@@ -2,27 +2,74 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
+import { creaPreventivo, aggiornaStatoPreventivo } from "@/app/actions";
 
 const COLONNE = [
   { stato: "APERTO", label: "Aperti" },
   { stato: "ACCETTATO", label: "Accettati" },
   { stato: "SCADUTO", label: "Scaduti" },
+  { stato: "ANNULLATO", label: "Annullati" },
 ];
 
-export default async function PreventiviPage() {
-  const preventivi = await prisma.preventivo.findMany({
-    include: { cliente: true, commerciale: true },
-    orderBy: { createdAt: "desc" },
-  });
+export default async function PreventiviPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ brand?: string }>;
+}) {
+  const { brand } = await searchParams;
+  const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
+
+  const [preventivi, clienti, brands, commerciali] = await Promise.all([
+    prisma.preventivo.findMany({
+      where: brandFiltro,
+      include: { cliente: true, commerciale: true },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.cliente.findMany({ where: brandFiltro, orderBy: { nome: "asc" } }),
+    prisma.brand.findMany({ orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } }),
+  ]);
 
   return (
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-medium">Preventivi</h1>
-        <BrandSwitcher />
+        <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <form action={creaPreventivo} className="bg-white rounded-lg border border-neutral-200 p-4 mb-8 flex flex-wrap items-end gap-2">
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-neutral-500">Cliente</label>
+          <select name="clienteId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[160px]">
+            <option value="">Seleziona...</option>
+            {clienti.map((c) => (
+              <option key={c.id} value={c.id}>{c.nome}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-neutral-500">Commerciale</label>
+          <select name="commercialeId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[160px]">
+            <option value="">Seleziona...</option>
+            {commerciali.map((u) => (
+              <option key={u.id} value={u.id}>{u.nome}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-neutral-500">Brand</label>
+          <select name="brandId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[140px]">
+            <option value="">Seleziona...</option>
+            {brands.map((b) => (
+              <option key={b.id} value={b.id}>{b.nome}</option>
+            ))}
+          </select>
+        </div>
+        <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Nuovo preventivo</button>
+        <p className="text-xs text-neutral-400 w-full">Le righe prodotto/prezzo si aggiungono in una fase successiva.</p>
+      </form>
+
+      <div className="grid grid-cols-4 gap-4">
         {COLONNE.map((col) => {
           const items = preventivi.filter((p) => p.stato === col.stato);
           return (
@@ -38,6 +85,17 @@ export default async function PreventiviPage() {
                       {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
                     </p>
                     <p className="text-xs text-neutral-400">{p.commerciale.nome}</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {COLONNE.filter((c) => c.stato !== p.stato).map((c) => (
+                        <form key={c.stato} action={aggiornaStatoPreventivo}>
+                          <input type="hidden" name="id" value={p.id} />
+                          <input type="hidden" name="stato" value={c.stato} />
+                          <button className="text-[11px] text-neutral-400 hover:text-neutral-700 underline">
+                            → {c.label.toLowerCase()}
+                          </button>
+                        </form>
+                      ))}
+                    </div>
                   </div>
                 ))}
                 {items.length === 0 && (

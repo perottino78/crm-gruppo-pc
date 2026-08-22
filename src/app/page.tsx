@@ -3,14 +3,22 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ brand?: string }>;
+}) {
+  const { brand } = await searchParams;
+  const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
+
   const [preventiviAperti, valorePipeline, leadDaLavorare] = await Promise.all([
-    prisma.preventivo.count({ where: { stato: "APERTO" } }),
-    prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO" } }),
-    prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] } } }),
+    prisma.preventivo.count({ where: { stato: "APERTO", ...brandFiltro } }),
+    prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO", ...brandFiltro } }),
+    prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] }, ...brandFiltro } }),
   ]);
 
   const preventivi = await prisma.preventivo.findMany({
+    where: brandFiltro,
     take: 5,
     orderBy: { createdAt: "desc" },
     include: { cliente: true },
@@ -20,7 +28,7 @@ export default async function DashboardPage() {
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-medium">Dashboard</h1>
-        <BrandSwitcher />
+        <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
       <div className="grid grid-cols-3 gap-4 mb-8">

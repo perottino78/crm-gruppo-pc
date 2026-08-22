@@ -45,7 +45,7 @@ export async function calcolaPrezzo(params: {
   });
   if (!prodotto) return null;
 
-  const coefficiente = await getConfigNumero("coefficiente_ricarico_default", 2.1);
+  const coefficiente = prodotto.coefficienteRicarico ?? (await getConfigNumero("coefficiente_ricarico_default", 2.1));
   const sovrapprezzoColoreBase = await getConfigNumero("sovrapprezzo_colore_speciale", 35);
   const isColoreSpeciale = !COLORI_STANDARD.has(params.colore.toLowerCase());
   const sovrapprezzoColore = isColoreSpeciale ? sovrapprezzoColoreBase : 0;

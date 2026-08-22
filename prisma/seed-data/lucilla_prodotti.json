@@ -1,0 +1,6246 @@
+[
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 6589
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 6885
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 7183
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 7482
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 7779
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 8077
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 8374
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 7033
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 7353
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 7674
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 7996
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 8316
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 8636
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 8958
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 7718
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 8117
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 8515
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 8914
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 9312
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 9710
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 10109
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 8165
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 8585
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 9008
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 9427
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 9849
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 10270
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 10692
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 8610
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 9053
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 9499
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 9942
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 10386
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 10831
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 11275
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 9053
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 9522
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 9990
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 10458
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 10924
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 11391
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 11859
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 9500
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 9992
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 10481
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 10972
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 11461
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 11952
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 12441
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 9946
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 10460
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 10972
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 11486
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 11998
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 12514
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 13026
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 10630
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 11222
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 11813
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 12403
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 12994
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 13584
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 14175
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 11076
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 11690
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 12304
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 12917
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 13531
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 14147
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 14759
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 11521
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 12158
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 12795
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 13432
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 14068
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 14707
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 15342
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 10039
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 550,
+  "prezzoBase": 10336
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 600,
+  "prezzoBase": 10634
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 650,
+  "prezzoBase": 10931
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 700,
+  "prezzoBase": 11229
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 750,
+  "prezzoBase": 11528
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 800,
+  "prezzoBase": 11825
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 850,
+  "prezzoBase": 12123
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 900,
+  "prezzoBase": 12420
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 10796
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 550,
+  "prezzoBase": 11116
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 600,
+  "prezzoBase": 11438
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 650,
+  "prezzoBase": 11759
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 700,
+  "prezzoBase": 12079
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 750,
+  "prezzoBase": 12401
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 800,
+  "prezzoBase": 12721
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 850,
+  "prezzoBase": 13042
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 900,
+  "prezzoBase": 13364
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 12119
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 550,
+  "prezzoBase": 12519
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 600,
+  "prezzoBase": 12917
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 650,
+  "prezzoBase": 13314
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 700,
+  "prezzoBase": 13712
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 750,
+  "prezzoBase": 14112
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 800,
+  "prezzoBase": 14511
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 850,
+  "prezzoBase": 14907
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 900,
+  "prezzoBase": 15307
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 12878
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 550,
+  "prezzoBase": 13299
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 600,
+  "prezzoBase": 13721
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 650,
+  "prezzoBase": 14140
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 700,
+  "prezzoBase": 14562
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 750,
+  "prezzoBase": 14983
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 800,
+  "prezzoBase": 15404
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 850,
+  "prezzoBase": 15826
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 900,
+  "prezzoBase": 16247
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 13635
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 550,
+  "prezzoBase": 14078
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 600,
+  "prezzoBase": 14524
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 650,
+  "prezzoBase": 14967
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 700,
+  "prezzoBase": 15412
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 750,
+  "prezzoBase": 15856
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 800,
+  "prezzoBase": 16299
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 850,
+  "prezzoBase": 16745
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 900,
+  "prezzoBase": 17190
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 14392
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 550,
+  "prezzoBase": 14858
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 15326
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 650,
+  "prezzoBase": 15794
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 700,
+  "prezzoBase": 16261
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 750,
+  "prezzoBase": 16727
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 800,
+  "prezzoBase": 17195
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 850,
+  "prezzoBase": 17663
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 900,
+  "prezzoBase": 18132
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 15148
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 550,
+  "prezzoBase": 15638
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 600,
+  "prezzoBase": 16129
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 650,
+  "prezzoBase": 16620
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 700,
+  "prezzoBase": 17111
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 750,
+  "prezzoBase": 17600
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 800,
+  "prezzoBase": 18091
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 850,
+  "prezzoBase": 18580
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 900,
+  "prezzoBase": 19071
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 15907
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 550,
+  "prezzoBase": 16419
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 600,
+  "prezzoBase": 16933
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 650,
+  "prezzoBase": 17445
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 700,
+  "prezzoBase": 17959
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 750,
+  "prezzoBase": 18473
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 800,
+  "prezzoBase": 18987
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 850,
+  "prezzoBase": 19499
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 900,
+  "prezzoBase": 20013
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 17230
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 550,
+  "prezzoBase": 17820
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 600,
+  "prezzoBase": 18411
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 650,
+  "prezzoBase": 19003
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 700,
+  "prezzoBase": 19594
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 750,
+  "prezzoBase": 20185
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 800,
+  "prezzoBase": 20775
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 850,
+  "prezzoBase": 21366
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 900,
+  "prezzoBase": 21958
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 17987
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 550,
+  "prezzoBase": 18600
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 600,
+  "prezzoBase": 19214
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 650,
+  "prezzoBase": 19830
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 700,
+  "prezzoBase": 20442
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 750,
+  "prezzoBase": 21057
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 800,
+  "prezzoBase": 21671
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 850,
+  "prezzoBase": 22283
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 900,
+  "prezzoBase": 22898
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 18744
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 550,
+  "prezzoBase": 19381
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 600,
+  "prezzoBase": 20018
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 650,
+  "prezzoBase": 20654
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 700,
+  "prezzoBase": 21292
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 750,
+  "prezzoBase": 21928
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 800,
+  "prezzoBase": 22565
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 850,
+  "prezzoBase": 23202
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 900,
+  "prezzoBase": 23839
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 950,
+  "prezzoBase": 14381
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1760,
+  "prezzoBase": 14680
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1848,
+  "prezzoBase": 14978
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1936,
+  "prezzoBase": 15275
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2024,
+  "prezzoBase": 15572
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2112,
+  "prezzoBase": 15872
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2200,
+  "prezzoBase": 16169
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2288,
+  "prezzoBase": 16467
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2376,
+  "prezzoBase": 16766
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 950,
+  "prezzoBase": 15520
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1760,
+  "prezzoBase": 15842
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1848,
+  "prezzoBase": 16162
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1936,
+  "prezzoBase": 16482
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2024,
+  "prezzoBase": 16804
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2112,
+  "prezzoBase": 17125
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2200,
+  "prezzoBase": 17445
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2288,
+  "prezzoBase": 17765
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2376,
+  "prezzoBase": 18088
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 950,
+  "prezzoBase": 17716
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1760,
+  "prezzoBase": 18114
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1848,
+  "prezzoBase": 18513
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1936,
+  "prezzoBase": 18909
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2024,
+  "prezzoBase": 19309
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2112,
+  "prezzoBase": 19708
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2200,
+  "prezzoBase": 20106
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2288,
+  "prezzoBase": 20504
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2376,
+  "prezzoBase": 20902
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 950,
+  "prezzoBase": 18853
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1760,
+  "prezzoBase": 19274
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1848,
+  "prezzoBase": 19696
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1936,
+  "prezzoBase": 20117
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2024,
+  "prezzoBase": 20539
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2112,
+  "prezzoBase": 20960
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2200,
+  "prezzoBase": 21382
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2288,
+  "prezzoBase": 21803
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2376,
+  "prezzoBase": 22224
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 950,
+  "prezzoBase": 19992
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1760,
+  "prezzoBase": 20437
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1848,
+  "prezzoBase": 20881
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1936,
+  "prezzoBase": 21324
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2024,
+  "prezzoBase": 21769
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2112,
+  "prezzoBase": 22213
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2200,
+  "prezzoBase": 22656
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2288,
+  "prezzoBase": 23104
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2376,
+  "prezzoBase": 23547
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 950,
+  "prezzoBase": 21129
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1760,
+  "prezzoBase": 21597
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1848,
+  "prezzoBase": 22065
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1936,
+  "prezzoBase": 22532
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2024,
+  "prezzoBase": 23000
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2112,
+  "prezzoBase": 23468
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2200,
+  "prezzoBase": 23934
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2288,
+  "prezzoBase": 24401
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2376,
+  "prezzoBase": 24869
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 950,
+  "prezzoBase": 22268
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1760,
+  "prezzoBase": 22759
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1848,
+  "prezzoBase": 23248
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1936,
+  "prezzoBase": 23739
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2024,
+  "prezzoBase": 24228
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2112,
+  "prezzoBase": 24721
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2200,
+  "prezzoBase": 25210
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2288,
+  "prezzoBase": 25701
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2376,
+  "prezzoBase": 26191
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 950,
+  "prezzoBase": 23406
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1760,
+  "prezzoBase": 23918
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1848,
+  "prezzoBase": 24432
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1936,
+  "prezzoBase": 24946
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2024,
+  "prezzoBase": 25460
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2112,
+  "prezzoBase": 25972
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2200,
+  "prezzoBase": 26486
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2288,
+  "prezzoBase": 26998
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2376,
+  "prezzoBase": 27514
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 950,
+  "prezzoBase": 25601
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1760,
+  "prezzoBase": 26192
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1848,
+  "prezzoBase": 26784
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1936,
+  "prezzoBase": 27373
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2024,
+  "prezzoBase": 27965
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2112,
+  "prezzoBase": 28556
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2200,
+  "prezzoBase": 29147
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2288,
+  "prezzoBase": 29739
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2376,
+  "prezzoBase": 30328
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 950,
+  "prezzoBase": 26740
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1760,
+  "prezzoBase": 27354
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1848,
+  "prezzoBase": 27966
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1936,
+  "prezzoBase": 28581
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2024,
+  "prezzoBase": 29197
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2112,
+  "prezzoBase": 29809
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2200,
+  "prezzoBase": 30423
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2288,
+  "prezzoBase": 31036
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2376,
+  "prezzoBase": 31650
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 950,
+  "prezzoBase": 27878
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1760,
+  "prezzoBase": 28514
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1848,
+  "prezzoBase": 29151
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1936,
+  "prezzoBase": 29788
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2024,
+  "prezzoBase": 30425
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2112,
+  "prezzoBase": 31062
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2200,
+  "prezzoBase": 31699
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2288,
+  "prezzoBase": 32336
+ },
+ {
+  "tipologia": "LUCILLA_PARETE_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2376,
+  "prezzoBase": 32972
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 9743
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 10190
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 10641
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 11090
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 11539
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 11989
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 12438
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 10319
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 10792
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 11264
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 11737
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 12209
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 12681
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 13152
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 11137
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 11686
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 12236
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 12786
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 13336
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 13885
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 14434
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 11713
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 12287
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 12859
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 13432
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 14004
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 14578
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 15150
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 12292
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 12887
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 13483
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 14078
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 14673
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 15270
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 15866
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 12867
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 13487
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 14106
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 14724
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 15344
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 15963
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 16581
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 13446
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 14089
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 14729
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 15372
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 16012
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 16655
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 17297
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 14024
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 14689
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 15352
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 16018
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 16683
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 17348
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 18014
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 14840
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 15581
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 16326
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 17067
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 17809
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 18550
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 19295
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 15418
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 16181
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 16949
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 17714
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 18478
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 19244
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 20009
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 15995
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 16783
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 17570
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 18359
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 19147
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 19936
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 20724
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 15097
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 550,
+  "prezzoBase": 15548
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 600,
+  "prezzoBase": 15997
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 650,
+  "prezzoBase": 16447
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 700,
+  "prezzoBase": 16896
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 750,
+  "prezzoBase": 17347
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 800,
+  "prezzoBase": 17794
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 850,
+  "prezzoBase": 18242
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 900,
+  "prezzoBase": 18693
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 15988
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 550,
+  "prezzoBase": 16460
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 600,
+  "prezzoBase": 16933
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 650,
+  "prezzoBase": 17403
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 700,
+  "prezzoBase": 17876
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 750,
+  "prezzoBase": 18348
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 800,
+  "prezzoBase": 18821
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 850,
+  "prezzoBase": 19295
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 900,
+  "prezzoBase": 19767
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 17443
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 550,
+  "prezzoBase": 17992
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 600,
+  "prezzoBase": 18543
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 650,
+  "prezzoBase": 19092
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 700,
+  "prezzoBase": 19643
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 750,
+  "prezzoBase": 20192
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 800,
+  "prezzoBase": 20743
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 850,
+  "prezzoBase": 21292
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 900,
+  "prezzoBase": 21842
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 18332
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 550,
+  "prezzoBase": 18904
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 600,
+  "prezzoBase": 19478
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 650,
+  "prezzoBase": 20050
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 700,
+  "prezzoBase": 20624
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 750,
+  "prezzoBase": 21196
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 800,
+  "prezzoBase": 21769
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 850,
+  "prezzoBase": 22341
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 900,
+  "prezzoBase": 22915
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 19223
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 550,
+  "prezzoBase": 19818
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 600,
+  "prezzoBase": 20412
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 650,
+  "prezzoBase": 21009
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 700,
+  "prezzoBase": 21606
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 750,
+  "prezzoBase": 22201
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 800,
+  "prezzoBase": 22797
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 850,
+  "prezzoBase": 23394
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 900,
+  "prezzoBase": 23987
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 20110
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 550,
+  "prezzoBase": 20731
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 21349
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 650,
+  "prezzoBase": 21967
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 700,
+  "prezzoBase": 22586
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 750,
+  "prezzoBase": 23204
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 800,
+  "prezzoBase": 23825
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 850,
+  "prezzoBase": 24443
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 900,
+  "prezzoBase": 25061
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 21000
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 550,
+  "prezzoBase": 21643
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 600,
+  "prezzoBase": 22283
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 650,
+  "prezzoBase": 22926
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 700,
+  "prezzoBase": 23566
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 750,
+  "prezzoBase": 24209
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 800,
+  "prezzoBase": 24851
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 850,
+  "prezzoBase": 25492
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 900,
+  "prezzoBase": 26134
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 21889
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 550,
+  "prezzoBase": 22554
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 600,
+  "prezzoBase": 23220
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 650,
+  "prezzoBase": 23885
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 700,
+  "prezzoBase": 24548
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 750,
+  "prezzoBase": 25214
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 800,
+  "prezzoBase": 25879
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 850,
+  "prezzoBase": 26544
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 900,
+  "prezzoBase": 27208
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 23345
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 550,
+  "prezzoBase": 24087
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 600,
+  "prezzoBase": 24828
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 650,
+  "prezzoBase": 25573
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 700,
+  "prezzoBase": 26316
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 750,
+  "prezzoBase": 27056
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 800,
+  "prezzoBase": 27801
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 850,
+  "prezzoBase": 28542
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 900,
+  "prezzoBase": 29285
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 24235
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 550,
+  "prezzoBase": 24999
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 600,
+  "prezzoBase": 25765
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 650,
+  "prezzoBase": 26532
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 700,
+  "prezzoBase": 27296
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 750,
+  "prezzoBase": 28061
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 800,
+  "prezzoBase": 28827
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 850,
+  "prezzoBase": 29591
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 900,
+  "prezzoBase": 30358
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 25122
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 550,
+  "prezzoBase": 25911
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 600,
+  "prezzoBase": 26699
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 650,
+  "prezzoBase": 27488
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 700,
+  "prezzoBase": 28276
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 750,
+  "prezzoBase": 29065
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 800,
+  "prezzoBase": 29855
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 850,
+  "prezzoBase": 30643
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 900,
+  "prezzoBase": 31432
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 950,
+  "prezzoBase": 21803
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1760,
+  "prezzoBase": 22253
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1848,
+  "prezzoBase": 22700
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1936,
+  "prezzoBase": 23151
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2024,
+  "prezzoBase": 23600
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2112,
+  "prezzoBase": 24049
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2200,
+  "prezzoBase": 24499
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2288,
+  "prezzoBase": 24948
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2376,
+  "prezzoBase": 25397
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 950,
+  "prezzoBase": 23072
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1760,
+  "prezzoBase": 23545
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1848,
+  "prezzoBase": 24017
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1936,
+  "prezzoBase": 24490
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2024,
+  "prezzoBase": 24962
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2112,
+  "prezzoBase": 25434
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2200,
+  "prezzoBase": 25905
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2288,
+  "prezzoBase": 26379
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2376,
+  "prezzoBase": 26851
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 950,
+  "prezzoBase": 25400
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1760,
+  "prezzoBase": 25949
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1848,
+  "prezzoBase": 26500
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1936,
+  "prezzoBase": 27049
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2024,
+  "prezzoBase": 27599
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2112,
+  "prezzoBase": 28149
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2200,
+  "prezzoBase": 28699
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2288,
+  "prezzoBase": 29249
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2376,
+  "prezzoBase": 29799
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 950,
+  "prezzoBase": 26671
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1760,
+  "prezzoBase": 27243
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1848,
+  "prezzoBase": 27817
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1936,
+  "prezzoBase": 28389
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2024,
+  "prezzoBase": 28963
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2112,
+  "prezzoBase": 29535
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2200,
+  "prezzoBase": 30108
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2288,
+  "prezzoBase": 30680
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2376,
+  "prezzoBase": 31254
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 950,
+  "prezzoBase": 27940
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1760,
+  "prezzoBase": 28537
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1848,
+  "prezzoBase": 29133
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1936,
+  "prezzoBase": 29726
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2024,
+  "prezzoBase": 30323
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2112,
+  "prezzoBase": 30920
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2200,
+  "prezzoBase": 31515
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2288,
+  "prezzoBase": 32111
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2376,
+  "prezzoBase": 32708
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 950,
+  "prezzoBase": 29211
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1760,
+  "prezzoBase": 29828
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1848,
+  "prezzoBase": 30448
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1936,
+  "prezzoBase": 31068
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2024,
+  "prezzoBase": 31685
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2112,
+  "prezzoBase": 32305
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2200,
+  "prezzoBase": 32923
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2288,
+  "prezzoBase": 33542
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2376,
+  "prezzoBase": 34162
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 950,
+  "prezzoBase": 30480
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1760,
+  "prezzoBase": 31122
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1848,
+  "prezzoBase": 31763
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1936,
+  "prezzoBase": 32407
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2024,
+  "prezzoBase": 33048
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2112,
+  "prezzoBase": 33690
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2200,
+  "prezzoBase": 34332
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2288,
+  "prezzoBase": 34973
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2376,
+  "prezzoBase": 35615
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 950,
+  "prezzoBase": 31750
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1760,
+  "prezzoBase": 32416
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1848,
+  "prezzoBase": 33079
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1936,
+  "prezzoBase": 33744
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2024,
+  "prezzoBase": 34410
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2112,
+  "prezzoBase": 35075
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2200,
+  "prezzoBase": 35739
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2288,
+  "prezzoBase": 36404
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2376,
+  "prezzoBase": 37069
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 950,
+  "prezzoBase": 34077
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1760,
+  "prezzoBase": 34820
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1848,
+  "prezzoBase": 35563
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1936,
+  "prezzoBase": 36304
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2024,
+  "prezzoBase": 37048
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2112,
+  "prezzoBase": 37789
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2200,
+  "prezzoBase": 38532
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2288,
+  "prezzoBase": 39273
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2376,
+  "prezzoBase": 40017
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 950,
+  "prezzoBase": 35346
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1760,
+  "prezzoBase": 36113
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1848,
+  "prezzoBase": 36879
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1936,
+  "prezzoBase": 37643
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2024,
+  "prezzoBase": 38408
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2112,
+  "prezzoBase": 39174
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2200,
+  "prezzoBase": 39940
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2288,
+  "prezzoBase": 40705
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2376,
+  "prezzoBase": 41471
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 950,
+  "prezzoBase": 36617
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1760,
+  "prezzoBase": 37407
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1848,
+  "prezzoBase": 38196
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1936,
+  "prezzoBase": 38984
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2024,
+  "prezzoBase": 39771
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2112,
+  "prezzoBase": 40559
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2200,
+  "prezzoBase": 41348
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2288,
+  "prezzoBase": 42136
+ },
+ {
+  "tipologia": "LUCILLA_ISOLA_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2376,
+  "prezzoBase": 42925
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 4773
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 4960
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 5144
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 5328
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 5512
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 5697
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 5880
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 5220
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 5426
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 5636
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 5841
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 6049
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 6257
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 6463
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 5905
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 6190
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 6475
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 6758
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 7044
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 7330
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 7614
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 6350
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 6658
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 6966
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 7274
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 7582
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 7890
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 8196
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 6795
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 7126
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 7457
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 7788
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 8119
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 8450
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 8781
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 7241
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 7594
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 7948
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 8302
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 8657
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 9011
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 9363
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 7686
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 8063
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 8439
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 8816
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 9194
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 9571
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 9948
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 8131
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 8532
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 8930
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 9332
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 9733
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 10131
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 10532
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 8816
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 9293
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 9772
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 10248
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 10727
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 11204
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 11681
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 9263
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 9763
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 10263
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 10764
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 11264
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 11764
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 12264
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 9706
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 10231
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 10754
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 11278
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 11801
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 12324
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 12848
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 7473
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 7660
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 7844
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 8027
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 8212
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 8397
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 7920
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 8126
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 8335
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 8541
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 8749
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 8957
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 8605
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 8890
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 9175
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 9458
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 9743
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 10030
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 6864
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 550,
+  "prezzoBase": 7049
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 600,
+  "prezzoBase": 7232
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 650,
+  "prezzoBase": 7417
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 700,
+  "prezzoBase": 7601
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 750,
+  "prezzoBase": 7784
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 800,
+  "prezzoBase": 7969
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 850,
+  "prezzoBase": 8154
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 900,
+  "prezzoBase": 8337
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 7623
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 550,
+  "prezzoBase": 7828
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 600,
+  "prezzoBase": 8034
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 650,
+  "prezzoBase": 8244
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 700,
+  "prezzoBase": 8450
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 750,
+  "prezzoBase": 8657
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 800,
+  "prezzoBase": 8865
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 850,
+  "prezzoBase": 9073
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 900,
+  "prezzoBase": 9280
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 8946
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 550,
+  "prezzoBase": 9229
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 600,
+  "prezzoBase": 9515
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 650,
+  "prezzoBase": 9800
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 700,
+  "prezzoBase": 10085
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 750,
+  "prezzoBase": 10370
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 800,
+  "prezzoBase": 10655
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 850,
+  "prezzoBase": 10940
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 900,
+  "prezzoBase": 11224
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 9703
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 550,
+  "prezzoBase": 10009
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 600,
+  "prezzoBase": 10317
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 650,
+  "prezzoBase": 10625
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 700,
+  "prezzoBase": 10933
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 750,
+  "prezzoBase": 11243
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 800,
+  "prezzoBase": 11551
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 850,
+  "prezzoBase": 11857
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 900,
+  "prezzoBase": 12165
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 10460
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 550,
+  "prezzoBase": 10791
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 600,
+  "prezzoBase": 11121
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 650,
+  "prezzoBase": 11452
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 700,
+  "prezzoBase": 11781
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 750,
+  "prezzoBase": 12114
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 800,
+  "prezzoBase": 12443
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 850,
+  "prezzoBase": 12776
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 900,
+  "prezzoBase": 13107
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 11216
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 550,
+  "prezzoBase": 11570
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 11924
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 650,
+  "prezzoBase": 12280
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 700,
+  "prezzoBase": 12633
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 750,
+  "prezzoBase": 12985
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 800,
+  "prezzoBase": 13339
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 850,
+  "prezzoBase": 13695
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 900,
+  "prezzoBase": 14048
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 11975
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 550,
+  "prezzoBase": 12352
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 600,
+  "prezzoBase": 12727
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 650,
+  "prezzoBase": 13103
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 700,
+  "prezzoBase": 13482
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 750,
+  "prezzoBase": 13858
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 800,
+  "prezzoBase": 14235
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 850,
+  "prezzoBase": 14612
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 900,
+  "prezzoBase": 14990
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 12730
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 550,
+  "prezzoBase": 13131
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 600,
+  "prezzoBase": 13531
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 650,
+  "prezzoBase": 13930
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 700,
+  "prezzoBase": 14332
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 750,
+  "prezzoBase": 14729
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 800,
+  "prezzoBase": 15131
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 850,
+  "prezzoBase": 15532
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 900,
+  "prezzoBase": 15930
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 14055
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 550,
+  "prezzoBase": 14532
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 600,
+  "prezzoBase": 15009
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 650,
+  "prezzoBase": 15488
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 700,
+  "prezzoBase": 15965
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 750,
+  "prezzoBase": 16444
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 800,
+  "prezzoBase": 16919
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 850,
+  "prezzoBase": 17396
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 900,
+  "prezzoBase": 17875
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 14812
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 550,
+  "prezzoBase": 15312
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 600,
+  "prezzoBase": 15814
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 650,
+  "prezzoBase": 16313
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 700,
+  "prezzoBase": 16815
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 750,
+  "prezzoBase": 17315
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 800,
+  "prezzoBase": 17815
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 850,
+  "prezzoBase": 18316
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 900,
+  "prezzoBase": 18816
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 15569
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 550,
+  "prezzoBase": 16093
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 600,
+  "prezzoBase": 16616
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 650,
+  "prezzoBase": 17139
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 700,
+  "prezzoBase": 17663
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 750,
+  "prezzoBase": 18186
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 800,
+  "prezzoBase": 18711
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 850,
+  "prezzoBase": 19233
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_DOPPIA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 900,
+  "prezzoBase": 19756
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 950,
+  "prezzoBase": 9508
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1760,
+  "prezzoBase": 9691
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1848,
+  "prezzoBase": 9875
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 1936,
+  "prezzoBase": 10060
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2024,
+  "prezzoBase": 10243
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2112,
+  "prezzoBase": 10428
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2200,
+  "prezzoBase": 10613
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2288,
+  "prezzoBase": 10796
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 2376,
+  "prezzoBase": 10981
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 950,
+  "prezzoBase": 10644
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1760,
+  "prezzoBase": 10852
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1848,
+  "prezzoBase": 11058
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 1936,
+  "prezzoBase": 11268
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2024,
+  "prezzoBase": 11473
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2112,
+  "prezzoBase": 11681
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2200,
+  "prezzoBase": 11889
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2288,
+  "prezzoBase": 12096
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 2376,
+  "prezzoBase": 12302
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 950,
+  "prezzoBase": 12841
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1760,
+  "prezzoBase": 13126
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1848,
+  "prezzoBase": 13409
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 1936,
+  "prezzoBase": 13695
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2024,
+  "prezzoBase": 13980
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2112,
+  "prezzoBase": 14265
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2200,
+  "prezzoBase": 14548
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2288,
+  "prezzoBase": 14833
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 2376,
+  "prezzoBase": 15120
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 950,
+  "prezzoBase": 13978
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1760,
+  "prezzoBase": 14286
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1848,
+  "prezzoBase": 14594
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 1936,
+  "prezzoBase": 14902
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2024,
+  "prezzoBase": 15210
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2112,
+  "prezzoBase": 15516
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2200,
+  "prezzoBase": 15824
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2288,
+  "prezzoBase": 16132
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 2376,
+  "prezzoBase": 16442
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 950,
+  "prezzoBase": 15117
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1760,
+  "prezzoBase": 15448
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1848,
+  "prezzoBase": 15778
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 1936,
+  "prezzoBase": 16109
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2024,
+  "prezzoBase": 16440
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2112,
+  "prezzoBase": 16771
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2200,
+  "prezzoBase": 17100
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2288,
+  "prezzoBase": 17433
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 2376,
+  "prezzoBase": 17762
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 950,
+  "prezzoBase": 16254
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1760,
+  "prezzoBase": 16607
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1848,
+  "prezzoBase": 16961
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 1936,
+  "prezzoBase": 17315
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2024,
+  "prezzoBase": 17670
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2112,
+  "prezzoBase": 18024
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2200,
+  "prezzoBase": 18378
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2288,
+  "prezzoBase": 18730
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 2376,
+  "prezzoBase": 19085
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 950,
+  "prezzoBase": 17392
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1760,
+  "prezzoBase": 17771
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1848,
+  "prezzoBase": 18146
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 1936,
+  "prezzoBase": 18522
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2024,
+  "prezzoBase": 18899
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2112,
+  "prezzoBase": 19276
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2200,
+  "prezzoBase": 19654
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2288,
+  "prezzoBase": 20031
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 2376,
+  "prezzoBase": 20407
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 950,
+  "prezzoBase": 18529
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1760,
+  "prezzoBase": 18931
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1848,
+  "prezzoBase": 19330
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 1936,
+  "prezzoBase": 19730
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2024,
+  "prezzoBase": 20131
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2112,
+  "prezzoBase": 20529
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2200,
+  "prezzoBase": 20930
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2288,
+  "prezzoBase": 21329
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 2376,
+  "prezzoBase": 21729
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 950,
+  "prezzoBase": 20724
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1760,
+  "prezzoBase": 21203
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1848,
+  "prezzoBase": 21680
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 1936,
+  "prezzoBase": 22158
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2024,
+  "prezzoBase": 22635
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2112,
+  "prezzoBase": 23112
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2200,
+  "prezzoBase": 23591
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2288,
+  "prezzoBase": 24068
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 2376,
+  "prezzoBase": 24545
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 950,
+  "prezzoBase": 21863
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1760,
+  "prezzoBase": 22364
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1848,
+  "prezzoBase": 22864
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 1936,
+  "prezzoBase": 23364
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2024,
+  "prezzoBase": 23864
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2112,
+  "prezzoBase": 24367
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2200,
+  "prezzoBase": 24867
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2288,
+  "prezzoBase": 25367
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 2376,
+  "prezzoBase": 25868
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 950,
+  "prezzoBase": 23001
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1760,
+  "prezzoBase": 23526
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1848,
+  "prezzoBase": 24049
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 1936,
+  "prezzoBase": 24571
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2024,
+  "prezzoBase": 25096
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2112,
+  "prezzoBase": 25619
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2200,
+  "prezzoBase": 26143
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2288,
+  "prezzoBase": 26666
+ },
+ {
+  "tipologia": "LUCILLA_PATIO_TRIPLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 2376,
+  "prezzoBase": 27188
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 7908
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 8263
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 8620
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 8980
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 9335
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 9692
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 10050
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 8441
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 8825
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 9208
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 9596
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 9979
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 10365
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 10750
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 9261
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 9742
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 10219
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 10697
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 11176
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 11653
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 12132
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 9798
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 10303
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 10810
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 11313
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 11820
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 12324
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 12830
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 10333
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 10864
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 11400
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 11931
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 12464
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 12998
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 13531
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 10864
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 11426
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 11989
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 12551
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 13110
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 13670
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 14231
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 11401
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 11991
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 12577
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 13167
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 13754
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 14344
+ },
+ {
+  "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 14930
+ }
+]

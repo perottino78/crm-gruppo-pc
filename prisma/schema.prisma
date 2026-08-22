@@ -22,6 +22,7 @@ model Brand {
   lead      Lead[]
   prodotti  Prodotto[]
   preventivi Preventivo[]
+  optionali Optional[]
 }
 
 model Utente {
@@ -89,6 +90,7 @@ model Prodotto {
   altezzaMm  Int
   larghezzaMm Int
   prezzoBase Float
+  coefficienteRicarico Float?
   righe      RigaPreventivo[]
 
   @@unique([brandId, tipologia, colore, altezzaMm, larghezzaMm])
@@ -129,6 +131,7 @@ model RigaPreventivo {
   prezzoUnitario Float
   optionalDescrizione String?
   optionalPrezzo Float @default(0)
+  optionali     RigaOptional[]
 }
 
 model PromemoriaInviato {
@@ -146,4 +149,31 @@ model Progetto {
   misureRilievoConfermate String?
   statoOrdineFornitore  String     @default("da_avviare")
   createdAt             DateTime   @default(now())
+}
+
+// Categoria optional: STAFFA | TESSUTO | SENSORE | TIMPANO | ALTRO
+// tipoPrezzo: FISSO (valore in euro) | PERCENTUALE (valore in % sul prezzo netto della riga)
+model Optional {
+  id          String   @id @default(cuid())
+  brand       Brand    @relation(fields: [brandId], references: [id])
+  brandId     String
+  categoria   String
+  nome        String
+  tipoPrezzo  String   @default("FISSO")
+  valore      Float
+  unita       String?
+  sporgenzaMm Int?
+  larghezzaMm Int?
+  note        String?
+  righe       RigaOptional[]
+}
+
+model RigaOptional {
+  id             String         @id @default(cuid())
+  riga           RigaPreventivo @relation(fields: [rigaId], references: [id])
+  rigaId         String
+  optional       Optional       @relation(fields: [optionalId], references: [id])
+  optionalId     String
+  quantita       Int            @default(1)
+  prezzoUnitario Float
 }
