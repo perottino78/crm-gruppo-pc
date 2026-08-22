@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Ruolo utente: COMMERCIALE | TELEFONISTA | POSATORE | AMMINISTRATIVO | AMMINISTRATORE
+// Fase lead: NUOVO | CONTATTATO | APPUNTAMENTO_FISSATO | NON_RISPONDE | NON_INTERESSATO
+// Tipo appuntamento: COMMERCIALE | RILIEVO_TECNICO
+// Stato appuntamento: PROGRAMMATO | CONFERMATO | COMPLETATO | ANNULLATO
+// Stato preventivo: APERTO | ACCETTATO | SCADUTO | ANNULLATO
+// Canale promemoria: EMAIL | WHATSAPP
+// (SQLite non supporta enum nativi: questi valori sono validati in app/lib/enums.ts)
+
+model Brand {
+  id        String     @id @default(cuid())
+  nome      String     @unique
+  clienti   Cliente[]
+  lead      Lead[]
+  prodotti  Prodotto[]
+  preventivi Preventivo[]
+}
+
+model Utente {
+  id            String   @id @default(cuid())
+  nome          String
+  email         String   @unique
+  ruolo         String
+  createdAt     DateTime @default(now())
+  leadAssegnati Lead[]
+  appuntamenti  Appuntamento[]
+  preventivi    Preventivo[]
+}
+
+model Lead {
+  id          String    @id @default(cuid())
+  nome        String
+  telefono    String?
+  email       String?
+  fonte       String    @default("facebook")
+  fase        String    @default("NUOVO")
+  note        String?
+  brand       Brand     @relation(fields: [brandId], references: [id])
+  brandId     String
+  telefonista Utente?   @relation(fields: [telefonistaId], references: [id])
+  telefonistaId String?
+  clienteGenerato Cliente?
+  createdAt   DateTime  @default(now())
+}
+
+model Cliente {
+  id         String    @id @default(cuid())
+  nome       String
+  telefono   String?
+  email      String?
+  indirizzo  String?
+  paese      String    @default("IT")
+  brand      Brand     @relation(fields: [brandId], references: [id])
+  brandId    String
+  leadOrigine Lead?    @relation(fields: [leadOrigineId], references: [id])
+  leadOrigineId String? @unique
+  appuntamenti Appuntamento[]
+  preventivi Preventivo[]
+  createdAt  DateTime  @default(now())
+}
+
+model Appuntamento {
+  id        String   @id @default(cuid())
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId String
+  utente    Utente   @relation(fields: [utenteId], references: [id])
+  utenteId  String
+  tipo      String   @default("COMMERCIALE")
+  dataOra   DateTime
+  stato     String   @default("PROGRAMMATO")
+  createdAt DateTime @default(now())
+}
+
+model Prodotto {
+  id         String   @id @default(cuid())
+  brand      Brand    @relation(fields: [brandId], references: [id])
+  brandId    String
+  tipologia  String
+  descrizione String?
+  colore     String
+  altezzaMm  Int
+  larghezzaMm Int
+  prezzoBase Float
+  righe      RigaPreventivo[]
+
+  @@unique([brandId, tipologia, colore, altezzaMm, larghezzaMm])
+}
+
+model Configurazione {
+  id     String @id @default(cuid())
+  chiave String @unique
+  valore String
+}
+
+model Preventivo {
+  id           String          @id @default(cuid())
+  cliente      Cliente         @relation(fields: [clienteId], references: [id])
+  clienteId    String
+  brand        Brand           @relation(fields: [brandId], references: [id])
+  brandId      String
+  commerciale  Utente          @relation(fields: [commercialeId], references: [id])
+  commercialeId String
+  stato        String          @default("APERTO")
+  totaleNetto  Float           @default(0)
+  aliquotaIva  Float           @default(22)
+  totaleIva    Float           @default(0)
+  righe        RigaPreventivo[]
+  promemoria   PromemoriaInviato[]
+  progetto     Progetto?
+  createdAt    DateTime        @default(now())
+  scadenza     DateTime?
+}
+
+model RigaPreventivo {
+  id            String     @id @default(cuid())
+  preventivo    Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId  String
+  prodotto      Prodotto   @relation(fields: [prodottoId], references: [id])
+  prodottoId    String
+  quantita      Int        @default(1)
+  prezzoUnitario Float
+  optionalDescrizione String?
+  optionalPrezzo Float @default(0)
+}
+
+model PromemoriaInviato {
+  id           String     @id @default(cuid())
+  preventivo   Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId String
+  canale       String
+  inviatoIl    DateTime   @default(now())
+}
+
+model Progetto {
+  id                    String     @id @default(cuid())
+  preventivo            Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId          String     @unique
+  misureRilievoConfermate String?
+  statoOrdineFornitore  String     @default("da_avviare")
+  createdAt             DateTime   @default(now())
+}
