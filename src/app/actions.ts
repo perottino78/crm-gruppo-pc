@@ -107,3 +107,30 @@ export async function creaUtente(formData: FormData) {
   await prisma.utente.create({ data: { nome, email, ruolo } });
   revalidatePath("/impostazioni");
 }
+
+export async function creaAttivita(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  const tipo = str(formData, "tipo");
+  const oggetto = str(formData, "oggetto");
+  if (!clienteId || !tipo || !oggetto) return;
+  const scadenzaStr = str(formData, "scadenza");
+  await prisma.attivita.create({
+    data: {
+      clienteId,
+      tipo,
+      oggetto,
+      descrizione: str(formData, "descrizione"),
+      scadenza: scadenzaStr ? new Date(scadenzaStr) : null,
+      utenteId: str(formData, "utenteId"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function completaAttivita(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id) return;
+  await prisma.attivita.update({ where: { id }, data: { completata: true } });
+  if (clienteId) revalidatePath(`/clienti/${clienteId}`);
+}

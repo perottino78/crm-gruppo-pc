@@ -34,6 +34,7 @@ model Utente {
   leadAssegnati Lead[]
   appuntamenti  Appuntamento[]
   preventivi    Preventivo[]
+  attivita      Attivita[]
 }
 
 model Lead {
@@ -65,6 +66,7 @@ model Cliente {
   leadOrigineId String? @unique
   appuntamenti Appuntamento[]
   preventivi Preventivo[]
+  attivita   Attivita[]
   createdAt  DateTime  @default(now())
 }
 
@@ -176,4 +178,20 @@ model RigaOptional {
   optionalId     String
   quantita       Int            @default(1)
   prezzoUnitario Float
+}
+
+// tipo attivita: EMAIL | CHIAMATA | NOTA | TASK | APPUNTAMENTO
+model Attivita {
+  id          String    @id @default(cuid())
+  cliente     Cliente   @relation(fields: [clienteId], references: [id])
+  clienteId   String
+  tipo        String
+  oggetto     String
+  descrizione String?
+  dataOra     DateTime  @default(now())
+  scadenza    DateTime?
+  completata  Boolean   @default(false)
+  utente      Utente?   @relation(fields: [utenteId], references: [id])
+  utenteId    String?
+  createdAt   DateTime  @default(now())
 }

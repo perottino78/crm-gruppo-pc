@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { creaLead, creaCliente, aggiornaFaseLead, convertiLeadInCliente } from "@/app/actions";
+import Link from "next/link";
 
 const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
@@ -123,7 +124,11 @@ export default async function ClientiPage({
       </h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
         {clienti.map((c) => (
-          <div key={c.id} className="flex items-center justify-between px-4 py-3 text-sm">
+          <Link
+            key={c.id}
+            href={`/clienti/${c.id}`}
+            className="flex items-center justify-between px-4 py-3 text-sm hover:bg-neutral-50"
+          >
             <div>
               <p className="font-medium">{c.nome}</p>
               <p className="text-xs text-neutral-400">
@@ -131,7 +136,7 @@ export default async function ClientiPage({
               </p>
             </div>
             <span className="text-xs text-neutral-400">{c.paese}</span>
-          </div>
+          </Link>
         ))}
         {clienti.length === 0 && (
           <p className="px-4 py-6 text-sm text-neutral-400">Nessun cliente ancora.</p>
