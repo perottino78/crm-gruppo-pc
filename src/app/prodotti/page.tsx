@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { prisma } from "@/lib/prisma";
 import { calcolaPrezzo } from "@/lib/pricing";
 import BrandSwitcher from "@/components/BrandSwitcher";
