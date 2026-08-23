@@ -1,0 +1,4860 @@
+[
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 143,
+    "prezzoBase": 1500.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 143,
+    "prezzoBase": 2043.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 143,
+    "prezzoBase": 2617.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 143,
+    "prezzoBase": 3145.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 143,
+    "prezzoBase": 3462.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 143,
+    "prezzoBase": 4279.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 143,
+    "prezzoBase": 5097.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 143,
+    "prezzoBase": 5910.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 1544.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 2105.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 150,
+    "prezzoBase": 2707.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 150,
+    "prezzoBase": 3254.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 150,
+    "prezzoBase": 3583.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 150,
+    "prezzoBase": 4426.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 150,
+    "prezzoBase": 5275.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 150,
+    "prezzoBase": 6118.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 157,
+    "prezzoBase": 1591.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 157,
+    "prezzoBase": 2165.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 157,
+    "prezzoBase": 2795.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 157,
+    "prezzoBase": 3356.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 157,
+    "prezzoBase": 3703.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 157,
+    "prezzoBase": 4576.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 157,
+    "prezzoBase": 5451.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 157,
+    "prezzoBase": 6327.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 164,
+    "prezzoBase": 1635.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 164,
+    "prezzoBase": 2228.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 164,
+    "prezzoBase": 2885.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 164,
+    "prezzoBase": 3462.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 164,
+    "prezzoBase": 3823.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 164,
+    "prezzoBase": 4729.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 164,
+    "prezzoBase": 5628.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 164,
+    "prezzoBase": 6535.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 171,
+    "prezzoBase": 1681.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 171,
+    "prezzoBase": 2286.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 171,
+    "prezzoBase": 2974.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 171,
+    "prezzoBase": 3568.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 171,
+    "prezzoBase": 3942.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 171,
+    "prezzoBase": 4875.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 171,
+    "prezzoBase": 5812.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 171,
+    "prezzoBase": 6741.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 178,
+    "prezzoBase": 1725.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 178,
+    "prezzoBase": 2353.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 178,
+    "prezzoBase": 3066.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 178,
+    "prezzoBase": 3670.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 178,
+    "prezzoBase": 4062.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 178,
+    "prezzoBase": 5027.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 178,
+    "prezzoBase": 5988.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 178,
+    "prezzoBase": 6954.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 185,
+    "prezzoBase": 1772.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 185,
+    "prezzoBase": 2413.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 185,
+    "prezzoBase": 3157.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 185,
+    "prezzoBase": 3773.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 185,
+    "prezzoBase": 4185.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 185,
+    "prezzoBase": 5171.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 185,
+    "prezzoBase": 6167.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 185,
+    "prezzoBase": 7160.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 192,
+    "prezzoBase": 1822.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 192,
+    "prezzoBase": 2475.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 192,
+    "prezzoBase": 3244.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 192,
+    "prezzoBase": 3883.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 192,
+    "prezzoBase": 4305.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 192,
+    "prezzoBase": 5326.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 192,
+    "prezzoBase": 6345.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 192,
+    "prezzoBase": 7366.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 199,
+    "prezzoBase": 1864.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 199,
+    "prezzoBase": 2534.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 199,
+    "prezzoBase": 3335.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 199,
+    "prezzoBase": 3985.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 199,
+    "prezzoBase": 4423.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 199,
+    "prezzoBase": 5474.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 199,
+    "prezzoBase": 6524.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 199,
+    "prezzoBase": 7573.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 206,
+    "prezzoBase": 1908.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 206,
+    "prezzoBase": 2598.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 206,
+    "prezzoBase": 3418.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 206,
+    "prezzoBase": 4090.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 206,
+    "prezzoBase": 4544.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 206,
+    "prezzoBase": 5623.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 206,
+    "prezzoBase": 6704.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 206,
+    "prezzoBase": 7786.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 213,
+    "prezzoBase": 2057.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 213,
+    "prezzoBase": 2814.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 213,
+    "prezzoBase": 3668.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 213,
+    "prezzoBase": 4402.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 213,
+    "prezzoBase": 4872.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 213,
+    "prezzoBase": 6033.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 213,
+    "prezzoBase": 7195.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 213,
+    "prezzoBase": 8360.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 220,
+    "prezzoBase": 2103.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 220,
+    "prezzoBase": 2879.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 220,
+    "prezzoBase": 3759.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 4506.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 220,
+    "prezzoBase": 4991.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 220,
+    "prezzoBase": 6183.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 220,
+    "prezzoBase": 7371.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 220,
+    "prezzoBase": 8564.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 227,
+    "prezzoBase": 2149.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 227,
+    "prezzoBase": 2937.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 227,
+    "prezzoBase": 3847.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 227,
+    "prezzoBase": 4615.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 227,
+    "prezzoBase": 5109.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 227,
+    "prezzoBase": 6332.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 227,
+    "prezzoBase": 7556.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 227,
+    "prezzoBase": 8772.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 234,
+    "prezzoBase": 2193.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 234,
+    "prezzoBase": 3003.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 234,
+    "prezzoBase": 3939.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 234,
+    "prezzoBase": 4717.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 234,
+    "prezzoBase": 5229.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 234,
+    "prezzoBase": 6484.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 234,
+    "prezzoBase": 7732.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 234,
+    "prezzoBase": 8981.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 241,
+    "prezzoBase": 2240.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 241,
+    "prezzoBase": 3062.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 241,
+    "prezzoBase": 4023.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 241,
+    "prezzoBase": 4822.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 241,
+    "prezzoBase": 5352.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 241,
+    "prezzoBase": 6630.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 241,
+    "prezzoBase": 7909.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 241,
+    "prezzoBase": 9192.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 248,
+    "prezzoBase": 2284.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 248,
+    "prezzoBase": 3124.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 248,
+    "prezzoBase": 4115.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 248,
+    "prezzoBase": 4928.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 248,
+    "prezzoBase": 5474.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 248,
+    "prezzoBase": 6783.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 248,
+    "prezzoBase": 8089.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 248,
+    "prezzoBase": 9397.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 255,
+    "prezzoBase": 2332.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 255,
+    "prezzoBase": 3186.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 255,
+    "prezzoBase": 4201.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 255,
+    "prezzoBase": 5032.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 255,
+    "prezzoBase": 5592.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 255,
+    "prezzoBase": 6931.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 255,
+    "prezzoBase": 8268.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 255,
+    "prezzoBase": 9603.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 262,
+    "prezzoBase": 2380.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 262,
+    "prezzoBase": 3247.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 262,
+    "prezzoBase": 4294.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 262,
+    "prezzoBase": 5134.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 262,
+    "prezzoBase": 5709.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 262,
+    "prezzoBase": 7082.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 262,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 262,
+    "prezzoBase": 9816.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 269,
+    "prezzoBase": 2508.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 269,
+    "prezzoBase": 3437.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 269,
+    "prezzoBase": 4511.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 269,
+    "prezzoBase": 5412.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 269,
+    "prezzoBase": 6003.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 269,
+    "prezzoBase": 7443.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 269,
+    "prezzoBase": 8881.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 269,
+    "prezzoBase": 10321.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 276,
+    "prezzoBase": 2556.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 276,
+    "prezzoBase": 3495.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 276,
+    "prezzoBase": 4599.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 276,
+    "prezzoBase": 5518.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 276,
+    "prezzoBase": 6127.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 276,
+    "prezzoBase": 7591.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 276,
+    "prezzoBase": 9057.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 276,
+    "prezzoBase": 10530.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 283,
+    "prezzoBase": 2598.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 283,
+    "prezzoBase": 3559.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 283,
+    "prezzoBase": 4687.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 283,
+    "prezzoBase": 5620.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 283,
+    "prezzoBase": 6243.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 283,
+    "prezzoBase": 7740.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 283,
+    "prezzoBase": 9238.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 283,
+    "prezzoBase": 10736.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 290,
+    "prezzoBase": 2644.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 290,
+    "prezzoBase": 3619.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 290,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 290,
+    "prezzoBase": 5727.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 290,
+    "prezzoBase": 6364.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 290,
+    "prezzoBase": 7890.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 290,
+    "prezzoBase": 9420.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 290,
+    "prezzoBase": 10945.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 297,
+    "prezzoBase": 2688.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 297,
+    "prezzoBase": 3682.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 297,
+    "prezzoBase": 4870.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 297,
+    "prezzoBase": 5833.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 297,
+    "prezzoBase": 6486.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 297,
+    "prezzoBase": 8041.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 297,
+    "prezzoBase": 9597.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 297,
+    "prezzoBase": 11155.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 304,
+    "prezzoBase": 2735.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 304,
+    "prezzoBase": 3742.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 304,
+    "prezzoBase": 4958.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 304,
+    "prezzoBase": 5936.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 304,
+    "prezzoBase": 6605.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 304,
+    "prezzoBase": 8189.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 304,
+    "prezzoBase": 9775.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 304,
+    "prezzoBase": 11359.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 311,
+    "prezzoBase": 2876.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 311,
+    "prezzoBase": 3946.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 311,
+    "prezzoBase": 5190.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 311,
+    "prezzoBase": 6230.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 311,
+    "prezzoBase": 6913.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 311,
+    "prezzoBase": 8575.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 311,
+    "prezzoBase": 10240.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 311,
+    "prezzoBase": 11899.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 318,
+    "prezzoBase": 2920.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 318,
+    "prezzoBase": 4011.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 318,
+    "prezzoBase": 5280.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 318,
+    "prezzoBase": 6336.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 318,
+    "prezzoBase": 7035.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 318,
+    "prezzoBase": 8726.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 318,
+    "prezzoBase": 10417.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 318,
+    "prezzoBase": 12111.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 325,
+    "prezzoBase": 2966.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 325,
+    "prezzoBase": 4069.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 325,
+    "prezzoBase": 5368.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 325,
+    "prezzoBase": 6440.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 325,
+    "prezzoBase": 7156.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 325,
+    "prezzoBase": 8874.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 325,
+    "prezzoBase": 10597.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 325,
+    "prezzoBase": 12318.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 332,
+    "prezzoBase": 3011.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 332,
+    "prezzoBase": 4134.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 332,
+    "prezzoBase": 5456.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 332,
+    "prezzoBase": 6544.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 332,
+    "prezzoBase": 7274.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 332,
+    "prezzoBase": 9025.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 332,
+    "prezzoBase": 10776.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 332,
+    "prezzoBase": 12528.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 339,
+    "prezzoBase": 3057.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 339,
+    "prezzoBase": 4194.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 339,
+    "prezzoBase": 5546.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 339,
+    "prezzoBase": 6651.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 339,
+    "prezzoBase": 7394.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 339,
+    "prezzoBase": 9175.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 339,
+    "prezzoBase": 10956.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 339,
+    "prezzoBase": 12734.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 346,
+    "prezzoBase": 3103.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 346,
+    "prezzoBase": 4254.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 346,
+    "prezzoBase": 5637.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 346,
+    "prezzoBase": 6757.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 346,
+    "prezzoBase": 7515.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 346,
+    "prezzoBase": 9324.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 346,
+    "prezzoBase": 11136.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 346,
+    "prezzoBase": 12941.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 353,
+    "prezzoBase": 3145.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 353,
+    "prezzoBase": 4316.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 353,
+    "prezzoBase": 5725.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 353,
+    "prezzoBase": 6859.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 353,
+    "prezzoBase": 7638.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 353,
+    "prezzoBase": 9476.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 353,
+    "prezzoBase": 11313.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 700,
+    "larghezzaMm": 353,
+    "prezzoBase": 13151.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 360,
+    "prezzoBase": 3295.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 360,
+    "prezzoBase": 4528.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 360,
+    "prezzoBase": 5970.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 360,
+    "prezzoBase": 7167.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 360,
+    "prezzoBase": 7962.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 9879.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 360,
+    "prezzoBase": 11797.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 367,
+    "prezzoBase": 3342.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 367,
+    "prezzoBase": 4592.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 367,
+    "prezzoBase": 6060.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 367,
+    "prezzoBase": 7274.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 367,
+    "prezzoBase": 8077.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 367,
+    "prezzoBase": 10027.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 367,
+    "prezzoBase": 11975.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 374,
+    "prezzoBase": 3386.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 374,
+    "prezzoBase": 4652.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 374,
+    "prezzoBase": 6148.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 374,
+    "prezzoBase": 7381.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 374,
+    "prezzoBase": 8196.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 374,
+    "prezzoBase": 10180.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 374,
+    "prezzoBase": 12158.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 381,
+    "prezzoBase": 3432.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 381,
+    "prezzoBase": 4713.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 381,
+    "prezzoBase": 6239.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 381,
+    "prezzoBase": 7482.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 381,
+    "prezzoBase": 8318.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 381,
+    "prezzoBase": 10328.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 381,
+    "prezzoBase": 12336.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 388,
+    "prezzoBase": 3474.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 388,
+    "prezzoBase": 4773.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 388,
+    "prezzoBase": 6327.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 388,
+    "prezzoBase": 7589.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 388,
+    "prezzoBase": 8443.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 388,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 388,
+    "prezzoBase": 12514.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 395,
+    "prezzoBase": 3524.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 395,
+    "prezzoBase": 4842.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 395,
+    "prezzoBase": 6417.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 395,
+    "prezzoBase": 7696.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 395,
+    "prezzoBase": 8562.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 395,
+    "prezzoBase": 10625.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 395,
+    "prezzoBase": 12690.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 402,
+    "prezzoBase": 3568.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 402,
+    "prezzoBase": 4900.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 402,
+    "prezzoBase": 6505.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 402,
+    "prezzoBase": 7795.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 402,
+    "prezzoBase": 8677.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 402,
+    "prezzoBase": 10776.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 402,
+    "prezzoBase": 12871.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 409,
+    "prezzoBase": 3613.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 409,
+    "prezzoBase": 4965.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 409,
+    "prezzoBase": 6595.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 409,
+    "prezzoBase": 7902.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 409,
+    "prezzoBase": 8800.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 409,
+    "prezzoBase": 10928.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 409,
+    "prezzoBase": 13050.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 416,
+    "prezzoBase": 3895.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 416,
+    "prezzoBase": 5370.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 416,
+    "prezzoBase": 7058.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 416,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 416,
+    "prezzoBase": 9420.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 416,
+    "prezzoBase": 11697.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 416,
+    "prezzoBase": 13976.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 423,
+    "prezzoBase": 3941.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 423,
+    "prezzoBase": 5430.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 423,
+    "prezzoBase": 7147.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 423,
+    "prezzoBase": 8598.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 423,
+    "prezzoBase": 9541.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 423,
+    "prezzoBase": 11850.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 430,
+    "prezzoBase": 3985.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 430,
+    "prezzoBase": 5495.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 430,
+    "prezzoBase": 7237.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 430,
+    "prezzoBase": 8701.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 430,
+    "prezzoBase": 9659.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 430,
+    "prezzoBase": 11996.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 437,
+    "prezzoBase": 4029.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 437,
+    "prezzoBase": 5555.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 437,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 437,
+    "prezzoBase": 8804.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 437,
+    "prezzoBase": 9782.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 437,
+    "prezzoBase": 12144.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 444,
+    "prezzoBase": 4076.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 444,
+    "prezzoBase": 5616.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 444,
+    "prezzoBase": 7417.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 444,
+    "prezzoBase": 8913.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 444,
+    "prezzoBase": 9904.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 444,
+    "prezzoBase": 12295.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 451,
+    "prezzoBase": 4120.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 451,
+    "prezzoBase": 5676.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 451,
+    "prezzoBase": 7508.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 451,
+    "prezzoBase": 9018.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 451,
+    "prezzoBase": 10021.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 451,
+    "prezzoBase": 12445.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 458,
+    "prezzoBase": 4166.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 458,
+    "prezzoBase": 5738.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 458,
+    "prezzoBase": 7593.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 458,
+    "prezzoBase": 9119.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 458,
+    "prezzoBase": 10139.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 458,
+    "prezzoBase": 12596.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 465,
+    "prezzoBase": 4212.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 465,
+    "prezzoBase": 5799.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 465,
+    "prezzoBase": 7684.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 465,
+    "prezzoBase": 9224.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 465,
+    "prezzoBase": 10259.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 465,
+    "prezzoBase": 12742.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 472,
+    "prezzoBase": 4254.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 472,
+    "prezzoBase": 5859.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 472,
+    "prezzoBase": 7772.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 472,
+    "prezzoBase": 9332.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 472,
+    "prezzoBase": 10384.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 472,
+    "prezzoBase": 12897.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 479,
+    "prezzoBase": 4303.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 479,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 479,
+    "prezzoBase": 7864.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 479,
+    "prezzoBase": 9432.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 479,
+    "prezzoBase": 10502.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 479,
+    "prezzoBase": 13045.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 486,
+    "prezzoBase": 4345.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 486,
+    "prezzoBase": 5982.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 486,
+    "prezzoBase": 7952.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 486,
+    "prezzoBase": 9541.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 486,
+    "prezzoBase": 10622.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 486,
+    "prezzoBase": 13195.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 493,
+    "prezzoBase": 4395.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 493,
+    "prezzoBase": 6047.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 493,
+    "prezzoBase": 8041.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 493,
+    "prezzoBase": 9647.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 493,
+    "prezzoBase": 10741.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 493,
+    "prezzoBase": 13344.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 4442.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6107.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 500,
+    "prezzoBase": 8131.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 500,
+    "prezzoBase": 9749.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 500,
+    "prezzoBase": 10863.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 507,
+    "prezzoBase": 4486.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 507,
+    "prezzoBase": 6171.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 507,
+    "prezzoBase": 8217.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 507,
+    "prezzoBase": 9854.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 507,
+    "prezzoBase": 10984.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 514,
+    "prezzoBase": 4717.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 514,
+    "prezzoBase": 6514.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 514,
+    "prezzoBase": 8596.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 514,
+    "prezzoBase": 10336.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 514,
+    "prezzoBase": 11484.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 521,
+    "prezzoBase": 4717.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 521,
+    "prezzoBase": 6514.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 521,
+    "prezzoBase": 8596.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 521,
+    "prezzoBase": 10336.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 521,
+    "prezzoBase": 11484.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 528,
+    "prezzoBase": 4764.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 528,
+    "prezzoBase": 6577.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 528,
+    "prezzoBase": 8680.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 528,
+    "prezzoBase": 10442.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 528,
+    "prezzoBase": 11602.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 535,
+    "prezzoBase": 4808.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 535,
+    "prezzoBase": 6637.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 535,
+    "prezzoBase": 8772.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 535,
+    "prezzoBase": 10549.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 535,
+    "prezzoBase": 11720.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 542,
+    "prezzoBase": 4854.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 542,
+    "prezzoBase": 6702.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 542,
+    "prezzoBase": 8862.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 542,
+    "prezzoBase": 10653.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 542,
+    "prezzoBase": 11841.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 549,
+    "prezzoBase": 4900.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 549,
+    "prezzoBase": 6762.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 549,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 549,
+    "prezzoBase": 10759.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 549,
+    "prezzoBase": 11963.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 556,
+    "prezzoBase": 4944.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 556,
+    "prezzoBase": 6824.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 556,
+    "prezzoBase": 9041.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 556,
+    "prezzoBase": 10863.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 556,
+    "prezzoBase": 12082.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 563,
+    "prezzoBase": 4991.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 563,
+    "prezzoBase": 6883.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 563,
+    "prezzoBase": 9129.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 563,
+    "prezzoBase": 10965.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 563,
+    "prezzoBase": 12200.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 570,
+    "prezzoBase": 5041.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 570,
+    "prezzoBase": 6945.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 570,
+    "prezzoBase": 9221.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 570,
+    "prezzoBase": 11070.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 570,
+    "prezzoBase": 12320.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 577,
+    "prezzoBase": 5081.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 577,
+    "prezzoBase": 7007.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 577,
+    "prezzoBase": 9309.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 577,
+    "prezzoBase": 11176.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 577,
+    "prezzoBase": 12443.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 584,
+    "prezzoBase": 5129.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 584,
+    "prezzoBase": 7070.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 584,
+    "prezzoBase": 9398.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 584,
+    "prezzoBase": 11278.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 584,
+    "prezzoBase": 12563.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 591,
+    "prezzoBase": 5171.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 591,
+    "prezzoBase": 7133.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 591,
+    "prezzoBase": 9485.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 591,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 591,
+    "prezzoBase": 12684.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 598,
+    "prezzoBase": 5220.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 598,
+    "prezzoBase": 7190.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 598,
+    "prezzoBase": 9576.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 598,
+    "prezzoBase": 11491.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 598,
+    "prezzoBase": 12802.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 605,
+    "prezzoBase": 5268.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 605,
+    "prezzoBase": 7255.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 605,
+    "prezzoBase": 9671.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 605,
+    "prezzoBase": 11597.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 605,
+    "prezzoBase": 12922.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 612,
+    "prezzoBase": 5498.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 612,
+    "prezzoBase": 7598.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 612,
+    "prezzoBase": 10041.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 612,
+    "prezzoBase": 12081.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 612,
+    "prezzoBase": 13424.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 619,
+    "prezzoBase": 5544.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 619,
+    "prezzoBase": 7660.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 619,
+    "prezzoBase": 10131.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 619,
+    "prezzoBase": 12186.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 619,
+    "prezzoBase": 13545.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 626,
+    "prezzoBase": 5592.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 626,
+    "prezzoBase": 7721.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 626,
+    "prezzoBase": 10220.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 626,
+    "prezzoBase": 12288.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 626,
+    "prezzoBase": 13661.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 633,
+    "prezzoBase": 5637.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 633,
+    "prezzoBase": 7786.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 633,
+    "prezzoBase": 10308.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 633,
+    "prezzoBase": 12396.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 633,
+    "prezzoBase": 13784.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 640,
+    "prezzoBase": 5680.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 640,
+    "prezzoBase": 7844.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 640,
+    "prezzoBase": 10398.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 640,
+    "prezzoBase": 12501.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 390,
+    "larghezzaMm": 640,
+    "prezzoBase": 13904.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 647,
+    "prezzoBase": 5727.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 647,
+    "prezzoBase": 7908.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 647,
+    "prezzoBase": 10486.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 647,
+    "prezzoBase": 12602.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 654,
+    "prezzoBase": 5773.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 654,
+    "prezzoBase": 7968.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 654,
+    "prezzoBase": 10579.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 654,
+    "prezzoBase": 12711.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 661,
+    "prezzoBase": 5819.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 661,
+    "prezzoBase": 8031.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 661,
+    "prezzoBase": 10667.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 661,
+    "prezzoBase": 12816.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 668,
+    "prezzoBase": 5861.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 668,
+    "prezzoBase": 8091.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 668,
+    "prezzoBase": 10759.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 668,
+    "prezzoBase": 12915.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 675,
+    "prezzoBase": 5907.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 675,
+    "prezzoBase": 8154.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 675,
+    "prezzoBase": 10845.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 675,
+    "prezzoBase": 13022.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 682,
+    "prezzoBase": 5954.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 682,
+    "prezzoBase": 8214.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 682,
+    "prezzoBase": 10935.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 682,
+    "prezzoBase": 13128.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 689,
+    "prezzoBase": 6000.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 689,
+    "prezzoBase": 8276.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 689,
+    "prezzoBase": 11025.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 689,
+    "prezzoBase": 13232.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 696,
+    "prezzoBase": 6046.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 696,
+    "prezzoBase": 8337.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 696,
+    "prezzoBase": 11114.0
+  },
+  {
+    "tipologia": "WAWE_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 696,
+    "prezzoBase": 13337.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 3379.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 3585.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 3867.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 4078.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 4363.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 3865.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 4136.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 4477.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 4745.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 5090.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 4041.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 4310.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 4652.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 4919.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 5268.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 4528.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 4858.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 5257.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 5588.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 5996.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 150,
+    "prezzoBase": 4704.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 5032.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 5437.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 5764.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 6171.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 150,
+    "prezzoBase": 5194.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 5583.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 6047.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 6433.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 6903.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 150,
+    "prezzoBase": 5546.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 200,
+    "prezzoBase": 5935.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 250,
+    "prezzoBase": 6398.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 300,
+    "prezzoBase": 6788.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 350,
+    "prezzoBase": 7248.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 150,
+    "prezzoBase": 5546.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 200,
+    "prezzoBase": 5935.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 250,
+    "prezzoBase": 6398.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 6788.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 7248.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 150,
+    "prezzoBase": 6211.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 200,
+    "prezzoBase": 6658.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 250,
+    "prezzoBase": 7183.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 300,
+    "prezzoBase": 7631.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 350,
+    "prezzoBase": 8154.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 150,
+    "prezzoBase": 6211.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 200,
+    "prezzoBase": 6658.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 250,
+    "prezzoBase": 7183.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 7631.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 8154.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 2277.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 2485.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 2765.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 2978.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 3260.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 2679.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2944.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 3289.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3557.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3900.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 2763.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 3034.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3379.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3645.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3992.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 3166.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3494.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3898.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 4224.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 4629.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 150,
+    "prezzoBase": 3256.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3583.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3986.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 4314.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4717.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 150,
+    "prezzoBase": 3656.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 4044.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 4506.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4898.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 5359.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 150,
+    "prezzoBase": 3832.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 200,
+    "prezzoBase": 4219.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 250,
+    "prezzoBase": 4682.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 300,
+    "prezzoBase": 5071.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 350,
+    "prezzoBase": 5533.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 150,
+    "prezzoBase": 3832.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 200,
+    "prezzoBase": 4219.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 250,
+    "prezzoBase": 4682.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 5071.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 5533.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 150,
+    "prezzoBase": 4317.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 200,
+    "prezzoBase": 4768.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 250,
+    "prezzoBase": 5294.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 300,
+    "prezzoBase": 5738.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 350,
+    "prezzoBase": 6266.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 150,
+    "prezzoBase": 4317.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 200,
+    "prezzoBase": 4768.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 250,
+    "prezzoBase": 5294.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 5738.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 6266.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 4567.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 5056.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 5056.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 7045.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 7045.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5357.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 5970.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 5970.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 8297.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 8297.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5530.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 6146.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6146.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 8559.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 8559.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 6322.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 7054.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 7054.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 9810.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 9810.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 6498.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 450,
+    "prezzoBase": 7228.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 7228.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 550,
+    "prezzoBase": 10072.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 10072.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 7285.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 450,
+    "prezzoBase": 8140.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 8140.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 550,
+    "prezzoBase": 11322.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 11322.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 400,
+    "prezzoBase": 7640.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 450,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 500,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 550,
+    "prezzoBase": 11852.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 7640.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 450,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 500,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 400,
+    "prezzoBase": 8605.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 450,
+    "prezzoBase": 9574.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 8605.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 3467.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 3958.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 3958.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 5947.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 5947.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 4168.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 7107.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 7107.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 4254.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 4868.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 4868.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 7283.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 7283.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4958.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 5688.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 5688.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 5046.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 450,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 550,
+    "prezzoBase": 8620.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 8620.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 5748.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 450,
+    "prezzoBase": 6602.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6602.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 550,
+    "prezzoBase": 9784.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 9784.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 400,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 450,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 500,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 550,
+    "prezzoBase": 10136.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 450,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 500,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 400,
+    "prezzoBase": 6713.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 450,
+    "prezzoBase": 7688.0
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 6713.0
+  }
+]

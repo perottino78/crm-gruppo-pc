@@ -1,0 +1,100 @@
+[
+  {
+    "categoria": "WAWE Accessori",
+    "nome": "Pluviale completo Ø60, H200",
+    "tipoPrezzo": "FISSO",
+    "valore": 120,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Accessori",
+    "nome": "Tettuccio",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Accessori",
+    "nome": "Gronda frontale",
+    "tipoPrezzo": "FISSO",
+    "valore": 52,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Motorizzazione",
+    "nome": "Somfy RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 1155,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Motorizzazione",
+    "nome": "Telecomando Situo 1 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 106,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Motorizzazione",
+    "nome": "Telecomando Situo 5 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 169,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "WAWE Motorizzazione",
+    "nome": "Sensore pioggia Ondeis",
+    "tipoPrezzo": "FISSO",
+    "valore": 894,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "WAWE",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  }
+]

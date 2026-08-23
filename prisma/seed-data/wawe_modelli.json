@@ -1,0 +1,37 @@
+[
+  {
+    "tipologia": "WAWE_PATIO",
+    "descrizioneTecnica": "WAWE — solo patio (copertura a lamelle orientabili). Un sistema di copertura unico e innovativo composto da lamelle in alluminio e speciali guide a scorrimento, che in posizione di chiusura protegge dalla pioggia e dal sole. Il suo design elegante e la soluzione ideale per diversi spazi anche fuori squadro: terrazze, pergolati, gazebo e verande. Certificazioni EN 13561, Resistenza al vento Classe 3, Peso circa 13 kg/m2 (variabile in base alle configurazioni). Colori disponibili: 9010 LUCIDO, 1013 LUCIDO. Lamelle da 85mm in alluminio verniciato, orientamento da 0 a 80 gradi, comando ad arganello o a motore con radiocomando, pendenza minima 3% e massima 7% per corretto deflusso delle acque.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/wawe/wawe_hero.png"
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA",
+    "descrizioneTecnica": "WAWE — struttura parete singola (senza lamelle, da abbinare al prezzo patio). Altezza max 2800mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/wawe/wawe_struttura_singola.png"
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_SINGOLA_AFFIANCATA",
+    "descrizioneTecnica": "WAWE — struttura parete singola affiancata (moduli accostati, senza lamelle, da abbinare al prezzo patio).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/wawe/wawe_struttura_singola.png"
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA",
+    "descrizioneTecnica": "WAWE — struttura parete doppia (senza lamelle, da abbinare al prezzo patio). Altezza max 2600mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/wawe/wawe_struttura_doppia.png"
+  },
+  {
+    "tipologia": "WAWE_STRUTTURA_DOPPIA_AFFIANCATA",
+    "descrizioneTecnica": "WAWE — struttura parete doppia affiancata (moduli accostati, senza lamelle, da abbinare al prezzo patio).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/wawe/wawe_struttura_doppia.png"
+  }
+]
