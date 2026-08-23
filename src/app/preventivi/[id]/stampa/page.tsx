@@ -27,6 +27,12 @@ export default async function StampaPreventivoPage({
   });
   if (!preventivo) notFound();
 
+  const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];
+  const modelli = tipologiePresenti.length
+    ? await prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId, tipologia: { in: tipologiePresenti } } })
+    : [];
+  const modelloMap = new Map(modelli.map((m) => [m.tipologia, m]));
+
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
   const oggi = new Date().toLocaleDateString("it-IT");
@@ -81,16 +87,28 @@ export default async function StampaPreventivoPage({
           {preventivo.righe.map((r) => {
             const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
             const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+            const modello = modelloMap.get(r.prodotto.tipologia);
+            const mostraScheda = r.mostraDescrizione && modello && (modello.immagineUrl || modello.descrizioneTecnica);
             return (
               <tr key={r.id} className="border-b border-neutral-100 align-top">
                 <td className="py-2">
-                  <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
-                  <p className="text-xs text-neutral-400">
-                    colore {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}
-                  </p>
-                  {r.optionali.map((ro) => (
-                    <p key={ro.id} className="text-xs text-neutral-400">+ {ro.optional.nome} ({ro.quantita}×)</p>
-                  ))}
+                  <div className="flex items-start gap-2">
+                    {mostraScheda && modello?.immagineUrl && (
+                      <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-16 h-16 object-cover rounded shrink-0" />
+                    )}
+                    <div>
+                      <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
+                      <p className="text-xs text-neutral-400">
+                        colore {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}
+                      </p>
+                      {mostraScheda && modello?.descrizioneTecnica && (
+                        <p className="text-xs text-neutral-500 mt-1 max-w-md whitespace-pre-line">{modello.descrizioneTecnica}</p>
+                      )}
+                      {r.optionali.map((ro) => (
+                        <p key={ro.id} className="text-xs text-neutral-400">+ {ro.optional.nome} ({ro.quantita}×)</p>
+                      ))}
+                    </div>
+                  </div>
                 </td>
                 <td className="py-2 text-center">{r.quantita}</td>
                 <td className="py-2 text-right">{r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</td>

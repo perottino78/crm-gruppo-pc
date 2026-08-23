@@ -11,6 +11,7 @@ import {
   aggiungiOptionalARiga,
   rimuoviOptionalDaRiga,
   aggiornaStatoPreventivo,
+  toggleDescrizioneRiga,
 } from "@/app/actions";
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
@@ -55,6 +56,12 @@ export default async function PreventivoPage({
         })
       : [],
   ]);
+
+  const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];
+  const modelli = tipologiePresenti.length
+    ? await prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId, tipologia: { in: tipologiePresenti } } })
+    : [];
+  const modelloMap = new Map(modelli.map((m) => [m.tipologia, m]));
 
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
@@ -118,12 +125,18 @@ export default async function PreventivoPage({
         {preventivo.righe.map((r) => {
           const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
           const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+          const modello = modelloMap.get(r.prodotto.tipologia);
           return (
             <div key={r.id} className="px-4 py-3 text-sm">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">{r.prodotto.tipologia} · {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}</p>
-                  <p className="text-xs text-neutral-400">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+                <div className="flex items-center gap-3">
+                  {modello?.immagineUrl && (
+                    <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-12 h-12 object-cover rounded border border-neutral-200" />
+                  )}
+                  <div>
+                    <p className="font-medium">{r.prodotto.tipologia} · {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}</p>
+                    <p className="text-xs text-neutral-400">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="font-medium">{subtotale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
@@ -134,6 +147,17 @@ export default async function PreventivoPage({
                   </form>
                 </div>
               </div>
+
+              {modello?.descrizioneTecnica && (
+                <form action={toggleDescrizioneRiga} className="mt-1.5 flex items-center gap-2">
+                  <input type="hidden" name="id" value={r.id} />
+                  <input type="hidden" name="preventivoId" value={preventivo.id} />
+                  <input type="hidden" name="mostra" value={(!r.mostraDescrizione).toString()} />
+                  <button className={`text-[11px] px-2 py-0.5 rounded-full border ${r.mostraDescrizione ? "border-green-200 bg-green-50 text-green-700" : "border-neutral-200 text-neutral-400"}`}>
+                    {r.mostraDescrizione ? "✓ descrizione visibile in offerta" : "descrizione nascosta — clicca per mostrarla"}
+                  </button>
+                </form>
+              )}
 
               {r.optionali.length > 0 && (
                 <div className="mt-2 pl-3 border-l-2 border-neutral-100 flex flex-col gap-1">

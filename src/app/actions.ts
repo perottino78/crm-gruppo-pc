@@ -226,3 +226,31 @@ export async function completaAttivita(formData: FormData) {
   await prisma.attivita.update({ where: { id }, data: { completata: true } });
   if (clienteId) revalidatePath(`/clienti/${clienteId}`);
 }
+
+export async function salvaModelloProdotto(formData: FormData) {
+  const brandId = str(formData, "brandId");
+  const tipologia = str(formData, "tipologia");
+  if (!brandId || !tipologia) return;
+  const immagineUrl = str(formData, "immagineUrl");
+  const descrizioneTecnica = str(formData, "descrizioneTecnica");
+
+  await prisma.modelloProdotto.upsert({
+    where: { brandId_tipologia: { brandId, tipologia } },
+    create: { brandId, tipologia, immagineUrl, descrizioneTecnica },
+    update: { immagineUrl, descrizioneTecnica },
+  });
+  revalidatePath("/prodotti");
+  revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
+}
+
+export async function toggleDescrizioneRiga(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  const mostraStr = str(formData, "mostra");
+  if (!id || !preventivoId) return;
+  await prisma.rigaPreventivo.update({
+    where: { id },
+    data: { mostraDescrizione: mostraStr === "true" },
+  });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}

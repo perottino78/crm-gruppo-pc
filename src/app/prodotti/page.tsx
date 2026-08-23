@@ -106,6 +106,7 @@ export default async function ProdottiPage({
               <th className="px-4 py-2 font-medium">Colore</th>
               <th className="px-4 py-2 font-medium">Dimensioni</th>
               <th className="px-4 py-2 font-medium text-right">Prezzo base</th>
+              <th className="px-4 py-2 font-medium"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-50">
@@ -117,6 +118,11 @@ export default async function ProdottiPage({
                 <td className="px-4 py-2 text-neutral-500">{p.larghezzaMm} × {p.altezzaMm} {unitaMisura(p.tipologia)}</td>
                 <td className="px-4 py-2 text-right">
                   {p.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                </td>
+                <td className="px-4 py-2 text-right">
+                  <Link href={`/prodotti/modello/${encodeURIComponent(p.tipologia)}`} className="text-xs text-blue-600 underline whitespace-nowrap">
+                    scheda tecnica
+                  </Link>
                 </td>
               </tr>
             ))}

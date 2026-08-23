@@ -23,6 +23,7 @@ model Brand {
   prodotti  Prodotto[]
   preventivi Preventivo[]
   optionali Optional[]
+  modelli   ModelloProdotto[]
 }
 
 model Utente {
@@ -133,6 +134,7 @@ model RigaPreventivo {
   prezzoUnitario Float
   optionalDescrizione String?
   optionalPrezzo Float @default(0)
+  mostraDescrizione Boolean @default(true)
   optionali     RigaOptional[]
 }
 
@@ -195,4 +197,17 @@ model Attivita {
   utente      Utente?   @relation(fields: [utenteId], references: [id])
   utenteId    String?
   createdAt   DateTime  @default(now())
+}
+
+// Scheda tecnica condivisa per tutte le varianti dimensionali di una tipologia
+// (es. tutte le righe LUCILLA_PARETE_SINGOLA condividono la stessa immagine/descrizione)
+model ModelloProdotto {
+  id                 String  @id @default(cuid())
+  brand              Brand   @relation(fields: [brandId], references: [id])
+  brandId            String
+  tipologia          String
+  immagineUrl        String?
+  descrizioneTecnica String?
+
+  @@unique([brandId, tipologia])
 }
