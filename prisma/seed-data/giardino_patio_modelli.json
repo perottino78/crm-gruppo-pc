@@ -1,0 +1,65 @@
+[
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "descrizioneTecnica": "GIARDINO PONZA — Manovrabilità, ottimo rapporto qualità prezzo, facilità d'installazione: copre terrazze, balconi e piccoli patii. Struttura montata in opera, comando apertura-chiusura a molla, arganello o motore. Certificazione EN 13561, Resistenza al vento Classe 3. Prezzo tariffa 1 (comando ad argano), colori di serie Bianco 9010/Beige 1013/Grigio 7035. Larghezza max 4000mm, sporgenza max 4000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/ponza.png"
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "descrizioneTecnica": "CORFÙ — soluzione ideale per terrazze, balconi e patii, particolarmente versatile per attività commerciali. Robustissima, si presta a raggiungere grandi dimensioni con configurazioni a più moduli. Disponibile con comando ad argano, a molla o motorizzabile. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 6000mm, sporgenza max 6000mm. Config.: singola a piastre separate.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/corfu.png"
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "descrizioneTecnica": "CORFÙ — soluzione ideale per terrazze, balconi e patii, particolarmente versatile per attività commerciali. Robustissima, si presta a raggiungere grandi dimensioni con configurazioni a più moduli. Disponibile con comando ad argano, a molla o motorizzabile. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 6000mm, sporgenza max 6000mm. Config.: affiancata a piastre separate.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/corfu.png"
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "descrizioneTecnica": "CORFÙ — soluzione ideale per terrazze, balconi e patii, particolarmente versatile per attività commerciali. Robustissima, si presta a raggiungere grandi dimensioni con configurazioni a più moduli. Disponibile con comando ad argano, a molla o motorizzabile. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 6000mm, sporgenza max 6000mm. Config.: singola a barra quadra e cassonetto.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/corfu.png"
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "descrizioneTecnica": "GIARDINO 94 — tenda con caratteristiche simili al modello Corfù. L'originale sezione delle guide di scorrimento permette, grazie alla scanalatura posta nella parte inferiore del profilo, di inserire eventuali teli laterali che scorrono lateralmente. Le guide sono intervallate da un giunto intermedio che inclina la struttura in avanti di 4°, per maggiore resistenza al vento. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 12000mm, sporgenza max 6000mm. Config.: singola a piastre separate.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "descrizioneTecnica": "GIARDINO 94 — tenda con caratteristiche simili al modello Corfù. L'originale sezione delle guide di scorrimento permette, grazie alla scanalatura posta nella parte inferiore del profilo, di inserire eventuali teli laterali che scorrono lateralmente. Le guide sono intervallate da un giunto intermedio che inclina la struttura in avanti di 4°, per maggiore resistenza al vento. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 12000mm, sporgenza max 6000mm. Config.: affiancata a piastre separate.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "descrizioneTecnica": "GIARDINO 94 — tenda con caratteristiche simili al modello Corfù. L'originale sezione delle guide di scorrimento permette, grazie alla scanalatura posta nella parte inferiore del profilo, di inserire eventuali teli laterali che scorrono lateralmente. Le guide sono intervallate da un giunto intermedio che inclina la struttura in avanti di 4°, per maggiore resistenza al vento. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 12000mm, sporgenza max 6000mm. Config.: telo unico con piastre separate (fino a 1200cm con 2 o 3 piantoni).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "descrizioneTecnica": "GIARDINO 94 — tenda con caratteristiche simili al modello Corfù. L'originale sezione delle guide di scorrimento permette, grazie alla scanalatura posta nella parte inferiore del profilo, di inserire eventuali teli laterali che scorrono lateralmente. Le guide sono intervallate da un giunto intermedio che inclina la struttura in avanti di 4°, per maggiore resistenza al vento. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 12000mm, sporgenza max 6000mm. Config.: telo unico con barra quadra (fino a 1200cm con 2 o 3 piantoni).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "descrizioneTecnica": "GIARDINO 94 — tenda con caratteristiche simili al modello Corfù. L'originale sezione delle guide di scorrimento permette, grazie alla scanalatura posta nella parte inferiore del profilo, di inserire eventuali teli laterali che scorrono lateralmente. Le guide sono intervallate da un giunto intermedio che inclina la struttura in avanti di 4°, per maggiore resistenza al vento. Certificazione EN 13561, Resistenza al vento Classe 3. Larghezza max 12000mm, sporgenza max 6000mm. Config.: telo unico con barra quadra e cassonetto.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "GIARDINO E PATIO",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
+  }
+]

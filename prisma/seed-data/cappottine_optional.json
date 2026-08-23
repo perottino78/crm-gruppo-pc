@@ -1,0 +1,2298 @@
+[
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 84.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 112.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 391.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 570.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "STANDARD35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "GRADINI35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "PROLUNGATA35",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Braccio supplementare",
+    "tipoPrezzo": "FISSO",
+    "valore": 340.0,
+    "unita": null,
+    "listino": "STANDARD50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "GRADINI50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "PROLUNGATA50",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "BARLETTA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Comando ad arganello",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": "mt",
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Pop1 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando PopPlus7 - Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 782.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 1140.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P1 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 168.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando P6 - Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 224.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione meccanica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 966.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Motorizzazione elettronica Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1202.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo1 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 166.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Motorizzazione e Supplementi",
+    "nome": "Telecomando Situo5 - Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.0,
+    "unita": null,
+    "listino": "CUPOLA",
+    "note": null,
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD35_4P3S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD35_4P3S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD35_4P3S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD35_5P4S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD35_5P4S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD35_5P4S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD35_6P5S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD35_6P5S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD35_6P5S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "GRADINI35",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "GRADINI35",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "GRADINI35",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "PROLUNGATA35",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "PROLUNGATA35",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "PROLUNGATA35",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD50_4P3S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD50_4P3S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD50_4P3S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD50_5P4S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD50_5P4S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD50_5P4S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "STANDARD50_6P5S",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "STANDARD50_6P5S",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "STANDARD50_6P5S",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "GRADINI50",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "GRADINI50",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "GRADINI50",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "PROLUNGATA50",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "PROLUNGATA50",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "PROLUNGATA50",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "VOGUE",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "VOGUE",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "VOGUE",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "DELTA_K35",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "DELTA_K35",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "DELTA_K35",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "DELTA_K50",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "DELTA_K50",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "DELTA_K50",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "BARLETTA",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "BARLETTA",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "BARLETTA",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "listino": "CUPOLA",
+    "note": "Maggiorazione da listino: +10% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "listino": "CUPOLA",
+    "note": "Maggiorazione da listino: +35% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "listino": "CUPOLA",
+    "note": "Maggiorazione da listino: +50% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": "%",
+    "listino": "BETA1002",
+    "note": "Maggiorazione da listino: +8% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": "%",
+    "listino": "BETA1002",
+    "note": "Maggiorazione da listino: +30% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": "%",
+    "listino": "BETA1002",
+    "note": "Maggiorazione da listino: +40% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": "%",
+    "listino": "BETA1003",
+    "note": "Maggiorazione da listino: +8% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": "%",
+    "listino": "BETA1003",
+    "note": "Maggiorazione da listino: +30% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4 (tessuto fuori tariffa 1)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": "%",
+    "listino": "BETA1003",
+    "note": "Maggiorazione da listino: +40% su prezzo tariffa 1.",
+    "gruppiApplicabili": [
+      "CAPPOTTINE FISSE E MOBILI"
+    ],
+    "sporgenzaMm": null,
+    "larghezzaMm": null
+  }
+]

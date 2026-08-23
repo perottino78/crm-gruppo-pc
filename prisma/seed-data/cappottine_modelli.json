@@ -1,0 +1,121 @@
+[
+  {
+    "tipologia": "STANDARD35_4P3S",
+    "descrizioneTecnica": "Cappottina Standard 35mm - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio spessore 35mm, telo in tessuto tecnico impermeabile. Prezzo per fascia di sporgenza (S) e larghezza (L).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard35.png"
+  },
+  {
+    "tipologia": "STANDARD35_5P4S",
+    "descrizioneTecnica": "Cappottina Standard 35mm - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura rinforzata rispetto alla versione 4 profili nella stessa fascia di sporgenza.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard35.png"
+  },
+  {
+    "tipologia": "STANDARD35_6P5S",
+    "descrizioneTecnica": "Cappottina Standard 35mm - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima sporgenza disponibile per il profilo 35mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard35.png"
+  },
+  {
+    "tipologia": "GRADINI35",
+    "descrizioneTecnica": "Cappottina Gradini 35mm, profilo con gradini per copertura scale/dislivelli. Struttura in alluminio 35mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/gradini35.png"
+  },
+  {
+    "tipologia": "PROLUNGATA35",
+    "descrizioneTecnica": "Cappottina Prolungata 35mm, versione con maggiore estensione frontale. Struttura in alluminio 35mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/prolungata35.png"
+  },
+  {
+    "tipologia": "STANDARD50_4P3S",
+    "descrizioneTecnica": "Cappottina Standard 50mm - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio spessore 50mm, maggior robustezza rispetto al 35mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard50.png"
+  },
+  {
+    "tipologia": "STANDARD50_5P4S",
+    "descrizioneTecnica": "Cappottina Standard 50mm - configurazione 5 profili/4 spicchi (sporgenza 90-150cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard50.png"
+  },
+  {
+    "tipologia": "STANDARD50_6P5S",
+    "descrizioneTecnica": "Cappottina Standard 50mm - configurazione 6 profili/5 spicchi (sporgenza 160-200cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/standard50.png"
+  },
+  {
+    "tipologia": "GRADINI50",
+    "descrizioneTecnica": "Cappottina Gradini 50mm, profilo con gradini per copertura scale/dislivelli. Struttura in alluminio 50mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/gradini50.png"
+  },
+  {
+    "tipologia": "PROLUNGATA50",
+    "descrizioneTecnica": "Cappottina Prolungata 50mm, versione con maggiore estensione frontale. Struttura in alluminio 50mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/prolungata50.png"
+  },
+  {
+    "tipologia": "VOGUE",
+    "descrizioneTecnica": "Cappottina Vogue, modello con struttura fissa e forma diagonale (rapporto sporgenza/larghezza fisso). Disponibile in 4 misure predefinite. Nessuna motorizzazione disponibile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/vogue.png"
+  },
+  {
+    "tipologia": "DELTA_K35",
+    "descrizioneTecnica": "Cappottina Delta K35, piccola tenda a struttura fissa per porte/finestre, profilo 35mm. Montaggio a parete. Nessuna motorizzazione disponibile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/delta.png"
+  },
+  {
+    "tipologia": "DELTA_K50",
+    "descrizioneTecnica": "Cappottina Delta K50, piccola tenda a struttura fissa per porte/finestre, profilo 50mm. Montaggio a parete. Nessuna motorizzazione disponibile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/delta.png"
+  },
+  {
+    "tipologia": "BETA1002",
+    "descrizioneTecnica": "Cappottina Beta 1002, struttura fissa con doppia dimensione (larghezza L e altezza A) e ampia gamma di misure. Nessuna motorizzazione disponibile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/beta1002.png"
+  },
+  {
+    "tipologia": "BETA1003",
+    "descrizioneTecnica": "Cappottina Beta 1003, struttura fissa con doppia dimensione (larghezza L e altezza A), versione compatta rispetto a Beta 1002. Nessuna motorizzazione disponibile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/beta1003.png"
+  },
+  {
+    "tipologia": "BARLETTA",
+    "descrizioneTecnica": "Cappottina Barletta. Prezzo calcolato come Cappottina Standard 35mm o 50mm (stessa sporgenza/larghezza) maggiorata del 30%. Usare il calcolatore Standard35/Standard50 per la misura desiderata e applicare +30% manualmente.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "CUPOLA",
+    "descrizioneTecnica": "Cappottina Cupola. Prezzo calcolato come Cappottina Standard 35mm o 50mm (stessa sporgenza/larghezza) maggiorata del 15% (+25% per cappottine a raggio non costante). Usare il calcolatore Standard35/Standard50 per la misura desiderata e applicare la maggiorazione manualmente.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  }
+]

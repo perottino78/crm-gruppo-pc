@@ -1,0 +1,2718 @@
+[
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 1596.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 1760.0
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 1908.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2068.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1803.2
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2024.0
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2171.2
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2390.4
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 2012.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2286.4
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2436.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2713.6
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 2372.8
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 2707.2
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 2889.6
+  },
+  {
+    "tipologia": "GIARDINO_PONZA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 3224.0
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 2259.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2422.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 2566.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2729.6
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 2875.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 3177.6
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 1632.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 1798.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 1940.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2104.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 2246.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 2555.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 2566.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2790.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2932.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3153.6
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 3299.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 3662.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1848.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2068.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2212.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2435.2
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 2580.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 2945.6
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 2878.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3156.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3299.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3582.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 3724.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 4152.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 2060.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2344.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2483.2
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2771.2
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 2910.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 3334.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 3334.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3676.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 3852.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4193.6
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 4371.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 4884.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 2408.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 2748.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 2924.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 3265.6
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 3440.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 3956.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 3795.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 4198.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 4403.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 4806.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 5014.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 5622.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 2752.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 3153.6
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 3360.0
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 3761.6
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 3969.6
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 4579.2
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 4104.0
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 4564.8
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 4769.6
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 5232.0
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 5438.4
+  },
+  {
+    "tipologia": "CORFU_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 6108.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 2966.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 3427.2
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 3635.2
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 4094.4
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 4300.8
+  },
+  {
+    "tipologia": "CORFU_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 4968.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 3065.6
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 3228.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 3524.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 3689.6
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 4092.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 4656.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 3374.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3598.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3896.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 4116.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 4520.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 5139.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 3684.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3964.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 4262.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4542.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 4944.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 5628.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 4080.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 4396.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4723.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 5035.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 480,
+    "prezzoBase": 5468.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 6216.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 4440.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4782.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 5161.6
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 5502.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 5987.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 6812.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 4897.6
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 5299.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 5712.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 6115.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 6627.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 7547.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 5211.2
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 5670.4
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 6080.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 6540.8
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 7056.0
+  },
+  {
+    "tipologia": "CORFU_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 8032.0
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 2630.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2793.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 3020.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 3185.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 3408.0
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 3798.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 2022.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2188.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 2412.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2580.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 2804.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 3196.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 2630.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2793.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 3020.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 3185.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 3408.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 3798.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 700,
+    "prezzoBase": 5352.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 800,
+    "prezzoBase": 5744.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 900,
+    "prezzoBase": 6206.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 6521.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1100,
+    "prezzoBase": 6985.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1200,
+    "prezzoBase": 7140.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 2908.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 3073.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 3318.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 3480.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 3833.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 4344.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 700,
+    "prezzoBase": 5942.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 800,
+    "prezzoBase": 6472.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 900,
+    "prezzoBase": 6979.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 7497.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1100,
+    "prezzoBase": 7843.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 1200,
+    "prezzoBase": 8155.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 2913.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3134.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3360.0
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3580.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 3814.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 4260.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 2224.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2448.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2672.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2892.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 3124.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 3571.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 2913.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3134.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3360.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3580.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 3814.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 4260.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 5952.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 6401.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 6923.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 7297.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1100,
+    "prezzoBase": 7817.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1200,
+    "prezzoBase": 7972.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 3190.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3408.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3656.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3875.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 4225.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 4798.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 6537.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 7126.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 7688.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 8264.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1100,
+    "prezzoBase": 8612.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 1200,
+    "prezzoBase": 8982.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 3193.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3473.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3702.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3982.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 4209.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 4716.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 2424.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2705.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2928.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3209.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 3441.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 3945.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 3193.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3473.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3702.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3982.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 4209.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 4716.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 6552.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 7057.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 7638.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 8033.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1100,
+    "prezzoBase": 8651.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1200,
+    "prezzoBase": 8806.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 3468.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3747.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3995.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4270.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 4625.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 5251.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 7131.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 7779.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 8398.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 9032.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1100,
+    "prezzoBase": 9379.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 1200,
+    "prezzoBase": 9809.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 3625.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3964.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4228.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4569.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 4835.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 5436.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 2774.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3113.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 3376.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 3718.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 3980.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 4388.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 3625.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3964.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4228.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4569.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 4835.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 5436.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 7488.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 8089.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 8766.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 9297.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1100,
+    "prezzoBase": 9974.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1200,
+    "prezzoBase": 10164.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 3897.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4230.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4520.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4852.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 5241.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 5964.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 8056.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 8801.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 9518.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10248.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1100,
+    "prezzoBase": 10630.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 1200,
+    "prezzoBase": 11156.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 4059.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 4457.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 4760.0
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 5153.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 5459.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 6158.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 3124.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 3520.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 3825.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 4220.8
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 4523.2
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 5222.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 4059.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 4457.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 4760.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 5153.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 5459.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 6158.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 700,
+    "prezzoBase": 8427.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 800,
+    "prezzoBase": 9124.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 900,
+    "prezzoBase": 9897.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10521.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1100,
+    "prezzoBase": 11292.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1200,
+    "prezzoBase": 11524.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 4326.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 4718.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 5038.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 5435.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 5862.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 6681.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 700,
+    "prezzoBase": 8985.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 800,
+    "prezzoBase": 9824.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 900,
+    "prezzoBase": 10633.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11457.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1100,
+    "prezzoBase": 11878.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 1200,
+    "prezzoBase": 12499.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 4339.2
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 4798.4
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 5097.6
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 5556.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 5860.8
+  },
+  {
+    "tipologia": "GIARDINO94_SINGOLA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 6617.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 3321.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 3779.2
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 4080.0
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 4534.4
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 4841.6
+  },
+  {
+    "tipologia": "GIARDINO94_AFFIANCATA_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 5598.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 4339.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 4798.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 5097.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 5556.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 5860.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 6617.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 700,
+    "prezzoBase": 9020.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 800,
+    "prezzoBase": 9780.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 900,
+    "prezzoBase": 10614.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11294.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1100,
+    "prezzoBase": 12128.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_PIASTRE",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1200,
+    "prezzoBase": 12355.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 4604.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 5059.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 5382.4
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 5828.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 6256.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 7132.8
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 700,
+    "prezzoBase": 9576.0
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 800,
+    "prezzoBase": 10473.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 900,
+    "prezzoBase": 11347.2
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12225.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1100,
+    "prezzoBase": 12649.6
+  },
+  {
+    "tipologia": "GIARDINO94_TELO_UNICO_BARRA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 1200,
+    "prezzoBase": 13326.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 240,
+    "prezzoBase": 3299.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 3462.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 3836.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 4000.0
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 480,
+    "prezzoBase": 4475.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 5115.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 3579.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3796.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 4172.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 4390.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 480,
+    "prezzoBase": 4872.0
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 5568.0
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 3857.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 4134.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 4510.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4785.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 480,
+    "prezzoBase": 5268.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6020.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 4225.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 4532.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4945.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 5252.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 480,
+    "prezzoBase": 5766.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 6592.0
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 240,
+    "prezzoBase": 4548.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4884.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 5347.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 5684.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 480,
+    "prezzoBase": 6249.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7145.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 240,
+    "prezzoBase": 4976.0
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 300,
+    "prezzoBase": 5371.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 350,
+    "prezzoBase": 5868.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 6262.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 480,
+    "prezzoBase": 6867.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 600,
+    "prezzoBase": 7865.6
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 240,
+    "prezzoBase": 5254.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 300,
+    "prezzoBase": 5708.8
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 350,
+    "prezzoBase": 6206.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 6659.2
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 480,
+    "prezzoBase": 7262.4
+  },
+  {
+    "tipologia": "GIARDINO94_BARRA_CASSONETTO",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 600,
+    "prezzoBase": 8313.6
+  }
+]

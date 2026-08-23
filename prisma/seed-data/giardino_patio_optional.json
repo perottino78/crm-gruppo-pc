@@ -1,0 +1,240 @@
+[
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO_PONZA",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO_PONZA",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO_PONZA",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "CORFU",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "CORFU",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "CORFU",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO94",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO94",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuti",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO94",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini Nice - motore meccanico (B)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini Nice - motore elettronico (D)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy - motore meccanico (B)",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy - motore elettronico (D)",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Tettuccio di protezione",
+    "tipoPrezzo": "FISSO",
+    "valore": 180,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Cassonetto (Giardino Ponza)",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO_PONZA",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Comando a molla (Corfù)",
+    "tipoPrezzo": "FISSO",
+    "valore": 252,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "CORFU",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Comando a molla (Giardino 94)",
+    "tipoPrezzo": "FISSO",
+    "valore": 252,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "GIARDINO94",
+    "note": null,
+    "gruppiApplicabili": [
+      "GIARDINO E PATIO"
+    ]
+  }
+]
