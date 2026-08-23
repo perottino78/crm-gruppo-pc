@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import prodottiData from "../../../../../prisma/seed-data/lucilla_prodotti.json";
-import optionaliData from "../../../../../prisma/seed-data/lucilla_optionals.json";
+import prodottiData from "../../../../../prisma/seed-data/nuvola_prodotti.json";
+import optionaliData from "../../../../../prisma/seed-data/nuvola_optionals.json";
 
 export const dynamic = "force-dynamic";
 
@@ -37,9 +37,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "brand P&C non trovato, esegui prima il seed principale" }, { status: 400 });
   }
 
-  // idempotenza: rimuove eventuali importazioni Lucilla precedenti
-  await prisma.prodotto.deleteMany({ where: { brandId: brand.id, tipologia: { startsWith: "LUCILLA_" } } });
-  await prisma.optional.deleteMany({ where: { brandId: brand.id, listino: "LUCILLA" } });
+  // idempotenza: rimuove eventuali importazioni Nuvola precedenti (non tocca gli optional di altre linee)
+  await prisma.prodotto.deleteMany({ where: { brandId: brand.id, tipologia: { startsWith: "NUVOLA_" } } });
+  await prisma.optional.deleteMany({ where: { brandId: brand.id, listino: "NUVOLA" } });
 
   const prodotti = prodottiData as ProdottoRow[];
   const optionali = optionaliData as OptionalRow[];
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       sporgenzaMm: o.sporgenzaMm,
       larghezzaMm: o.larghezzaMm,
       note: o.note,
-      listino: "LUCILLA",
+      listino: "NUVOLA",
     }));
     const res = await prisma.optional.createMany({ data: chunk });
     optionaliCreati += res.count;

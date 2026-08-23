@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
+import { unitaMisura, listinoDiTipologia } from "@/lib/prodotti";
 import {
   aggiungiRigaPreventivo,
   rimuoviRigaPreventivo,
@@ -121,7 +122,7 @@ export default async function PreventivoPage({
             <div key={r.id} className="px-4 py-3 text-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">{r.prodotto.tipologia} · {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}mm</p>
+                  <p className="font-medium">{r.prodotto.tipologia} · {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}</p>
                   <p className="text-xs text-neutral-400">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -153,11 +154,13 @@ export default async function PreventivoPage({
                 <input type="hidden" name="rigaId" value={r.id} />
                 <input type="hidden" name="preventivoId" value={preventivo.id} />
                 <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
-                  {optionaliDisponibili.map((o) => (
-                    <option key={o.id} value={o.id}>
-                      {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
-                    </option>
-                  ))}
+                  {optionaliDisponibili
+                    .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia))
+                    .map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                      </option>
+                    ))}
                 </select>
                 <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                 <button className="text-xs text-blue-600 underline">+ optional</button>
@@ -189,7 +192,7 @@ export default async function PreventivoPage({
             >
               <input type="hidden" name="preventivoId" value={preventivo.id} />
               <input type="hidden" name="prodottoId" value={p.id} />
-              <span className="flex-1">{p.tipologia} · {p.colore} · {p.larghezzaMm}×{p.altezzaMm}mm</span>
+              <span className="flex-1">{p.tipologia} · {p.colore} · {p.larghezzaMm}×{p.altezzaMm}{unitaMisura(p.tipologia)}</span>
               <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-14" />
               <input
                 name="prezzoUnitario"

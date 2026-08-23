@@ -1,0 +1,1087 @@
+[
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 200,
+  "prezzoBase": 2550
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 300,
+  "prezzoBase": 2804
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 400,
+  "prezzoBase": 3061
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 500,
+  "prezzoBase": 4120
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 600,
+  "prezzoBase": 4370
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 200,
+  "prezzoBase": 2758
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 300,
+  "prezzoBase": 3038
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 400,
+  "prezzoBase": 3314
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 500,
+  "prezzoBase": 4477
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 600,
+  "prezzoBase": 4757
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 200,
+  "prezzoBase": 3068
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 300,
+  "prezzoBase": 3420
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 400,
+  "prezzoBase": 3766
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 500,
+  "prezzoBase": 5078
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 600,
+  "prezzoBase": 5426
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 200,
+  "prezzoBase": 3277
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 300,
+  "prezzoBase": 3650
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 400,
+  "prezzoBase": 4022
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 500,
+  "prezzoBase": 5435
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 600,
+  "prezzoBase": 5804
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 200,
+  "prezzoBase": 3587
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 300,
+  "prezzoBase": 4029
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 400,
+  "prezzoBase": 4472
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 500,
+  "prezzoBase": 6035
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 600,
+  "prezzoBase": 6480
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 200,
+  "prezzoBase": 3796
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 300,
+  "prezzoBase": 4261
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 400,
+  "prezzoBase": 4729
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 500,
+  "prezzoBase": 6394
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 600,
+  "prezzoBase": 6860
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 4233
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 4771
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 5312
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 7191
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 600,
+  "prezzoBase": 7730
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 4312
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 4873
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 5437
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 7352
+ },
+ {
+  "tipologia": "NUVOLA_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 7915
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 200,
+  "prezzoBase": 3279
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 300,
+  "prezzoBase": 3594
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 400,
+  "prezzoBase": 3912
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 500,
+  "prezzoBase": 5364
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 600,
+  "prezzoBase": 5676
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 200,
+  "prezzoBase": 3487
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 300,
+  "prezzoBase": 3828
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 400,
+  "prezzoBase": 4166
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 500,
+  "prezzoBase": 5724
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 600,
+  "prezzoBase": 6065
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 200,
+  "prezzoBase": 3796
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 300,
+  "prezzoBase": 4210
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 400,
+  "prezzoBase": 4618
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 500,
+  "prezzoBase": 6322
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 600,
+  "prezzoBase": 6732
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 200,
+  "prezzoBase": 4006
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 300,
+  "prezzoBase": 4440
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 400,
+  "prezzoBase": 4873
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 500,
+  "prezzoBase": 6681
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 600,
+  "prezzoBase": 7112
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 200,
+  "prezzoBase": 4316
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 300,
+  "prezzoBase": 4819
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 400,
+  "prezzoBase": 5324
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 500,
+  "prezzoBase": 7281
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 600,
+  "prezzoBase": 7788
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 200,
+  "prezzoBase": 4525
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 300,
+  "prezzoBase": 5051
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 400,
+  "prezzoBase": 5581
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 500,
+  "prezzoBase": 7640
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 600,
+  "prezzoBase": 8166
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 4961
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 5562
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 6164
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 8436
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 600,
+  "prezzoBase": 9036
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 5041
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 5664
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 6288
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 8596
+ },
+ {
+  "tipologia": "NUVOLA_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 9221
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 200,
+  "prezzoBase": 731
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 300,
+  "prezzoBase": 840
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 400,
+  "prezzoBase": 951
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 500,
+  "prezzoBase": 2070
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 135,
+  "larghezzaMm": 600,
+  "prezzoBase": 2258
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 200,
+  "prezzoBase": 814
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 300,
+  "prezzoBase": 938
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 400,
+  "prezzoBase": 1866
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 500,
+  "prezzoBase": 2336
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 600,
+  "prezzoBase": 2554
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 200,
+  "prezzoBase": 955
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 300,
+  "prezzoBase": 1971
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 400,
+  "prezzoBase": 2256
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 500,
+  "prezzoBase": 2842
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 600,
+  "prezzoBase": 3129
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 200,
+  "prezzoBase": 1829
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 300,
+  "prezzoBase": 2140
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 400,
+  "prezzoBase": 2450
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 500,
+  "prezzoBase": 3108
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 270,
+  "larghezzaMm": 600,
+  "prezzoBase": 3416
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 200,
+  "prezzoBase": 2077
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 300,
+  "prezzoBase": 2457
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 400,
+  "prezzoBase": 2839
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 500,
+  "prezzoBase": 3617
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 315,
+  "larghezzaMm": 600,
+  "prezzoBase": 4000
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 200,
+  "prezzoBase": 2225
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 300,
+  "prezzoBase": 2628
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 400,
+  "prezzoBase": 3034
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 500,
+  "prezzoBase": 3883
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 360,
+  "larghezzaMm": 600,
+  "prezzoBase": 4287
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 2538
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 3015
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 3494
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 4495
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 600,
+  "prezzoBase": 4972
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 2617
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 3117
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 3619
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 4655
+ },
+ {
+  "tipologia": "NUVOLA_PATIO_SOFFITTO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 5157
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 200,
+  "prezzoBase": 6662
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 300,
+  "prezzoBase": 7248
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 400,
+  "prezzoBase": 7839
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 500,
+  "prezzoBase": 8631
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 600,
+  "prezzoBase": 9221
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 7003
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 7619
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 8235
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 9097
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 600,
+  "prezzoBase": 9708
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 7647
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 8335
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 9022
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 10002
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 600,
+  "prezzoBase": 10685
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 7795
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 8504
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 9214
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 10271
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 600,
+  "prezzoBase": 10975
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 8443
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 9221
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 10000
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 11174
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 600,
+  "prezzoBase": 11956
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 8906
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 9777
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 10655
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 12052
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 600,
+  "prezzoBase": 12927
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 9377
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 10280
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 11176
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 12612
+ },
+ {
+  "tipologia": "NUVOLA_NL140",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 600,
+  "prezzoBase": 13508
+ }
+]

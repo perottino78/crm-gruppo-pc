@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import BrandSwitcher from "@/components/BrandSwitcher";
+import { unitaMisura } from "@/lib/prodotti";
 
 const PER_PAGINA = 50;
 
@@ -103,7 +104,7 @@ export default async function ProdottiPage({
               <th className="px-4 py-2 font-medium">Brand</th>
               <th className="px-4 py-2 font-medium">Tipologia</th>
               <th className="px-4 py-2 font-medium">Colore</th>
-              <th className="px-4 py-2 font-medium">Dimensioni (mm)</th>
+              <th className="px-4 py-2 font-medium">Dimensioni</th>
               <th className="px-4 py-2 font-medium text-right">Prezzo base</th>
             </tr>
           </thead>
@@ -113,7 +114,7 @@ export default async function ProdottiPage({
                 <td className="px-4 py-2 text-neutral-500">{p.brand.nome}</td>
                 <td className="px-4 py-2 font-medium">{p.tipologia}</td>
                 <td className="px-4 py-2">{p.colore}</td>
-                <td className="px-4 py-2 text-neutral-500">{p.larghezzaMm} × {p.altezzaMm}</td>
+                <td className="px-4 py-2 text-neutral-500">{p.larghezzaMm} × {p.altezzaMm} {unitaMisura(p.tipologia)}</td>
                 <td className="px-4 py-2 text-right">
                   {p.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
                 </td>

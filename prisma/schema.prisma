@@ -166,6 +166,7 @@ model Optional {
   unita       String?
   sporgenzaMm Int?
   larghezzaMm Int?
+  listino     String?
   note        String?
   righe       RigaOptional[]
 }
