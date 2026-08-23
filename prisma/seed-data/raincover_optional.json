@@ -1,0 +1,86 @@
+[
+  {
+    "categoria": "RAIN COVER Accessori",
+    "nome": "Pluviale completo Ø60, H200",
+    "tipoPrezzo": "FISSO",
+    "valore": 211,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "RAIN COVER Accessori",
+    "nome": "Tettuccio",
+    "tipoPrezzo": "FISSO",
+    "valore": 88,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "RAIN COVER Motorizzazione",
+    "nome": "Somfy RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 1155,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "RAIN COVER Motorizzazione",
+    "nome": "Telecomando Situo 1 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 60,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "RAIN COVER Motorizzazione",
+    "nome": "Telecomando Situo 5 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 169,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "RAIN COVER Motorizzazione",
+    "nome": "Sensore pioggia Ondeis",
+    "tipoPrezzo": "FISSO",
+    "valore": 894,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "RAINCOVER",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  }
+]

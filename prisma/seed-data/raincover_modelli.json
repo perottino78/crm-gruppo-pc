@@ -1,0 +1,30 @@
+[
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "descrizioneTecnica": "RAIN COVER — solo patio, grondaia compresa. Sistema in lame di alluminio regolabili contraddistinte da una particolare scanalatura, in grado di garantire la massima schermatura dal sole ed una buona tenuta dalla pioggia quando è in posizione di chiusura. Rain Cover si adatta elegantemente a qualsiasi contesto, dal giardino agli attici, a pergolati, gazebo o verande. Certificazioni EN 13561, Resistenza al vento Classe 3, Peso circa 13 kg/m2 (variabile in base alle configurazioni). Colori disponibili: 9010 LUCIDO, 1013 LUCIDO. Lamelle da 85mm in alluminio verniciato, orientamento da 0 a 80 gradi, comando ad arganello o a motore con radiocomando, pendenza minima 15% e massima 18% per corretto deflusso delle acque. Può essere utilizzata anche come parete divisoria verticale (lamelle fisse).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/raincover/raincover_hero.png"
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "descrizioneTecnica": "RAIN COVER — struttura standard a parete (senza lamelle, da abbinare al prezzo patio). 2 o 3 piantoni secondo larghezza.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/raincover/raincover_struttura.png"
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "descrizioneTecnica": "RAIN COVER — struttura parete doppia (senza lamelle, da abbinare al prezzo patio). Altezza max 2600mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/raincover/raincover_doppia.png"
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "descrizioneTecnica": "RAIN COVER — struttura parete doppia affiancata (moduli accostati, senza lamelle, da abbinare al prezzo patio).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/raincover/raincover_doppia.png"
+  }
+]

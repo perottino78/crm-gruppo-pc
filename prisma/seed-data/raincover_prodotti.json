@@ -1,0 +1,4608 @@
+[
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 150,
+    "prezzoBase": 1378.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 200,
+    "prezzoBase": 1859.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 270,
+    "prezzoBase": 2327.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 340,
+    "prezzoBase": 2797.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 390,
+    "prezzoBase": 3050.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 500,
+    "prezzoBase": 3752.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 600,
+    "prezzoBase": 4455.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 146,
+    "larghezzaMm": 700,
+    "prezzoBase": 5159.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 150,
+    "prezzoBase": 1429.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 200,
+    "prezzoBase": 1922.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 270,
+    "prezzoBase": 2413.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 340,
+    "prezzoBase": 2897.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 390,
+    "prezzoBase": 3164.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 500,
+    "prezzoBase": 3895.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 600,
+    "prezzoBase": 4622.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 153,
+    "larghezzaMm": 700,
+    "prezzoBase": 5350.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 150,
+    "prezzoBase": 1473.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 200,
+    "prezzoBase": 1978.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 270,
+    "prezzoBase": 2494.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 340,
+    "prezzoBase": 2990.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 390,
+    "prezzoBase": 3274.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 500,
+    "prezzoBase": 4025.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 600,
+    "prezzoBase": 4782.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 700,
+    "prezzoBase": 5532.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 150,
+    "prezzoBase": 1510.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 200,
+    "prezzoBase": 2031.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 270,
+    "prezzoBase": 2571.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 340,
+    "prezzoBase": 3087.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 390,
+    "prezzoBase": 3379.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 500,
+    "prezzoBase": 4159.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 600,
+    "prezzoBase": 4939.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 700,
+    "prezzoBase": 5718.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 150,
+    "prezzoBase": 1554.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 200,
+    "prezzoBase": 2086.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 270,
+    "prezzoBase": 2652.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 340,
+    "prezzoBase": 3182.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 390,
+    "prezzoBase": 3487.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 500,
+    "prezzoBase": 4289.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 600,
+    "prezzoBase": 5099.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 174,
+    "larghezzaMm": 700,
+    "prezzoBase": 5903.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 150,
+    "prezzoBase": 1596.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 200,
+    "prezzoBase": 2145.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 270,
+    "prezzoBase": 2733.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 340,
+    "prezzoBase": 3274.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 390,
+    "prezzoBase": 3590.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 500,
+    "prezzoBase": 4425.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 600,
+    "prezzoBase": 5252.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 181,
+    "larghezzaMm": 700,
+    "prezzoBase": 6086.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 150,
+    "prezzoBase": 1639.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 200,
+    "prezzoBase": 2200.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 270,
+    "prezzoBase": 2812.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 340,
+    "prezzoBase": 3365.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 390,
+    "prezzoBase": 3700.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 500,
+    "prezzoBase": 4558.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 600,
+    "prezzoBase": 5412.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 188,
+    "larghezzaMm": 700,
+    "prezzoBase": 6271.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 200,
+    "prezzoBase": 2256.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 270,
+    "prezzoBase": 2893.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 340,
+    "prezzoBase": 3460.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 390,
+    "prezzoBase": 3807.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 500,
+    "prezzoBase": 4687.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 600,
+    "prezzoBase": 5574.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 195,
+    "larghezzaMm": 700,
+    "prezzoBase": 6454.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 200,
+    "prezzoBase": 2328.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 270,
+    "prezzoBase": 2988.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 340,
+    "prezzoBase": 3569.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 390,
+    "prezzoBase": 3927.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 500,
+    "prezzoBase": 4840.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 600,
+    "prezzoBase": 5746.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 202,
+    "larghezzaMm": 700,
+    "prezzoBase": 6653.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 150,
+    "prezzoBase": 1776.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 200,
+    "prezzoBase": 2383.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 270,
+    "prezzoBase": 3068.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 340,
+    "prezzoBase": 3661.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 390,
+    "prezzoBase": 4036.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 500,
+    "prezzoBase": 4970.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 600,
+    "prezzoBase": 5903.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 209,
+    "larghezzaMm": 700,
+    "prezzoBase": 6839.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 150,
+    "prezzoBase": 1822.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 200,
+    "prezzoBase": 2439.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 270,
+    "prezzoBase": 3145.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 340,
+    "prezzoBase": 3758.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 390,
+    "prezzoBase": 4141.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 500,
+    "prezzoBase": 5104.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 600,
+    "prezzoBase": 6061.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 216,
+    "larghezzaMm": 700,
+    "prezzoBase": 7022.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 150,
+    "prezzoBase": 1964.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 200,
+    "prezzoBase": 2649.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 270,
+    "prezzoBase": 3383.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 340,
+    "prezzoBase": 4059.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 390,
+    "prezzoBase": 4456.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 500,
+    "prezzoBase": 5496.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 600,
+    "prezzoBase": 6531.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 223,
+    "larghezzaMm": 700,
+    "prezzoBase": 7570.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 150,
+    "prezzoBase": 2005.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 2705.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 270,
+    "prezzoBase": 3465.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 340,
+    "prezzoBase": 4150.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 390,
+    "prezzoBase": 4565.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 5628.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 600,
+    "prezzoBase": 6690.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 700,
+    "prezzoBase": 7756.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 150,
+    "prezzoBase": 2049.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 200,
+    "prezzoBase": 2760.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 270,
+    "prezzoBase": 3545.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 340,
+    "prezzoBase": 4247.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 390,
+    "prezzoBase": 4673.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 500,
+    "prezzoBase": 5760.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 600,
+    "prezzoBase": 6852.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 237,
+    "larghezzaMm": 700,
+    "prezzoBase": 7938.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 150,
+    "prezzoBase": 2086.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 200,
+    "prezzoBase": 2814.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 270,
+    "prezzoBase": 3624.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 340,
+    "prezzoBase": 4338.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 390,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 500,
+    "prezzoBase": 5894.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 600,
+    "prezzoBase": 7007.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 244,
+    "larghezzaMm": 700,
+    "prezzoBase": 8121.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 150,
+    "prezzoBase": 2133.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 200,
+    "prezzoBase": 2871.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 270,
+    "prezzoBase": 3703.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 340,
+    "prezzoBase": 4430.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 390,
+    "prezzoBase": 4882.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 500,
+    "prezzoBase": 6028.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 600,
+    "prezzoBase": 7165.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 251,
+    "larghezzaMm": 700,
+    "prezzoBase": 8307.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 150,
+    "prezzoBase": 2170.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 200,
+    "prezzoBase": 2927.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 270,
+    "prezzoBase": 3784.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 340,
+    "prezzoBase": 4525.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 390,
+    "prezzoBase": 4991.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 500,
+    "prezzoBase": 6158.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 600,
+    "prezzoBase": 7327.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 258,
+    "larghezzaMm": 700,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 150,
+    "prezzoBase": 2214.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 200,
+    "prezzoBase": 2983.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 270,
+    "prezzoBase": 3863.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 340,
+    "prezzoBase": 4618.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 390,
+    "prezzoBase": 5100.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 500,
+    "prezzoBase": 6288.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 600,
+    "prezzoBase": 7482.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 265,
+    "larghezzaMm": 700,
+    "prezzoBase": 8673.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 150,
+    "prezzoBase": 2346.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 200,
+    "prezzoBase": 3172.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 270,
+    "prezzoBase": 4080.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 340,
+    "prezzoBase": 4888.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 390,
+    "prezzoBase": 5386.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 500,
+    "prezzoBase": 6642.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 600,
+    "prezzoBase": 7906.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 272,
+    "larghezzaMm": 700,
+    "prezzoBase": 9166.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 150,
+    "prezzoBase": 2388.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 200,
+    "prezzoBase": 3228.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 270,
+    "prezzoBase": 4161.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 340,
+    "prezzoBase": 4984.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 390,
+    "prezzoBase": 5491.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 500,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 600,
+    "prezzoBase": 8064.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 700,
+    "prezzoBase": 9347.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 150,
+    "prezzoBase": 2431.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 200,
+    "prezzoBase": 3284.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 270,
+    "prezzoBase": 4240.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 340,
+    "prezzoBase": 5076.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 390,
+    "prezzoBase": 5600.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 500,
+    "prezzoBase": 6910.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 600,
+    "prezzoBase": 8221.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 286,
+    "larghezzaMm": 700,
+    "prezzoBase": 9534.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 150,
+    "prezzoBase": 2473.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 200,
+    "prezzoBase": 3340.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 270,
+    "prezzoBase": 4317.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 340,
+    "prezzoBase": 5169.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 390,
+    "prezzoBase": 5704.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 500,
+    "prezzoBase": 7044.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 600,
+    "prezzoBase": 8379.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 293,
+    "larghezzaMm": 700,
+    "prezzoBase": 9717.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 2512.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3397.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 270,
+    "prezzoBase": 4398.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 340,
+    "prezzoBase": 5268.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 390,
+    "prezzoBase": 5813.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 7176.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 8541.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 9904.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 150,
+    "prezzoBase": 2557.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 200,
+    "prezzoBase": 3450.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 270,
+    "prezzoBase": 4479.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 340,
+    "prezzoBase": 5357.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 390,
+    "prezzoBase": 5917.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 500,
+    "prezzoBase": 7308.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 600,
+    "prezzoBase": 8698.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 307,
+    "larghezzaMm": 700,
+    "prezzoBase": 10085.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 150,
+    "prezzoBase": 2594.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 200,
+    "prezzoBase": 3504.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 270,
+    "prezzoBase": 4562.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 340,
+    "prezzoBase": 5452.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 390,
+    "prezzoBase": 6028.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 500,
+    "prezzoBase": 7441.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 600,
+    "prezzoBase": 8853.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 314,
+    "larghezzaMm": 700,
+    "prezzoBase": 10271.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 150,
+    "prezzoBase": 2735.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 200,
+    "prezzoBase": 3703.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 270,
+    "prezzoBase": 4782.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 340,
+    "prezzoBase": 5732.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 390,
+    "prezzoBase": 6325.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 500,
+    "prezzoBase": 7813.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 600,
+    "prezzoBase": 9296.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 321,
+    "larghezzaMm": 700,
+    "prezzoBase": 10785.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 150,
+    "prezzoBase": 2774.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 200,
+    "prezzoBase": 3759.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 270,
+    "prezzoBase": 4861.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 340,
+    "prezzoBase": 5829.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 390,
+    "prezzoBase": 6429.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 500,
+    "prezzoBase": 7941.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 600,
+    "prezzoBase": 9455.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 328,
+    "larghezzaMm": 700,
+    "prezzoBase": 10967.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 150,
+    "prezzoBase": 2818.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 200,
+    "prezzoBase": 3814.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 270,
+    "prezzoBase": 4940.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 340,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 390,
+    "prezzoBase": 6538.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 500,
+    "prezzoBase": 8073.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 600,
+    "prezzoBase": 9611.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 335,
+    "larghezzaMm": 700,
+    "prezzoBase": 11153.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 150,
+    "prezzoBase": 2865.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 200,
+    "prezzoBase": 3879.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 270,
+    "prezzoBase": 5030.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 340,
+    "prezzoBase": 6026.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 390,
+    "prezzoBase": 6651.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 500,
+    "prezzoBase": 8214.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 600,
+    "prezzoBase": 9782.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 342,
+    "larghezzaMm": 700,
+    "prezzoBase": 11343.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 150,
+    "prezzoBase": 2909.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 200,
+    "prezzoBase": 3935.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 270,
+    "prezzoBase": 5108.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 340,
+    "prezzoBase": 6118.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 390,
+    "prezzoBase": 6760.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 500,
+    "prezzoBase": 8348.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 600,
+    "prezzoBase": 9939.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 349,
+    "larghezzaMm": 700,
+    "prezzoBase": 11530.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 150,
+    "prezzoBase": 2946.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 200,
+    "prezzoBase": 3992.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 270,
+    "prezzoBase": 5190.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 340,
+    "prezzoBase": 6211.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 390,
+    "prezzoBase": 6862.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 500,
+    "prezzoBase": 8480.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 600,
+    "prezzoBase": 10101.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 356,
+    "larghezzaMm": 700,
+    "prezzoBase": 11713.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 150,
+    "prezzoBase": 3045.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 200,
+    "prezzoBase": 4120.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 270,
+    "prezzoBase": 5368.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 340,
+    "prezzoBase": 6424.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 390,
+    "prezzoBase": 7100.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 500,
+    "prezzoBase": 8775.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 363,
+    "larghezzaMm": 600,
+    "prezzoBase": 10444.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 150,
+    "prezzoBase": 3191.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 200,
+    "prezzoBase": 4331.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 270,
+    "prezzoBase": 5606.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 340,
+    "prezzoBase": 6725.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 390,
+    "prezzoBase": 7420.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 500,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 370,
+    "larghezzaMm": 600,
+    "prezzoBase": 10917.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 150,
+    "prezzoBase": 3235.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 200,
+    "prezzoBase": 4391.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 270,
+    "prezzoBase": 5687.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 340,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 390,
+    "prezzoBase": 7526.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 500,
+    "prezzoBase": 9303.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 377,
+    "larghezzaMm": 600,
+    "prezzoBase": 11079.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 150,
+    "prezzoBase": 3277.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 200,
+    "prezzoBase": 4446.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 270,
+    "prezzoBase": 5766.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 340,
+    "prezzoBase": 6915.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 390,
+    "prezzoBase": 7637.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 500,
+    "prezzoBase": 9442.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 384,
+    "larghezzaMm": 600,
+    "prezzoBase": 11239.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 150,
+    "prezzoBase": 3335.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 200,
+    "prezzoBase": 4516.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 270,
+    "prezzoBase": 5864.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 340,
+    "prezzoBase": 7028.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 390,
+    "prezzoBase": 7758.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 500,
+    "prezzoBase": 9588.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 391,
+    "larghezzaMm": 600,
+    "prezzoBase": 11417.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 150,
+    "prezzoBase": 3376.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 200,
+    "prezzoBase": 4574.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 270,
+    "prezzoBase": 5947.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 340,
+    "prezzoBase": 7119.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 390,
+    "prezzoBase": 7871.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 500,
+    "prezzoBase": 9724.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 600,
+    "prezzoBase": 11577.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 150,
+    "prezzoBase": 3418.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 4629.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 270,
+    "prezzoBase": 6030.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 340,
+    "prezzoBase": 7218.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 390,
+    "prezzoBase": 7980.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 9860.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 600,
+    "prezzoBase": 11741.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 150,
+    "prezzoBase": 3462.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 200,
+    "prezzoBase": 4683.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 270,
+    "prezzoBase": 6112.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 340,
+    "prezzoBase": 7311.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 390,
+    "prezzoBase": 8089.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 500,
+    "prezzoBase": 9993.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 412,
+    "larghezzaMm": 600,
+    "prezzoBase": 11899.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 150,
+    "prezzoBase": 3502.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 200,
+    "prezzoBase": 4741.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 270,
+    "prezzoBase": 6188.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 340,
+    "prezzoBase": 7406.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 390,
+    "prezzoBase": 8193.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 419,
+    "larghezzaMm": 500,
+    "prezzoBase": 10129.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 150,
+    "prezzoBase": 3740.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 200,
+    "prezzoBase": 5090.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 270,
+    "prezzoBase": 6558.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 340,
+    "prezzoBase": 7890.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 390,
+    "prezzoBase": 8687.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 426,
+    "larghezzaMm": 500,
+    "prezzoBase": 10748.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 150,
+    "prezzoBase": 3780.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 200,
+    "prezzoBase": 5146.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 270,
+    "prezzoBase": 6642.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 340,
+    "prezzoBase": 7985.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 390,
+    "prezzoBase": 8800.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 433,
+    "larghezzaMm": 500,
+    "prezzoBase": 10882.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 150,
+    "prezzoBase": 3828.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 200,
+    "prezzoBase": 5203.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 270,
+    "prezzoBase": 6725.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 340,
+    "prezzoBase": 8080.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 390,
+    "prezzoBase": 8909.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 440,
+    "larghezzaMm": 500,
+    "prezzoBase": 11018.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 150,
+    "prezzoBase": 3863.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 200,
+    "prezzoBase": 5257.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 270,
+    "prezzoBase": 6806.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 340,
+    "prezzoBase": 8175.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 390,
+    "prezzoBase": 9015.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 447,
+    "larghezzaMm": 500,
+    "prezzoBase": 11151.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 150,
+    "prezzoBase": 3911.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 200,
+    "prezzoBase": 5317.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 270,
+    "prezzoBase": 6885.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 340,
+    "prezzoBase": 8268.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 390,
+    "prezzoBase": 9122.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 454,
+    "larghezzaMm": 500,
+    "prezzoBase": 11289.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 150,
+    "prezzoBase": 3949.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 200,
+    "prezzoBase": 5372.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 270,
+    "prezzoBase": 6968.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 340,
+    "prezzoBase": 8367.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 390,
+    "prezzoBase": 9235.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 461,
+    "larghezzaMm": 500,
+    "prezzoBase": 11424.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 150,
+    "prezzoBase": 3995.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 200,
+    "prezzoBase": 5426.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 270,
+    "prezzoBase": 7049.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 340,
+    "prezzoBase": 8464.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 390,
+    "prezzoBase": 9346.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 468,
+    "larghezzaMm": 500,
+    "prezzoBase": 11558.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 150,
+    "prezzoBase": 4036.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 200,
+    "prezzoBase": 5484.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 270,
+    "prezzoBase": 7135.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 340,
+    "prezzoBase": 8555.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 390,
+    "prezzoBase": 9453.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 475,
+    "larghezzaMm": 500,
+    "prezzoBase": 11692.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 150,
+    "prezzoBase": 4078.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 200,
+    "prezzoBase": 5540.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 270,
+    "prezzoBase": 7216.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 340,
+    "prezzoBase": 8650.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 390,
+    "prezzoBase": 9560.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 11825.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 150,
+    "prezzoBase": 4120.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 200,
+    "prezzoBase": 5600.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 270,
+    "prezzoBase": 7292.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 340,
+    "prezzoBase": 8747.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 390,
+    "prezzoBase": 9673.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 489,
+    "larghezzaMm": 500,
+    "prezzoBase": 11963.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 150,
+    "prezzoBase": 4164.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 200,
+    "prezzoBase": 5653.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 270,
+    "prezzoBase": 7374.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 340,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 390,
+    "prezzoBase": 9779.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 496,
+    "larghezzaMm": 500,
+    "prezzoBase": 12098.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 503,
+    "larghezzaMm": 150,
+    "prezzoBase": 4219.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 503,
+    "larghezzaMm": 200,
+    "prezzoBase": 5725.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 503,
+    "larghezzaMm": 270,
+    "prezzoBase": 7471.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 503,
+    "larghezzaMm": 340,
+    "prezzoBase": 8953.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 503,
+    "larghezzaMm": 390,
+    "prezzoBase": 9905.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 510,
+    "larghezzaMm": 150,
+    "prezzoBase": 4263.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 510,
+    "larghezzaMm": 200,
+    "prezzoBase": 5783.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 510,
+    "larghezzaMm": 270,
+    "prezzoBase": 7556.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 510,
+    "larghezzaMm": 340,
+    "prezzoBase": 9048.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 510,
+    "larghezzaMm": 390,
+    "prezzoBase": 10013.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 150,
+    "prezzoBase": 4305.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 200,
+    "prezzoBase": 5838.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 270,
+    "prezzoBase": 7637.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 340,
+    "prezzoBase": 9143.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 390,
+    "prezzoBase": 10120.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 524,
+    "larghezzaMm": 150,
+    "prezzoBase": 4539.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 524,
+    "larghezzaMm": 200,
+    "prezzoBase": 6185.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 524,
+    "larghezzaMm": 270,
+    "prezzoBase": 8006.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 524,
+    "larghezzaMm": 340,
+    "prezzoBase": 9627.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 524,
+    "larghezzaMm": 390,
+    "prezzoBase": 10615.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 531,
+    "larghezzaMm": 150,
+    "prezzoBase": 4583.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 531,
+    "larghezzaMm": 200,
+    "prezzoBase": 6241.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 531,
+    "larghezzaMm": 270,
+    "prezzoBase": 8089.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 531,
+    "larghezzaMm": 340,
+    "prezzoBase": 9720.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 531,
+    "larghezzaMm": 390,
+    "prezzoBase": 10725.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 538,
+    "larghezzaMm": 150,
+    "prezzoBase": 4624.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 538,
+    "larghezzaMm": 200,
+    "prezzoBase": 6299.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 538,
+    "larghezzaMm": 270,
+    "prezzoBase": 8168.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 538,
+    "larghezzaMm": 340,
+    "prezzoBase": 9816.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 538,
+    "larghezzaMm": 390,
+    "prezzoBase": 10835.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 545,
+    "larghezzaMm": 150,
+    "prezzoBase": 4669.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 545,
+    "larghezzaMm": 200,
+    "prezzoBase": 6354.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 545,
+    "larghezzaMm": 270,
+    "prezzoBase": 8251.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 545,
+    "larghezzaMm": 340,
+    "prezzoBase": 9912.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 545,
+    "larghezzaMm": 390,
+    "prezzoBase": 10944.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 552,
+    "larghezzaMm": 150,
+    "prezzoBase": 4706.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 552,
+    "larghezzaMm": 200,
+    "prezzoBase": 6413.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 552,
+    "larghezzaMm": 270,
+    "prezzoBase": 8334.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 552,
+    "larghezzaMm": 340,
+    "prezzoBase": 10006.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 552,
+    "larghezzaMm": 390,
+    "prezzoBase": 11051.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 559,
+    "larghezzaMm": 150,
+    "prezzoBase": 4754.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 559,
+    "larghezzaMm": 200,
+    "prezzoBase": 6468.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 559,
+    "larghezzaMm": 270,
+    "prezzoBase": 8415.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 559,
+    "larghezzaMm": 340,
+    "prezzoBase": 10102.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 559,
+    "larghezzaMm": 390,
+    "prezzoBase": 11160.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 566,
+    "larghezzaMm": 150,
+    "prezzoBase": 4792.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 566,
+    "larghezzaMm": 200,
+    "prezzoBase": 6523.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 566,
+    "larghezzaMm": 270,
+    "prezzoBase": 8494.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 566,
+    "larghezzaMm": 340,
+    "prezzoBase": 10194.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 566,
+    "larghezzaMm": 390,
+    "prezzoBase": 11268.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 573,
+    "larghezzaMm": 150,
+    "prezzoBase": 4838.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 573,
+    "larghezzaMm": 200,
+    "prezzoBase": 6581.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 573,
+    "larghezzaMm": 270,
+    "prezzoBase": 8576.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 573,
+    "larghezzaMm": 340,
+    "prezzoBase": 10291.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 573,
+    "larghezzaMm": 390,
+    "prezzoBase": 11380.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 150,
+    "prezzoBase": 4879.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 6635.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 270,
+    "prezzoBase": 8659.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 340,
+    "prezzoBase": 10388.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 390,
+    "prezzoBase": 11489.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 587,
+    "larghezzaMm": 150,
+    "prezzoBase": 4923.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 587,
+    "larghezzaMm": 200,
+    "prezzoBase": 6695.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 587,
+    "larghezzaMm": 270,
+    "prezzoBase": 8740.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 587,
+    "larghezzaMm": 340,
+    "prezzoBase": 10481.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 587,
+    "larghezzaMm": 390,
+    "prezzoBase": 11597.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 594,
+    "larghezzaMm": 150,
+    "prezzoBase": 4961.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 594,
+    "larghezzaMm": 200,
+    "prezzoBase": 6750.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 594,
+    "larghezzaMm": 270,
+    "prezzoBase": 8819.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 594,
+    "larghezzaMm": 340,
+    "prezzoBase": 10578.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 594,
+    "larghezzaMm": 390,
+    "prezzoBase": 11702.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 601,
+    "larghezzaMm": 150,
+    "prezzoBase": 5021.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 601,
+    "larghezzaMm": 200,
+    "prezzoBase": 6822.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 601,
+    "larghezzaMm": 270,
+    "prezzoBase": 8916.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 601,
+    "larghezzaMm": 340,
+    "prezzoBase": 10685.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 601,
+    "larghezzaMm": 390,
+    "prezzoBase": 11829.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 608,
+    "larghezzaMm": 150,
+    "prezzoBase": 5064.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 608,
+    "larghezzaMm": 200,
+    "prezzoBase": 6880.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 608,
+    "larghezzaMm": 270,
+    "prezzoBase": 9001.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 608,
+    "larghezzaMm": 340,
+    "prezzoBase": 10782.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 608,
+    "larghezzaMm": 390,
+    "prezzoBase": 11938.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 615,
+    "larghezzaMm": 150,
+    "prezzoBase": 5108.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 615,
+    "larghezzaMm": 200,
+    "prezzoBase": 6934.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 615,
+    "larghezzaMm": 270,
+    "prezzoBase": 9083.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 615,
+    "larghezzaMm": 340,
+    "prezzoBase": 10877.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 615,
+    "larghezzaMm": 390,
+    "prezzoBase": 12051.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 622,
+    "larghezzaMm": 150,
+    "prezzoBase": 5342.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 622,
+    "larghezzaMm": 200,
+    "prezzoBase": 7279.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 622,
+    "larghezzaMm": 270,
+    "prezzoBase": 9453.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 622,
+    "larghezzaMm": 340,
+    "prezzoBase": 11357.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 622,
+    "larghezzaMm": 390,
+    "prezzoBase": 12542.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 629,
+    "larghezzaMm": 150,
+    "prezzoBase": 5382.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 629,
+    "larghezzaMm": 200,
+    "prezzoBase": 7337.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 629,
+    "larghezzaMm": 270,
+    "prezzoBase": 9534.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 629,
+    "larghezzaMm": 340,
+    "prezzoBase": 11454.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 629,
+    "larghezzaMm": 390,
+    "prezzoBase": 12653.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 636,
+    "larghezzaMm": 150,
+    "prezzoBase": 5424.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 636,
+    "larghezzaMm": 200,
+    "prezzoBase": 7394.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 636,
+    "larghezzaMm": 270,
+    "prezzoBase": 9615.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 636,
+    "larghezzaMm": 340,
+    "prezzoBase": 11549.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 636,
+    "larghezzaMm": 390,
+    "prezzoBase": 12758.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 643,
+    "larghezzaMm": 150,
+    "prezzoBase": 5468.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 643,
+    "larghezzaMm": 200,
+    "prezzoBase": 7450.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 643,
+    "larghezzaMm": 270,
+    "prezzoBase": 9696.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 643,
+    "larghezzaMm": 340,
+    "prezzoBase": 11642.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 650,
+    "larghezzaMm": 150,
+    "prezzoBase": 5511.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 650,
+    "larghezzaMm": 200,
+    "prezzoBase": 7508.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 650,
+    "larghezzaMm": 270,
+    "prezzoBase": 9777.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 650,
+    "larghezzaMm": 340,
+    "prezzoBase": 11741.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 657,
+    "larghezzaMm": 150,
+    "prezzoBase": 5553.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 657,
+    "larghezzaMm": 200,
+    "prezzoBase": 7561.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 657,
+    "larghezzaMm": 270,
+    "prezzoBase": 9860.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 657,
+    "larghezzaMm": 340,
+    "prezzoBase": 11838.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 664,
+    "larghezzaMm": 150,
+    "prezzoBase": 5595.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 664,
+    "larghezzaMm": 200,
+    "prezzoBase": 7623.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 664,
+    "larghezzaMm": 270,
+    "prezzoBase": 9939.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 664,
+    "larghezzaMm": 340,
+    "prezzoBase": 11935.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 671,
+    "larghezzaMm": 150,
+    "prezzoBase": 5636.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 671,
+    "larghezzaMm": 200,
+    "prezzoBase": 7679.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 671,
+    "larghezzaMm": 270,
+    "prezzoBase": 10021.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 671,
+    "larghezzaMm": 340,
+    "prezzoBase": 12030.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 678,
+    "larghezzaMm": 150,
+    "prezzoBase": 5678.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 678,
+    "larghezzaMm": 200,
+    "prezzoBase": 7732.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 678,
+    "larghezzaMm": 270,
+    "prezzoBase": 10104.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 678,
+    "larghezzaMm": 340,
+    "prezzoBase": 12121.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 685,
+    "larghezzaMm": 150,
+    "prezzoBase": 5764.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 685,
+    "larghezzaMm": 200,
+    "prezzoBase": 7846.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 685,
+    "larghezzaMm": 270,
+    "prezzoBase": 10268.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 685,
+    "larghezzaMm": 340,
+    "prezzoBase": 12315.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 692,
+    "larghezzaMm": 150,
+    "prezzoBase": 5764.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 692,
+    "larghezzaMm": 200,
+    "prezzoBase": 7846.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 692,
+    "larghezzaMm": 270,
+    "prezzoBase": 10268.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 692,
+    "larghezzaMm": 340,
+    "prezzoBase": 12315.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 699,
+    "larghezzaMm": 150,
+    "prezzoBase": 5806.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 699,
+    "larghezzaMm": 200,
+    "prezzoBase": 7904.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 699,
+    "larghezzaMm": 270,
+    "prezzoBase": 10349.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 699,
+    "larghezzaMm": 340,
+    "prezzoBase": 12410.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 706,
+    "larghezzaMm": 150,
+    "prezzoBase": 5738.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 706,
+    "larghezzaMm": 200,
+    "prezzoBase": 7848.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 706,
+    "larghezzaMm": 270,
+    "prezzoBase": 10321.0
+  },
+  {
+    "tipologia": "RAINCOVER_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 706,
+    "larghezzaMm": 340,
+    "prezzoBase": 12394.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 2839.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 3601.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 270,
+    "prezzoBase": 3675.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 340,
+    "prezzoBase": 4284.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 390,
+    "prezzoBase": 4396.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 5118.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 6549.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 3011.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 3861.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 270,
+    "prezzoBase": 3934.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 340,
+    "prezzoBase": 4631.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 390,
+    "prezzoBase": 4743.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 5549.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 7063.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 3184.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 4117.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 270,
+    "prezzoBase": 4192.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 340,
+    "prezzoBase": 4974.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 390,
+    "prezzoBase": 5088.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 5979.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 7582.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 3356.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 4377.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 270,
+    "prezzoBase": 4451.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 340,
+    "prezzoBase": 5315.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 390,
+    "prezzoBase": 5426.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6412.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 8096.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 150,
+    "prezzoBase": 3527.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 4636.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 270,
+    "prezzoBase": 4704.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 340,
+    "prezzoBase": 5660.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 390,
+    "prezzoBase": 5773.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6839.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 8613.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 150,
+    "prezzoBase": 3700.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 4891.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 270,
+    "prezzoBase": 4968.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 340,
+    "prezzoBase": 6007.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 390,
+    "prezzoBase": 6118.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 7272.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 9131.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 150,
+    "prezzoBase": 4043.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 200,
+    "prezzoBase": 5410.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 270,
+    "prezzoBase": 5481.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 340,
+    "prezzoBase": 6693.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 390,
+    "prezzoBase": 6804.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 500,
+    "prezzoBase": 8133.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 150,
+    "prezzoBase": 4043.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 200,
+    "prezzoBase": 5410.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 270,
+    "prezzoBase": 5481.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 340,
+    "prezzoBase": 6693.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 390,
+    "prezzoBase": 6804.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 500,
+    "prezzoBase": 8133.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 150,
+    "prezzoBase": 4388.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 200,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 270,
+    "prezzoBase": 6000.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 340,
+    "prezzoBase": 7383.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 390,
+    "prezzoBase": 7496.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 150,
+    "prezzoBase": 4388.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 200,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 270,
+    "prezzoBase": 6000.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 340,
+    "prezzoBase": 7383.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 390,
+    "prezzoBase": 7496.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 4567.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 5056.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 5056.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 7045.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 7045.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 3467.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 3958.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 3958.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 5947.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 5947.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5357.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 5970.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 5970.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 8297.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 8297.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 4168.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 4778.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 7107.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 7107.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5530.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 6146.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6146.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 8559.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 8559.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 4254.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 4868.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 4868.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 7283.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 7283.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 6322.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 7054.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 7054.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 9810.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 9810.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4958.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 5688.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 5688.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 6498.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 450,
+    "prezzoBase": 7228.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 7228.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 550,
+    "prezzoBase": 10072.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 10072.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 5046.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 450,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 550,
+    "prezzoBase": 8620.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 8620.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 7285.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 450,
+    "prezzoBase": 8140.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 8140.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 550,
+    "prezzoBase": 11322.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 11322.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 5748.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 450,
+    "prezzoBase": 6602.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6602.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 550,
+    "prezzoBase": 9784.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 9784.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 400,
+    "prezzoBase": 7640.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 450,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 500,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 550,
+    "prezzoBase": 11852.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 400,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 450,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 500,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 450,
+    "larghezzaMm": 550,
+    "prezzoBase": 10136.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 7640.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 450,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 500,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 400,
+    "prezzoBase": 5926.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 450,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 500,
+    "prezzoBase": 6776.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 400,
+    "prezzoBase": 8605.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 450,
+    "prezzoBase": 9574.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 400,
+    "prezzoBase": 6713.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 550,
+    "larghezzaMm": 450,
+    "prezzoBase": 7688.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 8605.0
+  },
+  {
+    "tipologia": "RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 600,
+    "larghezzaMm": 400,
+    "prezzoBase": 6713.0
+  }
+]
