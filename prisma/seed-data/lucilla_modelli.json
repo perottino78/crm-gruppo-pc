@@ -1,0 +1,79 @@
+[
+  {
+    "tipologia": "LUCILLA_PARETE_SINGOLA",
+    "immagineUrl": "/immagini/lucilla/parete.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione a parete, configurazione singola (2 guide).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PARETE_DOPPIA",
+    "immagineUrl": "/immagini/lucilla/parete.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione a parete, configurazione doppia (3 guide).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PARETE_TRIPLA",
+    "immagineUrl": "/immagini/lucilla/parete.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione a parete, configurazione tripla (4 guide).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_ISOLA_SINGOLA",
+    "immagineUrl": "/immagini/lucilla/isola.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione isola (autoportante, 4 piantoni), configurazione singola. Prezzo comprensivo del kit traversi laterali.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_ISOLA_DOPPIA",
+    "immagineUrl": "/immagini/lucilla/isola.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione isola (autoportante), configurazione doppia. Prezzo comprensivo del kit traversi laterali.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_ISOLA_TRIPLA",
+    "immagineUrl": "/immagini/lucilla/isola.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione isola (autoportante), configurazione tripla. Prezzo comprensivo del kit traversi laterali.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PATIO_SINGOLA",
+    "immagineUrl": "/immagini/lucilla/patio.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione patio (fissaggio a soffitto/parete-parete, senza piantoni anteriori), configurazione singola.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PATIO_DOPPIA",
+    "immagineUrl": "/immagini/lucilla/patio.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione patio, configurazione doppia.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PATIO_TRIPLA",
+    "immagineUrl": "/immagini/lucilla/patio.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione patio, configurazione tripla.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "immagineUrl": "/immagini/lucilla/patio_tiranti.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione patio con tiranti (NEW), sostegno tramite tiranti anziché piantoni anteriori.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "immagineUrl": "/immagini/lucilla/trapezoidale.png",
+    "descrizioneTecnica": "Tenda a pergola con telo di protezione in PVC ignifugo, profili in alluminio laccati anticorrosione. Certificazione EN 13561, resistenza al vento Classe 3, peso ~15kg/m². Dimensioni max 1350x700cm. Comando a motore con radiocomando, pendenza deflusso acque 10-15%, timpano in Cristal/Precontraint 302-502/Opatex/policarbonato. Versione trapezoidale a parete, fuori squadro massimo 50cm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  }
+]

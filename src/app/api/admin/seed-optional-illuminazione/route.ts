@@ -16,6 +16,7 @@ type OptionalRow = {
   sporgenzaMm: number | null;
   larghezzaMm: number | null;
   note: string | null;
+  gruppiApplicabili: string[];
 };
 
 // nessun listino specifico: disponibile su tutte le tipologie outdoor P&C (come gli optional con listino=null)
@@ -50,11 +51,19 @@ export async function POST(req: NextRequest) {
             sporgenzaMm: o.sporgenzaMm,
             larghezzaMm: o.larghezzaMm,
             note: o.note,
+            gruppiApplicabili: o.gruppiApplicabili,
           },
         });
         creati++;
-      } else if (esistente.valore !== o.valore || esistente.note !== o.note) {
-        await prisma.optional.update({ where: { id: esistente.id }, data: { valore: o.valore, note: o.note } });
+      } else if (
+        esistente.valore !== o.valore ||
+        esistente.note !== o.note ||
+        JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
+      ) {
+        await prisma.optional.update({
+          where: { id: esistente.id },
+          data: { valore: o.valore, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
+        });
         aggiornati++;
       } else {
         invariati++;

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import illumiaModelli from "../../../../../prisma/seed-data/modelli_illumia.json";
+import lucillaModelli from "../../../../../prisma/seed-data/lucilla_modelli.json";
+import nuvolaModelli from "../../../../../prisma/seed-data/nuvola_modelli.json";
+import panareaModelli from "../../../../../prisma/seed-data/panarea_modelli.json";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +52,28 @@ export async function POST(req: NextRequest) {
       illumiaAggiornati++;
     }
 
+    let pergoleAggiornate = 0;
+    for (const m of [...(lucillaModelli as ModelloRow[]), ...(nuvolaModelli as ModelloRow[]), ...(panareaModelli as ModelloRow[])]) {
+      await prisma.modelloProdotto.upsert({
+        where: { brandId_tipologia: { brandId: brand.id, tipologia: m.tipologia } },
+        create: {
+          brandId: brand.id,
+          tipologia: m.tipologia,
+          immagineUrl: m.immagineUrl,
+          descrizioneTecnica: m.descrizioneTecnica,
+          famiglia: m.famiglia,
+          gruppo: m.gruppo,
+        },
+        update: {
+          immagineUrl: m.immagineUrl,
+          descrizioneTecnica: m.descrizioneTecnica,
+          famiglia: m.famiglia,
+          gruppo: m.gruppo,
+        },
+      });
+      pergoleAggiornate++;
+    }
+
     // Tagga Outdoor/Pergole tutte le tipologie delle linee pergole già a catalogo,
     // senza toccare immagine/descrizione se già impostate a mano.
     const tipologiePergole = await prisma.prodotto.findMany({
@@ -67,7 +92,7 @@ export async function POST(req: NextRequest) {
       pergoleTaggate++;
     }
 
-    return NextResponse.json({ ok: true, illumiaAggiornati, pergoleTaggate });
+    return NextResponse.json({ ok: true, illumiaAggiornati, pergoleAggiornate, pergoleTaggate });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }

@@ -245,6 +245,7 @@ export default async function PreventivoPage({
                 <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
                   {optionaliDisponibili
                     .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia))
+                    .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                     .map((o) => (
                       <option key={o.id} value={o.id}>
                         {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})

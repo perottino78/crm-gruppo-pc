@@ -7,7 +7,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1."
+    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "TRASMETTITORE",
@@ -17,7 +21,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1."
+    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "PRESA",
@@ -27,7 +35,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "12-24V, USB 5V/2A max 10W, IP65. Incassabile solo su Ischia in assenza di vetrate/tende."
+    "note": "12-24V, USB 5V/2A max 10W, IP65. Incassabile solo su Ischia in assenza di vetrate/tende.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "PRESA",
@@ -37,7 +49,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "16A, 250V, IP54. Incassabile solo su Ischia in assenza di vetrate/tende."
+    "note": "16A, 250V, IP54. Incassabile solo su Ischia in assenza di vetrate/tende.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "RISCALDATORE",
@@ -47,7 +63,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "2000W, IPX5, area riscaldata 20/25m² circa, colore Silver, 46,5x19,5x12cm."
+    "note": "2000W, IPX5, area riscaldata 20/25m² circa, colore Silver, 46,5x19,5x12cm.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "AUDIO",
@@ -57,7 +77,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende."
+    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "AUDIO",
@@ -67,7 +91,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende."
+    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -77,7 +105,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Proiettore doppia emissione, 24Vdc, 4,6W, 500lm, IP65."
+    "note": "Proiettore doppia emissione, 24Vdc, 4,6W, 500lm, IP65.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -87,7 +119,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": null
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -97,7 +133,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -107,7 +147,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -117,7 +161,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -127,7 +175,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -137,7 +189,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -147,7 +203,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -157,7 +217,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -167,7 +231,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -177,7 +245,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -187,7 +259,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -197,7 +273,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -207,7 +287,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -217,7 +301,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -227,7 +315,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -237,7 +329,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -247,7 +343,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -257,7 +357,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -267,7 +371,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -277,7 +385,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -287,7 +399,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -297,7 +413,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -307,7 +427,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -317,7 +441,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -327,7 +455,11 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   },
   {
     "categoria": "ILLUMINAZIONE",
@@ -337,6 +469,10 @@
     "unita": null,
     "sporgenzaMm": null,
     "larghezzaMm": null,
-    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   }
 ]

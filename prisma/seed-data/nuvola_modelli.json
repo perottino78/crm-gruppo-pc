@@ -1,0 +1,30 @@
+[
+  {
+    "tipologia": "NUVOLA_PARETE",
+    "immagineUrl": "/immagini/nuvola/parete.png",
+    "descrizioneTecnica": "Sistema ombreggiante in tessuto acrilico, struttura in alluminio. Certificazione EN 13561, resistenza al vento Classe 1. Comando a fune (armatura RAL 9010), distanza tra traversi ±45cm, volant standard 01 da 25cm. Versione a parete, altezza massima 2700mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NUVOLA_ISOLA",
+    "immagineUrl": "/immagini/nuvola/isola.png",
+    "descrizioneTecnica": "Sistema ombreggiante in tessuto acrilico, struttura in alluminio. Certificazione EN 13561, resistenza al vento Classe 1. Comando a fune (armatura RAL 9010), distanza tra traversi ±45cm, volant standard 01 da 25cm. Versione isola (autoportante), altezza massima 2700mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NUVOLA_PATIO_SOFFITTO",
+    "immagineUrl": "/immagini/nuvola/patio_soffitto.png",
+    "descrizioneTecnica": "Sistema ombreggiante in tessuto acrilico, struttura in alluminio. Certificazione EN 13561, resistenza al vento Classe 1. Comando a fune (armatura RAL 9010), distanza tra traversi ±45cm, volant standard 01 da 25cm. Versione patio, attacco a soffitto (min 2,5cm - max 50cm) o parete-parete (min 4,5cm - max 50cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NUVOLA_NL140",
+    "immagineUrl": "/immagini/nuvola/nl140.png",
+    "descrizioneTecnica": "Sistema ombreggiante in tessuto acrilico, struttura in alluminio. Certificazione EN 13561, resistenza al vento Classe 1. Comando a fune (armatura RAL 9010), distanza tra traversi ±45cm, volant standard 01 da 25cm. Struttura NL140 autoportante con profilo maggiorato.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  }
+]

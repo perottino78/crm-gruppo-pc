@@ -181,6 +181,9 @@ model Optional {
   larghezzaMm Int?
   listino     String?
   note        String?
+  // Gruppi merceologici (ModelloProdotto.gruppo) a cui questo optional è applicabile,
+  // es. ["PERGOLE", "BIOCLIMATICA"]. Vuoto = nessuna restrizione di gruppo.
+  gruppiApplicabili String[] @default([])
   righe       RigaOptional[]
 }
 

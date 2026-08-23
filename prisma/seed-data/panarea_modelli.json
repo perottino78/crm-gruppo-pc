@@ -1,0 +1,44 @@
+[
+  {
+    "tipologia": "PANAREA_STANDARD_PARETE",
+    "immagineUrl": "/immagini/panarea/standard_parete.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Standard, a parete. Altezza totale max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "PANAREA_STANDARD_ISOLA",
+    "immagineUrl": "/immagini/panarea/standard_isola.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Standard, isola (autoportante). Altezza totale max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "PANAREA_STANDARD_PATIO",
+    "immagineUrl": "/immagini/panarea/standard_patio.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Standard, patio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "PANAREA_EASY_PARETE",
+    "immagineUrl": "/immagini/panarea/easy_parete.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Easy, a parete. Altezza totale max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "PANAREA_EASY_ISOLA",
+    "immagineUrl": "/immagini/panarea/easy_isola.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Easy, isola (autoportante). Altezza totale max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "PANAREA_EASY_PATIO",
+    "immagineUrl": "/immagini/panarea/easy_patio.png",
+    "descrizioneTecnica": "Tenda a pergola Zenith con telo di protezione in PVC, struttura in alluminio. Certificazione EN 13561. Versione Easy, patio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  }
+]
