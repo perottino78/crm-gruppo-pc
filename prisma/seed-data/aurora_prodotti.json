@@ -1,0 +1,4902 @@
+[
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 200,
+    "prezzoBase": 10510.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 250,
+    "prezzoBase": 11267.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 300,
+    "prezzoBase": 12024.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 350,
+    "prezzoBase": 13658.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 400,
+    "prezzoBase": 14734.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 450,
+    "prezzoBase": 15925.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 500,
+    "prezzoBase": 15928.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 200,
+    "prezzoBase": 8483.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 250,
+    "prezzoBase": 9237.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 300,
+    "prezzoBase": 9994.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 350,
+    "prezzoBase": 11630.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 400,
+    "prezzoBase": 12706.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 450,
+    "prezzoBase": 13896.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 500,
+    "prezzoBase": 13901.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 200,
+    "prezzoBase": 13808.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 250,
+    "prezzoBase": 14720.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 300,
+    "prezzoBase": 15638.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 350,
+    "prezzoBase": 17469.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 400,
+    "prezzoBase": 18386.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 450,
+    "prezzoBase": 20214.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 500,
+    "prezzoBase": 20222.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 200,
+    "prezzoBase": 10584.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 250,
+    "prezzoBase": 11502.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 300,
+    "prezzoBase": 12419.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 350,
+    "prezzoBase": 14254.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 400,
+    "prezzoBase": 15171.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 450,
+    "prezzoBase": 17002.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 500,
+    "prezzoBase": 17005.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 200,
+    "prezzoBase": 10146.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 250,
+    "prezzoBase": 11062.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 300,
+    "prezzoBase": 11981.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 350,
+    "prezzoBase": 13813.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 400,
+    "prezzoBase": 14730.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 450,
+    "prezzoBase": 16558.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 205,
+    "larghezzaMm": 500,
+    "prezzoBase": 16565.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 10912.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 250,
+    "prezzoBase": 11754.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 300,
+    "prezzoBase": 12598.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 350,
+    "prezzoBase": 14314.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 400,
+    "prezzoBase": 15478.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 450,
+    "prezzoBase": 16840.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 16845.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 8886.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 250,
+    "prezzoBase": 9728.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 300,
+    "prezzoBase": 10571.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 350,
+    "prezzoBase": 12290.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 400,
+    "prezzoBase": 13453.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 450,
+    "prezzoBase": 14811.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 14816.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 14530.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 250,
+    "prezzoBase": 15528.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 300,
+    "prezzoBase": 16531.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 350,
+    "prezzoBase": 18610.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 400,
+    "prezzoBase": 19611.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 450,
+    "prezzoBase": 21610.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 21618.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 11150.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 250,
+    "prezzoBase": 12152.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 300,
+    "prezzoBase": 13155.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 350,
+    "prezzoBase": 15232.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 400,
+    "prezzoBase": 16234.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 450,
+    "prezzoBase": 18232.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 18235.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 200,
+    "prezzoBase": 10872.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 250,
+    "prezzoBase": 11870.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 300,
+    "prezzoBase": 12874.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 350,
+    "prezzoBase": 14950.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 400,
+    "prezzoBase": 15952.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 450,
+    "prezzoBase": 17950.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 230,
+    "larghezzaMm": 500,
+    "prezzoBase": 17958.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 200,
+    "prezzoBase": 11886.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 250,
+    "prezzoBase": 12814.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 300,
+    "prezzoBase": 13739.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 350,
+    "prezzoBase": 15704.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 400,
+    "prezzoBase": 16950.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 450,
+    "prezzoBase": 18483.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 500,
+    "prezzoBase": 18486.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 200,
+    "prezzoBase": 9698.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 250,
+    "prezzoBase": 10626.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 300,
+    "prezzoBase": 11555.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 350,
+    "prezzoBase": 13512.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 400,
+    "prezzoBase": 14763.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 450,
+    "prezzoBase": 16296.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 500,
+    "prezzoBase": 16299.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 200,
+    "prezzoBase": 15181.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 250,
+    "prezzoBase": 16269.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 300,
+    "prezzoBase": 17354.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 350,
+    "prezzoBase": 19518.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 400,
+    "prezzoBase": 20603.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 450,
+    "prezzoBase": 22774.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 500,
+    "prezzoBase": 22781.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 200,
+    "prezzoBase": 11803.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 250,
+    "prezzoBase": 12890.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 300,
+    "prezzoBase": 13978.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 350,
+    "prezzoBase": 16141.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 400,
+    "prezzoBase": 17226.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 450,
+    "prezzoBase": 19397.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 500,
+    "prezzoBase": 19400.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 200,
+    "prezzoBase": 11522.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 250,
+    "prezzoBase": 12611.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 300,
+    "prezzoBase": 13693.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 350,
+    "prezzoBase": 15859.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 400,
+    "prezzoBase": 16944.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 450,
+    "prezzoBase": 19115.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 255,
+    "larghezzaMm": 500,
+    "prezzoBase": 19123.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 200,
+    "prezzoBase": 12290.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 13302.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 14312.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 350,
+    "prezzoBase": 16363.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 17694.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 450,
+    "prezzoBase": 19394.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 500,
+    "prezzoBase": 19400.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 200,
+    "prezzoBase": 10102.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 11115.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 12126.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 350,
+    "prezzoBase": 14176.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 15509.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 450,
+    "prezzoBase": 17208.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 500,
+    "prezzoBase": 17214.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 200,
+    "prezzoBase": 15904.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 17075.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 18250.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 350,
+    "prezzoBase": 20654.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 21827.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 450,
+    "prezzoBase": 24163.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 500,
+    "prezzoBase": 24173.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 200,
+    "prezzoBase": 12368.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 13538.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 14714.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 350,
+    "prezzoBase": 17118.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 18290.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 450,
+    "prezzoBase": 20627.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 500,
+    "prezzoBase": 20637.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 200,
+    "prezzoBase": 12246.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 13418.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 14589.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 350,
+    "prezzoBase": 17000.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 18171.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 450,
+    "prezzoBase": 20506.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 500,
+    "prezzoBase": 20514.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 200,
+    "prezzoBase": 13259.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 250,
+    "prezzoBase": 14358.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 300,
+    "prezzoBase": 15456.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 350,
+    "prezzoBase": 17752.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 400,
+    "prezzoBase": 19168.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 450,
+    "prezzoBase": 21037.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 500,
+    "prezzoBase": 21045.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 200,
+    "prezzoBase": 10912.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 250,
+    "prezzoBase": 12013.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 300,
+    "prezzoBase": 13110.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 350,
+    "prezzoBase": 15405.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 400,
+    "prezzoBase": 16821.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 450,
+    "prezzoBase": 18691.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 500,
+    "prezzoBase": 18696.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 200,
+    "prezzoBase": 16557.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 250,
+    "prezzoBase": 17813.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 300,
+    "prezzoBase": 19070.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 350,
+    "prezzoBase": 21563.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 400,
+    "prezzoBase": 22821.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 450,
+    "prezzoBase": 25330.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 500,
+    "prezzoBase": 25334.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 200,
+    "prezzoBase": 13018.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 250,
+    "prezzoBase": 14277.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 300,
+    "prezzoBase": 15533.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 350,
+    "prezzoBase": 18027.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 400,
+    "prezzoBase": 19286.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 450,
+    "prezzoBase": 21790.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 500,
+    "prezzoBase": 21798.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 200,
+    "prezzoBase": 12896.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 250,
+    "prezzoBase": 14154.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 300,
+    "prezzoBase": 15413.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 350,
+    "prezzoBase": 17902.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 400,
+    "prezzoBase": 19160.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 450,
+    "prezzoBase": 21670.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 305,
+    "larghezzaMm": 500,
+    "prezzoBase": 21677.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 200,
+    "prezzoBase": 13662.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 250,
+    "prezzoBase": 14846.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 300,
+    "prezzoBase": 16027.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 350,
+    "prezzoBase": 18408.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 400,
+    "prezzoBase": 19912.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 450,
+    "prezzoBase": 21952.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 500,
+    "prezzoBase": 21960.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 200,
+    "prezzoBase": 11318.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 250,
+    "prezzoBase": 12499.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 300,
+    "prezzoBase": 13685.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 350,
+    "prezzoBase": 16066.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 400,
+    "prezzoBase": 17562.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 450,
+    "prezzoBase": 19603.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 500,
+    "prezzoBase": 19611.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 200,
+    "prezzoBase": 17278.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 250,
+    "prezzoBase": 18621.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 300,
+    "prezzoBase": 19965.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 350,
+    "prezzoBase": 22702.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 400,
+    "prezzoBase": 24045.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 450,
+    "prezzoBase": 26720.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 500,
+    "prezzoBase": 26728.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 200,
+    "prezzoBase": 13582.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 250,
+    "prezzoBase": 14923.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 300,
+    "prezzoBase": 16269.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 350,
+    "prezzoBase": 19005.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 400,
+    "prezzoBase": 20346.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 450,
+    "prezzoBase": 23022.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 500,
+    "prezzoBase": 23034.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 200,
+    "prezzoBase": 13622.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 250,
+    "prezzoBase": 14965.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 300,
+    "prezzoBase": 16304.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 350,
+    "prezzoBase": 19043.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 400,
+    "prezzoBase": 20387.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 450,
+    "prezzoBase": 23062.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 500,
+    "prezzoBase": 23067.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 200,
+    "prezzoBase": 14638.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 250,
+    "prezzoBase": 15909.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 300,
+    "prezzoBase": 17174.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 350,
+    "prezzoBase": 19797.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 400,
+    "prezzoBase": 21386.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 450,
+    "prezzoBase": 23592.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 500,
+    "prezzoBase": 23603.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 200,
+    "prezzoBase": 12133.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 250,
+    "prezzoBase": 13400.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 300,
+    "prezzoBase": 14670.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 350,
+    "prezzoBase": 17291.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 400,
+    "prezzoBase": 18878.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 450,
+    "prezzoBase": 21086.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 500,
+    "prezzoBase": 21094.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 200,
+    "prezzoBase": 17934.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 250,
+    "prezzoBase": 19363.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 300,
+    "prezzoBase": 20794.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 350,
+    "prezzoBase": 23610.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 400,
+    "prezzoBase": 25037.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 450,
+    "prezzoBase": 27886.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 500,
+    "prezzoBase": 27893.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 200,
+    "prezzoBase": 14237.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 250,
+    "prezzoBase": 15664.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 300,
+    "prezzoBase": 17094.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 350,
+    "prezzoBase": 19914.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 400,
+    "prezzoBase": 21342.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 450,
+    "prezzoBase": 24187.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 500,
+    "prezzoBase": 24198.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 200,
+    "prezzoBase": 14275.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 250,
+    "prezzoBase": 15704.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 300,
+    "prezzoBase": 17133.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 350,
+    "prezzoBase": 19954.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 400,
+    "prezzoBase": 21379.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 450,
+    "prezzoBase": 24229.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 355,
+    "larghezzaMm": 500,
+    "prezzoBase": 24237.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 200,
+    "prezzoBase": 15038.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 250,
+    "prezzoBase": 16395.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 17752.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 350,
+    "prezzoBase": 20458.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 400,
+    "prezzoBase": 22128.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 450,
+    "prezzoBase": 24507.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 24518.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 200,
+    "prezzoBase": 12534.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 250,
+    "prezzoBase": 13891.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 15245.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 350,
+    "prezzoBase": 17949.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 400,
+    "prezzoBase": 19622.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 450,
+    "prezzoBase": 22000.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 22011.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 200,
+    "prezzoBase": 18653.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 250,
+    "prezzoBase": 20170.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 21682.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 350,
+    "prezzoBase": 24750.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 400,
+    "prezzoBase": 26261.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 450,
+    "prezzoBase": 29277.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 29290.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 200,
+    "prezzoBase": 14798.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 250,
+    "prezzoBase": 16314.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 17827.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 350,
+    "prezzoBase": 20890.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 400,
+    "prezzoBase": 22403.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 450,
+    "prezzoBase": 25421.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 25430.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 200,
+    "prezzoBase": 14997.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 250,
+    "prezzoBase": 16512.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 18026.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 350,
+    "prezzoBase": 21088.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 400,
+    "prezzoBase": 22600.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 450,
+    "prezzoBase": 25618.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 25630.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 16016.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 250,
+    "prezzoBase": 17448.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 300,
+    "prezzoBase": 18886.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 350,
+    "prezzoBase": 21843.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 400,
+    "prezzoBase": 23600.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 450,
+    "prezzoBase": 26147.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 26158.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 13347.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 250,
+    "prezzoBase": 14786.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 300,
+    "prezzoBase": 16227.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 350,
+    "prezzoBase": 19178.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 400,
+    "prezzoBase": 20936.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 450,
+    "prezzoBase": 23480.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 23494.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 19310.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 250,
+    "prezzoBase": 20907.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 300,
+    "prezzoBase": 22506.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 350,
+    "prezzoBase": 25658.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 400,
+    "prezzoBase": 27254.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 450,
+    "prezzoBase": 30443.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 30453.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 15451.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 250,
+    "prezzoBase": 17051.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 300,
+    "prezzoBase": 18650.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 350,
+    "prezzoBase": 21798.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 400,
+    "prezzoBase": 23398.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 450,
+    "prezzoBase": 26584.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 26595.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 200,
+    "prezzoBase": 15653.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 250,
+    "prezzoBase": 17251.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 300,
+    "prezzoBase": 18850.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 350,
+    "prezzoBase": 21995.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 400,
+    "prezzoBase": 23595.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 450,
+    "prezzoBase": 26784.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 405,
+    "larghezzaMm": 500,
+    "prezzoBase": 26794.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 200,
+    "prezzoBase": 16414.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 17941.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 300,
+    "prezzoBase": 19466.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 350,
+    "prezzoBase": 22501.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 24344.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 450,
+    "prezzoBase": 27062.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 500,
+    "prezzoBase": 27072.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 200,
+    "prezzoBase": 13754.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 15275.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 300,
+    "prezzoBase": 16797.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 350,
+    "prezzoBase": 19837.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 21677.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 450,
+    "prezzoBase": 24397.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 500,
+    "prezzoBase": 24408.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 200,
+    "prezzoBase": 20350.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 22035.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 300,
+    "prezzoBase": 23717.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 350,
+    "prezzoBase": 27274.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 28957.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 450,
+    "prezzoBase": 32312.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 500,
+    "prezzoBase": 32322.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 200,
+    "prezzoBase": 16176.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 17859.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 300,
+    "prezzoBase": 19541.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 350,
+    "prezzoBase": 23094.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 24781.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 450,
+    "prezzoBase": 28136.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 500,
+    "prezzoBase": 28147.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 200,
+    "prezzoBase": 16690.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 18378.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 300,
+    "prezzoBase": 20059.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 350,
+    "prezzoBase": 23613.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 25298.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 450,
+    "prezzoBase": 28653.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 430,
+    "larghezzaMm": 500,
+    "prezzoBase": 28666.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 200,
+    "prezzoBase": 17958.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 250,
+    "prezzoBase": 19565.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 300,
+    "prezzoBase": 21171.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 350,
+    "prezzoBase": 24619.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 400,
+    "prezzoBase": 26544.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 450,
+    "prezzoBase": 29430.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 500,
+    "prezzoBase": 29443.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 200,
+    "prezzoBase": 14973.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 250,
+    "prezzoBase": 16579.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 300,
+    "prezzoBase": 18190.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 350,
+    "prezzoBase": 21630.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 400,
+    "prezzoBase": 23560.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 450,
+    "prezzoBase": 26446.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 500,
+    "prezzoBase": 26461.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 200,
+    "prezzoBase": 21250.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 250,
+    "prezzoBase": 23021.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 300,
+    "prezzoBase": 24787.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 350,
+    "prezzoBase": 28434.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 400,
+    "prezzoBase": 30200.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 450,
+    "prezzoBase": 33722.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 500,
+    "prezzoBase": 33736.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 200,
+    "prezzoBase": 17078.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 250,
+    "prezzoBase": 18850.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 300,
+    "prezzoBase": 20616.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 350,
+    "prezzoBase": 24254.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 400,
+    "prezzoBase": 26022.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 450,
+    "prezzoBase": 29547.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 500,
+    "prezzoBase": 29562.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 200,
+    "prezzoBase": 17595.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 250,
+    "prezzoBase": 19365.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 300,
+    "prezzoBase": 21131.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 350,
+    "prezzoBase": 24773.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 400,
+    "prezzoBase": 26541.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 450,
+    "prezzoBase": 30062.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 455,
+    "larghezzaMm": 500,
+    "prezzoBase": 30077.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 200,
+    "prezzoBase": 18362.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 250,
+    "prezzoBase": 20054.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 300,
+    "prezzoBase": 21746.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 350,
+    "prezzoBase": 25277.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 400,
+    "prezzoBase": 27288.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 450,
+    "prezzoBase": 30342.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 500,
+    "prezzoBase": 30360.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 200,
+    "prezzoBase": 15376.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 250,
+    "prezzoBase": 17070.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 300,
+    "prezzoBase": 18766.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 350,
+    "prezzoBase": 22290.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 400,
+    "prezzoBase": 24304.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 450,
+    "prezzoBase": 27362.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 500,
+    "prezzoBase": 27376.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 200,
+    "prezzoBase": 21656.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 250,
+    "prezzoBase": 23510.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 300,
+    "prezzoBase": 25365.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 350,
+    "prezzoBase": 29091.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 400,
+    "prezzoBase": 30944.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 450,
+    "prezzoBase": 34635.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 500,
+    "prezzoBase": 34651.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 200,
+    "prezzoBase": 17482.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 250,
+    "prezzoBase": 19339.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 300,
+    "prezzoBase": 21189.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 350,
+    "prezzoBase": 24914.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 400,
+    "prezzoBase": 26768.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 450,
+    "prezzoBase": 30462.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 500,
+    "prezzoBase": 30474.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 200,
+    "prezzoBase": 17998.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 250,
+    "prezzoBase": 19853.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 300,
+    "prezzoBase": 21707.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 350,
+    "prezzoBase": 25430.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 400,
+    "prezzoBase": 27283.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 450,
+    "prezzoBase": 30978.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 480,
+    "larghezzaMm": 500,
+    "prezzoBase": 30994.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 200,
+    "prezzoBase": 18766.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 250,
+    "prezzoBase": 20544.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 300,
+    "prezzoBase": 22323.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 350,
+    "prezzoBase": 25939.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 400,
+    "prezzoBase": 28032.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 450,
+    "prezzoBase": 31256.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 500,
+    "prezzoBase": 31275.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 200,
+    "prezzoBase": 15778.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 250,
+    "prezzoBase": 17558.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 300,
+    "prezzoBase": 19341.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 350,
+    "prezzoBase": 22952.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 400,
+    "prezzoBase": 25046.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 450,
+    "prezzoBase": 28277.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 500,
+    "prezzoBase": 28288.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 200,
+    "prezzoBase": 22059.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 250,
+    "prezzoBase": 23998.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 300,
+    "prezzoBase": 25939.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 350,
+    "prezzoBase": 29747.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 400,
+    "prezzoBase": 31686.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 450,
+    "prezzoBase": 35550.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 500,
+    "prezzoBase": 35566.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 200,
+    "prezzoBase": 17883.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 250,
+    "prezzoBase": 19822.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 300,
+    "prezzoBase": 21762.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 350,
+    "prezzoBase": 25576.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 400,
+    "prezzoBase": 27512.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 450,
+    "prezzoBase": 31379.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 500,
+    "prezzoBase": 31389.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 200,
+    "prezzoBase": 18402.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 250,
+    "prezzoBase": 20341.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 300,
+    "prezzoBase": 22282.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 350,
+    "prezzoBase": 26091.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 400,
+    "prezzoBase": 28029.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 450,
+    "prezzoBase": 31893.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 505,
+    "larghezzaMm": 500,
+    "prezzoBase": 31906.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 200,
+    "prezzoBase": 19170.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 250,
+    "prezzoBase": 21032.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 300,
+    "prezzoBase": 22898.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 350,
+    "prezzoBase": 26595.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 400,
+    "prezzoBase": 28778.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 450,
+    "prezzoBase": 32174.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 500,
+    "prezzoBase": 32186.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 200,
+    "prezzoBase": 16182.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 250,
+    "prezzoBase": 18050.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 300,
+    "prezzoBase": 19912.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 350,
+    "prezzoBase": 23608.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 400,
+    "prezzoBase": 25794.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 450,
+    "prezzoBase": 29190.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 500,
+    "prezzoBase": 29205.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 200,
+    "prezzoBase": 23104.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 250,
+    "prezzoBase": 25125.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 300,
+    "prezzoBase": 27149.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 350,
+    "prezzoBase": 31365.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 400,
+    "prezzoBase": 33392.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 450,
+    "prezzoBase": 37426.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 500,
+    "prezzoBase": 37437.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 200,
+    "prezzoBase": 18610.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 250,
+    "prezzoBase": 20632.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 300,
+    "prezzoBase": 22654.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 350,
+    "prezzoBase": 26874.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 400,
+    "prezzoBase": 28893.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 450,
+    "prezzoBase": 32928.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 500,
+    "prezzoBase": 32941.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 200,
+    "prezzoBase": 19445.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 250,
+    "prezzoBase": 21469.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 300,
+    "prezzoBase": 23491.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 350,
+    "prezzoBase": 27707.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 400,
+    "prezzoBase": 29734.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 450,
+    "prezzoBase": 33766.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 530,
+    "larghezzaMm": 500,
+    "prezzoBase": 33778.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 200,
+    "prezzoBase": 20709.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 250,
+    "prezzoBase": 22656.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 300,
+    "prezzoBase": 24603.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 350,
+    "prezzoBase": 28709.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 400,
+    "prezzoBase": 30978.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 450,
+    "prezzoBase": 34542.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 500,
+    "prezzoBase": 34558.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 200,
+    "prezzoBase": 17408.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 250,
+    "prezzoBase": 19355.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 300,
+    "prezzoBase": 21301.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 350,
+    "prezzoBase": 25403.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 400,
+    "prezzoBase": 27677.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 450,
+    "prezzoBase": 31240.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 500,
+    "prezzoBase": 31253.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 200,
+    "prezzoBase": 24003.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 250,
+    "prezzoBase": 26112.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 300,
+    "prezzoBase": 28222.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 350,
+    "prezzoBase": 32520.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 400,
+    "prezzoBase": 34632.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 450,
+    "prezzoBase": 38835.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 500,
+    "prezzoBase": 38850.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 200,
+    "prezzoBase": 19514.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 250,
+    "prezzoBase": 21619.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 300,
+    "prezzoBase": 23728.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 350,
+    "prezzoBase": 28029.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 400,
+    "prezzoBase": 30134.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 450,
+    "prezzoBase": 34339.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 500,
+    "prezzoBase": 34355.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 200,
+    "prezzoBase": 20346.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 250,
+    "prezzoBase": 22454.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 300,
+    "prezzoBase": 24565.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 350,
+    "prezzoBase": 28864.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 400,
+    "prezzoBase": 30973.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 450,
+    "prezzoBase": 35176.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 555,
+    "larghezzaMm": 500,
+    "prezzoBase": 35190.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 21114.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 23147.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 300,
+    "prezzoBase": 25182.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 350,
+    "prezzoBase": 29370.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 31723.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 450,
+    "prezzoBase": 35456.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 500,
+    "prezzoBase": 35475.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 17808.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 19845.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 300,
+    "prezzoBase": 21878.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 350,
+    "prezzoBase": 26066.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 28419.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 450,
+    "prezzoBase": 32155.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 500,
+    "prezzoBase": 32166.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 24408.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 26603.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 300,
+    "prezzoBase": 28798.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 350,
+    "prezzoBase": 33184.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 35376.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 450,
+    "prezzoBase": 39747.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 500,
+    "prezzoBase": 39765.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 19914.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 22106.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 300,
+    "prezzoBase": 24304.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 350,
+    "prezzoBase": 28691.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 30883.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 450,
+    "prezzoBase": 35253.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 500,
+    "prezzoBase": 35270.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 200,
+    "prezzoBase": 20749.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 22942.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 300,
+    "prezzoBase": 25141.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 350,
+    "prezzoBase": 29525.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 31720.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 450,
+    "prezzoBase": 36090.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 580,
+    "larghezzaMm": 500,
+    "prezzoBase": 36107.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 200,
+    "prezzoBase": 21515.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 250,
+    "prezzoBase": 23637.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 300,
+    "prezzoBase": 25757.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 350,
+    "prezzoBase": 30029.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 400,
+    "prezzoBase": 32469.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 450,
+    "prezzoBase": 36371.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 500,
+    "prezzoBase": 36389.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 200,
+    "prezzoBase": 18213.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 250,
+    "prezzoBase": 20334.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 300,
+    "prezzoBase": 22451.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 350,
+    "prezzoBase": 26722.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 400,
+    "prezzoBase": 29163.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 450,
+    "prezzoBase": 33067.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 500,
+    "prezzoBase": 33085.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 200,
+    "prezzoBase": 24811.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 250,
+    "prezzoBase": 27093.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 300,
+    "prezzoBase": 29373.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 350,
+    "prezzoBase": 33838.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 400,
+    "prezzoBase": 36122.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 450,
+    "prezzoBase": 40662.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 500,
+    "prezzoBase": 40678.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 200,
+    "prezzoBase": 20317.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 250,
+    "prezzoBase": 22597.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 300,
+    "prezzoBase": 24877.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 350,
+    "prezzoBase": 29350.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 400,
+    "prezzoBase": 31629.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 450,
+    "prezzoBase": 36168.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 500,
+    "prezzoBase": 36184.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 200,
+    "prezzoBase": 21154.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 250,
+    "prezzoBase": 23432.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 300,
+    "prezzoBase": 25714.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 350,
+    "prezzoBase": 30182.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 400,
+    "prezzoBase": 32464.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 450,
+    "prezzoBase": 37006.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 605,
+    "larghezzaMm": 500,
+    "prezzoBase": 37019.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 200,
+    "prezzoBase": 21923.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 250,
+    "prezzoBase": 24126.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 300,
+    "prezzoBase": 26331.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 350,
+    "prezzoBase": 30688.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 400,
+    "prezzoBase": 33213.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 450,
+    "prezzoBase": 37286.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 500,
+    "prezzoBase": 37304.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 200,
+    "prezzoBase": 18619.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 250,
+    "prezzoBase": 20824.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 300,
+    "prezzoBase": 23027.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 350,
+    "prezzoBase": 27382.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 400,
+    "prezzoBase": 29906.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 450,
+    "prezzoBase": 33982.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 500,
+    "prezzoBase": 34000.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 200,
+    "prezzoBase": 25854.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 250,
+    "prezzoBase": 28218.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 300,
+    "prezzoBase": 30586.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 350,
+    "prezzoBase": 35458.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 400,
+    "prezzoBase": 37822.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 450,
+    "prezzoBase": 42539.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 500,
+    "prezzoBase": 42552.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 200,
+    "prezzoBase": 21043.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 250,
+    "prezzoBase": 23406.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 300,
+    "prezzoBase": 25770.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 350,
+    "prezzoBase": 30646.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 400,
+    "prezzoBase": 33008.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 450,
+    "prezzoBase": 37718.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 500,
+    "prezzoBase": 37738.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 200,
+    "prezzoBase": 22198.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 250,
+    "prezzoBase": 24562.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 300,
+    "prezzoBase": 26928.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 350,
+    "prezzoBase": 31800.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 400,
+    "prezzoBase": 34165.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 450,
+    "prezzoBase": 38877.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 630,
+    "larghezzaMm": 500,
+    "prezzoBase": 38893.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 200,
+    "prezzoBase": 23461.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 250,
+    "prezzoBase": 25754.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 300,
+    "prezzoBase": 28043.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 350,
+    "prezzoBase": 32805.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 400,
+    "prezzoBase": 35411.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 450,
+    "prezzoBase": 39654.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 500,
+    "prezzoBase": 39670.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 200,
+    "prezzoBase": 19837.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 250,
+    "prezzoBase": 22128.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 300,
+    "prezzoBase": 24419.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 350,
+    "prezzoBase": 29184.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 400,
+    "prezzoBase": 31792.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 450,
+    "prezzoBase": 36030.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 500,
+    "prezzoBase": 36053.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 200,
+    "prezzoBase": 26755.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 250,
+    "prezzoBase": 29206.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 300,
+    "prezzoBase": 31658.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 350,
+    "prezzoBase": 36616.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 400,
+    "prezzoBase": 39067.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 450,
+    "prezzoBase": 43946.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 500,
+    "prezzoBase": 43970.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 200,
+    "prezzoBase": 21942.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 250,
+    "prezzoBase": 24395.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 300,
+    "prezzoBase": 26842.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 350,
+    "prezzoBase": 31802.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 400,
+    "prezzoBase": 34251.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 450,
+    "prezzoBase": 39131.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 500,
+    "prezzoBase": 39150.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 200,
+    "prezzoBase": 23094.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 250,
+    "prezzoBase": 25550.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 300,
+    "prezzoBase": 28000.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 350,
+    "prezzoBase": 32958.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 400,
+    "prezzoBase": 35408.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 450,
+    "prezzoBase": 40288.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 655,
+    "larghezzaMm": 500,
+    "prezzoBase": 40309.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 200,
+    "prezzoBase": 23864.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 250,
+    "prezzoBase": 26242.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 300,
+    "prezzoBase": 28616.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 350,
+    "prezzoBase": 33462.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 400,
+    "prezzoBase": 36155.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 450,
+    "prezzoBase": 40568.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 500,
+    "prezzoBase": 41045.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 200,
+    "prezzoBase": 20242.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 250,
+    "prezzoBase": 22618.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 300,
+    "prezzoBase": 24990.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 350,
+    "prezzoBase": 29842.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 400,
+    "prezzoBase": 32534.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 450,
+    "prezzoBase": 36944.0
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 500,
+    "prezzoBase": 37426.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 200,
+    "prezzoBase": 27160.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 250,
+    "prezzoBase": 29694.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 300,
+    "prezzoBase": 32232.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 350,
+    "prezzoBase": 37275.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 400,
+    "prezzoBase": 39810.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 450,
+    "prezzoBase": 44859.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 500,
+    "prezzoBase": 45338.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 200,
+    "prezzoBase": 22346.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 250,
+    "prezzoBase": 24883.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 300,
+    "prezzoBase": 27418.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 350,
+    "prezzoBase": 32462.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 400,
+    "prezzoBase": 34995.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 450,
+    "prezzoBase": 40046.0
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 500,
+    "prezzoBase": 40525.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 200,
+    "prezzoBase": 23501.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 250,
+    "prezzoBase": 26035.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 300,
+    "prezzoBase": 28573.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 350,
+    "prezzoBase": 33616.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 400,
+    "prezzoBase": 36152.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 450,
+    "prezzoBase": 41203.0
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 680,
+    "larghezzaMm": 500,
+    "prezzoBase": 41680.0
+  }
+]

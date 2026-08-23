@@ -1,0 +1,128 @@
+[
+  {
+    "categoria": "AURORA Accessori",
+    "nome": "Pressopiegato per unione strutture",
+    "tipoPrezzo": "FISSO",
+    "valore": 102,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Accessori",
+    "nome": "Riempimento delle lamelle con EPS",
+    "tipoPrezzo": "FISSO",
+    "valore": 69,
+    "unita": "m2",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Accessori",
+    "nome": "Staffa per attacco a soffitto",
+    "tipoPrezzo": "FISSO",
+    "valore": 163,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Accessori",
+    "nome": "Piede laterale (H > 3000mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 405,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": "Costo aggiuntivo per singolo piantone di una struttura con altezza totale superiore a 3 metri",
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Accessori",
+    "nome": "Piede centrale (H > 3000mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 608,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": "Costo aggiuntivo per singolo piantone di una struttura con altezza totale superiore a 3 metri",
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Sensori",
+    "nome": "Sensore pioggia (motore Nexta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 270,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Sensori",
+    "nome": "Sensore vento (motore Nexta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 128,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Sensori",
+    "nome": "Sensore pioggia (motore Teleco)",
+    "tipoPrezzo": "FISSO",
+    "valore": 237,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "AURORA Sensori",
+    "nome": "Sensore vento (motore Teleco)",
+    "tipoPrezzo": "FISSO",
+    "valore": 88,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "AURORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "BIOCLIMATICA"
+    ]
+  }
+]

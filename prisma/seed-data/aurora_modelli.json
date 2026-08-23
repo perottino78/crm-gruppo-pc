@@ -1,0 +1,37 @@
+[
+  {
+    "tipologia": "ISCHIA_PARETE",
+    "descrizioneTecnica": "AURORA / ISCHIA — struttura standard a parete. Pergola bioclimatica premium a lamelle orientabili fino a 140°, lamelle da 279mm in alluminio verniciato, viteria in acciaio Inox, motore lineare di serie con centralina e radiocomando. Integrazione con schermatura verticale EVO ZIP. Certificazioni EN 13561, Resistenza al vento Classe 5, peso circa 40 kg/m2. Colori: lucidi 9010/1013, soft 9010/1013/7016/8017, Corten. Altezza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/aurora/aurora_parete.png"
+  },
+  {
+    "tipologia": "ISCHIA_PARETE_AFFIANCATA",
+    "descrizioneTecnica": "AURORA / ISCHIA — struttura standard a parete, modulo affiancato (max 680cm per modulo).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/aurora/aurora_parete.png"
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA",
+    "descrizioneTecnica": "AURORA / ISCHIA — struttura standard a isola (autoportante su 4 lati).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/aurora/aurora_isola.png"
+  },
+  {
+    "tipologia": "ISCHIA_ISOLA_AFFIANCATA",
+    "descrizioneTecnica": "AURORA / ISCHIA — struttura standard a isola, moduli affiancati in sporgenza.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/aurora/aurora_isola.png"
+  },
+  {
+    "tipologia": "ISCHIA_PATIO",
+    "descrizioneTecnica": "AURORA / ISCHIA — struttura patio (indipendente, autoportante su 4 piedi).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/aurora/aurora_patio.png"
+  }
+]
