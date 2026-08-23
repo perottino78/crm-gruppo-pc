@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { creaAttivita, completaAttivita } from "@/app/actions";
+import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -37,6 +37,8 @@ export default async function SchedaClientePage({
   if (!cliente) notFound();
 
   const utenti = await prisma.utente.findMany({ orderBy: { nome: "asc" } });
+  const brands = await prisma.brand.findMany({ orderBy: { nome: "asc" } });
+  const commerciali = await prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } });
   const taskAperti = cliente.attivita.filter((a) => a.tipo === "TASK" && !a.completata);
 
   return (
@@ -73,6 +75,28 @@ export default async function SchedaClientePage({
         </div>
       )}
 
+      <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+        <h2 className="text-sm font-medium text-neutral-700 mb-3">Nuova offerta / preventivo — scegli azienda</h2>
+        <form action={creaPreventivo} className="flex flex-wrap items-end gap-2">
+          <input type="hidden" name="clienteId" value={cliente.id} />
+          <div className="flex gap-2 flex-wrap">
+            {brands.map((b) => (
+              <label key={b.id} className="text-xs">
+                <input type="radio" name="brandId" value={b.id} defaultChecked={b.id === cliente.brandId} required className="mr-1" />
+                {b.nome}
+              </label>
+            ))}
+          </div>
+          <select name="commercialeId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+            <option value="">Commerciale...</option>
+            {commerciali.map((u) => (
+              <option key={u.id} value={u.id}>{u.nome}</option>
+            ))}
+          </select>
+          <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Apri offerta →</button>
+        </form>
+      </div>
+
       <div className="grid grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <h2 className="text-sm font-medium text-neutral-700 mb-3">Appuntamenti ({cliente.appuntamenti.length})</h2>
@@ -87,10 +111,14 @@ export default async function SchedaClientePage({
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <h2 className="text-sm font-medium text-neutral-700 mb-3">Preventivi ({cliente.preventivi.length})</h2>
           {cliente.preventivi.map((p) => (
-            <div key={p.id} className="text-sm py-1.5 border-b border-neutral-50 last:border-0 flex items-center justify-between">
+            <Link
+              key={p.id}
+              href={`/preventivi/${p.id}`}
+              className="text-sm py-1.5 border-b border-neutral-50 last:border-0 flex items-center justify-between hover:bg-neutral-50 -mx-4 px-4"
+            >
               <span>{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} · {p.commerciale.nome}</span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500">{p.stato}</span>
-            </div>
+            </Link>
           ))}
           {cliente.preventivi.length === 0 && <p className="text-xs text-neutral-300 italic">Nessuno</p>}
         </div>

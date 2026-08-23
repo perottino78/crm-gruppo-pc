@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { creaPreventivo, aggiornaStatoPreventivo } from "@/app/actions";
+import Link from "next/link";
 
 const COLONNE = [
   { stato: "APERTO", label: "Aperti" },
@@ -80,7 +81,9 @@ export default async function PreventiviPage({
               <div className="flex flex-col gap-2">
                 {items.map((p) => (
                   <div key={p.id} className="bg-white rounded-lg border border-neutral-200 p-3">
-                    <p className="text-sm font-medium">{p.cliente.nome}</p>
+                    <Link href={`/preventivi/${p.id}`} className="text-sm font-medium hover:underline">
+                      {p.cliente.nome}
+                    </Link>
                     <p className="text-xs text-neutral-400 mt-1">
                       {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
                     </p>

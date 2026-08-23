@@ -20,7 +20,7 @@ export default function Sidebar() {
   const info = brandInfo(brand === "Tutti" ? undefined : brand);
 
   return (
-    <aside className="w-56 shrink-0 border-r border-neutral-200 bg-white flex flex-col py-4">
+    <aside className="w-56 shrink-0 border-r border-neutral-200 bg-white flex flex-col py-4 print:hidden">
       <div className="px-4 pb-4 mb-2 border-b border-neutral-100">
         <div className="flex items-center gap-2">
           <span

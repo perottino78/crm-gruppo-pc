@@ -2,6 +2,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { aliquotaIvaPerPaese } from "@/lib/pricing";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -75,11 +77,101 @@ export async function creaPreventivo(formData: FormData) {
   const brandId = str(formData, "brandId");
   const commercialeId = str(formData, "commercialeId");
   if (!clienteId || !brandId || !commercialeId) return;
-  await prisma.preventivo.create({
-    data: { clienteId, brandId, commercialeId },
+
+  const cliente = await prisma.cliente.findUnique({ where: { id: clienteId } });
+  const { aliquota } = aliquotaIvaPerPaese(cliente?.paese ?? "IT");
+
+  const preventivo = await prisma.preventivo.create({
+    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota },
   });
   revalidatePath("/preventivi");
   revalidatePath("/");
+  revalidatePath(`/clienti/${clienteId}`);
+  redirect(`/preventivi/${preventivo.id}`);
+}
+
+async function ricalcolaTotali(preventivoId: string) {
+  const righe = await prisma.rigaPreventivo.findMany({
+    where: { preventivoId },
+    include: { optionali: true },
+  });
+  const totaleNetto = righe.reduce((sum, r) => {
+    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
+    return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+  }, 0);
+  const preventivo = await prisma.preventivo.update({
+    where: { id: preventivoId },
+    data: { totaleNetto },
+  });
+  await prisma.preventivo.update({
+    where: { id: preventivoId },
+    data: { totaleIva: totaleNetto * (preventivo.aliquotaIva / 100) },
+  });
+}
+
+export async function aggiungiRigaPreventivo(formData: FormData) {
+  const preventivoId = str(formData, "preventivoId");
+  const prodottoId = str(formData, "prodottoId");
+  const quantitaStr = str(formData, "quantita");
+  const prezzoStr = str(formData, "prezzoUnitario");
+  if (!preventivoId || !prodottoId) return;
+
+  const prodotto = await prisma.prodotto.findUnique({ where: { id: prodottoId } });
+  if (!prodotto) return;
+
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
+  const prezzoUnitario = prezzoStr ? parseFloat(prezzoStr) : prodotto.prezzoBase;
+
+  await prisma.rigaPreventivo.create({
+    data: { preventivoId, prodottoId, quantita, prezzoUnitario },
+  });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function rimuoviRigaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+  await prisma.rigaOptional.deleteMany({ where: { rigaId: id } });
+  await prisma.rigaPreventivo.delete({ where: { id } });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function aggiungiOptionalARiga(formData: FormData) {
+  const rigaId = str(formData, "rigaId");
+  const optionalId = str(formData, "optionalId");
+  const preventivoId = str(formData, "preventivoId");
+  const quantitaStr = str(formData, "quantita");
+  if (!rigaId || !optionalId || !preventivoId) return;
+
+  const [riga, optional] = await Promise.all([
+    prisma.rigaPreventivo.findUnique({ where: { id: rigaId } }),
+    prisma.optional.findUnique({ where: { id: optionalId } }),
+  ]);
+  if (!riga || !optional) return;
+
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
+  const prezzoUnitario =
+    optional.tipoPrezzo === "PERCENTUALE"
+      ? Math.round(riga.quantita * riga.prezzoUnitario * (optional.valore / 100) * 100) / 100
+      : optional.valore;
+
+  await prisma.rigaOptional.create({
+    data: { rigaId, optionalId, quantita, prezzoUnitario },
+  });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function rimuoviOptionalDaRiga(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+  await prisma.rigaOptional.delete({ where: { id } });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
 }
 
 export async function aggiornaStatoPreventivo(formData: FormData) {

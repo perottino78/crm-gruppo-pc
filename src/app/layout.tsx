@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={<div className="w-56 shrink-0 border-r border-neutral-200 bg-white" />}>
             <Sidebar />
           </Suspense>
-          <main className="flex-1 p-8">{children}</main>
+          <main className="flex-1 p-8 print:p-0">{children}</main>
         </div>
       </body>
     </html>
