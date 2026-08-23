@@ -1,0 +1,44 @@
+[
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "descrizioneTecnica": "SOLARIA — struttura standard a parete. Pergola bioclimatica a lamelle orientabili fino a 120°, lamelle da 188,7mm in alluminio verniciato, viteria in acciaio Inox, comando a motore con centralina e radiocomando di serie. Certificazioni EN 13561, Resistenza al vento Classe 5, peso circa 35 kg/m². Colori: lucidi 9010/1013, soft 9010/1013/7016/8017, Corten. Altezza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_parete.png"
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "descrizioneTecnica": "SOLARIA — struttura standard a parete, modulo affiancato (somma larghezze max 720cm: 360 singola + 360 affiancata).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_parete.png"
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "descrizioneTecnica": "SOLARIA — struttura Star a parete (arretramento piantoni da 200 a 1000mm). Stesse caratteristiche tecniche della struttura standard.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_parete.png"
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "descrizioneTecnica": "SOLARIA — struttura Star a parete, modulo affiancato.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_parete.png"
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "descrizioneTecnica": "SOLARIA — struttura patio (indipendente, autoportante su 4 piedi).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_patio.png"
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "descrizioneTecnica": "SOLARIA — struttura patio con tiranti (novità). Disponibile solo per larghezze/sporgenze contenute (N.Lame 6-9).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "BIOCLIMATICA",
+    "immagineUrl": "/immagini/solaria/solaria_patio.png"
+  }
+]

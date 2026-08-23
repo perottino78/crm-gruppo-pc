@@ -1,0 +1,5791 @@
+[
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 8402.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 8987.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 9574.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 10157.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 10747.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 11331.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 11915.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 6799.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 7271.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 7748.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 8216.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 8694.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 9168.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 9641.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 8529.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 9163.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 9794.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 10426.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 11058.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 11692.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 12327.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 6899.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 7413.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 7925.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 8437.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 8948.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 9460.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 9976.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 8914.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 9594.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 10271.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 10954.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 11634.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 12315.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 12994.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 7211.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 7762.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 8311.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 8862.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 9412.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 9962.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 10512.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 9039.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 9770.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 10493.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 11225.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 11950.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 12681.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 13409.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 7316.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 7904.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 8490.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 9083.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 9668.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 10259.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 10849.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 110,
+    "prezzoBase": 9164.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 160,
+    "prezzoBase": 9942.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 210,
+    "prezzoBase": 10717.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 260,
+    "prezzoBase": 11491.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 310,
+    "prezzoBase": 12271.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 360,
+    "prezzoBase": 13045.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 410,
+    "prezzoBase": 13820.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 110,
+    "prezzoBase": 7415.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 160,
+    "prezzoBase": 8043.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 210,
+    "prezzoBase": 8672.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 260,
+    "prezzoBase": 9296.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 310,
+    "prezzoBase": 9926.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 360,
+    "prezzoBase": 10555.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 410,
+    "prezzoBase": 11181.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 110,
+    "prezzoBase": 9552.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 160,
+    "prezzoBase": 10373.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 210,
+    "prezzoBase": 11199.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 260,
+    "prezzoBase": 12019.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 310,
+    "prezzoBase": 12843.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 360,
+    "prezzoBase": 13666.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 410,
+    "prezzoBase": 14492.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 110,
+    "prezzoBase": 7726.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 160,
+    "prezzoBase": 8392.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 210,
+    "prezzoBase": 9057.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 260,
+    "prezzoBase": 9726.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 310,
+    "prezzoBase": 10391.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 360,
+    "prezzoBase": 11056.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 410,
+    "prezzoBase": 11727.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 110,
+    "prezzoBase": 9675.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 160,
+    "prezzoBase": 10549.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 210,
+    "prezzoBase": 11419.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 260,
+    "prezzoBase": 12285.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 310,
+    "prezzoBase": 13161.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 360,
+    "prezzoBase": 14031.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 410,
+    "prezzoBase": 14900.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 110,
+    "prezzoBase": 7827.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 160,
+    "prezzoBase": 8536.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 210,
+    "prezzoBase": 9236.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 260,
+    "prezzoBase": 9940.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 310,
+    "prezzoBase": 10650.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 360,
+    "prezzoBase": 11352.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 410,
+    "prezzoBase": 12056.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 110,
+    "prezzoBase": 9801.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 160,
+    "prezzoBase": 10718.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 210,
+    "prezzoBase": 11635.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 260,
+    "prezzoBase": 12559.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 310,
+    "prezzoBase": 13475.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 360,
+    "prezzoBase": 14395.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 410,
+    "prezzoBase": 15314.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 110,
+    "prezzoBase": 7932.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 160,
+    "prezzoBase": 8673.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 210,
+    "prezzoBase": 9414.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 260,
+    "prezzoBase": 10162.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 310,
+    "prezzoBase": 10901.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 360,
+    "prezzoBase": 11644.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 410,
+    "prezzoBase": 12390.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 110,
+    "prezzoBase": 10183.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 160,
+    "prezzoBase": 11151.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 210,
+    "prezzoBase": 12119.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 260,
+    "prezzoBase": 13084.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 310,
+    "prezzoBase": 14048.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 360,
+    "prezzoBase": 15016.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 410,
+    "prezzoBase": 15984.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 110,
+    "prezzoBase": 8240.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 160,
+    "prezzoBase": 9022.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 210,
+    "prezzoBase": 9807.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 260,
+    "prezzoBase": 10586.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 310,
+    "prezzoBase": 11368.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 360,
+    "prezzoBase": 12151.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 410,
+    "prezzoBase": 12931.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 110,
+    "prezzoBase": 10310.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 160,
+    "prezzoBase": 11327.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 210,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 260,
+    "prezzoBase": 13357.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 310,
+    "prezzoBase": 14365.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 360,
+    "prezzoBase": 15382.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 410,
+    "prezzoBase": 16396.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 110,
+    "prezzoBase": 8344.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 160,
+    "prezzoBase": 9164.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 210,
+    "prezzoBase": 9983.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 260,
+    "prezzoBase": 10805.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 310,
+    "prezzoBase": 11623.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 360,
+    "prezzoBase": 12443.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 410,
+    "prezzoBase": 13267.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 110,
+    "prezzoBase": 10439.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 160,
+    "prezzoBase": 11502.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 210,
+    "prezzoBase": 12561.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 260,
+    "prezzoBase": 13622.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 310,
+    "prezzoBase": 14687.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 360,
+    "prezzoBase": 15748.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 410,
+    "prezzoBase": 16806.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 110,
+    "prezzoBase": 8446.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 160,
+    "prezzoBase": 9305.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 210,
+    "prezzoBase": 10164.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 260,
+    "prezzoBase": 11023.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 310,
+    "prezzoBase": 11884.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 360,
+    "prezzoBase": 12741.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 410,
+    "prezzoBase": 13600.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 110,
+    "prezzoBase": 10824.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 160,
+    "prezzoBase": 11935.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 210,
+    "prezzoBase": 13043.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 260,
+    "prezzoBase": 14152.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 310,
+    "prezzoBase": 15261.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 360,
+    "prezzoBase": 16370.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 410,
+    "prezzoBase": 17479.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 110,
+    "prezzoBase": 8756.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 160,
+    "prezzoBase": 9655.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 210,
+    "prezzoBase": 10553.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 260,
+    "prezzoBase": 11449.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 310,
+    "prezzoBase": 12346.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 360,
+    "prezzoBase": 13246.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 410,
+    "prezzoBase": 14138.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 110,
+    "prezzoBase": 10949.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 160,
+    "prezzoBase": 12104.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 210,
+    "prezzoBase": 13263.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 260,
+    "prezzoBase": 14416.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 310,
+    "prezzoBase": 15574.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 360,
+    "prezzoBase": 16732.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 410,
+    "prezzoBase": 17890.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 110,
+    "prezzoBase": 8856.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 160,
+    "prezzoBase": 9794.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 210,
+    "prezzoBase": 10732.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 260,
+    "prezzoBase": 11665.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 310,
+    "prezzoBase": 12602.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 360,
+    "prezzoBase": 13540.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 410,
+    "prezzoBase": 14474.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 110,
+    "prezzoBase": 11074.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 160,
+    "prezzoBase": 12278.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 210,
+    "prezzoBase": 13482.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 260,
+    "prezzoBase": 14691.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 310,
+    "prezzoBase": 15891.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 360,
+    "prezzoBase": 17093.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 410,
+    "prezzoBase": 18300.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 110,
+    "prezzoBase": 8960.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 160,
+    "prezzoBase": 9933.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 210,
+    "prezzoBase": 10907.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 260,
+    "prezzoBase": 11885.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 310,
+    "prezzoBase": 12857.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 360,
+    "prezzoBase": 13830.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 410,
+    "prezzoBase": 14810.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 110,
+    "prezzoBase": 11458.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 160,
+    "prezzoBase": 12711.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 210,
+    "prezzoBase": 13962.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 260,
+    "prezzoBase": 15212.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 310,
+    "prezzoBase": 16468.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 360,
+    "prezzoBase": 17718.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 410,
+    "prezzoBase": 18969.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 110,
+    "prezzoBase": 9272.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 160,
+    "prezzoBase": 10285.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 210,
+    "prezzoBase": 11296.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 260,
+    "prezzoBase": 12309.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 310,
+    "prezzoBase": 13325.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 360,
+    "prezzoBase": 14337.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 410,
+    "prezzoBase": 15345.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 110,
+    "prezzoBase": 11586.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 160,
+    "prezzoBase": 12885.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 210,
+    "prezzoBase": 14184.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 260,
+    "prezzoBase": 15484.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 310,
+    "prezzoBase": 16782.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 360,
+    "prezzoBase": 18084.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 410,
+    "prezzoBase": 19383.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 110,
+    "prezzoBase": 9376.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 160,
+    "prezzoBase": 10424.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 210,
+    "prezzoBase": 11475.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 260,
+    "prezzoBase": 12528.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 310,
+    "prezzoBase": 13578.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 360,
+    "prezzoBase": 14633.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 410,
+    "prezzoBase": 15683.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 110,
+    "prezzoBase": 11711.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 160,
+    "prezzoBase": 13057.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 210,
+    "prezzoBase": 14407.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 260,
+    "prezzoBase": 15752.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 310,
+    "prezzoBase": 17095.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 360,
+    "prezzoBase": 18448.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 410,
+    "prezzoBase": 19796.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 110,
+    "prezzoBase": 9476.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 160,
+    "prezzoBase": 10564.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 210,
+    "prezzoBase": 11656.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 260,
+    "prezzoBase": 12744.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 310,
+    "prezzoBase": 13832.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 360,
+    "prezzoBase": 14925.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 410,
+    "prezzoBase": 16018.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 110,
+    "prezzoBase": 12359.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 160,
+    "prezzoBase": 13749.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 210,
+    "prezzoBase": 15143.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 260,
+    "prezzoBase": 16540.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 310,
+    "prezzoBase": 17933.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 360,
+    "prezzoBase": 19330.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 410,
+    "prezzoBase": 20724.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 110,
+    "prezzoBase": 10000.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 160,
+    "prezzoBase": 11125.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 210,
+    "prezzoBase": 12251.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 260,
+    "prezzoBase": 13381.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 310,
+    "prezzoBase": 14509.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 360,
+    "prezzoBase": 15639.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 410,
+    "prezzoBase": 16768.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 110,
+    "prezzoBase": 12478.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 160,
+    "prezzoBase": 13923.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 210,
+    "prezzoBase": 15367.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 260,
+    "prezzoBase": 16806.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 310,
+    "prezzoBase": 18253.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 360,
+    "prezzoBase": 19696.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 410,
+    "prezzoBase": 21132.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 110,
+    "prezzoBase": 10097.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 160,
+    "prezzoBase": 11264.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 210,
+    "prezzoBase": 12431.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 260,
+    "prezzoBase": 13600.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 310,
+    "prezzoBase": 14766.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 360,
+    "prezzoBase": 15935.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 410,
+    "prezzoBase": 17097.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 110,
+    "prezzoBase": 12605.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 160,
+    "prezzoBase": 14096.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 210,
+    "prezzoBase": 15587.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 260,
+    "prezzoBase": 17079.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 310,
+    "prezzoBase": 18566.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 360,
+    "prezzoBase": 20055.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 410,
+    "prezzoBase": 21548.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 110,
+    "prezzoBase": 10197.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 160,
+    "prezzoBase": 11405.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 210,
+    "prezzoBase": 12610.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 260,
+    "prezzoBase": 13818.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 310,
+    "prezzoBase": 15022.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 360,
+    "prezzoBase": 16227.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 410,
+    "prezzoBase": 17433.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 110,
+    "prezzoBase": 12730.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 160,
+    "prezzoBase": 14272.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 210,
+    "prezzoBase": 15808.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 260,
+    "prezzoBase": 17347.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 310,
+    "prezzoBase": 18885.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 360,
+    "prezzoBase": 20418.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 410,
+    "prezzoBase": 21960.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 110,
+    "prezzoBase": 10301.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 160,
+    "prezzoBase": 11547.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 210,
+    "prezzoBase": 12790.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 260,
+    "prezzoBase": 14034.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 310,
+    "prezzoBase": 15279.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 360,
+    "prezzoBase": 16521.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 410,
+    "prezzoBase": 17765.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 110,
+    "prezzoBase": 12857.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 160,
+    "prezzoBase": 14444.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 210,
+    "prezzoBase": 16028.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 260,
+    "prezzoBase": 17614.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 310,
+    "prezzoBase": 19196.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 20782.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 410,
+    "prezzoBase": 22368.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 110,
+    "prezzoBase": 10403.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 160,
+    "prezzoBase": 11686.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 210,
+    "prezzoBase": 12968.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 260,
+    "prezzoBase": 14251.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 310,
+    "prezzoBase": 15532.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 16815.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 410,
+    "prezzoBase": 18098.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 110,
+    "prezzoBase": 12985.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 160,
+    "prezzoBase": 14619.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 210,
+    "prezzoBase": 16250.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 260,
+    "prezzoBase": 17883.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 310,
+    "prezzoBase": 19517.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 360,
+    "prezzoBase": 21152.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 410,
+    "prezzoBase": 22778.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 110,
+    "prezzoBase": 10505.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 160,
+    "prezzoBase": 11825.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 210,
+    "prezzoBase": 13149.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 260,
+    "prezzoBase": 14469.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 310,
+    "prezzoBase": 15789.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 360,
+    "prezzoBase": 17114.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STANDARD_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 410,
+    "prezzoBase": 18432.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 10312.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 10898.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 11488.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 12072.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 12656.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 13242.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 13825.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 8156.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 8620.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 9085.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 9550.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 10009.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 10474.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 10935.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 10439.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 11074.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 11709.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 12973.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 13605.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 14238.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 8256.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 8758.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 9263.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 9757.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 10259.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 10761.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 11262.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 10828.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 11507.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 12184.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 12867.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 13552.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 14224.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 14909.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 8562.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 9099.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 9638.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 10178.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 10717.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 11250.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 11792.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 10952.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 11681.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 12406.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 13135.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 13864.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 14590.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 15317.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 8661.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 9236.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 9812.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 10388.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 10965.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 11539.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 12116.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 110,
+    "prezzoBase": 11076.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 160,
+    "prezzoBase": 11854.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 210,
+    "prezzoBase": 12628.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 260,
+    "prezzoBase": 13402.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 310,
+    "prezzoBase": 14182.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 360,
+    "prezzoBase": 14956.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 410,
+    "prezzoBase": 15731.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 110,
+    "prezzoBase": 8760.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 160,
+    "prezzoBase": 9376.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 210,
+    "prezzoBase": 9990.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 260,
+    "prezzoBase": 10602.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 310,
+    "prezzoBase": 11216.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 360,
+    "prezzoBase": 11827.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 410,
+    "prezzoBase": 12440.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 110,
+    "prezzoBase": 11463.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 160,
+    "prezzoBase": 12283.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 210,
+    "prezzoBase": 13108.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 260,
+    "prezzoBase": 13930.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 310,
+    "prezzoBase": 14758.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 360,
+    "prezzoBase": 15578.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 410,
+    "prezzoBase": 16403.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 110,
+    "prezzoBase": 9068.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 160,
+    "prezzoBase": 9715.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 210,
+    "prezzoBase": 10370.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 260,
+    "prezzoBase": 11019.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 310,
+    "prezzoBase": 11672.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 360,
+    "prezzoBase": 12320.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 410,
+    "prezzoBase": 12973.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 110,
+    "prezzoBase": 11588.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 160,
+    "prezzoBase": 12459.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 210,
+    "prezzoBase": 13330.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 260,
+    "prezzoBase": 14205.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 310,
+    "prezzoBase": 15071.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 360,
+    "prezzoBase": 15944.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 410,
+    "prezzoBase": 16815.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 110,
+    "prezzoBase": 9166.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 160,
+    "prezzoBase": 9854.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 210,
+    "prezzoBase": 10541.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 260,
+    "prezzoBase": 11234.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 310,
+    "prezzoBase": 11920.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 360,
+    "prezzoBase": 12610.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 410,
+    "prezzoBase": 13299.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 110,
+    "prezzoBase": 11713.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 160,
+    "prezzoBase": 12632.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 210,
+    "prezzoBase": 13554.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 260,
+    "prezzoBase": 14469.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 310,
+    "prezzoBase": 15386.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 360,
+    "prezzoBase": 16306.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 410,
+    "prezzoBase": 17225.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 110,
+    "prezzoBase": 9265.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 160,
+    "prezzoBase": 9992.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 210,
+    "prezzoBase": 10718.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 260,
+    "prezzoBase": 11444.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 310,
+    "prezzoBase": 12169.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 360,
+    "prezzoBase": 12897.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 410,
+    "prezzoBase": 13624.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 110,
+    "prezzoBase": 12098.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 160,
+    "prezzoBase": 13066.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 210,
+    "prezzoBase": 14031.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 260,
+    "prezzoBase": 15000.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 310,
+    "prezzoBase": 15965.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 360,
+    "prezzoBase": 16929.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 410,
+    "prezzoBase": 17896.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 110,
+    "prezzoBase": 9569.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 160,
+    "prezzoBase": 10331.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 210,
+    "prezzoBase": 11099.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 260,
+    "prezzoBase": 11862.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 310,
+    "prezzoBase": 12626.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 360,
+    "prezzoBase": 13387.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 410,
+    "prezzoBase": 14156.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 110,
+    "prezzoBase": 12227.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 160,
+    "prezzoBase": 13239.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 210,
+    "prezzoBase": 14251.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 260,
+    "prezzoBase": 15268.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 310,
+    "prezzoBase": 16282.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 360,
+    "prezzoBase": 17290.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 410,
+    "prezzoBase": 18313.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 110,
+    "prezzoBase": 9671.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 160,
+    "prezzoBase": 10470.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 210,
+    "prezzoBase": 11271.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 260,
+    "prezzoBase": 12074.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 310,
+    "prezzoBase": 12878.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 360,
+    "prezzoBase": 13675.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 410,
+    "prezzoBase": 14481.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 110,
+    "prezzoBase": 12346.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 160,
+    "prezzoBase": 13411.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 210,
+    "prezzoBase": 14472.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 260,
+    "prezzoBase": 15537.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 310,
+    "prezzoBase": 16597.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 360,
+    "prezzoBase": 17660.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 410,
+    "prezzoBase": 18721.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 110,
+    "prezzoBase": 9764.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 160,
+    "prezzoBase": 10606.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 210,
+    "prezzoBase": 11445.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 260,
+    "prezzoBase": 12287.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 310,
+    "prezzoBase": 13128.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 360,
+    "prezzoBase": 13967.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 410,
+    "prezzoBase": 14809.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 110,
+    "prezzoBase": 12732.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 160,
+    "prezzoBase": 13844.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 210,
+    "prezzoBase": 14955.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 260,
+    "prezzoBase": 16060.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 310,
+    "prezzoBase": 17172.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 360,
+    "prezzoBase": 18279.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 410,
+    "prezzoBase": 19388.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 110,
+    "prezzoBase": 10071.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 160,
+    "prezzoBase": 10951.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 210,
+    "prezzoBase": 11825.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 260,
+    "prezzoBase": 12704.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 310,
+    "prezzoBase": 13580.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 360,
+    "prezzoBase": 14458.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 410,
+    "prezzoBase": 15333.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 110,
+    "prezzoBase": 12860.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 160,
+    "prezzoBase": 14015.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 210,
+    "prezzoBase": 15176.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 260,
+    "prezzoBase": 16331.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 310,
+    "prezzoBase": 17489.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 360,
+    "prezzoBase": 18645.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 410,
+    "prezzoBase": 19800.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 110,
+    "prezzoBase": 10169.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 160,
+    "prezzoBase": 11084.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 210,
+    "prezzoBase": 12001.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 260,
+    "prezzoBase": 12917.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 310,
+    "prezzoBase": 13830.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 360,
+    "prezzoBase": 14747.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 410,
+    "prezzoBase": 15660.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 110,
+    "prezzoBase": 12987.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 160,
+    "prezzoBase": 14187.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 210,
+    "prezzoBase": 15398.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 260,
+    "prezzoBase": 16599.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 310,
+    "prezzoBase": 17804.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 360,
+    "prezzoBase": 19008.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 410,
+    "prezzoBase": 20214.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 110,
+    "prezzoBase": 10271.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 160,
+    "prezzoBase": 11222.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 210,
+    "prezzoBase": 12179.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 260,
+    "prezzoBase": 13130.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 310,
+    "prezzoBase": 14082.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 360,
+    "prezzoBase": 15032.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 410,
+    "prezzoBase": 15986.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 110,
+    "prezzoBase": 13371.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 160,
+    "prezzoBase": 14622.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 210,
+    "prezzoBase": 15877.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 260,
+    "prezzoBase": 17127.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 310,
+    "prezzoBase": 18380.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 360,
+    "prezzoBase": 19629.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 410,
+    "prezzoBase": 20886.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 110,
+    "prezzoBase": 10574.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 160,
+    "prezzoBase": 11567.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 210,
+    "prezzoBase": 12556.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 260,
+    "prezzoBase": 13545.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 310,
+    "prezzoBase": 14536.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 360,
+    "prezzoBase": 15523.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 410,
+    "prezzoBase": 16519.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 110,
+    "prezzoBase": 13497.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 160,
+    "prezzoBase": 14796.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 210,
+    "prezzoBase": 16097.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 260,
+    "prezzoBase": 17398.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 310,
+    "prezzoBase": 18698.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 360,
+    "prezzoBase": 19994.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 410,
+    "prezzoBase": 21294.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 110,
+    "prezzoBase": 10674.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 160,
+    "prezzoBase": 11700.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 210,
+    "prezzoBase": 12728.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 260,
+    "prezzoBase": 13758.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 310,
+    "prezzoBase": 14786.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 360,
+    "prezzoBase": 15814.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 410,
+    "prezzoBase": 16841.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 110,
+    "prezzoBase": 13624.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 160,
+    "prezzoBase": 14969.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 210,
+    "prezzoBase": 16319.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 260,
+    "prezzoBase": 17667.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 310,
+    "prezzoBase": 19013.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 360,
+    "prezzoBase": 20358.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 410,
+    "prezzoBase": 21704.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 110,
+    "prezzoBase": 10776.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 160,
+    "prezzoBase": 11841.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 210,
+    "prezzoBase": 12904.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 260,
+    "prezzoBase": 13973.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 310,
+    "prezzoBase": 15037.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 360,
+    "prezzoBase": 16102.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 410,
+    "prezzoBase": 17167.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 110,
+    "prezzoBase": 14270.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 160,
+    "prezzoBase": 15660.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 210,
+    "prezzoBase": 17058.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 260,
+    "prezzoBase": 18450.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 310,
+    "prezzoBase": 19846.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 360,
+    "prezzoBase": 21241.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 410,
+    "prezzoBase": 22635.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 110,
+    "prezzoBase": 11285.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 160,
+    "prezzoBase": 12385.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 210,
+    "prezzoBase": 13490.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 110,
+    "prezzoBase": 14393.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 160,
+    "prezzoBase": 15835.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 210,
+    "prezzoBase": 17280.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 260,
+    "prezzoBase": 18721.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 310,
+    "prezzoBase": 20163.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 360,
+    "prezzoBase": 21606.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 410,
+    "prezzoBase": 23052.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 110,
+    "prezzoBase": 11384.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 160,
+    "prezzoBase": 12522.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 210,
+    "prezzoBase": 13666.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 260,
+    "prezzoBase": 14809.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 310,
+    "prezzoBase": 15946.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 360,
+    "prezzoBase": 17086.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 410,
+    "prezzoBase": 18232.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 110,
+    "prezzoBase": 14520.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 160,
+    "prezzoBase": 16007.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 210,
+    "prezzoBase": 17498.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 260,
+    "prezzoBase": 18990.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 310,
+    "prezzoBase": 20478.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 360,
+    "prezzoBase": 21968.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 410,
+    "prezzoBase": 23459.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 110,
+    "prezzoBase": 11486.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 160,
+    "prezzoBase": 12660.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 210,
+    "prezzoBase": 13837.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 260,
+    "prezzoBase": 15020.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 310,
+    "prezzoBase": 16197.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 360,
+    "prezzoBase": 17375.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 410,
+    "prezzoBase": 18554.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 110,
+    "prezzoBase": 14645.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 160,
+    "prezzoBase": 16178.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 210,
+    "prezzoBase": 17718.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 260,
+    "prezzoBase": 19256.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 310,
+    "prezzoBase": 20796.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 360,
+    "prezzoBase": 22329.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 410,
+    "prezzoBase": 23873.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 110,
+    "prezzoBase": 11583.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 160,
+    "prezzoBase": 12797.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 210,
+    "prezzoBase": 14013.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 260,
+    "prezzoBase": 15228.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 310,
+    "prezzoBase": 16447.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 360,
+    "prezzoBase": 17660.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 410,
+    "prezzoBase": 18881.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 110,
+    "prezzoBase": 14768.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 160,
+    "prezzoBase": 16352.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 210,
+    "prezzoBase": 17940.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 260,
+    "prezzoBase": 19525.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 310,
+    "prezzoBase": 21115.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 22697.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 410,
+    "prezzoBase": 24283.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 110,
+    "prezzoBase": 11683.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 160,
+    "prezzoBase": 12934.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 210,
+    "prezzoBase": 14189.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 260,
+    "prezzoBase": 15440.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 310,
+    "prezzoBase": 16701.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 17952.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 410,
+    "prezzoBase": 19205.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 110,
+    "prezzoBase": 14897.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 160,
+    "prezzoBase": 16528.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 210,
+    "prezzoBase": 18161.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 260,
+    "prezzoBase": 19796.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 310,
+    "prezzoBase": 21428.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 360,
+    "prezzoBase": 23061.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 410,
+    "prezzoBase": 24691.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 110,
+    "prezzoBase": 11780.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 160,
+    "prezzoBase": 13073.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 210,
+    "prezzoBase": 14365.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 260,
+    "prezzoBase": 15657.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 310,
+    "prezzoBase": 16949.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 360,
+    "prezzoBase": 18239.0
+  },
+  {
+    "tipologia": "SOLARIA_PARETE_STAR_AFFIANCATA",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 410,
+    "prezzoBase": 19529.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 6487.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 7073.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 7660.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 8246.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 8835.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 9416.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 10002.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 110,
+    "prezzoBase": 9187.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 160,
+    "prezzoBase": 9773.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 210,
+    "prezzoBase": 10359.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 260,
+    "prezzoBase": 10945.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 310,
+    "prezzoBase": 11535.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 360,
+    "prezzoBase": 12116.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 143,
+    "larghezzaMm": 410,
+    "prezzoBase": 12702.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 6618.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 7248.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 7883.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 8515.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 9147.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 9779.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 10412.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 110,
+    "prezzoBase": 9317.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 9948.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 210,
+    "prezzoBase": 10583.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 260,
+    "prezzoBase": 11215.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 11847.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 360,
+    "prezzoBase": 12478.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 410,
+    "prezzoBase": 13112.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 6998.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 7682.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 8362.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 9041.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 9722.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 10405.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 11083.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 110,
+    "prezzoBase": 9698.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 160,
+    "prezzoBase": 10382.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 210,
+    "prezzoBase": 11062.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 260,
+    "prezzoBase": 11741.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 310,
+    "prezzoBase": 12422.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 360,
+    "prezzoBase": 13105.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 177,
+    "larghezzaMm": 410,
+    "prezzoBase": 13783.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 7128.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 7850.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 8580.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 9310.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 10041.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 10771.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 11495.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 110,
+    "prezzoBase": 9828.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 160,
+    "prezzoBase": 10549.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 210,
+    "prezzoBase": 11280.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 260,
+    "prezzoBase": 12010.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 310,
+    "prezzoBase": 12741.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 360,
+    "prezzoBase": 13471.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO_TIRANTI",
+    "colore": "STANDARD",
+    "altezzaMm": 194,
+    "larghezzaMm": 410,
+    "prezzoBase": 14194.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 110,
+    "prezzoBase": 7251.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 160,
+    "prezzoBase": 8026.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 210,
+    "prezzoBase": 8805.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 260,
+    "prezzoBase": 9578.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 310,
+    "prezzoBase": 10354.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 360,
+    "prezzoBase": 11136.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 211,
+    "larghezzaMm": 410,
+    "prezzoBase": 11910.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 110,
+    "prezzoBase": 7640.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 160,
+    "prezzoBase": 8459.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 210,
+    "prezzoBase": 9286.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 260,
+    "prezzoBase": 10108.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 310,
+    "prezzoBase": 10933.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 360,
+    "prezzoBase": 11757.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 228,
+    "larghezzaMm": 410,
+    "prezzoBase": 12575.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 110,
+    "prezzoBase": 7760.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 160,
+    "prezzoBase": 8633.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 210,
+    "prezzoBase": 9504.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 260,
+    "prezzoBase": 10375.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 310,
+    "prezzoBase": 11246.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 360,
+    "prezzoBase": 12119.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 245,
+    "larghezzaMm": 410,
+    "prezzoBase": 12989.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 110,
+    "prezzoBase": 7888.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 160,
+    "prezzoBase": 8807.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 210,
+    "prezzoBase": 9724.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 260,
+    "prezzoBase": 10646.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 310,
+    "prezzoBase": 11567.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 360,
+    "prezzoBase": 12482.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 262,
+    "larghezzaMm": 410,
+    "prezzoBase": 13399.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 110,
+    "prezzoBase": 8272.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 160,
+    "prezzoBase": 9235.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 210,
+    "prezzoBase": 10204.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 260,
+    "prezzoBase": 11172.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 310,
+    "prezzoBase": 12139.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 360,
+    "prezzoBase": 13107.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 279,
+    "larghezzaMm": 410,
+    "prezzoBase": 14071.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 110,
+    "prezzoBase": 8399.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 160,
+    "prezzoBase": 9412.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 210,
+    "prezzoBase": 10426.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 260,
+    "prezzoBase": 11440.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 310,
+    "prezzoBase": 12457.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 360,
+    "prezzoBase": 13469.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 296,
+    "larghezzaMm": 410,
+    "prezzoBase": 14481.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 110,
+    "prezzoBase": 8525.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 160,
+    "prezzoBase": 9587.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 210,
+    "prezzoBase": 10652.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 260,
+    "prezzoBase": 11711.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 310,
+    "prezzoBase": 12771.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 360,
+    "prezzoBase": 13835.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 313,
+    "larghezzaMm": 410,
+    "prezzoBase": 14897.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 110,
+    "prezzoBase": 8907.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 160,
+    "prezzoBase": 10016.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 210,
+    "prezzoBase": 11128.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 260,
+    "prezzoBase": 12239.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 310,
+    "prezzoBase": 13350.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 360,
+    "prezzoBase": 14460.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 330,
+    "larghezzaMm": 410,
+    "prezzoBase": 15569.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 110,
+    "prezzoBase": 9038.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 160,
+    "prezzoBase": 10192.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 210,
+    "prezzoBase": 11345.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 260,
+    "prezzoBase": 12505.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 310,
+    "prezzoBase": 13665.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 360,
+    "prezzoBase": 14823.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 347,
+    "larghezzaMm": 410,
+    "prezzoBase": 15977.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 110,
+    "prezzoBase": 9163.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 160,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 210,
+    "prezzoBase": 11570.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 260,
+    "prezzoBase": 12776.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 310,
+    "prezzoBase": 13981.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 360,
+    "prezzoBase": 15185.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 364,
+    "larghezzaMm": 410,
+    "prezzoBase": 16389.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 110,
+    "prezzoBase": 9550.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 160,
+    "prezzoBase": 10798.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 210,
+    "prezzoBase": 12052.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 260,
+    "prezzoBase": 13302.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 310,
+    "prezzoBase": 14555.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 360,
+    "prezzoBase": 15808.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 381,
+    "larghezzaMm": 410,
+    "prezzoBase": 17060.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 110,
+    "prezzoBase": 9675.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 160,
+    "prezzoBase": 10974.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 210,
+    "prezzoBase": 12274.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 260,
+    "prezzoBase": 13571.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 310,
+    "prezzoBase": 14870.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 360,
+    "prezzoBase": 16171.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 398,
+    "larghezzaMm": 410,
+    "prezzoBase": 17472.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 110,
+    "prezzoBase": 9800.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 160,
+    "prezzoBase": 11144.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 210,
+    "prezzoBase": 12494.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 260,
+    "prezzoBase": 13842.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 415,
+    "larghezzaMm": 310,
+    "prezzoBase": 15187.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 110,
+    "prezzoBase": 10440.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 160,
+    "prezzoBase": 11838.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 210,
+    "prezzoBase": 13232.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 260,
+    "prezzoBase": 14631.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 310,
+    "prezzoBase": 16023.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 360,
+    "prezzoBase": 17420.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 432,
+    "larghezzaMm": 410,
+    "prezzoBase": 18811.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 110,
+    "prezzoBase": 10567.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 160,
+    "prezzoBase": 12012.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 210,
+    "prezzoBase": 13455.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 260,
+    "prezzoBase": 14897.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 310,
+    "prezzoBase": 16340.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 360,
+    "prezzoBase": 17780.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 449,
+    "larghezzaMm": 410,
+    "prezzoBase": 19221.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 110,
+    "prezzoBase": 10692.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 160,
+    "prezzoBase": 12184.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 210,
+    "prezzoBase": 13673.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 260,
+    "prezzoBase": 15166.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 310,
+    "prezzoBase": 16657.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 360,
+    "prezzoBase": 18146.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 466,
+    "larghezzaMm": 410,
+    "prezzoBase": 19635.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 110,
+    "prezzoBase": 10822.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 160,
+    "prezzoBase": 12360.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 210,
+    "prezzoBase": 13893.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 260,
+    "prezzoBase": 15433.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 310,
+    "prezzoBase": 16972.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 360,
+    "prezzoBase": 18510.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 483,
+    "larghezzaMm": 410,
+    "prezzoBase": 20046.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 110,
+    "prezzoBase": 10944.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 160,
+    "prezzoBase": 12531.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 210,
+    "prezzoBase": 14115.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 260,
+    "prezzoBase": 15699.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 310,
+    "prezzoBase": 17287.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 360,
+    "prezzoBase": 18872.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 500,
+    "larghezzaMm": 410,
+    "prezzoBase": 20460.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 110,
+    "prezzoBase": 11070.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 160,
+    "prezzoBase": 12705.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 210,
+    "prezzoBase": 14339.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 260,
+    "prezzoBase": 15968.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 310,
+    "prezzoBase": 17604.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 360,
+    "prezzoBase": 19239.0
+  },
+  {
+    "tipologia": "SOLARIA_PATIO",
+    "colore": "STANDARD",
+    "altezzaMm": 517,
+    "larghezzaMm": 410,
+    "prezzoBase": 20870.0
+  }
+]

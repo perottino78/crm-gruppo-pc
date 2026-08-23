@@ -2,7 +2,7 @@
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
 // compatibilità, ma il valore va interpretato secondo questa unità.
-const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_"];
+const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -17,6 +17,7 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("NUVOLA_")) return "NUVOLA";
   if (tipologia.startsWith("PANAREA_")) return "PANAREA";
   if (tipologia.startsWith("WAWE_")) return "WAWE";
+  if (tipologia.startsWith("SOLARIA_")) return "SOLARIA";
   return null;
 }
 
