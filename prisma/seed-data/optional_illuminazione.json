@@ -474,5 +474,47 @@
       "PERGOLE",
       "BIOCLIMATICA"
     ]
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Beta — 24m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 3585,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Sirio — 24m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 5859,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 24m",
+    "tipoPrezzo": "FISSO",
+    "valore": 2381,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino.",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
   }
 ]
