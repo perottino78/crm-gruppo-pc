@@ -298,6 +298,35 @@ export async function salvaModelloProdotto(formData: FormData) {
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
+export async function aggiornaPermessiBrand(formData: FormData) {
+  const utenteId = str(formData, "utenteId");
+  if (!utenteId) return;
+  const brandIds = formData.getAll("brandIds").map((v) => String(v));
+  await prisma.utente.update({
+    where: { id: utenteId },
+    data: { brandAutorizzati: { set: brandIds.map((id) => ({ id })) } },
+  });
+  revalidatePath(`/commerciali/${utenteId}`);
+  revalidatePath("/commerciali");
+}
+
+export async function impostaObiettivo(formData: FormData) {
+  const utenteId = str(formData, "utenteId");
+  const periodo = str(formData, "periodo");
+  const importoStr = str(formData, "importoTarget");
+  if (!utenteId || !periodo || !importoStr) return;
+  const importoTarget = parseFloat(importoStr.replace(",", "."));
+  if (!Number.isFinite(importoTarget)) return;
+  const note = str(formData, "note");
+
+  await prisma.obiettivo.upsert({
+    where: { utenteId_periodo: { utenteId, periodo } },
+    create: { utenteId, periodo, importoTarget, note },
+    update: { importoTarget, note },
+  });
+  revalidatePath(`/commerciali/${utenteId}`);
+}
+
 export async function toggleDescrizioneRiga(formData: FormData) {
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");

@@ -1,0 +1,138 @@
+[
+  {
+    "tipologia": "75.ST02AG",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 2500.0,
+    "descrizione": "Microfiltrazione doppio stadio (con rubinetto monovia inox 304)"
+  },
+  {
+    "tipologia": "76.ST02AG",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 2900.0,
+    "descrizione": "Microfiltrazione triplo stadio (con rubinetto monovia inox 304)"
+  },
+  {
+    "tipologia": "73.AIM01",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 4098.0,
+    "descrizione": "Nova Smart — microfiltrazione fredda gasata naturale sottolavello"
+  },
+  {
+    "tipologia": "73.X2TOP.BKS",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 4098.0,
+    "descrizione": "Spark Duo"
+  },
+  {
+    "tipologia": "PF-01",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 3500.0,
+    "descrizione": "Micro FL100 LCD — osmosi inversa"
+  },
+  {
+    "tipologia": "73.AIC03L.BKS",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 4508.0,
+    "descrizione": "Cosmo Smart AI 03L E-Tap nero/satinato"
+  },
+  {
+    "tipologia": "915.BE03LUN001S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 350.0,
+    "descrizione": "Rubinetto 3 vie E-Tap mono — canna curva"
+  },
+  {
+    "tipologia": "915.BE03LUN00IS",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 210.0,
+    "descrizione": "Rubinetto 3 vie E-Tap mono — canna corta"
+  },
+  {
+    "tipologia": "915.BE2ELDE00IS",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 350.0,
+    "descrizione": "Miscelatore MED 5 vie E-Tap estraibile"
+  },
+  {
+    "tipologia": "915.bm21cvs01ls",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 350.0,
+    "descrizione": "Miscelatore C 3 vie inox satinato"
+  },
+  {
+    "tipologia": "915BM21DVS04LS",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 420.0,
+    "descrizione": "Miscelatore CROS 3 vie doccetta flessibile inox satinato"
+  },
+  {
+    "tipologia": "7K.ICO2ACME",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 114.0,
+    "descrizione": "Kit installazione CO2 ACME per erogatori Clik soda"
+  },
+  {
+    "tipologia": "7A.CO2N100ACME",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 123.0,
+    "descrizione": "Cilindro CO2 Clik nuovo da 1 kg"
+  },
+  {
+    "tipologia": "7F.CB05AG",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 80.0,
+    "descrizione": "Filtro Click — CB 05 AG"
+  },
+  {
+    "tipologia": "7F.CB05AG.P",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 90.0,
+    "descrizione": "Filtro Click — CB 05 AG + Puro"
+  },
+  {
+    "tipologia": "7F.PP50",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 60.0,
+    "descrizione": "Filtro Click — PP50"
+  },
+  {
+    "tipologia": "7F.PU501",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 85.0,
+    "descrizione": "Filtro Click — PU501"
+  }
+]

@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import { aggiornaConfigurazione, creaUtente } from "@/app/actions";
+import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
@@ -55,13 +56,13 @@ export default async function ImpostazioniPage() {
       <h2 className="text-sm font-medium text-neutral-700 mb-3">Utenti e ruoli</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
         {utenti.map((u) => (
-          <div key={u.id} className="flex items-center justify-between px-4 py-3 text-sm">
+          <Link key={u.id} href={`/commerciali/${u.id}`} className="flex items-center justify-between px-4 py-3 text-sm hover:bg-neutral-50">
             <div>
-              <p>{u.nome}</p>
+              <p className="text-blue-700">{u.nome}</p>
               <p className="text-xs text-neutral-400">{u.email}</p>
             </div>
             <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{u.ruolo}</span>
-          </div>
+          </Link>
         ))}
       </div>
 

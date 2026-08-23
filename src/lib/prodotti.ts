@@ -23,3 +23,7 @@ export function etichetteDimensioni(tipologia: string): { larghezza: string; alt
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }
+
+export function haMisura(larghezza: number, altezza: number): boolean {
+  return larghezza > 0 || altezza > 0;
+}

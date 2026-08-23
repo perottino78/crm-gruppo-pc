@@ -24,6 +24,7 @@ model Brand {
   preventivi Preventivo[]
   optionali Optional[]
   modelli   ModelloProdotto[]
+  utentiAutorizzati Utente[] @relation("PermessoListino")
 }
 
 model Utente {
@@ -36,6 +37,9 @@ model Utente {
   appuntamenti  Appuntamento[]
   preventivi    Preventivo[]
   attivita      Attivita[]
+  obiettivi     Obiettivo[]
+  // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
+  brandAutorizzati Brand[] @relation("PermessoListino")
 }
 
 model Lead {
@@ -219,4 +223,17 @@ model ModelloProdotto {
   gruppo             String?
 
   @@unique([brandId, tipologia])
+}
+
+// Obiettivo commerciale periodico (target di vendita), assegnato dall'amministratore
+model Obiettivo {
+  id            String   @id @default(cuid())
+  utente        Utente   @relation(fields: [utenteId], references: [id])
+  utenteId      String
+  periodo       String   // formato "YYYY-MM"
+  importoTarget Float
+  note          String?
+  createdAt     DateTime @default(now())
+
+  @@unique([utenteId, periodo])
 }

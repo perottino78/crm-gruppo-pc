@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura } from "@/lib/prodotti";
+import { unitaMisura, haMisura } from "@/lib/prodotti";
 import PrintButton from "@/components/PrintButton";
 
 export default async function StampaPreventivoPage({
@@ -103,7 +103,8 @@ export default async function StampaPreventivoPage({
                     <div>
                       <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
                       <p className="text-xs text-neutral-400">
-                        colore {r.prodotto.colore} · {larghezzaMostrata}×{altezzaMostrata}{unit}
+                        colore {r.prodotto.colore}
+                        {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       </p>
                       {mostraScheda && descrizioneEffettiva && (
                         <p className="text-xs text-neutral-500 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>

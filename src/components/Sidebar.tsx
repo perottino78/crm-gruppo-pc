@@ -9,6 +9,7 @@ const moduli = [
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
+  { href: "/commerciali", label: "Team & performance", icon: "🏆" },
   { href: "/report", label: "Report", icon: "📊" },
   { href: "/impostazioni", label: "Impostazioni", icon: "⚙️" },
 ];

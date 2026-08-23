@@ -1,0 +1,121 @@
+[
+  {
+    "tipologia": "75.ST02AG",
+    "immagineUrl": "/immagini/purafonte/75.ST02AG.png",
+    "descrizioneTecnica": "Microfiltrazione doppio stadio (con rubinetto monovia inox 304)",
+    "famiglia": "PURAFONTE",
+    "gruppo": "MICROFILTRAZIONE"
+  },
+  {
+    "tipologia": "76.ST02AG",
+    "immagineUrl": "/immagini/purafonte/76.ST02AG.png",
+    "descrizioneTecnica": "Microfiltrazione triplo stadio (con rubinetto monovia inox 304)",
+    "famiglia": "PURAFONTE",
+    "gruppo": "MICROFILTRAZIONE"
+  },
+  {
+    "tipologia": "73.AIM01",
+    "immagineUrl": "/immagini/purafonte/73.AIM01.png",
+    "descrizioneTecnica": "Nova Smart — microfiltrazione fredda gasata naturale sottolavello",
+    "famiglia": "PURAFONTE",
+    "gruppo": "MICROFILTRAZIONE"
+  },
+  {
+    "tipologia": "73.X2TOP.BKS",
+    "immagineUrl": "/immagini/purafonte/73.X2TOP.BKS.png",
+    "descrizioneTecnica": "Spark Duo",
+    "famiglia": "PURAFONTE",
+    "gruppo": "MICROFILTRAZIONE"
+  },
+  {
+    "tipologia": "PF-01",
+    "immagineUrl": "/immagini/purafonte/PF-01.png",
+    "descrizioneTecnica": "Micro FL100 LCD — osmosi inversa",
+    "famiglia": "PURAFONTE",
+    "gruppo": "OSMOSI"
+  },
+  {
+    "tipologia": "73.AIC03L.BKS",
+    "immagineUrl": "/immagini/purafonte/73.AIC03L.BKS.png",
+    "descrizioneTecnica": "Cosmo Smart AI 03L E-Tap nero/satinato",
+    "famiglia": "PURAFONTE",
+    "gruppo": "OSMOSI"
+  },
+  {
+    "tipologia": "915.BE03LUN001S",
+    "immagineUrl": "/immagini/purafonte/915.BE03LUN001S.png",
+    "descrizioneTecnica": "Rubinetto 3 vie E-Tap mono — canna curva",
+    "famiglia": "PURAFONTE",
+    "gruppo": "RUBINETTERIA"
+  },
+  {
+    "tipologia": "915.BE03LUN00IS",
+    "immagineUrl": "/immagini/purafonte/915.BE03LUN00IS.png",
+    "descrizioneTecnica": "Rubinetto 3 vie E-Tap mono — canna corta",
+    "famiglia": "PURAFONTE",
+    "gruppo": "RUBINETTERIA"
+  },
+  {
+    "tipologia": "915.BE2ELDE00IS",
+    "immagineUrl": "/immagini/purafonte/915.BE2ELDE00IS.png",
+    "descrizioneTecnica": "Miscelatore MED 5 vie E-Tap estraibile",
+    "famiglia": "PURAFONTE",
+    "gruppo": "RUBINETTERIA"
+  },
+  {
+    "tipologia": "915.bm21cvs01ls",
+    "immagineUrl": "/immagini/purafonte/915.bm21cvs01ls.png",
+    "descrizioneTecnica": "Miscelatore C 3 vie inox satinato",
+    "famiglia": "PURAFONTE",
+    "gruppo": "RUBINETTERIA"
+  },
+  {
+    "tipologia": "915BM21DVS04LS",
+    "immagineUrl": "/immagini/purafonte/915BM21DVS04LS.png",
+    "descrizioneTecnica": "Miscelatore CROS 3 vie doccetta flessibile inox satinato",
+    "famiglia": "PURAFONTE",
+    "gruppo": "RUBINETTERIA"
+  },
+  {
+    "tipologia": "7K.ICO2ACME",
+    "immagineUrl": "/immagini/purafonte/7K.ICO2ACME.png",
+    "descrizioneTecnica": "Kit installazione CO2 ACME per erogatori Clik soda",
+    "famiglia": "PURAFONTE",
+    "gruppo": "ACCESSORI CO2"
+  },
+  {
+    "tipologia": "7A.CO2N100ACME",
+    "immagineUrl": "/immagini/purafonte/7A.CO2N100ACME.png",
+    "descrizioneTecnica": "Cilindro CO2 Clik nuovo da 1 kg",
+    "famiglia": "PURAFONTE",
+    "gruppo": "ACCESSORI CO2"
+  },
+  {
+    "tipologia": "7F.CB05AG",
+    "immagineUrl": "/immagini/purafonte/7F.CB05AG.png",
+    "descrizioneTecnica": "Filtro Click — CB 05 AG",
+    "famiglia": "PURAFONTE",
+    "gruppo": "FILTRI"
+  },
+  {
+    "tipologia": "7F.CB05AG.P",
+    "immagineUrl": "/immagini/purafonte/7F.CB05AG.P.png",
+    "descrizioneTecnica": "Filtro Click — CB 05 AG + Puro",
+    "famiglia": "PURAFONTE",
+    "gruppo": "FILTRI"
+  },
+  {
+    "tipologia": "7F.PP50",
+    "immagineUrl": "/immagini/purafonte/7F.PP50.png",
+    "descrizioneTecnica": "Filtro Click — PP50",
+    "famiglia": "PURAFONTE",
+    "gruppo": "FILTRI"
+  },
+  {
+    "tipologia": "7F.PU501",
+    "immagineUrl": "/immagini/purafonte/7F.PU501.png",
+    "descrizioneTecnica": "Filtro Click — PU501",
+    "famiglia": "PURAFONTE",
+    "gruppo": "FILTRI"
+  }
+]

@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura } from "@/lib/prodotti";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -161,7 +161,8 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {r.prodotto.tipologia} · {r.prodotto.colore} · {larghezzaMostrata}×{altezzaMostrata}{unit}
+                      {r.prodotto.tipologia} · {r.prodotto.colore}
+                      {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {r.misuraLarghezza && (
                         <span className="text-neutral-400 font-normal"> (fascia listino {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unit})</span>
                       )}
@@ -325,7 +326,10 @@ export default async function PreventivoPage({
                 >
                   <input type="hidden" name="preventivoId" value={preventivo.id} />
                   <input type="hidden" name="prodottoId" value={p.id} />
-                  <span className="flex-1">{p.tipologia} · {p.colore} · {p.larghezzaMm}×{p.altezzaMm}{unitaMisura(p.tipologia)}</span>
+                  <span className="flex-1">
+                    {p.tipologia} · {p.colore}
+                    {haMisura(p.larghezzaMm, p.altezzaMm) && ` · ${p.larghezzaMm}×${p.altezzaMm}${unitaMisura(p.tipologia)}`}
+                  </span>
                   <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-14" />
                   <input
                     name="prezzoUnitario"

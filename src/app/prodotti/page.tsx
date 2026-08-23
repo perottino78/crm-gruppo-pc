@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import BrandSwitcher from "@/components/BrandSwitcher";
-import { unitaMisura } from "@/lib/prodotti";
+import { unitaMisura, haMisura } from "@/lib/prodotti";
 import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
 
 export default async function ProdottiPage({
@@ -235,7 +235,9 @@ export default async function ProdottiPage({
                     {r.modello?.famiglia ? `${r.modello.famiglia} · ${r.modello.gruppo ?? ""}` : "—"}
                   </td>
                   <td className="px-4 py-2 text-neutral-500 text-xs">
-                    {r.larghezzaMin}–{r.larghezzaMax} × {r.altezzaMin}–{r.altezzaMax} {unit}
+                    {haMisura(r.larghezzaMax, r.altezzaMax)
+                      ? `${r.larghezzaMin}–${r.larghezzaMax} × ${r.altezzaMin}–${r.altezzaMax} ${unit}`
+                      : "prezzo fisso (senza misura)"}
                   </td>
                   <td className="px-4 py-2 text-right">
                     {r.prezzoMin.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
