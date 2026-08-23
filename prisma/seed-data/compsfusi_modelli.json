@@ -1,0 +1,56 @@
+[
+  {
+    "tipologia": "COMPSFUSI_PROFILO_L",
+    "descrizioneTecnica": "Profilo struttura L — sezione 168×60mm. Lunghezze disponibili 4/5/6/7m. Colori: 9010/1013 lucido, 9010/1013/7016/8017 soft, Corten.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_M",
+    "descrizioneTecnica": "Profilo struttura M — sezione 125×54mm. Lunghezze disponibili 4/5/6/7m.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_S",
+    "descrizioneTecnica": "Profilo struttura S — sezione 84×49mm. Lunghezze disponibili 4/5/6/7m.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_PIANTONE",
+    "descrizioneTecnica": "Piantone — sezione 125×140mm. Lunghezze disponibili 5/6/7m.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_L",
+    "descrizioneTecnica": "Aggancio a coda di rondine per profilo L — sezione 168×26mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_M",
+    "descrizioneTecnica": "Aggancio a coda di rondine per profilo M — sezione 125×26mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_S",
+    "descrizioneTecnica": "Aggancio a coda di rondine per profilo S — sezione 84×26mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_PIASTRA_PIANTONE",
+    "descrizioneTecnica": "Piastra per piantone, fissaggio a terra/parete — 125×140mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  },
+  {
+    "tipologia": "COMPSFUSI_PIASTRA_CROCE_SM",
+    "descrizioneTecnica": "Piastra a croce per piantone singolo S/M — 126×124mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "COMPONENTI STRUTTURA"
+  }
+]

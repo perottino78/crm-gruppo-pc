@@ -1,0 +1,142 @@
+[
+  {
+    "tipologia": "COMPSFUSI_PROFILO_L",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 400,
+    "prezzoBase": 507
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_L",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 500,
+    "prezzoBase": 634
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_L",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 600,
+    "prezzoBase": 760
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_L",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 700,
+    "prezzoBase": 885
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_M",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 400,
+    "prezzoBase": 347
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_M",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 500,
+    "prezzoBase": 433
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_M",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 600,
+    "prezzoBase": 521
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_M",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 700,
+    "prezzoBase": 607
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 400,
+    "prezzoBase": 250
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 500,
+    "prezzoBase": 312
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 600,
+    "prezzoBase": 375
+  },
+  {
+    "tipologia": "COMPSFUSI_PROFILO_S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 700,
+    "prezzoBase": 445
+  },
+  {
+    "tipologia": "COMPSFUSI_PIANTONE",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 500,
+    "prezzoBase": 683
+  },
+  {
+    "tipologia": "COMPSFUSI_PIANTONE",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 600,
+    "prezzoBase": 820
+  },
+  {
+    "tipologia": "COMPSFUSI_PIANTONE",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 700,
+    "prezzoBase": 956
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_L",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 63
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_M",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 56
+  },
+  {
+    "tipologia": "COMPSFUSI_AGGANCIO_S",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 49
+  },
+  {
+    "tipologia": "COMPSFUSI_PIASTRA_PIANTONE",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 42
+  },
+  {
+    "tipologia": "COMPSFUSI_PIASTRA_CROCE_SM",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 37
+  }
+]

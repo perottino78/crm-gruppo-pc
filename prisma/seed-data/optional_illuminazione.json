@@ -1,0 +1,342 @@
+[
+  {
+    "categoria": "TRASMETTITORE",
+    "nome": "Teleco — trasmettitore portatile/parete",
+    "tipoPrezzo": "FISSO",
+    "valore": 216,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1."
+  },
+  {
+    "categoria": "TRASMETTITORE",
+    "nome": "Nexta — trasmettitore portatile/parete",
+    "tipoPrezzo": "FISSO",
+    "valore": 216,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Colori: Bianco. Clip a parete inclusa. Gestione multigruppo, 6 trasmettitori in 1."
+  },
+  {
+    "categoria": "PRESA",
+    "nome": "Presa DUAL-USB e 3,5mt di cavo",
+    "tipoPrezzo": "FISSO",
+    "valore": 512,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "12-24V, USB 5V/2A max 10W, IP65. Incassabile solo su Ischia in assenza di vetrate/tende."
+  },
+  {
+    "categoria": "PRESA",
+    "nome": "Presa Schuko 230Vac e 3mt di cavo",
+    "tipoPrezzo": "FISSO",
+    "valore": 136,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "16A, 250V, IP54. Incassabile solo su Ischia in assenza di vetrate/tende."
+  },
+  {
+    "categoria": "RISCALDATORE",
+    "nome": "Riscaldatore elettrico con dimmer e telecomando",
+    "tipoPrezzo": "FISSO",
+    "valore": 1734,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "2000W, IPX5, area riscaldata 20/25m² circa, colore Silver, 46,5x19,5x12cm."
+  },
+  {
+    "categoria": "AUDIO",
+    "nome": "Kit Audio 2 casse",
+    "tipoPrezzo": "FISSO",
+    "valore": 1424,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende."
+  },
+  {
+    "categoria": "AUDIO",
+    "nome": "Kit Audio 4 casse",
+    "tipoPrezzo": "FISSO",
+    "valore": 1730,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Controllo sorgenti via Bluetooth/radio FM/USB, trasmettitore wireless. Incassabile solo su Ischia in assenza di vetrate/tende."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Aries — singolo faretto",
+    "tipoPrezzo": "FISSO",
+    "valore": 211,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Proiettore doppia emissione, 24Vdc, 4,6W, 500lm, IP65."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Aries — alimentazione e dimmeraggio per 20 faretti (escluso telecomando)",
+    "tipoPrezzo": "FISSO",
+    "valore": 44,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Beta — 12m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 1989,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Beta — 16m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 2617,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Beta — 20m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 3242,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Beta — 30m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 4615,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,3W 380lm IP54. Kit: alimentatore, dimmer, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Sirio — 12m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 2765,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Sirio — 16m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 3800,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Sirio — 20m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 4829,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Sirio — 30m²",
+    "tipoPrezzo": "FISSO",
+    "valore": 6982,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 2,3W 180lm IP54, con driver. Kit: alimentatore, dimmer, driver, telecomando multicanale."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 3 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 1533,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 6 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 2033,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 9 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 2538,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 12 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 3041,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 15 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 3543,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 18 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 4046,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 21 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 4550,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 24 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 5051,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 27 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 5555,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Atlas — 30 faretti",
+    "tipoPrezzo": "FISSO",
+    "valore": 6060,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Faretto led 24Vdc 4,5W 575lm IP44. Kit: faretto Atlas, alimentatore, dimmer, telecomando."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 5m",
+    "tipoPrezzo": "FISSO",
+    "valore": 1350,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 10m",
+    "tipoPrezzo": "FISSO",
+    "valore": 1609,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 15m",
+    "tipoPrezzo": "FISSO",
+    "valore": 1866,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 20m",
+    "tipoPrezzo": "FISSO",
+    "valore": 2124,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 30m",
+    "tipoPrezzo": "FISSO",
+    "valore": 3348,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 35m",
+    "tipoPrezzo": "FISSO",
+    "valore": 3604,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  },
+  {
+    "categoria": "ILLUMINAZIONE",
+    "nome": "Kit Stripe LED — 40m",
+    "tipoPrezzo": "FISSO",
+    "valore": 3863,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "9,6W/m, 739lm/m, IP55, dimmerabile, 3000K (4000K opzionale). Kit: stripe, alimentatore, dimmer, telecomando, profili, opalino."
+  }
+]

@@ -29,11 +29,18 @@ export async function trovaFasciaPrezzo(opts: {
 
   if (candidati.length === 0) return null;
 
-  // fascia più piccola che copre la misura richiesta (area minima tra le fasce idonee)
+  // fascia più piccola che copre la misura richiesta (area minima tra le fasce idonee).
+  // Per gli articoli monodimensionali (venduti a lunghezza, altezzaMm sempre 0 — es.
+  // profili a metraggio) l'area è sempre 0 per ogni candidato: in quel caso il
+  // confronto ricade sulla somma larghezza+altezza, che seleziona comunque la fascia
+  // più piccola invece di restituire arbitrariamente la prima riga trovata.
   return candidati.reduce((migliore, p) => {
     const areaP = p.larghezzaMm * p.altezzaMm;
     const areaMigliore = migliore.larghezzaMm * migliore.altezzaMm;
-    return areaP < areaMigliore ? p : migliore;
+    if (areaP !== areaMigliore) return areaP < areaMigliore ? p : migliore;
+    const sommaP = p.larghezzaMm + p.altezzaMm;
+    const sommaMigliore = migliore.larghezzaMm + migliore.altezzaMm;
+    return sommaP < sommaMigliore ? p : migliore;
   });
 }
 
