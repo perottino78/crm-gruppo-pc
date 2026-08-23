@@ -68,7 +68,7 @@ export default async function SchedaClientePage({
               <form action={completaAttivita}>
                 <input type="hidden" name="id" value={t.id} />
                 <input type="hidden" name="clienteId" value={cliente.id} />
-                <button className="text-xs text-amber-700 underline">segna come fatto</button>
+                <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">✓ segna come fatto</button>
               </form>
             </div>
           ))}
@@ -93,7 +93,7 @@ export default async function SchedaClientePage({
               <option key={u.id} value={u.id}>{u.nome}</option>
             ))}
           </select>
-          <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Apri offerta →</button>
+          <button className="btn-3d btn-3d-green text-sm px-4 py-2">Apri offerta →</button>
         </form>
       </div>
 
@@ -155,7 +155,7 @@ export default async function SchedaClientePage({
           <label className="text-xs text-neutral-500">Note</label>
           <textarea name="descrizione" rows={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
         </div>
-        <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Registra attività</button>
+        <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Registra attività</button>
       </form>
 
       <h2 className="text-sm font-medium text-neutral-700 mb-3">Diario attività ({cliente.attivita.length})</h2>

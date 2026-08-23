@@ -4,7 +4,7 @@ export default function PrintButton() {
   return (
     <button
       onClick={() => window.print()}
-      className="print:hidden bg-neutral-900 text-white text-sm rounded px-4 py-2 fixed top-4 right-4 shadow-lg"
+      className="btn-3d btn-3d-dark print:hidden text-sm px-4 py-2 fixed top-4 right-4 shadow-lg"
     >
       🖨️ Stampa / Salva PDF
     </button>

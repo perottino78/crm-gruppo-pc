@@ -51,7 +51,7 @@ export default async function ClientiPage({
                 <option key={b.id} value={b.id}>{b.nome}</option>
               ))}
             </select>
-            <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5 mt-1">Crea lead</button>
+            <button className="btn-3d btn-3d-orange text-sm px-4 py-2 mt-1">Crea lead</button>
           </div>
         </form>
 
@@ -74,7 +74,7 @@ export default async function ClientiPage({
                 <option key={b.id} value={b.id}>{b.nome}</option>
               ))}
             </select>
-            <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5 mt-1">Crea cliente</button>
+            <button className="btn-3d btn-3d-teal text-sm px-4 py-2 mt-1">Crea cliente</button>
           </div>
         </form>
       </div>

@@ -88,7 +88,11 @@ export default async function StampaPreventivoPage({
             const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
             const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
             const modello = modelloMap.get(r.prodotto.tipologia);
-            const mostraScheda = r.mostraDescrizione && modello && (modello.immagineUrl || modello.descrizioneTecnica);
+            const descrizioneEffettiva = r.descrizionePersonalizzata ?? modello?.descrizioneTecnica ?? "";
+            const mostraScheda = r.mostraDescrizione && modello && (modello.immagineUrl || descrizioneEffettiva);
+            const unit = unitaMisura(r.prodotto.tipologia);
+            const larghezzaMostrata = r.misuraLarghezza ?? r.prodotto.larghezzaMm;
+            const altezzaMostrata = r.misuraAltezza ?? r.prodotto.altezzaMm;
             return (
               <tr key={r.id} className="border-b border-neutral-100 align-top">
                 <td className="py-2">
@@ -99,10 +103,10 @@ export default async function StampaPreventivoPage({
                     <div>
                       <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
                       <p className="text-xs text-neutral-400">
-                        colore {r.prodotto.colore} · {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unitaMisura(r.prodotto.tipologia)}
+                        colore {r.prodotto.colore} · {larghezzaMostrata}×{altezzaMostrata}{unit}
                       </p>
-                      {mostraScheda && modello?.descrizioneTecnica && (
-                        <p className="text-xs text-neutral-500 mt-1 max-w-md whitespace-pre-line">{modello.descrizioneTecnica}</p>
+                      {mostraScheda && descrizioneEffettiva && (
+                        <p className="text-xs text-neutral-500 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
                       )}
                       {r.optionali.map((ro) => (
                         <p key={ro.id} className="text-xs text-neutral-400">+ {ro.optional.nome} ({ro.quantita}×)</p>

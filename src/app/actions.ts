@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
+import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -126,6 +127,58 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
     data: { preventivoId, prodottoId, quantita, prezzoUnitario },
   });
   await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
+  const preventivoId = str(formData, "preventivoId");
+  const brandId = str(formData, "brandId");
+  const tipologia = str(formData, "tipologia");
+  const larghezzaStr = str(formData, "larghezza");
+  const altezzaStr = str(formData, "altezza");
+  const quantitaStr = str(formData, "quantita");
+  if (!preventivoId || !brandId || !tipologia || !larghezzaStr || !altezzaStr) return;
+
+  const larghezza = parseFloat(larghezzaStr.replace(",", "."));
+  const altezza = parseFloat(altezzaStr.replace(",", "."));
+  if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || altezza <= 0) {
+    redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
+  }
+
+  const prodotto = await trovaFasciaPrezzo({ brandId, tipologia, larghezza, altezza });
+  if (!prodotto) {
+    redirect(
+      `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+        `Nessuna fascia di prezzo per ${tipologia} a ${larghezza}×${altezza} — misura fuori listino`
+      )}`
+    );
+  }
+
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
+
+  await prisma.rigaPreventivo.create({
+    data: {
+      preventivoId,
+      prodottoId: prodotto!.id,
+      quantita,
+      prezzoUnitario: prodotto!.prezzoBase,
+      misuraLarghezza: larghezza,
+      misuraAltezza: altezza,
+    },
+  });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function aggiornaDescrizionePersonalizzata(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+  const testo = str(formData, "descrizionePersonalizzata");
+  await prisma.rigaPreventivo.update({
+    where: { id },
+    data: { descrizionePersonalizzata: testo },
+  });
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 

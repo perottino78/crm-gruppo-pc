@@ -18,3 +18,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PANAREA_")) return "PANAREA";
   return null;
 }
+
+export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
+  if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
+  return { larghezza: "Larghezza", altezza: "Altezza" };
+}

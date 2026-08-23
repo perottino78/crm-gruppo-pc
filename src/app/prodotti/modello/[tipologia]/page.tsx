@@ -85,7 +85,7 @@ export default async function ModelloProdottoPage({
             />
           </div>
         </div>
-        <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5 self-start">Salva scheda</button>
+        <button className="btn-3d btn-3d-dark text-sm px-4 py-2 self-start">Salva scheda</button>
       </form>
     </div>
   );

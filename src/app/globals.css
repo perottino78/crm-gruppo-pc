@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Pulsanti "3D": squadrati, con ombra a blocco e pressione al click */
+.btn-3d {
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+  cursor: pointer;
+}
+.btn-3d:hover {
+  filter: brightness(1.06);
+}
+.btn-3d:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.25);
+}
+.btn-3d:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-3d-dark { background: #171717; color: #fff; border-color: #000; }
+.btn-3d-blue { background: #2563eb; color: #fff; border-color: #1e3a8a; }
+.btn-3d-green { background: #16a34a; color: #fff; border-color: #14532d; }
+.btn-3d-orange { background: #ea580c; color: #fff; border-color: #7c2d12; }
+.btn-3d-red { background: #dc2626; color: #fff; border-color: #7f1d1d; }
+.btn-3d-teal { background: #0d9488; color: #fff; border-color: #134e4a; }
+.btn-3d-outline { background: #fff; color: #171717; border-color: #d4d4d4; box-shadow: 0 3px 0 #d4d4d4; }
+.btn-3d-outline:active { box-shadow: 0 0 0 #d4d4d4; }

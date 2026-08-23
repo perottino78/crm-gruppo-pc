@@ -66,7 +66,7 @@ export default async function PreventiviPage({
             ))}
           </select>
         </div>
-        <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Nuovo preventivo</button>
+        <button className="btn-3d btn-3d-green text-sm px-4 py-2">Nuovo preventivo</button>
         <p className="text-xs text-neutral-400 w-full">Le righe prodotto/prezzo si aggiungono in una fase successiva.</p>
       </form>
 

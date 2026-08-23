@@ -135,6 +135,13 @@ model RigaPreventivo {
   optionalDescrizione String?
   optionalPrezzo Float @default(0)
   mostraDescrizione Boolean @default(true)
+  // Misura reale inserita a mano dal commerciale (può differire dalla fascia di prezzo
+  // agganciata in prodottoId, che è la fascia più vicina per eccesso nel listino nascosto)
+  misuraLarghezza Float?
+  misuraAltezza   Float?
+  // Testo libero che sovrascrive, solo per questa riga, la descrizione tecnica standard
+  // del modello (utile per non ripetere descrizioni identiche o correggerne il testo)
+  descrizionePersonalizzata String?
   optionali     RigaOptional[]
 }
 

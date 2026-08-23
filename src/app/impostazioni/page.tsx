@@ -82,7 +82,7 @@ export default async function ImpostazioniPage() {
             ))}
           </select>
         </div>
-        <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5">Aggiungi utente</button>
+        <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Aggiungi utente</button>
       </form>
     </div>
   );
