@@ -1,0 +1,15 @@
+[
+  {"tipologia":"FF1","immagineUrl":"/immagini/illumia/FF1.jpg","descrizioneTecnica":"Finestra fissa (senza apertura), telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"F1A1","immagineUrl":"/immagini/illumia/F1A1.jpg","descrizioneTecnica":"Finestra a 1 anta apribile anta-ribalta, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"F2A1","immagineUrl":"/immagini/illumia/F2A1.jpg","descrizioneTecnica":"Finestra a 2 ante apribili anta-ribalta, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"F3A1","immagineUrl":"/immagini/illumia/F3A1.jpg","descrizioneTecnica":"Finestra a 3 ante apribili anta-ribalta, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF1A1","immagineUrl":"/immagini/illumia/PF1A1.jpg","descrizioneTecnica":"Portafinestra a 1 anta, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF1A2","immagineUrl":"/immagini/illumia/PF1A2.jpg","descrizioneTecnica":"Portafinestra a 1 anta, variante 2, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF2A1","immagineUrl":"/immagini/illumia/PF2A1.jpg","descrizioneTecnica":"Portafinestra a 2 ante, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF2A2","immagineUrl":"/immagini/illumia/PF2A2.jpg","descrizioneTecnica":"Portafinestra a 2 ante con soglia, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF3A1","immagineUrl":"/immagini/illumia/PF3A1.jpg","descrizioneTecnica":"Portafinestra a 3 ante, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"PF3A2","immagineUrl":"/immagini/illumia/PF3A2.jpg","descrizioneTecnica":"Portafinestra a 3 ante con soglia, telaio PVC Illumia.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"BLC1","immagineUrl":"/immagini/illumia/BLC1.jpg","descrizioneTecnica":"Finestra a bilico, PVC medio made in Italy.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"STF1","immagineUrl":"/immagini/illumia/STF1.jpg","descrizioneTecnica":"Traslante fisso laterale, PVC medio made in Italy.","famiglia":"INDOOR","gruppo":"SERRAMENTI"},
+  {"tipologia":"STFA1","immagineUrl":"/immagini/illumia/STFA1.jpg","descrizioneTecnica":"Traslante anta fissa laterale ripetuta, PVC medio made in Italy.","famiglia":"INDOOR","gruppo":"SERRAMENTI"}
+]

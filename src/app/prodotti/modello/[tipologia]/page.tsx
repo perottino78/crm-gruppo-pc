@@ -66,6 +66,25 @@ export default async function ModelloProdottoPage({
             placeholder="Materiali, finiture, caratteristiche tecniche da mostrare in offerta..."
           />
         </div>
+        <div className="flex gap-2">
+          <div className="flex flex-col gap-1 flex-1">
+            <label className="text-xs text-neutral-500">Famiglia</label>
+            <select name="famiglia" defaultValue={modello?.famiglia ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              <option value="">—</option>
+              <option value="OUTDOOR">Outdoor</option>
+              <option value="INDOOR">Indoor</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1 flex-1">
+            <label className="text-xs text-neutral-500">Gruppo</label>
+            <input
+              name="gruppo"
+              defaultValue={modello?.gruppo ?? ""}
+              placeholder="es. Pergole, Serramenti, Zanzariere..."
+              className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
+            />
+          </div>
+        </div>
         <button className="bg-neutral-900 text-white text-sm rounded px-3 py-1.5 self-start">Salva scheda</button>
       </form>
     </div>

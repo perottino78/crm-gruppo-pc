@@ -208,6 +208,8 @@ model ModelloProdotto {
   tipologia          String
   immagineUrl        String?
   descrizioneTecnica String?
+  famiglia           String?
+  gruppo             String?
 
   @@unique([brandId, tipologia])
 }

@@ -233,11 +233,13 @@ export async function salvaModelloProdotto(formData: FormData) {
   if (!brandId || !tipologia) return;
   const immagineUrl = str(formData, "immagineUrl");
   const descrizioneTecnica = str(formData, "descrizioneTecnica");
+  const famiglia = str(formData, "famiglia");
+  const gruppo = str(formData, "gruppo");
 
   await prisma.modelloProdotto.upsert({
     where: { brandId_tipologia: { brandId, tipologia } },
-    create: { brandId, tipologia, immagineUrl, descrizioneTecnica },
-    update: { immagineUrl, descrizioneTecnica },
+    create: { brandId, tipologia, immagineUrl, descrizioneTecnica, famiglia, gruppo },
+    update: { immagineUrl, descrizioneTecnica, famiglia, gruppo },
   });
   revalidatePath("/prodotti");
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);

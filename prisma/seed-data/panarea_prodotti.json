@@ -1,0 +1,3824 @@
+[
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 200,
+  "prezzoBase": 8913
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 250,
+  "prezzoBase": 9486
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 300,
+  "prezzoBase": 10064
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 350,
+  "prezzoBase": 10641
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 400,
+  "prezzoBase": 11218
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 450,
+  "prezzoBase": 11796
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 500,
+  "prezzoBase": 12369
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 200,
+  "prezzoBase": 9552
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 250,
+  "prezzoBase": 10217
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 300,
+  "prezzoBase": 10875
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 350,
+  "prezzoBase": 11540
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 400,
+  "prezzoBase": 12204
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 450,
+  "prezzoBase": 12869
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 500,
+  "prezzoBase": 13534
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 200,
+  "prezzoBase": 10190
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 250,
+  "prezzoBase": 10937
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 300,
+  "prezzoBase": 11686
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 350,
+  "prezzoBase": 12436
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 400,
+  "prezzoBase": 13189
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 450,
+  "prezzoBase": 13936
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 500,
+  "prezzoBase": 14682
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 200,
+  "prezzoBase": 10588
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 250,
+  "prezzoBase": 11429
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 300,
+  "prezzoBase": 12262
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 350,
+  "prezzoBase": 13098
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 400,
+  "prezzoBase": 13936
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 450,
+  "prezzoBase": 14777
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 500,
+  "prezzoBase": 15618
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 11229
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 12155
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 13073
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 13999
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 14921
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 15847
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 16771
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 200,
+  "prezzoBase": 11869
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 250,
+  "prezzoBase": 12878
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 300,
+  "prezzoBase": 13886
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 350,
+  "prezzoBase": 14897
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 400,
+  "prezzoBase": 15905
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 450,
+  "prezzoBase": 16912
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 500,
+  "prezzoBase": 17920
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 200,
+  "prezzoBase": 12269
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 250,
+  "prezzoBase": 13369
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 300,
+  "prezzoBase": 14462
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 350,
+  "prezzoBase": 15555
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 400,
+  "prezzoBase": 16653
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 450,
+  "prezzoBase": 17753
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 500,
+  "prezzoBase": 18853
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 12908
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 250,
+  "prezzoBase": 14092
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 15272
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 350,
+  "prezzoBase": 16458
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 17639
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 450,
+  "prezzoBase": 18823
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 20008
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 200,
+  "prezzoBase": 13983
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 250,
+  "prezzoBase": 15294
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 300,
+  "prezzoBase": 16609
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 350,
+  "prezzoBase": 17924
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 400,
+  "prezzoBase": 19232
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 450,
+  "prezzoBase": 20539
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 500,
+  "prezzoBase": 21850
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 200,
+  "prezzoBase": 14386
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 250,
+  "prezzoBase": 15785
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 300,
+  "prezzoBase": 17185
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 350,
+  "prezzoBase": 18580
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 400,
+  "prezzoBase": 19983
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 450,
+  "prezzoBase": 21382
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 500,
+  "prezzoBase": 22780
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 200,
+  "prezzoBase": 14587
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 250,
+  "prezzoBase": 16030
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 300,
+  "prezzoBase": 17470
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 350,
+  "prezzoBase": 18913
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 400,
+  "prezzoBase": 20354
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 450,
+  "prezzoBase": 21798
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 500,
+  "prezzoBase": 23241
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 200,
+  "prezzoBase": 15220
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 250,
+  "prezzoBase": 16664
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 300,
+  "prezzoBase": 18103
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 350,
+  "prezzoBase": 19548
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 400,
+  "prezzoBase": 20990
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 450,
+  "prezzoBase": 21970
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 500,
+  "prezzoBase": 22982
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 200,
+  "prezzoBase": 17859
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 250,
+  "prezzoBase": 18871
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 300,
+  "prezzoBase": 19726
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 350,
+  "prezzoBase": 20580
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 400,
+  "prezzoBase": 21592
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 450,
+  "prezzoBase": 22239
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 500,
+  "prezzoBase": 23271
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 200,
+  "prezzoBase": 18029
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 250,
+  "prezzoBase": 19061
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 300,
+  "prezzoBase": 19934
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 350,
+  "prezzoBase": 20810
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 400,
+  "prezzoBase": 21842
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 450,
+  "prezzoBase": 23943
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 500,
+  "prezzoBase": 25041
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 19402
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 20500
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 21440
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 22382
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 23478
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 24211
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 25330
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 200,
+  "prezzoBase": 19573
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 250,
+  "prezzoBase": 20691
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 300,
+  "prezzoBase": 21652
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 350,
+  "prezzoBase": 22611
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 400,
+  "prezzoBase": 23728
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 450,
+  "prezzoBase": 24480
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 500,
+  "prezzoBase": 25617
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 19744
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 20881
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 21859
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 22840
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 23976
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 24744
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 25900
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 200,
+  "prezzoBase": 10553
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 250,
+  "prezzoBase": 11118
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 300,
+  "prezzoBase": 11692
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 350,
+  "prezzoBase": 12260
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 400,
+  "prezzoBase": 12830
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 450,
+  "prezzoBase": 13399
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 500,
+  "prezzoBase": 13966
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 200,
+  "prezzoBase": 11181
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 250,
+  "prezzoBase": 11836
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 300,
+  "prezzoBase": 12494
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 350,
+  "prezzoBase": 13149
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 400,
+  "prezzoBase": 13804
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 450,
+  "prezzoBase": 14460
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 500,
+  "prezzoBase": 15115
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 200,
+  "prezzoBase": 11813
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 250,
+  "prezzoBase": 12552
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 300,
+  "prezzoBase": 13299
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 350,
+  "prezzoBase": 14040
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 400,
+  "prezzoBase": 14782
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 450,
+  "prezzoBase": 15521
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 500,
+  "prezzoBase": 16262
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 200,
+  "prezzoBase": 12214
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 250,
+  "prezzoBase": 13040
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 300,
+  "prezzoBase": 13865
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 350,
+  "prezzoBase": 14694
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 400,
+  "prezzoBase": 15521
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 450,
+  "prezzoBase": 16347
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 500,
+  "prezzoBase": 17172
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 12844
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 13761
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 14673
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 15581
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 16502
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 17420
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 18337
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 200,
+  "prezzoBase": 13478
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 250,
+  "prezzoBase": 14474
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 300,
+  "prezzoBase": 15476
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 350,
+  "prezzoBase": 16474
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 400,
+  "prezzoBase": 17472
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 450,
+  "prezzoBase": 18469
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 500,
+  "prezzoBase": 19466
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 200,
+  "prezzoBase": 13878
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 250,
+  "prezzoBase": 14958
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 300,
+  "prezzoBase": 16044
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 350,
+  "prezzoBase": 17128
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 400,
+  "prezzoBase": 18216
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 450,
+  "prezzoBase": 19297
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 500,
+  "prezzoBase": 20379
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 14506
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 250,
+  "prezzoBase": 15680
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 16850
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 350,
+  "prezzoBase": 18019
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 19189
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 450,
+  "prezzoBase": 20363
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 21537
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 200,
+  "prezzoBase": 15572
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 250,
+  "prezzoBase": 16871
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 300,
+  "prezzoBase": 18170
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 350,
+  "prezzoBase": 19469
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 400,
+  "prezzoBase": 20775
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 450,
+  "prezzoBase": 22072
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 500,
+  "prezzoBase": 23371
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 200,
+  "prezzoBase": 15965
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 250,
+  "prezzoBase": 17354
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 300,
+  "prezzoBase": 18740
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 350,
+  "prezzoBase": 20122
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 400,
+  "prezzoBase": 21512
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 450,
+  "prezzoBase": 22899
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 500,
+  "prezzoBase": 24286
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 200,
+  "prezzoBase": 16169
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 250,
+  "prezzoBase": 17596
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 300,
+  "prezzoBase": 19027
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 350,
+  "prezzoBase": 20455
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 400,
+  "prezzoBase": 21884
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 450,
+  "prezzoBase": 23311
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 500,
+  "prezzoBase": 24739
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 200,
+  "prezzoBase": 16797
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 250,
+  "prezzoBase": 18225
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 300,
+  "prezzoBase": 19656
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 350,
+  "prezzoBase": 21083
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 400,
+  "prezzoBase": 22512
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 450,
+  "prezzoBase": 23758
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 500,
+  "prezzoBase": 24990
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 200,
+  "prezzoBase": 19224
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 250,
+  "prezzoBase": 20097
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 300,
+  "prezzoBase": 20921
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 350,
+  "prezzoBase": 21743
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 400,
+  "prezzoBase": 22794
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 450,
+  "prezzoBase": 24117
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 500,
+  "prezzoBase": 25349
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 200,
+  "prezzoBase": 19393
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 250,
+  "prezzoBase": 20286
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 300,
+  "prezzoBase": 21127
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 350,
+  "prezzoBase": 21968
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 400,
+  "prezzoBase": 23042
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 450,
+  "prezzoBase": 24814
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 500,
+  "prezzoBase": 25773
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 20754
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 21711
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 22618
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 23526
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 24483
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 25080
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 26059
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 200,
+  "prezzoBase": 20923
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 250,
+  "prezzoBase": 21900
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 300,
+  "prezzoBase": 22827
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 350,
+  "prezzoBase": 23753
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 400,
+  "prezzoBase": 24732
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 450,
+  "prezzoBase": 25346
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 500,
+  "prezzoBase": 26344
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 21090
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 22090
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 23033
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 23980
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 24978
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 25608
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 26624
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 200,
+  "prezzoBase": 7174
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 250,
+  "prezzoBase": 7749
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 300,
+  "prezzoBase": 8323
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 350,
+  "prezzoBase": 8900
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 400,
+  "prezzoBase": 9474
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 450,
+  "prezzoBase": 10051
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 160,
+  "larghezzaMm": 500,
+  "prezzoBase": 10625
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 200,
+  "prezzoBase": 7811
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 250,
+  "prezzoBase": 8473
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 300,
+  "prezzoBase": 9138
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 350,
+  "prezzoBase": 9803
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 400,
+  "prezzoBase": 10461
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 450,
+  "prezzoBase": 11123
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 195,
+  "larghezzaMm": 500,
+  "prezzoBase": 11783
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 200,
+  "prezzoBase": 8450
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 250,
+  "prezzoBase": 9198
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 300,
+  "prezzoBase": 9949
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 350,
+  "prezzoBase": 10699
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 400,
+  "prezzoBase": 11444
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 450,
+  "prezzoBase": 12190
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 230,
+  "larghezzaMm": 500,
+  "prezzoBase": 12938
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 200,
+  "prezzoBase": 8849
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 250,
+  "prezzoBase": 9689
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 300,
+  "prezzoBase": 10527
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 350,
+  "prezzoBase": 11357
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 400,
+  "prezzoBase": 12193
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 450,
+  "prezzoBase": 13031
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 265,
+  "larghezzaMm": 500,
+  "prezzoBase": 13869
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 9490
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 10412
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 11336
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 12258
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 13181
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 14103
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 15025
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 200,
+  "prezzoBase": 10127
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 250,
+  "prezzoBase": 11137
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 300,
+  "prezzoBase": 12149
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 350,
+  "prezzoBase": 13158
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 400,
+  "prezzoBase": 14168
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 450,
+  "prezzoBase": 15180
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 335,
+  "larghezzaMm": 500,
+  "prezzoBase": 16190
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 200,
+  "prezzoBase": 10530
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 250,
+  "prezzoBase": 11627
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 300,
+  "prezzoBase": 12723
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 350,
+  "prezzoBase": 13818
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 400,
+  "prezzoBase": 14912
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 450,
+  "prezzoBase": 16011
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 370,
+  "larghezzaMm": 500,
+  "prezzoBase": 17109
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 200,
+  "prezzoBase": 11169
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 250,
+  "prezzoBase": 12352
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 300,
+  "prezzoBase": 13531
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 350,
+  "prezzoBase": 14717
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 400,
+  "prezzoBase": 15900
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 450,
+  "prezzoBase": 17081
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 405,
+  "larghezzaMm": 500,
+  "prezzoBase": 18264
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 200,
+  "prezzoBase": 12244
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 250,
+  "prezzoBase": 13556
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 300,
+  "prezzoBase": 14870
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 350,
+  "prezzoBase": 16178
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 400,
+  "prezzoBase": 17491
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 450,
+  "prezzoBase": 18802
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 440,
+  "larghezzaMm": 500,
+  "prezzoBase": 20113
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 200,
+  "prezzoBase": 12644
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 250,
+  "prezzoBase": 14045
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 300,
+  "prezzoBase": 15444
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 350,
+  "prezzoBase": 16843
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 400,
+  "prezzoBase": 18242
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 450,
+  "prezzoBase": 19643
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 500,
+  "prezzoBase": 21044
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 200,
+  "prezzoBase": 12846
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 250,
+  "prezzoBase": 14288
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 300,
+  "prezzoBase": 15731
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 350,
+  "prezzoBase": 17176
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 400,
+  "prezzoBase": 18621
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 450,
+  "prezzoBase": 20060
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 510,
+  "larghezzaMm": 500,
+  "prezzoBase": 21502
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 200,
+  "prezzoBase": 13482
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 250,
+  "prezzoBase": 14921
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 300,
+  "prezzoBase": 16364
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 350,
+  "prezzoBase": 17809
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 400,
+  "prezzoBase": 19254
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 450,
+  "prezzoBase": 20332
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 545,
+  "larghezzaMm": 500,
+  "prezzoBase": 21757
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 200,
+  "prezzoBase": 15844
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 250,
+  "prezzoBase": 16724
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 300,
+  "prezzoBase": 17556
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 350,
+  "prezzoBase": 18387
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 400,
+  "prezzoBase": 19540
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 450,
+  "prezzoBase": 20599
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 580,
+  "larghezzaMm": 500,
+  "prezzoBase": 22044
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 200,
+  "prezzoBase": 16012
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 250,
+  "prezzoBase": 16914
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 300,
+  "prezzoBase": 17764
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 350,
+  "prezzoBase": 18616
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 400,
+  "prezzoBase": 20060
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 450,
+  "prezzoBase": 21488
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 615,
+  "larghezzaMm": 500,
+  "prezzoBase": 22456
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 200,
+  "prezzoBase": 17387
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 250,
+  "prezzoBase": 18353
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 300,
+  "prezzoBase": 19270
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 350,
+  "prezzoBase": 20187
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 400,
+  "prezzoBase": 21155
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 450,
+  "prezzoBase": 21757
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 650,
+  "larghezzaMm": 500,
+  "prezzoBase": 22744
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 200,
+  "prezzoBase": 17558
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 250,
+  "prezzoBase": 18543
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 300,
+  "prezzoBase": 19481
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 350,
+  "prezzoBase": 20416
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 400,
+  "prezzoBase": 21403
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 450,
+  "prezzoBase": 22025
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 685,
+  "larghezzaMm": 500,
+  "prezzoBase": 23033
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 200,
+  "prezzoBase": 17728
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 250,
+  "prezzoBase": 18735
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 300,
+  "prezzoBase": 19689
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 350,
+  "prezzoBase": 20645
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 400,
+  "prezzoBase": 21653
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 450,
+  "prezzoBase": 22287
+ },
+ {
+  "tipologia": "PANAREA_STANDARD_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 700,
+  "larghezzaMm": 500,
+  "prezzoBase": 23315
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 7276
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 7654
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 7876
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 8094
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 8474
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 8694
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 8914
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 8108
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 8554
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 8840
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 9129
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 9574
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 9861
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 10146
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 8515
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 8981
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 9289
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 9597
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 10064
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 10372
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 10680
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 8918
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 9404
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 9733
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 10060
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 10546
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 10873
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 11201
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 9627
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 10134
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 10484
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 10833
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 11340
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 11688
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 12037
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 9807
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 10333
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 10703
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 11070
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 11597
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 11964
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 12336
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 10432
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 10979
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 11368
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 11755
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 12302
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 12690
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 13079
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 10812
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 11428
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 11882
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 12338
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 12950
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 13404
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 13860
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 11194
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 11875
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 12397
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 12918
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 13596
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 14119
+ },
+ {
+  "tipologia": "PANAREA_EASY_PARETE",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 14641
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 9731
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 10060
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 10389
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 10718
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 11048
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 11377
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 11706
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 10358
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 10706
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 11055
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 11403
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 11753
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 12102
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 12450
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 10965
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 11382
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 11797
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 12213
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 12628
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 13043
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 13459
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 11370
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 11804
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 12239
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 12674
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 13110
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 13547
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 13981
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 11994
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 12450
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 12904
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 13360
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 13814
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 14272
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 14726
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 12174
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 12649
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 13124
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 13600
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 14073
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 14548
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 15023
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 12799
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 13293
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 13790
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 14284
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 14779
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 15273
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 15768
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 12973
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 13489
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 14003
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 14518
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 15032
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 15546
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 16060
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 13147
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 13682
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 14217
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 14752
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 15286
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 15817
+ },
+ {
+  "tipologia": "PANAREA_EASY_ISOLA",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 16352
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 4916
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 5134
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 5356
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 5576
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 5794
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 6016
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 500,
+  "prezzoBase": 6236
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 5748
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 6033
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 6322
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 6609
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 6896
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 7181
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 500,
+  "prezzoBase": 7468
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 6155
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 6461
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 6771
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 7079
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 7385
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 7693
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 500,
+  "prezzoBase": 8001
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 6558
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 6883
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 7212
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 7540
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 7867
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 8195
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 500,
+  "prezzoBase": 8524
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 7186
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 7536
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 7885
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 8233
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 8580
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 8928
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 9277
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 7366
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 7733
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 8105
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 8473
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 400,
+  "prezzoBase": 8840
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 450,
+  "prezzoBase": 9208
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 500,
+  "prezzoBase": 9576
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 7992
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 8379
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 8770
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 9157
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 9544
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 450,
+  "prezzoBase": 9933
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 10321
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 200,
+  "prezzoBase": 8372
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 250,
+  "prezzoBase": 8828
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 300,
+  "prezzoBase": 9282
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 350,
+  "prezzoBase": 9738
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 400,
+  "prezzoBase": 10192
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 450,
+  "prezzoBase": 10646
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 550,
+  "larghezzaMm": 500,
+  "prezzoBase": 11100
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 200,
+  "prezzoBase": 8752
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 250,
+  "prezzoBase": 9275
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 300,
+  "prezzoBase": 9796
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 350,
+  "prezzoBase": 10317
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 10840
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 450,
+  "prezzoBase": 11357
+ },
+ {
+  "tipologia": "PANAREA_EASY_PATIO",
+  "colore": "STANDARD",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 11880
+ }
+]

@@ -1,0 +1,512 @@
+[
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_STANDARD_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_STANDARD_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Standard_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_STANDARD_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Parete",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_EASY_PARETE"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Isola",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_EASY_ISOLA"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 803,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 200,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 820,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 250,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1047,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 300,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1063,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 350,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1290,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 400,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1324,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 450,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "TETTUCCIO",
+  "nome": "Tettuccio protezione Easy_Patio",
+  "tipoPrezzo": "FISSO",
+  "valore": 1533,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": 500,
+  "note": "PANAREA_EASY_PATIO"
+ },
+ {
+  "categoria": "STAFFA",
+  "nome": "Staffa a soffitto",
+  "tipoPrezzo": "FISSO",
+  "valore": 206,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "ALTRO",
+  "nome": "Pressopiegato per unione strutture",
+  "tipoPrezzo": "FISSO",
+  "valore": 113,
+  "unita": "€/mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "TESSUTO",
+  "nome": "Altri tessuti PVC (gamma BlockOut, Opatex Pro) (Panarea)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "TESSUTO",
+  "nome": "Tessuto Soltis (Panarea)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "ALTRO",
+  "nome": "Profilo di compensazione 80x40 (versione Easy)",
+  "tipoPrezzo": "FISSO",
+  "valore": 35,
+  "unita": "€/mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": "PANAREA_EASY"
+ },
+ {
+  "categoria": "SENSORE",
+  "nome": "Sensore vento (Panarea)",
+  "tipoPrezzo": "FISSO",
+  "valore": 333,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "SENSORE",
+  "nome": "Sensore vento-pioggia (Panarea)",
+  "tipoPrezzo": "FISSO",
+  "valore": 912,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "SENSORE",
+  "nome": "Sensore vento-sole (Panarea)",
+  "tipoPrezzo": "FISSO",
+  "valore": 612,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ },
+ {
+  "categoria": "SENSORE",
+  "nome": "Sensore vento-sole-pioggia (Panarea)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1192,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "note": null
+ }
+]

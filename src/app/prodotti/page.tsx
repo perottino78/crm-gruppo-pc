@@ -10,15 +10,31 @@ const PER_PAGINA = 50;
 export default async function ProdottiPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string; q?: string; tipologia?: string; pagina?: string }>;
+  searchParams: Promise<{ brand?: string; q?: string; tipologia?: string; famiglia?: string; gruppo?: string; pagina?: string }>;
 }) {
-  const { brand, q, tipologia, pagina } = await searchParams;
+  const { brand, q, tipologia, famiglia, gruppo, pagina } = await searchParams;
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const paginaAttuale = Math.max(1, Number(pagina) || 1);
+
+  const modelli = await prisma.modelloProdotto.findMany({
+    where: brand && brand !== "Tutti" ? { brand: { nome: brand } } : {},
+  });
+  const modelloMap = new Map(modelli.map((m) => [m.tipologia, m]));
+
+  const famiglieDisponibili = [...new Set(modelli.map((m) => m.famiglia).filter((f): f is string => !!f))].sort();
+  const gruppiDisponibili = [...new Set(modelli.filter((m) => !famiglia || m.famiglia === famiglia).map((m) => m.gruppo).filter((g): g is string => !!g))].sort();
+
+  let tipologieFamigliaGruppo: string[] | null = null;
+  if (famiglia || gruppo) {
+    tipologieFamigliaGruppo = modelli
+      .filter((m) => (!famiglia || m.famiglia === famiglia) && (!gruppo || m.gruppo === gruppo))
+      .map((m) => m.tipologia);
+  }
 
   const where = {
     ...brandFiltro,
     ...(tipologia ? { tipologia } : {}),
+    ...(tipologieFamigliaGruppo ? { tipologia: { in: tipologieFamigliaGruppo } } : {}),
     ...(q
       ? {
           OR: [
@@ -49,6 +65,8 @@ export default async function ProdottiPage({
     if (brand) params.set("brand", brand);
     if (q) params.set("q", q);
     if (tipologia) params.set("tipologia", tipologia);
+    if (famiglia) params.set("famiglia", famiglia);
+    if (gruppo) params.set("gruppo", gruppo);
     Object.entries(overrides).forEach(([k, v]) => (v ? params.set(k, v) : params.delete(k)));
     return `?${params.toString()}`;
   };
@@ -67,8 +85,44 @@ export default async function ProdottiPage({
         </p>
       </div>
 
+      {famiglieDisponibili.length > 0 && (
+        <div className="flex gap-2 mb-4">
+          <Link
+            href={qs({ famiglia: undefined, gruppo: undefined })}
+            className={`text-xs px-3 py-1.5 rounded-full border ${!famiglia ? "bg-neutral-900 text-white border-neutral-900" : "border-neutral-200 text-neutral-500"}`}
+          >
+            Tutte le famiglie
+          </Link>
+          {famiglieDisponibili.map((f) => (
+            <Link
+              key={f}
+              href={qs({ famiglia: f, gruppo: undefined })}
+              className={`text-xs px-3 py-1.5 rounded-full border ${famiglia === f ? "bg-neutral-900 text-white border-neutral-900" : "border-neutral-200 text-neutral-500"}`}
+            >
+              {f}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {famiglia && gruppiDisponibili.length > 0 && (
+        <div className="flex gap-2 mb-4">
+          {gruppiDisponibili.map((g) => (
+            <Link
+              key={g}
+              href={qs({ gruppo: g === gruppo ? undefined : g })}
+              className={`text-xs px-3 py-1.5 rounded-full border ${gruppo === g ? "bg-blue-50 text-blue-700 border-blue-200" : "border-neutral-200 text-neutral-500"}`}
+            >
+              {g}
+            </Link>
+          ))}
+        </div>
+      )}
+
       <form className="flex flex-wrap items-end gap-2 mb-4" action="/prodotti" method="get">
         {brand && <input type="hidden" name="brand" value={brand} />}
+        {famiglia && <input type="hidden" name="famiglia" value={famiglia} />}
+        {gruppo && <input type="hidden" name="gruppo" value={gruppo} />}
         <div className="flex flex-col gap-1">
           <label className="text-xs text-neutral-500">Cerca</label>
           <input
@@ -101,6 +155,7 @@ export default async function ProdottiPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-xs text-neutral-400 border-b border-neutral-100">
+              <th className="px-4 py-2 font-medium"></th>
               <th className="px-4 py-2 font-medium">Brand</th>
               <th className="px-4 py-2 font-medium">Tipologia</th>
               <th className="px-4 py-2 font-medium">Colore</th>
@@ -110,22 +165,32 @@ export default async function ProdottiPage({
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-50">
-            {prodotti.map((p) => (
-              <tr key={p.id}>
-                <td className="px-4 py-2 text-neutral-500">{p.brand.nome}</td>
-                <td className="px-4 py-2 font-medium">{p.tipologia}</td>
-                <td className="px-4 py-2">{p.colore}</td>
-                <td className="px-4 py-2 text-neutral-500">{p.larghezzaMm} × {p.altezzaMm} {unitaMisura(p.tipologia)}</td>
-                <td className="px-4 py-2 text-right">
-                  {p.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
-                </td>
-                <td className="px-4 py-2 text-right">
-                  <Link href={`/prodotti/modello/${encodeURIComponent(p.tipologia)}`} className="text-xs text-blue-600 underline whitespace-nowrap">
-                    scheda tecnica
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {prodotti.map((p) => {
+              const modello = modelloMap.get(p.tipologia);
+              return (
+                <tr key={p.id}>
+                  <td className="px-4 py-2">
+                    {modello?.immagineUrl ? (
+                      <img src={modello.immagineUrl} alt={p.tipologia} className="w-8 h-8 object-cover rounded border border-neutral-200" />
+                    ) : (
+                      <span className="w-8 h-8 block rounded bg-neutral-50 border border-dashed border-neutral-200" />
+                    )}
+                  </td>
+                  <td className="px-4 py-2 text-neutral-500">{p.brand.nome}</td>
+                  <td className="px-4 py-2 font-medium">{p.tipologia}</td>
+                  <td className="px-4 py-2">{p.colore}</td>
+                  <td className="px-4 py-2 text-neutral-500">{p.larghezzaMm} × {p.altezzaMm} {unitaMisura(p.tipologia)}</td>
+                  <td className="px-4 py-2 text-right">
+                    {p.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                  </td>
+                  <td className="px-4 py-2 text-right">
+                    <Link href={`/prodotti/modello/${encodeURIComponent(p.tipologia)}`} className="text-xs text-blue-600 underline whitespace-nowrap">
+                      scheda tecnica
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {prodotti.length === 0 && (
