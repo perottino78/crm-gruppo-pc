@@ -75,6 +75,7 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TENDABRACCICASS_CARAIBI")) return "TENDABRACCICASS_CARAIBI";
   if (tipologia.startsWith("TENDABRACCICASS_COVER400")) return "TENDABRACCICASS_COVER400";
   if (tipologia.startsWith("TENDABRACCICASS_EUROPA")) return "TENDABRACCICASS_EUROPA";
+  if (tipologia.startsWith("TENDABRACCICASS_HAWAII")) return "TENDABRACCICASS_HAWAII";
   return null;
 }
 

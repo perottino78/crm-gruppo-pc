@@ -1,0 +1,3362 @@
+[
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 5103.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 5657.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 6217.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 6644.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 9389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 800,
+    "prezzoBase": 9941.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 900,
+    "prezzoBase": 10509.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 200,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11069.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 5730.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 6302.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 6869.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 800,
+    "prezzoBase": 10081.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 900,
+    "prezzoBase": 10655.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 225,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11229.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 5803.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 6389.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 6815.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 8514.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 800,
+    "prezzoBase": 10214.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 900,
+    "prezzoBase": 10801.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 250,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11387.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 5875.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 6475.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 6902.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 700,
+    "prezzoBase": 8624.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 800,
+    "prezzoBase": 10346.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 900,
+    "prezzoBase": 10946.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 275,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 5948.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 6987.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 8733.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 800,
+    "prezzoBase": 10479.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 900,
+    "prezzoBase": 11092.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 300,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11704.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 500,
+    "prezzoBase": 6647.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 600,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 700,
+    "prezzoBase": 8842.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 800,
+    "prezzoBase": 10612.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 900,
+    "prezzoBase": 11237.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 325,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11863.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 6732.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 7159.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 8951.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 800,
+    "prezzoBase": 9590.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 900,
+    "prezzoBase": 11383.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 350,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12021.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 500,
+    "prezzoBase": 6818.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 600,
+    "prezzoBase": 7245.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 700,
+    "prezzoBase": 9060.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 800,
+    "prezzoBase": 9714.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 900,
+    "prezzoBase": 10366.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 375,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12188.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 500,
+    "prezzoBase": 6904.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 600,
+    "prezzoBase": 7330.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 700,
+    "prezzoBase": 9170.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 800,
+    "prezzoBase": 9835.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 900,
+    "prezzoBase": 10500.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO LUCE (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "CORTEN",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "BIANCO SOFT (9010)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "AVORIO SOFT (1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "GRIGIO SOFT (7035)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  },
+  {
+    "tipologia": "TENDABRACCICASS_HAWAII",
+    "colore": "ANTRACITE SOFT (7016)",
+    "altezzaMm": 400,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12339.0
+  }
+]

@@ -1,0 +1,450 @@
+[
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini elettronico (D) 50 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 424,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini elettronico (D) 85 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 727,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini elettronico (D) 120 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 865,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (D) 50 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 805,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (D) 85 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 992,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (D) 120 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 1232,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy IO elettronico (Di) 50 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 805,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy IO elettronico (Di) 85 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 992,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy IO elettronico (Di) 120 Nm",
+    "tipoPrezzo": "FISSO",
+    "valore": 1232,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "L'Nm richiesto dipende dalla misura scelta: verificare la riga 'Motore(Nm)' del listino Hawaii per la combinazione sporgenza/larghezza.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Sensore",
+    "nome": "Cherubini Windtec",
+    "tipoPrezzo": "FISSO",
+    "valore": 175,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Sensore",
+    "nome": "Cherubini Mistral",
+    "tipoPrezzo": "FISSO",
+    "valore": 217,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Sensore",
+    "nome": "Somfy Eolis RTS/IO",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Sensore",
+    "nome": "Somfy Eolis 3D RTS/IO",
+    "tipoPrezzo": "FISSO",
+    "valore": 272,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Telecomando",
+    "nome": "Cherubini Pop 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 97,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Telecomando",
+    "nome": "Cherubini Pop plus 7 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 129,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Telecomando",
+    "nome": "Somfy Situo 1 RTS/IO",
+    "tipoPrezzo": "FISSO",
+    "valore": 96,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Telecomando",
+    "nome": "Somfy Situo 5 RTS/IO",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 4,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 1",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 5m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 694,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 10m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 779,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 15m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 864,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 20m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 950,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 25m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1563,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 30m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1648,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 35m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1733,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 40m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1819,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Strip LED",
+    "nome": "Strip LED 45m (alimentatore e dimmer inclusi)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2432,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": "Sviluppo totale in metri da calcolare in base a bracci/cassonetto/terminale scelti (vedi esempio nel listino).",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Controstaffa a soffitto",
+    "tipoPrezzo": "FISSO",
+    "valore": 475,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_HAWAII",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  }
+]
