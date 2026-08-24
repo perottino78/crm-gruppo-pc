@@ -569,7 +569,7 @@
   },
   {
     "tipologia": "CENTRALINA_NICE",
-    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE",
+    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE (TT4)",
     "altezzaMm": 0,
     "larghezzaMm": 0,
     "prezzoBase": 378,
@@ -585,7 +585,7 @@
   },
   {
     "tipologia": "CENTRALINA_NICE",
-    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE",
+    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE (TT1N)",
     "altezzaMm": 0,
     "larghezzaMm": 0,
     "prezzoBase": 264,
@@ -601,7 +601,7 @@
   },
   {
     "tipologia": "SENSORE_NICE",
-    "colore": "SENSORE SOLE/VENTO",
+    "colore": "SENSORE SOLE/VENTO (VOLO/S)",
     "altezzaMm": 0,
     "larghezzaMm": 0,
     "prezzoBase": 200,
@@ -609,7 +609,7 @@
   },
   {
     "tipologia": "SENSORE_NICE",
-    "colore": "SENSORE SOLE/VENTO",
+    "colore": "SENSORE SOLE/VENTO (VOLO/SR)",
     "altezzaMm": 0,
     "larghezzaMm": 0,
     "prezzoBase": 304,
