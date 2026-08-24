@@ -1,0 +1,324 @@
+[
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 1",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Altri colori (fuori serie Bianco/Grigio)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Struttura",
+    "nome": "Esclusione braccetti",
+    "tipoPrezzo": "FISSO",
+    "valore": 279,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Segno da verificare sul listino cartaceo: importato come maggiorazione (+279€); potrebbe invece essere una detrazione per la configurazione senza braccetti.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Motore elettronico Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 827,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo per singolo motore.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Motore elettronico Cherubini",
+    "tipoPrezzo": "FISSO",
+    "valore": 735,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo per singolo motore.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Motore elettronico Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1207,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo per singolo motore.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 120cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 325,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 200cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 358,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 250cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 399,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 300cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 445,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 350cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 482,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Carter interno (largh. 400cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 530,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sostituisce il carter esterno di serie.",
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 120cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 80,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 200cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 159,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 250cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 159,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 300cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 235,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 350cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 235,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione telo estivo fino a terra (largh. 400cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 315,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE VERANDA"
+    ]
+  }
+]

@@ -1,0 +1,1682 @@
+[
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 2135.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2485.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2830.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2921.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3000.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3360.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1345.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1682.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 1772.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1860.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2147.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2236.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1724.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2051.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2147.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2421.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2513.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2788.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 2271.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2635.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3003.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3093.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3178.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3555.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1495.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 1875.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 1962.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2051.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2378.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2466.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1839.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2168.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2259.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2534.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2630.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2902.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 2402.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2793.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3178.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2670.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3350.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3750.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1658.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2074.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2166.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2257.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2618.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2704.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1960.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2293.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2387.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2663.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2753.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3027.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2538.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2947.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3354.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3447.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3528.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3945.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 1679.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2248.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2337.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2430.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 2829.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 2918.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2060.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2388.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2477.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2753.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 2847.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3120.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 2200.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2557.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2913.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3008.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3092.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3460.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1383.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1731.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 1825.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1917.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2305.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1777.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2115.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2212.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2493.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2592.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2873.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 2339.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2714.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3094.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3190.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3275.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3662.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1540.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 1932.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2024.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2115.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2450.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2539.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1894.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2235.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2325.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2611.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2709.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2990.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 2576.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2880.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3275.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3368.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3453.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3864.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1707.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2137.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2233.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2323.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2697.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2786.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 2020.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2363.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2459.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2743.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2835.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3120.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2616.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3039.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3445.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3551.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3637.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4065.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 1846.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2317.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2404.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2505.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 2913.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3003.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2122.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2462.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2553.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2836.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 2931.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP",
+    "colore": "SOLO TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3216.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 2383.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2765.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 3138.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3267.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3375.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3767.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1590.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1962.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2085.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2207.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2622.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2647.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 2515.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2919.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3317.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3440.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3555.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3965.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1743.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2156.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2276.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2399.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2753.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2875.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 2650.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3077.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3490.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3618.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3727.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4160.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1908.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2356.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2478.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2600.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2991.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3115.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2786.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3231.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3791.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3904.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4355.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2039.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2530.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2647.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2774.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3204.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3325.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 2447.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2839.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 3224.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3354.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3471.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3871.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1632.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2015.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2137.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2264.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2589.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2714.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 2584.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2998.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3407.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3534.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3649.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 4071.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 1787.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2212.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2337.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2462.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2827.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2949.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 2724.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3160.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3587.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3714.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3830.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4272.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1957.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2421.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2543.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2670.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3072.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3197.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2861.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3320.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3767.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3897.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4012.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "TELO INVERNALE + TESSUTO ESTIVO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4475.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 2092.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2598.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 2717.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2851.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3289.0
+  },
+  {
+    "tipologia": "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+    "colore": "SOLO TELO INVERNALE",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3413.0
+  }
+]
