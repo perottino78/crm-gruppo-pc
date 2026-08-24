@@ -1,0 +1,1266 @@
+[
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 15/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 306,
+    "descrizione": "Codice articolo: CME45151700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 32/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 330,
+    "descrizione": "Codice articolo: CME45321700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 40/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 348,
+    "descrizione": "Codice articolo: CME45401700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 368,
+    "descrizione": "Codice articolo: CME45501200"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 85/17 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 756,
+    "descrizione": "Codice articolo: CME58081700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 100/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 856,
+    "descrizione": "Codice articolo: CME58101100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+    "colore": "GARDA 120/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 988,
+    "descrizione": "Codice articolo: CME58121100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 32/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 570,
+    "descrizione": "Codice articolo: CMS45321700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 40/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 630,
+    "descrizione": "Codice articolo: CMS45401700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 664,
+    "descrizione": "Codice articolo: CMS45501200"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 85/17 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 908,
+    "descrizione": "Codice articolo: CMS58081700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 100/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 960,
+    "descrizione": "Codice articolo: CMS58101100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+    "colore": "OCEAN 120/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1042,
+    "descrizione": "Codice articolo: CMS58121100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 15/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 646,
+    "descrizione": "Codice articolo: CET45151700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 32/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 686,
+    "descrizione": "Codice articolo: CET45321700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 40/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 718,
+    "descrizione": "Codice articolo: CET45401700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 738,
+    "descrizione": "Codice articolo: CET45501200"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 85/17 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1266,
+    "descrizione": "Codice articolo: CET58081700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 100/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1356,
+    "descrizione": "Codice articolo: CET58101100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+    "colore": "WAVE RX 120/11 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1508,
+    "descrizione": "Codice articolo: CET58121100"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_RADIO",
+    "colore": "GARDA RX 32/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 626,
+    "descrizione": "Codice articolo: CMT45321700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_RADIO",
+    "colore": "GARDA RX 40/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 668,
+    "descrizione": "Codice articolo: CMT45401700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_RADIO",
+    "colore": "GARDA RX 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 710,
+    "descrizione": "Codice articolo: CMT45501200"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO_RADIO",
+    "colore": "OCEAN RX 32/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 858,
+    "descrizione": "Codice articolo: CMX45321700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO_RADIO",
+    "colore": "OCEAN RX 40/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 886,
+    "descrizione": "Codice articolo: CMX45401700"
+  },
+  {
+    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO_RADIO",
+    "colore": "OCEAN RX 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 938,
+    "descrizione": "Codice articolo: CMX45501200"
+  },
+  {
+    "tipologia": "TELECOMANDO_CHERUBINI",
+    "colore": "TELECOMANDO POP 1 CANALE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 168,
+    "descrizione": "Codice articolo: A530126"
+  },
+  {
+    "tipologia": "TELECOMANDO_CHERUBINI",
+    "colore": "TELECOMANDO POP PLUS 7 CANALI",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 224,
+    "descrizione": "Codice articolo: A530138"
+  },
+  {
+    "tipologia": "TELECOMANDO_CHERUBINI",
+    "colore": "TELECOMANDO POP LUX 1 CANALE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 196,
+    "descrizione": "Codice articolo: A530132"
+  },
+  {
+    "tipologia": "TELECOMANDO_CHERUBINI",
+    "colore": "TELECOMANDO POP P-LUX 7 CANALI",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 252,
+    "descrizione": "Codice articolo: A530144"
+  },
+  {
+    "tipologia": "CENTRALINA_CHERUBINI",
+    "colore": "CENTRALINA TDS GOLD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 348,
+    "descrizione": "Codice articolo: A510020"
+  },
+  {
+    "tipologia": "CENTRALINA_CHERUBINI",
+    "colore": "CENTRALINA SILVER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 248,
+    "descrizione": "Codice articolo: A510021"
+  },
+  {
+    "tipologia": "CENTRALINA_CHERUBINI",
+    "colore": "CENTRALINA TANDEM",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 512,
+    "descrizione": "Codice articolo: A510030"
+  },
+  {
+    "tipologia": "CENTRALINA_CHERUBINI",
+    "colore": "CENTRALINA GESTIONE LED DIMMER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 296,
+    "descrizione": "Codice articolo: A510073"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE VENTO WINDTEC",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 302,
+    "descrizione": "Codice articolo: A520007"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE SOLE/VENTO WINDTEC LUX",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 346,
+    "descrizione": "Codice articolo: A520008"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE VENTO MISTRAL (con rilevamento vibrazioni)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 374,
+    "descrizione": "Codice articolo: A520012"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE VENTO WINDTEC SC",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 148,
+    "descrizione": "Codice articolo: A520010"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE PIOGGIA RUGIADA TX",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 706,
+    "descrizione": "Codice articolo: A520016"
+  },
+  {
+    "tipologia": "SENSORE_CHERUBINI",
+    "colore": "SENSORE PIOGGIA GOCCIA (FILARE)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 306,
+    "descrizione": "Codice articolo: A520017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-M 15/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 306,
+    "descrizione": "Codice articolo: EM 1517"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-M 30/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 330,
+    "descrizione": "Codice articolo: EM 3017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-M 40/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 348,
+    "descrizione": "Codice articolo: EM 4012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-M 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 368,
+    "descrizione": "Codice articolo: EM 5012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-L 80/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 756,
+    "descrizione": "Codice articolo: EL 8012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-L 100/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 856,
+    "descrizione": "Codice articolo: EL 10012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO",
+    "colore": "ERA-L 120/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 988,
+    "descrizione": "Codice articolo: EL 12012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-MH 30/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 570,
+    "descrizione": "Codice articolo: EMH 3017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-MH 40/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 630,
+    "descrizione": "Codice articolo: EMH 4012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-MH 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 664,
+    "descrizione": "Codice articolo: EMH 5012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-LH 80/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 908,
+    "descrizione": "Codice articolo: ELH 8012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-LH 100/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 960,
+    "descrizione": "Codice articolo: ELH 10012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+    "colore": "ERA-LH 120/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1042,
+    "descrizione": "Codice articolo: ELH 12012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-MT 15/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 646,
+    "descrizione": "Codice articolo: EMATMT 1517"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-MT 30/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 686,
+    "descrizione": "Codice articolo: EMATMT 3017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-MT 40/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 718,
+    "descrizione": "Codice articolo: EMATMT 4012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-MT 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 738,
+    "descrizione": "Codice articolo: EMATMT 5012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-LT 80/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1266,
+    "descrizione": "Codice articolo: EMATLT 8012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-LT 100/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1356,
+    "descrizione": "Codice articolo: EMATLT 10012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+    "colore": "ERA MAT-LT 120/12 · Ø58mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1508,
+    "descrizione": "Codice articolo: EMATLT 12012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_RADIO",
+    "colore": "ERA PLUS M 30/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 626,
+    "descrizione": "Codice articolo: EPLUS M 3017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_RADIO",
+    "colore": "ERA PLUS M 40/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 668,
+    "descrizione": "Codice articolo: EPLUS M 4012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_RADIO",
+    "colore": "ERA PLUS M 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 710,
+    "descrizione": "Codice articolo: EPLUS M 5012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO_RADIO",
+    "colore": "ERA PLUS MH 30/17 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 858,
+    "descrizione": "Codice articolo: EPLUS MH 3017"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO_RADIO",
+    "colore": "ERA PLUS MH 40/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 886,
+    "descrizione": "Codice articolo: EPLUS MH 4012"
+  },
+  {
+    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO_RADIO",
+    "colore": "ERA PLUS MH 50/12 · Ø45mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 938,
+    "descrizione": "Codice articolo: EPLUS MH 5012"
+  },
+  {
+    "tipologia": "TELECOMANDO_NICE",
+    "colore": "COMANDO PORTATILE A 1 CANALE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 168,
+    "descrizione": "Codice articolo: P1"
+  },
+  {
+    "tipologia": "TELECOMANDO_NICE",
+    "colore": "COMANDO PORTATILE A 1 CANALE (attivazione sensori separata)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 196,
+    "descrizione": "Codice articolo: P1S"
+  },
+  {
+    "tipologia": "TELECOMANDO_NICE",
+    "colore": "COMANDO PORTATILE A 6 CANALI",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 224,
+    "descrizione": "Codice articolo: P6"
+  },
+  {
+    "tipologia": "TELECOMANDO_NICE",
+    "colore": "COMANDO PORTATILE A 6 CANALI (attivazione sensori separata)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 252,
+    "descrizione": "Codice articolo: P6S"
+  },
+  {
+    "tipologia": "CENTRALINA_NICE",
+    "colore": "CENTRALE DI COMANDO PER 1 MOTORE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 206,
+    "descrizione": "Codice articolo: TT3"
+  },
+  {
+    "tipologia": "CENTRALINA_NICE",
+    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 378,
+    "descrizione": "Codice articolo: TT4"
+  },
+  {
+    "tipologia": "CENTRALINA_NICE",
+    "colore": "CENTRALE DI COMANDO RADIO PER 2 MOTORI",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 512,
+    "descrizione": "Codice articolo: TT5"
+  },
+  {
+    "tipologia": "CENTRALINA_NICE",
+    "colore": "CENTRALE DI COMANDO RADIO PER 1 MOTORE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 264,
+    "descrizione": "Codice articolo: TT1N"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE VENTO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 138,
+    "descrizione": "Codice articolo: VOLO"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE SOLE/VENTO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": "Codice articolo: VOLO/S"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE SOLE/VENTO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 304,
+    "descrizione": "Codice articolo: VOLO/SR"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE SOLE/VENTO (autoalimentato a celle fotovoltaiche)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 480,
+    "descrizione": "Codice articolo: NEMO WSCT"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE VENTO/SOLE/PIOGGIA",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 664,
+    "descrizione": "Codice articolo: NEMO WSRT"
+  },
+  {
+    "tipologia": "SENSORE_NICE",
+    "colore": "SENSORE VENTO (con rilevamento vibrazioni)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 374,
+    "descrizione": "Codice articolo: NEMO VIBE"
+  },
+  {
+    "tipologia": "GATEWAY_NICE",
+    "colore": "WI FI RADIO GATEWAY",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 630,
+    "descrizione": "Codice articolo: CORE"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 HIPRO 12 20/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 384,
+    "descrizione": "Codice articolo: 1041045"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 HIPRO 12 30/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 512,
+    "descrizione": "Codice articolo: 1045037"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 HIPRO 12 40/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 574,
+    "descrizione": "Codice articolo: 1049054"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 METEOR 20/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 738,
+    "descrizione": "Codice articolo: 1041057"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 HELIOS 30/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 800,
+    "descrizione": "Codice articolo: 1045041"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 MARINER 40/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 890,
+    "descrizione": "Codice articolo: 1049066"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 50 VECTRAN 50/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 918,
+    "descrizione": "Codice articolo: 1051029"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 60 SIRIUS 80/12 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1128,
+    "descrizione": "Codice articolo: 1164021"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 60 TITAN 100/12 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1280,
+    "descrizione": "Codice articolo: 1166025"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO",
+    "colore": "LT 60 TAURUS 120/12 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1502,
+    "descrizione": "Codice articolo: 1167017"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 50 METEOR 20/17 CSI · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 912,
+    "descrizione": "Codice articolo: 1041005"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 50 HELIOS 30/17 CSI · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 984,
+    "descrizione": "Codice articolo: 1045004"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 50 MARINER 40/17 CSI · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1100,
+    "descrizione": "Codice articolo: 1049011"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 50 VECTRAN 50/12 CSI · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1146,
+    "descrizione": "Codice articolo: 1051000"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 60 SIRIUS 80/12 CSI · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1446,
+    "descrizione": "Codice articolo: 1164003"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 60 TITAN 100/12 CSI · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1770,
+    "descrizione": "Codice articolo: 1166002"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+    "colore": "LT 60 TAURUS 120/12 CSI · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1926,
+    "descrizione": "Codice articolo: 1167003"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS M 20/12 RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 692,
+    "descrizione": "Codice articolo: 1041674"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS M 30/12 RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 748,
+    "descrizione": "Codice articolo: 1045555"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS M 40/12 RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 792,
+    "descrizione": "Codice articolo: 1049639"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 50 RTS 10/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1034,
+    "descrizione": "Codice articolo: 1037504"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 50 RTS 20/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1124,
+    "descrizione": "Codice articolo: 1041479"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 50 RTS 30/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1222,
+    "descrizione": "Codice articolo: 1045393"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 50 RTS 40/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1362,
+    "descrizione": "Codice articolo: 1049499"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 50 RTS 50/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1402,
+    "descrizione": "Codice articolo: 1051321"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 60 RTS 85/17 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1728,
+    "descrizione": "Codice articolo: 1165099"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "ALTUS 60 RTS 120/12 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 2146,
+    "descrizione": "Codice articolo: 1167037"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 50 RTS 20/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1204,
+    "descrizione": "Codice articolo: 1113145"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 50 RTS 30/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1290,
+    "descrizione": "Codice articolo: 1115114"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 50 RTS 40/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1438,
+    "descrizione": "Codice articolo: 1117125"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 50 RTS 50/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1494,
+    "descrizione": "Codice articolo: 1118097"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 60 RTS 85/17 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1806,
+    "descrizione": "Codice articolo: 1183055"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+    "colore": "OREA 60 RTS 120/12 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 2146,
+    "descrizione": "Codice articolo: 1184062"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNILUS IO 50 20/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1124,
+    "descrizione": "Codice articolo: 1041822"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNILUS IO 50 30/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1222,
+    "descrizione": "Codice articolo: 1045634"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNILUS IO 50 40/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1362,
+    "descrizione": "Codice articolo: 1049727"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNILUS IO 50 50/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1402,
+    "descrizione": "Codice articolo: 1051380"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNILUS IO 60 85/17 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1728,
+    "descrizione": "Codice articolo: 1165169"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNEA IO 50 20/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1204,
+    "descrizione": "Codice articolo: 1113215"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNEA IO 50 30/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1290,
+    "descrizione": "Codice articolo: 1115204"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNEA IO 50 40/17 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1438,
+    "descrizione": "Codice articolo: 1117222"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNEA IO 50 50/12 · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1494,
+    "descrizione": "Codice articolo: 1118169"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+    "colore": "SUNEA IO 60 85/17 · Ø60mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1806,
+    "descrizione": "Codice articolo: 1183171"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
+    "colore": "LT 50 METEOR 20/17 CSI RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1160,
+    "descrizione": "Codice articolo: 1041109"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
+    "colore": "LT 50 HELIOS 30/17 CSI RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1224,
+    "descrizione": "Codice articolo: 1045227"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
+    "colore": "LT 50 MARINER 40/17 CSI RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1258,
+    "descrizione": "Codice articolo: 1049078"
+  },
+  {
+    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
+    "colore": "LT 50 VECTRAN 50/12 CSI RTS · Ø50mm",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1338,
+    "descrizione": "Codice articolo: 1051108"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 1 RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 166,
+    "descrizione": "Codice articolo: 1870405"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 5 RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 260,
+    "descrizione": "Codice articolo: 1870421"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 1 SOLIRIS RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 284,
+    "descrizione": "Codice articolo: 1870537"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 5 SOLIRIS RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 374,
+    "descrizione": "Codice articolo: 1870539"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 1 VARIATION RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 292,
+    "descrizione": "Codice articolo: 1811608"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 5 VARIATION RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 394,
+    "descrizione": "Codice articolo: 1811610"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_RTS",
+    "colore": "SITUO 1 VARIATION SOLIRIS RTS II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 370,
+    "descrizione": "Codice articolo: 1800503"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_IO",
+    "colore": "SITUO 1 IO II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 166,
+    "descrizione": "Codice articolo: 1870314"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_IO",
+    "colore": "SITUO 5 IO II",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 260,
+    "descrizione": "Codice articolo: 1870330"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_IO",
+    "colore": "SITUO 1 VARIATION IO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 284,
+    "descrizione": "Codice articolo: 1811634"
+  },
+  {
+    "tipologia": "TELECOMANDO_SOMFY_IO",
+    "colore": "SITUO 5 VARIATION IO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 374,
+    "descrizione": "Codice articolo: 1811636"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "COMANDO 2 OPERATORE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 664,
+    "descrizione": "Codice articolo: 9750040"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "RICEVITORE UNIVERSALE",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 466,
+    "descrizione": "Codice articolo: 1810624"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "CENTRALINA EOLIS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 350,
+    "descrizione": "Codice articolo: 1816046"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "MOTOR CONTROLLER 2ACIBWM",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 654,
+    "descrizione": "Codice articolo: 1860209"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "MOTOR CONTROLLER 4ACWM",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1130,
+    "descrizione": "Codice articolo: 1860049"
+  },
+  {
+    "tipologia": "CENTRALINA_SOMFY",
+    "colore": "TRASMETTITORE A CONTATTI PULITI",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 478,
+    "descrizione": "Codice articolo: 1810135"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "EOLIS (VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 430,
+    "descrizione": "Codice articolo: 1816068"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "SOLIRIS (SOLE/VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 588,
+    "descrizione": "Codice articolo: 1818212"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "EOLIS 3D (VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 472,
+    "descrizione": "Codice articolo: 9014400"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "KIT EOLIS (VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 876,
+    "descrizione": "Codice articolo: 1816064"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "KIT SOLIRIS (SOLE/VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1110,
+    "descrizione": "Codice articolo: 1818207"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "KIT EOLIS WT (VENTO)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 510,
+    "descrizione": "Codice articolo: 1816048"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "KIT SOLIRIS UNO (SOLE/VENTO)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 846,
+    "descrizione": "Codice articolo: 1818150"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "KIT SOLIRIS IB (SOLE/VENTO) RTS",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 898,
+    "descrizione": "Codice articolo: 1818163"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_RTS",
+    "colore": "ONDEIS CAPTATORE PIOGGIA",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 904,
+    "descrizione": "Codice articolo: 9016345"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_IO",
+    "colore": "EOLIS IO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 604,
+    "descrizione": "Codice articolo: 1816092"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_IO",
+    "colore": "SOLIRIS IO S/CAVO 230V",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 614,
+    "descrizione": "Codice articolo: 1870532"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_IO",
+    "colore": "EOLIS 3D WIREFREE IO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 472,
+    "descrizione": "Codice articolo: 9016355"
+  },
+  {
+    "tipologia": "SENSORE_SOMFY_IO",
+    "colore": "EOLIS WIREFREE IO",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 486,
+    "descrizione": "Codice articolo: 1816084"
+  }
+]

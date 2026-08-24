@@ -1,0 +1,240 @@
+[
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice",
+    "tipoPrezzo": "FISSO",
+    "valore": 738,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_MILLENIUM",
+    "note": "Prezzo unico riportato a catalogo per Cherubini/Nice, motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1494,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_MILLENIUM",
+    "note": "Prezzo unico riportato a catalogo per Somfy, motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Piedini di fissaggio",
+    "tipoPrezzo": "FISSO",
+    "valore": 32,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_MILLENIUM",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 368,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 738,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 574,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 1362,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 403,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": "368 € + 35 € di maggiorazione per predisposizione fori finecorsa (presente cassonetto). Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 738,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 609,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": "574 € + 35 € di maggiorazione per predisposizione fori finecorsa (presente cassonetto). Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 1362,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": "Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE ORIZZONTALI"
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "tipologia": "TENDAORIZZ_MILLENIUM",
+    "descrizioneTecnica": "Tenda orizzontale con struttura interamente in alluminio; tensione del telo terminale garantita da un sistema motorizzato con molla interna al rullo avvolgitore. Comando destra di serie, armatura RAL 9010, piastre laterali. Certificazione EN 13561, resistenza al vento Classe 1. Prezzo con motore escluso (tariffa tessuto 1/2, Soltis esclusa).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE ORIZZONTALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+    "descrizioneTecnica": "Tenda orizzontale Tenda Roll, versione senza cassonetto. Manovra ad argano o motore, con cinghie di traino e richiamo a molla. Comando destra di serie, armatura RAL 9010. Certificazione EN 13561, resistenza al vento Classe 2. Prezzo comando ad argano, tariffa tessuto 1.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE ORIZZONTALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+    "descrizioneTecnica": "Tenda orizzontale Tenda Roll, versione con cassonetto a chiusura integrale. Manovra ad argano o motore, con cinghie di traino e richiamo a molla. Comando destra di serie, armatura RAL 9010. Certificazione EN 13561, resistenza al vento Classe 2. Prezzo comando ad argano, tariffa tessuto 1.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE ORIZZONTALI",
+    "immagineUrl": null
+  }
+]

@@ -1,0 +1,646 @@
+[
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 686€ a 738€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1204,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 1204€ a 1438€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 686€ a 718€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1204,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 1204€ a 1290€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 718,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 718€ a 1266€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1438,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 1438€ a 1806€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Cherubini / Nice elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 686€ a 1266€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico (a partire da)",
+    "tipoPrezzo": "FISSO",
+    "valore": 748,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Prezzo variabile in base a sporgenza e larghezza, da 748€ a 1728€: verificare l'importo esatto per la misura scelta sul listino cartaceo. Motore fornito senza telecomando.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 1",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 1",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_COVER400",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 1",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto acrilico fuori campionario tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Staffa a L per attacco a soffitto",
+    "tipoPrezzo": "FISSO",
+    "valore": 119,
+    "unita": "a coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBI",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Staffa a L per attacco a soffitto",
+    "tipoPrezzo": "FISSO",
+    "valore": 119,
+    "unita": "a coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_CARAIBISMART",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 150cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 396,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 150cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 868,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 175cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 404,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 175cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 890,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 200cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 416,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 200cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 916,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 225cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 424,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 225cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 958,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 250cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 432,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 250cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 980,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 300cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 480,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 300cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1060,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo (sporgenza 350cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 496,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  },
+  {
+    "categoria": "Braccio aggiuntivo",
+    "nome": "Braccio aggiuntivo con LED (sporgenza 350cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1104,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDABRACCICASS_EUROPA",
+    "note": "Alimentatore/dimmer/telecomando multicanale inclusi. Verificare la compatibilità larghezza/sporgenza secondo le istruzioni del listino cartaceo.",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO"
+    ]
+  }
+]
