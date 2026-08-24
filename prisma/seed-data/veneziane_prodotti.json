@@ -1,0 +1,51 @@
+[
+  {
+    "tipologia": "VENEZIANA_50MM",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 30,
+    "larghezzaMm": 30,
+    "prezzoBase": 69.0
+  },
+  {
+    "tipologia": "VENEZIANA_50MM_ARGANELLO",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 30,
+    "larghezzaMm": 30,
+    "prezzoBase": 69.0
+  },
+  {
+    "tipologia": "VENEZIANA_50MM_MOTORE",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 50,
+    "larghezzaMm": 70,
+    "prezzoBase": 69.0
+  },
+  {
+    "tipologia": "VENEZIANA_70MM_SCUDO",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 30,
+    "larghezzaMm": 35,
+    "prezzoBase": 277.0
+  },
+  {
+    "tipologia": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 50,
+    "larghezzaMm": 70,
+    "prezzoBase": 277.0
+  },
+  {
+    "tipologia": "VENEZIANA_80MM",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 30,
+    "larghezzaMm": 35,
+    "prezzoBase": 261.0
+  },
+  {
+    "tipologia": "VENEZIANA_80MM_MOTORE",
+    "colore": "DI SERIE (18 colori standard + 6 tinta legno)",
+    "altezzaMm": 50,
+    "larghezzaMm": 70,
+    "prezzoBase": 261.0
+  }
+]

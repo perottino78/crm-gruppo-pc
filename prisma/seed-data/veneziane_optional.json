@@ -1,0 +1,492 @@
+[
+  {
+    "categoria": "Accessorio guida",
+    "nome": "Guida in perlon inserita + accessori (2 molle + 2 staffe + 2 morsetti), cadauna tenda",
+    "tipoPrezzo": "FISSO",
+    "valore": 9.5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_FAMIGLIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio guida",
+    "nome": "Impiego morsettone a pavimento, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 5.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_FAMIGLIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Supplemento colore",
+    "nome": "Colori stampato legno (cod. 501-502-503-504-505-507)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_FAMIGLIA",
+    "note": "Supplemento sul prezzo della tenda",
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Supplemento colore",
+    "nome": "Veneziane fino a 3 colori",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_FAMIGLIA",
+    "note": "Supplemento sul prezzo della tenda",
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Meccanismo",
+    "nome": "Supplemento per monocomando Arganello, cadauna tenda",
+    "tipoPrezzo": "FISSO",
+    "valore": 264.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_ARGANELLO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Innesto per asta sganciabile, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_ARGANELLO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 45°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_ARGANELLO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 90°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_ARGANELLO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Supplemento motore, cadauna tenda",
+    "tipoPrezzo": "FISSO",
+    "valore": 752.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Pulsantiera comune (commutatore e relativa scatola), cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 40.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Ricevitore singolo per funzionamento con telecomando, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 210.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 1 canale, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 110.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 5 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 10 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 230.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_50MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio guida",
+    "nome": "Guida doppia, al metro lineare",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.0,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70_80MM_FAMIGLIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio guida",
+    "nome": "Montante in alluminio mm. 50x20, al metro lineare",
+    "tipoPrezzo": "FISSO",
+    "valore": 30.0,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70_80MM_FAMIGLIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio guida",
+    "nome": "Mantovana di protezione in alluminio, al metro lineare",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.0,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70_80MM_FAMIGLIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Innesto per asta sganciabile, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 45°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 90°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Supplemento motore, cadauna tenda",
+    "tipoPrezzo": "FISSO",
+    "valore": 752.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Pulsantiera comune (commutatore e relativa scatola), cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 40.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Ricevitore singolo per funzionamento con telecomando, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 210.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 1 canale, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 110.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 5 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 10 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 230.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Innesto per asta sganciabile, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 45°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Accessorio meccanismo",
+    "nome": "Cardano con rinvio a 90°, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Supplemento motore, cadauna tenda",
+    "tipoPrezzo": "FISSO",
+    "valore": 752.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Pulsantiera comune (commutatore e relativa scatola), cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 40.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Ricevitore singolo per funzionamento con telecomando, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 210.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 1 canale, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 110.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 5 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Telecomando a 10 canali, cadaun pezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 230.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VENEZIANA_80MM_MOTORE",
+    "note": null,
+    "gruppiApplicabili": [
+      "VENEZIANE ESTERNO"
+    ]
+  }
+]

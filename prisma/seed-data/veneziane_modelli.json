@@ -1,0 +1,86 @@
+[
+  {
+    "tipologia": "VENEZIANA_50MM",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 50 MM. Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: a corde (tiraggio manuale con nappina, comandi vista interno stanza). PREZZO: tariffa fissa di 69€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 30 a 350 cm, altezza da 30 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Per misure luce foro la tenda verrà diminuita di 1cm in larghezza. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_50MM_ARGANELLO",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 50 MM MONOCOMANDO ARGANELLO. Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: monocomando ad arganello (manovella, comandi vista interno stanza). PREZZO: tariffa fissa di 69€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 30 a 350 cm, altezza da 30 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Include supplemento fisso per monocomando Arganello (264€ cadauna tenda) da aggiungere come optional. Per misure luce foro la tenda verrà diminuita di 1cm in larghezza. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_50MM_MOTORE",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 50 MM CON MOTORE. Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: motorizzato (motore 220V, comando via pulsantiera/telecomando optional). PREZZO: tariffa fissa di 69€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 70 a 350 cm, altezza da 50 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Include supplemento fisso motore (752€ cadauna tenda) da aggiungere come optional. Per misure luce foro la tenda verrà diminuita di 1cm in larghezza. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_70MM_SCUDO",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 70 MM SCUDO (Arganello). Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: ad arganello (manovella, comandi vista interno stanza), lamella profilo scudo con guarnizione. PREZZO: tariffa fissa di 277€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 35 a 350 cm, altezza da 30 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Vengono accettate solo le misure luce foro. Per tende con larghezza inferiore a 120cm non è garantita la perfezione a causa del peso ridotto. Tolleranza larghezza finita ± 0,5mm. Posizionare la tenda con le guarnizioni sulle lamelle verso l'esterno della stanza.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_70MM_SCUDO_MOTORE",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 70 MM SCUDO CON MOTORE. Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: motorizzato (motore 220V, comando via pulsantiera/telecomando optional), lamella profilo scudo con guarnizione. PREZZO: tariffa fissa di 277€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 70 a 350 cm, altezza da 50 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Include supplemento fisso motore (752€ cadauna tenda) da aggiungere come optional. Vengono accettate solo le misure luce foro. Per tende con larghezza inferiore a 120cm non è garantita la perfezione a causa del peso ridotto. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_80MM",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 80 MM (Arganello). Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: ad arganello (manovella, comandi vista interno stanza). PREZZO: tariffa fissa di 261€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 35 a 400 cm, altezza da 30 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Vengono accettate solo le misure luce foro. Per tende con larghezza inferiore a 120cm non è garantita la perfezione a causa del peso ridotto. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "VENEZIANA_80MM_MOTORE",
+    "descrizioneTecnica": "Tenda alla veneziana da esterno 80 MM CON MOTORE. Lamella in alluminio verniciato a fuoco (spessore 0,23mm), disponibile in 18 colori standard e 6 colori tinta legno (provenienza europea). Meccanismo: motorizzato (motore 220V, comando via pulsantiera/telecomando optional). PREZZO: tariffa fissa di 261€/m², applicata alla superficie reale (larghezza × altezza, nessun arrotondamento a scatti). MINIMO DI FATTURAZIONE: mq. 1,50 cadauna tenda (se la superficie reale è inferiore, si fattura comunque 1,50 m²). MISURE REALIZZABILI: larghezza da 70 a 400 cm, altezza da 50 a 350 cm — verificare sempre il rispetto di questo intervallo prima di confermare la misura al cliente, il sistema non blocca automaticamente le misure fuori range per questo prodotto a formula. Include supplemento fisso motore (752€ cadauna tenda) da aggiungere come optional. Vengono accettate solo le misure luce foro. Per tende con larghezza inferiore a 120cm non è garantita la perfezione a causa del peso ridotto. Tolleranza larghezza finita ± 0,5mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VENEZIANE ESTERNO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 0,
+      "areaMinimaM2": 1.5
+    }
+  }
+]
