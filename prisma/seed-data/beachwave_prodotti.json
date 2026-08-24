@@ -1,0 +1,4538 @@
+[
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2480.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2736.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 3120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3056.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3504.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2656.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2960.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2848.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3168.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3264.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3344.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3808.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 4048.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3872.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4288.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3088.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3344.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3808.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4096.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4560.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 3248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 3776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 3520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 4032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4048.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4576.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4832.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 2480.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 2672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 2864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 3072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 3248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2400.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 2704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 2912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 2816.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 3328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3216.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 3536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 2672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 3088.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 2896.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 3312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3136.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 3616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2832.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 3296.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3088.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 3552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 3584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 4048.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 3840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 2992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 200,
+    "prezzoBase": 3520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 3264.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 3776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 3536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 300,
+    "prezzoBase": 4048.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 3792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 350,
+    "prezzoBase": 4320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_80_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 4576.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 300,
+    "prezzoBase": 4752.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 300,
+    "prezzoBase": 5328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 350,
+    "prezzoBase": 5184.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 350,
+    "prezzoBase": 5856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 400,
+    "prezzoBase": 5616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 400,
+    "prezzoBase": 6384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 450,
+    "prezzoBase": 6064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 450,
+    "prezzoBase": 6928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 500,
+    "prezzoBase": 6496.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 500,
+    "prezzoBase": 7456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 300,
+    "prezzoBase": 5120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 300,
+    "prezzoBase": 5808.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 350,
+    "prezzoBase": 5600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 350,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 400,
+    "prezzoBase": 6064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 400,
+    "prezzoBase": 6992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 450,
+    "prezzoBase": 6544.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 450,
+    "prezzoBase": 7600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 500,
+    "prezzoBase": 7024.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 500,
+    "prezzoBase": 8176.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 300,
+    "prezzoBase": 5488.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 300,
+    "prezzoBase": 6288.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 350,
+    "prezzoBase": 6016.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 350,
+    "prezzoBase": 6944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 400,
+    "prezzoBase": 6528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 400,
+    "prezzoBase": 7584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 450,
+    "prezzoBase": 7040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 450,
+    "prezzoBase": 8240.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 500,
+    "prezzoBase": 7552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 500,
+    "prezzoBase": 8880.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 300,
+    "prezzoBase": 5856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 300,
+    "prezzoBase": 6784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 350,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 350,
+    "prezzoBase": 7488.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 400,
+    "prezzoBase": 6976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 400,
+    "prezzoBase": 8192.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 450,
+    "prezzoBase": 7536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 450,
+    "prezzoBase": 8912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 500,
+    "prezzoBase": 8080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 500,
+    "prezzoBase": 9600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 300,
+    "prezzoBase": 6224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 300,
+    "prezzoBase": 7264.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 350,
+    "prezzoBase": 6832.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 350,
+    "prezzoBase": 8032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 400,
+    "prezzoBase": 7424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 400,
+    "prezzoBase": 8784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 450,
+    "prezzoBase": 8016.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 450,
+    "prezzoBase": 9568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 500,
+    "prezzoBase": 8608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 500,
+    "prezzoBase": 10320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 300,
+    "prezzoBase": 4224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 300,
+    "prezzoBase": 4800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 350,
+    "prezzoBase": 4656.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 350,
+    "prezzoBase": 5328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 400,
+    "prezzoBase": 5088.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 400,
+    "prezzoBase": 5856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 450,
+    "prezzoBase": 5536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 450,
+    "prezzoBase": 6400.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 276,
+    "larghezzaMm": 500,
+    "prezzoBase": 5968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 276,
+    "larghezzaMm": 500,
+    "prezzoBase": 6928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 300,
+    "prezzoBase": 4592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 300,
+    "prezzoBase": 5280.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 350,
+    "prezzoBase": 5072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 350,
+    "prezzoBase": 5888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 400,
+    "prezzoBase": 5536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 400,
+    "prezzoBase": 6464.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 450,
+    "prezzoBase": 6016.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 450,
+    "prezzoBase": 7072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 326,
+    "larghezzaMm": 500,
+    "prezzoBase": 6496.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 326,
+    "larghezzaMm": 500,
+    "prezzoBase": 7648.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 300,
+    "prezzoBase": 4960.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 300,
+    "prezzoBase": 5760.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 350,
+    "prezzoBase": 5488.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 350,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 400,
+    "prezzoBase": 6000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 400,
+    "prezzoBase": 7056.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 450,
+    "prezzoBase": 6512.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 450,
+    "prezzoBase": 7712.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 376,
+    "larghezzaMm": 500,
+    "prezzoBase": 7024.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 376,
+    "larghezzaMm": 500,
+    "prezzoBase": 8352.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 300,
+    "prezzoBase": 5328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 300,
+    "prezzoBase": 6256.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 350,
+    "prezzoBase": 5888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 350,
+    "prezzoBase": 6960.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 400,
+    "prezzoBase": 6448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 400,
+    "prezzoBase": 7664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 450,
+    "prezzoBase": 7008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 450,
+    "prezzoBase": 8384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 426,
+    "larghezzaMm": 500,
+    "prezzoBase": 7552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 426,
+    "larghezzaMm": 500,
+    "prezzoBase": 9072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 300,
+    "prezzoBase": 5696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 300,
+    "prezzoBase": 6736.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 350,
+    "prezzoBase": 6304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 350,
+    "prezzoBase": 7504.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 400,
+    "prezzoBase": 6896.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 400,
+    "prezzoBase": 8256.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 450,
+    "prezzoBase": 7488.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 450,
+    "prezzoBase": 9040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 476,
+    "larghezzaMm": 500,
+    "prezzoBase": 8080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_100_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 476,
+    "larghezzaMm": 500,
+    "prezzoBase": 9792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 5072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 5664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 5536.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 6208.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 6000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 6768.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 6448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 7312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 6912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 7872.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 7376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 8432.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 7840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 8976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 5456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 6160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 5968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 6768.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 6448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 7376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 6960.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 8000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 7456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 8592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 7952.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 9232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 8448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 9824.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 5856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 6656.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 6384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 7328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 6928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 7984.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 7456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 8672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 8000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 9328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 8544.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 10016.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 9072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 10672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 6240.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 7152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 6816.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 7888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 7392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 8608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 7904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 9344.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 8544.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 10064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 9120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 10800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 9696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 11520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 6624.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 7648.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 7232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 8448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 7856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 9216.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 8464.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 10016.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 9072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 10784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 9696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 11584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 10320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 12368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 7008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 8160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 7664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 9008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 8320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 9824.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 8976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 10688.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 9616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 11520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 10288.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 12384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 10944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 13216.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 7392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 8656.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 8096.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 9568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 8784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 10448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 9472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 11360.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 10160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 12240.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 10864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 13168.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 11552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 14064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 7776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 9152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 8512.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 10128.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 9248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 11056.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 9984.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 12032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 10704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 12976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 11456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 13968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 12176.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_AUTOPORTANTE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 14912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 4304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 4896.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 4752.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 5424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 5200.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 5968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 5632.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 6496.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 6080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 7040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 6528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 7584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 6976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 8112.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 4672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 5376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 5168.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 5968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 5632.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 6560.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 6128.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 7168.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 6608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 7744.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 7088.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 8368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 7568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 8944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 5056.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 5856.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 5568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 6512.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 6096.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 7152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 6608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 7776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 7136.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 8464.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 7664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 9136.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 8176.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 9776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 5424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 6336.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 5984.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 7008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 6544.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 7760.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 7104.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 8480.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 7664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 9184.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 8224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 9904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 8784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 10608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 5792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 6816.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 6384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 7600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 6992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 8352.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 7584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 9136.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 8176.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 9888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 8784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 10672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 9392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 11440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 6160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 7312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 6800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 8144.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 7440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 8944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 8080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 9792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 8704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 10608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 9360.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 11456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 10000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 12272.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 6528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 7792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 7216.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 8688.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 7888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 9552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 8560.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 10448.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 9232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 11312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 9920.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 12224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 10592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 13104.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 6896.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 8272.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 7616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 9232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 8336.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 10144.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 9056.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 11104.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 9760.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 12032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 10496.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 13008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 11200.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 13936.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 4528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 5120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 4992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 5664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 5456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 6224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 5904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 6768.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 6368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 7328.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 6832.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 7888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 7296.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 8432.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 4912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 5616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 5424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 6224.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 5904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 6832.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 7456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 6912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 8048.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 7408.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 8688.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 7904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 9280.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 5312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 6112.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 5840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 6784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 6384.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 7440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 6912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 8128.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 7456.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 8784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 8000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 9472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 8528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 10128.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 5696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 6608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 6272.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 7344.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 6848.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 8064.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 7424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 8800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 8000.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 9520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 8576.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 10256.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 9152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 10976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 6080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 7104.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 6688.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 7904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 7312.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 8672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 7920.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 9472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 8528.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 10240.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 9152.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 11040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 9776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 11824.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 6464.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 7616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 7120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 8464.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 7776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 9280.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 8432.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 10144.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 9072.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 10976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 9744.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 11840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 10400.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 12672.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 6848.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 8112.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 7552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 9024.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 8256.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 9904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 8928.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 10816.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 9616.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 11696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 10320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 12624.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 11008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 13520.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 7232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 8608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 7968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 9584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 8704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 10512.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 9440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 11488.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 10160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 12432.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 10912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 13424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 11632.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 14368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 4112.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 300,
+    "prezzoBase": 4704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 4560.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 350,
+    "prezzoBase": 5232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 5024.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 400,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 5440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 450,
+    "prezzoBase": 6304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 5888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 500,
+    "prezzoBase": 6848.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 6336.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 550,
+    "prezzoBase": 7392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 6784.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 282,
+    "larghezzaMm": 600,
+    "prezzoBase": 7920.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 4480.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 300,
+    "prezzoBase": 5184.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 4976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 350,
+    "prezzoBase": 5776.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 5440.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 400,
+    "prezzoBase": 6368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 5936.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 450,
+    "prezzoBase": 6976.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 500,
+    "prezzoBase": 7552.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 6896.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 550,
+    "prezzoBase": 8176.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 7376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 332,
+    "larghezzaMm": 600,
+    "prezzoBase": 8752.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 4864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 300,
+    "prezzoBase": 5664.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 5376.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 350,
+    "prezzoBase": 6320.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 5904.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 400,
+    "prezzoBase": 6960.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 6416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 450,
+    "prezzoBase": 7632.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 6944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 500,
+    "prezzoBase": 8272.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 7472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 550,
+    "prezzoBase": 8944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 7984.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 382,
+    "larghezzaMm": 600,
+    "prezzoBase": 9584.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 5232.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 300,
+    "prezzoBase": 6144.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 5792.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 350,
+    "prezzoBase": 6864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 6352.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 400,
+    "prezzoBase": 7568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 6912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 450,
+    "prezzoBase": 8288.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 7472.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 500,
+    "prezzoBase": 8992.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 8032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 550,
+    "prezzoBase": 9712.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 8592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 432,
+    "larghezzaMm": 600,
+    "prezzoBase": 10416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 5600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 300,
+    "prezzoBase": 6624.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 6192.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 350,
+    "prezzoBase": 7408.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 6800.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 400,
+    "prezzoBase": 8160.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 7392.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 450,
+    "prezzoBase": 8944.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 7984.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 500,
+    "prezzoBase": 9696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 8592.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 550,
+    "prezzoBase": 10480.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 9200.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 482,
+    "larghezzaMm": 600,
+    "prezzoBase": 11248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 5968.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 300,
+    "prezzoBase": 7120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 6608.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 350,
+    "prezzoBase": 7952.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 7248.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 400,
+    "prezzoBase": 8752.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 7888.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 450,
+    "prezzoBase": 9600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 8512.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 500,
+    "prezzoBase": 10416.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 9168.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 550,
+    "prezzoBase": 11264.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 9808.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 532,
+    "larghezzaMm": 600,
+    "prezzoBase": 12080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 6336.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 300,
+    "prezzoBase": 7600.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 7024.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 350,
+    "prezzoBase": 8496.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 7696.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 400,
+    "prezzoBase": 9360.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 8368.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 450,
+    "prezzoBase": 10256.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 9040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 500,
+    "prezzoBase": 11120.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 9728.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 550,
+    "prezzoBase": 12032.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 10400.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 582,
+    "larghezzaMm": 600,
+    "prezzoBase": 12912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 6704.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 300,
+    "prezzoBase": 8080.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 7424.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 350,
+    "prezzoBase": 9040.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 8144.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 400,
+    "prezzoBase": 9952.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 8864.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 450,
+    "prezzoBase": 10912.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 9568.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 500,
+    "prezzoBase": 11840.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 10304.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 550,
+    "prezzoBase": 12816.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "OSCURANTE OPACO",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 11008.0
+  },
+  {
+    "tipologia": "BEACHWAVE_126_ACCOPPIATO_PARETE",
+    "colore": "SOLTIS 88 W88",
+    "altezzaMm": 632,
+    "larghezzaMm": 600,
+    "prezzoBase": 13744.0
+  }
+]

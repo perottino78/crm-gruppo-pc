@@ -1,0 +1,16 @@
+[
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Versione motorizzata con radiocomando",
+    "tipoPrezzo": "FISSO",
+    "valore": 580.0,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "BEACHWAVE_MOTORIZZABILE",
+    "note": "Disponibile solo per BEACH WAVE 100 e BEACH WAVE 126 (assente a listino per BEACH WAVE 80).",
+    "gruppiApplicabili": [
+      "GAZEBI BEACH WAVE"
+    ]
+  }
+]
