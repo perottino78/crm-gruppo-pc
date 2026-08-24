@@ -91,15 +91,20 @@ export async function creaPreventivo(formData: FormData) {
   redirect(`/preventivi/${preventivo.id}`);
 }
 
+// totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
+// l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
 async function ricalcolaTotali(preventivoId: string) {
   const righe = await prisma.rigaPreventivo.findMany({
     where: { preventivoId },
     include: { optionali: true },
   });
-  const totaleNetto = righe.reduce((sum, r) => {
+  const imponibileLordo = righe.reduce((sum, r) => {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
     return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   }, 0);
+  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
+  const sconto = preventivoAttuale?.scontoPercentuale ?? 0;
+  const totaleNetto = imponibileLordo * (1 - sconto / 100);
   const preventivo = await prisma.preventivo.update({
     where: { id: preventivoId },
     data: { totaleNetto },
@@ -108,6 +113,24 @@ async function ricalcolaTotali(preventivoId: string) {
     where: { id: preventivoId },
     data: { totaleIva: totaleNetto * (preventivo.aliquotaIva / 100) },
   });
+}
+
+export async function aggiornaCondizioniOfferta(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const oggetto = str(formData, "oggetto");
+  const scontoStr = str(formData, "scontoPercentuale");
+  const condizioniPagamento = str(formData, "condizioniPagamento");
+  const condizioniConsegna = str(formData, "condizioniConsegna");
+  const scontoPercentuale = scontoStr ? Math.max(0, Math.min(100, parseFloat(scontoStr))) : 0;
+
+  await prisma.preventivo.update({
+    where: { id },
+    data: { oggetto, scontoPercentuale, condizioniPagamento, condizioniConsegna },
+  });
+  await ricalcolaTotali(id);
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
 }
 
 export async function aggiungiRigaPreventivo(formData: FormData) {

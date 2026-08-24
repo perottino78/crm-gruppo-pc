@@ -121,6 +121,14 @@ model Preventivo {
   totaleNetto  Float           @default(0)
   aliquotaIva  Float           @default(22)
   totaleIva    Float           @default(0)
+  // Oggetto/titolo dell'offerta (es. "Zanzarriere pergola scorrevoli con rete acciaio")
+  oggetto      String?
+  // Sconto percentuale applicato sull'imponibile lordo (somma righe) prima del calcolo IVA;
+  // totaleNetto memorizza già l'imponibile SCONTATO
+  scontoPercentuale Float      @default(0)
+  // Testo libero per la stampa dell'offerta (condizioni di fornitura/vendita specifiche di questa offerta)
+  condizioniPagamento String?
+  condizioniConsegna  String?
   righe        RigaPreventivo[]
   promemoria   PromemoriaInviato[]
   progetto     Progetto?

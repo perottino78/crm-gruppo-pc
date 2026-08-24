@@ -14,6 +14,7 @@ import {
   aggiornaStatoPreventivo,
   toggleDescrizioneRiga,
   aggiornaDescrizionePersonalizzata,
+  aggiornaCondizioniOfferta,
 } from "@/app/actions";
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
@@ -133,7 +134,7 @@ export default async function PreventivoPage({
           </form>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-400 mb-1">Netto</p>
+          <p className="text-xs text-neutral-400 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
           <p className="text-sm font-medium">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
         </div>
         <div className="bg-neutral-900 rounded-lg p-4">
@@ -141,6 +142,59 @@ export default async function PreventivoPage({
           <p className="text-sm font-medium text-white">{totaleFinale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
         </div>
       </div>
+
+      <details className="bg-white rounded-lg border border-neutral-200 mb-6">
+        <summary className="cursor-pointer text-sm font-medium text-neutral-700 px-4 py-3">
+          Condizioni offerta (oggetto, sconto, pagamento, consegna) — usate nella stampa
+        </summary>
+        <form action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
+          <input type="hidden" name="id" value={preventivo.id} />
+          <div>
+            <label className="text-xs text-neutral-400 block mb-1">Oggetto offerta</label>
+            <input
+              name="oggetto"
+              defaultValue={preventivo.oggetto ?? ""}
+              placeholder="es. Zanzariere plissettate bilaterali"
+              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs text-neutral-400 block mb-1">Sconto (%)</label>
+              <input
+                name="scontoPercentuale"
+                type="number"
+                step="0.1"
+                min={0}
+                max={100}
+                defaultValue={preventivo.scontoPercentuale}
+                className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-neutral-400 block mb-1">Condizioni di pagamento</label>
+            <textarea
+              name="condizioniPagamento"
+              rows={2}
+              defaultValue={preventivo.condizioniPagamento ?? ""}
+              placeholder="es. Bonifico. Acconto 50%, saldo 50% a merce pronta a magazzino."
+              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-neutral-400 block mb-1">Condizioni di consegna</label>
+            <textarea
+              name="condizioniConsegna"
+              rows={2}
+              defaultValue={preventivo.condizioniConsegna ?? ""}
+              placeholder="es. Consegna 60 gg indicativi da rilievo tecnico esecutivo e da bonifico di acconto."
+              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+            />
+          </div>
+          <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start">salva condizioni</button>
+        </form>
+      </details>
 
       <h2 className="text-sm font-medium text-neutral-700 mb-3">Righe ({preventivo.righe.length})</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
