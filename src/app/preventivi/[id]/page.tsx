@@ -16,6 +16,7 @@ import {
   aggiornaDescrizionePersonalizzata,
   aggiornaCondizioniOfferta,
 } from "@/app/actions";
+import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -43,7 +44,7 @@ export default async function PreventivoPage({
   });
   if (!preventivo) notFound();
 
-  const [optionaliDisponibili, prodottiTrovati, tipologieGruppi, modelliBrand] = await Promise.all([
+  const [optionaliDisponibili, prodottiTrovati, tipologieMisure, modelliBrand] = await Promise.all([
     prisma.optional.findMany({ where: { brandId: preventivo.brandId }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
     q
       ? prisma.prodotto.findMany({
@@ -58,21 +59,70 @@ export default async function PreventivoPage({
           orderBy: [{ tipologia: "asc" }, { altezzaMm: "asc" }],
         })
       : [],
-    prisma.prodotto.groupBy({ by: ["tipologia"], where: { brandId: preventivo.brandId }, orderBy: { tipologia: "asc" } }),
+    prisma.prodotto.groupBy({
+      by: ["tipologia"],
+      where: { brandId: preventivo.brandId },
+      orderBy: { tipologia: "asc" },
+      _max: { larghezzaMm: true, altezzaMm: true },
+    }),
     prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId } }),
   ]);
 
   const modelloBrandMap = new Map(modelliBrand.map((m) => [m.tipologia, m]));
-  const tipologieDisponibili = tipologieGruppi.map((t) => t.tipologia);
+  const tipologieSenzaMisura = tipologieMisure
+    .filter((t) => !haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0))
+    .map((t) => t.tipologia);
 
-  // raggruppa le tipologie per famiglia/gruppo (scheda tecnica) per il menu a tendina
-  const gruppiOrdinati = new Map<string, string[]>();
-  for (const tip of tipologieDisponibili) {
-    const m = modelloBrandMap.get(tip);
-    const chiave = m?.famiglia && m?.gruppo ? `${m.famiglia} · ${m.gruppo}` : "Altro";
-    if (!gruppiOrdinati.has(chiave)) gruppiOrdinati.set(chiave, []);
-    gruppiOrdinati.get(chiave)!.push(tip);
+  const variantiSenzaMisura = tipologieSenzaMisura.length
+    ? await prisma.prodotto.findMany({
+        where: { brandId: preventivo.brandId, tipologia: { in: tipologieSenzaMisura } },
+        select: { id: true, tipologia: true, colore: true, prezzoBase: true },
+        orderBy: [{ tipologia: "asc" }, { colore: "asc" }],
+      })
+    : [];
+  const variantiPerTipologia = new Map<string, { id: string; colore: string; prezzoBase: number }[]>();
+  for (const v of variantiSenzaMisura) {
+    if (!variantiPerTipologia.has(v.tipologia)) variantiPerTipologia.set(v.tipologia, []);
+    variantiPerTipologia.get(v.tipologia)!.push({ id: v.id, colore: v.colore, prezzoBase: v.prezzoBase });
   }
+
+  // raggruppa le tipologie in un albero Famiglia (Indoor/Outdoor) > Gruppo > Modello,
+  // rispecchiando l'organizzazione dei cataloghi cartacei, per la navigazione a tendina
+  const alberoMap = new Map<string, Map<string, NodoTipologia[]>>();
+  for (const t of tipologieMisure) {
+    const tip = t.tipologia;
+    const m = modelloBrandMap.get(tip);
+    const famiglia = m?.famiglia ?? "Altro";
+    const gruppo = m?.gruppo ?? "Altro";
+    if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
+    const perGruppo = alberoMap.get(famiglia)!;
+    if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
+    perGruppo.get(gruppo)!.push({
+      value: tip,
+      label: tip.replace(/_/g, " "),
+      haMisura: haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0),
+      varianti: variantiPerTipologia.get(tip),
+    });
+  }
+  const ordineFamiglie = ["INDOOR", "OUTDOOR"];
+  const tassonomia: FamigliaNodo[] = [...alberoMap.entries()]
+    .sort(([a], [b]) => {
+      const ia = ordineFamiglie.indexOf(a);
+      const ib = ordineFamiglie.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b);
+    })
+    .map(([nome, gruppi]) => ({
+      nome,
+      gruppi: [...gruppi.entries()]
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([gnome, tipologie]) => ({
+          nome: gnome,
+          tipologie: tipologie.sort((a, b) => a.label.localeCompare(b.label)),
+        })),
+    }));
 
   const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];
   const modelli = tipologiePresenti.length
@@ -317,50 +367,18 @@ export default async function PreventivoPage({
         )}
       </div>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-1">Aggiungi prodotto ({preventivo.brand.nome})</h2>
-      <p className="text-xs text-neutral-400 mb-3">
-        Scegli il modello e inserisci la misura reale: il prezzo viene calcolato in automatico dalla fascia di listino corrispondente.
-      </p>
-
-      <form action={aggiungiRigaPreventivoPerMisura} className="bg-white rounded-lg border border-neutral-200 p-4 flex flex-wrap items-end gap-2 mb-6">
-        <input type="hidden" name="preventivoId" value={preventivo.id} />
-        <input type="hidden" name="brandId" value={preventivo.brandId} />
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Modello</label>
-          <select name="tipologia" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[240px]">
-            <option value="">— seleziona —</option>
-            {[...gruppiOrdinati.entries()].map(([chiave, tips]) => (
-              <optgroup key={chiave} label={chiave}>
-                {tips.map((t) => (
-                  <option key={t} value={t}>{t.replace(/_/g, " ")}</option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Larghezza</label>
-          <input name="larghezza" type="number" step="0.1" min="0" required placeholder="es. 380" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Altezza / sporgenza</label>
-          <input name="altezza" type="number" step="0.1" min="0" required placeholder="es. 250" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Quantità</label>
-          <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-20" />
-        </div>
-        <button className="btn-3d text-sm px-4 py-2" style={{ background: info.primary, color: "#fff", borderColor: info.primary }}>
-          Calcola e aggiungi
-        </button>
-        <p className="text-[11px] text-neutral-400 w-full">
-          Unità di misura secondo il listino del modello scelto (cm per le strutture outdoor, mm per i serramenti). Il sistema arrotonda per eccesso alla fascia di listino più vicina.
-        </p>
-      </form>
+      <SelettoreProdotto
+        preventivoId={preventivo.id}
+        brandId={preventivo.brandId}
+        brandColor={info.primary}
+        tassonomia={tassonomia}
+        azionePerMisura={aggiungiRigaPreventivoPerMisura}
+        azionePerProdotto={aggiungiRigaPreventivo}
+      />
 
       <details className="mb-6">
         <summary className="cursor-pointer text-xs text-neutral-400 hover:text-neutral-700">
-          Ricerca avanzata — sfoglia tutte le combinazioni di misura del listino
+          Ricerca avanzata — sfoglia le combinazioni di misura già a listino (prezzo modificabile)
         </summary>
         <div className="mt-3">
           <form className="flex items-end gap-2 mb-4" action={`/preventivi/${preventivo.id}`} method="get">

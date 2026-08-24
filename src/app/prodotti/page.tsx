@@ -52,15 +52,36 @@ export default async function ProdottiPage({
 
   const tutteLeTipologie = [...modelliRiga].sort((a, b) => a.tipologia.localeCompare(b.tipologia)).map((r) => r.tipologia);
 
-  if (famiglia) modelliRiga = modelliRiga.filter((r) => r.modello?.famiglia === famiglia);
-  if (gruppo) modelliRiga = modelliRiga.filter((r) => r.modello?.gruppo === gruppo);
-  if (q) {
+  // con una ricerca libera si va dritti ai risultati in tutte le famiglie/gruppi (scorciatoia
+  // per chi conosce già il nome); senza ricerca si segue la navigazione a tendina Famiglia > Gruppo
+  const cercaLibera = !!q;
+  if (!cercaLibera) {
+    if (famiglia) modelliRiga = modelliRiga.filter((r) => r.modello?.famiglia === famiglia);
+    if (gruppo) modelliRiga = modelliRiga.filter((r) => r.modello?.gruppo === gruppo);
+  } else {
     const ql = q.toLowerCase();
     modelliRiga = modelliRiga.filter(
       (r) => r.tipologia.toLowerCase().includes(ql) || r.modello?.descrizioneTecnica?.toLowerCase().includes(ql)
     );
   }
   modelliRiga.sort((a, b) => a.tipologia.localeCompare(b.tipologia));
+
+  const mostraFamiglie = !cercaLibera && !famiglia;
+  const mostraGruppi = !cercaLibera && !!famiglia && !gruppo;
+  const mostraTabella = cercaLibera || (!!famiglia && !!gruppo);
+
+  const conteggioPerFamiglia = new Map<string, number>();
+  const conteggioPerGruppo = new Map<string, number>();
+  for (const r of raggruppati) {
+    const m = modelloMap.get(r.tipologia);
+    const f = m?.famiglia ?? "Altro";
+    conteggioPerFamiglia.set(f, (conteggioPerFamiglia.get(f) ?? 0) + 1);
+    if (m?.famiglia && m?.gruppo) {
+      const chiave = `${m.famiglia}|${m.gruppo}`;
+      conteggioPerGruppo.set(chiave, (conteggioPerGruppo.get(chiave) ?? 0) + 1);
+    }
+  }
+  const iconaFamiglia = (f: string) => (f === "INDOOR" ? "🏠" : f === "OUTDOOR" ? "🌤️" : "📦");
 
   const totaleCombinazioni = modelliRiga.reduce((s, r) => s + r.varianti, 0);
   const totaleModelli = await prisma.prodotto.groupBy({ by: ["tipologia"], _count: { _all: true } });
@@ -148,60 +169,86 @@ export default async function ProdottiPage({
         )}
       </div>
 
-      {famiglieDisponibili.length > 0 && (
-        <div className="flex gap-2 mb-4">
-          <Link
-            href={qs({ famiglia: undefined, gruppo: undefined })}
-            className={`text-xs px-3 py-1.5 rounded-full border ${!famiglia ? "bg-neutral-900 text-white border-neutral-900" : "border-neutral-200 text-neutral-500"}`}
-          >
-            Tutte le famiglie
-          </Link>
-          {famiglieDisponibili.map((f) => (
-            <Link
-              key={f}
-              href={qs({ famiglia: f, gruppo: undefined })}
-              className={`text-xs px-3 py-1.5 rounded-full border ${famiglia === f ? "bg-neutral-900 text-white border-neutral-900" : "border-neutral-200 text-neutral-500"}`}
-            >
-              {f}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      {famiglia && gruppiDisponibili.length > 0 && (
-        <div className="flex gap-2 mb-4">
-          {gruppiDisponibili.map((g) => (
-            <Link
-              key={g}
-              href={qs({ gruppo: g === gruppo ? undefined : g })}
-              className={`text-xs px-3 py-1.5 rounded-full border ${gruppo === g ? "bg-blue-50 text-blue-700 border-blue-200" : "border-neutral-200 text-neutral-500"}`}
-            >
-              {g}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      <form className="flex flex-wrap items-end gap-2 mb-4" action="/prodotti" method="get">
+      <form className="flex flex-wrap items-end gap-2 mb-6" action="/prodotti" method="get">
         {brand && <input type="hidden" name="brand" value={brand} />}
         {famiglia && <input type="hidden" name="famiglia" value={famiglia} />}
         {gruppo && <input type="hidden" name="gruppo" value={gruppo} />}
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Cerca modello</label>
+        <div className="flex flex-col gap-1 flex-1 max-w-sm">
+          <label className="text-xs text-neutral-500">🔍 Cerca modello per nome (scorciatoia, salta la navigazione)</label>
           <input
             name="q"
             defaultValue={q ?? ""}
             placeholder="nome modello o descrizione..."
-            className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[220px]"
+            className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full"
           />
         </div>
-        <button className="btn-3d btn-3d-dark text-sm px-4 py-2">Filtra</button>
+        <button className="btn-3d btn-3d-dark text-sm px-4 py-2">Cerca</button>
         {q && (
           <Link href={qs({ q: undefined })} className="text-xs text-neutral-400 underline mb-2">
             azzera ricerca
           </Link>
         )}
       </form>
+
+      {mostraFamiglie && (
+        <div>
+          <p className="text-xs text-neutral-400 mb-2">Sfoglia per sezione:</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {famiglieDisponibili.map((f) => (
+              <Link
+                key={f}
+                href={qs({ famiglia: f, gruppo: undefined })}
+                className="bg-white rounded-lg border border-neutral-200 p-4 hover:border-neutral-400 transition-colors"
+              >
+                <span className="text-2xl">{iconaFamiglia(f)}</span>
+                <p className="text-sm font-medium mt-1">{f === "INDOOR" ? "Indoor" : f === "OUTDOOR" ? "Outdoor" : f}</p>
+                <p className="text-xs text-neutral-400">{conteggioPerFamiglia.get(f) ?? 0} modelli</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {mostraGruppi && (
+        <div>
+          <Link href={qs({ famiglia: undefined, gruppo: undefined })} className="text-xs text-neutral-400 hover:underline mb-2 inline-block">
+            ← {iconaFamiglia(famiglia!)} {famiglia === "INDOOR" ? "Indoor" : famiglia === "OUTDOOR" ? "Outdoor" : famiglia}
+          </Link>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {gruppiDisponibili.map((g) => (
+              <Link
+                key={g}
+                href={qs({ gruppo: g })}
+                className="bg-white rounded-lg border border-neutral-200 p-4 hover:border-neutral-400 transition-colors"
+              >
+                <p className="text-sm font-medium">{g}</p>
+                <p className="text-xs text-neutral-400">{conteggioPerGruppo.get(`${famiglia}|${g}`) ?? 0} modelli</p>
+              </Link>
+            ))}
+            {gruppiDisponibili.length === 0 && (
+              <p className="text-sm text-neutral-400 col-span-2">Nessun gruppo trovato per questa famiglia.</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {mostraTabella && (
+      <>
+      {cercaLibera ? (
+        <p className="text-xs text-neutral-400 mb-2">
+          Risultati per &quot;{q}&quot; in tutte le sezioni ({modelliRiga.length})
+        </p>
+      ) : (
+        <div className="flex items-center gap-1 text-xs text-neutral-400 mb-2">
+          <Link href={qs({ famiglia: undefined, gruppo: undefined })} className="hover:underline">
+            {iconaFamiglia(famiglia!)} {famiglia === "INDOOR" ? "Indoor" : famiglia === "OUTDOOR" ? "Outdoor" : famiglia}
+          </Link>
+          <span>/</span>
+          <Link href={qs({ gruppo: undefined })} className="hover:underline font-medium text-neutral-600">
+            {gruppo}
+          </Link>
+        </div>
+      )}
 
       <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
         <table className="w-full text-sm">
@@ -257,6 +304,8 @@ export default async function ProdottiPage({
           <p className="px-4 py-6 text-sm text-neutral-400">Nessun modello corrisponde ai filtri.</p>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 }
