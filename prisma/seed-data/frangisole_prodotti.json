@@ -1,0 +1,3460 @@
+[
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 672.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 130,
+    "prezzoBase": 767.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 160,
+    "prezzoBase": 820.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 190,
+    "prezzoBase": 949.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 220,
+    "prezzoBase": 1126.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 1241.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 100,
+    "prezzoBase": 875.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 130,
+    "prezzoBase": 994.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 160,
+    "prezzoBase": 1063.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 190,
+    "prezzoBase": 1228.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 220,
+    "prezzoBase": 1463.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 250,
+    "prezzoBase": 1609.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1075.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 130,
+    "prezzoBase": 1221.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 1309.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 190,
+    "prezzoBase": 1514.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 220,
+    "prezzoBase": 1799.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 250,
+    "prezzoBase": 1980.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 100,
+    "prezzoBase": 1278.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 130,
+    "prezzoBase": 1448.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 160,
+    "prezzoBase": 1554.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 190,
+    "prezzoBase": 1795.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 220,
+    "prezzoBase": 2135.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 250,
+    "prezzoBase": 2351.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 1478.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 130,
+    "prezzoBase": 1677.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 160,
+    "prezzoBase": 1799.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 190,
+    "prezzoBase": 2079.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 2473.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 250,
+    "prezzoBase": 2724.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 1679.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 130,
+    "prezzoBase": 1910.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 160,
+    "prezzoBase": 2043.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 190,
+    "prezzoBase": 2362.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 220,
+    "prezzoBase": 2809.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3092.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 100,
+    "prezzoBase": 1880.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 130,
+    "prezzoBase": 2137.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 160,
+    "prezzoBase": 2286.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 190,
+    "prezzoBase": 2645.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 220,
+    "prezzoBase": 3143.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 3464.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 100,
+    "prezzoBase": 2082.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 130,
+    "prezzoBase": 2364.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 160,
+    "prezzoBase": 2534.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 190,
+    "prezzoBase": 2929.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 220,
+    "prezzoBase": 3481.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 250,
+    "prezzoBase": 3835.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 100,
+    "prezzoBase": 2283.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 130,
+    "prezzoBase": 2592.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 160,
+    "prezzoBase": 2777.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 190,
+    "prezzoBase": 3212.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 3817.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 250,
+    "prezzoBase": 4206.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 100,
+    "prezzoBase": 2485.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 130,
+    "prezzoBase": 2820.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 160,
+    "prezzoBase": 3022.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 190,
+    "prezzoBase": 3495.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 220,
+    "prezzoBase": 4155.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 250,
+    "prezzoBase": 4576.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 100,
+    "prezzoBase": 2686.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 130,
+    "prezzoBase": 3050.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 160,
+    "prezzoBase": 3267.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 190,
+    "prezzoBase": 3777.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 220,
+    "prezzoBase": 4490.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 4946.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 100,
+    "prezzoBase": 2888.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 130,
+    "prezzoBase": 3279.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 160,
+    "prezzoBase": 3513.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 190,
+    "prezzoBase": 4060.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 220,
+    "prezzoBase": 4828.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 5319.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 100,
+    "prezzoBase": 3089.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 130,
+    "prezzoBase": 3508.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 160,
+    "prezzoBase": 3756.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 190,
+    "prezzoBase": 4342.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 220,
+    "prezzoBase": 5164.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 250,
+    "prezzoBase": 5690.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 100,
+    "prezzoBase": 3291.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 130,
+    "prezzoBase": 3735.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 160,
+    "prezzoBase": 4002.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 190,
+    "prezzoBase": 4625.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 220,
+    "prezzoBase": 5502.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 250,
+    "prezzoBase": 6060.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 100,
+    "prezzoBase": 3492.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 130,
+    "prezzoBase": 3965.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 160,
+    "prezzoBase": 4245.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 190,
+    "prezzoBase": 4910.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 220,
+    "prezzoBase": 5836.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 250,
+    "prezzoBase": 6429.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 100,
+    "prezzoBase": 3694.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 130,
+    "prezzoBase": 4192.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 160,
+    "prezzoBase": 4490.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 190,
+    "prezzoBase": 5192.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 220,
+    "prezzoBase": 6174.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 250,
+    "prezzoBase": 6801.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 100,
+    "prezzoBase": 3895.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 130,
+    "prezzoBase": 4421.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 160,
+    "prezzoBase": 4738.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 190,
+    "prezzoBase": 5475.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 220,
+    "prezzoBase": 6508.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 7174.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 100,
+    "prezzoBase": 4097.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 130,
+    "prezzoBase": 4650.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 160,
+    "prezzoBase": 4981.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 190,
+    "prezzoBase": 5760.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 220,
+    "prezzoBase": 6848.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 250,
+    "prezzoBase": 7542.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 100,
+    "prezzoBase": 4365.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 130,
+    "prezzoBase": 4956.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 160,
+    "prezzoBase": 5308.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 190,
+    "prezzoBase": 6139.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 220,
+    "prezzoBase": 7295.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA150",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 250,
+    "prezzoBase": 8038.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 672.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 130,
+    "prezzoBase": 861.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 160,
+    "prezzoBase": 979.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 190,
+    "prezzoBase": 1091.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 220,
+    "prezzoBase": 1251.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 1438.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 280,
+    "prezzoBase": 1580.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 310,
+    "prezzoBase": 1658.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 100,
+    "prezzoBase": 875.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 130,
+    "prezzoBase": 1119.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 160,
+    "prezzoBase": 1271.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 190,
+    "prezzoBase": 1419.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 220,
+    "prezzoBase": 1624.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 250,
+    "prezzoBase": 1869.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 280,
+    "prezzoBase": 2052.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 310,
+    "prezzoBase": 2156.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1075.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 130,
+    "prezzoBase": 1380.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 1565.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 190,
+    "prezzoBase": 1746.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 220,
+    "prezzoBase": 2001.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 250,
+    "prezzoBase": 2299.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 280,
+    "prezzoBase": 2524.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 2652.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 100,
+    "prezzoBase": 1278.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 130,
+    "prezzoBase": 1635.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 160,
+    "prezzoBase": 1853.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 190,
+    "prezzoBase": 2075.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 220,
+    "prezzoBase": 2374.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 250,
+    "prezzoBase": 2730.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 280,
+    "prezzoBase": 2997.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 310,
+    "prezzoBase": 3145.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 1478.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 130,
+    "prezzoBase": 1896.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 160,
+    "prezzoBase": 2147.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 190,
+    "prezzoBase": 2402.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 2747.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 250,
+    "prezzoBase": 3161.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 280,
+    "prezzoBase": 3469.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 310,
+    "prezzoBase": 3643.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 1679.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 130,
+    "prezzoBase": 2154.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 160,
+    "prezzoBase": 2439.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 190,
+    "prezzoBase": 2728.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 220,
+    "prezzoBase": 3124.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 3592.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 280,
+    "prezzoBase": 3946.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 310,
+    "prezzoBase": 4138.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 100,
+    "prezzoBase": 1880.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 130,
+    "prezzoBase": 2409.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 160,
+    "prezzoBase": 2735.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 190,
+    "prezzoBase": 3055.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 220,
+    "prezzoBase": 3497.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 4022.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 280,
+    "prezzoBase": 4418.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 310,
+    "prezzoBase": 4638.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 100,
+    "prezzoBase": 2082.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 130,
+    "prezzoBase": 2670.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 160,
+    "prezzoBase": 3025.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 190,
+    "prezzoBase": 3379.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 220,
+    "prezzoBase": 3870.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 250,
+    "prezzoBase": 4449.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 280,
+    "prezzoBase": 4889.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 310,
+    "prezzoBase": 5132.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 100,
+    "prezzoBase": 2283.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 130,
+    "prezzoBase": 2927.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 160,
+    "prezzoBase": 3319.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 190,
+    "prezzoBase": 3708.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 4245.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 250,
+    "prezzoBase": 4882.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 280,
+    "prezzoBase": 5363.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 310,
+    "prezzoBase": 5630.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 100,
+    "prezzoBase": 2485.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 130,
+    "prezzoBase": 3186.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 160,
+    "prezzoBase": 3612.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 190,
+    "prezzoBase": 4037.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 220,
+    "prezzoBase": 4620.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 250,
+    "prezzoBase": 5312.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 280,
+    "prezzoBase": 5834.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 310,
+    "prezzoBase": 6125.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 100,
+    "prezzoBase": 2686.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 130,
+    "prezzoBase": 3443.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 160,
+    "prezzoBase": 3905.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 190,
+    "prezzoBase": 4363.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 220,
+    "prezzoBase": 4995.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 5743.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 280,
+    "prezzoBase": 6306.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 310,
+    "prezzoBase": 6623.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 100,
+    "prezzoBase": 2888.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 130,
+    "prezzoBase": 3701.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 160,
+    "prezzoBase": 4199.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 190,
+    "prezzoBase": 4690.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 220,
+    "prezzoBase": 5370.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 6172.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 280,
+    "prezzoBase": 6780.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 310,
+    "prezzoBase": 7119.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 100,
+    "prezzoBase": 3089.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 130,
+    "prezzoBase": 3958.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 160,
+    "prezzoBase": 4488.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 190,
+    "prezzoBase": 5018.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 220,
+    "prezzoBase": 5743.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 250,
+    "prezzoBase": 6602.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 280,
+    "prezzoBase": 7255.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 310,
+    "prezzoBase": 7617.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 100,
+    "prezzoBase": 3291.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 130,
+    "prezzoBase": 4217.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 160,
+    "prezzoBase": 4780.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 190,
+    "prezzoBase": 5343.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 220,
+    "prezzoBase": 6120.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 250,
+    "prezzoBase": 7035.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 280,
+    "prezzoBase": 7728.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 310,
+    "prezzoBase": 8114.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 100,
+    "prezzoBase": 3492.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 130,
+    "prezzoBase": 4474.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 160,
+    "prezzoBase": 5074.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 190,
+    "prezzoBase": 5672.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 220,
+    "prezzoBase": 6494.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 250,
+    "prezzoBase": 7464.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 280,
+    "prezzoBase": 8200.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 310,
+    "prezzoBase": 8608.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 100,
+    "prezzoBase": 3694.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 130,
+    "prezzoBase": 4733.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 160,
+    "prezzoBase": 5368.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 190,
+    "prezzoBase": 5996.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 220,
+    "prezzoBase": 6866.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 250,
+    "prezzoBase": 7895.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 280,
+    "prezzoBase": 8673.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 310,
+    "prezzoBase": 9106.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 100,
+    "prezzoBase": 3895.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 130,
+    "prezzoBase": 4991.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 160,
+    "prezzoBase": 5660.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 190,
+    "prezzoBase": 6325.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 220,
+    "prezzoBase": 7242.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 8325.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 280,
+    "prezzoBase": 9145.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 310,
+    "prezzoBase": 9599.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 100,
+    "prezzoBase": 4097.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 130,
+    "prezzoBase": 5250.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 160,
+    "prezzoBase": 5951.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 190,
+    "prezzoBase": 6653.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 220,
+    "prezzoBase": 7617.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 250,
+    "prezzoBase": 8758.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 280,
+    "prezzoBase": 9618.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 310,
+    "prezzoBase": 10099.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 100,
+    "prezzoBase": 4365.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 130,
+    "prezzoBase": 5592.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 160,
+    "prezzoBase": 6343.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 190,
+    "prezzoBase": 7088.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 220,
+    "prezzoBase": 8115.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 250,
+    "prezzoBase": 9328.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 280,
+    "prezzoBase": 10248.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA200",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 310,
+    "prezzoBase": 10759.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 917.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 130,
+    "prezzoBase": 1017.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 160,
+    "prezzoBase": 1237.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 190,
+    "prezzoBase": 1531.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 220,
+    "prezzoBase": 1667.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 1855.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 280,
+    "prezzoBase": 1976.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 310,
+    "prezzoBase": 2070.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 340,
+    "prezzoBase": 2165.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 370,
+    "prezzoBase": 2564.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2658.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 100,
+    "larghezzaMm": 430,
+    "prezzoBase": 2753.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 100,
+    "prezzoBase": 1192.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 130,
+    "prezzoBase": 1322.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 160,
+    "prezzoBase": 1607.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 190,
+    "prezzoBase": 1989.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 220,
+    "prezzoBase": 2167.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 250,
+    "prezzoBase": 2413.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 280,
+    "prezzoBase": 2566.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 310,
+    "prezzoBase": 2689.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 340,
+    "prezzoBase": 2811.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 370,
+    "prezzoBase": 3333.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 400,
+    "prezzoBase": 3457.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 130,
+    "larghezzaMm": 430,
+    "prezzoBase": 3576.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1466.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 130,
+    "prezzoBase": 1628.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 160,
+    "prezzoBase": 1978.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 190,
+    "prezzoBase": 2446.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 220,
+    "prezzoBase": 2663.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 250,
+    "prezzoBase": 2971.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 280,
+    "prezzoBase": 3161.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 310,
+    "prezzoBase": 3309.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 340,
+    "prezzoBase": 3458.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 370,
+    "prezzoBase": 4104.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 400,
+    "prezzoBase": 4254.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 160,
+    "larghezzaMm": 430,
+    "prezzoBase": 4404.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 100,
+    "prezzoBase": 1739.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 130,
+    "prezzoBase": 1932.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 160,
+    "prezzoBase": 2348.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 190,
+    "prezzoBase": 2904.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 220,
+    "prezzoBase": 3164.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 250,
+    "prezzoBase": 3527.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 280,
+    "prezzoBase": 3751.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 310,
+    "prezzoBase": 3930.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 340,
+    "prezzoBase": 4108.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 370,
+    "prezzoBase": 4872.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 400,
+    "prezzoBase": 5049.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 190,
+    "larghezzaMm": 430,
+    "prezzoBase": 5229.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2013.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 130,
+    "prezzoBase": 2237.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 160,
+    "prezzoBase": 2719.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 190,
+    "prezzoBase": 3365.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 3663.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 250,
+    "prezzoBase": 4083.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 280,
+    "prezzoBase": 4342.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 310,
+    "prezzoBase": 4550.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 340,
+    "prezzoBase": 4757.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 370,
+    "prezzoBase": 5639.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 400,
+    "prezzoBase": 5847.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 220,
+    "larghezzaMm": 430,
+    "prezzoBase": 6056.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 2286.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 130,
+    "prezzoBase": 2541.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 160,
+    "prezzoBase": 3087.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 190,
+    "prezzoBase": 3823.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 220,
+    "prezzoBase": 4161.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 4641.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 280,
+    "prezzoBase": 4933.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 310,
+    "prezzoBase": 5169.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 340,
+    "prezzoBase": 5403.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 370,
+    "prezzoBase": 6408.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 6642.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 250,
+    "larghezzaMm": 430,
+    "prezzoBase": 6878.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 100,
+    "prezzoBase": 2563.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 130,
+    "prezzoBase": 2848.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 160,
+    "prezzoBase": 3458.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 190,
+    "prezzoBase": 4282.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 220,
+    "prezzoBase": 4662.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 250,
+    "prezzoBase": 5199.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 280,
+    "prezzoBase": 5526.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 310,
+    "prezzoBase": 5790.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 340,
+    "prezzoBase": 6051.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 370,
+    "prezzoBase": 7177.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 400,
+    "prezzoBase": 7441.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 280,
+    "larghezzaMm": 430,
+    "prezzoBase": 7704.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 100,
+    "prezzoBase": 2837.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 130,
+    "prezzoBase": 3152.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 160,
+    "prezzoBase": 3828.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 190,
+    "prezzoBase": 4740.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 220,
+    "prezzoBase": 5159.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 250,
+    "prezzoBase": 5752.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 280,
+    "prezzoBase": 6118.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 310,
+    "prezzoBase": 6412.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 340,
+    "prezzoBase": 6702.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 370,
+    "prezzoBase": 7948.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 400,
+    "prezzoBase": 8239.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 310,
+    "larghezzaMm": 430,
+    "prezzoBase": 8531.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 100,
+    "prezzoBase": 3110.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 130,
+    "prezzoBase": 3457.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 160,
+    "prezzoBase": 4201.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 190,
+    "prezzoBase": 5197.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 5658.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 250,
+    "prezzoBase": 6310.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 280,
+    "prezzoBase": 6709.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 310,
+    "prezzoBase": 7031.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 340,
+    "prezzoBase": 7352.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 370,
+    "prezzoBase": 8714.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 400,
+    "prezzoBase": 9034.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 340,
+    "larghezzaMm": 430,
+    "prezzoBase": 9353.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 100,
+    "prezzoBase": 3386.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 130,
+    "prezzoBase": 3759.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 160,
+    "prezzoBase": 4569.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 190,
+    "prezzoBase": 5655.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 220,
+    "prezzoBase": 6158.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 250,
+    "prezzoBase": 6866.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 280,
+    "prezzoBase": 7302.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 310,
+    "prezzoBase": 7649.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 340,
+    "prezzoBase": 7997.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 370,
+    "prezzoBase": 9483.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 400,
+    "prezzoBase": 9831.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 370,
+    "larghezzaMm": 430,
+    "prezzoBase": 10180.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 100,
+    "prezzoBase": 3657.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 130,
+    "prezzoBase": 4066.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 160,
+    "prezzoBase": 4940.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 190,
+    "prezzoBase": 6114.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 220,
+    "prezzoBase": 6656.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 250,
+    "prezzoBase": 7422.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 280,
+    "prezzoBase": 7894.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 310,
+    "prezzoBase": 8270.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 340,
+    "prezzoBase": 8645.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 370,
+    "prezzoBase": 10256.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 400,
+    "prezzoBase": 10629.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 400,
+    "larghezzaMm": 430,
+    "prezzoBase": 11005.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 100,
+    "prezzoBase": 3934.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 130,
+    "prezzoBase": 4372.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 160,
+    "prezzoBase": 5312.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 190,
+    "prezzoBase": 6572.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 220,
+    "prezzoBase": 7156.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 250,
+    "prezzoBase": 7978.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 280,
+    "prezzoBase": 8487.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 310,
+    "prezzoBase": 8890.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 340,
+    "prezzoBase": 9295.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 370,
+    "prezzoBase": 11021.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 400,
+    "prezzoBase": 11426.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 430,
+    "larghezzaMm": 430,
+    "prezzoBase": 11829.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 100,
+    "prezzoBase": 4206.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 130,
+    "prezzoBase": 4675.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 160,
+    "prezzoBase": 5681.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 190,
+    "prezzoBase": 7031.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 220,
+    "prezzoBase": 7658.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 250,
+    "prezzoBase": 8536.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 280,
+    "prezzoBase": 9076.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 310,
+    "prezzoBase": 9508.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 340,
+    "prezzoBase": 9940.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 370,
+    "prezzoBase": 11790.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 400,
+    "prezzoBase": 12223.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 460,
+    "larghezzaMm": 430,
+    "prezzoBase": 12654.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 100,
+    "prezzoBase": 4483.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 130,
+    "prezzoBase": 4981.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 160,
+    "prezzoBase": 6051.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 190,
+    "prezzoBase": 7489.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 220,
+    "prezzoBase": 8156.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 250,
+    "prezzoBase": 9092.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 280,
+    "prezzoBase": 9671.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 310,
+    "prezzoBase": 10129.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 340,
+    "prezzoBase": 10590.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 370,
+    "prezzoBase": 12558.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 400,
+    "prezzoBase": 13017.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 490,
+    "larghezzaMm": 430,
+    "prezzoBase": 13482.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 100,
+    "prezzoBase": 4757.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 130,
+    "prezzoBase": 5285.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 160,
+    "prezzoBase": 6420.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 190,
+    "prezzoBase": 7945.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 220,
+    "prezzoBase": 8654.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 250,
+    "prezzoBase": 9650.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 280,
+    "prezzoBase": 10261.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 310,
+    "prezzoBase": 10750.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 340,
+    "prezzoBase": 11238.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 370,
+    "prezzoBase": 13328.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 400,
+    "prezzoBase": 13816.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 520,
+    "larghezzaMm": 430,
+    "prezzoBase": 14305.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 100,
+    "prezzoBase": 5028.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 130,
+    "prezzoBase": 5590.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 160,
+    "prezzoBase": 6794.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 190,
+    "prezzoBase": 8404.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 220,
+    "prezzoBase": 9152.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 250,
+    "prezzoBase": 10204.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 280,
+    "prezzoBase": 10852.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 310,
+    "prezzoBase": 11371.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 340,
+    "prezzoBase": 11887.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 370,
+    "prezzoBase": 14096.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 400,
+    "prezzoBase": 14615.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 550,
+    "larghezzaMm": 430,
+    "prezzoBase": 15132.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 100,
+    "prezzoBase": 5305.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 130,
+    "prezzoBase": 5896.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 160,
+    "prezzoBase": 7161.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 190,
+    "prezzoBase": 8862.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 220,
+    "prezzoBase": 9652.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 250,
+    "prezzoBase": 10761.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 280,
+    "prezzoBase": 11445.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 310,
+    "prezzoBase": 11989.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 340,
+    "prezzoBase": 12533.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 370,
+    "prezzoBase": 14865.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 400,
+    "prezzoBase": 15411.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 580,
+    "larghezzaMm": 430,
+    "prezzoBase": 15953.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 100,
+    "prezzoBase": 5579.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 130,
+    "prezzoBase": 6199.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 160,
+    "prezzoBase": 7533.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 190,
+    "prezzoBase": 9321.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 220,
+    "prezzoBase": 10152.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 250,
+    "prezzoBase": 11319.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 280,
+    "prezzoBase": 12037.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 310,
+    "prezzoBase": 12609.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 340,
+    "prezzoBase": 13182.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 370,
+    "prezzoBase": 15634.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 400,
+    "prezzoBase": 16208.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 610,
+    "larghezzaMm": 430,
+    "prezzoBase": 16778.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 100,
+    "prezzoBase": 5944.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 130,
+    "prezzoBase": 6607.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 160,
+    "prezzoBase": 8026.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 190,
+    "prezzoBase": 9932.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 220,
+    "prezzoBase": 10817.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 250,
+    "prezzoBase": 12061.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 280,
+    "prezzoBase": 12825.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 310,
+    "prezzoBase": 13436.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 340,
+    "prezzoBase": 14047.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 370,
+    "prezzoBase": 16660.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 400,
+    "prezzoBase": 17269.0
+  },
+  {
+    "tipologia": "FRANGISOLE_PALA300",
+    "colore": "DI SERIE (Bianco RAL9010 / Avorio RAL1013)",
+    "altezzaMm": 650,
+    "larghezzaMm": 430,
+    "prezzoBase": 17882.0
+  }
+]

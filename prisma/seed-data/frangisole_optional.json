@@ -1,0 +1,86 @@
+[
+  {
+    "categoria": "Colore",
+    "nome": "Colorazione SOFT/Opaco o Argento (fuori serie)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Comando motorizzato",
+    "tipoPrezzo": "FISSO",
+    "valore": 1142,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Centralina con telecomando 4 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 1176,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sensore pioggia",
+    "tipoPrezzo": "FISSO",
+    "valore": 394,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sensore vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 194,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sensore luce - vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 230,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "FRANGISOLE"
+    ]
+  }
+]
