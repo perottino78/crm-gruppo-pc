@@ -61,7 +61,12 @@ export default async function ClientiPage({
             <input name="nome" placeholder="Nome / ragione sociale" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="email" placeholder="Email" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-            <input name="indirizzo" placeholder="Indirizzo" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <input name="indirizzo" placeholder="Indirizzo (via e numero civico)" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <div className="grid grid-cols-3 gap-2">
+              <input name="cap" placeholder="CAP" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+              <input name="comune" placeholder="Comune" className="col-span-2 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            </div>
+            <input name="provincia" placeholder="Provincia (es. TO)" maxLength={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <select name="paese" defaultValue="IT" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
               <option value="IT">Italia</option>
               <option value="FR">Francia</option>

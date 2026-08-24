@@ -68,7 +68,9 @@ export default async function StampaPreventivoPage({
 
   const oggi = new Date().toLocaleDateString("it-IT");
   const anno = preventivo.createdAt.getFullYear();
-  const numero = `${preventivo.id.slice(-6).toUpperCase()}/${anno}`;
+  const numero = preventivo.numeroOfferta != null
+    ? `${preventivo.numeroOfferta}/${anno}`
+    : `${preventivo.id.slice(-6).toUpperCase()}/${anno}`; // fallback per preventivi creati prima della numerazione progressiva
 
   const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
 
@@ -114,6 +116,12 @@ export default async function StampaPreventivoPage({
             <p className="text-xs text-neutral-400 mb-1">Spett.le</p>
             <p className="font-medium">{preventivo.cliente.nome}</p>
             <p className="text-neutral-500">{preventivo.cliente.indirizzo ?? ""}</p>
+            {(preventivo.cliente.cap || preventivo.cliente.comune || preventivo.cliente.provincia) && (
+              <p className="text-neutral-500">
+                {[preventivo.cliente.cap, preventivo.cliente.comune].filter(Boolean).join(" ")}
+                {preventivo.cliente.provincia && ` (${preventivo.cliente.provincia})`}
+              </p>
+            )}
             <p className="text-neutral-500">{preventivo.cliente.telefono ?? ""} · {preventivo.cliente.email ?? ""}</p>
           </div>
           <div className="text-right">

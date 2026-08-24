@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
+import { creaAttivita, completaAttivita, creaPreventivo, aggiornaCliente } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -52,10 +52,32 @@ export default async function SchedaClientePage({
           {cliente.brand.nome}
         </span>
       </div>
-      <p className="text-sm text-neutral-400 mb-6">
-        {cliente.telefono ?? "—"} · {cliente.email ?? "—"} · {cliente.indirizzo ?? "—"} · {cliente.paese}
+      <p className="text-sm text-neutral-400 mb-2">
+        {cliente.telefono ?? "—"} · {cliente.email ?? "—"} · {cliente.paese}
         {cliente.leadOrigine && <> · lead origine: {cliente.leadOrigine.fonte}</>}
       </p>
+      <p className="text-sm text-neutral-400 mb-4">
+        {cliente.indirizzo ?? "indirizzo non impostato"}
+        {(cliente.cap || cliente.comune || cliente.provincia) && (
+          <> — {[cliente.cap, cliente.comune].filter(Boolean).join(" ")}{cliente.provincia && ` (${cliente.provincia})`}</>
+        )}
+      </p>
+
+      <details className="mb-6">
+        <summary className="text-xs text-neutral-400 cursor-pointer hover:text-neutral-600">modifica contatti e indirizzo</summary>
+        <form action={aggiornaCliente} className="bg-white rounded-lg border border-neutral-200 p-4 mt-2 flex flex-col gap-2 max-w-md">
+          <input type="hidden" name="id" value={cliente.id} />
+          <input name="telefono" defaultValue={cliente.telefono ?? ""} placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+          <input name="email" defaultValue={cliente.email ?? ""} placeholder="Email" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+          <input name="indirizzo" defaultValue={cliente.indirizzo ?? ""} placeholder="Indirizzo (via e numero civico)" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+          <div className="grid grid-cols-3 gap-2">
+            <input name="cap" defaultValue={cliente.cap ?? ""} placeholder="CAP" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <input name="comune" defaultValue={cliente.comune ?? ""} placeholder="Comune" className="col-span-2 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+          </div>
+          <input name="provincia" defaultValue={cliente.provincia ?? ""} placeholder="Provincia (es. TO)" maxLength={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-24" />
+          <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start mt-1">salva contatti</button>
+        </form>
+      </details>
 
       {taskAperti.length > 0 && (
         <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-6">

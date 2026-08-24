@@ -66,11 +66,46 @@ export async function creaCliente(formData: FormData) {
       telefono: str(formData, "telefono"),
       email: str(formData, "email"),
       indirizzo: str(formData, "indirizzo"),
+      cap: str(formData, "cap"),
+      comune: str(formData, "comune"),
+      provincia: str(formData, "provincia"),
       paese: str(formData, "paese") ?? "IT",
       brandId,
     },
   });
   revalidatePath("/clienti");
+}
+
+export async function aggiornaCliente(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      telefono: str(formData, "telefono"),
+      email: str(formData, "email"),
+      indirizzo: str(formData, "indirizzo"),
+      cap: str(formData, "cap"),
+      comune: str(formData, "comune"),
+      provincia: str(formData, "provincia"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+  revalidatePath("/clienti");
+}
+
+// Numero offerta progressivo per brand, resettato ogni anno solare (1, 2, 3... dal 1 gennaio).
+// Non e' garantito atomico sotto concorrenza estrema, accettabile per il volume di questo CRM.
+async function prossimoNumeroOfferta(brandId: string): Promise<number> {
+  const anno = new Date().getFullYear();
+  const inizioAnno = new Date(anno, 0, 1);
+  const inizioAnnoSuccessivo = new Date(anno + 1, 0, 1);
+  const ultimo = await prisma.preventivo.findFirst({
+    where: { brandId, createdAt: { gte: inizioAnno, lt: inizioAnnoSuccessivo } },
+    orderBy: { numeroOfferta: "desc" },
+    select: { numeroOfferta: true },
+  });
+  return (ultimo?.numeroOfferta ?? 0) + 1;
 }
 
 export async function creaPreventivo(formData: FormData) {
@@ -81,9 +116,10 @@ export async function creaPreventivo(formData: FormData) {
 
   const cliente = await prisma.cliente.findUnique({ where: { id: clienteId } });
   const { aliquota } = aliquotaIvaPerPaese(cliente?.paese ?? "IT");
+  const numeroOfferta = await prossimoNumeroOfferta(brandId);
 
   const preventivo = await prisma.preventivo.create({
-    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota },
+    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta },
   });
   revalidatePath("/preventivi");
   revalidatePath("/");

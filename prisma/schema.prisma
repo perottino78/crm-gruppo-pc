@@ -64,6 +64,9 @@ model Cliente {
   telefono   String?
   email      String?
   indirizzo  String?
+  cap        String?
+  comune     String?
+  provincia  String?
   paese      String    @default("IT")
   brand      Brand     @relation(fields: [brandId], references: [id])
   brandId    String
@@ -118,6 +121,9 @@ model Preventivo {
   commerciale  Utente          @relation(fields: [commercialeId], references: [id])
   commercialeId String
   stato        String          @default("APERTO")
+  // Numero offerta progressivo per brand+anno (es. 1, 2, 3... resettato ogni anno solare per ciascun brand).
+  // Nullable per compatibilità con i preventivi creati prima dell'introduzione di questo campo.
+  numeroOfferta Int?
   totaleNetto  Float           @default(0)
   aliquotaIva  Float           @default(22)
   totaleIva    Float           @default(0)
