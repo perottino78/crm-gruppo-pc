@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const PREFISSO = "LUCILLA_";
-const LISTINO = "LUCILLA";
+const LISTINO_FAMIGLIA = "LUCILLA";
 
 type ProdottoRow = {
   tipologia: string;
@@ -26,11 +26,15 @@ type OptionalRow = {
   sporgenzaMm: number | null;
   larghezzaMm: number | null;
   note: string | null;
+  listino: string;
+  gruppiApplicabili: string[];
 };
 
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 
+// Chiave stabile basata su campi che non cambiano con questa migrazione (non include il listino,
+// che stiamo affinando da "bucket di famiglia" a "tipologia esatta per submodello").
 const keyOptional = (o: { categoria: string; nome: string; sporgenzaMm: number | null; larghezzaMm: number | null }) =>
   `${o.categoria}|${o.nome}|${o.sporgenzaMm}|${o.larghezzaMm}`;
 
@@ -46,8 +50,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "brand P&C non trovato, esegui prima il seed principale" }, { status: 400 });
     }
 
-    // upsert non distruttivo: preserva gli id dei prodotti/optional già eventualmente
-    // usati in preventivi esistenti (un delete+recreate romperebbe quei collegamenti)
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
       where: { brandId: brand.id, tipologia: { startsWith: PREFISSO } },
@@ -87,8 +89,14 @@ export async function POST(req: NextRequest) {
       prodottiCreati += res.count;
     }
 
+    // Optional: match sui campi stabili (categoria/nome/sporgenza/larghezza), NON sul listino
+    // — che qui stiamo affinando da bucket unico di famiglia a tipologia esatta per submodello,
+    // cosi' le righe esistenti (create dalla vecchia route con listino di famiglia) vengono
+    // aggiornate in-place invece di essere duplicate.
     const optionaliNuovi = optionaliData as OptionalRow[];
-    const optionaliEsistenti = await prisma.optional.findMany({ where: { brandId: brand.id, listino: LISTINO } });
+    const optionaliEsistenti = await prisma.optional.findMany({
+      where: { brandId: brand.id, OR: [{ listino: LISTINO_FAMIGLIA }, { listino: { startsWith: PREFISSO } }] },
+    });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
     const optDaCreare: OptionalRow[] = [];
@@ -98,10 +106,23 @@ export async function POST(req: NextRequest) {
       if (!esistente) {
         optDaCreare.push(o);
       } else {
-        if (esistente.valore !== o.valore || esistente.note !== o.note || esistente.unita !== o.unita) {
+        if (
+          esistente.valore !== o.valore ||
+          esistente.note !== o.note ||
+          esistente.unita !== o.unita ||
+          esistente.listino !== o.listino ||
+          JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
+        ) {
           await prisma.optional.update({
             where: { id: esistente.id },
-            data: { valore: o.valore, unita: o.unita, note: o.note, tipoPrezzo: o.tipoPrezzo },
+            data: {
+              valore: o.valore,
+              unita: o.unita,
+              note: o.note,
+              tipoPrezzo: o.tipoPrezzo,
+              listino: o.listino,
+              gruppiApplicabili: o.gruppiApplicabili,
+            },
           });
           optionaliAggiornati++;
         }
@@ -121,7 +142,8 @@ export async function POST(req: NextRequest) {
         sporgenzaMm: o.sporgenzaMm,
         larghezzaMm: o.larghezzaMm,
         note: o.note,
-        listino: LISTINO,
+        listino: o.listino,
+        gruppiApplicabili: o.gruppiApplicabili,
       }));
       const res = await prisma.optional.createMany({ data: chunk });
       optionaliCreati += res.count;
@@ -134,6 +156,7 @@ export async function POST(req: NextRequest) {
       prodottiInvariati: prodottiNuovi.length - daCreare.length - prodottiAggiornati,
       optionaliCreati,
       optionaliAggiornati,
+      optionaliInvariati: optionaliNuovi.length - optDaCreare.length - optionaliAggiornati,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });

@@ -1,1892 +1,2648 @@
 [
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 803,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 820,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 1047,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 1063,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 1290,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1324,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_SINGOLA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1533,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1616,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L550",
-  "tipoPrezzo": "FISSO",
-  "valore": 1649,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 550,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L600",
-  "tipoPrezzo": "FISSO",
-  "valore": 1859,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 600,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L650",
-  "tipoPrezzo": "FISSO",
-  "valore": 1892,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 650,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L700",
-  "tipoPrezzo": "FISSO",
-  "valore": 2101,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 700,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L750",
-  "tipoPrezzo": "FISSO",
-  "valore": 2135,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 750,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L800",
-  "tipoPrezzo": "FISSO",
-  "valore": 2346,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 800,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L850",
-  "tipoPrezzo": "FISSO",
-  "valore": 2413,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 850,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_DOPPIA L900",
-  "tipoPrezzo": "FISSO",
-  "valore": 2622,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 900,
-  "note": "PARETE_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L950",
-  "tipoPrezzo": "FISSO",
-  "valore": 2703,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 950,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L1760",
-  "tipoPrezzo": "FISSO",
-  "valore": 2915,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1760,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L1848",
-  "tipoPrezzo": "FISSO",
-  "valore": 2981,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1848,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L1936",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1936,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L2024",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2024,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L2112",
-  "tipoPrezzo": "FISSO",
-  "valore": 3400,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2112,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L2200",
-  "tipoPrezzo": "FISSO",
-  "valore": 3469,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2200,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L2288",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2288,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PARETE_TRIPLA L2376",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2376,
-  "note": "PARETE_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 803,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 820,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 1047,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 1063,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 1290,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1324,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_SINGOLA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1533,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "ISOLA_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1616,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L550",
-  "tipoPrezzo": "FISSO",
-  "valore": 1649,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 550,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L600",
-  "tipoPrezzo": "FISSO",
-  "valore": 1859,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 600,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L650",
-  "tipoPrezzo": "FISSO",
-  "valore": 1892,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 650,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L700",
-  "tipoPrezzo": "FISSO",
-  "valore": 2101,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 700,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L750",
-  "tipoPrezzo": "FISSO",
-  "valore": 2135,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 750,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L800",
-  "tipoPrezzo": "FISSO",
-  "valore": 2346,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 800,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L850",
-  "tipoPrezzo": "FISSO",
-  "valore": 2413,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 850,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_DOPPIA L900",
-  "tipoPrezzo": "FISSO",
-  "valore": 2622,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 900,
-  "note": "ISOLA_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L950",
-  "tipoPrezzo": "FISSO",
-  "valore": 2703,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 950,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L1760",
-  "tipoPrezzo": "FISSO",
-  "valore": 2915,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1760,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L1848",
-  "tipoPrezzo": "FISSO",
-  "valore": 2981,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1848,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L1936",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1936,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L2024",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2024,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L2112",
-  "tipoPrezzo": "FISSO",
-  "valore": 3400,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2112,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L2200",
-  "tipoPrezzo": "FISSO",
-  "valore": 3469,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2200,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L2288",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2288,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio ISOLA_TRIPLA L2376",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2376,
-  "note": "ISOLA_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 803,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 820,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 1047,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 1063,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 1290,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1324,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1533,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 445,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 556,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 669,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 778,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 889,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1000,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_SINGOLA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1111,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PATIO_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 803,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 820,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 1047,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 1063,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 1290,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1324,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "PATIO_SINGOLA_TIRANTI"
- },
- {
-  "categoria": "INFO_TIRANTI",
-  "nome": "H tiranti per sporgenza 200mm",
-  "tipoPrezzo": "FISSO",
-  "valore": 70,
-  "unita": "mm H",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "Valore informativo, non un prezzo"
- },
- {
-  "categoria": "INFO_TIRANTI",
-  "nome": "H tiranti per sporgenza 250mm",
-  "tipoPrezzo": "FISSO",
-  "valore": 87,
-  "unita": "mm H",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "Valore informativo, non un prezzo"
- },
- {
-  "categoria": "INFO_TIRANTI",
-  "nome": "H tiranti per sporgenza 300mm",
-  "tipoPrezzo": "FISSO",
-  "valore": 105,
-  "unita": "mm H",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "Valore informativo, non un prezzo"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1616,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L550",
-  "tipoPrezzo": "FISSO",
-  "valore": 1649,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 550,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L600",
-  "tipoPrezzo": "FISSO",
-  "valore": 1859,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 600,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L650",
-  "tipoPrezzo": "FISSO",
-  "valore": 1892,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 650,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L700",
-  "tipoPrezzo": "FISSO",
-  "valore": 2101,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 700,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L750",
-  "tipoPrezzo": "FISSO",
-  "valore": 2135,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 750,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L800",
-  "tipoPrezzo": "FISSO",
-  "valore": 2346,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 800,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L850",
-  "tipoPrezzo": "FISSO",
-  "valore": 2413,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 850,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_DOPPIA L900",
-  "tipoPrezzo": "FISSO",
-  "valore": 2622,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 900,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1111,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L550",
-  "tipoPrezzo": "FISSO",
-  "valore": 1223,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 550,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L600",
-  "tipoPrezzo": "FISSO",
-  "valore": 1334,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 600,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L650",
-  "tipoPrezzo": "FISSO",
-  "valore": 1443,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 650,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L700",
-  "tipoPrezzo": "FISSO",
-  "valore": 1554,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 700,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L750",
-  "tipoPrezzo": "FISSO",
-  "valore": 1665,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 750,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L800",
-  "tipoPrezzo": "FISSO",
-  "valore": 1778,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 800,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L850",
-  "tipoPrezzo": "FISSO",
-  "valore": 1888,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 850,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_DOPPIA L900",
-  "tipoPrezzo": "FISSO",
-  "valore": 1999,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 900,
-  "note": "PATIO_DOPPIA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L950",
-  "tipoPrezzo": "FISSO",
-  "valore": 2703,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 950,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L1760",
-  "tipoPrezzo": "FISSO",
-  "valore": 2915,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1760,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L1848",
-  "tipoPrezzo": "FISSO",
-  "valore": 2981,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1848,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L1936",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1936,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L2024",
-  "tipoPrezzo": "FISSO",
-  "valore": 3191,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2024,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L2112",
-  "tipoPrezzo": "FISSO",
-  "valore": 3400,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2112,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L2200",
-  "tipoPrezzo": "FISSO",
-  "valore": 3469,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2200,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L2288",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2288,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio PATIO_TRIPLA L2376",
-  "tipoPrezzo": "FISSO",
-  "valore": 3678,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2376,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L950",
-  "tipoPrezzo": "FISSO",
-  "valore": 2108,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 950,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L1760",
-  "tipoPrezzo": "FISSO",
-  "valore": 2219,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1760,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L1848",
-  "tipoPrezzo": "FISSO",
-  "valore": 2332,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1848,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L1936",
-  "tipoPrezzo": "FISSO",
-  "valore": 2443,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 1936,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L2024",
-  "tipoPrezzo": "FISSO",
-  "valore": 2554,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2024,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L2112",
-  "tipoPrezzo": "FISSO",
-  "valore": 2665,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2112,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L2200",
-  "tipoPrezzo": "FISSO",
-  "valore": 2774,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2200,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L2288",
-  "tipoPrezzo": "FISSO",
-  "valore": 2886,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2288,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "GRONDA",
-  "nome": "Gronda PATIO_TRIPLA L2376",
-  "tipoPrezzo": "FISSO",
-  "valore": 2997,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 2376,
-  "note": "PATIO_TRIPLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L200",
-  "tipoPrezzo": "FISSO",
-  "valore": 588,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 200,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L250",
-  "tipoPrezzo": "FISSO",
-  "valore": 686,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 250,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L300",
-  "tipoPrezzo": "FISSO",
-  "valore": 788,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 300,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L350",
-  "tipoPrezzo": "FISSO",
-  "valore": 987,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 350,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L400",
-  "tipoPrezzo": "FISSO",
-  "valore": 1091,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 400,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L450",
-  "tipoPrezzo": "FISSO",
-  "valore": 1190,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 450,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L500",
-  "tipoPrezzo": "FISSO",
-  "valore": 1290,
-  "unita": "a corpo",
-  "sporgenzaMm": null,
-  "larghezzaMm": 500,
-  "note": "TRAPEZOIDALE_PARETE_SINGOLA"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 47,
-  "unita": "a corpo",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 52,
-  "unita": "a corpo",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 57,
-  "unita": "a corpo",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 62,
-  "unita": "a corpo",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 67,
-  "unita": "a corpo",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 72,
-  "unita": "a corpo",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 77,
-  "unita": "a corpo",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 82,
-  "unita": "a corpo",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 87,
-  "unita": "a corpo",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 92,
-  "unita": "a corpo",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 10% (pendenza bassa)",
-  "tipoPrezzo": "FISSO",
-  "valore": 97,
-  "unita": "a corpo",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "10%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 57,
-  "unita": "a corpo",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 64.5,
-  "unita": "a corpo",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 72,
-  "unita": "a corpo",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 79.5,
-  "unita": "a corpo",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 87,
-  "unita": "a corpo",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 94.5,
-  "unita": "a corpo",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 102,
-  "unita": "a corpo",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 109.5,
-  "unita": "a corpo",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 117,
-  "unita": "a corpo",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 124.5,
-  "unita": "a corpo",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "SUPPLEMENTO_PENDENZA",
-  "nome": "Supplemento A 15% (pendenza alta)",
-  "tipoPrezzo": "FISSO",
-  "valore": 132,
-  "unita": "a corpo",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "15%"
- },
- {
-  "categoria": "STAFFA",
-  "nome": "Staffa a soffitto",
-  "tipoPrezzo": "FISSO",
-  "valore": 206,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "TESSUTO",
-  "nome": "Altri tessuti PVC (gamma BlockOut, Opatex Pro)",
-  "tipoPrezzo": "PERCENTUALE",
-  "valore": 5,
-  "unita": "%",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "TESSUTO",
-  "nome": "Tessuto Soltis",
-  "tipoPrezzo": "PERCENTUALE",
-  "valore": 10,
-  "unita": "%",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "SENSORE",
-  "nome": "Sensore vento",
-  "tipoPrezzo": "FISSO",
-  "valore": 333,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "SENSORE",
-  "nome": "Sensore vento-pioggia",
-  "tipoPrezzo": "FISSO",
-  "valore": 912,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "SENSORE",
-  "nome": "Sensore vento-sole",
-  "tipoPrezzo": "FISSO",
-  "valore": 612,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "SENSORE",
-  "nome": "Sensore vento-sole-pioggia",
-  "tipoPrezzo": "FISSO",
-  "valore": 1192,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 397,
-  "unita": "pz",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 462,
-  "unita": "pz",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 524,
-  "unita": "pz",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 613,
-  "unita": "pz",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 677,
-  "unita": "pz",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 739,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 803,
-  "unita": "pz",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 891,
-  "unita": "pz",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 955,
-  "unita": "pz",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 1788,
-  "unita": "pz",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Cristal (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 1888,
-  "unita": "pz",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "Cristal (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 500,
-  "unita": "pz",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 584,
-  "unita": "pz",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 668,
-  "unita": "pz",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 780,
-  "unita": "pz",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 864,
-  "unita": "pz",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 948,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 1816,
-  "unita": "pz",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2015,
-  "unita": "pz",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2163,
-  "unita": "pz",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2309,
-  "unita": "pz",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2438,
-  "unita": "pz",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "Precontraint 302/502 (profilo K50)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 500,
-  "unita": "pz",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 584,
-  "unita": "pz",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 668,
-  "unita": "pz",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 780,
-  "unita": "pz",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 864,
-  "unita": "pz",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 948,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 1816,
-  "unita": "pz",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2015,
-  "unita": "pz",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2163,
-  "unita": "pz",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2309,
-  "unita": "pz",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Opatex (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2438,
-  "unita": "pz",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "Opatex (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 691,
-  "unita": "pz",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 828,
-  "unita": "pz",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 964,
-  "unita": "pz",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 1980,
-  "unita": "pz",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2219,
-  "unita": "pz",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2460,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2545,
-  "unita": "pz",
-  "sporgenzaMm": 500,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 2988,
-  "unita": "pz",
-  "sporgenzaMm": 550,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 3226,
-  "unita": "pz",
-  "sporgenzaMm": 600,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 3464,
-  "unita": "pz",
-  "sporgenzaMm": 650,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- },
- {
-  "categoria": "TIMPANO",
-  "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
-  "tipoPrezzo": "FISSO",
-  "valore": 3703,
-  "unita": "pz",
-  "sporgenzaMm": 700,
-  "larghezzaMm": null,
-  "note": "Policarbonato (profilo K35)"
- }
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 803,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 820,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 1047,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 1063,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 1290,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1324,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_SINGOLA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1533,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PARETE_SINGOLA",
+    "listino": "LUCILLA_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1616,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L550",
+    "tipoPrezzo": "FISSO",
+    "valore": 1649,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 550,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L600",
+    "tipoPrezzo": "FISSO",
+    "valore": 1859,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 600,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L650",
+    "tipoPrezzo": "FISSO",
+    "valore": 1892,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 650,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L700",
+    "tipoPrezzo": "FISSO",
+    "valore": 2101,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 700,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L750",
+    "tipoPrezzo": "FISSO",
+    "valore": 2135,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 750,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L800",
+    "tipoPrezzo": "FISSO",
+    "valore": 2346,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 800,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L850",
+    "tipoPrezzo": "FISSO",
+    "valore": 2413,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 850,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_DOPPIA L900",
+    "tipoPrezzo": "FISSO",
+    "valore": 2622,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 900,
+    "note": "PARETE_DOPPIA",
+    "listino": "LUCILLA_PARETE_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L950",
+    "tipoPrezzo": "FISSO",
+    "valore": 2703,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 950,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L1760",
+    "tipoPrezzo": "FISSO",
+    "valore": 2915,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1760,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L1848",
+    "tipoPrezzo": "FISSO",
+    "valore": 2981,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1848,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L1936",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1936,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L2024",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2024,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L2112",
+    "tipoPrezzo": "FISSO",
+    "valore": 3400,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2112,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L2200",
+    "tipoPrezzo": "FISSO",
+    "valore": 3469,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2200,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L2288",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2288,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PARETE_TRIPLA L2376",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2376,
+    "note": "PARETE_TRIPLA",
+    "listino": "LUCILLA_PARETE_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 803,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 820,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 1047,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 1063,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 1290,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1324,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_SINGOLA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1533,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "ISOLA_SINGOLA",
+    "listino": "LUCILLA_ISOLA_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1616,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L550",
+    "tipoPrezzo": "FISSO",
+    "valore": 1649,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 550,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L600",
+    "tipoPrezzo": "FISSO",
+    "valore": 1859,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 600,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L650",
+    "tipoPrezzo": "FISSO",
+    "valore": 1892,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 650,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L700",
+    "tipoPrezzo": "FISSO",
+    "valore": 2101,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 700,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L750",
+    "tipoPrezzo": "FISSO",
+    "valore": 2135,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 750,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L800",
+    "tipoPrezzo": "FISSO",
+    "valore": 2346,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 800,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L850",
+    "tipoPrezzo": "FISSO",
+    "valore": 2413,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 850,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_DOPPIA L900",
+    "tipoPrezzo": "FISSO",
+    "valore": 2622,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 900,
+    "note": "ISOLA_DOPPIA",
+    "listino": "LUCILLA_ISOLA_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L950",
+    "tipoPrezzo": "FISSO",
+    "valore": 2703,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 950,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L1760",
+    "tipoPrezzo": "FISSO",
+    "valore": 2915,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1760,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L1848",
+    "tipoPrezzo": "FISSO",
+    "valore": 2981,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1848,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L1936",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1936,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L2024",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2024,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L2112",
+    "tipoPrezzo": "FISSO",
+    "valore": 3400,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2112,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L2200",
+    "tipoPrezzo": "FISSO",
+    "valore": 3469,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2200,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L2288",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2288,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio ISOLA_TRIPLA L2376",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2376,
+    "note": "ISOLA_TRIPLA",
+    "listino": "LUCILLA_ISOLA_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 803,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 820,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 1047,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 1063,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 1290,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1324,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1533,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 445,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 556,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 669,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 778,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 889,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1000,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_SINGOLA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1111,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PATIO_SINGOLA",
+    "listino": "LUCILLA_PATIO_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 803,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 820,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 1047,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 1063,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 1290,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_SINGOLA_TIRANTI L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1324,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "PATIO_SINGOLA_TIRANTI",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "INFO_TIRANTI",
+    "nome": "H tiranti per sporgenza 200mm",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": "mm H",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "Valore informativo, non un prezzo",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "INFO_TIRANTI",
+    "nome": "H tiranti per sporgenza 250mm",
+    "tipoPrezzo": "FISSO",
+    "valore": 87,
+    "unita": "mm H",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "Valore informativo, non un prezzo",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "INFO_TIRANTI",
+    "nome": "H tiranti per sporgenza 300mm",
+    "tipoPrezzo": "FISSO",
+    "valore": 105,
+    "unita": "mm H",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "Valore informativo, non un prezzo",
+    "listino": "LUCILLA_PATIO_SINGOLA_TIRANTI",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1616,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L550",
+    "tipoPrezzo": "FISSO",
+    "valore": 1649,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 550,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L600",
+    "tipoPrezzo": "FISSO",
+    "valore": 1859,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 600,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L650",
+    "tipoPrezzo": "FISSO",
+    "valore": 1892,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 650,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L700",
+    "tipoPrezzo": "FISSO",
+    "valore": 2101,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 700,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L750",
+    "tipoPrezzo": "FISSO",
+    "valore": 2135,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 750,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L800",
+    "tipoPrezzo": "FISSO",
+    "valore": 2346,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 800,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L850",
+    "tipoPrezzo": "FISSO",
+    "valore": 2413,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 850,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_DOPPIA L900",
+    "tipoPrezzo": "FISSO",
+    "valore": 2622,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 900,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1111,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L550",
+    "tipoPrezzo": "FISSO",
+    "valore": 1223,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 550,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L600",
+    "tipoPrezzo": "FISSO",
+    "valore": 1334,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 600,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L650",
+    "tipoPrezzo": "FISSO",
+    "valore": 1443,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 650,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L700",
+    "tipoPrezzo": "FISSO",
+    "valore": 1554,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 700,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L750",
+    "tipoPrezzo": "FISSO",
+    "valore": 1665,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 750,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L800",
+    "tipoPrezzo": "FISSO",
+    "valore": 1778,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 800,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L850",
+    "tipoPrezzo": "FISSO",
+    "valore": 1888,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 850,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_DOPPIA L900",
+    "tipoPrezzo": "FISSO",
+    "valore": 1999,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 900,
+    "note": "PATIO_DOPPIA",
+    "listino": "LUCILLA_PATIO_DOPPIA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L950",
+    "tipoPrezzo": "FISSO",
+    "valore": 2703,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 950,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L1760",
+    "tipoPrezzo": "FISSO",
+    "valore": 2915,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1760,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L1848",
+    "tipoPrezzo": "FISSO",
+    "valore": 2981,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1848,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L1936",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1936,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L2024",
+    "tipoPrezzo": "FISSO",
+    "valore": 3191,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2024,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L2112",
+    "tipoPrezzo": "FISSO",
+    "valore": 3400,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2112,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L2200",
+    "tipoPrezzo": "FISSO",
+    "valore": 3469,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2200,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L2288",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2288,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio PATIO_TRIPLA L2376",
+    "tipoPrezzo": "FISSO",
+    "valore": 3678,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2376,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L950",
+    "tipoPrezzo": "FISSO",
+    "valore": 2108,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 950,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L1760",
+    "tipoPrezzo": "FISSO",
+    "valore": 2219,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1760,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L1848",
+    "tipoPrezzo": "FISSO",
+    "valore": 2332,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1848,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L1936",
+    "tipoPrezzo": "FISSO",
+    "valore": 2443,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 1936,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L2024",
+    "tipoPrezzo": "FISSO",
+    "valore": 2554,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2024,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L2112",
+    "tipoPrezzo": "FISSO",
+    "valore": 2665,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2112,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L2200",
+    "tipoPrezzo": "FISSO",
+    "valore": 2774,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2200,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L2288",
+    "tipoPrezzo": "FISSO",
+    "valore": 2886,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2288,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GRONDA",
+    "nome": "Gronda PATIO_TRIPLA L2376",
+    "tipoPrezzo": "FISSO",
+    "valore": 2997,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 2376,
+    "note": "PATIO_TRIPLA",
+    "listino": "LUCILLA_PATIO_TRIPLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L200",
+    "tipoPrezzo": "FISSO",
+    "valore": 588,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 200,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L250",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 250,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L300",
+    "tipoPrezzo": "FISSO",
+    "valore": 788,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 300,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L350",
+    "tipoPrezzo": "FISSO",
+    "valore": 987,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 350,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L400",
+    "tipoPrezzo": "FISSO",
+    "valore": 1091,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 400,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L450",
+    "tipoPrezzo": "FISSO",
+    "valore": 1190,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 450,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio TRAPEZOIDALE_PARETE_SINGOLA L500",
+    "tipoPrezzo": "FISSO",
+    "valore": 1290,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": 500,
+    "note": "TRAPEZOIDALE_PARETE_SINGOLA",
+    "listino": "LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 47,
+    "unita": "a corpo",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 52,
+    "unita": "a corpo",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 57,
+    "unita": "a corpo",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 62,
+    "unita": "a corpo",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 67,
+    "unita": "a corpo",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 72,
+    "unita": "a corpo",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 77,
+    "unita": "a corpo",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 82,
+    "unita": "a corpo",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 87,
+    "unita": "a corpo",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 92,
+    "unita": "a corpo",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 10% (pendenza bassa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 97,
+    "unita": "a corpo",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "10%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 57,
+    "unita": "a corpo",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 64.5,
+    "unita": "a corpo",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 72,
+    "unita": "a corpo",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 79.5,
+    "unita": "a corpo",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 87,
+    "unita": "a corpo",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 94.5,
+    "unita": "a corpo",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 102,
+    "unita": "a corpo",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 109.5,
+    "unita": "a corpo",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 117,
+    "unita": "a corpo",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 124.5,
+    "unita": "a corpo",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SUPPLEMENTO_PENDENZA",
+    "nome": "Supplemento A 15% (pendenza alta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 132,
+    "unita": "a corpo",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "15%",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "STAFFA",
+    "nome": "Staffa a soffitto",
+    "tipoPrezzo": "FISSO",
+    "valore": 206,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TESSUTO",
+    "nome": "Altri tessuti PVC (gamma BlockOut, Opatex Pro)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TESSUTO",
+    "nome": "Tessuto Soltis",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SENSORE",
+    "nome": "Sensore vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 333,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SENSORE",
+    "nome": "Sensore vento-pioggia",
+    "tipoPrezzo": "FISSO",
+    "valore": 912,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SENSORE",
+    "nome": "Sensore vento-sole",
+    "tipoPrezzo": "FISSO",
+    "valore": 612,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "SENSORE",
+    "nome": "Sensore vento-sole-pioggia",
+    "tipoPrezzo": "FISSO",
+    "valore": 1192,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 397,
+    "unita": "pz",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 462,
+    "unita": "pz",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 524,
+    "unita": "pz",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 613,
+    "unita": "pz",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 677,
+    "unita": "pz",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 739,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 803,
+    "unita": "pz",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 891,
+    "unita": "pz",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 955,
+    "unita": "pz",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1788,
+    "unita": "pz",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Cristal (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1888,
+    "unita": "pz",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "Cristal (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 500,
+    "unita": "pz",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 584,
+    "unita": "pz",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 668,
+    "unita": "pz",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 780,
+    "unita": "pz",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 864,
+    "unita": "pz",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 948,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1816,
+    "unita": "pz",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2015,
+    "unita": "pz",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2163,
+    "unita": "pz",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2309,
+    "unita": "pz",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Precontraint 302/502 (profilo K50)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2438,
+    "unita": "pz",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "Precontraint 302/502 (profilo K50)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 500,
+    "unita": "pz",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 584,
+    "unita": "pz",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 668,
+    "unita": "pz",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 780,
+    "unita": "pz",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 864,
+    "unita": "pz",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 948,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1816,
+    "unita": "pz",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2015,
+    "unita": "pz",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2163,
+    "unita": "pz",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2309,
+    "unita": "pz",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Opatex (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2438,
+    "unita": "pz",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "Opatex (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 691,
+    "unita": "pz",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 828,
+    "unita": "pz",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 964,
+    "unita": "pz",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1980,
+    "unita": "pz",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2219,
+    "unita": "pz",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2460,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2545,
+    "unita": "pz",
+    "sporgenzaMm": 500,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 2988,
+    "unita": "pz",
+    "sporgenzaMm": 550,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 3226,
+    "unita": "pz",
+    "sporgenzaMm": 600,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 3464,
+    "unita": "pz",
+    "sporgenzaMm": 650,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TIMPANO",
+    "nome": "Timpano trapezoidale Policarbonato (profilo K35)",
+    "tipoPrezzo": "FISSO",
+    "valore": 3703,
+    "unita": "pz",
+    "sporgenzaMm": 700,
+    "larghezzaMm": null,
+    "note": "Policarbonato (profilo K35)",
+    "listino": "LUCILLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  }
 ]

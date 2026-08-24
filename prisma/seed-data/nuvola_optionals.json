@@ -1,392 +1,548 @@
 [
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 135cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 239,
-  "unita": "pz",
-  "sporgenzaMm": 135,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 180cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 289,
-  "unita": "pz",
-  "sporgenzaMm": 180,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 225cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 334,
-  "unita": "pz",
-  "sporgenzaMm": 225,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 270cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 387,
-  "unita": "pz",
-  "sporgenzaMm": 270,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 315cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 433,
-  "unita": "pz",
-  "sporgenzaMm": 315,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 360cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 477,
-  "unita": "pz",
-  "sporgenzaMm": 360,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 405cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 567,
-  "unita": "pz",
-  "sporgenzaMm": 405,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Parete (sporg. 450cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 576,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PARETE"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 135cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 239,
-  "unita": "pz",
-  "sporgenzaMm": 135,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 180cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 289,
-  "unita": "pz",
-  "sporgenzaMm": 180,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 225cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 334,
-  "unita": "pz",
-  "sporgenzaMm": 225,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 270cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 387,
-  "unita": "pz",
-  "sporgenzaMm": 270,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 315cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 433,
-  "unita": "pz",
-  "sporgenzaMm": 315,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 360cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 477,
-  "unita": "pz",
-  "sporgenzaMm": 360,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 405cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 567,
-  "unita": "pz",
-  "sporgenzaMm": 405,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Isola (sporg. 450cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 576,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "NUVOLA_ISOLA"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 135cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 239,
-  "unita": "pz",
-  "sporgenzaMm": 135,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 180cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 289,
-  "unita": "pz",
-  "sporgenzaMm": 180,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 225cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 334,
-  "unita": "pz",
-  "sporgenzaMm": 225,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 270cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 387,
-  "unita": "pz",
-  "sporgenzaMm": 270,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 315cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 433,
-  "unita": "pz",
-  "sporgenzaMm": 315,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 360cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 477,
-  "unita": "pz",
-  "sporgenzaMm": 360,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 405cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 567,
-  "unita": "pz",
-  "sporgenzaMm": 405,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 450cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 576,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "NUVOLA_PATIO_SOFFITTO"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 150cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 289,
-  "unita": "pz",
-  "sporgenzaMm": 150,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 200cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 190,
-  "unita": "pz",
-  "sporgenzaMm": 200,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 250cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 387,
-  "unita": "pz",
-  "sporgenzaMm": 250,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 300cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 246,
-  "unita": "pz",
-  "sporgenzaMm": 300,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 350cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 477,
-  "unita": "pz",
-  "sporgenzaMm": 350,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 400cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 322,
-  "unita": "pz",
-  "sporgenzaMm": 400,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "GUIDA_AGGIUNTIVA",
-  "nome": "Guida aggiuntiva Nl140 (sporg. 450cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 576,
-  "unita": "pz",
-  "sporgenzaMm": 450,
-  "larghezzaMm": null,
-  "note": "NUVOLA_NL140"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio di protezione (sporgenze fino a 400cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 146,
-  "unita": "€/mt",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": "Parete, Isola, Patio soffitto"
- },
- {
-  "categoria": "TETTUCCIO",
-  "nome": "Tettuccio di protezione (sporgenze oltre 400cm)",
-  "tipoPrezzo": "FISSO",
-  "valore": 178,
-  "unita": "€/mt",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": "Parete, Isola, Patio soffitto"
- },
- {
-  "categoria": "TESSUTO",
-  "nome": "Teli in PVC o acrilico impermeabile con teli trapezoidali",
-  "tipoPrezzo": "PERCENTUALE",
-  "valore": 22,
-  "unita": "%",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "TESSUTO",
-  "nome": "Tessuto Soltis (Nuvola)",
-  "tipoPrezzo": "PERCENTUALE",
-  "valore": 25,
-  "unita": "%",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "MOTORE",
-  "nome": "Kit motore tubolare meccanico Somfy",
-  "tipoPrezzo": "FISSO",
-  "valore": 1508,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": "Non disponibile su Nuvola Patio versione a soffitto"
- },
- {
-  "categoria": "MOTORE",
-  "nome": "Kit motore tubolare elettronico Somfy",
-  "tipoPrezzo": "FISSO",
-  "valore": 1860,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": "Non disponibile su Nuvola Patio versione a soffitto"
- },
- {
-  "categoria": "TELECOMANDO",
-  "nome": "Telecomando Somfy Situo 1 RTS",
-  "tipoPrezzo": "FISSO",
-  "valore": 106,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- },
- {
-  "categoria": "TELECOMANDO",
-  "nome": "Telecomando Somfy Situo 5 RTS",
-  "tipoPrezzo": "FISSO",
-  "valore": 169,
-  "unita": "pz",
-  "sporgenzaMm": null,
-  "larghezzaMm": null,
-  "note": null
- }
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 135cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 239,
+    "unita": "pz",
+    "sporgenzaMm": 135,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 180cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 289,
+    "unita": "pz",
+    "sporgenzaMm": 180,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 225cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 334,
+    "unita": "pz",
+    "sporgenzaMm": 225,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 270cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 387,
+    "unita": "pz",
+    "sporgenzaMm": 270,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 315cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 433,
+    "unita": "pz",
+    "sporgenzaMm": 315,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 360cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 477,
+    "unita": "pz",
+    "sporgenzaMm": 360,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 405cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 567,
+    "unita": "pz",
+    "sporgenzaMm": 405,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Parete (sporg. 450cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 576,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PARETE",
+    "listino": "NUVOLA_PARETE",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 135cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 239,
+    "unita": "pz",
+    "sporgenzaMm": 135,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 180cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 289,
+    "unita": "pz",
+    "sporgenzaMm": 180,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 225cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 334,
+    "unita": "pz",
+    "sporgenzaMm": 225,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 270cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 387,
+    "unita": "pz",
+    "sporgenzaMm": 270,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 315cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 433,
+    "unita": "pz",
+    "sporgenzaMm": 315,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 360cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 477,
+    "unita": "pz",
+    "sporgenzaMm": 360,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 405cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 567,
+    "unita": "pz",
+    "sporgenzaMm": 405,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Isola (sporg. 450cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 576,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "NUVOLA_ISOLA",
+    "listino": "NUVOLA_ISOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 135cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 239,
+    "unita": "pz",
+    "sporgenzaMm": 135,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 180cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 289,
+    "unita": "pz",
+    "sporgenzaMm": 180,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 225cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 334,
+    "unita": "pz",
+    "sporgenzaMm": 225,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 270cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 387,
+    "unita": "pz",
+    "sporgenzaMm": 270,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 315cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 433,
+    "unita": "pz",
+    "sporgenzaMm": 315,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 360cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 477,
+    "unita": "pz",
+    "sporgenzaMm": 360,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 405cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 567,
+    "unita": "pz",
+    "sporgenzaMm": 405,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Patio_Soffitto (sporg. 450cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 576,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "NUVOLA_PATIO_SOFFITTO",
+    "listino": "NUVOLA_PATIO_SOFFITTO",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 150cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 289,
+    "unita": "pz",
+    "sporgenzaMm": 150,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 200cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 190,
+    "unita": "pz",
+    "sporgenzaMm": 200,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 250cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 387,
+    "unita": "pz",
+    "sporgenzaMm": 250,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 300cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 246,
+    "unita": "pz",
+    "sporgenzaMm": 300,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 350cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 477,
+    "unita": "pz",
+    "sporgenzaMm": 350,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 400cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 322,
+    "unita": "pz",
+    "sporgenzaMm": 400,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "GUIDA_AGGIUNTIVA",
+    "nome": "Guida aggiuntiva Nl140 (sporg. 450cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 576,
+    "unita": "pz",
+    "sporgenzaMm": 450,
+    "larghezzaMm": null,
+    "note": "NUVOLA_NL140",
+    "listino": "NUVOLA_NL140",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio di protezione (sporgenze fino a 400cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 146,
+    "unita": "€/mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Parete, Isola, Patio soffitto",
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TETTUCCIO",
+    "nome": "Tettuccio di protezione (sporgenze oltre 400cm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 178,
+    "unita": "€/mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Parete, Isola, Patio soffitto",
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TESSUTO",
+    "nome": "Teli in PVC o acrilico impermeabile con teli trapezoidali",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 22,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TESSUTO",
+    "nome": "Tessuto Soltis (Nuvola)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "MOTORE",
+    "nome": "Kit motore tubolare meccanico Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1508,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Non disponibile su Nuvola Patio versione a soffitto",
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "MOTORE",
+    "nome": "Kit motore tubolare elettronico Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 1860,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": "Non disponibile su Nuvola Patio versione a soffitto",
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TELECOMANDO",
+    "nome": "Telecomando Somfy Situo 1 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 106,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  },
+  {
+    "categoria": "TELECOMANDO",
+    "nome": "Telecomando Somfy Situo 5 RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 169,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "note": null,
+    "listino": "NUVOLA",
+    "gruppiApplicabili": [
+      "PERGOLE"
+    ]
+  }
 ]

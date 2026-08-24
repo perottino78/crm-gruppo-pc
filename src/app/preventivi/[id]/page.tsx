@@ -358,7 +358,7 @@ export default async function PreventivoPage({
                 <input type="hidden" name="preventivoId" value={preventivo.id} />
                 <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
                   {optionaliDisponibili
-                    .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia))
+                    .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia) || o.listino === r.prodotto.tipologia)
                     .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                     .map((o) => (
                       <option key={o.id} value={o.id}>
