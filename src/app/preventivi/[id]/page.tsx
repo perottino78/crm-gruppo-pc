@@ -63,6 +63,7 @@ export default async function PreventivoPage({
       by: ["tipologia"],
       where: { brandId: preventivo.brandId },
       orderBy: { tipologia: "asc" },
+      _min: { larghezzaMm: true, altezzaMm: true },
       _max: { larghezzaMm: true, altezzaMm: true },
     }),
     prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId } }),
@@ -97,11 +98,20 @@ export default async function PreventivoPage({
     if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
     const perGruppo = alberoMap.get(famiglia)!;
     if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
+    const conMisura = haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0);
     perGruppo.get(gruppo)!.push({
       value: tip,
       label: tip.replace(/_/g, " "),
-      haMisura: haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0),
+      haMisura: conMisura,
       varianti: variantiPerTipologia.get(tip),
+      misure: conMisura
+        ? {
+            larghezzaMin: t._min.larghezzaMm ?? 0,
+            larghezzaMax: t._max.larghezzaMm ?? 0,
+            altezzaMin: t._min.altezzaMm ?? 0,
+            altezzaMax: t._max.altezzaMm ?? 0,
+          }
+        : undefined,
     });
   }
   const ordineFamiglie = ["INDOOR", "OUTDOOR"];

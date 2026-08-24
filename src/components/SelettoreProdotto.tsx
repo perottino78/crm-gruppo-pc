@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { unitaMisura } from "@/lib/prodotti";
 
 export type NodoTipologia = {
@@ -8,6 +8,8 @@ export type NodoTipologia = {
   label: string;
   haMisura: boolean;
   varianti?: { id: string; colore: string; prezzoBase: number }[];
+  // range di misure effettivamente a listino (solo per i modelli con haMisura=true)
+  misure?: { larghezzaMin: number; larghezzaMax: number; altezzaMin: number; altezzaMax: number };
 };
 export type GruppoNodo = { nome: string; tipologie: NodoTipologia[] };
 export type FamigliaNodo = { nome: string; gruppi: GruppoNodo[] };
@@ -31,6 +33,9 @@ export default function SelettoreProdotto({
   const [famigliaAperta, setFamigliaAperta] = useState<string | null>(null);
   const [gruppoAperto, setGruppoAperto] = useState<string | null>(null);
   const [scelto, setScelto] = useState<NodoTipologia | null>(null);
+  const [larghezzaVal, setLarghezzaVal] = useState("");
+  const [altezzaVal, setAltezzaVal] = useState("");
+  const [erroreMisura, setErroreMisura] = useState<string | null>(null);
 
   const risultatiRicerca = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -50,10 +55,47 @@ export default function SelettoreProdotto({
 
   function scegli(nodo: NodoTipologia) {
     setScelto(nodo);
+    setLarghezzaVal("");
+    setAltezzaVal("");
+    setErroreMisura(null);
   }
 
   function azzeraScelta() {
     setScelto(null);
+    setLarghezzaVal("");
+    setAltezzaVal("");
+    setErroreMisura(null);
+  }
+
+  // controlla che la misura inserita sia un numero valido e rientri nel range di produzione
+  // del modello scelto; restituisce il messaggio di errore da mostrare, o null se tutto ok
+  function controllaMisure(nodo: NodoTipologia, larghezzaStr: string, altezzaStr: string): string | null {
+    const larghezza = parseFloat(larghezzaStr.replace(",", "."));
+    const altezza = parseFloat(altezzaStr.replace(",", "."));
+    if (!larghezzaStr.trim() || !altezzaStr.trim() || !Number.isFinite(larghezza) || !Number.isFinite(altezza)) {
+      return "Misura non valida: inserisci solo numeri per larghezza e altezza.";
+    }
+    if (larghezza <= 0 || altezza <= 0) {
+      return "Misura non valida: i valori devono essere maggiori di zero.";
+    }
+    const unit = unitaMisura(nodo.value);
+    if (nodo.misure) {
+      const { larghezzaMin, larghezzaMax, altezzaMin, altezzaMax } = nodo.misure;
+      if (larghezza < larghezzaMin || larghezza > larghezzaMax) {
+        return `Larghezza fuori produzione: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
+      }
+      if (altezza < altezzaMin || altezza > altezzaMax) {
+        return `Altezza/sporgenza fuori produzione: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
+      }
+    }
+    return null;
+  }
+
+  function alSubmitMisura(e: FormEvent<HTMLFormElement>) {
+    if (!scelto) return;
+    const errore = controllaMisure(scelto, larghezzaVal, altezzaVal);
+    setErroreMisura(errore);
+    if (errore) e.preventDefault();
   }
 
   return (
@@ -154,29 +196,71 @@ export default function SelettoreProdotto({
           </div>
 
           {scelto.haMisura ? (
-            <form action={azionePerMisura} className="flex flex-wrap items-end gap-2">
-              <input type="hidden" name="preventivoId" value={preventivoId} />
-              <input type="hidden" name="brandId" value={brandId} />
-              <input type="hidden" name="tipologia" value={scelto.value} />
-              <div className="flex flex-col gap-1">
-                <label className="text-xs text-neutral-500">Larghezza ({unitaMisura(scelto.value)})</label>
-                <input name="larghezza" type="number" step="0.1" min="0" required placeholder="es. 380" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-xs text-neutral-500">Altezza / sporgenza ({unitaMisura(scelto.value)})</label>
-                <input name="altezza" type="number" step="0.1" min="0" required placeholder="es. 250" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-xs text-neutral-500">Quantità</label>
-                <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-20" />
-              </div>
-              <button className="btn-3d text-sm px-4 py-2" style={{ background: brandColor, color: "#fff", borderColor: brandColor }}>
-                Calcola e aggiungi
-              </button>
-              <p className="text-[11px] text-neutral-400 w-full">
-                Il prezzo viene calcolato dalla fascia di listino più vicina alla misura inserita.
-              </p>
-            </form>
+            <>
+              {scelto.misure && (
+                <p className="text-xs mb-2">
+                  <span className="font-bold text-neutral-700">
+                    Misure di produzione: larghezza {scelto.misure.larghezzaMin}–{scelto.misure.larghezzaMax} {unitaMisura(scelto.value)}
+                    {" "}· altezza/sporgenza {scelto.misure.altezzaMin}–{scelto.misure.altezzaMax} {unitaMisura(scelto.value)}
+                  </span>
+                </p>
+              )}
+              <form action={azionePerMisura} onSubmit={alSubmitMisura} className="flex flex-wrap items-end gap-2">
+                <input type="hidden" name="preventivoId" value={preventivoId} />
+                <input type="hidden" name="brandId" value={brandId} />
+                <input type="hidden" name="tipologia" value={scelto.value} />
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs text-neutral-500">Larghezza ({unitaMisura(scelto.value)})</label>
+                  <input
+                    name="larghezza"
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    required
+                    placeholder="es. 380"
+                    value={larghezzaVal}
+                    onChange={(e) => {
+                      setLarghezzaVal(e.target.value);
+                      if (erroreMisura) setErroreMisura(null);
+                    }}
+                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"}`}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs text-neutral-500">Altezza / sporgenza ({unitaMisura(scelto.value)})</label>
+                  <input
+                    name="altezza"
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    required
+                    placeholder="es. 250"
+                    value={altezzaVal}
+                    onChange={(e) => {
+                      setAltezzaVal(e.target.value);
+                      if (erroreMisura) setErroreMisura(null);
+                    }}
+                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"}`}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs text-neutral-500">Quantità</label>
+                  <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-20" />
+                </div>
+                <button className="btn-3d text-sm px-4 py-2" style={{ background: brandColor, color: "#fff", borderColor: brandColor }}>
+                  Calcola e aggiungi
+                </button>
+                {erroreMisura && (
+                  <div className="w-full flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-3 py-2 text-xs font-medium">
+                    <span>⚠️</span>
+                    <span>{erroreMisura}</span>
+                  </div>
+                )}
+                <p className="text-[11px] text-neutral-400 w-full">
+                  Il prezzo viene calcolato dalla fascia di listino più vicina alla misura inserita.
+                </p>
+              </form>
+            </>
           ) : scelto.varianti && scelto.varianti.length > 0 ? (
             <div className="flex flex-col gap-1.5">
               <p className="text-[11px] text-neutral-400 mb-1">Prodotto a prezzo fisso (senza misura) — scegli la variante:</p>

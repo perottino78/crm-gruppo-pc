@@ -282,9 +282,11 @@ export default async function ProdottiPage({
                     {r.modello?.famiglia ? `${r.modello.famiglia} · ${r.modello.gruppo ?? ""}` : "—"}
                   </td>
                   <td className="px-4 py-2 text-neutral-500 text-xs">
-                    {haMisura(r.larghezzaMax, r.altezzaMax)
-                      ? `${r.larghezzaMin}–${r.larghezzaMax} × ${r.altezzaMin}–${r.altezzaMax} ${unit}`
-                      : "prezzo fisso (senza misura)"}
+                    {haMisura(r.larghezzaMax, r.altezzaMax) ? (
+                      <span className="font-bold text-neutral-700">{r.larghezzaMin}–{r.larghezzaMax} × {r.altezzaMin}–{r.altezzaMax} {unit}</span>
+                    ) : (
+                      "prezzo fisso (senza misura)"
+                    )}
                   </td>
                   <td className="px-4 py-2 text-right">
                     {r.prezzoMin.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
