@@ -1,0 +1,79 @@
+[
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con tessuto acrilico (tariffa 1), montaggio in orizzontale senza cuciture. Altezza fissa 110cm (determinata dal rotolo del tessuto), larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "descrizioneTecnica": "Telaio fisso con tessuto acrilico (tariffa 1), montaggio in verticale con cuciture. Altezza e larghezza entrambe variabili (altezza 50-300cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con telo Precontraint 302, montaggio in orizzontale senza saldature. Altezza fissa 170cm, larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "descrizioneTecnica": "Telaio fisso con telo Precontraint 302, montaggio in verticale con saldature. Altezza e larghezza entrambe variabili (altezza 50-300cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con telo Cristal 500 (trasparente), montaggio in orizzontale senza saldature. Altezza fissa 127cm, larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "descrizioneTecnica": "Telaio fisso con telo Cristal 500 (trasparente), montaggio in verticale con saldature. Altezza e larghezza entrambe variabili (altezza 50-300cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con telo Vinitex 2102, montaggio in orizzontale senza saldature. Altezza fissa 140cm, larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con telo Vinitex 9x9, montaggio in orizzontale senza saldature. Altezza fissa 190cm, larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "descrizioneTecnica": "Telaio fisso con telo Soltis 92 H.177, montaggio in orizzontale senza saldature. Altezza fissa 167cm, larghezza variabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "descrizioneTecnica": "Telaio fisso con telo Soltis 92 H.177, montaggio in verticale con saldature. Altezza e larghezza entrambe variabili (altezza 50-300cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "descrizioneTecnica": "Telaio fisso con policarbonato compatto. Altezza e larghezza entrambe variabili (altezza 50-200cm, larghezza max 600cm).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TELAI FISSI",
+    "immagineUrl": "/immagini/telai_fissi/telaio_tipoA.png"
+  }
+]

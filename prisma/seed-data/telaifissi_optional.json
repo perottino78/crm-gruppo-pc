@@ -1,0 +1,58 @@
+[
+  {
+    "categoria": "Forma telaio",
+    "nome": "Tipo A - Telaio rettangolare (netto)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 0,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Nessuna maggiorazione, prezzo di listino.",
+    "gruppiApplicabili": [
+      "TELAI FISSI"
+    ]
+  },
+  {
+    "categoria": "Forma telaio",
+    "nome": "Tipo B - Telaio trapezoidale",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TELAI FISSI"
+    ]
+  },
+  {
+    "categoria": "Forma telaio",
+    "nome": "Tipo C - Telaio trapezoidale",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TELAI FISSI"
+    ]
+  },
+  {
+    "categoria": "Forma telaio",
+    "nome": "Tipo D - Telaio ad arco",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TELAI FISSI"
+    ]
+  }
+]

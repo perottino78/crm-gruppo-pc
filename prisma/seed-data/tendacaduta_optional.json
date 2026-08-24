@@ -1,0 +1,2536 @@
+[
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Round",
+    "tipoPrezzo": "FISSO",
+    "valore": 156,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square",
+    "tipoPrezzo": "FISSO",
+    "valore": 208,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 70,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Round",
+    "tipoPrezzo": "FISSO",
+    "valore": 156,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square",
+    "tipoPrezzo": "FISSO",
+    "valore": 208,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Staffa inox",
+    "tipoPrezzo": "FISSO",
+    "valore": 212,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 60,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000GUIDE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square (aumento su Round)",
+    "tipoPrezzo": "FISSO",
+    "valore": 74,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square (aumento su Round)",
+    "tipoPrezzo": "FISSO",
+    "valore": 74,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_ROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square (aumento su Round)",
+    "tipoPrezzo": "FISSO",
+    "valore": 74,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Bracci a doppio movimento verticale-laterale",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 70,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_5000S",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Bracci a doppio movimento verticale-laterale",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000T",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Bracci a doppio movimento verticale-laterale",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto Liberty e PVC tariffa 2 (max sporgenza 200cm)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_7000E",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Round",
+    "tipoPrezzo": "FISSO",
+    "valore": 156,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Staffa inox",
+    "tipoPrezzo": "FISSO",
+    "valore": 212,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Braccetti a molla",
+    "tipoPrezzo": "FISSO",
+    "valore": 234,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 2",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tessuto degradé",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_T4",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Cassonetto",
+    "nome": "Cassonetto Square (upgrade su Round incluso)",
+    "tipoPrezzo": "FISSO",
+    "valore": 74,
+    "unita": "mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 3",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Maggiorazione tessuto",
+    "nome": "Tariffa 4",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Per tende totalmente in Cristal",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Per tende con due parti in cristal e una in PVC",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Catenacciolo \"A\"",
+    "tipoPrezzo": "FISSO",
+    "valore": 112,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Catenacciolo \"B\"",
+    "tipoPrezzo": "FISSO",
+    "valore": 22,
+    "unita": "coppia",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 306,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice meccanico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 330,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. fino a 300)",
+    "tipoPrezzo": "FISSO",
+    "valore": 646,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Nice elettronico (larg. da 301)",
+    "tipoPrezzo": "FISSO",
+    "valore": 686,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy meccanico",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy elettronico",
+    "tipoPrezzo": "FISSO",
+    "valore": 692,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_ORIZZONTE",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: supplemento motore con ricevitore radio integrato",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 168,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 238,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 302,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 572,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali per sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 420,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: set di regolazione dei finecorsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore standard (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 236,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio IO (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 542,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 152,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 240,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: set regolazione fine corsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: supplemento motore con ricevitore radio integrato",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 168,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 238,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 302,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 572,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali per sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 420,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: set di regolazione dei finecorsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore standard (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 236,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio IO (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 542,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 152,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 240,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: set regolazione fine corsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: supplemento motore con ricevitore radio integrato",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 168,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 238,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 302,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 572,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali per sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 420,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: set di regolazione dei finecorsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore standard (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 236,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio IO (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 542,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 152,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 240,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: set regolazione fine corsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: supplemento motore con ricevitore radio integrato",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 168,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 238,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 302,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 572,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali per sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 420,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: set di regolazione dei finecorsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore standard (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 236,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio IO (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 542,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 152,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 240,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: set regolazione fine corsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: supplemento motore con ricevitore radio integrato",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 168,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 238,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 302,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 572,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: radiocomando a 5 canali per sensore sole-vento",
+    "tipoPrezzo": "FISSO",
+    "valore": 420,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Becker: set di regolazione dei finecorsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore standard (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 236,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio IO (rilevamento ostacoli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 448,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: supplemento motore radio RTS",
+    "tipoPrezzo": "FISSO",
+    "valore": 542,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 152,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 240,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Somfy: set regolazione fine corsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 248,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP100_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Set guide plus per Evo Zip / Soltis 92",
+    "tipoPrezzo": "FISSO",
+    "valore": 96,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_SCREEN",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  },
+  {
+    "categoria": "Supplementi",
+    "nome": "Set guide plus per Evo Zip / Opatex Pro",
+    "tipoPrezzo": "FISSO",
+    "valore": 96,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "TENDACADUTA_EVOZIP125_OPATEX",
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A CADUTA"
+    ]
+  }
+]

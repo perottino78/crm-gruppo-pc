@@ -1,0 +1,3761 @@
+[
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 396.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 566.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 611.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 782.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 830.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 998.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1049.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1220.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 456.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 688.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 732.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 966.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1009.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1243.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1294.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1524.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 630.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 814.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 864.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1049.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1100.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1283.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1347.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1528.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 737.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 987.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1040.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1286.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1337.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1587.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1649.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1896.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 844.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 1158.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 1214.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 1521.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 1576.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 1892.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 450,
+    "prezzoBase": 1952.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 2264.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1040.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1212.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1259.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1435.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1480.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1651.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1705.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1878.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1147.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1392.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1438.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1676.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1723.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1968.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 2020.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2264.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 1203.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 1476.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 1523.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 1801.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1035.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1203.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1371.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1539.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1712.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1876.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 2128.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 2297.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1139.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1371.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1544.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1776.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1947.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2177.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 2432.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2664.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 1192.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 1460.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 1627.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 1894.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 1326.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1502.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1675.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1848.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 2024.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2195.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 2456.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 2627.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 1396.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1812.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 2051.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2227.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2467.2
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 2728.0
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2966.4
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 120,
+    "prezzoBase": 1769.6
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 2044.8
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 240,
+    "prezzoBase": 2219.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 120,
+    "prezzoBase": 489.6
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 200,
+    "prezzoBase": 675.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 240,
+    "prezzoBase": 723.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 907.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 350,
+    "prezzoBase": 955.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 400,
+    "prezzoBase": 1139.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 450,
+    "prezzoBase": 1196.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 1377.6
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 502.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 700.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 748.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 947.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 993.6
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1192.0
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1246.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1444.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 532.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 766.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 240,
+    "prezzoBase": 811.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 1043.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 1092.8
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 1321.6
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 1374.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 1606.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 566.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 830.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 880.0
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1142.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1190.4
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1451.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1507.2
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1769.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 120,
+    "prezzoBase": 675.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 200,
+    "prezzoBase": 920.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 240,
+    "prezzoBase": 1083.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 1260.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 350,
+    "prezzoBase": 1424.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 400,
+    "prezzoBase": 1596.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 450,
+    "prezzoBase": 1753.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 1929.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 684.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 942.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 1110.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1299.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1462.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1648.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1803.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1992.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 716.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 1004.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 240,
+    "prezzoBase": 1169.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 1387.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 1552.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 1769.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 1928.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 2145.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 747.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1065.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1228.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1478.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1646.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1892.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 2048.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2297.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 120,
+    "prezzoBase": 662.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 200,
+    "prezzoBase": 827.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 240,
+    "prezzoBase": 964.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 1132.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 350,
+    "prezzoBase": 1268.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 400,
+    "prezzoBase": 1433.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 450,
+    "prezzoBase": 1560.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 1724.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 120,
+    "prezzoBase": 673.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 851.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 240,
+    "prezzoBase": 990.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1164.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1300.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1478.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1606.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1782.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 120,
+    "prezzoBase": 702.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 907.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 240,
+    "prezzoBase": 1044.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 1249.6
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 1390.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 1592.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 1720.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 1928.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 732.8
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 966.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1104.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1336.0
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1475.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1710.4
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1835.2
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2068.8
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 120,
+    "prezzoBase": 795.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 200,
+    "prezzoBase": 998.4
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 240,
+    "prezzoBase": 1070.4
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 350,
+    "prezzoBase": 1339.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 400,
+    "prezzoBase": 1539.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 450,
+    "prezzoBase": 1608.0
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 500,
+    "prezzoBase": 1804.8
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 120,
+    "prezzoBase": 856.0
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 200,
+    "prezzoBase": 1083.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 240,
+    "prezzoBase": 1155.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 300,
+    "prezzoBase": 1377.6
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 350,
+    "prezzoBase": 1451.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 400,
+    "prezzoBase": 1673.6
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 450,
+    "prezzoBase": 1740.8
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 500,
+    "prezzoBase": 1963.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 120,
+    "prezzoBase": 883.2
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1134.4
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 240,
+    "prezzoBase": 1206.4
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1452.8
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1528.0
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1774.4
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1840.0
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2089.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 1032.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1230.4
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 1440.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1633.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1856.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2041.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 1088.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 1288.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 1497.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 1696.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 1912.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2100.8
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 150,
+    "prezzoBase": 1147.2
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 200,
+    "prezzoBase": 1347.2
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 250,
+    "prezzoBase": 1552.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 300,
+    "prezzoBase": 1752.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 350,
+    "prezzoBase": 1972.8
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 270,
+    "larghezzaMm": 400,
+    "prezzoBase": 2193.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 150,
+    "prezzoBase": 1342.4
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 200,
+    "prezzoBase": 1584.0
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 250,
+    "prezzoBase": 1835.2
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 300,
+    "prezzoBase": 2081.6
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 350,
+    "prezzoBase": 2323.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 2331.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 140,
+    "prezzoBase": 2558.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 180,
+    "prezzoBase": 2742.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 220,
+    "prezzoBase": 2960.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 260,
+    "prezzoBase": 3153.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 3368.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 340,
+    "prezzoBase": 3550.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 380,
+    "prezzoBase": 3760.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 420,
+    "prezzoBase": 3934.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 460,
+    "prezzoBase": 4142.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 2452.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 140,
+    "prezzoBase": 2691.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 180,
+    "prezzoBase": 2880.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 220,
+    "prezzoBase": 3107.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 260,
+    "prezzoBase": 3310.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 3536.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 340,
+    "prezzoBase": 3728.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 380,
+    "prezzoBase": 3944.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 420,
+    "prezzoBase": 4126.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 460,
+    "prezzoBase": 4344.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2576.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 140,
+    "prezzoBase": 2822.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 180,
+    "prezzoBase": 3020.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 3254.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 260,
+    "prezzoBase": 3468.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 3704.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 340,
+    "prezzoBase": 3902.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 380,
+    "prezzoBase": 4131.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 420,
+    "prezzoBase": 4316.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 460,
+    "prezzoBase": 4545.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 100,
+    "prezzoBase": 2715.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 140,
+    "prezzoBase": 2972.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 180,
+    "prezzoBase": 3176.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 220,
+    "prezzoBase": 3424.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 260,
+    "prezzoBase": 3643.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 300,
+    "prezzoBase": 3891.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 340,
+    "prezzoBase": 4094.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 380,
+    "prezzoBase": 4334.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 420,
+    "prezzoBase": 4524.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 460,
+    "prezzoBase": 4766.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 2856.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 140,
+    "prezzoBase": 3123.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 180,
+    "prezzoBase": 3334.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 220,
+    "prezzoBase": 3588.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 260,
+    "prezzoBase": 3817.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 4076.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 340,
+    "prezzoBase": 4286.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 380,
+    "prezzoBase": 4537.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 420,
+    "prezzoBase": 4736.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 460,
+    "prezzoBase": 4985.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 2240.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 140,
+    "prezzoBase": 2486.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 180,
+    "prezzoBase": 2715.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 220,
+    "prezzoBase": 2961.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 260,
+    "prezzoBase": 3187.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 3417.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 340,
+    "prezzoBase": 3646.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 380,
+    "prezzoBase": 3875.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 420,
+    "prezzoBase": 4104.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 460,
+    "prezzoBase": 4332.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 500,
+    "prezzoBase": 4560.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 540,
+    "prezzoBase": 4789.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 580,
+    "prezzoBase": 5018.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 2380.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 140,
+    "prezzoBase": 2646.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 180,
+    "prezzoBase": 2892.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 220,
+    "prezzoBase": 3155.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 260,
+    "prezzoBase": 3401.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 3648.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 340,
+    "prezzoBase": 3894.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 380,
+    "prezzoBase": 4137.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 420,
+    "prezzoBase": 4384.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 460,
+    "prezzoBase": 4630.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 4875.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 540,
+    "prezzoBase": 5123.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 580,
+    "prezzoBase": 5370.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2523.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 140,
+    "prezzoBase": 2806.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 180,
+    "prezzoBase": 3068.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 3348.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 260,
+    "prezzoBase": 3612.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 3876.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 340,
+    "prezzoBase": 4140.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 380,
+    "prezzoBase": 4403.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 420,
+    "prezzoBase": 4665.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 460,
+    "prezzoBase": 4929.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 500,
+    "prezzoBase": 5192.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 540,
+    "prezzoBase": 5458.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 580,
+    "prezzoBase": 5720.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 100,
+    "prezzoBase": 2683.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 140,
+    "prezzoBase": 2982.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 180,
+    "prezzoBase": 3262.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 220,
+    "prezzoBase": 3561.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 260,
+    "prezzoBase": 3843.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 300,
+    "prezzoBase": 4123.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 340,
+    "prezzoBase": 4403.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 380,
+    "prezzoBase": 4683.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 420,
+    "prezzoBase": 4963.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 460,
+    "prezzoBase": 5246.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 500,
+    "prezzoBase": 5526.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 540,
+    "prezzoBase": 5806.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 580,
+    "prezzoBase": 6086.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 2846.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 140,
+    "prezzoBase": 3161.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 180,
+    "prezzoBase": 3459.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 220,
+    "prezzoBase": 3776.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 260,
+    "prezzoBase": 4073.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 4371.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 340,
+    "prezzoBase": 4668.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 380,
+    "prezzoBase": 4968.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 420,
+    "prezzoBase": 5265.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 460,
+    "prezzoBase": 5563.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 5861.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 540,
+    "prezzoBase": 6158.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 580,
+    "prezzoBase": 6456.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 100,
+    "prezzoBase": 3004.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 140,
+    "prezzoBase": 3339.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 180,
+    "prezzoBase": 3654.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 3987.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 260,
+    "prezzoBase": 4304.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 300,
+    "prezzoBase": 4617.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 340,
+    "prezzoBase": 4932.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 380,
+    "prezzoBase": 5248.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 420,
+    "prezzoBase": 5563.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 460,
+    "prezzoBase": 5880.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 500,
+    "prezzoBase": 6197.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 540,
+    "prezzoBase": 6512.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 580,
+    "prezzoBase": 6826.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 100,
+    "prezzoBase": 3164.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 140,
+    "prezzoBase": 3516.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 180,
+    "prezzoBase": 3848.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 220,
+    "prezzoBase": 4200.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 260,
+    "prezzoBase": 4531.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 4865.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 340,
+    "prezzoBase": 5198.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 380,
+    "prezzoBase": 5529.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 420,
+    "prezzoBase": 5864.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 460,
+    "prezzoBase": 6196.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 6528.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 540,
+    "prezzoBase": 6861.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 580,
+    "prezzoBase": 7195.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 140,
+    "prezzoBase": 2312.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 180,
+    "prezzoBase": 2491.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 220,
+    "prezzoBase": 2686.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 260,
+    "prezzoBase": 2865.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 3046.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 340,
+    "prezzoBase": 3225.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 380,
+    "prezzoBase": 3404.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 420,
+    "prezzoBase": 3584.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 460,
+    "prezzoBase": 3761.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 500,
+    "prezzoBase": 3941.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 540,
+    "prezzoBase": 4123.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 580,
+    "prezzoBase": 4301.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 2222.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 140,
+    "prezzoBase": 2424.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 180,
+    "prezzoBase": 2608.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 220,
+    "prezzoBase": 2809.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 260,
+    "prezzoBase": 2992.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 3177.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 340,
+    "prezzoBase": 3363.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 380,
+    "prezzoBase": 3545.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 420,
+    "prezzoBase": 3729.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 460,
+    "prezzoBase": 3913.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 4098.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 540,
+    "prezzoBase": 4282.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 580,
+    "prezzoBase": 4467.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2329.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 140,
+    "prezzoBase": 2537.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 180,
+    "prezzoBase": 2724.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 2931.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 260,
+    "prezzoBase": 3118.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 3310.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 340,
+    "prezzoBase": 3499.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 380,
+    "prezzoBase": 3686.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 420,
+    "prezzoBase": 3875.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 460,
+    "prezzoBase": 4064.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 500,
+    "prezzoBase": 4253.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 540,
+    "prezzoBase": 4443.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 580,
+    "prezzoBase": 4632.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 100,
+    "prezzoBase": 2454.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 140,
+    "prezzoBase": 2665.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 180,
+    "prezzoBase": 2859.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 220,
+    "prezzoBase": 3072.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 260,
+    "prezzoBase": 3267.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 300,
+    "prezzoBase": 3459.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 340,
+    "prezzoBase": 3652.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 380,
+    "prezzoBase": 3846.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 420,
+    "prezzoBase": 4038.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 460,
+    "prezzoBase": 4233.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 500,
+    "prezzoBase": 4429.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 540,
+    "prezzoBase": 4622.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 580,
+    "prezzoBase": 4814.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 2580.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 140,
+    "prezzoBase": 2796.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 180,
+    "prezzoBase": 2993.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 220,
+    "prezzoBase": 3211.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 260,
+    "prezzoBase": 3411.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 3608.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 340,
+    "prezzoBase": 3806.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 380,
+    "prezzoBase": 4006.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 420,
+    "prezzoBase": 4204.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 460,
+    "prezzoBase": 4403.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 4602.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 540,
+    "prezzoBase": 4798.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 580,
+    "prezzoBase": 4997.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 100,
+    "prezzoBase": 2705.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 140,
+    "prezzoBase": 2928.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 180,
+    "prezzoBase": 3129.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 220,
+    "prezzoBase": 3350.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 260,
+    "prezzoBase": 3556.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 300,
+    "prezzoBase": 3760.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 340,
+    "prezzoBase": 3961.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 380,
+    "prezzoBase": 4164.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 420,
+    "prezzoBase": 4368.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 460,
+    "prezzoBase": 4572.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 500,
+    "prezzoBase": 4776.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 540,
+    "prezzoBase": 4979.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 340,
+    "larghezzaMm": 580,
+    "prezzoBase": 5182.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 100,
+    "prezzoBase": 2830.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 140,
+    "prezzoBase": 3057.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 180,
+    "prezzoBase": 3264.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 220,
+    "prezzoBase": 3492.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 260,
+    "prezzoBase": 3700.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 300,
+    "prezzoBase": 3907.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 340,
+    "prezzoBase": 4115.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 380,
+    "prezzoBase": 4324.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 420,
+    "prezzoBase": 4534.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 460,
+    "prezzoBase": 4740.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 500,
+    "prezzoBase": 4949.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 540,
+    "prezzoBase": 5158.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 380,
+    "larghezzaMm": 580,
+    "prezzoBase": 5365.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 1980.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 140,
+    "prezzoBase": 2206.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 180,
+    "prezzoBase": 2416.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 220,
+    "prezzoBase": 2643.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 260,
+    "prezzoBase": 2849.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 3059.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 320,
+    "prezzoBase": 3270.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 2110.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 140,
+    "prezzoBase": 2355.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 180,
+    "prezzoBase": 2580.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 220,
+    "prezzoBase": 2822.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 260,
+    "prezzoBase": 3051.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 3278.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 320,
+    "prezzoBase": 3507.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2241.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 140,
+    "prezzoBase": 2500.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 180,
+    "prezzoBase": 2745.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 3004.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 260,
+    "prezzoBase": 3251.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 3494.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 320,
+    "prezzoBase": 3739.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 2387.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 140,
+    "prezzoBase": 2664.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 180,
+    "prezzoBase": 2926.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 220,
+    "prezzoBase": 3203.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 260,
+    "prezzoBase": 3465.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 3728.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 320,
+    "prezzoBase": 3988.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 1852.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 140,
+    "prezzoBase": 2032.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 180,
+    "prezzoBase": 2192.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 220,
+    "prezzoBase": 2368.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 260,
+    "prezzoBase": 2528.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 2686.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 320,
+    "prezzoBase": 2849.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 1952.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 140,
+    "prezzoBase": 2131.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 180,
+    "prezzoBase": 2297.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 220,
+    "prezzoBase": 2476.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 260,
+    "prezzoBase": 2643.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 2808.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 320,
+    "prezzoBase": 2974.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2048.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 140,
+    "prezzoBase": 2232.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 180,
+    "prezzoBase": 2403.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 220,
+    "prezzoBase": 2587.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 260,
+    "prezzoBase": 2758.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 300,
+    "prezzoBase": 2928.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 220,
+    "larghezzaMm": 320,
+    "prezzoBase": 3097.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 100,
+    "prezzoBase": 2158.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 140,
+    "prezzoBase": 2347.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 180,
+    "prezzoBase": 2523.2
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 220,
+    "prezzoBase": 2713.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 260,
+    "prezzoBase": 2889.6
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 300,
+    "prezzoBase": 3062.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 260,
+    "larghezzaMm": 320,
+    "prezzoBase": 3238.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 100,
+    "prezzoBase": 2270.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 140,
+    "prezzoBase": 2464.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 180,
+    "prezzoBase": 2644.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 220,
+    "prezzoBase": 2838.4
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 260,
+    "prezzoBase": 3020.8
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 300,
+    "prezzoBase": 3200.0
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "colore": "STANDARD",
+    "altezzaMm": 280,
+    "larghezzaMm": 320,
+    "prezzoBase": 3377.6
+  }
+]

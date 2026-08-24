@@ -1,0 +1,107 @@
+[
+  {
+    "tipologia": "TENDACADUTA_3000",
+    "descrizioneTecnica": "Tenda a caduta agganciabile a pavimento o a ringhiera, fissabile a soffitto o a parete. Comando ad argano, a molla o motorizzato. Larghezza max 5000mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/3000.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_3000GUIDE",
+    "descrizioneTecnica": "Tenda a caduta 3000 con guide laterali che garantiscono maggiore tenuta al vento (stessa Classe 3). Comando ad argano o motorizzato. Larghezza max 5000mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/3000guide.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+    "descrizioneTecnica": "Tenda a caduta 3000 con cavetto in acciaio (4mm) di guida laterale, senza cassonetto. Larghezza max 5000mm, sporgenza max 3500mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/3000cavetto.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND",
+    "descrizioneTecnica": "Tenda a caduta 3000 con cavetto in acciaio (4mm) e cassonetto Round incluso.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/3000cavetto.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_3000CAVETTO_TONDINOROUND",
+    "descrizioneTecnica": "Tenda a caduta 3000 con tondino in acciaio (6mm) e cassonetto Round incluso, massima tenuta.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/3000cavetto.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_5000S",
+    "descrizioneTecnica": "Tenda a caduta 5000/S. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/5000s.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_7000T",
+    "descrizioneTecnica": "Tenda a caduta 7000/T. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/7000t.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_7000E",
+    "descrizioneTecnica": "Tenda a caduta 7000/E, disponibile anche in tessuto Liberty e PVC (tariffa 2, sporgenza max 200cm). Larghezza max 5000mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/7000e.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_T4",
+    "descrizioneTecnica": "Tenda a caduta T4 con bracci con blocco. Comando ad argano o motorizzato (sconsigliato motore meccanico). Larghezza max 5000mm, sporgenza max 2200mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/t4.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_ORIZZONTE",
+    "descrizioneTecnica": "Tenda a caduta Orizzonte, prezzo con cassonetto Round incluso. Disponibile anche in tessuto Cristal/PVC. Larghezza max 4000mm, sporgenza max 3500mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/orizzonte.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Cristal (Classe 3 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide plus incluse. Larghezza max 4600mm, sporgenza max 3000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/evozip.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Screen oscurante/Soltis 92 (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/evozip.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Opatex Pro (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/evozip.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Screen oscurante/Soltis 92 (Classe 6). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2500mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/evozip.png"
+  },
+  {
+    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Opatex Pro (Classe 6). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2800mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A CADUTA",
+    "immagineUrl": "/immagini/tende_caduta/evozip.png"
+  }
+]

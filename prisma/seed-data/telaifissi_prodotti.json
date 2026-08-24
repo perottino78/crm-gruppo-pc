@@ -1,0 +1,5091 @@
+[
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 100,
+    "prezzoBase": 214.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 150,
+    "prezzoBase": 280.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 200,
+    "prezzoBase": 379.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 250,
+    "prezzoBase": 446.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 300,
+    "prezzoBase": 512.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 350,
+    "prezzoBase": 611.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 400,
+    "prezzoBase": 678.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 450,
+    "prezzoBase": 744.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 500,
+    "prezzoBase": 811.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 550,
+    "prezzoBase": 910.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 600,
+    "prezzoBase": 976.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 650,
+    "prezzoBase": 1043.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 110,
+    "larghezzaMm": 690,
+    "prezzoBase": 1096.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 100,
+    "prezzoBase": 268.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 150,
+    "prezzoBase": 348.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 200,
+    "prezzoBase": 470.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 250,
+    "prezzoBase": 550.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 300,
+    "prezzoBase": 630.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 350,
+    "prezzoBase": 753.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 400,
+    "prezzoBase": 832.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 450,
+    "prezzoBase": 912.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 500,
+    "prezzoBase": 990.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 550,
+    "prezzoBase": 1115.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 600,
+    "prezzoBase": 1193.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 650,
+    "prezzoBase": 1272.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 170,
+    "larghezzaMm": 690,
+    "prezzoBase": 1336.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 100,
+    "prezzoBase": 185.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 150,
+    "prezzoBase": 235.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 200,
+    "prezzoBase": 320.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 250,
+    "prezzoBase": 371.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 300,
+    "prezzoBase": 419.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 350,
+    "prezzoBase": 505.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 400,
+    "prezzoBase": 555.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 450,
+    "prezzoBase": 603.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 500,
+    "prezzoBase": 654.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 550,
+    "prezzoBase": 739.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 600,
+    "prezzoBase": 788.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 650,
+    "prezzoBase": 838.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 127,
+    "larghezzaMm": 690,
+    "prezzoBase": 876.8
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 188.8
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 150,
+    "prezzoBase": 236.8
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 200,
+    "prezzoBase": 329.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 250,
+    "prezzoBase": 377.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 427.2
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 350,
+    "prezzoBase": 518.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 400,
+    "prezzoBase": 568.0
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 450,
+    "prezzoBase": 616.0
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 500,
+    "prezzoBase": 665.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 550,
+    "prezzoBase": 758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 600,
+    "prezzoBase": 806.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 650,
+    "prezzoBase": 854.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX2102_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 690,
+    "prezzoBase": 894.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 100,
+    "prezzoBase": 236.8
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 150,
+    "prezzoBase": 297.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 200,
+    "prezzoBase": 401.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 250,
+    "prezzoBase": 462.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 300,
+    "prezzoBase": 523.2
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 350,
+    "prezzoBase": 625.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 400,
+    "prezzoBase": 686.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 450,
+    "prezzoBase": 747.2
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 500,
+    "prezzoBase": 808.0
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 550,
+    "prezzoBase": 913.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 600,
+    "prezzoBase": 974.4
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 650,
+    "prezzoBase": 1033.6
+  },
+  {
+    "tipologia": "TELAIFISSI_VINITEX9X9_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 190,
+    "larghezzaMm": 690,
+    "prezzoBase": 1083.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 100,
+    "prezzoBase": 408.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 150,
+    "prezzoBase": 552.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 200,
+    "prezzoBase": 739.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 250,
+    "prezzoBase": 881.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 300,
+    "prezzoBase": 1025.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 350,
+    "prezzoBase": 1212.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 400,
+    "prezzoBase": 1355.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 450,
+    "prezzoBase": 1499.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 500,
+    "prezzoBase": 1641.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 550,
+    "prezzoBase": 1828.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 600,
+    "prezzoBase": 1971.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 650,
+    "prezzoBase": 2113.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_ORIZZ",
+    "colore": "STANDARD",
+    "altezzaMm": 167,
+    "larghezzaMm": 690,
+    "prezzoBase": 2230.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 100,
+    "prezzoBase": 204.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 150,
+    "prezzoBase": 283.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 200,
+    "prezzoBase": 380.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 250,
+    "prezzoBase": 459.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 300,
+    "prezzoBase": 537.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 350,
+    "prezzoBase": 636.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 400,
+    "prezzoBase": 715.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 450,
+    "prezzoBase": 792.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 500,
+    "prezzoBase": 816.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 550,
+    "prezzoBase": 968.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 600,
+    "prezzoBase": 1046.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 100,
+    "prezzoBase": 270.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 150,
+    "prezzoBase": 374.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 200,
+    "prezzoBase": 505.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 250,
+    "prezzoBase": 609.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 300,
+    "prezzoBase": 715.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 350,
+    "prezzoBase": 844.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 400,
+    "prezzoBase": 948.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 450,
+    "prezzoBase": 1052.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 500,
+    "prezzoBase": 1076.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 550,
+    "prezzoBase": 1288.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 600,
+    "prezzoBase": 1392.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 337.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 150,
+    "prezzoBase": 472.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 635.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 766.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 897.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 1062.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 1192.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 450,
+    "prezzoBase": 1323.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 1348.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 550,
+    "prezzoBase": 1617.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 1748.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 100,
+    "prezzoBase": 401.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 150,
+    "prezzoBase": 558.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 200,
+    "prezzoBase": 752.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 250,
+    "prezzoBase": 910.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 300,
+    "prezzoBase": 1067.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 350,
+    "prezzoBase": 1260.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 400,
+    "prezzoBase": 1417.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 450,
+    "prezzoBase": 1574.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 500,
+    "prezzoBase": 1601.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 550,
+    "prezzoBase": 1926.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 600,
+    "prezzoBase": 2083.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 467.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 651.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 875.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 1060.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 1243.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 1467.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 1652.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 1835.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 1862.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 2244.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 2428.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 100,
+    "prezzoBase": 532.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 150,
+    "prezzoBase": 744.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 200,
+    "prezzoBase": 1000.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 250,
+    "prezzoBase": 1209.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 300,
+    "prezzoBase": 1420.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 350,
+    "prezzoBase": 1676.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 400,
+    "prezzoBase": 1888.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 450,
+    "prezzoBase": 2099.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 500,
+    "prezzoBase": 2123.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 550,
+    "prezzoBase": 2563.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 2774.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 598.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 835.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1121.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 1358.4
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1596.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1884.8
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 2121.6
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 2360.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 2384.0
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 2883.2
+  },
+  {
+    "tipologia": "TELAIFISSI_POLICARBONATO",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 3121.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 100,
+    "prezzoBase": 136.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 150,
+    "prezzoBase": 201.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 200,
+    "prezzoBase": 244.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 250,
+    "prezzoBase": 310.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 300,
+    "prezzoBase": 332.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 350,
+    "prezzoBase": 376.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 400,
+    "prezzoBase": 443.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 450,
+    "prezzoBase": 464.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 500,
+    "prezzoBase": 531.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 550,
+    "prezzoBase": 574.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 600,
+    "prezzoBase": 640.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 650,
+    "prezzoBase": 662.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 690,
+    "prezzoBase": 680.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 100,
+    "prezzoBase": 164.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 150,
+    "prezzoBase": 249.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 200,
+    "prezzoBase": 297.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 250,
+    "prezzoBase": 382.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 300,
+    "prezzoBase": 404.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 350,
+    "prezzoBase": 451.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 400,
+    "prezzoBase": 537.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 450,
+    "prezzoBase": 558.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 500,
+    "prezzoBase": 644.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 550,
+    "prezzoBase": 691.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 600,
+    "prezzoBase": 777.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 650,
+    "prezzoBase": 798.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 690,
+    "prezzoBase": 817.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 193.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 150,
+    "prezzoBase": 300.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 356.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 460.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 483.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 536.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 640.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 450,
+    "prezzoBase": 662.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 766.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 550,
+    "prezzoBase": 820.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 924.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 650,
+    "prezzoBase": 947.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 690,
+    "prezzoBase": 964.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 100,
+    "prezzoBase": 224.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 150,
+    "prezzoBase": 345.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 200,
+    "prezzoBase": 403.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 250,
+    "prezzoBase": 526.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 300,
+    "prezzoBase": 548.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 350,
+    "prezzoBase": 604.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 400,
+    "prezzoBase": 728.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 450,
+    "prezzoBase": 748.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 500,
+    "prezzoBase": 872.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 550,
+    "prezzoBase": 928.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 600,
+    "prezzoBase": 1051.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 650,
+    "prezzoBase": 1073.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 690,
+    "prezzoBase": 1091.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 252.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 395.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 457.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 596.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 619.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 681.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 824.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 844.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 985.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 1048.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 1187.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 650,
+    "prezzoBase": 1209.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 690,
+    "prezzoBase": 1227.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 100,
+    "prezzoBase": 283.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 150,
+    "prezzoBase": 443.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 200,
+    "prezzoBase": 508.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 250,
+    "prezzoBase": 668.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 300,
+    "prezzoBase": 689.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 350,
+    "prezzoBase": 758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 400,
+    "prezzoBase": 918.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 450,
+    "prezzoBase": 939.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 500,
+    "prezzoBase": 1099.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 550,
+    "prezzoBase": 1164.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 1326.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 650,
+    "prezzoBase": 1347.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 690,
+    "prezzoBase": 1366.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 312.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 489.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 561.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 740.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 763.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 833.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1012.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1033.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1212.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 1284.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 1462.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 650,
+    "prezzoBase": 1484.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 690,
+    "prezzoBase": 1502.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 100,
+    "prezzoBase": 340.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 150,
+    "prezzoBase": 537.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 200,
+    "prezzoBase": 616.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 250,
+    "prezzoBase": 812.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 300,
+    "prezzoBase": 833.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 350,
+    "prezzoBase": 912.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 1107.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 450,
+    "prezzoBase": 1129.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 1326.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 550,
+    "prezzoBase": 1401.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 1598.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 650,
+    "prezzoBase": 1622.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 690,
+    "prezzoBase": 1638.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 372.8
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 587.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 667.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 883.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 905.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 987.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 1201.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 1224.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 1440.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 1521.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 1737.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 650,
+    "prezzoBase": 1758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 690,
+    "prezzoBase": 1777.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 100,
+    "prezzoBase": 401.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 150,
+    "prezzoBase": 635.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 200,
+    "prezzoBase": 721.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 250,
+    "prezzoBase": 955.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 300,
+    "prezzoBase": 977.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 350,
+    "prezzoBase": 1064.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 1296.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 450,
+    "prezzoBase": 1320.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 1553.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 550,
+    "prezzoBase": 1638.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 1873.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 650,
+    "prezzoBase": 1896.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 690,
+    "prezzoBase": 1913.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 430.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 683.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 774.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 1027.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1049.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1139.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1392.0
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1414.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1667.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 1758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 2011.2
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 650,
+    "prezzoBase": 2033.6
+  },
+  {
+    "tipologia": "TELAIFISSI_ACRILICO_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 690,
+    "prezzoBase": 2049.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 100,
+    "prezzoBase": 158.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 150,
+    "prezzoBase": 180.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 200,
+    "prezzoBase": 292.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 250,
+    "prezzoBase": 315.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 300,
+    "prezzoBase": 336.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 350,
+    "prezzoBase": 379.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 400,
+    "prezzoBase": 470.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 450,
+    "prezzoBase": 491.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 500,
+    "prezzoBase": 513.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 550,
+    "prezzoBase": 625.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 600,
+    "prezzoBase": 646.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 650,
+    "prezzoBase": 668.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 690,
+    "prezzoBase": 686.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 100,
+    "prezzoBase": 198.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 150,
+    "prezzoBase": 220.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 200,
+    "prezzoBase": 364.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 250,
+    "prezzoBase": 387.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 300,
+    "prezzoBase": 409.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 350,
+    "prezzoBase": 457.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 400,
+    "prezzoBase": 576.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 450,
+    "prezzoBase": 598.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 500,
+    "prezzoBase": 620.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 550,
+    "prezzoBase": 766.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 600,
+    "prezzoBase": 787.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 650,
+    "prezzoBase": 809.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 690,
+    "prezzoBase": 827.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 240.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 150,
+    "prezzoBase": 265.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 444.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 467.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 489.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 544.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 691.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 450,
+    "prezzoBase": 715.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 734.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 550,
+    "prezzoBase": 916.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 937.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 650,
+    "prezzoBase": 960.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 690,
+    "prezzoBase": 977.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 100,
+    "prezzoBase": 276.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 150,
+    "prezzoBase": 299.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 200,
+    "prezzoBase": 512.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 250,
+    "prezzoBase": 532.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 300,
+    "prezzoBase": 555.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 350,
+    "prezzoBase": 612.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 400,
+    "prezzoBase": 790.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 450,
+    "prezzoBase": 811.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 500,
+    "prezzoBase": 833.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 550,
+    "prezzoBase": 1046.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 600,
+    "prezzoBase": 1068.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 650,
+    "prezzoBase": 1089.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 690,
+    "prezzoBase": 1107.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 316.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 339.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 585.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 608.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 630.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 689.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 896.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 918.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 940.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 1185.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 1208.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 650,
+    "prezzoBase": 1228.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 690,
+    "prezzoBase": 1248.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 100,
+    "prezzoBase": 356.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 150,
+    "prezzoBase": 379.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 200,
+    "prezzoBase": 657.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 250,
+    "prezzoBase": 680.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 300,
+    "prezzoBase": 702.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 350,
+    "prezzoBase": 769.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 400,
+    "prezzoBase": 1003.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 450,
+    "prezzoBase": 1025.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 500,
+    "prezzoBase": 1046.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 550,
+    "prezzoBase": 1326.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 1348.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 650,
+    "prezzoBase": 1369.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 690,
+    "prezzoBase": 1388.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 396.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 419.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 731.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 752.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 774.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 848.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1110.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1131.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1153.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 1465.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 1488.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 650,
+    "prezzoBase": 1508.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 690,
+    "prezzoBase": 1528.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 100,
+    "prezzoBase": 436.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 150,
+    "prezzoBase": 459.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 200,
+    "prezzoBase": 804.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 250,
+    "prezzoBase": 827.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 300,
+    "prezzoBase": 848.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 350,
+    "prezzoBase": 924.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 1216.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 450,
+    "prezzoBase": 1238.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 1260.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 550,
+    "prezzoBase": 1606.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 1628.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 650,
+    "prezzoBase": 1649.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 690,
+    "prezzoBase": 1668.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 475.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 499.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 876.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 899.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 921.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 1003.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 1323.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 1345.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 1366.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 1745.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 1768.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 650,
+    "prezzoBase": 1788.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 690,
+    "prezzoBase": 1808.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 100,
+    "prezzoBase": 515.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 150,
+    "prezzoBase": 537.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 200,
+    "prezzoBase": 950.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 250,
+    "prezzoBase": 971.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 300,
+    "prezzoBase": 993.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 350,
+    "prezzoBase": 1080.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 1430.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 450,
+    "prezzoBase": 1451.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 1473.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 550,
+    "prezzoBase": 1886.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 1908.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 650,
+    "prezzoBase": 1929.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 690,
+    "prezzoBase": 1948.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 555.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 577.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1024.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 1046.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1067.2
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 1158.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 1536.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1558.4
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1580.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 2025.6
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 2048.0
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 650,
+    "prezzoBase": 2068.8
+  },
+  {
+    "tipologia": "TELAIFISSI_PRECONTRAINT302_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 690,
+    "prezzoBase": 2088.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 100,
+    "prezzoBase": 123.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 150,
+    "prezzoBase": 179.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 200,
+    "prezzoBase": 220.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 250,
+    "prezzoBase": 243.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 300,
+    "prezzoBase": 297.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 350,
+    "prezzoBase": 340.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 400,
+    "prezzoBase": 361.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 450,
+    "prezzoBase": 398.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 500,
+    "prezzoBase": 440.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 550,
+    "prezzoBase": 515.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 600,
+    "prezzoBase": 537.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 650,
+    "prezzoBase": 558.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 690,
+    "prezzoBase": 609.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 100,
+    "prezzoBase": 147.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 150,
+    "prezzoBase": 216.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 200,
+    "prezzoBase": 264.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 250,
+    "prezzoBase": 286.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 300,
+    "prezzoBase": 355.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 350,
+    "prezzoBase": 401.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 400,
+    "prezzoBase": 424.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 450,
+    "prezzoBase": 465.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 500,
+    "prezzoBase": 515.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 550,
+    "prezzoBase": 609.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 600,
+    "prezzoBase": 632.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 650,
+    "prezzoBase": 654.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 690,
+    "prezzoBase": 718.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 172.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 150,
+    "prezzoBase": 259.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 313.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 336.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 417.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 472.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 494.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 450,
+    "prezzoBase": 542.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 598.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 550,
+    "prezzoBase": 712.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 734.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 650,
+    "prezzoBase": 758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 690,
+    "prezzoBase": 835.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 100,
+    "prezzoBase": 198.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 150,
+    "prezzoBase": 292.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 200,
+    "prezzoBase": 350.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 250,
+    "prezzoBase": 372.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 300,
+    "prezzoBase": 468.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 350,
+    "prezzoBase": 526.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 400,
+    "prezzoBase": 548.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 450,
+    "prezzoBase": 601.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 500,
+    "prezzoBase": 665.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 550,
+    "prezzoBase": 796.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 600,
+    "prezzoBase": 819.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 650,
+    "prezzoBase": 840.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 690,
+    "prezzoBase": 932.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 222.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 331.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 393.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 416.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 526.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 588.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 609.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 668.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 742.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 891.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 913.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 650,
+    "prezzoBase": 936.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 690,
+    "prezzoBase": 1041.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 100,
+    "prezzoBase": 246.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 150,
+    "prezzoBase": 371.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 200,
+    "prezzoBase": 436.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 250,
+    "prezzoBase": 459.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 300,
+    "prezzoBase": 582.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 350,
+    "prezzoBase": 648.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 400,
+    "prezzoBase": 672.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 450,
+    "prezzoBase": 737.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 500,
+    "prezzoBase": 816.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 550,
+    "prezzoBase": 985.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 1006.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 650,
+    "prezzoBase": 1028.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 690,
+    "prezzoBase": 1148.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 272.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 408.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 480.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 502.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 640.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 710.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 732.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 804.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 892.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 1078.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 1100.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 650,
+    "prezzoBase": 1123.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 690,
+    "prezzoBase": 1256.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 100,
+    "prezzoBase": 296.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 150,
+    "prezzoBase": 446.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 200,
+    "prezzoBase": 523.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 250,
+    "prezzoBase": 545.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 300,
+    "prezzoBase": 696.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 350,
+    "prezzoBase": 772.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 795.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 450,
+    "prezzoBase": 872.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 968.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 550,
+    "prezzoBase": 1172.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 1195.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 650,
+    "prezzoBase": 1217.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 690,
+    "prezzoBase": 1364.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 320.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 484.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 566.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 588.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 752.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 833.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 856.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 939.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 1043.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 1289.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 650,
+    "prezzoBase": 1310.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 690,
+    "prezzoBase": 1472.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 100,
+    "prezzoBase": 344.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 150,
+    "prezzoBase": 524.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 200,
+    "prezzoBase": 609.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 250,
+    "prezzoBase": 632.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 300,
+    "prezzoBase": 809.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 350,
+    "prezzoBase": 896.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 918.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 450,
+    "prezzoBase": 1006.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 1118.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 550,
+    "prezzoBase": 1360.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 1382.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 650,
+    "prezzoBase": 1406.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 690,
+    "prezzoBase": 1579.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 371.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 561.6
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 654.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 675.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 867.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 958.4
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 980.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 1075.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 1195.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 1456.0
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 1476.8
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 650,
+    "prezzoBase": 1499.2
+  },
+  {
+    "tipologia": "TELAIFISSI_CRISTAL500_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 690,
+    "prezzoBase": 1688.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 100,
+    "prezzoBase": 235.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 150,
+    "prezzoBase": 257.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 200,
+    "prezzoBase": 446.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 250,
+    "prezzoBase": 467.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 300,
+    "prezzoBase": 489.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 350,
+    "prezzoBase": 678.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 400,
+    "prezzoBase": 700.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 450,
+    "prezzoBase": 723.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 500,
+    "prezzoBase": 744.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 550,
+    "prezzoBase": 932.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 600,
+    "prezzoBase": 955.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 650,
+    "prezzoBase": 977.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 50,
+    "larghezzaMm": 690,
+    "prezzoBase": 1139.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 100,
+    "prezzoBase": 307.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 150,
+    "prezzoBase": 329.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 200,
+    "prezzoBase": 582.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 250,
+    "prezzoBase": 604.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 300,
+    "prezzoBase": 628.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 350,
+    "prezzoBase": 880.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 400,
+    "prezzoBase": 902.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 450,
+    "prezzoBase": 924.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 500,
+    "prezzoBase": 947.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 550,
+    "prezzoBase": 1201.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 600,
+    "prezzoBase": 1222.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 650,
+    "prezzoBase": 1244.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 75,
+    "larghezzaMm": 690,
+    "prezzoBase": 1468.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 379.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 150,
+    "prezzoBase": 404.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 726.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 250,
+    "prezzoBase": 748.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 771.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 350,
+    "prezzoBase": 1091.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 1113.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 450,
+    "prezzoBase": 1136.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 1158.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 550,
+    "prezzoBase": 1480.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 1500.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 650,
+    "prezzoBase": 1523.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 690,
+    "prezzoBase": 1808.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 100,
+    "prezzoBase": 449.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 150,
+    "prezzoBase": 472.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 200,
+    "prezzoBase": 857.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 250,
+    "prezzoBase": 878.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 300,
+    "prezzoBase": 900.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 350,
+    "prezzoBase": 1286.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 400,
+    "prezzoBase": 1308.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 450,
+    "prezzoBase": 1329.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 500,
+    "prezzoBase": 1352.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 550,
+    "prezzoBase": 1737.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 600,
+    "prezzoBase": 1758.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 650,
+    "prezzoBase": 1780.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 125,
+    "larghezzaMm": 690,
+    "prezzoBase": 2126.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 523.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 150,
+    "prezzoBase": 545.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 200,
+    "prezzoBase": 993.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 250,
+    "prezzoBase": 1017.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 300,
+    "prezzoBase": 1040.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 350,
+    "prezzoBase": 1488.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 400,
+    "prezzoBase": 1510.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 450,
+    "prezzoBase": 1532.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 500,
+    "prezzoBase": 1553.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 550,
+    "prezzoBase": 2004.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 2027.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 650,
+    "prezzoBase": 2048.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 690,
+    "prezzoBase": 2454.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 100,
+    "prezzoBase": 593.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 150,
+    "prezzoBase": 616.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 200,
+    "prezzoBase": 1131.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 250,
+    "prezzoBase": 1153.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 300,
+    "prezzoBase": 1176.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 350,
+    "prezzoBase": 1691.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 400,
+    "prezzoBase": 1713.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 450,
+    "prezzoBase": 1736.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 500,
+    "prezzoBase": 1756.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 550,
+    "prezzoBase": 2273.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 2296.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 650,
+    "prezzoBase": 2316.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 690,
+    "prezzoBase": 2782.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 665.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 150,
+    "prezzoBase": 686.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 200,
+    "prezzoBase": 1268.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 250,
+    "prezzoBase": 1289.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 300,
+    "prezzoBase": 1312.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 350,
+    "prezzoBase": 1892.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 400,
+    "prezzoBase": 1915.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 450,
+    "prezzoBase": 1937.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 500,
+    "prezzoBase": 1960.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 550,
+    "prezzoBase": 2540.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 2563.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 650,
+    "prezzoBase": 2584.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 690,
+    "prezzoBase": 3110.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 100,
+    "prezzoBase": 737.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 150,
+    "prezzoBase": 760.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 200,
+    "prezzoBase": 1406.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 250,
+    "prezzoBase": 1428.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 300,
+    "prezzoBase": 1451.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 350,
+    "prezzoBase": 2097.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 400,
+    "prezzoBase": 2116.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 450,
+    "prezzoBase": 2140.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 2163.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 550,
+    "prezzoBase": 2808.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 2832.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 650,
+    "prezzoBase": 2854.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 690,
+    "prezzoBase": 3441.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 809.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 150,
+    "prezzoBase": 830.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 200,
+    "prezzoBase": 1542.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 250,
+    "prezzoBase": 1564.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 300,
+    "prezzoBase": 1587.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 350,
+    "prezzoBase": 2299.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 400,
+    "prezzoBase": 2321.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 450,
+    "prezzoBase": 2342.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 2364.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 550,
+    "prezzoBase": 3076.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 3099.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 650,
+    "prezzoBase": 3121.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 690,
+    "prezzoBase": 3769.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 100,
+    "prezzoBase": 880.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 150,
+    "prezzoBase": 902.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 200,
+    "prezzoBase": 1680.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 250,
+    "prezzoBase": 1700.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 300,
+    "prezzoBase": 1723.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 350,
+    "prezzoBase": 2500.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 400,
+    "prezzoBase": 2523.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 450,
+    "prezzoBase": 2545.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 500,
+    "prezzoBase": 2566.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 550,
+    "prezzoBase": 3344.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 600,
+    "prezzoBase": 3366.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 650,
+    "prezzoBase": 3388.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 690,
+    "prezzoBase": 4097.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 953.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 150,
+    "prezzoBase": 974.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 200,
+    "prezzoBase": 1817.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 250,
+    "prezzoBase": 1840.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 300,
+    "prezzoBase": 1862.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 2704.0
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 2726.4
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 450,
+    "prezzoBase": 2748.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 2771.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 550,
+    "prezzoBase": 3612.8
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 3635.2
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 650,
+    "prezzoBase": 3657.6
+  },
+  {
+    "tipologia": "TELAIFISSI_SOLTIS92_VERT",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 690,
+    "prezzoBase": 4425.6
+  }
+]

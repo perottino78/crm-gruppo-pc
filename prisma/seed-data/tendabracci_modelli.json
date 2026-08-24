@@ -1,0 +1,44 @@
+[
+  {
+    "tipologia": "TENDABRACCI_BILBAO",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello Bilbao. Bracci in alluminio con catena triplex in acciaio inox, regolazione micrometrica inclinazione. Classe 2, sporgenza massima 2,5m, larghezza max 4750mm, inclinazione 8°/75°.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/bilbao.png"
+  },
+  {
+    "tipologia": "TENDABRACCI_MADRID",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello Madrid. Bracci in alluminio con catena triplex in acciaio inox. Classe 2, sporgenza massima 3,5m, larghezza max 10000mm (fino a 7m assemblata), inclinazione 8°/70°. Disponibili bracci aggiuntivi e bracci Led strip.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/madrid.png"
+  },
+  {
+    "tipologia": "TENDABRACCI_PANAMA",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello Panama. Bracci in alluminio con catena triplex in acciaio inox. Classe 2, sporgenza massima 4m, larghezza max 10000mm (fino a 7m assemblata), inclinazione 8°/70°. Disponibili bracci aggiuntivi.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/panama.png"
+  },
+  {
+    "tipologia": "TENDABRACCI_SAMBA",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello Samba, montaggio a soffitto. Classe 2, sporgenza massima 3m, larghezza max 5000mm, inclinazione 5°/80°. Disponibili bracci Led strip.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/samba.png"
+  },
+  {
+    "tipologia": "TENDABRACCI_SAMBASMART",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello Samba Smart, montaggio a soffitto. Classe 2, sporgenza massima 2,5m, larghezza max 4750mm, inclinazione 10°/80°.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/sambasmart.png"
+  },
+  {
+    "tipologia": "TENDABRACCI_AMERICA",
+    "descrizioneTecnica": "Tenda da sole a bracci senza cassonetto, modello America, con barra frangivento centrale per migliore tensione del telo e tenuta al vento. Classe 2, sporgenza massima 3m, larghezza max 6000mm.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "TENDE A BRACCI SENZA CASSONETTO",
+    "immagineUrl": "/immagini/tende_bracci/america.png"
+  }
+]
