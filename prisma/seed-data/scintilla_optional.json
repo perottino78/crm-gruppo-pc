@@ -1,0 +1,268 @@
+[
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura laterale con chiave esterna e nottolino interno",
+    "tipoPrezzo": "FISSO",
+    "valore": 384,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura laterale con chiave e maniglietta (chiave esterna e nottolino interno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 454,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura con chiave per apertura centrale (chiave esterna e nottolino interno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 584,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura con chiave e maniglietta per apertura centrale (chiave esterna e nottolino interno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 658,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Configurazione",
+    "nome": "Apertura centrale (indispensabile con vetrata con più di 6 ante)",
+    "tipoPrezzo": "FISSO",
+    "valore": 220,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Profilo inferiore per incasso a pavimento",
+    "tipoPrezzo": "FISSO",
+    "valore": 77,
+    "unita": "/mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Compensatore pavimento 3 vie",
+    "tipoPrezzo": "FISSO",
+    "valore": 398,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Compensatore pavimento 4 vie",
+    "tipoPrezzo": "FISSO",
+    "valore": 405,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Compensatore pavimento 5 vie",
+    "tipoPrezzo": "FISSO",
+    "valore": 556,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Compensatore pavimento 6 vie (2 compensatori da 3 vie)",
+    "tipoPrezzo": "FISSO",
+    "valore": 796,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro acetato (satinato)",
+    "tipoPrezzo": "FISSO",
+    "valore": 157,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro extrachiaro",
+    "tipoPrezzo": "FISSO",
+    "valore": 79,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro fumé",
+    "tipoPrezzo": "FISSO",
+    "valore": 106,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro riflettente",
+    "tipoPrezzo": "FISSO",
+    "valore": 194,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Configurazione",
+    "nome": "Ante aggiuntive rispetto al numero minimo di ante possibili",
+    "tipoPrezzo": "FISSO",
+    "valore": 151,
+    "unita": "/anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio autoblocco interno esterno",
+    "tipoPrezzo": "FISSO",
+    "valore": 42,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Nel listino originale questa riga non riporta un'unità di misura (a differenza di tutte le altre voci della tabella, che indicano /pz, /mt o /m²) — importato come prezzo fisso a corpo, da verificare sul listino cartaceo.",
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Configurazione",
+    "nome": "Angolo",
+    "tipoPrezzo": "FISSO",
+    "valore": 317,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro sostitutivo",
+    "nome": "Sostituzione anta (solo vetro)",
+    "tipoPrezzo": "FISSO",
+    "valore": 273,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  },
+  {
+    "categoria": "Vetro sostitutivo",
+    "nome": "Sostituzione anta (completa di accessori)",
+    "tipoPrezzo": "FISSO",
+    "valore": 363,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE SCINTILLA"
+    ]
+  }
+]

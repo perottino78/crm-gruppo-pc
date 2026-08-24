@@ -99,19 +99,25 @@ export default async function PreventivoPage({
     const perGruppo = alberoMap.get(famiglia)!;
     if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
     const conMisura = haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0);
+    // Per i modelli a calcolo "a formula" (es. vetrate BRILLANTE/SCINTILLA) le righe
+    // Prodotto non rappresentano una vera griglia larghezza×altezza (sono solo tariffe
+    // per fascia, o un'unica tariffa fissa): mostrare il loro min/max come "range di
+    // produzione" sarebbe fuorviante, quindi per questi modelli il range non si mostra.
+    const aFormula = m?.modalitaCalcolo && m.modalitaCalcolo !== "GRIGLIA";
     perGruppo.get(gruppo)!.push({
       value: tip,
       label: tip.replace(/_/g, " "),
       haMisura: conMisura,
       varianti: variantiPerTipologia.get(tip),
-      misure: conMisura
-        ? {
-            larghezzaMin: t._min.larghezzaMm ?? 0,
-            larghezzaMax: t._max.larghezzaMm ?? 0,
-            altezzaMin: t._min.altezzaMm ?? 0,
-            altezzaMax: t._max.altezzaMm ?? 0,
-          }
-        : undefined,
+      misure:
+        conMisura && !aFormula
+          ? {
+              larghezzaMin: t._min.larghezzaMm ?? 0,
+              larghezzaMax: t._max.larghezzaMm ?? 0,
+              altezzaMin: t._min.altezzaMm ?? 0,
+              altezzaMax: t._max.altezzaMm ?? 0,
+            }
+          : undefined,
     });
   }
   const ordineFamiglie = ["INDOOR", "OUTDOOR"];

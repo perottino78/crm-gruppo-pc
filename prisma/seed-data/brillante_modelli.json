@@ -1,0 +1,13 @@
+[
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "descrizioneTecnica": "Sistema di chiusura in vetro scorrevole BRILLANTE: pannelli scorrevoli in vetro temprato ad impacchettamento totale, ribaltabili e privi di giunzioni. Scorrimento su guide superiori in alluminio e guide inferiori sovrapposte oppure incassate a pavimento. Vetri temprati float chiaro da 10mm (28 Kg/m2). Altezza massima 300cm. Larghezza ante da 60 a 80cm ciascuna. Consente chiusure in qualsiasi forma geometrica, apertura verso l'esterno o l'interno. PREZZO: tariffa al metro lineare per fascia di altezza (100-300cm, passo 10cm) moltiplicata per la larghezza reale arrotondata per eccesso ogni 5cm, come da listino fornitore. Non è disponibile un minimo fatturabile dichiarato a listino per questo prodotto.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VETRATE BRILLANTE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  }
+]

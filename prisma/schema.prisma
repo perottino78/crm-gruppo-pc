@@ -238,6 +238,14 @@ model ModelloProdotto {
   descrizioneTecnica String?
   famiglia           String?
   gruppo             String?
+  // Modalità di calcolo del prezzo per questo modello:
+  // - "GRIGLIA" (default): prezzo letto da Prodotto.prezzoBase per la fascia larghezza/altezza più vicina (comportamento storico)
+  // - "METRO_LINEARE": prezzo = tariffa al metro lineare (dipendente dalla fascia altezza, righe Prodotto usate solo per la tariffa) x larghezza reale arrotondata
+  // - "MQ_CON_MINIMI": prezzo = tariffa fissa al m² (Prodotto.prezzoBase dell'unica riga) x superficie fatturabile (con eventuali minimi di altezza/area)
+  modalitaCalcolo    String  @default("GRIGLIA")
+  // Parametri del calcolo a formula (usato solo se modalitaCalcolo != "GRIGLIA"), es.
+  // {"arrotondamentoCm":5} oppure {"arrotondamentoCm":5,"areaMinimaM2":3,"altezzaMinimaMm":1500}
+  parametriCalcolo   Json?
 
   @@unique([brandId, tipologia])
 }

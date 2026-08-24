@@ -1,0 +1,15 @@
+[
+  {
+    "tipologia": "VETRATA_SCINTILLA",
+    "descrizioneTecnica": "Sistema di chiusura in vetro scorrevole SCINTILLA: ante in cristallo temprato chiaro che scorrono parallelamente e si impacchettano a destra o a sinistra della guida, con gancio di traino integrato per apertura/chiusura automatica delle ante. Vetro temprato float chiaro da 10mm (28 Kg/m2). Larghezza ante da 80 a 105cm, altezza massima di ciascuna anta 280cm. Configurazioni a 3/4/5/6 vie (apertura laterale max 6 ante, apertura centrale max 12 ante). PREZZO: tariffa fissa di 640€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm). Il prezzo comprende vetri temprati da 10mm chiari (escluso il fisso), profili laterali e bloccaggi automatici interni dx/sx. MINIMI DI FATTURAZIONE A LISTINO: altezza minima fatturabile 1,5ml, area minima fatturabile 3m² (es. una vetrata 450x130cm viene conteggiata 6,75m² per il minimo di altezza; una vetrata 110x250cm o 100x150cm viene conteggiata 3m² per il minimo di area).",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VETRATE SCINTILLA",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 1500
+    }
+  }
+]

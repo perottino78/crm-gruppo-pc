@@ -1,0 +1,149 @@
+[
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1552.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 110,
+    "larghezzaMm": 100,
+    "prezzoBase": 1591.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 120,
+    "larghezzaMm": 100,
+    "prezzoBase": 1628.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 130,
+    "larghezzaMm": 100,
+    "prezzoBase": 1681.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 1723.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 150,
+    "larghezzaMm": 100,
+    "prezzoBase": 1767.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1809.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 170,
+    "larghezzaMm": 100,
+    "prezzoBase": 1853.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 1901.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 190,
+    "larghezzaMm": 100,
+    "prezzoBase": 1980.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 200,
+    "larghezzaMm": 100,
+    "prezzoBase": 2043.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 210,
+    "larghezzaMm": 100,
+    "prezzoBase": 2073.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 220,
+    "larghezzaMm": 100,
+    "prezzoBase": 2105.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 230,
+    "larghezzaMm": 100,
+    "prezzoBase": 2158.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 240,
+    "larghezzaMm": 100,
+    "prezzoBase": 2198.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 250,
+    "larghezzaMm": 100,
+    "prezzoBase": 2242.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 260,
+    "larghezzaMm": 100,
+    "prezzoBase": 2286.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 270,
+    "larghezzaMm": 100,
+    "prezzoBase": 2328.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 280,
+    "larghezzaMm": 100,
+    "prezzoBase": 2374.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 290,
+    "larghezzaMm": 100,
+    "prezzoBase": 2420.0
+  },
+  {
+    "tipologia": "VETRATA_BRILLANTE",
+    "colore": "TARIFFA AL METRO LINEARE",
+    "altezzaMm": 300,
+    "larghezzaMm": 100,
+    "prezzoBase": 2455.0
+  }
+]

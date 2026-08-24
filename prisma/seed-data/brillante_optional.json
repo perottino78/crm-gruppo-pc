@@ -1,0 +1,212 @@
+[
+  {
+    "categoria": "Configurazione",
+    "nome": "Angolo",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Apertura",
+    "nome": "Doppia apertura ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 204,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Apertura",
+    "nome": "Uscita extra ante (L > 450cm e multipli)",
+    "tipoPrezzo": "FISSO",
+    "valore": 204,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Profilo inferiore per incasso a pavimento",
+    "tipoPrezzo": "FISSO",
+    "valore": 130,
+    "unita": "/mt",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Porta intermedia",
+    "tipoPrezzo": "FISSO",
+    "valore": 1751,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "La porta intermedia è sempre 15cm più larga rispetto alle altre ante, per evitare il contatto del pomolo con i vetri impacchettati.",
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pomolo apertura singolo (interno o esterno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 319,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pomolo apertura doppio (interno ed esterno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 356,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppia maniglia con serratura",
+    "tipoPrezzo": "FISSO",
+    "valore": 1167,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro acetato (satinato)",
+    "tipoPrezzo": "FISSO",
+    "valore": 157,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro extrachiaro",
+    "tipoPrezzo": "FISSO",
+    "valore": 79,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro fumé",
+    "tipoPrezzo": "FISSO",
+    "valore": 106,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "Vetro riflettente",
+    "tipoPrezzo": "FISSO",
+    "valore": 110,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Configurazione",
+    "nome": "Ante aggiuntive rispetto al numero minimo di ante possibili",
+    "tipoPrezzo": "FISSO",
+    "valore": 204,
+    "unita": "/anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro sostitutivo",
+    "nome": "Sostituzione anta (solo vetro)",
+    "tipoPrezzo": "FISSO",
+    "valore": 273,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  },
+  {
+    "categoria": "Vetro sostitutivo",
+    "nome": "Sostituzione anta (completa di accessori)",
+    "tipoPrezzo": "FISSO",
+    "valore": 363,
+    "unita": "/m²",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE"
+    ]
+  }
+]

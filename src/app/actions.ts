@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
-import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
+import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -204,6 +204,45 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
     redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
   }
 
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
+
+  const modello = await prisma.modelloProdotto.findUnique({
+    where: { brandId_tipologia: { brandId, tipologia } },
+  });
+
+  if (modello && modello.modalitaCalcolo !== "GRIGLIA") {
+    // Listini "a formula" (es. vetrate BRILLANTE/SCINTILLA): niente griglia larghezza×altezza,
+    // il prezzo si ricava applicando la tariffa a listino alla misura reale.
+    const esito = await calcolaPrezzoAFormula({
+      brandId,
+      tipologia,
+      modalitaCalcolo: modello.modalitaCalcolo,
+      parametriCalcolo: modello.parametriCalcolo,
+      larghezzaCm: larghezza,
+      altezzaCm: altezza,
+    });
+    if (!esito) {
+      redirect(
+        `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+          `Tariffa non disponibile per ${tipologia} a ${larghezza}×${altezza} — verificare il listino`
+        )}`
+      );
+    }
+    await prisma.rigaPreventivo.create({
+      data: {
+        preventivoId,
+        prodottoId: esito!.prodottoRiferimentoId,
+        quantita,
+        prezzoUnitario: esito!.prezzoUnitario,
+        misuraLarghezza: larghezza,
+        misuraAltezza: altezza,
+      },
+    });
+    await ricalcolaTotali(preventivoId);
+    revalidatePath(`/preventivi/${preventivoId}`);
+    return;
+  }
+
   const prodotto = await trovaFasciaPrezzo({ brandId, tipologia, larghezza, altezza });
   if (!prodotto) {
     redirect(
@@ -212,8 +251,6 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
       )}`
     );
   }
-
-  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
 
   await prisma.rigaPreventivo.create({
     data: {
