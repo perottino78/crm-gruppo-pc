@@ -88,6 +88,12 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("BEACHWAVE_100")) return "BEACHWAVE_MOTORIZZABILE";
   if (tipologia.startsWith("BEACHWAVE_126")) return "BEACHWAVE_MOTORIZZABILE";
   if (tipologia.startsWith("BEACHWAVE_80")) return "BEACHWAVE_80";
+  // Zenith (serramenti PVC): sotto-famiglie piu' specifiche vanno controllate PRIMA
+  // della generica "ZENITH_" per poter scopare optional solo a wasistas o solo a PF3A.
+  if (tipologia.startsWith("ZENITH_WASISTAS_")) return "ZENITH_WASISTAS";
+  if (tipologia.startsWith("ZENITH_PF3A_SOGLIA_")) return "ZENITH_PF3A_SOGLIA";
+  if (tipologia.startsWith("ZENITH_PF3A_")) return "ZENITH_PF3A";
+  if (tipologia.startsWith("ZENITH_")) return "ZENITH";
   return null;
 }
 

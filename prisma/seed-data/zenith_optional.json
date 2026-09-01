@@ -1,0 +1,142 @@
+[
+ {
+  "categoria": "Colore",
+  "nome": "Colore fuori standard / pellicola",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Applicabile a tutte le finiture fuori standard interne/esterne (es. Rovere Gold, Noce Gold, Bianco Frassinato, Rovere Sbiancato, Douglas, Vert, Rovere Grigio, Oregon, Acajou, Chêne Moyen, Chene Natural, Valnus Terra, Valnus, Vrt Foncé, Rou Ge Foncé, Palissandro, Gris, Anthracite, Bleu d'Acier e simili con codice AP/P riportato a listino). Colori MASSA e BIANCO MASSA sono compresi nel prezzo base.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Pellicole fuori standard diverse, un solo lato",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "ZENITH_PF3A",
+  "note": "Solo per Portafinestra 3 ante (PF3A): pellicola fuori standard applicata su un solo lato.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Pellicole fuori standard diverse, due lati diversi",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 100,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "ZENITH_PF3A",
+  "note": "Solo per Portafinestra 3 ante (PF3A): pellicole fuori standard diverse sui due lati (interno/esterno).",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Autoscala (dal 3° piano)",
+  "tipoPrezzo": "FISSO",
+  "valore": 500,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Dal 3° piano in su. Dal 7° piano in su: € 800 (inserire manualmente). +€300 se suolo pubblico privo di parcheggio privato interno o su lato strada. Se l'autoscala non può essere piazzata, sostituita con facchinaggio (da quotare a parte).",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Pratica ENEA",
+  "tipoPrezzo": "FISSO",
+  "valore": 350,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Gestiamo noi la pratica e la presentazione.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Smaltimento cartongesso",
+  "tipoPrezzo": "FISSO",
+  "valore": 300,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Prezzo al m². Moltiplicare manualmente per la superficie reale da smaltire.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Smaltimento e smontaggio veranda esistente",
+  "tipoPrezzo": "FISSO",
+  "valore": 500,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "A corpo.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Antifurto con cavo da 3mt",
+  "tipoPrezzo": "FISSO",
+  "valore": 45,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Non scontabile.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Foro per passagatto",
+  "tipoPrezzo": "FISSO",
+  "valore": 150,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Il cliente deve fornire il passagatto in azienda, oppure prevedere traverso e pannello fisso.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Motore per wasistas",
+  "tipoPrezzo": "FISSO",
+  "valore": 350,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "ZENITH_WASISTAS",
+  "note": "Colore bianco o nero, con pulsante. Predisposizione corrente elettrica a carico del cliente.",
+  "gruppiApplicabili": [
+   "SERRAMENTI PVC ZENITH"
+  ]
+ }
+]

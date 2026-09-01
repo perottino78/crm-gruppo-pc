@@ -1,0 +1,200 @@
+[
+ {
+  "tipologia": "ZENITH_FF_UKW13",
+  "descrizioneTecnica": "Specchiatura fissa - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_WASISTAS_UKW13",
+  "descrizioneTecnica": "Finestra a wasistas (apertura a scrocco o maniglia) - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F1A_UKW13",
+  "descrizioneTecnica": "Finestra 1 anta - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F2A_UKW13",
+  "descrizioneTecnica": "Finestra 2 ante - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F3A_UKW13",
+  "descrizioneTecnica": "Finestra 3 ante - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF1A_UKW13",
+  "descrizioneTecnica": "Portafinestra 1 anta, tutto telaio - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF2A_UKW13",
+  "descrizioneTecnica": "Portafinestra 2 ante - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF2A_SOGLIA_UKW13",
+  "descrizioneTecnica": "Portafinestra 2 ante con soglia ribassata - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF3A_UKW13",
+  "descrizioneTecnica": "Portafinestra 3 ante - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF3A_SOGLIA_UKW13",
+  "descrizioneTecnica": "Portafinestra 3 ante con soglia ribassata - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_TRASLANTE_UKW13",
+  "descrizioneTecnica": "Serramento traslante (ribalta e scorri su fisso) - serie Zenith PVC, Uw 1,3 W/m²K, zona climatica E, vetrocamera doppio. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_FF_UKW10",
+  "descrizioneTecnica": "Specchiatura fissa - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_WASISTAS_UKW10",
+  "descrizioneTecnica": "Finestra a wasistas (apertura a scrocco o maniglia) - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F1A_UKW10",
+  "descrizioneTecnica": "Finestra 1 anta - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F2A_UKW10",
+  "descrizioneTecnica": "Finestra 2 ante - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_F3A_UKW10",
+  "descrizioneTecnica": "Finestra 3 ante - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF1A_UKW10",
+  "descrizioneTecnica": "Portafinestra 1 anta, tutto telaio - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF2A_UKW10",
+  "descrizioneTecnica": "Portafinestra 2 ante - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF2A_SOGLIA_UKW10",
+  "descrizioneTecnica": "Portafinestra 2 ante con soglia ribassata - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF3A_UKW10",
+  "descrizioneTecnica": "Portafinestra 3 ante - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_PF3A_SOGLIA_UKW10",
+  "descrizioneTecnica": "Portafinestra 3 ante con soglia ribassata - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "ZENITH_TRASLANTE_UKW10",
+  "descrizioneTecnica": "Serramento traslante (ribalta e scorri su fisso) - serie Zenith PVC, Uw 1,0 W/m²K, zona climatica F, vetrocamera triplo. Colore struttura: MASSA/BIANCO MASSA compreso; colori fuori standard e pellicole +20% (vedi optional). Misure in mm.",
+  "famiglia": "INDOOR",
+  "gruppo": "SERRAMENTI PVC ZENITH",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ }
+]
