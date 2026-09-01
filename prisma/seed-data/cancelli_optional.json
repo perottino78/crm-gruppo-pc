@@ -12,5 +12,439 @@
   "gruppiApplicabili": [
    "CANCELLI"
   ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "NERO Ral 9005 (Tiefschwarz)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "AVORIO Ral 1013 (Perlweiß)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "AVORIO Ral 1015 (Hellelfenbein)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "AVORIO Ral 1011 (Braunbeige)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "BIANCO Ral 9002 (Grauweiß)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "BIANCO Ral 9010 (Reinweiß)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "GRIGIO Ral 7035 (Lichtgrau)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "GRIGIO Ral 7001 (Silbergrau)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "GRIGIO Ral 7015 (Schiefergrau)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "GRIGIO Ral 7024 (Graphitgrau)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "ROSSO Ral 3009 (Oxidrot)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8001 (Ockerbraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8003 (Lehmbraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8011 (Nußbraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8016 (Mahagonibraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8017 (Schokoladenbraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "MARRONE Ral 8019 (Graubraun)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "VERDE Ral 6021 (Blaßgrün)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "VERDE Ral 6011 (Rasedagrün)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "VERDE Ral 6005 (Moosgrün)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "VERDE Ral 6009 (Tannengrün)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore RAL raggrinzato fuori standard (verniciatura a polvere strutturata). Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Nero brillantinato",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Marezzati — Bianco marezzato",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Marezzati — Grigio marezzato",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Marezzati — Verde marezzato",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Marezzati — Marrone marezzato",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Sablé — Nero sablé",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Sablé — Grigio sablé",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Sablé — Verde scuro sablé",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Sablé — Marrone sablé",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Corten",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Colore particolare fuori standard. Il listino Cancelli P&C non riporta un sovrapprezzo per questa finitura: verificare con l'ufficio prezzi prima di confermarla in offerta se il valore 0€ non corrisponde al costo reale.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
  }
 ]
