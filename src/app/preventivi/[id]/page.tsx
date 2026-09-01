@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia } from "@/lib/prodotti";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -87,9 +87,12 @@ export default async function PreventivoPage({
     variantiPerTipologia.get(v.tipologia)!.push({ id: v.id, colore: v.colore, prezzoBase: v.prezzoBase });
   }
 
-  // raggruppa le tipologie in un albero Famiglia (Indoor/Outdoor) > Gruppo > Modello,
-  // rispecchiando l'organizzazione dei cataloghi cartacei, per la navigazione a tendina
-  const alberoMap = new Map<string, Map<string, NodoTipologia[]>>();
+  // raggruppa le tipologie in un albero Famiglia (Indoor/Outdoor) > Gruppo > [Sottogruppo] > Modello,
+  // rispecchiando l'organizzazione dei cataloghi cartacei, per la navigazione a tendina.
+  // Il livello Sottogruppo e' opzionale: serve per i cataloghi con una variante da scegliere
+  // prima della tipologia vera e propria (es. Zenith: prima Uw 1,0/1,3, poi FF/F1A/ecc.).
+  type VoceAlbero = { sottogruppo: string | null; nodo: NodoTipologia };
+  const alberoMap = new Map<string, Map<string, VoceAlbero[]>>();
   for (const t of tipologieMisure) {
     const tip = t.tipologia;
     const m = modelloBrandMap.get(tip);
@@ -104,20 +107,24 @@ export default async function PreventivoPage({
     // per fascia, o un'unica tariffa fissa): mostrare il loro min/max come "range di
     // produzione" sarebbe fuorviante, quindi per questi modelli il range non si mostra.
     const aFormula = m?.modalitaCalcolo && m.modalitaCalcolo !== "GRIGLIA";
+    const sottogruppo = sottogruppoDiTipologia(tip);
     perGruppo.get(gruppo)!.push({
-      value: tip,
-      label: tip.replace(/_/g, " "),
-      haMisura: conMisura,
-      varianti: variantiPerTipologia.get(tip),
-      misure:
-        conMisura && !aFormula
-          ? {
-              larghezzaMin: t._min.larghezzaMm ?? 0,
-              larghezzaMax: t._max.larghezzaMm ?? 0,
-              altezzaMin: t._min.altezzaMm ?? 0,
-              altezzaMax: t._max.altezzaMm ?? 0,
-            }
-          : undefined,
+      sottogruppo,
+      nodo: {
+        value: tip,
+        label: sottogruppo ? labelBreveTipologia(tip) : tip.replace(/_/g, " "),
+        haMisura: conMisura,
+        varianti: variantiPerTipologia.get(tip),
+        misure:
+          conMisura && !aFormula
+            ? {
+                larghezzaMin: t._min.larghezzaMm ?? 0,
+                larghezzaMax: t._max.larghezzaMm ?? 0,
+                altezzaMin: t._min.altezzaMm ?? 0,
+                altezzaMax: t._max.altezzaMm ?? 0,
+              }
+            : undefined,
+      },
     });
   }
   const ordineFamiglie = ["INDOOR", "OUTDOOR"];
@@ -134,10 +141,31 @@ export default async function PreventivoPage({
       nome,
       gruppi: [...gruppi.entries()]
         .sort(([a], [b]) => a.localeCompare(b))
-        .map(([gnome, tipologie]) => ({
-          nome: gnome,
-          tipologie: tipologie.sort((a, b) => a.label.localeCompare(b.label)),
-        })),
+        .map(([gnome, voci]) => {
+          const haSottogruppi = voci.some((v) => v.sottogruppo);
+          if (haSottogruppi) {
+            const sgMap = new Map<string, NodoTipologia[]>();
+            for (const v of voci) {
+              const chiave = v.sottogruppo ?? "Altro";
+              if (!sgMap.has(chiave)) sgMap.set(chiave, []);
+              sgMap.get(chiave)!.push(v.nodo);
+            }
+            return {
+              nome: gnome,
+              tipologie: [],
+              sottogruppi: [...sgMap.entries()]
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([sgnome, tipologie]) => ({
+                  nome: sgnome,
+                  tipologie: tipologie.sort((a, b) => a.label.localeCompare(b.label)),
+                })),
+            };
+          }
+          return {
+            nome: gnome,
+            tipologie: voci.map((v) => v.nodo).sort((a, b) => a.label.localeCompare(b.label)),
+          };
+        }),
     }));
 
   const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];

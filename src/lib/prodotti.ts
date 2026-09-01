@@ -101,6 +101,43 @@ export function listinoDiTipologia(tipologia: string): string | null {
   return null;
 }
 
+// Sottogruppo di selezione a due passaggi (es. Zenith: prima si sceglie la variante
+// Uw/zona climatica, poi la tipologia di serramento). Ritorna null per i prodotti che
+// non hanno bisogno di questo secondo livello (la stragrande maggioranza dei cataloghi).
+export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("ZENITH_")) {
+    if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
+    if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
+  }
+  return null;
+}
+
+const ZENITH_DESCRIZIONI: Record<string, string> = {
+  FF: "Specchiatura fissa (FF)",
+  WASISTAS: "Wasistas",
+  F1A: "Finestra 1 anta (F1A)",
+  F2A: "Finestra 2 ante (F2A)",
+  F3A: "Finestra 3 ante (F3A)",
+  PF1A: "Portafinestra 1 anta (PF1A)",
+  PF2A: "Portafinestra 2 ante (PF2A)",
+  PF2A_SOGLIA: "Portafinestra 2 ante con soglia (PF2A Soglia)",
+  PF3A: "Portafinestra 3 ante (PF3A)",
+  PF3A_SOGLIA: "Portafinestra 3 ante con soglia (PF3A Soglia)",
+  TRASLANTE: "Traslante",
+};
+
+// Etichetta breve da mostrare dentro un sottogruppo (senza ripetere marca/variante,
+// gia' indicate dal sottogruppo stesso). Se la tipologia non ha un sottogruppo, si
+// continua a usare l'etichetta "grezza" (tipologia con gli underscore sostituiti da spazi).
+export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia.startsWith("ZENITH_")) {
+    const senzaPrefisso = tipologia.slice("ZENITH_".length);
+    const base = senzaPrefisso.replace(/_UKW1[03]$/, "");
+    return ZENITH_DESCRIZIONI[base] ?? base.replace(/_/g, " ");
+  }
+  return tipologia.replace(/_/g, " ");
+}
+
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };

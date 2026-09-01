@@ -11,7 +11,8 @@ export type NodoTipologia = {
   // range di misure effettivamente a listino (solo per i modelli con haMisura=true)
   misure?: { larghezzaMin: number; larghezzaMax: number; altezzaMin: number; altezzaMax: number };
 };
-export type GruppoNodo = { nome: string; tipologie: NodoTipologia[] };
+export type SottogruppoNodo = { nome: string; tipologie: NodoTipologia[] };
+export type GruppoNodo = { nome: string; tipologie: NodoTipologia[]; sottogruppi?: SottogruppoNodo[] };
 export type FamigliaNodo = { nome: string; gruppi: GruppoNodo[] };
 
 export default function SelettoreProdotto({
@@ -32,6 +33,7 @@ export default function SelettoreProdotto({
   const [query, setQuery] = useState("");
   const [famigliaAperta, setFamigliaAperta] = useState<string | null>(null);
   const [gruppoAperto, setGruppoAperto] = useState<string | null>(null);
+  const [sottogruppoAperto, setSottogruppoAperto] = useState<string | null>(null);
   const [scelto, setScelto] = useState<NodoTipologia | null>(null);
   const [larghezzaVal, setLarghezzaVal] = useState("");
   const [altezzaVal, setAltezzaVal] = useState("");
@@ -40,12 +42,17 @@ export default function SelettoreProdotto({
   const risultatiRicerca = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return null;
-    const out: { famiglia: string; gruppo: string; nodo: NodoTipologia }[] = [];
+    const out: { famiglia: string; gruppo: string; sottogruppo?: string; nodo: NodoTipologia }[] = [];
     for (const f of tassonomia) {
       for (const g of f.gruppi) {
-        for (const t of g.tipologie) {
-          if (t.label.toLowerCase().includes(q) || t.value.toLowerCase().includes(q)) {
-            out.push({ famiglia: f.nome, gruppo: g.nome, nodo: t });
+        const liste = g.sottogruppi
+          ? g.sottogruppi.map((sg) => ({ sottogruppo: sg.nome as string | undefined, tipologie: sg.tipologie }))
+          : [{ sottogruppo: undefined as string | undefined, tipologie: g.tipologie }];
+        for (const { sottogruppo, tipologie } of liste) {
+          for (const t of tipologie) {
+            if (t.label.toLowerCase().includes(q) || t.value.toLowerCase().includes(q)) {
+              out.push({ famiglia: f.nome, gruppo: g.nome, sottogruppo, nodo: t });
+            }
           }
         }
       }
@@ -120,7 +127,7 @@ export default function SelettoreProdotto({
           {risultatiRicerca.length === 0 && (
             <p className="px-3 py-3 text-sm text-neutral-400">Nessun modello corrisponde a &quot;{query}&quot;.</p>
           )}
-          {risultatiRicerca.map(({ famiglia, gruppo, nodo }) => (
+          {risultatiRicerca.map(({ famiglia, gruppo, sottogruppo, nodo }) => (
             <button
               key={nodo.value}
               type="button"
@@ -128,7 +135,7 @@ export default function SelettoreProdotto({
               className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 ${scelto?.value === nodo.value ? "bg-neutral-50" : ""}`}
             >
               <span className="font-medium">{nodo.label}</span>
-              <span className="block text-[11px] text-neutral-400">{famiglia} · {gruppo}</span>
+              <span className="block text-[11px] text-neutral-400">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""}</span>
             </button>
           ))}
         </div>
@@ -143,6 +150,7 @@ export default function SelettoreProdotto({
                   onClick={() => {
                     setFamigliaAperta(apertaF ? null : f.nome);
                     setGruppoAperto(null);
+                    setSottogruppoAperto(null);
                   }}
                   className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
                 >
@@ -153,28 +161,69 @@ export default function SelettoreProdotto({
                   <div className="pl-3 pb-1">
                     {f.gruppi.map((g) => {
                       const apertoG = gruppoAperto === g.nome;
+                      const conteggioGruppo = g.sottogruppi
+                        ? g.sottogruppi.reduce((tot, sg) => tot + sg.tipologie.length, 0)
+                        : g.tipologie.length;
                       return (
                         <div key={g.nome} className="border-t border-neutral-50 first:border-t-0">
                           <button
                             type="button"
-                            onClick={() => setGruppoAperto(apertoG ? null : g.nome)}
+                            onClick={() => {
+                              setGruppoAperto(apertoG ? null : g.nome);
+                              setSottogruppoAperto(null);
+                            }}
                             className="w-full flex items-center justify-between px-2 py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-50"
                           >
-                            <span>{g.nome} <span className="text-neutral-300 font-normal">({g.tipologie.length})</span></span>
+                            <span>{g.nome} <span className="text-neutral-300 font-normal">({conteggioGruppo})</span></span>
                             <span className="text-neutral-300">{apertoG ? "▲" : "▼"}</span>
                           </button>
                           {apertoG && (
-                            <div className="pl-3 pb-1 flex flex-col">
-                              {g.tipologie.map((t) => (
-                                <button
-                                  key={t.value}
-                                  type="button"
-                                  onClick={() => scegli(t)}
-                                  className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-500"}`}
-                                >
-                                  {t.label}
-                                </button>
-                              ))}
+                            <div className="pl-3 pb-1">
+                              {g.sottogruppi ? (
+                                g.sottogruppi.map((sg) => {
+                                  const chiaveSg = `${g.nome}|${sg.nome}`;
+                                  const apertoSg = sottogruppoAperto === chiaveSg;
+                                  return (
+                                    <div key={sg.nome} className="border-t border-neutral-50 first:border-t-0">
+                                      <button
+                                        type="button"
+                                        onClick={() => setSottogruppoAperto(apertoSg ? null : chiaveSg)}
+                                        className="w-full flex items-center justify-between px-2 py-2 text-xs font-medium text-neutral-500 hover:bg-neutral-50"
+                                      >
+                                        <span>{sg.nome} <span className="text-neutral-300 font-normal">({sg.tipologie.length})</span></span>
+                                        <span className="text-neutral-300">{apertoSg ? "▲" : "▼"}</span>
+                                      </button>
+                                      {apertoSg && (
+                                        <div className="pl-3 pb-1 flex flex-col">
+                                          {sg.tipologie.map((t) => (
+                                            <button
+                                              key={t.value}
+                                              type="button"
+                                              onClick={() => scegli(t)}
+                                              className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-500"}`}
+                                            >
+                                              {t.label}
+                                            </button>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })
+                              ) : (
+                                <div className="flex flex-col">
+                                  {g.tipologie.map((t) => (
+                                    <button
+                                      key={t.value}
+                                      type="button"
+                                      onClick={() => scegli(t)}
+                                      className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-500"}`}
+                                    >
+                                      {t.label}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
