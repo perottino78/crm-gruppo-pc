@@ -1,0 +1,492 @@
+[
+ {
+  "tipologia": "CANCELLI_SEMPLICE_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 764.05
+ },
+ {
+  "tipologia": "CANCELLI_SEMPLICE_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 557.55
+ },
+ {
+  "tipologia": "CANCELLI_STILO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 836.325
+ },
+ {
+  "tipologia": "CANCELLI_STILO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 629.825
+ },
+ {
+  "tipologia": "CANCELLI_VISCONTEO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 836.325
+ },
+ {
+  "tipologia": "CANCELLI_VISCONTEO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 629.825
+ },
+ {
+  "tipologia": "CANCELLI_INGLESE_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 856.975
+ },
+ {
+  "tipologia": "CANCELLI_INGLESE_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 650.475
+ },
+ {
+  "tipologia": "CANCELLI_VECCHIAMILANO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_VECCHIAMILANO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_PANTOGRAFO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_PANTOGRAFO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_CERCHI_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_CERCHI_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_CRISTINA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_CRISTINA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_ADA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_ADA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_SFORZA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 856.975
+ },
+ {
+  "tipologia": "CANCELLI_SFORZA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 650.475
+ },
+ {
+  "tipologia": "CANCELLI_RUBINO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_RUBINO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 681.45
+ },
+ {
+  "tipologia": "CANCELLI_DEMETRIO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_DEMETRIO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 681.45
+ },
+ {
+  "tipologia": "CANCELLI_OSCAR_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_OSCAR_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 681.45
+ },
+ {
+  "tipologia": "CANCELLI_INFINITO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_INFINITO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 681.45
+ },
+ {
+  "tipologia": "CANCELLI_FIORE_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_FIORE_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_ALIDA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_ALIDA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_BARBARA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_BARBARA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_ALBA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_ALBA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_MATILDE_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_MATILDE_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_AMBRA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_AMBRA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_INDIA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_INDIA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_ARRIGO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 929.25
+ },
+ {
+  "tipologia": "CANCELLI_ARRIGO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 722.75
+ },
+ {
+  "tipologia": "CANCELLI_NOCE_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 960.225
+ },
+ {
+  "tipologia": "CANCELLI_NOCE_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 753.725
+ },
+ {
+  "tipologia": "CANCELLI_IMPERO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 960.225
+ },
+ {
+  "tipologia": "CANCELLI_IMPERO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 753.725
+ },
+ {
+  "tipologia": "CANCELLI_MILANESIO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 960.225
+ },
+ {
+  "tipologia": "CANCELLI_MILANESIO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 753.725
+ },
+ {
+  "tipologia": "CANCELLI_MILANOANTICA_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 960.225
+ },
+ {
+  "tipologia": "CANCELLI_MILANOANTICA_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 753.725
+ },
+ {
+  "tipologia": "CANCELLI_TULIPANO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 960.225
+ },
+ {
+  "tipologia": "CANCELLI_TULIPANO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 753.725
+ },
+ {
+  "tipologia": "CANCELLI_PITTORESCO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 980.875
+ },
+ {
+  "tipologia": "CANCELLI_PITTORESCO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 774.375
+ },
+ {
+  "tipologia": "CANCELLI_DOPPIOPANTOGRAFO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1032.5
+ },
+ {
+  "tipologia": "CANCELLI_DOPPIOPANTOGRAFO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 826.0
+ },
+ {
+  "tipologia": "CANCELLI_ROMBI_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1094.45
+ },
+ {
+  "tipologia": "CANCELLI_ROMBI_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_ALTERNATO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1094.45
+ },
+ {
+  "tipologia": "CANCELLI_ALTERNATO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_GAJ_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1094.45
+ },
+ {
+  "tipologia": "CANCELLI_GAJ_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_FERRI_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1321.6
+ },
+ {
+  "tipologia": "CANCELLI_FERRI_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1115.1
+ },
+ {
+  "tipologia": "CANCELLI_CASATI_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1094.45
+ },
+ {
+  "tipologia": "CANCELLI_CASATI_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 887.95
+ },
+ {
+  "tipologia": "CANCELLI_VENEZIANO_APRIBILE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1218.35
+ },
+ {
+  "tipologia": "CANCELLI_VENEZIANO_FISSO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 1011.85
+ }
+]

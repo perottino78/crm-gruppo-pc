@@ -1,0 +1,16 @@
+[
+ {
+  "categoria": "Accessorio",
+  "nome": "Pannello decorativo (PR1-PR6)",
+  "tipoPrezzo": "FISSO",
+  "valore": 87.5,
+  "unita": "cadauno",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "6 disegni disponibili (PR1, PR2, PR3, PR4, PR5, PR6), vedi immagine di riferimento /immagini/cancelli/pannelli_decorativi.png. Prezzo a pannello: moltiplicare manualmente per il numero di pannelli richiesti.",
+  "gruppiApplicabili": [
+   "CANCELLI"
+  ]
+ }
+]
