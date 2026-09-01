@@ -1,0 +1,366 @@
+[
+  {
+    "tipologia": "PLISSE_08_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata a soffietto, apertura singola su un lato, profilo 08, montaggio frontale a toppa. Prezzo a tariffa fissa di 187.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1,50m² per pezzo). Ingombro 22mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo) — vedi optional categoria Rete. Disponibili anche Anticimice (32€/ml, vedi optional) e Frangivento (+12%, vedi optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_08_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata a soffietto, apertura singola su un lato, profilo 08, montaggio frontale a toppa. Prezzo a tariffa fissa di 207.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1,50m² per pezzo). Ingombro 22mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo) — vedi optional categoria Rete. Disponibili anche Anticimice (32€/ml, vedi optional) e Frangivento (+12%, vedi optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_08_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata a soffietto, apertura singola su un lato, profilo 08, montaggio frontale a toppa. Prezzo a tariffa fissa di 204.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1,50m² per pezzo). Ingombro 22mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo) — vedi optional categoria Rete. Disponibili anche Anticimice (32€/ml, vedi optional) e Frangivento (+12%, vedi optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_08_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata a soffietto, apertura singola su un lato, profilo 08, montaggio frontale a toppa. Prezzo a tariffa fissa di 256.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1,50m² per pezzo). Ingombro 22mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo) — vedi optional categoria Rete. Disponibili anche Anticimice (32€/ml, vedi optional) e Frangivento (+12%, vedi optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_XXL08_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata a soffietto formato extra-large, multi-modulo (2-4 moduli), profilo 08. Prezzo a tariffa fissa di 224.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Il listino XXL riporta solo Rete Metallizzata (+7%) e Rete Nera (nessun sovrapprezzo) tra le varianti rete confermate; per le altre colorazioni verificare disponibilità con l'ufficio tecnico prima di offrirle. Anticimice specifico XXL a 24€/ml (diverso dal resto della gamma a 32€/ml, vedi optional dedicato).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/xxl_plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_XXL08_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata a soffietto formato extra-large, multi-modulo (2-4 moduli), profilo 08. Prezzo a tariffa fissa di 250.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Il listino XXL riporta solo Rete Metallizzata (+7%) e Rete Nera (nessun sovrapprezzo) tra le varianti rete confermate; per le altre colorazioni verificare disponibilità con l'ufficio tecnico prima di offrirle. Anticimice specifico XXL a 24€/ml (diverso dal resto della gamma a 32€/ml, vedi optional dedicato).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/xxl_plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_XXL08_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata a soffietto formato extra-large, multi-modulo (2-4 moduli), profilo 08. Prezzo a tariffa fissa di 221.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Il listino XXL riporta solo Rete Metallizzata (+7%) e Rete Nera (nessun sovrapprezzo) tra le varianti rete confermate; per le altre colorazioni verificare disponibilità con l'ufficio tecnico prima di offrirle. Anticimice specifico XXL a 24€/ml (diverso dal resto della gamma a 32€/ml, vedi optional dedicato).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/xxl_plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_XXL08_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata a soffietto formato extra-large, multi-modulo (2-4 moduli), profilo 08. Prezzo a tariffa fissa di 308.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Il listino XXL riporta solo Rete Metallizzata (+7%) e Rete Nera (nessun sovrapprezzo) tra le varianti rete confermate; per le altre colorazioni verificare disponibilità con l'ufficio tecnico prima di offrirle. Anticimice specifico XXL a 24€/ml (diverso dal resto della gamma a 32€/ml, vedi optional dedicato).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/xxl_plisse_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata ad apertura centrale (doppio battente che si incontra al centro), profilo 04 o 08. Prezzo a tariffa fissa di 210.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo). Versione con chiusura angolare: aggiungere gli accessori GIANIN (giunto inferiore), GIANSU (giunto superiore) e CA06 (calamita) — vedi optional categoria Accessorio.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/apertura_centrale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata ad apertura centrale (doppio battente che si incontra al centro), profilo 04 o 08. Prezzo a tariffa fissa di 249.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo). Versione con chiusura angolare: aggiungere gli accessori GIANIN (giunto inferiore), GIANSU (giunto superiore) e CA06 (calamita) — vedi optional categoria Accessorio.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/apertura_centrale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata ad apertura centrale (doppio battente che si incontra al centro), profilo 04 o 08. Prezzo a tariffa fissa di 246.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo). Versione con chiusura angolare: aggiungere gli accessori GIANIN (giunto inferiore), GIANSU (giunto superiore) e CA06 (calamita) — vedi optional categoria Accessorio.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/apertura_centrale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata ad apertura centrale (doppio battente che si incontra al centro), profilo 04 o 08. Prezzo a tariffa fissa di 308.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo). Versione con chiusura angolare: aggiungere gli accessori GIANIN (giunto inferiore), GIANSU (giunto superiore) e CA06 (calamita) — vedi optional categoria Accessorio.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/apertura_centrale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata ad apertura bilaterale (doppio battente indipendente), profilo 08. Prezzo a tariffa fissa di 238.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/bilaterale_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata ad apertura bilaterale (doppio battente indipendente), profilo 08. Prezzo a tariffa fissa di 268.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/bilaterale_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata ad apertura bilaterale (doppio battente indipendente), profilo 08. Prezzo a tariffa fissa di 264.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/bilaterale_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata ad apertura bilaterale (doppio battente indipendente), profilo 08. Prezzo a tariffa fissa di 334.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2,00m² per pezzo). Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/bilaterale_08.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata doppia bilaterale (due unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 270.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/doppia_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata doppia bilaterale (due unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 305.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/doppia_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata doppia bilaterale (due unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 300.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/doppia_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata doppia bilaterale (due unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 377.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/doppia_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Zanzariera plissettata tripla bilaterale (tre unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 352.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/tripla_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Zanzariera plissettata tripla bilaterale (tre unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 396.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/tripla_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Zanzariera plissettata tripla bilaterale (tre unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 391.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/tripla_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Zanzariera plissettata tripla bilaterale (tre unità bilaterali affiancate), profilo 08. Prezzo a tariffa fissa di 489.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3,00m² per pezzo). Misure massime consigliate: L 6000mm, H 3400mm. Rete standard Grigia inclusa; disponibili Rete Metallizzata (+7%), Rete Antiartiglio (+7%), Rete Bianca (+5%), Rete Nera (nessun sovrapprezzo).",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/tripla_bilaterale.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_STD",
+    "descrizioneTecnica": "Finitura profilo STANDARD. Porta a soffietto plissettata in tessuto Pantheon (non rete), modello Portapliss, valido solo per tessuto Pantheon. Prezzo del profilo a tariffa fissa di 197.00€/m², applicata alla superficie fatturabile (minimo fatturabile 2,20m² per pezzo). Misure massime consigliate: L 1800mm, H 2900mm. Tessuto non oscurante al 100% (50-60% con colori scuri). Varianti disponibili come optional PERCENTUALE sul totale della riga: Apertura Centrale (+8%, minimo fatturabile 3m²), Bilaterale (+14%), Doppia Bilaterale (+35%, minimo fatturabile 4m²), Montaggio Frontale (+18%). Colori tessuto e colori accessori (Nero, Bianco, Marrone, Avorio, Bronzo) vedi optional categoria Colore.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/portapliss.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_STDPLUS",
+    "descrizioneTecnica": "Finitura profilo STANDARD PLUS. Porta a soffietto plissettata in tessuto Pantheon (non rete), modello Portapliss, valido solo per tessuto Pantheon. Prezzo del profilo a tariffa fissa di 240.00€/m², applicata alla superficie fatturabile (minimo fatturabile 2,20m² per pezzo). Misure massime consigliate: L 1800mm, H 2900mm. Tessuto non oscurante al 100% (50-60% con colori scuri). Varianti disponibili come optional PERCENTUALE sul totale della riga: Apertura Centrale (+8%, minimo fatturabile 3m²), Bilaterale (+14%), Doppia Bilaterale (+35%, minimo fatturabile 4m²), Montaggio Frontale (+18%). Colori tessuto e colori accessori (Nero, Bianco, Marrone, Avorio, Bronzo) vedi optional categoria Colore.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/portapliss.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_MICH",
+    "descrizioneTecnica": "Finitura profilo MICHELANGELO. Porta a soffietto plissettata in tessuto Pantheon (non rete), modello Portapliss, valido solo per tessuto Pantheon. Prezzo del profilo a tariffa fissa di 238.00€/m², applicata alla superficie fatturabile (minimo fatturabile 2,20m² per pezzo). Misure massime consigliate: L 1800mm, H 2900mm. Tessuto non oscurante al 100% (50-60% con colori scuri). Varianti disponibili come optional PERCENTUALE sul totale della riga: Apertura Centrale (+8%, minimo fatturabile 3m²), Bilaterale (+14%), Doppia Bilaterale (+35%, minimo fatturabile 4m²), Montaggio Frontale (+18%). Colori tessuto e colori accessori (Nero, Bianco, Marrone, Avorio, Bronzo) vedi optional categoria Colore.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/portapliss.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_FL",
+    "descrizioneTecnica": "Finitura profilo FINTO LEGNO. Porta a soffietto plissettata in tessuto Pantheon (non rete), modello Portapliss, valido solo per tessuto Pantheon. Prezzo del profilo a tariffa fissa di 302.00€/m², applicata alla superficie fatturabile (minimo fatturabile 2,20m² per pezzo). Misure massime consigliate: L 1800mm, H 2900mm. Tessuto non oscurante al 100% (50-60% con colori scuri). Varianti disponibili come optional PERCENTUALE sul totale della riga: Apertura Centrale (+8%, minimo fatturabile 3m²), Bilaterale (+14%), Doppia Bilaterale (+35%, minimo fatturabile 4m²), Montaggio Frontale (+18%). Colori tessuto e colori accessori (Nero, Bianco, Marrone, Avorio, Bronzo) vedi optional categoria Colore.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PLISSE",
+    "immagineUrl": "/immagini/plisse/portapliss.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.2,
+      "altezzaMinimaMm": 0
+    }
+  }
+]

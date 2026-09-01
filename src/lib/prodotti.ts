@@ -98,16 +98,41 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // che pesca un'unica riga Prodotto di riferimento per tipologia), ma condividono lo
   // stesso gruppo di optional (pannelli decorativi), quindi un solo prefisso basta.
   if (tipologia.startsWith("CANCELLI_")) return "CANCELLI";
+  // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
+  // specifici (es. GIANIN/GIANSU/CA06 solo su Apertura Centrale, aumenti percentuali solo
+  // su Portapliss) si possono scopare per prodotto, mentre gli optional trasversali (rete,
+  // colori profilo, sistema a incasso) restano con listino=null sul gruppo ZANZARIERE_PLISSE.
+  if (tipologia.startsWith("PLISSE_XXL08_")) return "PLISSE_XXL08";
+  if (tipologia.startsWith("PLISSE_08_")) return "PLISSE_08";
+  if (tipologia.startsWith("PLISSE_APERTURACENTRALE_")) return "PLISSE_APERTURACENTRALE";
+  if (tipologia.startsWith("PLISSE_BILATERALE08_")) return "PLISSE_BILATERALE08";
+  if (tipologia.startsWith("PLISSE_DOPPIABILATERALE_")) return "PLISSE_DOPPIABILATERALE";
+  if (tipologia.startsWith("PLISSE_TRIPLABILATERALE_")) return "PLISSE_TRIPLABILATERALE";
+  if (tipologia.startsWith("PLISSE_PORTAPLISS_")) return "PLISSE_PORTAPLISS";
   return null;
 }
 
 // Sottogruppo di selezione a due passaggi (es. Zenith: prima si sceglie la variante
 // Uw/zona climatica, poi la tipologia di serramento). Ritorna null per i prodotti che
 // non hanno bisogno di questo secondo livello (la stragrande maggioranza dei cataloghi).
+const PLISSE_SOTTOGRUPPI: Record<string, string> = {
+  "08": "Plisse 08",
+  XXL08: "XXL Plisse 08",
+  APERTURACENTRALE: "Apertura Centrale (04 o 08)",
+  BILATERALE08: "Bilaterale 08",
+  DOPPIABILATERALE: "Doppia Bilaterale",
+  TRIPLABILATERALE: "Tripla Bilaterale",
+  PORTAPLISS: "Porta a Soffietto in Tessuto (Portapliss)",
+};
+
 export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
+  }
+  if (tipologia.startsWith("PLISSE_")) {
+    const codice = tipologia.slice("PLISSE_".length).replace(/_(STD|STDPLUS|MICH|FL)$/, "");
+    return PLISSE_SOTTOGRUPPI[codice] ?? null;
   }
   return null;
 }
@@ -129,11 +154,22 @@ const ZENITH_DESCRIZIONI: Record<string, string> = {
 // Etichetta breve da mostrare dentro un sottogruppo (senza ripetere marca/variante,
 // gia' indicate dal sottogruppo stesso). Se la tipologia non ha un sottogruppo, si
 // continua a usare l'etichetta "grezza" (tipologia con gli underscore sostituiti da spazi).
+const PLISSE_FINITURE: Record<string, string> = {
+  STD: "Standard",
+  STDPLUS: "Standard Plus",
+  MICH: "Michelangelo",
+  FL: "Finto Legno",
+};
+
 export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("ZENITH_")) {
     const senzaPrefisso = tipologia.slice("ZENITH_".length);
     const base = senzaPrefisso.replace(/_UKW1[03]$/, "");
     return ZENITH_DESCRIZIONI[base] ?? base.replace(/_/g, " ");
+  }
+  if (tipologia.startsWith("PLISSE_")) {
+    const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
+    if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
   return tipologia.replace(/_/g, " ");
 }

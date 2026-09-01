@@ -1,0 +1,2956 @@
+[
+  {
+    "categoria": "Rete",
+    "nome": "Rete Grigia (standard)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore/tipo rete di serie, incluso nel prezzo base. Non applicabile a Portapliss (che usa tessuto, non rete).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Nera",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Nessun sovrapprezzo rispetto alla rete standard grigia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Metallizzata (grigio o nero metallizzato)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 7.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sovrapprezzo confermato su Plisse 08, XXL Plisse 08, Apertura Centrale, Bilaterale, Doppia/Tripla Bilaterale.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Antiartiglio",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 7.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sovrapprezzo confermato su Plisse 08, Apertura Centrale, Bilaterale, Doppia/Tripla Bilaterale. Il listino XXL Plisse 08 non la riporta esplicitamente: verificare disponibilità con l'ufficio tecnico prima di offrirla su XXL.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Bianca",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sovrapprezzo confermato su Plisse 08, Apertura Centrale, Bilaterale, Doppia/Tripla Bilaterale. Il listino XXL Plisse 08 non la riporta esplicitamente: verificare disponibilità con l'ufficio tecnico prima di offrirla su XXL.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Anticimice (spazzolino antinsetto)",
+    "tipoPrezzo": "FISSO",
+    "valore": 32.0,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo al metro lineare di larghezza del telo: moltiplicare manualmente per lo sviluppo in larghezza (ml) del prodotto. Non usare per XXL Plisse 08 (vedi optional dedicato a 24€/ml).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Anticimice XXL Plisse 08",
+    "tipoPrezzo": "FISSO",
+    "valore": 24.0,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_XXL08",
+    "note": "Prezzo al metro lineare, specifico per XXL Plisse 08 (listino separato, 24€/ml invece di 32€/ml).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Frangivento",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 12.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicato per ogni 80cm di larghezza; obbligatorio oltre certe larghezze secondo le istruzioni tecniche del prodotto — verificare con l'ufficio tecnico prima di offrirlo/ometterlo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "GIANIN — giunto inferiore per chiusura angolare",
+    "tipoPrezzo": "FISSO",
+    "valore": 63.62,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_APERTURACENTRALE",
+    "note": "Solo per Apertura Centrale con chiusura angolare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "GIANSU — giunto superiore per chiusura angolare",
+    "tipoPrezzo": "FISSO",
+    "valore": 63.62,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_APERTURACENTRALE",
+    "note": "Solo per Apertura Centrale con chiusura angolare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "CA06 — calamita per chiusura angolare",
+    "tipoPrezzo": "FISSO",
+    "valore": 4.0,
+    "unita": "€/ml (x2)",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_APERTURACENTRALE",
+    "note": "Solo per Apertura Centrale con chiusura angolare. Prezzo al metro lineare, da moltiplicare per 2 (due calamite).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aumento per Apertura Centrale (Portapliss)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Minimo fatturabile per questa variante: 3 metri quadri (diverso dal minimo 2,2mq della versione base).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aumento per Bilaterale (Portapliss)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 14.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aumento per Doppia Bilaterale (Portapliss)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Minimo fatturabile per questa variante: 4 metri quadri.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aumento per Montaggio Frontale (Portapliss)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 18.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore accessori Portapliss — Nero",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore accessori/maniglieria per Portapliss. Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore accessori Portapliss — Bianco",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore accessori/maniglieria per Portapliss. Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore accessori Portapliss — Marrone",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore accessori/maniglieria per Portapliss. Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore accessori Portapliss — Avorio",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore accessori/maniglieria per Portapliss. Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore accessori Portapliss — Bronzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore accessori/maniglieria per Portapliss. Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 29 (arancio)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 59 (senape)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 61 (avorio)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 65 (bianco perla)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 98 (grigio chiaro)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore tessuto Pantheon 99 (grigio scuro)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_PORTAPLISS",
+    "note": "Colore tessuto Pantheon per Portapliss (tessuto non oscurante al 100%, colori indicativi). Nessun sovrapprezzo indicato a listino.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Bianco 9010 opaco (cod. DR-955)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Avorio 1013 opaco (cod. DR-110)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Marrone 8017 opaco (cod. DR-822)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Bianco Crema 9001 (cod. B)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Verde 6005 opaco (cod. DR-637)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard — Grigio 7035",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Michelangelo — Verde Michelangelo (cod. DR-601)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Michelangelo. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Michelangelo già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Michelangelo — Marrone Michelangelo (cod. DR-801)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Michelangelo. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Michelangelo già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Michelangelo — Grigio Michelangelo (cod. DR-709)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Michelangelo. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Michelangelo già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Nero Opaco (cod. DR-935 - 9005)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Nero Silver Martellato (cod. DR-924)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Bronzo Scuro (cod. DR-288 VIV 318)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Grigio Argento 7001 (cod. DR-730)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Ferro Micaceo scuro (cod. DR-703)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Grigio Antracite 7016",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Bronzo Verniciato (cod. DR 284)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Argento Verniciato (cod. DR734)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Bianco Traffic White 9016 (cod. AL-46)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Standard Plus — Corten (cod. V-3342)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Standard Plus. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Standard Plus già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Acacia (cod. A-70/R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Ciliegio (cod. 317-70/R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Noce Ruvido (cod. 102/70R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Rovere (cod. 333-80/R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Pino (cod. 319-8/R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Douglas (cod. 335/8R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Castagno Decoral (cod. 538-70-R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Noce Decoral (cod. 563-149-R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Noce (cod. 600-149-R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Noce Decoral (cod. V13-71-Rv)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Renolit Plast Chiaro (cod. 386/73R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore profilo Finto Legno — Renolit Plast Scuro (cod. 387/70R)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Colore indicativo tier Finto Legno. Colori e finiture potrebbero subire variazioni; nessun sovrapprezzo indicato oltre alla tariffa della finitura Finto Legno già selezionata come tipologia.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 23.17,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 28.95,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento ORIZZONTALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.91,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento ORIZZONTALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 37.51,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento VERTICALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 22.96,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento VERTICALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 28.69,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento VERTICALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.67,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile a scorrimento VERTICALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 37.17,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile APERTURA CENTRALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 22.96,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile APERTURA CENTRALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 28.69,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile APERTURA CENTRALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.67,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Tapparella/Avvolgibile APERTURA CENTRALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 37.17,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 24.87,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 31.44,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento ORIZZONTALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 28.69,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento ORIZZONTALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 41.45,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento VERTICALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 24.2,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento VERTICALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 30.58,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento VERTICALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.91,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente a scorrimento VERTICALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 41.06,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente APERTURA CENTRALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 24.2,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente APERTURA CENTRALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 30.58,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente APERTURA CENTRALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.91,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 70mm — Persiana/Battente APERTURA CENTRALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 41.06,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.48,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento ORIZZONTALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.39,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento ORIZZONTALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.3,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento ORIZZONTALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 31.83,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento VERTICALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.33,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento VERTICALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.13,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento VERTICALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.13,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — a scorrimento VERTICALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 31.53,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — APERTURA CENTRALE (incl. profilo copertura) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.33,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — APERTURA CENTRALE (incl. profilo copertura) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.13,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — APERTURA CENTRALE (incl. profilo copertura) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.13,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso 45mm — APERTURA CENTRALE (incl. profilo copertura) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 31.53,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Sistema di montaggio a incasso (nel muro/controtelaio), alternativo al montaggio frontale a toppa. Prezzo al metro lineare: applicare manualmente in base allo sviluppo lineare del vano.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per SharkNet — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 9.31,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per SharkNet — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 12.76,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per SharkNet — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.53,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per SharkNet — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.09,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per SharkNet — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 22.4,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per tapparella/persiana — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 6.18,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per tapparella/persiana — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 8.42,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per tapparella/persiana — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 8.93,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per tapparella/persiana — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 8.64,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo per tapparella/persiana — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 14.69,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo di chiusura — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.78,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo di chiusura — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.32,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo di chiusura — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.44,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo di chiusura — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.37,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Incasso sfuso al metro — Profilo di chiusura — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 3.84,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso del sistema a incasso, prezzo al metro lineare.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Profilo Base (Supporti ad L) — sfuso al metro — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 6.14,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Disponibile solo Grezzo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Sistema ad incasso",
+    "nome": "Profilo Base Supporti ad L — pezzo da 20cm — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.46,
+    "unita": "cadauno (20cm)",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Disponibile solo Grezzo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 85cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 56.81,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 85cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 57.9,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 85cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 65.55,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 85cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 68.82,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 85cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 77.56,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 115cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 58.99,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 115cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.18,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 115cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 69.91,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 115cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 74.28,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 115cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 86.3,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 145cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 60.08,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 145cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 63.36,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 145cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 74.28,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 145cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 85.21,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 145cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 89.58,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 175cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 66.64,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 175cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 69.91,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 175cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 77.56,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 175cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 87.39,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 175cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 102.69,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 205cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 69.91,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 205cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 77.56,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 205cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 83.02,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 205cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 90.67,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 205cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 117.98,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 220cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 75.38,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 220cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 79.75,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 220cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 85.21,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 220cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 93.95,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 220cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 119.07,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 235cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 78.65,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 235cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 81.93,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 235cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 88.49,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 235cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 97.23,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 235cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 130.0,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 275cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 81.93,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 275cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 87.39,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 275cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 92.86,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 275cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 101.6,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 275cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 146.38,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 290cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 89.58,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 290cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 96.13,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 290cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 99.41,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 290cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 108.15,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 290cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 160.59,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 330cm × L fino a 70cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 101.6,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 330cm × L 71-100cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 104.87,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 330cm × L 101-130cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 108.15,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 330cm × L 131-180cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 117.98,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Kit rete cambio — H 330cm × L 181-250cm",
+    "tipoPrezzo": "FISSO",
+    "valore": 179.16,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "KIT Accessori Plastica 04",
+    "tipoPrezzo": "FISSO",
+    "valore": 23.85,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Kit accessori in plastica di ricambio/dotazione per tipo prodotto. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "KIT Accessori Plastica 08",
+    "tipoPrezzo": "FISSO",
+    "valore": 23.85,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Kit accessori in plastica di ricambio/dotazione per tipo prodotto. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "KIT Accessori Plastica Apertura Centrale",
+    "tipoPrezzo": "FISSO",
+    "valore": 41.19,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PLISSE_APERTURACENTRALE",
+    "note": "Kit accessori in plastica di ricambio/dotazione per tipo prodotto. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "KIT Accessori Plastica Bilaterale",
+    "tipoPrezzo": "FISSO",
+    "valore": 36.05,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Kit accessori in plastica di ricambio/dotazione per tipo prodotto. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "KIT Accessori Plastica SG",
+    "tipoPrezzo": "FISSO",
+    "valore": 25.43,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Kit accessori in plastica di ricambio/dotazione per tipo prodotto. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida superiore (barra 6mt) — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 7.36,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida superiore (barra 6mt) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 9.14,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida superiore (barra 6mt) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.51,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida superiore (barra 6mt) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 9.46,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida superiore (barra 6mt) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.24,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 04 (barra 6mt) — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.58,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 04 (barra 6mt) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.1,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 04 (barra 6mt) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.21,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 04 (barra 6mt) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.1,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 04 (barra 6mt) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 3.36,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 08 (barra 6mt) — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.89,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 08 (barra 6mt) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.52,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 08 (barra 6mt) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.73,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 08 (barra 6mt) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 2.63,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Guida infer. 08 (barra 6mt) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 4.31,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Montante di partenza/arrivo (barra 6mt) — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 5.46,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Montante di partenza/arrivo (barra 6mt) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 6.62,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Montante di partenza/arrivo (barra 6mt) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 7.15,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Montante di partenza/arrivo (barra 6mt) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 6.83,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Montante di partenza/arrivo (barra 6mt) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.09,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Barramaniglia (barra 6mt) — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.93,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Barramaniglia (barra 6mt) — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 12.71,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Barramaniglia (barra 6mt) — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.66,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Barramaniglia (barra 6mt) — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.14,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Barramaniglia (barra 6mt) — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.81,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo quadro 25x25 — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 9.14,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo quadro 25x25 — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 12.19,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo quadro 25x25 — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 14.5,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo quadro 25x25 — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.35,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo quadro 25x25 — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 17.23,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo 60x30 — Grezzo",
+    "tipoPrezzo": "FISSO",
+    "valore": 11.45,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo 60x30 — Standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.13,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo 60x30 — Standard Plus",
+    "tipoPrezzo": "FISSO",
+    "valore": 17.23,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo 60x30 — Michelangelo",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.08,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo 60x30 — Finto Legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 21.12,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Profilo sfuso, prezzo al metro lineare. Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva. Disponibile in magazzino solo bianco; altre colorazioni consegna in 15 giorni lavorativi.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Profilo Portacalamita (barra 6mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 3.61,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Calamita in rotolo (200mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.32,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Biadesivo per guida alta (66mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.48,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Biadesivo per guida bassa (55mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.8,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Spazzolino in rotolo (600mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.77,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Maniglia (ricambio)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.46,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Astina di movimentazione per SG",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.4,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Frangivento — profilo in alluminio anodizzato (sfuso)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.5,
+    "unita": "€/ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Componente sfuso del kit frangivento (distinto dall'aumento +12% sul prodotto finito). Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Frangivento — tappo finale (sfuso)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.54,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Componente sfuso del kit frangivento (distinto dall'aumento +12% sul prodotto finito). Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Frangivento — accessorio centrale (sfuso)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.54,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Componente sfuso del kit frangivento (distinto dall'aumento +12% sul prodotto finito). Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Ricambio",
+    "nome": "Aumento per taglio kit rete a misura data dal cliente",
+    "tipoPrezzo": "FISSO",
+    "valore": 12.5,
+    "unita": "cadauno",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto cliente; aggiungere 30€ per la manodopera di manutenzione secondo listino (CAMBIO RETE ED ACCESSORI). Ordine minimo di approvvigionamento di magazzino 16 pezzi (a livello aziendale, non per singolo preventivo). Rete standard Grigia se non diversamente specificato; altri colori richiedere disponibilità preventiva.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PLISSE"
+    ]
+  }
+]

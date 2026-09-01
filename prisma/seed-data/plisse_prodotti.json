@@ -1,0 +1,198 @@
+[
+  {
+    "tipologia": "PLISSE_08_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 187.0
+  },
+  {
+    "tipologia": "PLISSE_08_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.0
+  },
+  {
+    "tipologia": "PLISSE_08_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 204.0
+  },
+  {
+    "tipologia": "PLISSE_08_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 256.0
+  },
+  {
+    "tipologia": "PLISSE_XXL08_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 224.0
+  },
+  {
+    "tipologia": "PLISSE_XXL08_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 250.0
+  },
+  {
+    "tipologia": "PLISSE_XXL08_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 221.0
+  },
+  {
+    "tipologia": "PLISSE_XXL08_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 308.0
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 210.0
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 249.0
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 246.0
+  },
+  {
+    "tipologia": "PLISSE_APERTURACENTRALE_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 308.0
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 238.0
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 268.0
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 264.0
+  },
+  {
+    "tipologia": "PLISSE_BILATERALE08_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 334.0
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 270.0
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 305.0
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 300.0
+  },
+  {
+    "tipologia": "PLISSE_DOPPIABILATERALE_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 377.0
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 352.0
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 396.0
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 391.0
+  },
+  {
+    "tipologia": "PLISSE_TRIPLABILATERALE_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 489.0
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_STD",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 197.0
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_STDPLUS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 240.0
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_MICH",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 238.0
+  },
+  {
+    "tipologia": "PLISSE_PORTAPLISS_FL",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 302.0
+  }
+]
