@@ -1,0 +1,30 @@
+[
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 2100,
+  "larghezzaMm": 850,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 2100,
+  "larghezzaMm": 850,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1250,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3811
+ }
+]

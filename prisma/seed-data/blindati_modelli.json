@@ -1,0 +1,38 @@
+[
+ {
+  "tipologia": "BLINDATI_CL3",
+  "descrizioneTecnica": "Portoncino blindato Classe 3 (UNI-EN 1627), anta singola, 1,4 K termico, pannelli lisci standard telaio nero. Misura standard L 80/85/90 x H 210 cm. Prezzo base 1800€. Doppia lamiera acciaio zincato, rostri lato cerniera x6, 6 chiavistelli inclinati, guarnizioni EPDM, serratura a cilindro di sicurezza, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Vedi optional per fuori misura, sopraluce, fianco luce, vetro e pannelli di rivestimento (menu a tendina).",
+  "famiglia": "INDOOR",
+  "gruppo": "BLINDATI",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "descrizioneTecnica": "Portoncino blindato Classe 4 (UNI-EN 1627), anta singola, 1,8 K termico, pannelli lisci standard telaio nero. Misura standard L 80/85/90 x H 210 cm. Prezzo base 2100€. Struttura e dotazioni di serie identiche alla Classe 3 (vedi CL3) con maggiore livello di resistenza all'effrazione. Non disponibile in versione a due ante nel listino fornitore attuale. Vedi optional per fuori misura, sopraluce, fianco luce, vetro e pannelli di rivestimento (menu a tendina).",
+  "famiglia": "INDOOR",
+  "gruppo": "BLINDATI",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "descrizioneTecnica": "Portoncino blindato Classe 3, DUE ANTE asimmetriche (anta principale 80/85/90 + antino 30/35/40/45) x H 210 cm. Prezzo base 3600€. Rostri lato cerniera x6, 3 chiavistelli + scrocco azionante, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Sovrapprezzi fuori misura calcolati PER OGNI ANTA. Vedi optional per dettagli.",
+  "famiglia": "INDOOR",
+  "gruppo": "BLINDATI",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "descrizioneTecnica": "Portoncino blindato Classe 3, DUE ANTE simmetriche (55/60/65 + 55/60/65) x H 210 cm. Prezzo base 3811€. 4 chiavistelli laterali dritti, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Sovrapprezzi fuori misura calcolati PER OGNI ANTA. Vedi optional per dettagli.",
+  "famiglia": "INDOOR",
+  "gruppo": "BLINDATI",
+  "immagineUrl": null,
+  "modalitaCalcolo": "GRIGLIA",
+  "parametriCalcolo": {}
+ }
+]
