@@ -201,9 +201,23 @@ export async function GET(req: NextRequest) {
   const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
   if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
 
-  const prodottiCount = await prisma.prodotto.count({
+  const prodottiEsistenti = await prisma.prodotto.findMany({
     where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
   });
+  const chiaviAttuali = new Set((prodottiData as ProdottoRow[]).map(keyProdotto));
+  const righeExtra = prodottiEsistenti.filter((p) => !chiaviAttuali.has(keyProdotto(p)));
+  const righeExtraConRiferimenti = await Promise.all(
+    righeExtra.map(async (p) => ({
+      id: p.id,
+      tipologia: p.tipologia,
+      colore: p.colore,
+      larghezzaMm: p.larghezzaMm,
+      altezzaMm: p.altezzaMm,
+      prezzoBase: p.prezzoBase,
+      righePreventivoCollegate: await prisma.rigaPreventivo.count({ where: { prodottoId: p.id } }),
+    }))
+  );
+
   const modelliCount = await prisma.modelloProdotto.count({
     where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
   });
@@ -211,5 +225,12 @@ export async function GET(req: NextRequest) {
     where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
   });
 
-  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
+  return NextResponse.json({
+    ok: true,
+    dryRun: true,
+    prodottiCount: prodottiEsistenti.length,
+    modelliCount,
+    optionaliCount,
+    righeExtra: righeExtraConRiferimenti,
+  });
 }
