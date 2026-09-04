@@ -2,29 +2,225 @@
  {
   "tipologia": "BLINDATI_CL3",
   "colore": "STANDARD",
-  "altezzaMm": 2100,
-  "larghezzaMm": 850,
+  "altezzaMm": 210,
+  "larghezzaMm": 80,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 80,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 85,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 85,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 90,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 90,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 50,
+  "prezzoBase": 1800
+ },
+ {
+  "tipologia": "BLINDATI_CL3",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 110,
   "prezzoBase": 1800
  },
  {
   "tipologia": "BLINDATI_CL4",
   "colore": "STANDARD",
-  "altezzaMm": 2100,
-  "larghezzaMm": 850,
+  "altezzaMm": 210,
+  "larghezzaMm": 80,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 80,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 85,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 85,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 90,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 90,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 50,
+  "prezzoBase": 2100
+ },
+ {
+  "tipologia": "BLINDATI_CL4",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 110,
   "prezzoBase": 2100
  },
  {
   "tipologia": "BLINDATI_CL3_DUEANTE_STD",
   "colore": "STANDARD",
-  "altezzaMm": 2100,
-  "larghezzaMm": 1250,
+  "altezzaMm": 210,
+  "larghezzaMm": 80,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 80,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 85,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 85,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 90,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 90,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 50,
+  "prezzoBase": 3600
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 110,
   "prezzoBase": 3600
  },
  {
   "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
   "colore": "STANDARD",
-  "altezzaMm": 2100,
-  "larghezzaMm": 1200,
+  "altezzaMm": 210,
+  "larghezzaMm": 55,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 55,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 60,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 60,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 210,
+  "larghezzaMm": 65,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 220,
+  "larghezzaMm": 65,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 180,
+  "larghezzaMm": 50,
+  "prezzoBase": 3811
+ },
+ {
+  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 110,
   "prezzoBase": 3811
  }
 ]

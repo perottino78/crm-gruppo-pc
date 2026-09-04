@@ -195,6 +195,9 @@ model Optional {
   larghezzaMm Int?
   listino     String?
   note        String?
+  // URL immagine rappresentativa (es. per i pannelli di rivestimento a catalogo: Blindati).
+  // Facoltativo: molte righe Optional restano senza immagine (accessori, sovrapprezzi, ecc.).
+  immagineUrl String?
   // Gruppi merceologici (ModelloProdotto.gruppo) a cui questo optional è applicabile,
   // es. ["PERGOLE", "BIOCLIMATICA"]. Vuoto = nessuna restrizione di gruppo.
   gruppiApplicabili String[] @default([])

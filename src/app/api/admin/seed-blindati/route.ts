@@ -31,6 +31,7 @@ type OptionalRow = {
   listino: string | null;
   note: string | null;
   gruppiApplicabili: string[];
+  immagineUrl?: string | null;
 };
 
 const TIPOLOGIE_PREFIXES = ["BLINDATI_"];
@@ -78,6 +79,24 @@ export async function POST(req: NextRequest) {
         prodottiAggiornati++;
       } else {
         prodottiInvariati++;
+      }
+    }
+
+    // Rimuove le vecchie righe Prodotto in scala errata (mm invece di cm, es. 850x2100)
+    // create nella prima versione del seed, ora sostituite dalla griglia standard corretta
+    // (80/85/90 x 210/220 cm) + righe di confine per il range fuori misura. Se una vecchia
+    // riga è già referenziata da una riga di preventivo esistente, la cancellazione viene
+    // saltata (FK) e la riga resta segnalata come non rimovibile, senza bloccare il resto.
+    const chiaviNuove = new Set(prodottiNuovi.map(keyProdotto));
+    let prodottiRimossi = 0;
+    let prodottiNonRimovibili = 0;
+    for (const vecchio of prodottiEsistenti) {
+      if (chiaviNuove.has(keyProdotto(vecchio))) continue;
+      try {
+        await prisma.prodotto.delete({ where: { id: vecchio.id } });
+        prodottiRimossi++;
+      } catch {
+        prodottiNonRimovibili++;
       }
     }
 
@@ -131,6 +150,7 @@ export async function POST(req: NextRequest) {
             listino: o.listino,
             note: o.note,
             gruppiApplicabili: o.gruppiApplicabili,
+            immagineUrl: o.immagineUrl ?? null,
           },
         });
         optCreati++;
@@ -138,11 +158,18 @@ export async function POST(req: NextRequest) {
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
         esistente.note !== o.note ||
+        esistente.immagineUrl !== (o.immagineUrl ?? null) ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
           where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
+          data: {
+            valore: o.valore,
+            tipoPrezzo: o.tipoPrezzo,
+            note: o.note,
+            gruppiApplicabili: o.gruppiApplicabili,
+            immagineUrl: o.immagineUrl ?? null,
+          },
         });
         optAggiornati++;
       } else {
@@ -155,6 +182,8 @@ export async function POST(req: NextRequest) {
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi,
+      prodottiNonRimovibili,
       modelliAggiornati: modelli.length,
       optCreati,
       optAggiornati,
