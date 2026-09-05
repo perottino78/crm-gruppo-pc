@@ -28,13 +28,13 @@ export default async function ClientiPage({
   return (
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-medium">Clienti</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">Clienti</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
       <div className="grid grid-cols-2 gap-6 mb-8">
         <form action={creaLead} className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-sm font-medium text-neutral-700 mb-3">Nuovo lead</h2>
+          <h2 className="text-base font-bold text-neutral-900 mb-3">Nuovo lead</h2>
           <div className="flex flex-col gap-2">
             <input name="nome" placeholder="Nome" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
@@ -56,7 +56,7 @@ export default async function ClientiPage({
         </form>
 
         <form action={creaCliente} className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-sm font-medium text-neutral-700 mb-3">Nuovo cliente</h2>
+          <h2 className="text-base font-bold text-neutral-900 mb-3">Nuovo cliente</h2>
           <div className="flex flex-col gap-2">
             <input name="nome" placeholder="Nome / ragione sociale" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
@@ -84,7 +84,7 @@ export default async function ClientiPage({
         </form>
       </div>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">
+      <h2 className="text-base font-bold text-neutral-900 mb-3">
         Lead da Facebook / Instagram ({lead.length})
       </h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
@@ -92,7 +92,7 @@ export default async function ClientiPage({
           <div key={l.id} className="flex items-center justify-between px-4 py-3 text-sm gap-3">
             <div>
               <p className="font-medium">{l.nome}</p>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-neutral-600">
                 {l.fonte} · {l.brand.nome} · assegnato a {l.telefonista?.nome ?? "—"}
               </p>
             </div>
@@ -108,7 +108,7 @@ export default async function ClientiPage({
                     <option key={f} value={f}>{f}</option>
                   ))}
                 </select>
-                <button className="text-xs text-neutral-400 underline">salva</button>
+                <button className="text-xs text-neutral-600 underline">salva</button>
               </form>
               {!l.clienteGenerato && (
                 <form action={convertiLeadInCliente}>
@@ -120,11 +120,11 @@ export default async function ClientiPage({
           </div>
         ))}
         {lead.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-400">Nessun lead ancora.</p>
+          <p className="px-4 py-6 text-sm text-neutral-600">Nessun lead ancora.</p>
         )}
       </div>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">
+      <h2 className="text-base font-bold text-neutral-900 mb-3">
         Anagrafica clienti ({clienti.length})
       </h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
@@ -136,15 +136,15 @@ export default async function ClientiPage({
           >
             <div>
               <p className="font-medium">{c.nome}</p>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-neutral-600">
                 {c.telefono} · {c.email}
               </p>
             </div>
-            <span className="text-xs text-neutral-400">{c.paese}</span>
+            <span className="text-xs text-neutral-600">{c.paese}</span>
           </Link>
         ))}
         {clienti.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-400">Nessun cliente ancora.</p>
+          <p className="px-4 py-6 text-sm text-neutral-600">Nessun cliente ancora.</p>
         )}
       </div>
     </div>

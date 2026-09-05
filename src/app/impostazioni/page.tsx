@@ -16,9 +16,9 @@ export default async function ImpostazioniPage() {
 
   return (
     <div className="max-w-5xl">
-      <h1 className="text-xl font-medium mb-6">Impostazioni</h1>
+      <h1 className="text-2xl font-bold text-neutral-900 mb-6">Impostazioni</h1>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">Configurazione listino e IVA</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-3">Configurazione listino e IVA</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
         {config.map((c) => (
           <form
@@ -27,7 +27,7 @@ export default async function ImpostazioniPage() {
             className="flex items-center justify-between px-4 py-3 text-sm gap-3"
           >
             <input type="hidden" name="id" value={c.id} />
-            <span className="text-neutral-500">{c.chiave}</span>
+            <span className="text-neutral-700">{c.chiave}</span>
             <div className="flex items-center gap-2">
               <input
                 name="valore"
@@ -40,7 +40,7 @@ export default async function ImpostazioniPage() {
         ))}
       </div>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">Brand attivi</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-3">Brand attivi</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
         {brands.map((b) => {
           const c = BRANDS.find((x) => x.nome === b.nome);
@@ -53,13 +53,13 @@ export default async function ImpostazioniPage() {
         })}
       </div>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">Utenti e ruoli</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-3">Utenti e ruoli</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
         {utenti.map((u) => (
           <Link key={u.id} href={`/commerciali/${u.id}`} className="flex items-center justify-between px-4 py-3 text-sm hover:bg-neutral-50">
             <div>
               <p className="text-blue-700">{u.nome}</p>
-              <p className="text-xs text-neutral-400">{u.email}</p>
+              <p className="text-xs text-neutral-600">{u.email}</p>
             </div>
             <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{u.ruolo}</span>
           </Link>
@@ -68,15 +68,15 @@ export default async function ImpostazioniPage() {
 
       <form action={creaUtente} className="bg-white rounded-lg border border-neutral-200 p-4 flex flex-wrap items-end gap-2">
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Nome</label>
+          <label className="text-xs text-neutral-700">Nome</label>
           <input name="nome" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Email</label>
+          <label className="text-xs text-neutral-700">Email</label>
           <input name="email" type="email" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Ruolo</label>
+          <label className="text-xs text-neutral-700">Ruolo</label>
           <select name="ruolo" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
             {RUOLI.map((r) => (
               <option key={r} value={r}>{r}</option>

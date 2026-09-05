@@ -43,20 +43,20 @@ export default async function SchedaClientePage({
 
   return (
     <div className="max-w-4xl">
-      <Link href="/clienti" className="text-xs text-neutral-400 hover:underline">
+      <Link href="/clienti" className="text-xs text-neutral-600 hover:underline">
         ← Clienti
       </Link>
       <div className="flex items-center justify-between mt-2 mb-1">
-        <h1 className="text-xl font-medium">{cliente.nome}</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">{cliente.nome}</h1>
         <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">
           {cliente.brand.nome}
         </span>
       </div>
-      <p className="text-sm text-neutral-400 mb-2">
+      <p className="text-sm text-neutral-600 mb-2">
         {cliente.telefono ?? "—"} · {cliente.email ?? "—"} · {cliente.paese}
         {cliente.leadOrigine && <> · lead origine: {cliente.leadOrigine.fonte}</>}
       </p>
-      <p className="text-sm text-neutral-400 mb-4">
+      <p className="text-sm text-neutral-600 mb-4">
         {cliente.indirizzo ?? "indirizzo non impostato"}
         {(cliente.cap || cliente.comune || cliente.provincia) && (
           <> — {[cliente.cap, cliente.comune].filter(Boolean).join(" ")}{cliente.provincia && ` (${cliente.provincia})`}</>
@@ -64,7 +64,7 @@ export default async function SchedaClientePage({
       </p>
 
       <details className="mb-6">
-        <summary className="text-xs text-neutral-400 cursor-pointer hover:text-neutral-600">modifica contatti e indirizzo</summary>
+        <summary className="text-xs text-neutral-600 cursor-pointer hover:text-neutral-600">modifica contatti e indirizzo</summary>
         <form action={aggiornaCliente} className="bg-white rounded-lg border border-neutral-200 p-4 mt-2 flex flex-col gap-2 max-w-md">
           <input type="hidden" name="id" value={cliente.id} />
           <input name="telefono" defaultValue={cliente.telefono ?? ""} placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
@@ -98,7 +98,7 @@ export default async function SchedaClientePage({
       )}
 
       <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-        <h2 className="text-sm font-medium text-neutral-700 mb-3">Nuova offerta / preventivo — scegli azienda</h2>
+        <h2 className="text-base font-bold text-neutral-900 mb-3">Nuova offerta / preventivo — scegli azienda</h2>
         <form action={creaPreventivo} className="flex flex-wrap items-end gap-2">
           <input type="hidden" name="clienteId" value={cliente.id} />
           <div className="flex gap-2 flex-wrap">
@@ -121,17 +121,17 @@ export default async function SchedaClientePage({
 
       <div className="grid grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-sm font-medium text-neutral-700 mb-3">Appuntamenti ({cliente.appuntamenti.length})</h2>
+          <h2 className="text-base font-bold text-neutral-900 mb-3">Appuntamenti ({cliente.appuntamenti.length})</h2>
           {cliente.appuntamenti.map((a) => (
             <div key={a.id} className="text-sm py-1.5 border-b border-neutral-50 last:border-0">
               <p>{a.dataOra.toLocaleString("it-IT")} · {a.tipo}</p>
-              <p className="text-xs text-neutral-400">{a.utente.nome} · {a.stato}</p>
+              <p className="text-xs text-neutral-600">{a.utente.nome} · {a.stato}</p>
             </div>
           ))}
-          {cliente.appuntamenti.length === 0 && <p className="text-xs text-neutral-300 italic">Nessuno</p>}
+          {cliente.appuntamenti.length === 0 && <p className="text-xs text-neutral-500 italic">Nessuno</p>}
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-sm font-medium text-neutral-700 mb-3">Preventivi ({cliente.preventivi.length})</h2>
+          <h2 className="text-base font-bold text-neutral-900 mb-3">Preventivi ({cliente.preventivi.length})</h2>
           {cliente.preventivi.map((p) => (
             <Link
               key={p.id}
@@ -139,17 +139,17 @@ export default async function SchedaClientePage({
               className="text-sm py-1.5 border-b border-neutral-50 last:border-0 flex items-center justify-between hover:bg-neutral-50 -mx-4 px-4"
             >
               <span>{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} · {p.commerciale.nome}</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500">{p.stato}</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{p.stato}</span>
             </Link>
           ))}
-          {cliente.preventivi.length === 0 && <p className="text-xs text-neutral-300 italic">Nessuno</p>}
+          {cliente.preventivi.length === 0 && <p className="text-xs text-neutral-500 italic">Nessuno</p>}
         </div>
       </div>
 
       <form action={creaAttivita} className="bg-white rounded-lg border border-neutral-200 p-4 mb-6 flex flex-wrap items-end gap-2">
         <input type="hidden" name="clienteId" value={cliente.id} />
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Tipo</label>
+          <label className="text-xs text-neutral-700">Tipo</label>
           <select name="tipo" defaultValue="NOTA" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
             {TIPI.map((t) => (
               <option key={t.v} value={t.v}>{t.icon} {t.label}</option>
@@ -157,15 +157,15 @@ export default async function SchedaClientePage({
           </select>
         </div>
         <div className="flex flex-col gap-1 flex-1 min-w-[180px]">
-          <label className="text-xs text-neutral-500">Oggetto</label>
+          <label className="text-xs text-neutral-700">Oggetto</label>
           <input name="oggetto" required placeholder="es. Chiamato per confermare misure" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Scadenza (solo task)</label>
+          <label className="text-xs text-neutral-700">Scadenza (solo task)</label>
           <input name="scadenza" type="date" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Chi</label>
+          <label className="text-xs text-neutral-700">Chi</label>
           <select name="utenteId" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
             <option value="">—</option>
             {utenti.map((u) => (
@@ -174,29 +174,29 @@ export default async function SchedaClientePage({
           </select>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <label className="text-xs text-neutral-500">Note</label>
+          <label className="text-xs text-neutral-700">Note</label>
           <textarea name="descrizione" rows={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
         </div>
         <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Registra attività</button>
       </form>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">Diario attività ({cliente.attivita.length})</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-3">Diario attività ({cliente.attivita.length})</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
         {cliente.attivita.map((a) => (
           <div key={a.id} className="px-4 py-3 text-sm">
             <div className="flex items-center justify-between">
               <span className="font-medium">{iconPer(a.tipo)} {a.oggetto}</span>
-              <span className="text-xs text-neutral-400">{a.dataOra.toLocaleString("it-IT")}</span>
+              <span className="text-xs text-neutral-600">{a.dataOra.toLocaleString("it-IT")}</span>
             </div>
-            {a.descrizione && <p className="text-xs text-neutral-500 mt-1">{a.descrizione}</p>}
-            <p className="text-xs text-neutral-300 mt-1">
+            {a.descrizione && <p className="text-xs text-neutral-700 mt-1">{a.descrizione}</p>}
+            <p className="text-xs text-neutral-500 mt-1">
               {a.utente?.nome ?? "—"}
               {a.tipo === "TASK" && (a.completata ? " · completato" : " · da fare")}
             </p>
           </div>
         ))}
         {cliente.attivita.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-400">Nessuna attività registrata ancora.</p>
+          <p className="px-4 py-6 text-sm text-neutral-600">Nessuna attività registrata ancora.</p>
         )}
       </div>
     </div>

@@ -179,13 +179,13 @@ export default async function PreventivoPage({
 
   return (
     <div className="max-w-5xl">
-      <Link href={`/clienti/${preventivo.clienteId}`} className="text-xs text-neutral-400 hover:underline">
+      <Link href={`/clienti/${preventivo.clienteId}`} className="text-xs text-neutral-600 hover:underline">
         ← {preventivo.cliente.nome}
       </Link>
 
       <div className="flex items-center justify-between mt-2 mb-6">
         <div className="flex items-center gap-3">
-          <h1 className="text-xl font-medium">Preventivo — {preventivo.cliente.nome}</h1>
+          <h1 className="text-2xl font-bold text-neutral-900">Preventivo — {preventivo.cliente.nome}</h1>
           <span
             className="text-xs font-medium px-3 py-1.5 rounded-full border"
             style={{ background: info.primarySoft, color: info.primary, borderColor: info.primary }}
@@ -212,11 +212,11 @@ export default async function PreventivoPage({
 
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-400 mb-1">Commerciale</p>
+          <p className="text-xs text-neutral-600 mb-1">Commerciale</p>
           <p className="text-sm font-medium">{preventivo.commerciale.nome}</p>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-400 mb-1">Stato</p>
+          <p className="text-xs text-neutral-600 mb-1">Stato</p>
           <form action={aggiornaStatoPreventivo} className="flex items-center gap-1">
             <input type="hidden" name="id" value={preventivo.id} />
             <select name="stato" defaultValue={preventivo.stato} className="text-sm border border-neutral-200 rounded px-1.5 py-0.5">
@@ -228,23 +228,23 @@ export default async function PreventivoPage({
           </form>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-400 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
+          <p className="text-xs text-neutral-600 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
           <p className="text-sm font-medium">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
         </div>
         <div className="bg-neutral-900 rounded-lg p-4">
-          <p className="text-xs text-neutral-300 mb-1">Totale (IVA {preventivo.aliquotaIva}%)</p>
+          <p className="text-xs text-neutral-500 mb-1">Totale (IVA {preventivo.aliquotaIva}%)</p>
           <p className="text-sm font-medium text-white">{totaleFinale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
         </div>
       </div>
 
       <details className="bg-white rounded-lg border border-neutral-200 mb-6">
-        <summary className="cursor-pointer text-sm font-medium text-neutral-700 px-4 py-3">
+        <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
           Condizioni offerta (oggetto, sconto, pagamento, consegna) — usate nella stampa
         </summary>
         <form action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
           <input type="hidden" name="id" value={preventivo.id} />
           <div>
-            <label className="text-xs text-neutral-400 block mb-1">Oggetto offerta</label>
+            <label className="text-xs text-neutral-600 block mb-1">Oggetto offerta</label>
             <input
               name="oggetto"
               defaultValue={preventivo.oggetto ?? ""}
@@ -254,7 +254,7 @@ export default async function PreventivoPage({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-neutral-400 block mb-1">Sconto (%)</label>
+              <label className="text-xs text-neutral-600 block mb-1">Sconto (%)</label>
               <input
                 name="scontoPercentuale"
                 type="number"
@@ -267,7 +267,7 @@ export default async function PreventivoPage({
             </div>
           </div>
           <div>
-            <label className="text-xs text-neutral-400 block mb-1">Condizioni di pagamento</label>
+            <label className="text-xs text-neutral-600 block mb-1">Condizioni di pagamento</label>
             <textarea
               name="condizioniPagamento"
               rows={2}
@@ -277,7 +277,7 @@ export default async function PreventivoPage({
             />
           </div>
           <div>
-            <label className="text-xs text-neutral-400 block mb-1">Condizioni di consegna</label>
+            <label className="text-xs text-neutral-600 block mb-1">Condizioni di consegna</label>
             <textarea
               name="condizioniConsegna"
               rows={2}
@@ -290,7 +290,7 @@ export default async function PreventivoPage({
         </form>
       </details>
 
-      <h2 className="text-sm font-medium text-neutral-700 mb-3">Righe ({preventivo.righe.length})</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-3">Righe ({preventivo.righe.length})</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
         {preventivo.righe.map((r) => {
           const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
@@ -312,10 +312,10 @@ export default async function PreventivoPage({
                       {r.prodotto.tipologia} · {r.prodotto.colore}
                       {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {r.misuraLarghezza && (
-                        <span className="text-neutral-400 font-normal"> (fascia listino {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unit})</span>
+                        <span className="text-neutral-600 font-normal"> (fascia listino {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
-                    <p className="text-xs text-neutral-400">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+                    <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -334,7 +334,7 @@ export default async function PreventivoPage({
                     <input type="hidden" name="id" value={r.id} />
                     <input type="hidden" name="preventivoId" value={preventivo.id} />
                     <input type="hidden" name="mostra" value={(!r.mostraDescrizione).toString()} />
-                    <button className={`text-[11px] px-2 py-0.5 rounded-full border ${r.mostraDescrizione ? "border-green-200 bg-green-50 text-green-700" : "border-neutral-200 text-neutral-400"}`}>
+                    <button className={`text-[11px] px-2 py-0.5 rounded-full border ${r.mostraDescrizione ? "border-green-200 bg-green-50 text-green-700" : "border-neutral-200 text-neutral-600"}`}>
                       {r.mostraDescrizione ? "✓ descrizione visibile in offerta" : "descrizione nascosta — clicca per mostrarla"}
                     </button>
                   </form>
@@ -344,7 +344,7 @@ export default async function PreventivoPage({
                     </span>
                   )}
                   <details className="text-[11px]">
-                    <summary className="cursor-pointer text-neutral-400 hover:text-neutral-700">✏️ modifica testo descrizione</summary>
+                    <summary className="cursor-pointer text-neutral-600 hover:text-neutral-700">✏️ modifica testo descrizione</summary>
                     <form action={aggiornaDescrizionePersonalizzata} className="mt-1.5 flex flex-col gap-1.5 max-w-lg">
                       <input type="hidden" name="id" value={r.id} />
                       <input type="hidden" name="preventivoId" value={preventivo.id} />
@@ -375,7 +375,7 @@ export default async function PreventivoPage({
               {r.optionali.length > 0 && (
                 <div className="mt-2 pl-3 border-l-2 border-neutral-100 flex flex-col gap-1">
                   {r.optionali.map((ro) => (
-                    <div key={ro.id} className="flex items-center justify-between text-xs text-neutral-500">
+                    <div key={ro.id} className="flex items-center justify-between text-xs text-neutral-700">
                       <span>+ {ro.optional.nome} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})</span>
                       <form action={rimuoviOptionalDaRiga}>
                         <input type="hidden" name="id" value={ro.id} />
@@ -407,7 +407,7 @@ export default async function PreventivoPage({
           );
         })}
         {preventivo.righe.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-400">Nessun prodotto ancora — aggiungilo qui sotto.</p>
+          <p className="px-4 py-6 text-sm text-neutral-600">Nessun prodotto ancora — aggiungilo qui sotto.</p>
         )}
       </div>
 
@@ -421,13 +421,13 @@ export default async function PreventivoPage({
       />
 
       <details className="mb-6">
-        <summary className="cursor-pointer text-xs text-neutral-400 hover:text-neutral-700">
+        <summary className="cursor-pointer text-xs text-neutral-600 hover:text-neutral-700">
           Ricerca avanzata — sfoglia le combinazioni di misura già a listino (prezzo modificabile)
         </summary>
         <div className="mt-3">
           <form className="flex items-end gap-2 mb-4" action={`/preventivi/${preventivo.id}`} method="get">
             <div className="flex flex-col gap-1 flex-1">
-              <label className="text-xs text-neutral-500">Cerca tipologia o colore</label>
+              <label className="text-xs text-neutral-700">Cerca tipologia o colore</label>
               <input name="q" defaultValue={q ?? ""} placeholder="es. FF1, LUCILLA_PARETE..." className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
             </div>
             <button className="btn-3d btn-3d-dark text-sm px-3 py-1.5">Cerca</button>
@@ -461,7 +461,7 @@ export default async function PreventivoPage({
             </div>
           )}
           {q && prodottiTrovati.length === 0 && (
-            <p className="text-sm text-neutral-400">Nessun prodotto trovato per &quot;{q}&quot; nel brand {preventivo.brand.nome}.</p>
+            <p className="text-sm text-neutral-600">Nessun prodotto trovato per &quot;{q}&quot; nel brand {preventivo.brand.nome}.</p>
           )}
         </div>
       </details>

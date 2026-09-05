@@ -23,16 +23,16 @@ export default function Sidebar() {
   return (
     <aside className="w-56 shrink-0 border-r border-neutral-200 bg-white flex flex-col py-4 print:hidden">
       <div className="px-4 pb-4 mb-2 border-b border-neutral-100">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <span
-            className="w-8 h-8 rounded-md flex items-center justify-center text-white text-sm font-bold"
-            style={{ background: info.primary }}
+            className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-base font-extrabold shadow-sm"
+            style={{ background: `linear-gradient(135deg, ${info.primary}, ${info.accent})` }}
           >
             PC
           </span>
           <div>
-            <span className="text-base font-semibold text-neutral-900 leading-none block">Gruppo P&amp;C</span>
-            <p className="text-[11px] text-neutral-400 leading-none mt-0.5">CRM — prototipo</p>
+            <span className="text-lg font-extrabold text-neutral-900 leading-none block">Gruppo P&amp;C</span>
+            <p className="text-[11px] font-medium text-neutral-600 leading-none mt-1">CRM Gestionale</p>
           </div>
         </div>
       </div>
@@ -44,11 +44,11 @@ export default function Sidebar() {
             <Link
               key={m.href}
               href={href}
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors"
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-sm border-l-4 transition-colors hover:bg-neutral-50"
               style={
                 active
-                  ? { background: info.primarySoft, color: info.primary, fontWeight: 500 }
-                  : { color: "#404040" }
+                  ? { background: info.primarySoft, color: info.primary, fontWeight: 700, borderLeftColor: info.primary }
+                  : { color: "#1f2937", fontWeight: 500, borderLeftColor: "transparent" }
               }
             >
               <span>{m.icon}</span>
@@ -57,8 +57,8 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      <div className="mt-auto px-4 pt-4 text-[11px] text-neutral-300">
-        Brand attivo: <span style={{ color: info.primary, fontWeight: 600 }}>{brand}</span>
+      <div className="mt-auto px-4 pt-4 text-[11px] font-medium text-neutral-600">
+        Brand attivo: <span style={{ color: info.primary, fontWeight: 700 }}>{brand}</span>
       </div>
     </aside>
   );

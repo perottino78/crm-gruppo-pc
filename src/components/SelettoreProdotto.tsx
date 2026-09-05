@@ -107,13 +107,13 @@ export default function SelettoreProdotto({
 
   return (
     <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-      <h2 className="text-sm font-medium text-neutral-700 mb-1">Aggiungi prodotto</h2>
-      <p className="text-xs text-neutral-400 mb-3">
+      <h2 className="text-base font-bold text-neutral-900 mb-1">Aggiungi prodotto</h2>
+      <p className="text-xs text-neutral-600 mb-3">
         Sfoglia Indoor / Outdoor per famiglia e modello, oppure cerca direttamente il nome se lo conosci già.
       </p>
 
       <div className="relative mb-3">
-        <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-300 text-sm">🔍</span>
+        <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-500 text-sm">🔍</span>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -125,7 +125,7 @@ export default function SelettoreProdotto({
       {risultatiRicerca ? (
         <div className="border border-neutral-100 rounded-lg divide-y divide-neutral-50 max-h-72 overflow-y-auto mb-3">
           {risultatiRicerca.length === 0 && (
-            <p className="px-3 py-3 text-sm text-neutral-400">Nessun modello corrisponde a &quot;{query}&quot;.</p>
+            <p className="px-3 py-3 text-sm text-neutral-600">Nessun modello corrisponde a &quot;{query}&quot;.</p>
           )}
           {risultatiRicerca.map(({ famiglia, gruppo, sottogruppo, nodo }) => (
             <button
@@ -135,7 +135,7 @@ export default function SelettoreProdotto({
               className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 ${scelto?.value === nodo.value ? "bg-neutral-50" : ""}`}
             >
               <span className="font-medium">{nodo.label}</span>
-              <span className="block text-[11px] text-neutral-400">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""}</span>
+              <span className="block text-[11px] text-neutral-600">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""}</span>
             </button>
           ))}
         </div>
@@ -152,10 +152,10 @@ export default function SelettoreProdotto({
                     setGruppoAperto(null);
                     setSottogruppoAperto(null);
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+                  className="w-full flex items-center justify-between px-3 py-2.5 text-base font-bold text-neutral-900 hover:bg-neutral-50"
                 >
                   <span>{f.nome === "INDOOR" ? "🏠 Indoor" : f.nome === "OUTDOOR" ? "🌤️ Outdoor" : f.nome}</span>
-                  <span className="text-neutral-300 text-xs">{apertaF ? "▲" : "▼"}</span>
+                  <span className="text-neutral-500 text-xs">{apertaF ? "▲" : "▼"}</span>
                 </button>
                 {apertaF && (
                   <div className="pl-3 pb-1">
@@ -174,8 +174,8 @@ export default function SelettoreProdotto({
                             }}
                             className="w-full flex items-center justify-between px-2 py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-50"
                           >
-                            <span>{g.nome} <span className="text-neutral-300 font-normal">({conteggioGruppo})</span></span>
-                            <span className="text-neutral-300">{apertoG ? "▲" : "▼"}</span>
+                            <span>{g.nome} <span className="text-neutral-500 font-normal">({conteggioGruppo})</span></span>
+                            <span className="text-neutral-500">{apertoG ? "▲" : "▼"}</span>
                           </button>
                           {apertoG && (
                             <div className="pl-3 pb-1">
@@ -188,10 +188,10 @@ export default function SelettoreProdotto({
                                       <button
                                         type="button"
                                         onClick={() => setSottogruppoAperto(apertoSg ? null : chiaveSg)}
-                                        className="w-full flex items-center justify-between px-2 py-2 text-xs font-medium text-neutral-500 hover:bg-neutral-50"
+                                        className="w-full flex items-center justify-between px-2 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-50"
                                       >
-                                        <span>{sg.nome} <span className="text-neutral-300 font-normal">({sg.tipologie.length})</span></span>
-                                        <span className="text-neutral-300">{apertoSg ? "▲" : "▼"}</span>
+                                        <span>{sg.nome} <span className="text-neutral-500 font-normal">({sg.tipologie.length})</span></span>
+                                        <span className="text-neutral-500">{apertoSg ? "▲" : "▼"}</span>
                                       </button>
                                       {apertoSg && (
                                         <div className="pl-3 pb-1 flex flex-col">
@@ -200,7 +200,7 @@ export default function SelettoreProdotto({
                                               key={t.value}
                                               type="button"
                                               onClick={() => scegli(t)}
-                                              className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-500"}`}
+                                              className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
                                             >
                                               {t.label}
                                             </button>
@@ -217,7 +217,7 @@ export default function SelettoreProdotto({
                                       key={t.value}
                                       type="button"
                                       onClick={() => scegli(t)}
-                                      className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-500"}`}
+                                      className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
                                     >
                                       {t.label}
                                     </button>
@@ -241,7 +241,7 @@ export default function SelettoreProdotto({
         <div className="border border-neutral-200 rounded-lg p-3 bg-neutral-50">
           <div className="flex items-center justify-between mb-2">
             <p className="text-sm font-medium">{scelto.label}</p>
-            <button type="button" onClick={azzeraScelta} className="text-xs text-neutral-400 hover:text-neutral-700">✕ cambia modello</button>
+            <button type="button" onClick={azzeraScelta} className="text-xs text-neutral-600 hover:text-neutral-700">✕ cambia modello</button>
           </div>
 
           {scelto.haMisura ? (
@@ -259,7 +259,7 @@ export default function SelettoreProdotto({
                 <input type="hidden" name="brandId" value={brandId} />
                 <input type="hidden" name="tipologia" value={scelto.value} />
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-500">Larghezza ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">Larghezza ({unitaMisura(scelto.value)})</label>
                   <input
                     name="larghezza"
                     type="number"
@@ -276,7 +276,7 @@ export default function SelettoreProdotto({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-500">Altezza / sporgenza ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">Altezza / sporgenza ({unitaMisura(scelto.value)})</label>
                   <input
                     name="altezza"
                     type="number"
@@ -293,7 +293,7 @@ export default function SelettoreProdotto({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-500">Quantità</label>
+                  <label className="text-xs text-neutral-700">Quantità</label>
                   <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-20" />
                 </div>
                 <button className="btn-3d text-sm px-4 py-2" style={{ background: brandColor, color: "#fff", borderColor: brandColor }}>
@@ -305,14 +305,14 @@ export default function SelettoreProdotto({
                     <span>{erroreMisura}</span>
                   </div>
                 )}
-                <p className="text-[11px] text-neutral-400 w-full">
+                <p className="text-[11px] text-neutral-600 w-full">
                   Il prezzo viene calcolato dalla fascia di listino più vicina alla misura inserita.
                 </p>
               </form>
             </>
           ) : scelto.varianti && scelto.varianti.length > 0 ? (
             <div className="flex flex-col gap-1.5">
-              <p className="text-[11px] text-neutral-400 mb-1">Prodotto a prezzo fisso (senza misura) — scegli la variante:</p>
+              <p className="text-[11px] text-neutral-600 mb-1">Prodotto a prezzo fisso (senza misura) — scegli la variante:</p>
               {scelto.varianti.map((v) => (
                 <form key={v.id} action={azionePerProdotto} className="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded px-2 py-1.5">
                   <input type="hidden" name="preventivoId" value={preventivoId} />
@@ -324,7 +324,7 @@ export default function SelettoreProdotto({
               ))}
             </div>
           ) : (
-            <p className="text-xs text-neutral-400">Nessuna variante disponibile a listino per questo modello.</p>
+            <p className="text-xs text-neutral-600">Nessuna variante disponibile a listino per questo modello.</p>
           )}
         </div>
       )}

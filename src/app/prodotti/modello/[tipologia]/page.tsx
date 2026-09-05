@@ -52,11 +52,11 @@ export default async function ModelloProdottoPage({
 
   return (
     <div className="max-w-2xl">
-      <Link href="/prodotti" className="text-xs text-neutral-400 hover:underline">
+      <Link href="/prodotti" className="text-xs text-neutral-600 hover:underline">
         ← Prodotti &amp; listini
       </Link>
-      <h1 className="text-xl font-medium mt-2 mb-1">{tipologia.replace(/_/g, " ")}</h1>
-      <p className="text-sm text-neutral-400 mb-6">
+      <h1 className="text-2xl font-bold text-neutral-900 mt-2 mb-1">{tipologia.replace(/_/g, " ")}</h1>
+      <p className="text-sm text-neutral-600 mb-6">
         {primoProdotto.brand.nome} · {varianti} varianti dimensionali collegate a questa scheda
       </p>
 
@@ -72,19 +72,19 @@ export default async function ModelloProdottoPage({
         <input type="hidden" name="brandId" value={primoProdotto.brandId} />
         <input type="hidden" name="tipologia" value={tipologia} />
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">URL immagine</label>
+          <label className="text-xs text-neutral-700">URL immagine</label>
           <input
             name="immagineUrl"
             defaultValue={modello?.immagineUrl ?? ""}
             placeholder="https://..."
             className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
           />
-          <p className="text-[11px] text-neutral-300">
+          <p className="text-[11px] text-neutral-500">
             Incolla il link di un&apos;immagine già online (es. da Google Drive con condivisione pubblica, o da un tuo sito). Il caricamento diretto di file non è ancora supportato.
           </p>
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-500">Descrizione tecnica</label>
+          <label className="text-xs text-neutral-700">Descrizione tecnica</label>
           <textarea
             name="descrizioneTecnica"
             defaultValue={modello?.descrizioneTecnica ?? ""}
@@ -95,7 +95,7 @@ export default async function ModelloProdottoPage({
         </div>
         <div className="flex gap-2">
           <div className="flex flex-col gap-1 flex-1">
-            <label className="text-xs text-neutral-500">Famiglia</label>
+            <label className="text-xs text-neutral-700">Famiglia</label>
             <select name="famiglia" defaultValue={modello?.famiglia ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
               <option value="">—</option>
               <option value="OUTDOOR">Outdoor</option>
@@ -103,7 +103,7 @@ export default async function ModelloProdottoPage({
             </select>
           </div>
           <div className="flex flex-col gap-1 flex-1">
-            <label className="text-xs text-neutral-500">Gruppo</label>
+            <label className="text-xs text-neutral-700">Gruppo</label>
             <input
               name="gruppo"
               defaultValue={modello?.gruppo ?? ""}
@@ -117,10 +117,10 @@ export default async function ModelloProdottoPage({
 
       {galleriaPannelli.length > 0 && (
         <div className="mt-6">
-          <h2 className="text-sm font-medium text-neutral-700 mb-1">
+          <h2 className="text-base font-bold text-neutral-900 mb-1">
             Pannelli / disegni disponibili ({galleriaPannelli.length} categorie a listino)
           </h2>
-          <p className="text-xs text-neutral-400 mb-3">
+          <p className="text-xs text-neutral-600 mb-3">
             Anteprima delle pagine catalogo fornitore corrispondenti — utile per mostrare le opzioni al cliente prima di scegliere l&apos;optional in offerta.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -129,7 +129,7 @@ export default async function ModelloProdottoPage({
                 <img src={g.immagineUrl} alt={g.categoria} className="w-full h-40 object-cover object-top" />
                 <div className="px-2 py-1.5">
                   <p className="text-[11px] font-medium text-neutral-700 leading-tight">{g.categoria}</p>
-                  {g.count > 1 && <p className="text-[10px] text-neutral-400">{g.count} varianti a listino</p>}
+                  {g.count > 1 && <p className="text-[10px] text-neutral-600">{g.count} varianti a listino</p>}
                 </div>
               </div>
             ))}

@@ -119,7 +119,7 @@ export default async function ProdottiPage({
   return (
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-medium">Prodotti &amp; listini</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">Prodotti &amp; listini</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
@@ -132,15 +132,15 @@ export default async function ProdottiPage({
       </div>
 
       <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-        <h2 className="text-sm font-medium text-neutral-700 mb-1">Calcola prezzo per misura</h2>
-        <p className="text-xs text-neutral-400 mb-3">Seleziona il modello, digita la misura reale: il prezzo esce dalla fascia di listino nascosta.</p>
+        <h2 className="text-base font-bold text-neutral-900 mb-1">Calcola prezzo per misura</h2>
+        <p className="text-xs text-neutral-600 mb-3">Seleziona il modello, digita la misura reale: il prezzo esce dalla fascia di listino nascosta.</p>
         <form className="flex flex-wrap items-end gap-2" action="/prodotti" method="get">
           {brand && <input type="hidden" name="brand" value={brand} />}
           {q && <input type="hidden" name="q" value={q} />}
           {famiglia && <input type="hidden" name="famiglia" value={famiglia} />}
           {gruppo && <input type="hidden" name="gruppo" value={gruppo} />}
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-neutral-500">Modello</label>
+            <label className="text-xs text-neutral-700">Modello</label>
             <select name="calcTipologia" defaultValue={calcTipologia ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[220px]">
               <option value="">— seleziona —</option>
               {tutteLeTipologie.map((t) => (
@@ -149,11 +149,11 @@ export default async function ProdottiPage({
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-neutral-500">Larghezza</label>
+            <label className="text-xs text-neutral-700">Larghezza</label>
             <input name="calcLarghezza" type="number" step="0.1" defaultValue={calcLarghezza ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-neutral-500">Altezza / sporgenza</label>
+            <label className="text-xs text-neutral-700">Altezza / sporgenza</label>
             <input name="calcAltezza" type="number" step="0.1" defaultValue={calcAltezza ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28" />
           </div>
           <button className="btn-3d btn-3d-orange text-sm px-4 py-2">Vedi prezzo</button>
@@ -174,7 +174,7 @@ export default async function ProdottiPage({
         {famiglia && <input type="hidden" name="famiglia" value={famiglia} />}
         {gruppo && <input type="hidden" name="gruppo" value={gruppo} />}
         <div className="flex flex-col gap-1 flex-1 max-w-sm">
-          <label className="text-xs text-neutral-500">🔍 Cerca modello per nome (scorciatoia, salta la navigazione)</label>
+          <label className="text-xs text-neutral-700">🔍 Cerca modello per nome (scorciatoia, salta la navigazione)</label>
           <input
             name="q"
             defaultValue={q ?? ""}
@@ -184,7 +184,7 @@ export default async function ProdottiPage({
         </div>
         <button className="btn-3d btn-3d-dark text-sm px-4 py-2">Cerca</button>
         {q && (
-          <Link href={qs({ q: undefined })} className="text-xs text-neutral-400 underline mb-2">
+          <Link href={qs({ q: undefined })} className="text-xs text-neutral-600 underline mb-2">
             azzera ricerca
           </Link>
         )}
@@ -192,7 +192,7 @@ export default async function ProdottiPage({
 
       {mostraFamiglie && (
         <div>
-          <p className="text-xs text-neutral-400 mb-2">Sfoglia per sezione:</p>
+          <p className="text-xs text-neutral-600 mb-2">Sfoglia per sezione:</p>
           <div className="grid grid-cols-2 gap-3 mb-6">
             {famiglieDisponibili.map((f) => (
               <Link
@@ -202,7 +202,7 @@ export default async function ProdottiPage({
               >
                 <span className="text-2xl">{iconaFamiglia(f)}</span>
                 <p className="text-sm font-medium mt-1">{f === "INDOOR" ? "Indoor" : f === "OUTDOOR" ? "Outdoor" : f}</p>
-                <p className="text-xs text-neutral-400">{conteggioPerFamiglia.get(f) ?? 0} modelli</p>
+                <p className="text-xs text-neutral-600">{conteggioPerFamiglia.get(f) ?? 0} modelli</p>
               </Link>
             ))}
           </div>
@@ -211,7 +211,7 @@ export default async function ProdottiPage({
 
       {mostraGruppi && (
         <div>
-          <Link href={qs({ famiglia: undefined, gruppo: undefined })} className="text-xs text-neutral-400 hover:underline mb-2 inline-block">
+          <Link href={qs({ famiglia: undefined, gruppo: undefined })} className="text-xs text-neutral-600 hover:underline mb-2 inline-block">
             ← {iconaFamiglia(famiglia!)} {famiglia === "INDOOR" ? "Indoor" : famiglia === "OUTDOOR" ? "Outdoor" : famiglia}
           </Link>
           <div className="grid grid-cols-2 gap-3 mb-6">
@@ -222,11 +222,11 @@ export default async function ProdottiPage({
                 className="bg-white rounded-lg border border-neutral-200 p-4 hover:border-neutral-400 transition-colors"
               >
                 <p className="text-sm font-medium">{g}</p>
-                <p className="text-xs text-neutral-400">{conteggioPerGruppo.get(`${famiglia}|${g}`) ?? 0} modelli</p>
+                <p className="text-xs text-neutral-600">{conteggioPerGruppo.get(`${famiglia}|${g}`) ?? 0} modelli</p>
               </Link>
             ))}
             {gruppiDisponibili.length === 0 && (
-              <p className="text-sm text-neutral-400 col-span-2">Nessun gruppo trovato per questa famiglia.</p>
+              <p className="text-sm text-neutral-600 col-span-2">Nessun gruppo trovato per questa famiglia.</p>
             )}
           </div>
         </div>
@@ -235,11 +235,11 @@ export default async function ProdottiPage({
       {mostraTabella && (
       <>
       {cercaLibera ? (
-        <p className="text-xs text-neutral-400 mb-2">
+        <p className="text-xs text-neutral-600 mb-2">
           Risultati per &quot;{q}&quot; in tutte le sezioni ({modelliRiga.length})
         </p>
       ) : (
-        <div className="flex items-center gap-1 text-xs text-neutral-400 mb-2">
+        <div className="flex items-center gap-1 text-xs text-neutral-600 mb-2">
           <Link href={qs({ famiglia: undefined, gruppo: undefined })} className="hover:underline">
             {iconaFamiglia(famiglia!)} {famiglia === "INDOOR" ? "Indoor" : famiglia === "OUTDOOR" ? "Outdoor" : famiglia}
           </Link>
@@ -253,7 +253,7 @@ export default async function ProdottiPage({
       <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-xs text-neutral-400 border-b border-neutral-100">
+            <tr className="text-left text-xs font-bold uppercase tracking-wide text-neutral-600 bg-neutral-50 border-b-2 border-neutral-200">
               <th className="px-4 py-2 font-medium"></th>
               <th className="px-4 py-2 font-medium">Modello</th>
               <th className="px-4 py-2 font-medium">Famiglia / gruppo</th>
@@ -276,12 +276,12 @@ export default async function ProdottiPage({
                   </td>
                   <td className="px-4 py-2 font-medium">
                     {r.tipologia.replace(/_/g, " ")}
-                    <span className="block text-xs text-neutral-400 font-normal">{r.varianti} misure a listino</span>
+                    <span className="block text-xs text-neutral-600 font-normal">{r.varianti} misure a listino</span>
                   </td>
-                  <td className="px-4 py-2 text-neutral-500 text-xs">
+                  <td className="px-4 py-2 text-neutral-700 text-xs">
                     {r.modello?.famiglia ? `${r.modello.famiglia} · ${r.modello.gruppo ?? ""}` : "—"}
                   </td>
-                  <td className="px-4 py-2 text-neutral-500 text-xs">
+                  <td className="px-4 py-2 text-neutral-700 text-xs">
                     {haMisura(r.larghezzaMax, r.altezzaMax) ? (
                       <span className="font-bold text-neutral-700">{r.larghezzaMin}–{r.larghezzaMax} × {r.altezzaMin}–{r.altezzaMax} {unit}</span>
                     ) : (
@@ -303,7 +303,7 @@ export default async function ProdottiPage({
           </tbody>
         </table>
         {modelliRiga.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-400">Nessun modello corrisponde ai filtri.</p>
+          <p className="px-4 py-6 text-sm text-neutral-600">Nessun modello corrisponde ai filtri.</p>
         )}
       </div>
       </>
