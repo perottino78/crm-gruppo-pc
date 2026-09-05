@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { aggiornaPermessiBrand, impostaObiettivo } from "@/app/actions";
+import { aggiornaPermessiBrand, impostaObiettivo, completaAttivita } from "@/app/actions";
 
 const STATI_PREVENTIVO_APERTI = ["APERTO"];
 const STATI_APPUNTAMENTO_APERTI = ["PROGRAMMATO", "CONFERMATO"];
@@ -33,6 +33,7 @@ export default async function SchedaCommercialePage({
       obiettivi: { orderBy: { periodo: "desc" } },
       preventivi: { include: { cliente: true, brand: true }, orderBy: { createdAt: "desc" } },
       appuntamenti: { include: { cliente: true }, orderBy: { dataOra: "desc" } },
+      attivita: { include: { cliente: true }, where: { tipo: "TASK" }, orderBy: [{ completata: "asc" }, { scadenza: "asc" }] },
     },
   });
   if (!utente) notFound();
@@ -59,6 +60,9 @@ export default async function SchedaCommercialePage({
   const percentualeObiettivo = obiettivoCorrente && obiettivoCorrente.importoTarget > 0
     ? Math.min(999, Math.round((realizzatoMese / obiettivoCorrente.importoTarget) * 100))
     : null;
+
+  const taskAperti = utente.attivita.filter((a) => !a.completata);
+  const taskCompletati = utente.attivita.filter((a) => a.completata);
 
   return (
     <div className="max-w-5xl">
@@ -194,6 +198,48 @@ export default async function SchedaCommercialePage({
             ))}
             {utente.appuntamenti.length === 0 && <p className="text-xs text-neutral-500 italic py-2">Nessuno</p>}
           </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg border border-neutral-200 p-4 mt-6">
+        <h2 className="text-base font-bold text-neutral-900 mb-3">
+          Task assegnati ({taskAperti.length} da fare{taskCompletati.length > 0 ? ` · ${taskCompletati.length} completati` : ""})
+        </h2>
+        <div className="flex flex-col divide-y divide-neutral-50 max-h-96 overflow-y-auto">
+          {taskAperti.map((t) => (
+            <div key={t.id} className="flex items-center justify-between text-sm py-2 gap-2">
+              <div>
+                <Link href={`/clienti/${t.clienteId}`} className="font-medium hover:underline">
+                  {t.oggetto}
+                </Link>
+                <p className="text-xs text-neutral-600">
+                  {t.cliente.nome}
+                  {t.scadenza && <span className="text-amber-700"> · scadenza {t.scadenza.toLocaleDateString("it-IT")}</span>}
+                </p>
+              </div>
+              <form action={completaAttivita}>
+                <input type="hidden" name="id" value={t.id} />
+                <input type="hidden" name="clienteId" value={t.clienteId} />
+                <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1 shrink-0">✓ segna come fatto</button>
+              </form>
+            </div>
+          ))}
+          {taskAperti.length === 0 && <p className="text-xs text-neutral-500 italic py-2">Nessun task aperto per questo utente.</p>}
+          {taskCompletati.length > 0 && (
+            <details className="pt-2">
+              <summary className="text-xs text-neutral-600 cursor-pointer">Mostra {taskCompletati.length} task completati</summary>
+              <div className="flex flex-col divide-y divide-neutral-50 mt-1">
+                {taskCompletati.map((t) => (
+                  <div key={t.id} className="text-sm py-2">
+                    <Link href={`/clienti/${t.clienteId}`} className="hover:underline">
+                      {t.oggetto}
+                    </Link>
+                    <p className="text-xs text-neutral-500">{t.cliente.nome} · completato</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
         </div>
       </div>
     </div>
