@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { creaAttivita, completaAttivita, creaPreventivo, aggiornaCliente } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+import { scopeClienteWhere } from "@/lib/scope";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -22,9 +24,11 @@ export default async function SchedaClientePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const utenteCorrente = await getCurrentUser();
+  if (!utenteCorrente) notFound();
 
-  const cliente = await prisma.cliente.findUnique({
-    where: { id },
+  const cliente = await prisma.cliente.findFirst({
+    where: { id, ...scopeClienteWhere(utenteCorrente) },
     include: {
       brand: true,
       leadOrigine: true,

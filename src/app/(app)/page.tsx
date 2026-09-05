@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
+import { getCurrentUser } from "@/lib/auth";
+import { scopePreventivoWhere, scopeLeadWhere } from "@/lib/scope";
 
 export default async function DashboardPage({
   searchParams,
@@ -10,15 +12,18 @@ export default async function DashboardPage({
 }) {
   const { brand } = await searchParams;
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
+  const utente = await getCurrentUser();
+  const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
+  const leadScope = utente ? scopeLeadWhere(utente) : {};
 
   const [preventiviAperti, valorePipeline, leadDaLavorare] = await Promise.all([
-    prisma.preventivo.count({ where: { stato: "APERTO", ...brandFiltro } }),
-    prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO", ...brandFiltro } }),
-    prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] }, ...brandFiltro } }),
+    prisma.preventivo.count({ where: { stato: "APERTO", ...brandFiltro, ...preventivoScope } }),
+    prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO", ...brandFiltro, ...preventivoScope } }),
+    prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] }, ...brandFiltro, ...leadScope } }),
   ]);
 
   const preventivi = await prisma.preventivo.findMany({
-    where: brandFiltro,
+    where: { ...brandFiltro, ...preventivoScope },
     take: 5,
     orderBy: { createdAt: "desc" },
     include: { cliente: true },

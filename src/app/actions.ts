@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
+import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -15,6 +16,7 @@ export async function creaLead(formData: FormData) {
   const nome = str(formData, "nome");
   const brandId = str(formData, "brandId");
   if (!nome || !brandId) return;
+  const utente = await getCurrentUser();
 
   await prisma.lead.create({
     data: {
@@ -23,6 +25,7 @@ export async function creaLead(formData: FormData) {
       email: str(formData, "email"),
       fonte: str(formData, "fonte") ?? "facebook",
       brandId,
+      telefonistaId: utente?.id,
     },
   });
   revalidatePath("/clienti");
@@ -60,6 +63,7 @@ export async function creaCliente(formData: FormData) {
   const nome = str(formData, "nome");
   const brandId = str(formData, "brandId");
   if (!nome || !brandId) return;
+  const utente = await getCurrentUser();
   await prisma.cliente.create({
     data: {
       nome,
@@ -71,6 +75,7 @@ export async function creaCliente(formData: FormData) {
       provincia: str(formData, "provincia"),
       paese: str(formData, "paese") ?? "IT",
       brandId,
+      responsabileId: utente?.id,
     },
   });
   revalidatePath("/clienti");
@@ -345,7 +350,106 @@ export async function creaUtente(formData: FormData) {
   const email = str(formData, "email");
   const ruolo = str(formData, "ruolo");
   if (!nome || !email || !ruolo) return;
-  await prisma.utente.create({ data: { nome, email, ruolo } });
+  const username = str(formData, "username") ?? email;
+  const passwordIniziale = str(formData, "password");
+  const passwordHash = passwordIniziale ? await hashPassword(passwordIniziale) : null;
+
+  await prisma.utente.create({
+    data: {
+      nome,
+      email,
+      ruolo,
+      username,
+      passwordHash,
+      mustChangePassword: true,
+    },
+  });
+  revalidatePath("/impostazioni");
+}
+
+// --- Autenticazione ---
+
+export async function login(formData: FormData) {
+  const username = str(formData, "username");
+  const password = str(formData, "password");
+  const next = str(formData, "next");
+  if (!username || !password) {
+    redirect(`/login?errore=1${next ? `&next=${encodeURIComponent(next)}` : ""}`);
+  }
+
+  const utente = await prisma.utente.findUnique({ where: { username: username! } });
+  if (!utente || !utente.passwordHash || !(await verificaPassword(password!, utente.passwordHash))) {
+    redirect(`/login?errore=1${next ? `&next=${encodeURIComponent(next)}` : ""}`);
+  }
+
+  await creaSessione(utente!.id);
+  redirect(next && next.startsWith("/") ? next : "/");
+}
+
+export async function logout() {
+  await distruggiSessione();
+  redirect("/login");
+}
+
+export async function cambiaPassword(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+
+  const passwordAttuale = str(formData, "passwordAttuale");
+  const nuovaPassword = str(formData, "nuovaPassword");
+  const conferma = str(formData, "conferma");
+
+  if (!nuovaPassword || nuovaPassword.length < 6) {
+    redirect("/profilo?errore=" + encodeURIComponent("La nuova password deve avere almeno 6 caratteri"));
+  }
+  if (nuovaPassword !== conferma) {
+    redirect("/profilo?errore=" + encodeURIComponent("Le due password non coincidono"));
+  }
+  // Se l'utente ha già una password impostata (non è il primo accesso forzato),
+  // richiediamo comunque la password attuale per sicurezza.
+  if (utente!.passwordHash && !utente!.mustChangePassword) {
+    if (!passwordAttuale || !(await verificaPassword(passwordAttuale, utente!.passwordHash))) {
+      redirect("/profilo?errore=" + encodeURIComponent("Password attuale non corretta"));
+    }
+  }
+
+  const passwordHash = await hashPassword(nuovaPassword!);
+  await prisma.utente.update({
+    where: { id: utente!.id },
+    data: { passwordHash, mustChangePassword: false },
+  });
+  redirect("/profilo?ok=1");
+}
+
+export async function aggiornaUsername(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const username = str(formData, "username");
+  if (!username) return;
+  await prisma.utente.update({ where: { id: utente!.id }, data: { username } });
+  revalidatePath("/profilo");
+}
+
+// Reset amministrativo: l'AMMINISTRATORE imposta una nuova password per un altro utente,
+// senza bisogno di conoscerne quella attuale (recupero credenziali smarrite).
+export async function adminResetPassword(formData: FormData) {
+  const admin = await getCurrentUser();
+  if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
+
+  const utenteId = str(formData, "utenteId");
+  const nuovaPassword = str(formData, "nuovaPassword");
+  const nuovoUsername = str(formData, "nuovoUsername");
+  if (!utenteId) return;
+
+  const data: { passwordHash?: string; mustChangePassword?: boolean; username?: string } = {};
+  if (nuovaPassword && nuovaPassword.length >= 6) {
+    data.passwordHash = await hashPassword(nuovaPassword);
+    data.mustChangePassword = true;
+  }
+  if (nuovoUsername) data.username = nuovoUsername;
+  if (Object.keys(data).length === 0) return;
+
+  await prisma.utente.update({ where: { id: utenteId }, data });
   revalidatePath("/impostazioni");
 }
 

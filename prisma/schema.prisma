@@ -32,12 +32,21 @@ model Utente {
   nome          String
   email         String   @unique
   ruolo         String
+  // Credenziali di accesso al CRM. Username nullable per compatibilità con gli utenti creati
+  // prima dell'introduzione del login (vanno attivati impostando username+password da Impostazioni).
+  // Senza passwordHash l'utente non può accedere.
+  username      String?  @unique
+  passwordHash  String?
+  // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
+  // amministratore con password temporanea).
+  mustChangePassword Boolean @default(true)
   createdAt     DateTime @default(now())
   leadAssegnati Lead[]
   appuntamenti  Appuntamento[]
   preventivi    Preventivo[]
   attivita      Attivita[]
   obiettivi     Obiettivo[]
+  clientiResponsabile Cliente[] @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
   brandAutorizzati Brand[] @relation("PermessoListino")
 }
@@ -72,6 +81,10 @@ model Cliente {
   brandId    String
   leadOrigine Lead?    @relation(fields: [leadOrigineId], references: [id])
   leadOrigineId String? @unique
+  // Utente "proprietario" del cliente ai fini della visibilità dati per ruolo (chi lo ha creato,
+  // riassegnabile dall'amministratore). Nullable per compatibilità con i clienti pre-esistenti.
+  responsabile   Utente? @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
+  responsabileId String?
   appuntamenti Appuntamento[]
   preventivi Preventivo[]
   attivita   Attivita[]

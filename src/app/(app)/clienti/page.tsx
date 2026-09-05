@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { creaLead, creaCliente, aggiornaFaseLead, convertiLeadInCliente } from "@/app/actions";
 import Link from "next/link";
+import { getCurrentUser } from "@/lib/auth";
+import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
 
 const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
@@ -14,11 +16,14 @@ export default async function ClientiPage({
 }) {
   const { brand } = await searchParams;
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
+  const utente = await getCurrentUser();
+  const clienteScope = utente ? scopeClienteWhere(utente) : {};
+  const leadScope = utente ? scopeLeadWhere(utente) : {};
 
   const [clienti, lead, brands] = await Promise.all([
-    prisma.cliente.findMany({ where: brandFiltro, orderBy: { createdAt: "desc" } }),
+    prisma.cliente.findMany({ where: { ...brandFiltro, ...clienteScope }, orderBy: { createdAt: "desc" } }),
     prisma.lead.findMany({
-      where: brandFiltro,
+      where: { ...brandFiltro, ...leadScope },
       orderBy: { createdAt: "desc" },
       include: { telefonista: true, brand: true, clienteGenerato: true },
     }),

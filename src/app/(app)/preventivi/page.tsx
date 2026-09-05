@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { creaPreventivo, aggiornaStatoPreventivo } from "@/app/actions";
 import Link from "next/link";
+import { getCurrentUser } from "@/lib/auth";
+import { scopePreventivoWhere, scopeClienteWhere } from "@/lib/scope";
 
 const COLONNE = [
   { stato: "APERTO", label: "Aperti" },
@@ -19,14 +21,17 @@ export default async function PreventiviPage({
 }) {
   const { brand } = await searchParams;
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
+  const utente = await getCurrentUser();
+  const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
+  const clienteScope = utente ? scopeClienteWhere(utente) : {};
 
   const [preventivi, clienti, brands, commerciali] = await Promise.all([
     prisma.preventivo.findMany({
-      where: brandFiltro,
+      where: { ...brandFiltro, ...preventivoScope },
       include: { cliente: true, commerciale: true },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.cliente.findMany({ where: brandFiltro, orderBy: { nome: "asc" } }),
+    prisma.cliente.findMany({ where: { ...brandFiltro, ...clienteScope }, orderBy: { nome: "asc" } }),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
     prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } }),
   ]);

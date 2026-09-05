@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { aggiornaPermessiBrand, impostaObiettivo, completaAttivita } from "@/app/actions";
 
 const STATI_PREVENTIVO_APERTI = ["APERTO"];
@@ -25,6 +26,10 @@ export default async function SchedaCommercialePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const utenteCorrente = await getCurrentUser();
+  if (!utenteCorrente) notFound();
+  const admin = isAmministratore(utenteCorrente);
+  if (!admin && id !== utenteCorrente.id) notFound();
 
   const utente = await prisma.utente.findUnique({
     where: { id },
@@ -117,29 +122,31 @@ export default async function SchedaCommercialePage({
         ) : (
           <p className="text-xs text-neutral-600 mb-3">Nessun obiettivo impostato per questo mese.</p>
         )}
-        <form action={impostaObiettivo} className="flex flex-wrap items-end gap-2">
-          <input type="hidden" name="utenteId" value={utente.id} />
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-neutral-700">Periodo</label>
-            <input name="periodo" type="month" defaultValue={periodo} className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-neutral-700">Obiettivo (€)</label>
-            <input
-              name="importoTarget"
-              type="number"
-              step="0.01"
-              min="0"
-              defaultValue={obiettivoCorrente?.importoTarget ?? ""}
-              className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-32"
-            />
-          </div>
-          <div className="flex flex-col gap-1 flex-1 min-w-[160px]">
-            <label className="text-xs text-neutral-700">Note</label>
-            <input name="note" defaultValue={obiettivoCorrente?.note ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
-          </div>
-          <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva obiettivo</button>
-        </form>
+        {admin && (
+          <form action={impostaObiettivo} className="flex flex-wrap items-end gap-2">
+            <input type="hidden" name="utenteId" value={utente.id} />
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-neutral-700">Periodo</label>
+              <input name="periodo" type="month" defaultValue={periodo} className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-neutral-700">Obiettivo (€)</label>
+              <input
+                name="importoTarget"
+                type="number"
+                step="0.01"
+                min="0"
+                defaultValue={obiettivoCorrente?.importoTarget ?? ""}
+                className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-32"
+              />
+            </div>
+            <div className="flex flex-col gap-1 flex-1 min-w-[160px]">
+              <label className="text-xs text-neutral-700">Note</label>
+              <input name="note" defaultValue={obiettivoCorrente?.note ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" />
+            </div>
+            <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva obiettivo</button>
+          </form>
+        )}
         {utente.obiettivi.length > 1 && (
           <div className="mt-3 pt-3 border-t border-neutral-100 flex flex-wrap gap-3 text-xs text-neutral-600">
             {utente.obiettivi.filter((o) => o.periodo !== periodo).slice(0, 6).map((o) => (
@@ -149,20 +156,22 @@ export default async function SchedaCommercialePage({
         )}
       </div>
 
-      <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-        <h2 className="text-base font-bold text-neutral-900 mb-1">Permessi listino</h2>
-        <p className="text-xs text-neutral-600 mb-3">Aziende/famiglie per cui questo utente è autorizzato a operare (impostati dall&apos;amministratore). Nessuna spunta = accesso a tutti i listini.</p>
-        <form action={aggiornaPermessiBrand} className="flex flex-wrap items-center gap-4">
-          <input type="hidden" name="utenteId" value={utente.id} />
-          {brands.map((b) => (
-            <label key={b.id} className="text-sm flex items-center gap-1.5">
-              <input type="checkbox" name="brandIds" value={b.id} defaultChecked={brandAutorizzatiIds.has(b.id)} />
-              {b.nome}
-            </label>
-          ))}
-          <button className="btn-3d btn-3d-outline text-xs px-3 py-1.5">salva permessi</button>
-        </form>
-      </div>
+      {admin && (
+        <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+          <h2 className="text-base font-bold text-neutral-900 mb-1">Permessi listino</h2>
+          <p className="text-xs text-neutral-600 mb-3">Aziende/famiglie per cui questo utente è autorizzato a operare (impostati dall&apos;amministratore). Nessuna spunta = accesso a tutti i listini.</p>
+          <form action={aggiornaPermessiBrand} className="flex flex-wrap items-center gap-4">
+            <input type="hidden" name="utenteId" value={utente.id} />
+            {brands.map((b) => (
+              <label key={b.id} className="text-sm flex items-center gap-1.5">
+                <input type="checkbox" name="brandIds" value={b.id} defaultChecked={brandAutorizzatiIds.has(b.id)} />
+                {b.nome}
+              </label>
+            ))}
+            <button className="btn-3d btn-3d-outline text-xs px-3 py-1.5">salva permessi</button>
+          </form>
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-6">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">

@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura } from "@/lib/prodotti";
 import PrintButton from "@/components/PrintButton";
@@ -33,9 +35,11 @@ export default async function StampaPreventivoPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const utenteCorrente = await getCurrentUser();
+  if (!utenteCorrente) notFound();
 
-  const preventivo = await prisma.preventivo.findUnique({
-    where: { id },
+  const preventivo = await prisma.preventivo.findFirst({
+    where: { id, ...scopePreventivoWhere(utenteCorrente) },
     include: {
       cliente: true,
       brand: true,

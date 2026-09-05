@@ -14,7 +14,13 @@ const moduli = [
   { href: "/impostazioni", label: "Impostazioni", icon: "⚙️" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+  utente,
+  logoutAction,
+}: {
+  utente?: { nome: string; ruolo: string };
+  logoutAction?: () => void;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const brand = searchParams.get("brand") ?? "Tutti";
@@ -60,6 +66,23 @@ export default function Sidebar() {
       <div className="mt-auto px-4 pt-4 text-[11px] font-medium text-neutral-600">
         Brand attivo: <span style={{ color: info.primary, fontWeight: 700 }}>{brand}</span>
       </div>
+      {utente && (
+        <div className="px-4 pt-3 mt-3 border-t border-neutral-100">
+          <p className="text-[11px] font-semibold text-neutral-900 leading-tight">{utente.nome}</p>
+          <p className="text-[10px] text-neutral-500 leading-tight mb-2">{utente.ruolo}</p>
+          <div className="flex items-center gap-2">
+            <Link href="/profilo" className="text-[11px] font-medium text-neutral-600 hover:underline">
+              Profilo
+            </Link>
+            <span className="text-neutral-300">·</span>
+            <form action={logoutAction}>
+              <button type="submit" className="text-[11px] font-medium text-red-600 hover:underline">
+                Esci
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </aside>
   );
 }

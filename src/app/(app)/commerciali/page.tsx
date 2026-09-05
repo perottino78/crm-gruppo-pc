@@ -2,8 +2,14 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getCurrentUser, isAmministratore } from "@/lib/auth";
 
 export default async function CommercialiPage() {
+  const utenteCorrente = await getCurrentUser();
+  if (!utenteCorrente) redirect("/login");
+  if (!isAmministratore(utenteCorrente)) redirect(`/commerciali/${utenteCorrente.id}`);
+
   const utenti = await prisma.utente.findMany({
     include: {
       brandAutorizzati: true,

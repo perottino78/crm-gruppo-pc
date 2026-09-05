@@ -3,6 +3,8 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia } from "@/lib/prodotti";
 import {
@@ -29,9 +31,11 @@ export default async function PreventivoPage({
 }) {
   const { id } = await params;
   const { q, errore } = await searchParams;
+  const utenteCorrente = await getCurrentUser();
+  if (!utenteCorrente) notFound();
 
-  const preventivo = await prisma.preventivo.findUnique({
-    where: { id },
+  const preventivo = await prisma.preventivo.findFirst({
+    where: { id, ...scopePreventivoWhere(utenteCorrente) },
     include: {
       cliente: true,
       brand: true,
