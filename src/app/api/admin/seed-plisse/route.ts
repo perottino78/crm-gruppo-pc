@@ -159,6 +159,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove dal catalogo gli optional che non compaiono più nel seed-data (es. "Colore
+    // profilo", tolto su richiesta perché la scelta è già implicita nella finitura scelta
+    // a monte). Elimina prima gli eventuali RigaOptional già selezionati su preventivi
+    // esistenti (sono tutti a valore 0€, quindi la rimozione non altera alcun totale).
+    const chiaviNuove = new Set(optionaliNuovi.map((o) => keyOptional(o)));
+    const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuove.has(keyOptional(o)));
+    let optRimossi = 0;
+    for (const o of optionaliDaRimuovere) {
+      await prisma.rigaOptional.deleteMany({ where: { optionalId: o.id } });
+      await prisma.optional.delete({ where: { id: o.id } });
+      optRimossi++;
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
@@ -168,6 +181,7 @@ export async function POST(req: NextRequest) {
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });

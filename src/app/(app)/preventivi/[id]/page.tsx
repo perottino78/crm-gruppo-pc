@@ -405,6 +405,9 @@ export default async function PreventivoPage({
                     .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia) || o.listino === r.prodotto.tipologia)
                     .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                     .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(r.prodotto.tipologia))
+                    /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
+                       (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
+                    .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"))
                     .map((o) => (
                       <option key={o.id} value={o.id}>
                         {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
