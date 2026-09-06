@@ -2,7 +2,13 @@
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
 // compatibilità, ma il valore va interpretato secondo questa unità.
-const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_"];
+const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_",
+  // Zanzariere plissettate: il listino a mq (calcolaMqConMinimi) interpreta le misure
+  // digitate come centimetri (coerente con SCINTILLA/VETRATA_), quindi anche l'etichetta
+  // del campo misura deve essere "cm" — prima mancava da questo elenco e il campo veniva
+  // etichettato "mm", inducendo l'inserimento di misure 10x troppo grandi e mq/minimi
+  // fatturabili completamente sballati.
+  "PLISSE_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -186,6 +192,19 @@ export function labelBreveTipologia(tipologia: string): string {
   }
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   return tipologia.replace(/_/g, " ");
+}
+
+// Estrae la finitura/profilo (STD/STDPLUS/MICH/FL) dalla tipologia di una zanzariera
+// plissettata, per filtrare gli optional "Colore profilo" e "Sistema ad incasso" che
+// hanno una riga per ciascuna finitura: senza questo filtro comparirebbero sempre
+// tutte e 4 le varianti (Standard, Standard Plus, Michelangelo, Finto Legno) invece
+// di solo quella coerente con la finitura già scelta scegliendo il modello.
+export function finituraDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("PLISSE_")) {
+    const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
+    if (match) return match[1];
+  }
+  return null;
 }
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {

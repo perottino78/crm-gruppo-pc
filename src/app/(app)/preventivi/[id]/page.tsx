@@ -6,7 +6,8 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia } from "@/lib/prodotti";
+import SelettoreImmagine from "@/components/SelettoreImmagine";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -290,22 +291,11 @@ export default async function PreventivoPage({
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
-          <div>
-            <label className="text-xs text-neutral-600 block mb-1">Immagine di copertina (URL) — mostrata in cima alla stampa</label>
-            <input
-              name="immagineCopertinaUrl"
-              defaultValue={preventivo.immagineCopertinaUrl ?? ""}
-              placeholder="https://... (foto del progetto, rendering, ecc.)"
-              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
-            />
-            {preventivo.immagineCopertinaUrl && (
-              <img
-                src={preventivo.immagineCopertinaUrl}
-                alt="Anteprima copertina"
-                className="mt-2 h-24 w-full object-cover rounded border border-neutral-200"
-              />
-            )}
-          </div>
+          <SelettoreImmagine
+            name="immagineCopertinaUrl"
+            defaultValue={preventivo.immagineCopertinaUrl}
+            label="Immagine di copertina — mostrata in cima alla stampa (foto del progetto, rendering, ecc.)"
+          />
           <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start">salva condizioni</button>
         </form>
       </details>
@@ -414,6 +404,7 @@ export default async function PreventivoPage({
                   {optionaliDisponibili
                     .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia) || o.listino === r.prodotto.tipologia)
                     .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
+                    .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(r.prodotto.tipologia))
                     .map((o) => (
                       <option key={o.id} value={o.id}>
                         {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})

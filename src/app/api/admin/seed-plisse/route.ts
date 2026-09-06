@@ -31,6 +31,7 @@ type OptionalRow = {
   listino: string | null;
   note: string | null;
   gruppiApplicabili: string[];
+  finituraApplicabile?: string | null;
 };
 
 const TIPOLOGIE_PREFIXES = ["PLISSE_"];
@@ -131,6 +132,7 @@ export async function POST(req: NextRequest) {
             listino: o.listino,
             note: o.note,
             gruppiApplicabili: o.gruppiApplicabili,
+            finituraApplicabile: o.finituraApplicabile ?? null,
           },
         });
         optCreati++;
@@ -138,11 +140,18 @@ export async function POST(req: NextRequest) {
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
         esistente.note !== o.note ||
+        esistente.finituraApplicabile !== (o.finituraApplicabile ?? null) ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
           where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
+          data: {
+            valore: o.valore,
+            tipoPrezzo: o.tipoPrezzo,
+            note: o.note,
+            gruppiApplicabili: o.gruppiApplicabili,
+            finituraApplicabile: o.finituraApplicabile ?? null,
+          },
         });
         optAggiornati++;
       } else {

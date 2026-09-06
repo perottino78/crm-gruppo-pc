@@ -218,6 +218,11 @@ model Optional {
   // Gruppi merceologici (ModelloProdotto.gruppo) a cui questo optional è applicabile,
   // es. ["PERGOLE", "BIOCLIMATICA"]. Vuoto = nessuna restrizione di gruppo.
   gruppiApplicabili String[] @default([])
+  // Finitura/profilo (es. "STD", "STDPLUS", "MICH", "FL" per le zanzariere plissettate)
+  // a cui questo optional è vincolato — es. i colori profilo Standard Plus non devono
+  // comparire quando si è scelto il modello di finitura Standard. Null = nessuna
+  // restrizione di finitura (l'optional compare per qualunque finitura del gruppo).
+  finituraApplicabile String?
   righe       RigaOptional[]
 }
 
