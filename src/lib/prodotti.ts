@@ -8,7 +8,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   // del campo misura deve essere "cm" — prima mancava da questo elenco e il campo veniva
   // etichettato "mm", inducendo l'inserimento di misure 10x troppo grandi e mq/minimi
   // fatturabili completamente sballati.
-  "PLISSE_"];
+  "PLISSE_",
+  // Zanzariere P&C (Antarex/Alba/Pratik/Libra/Scorri): listino a mq con minimi
+  // fatturabili (calcolaMqConMinimi), stessa convenzione cm delle altre zanzariere.
+  "ZPC_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -121,12 +124,102 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // prezzo differenziato per larghezza anta principale/antino).
   if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") return "BLINDATI_SINGOLA";
   if (tipologia.startsWith("BLINDATI_CL3_DUEANTE")) return "BLINDATI_DUEANTE";
+  // Zanzariere P&C: un "listino" per famiglia (Antarex/Alba/Pratik/Libra/Scorri), così gli
+  // optional/extra propri di ciascuna famiglia (es. Telaio chiuso solo su Antarex, Doppio
+  // traverso per Pratik solo su Pratik) restano scoperti dalle famiglie che non li prevedono,
+  // mentre gli extra davvero trasversali (es. rete Tuffscreen) sono comunque presenti una
+  // volta per ciascuna famiglia interessata.
+  if (tipologia.startsWith("ZPC_ANTAREX_")) return "ZPC_ANTAREX";
+  if (tipologia.startsWith("ZPC_ALBA_")) return "ZPC_ALBA";
+  if (tipologia.startsWith("ZPC_PRATIK_")) return "ZPC_PRATIK";
+  if (tipologia.startsWith("ZPC_LIBRA_")) return "ZPC_LIBRA";
+  if (tipologia.startsWith("ZPC_SCORRI_")) return "ZPC_SCORRI";
   return null;
 }
 
 // Sottogruppo di selezione a due passaggi (es. Zenith: prima si sceglie la variante
 // Uw/zona climatica, poi la tipologia di serramento). Ritorna null per i prodotti che
 // non hanno bisogno di questo secondo livello (la stragrande maggioranza dei cataloghi).
+// Zanzariere P&C (Antarex/Alba/Pratik/Libra/Scorri): ogni tipologia codifica per
+// intero la combinazione che determina il prezzo — famiglia, numero ante/variante,
+// tipo di rete e fascia colore — perché il motore MQ_CON_MINIMI pesca un'unica riga
+// Prodotto per tipologia (senza distinguere per colore) e perché il minimo fatturabile
+// (parametriCalcolo.areaMinimaM2) varia da una combinazione all'altra. Il gruppo unico
+// "ZANZARIERE_PC" raccoglie tutte le famiglie sotto Indoor; il "listino" (vedi
+// listinoDiTipologia) resta invece per singola famiglia, per lo scoping degli optional.
+const ZPC_FAMIGLIE = ["ANTAREX", "ALBA", "PRATIK", "LIBRA", "SCORRI"] as const;
+
+function famigliaZpc(tipologia: string): string | null {
+  const senzaPrefisso = tipologia.startsWith("ZPC_") ? tipologia.slice("ZPC_".length) : tipologia;
+  for (const fam of ZPC_FAMIGLIE) {
+    if (senzaPrefisso.startsWith(fam + "_")) return fam;
+  }
+  return null;
+}
+
+const ZPC_SOTTOGRUPPI: Record<string, string> = {
+  ANTAREX: "Antarex (anta battente)",
+  ALBA: "Alba (anta fissa)",
+  PRATIK: "Pratik (anta fissa)",
+  LIBRA: "Libra (anta scorrevole)",
+  SCORRI: "Scorri (anta scorrevole)",
+};
+
+const ZPC_RETE_LABEL: Record<string, string> = {
+  ALL: "Rete alluminio",
+  INOX: "Rete inox",
+  FIBRA: "Rete fibra",
+  TUFF: "Rete Tuffscreen™/PetScreen™",
+};
+
+const ZPC_COLORE_LABEL: Record<string, string> = {
+  BASE: "Base/RAL/Soft",
+  RAFF: "Raffaello/Ossidate/Sablè",
+  LEGNO: "Legno",
+};
+
+const ZPC_PRATIK_VARIANTE_LABEL: Record<string, string> = {
+  MURO: "Fissaggio a muro",
+  MAGGIORATO: "Profilo maggiorato",
+  MAGNETICA: "Magnetica",
+  UP: "Up",
+};
+
+const ZPC_SCORRI_VARIANTE_LABEL: Record<string, string> = {
+  BASE: "Scorri semplice",
+  COMP2: "Con compensatore 2 lati",
+  COMP34: "Con compensatore 3/4 lati",
+};
+
+// Etichetta breve leggibile per una tipologia ZPC_, es. "2 ante · Rete alluminio ·
+// Base/RAL/Soft" oppure, per Pratik/Scorri che hanno una variante di modello al posto
+// (o in aggiunta) del numero di ante, "Fissaggio a muro · Rete fibra · Legno".
+function labelBreveZpc(tipologia: string): string {
+  const fam = famigliaZpc(tipologia);
+  if (!fam) return tipologia.replace(/_/g, " ");
+  const resto = tipologia.slice(("ZPC_" + fam + "_").length);
+  const parti = resto.split("_");
+  const colore = parti[parti.length - 1];
+  const rete = parti[parti.length - 2];
+  const coloreLabel = ZPC_COLORE_LABEL[colore] ?? colore;
+  const reteLabel = ZPC_RETE_LABEL[rete] ?? rete;
+
+  if (fam === "PRATIK") {
+    const variante = parti[0];
+    const varianteLabel = ZPC_PRATIK_VARIANTE_LABEL[variante] ?? variante;
+    return `${varianteLabel} · ${reteLabel} · ${coloreLabel}`;
+  }
+  if (fam === "SCORRI") {
+    const variante = parti[0];
+    const anteToken = parti[1]; // es. "2ANTE"
+    const varianteLabel = ZPC_SCORRI_VARIANTE_LABEL[variante] ?? variante;
+    return `${varianteLabel} · ${anteToken.replace("ANTE", " ante")} · ${reteLabel} · ${coloreLabel}`;
+  }
+  // ANTAREX / ALBA / LIBRA: parti[0] è "NANTA" o "NANTE"
+  const anteToken = parti[0].replace("ANTA", " anta").replace("ANTE", " ante");
+  return `${anteToken} · ${reteLabel} · ${coloreLabel}`;
+}
+
 const PLISSE_SOTTOGRUPPI: Record<string, string> = {
   "08": "Plisse 08",
   XXL08: "XXL Plisse 08",
@@ -145,6 +238,10 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PLISSE_")) {
     const codice = tipologia.slice("PLISSE_".length).replace(/_(STD|STDPLUS|MICH|FL)$/, "");
     return PLISSE_SOTTOGRUPPI[codice] ?? null;
+  }
+  if (tipologia.startsWith("ZPC_")) {
+    const fam = famigliaZpc(tipologia);
+    return fam ? ZPC_SOTTOGRUPPI[fam] ?? null : null;
   }
   return null;
 }
@@ -191,6 +288,7 @@ export function labelBreveTipologia(tipologia: string): string {
     if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
+  if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   return tipologia.replace(/_/g, " ");
 }
 
@@ -202,6 +300,13 @@ export function labelBreveTipologia(tipologia: string): string {
 export function finituraDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PLISSE_")) {
     const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
+    if (match) return match[1];
+  }
+  // Zanzariere P&C: la fascia colore (BASE/RAFF/LEGNO) in coda alla tipologia gioca lo
+  // stesso ruolo della finitura plissettata, per scoperire correttamente gli optional
+  // con prezzo differenziato per fascia colore (es. Telaio chiuso, Doppio traverso).
+  if (tipologia.startsWith("ZPC_")) {
+    const match = tipologia.match(/_(BASE|RAFF|LEGNO)$/);
     if (match) return match[1];
   }
   return null;

@@ -1,0 +1,1241 @@
+[
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 259.42
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 298.37
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 337.25
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 389.16
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 447.55
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 505.87
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 259.42
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 298.37
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 337.25
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 389.16
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 447.55
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 505.87
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 259.42
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 298.37
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 337.25
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 389.16
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 447.55
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 505.87
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 259.42
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 298.37
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 337.25
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 389.16
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 447.55
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 505.87
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 271.51
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 312.26
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 353.02
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 407.3
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 468.36
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 529.49
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 271.51
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 312.26
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 353.02
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 407.3
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 468.36
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 529.49
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 271.51
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 312.26
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 353.02
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 407.3
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 468.36
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 529.49
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 85.82
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 98.71
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.6
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 103.03
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 118.44
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 133.92
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 103.03
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 118.44
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 133.92
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 128.74
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 148.1
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 167.4
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 109.87
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.36
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.85
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 131.83
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 151.63
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 171.43
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 99.58
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.55
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.46
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 119.52
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 137.45
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 155.38
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 119.52
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 137.45
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 155.38
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 149.4
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 171.79
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 194.18
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 99.29
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.19
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.1
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 119.16
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 137.09
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 154.94
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 148.97
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 171.29
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 193.68
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 371.66
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 427.46
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 483.19
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 557.42
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 641.16
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 724.75
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 140.33
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.42
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 182.45
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 210.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 242.14
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 273.67
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 140.33
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.42
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 182.45
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 210.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 242.14
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 273.67
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 140.33
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.42
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 182.45
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 210.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 242.14
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 273.67
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 165.6
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.44
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 215.28
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.4
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.7
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.92
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 165.6
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.44
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 215.28
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.4
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.7
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.92
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 165.6
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.44
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 215.28
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.4
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.7
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.92
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.87
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 219.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.11
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 286.27
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 329.26
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 372.17
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.87
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 219.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.11
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 286.27
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 329.26
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 372.17
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 190.87
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 219.53
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.11
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 286.27
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 329.26
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 372.17
+  }
+]

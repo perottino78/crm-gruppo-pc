@@ -1,0 +1,662 @@
+[
+  {
+    "categoria": "Rete",
+    "nome": "Rete Tuffscreen™/PetScreen™",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Tuffscreen™/PetScreen™",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ALBA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Tuffscreen™/PetScreen™",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Rete",
+    "nome": "Rete Tuffscreen™/PetScreen™",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_SCORRI",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Cat Flap (sportellino a molla per piccoli animali, con rete PetScreen™)",
+    "tipoPrezzo": "FISSO",
+    "valore": 329,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Anta ad angolazione variabile",
+    "tipoPrezzo": "FISSO",
+    "valore": 400,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Modello",
+    "nome": "Modello \"Saloon\"",
+    "tipoPrezzo": "FISSO",
+    "valore": 354,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Con molla di ritorno",
+    "tipoPrezzo": "FISSO",
+    "valore": 71,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Centinata apribile ad 1 anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 708,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Centinata apribile a 2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 1297,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Centinata apribile a 3 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 1849,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Centinata con superiore fisso",
+    "tipoPrezzo": "FISSO",
+    "valore": 708,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sopraluce superiore fisso",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": "Maggiorazione di 1m² allo sviluppo dell'anta: calcolare manualmente aumentando l'altezza fatturabile di conseguenza.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Telaio chiuso",
+    "tipoPrezzo": "FISSO",
+    "valore": 65.88,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 37.08,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 54.14,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Telaio chiuso",
+    "tipoPrezzo": "FISSO",
+    "valore": 75.74,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 42.7,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 62.21,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Telaio chiuso",
+    "tipoPrezzo": "FISSO",
+    "valore": 85.61,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 48.24,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.34,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pannello completo in bachelite",
+    "tipoPrezzo": "FISSO",
+    "valore": 208.44,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pannello completo in policarbonato",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.28,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Policarbonato (dal traverso in giù)",
+    "tipoPrezzo": "FISSO",
+    "valore": 208.44,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Bachelite (dal traverso in giù)",
+    "tipoPrezzo": "FISSO",
+    "valore": 143.28,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_ANTAREX",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 37.08,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 54.14,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 42.7,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 62.21,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso",
+    "tipoPrezzo": "FISSO",
+    "valore": 48.24,
+    "unita": "per singola anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maggiorazione per profilo compensatore",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.34,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pannello completo in bachelite",
+    "tipoPrezzo": "FISSO",
+    "valore": 208.44,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pannello completo in policarbonato",
+    "tipoPrezzo": "FISSO",
+    "valore": 260.28,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Policarbonato (dal traverso in giù)",
+    "tipoPrezzo": "FISSO",
+    "valore": 208.44,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Bachelite (dal traverso in giù)",
+    "tipoPrezzo": "FISSO",
+    "valore": 143.28,
+    "unita": "per anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "RAL/Legno special fuori cartella",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_LIBRA",
+    "note": "Colore fuori cartella standard: chiedere preventivo dedicato all'azienda.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso per Pratik",
+    "tipoPrezzo": "FISSO",
+    "valore": 18.43,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso per Pratik",
+    "tipoPrezzo": "FISSO",
+    "valore": 21.17,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio traverso per Pratik",
+    "tipoPrezzo": "FISSO",
+    "valore": 23.98,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Oblò",
+    "tipoPrezzo": "FISSO",
+    "valore": 590,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": "Viene utilizzato il profilo maggiorato.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Centinata",
+    "tipoPrezzo": "FISSO",
+    "valore": 495,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": "Viene utilizzato il profilo maggiorato.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Ad angolo variabile",
+    "tipoPrezzo": "FISSO",
+    "valore": 212,
+    "unita": "per coppia di angoli",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_PRATIK",
+    "note": "Viene utilizzato il profilo maggiorato.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maniglia incassata",
+    "tipoPrezzo": "FISSO",
+    "valore": 47,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ZPC_SCORRI",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  }
+]

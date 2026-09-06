@@ -1,0 +1,2303 @@
+[
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 259.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 298.37€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 337.25€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 389.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 447.55€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_1ANTA_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 1 anta, rete inox, colore Legno. Prezzo a tariffa fissa di 505.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per 1 anta). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 259.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 298.37€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 337.25€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 389.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 447.55€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_2ANTA_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 2 antae, rete inox, colore Legno. Prezzo a tariffa fissa di 505.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 259.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 298.37€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 337.25€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 389.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 447.55€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_3ANTA_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 3 antae, rete inox, colore Legno. Prezzo a tariffa fissa di 505.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 259.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 298.37€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 337.25€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 389.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 447.55€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ANTAREX_4ANTA_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ANTAREX (anta battente), 4 antae, rete inox, colore Legno. Prezzo a tariffa fissa di 505.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 antae). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: telaio chiuso, doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen, Cat Flap, anta ad angolazione variabile, modello Saloon, molla di ritorno, centinata apribile, sopraluce superiore fisso — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/antarex.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 271.51€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 312.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 353.02€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 407.30€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 468.36€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_2ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 2 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 529.49€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 271.51€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 312.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 353.02€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 407.30€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 468.36€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_3ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 3 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 529.49€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 271.51€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 312.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 353.02€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 407.30€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 468.36€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_ALBA_4ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C ALBA (anta fissa), 4 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 529.49€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibile: rete Tuffscreen/PetScreen — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/alba.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in fibra, colore Base/RAL/Soft. Prezzo a tariffa fissa di 85.82€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in fibra, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 98.71€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_FIBRA_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in fibra, colore Legno. Prezzo a tariffa fissa di 111.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete Tuffscreen™/PetScreen™, colore Base/RAL/Soft. Prezzo a tariffa fissa di 103.03€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete Tuffscreen™/PetScreen™, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 118.44€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_TUFF_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete Tuffscreen™/PetScreen™, colore Legno. Prezzo a tariffa fissa di 133.92€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 103.03€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 118.44€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete in alluminio, colore Legno. Prezzo a tariffa fissa di 133.92€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 128.74€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 148.10€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MURO_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK fissaggio a muro (anta fissa), rete inox, colore Legno. Prezzo a tariffa fissa di 167.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete in fibra, colore Base/RAL/Soft. Prezzo a tariffa fissa di 109.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete in fibra, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 126.36€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_FIBRA_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete in fibra, colore Legno. Prezzo a tariffa fissa di 142.85€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete Tuffscreen™/PetScreen™, colore Base/RAL/Soft. Prezzo a tariffa fissa di 131.83€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete Tuffscreen™/PetScreen™, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 151.63€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGGIORATO_TUFF_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK con profilo maggiorato (anta fissa), rete Tuffscreen™/PetScreen™, colore Legno. Prezzo a tariffa fissa di 171.43€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in fibra, colore Base/RAL/Soft. Prezzo a tariffa fissa di 99.58€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in fibra, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 114.55€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_FIBRA_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in fibra, colore Legno. Prezzo a tariffa fissa di 129.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete Tuffscreen™/PetScreen™, colore Base/RAL/Soft. Prezzo a tariffa fissa di 119.52€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete Tuffscreen™/PetScreen™, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 137.45€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_TUFF_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete Tuffscreen™/PetScreen™, colore Legno. Prezzo a tariffa fissa di 155.38€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 119.52€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 137.45€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete in alluminio, colore Legno. Prezzo a tariffa fissa di 155.38€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 149.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 171.79€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_MAGNETICA_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK magnetica (anta fissa), rete inox, colore Legno. Prezzo a tariffa fissa di 194.18€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in fibra, colore Base/RAL/Soft. Prezzo a tariffa fissa di 99.29€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in fibra, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 114.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_FIBRA_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in fibra, colore Legno. Prezzo a tariffa fissa di 129.10€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 119.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 137.09€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete in alluminio, colore Legno. Prezzo a tariffa fissa di 154.94€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 148.97€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 171.29€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_PRATIK_UP_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C PRATIK UP (anta fissa), rete inox, colore Legno. Prezzo a tariffa fissa di 193.68€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.2m² a prescindere dal numero di ante). Extra disponibili: doppio traverso, oblò, centinata, angolo variabile — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/pratik.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.2,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_3ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 3 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_4ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 4 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 5m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_5ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 5 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 6m² per 5 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_6ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 6 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 7m² per 6 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_7ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 7 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 8m² per 7 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_8ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 8 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 9m² per 8 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 9,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 371.66€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 427.46€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 483.19€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 557.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 641.16€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_LIBRA_9ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C LIBRA (anta scorrevole), 9 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 724.75€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 10m² per 9 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: doppio traverso, profilo compensatore, pannelli bachelite/policarbonato, rete Tuffscreen/PetScreen — vedi optional. RAL/Legno fuori cartella: chiedere preventivo.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/libra.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 10,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 140.33€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 161.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 182.45€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 210.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 242.14€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_2ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 2 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 273.67€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 140.33€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 161.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 182.45€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 210.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 242.14€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_3ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 3 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 273.67€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 140.33€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 161.42€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 182.45€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 210.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 242.14€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_BASE_4ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI (anta scorrevole), 4 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 273.67€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 165.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 190.44€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 215.28€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 248.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 285.70€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_2ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 2 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 322.92€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 165.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 190.44€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 215.28€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 248.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 285.70€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_3ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 3 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 322.92€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 165.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 190.44€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 215.28€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 248.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 285.70€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP2_4ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 2 lati (anta scorrevole), 4 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 322.92€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 190.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 219.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 248.11€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 286.27€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 329.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_2ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 2 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 372.17€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.8m² per 2 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.8,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 190.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 219.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 248.11€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 286.27€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 329.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_3ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 3 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 372.17€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2.7m² per 3 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.7,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete in alluminio, colore Base/RAL/Soft. Prezzo a tariffa fissa di 190.87€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete in alluminio, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 219.53€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_ALL_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete in alluminio, colore Legno. Prezzo a tariffa fissa di 248.11€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_BASE",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete inox, colore Base/RAL/Soft. Prezzo a tariffa fissa di 286.27€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_RAFF",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete inox, colore Raffaello/Ossidate/Sablè. Prezzo a tariffa fissa di 329.26€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ZPC_SCORRI_COMP34_4ANTE_INOX_LEGNO",
+    "descrizioneTecnica": "Zanzariera P&C SCORRI con compensatore 3/4 lati (anta scorrevole), 4 ante, rete inox, colore Legno. Prezzo a tariffa fissa di 372.17€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3.6m² per 4 ante). Disponibile anche con rete in fibra allo stesso prezzo della rete in alluminio. Extra disponibili: rete Tuffscreen/PetScreen, maniglia incassata — vedi optional.",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png",
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.6,
+      "altezzaMinimaMm": 0
+    }
+  }
+]
