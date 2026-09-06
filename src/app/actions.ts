@@ -163,11 +163,12 @@ export async function aggiornaCondizioniOfferta(formData: FormData) {
   const scontoStr = str(formData, "scontoPercentuale");
   const condizioniPagamento = str(formData, "condizioniPagamento");
   const condizioniConsegna = str(formData, "condizioniConsegna");
+  const immagineCopertinaUrl = str(formData, "immagineCopertinaUrl");
   const scontoPercentuale = scontoStr ? Math.max(0, Math.min(100, parseFloat(scontoStr))) : 0;
 
   await prisma.preventivo.update({
     where: { id },
-    data: { oggetto, scontoPercentuale, condizioniPagamento, condizioniConsegna },
+    data: { oggetto, scontoPercentuale, condizioniPagamento, condizioniConsegna, immagineCopertinaUrl },
   });
   await ricalcolaTotali(id);
   revalidatePath(`/preventivi/${id}`);
@@ -428,6 +429,26 @@ export async function aggiornaUsername(formData: FormData) {
   if (!username) return;
   await prisma.utente.update({ where: { id: utente!.id }, data: { username } });
   revalidatePath("/profilo");
+}
+
+// Telefono di contatto del commerciale, mostrato nella stampa dell'offerta come riferimento.
+export async function aggiornaContattiUtente(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const telefono = str(formData, "telefono");
+  await prisma.utente.update({ where: { id: utente!.id }, data: { telefono } });
+  revalidatePath("/profilo");
+}
+
+// L'amministratore può correggere il telefono di un altro utente (es. se lo ha inserito sbagliato).
+export async function adminAggiornaTelefonoUtente(formData: FormData) {
+  const admin = await getCurrentUser();
+  if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
+  const utenteId = str(formData, "utenteId");
+  if (!utenteId) return;
+  const telefono = str(formData, "telefono");
+  await prisma.utente.update({ where: { id: utenteId }, data: { telefono } });
+  revalidatePath("/impostazioni");
 }
 
 // Reset amministrativo: l'AMMINISTRATORE imposta una nuova password per un altro utente,

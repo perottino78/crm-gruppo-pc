@@ -37,6 +37,8 @@ model Utente {
   // Senza passwordHash l'utente non può accedere.
   username      String?  @unique
   passwordHash  String?
+  // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
+  telefono      String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
   mustChangePassword Boolean @default(true)
@@ -148,6 +150,8 @@ model Preventivo {
   // Testo libero per la stampa dell'offerta (condizioni di fornitura/vendita specifiche di questa offerta)
   condizioniPagamento String?
   condizioniConsegna  String?
+  // Immagine (URL) mostrata in cima alla prima pagina della stampa offerta, es. foto del progetto o rendering
+  immagineCopertinaUrl String?
   righe        RigaPreventivo[]
   promemoria   PromemoriaInviato[]
   progetto     Progetto?

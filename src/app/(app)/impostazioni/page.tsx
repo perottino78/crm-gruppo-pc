@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { aggiornaConfigurazione, creaUtente, adminResetPassword } from "@/app/actions";
+import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTelefonoUtente } from "@/app/actions";
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -78,6 +78,7 @@ export default async function ImpostazioniPage() {
                       {u.email}
                       {u.username && <span> · username: <span className="font-mono">{u.username}</span></span>}
                       {!u.username && <span className="text-amber-700"> · nessun accesso attivato</span>}
+                      {u.telefono && <span> · tel. {u.telefono}</span>}
                     </p>
                   </div>
                   <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600 shrink-0">
@@ -104,6 +105,19 @@ export default async function ImpostazioniPage() {
                     />
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Reset accesso</button>
+                </form>
+                <form action={adminAggiornaTelefonoUtente} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="utenteId" value={u.id} />
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Telefono (per la stampa offerte)</label>
+                    <input
+                      name="telefono"
+                      defaultValue={u.telefono ?? ""}
+                      placeholder="es. 011 1234567"
+                      className="border border-neutral-200 rounded px-2 py-1 text-xs w-40"
+                    />
+                  </div>
+                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva telefono</button>
                 </form>
               </div>
             ))}

@@ -290,6 +290,22 @@ export default async function PreventivoPage({
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
+          <div>
+            <label className="text-xs text-neutral-600 block mb-1">Immagine di copertina (URL) — mostrata in cima alla stampa</label>
+            <input
+              name="immagineCopertinaUrl"
+              defaultValue={preventivo.immagineCopertinaUrl ?? ""}
+              placeholder="https://... (foto del progetto, rendering, ecc.)"
+              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+            />
+            {preventivo.immagineCopertinaUrl && (
+              <img
+                src={preventivo.immagineCopertinaUrl}
+                alt="Anteprima copertina"
+                className="mt-2 h-24 w-full object-cover rounded border border-neutral-200"
+              />
+            )}
+          </div>
           <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start">salva condizioni</button>
         </form>
       </details>

@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { cambiaPassword, aggiornaUsername } from "@/app/actions";
+import { cambiaPassword, aggiornaUsername, aggiornaContattiUtente } from "@/app/actions";
 
 export default async function ProfiloPage({
   searchParams,
@@ -46,6 +46,21 @@ export default async function ProfiloPage({
           <button className="btn-3d btn-3d-outline">Salva</button>
         </form>
         <p className="text-xs text-neutral-500 mt-2">Usato per accedere al CRM al posto della password.</p>
+      </div>
+
+      <div className="bg-white rounded-lg border border-neutral-200 p-5">
+        <h2 className="text-base font-bold text-neutral-900 mb-3">Telefono di contatto</h2>
+        <form action={aggiornaContattiUtente} className="flex items-center gap-2">
+          <input
+            type="tel"
+            name="telefono"
+            defaultValue={utente.telefono ?? ""}
+            placeholder="es. 011 1234567"
+            className="flex-1 border border-neutral-300 rounded-md px-3 py-2 text-sm"
+          />
+          <button className="btn-3d btn-3d-outline">Salva</button>
+        </form>
+        <p className="text-xs text-neutral-500 mt-2">Mostrato come riferimento commerciale nella stampa delle offerte.</p>
       </div>
 
       <div className="bg-white rounded-lg border border-neutral-200 p-5">

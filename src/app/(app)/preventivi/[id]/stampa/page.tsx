@@ -83,7 +83,15 @@ export default async function StampaPreventivoPage({
       <PrintButton />
 
       {/* ===== PAGINA 1 — COPERTINA / OFFERTA ===== */}
-      <section className="p-10 print:p-8 print:break-after-page">
+      <section className="p-6 print:p-4 print:break-after-page">
+        <div className="border-2 border-neutral-800 rounded-md p-6 print:p-6">
+        {preventivo.immagineCopertinaUrl && (
+          <img
+            src={preventivo.immagineCopertinaUrl}
+            alt="Copertina offerta"
+            className="w-full max-h-64 object-cover rounded mb-6 border border-neutral-200"
+          />
+        )}
         <div className="flex items-center justify-between border-b-4 pb-4 mb-6" style={{ borderColor: info.primary }}>
           <div className="flex items-center gap-3">
             {isPC ? (
@@ -115,10 +123,10 @@ export default async function StampaPreventivoPage({
           <p className="text-base font-semibold mb-4" style={{ color: info.primary }}>{preventivo.oggetto}</p>
         )}
 
-        <div className="grid grid-cols-2 gap-6 mb-8 text-sm">
-          <div>
-            <p className="text-xs text-neutral-600 mb-1">Spett.le</p>
-            <p className="font-medium">{preventivo.cliente.nome}</p>
+        <div className="grid grid-cols-2 gap-4 mb-8 text-sm">
+          <div className="border border-neutral-300 rounded-md p-3">
+            <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-1">Spett.le</p>
+            <p className="font-semibold">{preventivo.cliente.nome}</p>
             <p className="text-neutral-700">{preventivo.cliente.indirizzo ?? ""}</p>
             {(preventivo.cliente.cap || preventivo.cliente.comune || preventivo.cliente.provincia) && (
               <p className="text-neutral-700">
@@ -126,11 +134,13 @@ export default async function StampaPreventivoPage({
                 {preventivo.cliente.provincia && ` (${preventivo.cliente.provincia})`}
               </p>
             )}
-            <p className="text-neutral-700">{preventivo.cliente.telefono ?? ""} · {preventivo.cliente.email ?? ""}</p>
+            <p className="text-neutral-700">{preventivo.cliente.telefono ?? "—"} · {preventivo.cliente.email ?? "—"}</p>
           </div>
-          <div className="text-right">
-            <p className="text-xs text-neutral-600 mb-1">Referente commerciale</p>
-            <p className="font-medium">{preventivo.commerciale.nome}</p>
+          <div className="border border-neutral-300 rounded-md p-3">
+            <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-1">Riferimento commerciale</p>
+            <p className="font-semibold">{preventivo.commerciale.nome}</p>
+            <p className="text-neutral-700">{preventivo.commerciale.telefono ?? "—"}</p>
+            <p className="text-neutral-700">{preventivo.commerciale.email}</p>
           </div>
         </div>
 
@@ -241,6 +251,7 @@ export default async function StampaPreventivoPage({
           <RigaFirma label="Luogo e data" />
           <RigaFirma label="Il Cliente (per accettazione)" sub={preventivo.cliente.nome} />
           <RigaFirma label="Il Fornitore" sub={isPC ? "P&C S.r.l. Unipersonale" : preventivo.brand.nome} />
+        </div>
         </div>
       </section>
 
