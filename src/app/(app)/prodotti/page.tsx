@@ -47,6 +47,12 @@ export default async function ProdottiPage({
     larghezzaMax: g._max.larghezzaMm ?? 0,
     altezzaMin: g._min.altezzaMm ?? 0,
     altezzaMax: g._max.altezzaMm ?? 0,
+    // I modelli a calcolo "a formula" (MQ_CON_MINIMI/METRO_LINEARE, es. Zanzariere Plissé/
+    // P&C, vetrate Brillante/Scintilla) non hanno una vera griglia larghezza×altezza: la
+    // riga Prodotto porta solo la tariffa, con larghezzaMm/altezzaMm segnaposto senza
+    // significato dimensionale. Mostrarli come "range misure" li fa sembrare erroneamente
+    // un intervallo di produzione reale (es. "1000–1000 × 2000–2000 cm").
+    aFormula: (modelloMap.get(g.tipologia)?.modalitaCalcolo ?? "GRIGLIA") !== "GRIGLIA",
     modello: modelloMap.get(g.tipologia),
   }));
 
@@ -282,7 +288,9 @@ export default async function ProdottiPage({
                     {r.modello?.famiglia ? `${r.modello.famiglia} · ${r.modello.gruppo ?? ""}` : "—"}
                   </td>
                   <td className="px-4 py-2 text-neutral-700 text-xs">
-                    {haMisura(r.larghezzaMax, r.altezzaMax) ? (
+                    {r.aFormula ? (
+                      "a misura, calcolo automatico"
+                    ) : haMisura(r.larghezzaMax, r.altezzaMax) ? (
                       <span className="font-bold text-neutral-700">{r.larghezzaMin}–{r.larghezzaMax} × {r.altezzaMin}–{r.altezzaMax} {unit}</span>
                     ) : (
                       "prezzo fisso (senza misura)"

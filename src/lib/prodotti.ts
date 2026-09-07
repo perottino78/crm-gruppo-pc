@@ -191,6 +191,51 @@ const ZPC_SCORRI_VARIANTE_LABEL: Record<string, string> = {
   COMP34: "Con compensatore 3/4 lati",
 };
 
+// Decompone una tipologia ZPC_ nei 3 assi di scelta (ante/variante → tipo di rete →
+// colore) così l'interfaccia può mostrare 3 tendine a cascata invece di una lista piatta
+// di 18-54 voci (una per ogni combinazione). Per Scorri, che ha 4 assi indipendenti
+// (variante compensatore, numero ante, rete, colore), i primi due vengono uniti in un
+// solo asse "modello" per restare a 3 tendine come richiesto.
+export type AsseSelezione = { valore: string; label: string };
+export type AssiZpc = { ante: AsseSelezione; rete: AsseSelezione; colore: AsseSelezione };
+
+export function assiSelezioneZpc(tipologia: string): AssiZpc | null {
+  const fam = famigliaZpc(tipologia);
+  if (!fam) return null;
+  const resto = tipologia.slice(("ZPC_" + fam + "_").length);
+  const parti = resto.split("_");
+  const colore = parti[parti.length - 1];
+  const rete = parti[parti.length - 2];
+  const coloreAsse: AsseSelezione = { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore };
+  const reteAsse: AsseSelezione = { valore: rete, label: ZPC_RETE_LABEL[rete] ?? rete };
+
+  if (fam === "PRATIK") {
+    const variante = parti[0];
+    return {
+      ante: { valore: variante, label: ZPC_PRATIK_VARIANTE_LABEL[variante] ?? variante },
+      rete: reteAsse,
+      colore: coloreAsse,
+    };
+  }
+  if (fam === "SCORRI") {
+    const variante = parti[0];
+    const anteToken = parti[1];
+    const varianteLabel = ZPC_SCORRI_VARIANTE_LABEL[variante] ?? variante;
+    return {
+      ante: { valore: `${variante}_${anteToken}`, label: `${varianteLabel} — ${anteToken.replace("ANTE", " ante")}` },
+      rete: reteAsse,
+      colore: coloreAsse,
+    };
+  }
+  // ANTAREX / ALBA / LIBRA: parti[0] è "NANTA" o "NANTE"
+  const anteToken = parti[0];
+  return {
+    ante: { valore: anteToken, label: anteToken.replace("ANTA", " anta").replace("ANTE", " ante") },
+    rete: reteAsse,
+    colore: coloreAsse,
+  };
+}
+
 // Etichetta breve leggibile per una tipologia ZPC_, es. "2 ante · Rete alluminio ·
 // Base/RAL/Soft" oppure, per Pratik/Scorri che hanno una variante di modello al posto
 // (o in aggiunta) del numero di ante, "Fissaggio a muro · Rete fibra · Legno".

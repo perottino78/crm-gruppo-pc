@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import {
   aggiungiRigaPreventivo,
@@ -129,6 +129,9 @@ export default async function PreventivoPage({
                 altezzaMax: t._max.altezzaMm ?? 0,
               }
             : undefined,
+        // Zanzariere P&C: assi ante/variante → rete → colore, per la selezione a 3 tendine
+        // a cascata invece della lista piatta (18-54 voci per famiglia).
+        assi: assiSelezioneZpc(tip) ?? undefined,
       },
     });
   }

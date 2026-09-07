@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
-import { unitaMisura } from "@/lib/prodotti";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { unitaMisura, type AssiZpc } from "@/lib/prodotti";
 
 export type NodoTipologia = {
   value: string;
@@ -10,10 +10,126 @@ export type NodoTipologia = {
   varianti?: { id: string; colore: string; prezzoBase: number }[];
   // range di misure effettivamente a listino (solo per i modelli con haMisura=true)
   misure?: { larghezzaMin: number; larghezzaMax: number; altezzaMin: number; altezzaMax: number };
+  // Zanzariere P&C: assi ante/variante → rete → colore, per mostrare 3 tendine a cascata
+  // invece della lista piatta (18-54 voci per famiglia) quando presente su tutte le
+  // tipologie di un sottogruppo.
+  assi?: AssiZpc;
 };
 export type SottogruppoNodo = { nome: string; tipologie: NodoTipologia[] };
 export type GruppoNodo = { nome: string; tipologie: NodoTipologia[]; sottogruppi?: SottogruppoNodo[] };
 export type FamigliaNodo = { nome: string; gruppi: GruppoNodo[] };
+
+// Tendine a cascata: 1) numero ante/variante, 2) tipo di rete, 3) colore. Ogni scelta
+// filtra le opzioni successive alle sole combinazioni che esistono davvero a listino
+// (es. la variante Pratik "profilo maggiorato" ha solo 2 tipi di rete, non 4), ed evita
+// così di dover scorrere una lista piatta con decine di voci.
+function SelettoreCascata({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [ante, setAnte] = useState("");
+  const [rete, setRete] = useState("");
+  const [colore, setColore] = useState("");
+
+  const opzioniAnte = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assi) mappa.set(t.assi.ante.valore, t.assi.ante.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerAnte = useMemo(() => tipologie.filter((t) => t.assi?.ante.valore === ante), [tipologie, ante]);
+  const opzioniRete = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerAnte) if (t.assi) mappa.set(t.assi.rete.valore, t.assi.rete.label);
+    return [...mappa.entries()];
+  }, [filtratePerAnte]);
+
+  const filtratePerRete = useMemo(() => filtratePerAnte.filter((t) => t.assi?.rete.valore === rete), [filtratePerAnte, rete]);
+  const opzioniColore = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerRete) if (t.assi) mappa.set(t.assi.colore.valore, t.assi.colore.label);
+    return [...mappa.entries()];
+  }, [filtratePerRete]);
+
+  const trovato = useMemo(
+    () => filtratePerRete.find((t) => t.assi?.colore.valore === colore) ?? null,
+    [filtratePerRete, colore]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Numero ante / variante</label>
+        <select
+          value={ante}
+          onChange={(e) => {
+            setAnte(e.target.value);
+            setRete("");
+            setColore("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniAnte.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {ante && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Tipo di rete</label>
+          <select
+            value={rete}
+            onChange={(e) => {
+              setRete(e.target.value);
+              setColore("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniRete.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {ante && rete && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Colore</label>
+          <select
+            value={colore}
+            onChange={(e) => setColore(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniColore.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
 
 export default function SelettoreProdotto({
   preventivoId,
@@ -195,16 +311,25 @@ export default function SelettoreProdotto({
                                       </button>
                                       {apertoSg && (
                                         <div className="pl-3 pb-1 flex flex-col">
-                                          {sg.tipologie.map((t) => (
-                                            <button
-                                              key={t.value}
-                                              type="button"
-                                              onClick={() => scegli(t)}
-                                              className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
-                                            >
-                                              {t.label}
-                                            </button>
-                                          ))}
+                                          {sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assi) ? (
+                                            <SelettoreCascata
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : (
+                                            sg.tipologie.map((t) => (
+                                              <button
+                                                key={t.value}
+                                                type="button"
+                                                onClick={() => scegli(t)}
+                                                className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
+                                              >
+                                                {t.label}
+                                              </button>
+                                            ))
+                                          )}
                                         </div>
                                       )}
                                     </div>
