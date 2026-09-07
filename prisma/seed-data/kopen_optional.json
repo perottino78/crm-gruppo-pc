@@ -1,0 +1,464 @@
+[
+ {
+  "categoria": "Cerniera a scomparsa",
+  "nome": "Cerniera a scomparsa mod.540 per porta fino a 1060x2250mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 870.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Cerniera a scomparsa",
+  "nome": "Cerniera a scomparsa mod.640 per porta oltre 1060x2250mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 1035.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Cerniera a scomparsa",
+  "nome": "Cerniera a scomparsa per porta a due ante",
+  "tipoPrezzo": "FISSO",
+  "valore": 1590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Telaio",
+  "nome": "Telaio a Z (non compatibile con fianco luce e/o sopraluce)",
+  "tipoPrezzo": "FISSO",
+  "valore": 120.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Apertura",
+  "nome": "Supplemento apertura a bilico per porte fino a 1300x2250mm (per tutti i modelli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2425.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Per la formulazione del prezzo della porta a bilico: costo del modello scelto + supplementi fuori misura eventualmente applicabili + costo della tipologia bilico. Misura massima 1800x2800mm.",
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Apertura",
+  "nome": "Supplemento apertura a bilico per porte oltre 1300x2250mm (solo modelli Effect)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2425.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Per la formulazione del prezzo della porta a bilico: costo del modello scelto + supplementi fuori misura eventualmente applicabili + costo della tipologia bilico. Misura massima 1800x2800mm.",
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Fuori Misura",
+  "nome": "Fuori misura in larghezza da 1061 a 1300mm (Lmax=1250 serie KDS100/WD)",
+  "tipoPrezzo": "FISSO",
+  "valore": 333.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Fuori Misura",
+  "nome": "Fuori misura in altezza da 2251 a 2500mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 333.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Fuori Misura",
+  "nome": "Fuori misura in altezza da 2501 a 2800mm (Hmax=2750 serie KDS100/WD)",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Doppia Anta",
+  "nome": "Doppia anta fino a misura max larghezza 2000mm (supplemento sul modello scelto)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 70,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Doppia Anta",
+  "nome": "Doppia anta fuori misura in larghezza da 2001 a 2600mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Doppia Anta",
+  "nome": "Doppia anta fuori misura in altezza da 2251 a 2500mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Antieffrazione",
+  "nome": "Versione porta antieffrazione classe RC2 (escluse porte con vetro e porte a due ante)",
+  "tipoPrezzo": "FISSO",
+  "valore": 333.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Antieffrazione",
+  "nome": "Versione porta antieffrazione classe RC3 (escluse porte con vetro e porte a due ante)",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Antieffrazione",
+  "nome": "Versione porta antieffrazione classe RC4 (escluse porte con vetro e porte a due ante)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1225.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Antieffrazione",
+  "nome": "Versione porta antieffrazione classe RC2 — linea Vitrum mod. VI03KP/VI04KP/VI07KP/VI08KP",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Cilindro di sicurezza frizionato certificato (solo per porta base)",
+  "tipoPrezzo": "FISSO",
+  "valore": 168.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Cilindro di sicurezza certificato con pomello interno (solo porta base) — disp. cromo satinato/ottone lucido/bronzo",
+  "tipoPrezzo": "FISSO",
+  "valore": 112.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 5 punti (per versione base e per versione RC2)",
+  "tipoPrezzo": "FISSO",
+  "valore": 129.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 3 punti a riarmo automatico (per versione base e versione RC2)",
+  "tipoPrezzo": "FISSO",
+  "valore": 93.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 3 punti motorizzata (comando esterno non fornito — pulsante o citofono)",
+  "tipoPrezzo": "FISSO",
+  "valore": 670.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 3 punti motorizzata con lettore biometrico/bluetooth",
+  "tipoPrezzo": "FISSO",
+  "valore": 1467.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 3 punti motorizzata con lettore biometrico su maniglione L=600/800/1000/1500mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 1905.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura 3 punti motorizzata con tastierino numerico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1333.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Serratura",
+  "nome": "Serratura blindata con deviatori di chiusura e defender esterno",
+  "tipoPrezzo": "FISSO",
+  "valore": 210.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Riscontro elettrico (escluse serrature a riarmo automatico e motorizzate)",
+  "tipoPrezzo": "FISSO",
+  "valore": 325.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Riscontro a rullo (oliva) (escluse serrature a riarmo automatico e motorizzata)",
+  "tipoPrezzo": "FISSO",
+  "valore": 52.5,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Kit luci LED di cortesia porta 1 anta (in abbinamento a serratura motorizzata)",
+  "tipoPrezzo": "FISSO",
+  "valore": 309.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Kit luci LED di cortesia porta 1 anta (per tutti gli altri casi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 612.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Kit completo cerniere in alluminio a 3 ali (solo per porta base)",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Contatto per allarme dotato di cavo da mt. 10",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Accessorio",
+  "nome": "Chiavi aggiuntive (cad.)",
+  "tipoPrezzo": "FISSO",
+  "valore": 30.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ },
+ {
+  "categoria": "Colore",
+  "nome": "Colore fuori standard",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": "Percentuale non presente nel listino fornitore Kopen: mutuata dal precedente già usato per i Portoncini Blindati P&C. Da confermare con l'ufficio prezzi.",
+  "gruppiApplicabili": [
+   "KOPEN"
+  ]
+ }
+]

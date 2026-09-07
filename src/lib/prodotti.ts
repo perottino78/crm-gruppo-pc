@@ -2,7 +2,7 @@
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
 // compatibilità, ma il valore va interpretato secondo questa unità.
-const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_",
+const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_", "KOPEN_",
   // Zanzariere plissettate: il listino a mq (calcolaMqConMinimi) interpreta le misure
   // digitate come centimetri (coerente con SCINTILLA/VETRATA_), quindi anche l'etichetta
   // del campo misura deve essere "cm" — prima mancava da questo elenco e il campo veniva
@@ -526,6 +526,10 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
+  if (tipologia.startsWith("KOPEN_")) {
+    const codice = tipologia.split("_")[1];
+    return KOPEN_SOTTOGRUPPI[codice] ?? null;
+  }
   return null;
 }
 
@@ -561,6 +565,53 @@ const SCATOLATO_FINITURA_LABEL: Record<string, string> = {
   LEGNO: "Legno tinte",
 };
 
+const KOPEN_SOTTOGRUPPI: Record<string, string> = {
+  LISCIO: "Modello liscio",
+  FRESATURE: "Modelli con fresature",
+  BUGNATI: "Modelli bugnati ciechi",
+  INSERTI: "Lisci con inserti",
+  STYLE: "Style modelli con inserti",
+  VITRUM: "Vitrum — modelli fresati con vetro",
+  VITRUMINS: "Vitrum — modelli fresati con vetro e inserti",
+  VITRUMBUG: "Vitrum — modelli bugnati con vetro e inserti",
+  FRAME: "Frame bugnati con vetro e inglesina decorata oro esterno",
+  LUMIERE: "Lumiere",
+  CLASSIC: "Classic bugnati con cornice riportata",
+  EFFECT: "Linea Effect — modelli multicolor",
+  EFFECTVETRO: "Effect multicolor con vetro e inserti",
+};
+
+const KOPEN_LABELS: Record<string, string> = {
+  KOPEN_LISCIO_ALU_LISCIO_INT: "ALU / liscio interno",
+  KOPEN_LISCIO_ALU_ALU: "ALU / ALU",
+  KOPEN_FRESATURE_ALU_EST_LEGNO_INT: "ALU fresato est. / legno liscio int.",
+  KOPEN_FRESATURE_ALU_EST_ALU_INT: "ALU fresato est. / ALU liscio int.",
+  KOPEN_FRESATURE_ALU_EST_INT: "ALU fresato est. e int. (stesso disegno)",
+  KOPEN_BUGNATI_ALU_EST_LEGNO_INT: "ALU bugnato est. / legno liscio int.",
+  KOPEN_BUGNATI_ALU_EST_ALU_INT: "ALU bugnato est. / ALU liscio int.",
+  KOPEN_BUGNATI_ALU_EST_INT: "ALU bugnato est. e int. (stesso disegno)",
+  KOPEN_INSERTI_ALU_EST_LEGNO_INT: "ALU fresato c/inserti est. / legno liscio int.",
+  KOPEN_INSERTI_ALU_EST_ALU_INT: "ALU fresato c/inserti est. / ALU liscio int.",
+  KOPEN_INSERTI_ALU_EST_INT: "ALU fresato c/inserti est. e int. (stesso disegno)",
+  KOPEN_STYLE_ALLUMINIO: "Alluminio liscio interno ed esterno",
+  KOPEN_VITRUM_ALU_EST_ALLUM_INT: "ALU fresato est. / alluminio liscio int.",
+  KOPEN_VITRUM_ALU_EST_INT: "ALU fresato est. e int. (stesso disegno)",
+  KOPEN_VITRUMINS_ALU_EST_ALLUM_INT: "ALU fresato c/inserti est. / alluminio liscio int.",
+  KOPEN_VITRUMINS_ALU_EST_INT: "ALU fresato c/inserti est. e int. (stesso disegno)",
+  KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT: "ALU bugnato est. / alluminio liscio int.",
+  KOPEN_VITRUMBUG_ALU_EST_INT: "ALU bugnato est. e int. (stesso disegno)",
+  KOPEN_FRAME_ALU_EST_ALLUM_INT: "ALU bugnato est. / alluminio liscio int.",
+  KOPEN_FRAME_ALU_EST_INT: "ALU bugnato est. e int. (stesso disegno)",
+  KOPEN_LUMIERE_ALLUMINIO: "Alluminio interno / esterno",
+  KOPEN_CLASSIC_ALU_EST_LEGNO_INT: "ALU bugnato c/cornice est. / legno liscio int.",
+  KOPEN_CLASSIC_ALU_EST_ALU_INT: "ALU bugnato c/cornice est. / ALU liscio int.",
+  KOPEN_EFFECT_ALU_EST_LEGNO_INT: "ALU effect est. / legno liscio int.",
+  KOPEN_EFFECT_ALU_EST_ALU_INT: "ALU effect est. / ALU liscio int.",
+  KOPEN_EFFECT_ALU_EST_INT: "ALU effect est. e int. (stesso disegno)",
+  KOPEN_EFFECTVETRO_ALU_EST_ALU_INT: "ALU effect est. / ALU liscio int.",
+  KOPEN_EFFECTVETRO_ALU_EST_INT: "ALU effect est. e int. (stesso disegno, stessi colori)",
+};
+
 const BLINDATI_LABELS: Record<string, string> = {
   BLINDATI_CL3: "Classe 3 - Anta Singola",
   BLINDATI_CL4: "Classe 4 - Anta Singola",
@@ -579,6 +630,7 @@ export function labelBreveTipologia(tipologia: string): string {
     if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
+  if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
