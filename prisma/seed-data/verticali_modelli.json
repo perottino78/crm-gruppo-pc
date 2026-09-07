@@ -1,0 +1,2966 @@
+[
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_BASE",
+    "descrizioneTecnica": "Casper Top 50 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_RAFF",
+    "descrizioneTecnica": "Casper Top 50 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_LEGNO",
+    "descrizioneTecnica": "Casper Top 50 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_BASE",
+    "descrizioneTecnica": "Casper Top 50 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_RAFF",
+    "descrizioneTecnica": "Casper Top 50 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_LEGNO",
+    "descrizioneTecnica": "Casper Top 50 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_BASE",
+    "descrizioneTecnica": "Casper Top 50 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Casper Top 50 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Casper Top 50 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_BASE",
+    "descrizioneTecnica": "Casper Top 50 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Casper Top 50 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Casper Top 50 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_BASE",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_BASE",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_BASE",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_BASE",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3 — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_BASE",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_RAFF",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_LEGNO",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_BASE",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_RAFF",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_LEGNO",
+    "descrizioneTecnica": "Casper Plus 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_BASE",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_BASE",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Casper Plus 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_BASE",
+    "descrizioneTecnica": "Casper 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_RAFF",
+    "descrizioneTecnica": "Casper 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_LEGNO",
+    "descrizioneTecnica": "Casper 50 Catena — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_BASE",
+    "descrizioneTecnica": "Casper 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_RAFF",
+    "descrizioneTecnica": "Casper 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Catena — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_BASE",
+    "descrizioneTecnica": "Casper 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Casper 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Catena — telo oscurante (Tecnic Oscura) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_BASE",
+    "descrizioneTecnica": "Casper 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Casper 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Casper 50 Catena — telo filtrante (Line Screen 3%) (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_BASE",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_BASE",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Comoda 50 Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_BASE",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_RAFF",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_LEGNO",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_BASE",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_RAFF",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_LEGNO",
+    "descrizioneTecnica": "Comoda 50 Verticale Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_BASE",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_BASE",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind 42 Incas - 45 Incas Verticale — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_BASE",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete in fibra (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_BASE",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind 42 Incas Smart — rete a strisce (Incasso verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_BASE",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_RAFF",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_LEGNO",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_BASE",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_RAFF",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_LEGNO",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_BASE",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_BASE",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Vera Top 45/55 - 40/50 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_BASE",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_BASE",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_BASE",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_BASE",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Vera 45/55 - Vera Basic 40/45/50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_BASE",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_RAFF",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_LEGNO",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_BASE",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_RAFF",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_LEGNO",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_BASE",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_BASE",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Vera Telescopica 40/50 - 45/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_BASE",
+    "descrizioneTecnica": "Clik-Clak — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_RAFF",
+    "descrizioneTecnica": "Clik-Clak — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_LEGNO",
+    "descrizioneTecnica": "Clik-Clak — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_BASE",
+    "descrizioneTecnica": "Clik-Clak — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_RAFF",
+    "descrizioneTecnica": "Clik-Clak — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_LEGNO",
+    "descrizioneTecnica": "Clik-Clak — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_BASE",
+    "descrizioneTecnica": "Clik-Clak — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Clik-Clak — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Clik-Clak — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_BASE",
+    "descrizioneTecnica": "Clik-Clak — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Clik-Clak — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Clik-Clak — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_BASE",
+    "descrizioneTecnica": "Ketty 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Ketty 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Ketty 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_BASE",
+    "descrizioneTecnica": "Ketty 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Ketty 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Ketty 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_BASE",
+    "descrizioneTecnica": "Ketty 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Ketty 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Ketty 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_BASE",
+    "descrizioneTecnica": "Ketty 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Ketty 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Ketty 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_BASE",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_RAFF",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_LEGNO",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_BASE",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_RAFF",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_LEGNO",
+    "descrizioneTecnica": "Ketty Plus 50/55 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_BASE",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_BASE",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Ketty Plus 50/55 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_BASE",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_BASE",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind 32/42/42 Tel./Simply/45 — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_BASE",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_BASE",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind 42 Molla/Catena — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_BASE",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_BASE",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind Cricchetto (32-42-42 telesc.) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_BASE",
+    "descrizioneTecnica": "Wind Smart (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind Smart (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind Smart (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_BASE",
+    "descrizioneTecnica": "Wind Smart (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind Smart (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind Smart (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind Smart (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind Smart (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind Smart (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind Smart (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind Smart (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind Smart (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_BASE",
+    "descrizioneTecnica": "Wind Fast (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind Fast (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind Fast (42) — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_BASE",
+    "descrizioneTecnica": "Wind Fast (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind Fast (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind Fast (42) — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind Fast (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind Fast (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind Fast (42) — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind Fast (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind Fast (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind Fast (42) — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_BASE",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_BASE",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind Up (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_BASE",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_RAFF",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_LEGNO",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete in fibra (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_BASE",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_RAFF",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_LEGNO",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — rete a strisce (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_BASE",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_RAFF",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_LEGNO",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo oscurante (Tecnic Oscura) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_BASE",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_RAFF",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_LEGNO",
+    "descrizioneTecnica": "Wind Up Cricchetto (45) - solo applicazione frontale — telo filtrante (Line Screen 3%) (Scorrimento verticale)",
+    "famiglia": "INDOOR",
+    "gruppo": "ZANZARIERE_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  }
+]

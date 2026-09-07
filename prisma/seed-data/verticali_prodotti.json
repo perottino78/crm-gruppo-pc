@@ -1,0 +1,1598 @@
+[
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 139.61
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 160.56
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 181.51
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 153.58
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 176.62
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 199.66
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 223.42
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 256.9
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 290.45
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 307.15
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 353.23
+  },
+  {
+    "tipologia": "VERTINC_CASPERTOP50_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 399.31
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 112.9
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.89
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.81
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 124.2
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.85
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.5
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 180.65
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.79
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 234.86
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.4
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.7
+  },
+  {
+    "tipologia": "VERTINC_CASPERSTD_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.92
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.31
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 148.75
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 168.12
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.27
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 163.58
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 184.97
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 206.93
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 237.96
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 268.99
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 284.54
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 327.17
+  },
+  {
+    "tipologia": "VERTINC_CASPERPLUS50CATENA_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 369.86
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 127.58
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.74
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 165.89
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 140.4
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.42
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 182.45
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 204.12
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 234.79
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 265.39
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 280.73
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.78
+  },
+  {
+    "tipologia": "VERTINC_CASPER50CATENA_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 364.9
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 112.9
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.89
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.81
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 124.2
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.85
+  },
+  {
+    "tipologia": "VERTINC_COMODASTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.5
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 120.82
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 138.96
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 157.1
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 132.91
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 152.86
+  },
+  {
+    "tipologia": "VERTINC_COMODASMART_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 172.8
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 112.9
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.89
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.81
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 124.2
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.85
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.5
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 120.82
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 138.96
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 157.1
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 132.91
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 152.86
+  },
+  {
+    "tipologia": "VERTINC_WINDINCASSMART_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 172.8
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 112.46
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.38
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.23
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 123.77
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.27
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 160.85
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 180.0
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.0
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 233.93
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 247.46
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 284.54
+  },
+  {
+    "tipologia": "VERTSCO_VERATOP_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 321.7
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 85.82
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 98.71
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.6
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 94.46
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 108.58
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 122.76
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 137.38
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 157.97
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 178.56
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 188.86
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 217.15
+  },
+  {
+    "tipologia": "VERTSCO_VERASTD_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 245.52
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 99.58
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.55
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.46
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 109.51
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.0
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.42
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 159.34
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 183.24
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.14
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 219.02
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 251.93
+  },
+  {
+    "tipologia": "VERTSCO_VERATELESCOPICA_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 284.76
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 97.13
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.74
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.29
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 106.85
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 122.9
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 138.96
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 155.45
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 178.78
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 202.03
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 213.7
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 245.74
+  },
+  {
+    "tipologia": "VERTSCO_CLIKCLAK_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 277.85
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 101.66
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 116.93
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 132.19
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.89
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 128.66
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 145.44
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 162.72
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 187.13
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 211.46
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 223.7
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 257.26
+  },
+  {
+    "tipologia": "VERTSCO_KETTYSTD_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 290.81
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 118.08
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 135.79
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 153.5
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.89
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 149.4
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 168.91
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 188.93
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 217.3
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 245.66
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 259.78
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 298.8
+  },
+  {
+    "tipologia": "VERTSCO_KETTYPLUS_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 337.75
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 88.27
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 101.52
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.77
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 97.13
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.67
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.29
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 141.26
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 162.43
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 183.67
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 194.26
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 223.34
+  },
+  {
+    "tipologia": "VERTSCO_WINDSTD_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 252.5
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 99.79
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.77
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.67
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 109.73
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.22
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.7
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 159.62
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 183.6
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.5
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 219.46
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 252.43
+  },
+  {
+    "tipologia": "VERTSCO_WINDMOLLACATENA_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.34
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 104.18
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 119.81
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 135.43
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 114.62
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 131.83
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 148.97
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 166.68
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 191.66
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 216.72
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 229.18
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 263.59
+  },
+  {
+    "tipologia": "VERTSCO_WINDCRICCHETTO_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 297.94
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 94.39
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 108.58
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 122.76
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 103.9
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 119.45
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 135.0
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 151.06
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 173.74
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 196.34
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.72
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 238.82
+  },
+  {
+    "tipologia": "VERTSCO_WINDSMART_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 270.0
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 97.13
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 111.74
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 126.29
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 106.85
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 122.9
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 138.89
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 155.45
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 178.78
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 202.03
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 213.7
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 245.74
+  },
+  {
+    "tipologia": "VERTSCO_WINDFAST_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 277.78
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 112.9
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 129.89
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 146.81
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 124.2
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 142.85
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 161.5
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 180.65
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 207.79
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 234.86
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 248.4
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 285.7
+  },
+  {
+    "tipologia": "VERTSCO_WINDUP_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 322.92
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 130.97
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 150.62
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FIBRA_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 170.28
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 144.07
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 165.67
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_STRISCE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 187.27
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 209.59
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 240.98
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_OSCURANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 272.45
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_BASE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 288.14
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_RAFF",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 331.34
+  },
+  {
+    "tipologia": "VERTSCO_WINDUPCRICCHETTO_FILTRANTE_LEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 2000,
+    "larghezzaMm": 1000,
+    "prezzoBase": 374.54
+  }
+]

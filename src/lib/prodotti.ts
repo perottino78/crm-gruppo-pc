@@ -14,7 +14,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "ZPC_",
   // Linea Uragano (Bora/Irene, dentro Zanzariere P&C): stesso motore MQ_CON_MINIMI,
   // stessa convenzione cm.
-  "URAGANO_"];
+  // Zanzariere verticali a rullo (Incasso: Casper/Comoda/Wind Incas Verticale;
+  // Scorrimento: Vera/Clik-Clak/Ketty/Wind Verticale), dentro Zanzariere P&C: stesso
+  // motore MQ_CON_MINIMI, stessa convenzione cm.
+  "VERTINC_", "VERTSCO_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -146,6 +149,11 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("URAGANO_IRENEINCAS50_")) return "URAGANO_IRENEINCAS50";
   if (tipologia.startsWith("URAGANO_IRENE65SQUAREINCAS_")) return "URAGANO_IRENE65SQUAREINCAS";
   if (tipologia.startsWith("URAGANO_IRENE65SQUARE_")) return "URAGANO_IRENE65SQUARE";
+  // Zanzariere verticali a rullo (Incasso/Scorrimento): un "listino" per linea di
+  // modello (21 linee totali), per scopare eventuali extra propri di una singola linea
+  // (es. Catena per doppio comando solo su Ketty/Ketty Plus).
+  const lineaVert = lineaVerticale(tipologia);
+  if (lineaVert) return `${lineaVert.prefix}${lineaVert.linea}`;
   return null;
 }
 
@@ -401,6 +409,87 @@ function labelBreveUragano(tipologia: string): string {
   return `${lineaLabel} ${URAGANO_MONT_LABEL[mont] ?? mont} · ${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
 }
 
+// Zanzariere verticali a rullo (dentro Zanzariere P&C, come Uragano), in due
+// sottogruppi distinti per meccanismo di montaggio: "Incasso verticale" (Casper,
+// Comoda, Wind Incas Verticale — cassonetto incassato nel vano) e "Scorrimento
+// verticale" (Vera, Clik-Clak, Ketty, Wind Verticale — cassonetto a vista con guide
+// esterne). A differenza di Uragano, ogni linea di modello (21 in totale) è già
+// completa in sé — non ha un'ulteriore variante di montaggio — quindi la tipologia
+// ha sempre e solo 3 parti dopo il prefisso: LINEA_TESSUTO_COLORE.
+const VERTICALE_PREFISSI = ["VERTINC_", "VERTSCO_"] as const;
+
+const VERTICALE_SOTTOGRUPPI: Record<string, string> = {
+  VERTINC_: "Incasso verticale",
+  VERTSCO_: "Scorrimento verticale",
+};
+
+const VERTICALE_LINEE: Record<string, string> = {
+  // Incasso verticale
+  CASPERTOP50: "Casper Top 50",
+  CASPERSTD: "Casper 50 Vert. / Casper 45 / Casper 2 / Casper 3",
+  CASPERPLUS50CATENA: "Casper Plus 50 Catena",
+  CASPER50CATENA: "Casper 50 Catena",
+  COMODASTD: "Comoda 50 Verticale",
+  COMODASMART: "Comoda 50 Verticale Smart",
+  WINDINCASSTD: "Wind 42 Incas / 45 Incas Verticale",
+  WINDINCASSMART: "Wind 42 Incas Smart",
+  // Scorrimento verticale
+  VERATOP: "Vera Top 45/55 - 40/50",
+  VERASTD: "Vera 45/55 - Vera Basic 40/45/50/55",
+  VERATELESCOPICA: "Vera Telescopica 40/50 - 45/55",
+  CLIKCLAK: "Clik-Clak",
+  KETTYSTD: "Ketty 50/55",
+  KETTYPLUS: "Ketty Plus 50/55",
+  WINDSTD: "Wind 32/42/42 Tel./Simply/45",
+  WINDMOLLACATENA: "Wind 42 Molla/Catena",
+  WINDCRICCHETTO: "Wind Cricchetto (32-42-42 telesc.)",
+  WINDSMART: "Wind Smart (42)",
+  WINDFAST: "Wind Fast (42)",
+  WINDUP: "Wind Up (45) — solo applicazione frontale",
+  WINDUPCRICCHETTO: "Wind Up Cricchetto (45) — solo applicazione frontale",
+};
+
+const VERTICALE_TESSUTO_LABEL: Record<string, string> = {
+  FIBRA: "Rete in fibra",
+  STRISCE: "Rete a strisce",
+  OSCURANTE: "Telo oscurante (Tecnic Oscura)",
+  FILTRANTE: "Telo filtrante (Line Screen 3%)",
+};
+
+function lineaVerticale(tipologia: string): { prefix: string; linea: string } | null {
+  for (const prefix of VERTICALE_PREFISSI) {
+    if (!tipologia.startsWith(prefix)) continue;
+    const resto = tipologia.slice(prefix.length);
+    for (const linea of Object.keys(VERTICALE_LINEE)) {
+      if (resto.startsWith(linea + "_")) return { prefix, linea };
+    }
+  }
+  return null;
+}
+
+// Decompone una tipologia VERTINC_/VERTSCO_ nei 3 assi di scelta: la linea di
+// modello fa direttamente da "ante" (ogni linea è già un modello completo), il tipo
+// di tessuto (rete in fibra/a strisce/telo oscurante/filtrante) da "rete", la fascia
+// colore da "colore" — stessa convenzione ZPC_COLORE_LABEL delle altre zanzariere P&C.
+export function assiSelezioneVerticale(tipologia: string): AssiZpc | null {
+  const trovata = lineaVerticale(tipologia);
+  if (!trovata) return null;
+  const { prefix, linea } = trovata;
+  const resto = tipologia.slice((prefix + linea + "_").length);
+  const [tessuto, colore] = resto.split("_");
+  return {
+    ante: { valore: `${prefix}${linea}`, label: VERTICALE_LINEE[linea] ?? linea },
+    rete: { valore: tessuto, label: VERTICALE_TESSUTO_LABEL[tessuto] ?? tessuto },
+    colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
+  };
+}
+
+function labelBreveVerticale(tipologia: string): string {
+  const assi = assiSelezioneVerticale(tipologia);
+  if (!assi) return tipologia.replace(/_/g, " ");
+  return `${assi.ante.label} · ${assi.rete.label} · ${assi.colore.label}`;
+}
+
 const PLISSE_SOTTOGRUPPI: Record<string, string> = {
   "08": "Plisse 08",
   XXL08: "XXL Plisse 08",
@@ -427,6 +516,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("URAGANO_")) {
     return lineaUragano(tipologia) ? URAGANO_SOTTOGRUPPO_UNICO : null;
   }
+  const vert = lineaVerticale(tipologia);
+  if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
   return null;
 }
 
@@ -474,6 +565,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
+  if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
   return tipologia.replace(/_/g, " ");
 }
 
@@ -496,6 +588,11 @@ export function finituraDiTipologia(tipologia: string): string | null {
   }
   // Linea Uragano: stessa convenzione fascia colore in coda alla tipologia.
   if (tipologia.startsWith("URAGANO_")) {
+    const match = tipologia.match(/_(BASE|RAFF|LEGNO)$/);
+    if (match) return match[1];
+  }
+  // Zanzariere verticali a rullo: stessa convenzione fascia colore in coda alla tipologia.
+  if (tipologia.startsWith("VERTINC_") || tipologia.startsWith("VERTSCO_")) {
     const match = tipologia.match(/_(BASE|RAFF|LEGNO)$/);
     if (match) return match[1];
   }

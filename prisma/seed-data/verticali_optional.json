@@ -1,0 +1,32 @@
+[
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Catena per doppio comando",
+    "tipoPrezzo": "FISSO",
+    "valore": 29,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VERTSCO_KETTYSTD",
+    "note": "per pezzo",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Catena per doppio comando",
+    "tipoPrezzo": "FISSO",
+    "valore": 29,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "VERTSCO_KETTYPLUS",
+    "note": "per pezzo",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  }
+]
