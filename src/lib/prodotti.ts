@@ -293,20 +293,28 @@ function lineaUragano(tipologia: string): string | null {
   return null;
 }
 
-const URAGANO_SOTTOGRUPPI: Record<string, string> = {
-  BORA: "Bora (verticale a rullo)",
-  IRENE45: "Irene 45 (verticale/laterale)",
-  IRENE45UP: "Irene 45 Up (verticale)",
-  IRENEINCAS50: "Irene Incas 50 (verticale/laterale)",
+// Tutta la Linea Uragano (Bora + Irene) sta in UN SOLO sottogruppo dentro Zanzariere
+// P&C: "Scorrevole laterale a molla" — il meccanismo a rullo con richiamo a molla che
+// la distingue dalle famiglie ad anta (Antarex/Alba/Pratik/Libra/Scorri). La linea di
+// modello (Bora/Irene 45/Irene 45 Up/Irene Incas 50/Irene 65 Square/Irene 65 Square
+// Incas) diventa quindi il primo asse di scelta dentro questo sottogruppo, non un
+// sottogruppo a sé — vedi assiSelezioneUragano.
+const URAGANO_SOTTOGRUPPO_UNICO = "Scorrevole laterale a molla";
+
+const URAGANO_LINEA_LABEL: Record<string, string> = {
+  BORA: "Bora",
+  IRENE45: "Irene 45",
+  IRENE45UP: "Irene 45 Up",
+  IRENEINCAS50: "Irene Incas 50",
   IRENE65SQUARE: "Irene 65 Square",
-  IRENE65SQUAREINCAS: "Irene 65 Square Incas (motorizzata)",
+  IRENE65SQUAREINCAS: "Irene 65 Square Incas",
 };
 
 const URAGANO_BORA_VARIANTE_LABEL: Record<string, string> = {
-  TOP: "Bora Top / Top Up / Top Incas",
-  TOPDOPPIA: "Bora Top Doppia / Top Incas Doppia",
-  STD: "Bora / Bora Up / Bora SR / Bora Incas",
-  STDDOPPIA: "Bora Doppia / Bora Incas Doppia",
+  TOP: "Top / Top Up / Top Incas",
+  TOPDOPPIA: "Top Doppia / Top Incas Doppia",
+  STD: "Standard / Up / SR / Incas",
+  STDDOPPIA: "Standard Doppia / Incas Doppia",
 };
 
 const URAGANO_MONT_LABEL: Record<string, string> = {
@@ -327,19 +335,27 @@ const URAGANO_RETE_LABEL: Record<string, string> = {
 };
 
 // Decompone una tipologia URAGANO_ nei 3 assi di scelta per il selettore a cascata.
-// Bora non ha un vero asse "rete" (rete inclusa fissa), quindi il secondo asse è
-// segnaposto a valore unico; le linee 65 Square non hanno un asse "montaggio" (solo
-// verticale), quindi il primo asse identifica la linea stessa.
+// Siccome tutte le linee condividono un solo sottogruppo, il primo asse ("ante") deve
+// includere anche la linea di modello (Bora/Irene 45/Irene 45 Up/...) e non solo la
+// variante/montaggio, altrimenti valori come "VERT" comparirebbero identici per più
+// linee diverse mescolando reti e prezzi non pertinenti. Bora non ha un vero asse
+// "rete" (rete inclusa fissa), quindi il secondo asse è segnaposto a valore unico; le
+// linee 65 Square non hanno un asse "montaggio" (solo verticale), quindi il primo asse
+// coincide con la linea stessa.
 export function assiSelezioneUragano(tipologia: string): AssiZpc | null {
   const linea = lineaUragano(tipologia);
   if (!linea) return null;
   const resto = tipologia.slice(("URAGANO_" + linea + "_").length);
   const parti = resto.split("_");
+  const lineaLabel = URAGANO_LINEA_LABEL[linea] ?? linea;
 
   if (linea === "BORA") {
     const [variante, colore] = parti;
     return {
-      ante: { valore: variante, label: URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante },
+      ante: {
+        valore: `${linea}_${variante}`,
+        label: `${lineaLabel} ${URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante}`,
+      },
       rete: { valore: "FISSA", label: "Rete nera Strong / rete in Fibra (inclusa)" },
       colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
     };
@@ -347,7 +363,7 @@ export function assiSelezioneUragano(tipologia: string): AssiZpc | null {
   if (linea === "IRENE65SQUARE" || linea === "IRENE65SQUAREINCAS") {
     const [rete, colore] = parti;
     return {
-      ante: { valore: linea, label: linea === "IRENE65SQUAREINCAS" ? "65 Square Incas" : "65 Square" },
+      ante: { valore: linea, label: lineaLabel },
       rete: { valore: rete, label: URAGANO_RETE_LABEL[rete] ?? rete },
       colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
     };
@@ -355,29 +371,34 @@ export function assiSelezioneUragano(tipologia: string): AssiZpc | null {
   // IRENE45 / IRENE45UP / IRENEINCAS50: montaggio + rete + colore
   const [mont, rete, colore] = parti;
   return {
-    ante: { valore: mont, label: URAGANO_MONT_LABEL[mont] ?? mont },
+    ante: {
+      valore: `${linea}_${mont}`,
+      label: `${lineaLabel} — ${URAGANO_MONT_LABEL[mont] ?? mont}`,
+    },
     rete: { valore: rete, label: URAGANO_RETE_LABEL[rete] ?? rete },
     colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
   };
 }
 
-// Etichetta breve leggibile per una tipologia URAGANO_.
+// Etichetta breve leggibile per una tipologia URAGANO_ (include sempre la linea di
+// modello, dato che tutte le linee condividono un solo sottogruppo).
 function labelBreveUragano(tipologia: string): string {
   const linea = lineaUragano(tipologia);
   if (!linea) return tipologia.replace(/_/g, " ");
   const resto = tipologia.slice(("URAGANO_" + linea + "_").length);
   const parti = resto.split("_");
+  const lineaLabel = URAGANO_LINEA_LABEL[linea] ?? linea;
 
   if (linea === "BORA") {
     const [variante, colore] = parti;
-    return `${URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+    return `${lineaLabel} ${URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
   }
   if (linea === "IRENE65SQUARE" || linea === "IRENE65SQUAREINCAS") {
     const [rete, colore] = parti;
-    return `${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+    return `${lineaLabel} · ${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
   }
   const [mont, rete, colore] = parti;
-  return `${URAGANO_MONT_LABEL[mont] ?? mont} · ${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+  return `${lineaLabel} ${URAGANO_MONT_LABEL[mont] ?? mont} · ${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
 }
 
 const PLISSE_SOTTOGRUPPI: Record<string, string> = {
@@ -404,8 +425,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
     return fam ? ZPC_SOTTOGRUPPI[fam] ?? null : null;
   }
   if (tipologia.startsWith("URAGANO_")) {
-    const linea = lineaUragano(tipologia);
-    return linea ? URAGANO_SOTTOGRUPPI[linea] ?? null : null;
+    return lineaUragano(tipologia) ? URAGANO_SOTTOGRUPPO_UNICO : null;
   }
   return null;
 }
