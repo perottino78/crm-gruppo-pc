@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
-const GRUPPO = "SERRAMENTI PVC ZENITH";
+const GRUPPO = "SERRAMENTI";
 
 type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number; prezzoBase: number };
 type ModelloRow = {

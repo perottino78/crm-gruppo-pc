@@ -25,6 +25,30 @@ const TIPOLOGIE_TEST = [
   "STFA1",
 ];
 
+// Cliente/preventivi di prova creati dal seed iniziale (prisma/seed.ts): unico cliente
+// per cui questa route ha il permesso di rimuovere righe preventivo per sbloccare la
+// cancellazione dei prodotti — mai su un preventivo di un cliente reale.
+const CLIENTE_DEMO_ID = "demo-cliente-1";
+
+async function ricalcolaTotali(preventivoId: string) {
+  const righe = await prisma.rigaPreventivo.findMany({
+    where: { preventivoId },
+    include: { optionali: true },
+  });
+  const imponibileLordo = righe.reduce((sum, r) => {
+    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
+    return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+  }, 0);
+  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
+  if (!preventivoAttuale) return;
+  const sconto = preventivoAttuale.scontoPercentuale ?? 0;
+  const totaleNetto = imponibileLordo * (1 - sconto / 100);
+  await prisma.preventivo.update({
+    where: { id: preventivoId },
+    data: { totaleNetto, totaleIva: totaleNetto * (preventivoAttuale.aliquotaIva / 100) },
+  });
+}
+
 export async function GET(req: NextRequest) {
   const key = req.headers.get("x-seed-key");
   if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -42,7 +66,12 @@ export async function GET(req: NextRequest) {
   });
   const righeCollegate = await prisma.rigaPreventivo.findMany({
     where: { prodottoId: { in: prodotti.map((p) => p.id) } },
-    select: { id: true, preventivoId: true, prodotto: { select: { tipologia: true } } },
+    select: {
+      id: true,
+      preventivoId: true,
+      prodotto: { select: { tipologia: true } },
+      preventivo: { select: { clienteId: true, cliente: { select: { nome: true } } } },
+    },
   });
 
   const perTipologia: Record<string, number> = {};
@@ -58,6 +87,9 @@ export async function GET(req: NextRequest) {
       rigaId: r.id,
       preventivoId: r.preventivoId,
       tipologia: r.prodotto.tipologia,
+      clienteId: r.preventivo.clienteId,
+      clienteNome: r.preventivo.cliente.nome,
+      isDemo: r.preventivo.clienteId === CLIENTE_DEMO_ID,
     })),
   });
 }
@@ -76,16 +108,34 @@ export async function POST(req: NextRequest) {
 
   const righeCollegate = await prisma.rigaPreventivo.findMany({
     where: { prodottoId: { in: prodotti.map((p) => p.id) } },
-    select: { prodottoId: true },
+    select: { id: true, prodottoId: true, preventivoId: true, preventivo: { select: { clienteId: true } } },
   });
-  const idProdottiBloccati = new Set(righeCollegate.map((r) => r.prodottoId));
+
+  // Solo le righe che appartengono al cliente demo del seed iniziale vengono rimosse
+  // automaticamente per sbloccare la cancellazione del prodotto orfano. Qualsiasi altra
+  // riga (cliente reale) blocca la cancellazione, come prima: mai toccare preventivi veri.
+  const righeDemoDaRimuovere = righeCollegate.filter((r) => r.preventivo.clienteId === CLIENTE_DEMO_ID);
+  const righeRealiBloccanti = righeCollegate.filter((r) => r.preventivo.clienteId !== CLIENTE_DEMO_ID);
+
+  let righeDemoRimosse = 0;
+  const preventiviDaRicalcolare = new Set<string>();
+  if (righeDemoDaRimuovere.length > 0) {
+    const rigaIds = righeDemoDaRimuovere.map((r) => r.id);
+    await prisma.rigaOptional.deleteMany({ where: { rigaId: { in: rigaIds } } });
+    const eliminate = await prisma.rigaPreventivo.deleteMany({ where: { id: { in: rigaIds } } });
+    righeDemoRimosse = eliminate.count;
+    for (const r of righeDemoDaRimuovere) preventiviDaRicalcolare.add(r.preventivoId);
+    for (const preventivoId of preventiviDaRicalcolare) await ricalcolaTotali(preventivoId);
+  }
+
+  const idProdottiBloccati = new Set(righeRealiBloccanti.map((r) => r.prodottoId));
   const idProdottiCancellabili = prodotti.filter((p) => !idProdottiBloccati.has(p.id)).map((p) => p.id);
   const tipologieBloccate = [...new Set(prodotti.filter((p) => idProdottiBloccati.has(p.id)).map((p) => p.tipologia))];
 
   const prodottiCancellati = await prisma.prodotto.deleteMany({ where: { id: { in: idProdottiCancellabili } } });
 
   // Il modello (ModelloProdotto: immagine/descrizione/gruppo) si cancella solo se non
-  // e' rimasto nessun Prodotto per quella tipologia (cioe' non era bloccata da preventivi).
+  // e' rimasto nessun Prodotto per quella tipologia (cioe' non era bloccata da un preventivo reale).
   const tipologieDaCancellareModello = TIPOLOGIE_TEST.filter((t) => !tipologieBloccate.includes(t));
   const modelliCancellati = await prisma.modelloProdotto.deleteMany({
     where: { brandId: brand.id, tipologia: { in: tipologieDaCancellareModello } },
@@ -93,8 +143,10 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     ok: true,
+    righePreventivoDemoRimosse: righeDemoRimosse,
+    preventiviRicalcolati: [...preventiviDaRicalcolare],
     prodottiCancellati: prodottiCancellati.count,
     modelliCancellati: modelliCancellati.count,
-    tipologieBloccateDaPreventiviEsistenti: tipologieBloccate,
+    tipologieBloccateDaPreventiviReali: tipologieBloccate,
   });
 }
