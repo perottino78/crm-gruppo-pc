@@ -10,7 +10,7 @@
     "listino": "URAGANO_BORA",
     "note": "Supplemento al pezzo sul prezzo del listino Bora (tutte le varianti Bora/Bora Top).",
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -25,7 +25,7 @@
     "listino": "URAGANO_BORA",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -40,7 +40,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -55,7 +55,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": "per pezzo",
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -70,7 +70,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -85,7 +85,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": "Da applicare in caso di motore Becker standard; incluso di serie nel prezzo del motore Becker radio.",
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -100,7 +100,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -115,7 +115,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -130,7 +130,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -145,7 +145,7 @@
     "listino": "URAGANO_IRENE65SQUARE",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -160,7 +160,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -175,7 +175,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": "per pezzo",
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -190,7 +190,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -205,7 +205,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": "Da applicare in caso di motore Becker standard; incluso di serie nel prezzo del motore Becker radio.",
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -220,7 +220,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -235,7 +235,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -250,7 +250,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   },
@@ -265,7 +265,7 @@
     "listino": "URAGANO_IRENE65SQUAREINCAS",
     "note": null,
     "gruppiApplicabili": [
-      "ZANZARIERE_PC_URAGANO"
+      "ZANZARIERE_PC"
     ],
     "finituraApplicabile": null
   }

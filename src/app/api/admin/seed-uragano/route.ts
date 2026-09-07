@@ -8,7 +8,19 @@ export const dynamic = "force-dynamic";
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
-const GRUPPO = "ZANZARIERE_PC_URAGANO";
+// Linea Uragano condivide il gruppo "ZANZARIERE_PC" con le famiglie ad anta
+// (Antarex/Alba/Pratik/Libra/Scorri) cosi' che compaiano come un'unica famiglia
+// Zanzariere P&C nell'albero Indoor. Per questo lo scoping degli optional in
+// creazione/rimozione NON puo' usare gruppiApplicabili (condiviso con l'altra
+// route seed-zanzariere-pc) ma i valori di "listino" propri di questa linea.
+const LISTINI_URAGANO = [
+  "URAGANO_BORA",
+  "URAGANO_IRENE45",
+  "URAGANO_IRENE45UP",
+  "URAGANO_IRENEINCAS50",
+  "URAGANO_IRENE65SQUARE",
+  "URAGANO_IRENE65SQUAREINCAS",
+];
 
 type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number; prezzoBase: number };
 type ModelloRow = {
@@ -110,7 +122,7 @@ export async function POST(req: NextRequest) {
 
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      where: { brandId: brand.id, listino: { in: LISTINI_URAGANO } },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -199,7 +211,7 @@ export async function GET(req: NextRequest) {
     where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
   });
   const optionaliCount = await prisma.optional.count({
-    where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+    where: { brandId: brand.id, listino: { in: LISTINI_URAGANO } },
   });
 
   return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });

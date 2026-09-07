@@ -3,7 +3,7 @@
     "tipologia": "URAGANO_BORA_TOP_BASE",
     "descrizioneTecnica": "Bora Top / Top Up / Top Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -16,7 +16,7 @@
     "tipologia": "URAGANO_BORA_TOP_RAFF",
     "descrizioneTecnica": "Bora Top / Top Up / Top Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -29,7 +29,7 @@
     "tipologia": "URAGANO_BORA_TOP_LEGNO",
     "descrizioneTecnica": "Bora Top / Top Up / Top Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -42,7 +42,7 @@
     "tipologia": "URAGANO_BORA_TOPDOPPIA_BASE",
     "descrizioneTecnica": "Bora Top Doppia / Top Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -55,7 +55,7 @@
     "tipologia": "URAGANO_BORA_TOPDOPPIA_RAFF",
     "descrizioneTecnica": "Bora Top Doppia / Top Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -68,7 +68,7 @@
     "tipologia": "URAGANO_BORA_TOPDOPPIA_LEGNO",
     "descrizioneTecnica": "Bora Top Doppia / Top Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -81,7 +81,7 @@
     "tipologia": "URAGANO_BORA_STD_BASE",
     "descrizioneTecnica": "Bora / Bora Up / Bora SR / Bora Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -94,7 +94,7 @@
     "tipologia": "URAGANO_BORA_STD_RAFF",
     "descrizioneTecnica": "Bora / Bora Up / Bora SR / Bora Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -107,7 +107,7 @@
     "tipologia": "URAGANO_BORA_STD_LEGNO",
     "descrizioneTecnica": "Bora / Bora Up / Bora SR / Bora Incas — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -120,7 +120,7 @@
     "tipologia": "URAGANO_BORA_STDDOPPIA_BASE",
     "descrizioneTecnica": "Bora Doppia / Bora Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -133,7 +133,7 @@
     "tipologia": "URAGANO_BORA_STDDOPPIA_RAFF",
     "descrizioneTecnica": "Bora Doppia / Bora Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -146,7 +146,7 @@
     "tipologia": "URAGANO_BORA_STDDOPPIA_LEGNO",
     "descrizioneTecnica": "Bora Doppia / Bora Incas Doppia — rete nera Strong / rete in Fibra",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_bora.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -159,7 +159,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRONG_BASE",
     "descrizioneTecnica": "Irene verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -172,7 +172,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRONG_RAFF",
     "descrizioneTecnica": "Irene verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -185,7 +185,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRONG_LEGNO",
     "descrizioneTecnica": "Irene verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -198,7 +198,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRISCE_BASE",
     "descrizioneTecnica": "Irene verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -211,7 +211,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRISCE_RAFF",
     "descrizioneTecnica": "Irene verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -224,7 +224,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -237,7 +237,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_TUFF_BASE",
     "descrizioneTecnica": "Irene verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -250,7 +250,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_TUFF_RAFF",
     "descrizioneTecnica": "Irene verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -263,7 +263,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_TUFF_LEGNO",
     "descrizioneTecnica": "Irene verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -276,7 +276,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_OSCUR_BASE",
     "descrizioneTecnica": "Irene verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -289,7 +289,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_OSCUR_RAFF",
     "descrizioneTecnica": "Irene verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -302,7 +302,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -315,7 +315,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_FILTR_BASE",
     "descrizioneTecnica": "Irene verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -328,7 +328,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_FILTR_RAFF",
     "descrizioneTecnica": "Irene verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -341,7 +341,7 @@
     "tipologia": "URAGANO_IRENE45_VERT_FILTR_LEGNO",
     "descrizioneTecnica": "Irene verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -354,7 +354,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRONG_BASE",
     "descrizioneTecnica": "Irene laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -367,7 +367,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRONG_RAFF",
     "descrizioneTecnica": "Irene laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -380,7 +380,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRONG_LEGNO",
     "descrizioneTecnica": "Irene laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -393,7 +393,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRONG_BASE",
     "descrizioneTecnica": "Irene laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -406,7 +406,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRONG_RAFF",
     "descrizioneTecnica": "Irene laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -419,7 +419,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRONG_LEGNO",
     "descrizioneTecnica": "Irene laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -432,7 +432,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRISCE_BASE",
     "descrizioneTecnica": "Irene laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -445,7 +445,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRISCE_RAFF",
     "descrizioneTecnica": "Irene laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -458,7 +458,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -471,7 +471,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRISCE_BASE",
     "descrizioneTecnica": "Irene laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -484,7 +484,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRISCE_RAFF",
     "descrizioneTecnica": "Irene laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -497,7 +497,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -510,7 +510,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_TUFF_BASE",
     "descrizioneTecnica": "Irene laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -523,7 +523,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_TUFF_RAFF",
     "descrizioneTecnica": "Irene laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -536,7 +536,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_TUFF_LEGNO",
     "descrizioneTecnica": "Irene laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -549,7 +549,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_TUFF_BASE",
     "descrizioneTecnica": "Irene laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -562,7 +562,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_TUFF_RAFF",
     "descrizioneTecnica": "Irene laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -575,7 +575,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_TUFF_LEGNO",
     "descrizioneTecnica": "Irene laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -588,7 +588,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_OSCUR_BASE",
     "descrizioneTecnica": "Irene laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -601,7 +601,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_OSCUR_RAFF",
     "descrizioneTecnica": "Irene laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -614,7 +614,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -627,7 +627,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_OSCUR_BASE",
     "descrizioneTecnica": "Irene laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -640,7 +640,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_OSCUR_RAFF",
     "descrizioneTecnica": "Irene laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -653,7 +653,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -666,7 +666,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_FILTR_BASE",
     "descrizioneTecnica": "Irene laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -679,7 +679,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_FILTR_RAFF",
     "descrizioneTecnica": "Irene laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -692,7 +692,7 @@
     "tipologia": "URAGANO_IRENE45_LAT_FILTR_LEGNO",
     "descrizioneTecnica": "Irene laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -705,7 +705,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_FILTR_BASE",
     "descrizioneTecnica": "Irene laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -718,7 +718,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_FILTR_RAFF",
     "descrizioneTecnica": "Irene laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -731,7 +731,7 @@
     "tipologia": "URAGANO_IRENE45_LATDOPPIA_FILTR_LEGNO",
     "descrizioneTecnica": "Irene laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -744,7 +744,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRONG_BASE",
     "descrizioneTecnica": "Irene 45 Up verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -757,7 +757,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRONG_RAFF",
     "descrizioneTecnica": "Irene 45 Up verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -770,7 +770,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRONG_LEGNO",
     "descrizioneTecnica": "Irene 45 Up verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -783,7 +783,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRISCE_BASE",
     "descrizioneTecnica": "Irene 45 Up verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -796,7 +796,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRISCE_RAFF",
     "descrizioneTecnica": "Irene 45 Up verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -809,7 +809,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene 45 Up verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -822,7 +822,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_TUFF_BASE",
     "descrizioneTecnica": "Irene 45 Up verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -835,7 +835,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_TUFF_RAFF",
     "descrizioneTecnica": "Irene 45 Up verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -848,7 +848,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_TUFF_LEGNO",
     "descrizioneTecnica": "Irene 45 Up verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -861,7 +861,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_OSCUR_BASE",
     "descrizioneTecnica": "Irene 45 Up verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -874,7 +874,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_OSCUR_RAFF",
     "descrizioneTecnica": "Irene 45 Up verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -887,7 +887,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene 45 Up verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -900,7 +900,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_FILTR_BASE",
     "descrizioneTecnica": "Irene 45 Up verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -913,7 +913,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_FILTR_RAFF",
     "descrizioneTecnica": "Irene 45 Up verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -926,7 +926,7 @@
     "tipologia": "URAGANO_IRENE45UP_VERT_FILTR_LEGNO",
     "descrizioneTecnica": "Irene 45 Up verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene45up.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -939,7 +939,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRONG_BASE",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -952,7 +952,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRONG_RAFF",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -965,7 +965,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRONG_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -978,7 +978,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRISCE_BASE",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -991,7 +991,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRISCE_RAFF",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1004,7 +1004,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1017,7 +1017,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_TUFF_BASE",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1030,7 +1030,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_TUFF_RAFF",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1043,7 +1043,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_TUFF_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 verticale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1056,7 +1056,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_OSCUR_BASE",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1069,7 +1069,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_OSCUR_RAFF",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1082,7 +1082,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1095,7 +1095,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_FILTR_BASE",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1108,7 +1108,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_FILTR_RAFF",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1121,7 +1121,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_VERT_FILTR_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 verticale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1134,7 +1134,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRONG_BASE",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1147,7 +1147,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRONG_RAFF",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1160,7 +1160,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRONG_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1173,7 +1173,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRONG_BASE",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1186,7 +1186,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRONG_RAFF",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1199,7 +1199,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRONG_LEGNO",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1212,7 +1212,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRISCE_BASE",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1225,7 +1225,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRISCE_RAFF",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1238,7 +1238,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1251,7 +1251,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRISCE_BASE",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1264,7 +1264,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRISCE_RAFF",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1277,7 +1277,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_STRISCE_LEGNO",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete a strisce",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1290,7 +1290,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_TUFF_BASE",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1303,7 +1303,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_TUFF_RAFF",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1316,7 +1316,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_TUFF_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 laterale — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1329,7 +1329,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_TUFF_BASE",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1342,7 +1342,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_TUFF_RAFF",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1355,7 +1355,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_TUFF_LEGNO",
     "descrizioneTecnica": "Irene Incas laterale doppia — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1368,7 +1368,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_OSCUR_BASE",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1381,7 +1381,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_OSCUR_RAFF",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1394,7 +1394,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1407,7 +1407,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_OSCUR_BASE",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1420,7 +1420,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_OSCUR_RAFF",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1433,7 +1433,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1446,7 +1446,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_FILTR_BASE",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1459,7 +1459,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_FILTR_RAFF",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1472,7 +1472,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LAT_FILTR_LEGNO",
     "descrizioneTecnica": "Irene Incas 50 laterale — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1485,7 +1485,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_FILTR_BASE",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1498,7 +1498,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_FILTR_RAFF",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1511,7 +1511,7 @@
     "tipologia": "URAGANO_IRENEINCAS50_LATDOPPIA_FILTR_LEGNO",
     "descrizioneTecnica": "Irene Incas laterale doppia — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_ireneincas50.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1524,7 +1524,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_STRONG_BASE",
     "descrizioneTecnica": "Irene 65 Square — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1537,7 +1537,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_STRONG_RAFF",
     "descrizioneTecnica": "Irene 65 Square — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1550,7 +1550,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_STRONG_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1563,7 +1563,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_TUFF_BASE",
     "descrizioneTecnica": "Irene 65 Square — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1576,7 +1576,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_TUFF_RAFF",
     "descrizioneTecnica": "Irene 65 Square — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1589,7 +1589,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_TUFF_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1602,7 +1602,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OSCUR_BASE",
     "descrizioneTecnica": "Irene 65 Square — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1615,7 +1615,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OSCUR_RAFF",
     "descrizioneTecnica": "Irene 65 Square — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1628,7 +1628,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1641,7 +1641,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_FILTR_BASE",
     "descrizioneTecnica": "Irene 65 Square — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1654,7 +1654,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_FILTR_RAFF",
     "descrizioneTecnica": "Irene 65 Square — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1667,7 +1667,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_FILTR_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1680,7 +1680,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OPATEX_BASE",
     "descrizioneTecnica": "Irene 65 Square — oscurante Opatex Pro (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1693,7 +1693,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OPATEX_RAFF",
     "descrizioneTecnica": "Irene 65 Square — oscurante Opatex Pro (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1706,7 +1706,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_OPATEX_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — oscurante Opatex Pro (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1719,7 +1719,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREENOSC_BASE",
     "descrizioneTecnica": "Irene 65 Square — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1732,7 +1732,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREENOSC_RAFF",
     "descrizioneTecnica": "Irene 65 Square — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1745,7 +1745,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREENOSC_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1758,7 +1758,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREEN5500_BASE",
     "descrizioneTecnica": "Irene 65 Square — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1771,7 +1771,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREEN5500_RAFF",
     "descrizioneTecnica": "Irene 65 Square — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1784,7 +1784,7 @@
     "tipologia": "URAGANO_IRENE65SQUARE_SCREEN5500_LEGNO",
     "descrizioneTecnica": "Irene 65 Square — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65square.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1797,7 +1797,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_STRONG_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1810,7 +1810,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_STRONG_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1823,7 +1823,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_STRONG_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete nera Strong",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1836,7 +1836,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_TUFF_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1849,7 +1849,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_TUFF_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1862,7 +1862,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_TUFF_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — rete Tuffscreen™",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1875,7 +1875,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_OSCUR_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1888,7 +1888,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_OSCUR_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1901,7 +1901,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_OSCUR_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo oscurante Tecnic Oscura",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1914,7 +1914,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_FILTR_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1927,7 +1927,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_FILTR_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1940,7 +1940,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_FILTR_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — telo filtrante Line Screen 3%",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1953,7 +1953,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_OPATEX_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — oscurante Opatex Pro (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1966,7 +1966,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREENOSC_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1979,7 +1979,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREENOSC_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -1992,7 +1992,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREENOSC_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen oscurante (motorizzata)",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -2005,7 +2005,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREEN5500_BASE",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -2018,7 +2018,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREEN5500_RAFF",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
@@ -2031,7 +2031,7 @@
     "tipologia": "URAGANO_IRENE65SQUAREINCAS_SCREEN5500_LEGNO",
     "descrizioneTecnica": "Irene 65 Square Incas (motorizzata) — Screen 5500",
     "famiglia": "INDOOR",
-    "gruppo": "ZANZARIERE_PC_URAGANO",
+    "gruppo": "ZANZARIERE_PC",
     "immagineUrl": "/immagini/zanzariere_pc/uragano_irene65squareincas.png",
     "modalitaCalcolo": "MQ_CON_MINIMI",
     "parametriCalcolo": {
