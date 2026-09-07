@@ -204,24 +204,17 @@ export default function SelettoreProdotto({
     const unit = unitaMisura(nodo.value);
     if (nodo.misure) {
       const { larghezzaMin, larghezzaMax, altezzaMin, altezzaMax } = nodo.misure;
-      // Se a listino c'e' una sola fascia di prezzo (min === max, es. Kopen: un unico
-      // prezzo "fino a" una misura massima, senza righe piu' piccole a listino), il prezzo
-      // vale per qualunque misura fino a quel massimo — coerente con trovaFasciaPrezzo, che
-      // seleziona la fascia piu' piccola che copre la misura richiesta. In quel caso non
-      // blocchiamo le misure piu' piccole, solo quelle davvero fuori produzione (> max).
-      const unicaFasciaLarghezza = larghezzaMin === larghezzaMax;
-      const unicaFasciaAltezza = altezzaMin === altezzaMax;
-      if (!unicaFasciaLarghezza && larghezza < larghezzaMin) {
-        return `Larghezza fuori produzione: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
+      // Blocco rigido su tutti i listini: la misura inserita deve rientrare nel range
+      // effettivamente a listino (min-max delle fasce di prezzo caricate), sia per evitare
+      // di andare sotto la misura minima prodotta sia per evitare di sforare il massimo —
+      // altrimenti si rischia di applicare comunque il prezzo della fascia piu' vicina,
+      // che per alcuni listini (es. un'unica fascia "fino a") puo' risultare un prezzo
+      // sproporzionato rispetto alla misura realmente richiesta.
+      if (larghezza < larghezzaMin || larghezza > larghezzaMax) {
+        return `Larghezza fuori listino: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
       }
-      if (larghezza > larghezzaMax) {
-        return `Larghezza fuori produzione: per questo modello va da ${unicaFasciaLarghezza ? 1 : larghezzaMin} a ${larghezzaMax} ${unit}.`;
-      }
-      if (!unicaFasciaAltezza && altezza < altezzaMin) {
-        return `Altezza/sporgenza fuori produzione: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
-      }
-      if (altezza > altezzaMax) {
-        return `Altezza/sporgenza fuori produzione: per questo modello va da ${unicaFasciaAltezza ? 1 : altezzaMin} a ${altezzaMax} ${unit}.`;
+      if (altezza < altezzaMin || altezza > altezzaMax) {
+        return `Altezza/sporgenza fuori listino: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
       }
     }
     return null;
@@ -231,7 +224,12 @@ export default function SelettoreProdotto({
     if (!scelto) return;
     const errore = controllaMisure(scelto, larghezzaVal, altezzaVal);
     setErroreMisura(errore);
-    if (errore) e.preventDefault();
+    if (errore) {
+      e.preventDefault();
+      // Pop-up vero e proprio, non solo il testo sotto al campo: cosi' non passa
+      // inosservato ed evita di procedere con una misura fuori listino.
+      window.alert(`⚠️ Misura fuori listino\n\n${errore}`);
+    }
   }
 
   return (
@@ -389,12 +387,12 @@ export default function SelettoreProdotto({
                   <span className="font-bold text-neutral-700">
                     Misure di produzione: {etichetteDimensioni(scelto.value).larghezza.toLowerCase()}{" "}
                     {scelto.misure.larghezzaMin === scelto.misure.larghezzaMax
-                      ? `fino a ${scelto.misure.larghezzaMax}`
+                      ? `esattamente ${scelto.misure.larghezzaMax}`
                       : `${scelto.misure.larghezzaMin}–${scelto.misure.larghezzaMax}`}{" "}
                     {unitaMisura(scelto.value)}
                     {" "}· {etichetteDimensioni(scelto.value).altezza.toLowerCase()}{" "}
                     {scelto.misure.altezzaMin === scelto.misure.altezzaMax
-                      ? `fino a ${scelto.misure.altezzaMax}`
+                      ? `esattamente ${scelto.misure.altezzaMax}`
                       : `${scelto.misure.altezzaMin}–${scelto.misure.altezzaMax}`}{" "}
                     {unitaMisura(scelto.value)}
                   </span>

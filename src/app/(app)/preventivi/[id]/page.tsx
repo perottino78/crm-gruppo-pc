@@ -20,6 +20,7 @@ import {
   aggiornaCondizioniOfferta,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
+import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -211,6 +212,8 @@ export default async function PreventivoPage({
           </Link>
         </div>
       </div>
+
+      <AvvisoMisuraFuoriListino errore={errore} />
 
       {errore && (
         <div className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5">
