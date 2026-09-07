@@ -620,7 +620,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 }
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
-  if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non usato (inserire 1)" };
+  if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }

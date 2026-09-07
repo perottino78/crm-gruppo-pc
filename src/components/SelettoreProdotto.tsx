@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, type AssiZpc } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc } from "@/lib/prodotti";
 
 export type NodoTipologia = {
   value: string;
@@ -374,8 +374,8 @@ export default function SelettoreProdotto({
               {scelto.misure && (
                 <p className="text-xs mb-2">
                   <span className="font-bold text-neutral-700">
-                    Misure di produzione: larghezza {scelto.misure.larghezzaMin}–{scelto.misure.larghezzaMax} {unitaMisura(scelto.value)}
-                    {" "}· altezza/sporgenza {scelto.misure.altezzaMin}–{scelto.misure.altezzaMax} {unitaMisura(scelto.value)}
+                    Misure di produzione: {etichetteDimensioni(scelto.value).larghezza.toLowerCase()} {scelto.misure.larghezzaMin}–{scelto.misure.larghezzaMax} {unitaMisura(scelto.value)}
+                    {" "}· {etichetteDimensioni(scelto.value).altezza.toLowerCase()} {scelto.misure.altezzaMin}–{scelto.misure.altezzaMax} {unitaMisura(scelto.value)}
                   </span>
                 </p>
               )}
@@ -384,7 +384,7 @@ export default function SelettoreProdotto({
                 <input type="hidden" name="brandId" value={brandId} />
                 <input type="hidden" name="tipologia" value={scelto.value} />
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-700">Larghezza ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">{etichetteDimensioni(scelto.value).larghezza} ({unitaMisura(scelto.value)})</label>
                   <input
                     name="larghezza"
                     type="number"
@@ -401,7 +401,7 @@ export default function SelettoreProdotto({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-700">Altezza / sporgenza ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">{etichetteDimensioni(scelto.value).altezza} ({unitaMisura(scelto.value)})</label>
                   <input
                     name="altezza"
                     type="number"
