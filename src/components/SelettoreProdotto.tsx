@@ -204,11 +204,24 @@ export default function SelettoreProdotto({
     const unit = unitaMisura(nodo.value);
     if (nodo.misure) {
       const { larghezzaMin, larghezzaMax, altezzaMin, altezzaMax } = nodo.misure;
-      if (larghezza < larghezzaMin || larghezza > larghezzaMax) {
+      // Se a listino c'e' una sola fascia di prezzo (min === max, es. Kopen: un unico
+      // prezzo "fino a" una misura massima, senza righe piu' piccole a listino), il prezzo
+      // vale per qualunque misura fino a quel massimo — coerente con trovaFasciaPrezzo, che
+      // seleziona la fascia piu' piccola che copre la misura richiesta. In quel caso non
+      // blocchiamo le misure piu' piccole, solo quelle davvero fuori produzione (> max).
+      const unicaFasciaLarghezza = larghezzaMin === larghezzaMax;
+      const unicaFasciaAltezza = altezzaMin === altezzaMax;
+      if (!unicaFasciaLarghezza && larghezza < larghezzaMin) {
         return `Larghezza fuori produzione: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
       }
-      if (altezza < altezzaMin || altezza > altezzaMax) {
+      if (larghezza > larghezzaMax) {
+        return `Larghezza fuori produzione: per questo modello va da ${unicaFasciaLarghezza ? 1 : larghezzaMin} a ${larghezzaMax} ${unit}.`;
+      }
+      if (!unicaFasciaAltezza && altezza < altezzaMin) {
         return `Altezza/sporgenza fuori produzione: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
+      }
+      if (altezza > altezzaMax) {
+        return `Altezza/sporgenza fuori produzione: per questo modello va da ${unicaFasciaAltezza ? 1 : altezzaMin} a ${altezzaMax} ${unit}.`;
       }
     }
     return null;
@@ -374,8 +387,16 @@ export default function SelettoreProdotto({
               {scelto.misure && (
                 <p className="text-xs mb-2">
                   <span className="font-bold text-neutral-700">
-                    Misure di produzione: {etichetteDimensioni(scelto.value).larghezza.toLowerCase()} {scelto.misure.larghezzaMin}–{scelto.misure.larghezzaMax} {unitaMisura(scelto.value)}
-                    {" "}· {etichetteDimensioni(scelto.value).altezza.toLowerCase()} {scelto.misure.altezzaMin}–{scelto.misure.altezzaMax} {unitaMisura(scelto.value)}
+                    Misure di produzione: {etichetteDimensioni(scelto.value).larghezza.toLowerCase()}{" "}
+                    {scelto.misure.larghezzaMin === scelto.misure.larghezzaMax
+                      ? `fino a ${scelto.misure.larghezzaMax}`
+                      : `${scelto.misure.larghezzaMin}–${scelto.misure.larghezzaMax}`}{" "}
+                    {unitaMisura(scelto.value)}
+                    {" "}· {etichetteDimensioni(scelto.value).altezza.toLowerCase()}{" "}
+                    {scelto.misure.altezzaMin === scelto.misure.altezzaMax
+                      ? `fino a ${scelto.misure.altezzaMax}`
+                      : `${scelto.misure.altezzaMin}–${scelto.misure.altezzaMax}`}{" "}
+                    {unitaMisura(scelto.value)}
                   </span>
                 </p>
               )}
