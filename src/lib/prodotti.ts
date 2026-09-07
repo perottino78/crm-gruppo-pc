@@ -17,7 +17,9 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   // Zanzariere verticali a rullo (Incasso: Casper/Comoda/Wind Incas Verticale;
   // Scorrimento: Vera/Clik-Clak/Ketty/Wind Verticale), dentro Zanzariere P&C: stesso
   // motore MQ_CON_MINIMI, stessa convenzione cm.
-  "VERTINC_", "VERTSCO_"];
+  "VERTINC_", "VERTSCO_",
+  // Scatolati (accessorio zanzariere venduto a metro lineare): stessa convenzione cm.
+  "SCATOLATO_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -154,6 +156,10 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // (es. Catena per doppio comando solo su Ketty/Ketty Plus).
   const lineaVert = lineaVerticale(tipologia);
   if (lineaVert) return `${lineaVert.prefix}${lineaVert.linea}`;
+  // Scatolati: un "listino" per formato (60x30/50x20), per scoperire l'optional
+  // "Tappo per scatolato" che è specifico del formato e va bene per tutte le finiture.
+  if (tipologia.startsWith("SCATOLATO_60X30_")) return "SCATOLATO_60X30";
+  if (tipologia.startsWith("SCATOLATO_50X20_")) return "SCATOLATO_50X20";
   return null;
 }
 
@@ -518,6 +524,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   }
   const vert = lineaVerticale(tipologia);
   if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
+  if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
+  if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
   return null;
 }
 
@@ -545,6 +553,14 @@ const PLISSE_FINITURE: Record<string, string> = {
   FL: "Finto Legno",
 };
 
+const SCATOLATO_FINITURA_LABEL: Record<string, string> = {
+  BASE: "Base",
+  VERNICIATO: "Verniciato",
+  RAFFAELLO: "Raffaello",
+  SABLE: "Sablé",
+  LEGNO: "Legno tinte",
+};
+
 const BLINDATI_LABELS: Record<string, string> = {
   BLINDATI_CL3: "Classe 3 - Anta Singola",
   BLINDATI_CL4: "Classe 4 - Anta Singola",
@@ -566,6 +582,10 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
+  if (tipologia.startsWith("SCATOLATO_")) {
+    const match = tipologia.match(/_(BASE|VERNICIATO|RAFFAELLO|SABLE|LEGNO)$/);
+    if (match) return SCATOLATO_FINITURA_LABEL[match[1]] ?? match[1];
+  }
   return tipologia.replace(/_/g, " ");
 }
 
@@ -600,6 +620,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 }
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
+  if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non usato (inserire 1)" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }

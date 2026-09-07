@@ -67,6 +67,7 @@ export type ParametriCalcolo = {
   arrotondamentoCm?: number;
   areaMinimaM2?: number;
   altezzaMinimaMm?: number;
+  lunghezzaMinimaM?: number;
 };
 
 function arrotondaSuPerEccesso(valoreCm: number, passoCm: number): number {
@@ -154,6 +155,38 @@ async function calcolaMqConMinimi(
   };
 }
 
+/**
+ * METRO_LINEARE_FISSO (es. Scatolati venduti a ml, prezzo unico indipendente
+ * dall'altezza): tariffa €/ml fissa (unica riga Prodotto di questa tipologia)
+ * applicata alla lunghezza reale, arrotondata per eccesso al passo indicato
+ * (default 5cm) e convertita in metri, con eventuale lunghezza minima
+ * fatturabile applicata come da listino. L'altezza non viene usata: il modulo
+ * di inserimento misure richiede comunque un valore positivo, quindi qui viene
+ * semplicemente ignorato (il venditore inserisce un valore segnaposto).
+ */
+async function calcolaMetroLineareFisso(
+  brandId: string,
+  tipologia: string,
+  larghezzaCm: number,
+  parametri: ParametriCalcolo
+): Promise<EsitoCalcoloFormula | null> {
+  const passo = parametri.arrotondamentoCm ?? 5;
+  const tariffaRiga = await prisma.prodotto.findFirst({ where: { brandId, tipologia } });
+  if (!tariffaRiga) return null;
+
+  const larghezzaArrCm = arrotondaSuPerEccesso(larghezzaCm, passo);
+  const lunghezzaMinimaM = parametri.lunghezzaMinimaM ?? 0;
+  const lunghezzaM = Math.max(larghezzaArrCm / 100, lunghezzaMinimaM);
+  const tariffaAlMl = tariffaRiga.prezzoBase;
+  const prezzoUnitario = Math.round(tariffaAlMl * lunghezzaM * 100) / 100;
+
+  return {
+    prezzoUnitario,
+    prodottoRiferimentoId: tariffaRiga.id,
+    dettaglio: `tariffa ${tariffaAlMl.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}/ml × ${lunghezzaM}ml (lunghezza arrotondata per eccesso da ${larghezzaCm}cm)`,
+  };
+}
+
 export async function calcolaPrezzoAFormula(opts: {
   brandId: string;
   tipologia: string;
@@ -168,6 +201,9 @@ export async function calcolaPrezzoAFormula(opts: {
   }
   if (opts.modalitaCalcolo === "MQ_CON_MINIMI") {
     return calcolaMqConMinimi(opts.brandId, opts.tipologia, opts.larghezzaCm, opts.altezzaCm, parametri);
+  }
+  if (opts.modalitaCalcolo === "METRO_LINEARE_FISSO") {
+    return calcolaMetroLineareFisso(opts.brandId, opts.tipologia, opts.larghezzaCm, parametri);
   }
   return null;
 }

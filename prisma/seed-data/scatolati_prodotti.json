@@ -1,0 +1,72 @@
+[
+  {
+    "tipologia": "SCATOLATO_60X30_BASE",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10.85
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_VERNICIATO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.3
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_RAFFAELLO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.75
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_SABLE",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 15.1
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_LEGNO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 18.65
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_BASE",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.45
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_VERNICIATO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.95
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_RAFFAELLO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12.4
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_SABLE",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 15.95
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_LEGNO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 19.7
+  }
+]

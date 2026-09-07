@@ -1,0 +1,17 @@
+[
+  {
+    "categoria": "Accessorio",
+    "nome": "Tappo per scatolato 60x30 (ZPF080)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.65,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "SCATOLATO_60X30",
+    "note": "Prezzo netto al pezzo.",
+    "gruppiApplicabili": [
+      "SCATOLATI_PC"
+    ],
+    "finituraApplicabile": null
+  }
+]

@@ -1,0 +1,1172 @@
+[
+  {
+    "categoria": "Accessorio",
+    "nome": "Rete nera STRONG",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Rete nera in fibra 18x14 per installazioni che richiedono maggiore resistenza. Di serie su tutti i modelli della Linea Uragano (Irene e Bora), su EVO ZIP e NEW Securzip; disponibile su richiesta anche sui prodotti classici. Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Rete nera",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 2,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione per le zanzariere con rete nera.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Rete Phifer BetterVue™",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 2,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Rete Phifer BetterVue™ (modelli in barre)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicata in caso di ordini con rete BetterVue™ sui modelli in barre.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Rete Sunox",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Rete antivirus e antibatterica (forte agente ossidante). Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema Soft",
+    "tipoPrezzo": "FISSO",
+    "valore": 21.5,
+    "unita": "pezzo per cassonetto",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Non applicabile sul modello Snake con cassonetto da 32mm; richiede cassonetto con dimensione minima di 60cm in larghezza (modelli verticali) o in altezza (modelli laterali). Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Caricamento molla",
+    "tipoPrezzo": "FISSO",
+    "valore": 15.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema Soft + Caricamento molla",
+    "tipoPrezzo": "FISSO",
+    "valore": 21.5,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "In questa combinazione il caricamento molla è gratuito. Verificare disponibilità a catalogo per ciascun modello.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Clips di aggancio al cassonetto (ZCA01V / ZCA02V)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto, esclusivamente per cassonetti in libera installazione da 45mm e 55mm. Per tutti gli altri modelli contattare l'Azienda.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aggancio rinforzato (DUAL HOOK)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Fornito su richiesta, senza alcuna maggiorazione.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Gancio",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Fornito su richiesta, senza alcuna maggiorazione.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aggancio telescopico — Kit compensatore ZSS11L (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 38.75,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo al pezzo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aggancio telescopico — Kit compensatore ZSS11L (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 44.6,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo al pezzo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Aggancio telescopico — Kit compensatore ZSS11L (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 58.15,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo al pezzo.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS310, tutte le zanzariere tranne Minima (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 19.45,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS310, tutte le zanzariere tranne Minima (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 23.35,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS310, tutte le zanzariere tranne Minima (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 38.9,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS31M, solo Minima (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 13.6,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS31M, solo Minima (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.35,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Sistema di applicazione frontale — ZSS31M, solo Minima (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 27.2,
+    "unita": "ml",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo su cassonetti da 32mm fino a 50mm. Inserire come quantità i metri lineari necessari.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 90.4,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 108.5,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 171.8,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 111.4,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 133.7,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 211.7,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra completo di tappo (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 121.4,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra completo di tappo (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 145.7,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per finestra completo di tappo (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 230.7,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra completo di tappo (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 144.4,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra completo di tappo (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 173.3,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 50 (ZSS325) per porta-finestra completo di tappo (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 274.4,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS360) per porta-finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 175.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS360) per porta-finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 210.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS360) per porta-finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 332.5,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS370) completo di tappo per porta-finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 231.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS370) completo di tappo per porta-finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 277.2,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS370) completo di tappo per porta-finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 438.9,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS380) per finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 120.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS380) per finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 144.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS380) per finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS390) completo di tappo per finestra (Base/RAL/Soft)",
+    "tipoPrezzo": "FISSO",
+    "valore": 158.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "BASE"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS390) completo di tappo per finestra (Raffaello/Ossidate/Sablè)",
+    "tipoPrezzo": "FISSO",
+    "valore": 189.6,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "RAFF"
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Kit predisposizione incasso 75 con guida tapparella (ZSS390) completo di tappo per finestra (Legno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 300.2,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Applicabile solo ed esclusivamente ai modelli Casper 45 e Clara 45 Incas.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": "LEGNO"
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Set regolazione fine corsa — Becker",
+    "tipoPrezzo": "FISSO",
+    "valore": 43.3,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Disponibile per motore standard, motore con sistema rilevamento ostacoli, motore con sistema rilevamento ostacoli + kit AUTOBLOCK.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Set regolazione fine corsa — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 208.15,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Disponibile per motore standard, motore con sistema rilevamento ostacoli + kit AUTOBLOCK.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Centralina di comando \"UC42\" (MK13003) — Becker",
+    "tipoPrezzo": "FISSO",
+    "valore": 84.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Sensore sole-vento motore radio \"SC811\" (MK13004) — Becker",
+    "tipoPrezzo": "FISSO",
+    "valore": 249.9,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Trasmettitore multicanale reg. sole-vento \"SWC445\" (MK13005) — Becker",
+    "tipoPrezzo": "FISSO",
+    "valore": 183.75,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Ricevitore radio ad incasso \"VC420\" (MK13006) — Becker",
+    "tipoPrezzo": "FISSO",
+    "valore": 164.85,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Trasmettitore radio IZYMO IO per pulsante a muro (SY19015) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.35,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Telecomando multicanale touchscreen NINA IO (SY25001) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 264.6,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Telecomando multicanale touchscreen NINA TIMER (SY25002) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 295.05,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Centralina di comando IO + RTS - CONNEXOON IO (SY25003) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 202.65,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Centralina di comando IO + RTS - TAHOMA NEW BOX (SY25004) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 434.7,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Automazione",
+    "nome": "Sensore vento EOLIS WIREFREE IO (SY25005) — Somfy",
+    "tipoPrezzo": "FISSO",
+    "valore": 147.0,
+    "unita": "pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "RAL fuori cartella colori — 1/2 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "RAL fuori cartella colori — 3/6 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "RAL fuori cartella colori — 7/20 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "RAL fuori cartella colori — 21 pezzi ed oltre",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Puntinati / Ruvidi / Bugnati / Opachi — 1/2 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Puntinati / Ruvidi / Bugnati / Opachi — 3/6 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Puntinati / Ruvidi / Bugnati / Opachi — 7/20 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Puntinati / Ruvidi / Bugnati / Opachi — 21 pezzi ed oltre",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno polvere su polvere — 1/2 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 80,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno polvere su polvere — 3/6 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno polvere su polvere — 7/20 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno polvere su polvere — 21 pezzi ed oltre",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 35,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno sublimati — 1/2 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno sublimati — 3/6 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 70,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno sublimati — 7/20 pezzi",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "Finto legno sublimati — 21 pezzi ed oltre",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 45,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione calcolata rispetto ai prezzi delle tinte RAL Base, applicata in base al numero di pezzi ordinati; non sommabile tra modelli differenti nello stesso ordine.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Altre tinte RAL (cartella MV Line)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Altre tinte RAL",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Raffaello (cartella MV Line)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Raffaello Special",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Legno (cartella MV Line)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Maggiorazione colore",
+    "nome": "EVO ZIP / SecurZip — tinte non di serie: Legno Special",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 40,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Maggiorazione applicabile solo ai modelli EVO ZIP e SecurZip per tinte non di serie.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC"
+    ],
+    "finituraApplicabile": null
+  }
+]

@@ -256,6 +256,18 @@ export default async function ProdottiPage({
         </div>
       )}
 
+      {gruppo === "ZANZARIERE_PC" && (
+        <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 mb-4 flex flex-wrap gap-4 items-center text-sm">
+          <span className="text-amber-800 font-medium">📎 Documenti di riferimento colori:</span>
+          <a href="/documenti/tabella-colori-zanzariere.png" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline hover:no-underline">
+            Tabella colori
+          </a>
+          <a href="/documenti/colori-disponibili-per-modello.png" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline hover:no-underline">
+            Colori disponibili per modello
+          </a>
+        </div>
+      )}
+
       <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
         <table className="w-full text-sm">
           <thead>

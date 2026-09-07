@@ -1,0 +1,122 @@
+[
+  {
+    "tipologia": "SCATOLATO_60X30_BASE",
+    "descrizioneTecnica": "Scatolato 60x30 (ZAP010) — Base, prezzo al metro lineare. Disponibile anche a barra intera: € 56,35 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_VERNICIATO",
+    "descrizioneTecnica": "Scatolato 60x30 (ZAP010) — Verniciato Soft / Opachi, prezzo al metro lineare. Disponibile anche a barra intera: € 56,65 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_RAFFAELLO",
+    "descrizioneTecnica": "Scatolato 60x30 (ZAP010) — Raffaello, prezzo al metro lineare. Disponibile anche a barra intera: € 60,95 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_SABLE",
+    "descrizioneTecnica": "Scatolato 60x30 (ZAP010) — Sablé, prezzo al metro lineare. Disponibile anche a barra intera: € 78,80 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_60X30_LEGNO",
+    "descrizioneTecnica": "Scatolato 60x30 (ZAP010) — Legno, prezzo al metro lineare. Disponibile anche a barra intera: € 97,00 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_BASE",
+    "descrizioneTecnica": "Scatolato 50x20 (ZAP070) — Base, prezzo al metro lineare. Disponibile anche a barra intera: € 59,55 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_VERNICIATO",
+    "descrizioneTecnica": "Scatolato 50x20 (ZAP070) — Verniciato Soft / Opachi, prezzo al metro lineare. Disponibile anche a barra intera: € 62,00 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_RAFFAELLO",
+    "descrizioneTecnica": "Scatolato 50x20 (ZAP070) — Raffaello, prezzo al metro lineare. Disponibile anche a barra intera: € 64,45 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_SABLE",
+    "descrizioneTecnica": "Scatolato 50x20 (ZAP070) — Sablé, prezzo al metro lineare. Disponibile anche a barra intera: € 83,00 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "SCATOLATO_50X20_LEGNO",
+    "descrizioneTecnica": "Scatolato 50x20 (ZAP070) — Legno, prezzo al metro lineare. Disponibile anche a barra intera: € 102,50 (prezzo netto).",
+    "famiglia": "INDOOR",
+    "gruppo": "SCATOLATI_PC",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  }
+]
