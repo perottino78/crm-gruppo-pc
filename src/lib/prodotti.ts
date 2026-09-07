@@ -11,7 +11,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "PLISSE_",
   // Zanzariere P&C (Antarex/Alba/Pratik/Libra/Scorri): listino a mq con minimi
   // fatturabili (calcolaMqConMinimi), stessa convenzione cm delle altre zanzariere.
-  "ZPC_"];
+  "ZPC_",
+  // Linea Uragano (Bora/Irene, dentro Zanzariere P&C): stesso motore MQ_CON_MINIMI,
+  // stessa convenzione cm.
+  "URAGANO_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -134,6 +137,15 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("ZPC_PRATIK_")) return "ZPC_PRATIK";
   if (tipologia.startsWith("ZPC_LIBRA_")) return "ZPC_LIBRA";
   if (tipologia.startsWith("ZPC_SCORRI_")) return "ZPC_SCORRI";
+  // Linea Uragano (Bora/Irene): un "listino" per linea di modello, per scopare gli
+  // extra propri di ciascuna linea (es. Bora Angolare solo su Bora, motorizzazione
+  // solo su Irene 65 Square/Square Incas).
+  if (tipologia.startsWith("URAGANO_BORA_")) return "URAGANO_BORA";
+  if (tipologia.startsWith("URAGANO_IRENE45UP_")) return "URAGANO_IRENE45UP";
+  if (tipologia.startsWith("URAGANO_IRENE45_")) return "URAGANO_IRENE45";
+  if (tipologia.startsWith("URAGANO_IRENEINCAS50_")) return "URAGANO_IRENEINCAS50";
+  if (tipologia.startsWith("URAGANO_IRENE65SQUAREINCAS_")) return "URAGANO_IRENE65SQUAREINCAS";
+  if (tipologia.startsWith("URAGANO_IRENE65SQUARE_")) return "URAGANO_IRENE65SQUARE";
   return null;
 }
 
@@ -265,6 +277,109 @@ function labelBreveZpc(tipologia: string): string {
   return `${anteToken} · ${reteLabel} · ${coloreLabel}`;
 }
 
+// Linea Uragano (Bora/Irene): zanzariere a rullo verticale/laterale, meccanicamente
+// diverse dalle famiglie ad anta (Antarex/Alba/Pratik/Libra/Scorri) ma sempre parte
+// del catalogo Zanzariere P&C secondo il fornitore. Ogni tipologia codifica linea di
+// modello, eventuale montaggio (verticale/laterale/laterale doppia), tipo di
+// rete/telo e fascia colore — stesso vincolo di MQ_CON_MINIMI (un'unica riga Prodotto
+// per tipologia, nessuna distinzione per colore) delle altre famiglie a mq.
+const URAGANO_LINEE = ["BORA", "IRENE45UP", "IRENE45", "IRENEINCAS50", "IRENE65SQUAREINCAS", "IRENE65SQUARE"] as const;
+
+function lineaUragano(tipologia: string): string | null {
+  const senzaPrefisso = tipologia.startsWith("URAGANO_") ? tipologia.slice("URAGANO_".length) : tipologia;
+  for (const linea of URAGANO_LINEE) {
+    if (senzaPrefisso.startsWith(linea + "_")) return linea;
+  }
+  return null;
+}
+
+const URAGANO_SOTTOGRUPPI: Record<string, string> = {
+  BORA: "Bora (verticale a rullo)",
+  IRENE45: "Irene 45 (verticale/laterale)",
+  IRENE45UP: "Irene 45 Up (verticale)",
+  IRENEINCAS50: "Irene Incas 50 (verticale/laterale)",
+  IRENE65SQUARE: "Irene 65 Square",
+  IRENE65SQUAREINCAS: "Irene 65 Square Incas (motorizzata)",
+};
+
+const URAGANO_BORA_VARIANTE_LABEL: Record<string, string> = {
+  TOP: "Bora Top / Top Up / Top Incas",
+  TOPDOPPIA: "Bora Top Doppia / Top Incas Doppia",
+  STD: "Bora / Bora Up / Bora SR / Bora Incas",
+  STDDOPPIA: "Bora Doppia / Bora Incas Doppia",
+};
+
+const URAGANO_MONT_LABEL: Record<string, string> = {
+  VERT: "Verticale",
+  LAT: "Laterale",
+  LATDOPPIA: "Laterale doppia",
+};
+
+const URAGANO_RETE_LABEL: Record<string, string> = {
+  STRONG: "Rete nera Strong / Fibra",
+  STRISCE: "Rete a strisce",
+  TUFF: "Rete Tuffscreen™",
+  OSCUR: "Telo oscurante (Tecnic Oscura)",
+  FILTR: "Telo filtrante (Line Screen 3%)",
+  OPATEX: "Oscurante Opatex Pro (solo motorizzata)",
+  SCREENOSC: "Screen oscurante (solo motorizzata)",
+  SCREEN5500: "Screen 5500",
+};
+
+// Decompone una tipologia URAGANO_ nei 3 assi di scelta per il selettore a cascata.
+// Bora non ha un vero asse "rete" (rete inclusa fissa), quindi il secondo asse è
+// segnaposto a valore unico; le linee 65 Square non hanno un asse "montaggio" (solo
+// verticale), quindi il primo asse identifica la linea stessa.
+export function assiSelezioneUragano(tipologia: string): AssiZpc | null {
+  const linea = lineaUragano(tipologia);
+  if (!linea) return null;
+  const resto = tipologia.slice(("URAGANO_" + linea + "_").length);
+  const parti = resto.split("_");
+
+  if (linea === "BORA") {
+    const [variante, colore] = parti;
+    return {
+      ante: { valore: variante, label: URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante },
+      rete: { valore: "FISSA", label: "Rete nera Strong / rete in Fibra (inclusa)" },
+      colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
+    };
+  }
+  if (linea === "IRENE65SQUARE" || linea === "IRENE65SQUAREINCAS") {
+    const [rete, colore] = parti;
+    return {
+      ante: { valore: linea, label: linea === "IRENE65SQUAREINCAS" ? "65 Square Incas" : "65 Square" },
+      rete: { valore: rete, label: URAGANO_RETE_LABEL[rete] ?? rete },
+      colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
+    };
+  }
+  // IRENE45 / IRENE45UP / IRENEINCAS50: montaggio + rete + colore
+  const [mont, rete, colore] = parti;
+  return {
+    ante: { valore: mont, label: URAGANO_MONT_LABEL[mont] ?? mont },
+    rete: { valore: rete, label: URAGANO_RETE_LABEL[rete] ?? rete },
+    colore: { valore: colore, label: ZPC_COLORE_LABEL[colore] ?? colore },
+  };
+}
+
+// Etichetta breve leggibile per una tipologia URAGANO_.
+function labelBreveUragano(tipologia: string): string {
+  const linea = lineaUragano(tipologia);
+  if (!linea) return tipologia.replace(/_/g, " ");
+  const resto = tipologia.slice(("URAGANO_" + linea + "_").length);
+  const parti = resto.split("_");
+
+  if (linea === "BORA") {
+    const [variante, colore] = parti;
+    return `${URAGANO_BORA_VARIANTE_LABEL[variante] ?? variante} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+  }
+  if (linea === "IRENE65SQUARE" || linea === "IRENE65SQUAREINCAS") {
+    const [rete, colore] = parti;
+    return `${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+  }
+  const [mont, rete, colore] = parti;
+  return `${URAGANO_MONT_LABEL[mont] ?? mont} · ${URAGANO_RETE_LABEL[rete] ?? rete} · ${ZPC_COLORE_LABEL[colore] ?? colore}`;
+}
+
 const PLISSE_SOTTOGRUPPI: Record<string, string> = {
   "08": "Plisse 08",
   XXL08: "XXL Plisse 08",
@@ -287,6 +402,10 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("ZPC_")) {
     const fam = famigliaZpc(tipologia);
     return fam ? ZPC_SOTTOGRUPPI[fam] ?? null : null;
+  }
+  if (tipologia.startsWith("URAGANO_")) {
+    const linea = lineaUragano(tipologia);
+    return linea ? URAGANO_SOTTOGRUPPI[linea] ?? null : null;
   }
   return null;
 }
@@ -334,6 +453,7 @@ export function labelBreveTipologia(tipologia: string): string {
   }
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
+  if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   return tipologia.replace(/_/g, " ");
 }
 
@@ -351,6 +471,11 @@ export function finituraDiTipologia(tipologia: string): string | null {
   // stesso ruolo della finitura plissettata, per scoperire correttamente gli optional
   // con prezzo differenziato per fascia colore (es. Telaio chiuso, Doppio traverso).
   if (tipologia.startsWith("ZPC_")) {
+    const match = tipologia.match(/_(BASE|RAFF|LEGNO)$/);
+    if (match) return match[1];
+  }
+  // Linea Uragano: stessa convenzione fascia colore in coda alla tipologia.
+  if (tipologia.startsWith("URAGANO_")) {
     const match = tipologia.match(/_(BASE|RAFF|LEGNO)$/);
     if (match) return match[1];
   }

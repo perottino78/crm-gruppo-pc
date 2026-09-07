@@ -1,0 +1,272 @@
+[
+  {
+    "categoria": "Variante",
+    "nome": "Bora Angolare",
+    "tipoPrezzo": "FISSO",
+    "valore": 181.3,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_BORA",
+    "note": "Supplemento al pezzo sul prezzo del listino Bora (tutte le varianti Bora/Bora Top).",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maniglia girevole a scomparsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 5.7,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_BORA",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema catena",
+    "tipoPrezzo": "FISSO",
+    "valore": 61,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Catena per doppio comando",
+    "tipoPrezzo": "FISSO",
+    "valore": 29,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": "per pezzo",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema a motore",
+    "tipoPrezzo": "FISSO",
+    "valore": 566,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Supplemento sistema rilevamento ostacoli",
+    "tipoPrezzo": "FISSO",
+    "valore": 114,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": "Da applicare in caso di motore Becker standard; incluso di serie nel prezzo del motore Becker radio.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema a motore radio (escl. radiocomando)",
+    "tipoPrezzo": "FISSO",
+    "valore": 987,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 158,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 224,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 284,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUARE",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema catena",
+    "tipoPrezzo": "FISSO",
+    "valore": 61,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Catena per doppio comando",
+    "tipoPrezzo": "FISSO",
+    "valore": 29,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": "per pezzo",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema a motore",
+    "tipoPrezzo": "FISSO",
+    "valore": 566,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Supplemento sistema rilevamento ostacoli",
+    "tipoPrezzo": "FISSO",
+    "valore": 114,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": "Da applicare in caso di motore Becker standard; incluso di serie nel prezzo del motore Becker radio.",
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Motorizzazione",
+    "nome": "Maggiorazione per sistema a motore radio (escl. radiocomando)",
+    "tipoPrezzo": "FISSO",
+    "valore": 987,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 1 canale",
+    "tipoPrezzo": "FISSO",
+    "valore": 158,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 5 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 224,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  },
+  {
+    "categoria": "Radiocomando",
+    "nome": "Radiocomando a 10 canali",
+    "tipoPrezzo": "FISSO",
+    "valore": 284,
+    "unita": "al pezzo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "URAGANO_IRENE65SQUAREINCAS",
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC_URAGANO"
+    ],
+    "finituraApplicabile": null
+  }
+]
