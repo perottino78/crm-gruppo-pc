@@ -1,0 +1,765 @@
+[
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_C",
+    "descrizioneTecnica": "Pompe di calore ibride reversibili aria-acqua in R32 per installazione splittata con produzione sanitaria istantanea - Le pompe di calore ibride IDOLA S HYBRID C 3.2 integrano in un un",
+    "famiglia": "SOLARIS",
+    "gruppo": "SISTEMI IBRIDI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_H",
+    "descrizioneTecnica": "Pompe di calore ibride reversibili aria-acqua in R32 per installazione splittata, abbinabile ad un bollitore sanitario esterno - Le pompe di calore ibride IDOLA S HYBRID H 3.2 integran",
+    "famiglia": "SOLARIS",
+    "gruppo": "SISTEMI IBRIDI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_H_IN",
+    "descrizioneTecnica": "Sistemi ad incasso con pompe di calore ibride in R32 reversibili aria- acqua per installazione splittata, con bollitore sanitario inox da 150 litri - La soluzione ad incasso IDOLA S HY",
+    "famiglia": "SOLARIS",
+    "gruppo": "SISTEMI IBRIDI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_HYBRID_HYDRO_KIT",
+    "descrizioneTecnica": "Kit idraulico per sistemi ibridi con caldaia e pompa di calore - Kit posto sotto-caldaia che consente la realizzazione di un sistema ibrido, integrando una p",
+    "famiglia": "SOLARIS",
+    "gruppo": "SISTEMI IBRIDI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SISTEMI_IBRIDI_A_COMPONENTI_SEPARATI",
+    "descrizioneTecnica": "SISTEMI IBRIDI A COMPONENTI SEPARATI I sistemi ibridi possono essere composti dall’unione di 2 generatori distinti, una caldaia",
+    "famiglia": "SOLARIS",
+    "gruppo": "SISTEMI IBRIDI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_LIFE_M",
+    "descrizioneTecnica": "Pompa di calore reversibile per installazione esterna con compressore con inverter DC e refrigerante R290 Questa serie di pompe di calore aria-acqua soddisfa le esigenze di climatizzazione invernale",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_LIFE_M_26T_35T",
+    "descrizioneTecnica": "Pompa di calore reversibile per installazione esterna con compressore con inverter DC e refrigerante R290 Questa serie di pompe di calore aria-acqua soddisfa le esigenze di",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_FT_R290",
+    "descrizioneTecnica": "Unità interna idronica con serbatoio ACS integrato in combinazione con IDOLA CONTO                                           LIFE M TERMICO 3.0",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_M_3_2",
+    "descrizioneTecnica": "4-16 Pompe di calore reversibili per installazione esterna con compressore DC inverter - Nuova gamma di pompe di calore monoblocco Full Inverter con Gas R32",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_FT_R32",
+    "descrizioneTecnica": "Unità interna idronica con serbatoio ACS integrato in combinazione con CONTO                                            IDOLA M 3.2 TERMICO 3.0",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_3_2",
+    "descrizioneTecnica": "Pompe di calore reversibili per installazione splittata con compressore DC inverter - Nuova gamma di pompe di calore splittate Full Inverter con Gas R32 a",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_ST_3_2",
+    "descrizioneTecnica": "Pompe di calore reversibili e splittate con compressore DC inverter e accumulo ACS integrato - Nuova gamma di pompe di calore splittate Full Inverter con Gas R32 a",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_IN_3_2",
+    "descrizioneTecnica": "Pompe di calore reversibili per installazione splittata, con compressore DC inverter - La soluzione ad incasso IDOLA S IN con gas ecologico R32 integra",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_SW_T_3_2",
+    "descrizioneTecnica": "Pompe di calore reversibili e splittate con compressore DC inverter e accumulo ACS integrato Pompe di calore splittate Full Inverter con Gas R32 a basso impatto ambientale.",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_LFI_1P_35_40",
+    "descrizioneTecnica": "Lamborghini CaloreClima — Lfi 1P 35-40 (catalogo pag. 95).",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_LFA_1P_50_100",
+    "descrizioneTecnica": "Lamborghini CaloreClima — Lfa 1P 50-100 (catalogo pag. 96).",
+    "famiglia": "SOLARIS",
+    "gruppo": "POMPE DI CALORE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_S",
+    "descrizioneTecnica": "Monosplit murale DC inverter in pompa di calore DETRAZ. FISCALE    - Refrigerante Ecologico R32",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_M",
+    "descrizioneTecnica": "Multisplit DC inverter in pompa di calore - Refrigerante Ecologico R32 - Classe di Efficienza A++ e A+++",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_CASSETTE",
+    "descrizioneTecnica": "Condizionatore a cassette 4 vie DETRAZ. FISCALE                   - Il nuovo climatizzatore a cassetta 4vie è perfetto per essere integrato in WiFi+APP",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_DUCT",
+    "descrizioneTecnica": "Condizionatore canalizzato a media pressione DETRAZ. FISCALE       WiFi+APP       - Soluzione perfetta per la climatizzazione di ambienti commerciali e",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_FLOOR_CEILING",
+    "descrizioneTecnica": "Condizionatore da soffitto o pavimento DETRAZ. FISCALE           - Condizionatore Floor & Ceiling per l’installazione a soffitto o a pavimento",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C",
+    "descrizioneTecnica": "Unità esterna universale - Tutte le unità sono dotate di un compressore Full DC Inverter, che insieme allo speciale design del ventilatore e al controllo invert",
+    "famiglia": "SOLARIS",
+    "gruppo": "CLIMATIZZAZIONE ED ESPANSIONE DIRETTA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_C",
+    "descrizioneTecnica": "Caldaie murali a condensazione con produzione sanitaria istantanea P                        - Caldaia con scambiatore primario in acciaio inox ad elevato spessore, con",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_H",
+    "descrizioneTecnica": "Caldaie murali a condensazione solo riscaldamento",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA",
+    "descrizioneTecnica": "Caldaie murali a condensazione con produzione sanitaria istantanea - Caldaia con scambiatore primario in acciaio inox mono circuito privo di giunzioni e/o saldature, mantiene un’alta efficienza anche su vecc",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_PENSILE_INCASSO",
+    "descrizioneTecnica": "Caldaia murale a condensazione con produzione sanitaria istantanea per installazione pensile o ad incasso - Caldaia con scambiatore primario in acciaio inox mono circuito privo di",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_K_50",
+    "descrizioneTecnica": "Caldaia murale a condensazione con accumulo sanitario inox :1 e 1 rang            - Caldaia con scambiatore primario in acciaio inox ad elevato spessore, con",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_FL_D_LN",
+    "descrizioneTecnica": "Caldaie murali con produzione sanitaria istantanea a doppio scambiatore. Camera aperta - tiraggio naturale - basso NOx - Scambiatore primario di calore a geometria compatta interamente",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A GAS MURALI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_B_K_50",
+    "descrizioneTecnica": "Caldaia a basamento a condensazione con accumulo sanitario inox GER                            - Caldaia con scambiatore primario in acciaio inox ad elevato spessore, con",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A BASAMENTO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_SI_UNIT_COND",
+    "descrizioneTecnica": "Gruppo termico a condensazione per riscaldamento e ACS con bruciatore a gasolio Low NOx e corpo caldaia in acciaio - Scambiatore principale a tubi fumo verticali in acciaio a due passaggi.",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A BASAMENTO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_UNIT_COND",
+    "descrizioneTecnica": "Gruppo termico a condensazione solo riscaldamento con bruciatore a gasolio Low NOx e corpo caldaia in acciaio - Scambiatore principale a tubi fumo verticali in acciaio a due passaggi.",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A BASAMENTO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_SI_UNIT",
+    "descrizioneTecnica": "Gruppo termico con bruciatore a gasolio Low NOx e corpo caldaia in acciaio per riscaldamento e produzione ACS - Scambiatore principale a tubi fumo verticali. Produzione di acqua calda",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A BASAMENTO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_UNIT",
+    "descrizioneTecnica": "Gruppo termico con bruciatore a gasolio Low NOx e corpo caldaia in acciaio. Solo riscaldamento - Scambiatore principale a tubi fumo verticali in acciaio a due passaggi fumo",
+    "famiglia": "SOLARIS",
+    "gruppo": "CALDAIE A BASAMENTO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_45_H",
+    "descrizioneTecnica": "Caldaie murali a condensazione solo riscaldamento D            F",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MODULO_TECH_H",
+    "descrizioneTecnica": "Moduli termici in batteria per centrali di piccola potenza P                         - Generatore termico (certificato INAIL) composto da due caldaie murali della",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_TORO_W",
+    "descrizioneTecnica": "Moduli termici a condensazione per installazioni in batteria GARANZIA 5ANNI - Modulo termico murale a condensazione ad alta potenza, progettato per",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_TITAN",
+    "descrizioneTecnica": "Generatore termico a condensazione ad elevata modulazione di F         potenza da esterni P         - Generatore termico a condensazione ad alta potenza, con un range di",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CLOVER",
+    "descrizioneTecnica": "Generatore termico a condensazione a grande volume d’acqua - Modulo termico a condensazione ad alta potenza e grande contenuto d’acqua, progettato per installazioni singole o in batteria fino alla potenza",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_PREX_H_3_COND_65_1000",
+    "descrizioneTecnica": "Generatore termico a condensazione a tre giri di fumo - Generatore di calore a condensazione, progettato per funzionare in abbinamento con bruciatori ad aria soffiata a gas o gasolio",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MEGAPREX_N_N",
+    "descrizioneTecnica": "Generatore di calore in acciaio ad inversione di fiamma - Generatore termico per bruciatore ad aria soffiata a combustibile liquido e/o gassoso, con focolare ad inversione di fiamma in camera di combustione",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SATELLITE_COMANDI_EVOLUTO",
+    "descrizioneTecnica": "- Unità per la termoregolazione climatica degli impianti di riscaldamento, la gestione attiva dei generatori di calore ed il controllo diretto dei bruciatori ad",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SATELLITE_COMANDI_TERMOSTATICO",
+    "descrizioneTecnica": "Le caratteristiche tecniche, gli accessori ed ogni altra informazione relativa ai bruciatori possono essere reperite consultando la documentazione Lamborghini CaloreClima",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_THETA_GENERATORI",
+    "descrizioneTecnica": "Sistema di termoregolazione e gestore di cascata - Unità per la termoregolazione climatica degli impianti di riscaldamento, la gestione attiva dei generatori di calore in cascata ed il controllo diretto dei",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_COLLETTORE_INAIL",
+    "descrizioneTecnica": "Collettore idraulico completo di apparecchiature di sicurezza INAIL - Collettore idraulico completo di apparecchiature di sicurezza INAIL (ex ISPESL) prescritti dalla Raccolta R per la sicurezza della centrale termica. Attacchi",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SCAMBIATORI_DI_CALORE_START",
+    "descrizioneTecnica": "N O V I TÀ Start Scambiatori di calore a piastre d’acciaio ispezionabili - Scambiatori di calore ispezionabili a piastre d’acciaio (AISI 316), per impianti",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SEPARATORI_IDRAULICI",
+    "descrizioneTecnica": "Scelta separatore idraulico Il separatore idraulico garantisce l’indipendenza tra il circuito primario (generatore) e il secondario (impianto) senza che vi siamo disturbi o interferenze tra loro. Il separatore viene",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NEUTRALIZZATORI",
+    "descrizioneTecnica": "di condensa NTR3 Portata massima litri/h 70 - Portata massima generatori kW 320. Composto da: 1 Contenitore 410 x 310 h 220 mm in polipropilene alimentare",
+    "famiglia": "SOLARIS",
+    "gruppo": "GENERATORI TERMICI ALTA POTENZA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT",
+    "descrizioneTecnica": "Lamborghini CaloreClima — Connect (catalogo pag. 190).",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SCHEDA_ZONE_FZ4_B",
+    "descrizioneTecnica": "ti a zone (max 3) di cui due miscelate e una diretta funzionante in abbinamento sia a cronocomandi modulanti che a cronotermostati ON/OFF - Gestisce temperature di mandata scorrevoli e differenziate tra le zone",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CRM_N",
+    "descrizioneTecnica": "Classe energetica Sonda esterna Lamborghini                                Cronorem                                                                                        di sistema A+",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CRONOREM",
+    "descrizioneTecnica": "di sistema A+ Codice         Descrizione                                                   Caldaia / Modulo termico 013032XD       CRM N - Comando remoto modulante                              ALHENA - ALHENA TECH - FL D LN",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT_CRP",
+    "descrizioneTecnica": "Zone (fino 8 zone, di cui una gestita dal CRP stesso) - Possibilità di gestione tramite APP, disponibile per Android e IOS - Connessione alla rete WiFi domestica per l’accesso ad internet. Wi-Fi: Standard",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT_CRP_ZONE",
+    "descrizioneTecnica": "(fino 8 zone, di cui una gestita dal CRP stesso) - Possibilità di gestione tramite APP, disponibile per Android e IOS - Connessione alla rete WiFi domestica per l’accesso ad internet. Wi-Fi: Standard",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_THETA",
+    "descrizioneTecnica": "Lamborghini CaloreClima — Theta+ (catalogo pag. 193).",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ECOTRONIC_HITECH",
+    "descrizioneTecnica": "Cod. Accessori               Modelli Accessori Sonda aggiuntiva per impianti solari a 4 sonde 043007X0 (PT1000, L=200 CM)",
+    "famiglia": "SOLARIS",
+    "gruppo": "TERMOREGOLAZIONE",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_PRO",
+    "descrizioneTecnica": "Bruciatore a gasolio monostadio Low NOx - Campo di potenza da 14,5 kW fino a 64 kW (da 1,22 Kg/h fino a 5,4 Kg/h) - Tutti i modelli della gamma NOVA PRO rientrano nella classe NOx 4 (<120",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2_PRO",
+    "descrizioneTecnica": "Bruciatore a gasolio a bistadio Low NOx - Campo di potenza da 32 kW fino a 450 kW (da 2,7 Kg/h fino a 37,94 Kg/h) - Tutti i modelli della gamma NOVA/2 PRO rientrano nella classe NOx 4 (<120",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA",
+    "descrizioneTecnica": "Bruciatore a gasolio a monostadio - Campo di potenza da 15,4 kW fino a 350 kW (da 1,3 Kg/h fino a 29,48 Kg/h) - Tutti i modelli della gamma NOVA sono conformi alla Classe NOx 2 (<185",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2",
+    "descrizioneTecnica": "Bruciatore a gasolio bistadio - Campo di potenza da 60 kW fino a 546 kW (da 5,1 Kg/h fino a 46 Kg/h) - Tutti i modelli della gamma NOVA/2 sono conformi alla Classe NOx 2 (<185",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2_TEC",
+    "descrizioneTecnica": "Bruciatore a gasolio bistadio - Campo di potenza da 237 kW fino a 2372 kW (da 20 Kg/h fino a 200 Kg/h) - Tutti i modelli della gamma NOVA/2 TEC sono conformi alla Classe NOx 2",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_PR_TEC",
+    "descrizioneTecnica": "Bruciatore a gasolio progressivo o modulante - Campo di potenza da 178 kW fino a 2372 kW (da 15 Kg/h fino a 200 Kg/h) - Tutti i modelli della gamma NOVA/PR TEC sono conformi alla Classe NOx 2",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GASOLIO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_JOB",
+    "descrizioneTecnica": "Bruciatori di gas monostadio - Bruciatori di gas di tipo monostadio da 17 kW a 350 kW - Tutti i Modelli della gamma monostadio sono certificati in classe 5° (≤56",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GAS",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_JOB_2",
+    "descrizioneTecnica": "Bruciatori di gas doppio stadio - Bruciatori di gas di tipo bistadio da 30 kW a 700 kW - Tutti i Modelli della gama monostadio sono certificati in classe 5° (≤56",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GAS",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_JOB_PR",
+    "descrizioneTecnica": "Bruciatori di gas di tipo progressivo o modulante - Bruciatori di gas progressivi da 120 kW a 2200 kW - Rapporto aria/gas durante il passaggio dalla prima alla seconda fase, viene",
+    "famiglia": "SOLARIS",
+    "gruppo": "BRUCIATORI DI GAS",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_FLY",
+    "descrizioneTecnica": "Ventilconvettore a parete - Unità terminali, per l’installazione a parete, con un’estetica elegante e contemporanea per installazioni in contesti dal design ricercato",
+    "famiglia": "SOLARIS",
+    "gruppo": "UNITA TERMINALI FAN COIL RADIATORI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_STYLE",
+    "descrizioneTecnica": "Ventilconvettore ultrasottile - Ventilconvettore tangenziale ultrasottile con una profondità di soli 127 mm. Caratterizzato da un design lineare ed elegante si",
+    "famiglia": "SOLARIS",
+    "gruppo": "UNITA TERMINALI FAN COIL RADIATORI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_I",
+    "descrizioneTecnica": "Ventilconvettori con motore brushless Nuova serie di ventilconvettori con ventilatore di tipo centrifugo con motore DC brushless ad alta efficienza. Caratterizzati da una profondità massima di",
+    "famiglia": "SOLARIS",
+    "gruppo": "UNITA TERMINALI FAN COIL RADIATORI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_PROTEO_PROTEO_HP",
+    "descrizioneTecnica": "Radiatori in alluminio pressofuso Radiatori in alluminio pressofuso assemblati con nipples e guarnizioni in batterie da 4 a 10 elementi",
+    "famiglia": "SOLARIS",
+    "gruppo": "UNITA TERMINALI FAN COIL RADIATORI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DORA_TECH_90_120_LT",
+    "descrizioneTecnica": "Scaldacqua murale a pompa di calore per basse temperature DETRAZ.                           - Pompa di calore ad aria per installazioni murali con serbatoio d’accumulo",
+    "famiglia": "SOLARIS",
+    "gruppo": "SCALDACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DORA_TECH_200_260_HT_LT_LT_S",
+    "descrizioneTecnica": "Scaldacqua a basamento a pompa di calore per basse o alte temperature DETRAZ.                               - Pompa di calore ad aria per installazioni a pavimento con serbatoio d’accumulo",
+    "famiglia": "SOLARIS",
+    "gruppo": "SCALDACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ESTORIL",
+    "descrizioneTecnica": "Scaldacqua murale a gas, LOW NOx, a tiraggio forzato e camera stagna - Scaldacqua a gas a camera stagna, a potenza termica modulante e controllo elettronico della combustione con emissione di fumi di tipo LOW NOx -",
+    "famiglia": "SOLARIS",
+    "gruppo": "SCALDACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MONZA",
+    "descrizioneTecnica": "Scaldacqua a gas a camera aperta e tiraggio naturale, a potenza termica modulante con emissione di fumi di tipo LOW NOx - Classe 6 - Scambiatore in rame a tubi alettati, finiti esternamente con un trattamento",
+    "famiglia": "SOLARIS",
+    "gruppo": "SCALDACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MINI_7",
+    "descrizioneTecnica": "Addolcitore di acqua cabinato, compatto, affidabile e prestazionale per una gestione dell’acqua a durezza controllata - Addolcitore compatto con rigenerazione a volume/tempo proporzionale al",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_TAUROSOFT",
+    "descrizioneTecnica": "Addolcitore di acqua cabinato, affidabile e prestazionale per una gestione dell’acqua a durezza controllata - Addolcitore cabinato con rigenerazione a volume/tempo proporzionale al",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_SOFT",
+    "descrizioneTecnica": "Addolcitori d’acqua doppio corpo con elettronica intelligente per un risparmio di acqua e sale - Addolcitore ad alta portata con rigenerazione a volume/tempo proporzionale al",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MICRO",
+    "descrizioneTecnica": "Addolcitore di acqua cabinato - Made in Europe - Addolcitore compatto con rigenerazione combinata volume/tempo anche per applicazioni residenziali",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ECO_FVT",
+    "descrizioneTecnica": "Addolcitori di acqua cabinati - Addolcitore con rigenerazione combinata volume/tempo - Valvola elettromeccanica con gestione automatica, completa di accessori per",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ECO_GREEN_SVT",
+    "descrizioneTecnica": "Addolcitore di acqua cabinato alta efficienza - Addolcitore con rigenerazione combinata volume/tempo - Valvola con gestione automatica, completa di accessori per una",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_SVT_N",
+    "descrizioneTecnica": "Addolcitori di acqua doppio corpo - Addolcitore con rigenerazione combinata volume/tempo - Valvola con gestione automatica, completa di contatore volumetrico",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_PLUS_SVT_N",
+    "descrizioneTecnica": "Addolcitori di acqua doppio corpo con elettronica intelligente per risparmio di acqua e sale - Addolcitore con rigenerazione combinata volume/tempo",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_BASE",
+    "descrizioneTecnica": "TESTATI       11   A                      Filtro meccanico pulente - Filtro meccanico pulente a garanzia di una filtrazione micrometrica anche in condizioni di acque ricche di impurità quali ferro, ruggine, sabbia o altri corpi",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_INOX_NET_PLUS",
+    "descrizioneTecnica": "TESTATI       11   A                      Filtro meccanico pulente - Filtro meccanico PN10 prestazionale pulente per garantire una filtrazione micrometrica anche in condizioni di acque ricche di impurità quali ferro,",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_STOPPER_PLUS",
+    "descrizioneTecnica": "TESTATI    11   A                        Filtro meccanico autopulente - Filtro meccanico PN16 prestazionale pulente per garantire una filtrazione micrometrica anche in condizioni di acque ricche di impurità quali ferro,",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOSACOMPACT",
+    "descrizioneTecnica": "Dosatore compatto per installazione sotto caldaia/scaldabagno - Prodotto completamente made in Italy - Dosatore ultracompatto volumetrico proporzionale di polifosfati ad uso",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOSAFLU",
+    "descrizioneTecnica": "Pompa dosatrice volumetrica proporzionale con ricarica rapida a sacchetto - Made in Italy - Pompa meccanica proporzionale per il condizionamento chimico attraverso il",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOSAPLUS",
+    "descrizioneTecnica": "Filtro dosatore di polifosfati / silicati a doppia azione - Svolge la duplice azione di filtro meccanico e dosatore di fosfati/silicati - Protegge tubazioni, raccordi, caldaie, scaldabagni ed altri componenti per il",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DOSAFIL_BIG",
+    "descrizioneTecnica": "Filtro dosatore ad alta prestazione per installazione esterna al generatore - Svolge la duplice azione di filtro meccanico di sicurezza e di dosatore di",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_DEFENDER",
+    "descrizioneTecnica": "Defangatore magnetico con filtro - Filtro defangatore magnetico in nylon rinforzato in vetro con calza filtrante in acciaio inox in grado di trattenere dall’acqua dell’impianto lo sporco, residui",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_PRO2_BOX",
+    "descrizioneTecnica": "Kit completo made in italy salva caldaia con filtro defangatore magnetico e dosatore proporzionale di polifosfati - Defangatore DEFENDER, installabile sia verticalmente che orizzontalmente",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_BIG_MAGNETO",
+    "descrizioneTecnica": "Defangatore magnetico con filtro magnete - Defangatore con corpo in ottone ed attacchi filettati gas utilizzabile sia in impianti residenziali che da centrale termica",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MAXIMAG",
+    "descrizioneTecnica": "Disareatore/Defangatore magnetico inox con filtro - Filtro defangatore con corpo in acciaio inox ed attacchi flangiati utilizzabile sia in impianti residenziali che da centrale termica",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SDV_C",
+    "descrizioneTecnica": "Lamborghini CaloreClima — SDV-C (catalogo pag. 265).",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_PRODOTTI_CHIMICI",
+    "descrizioneTecnica": "Prodotti chimici - I nostri prodotti chimici, realizzati con materie prime di qualità, sono idonei per tutti i tipi di trattamento nel settore alimentare e tecnologico",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SENSE_005",
+    "descrizioneTecnica": "Kit di ultrafiltrazione Made in Italy per l’acqua da bere - Sense 005 è la soluzione semplice e veloce per rendere l’acqua potabile",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_OSMOSENSE",
+    "descrizioneTecnica": "Filtrazione ad osmosi inversa, made in Italy, per installazione verticale/orizzontale sotto lavello o sotto zoccolo - Apparecchio domestico per l’affinamento dell’acqua da bere innovativo,",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_WATERBOX",
+    "descrizioneTecnica": "Frigogasatore sottobanco per l’affinamento dell’acqua da bere - Waterbox è un frigogasatore da posizionare sotto lavello per l’affinamento dell’acqua potabile",
+    "famiglia": "SOLARIS",
+    "gruppo": "TRATTAMENTO ACQUA",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SOLEXTECH_NAT",
+    "descrizioneTecnica": "Sistema a circolazione naturale DETRAZ. FISCALE                         - Sistema completo di:",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_KIT_MONOBLOCCO",
+    "descrizioneTecnica": "ST 200 H 0XDT0MXA                         Kit Monoblocco BL 200 0XGU2NXD                         Kit Monoblocco ST 300 H 0XDT0NXA                         Kit Monoblocco BL 300",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SOLEXTECH_V",
+    "descrizioneTecnica": "Collettore solare a circolazione forzata DETRAZ. FISCALE         - Collettore solare piano ad alta efficienza a circolazione forzata (max 10",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_COLONNA_SOLARE",
+    "descrizioneTecnica": "DETRAZ. FISCALE Ecotronic Hitech",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_IDRO",
+    "descrizioneTecnica": "IDRO 6-E IDRO 12-E / 30-E DETRAZ. FISCALE",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_VASO_DI_ESPANSIONE",
+    "descrizioneTecnica": "- Per alte temperature - Resistenti ad alte pressioni - Membrana per liquido antigelo",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SONDA_SOLARE_PT_1000",
+    "descrizioneTecnica": "6 mm 50 mm DETRAZ. FISCALE",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_SONDA_BOLLITORE_NTC",
+    "descrizioneTecnica": "2 mt 6,5 mm 043005X0      Sonda bollitore NTC 5 mt",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_FLUIDO_SOLARE_PROSUN",
+    "descrizioneTecnica": "specifico pronto all’uso per impianti solari con alte temperature estive e moderato rischio gelo. Prodotto specifico premiscelato a base di acqua demineralizzata, glicole propilenico atossico con funzione",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_MISCELATORE_TERMOSTATICO",
+    "descrizioneTecnica": "- Campo di regolazione: 30÷65°C - Miscelatore termostatico anticalcare, regolabile - Diametro 1/2”, cromato - A norma UNI EN 12165",
+    "famiglia": "SOLARIS",
+    "gruppo": "SOLARE TERMICO",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_BSF_HP",
+    "descrizioneTecnica": "Bollitore acs per pompe di calore, caldaie e sistemi solari termici - Bollitori verticale ad accumulo per acqua sanitaria, con singolo serpentino (versione 1C) oppure con doppio serpentino (versione 2C) in acciaio",
+    "famiglia": "SOLARIS",
+    "gruppo": "BOLLITORI E ACCUMULI TERMICI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ECOPUFFER_HP",
+    "descrizioneTecnica": "Serbatoio inerziale con funzione di volano termico per energie alternative - Serbatoi in acciaio con capacità di 50 - 80 - 100 litri progettati per lo stoccaggio di acqua tecnica per riscaldamento e/o raffrescamento",
+    "famiglia": "SOLARIS",
+    "gruppo": "BOLLITORI E ACCUMULI TERMICI",
+    "immagineUrl": null
+  },
+  {
+    "tipologia": "SOLARIS_ECOPUFFER_HY",
+    "descrizioneTecnica": "Serbatoio inerziale con funzione di volano termico per energie alternative - Serbatoi grezzi in acciaio al carbonio S235JR con capacità da 25 a 500 lt, per",
+    "famiglia": "SOLARIS",
+    "gruppo": "BOLLITORI E ACCUMULI TERMICI",
+    "immagineUrl": null
+  }
+]

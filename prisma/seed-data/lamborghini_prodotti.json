@@ -1,0 +1,874 @@
+[
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_C",
+    "colore": "Idola S Hybrid C",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 32."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_H",
+    "colore": "Idola S Hybrid H",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 36."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_HYBRID_H_IN",
+    "colore": "Idola S Hybrid H In",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 40."
+  },
+  {
+    "tipologia": "SOLARIS_HYBRID_HYDRO_KIT",
+    "colore": "Hybrid Hydro-Kit",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 45."
+  },
+  {
+    "tipologia": "SOLARIS_SISTEMI_IBRIDI_A_COMPONENTI_SEPARATI",
+    "colore": "Sistemi ibridi a componenti separati",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 46."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_LIFE_M",
+    "colore": "Idola Life M",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 50."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_LIFE_M_26T_35T",
+    "colore": "Idola Life M 26T-35T",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 54."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_FT_R290",
+    "colore": "Idola FT R290",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 58."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_M_3_2",
+    "colore": "Idola M 3.2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 62."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_FT_R32",
+    "colore": "Idola FT R32",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 72."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_3_2",
+    "colore": "Idola S 3.2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 74."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_ST_3_2",
+    "colore": "Idola ST 3.2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 79."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_S_IN_3_2",
+    "colore": "Idola S In 3.2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 86."
+  },
+  {
+    "tipologia": "SOLARIS_IDOLA_SW_T_3_2",
+    "colore": "Idola SW-T 3.2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 91."
+  },
+  {
+    "tipologia": "SOLARIS_LFI_1P_35_40",
+    "colore": "Lfi 1P 35-40",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 95."
+  },
+  {
+    "tipologia": "SOLARIS_LFA_1P_50_100",
+    "colore": "Lfa 1P 50-100",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 96."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_S",
+    "colore": "Smeraldo S",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 100."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_M",
+    "colore": "Smeraldo M",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 102."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_CASSETTE",
+    "colore": "Smeraldo-C Cassette",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 107."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_DUCT",
+    "colore": "Smeraldo-C Duct",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 110."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C_FLOOR_CEILING",
+    "colore": "Smeraldo-C Floor & Ceiling",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 113."
+  },
+  {
+    "tipologia": "SOLARIS_SMERALDO_C",
+    "colore": "Smeraldo-C",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 116."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_C",
+    "colore": "Alhena Tech C",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 118."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_H",
+    "colore": "Alhena Tech H",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 120."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA",
+    "colore": "Alhena",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 124."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_PENSILE_INCASSO",
+    "colore": "Alhena pensile/incasso",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 127."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_K_50",
+    "colore": "Alhena Tech K 50",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 129."
+  },
+  {
+    "tipologia": "SOLARIS_FL_D_LN",
+    "colore": "FL D LN",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 132."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_B_K_50",
+    "colore": "Alhena Tech B K 50",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 142."
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_SI_UNIT_COND",
+    "colore": "Kyra D 30 Si Unit Cond",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 144."
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_UNIT_COND",
+    "colore": "Kyra D 30 Unit Cond",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 145."
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_SI_UNIT",
+    "colore": "Kyra D 30 Si Unit",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 146."
+  },
+  {
+    "tipologia": "SOLARIS_KYRA_D_30_UNIT",
+    "colore": "Kyra D 30 Unit",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 147."
+  },
+  {
+    "tipologia": "SOLARIS_ALHENA_TECH_45_H",
+    "colore": "Alhena Tech 45 H",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 150."
+  },
+  {
+    "tipologia": "SOLARIS_MODULO_TECH_H",
+    "colore": "Modulo Tech H",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 152."
+  },
+  {
+    "tipologia": "SOLARIS_TORO_W",
+    "colore": "Toro W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 155."
+  },
+  {
+    "tipologia": "SOLARIS_TITAN",
+    "colore": "Titan",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 163."
+  },
+  {
+    "tipologia": "SOLARIS_CLOVER",
+    "colore": "Clover",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 167."
+  },
+  {
+    "tipologia": "SOLARIS_PREX_H_3_COND_65_1000",
+    "colore": "Prex H 3 Cond 65-1000",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 177."
+  },
+  {
+    "tipologia": "SOLARIS_MEGAPREX_N_N",
+    "colore": "Megaprex N N",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 180."
+  },
+  {
+    "tipologia": "SOLARIS_SATELLITE_COMANDI_EVOLUTO",
+    "colore": "Satellite comandi evoluto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 181."
+  },
+  {
+    "tipologia": "SOLARIS_SATELLITE_COMANDI_TERMOSTATICO",
+    "colore": "Satellite comandi termostatico",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 181."
+  },
+  {
+    "tipologia": "SOLARIS_THETA_GENERATORI",
+    "colore": "Theta+ (generatori)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 183."
+  },
+  {
+    "tipologia": "SOLARIS_COLLETTORE_INAIL",
+    "colore": "Collettore Inail",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 184."
+  },
+  {
+    "tipologia": "SOLARIS_SCAMBIATORI_DI_CALORE_START",
+    "colore": "Scambiatori di calore Start",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 185."
+  },
+  {
+    "tipologia": "SOLARIS_SEPARATORI_IDRAULICI",
+    "colore": "Separatori idraulici",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 187."
+  },
+  {
+    "tipologia": "SOLARIS_NEUTRALIZZATORI",
+    "colore": "Neutralizzatori",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 188."
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT",
+    "colore": "Connect",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 190."
+  },
+  {
+    "tipologia": "SOLARIS_SCHEDA_ZONE_FZ4_B",
+    "colore": "Scheda Zone FZ4 B",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 190."
+  },
+  {
+    "tipologia": "SOLARIS_CRM_N",
+    "colore": "Crm N",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 191."
+  },
+  {
+    "tipologia": "SOLARIS_CRONOREM",
+    "colore": "Cronorem",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 191."
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT_CRP",
+    "colore": "Connect Crp",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 192."
+  },
+  {
+    "tipologia": "SOLARIS_CONNECT_CRP_ZONE",
+    "colore": "Connect Crp Zone",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 192."
+  },
+  {
+    "tipologia": "SOLARIS_THETA",
+    "colore": "Theta+",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 193."
+  },
+  {
+    "tipologia": "SOLARIS_ECOTRONIC_HITECH",
+    "colore": "Ecotronic Hitech",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 194."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_PRO",
+    "colore": "Nova Pro",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 196."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2_PRO",
+    "colore": "Nova/2 Pro",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 198."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA",
+    "colore": "Nova",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 200."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2",
+    "colore": "Nova/2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 203."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_2_TEC",
+    "colore": "Nova/2 Tec",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 206."
+  },
+  {
+    "tipologia": "SOLARIS_NOVA_PR_TEC",
+    "colore": "Nova/Pr Tec",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 209."
+  },
+  {
+    "tipologia": "SOLARIS_JOB",
+    "colore": "Job",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 214."
+  },
+  {
+    "tipologia": "SOLARIS_JOB_2",
+    "colore": "Job/2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 218."
+  },
+  {
+    "tipologia": "SOLARIS_JOB_PR",
+    "colore": "Job/Pr",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 222."
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_FLY",
+    "colore": "Vega Fly",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 228."
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_STYLE",
+    "colore": "Vega Style",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 230."
+  },
+  {
+    "tipologia": "SOLARIS_VEGA_I",
+    "colore": "Vega I",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 233."
+  },
+  {
+    "tipologia": "SOLARIS_PROTEO_PROTEO_HP",
+    "colore": "Proteo - Proteo Hp",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 237."
+  },
+  {
+    "tipologia": "SOLARIS_DORA_TECH_90_120_LT",
+    "colore": "Dora Tech 90-120 LT",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 240."
+  },
+  {
+    "tipologia": "SOLARIS_DORA_TECH_200_260_HT_LT_LT_S",
+    "colore": "Dora Tech 200-260 HT / LT / LT-S",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 242."
+  },
+  {
+    "tipologia": "SOLARIS_ESTORIL",
+    "colore": "Estoril",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 244."
+  },
+  {
+    "tipologia": "SOLARIS_MONZA",
+    "colore": "Monza",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 246."
+  },
+  {
+    "tipologia": "SOLARIS_MINI_7",
+    "colore": "Mini 7",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 248."
+  },
+  {
+    "tipologia": "SOLARIS_TAUROSOFT",
+    "colore": "Taurosoft",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 249."
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_SOFT",
+    "colore": "Double Soft",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 250."
+  },
+  {
+    "tipologia": "SOLARIS_MICRO",
+    "colore": "Micro",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 251."
+  },
+  {
+    "tipologia": "SOLARIS_ECO_FVT",
+    "colore": "Eco FVT",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 252."
+  },
+  {
+    "tipologia": "SOLARIS_ECO_GREEN_SVT",
+    "colore": "Eco Green SVT",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 253."
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_SVT_N",
+    "colore": "Double SVT N",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 254."
+  },
+  {
+    "tipologia": "SOLARIS_DOUBLE_PLUS_SVT_N",
+    "colore": "Double Plus SVT N",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 255."
+  },
+  {
+    "tipologia": "SOLARIS_BASE",
+    "colore": "Base",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 256."
+  },
+  {
+    "tipologia": "SOLARIS_INOX_NET_PLUS",
+    "colore": "Inox Net Plus",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 256."
+  },
+  {
+    "tipologia": "SOLARIS_STOPPER_PLUS",
+    "colore": "Stopper Plus",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 257."
+  },
+  {
+    "tipologia": "SOLARIS_DOSACOMPACT",
+    "colore": "Dosacompact",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 257."
+  },
+  {
+    "tipologia": "SOLARIS_DOSAFLU",
+    "colore": "Dosaflu",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 258."
+  },
+  {
+    "tipologia": "SOLARIS_DOSAPLUS",
+    "colore": "Dosaplus",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 259."
+  },
+  {
+    "tipologia": "SOLARIS_DOSAFIL_BIG",
+    "colore": "Dosafil Big",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 260."
+  },
+  {
+    "tipologia": "SOLARIS_DEFENDER",
+    "colore": "Defender",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 261."
+  },
+  {
+    "tipologia": "SOLARIS_PRO2_BOX",
+    "colore": "Pro2 Box",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 262."
+  },
+  {
+    "tipologia": "SOLARIS_BIG_MAGNETO",
+    "colore": "Big Magneto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 263."
+  },
+  {
+    "tipologia": "SOLARIS_MAXIMAG",
+    "colore": "Maximag",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 264."
+  },
+  {
+    "tipologia": "SOLARIS_SDV_C",
+    "colore": "SDV-C",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 265."
+  },
+  {
+    "tipologia": "SOLARIS_PRODOTTI_CHIMICI",
+    "colore": "Prodotti chimici",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 266."
+  },
+  {
+    "tipologia": "SOLARIS_SENSE_005",
+    "colore": "Sense 005",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 270."
+  },
+  {
+    "tipologia": "SOLARIS_OSMOSENSE",
+    "colore": "Osmosense",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 271."
+  },
+  {
+    "tipologia": "SOLARIS_WATERBOX",
+    "colore": "Waterbox",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 272."
+  },
+  {
+    "tipologia": "SOLARIS_SOLEXTECH_NAT",
+    "colore": "Solextech Nat",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 276."
+  },
+  {
+    "tipologia": "SOLARIS_KIT_MONOBLOCCO",
+    "colore": "Kit Monoblocco",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 277."
+  },
+  {
+    "tipologia": "SOLARIS_SOLEXTECH_V",
+    "colore": "Solextech V",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 278."
+  },
+  {
+    "tipologia": "SOLARIS_COLONNA_SOLARE",
+    "colore": "Colonna Solare",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 279."
+  },
+  {
+    "tipologia": "SOLARIS_IDRO",
+    "colore": "Idro",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 280."
+  },
+  {
+    "tipologia": "SOLARIS_VASO_DI_ESPANSIONE",
+    "colore": "Vaso di espansione",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 280."
+  },
+  {
+    "tipologia": "SOLARIS_SONDA_SOLARE_PT_1000",
+    "colore": "Sonda solare PT 1000",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 281."
+  },
+  {
+    "tipologia": "SOLARIS_SONDA_BOLLITORE_NTC",
+    "colore": "Sonda bollitore NTC",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 281."
+  },
+  {
+    "tipologia": "SOLARIS_FLUIDO_SOLARE_PROSUN",
+    "colore": "Fluido solare Prosun",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 281."
+  },
+  {
+    "tipologia": "SOLARIS_MISCELATORE_TERMOSTATICO",
+    "colore": "Miscelatore termostatico",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 281."
+  },
+  {
+    "tipologia": "SOLARIS_BSF_HP",
+    "colore": "BSF HP",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 284."
+  },
+  {
+    "tipologia": "SOLARIS_ECOPUFFER_HP",
+    "colore": "Ecopuffer HP",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 285."
+  },
+  {
+    "tipologia": "SOLARIS_ECOPUFFER_HY",
+    "colore": "Ecopuffer HY",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Catalogo Lamborghini CaloreClima, pag. 286."
+  }
+]
