@@ -17,8 +17,6 @@ type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; largh
 type ModelloRow = { tipologia: string; descrizioneTecnica: string; famiglia: string; gruppo: string; immagineUrl?: string | null };
 
 const TIPOLOGIA_PREFIX = "SOLARIS_HISENSE_";
-const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
-  `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 
 export async function POST(req: NextRequest) {
   const key = req.headers.get("x-seed-key");
@@ -29,16 +27,31 @@ export async function POST(req: NextRequest) {
     if (!brand) return NextResponse.json({ error: "brand Solaris non trovato" }, { status: 400 });
 
     const prodottiNuovi = prodottiData as ProdottoRow[];
+    // Il campo "colore" per Hisense contiene l'etichetta di potenza (es. "12.000 BTU
+    // (3,5 kW)"), che puo' cambiare in una revisione testuale successiva (com'e' gia'
+    // successo passando dal formato "12000 BTU · <SKU>" a questo): non e' quindi una
+    // chiave stabile per abbinare i prodotti gia' a database a quelli nuovi del JSON.
+    // Si abbina invece per POSIZIONE all'interno della stessa tipologia, nello stesso
+    // ordine di creazione (id asc) da un lato e dello stesso ordine nel JSON dall'altro
+    // — l'ordine dei prodotti per tipologia non cambia tra una revisione e l'altra.
     const prodottiEsistenti = await prisma.prodotto.findMany({
       where: { brandId: brand.id, tipologia: { startsWith: TIPOLOGIA_PREFIX } },
+      orderBy: { id: "asc" },
     });
-    const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
+    const esistentiPerTipologia = new Map<string, typeof prodottiEsistenti>();
+    for (const p of prodottiEsistenti) {
+      if (!esistentiPerTipologia.has(p.tipologia)) esistentiPerTipologia.set(p.tipologia, []);
+      esistentiPerTipologia.get(p.tipologia)!.push(p);
+    }
+    const indicePerTipologia = new Map<string, number>();
 
     let prodottiCreati = 0;
     let prodottiAggiornati = 0;
     let prodottiInvariati = 0;
     for (const p of prodottiNuovi) {
-      const esistente = mappaProdotti.get(keyProdotto(p));
+      const idx = indicePerTipologia.get(p.tipologia) ?? 0;
+      indicePerTipologia.set(p.tipologia, idx + 1);
+      const esistente = esistentiPerTipologia.get(p.tipologia)?.[idx];
       if (!esistente) {
         await prisma.prodotto.create({
           data: {
@@ -54,13 +67,14 @@ export async function POST(req: NextRequest) {
         });
         prodottiCreati++;
       } else if (
+        esistente.colore !== p.colore ||
         esistente.prezzoBase !== p.prezzoBase ||
         esistente.coefficienteRicarico !== 1 ||
         esistente.descrizione !== (p.descrizione ?? null)
       ) {
         await prisma.prodotto.update({
           where: { id: esistente.id },
-          data: { prezzoBase: p.prezzoBase, coefficienteRicarico: 1, descrizione: p.descrizione ?? null },
+          data: { colore: p.colore, prezzoBase: p.prezzoBase, coefficienteRicarico: 1, descrizione: p.descrizione ?? null },
         });
         prodottiAggiornati++;
       } else {

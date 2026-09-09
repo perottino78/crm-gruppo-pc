@@ -506,7 +506,71 @@ const PLISSE_SOTTOGRUPPI: Record<string, string> = {
   PORTAPLISS: "Porta a Soffietto in Tessuto (Portapliss)",
 };
 
+const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
+  SOLARIS_MINI_7: "Addolcitori d'acqua",
+  SOLARIS_TAUROSOFT: "Addolcitori d'acqua",
+  SOLARIS_DOUBLE_SOFT: "Addolcitori d'acqua",
+  SOLARIS_MICRO: "Addolcitori d'acqua",
+  SOLARIS_ECO_FVT: "Addolcitori d'acqua",
+  SOLARIS_ECO_GREEN_SVT: "Addolcitori d'acqua",
+  SOLARIS_DOUBLE_SVT_N: "Addolcitori d'acqua",
+  SOLARIS_DOUBLE_PLUS_SVT_N: "Addolcitori d'acqua",
+  SOLARIS_BASE: "Filtri meccanici autopulenti",
+  SOLARIS_INOX_NET_PLUS: "Filtri meccanici autopulenti",
+  SOLARIS_STOPPER_PLUS: "Filtri meccanici autopulenti",
+  SOLARIS_DOSACOMPACT: "Dosatori e filtri dosatori",
+  SOLARIS_DOSAFLU: "Dosatori e filtri dosatori",
+  SOLARIS_DOSAPLUS: "Dosatori e filtri dosatori",
+  SOLARIS_DOSAFIL_BIG: "Dosatori e filtri dosatori",
+  SOLARIS_DEFENDER: "Defangatori, separatori e disareatori",
+  SOLARIS_PRO2_BOX: "Defangatori, separatori e disareatori",
+  SOLARIS_BIG_MAGNETO: "Defangatori, separatori e disareatori",
+  SOLARIS_MAXIMAG: "Defangatori, separatori e disareatori",
+  SOLARIS_SDV_C: "Defangatori, separatori e disareatori",
+  SOLARIS_PRODOTTI_CHIMICI: "Prodotti chimici",
+  SOLARIS_SENSE_005: "Filtrazione acqua potabile",
+  SOLARIS_OSMOSENSE: "Filtrazione acqua potabile",
+  SOLARIS_WATERBOX: "Filtrazione acqua potabile",
+  SOLARIS_ALHENA_TECH_45_H: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_MODULO_TECH_H: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_TORO_W: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_TITAN: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_CLOVER: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_PREX_H_3_COND_65_1000: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_MEGAPREX_N_N: "Caldaie e generatori a condensazione alta potenza",
+  SOLARIS_SATELLITE_COMANDI_EVOLUTO: "Termoregolazione e gestione cascata generatori",
+  SOLARIS_SATELLITE_COMANDI_TERMOSTATICO: "Termoregolazione e gestione cascata generatori",
+  SOLARIS_THETA_GENERATORI: "Termoregolazione e gestione cascata generatori",
+  SOLARIS_COLLETTORE_INAIL: "Componenti idraulici per centrali termiche",
+  SOLARIS_SCAMBIATORI_DI_CALORE_START: "Componenti idraulici per centrali termiche",
+  SOLARIS_SEPARATORI_IDRAULICI: "Componenti idraulici per centrali termiche",
+  SOLARIS_NEUTRALIZZATORI: "Componenti idraulici per centrali termiche",
+  SOLARIS_IDOLA_LIFE_M: "Pompe di calore Idola",
+  SOLARIS_IDOLA_LIFE_M_26T_35T: "Pompe di calore Idola",
+  SOLARIS_IDOLA_M_3_2: "Pompe di calore Idola",
+  SOLARIS_IDOLA_S_3_2: "Pompe di calore Idola",
+  SOLARIS_IDOLA_ST_3_2: "Pompe di calore Idola",
+  SOLARIS_IDOLA_S_IN_3_2: "Pompe di calore Idola",
+  SOLARIS_IDOLA_SW_T_3_2: "Pompe di calore Idola",
+  SOLARIS_IDOLA_FT_R290: "Unità interne idroniche Idola",
+  SOLARIS_IDOLA_FT_R32: "Unità interne idroniche Idola",
+  SOLARIS_LFI_1P_35_40: "Pompe di calore aria-acqua Lfi/Lfa",
+  SOLARIS_LFA_1P_50_100: "Pompe di calore aria-acqua Lfi/Lfa",
+  SOLARIS_SOLEXTECH_NAT: "Collettori e kit solari",
+  SOLARIS_KIT_MONOBLOCCO: "Collettori e kit solari",
+  SOLARIS_SOLEXTECH_V: "Collettori e kit solari",
+  SOLARIS_COLONNA_SOLARE: "Collettori e kit solari",
+  SOLARIS_IDRO: "Collettori e kit solari",
+  SOLARIS_VASO_DI_ESPANSIONE: "Componenti e accessori solari",
+  SOLARIS_SONDA_SOLARE_PT_1000: "Componenti e accessori solari",
+  SOLARIS_SONDA_BOLLITORE_NTC: "Componenti e accessori solari",
+  SOLARIS_FLUIDO_SOLARE_PROSUN: "Componenti e accessori solari",
+  SOLARIS_MISCELATORE_TERMOSTATICO: "Componenti e accessori solari",
+};
+
+
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -619,6 +683,12 @@ const BLINDATI_LABELS: Record<string, string> = {
   BLINDATI_CL3_DUEANTE_SIMMETRICA: "Classe 3 - Due Ante Simmetriche (55/60/65 + 55/60/65)",
 };
 
+const HISENSE_LABELS: Record<string, string> = {
+  SOLARIS_HISENSE_FRESH_MASTER: "Fresh Master",
+  SOLARIS_HISENSE_IQ_PLUS: "IQ Plus",
+  SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT: "Unità esterne multisplit",
+};
+
 export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("ZENITH_")) {
     const senzaPrefisso = tipologia.slice("ZENITH_".length);
@@ -629,6 +699,7 @@ export function labelBreveTipologia(tipologia: string): string {
     const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
     if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
+  if (HISENSE_LABELS[tipologia]) return HISENSE_LABELS[tipologia];
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);

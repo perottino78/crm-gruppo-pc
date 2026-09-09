@@ -4,20 +4,20 @@
     "descrizioneTecnica": "Hisense Fresh Master — climatizzatore monosplit residenziale, classe A+++ in raffrescamento e riscaldamento.",
     "famiglia": "SOLARIS",
     "gruppo": "CONDIZIONATORI",
-    "immagineUrl": null
+    "immagineUrl": "/immagini/hisense/fresh_master.jpg"
   },
   {
     "tipologia": "SOLARIS_HISENSE_IQ_PLUS",
     "descrizioneTecnica": "Hisense IQ Plus — climatizzatore monosplit residenziale, gamma di potenze da 9000 a 24000 BTU.",
     "famiglia": "SOLARIS",
     "gruppo": "CONDIZIONATORI",
-    "immagineUrl": null
+    "immagineUrl": "/immagini/hisense/iq_plus.jpg"
   },
   {
     "tipologia": "SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT",
     "descrizioneTecnica": "Hisense — unità esterne multisplit residenziali (2-3 unità interne collegabili), classe A+/A++.",
     "famiglia": "SOLARIS",
     "gruppo": "CONDIZIONATORI",
-    "immagineUrl": null
+    "immagineUrl": "/immagini/hisense/unita_esterna_multisplit.jpg"
   }
 ]

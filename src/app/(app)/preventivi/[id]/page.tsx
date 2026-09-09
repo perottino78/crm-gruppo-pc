@@ -118,7 +118,10 @@ export default async function PreventivoPage({
       sottogruppo,
       nodo: {
         value: tip,
-        label: sottogruppo ? labelBreveTipologia(tip) : tip.replace(/_/g, " "),
+        // labelBreveTipologia ha gia' un fallback a tip.replace(/_/g, " ") quando la
+        // tipologia non ha una etichetta breve dedicata, quindi va bene chiamarla sempre
+        // (serve anche fuori dai sottogruppi, es. le "linee" Hisense Fresh Master/IQ Plus).
+        label: labelBreveTipologia(tip),
         haMisura: conMisura,
         varianti: variantiPerTipologia.get(tip),
         misure:
