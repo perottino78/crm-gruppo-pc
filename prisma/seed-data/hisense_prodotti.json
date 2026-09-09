@@ -1,0 +1,82 @@
+[
+  {
+    "tipologia": "SOLARIS_HISENSE_FRESH_MASTER",
+    "colore": "9000 BTU · QF25XW00G / QF25XW00W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 899.99,
+    "descrizione": "2,6 kW raffrescamento (SEER 8,8, A+++) · 3,2 kW riscaldamento (SCOP 5,1, A+++). Interna 978×313×217mm, esterna 810×585×280mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_FRESH_MASTER",
+    "colore": "12000 BTU · QF35XW00G / QF35XW00W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 999.99,
+    "descrizione": "3,5 kW raffrescamento (SEER 8,5, A+++) · 4,2 kW riscaldamento (SCOP 5,1, A+++). Interna 978×313×217mm, esterna 810×585×280mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_IQ_PLUS",
+    "colore": "9000 BTU · CJMR0901G / CJMR0901W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 649.0,
+    "descrizione": "2,6 kW raffrescamento (SEER 8,5, A+++) · 3,0 kW riscaldamento (SCOP 4,6, A++). Interna 790×255×200mm, esterna 780×540×260mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_IQ_PLUS",
+    "colore": "12000 BTU · CJXR1201G / CJXR1201W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 749.0,
+    "descrizione": "3,5 kW raffrescamento (SEER 8,5, A+++) · 3,9 kW riscaldamento (SCOP 4,6, A++). Interna 790×255×200mm, esterna 810×585×280mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_IQ_PLUS",
+    "colore": "18000 BTU · CJBS1801G / CJBS1801W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1049.0,
+    "descrizione": "5,0 kW raffrescamento (SEER 7,8, A++) · 5,4 kW riscaldamento (SCOP 4,6, A++). Interna 890×300×220mm, esterna 860×667×310mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_IQ_PLUS",
+    "colore": "24000 BTU · CJKT2401G / CJKT2401W",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1349.0,
+    "descrizione": "7,0 kW raffrescamento (SEER 7,9, A++) · 7,5 kW riscaldamento (SCOP 4,6, A++). Interna 998×325×225mm, esterna 900×750×340mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT",
+    "colore": "2AMW42U4RGC · fino a 2 U.I.",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 839.99,
+    "descrizione": "4,1 kW raffrescamento (SEER 8,00, A++) · 4,5 kW riscaldamento (SCOP 4,40, A+). Dimensioni 715×540×240mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT",
+    "colore": "2AMW52U4RXC · fino a 2 U.I.",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 899.99,
+    "descrizione": "5,2 kW raffrescamento (SEER 7,60, A++) · 5,5 kW riscaldamento (SCOP 4,40, A+). Dimensioni 810×580×280mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT",
+    "colore": "3AMW62U4RJC · fino a 3 U.I.",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 999.99,
+    "descrizione": "6,3 kW raffrescamento (SEER 8,00, A++) · 7,0 kW riscaldamento (SCOP 4,40, A+). Dimensioni 860×670×310mm."
+  },
+  {
+    "tipologia": "SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT",
+    "colore": "3AMW72U4RJC · fino a 3 U.I.",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1199.99,
+    "descrizione": "7,0 kW raffrescamento (SEER 7,90, A++) · 8,0 kW riscaldamento (SCOP 4,40, A+). Dimensioni 860×670×310mm."
+  }
+]

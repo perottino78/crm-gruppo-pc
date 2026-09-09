@@ -519,6 +519,19 @@ export async function salvaModelloProdotto(formData: FormData) {
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
+export async function salvaPrezzoProdotto(formData: FormData) {
+  const prodottoId = str(formData, "prodottoId");
+  const tipologia = str(formData, "tipologia");
+  const prezzoStr = str(formData, "prezzoBase");
+  if (!prodottoId || !tipologia || prezzoStr === null) return;
+  const prezzoBase = parseFloat(prezzoStr.replace(",", "."));
+  if (!Number.isFinite(prezzoBase) || prezzoBase < 0) return;
+
+  await prisma.prodotto.update({ where: { id: prodottoId }, data: { prezzoBase } });
+  revalidatePath("/prodotti");
+  revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
+}
+
 export async function aggiornaPermessiBrand(formData: FormData) {
   const utenteId = str(formData, "utenteId");
   if (!utenteId) return;

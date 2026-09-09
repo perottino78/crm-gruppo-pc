@@ -3,8 +3,8 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { salvaModelloProdotto } from "@/app/actions";
-import { listinoDiTipologia } from "@/lib/prodotti";
+import { salvaModelloProdotto, salvaPrezzoProdotto } from "@/app/actions";
+import { listinoDiTipologia, haMisura } from "@/lib/prodotti";
 
 export default async function ModelloProdottoPage({
   params,
@@ -23,6 +23,17 @@ export default async function ModelloProdottoPage({
       where: { brandId_tipologia: { brandId: primoProdotto.brandId, tipologia } },
     }),
   ]);
+
+  // Cataloghi "a nome" (senza misura, es. Hisense, Lamborghini, Motori Cherubini): mostra
+  // l'elenco delle varianti con prezzo modificabile una per una, direttamente da qui.
+  const senzaMisura = !haMisura(primoProdotto.altezzaMm, primoProdotto.larghezzaMm);
+  const variantiPrezzo = senzaMisura
+    ? await prisma.prodotto.findMany({
+        where: { tipologia },
+        orderBy: { colore: "asc" },
+        select: { id: true, colore: true, prezzoBase: true, descrizione: true },
+      })
+    : [];
 
   // Pannelli/optional con immagine applicabili a questa scheda (stesso filtro usato in
   // preventivi per popolare il menu a tendina): listino a livello di famiglia/tipologia,
@@ -114,6 +125,43 @@ export default async function ModelloProdottoPage({
         </div>
         <button className="btn-3d btn-3d-dark text-sm px-4 py-2 self-start">Salva scheda</button>
       </form>
+
+      {senzaMisura && variantiPrezzo.length > 0 && (
+        <div className="mt-6 bg-white rounded-lg border border-neutral-200 p-4">
+          <h2 className="text-base font-bold text-neutral-900 mb-1">
+            Prezzi ({variantiPrezzo.length} varianti)
+          </h2>
+          <p className="text-xs text-neutral-600 mb-3">
+            Prodotto senza misura: inserisci o correggi il prezzo di ciascuna variante singolarmente.
+          </p>
+          <div className="flex flex-col gap-2">
+            {variantiPrezzo.map((v) => (
+              <form
+                key={v.id}
+                action={salvaPrezzoProdotto}
+                className="flex items-center gap-2 border border-neutral-100 rounded px-2 py-1.5"
+              >
+                <input type="hidden" name="prodottoId" value={v.id} />
+                <input type="hidden" name="tipologia" value={tipologia} />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-neutral-900 truncate">{v.colore}</p>
+                  {v.descrizione && <p className="text-[11px] text-neutral-500 truncate">{v.descrizione}</p>}
+                </div>
+                <span className="text-xs text-neutral-500">€</span>
+                <input
+                  name="prezzoBase"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  defaultValue={v.prezzoBase}
+                  className="border border-neutral-200 rounded px-2 py-1 text-sm w-28 text-right"
+                />
+                <button className="btn-3d btn-3d-dark text-xs px-3 py-1.5">Salva</button>
+              </form>
+            ))}
+          </div>
+        </div>
+      )}
 
       {galleriaPannelli.length > 0 && (
         <div className="mt-6">
