@@ -17,6 +17,13 @@ import {
   CONSENSO_MARKETING,
   CONSENSO_FOTO,
 } from "@/lib/condizioniGeneraliPC";
+import {
+  ARTICOLI_CONTRATTO_SOLARIS,
+  ARTICOLI_VESSATORI_SOLARIS,
+  INTRO_CONTRATTO_SOLARIS,
+  DICHIARAZIONE_VESSATORIE_SOLARIS,
+  CONSENSO_FOTO_SOLARIS,
+} from "@/lib/condizioniGeneraliSolaris";
 
 function RigaFirma({ label, sub }: { label: string; sub?: string }) {
   return (
@@ -60,6 +67,37 @@ export default async function StampaPreventivoPage({
 
   const info = brandInfo(preventivo.brand.nome);
   const isPC = preventivo.brand.nome === "P&C";
+  const isSolaris = preventivo.brand.nome === "Solaris";
+
+  const condizioniBrand = isPC
+    ? {
+        titolo: "CONDIZIONI GENERALI DI VENDITA P&C",
+        intro: INTRO_CONTRATTO,
+        articoli: ARTICOLI_CONTRATTO,
+        vessatori: ARTICOLI_VESSATORI,
+        dichiarazioneVessatorie: DICHIARAZIONE_VESSATORIE,
+        gdprInformativa: GDPR_INFORMATIVA,
+        gdprConsenso: GDPR_CONSENSO,
+        consensoMarketing: CONSENSO_MARKETING,
+        consensoFoto: CONSENSO_FOTO,
+        nomeArticoli: "Condizioni Generali di Vendita P&C",
+        fornitoreLabel: "P&C",
+      }
+    : isSolaris
+    ? {
+        titolo: "CONDIZIONI GENERALI DI VENDITA SOLARIS",
+        intro: INTRO_CONTRATTO_SOLARIS,
+        articoli: ARTICOLI_CONTRATTO_SOLARIS,
+        vessatori: ARTICOLI_VESSATORI_SOLARIS,
+        dichiarazioneVessatorie: DICHIARAZIONE_VESSATORIE_SOLARIS,
+        gdprInformativa: GDPR_INFORMATIVA,
+        gdprConsenso: GDPR_CONSENSO,
+        consensoMarketing: CONSENSO_MARKETING,
+        consensoFoto: CONSENSO_FOTO_SOLARIS,
+        nomeArticoli: "Condizioni Generali di Vendita Solaris",
+        fornitoreLabel: "Solaris",
+      }
+    : null;
 
   const imponibileLordo = preventivo.righe.reduce((sum, r) => {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
@@ -108,6 +146,8 @@ export default async function StampaPreventivoPage({
               <p className="text-lg font-bold">{preventivo.brand.nome}</p>
               {isPC ? (
                 <p className="text-xs text-neutral-600">P&amp;C S.r.l. Unipersonale — Corso Moncenisio, 28 — 10090 Rosta (TO) — P.IVA 10741080013 — Tel. 011 19887497</p>
+              ) : isSolaris ? (
+                <p className="text-xs text-neutral-600">P&amp;C S.r.l. Unipersonale (marchio Solaris) — Corso Moncenisio, 28 — 10090 Rosta (TO) — P.IVA 10741080013 — Tel. 011 19887497</p>
               ) : (
                 <p className="text-xs text-neutral-600">Gruppo P&amp;C</p>
               )}
@@ -234,10 +274,10 @@ export default async function StampaPreventivoPage({
           </div>
         )}
 
-        {isPC ? (
+        {condizioniBrand ? (
           <p className="text-[10px] text-neutral-600 mb-6">
             L'Acquirente dichiara di aver ricevuto, letto e accettato, sottoscrivendo la presente offerta, le
-            "Condizioni Generali di Vendita P&amp;C" riportate nelle pagine seguenti, che formano parte integrante
+            "{condizioniBrand.nomeArticoli}" riportate nelle pagine seguenti, che formano parte integrante
             e sostanziale del presente Contratto.
           </p>
         ) : (
@@ -250,18 +290,18 @@ export default async function StampaPreventivoPage({
         <div className="flex justify-between mt-10">
           <RigaFirma label="Luogo e data" />
           <RigaFirma label="Il Cliente (per accettazione)" sub={preventivo.cliente.nome} />
-          <RigaFirma label="Il Fornitore" sub={isPC ? "P&C S.r.l. Unipersonale" : preventivo.brand.nome} />
+          <RigaFirma label="Il Fornitore" sub={isPC ? "P&C S.r.l. Unipersonale" : isSolaris ? "P&C S.r.l. Unipersonale — Solaris" : preventivo.brand.nome} />
         </div>
         </div>
       </section>
 
-      {isPC && (
+      {condizioniBrand && (
         <>
           {/* ===== CONDIZIONI GENERALI DI VENDITA — ARTICOLI ===== */}
           <section className="p-10 print:p-8 print:break-after-page text-[9.5px] leading-snug">
-            <h2 className="text-sm font-bold mb-1" style={{ color: info.primary }}>CONDIZIONI GENERALI DI VENDITA P&amp;C</h2>
-            <p className="text-[9px] text-neutral-700 mb-4">{INTRO_CONTRATTO}</p>
-            {ARTICOLI_CONTRATTO.map((a) => (
+            <h2 className="text-sm font-bold mb-1" style={{ color: info.primary }}>{condizioniBrand.titolo}</h2>
+            <p className="text-[9px] text-neutral-700 mb-4">{condizioniBrand.intro}</p>
+            {condizioniBrand.articoli.map((a) => (
               <div key={a.numero} className="mb-2.5 print:break-inside-avoid">
                 <p className="font-semibold">Art. {a.numero} — {a.titolo}</p>
                 <p className="text-justify text-neutral-700">{a.testo}</p>
@@ -274,9 +314,9 @@ export default async function StampaPreventivoPage({
             <h2 className="text-sm font-bold mb-3" style={{ color: info.primary }}>
               Approvazione specifica delle clausole ai sensi degli artt. 1341 e 1342 c.c.
             </h2>
-            <p className="text-neutral-700 mb-2">{DICHIARAZIONE_VESSATORIE}</p>
+            <p className="text-neutral-700 mb-2">{condizioniBrand.dichiarazioneVessatorie}</p>
             <p className="font-medium mb-6">
-              Artt. {ARTICOLI_VESSATORI.join(", ")} delle Condizioni Generali di Vendita P&amp;C sopra riportate.
+              Artt. {condizioniBrand.vessatori.join(", ")} delle {condizioniBrand.nomeArticoli} sopra riportate.
             </p>
             <div className="flex justify-end mb-10">
               <RigaFirma label="Il Cliente (firma per approvazione specifica)" sub={preventivo.cliente.nome} />
@@ -285,26 +325,26 @@ export default async function StampaPreventivoPage({
             <h2 className="text-sm font-bold mb-2" style={{ color: info.primary }}>
               Informativa privacy (art. 13 e ss. Regolamento UE 2016/679 — GDPR)
             </h2>
-            <p className="text-neutral-700 whitespace-pre-line mb-4">{GDPR_INFORMATIVA}</p>
+            <p className="text-neutral-700 whitespace-pre-line mb-4">{condizioniBrand.gdprInformativa}</p>
 
             <p className="font-medium mb-1">Dichiarazione di consenso</p>
-            <p className="text-neutral-700 mb-4">{GDPR_CONSENSO}</p>
+            <p className="text-neutral-700 mb-4">{condizioniBrand.gdprConsenso}</p>
             <div className="flex justify-end mb-6">
               <RigaFirma label="Il Cliente" sub={preventivo.cliente.nome} />
             </div>
 
             <p className="font-medium mb-1">Consenso comunicazioni promozionali</p>
-            <p className="text-neutral-700 mb-1">{CONSENSO_MARKETING}</p>
+            <p className="text-neutral-700 mb-1">{condizioniBrand.consensoMarketing}</p>
             <p className="text-neutral-600 mb-4">☐ Acconsento &nbsp;&nbsp;&nbsp; ☐ Non acconsento</p>
 
             <p className="font-medium mb-1">Consenso utilizzo fotografico</p>
-            <p className="text-neutral-700 mb-1">{CONSENSO_FOTO}</p>
+            <p className="text-neutral-700 mb-1">{condizioniBrand.consensoFoto}</p>
             <p className="text-neutral-600 mb-8">☐ Acconsento &nbsp;&nbsp;&nbsp; ☐ Non acconsento</p>
 
             <div className="flex justify-between mt-10">
               <RigaFirma label="Luogo e data" />
               <RigaFirma label="Il Cliente" sub={preventivo.cliente.nome} />
-              <RigaFirma label="Il Fornitore" sub={`P&C — ${preventivo.commerciale.nome}`} />
+              <RigaFirma label="Il Fornitore" sub={`${condizioniBrand.fornitoreLabel} — ${preventivo.commerciale.nome}`} />
             </div>
           </section>
         </>
