@@ -138,11 +138,18 @@ export async function POST(req: NextRequest) {
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
         esistente.note !== o.note ||
+        esistente.unita !== (o.unita ?? null) ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
           where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
+          data: {
+            valore: o.valore,
+            tipoPrezzo: o.tipoPrezzo,
+            note: o.note,
+            unita: o.unita ?? null,
+            gruppiApplicabili: o.gruppiApplicabili,
+          },
         });
         optAggiornati++;
       } else {
