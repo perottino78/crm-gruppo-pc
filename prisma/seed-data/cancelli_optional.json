@@ -446,5 +446,159 @@
     "gruppiApplicabili": [
       "CANCELLI"
     ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Cancello a sbalzo — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 290.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 145,00 €/cad × 2 = 290,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Cancello dual — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 240.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 120,00 €/cad × 2 = 240,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Cancello a cardine (interna o esterna) — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 240.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 120,00 €/cad × 2 = 240,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Fisso — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 120.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 60,00 €/cad × 2 = 120,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Smontaggio e smaltimento vecchi cancelli",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 35,00 €/cad × 2 = 70,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Scorrevole — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 360.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 180,00 €/cad × 2 = 360,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Zanzariera — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 120.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 60,00 €/cad × 2 = 120,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Zanzariera a pannelli magnetici — per ogni pannello",
+    "tipoPrezzo": "FISSO",
+    "valore": 60.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 30,00 €/cad × 2 = 60,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Spostamento zanzariera",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 35,00 €/cad × 2 = 70,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Cavette su persiane di legno",
+    "tipoPrezzo": "FISSO",
+    "valore": 100.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 50,00 €/cad × 2 = 100,00 €/cad.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Trattamento triplex (zincatura a caldo, sabbiatura, doppia verniciatura)",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo netto da listino ProArt 2024 (Cancelli di sicurezza profilo New Style). Valore inserito con ricarico standard x2: netto x 2. Netto 90,00 €/mq × 2 = 180,00 €/mq. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
   }
 ]
