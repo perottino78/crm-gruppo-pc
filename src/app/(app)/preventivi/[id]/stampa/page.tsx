@@ -94,8 +94,8 @@ export default async function StampaPreventivoPage({
         )}
         <div className="flex items-center justify-between border-b-4 pb-4 mb-6" style={{ borderColor: info.primary }}>
           <div className="flex items-center gap-3">
-            {isPC ? (
-              <img src="/immagini/brand/pc_logo.png" alt="P&C Gruppo" className="h-14 w-auto object-contain" />
+            {info.logoUrl ? (
+              <img src={info.logoUrl} alt={preventivo.brand.nome} className="h-14 w-auto object-contain" />
             ) : (
               <span
                 className="w-12 h-12 rounded-md flex items-center justify-center text-white text-lg font-bold"

@@ -50,7 +50,11 @@ export default async function ImpostazioniPage() {
           const c = BRANDS.find((x) => x.nome === b.nome);
           return (
             <div key={b.id} className="flex items-center gap-3 px-4 py-3 text-sm">
-              <span className="w-4 h-4 rounded-full inline-block" style={{ background: c?.primary ?? "#999" }} />
+              {c?.logoUrl ? (
+                <img src={c.logoUrl} alt={b.nome} className="h-8 w-auto object-contain" />
+              ) : (
+                <span className="w-4 h-4 rounded-full inline-block" style={{ background: c?.primary ?? "#999" }} />
+              )}
               <span className="font-medium">{b.nome}</span>
             </div>
           );
