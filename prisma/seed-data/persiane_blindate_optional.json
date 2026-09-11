@@ -3,12 +3,12 @@
     "categoria": "Accessorio",
     "nome": "Cilindro intero R6 modello europeo",
     "tipoPrezzo": "FISSO",
-    "valore": 114.4,
+    "valore": 130.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 65.00€ × 1,76 = 114.40€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 65.00€ × 2 = 130.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -17,12 +17,12 @@
     "categoria": "Accessorio",
     "nome": "Mezzo cilindro ISEO R6 unificato 1 chiave",
     "tipoPrezzo": "FISSO",
-    "valore": 14.08,
+    "valore": 16.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 8.00€ × 1,76 = 14.08€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 8.00€ × 2 = 16.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -31,12 +31,12 @@
     "categoria": "Accessorio",
     "nome": "Mezzo cilindro ISEO R6 unificato 2+1 chiave cantiere",
     "tipoPrezzo": "FISSO",
-    "valore": 26.4,
+    "valore": 30.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 15.00€ × 1,76 = 26.40€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 15.00€ × 2 = 30.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -45,12 +45,12 @@
     "categoria": "Accessorio",
     "nome": "Borchie saldate + cilindro intero antitrapano",
     "tipoPrezzo": "FISSO",
-    "valore": 404.8,
+    "valore": 460.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 230.00€ × 1,76 = 404.80€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 230.00€ × 2 = 460.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -59,12 +59,12 @@
     "categoria": "Accessorio",
     "nome": "Extra unificazione cilindro R6",
     "tipoPrezzo": "FISSO",
-    "valore": 52.8,
+    "valore": 60.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 30.00€ × 1,76 = 52.80€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 30.00€ × 2 = 60.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -73,12 +73,12 @@
     "categoria": "Accessorio",
     "nome": "Duplicato chiave R6",
     "tipoPrezzo": "FISSO",
-    "valore": 35.2,
+    "valore": 40.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 20.00€ × 1,76 = 35.20€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 20.00€ × 2 = 40.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -87,12 +87,12 @@
     "categoria": "Accessorio",
     "nome": "Extra unificazione cilindro antitrapano",
     "tipoPrezzo": "FISSO",
-    "valore": 84.48,
+    "valore": 96.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 48.00€ × 1,76 = 84.48€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 48.00€ × 2 = 96.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -101,12 +101,12 @@
     "categoria": "Accessorio",
     "nome": "Duplicato chiave cilindro antitrapano",
     "tipoPrezzo": "FISSO",
-    "valore": 44.0,
+    "valore": 50.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 25.00€ × 1,76 = 44.00€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 25.00€ × 2 = 50.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -115,12 +115,12 @@
     "categoria": "Accessorio",
     "nome": "Extra serratura a montante per apertura a libro",
     "tipoPrezzo": "FISSO",
-    "valore": 290.4,
+    "valore": 330.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 165.00€ × 1,76 = 290.40€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 165.00€ × 2 = 330.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -129,12 +129,12 @@
     "categoria": "Accessorio",
     "nome": "Extra deviatori per apertura libro persiana a 2 ante",
     "tipoPrezzo": "FISSO",
-    "valore": 290.4,
+    "valore": 330.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 165.00€ × 1,76 = 290.40€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 165.00€ × 2 = 330.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -143,12 +143,12 @@
     "categoria": "Accessorio",
     "nome": "Vite di sicurezza Ø10mm lung. 100mm e tassello",
     "tipoPrezzo": "FISSO",
-    "valore": 3.52,
+    "valore": 4.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 2.00€ × 1,76 = 3.52€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 2.00€ × 2 = 4.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -157,12 +157,12 @@
     "categoria": "Accessorio",
     "nome": "Serratura multiblindo",
     "tipoPrezzo": "FISSO",
-    "valore": 404.8,
+    "valore": 460.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 230.00€ × 1,76 = 404.80€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 230.00€ × 2 = 460.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -171,12 +171,12 @@
     "categoria": "Accessorio",
     "nome": "Serratura emotion",
     "tipoPrezzo": "FISSO",
-    "valore": 1267.2,
+    "valore": 1440.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 720.00€ × 1,76 = 1267.20€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 720.00€ × 2 = 1440.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -185,12 +185,12 @@
     "categoria": "Accessorio",
     "nome": "Maniglia singola",
     "tipoPrezzo": "FISSO",
-    "valore": 61.6,
+    "valore": 70.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 35.00€ × 2 = 70.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -199,12 +199,12 @@
     "categoria": "Accessorio",
     "nome": "Coppia maniglie",
     "tipoPrezzo": "FISSO",
-    "valore": 123.2,
+    "valore": 140.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 70.00€ × 1,76 = 123.20€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 70.00€ × 2 = 140.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -213,12 +213,12 @@
     "categoria": "Accessorio",
     "nome": "Pompa di ritorno incassata",
     "tipoPrezzo": "FISSO",
-    "valore": 704.0,
+    "valore": 800.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 400.00€ × 1,76 = 704.00€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 400.00€ × 2 = 800.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -227,12 +227,12 @@
     "categoria": "Accessorio",
     "nome": "Passacavo a molla",
     "tipoPrezzo": "FISSO",
-    "valore": 158.4,
+    "valore": 180.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 90.00€ × 1,76 = 158.40€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 90.00€ × 2 = 180.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -241,12 +241,12 @@
     "categoria": "Accessorio",
     "nome": "Alladin block",
     "tipoPrezzo": "FISSO",
-    "valore": 88.0,
+    "valore": 100.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 50.00€ × 1,76 = 88.00€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 50.00€ × 2 = 100.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -255,12 +255,12 @@
     "categoria": "Accessorio",
     "nome": "Asta di movimentazione",
     "tipoPrezzo": "FISSO",
-    "valore": 88.0,
+    "valore": 100.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 50.00€ × 1,76 = 88.00€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 50.00€ × 2 = 100.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
@@ -269,12 +269,12 @@
     "categoria": "Accessorio",
     "nome": "Calamita ferma anta",
     "tipoPrezzo": "FISSO",
-    "valore": 17.6,
+    "valore": 20.0,
     "unita": "cad",
     "sporgenzaMm": null,
     "larghezzaMm": null,
     "listino": "PERSIANE_BLINDATE",
-    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 10.00€ × 1,76 = 17.60€.",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Ricarico standard accessori x2: netto 10.00€ × 2 = 20.00€.",
     "gruppiApplicabili": [
       "PERSIANE"
     ]
