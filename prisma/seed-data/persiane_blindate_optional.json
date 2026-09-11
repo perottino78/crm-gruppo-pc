@@ -1,0 +1,646 @@
+[
+  {
+    "categoria": "Accessorio",
+    "nome": "Cilindro intero R6 modello europeo",
+    "tipoPrezzo": "FISSO",
+    "valore": 114.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 65.00€ × 1,76 = 114.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Mezzo cilindro ISEO R6 unificato 1 chiave",
+    "tipoPrezzo": "FISSO",
+    "valore": 14.08,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 8.00€ × 1,76 = 14.08€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Mezzo cilindro ISEO R6 unificato 2+1 chiave cantiere",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 15.00€ × 1,76 = 26.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Borchie saldate + cilindro intero antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 404.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 230.00€ × 1,76 = 404.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra unificazione cilindro R6",
+    "tipoPrezzo": "FISSO",
+    "valore": 52.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 30.00€ × 1,76 = 52.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Duplicato chiave R6",
+    "tipoPrezzo": "FISSO",
+    "valore": 35.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 20.00€ × 1,76 = 35.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra unificazione cilindro antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 84.48,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 48.00€ × 1,76 = 84.48€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Duplicato chiave cilindro antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 44.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 25.00€ × 1,76 = 44.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra serratura a montante per apertura a libro",
+    "tipoPrezzo": "FISSO",
+    "valore": 290.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 165.00€ × 1,76 = 290.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra deviatori per apertura libro persiana a 2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 290.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 165.00€ × 1,76 = 290.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Vite di sicurezza Ø10mm lung. 100mm e tassello",
+    "tipoPrezzo": "FISSO",
+    "valore": 3.52,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 2.00€ × 1,76 = 3.52€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura multiblindo",
+    "tipoPrezzo": "FISSO",
+    "valore": 404.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 230.00€ × 1,76 = 404.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura emotion",
+    "tipoPrezzo": "FISSO",
+    "valore": 1267.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 720.00€ × 1,76 = 1267.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maniglia singola",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.6,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Coppia maniglie",
+    "tipoPrezzo": "FISSO",
+    "valore": 123.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 70.00€ × 1,76 = 123.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pompa di ritorno incassata",
+    "tipoPrezzo": "FISSO",
+    "valore": 704.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 400.00€ × 1,76 = 704.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Passacavo a molla",
+    "tipoPrezzo": "FISSO",
+    "valore": 158.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 90.00€ × 1,76 = 158.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Alladin block",
+    "tipoPrezzo": "FISSO",
+    "valore": 88.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 50.00€ × 1,76 = 88.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Asta di movimentazione",
+    "tipoPrezzo": "FISSO",
+    "valore": 88.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 50.00€ × 1,76 = 88.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Calamita ferma anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 17.6,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 10.00€ × 1,76 = 17.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Corten",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Effetti legno (Faggio, Rovere, Noce, Ciliegio e altre finiture PROART)",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€. Comprende tutte le finiture effetto legno del listino PROART (Faggio, Bianco Rovere, Frassino, Rovere Grigio, Quercia Naturale/Invecchiata, Rino, Douglas, Acero, Rovere, Renolit/Renolit Scuro, Ciliegio Rosso/317/317 Chiaro/Noce Anticato, Castagno, Teak, Noce/Noce 3D, Olmo, Verde Rov). Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore a campione RAL — supplemento fino a 10 mq di fornitura",
+    "tipoPrezzo": "FISSO",
+    "valore": 704.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 400.00€ × 1,76 = 704.00€. Supplemento una tantum per fornitura, non per mq. Applicabile solo se la fornitura complessiva è fino a 10 mq; oltre i 20 mq nessun supplemento.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore a campione RAL — supplemento da 10 a 20 mq di fornitura",
+    "tipoPrezzo": "FISSO",
+    "valore": 352.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 200.00€ × 1,76 = 352.00€. Supplemento una tantum per fornitura, non per mq. Applicabile solo se la fornitura complessiva è tra 10 e 20 mq; oltre i 20 mq nessun supplemento.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Supplemento per realizzazione complanare",
+    "tipoPrezzo": "FISSO",
+    "valore": 281.6,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 160.00€ × 1,76 = 281.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Coprifilo saldato sagomato a misura",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.6,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Espansore con grano 20mm",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.56,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 6.00€ × 1,76 = 10.56€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Cerniere a collo lungo",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 40.00€ × 1,76 = 70.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Fascione singolo per persiana",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 40.00€ × 1,76 = 70.40€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Fascione verticale su persiana",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione a trapezio apribile per ogni anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 580.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 330.00€ × 1,76 = 580.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione a trapezio apribile per ogni telaio",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 130.00€ × 1,76 = 228.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione ad arco regolare apribile per ogni anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 1144.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 650.00€ × 1,76 = 1144.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione ad arco regolare apribile per ogni telaio",
+    "tipoPrezzo": "FISSO",
+    "valore": 475.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 270.00€ × 1,76 = 475.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione anta scorrevole interno muro in scrigno",
+    "tipoPrezzo": "FISSO",
+    "valore": 281.6,
+    "unita": "ad anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 160.00€ × 1,76 = 281.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione anta scorrevole interno muro in vano",
+    "tipoPrezzo": "FISSO",
+    "valore": 193.6,
+    "unita": "ad anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 110.00€ × 1,76 = 193.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione anta scorrevole esterno/interno muro con mantovane, guide e imbotte saldato alla struttura",
+    "tipoPrezzo": "FISSO",
+    "valore": 1196.8,
+    "unita": "ad anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 680.00€ × 1,76 = 1196.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Telaio sagomato maggiorato 120/150",
+    "tipoPrezzo": "FISSO",
+    "valore": 38.72,
+    "unita": "al mtl",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 22.00€ × 1,76 = 38.72€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Sportello persiana alla genovese",
+    "tipoPrezzo": "FISSO",
+    "valore": 440.0,
+    "unita": "ad anta",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 250.00€ × 1,76 = 440.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Trasporto entro 30 km dal magazzino",
+    "tipoPrezzo": "FISSO",
+    "valore": 352.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 200.00€ × 1,76 = 352.00€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Supplemento trasporto per ogni km oltre i 30 (andata+ritorno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.76,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 1.00€ × 1,76 = 1.76€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Persiana — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 255.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 145.00€ × 1,76 = 255.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Antone — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 255.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 145.00€ × 1,76 = 255.20€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Smontaggio e smaltimento persiane/antoni",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.6,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Spostamento zanzariera",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.6,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Scorrevole — misurazione, trasporto e installazione (fino a 100 km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_BLINDATE",
+    "note": "Prezzo netto da listino ProArt 2024 (Persiane Blindate profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  }
+]

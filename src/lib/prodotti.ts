@@ -19,7 +19,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   // motore MQ_CON_MINIMI, stessa convenzione cm.
   "VERTINC_", "VERTSCO_",
   // Scatolati (accessorio zanzariere venduto a metro lineare): stessa convenzione cm.
-  "SCATOLATO_"];
+  "SCATOLATO_",
+  // Persiane Blindate (ProArt, profilo Elegant): tariffa a mq con minimi fatturabili
+  // per numero di ante, stessa convenzione cm dei cataloghi ProArt (Cancelli/Blindati).
+  "PERSIANEBLINDATE_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -115,6 +118,9 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // che pesca un'unica riga Prodotto di riferimento per tipologia), ma condividono lo
   // stesso gruppo di optional (pannelli decorativi), quindi un solo prefisso basta.
   if (tipologia.startsWith("CANCELLI_")) return "CANCELLI";
+  // Persiane Blindate: un solo listino per tutte le varianti classe/dogatura/numero ante,
+  // cosi' gli optional (accessori, colori, lavorazioni, trasporto) restano condivisi.
+  if (tipologia.startsWith("PERSIANEBLINDATE_")) return "PERSIANE_BLINDATE";
   // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
   // specifici (es. GIANIN/GIANSU/CA06 solo su Apertura Centrale, aumenti percentuali solo
   // su Portapliss) si possono scopare per prodotto, mentre gli optional trasversali (rete,
@@ -571,6 +577,10 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
+  // Persiane Blindate: unico sottogruppo dentro il gruppo PERSIANE, cosi' la famiglia
+  // "Persiane" nella tendina potra' in futuro accogliere altri materiali (es. legno, PVC)
+  // come sottogruppi affiancati.
+  if (tipologia.startsWith("PERSIANEBLINDATE_")) return "BLINDATE";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -689,7 +699,41 @@ const HISENSE_LABELS: Record<string, string> = {
   SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT: "Unità esterne multisplit",
 };
 
+const PERSIANE_BLINDATE_LABELS: Record<string, string> = {
+  STECCA_APERTA_CL3: "Persiana stecca aperta — Classe 3",
+  STECCA_APERTA_CL4: "Persiana stecca aperta — Classe 4",
+  DOGATA_VERT_CL3_50_120: "Dogata verticale Cl.3 — doghe 50-120mm",
+  DOGATA_VERT_CL3_120_200: "Dogata verticale Cl.3 — doghe 120-200mm",
+  DOGATA_VERT_CL3_OLTRE200: "Dogata verticale Cl.3 — doghe oltre 200mm",
+  DOGATA_VERT_CL4_50_120: "Dogata verticale Cl.4 — doghe 50-120mm",
+  DOGATA_VERT_CL4_120_200: "Dogata verticale Cl.4 — doghe 120-200mm",
+  DOGATA_VERT_CL4_OLTRE200: "Dogata verticale Cl.4 — doghe oltre 200mm",
+  DOGATA_ORIZZ_CL3_50_120: "Dogata orizzontale Cl.3 — doghe 50-120mm",
+  DOGATA_ORIZZ_CL3_120_200: "Dogata orizzontale Cl.3 — doghe 120-200mm",
+  DOGATA_ORIZZ_CL3_OLTRE200: "Dogata orizzontale Cl.3 — doghe oltre 200mm",
+  DOGATA_ORIZZ_CL4_50_120: "Dogata orizzontale Cl.4 — doghe 50-120mm",
+  DOGATA_ORIZZ_CL4_120_200: "Dogata orizzontale Cl.4 — doghe 120-200mm",
+  DOGATA_ORIZZ_CL4_OLTRE200: "Dogata orizzontale Cl.4 — doghe oltre 200mm",
+  ANTONE_MONOLAMIERA_CL3: "Antone cieco monolamiera 20/10 — Classe 3",
+  ANTONE_DOPPIALAMIERA_CL3: "Antone cieco doppia lamiera 20/10 — Classe 3",
+  ANTONE_DOPPIALAMIERA_CL4: "Antone cieco doppia lamiera 20/10 — Classe 4",
+};
+
+const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
+  "1ANTA": "apribile a 1 anta",
+  "2ANTE": "apribile a 2 ante",
+  "3ANTE": "apribile a 3 ante",
+  "4ANTE": "apribile a 4 ante",
+};
+
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia.startsWith("PERSIANEBLINDATE_")) {
+    const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
+    if (match) {
+      const base = PERSIANE_BLINDATE_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
+      return `${base} (${PERSIANE_BLINDATE_ANTE_LABELS[match[2]]})`;
+    }
+  }
   if (tipologia.startsWith("ZENITH_")) {
     const senzaPrefisso = tipologia.slice("ZENITH_".length);
     const base = senzaPrefisso.replace(/_UKW1[03]$/, "");
@@ -744,7 +788,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }

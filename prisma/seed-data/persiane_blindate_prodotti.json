@@ -1,0 +1,478 @@
+[
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1355.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1355.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1355.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1355.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1267.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2288.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2288.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2288.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2288.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1724.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1724.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1724.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1724.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1636.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2745.6
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2745.6
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2745.6
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2745.6
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1918.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1460.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1460.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1460.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1460.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 3115.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 3115.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 3115.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 3115.2
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 2112.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1830.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1830.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1830.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1830.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1056.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1056.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1056.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1056.0
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1196.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1196.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1196.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1196.8
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  }
+]

@@ -1,0 +1,886 @@
+[
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_1ANTA",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 3, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_2ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 3, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_3ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 3, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL3_4ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 3, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_1ANTA",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 4, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_2ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 4, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_3ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 4, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_STECCA_APERTA_CL4_4ANTE",
+    "descrizioneTecnica": "Persiana stecca aperta antieffrazione, classe 4, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_50_120_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1355.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 770.00€/mq, scontato 45% e moltiplicato per 3,2 (770.00 × 0,55 × 3,2 = 1355.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1355.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 770.00€/mq, scontato 45% e moltiplicato per 3,2 (770.00 × 0,55 × 3,2 = 1355.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1355.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 770.00€/mq, scontato 45% e moltiplicato per 3,2 (770.00 × 0,55 × 3,2 = 1355.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_120_200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1355.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 770.00€/mq, scontato 45% e moltiplicato per 3,2 (770.00 × 0,55 × 3,2 = 1355.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL3_OLTRE200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1267.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 720.00€/mq, scontato 45% e moltiplicato per 3,2 (720.00 × 0,55 × 3,2 = 1267.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2288.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1300.00€/mq, scontato 45% e moltiplicato per 3,2 (1300.00 × 0,55 × 3,2 = 2288.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2288.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1300.00€/mq, scontato 45% e moltiplicato per 3,2 (1300.00 × 0,55 × 3,2 = 2288.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2288.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1300.00€/mq, scontato 45% e moltiplicato per 3,2 (1300.00 × 0,55 × 3,2 = 2288.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_50_120_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2288.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1300.00€/mq, scontato 45% e moltiplicato per 3,2 (1300.00 × 0,55 × 3,2 = 2288.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1724.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 980.00€/mq, scontato 45% e moltiplicato per 3,2 (980.00 × 0,55 × 3,2 = 1724.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1724.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 980.00€/mq, scontato 45% e moltiplicato per 3,2 (980.00 × 0,55 × 3,2 = 1724.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1724.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 980.00€/mq, scontato 45% e moltiplicato per 3,2 (980.00 × 0,55 × 3,2 = 1724.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_120_200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1724.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 980.00€/mq, scontato 45% e moltiplicato per 3,2 (980.00 × 0,55 × 3,2 = 1724.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_VERT_CL4_OLTRE200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata verticale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1636.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 930.00€/mq, scontato 45% e moltiplicato per 3,2 (930.00 × 0,55 × 3,2 = 1636.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2745.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1560.00€/mq, scontato 45% e moltiplicato per 3,2 (1560.00 × 0,55 × 3,2 = 2745.60€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2745.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1560.00€/mq, scontato 45% e moltiplicato per 3,2 (1560.00 × 0,55 × 3,2 = 2745.60€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2745.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1560.00€/mq, scontato 45% e moltiplicato per 3,2 (1560.00 × 0,55 × 3,2 = 2745.60€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_50_120_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 50 e 120mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2745.60€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1560.00€/mq, scontato 45% e moltiplicato per 3,2 (1560.00 × 0,55 × 3,2 = 2745.60€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_120_200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe tra 120 e 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1918.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1090.00€/mq, scontato 45% e moltiplicato per 3,2 (1090.00 × 0,55 × 3,2 = 1918.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1460.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 830.00€/mq, scontato 45% e moltiplicato per 3,2 (830.00 × 0,55 × 3,2 = 1460.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1460.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 830.00€/mq, scontato 45% e moltiplicato per 3,2 (830.00 × 0,55 × 3,2 = 1460.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1460.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 830.00€/mq, scontato 45% e moltiplicato per 3,2 (830.00 × 0,55 × 3,2 = 1460.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL3_OLTRE200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 3, doghe larghe oltre 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1460.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 830.00€/mq, scontato 45% e moltiplicato per 3,2 (830.00 × 0,55 × 3,2 = 1460.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 3115.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1770.00€/mq, scontato 45% e moltiplicato per 3,2 (1770.00 × 0,55 × 3,2 = 3115.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 3115.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1770.00€/mq, scontato 45% e moltiplicato per 3,2 (1770.00 × 0,55 × 3,2 = 3115.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 3115.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1770.00€/mq, scontato 45% e moltiplicato per 3,2 (1770.00 × 0,55 × 3,2 = 3115.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_50_120_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 50 e 120mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 3115.20€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1770.00€/mq, scontato 45% e moltiplicato per 3,2 (1770.00 × 0,55 × 3,2 = 3115.20€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2112.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1200.00€/mq, scontato 45% e moltiplicato per 3,2 (1200.00 × 0,55 × 3,2 = 2112.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2112.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1200.00€/mq, scontato 45% e moltiplicato per 3,2 (1200.00 × 0,55 × 3,2 = 2112.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2112.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1200.00€/mq, scontato 45% e moltiplicato per 3,2 (1200.00 × 0,55 × 3,2 = 2112.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_120_200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe tra 120 e 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 2112.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1200.00€/mq, scontato 45% e moltiplicato per 3,2 (1200.00 × 0,55 × 3,2 = 2112.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_1ANTA",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1830.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 1040.00€/mq, scontato 45% e moltiplicato per 3,2 (1040.00 × 0,55 × 3,2 = 1830.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_2ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1830.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 1040.00€/mq, scontato 45% e moltiplicato per 3,2 (1040.00 × 0,55 × 3,2 = 1830.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_3ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1830.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 1040.00€/mq, scontato 45% e moltiplicato per 3,2 (1040.00 × 0,55 × 3,2 = 1830.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_DOGATA_ORIZZ_CL4_OLTRE200_4ANTE",
+    "descrizioneTecnica": "Persiana dogata orizzontale antieffrazione classe 4, doghe larghe oltre 200mm, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1830.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 1040.00€/mq, scontato 45% e moltiplicato per 3,2 (1040.00 × 0,55 × 3,2 = 1830.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_1ANTA",
+    "descrizioneTecnica": "Antone cieco monolamiera 20/10, classe 3, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1056.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 600.00€/mq, scontato 45% e moltiplicato per 3,2 (600.00 × 0,55 × 3,2 = 1056.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_2ANTE",
+    "descrizioneTecnica": "Antone cieco monolamiera 20/10, classe 3, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1056.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 600.00€/mq, scontato 45% e moltiplicato per 3,2 (600.00 × 0,55 × 3,2 = 1056.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_3ANTE",
+    "descrizioneTecnica": "Antone cieco monolamiera 20/10, classe 3, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1056.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 600.00€/mq, scontato 45% e moltiplicato per 3,2 (600.00 × 0,55 × 3,2 = 1056.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_MONOLAMIERA_CL3_4ANTE",
+    "descrizioneTecnica": "Antone cieco monolamiera 20/10, classe 3, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1056.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 600.00€/mq, scontato 45% e moltiplicato per 3,2 (600.00 × 0,55 × 3,2 = 1056.00€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_1ANTA",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 3, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1196.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 680.00€/mq, scontato 45% e moltiplicato per 3,2 (680.00 × 0,55 × 3,2 = 1196.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_2ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 3, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1196.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 680.00€/mq, scontato 45% e moltiplicato per 3,2 (680.00 × 0,55 × 3,2 = 1196.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_3ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 3, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1196.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 680.00€/mq, scontato 45% e moltiplicato per 3,2 (680.00 × 0,55 × 3,2 = 1196.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL3_4ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 3, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1196.80€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 680.00€/mq, scontato 45% e moltiplicato per 3,2 (680.00 × 0,55 × 3,2 = 1196.80€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_1ANTA",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 4, versione apribile a 1 anta. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_2ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 4, versione apribile a 2 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_3ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 4, versione apribile a 3 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "PERSIANEBLINDATE_ANTONE_DOPPIALAMIERA_CL4_4ANTE",
+    "descrizioneTecnica": "Antone cieco doppia lamiera 20/10, classe 4, versione apribile a 4 ante. Profilo Elegant (ProArt). Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, effetti legno, accessori aggiuntivi, lavorazioni speciali e trasporto/installazione sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  }
+]
