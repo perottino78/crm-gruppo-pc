@@ -1,0 +1,353 @@
+[
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_1ANTA",
+    "descrizioneTecnica": "Profilo ferro finestra, versione apribile a 1 anta. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_2ANTE",
+    "descrizioneTecnica": "Profilo ferro finestra, versione apribile a 2 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_3ANTE",
+    "descrizioneTecnica": "Profilo ferro finestra, versione apribile a 3 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_4ANTE",
+    "descrizioneTecnica": "Profilo ferro finestra, versione apribile a 4 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_WASISTAS",
+    "descrizioneTecnica": "Profilo ferro finestra, versione wasistas. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_1ANTA",
+    "descrizioneTecnica": "Infisso con cornice liscia a sormonto, versione apribile a 1 anta. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1276.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 725.00€/mq, scontato 45% e moltiplicato per 3,2 (725.00 × 0,55 × 3,2 = 1276.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_2ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia a sormonto, versione apribile a 2 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1276.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 725.00€/mq, scontato 45% e moltiplicato per 3,2 (725.00 × 0,55 × 3,2 = 1276.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_3ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia a sormonto, versione apribile a 3 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1276.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 725.00€/mq, scontato 45% e moltiplicato per 3,2 (725.00 × 0,55 × 3,2 = 1276.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_4ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia a sormonto, versione apribile a 4 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1276.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 725.00€/mq, scontato 45% e moltiplicato per 3,2 (725.00 × 0,55 × 3,2 = 1276.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_WASISTAS",
+    "descrizioneTecnica": "Infisso con cornice liscia a sormonto, versione wasistas. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1276.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 725.00€/mq, scontato 45% e moltiplicato per 3,2 (725.00 × 0,55 × 3,2 = 1276.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_1ANTA",
+    "descrizioneTecnica": "Infisso con cornice lavorata a sormonto, versione apribile a 1 anta. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1346.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 765.00€/mq, scontato 45% e moltiplicato per 3,2 (765.00 × 0,55 × 3,2 = 1346.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_2ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata a sormonto, versione apribile a 2 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1346.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 765.00€/mq, scontato 45% e moltiplicato per 3,2 (765.00 × 0,55 × 3,2 = 1346.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_3ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata a sormonto, versione apribile a 3 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1346.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 765.00€/mq, scontato 45% e moltiplicato per 3,2 (765.00 × 0,55 × 3,2 = 1346.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_4ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata a sormonto, versione apribile a 4 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1346.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 765.00€/mq, scontato 45% e moltiplicato per 3,2 (765.00 × 0,55 × 3,2 = 1346.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_WASISTAS",
+    "descrizioneTecnica": "Infisso con cornice lavorata a sormonto, versione wasistas. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1346.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 765.00€/mq, scontato 45% e moltiplicato per 3,2 (765.00 × 0,55 × 3,2 = 1346.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_1ANTA",
+    "descrizioneTecnica": "Infisso con cornice liscia complanare, versione apribile a 1 anta. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1496.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 850.00€/mq, scontato 45% e moltiplicato per 3,2 (850.00 × 0,55 × 3,2 = 1496.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_2ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia complanare, versione apribile a 2 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1496.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 850.00€/mq, scontato 45% e moltiplicato per 3,2 (850.00 × 0,55 × 3,2 = 1496.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_3ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia complanare, versione apribile a 3 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1496.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 850.00€/mq, scontato 45% e moltiplicato per 3,2 (850.00 × 0,55 × 3,2 = 1496.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_4ANTE",
+    "descrizioneTecnica": "Infisso con cornice liscia complanare, versione apribile a 4 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1496.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 850.00€/mq, scontato 45% e moltiplicato per 3,2 (850.00 × 0,55 × 3,2 = 1496.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_WASISTAS",
+    "descrizioneTecnica": "Infisso con cornice liscia complanare, versione wasistas. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1496.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 850.00€/mq, scontato 45% e moltiplicato per 3,2 (850.00 × 0,55 × 3,2 = 1496.00€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_1ANTA",
+    "descrizioneTecnica": "Infisso con cornice lavorata complanare, versione apribile a 1 anta. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_2ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata complanare, versione apribile a 2 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 2m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 2.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_3ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata complanare, versione apribile a 3 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 3m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 3.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_4ANTE",
+    "descrizioneTecnica": "Infisso con cornice lavorata complanare, versione apribile a 4 ante. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 4m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 4.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_WASISTAS",
+    "descrizioneTecnica": "Infisso con cornice lavorata complanare, versione wasistas. Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1566.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1.5m² per pezzo). Prezzo netto da listino ProArt 2024 890.00€/mq, scontato 45% e moltiplicato per 3,2 (890.00 × 0,55 × 3,2 = 1566.40€/mq). Vetro escluso, da abbinare come optional a parte. Dotazione standard compresa: serratura a montante di sicurezza a 3 punti, mezzo cilindro Alladin® modello europeo, aste di chiusura Ø18mm regolabile, doppia verniciatura a forno 120 micron. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_FISSO_CORNICE_LISCIA",
+    "descrizioneTecnica": "Fisso con cornice liscia (pannello fisso, non apribile). Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 994.40€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1m² per pezzo — il listino ProArt non indica un minimo specifico per i fissi, verificare con l'ufficio prezzi). Prezzo netto da listino ProArt 2024 565.00€/mq, scontato 45% e moltiplicato per 3,2 (565.00 × 0,55 × 3,2 = 994.40€/mq). Vetro escluso, da abbinare come optional a parte. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.0,
+      "altezzaMinimaMm": 0
+    }
+  },
+  {
+    "tipologia": "ACCIAIO_FISSO_CORNICE_LAVORATA",
+    "descrizioneTecnica": "Fisso con cornice lavorata (pannello fisso, non apribile). Profilo Elegant (ProArt) — infissi in acciaio. Prezzo a tariffa fissa di 1056.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm; minimo fatturabile 1m² per pezzo — il listino ProArt non indica un minimo specifico per i fissi, verificare con l'ufficio prezzi). Prezzo netto da listino ProArt 2024 600.00€/mq, scontato 45% e moltiplicato per 3,2 (600.00 × 0,55 × 3,2 = 1056.00€/mq). Vetro escluso, da abbinare come optional a parte. Colori RAL standard compresi; colori particolari, vetri, accessori aggiuntivi, lavorazioni speciali e trasporto sono optional a parte (vedi elenco optional).",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.0,
+      "altezzaMinimaMm": 0
+    }
+  }
+]

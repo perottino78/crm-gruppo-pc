@@ -1,0 +1,191 @@
+[
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_PROFILO_FERRO_FINESTRA_WASISTAS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1276.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1276.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1276.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1276.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_SORMONTO_WASISTAS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1276.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1346.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1346.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1346.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1346.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_SORMONTO_WASISTAS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1346.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1496.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1496.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1496.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1496.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LISCIA_COMPLANARE_WASISTAS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1496.0
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_1ANTA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_2ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_3ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_4ANTE",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_CORNICE_LAVORATA_COMPLANARE_WASISTAS",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1566.4
+  },
+  {
+    "tipologia": "ACCIAIO_FISSO_CORNICE_LISCIA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 994.4
+  },
+  {
+    "tipologia": "ACCIAIO_FISSO_CORNICE_LAVORATA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1056.0
+  }
+]

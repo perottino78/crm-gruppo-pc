@@ -1,0 +1,702 @@
+[
+  {
+    "categoria": "Vetro",
+    "nome": "4+4 PL 0.76 trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 158.4,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 90.00€ × 1,76 = 158.40€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "4+4 PL 0.76 STC",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 130.00€ × 1,76 = 228.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "4+4 PL 0.76 fumè",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 130.00€ × 1,76 = 228.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "4+4 PL 0.76 bianco latte",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 130.00€ × 1,76 = 228.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "6+6 PL 3.04 trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 457.6,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 260.00€ × 1,76 = 457.60€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "6+6 PL 3.04 satinato",
+    "tipoPrezzo": "FISSO",
+    "valore": 580.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 330.00€ × 1,76 = 580.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "8+8 PL 4.56 satinato",
+    "tipoPrezzo": "FISSO",
+    "valore": 756.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 430.00€ × 1,76 = 756.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "8+8 PL 4.56 trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 633.6,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 360.00€ × 1,76 = 633.60€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "6+6 PL 3.04 trasparente + camera/canalina a caldo + 3+3 PL 0.76 trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 704.0,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 400.00€ × 1,76 = 704.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Vetro",
+    "nome": "8+8 PL 4.56 trasparente + camera/canalina a caldo + 3+3 PL 0.76 trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 880.0,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 500.00€ × 1,76 = 880.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Cilindro intero R6 modello europeo",
+    "tipoPrezzo": "FISSO",
+    "valore": 130.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 65.00€ × 2 = 130.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Mezzo cilindro Iseo R6 unificato 1 chiave",
+    "tipoPrezzo": "FISSO",
+    "valore": 16.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 8.00€ × 2 = 16.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Mezzo cilindro Iseo R6 unificato 2+1 chiave cantiere",
+    "tipoPrezzo": "FISSO",
+    "valore": 30.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 15.00€ × 2 = 30.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Borchie saldate + cilindro intero antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 460.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 230.00€ × 2 = 460.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra unificazione cilindro R6",
+    "tipoPrezzo": "FISSO",
+    "valore": 60.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 30.00€ × 2 = 60.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Duplicato chiave R6",
+    "tipoPrezzo": "FISSO",
+    "valore": 40.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 20.00€ × 2 = 40.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra unificazione cilindro antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 96.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 48.00€ × 2 = 96.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Duplicato chiave cilindro antitrapano",
+    "tipoPrezzo": "FISSO",
+    "valore": 50.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 25.00€ × 2 = 50.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra serratura a montante per apertura a libro",
+    "tipoPrezzo": "FISSO",
+    "valore": 330.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 165.00€ × 2 = 330.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Extra deviatori per apertura libro a 2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 330.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 165.00€ × 2 = 330.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Vite di sicurezza Ø10mm lung. 100mm e tassello",
+    "tipoPrezzo": "FISSO",
+    "valore": 4.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 2.00€ × 2 = 4.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Spazzolino a ghigliottina",
+    "tipoPrezzo": "FISSO",
+    "valore": 110.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 55.00€ × 2 = 110.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura multiblindo",
+    "tipoPrezzo": "FISSO",
+    "valore": 460.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 230.00€ × 2 = 460.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura emotion",
+    "tipoPrezzo": "FISSO",
+    "valore": 1440.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 720.00€ × 2 = 1440.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Serratura elettropistone",
+    "tipoPrezzo": "FISSO",
+    "valore": 1280.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 640.00€ × 2 = 1280.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Maniglia singola",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 35.00€ × 2 = 70.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Coppia maniglie",
+    "tipoPrezzo": "FISSO",
+    "valore": 140.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 70.00€ × 2 = 140.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Pompa di ritorno incassata",
+    "tipoPrezzo": "FISSO",
+    "valore": 800.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 400.00€ × 2 = 800.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Passacavo a molla",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 90.00€ × 2 = 180.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Cerniera a scomparsa",
+    "tipoPrezzo": "FISSO",
+    "valore": 140.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 70.00€ × 2 = 140.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Doppio maniglione inox",
+    "tipoPrezzo": "FISSO",
+    "valore": 440.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 220.00€ × 2 = 440.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Push bar",
+    "tipoPrezzo": "FISSO",
+    "valore": 480.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 240.00€ × 2 = 480.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Accessorio",
+    "nome": "Push bar con maniglia",
+    "tipoPrezzo": "FISSO",
+    "valore": 580.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Ricarico standard accessori x2: netto 290.00€ × 2 = 580.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Corten",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Effetti legno (Faggio, Rovere, Noce, Ciliegio e altre finiture PROART)",
+    "tipoPrezzo": "FISSO",
+    "valore": 316.8,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 180.00€ × 1,76 = 316.80€. Comprende tutte le finiture effetto legno del listino PROART. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Bicolore su listino colori standard PROART",
+    "tipoPrezzo": "FISSO",
+    "valore": 387.2,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 220.00€ × 1,76 = 387.20€. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Bicolore effetto legno / RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 616.0,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 350.00€ × 1,76 = 616.00€. Come per gli altri optional a mq, moltiplicare manualmente per i mq reali impostando la quantità in fase di aggiunta alla riga preventivo.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore a campione RAL — supplemento fino a 10 mq di fornitura",
+    "tipoPrezzo": "FISSO",
+    "valore": 704.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 400.00€ × 1,76 = 704.00€. Supplemento una tantum per fornitura, non per mq. Applicabile solo se la fornitura complessiva è fino a 10 mq; oltre i 20 mq nessun supplemento.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Colore a campione RAL — supplemento da 10 a 20 mq di fornitura",
+    "tipoPrezzo": "FISSO",
+    "valore": 352.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 200.00€ × 1,76 = 352.00€. Supplemento una tantum per fornitura, non per mq. Applicabile solo se la fornitura complessiva è tra 10 e 20 mq; oltre i 20 mq nessun supplemento.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Coprifilo saldato sagomato a misura",
+    "tipoPrezzo": "FISSO",
+    "valore": 61.6,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 35.00€ × 1,76 = 61.60€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Espansore con grano 20mm",
+    "tipoPrezzo": "FISSO",
+    "valore": 10.56,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 6.00€ × 1,76 = 10.56€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Cerniere a collo lungo",
+    "tipoPrezzo": "FISSO",
+    "valore": 70.4,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 40.00€ × 1,76 = 70.40€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Fascione singolo per anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 105.6,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 60.00€ × 1,76 = 105.60€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione a trapezio apribile per ogni anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 528.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 300.00€ × 1,76 = 528.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione a trapezio apribile per ogni telaio",
+    "tipoPrezzo": "FISSO",
+    "valore": 228.8,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 130.00€ × 1,76 = 228.80€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione ad arco regolare apribile per ogni anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 1144.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 650.00€ × 1,76 = 1144.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Lavorazione ad arco regolare apribile per ogni telaio",
+    "tipoPrezzo": "FISSO",
+    "valore": 475.2,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 270.00€ × 1,76 = 475.20€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Lavorazione",
+    "nome": "Telaio sagomato maggiorato 120/150",
+    "tipoPrezzo": "FISSO",
+    "valore": 38.72,
+    "unita": "al mtl",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 22.00€ × 1,76 = 38.72€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Trasporto entro 30 km dal magazzino",
+    "tipoPrezzo": "FISSO",
+    "valore": 352.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 200.00€ × 1,76 = 352.00€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Supplemento trasporto per ogni km oltre i 30 (andata+ritorno)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.76,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "ACCIAIO",
+    "note": "Prezzo netto da listino ProArt 2024 (Infissi in Acciaio profilo Elegant). Valore inserito scontato 45% e moltiplicato per 3,2 (netto × 0,55 × 3,2), stessa formula del prezzo base a mq. Netto 1.00€ × 1,76 = 1.76€.",
+    "gruppiApplicabili": [
+      "SERRAMENTI"
+    ]
+  }
+]

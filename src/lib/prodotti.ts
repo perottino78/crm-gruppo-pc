@@ -22,7 +22,9 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "SCATOLATO_",
   // Persiane Blindate (ProArt, profilo Elegant): tariffa a mq con minimi fatturabili
   // per numero di ante, stessa convenzione cm dei cataloghi ProArt (Cancelli/Blindati).
-  "PERSIANEBLINDATE_"];
+  "PERSIANEBLINDATE_",
+  // Infissi in Acciaio (ProArt, profilo Elegant): stessa convenzione cm dei cataloghi ProArt.
+  "ACCIAIO_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -121,6 +123,9 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Persiane Blindate: un solo listino per tutte le varianti classe/dogatura/numero ante,
   // cosi' gli optional (accessori, colori, lavorazioni, trasporto) restano condivisi.
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "PERSIANE_BLINDATE";
+  // Infissi in Acciaio: un solo listino per tutte le varianti/numero ante, cosi'
+  // gli optional (vetri, accessori, colori, lavorazioni, trasporto) restano condivisi.
+  if (tipologia.startsWith("ACCIAIO_")) return "ACCIAIO";
   // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
   // specifici (es. GIANIN/GIANSU/CA06 solo su Apertura Centrale, aumenti percentuali solo
   // su Portapliss) si possono scopare per prodotto, mentre gli optional trasversali (rete,
@@ -581,6 +586,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // "Persiane" nella tendina potra' in futuro accogliere altri materiali (es. legno, PVC)
   // come sottogruppi affiancati.
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "BLINDATE";
+  // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
+  if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -699,6 +706,24 @@ const HISENSE_LABELS: Record<string, string> = {
   SOLARIS_HISENSE_UNITA_ESTERNE_MULTISPLIT: "Unità esterne multisplit",
 };
 
+const ACCIAIO_LABELS: Record<string, string> = {
+  PROFILO_FERRO_FINESTRA: "Profilo ferro finestra",
+  CORNICE_LISCIA_SORMONTO: "Infisso con cornice liscia a sormonto",
+  CORNICE_LAVORATA_SORMONTO: "Infisso con cornice lavorata a sormonto",
+  CORNICE_LISCIA_COMPLANARE: "Infisso con cornice liscia complanare",
+  CORNICE_LAVORATA_COMPLANARE: "Infisso con cornice lavorata complanare",
+  FISSO_CORNICE_LISCIA: "Fisso con cornice liscia",
+  FISSO_CORNICE_LAVORATA: "Fisso con cornice lavorata",
+};
+
+const ACCIAIO_ANTA_LABELS: Record<string, string> = {
+  "1ANTA": "apribile a 1 anta",
+  "2ANTE": "apribile a 2 ante",
+  "3ANTE": "apribile a 3 ante",
+  "4ANTE": "apribile a 4 ante",
+  WASISTAS: "wasistas",
+};
+
 const PERSIANE_BLINDATE_LABELS: Record<string, string> = {
   STECCA_APERTA_CL3: "Persiana stecca aperta — Classe 3",
   STECCA_APERTA_CL4: "Persiana stecca aperta — Classe 4",
@@ -727,6 +752,15 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
 };
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia.startsWith("ACCIAIO_")) {
+    const match = tipologia.match(/^ACCIAIO_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE|WASISTAS)$/);
+    if (match) {
+      const base = ACCIAIO_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
+      return `${base} (${ACCIAIO_ANTA_LABELS[match[2]]})`;
+    }
+    const fissoKey = tipologia.slice("ACCIAIO_".length);
+    if (ACCIAIO_LABELS[fissoKey]) return ACCIAIO_LABELS[fissoKey];
+  }
   if (tipologia.startsWith("PERSIANEBLINDATE_")) {
     const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
     if (match) {
@@ -788,7 +822,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }
