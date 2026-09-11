@@ -751,6 +751,47 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
   "4ANTE": "apribile a 4 ante",
 };
 
+// Decompone una tipologia PERSIANEBLINDATE_/ACCIAIO_ nei 2 assi "modello" e "numero
+// ante", cosi' il selettore puo' mostrare 2 tendine a cascata (prima il modello, poi
+// il numero di ante) invece della lista piatta di tutte le combinazioni (68 voci per
+// Persiane Blindate, 27 per Infissi in Acciaio) — facilita la scelta e resta il
+// pattern di riferimento per i prossimi cataloghi Serramenti con la stessa struttura
+// modello + numero ante. I due infissi "Fisso" (senza apertura) di Infissi in Acciaio
+// non hanno un vero numero di ante, ma per restare nello stesso meccanismo a 2 tendine
+// ricevono un asse ante fittizio a valore unico "FISSO".
+export type AssiModelloAnte = { modello: AsseSelezione; ante: AsseSelezione };
+
+export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | null {
+  if (tipologia.startsWith("ACCIAIO_")) {
+    const match = tipologia.match(/^ACCIAIO_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE|WASISTAS)$/);
+    if (match) {
+      const base = ACCIAIO_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
+      return {
+        modello: { valore: match[1], label: base },
+        ante: { valore: match[2], label: ACCIAIO_ANTA_LABELS[match[2]] ?? match[2] },
+      };
+    }
+    const fissoKey = tipologia.slice("ACCIAIO_".length);
+    if (ACCIAIO_LABELS[fissoKey]) {
+      return {
+        modello: { valore: fissoKey, label: ACCIAIO_LABELS[fissoKey] },
+        ante: { valore: "FISSO", label: "Fisso (senza apertura)" },
+      };
+    }
+  }
+  if (tipologia.startsWith("PERSIANEBLINDATE_")) {
+    const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
+    if (match) {
+      const base = PERSIANE_BLINDATE_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
+      return {
+        modello: { valore: match[1], label: base },
+        ante: { valore: match[2], label: PERSIANE_BLINDATE_ANTE_LABELS[match[2]] ?? match[2] },
+      };
+    }
+  }
+  return null;
+}
+
 export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("ACCIAIO_")) {
     const match = tipologia.match(/^ACCIAIO_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE|WASISTAS)$/);

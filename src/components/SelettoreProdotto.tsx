@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte } from "@/lib/prodotti";
 
 export type NodoTipologia = {
   value: string;
@@ -14,6 +14,9 @@ export type NodoTipologia = {
   // invece della lista piatta (18-54 voci per famiglia) quando presente su tutte le
   // tipologie di un sottogruppo.
   assi?: AssiZpc;
+  // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
+  // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
+  assiModelloAnte?: AssiModelloAnte;
 };
 export type SottogruppoNodo = { nome: string; tipologie: NodoTipologia[] };
 export type GruppoNodo = { nome: string; tipologie: NodoTipologia[]; sottogruppi?: SottogruppoNodo[] };
@@ -119,6 +122,95 @@ function SelettoreCascata({
           >
             <option value="">— seleziona —</option>
             {opzioniColore.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata piu' semplici, per i cataloghi Serramenti strutturati come
+// "modello + numero ante" (Persiane Blindate, Infissi in Acciaio): 1) modello,
+// 2) numero ante. Ogni scelta di modello filtra le opzioni di ante alle sole
+// combinazioni davvero a listino (es. i due infissi "Fisso" hanno solo l'opzione
+// fittizia "Fisso (senza apertura)").
+function SelettoreCascataModelloAnte({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [modello, setModello] = useState("");
+  const [ante, setAnte] = useState("");
+
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiModelloAnte) mappa.set(t.assiModelloAnte.modello.valore, t.assiModelloAnte.modello.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerModello = useMemo(
+    () => tipologie.filter((t) => t.assiModelloAnte?.modello.valore === modello),
+    [tipologie, modello]
+  );
+  const opzioniAnte = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiModelloAnte) mappa.set(t.assiModelloAnte.ante.valore, t.assiModelloAnte.ante.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiModelloAnte?.ante.valore === ante) ?? null,
+    [filtratePerModello, ante]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Modello</label>
+        <select
+          value={modello}
+          onChange={(e) => {
+            setModello(e.target.value);
+            setAnte("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniModello.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Numero ante</label>
+          <select
+            value={ante}
+            onChange={(e) => setAnte(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniAnte.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
@@ -324,6 +416,13 @@ export default function SelettoreProdotto({
                                         <div className="pl-3 pb-1 flex flex-col">
                                           {sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assi) ? (
                                             <SelettoreCascata
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiModelloAnte) ? (
+                                            <SelettoreCascataModelloAnte
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
