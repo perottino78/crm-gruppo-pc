@@ -64,5 +64,41 @@
     "parametriCalcolo": {
       "arrotondamentoCm": 5
     }
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_TINTAUNITA",
+    "descrizioneTecnica": "OBLIQUA — Telo Finito, colore Tinta Unita. OBLIQUA (Pracal) — avvolgibile a lamelle orientabili in alluminio estruso, sistema frangisole che unisce avvolgibile e persiana in un'unica soluzione: 3 modalità di posizionamento (telo completamente chiuso, lamelle inclinate a 60°, telo completamente aperto) per graduare luce, ventilazione e privacy secondo la stagione. Funzionamento senza meccanismi nelle guide: installabile come un normale avvolgibile, anche in sostituzione di uno esistente, su nuove costruzioni o ristrutturazioni, senza manutenzione e con funzionamento costante nel tempo. Caratteristiche tecniche: 18 barre per metro di altezza, interasse stecca-stecca orientata 54,9mm, interasse stecca-stecca in tiro 63,5mm, peso telo ca. 9 Kg/m². Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1600→Ø175mm, H1800→Ø185mm, H2000→Ø200mm, H2200→Ø205mm, H2400→Ø220mm, H2500→Ø225mm, H2800→Ø240mm, H3000→Ø250mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 300.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_FINTOLEGNO",
+    "descrizioneTecnica": "OBLIQUA — Telo Finito, colore Finto Legno. OBLIQUA (Pracal) — avvolgibile a lamelle orientabili in alluminio estruso, sistema frangisole che unisce avvolgibile e persiana in un'unica soluzione: 3 modalità di posizionamento (telo completamente chiuso, lamelle inclinate a 60°, telo completamente aperto) per graduare luce, ventilazione e privacy secondo la stagione. Funzionamento senza meccanismi nelle guide: installabile come un normale avvolgibile, anche in sostituzione di uno esistente, su nuove costruzioni o ristrutturazioni, senza manutenzione e con funzionamento costante nel tempo. Caratteristiche tecniche: 18 barre per metro di altezza, interasse stecca-stecca orientata 54,9mm, interasse stecca-stecca in tiro 63,5mm, peso telo ca. 9 Kg/m². Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1600→Ø175mm, H1800→Ø185mm, H2000→Ø200mm, H2200→Ø205mm, H2400→Ø220mm, H2500→Ø225mm, H2800→Ø240mm, H3000→Ø250mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 560.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_RAFFAELLO",
+    "descrizioneTecnica": "OBLIQUA — Telo Finito, colore Raffaello / Particolari. OBLIQUA (Pracal) — avvolgibile a lamelle orientabili in alluminio estruso, sistema frangisole che unisce avvolgibile e persiana in un'unica soluzione: 3 modalità di posizionamento (telo completamente chiuso, lamelle inclinate a 60°, telo completamente aperto) per graduare luce, ventilazione e privacy secondo la stagione. Funzionamento senza meccanismi nelle guide: installabile come un normale avvolgibile, anche in sostituzione di uno esistente, su nuove costruzioni o ristrutturazioni, senza manutenzione e con funzionamento costante nel tempo. Caratteristiche tecniche: 18 barre per metro di altezza, interasse stecca-stecca orientata 54,9mm, interasse stecca-stecca in tiro 63,5mm, peso telo ca. 9 Kg/m². Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1600→Ø175mm, H1800→Ø185mm, H2000→Ø200mm, H2200→Ø205mm, H2400→Ø220mm, H2500→Ø225mm, H2800→Ø240mm, H3000→Ø250mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 400.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
   }
 ]

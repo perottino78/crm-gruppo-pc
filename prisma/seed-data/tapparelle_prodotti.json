@@ -40,5 +40,26 @@
     "altezzaMm": 100,
     "larghezzaMm": 100,
     "prezzoBase": 121.0
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_TINTAUNITA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 300.0
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_FINTOLEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 560.0
+  },
+  {
+    "tipologia": "TAPPARELLE_OBLIQUA_RAFFAELLO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 400.0
   }
 ]
