@@ -113,20 +113,6 @@
   },
   {
     "categoria": "Servizio",
-    "nome": "Trasporto",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 2,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "PENSILINA_CURVA",
-    "note": "2% sul prezzo base, in Italia, con minimo di €100 (il minimo va verificato/corretto manualmente se il 2% risulta inferiore)",
-    "gruppiApplicabili": [
-      "PENSILINE"
-    ]
-  },
-  {
-    "categoria": "Servizio",
     "nome": "Imballo",
     "tipoPrezzo": "PERCENTUALE",
     "valore": 1,

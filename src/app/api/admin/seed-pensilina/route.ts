@@ -157,6 +157,18 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove eventuali optional dello scope Pensiline non piu' presenti nel JSON
+    // (es. "Trasporto", rimosso perche' gia' incluso nel prezzo) — cosi' il seed
+    // resta sincronizzato col file invece di lasciare righe orfane in DB.
+    const chiaviAttuali = new Set(optionaliNuovi.map(keyOptional));
+    let optRimossi = 0;
+    for (const o of optionaliEsistenti) {
+      if (!chiaviAttuali.has(keyOptional(o))) {
+        await prisma.optional.delete({ where: { id: o.id } });
+        optRimossi++;
+      }
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
@@ -166,6 +178,7 @@ export async function POST(req: NextRequest) {
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
