@@ -602,7 +602,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // Tapparelle: sottogruppo "Tapparelle in PVC e Alluminio" per i modelli veri e
   // propri (L14, Obliqua e futuri); "Accessori" (guide, kit di manovra) seguira' a
   // parte nello stesso gruppo TAPPARELLE, cosi' da poterli ordinare come voci separate.
-  if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_")) return "Tapparelle in PVC e Alluminio";
+  if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_")) return "Tapparelle in PVC e Alluminio";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -822,6 +822,9 @@ const TAPPARELLE_LABELS: Record<string, string> = {
   TAPPARELLE_OBLIQUA_TINTAUNITA: "Obliqua — Tinta Unita",
   TAPPARELLE_OBLIQUA_FINTOLEGNO: "Obliqua — Finto Legno",
   TAPPARELLE_OBLIQUA_RAFFAELLO: "Obliqua — Raffaello / Particolari",
+  TAPPARELLE_LUPIN_TINTAUNITA: "Lupin — Tinta Unita",
+  TAPPARELLE_LUPIN_FINTOLEGNO: "Lupin — Finto Legno",
+  TAPPARELLE_LUPIN_RAFFAELLO: "Lupin — Raffaello / Particolari",
 };
 
 // Tipologie "in arrivo": esistono gia' come voce di navigazione (cosi' il commerciale

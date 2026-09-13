@@ -61,5 +61,26 @@
     "altezzaMm": 100,
     "larghezzaMm": 100,
     "prezzoBase": 400.0
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_TINTAUNITA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 400.0
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_FINTOLEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 640.0
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_RAFFAELLO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 520.0
   }
 ]

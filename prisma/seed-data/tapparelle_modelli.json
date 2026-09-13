@@ -100,5 +100,41 @@
       "arrotondamentoCm": 5,
       "areaMinimaM2": 1.5
     }
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_TINTAUNITA",
+    "descrizioneTecnica": "LUPIN — Telo Finito, colore Tinta Unita. LUPIN — avvolgibile autobloccante di sicurezza in alluminio estruso. Piu' profili in estruso uniti dall'aggancio ad \"S\" attivano il sistema autobloccante, che protegge da intrusioni e tentativi di sollevamento dall'esterno. Parzialmente chiuso, la struttura microforata consente areazione e illuminazione impedendo l'accesso a zanzare e insetti. Caratteristiche tecniche: larghezza massima consigliata 2750mm, altezza massima consigliata 3000mm, misura lamella chiusa 49mm, lamella estesa 71,5mm, superficie microforata 0,078mq per mq di telo, peso telo ca. 12 Kg/m². Guida compatibile: A28. Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1000→Ø150mm, H1200→Ø170mm, H1400→Ø180mm, H1700→Ø190mm, H2000→Ø200mm, H2300→Ø215mm, H2600→Ø225mm, H3000→Ø230mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 400.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_FINTOLEGNO",
+    "descrizioneTecnica": "LUPIN — Telo Finito, colore Finto Legno. LUPIN — avvolgibile autobloccante di sicurezza in alluminio estruso. Piu' profili in estruso uniti dall'aggancio ad \"S\" attivano il sistema autobloccante, che protegge da intrusioni e tentativi di sollevamento dall'esterno. Parzialmente chiuso, la struttura microforata consente areazione e illuminazione impedendo l'accesso a zanzare e insetti. Caratteristiche tecniche: larghezza massima consigliata 2750mm, altezza massima consigliata 3000mm, misura lamella chiusa 49mm, lamella estesa 71,5mm, superficie microforata 0,078mq per mq di telo, peso telo ca. 12 Kg/m². Guida compatibile: A28. Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1000→Ø150mm, H1200→Ø170mm, H1400→Ø180mm, H1700→Ø190mm, H2000→Ø200mm, H2300→Ø215mm, H2600→Ø225mm, H3000→Ø230mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 640.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_LUPIN_RAFFAELLO",
+    "descrizioneTecnica": "LUPIN — Telo Finito, colore Raffaello / Particolari. LUPIN — avvolgibile autobloccante di sicurezza in alluminio estruso. Piu' profili in estruso uniti dall'aggancio ad \"S\" attivano il sistema autobloccante, che protegge da intrusioni e tentativi di sollevamento dall'esterno. Parzialmente chiuso, la struttura microforata consente areazione e illuminazione impedendo l'accesso a zanzare e insetti. Caratteristiche tecniche: larghezza massima consigliata 2750mm, altezza massima consigliata 3000mm, misura lamella chiusa 49mm, lamella estesa 71,5mm, superficie microforata 0,078mq per mq di telo, peso telo ca. 12 Kg/m². Guida compatibile: A28. Diametro di avvolgimento su rullo da 60mm in funzione dell'altezza: H1000→Ø150mm, H1200→Ø170mm, H1400→Ø180mm, H1700→Ø190mm, H2000→Ø200mm, H2300→Ø215mm, H2600→Ø225mm, H3000→Ø230mm. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 520.00€/m² per telo finito, applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); minimo fatturabile per telo finito 1,50m².",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1.5
+    }
   }
 ]
