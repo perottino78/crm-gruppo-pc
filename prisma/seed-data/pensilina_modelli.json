@@ -1,0 +1,29 @@
+[
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "descrizioneTecnica": "Pensilina curva in alluminio con copertura in policarbonato compatto 3mm. Misura tramite Larghezza (L, 100-600cm) e Sporgenza (S, 60-180cm): la Sporgenza determina anche l'Altezza massima (H) della struttura secondo questa corrispondenza fissa (non selezionabile a parte): S 60cm -> H max 40cm; S 80cm -> H max 40cm; S 100cm -> H max 60cm; S 120cm -> H max 60cm; S 140cm -> H max 80cm; S 160cm -> H max 80cm; S 180cm -> H max 90cm. Colori di serie inclusi: Bianco Ral 9010, Avorio Ral 1013 (tendina \"Colori\"). Altri colori (Bianco/Avorio SOFT-Opaco, Argento Ral 9006) con supplemento 8% (tendina \"Colori\"). Policarbonato disponibile Trasparente/Opale/Fumé senza sovrapprezzo (tendina \"Optional\"). Supplementi Trasporto 2% (minimo €100, in Italia) e Imballo 1% (in Italia) da aggiungere a mano dalla tendina \"Optional\". Prezzi netti da listino fornitore, nessun ricarico applicato — da confermare col commerciale se va aggiunto un margine.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PENSILINE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "descrizioneTecnica": "Pensilina curva in alluminio con copertura in policarbonato alveolare 6mm. Misura tramite Larghezza (L, 100-600cm) e Sporgenza (S, 80-180cm): la Sporgenza determina anche l'Altezza massima (H) della struttura secondo questa corrispondenza fissa (non selezionabile a parte): S 80cm -> H max 40cm; S 100cm -> H max 60cm; S 120cm -> H max 60cm; S 140cm -> H max 80cm; S 160cm -> H max 80cm; S 180cm -> H max 90cm. Colori di serie inclusi: Bianco Ral 9010, Avorio Ral 1013 (tendina \"Colori\"). Altri colori (Bianco/Avorio SOFT-Opaco, Argento Ral 9006) con supplemento 8% (tendina \"Colori\"). Policarbonato disponibile Trasparente/Opale/Fumé senza sovrapprezzo (tendina \"Optional\"). Supplementi Trasporto 2% (minimo €100, in Italia) e Imballo 1% (in Italia) da aggiungere a mano dalla tendina \"Optional\". Prezzi netti da listino fornitore, nessun ricarico applicato — da confermare col commerciale se va aggiunto un margine.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PENSILINE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PENSILINA_DRITTA_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Pensilina Dritta non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PENSILINE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  }
+]

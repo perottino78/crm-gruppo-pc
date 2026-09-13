@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import {
   aggiungiRigaPreventivo,
@@ -139,6 +139,9 @@ export default async function PreventivoPage({
         // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per la
         // selezione a 2 tendine a cascata invece della lista piatta (27-68 voci).
         assiModelloAnte: assiSelezioneModelloAnte(tip) ?? undefined,
+        // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino):
+        // visibili in tendina ma non selezionabili, mostrate in rosso.
+        disabilitato: notaInArrivo(tip) ?? undefined,
       },
     });
   }
@@ -417,6 +420,47 @@ export default async function PreventivoPage({
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
                   .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
+
+                // Per le Pensiline: tendina "Colori" (colore struttura) separata da
+                // "Optional" (policarbonato, trasporto, imballo) come richiesto.
+                if (modello?.gruppo === "PENSILINE") {
+                  const coloriPensilina = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore");
+                  const optionalPensilina = optionaliRigaFiltrati.filter((o) => o.categoria !== "Colore");
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {coloriPensilina.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {coloriPensilina.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {optionalPensilina.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {optionalPensilina.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
 
                 // Per i Blindati: tendina separata "Optional Blindato" (fuori misura, vetro,
                 // sopraluce, fianco luce, accessori) da "Pannelli e colori" (le centinaia di

@@ -1,0 +1,555 @@
+[
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 100,
+    "prezzoBase": 1181
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 200,
+    "prezzoBase": 1629
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 300,
+    "prezzoBase": 2201
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 400,
+    "prezzoBase": 2823
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 500,
+    "prezzoBase": 3445
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 60,
+    "larghezzaMm": 600,
+    "prezzoBase": 3808
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 100,
+    "prezzoBase": 1275
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 200,
+    "prezzoBase": 1818
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 300,
+    "prezzoBase": 2462
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 400,
+    "prezzoBase": 3156
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 500,
+    "prezzoBase": 3851
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 600,
+    "prezzoBase": 4287
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1412
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 2043
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2805
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 3572
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 4338
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 4851
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 100,
+    "prezzoBase": 1506
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 200,
+    "prezzoBase": 2232
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 300,
+    "prezzoBase": 3064
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 400,
+    "prezzoBase": 3906
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 500,
+    "prezzoBase": 4747
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 600,
+    "prezzoBase": 5326
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 1642
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 200,
+    "prezzoBase": 2462
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 3409
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 400,
+    "prezzoBase": 4321
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 500,
+    "prezzoBase": 5234
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 600,
+    "prezzoBase": 5887
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1733
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 200,
+    "prezzoBase": 2648
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 300,
+    "prezzoBase": 3666
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 400,
+    "prezzoBase": 4653
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 500,
+    "prezzoBase": 5640
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 600,
+    "prezzoBase": 6367
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 1873
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 200,
+    "prezzoBase": 2874
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 4013
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 400,
+    "prezzoBase": 5069
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 6125
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_COMPATTO",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 600,
+    "prezzoBase": 6927
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 100,
+    "prezzoBase": 1127
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 200,
+    "prezzoBase": 1520
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 300,
+    "prezzoBase": 2013
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 400,
+    "prezzoBase": 2559
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 500,
+    "prezzoBase": 3107
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 80,
+    "larghezzaMm": 600,
+    "prezzoBase": 3392
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 1229
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 200,
+    "prezzoBase": 1680
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 300,
+    "prezzoBase": 2261
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 400,
+    "prezzoBase": 2846
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 500,
+    "prezzoBase": 3434
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 100,
+    "larghezzaMm": 600,
+    "prezzoBase": 3762
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 100,
+    "prezzoBase": 1294
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 200,
+    "prezzoBase": 1803
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 300,
+    "prezzoBase": 2424
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 400,
+    "prezzoBase": 3049
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 500,
+    "prezzoBase": 3680
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 120,
+    "larghezzaMm": 600,
+    "prezzoBase": 4046
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 100,
+    "prezzoBase": 1396
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 200,
+    "prezzoBase": 1970
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 300,
+    "prezzoBase": 2587
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 400,
+    "prezzoBase": 3341
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 500,
+    "prezzoBase": 4005
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 140,
+    "larghezzaMm": 600,
+    "prezzoBase": 4414
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 100,
+    "prezzoBase": 1459
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 200,
+    "prezzoBase": 2091
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 300,
+    "prezzoBase": 2833
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 400,
+    "prezzoBase": 3541
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 500,
+    "prezzoBase": 4250
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 160,
+    "larghezzaMm": 600,
+    "prezzoBase": 4699
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 100,
+    "prezzoBase": 1559
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 200,
+    "prezzoBase": 2256
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 300,
+    "prezzoBase": 3082
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 400,
+    "prezzoBase": 3828
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 500,
+    "prezzoBase": 4580
+  },
+  {
+    "tipologia": "PENSILINA_CURVA_ALVEOLARE",
+    "colore": "STANDARD",
+    "altezzaMm": 180,
+    "larghezzaMm": 600,
+    "prezzoBase": 5066
+  },
+  {
+    "tipologia": "PENSILINA_DRITTA_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  }
+]

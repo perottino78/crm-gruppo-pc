@@ -17,6 +17,10 @@ export type NodoTipologia = {
   // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
   // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
   assiModelloAnte?: AssiModelloAnte;
+  // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
+  // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
+  // mostrare al click invece di aprire la selezione.
+  disabilitato?: string;
 };
 export type SottogruppoNodo = { nome: string; tipologie: NodoTipologia[] };
 export type GruppoNodo = { nome: string; tipologie: NodoTipologia[]; sottogruppi?: SottogruppoNodo[] };
@@ -346,17 +350,30 @@ export default function SelettoreProdotto({
           {risultatiRicerca.length === 0 && (
             <p className="px-3 py-3 text-sm text-neutral-600">Nessun modello corrisponde a &quot;{query}&quot;.</p>
           )}
-          {risultatiRicerca.map(({ famiglia, gruppo, sottogruppo, nodo }) => (
-            <button
-              key={nodo.value}
-              type="button"
-              onClick={() => scegli(nodo)}
-              className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 ${scelto?.value === nodo.value ? "bg-neutral-50" : ""}`}
-            >
-              <span className="font-medium">{nodo.label}</span>
-              <span className="block text-[11px] text-neutral-600">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""}</span>
-            </button>
-          ))}
+          {risultatiRicerca.map(({ famiglia, gruppo, sottogruppo, nodo }) =>
+            nodo.disabilitato ? (
+              <button
+                key={nodo.value}
+                type="button"
+                onClick={() => window.alert(nodo.disabilitato)}
+                className="w-full text-left px-3 py-2 text-sm bg-red-50 text-red-400 cursor-not-allowed"
+                title={nodo.disabilitato}
+              >
+                <span className="font-medium">{nodo.label}</span>
+                <span className="block text-[11px] text-red-400">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""} · {nodo.disabilitato}</span>
+              </button>
+            ) : (
+              <button
+                key={nodo.value}
+                type="button"
+                onClick={() => scegli(nodo)}
+                className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 ${scelto?.value === nodo.value ? "bg-neutral-50" : ""}`}
+              >
+                <span className="font-medium">{nodo.label}</span>
+                <span className="block text-[11px] text-neutral-600">{famiglia} · {gruppo}{sottogruppo ? ` · ${sottogruppo}` : ""}</span>
+              </button>
+            )
+          )}
         </div>
       ) : (
         <div className="border border-neutral-100 rounded-lg divide-y divide-neutral-50 mb-3">
@@ -429,16 +446,28 @@ export default function SelettoreProdotto({
                                               onReset={azzeraScelta}
                                             />
                                           ) : (
-                                            sg.tipologie.map((t) => (
-                                              <button
-                                                key={t.value}
-                                                type="button"
-                                                onClick={() => scegli(t)}
-                                                className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
-                                              >
-                                                {t.label}
-                                              </button>
-                                            ))
+                                            sg.tipologie.map((t) =>
+                                              t.disabilitato ? (
+                                                <button
+                                                  key={t.value}
+                                                  type="button"
+                                                  onClick={() => window.alert(t.disabilitato)}
+                                                  className="text-left px-2 py-1.5 text-xs rounded bg-red-50 text-red-400 cursor-not-allowed"
+                                                  title={t.disabilitato}
+                                                >
+                                                  {t.label}
+                                                </button>
+                                              ) : (
+                                                <button
+                                                  key={t.value}
+                                                  type="button"
+                                                  onClick={() => scegli(t)}
+                                                  className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
+                                                >
+                                                  {t.label}
+                                                </button>
+                                              )
+                                            )
                                           )}
                                         </div>
                                       )}
@@ -447,16 +476,28 @@ export default function SelettoreProdotto({
                                 })
                               ) : (
                                 <div className="flex flex-col">
-                                  {g.tipologie.map((t) => (
-                                    <button
-                                      key={t.value}
-                                      type="button"
-                                      onClick={() => scegli(t)}
-                                      className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
-                                    >
-                                      {t.label}
-                                    </button>
-                                  ))}
+                                  {g.tipologie.map((t) =>
+                                    t.disabilitato ? (
+                                      <button
+                                        key={t.value}
+                                        type="button"
+                                        onClick={() => window.alert(t.disabilitato)}
+                                        className="text-left px-2 py-1.5 text-xs rounded bg-red-50 text-red-400 cursor-not-allowed"
+                                        title={t.disabilitato}
+                                      >
+                                        {t.label}
+                                      </button>
+                                    ) : (
+                                      <button
+                                        key={t.value}
+                                        type="button"
+                                        onClick={() => scegli(t)}
+                                        className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
+                                      >
+                                        {t.label}
+                                      </button>
+                                    )
+                                  )}
                                 </div>
                               )}
                             </div>

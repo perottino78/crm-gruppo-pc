@@ -1,0 +1,142 @@
+[
+  {
+    "categoria": "Colore",
+    "nome": "Bianco Ral 9010 (di serie)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "Colore di serie, incluso nel prezzo base",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Avorio Ral 1013 (di serie)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "Colore di serie, incluso nel prezzo base",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Bianco SOFT/Opaco Ral 9010",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "Supplemento 8% sul prezzo base",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Avorio SOFT/Opaco Ral 1013",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "Supplemento 8% sul prezzo base",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Colore",
+    "nome": "Argento Ral 9006",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 8,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "Supplemento 8% sul prezzo base",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Policarbonato",
+    "nome": "Trasparente",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Policarbonato",
+    "nome": "Opale",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Policarbonato",
+    "nome": "Fumé",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Trasporto",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 2,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "2% sul prezzo base, in Italia, con minimo di €100 (il minimo va verificato/corretto manualmente se il 2% risulta inferiore)",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Servizio",
+    "nome": "Imballo",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 1,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PENSILINA_CURVA",
+    "note": "1% sul prezzo base, in Italia",
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  }
+]

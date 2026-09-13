@@ -24,7 +24,9 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   // per numero di ante, stessa convenzione cm dei cataloghi ProArt (Cancelli/Blindati).
   "PERSIANEBLINDATE_",
   // Infissi in Acciaio (ProArt, profilo Elegant): stessa convenzione cm dei cataloghi ProArt.
-  "ACCIAIO_"];
+  "ACCIAIO_",
+  // Pensiline (Outdoor): griglia larghezza x sporgenza, stessa convenzione cm.
+  "PENSILINA_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -126,6 +128,7 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Infissi in Acciaio: un solo listino per tutte le varianti/numero ante, cosi'
   // gli optional (vetri, accessori, colori, lavorazioni, trasporto) restano condivisi.
   if (tipologia.startsWith("ACCIAIO_")) return "ACCIAIO";
+  if (tipologia.startsWith("PENSILINA_")) return "PENSILINA_CURVA";
   // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
   // specifici (es. GIANIN/GIANSU/CA06 solo su Apertura Centrale, aumenti percentuali solo
   // su Portapliss) si possono scopare per prodotto, mentre gli optional trasversali (rete,
@@ -588,6 +591,10 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "BLINDATE";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
+  // Pensiline: tendina Curva / Dritta dentro il gruppo PENSILINE. "Dritta" e' per ora
+  // solo un segnaposto disabilitato (vedi IN_ARRIVO) in attesa del listino.
+  if (tipologia.startsWith("PENSILINA_CURVA_")) return "Curva";
+  if (tipologia.startsWith("PENSILINA_DRITTA_")) return "Dritta";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -792,7 +799,28 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
   return null;
 }
 
+const PENSILINA_LABELS: Record<string, string> = {
+  PENSILINA_CURVA_COMPATTO: "Pensilina Curva — Policarbonato Compatto (3mm)",
+  PENSILINA_CURVA_ALVEOLARE: "Pensilina Curva — Policarbonato Alveolare (6mm)",
+};
+
+// Tipologie "in arrivo": esistono gia' come voce di navigazione (cosi' il commerciale
+// vede subito che l'opzione esistera') ma non hanno ancora un listino reale caricato —
+// una singola riga Prodotto segnaposto (prezzo 0, senza misura) le fa comparire
+// nell'albero, e il campo "disabilitato" su NodoTipologia le rende non selezionabili
+// e le mostra in rosso nel selettore finche' non arriva il listino vero (a quel punto
+// basta rimuovere la voce da questa mappa e sostituire il segnaposto con i dati reali).
+const IN_ARRIVO: Record<string, string> = {
+  PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
+};
+
+export function notaInArrivo(tipologia: string): string | null {
+  return IN_ARRIVO[tipologia] ?? null;
+}
+
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
+  if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
   if (tipologia.startsWith("ACCIAIO_")) {
     const match = tipologia.match(/^ACCIAIO_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE|WASISTAS)$/);
     if (match) {
