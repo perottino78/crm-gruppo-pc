@@ -82,5 +82,180 @@
     "altezzaMm": 100,
     "larghezzaMm": 100,
     "prezzoBase": 520.0
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A50_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 26.37
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A80_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 35.0
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A60_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 32.9
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A60_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 34.18
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A14_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10.85
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A14_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.27
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A16_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.94
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A16_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12.74
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A25_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10.63
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A25_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12.36
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A27_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.94
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A27_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12.74
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A28_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 10.88
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A28_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.3
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A30_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.36
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A30_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 11.72
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A40_ARGENTOBRONZO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 12.96
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A40_RAL",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 13.48
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_FERRO_ZINCATO",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 3.72
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X3",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 0.55
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X5",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 0.48
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_GUARNIZIONE_E13",
+    "colore": "TARIFFA AL ML",
+    "altezzaMm": 100,
+    "larghezzaMm": 1000,
+    "prezzoBase": 0.48
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_INVITO_GUIDA",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 5.06
+  },
+  {
+    "tipologia": "TAPPARELLE_KIT_CINGHIA",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 140.0
+  },
+  {
+    "tipologia": "TAPPARELLE_KIT_MOTORIZZATO",
+    "colore": "STANDARD",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 250.0
   }
 ]

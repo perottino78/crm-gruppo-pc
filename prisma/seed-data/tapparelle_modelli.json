@@ -136,5 +136,296 @@
       "arrotondamentoCm": 5,
       "areaMinimaM2": 1.5
     }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A50_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A50 (32x50mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €15,00/ml, colore RAL €22,00/ml (barre da 5,80m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A80_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A80 (32x80mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €23,00/ml, colore RAL €30,00/ml (barre da 5,80m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A60_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A60 (60x27mm (profilo su misura riportato a listino: 40x25,5mm, con spazzolino)), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €12,32/ml, Argento-Bronzo €16,07/ml, RAL €16,68/ml (barre da 6,50m). Guida Antivento: compatibile con i profili Alta Densità in alluminio modelli Ariel, L14 e L15 e in acciaio modello C12. Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A60_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A60 (60x27mm (profilo su misura riportato a listino: 40x25,5mm, con spazzolino)), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €12,32/ml, Argento-Bronzo €16,07/ml, RAL €16,68/ml (barre da 6,50m). Guida Antivento: compatibile con i profili Alta Densità in alluminio modelli Ariel, L14 e L15 e in acciaio modello C12. Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A14_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A14 (28x14mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,93/ml, Argento-Bronzo €7,01/ml, RAL €6,72/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A14_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A14 (28x14mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,93/ml, Argento-Bronzo €7,01/ml, RAL €6,72/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A16_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A16 (28x16mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,07/ml, Argento-Bronzo €6,28/ml, RAL €6,85/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A16_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A16 (28x16mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,07/ml, Argento-Bronzo €6,28/ml, RAL €6,85/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A25_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A25 (25x20mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,07/ml, Argento-Bronzo €4,80/ml, RAL €5,25/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A25_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A25 (25x20mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €4,07/ml, Argento-Bronzo €4,80/ml, RAL €5,25/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A27_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A27 (30x25,5mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,97/ml, Argento-Bronzo €6,28/ml, RAL €6,85/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A27_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A27 (30x25,5mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,97/ml, Argento-Bronzo €6,28/ml, RAL €6,85/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A28_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A28 (28x17mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,72/ml, Argento-Bronzo €5,12/ml, RAL €5,22/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A28_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A28 (28x17mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,72/ml, Argento-Bronzo €5,12/ml, RAL €5,22/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A30_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A30 (30x19,5mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,94/ml, Argento-Bronzo €5,96/ml, RAL €6,31/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A30_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A30 (30x19,5mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €3,94/ml, Argento-Bronzo €5,96/ml, RAL €6,31/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo, Verde Scuro.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A40_ARGENTOBRONZO",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A40 (40x25,5mm), colore Argento-Bronzo, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €6,63/ml, Argento-Bronzo €8,55/ml, RAL €8,74/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_A40_RAL",
+    "descrizioneTecnica": "Guida in Alluminio Estruso A40 (40x25,5mm), colore RAL, su misura (con spazzolino) — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra intera non tagliata: grezzo €6,63/ml, Argento-Bronzo €8,55/ml, RAL €8,74/ml (barre da 6,50m). Colori disponibili: Bianco 9010, Avorio, Marrone 8017, Testa di Moro, Elettrocolore Nero, Argento, Bronzo.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_GUIDA_FERRO_ZINCATO",
+    "descrizioneTecnica": "Guida in Ferro Zincato 22x19mm, su misura — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra da 6m non tagliata: € 2,98/ml.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X3",
+    "descrizioneTecnica": "Spazzolino 4,8x3mm per guide in alluminio A14, A16, A28 — prezzo al metro lineare. Applicato alla lunghezza reale arrotondata per eccesso ogni 5cm.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X5",
+    "descrizioneTecnica": "Spazzolino 4,8x5mm per guide in alluminio A25, A27, A30, A40 — prezzo al metro lineare. Applicato alla lunghezza reale arrotondata per eccesso ogni 5cm.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_GUARNIZIONE_E13",
+    "descrizioneTecnica": "Guarnizione per profilo in alluminio estruso E13 — prezzo al metro lineare. Applicato alla lunghezza reale arrotondata per eccesso ogni 5cm.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "METRO_LINEARE_FISSO",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "lunghezzaMinimaM": 0
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_ACCESSORIO_INVITO_GUIDA",
+    "descrizioneTecnica": "Invito guida per guida in ferro — prezzo fisso cadauno.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_KIT_CINGHIA",
+    "descrizioneTecnica": "Kit completo manovra a cinghia con supporto a murare — comprende rullo ottogonale zincato, calotta, supporto a sfera tipo leggero, guida in alluminio, tappi d'arresto, gancio di attacco al rullo, cassetta per avvolgitore, avvolgitore zincato, placca, cintino, guidacinghia, cuscinetto sfilabile, puleggia, cintino di attacco al rullo, tappi laterali, guarnizioni per guide. Prezzo fisso, senza misura.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_KIT_MOTORIZZATO",
+    "descrizioneTecnica": "Kit completo con manovra a motoriduttore — comprende rullo ottogonale zincato, calotta in plastica rinforzata, supporto a sfera pesante con cuscinetto sfilabile, guida in alluminio, tappi d'arresto, molla per avvolgibili, motoriduttore senza manovra di soccorso, adattatore per motoriduttore, supporto per motore elettrico, terminale in alluminio, tappi laterali, guarnizioni per guide, catenacciolo intermedio di sicurezza a stecca montato. Prezzo fisso, senza misura.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
   }
 ]

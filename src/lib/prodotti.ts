@@ -603,6 +603,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // propri (L14, Obliqua e futuri); "Accessori" (guide, kit di manovra) seguira' a
   // parte nello stesso gruppo TAPPARELLE, cosi' da poterli ordinare come voci separate.
   if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_")) return "Tapparelle in PVC e Alluminio";
+  if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_") || tipologia.startsWith("TAPPARELLE_KIT_")) return "Accessori";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -825,6 +826,32 @@ const TAPPARELLE_LABELS: Record<string, string> = {
   TAPPARELLE_LUPIN_TINTAUNITA: "Lupin — Tinta Unita",
   TAPPARELLE_LUPIN_FINTOLEGNO: "Lupin — Finto Legno",
   TAPPARELLE_LUPIN_RAFFAELLO: "Lupin — Raffaello / Particolari",
+
+  TAPPARELLE_GUIDA_A50_RAL: "Guida A50 su misura — RAL",
+  TAPPARELLE_GUIDA_A80_RAL: "Guida A80 su misura — RAL",
+  TAPPARELLE_GUIDA_A60_ARGENTOBRONZO: "Guida A60 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A60_RAL: "Guida A60 su misura — RAL",
+  TAPPARELLE_GUIDA_A14_ARGENTOBRONZO: "Guida A14 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A14_RAL: "Guida A14 su misura — RAL",
+  TAPPARELLE_GUIDA_A16_ARGENTOBRONZO: "Guida A16 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A16_RAL: "Guida A16 su misura — RAL",
+  TAPPARELLE_GUIDA_A25_ARGENTOBRONZO: "Guida A25 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A25_RAL: "Guida A25 su misura — RAL",
+  TAPPARELLE_GUIDA_A27_ARGENTOBRONZO: "Guida A27 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A27_RAL: "Guida A27 su misura — RAL",
+  TAPPARELLE_GUIDA_A28_ARGENTOBRONZO: "Guida A28 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A28_RAL: "Guida A28 su misura — RAL",
+  TAPPARELLE_GUIDA_A30_ARGENTOBRONZO: "Guida A30 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A30_RAL: "Guida A30 su misura — RAL",
+  TAPPARELLE_GUIDA_A40_ARGENTOBRONZO: "Guida A40 su misura — Argento-Bronzo",
+  TAPPARELLE_GUIDA_A40_RAL: "Guida A40 su misura — RAL",
+  TAPPARELLE_GUIDA_FERRO_ZINCATO: "Guida in Ferro Zincato 22x19mm su misura",
+  TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X3: "Spazzolino 4,8x3mm",
+  TAPPARELLE_ACCESSORIO_SPAZZOLINO_48X5: "Spazzolino 4,8x5mm",
+  TAPPARELLE_ACCESSORIO_GUARNIZIONE_E13: "Guarnizione profilo E13",
+  TAPPARELLE_ACCESSORIO_INVITO_GUIDA: "Invito guida per guida in ferro (cadauno)",
+  TAPPARELLE_KIT_CINGHIA: "Kit completo manovra a cinghia (con supporto a murare)",
+  TAPPARELLE_KIT_MOTORIZZATO: "Kit completo con motoriduttore",
 };
 
 // Tipologie "in arrivo": esistono gia' come voce di navigazione (cosi' il commerciale
@@ -915,6 +942,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
+  if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
