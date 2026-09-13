@@ -1,38 +1,38 @@
 [
- {
-  "tipologia": "BLINDATI_CL3",
-  "descrizioneTecnica": "Portoncino blindato Classe 3 (UNI-EN 1627), anta singola, 1,4 K termico, pannelli lisci standard telaio nero. Misure standard (nessun sovrapprezzo): larghezza 80/85/90 cm combinata con altezza 210 o 220 cm (6 combinazioni, stesso prezzo). Prezzo base 1800€. Doppia lamiera acciaio zincato, rostri lato cerniera x6, 6 chiavistelli inclinati, guarnizioni EPDM, serratura a cilindro di sicurezza, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Fuori dalle misure standard: range di produzione fornitore larghezza 50-110cm, altezza 180-250cm — aggiungere l'optional \"Fuori Misura\" corrispondente (sia in meno che in più rispetto allo standard, vedi tabella dedicata). Vedi optional per sopraluce, fianco luce, vetro e pannelli di rivestimento (menu a tendina).",
-  "famiglia": "INDOOR",
-  "gruppo": "BLINDATI",
-  "immagineUrl": "/immagini/blindati/blindato_cl3_steel.png",
-  "modalitaCalcolo": "GRIGLIA",
-  "parametriCalcolo": {}
- },
- {
-  "tipologia": "BLINDATI_CL4",
-  "descrizioneTecnica": "Portoncino blindato Classe 4 (UNI-EN 1627), anta singola, 1,8 K termico, pannelli lisci standard telaio nero. Misure standard (nessun sovrapprezzo): larghezza 80/85/90 cm combinata con altezza 210 o 220 cm (6 combinazioni, stesso prezzo). Prezzo base 2100€. Struttura e dotazioni di serie identiche alla Classe 3 (vedi CL3) con maggiore livello di resistenza all'effrazione. Non disponibile in versione a due ante nel listino fornitore attuale. Fuori dalle misure standard: range di produzione fornitore larghezza 50-110cm, altezza 180-250cm — aggiungere l'optional \"Fuori Misura\" corrispondente (sia in meno che in più rispetto allo standard, vedi tabella dedicata). Vedi optional per sopraluce, fianco luce, vetro e pannelli di rivestimento (menu a tendina).",
-  "famiglia": "INDOOR",
-  "gruppo": "BLINDATI",
-  "immagineUrl": "/immagini/blindati/blindato_cl3_steel.png",
-  "modalitaCalcolo": "GRIGLIA",
-  "parametriCalcolo": {}
- },
- {
-  "tipologia": "BLINDATI_CL3_DUEANTE_STD",
-  "descrizioneTecnica": "Portoncino blindato Classe 3, DUE ANTE asimmetriche (anta principale + antino accoppiato: 80+30, 85+35, 90+40 o 90+45 cm). Misure standard (nessun sovrapprezzo): anta principale 80/85/90 cm combinata con altezza 210 o 220 cm (6 combinazioni, stesso prezzo — la larghezza indicata qui è l'anta principale, l'antino corrispondente va scelto secondo l'abbinamento indicato). Prezzo base 3600€. Rostri lato cerniera x6, 3 chiavistelli + scrocco azionante, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Fuori dalle misure standard: range di produzione fornitore larghezza (per anta) 50-110cm, altezza 180-250cm — sovrapprezzi fuori misura calcolati PER OGNI ANTA fuori misura (sia in meno che in più, vedi tabella dedicata). Vedi optional per dettagli.",
-  "famiglia": "INDOOR",
-  "gruppo": "BLINDATI",
-  "immagineUrl": "/immagini/blindati/blindato_2ante_foto.png",
-  "modalitaCalcolo": "GRIGLIA",
-  "parametriCalcolo": {}
- },
- {
-  "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
-  "descrizioneTecnica": "Portoncino blindato Classe 3, DUE ANTE simmetriche (55/60/65 + 55/60/65 cm, stessa larghezza su entrambe le ante). Misure standard (nessun sovrapprezzo): larghezza per anta 55/60/65 cm combinata con altezza 210 o 220 cm (6 combinazioni, stesso prezzo). Prezzo base 3811€. 4 chiavistelli laterali dritti, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Fuori dalle misure standard: range di produzione fornitore larghezza (per anta) 50-110cm, altezza 180-250cm — sovrapprezzi fuori misura calcolati PER OGNI ANTA fuori misura (sia in meno che in più, vedi tabella dedicata). Vedi optional per dettagli.",
-  "famiglia": "INDOOR",
-  "gruppo": "BLINDATI",
-  "immagineUrl": "/immagini/blindati/blindato_2ante_foto.png",
-  "modalitaCalcolo": "GRIGLIA",
-  "parametriCalcolo": {}
- }
+  {
+    "tipologia": "BLINDATI_CL3",
+    "descrizioneTecnica": "⚠️ PREZZO FISSO: cambiare larghezza/altezza nel form NON modifica il prezzo — il prezzo del portoncino è fisso per tutte le misure standard, va aggiunta a mano la maggiorazione \"Fuori Misura\" corretta se si esce dallo standard (tendina \"Optional Blindato\"). Portoncino blindato Classe 3 (UNI-EN 1627), anta singola, 1,4 K termico, pannelli lisci standard telaio nero. Misure standard senza sovrapprezzo: larghezza 80, 85 o 90 cm combinata con altezza 210 o 220 cm (6 combinazioni, tutte a 1800€). Fuori da queste misure (range di produzione fornitore: larghezza 50-110cm, altezza 180-250cm) aggiungere l'optional \"Fuori Misura\" corrispondente dalla tendina \"Optional Blindato\" (sia in meno che in più rispetto allo standard, vedi tabella dedicata). Doppia lamiera acciaio zincato, rostri lato cerniera x6, 6 chiavistelli inclinati, guarnizioni EPDM, serratura a cilindro di sicurezza, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Vedi le tendine \"Optional Blindato\" (fuori misura, vetro, sopraluce, fianco luce) e \"Pannelli e colori\" (rivestimento esterno) per completare la configurazione.",
+    "famiglia": "INDOOR",
+    "gruppo": "BLINDATI",
+    "immagineUrl": "/immagini/blindati/blindato_cl3_steel.png",
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "BLINDATI_CL4",
+    "descrizioneTecnica": "⚠️ PREZZO FISSO: cambiare larghezza/altezza nel form NON modifica il prezzo — il prezzo del portoncino è fisso per tutte le misure standard, va aggiunta a mano la maggiorazione \"Fuori Misura\" corretta se si esce dallo standard (tendina \"Optional Blindato\"). Portoncino blindato Classe 4 (UNI-EN 1627), anta singola, 1,8 K termico, pannelli lisci standard telaio nero. Misure standard senza sovrapprezzo: larghezza 80, 85 o 90 cm combinata con altezza 210 o 220 cm (6 combinazioni, tutte a 2100€). Fuori da queste misure (range di produzione fornitore: larghezza 50-110cm, altezza 180-250cm) aggiungere l'optional \"Fuori Misura\" corrispondente dalla tendina \"Optional Blindato\" (sia in meno che in più rispetto allo standard, vedi tabella dedicata). Struttura e dotazioni di serie identiche alla Classe 3 (vedi CL3) con maggiore livello di resistenza all'effrazione. Non disponibile in versione a due ante nel listino fornitore attuale. Vedi le tendine \"Optional Blindato\" (fuori misura, vetro, sopraluce, fianco luce) e \"Pannelli e colori\" (rivestimento esterno) per completare la configurazione.",
+    "famiglia": "INDOOR",
+    "gruppo": "BLINDATI",
+    "immagineUrl": "/immagini/blindati/blindato_cl3_steel.png",
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "BLINDATI_CL3_DUEANTE_STD",
+    "descrizioneTecnica": "⚠️ PREZZO FISSO: cambiare larghezza/altezza nel form NON modifica il prezzo — il prezzo del portoncino è fisso per tutte le misure standard, va aggiunta a mano la maggiorazione \"Fuori Misura\" corretta PER OGNI ANTA fuori standard (tendina \"Optional Blindato\"). Portoncino blindato Classe 3, DUE ANTE asimmetriche (anta principale + antino accoppiato: 80+30, 85+35, 90+40 o 90+45 cm). Misure standard senza sovrapprezzo: anta principale 80, 85 o 90 cm combinata con altezza 210 o 220 cm (6 combinazioni, tutte a 3600€ — la larghezza indicata qui è l'anta principale, l'antino corrispondente va scelto secondo l'abbinamento indicato). Fuori da queste misure (range di produzione fornitore, per anta: larghezza 50-110cm, altezza 180-250cm) aggiungere l'optional \"Fuori Misura\" corrispondente dalla tendina \"Optional Blindato\" PER OGNI ANTA che risulta fuori misura (sia in meno che in più, vedi tabella dedicata). Rostri lato cerniera x6, 3 chiavistelli + scrocco azionante, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Vedi le tendine \"Optional Blindato\" e \"Pannelli e colori\" per completare la configurazione.",
+    "famiglia": "INDOOR",
+    "gruppo": "BLINDATI",
+    "immagineUrl": "/immagini/blindati/blindato_2ante_foto.png",
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "BLINDATI_CL3_DUEANTE_SIMMETRICA",
+    "descrizioneTecnica": "⚠️ PREZZO FISSO: cambiare larghezza/altezza nel form NON modifica il prezzo — il prezzo del portoncino è fisso per tutte le misure standard, va aggiunta a mano la maggiorazione \"Fuori Misura\" corretta PER OGNI ANTA fuori standard (tendina \"Optional Blindato\"). Portoncino blindato Classe 3, DUE ANTE simmetriche (55/60/65 + 55/60/65 cm, stessa larghezza su entrambe le ante). Misure standard senza sovrapprezzo: larghezza per anta 55, 60 o 65 cm combinata con altezza 210 o 220 cm (6 combinazioni, tutte a 3811€). Fuori da queste misure (range di produzione fornitore, per anta: larghezza 50-110cm, altezza 180-250cm) aggiungere l'optional \"Fuori Misura\" corrispondente dalla tendina \"Optional Blindato\" PER OGNI ANTA che risulta fuori misura (sia in meno che in più, vedi tabella dedicata). 4 chiavistelli laterali dritti, guarnizioni EPDM, serratura a cilindro di sicurezza 3 chiavi, para aria, spioncino, maniglieria bronzo o argento incluse di serie. Vedi le tendine \"Optional Blindato\" e \"Pannelli e colori\" per completare la configurazione.",
+    "famiglia": "INDOOR",
+    "gruppo": "BLINDATI",
+    "immagineUrl": "/immagini/blindati/blindato_2ante_foto.png",
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  }
 ]

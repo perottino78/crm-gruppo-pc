@@ -418,6 +418,49 @@ export default async function PreventivoPage({
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
                   .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
 
+                // Per i Blindati: tendina separata "Optional Blindato" (fuori misura, vetro,
+                // sopraluce, fianco luce, accessori) da "Pannelli e colori" (le centinaia di
+                // varianti di pannello/colore delle collezioni Tradizione/Contemporaneo) — un
+                // unico elenco misto sarebbe ingestibile con quasi 1000 voci di pannelli.
+                if (modello?.gruppo === "BLINDATI") {
+                  const pannelliEColori = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Pannello"));
+                  const optionalBlindato = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Pannello"));
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {optionalBlindato.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {optionalBlindato.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional blindato</button>
+                        </form>
+                      )}
+                      {pannelliEColori.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {pannelliEColori.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ pannello/colore</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
                 // Per i Cancelli: tendine separate colori std / colori a pagamento / altri optional,
                 // così sono immediatamente distinguibili invece di un unico elenco misto.
                 if (modello?.gruppo === "CANCELLI") {
