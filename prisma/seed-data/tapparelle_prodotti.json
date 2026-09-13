@@ -1,0 +1,44 @@
+[
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_TINTAUNITA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 96.0
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_TINTAUNITA",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 116.0
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_FINTOLEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 101.0
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_FINTOLEGNO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 121.0
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_RAFFAELLO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 102.0
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_RAFFAELLO",
+    "colore": "TARIFFA AL M²",
+    "altezzaMm": 100,
+    "larghezzaMm": 100,
+    "prezzoBase": 121.0
+  }
+]

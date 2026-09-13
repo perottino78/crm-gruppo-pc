@@ -1,0 +1,68 @@
+[
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_TINTAUNITA",
+    "descrizioneTecnica": "AV L14-1 — Media Densità (70/90 Kg/m³), colore Tinta Unita. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 96.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_TINTAUNITA",
+    "descrizioneTecnica": "AV L14-1 — Alta Densità (300/350 Kg/m³), colore Tinta Unita. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 116.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_FINTOLEGNO",
+    "descrizioneTecnica": "AV L14-1 — Media Densità (70/90 Kg/m³), colore Finto Legno. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 101.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_FINTOLEGNO",
+    "descrizioneTecnica": "AV L14-1 — Alta Densità (300/350 Kg/m³), colore Finto Legno. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 121.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_MEDIA_RAFFAELLO",
+    "descrizioneTecnica": "AV L14-1 — Media Densità (70/90 Kg/m³), colore Raffaello / Particolari. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 102.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  },
+  {
+    "tipologia": "TAPPARELLE_L14_ALTA_RAFFAELLO",
+    "descrizioneTecnica": "AV L14-1 — Alta Densità (300/350 Kg/m³), colore Raffaello / Particolari. Tapparella in alluminio coibentato a schiuma poliuretanica ecologica, alta stabilità e lunga durata, senza manutenzione. Misura nominale doga 12,5x55mm, spessore lamiera 0,28mm, larghezza lamiera 173mm, peso telo ca. 3,0 Kg/m², 18 barre per metro di altezza. Produzione standard barre da 6500mm, larghezza massima consigliata 4200mm. Terminale in alluminio incluso. Guide compatibili: A27, A28, A30, A40, A60 Antivento (compatibile nella versione alta densità). Diametro di arrotolamento in funzione dell'altezza (molla max Ø60): H1000→Ø140mm, H1200→Ø150mm, H1300→Ø160mm, H1400→Ø163mm, H1500→Ø170mm, H1600→Ø170mm, H1700→Ø175mm, H1800→Ø180mm, H1900→Ø185mm, H2000→Ø187mm, H2200→Ø195mm, H2400→Ø200mm, H2600→Ø213mm, H2800→Ø213mm, H3000→Ø223mm, H3300→Ø235mm — utile per dimensionare il vano cassonetto. Guide, kit di manovra (a cinghia o motorizzato) e altri accessori sono disponibili come voci separate nel sottogruppo Accessori di questo stesso gruppo (in arrivo). PREZZO: tariffa fissa di 121.00€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm); nessun minimo di fatturazione indicato a listino.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5
+    }
+  }
+]
