@@ -604,6 +604,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // parte nello stesso gruppo TAPPARELLE, cosi' da poterli ordinare come voci separate.
   if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_")) return "Tapparelle in PVC e Alluminio";
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_") || tipologia.startsWith("TAPPARELLE_KIT_")) return "Accessori";
+  if (tipologia.startsWith("TAPPARELLE_MINIBOX_ACCESSORIO_")) return "Minibox — Accessori";
+  if (tipologia.startsWith("TAPPARELLE_MINIBOX165_")) return "Minibox 165";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -852,6 +854,24 @@ const TAPPARELLE_LABELS: Record<string, string> = {
   TAPPARELLE_ACCESSORIO_INVITO_GUIDA: "Invito guida per guida in ferro (cadauno)",
   TAPPARELLE_KIT_CINGHIA: "Kit completo manovra a cinghia (con supporto a murare)",
   TAPPARELLE_KIT_MOTORIZZATO: "Kit completo con motoriduttore",
+  TAPPARELLE_MINIBOX165_OR_MINIORIENTA: "Minibox 165 - OR Mini Orienta",
+  TAPPARELLE_MINIBOX165_OR_SEKURCLIM: "Minibox 165 - OR Sekurclim",
+  TAPPARELLE_MINIBOX165_OR_SEKURLOOK: "Minibox 165 - OR Sekurlook",
+  TAPPARELLE_MINIBOX165_OR_SEKURSTOP: "Minibox 165 - OR Sekurstop",
+  TAPPARELLE_MINIBOX165_OR_SEKURMIDI: "Minibox 165 - OR Sekur Midi",
+  TAPPARELLE_MINIBOX165_OR_LITELOOK: "Minibox 165 - OR Lite Look",
+  TAPPARELLE_MINIBOX165_TA_P08: "Minibox 165 - TA P/08",
+  TAPPARELLE_MINIBOX165_TA_I05: "Minibox 165 - TA I/05",
+  TAPPARELLE_MINIBOX165_TA_F09: "Minibox 165 - TA F/09",
+  TAPPARELLE_MINIBOX165_TA_S11: "Minibox 165 - TA S/11",
+  TAPPARELLE_MINIBOX165_TA_SF19: "Minibox 165 - TA SF/19",
+  TAPPARELLE_MINIBOX165_TA_SP14: "Minibox 165 - TA SP/14",
+  TAPPARELLE_MINIBOX165_ST: "Minibox 165 - Solo struttura",
+  TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_ORIENTA: "Minibox - Catenacciolo sicurezza Orienta",
+  TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_TERMINALE: "Minibox - Catenacciolo sicurezza terminale",
+  TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_INTERMEDIO: "Minibox - Catenacciolo intermedio",
+  TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_CHIAVE: "Minibox - Serratura a chiave",
+  TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_POMELLO: "Minibox - Serratura a pomello",
 };
 
 // Tipologie "in arrivo": esistono gia' come voce di navigazione (cosi' il commerciale

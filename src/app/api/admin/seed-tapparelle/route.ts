@@ -5,6 +5,7 @@ import modelliData from "../../../../../prisma/seed-data/tapparelle_modelli.json
 import optionaliData from "../../../../../prisma/seed-data/tapparelle_optional.json";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
@@ -52,33 +53,43 @@ export async function POST(req: NextRequest) {
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
-    let prodottiCreati = 0;
-    let prodottiAggiornati = 0;
+    const daCreare: ProdottoRow[] = [];
+    const daAggiornare: { id: string; prezzoBase: number }[] = [];
     let prodottiInvariati = 0;
     for (const p of prodottiNuovi) {
       const esistente = mappaProdotti.get(keyProdotto(p));
       if (!esistente) {
-        await prisma.prodotto.create({
-          data: {
-            brandId: brand.id,
-            tipologia: p.tipologia,
-            colore: p.colore,
-            altezzaMm: p.altezzaMm,
-            larghezzaMm: p.larghezzaMm,
-            prezzoBase: p.prezzoBase,
-            coefficienteRicarico: 1,
-          },
-        });
-        prodottiCreati++;
+        daCreare.push(p);
       } else if (esistente.prezzoBase !== p.prezzoBase || esistente.coefficienteRicarico !== 1) {
-        await prisma.prodotto.update({
-          where: { id: esistente.id },
-          data: { prezzoBase: p.prezzoBase, coefficienteRicarico: 1 },
-        });
-        prodottiAggiornati++;
+        daAggiornare.push({ id: esistente.id, prezzoBase: p.prezzoBase });
       } else {
         prodottiInvariati++;
       }
+    }
+
+    // Bulk insert: con cataloghi molto grandi (es. Minibox, migliaia di righe) una create()
+    // per riga rischia il timeout della funzione serverless — createMany fa un solo round-trip.
+    let prodottiCreati = 0;
+    if (daCreare.length > 0) {
+      const res = await prisma.prodotto.createMany({
+        data: daCreare.map((p) => ({
+          brandId: brand.id,
+          tipologia: p.tipologia,
+          colore: p.colore,
+          altezzaMm: p.altezzaMm,
+          larghezzaMm: p.larghezzaMm,
+          prezzoBase: p.prezzoBase,
+          coefficienteRicarico: 1,
+        })),
+        skipDuplicates: true,
+      });
+      prodottiCreati = res.count;
+    }
+
+    let prodottiAggiornati = 0;
+    for (const u of daAggiornare) {
+      await prisma.prodotto.update({ where: { id: u.id }, data: { prezzoBase: u.prezzoBase, coefficienteRicarico: 1 } });
+      prodottiAggiornati++;
     }
 
     const modelli = modelliData as ModelloRow[];
