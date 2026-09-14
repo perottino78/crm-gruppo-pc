@@ -15554,41 +15554,6 @@
     "prezzoBase": 797.0
   },
   {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_ORIENTA",
-    "colore": "STANDARD",
-    "altezzaMm": 0,
-    "larghezzaMm": 0,
-    "prezzoBase": 3.65
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_TERMINALE",
-    "colore": "STANDARD",
-    "altezzaMm": 0,
-    "larghezzaMm": 0,
-    "prezzoBase": 1.5
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_INTERMEDIO",
-    "colore": "STANDARD",
-    "altezzaMm": 0,
-    "larghezzaMm": 0,
-    "prezzoBase": 4.6
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_CHIAVE",
-    "colore": "STANDARD",
-    "altezzaMm": 0,
-    "larghezzaMm": 0,
-    "prezzoBase": 83.25
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_POMELLO",
-    "colore": "STANDARD",
-    "altezzaMm": 0,
-    "larghezzaMm": 0,
-    "prezzoBase": 77.05
-  },
-  {
     "tipologia": "TAPPARELLE_MINIBOX185_OR_MINIORIENTA_MOTORE",
     "colore": "STANDARD",
     "altezzaMm": 80,

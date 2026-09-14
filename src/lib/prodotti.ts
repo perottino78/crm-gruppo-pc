@@ -604,11 +604,12 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // parte nello stesso gruppo TAPPARELLE, cosi' da poterli ordinare come voci separate.
   if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_")) return "Tapparelle in PVC e Alluminio";
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_") || tipologia.startsWith("TAPPARELLE_KIT_")) return "Accessori";
-  if (tipologia.startsWith("TAPPARELLE_MINIBOX_ACCESSORIO_")) return "Minibox — Accessori";
-  if (tipologia.startsWith("TAPPARELLE_MINIBOX165_")) return "Minibox 165";
-  if (tipologia.startsWith("TAPPARELLE_MINIBOX185_")) return "Minibox 185";
-  if (tipologia.startsWith("TAPPARELLE_MINIBOX205_")) return "Minibox 205";
-  if (tipologia.startsWith("TAPPARELLE_MINIBOX250_")) return "Minibox 250";
+  // Minibox: un unico sottogruppo per tutte le misure di cassonetto (165/185/205/250),
+  // cosi' la selezione avviene con 2 tendine a cascata (misura -> tipologia tapparella)
+  // invece di 4 sottogruppi separati con liste piatte da 13 a 69 voci ciascuno. Gli
+  // accessori cassonetto (catenacciolo/serratura) sono ora Optional, non piu' Prodotto,
+  // quindi non compaiono qui.
+  if (/^TAPPARELLE_MINIBOX\d+_/.test(tipologia)) return "Minibox";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -811,6 +812,27 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
     }
   }
   return null;
+}
+
+// Minibox: decompone una tipologia TAPPARELLE_MINIBOX<misura>_<resto> nei 2 assi
+// "misura cassonetto" (165/185/205/250mm) e "tipologia tapparella" (marca + tipo di
+// manovra, es. "OR Mini Orienta (motorizzata)", o "Solo struttura"), cosi' il
+// selettore mostra 2 tendine a cascata invece della lista piatta di tutte le
+// combinazioni (fino a 69 voci per misura). L'etichetta del secondo asse riusa
+// TAPPARELLE_LABELS togliendo il prefisso "Minibox NNN - " gia' presente, per
+// restare sempre coerente con l'etichetta piena mostrata altrove (es. ricerca).
+export type AssiMinibox = { misura: AsseSelezione; tipologia: AsseSelezione };
+
+export function assiSelezioneMinibox(tipologia: string): AssiMinibox | null {
+  const match = tipologia.match(/^TAPPARELLE_MINIBOX(\d+)_/);
+  if (!match) return null;
+  const misura = match[1];
+  const label = TAPPARELLE_LABELS[tipologia] ?? tipologia.replace(/_/g, " ");
+  const tipologiaLabel = label.replace(/^Minibox \d+ - /, "");
+  return {
+    misura: { valore: misura, label: `Cassonetto ${misura} mm` },
+    tipologia: { valore: tipologia, label: tipologiaLabel },
+  };
 }
 
 const PENSILINA_LABELS: Record<string, string> = {

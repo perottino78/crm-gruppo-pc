@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiMinibox } from "@/lib/prodotti";
 
 export type NodoTipologia = {
   value: string;
@@ -17,6 +17,9 @@ export type NodoTipologia = {
   // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
   // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
   assiModelloAnte?: AssiModelloAnte;
+  // Minibox: assi misura cassonetto → tipologia tapparella, per mostrare 2 tendine
+  // a cascata invece della lista piatta (fino a 69 voci per misura).
+  assiMinibox?: AssiMinibox;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -215,6 +218,95 @@ function SelettoreCascataModelloAnte({
           >
             <option value="">— seleziona —</option>
             {opzioniAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata per Minibox: 1) misura cassonetto (165/185/205/250mm), 2) tipologia
+// di tapparella (marca + tipo di manovra, o "Solo struttura"). Ogni misura filtra la
+// tendina successiva alle sole tipologie effettivamente a listino per quel cassonetto
+// (es. il 165 non ha manovra motorizzata/ad argano separata, il 250 ha marche in piu'
+// rispetto al 185), evitando la lista piatta di 13-69 voci per misura.
+function SelettoreCascataMinibox({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [misura, setMisura] = useState("");
+  const [tipo, setTipo] = useState("");
+
+  const opzioniMisura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiMinibox) mappa.set(t.assiMinibox.misura.valore, t.assiMinibox.misura.label);
+    return [...mappa.entries()].sort(([a], [b]) => Number(a) - Number(b));
+  }, [tipologie]);
+
+  const filtratePerMisura = useMemo(
+    () => tipologie.filter((t) => t.assiMinibox?.misura.valore === misura),
+    [tipologie, misura]
+  );
+  const opzioniTipo = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerMisura) if (t.assiMinibox) mappa.set(t.assiMinibox.tipologia.valore, t.assiMinibox.tipologia.label);
+    return [...mappa.entries()];
+  }, [filtratePerMisura]);
+
+  const trovato = useMemo(
+    () => filtratePerMisura.find((t) => t.assiMinibox?.tipologia.valore === tipo) ?? null,
+    [filtratePerMisura, tipo]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Misura cassonetto</label>
+        <select
+          value={misura}
+          onChange={(e) => {
+            setMisura(e.target.value);
+            setTipo("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniMisura.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {misura && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Tipologia tapparella</label>
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniTipo.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
@@ -440,6 +532,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiModelloAnte) ? (
                                             <SelettoreCascataModelloAnte
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiMinibox) ? (
+                                            <SelettoreCascataMinibox
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneMinibox, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import {
   aggiungiRigaPreventivo,
@@ -139,6 +139,9 @@ export default async function PreventivoPage({
         // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per la
         // selezione a 2 tendine a cascata invece della lista piatta (27-68 voci).
         assiModelloAnte: assiSelezioneModelloAnte(tip) ?? undefined,
+        // Minibox: assi misura cassonetto → tipologia tapparella, per la selezione a
+        // 2 tendine a cascata invece della lista piatta (fino a 69 voci per misura).
+        assiMinibox: assiSelezioneMinibox(tip) ?? undefined,
         // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino):
         // visibili in tendina ma non selezionabili, mostrate in rosso.
         disabilitato: notaInArrivo(tip) ?? undefined,

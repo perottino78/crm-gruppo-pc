@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "categoria": "Accessorio Minibox",
+    "nome": "Catenacciolo sicurezza Orienta",
+    "tipoPrezzo": "FISSO",
+    "valore": 3.65,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio Minibox",
+    "nome": "Catenacciolo sicurezza terminale",
+    "tipoPrezzo": "FISSO",
+    "valore": 1.5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio Minibox",
+    "nome": "Catenacciolo intermedio",
+    "tipoPrezzo": "FISSO",
+    "valore": 4.6,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio Minibox",
+    "nome": "Serratura a chiave",
+    "tipoPrezzo": "FISSO",
+    "valore": 83.25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Accessorio Minibox",
+    "nome": "Serratura a pomello",
+    "tipoPrezzo": "FISSO",
+    "valore": 77.05,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  }
+]

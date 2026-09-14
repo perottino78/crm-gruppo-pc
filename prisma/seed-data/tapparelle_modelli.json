@@ -546,51 +546,6 @@
     "parametriCalcolo": {}
   },
   {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_ORIENTA",
-    "descrizioneTecnica": "Catenacciolo di sicurezza terminale per avvolgibile Orienta (cod. AT50000). Prezzo fisso, senza misura, al pezzo.",
-    "famiglia": "INDOOR",
-    "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_TERMINALE",
-    "descrizioneTecnica": "Catenacciolo di sicurezza terminale (cod. AT41007), compatibile con Mini Orienta, Sekurclim, Sekurlook, Sekurstop, Sekur Line, Sekur Midi, Lite Look, P/08, I/05, S/11, SP/14, S/14, M/10, M/03, F/09, SF/19. Prezzo fisso, senza misura, al pezzo.",
-    "famiglia": "INDOOR",
-    "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_INTERMEDIO",
-    "descrizioneTecnica": "Catenacciolo intermedio di sicurezza (cod. AT41005), per M/03 e Sekur Line. Prezzo fisso, senza misura, al pezzo.",
-    "famiglia": "INDOOR",
-    "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_CHIAVE",
-    "descrizioneTecnica": "Serratura di sicurezza a chiave (cod. AT42002). Prezzo fisso, senza misura, al pezzo.",
-    "famiglia": "INDOOR",
-    "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
-    "tipologia": "TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_POMELLO",
-    "descrizioneTecnica": "Serratura di sicurezza a pomello (cod. AT42004). Prezzo fisso, senza misura, al pezzo.",
-    "famiglia": "INDOOR",
-    "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
     "tipologia": "TAPPARELLE_MINIBOX185_OR_MINIORIENTA_MOTORE",
     "descrizioneTecnica": "Cassonetto Minibox 185mm (angolo 63°) con avvolgibile speciale Mini Orienta a doghe orientabili in alluminio coibentato, versione motorizzata. Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
     "famiglia": "INDOOR",
