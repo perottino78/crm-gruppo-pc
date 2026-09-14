@@ -606,6 +606,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_") || tipologia.startsWith("TAPPARELLE_KIT_")) return "Accessori";
   if (tipologia.startsWith("TAPPARELLE_MINIBOX_ACCESSORIO_")) return "Minibox — Accessori";
   if (tipologia.startsWith("TAPPARELLE_MINIBOX165_")) return "Minibox 165";
+  if (tipologia.startsWith("TAPPARELLE_MINIBOX185_")) return "Minibox 185";
   if (tipologia.startsWith("ZENITH_")) {
     if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
     if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
@@ -872,6 +873,43 @@ const TAPPARELLE_LABELS: Record<string, string> = {
   TAPPARELLE_MINIBOX_ACCESSORIO_CATENACCIOLO_INTERMEDIO: "Minibox - Catenacciolo intermedio",
   TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_CHIAVE: "Minibox - Serratura a chiave",
   TAPPARELLE_MINIBOX_ACCESSORIO_SERRATURA_POMELLO: "Minibox - Serratura a pomello",
+  TAPPARELLE_MINIBOX185_OR_MINIORIENTA_MOTORE: "Minibox 185 - OR Mini Orienta (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_SEKURCLIM_MOTORE: "Minibox 185 - OR Sekurclim (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_SEKURLOOK_MOTORE: "Minibox 185 - OR Sekurlook (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_SEKURSTOP_MOTORE: "Minibox 185 - OR Sekurstop (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_SEKURMIDI_MOTORE: "Minibox 185 - OR Sekur Midi (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_LITELOOK_MOTORE: "Minibox 185 - OR Lite Look (motorizzata)",
+  TAPPARELLE_MINIBOX185_OR_MINIORIENTA_ARGANO: "Minibox 185 - OR Mini Orienta (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OR_SEKURCLIM_ARGANO: "Minibox 185 - OR Sekurclim (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OR_SEKURLOOK_ARGANO: "Minibox 185 - OR Sekurlook (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OR_SEKURSTOP_ARGANO: "Minibox 185 - OR Sekurstop (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OR_SEKURMIDI_ARGANO: "Minibox 185 - OR Sekur Midi (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OR_LITELOOK_ARGANO: "Minibox 185 - OR Lite Look (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_OZ_MINIORIENTA: "Minibox 185 - OZ Mini Orienta",
+  TAPPARELLE_MINIBOX185_OZ_SEKURCLIM: "Minibox 185 - OZ Sekurclim",
+  TAPPARELLE_MINIBOX185_OZ_SEKURLOOK: "Minibox 185 - OZ Sekurlook",
+  TAPPARELLE_MINIBOX185_OZ_SEKURSTOP: "Minibox 185 - OZ Sekurstop",
+  TAPPARELLE_MINIBOX185_OZ_SEKURMIDI: "Minibox 185 - OZ Sekur Midi",
+  TAPPARELLE_MINIBOX185_OZ_LITELOOK: "Minibox 185 - OZ Lite Look",
+  TAPPARELLE_MINIBOX185_TA_P08_MOTORE: "Minibox 185 - TA P/08 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_I05_MOTORE: "Minibox 185 - TA I/05 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_F09_MOTORE: "Minibox 185 - TA F/09 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_S11_MOTORE: "Minibox 185 - TA S/11 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_SF19_MOTORE: "Minibox 185 - TA SF/19 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_SP14_MOTORE: "Minibox 185 - TA SP/14 (motorizzata)",
+  TAPPARELLE_MINIBOX185_TA_P08_ARGANO: "Minibox 185 - TA P/08 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TA_I05_ARGANO: "Minibox 185 - TA I/05 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TA_F09_ARGANO: "Minibox 185 - TA F/09 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TA_S11_ARGANO: "Minibox 185 - TA S/11 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TA_SF19_ARGANO: "Minibox 185 - TA SF/19 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TA_SP14_ARGANO: "Minibox 185 - TA SP/14 (ad argano/manovella)",
+  TAPPARELLE_MINIBOX185_TZ_P08: "Minibox 185 - TZ P/08",
+  TAPPARELLE_MINIBOX185_TZ_I05: "Minibox 185 - TZ I/05",
+  TAPPARELLE_MINIBOX185_TZ_F09: "Minibox 185 - TZ F/09",
+  TAPPARELLE_MINIBOX185_TZ_S11: "Minibox 185 - TZ S/11",
+  TAPPARELLE_MINIBOX185_TZ_SF19: "Minibox 185 - TZ SF/19",
+  TAPPARELLE_MINIBOX185_TZ_SP14: "Minibox 185 - TZ SP/14",
+  TAPPARELLE_MINIBOX185_ST: "Minibox 185 - Solo struttura",
 };
 
 // Tipologie "in arrivo": esistono gia' come voce di navigazione (cosi' il commerciale
