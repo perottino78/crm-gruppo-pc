@@ -1543,5 +1543,626 @@
     "immagineUrl": null,
     "modalitaCalcolo": "GRIGLIA",
     "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_ORIENTA_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Orienta, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_MINIORIENTA_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Mini Orienta, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURCLIM_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurclim, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURLOOK_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurlook, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURSTOP_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurstop, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURMIDI_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Midi, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_LITELOOK_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Lite Look, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURLINE_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Line, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_ORIENTA_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Orienta, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_MINIORIENTA_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Mini Orienta, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURCLIM_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurclim, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURLOOK_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurlook, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURSTOP_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurstop, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURMIDI_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Midi, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_LITELOOK_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Lite Look, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OR_SEKURLINE_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Line, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_ORIENTA_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Orienta, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_MINIORIENTA_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Mini Orienta, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURCLIM_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurclim, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURLOOK_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurlook, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURSTOP_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurstop, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURMIDI_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Midi, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_LITELOOK_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Lite Look, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURLINE_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Line, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_ORIENTA_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Orienta, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_MINIORIENTA_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Mini Orienta, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURCLIM_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurclim, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURLOOK_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurlook, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURSTOP_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekurstop, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURMIDI_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Midi, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_LITELOOK_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Lite Look, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_OZ_SEKURLINE_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale Sekur Line, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_P08_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale P/08, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_I05_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale I/05, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_F09_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale F/09, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_S11_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/11, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_SF19_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SF/19, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_SP14_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SP/14, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_M03_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/03, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_M10_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/10, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_S14_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/14, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_P08_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale P/08, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_I05_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale I/05, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_F09_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale F/09, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_S11_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/11, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_SF19_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SF/19, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_SP14_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SP/14, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_M03_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/03, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_M10_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/10, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TA_S14_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/14, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_P08_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale P/08, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_I05_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale I/05, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_F09_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale F/09, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_SF19_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SF/19, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_SP14_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SP/14, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_S11_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/11, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_M03_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/03, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_M10_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/10, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_S14_MOTORE",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/14, versione motorizzata. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_P08_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale P/08, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_I05_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale I/05, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_F09_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale F/09, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_SF19_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SF/19, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_SP14_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale SP/14, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_S11_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/11, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_M03_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/03, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_M10_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale M/10, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_TZ_S14_ARGANO",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°) con avvolgibile speciale S/14, versione ad argano/manovella. Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_MINIBOX250_ST",
+    "descrizioneTecnica": "Cassonetto Minibox 250mm (fianchi squadrati rinforzati in alluminio pressofuso, profili in alluminio pressopiegato, angolo 45°), solo struttura (cassonetto con fianchi e guide, senza avvolgibile/tapparella). Struttura sempre rinforzata (specifica di base per questa misura). Colori base inclusi nel prezzo (tinte RAL soft): 9010, 1013, 7035, 7001, 7016, 6005, 8017. Per tinte speciali, effetto legno o Raffaello sono previste maggiorazioni non standardizzate: consultare l'azienda per il relativo sovrapprezzo. Accessori dedicati (catenacciolo di sicurezza, serratura) disponibili separatamente nel sottogruppo \"Minibox — Accessori\".",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
   }
 ]
