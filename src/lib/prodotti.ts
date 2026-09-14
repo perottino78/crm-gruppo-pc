@@ -835,6 +835,55 @@ export function assiSelezioneMinibox(tipologia: string): AssiMinibox | null {
   };
 }
 
+// Tapparelle in PVC e Alluminio: decompone una tipologia TAPPARELLE_<modello>_<colore>
+// (con densita' opzionale per L14) nei 3 assi "materiale", "modello" e "colore", cosi'
+// il selettore mostra 3 tendine a cascata (per ora con una sola opzione ciascuna in
+// materiale/modello, in attesa di Obliqua/Lupin) invece della lista piatta. La tendina
+// colore riporta anche l'aumento di prezzo rispetto alla Tinta Unita della stessa
+// densita' (dati listino: L14 Media 96/101/102 €/mq, L14 Alta 116/121/121 €/mq),
+// cosi' l'aumento e' visibile senza dover aprire ogni singola tipologia.
+export type AssiTapparelle = { materiale: AsseSelezione; modello: AsseSelezione; colore: AsseSelezione };
+
+const TAPPARELLE_MODELLO_LABELS: Record<string, string> = { L14: "L14", OBLIQUA: "Obliqua", LUPIN: "Lupin" };
+const TAPPARELLE_FINITURA_LABELS: Record<string, string> = {
+  TINTAUNITA: "Tinta Unita",
+  FINTOLEGNO: "Finto Legno",
+  RAFFAELLO: "Raffaello / Particolari",
+};
+// prezzi €/mq a listino, usati solo per calcolare l'aumento mostrato in tendina colore.
+const TAPPARELLE_L14_PREZZI_MQ: Record<string, number> = {
+  MEDIA_TINTAUNITA: 96,
+  MEDIA_FINTOLEGNO: 101,
+  MEDIA_RAFFAELLO: 102,
+  ALTA_TINTAUNITA: 116,
+  ALTA_FINTOLEGNO: 121,
+  ALTA_RAFFAELLO: 121,
+};
+
+export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | null {
+  const match = tipologia.match(/^TAPPARELLE_(L14|OBLIQUA|LUPIN)_(?:(MEDIA|ALTA)_)?(TINTAUNITA|FINTOLEGNO|RAFFAELLO)$/);
+  if (!match) return null;
+  const [, modelloKey, densita, finituraKey] = match;
+  const densitaLabel = densita === "MEDIA" ? "Media Densità" : densita === "ALTA" ? "Alta Densità" : null;
+  const finituraLabel = TAPPARELLE_FINITURA_LABELS[finituraKey] ?? finituraKey;
+  let aumento = "";
+  if (modelloKey === "L14" && densita) {
+    const chiave = `${densita}_${finituraKey}`;
+    const chiaveBase = `${densita}_TINTAUNITA`;
+    const prezzo = TAPPARELLE_L14_PREZZI_MQ[chiave];
+    const prezzoBase = TAPPARELLE_L14_PREZZI_MQ[chiaveBase];
+    if (prezzo !== undefined && prezzoBase !== undefined && prezzo > prezzoBase) {
+      aumento = ` (+${prezzo - prezzoBase}€/mq)`;
+    }
+  }
+  const coloreLabel = `${densitaLabel ? densitaLabel + " — " : ""}${finituraLabel}${aumento}`;
+  return {
+    materiale: { valore: "PVC_ALLUMINIO", label: "PVC e Alluminio" },
+    modello: { valore: modelloKey, label: TAPPARELLE_MODELLO_LABELS[modelloKey] ?? modelloKey },
+    colore: { valore: tipologia, label: coloreLabel },
+  };
+}
+
 const PENSILINA_LABELS: Record<string, string> = {
   PENSILINA_CURVA_COMPATTO: "Pensilina Curva — Policarbonato Compatto (3mm)",
   PENSILINA_CURVA_ALVEOLARE: "Pensilina Curva — Policarbonato Alveolare (6mm)",

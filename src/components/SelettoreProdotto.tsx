@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiMinibox } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
 
 export type NodoTipologia = {
   value: string;
@@ -20,6 +20,9 @@ export type NodoTipologia = {
   // Minibox: assi misura cassonetto → tipologia tapparella, per mostrare 2 tendine
   // a cascata invece della lista piatta (fino a 69 voci per misura).
   assiMinibox?: AssiMinibox;
+  // Tapparelle in PVC e Alluminio: assi materiale → modello → colore, per mostrare
+  // 3 tendine a cascata (la tendina colore riporta anche l'aumento di prezzo).
+  assiTapparelle?: AssiTapparelle;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -319,6 +322,124 @@ function SelettoreCascataMinibox({
   );
 }
 
+// Tendine a cascata per Tapparelle in PVC e Alluminio: 1) materiale, 2) modello
+// (per ora solo L14, altri modelli in arrivo), 3) colore/finitura — quest'ultima
+// tendina riporta anche l'aumento di prezzo rispetto alla Tinta Unita della stessa
+// densita', cosi' e' visibile senza dover confrontare le tipologie una per una.
+function SelettoreCascataTapparelle({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [materiale, setMateriale] = useState("");
+  const [modello, setModello] = useState("");
+  const [colore, setColore] = useState("");
+
+  const opzioniMateriale = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiTapparelle) mappa.set(t.assiTapparelle.materiale.valore, t.assiTapparelle.materiale.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerMateriale = useMemo(
+    () => tipologie.filter((t) => t.assiTapparelle?.materiale.valore === materiale),
+    [tipologie, materiale]
+  );
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerMateriale) if (t.assiTapparelle) mappa.set(t.assiTapparelle.modello.valore, t.assiTapparelle.modello.label);
+    return [...mappa.entries()];
+  }, [filtratePerMateriale]);
+
+  const filtratePerModello = useMemo(
+    () => filtratePerMateriale.filter((t) => t.assiTapparelle?.modello.valore === modello),
+    [filtratePerMateriale, modello]
+  );
+  const opzioniColore = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiTapparelle) mappa.set(t.assiTapparelle.colore.valore, t.assiTapparelle.colore.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiTapparelle?.colore.valore === colore) ?? null,
+    [filtratePerModello, colore]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Materiale</label>
+        <select
+          value={materiale}
+          onChange={(e) => {
+            setMateriale(e.target.value);
+            setModello("");
+            setColore("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniMateriale.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {materiale && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Modello</label>
+          <select
+            value={modello}
+            onChange={(e) => {
+              setModello(e.target.value);
+              setColore("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniModello.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {materiale && modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Colore</label>
+          <select
+            value={colore}
+            onChange={(e) => setColore(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniColore.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 export default function SelettoreProdotto({
   preventivoId,
   brandId,
@@ -539,6 +660,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiMinibox) ? (
                                             <SelettoreCascataMinibox
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiTapparelle) ? (
+                                            <SelettoreCascataTapparelle
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
