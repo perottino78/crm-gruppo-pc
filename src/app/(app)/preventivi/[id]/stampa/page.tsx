@@ -6,6 +6,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura } from "@/lib/prodotti";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
   ARTICOLI_CONTRATTO,
@@ -280,18 +281,16 @@ export default async function StampaPreventivoPage({
           </div>
         </div>
 
-        {(preventivo.condizioniPagamento || preventivo.condizioniConsegna) && (
-          <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
-            <div>
-              <p className="text-neutral-600 mb-1">Condizioni di pagamento</p>
-              <p className="text-neutral-600 whitespace-pre-line">{preventivo.condizioniPagamento ?? "Da definire."}</p>
-            </div>
-            <div>
-              <p className="text-neutral-600 mb-1">Condizioni di consegna</p>
-              <p className="text-neutral-600 whitespace-pre-line">{preventivo.condizioniConsegna ?? "Da definire."}</p>
-            </div>
+        <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
+          <div className="border border-neutral-300 rounded-md p-3">
+            <p className="text-neutral-600 mb-1 font-semibold">Condizioni di pagamento</p>
+            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
           </div>
-        )}
+          <div className="border border-neutral-300 rounded-md p-3">
+            <p className="text-neutral-600 mb-1 font-semibold">Condizioni di consegna</p>
+            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}</p>
+          </div>
+        </div>
 
         {condizioniBrand ? (
           <p className="text-[10px] text-neutral-600 mb-6">

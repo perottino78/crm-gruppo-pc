@@ -8,6 +8,7 @@ import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneMinibox, assiSelezioneTapparelle, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -302,8 +303,7 @@ export default async function PreventivoPage({
             <textarea
               name="condizioniPagamento"
               rows={2}
-              defaultValue={preventivo.condizioniPagamento ?? ""}
-              placeholder="es. Bonifico. Acconto 50%, saldo 50% a merce pronta a magazzino."
+              defaultValue={preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
@@ -312,8 +312,7 @@ export default async function PreventivoPage({
             <textarea
               name="condizioniConsegna"
               rows={2}
-              defaultValue={preventivo.condizioniConsegna ?? ""}
-              placeholder="es. Consegna 60 gg indicativi da rilievo tecnico esecutivo e da bonifico di acconto."
+              defaultValue={preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
