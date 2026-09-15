@@ -160,19 +160,55 @@ export async function aggiornaCondizioniOfferta(formData: FormData) {
   const id = str(formData, "id");
   if (!id) return;
   const oggetto = str(formData, "oggetto");
-  const scontoStr = str(formData, "scontoPercentuale");
   const condizioniPagamento = str(formData, "condizioniPagamento");
   const condizioniConsegna = str(formData, "condizioniConsegna");
   const immagineCopertinaUrl = str(formData, "immagineCopertinaUrl");
-  const scontoPercentuale = scontoStr ? Math.max(0, Math.min(100, parseFloat(scontoStr))) : 0;
 
   await prisma.preventivo.update({
     where: { id },
-    data: { oggetto, scontoPercentuale, condizioniPagamento, condizioniConsegna, immagineCopertinaUrl },
+    data: { oggetto, condizioniPagamento, condizioniConsegna, immagineCopertinaUrl },
+  });
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+}
+
+// Azione dedicata per lo sconto, separata da "Condizioni offerta": vive accanto al
+// riquadro del totale nella pagina preventivo, con salvataggio immediato e ricalcolo
+// del netto/IVA, cosi' non serve aprire la scheda condizioni per modificarlo.
+export async function aggiornaSconto(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const scontoStr = str(formData, "scontoPercentuale");
+  const scontoPercentuale = scontoStr
+    ? Math.max(0, Math.min(100, parseFloat(scontoStr.replace(",", "."))))
+    : 0;
+
+  await prisma.preventivo.update({
+    where: { id },
+    data: { scontoPercentuale: Number.isFinite(scontoPercentuale) ? scontoPercentuale : 0 },
   });
   await ricalcolaTotali(id);
   revalidatePath(`/preventivi/${id}`);
   revalidatePath(`/preventivi/${id}/stampa`);
+}
+
+// Riga "di solo testo" senza prodotto collegato: utile per aggiungere note, informazioni
+// aggiuntive o la motivazione di uno sconto direttamente come voce del preventivo (visibile
+// anche in stampa). L'importo è facoltativo e può essere negativo per rappresentare uno
+// sconto extra concordato manualmente.
+export async function aggiungiRigaTestoLibero(formData: FormData) {
+  const preventivoId = str(formData, "preventivoId");
+  const testoLibero = str(formData, "testoLibero");
+  if (!preventivoId || !testoLibero) return;
+  const prezzoStr = str(formData, "prezzoUnitario");
+  const prezzoParsed = prezzoStr ? parseFloat(prezzoStr.replace(",", ".")) : 0;
+  const prezzoUnitario = Number.isFinite(prezzoParsed) ? prezzoParsed : 0;
+
+  await prisma.rigaPreventivo.create({
+    data: { preventivoId, testoLibero, quantita: 1, prezzoUnitario },
+  });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
 }
 
 export async function aggiungiRigaPreventivo(formData: FormData) {

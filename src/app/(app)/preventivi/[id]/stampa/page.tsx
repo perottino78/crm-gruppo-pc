@@ -59,7 +59,9 @@ export default async function StampaPreventivoPage({
   });
   if (!preventivo) notFound();
 
-  const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];
+  const tipologiePresenti = [
+    ...new Set(preventivo.righe.filter((r) => r.prodotto).map((r) => r.prodotto!.tipologia)),
+  ];
   const modelli = tipologiePresenti.length
     ? await prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId, tipologia: { in: tipologiePresenti } } })
     : [];
@@ -195,6 +197,23 @@ export default async function StampaPreventivoPage({
           </thead>
           <tbody>
             {preventivo.righe.map((r) => {
+              if (!r.prodotto) {
+                const subtotaleLibero = r.quantita * r.prezzoUnitario;
+                return (
+                  <tr key={r.id} className="border-b border-neutral-100 align-top">
+                    <td className="py-2" colSpan={r.prezzoUnitario === 0 ? 4 : 1}>
+                      <p className="text-neutral-700 whitespace-pre-line italic">{r.testoLibero}</p>
+                    </td>
+                    {r.prezzoUnitario !== 0 && (
+                      <>
+                        <td className="py-2 text-center">{r.quantita}</td>
+                        <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
+                        <td className="py-2 text-right font-medium">{eur(subtotaleLibero)}</td>
+                      </>
+                    )}
+                  </tr>
+                );
+              }
               const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
               const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
               const modello = modelloMap.get(r.prodotto.tipologia);

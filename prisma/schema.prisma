@@ -163,8 +163,12 @@ model RigaPreventivo {
   id            String     @id @default(cuid())
   preventivo    Preventivo @relation(fields: [preventivoId], references: [id])
   preventivoId  String
-  prodotto      Prodotto   @relation(fields: [prodottoId], references: [id])
-  prodottoId    String
+  // prodottoId è opzionale per permettere righe di solo testo libero (vedi testoLibero)
+  prodotto      Prodotto?  @relation(fields: [prodottoId], references: [id])
+  prodottoId    String?
+  // Riga senza prodotto collegato: testo libero mostrato al posto della scheda prodotto,
+  // sia nell'editor sia in stampa (usato per note, info aggiuntive o motivazione sconto).
+  testoLibero   String?
   quantita      Int        @default(1)
   prezzoUnitario Float
   optionalDescrizione String?

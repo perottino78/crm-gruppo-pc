@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
     righeInPreventiviEsistenti: righeCollegate.map((r) => ({
       rigaId: r.id,
       preventivoId: r.preventivoId,
-      tipologia: r.prodotto.tipologia,
+      tipologia: r.prodotto?.tipologia ?? null,
       clienteId: r.preventivo.clienteId,
       clienteNome: r.preventivo.cliente.nome,
       isDemo: r.preventivo.clienteId === CLIENTE_DEMO_ID,

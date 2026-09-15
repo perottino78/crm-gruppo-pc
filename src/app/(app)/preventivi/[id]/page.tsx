@@ -18,6 +18,8 @@ import {
   toggleDescrizioneRiga,
   aggiornaDescrizionePersonalizzata,
   aggiornaCondizioniOfferta,
+  aggiornaSconto,
+  aggiungiRigaTestoLibero,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
@@ -192,7 +194,9 @@ export default async function PreventivoPage({
         }),
     }));
 
-  const tipologiePresenti = [...new Set(preventivo.righe.map((r) => r.prodotto.tipologia))];
+  const tipologiePresenti = [
+    ...new Set(preventivo.righe.filter((r) => r.prodotto).map((r) => r.prodotto!.tipologia)),
+  ];
   const modelli = tipologiePresenti.length
     ? await prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId, tipologia: { in: tipologiePresenti } } })
     : [];
@@ -255,7 +259,22 @@ export default async function PreventivoPage({
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <p className="text-xs text-neutral-600 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
-          <p className="text-sm font-medium">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <p className="text-sm font-medium mb-2">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <form action={aggiornaSconto} className="flex items-center gap-1">
+            <input type="hidden" name="id" value={preventivo.id} />
+            <label className="text-[11px] text-neutral-500">Sconto</label>
+            <input
+              name="scontoPercentuale"
+              type="number"
+              step="0.1"
+              min={0}
+              max={100}
+              defaultValue={preventivo.scontoPercentuale}
+              className="w-16 text-xs border border-neutral-200 rounded px-1.5 py-1"
+            />
+            <span className="text-[11px] text-neutral-500">%</span>
+            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
+          </form>
         </div>
         <div className="bg-neutral-900 rounded-lg p-4">
           <p className="text-xs text-neutral-500 mb-1">Totale (IVA {preventivo.aliquotaIva}%)</p>
@@ -265,7 +284,7 @@ export default async function PreventivoPage({
 
       <details className="bg-white rounded-lg border border-neutral-200 mb-6">
         <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
-          Condizioni offerta (oggetto, sconto, pagamento, consegna) — usate nella stampa
+          Condizioni offerta (oggetto, pagamento, consegna) — usate nella stampa
         </summary>
         <form action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
           <input type="hidden" name="id" value={preventivo.id} />
@@ -277,20 +296,6 @@ export default async function PreventivoPage({
               placeholder="es. Zanzariere plissettate bilaterali"
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-neutral-600 block mb-1">Sconto (%)</label>
-              <input
-                name="scontoPercentuale"
-                type="number"
-                step="0.1"
-                min={0}
-                max={100}
-                defaultValue={preventivo.scontoPercentuale}
-                className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
-              />
-            </div>
           </div>
           <div>
             <label className="text-xs text-neutral-600 block mb-1">Condizioni di pagamento</label>
@@ -324,26 +329,51 @@ export default async function PreventivoPage({
       <h2 className="text-base font-bold text-neutral-900 mb-3">Righe ({preventivo.righe.length})</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
         {preventivo.righe.map((r) => {
+          if (!r.prodotto) {
+            const subtotaleLibero = r.quantita * r.prezzoUnitario;
+            return (
+              <div key={r.id} className="px-4 py-3 text-sm">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex-1">
+                    <p className="font-medium text-neutral-800 whitespace-pre-line">📝 {r.testoLibero}</p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    {r.prezzoUnitario !== 0 && (
+                      <span className={`font-medium ${subtotaleLibero < 0 ? "text-red-600" : ""}`}>
+                        {subtotaleLibero.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                      </span>
+                    )}
+                    <form action={rimuoviRigaPreventivo}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <input type="hidden" name="preventivoId" value={preventivo.id} />
+                      <button className="btn-3d btn-3d-red text-[11px] px-2 py-1">rimuovi</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            );
+          }
           const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
           const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
-          const modello = modelloMap.get(r.prodotto.tipologia);
-          const unit = unitaMisura(r.prodotto.tipologia);
-          const larghezzaMostrata = r.misuraLarghezza ?? r.prodotto.larghezzaMm;
-          const altezzaMostrata = r.misuraAltezza ?? r.prodotto.altezzaMm;
+          const prodotto = r.prodotto;
+          const modello = modelloMap.get(prodotto.tipologia);
+          const unit = unitaMisura(prodotto.tipologia);
+          const larghezzaMostrata = r.misuraLarghezza ?? prodotto.larghezzaMm;
+          const altezzaMostrata = r.misuraAltezza ?? prodotto.altezzaMm;
           const descrizioneEffettiva = r.descrizionePersonalizzata ?? modello?.descrizioneTecnica ?? "";
           return (
             <div key={r.id} className="px-4 py-3 text-sm">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {modello?.immagineUrl && (
-                    <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-12 h-12 object-cover rounded border border-neutral-200" />
+                    <img src={modello.immagineUrl} alt={prodotto.tipologia} className="w-12 h-12 object-cover rounded border border-neutral-200" />
                   )}
                   <div>
                     <p className="font-medium">
-                      {r.prodotto.tipologia} · {r.prodotto.colore}
-                      {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
+                      {prodotto.tipologia} · {prodotto.colore}
+                      {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {r.misuraLarghezza && (
-                        <span className="text-neutral-600 font-normal"> (fascia listino {r.prodotto.larghezzaMm}×{r.prodotto.altezzaMm}{unit})</span>
+                        <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
                     <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
@@ -420,9 +450,9 @@ export default async function PreventivoPage({
 
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || o.listino === listinoDiTipologia(r.prodotto.tipologia) || o.listino === r.prodotto.tipologia)
+                  .filter((o) => o.listino === null || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia)
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
-                  .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(r.prodotto.tipologia))
+                  .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
                   .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
@@ -589,6 +619,32 @@ export default async function PreventivoPage({
           <p className="px-4 py-6 text-sm text-neutral-600">Nessun prodotto ancora — aggiungilo qui sotto.</p>
         )}
       </div>
+
+      <details className="bg-white rounded-lg border border-neutral-200 mb-6">
+        <summary className="cursor-pointer text-sm font-semibold text-neutral-800 px-4 py-2.5">
+          + Aggiungi riga di testo libero (info o motivazione sconto)
+        </summary>
+        <form action={aggiungiRigaTestoLibero} className="px-4 pb-4 flex flex-col gap-2">
+          <input type="hidden" name="preventivoId" value={preventivo.id} />
+          <textarea
+            name="testoLibero"
+            rows={2}
+            placeholder="es. Sconto riservato concordato con il cliente per fine serie"
+            className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+          />
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-neutral-600">Importo (facoltativo, anche negativo per uno sconto)</label>
+            <input
+              name="prezzoUnitario"
+              type="number"
+              step="0.01"
+              defaultValue={0}
+              className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-28"
+            />
+            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1 ml-auto">+ aggiungi riga</button>
+          </div>
+        </form>
+      </details>
 
       <SelettoreProdotto
         preventivoId={preventivo.id}
