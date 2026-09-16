@@ -1,198 +1,1178 @@
 [
- {
-  "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3000.0
- },
- {
-  "tipologia": "KOPEN_LISCIO_ALU_ALU",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3166.5
- },
- {
-  "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3166.5
- },
- {
-  "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3333.0
- },
- {
-  "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3499.5
- },
- {
-  "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3166.5
- },
- {
-  "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3333.0
- },
- {
-  "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3499.5
- },
- {
-  "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3263.5
- },
- {
-  "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3433.5
- },
- {
-  "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3699.0
- },
- {
-  "tipologia": "KOPEN_STYLE_ALLUMINIO",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3832.5
- },
- {
-  "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4167.0
- },
- {
-  "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4330.5
- },
- {
-  "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4417.5
- },
- {
-  "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4684.5
- },
- {
-  "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4149.0
- },
- {
-  "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4317.0
- },
- {
-  "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4449.0
- },
- {
-  "tipologia": "KOPEN_FRAME_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4617.0
- },
- {
-  "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4341.0
- },
- {
-  "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3555.0
- },
- {
-  "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3705.0
- },
- {
-  "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3832.5
- },
- {
-  "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 3999.0
- },
- {
-  "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4167.0
- },
- {
-  "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4567.5
- },
- {
-  "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
-  "colore": "STANDARD",
-  "altezzaMm": 225,
-  "larghezzaMm": 106,
-  "prezzoBase": 4834.5
- }
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3000.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3166.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3166.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3333.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3166.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3333.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3263.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3433.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3699.0
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4167.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4330.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4417.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4684.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4149.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4317.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4449.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4617.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4341.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3555.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3705.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4167.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4567.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 106,
+    "prezzoBase": 4834.5
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3333.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3333.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_LISCIO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_LISCIO_ALU_ALU",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4332.0
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_FRESATURE_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3499.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3666.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3999.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4332.0
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3832.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_BUGNATI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3596.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 3929.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3596.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 3929.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4262.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3766.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4099.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3766.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4099.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4432.5
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4032.0
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4365.0
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4032.0
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4365.0
+  },
+  {
+    "tipologia": "KOPEN_INSERTI_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4698.0
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_STYLE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4831.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4500.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4833.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4500.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4833.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5166.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4663.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4996.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4663.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4996.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUM_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5329.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4750.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5083.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4750.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5083.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5416.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 5017.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5350.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 5017.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5350.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMINS_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5683.5
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4482.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4815.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4482.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4815.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5148.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4650.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4983.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4650.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4983.0
+  },
+  {
+    "tipologia": "KOPEN_VITRUMBUG_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5316.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4782.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5115.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4782.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5115.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_ALLUM_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5448.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4950.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5283.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4950.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5283.0
+  },
+  {
+    "tipologia": "KOPEN_FRAME_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5616.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4674.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5007.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4674.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5007.0
+  },
+  {
+    "tipologia": "KOPEN_LUMIERE_ALLUMINIO",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5340.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 3888.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4221.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 3888.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4221.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4554.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4038.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4371.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4038.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4371.0
+  },
+  {
+    "tipologia": "KOPEN_CLASSIC_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4704.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4165.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4498.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_LEGNO_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4831.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4332.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4665.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4332.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4665.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 4998.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4500.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 4833.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4500.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 4833.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECT_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5166.0
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 4900.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5233.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 4900.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5233.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_ALU_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5566.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 106,
+    "prezzoBase": 5167.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 106,
+    "prezzoBase": 5500.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 125,
+    "prezzoBase": 5167.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 125,
+    "prezzoBase": 5500.5
+  },
+  {
+    "tipologia": "KOPEN_EFFECTVETRO_ALU_EST_INT",
+    "colore": "STANDARD",
+    "altezzaMm": 275,
+    "larghezzaMm": 125,
+    "prezzoBase": 5833.5
+  }
 ]
