@@ -225,6 +225,11 @@ export async function GET(req: NextRequest) {
   const modelliCount = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
   const modelliFlatResidui = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: ["BARLETTA", "CUPOLA"] } } });
   const optionaliCount = await prisma.optional.count({ where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } } });
+  const optionaliByListino = await prisma.optional.groupBy({
+    by: ["listino"],
+    where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
+    _count: { _all: true },
+  });
 
-  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount });
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount, optionaliByListino });
 }
