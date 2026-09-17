@@ -95,8 +95,10 @@ export async function POST(req: NextRequest) {
     }
 
     const optionaliNuovi = optionaliData as OptionalRow[];
+    // Nota: gli optional specifici Hawaii hanno gruppiApplicabili=[] (si applicano "senza restrizione di gruppo"
+    // sul lato preventivo), quindi lo scoping corretto e sufficiente e' solo sul listino, che e' univoco per Hawaii.
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, listino: TIPOLOGIA_HAWAII },
+      where: { brandId: brand.id, listino: TIPOLOGIA_HAWAII },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -180,7 +182,7 @@ export async function GET(req: NextRequest) {
     where: { brandId: brand.id, tipologia: TIPOLOGIA_HAWAII },
   });
   const optionaliCount = await prisma.optional.count({
-    where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, listino: TIPOLOGIA_HAWAII },
+    where: { brandId: brand.id, listino: TIPOLOGIA_HAWAII },
   });
 
   return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
