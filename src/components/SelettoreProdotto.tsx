@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
+import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
   value: string;
@@ -746,6 +747,36 @@ export default function SelettoreProdotto({
             <p className="text-sm font-medium">{scelto.label}</p>
             <button type="button" onClick={azzeraScelta} className="text-xs text-neutral-600 hover:text-neutral-700">✕ cambia modello</button>
           </div>
+
+          {lineaRealeDiTipologiaKopen(scelto.value) && galleriaKopenPerTipologia(scelto.value) && (
+            <div className="mb-3 bg-white border border-neutral-200 rounded-lg p-2.5">
+              <p className="text-xs font-bold text-neutral-700 mb-0.5">
+                Modelli reali Kopen — linea {KOPEN_LINEA_NOME[lineaRealeDiTipologiaKopen(scelto.value)!]}
+              </p>
+              <p className="text-[11px] text-neutral-600 mb-2">
+                Foto ufficiali dal sito Kopen per riconoscere il disegno del pannello — clicca una foto per aprire la scheda reale del modello.
+              </p>
+              <div className="flex gap-2.5 overflow-x-auto pb-1">
+                {galleriaKopenPerTipologia(scelto.value)!.map((m) => (
+                  <a
+                    key={m.codice}
+                    href={m.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 w-20 text-center group"
+                    title={`Apri la scheda reale di ${m.codice} su kopendoors.com`}
+                  >
+                    <img
+                      src={m.immagineUrl}
+                      alt={m.codice}
+                      className="w-20 h-20 object-cover rounded border border-neutral-200 group-hover:border-neutral-400"
+                    />
+                    <span className="text-[10px] text-neutral-600 block mt-0.5">{m.codice}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
 
           {scelto.haMisura ? (
             <>
