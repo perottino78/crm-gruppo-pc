@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -33,6 +33,7 @@ export type NodoTipologia = {
   // Blindati: assi classe -> numero ante -> variante due ante, per mostrare 3
   // tendine a cascata invece della lista piatta divisa per sottogruppo.
   assiBlindati?: AssiBlindati;
+  assiZenith?: AssiZenith;
   // Minibox: assi misura cassonetto → tipologia tapparella, per mostrare 2 tendine
   // a cascata invece della lista piatta (fino a 69 voci per misura).
   assiMinibox?: AssiMinibox;
@@ -365,6 +366,95 @@ function SelettoreCascataBlindati({
           >
             <option value="">— seleziona —</option>
             {opzioniVariante.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata per i Serramenti PVC (Zenith): 1) categoria (Finestre/
+// Portefinestre), 2) modello (FF/F1A/.../TRASLANTE dentro Finestre; PF1A/.../
+// PF3A_SOGLIA dentro Portefinestre). Sostituisce la lista piatta di 11 pulsanti
+// usata finora dentro ciascuno dei 2 sottogruppi Uw (1,0/1,3) — la zona
+// climatica/Uw resta il sottogruppo, non fa parte di questa cascata.
+function SelettoreCascataZenith({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [categoria, setCategoria] = useState("");
+  const [modello, setModello] = useState("");
+
+  const opzioniCategoria = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiZenith) mappa.set(t.assiZenith.categoria.valore, t.assiZenith.categoria.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerCategoria = useMemo(
+    () => tipologie.filter((t) => t.assiZenith?.categoria.valore === categoria),
+    [tipologie, categoria]
+  );
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerCategoria) if (t.assiZenith) mappa.set(t.assiZenith.modello.valore, t.assiZenith.modello.label);
+    return [...mappa.entries()];
+  }, [filtratePerCategoria]);
+
+  const trovato = useMemo(
+    () => filtratePerCategoria.find((t) => t.assiZenith?.modello.valore === modello) ?? null,
+    [filtratePerCategoria, modello]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Categoria</label>
+        <select
+          value={categoria}
+          onChange={(e) => {
+            setCategoria(e.target.value);
+            setModello("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniCategoria.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {categoria && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Modello</label>
+          <select
+            value={modello}
+            onChange={(e) => setModello(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniModello.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
@@ -894,6 +984,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
                                             <SelettoreCascataKopen
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiZenith) ? (
+                                            <SelettoreCascataZenith
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

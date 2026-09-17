@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneBlindati, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneBlindati, assiSelezioneZenith, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -173,6 +173,7 @@ export default async function PreventivoPage({
         // Blindati: assi classe → numero ante → variante due ante, per la selezione
         // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
         assiBlindati: assiSelezioneBlindati(tip) ?? undefined,
+        assiZenith: assiSelezioneZenith(tip) ?? undefined,
         // Minibox: assi misura cassonetto → tipologia tapparella, per la selezione a
         // 2 tendine a cascata invece della lista piatta (fino a 69 voci per misura).
         assiMinibox: assiSelezioneMinibox(tip) ?? undefined,

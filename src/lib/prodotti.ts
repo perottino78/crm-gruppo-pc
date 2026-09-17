@@ -889,6 +889,44 @@ export function assiSelezioneBlindati(tipologia: string): AssiBlindati | null {
   return null;
 }
 
+// Zenith (Serramenti PVC): decompone una tipologia ZENITH_<modello>_UKW<10|13> nei 2
+// assi "categoria" (Finestre/Portefinestre) e "modello" (FF/F1A/.../TRASLANTE/
+// WASISTAS), cosi' il selettore mostra 2 tendine a cascata invece della lista piatta
+// di 11 pulsanti per ciascuno dei 2 sottogruppi Uw. La zona climatica/Uw resta il
+// sottogruppo (vedi sottogruppoDiTipologia), non fa parte di questa cascata.
+export type AssiZenith = { categoria: AsseSelezione; modello: AsseSelezione };
+
+const ZENITH_CATEGORIA_DI_MODELLO: Record<string, string> = {
+  FF: "FINESTRE",
+  WASISTAS: "FINESTRE",
+  F1A: "FINESTRE",
+  F2A: "FINESTRE",
+  F3A: "FINESTRE",
+  TRASLANTE: "FINESTRE",
+  PF1A: "PORTEFINESTRE",
+  PF2A: "PORTEFINESTRE",
+  PF2A_SOGLIA: "PORTEFINESTRE",
+  PF3A: "PORTEFINESTRE",
+  PF3A_SOGLIA: "PORTEFINESTRE",
+};
+
+const ZENITH_CATEGORIA_LABEL: Record<string, string> = {
+  FINESTRE: "Finestre",
+  PORTEFINESTRE: "Portefinestre",
+};
+
+export function assiSelezioneZenith(tipologia: string): AssiZenith | null {
+  const match = tipologia.match(/^ZENITH_(.+)_UKW1[03]$/);
+  if (!match) return null;
+  const base = match[1];
+  const categoria = ZENITH_CATEGORIA_DI_MODELLO[base];
+  if (!categoria) return null;
+  return {
+    categoria: { valore: categoria, label: ZENITH_CATEGORIA_LABEL[categoria] },
+    modello: { valore: base, label: ZENITH_DESCRIZIONI[base] ?? base.replace(/_/g, " ") },
+  };
+}
+
 // Minibox: decompone una tipologia TAPPARELLE_MINIBOX<misura>_<resto> nei 2 assi
 // "misura cassonetto" (165/185/205/250mm) e "tipologia tapparella" (marca + tipo di
 // manovra, es. "OR Mini Orienta (motorizzata)", o "Solo struttura"), cosi' il
