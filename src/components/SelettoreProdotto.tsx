@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -40,6 +40,10 @@ export type NodoTipologia = {
   // Tapparelle in PVC e Alluminio: assi materiale → modello → colore, per mostrare
   // 3 tendine a cascata (la tendina colore riporta anche l'aumento di prezzo).
   assiTapparelle?: AssiTapparelle;
+  // Tapparelle Accessori: assi categoria (Guide/Accessori vari/Kit) → voce → finitura
+  // (solo per le guide con scelta colore), per mostrare tendine a cascata invece
+  // della lista piatta di 24 voci.
+  assiAccessoriTapparelle?: AssiAccessoriTapparelle;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -258,6 +262,126 @@ function SelettoreCascataModelloAnte({
 // e' la decisione architettonica di partenza per il commerciale — la classe di
 // sicurezza si sceglie dopo, a parita' di apertura. Sostituisce i 2 sottogruppi
 // piatti BLINDATI_SINGOLA/BLINDATI_DUEANTE usati in precedenza.
+function SelettoreCascataAccessoriTapparelle({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [categoria, setCategoria] = useState("");
+  const [voce, setVoce] = useState("");
+  const [finitura, setFinitura] = useState("");
+
+  const opzioniCategoria = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiAccessoriTapparelle) mappa.set(t.assiAccessoriTapparelle.categoria.valore, t.assiAccessoriTapparelle.categoria.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerCategoria = useMemo(
+    () => tipologie.filter((t) => t.assiAccessoriTapparelle?.categoria.valore === categoria),
+    [tipologie, categoria]
+  );
+  const opzioniVoce = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerCategoria) if (t.assiAccessoriTapparelle) mappa.set(t.assiAccessoriTapparelle.voce.valore, t.assiAccessoriTapparelle.voce.label);
+    return [...mappa.entries()];
+  }, [filtratePerCategoria]);
+
+  const filtratePerVoce = useMemo(
+    () => filtratePerCategoria.filter((t) => t.assiAccessoriTapparelle?.voce.valore === voce),
+    [filtratePerCategoria, voce]
+  );
+  const richiedeFinitura = useMemo(
+    () => filtratePerVoce.some((t) => t.assiAccessoriTapparelle?.finitura),
+    [filtratePerVoce]
+  );
+  const opzioniFinitura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerVoce) if (t.assiAccessoriTapparelle?.finitura) mappa.set(t.assiAccessoriTapparelle.finitura.valore, t.assiAccessoriTapparelle.finitura.label);
+    return [...mappa.entries()];
+  }, [filtratePerVoce]);
+
+  const trovato = useMemo(() => {
+    if (richiedeFinitura) {
+      return filtratePerVoce.find((t) => t.assiAccessoriTapparelle?.finitura?.valore === finitura) ?? null;
+    }
+    return filtratePerVoce.length === 1 ? filtratePerVoce[0] : null;
+  }, [filtratePerVoce, richiedeFinitura, finitura]);
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Categoria</label>
+        <select
+          value={categoria}
+          onChange={(e) => {
+            setCategoria(e.target.value);
+            setVoce("");
+            setFinitura("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniCategoria.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {categoria && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Voce</label>
+          <select
+            value={voce}
+            onChange={(e) => {
+              setVoce(e.target.value);
+              setFinitura("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniVoce.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {categoria && voce && richiedeFinitura && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Finitura</label>
+          <select
+            value={finitura}
+            onChange={(e) => setFinitura(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniFinitura.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 function SelettoreCascataBlindati({
   tipologie,
   selezionato,
@@ -1012,6 +1136,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiTapparelle) ? (
                                             <SelettoreCascataTapparelle
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiAccessoriTapparelle) ? (
+                                            <SelettoreCascataAccessoriTapparelle
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

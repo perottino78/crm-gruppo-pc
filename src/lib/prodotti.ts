@@ -937,6 +937,73 @@ export function assiSelezioneZenith(tipologia: string): AssiZenith | null {
   };
 }
 
+
+// Tapparelle — Accessori (Guide su misura / Accessori vari / Kit di manovra): assi
+// categoria -> voce -> finitura (solo per le guide con scelta colore), per mostrare
+// tendine a cascata invece della lista piatta di 24 voci nel sottogruppo "Accessori".
+export type AssiAccessoriTapparelle = { categoria: AsseSelezione; voce: AsseSelezione; finitura?: AsseSelezione };
+
+const ACCESSORI_TAPPARELLE_CATEGORIA_LABEL: Record<string, string> = {
+  GUIDA: "Guide su misura",
+  ACCESSORIO: "Accessori vari",
+  KIT: "Kit di manovra",
+};
+const ACCESSORI_TAPPARELLE_VOCE_LABEL: Record<string, string> = {
+  A50: "Guida A50",
+  A80: "Guida A80",
+  A60: "Guida A60",
+  A14: "Guida A14",
+  A16: "Guida A16",
+  A25: "Guida A25",
+  A27: "Guida A27",
+  A28: "Guida A28",
+  A30: "Guida A30",
+  A40: "Guida A40",
+  FERRO_ZINCATO: "Guida in Ferro Zincato 22x19mm",
+  SPAZZOLINO_48X3: "Spazzolino 4,8x3mm",
+  SPAZZOLINO_48X5: "Spazzolino 4,8x5mm",
+  GUARNIZIONE_E13: "Guarnizione profilo E13",
+  INVITO_GUIDA: "Invito guida per guida in ferro (cadauno)",
+  CINGHIA: "Kit completo manovra a cinghia (con supporto a murare)",
+  MOTORIZZATO: "Kit completo con motoriduttore",
+};
+const ACCESSORI_TAPPARELLE_FINITURA_LABEL: Record<string, string> = { RAL: "RAL", ARGENTOBRONZO: "Argento-Bronzo" };
+
+export function assiSelezioneAccessoriTapparelle(tipologia: string): AssiAccessoriTapparelle | null {
+  if (tipologia === "TAPPARELLE_GUIDA_FERRO_ZINCATO") {
+    return {
+      categoria: { valore: "GUIDA", label: ACCESSORI_TAPPARELLE_CATEGORIA_LABEL.GUIDA },
+      voce: { valore: "FERRO_ZINCATO", label: ACCESSORI_TAPPARELLE_VOCE_LABEL.FERRO_ZINCATO },
+    };
+  }
+  let match = tipologia.match(/^TAPPARELLE_GUIDA_(A\d+)_(RAL|ARGENTOBRONZO)$/);
+  if (match) {
+    const [, modello, finitura] = match;
+    return {
+      categoria: { valore: "GUIDA", label: ACCESSORI_TAPPARELLE_CATEGORIA_LABEL.GUIDA },
+      voce: { valore: modello, label: ACCESSORI_TAPPARELLE_VOCE_LABEL[modello] ?? `Guida ${modello}` },
+      finitura: { valore: finitura, label: ACCESSORI_TAPPARELLE_FINITURA_LABEL[finitura] ?? finitura },
+    };
+  }
+  match = tipologia.match(/^TAPPARELLE_ACCESSORIO_(.+)$/);
+  if (match) {
+    const voce = match[1];
+    return {
+      categoria: { valore: "ACCESSORIO", label: ACCESSORI_TAPPARELLE_CATEGORIA_LABEL.ACCESSORIO },
+      voce: { valore: voce, label: ACCESSORI_TAPPARELLE_VOCE_LABEL[voce] ?? voce.replace(/_/g, " ") },
+    };
+  }
+  match = tipologia.match(/^TAPPARELLE_KIT_(.+)$/);
+  if (match) {
+    const voce = match[1];
+    return {
+      categoria: { valore: "KIT", label: ACCESSORI_TAPPARELLE_CATEGORIA_LABEL.KIT },
+      voce: { valore: voce, label: ACCESSORI_TAPPARELLE_VOCE_LABEL[voce] ?? voce.replace(/_/g, " ") },
+    };
+  }
+  return null;
+}
+
 // Minibox: decompone una tipologia TAPPARELLE_MINIBOX<misura>_<resto> nei 2 assi
 // "misura cassonetto" (165/185/205/250mm) e "tipologia tapparella" (marca + tipo di
 // manovra, es. "OR Mini Orienta (motorizzata)", o "Solo struttura"), cosi' il
