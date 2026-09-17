@@ -611,8 +611,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // quindi non compaiono qui.
   if (/^TAPPARELLE_MINIBOX\d+_/.test(tipologia)) return "Minibox";
   if (tipologia.startsWith("ZENITH_")) {
-    if (tipologia.endsWith("_UKW13")) return "Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
-    if (tipologia.endsWith("_UKW10")) return "Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
+    if (tipologia.endsWith("_UKW13")) return "PVC — Zenith Uw 1,3 — zona climatica E (vetrocamera doppio)";
+    if (tipologia.endsWith("_UKW10")) return "PVC — Zenith Uw 1,0 — zona climatica F (vetrocamera triplo)";
   }
   if (tipologia.startsWith("PLISSE_")) {
     const codice = tipologia.slice("PLISSE_".length).replace(/_(STD|STDPLUS|MICH|FL)$/, "");
@@ -630,11 +630,28 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
   if (tipologia.startsWith("KOPEN_")) {
-    const codice = tipologia.split("_")[1];
-    return KOPEN_SOTTOGRUPPI[codice] ?? null;
+    // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
+    // avviene con 2 tendine a cascata (linea -> combinazione materiali) tramite
+    // assiSelezioneKopen, invece dei 13 sottogruppi piatti usati in precedenza.
+    return "Portoncini Kopen";
   }
+  // Serramenti: segnaposto "in arrivo" per i materiali oltre al PVC (gia' a listino
+  // come Zenith) — ciascuno appare come proprio sottogruppo dentro SERRAMENTI, cosi'
+  // la prima scelta del commerciale e' il materiale (PVC/PVC-Alluminio/Alluminio/
+  // Alluminio a taglio freddo/Legno/Legno-Alluminio), come nei cataloghi cartacei.
+  if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return SERRAMENTI_MATERIALE_LABELS[tipologia];
   return null;
 }
+
+// Segnaposto "in arrivo" per i materiali Serramenti non ancora a listino (vedi
+// IN_ARRIVO piu' sotto per il messaggio mostrato al click).
+const SERRAMENTI_MATERIALE_LABELS: Record<string, string> = {
+  SERRAMENTI_PVCALLUMINIO_PLACEHOLDER: "PVC-Alluminio",
+  SERRAMENTI_ALLUMINIO_PLACEHOLDER: "Alluminio",
+  SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Alluminio a taglio freddo",
+  SERRAMENTI_LEGNO_PLACEHOLDER: "Legno",
+  SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER: "Legno-Alluminio",
+};
 
 const ZENITH_DESCRIZIONI: Record<string, string> = {
   FF: "Specchiatura fissa (FF)",
@@ -812,6 +829,28 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
     }
   }
   return null;
+}
+
+// Kopen: decompone una tipologia KOPEN_<codice>_<combinazione> nei 2 assi "linea"
+// (codice del gruppo finitura: Liscio/Fresature/Bugnati/Inserti/Style/Vitrum/
+// VitrumIns/VitrumBug/Frame/Lumiere/Classic/Effect/EffectVetro, etichette gia'
+// in KOPEN_SOTTOGRUPPI) e "combinazione" (la specifica accoppiata est./int., es.
+// "ALU fresato est. / legno liscio int.", etichette gia' in KOPEN_LABELS), cosi'
+// il selettore mostra 2 tendine a cascata invece della lista piatta per sottogruppo
+// usata in precedenza — stessa logica di assiSelezioneModelloAnte per Acciaio/
+// Persiane Blindate.
+export type AssiKopen = { linea: AsseSelezione; combinazione: AsseSelezione };
+
+export function assiSelezioneKopen(tipologia: string): AssiKopen | null {
+  if (!tipologia.startsWith("KOPEN_")) return null;
+  const codice = tipologia.split("_")[1];
+  const lineaLabel = KOPEN_SOTTOGRUPPI[codice];
+  if (!lineaLabel) return null;
+  const combinazioneLabel = KOPEN_LABELS[tipologia] ?? tipologia.replace(/_/g, " ");
+  return {
+    linea: { valore: codice, label: lineaLabel },
+    combinazione: { valore: tipologia, label: combinazioneLabel },
+  };
 }
 
 // Minibox: decompone una tipologia TAPPARELLE_MINIBOX<misura>_<resto> nei 2 assi
@@ -1131,6 +1170,11 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 // basta rimuovere la voce da questa mappa e sostituire il segnaposto con i dati reali).
 const IN_ARRIVO: Record<string, string> = {
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
+  SERRAMENTI_PVCALLUMINIO_PLACEHOLDER: "Listino Serramenti PVC-Alluminio non ancora caricato — in arrivo",
+  SERRAMENTI_ALLUMINIO_PLACEHOLDER: "Listino Serramenti Alluminio non ancora caricato — in arrivo",
+  SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo",
+  SERRAMENTI_LEGNO_PLACEHOLDER: "Listino Serramenti Legno non ancora caricato — in arrivo",
+  SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER: "Listino Serramenti Legno-Alluminio non ancora caricato — in arrivo",
 };
 
 export function notaInArrivo(tipologia: string): string | null {
@@ -1139,6 +1183,7 @@ export function notaInArrivo(tipologia: string): string | null {
 
 export function labelBreveTipologia(tipologia: string): string {
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
+  if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;
   if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
   if (TAPPARELLE_LABELS[tipologia]) return TAPPARELLE_LABELS[tipologia];
   if (tipologia.startsWith("ACCIAIO_")) {

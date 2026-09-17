@@ -1,0 +1,47 @@
+[
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC-Alluminio non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_ALLUMINIO_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Alluminio non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_LEGNO_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Legno non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Legno-Alluminio non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  }
+]

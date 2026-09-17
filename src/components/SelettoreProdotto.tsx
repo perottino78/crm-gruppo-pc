@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -18,6 +18,9 @@ export type NodoTipologia = {
   // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
   // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
   assiModelloAnte?: AssiModelloAnte;
+  // Kopen: assi linea -> combinazione materiali, per mostrare 2 tendine a cascata
+  // invece della lista piatta per sottogruppo.
+  assiKopen?: AssiKopen;
   // Minibox: assi misura cassonetto → tipologia tapparella, per mostrare 2 tendine
   // a cascata invece della lista piatta (fino a 69 voci per misura).
   assiMinibox?: AssiMinibox;
@@ -222,6 +225,96 @@ function SelettoreCascataModelloAnte({
           >
             <option value="">— seleziona —</option>
             {opzioniAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata per Kopen: 1) linea (Modello liscio/Fresature/Bugnati/Inserti/
+// Style/Vitrum/.../Effect — le stesse etichette gia' usate per la galleria foto
+// reali), 2) combinazione materiali est./int. specifica di quella linea (es. "ALU
+// fresato est. / legno liscio int."). Sostituisce la lista piatta di 1-3 voci per
+// ciascuno dei 13 sottogruppi usata in precedenza con 2 tendine, come per Acciaio/
+// Persiane Blindate.
+function SelettoreCascataKopen({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [linea, setLinea] = useState("");
+  const [combinazione, setCombinazione] = useState("");
+
+  const opzioniLinea = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiKopen) mappa.set(t.assiKopen.linea.valore, t.assiKopen.linea.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerLinea = useMemo(
+    () => tipologie.filter((t) => t.assiKopen?.linea.valore === linea),
+    [tipologie, linea]
+  );
+  const opzioniCombinazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerLinea) if (t.assiKopen) mappa.set(t.assiKopen.combinazione.valore, t.assiKopen.combinazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerLinea]);
+
+  const trovato = useMemo(
+    () => filtratePerLinea.find((t) => t.assiKopen?.combinazione.valore === combinazione) ?? null,
+    [filtratePerLinea, combinazione]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Linea</label>
+        <select
+          value={linea}
+          onChange={(e) => {
+            setLinea(e.target.value);
+            setCombinazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniLinea.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {linea && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Combinazione materiali (est. / int.)</label>
+          <select
+            value={combinazione}
+            onChange={(e) => setCombinazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniCombinazione.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
@@ -654,6 +747,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiModelloAnte) ? (
                                             <SelettoreCascataModelloAnte
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
+                                            <SelettoreCascataKopen
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

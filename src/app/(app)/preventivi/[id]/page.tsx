@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneMinibox, assiSelezioneTapparelle, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -142,6 +142,10 @@ export default async function PreventivoPage({
         // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per la
         // selezione a 2 tendine a cascata invece della lista piatta (27-68 voci).
         assiModelloAnte: assiSelezioneModelloAnte(tip) ?? undefined,
+        // Kopen: assi linea -> combinazione materiali, per la selezione a 2 tendine
+        // a cascata invece della lista piatta per sottogruppo (13 gruppi, 1-3 voci
+        // ciascuno).
+        assiKopen: assiSelezioneKopen(tip) ?? undefined,
         // Minibox: assi misura cassonetto → tipologia tapparella, per la selezione a
         // 2 tendine a cascata invece della lista piatta (fino a 69 voci per misura).
         assiMinibox: assiSelezioneMinibox(tip) ?? undefined,
