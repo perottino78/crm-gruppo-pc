@@ -1,1389 +1,808 @@
 [
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 245,
-    "prezzoBase": 2140.8
+    "prezzoBase": 2602
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 300,
-    "prezzoBase": 2456
+    "prezzoBase": 2986
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 350,
-    "prezzoBase": 2625.6
+    "prezzoBase": 3190
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 400,
-    "prezzoBase": 2937.6
+    "prezzoBase": 3570
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 475,
-    "prezzoBase": 3272
+    "prezzoBase": 3978
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 500,
-    "prezzoBase": 3422.4
+    "prezzoBase": 4158
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 600,
-    "prezzoBase": 3755.2
+    "prezzoBase": 4563
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 245,
-    "prezzoBase": 2200
+    "prezzoBase": 2674
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 300,
-    "prezzoBase": 2531
+    "prezzoBase": 3075
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 350,
-    "prezzoBase": 2697.6
+    "prezzoBase": 3278
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 400,
-    "prezzoBase": 3030.4
+    "prezzoBase": 3683
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 475,
-    "prezzoBase": 3360
+    "prezzoBase": 4082
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 500,
-    "prezzoBase": 3529.6
+    "prezzoBase": 4288
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 600,
-    "prezzoBase": 3860.8
+    "prezzoBase": 4690
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 245,
-    "prezzoBase": 2272
+    "prezzoBase": 2762
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 300,
-    "prezzoBase": 2618
+    "prezzoBase": 3181
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 350,
-    "prezzoBase": 2784
+    "prezzoBase": 3382
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 400,
-    "prezzoBase": 3134.4
+    "prezzoBase": 3810
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 475,
-    "prezzoBase": 3465.6
+    "prezzoBase": 4211
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 500,
-    "prezzoBase": 3646.4
+    "prezzoBase": 4430
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 600,
-    "prezzoBase": 3979.2
+    "prezzoBase": 4834
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 300,
-    "prezzoBase": 2696
+    "prezzoBase": 3275
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 350,
-    "prezzoBase": 2860.8
+    "prezzoBase": 3478
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 400,
-    "prezzoBase": 3224
+    "prezzoBase": 3918
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 475,
-    "prezzoBase": 3560
+    "prezzoBase": 4325
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 500,
-    "prezzoBase": 3755.2
+    "prezzoBase": 4563
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 600,
-    "prezzoBase": 4088
+    "prezzoBase": 4966
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 300,
-    "prezzoBase": 2773
+    "prezzoBase": 3371
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 350,
-    "prezzoBase": 2936
+    "prezzoBase": 3568
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 400,
-    "prezzoBase": 3318.4
+    "prezzoBase": 4032
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 475,
-    "prezzoBase": 3648
+    "prezzoBase": 4432
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 500,
-    "prezzoBase": 3926.4
+    "prezzoBase": 4770
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 600,
-    "prezzoBase": 4324.8
+    "prezzoBase": 5254
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 300,
     "larghezzaMm": 350,
-    "prezzoBase": 3214.4
+    "prezzoBase": 3906
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 300,
     "larghezzaMm": 400,
-    "prezzoBase": 3625.6
+    "prezzoBase": 4405
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 300,
     "larghezzaMm": 475,
-    "prezzoBase": 3960
+    "prezzoBase": 4811
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 300,
     "larghezzaMm": 500,
-    "prezzoBase": 4203.2
+    "prezzoBase": 5104
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 300,
     "larghezzaMm": 600,
-    "prezzoBase": 4600
+    "prezzoBase": 5589
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 350,
     "larghezzaMm": 400,
-    "prezzoBase": 3881.6
+    "prezzoBase": 4715
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BIANCO (9010)",
+    "colore": "STANDARD",
     "altezzaMm": 350,
     "larghezzaMm": 475,
-    "prezzoBase": 4353.6
+    "prezzoBase": 5288
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
+    "tipologia": "TENDABRACCICASS_CARAIBISMART",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 245,
-    "prezzoBase": 2140.8
+    "prezzoBase": 2093
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
+    "tipologia": "TENDABRACCICASS_CARAIBISMART",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 300,
-    "prezzoBase": 2456
+    "prezzoBase": 2402
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
+    "tipologia": "TENDABRACCICASS_CARAIBISMART",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 350,
-    "prezzoBase": 2625.6
+    "prezzoBase": 2541
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
+    "tipologia": "TENDABRACCICASS_CARAIBISMART",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 400,
-    "prezzoBase": 2937.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 3272
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 3422.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 600,
-    "prezzoBase": 3755.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 2200
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2531
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2697.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 3030.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 3360
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 3529.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 600,
-    "prezzoBase": 3860.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 2272
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2618
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2784
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 3134.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 3465.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 3646.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 600,
-    "prezzoBase": 3979.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2696
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2860.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 3224
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 3560
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 500,
-    "prezzoBase": 3755.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 600,
-    "prezzoBase": 4088
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2773
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2936
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 3318.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3648
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 500,
-    "prezzoBase": 3926.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 600,
-    "prezzoBase": 4324.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 3214.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 3625.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 475,
-    "prezzoBase": 3960
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 4203.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 600,
-    "prezzoBase": 4600
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 3881.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 475,
-    "prezzoBase": 4353.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 2140.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 2456
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2625.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2937.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 3272
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 3422.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 600,
-    "prezzoBase": 3755.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 2200
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2531
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2697.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 3030.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 3360
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 3529.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 600,
-    "prezzoBase": 3860.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 2272
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2618
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2784
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 3134.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 3465.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 3646.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 600,
-    "prezzoBase": 3979.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2696
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2860.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 3224
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 3560
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 500,
-    "prezzoBase": 3755.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 600,
-    "prezzoBase": 4088
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2773
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2936
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 3318.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3648
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 500,
-    "prezzoBase": 3926.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 600,
-    "prezzoBase": 4324.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 3214.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 3625.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 475,
-    "prezzoBase": 3960
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 4203.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 600,
-    "prezzoBase": 4600
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 3881.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBI",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 475,
-    "prezzoBase": 4353.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 1720
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 1976
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2090
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2344
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 2572.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 2705.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 1761.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2025.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2158
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 2425.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 2689.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 2820.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 1801.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2088
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2203
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2486.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 2715.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
     "prezzoBase": 2848
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2172.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2290
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 2587.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 2947.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2232
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2347
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 2662.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3177.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 1720
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 1976
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2090
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2344
-  },
-  {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 475,
-    "prezzoBase": 2572.8
+    "prezzoBase": 3126
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 500,
-    "prezzoBase": 2705.6
+    "prezzoBase": 3288
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 245,
-    "prezzoBase": 1761.6
+    "prezzoBase": 2142
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 300,
-    "prezzoBase": 2025.6
+    "prezzoBase": 2462
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 350,
-    "prezzoBase": 2158
+    "prezzoBase": 2624
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 400,
-    "prezzoBase": 2425.6
+    "prezzoBase": 2949
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 475,
-    "prezzoBase": 2689.6
+    "prezzoBase": 3267
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 500,
-    "prezzoBase": 2820.8
+    "prezzoBase": 3427
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 245,
-    "prezzoBase": 1801.6
+    "prezzoBase": 2190
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 300,
-    "prezzoBase": 2088
+    "prezzoBase": 2539
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 350,
-    "prezzoBase": 2203
+    "prezzoBase": 2677
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 400,
-    "prezzoBase": 2486.4
+    "prezzoBase": 3021
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 475,
-    "prezzoBase": 2715.2
+    "prezzoBase": 3301
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 500,
-    "prezzoBase": 2848
+    "prezzoBase": 3461
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 300,
-    "prezzoBase": 2172.8
+    "prezzoBase": 2643
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 350,
-    "prezzoBase": 2290
+    "prezzoBase": 2784
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 400,
-    "prezzoBase": 2587.2
+    "prezzoBase": 3146
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 475,
-    "prezzoBase": 2947.2
+    "prezzoBase": 3581
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 300,
-    "prezzoBase": 2232
+    "prezzoBase": 2714
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 350,
-    "prezzoBase": 2347
+    "prezzoBase": 2851
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 400,
-    "prezzoBase": 2662.4
+    "prezzoBase": 3235
   },
   {
     "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "BEIGE (1013)",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 475,
-    "prezzoBase": 3177.6
+    "prezzoBase": 3862
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 245,
-    "prezzoBase": 1720
+    "prezzoBase": 2416
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 300,
-    "prezzoBase": 1976
+    "prezzoBase": 2667
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 350,
-    "prezzoBase": 2090
+    "prezzoBase": 2952
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 400,
-    "prezzoBase": 2344
+    "prezzoBase": 3203
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 475,
-    "prezzoBase": 2572.8
+    "prezzoBase": 3552
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 150,
     "larghezzaMm": 500,
-    "prezzoBase": 2705.6
+    "prezzoBase": 3805
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 600,
+    "prezzoBase": 4357
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 150,
+    "larghezzaMm": 700,
+    "prezzoBase": 5331
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 245,
-    "prezzoBase": 1761.6
+    "prezzoBase": 2490
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 300,
-    "prezzoBase": 2025.6
+    "prezzoBase": 2771
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 350,
-    "prezzoBase": 2158
+    "prezzoBase": 3051
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 400,
-    "prezzoBase": 2425.6
+    "prezzoBase": 3330
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 475,
-    "prezzoBase": 2689.6
+    "prezzoBase": 3680
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 175,
     "larghezzaMm": 500,
-    "prezzoBase": 2820.8
+    "prezzoBase": 3955
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 600,
+    "prezzoBase": 4509
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 175,
+    "larghezzaMm": 700,
+    "prezzoBase": 5518
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 245,
-    "prezzoBase": 1801.6
+    "prezzoBase": 2565
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 300,
-    "prezzoBase": 2088
+    "prezzoBase": 2869
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 350,
-    "prezzoBase": 2203
+    "prezzoBase": 3152
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 400,
-    "prezzoBase": 2486.4
+    "prezzoBase": 3454
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 475,
-    "prezzoBase": 2715.2
+    "prezzoBase": 3872
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 200,
     "larghezzaMm": 500,
-    "prezzoBase": 2848
+    "prezzoBase": 4178
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 600,
+    "prezzoBase": 4728
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 200,
+    "larghezzaMm": 700,
+    "prezzoBase": 5707
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 300,
-    "prezzoBase": 2172.8
+    "prezzoBase": 2979
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 350,
-    "prezzoBase": 2290
+    "prezzoBase": 3261
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 400,
-    "prezzoBase": 2587.2
+    "prezzoBase": 3592
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 225,
     "larghezzaMm": 475,
-    "prezzoBase": 2947.2
+    "prezzoBase": 4010
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 500,
+    "prezzoBase": 4338
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 600,
+    "prezzoBase": 4888
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 225,
+    "larghezzaMm": 700,
+    "prezzoBase": 5912
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 300,
-    "prezzoBase": 2232
+    "prezzoBase": 3078
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 350,
-    "prezzoBase": 2347
+    "prezzoBase": 3360
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 400,
-    "prezzoBase": 2662.4
+    "prezzoBase": 3782
   },
   {
-    "tipologia": "TENDABRACCICASS_CARAIBISMART",
-    "colore": "GRIGIO (7035)",
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
     "altezzaMm": 250,
     "larghezzaMm": 475,
-    "prezzoBase": 3177.6
+    "prezzoBase": 4134
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 500,
+    "prezzoBase": 4490
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 600,
+    "prezzoBase": 5040
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 250,
+    "larghezzaMm": 700,
+    "prezzoBase": 6101
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 350,
+    "prezzoBase": 3662
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 400,
+    "prezzoBase": 4072
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 475,
+    "prezzoBase": 4421
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 500,
+    "prezzoBase": 4826
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 600,
+    "prezzoBase": 5376
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 300,
+    "larghezzaMm": 700,
+    "prezzoBase": 6528
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 400,
+    "prezzoBase": 4666
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 475,
+    "prezzoBase": 4955
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 500,
+    "prezzoBase": 5406
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 600,
+    "prezzoBase": 5960
+  },
+  {
+    "tipologia": "TENDABRACCICASS_EUROPA",
+    "colore": "STANDARD",
+    "altezzaMm": 350,
+    "larghezzaMm": 700,
+    "prezzoBase": 7461
   },
   {
     "tipologia": "TENDABRACCICASS_COVER400",
@@ -1657,1034 +1076,5 @@
     "altezzaMm": 400,
     "larghezzaMm": 700,
     "prezzoBase": 10210
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 1877
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 2073.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2294.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2489.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 2761.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 2956.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 600,
-    "prezzoBase": 3385.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 700,
-    "prezzoBase": 4144
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 1934
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2152
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2371.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 2587.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 2859.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 3075.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 600,
-    "prezzoBase": 3504
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 700,
-    "prezzoBase": 4291
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 1992
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2228.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2448
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2684.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 3009.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 3246.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 600,
-    "prezzoBase": 3675.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 700,
-    "prezzoBase": 4437
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2315.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2534.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 2790.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 3116.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 500,
-    "prezzoBase": 3372.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 600,
-    "prezzoBase": 3800
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 700,
-    "prezzoBase": 4597
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2392
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2611.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 2940.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3214.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 500,
-    "prezzoBase": 3491.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 600,
-    "prezzoBase": 3918.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 700,
-    "prezzoBase": 4742
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2846.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 3164.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 475,
-    "prezzoBase": 3436.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 3752
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 600,
-    "prezzoBase": 4180.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 700,
-    "prezzoBase": 5075
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 3627.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 475,
-    "prezzoBase": 3851.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 500,
-    "prezzoBase": 4204.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 600,
-    "prezzoBase": 4635.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 700,
-    "prezzoBase": 5802
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 1877
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 2073.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2294.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2489.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 2761.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 2956.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 600,
-    "prezzoBase": 3385.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 150,
-    "larghezzaMm": 700,
-    "prezzoBase": 4144
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 1934
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2152
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2371.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 2587.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 2859.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 3075.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 600,
-    "prezzoBase": 3504
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 175,
-    "larghezzaMm": 700,
-    "prezzoBase": 4291
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 1992
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2228.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2448
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2684.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 3009.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 3246.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 600,
-    "prezzoBase": 3675.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 700,
-    "prezzoBase": 4437
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2315.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2534.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 2790.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 3116.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 500,
-    "prezzoBase": 3372.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 600,
-    "prezzoBase": 3800
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 225,
-    "larghezzaMm": 700,
-    "prezzoBase": 4597
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2392
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2611.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 2940.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3214.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 500,
-    "prezzoBase": 3491.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 600,
-    "prezzoBase": 3918.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 250,
-    "larghezzaMm": 700,
-    "prezzoBase": 4742
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2846.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 3164.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 475,
-    "prezzoBase": 3436.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 3752
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 600,
-    "prezzoBase": 4180.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 700,
-    "prezzoBase": 5075
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 3627.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 475,
-    "prezzoBase": 3851.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 500,
-    "prezzoBase": 4204.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 600,
-    "prezzoBase": 4635.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 350,
-    "larghezzaMm": 700,
-    "prezzoBase": 5802
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 245,
-    "prezzoBase": 1877
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 2073.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 2294.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 2489.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 475,
-    "prezzoBase": 2761.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 500,
-    "prezzoBase": 2956.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 600,
-    "prezzoBase": 3385.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 150,
-    "larghezzaMm": 700,
-    "prezzoBase": 4144
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 245,
-    "prezzoBase": 1934
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 2152
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 2371.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 2587.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 475,
-    "prezzoBase": 2859.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 500,
-    "prezzoBase": 3075.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 600,
-    "prezzoBase": 3504
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 175,
-    "larghezzaMm": 700,
-    "prezzoBase": 4291
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 245,
-    "prezzoBase": 1992
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 2228.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2448
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2684.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 475,
-    "prezzoBase": 3009.6
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 3246.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 600,
-    "prezzoBase": 3675.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 200,
-    "larghezzaMm": 700,
-    "prezzoBase": 4437
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 2315.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 2534.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 2790.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 475,
-    "prezzoBase": 3116.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 500,
-    "prezzoBase": 3372.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 600,
-    "prezzoBase": 3800
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 225,
-    "larghezzaMm": 700,
-    "prezzoBase": 4597
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 2392
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 2611.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 2940.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 475,
-    "prezzoBase": 3214.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 500,
-    "prezzoBase": 3491.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 600,
-    "prezzoBase": 3918.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 250,
-    "larghezzaMm": 700,
-    "prezzoBase": 4742
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2846.4
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 3164.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 475,
-    "prezzoBase": 3436.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 3752
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 600,
-    "prezzoBase": 4180.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 300,
-    "larghezzaMm": 700,
-    "prezzoBase": 5075
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 3627.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 475,
-    "prezzoBase": 3851.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 500,
-    "prezzoBase": 4204.8
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 600,
-    "prezzoBase": 4635.2
-  },
-  {
-    "tipologia": "TENDABRACCICASS_EUROPA",
-    "colore": "GRIGIO (7035)",
-    "altezzaMm": 350,
-    "larghezzaMm": 700,
-    "prezzoBase": 5802
   }
 ]

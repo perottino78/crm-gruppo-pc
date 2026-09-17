@@ -25,7 +25,7 @@ type OptionalRow = {
   gruppiApplicabili: string[];
 };
 
-const TIPOLOGIE_PREFIXES = ["TENDABRACCICASS_HAWAII"];
+const TIPOLOGIA_HAWAII = "TENDABRACCICASS_HAWAII";
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
-      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      where: { brandId: brand.id, tipologia: TIPOLOGIA_HAWAII },
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
 
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, listino: { startsWith: "TENDABRACCICASS_HAWAII" } },
+      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, listino: TIPOLOGIA_HAWAII },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -138,17 +138,51 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove prodotti/optional Hawaii obsoleti (struttura precedente al catalogo 2026, es. griglia per-colore ora sostituita da colore STANDARD)
+    const prodottiDaRimuovere = prodottiEsistenti.filter((p) => !prodottiNuovi.some((n) => keyProdotto(n) === keyProdotto(p)));
+    if (prodottiDaRimuovere.length > 0) {
+      await prisma.prodotto.deleteMany({ where: { id: { in: prodottiDaRimuovere.map((p) => p.id) } } });
+    }
+    const chiaviNuoveOpt = new Set(optionaliNuovi.map(keyOptional));
+    const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuoveOpt.has(keyOptional(o)));
+    if (optionaliDaRimuovere.length > 0) {
+      await prisma.optional.deleteMany({ where: { id: { in: optionaliDaRimuovere.map((o) => o.id) } } });
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi: prodottiDaRimuovere.length,
       modelliAggiornati: modelli.length,
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi: optionaliDaRimuovere.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }
+
+export async function GET(req: NextRequest) {
+  const key = req.headers.get("x-seed-key");
+  if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
+  if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
+
+  const prodottiCount = await prisma.prodotto.count({
+    where: { brandId: brand.id, tipologia: TIPOLOGIA_HAWAII },
+  });
+  const modelliCount = await prisma.modelloProdotto.count({
+    where: { brandId: brand.id, tipologia: TIPOLOGIA_HAWAII },
+  });
+  const optionaliCount = await prisma.optional.count({
+    where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, listino: TIPOLOGIA_HAWAII },
+  });
+
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
+}
+

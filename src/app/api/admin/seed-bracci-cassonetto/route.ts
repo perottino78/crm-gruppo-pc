@@ -25,7 +25,13 @@ type OptionalRow = {
   gruppiApplicabili: string[];
 };
 
-const TIPOLOGIE_PREFIXES = ["TENDABRACCICASS_"];
+// Tipologie gestite da QUESTA route (esclude TENDABRACCICASS_HAWAII, gestita dalla sua route dedicata seed-hawaii)
+const TIPOLOGIE_GESTITE = [
+  "TENDABRACCICASS_CARAIBI",
+  "TENDABRACCICASS_CARAIBISMART",
+  "TENDABRACCICASS_COVER400",
+  "TENDABRACCICASS_EUROPA",
+];
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
@@ -40,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
-      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
@@ -95,8 +101,17 @@ export async function POST(req: NextRequest) {
     }
 
     const optionaliNuovi = optionaliData as OptionalRow[];
+    // Include sia gli optional specifici dei modelli gestiti da questa route, sia quelli condivisi
+    // a livello di gruppo (listino: null, es. Kit Solare Gaposa/Sensori/Telecomandi comuni a piu' modelli).
+    // Esclude esplicitamente gli optional di TENDABRACCICASS_HAWAII (gestiti da seed-hawaii).
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      where: {
+        brandId: brand.id,
+        OR: [
+          { listino: { in: TIPOLOGIE_GESTITE } },
+          { listino: null, gruppiApplicabili: { has: GRUPPO } },
+        ],
+      },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -126,11 +141,18 @@ export async function POST(req: NextRequest) {
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
         esistente.listino !== o.listino ||
+        esistente.note !== o.note ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
           where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, listino: o.listino, gruppiApplicabili: o.gruppiApplicabili },
+          data: {
+            valore: o.valore,
+            tipoPrezzo: o.tipoPrezzo,
+            listino: o.listino,
+            note: o.note,
+            gruppiApplicabili: o.gruppiApplicabili,
+          },
         });
         optAggiornati++;
       } else {
@@ -138,17 +160,54 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove prodotti/optional obsoleti dei modelli gestiti da questa route (non piu' presenti nel nuovo catalogo 2026)
+    const prodottiDaRimuovere = prodottiEsistenti.filter((p) => !prodottiNuovi.some((n) => keyProdotto(n) === keyProdotto(p)));
+    if (prodottiDaRimuovere.length > 0) {
+      await prisma.prodotto.deleteMany({ where: { id: { in: prodottiDaRimuovere.map((p) => p.id) } } });
+    }
+    const chiaviNuoveOpt = new Set(optionaliNuovi.map(keyOptional));
+    const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuoveOpt.has(keyOptional(o)));
+    if (optionaliDaRimuovere.length > 0) {
+      await prisma.optional.deleteMany({ where: { id: { in: optionaliDaRimuovere.map((o) => o.id) } } });
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi: prodottiDaRimuovere.length,
       modelliAggiornati: modelli.length,
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi: optionaliDaRimuovere.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
+}
+
+
+export async function GET(req: NextRequest) {
+  const key = req.headers.get("x-seed-key");
+  if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
+  if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
+
+  const prodottiCount = await prisma.prodotto.count({
+    where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
+  });
+  const modelliCount = await prisma.modelloProdotto.count({
+    where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
+  });
+  const optionaliCount = await prisma.optional.count({
+    where: {
+      brandId: brand.id,
+      OR: [{ listino: { in: TIPOLOGIE_GESTITE } }, { listino: null, gruppiApplicabili: { has: GRUPPO } }],
+    },
+  });
+
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
 }
