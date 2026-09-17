@@ -821,7 +821,7 @@ function SelettoreCascataTapparelle({
   );
 
   useEffect(() => {
-    if (trovato) {
+    if (trovato && !trovato.disabilitato) {
       onScegli(trovato);
     } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
       onReset();
@@ -881,9 +881,11 @@ function SelettoreCascataTapparelle({
           </select>
         </div>
       )}
-      {trovato && (
+      {trovato && trovato.disabilitato ? (
+        <p className="text-xs font-medium text-red-500">⚠️ {trovato.disabilitato}</p>
+      ) : trovato ? (
         <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
-      )}
+      ) : null}
     </div>
   );
 }

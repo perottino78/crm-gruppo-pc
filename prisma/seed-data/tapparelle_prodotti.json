@@ -350859,5 +350859,12 @@
     "altezzaMm": 3800,
     "larghezzaMm": 4300,
     "prezzoBase": 1405.0
+  },
+  {
+    "tipologia": "TAPPARELLE_PVC_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
   }
 ]

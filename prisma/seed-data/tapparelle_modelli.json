@@ -2119,5 +2119,14 @@
     "immagineUrl": null,
     "modalitaCalcolo": "GRIGLIA",
     "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "TAPPARELLE_PVC_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "TAPPARELLE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
   }
 ]

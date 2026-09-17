@@ -604,7 +604,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // Tapparelle: sottogruppo "Tapparelle in PVC e Alluminio" per i modelli veri e
   // propri (L14, Obliqua e futuri); "Accessori" (guide, kit di manovra) seguira' a
   // parte nello stesso gruppo TAPPARELLE, cosi' da poterli ordinare come voci separate.
-  if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_")) return "Tapparelle in PVC e Alluminio";
+  if (tipologia.startsWith("TAPPARELLE_L14_") || tipologia.startsWith("TAPPARELLE_OBLIQUA_") || tipologia.startsWith("TAPPARELLE_LUPIN_") || tipologia === "TAPPARELLE_PVC_PLACEHOLDER") return "Tapparelle in PVC e Alluminio";
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_") || tipologia.startsWith("TAPPARELLE_KIT_")) return "Accessori";
   // Minibox: un unico sottogruppo per tutte le misure di cassonetto (165/185/205/250),
   // cosi' la selezione avviene con 2 tendine a cascata (misura -> tipologia tapparella)
@@ -1051,6 +1051,16 @@ const TAPPARELLE_L14_PREZZI_MQ: Record<string, number> = {
 };
 
 export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | null {
+  // Segnaposto Tapparelle in PVC: nessun modello/colore reale finche' non arriva il
+  // listino (prezzo a mq con colori), ma compare nella stessa tendina Materiale delle
+  // tipologie in Alluminio gia' caricate (L14/Obliqua/Lupin), disabilitato (vedi IN_ARRIVO).
+  if (tipologia === "TAPPARELLE_PVC_PLACEHOLDER") {
+    return {
+      materiale: { valore: "PVC", label: "PVC" },
+      modello: { valore: "PLACEHOLDER", label: "—" },
+      colore: { valore: tipologia, label: "—" },
+    };
+  }
   const match = tipologia.match(/^TAPPARELLE_(L14|OBLIQUA|LUPIN)_(?:(MEDIA|ALTA)_)?(TINTAUNITA|FINTOLEGNO|RAFFAELLO)$/);
   if (!match) return null;
   const [, modelloKey, densita, finituraKey] = match;
@@ -1068,7 +1078,7 @@ export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | nul
   }
   const coloreLabel = `${densitaLabel ? densitaLabel + " — " : ""}${finituraLabel}${aumento}`;
   return {
-    materiale: { valore: "PVC_ALLUMINIO", label: "PVC e Alluminio" },
+    materiale: { valore: "ALLUMINIO", label: "Alluminio" },
     modello: { valore: modelloKey, label: TAPPARELLE_MODELLO_LABELS[modelloKey] ?? modelloKey },
     colore: { valore: tipologia, label: coloreLabel },
   };
@@ -1092,6 +1102,7 @@ const TAPPARELLE_LABELS: Record<string, string> = {
   TAPPARELLE_LUPIN_TINTAUNITA: "Lupin — Tinta Unita",
   TAPPARELLE_LUPIN_FINTOLEGNO: "Lupin — Finto Legno",
   TAPPARELLE_LUPIN_RAFFAELLO: "Lupin — Raffaello / Particolari",
+  TAPPARELLE_PVC_PLACEHOLDER: "Tapparelle in PVC (listino in arrivo)",
 
   TAPPARELLE_GUIDA_A50_RAL: "Guida A50 su misura — RAL",
   TAPPARELLE_GUIDA_A80_RAL: "Guida A80 su misura — RAL",
@@ -1331,6 +1342,7 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_LEGNO_PLACEHOLDER: "Listino Serramenti Legno non ancora caricato — in arrivo",
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
+  TAPPARELLE_PVC_PLACEHOLDER: "Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo",
 };
 
 export function notaInArrivo(tipologia: string): string | null {
