@@ -1,23 +1,5 @@
 [
   {
-    "tipologia": "SERRAMENTI_PVCALLUMINIO_PLACEHOLDER",
-    "descrizioneTecnica": "⚠️ Listino Serramenti PVC-Alluminio non ancora caricato — in arrivo. Non selezionabile.",
-    "famiglia": "INDOOR",
-    "gruppo": "SERRAMENTI",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
-    "tipologia": "SERRAMENTI_ALLUMINIO_PLACEHOLDER",
-    "descrizioneTecnica": "⚠️ Listino Serramenti Alluminio non ancora caricato — in arrivo. Non selezionabile.",
-    "famiglia": "INDOOR",
-    "gruppo": "SERRAMENTI",
-    "immagineUrl": null,
-    "modalitaCalcolo": "GRIGLIA",
-    "parametriCalcolo": {}
-  },
-  {
     "tipologia": "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER",
     "descrizioneTecnica": "⚠️ Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo. Non selezionabile.",
     "famiglia": "INDOOR",
@@ -36,8 +18,71 @@
     "parametriCalcolo": {}
   },
   {
-    "tipologia": "SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER",
-    "descrizioneTecnica": "⚠️ Listino Serramenti Legno-Alluminio non ancora caricato — in arrivo. Non selezionabile.",
+    "tipologia": "SERRAMENTI_PVC_OPTIMA_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC Optima non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_PVC_PLASMA30_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_PVC_FENIX_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC Fenix non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC-Alluminio Plasma 30 non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC-Alluminio Fidra non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti PVC-Alluminio Fenix K non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo. Non selezionabile.",
+    "famiglia": "INDOOR",
+    "gruppo": "SERRAMENTI",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER",
+    "descrizioneTecnica": "⚠️ Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo. Non selezionabile.",
     "famiglia": "INDOOR",
     "gruppo": "SERRAMENTI",
     "immagineUrl": null,

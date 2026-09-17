@@ -648,11 +648,21 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
 // Segnaposto "in arrivo" per i materiali Serramenti non ancora a listino (vedi
 // IN_ARRIVO piu' sotto per il messaggio mostrato al click).
 const SERRAMENTI_MATERIALE_LABELS: Record<string, string> = {
-  SERRAMENTI_PVCALLUMINIO_PLACEHOLDER: "PVC-Alluminio",
-  SERRAMENTI_ALLUMINIO_PLACEHOLDER: "Alluminio",
+  // PVC: Zenith e' gia' a listino reale (vedi sottogruppoDiTipologia sopra); Optima,
+  // Plasma 30 e Fenix sono le altre linee del materiale, ancora senza listino.
+  SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "PVC — Optima",
+  SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "PVC — Plasma 30",
+  SERRAMENTI_PVC_FENIX_PLACEHOLDER: "PVC — Fenix",
+  // PVC-Alluminio: 3 linee, nessuna ancora a listino.
+  SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "PVC-Alluminio — Plasma 30",
+  SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER: "PVC-Alluminio — Fidra",
+  SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "PVC-Alluminio — Fenix K",
   SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Alluminio a taglio freddo",
   SERRAMENTI_LEGNO_PLACEHOLDER: "Legno",
-  SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER: "Legno-Alluminio",
+  // Alluminio: unica linea comunicata finora (Plasma 30 Alu).
+  SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Alluminio — Plasma 30 Alu",
+  // Legno-Alluminio: unica linea comunicata finora (Plasma 30 Wood).
+  SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Legno-Alluminio — Plasma 30 Wood",
 };
 
 const ZENITH_DESCRIZIONI: Record<string, string> = {
@@ -1244,11 +1254,16 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 // basta rimuovere la voce da questa mappa e sostituire il segnaposto con i dati reali).
 const IN_ARRIVO: Record<string, string> = {
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
-  SERRAMENTI_PVCALLUMINIO_PLACEHOLDER: "Listino Serramenti PVC-Alluminio non ancora caricato — in arrivo",
-  SERRAMENTI_ALLUMINIO_PLACEHOLDER: "Listino Serramenti Alluminio non ancora caricato — in arrivo",
+  SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "Listino Serramenti PVC Optima non ancora caricato — in arrivo",
+  SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
+  SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
+  SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Plasma 30 non ancora caricato — in arrivo",
+  SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fidra non ancora caricato — in arrivo",
+  SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fenix K non ancora caricato — in arrivo",
   SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo",
   SERRAMENTI_LEGNO_PLACEHOLDER: "Listino Serramenti Legno non ancora caricato — in arrivo",
-  SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER: "Listino Serramenti Legno-Alluminio non ancora caricato — in arrivo",
+  SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
+  SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
 };
 
 export function notaInArrivo(tipologia: string): string | null {

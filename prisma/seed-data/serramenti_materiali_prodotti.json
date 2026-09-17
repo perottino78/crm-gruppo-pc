@@ -1,7 +1,72 @@
 [
-  { "tipologia": "SERRAMENTI_PVCALLUMINIO_PLACEHOLDER", "colore": "PLACEHOLDER", "altezzaMm": 0, "larghezzaMm": 0, "prezzoBase": 0 },
-  { "tipologia": "SERRAMENTI_ALLUMINIO_PLACEHOLDER", "colore": "PLACEHOLDER", "altezzaMm": 0, "larghezzaMm": 0, "prezzoBase": 0 },
-  { "tipologia": "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER", "colore": "PLACEHOLDER", "altezzaMm": 0, "larghezzaMm": 0, "prezzoBase": 0 },
-  { "tipologia": "SERRAMENTI_LEGNO_PLACEHOLDER", "colore": "PLACEHOLDER", "altezzaMm": 0, "larghezzaMm": 0, "prezzoBase": 0 },
-  { "tipologia": "SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER", "colore": "PLACEHOLDER", "altezzaMm": 0, "larghezzaMm": 0, "prezzoBase": 0 }
+  {
+    "tipologia": "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_LEGNO_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVC_OPTIMA_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVC_PLASMA30_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVC_FENIX_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  }
 ]
