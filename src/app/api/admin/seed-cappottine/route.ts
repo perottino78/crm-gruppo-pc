@@ -252,21 +252,6 @@ export async function GET(req: NextRequest) {
   const modelliCount = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
   const modelliFlatResidui = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: ["BARLETTA", "CUPOLA"] } } });
   const optionaliCount = await prisma.optional.count({ where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } } });
-  const optionaliByListino = await prisma.optional.groupBy({
-    by: ["listino"],
-    where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
-    _count: { _all: true },
-  });
 
-  const debugListino = req.nextUrl.searchParams.get("debugListino");
-  let debugRows: unknown = undefined;
-  if (debugListino) {
-    debugRows = await prisma.optional.findMany({
-      where: { brandId: brand.id, listino: debugListino },
-      select: { id: true, categoria: true, nome: true, valore: true, tipoPrezzo: true, unita: true, note: true, gruppiApplicabili: true },
-      orderBy: [{ categoria: "asc" }, { nome: "asc" }],
-    });
-  }
-
-  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount, optionaliByListino, debugRows });
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount });
 }
