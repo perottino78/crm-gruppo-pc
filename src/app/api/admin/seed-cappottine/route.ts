@@ -196,6 +196,32 @@ export async function POST(req: NextRequest) {
       await prisma.optional.deleteMany({ where: { id: { in: optionaliDaRimuovere.map((o) => o.id) } } });
     }
 
+    // Dedup: rimuove righe duplicate esatte (stessa categoria+nome+listino) che
+    // possono essersi create per race-condition tra chiamate concorrenti al seed
+    // (es. un retry lanciato mentre l'invocazione precedente era ancora in corso
+    // lato server dopo un timeout lato client). Idempotente: mantiene una sola
+    // riga per chiave (la piu' vecchia), elimina le altre.
+    const tuttiOptionali = await prisma.optional.findMany({
+      where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
+      orderBy: { id: "asc" },
+    });
+    const gruppiPerChiave = new Map<string, typeof tuttiOptionali>();
+    for (const o of tuttiOptionali) {
+      const k = keyOptional(o);
+      const arr = gruppiPerChiave.get(k);
+      if (arr) arr.push(o);
+      else gruppiPerChiave.set(k, [o]);
+    }
+    const idDuplicatiDaRimuovere: string[] = [];
+    for (const arr of gruppiPerChiave.values()) {
+      if (arr.length > 1) {
+        for (const dup of arr.slice(1)) idDuplicatiDaRimuovere.push(dup.id);
+      }
+    }
+    if (idDuplicatiDaRimuovere.length > 0) {
+      await prisma.optional.deleteMany({ where: { id: { in: idDuplicatiDaRimuovere } } });
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
@@ -208,6 +234,7 @@ export async function POST(req: NextRequest) {
       optAggiornati,
       optInvariati,
       optRimossi: optionaliDaRimuovere.length,
+      optDuplicatiRimossi: idDuplicatiDaRimuovere.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
