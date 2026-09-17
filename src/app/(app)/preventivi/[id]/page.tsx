@@ -54,7 +54,7 @@ export default async function PreventivoPage({
   });
   if (!preventivo) notFound();
 
-  const [optionaliDisponibili, prodottiTrovati, tipologieMisure, modelliBrand] = await Promise.all([
+  const [optionaliDisponibili, prodottiTrovati, tipologieMisure, modelliBrand, blindatiMisure] = await Promise.all([
     prisma.optional.findMany({ where: { brandId: preventivo.brandId }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
     q
       ? prisma.prodotto.findMany({
@@ -77,9 +77,31 @@ export default async function PreventivoPage({
       _max: { larghezzaMm: true, altezzaMm: true },
     }),
     prisma.modelloProdotto.findMany({ where: { brandId: preventivo.brandId } }),
+    // Portoncini Blindati: 2 righe "corner" (50x180 e 110x250, presenti su tutte e 4 le
+    // tipologie) esistono solo per definire il range massimo producibile a listino, ma
+    // NON sono misure standard vere e proprie (fuori da quelle il prezzo resta invariato
+    // solo per convenzione tecnica, non perche' siano combinazioni realmente offerte dal
+    // fornitore). Le 6 vere misure standard (senza sovrapprezzo "Fuori Misura") vanno
+    // mostrate esplicitamente, altrimenti il banner min-max risulta fuorviante.
+    prisma.prodotto.findMany({
+      where: { brandId: preventivo.brandId, tipologia: { startsWith: "BLINDATI_" } },
+      select: { tipologia: true, larghezzaMm: true, altezzaMm: true },
+      orderBy: [{ tipologia: "asc" }, { larghezzaMm: "asc" }, { altezzaMm: "asc" }],
+    }),
   ]);
 
   const modelloBrandMap = new Map(modelliBrand.map((m) => [m.tipologia, m]));
+
+  // Coordinate "corner" comuni a tutte le tipologie Blindati (50x180 e 110x250): servono
+  // solo a delimitare il range massimo mostrato in banner, non sono misure standard reali.
+  const angoliBlindati = new Set(["50x180", "110x250"]);
+  const misureStandardBlindatiMap = new Map<string, { larghezza: number; altezza: number }[]>();
+  for (const p of blindatiMisure) {
+    const chiave = `${p.larghezzaMm}x${p.altezzaMm}`;
+    if (angoliBlindati.has(chiave)) continue;
+    if (!misureStandardBlindatiMap.has(p.tipologia)) misureStandardBlindatiMap.set(p.tipologia, []);
+    misureStandardBlindatiMap.get(p.tipologia)!.push({ larghezza: p.larghezzaMm, altezza: p.altezzaMm });
+  }
   const tipologieSenzaMisura = tipologieMisure
     .filter((t) => !haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0))
     .map((t) => t.tipologia);
@@ -135,6 +157,7 @@ export default async function PreventivoPage({
                 larghezzaMax: t._max.larghezzaMm ?? 0,
                 altezzaMin: t._min.altezzaMm ?? 0,
                 altezzaMax: t._max.altezzaMm ?? 0,
+                standard: misureStandardBlindatiMap.get(tip),
               }
             : undefined,
         // Zanzariere P&C: assi ante/variante → rete → colore, per la selezione a 3 tendine

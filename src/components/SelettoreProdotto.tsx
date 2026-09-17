@@ -10,7 +10,16 @@ export type NodoTipologia = {
   haMisura: boolean;
   varianti?: { id: string; colore: string; prezzoBase: number }[];
   // range di misure effettivamente a listino (solo per i modelli con haMisura=true)
-  misure?: { larghezzaMin: number; larghezzaMax: number; altezzaMin: number; altezzaMax: number };
+  misure?: {
+    larghezzaMin: number;
+    larghezzaMax: number;
+    altezzaMin: number;
+    altezzaMax: number;
+    // Solo Portoncini Blindati: le combinazioni larghezza×altezza realmente "standard"
+    // (nessun sovrapprezzo Fuori Misura), distinte dal range min-max che include anche
+    // 2 righe "corner" usate solo per delimitare la misura massima producibile.
+    standard?: { larghezza: number; altezza: number }[];
+  };
   // Zanzariere P&C: assi ante/variante → rete → colore, per mostrare 3 tendine a cascata
   // invece della lista piatta (18-54 voci per famiglia) quando presente su tutte le
   // tipologie di un sottogruppo.
@@ -240,12 +249,14 @@ function SelettoreCascataModelloAnte({
   );
 }
 
-// Tendine a cascata per i Portoncini Blindati: 1) classe (3/4), 2) numero ante
-// (1 anta/2 ante), 3) variante due ante (Standard asimmetriche/Simmetriche) — la
-// terza tendina compare solo quando la combinazione classe+ante scelta ha davvero
+// Tendine a cascata per i Portoncini Blindati: 1) numero ante (1 anta/2 ante),
+// 2) classe (3/4), 3) variante due ante (Standard asimmetriche/Simmetriche) — la
+// terza tendina compare solo quando la combinazione ante+classe scelta ha davvero
 // piu' di una variante a listino (oggi solo Classe 3 a 2 ante: la Classe 4 esiste
-// solo ad anta singola). Sostituisce i 2 sottogruppi piatti BLINDATI_SINGOLA/
-// BLINDATI_DUEANTE usati in precedenza.
+// solo ad anta singola). N. ante e' la prima scelta (invece della classe) perche'
+// e' la decisione architettonica di partenza per il commerciale — la classe di
+// sicurezza si sceglie dopo, a parita' di apertura. Sostituisce i 2 sottogruppi
+// piatti BLINDATI_SINGOLA/BLINDATI_DUEANTE usati in precedenza.
 function SelettoreCascataBlindati({
   tipologie,
   selezionato,
@@ -257,46 +268,46 @@ function SelettoreCascataBlindati({
   onScegli: (nodo: NodoTipologia) => void;
   onReset: () => void;
 }) {
-  const [classe, setClasse] = useState("");
   const [nAnte, setNAnte] = useState("");
+  const [classe, setClasse] = useState("");
   const [variante, setVariante] = useState("");
 
-  const opzioniClasse = useMemo(() => {
+  const opzioniNAnte = useMemo(() => {
     const mappa = new Map<string, string>();
-    for (const t of tipologie) if (t.assiBlindati) mappa.set(t.assiBlindati.classe.valore, t.assiBlindati.classe.label);
+    for (const t of tipologie) if (t.assiBlindati) mappa.set(t.assiBlindati.nAnte.valore, t.assiBlindati.nAnte.label);
     return [...mappa.entries()];
   }, [tipologie]);
 
-  const filtratePerClasse = useMemo(
-    () => tipologie.filter((t) => t.assiBlindati?.classe.valore === classe),
-    [tipologie, classe]
-  );
-  const opzioniNAnte = useMemo(() => {
-    const mappa = new Map<string, string>();
-    for (const t of filtratePerClasse) if (t.assiBlindati) mappa.set(t.assiBlindati.nAnte.valore, t.assiBlindati.nAnte.label);
-    return [...mappa.entries()];
-  }, [filtratePerClasse]);
-
   const filtratePerNAnte = useMemo(
-    () => filtratePerClasse.filter((t) => t.assiBlindati?.nAnte.valore === nAnte),
-    [filtratePerClasse, nAnte]
+    () => tipologie.filter((t) => t.assiBlindati?.nAnte.valore === nAnte),
+    [tipologie, nAnte]
   );
-  const richiedeVariante = useMemo(
-    () => filtratePerNAnte.some((t) => t.assiBlindati?.variante),
-    [filtratePerNAnte]
-  );
-  const opzioniVariante = useMemo(() => {
+  const opzioniClasse = useMemo(() => {
     const mappa = new Map<string, string>();
-    for (const t of filtratePerNAnte) if (t.assiBlindati?.variante) mappa.set(t.assiBlindati.variante.valore, t.assiBlindati.variante.label);
+    for (const t of filtratePerNAnte) if (t.assiBlindati) mappa.set(t.assiBlindati.classe.valore, t.assiBlindati.classe.label);
     return [...mappa.entries()];
   }, [filtratePerNAnte]);
 
+  const filtratePerClasse = useMemo(
+    () => filtratePerNAnte.filter((t) => t.assiBlindati?.classe.valore === classe),
+    [filtratePerNAnte, classe]
+  );
+  const richiedeVariante = useMemo(
+    () => filtratePerClasse.some((t) => t.assiBlindati?.variante),
+    [filtratePerClasse]
+  );
+  const opzioniVariante = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerClasse) if (t.assiBlindati?.variante) mappa.set(t.assiBlindati.variante.valore, t.assiBlindati.variante.label);
+    return [...mappa.entries()];
+  }, [filtratePerClasse]);
+
   const trovato = useMemo(() => {
     if (richiedeVariante) {
-      return filtratePerNAnte.find((t) => t.assiBlindati?.variante?.valore === variante) ?? null;
+      return filtratePerClasse.find((t) => t.assiBlindati?.variante?.valore === variante) ?? null;
     }
-    return filtratePerNAnte.length === 1 ? filtratePerNAnte[0] : null;
-  }, [filtratePerNAnte, richiedeVariante, variante]);
+    return filtratePerClasse.length === 1 ? filtratePerClasse[0] : null;
+  }, [filtratePerClasse, richiedeVariante, variante]);
 
   useEffect(() => {
     if (trovato) {
@@ -310,41 +321,41 @@ function SelettoreCascataBlindati({
   return (
     <div className="flex flex-col gap-2 px-2 py-2">
       <div className="flex flex-col gap-1">
-        <label className="text-[11px] text-neutral-600">1. Classe</label>
+        <label className="text-[11px] text-neutral-600">1. Numero ante</label>
         <select
-          value={classe}
+          value={nAnte}
           onChange={(e) => {
-            setClasse(e.target.value);
-            setNAnte("");
+            setNAnte(e.target.value);
+            setClasse("");
             setVariante("");
           }}
           className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
         >
           <option value="">— seleziona —</option>
-          {opzioniClasse.map(([v, l]) => (
+          {opzioniNAnte.map(([v, l]) => (
             <option key={v} value={v}>{l}</option>
           ))}
         </select>
       </div>
-      {classe && (
+      {nAnte && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">2. Numero ante</label>
+          <label className="text-[11px] text-neutral-600">2. Classe</label>
           <select
-            value={nAnte}
+            value={classe}
             onChange={(e) => {
-              setNAnte(e.target.value);
+              setClasse(e.target.value);
               setVariante("");
             }}
             className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
           >
             <option value="">— seleziona —</option>
-            {opzioniNAnte.map(([v, l]) => (
+            {opzioniClasse.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
         </div>
       )}
-      {classe && nAnte && richiedeVariante && (
+      {nAnte && classe && richiedeVariante && (
         <div className="flex flex-col gap-1">
           <label className="text-[11px] text-neutral-600">3. Variante</label>
           <select
@@ -1031,6 +1042,33 @@ export default function SelettoreProdotto({
                     {unitaMisura(scelto.value)}
                   </span>
                 </p>
+              )}
+              {scelto.misure?.standard && scelto.misure.standard.length > 0 && (
+                <div className="mb-2">
+                  <p className="text-[11px] text-neutral-600 mb-1">
+                    Misure standard (nessun sovrapprezzo) — clicca per compilare i campi:
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {scelto.misure.standard.map((m) => (
+                      <button
+                        key={`${m.larghezza}x${m.altezza}`}
+                        type="button"
+                        onClick={() => {
+                          setLarghezzaVal(String(m.larghezza));
+                          setAltezzaVal(String(m.altezza));
+                          if (erroreMisura) setErroreMisura(null);
+                        }}
+                        className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                          larghezzaVal === String(m.larghezza) && altezzaVal === String(m.altezza)
+                            ? "bg-neutral-800 text-white border-neutral-800"
+                            : "bg-white text-neutral-700 border-neutral-300 hover:border-neutral-500"
+                        }`}
+                      >
+                        {m.larghezza}×{m.altezza}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               )}
               <form action={azionePerMisura} onSubmit={alSubmitMisura} className="flex flex-wrap items-end gap-2">
                 <input type="hidden" name="preventivoId" value={preventivoId} />
