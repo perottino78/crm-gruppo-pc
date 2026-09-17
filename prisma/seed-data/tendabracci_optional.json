@@ -1,1724 +1,5266 @@
 [
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 20,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 30,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 20,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 30,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 18,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 8,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 30,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 40,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 8,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 30,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 40,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 5,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 20,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tessuto degradé",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 3,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 368,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 738,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 918,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 1402,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": "Prezzo base per la maggior parte delle combinazioni sporgenza/larghezza; per le misure estreme (sporgenza massima o larghezza minima/massima) il prezzo motore può variare, verificare sul listino cartaceo.",
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Arganello Speedy con molla",
-    "tipoPrezzo": "FISSO",
-    "valore": 250,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Arganello Speedy con molla",
-    "tipoPrezzo": "FISSO",
-    "valore": 250,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Arganello Speedy con molla",
-    "tipoPrezzo": "FISSO",
-    "valore": 250,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Arganello Speedy con molla",
-    "tipoPrezzo": "FISSO",
-    "valore": 250,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"B\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 168,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"B\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 168,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"B\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 168,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"B\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 168,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBASMART",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"B\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 168,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_AMERICA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione tipo \"C\"",
-    "tipoPrezzo": "FISSO",
-    "valore": 180,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Barra quadra in alluminio",
-    "tipoPrezzo": "FISSO",
-    "valore": 60,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Terminale a cassonetto",
-    "tipoPrezzo": "FISSO",
-    "valore": 296,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Terminale a cassonetto",
-    "tipoPrezzo": "FISSO",
-    "valore": 296,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Terminale a cassonetto",
-    "tipoPrezzo": "FISSO",
-    "valore": 296,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Attacco braccio a cremagliera",
-    "tipoPrezzo": "FISSO",
-    "valore": 348,
-    "unita": "coppia",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_BILBAO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Attacco braccio a cremagliera",
-    "tipoPrezzo": "FISSO",
-    "valore": 348,
-    "unita": "coppia",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 940.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1412.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1880.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 972.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1458.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1942.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1004.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1504.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2004.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1066.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1600.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2128.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1094.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1640.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2184.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1158.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1738.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2314.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1214.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1824.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2428.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 940.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1412.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 150cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1880.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 972.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1458.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 175cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1942.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1004.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1504.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 200cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2004.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1066.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1600.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 225cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2128.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1094.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1640.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 250cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2184.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1158.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1738.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 300cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2314.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 2 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1214.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 3 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 1824.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Bracci Led strip",
-    "nome": "Sporgenza 350cm - 4 bracci (alimentatore/dimmer/telecomando inclusi)",
-    "tipoPrezzo": "FISSO",
-    "valore": 2428.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_SAMBA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 150cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 396.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 150cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 868.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 175cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 404.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 175cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 890.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 200cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 416.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 200cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 916.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 225cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 424.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 225cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 958.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 250cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 432.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 250cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 980.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 300cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 480.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 300cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 1060.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 350cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 496.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo Led sporgenza 350cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 1104.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_MADRID",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 300cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 1218.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 350cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 1286.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  },
-  {
-    "categoria": "Braccio aggiuntivo",
-    "nome": "Braccio aggiuntivo sporgenza 400cm",
-    "tipoPrezzo": "FISSO",
-    "valore": 1338.0,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDABRACCI_PANAMA",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE A BRACCI SENZA CASSONETTO"
-    ]
-  }
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 430.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 886.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 2x80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 682.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1232.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 728.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1252.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 2x80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 924.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 1446.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 320.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 2x80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2424.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 772.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1348.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 814.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 2x80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2424.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 652.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 926.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 2x80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2736.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 644.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1152.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 694.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1130.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 870.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1320.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 2x80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 3524.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1234.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1868.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1326.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1256.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1604.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 870.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1320.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 2x50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1040.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1120.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1258.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1234.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1868.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1326.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 50Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1256.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 80Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1604.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 926.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 2x50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 576.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 608.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 644.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1152.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 694.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1130.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 430.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 886.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 2x50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 636.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 658.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 682.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1232.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 728.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1252.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 2x50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 924.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 80Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 1446.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 320.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 2x50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 654.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 712.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 772.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1348.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 814.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 80Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 2x50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 652.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1040.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1120.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 654.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 712.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 636.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 658.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 576.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 608.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1040.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1120.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 1258.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 40Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 576.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 608.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 644.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 694.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 430.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 636.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 658.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 682.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 728.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 50Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 924.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 320.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 654.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 712.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - meccanico con manovra di soccorso",
+  "tipoPrezzo": "FISSO",
+  "valore": 772.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 814.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 50Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 652.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 30Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini 40Nm - elettronico WiFi",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 30Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice 40Nm - elettronico bidirezionale",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu 40Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - meccanico",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 20Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy 30Nm - IO elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Volant a rullo",
+  "tipoPrezzo": "FISSO",
+  "valore": 356.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Arganello Speedy con molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 306.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Supporto aggiuntivo",
+  "tipoPrezzo": "FISSO",
+  "valore": 90.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Barra quadra in alluminio",
+  "tipoPrezzo": "FISSO",
+  "valore": 78.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 248.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Volant a rullo",
+  "tipoPrezzo": "FISSO",
+  "valore": 356.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Attacco braccio a cremagliera",
+  "tipoPrezzo": "FISSO",
+  "valore": 428.0,
+  "unita": "coppia",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Arganello Speedy con molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 306.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Supporto per braccio incrociato",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 248.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Volant a rullo",
+  "tipoPrezzo": "FISSO",
+  "valore": 356.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Attacco braccio a cremagliera",
+  "tipoPrezzo": "FISSO",
+  "valore": 428.0,
+  "unita": "coppia",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Arganello Speedy con molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 306.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Supporto per braccio incrociato",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 248.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Arganello Speedy con molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 306.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 248.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 248.0,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1484.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1566.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1628.0,
+  "unita": null,
+  "sporgenzaMm": 400,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 150cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 484.0,
+  "unita": null,
+  "sporgenzaMm": 150,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 175cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 496.0,
+  "unita": null,
+  "sporgenzaMm": 175,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 200cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 508.0,
+  "unita": null,
+  "sporgenzaMm": 200,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 225cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 518.0,
+  "unita": null,
+  "sporgenzaMm": 225,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 250cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "sporgenzaMm": 250,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Braccio aggiuntivo",
+  "nome": "Aggiunta braccio (sporgenza 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 606.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": "Il motore viene automaticamente adeguato alla potenza superiore richiesta.",
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 150cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1144.0,
+  "unita": null,
+  "sporgenzaMm": 150,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 150cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "sporgenzaMm": 150,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 150cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2286.0,
+  "unita": null,
+  "sporgenzaMm": 150,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 175cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1186.0,
+  "unita": null,
+  "sporgenzaMm": 175,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 175cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1774.0,
+  "unita": null,
+  "sporgenzaMm": 175,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 175cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2362.0,
+  "unita": null,
+  "sporgenzaMm": 175,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 200cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1224.0,
+  "unita": null,
+  "sporgenzaMm": 200,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 200cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1830.0,
+  "unita": null,
+  "sporgenzaMm": 200,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 200cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2438.0,
+  "unita": null,
+  "sporgenzaMm": 200,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 225cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1298.0,
+  "unita": null,
+  "sporgenzaMm": 225,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 225cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1946.0,
+  "unita": null,
+  "sporgenzaMm": 225,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 225cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2588.0,
+  "unita": null,
+  "sporgenzaMm": 225,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 250cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1332.0,
+  "unita": null,
+  "sporgenzaMm": 250,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 250cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1996.0,
+  "unita": null,
+  "sporgenzaMm": 250,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 250cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2656.0,
+  "unita": null,
+  "sporgenzaMm": 250,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 300cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1410.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 300cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2114.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 300cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2812.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 350cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1478.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 350cm - 3 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2220.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 350cm - 4 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2950.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 150cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1144.0,
+  "unita": null,
+  "sporgenzaMm": 150,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 175cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1186.0,
+  "unita": null,
+  "sporgenzaMm": 175,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 200cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1224.0,
+  "unita": null,
+  "sporgenzaMm": 200,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 225cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1298.0,
+  "unita": null,
+  "sporgenzaMm": 225,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 250cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1332.0,
+  "unita": null,
+  "sporgenzaMm": 250,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 300cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1410.0,
+  "unita": null,
+  "sporgenzaMm": 300,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Bracci Led strip",
+  "nome": "Sporgenza 350cm - 2 bracci (alimentatore/dimmer inclusi)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1478.0,
+  "unita": null,
+  "sporgenzaMm": 350,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_PANAMA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL DB703 Speciale",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7016 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 8017 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_MADRID",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7016 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_BILBAO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_AMERICA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7016 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBA",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Lucido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7035 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 1013 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 7016 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Colore struttura",
+  "nome": "RAL 9010 Soft",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "TENDABRACCI_SAMBASMART",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Cherubini Windtec",
+  "tipoPrezzo": "FISSO",
+  "valore": 394.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Cherubini Mistral",
+  "tipoPrezzo": "FISSO",
+  "valore": 502.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Nice Volo",
+  "tipoPrezzo": "FISSO",
+  "valore": 156.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Nice Nemo vibe",
+  "tipoPrezzo": "FISSO",
+  "valore": 464.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Simu Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Simu Windy",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Somfy Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Somfy Eolis 3D RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 572.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Somfy Eolis IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 618.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Somfy Eolis 3D IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 564.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Sensore vento",
+  "nome": "Gaposa Sensore vento",
+  "tipoPrezzo": "FISSO",
+  "valore": 458.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Cherubini Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Cherubini Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Nice Dom\u00ec P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Nice Dom\u00ec P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Simu HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Simu HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Somfy Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Somfy Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Somfy Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Somfy Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Gaposa 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Telecomando",
+  "nome": "Gaposa 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit solare Gaposa (motore + pannello + batteria, max 50 Nm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": null,
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE A BRACCI SENZA CASSONETTO"
+  ]
+ }
 ]

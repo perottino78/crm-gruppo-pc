@@ -99,6 +99,7 @@ export async function POST(req: NextRequest) {
       where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
+    const chiaviNuove = new Set(optionaliNuovi.map(keyOptional));
 
     let optCreati = 0;
     let optAggiornati = 0;
@@ -138,17 +139,49 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove i prodotti/optional del vecchio listino non più presenti nel nuovo catalogo 2026
+    const prodottiDaRimuovere = prodottiEsistenti.filter((p) => !prodottiNuovi.some((n) => keyProdotto(n) === keyProdotto(p)));
+    if (prodottiDaRimuovere.length > 0) {
+      await prisma.prodotto.deleteMany({ where: { id: { in: prodottiDaRimuovere.map((p) => p.id) } } });
+    }
+    const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuove.has(keyOptional(o)));
+    if (optionaliDaRimuovere.length > 0) {
+      await prisma.optional.deleteMany({ where: { id: { in: optionaliDaRimuovere.map((o) => o.id) } } });
+    }
+
     return NextResponse.json({
       ok: true,
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi: prodottiDaRimuovere.length,
       modelliAggiornati: modelli.length,
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi: optionaliDaRimuovere.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
+}
+
+export async function GET(req: NextRequest) {
+  const key = req.headers.get("x-seed-key");
+  if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
+  if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
+
+  const prodottiCount = await prisma.prodotto.count({
+    where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+  });
+  const modelliCount = await prisma.modelloProdotto.count({
+    where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+  });
+  const optionaliCount = await prisma.optional.count({
+    where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+  });
+
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
 }
