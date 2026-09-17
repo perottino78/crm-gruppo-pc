@@ -231,5 +231,15 @@ export async function GET(req: NextRequest) {
     _count: { _all: true },
   });
 
-  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount, optionaliByListino });
+  const debugListino = req.nextUrl.searchParams.get("debugListino");
+  let debugRows: unknown = undefined;
+  if (debugListino) {
+    debugRows = await prisma.optional.findMany({
+      where: { brandId: brand.id, listino: debugListino },
+      select: { id: true, categoria: true, nome: true, valore: true, tipoPrezzo: true, unita: true, note: true, gruppiApplicabili: true },
+      orderBy: [{ categoria: "asc" }, { nome: "asc" }],
+    });
+  }
+
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount, optionaliByListino, debugRows });
 }
