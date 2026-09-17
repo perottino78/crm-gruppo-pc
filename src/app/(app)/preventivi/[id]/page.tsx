@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneBlindati, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -24,6 +24,7 @@ import {
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
+import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -146,6 +147,9 @@ export default async function PreventivoPage({
         // a cascata invece della lista piatta per sottogruppo (13 gruppi, 1-3 voci
         // ciascuno).
         assiKopen: assiSelezioneKopen(tip) ?? undefined,
+        // Blindati: assi classe → numero ante → variante due ante, per la selezione
+        // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
+        assiBlindati: assiSelezioneBlindati(tip) ?? undefined,
         // Minibox: assi misura cassonetto → tipologia tapparella, per la selezione a
         // 2 tendine a cascata invece della lista piatta (fino a 69 voci per misura).
         assiMinibox: assiSelezioneMinibox(tip) ?? undefined,
@@ -526,19 +530,12 @@ export default async function PreventivoPage({
                         </form>
                       )}
                       {pannelliEColori.length > 0 && (
-                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
-                          <input type="hidden" name="rigaId" value={r.id} />
-                          <input type="hidden" name="preventivoId" value={preventivo.id} />
-                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
-                            {pannelliEColori.map((o) => (
-                              <option key={o.id} value={o.id}>
-                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
-                              </option>
-                            ))}
-                          </select>
-                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
-                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ pannello/colore</button>
-                        </form>
+                        <SelettorePannelliBlindati
+                          optionali={pannelliEColori}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
                       )}
                     </div>
                   );

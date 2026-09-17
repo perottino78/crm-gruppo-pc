@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiMinibox, type AssiTapparelle } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -21,6 +21,9 @@ export type NodoTipologia = {
   // Kopen: assi linea -> combinazione materiali, per mostrare 2 tendine a cascata
   // invece della lista piatta per sottogruppo.
   assiKopen?: AssiKopen;
+  // Blindati: assi classe -> numero ante -> variante due ante, per mostrare 3
+  // tendine a cascata invece della lista piatta divisa per sottogruppo.
+  assiBlindati?: AssiBlindati;
   // Minibox: assi misura cassonetto → tipologia tapparella, per mostrare 2 tendine
   // a cascata invece della lista piatta (fino a 69 voci per misura).
   assiMinibox?: AssiMinibox;
@@ -225,6 +228,132 @@ function SelettoreCascataModelloAnte({
           >
             <option value="">— seleziona —</option>
             {opzioniAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata per i Portoncini Blindati: 1) classe (3/4), 2) numero ante
+// (1 anta/2 ante), 3) variante due ante (Standard asimmetriche/Simmetriche) — la
+// terza tendina compare solo quando la combinazione classe+ante scelta ha davvero
+// piu' di una variante a listino (oggi solo Classe 3 a 2 ante: la Classe 4 esiste
+// solo ad anta singola). Sostituisce i 2 sottogruppi piatti BLINDATI_SINGOLA/
+// BLINDATI_DUEANTE usati in precedenza.
+function SelettoreCascataBlindati({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [classe, setClasse] = useState("");
+  const [nAnte, setNAnte] = useState("");
+  const [variante, setVariante] = useState("");
+
+  const opzioniClasse = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiBlindati) mappa.set(t.assiBlindati.classe.valore, t.assiBlindati.classe.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerClasse = useMemo(
+    () => tipologie.filter((t) => t.assiBlindati?.classe.valore === classe),
+    [tipologie, classe]
+  );
+  const opzioniNAnte = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerClasse) if (t.assiBlindati) mappa.set(t.assiBlindati.nAnte.valore, t.assiBlindati.nAnte.label);
+    return [...mappa.entries()];
+  }, [filtratePerClasse]);
+
+  const filtratePerNAnte = useMemo(
+    () => filtratePerClasse.filter((t) => t.assiBlindati?.nAnte.valore === nAnte),
+    [filtratePerClasse, nAnte]
+  );
+  const richiedeVariante = useMemo(
+    () => filtratePerNAnte.some((t) => t.assiBlindati?.variante),
+    [filtratePerNAnte]
+  );
+  const opzioniVariante = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerNAnte) if (t.assiBlindati?.variante) mappa.set(t.assiBlindati.variante.valore, t.assiBlindati.variante.label);
+    return [...mappa.entries()];
+  }, [filtratePerNAnte]);
+
+  const trovato = useMemo(() => {
+    if (richiedeVariante) {
+      return filtratePerNAnte.find((t) => t.assiBlindati?.variante?.valore === variante) ?? null;
+    }
+    return filtratePerNAnte.length === 1 ? filtratePerNAnte[0] : null;
+  }, [filtratePerNAnte, richiedeVariante, variante]);
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Classe</label>
+        <select
+          value={classe}
+          onChange={(e) => {
+            setClasse(e.target.value);
+            setNAnte("");
+            setVariante("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniClasse.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {classe && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Numero ante</label>
+          <select
+            value={nAnte}
+            onChange={(e) => {
+              setNAnte(e.target.value);
+              setVariante("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniNAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {classe && nAnte && richiedeVariante && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Variante</label>
+          <select
+            value={variante}
+            onChange={(e) => setVariante(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniVariante.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
@@ -754,6 +883,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
                                             <SelettoreCascataKopen
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiBlindati) ? (
+                                            <SelettoreCascataBlindati
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

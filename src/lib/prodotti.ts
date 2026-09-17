@@ -148,8 +148,10 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // fianco luce, vetro, pannelli semplici sono identici tra le due classi); le due varianti
   // a due ante hanno invece tabelle proprie (sovrapprezzi "per ogni anta", pannelli con
   // prezzo differenziato per larghezza anta principale/antino).
-  if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") return "BLINDATI_SINGOLA";
-  if (tipologia.startsWith("BLINDATI_CL3_DUEANTE")) return "BLINDATI_DUEANTE";
+  // Un solo sottogruppo: la scelta reale (classe / n. ante / variante due ante) è
+  // ora gestita dalla cascata a 3 tendine (vedi assiSelezioneBlindati), non più da
+  // sottogruppi separati per classe/n.ante.
+  if (tipologia.startsWith("BLINDATI_")) return "Portoncini Blindati";
   // Zanzariere P&C: un "listino" per famiglia (Antarex/Alba/Pratik/Libra/Scorri), così gli
   // optional/extra propri di ciascuna famiglia (es. Telaio chiuso solo su Antarex, Doppio
   // traverso per Pratik solo su Pratik) restano scoperti dalle famiglie che non li prevedono,
@@ -851,6 +853,40 @@ export function assiSelezioneKopen(tipologia: string): AssiKopen | null {
     linea: { valore: codice, label: lineaLabel },
     combinazione: { valore: tipologia, label: combinazioneLabel },
   };
+}
+
+// Blindati: decompone le 4 tipologie reali (BLINDATI_CL3, BLINDATI_CL4,
+// BLINDATI_CL3_DUEANTE_STD, BLINDATI_CL3_DUEANTE_SIMMETRICA) in 3 assi — 1) classe
+// (3/4), 2) numero ante (1 anta/2 ante), 3) variante due ante (Standard asimmetriche
+// vs Simmetriche, solo per Classe 3 a 2 ante: la Classe 4 non esiste a 2 ante nel
+// listino fornitore) — cosi' il selettore mostra 3 tendine a cascata invece della
+// lista piatta divisa per sottogruppo (BLINDATI_SINGOLA/BLINDATI_DUEANTE) usata in
+// precedenza. La terza tendina compare solo quando la combinazione classe+ante
+// scelta ha davvero piu' di una variante a listino.
+export type AssiBlindati = { classe: AsseSelezione; nAnte: AsseSelezione; variante?: AsseSelezione };
+
+export function assiSelezioneBlindati(tipologia: string): AssiBlindati | null {
+  if (tipologia === "BLINDATI_CL3") {
+    return { classe: { valore: "CL3", label: "Classe 3" }, nAnte: { valore: "1ANTA", label: "1 Anta" } };
+  }
+  if (tipologia === "BLINDATI_CL4") {
+    return { classe: { valore: "CL4", label: "Classe 4" }, nAnte: { valore: "1ANTA", label: "1 Anta" } };
+  }
+  if (tipologia === "BLINDATI_CL3_DUEANTE_STD") {
+    return {
+      classe: { valore: "CL3", label: "Classe 3" },
+      nAnte: { valore: "2ANTE", label: "2 Ante" },
+      variante: { valore: "STD", label: "Standard (asimmetriche, es. 80+30)" },
+    };
+  }
+  if (tipologia === "BLINDATI_CL3_DUEANTE_SIMMETRICA") {
+    return {
+      classe: { valore: "CL3", label: "Classe 3" },
+      nAnte: { valore: "2ANTE", label: "2 Ante" },
+      variante: { valore: "SIMMETRICA", label: "Simmetriche (es. 60+60)" },
+    };
+  }
+  return null;
 }
 
 // Minibox: decompone una tipologia TAPPARELLE_MINIBOX<misura>_<resto> nei 2 assi
