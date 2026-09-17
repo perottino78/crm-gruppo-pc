@@ -179,9 +179,15 @@ export async function GET(req: NextRequest) {
   const modelliCount = await prisma.modelloProdotto.count({
     where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
   });
+  const modelliTipologie = (
+    await prisma.modelloProdotto.findMany({
+      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      select: { tipologia: true },
+    })
+  ).map((m) => m.tipologia);
   const optionaliCount = await prisma.optional.count({
     where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
   });
 
-  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, optionaliCount });
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliTipologie, optionaliCount });
 }
