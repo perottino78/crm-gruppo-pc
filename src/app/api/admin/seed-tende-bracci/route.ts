@@ -25,7 +25,17 @@ type OptionalRow = {
   gruppiApplicabili: string[];
 };
 
-const TIPOLOGIE_PREFIXES = ["TENDABRACCI_"];
+// NOTA: usare match esatti (non startsWith) perché Prisma/Postgres compila startsWith in
+// LIKE 'prefix%' senza escape del carattere '_' (che in SQL LIKE è un wildcard "1 carattere qualsiasi").
+// "TENDABRACCI_" come prefisso quindi intercetta erroneamente anche "TENDABRACCICASS_..." (sezione con cassonetto).
+const TIPOLOGIE_ESATTE = [
+  "TENDABRACCI_PANAMA",
+  "TENDABRACCI_MADRID",
+  "TENDABRACCI_BILBAO",
+  "TENDABRACCI_AMERICA",
+  "TENDABRACCI_SAMBA",
+  "TENDABRACCI_SAMBASMART",
+];
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
@@ -40,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
-      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_ESATTE } },
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
@@ -174,14 +184,14 @@ export async function GET(req: NextRequest) {
   if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
 
   const prodottiCount = await prisma.prodotto.count({
-    where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+    where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_ESATTE } },
   });
   const modelliCount = await prisma.modelloProdotto.count({
-    where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+    where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_ESATTE } },
   });
   const modelliTipologie = (
     await prisma.modelloProdotto.findMany({
-      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_ESATTE } },
       select: { tipologia: true },
     })
   ).map((m) => m.tipologia);
