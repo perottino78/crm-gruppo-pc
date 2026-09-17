@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
-const GRUPPO = "CAPPOTTINE FISSE E MOBILI";
 
 type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number; prezzoBase: number };
 type ModelloRow = { tipologia: string; descrizioneTecnica: string; famiglia: string; gruppo: string; immagineUrl?: string | null };
@@ -25,12 +24,36 @@ type OptionalRow = {
   gruppiApplicabili: string[];
 };
 
-const TIPOLOGIE_PREFIXES = [
-  "STANDARD35_", "GRADINI35", "PROLUNGATA35",
-  "STANDARD50_", "GRADINI50", "PROLUNGATA50",
-  "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003",
-  "BARLETTA", "CUPOLA",
+// Tipologie gestite da questa route (match esatto, mai prefix/startsWith:
+// Prisma compila startsWith in LIKE 'prefix%' dove "_" e' wildcard SQL per
+// un singolo carattere, quindi un prefix con underscore puo' fare match
+// involontari - vedi bug gia' corretto in seed-tende-bracci).
+const TIPOLOGIE_GESTITE = [
+  "BARLETTA35_4P3S", "BARLETTA35_5P4S", "BARLETTA35_6P5S",
+  "BARLETTA50_4P3S", "BARLETTA50_5P4S", "BARLETTA50_6P5S",
+  "BETA1002", "BETA1003",
+  "CUPOLA35_COSTANTE_4P3S", "CUPOLA35_COSTANTE_5P4S", "CUPOLA35_COSTANTE_6P5S",
+  "CUPOLA35_NONCOSTANTE_4P3S", "CUPOLA35_NONCOSTANTE_5P4S", "CUPOLA35_NONCOSTANTE_6P5S",
+  "CUPOLA50_COSTANTE_4P3S", "CUPOLA50_COSTANTE_5P4S", "CUPOLA50_COSTANTE_6P5S",
+  "CUPOLA50_NONCOSTANTE_4P3S", "CUPOLA50_NONCOSTANTE_5P4S", "CUPOLA50_NONCOSTANTE_6P5S",
+  "DELTA_K35", "DELTA_K50",
+  "GRADINI35", "GRADINI50",
+  "PROLUNGATA35", "PROLUNGATA50",
+  "STANDARD35_4P3S", "STANDARD35_5P4S", "STANDARD35_6P5S",
+  "STANDARD50_4P3S", "STANDARD50_5P4S", "STANDARD50_6P5S",
+  "VOGUE",
 ];
+
+// Listini usati dagli Optional (famiglie collassate via listinoDiTipologia + le
+// sotto-tipologie che referenziano se' stesse per la maggiorazione tessuto).
+const LISTINI_GESTITI = [
+  "BARLETTA", "BETA1002", "BETA1003", "CUPOLA", "DELTA_K35", "DELTA_K50",
+  "GRADINI35", "GRADINI50", "PROLUNGATA35", "PROLUNGATA50",
+  "STANDARD35", "STANDARD35_4P3S", "STANDARD35_5P4S", "STANDARD35_6P5S",
+  "STANDARD50", "STANDARD50_4P3S", "STANDARD50_5P4S", "STANDARD50_6P5S",
+  "VOGUE",
+];
+
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
@@ -43,10 +66,10 @@ export async function POST(req: NextRequest) {
     const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
     if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
 
-    // Prodotti (fasce di prezzo)
+    // Prodotti (griglia prezzi)
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
-      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
@@ -79,7 +102,15 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Modelli (descrizione + immagine) - include anche BARLETTA e CUPOLA (info-only, nessuna riga Prodotto)
+    // Cleanup: rimuove prodotti orfani (es. vecchie righe BARLETTA/CUPOLA
+    // flat, ora sostituite dalle sotto-tipologie 4P3S/5P4S/6P5S)
+    const chiaviNuoveProd = new Set(prodottiNuovi.map(keyProdotto));
+    const prodottiDaRimuovere = prodottiEsistenti.filter((p) => !chiaviNuoveProd.has(keyProdotto(p)));
+    if (prodottiDaRimuovere.length > 0) {
+      await prisma.prodotto.deleteMany({ where: { id: { in: prodottiDaRimuovere.map((p) => p.id) } } });
+    }
+
+    // Modelli (descrizione + immagine) - cleanup dei vecchi BARLETTA/CUPOLA flat
     const modelli = modelliData as ModelloRow[];
     for (const m of modelli) {
       await prisma.modelloProdotto.upsert({
@@ -100,11 +131,24 @@ export async function POST(req: NextRequest) {
         },
       });
     }
+    const tipologieModelliNuovi = new Set(modelli.map((m) => m.tipologia));
+    const modelliOrfani = await prisma.modelloProdotto.findMany({
+      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE }, NOT: { tipologia: { in: Array.from(tipologieModelliNuovi) } } },
+    });
+    // I modelli "vecchi" con tipologia flat BARLETTA/CUPOLA non sono in TIPOLOGIE_GESTITE
+    // (che contiene solo le nuove sotto-tipologie), quindi li cerchiamo esplicitamente per nome.
+    const modelliFlatDaRimuovere = await prisma.modelloProdotto.findMany({
+      where: { brandId: brand.id, tipologia: { in: ["BARLETTA", "CUPOLA"] } },
+    });
+    const idModelliDaRimuovere = [...modelliOrfani, ...modelliFlatDaRimuovere].map((m) => m.id);
+    if (idModelliDaRimuovere.length > 0) {
+      await prisma.modelloProdotto.deleteMany({ where: { id: { in: idModelliDaRimuovere } } });
+    }
 
-    // Optional (Motorizzazione/Supplementi per prodotto + Maggiorazione tessuti), scoping via gruppo "CAPPOTTINE FISSE E MOBILI"
+    // Optional (Motorizzazione/Supplementi + Maggiorazione tessuto)
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -133,17 +177,23 @@ export async function POST(req: NextRequest) {
       } else if (
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
-        esistente.listino !== o.listino ||
+        esistente.unita !== o.unita ||
+        esistente.note !== o.note ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
           where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, listino: o.listino, gruppiApplicabili: o.gruppiApplicabili },
+          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, unita: o.unita, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
         });
         optAggiornati++;
       } else {
         optInvariati++;
       }
+    }
+    const chiaviNuoveOpt = new Set(optionaliNuovi.map(keyOptional));
+    const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuoveOpt.has(keyOptional(o)));
+    if (optionaliDaRimuovere.length > 0) {
+      await prisma.optional.deleteMany({ where: { id: { in: optionaliDaRimuovere.map((o) => o.id) } } });
     }
 
     return NextResponse.json({
@@ -151,12 +201,30 @@ export async function POST(req: NextRequest) {
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi: prodottiDaRimuovere.length,
       modelliAggiornati: modelli.length,
+      modelliRimossi: idModelliDaRimuovere.length,
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi: optionaliDaRimuovere.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
+}
+
+export async function GET(req: NextRequest) {
+  const key = req.headers.get("x-seed-key");
+  if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
+  if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
+
+  const prodottiCount = await prisma.prodotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
+  const modelliCount = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
+  const modelliFlatResidui = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: ["BARLETTA", "CUPOLA"] } } });
+  const optionaliCount = await prisma.optional.count({ where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } } });
+
+  return NextResponse.json({ ok: true, dryRun: true, prodottiCount, modelliCount, modelliFlatResidui, optionaliCount });
 }

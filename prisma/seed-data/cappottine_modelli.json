@@ -105,15 +105,127 @@
     "immagineUrl": "/immagini/cappottine/beta1003.png"
   },
   {
-    "tipologia": "BARLETTA",
-    "descrizioneTecnica": "Cappottina Barletta. Prezzo calcolato come Cappottina Standard 35mm o 50mm (stessa sporgenza/larghezza) maggiorata del 30%. Usare il calcolatore Standard35/Standard50 per la misura desiderata e applicare +30% manualmente.",
+    "tipologia": "BARLETTA35_4P3S",
+    "descrizioneTecnica": "Cappottina Barletta 35mm - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
     "famiglia": "OUTDOOR",
     "gruppo": "CAPPOTTINE FISSE E MOBILI",
     "immagineUrl": "/immagini/cappottine/barletta.png"
   },
   {
-    "tipologia": "CUPOLA",
-    "descrizioneTecnica": "Cappottina Cupola. Prezzo calcolato come Cappottina Standard 35mm o 50mm (stessa sporgenza/larghezza) maggiorata del 15% (+25% per cappottine a raggio non costante). Usare il calcolatore Standard35/Standard50 per la misura desiderata e applicare la maggiorazione manualmente.",
+    "tipologia": "BARLETTA35_5P4S",
+    "descrizioneTecnica": "Cappottina Barletta 35mm - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "BARLETTA35_6P5S",
+    "descrizioneTecnica": "Cappottina Barletta 35mm - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "BARLETTA50_4P3S",
+    "descrizioneTecnica": "Cappottina Barletta 50mm - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "BARLETTA50_5P4S",
+    "descrizioneTecnica": "Cappottina Barletta 50mm - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "BARLETTA50_6P5S",
+    "descrizioneTecnica": "Cappottina Barletta 50mm - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/barletta.png"
+  },
+  {
+    "tipologia": "CUPOLA35_COSTANTE_4P3S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio costante - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA35_COSTANTE_5P4S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio costante - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA35_COSTANTE_6P5S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio costante - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_COSTANTE_4P3S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio costante - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_COSTANTE_5P4S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio costante - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_COSTANTE_6P5S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio costante - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA35_NONCOSTANTE_4P3S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio non costante - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA35_NONCOSTANTE_5P4S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio non costante - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA35_NONCOSTANTE_6P5S",
+    "descrizioneTecnica": "Cappottina Cupola 35mm a raggio non costante - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_NONCOSTANTE_4P3S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio non costante - configurazione 4 profili/3 spicchi (sporgenza 80-100cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_NONCOSTANTE_5P4S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio non costante - configurazione 5 profili/4 spicchi (sporgenza 90-150cm). Struttura in alluminio.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "CAPPOTTINE FISSE E MOBILI",
+    "immagineUrl": "/immagini/cappottine/cupola.png"
+  },
+  {
+    "tipologia": "CUPOLA50_NONCOSTANTE_6P5S",
+    "descrizioneTecnica": "Cappottina Cupola 50mm a raggio non costante - configurazione 6 profili/5 spicchi (sporgenza 160-200cm), massima estensione. Struttura in alluminio.",
     "famiglia": "OUTDOOR",
     "gruppo": "CAPPOTTINE FISSE E MOBILI",
     "immagineUrl": "/immagini/cappottine/cupola.png"
