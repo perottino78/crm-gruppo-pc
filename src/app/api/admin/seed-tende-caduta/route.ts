@@ -237,7 +237,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Optional (Motorizzazione/Telecomandi/Sensori/Supplementi + Maggiorazione tessuto preservata)
-    const optionaliNuovi = optionaliData as OptionalRow[];
+    // NB: tendacaduta_optional.json e' condiviso con altri sotto-prodotti non gestiti da
+    // questa route (5000S/7000T/7000E/EvoZip*): va filtrato al solo scope LISTINI_GESTITI,
+    // altrimenti quelle righe verrebbero duplicate ad ogni run (mai trovate come "esistenti"
+    // perche' il fetch e' scoped, e quindi sempre re-inserite).
+    const optionaliNuovi = (optionaliData as OptionalRow[]).filter((o) => o.listino && LISTINI_GESTITI.includes(o.listino));
     const optionaliEsistenti = await prisma.optional.findMany({
       where: { brandId: brand.id, listino: { in: [...LISTINI_GESTITI, ...TIPOLOGIE_LEGACY_DA_RIMUOVERE] } },
     });
@@ -305,8 +309,9 @@ export async function POST(req: NextRequest) {
 
     // Dedup idempotente: rimuove righe duplicate esatte (stessa categoria+nome+listino)
     // che possono essersi create per race-condition tra chiamate concorrenti al seed.
+    const TUTTI_I_LISTINI_NEL_FILE = Array.from(new Set((optionaliData as OptionalRow[]).map((o) => o.listino).filter((l): l is string => !!l)));
     const tuttiOptionali = await prisma.optional.findMany({
-      where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
+      where: { brandId: brand.id, listino: { in: TUTTI_I_LISTINI_NEL_FILE } },
       orderBy: { id: "asc" },
     });
     const gruppiPerChiave = new Map<string, typeof tuttiOptionali>();
