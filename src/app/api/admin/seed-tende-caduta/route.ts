@@ -132,6 +132,10 @@ const LISTINI_GESTITI = [
   "TENDACADUTA_T4_SENZACASS",
 ];
 
+// Sezione 5 2026: vecchie tipologie sostituite, da ripulire una tantum in questa run
+// (bare "TENDACADUTA_ORIZZONTE" -> split ROUND/SQUARE).
+const TIPOLOGIE_LEGACY_DA_RIMUOVERE = ["TENDACADUTA_ORIZZONTE"];
+
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
@@ -148,7 +152,7 @@ export async function POST(req: NextRequest) {
     // ~12.500 righe, una create() per riga rischierebbe il timeout serverless.
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
-      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
+      where: { brandId: brand.id, tipologia: { in: [...TIPOLOGIE_GESTITE, ...TIPOLOGIE_LEGACY_DA_RIMUOVERE] } },
     });
     const mappaProdotti = new Map(prodottiEsistenti.map((p) => [keyProdotto(p), p]));
 
@@ -224,7 +228,7 @@ export async function POST(req: NextRequest) {
     }
     const tipologieModelliNuovi = new Set(modelli.map((m) => m.tipologia));
     const modelliOrfani = await prisma.modelloProdotto.findMany({
-      where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE }, NOT: { tipologia: { in: Array.from(tipologieModelliNuovi) } } },
+      where: { brandId: brand.id, tipologia: { in: [...TIPOLOGIE_GESTITE, ...TIPOLOGIE_LEGACY_DA_RIMUOVERE] }, NOT: { tipologia: { in: Array.from(tipologieModelliNuovi) } } },
     });
     let modelliRimossi = 0;
     if (modelliOrfani.length > 0) {
@@ -235,7 +239,7 @@ export async function POST(req: NextRequest) {
     // Optional (Motorizzazione/Telecomandi/Sensori/Supplementi + Maggiorazione tessuto preservata)
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, listino: { in: LISTINI_GESTITI } },
+      where: { brandId: brand.id, listino: { in: [...LISTINI_GESTITI, ...TIPOLOGIE_LEGACY_DA_RIMUOVERE] } },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
