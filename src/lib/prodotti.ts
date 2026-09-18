@@ -63,15 +63,30 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("BETA1003")) return "BETA1003";
   if (tipologia.startsWith("BARLETTA")) return "BARLETTA";
   if (tipologia.startsWith("CUPOLA")) return "CUPOLA";
+  // --- Sezione 4 2026: 3000 (6 varianti) ---
+  if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS_BRACCI")) return "TENDACADUTA_3000_SENZACASS_BRACCI";
+  if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS")) return "TENDACADUTA_3000_SENZACASS";
+  if (tipologia.startsWith("TENDACADUTA_3000_ROUND_BRACCI")) return "TENDACADUTA_3000_ROUND_BRACCI";
+  if (tipologia.startsWith("TENDACADUTA_3000_SQUARE_BRACCI")) return "TENDACADUTA_3000_SQUARE_BRACCI";
+  if (tipologia.startsWith("TENDACADUTA_3000_ROUND")) return "TENDACADUTA_3000_ROUND";
+  if (tipologia.startsWith("TENDACADUTA_3000_SQUARE")) return "TENDACADUTA_3000_SQUARE";
+  // --- Sezione 4 2026: 3000 con guide (3 varianti) ---
+  if (tipologia.startsWith("TENDACADUTA_3000GUIDE_SENZACASS")) return "TENDACADUTA_3000GUIDE_SENZACASS";
+  if (tipologia.startsWith("TENDACADUTA_3000GUIDE_ROUND")) return "TENDACADUTA_3000GUIDE_ROUND";
+  if (tipologia.startsWith("TENDACADUTA_3000GUIDE_SQUARE")) return "TENDACADUTA_3000GUIDE_SQUARE";
+  // --- Sezione 4 2026: 3000 cavetto (5 varianti) ---
   if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_SENZACASS")) return "TENDACADUTA_3000CAVETTO_SENZACASS";
-  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_ROUND")) return "TENDACADUTA_3000CAVETTO_ROUND";
-  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_TONDINOROUND")) return "TENDACADUTA_3000CAVETTO_TONDINOROUND";
-  if (tipologia.startsWith("TENDACADUTA_3000GUIDE")) return "TENDACADUTA_3000GUIDE";
-  if (tipologia.startsWith("TENDACADUTA_3000")) return "TENDACADUTA_3000";
+  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_ROUND_CAVETTO4")) return "TENDACADUTA_3000CAVETTO_ROUND_CAVETTO4";
+  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_ROUND_TONDINO6")) return "TENDACADUTA_3000CAVETTO_ROUND_TONDINO6";
+  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_SQUARE_CAVETTO4")) return "TENDACADUTA_3000CAVETTO_SQUARE_CAVETTO4";
+  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_SQUARE_TONDINO6")) return "TENDACADUTA_3000CAVETTO_SQUARE_TONDINO6";
   if (tipologia.startsWith("TENDACADUTA_5000S")) return "TENDACADUTA_5000S";
   if (tipologia.startsWith("TENDACADUTA_7000T")) return "TENDACADUTA_7000T";
   if (tipologia.startsWith("TENDACADUTA_7000E")) return "TENDACADUTA_7000E";
-  if (tipologia.startsWith("TENDACADUTA_T4")) return "TENDACADUTA_T4";
+  // --- Sezione 4 2026: T4 (2 varianti) ---
+  if (tipologia.startsWith("TENDACADUTA_T4_SENZACASS")) return "TENDACADUTA_T4_SENZACASS";
+  if (tipologia.startsWith("TENDACADUTA_T4_ROUND")) return "TENDACADUTA_T4_ROUND";
+  // Ombra Box Inox: nessun optional, non necessita di scoping (ritorna null di default).
   if (tipologia.startsWith("TENDACADUTA_ORIZZONTE")) return "TENDACADUTA_ORIZZONTE";
   if (tipologia.startsWith("TENDACADUTA_EVOZIP125_CRISTAL")) return "TENDACADUTA_EVOZIP125_CRISTAL";
   if (tipologia.startsWith("TENDACADUTA_EVOZIP125_SCREEN")) return "TENDACADUTA_EVOZIP125_SCREEN";
