@@ -1,240 +1,5574 @@
 [
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO_PONZA",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO_PONZA",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 35,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO_PONZA",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "CORFU",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "CORFU",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 35,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "CORFU",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 6,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO94",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 20,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO94",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuti",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 30,
-    "unita": "%",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO94",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini Nice - motore meccanico (B)",
-    "tipoPrezzo": "FISSO",
-    "valore": 330,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": null,
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini Nice - motore elettronico (D)",
-    "tipoPrezzo": "FISSO",
-    "valore": 686,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": null,
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy - motore meccanico (B)",
-    "tipoPrezzo": "FISSO",
-    "valore": 384,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": null,
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy - motore elettronico (D)",
-    "tipoPrezzo": "FISSO",
-    "valore": 692,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": null,
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Tettuccio di protezione",
-    "tipoPrezzo": "FISSO",
-    "valore": 180,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": null,
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Cassonetto (Giardino Ponza)",
-    "tipoPrezzo": "FISSO",
-    "valore": 150,
-    "unita": "mt",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO_PONZA",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Comando a molla (Corfù)",
-    "tipoPrezzo": "FISSO",
-    "valore": 252,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "CORFU",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  },
-  {
-    "categoria": "Supplementi",
-    "nome": "Comando a molla (Giardino 94)",
-    "tipoPrezzo": "FISSO",
-    "valore": 252,
-    "unita": "pz",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "GIARDINO94",
-    "note": null,
-    "gruppiApplicabili": [
-      "GIARDINO E PATIO"
-    ]
-  }
+ {
+  "categoria": "Maggiorazione tessuti",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuti",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 25,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Maggiorazione tessuti",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 35,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini Nice - motore meccanico (B)",
+  "tipoPrezzo": "FISSO",
+  "valore": 330,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini Nice - motore elettronico (D)",
+  "tipoPrezzo": "FISSO",
+  "valore": 686,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - motore meccanico (B)",
+  "tipoPrezzo": "FISSO",
+  "valore": 384,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - motore elettronico (D)",
+  "tipoPrezzo": "FISSO",
+  "valore": 692,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 180,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Supplementi",
+  "nome": "Cassonetto (Giardino Ponza)",
+  "tipoPrezzo": "FISSO",
+  "valore": 150,
+  "unita": "mt",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "GIARDINO_PONZA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ]
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 350.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": "pz",
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore IO elettronico Di - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "CORFU_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 350.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": "pz",
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore IO elettronico Di - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "CORFU_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 250.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 350.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 402.0,
+  "unita": "pz",
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 448.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 822.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore IO elettronico Di - Nm20",
+  "tipoPrezzo": "FISSO",
+  "valore": 1004.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "CORFU_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "GIARDINO94_SINGOLA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "GIARDINO94_AFFIANCATA_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_PIASTRE",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "GIARDINO94_TELO_UNICO_BARRA",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Comando a molla",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Tettuccio di protezione",
+  "tipoPrezzo": "FISSO",
+  "valore": 280.0,
+  "unita": "mt",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Staffa a parete tettuccio",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 240cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 300cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 264.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 350cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 400cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 308.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 480cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Rulli frangivento supplementari (largh. 600cm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": "pz",
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 6,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 384.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 666.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1720.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 860.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 282.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 746.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1240.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 558.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 342.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1688.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 674.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 526.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm2x50",
+  "tipoPrezzo": "FISSO",
+  "valore": 2624.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 912.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 964.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm30",
+  "tipoPrezzo": "FISSO",
+  "valore": 1086.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1254.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "GIARDINO94_BARRA_CASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "GIARDINO E PATIO"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ }
 ]

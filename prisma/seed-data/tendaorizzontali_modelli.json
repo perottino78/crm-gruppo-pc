@@ -1,23 +1,23 @@
 [
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "descrizioneTecnica": "Tenda orizzontale con struttura interamente in alluminio; tensione del telo terminale garantita da un sistema motorizzato con molla interna al rullo avvolgitore. Comando destra di serie, armatura RAL 9010, piastre laterali. Certificazione EN 13561, resistenza al vento Classe 1. Prezzo con motore escluso (tariffa tessuto 1/2, Soltis esclusa).",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE ORIZZONTALI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "descrizioneTecnica": "Tenda orizzontale Tenda Roll, versione senza cassonetto. Manovra ad argano o motore, con cinghie di traino e richiamo a molla. Comando destra di serie, armatura RAL 9010. Certificazione EN 13561, resistenza al vento Classe 2. Prezzo comando ad argano, tariffa tessuto 1.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE ORIZZONTALI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "descrizioneTecnica": "Tenda orizzontale Tenda Roll, versione con cassonetto a chiusura integrale. Manovra ad argano o motore, con cinghie di traino e richiamo a molla. Comando destra di serie, armatura RAL 9010. Certificazione EN 13561, resistenza al vento Classe 2. Prezzo comando ad argano, tariffa tessuto 1.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE ORIZZONTALI",
-    "immagineUrl": null
-  }
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "descrizioneTecnica": "Tenda orizzontale mod. Millenium: struttura interamente in alluminio; tensione del telo terminale garantita da un sistema motorizzato che agisce su una speciale molla interna al terminale, tramite carrucole e cavi agganciati direttamente al rullo avvolgitore. Movimentazione a motore (nessun comando ad argano). Montaggio a parete, comando destra (vista frontale esterna), colore struttura Ral 9010. Prezzo con motore escluso (tariffa tessuto Soltis 1/2). Certificazione EN 13561, Resistenza al vento Classe 1, sporgenza massima 5m.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE ORIZZONTALI",
+  "immagineUrl": "/immagini/tende_orizzontali/millenium.png"
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "descrizioneTecnica": "Tenda orizzontale mod. Tenda Roll: manovra ad argano o a motore, con cinghie di traino e richiamo a molla. Montaggio a parete, comando destra (vista frontale esterna), colore struttura Ral 9010. Prezzo comando ad argano, tariffa tessuto 1. Certificazione EN 13561, Resistenza al vento Classe 2, sporgenza massima 5m. Versione senza cassonetto.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE ORIZZONTALI",
+  "immagineUrl": "/immagini/tende_orizzontali/tenda_roll.png"
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "descrizioneTecnica": "Tenda orizzontale mod. Tenda Roll: manovra ad argano o a motore, con cinghie di traino e richiamo a molla. Montaggio a parete, comando destra (vista frontale esterna), colore struttura Ral 9010. Prezzo comando ad argano, tariffa tessuto 1. Certificazione EN 13561, Resistenza al vento Classe 2, sporgenza massima 5m. Versione con cassonetto a chiusura integrale.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE ORIZZONTALI",
+  "immagineUrl": "/immagini/tende_orizzontali/tenda_roll.png"
+ }
 ]

@@ -1,240 +1,1570 @@
 [
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini / Nice",
-    "tipoPrezzo": "FISSO",
-    "valore": 738,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_MILLENIUM",
-    "note": "Prezzo unico riportato a catalogo per Cherubini/Nice, motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy",
-    "tipoPrezzo": "FISSO",
-    "valore": 1494,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_MILLENIUM",
-    "note": "Prezzo unico riportato a catalogo per Somfy, motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Accessorio",
-    "nome": "Piedini di fissaggio",
-    "tipoPrezzo": "FISSO",
-    "valore": 32,
-    "unita": "al pezzo",
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_MILLENIUM",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini / Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 368,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini / Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 738,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 574,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 1362,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini / Nice meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 403,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": "368 € + 35 € di maggiorazione per predisposizione fori finecorsa (presente cassonetto). Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Cherubini / Nice elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 738,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy meccanico",
-    "tipoPrezzo": "FISSO",
-    "valore": 609,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": "574 € + 35 € di maggiorazione per predisposizione fori finecorsa (presente cassonetto). Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Motorizzazione",
-    "nome": "Somfy elettronico",
-    "tipoPrezzo": "FISSO",
-    "valore": 1362,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": "Motore fornito senza telecomando.",
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 10,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 50,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 2",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 10,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 3",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 25,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  },
-  {
-    "categoria": "Maggiorazione tessuto",
-    "nome": "Tariffa 4",
-    "tipoPrezzo": "PERCENTUALE",
-    "valore": 50,
-    "unita": null,
-    "sporgenzaMm": null,
-    "larghezzaMm": null,
-    "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "note": null,
-    "gruppiApplicabili": [
-      "TENDE ORIZZONTALI"
-    ]
-  }
+ {
+  "categoria": "Optional",
+  "nome": "Piedini di fissaggio",
+  "tipoPrezzo": "FISSO",
+  "valore": 78.0,
+  "unita": "pz",
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1490.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 1534.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 728.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 924.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 814.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 652.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm50",
+  "tipoPrezzo": "FISSO",
+  "valore": 850.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Windtec",
+  "tipoPrezzo": "FISSO",
+  "valore": 394.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Mistral",
+  "tipoPrezzo": "FISSO",
+  "valore": 502.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Volo",
+  "tipoPrezzo": "FISSO",
+  "valore": 156.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Nemo vibe",
+  "tipoPrezzo": "FISSO",
+  "valore": 464.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Windy",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 572.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 618.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 564.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Gaposa - Sensore vento",
+  "tipoPrezzo": "FISSO",
+  "valore": 458.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_MILLENIUM",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1398.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1438.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 776.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Windtec",
+  "tipoPrezzo": "FISSO",
+  "valore": 394.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Mistral",
+  "tipoPrezzo": "FISSO",
+  "valore": 502.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Volo",
+  "tipoPrezzo": "FISSO",
+  "valore": 156.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Nemo vibe",
+  "tipoPrezzo": "FISSO",
+  "valore": 464.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Windy",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 572.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 618.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 564.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Gaposa - Sensore vento",
+  "tipoPrezzo": "FISSO",
+  "valore": 458.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 3",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa 4",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 1",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 15,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Maggiorazione tessuto",
+  "nome": "Tariffa tessuto fuori campionario 2",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 20,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 586.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1398.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Somfy - Motore elettronico IO Di - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 1438.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 418.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 700.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Cherubini - Motore elettronico WiFi Dw - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 894.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 310.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 782.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Nice - Motore elettronico bidirezionale Db - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 590.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore meccanico B - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 370.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": "Maggiorazione di 35€ per predisposizione fori finecorsa se presente cassonetto.",
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Simu - Motore elettronico D - Nm40",
+  "tipoPrezzo": "FISSO",
+  "valore": 776.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Cherubini - Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P1",
+  "tipoPrezzo": "FISSO",
+  "valore": 158.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Nice - Domì P6",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 144.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Simu - HZ 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 1 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Somfy - Situo 5 IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Telecomandi",
+  "nome": "Gaposa - Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Kit Solare Gaposa (motore + pannello + batteria)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2082.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Windtec",
+  "tipoPrezzo": "FISSO",
+  "valore": 394.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Cherubini - Sensore Mistral",
+  "tipoPrezzo": "FISSO",
+  "valore": 502.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Volo",
+  "tipoPrezzo": "FISSO",
+  "valore": 156.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Nice - Sensore Nemo vibe",
+  "tipoPrezzo": "FISSO",
+  "valore": 464.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Simu - Sensore Windy",
+  "tipoPrezzo": "FISSO",
+  "valore": 432.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 512.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 572.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 618.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Somfy - Sensore Eolis 3D IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 564.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Sensori",
+  "nome": "Gaposa - Sensore vento",
+  "tipoPrezzo": "FISSO",
+  "valore": 458.0,
+  "unita": null,
+  "listino": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "note": null,
+  "gruppiApplicabili": [
+   "TENDE ORIZZONTALI"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ }
 ]

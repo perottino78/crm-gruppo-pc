@@ -1,2088 +1,856 @@
 [
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 200,
-    "prezzoBase": 2718.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 250,
-    "prezzoBase": 3044.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 3059.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 3388.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 3787.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 150,
-    "larghezzaMm": 450,
-    "prezzoBase": 4113.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 200,
-    "prezzoBase": 2819.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 250,
-    "prezzoBase": 3147.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 3158.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 3488
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 3929.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 175,
-    "larghezzaMm": 450,
-    "prezzoBase": 4260.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 2918.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 250,
-    "prezzoBase": 3248
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 3256
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 3588.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 4072
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 4401.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 200,
-    "prezzoBase": 3200
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 250,
-    "prezzoBase": 3528
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 3539.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 3868.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 4396.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 225,
-    "larghezzaMm": 450,
-    "prezzoBase": 4724.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 200,
-    "prezzoBase": 3296
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 250,
-    "prezzoBase": 3625.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 3640
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 3968
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 4536
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 250,
-    "larghezzaMm": 450,
-    "prezzoBase": 4872
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 200,
-    "prezzoBase": 3396.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 250,
-    "prezzoBase": 3724.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 300,
-    "prezzoBase": 3736
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 350,
-    "prezzoBase": 4065.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 400,
-    "prezzoBase": 4684.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 275,
-    "larghezzaMm": 450,
-    "prezzoBase": 5014.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 3494.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 250,
-    "prezzoBase": 3827.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 3836.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 4164.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 4824
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 5153.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 200,
-    "prezzoBase": 3753.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 250,
-    "prezzoBase": 4081.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 300,
-    "prezzoBase": 4096
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 350,
-    "prezzoBase": 4422.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 400,
-    "prezzoBase": 5129.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 325,
-    "larghezzaMm": 450,
-    "prezzoBase": 5456
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 200,
-    "prezzoBase": 3854.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 250,
-    "prezzoBase": 4182.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 300,
-    "prezzoBase": 4195.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 350,
-    "prezzoBase": 4524.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 5273.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 350,
-    "larghezzaMm": 450,
-    "prezzoBase": 5600
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 200,
-    "prezzoBase": 3952
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 250,
-    "prezzoBase": 4281.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 300,
-    "prezzoBase": 4294.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 350,
-    "prezzoBase": 4625.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 400,
-    "prezzoBase": 5414.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 375,
-    "larghezzaMm": 450,
-    "prezzoBase": 5745.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 4054.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 250,
-    "prezzoBase": 4380.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 4390.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 4721.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 5558.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 450,
-    "prezzoBase": 5886.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 425,
-    "larghezzaMm": 200,
-    "prezzoBase": 4312
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 425,
-    "larghezzaMm": 250,
-    "prezzoBase": 4640
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 425,
-    "larghezzaMm": 300,
-    "prezzoBase": 4652.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 425,
-    "larghezzaMm": 350,
-    "prezzoBase": 4980.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 450,
-    "larghezzaMm": 200,
-    "prezzoBase": 4411.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 450,
-    "larghezzaMm": 250,
-    "prezzoBase": 4740.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 450,
-    "larghezzaMm": 300,
-    "prezzoBase": 4752
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 450,
-    "larghezzaMm": 350,
-    "prezzoBase": 5080
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 475,
-    "larghezzaMm": 200,
-    "prezzoBase": 4508.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 475,
-    "larghezzaMm": 250,
-    "prezzoBase": 4838.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 475,
-    "larghezzaMm": 300,
-    "prezzoBase": 4849.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 4608
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 250,
-    "prezzoBase": 4936
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 4952
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 200,
-    "prezzoBase": 2718.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 250,
-    "prezzoBase": 3044.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 300,
-    "prezzoBase": 3059.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 350,
-    "prezzoBase": 3388.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 400,
-    "prezzoBase": 3787.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 150,
-    "larghezzaMm": 450,
-    "prezzoBase": 4113.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 200,
-    "prezzoBase": 2819.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 250,
-    "prezzoBase": 3147.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 300,
-    "prezzoBase": 3158.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 350,
-    "prezzoBase": 3488
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 400,
-    "prezzoBase": 3929.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 175,
-    "larghezzaMm": 450,
-    "prezzoBase": 4260.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 2918.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 250,
-    "prezzoBase": 3248
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 3256
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 3588.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 4072
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 4401.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 200,
-    "prezzoBase": 3200
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 250,
-    "prezzoBase": 3528
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 300,
-    "prezzoBase": 3539.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 350,
-    "prezzoBase": 3868.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 400,
-    "prezzoBase": 4396.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 225,
-    "larghezzaMm": 450,
-    "prezzoBase": 4724.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 200,
-    "prezzoBase": 3296
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 250,
-    "prezzoBase": 3625.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 300,
-    "prezzoBase": 3640
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 350,
-    "prezzoBase": 3968
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 400,
-    "prezzoBase": 4536
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 250,
-    "larghezzaMm": 450,
-    "prezzoBase": 4872
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 200,
-    "prezzoBase": 3396.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 250,
-    "prezzoBase": 3724.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 300,
-    "prezzoBase": 3736
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 350,
-    "prezzoBase": 4065.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 400,
-    "prezzoBase": 4684.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 275,
-    "larghezzaMm": 450,
-    "prezzoBase": 5014.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 3494.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 250,
-    "prezzoBase": 3827.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 3836.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 4164.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 4824
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 5153.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 200,
-    "prezzoBase": 3753.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 250,
-    "prezzoBase": 4081.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 300,
-    "prezzoBase": 4096
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 350,
-    "prezzoBase": 4422.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 400,
-    "prezzoBase": 5129.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 325,
-    "larghezzaMm": 450,
-    "prezzoBase": 5456
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 200,
-    "prezzoBase": 3854.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 250,
-    "prezzoBase": 4182.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 300,
-    "prezzoBase": 4195.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 350,
-    "prezzoBase": 4524.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 400,
-    "prezzoBase": 5273.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 350,
-    "larghezzaMm": 450,
-    "prezzoBase": 5600
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 200,
-    "prezzoBase": 3952
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 250,
-    "prezzoBase": 4281.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 300,
-    "prezzoBase": 4294.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 350,
-    "prezzoBase": 4625.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 400,
-    "prezzoBase": 5414.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 375,
-    "larghezzaMm": 450,
-    "prezzoBase": 5745.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 4054.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 250,
-    "prezzoBase": 4380.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 4390.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 4721.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 5558.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 450,
-    "prezzoBase": 5886.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 425,
-    "larghezzaMm": 200,
-    "prezzoBase": 4312
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 425,
-    "larghezzaMm": 250,
-    "prezzoBase": 4640
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 425,
-    "larghezzaMm": 300,
-    "prezzoBase": 4652.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 425,
-    "larghezzaMm": 350,
-    "prezzoBase": 4980.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 450,
-    "larghezzaMm": 200,
-    "prezzoBase": 4411.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 450,
-    "larghezzaMm": 250,
-    "prezzoBase": 4740.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 450,
-    "larghezzaMm": 300,
-    "prezzoBase": 4752
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 450,
-    "larghezzaMm": 350,
-    "prezzoBase": 5080
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 475,
-    "larghezzaMm": 200,
-    "prezzoBase": 4508.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 475,
-    "larghezzaMm": 250,
-    "prezzoBase": 4838.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 475,
-    "larghezzaMm": 300,
-    "prezzoBase": 4849.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 4608
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 250,
-    "prezzoBase": 4936
-  },
-  {
-    "tipologia": "TENDAORIZZ_MILLENIUM",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 4952
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1060.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1166.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1323.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 1425.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 1582.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 1688
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 1840
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1251.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1355.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 1574.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 1673.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 1896
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2000
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2217.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1476.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 1580.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 1862.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 1968
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2246.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 1652.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 1756.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2094.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2203.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1060.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1166.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1323.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 1425.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 1582.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 1688
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 1840
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1251.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1355.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 1574.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 1673.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 1896
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2000
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2217.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1476.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 1580.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 1862.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 1968
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2246.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 1652.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 1756.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2094.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2203.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1060.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1166.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1323.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 1425.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 1582.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 1688
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 1840
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1251.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1355.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 1574.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 1673.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 1896
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2000
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2217.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1476.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 1580.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 1862.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 1968
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2246.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 1652.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 1756.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2094.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2203.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1382.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1616
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1776
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2016
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2169.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 2400
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 2555.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1571.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1809.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 2486.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2715.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2934.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1798.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 2036.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 2321.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 2560
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2841.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2609.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BIANCO (9010)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2849.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1382.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1616
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1776
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2016
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2169.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 2400
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 2555.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1571.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1809.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 2486.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2715.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2934.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1798.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 2036.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 2321.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 2560
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2841.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2609.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "BEIGE (1013)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2849.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 200,
-    "prezzoBase": 1382.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 240,
-    "prezzoBase": 1616
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 300,
-    "prezzoBase": 1776
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 350,
-    "prezzoBase": 2016
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 400,
-    "prezzoBase": 2169.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 450,
-    "prezzoBase": 2400
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 200,
-    "larghezzaMm": 500,
-    "prezzoBase": 2555.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 200,
-    "prezzoBase": 1571.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 240,
-    "prezzoBase": 1809.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 300,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 350,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 400,
-    "prezzoBase": 2486.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 450,
-    "prezzoBase": 2715.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 300,
-    "larghezzaMm": 500,
-    "prezzoBase": 2934.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 200,
-    "prezzoBase": 1798.4
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 240,
-    "prezzoBase": 2036.8
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 300,
-    "prezzoBase": 2321.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 350,
-    "prezzoBase": 2560
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 400,
-    "larghezzaMm": 400,
-    "prezzoBase": 2841.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 200,
-    "prezzoBase": 2027.2
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 240,
-    "prezzoBase": 2265.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 300,
-    "prezzoBase": 2609.6
-  },
-  {
-    "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
-    "colore": "MARRONE (8017)",
-    "altezzaMm": 500,
-    "larghezzaMm": 350,
-    "prezzoBase": 2849.6
-  }
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 200,
+  "prezzoBase": 3304.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 250,
+  "prezzoBase": 3699.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 300,
+  "prezzoBase": 3716.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 350,
+  "prezzoBase": 4116.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 400,
+  "prezzoBase": 4600.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 150,
+  "larghezzaMm": 450,
+  "prezzoBase": 4996.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 200,
+  "prezzoBase": 3425.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 250,
+  "prezzoBase": 3824.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 300,
+  "prezzoBase": 3838.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 350,
+  "prezzoBase": 4238.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 400,
+  "prezzoBase": 4772.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 175,
+  "larghezzaMm": 450,
+  "prezzoBase": 5176.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 3547.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 3945.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 3958.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 4361.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 4947.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 5347.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 200,
+  "prezzoBase": 3888.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 250,
+  "prezzoBase": 4284.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 300,
+  "prezzoBase": 4300.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 350,
+  "prezzoBase": 4700.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 400,
+  "prezzoBase": 5342.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 225,
+  "larghezzaMm": 450,
+  "prezzoBase": 5739.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 200,
+  "prezzoBase": 4004.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 250,
+  "prezzoBase": 4404.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 300,
+  "prezzoBase": 4422.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 350,
+  "prezzoBase": 4820.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 400,
+  "prezzoBase": 5510.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 250,
+  "larghezzaMm": 450,
+  "prezzoBase": 5918.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 200,
+  "prezzoBase": 4128.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 250,
+  "prezzoBase": 4524.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 300,
+  "prezzoBase": 4537.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 350,
+  "prezzoBase": 4937.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 400,
+  "prezzoBase": 5689.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 275,
+  "larghezzaMm": 450,
+  "prezzoBase": 6091.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 4244.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 4649.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 4660.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 5060.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 5860.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 6259.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 200,
+  "prezzoBase": 4561.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 250,
+  "prezzoBase": 4958.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 300,
+  "prezzoBase": 4977.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 350,
+  "prezzoBase": 5371.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 400,
+  "prezzoBase": 6232.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 325,
+  "larghezzaMm": 450,
+  "prezzoBase": 6625.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 200,
+  "prezzoBase": 4683.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 250,
+  "prezzoBase": 5080.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 300,
+  "prezzoBase": 5096.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 350,
+  "prezzoBase": 5497.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 400,
+  "prezzoBase": 6406.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 350,
+  "larghezzaMm": 450,
+  "prezzoBase": 6800.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 200,
+  "prezzoBase": 4801.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 250,
+  "prezzoBase": 5201.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 300,
+  "prezzoBase": 5216.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 350,
+  "prezzoBase": 5619.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 400,
+  "prezzoBase": 6576.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 375,
+  "larghezzaMm": 450,
+  "prezzoBase": 6980.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 4924.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 5321.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 5334.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 5736.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 6752.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 450,
+  "prezzoBase": 7150.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 425,
+  "larghezzaMm": 200,
+  "prezzoBase": 5238.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 425,
+  "larghezzaMm": 250,
+  "prezzoBase": 5636.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 425,
+  "larghezzaMm": 300,
+  "prezzoBase": 5651.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 425,
+  "larghezzaMm": 350,
+  "prezzoBase": 6049.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 200,
+  "prezzoBase": 5356.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 250,
+  "prezzoBase": 5758.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 300,
+  "prezzoBase": 5772.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 450,
+  "larghezzaMm": 350,
+  "prezzoBase": 6171.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 200,
+  "prezzoBase": 5478.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 250,
+  "prezzoBase": 5875.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 475,
+  "larghezzaMm": 300,
+  "prezzoBase": 5892.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 5596.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 5996.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_MILLENIUM",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 6014.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 1291.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 1419.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 1609.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 1734.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 1924.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 2052.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 1521.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 1648.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 1913.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 2036.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 2304.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 2432.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 1796.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 1921.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 2264.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 2393.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 2731.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 2009.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 2134.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 2547.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_SENZACASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 2676.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 200,
+  "prezzoBase": 1680.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 250,
+  "prezzoBase": 1964.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 300,
+  "prezzoBase": 2160.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 350,
+  "prezzoBase": 2451.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 400,
+  "prezzoBase": 2636.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 200,
+  "larghezzaMm": 450,
+  "prezzoBase": 2916.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 200,
+  "prezzoBase": 1910.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 250,
+  "prezzoBase": 2201.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 300,
+  "prezzoBase": 2464.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 350,
+  "prezzoBase": 2755.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 400,
+  "prezzoBase": 3020.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 300,
+  "larghezzaMm": 450,
+  "prezzoBase": 3300.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 200,
+  "prezzoBase": 2185.6
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 250,
+  "prezzoBase": 2478.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 300,
+  "prezzoBase": 2822.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 350,
+  "prezzoBase": 3108.8
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 3454.4
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 200,
+  "prezzoBase": 2464.0
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 250,
+  "prezzoBase": 2755.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 300,
+  "prezzoBase": 3171.2
+ },
+ {
+  "tipologia": "TENDAORIZZ_TENDAROLL_CONCASSONETTO",
+  "colore": "STANDARD",
+  "altezzaMm": 500,
+  "larghezzaMm": 350,
+  "prezzoBase": 3464.0
+ }
 ]
