@@ -233,28 +233,13 @@ export async function POST(req: NextRequest) {
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
-    let optCreati = 0;
-    let optAggiornati = 0;
+    const optDaCreare: OptionalRow[] = [];
+    const optDaAggiornare: { id: string; o: OptionalRow }[] = [];
     let optInvariati = 0;
     for (const o of optionaliNuovi) {
       const esistente = mappaOptional.get(keyOptional(o));
       if (!esistente) {
-        await prisma.optional.create({
-          data: {
-            brandId: brand.id,
-            categoria: o.categoria,
-            nome: o.nome,
-            tipoPrezzo: o.tipoPrezzo,
-            valore: o.valore,
-            unita: o.unita,
-            sporgenzaMm: o.sporgenzaMm,
-            larghezzaMm: o.larghezzaMm,
-            listino: o.listino,
-            note: o.note,
-            gruppiApplicabili: o.gruppiApplicabili,
-          },
-        });
-        optCreati++;
+        optDaCreare.push(o);
       } else if (
         esistente.valore !== o.valore ||
         esistente.tipoPrezzo !== o.tipoPrezzo ||
@@ -262,14 +247,43 @@ export async function POST(req: NextRequest) {
         esistente.note !== o.note ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
-        await prisma.optional.update({
-          where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, unita: o.unita, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
-        });
-        optAggiornati++;
+        optDaAggiornare.push({ id: esistente.id, o });
       } else {
         optInvariati++;
       }
+    }
+
+    // Bulk insert: con ~500 righe Optional (Motorizzazione/Telecomandi/Sensori
+    // per 3+ famiglie) una create() sequenziale per riga rischia il timeout
+    // serverless (gia' verificato in produzione su questa stessa route).
+    let optCreati = 0;
+    if (optDaCreare.length > 0) {
+      const res = await prisma.optional.createMany({
+        data: optDaCreare.map((o) => ({
+          brandId: brand.id,
+          categoria: o.categoria,
+          nome: o.nome,
+          tipoPrezzo: o.tipoPrezzo,
+          valore: o.valore,
+          unita: o.unita,
+          sporgenzaMm: o.sporgenzaMm,
+          larghezzaMm: o.larghezzaMm,
+          listino: o.listino,
+          note: o.note,
+          gruppiApplicabili: o.gruppiApplicabili,
+        })),
+        skipDuplicates: true,
+      });
+      optCreati = res.count;
+    }
+
+    let optAggiornati = 0;
+    for (const { id, o } of optDaAggiornare) {
+      await prisma.optional.update({
+        where: { id },
+        data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, unita: o.unita, note: o.note, gruppiApplicabili: o.gruppiApplicabili },
+      });
+      optAggiornati++;
     }
     const chiaviNuoveOpt = new Set(optionaliNuovi.map(keyOptional));
     const optionaliDaRimuovere = optionaliEsistenti.filter((o) => !chiaviNuoveOpt.has(keyOptional(o)));
