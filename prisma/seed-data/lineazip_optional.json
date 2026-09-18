@@ -1,0 +1,2284 @@
+[
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP85_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP85_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP100_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP100_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP125_ARGANO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (obbligatorie per versione ad argano e tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": "incluso",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (per questo motore non e' disponibile il sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "SECURZIP125_MOTORE",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (Obbligatorie per tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Motore solare",
+  "tipoPrezzo": "FISSO",
+  "valore": 1170.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (non disponibile rilevamento ostacoli per questo motore)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "EVOZIP100",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 296.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (Obbligatorie per tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 278.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus con compensatori complete di regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 748.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazioni per guide plus con compensatori senza regoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 632.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 208.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Motore solare",
+  "tipoPrezzo": "FISSO",
+  "valore": 1170.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Telecomando 1 canale",
+  "tipoPrezzo": "FISSO",
+  "valore": 190.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Gaposa (a richiesta)",
+  "nome": "Telecomando 5 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 232.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante con sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 530.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (non disponibile rilevamento ostacoli per questo motore)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO integrata e sistema rilevamento ostacoli + kit AUTOBLOCK",
+  "tipoPrezzo": "FISSO",
+  "valore": 882.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 1 canale RTS/IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 194.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "EVOZIP125",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide con compensatori senza regoli (opzionali)",
+  "tipoPrezzo": "FISSO",
+  "valore": 180.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Maggiorazione per guide plus (Obbligatorie per versione con tessuto cristal)",
+  "tipoPrezzo": "FISSO",
+  "valore": 260.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Kit strip led luce calda (centralina, opalina, strip led)",
+  "tipoPrezzo": "FISSO",
+  "valore": 3042.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Optional",
+  "nome": "Kit strip led luce fredda (centralina, opalina, strip led)",
+  "tipoPrezzo": "FISSO",
+  "valore": 3042.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": null,
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore meccanico con fine corsa elettronico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 152.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Motore con radio-ricevente con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Cherubini (di serie)",
+  "nome": "Telecomando Pop plus 7 canali",
+  "tipoPrezzo": "FISSO",
+  "valore": 252.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con finecorsa elettronico e comando a pulsante (dotato di sistema rilevamento ostacoli)",
+  "tipoPrezzo": "FISSO",
+  "valore": 294.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente IO con sistema rilevamento ostacoli",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Motore con radio-ricevente RTS (non disponibile rilevamento ostacoli per questo motore)",
+  "tipoPrezzo": "FISSO",
+  "valore": 560.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale RTS",
+  "tipoPrezzo": "FISSO",
+  "valore": 312.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ },
+ {
+  "categoria": "Motorizzazione Somfy (a richiesta)",
+  "nome": "Radiocomando 5 canale IO",
+  "tipoPrezzo": "FISSO",
+  "valore": 316.0,
+  "unita": null,
+  "listino": "EVOZIPDUO",
+  "note": "Maggiorazione per SINGOLO motore: prodotto con due rulli motorizzati, applicare sempre la maggiorazione doppia.",
+  "gruppiApplicabili": [
+   "LINEA ZIP"
+  ],
+  "sporgenzaMm": null,
+  "larghezzaMm": null
+ }
+]

@@ -2,7 +2,7 @@
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
 // compatibilità, ma il valore va interpretato secondo questa unità.
-const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_", "KOPEN_",
+const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_", "SOLARIA_", "RAINCOVER_", "ISCHIA_", "GIARDINO_PONZA", "CORFU_", "GIARDINO94_", "STANDARD35_", "GRADINI35", "PROLUNGATA35", "STANDARD50_", "GRADINI50", "PROLUNGATA50", "VOGUE", "DELTA_K35", "DELTA_K50", "BETA1002", "BETA1003", "BARLETTA", "CUPOLA", "TENDACADUTA_", "TELAIFISSI_", "TENDABRACCI_", "TENDAORIZZ_", "TENDABRACCICASS_", "TENDAVERANDA_", "VETRATA_", "FRANGISOLE_", "VENEZIANA_", "BEACHWAVE_", "CANCELLI_", "BLINDATI_", "KOPEN_", "SECURZIP85_", "SECURZIP100_", "SECURZIP125_", "EVOZIP100_", "EVOZIP125_", "EVOZIPDUO_",
   // Zanzariere plissettate: il listino a mq (calcolaMqConMinimi) interpreta le misure
   // digitate come centimetri (coerente con SCINTILLA/VETRATA_), quindi anche l'etichetta
   // del campo misura deve essere "cm" — prima mancava da questo elenco e il campo veniva
@@ -203,6 +203,18 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // "Tappo per scatolato" che è specifico del formato e va bene per tutte le finiture.
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "SCATOLATO_60X30";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "SCATOLATO_50X20";
+  // Sezioni 7-8 2026: Linea Zip (New Securzip 85/100/125 x Argano/Motore, EvoZip 100/125, EvoZip Duo).
+  // Un "listino" per famiglia+misura(+manovra), per scopare Optional/Motorizzazione condivisi
+  // tra tutti i tessuti di quella famiglia (identico al pattern Tende a caduta/Tende orizzontali).
+  if (tipologia.startsWith("SECURZIP85_ARGANO_")) return "SECURZIP85_ARGANO";
+  if (tipologia.startsWith("SECURZIP85_MOTORE_")) return "SECURZIP85_MOTORE";
+  if (tipologia.startsWith("SECURZIP100_ARGANO_")) return "SECURZIP100_ARGANO";
+  if (tipologia.startsWith("SECURZIP100_MOTORE_")) return "SECURZIP100_MOTORE";
+  if (tipologia.startsWith("SECURZIP125_ARGANO_")) return "SECURZIP125_ARGANO";
+  if (tipologia.startsWith("SECURZIP125_MOTORE_")) return "SECURZIP125_MOTORE";
+  if (tipologia.startsWith("EVOZIP100_")) return "EVOZIP100";
+  if (tipologia.startsWith("EVOZIP125_")) return "EVOZIP125";
+  if (tipologia.startsWith("EVOZIPDUO_")) return "EVOZIPDUO";
   return null;
 }
 
