@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import prodottiData from "../../../../../prisma/seed-data/veranda_prodotti.json";
-import modelliData from "../../../../../prisma/seed-data/veranda_modelli.json";
-import optionaliData from "../../../../../prisma/seed-data/veranda_optional.json";
+import prodottiData from "../../../../../prisma/seed-data/tendeclassiche_prodotti.json";
+import modelliData from "../../../../../prisma/seed-data/tendeclassiche_modelli.json";
+import optionaliData from "../../../../../prisma/seed-data/tendeclassiche_optional.json";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
-const GRUPPO = "TENDE VERANDA";
+const GRUPPO = "TENDE CLASSICHE";
 
-// Sezione 5 2026: le 4 tipologie Winter Balkon (prezzi rifatti con formula 2026).
+// Sezione 5 2026: nuovo gruppo "Tende classiche" (catalogo 2026, pag. 86-93).
 const TIPOLOGIE_GESTITE = [
-  "TENDAVERANDA_WINTERBALKON",
-  "TENDAVERANDA_WINTERBALKON_FRANGIVENTO",
-  "TENDAVERANDA_WINTERBALKON_TOP",
-  "TENDAVERANDA_WINTERBALKON_TOP_FRANGIVENTO",
+  "TENDABRACCI_CLASSIQUE",
+  "TENDABRACCI_LEUCA",
+  "TENDABRACCI_RETRO6000_ROUND",
+  "TENDABRACCI_RETRO6000_SENZACASS",
 ];
 
 type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number; prezzoBase: number };
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     const brand = await prisma.brand.findUnique({ where: { nome: BRAND } });
     if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
 
-    // --- Prodotti (griglia prezzi Winter Balkon: 240 righe) ---
+    // --- Prodotti ---
     const prodottiNuovi = prodottiData as ProdottoRow[];
     const prodottiEsistenti = await prisma.prodotto.findMany({
       where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } },
@@ -88,14 +88,7 @@ export async function POST(req: NextRequest) {
       prodottiAggiornati++;
     }
 
-    // Rimuove eventuali righe orfane (misure presenti nel vecchio DB ma non piu' nel nuovo listino)
-    const chiaviNuove = new Set(prodottiNuovi.map(keyProdotto));
-    const orfaniProdotto = prodottiEsistenti.filter((p) => !chiaviNuove.has(keyProdotto(p)));
-    if (orfaniProdotto.length > 0) {
-      await prisma.prodotto.deleteMany({ where: { id: { in: orfaniProdotto.map((p) => p.id) } } });
-    }
-
-    // --- Modelli (descrizioni gia' corrette: solo upsert idempotente, nessuna modifica ai testi) ---
+    // --- Modelli ---
     const modelli = modelliData as ModelloRow[];
     for (const m of modelli) {
       await prisma.modelloProdotto.upsert({
@@ -117,10 +110,10 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // --- Optional (rifatti integralmente: motorizzazione/accessori 2026 + maggiorazioni tessuto invariate) ---
+    // --- Optional ---
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      where: { brandId: brand.id, listino: { in: TIPOLOGIE_GESTITE } },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
@@ -171,24 +164,15 @@ export async function POST(req: NextRequest) {
       optAggiornati++;
     }
 
-    // Rimuove i vecchi Optional Winter Balkon non piu' presenti nel nuovo listino
-    const chiaviOptNuove = new Set(optionaliNuovi.map(keyOptional));
-    const orfaniOptional = optionaliEsistenti.filter((o) => !chiaviOptNuove.has(keyOptional(o)));
-    if (orfaniOptional.length > 0) {
-      await prisma.optional.deleteMany({ where: { id: { in: orfaniOptional.map((o) => o.id) } } });
-    }
-
     return NextResponse.json({
       ok: true,
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati: prodInvariati,
-      prodottiRimossi: orfaniProdotto.length,
       modelliAggiornati: modelli.length,
       optCreati,
       optAggiornati,
       optInvariati,
-      optRimossi: orfaniOptional.length,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
@@ -202,6 +186,6 @@ export async function GET(req: NextRequest) {
   if (!brand) return NextResponse.json({ error: "brand P&C non trovato" }, { status: 400 });
   const prodottiCount = await prisma.prodotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
   const modelliCount = await prisma.modelloProdotto.count({ where: { brandId: brand.id, tipologia: { in: TIPOLOGIE_GESTITE } } });
-  const optionaliCount = await prisma.optional.count({ where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } } });
+  const optionaliCount = await prisma.optional.count({ where: { brandId: brand.id, listino: { in: TIPOLOGIE_GESTITE } } });
   return NextResponse.json({ prodottiCount, modelliCount, optionaliCount });
 }

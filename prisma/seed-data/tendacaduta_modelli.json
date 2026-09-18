@@ -1,555 +1,569 @@
 [
-  {
-    "tipologia": "TENDACADUTA_5000S",
-    "descrizioneTecnica": "Tenda a caduta 5000/S. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/5000s.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_7000T",
-    "descrizioneTecnica": "Tenda a caduta 7000/T. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/7000t.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_7000E",
-    "descrizioneTecnica": "Tenda a caduta 7000/E, disponibile anche in tessuto Liberty e PVC (tariffa 2, sporgenza max 200cm). Larghezza max 5000mm, sporgenza max 3000mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/7000e.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_ORIZZONTE",
-    "descrizioneTecnica": "Tenda a caduta Orizzonte, prezzo con cassonetto Round incluso. Disponibile anche in tessuto Cristal/PVC. Larghezza max 4000mm, sporgenza max 3500mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/orizzonte.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
-    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Cristal (Classe 3 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide plus incluse. Larghezza max 4600mm, sporgenza max 3000mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/evozip.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
-    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Screen oscurante/Soltis 92 (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/evozip.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
-    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Opatex Pro (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/evozip.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
-    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Screen oscurante/Soltis 92 (Classe 6). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2500mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/evozip.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
-    "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Opatex Pro (Classe 6). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2800mm.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/evozip.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_SENZACASS",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, senza cassonetto. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_SENZACASS_BRACCI",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, senza cassonetto, con braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_ROUND",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Round. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_SQUARE",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Square. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_ROUND_BRACCI",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Round e braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000_SQUARE_BRACCI",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Square e braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000GUIDE_SENZACASS",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, senza cassonetto. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000GUIDE_ROUND",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, con cassonetto Round. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000GUIDE_SQUARE",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, con cassonetto Square. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, versione standard senza cassonetto, guidata da 2 cavetti in acciaio da 4mm. Comando ad argano, a molla o motorizzato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND_CAVETTO4",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Round, cavetto in acciaio da 4mm (versione su richiesta).",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000CAVETTO_ROUND_TONDINO6",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Round, tondino in acciaio da 6mm (versione su richiesta).",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000CAVETTO_SQUARE_CAVETTO4",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Square, cavetto in acciaio da 4mm (versione su richiesta).",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_3000CAVETTO_SQUARE_TONDINO6",
-    "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Square, tondino in acciaio da 6mm (versione su richiesta).",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/3000.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_T4_SENZACASS",
-    "descrizioneTecnica": "Tenda da balcone mod. T4, senza cassonetto. Scorre su guide laterali fissate tra soffitto e ringhiera, braccetti laterali e frangitratta, arganello interno alla piastra.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/t4.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_T4_ROUND",
-    "descrizioneTecnica": "Tenda da balcone mod. T4, con cassonetto Round. Scorre su guide laterali fissate tra soffitto e ringhiera, braccetti laterali e frangitratta, arganello interno alla piastra.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": "/immagini/tende_caduta/t4.png"
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SCREENOSCURANTE",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SCREEN5500",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS96",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS88VEOZIP",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTISB92",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_OPATEXPROZIPDECO",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTISW96W88",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_OPATEXFLAT",
-    "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "TENDE A CADUTA",
-    "immagineUrl": null
-  }
+ {
+  "tipologia": "TENDACADUTA_5000S",
+  "descrizioneTecnica": "Tenda a caduta 5000/S. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/5000s.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_7000T",
+  "descrizioneTecnica": "Tenda a caduta 7000/T. Comando ad argano o motorizzato (sconsigliato motore meccanico, braccetti di ancoraggio). Larghezza max 5000mm, sporgenza max 3000mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/7000t.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_7000E",
+  "descrizioneTecnica": "Tenda a caduta 7000/E, disponibile anche in tessuto Liberty e PVC (tariffa 2, sporgenza max 200cm). Larghezza max 5000mm, sporgenza max 3000mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/7000e.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_EVOZIP125_CRISTAL",
+  "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Cristal (Classe 3 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide plus incluse. Larghezza max 4600mm, sporgenza max 3000mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/evozip.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_EVOZIP125_SCREEN",
+  "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Screen oscurante/Soltis 92 (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/evozip.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_EVOZIP125_OPATEX",
+  "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 125mm, telo Opatex Pro (Classe 6 resistenza vento). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 5800mm, sporgenza max 3800mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/evozip.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_EVOZIP100_SCREEN",
+  "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Screen oscurante/Soltis 92 (Classe 6). Motore elettronico con fine-corsa meccanico incluso e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2500mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/evozip.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_EVOZIP100_OPATEX",
+  "descrizioneTecnica": "Tenda a caduta motorizzata Evo Zip, cassonetto 100mm (più compatto), telo Opatex Pro (Classe 6). Motore elettronico con fine-corsa meccanico e set guide standard incluse. Larghezza max 3200mm, sporgenza max 2800mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/evozip.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_SENZACASS",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, senza cassonetto. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_SENZACASS_BRACCI",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, senza cassonetto, con braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_ROUND",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Round. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_SQUARE",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Square. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_ROUND_BRACCI",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Round e braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000_SQUARE_BRACCI",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000, con cassonetto Square e braccetti laterali. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000GUIDE_SENZACASS",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, senza cassonetto. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000GUIDE_ROUND",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, con cassonetto Round. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000GUIDE_SQUARE",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 con guide laterali, con cassonetto Square. Comando ad argano, a molla o motorizzato. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000CAVETTO_SENZACASS",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, versione standard senza cassonetto, guidata da 2 cavetti in acciaio da 4mm. Comando ad argano, a molla o motorizzato.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000CAVETTO_ROUND_CAVETTO4",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Round, cavetto in acciaio da 4mm (versione su richiesta).",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000CAVETTO_ROUND_TONDINO6",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Round, tondino in acciaio da 6mm (versione su richiesta).",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000CAVETTO_SQUARE_CAVETTO4",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Square, cavetto in acciaio da 4mm (versione su richiesta).",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_3000CAVETTO_SQUARE_TONDINO6",
+  "descrizioneTecnica": "Tenda a caduta mod. 3000 Cavetto, con cassonetto Square, tondino in acciaio da 6mm (versione su richiesta).",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/3000.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_T4_SENZACASS",
+  "descrizioneTecnica": "Tenda da balcone mod. T4, senza cassonetto. Scorre su guide laterali fissate tra soffitto e ringhiera, braccetti laterali e frangitratta, arganello interno alla piastra.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/t4.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_T4_ROUND",
+  "descrizioneTecnica": "Tenda da balcone mod. T4, con cassonetto Round. Scorre su guide laterali fissate tra soffitto e ringhiera, braccetti laterali e frangitratta, arganello interno alla piastra.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/t4.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85A_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100A_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125A_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando ad argano, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_85M_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 85mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_100M_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 100mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SCREENOSCURANTE",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Screen Oscurante. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SCREEN5500",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Screen 5500. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS96",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 96. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTIS88VEOZIP",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis 88/Veozip. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTISB92",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis B92. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_OPATEXPROZIPDECO",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Opatex Pro/Opatex Zip/Opatex Decò. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_SOLTISW96W88",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Soltis W96/Soltis W88. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_OMBRABOXINOX_125M_OPATEXFLAT",
+  "descrizioneTecnica": "Tenda a caduta Ombra Box Inox, cassonetto 125mm, comando motorizzato, tessuto tecnico Opatex Flat. Cassonetto in acciaio inox.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TENDACADUTA_ORIZZONTE_ROUND",
+  "descrizioneTecnica": "Tenda a caduta mod. Orizzonte: struttura in alluminio, telo in PVC con ampia finestra centrale in PVC Cristal irrobustito da stecche in alluminio che scorrono nelle guide laterali, massimo riparo da pioggia laterale e vento. Certificazione EN 13561, Resistenza al vento Classe 3, altezza massima 3,5m. FINO A ESAURIMENTO SCORTE. Con cassonetto Round.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/orizzonte.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_ORIZZONTE_SQUARE",
+  "descrizioneTecnica": "Tenda a caduta mod. Orizzonte: struttura in alluminio, telo in PVC con ampia finestra centrale in PVC Cristal irrobustito da stecche in alluminio che scorrono nelle guide laterali, massimo riparo da pioggia laterale e vento. Certificazione EN 13561, Resistenza al vento Classe 3, altezza massima 3,5m. FINO A ESAURIMENTO SCORTE. Con cassonetto Square.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/orizzonte.png"
+ },
+ {
+  "tipologia": "TENDACADUTA_NEWORIZZONTE",
+  "descrizioneTecnica": "Tenda a caduta mod. New Orizzonte: struttura interamente in alluminio, cassonetto con testate autoportanti e sistema di ispezione con chiusura di sicurezza di serie. Staffa opzionale per montaggio a parete o a soffitto. Telo centrale in PVC Cristal per vista panoramica. Predisposizione per Strip LED. Certificazione EN 13561, Resistenza al vento Classe 3, sporgenza massima 3,5m.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE A CADUTA",
+  "immagineUrl": "/immagini/tende_caduta/new_orizzonte.png"
+ }
 ]

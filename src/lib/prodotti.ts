@@ -87,7 +87,10 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TENDACADUTA_T4_SENZACASS")) return "TENDACADUTA_T4_SENZACASS";
   if (tipologia.startsWith("TENDACADUTA_T4_ROUND")) return "TENDACADUTA_T4_ROUND";
   // Ombra Box Inox: nessun optional, non necessita di scoping (ritorna null di default).
-  if (tipologia.startsWith("TENDACADUTA_ORIZZONTE")) return "TENDACADUTA_ORIZZONTE";
+  // --- Sezione 5 2026: Orizzonte / New Orizzonte ---
+  if (tipologia.startsWith("TENDACADUTA_ORIZZONTE_ROUND")) return "TENDACADUTA_ORIZZONTE_ROUND";
+  if (tipologia.startsWith("TENDACADUTA_ORIZZONTE_SQUARE")) return "TENDACADUTA_ORIZZONTE_SQUARE";
+  if (tipologia.startsWith("TENDACADUTA_NEWORIZZONTE")) return "TENDACADUTA_NEWORIZZONTE";
   if (tipologia.startsWith("TENDACADUTA_EVOZIP125_CRISTAL")) return "TENDACADUTA_EVOZIP125_CRISTAL";
   if (tipologia.startsWith("TENDACADUTA_EVOZIP125_SCREEN")) return "TENDACADUTA_EVOZIP125_SCREEN";
   if (tipologia.startsWith("TENDACADUTA_EVOZIP125_OPATEX")) return "TENDACADUTA_EVOZIP125_OPATEX";
@@ -110,6 +113,11 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TENDABRACCI_SAMBASMART")) return "TENDABRACCI_SAMBASMART";
   if (tipologia.startsWith("TENDABRACCI_SAMBA")) return "TENDABRACCI_SAMBA";
   if (tipologia.startsWith("TENDABRACCI_AMERICA")) return "TENDABRACCI_AMERICA";
+  // --- Sezione 5 2026: Tende classiche (Retro 6000 / Leuca / Classique) ---
+  if (tipologia.startsWith("TENDABRACCI_RETRO6000_SENZACASS")) return "TENDABRACCI_RETRO6000_SENZACASS";
+  if (tipologia.startsWith("TENDABRACCI_RETRO6000_ROUND")) return "TENDABRACCI_RETRO6000_ROUND";
+  if (tipologia.startsWith("TENDABRACCI_LEUCA")) return "TENDABRACCI_LEUCA";
+  if (tipologia.startsWith("TENDABRACCI_CLASSIQUE")) return "TENDABRACCI_CLASSIQUE";
   if (tipologia.startsWith("TENDAORIZZ_MILLENIUM")) return "TENDAORIZZ_MILLENIUM";
   if (tipologia.startsWith("TENDAORIZZ_TENDAROLL_SENZACASSONETTO")) return "TENDAORIZZ_TENDAROLL_SENZACASSONETTO";
   if (tipologia.startsWith("TENDAORIZZ_TENDAROLL_CONCASSONETTO")) return "TENDAORIZZ_TENDAROLL_CONCASSONETTO";

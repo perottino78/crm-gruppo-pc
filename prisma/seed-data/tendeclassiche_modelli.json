@@ -1,0 +1,30 @@
+[
+ {
+  "tipologia": "TENDABRACCI_RETRO6000_SENZACASS",
+  "descrizioneTecnica": "Tenda a bracci laterali mod. Retrò 6000, sporgenza uguale all'ingombro. Fissaggio a parete o a soffitto, adatta a prospetti di ville e negozi. Comando ad arganello o motorizzato, blocco apertura a qualsiasi altezza. Certificazione EN 13561, Resistenza al vento Classe 3, sporgenza massima 1,6m. Larghezza max 500cm. Senza cassonetto.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE CLASSICHE",
+  "immagineUrl": "/immagini/tende_classiche/retro6000.png"
+ },
+ {
+  "tipologia": "TENDABRACCI_RETRO6000_ROUND",
+  "descrizioneTecnica": "Tenda a bracci laterali mod. Retrò 6000, sporgenza uguale all'ingombro. Fissaggio a parete o a soffitto, adatta a prospetti di ville e negozi. Comando ad arganello o motorizzato, blocco apertura a qualsiasi altezza. Certificazione EN 13561, Resistenza al vento Classe 3, sporgenza massima 1,6m. Larghezza max 500cm. Con cassonetto Round.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE CLASSICHE",
+  "immagineUrl": "/immagini/tende_classiche/retro6000.png"
+ },
+ {
+  "tipologia": "TENDABRACCI_LEUCA",
+  "descrizioneTecnica": "Tenda a bracci laterali mod. Leuca, sporgenza uguale all'ingombro. Fissaggio a parete o a soffitto, adatta a prospetti di ville e negozi. Comando ad arganello o motorizzato, blocco apertura a qualsiasi altezza. Certificazione EN 13561, Resistenza al vento Classe 3, sporgenza massima 1,5m. Larghezza max 500cm. FINO A ESAURIMENTO SCORTE.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE CLASSICHE",
+  "immagineUrl": "/immagini/tende_classiche/leuca.png"
+ },
+ {
+  "tipologia": "TENDABRACCI_CLASSIQUE",
+  "descrizioneTecnica": "Tenda a bracci laterali mod. Classique, elegante, ideale per ville in stile antico, centri storici, bar, ristoranti, boutique e negozi. Struttura in ferro battuto verniciato a polveri. Ingombro sempre uguale alla sporgenza. Certificazione EN 13561, Resistenza al vento Classe 3, sporgenza massima 1,5m.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "TENDE CLASSICHE",
+  "immagineUrl": "/immagini/tende_classiche/classique.png"
+ }
+]
