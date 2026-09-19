@@ -1,191 +1,303 @@
 [
-  {
-    "tipologia": "MOTORE_CHERUBINI_MECCANICO",
-    "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
-    "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico e manovra di soccorso.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
-    "descrizioneTecnica": "Cherubini — Motori con finecorsa elettronico e ricevitore radio integrato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_CHERUBINI_MECCANICO_RADIO",
-    "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico e ricevitore radio integrato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO_RADIO",
-    "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TELECOMANDO_CHERUBINI",
-    "descrizioneTecnica": "Cherubini — Sistemi di comando. * Con attivazione separata dei sensori climatici per i modelli LUX/P-LUX.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "CENTRALINA_CHERUBINI",
-    "descrizioneTecnica": "Cherubini — Centrali di comando.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "SENSORE_CHERUBINI",
-    "descrizioneTecnica": "Cherubini — Sensori di vento, sole e pioggia.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_NICE_MECCANICO",
-    "descrizioneTecnica": "Nice — Motori con finecorsa meccanico.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
-    "descrizioneTecnica": "Nice — Motori con finecorsa meccanico e manovra di soccorso.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
-    "descrizioneTecnica": "Nice — Motori con finecorsa elettronico e ricevitore radio integrato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_NICE_MECCANICO_RADIO",
-    "descrizioneTecnica": "Nice — Motori con finecorsa meccanico e ricevitore radio integrato.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO_RADIO",
-    "descrizioneTecnica": "Nice — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato. Compatibili solo con KIT 8 - VOLO/SR.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TELECOMANDO_NICE",
-    "descrizioneTecnica": "Nice — Sistemi di comando.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "CENTRALINA_NICE",
-    "descrizioneTecnica": "Nice — Centrali di comando.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "SENSORE_NICE",
-    "descrizioneTecnica": "Nice — Sensori di vento, sole e pioggia.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "GATEWAY_NICE",
-    "descrizioneTecnica": "Nice — Wi-Fi radio gateway.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_SOMFY_MECCANICO",
-    "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
-    "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico e manovra di soccorso.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
-    "descrizioneTecnica": "Somfy — Motori con finecorsa elettronico e ricevitore radio integrato — Serie RTS.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
-    "descrizioneTecnica": "Somfy — Motori con finecorsa elettronico e ricevitore radio integrato — Serie IO.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
-    "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato — Serie RTS.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TELECOMANDO_SOMFY_RTS",
-    "descrizioneTecnica": "Somfy — Sistemi di comando — Serie RTS.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "TELECOMANDO_SOMFY_IO",
-    "descrizioneTecnica": "Somfy — Sistemi di comando — Serie IO.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "CENTRALINA_SOMFY",
-    "descrizioneTecnica": "Somfy — Centrali di comando.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "SENSORE_SOMFY_RTS",
-    "descrizioneTecnica": "Somfy — Sensori di vento, sole e pioggia — Serie RTS.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  },
-  {
-    "tipologia": "SENSORE_SOMFY_IO",
-    "descrizioneTecnica": "Somfy — Sensori di vento e sole — Serie IO.",
-    "famiglia": "OUTDOOR",
-    "gruppo": "MOTORI E AUTOMATISMI",
-    "immagineUrl": null
-  }
+ {
+  "tipologia": "MOTORE_CHERUBINI_MECCANICO",
+  "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO",
+  "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico e manovra di soccorso.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_CHERUBINI_ELETTRONICO_RADIO",
+  "descrizioneTecnica": "Cherubini — Motori con finecorsa elettronico e ricevitore radio integrato.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_CHERUBINI_MECCANICO_RADIO",
+  "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico e ricevitore radio integrato.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_CHERUBINI_MECCANICO_SOCCORSO_RADIO",
+  "descrizioneTecnica": "Cherubini — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TELECOMANDO_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Sistemi di comando. * Con attivazione separata dei sensori climatici per i modelli LUX/P-LUX.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "CENTRALINA_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Centrali di comando.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "SENSORE_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Sensori di vento, sole e pioggia.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "GATEWAY_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Domotica.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "ADATTATORE_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Adattatori.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "KIT_CHERUBINI",
+  "descrizioneTecnica": "Cherubini — Kit combinati sensore/centralina/telecomando pre-assemblati, prezzo per numero di tende gestite.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_NICE_MECCANICO",
+  "descrizioneTecnica": "Nice — Motori con finecorsa meccanico.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO",
+  "descrizioneTecnica": "Nice — Motori con finecorsa meccanico e manovra di soccorso.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_NICE_ELETTRONICO_RADIO",
+  "descrizioneTecnica": "Nice — Motori con finecorsa elettronico e ricevitore radio integrato.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_NICE_MECCANICO_SOCCORSO_RADIO",
+  "descrizioneTecnica": "Nice — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato. Compatibili solo con KIT 8 - VOLO/SR.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TELECOMANDO_NICE",
+  "descrizioneTecnica": "Nice — Sistemi di comando.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "CENTRALINA_NICE",
+  "descrizioneTecnica": "Nice — Centrali di comando.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "SENSORE_NICE",
+  "descrizioneTecnica": "Nice — Sensori di vento, sole e pioggia.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "GATEWAY_NICE",
+  "descrizioneTecnica": "Nice — Wi-Fi radio gateway.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "ADATTATORE_NICE",
+  "descrizioneTecnica": "Nice — Adattatori.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "KIT_NICE",
+  "descrizioneTecnica": "Nice — Kit combinati sensore/centralina/telecomando pre-assemblati, prezzo per numero di tende gestite.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SIMU_MECCANICO",
+  "descrizioneTecnica": "Simu — Motori con finecorsa meccanico.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SIMU_MECCANICO_SOCCORSO",
+  "descrizioneTecnica": "Simu — Motori con finecorsa meccanico e manovra di soccorso.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SIMU_ELETTRONICO_RADIO",
+  "descrizioneTecnica": "Simu — Motori con finecorsa elettronico e ricevitore radio integrato - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SIMU_MECCANICO_SOCCORSO_RADIO",
+  "descrizioneTecnica": "Simu — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TELECOMANDO_SIMU",
+  "descrizioneTecnica": "Simu — Sistemi di comando - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "CENTRALINA_SIMU",
+  "descrizioneTecnica": "Simu — Centrali di comando.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "SENSORE_SIMU",
+  "descrizioneTecnica": "Simu — Sensori di vento, sole e pioggia - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "ADATTATORE_SIMU",
+  "descrizioneTecnica": "Simu — Adattatori.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "KIT_SIMU",
+  "descrizioneTecnica": "Simu — Kit combinati sensore/telecomando pre-assemblati, prezzo per numero di tende gestite.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SOMFY_MECCANICO",
+  "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO",
+  "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico e manovra di soccorso.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_RTS",
+  "descrizioneTecnica": "Somfy — Motori con finecorsa elettronico e ricevitore radio integrato - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SOMFY_ELETTRONICO_RADIO_IO",
+  "descrizioneTecnica": "Somfy — Motori con finecorsa elettronico e ricevitore radio integrato - Serie IO.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "MOTORE_SOMFY_MECCANICO_SOCCORSO_RADIO_RTS",
+  "descrizioneTecnica": "Somfy — Motori con finecorsa meccanico, manovra di soccorso e ricevitore radio integrato - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TELECOMANDO_SOMFY_RTS",
+  "descrizioneTecnica": "Somfy — Sistemi di comando - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "TELECOMANDO_SOMFY_IO",
+  "descrizioneTecnica": "Somfy — Sistemi di comando - Serie IO.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "CENTRALINA_SOMFY",
+  "descrizioneTecnica": "Somfy — Centrali di comando.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "SENSORE_SOMFY_RTS",
+  "descrizioneTecnica": "Somfy — Sensori di vento, sole e pioggia - Serie RTS.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "SENSORE_SOMFY_IO",
+  "descrizioneTecnica": "Somfy — Sensori di vento e sole - Serie IO.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "GATEWAY_SOMFY",
+  "descrizioneTecnica": "Somfy — Domotica.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "ADATTATORE_SOMFY",
+  "descrizioneTecnica": "Somfy — Adattatori.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ },
+ {
+  "tipologia": "KIT_SOMFY",
+  "descrizioneTecnica": "Somfy — Kit combinati sensore/telecomando pre-assemblati, prezzo per numero di tende gestite.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "MOTORI E AUTOMATISMI",
+  "immagineUrl": null
+ }
 ]
