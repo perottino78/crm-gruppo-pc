@@ -218,6 +218,71 @@ export function listinoDiTipologia(tipologia: string): string | null {
   return null;
 }
 
+// Colori struttura tende da sole 2026 (task #209, catalogo sezione 12 "Colori
+// disponibili"): chiave di famiglia dedicata ESCLUSIVAMENTE allo scoping
+// dell'optional "Colore struttura" (categoria Optional, listino=questa chiave),
+// indipendente da listinoDiTipologia() qui sopra — che serve a scopare optional
+// di prezzo (maggiorazioni tessuto, motorizzazione, kit) con una granularità
+// molto più fine (spesso una chiave diversa per ogni sotto-variante di
+// cassonetto/comando/tessuto). Il catalogo colori invece elenca UNA sola riga
+// di disponibilità per ciascun "modello" commerciale, che in DB può coprire
+// più tipologie diverse (es. "OMBRA BOX INOX" = 72 tipologie per le sole
+// combinazioni cassonetto/comando, tutte con la stessa tavolozza colori).
+// Tutte le chiavi qui iniziano con "COLORE_" per non collidere mai con un
+// valore reale di tipologia o con un ritorno di listinoDiTipologia().
+export function famigliaColoreStruttura(tipologia: string): string | null {
+  // Tende a caduta (sezione 4): più sotto-varianti condividono la stessa tavolozza.
+  if (tipologia.startsWith("TENDACADUTA_3000GUIDE_")) return "COLORE_3000GUIDE";
+  if (tipologia.startsWith("TENDACADUTA_3000CAVETTO_")) return "COLORE_3000CAVETTO";
+  if (tipologia.startsWith("TENDACADUTA_3000_")) return "COLORE_3000";
+  if (tipologia.startsWith("TENDACADUTA_T4_")) return "COLORE_T4";
+  if (tipologia.startsWith("TENDACADUTA_ORIZZONTE_")) return "COLORE_ORIZZONTE";
+  if (tipologia.startsWith("TENDACADUTA_OMBRABOXINOX_")) return "COLORE_OMBRABOXINOX";
+  // Tende classiche (sezione 5): Retrò 6000 ha due varianti (senza cassonetto/round).
+  if (tipologia.startsWith("TENDABRACCI_RETRO6000_")) return "COLORE_RETRO6000";
+  // Tende veranda (Winter Balkon, 4 varianti: base/top/frangivento/top+frangivento).
+  if (tipologia.startsWith("TENDAVERANDA_WINTERBALKON")) return "COLORE_WINTERBALKON";
+  // Cappottine (sezione 3): il catalogo colori distingue solo profilo 35mm vs 50mm,
+  // non i singoli modelli (Standard/Gradini/Prolungata/Barletta/Cupola). Delta K35/K50
+  // e Vogue non compaiono nella tavola colori del catalogo 2026: nessuna chiave, quindi
+  // restano senza optional colore struttura (dato non fabbricato).
+  if (
+    tipologia.startsWith("STANDARD35_") ||
+    tipologia === "GRADINI35" ||
+    tipologia === "PROLUNGATA35" ||
+    tipologia.startsWith("BARLETTA35") ||
+    tipologia.startsWith("CUPOLA35")
+  )
+    return "COLORE_CAPPOTTINE35";
+  if (
+    tipologia.startsWith("STANDARD50_") ||
+    tipologia === "GRADINI50" ||
+    tipologia === "PROLUNGATA50" ||
+    tipologia.startsWith("BARLETTA50") ||
+    tipologia.startsWith("CUPOLA50")
+  )
+    return "COLORE_CAPPOTTINE50";
+  // Giardino e patio (sezione 6): Corfù e Giardino94 hanno più varianti di montaggio.
+  if (tipologia.startsWith("CORFU_")) return "COLORE_CORFU";
+  if (tipologia.startsWith("GIARDINO94_")) return "COLORE_GIARDINO94";
+  // Tende orizzontali (sezioni 7-8): Tenda Roll ha 2 varianti (con/senza cassonetto).
+  if (tipologia.startsWith("TENDAORIZZ_TENDAROLL_")) return "COLORE_TENDAROLL";
+  // Telai fissi (sezione 11): un'unica tavolozza per tutte le 11 tipologie/tessuti.
+  if (tipologia.startsWith("TELAIFISSI_")) return "COLORE_TELAIFISSI";
+  // Linea Zip (sezioni 7-8): New Securzip copre le 3 larghezze cassonetto (85/100/125);
+  // EvoZip copre le 2 larghezze (100/125) ma NON EvoZip Duo, che ha tavolozza propria
+  // con maggiorazioni aggiuntive (i prefissi non collidono, "EVOZIPDUO_" != "EVOZIP100_"/"EVOZIP125_").
+  if (
+    tipologia.startsWith("SECURZIP85_") ||
+    tipologia.startsWith("SECURZIP100_") ||
+    tipologia.startsWith("SECURZIP125_")
+  )
+    return "COLORE_NEWSECURZIP";
+  if (tipologia.startsWith("EVOZIPDUO_")) return "COLORE_EVOZIPDUO";
+  if (tipologia.startsWith("EVOZIP100_") || tipologia.startsWith("EVOZIP125_")) return "COLORE_EVOZIP";
+  return null;
+}
+
 // Sottogruppo di selezione a due passaggi (es. Zenith: prima si sceglie la variante
 // Uw/zona climatica, poi la tipologia di serramento). Ritorna null per i prodotti che
 // non hanno bisogno di questo secondo livello (la stragrande maggioranza dei cataloghi).
