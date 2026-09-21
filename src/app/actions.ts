@@ -232,12 +232,171 @@ export async function aggiungiRigaTestoLibero(formData: FormData) {
   const prezzoStr = str(formData, "prezzoUnitario");
   const prezzoParsed = prezzoStr ? parseFloat(prezzoStr.replace(",", ".")) : 0;
   const prezzoUnitario = Number.isFinite(prezzoParsed) ? prezzoParsed : 0;
+  // Sezione opzionale: se il pulsante "+ riga testuale" è quello dentro una
+  // sezione/stanza, la riga nasce già assegnata a quella sezione, in coda.
+  const sezioneId = str(formData, "sezioneId") || null;
+  const ordine = await prossimoOrdine(preventivoId, sezioneId);
 
   await prisma.rigaPreventivo.create({
-    data: { preventivoId, testoLibero, quantita: 1, prezzoUnitario },
+    data: { preventivoId, testoLibero, quantita: 1, prezzoUnitario, sezioneId, ordine },
   });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+// ===== Sezioni preventivo (raggruppamento righe per stanza/gruppo) =====
+//
+// Le righe di un preventivo con molti articoli misti (finestre, tapparelle,
+// zanzariere...) possono essere organizzate in "sezioni" create a mano dal
+// commerciale (es. "Cucina", "Camera 1"). Le righe senza sezioneId restano
+// in un elenco "senza sezione" separato, in cima alla pagina.
+//
+// L'ordinamento (riga.ordine / sezione.ordine) non è mai garantito denso o
+// univoco finché nessuno lo tocca (le righe create restano tutte a 0, o in
+// coda con prossimoOrdine): per questo ogni operazione di spostamento fa
+// prima un "resequence" (riassegna 0..n-1 in base all'ordine di visualizzazione
+// attuale, con l'id come spareggio = ordine di creazione) e solo dopo scambia
+// i due valori — così funziona correttamente anche sui preventivi già esistenti,
+// senza bisogno di una migrazione dati separata.
+
+async function prossimoOrdine(preventivoId: string, sezioneId: string | null): Promise<number> {
+  const agg = await prisma.rigaPreventivo.aggregate({
+    where: { preventivoId, sezioneId },
+    _max: { ordine: true },
+  });
+  return (agg._max.ordine ?? -1) + 1;
+}
+
+async function resequenceRighe(preventivoId: string, sezioneId: string | null): Promise<{ id: string; ordine: number }[]> {
+  const righe = await prisma.rigaPreventivo.findMany({
+    where: { preventivoId, sezioneId },
+    orderBy: [{ ordine: "asc" }, { id: "asc" }],
+    select: { id: true },
+  });
+  const aggiornate = righe.map((r, i) => ({ id: r.id, ordine: i }));
+  await Promise.all(aggiornate.map((r) => prisma.rigaPreventivo.update({ where: { id: r.id }, data: { ordine: r.ordine } })));
+  return aggiornate;
+}
+
+async function spostaRiga(formData: FormData, direzione: 1 | -1) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const riga = await prisma.rigaPreventivo.findUnique({ where: { id }, select: { sezioneId: true } });
+  if (!riga) return;
+
+  const ordinate = await resequenceRighe(preventivoId, riga.sezioneId);
+  const idx = ordinate.findIndex((r) => r.id === id);
+  const altroIdx = idx + direzione;
+  if (idx === -1 || altroIdx < 0 || altroIdx >= ordinate.length) return;
+
+  await prisma.$transaction([
+    prisma.rigaPreventivo.update({ where: { id: ordinate[idx].id }, data: { ordine: ordinate[altroIdx].ordine } }),
+    prisma.rigaPreventivo.update({ where: { id: ordinate[altroIdx].id }, data: { ordine: ordinate[idx].ordine } }),
+  ]);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function spostaRigaSu(formData: FormData) {
+  await spostaRiga(formData, -1);
+}
+
+export async function spostaRigaGiu(formData: FormData) {
+  await spostaRiga(formData, 1);
+}
+
+// Sposta una riga in un'altra sezione (o fuori da qualunque sezione se si
+// sceglie l'opzione vuota): finisce in coda alla sezione di destinazione,
+// poi eventualmente riordinabile con le frecce su/giu.
+export async function spostaRigaSezione(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+  const sezioneIdRaw = str(formData, "sezioneId");
+  const sezioneId = sezioneIdRaw ? sezioneIdRaw : null;
+
+  const ordine = await prossimoOrdine(preventivoId, sezioneId);
+  await prisma.rigaPreventivo.update({ where: { id }, data: { sezioneId, ordine } });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function creaSezione(formData: FormData) {
+  const preventivoId = str(formData, "preventivoId");
+  const nome = str(formData, "nome");
+  if (!preventivoId || !nome || !nome.trim()) return;
+
+  const agg = await prisma.sezionePreventivo.aggregate({
+    where: { preventivoId },
+    _max: { ordine: true },
+  });
+  const ordine = (agg._max.ordine ?? -1) + 1;
+
+  await prisma.sezionePreventivo.create({
+    data: { preventivoId, nome: nome.trim(), ordine },
+  });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function rinominaSezione(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  const nome = str(formData, "nome");
+  if (!id || !preventivoId || !nome || !nome.trim()) return;
+
+  await prisma.sezionePreventivo.update({ where: { id }, data: { nome: nome.trim() } });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+// Elimina una sezione vuota. Se contiene ancora righe non fa nulla (l'interfaccia
+// non mostra comunque il pulsante in quel caso): evita di cancellare per sbaglio
+// righe/articoli insieme alla sezione.
+export async function eliminaSezione(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const righeCollegate = await prisma.rigaPreventivo.count({ where: { sezioneId: id } });
+  if (righeCollegate > 0) return;
+
+  await prisma.sezionePreventivo.delete({ where: { id } });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+async function resequenceSezioni(preventivoId: string): Promise<{ id: string; ordine: number }[]> {
+  const sezioni = await prisma.sezionePreventivo.findMany({
+    where: { preventivoId },
+    orderBy: [{ ordine: "asc" }, { id: "asc" }],
+    select: { id: true },
+  });
+  const aggiornate = sezioni.map((s, i) => ({ id: s.id, ordine: i }));
+  await Promise.all(aggiornate.map((s) => prisma.sezionePreventivo.update({ where: { id: s.id }, data: { ordine: s.ordine } })));
+  return aggiornate;
+}
+
+async function spostaSezione(formData: FormData, direzione: 1 | -1) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const ordinate = await resequenceSezioni(preventivoId);
+  const idx = ordinate.findIndex((s) => s.id === id);
+  const altroIdx = idx + direzione;
+  if (idx === -1 || altroIdx < 0 || altroIdx >= ordinate.length) return;
+
+  await prisma.$transaction([
+    prisma.sezionePreventivo.update({ where: { id: ordinate[idx].id }, data: { ordine: ordinate[altroIdx].ordine } }),
+    prisma.sezionePreventivo.update({ where: { id: ordinate[altroIdx].id }, data: { ordine: ordinate[idx].ordine } }),
+  ]);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function spostaSezioneSu(formData: FormData) {
+  await spostaSezione(formData, -1);
+}
+
+export async function spostaSezioneGiu(formData: FormData) {
+  await spostaSezione(formData, 1);
 }
 
 export async function aggiungiRigaPreventivo(formData: FormData) {

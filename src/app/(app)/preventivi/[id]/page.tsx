@@ -22,6 +22,14 @@ import {
   aggiornaSconto,
   aggiornaIva,
   aggiungiRigaTestoLibero,
+  creaSezione,
+  rinominaSezione,
+  eliminaSezione,
+  spostaRigaSu,
+  spostaRigaGiu,
+  spostaRigaSezione,
+  spostaSezioneSu,
+  spostaSezioneGiu,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
@@ -67,8 +75,9 @@ export default async function PreventivoPage({
       commerciale: true,
       righe: {
         include: { prodotto: true, optionali: { include: { optional: true } } },
-        orderBy: { id: "asc" },
+        orderBy: [{ ordine: "asc" }, { id: "asc" }],
       },
+      sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
     },
   });
   if (!preventivo) notFound();
@@ -260,6 +269,39 @@ export default async function PreventivoPage({
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
 
+  // Frecce su/giu + tendina "sposta in sezione" mostrate a sinistra di ogni riga
+  // (prodotto o testo libero). idx/totale sono la posizione della riga dentro il
+  // proprio gruppo (senza-sezione, oppure la singola sezione a cui appartiene).
+  const controlliSpostamento = (rigaId: string, sezioneIdCorrente: string | null, idx: number, totale: number) => (
+    <div className="flex flex-col items-center gap-1 px-1.5 py-2 border-r border-neutral-100 bg-neutral-50 shrink-0 w-[70px]">
+      <div className="flex items-center gap-1">
+        <form action={spostaRigaSu}>
+          <input type="hidden" name="id" value={rigaId} />
+          <input type="hidden" name="preventivoId" value={preventivo.id} />
+          <button disabled={idx === 0} className={`block leading-none text-xs ${idx === 0 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta su">▲</button>
+        </form>
+        <form action={spostaRigaGiu}>
+          <input type="hidden" name="id" value={rigaId} />
+          <input type="hidden" name="preventivoId" value={preventivo.id} />
+          <button disabled={idx === totale - 1} className={`block leading-none text-xs ${idx === totale - 1 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta giù">▼</button>
+        </form>
+      </div>
+      {preventivo.sezioni.length > 0 && (
+        <form action={spostaRigaSezione} className="flex flex-col items-center gap-0.5">
+          <input type="hidden" name="id" value={rigaId} />
+          <input type="hidden" name="preventivoId" value={preventivo.id} />
+          <select name="sezioneId" defaultValue={sezioneIdCorrente ?? ""} className="text-[9px] border border-neutral-200 rounded px-0.5 py-0.5 w-full">
+            <option value="">— nessuna —</option>
+            {preventivo.sezioni.map((s) => (
+              <option key={s.id} value={s.id}>{s.nome}</option>
+            ))}
+          </select>
+          <button className="text-[9px] text-blue-600 hover:underline" title="sposta in sezione">sposta</button>
+        </form>
+      )}
+    </div>
+  );
+
   return (
     <div className="max-w-5xl">
       <Link href={`/clienti/${preventivo.clienteId}`} className="text-xs text-neutral-600 hover:underline">
@@ -403,13 +445,30 @@ export default async function PreventivoPage({
         </form>
       </details>
 
-      <h2 className="text-base font-bold text-neutral-900 mb-3">Righe ({preventivo.righe.length})</h2>
+      {(() => {
+        return (
+          <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+            <h2 className="text-base font-bold text-neutral-900">Righe ({preventivo.righe.length})</h2>
+            <details className="text-xs">
+              <summary className="cursor-pointer text-blue-600 hover:underline">+ crea sezione (stanza/gruppo)</summary>
+              <form action={creaSezione} className="mt-1.5 flex items-center gap-1.5">
+                <input type="hidden" name="preventivoId" value={preventivo.id} />
+                <input name="nome" placeholder="es. Cucina, Camera 1..." className="text-xs border border-neutral-200 rounded px-2 py-1 w-48" />
+                <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">crea sezione</button>
+              </form>
+            </details>
+          </div>
+        );
+      })()}
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
-        {preventivo.righe.map((r) => {
+        {(() => {
+          const renderRiga = (r: (typeof preventivo.righe)[number], idx: number, arr: (typeof preventivo.righe)[number][]) => {
           if (!r.prodotto) {
             const subtotaleLibero = r.quantita * r.prezzoUnitario;
             return (
-              <div key={r.id} className="px-4 py-3 text-sm">
+              <div key={r.id} className="flex items-stretch">
+                {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
+                <div className="flex-1 px-4 py-3 text-sm">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex-1">
                     <p className="font-medium text-neutral-800 whitespace-pre-line">📝 {r.testoLibero}</p>
@@ -427,6 +486,7 @@ export default async function PreventivoPage({
                     </form>
                   </div>
                 </div>
+                </div>
               </div>
             );
           }
@@ -439,7 +499,9 @@ export default async function PreventivoPage({
           const altezzaMostrata = r.misuraAltezza ?? prodotto.altezzaMm;
           const descrizioneEffettiva = r.descrizionePersonalizzata ?? modello?.descrizioneTecnica ?? "";
           return (
-            <div key={r.id} className="px-4 py-3 text-sm">
+            <div key={r.id} className="flex items-stretch">
+              {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
+              <div className="flex-1 px-4 py-3 text-sm">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {modello?.immagineUrl && (
@@ -753,9 +815,84 @@ export default async function PreventivoPage({
                   </form>
                 );
               })()}
+              </div>
             </div>
           );
-        })}
+          };
+
+          const righeSenzaSezione = preventivo.righe.filter((r) => !r.sezioneId);
+          const sezioniConRighe = preventivo.sezioni.map((sezione) => ({
+            sezione,
+            righe: preventivo.righe.filter((r) => r.sezioneId === sezione.id),
+          }));
+
+          return (
+            <>
+              {righeSenzaSezione.length > 0 && sezioniConRighe.length > 0 && (
+                <p className="px-4 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Senza sezione</p>
+              )}
+              {righeSenzaSezione.map((r, idx, arr) => renderRiga(r, idx, arr))}
+              {sezioniConRighe.map(({ sezione, righe }, sIdx, sArr) => (
+                <div key={sezione.id}>
+                  <div className="px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap border-t-2 border-neutral-300 bg-neutral-100">
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex flex-col leading-none">
+                        <form action={spostaSezioneSu}>
+                          <input type="hidden" name="id" value={sezione.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <button disabled={sIdx === 0} className={`block text-[9px] ${sIdx === 0 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta sezione su">▲</button>
+                        </form>
+                        <form action={spostaSezioneGiu}>
+                          <input type="hidden" name="id" value={sezione.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <button disabled={sIdx === sArr.length - 1} className={`block text-[9px] ${sIdx === sArr.length - 1 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta sezione giù">▼</button>
+                        </form>
+                      </div>
+                      <span className="text-sm">🏠</span>
+                      <form action={rinominaSezione} className="flex items-center gap-1.5">
+                        <input type="hidden" name="id" value={sezione.id} />
+                        <input type="hidden" name="preventivoId" value={preventivo.id} />
+                        <input
+                          name="nome"
+                          defaultValue={sezione.nome}
+                          className="text-sm font-bold text-neutral-800 bg-transparent border-b border-dashed border-neutral-300 focus:border-neutral-600 focus:outline-none px-0.5"
+                        />
+                        <button className="text-[10px] text-blue-600 hover:underline">salva nome</button>
+                      </form>
+                    </div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <form action={aggiungiRigaTestoLibero} className="flex items-center gap-1">
+                        <input type="hidden" name="preventivoId" value={preventivo.id} />
+                        <input type="hidden" name="sezioneId" value={sezione.id} />
+                        <input
+                          name="testoLibero"
+                          placeholder="riga di testo in questa sezione..."
+                          className="text-xs border border-amber-300 bg-amber-50 rounded px-1.5 py-1 w-48"
+                        />
+                        <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ riga testuale</button>
+                      </form>
+                      {righe.length === 0 && (
+                        <form action={eliminaSezione}>
+                          <input type="hidden" name="id" value={sezione.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <button className="text-[11px] text-red-500 hover:text-red-700">elimina sezione</button>
+                        </form>
+                      )}
+                    </div>
+                  </div>
+                  <div className="divide-y divide-neutral-100 bg-neutral-50/40">
+                    {righe.map((r, idx, arr) => renderRiga(r, idx, arr))}
+                    {righe.length === 0 && (
+                      <p className="px-4 py-4 text-xs text-neutral-500 italic">
+                        Nessun articolo qui — spostane uno con la tendina nella colonna a sinistra, oppure aggiungi una riga testuale sopra.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </>
+          );
+        })()}
         {preventivo.righe.length === 0 && (
           <p className="px-4 py-6 text-sm text-neutral-600">Nessun prodotto ancora — aggiungilo qui sotto.</p>
         )}

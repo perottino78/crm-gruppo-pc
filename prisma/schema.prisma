@@ -153,6 +153,11 @@ model Preventivo {
   // Immagine (URL) mostrata in cima alla prima pagina della stampa offerta, es. foto del progetto o rendering
   immagineCopertinaUrl String?
   righe        RigaPreventivo[]
+  // Sezioni/stanze in cui il commerciale può raggruppare le righe (es. "Cucina",
+  // "Camera 1"...) per organizzare preventivi con molti articoli misti (finestre,
+  // tapparelle, zanzariere...) invece di un unico elenco piatto. Le righe senza
+  // sezioneId restano nell'elenco "senza sezione" in cima.
+  sezioni      SezionePreventivo[]
   promemoria   PromemoriaInviato[]
   progetto     Progetto?
   createdAt    DateTime        @default(now())
@@ -181,7 +186,28 @@ model RigaPreventivo {
   // Testo libero che sovrascrive, solo per questa riga, la descrizione tecnica standard
   // del modello (utile per non ripetere descrizioni identiche o correggerne il testo)
   descrizionePersonalizzata String?
+  // Ordinamento manuale (frecce su/giu nell'editor preventivo) fra le righe che
+  // condividono la stessa sezione (o fra tutte le righe "senza sezione" se null).
+  // Non è garantito univoco/denso finché nessuno riordina: in quel caso l'ordine
+  // effettivo resta quello di creazione (vedi orderBy [ordine, id] nella pagina).
+  ordine        Int            @default(0)
+  sezione       SezionePreventivo? @relation(fields: [sezioneId], references: [id], onDelete: SetNull)
+  sezioneId     String?
   optionali     RigaOptional[]
+}
+
+// Sezione/stanza di un preventivo (es. "Cucina", "Camera da letto 1") creata a
+// mano dal commerciale per raggruppare le righe che vanno in quell'ambiente,
+// invece di un unico elenco piatto di finestre/tapparelle/zanzariere ecc.
+model SezionePreventivo {
+  id           String           @id @default(cuid())
+  preventivo   Preventivo       @relation(fields: [preventivoId], references: [id])
+  preventivoId String
+  nome         String
+  // Ordinamento manuale fra le sezioni dello stesso preventivo (frecce su/giu).
+  ordine       Int              @default(0)
+  righe        RigaPreventivo[]
+  createdAt    DateTime         @default(now())
 }
 
 model PromemoriaInviato {
