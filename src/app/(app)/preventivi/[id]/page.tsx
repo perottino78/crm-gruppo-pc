@@ -157,17 +157,24 @@ export default async function PreventivoPage({
     const tip = t.tipologia;
     const m = modelloBrandMap.get(tip);
     const famiglia = m?.famiglia ?? "Altro";
-    const gruppo = m?.gruppo ?? "Altro";
-    if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
-    const perGruppo = alberoMap.get(famiglia)!;
-    if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
+    let gruppo = m?.gruppo ?? "Altro";
     const conMisura = haMisura(t._max.larghezzaMm ?? 0, t._max.altezzaMm ?? 0);
     // Per i modelli a calcolo "a formula" (es. vetrate BRILLANTE/SCINTILLA) le righe
     // Prodotto non rappresentano una vera griglia larghezza×altezza (sono solo tariffe
     // per fascia, o un'unica tariffa fissa): mostrare il loro min/max come "range di
     // produzione" sarebbe fuorviante, quindi per questi modelli il range non si mostra.
     const aFormula = m?.modalitaCalcolo && m.modalitaCalcolo !== "GRIGLIA";
-    const sottogruppo = sottogruppoDiTipologia(tip);
+    let sottogruppo = sottogruppoDiTipologia(tip);
+    // Le tende (10 gruppi distinti a livello di catalogo) vengono raccolte sotto un
+    // unico gruppo sintetico "TENDE" in tendina, mostrando il nome del gruppo originale
+    // come sottogruppo (es. TENDE > Tende a caduta > Tende a caduta 3000 - con cavetto).
+    if (GRUPPI_TENDE_CON_TESSUTO.includes(gruppo)) {
+      sottogruppo = gruppo;
+      gruppo = "TENDE";
+    }
+    if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
+    const perGruppo = alberoMap.get(famiglia)!;
+    if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
     perGruppo.get(gruppo)!.push({
       sottogruppo,
       nodo: {
