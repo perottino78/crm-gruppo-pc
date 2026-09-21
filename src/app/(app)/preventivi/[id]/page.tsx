@@ -269,34 +269,42 @@ export default async function PreventivoPage({
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
 
+  // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
+  // rendering della riga — riusato per calcolare il totale di ogni sezione.
+  const subtotaleRiga = (r: (typeof preventivo.righe)[number]): number => {
+    if (!r.prodotto) return r.quantita * r.prezzoUnitario;
+    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
+    return r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+  };
+
   // Frecce su/giu + tendina "sposta in sezione" mostrate a sinistra di ogni riga
   // (prodotto o testo libero). idx/totale sono la posizione della riga dentro il
   // proprio gruppo (senza-sezione, oppure la singola sezione a cui appartiene).
   const controlliSpostamento = (rigaId: string, sezioneIdCorrente: string | null, idx: number, totale: number) => (
-    <div className="flex flex-col items-center gap-1 px-1.5 py-2 border-r border-neutral-100 bg-neutral-50 shrink-0 w-[70px]">
+    <div className="flex flex-col items-center gap-1.5 px-2 py-2.5 border-r border-neutral-200 bg-neutral-50 shrink-0 w-[80px]">
       <div className="flex items-center gap-1">
         <form action={spostaRigaSu}>
           <input type="hidden" name="id" value={rigaId} />
           <input type="hidden" name="preventivoId" value={preventivo.id} />
-          <button disabled={idx === 0} className={`block leading-none text-xs ${idx === 0 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta su">▲</button>
+          <button disabled={idx === 0} className="btn-3d btn-3d-outline w-7 h-7 p-0 flex items-center justify-center text-sm" title="sposta su">▲</button>
         </form>
         <form action={spostaRigaGiu}>
           <input type="hidden" name="id" value={rigaId} />
           <input type="hidden" name="preventivoId" value={preventivo.id} />
-          <button disabled={idx === totale - 1} className={`block leading-none text-xs ${idx === totale - 1 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta giù">▼</button>
+          <button disabled={idx === totale - 1} className="btn-3d btn-3d-outline w-7 h-7 p-0 flex items-center justify-center text-sm" title="sposta giù">▼</button>
         </form>
       </div>
       {preventivo.sezioni.length > 0 && (
-        <form action={spostaRigaSezione} className="flex flex-col items-center gap-0.5">
+        <form action={spostaRigaSezione} className="flex flex-col items-center gap-1 w-full">
           <input type="hidden" name="id" value={rigaId} />
           <input type="hidden" name="preventivoId" value={preventivo.id} />
-          <select name="sezioneId" defaultValue={sezioneIdCorrente ?? ""} className="text-[9px] border border-neutral-200 rounded px-0.5 py-0.5 w-full">
+          <select name="sezioneId" defaultValue={sezioneIdCorrente ?? ""} className="text-[9px] border border-neutral-300 rounded px-0.5 py-0.5 w-full">
             <option value="">— nessuna —</option>
             {preventivo.sezioni.map((s) => (
               <option key={s.id} value={s.id}>{s.nome}</option>
             ))}
           </select>
-          <button className="text-[9px] text-blue-600 hover:underline" title="sposta in sezione">sposta</button>
+          <button className="btn-3d btn-3d-teal text-[9px] px-1 py-0.5 w-full leading-tight">sposta →</button>
         </form>
       )}
     </div>
@@ -445,21 +453,14 @@ export default async function PreventivoPage({
         </form>
       </details>
 
-      {(() => {
-        return (
-          <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-            <h2 className="text-base font-bold text-neutral-900">Righe ({preventivo.righe.length})</h2>
-            <details className="text-xs">
-              <summary className="cursor-pointer text-blue-600 hover:underline">+ crea sezione (stanza/gruppo)</summary>
-              <form action={creaSezione} className="mt-1.5 flex items-center gap-1.5">
-                <input type="hidden" name="preventivoId" value={preventivo.id} />
-                <input name="nome" placeholder="es. Cucina, Camera 1..." className="text-xs border border-neutral-200 rounded px-2 py-1 w-48" />
-                <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">crea sezione</button>
-              </form>
-            </details>
-          </div>
-        );
-      })()}
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <h2 className="text-base font-bold text-neutral-900">Righe ({preventivo.righe.length})</h2>
+        <form action={creaSezione} className="flex items-center gap-1.5">
+          <input type="hidden" name="preventivoId" value={preventivo.id} />
+          <input name="nome" placeholder="es. Cucina, Camera 1..." className="text-xs border border-neutral-300 rounded px-2 py-1.5 w-44" />
+          <button className="btn-3d btn-3d-green text-xs px-3 py-1.5">🏠 + crea sezione</button>
+        </form>
+      </div>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
         {(() => {
           const renderRiga = (r: (typeof preventivo.righe)[number], idx: number, arr: (typeof preventivo.righe)[number][]) => {
@@ -825,71 +826,83 @@ export default async function PreventivoPage({
             sezione,
             righe: preventivo.righe.filter((r) => r.sezioneId === sezione.id),
           }));
+          const totaleSenzaSezione = righeSenzaSezione.reduce((s, r) => s + subtotaleRiga(r), 0);
 
           return (
             <>
               {righeSenzaSezione.length > 0 && sezioniConRighe.length > 0 && (
-                <p className="px-4 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Senza sezione</p>
+                <div className="px-4 pt-3 pb-1.5 flex items-center justify-between">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Senza sezione</p>
+                  <span className="text-xs font-bold text-neutral-600">
+                    {totaleSenzaSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                  </span>
+                </div>
               )}
               {righeSenzaSezione.map((r, idx, arr) => renderRiga(r, idx, arr))}
-              {sezioniConRighe.map(({ sezione, righe }, sIdx, sArr) => (
-                <div key={sezione.id}>
-                  <div className="px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap border-t-2 border-neutral-300 bg-neutral-100">
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex flex-col leading-none">
-                        <form action={spostaSezioneSu}>
+              {sezioniConRighe.map(({ sezione, righe }, sIdx, sArr) => {
+                const totaleSezione = righe.reduce((s, r) => s + subtotaleRiga(r), 0);
+                return (
+                  <div key={sezione.id}>
+                    <div className="px-4 py-3 flex items-center justify-between gap-3 flex-wrap border-t-4 border-indigo-400 bg-indigo-50">
+                      <div className="flex items-center gap-2">
+                        <div className="flex flex-col gap-0.5">
+                          <form action={spostaSezioneSu}>
+                            <input type="hidden" name="id" value={sezione.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <button disabled={sIdx === 0} className="btn-3d btn-3d-outline w-6 h-5 p-0 flex items-center justify-center text-[10px]" title="sposta sezione su">▲</button>
+                          </form>
+                          <form action={spostaSezioneGiu}>
+                            <input type="hidden" name="id" value={sezione.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <button disabled={sIdx === sArr.length - 1} className="btn-3d btn-3d-outline w-6 h-5 p-0 flex items-center justify-center text-[10px]" title="sposta sezione giù">▼</button>
+                          </form>
+                        </div>
+                        <span className="text-xl">🏠</span>
+                        <form action={rinominaSezione} className="flex items-center gap-1.5">
                           <input type="hidden" name="id" value={sezione.id} />
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
-                          <button disabled={sIdx === 0} className={`block text-[9px] ${sIdx === 0 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta sezione su">▲</button>
-                        </form>
-                        <form action={spostaSezioneGiu}>
-                          <input type="hidden" name="id" value={sezione.id} />
-                          <input type="hidden" name="preventivoId" value={preventivo.id} />
-                          <button disabled={sIdx === sArr.length - 1} className={`block text-[9px] ${sIdx === sArr.length - 1 ? "text-neutral-300" : "text-neutral-500 hover:text-neutral-800"}`} title="sposta sezione giù">▼</button>
+                          <input
+                            name="nome"
+                            defaultValue={sezione.nome}
+                            className="text-base font-bold text-indigo-900 bg-white/70 border border-indigo-200 rounded px-2 py-1 focus:border-indigo-500 focus:outline-none"
+                          />
+                          <button className="btn-3d btn-3d-blue text-[11px] px-2.5 py-1.5">salva nome</button>
                         </form>
                       </div>
-                      <span className="text-sm">🏠</span>
-                      <form action={rinominaSezione} className="flex items-center gap-1.5">
-                        <input type="hidden" name="id" value={sezione.id} />
-                        <input type="hidden" name="preventivoId" value={preventivo.id} />
-                        <input
-                          name="nome"
-                          defaultValue={sezione.nome}
-                          className="text-sm font-bold text-neutral-800 bg-transparent border-b border-dashed border-neutral-300 focus:border-neutral-600 focus:outline-none px-0.5"
-                        />
-                        <button className="text-[10px] text-blue-600 hover:underline">salva nome</button>
-                      </form>
-                    </div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <form action={aggiungiRigaTestoLibero} className="flex items-center gap-1">
-                        <input type="hidden" name="preventivoId" value={preventivo.id} />
-                        <input type="hidden" name="sezioneId" value={sezione.id} />
-                        <input
-                          name="testoLibero"
-                          placeholder="riga di testo in questa sezione..."
-                          className="text-xs border border-amber-300 bg-amber-50 rounded px-1.5 py-1 w-48"
-                        />
-                        <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ riga testuale</button>
-                      </form>
-                      {righe.length === 0 && (
-                        <form action={eliminaSezione}>
-                          <input type="hidden" name="id" value={sezione.id} />
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="btn-3d bg-white text-indigo-900 border-indigo-300 text-sm px-3 py-1.5 cursor-default">
+                          Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                        </span>
+                        <form action={aggiungiRigaTestoLibero} className="flex items-center gap-1">
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
-                          <button className="text-[11px] text-red-500 hover:text-red-700">elimina sezione</button>
+                          <input type="hidden" name="sezioneId" value={sezione.id} />
+                          <input
+                            name="testoLibero"
+                            placeholder="riga di testo in questa sezione..."
+                            className="text-xs border border-amber-300 bg-amber-50 rounded px-1.5 py-1.5 w-44"
+                          />
+                          <button className="btn-3d btn-3d-orange text-[11px] px-2.5 py-1.5">📝 + riga testuale</button>
                         </form>
+                        {righe.length === 0 && (
+                          <form action={eliminaSezione}>
+                            <input type="hidden" name="id" value={sezione.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <button className="btn-3d btn-3d-red text-[11px] px-2.5 py-1.5">🗑 elimina sezione</button>
+                          </form>
+                        )}
+                      </div>
+                    </div>
+                    <div className="divide-y divide-neutral-100 bg-indigo-50/20">
+                      {righe.map((r, idx, arr) => renderRiga(r, idx, arr))}
+                      {righe.length === 0 && (
+                        <p className="px-4 py-4 text-xs text-neutral-500 italic">
+                          Nessun articolo qui — spostane uno con la tendina nella colonna a sinistra, oppure aggiungi una riga testuale qui sopra.
+                        </p>
                       )}
                     </div>
                   </div>
-                  <div className="divide-y divide-neutral-100 bg-neutral-50/40">
-                    {righe.map((r, idx, arr) => renderRiga(r, idx, arr))}
-                    {righe.length === 0 && (
-                      <p className="px-4 py-4 text-xs text-neutral-500 italic">
-                        Nessun articolo qui — spostane uno con la tendina nella colonna a sinistra, oppure aggiungi una riga testuale sopra.
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </>
           );
         })()}
