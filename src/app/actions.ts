@@ -192,6 +192,35 @@ export async function aggiornaSconto(formData: FormData) {
   revalidatePath(`/preventivi/${id}/stampa`);
 }
 
+// Aliquota IVA dell'offerta: di norma preimpostata dal paese del cliente alla
+// creazione (aliquotaIvaPerPaese), ma il commerciale può doverla correggere a
+// mano (es. aliquota agevolata 14,8% del regime del margine su alcuni
+// arredi/serramenti, o un'aliquota estera). Tendina coi valori più comuni +
+// slot libero per qualunque altro valore.
+export async function aggiornaIva(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const preset = str(formData, "aliquotaPreset");
+  const customStr = str(formData, "aliquotaCustom");
+
+  let aliquotaIva: number;
+  if (preset === "ALTRO") {
+    const custom = customStr ? parseFloat(customStr.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(custom) ? Math.max(0, Math.min(100, custom)) : 22;
+  } else {
+    const val = preset ? parseFloat(preset.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(val) ? val : 22;
+  }
+
+  await prisma.preventivo.update({
+    where: { id },
+    data: { aliquotaIva },
+  });
+  await ricalcolaTotali(id);
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+}
+
 // Riga "di solo testo" senza prodotto collegato: utile per aggiungere note, informazioni
 // aggiuntive o la motivazione di uno sconto direttamente come voce del preventivo (visibile
 // anche in stampa). L'importo è facoltativo e può essere negativo per rappresentare uno

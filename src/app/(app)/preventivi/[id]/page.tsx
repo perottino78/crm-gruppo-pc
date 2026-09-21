@@ -20,12 +20,14 @@ import {
   aggiornaDescrizionePersonalizzata,
   aggiornaCondizioniOfferta,
   aggiornaSconto,
+  aggiornaIva,
   aggiungiRigaTestoLibero,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 import { SelettoreTessuti } from "@/components/SelettoreTessuti";
+import { SelettoreMotori } from "@/components/SelettoreMotori";
 
 // Gruppi di tende da sole che usano un tessuto Tempotest (vedi task #210): qui la
 // tendina "Optional" viene sostituita da SelettoreTessuti, una cascata a 2 livelli
@@ -331,7 +333,31 @@ export default async function PreventivoPage({
         </div>
         <div className="bg-neutral-900 rounded-lg p-4">
           <p className="text-xs text-neutral-500 mb-1">Totale (IVA {preventivo.aliquotaIva}%)</p>
-          <p className="text-sm font-medium text-white">{totaleFinale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <p className="text-sm font-medium text-white mb-2">{totaleFinale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <form action={aggiornaIva} className="flex items-center gap-1 flex-wrap">
+            <input type="hidden" name="id" value={preventivo.id} />
+            <select
+              name="aliquotaPreset"
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
+              className="text-xs border border-neutral-700 bg-neutral-800 text-white rounded px-1.5 py-1"
+            >
+              <option value="22">IVA 22%</option>
+              <option value="10">IVA 10%</option>
+              <option value="14.8">IVA agevolata 14,8%</option>
+              <option value="ALTRO">Altro —</option>
+            </select>
+            <input
+              name="aliquotaCustom"
+              type="number"
+              step="0.1"
+              min={0}
+              max={100}
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
+              placeholder="%"
+              className="w-14 text-xs border border-neutral-700 bg-neutral-800 text-white rounded px-1.5 py-1"
+            />
+            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
+          </form>
         </div>
       </div>
 
@@ -489,7 +515,11 @@ export default async function PreventivoPage({
                   {r.optionali.map((ro) => (
                     <div key={ro.id} className="flex items-center justify-between text-xs text-neutral-700">
                       <span>
-                        + {ro.optional.categoria.startsWith("Tessuto - ") ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}` : ro.optional.nome}
+                        + {ro.optional.categoria.startsWith("Tessuto - ")
+                          ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}`
+                          : ro.optional.categoria.startsWith("Motore - ") && ro.optional.categoria !== "Motore - Manuale"
+                          ? `${ro.optional.categoria.replace("Motore - ", "")} ${ro.optional.nome}`
+                          : ro.optional.nome}
                         {ro.nota ? ` — codice indicato: "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
                       </span>
                       <form action={rimuoviOptionalDaRiga}>
@@ -650,10 +680,36 @@ export default async function PreventivoPage({
                 // altri optional (colore struttura, motorizzazione, ecc.) — un unico
                 // elenco misto sarebbe ingestibile con oltre 500 codici tessuto.
                 if (modello?.gruppo && GRUPPI_TENDE_CON_TESSUTO.includes(modello.gruppo)) {
+                  const motori = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Motore - "));
+                  const coloreTelaio = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore struttura");
                   const tessuti = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Tessuto - "));
-                  const altriOptionalTenda = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Tessuto - "));
+                  const altriOptionalTenda = optionaliRigaFiltrati.filter(
+                    (o) => !o.categoria.startsWith("Motore - ") && o.categoria !== "Colore struttura" && !o.categoria.startsWith("Tessuto - ")
+                  );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
+                      {motori.length > 0 && (
+                        <SelettoreMotori
+                          optionali={motori}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {coloreTelaio.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            <option value="">Colore telaio —</option>
+                            {coloreTelaio.map((o) => (
+                              <option key={o.id} value={o.id}>{o.nome}</option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore telaio</button>
+                        </form>
+                      )}
                       {tessuti.length > 0 && (
                         <SelettoreTessuti
                           optionali={tessuti}
