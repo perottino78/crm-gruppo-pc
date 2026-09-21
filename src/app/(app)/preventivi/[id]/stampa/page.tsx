@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
@@ -54,8 +55,9 @@ export default async function StampaPreventivoPage({
       commerciale: true,
       righe: {
         include: { prodotto: true, optionali: { include: { optional: true } } },
-        orderBy: { id: "asc" },
+        orderBy: [{ ordine: "asc" }, { id: "asc" }],
       },
+      sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
     },
   });
   if (!preventivo) notFound();
@@ -113,6 +115,74 @@ export default async function StampaPreventivoPage({
 
   const oggi = new Date().toLocaleDateString("it-IT");
   const anno = preventivo.createdAt.getFullYear();
+
+  const subtotaleRiga = (r: (typeof preventivo.righe)[number]): number => {
+    if (!r.prodotto) return r.quantita * r.prezzoUnitario;
+    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
+    return r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+  };
+
+  const renderRigaStampa = (r: (typeof preventivo.righe)[number]) => {
+    if (!r.prodotto) {
+      const subtotaleLibero = r.quantita * r.prezzoUnitario;
+      return (
+        <tr key={r.id} className="border-b border-neutral-100 align-top">
+          <td className="py-2" colSpan={r.prezzoUnitario === 0 ? 4 : 1}>
+            <p className="text-neutral-700 whitespace-pre-line italic">{r.testoLibero}</p>
+          </td>
+          {r.prezzoUnitario !== 0 && (
+            <>
+              <td className="py-2 text-center">{r.quantita}</td>
+              <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
+              <td className="py-2 text-right font-medium">{eur(subtotaleLibero)}</td>
+            </>
+          )}
+        </tr>
+      );
+    }
+    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
+    const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
+    const modello = modelloMap.get(r.prodotto.tipologia);
+    const descrizioneEffettiva = r.descrizionePersonalizzata ?? modello?.descrizioneTecnica ?? "";
+    const mostraScheda = r.mostraDescrizione && modello && (modello.immagineUrl || descrizioneEffettiva);
+    const unit = unitaMisura(r.prodotto.tipologia);
+    const larghezzaMostrata = r.misuraLarghezza ?? r.prodotto.larghezzaMm;
+    const altezzaMostrata = r.misuraAltezza ?? r.prodotto.altezzaMm;
+    return (
+      <tr key={r.id} className="border-b border-neutral-100 align-top">
+        <td className="py-2">
+          <div className="flex items-start gap-2">
+            {mostraScheda && modello?.immagineUrl && (
+              <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-16 h-16 object-cover rounded shrink-0" />
+            )}
+            <div>
+              <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
+              <p className="text-xs text-neutral-600">
+                colore {r.prodotto.colore}
+                {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
+              </p>
+              {mostraScheda && descrizioneEffettiva && (
+                <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
+              )}
+              {r.optionali.map((ro) => (
+                <p key={ro.id} className="text-xs text-neutral-600">+ {ro.optional.nome} ({ro.quantita}×)</p>
+              ))}
+            </div>
+          </div>
+        </td>
+        <td className="py-2 text-center">{r.quantita}</td>
+        <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
+        <td className="py-2 text-right font-medium">{eur(subtotale)}</td>
+      </tr>
+    );
+  };
+
+  const righeSenzaSezione = preventivo.righe.filter((r) => !r.sezioneId);
+  const sezioniConRighe = preventivo.sezioni.map((sezione) => ({
+    sezione,
+    righe: preventivo.righe.filter((r) => r.sezioneId === sezione.id),
+  }));
+  const mostraIntestazioniSezione = sezioniConRighe.some((s) => s.righe.length > 0);
   const numero = preventivo.numeroOfferta != null
     ? `${preventivo.numeroOfferta}/${anno}`
     : `${preventivo.id.slice(-6).toUpperCase()}/${anno}`; // fallback per preventivi creati prima della numerazione progressiva
@@ -197,60 +267,32 @@ export default async function StampaPreventivoPage({
             </tr>
           </thead>
           <tbody>
-            {preventivo.righe.map((r) => {
-              if (!r.prodotto) {
-                const subtotaleLibero = r.quantita * r.prezzoUnitario;
+            {mostraIntestazioniSezione && righeSenzaSezione.length > 0 && (
+              <tr>
+                <td colSpan={4} className="pt-3 pb-1 text-[10px] font-bold uppercase tracking-wide text-neutral-400">
+                  Senza sezione
+                </td>
+              </tr>
+            )}
+            {righeSenzaSezione.map((r) => renderRigaStampa(r))}
+            {mostraIntestazioniSezione &&
+              sezioniConRighe.map(({ sezione, righe }) => {
+                if (righe.length === 0) return null;
+                const totaleSezione = righe.reduce((s, r) => s + subtotaleRiga(r), 0);
                 return (
-                  <tr key={r.id} className="border-b border-neutral-100 align-top">
-                    <td className="py-2" colSpan={r.prezzoUnitario === 0 ? 4 : 1}>
-                      <p className="text-neutral-700 whitespace-pre-line italic">{r.testoLibero}</p>
-                    </td>
-                    {r.prezzoUnitario !== 0 && (
-                      <>
-                        <td className="py-2 text-center">{r.quantita}</td>
-                        <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
-                        <td className="py-2 text-right font-medium">{eur(subtotaleLibero)}</td>
-                      </>
-                    )}
-                  </tr>
+                  <Fragment key={sezione.id}>
+                    <tr>
+                      <td colSpan={3} className="pt-4 pb-1 text-xs font-bold uppercase tracking-wide text-indigo-700 border-t-2 border-indigo-200">
+                        🏠 {sezione.nome}
+                      </td>
+                      <td className="pt-4 pb-1 text-right text-xs font-bold text-indigo-700 border-t-2 border-indigo-200">
+                        {eur(totaleSezione)}
+                      </td>
+                    </tr>
+                    {righe.map((r) => renderRigaStampa(r))}
+                  </Fragment>
                 );
-              }
-              const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
-              const subtotale = r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
-              const modello = modelloMap.get(r.prodotto.tipologia);
-              const descrizioneEffettiva = r.descrizionePersonalizzata ?? modello?.descrizioneTecnica ?? "";
-              const mostraScheda = r.mostraDescrizione && modello && (modello.immagineUrl || descrizioneEffettiva);
-              const unit = unitaMisura(r.prodotto.tipologia);
-              const larghezzaMostrata = r.misuraLarghezza ?? r.prodotto.larghezzaMm;
-              const altezzaMostrata = r.misuraAltezza ?? r.prodotto.altezzaMm;
-              return (
-                <tr key={r.id} className="border-b border-neutral-100 align-top">
-                  <td className="py-2">
-                    <div className="flex items-start gap-2">
-                      {mostraScheda && modello?.immagineUrl && (
-                        <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-16 h-16 object-cover rounded shrink-0" />
-                      )}
-                      <div>
-                        <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
-                        <p className="text-xs text-neutral-600">
-                          colore {r.prodotto.colore}
-                          {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
-                        </p>
-                        {mostraScheda && descrizioneEffettiva && (
-                          <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
-                        )}
-                        {r.optionali.map((ro) => (
-                          <p key={ro.id} className="text-xs text-neutral-600">+ {ro.optional.nome} ({ro.quantita}×)</p>
-                        ))}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-2 text-center">{r.quantita}</td>
-                  <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
-                  <td className="py-2 text-right font-medium">{eur(subtotale)}</td>
-                </tr>
-              );
-            })}
+              })}
           </tbody>
         </table>
 
