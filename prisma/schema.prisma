@@ -238,6 +238,10 @@ model RigaOptional {
   optionalId     String
   quantita       Int            @default(1)
   prezzoUnitario Float
+  // Slot di scrittura libera: usato per correggere/precisare a mano il codice
+  // tessuto esatto scelto dal campionario fisico Tempotest quando quello
+  // pre-catalogato in Optional.nome non è affidabile al 100% (vedi task #210).
+  nota           String?
 }
 
 // tipo attivita: EMAIL | CHIAMATA | NOTA | TASK | APPUNTAMENTO

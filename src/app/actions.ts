@@ -335,6 +335,9 @@ export async function aggiungiOptionalARiga(formData: FormData) {
   const optionalId = str(formData, "optionalId");
   const preventivoId = str(formData, "preventivoId");
   const quantitaStr = str(formData, "quantita");
+  // Slot di scrittura libera (es. codice tessuto Tempotest esatto dal campionario
+  // fisico, quando l'automazione non è certa al 100%) — vedi task #210.
+  const nota = str(formData, "nota");
   if (!rigaId || !optionalId || !preventivoId) return;
 
   const [riga, optional] = await Promise.all([
@@ -350,7 +353,7 @@ export async function aggiungiOptionalARiga(formData: FormData) {
       : optional.valore;
 
   await prisma.rigaOptional.create({
-    data: { rigaId, optionalId, quantita, prezzoUnitario },
+    data: { rigaId, optionalId, quantita, prezzoUnitario, nota: nota || null },
   });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);

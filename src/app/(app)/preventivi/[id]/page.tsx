@@ -25,6 +25,23 @@ import {
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
+import { SelettoreTessuti } from "@/components/SelettoreTessuti";
+
+// Gruppi di tende da sole che usano un tessuto Tempotest (vedi task #210): qui la
+// tendina "Optional" viene sostituita da SelettoreTessuti, una cascata a 2 livelli
+// (collezione -> codice) invece dell'elenco piatto di oltre 500 codici tessuto.
+const GRUPPI_TENDE_CON_TESSUTO = [
+  "TENDE A BRACCI SENZA CASSONETTO",
+  "TENDE A BRACCI CON CASSONETTO",
+  "TENDE A CADUTA",
+  "TENDE CLASSICHE",
+  "TENDE ORIZZONTALI",
+  "TENDE VERANDA",
+  "GIARDINO E PATIO",
+  "CAPPOTTINE FISSE E MOBILI",
+  "LINEA ZIP",
+  "TELAI FISSI",
+];
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -471,7 +488,10 @@ export default async function PreventivoPage({
                 <div className="mt-2 pl-3 border-l-2 border-neutral-100 flex flex-col gap-1">
                   {r.optionali.map((ro) => (
                     <div key={ro.id} className="flex items-center justify-between text-xs text-neutral-700">
-                      <span>+ {ro.optional.nome} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})</span>
+                      <span>
+                        + {ro.optional.categoria.startsWith("Tessuto - ") ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}` : ro.optional.nome}
+                        {ro.nota ? ` — codice indicato: "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                      </span>
                       <form action={rimuoviOptionalDaRiga}>
                         <input type="hidden" name="id" value={ro.id} />
                         <input type="hidden" name="preventivoId" value={preventivo.id} />
@@ -617,6 +637,44 @@ export default async function PreventivoPage({
                           </select>
                           <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                           <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ altro optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
+                // Per le Tende da sole (a bracci, a caduta, classiche, orizzontali,
+                // veranda, giardino/patio, cappottine, telai fissi): tendina "Tessuto
+                // Tempotest" a cascata separata (collezione -> codice, +slot di
+                // scrittura libera per correggere il codice esatto) da tutti gli
+                // altri optional (colore struttura, motorizzazione, ecc.) — un unico
+                // elenco misto sarebbe ingestibile con oltre 500 codici tessuto.
+                if (modello?.gruppo && GRUPPI_TENDE_CON_TESSUTO.includes(modello.gruppo)) {
+                  const tessuti = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Tessuto - "));
+                  const altriOptionalTenda = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Tessuto - "));
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {tessuti.length > 0 && (
+                        <SelettoreTessuti
+                          optionali={tessuti}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {altriOptionalTenda.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {altriOptionalTenda.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
                         </form>
                       )}
                     </div>
