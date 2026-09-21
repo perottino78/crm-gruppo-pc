@@ -36,6 +36,7 @@ import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 import { SelettoreTessuti } from "@/components/SelettoreTessuti";
 import { SelettoreMotori } from "@/components/SelettoreMotori";
+import { SelettoreAccessoriMotore } from "@/components/SelettoreAccessoriMotore";
 
 // Gruppi di tende da sole che usano un tessuto Tempotest (vedi task #210): qui la
 // tendina "Optional" viene sostituita da SelettoreTessuti, una cascata a 2 livelli
@@ -751,16 +752,29 @@ export default async function PreventivoPage({
                 // elenco misto sarebbe ingestibile con oltre 500 codici tessuto.
                 if (modello?.gruppo && GRUPPI_TENDE_CON_TESSUTO.includes(modello.gruppo)) {
                   const motori = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Motore - "));
+                  const accessoriMotore = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Accessorio motore - "));
                   const coloreTelaio = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore struttura");
                   const tessuti = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Tessuto - "));
                   const altriOptionalTenda = optionaliRigaFiltrati.filter(
-                    (o) => !o.categoria.startsWith("Motore - ") && o.categoria !== "Colore struttura" && !o.categoria.startsWith("Tessuto - ")
+                    (o) =>
+                      !o.categoria.startsWith("Motore - ") &&
+                      !o.categoria.startsWith("Accessorio motore - ") &&
+                      o.categoria !== "Colore struttura" &&
+                      !o.categoria.startsWith("Tessuto - ")
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       {motori.length > 0 && (
                         <SelettoreMotori
                           optionali={motori}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {accessoriMotore.length > 0 && (
+                        <SelettoreAccessoriMotore
+                          optionali={accessoriMotore}
                           formAction={aggiungiOptionalARiga}
                           rigaId={r.id}
                           preventivoId={preventivo.id}
