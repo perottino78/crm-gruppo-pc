@@ -526,6 +526,10 @@ export async function aggiungiOptionalARiga(formData: FormData) {
   // Slot di scrittura libera (es. codice tessuto Tempotest esatto dal campionario
   // fisico, quando l'automazione non è certa al 100%) — vedi task #210.
   const nota = str(formData, "nota");
+  // Prezzo inserito a mano per le posizioni "a scrittura libera" (es. pannello
+  // Blindati esterno/interno non a catalogo) — se presente e numerico sovrascrive
+  // il prezzo calcolato dall'Optional-ancora selezionato. Vedi task #235.
+  const prezzoManualeStr = str(formData, "prezzoManuale");
   if (!rigaId || !optionalId || !preventivoId) return;
 
   const [riga, optional] = await Promise.all([
@@ -535,8 +539,11 @@ export async function aggiungiOptionalARiga(formData: FormData) {
   if (!riga || !optional) return;
 
   const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
+  const prezzoManuale = prezzoManualeStr !== null ? parseFloat(prezzoManualeStr) : NaN;
   const prezzoUnitario =
-    optional.tipoPrezzo === "PERCENTUALE"
+    !Number.isNaN(prezzoManuale)
+      ? prezzoManuale
+      : optional.tipoPrezzo === "PERCENTUALE"
       ? Math.round(riga.quantita * riga.prezzoUnitario * (optional.valore / 100) * 100) / 100
       : optional.valore;
 

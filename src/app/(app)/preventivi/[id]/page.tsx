@@ -34,6 +34,7 @@ import {
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
+import { SelettorePannelliInterniBlindati } from "@/components/SelettorePannelliInterniBlindati";
 import { SelettoreTessuti } from "@/components/SelettoreTessuti";
 import { SelettoreMotori } from "@/components/SelettoreMotori";
 import { SelettoreAccessoriMotore } from "@/components/SelettoreAccessoriMotore";
@@ -590,8 +591,12 @@ export default async function PreventivoPage({
                           ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}`
                           : ro.optional.categoria.startsWith("Motore - ") && ro.optional.categoria !== "Motore - Manuale"
                           ? `${ro.optional.categoria.replace("Motore - ", "")} ${ro.optional.nome}`
+                          : ro.optional.nome.includes("scrittura libera") || ro.optional.nome.includes("da definire")
+                          ? ro.optional.categoria.replace(/^Pannello( Interno - (STD|A pagamento))?$/, (m, _g1, tipo) =>
+                              tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
+                            )
                           : ro.optional.nome}
-                        {ro.nota ? ` — codice indicato: "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                        {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
                       </span>
                       <form action={rimuoviOptionalDaRiga}>
                         <input type="hidden" name="id" value={ro.id} />
@@ -658,8 +663,19 @@ export default async function PreventivoPage({
                 // varianti di pannello/colore delle collezioni Tradizione/Contemporaneo) — un
                 // unico elenco misto sarebbe ingestibile con quasi 1000 voci di pannelli.
                 if (modello?.gruppo === "BLINDATI") {
-                  const pannelliEColori = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Pannello"));
-                  const optionalBlindato = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Pannello"));
+                  // Pannelli interni (categoria "Pannello Interno - ...") separati dai
+                  // pannelli esterni (categoria che inizia per "Pannello" ma non
+                  // "Pannello Interno") — vedi richiesta utente: due tendine distinte,
+                  // esterno con scrittura libera per finiture a sovrapprezzo non a
+                  // catalogo, interno con STD/a pagamento + scrittura libera (oggi
+                  // segnaposto in attesa del listino reale delle finiture interne).
+                  const pannelliEsterni = optionaliRigaFiltrati.filter(
+                    (o) => o.categoria.startsWith("Pannello") && !o.categoria.startsWith("Pannello Interno")
+                  );
+                  const pannelliInterni = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Pannello Interno"));
+                  const optionalBlindato = optionaliRigaFiltrati.filter(
+                    (o) => !o.categoria.startsWith("Pannello")
+                  );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       {optionalBlindato.length > 0 && (
@@ -677,9 +693,17 @@ export default async function PreventivoPage({
                           <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional blindato</button>
                         </form>
                       )}
-                      {pannelliEColori.length > 0 && (
+                      {pannelliEsterni.length > 0 && (
                         <SelettorePannelliBlindati
-                          optionali={pannelliEColori}
+                          optionali={pannelliEsterni}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {pannelliInterni.length > 0 && (
+                        <SelettorePannelliInterniBlindati
+                          optionali={pannelliInterni}
                           formAction={aggiungiOptionalARiga}
                           rigaId={r.id}
                           preventivoId={preventivo.id}

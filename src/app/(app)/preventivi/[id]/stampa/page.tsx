@@ -164,9 +164,23 @@ export default async function StampaPreventivoPage({
               {mostraScheda && descrizioneEffettiva && (
                 <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
               )}
-              {r.optionali.map((ro) => (
-                <p key={ro.id} className="text-xs text-neutral-600">+ {ro.optional.nome} ({ro.quantita}×)</p>
-              ))}
+              {r.optionali.map((ro) => {
+                const nomeOptional = ro.optional.categoria.startsWith("Tessuto - ")
+                  ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}`
+                  : ro.optional.categoria.startsWith("Motore - ") && ro.optional.categoria !== "Motore - Manuale"
+                  ? `${ro.optional.categoria.replace("Motore - ", "")} ${ro.optional.nome}`
+                  : ro.optional.nome.includes("scrittura libera") || ro.optional.nome.includes("da definire")
+                  ? ro.optional.categoria.replace(/^Pannello( Interno - (STD|A pagamento))?$/, (_m, _g1, tipo) =>
+                      tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
+                    )
+                  : ro.optional.nome;
+                return (
+                  <p key={ro.id} className="text-xs text-neutral-600">
+                    + {nomeOptional}
+                    {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×)
+                  </p>
+                );
+              })}
             </div>
           </div>
         </td>
