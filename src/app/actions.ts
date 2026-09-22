@@ -482,7 +482,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
     );
   }
 
-  await prisma.rigaPreventivo.create({
+  const nuovaRiga = await prisma.rigaPreventivo.create({
     data: {
       preventivoId,
       prodottoId: prodotto!.id,
@@ -492,6 +492,55 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
       misuraAltezza: altezza,
     },
   });
+
+  // Blindati anta singola (CL3/CL4): il prezzo del portoncino è fisso per tutte le
+  // misure standard (80/85/90 x 210/220cm) — se la misura richiesta esce da questo
+  // standard va applicata la maggiorazione "Fuori Misura" corrispondente, che prima
+  // andava aggiunta a mano (facile da dimenticare, come segnalato dall'utente: "un
+  // 100 di larghezza non costa come uno standard"). Qui viene calcolata e agganciata
+  // automaticamente come riga Optional distinta, visibile/rimovibile come le altre.
+  // Le varianti a due ante (DUEANTE_STD/SIMMETRICA) restano manuali: la maggiorazione
+  // lì va valutata "per ogni anta" e la larghezza dell'antino non è nemmeno tracciata
+  // separatamente nel modello dati attuale, quindi un calcolo automatico rischierebbe
+  // di essere sbagliato — resta da selezionare a mano dalla tendina "Optional Blindato".
+  if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") {
+    const L = Math.round(larghezza);
+    const H = Math.round(altezza);
+    const larghezzaStd = L === 80 || L === 85 || L === 90;
+    const altezzaStd = H === 210 || H === 220;
+    let nomeMaggiorazione: string | null = null;
+    if (!larghezzaStd && !altezzaStd) {
+      const fasciaL = L <= 100 ? "50-100" : "101-110";
+      const fasciaH = H <= 230 ? "180-230" : "231-250";
+      nomeMaggiorazione =
+        fasciaL === "50-100" && fasciaH === "180-230"
+          ? "Fuori misura L e H (L 50-100cm, H 180-230cm)"
+          : fasciaL === "50-100" && fasciaH === "231-250"
+          ? "Fuori misura L e H (L 50-100cm, H 231-250cm)"
+          : "Fuori misura L e H (L 101-110cm, H 180-250cm)";
+    } else if (!larghezzaStd) {
+      nomeMaggiorazione = L <= 100 ? "Fuori misura in Larghezza da 50 a 100 cm" : "Fuori misura in Larghezza da 101 a 110 cm";
+    } else if (!altezzaStd) {
+      nomeMaggiorazione = H <= 230 ? "Fuori misura in Altezza da 180 a 230 cm" : "Fuori misura in Altezza da 231 a 250 cm";
+    }
+    if (nomeMaggiorazione) {
+      const optionalMaggiorazione = await prisma.optional.findFirst({
+        where: { brandId, categoria: "Fuori Misura", nome: nomeMaggiorazione, listino: "BLINDATI_SINGOLA" },
+      });
+      if (optionalMaggiorazione) {
+        await prisma.rigaOptional.create({
+          data: {
+            rigaId: nuovaRiga.id,
+            optionalId: optionalMaggiorazione.id,
+            quantita: 1,
+            prezzoUnitario: optionalMaggiorazione.valore,
+            nota: "applicata automaticamente — misura richiesta fuori standard",
+          },
+        });
+      }
+    }
+  }
+
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

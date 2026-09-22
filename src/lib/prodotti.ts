@@ -170,11 +170,15 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Blindati: CL3 e CL4 anta singola condividono lo stesso listino (fuori misura, sopraluce,
   // fianco luce, vetro, pannelli semplici sono identici tra le due classi); le due varianti
   // a due ante hanno invece tabelle proprie (sovrapprezzi "per ogni anta", pannelli con
-  // prezzo differenziato per larghezza anta principale/antino).
-  // Un solo sottogruppo: la scelta reale (classe / n. ante / variante due ante) è
-  // ora gestita dalla cascata a 3 tendine (vedi assiSelezioneBlindati), non più da
-  // sottogruppi separati per classe/n.ante.
-  if (tipologia.startsWith("BLINDATI_")) return "Portoncini Blindati";
+  // prezzo differenziato per larghezza anta principale/antino). BUG STORICO corretto qui:
+  // prima restituiva la stringa fissa "Portoncini Blindati" per tutte e 4 le tipologie, che
+  // non corrisponde a NESSUN valore listino presente negli Optional (che usano invece le
+  // chiavi "BLINDATI_SINGOLA"/"BLINDATI_DUEANTE") — di conseguenza tutte le righe Optional
+  // con quel listino (fuori misura, vetro, sopraluce, fianco luce, alcuni pannelli, imbotte
+  // a copiare) restavano invisibili nella tendina, per qualunque prodotto Blindati.
+  if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") return "BLINDATI_SINGOLA";
+  if (tipologia === "BLINDATI_CL3_DUEANTE_STD" || tipologia === "BLINDATI_CL3_DUEANTE_SIMMETRICA") return "BLINDATI_DUEANTE";
+  if (tipologia.startsWith("BLINDATI_")) return "BLINDATI_SINGOLA";
   // Zanzariere P&C: un "listino" per famiglia (Antarex/Alba/Pratik/Libra/Scorri), così gli
   // optional/extra propri di ciascuna famiglia (es. Telaio chiuso solo su Antarex, Doppio
   // traverso per Pratik solo su Pratik) restano scoperti dalle famiglie che non li prevedono,
