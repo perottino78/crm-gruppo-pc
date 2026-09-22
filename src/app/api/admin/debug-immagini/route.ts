@@ -8,22 +8,39 @@ export async function GET(req: NextRequest) {
   const key = req.headers.get("x-seed-key");
   if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  const totale = await prisma.modelloProdotto.count();
-  const conImmagine = await prisma.modelloProdotto.count({ where: { NOT: { immagineUrl: null } } });
-  const campione = await prisma.modelloProdotto.findMany({
-    where: { NOT: { immagineUrl: null } },
-    select: { tipologia: true, immagineUrl: true },
-    take: 5,
+  const righe = await prisma.rigaPreventivo.findMany({
+    where: { prodottoId: { not: null } },
+    include: { prodotto: true, preventivo: { select: { id: true, numeroOfferta: true, brandId: true } } },
   });
 
-  const preventivo = await prisma.preventivo.findFirst({
-    where: { righe: { some: { prodottoId: { not: null } } } },
-    include: { righe: { include: { prodotto: true }, take: 3 } },
-    orderBy: { createdAt: "desc" },
+  const tipologie = [...new Set(righe.map((r) => r.prodotto!.tipologia))];
+  const modelli = await prisma.modelloProdotto.findMany({
+    where: { tipologia: { in: tipologie } },
+    select: { tipologia: true, immagineUrl: true, brandId: true },
   });
-  const righeSample = preventivo?.righe
-    .filter((r) => r.prodotto)
-    .map((r) => ({ tipologia: r.prodotto!.tipologia, mostraDescrizione: r.mostraDescrizione }));
+  const modelloMap = new Map(modelli.map((m) => [`${m.brandId}|${m.tipologia}`, m]));
 
-  return NextResponse.json({ totale, conImmagine, campione, righeSample });
+  const conFotoDisponibile = righe.filter((r) => {
+    const m = modelloMap.get(`${r.preventivo.brandId}|${r.prodotto!.tipologia}`);
+    return m?.immagineUrl;
+  });
+
+  const dettaglio = conFotoDisponibile.slice(0, 15).map((r) => {
+    const m = modelloMap.get(`${r.preventivo.brandId}|${r.prodotto!.tipologia}`);
+    return {
+      preventivoId: r.preventivo.id,
+      numeroOfferta: r.preventivo.numeroOfferta,
+      tipologia: r.prodotto!.tipologia,
+      immagineUrl: m?.immagineUrl,
+      mostraDescrizione: r.mostraDescrizione,
+    };
+  });
+
+  return NextResponse.json({
+    totaleRigheConProdotto: righe.length,
+    tipologieDistinte: tipologie.length,
+    righeConFotoDisponibile: conFotoDisponibile.length,
+    righeConFotoEMostrata: conFotoDisponibile.filter((r) => r.mostraDescrizione).length,
+    dettaglio,
+  });
 }
