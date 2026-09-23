@@ -29,7 +29,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "PENSILINA_",
   // Tapparelle: tariffa a mq con minimi fatturabili (calcolaMqConMinimi), stessa
   // convenzione cm dei cataloghi con motore MQ_CON_MINIMI.
-  "TAPPARELLE_"];
+  "TAPPARELLE_",
+  // Porte interne Isomax: modello + tipo apertura a prezzo fisso (misura standard
+  // 60/70/80/90cm), stessa convenzione cm dei cataloghi porte/serramenti.
+  "ISOMAX_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -219,7 +222,28 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("EVOZIP100_")) return "EVOZIP100";
   if (tipologia.startsWith("EVOZIP125_")) return "EVOZIP125";
   if (tipologia.startsWith("EVOZIPDUO_")) return "EVOZIPDUO";
+  // Isomax (Porte interne): un listino per gruppo colore/finitura (A = colori nominati
+  // standard, B = RAL a scelta +100€, L = supplemento telaio/coprifili laccato +150€),
+  // cosi' le maggiorazioni spessore muro (valori diversi tra A/B) e l'optional Colore
+  // si scopano correttamente indipendentemente dal modello/apertura specifici.
+  if (tipologia.startsWith("ISOMAX_")) return isomaxListino(tipologia);
   return null;
+}
+
+const ISOMAX_GRUPPO_B = new Set(["PLL","P13","PT3","PT4","PT6","PT8","PPO","PP2","PP3","LL2","LL3","LL4","PLR",
+  "BFV","BDQ","BDT","BDR","BFL","BQL","RLT","RLL","R1I","R1V","RIA","R2F","RSP","RVP"]);
+const ISOMAX_GRUPPO_L = new Set(["F2L", "FLL"]);
+
+function isomaxModello(tipologia: string): string | null {
+  const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_/);
+  return match ? match[1] : null;
+}
+
+function isomaxListino(tipologia: string): string {
+  const modello = isomaxModello(tipologia);
+  if (modello && ISOMAX_GRUPPO_B.has(modello)) return "ISOMAX_B";
+  if (modello && ISOMAX_GRUPPO_L.has(modello)) return "ISOMAX_L";
+  return "ISOMAX_A";
 }
 
 // Colori struttura tende da sole 2026 (task #209, catalogo sezione 12 "Colori
@@ -741,6 +765,13 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
     // assiSelezioneKopen, invece dei 13 sottogruppi piatti usati in precedenza.
     return "Portoncini Kopen";
   }
+  if (tipologia.startsWith("ISOMAX_")) {
+    // Un unico sottogruppo per tutti i modelli Isomax: la selezione vera e propria
+    // avviene con 2 tendine a cascata (modello -> tipo apertura) tramite
+    // assiSelezioneIsomax, stesso pattern di assiSelezioneKopen.
+    return "Isomax";
+  }
+  if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C";
   // Serramenti: segnaposto "in arrivo" per i materiali oltre al PVC (gia' a listino
   // come Zenith) — ciascuno appare come proprio sottogruppo dentro SERRAMENTI, cosi'
   // la prima scelta del commerciale e' il materiale (PVC/PVC-Alluminio/Alluminio/
@@ -966,6 +997,36 @@ export function assiSelezioneKopen(tipologia: string): AssiKopen | null {
   return {
     linea: { valore: codice, label: lineaLabel },
     combinazione: { valore: tipologia, label: combinazioneLabel },
+  };
+}
+
+// Isomax: decompone una tipologia ISOMAX_<MODELLO>_<APERTURA> nei 2 assi "modello"
+// (codice del modello porta, es. SKL/S1I/RLT/PT4...) e "apertura" (tipo di apertura
+// scelta per quel modello: Battente, Scorrevole interno, Libro simmetrica...), stesso
+// pattern di assiSelezioneKopen (linea -> combinazione).
+export type AssiIsomax = { modello: AsseSelezione; apertura: AsseSelezione };
+
+const ISOMAX_APERTURA_LABELS: Record<string, string> = {
+  BATT: "Battente", BATT2A: "Battente 2 ante",
+  SCI: "Scorrevole interno", SCI2A: "Scorrevole interno 2 ante",
+  SCIS: "Scorrevole interno con serratura", SCIS2A: "Scorrevole interno con serratura 2 ante",
+  SCE: "Scorrevole esterno", SCE2A: "Scorrevole esterno 2 ante",
+  SCES: "Scorrevole esterno con serratura", SCES2A: "Scorrevole esterno con serratura 2 ante",
+  LSIM: "Libro simmetrica", LASIM: "Libro asimmetrica",
+  LRIB: "Libro a ribalta", ROTO: "Rototraslante",
+  VENT: "Ventola", VENT2A: "Ventola 2 ante",
+  ESL: "E-slide", ESL2A: "E-slide 2 ante",
+  ESLS: "E-slide con serratura", ESLS2A: "E-slide 2 ante con serratura",
+};
+
+export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
+  if (!tipologia.startsWith("ISOMAX_")) return null;
+  const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_([A-Z0-9]+)$/);
+  if (!match) return null;
+  const [, modello, apertura] = match;
+  return {
+    modello: { valore: modello, label: modello },
+    apertura: { valore: apertura, label: ISOMAX_APERTURA_LABELS[apertura] ?? apertura },
   };
 }
 
@@ -1435,6 +1496,7 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 // e le mostra in rosso nel selettore finche' non arriva il listino vero (a quel punto
 // basta rimuovere la voce da questa mappa e sostituire il segnaposto con i dati reali).
 const IN_ARRIVO: Record<string, string> = {
+  PORTEPC_PLACEHOLDER: "Listino Porte P&C non ancora caricato — in arrivo",
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
   SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "Listino Serramenti PVC Optima non ancora caricato — in arrivo",
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
@@ -1454,6 +1516,11 @@ export function notaInArrivo(tipologia: string): string | null {
 }
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
+  if (tipologia.startsWith("ISOMAX_")) {
+    const assi = assiSelezioneIsomax(tipologia);
+    if (assi) return `${assi.modello.label} — ${assi.apertura.label}`;
+  }
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
   if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;
   if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
@@ -1529,7 +1596,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }

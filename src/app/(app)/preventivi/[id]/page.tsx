@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -207,6 +207,9 @@ export default async function PreventivoPage({
         // a cascata invece della lista piatta per sottogruppo (13 gruppi, 1-3 voci
         // ciascuno).
         assiKopen: assiSelezioneKopen(tip) ?? undefined,
+        // Isomax (Porte interne): assi modello -> tipo apertura, per la selezione
+        // a 2 tendine a cascata invece della lista piatta (fino a 20 voci per modello).
+        assiIsomax: assiSelezioneIsomax(tip) ?? undefined,
         // Blindati: assi classe → numero ante → variante due ante, per la selezione
         // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
         assiBlindati: assiSelezioneBlindati(tip) ?? undefined,

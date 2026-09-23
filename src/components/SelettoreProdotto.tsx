@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -30,6 +30,9 @@ export type NodoTipologia = {
   // Kopen: assi linea -> combinazione materiali, per mostrare 2 tendine a cascata
   // invece della lista piatta per sottogruppo.
   assiKopen?: AssiKopen;
+  // Isomax (Porte interne): assi modello -> tipo apertura, per mostrare 2 tendine
+  // a cascata invece della lista piatta (fino a 20 voci per modello).
+  assiIsomax?: AssiIsomax;
   // Blindati: assi classe -> numero ante -> variante due ante, per mostrare 3
   // tendine a cascata invece della lista piatta divisa per sottogruppo.
   assiBlindati?: AssiBlindati;
@@ -681,6 +684,94 @@ function SelettoreCascataKopen({
   );
 }
 
+// Tendine a cascata per Isomax (Porte interne): 1) modello (codice porta, es. SKL/
+// S1I/RLT/PT4...), 2) tipo di apertura specifico di quel modello (Battente, Scorrevole
+// interno, Libro simmetrica, ecc. - alcuni modelli non offrono tutte le aperture).
+// Sostituisce la lista piatta fino a 20 voci per modello con 2 tendine, come per Kopen.
+function SelettoreCascataIsomax({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [modello, setModello] = useState("");
+  const [apertura, setApertura] = useState("");
+
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiIsomax) mappa.set(t.assiIsomax.modello.valore, t.assiIsomax.modello.label);
+    return [...mappa.entries()].sort(([, a], [, b]) => a.localeCompare(b));
+  }, [tipologie]);
+
+  const filtratePerModello = useMemo(
+    () => tipologie.filter((t) => t.assiIsomax?.modello.valore === modello),
+    [tipologie, modello]
+  );
+  const opzioniApertura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiIsomax) mappa.set(t.assiIsomax.apertura.valore, t.assiIsomax.apertura.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiIsomax?.apertura.valore === apertura) ?? null,
+    [filtratePerModello, apertura]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Modello</label>
+        <select
+          value={modello}
+          onChange={(e) => {
+            setModello(e.target.value);
+            setApertura("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniModello.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Tipo apertura</label>
+          <select
+            value={apertura}
+            onChange={(e) => setApertura(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniApertura.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 // Tendine a cascata per Minibox: 1) misura cassonetto (165/185/205/250mm), 2) tipologia
 // di tapparella (marca + tipo di manovra, o "Solo struttura"). Ogni misura filtra la
 // tendina successiva alle sole tipologie effettivamente a listino per quel cassonetto
@@ -1110,6 +1201,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
                                             <SelettoreCascataKopen
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiIsomax) ? (
+                                            <SelettoreCascataIsomax
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
