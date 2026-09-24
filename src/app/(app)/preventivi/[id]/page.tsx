@@ -771,6 +771,51 @@ export default async function PreventivoPage({
                   );
                 }
 
+                // Per Isomax (Porte interne): tendina "Colore" separata dal resto degli
+                // optional (maggiorazioni spessore muro, taglio, serrature) — i colori
+                // disponibili variano gia' per modello grazie al filtro sul listino
+                // (ISOMAX_A/B/L applicato sopra), quindi qui basta isolare la categoria
+                // "Colore" per renderla immediatamente visibile invece di perderla in
+                // mezzo a una quindicina di altre voci.
+                if (modello?.gruppo === "PORTE INTERNE") {
+                  const coloriIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore");
+                  const altriOptionalIsomax = optionaliRigaFiltrati.filter((o) => o.categoria !== "Colore");
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {coloriIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            {coloriIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : " (compreso)"}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {altriOptionalIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {altriOptionalIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ altro optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
                 // Per le Tende da sole (a bracci, a caduta, classiche, orizzontali,
                 // veranda, giardino/patio, cappottine, telai fissi): tendina "Tessuto
                 // Tempotest" a cascata separata (collezione -> codice, +slot di
