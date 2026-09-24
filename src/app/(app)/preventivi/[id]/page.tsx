@@ -681,6 +681,14 @@ export default async function PreventivoPage({
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
+                      <p className="text-[11px] text-neutral-500">
+                        ⚠️ Nota interna (non stampata): il prezzo del portoncino è fisso per
+                        tutte le combinazioni di misura standard indicate in descrizione —
+                        cambiare larghezza/altezza nel form NON aggiorna il prezzo. Se la
+                        misura richiesta è fuori standard, aggiungere a mano la maggiorazione
+                        &quot;Fuori Misura&quot; corretta dalla tendina qui sotto (per ogni anta,
+                        nei modelli a due ante).
+                      </p>
                       {optionalBlindato.length > 0 && (
                         <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
                           <input type="hidden" name="rigaId" value={r.id} />
