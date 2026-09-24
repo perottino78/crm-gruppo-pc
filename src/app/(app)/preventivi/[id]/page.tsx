@@ -779,9 +779,17 @@ export default async function PreventivoPage({
                 // mezzo a una quindicina di altre voci.
                 if (modello?.gruppo === "PORTE INTERNE") {
                   const coloriIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore");
-                  const altriOptionalIsomax = optionaliRigaFiltrati.filter((o) => o.categoria !== "Colore");
+                  const fuoriMisuraIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Maggiorazione taglio/luce netta");
+                  const altriOptionalIsomax = optionaliRigaFiltrati.filter(
+                    (o) => o.categoria !== "Colore" && o.categoria !== "Maggiorazione taglio/luce netta"
+                  );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
+                      <p className="text-[11px] text-neutral-500">
+                        Misure standard di produzione: 70/80cm luce netta (nel prezzo). Riduzione a 60cm o
+                        allargamento a 90cm: +38€ (tendina &quot;fuori misura&quot; sotto). Oltre, o tagli in
+                        altezza/larghezza/obliquo: vedi stessa tendina.
+                      </p>
                       {coloriIsomax.length > 0 && (
                         <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
                           <input type="hidden" name="rigaId" value={r.id} />
@@ -795,6 +803,21 @@ export default async function PreventivoPage({
                           </select>
                           <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                           <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {fuoriMisuraIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[300px]">
+                            {fuoriMisuraIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : ""}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ fuori misura</button>
                         </form>
                       )}
                       {altriOptionalIsomax.length > 0 && (
