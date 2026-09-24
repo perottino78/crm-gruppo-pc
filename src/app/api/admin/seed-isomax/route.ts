@@ -120,9 +120,37 @@ export async function POST(req: NextRequest) {
     }
 
     const optionaliNuovi = optionaliData as OptionalRow[];
-    const optionaliEsistenti = await prisma.optional.findMany({
+    let optionaliEsistenti = await prisma.optional.findMany({
       where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
     });
+
+    // Dedup: se più righe condividono la stessa chiave (categoria|nome|listino),
+    // per via di vecchi run di seed con bug sul nome del gruppo, tieni solo la
+    // più recente ed elimina le altre.
+    const gruppiPerChiave = new Map<string, typeof optionaliEsistenti>();
+    for (const o of optionaliEsistenti) {
+      const k = keyOptional(o);
+      const arr = gruppiPerChiave.get(k) ?? [];
+      arr.push(o);
+      gruppiPerChiave.set(k, arr);
+    }
+    let optDuplicatiRimossi = 0;
+    const superstiti: typeof optionaliEsistenti = [];
+    for (const arr of gruppiPerChiave.values()) {
+      if (arr.length === 1) {
+        superstiti.push(arr[0]);
+        continue;
+      }
+      arr.sort((a, b) => b.id.localeCompare(a.id));
+      superstiti.push(arr[0]);
+      for (const dup of arr.slice(1)) {
+        await prisma.rigaOptional.deleteMany({ where: { optionalId: dup.id } });
+        await prisma.optional.delete({ where: { id: dup.id } });
+        optDuplicatiRimossi++;
+      }
+    }
+    optionaliEsistenti = superstiti;
+
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
     let optCreati = 0;
@@ -189,6 +217,7 @@ export async function POST(req: NextRequest) {
       optAggiornati,
       optInvariati,
       optRimossi,
+      optDuplicatiRimossi,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
