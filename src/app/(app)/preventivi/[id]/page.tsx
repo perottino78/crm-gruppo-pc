@@ -55,6 +55,14 @@ const GRUPPI_TENDE_CON_TESSUTO = [
   "TELAI FISSI",
 ];
 
+// Vetrate scorrevoli (vedi richiesta utente su Scintilla/Brillante): raccolte sotto
+// un unico gruppo sintetico "VETRATE" in tendina, con il nome del catalogo originale
+// mostrato come sottogruppo (es. VETRATE > Scintilla, VETRATE > Brillante), sullo
+// stesso modello del wrapping gia' usato per le TENDE. "Fissi" e "Porte vetro" non
+// sono ancora a listino (nessun prezzo/dato tecnico caricato) e vanno aggiunti qui
+// non appena disponibili i relativi dati.
+const GRUPPI_VETRATE = ["VETRATE SCINTILLA", "VETRATE BRILLANTE"];
+
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
 export default async function PreventivoPage({
@@ -173,6 +181,11 @@ export default async function PreventivoPage({
     if (GRUPPI_TENDE_CON_TESSUTO.includes(gruppo)) {
       sottogruppo = gruppo;
       gruppo = "TENDE";
+    }
+    // Vetrate (Scintilla/Brillante): stesso wrapping delle tende, vedi GRUPPI_VETRATE.
+    if (GRUPPI_VETRATE.includes(gruppo)) {
+      sottogruppo = gruppo === "VETRATE SCINTILLA" ? "Scintilla" : "Brillante";
+      gruppo = "VETRATE";
     }
     if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
     const perGruppo = alberoMap.get(famiglia)!;
