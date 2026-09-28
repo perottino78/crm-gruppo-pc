@@ -14,6 +14,7 @@ import {
   aggiungiRigaPreventivoPerMisura,
   rimuoviRigaPreventivo,
   modificaRigaPreventivo,
+  duplicaRigaPreventivo,
   aggiungiOptionalARiga,
   rimuoviOptionalDaRiga,
   aggiornaStatoPreventivo,
@@ -610,6 +611,11 @@ export default async function PreventivoPage({
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="font-medium">{subtotale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
+                  <form action={duplicaRigaPreventivo}>
+                    <input type="hidden" name="id" value={r.id} />
+                    <input type="hidden" name="preventivoId" value={preventivo.id} />
+                    <button className="btn-3d btn-3d-green text-[11px] px-2 py-1">⧉ duplica</button>
+                  </form>
                   <form action={rimuoviRigaPreventivo}>
                     <input type="hidden" name="id" value={r.id} />
                     <input type="hidden" name="preventivoId" value={preventivo.id} />
@@ -619,7 +625,7 @@ export default async function PreventivoPage({
               </div>
 
               <details className="mt-1.5 text-[11px]">
-                <summary className="cursor-pointer text-neutral-600 hover:text-neutral-700">✏️ modifica misura / quantità / prezzo</summary>
+                <summary className="btn-3d btn-3d-blue text-[11px] px-2 py-1 cursor-pointer inline-block [&::-webkit-details-marker]:hidden marker:content-none">✏️ modifica misura / quantità / prezzo</summary>
                 <form action={modificaRigaPreventivo} className="mt-1.5 flex flex-wrap items-end gap-2">
                   <input type="hidden" name="id" value={r.id} />
                   <input type="hidden" name="preventivoId" value={preventivo.id} />

@@ -631,6 +631,55 @@ export async function rimuoviRigaPreventivo(formData: FormData) {
 // creazione della riga NON viene ricalcolata automaticamente qui — se la nuova misura
 // cambia fascia (standard/fuori misura) va controllata/aggiornata a mano tra gli optional
 // della riga, come già succede oggi per le altre modifiche manuali agli optional.
+// Duplica una riga preventivo (prodotto + optionali agganciati) per velocizzare
+// l'inserimento di articoli identici — vedi richiesta: "un pulsante duplica così
+// è anche più veloce l'inserimento di articoli uguali". La copia viene creata
+// subito dopo l'originale nello stesso ordinamento/sezione.
+export async function duplicaRigaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const riga = await prisma.rigaPreventivo.findUnique({
+    where: { id },
+    include: { optionali: true },
+  });
+  if (!riga) return;
+
+  const nuovaRiga = await prisma.rigaPreventivo.create({
+    data: {
+      preventivoId: riga.preventivoId,
+      prodottoId: riga.prodottoId,
+      testoLibero: riga.testoLibero,
+      quantita: riga.quantita,
+      prezzoUnitario: riga.prezzoUnitario,
+      optionalDescrizione: riga.optionalDescrizione,
+      optionalPrezzo: riga.optionalPrezzo,
+      mostraDescrizione: riga.mostraDescrizione,
+      misuraLarghezza: riga.misuraLarghezza,
+      misuraAltezza: riga.misuraAltezza,
+      descrizionePersonalizzata: riga.descrizionePersonalizzata,
+      ordine: riga.ordine,
+      sezioneId: riga.sezioneId,
+    },
+  });
+
+  if (riga.optionali.length > 0) {
+    await prisma.rigaOptional.createMany({
+      data: riga.optionali.map((o) => ({
+        rigaId: nuovaRiga.id,
+        optionalId: o.optionalId,
+        quantita: o.quantita,
+        prezzoUnitario: o.prezzoUnitario,
+        nota: o.nota,
+      })),
+    });
+  }
+
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
 export async function modificaRigaPreventivo(formData: FormData) {
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
