@@ -1,0 +1,1683 @@
+[
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto fino a 20 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 21 a 30 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 31 a 40 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 300,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 41 a 50 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 350,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 51 a 60 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 400,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 61 a 70 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 450,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 71 a 80 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 500,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 81 a 90 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 550,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Vetrate Panoramiche (Work&Service)",
+    "nome": "Rilievo Vetrate Panoramiche/Pacchetto da 91 a 100 mt²",
+    "tipoPrezzo": "FISSO",
+    "valore": 600,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Rilievo Pergotende e Bioclimatiche - 1a campata",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Rilievo Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Rilievo Pergotende e Bioclimatiche - ogni campata aggiuntiva",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Note Trasferta Rilievi Pergole/Vetrate (Work&Service)",
+    "nome": "Trasferta rilievo oltre 50 km (rimborso al km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Rilievi entro 50 km compresi nella tariffa base",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Note Trasferta Rilievi Pergole/Vetrate (Work&Service)",
+    "nome": "Pernottamento tecnico (1 persona)",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": "notte",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Posa Bioclimatica Monocampata (1 motore) fino a 20 mt2",
+    "tipoPrezzo": "FISSO",
+    "valore": 800,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Posa Bioclimatica Monocampata - supplemento oltre 20 mt2",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": "mq eccedenti",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Posa Pergotenda 1 Campata",
+    "tipoPrezzo": "FISSO",
+    "valore": 600,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Posa Pergotenda 2 Campate",
+    "tipoPrezzo": "FISSO",
+    "valore": 1100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Posa Pergotenda 3 Campate",
+    "tipoPrezzo": "FISSO",
+    "valore": 1400,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Note Posa Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Facchinaggio al piano",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": "piano",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Note Posa Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Uscita a vuoto",
+    "tipoPrezzo": "FISSO",
+    "valore": 400,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Note Posa Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Ritorno per materiale mancante",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Note Posa Pergotende e Bioclimatiche (Work&Service)",
+    "nome": "Trasferta oltre 100 km (rimborso al km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Trasferta entro 100 km inclusa",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Vetrate Vepa (Work&Service)",
+    "nome": "Posa vetrate scorrevoli (parallele o a pacchetto)",
+    "tipoPrezzo": "FISSO",
+    "valore": 55,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Minimo fatturabile 12 mq",
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Vetrate Vepa (Work&Service)",
+    "nome": "Supplemento vetrate curve",
+    "tipoPrezzo": "FISSO",
+    "valore": 30,
+    "unita": "mtl",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Vetrate Vepa (Work&Service)",
+    "nome": "Posa timpani",
+    "tipoPrezzo": "FISSO",
+    "valore": 55,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Allargamento davanzale - costo fisso",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Allargamento davanzale - al metro lineare",
+    "tipoPrezzo": "FISSO",
+    "valore": 20,
+    "unita": "mtl",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Rifiniture coprifili",
+    "tipoPrezzo": "FISSO",
+    "valore": 5,
+    "unita": "mtl",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Smontaggio e smaltimento infissi esistenti",
+    "tipoPrezzo": "FISSO",
+    "valore": 25,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Smontaggio tendaggi e smaltimento (o spostamento)",
+    "tipoPrezzo": "FISSO",
+    "valore": 110,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Scavo pavimento",
+    "tipoPrezzo": "FISSO",
+    "valore": 55,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Montaggio tappi PMMA",
+    "tipoPrezzo": "FISSO",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Complementi e Lavorazioni Extra Vetrate (Work&Service)",
+    "nome": "Facchinaggio",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Note Logistiche Vetrate (Work&Service)",
+    "nome": "Uscita a vuoto",
+    "tipoPrezzo": "FISSO",
+    "valore": 400,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Note Logistiche Vetrate (Work&Service)",
+    "nome": "Ritorno per materiale mancante",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Note Logistiche Vetrate (Work&Service)",
+    "nome": "Trasferta oltre 100 km (rimborso al km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO"
+    ]
+  },
+  {
+    "categoria": "Rilievo Serramenti e affini (Work&Service)",
+    "nome": "Rilievo Serramenti e affini fino a 10 pezzi",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Rilievo Serramenti e affini (Work&Service)",
+    "nome": "Rilievo Serramenti e affini da 10 a 20 pezzi",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Rilievo Serramenti e affini (Work&Service)",
+    "nome": "Rilievo Serramenti e affini oltre 20 pezzi",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": "ora",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Note Trasferta Rilievi Serramenti (Work&Service)",
+    "nome": "Trasferta rilievo oltre 50 km (rimborso al km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Rilievi entro 50 km compresi nella tariffa base",
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Note Trasferta Rilievi Serramenti (Work&Service)",
+    "nome": "Pernottamento tecnico (1 persona)",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": "notte",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Finestre e Porte Finestre (Work&Service)",
+    "nome": "Posa finestra 1/2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 120,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "KOPEN"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Finestre e Porte Finestre (Work&Service)",
+    "nome": "Posa finestre a 3 ante e porta finestra",
+    "tipoPrezzo": "FISSO",
+    "valore": 140,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "KOPEN"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Finestre e Porte Finestre (Work&Service)",
+    "nome": "Posa porta traslante scorrevole",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "KOPEN"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa porta interna battente",
+    "tipoPrezzo": "FISSO",
+    "valore": 80,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa porta interna cardine",
+    "tipoPrezzo": "FISSO",
+    "valore": 90,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa porta scorrevole interno vano",
+    "tipoPrezzo": "FISSO",
+    "valore": 120,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa porta scorrevole esterno vano",
+    "tipoPrezzo": "FISSO",
+    "valore": 140,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa stipite di passaggio",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Interne (Work&Service)",
+    "nome": "Posa porta scorrevole esterna in cristallo",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PORTE INTERNE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Portoncini (Work&Service)",
+    "nome": "Posa portoncino ingresso",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "KOPEN",
+      "BLINDATI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Blindate (Work&Service)",
+    "nome": "Posa porta blindata (tassello chimico)",
+    "tipoPrezzo": "FISSO",
+    "valore": 450,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "BLINDATI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Blindate (Work&Service)",
+    "nome": "Adeguamento vano porta blindata",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "BLINDATI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Blindate (Work&Service)",
+    "nome": "Supplemento sovraluce porta",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "BLINDATI",
+      "KOPEN"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Blindate (Work&Service)",
+    "nome": "Sostituzione pannello porta blindata",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "BLINDATI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Porte Blindate (Work&Service)",
+    "nome": "Modifica imbotte porta blindata",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "BLINDATI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tapparelle (Work&Service)",
+    "nome": "Posa telo tapparella",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tapparelle (Work&Service)",
+    "nome": "Posa tapparelle + kit manuale",
+    "tipoPrezzo": "FISSO",
+    "valore": 80,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tapparelle (Work&Service)",
+    "nome": "Posa tapparelle + kit motorizzato",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Persiane (Work&Service)",
+    "nome": "Posa persiana a telaio",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Persiane (Work&Service)",
+    "nome": "Posa persiana a cardine/libro",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Inferriate (Work&Service)",
+    "nome": "Posa inferriata",
+    "tipoPrezzo": "FISSO",
+    "valore": 110,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "CANCELLI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Zanzariere (Work&Service)",
+    "nome": "Posa zanzariera",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": "cad.",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Pensiline (Work&Service)",
+    "nome": "Posa pensilina in policarbonato",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Accessori (Work&Service)",
+    "nome": "Posa cassonetto",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE",
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Accessori (Work&Service)",
+    "nome": "Posa celino",
+    "tipoPrezzo": "FISSO",
+    "valore": 40,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE",
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Accessori (Work&Service)",
+    "nome": "Coibentazione celino",
+    "tipoPrezzo": "FISSO",
+    "valore": 40,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TAPPARELLE",
+      "SERRAMENTI"
+    ]
+  },
+  {
+    "categoria": "Note Posa Serramenti (Work&Service)",
+    "nome": "Facchinaggio al piano",
+    "tipoPrezzo": "FISSO",
+    "valore": 70,
+    "unita": "piano",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Note Posa Serramenti (Work&Service)",
+    "nome": "Uscita a vuoto",
+    "tipoPrezzo": "FISSO",
+    "valore": 400,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Note Posa Serramenti (Work&Service)",
+    "nome": "Ritorno per materiale mancante",
+    "tipoPrezzo": "FISSO",
+    "valore": 150,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Note Posa Serramenti (Work&Service)",
+    "nome": "Trasferta oltre 50 km (rimborso al km)",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.35,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Trasferta entro 50 km inclusa",
+    "gruppiApplicabili": [
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tende da Sole (Work&Service)",
+    "nome": "Posa tenda da sole fino a 3 mt (altezza max di posa 3 mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tende da Sole (Work&Service)",
+    "nome": "Posa tenda da sole oltre 3 mt (altezza max di posa 3 mt)",
+    "tipoPrezzo": "FISSO",
+    "valore": 250,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tende da Sole (Work&Service)",
+    "nome": "Motorizzazione tenda (da aggiungere al costo posa)",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Posa in Opera Tende da Sole (Work&Service)",
+    "nome": "Sostituzione telo tenda - su preventivo",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo da concordare caso per caso, modificare manualmente",
+    "gruppiApplicabili": [
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Trasporto al piano dal 3 in poi (oltre 4 pezzi) - autocarrata",
+    "tipoPrezzo": "FISSO",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Prezzo a preventivo, da concordare e modificare manualmente",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Trasporto al piano dal 3 in poi (meno di 4 pezzi) - forfait",
+    "tipoPrezzo": "FISSO",
+    "valore": 200,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Supplemento al km oltre i 30 km",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.6,
+    "unita": "km",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Smaltimento porta blindata",
+    "tipoPrezzo": "FISSO",
+    "valore": 15,
+    "unita": "cad.",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Smaltimento porta interna",
+    "tipoPrezzo": "FISSO",
+    "valore": 10,
+    "unita": "cad.",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Smaltimento infissi",
+    "tipoPrezzo": "FISSO",
+    "valore": 15,
+    "unita": "cad.",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Smuratura",
+    "tipoPrezzo": "FISSO",
+    "valore": 45,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Ore in economia tecnico (da pattuire con la proprieta)",
+    "tipoPrezzo": "FISSO",
+    "valore": 35,
+    "unita": "ora",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Assistenza in Piemonte (+IVA)",
+    "tipoPrezzo": "FISSO",
+    "valore": 50,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Costi Aggiuntivi e Servizi Accessori (Work&Service)",
+    "nome": "Assistenza fuori Piemonte (+IVA)",
+    "tipoPrezzo": "FISSO",
+    "valore": 80,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Spese Magazzino (Work&Service)",
+    "nome": "Spese per scarico e carico presso il magazzino Work&Service",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": "commessa",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": "Per ogni commessa che non dovra' rimanere presso i magazzini oltre 30 gg dallo scarico",
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  },
+  {
+    "categoria": "Spese Magazzino (Work&Service)",
+    "nome": "Fermo deposito (oltre 30 gg dallo scarico)",
+    "tipoPrezzo": "FISSO",
+    "valore": 100,
+    "unita": "mese",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "PERGOLE",
+      "BIOCLIMATICA",
+      "VETRATE BRILLANTE",
+      "VETRATE SCINTILLA",
+      "VETRATE FISSO",
+      "SERRAMENTI",
+      "PORTE INTERNE",
+      "BLINDATI",
+      "TAPPARELLE",
+      "PERSIANE",
+      "KOPEN",
+      "CANCELLI",
+      "ZANZARIERE_PC",
+      "ZANZARIERE_PLISSE",
+      "PENSILINE",
+      "TENDE A BRACCI CON CASSONETTO",
+      "TENDE A BRACCI SENZA CASSONETTO",
+      "TENDE A CADUTA",
+      "TENDE CLASSICHE",
+      "TENDE ORIZZONTALI",
+      "TENDE VERANDA",
+      "CAPPOTTINE FISSE E MOBILI",
+      "GIARDINO E PATIO",
+      "LINEA ZIP"
+    ]
+  }
+]

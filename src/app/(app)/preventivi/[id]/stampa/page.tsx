@@ -26,6 +26,11 @@ import {
   DICHIARAZIONE_VESSATORIE_SOLARIS,
   CONSENSO_FOTO_SOLARIS,
 } from "@/lib/condizioniGeneraliSolaris";
+import {
+  TITOLO_CONDIZIONI_POSA_WS,
+  INTRO_CONDIZIONI_POSA_WS,
+  VOCI_CONDIZIONI_POSA_WS,
+} from "@/lib/condizioniPosaWS";
 
 function RigaFirma({ label, sub }: { label: string; sub?: string }) {
   return (
@@ -103,6 +108,14 @@ export default async function StampaPreventivoPage({
         fornitoreLabel: "Solaris",
       }
     : null;
+
+  // Vero se il preventivo contiene almeno una voce di rilievo/posa in opera
+  // Work&Service (marcate dal suffisso "(Work&Service)" nella categoria
+  // dell'optional, vedi condizioniPosaWS.ts) — in tal caso in stampa vengono
+  // aggiunte le condizioni contrattuali del subappaltatore.
+  const haPosaWS = preventivo.righe.some((r) =>
+    r.optionali.some((ro) => ro.optional.categoria.endsWith("(Work&Service)"))
+  );
 
   const imponibileLordo = preventivo.righe.reduce((sum, r) => {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
@@ -375,6 +388,19 @@ export default async function StampaPreventivoPage({
         </div>
         </div>
       </section>
+
+      {haPosaWS && (
+        <section className="p-10 print:p-8 print:break-after-page text-[9.5px] leading-snug">
+          <h2 className="text-sm font-bold mb-1" style={{ color: info.primary }}>{TITOLO_CONDIZIONI_POSA_WS}</h2>
+          <p className="text-[9px] text-neutral-700 mb-4">{INTRO_CONDIZIONI_POSA_WS}</p>
+          {VOCI_CONDIZIONI_POSA_WS.map((v) => (
+            <div key={v.titolo} className="mb-2.5 print:break-inside-avoid">
+              <p className="font-semibold">{v.titolo}</p>
+              <p className="text-justify text-neutral-700">{v.testo}</p>
+            </div>
+          ))}
+        </section>
+      )}
 
       {condizioniBrand && (
         <>
