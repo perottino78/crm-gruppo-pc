@@ -963,14 +963,12 @@ const PERSIANEGOCCIA_LABELS: Record<string, string> = {
   PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
   PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
   PERSIANEGOCCIA_PORTAPERSIANA4A: "Portapersiana orientabile 4 ante",
-  PERSIANEGOCCIA_BILICO: "Persiana a bilico",
 };
 
 const PERSIANEGOCCIA_MODELLO_LABELS: Record<string, string> = {
   PERSIANA: "Persiana orientabile (aletta genovese)",
   PORTAPERSIANA: "Portapersiana orientabile",
   WASISTAS: "Wasistas",
-  BILICO: "Persiana a bilico",
 };
 
 const PERSIANEGOCCIA_ANTA_LABELS: Record<string, string> = {
