@@ -13,6 +13,7 @@ import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
   rimuoviRigaPreventivo,
+  modificaRigaPreventivo,
   aggiungiOptionalARiga,
   rimuoviOptionalDaRiga,
   aggiornaStatoPreventivo,
@@ -616,6 +617,63 @@ export default async function PreventivoPage({
                   </form>
                 </div>
               </div>
+
+              <details className="mt-1.5 text-[11px]">
+                <summary className="cursor-pointer text-neutral-600 hover:text-neutral-700">✏️ modifica misura / quantità / prezzo</summary>
+                <form action={modificaRigaPreventivo} className="mt-1.5 flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="id" value={r.id} />
+                  <input type="hidden" name="preventivoId" value={preventivo.id} />
+                  <div className="flex flex-col">
+                    <label className="text-[10px] text-neutral-500">Quantità</label>
+                    <input
+                      name="quantita"
+                      type="number"
+                      min={1}
+                      defaultValue={r.quantita}
+                      className="w-16 border border-neutral-200 rounded px-1.5 py-1 text-xs"
+                    />
+                  </div>
+                  {r.misuraLarghezza != null && r.misuraAltezza != null ? (
+                    <>
+                      <div className="flex flex-col">
+                        <label className="text-[10px] text-neutral-500">Larghezza {unit}</label>
+                        <input
+                          name="larghezza"
+                          type="number"
+                          step="0.1"
+                          defaultValue={r.misuraLarghezza}
+                          className="w-20 border border-neutral-200 rounded px-1.5 py-1 text-xs"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="text-[10px] text-neutral-500">Altezza {unit}</label>
+                        <input
+                          name="altezza"
+                          type="number"
+                          step="0.1"
+                          defaultValue={r.misuraAltezza}
+                          className="w-20 border border-neutral-200 rounded px-1.5 py-1 text-xs"
+                        />
+                      </div>
+                      <p className="text-[10px] text-neutral-500 basis-full">
+                        Il prezzo unitario viene ricalcolato automaticamente sulla nuova misura.
+                      </p>
+                    </>
+                  ) : (
+                    <div className="flex flex-col">
+                      <label className="text-[10px] text-neutral-500">Prezzo unitario</label>
+                      <input
+                        name="prezzoUnitarioManuale"
+                        type="number"
+                        step="0.01"
+                        defaultValue={r.prezzoUnitario}
+                        className="w-24 border border-neutral-200 rounded px-1.5 py-1 text-xs"
+                      />
+                    </div>
+                  )}
+                  <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva modifiche</button>
+                </form>
+              </details>
 
               {(modello?.descrizioneTecnica || r.descrizionePersonalizzata) && (
                 <div className="mt-1.5 flex flex-wrap items-center gap-2">

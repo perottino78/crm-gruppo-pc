@@ -619,6 +619,110 @@ export async function rimuoviRigaPreventivo(formData: FormData) {
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
+// Modifica una riga preventivo già aggiunta (l'utente aveva solo "cancella e rifai" —
+// vedi richiesta: poter correggere una misura sbagliata senza eliminare la riga).
+// Se la riga ha una misura reale (aggiunta "a misura", griglia o formula), cambiando
+// larghezza/altezza il prezzo unitario viene ricalcolato da zero con la stessa identica
+// logica usata in fase di aggiunta (trovaFasciaPrezzo / calcolaPrezzoAFormula), cosi'
+// non resta mai un prezzo non coerente con la nuova misura. Se invece la riga non ha
+// misura (prodotto a prezzo fisso da listino, es. Blindati/Cancelli/Solaris) si puo'
+// aggiornare solo la quantita' e, volendo, il prezzo unitario scritto a mano.
+// Nota Blindati: l'eventuale maggiorazione "Fuori Misura" agganciata come optional alla
+// creazione della riga NON viene ricalcolata automaticamente qui — se la nuova misura
+// cambia fascia (standard/fuori misura) va controllata/aggiornata a mano tra gli optional
+// della riga, come già succede oggi per le altre modifiche manuali agli optional.
+export async function modificaRigaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const riga = await prisma.rigaPreventivo.findUnique({
+    where: { id },
+    include: { prodotto: true },
+  });
+  if (!riga || !riga.prodotto) return;
+
+  const quantitaStr = str(formData, "quantita");
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : riga.quantita;
+
+  const larghezzaStr = str(formData, "larghezza");
+  const altezzaStr = str(formData, "altezza");
+
+  if (riga.misuraLarghezza != null && riga.misuraAltezza != null && larghezzaStr && altezzaStr) {
+    const larghezza = parseFloat(larghezzaStr.replace(",", "."));
+    const altezza = parseFloat(altezzaStr.replace(",", "."));
+    if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || altezza <= 0) {
+      redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
+    }
+
+    const brandId = riga.prodotto.brandId;
+    const tipologia = riga.prodotto.tipologia;
+    const modello = await prisma.modelloProdotto.findUnique({
+      where: { brandId_tipologia: { brandId, tipologia } },
+    });
+
+    if (modello && modello.modalitaCalcolo !== "GRIGLIA") {
+      const esito = await calcolaPrezzoAFormula({
+        brandId,
+        tipologia,
+        modalitaCalcolo: modello.modalitaCalcolo,
+        parametriCalcolo: modello.parametriCalcolo,
+        larghezzaCm: larghezza,
+        altezzaCm: altezza,
+      });
+      if (!esito) {
+        redirect(
+          `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+            `Tariffa non disponibile per ${tipologia} a ${larghezza}×${altezza} — verificare il listino`
+          )}`
+        );
+      }
+      await prisma.rigaPreventivo.update({
+        where: { id },
+        data: {
+          prodottoId: esito!.prodottoRiferimentoId,
+          quantita,
+          prezzoUnitario: esito!.prezzoUnitario,
+          misuraLarghezza: larghezza,
+          misuraAltezza: altezza,
+        },
+      });
+    } else {
+      const prodotto = await trovaFasciaPrezzo({ brandId, tipologia, larghezza, altezza });
+      if (!prodotto) {
+        redirect(
+          `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+            `Nessuna fascia di prezzo per ${tipologia} a ${larghezza}×${altezza} — misura fuori listino`
+          )}`
+        );
+      }
+      await prisma.rigaPreventivo.update({
+        where: { id },
+        data: {
+          prodottoId: prodotto!.id,
+          quantita,
+          prezzoUnitario: prodotto!.prezzoBase,
+          misuraLarghezza: larghezza,
+          misuraAltezza: altezza,
+        },
+      });
+    }
+  } else {
+    const prezzoManualeStr = str(formData, "prezzoUnitarioManuale");
+    const prezzoManuale = prezzoManualeStr ? parseFloat(prezzoManualeStr.replace(",", ".")) : NaN;
+    await prisma.rigaPreventivo.update({
+      where: { id },
+      data: {
+        quantita,
+        prezzoUnitario: Number.isFinite(prezzoManuale) ? prezzoManuale : riga.prezzoUnitario,
+      },
+    });
+  }
+
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
 export async function aggiungiOptionalARiga(formData: FormData) {
   const rigaId = str(formData, "rigaId");
   const optionalId = str(formData, "optionalId");
