@@ -56,13 +56,16 @@ const GRUPPI_TENDE_CON_TESSUTO = [
   "TELAI FISSI",
 ];
 
-// Vetrate scorrevoli (vedi richiesta utente su Scintilla/Brillante): raccolte sotto
-// un unico gruppo sintetico "VETRATE" in tendina, con il nome del catalogo originale
-// mostrato come sottogruppo (es. VETRATE > Scintilla, VETRATE > Brillante), sullo
-// stesso modello del wrapping gia' usato per le TENDE. "Fissi" e "Porte vetro" non
-// sono ancora a listino (nessun prezzo/dato tecnico caricato) e vanno aggiunti qui
-// non appena disponibili i relativi dati.
-const GRUPPI_VETRATE = ["VETRATE SCINTILLA", "VETRATE BRILLANTE"];
+// Vetrate scorrevoli/fisse (vedi richiesta utente su Scintilla/Brillante/Fisso): raccolte
+// sotto un unico gruppo sintetico "VETRATE" in tendina, con il nome del catalogo originale
+// mostrato come sottogruppo (es. VETRATE > Scintilla, VETRATE > Brillante, VETRATE > Fisso),
+// sullo stesso modello del wrapping gia' usato per le TENDE. "Porte vetro" non e' ancora a
+// listino (nessun prezzo/dato tecnico caricato) e va aggiunto qui non appena disponibile.
+const GRUPPI_VETRATE: Record<string, string> = {
+  "VETRATE SCINTILLA": "Scintilla",
+  "VETRATE BRILLANTE": "Brillante",
+  "VETRATE FISSO": "Fisso",
+};
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -183,9 +186,9 @@ export default async function PreventivoPage({
       sottogruppo = gruppo;
       gruppo = "TENDE";
     }
-    // Vetrate (Scintilla/Brillante): stesso wrapping delle tende, vedi GRUPPI_VETRATE.
-    if (GRUPPI_VETRATE.includes(gruppo)) {
-      sottogruppo = gruppo === "VETRATE SCINTILLA" ? "Scintilla" : "Brillante";
+    // Vetrate (Scintilla/Brillante/Fisso): stesso wrapping delle tende, vedi GRUPPI_VETRATE.
+    if (gruppo in GRUPPI_VETRATE) {
+      sottogruppo = GRUPPI_VETRATE[gruppo];
       gruppo = "VETRATE";
     }
     if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());

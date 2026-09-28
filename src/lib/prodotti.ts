@@ -135,6 +135,7 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TENDAVERANDA_WINTERBALKON")) return "TENDAVERANDA_WINTERBALKON";
   if (tipologia.startsWith("VETRATA_BRILLANTE")) return "VETRATA_BRILLANTE";
   if (tipologia.startsWith("VETRATA_SCINTILLA")) return "VETRATA_SCINTILLA";
+  if (tipologia.startsWith("VETRATA_FISSO")) return "VETRATA_FISSO";
   if (tipologia.startsWith("VENEZIANA_50MM")) return "VENEZIANA_50MM_FAMIGLIA";
   if (tipologia.startsWith("VENEZIANA_70MM_SCUDO")) return "VENEZIANA_70_80MM_FAMIGLIA";
   if (tipologia.startsWith("VENEZIANA_80MM")) return "VENEZIANA_70_80MM_FAMIGLIA";
