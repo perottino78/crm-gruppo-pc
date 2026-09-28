@@ -1,0 +1,1122 @@
+[
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Standard — texture/RAL (H47/H59/H62/H63/H65/H93/I40/I77/AL09/AL14/AL18)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": "Compreso nel prezzo base. Codici: H47(7016 R TX), H59(7001 R TX), H62(9010 R TX), H63(1013 R TX), H65(6005 R TX), H93(8017 R TX), I40(6009 R TX), I77(6021 R TX), AL09(PM), AL14(6005 MA), AL18(PGMA).",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Standard Relif (G80 PKRL3 / G81 PKRL4) +15%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 15,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Standard Sublimato (AL41 PKA3 / AL43 PKA7 / AL47 PKA16 / H11 PKA31) +25%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 25,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Special Texture (H64/AL08) +10% — attrezzaggio 400€ da 1 a 5 pz",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Special RAL (AL10/AL11/AL19/F25/I17) +10% — attrezzaggio 400€ da 1 a 5 pz",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Altri/a Campione RAL (AL03/AL04/AL05/F09/G90/RAL a campione) +20% — attrezzaggio 400€ da 1 a 5 pz",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Colore Altri/a Campione Sublimato (I13/AL40/AL44/AL45/AL46/H56/AL37/sublimato a campione) +30% — attrezzaggio 400€ da 1 a 5 pz",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 30,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Colore struttura",
+    "nome": "Costo attrezzaggio colore Special / Altri e a Campione (da 1 a 5 pz)",
+    "tipoPrezzo": "FISSO",
+    "valore": 400.0,
+    "unita": "a corpo",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione telaio da 45mm +3%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 3,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione telaio da 75mm +6%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 6,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Telaio maggiorato senza aletta (in ELLE)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Rifilatura telaio (per lato)",
+    "tipoPrezzo": "FISSO",
+    "valore": 30.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Coibentazione lamelle e fascia",
+    "tipoPrezzo": "FISSO",
+    "valore": 26.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Doghe al posto delle lamelle orientabili (verticale o orizzontale) +5%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 5,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Fascia centrale supplementare",
+    "tipoPrezzo": "FISSO",
+    "valore": 100.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Pannello Liscio (prezzo al mq, minimo fatturabile 0,5mq — moltiplicare manualmente per la superficie)",
+    "tipoPrezzo": "FISSO",
+    "valore": 350.0,
+    "unita": "mq",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Scantonatura su telaio per battuta marmo",
+    "tipoPrezzo": "FISSO",
+    "valore": 60.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Fermapersiana Tiramolla (solo 1 e 2 ante con zoccolo/fascia standard)",
+    "tipoPrezzo": "FISSO",
+    "valore": 35.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione persiane ad arco 1 anta (raggio minimo 500mm, solo telaio aletta 30mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1000.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione persiane ad arco 2 ante (raggio minimo 500mm, solo telaio aletta 30mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1200.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione persiane ad arco 3 ante (raggio minimo 500mm, solo telaio aletta 30mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1500.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Maggiorazione persiane ad arco 4 ante (raggio minimo 500mm, solo telaio aletta 30mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 1800.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Cerniera aggiuntiva FERMA (antisfilo, NO collo lungo)",
+    "tipoPrezzo": "FISSO",
+    "valore": 7.5,
+    "unita": "pz",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Cerniera collo lungo int.42 (scavalco 70mm)",
+    "tipoPrezzo": "FISSO",
+    "valore": 6.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Apertura con Martellina Ribassata ZERA",
+    "tipoPrezzo": "FISSO",
+    "valore": 65.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Apertura con Vaschetta (catenaccio bidirezionale)",
+    "tipoPrezzo": "FISSO",
+    "valore": 80.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Cremonese con chiave NERA",
+    "tipoPrezzo": "FISSO",
+    "valore": 80.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Spagnoletta NERA",
+    "tipoPrezzo": "FISSO",
+    "valore": 0.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Serratura da montante / da fascia 3PC",
+    "tipoPrezzo": "FISSO",
+    "valore": 115.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Serratura da montante aggiuntiva 2PC (necessaria su ante con apertura a libro, solo cilindro)",
+    "tipoPrezzo": "FISSO",
+    "valore": 350.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Doppia maniglia",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Kit sensori cilindrici (a sigaretta) per allarme",
+    "tipoPrezzo": "FISSO",
+    "valore": 55.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Apertura a libro per tipologie a 2 e 3 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 40.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Ferramenta e apertura",
+    "nome": "Apertura a libro per tipologie a 4 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Finestra persiana 1 anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 120.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Finestra persiana 2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 230.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Finestra persiana 3 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 320.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Finestra persiana 4 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 420.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Porta-finestra persiana 1 anta",
+    "tipoPrezzo": "FISSO",
+    "valore": 170.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Porta-finestra persiana 2 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 340.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Porta-finestra persiana 3 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 470.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Cardini su telaio (cerniere registrabili con squadri e bandelle)",
+    "nome": "Porta-finestra persiana 4 ante",
+    "tipoPrezzo": "FISSO",
+    "valore": 620.0,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio (aletta 30mm) con profilo a scatto — tagliato e assemblato a misura — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 210.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio (aletta 30mm) con profilo a scatto — tagliato e assemblato a misura — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 268.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio (aletta 30mm) con profilo a scatto — tagliato e assemblato a misura — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 290.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio a imbotte — tagliato e assemblato a misura — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 185.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio a imbotte — tagliato e assemblato a misura — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 220.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Telaio a imbotte — tagliato e assemblato a misura — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 250.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 30mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 33.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 30mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 38.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 30mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 41.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 40mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 44.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 40mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 52.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili piatti 40mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 55.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 20x20mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 42.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 20x20mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 49.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 20x20mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 53.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 40x20mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 66.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 40x20mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 77.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Coprifili angolari 40x20mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 82.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 40x20mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 73.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 40x20mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 88.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 40x20mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 98.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 50x20mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 114.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 50x20mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 136.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Tubolare 50x20mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 152.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 80mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 99.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 80mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 119.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 80mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 133.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 100mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 118.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 100mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 141.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 100mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 157.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 120mm (barra 6500mm) — colori RAL standard",
+    "tipoPrezzo": "FISSO",
+    "valore": 134.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 120mm (barra 6500mm) — effetto legno verniciato",
+    "tipoPrezzo": "FISSO",
+    "valore": 161.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Profili complementari",
+    "nome": "Imbotti a \"C\" 120mm (barra 6500mm) — effetto legno sublimato",
+    "tipoPrezzo": "FISSO",
+    "valore": 180.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione (Ducati Rientra)",
+    "nome": "Kit motorizzazione Rientra 62 Mono/B — persiana 1 anta (Ducati Home Automation)",
+    "tipoPrezzo": "FISSO",
+    "valore": 400.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": "Motori potenziati, velocità standard, adatti a persiane ben bilanciate di maggiori dimensioni/peso. Protocollo radio 24Bit. Colore standard bianco RAL 9010, bracci in ferro zincato.",
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione (Ducati Rientra)",
+    "nome": "Kit motorizzazione Rientra 62/B — persiana 2 ante (Ducati Home Automation)",
+    "tipoPrezzo": "FISSO",
+    "valore": 484.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione (Ducati Rientra)",
+    "nome": "Set Levartic per apertura a libro (solo tipologia a 2 ante)",
+    "tipoPrezzo": "FISSO",
+    "valore": 150.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione (Ducati Rientra)",
+    "nome": "Batteria aggiuntiva ricaricabile (ricambio/riserva)",
+    "tipoPrezzo": "FISSO",
+    "valore": 51.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  },
+  {
+    "categoria": "Motorizzazione (Ducati Rientra)",
+    "nome": "Modulo Wi-Fi 4CH (completo di alimentatore)",
+    "tipoPrezzo": "FISSO",
+    "valore": 284.0,
+    "unita": "cad",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
+  }
+]

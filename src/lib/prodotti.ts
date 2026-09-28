@@ -158,6 +158,11 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Infissi in Acciaio: un solo listino per tutte le varianti/numero ante, cosi'
   // gli optional (vetri, accessori, colori, lavorazioni, trasporto) restano condivisi.
   if (tipologia.startsWith("ACCIAIO_")) return "ACCIAIO";
+  // Persiane Orientabili a Goccia: un solo listino per tutte le 13 tipologie (FF,
+  // Wasistas, Persiana/Portapersiana 1-4 ante, PF Soglia, Bilico, Traslante), cosi'
+  // gli optional condivisi (varianti aletta/apertura, colore, ferramenta, profili,
+  // motorizzazione) restano scopati su tutta la famiglia.
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) return "PERSIANE_GOCCIA";
   if (tipologia.startsWith("PENSILINA_")) return "PENSILINA_CURVA";
   if (tipologia.startsWith("TAPPARELLE_")) return "TAPPARELLE";
   // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
@@ -724,6 +729,12 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // "Persiane" nella tendina potra' in futuro accogliere altri materiali (es. legno, PVC)
   // come sottogruppi affiancati.
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "BLINDATE";
+  // Persiane Orientabili a Goccia: sottogruppo unico dentro il gruppo PERSIANE,
+  // accanto a BLINDATE. Le 13 tipologie (FF, Wasistas, Persiana/Portapersiana 1-4
+  // ante, PF Soglia, Bilico, Traslante) restano in lista piatta nella stessa
+  // tendina, come richiesto (aletta genovese, fisse, ecc. tutte visibili insieme,
+  // niente sotto-pagine).
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) return "GOCCIA";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
   // Pensiline: tendina Curva / Dritta dentro il gruppo PENSILINE. "Dritta" e' per ora
@@ -936,6 +947,24 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
   "2ANTE": "apribile a 2 ante",
   "3ANTE": "apribile a 3 ante",
   "4ANTE": "apribile a 4 ante",
+};
+
+// Persiane Orientabili a Goccia: etichette brevi per le 13 tipologie, mostrate nella
+// tendina piatta del sottogruppo GOCCIA (aletta genovese/fisse/ecc. tutte insieme).
+const PERSIANEGOCCIA_LABELS: Record<string, string> = {
+  PERSIANEGOCCIA_FF: "Specchiatura fissa",
+  PERSIANEGOCCIA_WASISTAS: "Wasistas",
+  PERSIANEGOCCIA_PERSIANA1A: "Persiana orientabile 1 anta (aletta genovese)",
+  PERSIANEGOCCIA_PERSIANA2A: "Persiana orientabile 2 ante (aletta genovese)",
+  PERSIANEGOCCIA_PERSIANA3A: "Persiana orientabile 3 ante (aletta genovese)",
+  PERSIANEGOCCIA_PORTAPERSIANA1A: "Portapersiana orientabile 1 anta",
+  PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
+  PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
+  PERSIANEGOCCIA_PORTAPERSIANA4A: "Portapersiana orientabile 4 ante",
+  PERSIANEGOCCIA_PF2A_SOGLIA: "Portafinestra 2 ante con soglia ribassata",
+  PERSIANEGOCCIA_PF3A_SOGLIA: "Portafinestra 3 ante con soglia ribassata",
+  PERSIANEGOCCIA_BILICO: "Persiana a bilico",
+  PERSIANEGOCCIA_TRASLANTE: "Traslante anta fissa laterale",
 };
 
 // Decompone una tipologia PERSIANEBLINDATE_/ACCIAIO_ nei 2 assi "modello" e "numero
@@ -1551,6 +1580,7 @@ export function labelBreveTipologia(tipologia: string): string {
     const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
     if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
+  if (PERSIANEGOCCIA_LABELS[tipologia]) return PERSIANEGOCCIA_LABELS[tipologia];
   if (HISENSE_LABELS[tipologia]) return HISENSE_LABELS[tipologia];
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
@@ -1597,7 +1627,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }
