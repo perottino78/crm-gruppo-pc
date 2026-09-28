@@ -82,7 +82,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove i Prodotto la cui tipologia non compare piu' nel JSON (es. le 4
+    // tipologie tolte su richiesta: Specchiatura fissa, Portafinestra con soglia
+    // ribassata 2/3 ante, Traslante), cosi' il seed resta sincronizzato col file
+    // invece di lasciare righe orfane in DB.
+    const tipologieProdottiAttuali = new Set(prodottiNuovi.map((p) => p.tipologia));
+    const prodottiOrfani = prodottiEsistenti.filter((p) => !tipologieProdottiAttuali.has(p.tipologia));
+    let prodottiRimossi = 0;
+    if (prodottiOrfani.length > 0) {
+      const res = await prisma.prodotto.deleteMany({ where: { id: { in: prodottiOrfani.map((p) => p.id) } } });
+      prodottiRimossi = res.count;
+    }
+
     const modelli = modelliData as ModelloRow[];
+    const modelliEsistenti = await prisma.modelloProdotto.findMany({
+      where: { brandId: brand.id, OR: TIPOLOGIE_PREFIXES.map((p) => ({ tipologia: { startsWith: p } })) },
+    });
     for (const m of modelli) {
       await prisma.modelloProdotto.upsert({
         where: { brandId_tipologia: { brandId: brand.id, tipologia: m.tipologia } },
@@ -105,6 +120,14 @@ export async function POST(req: NextRequest) {
           parametriCalcolo: m.parametriCalcolo,
         },
       });
+    }
+
+    const tipologieModelliAttuali = new Set(modelli.map((m) => m.tipologia));
+    const modelliOrfani = modelliEsistenti.filter((m) => !tipologieModelliAttuali.has(m.tipologia));
+    let modelliRimossi = 0;
+    if (modelliOrfani.length > 0) {
+      const res = await prisma.modelloProdotto.deleteMany({ where: { id: { in: modelliOrfani.map((m) => m.id) } } });
+      modelliRimossi = res.count;
     }
 
     const optionaliNuovi = optionaliData as OptionalRow[];
@@ -157,7 +180,9 @@ export async function POST(req: NextRequest) {
       prodottiCreati,
       prodottiAggiornati,
       prodottiInvariati,
+      prodottiRimossi,
       modelliAggiornati: modelli.length,
+      modelliRimossi,
       optCreati,
       optAggiornati,
       optInvariati,

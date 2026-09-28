@@ -949,10 +949,12 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
   "4ANTE": "apribile a 4 ante",
 };
 
-// Persiane Orientabili a Goccia: etichette brevi per le 13 tipologie, mostrate nella
-// tendina piatta del sottogruppo GOCCIA (aletta genovese/fisse/ecc. tutte insieme).
+// Persiane Orientabili a Goccia: etichette brevi per le 9 tipologie rimaste (tolte su
+// richiesta le 4 che non c'entravano nella tendina: Specchiatura fissa, Portafinestra
+// con soglia ribassata 2/3 ante, Traslante). Restano Persiana/Portapersiana orientabile
+// (1-4 ante), Wasistas e Bilico, selezionate con le 2 tendine a cascata modello -> n.
+// ante (vedi assiSelezioneModelloAnte) invece della lista piatta usata prima.
 const PERSIANEGOCCIA_LABELS: Record<string, string> = {
-  PERSIANEGOCCIA_FF: "Specchiatura fissa",
   PERSIANEGOCCIA_WASISTAS: "Wasistas",
   PERSIANEGOCCIA_PERSIANA1A: "Persiana orientabile 1 anta (aletta genovese)",
   PERSIANEGOCCIA_PERSIANA2A: "Persiana orientabile 2 ante (aletta genovese)",
@@ -961,10 +963,22 @@ const PERSIANEGOCCIA_LABELS: Record<string, string> = {
   PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
   PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
   PERSIANEGOCCIA_PORTAPERSIANA4A: "Portapersiana orientabile 4 ante",
-  PERSIANEGOCCIA_PF2A_SOGLIA: "Portafinestra 2 ante con soglia ribassata",
-  PERSIANEGOCCIA_PF3A_SOGLIA: "Portafinestra 3 ante con soglia ribassata",
   PERSIANEGOCCIA_BILICO: "Persiana a bilico",
-  PERSIANEGOCCIA_TRASLANTE: "Traslante anta fissa laterale",
+};
+
+const PERSIANEGOCCIA_MODELLO_LABELS: Record<string, string> = {
+  PERSIANA: "Persiana orientabile (aletta genovese)",
+  PORTAPERSIANA: "Portapersiana orientabile",
+  WASISTAS: "Wasistas",
+  BILICO: "Persiana a bilico",
+};
+
+const PERSIANEGOCCIA_ANTA_LABELS: Record<string, string> = {
+  "1A": "1 anta",
+  "2A": "2 ante",
+  "3A": "3 ante",
+  "4A": "4 ante",
+  UNICA: "misura unica",
 };
 
 // Decompone una tipologia PERSIANEBLINDATE_/ACCIAIO_ nei 2 assi "modello" e "numero
@@ -1002,6 +1016,27 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
       return {
         modello: { valore: match[1], label: base },
         ante: { valore: match[2], label: PERSIANE_BLINDATE_ANTE_LABELS[match[2]] ?? match[2] },
+      };
+    }
+  }
+  // Persiane Orientabili a Goccia: Persiana/Portapersiana hanno un vero numero di
+  // ante (1-4) nel nome tipologia (es. PERSIANA2A, PORTAPERSIANA4A), scomposto con
+  // la stessa regex di Persiane Blindate/Acciaio. Wasistas e Bilico non hanno varianti
+  // di ante nel listino (una sola misura/apertura a modello), quindi ricevono un asse
+  // ante fittizio "UNICA" per restare nello stesso meccanismo a 2 tendine.
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) {
+    const match = tipologia.match(/^PERSIANEGOCCIA_(PERSIANA|PORTAPERSIANA)(1A|2A|3A|4A)$/);
+    if (match) {
+      return {
+        modello: { valore: match[1], label: PERSIANEGOCCIA_MODELLO_LABELS[match[1]] ?? match[1] },
+        ante: { valore: match[2], label: PERSIANEGOCCIA_ANTA_LABELS[match[2]] ?? match[2] },
+      };
+    }
+    const unicaKey = tipologia.slice("PERSIANEGOCCIA_".length);
+    if (PERSIANEGOCCIA_MODELLO_LABELS[unicaKey]) {
+      return {
+        modello: { valore: unicaKey, label: PERSIANEGOCCIA_MODELLO_LABELS[unicaKey] },
+        ante: { valore: "UNICA", label: PERSIANEGOCCIA_ANTA_LABELS.UNICA },
       };
     }
   }
