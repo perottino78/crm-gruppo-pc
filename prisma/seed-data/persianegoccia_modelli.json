@@ -79,5 +79,23 @@
     "immagineUrl": null,
     "modalitaCalcolo": "GRIGLIA",
     "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEALLUMINIO_PALETTAFISSA_PLACEHOLDER",
+    "descrizioneTecnica": "Listino Persiane in Alluminio — Paletta fissa non ancora caricato.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER",
+    "descrizioneTecnica": "Listino Persiane in Alluminio — Tabelloni verticali non ancora caricato.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
   }
 ]

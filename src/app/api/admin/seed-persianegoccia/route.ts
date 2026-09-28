@@ -34,7 +34,7 @@ type OptionalRow = {
   gruppiApplicabili: string[];
 };
 
-const TIPOLOGIE_PREFIXES = ["PERSIANEGOCCIA_"];
+const TIPOLOGIE_PREFIXES = ["PERSIANEGOCCIA_", "PERSIANEALLUMINIO_"];
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
 const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;

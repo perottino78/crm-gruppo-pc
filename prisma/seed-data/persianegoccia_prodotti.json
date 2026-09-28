@@ -13109,5 +13109,19 @@
     "altezzaMm": 2300,
     "larghezzaMm": 3300,
     "prezzoBase": 4154.52
+  },
+  {
+    "tipologia": "PERSIANEALLUMINIO_PALETTAFISSA_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER",
+    "colore": "PLACEHOLDER",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
   }
 ]
