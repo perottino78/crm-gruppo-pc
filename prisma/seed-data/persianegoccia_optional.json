@@ -1118,5 +1118,19 @@
     "gruppiApplicabili": [
       "PERSIANE"
     ]
+  },
+  {
+    "categoria": "Maggiorazioni telaio e lavorazioni",
+    "nome": "Paletta fissa (anziché orientabile) +10%",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 10,
+    "unita": "%",
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": "PERSIANE_GOCCIA",
+    "note": null,
+    "gruppiApplicabili": [
+      "PERSIANE"
+    ]
   }
 ]

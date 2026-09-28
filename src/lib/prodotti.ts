@@ -725,15 +725,17 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
-  // Persiane: organizzate per materiale, come richiesto — "ACCIAIO (Blindate)" per
-  // il catalogo Persiane Blindate (classe 3/4), e sotto "ALLUMINIO" i vari tipi di
-  // lavorazione affiancati (Orientabile a Goccia gia' a listino; Paletta fissa e
-  // Tabelloni verticali per ora solo segnaposto "in arrivo", vedi IN_ARRIVO). Dentro
-  // Orientabile a Goccia restano le 2 tendine modello (Persiana/Portapersiana) ->
-  // numero ante gia' costruite in assiSelezioneModelloAnte.
+  // Persiane: organizzate per materiale — "ACCIAIO (Blindate)" per il catalogo
+  // Persiane Blindate (classe 3/4), e sotto "ALLUMINIO" i vari tipi di lavorazione
+  // affiancati. Orientabile a Goccia e' gia' a listino, con le 2 tendine modello
+  // (Persiana/Portapersiana) -> numero ante gia' costruite in
+  // assiSelezioneModelloAnte; "Paletta fissa" (lamella fissa anziche' orientabile)
+  // NON e' una famiglia a parte ma un optional a percentuale su Persiana/
+  // Portapersiana orientabile (vedi persianegoccia_optional.json). Tabelloni
+  // verticali resta per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO), in
+  // attesa che arrivi un vero listino con misure e prezzi propri.
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "ACCIAIO (Blindate)";
   if (tipologia.startsWith("PERSIANEGOCCIA_")) return "ALLUMINIO — Orientabile a Goccia";
-  if (tipologia === "PERSIANEALLUMINIO_PALETTAFISSA_PLACEHOLDER") return "ALLUMINIO — Paletta fissa";
   if (tipologia === "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER") return "ALLUMINIO — Tabelloni verticali";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
@@ -1572,7 +1574,6 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
   TAPPARELLE_PVC_PLACEHOLDER: "Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo",
-  PERSIANEALLUMINIO_PALETTAFISSA_PLACEHOLDER: "Listino Persiane Alluminio — Paletta fissa non ancora caricato — in arrivo",
   PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER: "Listino Persiane Alluminio — Tabelloni verticali non ancora caricato — in arrivo",
 };
 
@@ -1588,7 +1589,6 @@ export function labelBreveTipologia(tipologia: string): string {
   }
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
   if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;
-  if (tipologia === "PERSIANEALLUMINIO_PALETTAFISSA_PLACEHOLDER") return "Paletta fissa (listino in arrivo)";
   if (tipologia === "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER") return "Tabelloni verticali (listino in arrivo)";
   if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
   if (TAPPARELLE_LABELS[tipologia]) return TAPPARELLE_LABELS[tipologia];
