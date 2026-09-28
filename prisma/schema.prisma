@@ -147,6 +147,13 @@ model Preventivo {
   // Sconto percentuale applicato sull'imponibile lordo (somma righe) prima del calcolo IVA;
   // totaleNetto memorizza già l'imponibile SCONTATO
   scontoPercentuale Float      @default(0)
+  // Prezzo finale scritto a mano dal commerciale (IVA inclusa), che bypassa il calcolo
+  // automatico righe/sconto: utile per imporre una cifra concordata a voce senza che il
+  // cliente veda in stampa la percentuale di sconto applicata. Quando attivo, totaleNetto/
+  // totaleIva sono ricavati a ritroso da questo importo e dall'aliquota IVA corrente, e la
+  // stampa mostra solo un imponibile+IVA "puliti", indistinguibili da un calcolo normale.
+  prezzoManualeAttivo Boolean  @default(false)
+  prezzoManualeTotale Float?
   // Testo libero per la stampa dell'offerta (condizioni di fornitura/vendita specifiche di questa offerta)
   condizioniPagamento String?
   condizioniConsegna  String?

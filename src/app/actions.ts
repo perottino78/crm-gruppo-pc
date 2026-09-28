@@ -134,7 +134,23 @@ export async function creaPreventivo(formData: FormData) {
 
 // totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
 // l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
+// Se e' attivo il "prezzo manuale" (vedi aggiornaPrezzoManuale), il calcolo dalle righe
+// viene del tutto bypassato: totaleNetto/totaleIva si ricavano a ritroso dal totale finale
+// scritto a mano e dall'aliquota IVA corrente, ignorando righe e scontoPercentuale.
 async function ricalcolaTotali(preventivoId: string) {
+  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
+  if (!preventivoAttuale) return;
+
+  if (preventivoAttuale.prezzoManualeAttivo && preventivoAttuale.prezzoManualeTotale != null) {
+    const totaleManuale = preventivoAttuale.prezzoManualeTotale;
+    const totaleNetto = totaleManuale / (1 + preventivoAttuale.aliquotaIva / 100);
+    await prisma.preventivo.update({
+      where: { id: preventivoId },
+      data: { totaleNetto, totaleIva: totaleManuale - totaleNetto },
+    });
+    return;
+  }
+
   const righe = await prisma.rigaPreventivo.findMany({
     where: { preventivoId },
     include: { optionali: true },
@@ -143,8 +159,7 @@ async function ricalcolaTotali(preventivoId: string) {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
     return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   }, 0);
-  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
-  const sconto = preventivoAttuale?.scontoPercentuale ?? 0;
+  const sconto = preventivoAttuale.scontoPercentuale ?? 0;
   const totaleNetto = imponibileLordo * (1 - sconto / 100);
   const preventivo = await prisma.preventivo.update({
     where: { id: preventivoId },
@@ -215,6 +230,43 @@ export async function aggiornaIva(formData: FormData) {
   await prisma.preventivo.update({
     where: { id },
     data: { aliquotaIva },
+  });
+  await ricalcolaTotali(id);
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+}
+
+// Prezzo manuale: bypassa il calcolo automatico (righe - sconto%) e permette di scrivere
+// direttamente il totale finale concordato (IVA inclusa) — utile quando si vuole imporre
+// una cifra tonda concordata a voce senza che il cliente veda in stampa la percentuale di
+// sconto applicata. Quando attivo, la stampa mostra solo un imponibile+IVA "puliti"
+// ricavati a ritroso da questa cifra, indistinguibili da un preventivo calcolato normalmente.
+export async function aggiornaPrezzoManuale(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const attivo = formData.get("prezzoManualeAttivo") === "on";
+  const totaleStr = str(formData, "prezzoManualeTotale");
+  const preset = str(formData, "aliquotaPreset");
+  const customStr = str(formData, "aliquotaCustom");
+
+  let aliquotaIva: number;
+  if (preset === "ALTRO") {
+    const custom = customStr ? parseFloat(customStr.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(custom) ? Math.max(0, Math.min(100, custom)) : 22;
+  } else {
+    const val = preset ? parseFloat(preset.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(val) ? val : 22;
+  }
+
+  const totale = totaleStr ? parseFloat(totaleStr.replace(",", ".")) : NaN;
+
+  await prisma.preventivo.update({
+    where: { id },
+    data: {
+      prezzoManualeAttivo: attivo,
+      prezzoManualeTotale: attivo && Number.isFinite(totale) ? totale : null,
+      aliquotaIva,
+    },
   });
   await ricalcolaTotali(id);
   revalidatePath(`/preventivi/${id}`);

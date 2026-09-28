@@ -21,6 +21,7 @@ import {
   aggiornaCondizioniOfferta,
   aggiornaSconto,
   aggiornaIva,
+  aggiornaPrezzoManuale,
   aggiungiRigaTestoLibero,
   creaSezione,
   rinominaSezione,
@@ -388,7 +389,14 @@ export default async function PreventivoPage({
           </form>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-600 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
+          <p className="text-xs text-neutral-600 mb-1">
+            Netto
+            {preventivo.prezzoManualeAttivo
+              ? " (prezzo manuale)"
+              : preventivo.scontoPercentuale > 0
+                ? ` (scontato ${preventivo.scontoPercentuale}%)`
+                : ""}
+          </p>
           <p className="text-sm font-medium mb-2">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
           <form action={aggiornaSconto} className="flex items-center gap-1">
             <input type="hidden" name="id" value={preventivo.id} />
@@ -435,6 +443,58 @@ export default async function PreventivoPage({
           </form>
         </div>
       </div>
+
+      <details className="bg-white rounded-lg border border-neutral-200 mb-6" open={preventivo.prezzoManualeAttivo}>
+        <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
+          💰 Prezzo manuale — bypassa sconto/calcolo automatico
+        </summary>
+        <form action={aggiornaPrezzoManuale} className="px-4 pb-4 flex flex-col gap-2">
+          <input type="hidden" name="id" value={preventivo.id} />
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="prezzoManualeAttivo" defaultChecked={preventivo.prezzoManualeAttivo} />
+            Attiva prezzo manuale
+          </label>
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="text-xs text-neutral-500">Totale finale (IVA inclusa)</label>
+            <input
+              name="prezzoManualeTotale"
+              type="number"
+              step="0.01"
+              min={0}
+              defaultValue={preventivo.prezzoManualeTotale ?? ""}
+              placeholder="es. 2400,00"
+              className="w-32 text-sm border border-neutral-200 rounded px-1.5 py-1"
+            />
+            <label className="text-xs text-neutral-500">IVA</label>
+            <select
+              name="aliquotaPreset"
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
+              className="text-xs border border-neutral-200 rounded px-1.5 py-1"
+            >
+              <option value="22">22%</option>
+              <option value="10">10%</option>
+              <option value="14.8">14,8%</option>
+              <option value="ALTRO">Altro —</option>
+            </select>
+            <input
+              name="aliquotaCustom"
+              type="number"
+              step="0.1"
+              min={0}
+              max={100}
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
+              placeholder="%"
+              className="w-14 text-xs border border-neutral-200 rounded px-1.5 py-1"
+            />
+            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
+          </div>
+          <p className="text-[11px] text-neutral-500">
+            Quando attivo, il totale sopra ignora righe e sconto%: in stampa comparirà solo un
+            imponibile + IVA coerenti con questa cifra, senza alcuna riga "sconto" visibile al
+            cliente — come un preventivo calcolato normalmente.
+          </p>
+        </form>
+      </details>
 
       <details className="bg-white rounded-lg border border-neutral-200 mb-6">
         <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">

@@ -112,6 +112,11 @@ export default async function StampaPreventivoPage({
   const totaleNetto = preventivo.totaleNetto;
   const totaleIva = preventivo.totaleIva;
   const totaleFinale = totaleNetto + totaleIva;
+  // Prezzo manuale: quando attivo, la stampa non deve rivelare al cliente ne' l'imponibile
+  // lordo di calcolo ne' la percentuale di sconto applicata — mostra solo un imponibile+IVA
+  // "puliti" ricavati a ritroso dal totale finale scritto a mano, indistinguibili da un
+  // preventivo calcolato normalmente.
+  const prezzoManualeAttivo = preventivo.prezzoManualeAttivo;
 
   const oggi = new Date().toLocaleDateString("it-IT");
   const anno = preventivo.createdAt.getFullYear();
@@ -312,18 +317,20 @@ export default async function StampaPreventivoPage({
 
         <div className="flex justify-end mb-8">
           <div className="w-64 text-sm">
-            <div className="flex justify-between py-1">
-              <span className="text-neutral-700">Imponibile</span>
-              <span>{eur(imponibileLordo)}</span>
-            </div>
-            {sconto > 0 && (
+            {!prezzoManualeAttivo && (
+              <div className="flex justify-between py-1">
+                <span className="text-neutral-700">Imponibile</span>
+                <span>{eur(imponibileLordo)}</span>
+              </div>
+            )}
+            {!prezzoManualeAttivo && sconto > 0 && (
               <div className="flex justify-between py-1">
                 <span className="text-neutral-700">Sconto ({sconto}%)</span>
                 <span>-{eur(imponibileLordo - totaleNetto)}</span>
               </div>
             )}
             <div className="flex justify-between py-1">
-              <span className="text-neutral-700">Imponibile {sconto > 0 ? "scontato" : ""}</span>
+              <span className="text-neutral-700">Imponibile {!prezzoManualeAttivo && sconto > 0 ? "scontato" : ""}</span>
               <span>{eur(totaleNetto)}</span>
             </div>
             <div className="flex justify-between py-1">
