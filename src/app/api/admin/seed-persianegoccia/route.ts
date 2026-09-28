@@ -5,6 +5,7 @@ import modelliData from "../../../../../prisma/seed-data/persianegoccia_modelli.
 import optionaliData from "../../../../../prisma/seed-data/persianegoccia_optional.json";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 300;
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
