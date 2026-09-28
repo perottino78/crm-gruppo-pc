@@ -229,11 +229,14 @@ export default async function StampaPreventivoPage({
       <section className="p-6 print:p-4 print:break-after-page">
         <div className="border-2 border-neutral-800 rounded-md p-6 print:p-6">
         {preventivo.immagineCopertinaUrl && (
-          <img
-            src={preventivo.immagineCopertinaUrl}
-            alt="Copertina offerta"
-            className="w-full max-h-64 object-cover rounded mb-6 border border-neutral-200"
-          />
+          <div className="w-full mb-6 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center overflow-hidden" style={{ maxHeight: 420 }}>
+            <img
+              src={preventivo.immagineCopertinaUrl}
+              alt="Copertina offerta"
+              className="max-w-full object-contain"
+              style={{ maxHeight: 420 }}
+            />
+          </div>
         )}
         <div className="flex items-center justify-between border-b-4 pb-4 mb-6" style={{ borderColor: info.primary }}>
           <div className="flex items-center gap-3">

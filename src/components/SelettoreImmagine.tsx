@@ -106,7 +106,9 @@ export default function SelettoreImmagine({
       <input ref={inputFileRef} type="file" accept="image/*" onChange={alSelezionaFile} className="hidden" />
       {errore && <p className="text-xs text-red-600 mt-1">{errore}</p>}
       {valore && (
-        <img src={valore} alt="Anteprima copertina" className="mt-2 h-24 w-full object-cover rounded border border-neutral-200" />
+        <div className="mt-2 w-full max-h-40 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center overflow-hidden">
+          <img src={valore} alt="Anteprima copertina" className="max-h-40 max-w-full object-contain" />
+        </div>
       )}
     </div>
   );
