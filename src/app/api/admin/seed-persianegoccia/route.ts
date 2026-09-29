@@ -174,6 +174,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Rimuove gli Optional la cui combinazione categoria+nome+listino non compare
+    // piu' nel JSON (es. le 2 fasce "Apertura a libro" sostituite da un unico
+    // optional flat), cosi' non restano voci orfane selezionabili nella tendina
+    // "+ optional". Sicuro: RigaOptional.optional non ha onDelete cascade, quindi
+    // se una riga preventivo esistente referenzia ancora un optional rimosso dal
+    // JSON la delete fallisce con errore FK invece di corrompere il preventivo.
+    const chiaviOptionaliAttuali = new Set(optionaliNuovi.map((o) => keyOptional(o)));
+    const optionaliOrfani = optionaliEsistenti.filter((o) => !chiaviOptionaliAttuali.has(keyOptional(o)));
+    let optRimossi = 0;
+    if (optionaliOrfani.length > 0) {
+      const res = await prisma.optional.deleteMany({ where: { id: { in: optionaliOrfani.map((o) => o.id) } } });
+      optRimossi = res.count;
+    }
+
     return NextResponse.json({
       ok: true,
       gruppo: GRUPPO,
@@ -186,6 +200,7 @@ export async function POST(req: NextRequest) {
       optCreati,
       optAggiornati,
       optInvariati,
+      optRimossi,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
