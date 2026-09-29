@@ -957,10 +957,9 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
 // (1-4 ante), Wasistas e Bilico, selezionate con le 2 tendine a cascata modello -> n.
 // ante (vedi assiSelezioneModelloAnte) invece della lista piatta usata prima.
 const PERSIANEGOCCIA_LABELS: Record<string, string> = {
-  PERSIANEGOCCIA_WASISTAS: "Wasistas",
-  PERSIANEGOCCIA_PERSIANA1A: "Persiana orientabile 1 anta (aletta genovese)",
-  PERSIANEGOCCIA_PERSIANA2A: "Persiana orientabile 2 ante (aletta genovese)",
-  PERSIANEGOCCIA_PERSIANA3A: "Persiana orientabile 3 ante (aletta genovese)",
+  PERSIANEGOCCIA_PERSIANA1A: "Persiana orientabile 1 anta",
+  PERSIANEGOCCIA_PERSIANA2A: "Persiana orientabile 2 ante",
+  PERSIANEGOCCIA_PERSIANA3A: "Persiana orientabile 3 ante",
   PERSIANEGOCCIA_PORTAPERSIANA1A: "Portapersiana orientabile 1 anta",
   PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
   PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
@@ -968,9 +967,8 @@ const PERSIANEGOCCIA_LABELS: Record<string, string> = {
 };
 
 const PERSIANEGOCCIA_MODELLO_LABELS: Record<string, string> = {
-  PERSIANA: "Persiana orientabile (aletta genovese)",
+  PERSIANA: "Persiana orientabile",
   PORTAPERSIANA: "Portapersiana orientabile",
-  WASISTAS: "Wasistas",
 };
 
 const PERSIANEGOCCIA_ANTA_LABELS: Record<string, string> = {
