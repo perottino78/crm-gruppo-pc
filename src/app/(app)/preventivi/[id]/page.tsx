@@ -925,6 +925,115 @@ export default async function PreventivoPage({
                   );
                 }
 
+                // Per le Persiane (Blindate in acciaio + Orientabili a Goccia in alluminio):
+                // troppi accessori diversi (fino a un'ottantina per la Goccia) per stare in
+                // un'unica tendina piatta, quindi si separano in 5 gruppi tematici: apertura
+                // (battenti/scorrevole/a libro — la scelta piu' importante, sempre in cima),
+                // colori, motorizzazione, profili complementari, e un gruppo "servizi e
+                // lavorazioni" che raccoglie tutto il resto (maggiorazioni telaio, cardini,
+                // accessori vari, lavorazioni, servizi) cosi' da trovare subito quello che
+                // serve invece di scorrere decine di voci mischiate.
+                if (modello?.gruppo === "PERSIANE") {
+                  const aperturaPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Ferramenta e apertura");
+                  const coloriPersiane = optionaliRigaFiltrati.filter(
+                    (o) => o.categoria === "Colore struttura" || o.categoria === "Colore"
+                  );
+                  const motorizzazionePersiane = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Motorizzazione"));
+                  const profiliPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Profili complementari");
+                  const serviziPersiane = optionaliRigaFiltrati.filter(
+                    (o) =>
+                      o.categoria !== "Ferramenta e apertura" &&
+                      o.categoria !== "Colore struttura" &&
+                      o.categoria !== "Colore" &&
+                      !o.categoria.startsWith("Motorizzazione") &&
+                      o.categoria !== "Profili complementari"
+                  );
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {aperturaPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Tipo apertura —</option>
+                            {aperturaPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ apertura</button>
+                        </form>
+                      )}
+                      {coloriPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Colore —</option>
+                            {coloriPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : " (compreso)"}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {motorizzazionePersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Motorizzazione —</option>
+                            {motorizzazionePersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ motorizzazione</button>
+                        </form>
+                      )}
+                      {profiliPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Profilo complementare —</option>
+                            {profiliPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ profilo</button>
+                        </form>
+                      )}
+                      {serviziPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[280px]">
+                            <option value="">Servizi e lavorazioni —</option>
+                            {serviziPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ servizio</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
                 // Per le Tende da sole (a bracci, a caduta, classiche, orizzontali,
                 // veranda, giardino/patio, cappottine, telai fissi): tendina "Tessuto
                 // Tempotest" a cascata separata (collezione -> codice, +slot di
