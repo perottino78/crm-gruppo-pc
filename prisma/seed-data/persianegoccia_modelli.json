@@ -63,8 +63,62 @@
     "parametriCalcolo": {}
   },
   {
-    "tipologia": "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER",
-    "descrizioneTecnica": "Listino Persiane in Alluminio — Tabelloni verticali non ancora caricato.",
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA1A",
+    "descrizioneTecnica": "Persiana a doghe verticali 1 anta, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA2A",
+    "descrizioneTecnica": "Persiana a doghe verticali 2 ante, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA3A",
+    "descrizioneTecnica": "Persiana a doghe verticali 3 ante, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA1A",
+    "descrizioneTecnica": "Portapersiana a doghe verticali 1 anta, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA2A",
+    "descrizioneTecnica": "Portapersiana a doghe verticali 2 ante, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA3A",
+    "descrizioneTecnica": "Portapersiana a doghe verticali 3 ante, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
+    "famiglia": "INDOOR",
+    "gruppo": "PERSIANE",
+    "immagineUrl": null,
+    "modalitaCalcolo": "GRIGLIA",
+    "parametriCalcolo": {}
+  },
+  {
+    "tipologia": "PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA4A",
+    "descrizioneTecnica": "Portapersiana a doghe verticali 4 ante, aletta a doghe verticali anziche' orientabile a goccia (alluminio) - serie Persiane Orientabili a Goccia, maggiorazione +15% da listino ('PERSIANA DOGHE VERTICALI + 15%') sul prezzo base lamelle orientabili. PVC interno / Alluminio esterno. Colore struttura: STANDARD compreso; colori sublimati legno, RAL/effetti legno particolari e soglia ribassata sono optional a parte (vedi elenco optional). Misure in mm.",
     "famiglia": "INDOOR",
     "gruppo": "PERSIANE",
     "immagineUrl": null,

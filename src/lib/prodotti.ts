@@ -735,8 +735,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // verticali resta per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO), in
   // attesa che arrivi un vero listino con misure e prezzi propri.
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "ACCIAIO (Blindate)";
+  if (tipologia.startsWith("PERSIANEGOCCIA_DOGHEVERTICALI_")) return "ALLUMINIO — Doghe verticali";
   if (tipologia.startsWith("PERSIANEGOCCIA_")) return "ALLUMINIO — Orientabile a Goccia";
-  if (tipologia === "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER") return "ALLUMINIO — Tabelloni verticali";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
   // Pensiline: tendina Curva / Dritta dentro il gruppo PENSILINE. "Dritta" e' per ora
@@ -964,11 +964,24 @@ const PERSIANEGOCCIA_LABELS: Record<string, string> = {
   PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
   PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
   PERSIANEGOCCIA_PORTAPERSIANA4A: "Portapersiana orientabile 4 ante",
+  // Doghe verticali: stessa serie ma aletta a doghe verticali anziche' a goccia
+  // orientabile; maggiorazione +15% da listino ("PERSIANA DOGHE VERTICALI + 15%",
+  // nota presente su tutti i fogli 1/2/3/4 ante del listino originale) applicata
+  // sul prezzo base lamelle orientabili.
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA1A: "Persiana a doghe verticali 1 anta",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA2A: "Persiana a doghe verticali 2 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA3A: "Persiana a doghe verticali 3 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA1A: "Portapersiana a doghe verticali 1 anta",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA2A: "Portapersiana a doghe verticali 2 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA3A: "Portapersiana a doghe verticali 3 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA4A: "Portapersiana a doghe verticali 4 ante",
 };
 
 const PERSIANEGOCCIA_MODELLO_LABELS: Record<string, string> = {
   PERSIANA: "Persiana orientabile",
   PORTAPERSIANA: "Portapersiana orientabile",
+  DOGHEVERTICALI_PERSIANA: "Persiana a doghe verticali",
+  DOGHEVERTICALI_PORTAPERSIANA: "Portapersiana a doghe verticali",
 };
 
 const PERSIANEGOCCIA_ANTA_LABELS: Record<string, string> = {
@@ -1023,6 +1036,14 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
   // di ante nel listino (una sola misura/apertura a modello), quindi ricevono un asse
   // ante fittizio "UNICA" per restare nello stesso meccanismo a 2 tendine.
   if (tipologia.startsWith("PERSIANEGOCCIA_")) {
+    const dvMatch = tipologia.match(/^PERSIANEGOCCIA_DOGHEVERTICALI_(PERSIANA|PORTAPERSIANA)(1A|2A|3A|4A)$/);
+    if (dvMatch) {
+      const modelloKey = `DOGHEVERTICALI_${dvMatch[1]}`;
+      return {
+        modello: { valore: modelloKey, label: PERSIANEGOCCIA_MODELLO_LABELS[modelloKey] ?? modelloKey },
+        ante: { valore: dvMatch[2], label: PERSIANEGOCCIA_ANTA_LABELS[dvMatch[2]] ?? dvMatch[2] },
+      };
+    }
     const match = tipologia.match(/^PERSIANEGOCCIA_(PERSIANA|PORTAPERSIANA)(1A|2A|3A|4A)$/);
     if (match) {
       return {
@@ -1572,7 +1593,6 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
   TAPPARELLE_PVC_PLACEHOLDER: "Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo",
-  PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER: "Listino Persiane Alluminio — Tabelloni verticali non ancora caricato — in arrivo",
 };
 
 export function notaInArrivo(tipologia: string): string | null {
@@ -1587,7 +1607,6 @@ export function labelBreveTipologia(tipologia: string): string {
   }
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
   if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;
-  if (tipologia === "PERSIANEALLUMINIO_TABELLONI_PLACEHOLDER") return "Tabelloni verticali (listino in arrivo)";
   if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
   if (TAPPARELLE_LABELS[tipologia]) return TAPPARELLE_LABELS[tipologia];
   if (tipologia.startsWith("ACCIAIO_")) {
