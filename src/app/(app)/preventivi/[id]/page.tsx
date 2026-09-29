@@ -13,8 +13,6 @@ import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
   rimuoviRigaPreventivo,
-  modificaRigaPreventivo,
-  duplicaRigaPreventivo,
   aggiungiOptionalARiga,
   rimuoviOptionalDaRiga,
   aggiornaStatoPreventivo,
@@ -35,6 +33,7 @@ import {
   spostaSezioneGiu,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
+import RigaAzioni from "@/components/RigaAzioni";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 import { SelettorePannelliInterniBlindati } from "@/components/SelettorePannelliInterniBlindati";
@@ -573,7 +572,7 @@ export default async function PreventivoPage({
                     <form action={rimuoviRigaPreventivo}>
                       <input type="hidden" name="id" value={r.id} />
                       <input type="hidden" name="preventivoId" value={preventivo.id} />
-                      <button className="btn-3d btn-3d-red text-[11px] px-2 py-1">rimuovi</button>
+                      <button className="btn-flat btn-flat-red">rimuovi</button>
                     </form>
                   </div>
                 </div>
@@ -593,7 +592,16 @@ export default async function PreventivoPage({
             <div key={r.id} className="flex items-stretch">
               {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
               <div className="flex-1 px-4 py-3 text-sm">
-              <div className="flex items-center justify-between">
+              <RigaAzioni
+                rigaId={r.id}
+                preventivoId={preventivo.id}
+                subtotale={subtotale}
+                quantita={r.quantita}
+                misuraLarghezza={r.misuraLarghezza}
+                misuraAltezza={r.misuraAltezza}
+                prezzoUnitario={r.prezzoUnitario}
+                unit={unit}
+              >
                 <div className="flex items-center gap-3">
                   {modello?.immagineUrl && (
                     <img src={modello.immagineUrl} alt={prodotto.tipologia} className="w-12 h-12 object-cover rounded border border-neutral-200" />
@@ -609,77 +617,7 @@ export default async function PreventivoPage({
                     <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="font-medium">{subtotale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
-                  <form action={duplicaRigaPreventivo}>
-                    <input type="hidden" name="id" value={r.id} />
-                    <input type="hidden" name="preventivoId" value={preventivo.id} />
-                    <button className="btn-3d btn-3d-green text-[11px] px-2 py-1">⧉ duplica</button>
-                  </form>
-                  <form action={rimuoviRigaPreventivo}>
-                    <input type="hidden" name="id" value={r.id} />
-                    <input type="hidden" name="preventivoId" value={preventivo.id} />
-                    <button className="btn-3d btn-3d-red text-[11px] px-2 py-1">rimuovi</button>
-                  </form>
-                </div>
-              </div>
-
-              <details className="mt-1.5 text-[11px]">
-                <summary className="btn-3d btn-3d-blue text-[11px] px-2 py-1 cursor-pointer inline-block [&::-webkit-details-marker]:hidden marker:content-none">✏️ modifica misura / quantità / prezzo</summary>
-                <form action={modificaRigaPreventivo} className="mt-1.5 flex flex-wrap items-end gap-2">
-                  <input type="hidden" name="id" value={r.id} />
-                  <input type="hidden" name="preventivoId" value={preventivo.id} />
-                  <div className="flex flex-col">
-                    <label className="text-[10px] text-neutral-500">Quantità</label>
-                    <input
-                      name="quantita"
-                      type="number"
-                      min={1}
-                      defaultValue={r.quantita}
-                      className="w-16 border border-neutral-200 rounded px-1.5 py-1 text-xs"
-                    />
-                  </div>
-                  {r.misuraLarghezza != null && r.misuraAltezza != null ? (
-                    <>
-                      <div className="flex flex-col">
-                        <label className="text-[10px] text-neutral-500">Larghezza {unit}</label>
-                        <input
-                          name="larghezza"
-                          type="number"
-                          step="0.1"
-                          defaultValue={r.misuraLarghezza}
-                          className="w-20 border border-neutral-200 rounded px-1.5 py-1 text-xs"
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="text-[10px] text-neutral-500">Altezza {unit}</label>
-                        <input
-                          name="altezza"
-                          type="number"
-                          step="0.1"
-                          defaultValue={r.misuraAltezza}
-                          className="w-20 border border-neutral-200 rounded px-1.5 py-1 text-xs"
-                        />
-                      </div>
-                      <p className="text-[10px] text-neutral-500 basis-full">
-                        Il prezzo unitario viene ricalcolato automaticamente sulla nuova misura.
-                      </p>
-                    </>
-                  ) : (
-                    <div className="flex flex-col">
-                      <label className="text-[10px] text-neutral-500">Prezzo unitario</label>
-                      <input
-                        name="prezzoUnitarioManuale"
-                        type="number"
-                        step="0.01"
-                        defaultValue={r.prezzoUnitario}
-                        className="w-24 border border-neutral-200 rounded px-1.5 py-1 text-xs"
-                      />
-                    </div>
-                  )}
-                  <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva modifiche</button>
-                </form>
-              </details>
+              </RigaAzioni>
 
               {(modello?.descrizioneTecnica || r.descrizionePersonalizzata) && (
                 <div className="mt-1.5 flex flex-wrap items-center gap-2">

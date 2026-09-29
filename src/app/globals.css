@@ -54,3 +54,31 @@ body {
 .btn-3d-teal { background: #0d9488; color: #fff; border-color: #134e4a; }
 .btn-3d-outline { background: #fff; color: #171717; border-color: #d4d4d4; box-shadow: 0 3px 0 #d4d4d4; }
 .btn-3d-outline:active { box-shadow: 0 0 0 #d4d4d4; }
+
+/* Pulsanti "flat": stile compatto a pillola con bordo sottile, senza ombra 3D —
+   usati per le azioni per-riga (modifica/duplica/elimina) del preventivo, dove
+   serve un ingombro minimo e leggibile invece del bottone bold squadrato. */
+.btn-flat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 7px;
+  border: 1px solid;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.1;
+  padding: 4px 10px;
+  background: #fff;
+  cursor: pointer;
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+  white-space: nowrap;
+}
+.btn-flat:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-flat-neutral { color: #404040; border-color: #d4d4d4; }
+.btn-flat-neutral:hover { background: #f5f5f5; border-color: #a3a3a3; }
+.btn-flat-red { color: #dc2626; border-color: #f3b4b4; }
+.btn-flat-red:hover { background: #fef2f2; border-color: #dc2626; }
+.btn-flat-green { color: #15803d; border-color: #bbf0cc; }
+.btn-flat-green:hover { background: #f0fdf4; border-color: #15803d; }
+
