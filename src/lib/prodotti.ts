@@ -793,6 +793,13 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
     return "Pergole Vetrate";
   }
+  // Bioclimatiche (Wawe/Solaria/Raincover/Aurora): un unico sottogruppo, la selezione
+  // avviene con 2 tendine a cascata (linea -> installazione) tramite
+  // assiSelezioneBioclimatica, stesso pattern di assiSelezionePergola, invece della
+  // lista piatta di 20 voci mischiate sotto il gruppo BIOCLIMATICA.
+  if (tipologia.startsWith("WAWE_") || tipologia.startsWith("SOLARIA_") || tipologia.startsWith("RAINCOVER_") || tipologia.startsWith("ISCHIA_")) {
+    return "Bioclimatiche";
+  }
   if (tipologia.startsWith("KOPEN_")) {
     // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
     // avviene con 2 tendine a cascata (linea -> combinazione materiali) tramite
@@ -1263,6 +1270,60 @@ export function assiSelezionePergola(tipologia: string): AssiPergola | null {
   if (!installazioneLabel) return null;
   return {
     modello: { valore: modelloCodice, label: PERGOLA_MODELLO_LABELS[modelloCodice] },
+    installazione: { valore: tipologia, label: installazioneLabel },
+  };
+}
+
+// Bioclimatiche (Wawe/Solaria/Raincover/Aurora): decompone la tipologia nei 2 assi
+// "linea" (WAWE/SOLARIA/RAINCOVER/AURORA) e "installazione" (a parete/isola/patio,
+// con le varianti Singola/Doppia/Standard/Star/affiancata gia' incorporate
+// nell'etichetta), cosi' il selettore mostra 2 tendine a cascata (linea ->
+// installazione) invece della lista piatta di 20 voci mischiate sotto il gruppo
+// BIOCLIMATICA — stesso pattern di assiSelezionePergola. Nota: la linea Aurora usa
+// il prefisso tipologia ISCHIA_ (nome commerciale del modello), non AURORA_.
+export type AssiBioclimatica = { linea: AsseSelezione; installazione: AsseSelezione };
+
+const BIOCLIMATICA_LINEA_LABELS: Record<string, string> = {
+  WAWE: "Wawe",
+  SOLARIA: "Solaria",
+  RAINCOVER: "Rain Cover",
+  AURORA: "Aurora",
+};
+
+const BIOCLIMATICA_INSTALLAZIONE_LABELS: Record<string, string> = {
+  WAWE_PATIO: "Patio (autoportante, con lamelle orientabili)",
+  WAWE_STRUTTURA_SINGOLA: "Struttura a parete — Singola (senza lamelle, da abbinare al patio)",
+  WAWE_STRUTTURA_SINGOLA_AFFIANCATA: "Struttura a parete — Singola affiancata (moduli accostati)",
+  WAWE_STRUTTURA_DOPPIA: "Struttura a parete — Doppia (senza lamelle, da abbinare al patio)",
+  WAWE_STRUTTURA_DOPPIA_AFFIANCATA: "Struttura a parete — Doppia affiancata (moduli accostati)",
+  SOLARIA_PARETE_STANDARD: "Standard — A parete",
+  SOLARIA_PARETE_STANDARD_AFFIANCATA: "Standard — A parete, modulo affiancato",
+  SOLARIA_PARETE_STAR: "Star — A parete (arretramento piantoni)",
+  SOLARIA_PARETE_STAR_AFFIANCATA: "Star — A parete, modulo affiancato",
+  SOLARIA_PATIO: "Patio (autoportante su 4 piedi)",
+  SOLARIA_PATIO_TIRANTI: "Patio con tiranti",
+  RAINCOVER_PATIO: "Patio (grondaia compresa)",
+  RAINCOVER_STRUTTURA: "Struttura a parete (senza lamelle, da abbinare al patio)",
+  RAINCOVER_STRUTTURA_DOPPIA: "Struttura a parete — Doppia",
+  RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA: "Struttura a parete — Doppia affiancata",
+  ISCHIA_PARETE: "Standard — A parete",
+  ISCHIA_PARETE_AFFIANCATA: "Standard — A parete, modulo affiancato",
+  ISCHIA_ISOLA: "Standard — Isola (autoportante su 4 lati)",
+  ISCHIA_ISOLA_AFFIANCATA: "Standard — Isola, moduli affiancati",
+  ISCHIA_PATIO: "Patio (autoportante su 4 piedi)",
+};
+
+export function assiSelezioneBioclimatica(tipologia: string): AssiBioclimatica | null {
+  let lineaCodice: string | null = null;
+  if (tipologia.startsWith("WAWE_")) lineaCodice = "WAWE";
+  else if (tipologia.startsWith("SOLARIA_")) lineaCodice = "SOLARIA";
+  else if (tipologia.startsWith("RAINCOVER_")) lineaCodice = "RAINCOVER";
+  else if (tipologia.startsWith("ISCHIA_")) lineaCodice = "AURORA";
+  if (!lineaCodice) return null;
+  const installazioneLabel = BIOCLIMATICA_INSTALLAZIONE_LABELS[tipologia];
+  if (!installazioneLabel) return null;
+  return {
+    linea: { valore: lineaCodice, label: BIOCLIMATICA_LINEA_LABELS[lineaCodice] },
     installazione: { valore: tipologia, label: installazioneLabel },
   };
 }
@@ -1835,6 +1896,10 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
+  }
+  if (tipologia.startsWith("WAWE_") || tipologia.startsWith("SOLARIA_") || tipologia.startsWith("RAINCOVER_") || tipologia.startsWith("ISCHIA_")) {
+    const assi = assiSelezioneBioclimatica(tipologia);
+    if (assi) return `${assi.linea.label} — ${assi.installazione.label}`;
   }
   if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
     const assi = assiSelezioneVetrata(tipologia);

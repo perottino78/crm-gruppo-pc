@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -60,6 +60,10 @@ export type NodoTipologia = {
   // restano "in arrivo" (disabilitato), Nubes ha scheda tecnica reale ma prezzo
   // ancora "in arrivo" (disabilitato) finche' non arriva il listino ufficiale.
   assiVetrata?: AssiVetrata;
+  // Bioclimatiche (Wawe/Solaria/Raincover/Aurora): assi linea -> installazione, per
+  // mostrare 2 tendine a cascata invece della lista piatta di 20 voci mischiate sotto
+  // il gruppo BIOCLIMATICA.
+  assiBioclimatica?: AssiBioclimatica;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -767,6 +771,93 @@ function SelettoreCascataPergola({
       {modello && (
         <div className="flex flex-col gap-1">
           <label className="text-[11px] text-neutral-600">2. Installazione (addossata/isola/patio)</label>
+          <select
+            value={installazione}
+            onChange={(e) => setInstallazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniInstallazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Bioclimatiche (Wawe/Solaria/Raincover/Aurora): 2 tendine a cascata
+// (1. Linea, 2. Installazione) invece della lista piatta di 20 voci mischiate sotto
+// il gruppo BIOCLIMATICA. Stesso pattern di SelettoreCascataPergola.
+function SelettoreCascataBioclimatica({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [linea, setLinea] = useState("");
+  const [installazione, setInstallazione] = useState("");
+
+  const opzioniLinea = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiBioclimatica) mappa.set(t.assiBioclimatica.linea.valore, t.assiBioclimatica.linea.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerLinea = useMemo(
+    () => tipologie.filter((t) => t.assiBioclimatica?.linea.valore === linea),
+    [tipologie, linea]
+  );
+  const opzioniInstallazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerLinea) if (t.assiBioclimatica) mappa.set(t.assiBioclimatica.installazione.valore, t.assiBioclimatica.installazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerLinea]);
+
+  const trovato = useMemo(
+    () => filtratePerLinea.find((t) => t.assiBioclimatica?.installazione.valore === installazione) ?? null,
+    [filtratePerLinea, installazione]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Linea</label>
+        <select
+          value={linea}
+          onChange={(e) => {
+            setLinea(e.target.value);
+            setInstallazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniLinea.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {linea && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Installazione (parete/isola/patio)</label>
           <select
             value={installazione}
             onChange={(e) => setInstallazione(e.target.value)}
@@ -1505,6 +1596,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiVetrata) ? (
                                             <SelettoreCascataVetrata
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiBioclimatica) ? (
+                                            <SelettoreCascataBioclimatica
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
