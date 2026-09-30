@@ -68,6 +68,37 @@ const GRUPPI_VETRATE: Record<string, string> = {
   "VETRATE FISSO": "Fisso",
 };
 
+// Listino Work&Service (posa/rilievo/servizi, vedi task #280): i 24 "gruppo" con cui
+// sono stati caricati i ModelloProdotto WSPOSA_* sono raccolti sotto 3 macro-categorie
+// sintetiche in tendina ("Posa" / "Rilievo" / "Servizi", vedi richiesta utente task #281),
+// col nome originale mostrato come sottogruppo — stesso wrapping gia' usato per TENDE/VETRATE.
+const GRUPPI_WSPOSA: Record<string, { gruppo: string; sottogruppo: string }> = {
+  "Rilievo Vetrate Panoramiche": { gruppo: "Rilievo", sottogruppo: "Vetrate Panoramiche" },
+  "Rilievo Pergotende e Bioclimatiche": { gruppo: "Rilievo", sottogruppo: "Pergotende e Bioclimatiche" },
+  "Rilievo Serramenti e affini": { gruppo: "Rilievo", sottogruppo: "Serramenti e affini" },
+  "Note Trasferta Rilievi Pergole/Vetrate": { gruppo: "Rilievo", sottogruppo: "Trasferta Rilievi Pergole/Vetrate" },
+  "Note Trasferta Rilievi Serramenti": { gruppo: "Rilievo", sottogruppo: "Trasferta Rilievi Serramenti" },
+  "Posa in Opera Pergotende e Bioclimatiche": { gruppo: "Posa", sottogruppo: "Pergotende e Bioclimatiche" },
+  "Note Posa Pergotende e Bioclimatiche": { gruppo: "Posa", sottogruppo: "Extra Posa Pergotende e Bioclimatiche" },
+  "Posa in Opera Vetrate Vepa": { gruppo: "Posa", sottogruppo: "Vetrate Vepa" },
+  "Complementi e Lavorazioni Extra Vetrate": { gruppo: "Posa", sottogruppo: "Complementi e Lavorazioni Extra Vetrate" },
+  "Note Logistiche Vetrate": { gruppo: "Posa", sottogruppo: "Logistica Vetrate" },
+  "Posa in Opera Finestre e Porte Finestre": { gruppo: "Posa", sottogruppo: "Finestre e Porte Finestre" },
+  "Posa in Opera Porte Interne": { gruppo: "Posa", sottogruppo: "Porte Interne" },
+  "Posa in Opera Portoncini": { gruppo: "Posa", sottogruppo: "Portoncini" },
+  "Posa in Opera Porte Blindate": { gruppo: "Posa", sottogruppo: "Porte Blindate" },
+  "Posa in Opera Tapparelle": { gruppo: "Posa", sottogruppo: "Tapparelle" },
+  "Posa in Opera Persiane": { gruppo: "Posa", sottogruppo: "Persiane" },
+  "Posa in Opera Inferriate": { gruppo: "Posa", sottogruppo: "Inferriate" },
+  "Posa in Opera Zanzariere": { gruppo: "Posa", sottogruppo: "Zanzariere" },
+  "Posa in Opera Pensiline": { gruppo: "Posa", sottogruppo: "Pensiline" },
+  "Posa in Opera Accessori": { gruppo: "Posa", sottogruppo: "Accessori" },
+  "Note Posa Serramenti": { gruppo: "Posa", sottogruppo: "Extra Posa Serramenti" },
+  "Posa in Opera Tende da Sole": { gruppo: "Posa", sottogruppo: "Tende da Sole" },
+  "Costi Aggiuntivi e Servizi Accessori": { gruppo: "Servizi", sottogruppo: "Costi Aggiuntivi e Servizi Accessori" },
+  "Spese Magazzino": { gruppo: "Servizi", sottogruppo: "Spese Magazzino" },
+};
+
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
 export default async function PreventivoPage({
@@ -191,6 +222,12 @@ export default async function PreventivoPage({
     if (gruppo in GRUPPI_VETRATE) {
       sottogruppo = GRUPPI_VETRATE[gruppo];
       gruppo = "VETRATE";
+    }
+    // Listino Work&Service: raccoglie i 24 gruppi piatti sotto 3 macro-categorie
+    // Posa/Rilievo/Servizi in tendina, vedi GRUPPI_WSPOSA sopra.
+    if (gruppo in GRUPPI_WSPOSA) {
+      sottogruppo = GRUPPI_WSPOSA[gruppo].sottogruppo;
+      gruppo = GRUPPI_WSPOSA[gruppo].gruppo;
     }
     if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
     const perGruppo = alberoMap.get(famiglia)!;
