@@ -32,7 +32,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "TAPPARELLE_",
   // Porte interne Isomax: modello + tipo apertura a prezzo fisso (misura standard
   // 60/70/80/90cm), stessa convenzione cm dei cataloghi porte/serramenti.
-  "ISOMAX_"];
+  "ISOMAX_",
+  // Tende a rullo da interno (P&C): griglia larghezza x altezza in cm come da listino
+  // fornitore (RULLO A CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO — vedi task #283).
+  "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -785,6 +788,13 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
     // assiSelezioneIsomax, stesso pattern di assiSelezioneKopen.
     return "Isomax";
   }
+  // Tende a rullo da interno: un sottogruppo per ciascuna linea/meccanismo, cosi'
+  // la selezione avviene con 2 tendine a cascata (tessuto -> variante) invece della
+  // lista piatta (fino a 34 voci per linea) — vedi assiSelezioneRullo.
+  if (tipologia.startsWith("RULLOCATENA_")) return "Rullo a Catena";
+  if (tipologia.startsWith("RULLOXS_")) return "Rullo XS";
+  if (tipologia.startsWith("LOOKIN_")) return "Look In";
+  if (tipologia.startsWith("TAGLIOTESSUTO_")) return "Tagli Tessuto";
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C";
   // Serramenti: segnaposto "in arrivo" per i materiali oltre al PVC (gia' a listino
   // come Zenith) — ciascuno appare come proprio sottogruppo dentro SERRAMENTI, cosi'
@@ -1112,6 +1122,79 @@ export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
     modello: { valore: modello, label: modello },
     apertura: { valore: apertura, label: ISOMAX_APERTURA_LABELS[apertura] ?? apertura },
   };
+}
+
+// Tende a rullo da interno (P&C): 17 tessuti condivisi tra le 4 linee (RULLO A
+// CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO), ciascuno con un proprio slug usato sia
+// nella tipologia (RULLOCATENA_<slug>[_CASSONETTO], RULLOXS_<slug>_CATENA|MOLLA,
+// LOOKIN_<slug>_MOLLA|CATENELLA, TAGLIOTESSUTO_<slug>) sia come chiave della
+// categoria Optional "Colore - <slug>" (vedi seed-tende-rullo e
+// SelettoreColoreTessutoRullo). Nomi ed elenco colori vengono dal catalogo
+// "TESSUTI DA INTERNO" del fornitore (task #286); non tutti i tessuti hanno prezzo
+// in tutte le 4 linee (es. TULIPANO non e' in LOOK IN), e SOLTIS 92/SERGE non hanno
+// ancora un campionario colori disponibile (solo prezzo, tendina colore vuota).
+export const RULLO_TESSUTO_LABELS: Record<string, string> = {
+  PRESTIGEBO: "Prestige B.O.",
+  ORCHIDEA: "Orchidea",
+  GIRASOLE: "Girasole",
+  IRIS: "Iris",
+  LIBERTYBO: "Liberty B.O.",
+  PRESTIGE: "Prestige",
+  PRIMULA: "Primula",
+  TULIPANO: "Tulipano",
+  CONFORT: "Confort",
+  SILENZIO: "Silenzio",
+  IDEA: "Idea / Idea Legno / Idea Plus",
+  MICROTEX: "Microtex",
+  TEXNET: "Texnet",
+  FUTURO: "Futuro",
+  NATTE: "Nattè",
+  SOLTIS99: "Soltis 99",
+  SOLTIS92: "Soltis 92",
+  SERGE: "Serge",
+};
+
+export type AssiRullo = { tessuto: AsseSelezione; variante?: AsseSelezione };
+
+export function assiSelezioneRullo(tipologia: string): AssiRullo | null {
+  let m = tipologia.match(/^RULLOCATENA_([A-Z0-9]+?)(_CASSONETTO)?$/);
+  if (m) {
+    const [, slug, cassonetto] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: cassonetto
+        ? { valore: "CASSONETTO", label: "Con cassonetto" }
+        : { valore: "SENZACASSONETTO", label: "Senza cassonetto" },
+    };
+  }
+  m = tipologia.match(/^RULLOXS_([A-Z0-9]+)_(CATENA|MOLLA)$/);
+  if (m) {
+    const [, slug, com] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: { valore: com, label: com === "CATENA" ? "Comando a catena" : "Comando a molla" },
+    };
+  }
+  m = tipologia.match(/^LOOKIN_([A-Z0-9]+)_(MOLLA|CATENELLA)$/);
+  if (m) {
+    const [, slug, com] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: { valore: com, label: com === "MOLLA" ? "Comando a molla" : "Comando a catenella" },
+    };
+  }
+  m = tipologia.match(/^TAGLIOTESSUTO_([A-Z0-9]+)$/);
+  if (m) {
+    const [, slug] = m;
+    return { tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug } };
+  }
+  return null;
+}
+
+// Slug tessuto per una qualunque tipologia Rullo/Look In/Tagli Tessuto — usato per
+// scoperire la tendina colore ("Colore - <slug>") in base al prodotto gia' scelto.
+export function slugTessutoRullo(tipologia: string): string | null {
+  return assiSelezioneRullo(tipologia)?.tessuto.valore ?? null;
 }
 
 // Blindati: decompone le 4 tipologie reali (BLINDATI_CL3, BLINDATI_CL4,
@@ -1632,6 +1715,15 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("ISOMAX_")) {
     const assi = assiSelezioneIsomax(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.apertura.label}`;
+  }
+  if (
+    tipologia.startsWith("RULLOCATENA_") ||
+    tipologia.startsWith("RULLOXS_") ||
+    tipologia.startsWith("LOOKIN_") ||
+    tipologia.startsWith("TAGLIOTESSUTO_")
+  ) {
+    const assi = assiSelezioneRullo(tipologia);
+    if (assi) return assi.variante ? `${assi.tessuto.label} — ${assi.variante.label}` : assi.tessuto.label;
   }
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
   if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;

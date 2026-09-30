@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -47,6 +47,10 @@ export type NodoTipologia = {
   // (solo per le guide con scelta colore), per mostrare tendine a cascata invece
   // della lista piatta di 24 voci.
   assiAccessoriTapparelle?: AssiAccessoriTapparelle;
+  // Tende a rullo da interno: assi tessuto → variante (meccanismo/cassonetto), per
+  // mostrare 2 tendine a cascata (1 sola per Tagli Tessuto) invece della lista piatta
+  // (fino a 34 voci per linea).
+  assiRullo?: AssiRullo;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -684,6 +688,96 @@ function SelettoreCascataKopen({
   );
 }
 
+// Tendine a cascata per le tende a rullo da interno: 1) tessuto (17 tessuti
+// condivisi tra le 4 linee), 2) variante di meccanismo/cassonetto (assente solo per
+// Tagli Tessuto, che e' pura fornitura del tessuto senza meccanismo — in quel caso
+// la selezione si conclude gia' al passo 1). Stesso pattern di SelettoreCascataKopen.
+function SelettoreCascataRullo({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [tessuto, setTessuto] = useState("");
+  const [variante, setVariante] = useState("");
+
+  const haVarianti = useMemo(() => tipologie.some((t) => t.assiRullo?.variante), [tipologie]);
+
+  const opzioniTessuto = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiRullo) mappa.set(t.assiRullo.tessuto.valore, t.assiRullo.tessuto.label);
+    return [...mappa.entries()].sort((a, b) => a[1].localeCompare(b[1], "it"));
+  }, [tipologie]);
+
+  const filtratePerTessuto = useMemo(
+    () => tipologie.filter((t) => t.assiRullo?.tessuto.valore === tessuto),
+    [tipologie, tessuto]
+  );
+  const opzioniVariante = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerTessuto) if (t.assiRullo?.variante) mappa.set(t.assiRullo.variante.valore, t.assiRullo.variante.label);
+    return [...mappa.entries()];
+  }, [filtratePerTessuto]);
+
+  const trovato = useMemo(() => {
+    if (!haVarianti) return filtratePerTessuto[0] ?? null;
+    return filtratePerTessuto.find((t) => t.assiRullo?.variante?.valore === variante) ?? null;
+  }, [filtratePerTessuto, variante, haVarianti]);
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Tessuto</label>
+        <select
+          value={tessuto}
+          onChange={(e) => {
+            setTessuto(e.target.value);
+            setVariante("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniTessuto.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {tessuto && haVarianti && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Meccanismo</label>
+          <select
+            value={variante}
+            onChange={(e) => setVariante(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniVariante.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 // Tendine a cascata per Isomax (Porte interne): 1) modello (codice porta, es. SKL/
 // S1I/RLT/PT4...), 2) tipo di apertura specifico di quel modello (Battente, Scorrevole
 // interno, Libro simmetrica, ecc. - alcuni modelli non offrono tutte le aperture).
@@ -1208,6 +1302,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiIsomax) ? (
                                             <SelettoreCascataIsomax
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiRullo) ? (
+                                            <SelettoreCascataRullo
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

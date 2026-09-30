@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -38,6 +38,7 @@ import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 import { SelettorePannelliInterniBlindati } from "@/components/SelettorePannelliInterniBlindati";
 import { SelettoreTessuti } from "@/components/SelettoreTessuti";
+import { SelettoreColoreTessutoRullo } from "@/components/SelettoreColoreTessutoRullo";
 import { SelettoreMotori } from "@/components/SelettoreMotori";
 import { SelettoreAccessoriMotore } from "@/components/SelettoreAccessoriMotore";
 
@@ -265,6 +266,10 @@ export default async function PreventivoPage({
         // Isomax (Porte interne): assi modello -> tipo apertura, per la selezione
         // a 2 tendine a cascata invece della lista piatta (fino a 20 voci per modello).
         assiIsomax: assiSelezioneIsomax(tip) ?? undefined,
+        // Tende a rullo da interno: assi tessuto -> variante (meccanismo/cassonetto),
+        // per la selezione a 2 tendine a cascata (1 sola per Tagli Tessuto, che non ha
+        // varianti di meccanismo) invece della lista piatta (fino a 34 voci per linea).
+        assiRullo: assiSelezioneRullo(tip) ?? undefined,
         // Blindati: assi classe → numero ante → variante due ante, per la selezione
         // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
         assiBlindati: assiSelezioneBlindati(tip) ?? undefined,
@@ -734,6 +739,46 @@ export default async function PreventivoPage({
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
                   .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
+
+                // Tende a rullo da interno: tendina "Colore tessuto" con swatch colorato,
+                // scoperta al solo tessuto gia' determinato dal prodotto scelto (categoria
+                // Optional "Colore - <SLUG>"), separata da eventuali altri optional futuri
+                // — vedi task #283/#290. Il tessuto specifico e' quello che fissa il prezzo
+                // (griglia larghezza×altezza), il colore no: e' una scelta a valle, gratuita.
+                if (modello?.gruppo === "TENDE A RULLO") {
+                  const slug = slugTessutoRullo(prodotto.tipologia);
+                  const coloriRullo = slug
+                    ? optionaliRigaFiltrati.filter((o) => o.categoria === `Colore - ${slug}`)
+                    : [];
+                  const altriOptionalRullo = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Colore - "));
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {slug && (
+                        <SelettoreColoreTessutoRullo
+                          optionali={coloriRullo}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {altriOptionalRullo.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {altriOptionalRullo.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
 
                 // Per le Pensiline: tendina "Colori" (colore struttura) separata da
                 // "Optional" (policarbonato, trasporto, imballo) come richiesto.
