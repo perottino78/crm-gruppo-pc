@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -270,6 +270,10 @@ export default async function PreventivoPage({
         // per la selezione a 2 tendine a cascata (1 sola per Tagli Tessuto, che non ha
         // varianti di meccanismo) invece della lista piatta (fino a 34 voci per linea).
         assiRullo: assiSelezioneRullo(tip) ?? undefined,
+        // Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): assi modello ->
+        // installazione (a parete/isola/patio), per la selezione a 2 tendine a
+        // cascata invece della lista piatta di 21 voci mischiate sotto PERGOLE.
+        assiPergola: assiSelezionePergola(tip) ?? undefined,
         // Blindati: assi classe → numero ante → variante due ante, per la selezione
         // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
         assiBlindati: assiSelezioneBlindati(tip) ?? undefined,

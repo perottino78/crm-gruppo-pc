@@ -776,6 +776,12 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
+  // Pergole a bracci retrattili: un unico sottogruppo per Lucilla/Nuvola/Panarea,
+  // cosi' la selezione avviene con 2 tendine a cascata (modello -> installazione)
+  // tramite assiSelezionePergola, invece della lista piatta di 21 voci mischiate.
+  if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
+    return "Pergole a bracci retrattili";
+  }
   if (tipologia.startsWith("KOPEN_")) {
     // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
     // avviene con 2 tendine a cascata (linea -> combinazione materiali) tramite
@@ -1195,6 +1201,59 @@ export function assiSelezioneRullo(tipologia: string): AssiRullo | null {
 // scoperire la tendina colore ("Colore - <slug>") in base al prodotto gia' scelto.
 export function slugTessutoRullo(tipologia: string): string | null {
   return assiSelezioneRullo(tipologia)?.tessuto.valore ?? null;
+}
+
+// Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): decompone la tipologia
+// nei 2 assi "modello" (LUCILLA/NUVOLA/PANAREA) e "installazione" (a parete/
+// addossata, isola/autoportante, patio — con le varianti di configurazione
+// singola/doppia/tripla e i casi speciali tiranti/trapezoidale/NL140/Easy-Standard
+// gia' incorporati nell'etichetta), cosi' il selettore mostra 2 tendine a cascata
+// (modello -> installazione) invece della lista piatta di 21 voci mischiate sotto
+// il gruppo PERGOLE — stesso pattern di assiSelezioneKopen.
+export type AssiPergola = { modello: AsseSelezione; installazione: AsseSelezione };
+
+const PERGOLA_MODELLO_LABELS: Record<string, string> = {
+  LUCILLA: "Lucilla",
+  NUVOLA: "Nuvola",
+  PANAREA: "Panarea",
+};
+
+const PERGOLA_INSTALLAZIONE_LABELS: Record<string, string> = {
+  LUCILLA_PARETE_SINGOLA: "A parete (addossata) — Singola, 2 guide, fino a 500cm",
+  LUCILLA_PARETE_DOPPIA: "A parete (addossata) — Doppia, 3 guide, fino a 900cm",
+  LUCILLA_PARETE_TRIPLA: "A parete (addossata) — Tripla, 4 guide, oltre 900cm",
+  LUCILLA_ISOLA_SINGOLA: "Isola (autoportante, non addossata) — Singola",
+  LUCILLA_ISOLA_DOPPIA: "Isola (autoportante, non addossata) — Doppia",
+  LUCILLA_ISOLA_TRIPLA: "Isola (autoportante, non addossata) — Tripla",
+  LUCILLA_PATIO_SINGOLA: "Patio (senza piantoni anteriori) — Singola",
+  LUCILLA_PATIO_DOPPIA: "Patio (senza piantoni anteriori) — Doppia",
+  LUCILLA_PATIO_TRIPLA: "Patio (senza piantoni anteriori) — Tripla",
+  LUCILLA_PATIO_SINGOLA_TIRANTI: "Patio con tiranti — Singola",
+  LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA: "Trapezoidale a parete (addossata) — Singola",
+  NUVOLA_PARETE: "A parete (addossata)",
+  NUVOLA_ISOLA: "Isola (autoportante, non addossata)",
+  NUVOLA_PATIO_SOFFITTO: "Patio a soffitto",
+  NUVOLA_NL140: "NL140 (variante speciale)",
+  PANAREA_STANDARD_PARETE: "Standard — A parete (addossata)",
+  PANAREA_STANDARD_ISOLA: "Standard — Isola (autoportante, non addossata)",
+  PANAREA_STANDARD_PATIO: "Standard — Patio",
+  PANAREA_EASY_PARETE: "Easy — A parete (addossata)",
+  PANAREA_EASY_ISOLA: "Easy — Isola (autoportante, non addossata)",
+  PANAREA_EASY_PATIO: "Easy — Patio",
+};
+
+export function assiSelezionePergola(tipologia: string): AssiPergola | null {
+  let modelloCodice: string | null = null;
+  if (tipologia.startsWith("LUCILLA_")) modelloCodice = "LUCILLA";
+  else if (tipologia.startsWith("NUVOLA_")) modelloCodice = "NUVOLA";
+  else if (tipologia.startsWith("PANAREA_")) modelloCodice = "PANAREA";
+  if (!modelloCodice) return null;
+  const installazioneLabel = PERGOLA_INSTALLAZIONE_LABELS[tipologia];
+  if (!installazioneLabel) return null;
+  return {
+    modello: { valore: modelloCodice, label: PERGOLA_MODELLO_LABELS[modelloCodice] },
+    installazione: { valore: tipologia, label: installazioneLabel },
+  };
 }
 
 // Blindati: decompone le 4 tipologie reali (BLINDATI_CL3, BLINDATI_CL4,
@@ -1712,6 +1771,10 @@ export function notaInArrivo(tipologia: string): string | null {
 export function labelBreveTipologia(tipologia: string): string {
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
+  if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
+    const assi = assiSelezionePergola(tipologia);
+    if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
+  }
   if (tipologia.startsWith("ISOMAX_")) {
     const assi = assiSelezioneIsomax(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.apertura.label}`;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -51,6 +51,10 @@ export type NodoTipologia = {
   // mostrare 2 tendine a cascata (1 sola per Tagli Tessuto) invece della lista piatta
   // (fino a 34 voci per linea).
   assiRullo?: AssiRullo;
+  // Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): assi modello →
+  // installazione (a parete/isola/patio), per mostrare 2 tendine a cascata invece
+  // della lista piatta di 21 voci mischiate sotto il gruppo PERGOLE.
+  assiPergola?: AssiPergola;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -688,6 +692,95 @@ function SelettoreCascataKopen({
   );
 }
 
+// Tendine a cascata per le pergole a bracci retrattili (Lucilla/Nuvola/Panarea):
+// 1) modello, 2) installazione (a parete/addossata, isola/autoportante, patio — con
+// la configurazione singola/doppia/tripla e i casi speciali gia' incorporati
+// nell'etichetta). Sostituisce la lista piatta di 21 voci mischiate sotto il
+// gruppo PERGOLE. Stesso pattern di SelettoreCascataKopen.
+function SelettoreCascataPergola({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [modello, setModello] = useState("");
+  const [installazione, setInstallazione] = useState("");
+
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiPergola) mappa.set(t.assiPergola.modello.valore, t.assiPergola.modello.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerModello = useMemo(
+    () => tipologie.filter((t) => t.assiPergola?.modello.valore === modello),
+    [tipologie, modello]
+  );
+  const opzioniInstallazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiPergola) mappa.set(t.assiPergola.installazione.valore, t.assiPergola.installazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiPergola?.installazione.valore === installazione) ?? null,
+    [filtratePerModello, installazione]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Modello</label>
+        <select
+          value={modello}
+          onChange={(e) => {
+            setModello(e.target.value);
+            setInstallazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniModello.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Installazione (addossata/isola/patio)</label>
+          <select
+            value={installazione}
+            onChange={(e) => setInstallazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniInstallazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 // Tendine a cascata per le tende a rullo da interno: 1) tessuto (17 tessuti
 // condivisi tra le 4 linee), 2) variante di meccanismo/cassonetto (assente solo per
 // Tagli Tessuto, che e' pura fornitura del tessuto senza meccanismo — in quel caso
@@ -1295,6 +1388,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
                                             <SelettoreCascataKopen
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPergola) ? (
+                                            <SelettoreCascataPergola
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
