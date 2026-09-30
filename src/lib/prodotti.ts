@@ -779,11 +779,11 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
-  // Pergole a bracci retrattili: un unico sottogruppo per Lucilla/Nuvola/Panarea,
+  // Pergole: un unico sottogruppo per Lucilla/Nuvola/Panarea,
   // cosi' la selezione avviene con 2 tendine a cascata (modello -> installazione)
   // tramite assiSelezionePergola, invece della lista piatta di 21 voci mischiate.
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
-    return "Pergole a bracci retrattili";
+    return "Pergole";
   }
   // Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): un unico sottogruppo,
   // la selezione vera e propria avviene con 2 tendine a cascata (linea -> declinazione)
@@ -791,7 +791,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // sono per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO): solo Nubes (Mob/Fix/TT)
   // ha una scheda tecnica reale, con prezzo su richiesta all'ufficio tecnico.
   if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
-    return "Vetrate";
+    return "Pergole Vetrate";
   }
   if (tipologia.startsWith("KOPEN_")) {
     // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
@@ -1214,7 +1214,7 @@ export function slugTessutoRullo(tipologia: string): string | null {
   return assiSelezioneRullo(tipologia)?.tessuto.valore ?? null;
 }
 
-// Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): decompone la tipologia
+// Pergole (Lucilla/Nuvola/Panarea): decompone la tipologia
 // nei 2 assi "modello" (LUCILLA/NUVOLA/PANAREA) e "installazione" (a parete/
 // addossata, isola/autoportante, patio — con le varianti di configurazione
 // singola/doppia/tripla e i casi speciali tiranti/trapezoidale/NL140/Easy-Standard

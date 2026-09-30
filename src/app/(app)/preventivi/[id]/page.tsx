@@ -270,7 +270,7 @@ export default async function PreventivoPage({
         // per la selezione a 2 tendine a cascata (1 sola per Tagli Tessuto, che non ha
         // varianti di meccanismo) invece della lista piatta (fino a 34 voci per linea).
         assiRullo: assiSelezioneRullo(tip) ?? undefined,
-        // Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): assi modello ->
+        // Pergole (Lucilla/Nuvola/Panarea): assi modello ->
         // installazione (a parete/isola/patio), per la selezione a 2 tendine a
         // cascata invece della lista piatta di 21 voci mischiate sotto PERGOLE.
         assiPergola: assiSelezionePergola(tip) ?? undefined,

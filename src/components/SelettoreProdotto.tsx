@@ -51,7 +51,7 @@ export type NodoTipologia = {
   // mostrare 2 tendine a cascata (1 sola per Tagli Tessuto) invece della lista piatta
   // (fino a 34 voci per linea).
   assiRullo?: AssiRullo;
-  // Pergole a bracci retrattili (Lucilla/Nuvola/Panarea): assi modello →
+  // Pergole (Lucilla/Nuvola/Panarea): assi modello →
   // installazione (a parete/isola/patio), per mostrare 2 tendine a cascata invece
   // della lista piatta di 21 voci mischiate sotto il gruppo PERGOLE.
   assiPergola?: AssiPergola;
@@ -697,7 +697,7 @@ function SelettoreCascataKopen({
   );
 }
 
-// Tendine a cascata per le pergole a bracci retrattili (Lucilla/Nuvola/Panarea):
+// Tendine a cascata per le pergole (Lucilla/Nuvola/Panarea):
 // 1) modello, 2) installazione (a parete/addossata, isola/autoportante, patio — con
 // la configurazione singola/doppia/tripla e i casi speciali gia' incorporati
 // nell'etichetta). Sostituisce la lista piatta di 21 voci mischiate sotto il
