@@ -434,6 +434,16 @@ export default async function StampaPreventivoPage({
               <p className="text-justify text-neutral-700">{v.testo}</p>
             </div>
           ))}
+          <p className="text-neutral-700 mt-4 mb-8 print:break-inside-avoid">
+            Il Cliente dichiara di aver ricevuto, letto e accettato integralmente, sottoscrivendo la presente
+            offerta, il presente capitolato e le condizioni generali di posa in opera Work &amp; Service sopra
+            riportate, che formano parte integrante e sostanziale del presente Contratto.
+          </p>
+          <div className="flex justify-between mt-10 print:break-inside-avoid">
+            <RigaFirma label="Luogo e data" />
+            <RigaFirma label="Il Cliente (per accettazione capitolato posa)" sub={preventivo.cliente.nome} />
+            <RigaFirma label="Il Posatore" sub="Work & Service S.r.l." />
+          </div>
         </section>
       )}
 
