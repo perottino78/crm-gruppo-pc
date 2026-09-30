@@ -1333,6 +1333,33 @@ export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | nul
   };
 }
 
+const WSPOSA_LABELS: Record<string, string> = {
+  "WSPOSA_RILIEVO_VETRATE_PANORAMICHE": "Rilievo Vetrate Panoramiche",
+  "WSPOSA_RILIEVO_PERGOTENDE_E_BIOCLIMATICHE": "Rilievo Pergotende e Bioclimatiche",
+  "WSPOSA_NOTE_TRASFERTA_RILIEVI_PERGOLE_VETRATE": "Note Trasferta Rilievi Pergole/Vetrate",
+  "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE": "Posa in Opera Pergotende e Bioclimatiche",
+  "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE": "Note Posa Pergotende e Bioclimatiche",
+  "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA": "Posa in Opera Vetrate Vepa",
+  "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE": "Complementi e Lavorazioni Extra Vetrate",
+  "WSPOSA_NOTE_LOGISTICHE_VETRATE": "Note Logistiche Vetrate",
+  "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI": "Rilievo Serramenti e affini",
+  "WSPOSA_NOTE_TRASFERTA_RILIEVI_SERRAMENTI": "Note Trasferta Rilievi Serramenti",
+  "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE": "Posa in Opera Finestre e Porte Finestre",
+  "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE": "Posa in Opera Porte Interne",
+  "WSPOSA_POSA_IN_OPERA_PORTONCINI": "Posa in Opera Portoncini",
+  "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE": "Posa in Opera Porte Blindate",
+  "WSPOSA_POSA_IN_OPERA_TAPPARELLE": "Posa in Opera Tapparelle",
+  "WSPOSA_POSA_IN_OPERA_PERSIANE": "Posa in Opera Persiane",
+  "WSPOSA_POSA_IN_OPERA_INFERRIATE": "Posa in Opera Inferriate",
+  "WSPOSA_POSA_IN_OPERA_ZANZARIERE": "Posa in Opera Zanzariere",
+  "WSPOSA_POSA_IN_OPERA_PENSILINE": "Posa in Opera Pensiline",
+  "WSPOSA_POSA_IN_OPERA_ACCESSORI": "Posa in Opera Accessori",
+  "WSPOSA_NOTE_POSA_SERRAMENTI": "Note Posa Serramenti",
+  "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE": "Posa in Opera Tende da Sole",
+  "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI": "Costi Aggiuntivi e Servizi Accessori",
+  "WSPOSA_SPESE_MAGAZZINO": "Spese Magazzino",
+};
+
 const PENSILINA_LABELS: Record<string, string> = {
   PENSILINA_CURVA_COMPATTO: "Pensilina Curva — Policarbonato Compatto (3mm)",
   PENSILINA_CURVA_ALVEOLARE: "Pensilina Curva — Policarbonato Alveolare (6mm)",
@@ -1600,6 +1627,7 @@ export function notaInArrivo(tipologia: string): string | null {
 }
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
   if (tipologia.startsWith("ISOMAX_")) {
     const assi = assiSelezioneIsomax(tipologia);
