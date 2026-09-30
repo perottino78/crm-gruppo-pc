@@ -2,7 +2,7 @@
  {
   "tipologia": "RULLOCATENA_PRESTIGEBO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Prestige B.O. (oscurante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -11,7 +11,7 @@
  {
   "tipologia": "RULLOCATENA_PRESTIGEBO_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Prestige B.O. (oscurante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -20,7 +20,7 @@
  {
   "tipologia": "RULLOCATENA_ORCHIDEA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Orchidea (oscurante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -29,7 +29,7 @@
  {
   "tipologia": "RULLOCATENA_ORCHIDEA_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Orchidea (oscurante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -38,7 +38,7 @@
  {
   "tipologia": "RULLOCATENA_GIRASOLE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Girasole (oscurante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -47,7 +47,7 @@
  {
   "tipologia": "RULLOCATENA_GIRASOLE_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Girasole (oscurante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -56,7 +56,7 @@
  {
   "tipologia": "RULLOCATENA_IRIS",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Iris (oscurante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -65,7 +65,7 @@
  {
   "tipologia": "RULLOCATENA_IRIS_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Iris (oscurante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -74,7 +74,7 @@
  {
   "tipologia": "RULLOCATENA_LIBERTYBO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Liberty B.O. (oscurante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -83,7 +83,7 @@
  {
   "tipologia": "RULLOCATENA_LIBERTYBO_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Liberty B.O. (oscurante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -92,7 +92,7 @@
  {
   "tipologia": "RULLOCATENA_PRESTIGE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Prestige (filtrante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -101,7 +101,7 @@
  {
   "tipologia": "RULLOCATENA_PRESTIGE_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Prestige (filtrante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -110,7 +110,7 @@
  {
   "tipologia": "RULLOCATENA_PRIMULA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Primula (filtrante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -119,7 +119,7 @@
  {
   "tipologia": "RULLOCATENA_PRIMULA_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Primula (filtrante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -128,7 +128,7 @@
  {
   "tipologia": "RULLOCATENA_TULIPANO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Tulipano (filtrante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -137,7 +137,7 @@
  {
   "tipologia": "RULLOCATENA_TULIPANO_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Tulipano (filtrante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -146,7 +146,7 @@
  {
   "tipologia": "RULLOCATENA_CONFORT",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Confort (filtrante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -155,7 +155,7 @@
  {
   "tipologia": "RULLOCATENA_CONFORT_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Confort (filtrante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -164,7 +164,7 @@
  {
   "tipologia": "RULLOCATENA_SILENZIO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Silenzio (filtrante), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -173,7 +173,7 @@
  {
   "tipologia": "RULLOCATENA_SILENZIO_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Silenzio (filtrante), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -182,7 +182,7 @@
  {
   "tipologia": "RULLOCATENA_MICROTEX",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Microtex (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -191,7 +191,7 @@
  {
   "tipologia": "RULLOCATENA_MICROTEX_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Microtex (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -200,7 +200,7 @@
  {
   "tipologia": "RULLOCATENA_TEXNET",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Texnet (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -209,7 +209,7 @@
  {
   "tipologia": "RULLOCATENA_TEXNET_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Texnet (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -218,7 +218,7 @@
  {
   "tipologia": "RULLOCATENA_FUTURO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Futuro (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -227,7 +227,7 @@
  {
   "tipologia": "RULLOCATENA_FUTURO_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Futuro (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -236,7 +236,7 @@
  {
   "tipologia": "RULLOCATENA_NATTE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Nattè (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -245,7 +245,7 @@
  {
   "tipologia": "RULLOCATENA_NATTE_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Nattè (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -254,7 +254,7 @@
  {
   "tipologia": "RULLOCATENA_SOLTIS99",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Soltis 99 (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -263,7 +263,7 @@
  {
   "tipologia": "RULLOCATENA_SOLTIS99_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Soltis 99 (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -272,7 +272,7 @@
  {
   "tipologia": "RULLOCATENA_SOLTIS92",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Soltis 92 (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -281,7 +281,7 @@
  {
   "tipologia": "RULLOCATENA_SOLTIS92_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Soltis 92 (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -290,7 +290,7 @@
  {
   "tipologia": "RULLOCATENA_SERGE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Serge (screen), rullo a catena senza cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -299,7 +299,7 @@
  {
   "tipologia": "RULLOCATENA_SERGE_CASSONETTO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo da interno, tessuto Serge (screen), rullo a catena con cassonetto. Comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -308,7 +308,7 @@
  {
   "tipologia": "RULLOXS_ORCHIDEA_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Orchidea (oscurante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -317,7 +317,7 @@
  {
   "tipologia": "RULLOXS_ORCHIDEA_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Orchidea (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -326,7 +326,7 @@
  {
   "tipologia": "RULLOXS_GIRASOLE_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Girasole (oscurante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -335,7 +335,7 @@
  {
   "tipologia": "RULLOXS_GIRASOLE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Girasole (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -344,7 +344,7 @@
  {
   "tipologia": "RULLOXS_LIBERTYBO_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Liberty B.O. (oscurante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -353,7 +353,7 @@
  {
   "tipologia": "RULLOXS_LIBERTYBO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Liberty B.O. (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -362,7 +362,7 @@
  {
   "tipologia": "RULLOXS_PRESTIGE_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Prestige (filtrante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -371,7 +371,7 @@
  {
   "tipologia": "RULLOXS_PRESTIGE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Prestige (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -380,7 +380,7 @@
  {
   "tipologia": "RULLOXS_PRIMULA_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Primula (filtrante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -389,7 +389,7 @@
  {
   "tipologia": "RULLOXS_PRIMULA_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Primula (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -398,7 +398,7 @@
  {
   "tipologia": "RULLOXS_TULIPANO_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Tulipano (filtrante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -407,7 +407,7 @@
  {
   "tipologia": "RULLOXS_TULIPANO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Tulipano (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -416,7 +416,7 @@
  {
   "tipologia": "RULLOXS_CONFORT_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Confort (filtrante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -425,7 +425,7 @@
  {
   "tipologia": "RULLOXS_CONFORT_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Confort (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -434,7 +434,7 @@
  {
   "tipologia": "RULLOXS_SILENZIO_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Silenzio (filtrante), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -443,7 +443,7 @@
  {
   "tipologia": "RULLOXS_SILENZIO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Silenzio (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -452,7 +452,7 @@
  {
   "tipologia": "RULLOXS_FUTURO_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Futuro (screen), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -461,7 +461,7 @@
  {
   "tipologia": "RULLOXS_FUTURO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Futuro (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -470,7 +470,7 @@
  {
   "tipologia": "RULLOXS_NATTE_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Nattè (screen), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -479,7 +479,7 @@
  {
   "tipologia": "RULLOXS_NATTE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Nattè (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -488,7 +488,7 @@
  {
   "tipologia": "RULLOXS_SOLTIS99_CATENA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Soltis 99 (screen), comando a catena.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -497,7 +497,7 @@
  {
   "tipologia": "RULLOXS_SOLTIS99_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda a rullo XS da interno, tessuto Soltis 99 (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -506,7 +506,7 @@
  {
   "tipologia": "LOOKIN_PRESTIGEBO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Prestige B.O. (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -515,7 +515,7 @@
  {
   "tipologia": "LOOKIN_PRESTIGEBO_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Prestige B.O. (oscurante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -524,7 +524,7 @@
  {
   "tipologia": "LOOKIN_ORCHIDEA_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Orchidea (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -533,7 +533,7 @@
  {
   "tipologia": "LOOKIN_ORCHIDEA_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Orchidea (oscurante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -542,7 +542,7 @@
  {
   "tipologia": "LOOKIN_GIRASOLE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Girasole (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -551,7 +551,7 @@
  {
   "tipologia": "LOOKIN_GIRASOLE_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Girasole (oscurante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -560,7 +560,7 @@
  {
   "tipologia": "LOOKIN_IRIS_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Iris (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -569,7 +569,7 @@
  {
   "tipologia": "LOOKIN_IRIS_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Iris (oscurante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -578,7 +578,7 @@
  {
   "tipologia": "LOOKIN_LIBERTYBO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Liberty B.O. (oscurante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -587,7 +587,7 @@
  {
   "tipologia": "LOOKIN_LIBERTYBO_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Liberty B.O. (oscurante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -596,7 +596,7 @@
  {
   "tipologia": "LOOKIN_PRESTIGE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Prestige (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -605,7 +605,7 @@
  {
   "tipologia": "LOOKIN_PRESTIGE_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Prestige (filtrante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -614,7 +614,7 @@
  {
   "tipologia": "LOOKIN_PRIMULA_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Primula (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -623,7 +623,7 @@
  {
   "tipologia": "LOOKIN_PRIMULA_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Primula (filtrante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -632,7 +632,7 @@
  {
   "tipologia": "LOOKIN_CONFORT_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Confort (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -641,7 +641,7 @@
  {
   "tipologia": "LOOKIN_CONFORT_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Confort (filtrante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -650,7 +650,7 @@
  {
   "tipologia": "LOOKIN_SILENZIO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Silenzio (filtrante), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -659,7 +659,7 @@
  {
   "tipologia": "LOOKIN_SILENZIO_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Silenzio (filtrante), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -668,7 +668,7 @@
  {
   "tipologia": "LOOKIN_MICROTEX_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Microtex (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -677,7 +677,7 @@
  {
   "tipologia": "LOOKIN_MICROTEX_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Microtex (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -686,7 +686,7 @@
  {
   "tipologia": "LOOKIN_TEXNET_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Texnet (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -695,7 +695,7 @@
  {
   "tipologia": "LOOKIN_TEXNET_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Texnet (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -704,7 +704,7 @@
  {
   "tipologia": "LOOKIN_FUTURO_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Futuro (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -713,7 +713,7 @@
  {
   "tipologia": "LOOKIN_FUTURO_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Futuro (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -722,7 +722,7 @@
  {
   "tipologia": "LOOKIN_NATTE_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Nattè (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -731,7 +731,7 @@
  {
   "tipologia": "LOOKIN_NATTE_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Nattè (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -740,7 +740,7 @@
  {
   "tipologia": "LOOKIN_SOLTIS99_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Soltis 99 (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -749,7 +749,7 @@
  {
   "tipologia": "LOOKIN_SOLTIS99_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Soltis 99 (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -758,7 +758,7 @@
  {
   "tipologia": "LOOKIN_SOLTIS92_MOLLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Soltis 92 (screen), comando a molla.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -767,7 +767,7 @@
  {
   "tipologia": "LOOKIN_SOLTIS92_CATENELLA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Tenda Look In (montaggio a fermavetro) da interno, tessuto Soltis 92 (screen), comando a catenella.",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -776,7 +776,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_PRESTIGEBO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Prestige B.O. (oscurante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -785,7 +785,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_ORCHIDEA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Orchidea (oscurante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -794,7 +794,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_GIRASOLE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Girasole (oscurante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -803,7 +803,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_IRIS",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Iris (oscurante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -812,7 +812,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_LIBERTYBO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Liberty B.O. (oscurante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -821,7 +821,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_PRESTIGE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Prestige (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -830,7 +830,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_PRIMULA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Primula (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -839,7 +839,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_TULIPANO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Tulipano (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -848,7 +848,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_CONFORT",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Confort (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -857,7 +857,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_SILENZIO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Silenzio (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -866,7 +866,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_IDEA",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Idea / Idea Legno / Idea Plus (filtrante) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -875,7 +875,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_MICROTEX",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Microtex (screen) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -884,7 +884,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_TEXNET",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Texnet (screen) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -893,7 +893,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_FUTURO",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Futuro (screen) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -902,7 +902,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_NATTE",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Nattè (screen) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},
@@ -911,7 +911,7 @@
  {
   "tipologia": "TAGLIOTESSUTO_SOLTIS99",
   "famiglia": "INDOOR",
-  "gruppo": "TENDE A RULLO",
+  "gruppo": "TENDE INTERNE",
   "descrizioneTecnica": "Taglio tessuto Soltis 99 (screen) su misura, senza meccanismo (tenda a rullo da interno).",
   "modalitaCalcolo": "GRIGLIA",
   "parametriCalcolo": {},

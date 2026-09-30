@@ -745,7 +745,7 @@ export default async function PreventivoPage({
                 // Optional "Colore - <SLUG>"), separata da eventuali altri optional futuri
                 // — vedi task #283/#290. Il tessuto specifico e' quello che fissa il prezzo
                 // (griglia larghezza×altezza), il colore no: e' una scelta a valle, gratuita.
-                if (modello?.gruppo === "TENDE A RULLO") {
+                if (modello?.gruppo === "TENDE INTERNE") {
                   const slug = slugTessutoRullo(prodotto.tipologia);
                   const coloriRullo = slug
                     ? optionaliRigaFiltrati.filter((o) => o.categoria === `Colore - ${slug}`)

@@ -149,7 +149,10 @@ export async function POST(req: NextRequest) {
     // ---- Optional (colori tessuto) ----
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: "TENDE A RULLO" } },
+      where: {
+        brandId: brand.id,
+        OR: [{ gruppiApplicabili: { has: "TENDE A RULLO" } }, { gruppiApplicabili: { has: "TENDE INTERNE" } }],
+      },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 
