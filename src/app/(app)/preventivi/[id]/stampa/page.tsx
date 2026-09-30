@@ -111,11 +111,17 @@ export default async function StampaPreventivoPage({
 
   // Vero se il preventivo contiene almeno una voce di rilievo/posa in opera
   // Work&Service (marcate dal suffisso "(Work&Service)" nella categoria
-  // dell'optional, vedi condizioniPosaWS.ts) — in tal caso in stampa vengono
-  // aggiunte le condizioni contrattuali del subappaltatore.
-  const haPosaWS = preventivo.righe.some((r) =>
-    r.optionali.some((ro) => ro.optional.categoria.endsWith("(Work&Service)"))
-  );
+  // dell'optional, vedi condizioniPosaWS.ts), OPPURE se il preventivo stesso
+  // e' stato creato sotto il brand "Work & Services" (caso di un preventivo
+  // di sola posa/rilievo/smontaggio scritto a righe libere, senza alcun
+  // prodotto/optional a listino a cui agganciare il marcatore) — in
+  // entrambi i casi in stampa vengono aggiunte le condizioni contrattuali
+  // del subappaltatore.
+  const haPosaWS =
+    preventivo.brand.nome === "Work & Services" ||
+    preventivo.righe.some((r) =>
+      r.optionali.some((ro) => ro.optional.categoria.endsWith("(Work&Service)"))
+    );
 
   const imponibileLordo = preventivo.righe.reduce((sum, r) => {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
