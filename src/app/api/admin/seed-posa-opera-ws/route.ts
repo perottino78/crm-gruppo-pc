@@ -29,6 +29,7 @@ type ModelloRow = {
   tipologia: string;
   famiglia: string;
   gruppo: string;
+  immagineUrl?: string | null;
 };
 
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
@@ -103,10 +104,12 @@ export async function POST(req: NextRequest) {
           tipologia: m.tipologia,
           famiglia: m.famiglia,
           gruppo: m.gruppo,
+          immagineUrl: m.immagineUrl ?? null,
         },
         update: {
           famiglia: m.famiglia,
           gruppo: m.gruppo,
+          immagineUrl: m.immagineUrl ?? null,
         },
       });
       modelliAggiornati++;

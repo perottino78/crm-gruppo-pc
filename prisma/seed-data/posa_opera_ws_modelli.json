@@ -2,121 +2,145 @@
   {
     "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
     "famiglia": "SERVIZI",
-    "gruppo": "Rilievo Vetrate Panoramiche"
+    "gruppo": "Rilievo Vetrate Panoramiche",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_RILIEVO_PERGOTENDE_E_BIOCLIMATICHE",
     "famiglia": "SERVIZI",
-    "gruppo": "Rilievo Pergotende e Bioclimatiche"
+    "gruppo": "Rilievo Pergotende e Bioclimatiche",
+    "immagineUrl": "/immagini/aurora/aurora_hero.png"
   },
   {
     "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_PERGOLE_VETRATE",
     "famiglia": "SERVIZI",
-    "gruppo": "Note Trasferta Rilievi Pergole/Vetrate"
+    "gruppo": "Note Trasferta Rilievi Pergole/Vetrate",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Pergotende e Bioclimatiche"
+    "gruppo": "Posa in Opera Pergotende e Bioclimatiche",
+    "immagineUrl": "/immagini/aurora/aurora_patio.png"
   },
   {
     "tipologia": "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE",
     "famiglia": "SERVIZI",
-    "gruppo": "Note Posa Pergotende e Bioclimatiche"
+    "gruppo": "Note Posa Pergotende e Bioclimatiche",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Vetrate Vepa"
+    "gruppo": "Posa in Opera Vetrate Vepa",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
     "famiglia": "SERVIZI",
-    "gruppo": "Complementi e Lavorazioni Extra Vetrate"
+    "gruppo": "Complementi e Lavorazioni Extra Vetrate",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_NOTE_LOGISTICHE_VETRATE",
     "famiglia": "SERVIZI",
-    "gruppo": "Note Logistiche Vetrate"
+    "gruppo": "Note Logistiche Vetrate",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI",
     "famiglia": "SERVIZI",
-    "gruppo": "Rilievo Serramenti e affini"
+    "gruppo": "Rilievo Serramenti e affini",
+    "immagineUrl": "/immagini/zenith/f2a.svg"
   },
   {
     "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_SERRAMENTI",
     "famiglia": "SERVIZI",
-    "gruppo": "Note Trasferta Rilievi Serramenti"
+    "gruppo": "Note Trasferta Rilievi Serramenti",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Finestre e Porte Finestre"
+    "gruppo": "Posa in Opera Finestre e Porte Finestre",
+    "immagineUrl": "/immagini/zenith/f3a.svg"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Porte Interne"
+    "gruppo": "Posa in Opera Porte Interne",
+    "immagineUrl": "/immagini/isomax/BDQ.png"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PORTONCINI",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Portoncini"
+    "gruppo": "Posa in Opera Portoncini",
+    "immagineUrl": "https://kopendoors.com/wp-content/uploads/2022/11/Kopen-Linea-Pure-PU-01-KP-5.jpg"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Porte Blindate"
+    "gruppo": "Posa in Opera Porte Blindate",
+    "immagineUrl": "/immagini/blindati/blindato_2ante_foto.png"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_TAPPARELLE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Tapparelle"
+    "gruppo": "Posa in Opera Tapparelle",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PERSIANE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Persiane"
+    "gruppo": "Posa in Opera Persiane",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_INFERRIATE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Inferriate"
+    "gruppo": "Posa in Opera Inferriate",
+    "immagineUrl": "/immagini/cancelli/ada.png"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_ZANZARIERE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Zanzariere"
+    "gruppo": "Posa in Opera Zanzariere",
+    "immagineUrl": "/immagini/zanzariere_pc/scorri.png"
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_PENSILINE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Pensiline"
+    "gruppo": "Posa in Opera Pensiline",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_ACCESSORI",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Accessori"
+    "gruppo": "Posa in Opera Accessori",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_NOTE_POSA_SERRAMENTI",
     "famiglia": "SERVIZI",
-    "gruppo": "Note Posa Serramenti"
+    "gruppo": "Note Posa Serramenti",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE",
     "famiglia": "SERVIZI",
-    "gruppo": "Posa in Opera Tende da Sole"
+    "gruppo": "Posa in Opera Tende da Sole",
+    "immagineUrl": "/immagini/giardino_patio/giardino94.png"
   },
   {
     "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
     "famiglia": "SERVIZI",
-    "gruppo": "Costi Aggiuntivi e Servizi Accessori"
+    "gruppo": "Costi Aggiuntivi e Servizi Accessori",
+    "immagineUrl": null
   },
   {
     "tipologia": "WSPOSA_SPESE_MAGAZZINO",
     "famiglia": "SERVIZI",
-    "gruppo": "Spese Magazzino"
+    "gruppo": "Spese Magazzino",
+    "immagineUrl": null
   }
 ]
