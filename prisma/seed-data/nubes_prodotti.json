@@ -1,0 +1,37 @@
+[
+  {
+    "tipologia": "NUBES_MOB",
+    "colore": "Prezzo su richiesta — ufficio tecnico",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "NUBES_FIX",
+    "colore": "Prezzo su richiesta — ufficio tecnico",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "NUBES_TT",
+    "colore": "Prezzo su richiesta — ufficio tecnico",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "NESOS_PLACEHOLDER",
+    "colore": "Listino non ancora disponibile",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  },
+  {
+    "tipologia": "ERMES_PLACEHOLDER",
+    "colore": "Listino non ancora disponibile",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0
+  }
+]

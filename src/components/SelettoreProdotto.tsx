@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -55,6 +55,11 @@ export type NodoTipologia = {
   // installazione (a parete/isola/patio), per mostrare 2 tendine a cascata invece
   // della lista piatta di 21 voci mischiate sotto il gruppo PERGOLE.
   assiPergola?: AssiPergola;
+  // Vetrate pergole (Nesos/Nubes/Ermes): assi linea -> declinazione (Mob/Fix/TT per
+  // Nubes), per mostrare 2 tendine a cascata invece della lista piatta. Nesos/Ermes
+  // restano "in arrivo" (disabilitato), Nubes ha scheda tecnica reale ma prezzo
+  // ancora "in arrivo" (disabilitato) finche' non arriva il listino ufficiale.
+  assiVetrata?: AssiVetrata;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -781,6 +786,104 @@ function SelettoreCascataPergola({
   );
 }
 
+// Vetrate pergole (Nesos/Nubes/Ermes): 2 tendine a cascata (1. Linea, 2. Declinazione)
+// invece della lista piatta. A differenza di SelettoreCascataPergola, qui il click su
+// una declinazione "in arrivo" (Nesos/Ermes senza dati, o Nubes con prezzo ancora da
+// listinare) NON chiude la selezione: mostra solo l'avviso rosso inline, cosi' il
+// commerciale capisce subito che serve contattare l'ufficio tecnico invece di
+// ritrovarsi in una griglia prezzi vuota o a zero. Stesso pattern di
+// SelettoreCascataTapparelle.
+function SelettoreCascataVetrata({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [linea, setLinea] = useState("");
+  const [declinazione, setDeclinazione] = useState("");
+
+  const opzioniLinea = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiVetrata) mappa.set(t.assiVetrata.linea.valore, t.assiVetrata.linea.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerLinea = useMemo(
+    () => tipologie.filter((t) => t.assiVetrata?.linea.valore === linea),
+    [tipologie, linea]
+  );
+  const opzioniDeclinazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerLinea) if (t.assiVetrata) mappa.set(t.assiVetrata.declinazione.valore, t.assiVetrata.declinazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerLinea]);
+
+  const trovato = useMemo(
+    () => filtratePerLinea.find((t) => t.assiVetrata?.declinazione.valore === declinazione) ?? null,
+    [filtratePerLinea, declinazione]
+  );
+
+  useEffect(() => {
+    if (trovato && !trovato.disabilitato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Linea</label>
+        <select
+          value={linea}
+          onChange={(e) => {
+            setLinea(e.target.value);
+            setDeclinazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniLinea.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {linea && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Declinazione</label>
+          <select
+            value={declinazione}
+            onChange={(e) => setDeclinazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniDeclinazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && trovato.disabilitato ? (
+        <div className="text-xs font-medium text-red-500 bg-red-50 border border-red-100 rounded px-2 py-1.5">
+          ⚠️ {trovato.disabilitato}
+          <p className="text-[11px] text-red-400 font-normal mt-0.5">
+            Scheda tecnica e foto disponibili in "Prodotti &amp; listini" — {trovato.label}.
+          </p>
+        </div>
+      ) : trovato ? (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      ) : null}
+    </div>
+  );
+}
+
 // Tendine a cascata per le tende a rullo da interno: 1) tessuto (17 tessuti
 // condivisi tra le 4 linee), 2) variante di meccanismo/cassonetto (assente solo per
 // Tagli Tessuto, che e' pura fornitura del tessuto senza meccanismo — in quel caso
@@ -1395,6 +1498,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPergola) ? (
                                             <SelettoreCascataPergola
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiVetrata) ? (
+                                            <SelettoreCascataVetrata
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

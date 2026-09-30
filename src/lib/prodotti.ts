@@ -35,7 +35,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "ISOMAX_",
   // Tende a rullo da interno (P&C): griglia larghezza x altezza in cm come da listino
   // fornitore (RULLO A CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO — vedi task #283).
-  "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_"];
+  "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_",
+  // Vetrate a copertura fissa/mobile per pergole (Nesos/Nubes/Ermes): stessa convenzione
+  // cm delle altre pergole (Lucilla/Nuvola/Panarea).
+  "NUBES_", "NESOS_", "ERMES_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -782,6 +785,14 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     return "Pergole a bracci retrattili";
   }
+  // Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): un unico sottogruppo,
+  // la selezione vera e propria avviene con 2 tendine a cascata (linea -> declinazione)
+  // tramite assiSelezioneVetrata, stesso pattern di assiSelezionePergola. Nesos ed Ermes
+  // sono per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO): solo Nubes (Mob/Fix/TT)
+  // ha una scheda tecnica reale, con prezzo su richiesta all'ufficio tecnico.
+  if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
+    return "Vetrate";
+  }
   if (tipologia.startsWith("KOPEN_")) {
     // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
     // avviene con 2 tendine a cascata (linea -> combinazione materiali) tramite
@@ -1253,6 +1264,45 @@ export function assiSelezionePergola(tipologia: string): AssiPergola | null {
   return {
     modello: { valore: modelloCodice, label: PERGOLA_MODELLO_LABELS[modelloCodice] },
     installazione: { valore: tipologia, label: installazioneLabel },
+  };
+}
+
+// Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): decompone la tipologia nei
+// 2 assi "linea" (NESOS/NUBES/ERMES) e "declinazione" (per Nubes: Mob/Fix/TT; per
+// Nesos/Ermes, per ora, un unico segnaposto "in arrivo" finche' non arrivano i
+// rispettivi listini/schede prodotto), cosi' il selettore mostra 2 tendine a cascata
+// (linea -> declinazione) invece di una lista piatta — stesso pattern di
+// assiSelezionePergola. A differenza di Nesos/Ermes (interamente "in arrivo"),
+// Nubes ha gia' scheda tecnica e immagini reali per tutte e 3 le declinazioni: solo
+// il prezzo e' segnaposto rosso "su richiesta all'ufficio tecnico" (vedi IN_ARRIVO),
+// finche' non arriva il listino ufficiale.
+export type AssiVetrata = { linea: AsseSelezione; declinazione: AsseSelezione };
+
+const VETRATA_LINEA_LABELS: Record<string, string> = {
+  NESOS: "Nesos",
+  NUBES: "Nubes",
+  ERMES: "Ermes",
+};
+
+const VETRATA_DECLINAZIONE_LABELS: Record<string, string> = {
+  NESOS_PLACEHOLDER: "Listino non ancora disponibile",
+  ERMES_PLACEHOLDER: "Listino non ancora disponibile",
+  NUBES_MOB: "Mob — copertura mobile (apertura 50% / 66% / 75%)",
+  NUBES_FIX: "Fix — copertura fissa panoramica",
+  NUBES_TT: "TT — copertura fissa a taglio termico (isolamento)",
+};
+
+export function assiSelezioneVetrata(tipologia: string): AssiVetrata | null {
+  let lineaCodice: string | null = null;
+  if (tipologia.startsWith("NESOS_")) lineaCodice = "NESOS";
+  else if (tipologia.startsWith("NUBES_")) lineaCodice = "NUBES";
+  else if (tipologia.startsWith("ERMES_")) lineaCodice = "ERMES";
+  if (!lineaCodice) return null;
+  const declinazioneLabel = VETRATA_DECLINAZIONE_LABELS[tipologia];
+  if (!declinazioneLabel) return null;
+  return {
+    linea: { valore: lineaCodice, label: VETRATA_LINEA_LABELS[lineaCodice] },
+    declinazione: { valore: tipologia, label: declinazioneLabel },
   };
 }
 
@@ -1762,6 +1812,17 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
   TAPPARELLE_PVC_PLACEHOLDER: "Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo",
+  // Vetrate pergole: Nesos ed Ermes non hanno ancora nessun dato (scheda ne' listino).
+  // Nubes ha gia' scheda tecnica e immagini reali per tutte e 3 le declinazioni
+  // (Mob/Fix/TT) — qui e' disabilitato SOLO il prezzo, in attesa del listino
+  // ufficiale: il commerciale puo' comunque vedere la scheda tecnica completa (con
+  // foto) dalla pagina "Prodotti & listini", ma non puo' ancora aggiungerlo a un
+  // preventivo con un prezzo reale.
+  NESOS_PLACEHOLDER: "Listino Nesos non ancora caricato — in arrivo",
+  ERMES_PLACEHOLDER: "Listino Ermes non ancora caricato — in arrivo",
+  NUBES_MOB: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes Mob",
+  NUBES_FIX: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes Fix",
+  NUBES_TT: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes TT",
 };
 
 export function notaInArrivo(tipologia: string): string | null {
@@ -1774,6 +1835,10 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
+  }
+  if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
+    const assi = assiSelezioneVetrata(tipologia);
+    if (assi) return `${assi.linea.label} — ${assi.declinazione.label}`;
   }
   if (tipologia.startsWith("ISOMAX_")) {
     const assi = assiSelezioneIsomax(tipologia);

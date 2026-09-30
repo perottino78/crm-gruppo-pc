@@ -1,0 +1,37 @@
+[
+  {
+    "tipologia": "NUBES_MOB",
+    "immagineUrl": "/immagini/nubes/mob.jpg",
+    "descrizioneTecnica": "Nubes Mob — copertura All Season mobile per pergole vetrate (linea Nesos/Nubes/Ermes, Protezioni Srl). Struttura in alluminio estruso lega primaria, verniciata a polveri epossidiche a base resina poliestere, resistente ai raggi UV. Apertura manuale con asta o motorizzata con sistema Somfy, disponibile in 3 gradi di apertura: 50% (profondità max 4.000mm), 66% (profondità max 5.000mm), 75% (profondità max 6.000mm). Larghezza senza limiti (interasse piantoni 3.500mm), pendenza 10-15%. Pannelli a scelta: policarbonato alveolare opale 16mm (traslucente, ottima protezione dal sole, garanzia 10 anni contro ingiallimento/cristallizzazione/grandine), pannello sandwich bianco opaco 16mm (elevata schermatura dalla luce, coibentazione termica), vetro stratificato trasparente 44.2 (totale trasparenza, doppia lastra 4mm con anima PVB 2mm — disponibile solo su apertura 66%/75%). Perni/viti/staffe/piastre in acciaio inox verniciate in tinta. Certificazione UNI EN1090. 5 anni di garanzia, resistente a sole/vento/pioggia/carico, detrazione fiscale. Configurazioni installative: a parete, con parete a destra/sinistra, con due pareti, sulle pareti, con parete frontale, tra le pareti (fissaggio a muro rapido e sicuro). Accessori su richiesta: illuminazione LED bianco/RGB, tenda ombreggiante (tensionata o a nuvoletta — solo su apertura 66%/75%). Colori struttura: bianco opaco RAL9010, avorio opaco RAL1013, marrone opaco RAL8017, grigio antracite opaco RAL7016, grigio polvere opaco RAL7037, corten (ruggine antico), grigio grafite — colori optional in cartella +5%, fuori cartella +10%.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NUBES_FIX",
+    "immagineUrl": "/immagini/nubes/fix.jpg",
+    "descrizioneTecnica": "Nubes Fix — copertura All Season fissa e panoramica per pergole vetrate (linea Nesos/Nubes/Ermes, Protezioni Srl), ideale per estendere la vivibilità degli spazi esterni protetti da pioggia, vento e neve con continuità visiva del tetto. Totalmente personalizzabile in finitura, materiale e dettaglio; integrabile con le vetrate panoramiche Visio per comfort ed eleganza superiori. Struttura in alluminio estruso lega primaria, verniciata a polveri epossidiche resistente ai raggi UV. Resistenza al carico fino a 100 kg/m². Profondità max 6.000mm, larghezza senza limiti (interasse piantoni 3.500mm), pendenza 5-15%. Pannelli a scelta: policarbonato alveolare 16mm, pannello sandwich 16-55-82mm (versione 55mm autoportante o con guida rinforzata, versione 82mm autoportante — sporgenze fino a 6.000mm), vetro stratificato trasparente 44.2 (sporgenza max 4.000mm). Perni/viti/staffe/piastre in acciaio inox verniciate in tinta. Certificazione UNI EN1090. 5 anni di garanzia, resistente a sole/vento/pioggia/carico, detrazione fiscale. Configurazioni installative: a parete, con parete a destra/sinistra, con due pareti, sulle pareti, con parete frontale, tra le pareti. Accessori su richiesta: illuminazione LED bianco/RGB, tenda ombreggiante. Colori struttura: bianco opaco RAL9010, avorio opaco RAL1013, marrone opaco RAL8017, grigio antracite opaco RAL7016, grigio polvere opaco RAL7037, corten (ruggine antico), grigio grafite — colori optional in cartella +5%, fuori cartella +10%.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NUBES_TT",
+    "immagineUrl": "/immagini/nubes/tt.jpg",
+    "descrizioneTecnica": "Nubes TT — copertura fissa a taglio termico per pergole vetrate (linea Nesos/Nubes/Ermes, Protezioni Srl), la soluzione ideale per realizzare giardini d'inverno e dehors luminosi e confortevoli tutto l'anno. Innovativa copertura con tetto fisso a taglio caldo e serramenti termici: assicura elevati livelli di isolamento e risparmio energetico, tenuta all'aria e all'acqua. Struttura in alluminio estruso lega primaria, verniciata a polveri epossidiche resistente ai raggi UV. Resistenza al carico fino a 100 kg/m². Profondità max 6.000mm, larghezza senza limiti, pendenza 9-35% (la più ampia delle 3 declinazioni Nubes). Pannelli a scelta: pannello sandwich bianco opaco 32mm (elevata schermatura e coibentazione termica), vetro stratificato trasparente 44.2, vetro camera standard 32mm o vetro camera basso emissivo e selettivo 32mm (isolamento termico e acustico). Perni/viti/staffe/piastre in acciaio inox verniciate in tinta. Certificazione UNI EN1090. 5 anni di garanzia, resistente a sole/vento/pioggia/carico, isolamento termico, detrazione fiscale. Accessori su richiesta: illuminazione LED con mini faretti da incasso, tenda ombreggiante. Colori struttura: bianco opaco RAL9010, avorio opaco RAL1013, marrone opaco RAL8017, grigio antracite opaco RAL7016, grigio polvere opaco RAL7037, corten (ruggine antico), grigio grafite — colori optional in cartella +5%, fuori cartella +10%.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "NESOS_PLACEHOLDER",
+    "immagineUrl": null,
+    "descrizioneTecnica": "Nesos — linea di pergole a copertura vetrata (Protezioni Srl), stesso gruppo prodotto di Nubes ed Ermes. Scheda tecnica e listino non ancora caricati: in attesa della documentazione fornitore, contattare l'ufficio tecnico per informazioni e preventivo.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  },
+  {
+    "tipologia": "ERMES_PLACEHOLDER",
+    "immagineUrl": null,
+    "descrizioneTecnica": "Ermes — linea di pergole a copertura vetrata (Protezioni Srl), stesso gruppo prodotto di Nubes e Nesos. Scheda tecnica e listino non ancora caricati: in attesa della documentazione fornitore, contattare l'ufficio tecnico per informazioni e preventivo.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "PERGOLE"
+  }
+]
