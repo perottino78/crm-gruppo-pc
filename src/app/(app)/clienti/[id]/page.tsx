@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { creaAttivita, completaAttivita, creaPreventivo, aggiornaCliente } from "@/app/actions";
+import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopeClienteWhere } from "@/lib/scope";
+import SchedaClienteTabs from "@/components/SchedaClienteTabs";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -32,9 +33,14 @@ export default async function SchedaClientePage({
     include: {
       brand: true,
       leadOrigine: true,
+      responsabile: true,
       appuntamenti: { include: { utente: true }, orderBy: { dataOra: "desc" } },
       preventivi: { include: { commerciale: true }, orderBy: { createdAt: "desc" } },
       attivita: { include: { utente: true }, orderBy: { dataOra: "desc" } },
+      referenti: { orderBy: { createdAt: "desc" } },
+      indirizziAltri: { orderBy: { createdAt: "desc" } },
+      correlazioniDa: { include: { correlato: true }, orderBy: { createdAt: "desc" } },
+      correlazioniA: { include: { cliente: true }, orderBy: { createdAt: "desc" } },
     },
   });
 
@@ -44,9 +50,15 @@ export default async function SchedaClientePage({
   const brands = await prisma.brand.findMany({ orderBy: { nome: "asc" } });
   const commerciali = await prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } });
   const taskAperti = cliente.attivita.filter((a) => a.tipo === "TASK" && !a.completata);
+  const altriClienti = await prisma.cliente.findMany({
+    where: { id: { not: cliente.id } },
+    select: { id: true, nome: true, comune: true },
+    orderBy: { nome: "asc" },
+    take: 500,
+  });
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-6xl">
       <Link href="/clienti" className="text-xs text-neutral-600 hover:underline">
         ← Clienti
       </Link>
@@ -67,21 +79,7 @@ export default async function SchedaClientePage({
         )}
       </p>
 
-      <details className="mb-6">
-        <summary className="text-xs text-neutral-600 cursor-pointer hover:text-neutral-600">modifica contatti e indirizzo</summary>
-        <form action={aggiornaCliente} className="bg-white rounded-lg border border-neutral-200 p-4 mt-2 flex flex-col gap-2 max-w-md">
-          <input type="hidden" name="id" value={cliente.id} />
-          <input name="telefono" defaultValue={cliente.telefono ?? ""} placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-          <input name="email" defaultValue={cliente.email ?? ""} placeholder="Email" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-          <input name="indirizzo" defaultValue={cliente.indirizzo ?? ""} placeholder="Indirizzo (via e numero civico)" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-          <div className="grid grid-cols-3 gap-2">
-            <input name="cap" defaultValue={cliente.cap ?? ""} placeholder="CAP" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-            <input name="comune" defaultValue={cliente.comune ?? ""} placeholder="Comune" className="col-span-2 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-          </div>
-          <input name="provincia" defaultValue={cliente.provincia ?? ""} placeholder="Provincia (es. TO)" maxLength={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-24" />
-          <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start mt-1">salva contatti</button>
-        </form>
-      </details>
+      <SchedaClienteTabs cliente={cliente} utenti={utenti} altriClienti={altriClienti} />
 
       {taskAperti.length > 0 && (
         <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-6">

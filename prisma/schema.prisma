@@ -16,81 +16,203 @@ datasource db {
 // (SQLite non supporta enum nativi: questi valori sono validati in app/lib/enums.ts)
 
 model Brand {
-  id        String     @id @default(cuid())
-  nome      String     @unique
-  clienti   Cliente[]
-  lead      Lead[]
-  prodotti  Prodotto[]
-  preventivi Preventivo[]
-  optionali Optional[]
-  modelli   ModelloProdotto[]
-  utentiAutorizzati Utente[] @relation("PermessoListino")
+  id                String            @id @default(cuid())
+  nome              String            @unique
+  clienti           Cliente[]
+  lead              Lead[]
+  prodotti          Prodotto[]
+  preventivi        Preventivo[]
+  optionali         Optional[]
+  modelli           ModelloProdotto[]
+  utentiAutorizzati Utente[]          @relation("PermessoListino")
 }
 
 model Utente {
-  id            String   @id @default(cuid())
-  nome          String
-  email         String   @unique
-  ruolo         String
+  id                  String         @id @default(cuid())
+  nome                String
+  email               String         @unique
+  ruolo               String
   // Credenziali di accesso al CRM. Username nullable per compatibilità con gli utenti creati
   // prima dell'introduzione del login (vanno attivati impostando username+password da Impostazioni).
   // Senza passwordHash l'utente non può accedere.
-  username      String?  @unique
-  passwordHash  String?
+  username            String?        @unique
+  passwordHash        String?
   // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
-  telefono      String?
+  telefono            String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
-  mustChangePassword Boolean @default(true)
-  createdAt     DateTime @default(now())
-  leadAssegnati Lead[]
-  appuntamenti  Appuntamento[]
-  preventivi    Preventivo[]
-  attivita      Attivita[]
-  obiettivi     Obiettivo[]
-  clientiResponsabile Cliente[] @relation("ResponsabileCliente")
+  mustChangePassword  Boolean        @default(true)
+  createdAt           DateTime       @default(now())
+  leadAssegnati       Lead[]
+  appuntamenti        Appuntamento[]
+  preventivi          Preventivo[]
+  attivita            Attivita[]
+  obiettivi           Obiettivo[]
+  clientiResponsabile Cliente[]      @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
-  brandAutorizzati Brand[] @relation("PermessoListino")
+  brandAutorizzati    Brand[]        @relation("PermessoListino")
 }
 
 model Lead {
-  id          String    @id @default(cuid())
-  nome        String
-  telefono    String?
-  email       String?
-  fonte       String    @default("facebook")
-  fase        String    @default("NUOVO")
-  note        String?
-  brand       Brand     @relation(fields: [brandId], references: [id])
-  brandId     String
-  telefonista Utente?   @relation(fields: [telefonistaId], references: [id])
-  telefonistaId String?
+  id              String   @id @default(cuid())
+  nome            String
+  telefono        String?
+  email           String?
+  fonte           String   @default("facebook")
+  fase            String   @default("NUOVO")
+  note            String?
+  brand           Brand    @relation(fields: [brandId], references: [id])
+  brandId         String
+  telefonista     Utente?  @relation(fields: [telefonistaId], references: [id])
+  telefonistaId   String?
   clienteGenerato Cliente?
-  createdAt   DateTime  @default(now())
+  createdAt       DateTime @default(now())
 }
 
 model Cliente {
-  id         String    @id @default(cuid())
-  nome       String
-  telefono   String?
-  email      String?
-  indirizzo  String?
-  cap        String?
-  comune     String?
-  provincia  String?
-  paese      String    @default("IT")
-  brand      Brand     @relation(fields: [brandId], references: [id])
-  brandId    String
-  leadOrigine Lead?    @relation(fields: [leadOrigineId], references: [id])
-  leadOrigineId String? @unique
+  id             String         @id @default(cuid())
+  nome           String
+  telefono       String?
+  email          String?
+  indirizzo      String?
+  cap            String?
+  comune         String?
+  provincia      String?
+  paese          String         @default("IT")
+  brand          Brand          @relation(fields: [brandId], references: [id])
+  brandId        String
+  leadOrigine    Lead?          @relation(fields: [leadOrigineId], references: [id])
+  leadOrigineId  String?        @unique
   // Utente "proprietario" del cliente ai fini della visibilità dati per ruolo (chi lo ha creato,
   // riassegnabile dall'amministratore). Nullable per compatibilità con i clienti pre-esistenti.
-  responsabile   Utente? @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
+  responsabile   Utente?        @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
   responsabileId String?
-  appuntamenti Appuntamento[]
-  preventivi Preventivo[]
-  attivita   Attivita[]
-  createdAt  DateTime  @default(now())
+  appuntamenti   Appuntamento[]
+  preventivi     Preventivo[]
+  attivita       Attivita[]
+  createdAt      DateTime       @default(now())
+
+  // ===== Scheda Anagrafica estesa (ispirata a Bconsole) =====
+
+  // --- Anagrafica: dati aggiuntivi di indirizzo/contatto ---
+  frazione             String?
+  regione              String?
+  descrizione          String?
+  altroTelefono        String?
+  cellulare            String?
+  sitoWeb              String?
+  altraEmail           String?
+  emailOrdiniFornitore String?
+
+  // --- Anagrafica: persona fisica (per calcolo Codice Fiscale automatico) ---
+  // tipoAnagrafica: AZIENDA | PERSONA_FISICA — determina quali campi mostrare/usare.
+  tipoAnagrafica   String    @default("AZIENDA")
+  cognome          String?
+  nomePersona      String?
+  sesso            String? // M | F
+  dataNascita      DateTime?
+  comuneNascita    String?
+  provinciaNascita String?
+
+  // --- Profilazione ---
+  bloccato     Boolean @default(false)
+  origine      String?
+  settore      String?
+  km           Float?  @default(0)
+  tipologia    String?
+  categoria    String? // es. "Account, Cliente" — lista separata da virgola
+  condivisioni String?
+  tag          String? // lista tag separata da virgola
+
+  // --- Commerciale ---
+  pagamento          String?
+  bancaAppoggio      String?
+  euroAlKm           Float?  @default(0)
+  resa               String?
+  provvigione        Float?  @default(0)
+  budgetAnnoCorrente Float?  @default(0)
+  budgetAnnoProssimo Float?  @default(0)
+  centroRicavo       String?
+  codiceIvaCliente   String?
+  scontoTier1        Float?  @default(0)
+  scontoTier2        Float?  @default(0)
+  scontoTier3        Float?  @default(0)
+  scontoTier4        Float?  @default(0)
+  tipoCosto          String?
+  corriere           String?
+  valuta             String?
+  lingua             String? @default("it_IT")
+  nsNumeroFornitore  String?
+  fido               Float?
+
+  // --- Amministrazione: fattura elettronica ---
+  emailInvioFatture  String?
+  rea                String?
+  isoNazione         String?
+  piva               String?
+  codiceFiscale      String?
+  esigibilitaIva     String? @default("esigibilità immediata")
+  regimeFiscale      String? @default("RF01 Ordinario")
+  pec                String?
+  codiceDestinatario String? @default("0000000")
+  codEori            String?
+  fatturaPA          Boolean @default(false)
+  senzaCigCup        Boolean @default(false)
+  cessioneCredito    Boolean @default(false)
+  soggettoRitenuta   Boolean @default(false)
+  addebitoSpese      Boolean @default(true)
+  bolloInFattura     Boolean @default(false)
+  addebitoBollo      Boolean @default(false)
+  importoBollo       Float?  @default(0)
+
+  // --- Note libere (scheda "Note") ---
+  noteLibere String?
+
+  // --- Relazioni nuove sezioni ---
+  referenti      Referente[]
+  indirizziAltri IndirizzoCliente[]
+  correlazioniDa ClienteCorrelazione[] @relation("CorrelazioneDa")
+  correlazioniA  ClienteCorrelazione[] @relation("CorrelazioneA")
+}
+
+model Referente {
+  id        String   @id @default(cuid())
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId String
+  nome      String
+  cognome   String?
+  ruolo     String?
+  telefono  String?
+  email     String?
+  createdAt DateTime @default(now())
+}
+
+model IndirizzoCliente {
+  id        String   @id @default(cuid())
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId String
+  etichetta String   @default("Altro indirizzo")
+  indirizzo String?
+  comune    String?
+  cap       String?
+  provincia String?
+  referente String?
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+// Correlazione fra due anagrafiche Cliente (es. "Account di fatturazione", "Sede", "Gruppo societario")
+model ClienteCorrelazione {
+  id          String   @id @default(cuid())
+  cliente     Cliente  @relation("CorrelazioneDa", fields: [clienteId], references: [id])
+  clienteId   String
+  correlato   Cliente  @relation("CorrelazioneA", fields: [correlatoId], references: [id])
+  correlatoId String
+  tipologia   String   @default("Account di fatturazione")
+  principale  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@unique([clienteId, correlatoId, tipologia])
 }
 
 model Appuntamento {
@@ -106,17 +228,17 @@ model Appuntamento {
 }
 
 model Prodotto {
-  id         String   @id @default(cuid())
-  brand      Brand    @relation(fields: [brandId], references: [id])
-  brandId    String
-  tipologia  String
-  descrizione String?
-  colore     String
-  altezzaMm  Int
-  larghezzaMm Int
-  prezzoBase Float
+  id                   String           @id @default(cuid())
+  brand                Brand            @relation(fields: [brandId], references: [id])
+  brandId              String
+  tipologia            String
+  descrizione          String?
+  colore               String
+  altezzaMm            Int
+  larghezzaMm          Int
+  prezzoBase           Float
   coefficienteRicarico Float?
-  righe      RigaPreventivo[]
+  righe                RigaPreventivo[]
 
   @@unique([brandId, tipologia, colore, altezzaMm, larghezzaMm])
 }
@@ -128,68 +250,68 @@ model Configurazione {
 }
 
 model Preventivo {
-  id           String          @id @default(cuid())
-  cliente      Cliente         @relation(fields: [clienteId], references: [id])
-  clienteId    String
-  brand        Brand           @relation(fields: [brandId], references: [id])
-  brandId      String
-  commerciale  Utente          @relation(fields: [commercialeId], references: [id])
-  commercialeId String
-  stato        String          @default("APERTO")
+  id                   String              @id @default(cuid())
+  cliente              Cliente             @relation(fields: [clienteId], references: [id])
+  clienteId            String
+  brand                Brand               @relation(fields: [brandId], references: [id])
+  brandId              String
+  commerciale          Utente              @relation(fields: [commercialeId], references: [id])
+  commercialeId        String
+  stato                String              @default("APERTO")
   // Numero offerta progressivo per brand+anno (es. 1, 2, 3... resettato ogni anno solare per ciascun brand).
   // Nullable per compatibilità con i preventivi creati prima dell'introduzione di questo campo.
-  numeroOfferta Int?
-  totaleNetto  Float           @default(0)
-  aliquotaIva  Float           @default(22)
-  totaleIva    Float           @default(0)
+  numeroOfferta        Int?
+  totaleNetto          Float               @default(0)
+  aliquotaIva          Float               @default(22)
+  totaleIva            Float               @default(0)
   // Oggetto/titolo dell'offerta (es. "Zanzarriere pergola scorrevoli con rete acciaio")
-  oggetto      String?
+  oggetto              String?
   // Sconto percentuale applicato sull'imponibile lordo (somma righe) prima del calcolo IVA;
   // totaleNetto memorizza già l'imponibile SCONTATO
-  scontoPercentuale Float      @default(0)
+  scontoPercentuale    Float               @default(0)
   // Prezzo finale scritto a mano dal commerciale (IVA inclusa), che bypassa il calcolo
   // automatico righe/sconto: utile per imporre una cifra concordata a voce senza che il
   // cliente veda in stampa la percentuale di sconto applicata. Quando attivo, totaleNetto/
   // totaleIva sono ricavati a ritroso da questo importo e dall'aliquota IVA corrente, e la
   // stampa mostra solo un imponibile+IVA "puliti", indistinguibili da un calcolo normale.
-  prezzoManualeAttivo Boolean  @default(false)
-  prezzoManualeTotale Float?
+  prezzoManualeAttivo  Boolean             @default(false)
+  prezzoManualeTotale  Float?
   // Testo libero per la stampa dell'offerta (condizioni di fornitura/vendita specifiche di questa offerta)
-  condizioniPagamento String?
-  condizioniConsegna  String?
+  condizioniPagamento  String?
+  condizioniConsegna   String?
   // Immagine (URL) mostrata in cima alla prima pagina della stampa offerta, es. foto del progetto o rendering
   immagineCopertinaUrl String?
-  righe        RigaPreventivo[]
+  righe                RigaPreventivo[]
   // Sezioni/stanze in cui il commerciale può raggruppare le righe (es. "Cucina",
   // "Camera 1"...) per organizzare preventivi con molti articoli misti (finestre,
   // tapparelle, zanzariere...) invece di un unico elenco piatto. Le righe senza
   // sezioneId restano nell'elenco "senza sezione" in cima.
-  sezioni      SezionePreventivo[]
-  promemoria   PromemoriaInviato[]
-  progetto     Progetto?
-  createdAt    DateTime        @default(now())
-  scadenza     DateTime?
+  sezioni              SezionePreventivo[]
+  promemoria           PromemoriaInviato[]
+  progetto             Progetto?
+  createdAt            DateTime            @default(now())
+  scadenza             DateTime?
 }
 
 model RigaPreventivo {
-  id            String     @id @default(cuid())
-  preventivo    Preventivo @relation(fields: [preventivoId], references: [id])
-  preventivoId  String
+  id                        String             @id @default(cuid())
+  preventivo                Preventivo         @relation(fields: [preventivoId], references: [id])
+  preventivoId              String
   // prodottoId è opzionale per permettere righe di solo testo libero (vedi testoLibero)
-  prodotto      Prodotto?  @relation(fields: [prodottoId], references: [id])
-  prodottoId    String?
+  prodotto                  Prodotto?          @relation(fields: [prodottoId], references: [id])
+  prodottoId                String?
   // Riga senza prodotto collegato: testo libero mostrato al posto della scheda prodotto,
   // sia nell'editor sia in stampa (usato per note, info aggiuntive o motivazione sconto).
-  testoLibero   String?
-  quantita      Int        @default(1)
-  prezzoUnitario Float
-  optionalDescrizione String?
-  optionalPrezzo Float @default(0)
-  mostraDescrizione Boolean @default(true)
+  testoLibero               String?
+  quantita                  Int                @default(1)
+  prezzoUnitario            Float
+  optionalDescrizione       String?
+  optionalPrezzo            Float              @default(0)
+  mostraDescrizione         Boolean            @default(true)
   // Misura reale inserita a mano dal commerciale (può differire dalla fascia di prezzo
   // agganciata in prodottoId, che è la fascia più vicina per eccesso nel listino nascosto)
-  misuraLarghezza Float?
-  misuraAltezza   Float?
+  misuraLarghezza           Float?
+  misuraAltezza             Float?
   // Testo libero che sovrascrive, solo per questa riga, la descrizione tecnica standard
   // del modello (utile per non ripetere descrizioni identiche o correggerne il testo)
   descrizionePersonalizzata String?
@@ -197,10 +319,10 @@ model RigaPreventivo {
   // condividono la stessa sezione (o fra tutte le righe "senza sezione" se null).
   // Non è garantito univoco/denso finché nessuno riordina: in quel caso l'ordine
   // effettivo resta quello di creazione (vedi orderBy [ordine, id] nella pagina).
-  ordine        Int            @default(0)
-  sezione       SezionePreventivo? @relation(fields: [sezioneId], references: [id], onDelete: SetNull)
-  sezioneId     String?
-  optionali     RigaOptional[]
+  ordine                    Int                @default(0)
+  sezione                   SezionePreventivo? @relation(fields: [sezioneId], references: [id], onDelete: SetNull)
+  sezioneId                 String?
+  optionali                 RigaOptional[]
 }
 
 // Sezione/stanza di un preventivo (es. "Cucina", "Camera da letto 1") creata a
@@ -226,41 +348,41 @@ model PromemoriaInviato {
 }
 
 model Progetto {
-  id                    String     @id @default(cuid())
-  preventivo            Preventivo @relation(fields: [preventivoId], references: [id])
-  preventivoId          String     @unique
+  id                      String     @id @default(cuid())
+  preventivo              Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId            String     @unique
   misureRilievoConfermate String?
-  statoOrdineFornitore  String     @default("da_avviare")
-  createdAt             DateTime   @default(now())
+  statoOrdineFornitore    String     @default("da_avviare")
+  createdAt               DateTime   @default(now())
 }
 
 // Categoria optional: STAFFA | TESSUTO | SENSORE | TIMPANO | ALTRO
 // tipoPrezzo: FISSO (valore in euro) | PERCENTUALE (valore in % sul prezzo netto della riga)
 model Optional {
-  id          String   @id @default(cuid())
-  brand       Brand    @relation(fields: [brandId], references: [id])
-  brandId     String
-  categoria   String
-  nome        String
-  tipoPrezzo  String   @default("FISSO")
-  valore      Float
-  unita       String?
-  sporgenzaMm Int?
-  larghezzaMm Int?
-  listino     String?
-  note        String?
+  id                  String         @id @default(cuid())
+  brand               Brand          @relation(fields: [brandId], references: [id])
+  brandId             String
+  categoria           String
+  nome                String
+  tipoPrezzo          String         @default("FISSO")
+  valore              Float
+  unita               String?
+  sporgenzaMm         Int?
+  larghezzaMm         Int?
+  listino             String?
+  note                String?
   // URL immagine rappresentativa (es. per i pannelli di rivestimento a catalogo: Blindati).
   // Facoltativo: molte righe Optional restano senza immagine (accessori, sovrapprezzi, ecc.).
-  immagineUrl String?
+  immagineUrl         String?
   // Gruppi merceologici (ModelloProdotto.gruppo) a cui questo optional è applicabile,
   // es. ["PERGOLE", "BIOCLIMATICA"]. Vuoto = nessuna restrizione di gruppo.
-  gruppiApplicabili String[] @default([])
+  gruppiApplicabili   String[]       @default([])
   // Finitura/profilo (es. "STD", "STDPLUS", "MICH", "FL" per le zanzariere plissettate)
   // a cui questo optional è vincolato — es. i colori profilo Standard Plus non devono
   // comparire quando si è scelto il modello di finitura Standard. Null = nessuna
   // restrizione di finitura (l'optional compare per qualunque finitura del gruppo).
   finituraApplicabile String?
-  righe       RigaOptional[]
+  righe               RigaOptional[]
 }
 
 model RigaOptional {
@@ -321,7 +443,7 @@ model Obiettivo {
   id            String   @id @default(cuid())
   utente        Utente   @relation(fields: [utenteId], references: [id])
   utenteId      String
-  periodo       String   // formato "YYYY-MM"
+  periodo       String // formato "YYYY-MM"
   importoTarget Float
   note          String?
   createdAt     DateTime @default(now())

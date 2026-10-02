@@ -6,10 +6,29 @@ import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
+import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
   return typeof v === "string" && v.trim() !== "" ? v.trim() : null;
+}
+
+function flt(fd: FormData, key: string): number | null {
+  const v = str(fd, key);
+  if (v === null) return null;
+  const n = Number(v.replace(",", "."));
+  return isNaN(n) ? null : n;
+}
+
+function boolCheckbox(fd: FormData, key: string): boolean {
+  return fd.get(key) === "on";
+}
+
+function dataOrNull(fd: FormData, key: string): Date | null {
+  const v = str(fd, key);
+  if (!v) return null;
+  const d = new Date(v);
+  return isNaN(d.getTime()) ? null : d;
 }
 
 export async function creaLead(formData: FormData) {
@@ -97,6 +116,249 @@ export async function aggiornaCliente(formData: FormData) {
   });
   revalidatePath(`/clienti/${id}`);
   revalidatePath("/clienti");
+}
+
+// ===== Scheda Anagrafica estesa cliente (tab stile Bconsole) =====
+
+export async function aggiornaClienteAnagrafica(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      nome: str(formData, "nome") ?? undefined,
+      telefono: str(formData, "telefono"),
+      altroTelefono: str(formData, "altroTelefono"),
+      cellulare: str(formData, "cellulare"),
+      sitoWeb: str(formData, "sitoWeb"),
+      email: str(formData, "email"),
+      altraEmail: str(formData, "altraEmail"),
+      emailOrdiniFornitore: str(formData, "emailOrdiniFornitore"),
+      paese: str(formData, "paese") ?? "IT",
+      comune: str(formData, "comune"),
+      frazione: str(formData, "frazione"),
+      indirizzo: str(formData, "indirizzo"),
+      cap: str(formData, "cap"),
+      provincia: str(formData, "provincia"),
+      regione: str(formData, "regione"),
+      descrizione: str(formData, "descrizione"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+  revalidatePath("/clienti");
+}
+
+// Dati persona fisica: se compilati cognome+nome+sesso+data+comune di nascita, calcola e
+// salva automaticamente il Codice Fiscale (come in Bconsole). Non sovrascrive un C.F. già
+// presente se i dati anagrafici non sono sufficienti per ricalcolarlo.
+export async function aggiornaClientePersonaFisica(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+
+  const tipoAnagrafica = str(formData, "tipoAnagrafica") ?? "AZIENDA";
+  const cognome = str(formData, "cognome");
+  const nomePersona = str(formData, "nomePersona");
+  const sesso = str(formData, "sesso") as "M" | "F" | null;
+  const dataNascita = dataOrNull(formData, "dataNascita");
+  const comuneNascita = str(formData, "comuneNascita");
+  const provinciaNascita = str(formData, "provinciaNascita");
+
+  let codiceFiscaleCalcolato: string | null = null;
+  if (cognome && nomePersona && sesso && dataNascita && comuneNascita) {
+    codiceFiscaleCalcolato = await calcolaCodiceFiscale({
+      cognome,
+      nome: nomePersona,
+      sesso,
+      dataNascita,
+      comuneNascita,
+    });
+  }
+
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      tipoAnagrafica,
+      cognome,
+      nomePersona,
+      sesso,
+      dataNascita,
+      comuneNascita,
+      provinciaNascita,
+      // Se il calcolo è riuscito aggiorna il C.F.; altrimenti lascia quello già salvato
+      // (eventualmente inserito a mano dall'operatore in Amministrazione).
+      ...(codiceFiscaleCalcolato ? { codiceFiscale: codiceFiscaleCalcolato } : {}),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteProfilazione(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      bloccato: boolCheckbox(formData, "bloccato"),
+      origine: str(formData, "origine"),
+      settore: str(formData, "settore"),
+      km: flt(formData, "km") ?? 0,
+      tipologia: str(formData, "tipologia"),
+      categoria: str(formData, "categoria"),
+      condivisioni: str(formData, "condivisioni"),
+      tag: str(formData, "tag"),
+      responsabileId: str(formData, "responsabileId"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteCommerciale(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      pagamento: str(formData, "pagamento"),
+      bancaAppoggio: str(formData, "bancaAppoggio"),
+      euroAlKm: flt(formData, "euroAlKm") ?? 0,
+      resa: str(formData, "resa"),
+      provvigione: flt(formData, "provvigione") ?? 0,
+      budgetAnnoCorrente: flt(formData, "budgetAnnoCorrente") ?? 0,
+      budgetAnnoProssimo: flt(formData, "budgetAnnoProssimo") ?? 0,
+      centroRicavo: str(formData, "centroRicavo"),
+      codiceIvaCliente: str(formData, "codiceIvaCliente"),
+      scontoTier1: flt(formData, "scontoTier1") ?? 0,
+      scontoTier2: flt(formData, "scontoTier2") ?? 0,
+      scontoTier3: flt(formData, "scontoTier3") ?? 0,
+      scontoTier4: flt(formData, "scontoTier4") ?? 0,
+      tipoCosto: str(formData, "tipoCosto"),
+      corriere: str(formData, "corriere"),
+      valuta: str(formData, "valuta"),
+      lingua: str(formData, "lingua") ?? "it_IT",
+      nsNumeroFornitore: str(formData, "nsNumeroFornitore"),
+      fido: flt(formData, "fido"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteAmministrazione(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      emailInvioFatture: str(formData, "emailInvioFatture"),
+      rea: str(formData, "rea"),
+      isoNazione: str(formData, "isoNazione"),
+      piva: str(formData, "piva"),
+      codiceFiscale: str(formData, "codiceFiscale"),
+      esigibilitaIva: str(formData, "esigibilitaIva"),
+      regimeFiscale: str(formData, "regimeFiscale"),
+      pec: str(formData, "pec"),
+      codiceDestinatario: str(formData, "codiceDestinatario") ?? "0000000",
+      codEori: str(formData, "codEori"),
+      fatturaPA: boolCheckbox(formData, "fatturaPA"),
+      senzaCigCup: boolCheckbox(formData, "senzaCigCup"),
+      cessioneCredito: boolCheckbox(formData, "cessioneCredito"),
+      soggettoRitenuta: boolCheckbox(formData, "soggettoRitenuta"),
+      addebitoSpese: boolCheckbox(formData, "addebitoSpese"),
+      bolloInFattura: boolCheckbox(formData, "bolloInFattura"),
+      addebitoBollo: boolCheckbox(formData, "addebitoBollo"),
+      importoBollo: flt(formData, "importoBollo") ?? 0,
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteNote(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: { noteLibere: str(formData, "noteLibere") },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+// --- Referenti ---
+
+export async function creaReferente(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  const nome = str(formData, "nome");
+  if (!clienteId || !nome) return;
+  await prisma.referente.create({
+    data: {
+      clienteId,
+      nome,
+      cognome: str(formData, "cognome"),
+      ruolo: str(formData, "ruolo"),
+      telefono: str(formData, "telefono"),
+      email: str(formData, "email"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaReferente(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.referente.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+// --- Altri indirizzi ---
+
+export async function creaIndirizzoCliente(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  if (!clienteId) return;
+  await prisma.indirizzoCliente.create({
+    data: {
+      clienteId,
+      etichetta: str(formData, "etichetta") ?? "Altro indirizzo",
+      indirizzo: str(formData, "indirizzo"),
+      comune: str(formData, "comune"),
+      cap: str(formData, "cap"),
+      provincia: str(formData, "provincia"),
+      referente: str(formData, "referente"),
+      note: str(formData, "note"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaIndirizzoCliente(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.indirizzoCliente.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+// --- Correlazioni fra anagrafiche ---
+
+export async function creaCorrelazione(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  const correlatoId = str(formData, "correlatoId");
+  if (!clienteId || !correlatoId || clienteId === correlatoId) return;
+  await prisma.clienteCorrelazione.create({
+    data: {
+      clienteId,
+      correlatoId,
+      tipologia: str(formData, "tipologia") ?? "Account di fatturazione",
+      principale: boolCheckbox(formData, "principale"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaCorrelazione(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.clienteCorrelazione.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
 }
 
 // Numero offerta progressivo per brand, resettato ogni anno solare (1, 2, 3... dal 1 gennaio).
