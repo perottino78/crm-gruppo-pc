@@ -1261,31 +1261,79 @@ export default async function PreventivoPage({
                 // Illuminazione & Optionals, voci di posa in opera/rilievo dal listino
                 // Work&Service, e i veri accessori del modello (tettuccio, gronda, timpano,
                 // motorizzazione, sensori...) — rendendo difficile trovare quello che
-                // serve. Si separano in 3 tendine tematiche, stesso pattern usato per le
-                // Persiane (vedi sopra).
+                // serve. Si separano in tendine tematiche, stesso pattern usato per le
+                // Persiane (vedi sopra). Il blocco "optional prodotto" a sua volta,
+                // soprattutto su Lucilla (8 categorie, quasi 190 optional), viene
+                // ulteriormente suddiviso in 3 sotto-tendine per natura dell'accessorio:
+                // coperture (tettuccio/gronda/timpano), motorizzazione/sensori/comandi,
+                // struttura/posa/tessuto.
                 if (modello?.gruppo === "PERGOLE" || modello?.gruppo === "BIOCLIMATICA") {
                   const CATEGORIE_ILLUMINAZIONE = ["ILLUMINAZIONE", "TRASMETTITORE", "PRESA", "RISCALDATORE", "AUDIO"];
+                  const CATEGORIE_COPERTURA = ["TETTUCCIO", "GRONDA", "TIMPANO"];
+                  const isMotorizzazione = (categoria: string) => {
+                    const c = categoria.toUpperCase();
+                    return c.includes("MOTOR") || c.includes("SENSOR") || c === "TELECOMANDO";
+                  };
                   const illuminazionePergole = optionaliRigaFiltrati.filter((o) => CATEGORIE_ILLUMINAZIONE.includes(o.categoria));
                   const posaPergole = optionaliRigaFiltrati.filter((o) => o.categoria.endsWith("(Work&Service)"));
-                  const optionalPergole = optionaliRigaFiltrati.filter(
+                  const optionalPergoleBase = optionaliRigaFiltrati.filter(
                     (o) => !CATEGORIE_ILLUMINAZIONE.includes(o.categoria) && !o.categoria.endsWith("(Work&Service)")
+                  );
+                  const coperturaPergole = optionalPergoleBase.filter((o) => CATEGORIE_COPERTURA.includes(o.categoria));
+                  const motorizzazionePergole = optionalPergoleBase.filter(
+                    (o) => !CATEGORIE_COPERTURA.includes(o.categoria) && isMotorizzazione(o.categoria)
+                  );
+                  const strutturaPergole = optionalPergoleBase.filter(
+                    (o) => !CATEGORIE_COPERTURA.includes(o.categoria) && !isMotorizzazione(o.categoria)
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
-                      {optionalPergole.length > 0 && (
+                      {coperturaPergole.length > 0 && (
                         <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
                           <input type="hidden" name="rigaId" value={r.id} />
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
                           <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
-                            <option value="">Optional prodotto —</option>
-                            {optionalPergole.map((o) => (
+                            <option value="">Tettuccio, gronda e timpano —</option>
+                            {coperturaPergole.map((o) => (
                               <option key={o.id} value={o.id}>
                                 {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
                               </option>
                             ))}
                           </select>
                           <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
-                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ copertura</button>
+                        </form>
+                      )}
+                      {motorizzazionePergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Motorizzazione, sensori e comandi —</option>
+                            {motorizzazionePergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ motorizzazione</button>
+                        </form>
+                      )}
+                      {strutturaPergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Struttura, posa e tessuto —</option>
+                            {strutturaPergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ struttura</button>
                         </form>
                       )}
                       {illuminazionePergole.length > 0 && (
