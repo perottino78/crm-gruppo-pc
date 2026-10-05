@@ -1596,16 +1596,25 @@ export default function SelettoreProdotto({
     const unit = unitaMisura(nodo.value);
     if (nodo.misure) {
       const { larghezzaMin, larghezzaMax, altezzaMin, altezzaMax } = nodo.misure;
-      // Blocco rigido su tutti i listini: la misura inserita deve rientrare nel range
+      // Profili sfusi (barre COMPSFUSI, es. Profilo L/M/S, Piantone): il fornitore
+      // consegna solo barre nelle lunghezze fisse a listino (4/5/6/7 m) e un pezzo
+      // richiesto piu' corto viene sempre tagliato internamente da una barra della
+      // lunghezza standard immediatamente superiore (es. 2 m -> barra da 4 m, 4,5 m ->
+      // barra da 5 m). Quindi per queste tipologie NON si blocca una misura sotto il
+      // minimo: trovaFasciaPrezzo() applica comunque la fascia superiore piu' vicina.
+      // Resta bloccato solo il superamento del massimo, perche' non esiste una barra
+      // abbastanza lunga da coprire la richiesta.
+      const profiloSfuso = nodo.value.startsWith("COMPSFUSI_");
+      // Blocco rigido sugli altri listini: la misura inserita deve rientrare nel range
       // effettivamente a listino (min-max delle fasce di prezzo caricate), sia per evitare
       // di andare sotto la misura minima prodotta sia per evitare di sforare il massimo —
       // altrimenti si rischia di applicare comunque il prezzo della fascia piu' vicina,
       // che per alcuni listini (es. un'unica fascia "fino a") puo' risultare un prezzo
       // sproporzionato rispetto alla misura realmente richiesta.
-      if (larghezza < larghezzaMin || larghezza > larghezzaMax) {
+      if ((!profiloSfuso && larghezza < larghezzaMin) || larghezza > larghezzaMax) {
         return `Larghezza fuori listino: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
       }
-      if (altezza < altezzaMin || altezza > altezzaMax) {
+      if ((!profiloSfuso && altezza < altezzaMin) || altezza > altezzaMax) {
         return `Altezza/sporgenza fuori listino: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
       }
     }
