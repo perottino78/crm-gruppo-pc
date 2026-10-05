@@ -1571,7 +1571,12 @@ export default function SelettoreProdotto({
   function scegli(nodo: NodoTipologia) {
     setScelto(nodo);
     setLarghezzaVal("");
-    setAltezzaVal("");
+    // Profili sfusi a metraggio (es. COMPSFUSI Profilo L/M/S, Piantone): il listino e'
+    // monodimensionale (altezzaMm sempre 0, "sporgenza" non si usa). Precompiliamo il
+    // campo a 0 invece di lasciarlo vuoto, cosi' l'utente inserisce solo la lunghezza
+    // e il campo (reso sola-lettura piu' sotto) non genera un valore incoerente.
+    const altezzaNonUsata = !!nodo.misure && nodo.misure.altezzaMin === 0 && nodo.misure.altezzaMax === 0;
+    setAltezzaVal(altezzaNonUsata ? "0" : "");
     setErroreMisura(null);
   }
 
@@ -1590,7 +1595,10 @@ export default function SelettoreProdotto({
     if (!larghezzaStr.trim() || !altezzaStr.trim() || !Number.isFinite(larghezza) || !Number.isFinite(altezza)) {
       return "Misura non valida: inserisci solo numeri per larghezza e altezza.";
     }
-    if (larghezza <= 0 || altezza <= 0) {
+    // Vedi nota in scegli(): per i profili sfusi a metraggio l'altezza/sporgenza non si
+    // usa ed e' sempre 0 a listino, quindi qui si accetta 0 solo per quel campo.
+    const altezzaNonUsata = !!nodo.misure && nodo.misure.altezzaMin === 0 && nodo.misure.altezzaMax === 0;
+    if (larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
       return "Misura non valida: i valori devono essere maggiori di zero.";
     }
     const unit = unitaMisura(nodo.value);
@@ -2006,20 +2014,28 @@ export default function SelettoreProdotto({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-700">{etichetteDimensioni(scelto.value).altezza} ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">
+                    {etichetteDimensioni(scelto.value).altezza} ({unitaMisura(scelto.value)})
+                    {scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0 && (
+                      <span className="text-neutral-400"> — non utilizzata</span>
+                    )}
+                  </label>
                   <input
                     name="altezza"
                     type="number"
                     step="0.1"
                     min="0"
                     required
+                    readOnly={!!scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0}
                     placeholder="es. 250"
                     value={altezzaVal}
                     onChange={(e) => {
                       setAltezzaVal(e.target.value);
                       if (erroreMisura) setErroreMisura(null);
                     }}
-                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"}`}
+                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"} ${
+                      scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0 ? "bg-neutral-50 text-neutral-400" : ""
+                    }`}
                   />
                 </div>
                 <div className="flex flex-col gap-1">
