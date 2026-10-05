@@ -1054,16 +1054,12 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
       };
     }
   }
-  if (tipologia.startsWith("PERSIANEBLINDATE_")) {
-    const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
-    if (match) {
-      const base = PERSIANE_BLINDATE_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
-      return {
-        modello: { valore: match[1], label: base },
-        ante: { valore: match[2], label: PERSIANE_BLINDATE_ANTE_LABELS[match[2]] ?? match[2] },
-      };
-    }
-  }
+  // Persiane Blindate ha ora un proprio selettore a 4 assi (vedi
+  // assiSelezionePersianeBlindate piu' sotto: tipo -> classe -> misura doghe (se
+  // presente) -> ante) cosi' "monolamiera" e "doppia lamiera" non sono piu' due righe
+  // qualsiasi mescolate in un'unica tendina "modello" da 17 voci, ma una scelta
+  // esplicita e distinta dalle altre tipologie (stecca aperta, dogata verticale/
+  // orizzontale) — vedi richiesta utente.
   // Persiane Orientabili a Goccia: Persiana/Portapersiana hanno un vero numero di
   // ante (1-4) nel nome tipologia (es. PERSIANA2A, PORTAPERSIANA4A), scomposto con
   // la stessa regex di Persiane Blindate/Acciaio. Wasistas e Bilico non hanno varianti
@@ -1092,6 +1088,66 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
         ante: { valore: "UNICA", label: PERSIANEGOCCIA_ANTA_LABELS.UNICA },
       };
     }
+  }
+  return null;
+}
+
+// Persiane Blindate: decompone le tipologie PERSIANEBLINDATE_<tipo>_<classe>[_<misura>]_
+// <nAnte> in 4 assi -- 1) tipo (Stecca aperta / Dogata verticale / Dogata
+// orizzontale / Antone monolamiera / Antone doppia lamiera), 2) classe (3/4),
+// 3) misura doghe (solo per le dogate: 50-120/120-200/oltre200mm), 4) numero ante --
+// cosi' il selettore mostra tendine a cascata separate invece dell'unica tendina
+// "modello" piatta da 17 voci mescolate usata in precedenza, dove "monolamiera" e
+// "doppia lamiera" erano righe qualsiasi in mezzo alle dogate. La tendina misura
+// compare solo quando il tipo scelto la prevede (le dogate), esattamente come la
+// variante opzionale di assiSelezioneBlindati per i Portoncini Blindati — vedi
+// richiesta utente del 05/10/2026.
+export type AssiPersianeBlindate = {
+  tipo: AsseSelezione;
+  classe: AsseSelezione;
+  misura?: AsseSelezione;
+  ante: AsseSelezione;
+};
+
+const PERSIANE_BLINDATE_TIPO_LABELS: Record<string, string> = {
+  STECCA_APERTA: "Persiana a stecca aperta",
+  DOGATA_VERT: "Persiana dogata verticale",
+  DOGATA_ORIZZ: "Persiana dogata orizzontale",
+  ANTONE_MONOLAMIERA: "Antone cieco monolamiera 20/10",
+  ANTONE_DOPPIALAMIERA: "Antone cieco doppia lamiera 20/10",
+};
+
+const PERSIANE_BLINDATE_MISURA_LABELS: Record<string, string> = {
+  "50_120": "doghe 50-120mm",
+  "120_200": "doghe 120-200mm",
+  OLTRE200: "doghe oltre 200mm",
+};
+
+export function assiSelezionePersianeBlindate(tipologia: string): AssiPersianeBlindate | null {
+  if (!tipologia.startsWith("PERSIANEBLINDATE_")) return null;
+  const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
+  if (!match) return null;
+  const [, chiaveModello, anteKey] = match;
+  const ante: AsseSelezione = { valore: anteKey, label: PERSIANE_BLINDATE_ANTE_LABELS[anteKey] ?? anteKey };
+
+  const dogataMatch = chiaveModello.match(/^(DOGATA_VERT|DOGATA_ORIZZ)_(CL3|CL4)_(50_120|120_200|OLTRE200)$/);
+  if (dogataMatch) {
+    const [, tipoKey, classeKey, misuraKey] = dogataMatch;
+    return {
+      tipo: { valore: tipoKey, label: PERSIANE_BLINDATE_TIPO_LABELS[tipoKey] ?? tipoKey },
+      classe: { valore: classeKey, label: classeKey === "CL3" ? "Classe 3" : "Classe 4" },
+      misura: { valore: misuraKey, label: PERSIANE_BLINDATE_MISURA_LABELS[misuraKey] ?? misuraKey },
+      ante,
+    };
+  }
+  const semplice = chiaveModello.match(/^(STECCA_APERTA|ANTONE_MONOLAMIERA|ANTONE_DOPPIALAMIERA)_(CL3|CL4)$/);
+  if (semplice) {
+    const [, tipoKey, classeKey] = semplice;
+    return {
+      tipo: { valore: tipoKey, label: PERSIANE_BLINDATE_TIPO_LABELS[tipoKey] ?? tipoKey },
+      classe: { valore: classeKey, label: classeKey === "CL3" ? "Classe 3" : "Classe 4" },
+      ante,
+    };
   }
   return null;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiPersianeBlindate, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -24,9 +24,15 @@ export type NodoTipologia = {
   // invece della lista piatta (18-54 voci per famiglia) quando presente su tutte le
   // tipologie di un sottogruppo.
   assi?: AssiZpc;
-  // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
-  // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
+  // Infissi in Acciaio: assi modello → numero ante, per mostrare 2 tendine a
+  // cascata invece della lista piatta (27 voci). Persiane Blindate usa invece
+  // assiPersianeBlindate qui sotto (4 tendine).
   assiModelloAnte?: AssiModelloAnte;
+  // Persiane Blindate: assi tipo (incl. antone monolamiera/doppia lamiera) → classe
+  // → misura doghe (se presente) → numero ante, per mostrare una cascata di tendine
+  // distinte invece dell'unica tendina "modello" piatta da 17 voci mescolate — vedi
+  // richiesta utente.
+  assiPersianeBlindate?: AssiPersianeBlindate;
   // Kopen: assi linea -> combinazione materiali, per mostrare 2 tendine a cascata
   // invece della lista piatta per sottogruppo.
   assiKopen?: AssiKopen;
@@ -282,6 +288,161 @@ function SelettoreCascataModelloAnte({
 // e' la decisione architettonica di partenza per il commerciale — la classe di
 // sicurezza si sceglie dopo, a parita' di apertura. Sostituisce i 2 sottogruppi
 // piatti BLINDATI_SINGOLA/BLINDATI_DUEANTE usati in precedenza.
+// Persiane Blindate: tendine a cascata tipo (incl. antone monolamiera/doppia
+// lamiera) -> classe -> misura doghe (solo se il tipo la prevede) -> numero ante,
+// al posto dell'unica tendina "modello" piatta da 17 voci che mescolava stecca
+// aperta, dogate verticali/orizzontali e i due antoni — rendendo "fuori standard"
+// cercare monolamiera/doppia lamiera in mezzo a tutto il resto. Stesso pattern di
+// SelettoreCascataBlindati, con una tendina in piu' per la misura doghe.
+function SelettoreCascataPersianeBlindate({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [tipo, setTipo] = useState("");
+  const [classe, setClasse] = useState("");
+  const [misura, setMisura] = useState("");
+  const [ante, setAnte] = useState("");
+
+  const opzioniTipo = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.tipo.valore, t.assiPersianeBlindate.tipo.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerTipo = useMemo(
+    () => tipologie.filter((t) => t.assiPersianeBlindate?.tipo.valore === tipo),
+    [tipologie, tipo]
+  );
+  const opzioniClasse = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerTipo) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.classe.valore, t.assiPersianeBlindate.classe.label);
+    return [...mappa.entries()];
+  }, [filtratePerTipo]);
+
+  const filtratePerClasse = useMemo(
+    () => filtratePerTipo.filter((t) => t.assiPersianeBlindate?.classe.valore === classe),
+    [filtratePerTipo, classe]
+  );
+  const richiedeMisura = useMemo(
+    () => filtratePerClasse.some((t) => t.assiPersianeBlindate?.misura),
+    [filtratePerClasse]
+  );
+  const opzioniMisura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerClasse) if (t.assiPersianeBlindate?.misura) mappa.set(t.assiPersianeBlindate.misura.valore, t.assiPersianeBlindate.misura.label);
+    return [...mappa.entries()];
+  }, [filtratePerClasse]);
+
+  const filtratePerMisura = useMemo(
+    () => (richiedeMisura ? filtratePerClasse.filter((t) => t.assiPersianeBlindate?.misura?.valore === misura) : filtratePerClasse),
+    [filtratePerClasse, richiedeMisura, misura]
+  );
+  const opzioniAnte = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerMisura) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.ante.valore, t.assiPersianeBlindate.ante.label);
+    return [...mappa.entries()];
+  }, [filtratePerMisura]);
+
+  const trovato = useMemo(
+    () => filtratePerMisura.find((t) => t.assiPersianeBlindate?.ante.valore === ante) ?? null,
+    [filtratePerMisura, ante]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Tipo</label>
+        <select
+          value={tipo}
+          onChange={(e) => {
+            setTipo(e.target.value);
+            setClasse("");
+            setMisura("");
+            setAnte("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniTipo.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {tipo && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Classe</label>
+          <select
+            value={classe}
+            onChange={(e) => {
+              setClasse(e.target.value);
+              setMisura("");
+              setAnte("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniClasse.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {tipo && classe && richiedeMisura && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Misura doghe</label>
+          <select
+            value={misura}
+            onChange={(e) => {
+              setMisura(e.target.value);
+              setAnte("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniMisura.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {tipo && classe && (!richiedeMisura || misura) && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">{richiedeMisura ? "4" : "3"}. Numero ante</label>
+          <select
+            value={ante}
+            onChange={(e) => setAnte(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 function SelettoreCascataAccessoriTapparelle({
   tipologie,
   selezionato,
@@ -1575,6 +1736,13 @@ export default function SelettoreProdotto({
                                             />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiModelloAnte) ? (
                                             <SelettoreCascataModelloAnte
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPersianeBlindate) ? (
+                                            <SelettoreCascataPersianeBlindate
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}

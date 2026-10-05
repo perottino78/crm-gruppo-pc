@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -256,9 +256,16 @@ export default async function PreventivoPage({
         // Zanzariere P&C: assi ante/variante → rete → colore, per la selezione a 3 tendine
         // a cascata invece della lista piatta (18-54 voci per famiglia).
         assi: assiSelezioneZpc(tip) ?? assiSelezioneUragano(tip) ?? assiSelezioneVerticale(tip) ?? undefined,
-        // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per la
-        // selezione a 2 tendine a cascata invece della lista piatta (27-68 voci).
+        // Infissi in Acciaio: assi modello → numero ante, per la selezione a 2
+        // tendine a cascata invece della lista piatta (27 voci). Persiane Blindate
+        // ha ora un proprio assiPersianeBlindate piu' sotto (4 tendine), non piu'
+        // questo meccanismo generico a 2 tendine.
         assiModelloAnte: assiSelezioneModelloAnte(tip) ?? undefined,
+        // Persiane Blindate: assi tipo → classe → misura doghe (se presente) → numero
+        // ante, al posto dell'unica tendina "modello" piatta da 17 voci che mescolava
+        // stecca aperta/dogate/antone monolamiera/antone doppia lamiera — vedi
+        // richiesta utente.
+        assiPersianeBlindate: assiSelezionePersianeBlindate(tip) ?? undefined,
         // Kopen: assi linea -> combinazione materiali, per la selezione a 2 tendine
         // a cascata invece della lista piatta per sottogruppo (13 gruppi, 1-3 voci
         // ciascuno).
@@ -1056,13 +1063,18 @@ export default async function PreventivoPage({
                   );
                   const motorizzazionePersiane = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Motorizzazione"));
                   const profiliPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Profili complementari");
+                  // Accessorio separato dal generico "servizi e lavorazioni": cilindri,
+                  // maniglie ecc. sono scelte frequenti e vanno trovate subito, non in
+                  // mezzo a voci di lavorazione/servizio — vedi richiesta utente.
+                  const accessoriPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Accessorio");
                   const serviziPersiane = optionaliRigaFiltrati.filter(
                     (o) =>
                       o.categoria !== "Ferramenta e apertura" &&
                       o.categoria !== "Colore struttura" &&
                       o.categoria !== "Colore" &&
                       !o.categoria.startsWith("Motorizzazione") &&
-                      o.categoria !== "Profili complementari"
+                      o.categoria !== "Profili complementari" &&
+                      o.categoria !== "Accessorio"
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
@@ -1128,6 +1140,22 @@ export default async function PreventivoPage({
                           </select>
                           <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                           <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ profilo</button>
+                        </form>
+                      )}
+                      {accessoriPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Accessori —</option>
+                            {accessoriPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ accessorio</button>
                         </form>
                       )}
                       {serviziPersiane.length > 0 && (
