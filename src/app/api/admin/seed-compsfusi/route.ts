@@ -9,7 +9,7 @@ const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const BRAND = "P&C";
 
 type ProdottoRow = { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number; prezzoBase: number };
-type ModelloRow = { tipologia: string; descrizioneTecnica: string; famiglia: string; gruppo: string };
+type ModelloRow = { tipologia: string; descrizioneTecnica: string; famiglia: string; gruppo: string; immagineUrl?: string };
 
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
@@ -50,8 +50,8 @@ export async function POST(req: NextRequest) {
     for (const m of modelli) {
       await prisma.modelloProdotto.upsert({
         where: { brandId_tipologia: { brandId: brand.id, tipologia: m.tipologia } },
-        create: { brandId: brand.id, tipologia: m.tipologia, descrizioneTecnica: m.descrizioneTecnica, famiglia: m.famiglia, gruppo: m.gruppo },
-        update: { descrizioneTecnica: m.descrizioneTecnica, famiglia: m.famiglia, gruppo: m.gruppo },
+        create: { brandId: brand.id, tipologia: m.tipologia, descrizioneTecnica: m.descrizioneTecnica, famiglia: m.famiglia, gruppo: m.gruppo, immagineUrl: m.immagineUrl },
+        update: { descrizioneTecnica: m.descrizioneTecnica, famiglia: m.famiglia, gruppo: m.gruppo, immagineUrl: m.immagineUrl },
       });
     }
 
