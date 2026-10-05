@@ -846,25 +846,49 @@ export default async function PreventivoPage({
                     (o) => o.categoria.startsWith("Pannello") && !o.categoria.startsWith("Pannello Interno")
                   );
                   const pannelliInterni = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Pannello Interno"));
-                  const optionalBlindato = optionaliRigaFiltrati.filter(
-                    (o) => !o.categoria.startsWith("Pannello")
+                  // "Fuori Misura" isolato in una sezione propria, evidenziata, separata
+                  // dagli altri optional: il selettore misura permette di inserire misure
+                  // fuori dal range standard calcolando comunque un prezzo (fascia più
+                  // vicina), quindi è facile dimenticarsi di aggiungere a mano la
+                  // maggiorazione corretta. Metterla sotto "optional" generico la rendeva
+                  // poco visibile al commerciale (vedi richiesta utente).
+                  const fuoriMisuraBlindati = optionaliRigaFiltrati.filter((o) => o.categoria === "Fuori Misura");
+                  const altriOptionalBlindato = optionaliRigaFiltrati.filter(
+                    (o) => !o.categoria.startsWith("Pannello") && o.categoria !== "Fuori Misura"
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
-                      <p className="text-[11px] text-neutral-500">
-                        ⚠️ Nota interna (non stampata): il prezzo del portoncino è fisso per
-                        tutte le combinazioni di misura standard indicate in descrizione —
-                        cambiare larghezza/altezza nel form NON aggiorna il prezzo. Se la
-                        misura richiesta è fuori standard, aggiungere a mano la maggiorazione
-                        &quot;Fuori Misura&quot; corretta dalla tendina qui sotto (per ogni anta,
-                        nei modelli a due ante).
-                      </p>
-                      {optionalBlindato.length > 0 && (
+                      {fuoriMisuraBlindati.length > 0 && (
+                        <div className="rounded border border-orange-300 bg-orange-50 px-2 py-1.5 flex flex-col gap-1">
+                          <p className="text-[11px] font-semibold text-orange-800">
+                            ⚠️ Misura fuori standard? Aggiungi qui la maggiorazione &quot;Fuori Misura&quot;
+                            (per ogni anta, nei modelli a due ante) — il prezzo del portoncino sopra
+                            NON si aggiorna da solo.
+                          </p>
+                          <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                            <input type="hidden" name="rigaId" value={r.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <select name="optionalId" className="text-xs border border-orange-300 rounded px-1.5 py-1 max-w-[220px]">
+                              {fuoriMisuraBlindati.map((o) => (
+                                <option key={o.id} value={o.id}>
+                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                                </option>
+                              ))}
+                            </select>
+                            <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-orange-300 rounded px-1.5 py-1 w-14" />
+                            <button className="btn-3d text-[11px] px-2 py-1 bg-orange-500 text-white">+ fuori misura</button>
+                          </form>
+                        </div>
+                      )}
+                      {altriOptionalBlindato.length > 0 && (
                         <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
                           <input type="hidden" name="rigaId" value={r.id} />
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
                           <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
-                            {optionalBlindato.map((o) => (
+                            <option value="" disabled>
+                              Altri costi aggiuntivi (vetro, sopraluce, fianco luce, accessori) —
+                            </option>
+                            {altriOptionalBlindato.map((o) => (
                               <option key={o.id} value={o.id}>
                                 {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
                               </option>
