@@ -744,7 +744,11 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
 
   const larghezza = parseFloat(larghezzaStr.replace(",", "."));
   const altezza = parseFloat(altezzaStr.replace(",", "."));
-  if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || altezza <= 0) {
+  // Profili sfusi a metraggio (COMPSFUSI Profilo L/M/S, Piantone): listino
+  // monodimensionale, altezza/sporgenza sempre 0 a DB — vedi stessa nota in
+  // SelettoreProdotto.tsx (controllaMisure).
+  const altezzaNonUsata = tipologia.startsWith("COMPSFUSI_");
+  if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
     redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
   }
 
@@ -962,12 +966,13 @@ export async function modificaRigaPreventivo(formData: FormData) {
   if (riga.misuraLarghezza != null && riga.misuraAltezza != null && larghezzaStr && altezzaStr) {
     const larghezza = parseFloat(larghezzaStr.replace(",", "."));
     const altezza = parseFloat(altezzaStr.replace(",", "."));
-    if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || altezza <= 0) {
-      redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
-    }
-
     const brandId = riga.prodotto.brandId;
     const tipologia = riga.prodotto.tipologia;
+    // Profili sfusi a metraggio: vedi nota in aggiungiRigaPreventivoPerMisura.
+    const altezzaNonUsata = tipologia.startsWith("COMPSFUSI_");
+    if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
+      redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
+    }
     const modello = await prisma.modelloProdotto.findUnique({
       where: { brandId_tipologia: { brandId, tipologia } },
     });
