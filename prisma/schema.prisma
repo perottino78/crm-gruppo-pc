@@ -25,6 +25,7 @@ model Brand {
   optionali         Optional[]
   modelli           ModelloProdotto[]
   utentiAutorizzati Utente[]          @relation("PermessoListino")
+  commesse          Commessa[]
 }
 
 model Utente {
@@ -51,6 +52,8 @@ model Utente {
   clientiResponsabile Cliente[]      @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
   brandAutorizzati    Brand[]        @relation("PermessoListino")
+  commesseResponsabile Commessa[]    @relation("ResponsabileCommessa")
+  rilieviAssegnati    Rilievo[]
 }
 
 model Lead {
@@ -89,6 +92,7 @@ model Cliente {
   responsabileId String?
   appuntamenti   Appuntamento[]
   preventivi     Preventivo[]
+  commesse       Commessa[]
   attivita       Attivita[]
   createdAt      DateTime       @default(now())
 
@@ -289,6 +293,7 @@ model Preventivo {
   sezioni              SezionePreventivo[]
   promemoria           PromemoriaInviato[]
   progetto             Progetto?
+  commessa             Commessa?
   createdAt            DateTime            @default(now())
   scadenza             DateTime?
 }
@@ -449,4 +454,85 @@ model Obiettivo {
   createdAt     DateTime @default(now())
 
   @@unique([utenteId, periodo])
+}
+
+// ============ POST-VENDITA: COMMESSE (fase 1: acconto + rilievo misure) ============
+// Una Commessa nasce da un preventivo ACCETTATO. Il preventivo non viene modificato: la
+// commessa ne conserva un'istantanea del totale e funge da contenitore di tutto il flusso
+// successivo (acconto, rilievo, ordini fornitore, posa, assistenza).
+// stato: IN_ATTESA_ACCONTO | RILIEVO_DA_PROGRAMMARE | RILIEVO_PROGRAMMATO | RILIEVO_ESEGUITO
+//        | (fasi successive) ORDINI | POSA | CHIUSA | ANNULLATA
+// accontoTipo: ACCONTO (percentuale sul totale) | FINANZIAMENTO
+model Commessa {
+  id                      String    @id @default(cuid())
+  numero                  Int
+  anno                    Int
+  preventivo              Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId            String    @unique
+  cliente                 Cliente   @relation(fields: [clienteId], references: [id])
+  clienteId               String
+  brand                   Brand     @relation(fields: [brandId], references: [id])
+  brandId                 String
+  responsabile            Utente?   @relation("ResponsabileCommessa", fields: [responsabileId], references: [id])
+  responsabileId          String?
+  stato                   String    @default("IN_ATTESA_ACCONTO")
+  // Totale IVA inclusa del preventivo al momento della creazione commessa
+  totaleVendita           Float     @default(0)
+  totaleImponibile        Float     @default(0)
+  accontoTipo             String    @default("ACCONTO")
+  accontoPercentuale      Float     @default(50)
+  accontoImporto          Float     @default(0)
+  // Incasso acconto
+  accontoIncassato        Boolean   @default(false)
+  accontoIncassatoIl      DateTime?
+  accontoImportoIncassato Float?
+  accontoModalita         String?
+  accontoNote             String?
+  // Finanziamento
+  finanziamentoSocieta    String?
+  finanziamentoStato      String?   // IN_ISTRUTTORIA | APPROVATO | RIFIUTATO
+  finanziamentoNote       String?
+  note                    String?
+  rilievi                 Rilievo[]
+  eventi                  CommessaEvento[]
+  createdAt               DateTime  @default(now())
+
+  @@unique([anno, numero])
+}
+
+model CommessaEvento {
+  id          String   @id @default(cuid())
+  commessa    Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId  String
+  utenteNome  String?
+  testo       String
+  createdAt   DateTime @default(now())
+}
+
+// stato: PROGRAMMATO | ESEGUITO | ANNULLATO
+model Rilievo {
+  id           String   @id @default(cuid())
+  commessa     Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId   String
+  tecnico      Utente   @relation(fields: [tecnicoId], references: [id])
+  tecnicoId    String
+  dataOra      DateTime
+  stato        String   @default("PROGRAMMATO")
+  indirizzo    String?
+  note         String?
+  // Misure rilevate (testo libero strutturato dal tecnico) e osservazioni di cantiere
+  misure       String?
+  eseguitoIl   DateTime?
+  allegati     RilievoAllegato[]
+  createdAt    DateTime @default(now())
+}
+
+// Foto/documenti del rilievo, salvati come data URI (nessuno storage esterno configurato)
+model RilievoAllegato {
+  id         String   @id @default(cuid())
+  rilievo    Rilievo  @relation(fields: [rilievoId], references: [id], onDelete: Cascade)
+  rilievoId  String
+  nome       String?
+  dataUri    String
+  createdAt  DateTime @default(now())
 }
