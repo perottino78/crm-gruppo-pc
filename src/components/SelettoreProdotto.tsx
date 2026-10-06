@@ -1421,6 +1421,7 @@ function SelettoreCascataTapparelle({
   const [materiale, setMateriale] = useState("");
   const [modello, setModello] = useState("");
   const [colore, setColore] = useState("");
+  const et = tipologie.find((t) => t.assiTapparelle)?.assiTapparelle?.etichette;
 
   const opzioniMateriale = useMemo(() => {
     const mappa = new Map<string, string>();
@@ -1465,7 +1466,7 @@ function SelettoreCascataTapparelle({
   return (
     <div className="flex flex-col gap-2 px-2 py-2">
       <div className="flex flex-col gap-1">
-        <label className="text-[11px] text-neutral-600">1. Materiale</label>
+        <label className="text-[11px] text-neutral-600">1. {et?.[0] ?? "Materiale"}</label>
         <select
           value={materiale}
           onChange={(e) => {
@@ -1483,7 +1484,7 @@ function SelettoreCascataTapparelle({
       </div>
       {materiale && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">2. Modello</label>
+          <label className="text-[11px] text-neutral-600">2. {et?.[1] ?? "Modello"}</label>
           <select
             value={modello}
             onChange={(e) => {
@@ -1501,7 +1502,7 @@ function SelettoreCascataTapparelle({
       )}
       {materiale && modello && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">3. Colore</label>
+          <label className="text-[11px] text-neutral-600">3. {et?.[2] ?? "Colore"}</label>
           <select
             value={colore}
             onChange={(e) => setColore(e.target.value)}

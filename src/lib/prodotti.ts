@@ -1,3 +1,4 @@
+import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
@@ -38,7 +39,10 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_",
   // Vetrate a copertura fissa/mobile per pergole (Nesos/Nubes/Ermes): stessa convenzione
   // cm delle altre pergole (Lucilla/Nuvola/Panarea).
-  "NUBES_", "NESOS_", "ERMES_"];
+  "NUBES_", "NESOS_", "ERMES_",
+  // Pavimenti Outdoor: WPC Novowood (pavimenti/rivestimenti/soffitti/recinzioni) + segnaposto
+  // galleggianti e gres porcellanato. Misure a m²/ml digitate in cm.
+  "WPC_", "PAVGALLEGGIANTI_", "PAVGRES_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -49,6 +53,7 @@ export function formatDimensioni(tipologia: string, larghezza: number, altezza: 
 }
 
 export function listinoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
   if (tipologia.startsWith("LUCILLA_")) return "LUCILLA";
   if (tipologia.startsWith("NUVOLA_")) return "NUVOLA";
   if (tipologia.startsWith("PANAREA_")) return "PANAREA";
@@ -730,6 +735,9 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
+  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti";
+  if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato";
   if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
   // Persiane: organizzate per materiale — "ACCIAIO (Blindate)" per il catalogo
   // Persiane Blindate (classe 3/4), e sotto "ALLUMINIO" i vari tipi di lavorazione
@@ -1590,7 +1598,13 @@ export function assiSelezioneMinibox(tipologia: string): AssiMinibox | null {
 // colore riporta anche l'aumento di prezzo rispetto alla Tinta Unita della stessa
 // densita' (dati listino: L14 Media 96/101/102 €/mq, L14 Alta 116/121/121 €/mq),
 // cosi' l'aumento e' visibile senza dover aprire ogni singola tipologia.
-export type AssiTapparelle = { materiale: AsseSelezione; modello: AsseSelezione; colore: AsseSelezione };
+export type AssiTapparelle = {
+  materiale: AsseSelezione;
+  modello: AsseSelezione;
+  colore: AsseSelezione;
+  // etichette personalizzate delle 3 tendine (default: Materiale / Modello / Colore)
+  etichette?: [string, string, string];
+};
 
 const TAPPARELLE_MODELLO_LABELS: Record<string, string> = { L14: "L14", OBLIQUA: "Obliqua", LUPIN: "Lupin" };
 const TAPPARELLE_FINITURA_LABELS: Record<string, string> = {
@@ -1639,6 +1653,20 @@ export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | nul
     materiale: { valore: "ALLUMINIO", label: "Alluminio" },
     modello: { valore: modelloKey, label: TAPPARELLE_MODELLO_LABELS[modelloKey] ?? modelloKey },
     colore: { valore: tipologia, label: coloreLabel },
+  };
+}
+
+// WPC Novowood (Outdoor > Pavimenti): riusa il selettore a 3 tendine delle Tapparelle con
+// assi categoria (Pavimenti/Rivestimenti/Soffitti e frangisole/Recinzioni) -> prodotto -> variante
+// (colore/lunghezza/pilastro). La mappa e' generata dallo script di seed (wpcCatalogo.ts).
+export function assiSelezioneWpc(tipologia: string): AssiTapparelle | null {
+  const w = WPC_TIPOLOGIE[tipologia];
+  if (!w) return null;
+  return {
+    materiale: { valore: w.cat, label: w.catLabel },
+    modello: { valore: w.prod, label: w.prodLabel },
+    colore: { valore: tipologia, label: w.varLabel },
+    etichette: ["Categoria", "Prodotto", "Colore / variante"],
   };
 }
 
@@ -1918,6 +1946,8 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 const IN_ARRIVO: Record<string, string> = {
   PORTEPC_PLACEHOLDER: "Listino Porte P&C non ancora caricato — in arrivo",
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
+  PAVGALLEGGIANTI_PLACEHOLDER: "Listino Pavimenti galleggianti non ancora caricato — in arrivo",
+  PAVGRES_PLACEHOLDER: "Listino Gres porcellanato non ancora caricato — in arrivo",
   SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "Listino Serramenti PVC Optima non ancora caricato — in arrivo",
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
@@ -1947,6 +1977,9 @@ export function notaInArrivo(tipologia: string): string | null {
 }
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (WPC_TIPOLOGIE[tipologia]) return `${WPC_TIPOLOGIE[tipologia].prodLabel} — ${WPC_TIPOLOGIE[tipologia].varLabel}`;
+  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti (listino in arrivo)";
+  if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {

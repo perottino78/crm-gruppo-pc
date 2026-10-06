@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -296,7 +296,7 @@ export default async function PreventivoPage({
         assiMinibox: assiSelezioneMinibox(tip) ?? undefined,
         // Tapparelle in PVC e Alluminio: assi materiale → modello → colore, per la
         // selezione a 3 tendine a cascata (la tendina colore mostra anche l'aumento).
-        assiTapparelle: assiSelezioneTapparelle(tip) ?? undefined,
+        assiTapparelle: assiSelezioneTapparelle(tip) ?? assiSelezioneWpc(tip) ?? undefined,
         // Tapparelle Accessori: assi categoria -> voce -> finitura, per mostrare
         // tendine a cascata invece della lista piatta (24 voci) nel sottogruppo Accessori.
         assiAccessoriTapparelle: assiSelezioneAccessoriTapparelle(tip) ?? undefined,
@@ -1267,6 +1267,46 @@ export default async function PreventivoPage({
                 // ulteriormente suddiviso in 3 sotto-tendine per natura dell'accessorio:
                 // coperture (tettuccio/gronda/timpano), motorizzazione/sensori/comandi,
                 // struttura/posa/tessuto.
+                // Pavimenti (WPC Novowood): accessori per la posa e rifiniture in tendine tematiche,
+                // per trovarli piu' in fretta (sottostruttura, supporti, clip, profili di finitura,
+                // lavorazioni/trattamenti, anime/tappi/fissaggi frangisole, pilastri e illuminazione recinzioni).
+                if (modello?.gruppo === "PAVIMENTI") {
+                  const TENDINE_WPC: { titolo: string; categorie: string[]; bottone: string }[] = [
+                    { titolo: "Sottostruttura e supporti —", categorie: ["Sottostruttura", "Supporti e livellamento"], bottone: "+ sottostruttura" },
+                    { titolo: "Clip e fissaggi —", categorie: ["Clip e fissaggi"], bottone: "+ fissaggio" },
+                    { titolo: "Rifiniture e profili di finitura —", categorie: ["Rifiniture e profili"], bottone: "+ rifinitura" },
+                    { titolo: "Anime, tappi e sistemi frangisole —", categorie: ["Anime per frangisole", "Tappi e collante", "Fissaggi e sistemi"], bottone: "+ accessorio" },
+                    { titolo: "Pilastri e illuminazione recinzione —", categorie: ["Pilastri e illuminazione"], bottone: "+ pilastro/luce" },
+                    { titolo: "Lavorazioni e trattamenti —", categorie: ["Lavorazioni e trattamenti"], bottone: "+ lavorazione" },
+                  ];
+                  const usate = new Set(TENDINE_WPC.flatMap((t) => t.categorie));
+                  const altriWpc = optionaliRigaFiltrati.filter((o) => !usate.has(o.categoria));
+                  const tendine = [
+                    ...TENDINE_WPC.map((t) => ({ ...t, voci: optionaliRigaFiltrati.filter((o) => t.categorie.includes(o.categoria)) })),
+                    { titolo: "Altri optional —", categorie: [], bottone: "+ optional", voci: altriWpc },
+                  ].filter((t) => t.voci.length > 0);
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {tendine.map((t) => (
+                        <form key={t.titolo} action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[320px]">
+                            <option value="">{t.titolo}</option>
+                            {t.voci.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore.toLocaleString("it-IT", { minimumFractionDigits: 2 })}€${o.unita ? ` ${o.unita.replace("€", "")}` : ""}`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">{t.bottone}</button>
+                        </form>
+                      ))}
+                    </div>
+                  );
+                }
+
                 if (modello?.gruppo === "PERGOLE" || modello?.gruppo === "BIOCLIMATICA") {
                   const CATEGORIE_ILLUMINAZIONE = ["ILLUMINAZIONE", "TRASMETTITORE", "PRESA", "RISCALDATORE", "AUDIO"];
                   const CATEGORIE_COPERTURA = ["TETTUCCIO", "GRONDA", "TIMPANO"];

@@ -1,0 +1,1164 @@
+[
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Magatello alluminio 40x30 sp. 1,5 mm (L 3000) — 3,5 m/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 15.8,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Magatello Omega 80x25 alluminio (L 3000+) — 3,5 m/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 19.74,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Magatello alluminio per doppia orditura 40x30 — 2,5 m/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 15.8,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Tassello per calcestruzzo con vite per pavimentazione 6x60",
+  "tipoPrezzo": "FISSO",
+  "valore": 2.2,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Da valutare in base al fondo e ai carichi di progetto",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Novostrip - nastro butilico (0,5 m/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 5.66,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Novostrip - nastro butilico (0,5 m/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 5.66,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Profilo Omega Wall 90x25 alluminio (L 3000+) — 3 m/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 17.72,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Equivale a € 26,58/m² a listino (x3 m/m²), prima del ricarico x2",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Sistema a 2 livelli per cappotti (a partire da)",
+  "tipoPrezzo": "FISSO",
+  "valore": 156.0,
+  "unita": "€/m²",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Tassello per calcestruzzo con vite zincata per parete 10x80",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.6,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Da valutare in base al fondo e ai carichi di progetto",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Sottostruttura",
+  "nome": "Tassello per laterizi con vite zincata per parete 10x80",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.6,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Da valutare in base al fondo e ai carichi di progetto",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Spessore in gomma modulare 3 mm (12 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.74,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Livellamento fino a 20 mm, elementi sovrapponibili",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo A (10–25 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 8.7,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 100 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo B (25–40 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 10.5,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo C (40–70 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 10.5,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo D (60–100 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 10.5,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo E (90–160 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 12.2,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo F (150–270 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 13.8,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Supporti e livellamento",
+  "nome": "Supporto regolabile tipo G (195–305 mm) — 6 pz/m²",
+  "tipoPrezzo": "FISSO",
+  "valore": 20.8,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "conf. 20 pz",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip nylon + vite AFOR/AFIL (25 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.78,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 3/4 mm + vite (25 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 5 mm + vite (25 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 7/8 mm \"V\" + vite (25 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inizio-fine + vite (conf. 5 pz)",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.4,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inizio-fine + vite (conf. 5 pz)",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.4,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip + vite CLIPSHP7 (Skin: 25 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.16,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 3/4 mm + vite (Skin Prestige 145: 20 pz/m², 197: 15 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 5 mm + vite (Skin Prestige 145: 20, 197: 15, Pro: 30, Max: 12 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Clip inox 7/8 mm \"V\" + vite (Skin Prestige 145: 20, 197: 15, Pro: 30 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.64,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Clip e fissaggi",
+  "nome": "Fissaggi per Skin Air (15 pz/m²)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0.88,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare ad \"L\" 50x50 (L 3000) — colori Standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 16.76,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare ad \"L\" 50x50 (L 3000) — colori Standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 16.76,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare ad \"L\" 50x50 (L 3000) — colori Premium",
+  "tipoPrezzo": "FISSO",
+  "valore": 19.76,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare ad \"L\" 50x50 (L 3000) — colori Premium",
+  "tipoPrezzo": "FISSO",
+  "valore": 19.76,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Battiscopa 145x10 (L 2000) — colori Standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 34.6,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Battiscopa 145x10 (L 2000) — colori Premium",
+  "tipoPrezzo": "FISSO",
+  "valore": 41.8,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Copriguiga in PVC nero",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.68,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Profilo laterale alluminio 64x30 (L 2400, antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 59.52,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Confezioni da 10 pezzi",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Profilo laterale alluminio 64x60 (L 2400, antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 69.12,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Confezioni da 10 pezzi",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Giunto lineare per profilo laterale h30 (antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 17.28,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Giunto lineare per profilo laterale h60 (antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 18.48,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolo 90° per profilo laterale h30 (antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 33.12,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolo 90° per profilo laterale h60 (antracite)",
+  "tipoPrezzo": "FISSO",
+  "valore": 34.32,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Tappi di chiusura per Prestige 145",
+  "tipoPrezzo": "FISSO",
+  "valore": 6.16,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Tappi di chiusura per Prestige 145",
+  "tipoPrezzo": "FISSO",
+  "valore": 6.16,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"START\" per Skin Air (L 2900) — colori Standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 36.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"START\" per Skin Air (L 2900) — colori Premium",
+  "tipoPrezzo": "FISSO",
+  "valore": 44.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"EDGE\" per Skin Air (L 2900) — colori Standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 36.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"EDGE\" per Skin Air (L 2900) — colori Premium",
+  "tipoPrezzo": "FISSO",
+  "valore": 44.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare DUO 60x40 (L 2200)",
+  "tipoPrezzo": "FISSO",
+  "valore": 19.3,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"START\" per Skin Air DUO (L 2900)",
+  "tipoPrezzo": "FISSO",
+  "valore": 38.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Rifiniture e profili",
+  "nome": "Angolare \"EDGE\" per Skin Air DUO (L 2900)",
+  "tipoPrezzo": "FISSO",
+  "valore": 38.0,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Finitura Premium (spazzolata) sulle doghe",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "€/m²",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Solo Elite 145 e Prestige 145 (Skin Prestige 145 / Skin Air per rivestimenti); lato liscio. Indicare il lato da spazzolare. Min. 250 m² su colori diversi da Wood e Copper Brown",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Finitura Premium (spazzolata) sulle doghe",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "€/m²",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Solo Elite 145 e Prestige 145 (Skin Prestige 145 / Skin Air per rivestimenti); lato liscio. Indicare il lato da spazzolare. Min. 250 m² su colori diversi da Wood e Copper Brown",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Finitura Natural sulle doghe",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "€/m²",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": "Solo Elite 145 e Prestige 145 (Skin Prestige 145 / Skin Air per rivestimenti); lato liscio. Min. 250 m² su colori diversi da Wood e Copper Brown",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Finitura Natural sulle doghe",
+  "tipoPrezzo": "FISSO",
+  "valore": 22.0,
+  "unita": "€/m²",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Solo Elite 145 e Prestige 145 (Skin Prestige 145 / Skin Air per rivestimenti); lato liscio. Min. 250 m² su colori diversi da Wood e Copper Brown",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Formulazione Fire Retardant (classe B-s1,d0 a parete)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 35,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": "Min. 3000 kg, solo colori Wood / Copper Brown / Dark Grey",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Formulazione Fire Retardant (classe B-s1,d0 a parete)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 35,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": "Min. 3000 kg, solo colori Wood / Copper Brown / Dark Grey",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Scudo WPC 5 l (10 m²/l)",
+  "tipoPrezzo": "FISSO",
+  "valore": 519.8,
+  "unita": "€/conf.",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Scudo WPC 5 l (10 m²/l)",
+  "tipoPrezzo": "FISSO",
+  "valore": 519.8,
+  "unita": "€/conf.",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Pulitore WPC 1 l (10 m²/l)",
+  "tipoPrezzo": "FISSO",
+  "valore": 59.54,
+  "unita": "€/conf.",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Pulitore WPC 1 l (10 m²/l)",
+  "tipoPrezzo": "FISSO",
+  "valore": 59.54,
+  "unita": "€/conf.",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Spray WPC 200 ml",
+  "tipoPrezzo": "FISSO",
+  "valore": 70.98,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_PAV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Lavorazioni e trattamenti",
+  "nome": "Spray WPC 200 ml",
+  "tipoPrezzo": "FISSO",
+  "valore": 70.98,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_RIV",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima speciale 25x20 con occhielli (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 16.92,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima 45x20 per profilo 60x40 (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 21.06,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima 60x20 per profilo 75x40 (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 24.96,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima 60x20 con occhielli per profilo 75x40 (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 27.94,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima 60x40 per profilo 120x60 (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 33.58,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Anime per frangisole",
+  "nome": "Anima 80x40 per profilo 200x60 (L 3000/4000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 38.84,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 30/60/75/90",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.88,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 120",
+  "tipoPrezzo": "FISSO",
+  "valore": 5.46,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 150",
+  "tipoPrezzo": "FISSO",
+  "valore": 6.06,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura tipo A+B per Infinity T 100 (sempre in coppia)",
+  "tipoPrezzo": "FISSO",
+  "valore": 6.06,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 162",
+  "tipoPrezzo": "FISSO",
+  "valore": 6.06,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 200",
+  "tipoPrezzo": "FISSO",
+  "valore": 7.2,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi per fissaggio frontale UNIVERSE (CAPMIN)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1.38,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Tappi di chiusura per Infinity 60 DUO",
+  "tipoPrezzo": "FISSO",
+  "valore": 3.88,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Tappi e collante",
+  "nome": "Collante per tappi 310 ml + pistola",
+  "tipoPrezzo": "FISSO",
+  "valore": 62.22,
+  "unita": "€/conf.",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Fissaggi e sistemi",
+  "nome": "Novofix — fissaggio a scomparsa (1 pz per incrocio)",
+  "tipoPrezzo": "FISSO",
+  "valore": 9.4,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": "Confezione da 100 pz: € 470 a listino (prima del ricarico x2)",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Fissaggi e sistemi",
+  "nome": "Lampada LED per Novo-Up (1415 mm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1380.0,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": "Per superfici minime di 50 m² (Novo-Up 60/75/90) o 100 m² (Novo-Up 162). Altre lunghezze su richiesta",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Fissaggi e sistemi",
+  "nome": "Magatello alluminio 40x30 sp. 1,5 mm (L 3000)",
+  "tipoPrezzo": "FISSO",
+  "valore": 15.8,
+  "unita": "€/m",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_SOF",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Pilastri e illuminazione",
+  "nome": "Kit 1 pilastro finale (pilastro con tappo + 3 carter 1950 mm)",
+  "tipoPrezzo": "FISSO",
+  "valore": 200.0,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_REC",
+  "note": "Con piedistallo oppure ad immersione (come il modulo scelto)",
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ },
+ {
+  "categoria": "Pilastri e illuminazione",
+  "nome": "Kit lampada LED (lampada, profili UP/LOW, tappo con cella fotovoltaica h28)",
+  "tipoPrezzo": "FISSO",
+  "valore": 380.0,
+  "unita": "€/pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "WPC_REC",
+  "note": null,
+  "gruppiApplicabili": [
+   "PAVIMENTI"
+  ]
+ }
+]
