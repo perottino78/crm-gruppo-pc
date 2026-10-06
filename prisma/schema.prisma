@@ -495,6 +495,9 @@ model Commessa {
   note                    String?
   rilievi                 Rilievo[]
   eventi                  CommessaEvento[]
+  fasi                    FaseCommessa[]
+  righeOrdine             RigaOrdine[]
+  costiManuali            CostoManuale[]
   createdAt               DateTime  @default(now())
 
   @@unique([anno, numero])
@@ -583,4 +586,64 @@ model Soggetto {
   clienteOrigineId      String?
   note                  String?
   createdAt             DateTime  @default(now())
+}
+
+// ============ FASI, VIDIMAZIONE ORDINI E COSTI A SCALARE ============
+// Ogni fase viene chiusa da chi la esegue, indicando ore e costo orario (o forfait):
+// il costo entra automaticamente nella scheda costi della commessa.
+// stato: DA_FARE | IN_CORSO | CHIUSA
+// tipo: RILIEVO | ORDINI | ARRIVO_MERCE | POSA | FINE_LAVORI | ALTRO
+model FaseCommessa {
+  id                  String    @id @default(cuid())
+  commessa            Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId          String
+  ordine              Int       @default(0)
+  tipo                String    @default("ALTRO")
+  nome                String
+  stato               String    @default("DA_FARE")
+  assegnatoUtenteId   String?
+  assegnatoSoggettoId String?
+  assegnatoNome       String?
+  ore                 Float?
+  costoOrario         Float?
+  forfait             Float?
+  costoTotale         Float     @default(0)
+  note                String?
+  chiusaIl            DateTime?
+  chiusaDaNome        String?
+  createdAt           DateTime  @default(now())
+}
+
+// Righe del preventivo da "vidimare": la spunta attesta che l'ordine vero e proprio è stato
+// eseguito (tramite i moduli del singolo prodotto, fuori da questo elenco).
+model RigaOrdine {
+  id              String    @id @default(cuid())
+  commessa        Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId      String
+  rigaPreventivoId String?
+  descrizione     String
+  quantita        Int       @default(1)
+  fornitoreId     String?
+  fornitoreNome   String?
+  ordinato        Boolean   @default(false)
+  ordinatoIl      DateTime?
+  ordinatoDaNome  String?
+  arrivato        Boolean   @default(false)
+  arrivatoIl      DateTime?
+  // Costo reale, inserito man mano che la merce arriva / arriva la fattura
+  costoEffettivo  Float?
+  note            String?
+  createdAt       DateTime  @default(now())
+}
+
+// Altri costi diretti inseriti a mano (trasporti, noleggi, extra, ecc.)
+model CostoManuale {
+  id          String   @id @default(cuid())
+  commessa    Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId  String
+  categoria   String   @default("ALTRO")
+  descrizione String
+  importo     Float
+  data        DateTime @default(now())
+  autoreNome  String?
 }

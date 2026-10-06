@@ -69,6 +69,7 @@ export async function creaCommessaDaPreventivo(formData: FormData) {
       accontoImporto: Math.round(totale * 50) / 100,
     },
   });
+  await creaFasiStandard(c.id);
   await log(c.id, `Commessa creata dal preventivo accettato (totale ${totale.toFixed(2)} € IVA incl.).`);
   redirect(`/commesse/${c.id}`);
 }
@@ -335,4 +336,183 @@ export async function eliminaSoggetto(formData: FormData) {
   await prisma.soggetto.delete({ where: { id } });
   revalidatePath("/impostazioni/anagrafica");
   redirect("/impostazioni/anagrafica");
+}
+
+// ============ FASI ============
+const FASI_STANDARD: { tipo: string; nome: string }[] = [
+  { tipo: "RILIEVO", nome: "Rilievo misure" },
+  { tipo: "ORDINI", nome: "Ordini ai fornitori" },
+  { tipo: "ARRIVO_MERCE", nome: "Arrivo e controllo merce" },
+  { tipo: "POSA", nome: "Posa in opera" },
+  { tipo: "FINE_LAVORI", nome: "Fine lavori e collaudo" },
+];
+
+async function creaFasiStandard(commessaId: string) {
+  const esistenti = await prisma.faseCommessa.count({ where: { commessaId } });
+  if (esistenti > 0) return;
+  await prisma.faseCommessa.createMany({
+    data: FASI_STANDARD.map((f, i) => ({ commessaId, ordine: i + 1, tipo: f.tipo, nome: f.nome })),
+  });
+}
+
+export async function generaFasiStandard(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  await creaFasiStandard(id);
+  revalidatePath(`/commesse/${id}`);
+}
+
+export async function aggiungiFase(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  const nome = str(formData, "nome");
+  if (!commessaId || !nome) return;
+  const ult = await prisma.faseCommessa.findFirst({ where: { commessaId }, orderBy: { ordine: "desc" } });
+  await prisma.faseCommessa.create({ data: { commessaId, nome, tipo: "ALTRO", ordine: (ult?.ordine ?? 0) + 1 } });
+  revalidatePath(`/commesse/${commessaId}`);
+}
+
+export async function assegnaFase(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const faseId = str(formData, "faseId");
+  if (!faseId) return;
+  const sel = str(formData, "assegnatario") ?? ""; // "U:<id>" | "S:<id>" | ""
+  let data: { assegnatoUtenteId: string | null; assegnatoSoggettoId: string | null; assegnatoNome: string | null } = {
+    assegnatoUtenteId: null, assegnatoSoggettoId: null, assegnatoNome: null,
+  };
+  if (sel.startsWith("U:")) {
+    const ut = await prisma.utente.findUnique({ where: { id: sel.slice(2) } });
+    if (ut) data = { assegnatoUtenteId: ut.id, assegnatoSoggettoId: null, assegnatoNome: ut.nome };
+  } else if (sel.startsWith("S:")) {
+    const so = await prisma.soggetto.findUnique({ where: { id: sel.slice(2) } });
+    if (so) data = { assegnatoUtenteId: null, assegnatoSoggettoId: so.id, assegnatoNome: so.ragioneSociale };
+  }
+  const f = await prisma.faseCommessa.update({ where: { id: faseId }, data: { ...data, stato: "IN_CORSO" } });
+  await log(f.commessaId, `Fase "${f.nome}" assegnata a ${data.assegnatoNome ?? "nessuno"}.`);
+  revalidatePath(`/commesse/${f.commessaId}`);
+}
+
+// Chiusura fase: chi esegue inserisce ore e costo orario (oppure un forfait); il costo entra nella commessa
+export async function chiudiFase(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const faseId = str(formData, "faseId");
+  if (!faseId) return;
+  const f = await prisma.faseCommessa.findUnique({ where: { id: faseId } });
+  if (!f || f.stato === "CHIUSA") return;
+  const autorizzato = f.assegnatoUtenteId === u.id || ["AMMINISTRATORE", "AMMINISTRATIVO"].includes(u.ruolo) || !f.assegnatoUtenteId;
+  if (!autorizzato) return;
+  const ore = flt(formData, "ore");
+  const costoOrario = flt(formData, "costoOrario");
+  const forfait = flt(formData, "forfait");
+  const costoTotale = forfait ?? (ore !== null && costoOrario !== null ? Math.round(ore * costoOrario * 100) / 100 : 0);
+  await prisma.faseCommessa.update({
+    where: { id: faseId },
+    data: {
+      stato: "CHIUSA",
+      ore, costoOrario, forfait, costoTotale,
+      note: str(formData, "note") ?? f.note,
+      chiusaIl: new Date(),
+      chiusaDaNome: u.nome,
+    },
+  });
+  await log(f.commessaId, `Fase "${f.nome}" chiusa da ${u.nome}: ${costoTotale.toFixed(2)} €${forfait === null && ore !== null ? ` (${ore} h × ${costoOrario ?? 0} €/h)` : forfait !== null ? " (forfait)" : ""}.`);
+  revalidatePath(`/commesse/${f.commessaId}`);
+}
+
+export async function riapriFase(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const faseId = str(formData, "faseId");
+  if (!faseId) return;
+  const f = await prisma.faseCommessa.update({ where: { id: faseId }, data: { stato: "IN_CORSO", chiusaIl: null, chiusaDaNome: null, costoTotale: 0, ore: null, costoOrario: null, forfait: null } });
+  await log(f.commessaId, `Fase "${f.nome}" riaperta dal responsabile.`);
+  revalidatePath(`/commesse/${f.commessaId}`);
+}
+
+// ============ RIGHE ORDINE (vidimazione) ============
+export async function generaRigheOrdine(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  const c = await prisma.commessa.findUnique({
+    where: { id },
+    include: { righeOrdine: true, preventivo: { include: { righe: { include: { prodotto: true }, orderBy: [{ ordine: "asc" }, { id: "asc" }] } } } },
+  });
+  if (!c) return;
+  const giaPresenti = new Set(c.righeOrdine.map((r) => r.rigaPreventivoId).filter(Boolean));
+  const nuove = c.preventivo.righe
+    .filter((r) => !giaPresenti.has(r.id))
+    .map((r) => {
+      let desc = r.testoLibero ?? (r.prodotto ? r.prodotto.tipologia.replace(/_/g, " ") : "Riga");
+      if (r.prodotto && r.prodotto.colore && !/TARIFFA|Prezzo a/.test(r.prodotto.colore)) desc += ` — ${r.prodotto.colore}`;
+      if (r.misuraLarghezza && r.misuraAltezza) desc += ` (${r.misuraLarghezza}×${r.misuraAltezza})`;
+      if (r.optionalDescrizione) desc += ` + ${r.optionalDescrizione}`;
+      return { commessaId: id, rigaPreventivoId: r.id, descrizione: desc, quantita: r.quantita };
+    });
+  if (nuove.length) {
+    await prisma.rigaOrdine.createMany({ data: nuove });
+    await log(id, `Elenco ordini generato: ${nuove.length} righe da vidimare.`);
+  }
+  revalidatePath(`/commesse/${id}`);
+}
+
+export async function aggiornaRigaOrdine(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "rigaId");
+  if (!id) return;
+  const prima = await prisma.rigaOrdine.findUnique({ where: { id } });
+  if (!prima) return;
+  const ordinato = formData.get("ordinato") === "on";
+  const arrivato = formData.get("arrivato") === "on";
+  const fornitoreId = str(formData, "fornitoreId");
+  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId } }) : null;
+  const costo = flt(formData, "costoEffettivo");
+  await prisma.rigaOrdine.update({
+    where: { id },
+    data: {
+      ordinato,
+      ordinatoIl: ordinato ? (prima.ordinatoIl ?? new Date()) : null,
+      ordinatoDaNome: ordinato ? (prima.ordinatoDaNome ?? u.nome) : null,
+      arrivato,
+      arrivatoIl: arrivato ? (prima.arrivatoIl ?? new Date()) : null,
+      fornitoreId,
+      fornitoreNome: forn?.ragioneSociale ?? null,
+      costoEffettivo: costo,
+      note: str(formData, "note"),
+    },
+  });
+  if (ordinato && !prima.ordinato) await log(prima.commessaId, `Ordine vidimato: ${prima.descrizione}${forn ? " (" + forn.ragioneSociale + ")" : ""}.`);
+  if (arrivato && !prima.arrivato) await log(prima.commessaId, `Merce arrivata: ${prima.descrizione}.`);
+  revalidatePath(`/commesse/${prima.commessaId}`);
+}
+
+// ============ COSTI MANUALI ============
+export async function aggiungiCostoManuale(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  const descrizione = str(formData, "descrizione");
+  const importo = flt(formData, "importo");
+  if (!commessaId || !descrizione || importo === null) return;
+  await prisma.costoManuale.create({
+    data: { commessaId, descrizione, importo, categoria: str(formData, "categoria") ?? "ALTRO", autoreNome: u.nome },
+  });
+  await log(commessaId, `Costo aggiunto: ${descrizione} — ${importo.toFixed(2)} €.`);
+  revalidatePath(`/commesse/${commessaId}`);
+}
+
+export async function eliminaCostoManuale(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoGestireIncassi(u?.ruolo)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  const c = await prisma.costoManuale.delete({ where: { id } });
+  revalidatePath(`/commesse/${c.commessaId}`);
 }
