@@ -237,3 +237,102 @@ export async function aggiungiNotaCommessa(formData: FormData) {
   await log(id, testo);
   revalidatePath(`/commesse/${id}`);
 }
+
+// ============ ANAGRAFICA (Impostazioni) ============
+const RUOLI_SOGGETTO = ["FORNITORE", "POSATORE_ESTERNO", "TECNICO_INTERNO", "ALTRO"];
+
+function datiSoggetto(fd: FormData) {
+  const ruoli = RUOLI_SOGGETTO.filter((r) => fd.get(`ruolo_${r}`) === "on");
+  const giorni = flt(fd, "giorniPagamento");
+  const d = (k: string) => {
+    const v = str(fd, k);
+    if (!v) return null;
+    const x = new Date(v);
+    return isNaN(x.getTime()) ? null : x;
+  };
+  return {
+    ragioneSociale: str(fd, "ragioneSociale") ?? "Senza nome",
+    tipo: str(fd, "tipo") === "PERSONA" ? "PERSONA" : "AZIENDA",
+    ruoli,
+    attivo: fd.get("attivo") === "on",
+    partitaIva: str(fd, "partitaIva"),
+    codiceFiscale: str(fd, "codiceFiscale"),
+    codiceSdi: str(fd, "codiceSdi"),
+    pec: str(fd, "pec"),
+    indirizzo: str(fd, "indirizzo"),
+    cap: str(fd, "cap"),
+    comune: str(fd, "comune"),
+    provincia: str(fd, "provincia"),
+    telefono: str(fd, "telefono"),
+    email: str(fd, "email"),
+    emailOrdini: str(fd, "emailOrdini"),
+    referente: str(fd, "referente"),
+    banca: str(fd, "banca"),
+    iban: str(fd, "iban")?.replace(/\s+/g, "").toUpperCase() ?? null,
+    bic: str(fd, "bic"),
+    intestatario: str(fd, "intestatario"),
+    metodoPagamento: str(fd, "metodoPagamento"),
+    condizioniPagamento: str(fd, "condizioniPagamento"),
+    giorniPagamento: giorni === null ? null : Math.round(giorni),
+    scontoFornitore: flt(fd, "scontoFornitore"),
+    listiniForniti: str(fd, "listiniForniti"),
+    tariffaPosa: flt(fd, "tariffaPosa"),
+    tariffaTipo: str(fd, "tariffaTipo"),
+    costoOrario: flt(fd, "costoOrario"),
+    zonaOperativa: str(fd, "zonaOperativa"),
+    scadenzaDurc: d("scadenzaDurc"),
+    scadenzaAssicurazione: d("scadenzaAssicurazione"),
+    utenteId: str(fd, "utenteId"),
+    note: str(fd, "note"),
+  };
+}
+
+function puoGestireAnagrafica(ruolo?: string | null) {
+  return ruolo === "AMMINISTRATORE" || ruolo === "AMMINISTRATIVO";
+}
+
+export async function creaSoggetto(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoGestireAnagrafica(u?.ruolo)) return;
+  const dati = datiSoggetto(formData);
+  const clienteId = str(formData, "clienteOrigineId");
+  let extra: Record<string, string | null> = {};
+  if (clienteId) {
+    const c = await prisma.cliente.findUnique({ where: { id: clienteId } });
+    if (c) {
+      extra = {
+        clienteOrigineId: c.id,
+        indirizzo: dati.indirizzo ?? c.indirizzo,
+        cap: dati.cap ?? c.cap,
+        comune: dati.comune ?? c.comune,
+        provincia: dati.provincia ?? c.provincia,
+        telefono: dati.telefono ?? c.telefono,
+        email: dati.email ?? c.email,
+      };
+      if (dati.ragioneSociale === "Senza nome") dati.ragioneSociale = c.nome;
+    }
+  }
+  const s = await prisma.soggetto.create({ data: { ...dati, ...extra, attivo: true } });
+  revalidatePath("/impostazioni/anagrafica");
+  redirect(`/impostazioni/anagrafica/${s.id}`);
+}
+
+export async function aggiornaSoggetto(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoGestireAnagrafica(u?.ruolo)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.soggetto.update({ where: { id }, data: datiSoggetto(formData) });
+  revalidatePath("/impostazioni/anagrafica");
+  revalidatePath(`/impostazioni/anagrafica/${id}`);
+}
+
+export async function eliminaSoggetto(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.soggetto.delete({ where: { id } });
+  revalidatePath("/impostazioni/anagrafica");
+  redirect("/impostazioni/anagrafica");
+}

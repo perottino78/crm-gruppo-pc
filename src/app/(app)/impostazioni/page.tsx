@@ -44,6 +44,11 @@ export default async function ImpostazioniPage() {
         ))}
       </div>
 
+      <Link href="/impostazioni/anagrafica" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
+        <span className="text-base font-bold text-neutral-900">Anagrafica fornitori, posatori e tecnici →</span>
+        <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
+      </Link>
+
       <h2 className="text-base font-bold text-neutral-900 mb-3">Brand attivi</h2>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
         {brands.map((b) => {

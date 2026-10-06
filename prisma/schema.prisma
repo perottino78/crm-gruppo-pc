@@ -536,3 +536,51 @@ model RilievoAllegato {
   dataUri    String
   createdAt  DateTime @default(now())
 }
+
+// ============ ANAGRAFICA UNICA (Impostazioni): fornitori, posatori esterni, tecnici interni ============
+// Un solo soggetto può avere più ruoli: "trasformare" un account in fornitore = aggiungere il ruolo.
+// ruoli: FORNITORE | POSATORE_ESTERNO | TECNICO_INTERNO | ALTRO
+model Soggetto {
+  id                    String    @id @default(cuid())
+  ragioneSociale        String
+  tipo                  String    @default("AZIENDA") // AZIENDA | PERSONA
+  ruoli                 String[]
+  attivo                Boolean   @default(true)
+  partitaIva            String?
+  codiceFiscale         String?
+  codiceSdi             String?
+  pec                   String?
+  indirizzo             String?
+  cap                   String?
+  comune                String?
+  provincia             String?
+  telefono              String?
+  email                 String?
+  // Casella a cui inviare gli ordini (può differire dalla mail generale)
+  emailOrdini           String?
+  referente             String?
+  // Banca e pagamenti
+  banca                 String?
+  iban                  String?
+  bic                   String?
+  intestatario          String?
+  metodoPagamento       String?
+  condizioniPagamento   String?
+  giorniPagamento       Int?
+  // Fornitore
+  scontoFornitore       Float?
+  listiniForniti        String?
+  // Posatore esterno / tecnico interno
+  tariffaPosa           Float?
+  tariffaTipo           String?   // ORA | GIORNO | MQ | PRESTAZIONE
+  costoOrario           Float?
+  zonaOperativa         String?
+  scadenzaDurc          DateTime?
+  scadenzaAssicurazione DateTime?
+  // Eventuale collegamento a un utente del CRM (tecnico interno che accede all'app)
+  utenteId              String?
+  // Cliente da cui è stato creato (se importato)
+  clienteOrigineId      String?
+  note                  String?
+  createdAt             DateTime  @default(now())
+}
