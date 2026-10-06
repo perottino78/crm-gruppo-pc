@@ -21,6 +21,7 @@ type ModelloRow = {
   parametriCalcolo: Record<string, number>;
 };
 type OptionalRow = {
+  immagineUrl?: string | null;
   categoria: string;
   nome: string;
   tipoPrezzo: string;
@@ -131,6 +132,7 @@ export async function POST(req: NextRequest) {
             listino: o.listino,
             note: o.note,
             gruppiApplicabili: o.gruppiApplicabili,
+            immagineUrl: o.immagineUrl ?? null,
           },
         });
         optCreati++;
@@ -139,6 +141,7 @@ export async function POST(req: NextRequest) {
         esistente.tipoPrezzo !== o.tipoPrezzo ||
         esistente.note !== o.note ||
         esistente.unita !== (o.unita ?? null) ||
+        (esistente.immagineUrl ?? null) !== (o.immagineUrl ?? null) ||
         JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
       ) {
         await prisma.optional.update({
@@ -149,6 +152,7 @@ export async function POST(req: NextRequest) {
             note: o.note,
             unita: o.unita ?? null,
             gruppiApplicabili: o.gruppiApplicabili,
+            immagineUrl: o.immagineUrl ?? null,
           },
         });
         optAggiornati++;

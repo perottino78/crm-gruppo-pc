@@ -55,9 +55,10 @@ export default async function ModelloProdottoPage({
   const categorieUniche = new Map<string, { categoria: string; immagineUrl: string; count: number }>();
   for (const o of optionaliConImmagine) {
     if (!o.immagineUrl) continue;
-    const esistente = categorieUniche.get(o.categoria);
+    const chiave = modello?.gruppo === "PAVIMENTI" ? o.immagineUrl : o.categoria;
+    const esistente = categorieUniche.get(chiave);
     if (esistente) esistente.count++;
-    else categorieUniche.set(o.categoria, { categoria: o.categoria, immagineUrl: o.immagineUrl, count: 1 });
+    else categorieUniche.set(chiave, { categoria: modello?.gruppo === "PAVIMENTI" ? o.nome : o.categoria, immagineUrl: o.immagineUrl, count: 1 });
   }
   const galleriaPannelli = [...categorieUniche.values()];
 
