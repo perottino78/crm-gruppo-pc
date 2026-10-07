@@ -1,0 +1,303 @@
+[
+ {
+  "tipologia": "SERAFRANG_BOLD_MAR",
+  "descrizioneTecnica": "Frangisole Seraplastic Bold a catena, versione con Kit Mare. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/bold.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_BOLD_STD",
+  "descrizioneTecnica": "Frangisole Seraplastic Bold a catena, versione Standard. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/bold.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_BOLD_TOP",
+  "descrizioneTecnica": "Frangisole Seraplastic Bold a catena, versione Top. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/bold.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_CAV_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide a cavo, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_CAV_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide a cavo, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_GUI_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide estruse, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_GUI_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide estruse, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_KAP_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide estruse autoportanti, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C65_KAP_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 65-C a filo, lama 65 mm, guide estruse autoportanti, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c65.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_CAV_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide a cavo, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_CAV_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide a cavo, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_GUI_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide estruse, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_GUI_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide estruse, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_KAP_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide estruse autoportanti, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_C80_KAP_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 80-C a filo, lama 80 mm, guide estruse autoportanti, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/c80.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_ESSE_MAR",
+  "descrizioneTecnica": "Frangisole Seraplastic Esse a catena, versione con Kit Mare. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/esse.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_ESSE_STD",
+  "descrizioneTecnica": "Frangisole Seraplastic Esse a catena, versione Standard. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/esse.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_ESSE_TOP",
+  "descrizioneTecnica": "Frangisole Seraplastic Esse a catena, versione Top. Lame in alluminio (1,30 mm estruso), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/esse.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_LIGHT_MAR",
+  "descrizioneTecnica": "Frangisole Seraplastic Light a catena, versione con Kit Mare. Lame in alluminio (0,75 mm), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/light.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_LIGHT_STD",
+  "descrizioneTecnica": "Frangisole Seraplastic Light a catena, versione Standard. Lame in alluminio (0,75 mm), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/light.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_LIGHT_TOP",
+  "descrizioneTecnica": "Frangisole Seraplastic Light a catena, versione Top. Lame in alluminio (0,75 mm), azionamento a catena (nessun motore). Prezzo da listino 2026 per fascia altezza (HT) x larghezza (LG) in mm.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/light.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_CAV_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide a cavo, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_CAV_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide a cavo, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_GUI_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide estruse, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_GUI_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide estruse, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_KAP_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide estruse autoportanti, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_S90_KAP_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-S a filo, lama 90 mm, guide estruse autoportanti, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/s90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_VEL_A",
+  "descrizioneTecnica": "Veletta frontale Moda A per frangisole Seraplastic. Listino valido per colorazioni Standard; fuori standard (Touch/Plus) a preventivo. Minimo fatturabile 100 cm mensole comprese. Tappi, giunti e asole come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_VEL_B",
+  "descrizioneTecnica": "Veletta frontale Moda B per frangisole Seraplastic. Listino valido per colorazioni Standard; fuori standard (Touch/Plus) a preventivo. Minimo fatturabile 100 cm mensole comprese. Tappi, giunti e asole come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_VEL_C",
+  "descrizioneTecnica": "Veletta frontale Moda C per frangisole Seraplastic. Listino valido per colorazioni Standard; fuori standard (Touch/Plus) a preventivo. Minimo fatturabile 100 cm mensole comprese. Tappi, giunti e asole come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_VEL_D",
+  "descrizioneTecnica": "Veletta frontale Moda D per frangisole Seraplastic. Listino valido per colorazioni Standard; fuori standard (Touch/Plus) a preventivo. Minimo fatturabile 100 cm mensole comprese. Tappi, giunti e asole come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_CAV_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide a cavo, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_CAV_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide a cavo, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_GUI_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide estruse, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_GUI_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide estruse, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_KAP_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide estruse autoportanti, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z70_KAP_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 70-Z a filo, lama 70 mm, guide estruse autoportanti, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z70.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_CAV_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide a cavo, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_CAV_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide a cavo, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_GUI_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide estruse, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_GUI_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide estruse, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_KAP_MAN",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide estruse autoportanti, manuale ad argano. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ },
+ {
+  "tipologia": "SERAFRANG_Z90_KAP_MOT",
+  "descrizioneTecnica": "Frangisole Seraplastic 90-Z a filo, lama 90 mm, guide estruse autoportanti, motorizzata. Prezzo da listino 2026 per fascia altezza (HT) x larghezza esterna guide (LG) in mm. Guide, distanziali, supporti, motori e colori come optional.",
+  "famiglia": "OUTDOOR",
+  "gruppo": "FRANGISOLE",
+  "immagineUrl": "/immagini/frangisole/z90.jpg"
+ }
+]

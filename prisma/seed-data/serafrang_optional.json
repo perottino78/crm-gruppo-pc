@@ -1,0 +1,737 @@
+[
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL1013 Bianco perla",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL6005 Verde muschio",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z70,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL6009 Verde abete",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL6021 Verde pallido",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:C80:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL7016 Grigio antracite",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL7022 Grigio ombra",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL7035 Grigio luce",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL8017 Marrone cioccolata",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL8019 Marrone grigiastro",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL9005 Nero intenso",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL9006 Alluminio brillante",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL9007 Alluminio giallastro",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL9010 Bianco puro",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore standard",
+  "nome": "RAL9016 Bianco traffico",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a corpo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C65,BOLD,ESSE,LIGHT:*:*",
+  "note": "Colore standard senza supplemento",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore Touch",
+  "nome": "Touch Beige grigiastro (RAL1910)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,BOLD,ESSE:*:*",
+  "note": "Supplemento +5% sul prezzo di listino. Lamella goffrata con maggiore resistenza alla corrosione (doppio strato poliestere). Compatibile 90-Z, 70-Z, 90-S, Bold, Esse.",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore Touch",
+  "nome": "Touch Marrone",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,BOLD,ESSE:*:*",
+  "note": "Supplemento +5% sul prezzo di listino. Lamella goffrata con maggiore resistenza alla corrosione (doppio strato poliestere). Compatibile 90-Z, 70-Z, 90-S, Bold, Esse.",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore Touch",
+  "nome": "Touch Nero",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,BOLD,ESSE:*:*",
+  "note": "Supplemento +5% sul prezzo di listino. Lamella goffrata con maggiore resistenza alla corrosione (doppio strato poliestere). Compatibile 90-Z, 70-Z, 90-S, Bold, Esse.",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore Plus",
+  "nome": "Colore Plus (RAL 1015/1001/3005/5010/7004/7021/7036/7038/8003/9001/9003)",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a preventivo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,BOLD,ESSE,LIGHT:*:*",
+  "note": "Supplemento a preventivo da listino colori Plus (guide+terminali e pacco lame, in base ai mq). Produzione +3 settimane sui tempi standard. Inserire il prezzo manuale.",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Colore Plus",
+  "nome": "Trattamento Seaside",
+  "tipoPrezzo": "FISSO",
+  "valore": 0,
+  "unita": "a preventivo",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:Z90,Z70,S90,C80,C65:*:*",
+  "note": "Disponibile con supplemento a preventivo. Compatibile 90-Z, 90-S, 70-Z, 80-C, 65-C.",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida singola per distanziale (GUIS2120)",
+  "tipoPrezzo": "FISSO",
+  "valore": 2.5,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_singola_distanziale.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida singola 21x20 (GUISINDIS)",
+  "tipoPrezzo": "FISSO",
+  "valore": 9,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_singola_21x20.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida telescopica ad incasso (GUIINCTEC)",
+  "tipoPrezzo": "FISSO",
+  "valore": 24,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_telescopica_incasso.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida incasso (GUIINC)",
+  "tipoPrezzo": "FISSO",
+  "valore": 5,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_incasso.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida ad incasso con canalina (GUIINCCAN)",
+  "tipoPrezzo": "FISSO",
+  "valore": 14,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_incasso_canalina.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Guide alternative",
+  "nome": "Guida doppia (GUIDOP)",
+  "tipoPrezzo": "FISSO",
+  "valore": 10,
+  "unita": "€/ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": "Supplemento al metro lineare di guida. Indicare i metri nel campo quantità.",
+  "immagineUrl": "/immagini/frangisole/a_guida_doppia.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Distanziali",
+  "nome": "Distanziali regolabili x da 50 a 70 mm (DIST70)",
+  "tipoPrezzo": "FISSO",
+  "valore": 11,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_dist70.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Distanziali",
+  "nome": "Distanziali regolabili x da 71 a 105 mm (DIST105)",
+  "tipoPrezzo": "FISSO",
+  "valore": 12,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_dist105.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Distanziali",
+  "nome": "Distanziali regolabili x da 106 a 170 mm (DIST170)",
+  "tipoPrezzo": "FISSO",
+  "valore": 16,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_dist170.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Distanziali",
+  "nome": "Distanziali regolabili x da 171 a 295 mm (DIST295)",
+  "tipoPrezzo": "FISSO",
+  "valore": 19,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:GUI:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_dist295.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Supporti a sbalzo",
+  "nome": "Supporti a sbalzo - piccoli (SUPCAVPIC)",
+  "tipoPrezzo": "FISSO",
+  "valore": 18,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:CAV:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_sbalzo_piccoli.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Supporti a sbalzo",
+  "nome": "Supporti a sbalzo - grandi (SUPCAVGRA)",
+  "tipoPrezzo": "FISSO",
+  "valore": 20,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:CAV:*",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_sbalzo_grandi.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Motorizzazione",
+  "nome": "Motore SOMFY J4 Io Protect (MOTSOM)",
+  "tipoPrezzo": "FISSO",
+  "valore": 276,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_mot_somfy_j4.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Telecomando 1 canale SITUO 1 IO (TELSIT1)",
+  "tipoPrezzo": "FISSO",
+  "valore": 62,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_tel_situo1.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Telecomando 5 canali SITUO 5 IO (TELSIT5)",
+  "tipoPrezzo": "FISSO",
+  "valore": 97,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_tel_situo5.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Ricevente EVB SLIM IO (RICEVBSOM)",
+  "tipoPrezzo": "FISSO",
+  "valore": 222,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_ric_evb.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Telecomando 1 canale DOMI P1 SV (TELDOM1)",
+  "tipoPrezzo": "FISSO",
+  "valore": 80,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_tel_domi1.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Telecomando 6 canali DOMI P6 SV (TELDOM6)",
+  "tipoPrezzo": "FISSO",
+  "valore": 93,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_tel_domi6.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Comandi e radiocomandi",
+  "nome": "Ricevente TT1VR (RICTT1ELE)",
+  "tipoPrezzo": "FISSO",
+  "valore": 189,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:*:*:MOT",
+  "note": null,
+  "immagineUrl": "/immagini/frangisole/a_ric_tt1.jpg",
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 180-210 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 14,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 220-230 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 16,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 240-260 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 18,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 270-300 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 20,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 310-350 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 22,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Supporti velette 360-550 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 32,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Supporti di montaggio per veletta (in base all'altezza)",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Tappo veletta fino a 400 cm",
+  "tipoPrezzo": "FISSO",
+  "valore": 2,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Minimo fatturabile 100 cm mensole comprese",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Giunto veletta fino a 400 cm",
+  "tipoPrezzo": "FISSO",
+  "valore": 4,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Minimo fatturabile 100 cm mensole comprese",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Tappo veletta da 401 a 700 cm",
+  "tipoPrezzo": "FISSO",
+  "valore": 4,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Minimo fatturabile 100 cm mensole comprese",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Giunto veletta da 401 a 700 cm",
+  "tipoPrezzo": "FISSO",
+  "valore": 7,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Minimo fatturabile 100 cm mensole comprese",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ },
+ {
+  "categoria": "Velette - accessori",
+  "nome": "Asola veletta",
+  "tipoPrezzo": "FISSO",
+  "valore": 3,
+  "unita": "cad",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "SF:VEL:*:*",
+  "note": "Minimo fatturabile 100 cm mensole comprese",
+  "immagineUrl": null,
+  "gruppiApplicabili": [
+   "FRANGISOLE"
+  ]
+ }
+]

@@ -53,6 +53,8 @@ export function formatDimensioni(tipologia: string, larghezza: number, altezza: 
 }
 
 export function listinoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
+  if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
   if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
   if (tipologia.startsWith("LUCILLA_")) return "LUCILLA";
   if (tipologia.startsWith("NUVOLA_")) return "NUVOLA";
@@ -735,6 +737,8 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
+  if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
   if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti";
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato";
@@ -1977,6 +1981,10 @@ export function notaInArrivo(tipologia: string): string | null {
 }
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia.startsWith("SERAFRANG_")) {
+    const a = assiSelezioneSeraFrangisole(tipologia);
+    if (a) return a.materiale.valore === "VEL" ? `${a.materiale.label} — ${a.modello.label}` : `${a.materiale.label} — ${a.modello.label} — ${a.colore.label}`;
+  }
   if (WPC_TIPOLOGIE[tipologia]) return `${WPC_TIPOLOGIE[tipologia].prodLabel} — ${WPC_TIPOLOGIE[tipologia].varLabel}`;
   if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti (listino in arrivo)";
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
@@ -2090,4 +2098,71 @@ export function etichetteDimensioni(tipologia: string): { larghezza: string; alt
 
 export function haMisura(larghezza: number, altezza: number): boolean {
   return larghezza > 0 || altezza > 0;
+}
+
+
+// Frangisole Seraplastic (veneziane esterne a filo / a catena + velette).
+// Tipologia: SERAFRANG_<LINEA>_<GUIDA>_<MOV> (a filo: Z90/Z70/S90/C80/C65 x GUI/CAV/KAP x MOT/MAN),
+// SERAFRANG_<BOLD|ESSE|LIGHT>_<STD|TOP|MAR> (a catena), SERAFRANG_VEL_<A-D> (velette).
+// Cascata a 3 tendine: Linea -> Guide / Versione -> Azionamento.
+const SERAFRANG_LINEE: Record<string, string> = {
+  Z90: "90-Z a filo (lama 90 mm)",
+  Z70: "70-Z a filo (lama 70 mm)",
+  S90: "90-S a filo (lama 90 mm)",
+  C80: "80-C a filo (lama 80 mm)",
+  C65: "65-C a filo (lama 65 mm)",
+  BOLD: "Bold a catena (lama 1,3 mm)",
+  ESSE: "Esse a catena (lama 1,3 mm)",
+  LIGHT: "Light a catena (lama 0,75 mm)",
+  VEL: "Velette",
+};
+const SERAFRANG_GUIDE: Record<string, string> = { GUI: "Guide estruse", CAV: "Guide a cavo", KAP: "Guide estruse autoportanti" };
+const SERAFRANG_MOV: Record<string, string> = { MOT: "Motorizzata", MAN: "Manuale ad argano" };
+const SERAFRANG_VERSIONI: Record<string, string> = { STD: "Versione Standard", TOP: "Versione Top", MAR: "Versione con Kit Mare" };
+
+export function parteSeraFrangisole(tipologia: string): { linea: string; guida: string; mov: string } | null {
+  const m = tipologia.match(/^SERAFRANG_([A-Z0-9]+)_([A-Z0-9]+)(?:_([A-Z0-9]+))?$/);
+  if (!m) return null;
+  const [, linea, a, b] = m;
+  if (linea === "VEL") return { linea, guida: "-", mov: a };
+  if (b) return { linea, guida: a, mov: b };
+  return { linea, guida: "CAT", mov: a };
+}
+
+export function assiSelezioneSeraFrangisole(tipologia: string): AssiTapparelle | null {
+  const p = parteSeraFrangisole(tipologia);
+  if (!p || !SERAFRANG_LINEE[p.linea]) return null;
+  const etichette: [string, string, string] = ["Linea", "Guide / Versione", "Azionamento"];
+  if (p.linea === "VEL") {
+    return {
+      materiale: { valore: "VEL", label: SERAFRANG_LINEE.VEL },
+      modello: { valore: tipologia, label: `Veletta Moda ${p.mov}` },
+      colore: { valore: tipologia, label: "Colori standard" },
+      etichette,
+    };
+  }
+  if (p.guida === "CAT") {
+    return {
+      materiale: { valore: p.linea, label: SERAFRANG_LINEE[p.linea] },
+      modello: { valore: `${p.linea}_CAT`, label: "A catena" },
+      colore: { valore: tipologia, label: SERAFRANG_VERSIONI[p.mov] ?? p.mov },
+      etichette,
+    };
+  }
+  return {
+    materiale: { valore: p.linea, label: SERAFRANG_LINEE[p.linea] },
+    modello: { valore: `${p.linea}_${p.guida}`, label: SERAFRANG_GUIDE[p.guida] ?? p.guida },
+    colore: { valore: tipologia, label: SERAFRANG_MOV[p.mov] ?? p.mov },
+    etichette,
+  };
+}
+
+// Optional Seraplastic con listino "SF:<linee>:<guide>:<mov>" (liste separate da virgola, * = tutti).
+export function optionalSeraFrangisoleApplicabile(listino: string | null, tipologia: string): boolean {
+  if (!listino || !listino.startsWith("SF:")) return false;
+  const p = parteSeraFrangisole(tipologia);
+  if (!p) return false;
+  const [, l, g, m] = listino.split(":");
+  const ok = (spec: string, v: string) => spec === "*" || spec.split(",").includes(v);
+  return ok(l, p.linea) && ok(g, p.guida) && ok(m, p.mov);
 }
