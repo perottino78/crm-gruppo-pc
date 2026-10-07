@@ -506,6 +506,12 @@ model Commessa {
   righeOrdine             RigaOrdine[]
   costiManuali            CostoManuale[]
   pose                    Posa[]
+  // Chiusura
+  chiusaIl                DateTime?
+  fatturaFinaleNote       String?
+  recensioneRichiestaIl   DateTime?
+  garanziaMesi            Int       @default(24)
+  assistenze              Assistenza[]
   createdAt               DateTime  @default(now())
 
   @@unique([anno, numero])
@@ -699,4 +705,25 @@ model PosaFoto {
   dataUri    String
   autoreNome String?
   createdAt  DateTime @default(now())
+}
+
+model Assistenza {
+  id                String    @id @default(cuid())
+  numero            Int       @default(autoincrement())
+  commessa          Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId        String
+  prodotto          String?
+  descrizione       String
+  priorita          String    @default("NORMALE") // BASSA | NORMALE | URGENTE
+  stato             String    @default("APERTA")  // APERTA | PROGRAMMATA | IN_ATTESA_RICAMBIO | RISOLTA | ANNULLATA
+  inGaranzia        Boolean   @default(true)
+  assegnatoUtenteId String?
+  assegnatoNome     String?
+  dataIntervento    DateTime?
+  ricambioNote      String?   // ordine ricambio al fornitore
+  esito             String?
+  costo             Float?
+  aperturaDa        String?
+  risoltaIl         DateTime?
+  createdAt         DateTime  @default(now())
 }

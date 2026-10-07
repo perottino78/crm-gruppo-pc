@@ -10,6 +10,7 @@ const moduli = [
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
   { href: "/lavori", label: "Lavori / squadre", icon: "🔧" },
+  { href: "/assistenza", label: "Assistenza", icon: "🛟" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
   { href: "/commerciali", label: "Team & performance", icon: "🏆" },
   { href: "/report", label: "Report", icon: "📊" },

@@ -711,3 +711,110 @@ export async function confermaGiornoPosa(formData: FormData) {
   await log(p.commessaId, `Giorno di posa confermato al cliente (${p.dataInizio.toLocaleDateString("it-IT")}) da ${u.nome}.`);
   revalidatePath(`/commesse/${p.commessaId}`);
 }
+
+
+// ============ CHIUSURA COMMESSA ============
+export async function chiudiCommessa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoGestireIncassi(u?.ruolo)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  const c = await prisma.commessa.findUnique({ where: { id } });
+  if (!c || c.stato !== "LAVORI_ESEGUITI") return;
+  await prisma.commessa.update({
+    where: { id },
+    data: { stato: "CHIUSA", chiusaIl: new Date(), fatturaFinaleNote: str(formData, "fatturaFinaleNote"), garanziaMesi: Math.round(flt(formData, "garanziaMesi") ?? 24) },
+  });
+  await log(id, `Commessa chiusa da ${u!.nome}.`);
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+}
+
+export async function riapriCommessa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.commessa.update({ where: { id }, data: { stato: "LAVORI_ESEGUITI", chiusaIl: null } });
+  await log(id, `Commessa riaperta da ${u!.nome}.`);
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+}
+
+export async function segnaRecensioneRichiesta(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.commessa.update({ where: { id }, data: { recensioneRichiestaIl: new Date() } });
+  await log(id, `Richiesta recensione al cliente (${u.nome}).`);
+  revalidatePath(`/commesse/${id}`);
+}
+
+// ============ ASSISTENZA ============
+export async function creaAssistenza(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  const descrizione = str(formData, "descrizione");
+  if (!commessaId || !descrizione) return;
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { pose: true } });
+  if (!c) return;
+  const fine = c.pose.filter((p) => p.completataIl).map((p) => p.completataIl as Date).sort((x, y) => y.getTime() - x.getTime())[0];
+  let inGaranzia = true;
+  if (fine) {
+    const scad = new Date(fine);
+    scad.setMonth(scad.getMonth() + c.garanziaMesi);
+    inGaranzia = scad.getTime() >= Date.now();
+  }
+  const ass = str(formData, "assegnatoUtenteId");
+  const ut = ass ? await prisma.utente.findUnique({ where: { id: ass } }) : null;
+  const dt = str(formData, "dataIntervento");
+  const a = await prisma.assistenza.create({
+    data: {
+      commessaId,
+      descrizione,
+      prodotto: str(formData, "prodotto"),
+      priorita: str(formData, "priorita") ?? "NORMALE",
+      inGaranzia,
+      assegnatoUtenteId: ut?.id ?? null,
+      assegnatoNome: ut?.nome ?? null,
+      dataIntervento: dt ? new Date(dt) : null,
+      stato: dt ? "PROGRAMMATA" : "APERTA",
+      aperturaDa: u.nome,
+    },
+  });
+  await log(commessaId, `Assistenza #${a.numero} aperta da ${u.nome}: ${descrizione}${inGaranzia ? "" : " (fuori garanzia)"}`);
+  revalidatePath(`/commesse/${commessaId}`);
+  revalidatePath("/assistenza");
+}
+
+export async function aggiornaAssistenza(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  const prima = await prisma.assistenza.findUnique({ where: { id } });
+  if (!prima) return;
+  const ass = str(formData, "assegnatoUtenteId");
+  const ut = ass ? await prisma.utente.findUnique({ where: { id: ass } }) : null;
+  const dt = str(formData, "dataIntervento");
+  let stato = str(formData, "stato") ?? prima.stato;
+  if (stato === "APERTA" && dt) stato = "PROGRAMMATA";
+  await prisma.assistenza.update({
+    where: { id },
+    data: {
+      stato,
+      assegnatoUtenteId: ut?.id ?? null,
+      assegnatoNome: ut?.nome ?? null,
+      dataIntervento: dt ? new Date(dt) : null,
+      ricambioNote: str(formData, "ricambioNote"),
+      esito: str(formData, "esito"),
+      costo: flt(formData, "costo"),
+      risoltaIl: stato === "RISOLTA" ? prima.risoltaIl ?? new Date() : null,
+    },
+  });
+  if (stato !== prima.stato) await log(prima.commessaId, `Assistenza #${prima.numero}: ${prima.stato} → ${stato} (${u.nome}).`);
+  revalidatePath(`/commesse/${prima.commessaId}`);
+  revalidatePath("/assistenza");
+}

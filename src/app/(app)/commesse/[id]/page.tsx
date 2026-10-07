@@ -30,6 +30,10 @@ import {
   registraSaldo,
   annullaSaldo,
   confermaGiornoPosa,
+  chiudiCommessa,
+  riapriCommessa,
+  segnaRecensioneRichiesta,
+  creaAssistenza,
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
 import FotoRilievo from "@/components/FotoRilievo";
@@ -52,6 +56,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       fasi: { orderBy: { ordine: "asc" } },
       righeOrdine: { orderBy: { createdAt: "asc" } },
       costiManuali: { orderBy: { data: "asc" } },
+      assistenze: { orderBy: { createdAt: "desc" } },
       pose: { include: { foto: { orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
     },
   });
@@ -667,6 +672,63 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
           ))}
           {c.pose.length === 0 && <p className="text-xs text-neutral-600">Nessuna posa programmata.</p>}
         </div>
+      </section>
+
+      {/* CHIUSURA */}
+      {(c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
+        <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+          <h2 className="text-base font-bold text-neutral-900 mb-3">8 · Chiusura commessa</h2>
+          {c.stato === "CHIUSA" ? (
+            <div className="text-sm text-neutral-900 space-y-1">
+              <p className="text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">✔ Commessa chiusa il {c.chiusaIl?.toLocaleDateString("it-IT")} · garanzia {c.garanziaMesi} mesi{c.fatturaFinaleNote ? ` · ${c.fatturaFinaleNote}` : ""}</p>
+              {admin && <form action={riapriCommessa}><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-700 underline">riapri commessa</button></form>}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <ul className="text-xs text-neutral-900 space-y-1">
+                <li>{c.saldoIncassato ? "✔" : "✖"} Saldo incassato</li>
+                <li>{fasiAperte === 0 ? "✔" : "✖"} Fasi chiuse{fasiAperte ? ` (${fasiAperte} aperte)` : ""}</li>
+                <li>{righeSenzaCosto === 0 ? "✔" : "✖"} Costi di acquisto inseriti{righeSenzaCosto ? ` (mancano ${righeSenzaCosto} righe)` : ""}</li>
+              </ul>
+              <p className="text-xs text-neutral-700">Margine finale: <b>{eur(margine)}</b> ({marginePerc.toFixed(1)}%)</p>
+              {gestoreIncassi ? (
+                <form action={chiudiCommessa} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="id" value={c.id} />
+                  <input name="fatturaFinaleNote" placeholder="Note fatturazione finale" className={`${inp} w-64`} />
+                  <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Garanzia (mesi)</label><input name="garanziaMesi" defaultValue={24} className={`${inp} w-20`} /></div>
+                  <button className="btn-3d btn-3d-green text-xs px-3 py-1.5">Chiudi commessa</button>
+                </form>
+              ) : <p className="text-xs text-amber-900">La chiusura la fa l&apos;amministrazione.</p>}
+              <div className="flex flex-wrap items-center gap-3 text-xs">
+                {c.cliente.email && (
+                  <a className="text-blue-800 underline" href={`mailto:${c.cliente.email}?subject=${encodeURIComponent("Come è andata la posa?")}&body=${encodeURIComponent(`Gentile ${c.cliente.nome},\n\ngrazie per averci scelto. Se è soddisfatto del lavoro, ci farebbe piacere una sua recensione.\n\nCordiali saluti`)}`}>✉ chiedi recensione al cliente</a>
+                )}
+                <form action={segnaRecensioneRichiesta}><input type="hidden" name="id" value={c.id} /><button className="text-neutral-700 underline">segna recensione richiesta</button></form>
+                {c.recensioneRichiestaIl && <span className="text-green-900">richiesta il {c.recensioneRichiestaIl.toLocaleDateString("it-IT")}</span>}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ASSISTENZA */}
+      <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base font-bold text-neutral-900">Assistenza ({c.assistenze.length})</h2>
+          <Link href="/assistenza" className="text-xs text-blue-800 underline">tutte le assistenze</Link>
+        </div>
+        {c.assistenze.map((a) => (
+          <p key={a.id} className="text-sm text-neutral-900 border-b border-neutral-100 py-1">
+            #{a.numero} · <b>{a.stato}</b> · {a.descrizione}{a.inGaranzia ? "" : " (fuori garanzia)"}{a.dataIntervento ? ` · intervento ${a.dataIntervento.toLocaleDateString("it-IT")}` : ""}
+          </p>
+        ))}
+        <form action={creaAssistenza} className="flex flex-wrap items-end gap-2 mt-3">
+          <input type="hidden" name="commessaId" value={c.id} />
+          <input name="prodotto" placeholder="Prodotto" className={`${inp} w-40`} />
+          <input name="descrizione" required placeholder="Problema segnalato" className={`${inp} flex-1 min-w-48`} />
+          <select name="priorita" className={inp}><option>NORMALE</option><option>URGENTE</option><option>BASSA</option></select>
+          <button className="btn-3d btn-3d-orange text-xs px-3 py-1.5">Apri assistenza</button>
+        </form>
       </section>
 
       {/* TIMELINE */}
