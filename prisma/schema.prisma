@@ -492,6 +492,13 @@ model Commessa {
   finanziamentoSocieta    String?
   finanziamentoStato      String?   // IN_ISTRUTTORIA | APPROVATO | RIFIUTATO
   finanziamentoNote       String?
+  // Saldo: incassato prima dell'uscita del materiale; sblocca la conferma del giorno di posa
+  saldoIncassato          Boolean   @default(false)
+  saldoIncassatoIl        DateTime?
+  saldoImporto            Float?
+  saldoModalita           String?
+  fatturaSaldoNumero      String?
+  fatturaSaldoData        DateTime?
   note                    String?
   rilievi                 Rilievo[]
   eventi                  CommessaEvento[]
@@ -670,6 +677,12 @@ model Posa {
   completataIl        DateTime?
   // Verbale di fine lavori
   noteFine            String?
+  // Conferma al cliente del giorno di posa (dopo il saldo)
+  confermata          Boolean   @default(false)
+  confermataIl        DateTime?
+  // Costo posa: INTERNA (ore x costo orario) oppure ESTERNA (fattura della squadra)
+  fatturaEsternaNumero  String?
+  fatturaEsternaImporto Float?
   firmaCliente        String?   // data URI (firma disegnata)
   nomeFirmatario      String?
   foto                PosaFoto[]

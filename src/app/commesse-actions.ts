@@ -29,7 +29,7 @@ function puoGestireIncassi(ruolo?: string | null) {
 // Ricalcola lo stato della commessa nella fase acconto + rilievo
 async function ricalcolaStato(commessaId: string) {
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { rilievi: true } });
-  if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA"].includes(c.stato)) return;
+  if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA", "SALDO_INCASSATO", "LAVORI_ESEGUITI"].includes(c.stato)) return;
   const viaLibera =
     c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
   let stato = "IN_ATTESA_ACCONTO";
@@ -498,11 +498,18 @@ export async function aggiungiCostoManuale(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
   const commessaId = str(formData, "commessaId");
-  const descrizione = str(formData, "descrizione");
+  const categoria = str(formData, "categoria") ?? "ALTRO";
+  let descrizione = str(formData, "descrizione");
   const importo = flt(formData, "importo");
+  if (categoria === "ACQUISTO_MATERIALE") {
+    const fid = str(formData, "fornitoreId");
+    const forn = fid ? await prisma.soggetto.findUnique({ where: { id: fid } }) : null;
+    const nf = str(formData, "fatturaNumero");
+    descrizione = `Acquisto materiale${forn ? " — " + forn.ragioneSociale : ""}${nf ? " (fatt. " + nf + ")" : ""}`;
+  }
   if (!commessaId || !descrizione || importo === null) return;
   await prisma.costoManuale.create({
-    data: { commessaId, descrizione, importo, categoria: str(formData, "categoria") ?? "ALTRO", autoreNome: u.nome },
+    data: { commessaId, descrizione, importo, categoria, autoreNome: u.nome },
   });
   await log(commessaId, `Costo aggiunto: ${descrizione} — ${importo.toFixed(2)} €.`);
   revalidatePath(`/commesse/${commessaId}`);
@@ -571,6 +578,8 @@ export async function avviaPosa(formData: FormData) {
   if (!u) redirect("/login");
   const id = str(formData, "posaId");
   if (!id) return;
+  const prima = await prisma.posa.findUnique({ where: { id }, include: { commessa: true } });
+  if (!prima || !prima.commessa.saldoIncassato) return; // il materiale esce solo a saldo incassato
   const p = await prisma.posa.update({ where: { id }, data: { stato: "IN_CORSO", avviataIl: new Date() } });
   await log(p.commessaId, `Posa avviata da ${u.nome}.`);
   revalidatePath(`/commesse/${p.commessaId}`);
@@ -629,19 +638,76 @@ export async function completaPosa(formData: FormData) {
     await prisma.posaFoto.createMany({ data: foto.map((f) => ({ posaId: id, categoria: "DOPO", nome: f.nome ?? null, dataUri: f.dataUri, autoreNome: u.nome })) });
   }
   // chiusura fase POSA con costo
-  const ore = flt(formData, "ore");
-  const costoOrario = flt(formData, "costoOrario");
-  const forfait = flt(formData, "forfait");
+  const esterna = str(formData, "tipoCosto") === "ESTERNA";
+  const fattImporto = flt(formData, "fatturaImporto");
+  const fattNumero = str(formData, "fatturaNumero");
+  const ore = esterna ? null : flt(formData, "ore");
+  const costoOrario = esterna ? null : flt(formData, "costoOrario");
+  const forfait = esterna ? fattImporto : flt(formData, "forfait");
   const costoTotale = forfait ?? (ore !== null && costoOrario !== null ? Math.round(ore * costoOrario * 100) / 100 : 0);
+  if (esterna) {
+    await prisma.posa.update({ where: { id }, data: { tipo: "ESTERNA", fatturaEsternaNumero: fattNumero, fatturaEsternaImporto: fattImporto } });
+  }
   const fase = await prisma.faseCommessa.findFirst({ where: { commessaId: p.commessaId, tipo: "POSA", stato: { not: "CHIUSA" } } });
   if (fase) {
     await prisma.faseCommessa.update({
       where: { id: fase.id },
-      data: { stato: "CHIUSA", ore, costoOrario, forfait, costoTotale, chiusaIl: new Date(), chiusaDaNome: u.nome, assegnatoNome: fase.assegnatoNome ?? p.assegnatoNome },
+      data: { stato: "CHIUSA", ore, costoOrario, forfait, costoTotale, chiusaIl: new Date(), chiusaDaNome: u.nome, assegnatoNome: fase.assegnatoNome ?? p.assegnatoNome, note: esterna ? `Fattura squadra esterna${fattNumero ? " n. " + fattNumero : ""}` : fase.note },
     });
   }
   await prisma.commessa.update({ where: { id: p.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
   await log(p.commessaId, `Posa completata da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
   revalidatePath(`/commesse/${p.commessaId}`);
   revalidatePath("/lavori");
+}
+
+// ============ SALDO E CONFERMA POSA ============
+export async function registraSaldo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoGestireIncassi(u?.ruolo)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  const c = await prisma.commessa.findUnique({ where: { id } });
+  if (!c) return;
+  const importo = flt(formData, "importo") ?? 0;
+  const dataFatt = str(formData, "fatturaData");
+  await prisma.commessa.update({
+    where: { id },
+    data: {
+      saldoIncassato: true,
+      saldoIncassatoIl: new Date(),
+      saldoImporto: importo,
+      saldoModalita: str(formData, "modalita"),
+      fatturaSaldoNumero: str(formData, "fatturaNumero"),
+      fatturaSaldoData: dataFatt ? new Date(dataFatt) : null,
+      stato: ["IN_ATTESA_ACCONTO", "RILIEVO_DA_PROGRAMMARE", "RILIEVO_PROGRAMMATO", "RILIEVO_ESEGUITO", "ORDINI"].includes(c.stato) ? "SALDO_INCASSATO" : c.stato,
+    },
+  });
+  await log(id, `Saldo incassato: ${importo.toFixed(2)} €${str(formData, "fatturaNumero") ? " — fattura n. " + str(formData, "fatturaNumero") : ""}. Materiale rilasciabile e posa confermabile.`);
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+}
+
+export async function annullaSaldo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  const c = await prisma.commessa.update({ where: { id }, data: { saldoIncassato: false, saldoIncassatoIl: null, saldoImporto: null, saldoModalita: null, fatturaSaldoNumero: null, fatturaSaldoData: null } });
+  if (c.stato === "SALDO_INCASSATO") await prisma.commessa.update({ where: { id }, data: { stato: "RILIEVO_ESEGUITO" } });
+  await log(id, "Saldo annullato dal responsabile.");
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+}
+
+export async function confermaGiornoPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "posaId");
+  if (!id) return;
+  const p = await prisma.posa.findUnique({ where: { id }, include: { commessa: true } });
+  if (!p || !p.commessa.saldoIncassato) return;
+  await prisma.posa.update({ where: { id }, data: { confermata: true, confermataIl: new Date() } });
+  await log(p.commessaId, `Giorno di posa confermato al cliente (${p.dataInizio.toLocaleDateString("it-IT")}) da ${u.nome}.`);
+  revalidatePath(`/commesse/${p.commessaId}`);
 }

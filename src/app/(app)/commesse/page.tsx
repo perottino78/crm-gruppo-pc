@@ -33,7 +33,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
     }),
   ]);
 
-  const colonne = ["IN_ATTESA_ACCONTO", "RILIEVO_DA_PROGRAMMARE", "RILIEVO_PROGRAMMATO", "RILIEVO_ESEGUITO", "POSA", "LAVORI_ESEGUITI"];
+  const colonne = ["IN_ATTESA_ACCONTO", "RILIEVO_DA_PROGRAMMARE", "RILIEVO_PROGRAMMATO", "RILIEVO_ESEGUITO", "SALDO_INCASSATO", "POSA", "LAVORI_ESEGUITI"];
 
   return (
     <div className="max-w-7xl">
@@ -75,7 +75,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
         </div>
       )}
 
-      <div className="grid grid-cols-6 gap-2 items-start">
+      <div className="grid grid-cols-7 gap-2 items-start">
         {colonne.map((st) => {
           const lista = commesse.filter((c) => c.stato === st);
           return (

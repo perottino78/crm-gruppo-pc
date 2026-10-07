@@ -27,6 +27,9 @@ import {
   avviaPosa,
   caricaFotoPosa,
   completaPosa,
+  registraSaldo,
+  annullaSaldo,
+  confermaGiornoPosa,
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
 import FotoRilievo from "@/components/FotoRilievo";
@@ -67,16 +70,18 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
     soggettiOperativi.find((x) => x.utenteId && x.utenteId === uid)?.costoOrario ?? "";
 
   // Scheda costi a scalare: movimenti in ordine cronologico con residuo progressivo
+  const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
+  const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
   const movimenti: Mov[] = [
     ...c.fasi.filter((f) => f.stato === "CHIUSA" && f.costoTotale > 0).map((f) => ({ data: f.chiusaIl ?? f.createdAt, voce: `Fase: ${f.nome}${f.assegnatoNome ? " (" + f.assegnatoNome + ")" : ""}`, tipo: "Manodopera", importo: f.costoTotale })),
-    ...c.righeOrdine.filter((r) => r.costoEffettivo !== null).map((r) => ({ data: r.arrivatoIl ?? r.ordinatoIl ?? r.createdAt, voce: `${r.descrizione}${r.fornitoreNome ? " — " + r.fornitoreNome : ""}`, tipo: "Materiale", importo: r.costoEffettivo ?? 0 })),
-    ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria, importo: m.importo })),
+    ...(haAcquistiTotali ? [] : c.righeOrdine).filter((r) => r.costoEffettivo !== null).map((r) => ({ data: r.arrivatoIl ?? r.ordinatoIl ?? r.createdAt, voce: `${r.descrizione}${r.fornitoreNome ? " — " + r.fornitoreNome : ""}`, tipo: "Materiale", importo: r.costoEffettivo ?? 0 })),
+    ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria === "ACQUISTO_MATERIALE" ? "Materiale (totale)" : m.categoria, importo: m.importo })),
   ].sort((a, b) => a.data.getTime() - b.data.getTime());
   const totaleCosti = movimenti.reduce((t, m) => t + m.importo, 0);
   const margine = c.totaleImponibile - totaleCosti;
   const marginePerc = c.totaleImponibile > 0 ? (margine / c.totaleImponibile) * 100 : 0;
-  const righeSenzaCosto = c.righeOrdine.filter((r) => r.costoEffettivo === null).length;
+  const righeSenzaCosto = haAcquistiTotali ? 0 : c.righeOrdine.filter((r) => r.costoEffettivo === null).length;
   const fasiAperte = c.fasi.filter((f) => f.stato !== "CHIUSA").length;
   let residuo = c.totaleImponibile;
   const admin = isAmministratore(utente);
@@ -380,6 +385,28 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
         <h2 className="text-base font-bold text-neutral-900 mb-1">4 · Righe da ordinare (vidimazione)</h2>
         <p className="text-xs text-neutral-600 mb-3">La spunta &quot;ordinato&quot; attesta che l&apos;ordine è stato eseguito con il modulo del prodotto. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
+        <div className="bg-amber-50 border border-amber-300 rounded p-3 mb-4">
+          <p className="text-sm font-bold text-neutral-900 mb-1">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""}</p>
+          <p className="text-xs text-neutral-700 mb-2">Inserisci un solo importo per fornitore/fattura invece del costo di ogni riga. Se presente, sostituisce i costi per riga nella scheda costi.</p>
+          <form action={aggiungiCostoManuale} className="flex flex-wrap items-end gap-2">
+            <input type="hidden" name="commessaId" value={c.id} />
+            <input type="hidden" name="categoria" value="ACQUISTO_MATERIALE" />
+            <select name="fornitoreId" className={inp}>
+              <option value="">Fornitore…</option>
+              {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
+            </select>
+            <input name="fatturaNumero" placeholder="N° fattura" className={`${inp} w-28`} />
+            <input name="importo" placeholder="Totale acquisto €" required className={`${inp} w-36 border-amber-400`} />
+            <button className="btn-3d btn-3d-orange text-xs px-3 py-1.5">Aggiungi acquisto</button>
+          </form>
+          {c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").map((m) => (
+            <p key={m.id} className="text-xs text-neutral-900 mt-1">• {m.descrizione}: <b>{eur(m.importo)}</b>
+              {gestoreIncassi && (
+                <form action={eliminaCostoManuale} className="inline ml-2"><input type="hidden" name="id" value={m.id} /><button className="text-red-700 underline">elimina</button></form>
+              )}
+            </p>
+          ))}
+        </div>
         {c.righeOrdine.length === 0 ? (
           <form action={generaRigheOrdine}>
             <input type="hidden" name="id" value={c.id} />
@@ -478,9 +505,35 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
         )}
       </section>
 
+      {/* SALDO */}
+      <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+        <h2 className="text-base font-bold text-neutral-900 mb-1">6 · Saldo e conferma posa</h2>
+        <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
+        {c.saldoIncassato ? (
+          <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
+            ✔ Saldo incassato {eur(c.saldoImporto ?? 0)} il {c.saldoIncassatoIl?.toLocaleDateString("it-IT")}
+            {c.fatturaSaldoNumero ? ` · fattura n. ${c.fatturaSaldoNumero}` : ""}{c.saldoModalita ? ` · ${c.saldoModalita}` : ""}
+            {admin && (
+              <form action={annullaSaldo} className="inline ml-3"><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-700 underline">annulla saldo</button></form>
+            )}
+          </p>
+        ) : gestoreIncassi ? (
+          <form action={registraSaldo} className="flex flex-wrap items-end gap-2">
+            <input type="hidden" name="id" value={c.id} />
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Importo saldo €</label><input name="importo" defaultValue={Math.max(0, Math.round((c.totaleVendita - (c.accontoIncassato ? (c.accontoImportoIncassato ?? c.accontoImporto) : 0)) * 100) / 100)} className={`${inp} w-32`} /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">N° fattura saldo</label><input name="fatturaNumero" className={`${inp} w-32`} /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Data fattura</label><input type="date" name="fatturaData" className={inp} /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Modalità</label><select name="modalita" className={inp}><option>Bonifico</option><option>Contanti</option><option>Assegno</option><option>Carta/POS</option><option>Finanziamento</option></select></div>
+            <button className="btn-3d btn-3d-green text-xs px-3 py-1.5">Registra saldo incassato</button>
+          </form>
+        ) : (
+          <p className="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">In attesa del saldo: lo registra l&apos;amministrazione.</p>
+        )}
+      </section>
+
       {/* POSA E FINE LAVORI */}
       <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-        <h2 className="text-base font-bold text-neutral-900 mb-3">6 · Posa e fine lavori</h2>
+        <h2 className="text-base font-bold text-neutral-900 mb-3">7 · Posa e fine lavori</h2>
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
           <div className="flex flex-col gap-1">
@@ -545,7 +598,29 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
 
               {(p.stato === "PROGRAMMATA" || p.stato === "IN_CORSO") && (
                 <div className="mt-2 space-y-2">
-                  {p.stato === "PROGRAMMATA" && (
+                  {p.stato === "PROGRAMMATA" && !c.saldoIncassato && (
+                    <p className="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-1.5">Saldo non ancora incassato: la conferma del giorno di posa e l&apos;uscita del materiale restano bloccate.</p>
+                  )}
+                  {p.stato === "PROGRAMMATA" && c.saldoIncassato && !p.confermata && (
+                    <div className="flex flex-wrap items-center gap-2">
+                      <form action={confermaGiornoPosa} className="inline">
+                        <input type="hidden" name="posaId" value={p.id} />
+                        <button className="btn-3d btn-3d-orange text-xs px-3 py-1.5">Conferma giorno di posa</button>
+                      </form>
+                      {c.cliente.email && (
+                        <a
+                          className="text-xs text-blue-800 underline"
+                          href={`mailto:${c.cliente.email}?subject=${encodeURIComponent("Conferma giorno di posa — commessa " + numeroCommessa(c))}&body=${encodeURIComponent(`Gentile ${c.cliente.nome},\n\nconfermiamo che la posa avrà inizio il ${p.dataInizio.toLocaleDateString("it-IT")} (durata prevista ${p.giorniPrevisti} giorni).\n\nCordiali saluti`)}`}
+                        >
+                          ✉ scrivi la conferma al cliente
+                        </a>
+                      )}
+                    </div>
+                  )}
+                  {p.confermata && p.stato === "PROGRAMMATA" && (
+                    <p className="text-xs text-green-900">✔ Giorno di posa confermato il {p.confermataIl?.toLocaleDateString("it-IT")}</p>
+                  )}
+                  {p.stato === "PROGRAMMATA" && c.saldoIncassato && (
                     <form action={avviaPosa} className="inline">
                       <input type="hidden" name="posaId" value={p.id} />
                       <button className="btn-3d btn-3d-teal text-xs px-3 py-1.5">Avvia posa</button>
@@ -568,10 +643,19 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                       <FotoRilievo name="foto" />
                       <input name="nomeFirmatario" placeholder="Nome di chi firma" className={`${inp} w-64`} />
                       <FirmaCliente name="firmaCliente" />
-                      <div className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
-                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Ore totali posa</label><input name="ore" className={`${inp} w-20`} /></div>
-                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Costo orario €</label><input name="costoOrario" defaultValue={costoOrarioUtente(p.assegnatoUtenteId) as string | number} className={`${inp} w-24`} /></div>
-                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">oppure forfait €</label><input name="forfait" className={`${inp} w-24`} /></div>
+                      <div className="bg-neutral-50 border border-neutral-200 rounded p-2 space-y-2">
+                        <p className="text-xs font-bold text-neutral-800">Costo posa</p>
+                        <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-900">
+                          <label className="flex items-center gap-1"><input type="radio" name="tipoCosto" value="INTERNA" defaultChecked={p.tipo !== "ESTERNA"} /> Posa interna (ore × costo orario)</label>
+                          <label className="flex items-center gap-1"><input type="radio" name="tipoCosto" value="ESTERNA" defaultChecked={p.tipo === "ESTERNA"} /> Squadra esterna (fattura)</label>
+                        </div>
+                        <div className="flex flex-wrap items-end gap-2">
+                          <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Ore totali</label><input name="ore" className={`${inp} w-20`} /></div>
+                          <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Costo orario €</label><input name="costoOrario" defaultValue={costoOrarioUtente(p.assegnatoUtenteId) as string | number} className={`${inp} w-24`} /></div>
+                          <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">oppure forfait interno €</label><input name="forfait" className={`${inp} w-28`} /></div>
+                          <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Fattura squadra n°</label><input name="fatturaNumero" className={`${inp} w-28`} /></div>
+                          <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Importo fattura €</label><input name="fatturaImporto" className={`${inp} w-28`} /></div>
+                        </div>
                       </div>
                       <button className="btn-3d btn-3d-green text-xs px-3 py-1.5">Chiudi posa e fine lavori</button>
                     </form>
