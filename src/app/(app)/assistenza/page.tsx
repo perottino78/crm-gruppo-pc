@@ -32,7 +32,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
       </div>
       <div className="space-y-3">
         {lista.map((a) => (
-          <div key={a.id} className="bg-white rounded-lg border border-neutral-200 p-3">
+          <div key={a.id} className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties}>
             <p className="text-sm text-neutral-900">
               <b>#{a.numero}</b> · <Link href={`/commesse/${a.commessaId}`} className="underline text-blue-800">{numeroCommessa(a.commessa)} {a.commessa.cliente.nome}</Link>
               {" · "}{a.prodotto ? a.prodotto + " · " : ""}{a.descrizione}
@@ -50,7 +50,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
               <input name="ricambioNote" defaultValue={a.ricambioNote ?? ""} placeholder="Ricambio / ordine fornitore" className={`${inp} w-52`} />
               <input name="esito" defaultValue={a.esito ?? ""} placeholder="Esito intervento" className={`${inp} w-52`} />
               <input name="costo" defaultValue={a.costo ?? ""} placeholder="Costo €" className={`${inp} w-24`} />
-              <button className="btn-3d btn-3d-dark text-xs px-3 py-1.5">Salva</button>
+              <button className="btn-3d btn-3d-green text-sm px-4 py-2">Salva</button>
             </form>
           </div>
         ))}
