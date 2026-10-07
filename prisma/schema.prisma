@@ -498,6 +498,7 @@ model Commessa {
   fasi                    FaseCommessa[]
   righeOrdine             RigaOrdine[]
   costiManuali            CostoManuale[]
+  pose                    Posa[]
   createdAt               DateTime  @default(now())
 
   @@unique([anno, numero])
@@ -646,4 +647,43 @@ model CostoManuale {
   importo     Float
   data        DateTime @default(now())
   autoreNome  String?
+}
+
+// ============ POSA E FINE LAVORI ============
+// stato: PROGRAMMATA | IN_CORSO | COMPLETATA | ANNULLATA ; tipo: INTERNA | ESTERNA
+model Posa {
+  id                  String    @id @default(cuid())
+  commessa            Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId          String
+  tipo                String    @default("INTERNA")
+  assegnatoUtenteId   String?
+  assegnatoSoggettoId String?
+  assegnatoNome       String?
+  // Eventuali altri componenti della squadra (testo libero)
+  squadra             String?
+  dataInizio          DateTime
+  giorniPrevisti      Int       @default(1)
+  indirizzo           String?
+  note                String?
+  stato               String    @default("PROGRAMMATA")
+  avviataIl           DateTime?
+  completataIl        DateTime?
+  // Verbale di fine lavori
+  noteFine            String?
+  firmaCliente        String?   // data URI (firma disegnata)
+  nomeFirmatario      String?
+  foto                PosaFoto[]
+  createdAt           DateTime  @default(now())
+}
+
+// categoria: PRIMA | DURANTE | DOPO | PROBLEMA
+model PosaFoto {
+  id         String   @id @default(cuid())
+  posa       Posa     @relation(fields: [posaId], references: [id], onDelete: Cascade)
+  posaId     String
+  categoria  String   @default("DOPO")
+  nome       String?
+  dataUri    String
+  autoreNome String?
+  createdAt  DateTime @default(now())
 }

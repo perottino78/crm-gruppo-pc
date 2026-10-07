@@ -22,9 +22,15 @@ import {
   aggiornaRigaOrdine,
   aggiungiCostoManuale,
   eliminaCostoManuale,
+  programmaPosa,
+  annullaPosa,
+  avviaPosa,
+  caricaFotoPosa,
+  completaPosa,
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
 import FotoRilievo from "@/components/FotoRilievo";
+import FirmaCliente from "@/components/FirmaCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
@@ -43,6 +49,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       fasi: { orderBy: { ordine: "asc" } },
       righeOrdine: { orderBy: { createdAt: "asc" } },
       costiManuali: { orderBy: { data: "asc" } },
+      pose: { include: { foto: { orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
     },
   });
   if (!c) notFound();
@@ -51,6 +58,11 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
     prisma.soggetto.findMany({ where: { attivo: true, ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" } }),
     prisma.soggetto.findMany({ where: { attivo: true, OR: [{ ruoli: { has: "POSATORE_ESTERNO" } }, { ruoli: { has: "TECNICO_INTERNO" } }] }, orderBy: { ragioneSociale: "asc" } }),
   ]);
+  const righePrev = await prisma.rigaPreventivo.findMany({ where: { preventivoId: c.preventivoId }, include: { optionali: true } });
+  const venditaRiga = (rid?: string | null) => {
+    const r = righePrev.find((x) => x.id === rid);
+    return r ? (r.prezzoUnitario + r.optionalPrezzo) * r.quantita : null;
+  };
   const costoOrarioUtente = (uid?: string | null) =>
     soggettiOperativi.find((x) => x.utenteId && x.utenteId === uid)?.costoOrario ?? "";
 
@@ -386,7 +398,16 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                   </select>
                   <label className="flex items-center gap-1 text-xs text-neutral-900"><input type="checkbox" name="ordinato" defaultChecked={r.ordinato} /> Ordinato{r.ordinatoIl ? ` (${r.ordinatoIl.toLocaleDateString("it-IT")})` : ""}</label>
                   <label className="flex items-center gap-1 text-xs text-neutral-900"><input type="checkbox" name="arrivato" defaultChecked={r.arrivato} /> Arrivato{r.arrivatoIl ? ` (${r.arrivatoIl.toLocaleDateString("it-IT")})` : ""}</label>
-                  <input name="costoEffettivo" defaultValue={r.costoEffettivo ?? ""} placeholder="Costo reale €" className={`${inp} w-28`} />
+                  {venditaRiga(r.rigaPreventivoId) !== null && (
+                    <span className="text-xs text-neutral-700">Vendita <b>{eur(venditaRiga(r.rigaPreventivoId) ?? 0)}</b></span>
+                  )}
+                  <div className="flex flex-col">
+                    <label className="text-[10px] text-neutral-600">Costo d&apos;acquisto €</label>
+                    <input name="costoEffettivo" defaultValue={r.costoEffettivo ?? ""} placeholder="inserisci quando noto" className={`${inp} w-36 border-amber-400`} />
+                  </div>
+                  {r.costoEffettivo !== null && venditaRiga(r.rigaPreventivoId) !== null && (
+                    <span className="text-xs text-green-900">margine riga <b>{eur((venditaRiga(r.rigaPreventivoId) ?? 0) - (r.costoEffettivo ?? 0))}</b></span>
+                  )}
                   <input name="note" defaultValue={r.note ?? ""} placeholder="Note" className={`${inp} w-40`} />
                   <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
                 </div>
@@ -455,6 +476,113 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             ))}
           </div>
         )}
+      </section>
+
+      {/* POSA E FINE LAVORI */}
+      <section className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+        <h2 className="text-base font-bold text-neutral-900 mb-3">6 · Posa e fine lavori</h2>
+        <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
+          <input type="hidden" name="commessaId" value={c.id} />
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-neutral-700">Squadra / posatore</label>
+            <select name="assegnatario" className={inp}>
+              <option value="">Seleziona…</option>
+              <optgroup label="Interni (utenti CRM)">
+                {tecnici.map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
+              </optgroup>
+              {soggettiOperativi.length > 0 && (
+                <optgroup label="Anagrafica (interni ed esterni)">
+                  {soggettiOperativi.map((t) => <option key={t.id} value={`S:${t.id}`}>{t.ragioneSociale}{t.ruoli.includes("POSATORE_ESTERNO") ? " (esterno)" : ""}</option>)}
+                </optgroup>
+              )}
+            </select>
+          </div>
+          <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Inizio posa</label><input type="datetime-local" name="dataInizio" required defaultValue={defaultData} className={inp} /></div>
+          <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Giorni</label><input name="giorniPrevisti" defaultValue="1" className={`${inp} w-16`} /></div>
+          <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Altri nella squadra</label><input name="squadra" className={`${inp} w-44`} /></div>
+          <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Indirizzo (se diverso)</label><input name="indirizzo" className={`${inp} w-48`} /></div>
+          <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Note per la squadra</label><input name="note" className={`${inp} w-48`} /></div>
+          <button className="btn-3d btn-3d-blue text-xs px-3 py-1.5">Programma posa</button>
+        </form>
+
+        <div className="space-y-3">
+          {c.pose.map((p) => (
+            <div key={p.id} className="border border-neutral-200 rounded p-3">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-semibold text-neutral-900">
+                  🛠️ dal {p.dataInizio.toLocaleDateString("it-IT")} · {p.giorniPrevisti} gg · {p.tipo === "ESTERNA" ? "esterna" : "interna"}{p.assegnatoNome ? ` · ${p.assegnatoNome}` : ""}
+                </p>
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${p.stato === "COMPLETATA" ? "bg-green-100 text-green-900" : p.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : p.stato === "ANNULLATA" ? "bg-red-100 text-red-900" : "bg-amber-100 text-amber-900"}`}>{p.stato.replace("_", " ")}</span>
+              </div>
+              {p.squadra && <p className="text-xs text-neutral-700">Squadra: {p.squadra}</p>}
+              {p.indirizzo && <p className="text-xs text-neutral-700">📍 {p.indirizzo}</p>}
+              {p.note && <p className="text-xs text-neutral-700">Note: {p.note}</p>}
+
+              {p.foto.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {p.foto.map((f) => (
+                    <a key={f.id} href={f.dataUri} target="_blank" rel="noreferrer" className="relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={f.dataUri} alt={f.nome ?? "foto posa"} className="h-20 w-20 object-cover rounded border border-neutral-300" />
+                      <span className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[9px] text-center">{f.categoria.toLowerCase()}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {p.stato === "COMPLETATA" && (
+                <div className="mt-2 text-xs text-neutral-900 bg-green-50 border border-green-200 rounded p-2">
+                  Completata il {p.completataIl?.toLocaleString("it-IT")}{p.noteFine ? ` · ${p.noteFine}` : ""}
+                  {p.firmaCliente && (
+                    <div className="mt-1">
+                      Firmato da <b>{p.nomeFirmatario ?? "cliente"}</b>:
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.firmaCliente} alt="firma cliente" className="h-14 bg-white border border-neutral-300 rounded mt-1" />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {(p.stato === "PROGRAMMATA" || p.stato === "IN_CORSO") && (
+                <div className="mt-2 space-y-2">
+                  {p.stato === "PROGRAMMATA" && (
+                    <form action={avviaPosa} className="inline">
+                      <input type="hidden" name="posaId" value={p.id} />
+                      <button className="btn-3d btn-3d-teal text-xs px-3 py-1.5">Avvia posa</button>
+                    </form>
+                  )}
+                  <details>
+                    <summary className="text-xs font-semibold text-blue-800 cursor-pointer">Carica foto (prima / durante / problemi)</summary>
+                    <form action={caricaFotoPosa} className="mt-2 space-y-2">
+                      <input type="hidden" name="posaId" value={p.id} />
+                      <select name="categoria" className={inp}><option value="PRIMA">Prima</option><option value="DURANTE">Durante</option><option value="PROBLEMA">Problema</option></select>
+                      <FotoRilievo name="foto" />
+                      <button className="btn-3d btn-3d-blue text-xs px-3 py-1.5">Salva foto</button>
+                    </form>
+                  </details>
+                  <details>
+                    <summary className="text-xs font-semibold text-green-800 cursor-pointer">Fine lavori: verbale, firma e costo</summary>
+                    <form action={completaPosa} className="mt-2 space-y-2">
+                      <input type="hidden" name="posaId" value={p.id} />
+                      <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
+                      <FotoRilievo name="foto" />
+                      <input name="nomeFirmatario" placeholder="Nome di chi firma" className={`${inp} w-64`} />
+                      <FirmaCliente name="firmaCliente" />
+                      <div className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
+                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Ore totali posa</label><input name="ore" className={`${inp} w-20`} /></div>
+                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">Costo orario €</label><input name="costoOrario" defaultValue={costoOrarioUtente(p.assegnatoUtenteId) as string | number} className={`${inp} w-24`} /></div>
+                        <div className="flex flex-col gap-1"><label className="text-[11px] text-neutral-700">oppure forfait €</label><input name="forfait" className={`${inp} w-24`} /></div>
+                      </div>
+                      <button className="btn-3d btn-3d-green text-xs px-3 py-1.5">Chiudi posa e fine lavori</button>
+                    </form>
+                  </details>
+                  <form action={annullaPosa}><input type="hidden" name="posaId" value={p.id} /><button className="text-xs text-red-700 underline">annulla posa</button></form>
+                </div>
+              )}
+            </div>
+          ))}
+          {c.pose.length === 0 && <p className="text-xs text-neutral-600">Nessuna posa programmata.</p>}
+        </div>
       </section>
 
       {/* TIMELINE */}

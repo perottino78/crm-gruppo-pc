@@ -33,10 +33,10 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
     }),
   ]);
 
-  const colonne = ["IN_ATTESA_ACCONTO", "RILIEVO_DA_PROGRAMMARE", "RILIEVO_PROGRAMMATO", "RILIEVO_ESEGUITO"];
+  const colonne = ["IN_ATTESA_ACCONTO", "RILIEVO_DA_PROGRAMMARE", "RILIEVO_PROGRAMMATO", "RILIEVO_ESEGUITO", "POSA", "LAVORI_ESEGUITI"];
 
   return (
-    <div className="max-w-6xl">
+    <div className="max-w-7xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-neutral-900">Commesse</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
@@ -75,7 +75,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
         </div>
       )}
 
-      <div className="grid grid-cols-4 gap-3 items-start">
+      <div className="grid grid-cols-6 gap-2 items-start">
         {colonne.map((st) => {
           const lista = commesse.filter((c) => c.stato === st);
           return (

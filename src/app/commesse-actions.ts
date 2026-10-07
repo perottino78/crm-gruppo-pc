@@ -516,3 +516,132 @@ export async function eliminaCostoManuale(formData: FormData) {
   const c = await prisma.costoManuale.delete({ where: { id } });
   revalidatePath(`/commesse/${c.commessaId}`);
 }
+
+// ============ POSA ============
+export async function programmaPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  const dataStr = str(formData, "dataInizio");
+  if (!commessaId || !dataStr) return;
+  const dataInizio = new Date(dataStr);
+  if (isNaN(dataInizio.getTime())) return;
+  const sel = str(formData, "assegnatario") ?? "";
+  let ass: { assegnatoUtenteId: string | null; assegnatoSoggettoId: string | null; assegnatoNome: string | null; tipo: string } = {
+    assegnatoUtenteId: null, assegnatoSoggettoId: null, assegnatoNome: null, tipo: "INTERNA",
+  };
+  if (sel.startsWith("U:")) {
+    const ut = await prisma.utente.findUnique({ where: { id: sel.slice(2) } });
+    if (ut) ass = { assegnatoUtenteId: ut.id, assegnatoSoggettoId: null, assegnatoNome: ut.nome, tipo: "INTERNA" };
+  } else if (sel.startsWith("S:")) {
+    const so = await prisma.soggetto.findUnique({ where: { id: sel.slice(2) } });
+    if (so) ass = { assegnatoUtenteId: so.utenteId, assegnatoSoggettoId: so.id, assegnatoNome: so.ragioneSociale, tipo: so.ruoli.includes("POSATORE_ESTERNO") ? "ESTERNA" : "INTERNA" };
+  }
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { cliente: true } });
+  if (!c) return;
+  const indirizzo = str(formData, "indirizzo") ?? [c.cliente.indirizzo, c.cliente.cap, c.cliente.comune, c.cliente.provincia].filter(Boolean).join(", ");
+  const giorni = Math.max(1, Math.round(flt(formData, "giorniPrevisti") ?? 1));
+  await prisma.posa.create({
+    data: { commessaId, ...ass, squadra: str(formData, "squadra"), dataInizio, giorniPrevisti: giorni, indirizzo: indirizzo || null, note: str(formData, "note") },
+  });
+  await prisma.commessa.update({ where: { id: commessaId }, data: { stato: "POSA" } });
+  // la fase Posa passa "in corso" e assegnata
+  await prisma.faseCommessa.updateMany({
+    where: { commessaId, tipo: "POSA", stato: { not: "CHIUSA" } },
+    data: { stato: "IN_CORSO", assegnatoUtenteId: ass.assegnatoUtenteId, assegnatoSoggettoId: ass.assegnatoSoggettoId, assegnatoNome: ass.assegnatoNome },
+  });
+  await log(commessaId, `Posa programmata dal ${dataInizio.toLocaleDateString("it-IT")} (${giorni} gg) — ${ass.tipo === "ESTERNA" ? "posatore esterno" : "squadra interna"}${ass.assegnatoNome ? ": " + ass.assegnatoNome : ""}.`);
+  revalidatePath(`/commesse/${commessaId}`);
+  revalidatePath("/lavori");
+}
+
+export async function annullaPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "posaId");
+  if (!id) return;
+  const p = await prisma.posa.update({ where: { id }, data: { stato: "ANNULLATA" } });
+  await log(p.commessaId, "Posa annullata.");
+  revalidatePath(`/commesse/${p.commessaId}`);
+  revalidatePath("/lavori");
+}
+
+export async function avviaPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "posaId");
+  if (!id) return;
+  const p = await prisma.posa.update({ where: { id }, data: { stato: "IN_CORSO", avviataIl: new Date() } });
+  await log(p.commessaId, `Posa avviata da ${u.nome}.`);
+  revalidatePath(`/commesse/${p.commessaId}`);
+  revalidatePath("/lavori");
+}
+
+function fotoDaForm(formData: FormData): { nome: string; dataUri: string }[] {
+  try {
+    const raw = str(formData, "foto");
+    const arr = raw ? JSON.parse(raw) : [];
+    return (Array.isArray(arr) ? arr : [])
+      .filter((f) => typeof f?.dataUri === "string" && f.dataUri.startsWith("data:"))
+      .slice(0, 12);
+  } catch {
+    return [];
+  }
+}
+
+export async function caricaFotoPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "posaId");
+  if (!id) return;
+  const foto = fotoDaForm(formData);
+  if (!foto.length) return;
+  const cat = ["PRIMA", "DURANTE", "DOPO", "PROBLEMA"].includes(str(formData, "categoria") ?? "") ? (str(formData, "categoria") as string) : "DURANTE";
+  const p = await prisma.posa.findUnique({ where: { id } });
+  if (!p) return;
+  await prisma.posaFoto.createMany({ data: foto.map((f) => ({ posaId: id, categoria: cat, nome: f.nome ?? null, dataUri: f.dataUri, autoreNome: u.nome })) });
+  await log(p.commessaId, `${foto.length} foto posa caricate (${cat.toLowerCase()}) da ${u.nome}.`);
+  revalidatePath(`/commesse/${p.commessaId}`);
+  revalidatePath("/lavori");
+}
+
+// Fine lavori: verbale, firma cliente, foto finali; chiude anche la fase "Posa" con ore e costo
+export async function completaPosa(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "posaId");
+  if (!id) return;
+  const p = await prisma.posa.findUnique({ where: { id } });
+  if (!p || p.stato === "COMPLETATA") return;
+  const foto = fotoDaForm(formData);
+  const firma = str(formData, "firmaCliente");
+  await prisma.posa.update({
+    where: { id },
+    data: {
+      stato: "COMPLETATA",
+      completataIl: new Date(),
+      noteFine: str(formData, "noteFine"),
+      nomeFirmatario: str(formData, "nomeFirmatario"),
+      firmaCliente: firma && firma.startsWith("data:") ? firma : null,
+    },
+  });
+  if (foto.length) {
+    await prisma.posaFoto.createMany({ data: foto.map((f) => ({ posaId: id, categoria: "DOPO", nome: f.nome ?? null, dataUri: f.dataUri, autoreNome: u.nome })) });
+  }
+  // chiusura fase POSA con costo
+  const ore = flt(formData, "ore");
+  const costoOrario = flt(formData, "costoOrario");
+  const forfait = flt(formData, "forfait");
+  const costoTotale = forfait ?? (ore !== null && costoOrario !== null ? Math.round(ore * costoOrario * 100) / 100 : 0);
+  const fase = await prisma.faseCommessa.findFirst({ where: { commessaId: p.commessaId, tipo: "POSA", stato: { not: "CHIUSA" } } });
+  if (fase) {
+    await prisma.faseCommessa.update({
+      where: { id: fase.id },
+      data: { stato: "CHIUSA", ore, costoOrario, forfait, costoTotale, chiusaIl: new Date(), chiusaDaNome: u.nome, assegnatoNome: fase.assegnatoNome ?? p.assegnatoNome },
+    });
+  }
+  await prisma.commessa.update({ where: { id: p.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
+  await log(p.commessaId, `Posa completata da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
+  revalidatePath(`/commesse/${p.commessaId}`);
+  revalidatePath("/lavori");
+}

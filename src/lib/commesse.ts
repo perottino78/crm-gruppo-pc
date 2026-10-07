@@ -5,6 +5,7 @@ export const STATI_COMMESSA: Record<string, { label: string; cls: string }> = {
   RILIEVO_ESEGUITO: { label: "Rilievo eseguito", cls: "bg-green-100 text-green-900" },
   ORDINI: { label: "Ordini fornitore", cls: "bg-purple-100 text-purple-900" },
   POSA: { label: "Posa", cls: "bg-teal-100 text-teal-900" },
+  LAVORI_ESEGUITI: { label: "Lavori eseguiti", cls: "bg-emerald-100 text-emerald-900" },
   CHIUSA: { label: "Chiusa", cls: "bg-neutral-200 text-neutral-800" },
   ANNULLATA: { label: "Annullata", cls: "bg-red-100 text-red-900" },
 };
