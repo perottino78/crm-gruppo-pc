@@ -8,6 +8,7 @@ const moduli = [
   { href: "/", label: "Dashboard", icon: "🏠" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
+  { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
   { href: "/lavori", label: "Lavori / squadre", icon: "🔧" },
   { href: "/assistenza", label: "Assistenza", icon: "🛟" },

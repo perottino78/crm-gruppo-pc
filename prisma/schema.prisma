@@ -40,6 +40,8 @@ model Utente {
   passwordHash        String?
   // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
   telefono            String?
+  // Ufficio di appartenenza (COMMERCIALE | FATTURAZIONE | TECNICO | ORDINI | POSA | AMMINISTRAZIONE): determina quali task di pratica vede
+  ufficio             String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
   mustChangePassword  Boolean        @default(true)
@@ -503,6 +505,7 @@ model Commessa {
   rilievi                 Rilievo[]
   eventi                  CommessaEvento[]
   fasi                    FaseCommessa[]
+  tasks                   TaskPratica[]
   righeOrdine             RigaOrdine[]
   costiManuali            CostoManuale[]
   pose                    Posa[]
@@ -726,4 +729,45 @@ model Assistenza {
   aperturaDa        String?
   risoltaIl         DateTime?
   createdAt         DateTime  @default(now())
+}
+
+
+// Flusso pratiche fra uffici: configurazione di ogni fase (modificabile da Impostazioni)
+model FlussoFase {
+  id               String  @id @default(cuid())
+  chiave           String  @unique
+  ordine           Int     @default(0)
+  nome             String
+  ufficio          String
+  prossimaChiave   String?
+  taskAttivo       Boolean @default(true)
+  taskTitolo       String
+  taskTesto        String?
+  mailAttiva       Boolean @default(false)
+  mailQuando       String  @default("FATTO") // INIZIO | FATTO
+  mailDestinatario String  @default("CLIENTE") // CLIENTE | INTERNO
+  mailOggetto      String?
+  mailTesto        String?
+}
+
+// Task di una pratica (commessa) assegnato a un ufficio; "Fatto" crea il task dell'ufficio successivo
+model TaskPratica {
+  id               String    @id @default(cuid())
+  commessa         Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId       String
+  faseChiave       String?
+  titolo           String
+  descrizione      String?
+  ufficio          String
+  assegnatoUtenteId String?
+  assegnatoNome    String?
+  stato            String    @default("DA_INIZIARE")
+  creatoDa         String?
+  completatoIl     DateTime?
+  completatoDaNome String?
+  mailA            String?
+  mailOggetto      String?
+  mailTesto        String?
+  mailInviataIl    DateTime?
+  createdAt        DateTime  @default(now())
 }

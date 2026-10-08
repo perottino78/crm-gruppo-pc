@@ -36,6 +36,9 @@ import {
   creaAssistenza,
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
+import TaskCard from "@/components/TaskCard";
+import { creaTaskManuale, avviaFlussoCommessa } from "@/app/flusso-actions";
+import { UFFICI } from "@/lib/flusso";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
 
@@ -54,6 +57,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       rilievi: { include: { tecnico: true, allegati: true }, orderBy: { dataOra: "desc" } },
       eventi: { orderBy: { createdAt: "desc" } },
       fasi: { orderBy: { ordine: "asc" } },
+      tasks: { orderBy: { createdAt: "desc" } },
       righeOrdine: { orderBy: { createdAt: "asc" } },
       costiManuali: { orderBy: { data: "asc" } },
       assistenze: { orderBy: { createdAt: "desc" } },
@@ -124,6 +128,40 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
           <Link href={`/preventivi/${c.preventivoId}`} className="text-sm font-medium text-blue-800 hover:underline">apri preventivo →</Link>
         </div>
       </div>
+
+      {/* FLUSSO PRATICA FRA UFFICI */}
+      <section className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
+        <h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2>
+        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Puoi anche inviare un task libero a un ufficio.</p>
+        <div className="flex flex-col gap-2 mb-3">
+          {c.tasks.length === 0 && (
+            <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
+              <input type="hidden" name="commessaId" value={c.id} />
+              <p className="text-sm text-neutral-600">Nessun task ancora.</p>
+              <select name="fase" className={inp}>
+                <option value="ACCETTAZIONE">Parti da: Accettazione (commerciale)</option>
+                <option value="FATT_ACCONTO">Parti da: Fattura acconto</option>
+                <option value="RILIEVO">Parti da: Rilievo</option>
+                <option value="ORDINI">Parti da: Evasione ordini</option>
+                <option value="FATT_SALDO">Parti da: Fattura saldo</option>
+                <option value="POSA">Parti da: Posa</option>
+              </select>
+              <button className="btn-3d btn-3d-green text-sm px-4 py-2">Avvia flusso</button>
+            </form>
+          )}
+          {c.tasks.map((t) => <TaskCard key={t.id} task={t} />)}
+        </div>
+        <form action={creaTaskManuale} className="flex flex-wrap items-end gap-2">
+          <input type="hidden" name="commessaId" value={c.id} />
+          <div><label className="text-[11px] font-bold text-neutral-700 block">Invia task a</label>
+            <select name="ufficio" className={inp}>{UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}</select></div>
+          <div className="flex-1 min-w-[200px]"><label className="text-[11px] font-bold text-neutral-700 block">Cosa deve fare</label>
+            <input name="titolo" required className={inp + " w-full"} placeholder="es. Verificare pagamento acconto" /></div>
+          <div className="flex-1 min-w-[200px]"><label className="text-[11px] font-bold text-neutral-700 block">Note (opz.)</label>
+            <input name="descrizione" className={inp + " w-full"} /></div>
+          <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Invia task</button>
+        </form>
+      </section>
 
       {/* ACCONTO */}
       <section className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties}>

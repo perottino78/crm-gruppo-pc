@@ -5,6 +5,8 @@ import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTe
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import { aggiornaUfficioUtente } from "@/app/flusso-actions";
+import { UFFICI } from "@/lib/flusso";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
@@ -47,6 +49,11 @@ export default async function ImpostazioniPage() {
       <Link href="/impostazioni/anagrafica" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
         <span className="text-base font-bold text-neutral-900">Anagrafica fornitori, posatori e tecnici →</span>
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
+      </Link>
+
+      <Link href="/impostazioni/flusso" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
+        <span className="text-base font-bold text-neutral-900">Flusso pratiche fra uffici: task ed email →</span>
+        <span className="block text-xs text-neutral-600">Per ogni fase: ufficio, fase successiva, testo del task e email con testo personalizzabile.</span>
       </Link>
 
       <h2 className="text-base font-bold text-neutral-900 mb-3">Brand attivi</h2>
@@ -114,6 +121,17 @@ export default async function ImpostazioniPage() {
                     />
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Reset accesso</button>
+                </form>
+                <form action={aggiornaUfficioUtente} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="utenteId" value={u.id} />
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Ufficio (per i task di pratica)</label>
+                    <select name="ufficio" defaultValue={u.ufficio ?? ""} className="border border-neutral-200 rounded px-2 py-1 text-xs w-44">
+                      <option value="">— nessuno —</option>
+                      {UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}
+                    </select>
+                  </div>
+                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva ufficio</button>
                 </form>
                 <form action={adminAggiornaTelefonoUtente} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />

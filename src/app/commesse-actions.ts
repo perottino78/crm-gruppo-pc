@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import { avviaFaseFlusso } from "@/app/flusso-actions";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -70,6 +71,7 @@ export async function creaCommessaDaPreventivo(formData: FormData) {
     },
   });
   await creaFasiStandard(c.id);
+  await avviaFaseFlusso(c.id, "ACCETTAZIONE", null, utente.nome);
   await log(c.id, `Commessa creata dal preventivo accettato (totale ${totale.toFixed(2)} € IVA incl.).`);
   redirect(`/commesse/${c.id}`);
 }
