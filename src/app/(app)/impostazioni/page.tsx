@@ -51,6 +51,11 @@ export default async function ImpostazioniPage() {
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
 
+      <Link href="/impostazioni/lead" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
+        <span className="text-base font-bold text-neutral-900">Lead da pubblicità online: pagine di atterraggio e collegamenti →</span>
+        <span className="block text-xs text-neutral-600">Link per le inserzioni, indirizzo per collegare il gestionale pubblicità e Meta Lead Ads.</span>
+      </Link>
+
       <Link href="/impostazioni/flusso" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
         <span className="text-base font-bold text-neutral-900">Flusso pratiche fra uffici: task ed email →</span>
         <span className="block text-xs text-neutral-600">Per ogni fase: ufficio, fase successiva, testo del task e email con testo personalizzabile.</span>
