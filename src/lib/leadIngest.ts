@@ -48,6 +48,10 @@ export type DatiLead = {
   brand?: string | null;
   fonte?: string | null;
   note?: string | null;
+  // Tracciamento Meta Lead Ads (idempotenza)
+  externalId?: string | null;
+  metaFormId?: string | null;
+  metaAdId?: string | null;
 };
 
 // Crea il lead evitando doppioni (stesso telefono o email negli ultimi 30 giorni).
@@ -58,6 +62,12 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
   if (!nome || (!telefono && !email)) return null;
   const brandId = await brandIdDaNome(d.brand);
   if (!brandId) return null;
+
+  // Idempotenza: lo stesso leadgen_id non crea mai due lead.
+  if (d.externalId) {
+    const gia = await prisma.lead.findUnique({ where: { metaLeadgenId: d.externalId } });
+    if (gia) return { id: gia.id, duplicato: true };
+  }
 
   const da = new Date(Date.now() - 30 * 24 * 3600 * 1000);
   const recenti = await prisma.lead.findMany({ where: { createdAt: { gte: da }, brandId } });
@@ -72,7 +82,9 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
     }
     return { id: dup.id, duplicato: true };
   }
-  const l = await prisma.lead.create({
+  let l;
+  try {
+    l = await prisma.lead.create({
     data: {
       nome,
       telefono,
@@ -80,7 +92,18 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
       brandId,
       fonte: (d.fonte ?? "facebook").trim().slice(0, 60) || "facebook",
       note: d.note?.trim().slice(0, 2000) || null,
+      metaLeadgenId: d.externalId ?? null,
+      metaFormId: d.metaFormId ?? null,
+      metaAdId: d.metaAdId ?? null,
     },
   });
+  } catch (e) {
+    // Corsa su metaLeadgenId unico: il lead esiste già, nessun doppione.
+    if (d.externalId) {
+      const gia = await prisma.lead.findUnique({ where: { metaLeadgenId: d.externalId } });
+      if (gia) return { id: gia.id, duplicato: true };
+    }
+    throw e;
+  }
   return { id: l.id, duplicato: false };
 }

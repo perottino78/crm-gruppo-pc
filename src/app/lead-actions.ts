@@ -15,12 +15,3 @@ export async function rigeneraChiaveLead() {
   await setConfig("lead_api_key", randomBytes(18).toString("hex"));
   revalidatePath("/impostazioni/lead");
 }
-
-export async function salvaMetaLead(fd: FormData) {
-  await soloAdmin();
-  for (const k of ["meta_verify_token", "meta_page_token", "meta_brand", "meta_app_secret"]) {
-    const v = String(fd.get(k) ?? "").trim();
-    if (v) await setConfig(k, v);
-  }
-  revalidatePath("/impostazioni/lead");
-}

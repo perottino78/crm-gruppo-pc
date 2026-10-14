@@ -1,0 +1,80 @@
+// Configurazione SOLO da variabili d'ambiente. Nessun valore sensibile nel codice, nei commit o nei log.
+export type Downstream = { name: string; url: string; secret: string };
+
+export type MetaConfig = {
+  appId?: string;
+  appSecret?: string;
+  accessToken?: string;
+  verifyToken?: string;
+  pageId?: string;
+  graphVersion: string;
+  allowedFormIds: string[];
+  /** CRM a valle (fan-out). Vuoto = nessun inoltro. */
+  downstreams: Downstream[];
+  downstreamsInvalid: string[]; // nomi con configurazione incompleta (solo nomi)
+  /** Segreto HMAC con cui QUESTO CRM accetta eventi interni firmati da un gateway. */
+  internalSecret?: string;
+  /** Segreto per l'endpoint di retry (Authorization: Bearer ...). */
+  retrySecret?: string;
+  /** Se false questo servizio fa solo da gateway e non crea lead locali. */
+  localIngest: boolean;
+  defaultBrand: string;
+  formBrands: Record<string, string>;
+};
+
+type Env = Record<string, string | undefined>;
+
+const clean = (v: string | undefined) => (v && v.trim() ? v.trim() : undefined);
+
+export function loadMetaConfig(env: Env = process.env): MetaConfig {
+  const ver = clean(env.META_GRAPH_API_VERSION) ?? "v26.0";
+  const graphVersion = /^v\d+\.\d+$/.test(ver) ? ver : "v26.0";
+
+  const allowedFormIds = (clean(env.META_ALLOWED_FORM_IDS) ?? "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter((x) => /^\d+$/.test(x));
+
+  const downstreams: Downstream[] = [];
+  const downstreamsInvalid: string[] = [];
+  for (const raw of (clean(env.META_DOWNSTREAMS) ?? "").split(",")) {
+    const name = raw.trim();
+    if (!name) continue;
+    const key = name.toUpperCase().replace(/[^A-Z0-9]/g, "_");
+    const url = clean(env[`META_DOWNSTREAM_${key}_URL`]);
+    const secret = clean(env[`META_DOWNSTREAM_${key}_SECRET`]);
+    const okUrl = !!url && (/^https:\/\//i.test(url) || /^http:\/\/(localhost|127\.0\.0\.1)(:|\/)/i.test(url));
+    if (okUrl && secret) downstreams.push({ name, url: url!, secret });
+    else downstreamsInvalid.push(name);
+  }
+
+  const formBrands: Record<string, string> = {};
+  for (const pair of (clean(env.META_FORM_BRANDS) ?? "").split(",")) {
+    const [f, b] = pair.split("=");
+    if (f && b && /^\d+$/.test(f.trim())) formBrands[f.trim()] = b.trim();
+  }
+
+  return {
+    appId: clean(env.META_APP_ID),
+    appSecret: clean(env.META_APP_SECRET),
+    accessToken: clean(env.META_ACCESS_TOKEN),
+    verifyToken: clean(env.META_WEBHOOK_VERIFY_TOKEN),
+    pageId: clean(env.META_PAGE_ID),
+    graphVersion,
+    allowedFormIds,
+    downstreams,
+    downstreamsInvalid,
+    internalSecret: clean(env.META_INTERNAL_SECRET),
+    retrySecret: clean(env.META_RETRY_SECRET) ?? clean(env.CRON_SECRET),
+    localIngest: (clean(env.META_LOCAL_INGEST) ?? "true").toLowerCase() !== "false",
+    defaultBrand: clean(env.META_DEFAULT_BRAND) ?? "P&C",
+    formBrands,
+  };
+}
+
+/** Stato delle variabili (solo presente/assente), per la pagina diagnostica admin. Mai i valori. */
+export function configPresence(env: Env = process.env): { name: string; set: boolean; required: boolean }[] {
+  const req = ["META_APP_ID", "META_APP_SECRET", "META_ACCESS_TOKEN", "META_WEBHOOK_VERIFY_TOKEN", "META_PAGE_ID", "META_ALLOWED_FORM_IDS"];
+  const opt = ["META_GRAPH_API_VERSION", "META_DOWNSTREAMS", "META_INTERNAL_SECRET", "META_RETRY_SECRET", "META_LOCAL_INGEST", "META_DEFAULT_BRAND", "META_FORM_BRANDS"];
+  return [...req.map((n) => ({ name: n, set: !!clean(env[n]), required: true })), ...opt.map((n) => ({ name: n, set: !!clean(env[n]), required: false }))];
+}

@@ -1,58 +1,57 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createHmac, timingSafeEqual } from "crypto";
-import { getConfig, registraLead } from "@/lib/leadIngest";
+import { NextRequest, NextResponse, after } from "next/server";
+import { handleNotification, handleVerification, processDelivery, runSweep } from "@/lib/meta/service";
+import { makeDeps } from "@/lib/meta/runtime";
+import { MAX_PAYLOAD_BYTES } from "@/lib/meta/parse";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
-// Collegamento DIRETTO con Meta Lead Ads (moduli istantanei Facebook/Instagram).
-// In Meta for Developers: Webhooks → Page → "leadgen", URL = questo indirizzo,
-// token di verifica = valore "meta_verify_token" in Impostazioni → Lead.
-// Per leggere i dati del modulo serve il token pagina "meta_page_token".
+// Receiver Meta Lead Ads (object=page, field=leadgen).
+// ATTENZIONE: questo endpoint NON è collegato alla dashboard Meta. Vedi docs/META_LEADS.md
+// prima di registrarlo come callback (esiste già un callback principale per la stessa app).
+
+// Verifica iniziale (hub.mode / hub.verify_token / hub.challenge). Il token non viene mai loggato.
 export async function GET(req: NextRequest) {
   const p = req.nextUrl.searchParams;
-  const atteso = await getConfig("meta_verify_token");
-  if (p.get("hub.mode") === "subscribe" && atteso && p.get("hub.verify_token") === atteso) {
-    return new NextResponse(p.get("hub.challenge") ?? "", { status: 200 });
-  }
-  return new NextResponse("forbidden", { status: 403 });
+  const r = handleVerification(
+    { mode: p.get("hub.mode"), token: p.get("hub.verify_token"), challenge: p.get("hub.challenge") },
+    makeDeps().cfg,
+  );
+  return new NextResponse(r.body, { status: r.status, headers: { "content-type": "text/plain; charset=utf-8" } });
 }
 
-type CampoMeta = { name: string; values: string[] };
+// Legge il corpo grezzo con un limite rigido di dimensione (anche senza Content-Length affidabile).
+async function readLimited(req: NextRequest, max: number): Promise<Buffer | null> {
+  if (!req.body) return Buffer.alloc(0);
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.length;
+    if (total > max) {
+      await reader.cancel().catch(() => undefined);
+      return null;
+    }
+    chunks.push(value);
+  }
+  return Buffer.concat(chunks);
+}
 
 export async function POST(req: NextRequest) {
-  const token = await getConfig("meta_page_token");
-  const raw = await req.text();
-  // Se è impostato il Segreto app, accetta solo richieste firmate da Meta.
-  const segreto = await getConfig("meta_app_secret");
-  if (segreto) {
-    const atteso = "sha256=" + createHmac("sha256", segreto).update(raw).digest("hex");
-    const ricevuto = req.headers.get("x-hub-signature-256") ?? "";
-    const a = Buffer.from(atteso), b = Buffer.from(ricevuto);
-    if (a.length !== b.length || !timingSafeEqual(a, b)) return new NextResponse("firma non valida", { status: 401 });
+  const deps = makeDeps();
+  const declared = Number(req.headers.get("content-length") ?? 0);
+  const raw = declared > MAX_PAYLOAD_BYTES ? null : await readLimited(req, MAX_PAYLOAD_BYTES);
+  if (!raw) return NextResponse.json({ ok: false, error: "payload_too_large" }, { status: 413 });
+
+  const r = await handleNotification({ raw, signature: req.headers.get("x-hub-signature-256"), declaredLength: declared }, deps);
+  if (r.status === 200) {
+    // Risposta rapida a Meta; recupero del lead e fan-out dopo la risposta. Il resto lo copre il retry.
+    after(async () => {
+      for (const id of r.toProcess) await processDelivery(deps, id).catch(() => undefined);
+      await runSweep(deps, 10).catch(() => undefined);
+    });
   }
-  let ev: any = null;
-  try { ev = JSON.parse(raw); } catch {}
-  if (!ev || !token) return NextResponse.json({ ok: false }, { status: 200 });
-  const brandDefault = (await getConfig("meta_brand")) ?? "P&C";
-  for (const entry of ev.entry ?? []) {
-    for (const ch of entry.changes ?? []) {
-      const id = ch.value?.leadgen_id;
-      if (ch.field !== "leadgen" || !id) continue;
-      try {
-        const r = await fetch(`https://graph.facebook.com/v21.0/${id}?fields=field_data,campaign_name,form_id&access_token=${token}`);
-        const j = await r.json();
-        const m: Record<string, string> = {};
-        (j.field_data as CampoMeta[] | undefined)?.forEach((f) => (m[f.name.toLowerCase()] = f.values?.[0] ?? ""));
-        await registraLead({
-          nome: m.full_name || [m.first_name, m.last_name].filter(Boolean).join(" ") || m.nome || "",
-          telefono: m.phone_number || m.telefono,
-          email: m.email,
-          brand: brandDefault,
-          fonte: "facebook",
-          note: j.campaign_name ? `Campagna: ${j.campaign_name}` : null,
-        });
-      } catch {}
-    }
-  }
-  return NextResponse.json({ ok: true });
+  return NextResponse.json(r.body, { status: r.status });
 }

@@ -4,8 +4,10 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { BRAND_SLUGS, getConfig, getLeadKey } from "@/lib/leadIngest";
-import { rigeneraChiaveLead, salvaMetaLead } from "@/app/lead-actions";
+import { BRAND_SLUGS, getLeadKey } from "@/lib/leadIngest";
+import { configPresence } from "@/lib/meta/config";
+import { prisma } from "@/lib/prisma";
+import { rigeneraChiaveLead } from "@/app/lead-actions";
 
 export default async function LeadSettings() {
   const u = await getCurrentUser();
@@ -14,7 +16,11 @@ export default async function LeadSettings() {
   const host = h.get("x-forwarded-host") ?? h.get("host") ?? "crm-gruppo-pc.vercel.app";
   const base = `https://${host}`;
   const chiave = await getLeadKey();
-  const [vt, pt, mb, sg] = await Promise.all([getConfig("meta_verify_token"), getConfig("meta_page_token"), getConfig("meta_brand"), getConfig("meta_app_secret")]);
+  const presenza = configPresence();
+  const [conteggi, recenti] = await Promise.all([
+    prisma.metaDelivery.groupBy({ by: ["stato"], _count: true }),
+    prisma.metaDelivery.findMany({ orderBy: { receivedAt: "desc" }, take: 10, select: { leadgenId: true, stato: true, tentativi: true, erroreCodice: true, receivedAt: true } }),
+  ]);
   const box = "bg-neutral-50 border border-neutral-200 rounded px-2 py-1 text-xs break-all select-all font-mono";
 
   return (
@@ -53,20 +59,39 @@ export default async function LeadSettings() {
       </section>
 
       <section className="bg-white rounded-lg border border-neutral-200 p-4">
-        <h2 className="font-bold text-neutral-900 mb-1">3 · Meta Lead Ads diretto (moduli istantanei Facebook/Instagram)</h2>
-        <p className="text-xs text-neutral-600 mb-3">In Meta for Developers → la vostra app → Webhooks → Pagina → campo <b>leadgen</b>: come URL di callback usa l&apos;indirizzo qui sotto e come token di verifica quello che imposti qui.</p>
-        <div className="text-sm mb-3">URL di callback: <span className={box}>{base}/api/lead/meta</span></div>
-        <form action={salvaMetaLead} className="grid sm:grid-cols-3 gap-2 text-sm">
-          <label className="block"><span className="text-xs text-neutral-600">Token di verifica (lo scegli tu)</span>
-            <input name="meta_verify_token" placeholder={vt ? "già impostato" : "es. gpc-meta-2026"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
-          <label className="block"><span className="text-xs text-neutral-600">Token di accesso pagina Meta</span>
-            <input name="meta_page_token" placeholder={pt ? "già impostato" : "incolla il token"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
-          <label className="block"><span className="text-xs text-neutral-600">Brand dei lead (P&amp;C, Solaris, Purafonte…)</span>
-            <input name="meta_brand" placeholder={mb ?? "P&C"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
-          <label className="block"><span className="text-xs text-neutral-600">Segreto app Meta (consigliato, verifica la firma)</span>
-            <input name="meta_app_secret" placeholder={sg ? "già impostato" : "App secret"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
-          <div className="sm:col-span-3"><button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva</button></div>
-        </form>
+        <h2 className="font-bold text-neutral-900 mb-1">3 · Meta Lead Ads diretto: receiver (NON ancora collegato a Meta)</h2>
+        <p className="text-xs text-neutral-600 mb-3">
+          Il receiver è pronto ma non è registrato nella dashboard Meta: per la stessa app esiste già un callback principale.
+          Prima del collegamento va scelto l&apos;assetto (gateway, inoltro transitorio o cutover): vedi <code>docs/META_LEADS.md</code>.
+          Le credenziali si impostano solo come variabili d&apos;ambiente su Vercel, mai da qui.
+        </p>
+        <div className="text-sm mb-3">Indirizzo receiver: <span className={box}>{base}/api/lead/meta</span></div>
+        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1 text-xs mb-3">
+          {presenza.map((v) => (
+            <div key={v.name} className="flex justify-between border-b border-neutral-100 py-0.5">
+              <span className="font-mono">{v.name}{v.required ? " *" : ""}</span>
+              <span className={v.set ? "text-green-700 font-bold" : v.required ? "text-red-700 font-bold" : "text-neutral-400"}>{v.set ? "impostata" : "mancante"}</span>
+            </div>
+          ))}
+        </div>
+        <div className="text-xs text-neutral-700 mb-1 font-semibold">
+          Eventi ricevuti: {conteggi.length === 0 ? "nessuno" : conteggi.map((c) => `${c.stato} ${c._count}`).join(" · ")}
+        </div>
+        {recenti.length > 0 && (
+          <table className="w-full text-xs">
+            <tbody>
+              {recenti.map((r) => (
+                <tr key={r.leadgenId} className="border-t border-neutral-100">
+                  <td className="py-1 font-mono">{r.leadgenId}</td>
+                  <td>{r.stato}</td>
+                  <td>tentativi {r.tentativi}</td>
+                  <td className="text-red-700">{r.erroreCodice ?? ""}</td>
+                  <td className="text-neutral-500">{r.receivedAt.toLocaleString("it-IT")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </section>
     </div>
   );

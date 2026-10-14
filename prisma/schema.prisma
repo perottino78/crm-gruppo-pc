@@ -71,6 +71,10 @@ model Lead {
   telefonista     Utente?  @relation(fields: [telefonistaId], references: [id])
   telefonistaId   String?
   clienteGenerato Cliente?
+  // Tracciamento Meta Lead Ads (idempotenza: un solo lead per leadgen_id)
+  metaLeadgenId   String?  @unique
+  metaFormId      String?
+  metaAdId        String?
   createdAt       DateTime @default(now())
 }
 
@@ -770,4 +774,49 @@ model TaskPratica {
   mailTesto        String?
   mailInviataIl    DateTime?
   createdAt        DateTime  @default(now())
+}
+
+
+// ===== Integrazione Meta Lead Ads (receiver webhook) =====
+// Una riga per ogni leadgen_id ricevuto. eventJson contiene solo ID (nessun dato personale);
+// leadJson contiene il lead recuperato da Graph API (dati personali: archivio protetto, mai esposto).
+model MetaDelivery {
+  id              String           @id @default(cuid())
+  leadgenId       String           @unique
+  pageId          String
+  formId          String
+  adId            String?
+  adgroupId       String?
+  createdTimeMeta DateTime?
+  stato           String           @default("RECEIVED") // RECEIVED | PROCESSING | PROCESSED | FAILED
+  tentativi       Int              @default(0)
+  erroreCodice    String?          // solo codice, mai dati sensibili
+  retriabile      Boolean          @default(true)
+  nextRetryAt     DateTime?
+  eventJson       String
+  leadJson        String?
+  leadId          String?
+  receivedAt      DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  downstreams     MetaDownstream[]
+
+  @@index([stato, nextRetryAt])
+}
+
+// Consegna verso un CRM a valle (fan-out): idempotenza separata per destinatario.
+model MetaDownstream {
+  id           String       @id @default(cuid())
+  delivery     MetaDelivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+  deliveryId   String
+  destinatario String
+  stato        String       @default("PENDING") // PENDING | DELIVERED | FAILED
+  tentativi    Int          @default(0)
+  erroreCodice String?
+  retriabile   Boolean      @default(true)
+  nextRetryAt  DateTime?
+  deliveredAt  DateTime?
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([deliveryId, destinatario])
+  @@index([stato, nextRetryAt])
 }
