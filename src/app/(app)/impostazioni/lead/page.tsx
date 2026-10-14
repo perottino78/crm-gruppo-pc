@@ -14,7 +14,7 @@ export default async function LeadSettings() {
   const host = h.get("x-forwarded-host") ?? h.get("host") ?? "crm-gruppo-pc.vercel.app";
   const base = `https://${host}`;
   const chiave = await getLeadKey();
-  const [vt, pt, mb] = await Promise.all([getConfig("meta_verify_token"), getConfig("meta_page_token"), getConfig("meta_brand")]);
+  const [vt, pt, mb, sg] = await Promise.all([getConfig("meta_verify_token"), getConfig("meta_page_token"), getConfig("meta_brand"), getConfig("meta_app_secret")]);
   const box = "bg-neutral-50 border border-neutral-200 rounded px-2 py-1 text-xs break-all select-all font-mono";
 
   return (
@@ -63,6 +63,8 @@ export default async function LeadSettings() {
             <input name="meta_page_token" placeholder={pt ? "già impostato" : "incolla il token"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
           <label className="block"><span className="text-xs text-neutral-600">Brand dei lead (P&amp;C, Solaris, Purafonte…)</span>
             <input name="meta_brand" placeholder={mb ?? "P&C"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
+          <label className="block"><span className="text-xs text-neutral-600">Segreto app Meta (consigliato, verifica la firma)</span>
+            <input name="meta_app_secret" placeholder={sg ? "già impostato" : "App secret"} className="w-full border border-neutral-200 rounded px-2 py-1" /></label>
           <div className="sm:col-span-3"><button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva</button></div>
         </form>
       </section>

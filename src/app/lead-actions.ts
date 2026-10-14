@@ -18,7 +18,7 @@ export async function rigeneraChiaveLead() {
 
 export async function salvaMetaLead(fd: FormData) {
   await soloAdmin();
-  for (const k of ["meta_verify_token", "meta_page_token", "meta_brand"]) {
+  for (const k of ["meta_verify_token", "meta_page_token", "meta_brand", "meta_app_secret"]) {
     const v = String(fd.get(k) ?? "").trim();
     if (v) await setConfig(k, v);
   }

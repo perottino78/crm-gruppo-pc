@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHmac, timingSafeEqual } from "crypto";
 import { getConfig, registraLead } from "@/lib/leadIngest";
 
 export const dynamic = "force-dynamic";
@@ -20,7 +21,17 @@ type CampoMeta = { name: string; values: string[] };
 
 export async function POST(req: NextRequest) {
   const token = await getConfig("meta_page_token");
-  const ev = await req.json().catch(() => null);
+  const raw = await req.text();
+  // Se è impostato il Segreto app, accetta solo richieste firmate da Meta.
+  const segreto = await getConfig("meta_app_secret");
+  if (segreto) {
+    const atteso = "sha256=" + createHmac("sha256", segreto).update(raw).digest("hex");
+    const ricevuto = req.headers.get("x-hub-signature-256") ?? "";
+    const a = Buffer.from(atteso), b = Buffer.from(ricevuto);
+    if (a.length !== b.length || !timingSafeEqual(a, b)) return new NextResponse("firma non valida", { status: 401 });
+  }
+  let ev: any = null;
+  try { ev = JSON.parse(raw); } catch {}
   if (!ev || !token) return NextResponse.json({ ok: false }, { status: 200 });
   const brandDefault = (await getConfig("meta_brand")) ?? "P&C";
   for (const entry of ev.entry ?? []) {
