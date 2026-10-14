@@ -6,11 +6,11 @@ Il passaggio del callback al gateway è un cutover coordinato che richiede autor
 ## 1. URL stabile proposto
 Progetto Vercel dedicato (cartella `gateway/` del repo), con dominio proprio e stabile, non un tunnel:
 
-- Callback Meta (da registrare SOLO al cutover): `https://meta-leads.<dominio-aziendale>/api/meta/webhook`
+- Callback Meta (da registrare SOLO al cutover): `https://meta-leads.gruppopec.com/api/meta/webhook`
 - Fino a quel momento (collaudo senza Meta): `https://<progetto>.vercel.app/api/meta/webhook`
 - Salute: `GET /api/health` · Stato (autenticato): `/api/internal/status`
 
-Consigliato un sottodominio aziendale (CNAME verso Vercel): se un giorno cambia il progetto Vercel, l'URL registrato in Meta non cambia.
+Dominio deciso: `meta-leads.gruppopec.com` (CNAME verso Vercel): se un giorno cambia il progetto Vercel, l'URL registrato in Meta non cambia.
 
 ## 2. Contratto del webhook downstream (gateway → CRM), versione 1
 - **Metodo/URL**: `POST <URL del CRM>` (nel CRM di questo repo: `/api/lead/meta/internal`). Solo `https://` (o `http://localhost` per i test).
@@ -28,7 +28,8 @@ Consigliato un sottodominio aziendale (CNAME verso Vercel): se un giorno cambia 
 - Il ricevente nel “CRM attuale” verrà implementato dopo accordo su questo contratto.
 
 ## 3. Scheduler / coda scelti
-**Scelta confermata: Vercel Cron** (ogni minuto, `gateway/vercel.json`) con `CRON_SECRET` ≥ 32 caratteri inserito a mano su Vercel. Richiede il piano **Pro**: su Hobby il deploy fallisce con un cron al minuto. URL: dominio fornito da Vercel (`<progetto>.vercel.app`) o dominio aggiunto in Vercel.
+**Regola decisa:** se il progetto ha già Vercel Pro → Vercel Cron ogni minuto; altrimenti QStash ogni 2 minuti. Entrambi i CRM partono in shadow. Dettagli del contratto: `docs/DOWNSTREAM_CONTRACT_V1.md`.
+(Configurazione attuale nel repo: Vercel Cron) (ogni minuto, `gateway/vercel.json`) con `CRON_SECRET` ≥ 32 caratteri inserito a mano su Vercel. Richiede il piano **Pro**: su Hobby il deploy fallisce con un cron al minuto. URL: dominio fornito da Vercel (`<progetto>.vercel.app`) o dominio aggiunto in Vercel.
 
 - **Coda durevole = tabelle Postgres** (`MetaDelivery`, `MetaDownstream`) del database dedicato del gateway. Ogni evento è su DB **prima** del `200` a Meta; nessuna elaborazione dipende dal codice eseguito dopo la risposta HTTP.
 - **Tick**: `/api/internal/tick` rilegge lo stato dal DB e riprende tutto (lead non recuperati, PROCESSING abbandonati, consegne scadute). I retry non dipendono da un nuovo webhook.

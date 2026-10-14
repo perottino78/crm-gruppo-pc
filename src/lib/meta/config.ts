@@ -15,6 +15,8 @@ export type MetaConfig = {
   downstreamsInvalid: string[]; // nomi con configurazione incompleta (solo nomi)
   /** Segreto HMAC con cui QUESTO CRM accetta eventi interni firmati da un gateway. */
   internalSecret?: string;
+  /** Segreto successivo, accettato in parallelo durante la rotazione senza fermo. */
+  internalSecretNext?: string;
   /** Modalità con cui QUESTO CRM tratta gli eventi interni: in "shadow" registra senza creare lead. Default shadow. */
   inboundMode: Mode;
   /** Segreto (>= 32 caratteri) dell'endpoint scheduler: Authorization: Bearer ... (Vercel Cron). */
@@ -76,6 +78,7 @@ export function loadMetaConfig(env: Env = process.env): MetaConfig {
     downstreams,
     downstreamsInvalid,
     internalSecret: clean(env.META_INTERNAL_SECRET),
+    internalSecretNext: clean(env.META_INTERNAL_SECRET_NEXT),
     inboundMode: (clean(env.META_INTERNAL_MODE) ?? "shadow").toLowerCase() === "live" ? "live" : "shadow",
     schedulerSecret: strong(clean(env.META_SCHEDULER_SECRET) ?? clean(env.META_RETRY_SECRET) ?? clean(env.CRON_SECRET)),
     qstashKeys: [clean(env.QSTASH_CURRENT_SIGNING_KEY), clean(env.QSTASH_NEXT_SIGNING_KEY)].filter((x): x is string => !!x),
@@ -90,6 +93,6 @@ export function loadMetaConfig(env: Env = process.env): MetaConfig {
 /** Stato delle variabili (solo presente/assente), per la pagina diagnostica admin. Mai i valori. */
 export function configPresence(env: Env = process.env): { name: string; set: boolean; required: boolean }[] {
   const req = ["META_APP_ID", "META_APP_SECRET", "META_ACCESS_TOKEN", "META_WEBHOOK_VERIFY_TOKEN", "META_PAGE_ID", "META_ALLOWED_FORM_IDS"];
-  const opt = ["META_GRAPH_API_VERSION", "META_DOWNSTREAMS", "META_INTERNAL_SECRET", "META_INTERNAL_MODE", "META_SCHEDULER_SECRET", "QSTASH_CURRENT_SIGNING_KEY", "META_LOCAL_INGEST", "META_DEFAULT_BRAND", "META_FORM_BRANDS"];
+  const opt = ["META_GRAPH_API_VERSION", "META_DOWNSTREAMS", "META_INTERNAL_SECRET", "META_INTERNAL_SECRET_NEXT", "META_INTERNAL_MODE", "META_SCHEDULER_SECRET", "QSTASH_CURRENT_SIGNING_KEY", "META_LOCAL_INGEST", "META_DEFAULT_BRAND", "META_FORM_BRANDS"];
   return [...req.map((n) => ({ name: n, set: !!clean(env[n]), required: true })), ...opt.map((n) => ({ name: n, set: !!clean(env[n]), required: false }))];
 }

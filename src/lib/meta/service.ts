@@ -303,7 +303,9 @@ export async function handleInternalEvent(
   if (input.raw.length > MAX_PAYLOAD_BYTES) return { status: 413, body: { ok: false, error: "payload_too_large" } };
   const text = input.raw.toString("utf8");
   // Anti-replay: timestamp entro ±300 s dall'orologio locale + idempotenza per event_id.
-  if (!verifyInternal(cfg.internalSecret, input.timestamp, input.signature, text, Math.floor(deps.now().getTime() / 1000))) {
+  const nowSec = Math.floor(deps.now().getTime() / 1000);
+  const sigOk = [cfg.internalSecret, cfg.internalSecretNext].some((s) => !!s && verifyInternal(s, input.timestamp, input.signature, text, nowSec));
+  if (!sigOk) {
     log("internal_bad_signature");
     return { status: 401, body: { ok: false, error: "invalid_signature" } };
   }
