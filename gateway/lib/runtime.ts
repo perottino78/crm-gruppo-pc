@@ -5,7 +5,10 @@ import { makePrismaMetaStore, type MetaPrisma } from "../../src/lib/meta/prismaS
 import type { Deps } from "../../src/lib/meta/service";
 
 let client: PrismaClient | undefined;
-export const db = () => (client ??= new PrismaClient());
+export const db = () =>
+  (client ??= new PrismaClient({
+    datasourceUrl: process.env.DATABASE_URL ?? process.env.POSTGRES_PRISMA_URL,
+  }));
 
 export function makeDeps(env: Record<string, string | undefined> = process.env): Deps {
   const cfg = loadMetaConfig(env);

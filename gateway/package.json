@@ -5,7 +5,7 @@
   "description": "Gateway centrale Meta Lead Ads: verifica il webhook una volta, salva, recupera il lead, distribuisce ai CRM con firma HMAC distinta.",
   "scripts": {
     "postinstall": "prisma generate",
-    "build": "prisma generate && prisma migrate deploy",
+    "build": "sh scripts/build.sh",
     "dev": "tsx dev-server.ts",
     "test:pg": "tsx --test tests/pg.test.ts",
     "typecheck": "tsc --noEmit -p ."
