@@ -28,6 +28,8 @@ Consigliato un sottodominio aziendale (CNAME verso Vercel): se un giorno cambia 
 - Il ricevente nel “CRM attuale” verrà implementato dopo accordo su questo contratto.
 
 ## 3. Scheduler / coda scelti
+**Scelta confermata: Vercel Cron** (ogni minuto, `gateway/vercel.json`) con `CRON_SECRET` ≥ 32 caratteri inserito a mano su Vercel. Richiede il piano **Pro**: su Hobby il deploy fallisce con un cron al minuto. URL: dominio fornito da Vercel (`<progetto>.vercel.app`) o dominio aggiunto in Vercel.
+
 - **Coda durevole = tabelle Postgres** (`MetaDelivery`, `MetaDownstream`) del database dedicato del gateway. Ogni evento è su DB **prima** del `200` a Meta; nessuna elaborazione dipende dal codice eseguito dopo la risposta HTTP.
 - **Tick**: `/api/internal/tick` rilegge lo stato dal DB e riprende tutto (lead non recuperati, PROCESSING abbandonati, consegne scadute). I retry non dipendono da un nuovo webhook.
 - **Trigger**: Vercel Cron ogni minuto se il progetto è **Pro**; altrimenti **Upstash QStash** (ogni 2 min rientra nel piano gratuito). Il Hobby di Vercel consente solo cron giornalieri: non usarlo.
