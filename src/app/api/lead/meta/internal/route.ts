@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   }
   const raw = Buffer.from(await req.arrayBuffer());
   const r = await handleInternalEvent(
-    { raw, timestamp: req.headers.get("x-gpc-timestamp"), signature: req.headers.get("x-gpc-signature") },
+    { raw, timestamp: req.headers.get("x-gpc-timestamp"), signature: req.headers.get("x-gpc-signature"), eventIdHeader: req.headers.get("x-gpc-event-id") },
     makeDeps(),
   );
   return NextResponse.json(r.body, { status: r.status });

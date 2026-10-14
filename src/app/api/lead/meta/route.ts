@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     // Risposta rapida a Meta; recupero del lead e fan-out dopo la risposta. Il resto lo copre il retry.
     after(async () => {
       for (const id of r.toProcess) await processDelivery(deps, id).catch(() => undefined);
-      await runSweep(deps, 10).catch(() => undefined);
+      await runSweep(deps, { limit: 10 }).catch(() => undefined);
     });
   }
   return NextResponse.json(r.body, { status: r.status });

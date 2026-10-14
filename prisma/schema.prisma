@@ -788,6 +788,7 @@ model MetaDelivery {
   adId            String?
   adgroupId       String?
   createdTimeMeta DateTime?
+  origine         String           @default("META") // META | REPLAY (replay = sempre shadow, mai live)
   stato           String           @default("RECEIVED") // RECEIVED | PROCESSING | PROCESSED | FAILED
   tentativi       Int              @default(0)
   erroreCodice    String?          // solo codice, mai dati sensibili
@@ -819,4 +820,17 @@ model MetaDownstream {
 
   @@unique([deliveryId, destinatario])
   @@index([stato, nextRetryAt])
+}
+
+// Eventi interni ricevuti dal gateway (questo CRM come destinatario): idempotenza per event_id e
+// registro dello shadow mode (in shadow l'evento è registrato ma NON crea lead né notifiche).
+model MetaInboundEvent {
+  id         String   @id @default(cuid())
+  eventId    String   @unique
+  leadgenId  String
+  pageId     String
+  formId     String
+  mode       String   // shadow | live
+  leadId     String?
+  receivedAt DateTime @default(now())
 }

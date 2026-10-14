@@ -1,0 +1,22 @@
+{
+  "name": "gpc-meta-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gateway centrale Meta Lead Ads: verifica il webhook una volta, salva, recupera il lead, distribuisce ai CRM con firma HMAC distinta.",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "build": "prisma generate && prisma migrate deploy",
+    "dev": "tsx dev-server.ts",
+    "test:pg": "tsx --test tests/pg.test.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.23.11",
+    "typescript": "^5"
+  }
+}

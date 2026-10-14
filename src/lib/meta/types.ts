@@ -20,8 +20,10 @@ export type GraphLead = {
 export type DeliveryStato = "RECEIVED" | "PROCESSING" | "PROCESSED" | "FAILED";
 export type DownstreamStato = "PENDING" | "DELIVERED" | "FAILED";
 
+export type Origine = "META" | "REPLAY";
 export type DeliveryRow = {
   id: string;
+  origine: Origine;
   leadgenId: string;
   pageId: string;
   formId: string;
@@ -54,7 +56,7 @@ export type DownstreamRow = {
 
 // Persistenza astratta: implementata con Prisma in produzione e in memoria nei test.
 export interface MetaStore {
-  upsertReceived(ev: LeadgenEvent, eventJson: string, now: Date): Promise<{ id: string; stato: DeliveryStato; isNew: boolean }>;
+  upsertReceived(ev: LeadgenEvent, eventJson: string, now: Date, origine?: Origine): Promise<{ id: string; stato: DeliveryStato; isNew: boolean }>;
   /** Passa RECEIVED/FAILED(retriabile)/PROCESSING(scaduto) a PROCESSING incrementando i tentativi. Atomico. */
   claim(id: string, staleBefore: Date): Promise<DeliveryRow | null>;
   saveLead(id: string, leadJson: string): Promise<void>;
@@ -64,9 +66,25 @@ export interface MetaStore {
   getDownstreams(deliveryId: string): Promise<DownstreamRow[]>;
   listRetryableDeliveries(now: Date, staleBefore: Date, limit: number): Promise<string[]>;
   listDueDownstreams(now: Date, limit: number): Promise<{ row: DownstreamRow; delivery: DeliveryRow }[]>;
-  bumpDownstreamAttempt(id: string): Promise<number>;
+  /** Lease atomica: un solo chiamante ottiene il tentativo (restituisce il numero di tentativo), gli altri null. */
+  claimDownstream(id: string, now: Date, leaseMs: number): Promise<number | null>;
   markDownstreamDelivered(id: string): Promise<void>;
   markDownstreamFailed(id: string, code: string, retriabile: boolean, nextRetryAt: Date | null): Promise<void>;
+  /** Rimette in coda i FAILED non più ritentabili (dopo aver risolto la causa). Restituisce quanti. */
+  requeueDeliveries(now: Date): Promise<number>;
+  requeueDownstreams(now: Date, destinatario?: string): Promise<number>;
+  stats(): Promise<StoreStats>;
+}
+
+export type StoreStats = {
+  deliveries: Record<string, number>;
+  downstreams: { destinatario: string; stato: string; count: number }[];
+};
+
+/** Registro degli eventi interni ricevuti (lato CRM destinatario). */
+export interface InboundStore {
+  record(i: { eventId: string; leadgenId: string; pageId: string; formId: string; mode: "shadow" | "live" }, now: Date): Promise<{ isNew: boolean; mode: string; leadId: string | null }>;
+  attachLead(eventId: string, leadId: string): Promise<void>;
 }
 
 export type IngestInput = {

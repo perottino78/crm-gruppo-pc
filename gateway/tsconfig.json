@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true
+  },
+  "include": ["api/**/*.ts", "lib/**/*.ts", "dev-server.ts", "../src/lib/meta/**/*.ts"],
+  "exclude": ["../src/lib/meta/prismaStore.ts", "../src/lib/meta/runtime.ts", "../src/lib/meta/prismaSink.ts"]
+}

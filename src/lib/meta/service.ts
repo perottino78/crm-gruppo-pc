@@ -1,30 +1,40 @@
-import type { MetaConfig } from "./config";
+import type { MetaConfig, Mode } from "./config";
 import { authorizeEvent, MAX_PAYLOAD_BYTES, parseNotification } from "./parse";
 import { constantTimeEqual, signInternal, verifyInternal, verifyMetaSignature } from "./signature";
 import { fetchLead } from "./graph";
 import { mapLead } from "./mapping";
-import type { DeliveryRow, DownstreamRow, GraphLead, LeadSink, LeadgenEvent, Logger, MetaStore } from "./types";
+import type { DeliveryRow, DownstreamRow, GraphLead, InboundStore, LeadSink, LeadgenEvent, Logger, MetaStore } from "./types";
 
 export type Deps = {
   cfg: MetaConfig;
   store: MetaStore;
-  sink: LeadSink;
+  sink?: LeadSink; // assente nel gateway (nessun lead locale)
+  inbound?: InboundStore; // presente nel CRM destinatario
   fetchImpl: typeof fetch;
   now: () => Date;
   log: Logger;
+  random?: () => number;
 };
 
-export const MAX_ATTEMPTS = 8;
-const STALE_PROCESSING_MS = 10 * 60 * 1000;
-const RECEIVED_GRACE_MS = 60 * 1000;
+export const SCHEMA_VERSION = 1;
+export const MAX_ATTEMPTS = 15; // ~38 ore di copertura con backoff 30s … 6h
+/** Un PROCESSING più vecchio di così è considerato abbandonato (funzione terminata a metà) e viene ripreso. */
+export const STALE_PROCESSING_MS = 3 * 60 * 1000;
+const RECEIVED_GRACE_MS = 30 * 1000;
+const MAX_RETRY_AFTER_MS = 6 * 3600 * 1000;
 
-/** Backoff esponenziale: 30s, 1m, 2m, 4m, ... massimo 6h. */
-export function backoffMs(attempt: number): number {
-  return Math.min(30_000 * 2 ** Math.max(0, attempt - 1), 6 * 3600 * 1000);
+export const eventIdFor = (leadgenId: string) => `meta_leadgen_${leadgenId}`;
+
+/** Backoff esponenziale 30 s · 2^(n-1), tetto 6 h, con jitter ±20% (rand=0.5 → nessuno scostamento). */
+export function backoffMs(attempt: number, rand = 0.5): number {
+  const base = Math.min(30_000 * 2 ** Math.max(0, attempt - 1), 6 * 3600 * 1000);
+  return Math.round(base * (0.8 + 0.4 * rand));
 }
-function nextRetry(deps: Deps, attempt: number, retriable: boolean): { retriabile: boolean; at: Date | null } {
+function nextRetry(deps: Deps, attempt: number, retriable: boolean, minDelayMs = 0): { retriabile: boolean; at: Date | null } {
   const ok = retriable && attempt < MAX_ATTEMPTS;
-  return { retriabile: ok, at: ok ? new Date(deps.now().getTime() + backoffMs(attempt)) : null };
+  const rand = deps.random ? deps.random() : Math.random();
+  const delay = Math.max(backoffMs(attempt, rand), Math.min(minDelayMs, MAX_RETRY_AFTER_MS));
+  return { retriabile: ok, at: ok ? new Date(deps.now().getTime() + delay) : null };
 }
 
 // ---------------------------------------------------------------- GET: verifica Meta
@@ -39,6 +49,8 @@ export function handleVerification(
 }
 
 // ---------------------------------------------------------------- POST: notifiche Meta
+// Garanzia: quando restituisce 200, tutto ciò che serve per completare il lavoro è già su database.
+// L'elaborazione NON è eseguita qui: la riprende lo scheduler (runSweep) leggendo lo stato persistito.
 export async function handleNotification(
   input: { raw: Buffer; signature: string | null; declaredLength?: number | null },
   deps: Deps,
@@ -83,13 +95,12 @@ export async function handleNotification(
       continue;
     }
     try {
-      const eventJson = JSON.stringify(ev); // solo ID: nessun dato personale
-      const r = await store.upsertReceived(ev, eventJson, now());
+      const r = await store.upsertReceived(ev, JSON.stringify(ev), now(), "META"); // solo ID, nessun dato personale
       if (r.isNew) received++;
       else duplicates++;
       if (r.stato !== "PROCESSED") toProcess.push(r.id);
     } catch {
-      // Nulla è stato garantito su questo evento: 500 => Meta ritenta.
+      // Nulla è garantito su questo evento: 500 => Meta ritenta.
       log("webhook_persist_error");
       return { status: 500, body: { ok: false, error: "persist_failed" }, toProcess: [] };
     }
@@ -99,14 +110,11 @@ export async function handleNotification(
 }
 
 // ---------------------------------------------------------------- elaborazione di un evento
-function brandFor(cfg: MetaConfig, formId: string) {
-  return cfg.formBrands[formId] ?? cfg.defaultBrand;
-}
+const brandFor = (cfg: MetaConfig, formId: string) => cfg.formBrands[formId] ?? cfg.defaultBrand;
 
 export async function processDelivery(deps: Deps, id: string): Promise<"processed" | "failed" | "skipped"> {
   const { cfg, store, sink, log } = deps;
-  const staleBefore = new Date(deps.now().getTime() - STALE_PROCESSING_MS);
-  const d = await store.claim(id, staleBefore);
+  const d = await store.claim(id, new Date(deps.now().getTime() - STALE_PROCESSING_MS));
   if (!d) return "skipped";
 
   const failWith = async (code: string, retriable: boolean) => {
@@ -117,6 +125,7 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
   };
 
   try {
+    // 1. Recupero del lead UNA sola volta (poi riusato da tutti i destinatari e dai retry).
     let lead: GraphLead | null = d.leadJson ? (JSON.parse(d.leadJson) as GraphLead) : null;
     if (!lead) {
       const ev: LeadgenEvent = { leadgenId: d.leadgenId, pageId: d.pageId, formId: d.formId };
@@ -126,8 +135,13 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
       await store.saveLead(d.id, JSON.stringify(lead));
     }
 
+    // 2. Righe di consegna create PRIMA di chiudere l'elaborazione: un crash successivo non perde destinatari.
+    if (cfg.downstreams.length > 0) await store.ensureDownstreams(d.id, cfg.downstreams.map((x) => x.name));
+
+    // 3. Eventuale creazione lead locale (solo se questo servizio è anche un CRM).
     let leadId: string | null = d.leadId;
-    if (cfg.localIngest) {
+    if (cfg.localIngest && d.origine === "META") {
+      if (!sink) return await failWith("sink_missing", false);
       const m = mapLead(lead);
       const r = await sink.ingest({
         externalId: d.leadgenId,
@@ -143,14 +157,13 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
       leadId = r.leadId;
     }
     await store.markProcessed(d.id, leadId);
-    log("delivery_processed", { duplicate: false });
+    log("delivery_processed");
 
-    // Fan-out: ogni destinatario ha stato e retry indipendenti.
-    if (cfg.downstreams.length > 0) {
-      await store.ensureDownstreams(d.id, cfg.downstreams.map((x) => x.name));
-      const processed: DeliveryRow = { ...d, stato: "PROCESSED", leadJson: JSON.stringify(lead), leadId };
-      for (const row of await store.getDownstreams(d.id)) {
-        if (row.stato !== "DELIVERED") await deliverDownstream(deps, row, processed).catch(() => log("downstream_internal_error"));
+    // 4. Fan-out: ogni destinatario ha stato, tentativi e retry indipendenti.
+    const processed: DeliveryRow = { ...d, stato: "PROCESSED", leadJson: JSON.stringify(lead), leadId };
+    for (const row of await store.getDownstreams(d.id)) {
+      if (row.stato !== "DELIVERED") {
+        await deliverDownstream(deps, row, processed).catch(() => log("downstream_internal_error"));
       }
     }
     return "processed";
@@ -159,19 +172,29 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
   }
 }
 
-// ---------------------------------------------------------------- fan-out verso i CRM a valle
-export function buildDownstreamPayload(d: DeliveryRow, nowIso: string): string {
+// ---------------------------------------------------------------- contratto downstream (v1)
+/**
+ * Corpo JSON inviato a ogni CRM. Deterministico per evento+modalità (stesso corpo a ogni tentativo),
+ * senza App Secret, token Meta né firma Meta originale.
+ */
+export function buildDownstreamPayload(d: DeliveryRow, mode: Mode): string {
   const ev = JSON.parse(d.eventJson) as LeadgenEvent;
+  const lead = d.leadJson ? (JSON.parse(d.leadJson) as GraphLead) : null;
   return JSON.stringify({
-    event_id: d.leadgenId,
+    schema_version: SCHEMA_VERSION,
+    event_id: eventIdFor(d.leadgenId),
+    source: "meta_lead_ads",
+    mode,
     leadgen_id: d.leadgenId,
     page_id: ev.pageId,
     form_id: ev.formId,
-    ad_id: ev.adId ?? null,
+    ad_id: ev.adId ?? lead?.ad_id ?? null,
     adgroup_id: ev.adgroupId ?? null,
     created_time: ev.createdTime ?? null,
-    forwarded_at: nowIso,
-    lead: d.leadJson ? JSON.parse(d.leadJson) : null, // l'App Secret non viene mai inoltrato
+    received_at: d.receivedAt.toISOString(),
+    lead: lead
+      ? { id: lead.id, created_time: lead.created_time ?? null, form_id: lead.form_id, ad_id: lead.ad_id ?? null, campaign_name: lead.campaign_name ?? null, field_data: lead.field_data }
+      : null,
   });
 }
 
@@ -181,19 +204,27 @@ export async function deliverDownstream(deps: Deps, row: DownstreamRow, d: Deliv
     await deps.store.markDownstreamFailed(row.id, "target_not_configured", false, null);
     return false;
   }
-  const attempt = await deps.store.bumpDownstreamAttempt(row.id);
-  const body = buildDownstreamPayload(d, deps.now().toISOString());
-  const ts = String(Math.floor(deps.now().getTime() / 1000));
+  // Un replay (rilettura manuale di un lead reale già gestito altrove) è SEMPRE shadow: mai effetti live.
+  const mode: Mode = d.origine === "REPLAY" ? "shadow" : target.mode;
+  // Lease atomica: due scheduler concorrenti non inviano mai lo stesso evento allo stesso destinatario.
+  const attempt = await deps.store.claimDownstream(row.id, deps.now(), 2 * 60 * 1000);
+  if (attempt === null) return false;
+  const body = buildDownstreamPayload(d, mode);
+  const ts = String(Math.floor(deps.now().getTime() / 1000)); // nuovo timestamp (e firma) a ogni tentativo
   let retriable = true;
   let code = "downstream_network";
+  let minDelay = 0;
   try {
     const res = await deps.fetchImpl(target.url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "x-gpc-event-id": d.leadgenId,
+        "user-agent": "gpc-meta-gateway/1",
+        "x-gpc-schema-version": String(SCHEMA_VERSION),
+        "x-gpc-event-id": eventIdFor(d.leadgenId),
         "x-gpc-timestamp": ts,
-        "x-gpc-signature": signInternal(target.secret, ts, body), // segreto diverso per ciascun CRM
+        "x-gpc-signature": signInternal(target.secret, ts, body), // HMAC con il segreto PROPRIO di questo CRM
+        "x-gpc-mode": mode,
         "x-gpc-attempt": String(attempt),
       },
       body,
@@ -201,61 +232,108 @@ export async function deliverDownstream(deps: Deps, row: DownstreamRow, d: Deliv
     });
     if (res.ok || res.status === 409) {
       await deps.store.markDownstreamDelivered(row.id);
-      deps.log("downstream_delivered", { target: target.name, attempt });
+      deps.log("downstream_delivered", { target: target.name, attempt, mode, status: res.status });
       return true;
     }
     code = `downstream_${res.status}`;
-    retriable = res.status >= 500 || res.status === 429 || res.status === 408;
+    retriable = res.status >= 500 || [408, 425, 429].includes(res.status);
+    const ra = Number(res.headers.get("retry-after"));
+    if (Number.isFinite(ra) && ra > 0) minDelay = ra * 1000;
   } catch {
     /* rete/timeout: ritentabile */
   }
-  const r = nextRetry(deps, attempt, retriable);
+  const r = nextRetry(deps, attempt, retriable, minDelay);
   await deps.store.markDownstreamFailed(row.id, code, r.retriabile, r.at);
   deps.log("downstream_failed", { target: target.name, code, retriabile: r.retriabile });
   return false;
 }
 
-// ---------------------------------------------------------------- ritentativi
-export async function runSweep(deps: Deps, limit = 25): Promise<{ deliveries: number; downstreams: number }> {
+// ---------------------------------------------------------------- scheduler: sweep dello stato persistito
+export async function runSweep(
+  deps: Deps,
+  opts: { limit?: number; budgetMs?: number } = {},
+): Promise<{ deliveries: number; downstreams: number; stoppedForBudget: boolean }> {
+  const limit = opts.limit ?? 25;
+  const started = Date.now();
+  const over = () => Date.now() - started > (opts.budgetMs ?? 40_000);
   const now = deps.now();
   const ids = await deps.store.listRetryableDeliveries(new Date(now.getTime() - RECEIVED_GRACE_MS), new Date(now.getTime() - STALE_PROCESSING_MS), limit);
   let deliveries = 0;
-  for (const id of ids) {
-    const r = await processDelivery(deps, id).catch(() => "failed" as const);
-    if (r !== "skipped") deliveries++;
-  }
   let downstreams = 0;
+  let stopped = false;
+  for (const id of ids) {
+    if (over()) { stopped = true; break; }
+    if ((await processDelivery(deps, id).catch(() => "failed" as const)) !== "skipped") deliveries++;
+  }
   for (const { row, delivery } of await deps.store.listDueDownstreams(deps.now(), limit)) {
+    if (over()) { stopped = true; break; }
     await deliverDownstream(deps, row, delivery).catch(() => undefined);
     downstreams++;
   }
-  return { deliveries, downstreams };
+  return { deliveries, downstreams, stoppedForBudget: stopped };
+}
+
+// ---------------------------------------------------------------- replay manuale (solo shadow)
+/**
+ * Rilegge da Graph un lead reale già noto (es. dal log del CRM attuale) e lo distribuisce in SHADOW.
+ * Serve a collaudare l'intera catena senza modificare Meta e senza creare duplicati live.
+ */
+export async function replayLead(deps: Deps, leadgenId: string): Promise<{ status: number; body: Record<string, unknown> }> {
+  const { cfg, store } = deps;
+  if (!/^\d{1,30}$/.test(leadgenId)) return { status: 400, body: { ok: false, error: "invalid_leadgen_id" } };
+  if (!cfg.pageId || cfg.allowedFormIds.length === 0) return { status: 503, body: { ok: false, error: "not_configured" } };
+  const res = await fetchLead({ leadgenId, pageId: cfg.pageId, formId: "" }, cfg, deps.fetchImpl);
+  if (!res.ok) return { status: res.retriable ? 502 : 422, body: { ok: false, error: res.code } };
+  const ev: LeadgenEvent = { leadgenId, pageId: cfg.pageId, formId: res.lead.form_id, adId: res.lead.ad_id };
+  if (authorizeEvent(ev, cfg) !== "ok") return { status: 403, body: { ok: false, error: "form_not_allowed" } };
+  const r = await store.upsertReceived(ev, JSON.stringify(ev), deps.now(), "REPLAY");
+  if (!r.isNew) return { status: 200, body: { ok: true, duplicate: true } }; // già gestito: nessun reinvio
+  await store.saveLead(r.id, JSON.stringify(res.lead));
+  const out = await processDelivery(deps, r.id);
+  return { status: 200, body: { ok: true, duplicate: false, result: out } };
 }
 
 // ---------------------------------------------------------------- ricezione eventi interni (gateway → questo CRM)
 export async function handleInternalEvent(
-  input: { raw: Buffer; timestamp: string | null; signature: string | null },
+  input: { raw: Buffer; timestamp: string | null; signature: string | null; eventIdHeader?: string | null },
   deps: Deps,
 ): Promise<{ status: number; body: Record<string, unknown> }> {
-  const { cfg, sink, log } = deps;
-  if (!cfg.internalSecret || !cfg.pageId || cfg.allowedFormIds.length === 0) return { status: 503, body: { ok: false, error: "not_configured" } };
+  const { cfg, sink, inbound, log } = deps;
+  if (!cfg.internalSecret || !cfg.pageId || cfg.allowedFormIds.length === 0 || !inbound) return { status: 503, body: { ok: false, error: "not_configured" } };
   if (input.raw.length > MAX_PAYLOAD_BYTES) return { status: 413, body: { ok: false, error: "payload_too_large" } };
   const text = input.raw.toString("utf8");
+  // Anti-replay: timestamp entro ±300 s dall'orologio locale + idempotenza per event_id.
   if (!verifyInternal(cfg.internalSecret, input.timestamp, input.signature, text, Math.floor(deps.now().getTime() / 1000))) {
     log("internal_bad_signature");
     return { status: 401, body: { ok: false, error: "invalid_signature" } };
   }
-  let p: { leadgen_id?: unknown; page_id?: unknown; form_id?: unknown; ad_id?: unknown; lead?: GraphLead | null };
+  let p: { schema_version?: unknown; event_id?: unknown; mode?: unknown; leadgen_id?: unknown; page_id?: unknown; form_id?: unknown; ad_id?: unknown; lead?: GraphLead | null };
   try {
     p = JSON.parse(text);
   } catch {
     return { status: 400, body: { ok: false, error: "invalid_payload" } };
   }
+  if (p.schema_version !== SCHEMA_VERSION) return { status: 422, body: { ok: false, error: "unsupported_schema_version" } };
   const ev: LeadgenEvent = { leadgenId: String(p.leadgen_id ?? ""), pageId: String(p.page_id ?? ""), formId: String(p.form_id ?? "") };
-  if (!/^\d+$/.test(ev.leadgenId) || authorizeEvent(ev, cfg) !== "ok") {
+  if (!/^\d+$/.test(ev.leadgenId) || p.event_id !== eventIdFor(ev.leadgenId) || (input.eventIdHeader && input.eventIdHeader !== p.event_id)) {
+    return { status: 400, body: { ok: false, error: "invalid_payload" } };
+  }
+  if (p.mode !== "shadow" && p.mode !== "live") return { status: 400, body: { ok: false, error: "invalid_payload" } };
+  if (authorizeEvent(ev, cfg) !== "ok") {
     log("internal_event_not_allowed");
     return { status: 200, body: { ok: true, ignored: true } };
   }
+  // Modalità effettiva: shadow se lo è il gateway O se questo CRM non è ancora stato abilitato a "live".
+  const mode: Mode = p.mode === "live" && cfg.inboundMode === "live" ? "live" : "shadow";
+  const rec = await inbound.record({ eventId: p.event_id as string, leadgenId: ev.leadgenId, pageId: ev.pageId, formId: ev.formId, mode }, deps.now());
+  if (!rec.isNew && (rec.leadId || rec.mode === "shadow")) {
+    return { status: 200, body: { ok: true, duplicate: true } };
+  }
+  if (mode === "shadow") {
+    log("internal_shadow_recorded");
+    return { status: 202, body: { ok: true, shadow: true } }; // nessun lead, nessuna notifica, nessuna automazione
+  }
+  if (!sink) return { status: 503, body: { ok: false, error: "not_configured" } };
   if (!p.lead || !Array.isArray(p.lead.field_data) || p.lead.id !== ev.leadgenId) return { status: 400, body: { ok: false, error: "invalid_payload" } };
   const m = mapLead(p.lead);
   const r = await sink.ingest({
@@ -269,5 +347,6 @@ export async function handleInternalEvent(
     adId: typeof p.ad_id === "string" ? p.ad_id : (p.lead.ad_id ?? null),
   });
   if (!r.ok) return { status: r.retriable ? 503 : 422, body: { ok: false, error: r.code } };
+  await inbound.attachLead(p.event_id as string, r.leadId);
   return { status: 200, body: { ok: true, duplicate: r.duplicate } };
 }

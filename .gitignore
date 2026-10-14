@@ -5,3 +5,7 @@ prisma/dev.db-journal
 .env
 *.log
 tsconfig.tsbuildinfo
+
+# gateway
+gateway/generated
+gateway/node_modules

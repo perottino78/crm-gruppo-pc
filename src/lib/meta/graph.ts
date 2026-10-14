@@ -13,14 +13,14 @@ const TEMP_GRAPH_CODES = new Set([1, 2, 4, 17, 32, 341, 368, 613, 80004]);
  */
 export async function fetchLead(
   ev: LeadgenEvent,
-  cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion">,
+  cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl">,
   fetchImpl: typeof fetch = fetch,
   timeoutMs = 10_000,
 ): Promise<GraphResult> {
   if (!cfg.accessToken || !cfg.appSecret) return { ok: false, retriable: true, code: "config_missing" };
   const proof = appSecretProof(cfg.accessToken, cfg.appSecret);
   const fields = "id,created_time,form_id,ad_id,campaign_name,field_data";
-  const url = `https://graph.facebook.com/${cfg.graphVersion}/${encodeURIComponent(ev.leadgenId)}?fields=${fields}&appsecret_proof=${proof}`;
+  const url = `${cfg.graphBaseUrl}/${cfg.graphVersion}/${encodeURIComponent(ev.leadgenId)}?fields=${fields}&appsecret_proof=${proof}`;
 
   let res: Response;
   try {
@@ -53,7 +53,7 @@ export async function fetchLead(
   }
   // Il lead recuperato deve coincidere con la notifica.
   if (d.id !== ev.leadgenId) return { ok: false, retriable: false, code: "lead_id_mismatch" };
-  if (d.form_id !== ev.formId) return { ok: false, retriable: false, code: "form_id_mismatch" };
+  if (ev.formId && d.form_id !== ev.formId) return { ok: false, retriable: false, code: "form_id_mismatch" };
 
   const field_data = (d.field_data as unknown[])
     .filter((f): f is { name: string; values: unknown[] } => !!f && typeof (f as { name?: unknown }).name === "string")

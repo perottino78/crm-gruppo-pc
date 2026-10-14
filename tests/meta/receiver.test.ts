@@ -219,6 +219,8 @@ const fanout = () =>
     META_DOWNSTREAMS: "crm-a,crm-b",
     META_DOWNSTREAM_CRM_A_URL: "https://crm-a.example.test/hook",
     META_DOWNSTREAM_CRM_A_SECRET: T.crmASecret,
+    META_DOWNSTREAM_CRM_A_MODE: "live",
+    META_DOWNSTREAM_CRM_B_MODE: "live",
     META_DOWNSTREAM_CRM_B_URL: "https://crm-b.example.test/hook",
     META_DOWNSTREAM_CRM_B_SECRET: T.crmBSecret,
   });
@@ -239,9 +241,9 @@ test("Fan-out: ogni CRM riceve l'evento firmato con il PROPRIO segreto; App Secr
     const body = String(c.init.body);
     assert.ok(verifyInternal(secret, h["x-gpc-timestamp"], h["x-gpc-signature"], body, Math.floor(deps.now().getTime() / 1000)), "firma valida col segreto del destinatario");
     assert.ok(!verifyInternal(other, h["x-gpc-timestamp"], h["x-gpc-signature"], body, Math.floor(deps.now().getTime() / 1000)), "firma non valida con il segreto dell'altro CRM");
-    assert.equal(h["x-gpc-event-id"], T.leadgenId);
+    assert.equal(h["x-gpc-event-id"], `meta_leadgen_${T.leadgenId}`);
     const p = JSON.parse(body);
-    assert.equal(p.event_id, T.leadgenId);
+    assert.equal(p.event_id, `meta_leadgen_${T.leadgenId}`);
     assert.ok(!body.includes(T.appSecret) && !body.includes(T.token) && !body.includes(T.verify));
   }
 });
@@ -311,7 +313,7 @@ test("Gateway puro (META_LOCAL_INGEST=false): nessun lead locale ma fan-out rego
 test("Evento interno: firma valida → lead creato; duplicato → idempotente; firma/timestamp errati → 401", async () => {
   const { deps, sink } = makeDeps();
   const tsNow = String(Math.floor(deps.now().getTime() / 1000));
-  const body = JSON.stringify({ event_id: T.leadgenId, leadgen_id: T.leadgenId, page_id: T.pageId, form_id: T.formId, ad_id: "1", lead: graphLead() });
+  const body = JSON.stringify({ schema_version: 1, event_id: `meta_leadgen_${T.leadgenId}`, mode: "live", leadgen_id: T.leadgenId, page_id: T.pageId, form_id: T.formId, ad_id: "1", lead: graphLead() });
   const raw = Buffer.from(body);
   const h = internalHeaders(T.internal, body, tsNow);
   const ok = await handleInternalEvent({ raw, timestamp: h.ts, signature: h.sig }, deps);
@@ -327,7 +329,7 @@ test("Evento interno: firma valida → lead creato; duplicato → idempotente; f
 });
 test("Evento interno: page/form non autorizzati ignorati", async () => {
   const { deps, sink } = makeDeps();
-  const body = JSON.stringify({ leadgen_id: T.leadgenId, page_id: "1", form_id: T.formId, lead: graphLead() });
+  const body = JSON.stringify({ schema_version: 1, event_id: `meta_leadgen_${T.leadgenId}`, mode: "live", leadgen_id: T.leadgenId, page_id: "1", form_id: T.formId, lead: graphLead() });
   const h = internalHeaders(T.internal, body, String(Math.floor(deps.now().getTime() / 1000)));
   const r = await handleInternalEvent({ raw: Buffer.from(body), timestamp: h.ts, signature: h.sig }, deps);
   assert.equal(r.body.ignored, true);

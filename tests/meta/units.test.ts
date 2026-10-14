@@ -38,8 +38,9 @@ test("config: lista form, brand per form, downstream incompleti segnalati, https
     META_ALLOWED_FORM_IDS: "1280816026986939, 42,xx",
     META_FORM_BRANDS: "42=Solaris",
     META_DOWNSTREAMS: "a,b,c",
-    META_DOWNSTREAM_A_URL: "https://a.test/h", META_DOWNSTREAM_A_SECRET: "s",
-    META_DOWNSTREAM_B_URL: "http://insicuro.test/h", META_DOWNSTREAM_B_SECRET: "s",
+    META_DOWNSTREAM_A_URL: "https://a.test/h", META_DOWNSTREAM_A_SECRET: "a".repeat(32),
+    META_DOWNSTREAM_B_URL: "http://insicuro.test/h", META_DOWNSTREAM_B_SECRET: "b".repeat(32),
+    META_DOWNSTREAM_C_URL: "https://c.test/h", META_DOWNSTREAM_C_SECRET: "corto",
   });
   assert.deepEqual(c.allowedFormIds, ["1280816026986939", "42"]);
   assert.equal(c.formBrands["42"], "Solaris");

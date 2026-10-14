@@ -1,7 +1,7 @@
 import { loadMetaConfig, type MetaConfig } from "../../src/lib/meta/config";
 import { metaSignature, signInternal } from "../../src/lib/meta/signature";
 import type { Deps } from "../../src/lib/meta/service";
-import type { DeliveryRow, DeliveryStato, DownstreamRow, IngestInput, IngestResult, LeadSink, LeadgenEvent, MetaStore } from "../../src/lib/meta/types";
+import type { DeliveryRow, DeliveryStato, DownstreamRow, InboundStore, IngestInput, IngestResult, LeadSink, LeadgenEvent, MetaStore, Origine } from "../../src/lib/meta/types";
 
 // Tutti i valori sono FINTI e usati solo nei test. Mai segreti reali.
 export const T = {
@@ -11,8 +11,8 @@ export const T = {
   pageId: "1039357632750262",
   formId: "1280816026986939",
   leadgenId: "555000111222333",
-  crmASecret: "test_downstream_secret_A",
-  crmBSecret: "test_downstream_secret_B",
+  crmASecret: "test_downstream_secret_A_0123456789abcdef",
+  crmBSecret: "test_downstream_secret_B_0123456789abcdef",
   internal: "test_internal_secret",
 };
 
@@ -25,6 +25,7 @@ export const testEnv = {
   META_GRAPH_API_VERSION: "v26.0",
   META_ALLOWED_FORM_IDS: T.formId,
   META_INTERNAL_SECRET: T.internal,
+  META_INTERNAL_MODE: "live",
 };
 
 export function cfg(extra: Record<string, string> = {}): MetaConfig {
@@ -85,13 +86,13 @@ export class MemoryStore implements MetaStore {
   private n = 0;
   failPersist = false;
 
-  async upsertReceived(ev: LeadgenEvent, eventJson: string, now: Date) {
+  async upsertReceived(ev: LeadgenEvent, eventJson: string, now: Date, origine: Origine = "META") {
     if (this.failPersist) throw new Error("db down");
     const ex = [...this.deliveries.values()].find((d) => d.leadgenId === ev.leadgenId);
     if (ex) return { id: ex.id, stato: ex.stato, isNew: false };
     const id = `d${++this.n}`;
     this.deliveries.set(id, {
-      id, leadgenId: ev.leadgenId, pageId: ev.pageId, formId: ev.formId, adId: ev.adId ?? null, adgroupId: ev.adgroupId ?? null,
+      id, origine, leadgenId: ev.leadgenId, pageId: ev.pageId, formId: ev.formId, adId: ev.adId ?? null, adgroupId: ev.adgroupId ?? null,
       createdTimeMeta: null, stato: "RECEIVED", tentativi: 0, erroreCodice: null, retriabile: true, nextRetryAt: null,
       eventJson, leadJson: null, leadId: null, receivedAt: now, updatedAt: now,
     });
@@ -129,9 +130,41 @@ export class MemoryStore implements MetaStore {
       .filter((x) => this.deliveries.get(x.deliveryId)!.stato === "PROCESSED" && ((x.stato === "PENDING" && (!x.nextRetryAt || x.nextRetryAt <= now)) || (x.stato === "FAILED" && x.retriabile && x.nextRetryAt && x.nextRetryAt <= now)))
       .slice(0, limit).map((x) => ({ row: { ...x }, delivery: { ...this.deliveries.get(x.deliveryId)! } }));
   }
-  async bumpDownstreamAttempt(id: string) { const x = this.downstreams.get(id)!; x.tentativi++; return x.tentativi; }
+  async requeueDeliveries(now: Date) {
+    let n = 0;
+    for (const d of this.deliveries.values()) if (d.stato === "FAILED" && !d.retriabile) { Object.assign(d, { retriabile: true, tentativi: 0, nextRetryAt: now }); n++; }
+    return n;
+  }
+  async requeueDownstreams(now: Date, destinatario?: string) {
+    let n = 0;
+    for (const x of this.downstreams.values()) if (x.stato === "FAILED" && !x.retriabile && (!destinatario || x.destinatario === destinatario)) { Object.assign(x, { retriabile: true, tentativi: 0, nextRetryAt: now }); n++; }
+    return n;
+  }
+  async stats() {
+    const deliveries: Record<string, number> = {};
+    for (const d of this.deliveries.values()) deliveries[d.stato] = (deliveries[d.stato] ?? 0) + 1;
+    return { deliveries, downstreams: [] };
+  }
+  async claimDownstream(id: string, now: Date, leaseMs: number) {
+    const x = this.downstreams.get(id)!;
+    const due = (x.stato === "PENDING" && (!x.nextRetryAt || x.nextRetryAt <= now)) || (x.stato === "FAILED" && x.retriabile && !!x.nextRetryAt && x.nextRetryAt <= now);
+    if (!due) return null;
+    x.tentativi++; x.nextRetryAt = new Date(now.getTime() + leaseMs);
+    return x.tentativi;
+  }
   async markDownstreamDelivered(id: string) { Object.assign(this.downstreams.get(id)!, { stato: "DELIVERED", deliveredAt: this.now(), erroreCodice: null, nextRetryAt: null }); }
   async markDownstreamFailed(id: string, code: string, retriabile: boolean, nextRetryAt: Date | null) { Object.assign(this.downstreams.get(id)!, { stato: "FAILED", erroreCodice: code, retriabile, nextRetryAt }); }
+}
+
+export class MemoryInbound implements InboundStore {
+  events = new Map<string, { mode: string; leadId: string | null }>();
+  async record(i: { eventId: string; mode: "shadow" | "live" }) {
+    const ex = this.events.get(i.eventId);
+    if (ex) return { isNew: false, mode: ex.mode, leadId: ex.leadId };
+    this.events.set(i.eventId, { mode: i.mode, leadId: null });
+    return { isNew: true, mode: i.mode, leadId: null };
+  }
+  async attachLead(eventId: string, leadId: string) { this.events.get(eventId)!.leadId = leadId; }
 }
 
 export class MemorySink implements LeadSink {
@@ -158,6 +191,7 @@ export function makeDeps(opts: {
   const nowFn = opts.now ?? (() => new Date(clock.t));
   const store = new MemoryStore(nowFn);
   const sink = new MemorySink();
+  const inbound = new MemoryInbound();
   const fetchImpl = (async (url: string, init: RequestInit) => {
     calls.push({ url: String(url), init });
     if (!opts.fetchImpl) throw new Error("no fetch stub");
@@ -165,11 +199,11 @@ export function makeDeps(opts: {
   }) as unknown as typeof fetch;
   const deps: Deps = {
     cfg: opts.config ?? cfg(),
-    store, sink, fetchImpl,
+    store, sink, inbound, fetchImpl, random: () => 0.5,
     now: nowFn,
     log: (code, meta) => logs.push(JSON.stringify({ code, ...meta })),
   };
-  return { deps, store, sink, logs, calls, clock };
+  return { deps, store, sink, inbound, logs, calls, clock };
 }
 
 export const json = (status: number, body: unknown) => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
