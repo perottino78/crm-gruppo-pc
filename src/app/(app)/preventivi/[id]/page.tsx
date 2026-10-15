@@ -31,6 +31,7 @@ import {
   spostaRigaSezione,
   spostaSezioneSu,
   spostaSezioneGiu,
+  duplicaPreventivo,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import RigaAzioni from "@/components/RigaAzioni";
@@ -416,6 +417,12 @@ export default async function PreventivoPage({
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <form action={duplicaPreventivo}>
+            <input type="hidden" name="id" value={preventivo.id} />
+            <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Crea una copia con data odierna e nuovo numero offerta">
+              📄 Duplica offerta
+            </button>
+          </form>
           <Link
             href={`/preventivi/${preventivo.id}/stampa`}
             target="_blank"

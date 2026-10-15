@@ -291,6 +291,8 @@ model Preventivo {
   condizioniConsegna   String?
   // Immagine (URL) mostrata in cima alla prima pagina della stampa offerta, es. foto del progetto o rendering
   immagineCopertinaUrl String?
+  // Se questa offerta è stata creata con "Duplica offerta", id dell'offerta di origine (storico sotto il profilo del commerciale)
+  duplicatoDaId        String?
   righe                RigaPreventivo[]
   // Sezioni/stanze in cui il commerciale può raggruppare le righe (es. "Cucina",
   // "Camera 1"...) per organizzare preventivi con molti articoli misti (finestre,

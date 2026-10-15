@@ -394,6 +394,86 @@ export async function creaPreventivo(formData: FormData) {
   redirect(`/preventivi/${preventivo.id}`);
 }
 
+
+// Duplica un'intera offerta con data di creazione odierna e nuovo numero offerta progressivo:
+// copia sezioni, righe e optional, riparte da stato APERTO. L'offerta compare sotto il profilo
+// del commerciale che la duplica (utente loggato, altrimenti quello dell'offerta originale).
+export async function duplicaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const orig = await prisma.preventivo.findUnique({
+    where: { id },
+    include: { sezioni: true, righe: { include: { optionali: true } } },
+  });
+  if (!orig) return;
+  const utente = await getCurrentUser().catch(() => null);
+  const commercialeId = utente?.id ?? orig.commercialeId;
+  const numeroOfferta = await prossimoNumeroOfferta(orig.brandId);
+
+  const nuovo = await prisma.preventivo.create({
+    data: {
+      clienteId: orig.clienteId,
+      brandId: orig.brandId,
+      commercialeId,
+      stato: "APERTO",
+      numeroOfferta,
+      aliquotaIva: orig.aliquotaIva,
+      oggetto: orig.oggetto,
+      scontoPercentuale: orig.scontoPercentuale,
+      prezzoManualeAttivo: orig.prezzoManualeAttivo,
+      prezzoManualeTotale: orig.prezzoManualeTotale,
+      condizioniPagamento: orig.condizioniPagamento,
+      condizioniConsegna: orig.condizioniConsegna,
+      immagineCopertinaUrl: orig.immagineCopertinaUrl,
+      duplicatoDaId: orig.id,
+    },
+  });
+
+  const mappaSezioni = new Map<string, string>();
+  for (const sez of orig.sezioni) {
+    const n = await prisma.sezionePreventivo.create({
+      data: { preventivoId: nuovo.id, nome: sez.nome, ordine: sez.ordine },
+    });
+    mappaSezioni.set(sez.id, n.id);
+  }
+  for (const r of orig.righe) {
+    const nr = await prisma.rigaPreventivo.create({
+      data: {
+        preventivoId: nuovo.id,
+        prodottoId: r.prodottoId,
+        testoLibero: r.testoLibero,
+        quantita: r.quantita,
+        prezzoUnitario: r.prezzoUnitario,
+        optionalDescrizione: r.optionalDescrizione,
+        optionalPrezzo: r.optionalPrezzo,
+        mostraDescrizione: r.mostraDescrizione,
+        misuraLarghezza: r.misuraLarghezza,
+        misuraAltezza: r.misuraAltezza,
+        descrizionePersonalizzata: r.descrizionePersonalizzata,
+        ordine: r.ordine,
+        sezioneId: r.sezioneId ? mappaSezioni.get(r.sezioneId) ?? null : null,
+      },
+    });
+    if (r.optionali.length > 0) {
+      await prisma.rigaOptional.createMany({
+        data: r.optionali.map((o) => ({
+          rigaId: nr.id,
+          optionalId: o.optionalId,
+          quantita: o.quantita,
+          prezzoUnitario: o.prezzoUnitario,
+          nota: o.nota,
+        })),
+      });
+    }
+  }
+  await ricalcolaTotali(nuovo.id);
+  revalidatePath("/preventivi");
+  revalidatePath("/");
+  revalidatePath(`/clienti/${orig.clienteId}`);
+  revalidatePath(`/commerciali/${commercialeId}`);
+  redirect(`/preventivi/${nuovo.id}`);
+}
+
 // totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
 // l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
 // Se e' attivo il "prezzo manuale" (vedi aggiornaPrezzoManuale), il calcolo dalle righe
