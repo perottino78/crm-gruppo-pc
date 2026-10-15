@@ -89,7 +89,11 @@ export default async function PreventiviPage({
                     <Link href={`/preventivi/${p.id}`} className="text-sm font-medium hover:underline">
                       {p.cliente.nome}
                     </Link>
-                    <p className="text-xs text-neutral-600 mt-1">
+                    <p className="text-xs font-semibold text-neutral-800 mt-1">
+                      {p.numeroOfferta ? `Offerta N° ${p.numeroOfferta}` : "Offerta"} · {p.createdAt.toLocaleDateString("it-IT")}
+                      {p.duplicatoDaId ? " · copia" : ""}
+                    </p>
+                    <p className="text-xs text-neutral-600">
                       {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
                     </p>
                     <p className="text-xs text-neutral-600">{p.commerciale.nome}</p>

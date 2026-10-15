@@ -415,6 +415,10 @@ export default async function PreventivoPage({
           >
             {preventivo.brand.nome}
           </span>
+          <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-300">
+            {preventivo.numeroOfferta ? `Offerta N° ${preventivo.numeroOfferta}` : "Offerta"} · {preventivo.createdAt.toLocaleDateString("it-IT")}
+            {preventivo.duplicatoDaId ? " · copia" : ""}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <form action={duplicaPreventivo}>
