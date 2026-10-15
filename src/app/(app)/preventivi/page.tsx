@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
-import { creaPreventivo, aggiornaStatoPreventivo } from "@/app/actions";
+import { creaPreventivo, aggiornaStatoPreventivo, archiviaOfferteScadute } from "@/app/actions";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere, scopeClienteWhere } from "@/lib/scope";
@@ -17,9 +17,11 @@ const COLONNE = [
 export default async function PreventiviPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string }>;
+  searchParams: Promise<{ brand?: string; archivio?: string }>;
 }) {
-  const { brand } = await searchParams;
+  const { brand, archivio } = await searchParams;
+  const inArchivio = archivio === "1";
+  await archiviaOfferteScadute();
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
@@ -27,7 +29,7 @@ export default async function PreventiviPage({
 
   const [preventivi, clienti, brands, commerciali] = await Promise.all([
     prisma.preventivo.findMany({
-      where: { ...brandFiltro, ...preventivoScope },
+      where: { ...brandFiltro, ...preventivoScope, archiviato: inArchivio },
       include: { cliente: true, commerciale: true },
       orderBy: { createdAt: "desc" },
     }),
@@ -39,7 +41,13 @@ export default async function PreventiviPage({
   return (
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-neutral-900">Preventivi</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">{inArchivio ? "Preventivi — Archivio" : "Preventivi"}</h1>
+        <Link
+          href={inArchivio ? "/preventivi" : "/preventivi?archivio=1"}
+          className="btn-3d text-sm px-3 py-1.5"
+        >
+          {inArchivio ? "← Torna ai preventivi attivi" : "🗄️ Archivio"}
+        </Link>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 

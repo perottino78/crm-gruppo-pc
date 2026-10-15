@@ -185,7 +185,7 @@ export default async function SchedaCommercialePage({
               >
                 <span>
                   {p.numeroOfferta ? <span className="text-xs font-semibold text-neutral-700">N° {p.numeroOfferta} · </span> : null}
-                  {p.cliente.nome} <span className="text-xs text-neutral-600">· {p.brand.nome} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · duplicata" : ""}</span>
+                  {p.cliente.nome} <span className="text-xs text-neutral-600">· {p.brand.nome} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · duplicata" : ""}{p.archiviato ? " · archiviata" : ""}</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="text-xs text-neutral-700">{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>

@@ -375,6 +375,81 @@ async function prossimoNumeroOfferta(brandId: string): Promise<number> {
   return (ultimo?.numeroOfferta ?? 0) + 1;
 }
 
+// Validità standard di un'offerta: 15 giorni dalla creazione (modificabile a mano dalla pagina preventivo).
+const GIORNI_VALIDITA_OFFERTA = 15;
+function scadenzaDefault(): Date {
+  const d = new Date();
+  d.setDate(d.getDate() + GIORNI_VALIDITA_OFFERTA);
+  return d;
+}
+
+// Archivia in automatico le offerte ancora APERTE la cui scadenza è passata.
+// Le offerte senza scadenza (create prima di questa funzione) non vengono toccate.
+export async function archiviaOfferteScadute() {
+  await prisma.preventivo.updateMany({
+    where: { archiviato: false, stato: "APERTO", scadenza: { lt: new Date() } },
+    data: { archiviato: true },
+  });
+}
+
+export async function archiviaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const p = await prisma.preventivo.update({ where: { id }, data: { archiviato: true } });
+  revalidatePath("/preventivi");
+  revalidatePath(`/clienti/${p.clienteId}`);
+  revalidatePath(`/commerciali/${p.commercialeId}`);
+  redirect("/preventivi");
+}
+
+// Ripristina un'offerta archiviata; se la scadenza è già passata la riporta a 15 giorni da oggi
+// (altrimenti verrebbe riarchiviata subito).
+export async function ripristinaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const orig = await prisma.preventivo.findUnique({ where: { id } });
+  if (!orig) return;
+  const scaduta = orig.scadenza && orig.scadenza < new Date();
+  await prisma.preventivo.update({
+    where: { id },
+    data: { archiviato: false, ...(scaduta ? { scadenza: scadenzaDefault() } : {}) },
+  });
+  revalidatePath("/preventivi");
+  revalidatePath(`/preventivi/${id}`);
+}
+
+export async function aggiornaScadenzaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const s = str(formData, "scadenza");
+  await prisma.preventivo.update({ where: { id }, data: { scadenza: s ? new Date(s) : null } });
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath("/preventivi");
+}
+
+// Eliminazione definitiva: righe, optional, sezioni e promemoria vanno via con l'offerta.
+// Non consentita se esiste già un progetto/commessa collegato (offerta accettata e lavorata): in quel caso archiviare.
+export async function eliminaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const p = await prisma.preventivo.findUnique({ where: { id }, include: { progetto: true, commessa: true } });
+  if (!p) return;
+  if (p.progetto || p.commessa) {
+    redirect(`/preventivi/${id}?errore=${encodeURIComponent("Offerta con commessa/progetto collegato: non eliminabile, usa Archivia.")}`);
+  }
+  await prisma.$transaction([
+    prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: id } } }),
+    prisma.rigaPreventivo.deleteMany({ where: { preventivoId: id } }),
+    prisma.sezionePreventivo.deleteMany({ where: { preventivoId: id } }),
+    prisma.promemoriaInviato.deleteMany({ where: { preventivoId: id } }),
+    prisma.preventivo.delete({ where: { id } }),
+  ]);
+  revalidatePath("/preventivi");
+  revalidatePath(`/clienti/${p.clienteId}`);
+  revalidatePath(`/commerciali/${p.commercialeId}`);
+  redirect("/preventivi");
+}
+
 export async function creaPreventivo(formData: FormData) {
   const clienteId = str(formData, "clienteId");
   const brandId = str(formData, "brandId");
@@ -386,7 +461,7 @@ export async function creaPreventivo(formData: FormData) {
   const numeroOfferta = await prossimoNumeroOfferta(brandId);
 
   const preventivo = await prisma.preventivo.create({
-    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta },
+    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta, scadenza: scadenzaDefault() },
   });
   revalidatePath("/preventivi");
   revalidatePath("/");
@@ -426,6 +501,7 @@ export async function duplicaPreventivo(formData: FormData) {
       condizioniConsegna: orig.condizioniConsegna,
       immagineCopertinaUrl: orig.immagineCopertinaUrl,
       duplicatoDaId: orig.id,
+      scadenza: scadenzaDefault(),
     },
   });
 

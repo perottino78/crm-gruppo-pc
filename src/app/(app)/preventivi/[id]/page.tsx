@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -32,6 +33,10 @@ import {
   spostaSezioneSu,
   spostaSezioneGiu,
   duplicaPreventivo,
+  archiviaPreventivo,
+  ripristinaPreventivo,
+  eliminaPreventivo,
+  aggiornaScadenzaPreventivo,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import RigaAzioni from "@/components/RigaAzioni";
@@ -427,6 +432,26 @@ export default async function PreventivoPage({
               📄 Duplica offerta
             </button>
           </form>
+          {preventivo.archiviato ? (
+            <form action={ripristinaPreventivo}>
+              <input type="hidden" name="id" value={preventivo.id} />
+              <button type="submit" className="btn-3d btn-3d-green text-sm px-3 py-1.5">♻️ Ripristina</button>
+            </form>
+          ) : (
+            <form action={archiviaPreventivo}>
+              <input type="hidden" name="id" value={preventivo.id} />
+              <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Sposta l'offerta nell'archivio">🗄️ Archivia</button>
+            </form>
+          )}
+          <form action={eliminaPreventivo}>
+            <input type="hidden" name="id" value={preventivo.id} />
+            <BottoneConferma
+              messaggio="Eliminare definitivamente questa offerta? L'operazione non si può annullare."
+              className="btn-3d btn-3d-red text-sm px-3 py-1.5"
+            >
+              🗑️ Elimina
+            </BottoneConferma>
+          </form>
           <Link
             href={`/preventivi/${preventivo.id}/stampa`}
             target="_blank"
@@ -435,6 +460,24 @@ export default async function PreventivoPage({
             🖨️ Stampa offerta
           </Link>
         </div>
+      </div>
+
+      <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
+        {preventivo.archiviato && (
+          <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-semibold">🗄️ Offerta archiviata</span>
+        )}
+        <form action={aggiornaScadenzaPreventivo} className="flex items-center gap-2">
+          <input type="hidden" name="id" value={preventivo.id} />
+          <label className="text-xs font-semibold text-neutral-700">Valida fino al</label>
+          <input
+            type="date"
+            name="scadenza"
+            defaultValue={preventivo.scadenza ? preventivo.scadenza.toISOString().slice(0, 10) : ""}
+            className="border border-neutral-300 rounded px-2 py-1 text-sm"
+          />
+          <button type="submit" className="btn-3d text-xs px-2.5 py-1">Salva</button>
+          <span className="text-xs text-neutral-600">(di default 15 giorni dalla creazione; scaduta l'offerta aperta va in archivio)</span>
+        </form>
       </div>
 
       <AvvisoMisuraFuoriListino errore={errore} />

@@ -141,7 +141,7 @@ export default async function SchedaClientePage({
               className="text-sm py-1.5 border-b border-neutral-50 last:border-0 flex items-center justify-between hover:bg-neutral-50 -mx-4 px-4"
             >
               <span>
-                <span className="font-semibold">{p.numeroOfferta ? `N° ${p.numeroOfferta}` : "Offerta"} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · copia" : ""}</span>
+                <span className="font-semibold">{p.numeroOfferta ? `N° ${p.numeroOfferta}` : "Offerta"} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · copia" : ""}{p.archiviato ? " · archiviata" : ""}</span>
                 {" · "}{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} · {p.commerciale.nome}
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{p.stato}</span>
