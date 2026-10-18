@@ -42,6 +42,7 @@ Opzionali:
 | `META_DEFAULT_BRAND` | `P&C` | Brand dei lead |
 | `META_FORM_BRANDS` | – | Brand per form: `1280816026986939=P&C,42=Solaris` |
 | `META_LOCAL_INGEST` | `true` | `false` = questo servizio fa solo da gateway e non crea lead locali |
+| `META_POLL_MIN_AGE_MINUTES` | `10` | La lettura periodica ignora i lead più recenti di N minuti: il webhook ha la precedenza (evita che un lead letto prima in polling resti shadow). `0` = comportamento precedente |
 | `META_INTERNAL_SECRET` | – | Segreto con cui questo CRM accetta eventi interni firmati (modalità downstream) |
 | `META_RETRY_SECRET` | `CRON_SECRET` | Protegge `/api/lead/meta/retry` |
 | `META_DOWNSTREAMS` | – | Nomi dei CRM a valle, es. `crm-vecchio,crm-nuovo` |
