@@ -282,13 +282,16 @@ export async function runSweep(
 export async function pollLeads(
   deps: Deps,
   opts: { maxPages?: number; pageSize?: number } = {},
-): Promise<{ forms: number; fetched: number; added: number; duplicates: number; errors: number }> {
+): Promise<{ forms: number; fetched: number; added: number; duplicates: number; deferred: number; errors: number }> {
   const { cfg, store, log } = deps;
-  const out = { forms: 0, fetched: 0, added: 0, duplicates: 0, errors: 0 };
+  const out = { forms: 0, fetched: 0, added: 0, duplicates: 0, deferred: 0, errors: 0 };
   if (!cfg.pollEnabled || !cfg.pageId || cfg.allowedFormIds.length === 0) return out;
   const nowMs = deps.now().getTime();
   const since = cfg.pollSince ?? new Date(nowMs - cfg.pollLookbackHours * 3600_000);
   const sinceSec = Math.floor(since.getTime() / 1000);
+  // Il webhook ha la precedenza: i lead troppo recenti si lasciano al webhook (verranno ripresi al giro
+  // successivo solo se il webhook non arriva). Evita che un lead letto prima in POLL resti per sempre shadow.
+  const youngerThan = nowMs - cfg.pollMinAgeMinutes * 60_000;
   for (const formId of cfg.allowedFormIds) {
     out.forms++;
     let after: string | null = null;
@@ -298,6 +301,7 @@ export async function pollLeads(
       for (const lead of r.leads) {
         const ct = lead.created_time ? Date.parse(lead.created_time) : NaN;
         if (Number.isFinite(ct) && ct < since.getTime()) continue; // difesa in profondità sul filtro lato Meta
+        if (Number.isFinite(ct) && ct > youngerThan) { out.deferred++; continue; } // troppo recente: decide il webhook
         out.fetched++;
         const ev: LeadgenEvent = { leadgenId: lead.id, pageId: cfg.pageId, formId, adId: lead.ad_id, createdTime: Number.isFinite(ct) ? Math.floor(ct / 1000) : undefined };
         if (authorizeEvent(ev, cfg) !== "ok") continue;
