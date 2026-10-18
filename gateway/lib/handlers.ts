@@ -1,6 +1,6 @@
 import { authorizeScheduler } from "../../src/lib/meta/schedulerAuth";
 import { MAX_PAYLOAD_BYTES } from "../../src/lib/meta/parse";
-import { handleNotification, handleVerification, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
+import { handleNotification, handleVerification, pollLeads, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
 
 export type Factory = () => Deps;
 const j = (status: number, body: unknown) => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
@@ -55,8 +55,9 @@ export function tick(make: Factory) {
   return async (req: Request) => {
     const deps = make();
     if (!(await authed(req, deps)).ok) return j(401, { ok: false });
+    const poll = await pollLeads(deps).catch(() => undefined); // sola lettura; mai bloccante per lo sweep
     const out = await runSweep(deps, { limit: 25, budgetMs: 40_000 });
-    return j(200, { ok: true, ...out }); // solo contatori
+    return j(200, { ok: true, ...out, poll }); // solo contatori
   };
 }
 
