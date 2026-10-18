@@ -1,7 +1,7 @@
 import type { MetaConfig, Mode } from "./config";
 import { authorizeEvent, MAX_PAYLOAD_BYTES, parseNotification } from "./parse";
 import { constantTimeEqual, signInternal, verifyInternal, verifyMetaSignature } from "./signature";
-import { fetchLead } from "./graph";
+import { fetchFormLeads, fetchLead } from "./graph";
 import { mapLead } from "./mapping";
 import type { DeliveryRow, DownstreamRow, GraphLead, InboundStore, LeadSink, LeadgenEvent, Logger, MetaStore } from "./types";
 
@@ -205,7 +205,8 @@ export async function deliverDownstream(deps: Deps, row: DownstreamRow, d: Deliv
     return false;
   }
   // Un replay (rilettura manuale di un lead reale già gestito altrove) è SEMPRE shadow: mai effetti live.
-  const mode: Mode = d.origine === "REPLAY" ? "shadow" : target.mode;
+  // Anche la lettura periodica (POLL) è shadow, salvo META_POLL_LIVE=true esplicito.
+  const mode: Mode = d.origine === "REPLAY" || (d.origine === "POLL" && !deps.cfg.pollLive) ? "shadow" : target.mode;
   // Lease atomica: due scheduler concorrenti non inviano mai lo stesso evento allo stesso destinatario.
   const attempt = await deps.store.claimDownstream(row.id, deps.now(), 2 * 60 * 1000);
   if (attempt === null) return false;
@@ -271,6 +272,48 @@ export async function runSweep(
     downstreams++;
   }
   return { deliveries, downstreams, stoppedForBudget: stopped };
+}
+
+// ---------------------------------------------------------------- lettura periodica (sola lettura, nessuna modifica a Meta)
+/**
+ * Legge i lead dei moduli consentiti con GET /{form}/leads e li accoda come eventi origine "POLL".
+ * Idempotente: un leadgen_id già noto (da webhook, replay o lettura precedente) non viene mai ri-accodato.
+ */
+export async function pollLeads(
+  deps: Deps,
+  opts: { maxPages?: number; pageSize?: number } = {},
+): Promise<{ forms: number; fetched: number; added: number; duplicates: number; errors: number }> {
+  const { cfg, store, log } = deps;
+  const out = { forms: 0, fetched: 0, added: 0, duplicates: 0, errors: 0 };
+  if (!cfg.pollEnabled || !cfg.pageId || cfg.allowedFormIds.length === 0) return out;
+  const nowMs = deps.now().getTime();
+  const since = cfg.pollSince ?? new Date(nowMs - cfg.pollLookbackHours * 3600_000);
+  const sinceSec = Math.floor(since.getTime() / 1000);
+  for (const formId of cfg.allowedFormIds) {
+    out.forms++;
+    let after: string | null = null;
+    for (let page = 0; page < (opts.maxPages ?? 10); page++) {
+      const r = await fetchFormLeads(formId, cfg, deps.fetchImpl, { sinceSec, after, limit: opts.pageSize ?? 100 });
+      if (!r.ok) { out.errors++; log("poll_failed", { reason: r.code }); break; }
+      for (const lead of r.leads) {
+        const ct = lead.created_time ? Date.parse(lead.created_time) : NaN;
+        if (Number.isFinite(ct) && ct < since.getTime()) continue; // difesa in profondità sul filtro lato Meta
+        out.fetched++;
+        const ev: LeadgenEvent = { leadgenId: lead.id, pageId: cfg.pageId, formId, adId: lead.ad_id, createdTime: Number.isFinite(ct) ? Math.floor(ct / 1000) : undefined };
+        if (authorizeEvent(ev, cfg) !== "ok") continue;
+        try {
+          const u = await store.upsertReceived(ev, JSON.stringify({ ...ev }), deps.now(), "POLL"); // eventJson: solo ID
+          if (!u.isNew) { out.duplicates++; continue; }
+          await store.saveLead(u.id, JSON.stringify(lead)); // lead già in mano: nessuna seconda chiamata a Graph
+          out.added++;
+        } catch { out.errors++; log("poll_persist_error"); }
+      }
+      if (!r.after) break;
+      after = r.after;
+    }
+  }
+  log("poll_done", out);
+  return out;
 }
 
 // ---------------------------------------------------------------- replay manuale (solo shadow)

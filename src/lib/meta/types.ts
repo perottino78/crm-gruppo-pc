@@ -20,7 +20,7 @@ export type GraphLead = {
 export type DeliveryStato = "RECEIVED" | "PROCESSING" | "PROCESSED" | "FAILED";
 export type DownstreamStato = "PENDING" | "DELIVERED" | "FAILED";
 
-export type Origine = "META" | "REPLAY";
+export type Origine = "META" | "REPLAY" | "POLL";
 export type DeliveryRow = {
   id: string;
   origine: Origine;

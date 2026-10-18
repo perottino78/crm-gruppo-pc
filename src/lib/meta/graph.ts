@@ -71,3 +71,57 @@ export async function fetchLead(
     },
   };
 }
+
+export type FormLeadsPage = { ok: true; leads: GraphLead[]; after: string | null } | { ok: false; retriable: boolean; code: string };
+
+/**
+ * Lettura (SOLA LETTURA) dei lead di un modulo: GET /{form_id}/leads. Ordine Graph: dal più recente.
+ * Non segue mai l'URL "next" restituito da Meta (contiene il token): la paginazione usa solo il cursore.
+ */
+export async function fetchFormLeads(
+  formId: string,
+  cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl">,
+  fetchImpl: typeof fetch = fetch,
+  opts: { sinceSec?: number; after?: string | null; limit?: number; timeoutMs?: number } = {},
+): Promise<FormLeadsPage> {
+  if (!cfg.accessToken || !cfg.appSecret) return { ok: false, retriable: true, code: "config_missing" };
+  if (!/^\d+$/.test(formId)) return { ok: false, retriable: false, code: "invalid_form_id" };
+  const proof = appSecretProof(cfg.accessToken, cfg.appSecret);
+  const q = new URLSearchParams({ fields: "id,created_time,form_id,ad_id,campaign_name,field_data", limit: String(Math.min(100, opts.limit ?? 100)), appsecret_proof: proof });
+  if (opts.sinceSec) q.set("filtering", JSON.stringify([{ field: "time_created", operator: "GREATER_THAN", value: opts.sinceSec }]));
+  if (opts.after && /^[A-Za-z0-9=_\-]{1,300}$/.test(opts.after)) q.set("after", opts.after);
+  const url = `${cfg.graphBaseUrl}/${cfg.graphVersion}/${formId}/leads?${q.toString()}`;
+
+  let res: Response;
+  try {
+    res = await fetchImpl(url, { method: "GET", headers: { Authorization: `Bearer ${cfg.accessToken}`, Accept: "application/json" }, signal: AbortSignal.timeout(opts.timeoutMs ?? 15_000) });
+  } catch {
+    return { ok: false, retriable: true, code: "graph_network" };
+  }
+  let json: unknown = null;
+  try { json = await res.json(); } catch { json = null; }
+  if (!res.ok) {
+    const e = (json as { error?: { code?: number } } | null)?.error;
+    const gcode = typeof e?.code === "number" ? e.code : undefined;
+    const retriable = res.status >= 500 || res.status === 429 || res.status === 408 || (gcode !== undefined && TEMP_GRAPH_CODES.has(gcode));
+    return { ok: false, retriable, code: gcode !== undefined ? `graph_${res.status}_c${gcode}` : `graph_${res.status}` };
+  }
+  const body = json as { data?: unknown; paging?: { cursors?: { after?: unknown }; next?: unknown } } | null;
+  if (!body || !Array.isArray(body.data)) return { ok: false, retriable: false, code: "graph_shape" };
+  const leads: GraphLead[] = [];
+  for (const d of body.data as Partial<GraphLead>[]) {
+    if (!d || typeof d.id !== "string" || !/^\d+$/.test(d.id) || d.form_id !== formId || !Array.isArray(d.field_data)) continue; // scarta righe incoerenti
+    leads.push({
+      id: d.id,
+      form_id: d.form_id,
+      created_time: typeof d.created_time === "string" ? d.created_time : undefined,
+      ad_id: typeof d.ad_id === "string" ? d.ad_id : undefined,
+      campaign_name: typeof d.campaign_name === "string" ? d.campaign_name : undefined,
+      field_data: (d.field_data as unknown[])
+        .filter((f): f is { name: string; values: unknown[] } => !!f && typeof (f as { name?: unknown }).name === "string")
+        .map((f) => ({ name: f.name, values: Array.isArray(f.values) ? f.values.filter((x) => typeof x === "string").map(String) : [] })),
+    });
+  }
+  const after = body.paging?.next && typeof body.paging.cursors?.after === "string" ? body.paging.cursors.after : null;
+  return { ok: true, leads, after };
+}

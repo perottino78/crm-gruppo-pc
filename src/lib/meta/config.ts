@@ -27,6 +27,13 @@ export type MetaConfig = {
   graphBaseUrl: string;
   /** Se false questo servizio fa solo da gateway e non crea lead locali. */
   localIngest: boolean;
+  /** Lettura periodica (sola lettura) dei moduli lead via Graph: alternativa al webhook, senza toccare la configurazione Meta. */
+  pollEnabled: boolean;
+  /** I lead letti in polling vanno ai CRM in "live" SOLO se true. Default false = sempre shadow. */
+  pollLive: boolean;
+  /** Ignora lead creati prima di questa data (ISO). Assente = ultime `pollLookbackHours`. */
+  pollSince?: Date;
+  pollLookbackHours: number;
   defaultBrand: string;
   formBrands: Record<string, string>;
 };
@@ -85,6 +92,10 @@ export function loadMetaConfig(env: Env = process.env): MetaConfig {
     graphBaseUrl:
       env.NODE_ENV === "production" ? "https://graph.facebook.com" : (clean(env.META_GRAPH_BASE_URL) ?? "https://graph.facebook.com"),
     localIngest: (clean(env.META_LOCAL_INGEST) ?? "true").toLowerCase() !== "false",
+    pollEnabled: (clean(env.META_POLL_ENABLED) ?? "false").toLowerCase() === "true",
+    pollLive: (clean(env.META_POLL_LIVE) ?? "false").toLowerCase() === "true",
+    pollSince: (() => { const d = clean(env.META_POLL_SINCE) ? new Date(clean(env.META_POLL_SINCE)!) : undefined; return d && !Number.isNaN(d.getTime()) ? d : undefined; })(),
+    pollLookbackHours: Math.min(24 * 30, Math.max(1, Number(clean(env.META_POLL_LOOKBACK_HOURS)) || 48)),
     defaultBrand: clean(env.META_DEFAULT_BRAND) ?? "P&C",
     formBrands,
   };
@@ -93,6 +104,6 @@ export function loadMetaConfig(env: Env = process.env): MetaConfig {
 /** Stato delle variabili (solo presente/assente), per la pagina diagnostica admin. Mai i valori. */
 export function configPresence(env: Env = process.env): { name: string; set: boolean; required: boolean }[] {
   const req = ["META_APP_ID", "META_APP_SECRET", "META_ACCESS_TOKEN", "META_WEBHOOK_VERIFY_TOKEN", "META_PAGE_ID", "META_ALLOWED_FORM_IDS"];
-  const opt = ["META_GRAPH_API_VERSION", "META_DOWNSTREAMS", "META_INTERNAL_SECRET", "META_INTERNAL_SECRET_NEXT", "META_INTERNAL_MODE", "META_SCHEDULER_SECRET", "QSTASH_CURRENT_SIGNING_KEY", "META_LOCAL_INGEST", "META_DEFAULT_BRAND", "META_FORM_BRANDS"];
+  const opt = ["META_GRAPH_API_VERSION", "META_DOWNSTREAMS", "META_INTERNAL_SECRET", "META_INTERNAL_SECRET_NEXT", "META_INTERNAL_MODE", "META_SCHEDULER_SECRET", "QSTASH_CURRENT_SIGNING_KEY", "META_LOCAL_INGEST", "META_POLL_ENABLED", "META_POLL_LIVE", "META_POLL_SINCE", "META_POLL_LOOKBACK_HOURS", "META_DEFAULT_BRAND", "META_FORM_BRANDS"];
   return [...req.map((n) => ({ name: n, set: !!clean(env[n]), required: true })), ...opt.map((n) => ({ name: n, set: !!clean(env[n]), required: false }))];
 }
