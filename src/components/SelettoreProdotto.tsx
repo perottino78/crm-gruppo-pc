@@ -1058,6 +1058,8 @@ function SelettoreCascataVetrata({
 }) {
   const [linea, setLinea] = useState("");
   const [declinazione, setDeclinazione] = useState("");
+  // Terza tendina (solo Nubes Mob): copertura — installazione — movimentazione.
+  const [configurazione, setConfigurazione] = useState("");
 
   const opzioniLinea = useMemo(() => {
     const mappa = new Map<string, string>();
@@ -1075,10 +1077,27 @@ function SelettoreCascataVetrata({
     return [...mappa.entries()];
   }, [filtratePerLinea]);
 
-  const trovato = useMemo(
-    () => filtratePerLinea.find((t) => t.assiVetrata?.declinazione.valore === declinazione) ?? null,
+  const filtratePerDeclinazione = useMemo(
+    () => filtratePerLinea.filter((t) => t.assiVetrata?.declinazione.valore === declinazione),
     [filtratePerLinea, declinazione]
   );
+  const richiedeConfigurazione = useMemo(
+    () => filtratePerDeclinazione.some((t) => t.assiVetrata?.configurazione),
+    [filtratePerDeclinazione]
+  );
+  const opzioniConfigurazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerDeclinazione)
+      if (t.assiVetrata?.configurazione) mappa.set(t.assiVetrata.configurazione.valore, t.assiVetrata.configurazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerDeclinazione]);
+
+  const trovato = useMemo(() => {
+    if (richiedeConfigurazione) {
+      return filtratePerDeclinazione.find((t) => t.assiVetrata?.configurazione?.valore === configurazione) ?? null;
+    }
+    return filtratePerDeclinazione[0] ?? null;
+  }, [filtratePerDeclinazione, richiedeConfigurazione, configurazione]);
 
   useEffect(() => {
     if (trovato && !trovato.disabilitato) {
@@ -1098,6 +1117,7 @@ function SelettoreCascataVetrata({
           onChange={(e) => {
             setLinea(e.target.value);
             setDeclinazione("");
+            setConfigurazione("");
           }}
           className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
         >
@@ -1112,11 +1132,29 @@ function SelettoreCascataVetrata({
           <label className="text-[11px] text-neutral-600">2. Declinazione</label>
           <select
             value={declinazione}
-            onChange={(e) => setDeclinazione(e.target.value)}
+            onChange={(e) => {
+              setDeclinazione(e.target.value);
+              setConfigurazione("");
+            }}
             className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
           >
             <option value="">— seleziona —</option>
             {opzioniDeclinazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {declinazione && richiedeConfigurazione && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Copertura, installazione e movimentazione</label>
+          <select
+            value={configurazione}
+            onChange={(e) => setConfigurazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniConfigurazione.map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
