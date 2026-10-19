@@ -78,6 +78,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("BETA1002")) return "BETA1002";
   if (tipologia.startsWith("BETA1003")) return "BETA1003";
   if (tipologia.startsWith("BARLETTA")) return "BARLETTA";
+  // Nubes Mob (listino 2025): accessori comuni a tutte le 38 varianti apertura/copertura/installazione/movimento.
+  if (tipologia.startsWith("NUBES_MOB_")) return "NUBES_MOB";
   if (tipologia.startsWith("CUPOLA")) return "CUPOLA";
   // --- Sezione 4 2026: 3000 (6 varianti) ---
   if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS_BRACCI")) return "TENDACADUTA_3000_SENZACASS_BRACCI";
@@ -800,8 +802,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   // Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): un unico sottogruppo,
   // la selezione vera e propria avviene con 2 tendine a cascata (linea -> declinazione)
   // tramite assiSelezioneVetrata, stesso pattern di assiSelezionePergola. Nesos ed Ermes
-  // sono per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO): solo Nubes (Mob/Fix/TT)
-  // ha una scheda tecnica reale, con prezzo su richiesta all'ufficio tecnico.
+  // sono per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO). Nubes Mob ha il listino
+  // reale 2025 (NUBES_MOB_*); Nubes Fix/TT restano con prezzo su richiesta.
   if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
     return "Pergole Vetrate";
   }
@@ -1405,7 +1407,47 @@ export function assiSelezioneBioclimatica(tipologia: string): AssiBioclimatica |
 // Nubes ha gia' scheda tecnica e immagini reali per tutte e 3 le declinazioni: solo
 // il prezzo e' segnaposto rosso "su richiesta all'ufficio tecnico" (vedi IN_ARRIVO),
 // finche' non arriva il listino ufficiale.
-export type AssiVetrata = { linea: AsseSelezione; declinazione: AsseSelezione };
+// Nubes Mob ha un listino reale (2025): la declinazione diventa "Mob — apertura NN%" e
+// compare una terza tendina "configurazione" (copertura — installazione — movimentazione),
+// stesso pattern della terza tendina opzionale dei Blindati.
+export type AssiVetrata = { linea: AsseSelezione; declinazione: AsseSelezione; configurazione?: AsseSelezione };
+
+const NUBES_MOB_APERTURA_LABELS: Record<string, string> = {
+  "50": "Mob — apertura 50% (solo manuale)",
+  "66": "Mob — apertura 66%",
+  "75": "Mob — apertura 75%",
+  "80": "Mob — apertura 80%",
+};
+const NUBES_MOB_COPERTURA_LABELS: Record<string, string> = {
+  PC: "Policarbonato alveolare opale 16 mm",
+  SW: "Pannello sandwich bianco 16 mm",
+  VT: "Vetro stratificato 44.2",
+};
+const NUBES_MOB_INSTALLAZIONE_LABELS: Record<string, string> = {
+  STD: "Standard (profilo di ancoraggio)",
+  ADD: "Addossata (gronda + piantoni)",
+};
+const NUBES_MOB_MOVIMENTO_LABELS: Record<string, string> = {
+  MAN: "manuale",
+  MOT: "motorizzata Somfy",
+};
+
+function assiNubesMob(tipologia: string): AssiVetrata | null {
+  const m = tipologia.match(/^NUBES_MOB_(50|66|75|80)_(PC|SW|VT)_(STD|ADD)_(MAN|MOT)$/);
+  if (!m) return null;
+  const [, ap, cop, inst, mov] = m;
+  let movimento = NUBES_MOB_MOVIMENTO_LABELS[mov];
+  if (ap === "75" && cop === "VT" && mov === "MAN") movimento += " (max sporgenza 300 cm)";
+  if (ap === "80" && cop === "VT") movimento += " (inclusa)";
+  return {
+    linea: { valore: "NUBES", label: VETRATA_LINEA_LABELS.NUBES },
+    declinazione: { valore: `NUBES_MOB_${ap}`, label: NUBES_MOB_APERTURA_LABELS[ap] },
+    configurazione: {
+      valore: tipologia,
+      label: `${NUBES_MOB_COPERTURA_LABELS[cop]} — ${NUBES_MOB_INSTALLAZIONE_LABELS[inst]} — ${movimento}`,
+    },
+  };
+}
 
 const VETRATA_LINEA_LABELS: Record<string, string> = {
   NESOS: "Nesos",
@@ -1416,12 +1458,15 @@ const VETRATA_LINEA_LABELS: Record<string, string> = {
 const VETRATA_DECLINAZIONE_LABELS: Record<string, string> = {
   NESOS_PLACEHOLDER: "Listino non ancora disponibile",
   ERMES_PLACEHOLDER: "Listino non ancora disponibile",
-  NUBES_MOB: "Mob — copertura mobile (apertura 50% / 66% / 75%)",
+  // Vecchio segnaposto "prezzo su richiesta", sostituito dalle varianti NUBES_MOB_* del
+  // listino 2025 (la route seed-vetrate lo elimina se nessun preventivo lo usa).
+  NUBES_MOB: "Mob — voce precedente (prezzo su richiesta)",
   NUBES_FIX: "Fix — copertura fissa panoramica",
   NUBES_TT: "TT — copertura fissa a taglio termico (isolamento)",
 };
 
 export function assiSelezioneVetrata(tipologia: string): AssiVetrata | null {
+  if (tipologia.startsWith("NUBES_MOB_")) return assiNubesMob(tipologia);
   let lineaCodice: string | null = null;
   if (tipologia.startsWith("NESOS_")) lineaCodice = "NESOS";
   else if (tipologia.startsWith("NUBES_")) lineaCodice = "NUBES";
@@ -2000,6 +2045,7 @@ export function labelBreveTipologia(tipologia: string): string {
   }
   if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
     const assi = assiSelezioneVetrata(tipologia);
+    if (assi?.configurazione) return `${assi.linea.label} ${assi.declinazione.label} — ${assi.configurazione.label}`;
     if (assi) return `${assi.linea.label} — ${assi.declinazione.label}`;
   }
   if (tipologia.startsWith("ISOMAX_")) {
