@@ -1,0 +1,408 @@
+[
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Trave laterale / piantone (distanza max tra piantoni 3,5 m)",
+  "tipoPrezzo": "FISSO",
+  "valore": 190,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Profilo di rinforzo per trave anteriore e trave laterale",
+  "tipoPrezzo": "FISSO",
+  "valore": 96,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Obbligatorio in caso di installazione di vetrata Visio Fold",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Pannello fuori squadro (supplemento a pannello)",
+  "tipoPrezzo": "FISSO",
+  "valore": 144,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Coperture fuori squadro: calcolare la struttura sull'ingombro massimo e aggiungere ogni pannello fuori squadro",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Telaio fisso in alluminio con vetro 44.1",
+  "tipoPrezzo": "FISSO",
+  "valore": 706,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Scossalina muro laterale/guida, finitura standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 72,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "STRUTTURA",
+  "nome": "Scossalina muro/trave posteriore, finitura standard",
+  "tipoPrezzo": "FISSO",
+  "valore": 72,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "TIMPANO",
+  "nome": "Timpano laterale in policarbonato alveolare opale 16 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 190,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Dimensione minima fatturabile 1 mq",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "TIMPANO",
+  "nome": "Timpano laterale in pannello sandwich 16 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 234,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Dimensione minima fatturabile 1 mq",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "TIMPANO",
+  "nome": "Timpano laterale in policarbonato compatto trasparente 4 mm",
+  "tipoPrezzo": "FISSO",
+  "valore": 284,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Dimensione minima fatturabile 1 mq",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "TIMPANO",
+  "nome": "Timpano laterale in vetro 44.2 trasparente",
+  "tipoPrezzo": "FISSO",
+  "valore": 848,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": "Dimensione minima fatturabile 1 mq",
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "GRONDA",
+  "nome": "Kit gronda",
+  "tipoPrezzo": "FISSO",
+  "valore": 518,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "GRONDA",
+  "nome": "Pluviale",
+  "tipoPrezzo": "FISSO",
+  "valore": 62,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "GRONDA",
+  "nome": "Curva per pluviale",
+  "tipoPrezzo": "FISSO",
+  "valore": 48,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "GRONDA",
+  "nome": "Staffa muro / kit gronda",
+  "tipoPrezzo": "FISSO",
+  "valore": 144,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Strip LED bianco naturale IP65 12W/ml 24V",
+  "tipoPrezzo": "FISSO",
+  "valore": 160,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Strip LED blu-verde-rosso IP65 12W/ml 24V",
+  "tipoPrezzo": "FISSO",
+  "valore": 180,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Strip LED RGB IP65 12W/ml 24V",
+  "tipoPrezzo": "FISSO",
+  "valore": 180,
+  "unita": "ml",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Alimentatore LED 80W",
+  "tipoPrezzo": "FISSO",
+  "valore": 134,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Alimentatore LED 150W",
+  "tipoPrezzo": "FISSO",
+  "valore": 164,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Alimentatore LED 200W",
+  "tipoPrezzo": "FISSO",
+  "valore": 208,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Alimentatore LED 360W",
+  "tipoPrezzo": "FISSO",
+  "valore": 324,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Centralina dimmer con telecomando touch",
+  "tipoPrezzo": "FISSO",
+  "valore": 382,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "ILLUMINAZIONE",
+  "nome": "Amplificatore segnale centralina dimmer (oltre 10 m di LED)",
+  "tipoPrezzo": "FISSO",
+  "valore": 180,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "VETRO",
+  "nome": "Vetro 44.2 satinato (supplemento, solo coperture in vetro)",
+  "tipoPrezzo": "FISSO",
+  "valore": 98,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "VETRO",
+  "nome": "Vetro 44.2 con plastico opaco (supplemento, solo coperture in vetro)",
+  "tipoPrezzo": "FISSO",
+  "valore": 146,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "VETRO",
+  "nome": "Vetro 53.2 controllo solare (supplemento, solo coperture in vetro)",
+  "tipoPrezzo": "FISSO",
+  "valore": 146,
+  "unita": "mq",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "SENSORE PIOGGIA",
+  "nome": "Captatore di pioggia (solo versioni motorizzate)",
+  "tipoPrezzo": "FISSO",
+  "valore": 1176,
+  "unita": "pz",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "COLORE",
+  "nome": "Colore struttura in cartella (RAL1013, RAL8017, RAL7016, RAL7037, Corten, Grafite)",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 5,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ },
+ {
+  "categoria": "COLORE",
+  "nome": "Colore struttura fuori cartella",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 10,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "NUBES_MOB",
+  "note": null,
+  "gruppiApplicabili": [
+   "PERGOLE"
+  ]
+ }
+]
