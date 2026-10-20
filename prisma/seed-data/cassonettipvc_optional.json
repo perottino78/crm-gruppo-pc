@@ -1,0 +1,44 @@
+[
+ {
+  "categoria": "COLORE",
+  "nome": "Pellicolato noce / ciliegio",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "CASSONETTOPVC",
+  "note": null,
+  "gruppiApplicabili": [
+   "SERRAMENTI"
+  ]
+ },
+ {
+  "categoria": "COLORE",
+  "nome": "Pellicolato avorio",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "CASSONETTOPVC",
+  "note": null,
+  "gruppiApplicabili": [
+   "SERRAMENTI"
+  ]
+ },
+ {
+  "categoria": "COLORE",
+  "nome": "Pellicole speciali",
+  "tipoPrezzo": "PERCENTUALE",
+  "valore": 30,
+  "unita": "%",
+  "sporgenzaMm": null,
+  "larghezzaMm": null,
+  "listino": "CASSONETTOPVC",
+  "note": null,
+  "gruppiApplicabili": [
+   "SERRAMENTI"
+  ]
+ }
+]

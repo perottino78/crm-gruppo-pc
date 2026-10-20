@@ -1,0 +1,926 @@
+[
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1700,
+  "prezzoBase": 330.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1800,
+  "prezzoBase": 340.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1900,
+  "prezzoBase": 350.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2000,
+  "prezzoBase": 360.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2100,
+  "prezzoBase": 370.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2200,
+  "prezzoBase": 380.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2300,
+  "prezzoBase": 390.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2400,
+  "prezzoBase": 400.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2500,
+  "prezzoBase": 410.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2600,
+  "prezzoBase": 420.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2700,
+  "prezzoBase": 430.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2800,
+  "prezzoBase": 440.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 900,
+  "prezzoBase": 350.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1000,
+  "prezzoBase": 390.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1100,
+  "prezzoBase": 400.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1200,
+  "prezzoBase": 410.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1300,
+  "prezzoBase": 420.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1400,
+  "prezzoBase": 450.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1500,
+  "prezzoBase": 460.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1600,
+  "prezzoBase": 470.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1700,
+  "prezzoBase": 480.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1800,
+  "prezzoBase": 490.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1900,
+  "prezzoBase": 500.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2000,
+  "prezzoBase": 510.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2100,
+  "prezzoBase": 520.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2200,
+  "prezzoBase": 530.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2300,
+  "prezzoBase": 540.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2400,
+  "prezzoBase": 550.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2500,
+  "prezzoBase": 560.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2600,
+  "prezzoBase": 570.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2700,
+  "prezzoBase": 580.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2800,
+  "prezzoBase": 590.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 370.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 380.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 600,
+  "prezzoBase": 390.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 700,
+  "prezzoBase": 400.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 800,
+  "prezzoBase": 410.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 900,
+  "prezzoBase": 420.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1000,
+  "prezzoBase": 430.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1100,
+  "prezzoBase": 440.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1200,
+  "prezzoBase": 450.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1300,
+  "prezzoBase": 460.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1400,
+  "prezzoBase": 470.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1500,
+  "prezzoBase": 480.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1600,
+  "prezzoBase": 490.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1700,
+  "prezzoBase": 500.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1800,
+  "prezzoBase": 510.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1900,
+  "prezzoBase": 520.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2000,
+  "prezzoBase": 530.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2100,
+  "prezzoBase": 540.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2200,
+  "prezzoBase": 550.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2300,
+  "prezzoBase": 560.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2400,
+  "prezzoBase": 570.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2500,
+  "prezzoBase": 580.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2600,
+  "prezzoBase": 590.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2700,
+  "prezzoBase": 600.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P147",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2800,
+  "prezzoBase": 610.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 400,
+  "prezzoBase": 550.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 500,
+  "prezzoBase": 560.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 600,
+  "prezzoBase": 570.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 700,
+  "prezzoBase": 580.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 800,
+  "prezzoBase": 590.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 900,
+  "prezzoBase": 600.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1000,
+  "prezzoBase": 610.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1100,
+  "prezzoBase": 620.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1200,
+  "prezzoBase": 630.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1300,
+  "prezzoBase": 640.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1400,
+  "prezzoBase": 650.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1500,
+  "prezzoBase": 660.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1600,
+  "prezzoBase": 670.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1700,
+  "prezzoBase": 680.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1800,
+  "prezzoBase": 690.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 1900,
+  "prezzoBase": 700.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2000,
+  "prezzoBase": 710.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2100,
+  "prezzoBase": 720.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2200,
+  "prezzoBase": 730.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2300,
+  "prezzoBase": 740.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2400,
+  "prezzoBase": 750.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2500,
+  "prezzoBase": 760.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2600,
+  "prezzoBase": 770.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2700,
+  "prezzoBase": 780.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 400,
+  "larghezzaMm": 2800,
+  "prezzoBase": 790.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 400,
+  "prezzoBase": 620.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 500,
+  "prezzoBase": 630.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 600,
+  "prezzoBase": 640.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 700,
+  "prezzoBase": 650.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 800,
+  "prezzoBase": 660.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 900,
+  "prezzoBase": 670.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1000,
+  "prezzoBase": 680.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1100,
+  "prezzoBase": 690.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1200,
+  "prezzoBase": 700.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1300,
+  "prezzoBase": 710.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1400,
+  "prezzoBase": 720.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1500,
+  "prezzoBase": 730.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1600,
+  "prezzoBase": 740.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1700,
+  "prezzoBase": 750.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1800,
+  "prezzoBase": 760.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 1900,
+  "prezzoBase": 770.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2000,
+  "prezzoBase": 780.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2100,
+  "prezzoBase": 790.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2200,
+  "prezzoBase": 800.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2300,
+  "prezzoBase": 810.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2400,
+  "prezzoBase": 820.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2500,
+  "prezzoBase": 830.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2600,
+  "prezzoBase": 840.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2700,
+  "prezzoBase": 850.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 500,
+  "larghezzaMm": 2800,
+  "prezzoBase": 860.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 400,
+  "prezzoBase": 640.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 500,
+  "prezzoBase": 650.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 600,
+  "prezzoBase": 660.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 700,
+  "prezzoBase": 670.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 800,
+  "prezzoBase": 680.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 900,
+  "prezzoBase": 690.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1000,
+  "prezzoBase": 700.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1100,
+  "prezzoBase": 710.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1200,
+  "prezzoBase": 720.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1300,
+  "prezzoBase": 730.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1400,
+  "prezzoBase": 740.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1500,
+  "prezzoBase": 750.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1600,
+  "prezzoBase": 760.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1700,
+  "prezzoBase": 770.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1800,
+  "prezzoBase": 780.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 1900,
+  "prezzoBase": 790.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2000,
+  "prezzoBase": 800.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2100,
+  "prezzoBase": 810.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2200,
+  "prezzoBase": 820.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2300,
+  "prezzoBase": 830.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2400,
+  "prezzoBase": 840.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2500,
+  "prezzoBase": 850.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2600,
+  "prezzoBase": 860.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2700,
+  "prezzoBase": 870.0
+ },
+ {
+  "tipologia": "CASSONETTOPVC_P272",
+  "colore": "BIANCO",
+  "altezzaMm": 600,
+  "larghezzaMm": 2800,
+  "prezzoBase": 880.0
+ }
+]
