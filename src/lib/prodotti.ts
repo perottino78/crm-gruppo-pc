@@ -80,6 +80,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("BARLETTA")) return "BARLETTA";
   // Nubes Mob (listino 2025): accessori comuni a tutte le 38 varianti apertura/copertura/installazione/movimento.
   if (tipologia.startsWith("NUBES_MOB_")) return "NUBES_MOB";
+  // Portoncini PVC (1 e 2 ante): pannelli decorativi, maniglioni e finiture comuni.
+  if (tipologia.startsWith("PORTONCINOPVC_")) return "PORTONCINOPVC";
   if (tipologia.startsWith("CUPOLA")) return "CUPOLA";
   // --- Sezione 4 2026: 3000 (6 varianti) ---
   if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS_BRACCI")) return "TENDACADUTA_3000_SENZACASS_BRACCI";
@@ -2094,6 +2096,8 @@ export function labelBreveTipologia(tipologia: string): string {
   if (HISENSE_LABELS[tipologia]) return HISENSE_LABELS[tipologia];
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
+  if (tipologia === "PORTONCINOPVC_1ANTA") return "Portoncino PVC bianco 1 anta";
+  if (tipologia === "PORTONCINOPVC_2ANTE") return "Portoncino PVC bianco 2 ante";
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
