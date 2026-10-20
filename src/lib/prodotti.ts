@@ -82,6 +82,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("NUBES_MOB_")) return "NUBES_MOB";
   // Portoncini PVC (1 e 2 ante): pannelli decorativi, maniglioni e finiture comuni.
   if (tipologia.startsWith("PORTONCINOPVC_")) return "PORTONCINOPVC";
+  // Cassonetti PVC da restauro (2 profondita'): pellicolati comuni.
+  if (tipologia.startsWith("CASSONETTOPVC_")) return "CASSONETTOPVC";
   if (tipologia.startsWith("CUPOLA")) return "CUPOLA";
   // --- Sezione 4 2026: 3000 (6 varianti) ---
   if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS_BRACCI")) return "TENDACADUTA_3000_SENZACASS_BRACCI";
@@ -759,6 +761,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PERSIANEBLINDATE_")) return "ACCIAIO (Blindate)";
   if (tipologia.startsWith("PERSIANEGOCCIA_DOGHEVERTICALI_")) return "ALLUMINIO — Doghe verticali";
   if (tipologia.startsWith("PERSIANEGOCCIA_")) return "ALLUMINIO — Orientabile a Goccia";
+  // Cassonetti PVC da restauro: sottogruppo dentro SERRAMENTI, da abbinare ai serramenti.
+  if (tipologia.startsWith("CASSONETTOPVC_")) return "Cassonetti in PVC da restauro";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
   // Pensiline: tendina Curva / Dritta dentro il gruppo PENSILINE. "Dritta" e' per ora
@@ -2098,6 +2102,8 @@ export function labelBreveTipologia(tipologia: string): string {
   if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
   if (tipologia === "PORTONCINOPVC_1ANTA") return "Portoncino PVC bianco 1 anta";
   if (tipologia === "PORTONCINOPVC_2ANTE") return "Portoncino PVC bianco 2 ante";
+  if (tipologia === "CASSONETTOPVC_P147") return "Cassonetto PVC — profondità fino a 147 mm";
+  if (tipologia === "CASSONETTOPVC_P272") return "Cassonetto PVC — profondità da 147 a 272 mm";
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
