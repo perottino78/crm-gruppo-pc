@@ -809,7 +809,10 @@ export default async function PreventivoPage({
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
-                  .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
+                  .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"))
+                  /* Cassonetti PVC da restauro: come optional solo le colorazioni del proprio listino
+                     (non le voci generiche dei SERRAMENTI: accessori Zenith, posa e servizi Work&Service). */
+                  .filter((o) => listinoDiTipologia(prodotto.tipologia) !== "CASSONETTOPVC" || o.listino === "CASSONETTOPVC");
 
                 // Tende a rullo da interno: tendina "Colore tessuto" con swatch colorato,
                 // scoperta al solo tessuto gia' determinato dal prodotto scelto (categoria
