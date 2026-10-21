@@ -10,10 +10,12 @@ import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
 
 const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
-// Quanti lead mostrare: di default i 10 piu' recenti, poi 20/50/100/tutti a scelta
-// (parametro ?lead=), per non dover scorrere tutta la lista man mano che arrivano.
+// Quante righe mostrare (lead: ?lead=, anagrafica clienti: ?clienti=): di default le 10
+// piu' recenti, poi 20/50/100/tutte a scelta, per non dover scorrere liste lunghissime.
 const LEAD_PER_PAGINA = ["10", "20", "50", "100", "tutti"] as const;
 const LEAD_DEFAULT = "10";
+const leggiQuante = (v: string | undefined) => ((LEAD_PER_PAGINA as readonly string[]).includes(v ?? "") ? v! : LEAD_DEFAULT);
+const quanteTake = (v: string) => (v === "tutti" ? undefined : Number(v));
 
 // Data/ora di arrivo del lead nel CRM, sempre in ora italiana (il server Vercel e' in UTC).
 const formatoArrivo = new Intl.DateTimeFormat("it-IT", {
@@ -38,6 +40,7 @@ type ClientiSearchParams = {
   cap?: string;
   paese?: string;
   lead?: string;
+  clienti?: string;
 };
 
 export default async function ClientiPage({
@@ -45,9 +48,23 @@ export default async function ClientiPage({
 }: {
   searchParams: Promise<ClientiSearchParams>;
 }) {
-  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam } = await searchParams;
-  const leadMostrati = (LEAD_PER_PAGINA as readonly string[]).includes(leadParam ?? "") ? leadParam! : LEAD_DEFAULT;
-  const leadTake = leadMostrati === "tutti" ? undefined : Number(leadMostrati);
+  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam, clienti: clientiParam } = await searchParams;
+  const leadMostrati = leggiQuante(leadParam);
+  const leadTake = quanteTake(leadMostrati);
+  const clientiMostrati = leggiQuante(clientiParam);
+  const clientiTake = quanteTake(clientiMostrati);
+  // Link "Mostra: 10/20/50/100/tutti" che conserva brand, ricerca e l'altra scelta.
+  const hrefQuante = (cambia: { lead?: string; clienti?: string }) => {
+    const parametri = new URLSearchParams();
+    for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese })) if (v) parametri.set(k, v);
+    const l = cambia.lead ?? leadMostrati;
+    const c = cambia.clienti ?? clientiMostrati;
+    if (l !== LEAD_DEFAULT) parametri.set("lead", l);
+    if (c !== LEAD_DEFAULT) parametri.set("clienti", c);
+    return `/clienti${parametri.toString() ? `?${parametri.toString()}` : ""}`;
+  };
+  const classePulsante = (attivo: boolean) =>
+    `px-2 py-1 rounded border ${attivo ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"}`;
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
@@ -80,8 +97,9 @@ export default async function ClientiPage({
   };
 
   const leadWhere = { ...brandFiltro, ...leadScope };
-  const [clienti, lead, leadTotali, brands] = await Promise.all([
-    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" } }),
+  const [clienti, clientiTotali, lead, leadTotali, brands] = await Promise.all([
+    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake }),
+    prisma.cliente.count({ where: clientiWhere }),
     prisma.lead.findMany({
       where: leadWhere,
       orderBy: { createdAt: "desc" },
@@ -162,24 +180,11 @@ export default async function ClientiPage({
         </h2>
         <div className="flex items-center gap-1 text-xs">
           <span className="text-neutral-600 mr-1">Mostra:</span>
-          {LEAD_PER_PAGINA.map((n) => {
-            const parametri = new URLSearchParams();
-            for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese })) if (v) parametri.set(k, v);
-            if (n !== LEAD_DEFAULT) parametri.set("lead", n);
-            const attivo = n === leadMostrati;
-            return (
-              <Link
-                key={n}
-                href={`/clienti${parametri.toString() ? `?${parametri.toString()}` : ""}`}
-                scroll={false}
-                className={`px-2 py-1 rounded border ${
-                  attivo ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
-                }`}
-              >
-                {n === "tutti" ? "tutti" : n}
-              </Link>
-            );
-          })}
+          {LEAD_PER_PAGINA.map((n) => (
+            <Link key={n} href={hrefQuante({ lead: n })} scroll={false} className={classePulsante(n === leadMostrati)}>
+              {n}
+            </Link>
+          ))}
         </div>
       </div>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
@@ -227,12 +232,29 @@ export default async function ClientiPage({
         )}
       </div>
 
-      <h2 className="text-base font-bold text-neutral-900 mb-3">
-        Anagrafica clienti ({clienti.length})
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <h2 className="text-base font-bold text-neutral-900">
+          Anagrafica clienti ({clientiTotali})
+          {clienti.length < clientiTotali && (
+            <span className="ml-2 text-xs font-normal text-neutral-600">
+              {ricercaAttiva ? "mostrati" : "ultimi"} {clienti.length} di {clientiTotali}
+            </span>
+          )}
+        </h2>
+        <div className="flex items-center gap-1 text-xs">
+          <span className="text-neutral-600 mr-1">Mostra:</span>
+          {LEAD_PER_PAGINA.map((n) => (
+            <Link key={n} href={hrefQuante({ clienti: n })} scroll={false} className={classePulsante(n === clientiMostrati)}>
+              {n}
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-4 mb-4">
         <input type="hidden" name="brand" value={brand ?? "Tutti"} />
+        {leadMostrati !== LEAD_DEFAULT && <input type="hidden" name="lead" value={leadMostrati} />}
+        {clientiMostrati !== LEAD_DEFAULT && <input type="hidden" name="clienti" value={clientiMostrati} />}
         <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
