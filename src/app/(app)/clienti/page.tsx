@@ -10,6 +10,25 @@ import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
 
 const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
+// Quanti lead mostrare: di default i 10 piu' recenti, poi 20/50/100/tutti a scelta
+// (parametro ?lead=), per non dover scorrere tutta la lista man mano che arrivano.
+const LEAD_PER_PAGINA = ["10", "20", "50", "100", "tutti"] as const;
+const LEAD_DEFAULT = "10";
+
+// Data/ora di arrivo del lead nel CRM, sempre in ora italiana (il server Vercel e' in UTC).
+const formatoArrivo = new Intl.DateTimeFormat("it-IT", {
+  timeZone: "Europe/Rome",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+function arrivoLead(d: Date): string {
+  const parti = Object.fromEntries(formatoArrivo.formatToParts(d).map((p) => [p.type, p.value]));
+  return `${parti.day}/${parti.month}/${parti.year} alle ${parti.hour}:${parti.minute}`;
+}
+
 type ClientiSearchParams = {
   brand?: string;
   q?: string;
@@ -18,6 +37,7 @@ type ClientiSearchParams = {
   provincia?: string;
   cap?: string;
   paese?: string;
+  lead?: string;
 };
 
 export default async function ClientiPage({
@@ -25,7 +45,9 @@ export default async function ClientiPage({
 }: {
   searchParams: Promise<ClientiSearchParams>;
 }) {
-  const { brand, q, indirizzo, comune, provincia, cap, paese } = await searchParams;
+  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam } = await searchParams;
+  const leadMostrati = (LEAD_PER_PAGINA as readonly string[]).includes(leadParam ?? "") ? leadParam! : LEAD_DEFAULT;
+  const leadTake = leadMostrati === "tutti" ? undefined : Number(leadMostrati);
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
@@ -57,13 +79,16 @@ export default async function ClientiPage({
     AND: [brandFiltro, clienteScope, ricercaStdWhere, ...filtriAvanzati],
   };
 
-  const [clienti, lead, brands] = await Promise.all([
+  const leadWhere = { ...brandFiltro, ...leadScope };
+  const [clienti, lead, leadTotali, brands] = await Promise.all([
     prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" } }),
     prisma.lead.findMany({
-      where: { ...brandFiltro, ...leadScope },
+      where: leadWhere,
       orderBy: { createdAt: "desc" },
+      take: leadTake,
       include: { telefonista: true, brand: true, clienteGenerato: true },
     }),
+    prisma.lead.count({ where: leadWhere }),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);
 
@@ -126,14 +151,50 @@ export default async function ClientiPage({
         </form>
       </div>
 
-      <h2 className="text-base font-bold text-neutral-900 mb-3">
-        Lead da Facebook / Instagram ({lead.length})
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <h2 className="text-base font-bold text-neutral-900">
+          Lead da Facebook / Instagram ({leadTotali})
+          {lead.length < leadTotali && (
+            <span className="ml-2 text-xs font-normal text-neutral-600">
+              ultimi {lead.length} di {leadTotali}
+            </span>
+          )}
+        </h2>
+        <div className="flex items-center gap-1 text-xs">
+          <span className="text-neutral-600 mr-1">Mostra:</span>
+          {LEAD_PER_PAGINA.map((n) => {
+            const parametri = new URLSearchParams();
+            for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese })) if (v) parametri.set(k, v);
+            if (n !== LEAD_DEFAULT) parametri.set("lead", n);
+            const attivo = n === leadMostrati;
+            return (
+              <Link
+                key={n}
+                href={`/clienti${parametri.toString() ? `?${parametri.toString()}` : ""}`}
+                scroll={false}
+                className={`px-2 py-1 rounded border ${
+                  attivo ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
+                }`}
+              >
+                {n === "tutti" ? "tutti" : n}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
         {lead.map((l) => (
           <div key={l.id} className="flex items-center justify-between px-4 py-3 text-sm gap-3">
             <div>
               <p className="font-medium">{l.nome}</p>
+              <p className="text-xs text-neutral-800">
+                🕒 Arrivato il {arrivoLead(l.createdAt)}
+              </p>
+              {(l.telefono || l.email) && (
+                <p className="text-xs text-neutral-600">
+                  {[l.telefono, l.email].filter(Boolean).join(" · ")}
+                </p>
+              )}
               <p className="text-xs text-neutral-600">
                 {l.fonte} · {l.brand.nome} · assegnato a {l.telefonista?.nome ?? "—"}
               </p>
