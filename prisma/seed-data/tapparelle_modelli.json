@@ -358,7 +358,7 @@
     "descrizioneTecnica": "Guida in Ferro Zincato 22x19mm, su misura — prezzo al metro lineare, applicato alla lunghezza reale arrotondata per eccesso ogni 5cm. Disponibile anche in barra da 6m non tagliata: € 2,98/ml.",
     "famiglia": "INDOOR",
     "gruppo": "TAPPARELLE",
-    "immagineUrl": null,
+    "immagineUrl": "/immagini/tapparelle/guida-ferro-zincato.jpg",
     "modalitaCalcolo": "METRO_LINEARE_FISSO",
     "parametriCalcolo": {
       "arrotondamentoCm": 5,
