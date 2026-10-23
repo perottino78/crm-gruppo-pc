@@ -844,6 +844,7 @@ model MetaInboundEvent {
   mode       String   // shadow | live
   leadId     String?
   receivedAt DateTime @default(now())
+}
 // ============ SOLARIS STUDIO — Progettazione Fotovoltaico ============
 
 // Progetto fotovoltaico collegato a un preventivo Solaris.
