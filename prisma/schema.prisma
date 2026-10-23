@@ -966,4 +966,5 @@ model LeadSimulazione {
 
   // Snapshot completo della simulazione al momento dell'invio
   simulazioneJson  Json?
-  createdAt        DateTime @default(now())}
+  createdAt        DateTime @default(now())
+}
