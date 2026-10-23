@@ -58,6 +58,11 @@ export default async function StampaPreventivoPage({
         orderBy: [{ ordine: "asc" }, { id: "asc" }],
       },
       sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
+      solarisProgetto: {
+        include: {
+          fotoTetto: { orderBy: { createdAt: "asc" }, take: 3 },
+        },
+      },
     },
   });
   if (!preventivo) notFound();
@@ -368,6 +373,132 @@ export default async function StampaPreventivoPage({
         </div>
         </div>
       </section>
+
+      {/* ===== PAGINA SOLARIS — ANALISI IMPIANTO FOTOVOLTAICO ===== */}
+      {isSolaris && preventivo.solarisProgetto && preventivo.solarisProgetto.kwp && (
+        <section className="p-6 print:p-4 print:break-after-page">
+          <div className="border-2 rounded-md p-6" style={{ borderColor: "#16A34A" }}>
+            <div className="flex items-center gap-2 mb-5 border-b-2 pb-3" style={{ borderColor: "#16A34A" }}>
+              <span className="text-xl">☀️</span>
+              <h2 className="text-base font-bold" style={{ color: "#16A34A" }}>Analisi Impianto Fotovoltaico — Solaris</h2>
+            </div>
+
+            {/* KPI grid */}
+            {(() => {
+              const sp = preventivo.solarisProgetto!;
+              const fmt = (n: number, d = 0) =>
+                new Intl.NumberFormat("it-IT", { maximumFractionDigits: d, minimumFractionDigits: d }).format(n);
+              const eur2 = (n: number) => "€ " + fmt(Math.round(n));
+              const oriLabel = (o: number | null) =>
+                o == null ? "—" : o === 0 ? "Sud" : Math.abs(o) >= 80 ? (o < 0 ? "Est" : "Ovest") : (o < 0 ? "Sud-Est " : "Sud-Ovest ") + Math.abs(o) + "°";
+
+              // Stima risparmio per anni 1/10/20/25 da risparmioAnno1 con +2% inflazione
+              const r1 = sp.risparmioAnno1 ?? 0;
+              const cumSavings = (years: number) => {
+                let cum = 0;
+                for (let t = 1; t <= years; t++) cum += r1 * Math.pow(1.02, t - 1);
+                return cum;
+              };
+              const bars: [string, number][] = [
+                ["Anno 1", r1],
+                ["Anno 10", cumSavings(10)],
+                ["Anno 20", cumSavings(20)],
+                ["Anno 25", sp.risparmio25anni ?? cumSavings(25)],
+              ];
+              const maxBar = Math.max(...bars.map(([, v]) => v));
+
+              return (
+                <>
+                  <div className="grid grid-cols-4 gap-3 mb-5 text-center text-sm">
+                    {[
+                      ["Impianto", `${fmt(sp.kwp!, 2)} kWp`],
+                      ["Pannelli", `${sp.numeroPannelli ?? "—"} moduli`],
+                      ["Produzione stimata", `${fmt(sp.produzioneStimaKwh ?? 0)} kWh/anno`],
+                      ["Autonomia", `${sp.autonomiaPercent ?? "—"}%`],
+                    ].map(([label, value]) => (
+                      <div key={label} className="border border-neutral-200 rounded-md p-2">
+                        <p className="text-[10px] text-neutral-500 uppercase tracking-wide mb-1">{label}</p>
+                        <p className="font-bold text-base">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 mb-5 text-center text-sm">
+                    {[
+                      ["Risparmio anno 1", eur2(r1)],
+                      ["Rientro investimento", sp.rientroAnni != null ? `${fmt(sp.rientroAnni, 1)} anni` : "—"],
+                      ["Risparmio totale 25 anni", eur2(sp.risparmio25anni ?? 0)],
+                    ].map(([label, value]) => (
+                      <div key={label} className="border rounded-md p-2" style={{ borderColor: "#16A34A", background: "#EEFBF2" }}>
+                        <p className="text-[10px] text-neutral-500 uppercase tracking-wide mb-1">{label}</p>
+                        <p className="font-bold text-base" style={{ color: "#15803D" }}>{value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid gap-4 mb-4" style={{ gridTemplateColumns: sp.fotoTetto.length > 0 ? "1fr 1fr" : "1fr" }}>
+                    {/* Foto tetto */}
+                    {sp.fotoTetto.length > 0 && (
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-2">Foto tetto</p>
+                        <div className="grid gap-2" style={{ gridTemplateColumns: sp.fotoTetto.length > 1 ? "1fr 1fr" : "1fr" }}>
+                          {sp.fotoTetto.map((f) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              key={f.id}
+                              src={f.dataUri}
+                              alt={f.nome ?? "Foto tetto"}
+                              className="w-full object-cover rounded border border-neutral-200"
+                              style={{ maxHeight: "160px" }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Grafico risparmio */}
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-2">Risparmio stimato cumulativo</p>
+                      <div className="space-y-2">
+                        {bars.map(([label, value]) => (
+                          <div key={label} className="flex items-center gap-2 text-xs">
+                            <span className="w-14 text-right text-neutral-600 shrink-0">{label}</span>
+                            <div className="flex-1 bg-neutral-100 rounded-full h-4 overflow-hidden">
+                              <div
+                                className="h-full rounded-full flex items-center justify-end pr-2"
+                                style={{ width: `${maxBar > 0 ? (value / maxBar) * 100 : 0}%`, background: "#16A34A" }}
+                              >
+                                {value >= maxBar * 0.25 && (
+                                  <span className="text-white text-[9px] font-bold whitespace-nowrap">{eur2(value)}</span>
+                                )}
+                              </div>
+                            </div>
+                            {value < maxBar * 0.25 && (
+                              <span className="text-[9px] text-neutral-600 whitespace-nowrap">{eur2(value)}</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 text-xs text-neutral-600 border-t border-neutral-200 pt-3">
+                    <span>Orientamento falda: <strong>{oriLabel(sp.orientamento)}</strong></span>
+                    <span>Inclinazione: <strong>{sp.inclinazione != null ? `${sp.inclinazione}°` : "—"}</strong></span>
+                    {sp.batteria ? <span>Batteria: <strong>{sp.batteria} kWh</strong></span> : <span />}
+                  </div>
+
+                  <p className="text-[9px] text-neutral-400 mt-3">
+                    Stime indicative calcolate con irraggiamento medio della zona, consumo dichiarato e tariffe vigenti.
+                    I risparmi cumulativi includono un&apos;inflazione energetica stimata del 2% annuo.
+                    Valori effettivi soggetti a variazione in base alle condizioni reali di installazione.
+                  </p>
+                </>
+              );
+            })()}
+          </div>
+        </section>
+      )}
 
       {condizioniBrand && (
         <>
