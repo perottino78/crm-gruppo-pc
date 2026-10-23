@@ -58,7 +58,7 @@ export async function handleNotification(
   const { cfg, store, log, now } = deps;
   const fail = (status: number, error: string) => ({ status, body: { ok: false, error }, toProcess: [] as string[] });
 
-  if (!cfg.appSecret || !cfg.pageId || cfg.allowedFormIds.length === 0) {
+  if (!cfg.appSecret || cfg.pageIds.length === 0) {
     log("webhook_not_configured");
     return fail(503, "not_configured");
   }
@@ -110,7 +110,8 @@ export async function handleNotification(
 }
 
 // ---------------------------------------------------------------- elaborazione di un evento
-const brandFor = (cfg: MetaConfig, formId: string) => cfg.formBrands[formId] ?? cfg.defaultBrand;
+const brandFor = (cfg: MetaConfig, formId: string, pageId?: string) =>
+  cfg.formBrands[formId] ?? (pageId ? cfg.pageBrands[pageId] : undefined) ?? cfg.defaultBrand;
 
 export async function processDelivery(deps: Deps, id: string): Promise<"processed" | "failed" | "skipped"> {
   const { cfg, store, sink, log } = deps;
@@ -148,7 +149,7 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
         nome: m.nome || "Contatto Meta",
         telefono: m.telefono,
         email: m.email,
-        brand: brandFor(cfg, d.formId),
+        brand: brandFor(cfg, d.formId, d.pageId),
         note: ["Meta Lead Ads", lead.campaign_name ? `Campagna: ${lead.campaign_name}` : "", m.extra].filter(Boolean).join(" · "),
         formId: d.formId,
         adId: lead.ad_id ?? d.adId,
@@ -285,7 +286,7 @@ export async function pollLeads(
 ): Promise<{ forms: number; fetched: number; added: number; duplicates: number; deferred: number; errors: number }> {
   const { cfg, store, log } = deps;
   const out = { forms: 0, fetched: 0, added: 0, duplicates: 0, deferred: 0, errors: 0 };
-  if (!cfg.pollEnabled || !cfg.pageId || cfg.allowedFormIds.length === 0) return out;
+  if (!cfg.pollEnabled || cfg.pageIds.length === 0 || cfg.allowedFormIds.length === 0) return out;
   const nowMs = deps.now().getTime();
   const since = cfg.pollSince ?? new Date(nowMs - cfg.pollLookbackHours * 3600_000);
   const sinceSec = Math.floor(since.getTime() / 1000);
@@ -328,10 +329,10 @@ export async function pollLeads(
 export async function replayLead(deps: Deps, leadgenId: string): Promise<{ status: number; body: Record<string, unknown> }> {
   const { cfg, store } = deps;
   if (!/^\d{1,30}$/.test(leadgenId)) return { status: 400, body: { ok: false, error: "invalid_leadgen_id" } };
-  if (!cfg.pageId || cfg.allowedFormIds.length === 0) return { status: 503, body: { ok: false, error: "not_configured" } };
-  const res = await fetchLead({ leadgenId, pageId: cfg.pageId, formId: "" }, cfg, deps.fetchImpl);
+  if (cfg.pageIds.length === 0) return { status: 503, body: { ok: false, error: "not_configured" } };
+  const res = await fetchLead({ leadgenId, pageId: cfg.pageId ?? cfg.pageIds[0], formId: "" }, cfg, deps.fetchImpl);
   if (!res.ok) return { status: res.retriable ? 502 : 422, body: { ok: false, error: res.code } };
-  const ev: LeadgenEvent = { leadgenId, pageId: cfg.pageId, formId: res.lead.form_id, adId: res.lead.ad_id };
+  const ev: LeadgenEvent = { leadgenId, pageId: cfg.pageId ?? cfg.pageIds[0], formId: res.lead.form_id, adId: res.lead.ad_id };
   if (authorizeEvent(ev, cfg) !== "ok") return { status: 403, body: { ok: false, error: "form_not_allowed" } };
   const r = await store.upsertReceived(ev, JSON.stringify(ev), deps.now(), "REPLAY");
   if (!r.isNew) return { status: 200, body: { ok: true, duplicate: true } }; // già gestito: nessun reinvio
@@ -346,7 +347,7 @@ export async function handleInternalEvent(
   deps: Deps,
 ): Promise<{ status: number; body: Record<string, unknown> }> {
   const { cfg, sink, inbound, log } = deps;
-  if (!cfg.internalSecret || !cfg.pageId || cfg.allowedFormIds.length === 0 || !inbound) return { status: 503, body: { ok: false, error: "not_configured" } };
+  if (!cfg.internalSecret || cfg.pageIds.length === 0 || !inbound) return { status: 503, body: { ok: false, error: "not_configured" } };
   if (input.raw.length > MAX_PAYLOAD_BYTES) return { status: 413, body: { ok: false, error: "payload_too_large" } };
   const text = input.raw.toString("utf8");
   // Anti-replay: timestamp entro ±300 s dall'orologio locale + idempotenza per event_id.
@@ -390,7 +391,7 @@ export async function handleInternalEvent(
     nome: m.nome || "Contatto Meta",
     telefono: m.telefono,
     email: m.email,
-    brand: brandFor(cfg, ev.formId),
+    brand: brandFor(cfg, ev.formId, ev.pageId),
     note: ["Meta Lead Ads", p.lead.campaign_name ? `Campagna: ${p.lead.campaign_name}` : "", m.extra].filter(Boolean).join(" · "),
     formId: ev.formId,
     adId: typeof p.ad_id === "string" ? p.ad_id : (p.lead.ad_id ?? null),

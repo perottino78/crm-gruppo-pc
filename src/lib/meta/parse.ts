@@ -55,9 +55,10 @@ export function parseNotification(raw: Buffer | string): ParseResult {
   return { ok: true, events, skippedFields };
 }
 
-/** Allowlist di Page ID e Form ID. */
-export function authorizeEvent(ev: LeadgenEvent, cfg: Pick<MetaConfig, "pageId" | "allowedFormIds">): "ok" | "page" | "form" {
-  if (!cfg.pageId || ev.pageId !== cfg.pageId) return "page";
-  if (!cfg.allowedFormIds.includes(ev.formId)) return "form";
+/** Allowlist di Page ID e Form ID. Se pageIds è vuoto accetta qualsiasi pagina; se allowedFormIds è vuoto accetta qualsiasi form. */
+export function authorizeEvent(ev: LeadgenEvent, cfg: Pick<MetaConfig, "pageId" | "pageIds" | "allowedFormIds">): "ok" | "page" | "form" {
+  const ids = cfg.pageIds && cfg.pageIds.length > 0 ? cfg.pageIds : (cfg.pageId ? [cfg.pageId] : []);
+  if (ids.length > 0 && !ids.includes(ev.pageId)) return "page";
+  if (cfg.allowedFormIds.length > 0 && !cfg.allowedFormIds.includes(ev.formId)) return "form";
   return "ok";
 }
