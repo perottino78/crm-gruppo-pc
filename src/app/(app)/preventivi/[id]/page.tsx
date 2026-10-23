@@ -30,6 +30,7 @@ import {
   spostaRigaSezione,
   spostaSezioneSu,
   spostaSezioneGiu,
+  creaProgettoSolaris,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
@@ -80,6 +81,7 @@ export default async function PreventivoPage({
         orderBy: [{ ordine: "asc" }, { id: "asc" }],
       },
       sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
+      solarisProgetto: { select: { id: true } },
     },
   });
   if (!preventivo) notFound();
@@ -336,6 +338,28 @@ export default async function PreventivoPage({
           </span>
         </div>
         <div className="flex items-center gap-2">
+          {preventivo.brand.nome === "Solaris" && (
+            preventivo.solarisProgetto ? (
+              <Link
+                href={`/solaris/progetto/${preventivo.solarisProgetto.id}`}
+                className="btn-3d text-sm px-3 py-1.5"
+                style={{ background: "#16A34A", color: "#fff", borderColor: "#15803D" }}
+              >
+                ☀️ Apri Studio Solaris
+              </Link>
+            ) : (
+              <form action={creaProgettoSolaris}>
+                <input type="hidden" name="preventivoId" value={preventivo.id} />
+                <button
+                  type="submit"
+                  className="btn-3d text-sm px-3 py-1.5"
+                  style={{ background: "#16A34A", color: "#fff", borderColor: "#15803D" }}
+                >
+                  ☀️ Crea progetto Solaris
+                </button>
+              </form>
+            )
+          )}
           <Link
             href={`/preventivi/${preventivo.id}/stampa`}
             target="_blank"

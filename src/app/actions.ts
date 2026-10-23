@@ -795,6 +795,34 @@ export async function impostaObiettivo(formData: FormData) {
   revalidatePath(`/commerciali/${utenteId}`);
 }
 
+export async function creaProgettoSolaris(formData: FormData) {
+  const preventivoId = str(formData, "preventivoId");
+  if (!preventivoId) return;
+
+  const utente = await getCurrentUser();
+  if (!utente) return;
+
+  const preventivo = await prisma.preventivo.findUnique({
+    where: { id: preventivoId },
+    select: { clienteId: true, commercialeId: true, solarisProgetto: { select: { id: true } } },
+  });
+  if (!preventivo) return;
+
+  if (preventivo.solarisProgetto) {
+    redirect(`/solaris/progetto/${preventivo.solarisProgetto.id}`);
+  }
+
+  const progetto = await prisma.solarisProgetto.create({
+    data: {
+      preventivoId,
+      clienteId: preventivo.clienteId,
+      commercialeId: preventivo.commercialeId,
+    },
+  });
+
+  redirect(`/solaris/progetto/${progetto.id}`);
+}
+
 export async function toggleDescrizioneRiga(formData: FormData) {
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
