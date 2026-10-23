@@ -1511,3 +1511,16 @@ export async function toggleDescrizioneRiga(formData: FormData) {
   });
   revalidatePath(`/preventivi/${preventivoId}`);
 }
+
+export async function aggiornaSolarisRuolo(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!isAmministratore(utente)) return;
+  const utenteId = str(formData, "utenteId");
+  const solarisRuolo = str(formData, "solarisRuolo");
+  if (!utenteId) return;
+  await prisma.utente.update({
+    where: { id: utenteId },
+    data: { solarisRuolo: solarisRuolo || null },
+  });
+  revalidatePath("/impostazioni");
+}

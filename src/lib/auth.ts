@@ -44,3 +44,15 @@ export async function getCurrentUser(): Promise<Utente | null> {
 export function isAmministratore(utente: Pick<Utente, "ruolo"> | null | undefined): boolean {
   return utente?.ruolo === "AMMINISTRATORE";
 }
+
+export type SolarisLivello = "AMMINISTRATORE" | "COMMERCIALE" | "TECNICO";
+
+export function getSolarisLivello(
+  utente: Pick<Utente, "ruolo" | "solarisRuolo"> | null | undefined
+): SolarisLivello | null {
+  if (!utente) return null;
+  if (utente.ruolo === "AMMINISTRATORE") return "AMMINISTRATORE";
+  if (utente.solarisRuolo === "COMMERCIALE") return "COMMERCIALE";
+  if (utente.solarisRuolo === "TECNICO") return "TECNICO";
+  return null;
+}

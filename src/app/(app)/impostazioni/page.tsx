@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTelefonoUtente } from "@/app/actions";
+import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTelefonoUtente, aggiornaSolarisRuolo } from "@/app/actions";
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -150,6 +150,18 @@ export default async function ImpostazioniPage() {
                     />
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva telefono</button>
+                </form>
+                <form action={aggiornaSolarisRuolo} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="utenteId" value={u.id} />
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Accesso Solaris Studio</label>
+                    <select name="solarisRuolo" defaultValue={u.solarisRuolo ?? ""} className="border border-neutral-200 rounded px-2 py-1 text-xs w-44">
+                      <option value="">— nessun accesso —</option>
+                      <option value="COMMERCIALE">COMMERCIALE (propri clienti, no costi)</option>
+                      <option value="TECNICO">TECNICO (tutti i progetti, sola lettura)</option>
+                    </select>
+                  </div>
+                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva Solaris</button>
                 </form>
               </div>
             ))}

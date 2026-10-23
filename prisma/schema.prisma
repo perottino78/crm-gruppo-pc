@@ -44,6 +44,8 @@ model Utente {
   telefono            String?
   // Ufficio di appartenenza (COMMERCIALE | FATTURAZIONE | TECNICO | ORDINI | POSA | AMMINISTRAZIONE): determina quali task di pratica vede
   ufficio             String?
+  // Accesso Solaris Studio: null=nessun accesso, COMMERCIALE=solo propri clienti (no costi acquisto), TECNICO=tutti i progetti (no prezzi)
+  solarisRuolo        String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
   mustChangePassword  Boolean        @default(true)

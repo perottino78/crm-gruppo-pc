@@ -526,6 +526,7 @@ section[hidden]{display:none}
 /* === SOLARIS INIT — iniettato dal server via window.SOLARIS_INIT === */
 const _INIT=window.SOLARIS_INIT||{};
 const _IS_ADMIN=!!_INIT.isAmministratore;
+const _LIVELLO=_INIT.solarisLivello||(_IS_ADMIN?"AMMINISTRATORE":null);
 const _PROGETTO_ID=_INIT.progettoId||null;
 /* ================================================================== */
 
@@ -608,7 +609,24 @@ if(_INIT.stato){
   if(!S.photo||typeof S.photo!=="object") S.photo={view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null};
 }
 /* Visualizzazione commerciale basata su ruolo */
-if(_IS_ADMIN) S.commercial=true;
+if(_LIVELLO==="AMMINISTRATORE") S.commercial=true;
+/* Modalità TECNICO: sola lettura, nessun prezzo */
+if(_LIVELLO==="TECNICO"){
+  document.addEventListener("DOMContentLoaded",function(){
+    var vt=document.querySelector(".viewtoggle");
+    if(vt)vt.style.display="none";
+    // disabilita tutti gli input e button tranne la navigazione
+    ["input","select","textarea","button.b3d","button.sun"].forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        if(!el.closest(".steps")&&!el.hasAttribute("data-goto")&&el.id!=="viewSw")
+          el.disabled=true;
+      });
+    });
+    // banner sola lettura
+    var bar=document.querySelector(".bar");
+    if(bar){var badge=document.createElement("span");badge.style.cssText="font-size:12px;background:#F59E0B;color:#000;padding:2px 10px;border-radius:99px;font-weight:600";badge.textContent="Vista tecnica — sola lettura";bar.appendChild(badge);}
+  });
+}
 
 const fmt = (n,d=0)=>new Intl.NumberFormat("it-IT",{maximumFractionDigits:d,minimumFractionDigits:d}).format(n);
 const eur = (n)=>"€ "+fmt(Math.round(n));

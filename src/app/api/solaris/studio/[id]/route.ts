@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import { getCurrentUser, getSolarisLivello } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import fs from "fs";
 import path from "path";
@@ -13,6 +13,11 @@ export async function GET(
     return new NextResponse("Non autorizzato", { status: 401 });
   }
 
+  const livello = getSolarisLivello(utente);
+  if (!livello) {
+    return new NextResponse("Accesso Solaris non abilitato", { status: 403 });
+  }
+
   const { id } = await params;
 
   const progetto = await prisma.solarisProgetto.findUnique({
@@ -23,7 +28,8 @@ export async function GET(
     return new NextResponse("Progetto non trovato", { status: 404 });
   }
 
-  if (!isAmministratore(utente) && progetto.commercialeId !== utente.id) {
+  // COMMERCIALE vede solo i propri progetti; AMMINISTRATORE e TECNICO vedono tutto
+  if (livello === "COMMERCIALE" && progetto.commercialeId !== utente.id) {
     return new NextResponse("Non autorizzato", { status: 403 });
   }
 
@@ -32,14 +38,16 @@ export async function GET(
     orderBy: [{ categoria: "asc" }, { potenzaW: "asc" }],
   });
 
+  const mostraCosti = livello === "AMMINISTRATORE";
+
   const pannelli = componenti
     .filter((c) => c.categoria === "PANNELLO")
     .map((c) => ({
       id: c.id,
       n: c.nome,
       w: c.potenzaW,
-      price: c.prezzoVendita,
-      cost: c.costoAcquisto,
+      price: livello !== "TECNICO" ? c.prezzoVendita : null,
+      cost: mostraCosti ? c.costoAcquisto : null,
       ...((c.misureJson as Record<string, unknown>) ?? {}),
     }));
 
@@ -48,15 +56,17 @@ export async function GET(
     .map((c) => ({
       id: c.id,
       n: c.nome,
-      price: c.prezzoVendita,
-      cost: c.costoAcquisto,
+      price: livello !== "TECNICO" ? c.prezzoVendita : null,
+      cost: mostraCosti ? c.costoAcquisto : null,
       ibrido: c.ibrido,
     }));
 
   const solarisInit = {
     progettoId: progetto.id,
     preventivoId: progetto.preventivoId,
-    isAmministratore: isAmministratore(utente),
+    solarisLivello: livello,
+    // mantenuto per retrocompatibilità con lo studio HTML esistente
+    isAmministratore: livello === "AMMINISTRATORE",
     stato: (progetto.statoJson as Record<string, unknown> | null) ?? null,
     catalogo: pannelli.length > 0 || inverter.length > 0
       ? { pannelli, inverter }
