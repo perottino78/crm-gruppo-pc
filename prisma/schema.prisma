@@ -25,6 +25,8 @@ model Brand {
   optionali Optional[]
   modelli   ModelloProdotto[]
   utentiAutorizzati Utente[] @relation("PermessoListino")
+  solarisComponenti SolarisComponente[]
+  leadSimulazioni   LeadSimulazione[]
 }
 
 model Utente {
@@ -51,6 +53,7 @@ model Utente {
   clientiResponsabile Cliente[] @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
   brandAutorizzati Brand[] @relation("PermessoListino")
+  solarisProgetti  SolarisProgetto[]
 }
 
 model Lead {
@@ -87,10 +90,11 @@ model Cliente {
   // riassegnabile dall'amministratore). Nullable per compatibilità con i clienti pre-esistenti.
   responsabile   Utente? @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
   responsabileId String?
-  appuntamenti Appuntamento[]
-  preventivi Preventivo[]
-  attivita   Attivita[]
-  createdAt  DateTime  @default(now())
+  appuntamenti    Appuntamento[]
+  preventivi      Preventivo[]
+  attivita        Attivita[]
+  solarisProgetti SolarisProgetto[]
+  createdAt       DateTime  @default(now())
 }
 
 model Appuntamento {
@@ -158,10 +162,11 @@ model Preventivo {
   // tapparelle, zanzariere...) invece di un unico elenco piatto. Le righe senza
   // sezioneId restano nell'elenco "senza sezione" in cima.
   sezioni      SezionePreventivo[]
-  promemoria   PromemoriaInviato[]
-  progetto     Progetto?
-  createdAt    DateTime        @default(now())
-  scadenza     DateTime?
+  promemoria      PromemoriaInviato[]
+  progetto        Progetto?
+  solarisProgetto SolarisProgetto?
+  createdAt       DateTime        @default(now())
+  scadenza        DateTime?
 }
 
 model RigaPreventivo {
@@ -320,4 +325,131 @@ model Obiettivo {
   createdAt     DateTime @default(now())
 
   @@unique([utenteId, periodo])
+}
+
+// ============ SOLARIS STUDIO — Progettazione Fotovoltaico ============
+
+// Progetto fotovoltaico collegato a un preventivo Solaris.
+// stato: BOZZA | INVIATO | ACCETTATO
+model SolarisProgetto {
+  id            String     @id @default(cuid())
+  preventivo    Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId  String     @unique
+  cliente       Cliente    @relation(fields: [clienteId], references: [id])
+  clienteId     String
+  commerciale   Utente     @relation(fields: [commercialeId], references: [id])
+  commercialeId String
+
+  // Step 1 — Casa e consumi
+  nomeCliente    String?
+  indirizzo      String?
+  latitudine     Float?
+  longitudine    Float?
+  zonaClimatica  String?   // A | B | C | D | E | F
+  consumoKwh     Float?
+  prezzoEnergia  Float?
+  fasciaF1       Float?
+  presenzaGiorno Int?      // 0=quasi mai 1=a volte 2=quasi sempre
+  quizJson       Json?     // abitudini casa (persone, elettrodomestici, EV, ecc.)
+
+  // Step 2 — Tetto e sole
+  orientamento   Int?      // -90 (Est) .. 0 (Sud) .. +90 (Ovest)
+  inclinazione   Int?      // gradi 5..45
+  numeroPannelli Int?
+  batteria       Int?      // kWh accumulo (0/5/10/15)
+  panelId        String?   // → SolarisComponente.id
+  inverterId     String?   // → SolarisComponente.id
+
+  // Costi (visibili solo a AMMINISTRATORE)
+  costoKwp      Float?     // €/kWp (posa + strutture)
+  costoBatteria Float?     // €/kWh batteria
+  detrazioneFlag Float?    // 0.5 | 0.36 | 0
+
+  // Risultati simulazione (calcolati e cache-ati)
+  kwp                Float?
+  produzioneStimaKwh Float?
+  risparmioAnno1     Float?
+  rientroAnni        Float?
+  risparmio25anni    Float?
+  autonomiaPercent   Float?
+
+  // Foto tetto
+  fotoTetto     SolarisFoto[]
+
+  // Firma digitale (Step 4)
+  firmaDataUri  String?   @db.Text
+  firmatoIl     DateTime?
+
+  // Snapshot completo per riaprire il progetto nello stesso stato (oggetto S del prototipo)
+  statoJson     Json?
+
+  stato         String    @default("BOZZA")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Foto del tetto caricate durante la progettazione (data URI, come RilievoAllegato)
+// tipo: TETTO | SATELLITARE | SCHEMA
+model SolarisFoto {
+  id         String          @id @default(cuid())
+  progetto   SolarisProgetto @relation(fields: [progettoId], references: [id], onDelete: Cascade)
+  progettoId String
+  nome       String?
+  dataUri    String          @db.Text
+  tipo       String          @default("TETTO")
+  createdAt  DateTime        @default(now())
+}
+
+// Catalogo pannelli e inverter gestito dall'amministratore (sostituisce il catalogo hardcoded
+// nel prototipo che usava localStorage). categoria: PANNELLO | INVERTER
+model SolarisComponente {
+  id            String   @id @default(cuid())
+  brand         Brand    @relation(fields: [brandId], references: [id])
+  brandId       String
+  categoria     String   // PANNELLO | INVERTER
+  nome          String
+  potenzaW      Float    // Wp per i pannelli, W per gli inverter
+  misureJson    Json?    // {w: 1.134, h: 1.762} per i pannelli (metri)
+  prezzoVendita Float
+  costoAcquisto Float
+  ibrido        Boolean  @default(false) // true = inverter ibrido (gestisce batteria)
+  attivo        Boolean  @default(true)
+  note          String?
+  createdAt     DateTime @default(now())
+
+  @@unique([brandId, categoria, nome])
+}
+
+// Lead acquisito dalla pagina pubblica /simula (simulatore fotovoltaico su solarisfotovoltaico.com)
+// stato: NUOVO | CONTATTATO | CONVERTITO | NON_INTERESSATO
+model LeadSimulazione {
+  id              String   @id @default(cuid())
+  brand           Brand    @relation(fields: [brandId], references: [id])
+  brandId         String
+  nome            String
+  telefono        String?
+  email           String?
+  consensoPrivacy Boolean  @default(false)
+
+  // Dati della simulazione (acquisiti dal form)
+  localita         String?
+  latitudine       Float?
+  longitudine      Float?
+  consumoKwh       Float?
+  prezzoEnergia    Float?
+  orientamento     Int?
+  inclinazione     Int?
+  batteria         Int?    // kWh
+  kwp              Float?
+  risparmioStimato Float?
+  rientroAnni      Float?
+
+  stato            String  @default("NUOVO")
+  fonte            String  @default("simulatore_web")
+  // Collegamento al Lead CRM se convertito
+  leadGeneratoId   String? @unique
+
+  // Snapshot completo della simulazione al momento dell'invio
+  simulazioneJson  Json?
+  createdAt        DateTime @default(now())
 }
