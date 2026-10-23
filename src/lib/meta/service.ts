@@ -304,7 +304,7 @@ export async function pollLeads(
         if (Number.isFinite(ct) && ct < since.getTime()) continue; // difesa in profondità sul filtro lato Meta
         if (Number.isFinite(ct) && ct > youngerThan) { out.deferred++; continue; } // troppo recente: decide il webhook
         out.fetched++;
-        const ev: LeadgenEvent = { leadgenId: lead.id, pageId: cfg.pageId, formId, adId: lead.ad_id, createdTime: Number.isFinite(ct) ? Math.floor(ct / 1000) : undefined };
+        const ev: LeadgenEvent = { leadgenId: lead.id, pageId: cfg.pageIds[0], formId, adId: lead.ad_id, createdTime: Number.isFinite(ct) ? Math.floor(ct / 1000) : undefined };
         if (authorizeEvent(ev, cfg) !== "ok") continue;
         try {
           const u = await store.upsertReceived(ev, JSON.stringify({ ...ev }), deps.now(), "POLL"); // eventJson: solo ID

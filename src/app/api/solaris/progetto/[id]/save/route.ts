@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -47,7 +48,7 @@ export async function POST(
   await prisma.solarisProgetto.update({
     where: { id },
     data: {
-      statoJson: body.statoJson ?? undefined,
+      statoJson: body.statoJson as Prisma.InputJsonValue | undefined,
       kwp: body.kwp ?? undefined,
       produzioneStimaKwh: body.produzioneStimaKwh ?? undefined,
       risparmioAnno1: body.risparmioAnno1 ?? undefined,
