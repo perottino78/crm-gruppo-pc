@@ -22,6 +22,10 @@ export default async function DashboardPage({
     prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] }, ...brandFiltro, ...leadScope } }),
   ]);
 
+  const taskAperti = await prisma.taskPratica.count({
+    where: { stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] }, ...(utente?.ufficio ? { ufficio: utente.ufficio } : {}) },
+  });
+
   const preventivi = await prisma.preventivo.findMany({
     where: { ...brandFiltro, ...preventivoScope },
     take: 5,
@@ -35,6 +39,11 @@ export default async function DashboardPage({
         <h1 className="text-2xl font-bold text-neutral-900">Dashboard</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+
+      <a href="/task" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-green-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
+        <span className="text-sm font-extrabold text-neutral-900">✅ Task pratiche aperti{utente?.ufficio ? " per il tuo ufficio" : ""}</span>
+        <span className="text-2xl font-extrabold text-green-700">{taskAperti}</span>
+      </a>
 
       <div className="grid grid-cols-3 gap-4 mb-8">
         <div className="bg-white rounded-lg border border-neutral-200 border-l-4 border-l-blue-500 p-4 shadow-sm">

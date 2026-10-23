@@ -1,3 +1,4 @@
+import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
@@ -29,7 +30,19 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "PENSILINA_",
   // Tapparelle: tariffa a mq con minimi fatturabili (calcolaMqConMinimi), stessa
   // convenzione cm dei cataloghi con motore MQ_CON_MINIMI.
-  "TAPPARELLE_"];
+  "TAPPARELLE_",
+  // Porte interne Isomax: modello + tipo apertura a prezzo fisso (misura standard
+  // 60/70/80/90cm), stessa convenzione cm dei cataloghi porte/serramenti.
+  "ISOMAX_",
+  // Tende a rullo da interno (P&C): griglia larghezza x altezza in cm come da listino
+  // fornitore (RULLO A CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO — vedi task #283).
+  "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_",
+  // Vetrate a copertura fissa/mobile per pergole (Nesos/Nubes/Ermes): stessa convenzione
+  // cm delle altre pergole (Lucilla/Nuvola/Panarea).
+  "NUBES_", "NESOS_", "ERMES_",
+  // Pavimenti Outdoor: WPC Novowood (pavimenti/rivestimenti/soffitti/recinzioni) + segnaposto
+  // galleggianti e gres porcellanato. Misure a m²/ml digitate in cm.
+  "WPC_", "PAVGALLEGGIANTI_", "PAVGRES_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -40,6 +53,9 @@ export function formatDimensioni(tipologia: string, larghezza: number, altezza: 
 }
 
 export function listinoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
+  if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
+  if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
   if (tipologia.startsWith("LUCILLA_")) return "LUCILLA";
   if (tipologia.startsWith("NUVOLA_")) return "NUVOLA";
   if (tipologia.startsWith("PANAREA_")) return "PANAREA";
@@ -62,6 +78,12 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("BETA1002")) return "BETA1002";
   if (tipologia.startsWith("BETA1003")) return "BETA1003";
   if (tipologia.startsWith("BARLETTA")) return "BARLETTA";
+  // Nubes Mob (listino 2025): accessori comuni a tutte le 38 varianti apertura/copertura/installazione/movimento.
+  if (tipologia.startsWith("NUBES_MOB_")) return "NUBES_MOB";
+  // Portoncini PVC (1 e 2 ante): pannelli decorativi, maniglioni e finiture comuni.
+  if (tipologia.startsWith("PORTONCINOPVC_")) return "PORTONCINOPVC";
+  // Cassonetti PVC da restauro (2 profondita'): pellicolati comuni.
+  if (tipologia.startsWith("CASSONETTOPVC_")) return "CASSONETTOPVC";
   if (tipologia.startsWith("CUPOLA")) return "CUPOLA";
   // --- Sezione 4 2026: 3000 (6 varianti) ---
   if (tipologia.startsWith("TENDACADUTA_3000_SENZACASS_BRACCI")) return "TENDACADUTA_3000_SENZACASS_BRACCI";
@@ -132,6 +154,7 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("TENDAVERANDA_WINTERBALKON")) return "TENDAVERANDA_WINTERBALKON";
   if (tipologia.startsWith("VETRATA_BRILLANTE")) return "VETRATA_BRILLANTE";
   if (tipologia.startsWith("VETRATA_SCINTILLA")) return "VETRATA_SCINTILLA";
+  if (tipologia.startsWith("VETRATA_FISSO")) return "VETRATA_FISSO";
   if (tipologia.startsWith("VENEZIANA_50MM")) return "VENEZIANA_50MM_FAMIGLIA";
   if (tipologia.startsWith("VENEZIANA_70MM_SCUDO")) return "VENEZIANA_70_80MM_FAMIGLIA";
   if (tipologia.startsWith("VENEZIANA_80MM")) return "VENEZIANA_70_80MM_FAMIGLIA";
@@ -154,6 +177,11 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Infissi in Acciaio: un solo listino per tutte le varianti/numero ante, cosi'
   // gli optional (vetri, accessori, colori, lavorazioni, trasporto) restano condivisi.
   if (tipologia.startsWith("ACCIAIO_")) return "ACCIAIO";
+  // Persiane Orientabili a Goccia: un solo listino per tutte le 13 tipologie (FF,
+  // Wasistas, Persiana/Portapersiana 1-4 ante, PF Soglia, Bilico, Traslante), cosi'
+  // gli optional condivisi (varianti aletta/apertura, colore, ferramenta, profili,
+  // motorizzazione) restano scopati su tutta la famiglia.
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) return "PERSIANE_GOCCIA";
   if (tipologia.startsWith("PENSILINA_")) return "PENSILINA_CURVA";
   if (tipologia.startsWith("TAPPARELLE_")) return "TAPPARELLE";
   // Zanzariere plissettate: ogni tipo prodotto ha il proprio "listino" cosi' gli optional
@@ -170,11 +198,15 @@ export function listinoDiTipologia(tipologia: string): string | null {
   // Blindati: CL3 e CL4 anta singola condividono lo stesso listino (fuori misura, sopraluce,
   // fianco luce, vetro, pannelli semplici sono identici tra le due classi); le due varianti
   // a due ante hanno invece tabelle proprie (sovrapprezzi "per ogni anta", pannelli con
-  // prezzo differenziato per larghezza anta principale/antino).
-  // Un solo sottogruppo: la scelta reale (classe / n. ante / variante due ante) è
-  // ora gestita dalla cascata a 3 tendine (vedi assiSelezioneBlindati), non più da
-  // sottogruppi separati per classe/n.ante.
-  if (tipologia.startsWith("BLINDATI_")) return "Portoncini Blindati";
+  // prezzo differenziato per larghezza anta principale/antino). BUG STORICO corretto qui:
+  // prima restituiva la stringa fissa "Portoncini Blindati" per tutte e 4 le tipologie, che
+  // non corrisponde a NESSUN valore listino presente negli Optional (che usano invece le
+  // chiavi "BLINDATI_SINGOLA"/"BLINDATI_DUEANTE") — di conseguenza tutte le righe Optional
+  // con quel listino (fuori misura, vetro, sopraluce, fianco luce, alcuni pannelli, imbotte
+  // a copiare) restavano invisibili nella tendina, per qualunque prodotto Blindati.
+  if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") return "BLINDATI_SINGOLA";
+  if (tipologia === "BLINDATI_CL3_DUEANTE_STD" || tipologia === "BLINDATI_CL3_DUEANTE_SIMMETRICA") return "BLINDATI_DUEANTE";
+  if (tipologia.startsWith("BLINDATI_")) return "BLINDATI_SINGOLA";
   // Zanzariere P&C: un "listino" per famiglia (Antarex/Alba/Pratik/Libra/Scorri), così gli
   // optional/extra propri di ciascuna famiglia (es. Telaio chiuso solo su Antarex, Doppio
   // traverso per Pratik solo su Pratik) restano scoperti dalle famiglie che non li prevedono,
@@ -215,7 +247,28 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("EVOZIP100_")) return "EVOZIP100";
   if (tipologia.startsWith("EVOZIP125_")) return "EVOZIP125";
   if (tipologia.startsWith("EVOZIPDUO_")) return "EVOZIPDUO";
+  // Isomax (Porte interne): un listino per gruppo colore/finitura (A = colori nominati
+  // standard, B = RAL a scelta +100€, L = supplemento telaio/coprifili laccato +150€),
+  // cosi' le maggiorazioni spessore muro (valori diversi tra A/B) e l'optional Colore
+  // si scopano correttamente indipendentemente dal modello/apertura specifici.
+  if (tipologia.startsWith("ISOMAX_")) return isomaxListino(tipologia);
   return null;
+}
+
+const ISOMAX_GRUPPO_B = new Set(["PLL","P13","PT3","PT4","PT6","PT8","PPO","PP2","PP3","LL2","LL3","LL4","PLR",
+  "BFV","BDQ","BDT","BDR","BFL","BQL","RLT","RLL","R1I","R1V","RIA","R2F","RSP","RVP"]);
+const ISOMAX_GRUPPO_L = new Set(["F2L", "FLL"]);
+
+function isomaxModello(tipologia: string): string | null {
+  const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_/);
+  return match ? match[1] : null;
+}
+
+function isomaxListino(tipologia: string): string {
+  const modello = isomaxModello(tipologia);
+  if (modello && ISOMAX_GRUPPO_B.has(modello)) return "ISOMAX_B";
+  if (modello && ISOMAX_GRUPPO_L.has(modello)) return "ISOMAX_L";
+  return "ISOMAX_A";
 }
 
 // Colori struttura tende da sole 2026 (task #209, catalogo sezione 12 "Colori
@@ -690,11 +743,26 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
+  if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
+  if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
+  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti";
+  if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato";
   if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
-  // Persiane Blindate: unico sottogruppo dentro il gruppo PERSIANE, cosi' la famiglia
-  // "Persiane" nella tendina potra' in futuro accogliere altri materiali (es. legno, PVC)
-  // come sottogruppi affiancati.
-  if (tipologia.startsWith("PERSIANEBLINDATE_")) return "BLINDATE";
+  // Persiane: organizzate per materiale — "ACCIAIO (Blindate)" per il catalogo
+  // Persiane Blindate (classe 3/4), e sotto "ALLUMINIO" i vari tipi di lavorazione
+  // affiancati. Orientabile a Goccia e' gia' a listino, con le 2 tendine modello
+  // (Persiana/Portapersiana) -> numero ante gia' costruite in
+  // assiSelezioneModelloAnte; "Paletta fissa" (lamella fissa anziche' orientabile)
+  // NON e' una famiglia a parte ma un optional a percentuale su Persiana/
+  // Portapersiana orientabile (vedi persianegoccia_optional.json). Tabelloni
+  // verticali resta per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO), in
+  // attesa che arrivi un vero listino con misure e prezzi propri.
+  if (tipologia.startsWith("PERSIANEBLINDATE_")) return "ACCIAIO (Blindate)";
+  if (tipologia.startsWith("PERSIANEGOCCIA_DOGHEVERTICALI_")) return "ALLUMINIO — Doghe verticali";
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) return "ALLUMINIO — Orientabile a Goccia";
+  // Cassonetti PVC da restauro: sottogruppo dentro SERRAMENTI, da abbinare ai serramenti.
+  if (tipologia.startsWith("CASSONETTOPVC_")) return "Cassonetti in PVC da restauro";
   // Infissi in Acciaio: sottogruppo dentro SERRAMENTI, accanto a Zenith (PVC).
   if (tipologia.startsWith("ACCIAIO_")) return "Infissi in Acciaio (ProArt)";
   // Pensiline: tendina Curva / Dritta dentro il gruppo PENSILINE. "Dritta" e' per ora
@@ -731,12 +799,47 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (vert) return VERTICALE_SOTTOGRUPPI[vert.prefix] ?? null;
   if (tipologia.startsWith("SCATOLATO_60X30_")) return "Scatolato 60x30 (ZAP010)";
   if (tipologia.startsWith("SCATOLATO_50X20_")) return "Scatolato 50x20 (ZAP070)";
+  // Pergole: un unico sottogruppo per Lucilla/Nuvola/Panarea,
+  // cosi' la selezione avviene con 2 tendine a cascata (modello -> installazione)
+  // tramite assiSelezionePergola, invece della lista piatta di 21 voci mischiate.
+  if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
+    return "Pergole";
+  }
+  // Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): un unico sottogruppo,
+  // la selezione vera e propria avviene con 2 tendine a cascata (linea -> declinazione)
+  // tramite assiSelezioneVetrata, stesso pattern di assiSelezionePergola. Nesos ed Ermes
+  // sono per ora solo segnaposto "in arrivo" (vedi IN_ARRIVO). Nubes Mob ha il listino
+  // reale 2025 (NUBES_MOB_*); Nubes Fix/TT restano con prezzo su richiesta.
+  if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
+    return "Pergole Vetrate";
+  }
+  // Bioclimatiche (Wawe/Solaria/Raincover/Aurora): un unico sottogruppo, la selezione
+  // avviene con 2 tendine a cascata (linea -> installazione) tramite
+  // assiSelezioneBioclimatica, stesso pattern di assiSelezionePergola, invece della
+  // lista piatta di 20 voci mischiate sotto il gruppo BIOCLIMATICA.
+  if (tipologia.startsWith("WAWE_") || tipologia.startsWith("SOLARIA_") || tipologia.startsWith("RAINCOVER_") || tipologia.startsWith("ISCHIA_")) {
+    return "Bioclimatiche";
+  }
   if (tipologia.startsWith("KOPEN_")) {
     // Un unico sottogruppo per tutti i portoncini Kopen: la selezione vera e propria
     // avviene con 2 tendine a cascata (linea -> combinazione materiali) tramite
     // assiSelezioneKopen, invece dei 13 sottogruppi piatti usati in precedenza.
     return "Portoncini Kopen";
   }
+  if (tipologia.startsWith("ISOMAX_")) {
+    // Un unico sottogruppo per tutti i modelli Isomax: la selezione vera e propria
+    // avviene con 2 tendine a cascata (modello -> tipo apertura) tramite
+    // assiSelezioneIsomax, stesso pattern di assiSelezioneKopen.
+    return "Isomax";
+  }
+  // Tende a rullo da interno: un sottogruppo per ciascuna linea/meccanismo, cosi'
+  // la selezione avviene con 2 tendine a cascata (tessuto -> variante) invece della
+  // lista piatta (fino a 34 voci per linea) — vedi assiSelezioneRullo.
+  if (tipologia.startsWith("RULLOCATENA_")) return "Rullo a Catena";
+  if (tipologia.startsWith("RULLOXS_")) return "Rullo XS";
+  if (tipologia.startsWith("LOOKIN_")) return "Look In";
+  if (tipologia.startsWith("TAGLIOTESSUTO_")) return "Tagli Tessuto";
+  if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C";
   // Serramenti: segnaposto "in arrivo" per i materiali oltre al PVC (gia' a listino
   // come Zenith) — ciascuno appare come proprio sottogruppo dentro SERRAMENTI, cosi'
   // la prima scelta del commerciale e' il materiale (PVC/PVC-Alluminio/Alluminio/
@@ -902,6 +1005,47 @@ const PERSIANE_BLINDATE_ANTE_LABELS: Record<string, string> = {
   "4ANTE": "apribile a 4 ante",
 };
 
+// Persiane Orientabili a Goccia: etichette brevi per le 9 tipologie rimaste (tolte su
+// richiesta le 4 che non c'entravano nella tendina: Specchiatura fissa, Portafinestra
+// con soglia ribassata 2/3 ante, Traslante). Restano Persiana/Portapersiana orientabile
+// (1-4 ante), Wasistas e Bilico, selezionate con le 2 tendine a cascata modello -> n.
+// ante (vedi assiSelezioneModelloAnte) invece della lista piatta usata prima.
+const PERSIANEGOCCIA_LABELS: Record<string, string> = {
+  PERSIANEGOCCIA_PERSIANA1A: "Persiana orientabile 1 anta",
+  PERSIANEGOCCIA_PERSIANA2A: "Persiana orientabile 2 ante",
+  PERSIANEGOCCIA_PERSIANA3A: "Persiana orientabile 3 ante",
+  PERSIANEGOCCIA_PORTAPERSIANA1A: "Portapersiana orientabile 1 anta",
+  PERSIANEGOCCIA_PORTAPERSIANA2A: "Portapersiana orientabile 2 ante",
+  PERSIANEGOCCIA_PORTAPERSIANA3A: "Portapersiana orientabile 3 ante",
+  PERSIANEGOCCIA_PORTAPERSIANA4A: "Portapersiana orientabile 4 ante",
+  // Doghe verticali: stessa serie ma aletta a doghe verticali anziche' a goccia
+  // orientabile; maggiorazione +15% da listino ("PERSIANA DOGHE VERTICALI + 15%",
+  // nota presente su tutti i fogli 1/2/3/4 ante del listino originale) applicata
+  // sul prezzo base lamelle orientabili.
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA1A: "Persiana a doghe verticali 1 anta",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA2A: "Persiana a doghe verticali 2 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PERSIANA3A: "Persiana a doghe verticali 3 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA1A: "Portapersiana a doghe verticali 1 anta",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA2A: "Portapersiana a doghe verticali 2 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA3A: "Portapersiana a doghe verticali 3 ante",
+  PERSIANEGOCCIA_DOGHEVERTICALI_PORTAPERSIANA4A: "Portapersiana a doghe verticali 4 ante",
+};
+
+const PERSIANEGOCCIA_MODELLO_LABELS: Record<string, string> = {
+  PERSIANA: "Persiana orientabile",
+  PORTAPERSIANA: "Portapersiana orientabile",
+  DOGHEVERTICALI_PERSIANA: "Persiana a doghe verticali",
+  DOGHEVERTICALI_PORTAPERSIANA: "Portapersiana a doghe verticali",
+};
+
+const PERSIANEGOCCIA_ANTA_LABELS: Record<string, string> = {
+  "1A": "1 anta",
+  "2A": "2 ante",
+  "3A": "3 ante",
+  "4A": "4 ante",
+  UNICA: "misura unica",
+};
+
 // Decompone una tipologia PERSIANEBLINDATE_/ACCIAIO_ nei 2 assi "modello" e "numero
 // ante", cosi' il selettore puo' mostrare 2 tendine a cascata (prima il modello, poi
 // il numero di ante) invece della lista piatta di tutte le combinazioni (68 voci per
@@ -930,15 +1074,100 @@ export function assiSelezioneModelloAnte(tipologia: string): AssiModelloAnte | n
       };
     }
   }
-  if (tipologia.startsWith("PERSIANEBLINDATE_")) {
-    const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
-    if (match) {
-      const base = PERSIANE_BLINDATE_LABELS[match[1]] ?? match[1].replace(/_/g, " ");
+  // Persiane Blindate ha ora un proprio selettore a 4 assi (vedi
+  // assiSelezionePersianeBlindate piu' sotto: tipo -> classe -> misura doghe (se
+  // presente) -> ante) cosi' "monolamiera" e "doppia lamiera" non sono piu' due righe
+  // qualsiasi mescolate in un'unica tendina "modello" da 17 voci, ma una scelta
+  // esplicita e distinta dalle altre tipologie (stecca aperta, dogata verticale/
+  // orizzontale) — vedi richiesta utente.
+  // Persiane Orientabili a Goccia: Persiana/Portapersiana hanno un vero numero di
+  // ante (1-4) nel nome tipologia (es. PERSIANA2A, PORTAPERSIANA4A), scomposto con
+  // la stessa regex di Persiane Blindate/Acciaio. Wasistas e Bilico non hanno varianti
+  // di ante nel listino (una sola misura/apertura a modello), quindi ricevono un asse
+  // ante fittizio "UNICA" per restare nello stesso meccanismo a 2 tendine.
+  if (tipologia.startsWith("PERSIANEGOCCIA_")) {
+    const dvMatch = tipologia.match(/^PERSIANEGOCCIA_DOGHEVERTICALI_(PERSIANA|PORTAPERSIANA)(1A|2A|3A|4A)$/);
+    if (dvMatch) {
+      const modelloKey = `DOGHEVERTICALI_${dvMatch[1]}`;
       return {
-        modello: { valore: match[1], label: base },
-        ante: { valore: match[2], label: PERSIANE_BLINDATE_ANTE_LABELS[match[2]] ?? match[2] },
+        modello: { valore: modelloKey, label: PERSIANEGOCCIA_MODELLO_LABELS[modelloKey] ?? modelloKey },
+        ante: { valore: dvMatch[2], label: PERSIANEGOCCIA_ANTA_LABELS[dvMatch[2]] ?? dvMatch[2] },
       };
     }
+    const match = tipologia.match(/^PERSIANEGOCCIA_(PERSIANA|PORTAPERSIANA)(1A|2A|3A|4A)$/);
+    if (match) {
+      return {
+        modello: { valore: match[1], label: PERSIANEGOCCIA_MODELLO_LABELS[match[1]] ?? match[1] },
+        ante: { valore: match[2], label: PERSIANEGOCCIA_ANTA_LABELS[match[2]] ?? match[2] },
+      };
+    }
+    const unicaKey = tipologia.slice("PERSIANEGOCCIA_".length);
+    if (PERSIANEGOCCIA_MODELLO_LABELS[unicaKey]) {
+      return {
+        modello: { valore: unicaKey, label: PERSIANEGOCCIA_MODELLO_LABELS[unicaKey] },
+        ante: { valore: "UNICA", label: PERSIANEGOCCIA_ANTA_LABELS.UNICA },
+      };
+    }
+  }
+  return null;
+}
+
+// Persiane Blindate: decompone le tipologie PERSIANEBLINDATE_<tipo>_<classe>[_<misura>]_
+// <nAnte> in 4 assi -- 1) tipo (Stecca aperta / Dogata verticale / Dogata
+// orizzontale / Antone monolamiera / Antone doppia lamiera), 2) classe (3/4),
+// 3) misura doghe (solo per le dogate: 50-120/120-200/oltre200mm), 4) numero ante --
+// cosi' il selettore mostra tendine a cascata separate invece dell'unica tendina
+// "modello" piatta da 17 voci mescolate usata in precedenza, dove "monolamiera" e
+// "doppia lamiera" erano righe qualsiasi in mezzo alle dogate. La tendina misura
+// compare solo quando il tipo scelto la prevede (le dogate), esattamente come la
+// variante opzionale di assiSelezioneBlindati per i Portoncini Blindati — vedi
+// richiesta utente del 05/10/2026.
+export type AssiPersianeBlindate = {
+  tipo: AsseSelezione;
+  classe: AsseSelezione;
+  misura?: AsseSelezione;
+  ante: AsseSelezione;
+};
+
+const PERSIANE_BLINDATE_TIPO_LABELS: Record<string, string> = {
+  STECCA_APERTA: "Persiana a stecca aperta",
+  DOGATA_VERT: "Persiana dogata verticale",
+  DOGATA_ORIZZ: "Persiana dogata orizzontale",
+  ANTONE_MONOLAMIERA: "Antone cieco monolamiera 20/10",
+  ANTONE_DOPPIALAMIERA: "Antone cieco doppia lamiera 20/10",
+};
+
+const PERSIANE_BLINDATE_MISURA_LABELS: Record<string, string> = {
+  "50_120": "doghe 50-120mm",
+  "120_200": "doghe 120-200mm",
+  OLTRE200: "doghe oltre 200mm",
+};
+
+export function assiSelezionePersianeBlindate(tipologia: string): AssiPersianeBlindate | null {
+  if (!tipologia.startsWith("PERSIANEBLINDATE_")) return null;
+  const match = tipologia.match(/^PERSIANEBLINDATE_(.+)_(1ANTA|2ANTE|3ANTE|4ANTE)$/);
+  if (!match) return null;
+  const [, chiaveModello, anteKey] = match;
+  const ante: AsseSelezione = { valore: anteKey, label: PERSIANE_BLINDATE_ANTE_LABELS[anteKey] ?? anteKey };
+
+  const dogataMatch = chiaveModello.match(/^(DOGATA_VERT|DOGATA_ORIZZ)_(CL3|CL4)_(50_120|120_200|OLTRE200)$/);
+  if (dogataMatch) {
+    const [, tipoKey, classeKey, misuraKey] = dogataMatch;
+    return {
+      tipo: { valore: tipoKey, label: PERSIANE_BLINDATE_TIPO_LABELS[tipoKey] ?? tipoKey },
+      classe: { valore: classeKey, label: classeKey === "CL3" ? "Classe 3" : "Classe 4" },
+      misura: { valore: misuraKey, label: PERSIANE_BLINDATE_MISURA_LABELS[misuraKey] ?? misuraKey },
+      ante,
+    };
+  }
+  const semplice = chiaveModello.match(/^(STECCA_APERTA|ANTONE_MONOLAMIERA|ANTONE_DOPPIALAMIERA)_(CL3|CL4)$/);
+  if (semplice) {
+    const [, tipoKey, classeKey] = semplice;
+    return {
+      tipo: { valore: tipoKey, label: PERSIANE_BLINDATE_TIPO_LABELS[tipoKey] ?? tipoKey },
+      classe: { valore: classeKey, label: classeKey === "CL3" ? "Classe 3" : "Classe 4" },
+      ante,
+    };
   }
   return null;
 }
@@ -962,6 +1191,298 @@ export function assiSelezioneKopen(tipologia: string): AssiKopen | null {
   return {
     linea: { valore: codice, label: lineaLabel },
     combinazione: { valore: tipologia, label: combinazioneLabel },
+  };
+}
+
+// Isomax: decompone una tipologia ISOMAX_<MODELLO>_<APERTURA> nei 2 assi "modello"
+// (codice del modello porta, es. SKL/S1I/RLT/PT4...) e "apertura" (tipo di apertura
+// scelta per quel modello: Battente, Scorrevole interno, Libro simmetrica...), stesso
+// pattern di assiSelezioneKopen (linea -> combinazione).
+export type AssiIsomax = { modello: AsseSelezione; apertura: AsseSelezione };
+
+const ISOMAX_APERTURA_LABELS: Record<string, string> = {
+  BATT: "Battente", BATT2A: "Battente 2 ante",
+  SCI: "Scorrevole interno", SCI2A: "Scorrevole interno 2 ante",
+  SCIS: "Scorrevole interno con serratura", SCIS2A: "Scorrevole interno con serratura 2 ante",
+  SCE: "Scorrevole esterno", SCE2A: "Scorrevole esterno 2 ante",
+  SCES: "Scorrevole esterno con serratura", SCES2A: "Scorrevole esterno con serratura 2 ante",
+  LSIM: "Libro simmetrica", LASIM: "Libro asimmetrica",
+  LRIB: "Libro a ribalta", ROTO: "Rototraslante",
+  VENT: "Ventola", VENT2A: "Ventola 2 ante",
+  ESL: "E-slide", ESL2A: "E-slide 2 ante",
+  ESLS: "E-slide con serratura", ESLS2A: "E-slide 2 ante con serratura",
+};
+
+export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
+  if (!tipologia.startsWith("ISOMAX_")) return null;
+  const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_([A-Z0-9]+)$/);
+  if (!match) return null;
+  const [, modello, apertura] = match;
+  return {
+    modello: { valore: modello, label: modello },
+    apertura: { valore: apertura, label: ISOMAX_APERTURA_LABELS[apertura] ?? apertura },
+  };
+}
+
+// Tende a rullo da interno (P&C): 17 tessuti condivisi tra le 4 linee (RULLO A
+// CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO), ciascuno con un proprio slug usato sia
+// nella tipologia (RULLOCATENA_<slug>[_CASSONETTO], RULLOXS_<slug>_CATENA|MOLLA,
+// LOOKIN_<slug>_MOLLA|CATENELLA, TAGLIOTESSUTO_<slug>) sia come chiave della
+// categoria Optional "Colore - <slug>" (vedi seed-tende-rullo e
+// SelettoreColoreTessutoRullo). Nomi ed elenco colori vengono dal catalogo
+// "TESSUTI DA INTERNO" del fornitore (task #286); non tutti i tessuti hanno prezzo
+// in tutte le 4 linee (es. TULIPANO non e' in LOOK IN), e SOLTIS 92/SERGE non hanno
+// ancora un campionario colori disponibile (solo prezzo, tendina colore vuota).
+export const RULLO_TESSUTO_LABELS: Record<string, string> = {
+  PRESTIGEBO: "Prestige B.O.",
+  ORCHIDEA: "Orchidea",
+  GIRASOLE: "Girasole",
+  IRIS: "Iris",
+  LIBERTYBO: "Liberty B.O.",
+  PRESTIGE: "Prestige",
+  PRIMULA: "Primula",
+  TULIPANO: "Tulipano",
+  CONFORT: "Confort",
+  SILENZIO: "Silenzio",
+  IDEA: "Idea / Idea Legno / Idea Plus",
+  MICROTEX: "Microtex",
+  TEXNET: "Texnet",
+  FUTURO: "Futuro",
+  NATTE: "Nattè",
+  SOLTIS99: "Soltis 99",
+  SOLTIS92: "Soltis 92",
+  SERGE: "Serge",
+};
+
+export type AssiRullo = { tessuto: AsseSelezione; variante?: AsseSelezione };
+
+export function assiSelezioneRullo(tipologia: string): AssiRullo | null {
+  let m = tipologia.match(/^RULLOCATENA_([A-Z0-9]+?)(_CASSONETTO)?$/);
+  if (m) {
+    const [, slug, cassonetto] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: cassonetto
+        ? { valore: "CASSONETTO", label: "Con cassonetto" }
+        : { valore: "SENZACASSONETTO", label: "Senza cassonetto" },
+    };
+  }
+  m = tipologia.match(/^RULLOXS_([A-Z0-9]+)_(CATENA|MOLLA)$/);
+  if (m) {
+    const [, slug, com] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: { valore: com, label: com === "CATENA" ? "Comando a catena" : "Comando a molla" },
+    };
+  }
+  m = tipologia.match(/^LOOKIN_([A-Z0-9]+)_(MOLLA|CATENELLA)$/);
+  if (m) {
+    const [, slug, com] = m;
+    return {
+      tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug },
+      variante: { valore: com, label: com === "MOLLA" ? "Comando a molla" : "Comando a catenella" },
+    };
+  }
+  m = tipologia.match(/^TAGLIOTESSUTO_([A-Z0-9]+)$/);
+  if (m) {
+    const [, slug] = m;
+    return { tessuto: { valore: slug, label: RULLO_TESSUTO_LABELS[slug] ?? slug } };
+  }
+  return null;
+}
+
+// Slug tessuto per una qualunque tipologia Rullo/Look In/Tagli Tessuto — usato per
+// scoperire la tendina colore ("Colore - <slug>") in base al prodotto gia' scelto.
+export function slugTessutoRullo(tipologia: string): string | null {
+  return assiSelezioneRullo(tipologia)?.tessuto.valore ?? null;
+}
+
+// Pergole (Lucilla/Nuvola/Panarea): decompone la tipologia
+// nei 2 assi "modello" (LUCILLA/NUVOLA/PANAREA) e "installazione" (a parete/
+// addossata, isola/autoportante, patio — con le varianti di configurazione
+// singola/doppia/tripla e i casi speciali tiranti/trapezoidale/NL140/Easy-Standard
+// gia' incorporati nell'etichetta), cosi' il selettore mostra 2 tendine a cascata
+// (modello -> installazione) invece della lista piatta di 21 voci mischiate sotto
+// il gruppo PERGOLE — stesso pattern di assiSelezioneKopen.
+export type AssiPergola = { modello: AsseSelezione; installazione: AsseSelezione };
+
+const PERGOLA_MODELLO_LABELS: Record<string, string> = {
+  LUCILLA: "Lucilla",
+  NUVOLA: "Nuvola",
+  PANAREA: "Panarea",
+};
+
+const PERGOLA_INSTALLAZIONE_LABELS: Record<string, string> = {
+  LUCILLA_PARETE_SINGOLA: "A parete (addossata) — Singola, 2 guide, fino a 500cm",
+  LUCILLA_PARETE_DOPPIA: "A parete (addossata) — Doppia, 3 guide, fino a 900cm",
+  LUCILLA_PARETE_TRIPLA: "A parete (addossata) — Tripla, 4 guide, oltre 900cm",
+  LUCILLA_ISOLA_SINGOLA: "Isola (autoportante, non addossata) — Singola",
+  LUCILLA_ISOLA_DOPPIA: "Isola (autoportante, non addossata) — Doppia",
+  LUCILLA_ISOLA_TRIPLA: "Isola (autoportante, non addossata) — Tripla",
+  LUCILLA_PATIO_SINGOLA: "Patio (senza piantoni anteriori) — Singola",
+  LUCILLA_PATIO_DOPPIA: "Patio (senza piantoni anteriori) — Doppia",
+  LUCILLA_PATIO_TRIPLA: "Patio (senza piantoni anteriori) — Tripla",
+  LUCILLA_PATIO_SINGOLA_TIRANTI: "Patio con tiranti — Singola",
+  LUCILLA_TRAPEZOIDALE_PARETE_SINGOLA: "Trapezoidale a parete (addossata) — Singola",
+  NUVOLA_PARETE: "A parete (addossata)",
+  NUVOLA_ISOLA: "Isola (autoportante, non addossata)",
+  NUVOLA_PATIO_SOFFITTO: "Patio a soffitto",
+  NUVOLA_NL140: "NL140 (variante speciale)",
+  PANAREA_STANDARD_PARETE: "Standard — A parete (addossata)",
+  PANAREA_STANDARD_ISOLA: "Standard — Isola (autoportante, non addossata)",
+  PANAREA_STANDARD_PATIO: "Standard — Patio",
+  PANAREA_EASY_PARETE: "Easy — A parete (addossata)",
+  PANAREA_EASY_ISOLA: "Easy — Isola (autoportante, non addossata)",
+  PANAREA_EASY_PATIO: "Easy — Patio",
+};
+
+export function assiSelezionePergola(tipologia: string): AssiPergola | null {
+  let modelloCodice: string | null = null;
+  if (tipologia.startsWith("LUCILLA_")) modelloCodice = "LUCILLA";
+  else if (tipologia.startsWith("NUVOLA_")) modelloCodice = "NUVOLA";
+  else if (tipologia.startsWith("PANAREA_")) modelloCodice = "PANAREA";
+  if (!modelloCodice) return null;
+  const installazioneLabel = PERGOLA_INSTALLAZIONE_LABELS[tipologia];
+  if (!installazioneLabel) return null;
+  return {
+    modello: { valore: modelloCodice, label: PERGOLA_MODELLO_LABELS[modelloCodice] },
+    installazione: { valore: tipologia, label: installazioneLabel },
+  };
+}
+
+// Bioclimatiche (Wawe/Solaria/Raincover/Aurora): decompone la tipologia nei 2 assi
+// "linea" (WAWE/SOLARIA/RAINCOVER/AURORA) e "installazione" (a parete/isola/patio,
+// con le varianti Singola/Doppia/Standard/Star/affiancata gia' incorporate
+// nell'etichetta), cosi' il selettore mostra 2 tendine a cascata (linea ->
+// installazione) invece della lista piatta di 20 voci mischiate sotto il gruppo
+// BIOCLIMATICA — stesso pattern di assiSelezionePergola. Nota: la linea Aurora usa
+// il prefisso tipologia ISCHIA_ (nome commerciale del modello), non AURORA_.
+export type AssiBioclimatica = { linea: AsseSelezione; installazione: AsseSelezione };
+
+const BIOCLIMATICA_LINEA_LABELS: Record<string, string> = {
+  WAWE: "Wawe",
+  SOLARIA: "Solaria",
+  RAINCOVER: "Rain Cover",
+  AURORA: "Aurora",
+};
+
+const BIOCLIMATICA_INSTALLAZIONE_LABELS: Record<string, string> = {
+  WAWE_PATIO: "Patio (autoportante, con lamelle orientabili)",
+  WAWE_STRUTTURA_SINGOLA: "Struttura a parete — Singola (senza lamelle, da abbinare al patio)",
+  WAWE_STRUTTURA_SINGOLA_AFFIANCATA: "Struttura a parete — Singola affiancata (moduli accostati)",
+  WAWE_STRUTTURA_DOPPIA: "Struttura a parete — Doppia (senza lamelle, da abbinare al patio)",
+  WAWE_STRUTTURA_DOPPIA_AFFIANCATA: "Struttura a parete — Doppia affiancata (moduli accostati)",
+  SOLARIA_PARETE_STANDARD: "Standard — A parete",
+  SOLARIA_PARETE_STANDARD_AFFIANCATA: "Standard — A parete, modulo affiancato",
+  SOLARIA_PARETE_STAR: "Star — A parete (arretramento piantoni)",
+  SOLARIA_PARETE_STAR_AFFIANCATA: "Star — A parete, modulo affiancato",
+  SOLARIA_PATIO: "Patio (autoportante su 4 piedi)",
+  SOLARIA_PATIO_TIRANTI: "Patio con tiranti",
+  RAINCOVER_PATIO: "Patio (grondaia compresa)",
+  RAINCOVER_STRUTTURA: "Struttura a parete (senza lamelle, da abbinare al patio)",
+  RAINCOVER_STRUTTURA_DOPPIA: "Struttura a parete — Doppia",
+  RAINCOVER_STRUTTURA_DOPPIA_AFFIANCATA: "Struttura a parete — Doppia affiancata",
+  ISCHIA_PARETE: "Standard — A parete",
+  ISCHIA_PARETE_AFFIANCATA: "Standard — A parete, modulo affiancato",
+  ISCHIA_ISOLA: "Standard — Isola (autoportante su 4 lati)",
+  ISCHIA_ISOLA_AFFIANCATA: "Standard — Isola, moduli affiancati",
+  ISCHIA_PATIO: "Patio (autoportante su 4 piedi)",
+};
+
+export function assiSelezioneBioclimatica(tipologia: string): AssiBioclimatica | null {
+  let lineaCodice: string | null = null;
+  if (tipologia.startsWith("WAWE_")) lineaCodice = "WAWE";
+  else if (tipologia.startsWith("SOLARIA_")) lineaCodice = "SOLARIA";
+  else if (tipologia.startsWith("RAINCOVER_")) lineaCodice = "RAINCOVER";
+  else if (tipologia.startsWith("ISCHIA_")) lineaCodice = "AURORA";
+  if (!lineaCodice) return null;
+  const installazioneLabel = BIOCLIMATICA_INSTALLAZIONE_LABELS[tipologia];
+  if (!installazioneLabel) return null;
+  return {
+    linea: { valore: lineaCodice, label: BIOCLIMATICA_LINEA_LABELS[lineaCodice] },
+    installazione: { valore: tipologia, label: installazioneLabel },
+  };
+}
+
+// Pergole a copertura vetrata/fissa (Nesos/Nubes/Ermes): decompone la tipologia nei
+// 2 assi "linea" (NESOS/NUBES/ERMES) e "declinazione" (per Nubes: Mob/Fix/TT; per
+// Nesos/Ermes, per ora, un unico segnaposto "in arrivo" finche' non arrivano i
+// rispettivi listini/schede prodotto), cosi' il selettore mostra 2 tendine a cascata
+// (linea -> declinazione) invece di una lista piatta — stesso pattern di
+// assiSelezionePergola. A differenza di Nesos/Ermes (interamente "in arrivo"),
+// Nubes ha gia' scheda tecnica e immagini reali per tutte e 3 le declinazioni: solo
+// il prezzo e' segnaposto rosso "su richiesta all'ufficio tecnico" (vedi IN_ARRIVO),
+// finche' non arriva il listino ufficiale.
+// Nubes Mob ha un listino reale (2025): la declinazione diventa "Mob — apertura NN%" e
+// compare una terza tendina "configurazione" (copertura — installazione — movimentazione),
+// stesso pattern della terza tendina opzionale dei Blindati.
+export type AssiVetrata = { linea: AsseSelezione; declinazione: AsseSelezione; configurazione?: AsseSelezione };
+
+const NUBES_MOB_APERTURA_LABELS: Record<string, string> = {
+  "50": "Mob — apertura 50% (solo manuale)",
+  "66": "Mob — apertura 66%",
+  "75": "Mob — apertura 75%",
+  "80": "Mob — apertura 80%",
+};
+const NUBES_MOB_COPERTURA_LABELS: Record<string, string> = {
+  PC: "Policarbonato alveolare opale 16 mm",
+  SW: "Pannello sandwich bianco 16 mm",
+  VT: "Vetro stratificato 44.2",
+};
+const NUBES_MOB_INSTALLAZIONE_LABELS: Record<string, string> = {
+  STD: "Standard (profilo di ancoraggio)",
+  ADD: "Addossata (gronda + piantoni)",
+};
+const NUBES_MOB_MOVIMENTO_LABELS: Record<string, string> = {
+  MAN: "manuale",
+  MOT: "motorizzata Somfy",
+};
+
+function assiNubesMob(tipologia: string): AssiVetrata | null {
+  const m = tipologia.match(/^NUBES_MOB_(50|66|75|80)_(PC|SW|VT)_(STD|ADD)_(MAN|MOT)$/);
+  if (!m) return null;
+  const [, ap, cop, inst, mov] = m;
+  let movimento = NUBES_MOB_MOVIMENTO_LABELS[mov];
+  if (ap === "75" && cop === "VT" && mov === "MAN") movimento += " (max sporgenza 300 cm)";
+  if (ap === "80" && cop === "VT") movimento += " (inclusa)";
+  return {
+    linea: { valore: "NUBES", label: VETRATA_LINEA_LABELS.NUBES },
+    declinazione: { valore: `NUBES_MOB_${ap}`, label: NUBES_MOB_APERTURA_LABELS[ap] },
+    configurazione: {
+      valore: tipologia,
+      label: `${NUBES_MOB_COPERTURA_LABELS[cop]} — ${NUBES_MOB_INSTALLAZIONE_LABELS[inst]} — ${movimento}`,
+    },
+  };
+}
+
+const VETRATA_LINEA_LABELS: Record<string, string> = {
+  NESOS: "Nesos",
+  NUBES: "Nubes",
+  ERMES: "Ermes",
+};
+
+const VETRATA_DECLINAZIONE_LABELS: Record<string, string> = {
+  NESOS_PLACEHOLDER: "Listino non ancora disponibile",
+  ERMES_PLACEHOLDER: "Listino non ancora disponibile",
+  // Vecchio segnaposto "prezzo su richiesta", sostituito dalle varianti NUBES_MOB_* del
+  // listino 2025 (la route seed-vetrate lo elimina se nessun preventivo lo usa).
+  NUBES_MOB: "Mob — voce precedente (prezzo su richiesta)",
+  NUBES_FIX: "Fix — copertura fissa panoramica",
+  NUBES_TT: "TT — copertura fissa a taglio termico (isolamento)",
+};
+
+export function assiSelezioneVetrata(tipologia: string): AssiVetrata | null {
+  if (tipologia.startsWith("NUBES_MOB_")) return assiNubesMob(tipologia);
+  let lineaCodice: string | null = null;
+  if (tipologia.startsWith("NESOS_")) lineaCodice = "NESOS";
+  else if (tipologia.startsWith("NUBES_")) lineaCodice = "NUBES";
+  else if (tipologia.startsWith("ERMES_")) lineaCodice = "ERMES";
+  if (!lineaCodice) return null;
+  const declinazioneLabel = VETRATA_DECLINAZIONE_LABELS[tipologia];
+  if (!declinazioneLabel) return null;
+  return {
+    linea: { valore: lineaCodice, label: VETRATA_LINEA_LABELS[lineaCodice] },
+    declinazione: { valore: tipologia, label: declinazioneLabel },
   };
 }
 
@@ -1132,7 +1653,13 @@ export function assiSelezioneMinibox(tipologia: string): AssiMinibox | null {
 // colore riporta anche l'aumento di prezzo rispetto alla Tinta Unita della stessa
 // densita' (dati listino: L14 Media 96/101/102 €/mq, L14 Alta 116/121/121 €/mq),
 // cosi' l'aumento e' visibile senza dover aprire ogni singola tipologia.
-export type AssiTapparelle = { materiale: AsseSelezione; modello: AsseSelezione; colore: AsseSelezione };
+export type AssiTapparelle = {
+  materiale: AsseSelezione;
+  modello: AsseSelezione;
+  colore: AsseSelezione;
+  // etichette personalizzate delle 3 tendine (default: Materiale / Modello / Colore)
+  etichette?: [string, string, string];
+};
 
 const TAPPARELLE_MODELLO_LABELS: Record<string, string> = { L14: "L14", OBLIQUA: "Obliqua", LUPIN: "Lupin" };
 const TAPPARELLE_FINITURA_LABELS: Record<string, string> = {
@@ -1183,6 +1710,47 @@ export function assiSelezioneTapparelle(tipologia: string): AssiTapparelle | nul
     colore: { valore: tipologia, label: coloreLabel },
   };
 }
+
+// WPC Novowood (Outdoor > Pavimenti): riusa il selettore a 3 tendine delle Tapparelle con
+// assi categoria (Pavimenti/Rivestimenti/Soffitti e frangisole/Recinzioni) -> prodotto -> variante
+// (colore/lunghezza/pilastro). La mappa e' generata dallo script di seed (wpcCatalogo.ts).
+export function assiSelezioneWpc(tipologia: string): AssiTapparelle | null {
+  const w = WPC_TIPOLOGIE[tipologia];
+  if (!w) return null;
+  return {
+    materiale: { valore: w.cat, label: w.catLabel },
+    modello: { valore: w.prod, label: w.prodLabel },
+    colore: { valore: tipologia, label: w.varLabel },
+    etichette: ["Categoria", "Prodotto", "Colore / variante"],
+  };
+}
+
+const WSPOSA_LABELS: Record<string, string> = {
+  "WSPOSA_RILIEVO_VETRATE_PANORAMICHE": "Rilievo Vetrate Panoramiche",
+  "WSPOSA_RILIEVO_PERGOTENDE_E_BIOCLIMATICHE": "Rilievo Pergotende e Bioclimatiche",
+  "WSPOSA_NOTE_TRASFERTA_RILIEVI_PERGOLE_VETRATE": "Note Trasferta Rilievi Pergole/Vetrate",
+  "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE": "Posa in Opera Pergotende e Bioclimatiche",
+  "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE": "Note Posa Pergotende e Bioclimatiche",
+  "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA": "Posa in Opera Vetrate Vepa",
+  "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE": "Complementi e Lavorazioni Extra Vetrate",
+  "WSPOSA_NOTE_LOGISTICHE_VETRATE": "Note Logistiche Vetrate",
+  "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI": "Rilievo Serramenti e affini",
+  "WSPOSA_NOTE_TRASFERTA_RILIEVI_SERRAMENTI": "Note Trasferta Rilievi Serramenti",
+  "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE": "Posa in Opera Finestre e Porte Finestre",
+  "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE": "Posa in Opera Porte Interne",
+  "WSPOSA_POSA_IN_OPERA_PORTONCINI": "Posa in Opera Portoncini",
+  "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE": "Posa in Opera Porte Blindate",
+  "WSPOSA_POSA_IN_OPERA_TAPPARELLE": "Posa in Opera Tapparelle",
+  "WSPOSA_POSA_IN_OPERA_PERSIANE": "Posa in Opera Persiane",
+  "WSPOSA_POSA_IN_OPERA_INFERRIATE": "Posa in Opera Inferriate",
+  "WSPOSA_POSA_IN_OPERA_ZANZARIERE": "Posa in Opera Zanzariere",
+  "WSPOSA_POSA_IN_OPERA_PENSILINE": "Posa in Opera Pensiline",
+  "WSPOSA_POSA_IN_OPERA_ACCESSORI": "Posa in Opera Accessori",
+  "WSPOSA_NOTE_POSA_SERRAMENTI": "Note Posa Serramenti",
+  "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE": "Posa in Opera Tende da Sole",
+  "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI": "Costi Aggiuntivi e Servizi Accessori",
+  "WSPOSA_SPESE_MAGAZZINO": "Spese Magazzino",
+};
 
 const PENSILINA_LABELS: Record<string, string> = {
   PENSILINA_CURVA_COMPATTO: "Pensilina Curva — Policarbonato Compatto (3mm)",
@@ -1431,7 +1999,10 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 // e le mostra in rosso nel selettore finche' non arriva il listino vero (a quel punto
 // basta rimuovere la voce da questa mappa e sostituire il segnaposto con i dati reali).
 const IN_ARRIVO: Record<string, string> = {
+  PORTEPC_PLACEHOLDER: "Listino Porte P&C non ancora caricato — in arrivo",
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
+  PAVGALLEGGIANTI_PLACEHOLDER: "Listino Pavimenti galleggianti non ancora caricato — in arrivo",
+  PAVGRES_PLACEHOLDER: "Listino Gres porcellanato non ancora caricato — in arrivo",
   SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "Listino Serramenti PVC Optima non ancora caricato — in arrivo",
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
@@ -1443,6 +2014,17 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
   TAPPARELLE_PVC_PLACEHOLDER: "Listino Tapparelle in PVC (prezzo a mq con colori) non ancora caricato — in arrivo",
+  // Vetrate pergole: Nesos ed Ermes non hanno ancora nessun dato (scheda ne' listino).
+  // Nubes ha gia' scheda tecnica e immagini reali per tutte e 3 le declinazioni
+  // (Mob/Fix/TT) — qui e' disabilitato SOLO il prezzo, in attesa del listino
+  // ufficiale: il commerciale puo' comunque vedere la scheda tecnica completa (con
+  // foto) dalla pagina "Prodotti & listini", ma non puo' ancora aggiungerlo a un
+  // preventivo con un prezzo reale.
+  NESOS_PLACEHOLDER: "Listino Nesos non ancora caricato — in arrivo",
+  ERMES_PLACEHOLDER: "Listino Ermes non ancora caricato — in arrivo",
+  NUBES_MOB: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes Mob",
+  NUBES_FIX: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes Fix",
+  NUBES_TT: "Prezzo su richiesta — contattare l'ufficio tecnico per un preventivo Nubes TT",
 };
 
 export function notaInArrivo(tipologia: string): string | null {
@@ -1450,6 +2032,41 @@ export function notaInArrivo(tipologia: string): string | null {
 }
 
 export function labelBreveTipologia(tipologia: string): string {
+  if (tipologia.startsWith("SERAFRANG_")) {
+    const a = assiSelezioneSeraFrangisole(tipologia);
+    if (a) return a.materiale.valore === "VEL" ? `${a.materiale.label} — ${a.modello.label}` : `${a.materiale.label} — ${a.modello.label} — ${a.colore.label}`;
+  }
+  if (WPC_TIPOLOGIE[tipologia]) return `${WPC_TIPOLOGIE[tipologia].prodLabel} — ${WPC_TIPOLOGIE[tipologia].varLabel}`;
+  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti (listino in arrivo)";
+  if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
+  if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
+  if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
+  if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
+    const assi = assiSelezionePergola(tipologia);
+    if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
+  }
+  if (tipologia.startsWith("WAWE_") || tipologia.startsWith("SOLARIA_") || tipologia.startsWith("RAINCOVER_") || tipologia.startsWith("ISCHIA_")) {
+    const assi = assiSelezioneBioclimatica(tipologia);
+    if (assi) return `${assi.linea.label} — ${assi.installazione.label}`;
+  }
+  if (tipologia.startsWith("NUBES_") || tipologia.startsWith("NESOS_") || tipologia.startsWith("ERMES_")) {
+    const assi = assiSelezioneVetrata(tipologia);
+    if (assi?.configurazione) return `${assi.linea.label} ${assi.declinazione.label} — ${assi.configurazione.label}`;
+    if (assi) return `${assi.linea.label} — ${assi.declinazione.label}`;
+  }
+  if (tipologia.startsWith("ISOMAX_")) {
+    const assi = assiSelezioneIsomax(tipologia);
+    if (assi) return `${assi.modello.label} — ${assi.apertura.label}`;
+  }
+  if (
+    tipologia.startsWith("RULLOCATENA_") ||
+    tipologia.startsWith("RULLOXS_") ||
+    tipologia.startsWith("LOOKIN_") ||
+    tipologia.startsWith("TAGLIOTESSUTO_")
+  ) {
+    const assi = assiSelezioneRullo(tipologia);
+    if (assi) return assi.variante ? `${assi.tessuto.label} — ${assi.variante.label}` : assi.tessuto.label;
+  }
   if (tipologia === "PENSILINA_DRITTA_PLACEHOLDER") return "Dritta (listino in arrivo)";
   if (SERRAMENTI_MATERIALE_LABELS[tipologia]) return `${SERRAMENTI_MATERIALE_LABELS[tipologia]} (listino in arrivo)`;
   if (PENSILINA_LABELS[tipologia]) return PENSILINA_LABELS[tipologia];
@@ -1479,9 +2096,14 @@ export function labelBreveTipologia(tipologia: string): string {
     const match = tipologia.match(/_(STD|STDPLUS|MICH|FL)$/);
     if (match) return PLISSE_FINITURE[match[1]] ?? match[1];
   }
+  if (PERSIANEGOCCIA_LABELS[tipologia]) return PERSIANEGOCCIA_LABELS[tipologia];
   if (HISENSE_LABELS[tipologia]) return HISENSE_LABELS[tipologia];
   if (BLINDATI_LABELS[tipologia]) return BLINDATI_LABELS[tipologia];
   if (KOPEN_LABELS[tipologia]) return KOPEN_LABELS[tipologia];
+  if (tipologia === "PORTONCINOPVC_1ANTA") return "Portoncino PVC bianco 1 anta";
+  if (tipologia === "PORTONCINOPVC_2ANTE") return "Portoncino PVC bianco 2 ante";
+  if (tipologia === "CASSONETTOPVC_P147") return "Cassonetto PVC — profondità fino a 147 mm";
+  if (tipologia === "CASSONETTOPVC_P272") return "Cassonetto PVC — profondità da 147 a 272 mm";
   if (tipologia.startsWith("ZPC_")) return labelBreveZpc(tipologia);
   if (tipologia.startsWith("URAGANO_")) return labelBreveUragano(tipologia);
   if (lineaVerticale(tipologia)) return labelBreveVerticale(tipologia);
@@ -1525,11 +2147,78 @@ export function finituraDiTipologia(tipologia: string): string | null {
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }
 
 export function haMisura(larghezza: number, altezza: number): boolean {
   return larghezza > 0 || altezza > 0;
+}
+
+
+// Frangisole Seraplastic (veneziane esterne a filo / a catena + velette).
+// Tipologia: SERAFRANG_<LINEA>_<GUIDA>_<MOV> (a filo: Z90/Z70/S90/C80/C65 x GUI/CAV/KAP x MOT/MAN),
+// SERAFRANG_<BOLD|ESSE|LIGHT>_<STD|TOP|MAR> (a catena), SERAFRANG_VEL_<A-D> (velette).
+// Cascata a 3 tendine: Linea -> Guide / Versione -> Azionamento.
+const SERAFRANG_LINEE: Record<string, string> = {
+  Z90: "90-Z a filo (lama 90 mm)",
+  Z70: "70-Z a filo (lama 70 mm)",
+  S90: "90-S a filo (lama 90 mm)",
+  C80: "80-C a filo (lama 80 mm)",
+  C65: "65-C a filo (lama 65 mm)",
+  BOLD: "Bold a catena (lama 1,3 mm)",
+  ESSE: "Esse a catena (lama 1,3 mm)",
+  LIGHT: "Light a catena (lama 0,75 mm)",
+  VEL: "Velette",
+};
+const SERAFRANG_GUIDE: Record<string, string> = { GUI: "Guide estruse", CAV: "Guide a cavo", KAP: "Guide estruse autoportanti" };
+const SERAFRANG_MOV: Record<string, string> = { MOT: "Motorizzata", MAN: "Manuale ad argano" };
+const SERAFRANG_VERSIONI: Record<string, string> = { STD: "Versione Standard", TOP: "Versione Top", MAR: "Versione con Kit Mare" };
+
+export function parteSeraFrangisole(tipologia: string): { linea: string; guida: string; mov: string } | null {
+  const m = tipologia.match(/^SERAFRANG_([A-Z0-9]+)_([A-Z0-9]+)(?:_([A-Z0-9]+))?$/);
+  if (!m) return null;
+  const [, linea, a, b] = m;
+  if (linea === "VEL") return { linea, guida: "-", mov: a };
+  if (b) return { linea, guida: a, mov: b };
+  return { linea, guida: "CAT", mov: a };
+}
+
+export function assiSelezioneSeraFrangisole(tipologia: string): AssiTapparelle | null {
+  const p = parteSeraFrangisole(tipologia);
+  if (!p || !SERAFRANG_LINEE[p.linea]) return null;
+  const etichette: [string, string, string] = ["Linea", "Guide / Versione", "Azionamento"];
+  if (p.linea === "VEL") {
+    return {
+      materiale: { valore: "VEL", label: SERAFRANG_LINEE.VEL },
+      modello: { valore: tipologia, label: `Veletta Moda ${p.mov}` },
+      colore: { valore: tipologia, label: "Colori standard" },
+      etichette,
+    };
+  }
+  if (p.guida === "CAT") {
+    return {
+      materiale: { valore: p.linea, label: SERAFRANG_LINEE[p.linea] },
+      modello: { valore: `${p.linea}_CAT`, label: "A catena" },
+      colore: { valore: tipologia, label: SERAFRANG_VERSIONI[p.mov] ?? p.mov },
+      etichette,
+    };
+  }
+  return {
+    materiale: { valore: p.linea, label: SERAFRANG_LINEE[p.linea] },
+    modello: { valore: `${p.linea}_${p.guida}`, label: SERAFRANG_GUIDE[p.guida] ?? p.guida },
+    colore: { valore: tipologia, label: SERAFRANG_MOV[p.mov] ?? p.mov },
+    etichette,
+  };
+}
+
+// Optional Seraplastic con listino "SF:<linee>:<guide>:<mov>" (liste separate da virgola, * = tutti).
+export function optionalSeraFrangisoleApplicabile(listino: string | null, tipologia: string): boolean {
+  if (!listino || !listino.startsWith("SF:")) return false;
+  const p = parteSeraFrangisole(tipologia);
+  if (!p) return false;
+  const [, l, g, m] = listino.split(":");
+  const ok = (spec: string, v: string) => spec === "*" || spec.split(",").includes(v);
+  return ok(l, p.linea) && ok(g, p.guida) && ok(m, p.mov);
 }

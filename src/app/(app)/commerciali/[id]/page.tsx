@@ -183,7 +183,10 @@ export default async function SchedaCommercialePage({
                 href={`/preventivi/${p.id}`}
                 className="text-sm py-1.5 flex items-center justify-between hover:bg-neutral-50 -mx-1 px-1"
               >
-                <span>{p.cliente.nome} <span className="text-xs text-neutral-600">· {p.brand.nome}</span></span>
+                <span>
+                  {p.numeroOfferta ? <span className="text-xs font-semibold text-neutral-700">N° {p.numeroOfferta} · </span> : null}
+                  {p.cliente.nome} <span className="text-xs text-neutral-600">· {p.brand.nome} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · duplicata" : ""}{p.archiviato ? " · archiviata" : ""}</span>
+                </span>
                 <span className="flex items-center gap-2">
                   <span className="text-xs text-neutral-700">{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{p.stato}</span>

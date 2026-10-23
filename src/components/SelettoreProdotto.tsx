@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiKopen, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle } from "@/lib/prodotti";
+import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiPersianeBlindate, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
 export type NodoTipologia = {
@@ -24,12 +24,21 @@ export type NodoTipologia = {
   // invece della lista piatta (18-54 voci per famiglia) quando presente su tutte le
   // tipologie di un sottogruppo.
   assi?: AssiZpc;
-  // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per mostrare
-  // 2 tendine a cascata invece della lista piatta (27-68 voci per famiglia).
+  // Infissi in Acciaio: assi modello → numero ante, per mostrare 2 tendine a
+  // cascata invece della lista piatta (27 voci). Persiane Blindate usa invece
+  // assiPersianeBlindate qui sotto (4 tendine).
   assiModelloAnte?: AssiModelloAnte;
+  // Persiane Blindate: assi tipo (incl. antone monolamiera/doppia lamiera) → classe
+  // → misura doghe (se presente) → numero ante, per mostrare una cascata di tendine
+  // distinte invece dell'unica tendina "modello" piatta da 17 voci mescolate — vedi
+  // richiesta utente.
+  assiPersianeBlindate?: AssiPersianeBlindate;
   // Kopen: assi linea -> combinazione materiali, per mostrare 2 tendine a cascata
   // invece della lista piatta per sottogruppo.
   assiKopen?: AssiKopen;
+  // Isomax (Porte interne): assi modello -> tipo apertura, per mostrare 2 tendine
+  // a cascata invece della lista piatta (fino a 20 voci per modello).
+  assiIsomax?: AssiIsomax;
   // Blindati: assi classe -> numero ante -> variante due ante, per mostrare 3
   // tendine a cascata invece della lista piatta divisa per sottogruppo.
   assiBlindati?: AssiBlindati;
@@ -44,6 +53,23 @@ export type NodoTipologia = {
   // (solo per le guide con scelta colore), per mostrare tendine a cascata invece
   // della lista piatta di 24 voci.
   assiAccessoriTapparelle?: AssiAccessoriTapparelle;
+  // Tende a rullo da interno: assi tessuto → variante (meccanismo/cassonetto), per
+  // mostrare 2 tendine a cascata (1 sola per Tagli Tessuto) invece della lista piatta
+  // (fino a 34 voci per linea).
+  assiRullo?: AssiRullo;
+  // Pergole (Lucilla/Nuvola/Panarea): assi modello →
+  // installazione (a parete/isola/patio), per mostrare 2 tendine a cascata invece
+  // della lista piatta di 21 voci mischiate sotto il gruppo PERGOLE.
+  assiPergola?: AssiPergola;
+  // Vetrate pergole (Nesos/Nubes/Ermes): assi linea -> declinazione (Mob/Fix/TT per
+  // Nubes), per mostrare 2 tendine a cascata invece della lista piatta. Nesos/Ermes
+  // restano "in arrivo" (disabilitato), Nubes ha scheda tecnica reale ma prezzo
+  // ancora "in arrivo" (disabilitato) finche' non arriva il listino ufficiale.
+  assiVetrata?: AssiVetrata;
+  // Bioclimatiche (Wawe/Solaria/Raincover/Aurora): assi linea -> installazione, per
+  // mostrare 2 tendine a cascata invece della lista piatta di 20 voci mischiate sotto
+  // il gruppo BIOCLIMATICA.
+  assiBioclimatica?: AssiBioclimatica;
   // Tipologie "in arrivo" (es. Pensilina Dritta prima che arrivi il listino): mostrate
   // in tendina per farsi vedere, ma non selezionabili — il testo qui e' il motivo da
   // mostrare al click invece di aprire la selezione.
@@ -262,6 +288,161 @@ function SelettoreCascataModelloAnte({
 // e' la decisione architettonica di partenza per il commerciale — la classe di
 // sicurezza si sceglie dopo, a parita' di apertura. Sostituisce i 2 sottogruppi
 // piatti BLINDATI_SINGOLA/BLINDATI_DUEANTE usati in precedenza.
+// Persiane Blindate: tendine a cascata tipo (incl. antone monolamiera/doppia
+// lamiera) -> classe -> misura doghe (solo se il tipo la prevede) -> numero ante,
+// al posto dell'unica tendina "modello" piatta da 17 voci che mescolava stecca
+// aperta, dogate verticali/orizzontali e i due antoni — rendendo "fuori standard"
+// cercare monolamiera/doppia lamiera in mezzo a tutto il resto. Stesso pattern di
+// SelettoreCascataBlindati, con una tendina in piu' per la misura doghe.
+function SelettoreCascataPersianeBlindate({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [tipo, setTipo] = useState("");
+  const [classe, setClasse] = useState("");
+  const [misura, setMisura] = useState("");
+  const [ante, setAnte] = useState("");
+
+  const opzioniTipo = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.tipo.valore, t.assiPersianeBlindate.tipo.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerTipo = useMemo(
+    () => tipologie.filter((t) => t.assiPersianeBlindate?.tipo.valore === tipo),
+    [tipologie, tipo]
+  );
+  const opzioniClasse = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerTipo) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.classe.valore, t.assiPersianeBlindate.classe.label);
+    return [...mappa.entries()];
+  }, [filtratePerTipo]);
+
+  const filtratePerClasse = useMemo(
+    () => filtratePerTipo.filter((t) => t.assiPersianeBlindate?.classe.valore === classe),
+    [filtratePerTipo, classe]
+  );
+  const richiedeMisura = useMemo(
+    () => filtratePerClasse.some((t) => t.assiPersianeBlindate?.misura),
+    [filtratePerClasse]
+  );
+  const opzioniMisura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerClasse) if (t.assiPersianeBlindate?.misura) mappa.set(t.assiPersianeBlindate.misura.valore, t.assiPersianeBlindate.misura.label);
+    return [...mappa.entries()];
+  }, [filtratePerClasse]);
+
+  const filtratePerMisura = useMemo(
+    () => (richiedeMisura ? filtratePerClasse.filter((t) => t.assiPersianeBlindate?.misura?.valore === misura) : filtratePerClasse),
+    [filtratePerClasse, richiedeMisura, misura]
+  );
+  const opzioniAnte = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerMisura) if (t.assiPersianeBlindate) mappa.set(t.assiPersianeBlindate.ante.valore, t.assiPersianeBlindate.ante.label);
+    return [...mappa.entries()];
+  }, [filtratePerMisura]);
+
+  const trovato = useMemo(
+    () => filtratePerMisura.find((t) => t.assiPersianeBlindate?.ante.valore === ante) ?? null,
+    [filtratePerMisura, ante]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Tipo</label>
+        <select
+          value={tipo}
+          onChange={(e) => {
+            setTipo(e.target.value);
+            setClasse("");
+            setMisura("");
+            setAnte("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniTipo.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {tipo && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Classe</label>
+          <select
+            value={classe}
+            onChange={(e) => {
+              setClasse(e.target.value);
+              setMisura("");
+              setAnte("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniClasse.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {tipo && classe && richiedeMisura && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Misura doghe</label>
+          <select
+            value={misura}
+            onChange={(e) => {
+              setMisura(e.target.value);
+              setAnte("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniMisura.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {tipo && classe && (!richiedeMisura || misura) && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">{richiedeMisura ? "4" : "3"}. Numero ante</label>
+          <select
+            value={ante}
+            onChange={(e) => setAnte(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniAnte.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 function SelettoreCascataAccessoriTapparelle({
   tipologie,
   selezionato,
@@ -681,6 +862,496 @@ function SelettoreCascataKopen({
   );
 }
 
+// Tendine a cascata per le pergole (Lucilla/Nuvola/Panarea):
+// 1) modello, 2) installazione (a parete/addossata, isola/autoportante, patio — con
+// la configurazione singola/doppia/tripla e i casi speciali gia' incorporati
+// nell'etichetta). Sostituisce la lista piatta di 21 voci mischiate sotto il
+// gruppo PERGOLE. Stesso pattern di SelettoreCascataKopen.
+function SelettoreCascataPergola({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [modello, setModello] = useState("");
+  const [installazione, setInstallazione] = useState("");
+
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiPergola) mappa.set(t.assiPergola.modello.valore, t.assiPergola.modello.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerModello = useMemo(
+    () => tipologie.filter((t) => t.assiPergola?.modello.valore === modello),
+    [tipologie, modello]
+  );
+  const opzioniInstallazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiPergola) mappa.set(t.assiPergola.installazione.valore, t.assiPergola.installazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiPergola?.installazione.valore === installazione) ?? null,
+    [filtratePerModello, installazione]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Modello</label>
+        <select
+          value={modello}
+          onChange={(e) => {
+            setModello(e.target.value);
+            setInstallazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniModello.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Installazione (addossata/isola/patio)</label>
+          <select
+            value={installazione}
+            onChange={(e) => setInstallazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniInstallazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Bioclimatiche (Wawe/Solaria/Raincover/Aurora): 2 tendine a cascata
+// (1. Linea, 2. Installazione) invece della lista piatta di 20 voci mischiate sotto
+// il gruppo BIOCLIMATICA. Stesso pattern di SelettoreCascataPergola.
+function SelettoreCascataBioclimatica({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [linea, setLinea] = useState("");
+  const [installazione, setInstallazione] = useState("");
+
+  const opzioniLinea = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiBioclimatica) mappa.set(t.assiBioclimatica.linea.valore, t.assiBioclimatica.linea.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerLinea = useMemo(
+    () => tipologie.filter((t) => t.assiBioclimatica?.linea.valore === linea),
+    [tipologie, linea]
+  );
+  const opzioniInstallazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerLinea) if (t.assiBioclimatica) mappa.set(t.assiBioclimatica.installazione.valore, t.assiBioclimatica.installazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerLinea]);
+
+  const trovato = useMemo(
+    () => filtratePerLinea.find((t) => t.assiBioclimatica?.installazione.valore === installazione) ?? null,
+    [filtratePerLinea, installazione]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Linea</label>
+        <select
+          value={linea}
+          onChange={(e) => {
+            setLinea(e.target.value);
+            setInstallazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniLinea.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {linea && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Installazione (parete/isola/patio)</label>
+          <select
+            value={installazione}
+            onChange={(e) => setInstallazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniInstallazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Vetrate pergole (Nesos/Nubes/Ermes): 2 tendine a cascata (1. Linea, 2. Declinazione)
+// invece della lista piatta. A differenza di SelettoreCascataPergola, qui il click su
+// una declinazione "in arrivo" (Nesos/Ermes senza dati, o Nubes con prezzo ancora da
+// listinare) NON chiude la selezione: mostra solo l'avviso rosso inline, cosi' il
+// commerciale capisce subito che serve contattare l'ufficio tecnico invece di
+// ritrovarsi in una griglia prezzi vuota o a zero. Stesso pattern di
+// SelettoreCascataTapparelle.
+function SelettoreCascataVetrata({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [linea, setLinea] = useState("");
+  const [declinazione, setDeclinazione] = useState("");
+  // Terza tendina (solo Nubes Mob): copertura — installazione — movimentazione.
+  const [configurazione, setConfigurazione] = useState("");
+
+  const opzioniLinea = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiVetrata) mappa.set(t.assiVetrata.linea.valore, t.assiVetrata.linea.label);
+    return [...mappa.entries()];
+  }, [tipologie]);
+
+  const filtratePerLinea = useMemo(
+    () => tipologie.filter((t) => t.assiVetrata?.linea.valore === linea),
+    [tipologie, linea]
+  );
+  const opzioniDeclinazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerLinea) if (t.assiVetrata) mappa.set(t.assiVetrata.declinazione.valore, t.assiVetrata.declinazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerLinea]);
+
+  const filtratePerDeclinazione = useMemo(
+    () => filtratePerLinea.filter((t) => t.assiVetrata?.declinazione.valore === declinazione),
+    [filtratePerLinea, declinazione]
+  );
+  const richiedeConfigurazione = useMemo(
+    () => filtratePerDeclinazione.some((t) => t.assiVetrata?.configurazione),
+    [filtratePerDeclinazione]
+  );
+  const opzioniConfigurazione = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerDeclinazione)
+      if (t.assiVetrata?.configurazione) mappa.set(t.assiVetrata.configurazione.valore, t.assiVetrata.configurazione.label);
+    return [...mappa.entries()];
+  }, [filtratePerDeclinazione]);
+
+  const trovato = useMemo(() => {
+    if (richiedeConfigurazione) {
+      return filtratePerDeclinazione.find((t) => t.assiVetrata?.configurazione?.valore === configurazione) ?? null;
+    }
+    return filtratePerDeclinazione[0] ?? null;
+  }, [filtratePerDeclinazione, richiedeConfigurazione, configurazione]);
+
+  useEffect(() => {
+    if (trovato && !trovato.disabilitato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Linea</label>
+        <select
+          value={linea}
+          onChange={(e) => {
+            setLinea(e.target.value);
+            setDeclinazione("");
+            setConfigurazione("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniLinea.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {linea && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Declinazione</label>
+          <select
+            value={declinazione}
+            onChange={(e) => {
+              setDeclinazione(e.target.value);
+              setConfigurazione("");
+            }}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniDeclinazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {declinazione && richiedeConfigurazione && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">3. Copertura, installazione e movimentazione</label>
+          <select
+            value={configurazione}
+            onChange={(e) => setConfigurazione(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniConfigurazione.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && trovato.disabilitato ? (
+        <div className="text-xs font-medium text-red-500 bg-red-50 border border-red-100 rounded px-2 py-1.5">
+          ⚠️ {trovato.disabilitato}
+          <p className="text-[11px] text-red-400 font-normal mt-0.5">
+            Scheda tecnica e foto disponibili in "Prodotti &amp; listini" — {trovato.label}.
+          </p>
+        </div>
+      ) : trovato ? (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      ) : null}
+    </div>
+  );
+}
+
+// Tendine a cascata per le tende a rullo da interno: 1) tessuto (17 tessuti
+// condivisi tra le 4 linee), 2) variante di meccanismo/cassonetto (assente solo per
+// Tagli Tessuto, che e' pura fornitura del tessuto senza meccanismo — in quel caso
+// la selezione si conclude gia' al passo 1). Stesso pattern di SelettoreCascataKopen.
+function SelettoreCascataRullo({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [tessuto, setTessuto] = useState("");
+  const [variante, setVariante] = useState("");
+
+  const haVarianti = useMemo(() => tipologie.some((t) => t.assiRullo?.variante), [tipologie]);
+
+  const opzioniTessuto = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiRullo) mappa.set(t.assiRullo.tessuto.valore, t.assiRullo.tessuto.label);
+    return [...mappa.entries()].sort((a, b) => a[1].localeCompare(b[1], "it"));
+  }, [tipologie]);
+
+  const filtratePerTessuto = useMemo(
+    () => tipologie.filter((t) => t.assiRullo?.tessuto.valore === tessuto),
+    [tipologie, tessuto]
+  );
+  const opzioniVariante = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerTessuto) if (t.assiRullo?.variante) mappa.set(t.assiRullo.variante.valore, t.assiRullo.variante.label);
+    return [...mappa.entries()];
+  }, [filtratePerTessuto]);
+
+  const trovato = useMemo(() => {
+    if (!haVarianti) return filtratePerTessuto[0] ?? null;
+    return filtratePerTessuto.find((t) => t.assiRullo?.variante?.valore === variante) ?? null;
+  }, [filtratePerTessuto, variante, haVarianti]);
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Tessuto</label>
+        <select
+          value={tessuto}
+          onChange={(e) => {
+            setTessuto(e.target.value);
+            setVariante("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniTessuto.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {tessuto && haVarianti && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Meccanismo</label>
+          <select
+            value={variante}
+            onChange={(e) => setVariante(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniVariante.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
+// Tendine a cascata per Isomax (Porte interne): 1) modello (codice porta, es. SKL/
+// S1I/RLT/PT4...), 2) tipo di apertura specifico di quel modello (Battente, Scorrevole
+// interno, Libro simmetrica, ecc. - alcuni modelli non offrono tutte le aperture).
+// Sostituisce la lista piatta fino a 20 voci per modello con 2 tendine, come per Kopen.
+function SelettoreCascataIsomax({
+  tipologie,
+  selezionato,
+  onScegli,
+  onReset,
+}: {
+  tipologie: NodoTipologia[];
+  selezionato: string | null;
+  onScegli: (nodo: NodoTipologia) => void;
+  onReset: () => void;
+}) {
+  const [modello, setModello] = useState("");
+  const [apertura, setApertura] = useState("");
+
+  const opzioniModello = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of tipologie) if (t.assiIsomax) mappa.set(t.assiIsomax.modello.valore, t.assiIsomax.modello.label);
+    return [...mappa.entries()].sort(([, a], [, b]) => a.localeCompare(b));
+  }, [tipologie]);
+
+  const filtratePerModello = useMemo(
+    () => tipologie.filter((t) => t.assiIsomax?.modello.valore === modello),
+    [tipologie, modello]
+  );
+  const opzioniApertura = useMemo(() => {
+    const mappa = new Map<string, string>();
+    for (const t of filtratePerModello) if (t.assiIsomax) mappa.set(t.assiIsomax.apertura.valore, t.assiIsomax.apertura.label);
+    return [...mappa.entries()];
+  }, [filtratePerModello]);
+
+  const trovato = useMemo(
+    () => filtratePerModello.find((t) => t.assiIsomax?.apertura.valore === apertura) ?? null,
+    [filtratePerModello, apertura]
+  );
+
+  useEffect(() => {
+    if (trovato) {
+      onScegli(trovato);
+    } else if (selezionato && tipologie.some((t) => t.value === selezionato)) {
+      onReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trovato]);
+
+  return (
+    <div className="flex flex-col gap-2 px-2 py-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-[11px] text-neutral-600">1. Modello</label>
+        <select
+          value={modello}
+          onChange={(e) => {
+            setModello(e.target.value);
+            setApertura("");
+          }}
+          className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+        >
+          <option value="">— seleziona —</option>
+          {opzioniModello.map(([v, l]) => (
+            <option key={v} value={v}>{l}</option>
+          ))}
+        </select>
+      </div>
+      {modello && (
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] text-neutral-600">2. Tipo apertura</label>
+          <select
+            value={apertura}
+            onChange={(e) => setApertura(e.target.value)}
+            className="border border-neutral-200 rounded px-2 py-1.5 text-xs"
+          >
+            <option value="">— seleziona —</option>
+            {opzioniApertura.map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {trovato && (
+        <p className="text-xs font-medium text-green-700">✓ {trovato.label} selezionato</p>
+      )}
+    </div>
+  );
+}
+
 // Tendine a cascata per Minibox: 1) misura cassonetto (165/185/205/250mm), 2) tipologia
 // di tapparella (marca + tipo di manovra, o "Solo struttura"). Ogni misura filtra la
 // tendina successiva alle sole tipologie effettivamente a listino per quel cassonetto
@@ -788,6 +1459,7 @@ function SelettoreCascataTapparelle({
   const [materiale, setMateriale] = useState("");
   const [modello, setModello] = useState("");
   const [colore, setColore] = useState("");
+  const et = tipologie.find((t) => t.assiTapparelle)?.assiTapparelle?.etichette;
 
   const opzioniMateriale = useMemo(() => {
     const mappa = new Map<string, string>();
@@ -832,7 +1504,7 @@ function SelettoreCascataTapparelle({
   return (
     <div className="flex flex-col gap-2 px-2 py-2">
       <div className="flex flex-col gap-1">
-        <label className="text-[11px] text-neutral-600">1. Materiale</label>
+        <label className="text-[11px] text-neutral-600">1. {et?.[0] ?? "Materiale"}</label>
         <select
           value={materiale}
           onChange={(e) => {
@@ -850,7 +1522,7 @@ function SelettoreCascataTapparelle({
       </div>
       {materiale && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">2. Modello</label>
+          <label className="text-[11px] text-neutral-600">2. {et?.[1] ?? "Modello"}</label>
           <select
             value={modello}
             onChange={(e) => {
@@ -868,7 +1540,7 @@ function SelettoreCascataTapparelle({
       )}
       {materiale && modello && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">3. Colore</label>
+          <label className="text-[11px] text-neutral-600">3. {et?.[2] ?? "Colore"}</label>
           <select
             value={colore}
             onChange={(e) => setColore(e.target.value)}
@@ -938,7 +1610,12 @@ export default function SelettoreProdotto({
   function scegli(nodo: NodoTipologia) {
     setScelto(nodo);
     setLarghezzaVal("");
-    setAltezzaVal("");
+    // Profili sfusi a metraggio (es. COMPSFUSI Profilo L/M/S, Piantone): il listino e'
+    // monodimensionale (altezzaMm sempre 0, "sporgenza" non si usa). Precompiliamo il
+    // campo a 0 invece di lasciarlo vuoto, cosi' l'utente inserisce solo la lunghezza
+    // e il campo (reso sola-lettura piu' sotto) non genera un valore incoerente.
+    const altezzaNonUsata = !!nodo.misure && nodo.misure.altezzaMin === 0 && nodo.misure.altezzaMax === 0;
+    setAltezzaVal(altezzaNonUsata ? "0" : "");
     setErroreMisura(null);
   }
 
@@ -957,22 +1634,34 @@ export default function SelettoreProdotto({
     if (!larghezzaStr.trim() || !altezzaStr.trim() || !Number.isFinite(larghezza) || !Number.isFinite(altezza)) {
       return "Misura non valida: inserisci solo numeri per larghezza e altezza.";
     }
-    if (larghezza <= 0 || altezza <= 0) {
+    // Vedi nota in scegli(): per i profili sfusi a metraggio l'altezza/sporgenza non si
+    // usa ed e' sempre 0 a listino, quindi qui si accetta 0 solo per quel campo.
+    const altezzaNonUsata = !!nodo.misure && nodo.misure.altezzaMin === 0 && nodo.misure.altezzaMax === 0;
+    if (larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
       return "Misura non valida: i valori devono essere maggiori di zero.";
     }
     const unit = unitaMisura(nodo.value);
     if (nodo.misure) {
       const { larghezzaMin, larghezzaMax, altezzaMin, altezzaMax } = nodo.misure;
-      // Blocco rigido su tutti i listini: la misura inserita deve rientrare nel range
+      // Profili sfusi (barre COMPSFUSI, es. Profilo L/M/S, Piantone): il fornitore
+      // consegna solo barre nelle lunghezze fisse a listino (4/5/6/7 m) e un pezzo
+      // richiesto piu' corto viene sempre tagliato internamente da una barra della
+      // lunghezza standard immediatamente superiore (es. 2 m -> barra da 4 m, 4,5 m ->
+      // barra da 5 m). Quindi per queste tipologie NON si blocca una misura sotto il
+      // minimo: trovaFasciaPrezzo() applica comunque la fascia superiore piu' vicina.
+      // Resta bloccato solo il superamento del massimo, perche' non esiste una barra
+      // abbastanza lunga da coprire la richiesta.
+      const profiloSfuso = nodo.value.startsWith("COMPSFUSI_");
+      // Blocco rigido sugli altri listini: la misura inserita deve rientrare nel range
       // effettivamente a listino (min-max delle fasce di prezzo caricate), sia per evitare
       // di andare sotto la misura minima prodotta sia per evitare di sforare il massimo —
       // altrimenti si rischia di applicare comunque il prezzo della fascia piu' vicina,
       // che per alcuni listini (es. un'unica fascia "fino a") puo' risultare un prezzo
       // sproporzionato rispetto alla misura realmente richiesta.
-      if (larghezza < larghezzaMin || larghezza > larghezzaMax) {
+      if ((!profiloSfuso && larghezza < larghezzaMin) || larghezza > larghezzaMax) {
         return `Larghezza fuori listino: per questo modello va da ${larghezzaMin} a ${larghezzaMax} ${unit}.`;
       }
-      if (altezza < altezzaMin || altezza > altezzaMax) {
+      if ((!profiloSfuso && altezza < altezzaMin) || altezza > altezzaMax) {
         return `Altezza/sporgenza fuori listino: per questo modello va da ${altezzaMin} a ${altezzaMax} ${unit}.`;
       }
     }
@@ -1108,8 +1797,50 @@ export default function SelettoreProdotto({
                                               onScegli={scegli}
                                               onReset={azzeraScelta}
                                             />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPersianeBlindate) ? (
+                                            <SelettoreCascataPersianeBlindate
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
                                           ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
                                             <SelettoreCascataKopen
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPergola) ? (
+                                            <SelettoreCascataPergola
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiVetrata) ? (
+                                            <SelettoreCascataVetrata
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiBioclimatica) ? (
+                                            <SelettoreCascataBioclimatica
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiIsomax) ? (
+                                            <SelettoreCascataIsomax
+                                              tipologie={sg.tipologie}
+                                              selezionato={scelto?.value ?? null}
+                                              onScegli={scegli}
+                                              onReset={azzeraScelta}
+                                            />
+                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiRullo) ? (
+                                            <SelettoreCascataRullo
                                               tipologie={sg.tipologie}
                                               selezionato={scelto?.value ?? null}
                                               onScegli={scegli}
@@ -1322,20 +2053,28 @@ export default function SelettoreProdotto({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-neutral-700">{etichetteDimensioni(scelto.value).altezza} ({unitaMisura(scelto.value)})</label>
+                  <label className="text-xs text-neutral-700">
+                    {etichetteDimensioni(scelto.value).altezza} ({unitaMisura(scelto.value)})
+                    {scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0 && (
+                      <span className="text-neutral-400"> — non utilizzata</span>
+                    )}
+                  </label>
                   <input
                     name="altezza"
                     type="number"
                     step="0.1"
                     min="0"
                     required
+                    readOnly={!!scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0}
                     placeholder="es. 250"
                     value={altezzaVal}
                     onChange={(e) => {
                       setAltezzaVal(e.target.value);
                       if (erroreMisura) setErroreMisura(null);
                     }}
-                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"}`}
+                    className={`border rounded px-2 py-1.5 text-sm w-28 ${erroreMisura ? "border-red-300" : "border-neutral-200"} ${
+                      scelto.misure && scelto.misure.altezzaMin === 0 && scelto.misure.altezzaMax === 0 ? "bg-neutral-50 text-neutral-400" : ""
+                    }`}
                   />
                 </div>
                 <div className="flex flex-col gap-1">

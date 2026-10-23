@@ -1,0 +1,15 @@
+{
+  "secret": "TEST_ONLY_secret_0123456789abcdef0123456789abcdef",
+  "timestamp": "1760436005",
+  "signed_string": "1760436005.<corpo grezzo>",
+  "raw_body_file": "example-full.json (senza il newline finale)",
+  "raw_body": "{\"schema_version\":1,\"event_id\":\"meta_leadgen_555000111222333\",\"source\":\"meta_lead_ads\",\"mode\":\"live\",\"leadgen_id\":\"555000111222333\",\"page_id\":\"1039357632750262\",\"form_id\":\"1280816026986939\",\"ad_id\":\"120200000000001\",\"adgroup_id\":\"120200000000002\",\"created_time\":1760436000,\"received_at\":\"2026-10-14T10:00:05.123Z\",\"lead\":{\"id\":\"555000111222333\",\"created_time\":\"2026-10-14T10:00:00+0000\",\"form_id\":\"1280816026986939\",\"ad_id\":\"120200000000001\",\"campaign_name\":\"Catalogo autunno (FITTIZIO)\",\"field_data\":[{\"name\":\"full_name\",\"values\":[\"Mario Rossi\"]},{\"name\":\"phone_number\",\"values\":[\"+393331112233\"]},{\"name\":\"email\",\"values\":[\"mario.rossi@example.com\"]},{\"name\":\"citta\",\"values\":[\"Torino\"]}]}}",
+  "headers": {
+    "X-GPC-Signature": "v1=f2bb377ece9ef55d057324c8c3ef96d2b85dd065e575dd05aead796d13aaf307",
+    "X-GPC-Timestamp": "1760436005",
+    "X-GPC-Event-Id": "meta_leadgen_555000111222333",
+    "X-GPC-Schema-Version": "1",
+    "X-GPC-Mode": "live",
+    "X-GPC-Attempt": "1"
+  }
+}

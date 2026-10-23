@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meta-leads.gruppopec.com/schemas/downstream-v1.json",
+  "title": "GPC Meta Lead Ads - evento downstream v1 (gateway -> CRM)",
+  "type": "object",
+  "required": ["schema_version", "event_id", "source", "mode", "leadgen_id", "page_id", "form_id", "ad_id", "adgroup_id", "created_time", "received_at", "lead"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "event_id": { "type": "string", "pattern": "^meta_leadgen_[0-9]{1,30}$", "description": "= 'meta_leadgen_' + leadgen_id" },
+    "source": { "const": "meta_lead_ads" },
+    "mode": { "enum": ["shadow", "live"] },
+    "leadgen_id": { "type": "string", "pattern": "^[0-9]{1,30}$" },
+    "page_id": { "type": "string", "pattern": "^[0-9]{1,30}$" },
+    "form_id": { "type": "string", "pattern": "^[0-9]{1,30}$" },
+    "ad_id": { "type": ["string", "null"], "description": "Dal webhook Meta; se assente, dal lead; altrimenti null" },
+    "adgroup_id": { "type": ["string", "null"] },
+    "created_time": { "type": ["integer", "null"], "minimum": 0, "description": "Unix secondi, dal webhook Meta" },
+    "received_at": { "type": "string", "format": "date-time", "description": "ISO 8601 UTC con millisecondi, momento di ricezione nel gateway" },
+    "lead": {
+      "type": ["object", "null"],
+      "required": ["id", "created_time", "form_id", "ad_id", "campaign_name", "field_data"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[0-9]{1,30}$", "description": "Deve essere uguale a leadgen_id" },
+        "created_time": { "type": ["string", "null"], "description": "Stringa di Graph API, es. 2026-10-14T10:00:00+0000" },
+        "form_id": { "type": "string", "pattern": "^[0-9]{1,30}$" },
+        "ad_id": { "type": ["string", "null"] },
+        "campaign_name": { "type": ["string", "null"] },
+        "field_data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "values"],
+            "additionalProperties": true,
+            "properties": { "name": { "type": "string" }, "values": { "type": "array", "items": { "type": "string" } } }
+          }
+        }
+      }
+    }
+  }
+}

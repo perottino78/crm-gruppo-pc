@@ -1,0 +1,506 @@
+[
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 800,
+  "prezzoBase": 2230.8
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 900,
+  "prezzoBase": 2253.78
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2276.77
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2299.75
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2322.74
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2345.72
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 800,
+  "prezzoBase": 2240.26
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 900,
+  "prezzoBase": 2264.6
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2288.94
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2313.27
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2337.61
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2361.94
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 800,
+  "prezzoBase": 2249.73
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 900,
+  "prezzoBase": 2275.42
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2299.75
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2325.44
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2351.13
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2376.82
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 800,
+  "prezzoBase": 2259.19
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 900,
+  "prezzoBase": 2284.88
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2311.92
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2338.96
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2364.65
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2391.69
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 800,
+  "prezzoBase": 2268.66
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 900,
+  "prezzoBase": 2295.7
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2322.74
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2351.13
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2378.17
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2406.56
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 800,
+  "prezzoBase": 2276.77
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 900,
+  "prezzoBase": 2306.51
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1000,
+  "prezzoBase": 2334.9
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1100,
+  "prezzoBase": 2363.3
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1200,
+  "prezzoBase": 2391.69
+ },
+ {
+  "tipologia": "PORTONCINOPVC_1ANTA",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1300,
+  "prezzoBase": 2421.43
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 800,
+  "prezzoBase": 3230.8
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 900,
+  "prezzoBase": 3253.78
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3276.77
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3299.75
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3322.74
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2000,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3345.72
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 800,
+  "prezzoBase": 3240.26
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 900,
+  "prezzoBase": 3264.6
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3288.94
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3313.27
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3337.61
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2100,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3361.94
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 800,
+  "prezzoBase": 3249.73
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 900,
+  "prezzoBase": 3275.42
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3299.75
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3325.44
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3351.13
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2200,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3376.82
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 800,
+  "prezzoBase": 3259.19
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 900,
+  "prezzoBase": 3284.88
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3311.92
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3338.96
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3364.65
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2300,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3391.69
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 800,
+  "prezzoBase": 3268.66
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 900,
+  "prezzoBase": 3295.7
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3322.74
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3351.13
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3378.17
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2400,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3406.56
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 800,
+  "prezzoBase": 3276.77
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 900,
+  "prezzoBase": 3306.51
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1000,
+  "prezzoBase": 3334.9
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1100,
+  "prezzoBase": 3363.3
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1200,
+  "prezzoBase": 3391.69
+ },
+ {
+  "tipologia": "PORTONCINOPVC_2ANTE",
+  "colore": "BIANCO",
+  "altezzaMm": 2500,
+  "larghezzaMm": 1300,
+  "prezzoBase": 3421.43
+ }
+]

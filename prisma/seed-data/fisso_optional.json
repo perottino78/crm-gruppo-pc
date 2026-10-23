@@ -1,0 +1,16 @@
+[
+  {
+    "categoria": "Configurazione",
+    "nome": "Configurazione speciale (trapezoidale/ad angolo anziché rettangolare)",
+    "tipoPrezzo": "PERCENTUALE",
+    "valore": 20,
+    "unita": null,
+    "sporgenzaMm": null,
+    "larghezzaMm": null,
+    "listino": null,
+    "note": null,
+    "gruppiApplicabili": [
+      "VETRATE FISSO"
+    ]
+  }
+]

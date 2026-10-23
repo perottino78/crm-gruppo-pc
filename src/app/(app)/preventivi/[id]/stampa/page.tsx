@@ -26,6 +26,11 @@ import {
   DICHIARAZIONE_VESSATORIE_SOLARIS,
   CONSENSO_FOTO_SOLARIS,
 } from "@/lib/condizioniGeneraliSolaris";
+import {
+  TITOLO_CONDIZIONI_POSA_WS,
+  INTRO_CONDIZIONI_POSA_WS,
+  VOCI_CONDIZIONI_POSA_WS,
+} from "@/lib/condizioniPosaWS";
 
 function RigaFirma({ label, sub }: { label: string; sub?: string }) {
   return (
@@ -109,6 +114,20 @@ export default async function StampaPreventivoPage({
       }
     : null;
 
+  // Vero se il preventivo contiene almeno una voce di rilievo/posa in opera
+  // Work&Service (marcate dal suffisso "(Work&Service)" nella categoria
+  // dell'optional, vedi condizioniPosaWS.ts), OPPURE se il preventivo stesso
+  // e' stato creato sotto il brand "Work & Services" (caso di un preventivo
+  // di sola posa/rilievo/smontaggio scritto a righe libere, senza alcun
+  // prodotto/optional a listino a cui agganciare il marcatore) — in
+  // entrambi i casi in stampa vengono aggiunte le condizioni contrattuali
+  // del subappaltatore.
+  const haPosaWS =
+    preventivo.brand.nome === "Work & Services" ||
+    preventivo.righe.some((r) =>
+      r.optionali.some((ro) => ro.optional.categoria.endsWith("(Work&Service)"))
+    );
+
   const imponibileLordo = preventivo.righe.reduce((sum, r) => {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
     return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
@@ -117,6 +136,11 @@ export default async function StampaPreventivoPage({
   const totaleNetto = preventivo.totaleNetto;
   const totaleIva = preventivo.totaleIva;
   const totaleFinale = totaleNetto + totaleIva;
+  // Prezzo manuale: quando attivo, la stampa non deve rivelare al cliente ne' l'imponibile
+  // lordo di calcolo ne' la percentuale di sconto applicata — mostra solo un imponibile+IVA
+  // "puliti" ricavati a ritroso dal totale finale scritto a mano, indistinguibili da un
+  // preventivo calcolato normalmente.
+  const prezzoManualeAttivo = preventivo.prezzoManualeAttivo;
 
   const oggi = new Date().toLocaleDateString("it-IT");
   const anno = preventivo.createdAt.getFullYear();
@@ -210,26 +234,32 @@ export default async function StampaPreventivoPage({
 
   return (
     <div className="max-w-3xl mx-auto bg-white text-neutral-900 print:max-w-none">
+      <style>{`@media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }`}</style>
       <PrintButton />
 
       {/* ===== PAGINA 1 — COPERTINA / OFFERTA ===== */}
       <section className="p-6 print:p-4 print:break-after-page">
-        <div className="border-2 border-neutral-800 rounded-md p-6 print:p-6">
+        <div className="relative rounded-2xl border border-neutral-200 shadow-sm print:shadow-none overflow-hidden">
+        <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${info.primary}, ${info.accent})` }} />
+        <div className="p-6 print:p-6">
         {preventivo.immagineCopertinaUrl && (
-          <img
-            src={preventivo.immagineCopertinaUrl}
-            alt="Copertina offerta"
-            className="w-full max-h-64 object-cover rounded mb-6 border border-neutral-200"
-          />
+          <div className="w-full mb-6 rounded-lg border border-neutral-200 bg-neutral-50 flex items-center justify-center overflow-hidden" style={{ maxHeight: 420 }}>
+            <img
+              src={preventivo.immagineCopertinaUrl}
+              alt="Copertina offerta"
+              className="max-w-full object-contain"
+              style={{ maxHeight: 420 }}
+            />
+          </div>
         )}
-        <div className="flex items-center justify-between border-b-4 pb-4 mb-6" style={{ borderColor: info.primary }}>
+        <div className="flex items-center justify-between pb-4 mb-6 border-b" style={{ borderColor: `${info.primary}33` }}>
           <div className="flex items-center gap-3">
             {info.logoUrl ? (
               <img src={info.logoUrl} alt={preventivo.brand.nome} className="h-14 w-auto object-contain" />
             ) : (
               <span
-                className="w-12 h-12 rounded-md flex items-center justify-center text-white text-lg font-bold"
-                style={{ background: info.primary }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-sm"
+                style={{ background: `linear-gradient(135deg, ${info.primary}, ${info.accent})` }}
               >
                 {preventivo.brand.nome.replace(/[^A-Z&]/g, "").slice(0, 2) || preventivo.brand.nome.slice(0, 2).toUpperCase()}
               </span>
@@ -246,18 +276,30 @@ export default async function StampaPreventivoPage({
             </div>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium">Offerta n° {numero}</p>
-            <p className="text-xs text-neutral-600">{oggi}</p>
+            <span
+              className="inline-block text-sm font-semibold px-3 py-1 rounded-full"
+              style={{ background: info.primarySoft, color: info.primary }}
+            >
+              Offerta n° {numero}
+            </span>
+            <p className="text-xs text-neutral-500 mt-1.5">{oggi}</p>
           </div>
         </div>
 
         {preventivo.oggetto && (
-          <p className="text-base font-semibold mb-4" style={{ color: info.primary }}>{preventivo.oggetto}</p>
+          <div className="mb-4">
+            <span
+              className="inline-block text-sm font-semibold px-3 py-1.5 rounded-full"
+              style={{ background: info.primarySoft, color: info.primary }}
+            >
+              {preventivo.oggetto}
+            </span>
+          </div>
         )}
 
         <div className="grid grid-cols-2 gap-4 mb-8 text-sm">
-          <div className="border border-neutral-300 rounded-md p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-1">Spett.le</p>
+          <div className="rounded-lg p-3 border" style={{ background: info.primarySoft, borderColor: `${info.primary}33` }}>
+            <p className="text-[10px] font-bold uppercase tracking-wide mb-1" style={{ color: info.primary }}>Spett.le</p>
             <p className="font-semibold">{preventivo.cliente.nome}</p>
             <p className="text-neutral-700">{preventivo.cliente.indirizzo ?? ""}</p>
             {(preventivo.cliente.cap || preventivo.cliente.comune || preventivo.cliente.provincia) && (
@@ -268,27 +310,27 @@ export default async function StampaPreventivoPage({
             )}
             <p className="text-neutral-700">{preventivo.cliente.telefono ?? "—"} · {preventivo.cliente.email ?? "—"}</p>
           </div>
-          <div className="border border-neutral-300 rounded-md p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-neutral-500 mb-1">Riferimento commerciale</p>
+          <div className="rounded-lg p-3 border" style={{ background: info.primarySoft, borderColor: `${info.primary}33` }}>
+            <p className="text-[10px] font-bold uppercase tracking-wide mb-1" style={{ color: info.primary }}>Riferimento commerciale</p>
             <p className="font-semibold">{preventivo.commerciale.nome}</p>
             <p className="text-neutral-700">{preventivo.commerciale.telefono ?? "—"}</p>
             <p className="text-neutral-700">{preventivo.commerciale.email}</p>
           </div>
         </div>
 
-        <table className="w-full text-sm mb-8">
+        <table className="w-full text-sm mb-8 border-separate" style={{ borderSpacing: 0 }}>
           <thead>
-            <tr className="text-left border-b-2 border-neutral-200 text-xs text-neutral-600">
-              <th className="py-2">Descrizione</th>
-              <th className="py-2 text-center">Qtà</th>
-              <th className="py-2 text-right">Prezzo unit.</th>
-              <th className="py-2 text-right">Totale</th>
+            <tr className="text-left text-xs" style={{ background: info.primarySoft }}>
+              <th className="py-2 px-2 rounded-l-lg" style={{ color: info.primary }}>Descrizione</th>
+              <th className="py-2 px-2 text-center" style={{ color: info.primary }}>Qtà</th>
+              <th className="py-2 px-2 text-right" style={{ color: info.primary }}>Prezzo unit.</th>
+              <th className="py-2 px-2 text-right rounded-r-lg" style={{ color: info.primary }}>Totale</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="[&>tr:nth-child(even)]:bg-neutral-50">
             {mostraIntestazioniSezione && righeSenzaSezione.length > 0 && (
               <tr>
-                <td colSpan={4} className="pt-3 pb-1 text-[10px] font-bold uppercase tracking-wide text-neutral-400">
+                <td colSpan={4} className="pt-3 pb-1 px-2 text-[10px] font-bold uppercase tracking-wide text-neutral-400">
                   Senza sezione
                 </td>
               </tr>
@@ -301,10 +343,15 @@ export default async function StampaPreventivoPage({
                 return (
                   <Fragment key={sezione.id}>
                     <tr>
-                      <td colSpan={3} className="pt-4 pb-1 text-xs font-bold uppercase tracking-wide text-indigo-700 border-t-2 border-indigo-200">
-                        🏠 {sezione.nome}
+                      <td colSpan={3} className="pt-4 pb-1.5 px-2">
+                        <span
+                          className="inline-block text-xs font-bold uppercase tracking-wide text-white px-3 py-1 rounded-full"
+                          style={{ background: info.accent }}
+                        >
+                          🏠 {sezione.nome}
+                        </span>
                       </td>
-                      <td className="pt-4 pb-1 text-right text-xs font-bold text-indigo-700 border-t-2 border-indigo-200">
+                      <td className="pt-4 pb-1.5 px-2 text-right text-xs font-bold" style={{ color: info.accent }}>
                         {eur(totaleSezione)}
                       </td>
                     </tr>
@@ -316,26 +363,30 @@ export default async function StampaPreventivoPage({
         </table>
 
         <div className="flex justify-end mb-8">
-          <div className="w-64 text-sm">
-            <div className="flex justify-between py-1">
-              <span className="text-neutral-700">Imponibile</span>
-              <span>{eur(imponibileLordo)}</span>
-            </div>
-            {sconto > 0 && (
+          <div className="w-72 rounded-xl border overflow-hidden" style={{ borderColor: `${info.primary}33` }}>
+            <div className="p-3 text-sm" style={{ background: info.primarySoft }}>
+              {!prezzoManualeAttivo && (
+                <div className="flex justify-between py-1">
+                  <span className="text-neutral-700">Imponibile</span>
+                  <span>{eur(imponibileLordo)}</span>
+                </div>
+              )}
+              {!prezzoManualeAttivo && sconto > 0 && (
+                <div className="flex justify-between py-1">
+                  <span className="text-neutral-700">Sconto ({sconto}%)</span>
+                  <span>-{eur(imponibileLordo - totaleNetto)}</span>
+                </div>
+              )}
               <div className="flex justify-between py-1">
-                <span className="text-neutral-700">Sconto ({sconto}%)</span>
-                <span>-{eur(imponibileLordo - totaleNetto)}</span>
+                <span className="text-neutral-700">Imponibile {!prezzoManualeAttivo && sconto > 0 ? "scontato" : ""}</span>
+                <span>{eur(totaleNetto)}</span>
               </div>
-            )}
-            <div className="flex justify-between py-1">
-              <span className="text-neutral-700">Imponibile {sconto > 0 ? "scontato" : ""}</span>
-              <span>{eur(totaleNetto)}</span>
+              <div className="flex justify-between py-1">
+                <span className="text-neutral-700">IVA ({preventivo.aliquotaIva}%)</span>
+                <span>{eur(totaleIva)}</span>
+              </div>
             </div>
-            <div className="flex justify-between py-1">
-              <span className="text-neutral-700">IVA ({preventivo.aliquotaIva}%)</span>
-              <span>{eur(totaleIva)}</span>
-            </div>
-            <div className="flex justify-between py-2 border-t-2 mt-1 font-semibold" style={{ borderColor: info.primary }}>
+            <div className="flex justify-between py-2.5 px-3 font-semibold text-white" style={{ background: info.primary }}>
               <span>Totale a pagare</span>
               <span>{eur(totaleFinale)}</span>
             </div>
@@ -343,12 +394,12 @@ export default async function StampaPreventivoPage({
         </div>
 
         <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
-          <div className="border border-neutral-300 rounded-md p-3">
-            <p className="text-neutral-600 mb-1 font-semibold">Condizioni di pagamento</p>
+          <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.primary }}>
+            <p className="mb-1 font-semibold" style={{ color: info.primary }}>Condizioni di pagamento</p>
             <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
           </div>
-          <div className="border border-neutral-300 rounded-md p-3">
-            <p className="text-neutral-600 mb-1 font-semibold">Condizioni di consegna</p>
+          <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.accent }}>
+            <p className="mb-1 font-semibold" style={{ color: info.accent }}>Condizioni di consegna</p>
             <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}</p>
           </div>
         </div>
@@ -370,6 +421,7 @@ export default async function StampaPreventivoPage({
           <RigaFirma label="Luogo e data" />
           <RigaFirma label="Il Cliente (per accettazione)" sub={preventivo.cliente.nome} />
           <RigaFirma label="Il Fornitore" sub={isPC ? "P&C S.r.l. Unipersonale" : isSolaris ? "P&C S.r.l. Unipersonale — Solaris" : preventivo.brand.nome} />
+        </div>
         </div>
         </div>
       </section>
@@ -500,23 +552,52 @@ export default async function StampaPreventivoPage({
         </section>
       )}
 
+      {haPosaWS && (
+        <section className="p-10 print:p-8 print:break-after-page text-[9.5px] leading-snug border-l-4" style={{ borderColor: info.accent }}>
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-sm font-bold pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>{TITOLO_CONDIZIONI_POSA_WS}</h2>
+            <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-3" style={{ background: info.primarySoft, color: info.primary }}>{preventivo.brand.nome}</span>
+          </div>
+          <p className="text-[9px] text-neutral-700 mb-4 mt-2">{INTRO_CONDIZIONI_POSA_WS}</p>
+          {VOCI_CONDIZIONI_POSA_WS.map((v) => (
+            <div key={v.titolo} className="mb-2.5 print:break-inside-avoid">
+              <p className="font-semibold" style={{ color: info.accent }}>{v.titolo}</p>
+              <p className="text-justify text-neutral-700">{v.testo}</p>
+            </div>
+          ))}
+          <p className="text-neutral-700 mt-4 mb-8 print:break-inside-avoid">
+            Il Cliente dichiara di aver ricevuto, letto e accettato integralmente, sottoscrivendo la presente
+            offerta, il presente capitolato e le condizioni generali di posa in opera Work &amp; Service sopra
+            riportate, che formano parte integrante e sostanziale del presente Contratto.
+          </p>
+          <div className="flex justify-between mt-10 print:break-inside-avoid">
+            <RigaFirma label="Luogo e data" />
+            <RigaFirma label="Il Cliente (per accettazione capitolato posa)" sub={preventivo.cliente.nome} />
+            <RigaFirma label="Il Posatore" sub="Work & Service S.r.l." />
+          </div>
+        </section>
+      )}
+
       {condizioniBrand && (
         <>
           {/* ===== CONDIZIONI GENERALI DI VENDITA — ARTICOLI ===== */}
-          <section className="p-10 print:p-8 print:break-after-page text-[9.5px] leading-snug">
-            <h2 className="text-sm font-bold mb-1" style={{ color: info.primary }}>{condizioniBrand.titolo}</h2>
-            <p className="text-[9px] text-neutral-700 mb-4">{condizioniBrand.intro}</p>
+          <section className="p-10 print:p-8 print:break-after-page text-[9.5px] leading-snug border-l-4" style={{ borderColor: info.primary }}>
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="text-sm font-bold pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>{condizioniBrand.titolo}</h2>
+              <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-3" style={{ background: info.primarySoft, color: info.primary }}>{preventivo.brand.nome}</span>
+            </div>
+            <p className="text-[9px] text-neutral-700 mb-4 mt-2">{condizioniBrand.intro}</p>
             {condizioniBrand.articoli.map((a) => (
               <div key={a.numero} className="mb-2.5 print:break-inside-avoid">
-                <p className="font-semibold">Art. {a.numero} — {a.titolo}</p>
+                <p className="font-semibold" style={{ color: info.accent }}>Art. {a.numero} — {a.titolo}</p>
                 <p className="text-justify text-neutral-700">{a.testo}</p>
               </div>
             ))}
           </section>
 
           {/* ===== ACCETTAZIONE CLAUSOLE VESSATORIE (art. 1341-1342 c.c.) ===== */}
-          <section className="p-10 print:p-8 print:break-after-page text-xs">
-            <h2 className="text-sm font-bold mb-3" style={{ color: info.primary }}>
+          <section className="p-10 print:p-8 print:break-after-page text-xs border-l-4" style={{ borderColor: info.primary }}>
+            <h2 className="text-sm font-bold mb-3 pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>
               Approvazione specifica delle clausole ai sensi degli artt. 1341 e 1342 c.c.
             </h2>
             <p className="text-neutral-700 mb-2">{condizioniBrand.dichiarazioneVessatorie}</p>
@@ -527,7 +608,7 @@ export default async function StampaPreventivoPage({
               <RigaFirma label="Il Cliente (firma per approvazione specifica)" sub={preventivo.cliente.nome} />
             </div>
 
-            <h2 className="text-sm font-bold mb-2" style={{ color: info.primary }}>
+            <h2 className="text-sm font-bold mb-2 pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>
               Informativa privacy (art. 13 e ss. Regolamento UE 2016/679 — GDPR)
             </h2>
             <p className="text-neutral-700 whitespace-pre-line mb-4">{condizioniBrand.gdprInformativa}</p>

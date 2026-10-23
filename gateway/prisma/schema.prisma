@@ -1,0 +1,54 @@
+// Database DEDICATO del gateway (separato da quello dei CRM).
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+// Una riga per ogni leadgen_id ricevuto. eventJson = solo ID (nessun dato personale);
+// leadJson = lead recuperato da Graph (dati personali: archivio protetto, mai esposto da endpoint).
+model MetaDelivery {
+  id              String           @id @default(cuid())
+  leadgenId       String           @unique
+  pageId          String
+  formId          String
+  adId            String?
+  adgroupId       String?
+  createdTimeMeta DateTime?
+  origine         String           @default("META")
+  stato           String           @default("RECEIVED")
+  tentativi       Int              @default(0)
+  erroreCodice    String?
+  retriabile      Boolean          @default(true)
+  nextRetryAt     DateTime?
+  eventJson       String
+  leadJson        String?
+  leadId          String?
+  receivedAt      DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  downstreams     MetaDownstream[]
+
+  @@index([stato, nextRetryAt])
+}
+
+model MetaDownstream {
+  id           String       @id @default(cuid())
+  delivery     MetaDelivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+  deliveryId   String
+  destinatario String
+  stato        String       @default("PENDING")
+  tentativi    Int          @default(0)
+  erroreCodice String?
+  retriabile   Boolean      @default(true)
+  nextRetryAt  DateTime?
+  deliveredAt  DateTime?
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([deliveryId, destinatario])
+  @@index([stato, nextRetryAt])
+}

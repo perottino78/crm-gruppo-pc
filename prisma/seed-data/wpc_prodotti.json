@@ -1,0 +1,1171 @@
+[
+ {
+  "tipologia": "WPC_PAV_KITPRESTIGE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 293.8
+ },
+ {
+  "tipologia": "WPC_PAV_KITPRESTIGE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 332.7
+ },
+ {
+  "tipologia": "WPC_PAV_KITELITE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 378.6
+ },
+ {
+  "tipologia": "WPC_PAV_KITELITE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 439.8
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 219.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.9
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 303.8
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 365.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGE197_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 229.8
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGE197_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 263.6
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITE197_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 330.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITE197_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 383.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGANAUTICOLIGHT_TUTTI",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 255.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGANAUTICO_TUTTI",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 354.8
+ },
+ {
+  "tipologia": "WPC_PAV_KITPRESTIGEDUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 331.8
+ },
+ {
+  "tipologia": "WPC_PAV_KITPRESTIGEDUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 331.8
+ },
+ {
+  "tipologia": "WPC_PAV_KITELITEDUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 404.8
+ },
+ {
+  "tipologia": "WPC_PAV_KITELITEDUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 404.8
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGEDUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAPRESTIGEDUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITEDUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 330.0
+ },
+ {
+  "tipologia": "WPC_PAV_DOGAELITEDUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 330.0
+ },
+ {
+  "tipologia": "WPC_PAV_BOTTAZZO_WOOD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 56.54
+ },
+ {
+  "tipologia": "WPC_PAV_PARABORDO_WOOD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 64.2
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKIN127_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 281.16
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKIN127_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 319.16
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 306.66
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 345.56
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE197_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 309.26
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE197_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 343.06
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRO_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 353.26
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRO_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 389.06
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINMAX_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 274.34
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINMAX_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 309.54
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINAIR_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 292.16
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINAIR_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 332.16
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKIN127_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 199.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKIN127_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 237.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE145_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 219.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE145_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.9
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE197_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 229.8
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE197_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 263.6
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRO_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 249.2
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRO_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 285.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINMAX_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 199.8
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINMAX_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 235.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINAIR_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 225.8
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINAIR_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 265.8
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE145DUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 344.66
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINPRESTIGE145DUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 344.66
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINMAXDUO_TEAK",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 292.54
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINMAXDUO_IPE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 292.54
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINAIRDUO_TEAK",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 336.36
+ },
+ {
+  "tipologia": "WPC_RIV_KITSKINAIRDUO_IPE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 336.36
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE145DUO_TEAKAO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINPRESTIGE145DUO_IPEEB",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 257.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINMAXDUO_TEAK",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 218.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINMAXDUO_IPE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 218.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINAIRDUO_TEAK",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 270.0
+ },
+ {
+  "tipologia": "WPC_RIV_DOGASKINAIRDUO_IPE",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 270.0
+ },
+ {
+  "tipologia": "WPC_RIV_PANNELLOPREASS_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 633.2
+ },
+ {
+  "tipologia": "WPC_RIV_PANNELLOPREASS_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 695.62
+ },
+ {
+  "tipologia": "WPC_RIV_PANNELLOSCORR_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 1098.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI30_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 13.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI30_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 17.6
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI30_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 17.1
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI30_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 20.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 21.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.5
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.6
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 29.3
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI75_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 26.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI75_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 29.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI75_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 29.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI75_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 33.5
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI90_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 33.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI90_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 36.7
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI90_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 39.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI90_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.5
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIT100_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 33.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIT100_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 42.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIT100_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 45.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIT100_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 54.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI120_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 57.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI120_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 65.4
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI120_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 67.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI120_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 76.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI150_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 45.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI150_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 45.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI162_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 51.6
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI162_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 60.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI162_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 63.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI162_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 72.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI200_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 79.6
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI200_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 99.6
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI209_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 113.0
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI209_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 135.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS30_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.54
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS30_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 29.24
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS30_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 28.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS30_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 32.44
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 36.34
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 40.04
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 40.14
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.84
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS75_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 40.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS75_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 44.44
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS75_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 44.34
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS75_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 48.04
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS90_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 47.54
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS90_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 51.24
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS90_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 54.34
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS90_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 58.04
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUST100_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 67.4
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUST100_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 75.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUST100_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 79.4
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUST100_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 87.8
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS120_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 79.78
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS120_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 88.18
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS120_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 90.58
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS120_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 98.98
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS150_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 74.12
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS150_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 74.12
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS162_B3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 73.7
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS162_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 82.1
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS162_B4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 85.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS162_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 94.3
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS200_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 105.06
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS200_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 125.06
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS209_B3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 185.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS209_B4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 208.7
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_TEAKB3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_TEAKB3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 28.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_TEAKB4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_TEAKB4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 28.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_IPEB3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_IPEB3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 28.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_IPEB4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 25.2
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGI60DUO_IPEB4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 28.9
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_TEAKB3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 39.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_TEAKB3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.44
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_TEAKB4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 39.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_TEAKB4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.44
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_IPEB3STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 39.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_IPEB3PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.44
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_IPEB4STD",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 39.74
+ },
+ {
+  "tipologia": "WPC_SOF_FRANGIPLUS60DUO_IPEB4PREM",
+  "colore": "TARIFFA AL ML",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 43.44
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP60_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 754.38
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP60_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 794.28
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP75_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 800.58
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP75_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 838.38
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP90_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 897.68
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP90_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 967.48
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP162_STD",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 750.84
+ },
+ {
+  "tipologia": "WPC_SOF_NOVOUP162_PRM",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 814.88
+ },
+ {
+  "tipologia": "WPC_SOF_SURFACE_UNICO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 318.0
+ },
+ {
+  "tipologia": "WPC_SOF_PREASSEMBLAGGIO_UNICO",
+  "colore": "TARIFFA AL M²",
+  "altezzaMm": 100,
+  "larghezzaMm": 100,
+  "prezzoBase": 244.44
+ },
+ {
+  "tipologia": "WPC_SOF_MENSOLE_UNICO",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 25.32
+ },
+ {
+  "tipologia": "WPC_SOF_INVISIBLE_UNICO",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 80.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCE9_PIEDISTALLO",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1200.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCE9_IMMERSIONE",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1200.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCEDUOSPACE_PIEDISTALLO",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1290.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCEDUOSPACE_IMMERSIONE",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1290.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCEAIRFLOW_PIEDISTALLO",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1382.0
+ },
+ {
+  "tipologia": "WPC_REC_FENCEAIRFLOW_IMMERSIONE",
+  "colore": "Prezzo a modulo/pezzo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 1382.0
+ },
+ {
+  "tipologia": "PAVGALLEGGIANTI_PLACEHOLDER",
+  "colore": "In arrivo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 0
+ },
+ {
+  "tipologia": "PAVGRES_PLACEHOLDER",
+  "colore": "In arrivo",
+  "altezzaMm": 0,
+  "larghezzaMm": 0,
+  "prezzoBase": 0
+ }
+]

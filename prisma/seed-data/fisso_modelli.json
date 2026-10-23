@@ -1,0 +1,14 @@
+[
+  {
+    "tipologia": "VETRATA_FISSO",
+    "descrizioneTecnica": "Vetro fisso: sistema di chiusura per spazi piccoli o difficili da gestire con vetrate scorrevoli. Vetro stratificato chiaro da 8mm, vetro di sicurezza 44.1 con PVB, telaio perimetrale in alluminio estruso (profilo perimetrale 41x60,5mm, profilo traverso 41x88,5mm), configurabile in molteplici forme. Configurazioni disponibili: ogni singolo vetro con il proprio telaio perimetrale, oppure più vetri affiancati in un unico telaio perimetrale con misure superiori al metro lineare. Misura minima producibile 13cm. PREZZO: tariffa fissa di 472€/m², applicata alla superficie fatturabile (larghezza e altezza reali arrotondate per eccesso ogni 5cm). MINIMO DI FATTURAZIONE A LISTINO: area minima fatturabile 1m². Configurazioni speciali (es. forme trapezoidali/ad angolo anziché rettangolari): maggiorazione +20%. Colori disponibili: lucidi (9010, 1013), soft (9010, 1013, 7016, 7035, 8017), speciale Corten; altre colorazioni disponibili su richiesta.",
+    "famiglia": "OUTDOOR",
+    "gruppo": "VETRATE FISSO",
+    "immagineUrl": null,
+    "modalitaCalcolo": "MQ_CON_MINIMI",
+    "parametriCalcolo": {
+      "arrotondamentoCm": 5,
+      "areaMinimaM2": 1
+    }
+  }
+]

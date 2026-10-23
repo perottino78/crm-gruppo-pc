@@ -16,86 +16,217 @@ datasource db {
 // (SQLite non supporta enum nativi: questi valori sono validati in app/lib/enums.ts)
 
 model Brand {
-  id        String     @id @default(cuid())
-  nome      String     @unique
-  clienti   Cliente[]
-  lead      Lead[]
-  prodotti  Prodotto[]
-  preventivi Preventivo[]
-  optionali Optional[]
-  modelli   ModelloProdotto[]
-  utentiAutorizzati Utente[] @relation("PermessoListino")
+  id                String            @id @default(cuid())
+  nome              String            @unique
+  clienti           Cliente[]
+  lead              Lead[]
+  prodotti          Prodotto[]
+  preventivi        Preventivo[]
+  optionali         Optional[]
+  modelli           ModelloProdotto[]
+  utentiAutorizzati Utente[]          @relation("PermessoListino")
+  commesse          Commessa[]
   solarisComponenti SolarisComponente[]
   leadSimulazioni   LeadSimulazione[]
 }
 
 model Utente {
-  id            String   @id @default(cuid())
-  nome          String
-  email         String   @unique
-  ruolo         String
+  id                  String         @id @default(cuid())
+  nome                String
+  email               String         @unique
+  ruolo               String
   // Credenziali di accesso al CRM. Username nullable per compatibilità con gli utenti creati
   // prima dell'introduzione del login (vanno attivati impostando username+password da Impostazioni).
   // Senza passwordHash l'utente non può accedere.
-  username      String?  @unique
-  passwordHash  String?
+  username            String?        @unique
+  passwordHash        String?
   // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
-  telefono      String?
+  telefono            String?
+  // Ufficio di appartenenza (COMMERCIALE | FATTURAZIONE | TECNICO | ORDINI | POSA | AMMINISTRAZIONE): determina quali task di pratica vede
+  ufficio             String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
-  mustChangePassword Boolean @default(true)
-  createdAt     DateTime @default(now())
-  leadAssegnati Lead[]
-  appuntamenti  Appuntamento[]
-  preventivi    Preventivo[]
-  attivita      Attivita[]
-  obiettivi     Obiettivo[]
-  clientiResponsabile Cliente[] @relation("ResponsabileCliente")
+  mustChangePassword  Boolean        @default(true)
+  createdAt           DateTime       @default(now())
+  leadAssegnati       Lead[]
+  appuntamenti        Appuntamento[]
+  preventivi          Preventivo[]
+  attivita            Attivita[]
+  obiettivi           Obiettivo[]
+  clientiResponsabile Cliente[]      @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
-  brandAutorizzati Brand[] @relation("PermessoListino")
+  brandAutorizzati    Brand[]        @relation("PermessoListino")
+  commesseResponsabile Commessa[]    @relation("ResponsabileCommessa")
+  rilieviAssegnati    Rilievo[]
   solarisProgetti  SolarisProgetto[]
 }
 
 model Lead {
-  id          String    @id @default(cuid())
-  nome        String
-  telefono    String?
-  email       String?
-  fonte       String    @default("facebook")
-  fase        String    @default("NUOVO")
-  note        String?
-  brand       Brand     @relation(fields: [brandId], references: [id])
-  brandId     String
-  telefonista Utente?   @relation(fields: [telefonistaId], references: [id])
-  telefonistaId String?
+  id              String   @id @default(cuid())
+  nome            String
+  telefono        String?
+  email           String?
+  fonte           String   @default("facebook")
+  fase            String   @default("NUOVO")
+  note            String?
+  brand           Brand    @relation(fields: [brandId], references: [id])
+  brandId         String
+  telefonista     Utente?  @relation(fields: [telefonistaId], references: [id])
+  telefonistaId   String?
   clienteGenerato Cliente?
-  createdAt   DateTime  @default(now())
+  // Tracciamento Meta Lead Ads (idempotenza: un solo lead per leadgen_id)
+  metaLeadgenId   String?  @unique
+  metaFormId      String?
+  metaAdId        String?
+  createdAt       DateTime @default(now())
 }
 
 model Cliente {
-  id         String    @id @default(cuid())
-  nome       String
-  telefono   String?
-  email      String?
-  indirizzo  String?
-  cap        String?
-  comune     String?
-  provincia  String?
-  paese      String    @default("IT")
-  brand      Brand     @relation(fields: [brandId], references: [id])
-  brandId    String
-  leadOrigine Lead?    @relation(fields: [leadOrigineId], references: [id])
-  leadOrigineId String? @unique
+  id             String         @id @default(cuid())
+  nome           String
+  telefono       String?
+  email          String?
+  indirizzo      String?
+  cap            String?
+  comune         String?
+  provincia      String?
+  paese          String         @default("IT")
+  brand          Brand          @relation(fields: [brandId], references: [id])
+  brandId        String
+  leadOrigine    Lead?          @relation(fields: [leadOrigineId], references: [id])
+  leadOrigineId  String?        @unique
   // Utente "proprietario" del cliente ai fini della visibilità dati per ruolo (chi lo ha creato,
   // riassegnabile dall'amministratore). Nullable per compatibilità con i clienti pre-esistenti.
-  responsabile   Utente? @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
+  responsabile   Utente?        @relation("ResponsabileCliente", fields: [responsabileId], references: [id])
   responsabileId String?
-  appuntamenti    Appuntamento[]
-  preventivi      Preventivo[]
-  attivita        Attivita[]
+  appuntamenti   Appuntamento[]
+  preventivi     Preventivo[]
+  commesse       Commessa[]
+  attivita       Attivita[]
   solarisProgetti SolarisProgetto[]
-  createdAt       DateTime  @default(now())
+  createdAt      DateTime       @default(now())
+
+  // ===== Scheda Anagrafica estesa (ispirata a Bconsole) =====
+
+  // --- Anagrafica: dati aggiuntivi di indirizzo/contatto ---
+  frazione             String?
+  regione              String?
+  descrizione          String?
+  altroTelefono        String?
+  cellulare            String?
+  sitoWeb              String?
+  altraEmail           String?
+  emailOrdiniFornitore String?
+
+  // --- Anagrafica: persona fisica (per calcolo Codice Fiscale automatico) ---
+  // tipoAnagrafica: AZIENDA | PERSONA_FISICA — determina quali campi mostrare/usare.
+  tipoAnagrafica   String    @default("AZIENDA")
+  cognome          String?
+  nomePersona      String?
+  sesso            String? // M | F
+  dataNascita      DateTime?
+  comuneNascita    String?
+  provinciaNascita String?
+
+  // --- Profilazione ---
+  bloccato     Boolean @default(false)
+  origine      String?
+  settore      String?
+  km           Float?  @default(0)
+  tipologia    String?
+  categoria    String? // es. "Account, Cliente" — lista separata da virgola
+  condivisioni String?
+  tag          String? // lista tag separata da virgola
+
+  // --- Commerciale ---
+  pagamento          String?
+  bancaAppoggio      String?
+  euroAlKm           Float?  @default(0)
+  resa               String?
+  provvigione        Float?  @default(0)
+  budgetAnnoCorrente Float?  @default(0)
+  budgetAnnoProssimo Float?  @default(0)
+  centroRicavo       String?
+  codiceIvaCliente   String?
+  scontoTier1        Float?  @default(0)
+  scontoTier2        Float?  @default(0)
+  scontoTier3        Float?  @default(0)
+  scontoTier4        Float?  @default(0)
+  tipoCosto          String?
+  corriere           String?
+  valuta             String?
+  lingua             String? @default("it_IT")
+  nsNumeroFornitore  String?
+  fido               Float?
+
+  // --- Amministrazione: fattura elettronica ---
+  emailInvioFatture  String?
+  rea                String?
+  isoNazione         String?
+  piva               String?
+  codiceFiscale      String?
+  esigibilitaIva     String? @default("esigibilità immediata")
+  regimeFiscale      String? @default("RF01 Ordinario")
+  pec                String?
+  codiceDestinatario String? @default("0000000")
+  codEori            String?
+  fatturaPA          Boolean @default(false)
+  senzaCigCup        Boolean @default(false)
+  cessioneCredito    Boolean @default(false)
+  soggettoRitenuta   Boolean @default(false)
+  addebitoSpese      Boolean @default(true)
+  bolloInFattura     Boolean @default(false)
+  addebitoBollo      Boolean @default(false)
+  importoBollo       Float?  @default(0)
+
+  // --- Note libere (scheda "Note") ---
+  noteLibere String?
+
+  // --- Relazioni nuove sezioni ---
+  referenti      Referente[]
+  indirizziAltri IndirizzoCliente[]
+  correlazioniDa ClienteCorrelazione[] @relation("CorrelazioneDa")
+  correlazioniA  ClienteCorrelazione[] @relation("CorrelazioneA")
 }
+
+model Referente {
+  id        String   @id @default(cuid())
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId String
+  nome      String
+  cognome   String?
+  ruolo     String?
+  telefono  String?
+  email     String?
+  createdAt DateTime @default(now())
+}
+
+model IndirizzoCliente {
+  id        String   @id @default(cuid())
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId String
+  etichetta String   @default("Altro indirizzo")
+  indirizzo String?
+  comune    String?
+  cap       String?
+  provincia String?
+  referente String?
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+// Correlazione fra due anagrafiche Cliente (es. "Account di fatturazione", "Sede", "Gruppo societario")
+model ClienteCorrelazione {
+  id          String   @id @default(cuid())
+  cliente     Cliente  @relation("CorrelazioneDa", fields: [clienteId], references: [id])
+  clienteId   String
+  correlato   Cliente  @relation("CorrelazioneA", fields: [correlatoId], references: [id])
+  correlatoId String
+  tipologia   String   @default("Account di fatturazione")
+  principale  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@unique([clienteId, correlatoId, tipologia])}
 
 model Appuntamento {
   id        String   @id @default(cuid())
@@ -110,17 +241,17 @@ model Appuntamento {
 }
 
 model Prodotto {
-  id         String   @id @default(cuid())
-  brand      Brand    @relation(fields: [brandId], references: [id])
-  brandId    String
-  tipologia  String
-  descrizione String?
-  colore     String
-  altezzaMm  Int
-  larghezzaMm Int
-  prezzoBase Float
+  id                   String           @id @default(cuid())
+  brand                Brand            @relation(fields: [brandId], references: [id])
+  brandId              String
+  tipologia            String
+  descrizione          String?
+  colore               String
+  altezzaMm            Int
+  larghezzaMm          Int
+  prezzoBase           Float
   coefficienteRicarico Float?
-  righe      RigaPreventivo[]
+  righe                RigaPreventivo[]
 
   @@unique([brandId, tipologia, colore, altezzaMm, larghezzaMm])
 }
@@ -132,62 +263,73 @@ model Configurazione {
 }
 
 model Preventivo {
-  id           String          @id @default(cuid())
-  cliente      Cliente         @relation(fields: [clienteId], references: [id])
-  clienteId    String
-  brand        Brand           @relation(fields: [brandId], references: [id])
-  brandId      String
-  commerciale  Utente          @relation(fields: [commercialeId], references: [id])
-  commercialeId String
-  stato        String          @default("APERTO")
+  id                   String              @id @default(cuid())
+  cliente              Cliente             @relation(fields: [clienteId], references: [id])
+  clienteId            String
+  brand                Brand               @relation(fields: [brandId], references: [id])
+  brandId              String
+  commerciale          Utente              @relation(fields: [commercialeId], references: [id])
+  commercialeId        String
+  stato                String              @default("APERTO")
   // Numero offerta progressivo per brand+anno (es. 1, 2, 3... resettato ogni anno solare per ciascun brand).
   // Nullable per compatibilità con i preventivi creati prima dell'introduzione di questo campo.
-  numeroOfferta Int?
-  totaleNetto  Float           @default(0)
-  aliquotaIva  Float           @default(22)
-  totaleIva    Float           @default(0)
+  numeroOfferta        Int?
+  totaleNetto          Float               @default(0)
+  aliquotaIva          Float               @default(22)
+  totaleIva            Float               @default(0)
   // Oggetto/titolo dell'offerta (es. "Zanzarriere pergola scorrevoli con rete acciaio")
-  oggetto      String?
+  oggetto              String?
   // Sconto percentuale applicato sull'imponibile lordo (somma righe) prima del calcolo IVA;
   // totaleNetto memorizza già l'imponibile SCONTATO
-  scontoPercentuale Float      @default(0)
+  scontoPercentuale    Float               @default(0)
+  // Prezzo finale scritto a mano dal commerciale (IVA inclusa), che bypassa il calcolo
+  // automatico righe/sconto: utile per imporre una cifra concordata a voce senza che il
+  // cliente veda in stampa la percentuale di sconto applicata. Quando attivo, totaleNetto/
+  // totaleIva sono ricavati a ritroso da questo importo e dall'aliquota IVA corrente, e la
+  // stampa mostra solo un imponibile+IVA "puliti", indistinguibili da un calcolo normale.
+  prezzoManualeAttivo  Boolean             @default(false)
+  prezzoManualeTotale  Float?
   // Testo libero per la stampa dell'offerta (condizioni di fornitura/vendita specifiche di questa offerta)
-  condizioniPagamento String?
-  condizioniConsegna  String?
+  condizioniPagamento  String?
+  condizioniConsegna   String?
   // Immagine (URL) mostrata in cima alla prima pagina della stampa offerta, es. foto del progetto o rendering
   immagineCopertinaUrl String?
-  righe        RigaPreventivo[]
+  // Se questa offerta è stata creata con "Duplica offerta", id dell'offerta di origine (storico sotto il profilo del commerciale)
+  duplicatoDaId        String?
+  // Offerta archiviata (a mano o in automatico alla scadenza); non compare più nella lavagna ma resta consultabile
+  archiviato           Boolean             @default(false)
+  righe                RigaPreventivo[]
   // Sezioni/stanze in cui il commerciale può raggruppare le righe (es. "Cucina",
   // "Camera 1"...) per organizzare preventivi con molti articoli misti (finestre,
   // tapparelle, zanzariere...) invece di un unico elenco piatto. Le righe senza
   // sezioneId restano nell'elenco "senza sezione" in cima.
-  sezioni      SezionePreventivo[]
-  promemoria      PromemoriaInviato[]
-  progetto        Progetto?
+  sezioni              SezionePreventivo[]
+  promemoria           PromemoriaInviato[]
+  progetto             Progetto?
   solarisProgetto SolarisProgetto?
-  createdAt       DateTime        @default(now())
-  scadenza        DateTime?
-}
+  commessa             Commessa?
+  createdAt            DateTime            @default(now())
+  scadenza             DateTime?}
 
 model RigaPreventivo {
-  id            String     @id @default(cuid())
-  preventivo    Preventivo @relation(fields: [preventivoId], references: [id])
-  preventivoId  String
+  id                        String             @id @default(cuid())
+  preventivo                Preventivo         @relation(fields: [preventivoId], references: [id])
+  preventivoId              String
   // prodottoId è opzionale per permettere righe di solo testo libero (vedi testoLibero)
-  prodotto      Prodotto?  @relation(fields: [prodottoId], references: [id])
-  prodottoId    String?
+  prodotto                  Prodotto?          @relation(fields: [prodottoId], references: [id])
+  prodottoId                String?
   // Riga senza prodotto collegato: testo libero mostrato al posto della scheda prodotto,
   // sia nell'editor sia in stampa (usato per note, info aggiuntive o motivazione sconto).
-  testoLibero   String?
-  quantita      Int        @default(1)
-  prezzoUnitario Float
-  optionalDescrizione String?
-  optionalPrezzo Float @default(0)
-  mostraDescrizione Boolean @default(true)
+  testoLibero               String?
+  quantita                  Int                @default(1)
+  prezzoUnitario            Float
+  optionalDescrizione       String?
+  optionalPrezzo            Float              @default(0)
+  mostraDescrizione         Boolean            @default(true)
   // Misura reale inserita a mano dal commerciale (può differire dalla fascia di prezzo
   // agganciata in prodottoId, che è la fascia più vicina per eccesso nel listino nascosto)
-  misuraLarghezza Float?
-  misuraAltezza   Float?
+  misuraLarghezza           Float?
+  misuraAltezza             Float?
   // Testo libero che sovrascrive, solo per questa riga, la descrizione tecnica standard
   // del modello (utile per non ripetere descrizioni identiche o correggerne il testo)
   descrizionePersonalizzata String?
@@ -195,10 +337,10 @@ model RigaPreventivo {
   // condividono la stessa sezione (o fra tutte le righe "senza sezione" se null).
   // Non è garantito univoco/denso finché nessuno riordina: in quel caso l'ordine
   // effettivo resta quello di creazione (vedi orderBy [ordine, id] nella pagina).
-  ordine        Int            @default(0)
-  sezione       SezionePreventivo? @relation(fields: [sezioneId], references: [id], onDelete: SetNull)
-  sezioneId     String?
-  optionali     RigaOptional[]
+  ordine                    Int                @default(0)
+  sezione                   SezionePreventivo? @relation(fields: [sezioneId], references: [id], onDelete: SetNull)
+  sezioneId                 String?
+  optionali                 RigaOptional[]
 }
 
 // Sezione/stanza di un preventivo (es. "Cucina", "Camera da letto 1") creata a
@@ -224,41 +366,41 @@ model PromemoriaInviato {
 }
 
 model Progetto {
-  id                    String     @id @default(cuid())
-  preventivo            Preventivo @relation(fields: [preventivoId], references: [id])
-  preventivoId          String     @unique
+  id                      String     @id @default(cuid())
+  preventivo              Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId            String     @unique
   misureRilievoConfermate String?
-  statoOrdineFornitore  String     @default("da_avviare")
-  createdAt             DateTime   @default(now())
+  statoOrdineFornitore    String     @default("da_avviare")
+  createdAt               DateTime   @default(now())
 }
 
 // Categoria optional: STAFFA | TESSUTO | SENSORE | TIMPANO | ALTRO
 // tipoPrezzo: FISSO (valore in euro) | PERCENTUALE (valore in % sul prezzo netto della riga)
 model Optional {
-  id          String   @id @default(cuid())
-  brand       Brand    @relation(fields: [brandId], references: [id])
-  brandId     String
-  categoria   String
-  nome        String
-  tipoPrezzo  String   @default("FISSO")
-  valore      Float
-  unita       String?
-  sporgenzaMm Int?
-  larghezzaMm Int?
-  listino     String?
-  note        String?
+  id                  String         @id @default(cuid())
+  brand               Brand          @relation(fields: [brandId], references: [id])
+  brandId             String
+  categoria           String
+  nome                String
+  tipoPrezzo          String         @default("FISSO")
+  valore              Float
+  unita               String?
+  sporgenzaMm         Int?
+  larghezzaMm         Int?
+  listino             String?
+  note                String?
   // URL immagine rappresentativa (es. per i pannelli di rivestimento a catalogo: Blindati).
   // Facoltativo: molte righe Optional restano senza immagine (accessori, sovrapprezzi, ecc.).
-  immagineUrl String?
+  immagineUrl         String?
   // Gruppi merceologici (ModelloProdotto.gruppo) a cui questo optional è applicabile,
   // es. ["PERGOLE", "BIOCLIMATICA"]. Vuoto = nessuna restrizione di gruppo.
-  gruppiApplicabili String[] @default([])
+  gruppiApplicabili   String[]       @default([])
   // Finitura/profilo (es. "STD", "STDPLUS", "MICH", "FL" per le zanzariere plissettate)
   // a cui questo optional è vincolato — es. i colori profilo Standard Plus non devono
   // comparire quando si è scelto il modello di finitura Standard. Null = nessuna
   // restrizione di finitura (l'optional compare per qualunque finitura del gruppo).
   finituraApplicabile String?
-  righe       RigaOptional[]
+  righe               RigaOptional[]
 }
 
 model RigaOptional {
@@ -319,7 +461,7 @@ model Obiettivo {
   id            String   @id @default(cuid())
   utente        Utente   @relation(fields: [utenteId], references: [id])
   utenteId      String
-  periodo       String   // formato "YYYY-MM"
+  periodo       String // formato "YYYY-MM"
   importoTarget Float
   note          String?
   createdAt     DateTime @default(now())
@@ -327,6 +469,377 @@ model Obiettivo {
   @@unique([utenteId, periodo])
 }
 
+// ============ POST-VENDITA: COMMESSE (fase 1: acconto + rilievo misure) ============
+// Una Commessa nasce da un preventivo ACCETTATO. Il preventivo non viene modificato: la
+// commessa ne conserva un'istantanea del totale e funge da contenitore di tutto il flusso
+// successivo (acconto, rilievo, ordini fornitore, posa, assistenza).
+// stato: IN_ATTESA_ACCONTO | RILIEVO_DA_PROGRAMMARE | RILIEVO_PROGRAMMATO | RILIEVO_ESEGUITO
+//        | (fasi successive) ORDINI | POSA | CHIUSA | ANNULLATA
+// accontoTipo: ACCONTO (percentuale sul totale) | FINANZIAMENTO
+model Commessa {
+  id                      String    @id @default(cuid())
+  numero                  Int
+  anno                    Int
+  preventivo              Preventivo @relation(fields: [preventivoId], references: [id])
+  preventivoId            String    @unique
+  cliente                 Cliente   @relation(fields: [clienteId], references: [id])
+  clienteId               String
+  brand                   Brand     @relation(fields: [brandId], references: [id])
+  brandId                 String
+  responsabile            Utente?   @relation("ResponsabileCommessa", fields: [responsabileId], references: [id])
+  responsabileId          String?
+  stato                   String    @default("IN_ATTESA_ACCONTO")
+  // Totale IVA inclusa del preventivo al momento della creazione commessa
+  totaleVendita           Float     @default(0)
+  totaleImponibile        Float     @default(0)
+  accontoTipo             String    @default("ACCONTO")
+  accontoPercentuale      Float     @default(50)
+  accontoImporto          Float     @default(0)
+  // Incasso acconto
+  accontoIncassato        Boolean   @default(false)
+  accontoIncassatoIl      DateTime?
+  accontoImportoIncassato Float?
+  accontoModalita         String?
+  accontoNote             String?
+  // Finanziamento
+  finanziamentoSocieta    String?
+  finanziamentoStato      String?   // IN_ISTRUTTORIA | APPROVATO | RIFIUTATO
+  finanziamentoNote       String?
+  // Saldo: incassato prima dell'uscita del materiale; sblocca la conferma del giorno di posa
+  saldoIncassato          Boolean   @default(false)
+  saldoIncassatoIl        DateTime?
+  saldoImporto            Float?
+  saldoModalita           String?
+  fatturaSaldoNumero      String?
+  fatturaSaldoData        DateTime?
+  note                    String?
+  rilievi                 Rilievo[]
+  eventi                  CommessaEvento[]
+  fasi                    FaseCommessa[]
+  tasks                   TaskPratica[]
+  righeOrdine             RigaOrdine[]
+  costiManuali            CostoManuale[]
+  pose                    Posa[]
+  // Chiusura
+  chiusaIl                DateTime?
+  fatturaFinaleNote       String?
+  recensioneRichiestaIl   DateTime?
+  garanziaMesi            Int       @default(24)
+  assistenze              Assistenza[]
+  createdAt               DateTime  @default(now())
+
+  @@unique([anno, numero])
+}
+
+model CommessaEvento {
+  id          String   @id @default(cuid())
+  commessa    Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId  String
+  utenteNome  String?
+  testo       String
+  createdAt   DateTime @default(now())
+}
+
+// stato: PROGRAMMATO | ESEGUITO | ANNULLATO
+model Rilievo {
+  id           String   @id @default(cuid())
+  commessa     Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId   String
+  tecnico      Utente   @relation(fields: [tecnicoId], references: [id])
+  tecnicoId    String
+  dataOra      DateTime
+  stato        String   @default("PROGRAMMATO")
+  indirizzo    String?
+  note         String?
+  // Misure rilevate (testo libero strutturato dal tecnico) e osservazioni di cantiere
+  misure       String?
+  eseguitoIl   DateTime?
+  allegati     RilievoAllegato[]
+  createdAt    DateTime @default(now())
+}
+
+// Foto/documenti del rilievo, salvati come data URI (nessuno storage esterno configurato)
+model RilievoAllegato {
+  id         String   @id @default(cuid())
+  rilievo    Rilievo  @relation(fields: [rilievoId], references: [id], onDelete: Cascade)
+  rilievoId  String
+  nome       String?
+  dataUri    String
+  createdAt  DateTime @default(now())
+}
+
+// ============ ANAGRAFICA UNICA (Impostazioni): fornitori, posatori esterni, tecnici interni ============
+// Un solo soggetto può avere più ruoli: "trasformare" un account in fornitore = aggiungere il ruolo.
+// ruoli: FORNITORE | POSATORE_ESTERNO | TECNICO_INTERNO | ALTRO
+model Soggetto {
+  id                    String    @id @default(cuid())
+  ragioneSociale        String
+  tipo                  String    @default("AZIENDA") // AZIENDA | PERSONA
+  ruoli                 String[]
+  attivo                Boolean   @default(true)
+  partitaIva            String?
+  codiceFiscale         String?
+  codiceSdi             String?
+  pec                   String?
+  indirizzo             String?
+  cap                   String?
+  comune                String?
+  provincia             String?
+  telefono              String?
+  email                 String?
+  // Casella a cui inviare gli ordini (può differire dalla mail generale)
+  emailOrdini           String?
+  referente             String?
+  // Banca e pagamenti
+  banca                 String?
+  iban                  String?
+  bic                   String?
+  intestatario          String?
+  metodoPagamento       String?
+  condizioniPagamento   String?
+  giorniPagamento       Int?
+  // Fornitore
+  scontoFornitore       Float?
+  listiniForniti        String?
+  // Posatore esterno / tecnico interno
+  tariffaPosa           Float?
+  tariffaTipo           String?   // ORA | GIORNO | MQ | PRESTAZIONE
+  costoOrario           Float?
+  zonaOperativa         String?
+  scadenzaDurc          DateTime?
+  scadenzaAssicurazione DateTime?
+  // Eventuale collegamento a un utente del CRM (tecnico interno che accede all'app)
+  utenteId              String?
+  // Cliente da cui è stato creato (se importato)
+  clienteOrigineId      String?
+  note                  String?
+  createdAt             DateTime  @default(now())
+}
+
+// ============ FASI, VIDIMAZIONE ORDINI E COSTI A SCALARE ============
+// Ogni fase viene chiusa da chi la esegue, indicando ore e costo orario (o forfait):
+// il costo entra automaticamente nella scheda costi della commessa.
+// stato: DA_FARE | IN_CORSO | CHIUSA
+// tipo: RILIEVO | ORDINI | ARRIVO_MERCE | POSA | FINE_LAVORI | ALTRO
+model FaseCommessa {
+  id                  String    @id @default(cuid())
+  commessa            Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId          String
+  ordine              Int       @default(0)
+  tipo                String    @default("ALTRO")
+  nome                String
+  stato               String    @default("DA_FARE")
+  assegnatoUtenteId   String?
+  assegnatoSoggettoId String?
+  assegnatoNome       String?
+  ore                 Float?
+  costoOrario         Float?
+  forfait             Float?
+  costoTotale         Float     @default(0)
+  note                String?
+  chiusaIl            DateTime?
+  chiusaDaNome        String?
+  createdAt           DateTime  @default(now())
+}
+
+// Righe del preventivo da "vidimare": la spunta attesta che l'ordine vero e proprio è stato
+// eseguito (tramite i moduli del singolo prodotto, fuori da questo elenco).
+model RigaOrdine {
+  id              String    @id @default(cuid())
+  commessa        Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId      String
+  rigaPreventivoId String?
+  descrizione     String
+  quantita        Int       @default(1)
+  fornitoreId     String?
+  fornitoreNome   String?
+  ordinato        Boolean   @default(false)
+  ordinatoIl      DateTime?
+  ordinatoDaNome  String?
+  arrivato        Boolean   @default(false)
+  arrivatoIl      DateTime?
+  // Costo reale, inserito man mano che la merce arriva / arriva la fattura
+  costoEffettivo  Float?
+  note            String?
+  createdAt       DateTime  @default(now())
+}
+
+// Altri costi diretti inseriti a mano (trasporti, noleggi, extra, ecc.)
+model CostoManuale {
+  id          String   @id @default(cuid())
+  commessa    Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId  String
+  categoria   String   @default("ALTRO")
+  descrizione String
+  importo     Float
+  data        DateTime @default(now())
+  autoreNome  String?
+}
+
+// ============ POSA E FINE LAVORI ============
+// stato: PROGRAMMATA | IN_CORSO | COMPLETATA | ANNULLATA ; tipo: INTERNA | ESTERNA
+model Posa {
+  id                  String    @id @default(cuid())
+  commessa            Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId          String
+  tipo                String    @default("INTERNA")
+  assegnatoUtenteId   String?
+  assegnatoSoggettoId String?
+  assegnatoNome       String?
+  // Eventuali altri componenti della squadra (testo libero)
+  squadra             String?
+  dataInizio          DateTime
+  giorniPrevisti      Int       @default(1)
+  indirizzo           String?
+  note                String?
+  stato               String    @default("PROGRAMMATA")
+  avviataIl           DateTime?
+  completataIl        DateTime?
+  // Verbale di fine lavori
+  noteFine            String?
+  // Conferma al cliente del giorno di posa (dopo il saldo)
+  confermata          Boolean   @default(false)
+  confermataIl        DateTime?
+  // Costo posa: INTERNA (ore x costo orario) oppure ESTERNA (fattura della squadra)
+  fatturaEsternaNumero  String?
+  fatturaEsternaImporto Float?
+  firmaCliente        String?   // data URI (firma disegnata)
+  nomeFirmatario      String?
+  foto                PosaFoto[]
+  createdAt           DateTime  @default(now())
+}
+
+// categoria: PRIMA | DURANTE | DOPO | PROBLEMA
+model PosaFoto {
+  id         String   @id @default(cuid())
+  posa       Posa     @relation(fields: [posaId], references: [id], onDelete: Cascade)
+  posaId     String
+  categoria  String   @default("DOPO")
+  nome       String?
+  dataUri    String
+  autoreNome String?
+  createdAt  DateTime @default(now())
+}
+
+model Assistenza {
+  id                String    @id @default(cuid())
+  numero            Int       @default(autoincrement())
+  commessa          Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId        String
+  prodotto          String?
+  descrizione       String
+  priorita          String    @default("NORMALE") // BASSA | NORMALE | URGENTE
+  stato             String    @default("APERTA")  // APERTA | PROGRAMMATA | IN_ATTESA_RICAMBIO | RISOLTA | ANNULLATA
+  inGaranzia        Boolean   @default(true)
+  assegnatoUtenteId String?
+  assegnatoNome     String?
+  dataIntervento    DateTime?
+  ricambioNote      String?   // ordine ricambio al fornitore
+  esito             String?
+  costo             Float?
+  aperturaDa        String?
+  risoltaIl         DateTime?
+  createdAt         DateTime  @default(now())
+}
+
+
+// Flusso pratiche fra uffici: configurazione di ogni fase (modificabile da Impostazioni)
+model FlussoFase {
+  id               String  @id @default(cuid())
+  chiave           String  @unique
+  ordine           Int     @default(0)
+  nome             String
+  ufficio          String
+  prossimaChiave   String?
+  taskAttivo       Boolean @default(true)
+  taskTitolo       String
+  taskTesto        String?
+  mailAttiva       Boolean @default(false)
+  mailQuando       String  @default("FATTO") // INIZIO | FATTO
+  mailDestinatario String  @default("CLIENTE") // CLIENTE | INTERNO
+  mailOggetto      String?
+  mailTesto        String?
+}
+
+// Task di una pratica (commessa) assegnato a un ufficio; "Fatto" crea il task dell'ufficio successivo
+model TaskPratica {
+  id               String    @id @default(cuid())
+  commessa         Commessa  @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId       String
+  faseChiave       String?
+  titolo           String
+  descrizione      String?
+  ufficio          String
+  assegnatoUtenteId String?
+  assegnatoNome    String?
+  stato            String    @default("DA_INIZIARE")
+  creatoDa         String?
+  completatoIl     DateTime?
+  completatoDaNome String?
+  mailA            String?
+  mailOggetto      String?
+  mailTesto        String?
+  mailInviataIl    DateTime?
+  createdAt        DateTime  @default(now())
+}
+
+
+// ===== Integrazione Meta Lead Ads (receiver webhook) =====
+// Una riga per ogni leadgen_id ricevuto. eventJson contiene solo ID (nessun dato personale);
+// leadJson contiene il lead recuperato da Graph API (dati personali: archivio protetto, mai esposto).
+model MetaDelivery {
+  id              String           @id @default(cuid())
+  leadgenId       String           @unique
+  pageId          String
+  formId          String
+  adId            String?
+  adgroupId       String?
+  createdTimeMeta DateTime?
+  origine         String           @default("META") // META | REPLAY (replay = sempre shadow, mai live)
+  stato           String           @default("RECEIVED") // RECEIVED | PROCESSING | PROCESSED | FAILED
+  tentativi       Int              @default(0)
+  erroreCodice    String?          // solo codice, mai dati sensibili
+  retriabile      Boolean          @default(true)
+  nextRetryAt     DateTime?
+  eventJson       String
+  leadJson        String?
+  leadId          String?
+  receivedAt      DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  downstreams     MetaDownstream[]
+
+  @@index([stato, nextRetryAt])
+}
+
+// Consegna verso un CRM a valle (fan-out): idempotenza separata per destinatario.
+model MetaDownstream {
+  id           String       @id @default(cuid())
+  delivery     MetaDelivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+  deliveryId   String
+  destinatario String
+  stato        String       @default("PENDING") // PENDING | DELIVERED | FAILED
+  tentativi    Int          @default(0)
+  erroreCodice String?
+  retriabile   Boolean      @default(true)
+  nextRetryAt  DateTime?
+  deliveredAt  DateTime?
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([deliveryId, destinatario])
+  @@index([stato, nextRetryAt])
+}
+
+// Eventi interni ricevuti dal gateway (questo CRM come destinatario): idempotenza per event_id e
+// registro dello shadow mode (in shadow l'evento è registrato ma NON crea lead né notifiche).
+model MetaInboundEvent {
+  id         String   @id @default(cuid())
+  eventId    String   @unique
+  leadgenId  String
+  pageId     String
+  formId     String
+  mode       String   // shadow | live
+  leadId     String?
+  receivedAt DateTime @default(now())
 // ============ SOLARIS STUDIO — Progettazione Fotovoltaico ============
 
 // Progetto fotovoltaico collegato a un preventivo Solaris.
@@ -451,5 +964,4 @@ model LeadSimulazione {
 
   // Snapshot completo della simulazione al momento dell'invio
   simulazioneJson  Json?
-  createdAt        DateTime @default(now())
-}
+  createdAt        DateTime @default(now())}

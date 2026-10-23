@@ -1,12 +1,13 @@
 export const dynamic = "force-dynamic";
 
+import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezioneKopen, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, notaInArrivo } from "@/lib/prodotti";
+import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import {
@@ -21,6 +22,7 @@ import {
   aggiornaCondizioniOfferta,
   aggiornaSconto,
   aggiornaIva,
+  aggiornaPrezzoManuale,
   aggiungiRigaTestoLibero,
   creaSezione,
   rinominaSezione,
@@ -31,12 +33,19 @@ import {
   spostaSezioneSu,
   spostaSezioneGiu,
   creaProgettoSolaris,
+  duplicaPreventivo,
+  archiviaPreventivo,
+  ripristinaPreventivo,
+  eliminaPreventivo,
+  aggiornaScadenzaPreventivo,
 } from "@/app/actions";
 import SelettoreProdotto, { type FamigliaNodo, type NodoTipologia } from "@/components/SelettoreProdotto";
+import RigaAzioni from "@/components/RigaAzioni";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
 import { SelettorePannelliInterniBlindati } from "@/components/SelettorePannelliInterniBlindati";
 import { SelettoreTessuti } from "@/components/SelettoreTessuti";
+import { SelettoreColoreTessutoRullo } from "@/components/SelettoreColoreTessutoRullo";
 import { SelettoreMotori } from "@/components/SelettoreMotori";
 import { SelettoreAccessoriMotore } from "@/components/SelettoreAccessoriMotore";
 
@@ -55,6 +64,48 @@ const GRUPPI_TENDE_CON_TESSUTO = [
   "LINEA ZIP",
   "TELAI FISSI",
 ];
+
+// Vetrate scorrevoli/fisse (vedi richiesta utente su Scintilla/Brillante/Fisso): raccolte
+// sotto un unico gruppo sintetico "VETRATE" in tendina, con il nome del catalogo originale
+// mostrato come sottogruppo (es. VETRATE > Scintilla, VETRATE > Brillante, VETRATE > Fisso),
+// sullo stesso modello del wrapping gia' usato per le TENDE. "Porte vetro" non e' ancora a
+// listino (nessun prezzo/dato tecnico caricato) e va aggiunto qui non appena disponibile.
+const GRUPPI_VETRATE: Record<string, string> = {
+  "VETRATE SCINTILLA": "Scintilla",
+  "VETRATE BRILLANTE": "Brillante",
+  "VETRATE FISSO": "Fisso",
+};
+
+// Listino Work&Service (posa/rilievo/servizi, vedi task #280): i 24 "gruppo" con cui
+// sono stati caricati i ModelloProdotto WSPOSA_* sono raccolti sotto 3 macro-categorie
+// sintetiche in tendina ("Posa" / "Rilievo" / "Servizi", vedi richiesta utente task #281),
+// col nome originale mostrato come sottogruppo — stesso wrapping gia' usato per TENDE/VETRATE.
+const GRUPPI_WSPOSA: Record<string, { gruppo: string; sottogruppo: string }> = {
+  "Rilievo Vetrate Panoramiche": { gruppo: "Rilievo", sottogruppo: "Vetrate Panoramiche" },
+  "Rilievo Pergotende e Bioclimatiche": { gruppo: "Rilievo", sottogruppo: "Pergotende e Bioclimatiche" },
+  "Rilievo Serramenti e affini": { gruppo: "Rilievo", sottogruppo: "Serramenti e affini" },
+  "Note Trasferta Rilievi Pergole/Vetrate": { gruppo: "Rilievo", sottogruppo: "Trasferta Rilievi Pergole/Vetrate" },
+  "Note Trasferta Rilievi Serramenti": { gruppo: "Rilievo", sottogruppo: "Trasferta Rilievi Serramenti" },
+  "Posa in Opera Pergotende e Bioclimatiche": { gruppo: "Posa", sottogruppo: "Pergotende e Bioclimatiche" },
+  "Note Posa Pergotende e Bioclimatiche": { gruppo: "Posa", sottogruppo: "Extra Posa Pergotende e Bioclimatiche" },
+  "Posa in Opera Vetrate Vepa": { gruppo: "Posa", sottogruppo: "Vetrate Vepa" },
+  "Complementi e Lavorazioni Extra Vetrate": { gruppo: "Posa", sottogruppo: "Complementi e Lavorazioni Extra Vetrate" },
+  "Note Logistiche Vetrate": { gruppo: "Posa", sottogruppo: "Logistica Vetrate" },
+  "Posa in Opera Finestre e Porte Finestre": { gruppo: "Posa", sottogruppo: "Finestre e Porte Finestre" },
+  "Posa in Opera Porte Interne": { gruppo: "Posa", sottogruppo: "Porte Interne" },
+  "Posa in Opera Portoncini": { gruppo: "Posa", sottogruppo: "Portoncini" },
+  "Posa in Opera Porte Blindate": { gruppo: "Posa", sottogruppo: "Porte Blindate" },
+  "Posa in Opera Tapparelle": { gruppo: "Posa", sottogruppo: "Tapparelle" },
+  "Posa in Opera Persiane": { gruppo: "Posa", sottogruppo: "Persiane" },
+  "Posa in Opera Inferriate": { gruppo: "Posa", sottogruppo: "Inferriate" },
+  "Posa in Opera Zanzariere": { gruppo: "Posa", sottogruppo: "Zanzariere" },
+  "Posa in Opera Pensiline": { gruppo: "Posa", sottogruppo: "Pensiline" },
+  "Posa in Opera Accessori": { gruppo: "Posa", sottogruppo: "Accessori" },
+  "Note Posa Serramenti": { gruppo: "Posa", sottogruppo: "Extra Posa Serramenti" },
+  "Posa in Opera Tende da Sole": { gruppo: "Posa", sottogruppo: "Tende da Sole" },
+  "Costi Aggiuntivi e Servizi Accessori": { gruppo: "Servizi", sottogruppo: "Costi Aggiuntivi e Servizi Accessori" },
+  "Spese Magazzino": { gruppo: "Servizi", sottogruppo: "Spese Magazzino" },
+};
 
 const STATI = ["APERTO", "ACCETTATO", "SCADUTO", "ANNULLATO"];
 
@@ -176,6 +227,17 @@ export default async function PreventivoPage({
       sottogruppo = gruppo;
       gruppo = "TENDE";
     }
+    // Vetrate (Scintilla/Brillante/Fisso): stesso wrapping delle tende, vedi GRUPPI_VETRATE.
+    if (gruppo in GRUPPI_VETRATE) {
+      sottogruppo = GRUPPI_VETRATE[gruppo];
+      gruppo = "VETRATE";
+    }
+    // Listino Work&Service: raccoglie i 24 gruppi piatti sotto 3 macro-categorie
+    // Posa/Rilievo/Servizi in tendina, vedi GRUPPI_WSPOSA sopra.
+    if (gruppo in GRUPPI_WSPOSA) {
+      sottogruppo = GRUPPI_WSPOSA[gruppo].sottogruppo;
+      gruppo = GRUPPI_WSPOSA[gruppo].gruppo;
+    }
     if (!alberoMap.has(famiglia)) alberoMap.set(famiglia, new Map());
     const perGruppo = alberoMap.get(famiglia)!;
     if (!perGruppo.has(gruppo)) perGruppo.set(gruppo, []);
@@ -202,13 +264,37 @@ export default async function PreventivoPage({
         // Zanzariere P&C: assi ante/variante → rete → colore, per la selezione a 3 tendine
         // a cascata invece della lista piatta (18-54 voci per famiglia).
         assi: assiSelezioneZpc(tip) ?? assiSelezioneUragano(tip) ?? assiSelezioneVerticale(tip) ?? undefined,
-        // Persiane Blindate / Infissi in Acciaio: assi modello → numero ante, per la
-        // selezione a 2 tendine a cascata invece della lista piatta (27-68 voci).
+        // Infissi in Acciaio: assi modello → numero ante, per la selezione a 2
+        // tendine a cascata invece della lista piatta (27 voci). Persiane Blindate
+        // ha ora un proprio assiPersianeBlindate piu' sotto (4 tendine), non piu'
+        // questo meccanismo generico a 2 tendine.
         assiModelloAnte: assiSelezioneModelloAnte(tip) ?? undefined,
+        // Persiane Blindate: assi tipo → classe → misura doghe (se presente) → numero
+        // ante, al posto dell'unica tendina "modello" piatta da 17 voci che mescolava
+        // stecca aperta/dogate/antone monolamiera/antone doppia lamiera — vedi
+        // richiesta utente.
+        assiPersianeBlindate: assiSelezionePersianeBlindate(tip) ?? undefined,
         // Kopen: assi linea -> combinazione materiali, per la selezione a 2 tendine
         // a cascata invece della lista piatta per sottogruppo (13 gruppi, 1-3 voci
         // ciascuno).
         assiKopen: assiSelezioneKopen(tip) ?? undefined,
+        // Isomax (Porte interne): assi modello -> tipo apertura, per la selezione
+        // a 2 tendine a cascata invece della lista piatta (fino a 20 voci per modello).
+        assiIsomax: assiSelezioneIsomax(tip) ?? undefined,
+        // Tende a rullo da interno: assi tessuto -> variante (meccanismo/cassonetto),
+        // per la selezione a 2 tendine a cascata (1 sola per Tagli Tessuto, che non ha
+        // varianti di meccanismo) invece della lista piatta (fino a 34 voci per linea).
+        assiRullo: assiSelezioneRullo(tip) ?? undefined,
+        // Pergole (Lucilla/Nuvola/Panarea): assi modello ->
+        // installazione (a parete/isola/patio), per la selezione a 2 tendine a
+        // cascata invece della lista piatta di 21 voci mischiate sotto PERGOLE.
+        assiPergola: assiSelezionePergola(tip) ?? undefined,
+        // Vetrate pergole (Nesos/Nubes/Ermes): assi linea -> declinazione, stesso
+        // pattern di assiPergola.
+        assiVetrata: assiSelezioneVetrata(tip) ?? undefined,
+        // Bioclimatiche (Wawe/Solaria/Raincover/Aurora): assi linea -> installazione,
+        // stesso pattern di assiPergola.
+        assiBioclimatica: assiSelezioneBioclimatica(tip) ?? undefined,
         // Blindati: assi classe → numero ante → variante due ante, per la selezione
         // a 3 tendine a cascata invece della lista piatta divisa per sottogruppo.
         assiBlindati: assiSelezioneBlindati(tip) ?? undefined,
@@ -218,7 +304,7 @@ export default async function PreventivoPage({
         assiMinibox: assiSelezioneMinibox(tip) ?? undefined,
         // Tapparelle in PVC e Alluminio: assi materiale → modello → colore, per la
         // selezione a 3 tendine a cascata (la tendina colore mostra anche l'aumento).
-        assiTapparelle: assiSelezioneTapparelle(tip) ?? undefined,
+        assiTapparelle: assiSelezioneTapparelle(tip) ?? assiSelezioneWpc(tip) ?? assiSelezioneSeraFrangisole(tip) ?? undefined,
         // Tapparelle Accessori: assi categoria -> voce -> finitura, per mostrare
         // tendine a cascata invece della lista piatta (24 voci) nel sottogruppo Accessori.
         assiAccessoriTapparelle: assiSelezioneAccessoriTapparelle(tip) ?? undefined,
@@ -336,6 +422,10 @@ export default async function PreventivoPage({
           >
             {preventivo.brand.nome}
           </span>
+          <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-300">
+            {preventivo.numeroOfferta ? `Offerta N° ${preventivo.numeroOfferta}` : "Offerta"} · {preventivo.createdAt.toLocaleDateString("it-IT")}
+            {preventivo.duplicatoDaId ? " · copia" : ""}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           {preventivo.brand.nome === "Solaris" && (
@@ -360,6 +450,32 @@ export default async function PreventivoPage({
               </form>
             )
           )}
+          <form action={duplicaPreventivo}>
+            <input type="hidden" name="id" value={preventivo.id} />
+            <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Crea una copia con data odierna e nuovo numero offerta">
+              📄 Duplica offerta
+            </button>
+          </form>
+          {preventivo.archiviato ? (
+            <form action={ripristinaPreventivo}>
+              <input type="hidden" name="id" value={preventivo.id} />
+              <button type="submit" className="btn-3d btn-3d-green text-sm px-3 py-1.5">♻️ Ripristina</button>
+            </form>
+          ) : (
+            <form action={archiviaPreventivo}>
+              <input type="hidden" name="id" value={preventivo.id} />
+              <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Sposta l'offerta nell'archivio">🗄️ Archivia</button>
+            </form>
+          )}
+          <form action={eliminaPreventivo}>
+            <input type="hidden" name="id" value={preventivo.id} />
+            <BottoneConferma
+              messaggio="Eliminare definitivamente questa offerta? L'operazione non si può annullare."
+              className="btn-3d btn-3d-red text-sm px-3 py-1.5"
+            >
+              🗑️ Elimina
+            </BottoneConferma>
+          </form>
           <Link
             href={`/preventivi/${preventivo.id}/stampa`}
             target="_blank"
@@ -368,6 +484,24 @@ export default async function PreventivoPage({
             🖨️ Stampa offerta
           </Link>
         </div>
+      </div>
+
+      <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
+        {preventivo.archiviato && (
+          <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-semibold">🗄️ Offerta archiviata</span>
+        )}
+        <form action={aggiornaScadenzaPreventivo} className="flex items-center gap-2">
+          <input type="hidden" name="id" value={preventivo.id} />
+          <label className="text-xs font-semibold text-neutral-700">Valida fino al</label>
+          <input
+            type="date"
+            name="scadenza"
+            defaultValue={preventivo.scadenza ? preventivo.scadenza.toISOString().slice(0, 10) : ""}
+            className="border border-neutral-300 rounded px-2 py-1 text-sm"
+          />
+          <button type="submit" className="btn-3d text-xs px-2.5 py-1">Salva</button>
+          <span className="text-xs text-neutral-600">(di default 15 giorni dalla creazione; scaduta l'offerta aperta va in archivio)</span>
+        </form>
       </div>
 
       <AvvisoMisuraFuoriListino errore={errore} />
@@ -396,7 +530,14 @@ export default async function PreventivoPage({
           </form>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-600 mb-1">Netto{preventivo.scontoPercentuale > 0 ? ` (scontato ${preventivo.scontoPercentuale}%)` : ""}</p>
+          <p className="text-xs text-neutral-600 mb-1">
+            Netto
+            {preventivo.prezzoManualeAttivo
+              ? " (prezzo manuale)"
+              : preventivo.scontoPercentuale > 0
+                ? ` (scontato ${preventivo.scontoPercentuale}%)`
+                : ""}
+          </p>
           <p className="text-sm font-medium mb-2">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
           <form action={aggiornaSconto} className="flex items-center gap-1">
             <input type="hidden" name="id" value={preventivo.id} />
@@ -443,6 +584,58 @@ export default async function PreventivoPage({
           </form>
         </div>
       </div>
+
+      <details className="bg-white rounded-lg border border-neutral-200 mb-6" open={preventivo.prezzoManualeAttivo}>
+        <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
+          💰 Prezzo manuale — bypassa sconto/calcolo automatico
+        </summary>
+        <form action={aggiornaPrezzoManuale} className="px-4 pb-4 flex flex-col gap-2">
+          <input type="hidden" name="id" value={preventivo.id} />
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="prezzoManualeAttivo" defaultChecked={preventivo.prezzoManualeAttivo} />
+            Attiva prezzo manuale
+          </label>
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="text-xs text-neutral-500">Totale finale (IVA inclusa)</label>
+            <input
+              name="prezzoManualeTotale"
+              type="number"
+              step="0.01"
+              min={0}
+              defaultValue={preventivo.prezzoManualeTotale ?? ""}
+              placeholder="es. 2400,00"
+              className="w-32 text-sm border border-neutral-200 rounded px-1.5 py-1"
+            />
+            <label className="text-xs text-neutral-500">IVA</label>
+            <select
+              name="aliquotaPreset"
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
+              className="text-xs border border-neutral-200 rounded px-1.5 py-1"
+            >
+              <option value="22">22%</option>
+              <option value="10">10%</option>
+              <option value="14.8">14,8%</option>
+              <option value="ALTRO">Altro —</option>
+            </select>
+            <input
+              name="aliquotaCustom"
+              type="number"
+              step="0.1"
+              min={0}
+              max={100}
+              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
+              placeholder="%"
+              className="w-14 text-xs border border-neutral-200 rounded px-1.5 py-1"
+            />
+            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
+          </div>
+          <p className="text-[11px] text-neutral-500">
+            Quando attivo, il totale sopra ignora righe e sconto%: in stampa comparirà solo un
+            imponibile + IVA coerenti con questa cifra, senza alcuna riga "sconto" visibile al
+            cliente — come un preventivo calcolato normalmente.
+          </p>
+        </form>
+      </details>
 
       <details className="bg-white rounded-lg border border-neutral-200 mb-6">
         <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
@@ -516,7 +709,7 @@ export default async function PreventivoPage({
                     <form action={rimuoviRigaPreventivo}>
                       <input type="hidden" name="id" value={r.id} />
                       <input type="hidden" name="preventivoId" value={preventivo.id} />
-                      <button className="btn-3d btn-3d-red text-[11px] px-2 py-1">rimuovi</button>
+                      <button className="btn-flat btn-flat-red">rimuovi</button>
                     </form>
                   </div>
                 </div>
@@ -536,7 +729,16 @@ export default async function PreventivoPage({
             <div key={r.id} className="flex items-stretch">
               {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
               <div className="flex-1 px-4 py-3 text-sm">
-              <div className="flex items-center justify-between">
+              <RigaAzioni
+                rigaId={r.id}
+                preventivoId={preventivo.id}
+                subtotale={subtotale}
+                quantita={r.quantita}
+                misuraLarghezza={r.misuraLarghezza}
+                misuraAltezza={r.misuraAltezza}
+                prezzoUnitario={r.prezzoUnitario}
+                unit={unit}
+              >
                 <div className="flex items-center gap-3">
                   {modello?.immagineUrl && (
                     <img src={modello.immagineUrl} alt={prodotto.tipologia} className="w-12 h-12 object-cover rounded border border-neutral-200" />
@@ -552,15 +754,7 @@ export default async function PreventivoPage({
                     <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="font-medium">{subtotale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
-                  <form action={rimuoviRigaPreventivo}>
-                    <input type="hidden" name="id" value={r.id} />
-                    <input type="hidden" name="preventivoId" value={preventivo.id} />
-                    <button className="btn-3d btn-3d-red text-[11px] px-2 py-1">rimuovi</button>
-                  </form>
-                </div>
-              </div>
+              </RigaAzioni>
 
               {(modello?.descrizioneTecnica || r.descrizionePersonalizzata) && (
                 <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -634,12 +828,55 @@ export default async function PreventivoPage({
 
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia))
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia))
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
                      (Standard/Standard Plus/Michelangelo/Finto Legno) fatta a monte: non va riproposto qui. */
-                  .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"));
+                  .filter((o) => !(o.categoria === "Colore" && modello?.gruppo === "ZANZARIERE_PLISSE"))
+                  /* Cassonetti PVC da restauro: come optional solo le colorazioni del proprio listino
+                     (non le voci generiche dei SERRAMENTI: accessori Zenith, posa e servizi Work&Service). */
+                  .filter((o) => listinoDiTipologia(prodotto.tipologia) !== "CASSONETTOPVC" || o.listino === "CASSONETTOPVC");
+
+                // Tende a rullo da interno: tendina "Colore tessuto" con swatch colorato,
+                // scoperta al solo tessuto gia' determinato dal prodotto scelto (categoria
+                // Optional "Colore - <SLUG>"), separata da eventuali altri optional futuri
+                // — vedi task #283/#290. Il tessuto specifico e' quello che fissa il prezzo
+                // (griglia larghezza×altezza), il colore no: e' una scelta a valle, gratuita.
+                if (modello?.gruppo === "TENDE INTERNE") {
+                  const slug = slugTessutoRullo(prodotto.tipologia);
+                  const coloriRullo = slug
+                    ? optionaliRigaFiltrati.filter((o) => o.categoria === `Colore - ${slug}`)
+                    : [];
+                  const altriOptionalRullo = optionaliRigaFiltrati.filter((o) => !o.categoria.startsWith("Colore - "));
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {slug && (
+                        <SelettoreColoreTessutoRullo
+                          optionali={coloriRullo}
+                          formAction={aggiungiOptionalARiga}
+                          rigaId={r.id}
+                          preventivoId={preventivo.id}
+                        />
+                      )}
+                      {altriOptionalRullo.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {altriOptionalRullo.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
 
                 // Per le Pensiline: tendina "Colori" (colore struttura) separata da
                 // "Optional" (policarbonato, trasporto, imballo) come richiesto.
@@ -697,17 +934,49 @@ export default async function PreventivoPage({
                     (o) => o.categoria.startsWith("Pannello") && !o.categoria.startsWith("Pannello Interno")
                   );
                   const pannelliInterni = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Pannello Interno"));
-                  const optionalBlindato = optionaliRigaFiltrati.filter(
-                    (o) => !o.categoria.startsWith("Pannello")
+                  // "Fuori Misura" isolato in una sezione propria, evidenziata, separata
+                  // dagli altri optional: il selettore misura permette di inserire misure
+                  // fuori dal range standard calcolando comunque un prezzo (fascia più
+                  // vicina), quindi è facile dimenticarsi di aggiungere a mano la
+                  // maggiorazione corretta. Metterla sotto "optional" generico la rendeva
+                  // poco visibile al commerciale (vedi richiesta utente).
+                  const fuoriMisuraBlindati = optionaliRigaFiltrati.filter((o) => o.categoria === "Fuori Misura");
+                  const altriOptionalBlindato = optionaliRigaFiltrati.filter(
+                    (o) => !o.categoria.startsWith("Pannello") && o.categoria !== "Fuori Misura"
                   );
                   return (
                     <div className="mt-2 flex flex-col gap-1">
-                      {optionalBlindato.length > 0 && (
+                      {fuoriMisuraBlindati.length > 0 && (
+                        <div className="rounded border border-orange-300 bg-orange-50 px-2 py-1.5 flex flex-col gap-1">
+                          <p className="text-[11px] font-semibold text-orange-800">
+                            ⚠️ Misura fuori standard? Aggiungi qui la maggiorazione &quot;Fuori Misura&quot;
+                            (per ogni anta, nei modelli a due ante) — il prezzo del portoncino sopra
+                            NON si aggiorna da solo.
+                          </p>
+                          <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                            <input type="hidden" name="rigaId" value={r.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <select name="optionalId" className="text-xs border border-orange-300 rounded px-1.5 py-1 max-w-[220px]">
+                              {fuoriMisuraBlindati.map((o) => (
+                                <option key={o.id} value={o.id}>
+                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                                </option>
+                              ))}
+                            </select>
+                            <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-orange-300 rounded px-1.5 py-1 w-14" />
+                            <button className="btn-3d text-[11px] px-2 py-1 bg-orange-500 text-white">+ fuori misura</button>
+                          </form>
+                        </div>
+                      )}
+                      {altriOptionalBlindato.length > 0 && (
                         <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
                           <input type="hidden" name="rigaId" value={r.id} />
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
                           <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
-                            {optionalBlindato.map((o) => (
+                            <option value="" disabled>
+                              Altri costi aggiuntivi (vetro, sopraluce, fianco luce, accessori) —
+                            </option>
+                            {altriOptionalBlindato.map((o) => (
                               <option key={o.id} value={o.id}>
                                 {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
                               </option>
@@ -792,6 +1061,204 @@ export default async function PreventivoPage({
                   );
                 }
 
+                // Per Isomax (Porte interne): tendina "Colore" separata dal resto degli
+                // optional (maggiorazioni spessore muro, taglio, serrature) — i colori
+                // disponibili variano gia' per modello grazie al filtro sul listino
+                // (ISOMAX_A/B/L applicato sopra), quindi qui basta isolare la categoria
+                // "Colore" per renderla immediatamente visibile invece di perderla in
+                // mezzo a una quindicina di altre voci.
+                if (modello?.gruppo === "PORTE INTERNE") {
+                  const coloriIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore");
+                  const fuoriMisuraIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Maggiorazione taglio/luce netta");
+                  const altriOptionalIsomax = optionaliRigaFiltrati.filter(
+                    (o) => o.categoria !== "Colore" && o.categoria !== "Maggiorazione taglio/luce netta"
+                  );
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      <p className="text-[11px] text-neutral-500">
+                        Misure standard di produzione: 70/80cm luce netta (nel prezzo). Riduzione a 60cm o
+                        allargamento a 90cm: +38€ (tendina &quot;fuori misura&quot; sotto). Oltre, o tagli in
+                        altezza/larghezza/obliquo: vedi stessa tendina.
+                      </p>
+                      {coloriIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            {coloriIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : " (compreso)"}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {fuoriMisuraIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[300px]">
+                            {fuoriMisuraIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : ""}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ fuori misura</button>
+                        </form>
+                      )}
+                      {altriOptionalIsomax.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[220px]">
+                            {altriOptionalIsomax.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ altro optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
+                // Per le Persiane (Blindate in acciaio + Orientabili a Goccia in alluminio):
+                // troppi accessori diversi (fino a un'ottantina per la Goccia) per stare in
+                // un'unica tendina piatta, quindi si separano in 5 gruppi tematici: apertura
+                // (battenti/scorrevole/a libro — la scelta piu' importante, sempre in cima),
+                // colori, motorizzazione, profili complementari, e un gruppo "servizi e
+                // lavorazioni" che raccoglie tutto il resto (maggiorazioni telaio, cardini,
+                // accessori vari, lavorazioni, servizi) cosi' da trovare subito quello che
+                // serve invece di scorrere decine di voci mischiate.
+                if (modello?.gruppo === "PERSIANE") {
+                  const aperturaPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Ferramenta e apertura");
+                  const coloriPersiane = optionaliRigaFiltrati.filter(
+                    (o) => o.categoria === "Colore struttura" || o.categoria === "Colore"
+                  );
+                  const motorizzazionePersiane = optionaliRigaFiltrati.filter((o) => o.categoria.startsWith("Motorizzazione"));
+                  const profiliPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Profili complementari");
+                  // Accessorio separato dal generico "servizi e lavorazioni": cilindri,
+                  // maniglie ecc. sono scelte frequenti e vanno trovate subito, non in
+                  // mezzo a voci di lavorazione/servizio — vedi richiesta utente.
+                  const accessoriPersiane = optionaliRigaFiltrati.filter((o) => o.categoria === "Accessorio");
+                  const serviziPersiane = optionaliRigaFiltrati.filter(
+                    (o) =>
+                      o.categoria !== "Ferramenta e apertura" &&
+                      o.categoria !== "Colore struttura" &&
+                      o.categoria !== "Colore" &&
+                      !o.categoria.startsWith("Motorizzazione") &&
+                      o.categoria !== "Profili complementari" &&
+                      o.categoria !== "Accessorio"
+                  );
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {aperturaPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Tipo apertura —</option>
+                            {aperturaPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ apertura</button>
+                        </form>
+                      )}
+                      {coloriPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Colore —</option>
+                            {coloriPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome}{o.valore > 0 ? ` (+${o.valore}€)` : " (compreso)"}
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ colore</button>
+                        </form>
+                      )}
+                      {motorizzazionePersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Motorizzazione —</option>
+                            {motorizzazionePersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ motorizzazione</button>
+                        </form>
+                      )}
+                      {profiliPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Profilo complementare —</option>
+                            {profiliPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ profilo</button>
+                        </form>
+                      )}
+                      {accessoriPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Accessori —</option>
+                            {accessoriPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ accessorio</button>
+                        </form>
+                      )}
+                      {serviziPersiane.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[280px]">
+                            <option value="">Servizi e lavorazioni —</option>
+                            {serviziPersiane.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ servizio</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
                 // Per le Tende da sole (a bracci, a caduta, classiche, orizzontali,
                 // veranda, giardino/patio, cappottine, telai fissi): tendina "Tessuto
                 // Tempotest" a cascata separata (collezione -> codice, +slot di
@@ -863,6 +1330,163 @@ export default async function PreventivoPage({
                           </select>
                           <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                           <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
+                        </form>
+                      )}
+                    </div>
+                  );
+                }
+
+                // Per le Pergole (Lucilla/Nuvola/Panarea) e le Bioclimatiche
+                // (Wawe/Solaria/Raincover/Aurora): nella stessa tendina finivano mischiati
+                // optional di natura molto diversa — luci/impianti dal catalogo condiviso
+                // Illuminazione & Optionals, voci di posa in opera/rilievo dal listino
+                // Work&Service, e i veri accessori del modello (tettuccio, gronda, timpano,
+                // motorizzazione, sensori...) — rendendo difficile trovare quello che
+                // serve. Si separano in tendine tematiche, stesso pattern usato per le
+                // Persiane (vedi sopra). Il blocco "optional prodotto" a sua volta,
+                // soprattutto su Lucilla (8 categorie, quasi 190 optional), viene
+                // ulteriormente suddiviso in 3 sotto-tendine per natura dell'accessorio:
+                // coperture (tettuccio/gronda/timpano), motorizzazione/sensori/comandi,
+                // struttura/posa/tessuto.
+                // Pavimenti (WPC Novowood): accessori per la posa e rifiniture in tendine tematiche,
+                // per trovarli piu' in fretta (sottostruttura, supporti, clip, profili di finitura,
+                // lavorazioni/trattamenti, anime/tappi/fissaggi frangisole, pilastri e illuminazione recinzioni).
+                if (modello?.gruppo === "PAVIMENTI") {
+                  const TENDINE_WPC: { titolo: string; categorie: string[]; bottone: string }[] = [
+                    { titolo: "Sottostruttura e supporti —", categorie: ["Sottostruttura", "Supporti e livellamento"], bottone: "+ sottostruttura" },
+                    { titolo: "Clip e fissaggi —", categorie: ["Clip e fissaggi"], bottone: "+ fissaggio" },
+                    { titolo: "Rifiniture e profili di finitura —", categorie: ["Rifiniture e profili"], bottone: "+ rifinitura" },
+                    { titolo: "Anime, tappi e sistemi frangisole —", categorie: ["Anime per frangisole", "Tappi e collante", "Fissaggi e sistemi"], bottone: "+ accessorio" },
+                    { titolo: "Pilastri e illuminazione recinzione —", categorie: ["Pilastri e illuminazione"], bottone: "+ pilastro/luce" },
+                    { titolo: "Lavorazioni e trattamenti —", categorie: ["Lavorazioni e trattamenti"], bottone: "+ lavorazione" },
+                  ];
+                  const usate = new Set(TENDINE_WPC.flatMap((t) => t.categorie));
+                  const altriWpc = optionaliRigaFiltrati.filter((o) => !usate.has(o.categoria));
+                  const tendine = [
+                    ...TENDINE_WPC.map((t) => ({ ...t, voci: optionaliRigaFiltrati.filter((o) => t.categorie.includes(o.categoria)) })),
+                    { titolo: "Altri optional —", categorie: [], bottone: "+ optional", voci: altriWpc },
+                  ].filter((t) => t.voci.length > 0);
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {tendine.map((t) => (
+                        <form key={t.titolo} action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[320px]">
+                            <option value="">{t.titolo}</option>
+                            {t.voci.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore.toLocaleString("it-IT", { minimumFractionDigits: 2 })}€${o.unita ? ` ${o.unita.replace("€", "")}` : ""}`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">{t.bottone}</button>
+                        </form>
+                      ))}
+                    </div>
+                  );
+                }
+
+                if (modello?.gruppo === "PERGOLE" || modello?.gruppo === "BIOCLIMATICA") {
+                  const CATEGORIE_ILLUMINAZIONE = ["ILLUMINAZIONE", "TRASMETTITORE", "PRESA", "RISCALDATORE", "AUDIO"];
+                  const CATEGORIE_COPERTURA = ["TETTUCCIO", "GRONDA", "TIMPANO"];
+                  const isMotorizzazione = (categoria: string) => {
+                    const c = categoria.toUpperCase();
+                    return c.includes("MOTOR") || c.includes("SENSOR") || c === "TELECOMANDO";
+                  };
+                  const illuminazionePergole = optionaliRigaFiltrati.filter((o) => CATEGORIE_ILLUMINAZIONE.includes(o.categoria));
+                  const posaPergole = optionaliRigaFiltrati.filter((o) => o.categoria.endsWith("(Work&Service)"));
+                  const optionalPergoleBase = optionaliRigaFiltrati.filter(
+                    (o) => !CATEGORIE_ILLUMINAZIONE.includes(o.categoria) && !o.categoria.endsWith("(Work&Service)")
+                  );
+                  const coperturaPergole = optionalPergoleBase.filter((o) => CATEGORIE_COPERTURA.includes(o.categoria));
+                  const motorizzazionePergole = optionalPergoleBase.filter(
+                    (o) => !CATEGORIE_COPERTURA.includes(o.categoria) && isMotorizzazione(o.categoria)
+                  );
+                  const strutturaPergole = optionalPergoleBase.filter(
+                    (o) => !CATEGORIE_COPERTURA.includes(o.categoria) && !isMotorizzazione(o.categoria)
+                  );
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      {coperturaPergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Tettuccio, gronda e timpano —</option>
+                            {coperturaPergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ copertura</button>
+                        </form>
+                      )}
+                      {motorizzazionePergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Motorizzazione, sensori e comandi —</option>
+                            {motorizzazionePergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ motorizzazione</button>
+                        </form>
+                      )}
+                      {strutturaPergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Struttura, posa e tessuto —</option>
+                            {strutturaPergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ struttura</button>
+                        </form>
+                      )}
+                      {illuminazionePergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[260px]">
+                            <option value="">Illuminazione e impianti —</option>
+                            {illuminazionePergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ luce/impianto</button>
+                        </form>
+                      )}
+                      {posaPergole.length > 0 && (
+                        <form action={aggiungiOptionalARiga} className="flex items-center gap-1">
+                          <input type="hidden" name="rigaId" value={r.id} />
+                          <input type="hidden" name="preventivoId" value={preventivo.id} />
+                          <select name="optionalId" className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[280px]">
+                            <option value="">Posa in opera / Work&amp;Service —</option>
+                            {posaPergole.map((o) => (
+                              <option key={o.id} value={o.id}>
+                                {o.categoria.replace(" (Work&Service)", "")} · {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `${o.valore}%` : `${o.valore}€`})
+                              </option>
+                            ))}
+                          </select>
+                          <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                          <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ posa/servizio</button>
                         </form>
                       )}
                     </div>

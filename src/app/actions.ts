@@ -6,10 +6,29 @@ import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
+import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
   return typeof v === "string" && v.trim() !== "" ? v.trim() : null;
+}
+
+function flt(fd: FormData, key: string): number | null {
+  const v = str(fd, key);
+  if (v === null) return null;
+  const n = Number(v.replace(",", "."));
+  return isNaN(n) ? null : n;
+}
+
+function boolCheckbox(fd: FormData, key: string): boolean {
+  return fd.get(key) === "on";
+}
+
+function dataOrNull(fd: FormData, key: string): Date | null {
+  const v = str(fd, key);
+  if (!v) return null;
+  const d = new Date(v);
+  return isNaN(d.getTime()) ? null : d;
 }
 
 export async function creaLead(formData: FormData) {
@@ -99,6 +118,249 @@ export async function aggiornaCliente(formData: FormData) {
   revalidatePath("/clienti");
 }
 
+// ===== Scheda Anagrafica estesa cliente (tab stile Bconsole) =====
+
+export async function aggiornaClienteAnagrafica(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      nome: str(formData, "nome") ?? undefined,
+      telefono: str(formData, "telefono"),
+      altroTelefono: str(formData, "altroTelefono"),
+      cellulare: str(formData, "cellulare"),
+      sitoWeb: str(formData, "sitoWeb"),
+      email: str(formData, "email"),
+      altraEmail: str(formData, "altraEmail"),
+      emailOrdiniFornitore: str(formData, "emailOrdiniFornitore"),
+      paese: str(formData, "paese") ?? "IT",
+      comune: str(formData, "comune"),
+      frazione: str(formData, "frazione"),
+      indirizzo: str(formData, "indirizzo"),
+      cap: str(formData, "cap"),
+      provincia: str(formData, "provincia"),
+      regione: str(formData, "regione"),
+      descrizione: str(formData, "descrizione"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+  revalidatePath("/clienti");
+}
+
+// Dati persona fisica: se compilati cognome+nome+sesso+data+comune di nascita, calcola e
+// salva automaticamente il Codice Fiscale (come in Bconsole). Non sovrascrive un C.F. già
+// presente se i dati anagrafici non sono sufficienti per ricalcolarlo.
+export async function aggiornaClientePersonaFisica(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+
+  const tipoAnagrafica = str(formData, "tipoAnagrafica") ?? "AZIENDA";
+  const cognome = str(formData, "cognome");
+  const nomePersona = str(formData, "nomePersona");
+  const sesso = str(formData, "sesso") as "M" | "F" | null;
+  const dataNascita = dataOrNull(formData, "dataNascita");
+  const comuneNascita = str(formData, "comuneNascita");
+  const provinciaNascita = str(formData, "provinciaNascita");
+
+  let codiceFiscaleCalcolato: string | null = null;
+  if (cognome && nomePersona && sesso && dataNascita && comuneNascita) {
+    codiceFiscaleCalcolato = await calcolaCodiceFiscale({
+      cognome,
+      nome: nomePersona,
+      sesso,
+      dataNascita,
+      comuneNascita,
+    });
+  }
+
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      tipoAnagrafica,
+      cognome,
+      nomePersona,
+      sesso,
+      dataNascita,
+      comuneNascita,
+      provinciaNascita,
+      // Se il calcolo è riuscito aggiorna il C.F.; altrimenti lascia quello già salvato
+      // (eventualmente inserito a mano dall'operatore in Amministrazione).
+      ...(codiceFiscaleCalcolato ? { codiceFiscale: codiceFiscaleCalcolato } : {}),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteProfilazione(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      bloccato: boolCheckbox(formData, "bloccato"),
+      origine: str(formData, "origine"),
+      settore: str(formData, "settore"),
+      km: flt(formData, "km") ?? 0,
+      tipologia: str(formData, "tipologia"),
+      categoria: str(formData, "categoria"),
+      condivisioni: str(formData, "condivisioni"),
+      tag: str(formData, "tag"),
+      responsabileId: str(formData, "responsabileId"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteCommerciale(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      pagamento: str(formData, "pagamento"),
+      bancaAppoggio: str(formData, "bancaAppoggio"),
+      euroAlKm: flt(formData, "euroAlKm") ?? 0,
+      resa: str(formData, "resa"),
+      provvigione: flt(formData, "provvigione") ?? 0,
+      budgetAnnoCorrente: flt(formData, "budgetAnnoCorrente") ?? 0,
+      budgetAnnoProssimo: flt(formData, "budgetAnnoProssimo") ?? 0,
+      centroRicavo: str(formData, "centroRicavo"),
+      codiceIvaCliente: str(formData, "codiceIvaCliente"),
+      scontoTier1: flt(formData, "scontoTier1") ?? 0,
+      scontoTier2: flt(formData, "scontoTier2") ?? 0,
+      scontoTier3: flt(formData, "scontoTier3") ?? 0,
+      scontoTier4: flt(formData, "scontoTier4") ?? 0,
+      tipoCosto: str(formData, "tipoCosto"),
+      corriere: str(formData, "corriere"),
+      valuta: str(formData, "valuta"),
+      lingua: str(formData, "lingua") ?? "it_IT",
+      nsNumeroFornitore: str(formData, "nsNumeroFornitore"),
+      fido: flt(formData, "fido"),
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteAmministrazione(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: {
+      emailInvioFatture: str(formData, "emailInvioFatture"),
+      rea: str(formData, "rea"),
+      isoNazione: str(formData, "isoNazione"),
+      piva: str(formData, "piva"),
+      codiceFiscale: str(formData, "codiceFiscale"),
+      esigibilitaIva: str(formData, "esigibilitaIva"),
+      regimeFiscale: str(formData, "regimeFiscale"),
+      pec: str(formData, "pec"),
+      codiceDestinatario: str(formData, "codiceDestinatario") ?? "0000000",
+      codEori: str(formData, "codEori"),
+      fatturaPA: boolCheckbox(formData, "fatturaPA"),
+      senzaCigCup: boolCheckbox(formData, "senzaCigCup"),
+      cessioneCredito: boolCheckbox(formData, "cessioneCredito"),
+      soggettoRitenuta: boolCheckbox(formData, "soggettoRitenuta"),
+      addebitoSpese: boolCheckbox(formData, "addebitoSpese"),
+      bolloInFattura: boolCheckbox(formData, "bolloInFattura"),
+      addebitoBollo: boolCheckbox(formData, "addebitoBollo"),
+      importoBollo: flt(formData, "importoBollo") ?? 0,
+    },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+export async function aggiornaClienteNote(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.cliente.update({
+    where: { id },
+    data: { noteLibere: str(formData, "noteLibere") },
+  });
+  revalidatePath(`/clienti/${id}`);
+}
+
+// --- Referenti ---
+
+export async function creaReferente(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  const nome = str(formData, "nome");
+  if (!clienteId || !nome) return;
+  await prisma.referente.create({
+    data: {
+      clienteId,
+      nome,
+      cognome: str(formData, "cognome"),
+      ruolo: str(formData, "ruolo"),
+      telefono: str(formData, "telefono"),
+      email: str(formData, "email"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaReferente(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.referente.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+// --- Altri indirizzi ---
+
+export async function creaIndirizzoCliente(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  if (!clienteId) return;
+  await prisma.indirizzoCliente.create({
+    data: {
+      clienteId,
+      etichetta: str(formData, "etichetta") ?? "Altro indirizzo",
+      indirizzo: str(formData, "indirizzo"),
+      comune: str(formData, "comune"),
+      cap: str(formData, "cap"),
+      provincia: str(formData, "provincia"),
+      referente: str(formData, "referente"),
+      note: str(formData, "note"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaIndirizzoCliente(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.indirizzoCliente.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+// --- Correlazioni fra anagrafiche ---
+
+export async function creaCorrelazione(formData: FormData) {
+  const clienteId = str(formData, "clienteId");
+  const correlatoId = str(formData, "correlatoId");
+  if (!clienteId || !correlatoId || clienteId === correlatoId) return;
+  await prisma.clienteCorrelazione.create({
+    data: {
+      clienteId,
+      correlatoId,
+      tipologia: str(formData, "tipologia") ?? "Account di fatturazione",
+      principale: boolCheckbox(formData, "principale"),
+    },
+  });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
+export async function eliminaCorrelazione(formData: FormData) {
+  const id = str(formData, "id");
+  const clienteId = str(formData, "clienteId");
+  if (!id || !clienteId) return;
+  await prisma.clienteCorrelazione.delete({ where: { id } });
+  revalidatePath(`/clienti/${clienteId}`);
+}
+
 // Numero offerta progressivo per brand, resettato ogni anno solare (1, 2, 3... dal 1 gennaio).
 // Non e' garantito atomico sotto concorrenza estrema, accettabile per il volume di questo CRM.
 async function prossimoNumeroOfferta(brandId: string): Promise<number> {
@@ -113,6 +375,81 @@ async function prossimoNumeroOfferta(brandId: string): Promise<number> {
   return (ultimo?.numeroOfferta ?? 0) + 1;
 }
 
+// Validità standard di un'offerta: 15 giorni dalla creazione (modificabile a mano dalla pagina preventivo).
+const GIORNI_VALIDITA_OFFERTA = 15;
+function scadenzaDefault(): Date {
+  const d = new Date();
+  d.setDate(d.getDate() + GIORNI_VALIDITA_OFFERTA);
+  return d;
+}
+
+// Archivia in automatico le offerte ancora APERTE la cui scadenza è passata.
+// Le offerte senza scadenza (create prima di questa funzione) non vengono toccate.
+export async function archiviaOfferteScadute() {
+  await prisma.preventivo.updateMany({
+    where: { archiviato: false, stato: "APERTO", scadenza: { lt: new Date() } },
+    data: { archiviato: true },
+  });
+}
+
+export async function archiviaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const p = await prisma.preventivo.update({ where: { id }, data: { archiviato: true } });
+  revalidatePath("/preventivi");
+  revalidatePath(`/clienti/${p.clienteId}`);
+  revalidatePath(`/commerciali/${p.commercialeId}`);
+  redirect("/preventivi");
+}
+
+// Ripristina un'offerta archiviata; se la scadenza è già passata la riporta a 15 giorni da oggi
+// (altrimenti verrebbe riarchiviata subito).
+export async function ripristinaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const orig = await prisma.preventivo.findUnique({ where: { id } });
+  if (!orig) return;
+  const scaduta = orig.scadenza && orig.scadenza < new Date();
+  await prisma.preventivo.update({
+    where: { id },
+    data: { archiviato: false, ...(scaduta ? { scadenza: scadenzaDefault() } : {}) },
+  });
+  revalidatePath("/preventivi");
+  revalidatePath(`/preventivi/${id}`);
+}
+
+export async function aggiornaScadenzaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const s = str(formData, "scadenza");
+  await prisma.preventivo.update({ where: { id }, data: { scadenza: s ? new Date(s) : null } });
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath("/preventivi");
+}
+
+// Eliminazione definitiva: righe, optional, sezioni e promemoria vanno via con l'offerta.
+// Non consentita se esiste già un progetto/commessa collegato (offerta accettata e lavorata): in quel caso archiviare.
+export async function eliminaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const p = await prisma.preventivo.findUnique({ where: { id }, include: { progetto: true, commessa: true } });
+  if (!p) return;
+  if (p.progetto || p.commessa) {
+    redirect(`/preventivi/${id}?errore=${encodeURIComponent("Offerta con commessa/progetto collegato: non eliminabile, usa Archivia.")}`);
+  }
+  await prisma.$transaction([
+    prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: id } } }),
+    prisma.rigaPreventivo.deleteMany({ where: { preventivoId: id } }),
+    prisma.sezionePreventivo.deleteMany({ where: { preventivoId: id } }),
+    prisma.promemoriaInviato.deleteMany({ where: { preventivoId: id } }),
+    prisma.preventivo.delete({ where: { id } }),
+  ]);
+  revalidatePath("/preventivi");
+  revalidatePath(`/clienti/${p.clienteId}`);
+  revalidatePath(`/commerciali/${p.commercialeId}`);
+  redirect("/preventivi");
+}
+
 export async function creaPreventivo(formData: FormData) {
   const clienteId = str(formData, "clienteId");
   const brandId = str(formData, "brandId");
@@ -124,7 +461,7 @@ export async function creaPreventivo(formData: FormData) {
   const numeroOfferta = await prossimoNumeroOfferta(brandId);
 
   const preventivo = await prisma.preventivo.create({
-    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta },
+    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta, scadenza: scadenzaDefault() },
   });
   revalidatePath("/preventivi");
   revalidatePath("/");
@@ -132,9 +469,106 @@ export async function creaPreventivo(formData: FormData) {
   redirect(`/preventivi/${preventivo.id}`);
 }
 
+
+// Duplica un'intera offerta con data di creazione odierna e nuovo numero offerta progressivo:
+// copia sezioni, righe e optional, riparte da stato APERTO. L'offerta compare sotto il profilo
+// del commerciale che la duplica (utente loggato, altrimenti quello dell'offerta originale).
+export async function duplicaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const orig = await prisma.preventivo.findUnique({
+    where: { id },
+    include: { sezioni: true, righe: { include: { optionali: true } } },
+  });
+  if (!orig) return;
+  const utente = await getCurrentUser().catch(() => null);
+  const commercialeId = utente?.id ?? orig.commercialeId;
+  const numeroOfferta = await prossimoNumeroOfferta(orig.brandId);
+
+  const nuovo = await prisma.preventivo.create({
+    data: {
+      clienteId: orig.clienteId,
+      brandId: orig.brandId,
+      commercialeId,
+      stato: "APERTO",
+      numeroOfferta,
+      aliquotaIva: orig.aliquotaIva,
+      oggetto: orig.oggetto,
+      scontoPercentuale: orig.scontoPercentuale,
+      prezzoManualeAttivo: orig.prezzoManualeAttivo,
+      prezzoManualeTotale: orig.prezzoManualeTotale,
+      condizioniPagamento: orig.condizioniPagamento,
+      condizioniConsegna: orig.condizioniConsegna,
+      immagineCopertinaUrl: orig.immagineCopertinaUrl,
+      duplicatoDaId: orig.id,
+      scadenza: scadenzaDefault(),
+    },
+  });
+
+  const mappaSezioni = new Map<string, string>();
+  for (const sez of orig.sezioni) {
+    const n = await prisma.sezionePreventivo.create({
+      data: { preventivoId: nuovo.id, nome: sez.nome, ordine: sez.ordine },
+    });
+    mappaSezioni.set(sez.id, n.id);
+  }
+  for (const r of orig.righe) {
+    const nr = await prisma.rigaPreventivo.create({
+      data: {
+        preventivoId: nuovo.id,
+        prodottoId: r.prodottoId,
+        testoLibero: r.testoLibero,
+        quantita: r.quantita,
+        prezzoUnitario: r.prezzoUnitario,
+        optionalDescrizione: r.optionalDescrizione,
+        optionalPrezzo: r.optionalPrezzo,
+        mostraDescrizione: r.mostraDescrizione,
+        misuraLarghezza: r.misuraLarghezza,
+        misuraAltezza: r.misuraAltezza,
+        descrizionePersonalizzata: r.descrizionePersonalizzata,
+        ordine: r.ordine,
+        sezioneId: r.sezioneId ? mappaSezioni.get(r.sezioneId) ?? null : null,
+      },
+    });
+    if (r.optionali.length > 0) {
+      await prisma.rigaOptional.createMany({
+        data: r.optionali.map((o) => ({
+          rigaId: nr.id,
+          optionalId: o.optionalId,
+          quantita: o.quantita,
+          prezzoUnitario: o.prezzoUnitario,
+          nota: o.nota,
+        })),
+      });
+    }
+  }
+  await ricalcolaTotali(nuovo.id);
+  revalidatePath("/preventivi");
+  revalidatePath("/");
+  revalidatePath(`/clienti/${orig.clienteId}`);
+  revalidatePath(`/commerciali/${commercialeId}`);
+  redirect(`/preventivi/${nuovo.id}`);
+}
+
 // totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
 // l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
+// Se e' attivo il "prezzo manuale" (vedi aggiornaPrezzoManuale), il calcolo dalle righe
+// viene del tutto bypassato: totaleNetto/totaleIva si ricavano a ritroso dal totale finale
+// scritto a mano e dall'aliquota IVA corrente, ignorando righe e scontoPercentuale.
 async function ricalcolaTotali(preventivoId: string) {
+  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
+  if (!preventivoAttuale) return;
+
+  if (preventivoAttuale.prezzoManualeAttivo && preventivoAttuale.prezzoManualeTotale != null) {
+    const totaleManuale = preventivoAttuale.prezzoManualeTotale;
+    const totaleNetto = totaleManuale / (1 + preventivoAttuale.aliquotaIva / 100);
+    await prisma.preventivo.update({
+      where: { id: preventivoId },
+      data: { totaleNetto, totaleIva: totaleManuale - totaleNetto },
+    });
+    return;
+  }
+
   const righe = await prisma.rigaPreventivo.findMany({
     where: { preventivoId },
     include: { optionali: true },
@@ -143,8 +577,7 @@ async function ricalcolaTotali(preventivoId: string) {
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
     return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   }, 0);
-  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
-  const sconto = preventivoAttuale?.scontoPercentuale ?? 0;
+  const sconto = preventivoAttuale.scontoPercentuale ?? 0;
   const totaleNetto = imponibileLordo * (1 - sconto / 100);
   const preventivo = await prisma.preventivo.update({
     where: { id: preventivoId },
@@ -215,6 +648,43 @@ export async function aggiornaIva(formData: FormData) {
   await prisma.preventivo.update({
     where: { id },
     data: { aliquotaIva },
+  });
+  await ricalcolaTotali(id);
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+}
+
+// Prezzo manuale: bypassa il calcolo automatico (righe - sconto%) e permette di scrivere
+// direttamente il totale finale concordato (IVA inclusa) — utile quando si vuole imporre
+// una cifra tonda concordata a voce senza che il cliente veda in stampa la percentuale di
+// sconto applicata. Quando attivo, la stampa mostra solo un imponibile+IVA "puliti"
+// ricavati a ritroso da questa cifra, indistinguibili da un preventivo calcolato normalmente.
+export async function aggiornaPrezzoManuale(formData: FormData) {
+  const id = str(formData, "id");
+  if (!id) return;
+  const attivo = formData.get("prezzoManualeAttivo") === "on";
+  const totaleStr = str(formData, "prezzoManualeTotale");
+  const preset = str(formData, "aliquotaPreset");
+  const customStr = str(formData, "aliquotaCustom");
+
+  let aliquotaIva: number;
+  if (preset === "ALTRO") {
+    const custom = customStr ? parseFloat(customStr.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(custom) ? Math.max(0, Math.min(100, custom)) : 22;
+  } else {
+    const val = preset ? parseFloat(preset.replace(",", ".")) : NaN;
+    aliquotaIva = Number.isFinite(val) ? val : 22;
+  }
+
+  const totale = totaleStr ? parseFloat(totaleStr.replace(",", ".")) : NaN;
+
+  await prisma.preventivo.update({
+    where: { id },
+    data: {
+      prezzoManualeAttivo: attivo,
+      prezzoManualeTotale: attivo && Number.isFinite(totale) ? totale : null,
+      aliquotaIva,
+    },
   });
   await ricalcolaTotali(id);
   revalidatePath(`/preventivi/${id}`);
@@ -430,7 +900,11 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
 
   const larghezza = parseFloat(larghezzaStr.replace(",", "."));
   const altezza = parseFloat(altezzaStr.replace(",", "."));
-  if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || altezza <= 0) {
+  // Profili sfusi a metraggio (COMPSFUSI Profilo L/M/S, Piantone): listino
+  // monodimensionale, altezza/sporgenza sempre 0 a DB — vedi stessa nota in
+  // SelettoreProdotto.tsx (controllaMisure).
+  const altezzaNonUsata = tipologia.startsWith("COMPSFUSI_");
+  if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
     redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
   }
 
@@ -482,7 +956,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
     );
   }
 
-  await prisma.rigaPreventivo.create({
+  const nuovaRiga = await prisma.rigaPreventivo.create({
     data: {
       preventivoId,
       prodottoId: prodotto!.id,
@@ -492,6 +966,55 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
       misuraAltezza: altezza,
     },
   });
+
+  // Blindati anta singola (CL3/CL4): il prezzo del portoncino è fisso per tutte le
+  // misure standard (80/85/90 x 210/220cm) — se la misura richiesta esce da questo
+  // standard va applicata la maggiorazione "Fuori Misura" corrispondente, che prima
+  // andava aggiunta a mano (facile da dimenticare, come segnalato dall'utente: "un
+  // 100 di larghezza non costa come uno standard"). Qui viene calcolata e agganciata
+  // automaticamente come riga Optional distinta, visibile/rimovibile come le altre.
+  // Le varianti a due ante (DUEANTE_STD/SIMMETRICA) restano manuali: la maggiorazione
+  // lì va valutata "per ogni anta" e la larghezza dell'antino non è nemmeno tracciata
+  // separatamente nel modello dati attuale, quindi un calcolo automatico rischierebbe
+  // di essere sbagliato — resta da selezionare a mano dalla tendina "Optional Blindato".
+  if (tipologia === "BLINDATI_CL3" || tipologia === "BLINDATI_CL4") {
+    const L = Math.round(larghezza);
+    const H = Math.round(altezza);
+    const larghezzaStd = L === 80 || L === 85 || L === 90;
+    const altezzaStd = H === 210 || H === 220;
+    let nomeMaggiorazione: string | null = null;
+    if (!larghezzaStd && !altezzaStd) {
+      const fasciaL = L <= 100 ? "50-100" : "101-110";
+      const fasciaH = H <= 230 ? "180-230" : "231-250";
+      nomeMaggiorazione =
+        fasciaL === "50-100" && fasciaH === "180-230"
+          ? "Fuori misura L e H (L 50-100cm, H 180-230cm)"
+          : fasciaL === "50-100" && fasciaH === "231-250"
+          ? "Fuori misura L e H (L 50-100cm, H 231-250cm)"
+          : "Fuori misura L e H (L 101-110cm, H 180-250cm)";
+    } else if (!larghezzaStd) {
+      nomeMaggiorazione = L <= 100 ? "Fuori misura in Larghezza da 50 a 100 cm" : "Fuori misura in Larghezza da 101 a 110 cm";
+    } else if (!altezzaStd) {
+      nomeMaggiorazione = H <= 230 ? "Fuori misura in Altezza da 180 a 230 cm" : "Fuori misura in Altezza da 231 a 250 cm";
+    }
+    if (nomeMaggiorazione) {
+      const optionalMaggiorazione = await prisma.optional.findFirst({
+        where: { brandId, categoria: "Fuori Misura", nome: nomeMaggiorazione, listino: "BLINDATI_SINGOLA" },
+      });
+      if (optionalMaggiorazione) {
+        await prisma.rigaOptional.create({
+          data: {
+            rigaId: nuovaRiga.id,
+            optionalId: optionalMaggiorazione.id,
+            quantita: 1,
+            prezzoUnitario: optionalMaggiorazione.valore,
+            nota: "applicata automaticamente — misura richiesta fuori standard",
+          },
+        });
+      }
+    }
+  }
+
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
@@ -514,6 +1037,160 @@ export async function rimuoviRigaPreventivo(formData: FormData) {
   if (!id || !preventivoId) return;
   await prisma.rigaOptional.deleteMany({ where: { rigaId: id } });
   await prisma.rigaPreventivo.delete({ where: { id } });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+// Modifica una riga preventivo già aggiunta (l'utente aveva solo "cancella e rifai" —
+// vedi richiesta: poter correggere una misura sbagliata senza eliminare la riga).
+// Se la riga ha una misura reale (aggiunta "a misura", griglia o formula), cambiando
+// larghezza/altezza il prezzo unitario viene ricalcolato da zero con la stessa identica
+// logica usata in fase di aggiunta (trovaFasciaPrezzo / calcolaPrezzoAFormula), cosi'
+// non resta mai un prezzo non coerente con la nuova misura. Se invece la riga non ha
+// misura (prodotto a prezzo fisso da listino, es. Blindati/Cancelli/Solaris) si puo'
+// aggiornare solo la quantita' e, volendo, il prezzo unitario scritto a mano.
+// Nota Blindati: l'eventuale maggiorazione "Fuori Misura" agganciata come optional alla
+// creazione della riga NON viene ricalcolata automaticamente qui — se la nuova misura
+// cambia fascia (standard/fuori misura) va controllata/aggiornata a mano tra gli optional
+// della riga, come già succede oggi per le altre modifiche manuali agli optional.
+// Duplica una riga preventivo (prodotto + optionali agganciati) per velocizzare
+// l'inserimento di articoli identici — vedi richiesta: "un pulsante duplica così
+// è anche più veloce l'inserimento di articoli uguali". La copia viene creata
+// subito dopo l'originale nello stesso ordinamento/sezione.
+export async function duplicaRigaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const riga = await prisma.rigaPreventivo.findUnique({
+    where: { id },
+    include: { optionali: true },
+  });
+  if (!riga) return;
+
+  const nuovaRiga = await prisma.rigaPreventivo.create({
+    data: {
+      preventivoId: riga.preventivoId,
+      prodottoId: riga.prodottoId,
+      testoLibero: riga.testoLibero,
+      quantita: riga.quantita,
+      prezzoUnitario: riga.prezzoUnitario,
+      optionalDescrizione: riga.optionalDescrizione,
+      optionalPrezzo: riga.optionalPrezzo,
+      mostraDescrizione: riga.mostraDescrizione,
+      misuraLarghezza: riga.misuraLarghezza,
+      misuraAltezza: riga.misuraAltezza,
+      descrizionePersonalizzata: riga.descrizionePersonalizzata,
+      ordine: riga.ordine,
+      sezioneId: riga.sezioneId,
+    },
+  });
+
+  if (riga.optionali.length > 0) {
+    await prisma.rigaOptional.createMany({
+      data: riga.optionali.map((o) => ({
+        rigaId: nuovaRiga.id,
+        optionalId: o.optionalId,
+        quantita: o.quantita,
+        prezzoUnitario: o.prezzoUnitario,
+        nota: o.nota,
+      })),
+    });
+  }
+
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function modificaRigaPreventivo(formData: FormData) {
+  const id = str(formData, "id");
+  const preventivoId = str(formData, "preventivoId");
+  if (!id || !preventivoId) return;
+
+  const riga = await prisma.rigaPreventivo.findUnique({
+    where: { id },
+    include: { prodotto: true },
+  });
+  if (!riga || !riga.prodotto) return;
+
+  const quantitaStr = str(formData, "quantita");
+  const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : riga.quantita;
+
+  const larghezzaStr = str(formData, "larghezza");
+  const altezzaStr = str(formData, "altezza");
+
+  if (riga.misuraLarghezza != null && riga.misuraAltezza != null && larghezzaStr && altezzaStr) {
+    const larghezza = parseFloat(larghezzaStr.replace(",", "."));
+    const altezza = parseFloat(altezzaStr.replace(",", "."));
+    const brandId = riga.prodotto.brandId;
+    const tipologia = riga.prodotto.tipologia;
+    // Profili sfusi a metraggio: vedi nota in aggiungiRigaPreventivoPerMisura.
+    const altezzaNonUsata = tipologia.startsWith("COMPSFUSI_");
+    if (!Number.isFinite(larghezza) || !Number.isFinite(altezza) || larghezza <= 0 || (!altezzaNonUsata && altezza <= 0)) {
+      redirect(`/preventivi/${preventivoId}?errore=${encodeURIComponent("Misure non valide")}`);
+    }
+    const modello = await prisma.modelloProdotto.findUnique({
+      where: { brandId_tipologia: { brandId, tipologia } },
+    });
+
+    if (modello && modello.modalitaCalcolo !== "GRIGLIA") {
+      const esito = await calcolaPrezzoAFormula({
+        brandId,
+        tipologia,
+        modalitaCalcolo: modello.modalitaCalcolo,
+        parametriCalcolo: modello.parametriCalcolo,
+        larghezzaCm: larghezza,
+        altezzaCm: altezza,
+      });
+      if (!esito) {
+        redirect(
+          `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+            `Tariffa non disponibile per ${tipologia} a ${larghezza}×${altezza} — verificare il listino`
+          )}`
+        );
+      }
+      await prisma.rigaPreventivo.update({
+        where: { id },
+        data: {
+          prodottoId: esito!.prodottoRiferimentoId,
+          quantita,
+          prezzoUnitario: esito!.prezzoUnitario,
+          misuraLarghezza: larghezza,
+          misuraAltezza: altezza,
+        },
+      });
+    } else {
+      const prodotto = await trovaFasciaPrezzo({ brandId, tipologia, larghezza, altezza });
+      if (!prodotto) {
+        redirect(
+          `/preventivi/${preventivoId}?errore=${encodeURIComponent(
+            `Nessuna fascia di prezzo per ${tipologia} a ${larghezza}×${altezza} — misura fuori listino`
+          )}`
+        );
+      }
+      await prisma.rigaPreventivo.update({
+        where: { id },
+        data: {
+          prodottoId: prodotto!.id,
+          quantita,
+          prezzoUnitario: prodotto!.prezzoBase,
+          misuraLarghezza: larghezza,
+          misuraAltezza: altezza,
+        },
+      });
+    }
+  } else {
+    const prezzoManualeStr = str(formData, "prezzoUnitarioManuale");
+    const prezzoManuale = prezzoManualeStr ? parseFloat(prezzoManualeStr.replace(",", ".")) : NaN;
+    await prisma.rigaPreventivo.update({
+      where: { id },
+      data: {
+        quantita,
+        prezzoUnitario: Number.isFinite(prezzoManuale) ? prezzoManuale : riga.prezzoUnitario,
+      },
+    });
+  }
+
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

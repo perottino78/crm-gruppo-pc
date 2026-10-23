@@ -1,0 +1,698 @@
+[
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto fino a 20 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 21 a 30 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 31 a 40 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 300,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 41 a 50 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 350,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 51 a 60 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 400,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 61 a 70 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 450,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 71 a 80 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 500,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 81 a 90 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 550,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_VETRATE_PANORAMICHE",
+    "colore": "Rilievo Vetrate Panoramiche/Pacchetto da 91 a 100 mt²",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 600,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Rilievo Pergotende e Bioclimatiche - 1a campata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Rilievo Pergotende e Bioclimatiche - ogni campata aggiuntiva",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_PERGOLE_VETRATE",
+    "colore": "Trasferta rilievo oltre 50 km (rimborso al km)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.35,
+    "descrizione": "Rilievi entro 50 km compresi nella tariffa base"
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_PERGOLE_VETRATE",
+    "colore": "Pernottamento tecnico (1 persona)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Posa Bioclimatica Monocampata (1 motore) fino a 20 mt2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 800,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Posa Bioclimatica Monocampata - supplemento oltre 20 mt2",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 45,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Posa Pergotenda 1 Campata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 600,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Posa Pergotenda 2 Campate",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Posa Pergotenda 3 Campate",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 1400,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Facchinaggio al piano",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 70,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Uscita a vuoto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 400,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Ritorno per materiale mancante",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_PERGOTENDE_E_BIOCLIMATICHE",
+    "colore": "Trasferta oltre 100 km (rimborso al km)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.35,
+    "descrizione": "Trasferta entro 100 km inclusa"
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA",
+    "colore": "Posa vetrate scorrevoli (parallele o a pacchetto)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 55,
+    "descrizione": "Minimo fatturabile 12 mq"
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA",
+    "colore": "Supplemento vetrate curve",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 30,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_VETRATE_VEPA",
+    "colore": "Posa timpani",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 55,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Allargamento davanzale - costo fisso",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Allargamento davanzale - al metro lineare",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 20,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Rifiniture coprifili",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 5,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Smontaggio e smaltimento infissi esistenti",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 25,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Smontaggio tendaggi e smaltimento (o spostamento)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 110,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Scavo pavimento",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 55,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Montaggio tappi PMMA",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 20,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COMPLEMENTI_E_LAVORAZIONI_EXTRA_VETRATE",
+    "colore": "Facchinaggio",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 70,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_LOGISTICHE_VETRATE",
+    "colore": "Uscita a vuoto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 400,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_LOGISTICHE_VETRATE",
+    "colore": "Ritorno per materiale mancante",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_LOGISTICHE_VETRATE",
+    "colore": "Trasferta oltre 100 km (rimborso al km)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.35,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI",
+    "colore": "Rilievo Serramenti e affini fino a 10 pezzi",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI",
+    "colore": "Rilievo Serramenti e affini da 10 a 20 pezzi",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_RILIEVO_SERRAMENTI_E_AFFINI",
+    "colore": "Rilievo Serramenti e affini oltre 20 pezzi",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_SERRAMENTI",
+    "colore": "Trasferta rilievo oltre 50 km (rimborso al km)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.35,
+    "descrizione": "Rilievi entro 50 km compresi nella tariffa base"
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_TRASFERTA_RILIEVI_SERRAMENTI",
+    "colore": "Pernottamento tecnico (1 persona)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE",
+    "colore": "Posa finestra 1/2 ante",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 120,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE",
+    "colore": "Posa finestre a 3 ante e porta finestra",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 140,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_FINESTRE_E_PORTE_FINESTRE",
+    "colore": "Posa porta traslante scorrevole",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa porta interna battente",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 80,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa porta interna cardine",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 90,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa porta scorrevole interno vano",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 120,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa porta scorrevole esterno vano",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 140,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa stipite di passaggio",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_INTERNE",
+    "colore": "Posa porta scorrevole esterna in cristallo",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTONCINI",
+    "colore": "Posa portoncino ingresso",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
+    "colore": "Posa porta blindata (tassello chimico)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 450,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
+    "colore": "Adeguamento vano porta blindata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
+    "colore": "Supplemento sovraluce porta",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
+    "colore": "Sostituzione pannello porta blindata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PORTE_BLINDATE",
+    "colore": "Modifica imbotte porta blindata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TAPPARELLE",
+    "colore": "Posa telo tapparella",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TAPPARELLE",
+    "colore": "Posa tapparelle + kit manuale",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 80,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TAPPARELLE",
+    "colore": "Posa tapparelle + kit motorizzato",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERSIANE",
+    "colore": "Posa persiana a telaio",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 70,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PERSIANE",
+    "colore": "Posa persiana a cardine/libro",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_INFERRIATE",
+    "colore": "Posa inferriata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 110,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_ZANZARIERE",
+    "colore": "Posa zanzariera",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_PENSILINE",
+    "colore": "Posa pensilina in policarbonato",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_ACCESSORI",
+    "colore": "Posa cassonetto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 70,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_ACCESSORI",
+    "colore": "Posa celino",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 40,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_ACCESSORI",
+    "colore": "Coibentazione celino",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 40,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_SERRAMENTI",
+    "colore": "Facchinaggio al piano",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 70,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_SERRAMENTI",
+    "colore": "Uscita a vuoto",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 400,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_SERRAMENTI",
+    "colore": "Ritorno per materiale mancante",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 150,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_NOTE_POSA_SERRAMENTI",
+    "colore": "Trasferta oltre 50 km (rimborso al km)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.35,
+    "descrizione": "Trasferta entro 50 km inclusa"
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE",
+    "colore": "Posa tenda da sole fino a 3 mt (altezza max di posa 3 mt)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE",
+    "colore": "Posa tenda da sole oltre 3 mt (altezza max di posa 3 mt)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 250,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE",
+    "colore": "Motorizzazione tenda (da aggiungere al costo posa)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_POSA_IN_OPERA_TENDE_DA_SOLE",
+    "colore": "Sostituzione telo tenda - su preventivo",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Prezzo da concordare caso per caso, modificare manualmente"
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Trasporto al piano dal 3 in poi (oltre 4 pezzi) - autocarrata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0,
+    "descrizione": "Prezzo a preventivo, da concordare e modificare manualmente"
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Trasporto al piano dal 3 in poi (meno di 4 pezzi) - forfait",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 200,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Supplemento al km oltre i 30 km",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 0.6,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Smaltimento porta blindata",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 15,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Smaltimento porta interna",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 10,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Smaltimento infissi",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 15,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Smuratura",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 45,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Ore in economia tecnico (da pattuire con la proprieta)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 35,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Assistenza in Piemonte (+IVA)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 50,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_COSTI_AGGIUNTIVI_E_SERVIZI_ACCESSORI",
+    "colore": "Assistenza fuori Piemonte (+IVA)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 80,
+    "descrizione": null
+  },
+  {
+    "tipologia": "WSPOSA_SPESE_MAGAZZINO",
+    "colore": "Spese per scarico e carico presso il magazzino Work&Service",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": "Per ogni commessa che non dovra' rimanere presso i magazzini oltre 30 gg dallo scarico"
+  },
+  {
+    "tipologia": "WSPOSA_SPESE_MAGAZZINO",
+    "colore": "Fermo deposito (oltre 30 gg dallo scarico)",
+    "altezzaMm": 0,
+    "larghezzaMm": 0,
+    "prezzoBase": 100,
+    "descrizione": null
+  }
+]

@@ -1,0 +1,18 @@
+import { writeFileSync } from "node:fs";
+import { buildDownstreamPayload, eventIdFor } from "../../src/lib/meta/service";
+import { signInternal } from "../../src/lib/meta/signature";
+import type { DeliveryRow } from "../../src/lib/meta/types";
+
+const base: DeliveryRow = { id: "x", origine: "META", leadgenId: "555000111222333", pageId: "1039357632750262", formId: "1280816026986939", adId: "120200000000001", adgroupId: "120200000000002", createdTimeMeta: null, stato: "PROCESSED", tentativi: 1, erroreCodice: null, retriabile: true, nextRetryAt: null, eventJson: JSON.stringify({ leadgenId: "555000111222333", pageId: "1039357632750262", formId: "1280816026986939", adId: "120200000000001", adgroupId: "120200000000002", createdTime: 1760436000 }), leadJson: JSON.stringify({ id: "555000111222333", created_time: "2026-10-14T10:00:00+0000", form_id: "1280816026986939", ad_id: "120200000000001", campaign_name: "Catalogo autunno (FITTIZIO)", field_data: [{ name: "full_name", values: ["Mario Rossi"] }, { name: "phone_number", values: ["+393331112233"] }, { name: "email", values: ["mario.rossi@example.com"] }, { name: "citta", values: ["Torino"] }] }), leadId: null, receivedAt: new Date("2026-10-14T10:00:05.123Z"), updatedAt: new Date("2026-10-14T10:00:05.123Z") };
+const minimal: DeliveryRow = { ...base, leadgenId: "555000111222334", adId: null, adgroupId: null, eventJson: JSON.stringify({ leadgenId: "555000111222334", pageId: "1039357632750262", formId: "1280816026986939" }), leadJson: JSON.stringify({ id: "555000111222334", form_id: "1280816026986939", field_data: [{ name: "email", values: ["solo.email@example.com"] }] }) };
+const noLead: DeliveryRow = { ...minimal, leadgenId: "555000111222335", eventJson: JSON.stringify({ leadgenId: "555000111222335", pageId: "1039357632750262", formId: "1280816026986939" }), leadJson: null };
+
+const SECRET = "TEST_ONLY_secret_0123456789abcdef0123456789abcdef"; // FITTIZIO
+const TS = "1760436005";
+const full = buildDownstreamPayload(base, "live");
+writeFileSync("docs/contract/example-full.json", full + "\n");
+writeFileSync("docs/contract/example-minimal-nulls.json", buildDownstreamPayload(minimal, "shadow") + "\n");
+writeFileSync("docs/contract/example-no-lead.json", buildDownstreamPayload(noLead, "shadow") + "\n");
+const vec = { secret: SECRET, timestamp: TS, signed_string: `${TS}.<corpo grezzo>`, raw_body_file: "example-full.json (senza il newline finale)", raw_body: full, headers: { "X-GPC-Signature": signInternal(SECRET, TS, full), "X-GPC-Timestamp": TS, "X-GPC-Event-Id": eventIdFor(base.leadgenId), "X-GPC-Schema-Version": "1", "X-GPC-Mode": "live", "X-GPC-Attempt": "1" } };
+writeFileSync("docs/contract/test-vector.json", JSON.stringify(vec, null, 2) + "\n");
+console.log(vec.headers["X-GPC-Signature"]);
