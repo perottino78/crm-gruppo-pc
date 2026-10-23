@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solaris Studio — progetta il tuo fotovoltaico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF3F9; --surface:#FFFFFF; --surface2:#F6F9FD; --ink:#13233D; --muted:#5B6B82; --line:#D5DEEA;
+  --sun:#F2A71B; --sunInk:#7A4A00; --sunSoft:#FDF1D8; --panel:#1D4F91; --panelSoft:#E3ECF8;
+  --save:#1F8A5B; --saveSoft:#DDF2E7; --cost:#C8553D; --costSoft:#F8E3DE;
+  --btnShadow:#B9C6D8;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Figtree", "Helvetica Neue", system-ui, sans-serif;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1626; --surface:#15223A; --surface2:#1A2944; --ink:#E8EEF7; --muted:#93A3BB; --line:#26365A;
+    --sun:#F5B53A; --sunInk:#FFE2A6; --sunSoft:#3A2E14; --panel:#6B9BE0; --panelSoft:#1C3053;
+    --save:#43C08A; --saveSoft:#15382A; --cost:#E58A72; --costSoft:#3D2220; --btnShadow:#0A1120;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1626; --surface:#15223A; --surface2:#1A2944; --ink:#E8EEF7; --muted:#93A3BB; --line:#26365A;
+  --sun:#F5B53A; --sunInk:#FFE2A6; --sunSoft:#3A2E14; --panel:#6B9BE0; --panelSoft:#1C3053;
+  --save:#43C08A; --saveSoft:#15382A; --cost:#E58A72; --costSoft:#3D2220; --btnShadow:#0A1120;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.bar{display:flex;align-items:center;gap:20px;padding:12px 22px;max-width:1500px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;white-space:nowrap}
+.brand small{display:block;font-family:var(--body);font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
+.steps{display:flex;gap:6px;margin-left:auto;background:var(--surface2);border:1px solid var(--line);border-radius:16px;padding:5px}
+.step{border:0;background:transparent;border-radius:12px;padding:9px 14px;font-weight:600;color:var(--muted);cursor:pointer;display:flex;gap:8px;align-items:center;min-height:44px}
+.step b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--line);color:var(--ink);font-size:13px}
+.step[aria-selected="true"]{background:var(--ink);color:var(--surface)}
+.step[aria-selected="true"] b{background:var(--sun);color:#3a2400}
+.viewtoggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);white-space:nowrap}
+.switch{position:relative;width:50px;height:30px;border-radius:30px;border:0;background:var(--line);cursor:pointer;flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch[aria-checked="true"]{background:var(--panel)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+
+.kpis{display:flex;gap:10px;padding:0 22px 12px;max-width:1500px;margin:0 auto;overflow-x:auto}
+.kpi{flex:1 0 150px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:8px 14px}
+.kpi span{display:block;font-size:12.5px;color:var(--muted)}
+.kpi strong{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi.save strong{color:var(--save)}
+.kpi.sunk strong{color:var(--sunInk)}
+
+/* ---------- layout ---------- */
+main{max-width:1500px;margin:0 auto;padding:18px 22px 40px}
+.split{display:grid;grid-template-columns:380px 1fr;gap:18px;min-height:calc(100vh - 200px)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:22px}
+.panel h2{font-family:var(--display);font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0}
+.panel p.lead{margin:-12px 0 0;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > label, .field > .lbl{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:10px}
+.field output{font-family:var(--display);font-weight:700;color:var(--panel);font-variant-numeric:tabular-nums}
+input[type=text], select{min-height:48px;border:1px solid var(--line);background:var(--surface2);border-radius:12px;padding:0 14px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:10px;background:linear-gradient(90deg,var(--sun) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range]::-moz-range-track{height:10px;border-radius:10px;background:linear-gradient(90deg,var(--sun) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-10px;border-radius:50%;background:var(--surface);border:3px solid var(--sun);box-shadow:0 3px 0 var(--btnShadow)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--surface);border:3px solid var(--sun)}
+.hint{font-size:13.5px;color:var(--muted);margin:0}
+
+/* tactile 3D buttons */
+.b3d{position:relative;border:0;cursor:pointer;border-radius:14px;min-height:48px;padding:0 16px;font-weight:700;
+  background:var(--surface2);color:var(--ink);box-shadow:0 5px 0 var(--btnShadow), inset 0 0 0 1px var(--line);
+  transition:transform .08s, box-shadow .08s;transform:translateY(-2px)}
+.b3d:active,.b3d.on:active{transform:translateY(3px);box-shadow:0 0 0 var(--btnShadow), inset 0 0 0 1px var(--line)}
+.b3d.on{background:var(--ink);color:var(--surface);box-shadow:0 5px 0 #5B6B82}
+.b3d.sun{background:var(--sun);color:#3a2400;box-shadow:0 5px 0 #B0740A}
+.b3d.go{background:var(--save);color:#fff;box-shadow:0 5px 0 #136542}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px}
+.stepper{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:12px}
+.stepper .b3d{font-size:28px;line-height:1;padding:0}
+.stepper .val{text-align:center;font-family:var(--display);font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.stepper .val small{display:block;font-family:var(--body);font-size:13px;font-weight:500;color:var(--muted)}
+
+/* climate zone strip */
+.zones{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.zones div{text-align:center;padding:8px 0;border-radius:10px;font-weight:700;font-size:15px;color:#fff}
+.zones div.dim{opacity:.28}
+.zinfo{background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14.5px}
+.zinfo strong{font-family:var(--display)}
+[hidden]{display:none!important}
+.billcam{border:2px dashed var(--sun);border-radius:18px;padding:14px;display:flex;gap:14px;align-items:center;background:var(--sunSoft)}
+.billcam img{width:60px;height:80px;object-fit:cover;border-radius:8px;flex:none}
+.billcam .t{flex:1;font-size:14.5px;line-height:1.35}
+.billcam .t b{display:block;font-family:var(--display);font-size:17px;margin-bottom:2px}
+.billcam label.b3d{display:inline-flex;align-items:center;flex:none}
+.fasce{display:flex;height:14px;border-radius:14px;overflow:hidden}
+.fasce i{display:block;height:100%}
+.payopt{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.payopt div{background:var(--surface2);border-radius:14px;padding:12px 14px;font-size:14px;color:var(--muted)}
+.payopt strong{display:block;font-family:var(--display);font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
+.addons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.addons .b3d{text-align:left;padding:10px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-weight:600}
+.addons .b3d small{font-weight:500;opacity:.8}
+.modeSw{position:absolute;right:16px;top:16px;z-index:5;display:flex;gap:6px;background:rgba(255,255,255,.92);border-radius:16px;padding:5px;box-shadow:0 6px 20px rgba(10,30,60,.15)}
+.modeSw button{border:0;border-radius:12px;min-height:42px;padding:0 14px;font-weight:700;background:transparent;color:#13233D;cursor:pointer}
+.modeSw button[aria-pressed="true"]{background:#13233D;color:#fff}
+#photoStage{position:absolute;inset:0;background:#1b2a4a;touch-action:none;z-index:3}
+#photoCanvas{width:100%;height:100%;display:block;cursor:crosshair}
+.photoEmpty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#E8EEF7;padding:30px;max-width:560px;margin:0 auto}
+.photoEmpty b{display:block;font-family:var(--display);font-size:28px;margin-bottom:8px;color:#fff}
+.photoEmpty label{margin-top:20px}
+.photoTip{position:absolute;left:16px;top:16px;max-width:min(420px,55%);pointer-events:none}
+.photobar{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:10px;background:rgba(255,255,255,.92);border-radius:18px;padding:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.photobar .b3d{background:#fff;color:#13233D;box-shadow:0 5px 0 #B9C6D8, inset 0 0 0 1px #D5DEEA}
+.photobar .b3d.sun,.photoEmpty .b3d.sun{background:#F2A71B;color:#3a2400;box-shadow:0 5px 0 #B0740A}
+.photobar label.b3d,.photoEmpty label.b3d{display:inline-flex;align-items:center}
+.stage.photo .overlay,.stage.photo .sunbar,.stage.photo .draghint{display:none}
+.mini{display:grid;grid-template-columns:48px 1fr 48px;gap:8px;align-items:center}
+.mini .b3d{padding:0;font-size:24px}
+.mini span{text-align:center;font-family:var(--display);font-size:26px;font-weight:800}
+.propPhoto{width:100%;border-radius:16px;margin-top:18px;display:block}
+.qgrid{display:flex;flex-direction:column;gap:14px}
+.q{display:flex;flex-direction:column;gap:6px}
+.q > span{font-size:14px;font-weight:600}
+.q .seg{gap:8px}
+.q .seg .b3d{min-height:42px;padding:0 6px;font-size:14px}
+.daychart svg{width:100%;height:auto;display:block}
+.check{border-radius:12px;padding:10px 12px;font-size:14px;font-weight:600}
+.check.ok{background:var(--saveSoft);color:var(--save)}
+.check.warn{background:var(--costSoft);color:var(--cost)}
+.newcomp{display:flex;flex-direction:column;gap:10px;border:2px dashed var(--line);border-radius:14px;padding:12px}
+.newcomp .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.newcomp input[type=text],.newcomp select{min-height:44px;border:1px solid var(--line);background:var(--surface2);border-radius:10px;padding:0 10px;width:100%}
+.linkrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.linkrow a.b3d{display:flex;align-items:center;justify-content:center;text-decoration:none}
+.viewSeg{display:flex;gap:4px;background:#fff;border-radius:14px;padding:4px;box-shadow:inset 0 0 0 1px #D5DEEA}
+.viewSeg button{border:0;border-radius:10px;min-height:40px;padding:0 12px;font-weight:700;background:transparent;color:#13233D;cursor:pointer}
+.viewSeg button[aria-pressed="true"]{background:#13233D;color:#fff}
+body:not(.comm) .commOnly{display:none!important}
+
+/* stage */
+.stage{position:relative;border-radius:22px;overflow:hidden;min-height:520px;background:#9fc3e6;touch-action:none}
+.stage canvas{display:block;width:100%;height:100%}
+.overlay{position:absolute;left:16px;top:16px;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.chip{background:rgba(255,255,255,.88);color:#13233D;border-radius:14px;padding:10px 14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(10,30,60,.15)}
+.chip span{display:block;font-size:12.5px;color:#5B6B82}
+.chip strong{font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums}
+.sunbar{position:absolute;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.9);color:#13233D;border-radius:18px;padding:10px 14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.sunbar .b3d{min-width:54px;background:#F2A71B;color:#3a2400;box-shadow:0 5px 0 #B0740A}
+.sunbar label{font-size:13px;color:#5B6B82;white-space:nowrap}
+.sunbar select{min-height:44px;background:#fff;color:#13233D;border-color:#D5DEEA}
+.sunbar input[type=range]{--line:#D5DEEA}
+.sunbar output{font-family:var(--display);font-weight:700;min-width:56px;font-variant-numeric:tabular-nums}
+.draghint{position:absolute;right:16px;top:76px;font-size:13px;color:#fff;background:rgba(19,35,61,.55);padding:6px 12px;border-radius:20px;pointer-events:none}
+
+/* compass dial */
+.dial{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center}
+.dial svg{width:150px;height:150px;touch-action:none;cursor:grab}
+.oriBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ---------- dashboard ---------- */
+.dash{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}
+.card h3{font-family:var(--display);font-size:22px;letter-spacing:-.01em;margin:0 0 4px}
+.card .sub{color:var(--muted);margin:0 0 16px;font-size:14.5px}
+.span12{grid-column:span 12}.span8{grid-column:span 8}.span7{grid-column:span 7}.span5{grid-column:span 5}.span4{grid-column:span 4}.span6{grid-column:span 6}
+
+.bills{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end}
+.bill{position:relative;background:var(--surface2);border:1px solid var(--line);border-radius:16px 16px 0 0;padding:20px 20px 30px;
+  -webkit-mask:radial-gradient(circle 9px at 50% 100%,transparent 98%,#000) 0 0/22px 100% repeat-x;
+          mask:radial-gradient(circle 9px at 50% 100%,transparent 98%,#000) 0 0/22px 100% repeat-x}
+.bill .who{font-weight:700}
+.bill .amt{font-family:var(--display);font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1;margin:14px 0 4px;font-variant-numeric:tabular-nums}
+.bill .per{color:var(--muted);font-size:14px}
+.bill .bar{height:12px;border-radius:12px;background:var(--line);margin-top:16px;padding:0;overflow:hidden}
+.bill .bar i{display:block;height:100%;border-radius:12px}
+.bill.today .amt{color:var(--cost)} .bill.today .bar i{background:var(--cost)}
+.bill.pv .amt{color:var(--panel)} .bill.pv .bar i{background:var(--panel)}
+.bill.batt{background:var(--saveSoft);border-color:transparent}
+.bill.batt .amt{color:var(--save)} .bill.batt .bar i{background:var(--save)}
+.bill .delta{margin-top:12px;font-weight:700;color:var(--save)}
+
+.chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.big{font-family:var(--display);font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.donutwrap{display:flex;align-items:center;gap:20px}
+.eco{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.eco div{background:var(--surface2);border-radius:16px;padding:16px}
+.eco strong{display:block;font-family:var(--display);font-size:32px;font-weight:800}
+
+/* proposta */
+.prop{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.lines{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.lines td{padding:12px 0;border-bottom:1px solid var(--line)}
+.lines td:last-child{text-align:right;font-weight:600}
+.lines tr.tot td{border-bottom:0;font-family:var(--display);font-size:24px;font-weight:800;padding-top:16px}
+.lines tr.neg td:last-child{color:var(--save)}
+.commercial{border:2px dashed var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.commercial[hidden]{display:none}
+.sig{width:100%;height:170px;border:1px solid var(--line);border-radius:14px;background:var(--surface2);touch-action:none;cursor:crosshair}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--surface);padding:14px 20px;border-radius:14px;font-weight:600;transition:transform .3s;z-index:40}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+section[hidden]{display:none}
+
+@media (max-width: 1100px){
+  .split{grid-template-columns:1fr}
+  .stage{min-height:460px}
+  .span8,.span7,.span5,.span4,.span6{grid-column:span 12}
+  .prop{grid-template-columns:1fr}
+  .steps .step span{display:none}
+}
+@media (max-width: 700px){
+  .bar{flex-wrap:wrap;gap:10px}
+  .steps{margin-left:0;width:100%;justify-content:space-between}
+  .bills{grid-template-columns:1fr}
+  .bill .amt{font-size:38px}
+  .sunbar{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="8" fill="#F2A71B"/><g stroke="#F2A71B" stroke-width="3" stroke-linecap="round"><path d="M17 2v4M17 28v4M2 17h4M28 17h4M6.4 6.4l2.8 2.8M24.8 24.8l2.8 2.8M6.4 27.6l2.8-2.8M24.8 9.2l2.8-2.8"/></g></svg>
+      <div>Solaris Studio<small>Gruppo P&amp;C · Rosta (TO)</small></div>
+    </div>
+    <nav class="steps" role="tablist" aria-label="Fasi della consulenza">
+      <button class="step" role="tab" data-step="1" aria-selected="true"><b>1</b><span>Casa e consumi</span></button>
+      <button class="step" role="tab" data-step="2" aria-selected="false"><b>2</b><span>Tetto e sole</span></button>
+      <button class="step" role="tab" data-step="3" aria-selected="false"><b>3</b><span>Risparmio</span></button>
+      <button class="step" role="tab" data-step="4" aria-selected="false"><b>4</b><span>Proposta</span></button>
+    </nav>
+    <div class="viewtoggle"><span>Vista commerciale</span><button class="switch" id="viewSw" role="switch" aria-checked="false" aria-label="Vista commerciale"></button></div>
+  </div>
+  <div class="kpis" aria-live="polite">
+    <div class="kpi"><span>Impianto</span><strong id="kKwp">–</strong></div>
+    <div class="kpi sunk"><span>Produzione annua</span><strong id="kProd">–</strong></div>
+    <div class="kpi save"><span>Risparmio il primo anno</span><strong id="kSave">–</strong></div>
+    <div class="kpi"><span>Rientro dell’investimento</span><strong id="kPay">–</strong></div>
+  </div>
+</header>
+
+<main>
+  <!-- ======== STEP 1 + 2 share the 3D stage ======== -->
+  <div class="split" id="designView">
+    <div>
+      <section class="panel" id="s1">
+        <h2>Partiamo da casa tua</h2>
+        <p class="lead">Dove si trova e quanta energia usate oggi.</p>
+        <div class="field"><label for="cliente">Nome del cliente</label><input type="text" id="cliente" placeholder="Es. Famiglia Rossi" autocomplete="off"></div>
+        <div class="field"><label for="city">Località</label><select id="city"></select></div>
+        <div class="field">
+          <label for="addr">Indirizzo della casa</label>
+          <input type="text" id="addr" placeholder="Es. Via Roma 10, Rosta" autocomplete="off">
+          <div class="linkrow">
+            <a class="b3d" id="gmaps" href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>
+            <a class="b3d" id="gearth" href="https://earth.google.com/web/" target="_blank" rel="noopener">Google Earth</a>
+          </div>
+          <p class="hint">Apri la vista satellitare, fai uno screenshot del tetto con il nord in alto e caricalo in “Foto del tetto”, vista dall’alto. Con “Misura distanza” di Maps prendi anche la larghezza della falda.</p>
+        </div>
+        <div class="field">
+          <div class="lbl">Zona climatica <output id="zoneOut">E</output></div>
+          <div class="zones" id="zones"></div>
+          <div class="zinfo" id="zinfo"></div>
+        </div>
+        <div class="billcam" id="billcam" hidden>
+          <img id="billImg" alt="Foto della bolletta" hidden>
+          <div class="t" id="billTxt"><b>Fotografa la bolletta</b>Leggo consumi, fasce F1/F2/F3 e prezzo in automatico.</div>
+          <label class="b3d sun" for="billFile">Scatta</label>
+          <input type="file" id="billFile" accept="image/*" hidden>
+        </div>
+        <div class="field">
+          <div class="lbl">Come conosciamo i consumi</div>
+          <div class="seg">
+            <button class="b3d on" data-billmode="kwh">Ho i kWh</button>
+            <button class="b3d" data-billmode="eur">Ho la bolletta in €</button>
+          </div>
+        </div>
+        <div class="field" id="kwhField"><label for="kwh">Consumo annuo <output id="kwhOut"></output></label><input type="range" id="kwh" min="1500" max="15000" step="100" value="3800"></div>
+        <div class="field" id="eurField" hidden><label for="eur">Spesa media mensile <output id="eurOut"></output></label><input type="range" id="eur" min="40" max="500" step="5" value="110"></div>
+        <div class="field"><label for="price">Costo dell’energia <output id="priceOut"></output></label><input type="range" id="price" min="0.18" max="0.45" step="0.01" value="0.30"><p class="hint">Valore tutto compreso in bolletta, al kWh.</p></div>
+        <div class="field" id="fasceBox" hidden>
+          <div class="lbl">Consumi per fascia oraria <output id="fasceOut"></output></div>
+          <div class="fasce" id="fasceBar"></div>
+          <p class="hint">F1 sono le ore di giorno dei feriali: più è alta, più energia del tetto usate subito.</p>
+        </div>
+        <div class="field">
+          <div class="lbl">Come vivete la casa <output id="qOut"></output></div>
+          <div class="qgrid" id="quiz"></div>
+          <div class="daychart" id="dayChart"></div>
+          <div class="legend" style="margin-top:0"><span><i style="background:var(--panel)"></i>Consumi della casa, kWh per ora</span><span><i style="background:var(--sun)"></i>Produzione del tetto</span></div>
+          <button class="b3d" id="useEst" hidden></button>
+        </div>
+        <div class="field" id="presField" hidden>
+          <div class="lbl">Quando siete in casa di giorno?</div>
+          <div class="seg">
+            <button class="b3d" data-presence="0">Quasi mai</button>
+            <button class="b3d on" data-presence="1">A volte</button>
+            <button class="b3d" data-presence="2">Quasi sempre</button>
+          </div>
+        </div>
+        <button class="b3d sun" data-goto="2">Disegna l’impianto</button>
+      </section>
+
+      <section class="panel" id="s2" hidden>
+        <h2>Il tuo tetto al sole</h2>
+        <p class="lead">Ruota la casa, scegli i pannelli, guarda il sole muoversi.</p>
+        <div class="field">
+          <div class="lbl">Orientamento della falda <output id="oriOut">Sud</output></div>
+          <div class="dial">
+            <svg id="dial" viewBox="-80 -80 160 160" role="slider" aria-label="Orientamento" tabindex="0">
+              <circle r="74" fill="var(--surface2)" stroke="var(--line)" stroke-width="2"/>
+              <path d="M-74 0 A74 74 0 0 0 74 0" fill="var(--sunSoft)"/>
+              <g font-family="Figtree" font-weight="700" font-size="14" text-anchor="middle" fill="var(--muted)">
+                <text y="-56">N</text><text y="66">S</text><text x="-60" y="5">E</text><text x="60" y="5">O</text>
+              </g>
+              <g id="needle"><line y1="0" y2="52" stroke="var(--sun)" stroke-width="7" stroke-linecap="round"/><circle cy="52" r="10" fill="var(--sun)"/><circle r="8" fill="var(--ink)"/></g>
+            </svg>
+            <div class="oriBtns">
+              <button class="b3d" data-ori="-90">Est</button><button class="b3d" data-ori="90">Ovest</button>
+              <button class="b3d" data-ori="-45">Sud-Est</button><button class="b3d" data-ori="45">Sud-Ovest</button>
+              <button class="b3d on" data-ori="0" style="grid-column:span 2">Sud pieno</button>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label for="tilt">Inclinazione del tetto <output id="tiltOut"></output></label><input type="range" id="tilt" min="5" max="45" step="1" value="28"></div>
+        <div class="field">
+          <div class="lbl">Componenti</div>
+          <label class="hint" for="panSel">Modulo fotovoltaico</label>
+          <select id="panSel"></select>
+          <label class="hint" for="invSel">Inverter</label>
+          <select id="invSel"></select>
+          <div class="check" id="invCheck"></div>
+          <button class="b3d commOnly" id="newCompBtn">+ Nuovo pannello o inverter</button>
+          <div class="newcomp commOnly" id="newComp" hidden>
+            <div class="two"><select id="ncType" aria-label="Tipo di componente"><option value="pan">Pannello</option><option value="inv">Inverter</option></select><input type="text" id="ncName" placeholder="Marca e modello"></div>
+            <div class="two"><input type="text" inputmode="decimal" id="ncPow" placeholder="Potenza: W pannello, kW inverter"><input type="text" inputmode="decimal" id="ncPrice" placeholder="Prezzo di vendita €"></div>
+            <div class="two"><input type="text" inputmode="decimal" id="ncCost" placeholder="Costo d’acquisto €"><input type="text" inputmode="decimal" id="ncDim" placeholder="Misure in m, es. 1,13 x 1,76"></div>
+            <label class="hint" hidden><input type="checkbox" id="ncHyb" checked> Inverter ibrido (accetta la batteria)</label>
+            <button class="b3d go" id="ncSave">Aggiungi al catalogo</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="lbl">Pannelli <output id="panLbl"></output></div>
+          <div class="stepper">
+            <button class="b3d" id="pMinus" aria-label="Togli un pannello">−</button>
+            <div class="val"><span id="pVal">12</span><small id="pMax">massimo 30 su questa falda</small></div>
+            <button class="b3d" id="pPlus" aria-label="Aggiungi un pannello">+</button>
+          </div>
+          <button class="b3d" id="pAuto">Dimensiona sui consumi</button>
+        </div>
+        <div class="field" id="photoGrid" hidden>
+          <div class="lbl">Pannelli sulla foto <output id="gridOut"></output></div>
+          <div class="seg">
+            <div><div class="mini"><button class="b3d" data-grid="c-" aria-label="Una colonna in meno">−</button><span id="gCols">6</span><button class="b3d" data-grid="c+" aria-label="Una colonna in più">+</button></div><p class="hint" style="text-align:center;margin-top:6px">colonne</p></div>
+            <div><div class="mini"><button class="b3d" data-grid="r-" aria-label="Una riga in meno">−</button><span id="gRows">2</span><button class="b3d" data-grid="r+" aria-label="Una riga in più">+</button></div><p class="hint" style="text-align:center;margin-top:6px">righe</p></div>
+          </div>
+          <div class="seg">
+            <input type="text" inputmode="decimal" id="slopeW" placeholder="Larghezza falda, m" aria-label="Larghezza falda in metri">
+            <input type="text" inputmode="decimal" id="slopeL" placeholder="Lunghezza falda, m" aria-label="Lunghezza falda in metri">
+          </div>
+          <p class="hint">Con le misure calcolo quanti pannelli ci stanno e le scrivo sulla foto.</p>
+        </div>
+        <div class="field">
+          <div class="lbl">Batteria di accumulo</div>
+          <div class="seg">
+            <button class="b3d" data-batt="0">No</button>
+            <button class="b3d on" data-batt="5">5 kWh</button>
+            <button class="b3d" data-batt="10">10 kWh</button>
+            <button class="b3d" data-batt="15">15 kWh</button>
+          </div>
+        </div>
+        <button class="b3d sun" data-goto="3">Vedi quanto risparmi</button>
+      </section>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="overlay">
+        <div class="chip"><span id="nowLbl">Adesso l’impianto produce</span><strong id="nowKw">–</strong></div>
+        <div class="chip"><span>Resa della falda rispetto all’ideale</span><strong id="effOut">–</strong></div>
+      </div>
+      <div class="draghint">Trascina per girare, pizzica per zoomare</div>
+      <div class="modeSw" role="group" aria-label="Vista"><button id="m3d" aria-pressed="true">Modello 3D</button><button id="mPhoto" aria-pressed="false">Foto del tetto</button></div>
+      <div id="photoStage" hidden>
+        <canvas id="photoCanvas"></canvas>
+        <div class="photoEmpty" id="photoEmpty"><div><b>Fotografa il tetto del cliente</b>Leggo posizione e orientamento dalla foto, poi tocchi i 4 angoli della falda e i pannelli compaiono sul tetto vero, con misure e produzione scritte sopra.<br><label class="b3d sun" for="roofFile">Scatta o scegli una foto</label><br><span style="font-size:14px;opacity:.85;display:block;margin-top:14px">Va bene anche uno screenshot satellitare di Google Maps o Earth: dopo averlo caricato scegli “Dall’alto” e orientamento e misure si calcolano da soli.</span></div></div>
+        <div class="photoTip chip" id="photoTip" hidden><span id="tipLbl"></span><strong id="tipTxt" style="font-size:18px;display:block;line-height:1.25"></strong></div>
+        <div class="photobar" id="photobar" hidden>
+          <div class="viewSeg" role="group" aria-label="Tipo di foto"><button data-pv="ground" aria-pressed="true">Da terra</button><button data-pv="top" aria-pressed="false">Dall’alto</button></div>
+          <label class="b3d" for="roofFile">Nuova foto</label>
+          <button class="b3d" id="compassBtn">Usa la bussola</button>
+          <button class="b3d" id="resetCorners">Rifai gli angoli</button>
+          <button class="b3d" id="toggleLabels">Nascondi scritte</button>
+          <button class="b3d sun" id="savePhoto">Salva l’immagine</button>
+        </div>
+        <input type="file" id="roofFile" accept="image/*" hidden>
+      </div>
+      <div class="sunbar">
+        <button class="b3d" id="play" aria-label="Avvia la giornata">▶</button>
+        <label for="month">Mese</label>
+        <select id="month"></select>
+        <label for="hour">Ora</label>
+        <input type="range" id="hour" min="5" max="21" step="0.25" value="12">
+        <output id="hourOut">12:00</output>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== STEP 3 ======== -->
+  <section id="s3" hidden>
+    <div class="dash">
+      <div class="card span12">
+        <h3>La tua bolletta, prima e dopo</h3>
+        <p class="sub">Spesa annua per l’elettricità nei tre scenari, primo anno.</p>
+        <div class="bills" id="bills"></div>
+      </div>
+      <div class="card span12 chart">
+        <h3>Una giornata tipo in casa vostra</h3>
+        <p class="sub">Dove la curva gialla copre le barre blu, la casa usa energia del tetto: gratis. Le barre fuori dalla curva sono il margine per la batteria.</p>
+        <div class="daychart" id="dayChart2"></div>
+      </div>
+      <div class="card span7 chart">
+        <h3>Mese per mese</h3>
+        <p class="sub">Quanta energia produce il tetto e quanta ne usa la casa.</p>
+        <div id="monthChart"></div>
+        <div class="legend"><span><i style="background:var(--sun)"></i>Prodotta dal tetto</span><span><i style="background:var(--panel)"></i>Consumata dalla casa</span></div>
+      </div>
+      <div class="card span5">
+        <h3>Da dove arriva la tua energia</h3>
+        <p class="sub">Con l’impianto e la batteria scelti.</p>
+        <div class="donutwrap"><div id="donut"></div><div id="donutLeg" class="legend" style="flex-direction:column;margin:0"></div></div>
+      </div>
+      <div class="card span8 chart">
+        <h3>25 anni in un colpo d’occhio</h3>
+        <p class="sub">Guadagno cumulato: parte dal costo dell’impianto e sale anno dopo anno.</p>
+        <div id="cashChart"></div>
+        <div class="field" style="margin-top:14px"><label for="infl">Quanto aumenterà l’energia <output id="inflOut"></output></label><input type="range" id="infl" min="0" max="6" step="0.5" value="2"><p class="hint" id="future"></p></div>
+      </div>
+      <div class="card span4">
+        <h3>Per l’ambiente</h3>
+        <p class="sub">Ogni anno, rispetto alla rete elettrica.</p>
+        <div class="eco">
+          <div><strong id="co2">–</strong>tonnellate di CO₂ evitate</div>
+          <div><strong id="trees">–</strong>alberi equivalenti</div>
+        </div>
+        <button class="b3d sun" data-goto="4" style="width:100%;margin-top:18px">Prepara la proposta</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== STEP 4 ======== -->
+  <section id="s4" hidden>
+    <div class="prop">
+      <div class="card">
+        <h3 id="propTitle">Proposta</h3>
+        <p class="sub" id="propSub"></p>
+        <table class="lines" id="lines"></table>
+        <img class="propPhoto" id="propPhoto" alt="Il tetto del cliente con i pannelli" hidden>
+        <div class="field" style="margin-top:18px">
+          <div class="lbl">Detrazione fiscale applicabile</div>
+          <div class="seg">
+            <button class="b3d on" data-detr="0.5">50%</button>
+            <button class="b3d" data-detr="0.36">36%</button>
+            <button class="b3d" data-detr="0">Nessuna</button>
+          </div>
+          <p class="hint">Recuperata in 10 anni. Aliquota da verificare con il cliente in base all’immobile e alla normativa in vigore.</p>
+        </div>
+        <div class="field" style="margin-top:18px">
+          <div class="lbl">Pacchetti opzionali</div>
+          <div class="addons" id="addons"></div>
+          <p class="hint">Il cliente può aggiungerli ora o più avanti; non cambiano il calcolo del rientro.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="card">
+          <h3>Come vuoi pagare</h3>
+          <p class="sub">Il cliente confronta le due strade prima di firmare.</p>
+          <div class="seg"><button class="b3d on" data-pay="cash">Unica soluzione</button><button class="b3d" data-pay="fin">Finanziamento</button></div>
+          <div class="seg" id="finMonths" hidden style="margin-top:14px"><button class="b3d" data-months="60">60 rate</button><button class="b3d on" data-months="120">120 rate</button><button class="b3d" data-months="180">180 rate</button></div>
+          <div class="payopt" id="payopt"></div>
+          <p class="hint" id="rataVs" style="margin-top:12px"></p>
+        </div>
+        <div class="commercial card" id="commercial" hidden>
+          <h3>Solo per il commerciale</h3>
+          <div class="field"><label for="ckwp">Posa, strutture e pratiche <output id="ckwpOut"></output></label><input type="range" id="ckwp" min="400" max="1500" step="25" value="850"></div>
+          <div class="field"><label for="cbat">Prezzo accumulo <output id="cbatOut"></output></label><input type="range" id="cbat" min="300" max="900" step="10" value="520"></div>
+          <p class="hint" id="margin"></p>
+        </div>
+        <div class="card">
+          <h3>Firma qui</h3>
+          <p class="sub">Accettazione della proposta preliminare, soggetta a sopralluogo tecnico.</p>
+          <canvas class="sig" id="sig"></canvas>
+          <div class="row" style="margin-top:14px">
+            <button class="b3d" id="sigClear">Cancella firma</button>
+            <button class="b3d go" id="sigOk">Conferma proposta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<div id="_saveStatus" style="position:fixed;bottom:8px;right:14px;font-size:11px;color:var(--muted);opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* === SOLARIS INIT — iniettato dal server via window.SOLARIS_INIT === */
+const _INIT=window.SOLARIS_INIT||{};
+const _IS_ADMIN=!!_INIT.isAmministratore;
+const _PROGETTO_ID=_INIT.progettoId||null;
+/* ================================================================== */
+
+/* ======================= DATI ======================= */
+const CITIES = [
+  {n:"Rosta (TO)",lat:45.07,zone:"E",y:1270},
+  {n:"Torino",lat:45.07,zone:"E",y:1260},
+  {n:"Rivoli (TO)",lat:45.07,zone:"E",y:1265},
+  {n:"Pinerolo (TO)",lat:44.88,zone:"E",y:1290},
+  {n:"Susa (TO)",lat:45.14,zone:"E",y:1300},
+  {n:"Sestriere (TO)",lat:44.96,zone:"F",y:1360},
+  {n:"Cuneo",lat:44.39,zone:"F",y:1310},
+  {n:"Asti",lat:44.90,zone:"E",y:1270},
+  {n:"Alessandria",lat:44.91,zone:"E",y:1260},
+  {n:"Novara",lat:45.45,zone:"E",y:1230},
+  {n:"Biella",lat:45.56,zone:"E",y:1240},
+  {n:"Aosta",lat:45.74,zone:"E",y:1300},
+  {n:"Milano",lat:45.46,zone:"E",y:1220},
+  {n:"Genova",lat:44.41,zone:"D",y:1350},
+  {n:"Bologna",lat:44.49,zone:"E",y:1300},
+  {n:"Firenze",lat:43.77,zone:"D",y:1360},
+  {n:"Roma",lat:41.90,zone:"D",y:1450},
+  {n:"Napoli",lat:40.85,zone:"C",y:1480},
+  {n:"Bari",lat:41.12,zone:"C",y:1500},
+  {n:"Palermo",lat:38.12,zone:"B",y:1580},
+  {n:"Lampedusa",lat:35.50,zone:"A",y:1700}
+];
+const LONS=[7.47,7.69,7.52,7.35,7.05,6.88,7.55,8.21,8.61,8.62,8.05,7.32,9.19,8.93,11.34,11.25,12.50,14.27,16.87,13.36,12.60];
+CITIES.forEach((c,i)=>c.lon=LONS[i]);
+const ZONES = {
+  A:{c:"#E4572E",t:"Clima molto caldo: il problema è il fresco d’estate. Il fotovoltaico copre il condizionatore proprio quando serve."},
+  B:{c:"#EE8434",t:"Inverni miti, estati calde. Fotovoltaico e climatizzazione lavorano insieme quasi tutto l’anno."},
+  C:{c:"#F2A71B",t:"Clima temperato. Pompa di calore e fotovoltaico si ripagano bene in coppia."},
+  D:{c:"#7FB069",t:"Riscaldamento per circa 6 mesi. Spostare il riscaldamento sull’elettrico raddoppia il valore del fotovoltaico."},
+  E:{c:"#3E8EDE",t:"Inverni lunghi e freddi, come qui in Piemonte. Fotovoltaico + pompa di calore Solaris: il gas diventa un ricordo."},
+  F:{c:"#2D4C9C",t:"Montagna, riscaldamento quasi tutto l’anno. Serve un impianto più generoso e un buon accumulo."}
+};
+const MONTHS = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+const MONTH_FULL = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+const DOY = [17,47,75,105,135,162,198,228,258,288,318,344];
+const DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
+const PROD_SHARE = [.045,.06,.09,.105,.115,.12,.13,.115,.09,.065,.04,.025];
+const CONS_W = [1.12,1.05,1.0,.92,.9,.95,1.05,1.0,.92,.95,1.04,1.1];
+const CONS_SHARE = CONS_W.map(v=>v/CONS_W.reduce((a,b)=>a+b,0));
+let PANEL_KW = 0.44; const RID = 0.09, FIXED = 120, CO2F = 0.26;
+/* catalogo di esempio: prezzi segnaposto da sostituire con il listino Solaris */
+const PANELS=[
+  {id:"jinko440",n:"Jinko Tiger Neo 440 W",kw:.44,w:1.134,h:1.762,price:125,cost:78},
+  {id:"longi430",n:"LONGi Hi-MO 6 430 W",kw:.43,w:1.134,h:1.722,price:120,cost:74},
+  {id:"trina445",n:"Trina Vertex S+ 445 W",kw:.445,w:1.134,h:1.762,price:130,cost:82},
+  {id:"aiko460",n:"Aiko Neostar 460 W full black",kw:.46,w:1.134,h:1.762,price:165,cost:108}];
+const INVERTERS=[
+  {id:"hw3",n:"Huawei SUN2000-3KTL-L1 (ibrido)",kw:3,hyb:true,price:1150,cost:760},
+  {id:"hw6",n:"Huawei SUN2000-6KTL-L1 (ibrido)",kw:6,hyb:true,price:1450,cost:980},
+  {id:"zcs6",n:"ZCS Azzurro HYD 6000 ZSS (ibrido)",kw:6,hyb:true,price:1350,cost:900},
+  {id:"fr6",n:"Fronius Primo GEN24 6.0 Plus (ibrido)",kw:6,hyb:true,price:2200,cost:1500},
+  {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,price:2100,cost:1450},
+  {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,price:950,cost:620}];
+if(_INIT.catalogo){
+  (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
+  (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
+} else {
+  try{ const ex=JSON.parse(localStorage.getItem("solaris-catalogo")||"{}"); (ex.pan||[]).forEach(p=>PANELS.push(p)); (ex.inv||[]).forEach(p=>INVERTERS.push(p)); }catch(e){}
+}
+function curPanel(){ return PANELS.find(p=>p.id===S.panelId)||PANELS[0]; }
+function curInv(){ return INVERTERS.find(p=>p.id===S.invId)||INVERTERS[0]; }
+
+const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,tilt:28,panels:12,batt:5,
+  month:5,hour:12,playing:false,step:1,ckwp:850,cbat:520,detr:0.5,commercial:false,cliente:"",
+  panelId:"jinko440",invId:"hw6",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
+  f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
+  mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null}};
+
+/* Ripristina stato salvato dal server */
+if(_INIT.stato){
+  const st=_INIT.stato;
+  const addonsArr=st.addons; delete st.addons;
+  Object.assign(S,st);
+  S.addons=new Set(Array.isArray(addonsArr)?addonsArr:[]);
+  if(!S.photo||typeof S.photo!=="object") S.photo={view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null};
+}
+/* Visualizzazione commerciale basata su ruolo */
+if(_IS_ADMIN) S.commercial=true;
+
+const fmt = (n,d=0)=>new Intl.NumberFormat("it-IT",{maximumFractionDigits:d,minimumFractionDigits:d}).format(n);
+const eur = (n)=>"€ "+fmt(Math.round(n));
+const $ = (s)=>document.querySelector(s);
+const $$ = (s)=>[...document.querySelectorAll(s)];
+
+/* ======================= CALCOLI ======================= */
+function annualKwh(){ return S.billMode==="kwh" ? S.kwh : Math.max(800, Math.round((S.eur*12-FIXED)/S.price)); }
+function orientFactor(){
+  const t=S.tilt, a=Math.abs(S.ori);
+  const fTilt = 1 - 0.00011*Math.pow(t-33,2);
+  const fOri = 1 - 0.17*Math.pow(a/90,2)*Math.pow(t/30,0.9);
+  return Math.max(0.5, fTilt*fOri);
+}
+function simulate(batt){
+  const c = CITIES[S.city], kwp = S.panels*PANEL_KW, cons = annualKwh();
+  const prodY = kwp*c.y*orientFactor();
+  const scr = S.f1!=null ? Math.max(.25,Math.min(.55,.25+(S.f1-.25)*.9)) : [0.28,0.38,0.50][S.presence];
+  let direct=0, fromBatt=0, imp=0, exp=0; const pm=[], cm=[];
+  for(let m=0;m<12;m++){
+    const p = prodY*PROD_SHARE[m], k = cons*CONS_SHARE[m];
+    pm.push(p); cm.push(k);
+    const d = Math.min(p*scr, k);
+    const surplus = p-d;
+    const cap = batt*0.9*DAYS[m]*0.85;
+    const b = Math.min(surplus*0.9, cap, k-d);
+    direct+=d; fromBatt+=b; imp+=k-d-b; exp+=Math.max(0,surplus-b/0.9);
+  }
+  const billToday = cons*S.price+FIXED;
+  const billAfter = imp*S.price+FIXED - exp*RID;
+  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + batt*S.cbat;
+  return {kwp,prodY,cons,direct,fromBatt,imp,exp,billToday,billAfter,saving:billToday-billAfter,cost,pm,cm,
+    selfShare:(direct+fromBatt)/cons};
+}
+function cashflow(r){
+  const pts=[-r.cost]; let cum=-r.cost, pay=null;
+  for(let t=1;t<=25;t++){
+    const s = r.saving*Math.pow(1+S.infl/100,t-1)*Math.pow(0.995,t-1) + (t<=10 ? r.cost*S.detr/10 : 0);
+    const prev=cum; cum+=s; pts.push(cum);
+    if(pay===null && cum>=0) pay = t-1 + (-prev)/s;
+  }
+  return {pts,pay,total:cum};
+}
+function maxPanels(){ const p=curPanel(), L=5/Math.cos(S.tilt*Math.PI/180); return Math.floor(11.8/(p.w+0.03))*Math.floor((L-0.2)/(p.h+0.04)); }
+
+/* ======================= UI BINDING ======================= */
+function setP(el){ const p=(el.value-el.min)/(el.max-el.min)*100; el.style.setProperty("--p",p+"%"); }
+function bindRange(id, key, out, f){
+  const el=$("#"+id); el.value=S[key]; setP(el);
+  const upd=()=>{ S[key]=+el.value; setP(el); $(out).textContent=f(S[key]); refresh(); };
+  el.addEventListener("input",upd); $(out).textContent=f(S[key]);
+}
+function bindSeg(attr, key, conv){
+  $$("[data-"+attr+"]").forEach(b=>b.addEventListener("click",()=>{
+    $$("[data-"+attr+"]").forEach(x=>x.classList.toggle("on",x===b));
+    S[key]=conv(b.dataset[attr]); onSeg(key); refresh();
+  }));
+}
+function onSeg(key){
+  if(key==="billMode"){ $("#kwhField").hidden=S.billMode!=="kwh"; $("#eurField").hidden=S.billMode!=="eur"; }
+  if(key==="ori"){ updateDial(); rebuildHouse(); }
+  if(key==="presence"){ S.f1=null; $("#fasceBox").hidden=true; }
+  if(key==="pay"){ $("#finMonths").hidden=S.pay!=="fin"; }
+}
+
+CITIES.forEach((c,i)=>$("#city").insertAdjacentHTML("beforeend",`<option value="${i}">${c.n}</option>`));
+MONTH_FULL.forEach((m,i)=>$("#month").insertAdjacentHTML("beforeend",`<option value="${i}">${m}</option>`));
+$("#month").value=S.month;
+$("#zones").innerHTML="ABCDEF".split("").map(z=>`<div data-z="${z}" style="background:${ZONES[z].c}">${z}</div>`).join("");
+$("#city").addEventListener("change",e=>{S.city=+e.target.value; refresh(); updateSunPath();});
+$("#cliente").addEventListener("input",e=>{S.cliente=e.target.value.trim(); refresh();});
+$("#month").addEventListener("change",e=>{S.month=+e.target.value; updateSunPath(); refresh();});
+
+bindRange("kwh","kwh","#kwhOut",v=>fmt(v)+" kWh");
+bindRange("eur","eur","#eurOut",v=>"€ "+fmt(v));
+bindRange("price","price","#priceOut",v=>"€ "+fmt(v,2));
+bindRange("tilt","tilt","#tiltOut",v=>v+"°");
+bindRange("hour","hour","#hourOut",hh);
+bindRange("ckwp","ckwp","#ckwpOut",v=>"€ "+fmt(v)+" al kWp");
+bindRange("cbat","cbat","#cbatOut",v=>"€ "+fmt(v)+" al kWh");
+$("#tilt").addEventListener("input",()=>{ clampPanels(); rebuildHouse(); });
+function hh(v){ const h=Math.floor(v), m=Math.round((v-h)*60); return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0"); }
+
+bindSeg("billmode","billMode",v=>v);
+bindSeg("presence","presence",v=>+v);
+bindSeg("ori","ori",v=>+v);
+bindSeg("batt","batt",v=>+v);
+bindSeg("detr","detr",v=>+v);
+bindSeg("pay","pay",v=>v);
+bindSeg("months","months",v=>+v);
+bindRange("infl","infl","#inflOut",v=>"+"+fmt(v,1)+"% all’anno");
+
+/* pacchetti opzionali */
+const ADDONS=[
+  {k:"wb",n:"Wallbox per l’auto elettrica",p:()=>1290},
+  {k:"pdc",n:"Pompa di calore Solaris",p:()=>8900},
+  {k:"ott",n:"Ottimizzatori sui pannelli",p:()=>S.panels*48},
+  {k:"clima",n:"Climatizzatore PTC dual split",p:()=>1990}];
+function renderAddons(){
+  $("#addons").innerHTML=ADDONS.map(a=>`<button class="b3d${S.addons.has(a.k)?" on":""}" data-addon="${a.k}" aria-pressed="${S.addons.has(a.k)}">${a.n}<small>${eur(a.p())}</small></button>`).join("");
+}
+$("#addons").addEventListener("click",e=>{const b=e.target.closest("[data-addon]"); if(!b) return; const k=b.dataset.addon; S.addons.has(k)?S.addons.delete(k):S.addons.add(k); refresh();});
+function addonHtml(r){
+  const sel=ADDONS.filter(a=>S.addons.has(a.k)); if(!sel.length) return "";
+  const tot=sel.reduce((s,a)=>s+a.p(),0);
+  return sel.map(a=>`<tr><td>Opzionale: ${a.n}</td><td>${eur(a.p())}</td></tr>`).join("")+`<tr class="tot"><td>Totale con le opzioni</td><td>${eur(r.cost+tot)}</td></tr>`;
+}
+
+/* lettura bolletta con Claude */
+const BILL_PROMPT=`Sei un esperto di bollette elettriche italiane. Leggi la bolletta della luce nell’immagine e rispondi SOLO con un oggetto JSON con queste chiavi:
+fornitore (stringa o null), mesi_periodo (numero di mesi fatturati), consumo_periodo_kwh (numero o null), consumo_annuo_kwh (consumo annuo indicato in bolletta, numero o null), f1_pct, f2_pct, f3_pct (percentuale 0-100 dei consumi in ciascuna fascia, null se assenti; se c’è solo F23 mettilo in f2_pct e f3_pct null), totale_periodo_eur (numero o null), prezzo_medio_kwh (totale bolletta diviso kWh del periodo, numero o null), potenza_impegnata_kw (numero o null).
+Se l’immagine non è una bolletta elettrica rispondi {"errore":"non è una bolletta"}.`;
+async function shrink(file){
+  try{
+    const bmp=await createImageBitmap(file); const k=Math.min(1,1800/Math.max(bmp.width,bmp.height));
+    const c=document.createElement("canvas"); c.width=Math.round(bmp.width*k); c.height=Math.round(bmp.height*k);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    return await new Promise(res=>c.toBlob(b=>res(b||file),"image/jpeg",0.85));
+  }catch(e){ return file; }
+}
+function setRange(id,val,out,f){ const el=$("#"+id); el.value=val; setP(el); $(out).textContent=f(+el.value); }
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+(async()=>{
+  if(!window.claude||!claude.use) return;
+  const sample=await claude.use("sample"); if(!sample) return;
+  let lim=null; try{ lim=await sample.limits(); }catch(e){}
+  if(!lim||!lim.images) return;
+  $("#billcam").hidden=false;
+  const txt=$("#billTxt");
+  $("#billFile").addEventListener("change",async e=>{
+    const f=e.target.files&&e.target.files[0]; e.target.value=""; if(!f) return;
+    const img=$("#billImg"); img.src=URL.createObjectURL(f); img.hidden=false;
+    txt.innerHTML="<b>Sto leggendo la bolletta…</b>Ci vogliono alcuni secondi.";
+    try{
+      const blob=await shrink(f);
+      const d=await sample.json(BILL_PROMPT,{images:[blob],modelTier:"default"});
+      applyBill(d);
+    }catch(err){
+      const m={not_granted:"Lettura non autorizzata: inserisci i consumi a mano qui sotto.",rate_limited:"Troppe letture di fila: riprova tra un minuto.",images_unavailable:"La lettura delle foto non è disponibile su questo dispositivo."}[err&&err.code]||"Foto non leggibile. Riprova con la bolletta intera e ben illuminata.";
+      txt.innerHTML="<b>Bolletta non letta</b>"+m;
+    }
+  });
+})();
+function applyBill(d){
+  const txt=$("#billTxt");
+  if(!d||d.errore){ txt.innerHTML="<b>Non sembra una bolletta della luce</b>Riprova inquadrando la pagina con i consumi."; return; }
+  const n=v=>typeof v==="number"&&isFinite(v)?v:null;
+  let annual=n(d.consumo_annuo_kwh);
+  if(!annual&&n(d.consumo_periodo_kwh)&&n(d.mesi_periodo)) annual=d.consumo_periodo_kwh*12/d.mesi_periodo;
+  const parts=[];
+  if(annual){
+    S.billMode="kwh"; $$("[data-billmode]").forEach(x=>x.classList.toggle("on",x.dataset.billmode==="kwh")); onSeg("billMode");
+    S.kwh=Math.max(1500,Math.min(15000,Math.round(annual/100)*100)); setRange("kwh",S.kwh,"#kwhOut",v=>fmt(v)+" kWh");
+    parts.push(fmt(Math.round(annual))+" kWh all’anno");
+  }
+  const pr=n(d.prezzo_medio_kwh);
+  if(pr&&pr>0.12&&pr<0.7){ S.price=Math.max(0.18,Math.min(0.45,Math.round(pr*100)/100)); setRange("price",S.price,"#priceOut",v=>"€ "+fmt(v,2)); parts.push("€ "+fmt(pr,2)+" al kWh"); }
+  const f1=n(d.f1_pct);
+  if(f1!=null&&f1>0&&f1<100){
+    const f2=n(d.f2_pct)||0, f3=n(d.f3_pct)||0;
+    const a=f2+f3>0?f2:100-f1, b=f2+f3>0?f3:0;
+    S.f1=f1/100; $$("[data-presence]").forEach(x=>x.classList.remove("on"));
+    $("#fasceBox").hidden=false;
+    $("#fasceBar").innerHTML=`<i style="width:${f1}%;background:var(--sun)"></i><i style="width:${a}%;background:var(--panel)"></i><i style="width:${b}%;background:var(--muted)"></i>`;
+    $("#fasceOut").textContent=`F1 ${Math.round(f1)}% / ${b?"F2":"F23"} ${Math.round(a)}%`+(b?` / F3 ${Math.round(b)}%`:"");
+    parts.push("F1 al "+Math.round(f1)+"%");
+  }
+  txt.innerHTML=`<b>Bolletta letta${d.fornitore?" ("+esc(d.fornitore)+")":""}</b>${parts.length?parts.join(", ")+". Controlla i valori qui sotto.":"Non ho trovato i consumi: inseriscili a mano."}`;
+  refresh();
+}
+
+function clampPanels(){ const mx=maxPanels(); S.panels=Math.max(4,Math.min(mx,S.panels)); $("#pMax").textContent="massimo "+mx+" su questa falda"; }
+$("#pMinus").addEventListener("click",()=>{S.panels--; clampPanels(); rebuildHouse(); refresh();});
+$("#pPlus").addEventListener("click",()=>{S.panels++; clampPanels(); rebuildHouse(); refresh();});
+$("#pAuto").addEventListener("click",()=>{
+  const y=CITIES[S.city].y*orientFactor();
+  S.panels=Math.round(annualKwh()*1.05/y/PANEL_KW); clampPanels(); rebuildHouse(); refresh();
+  toast("Impianto dimensionato sui consumi: "+S.panels+" pannelli");
+});
+
+$("#viewSw").addEventListener("click",e=>{
+  S.commercial=!S.commercial; e.currentTarget.setAttribute("aria-checked",S.commercial);
+  $("#commercial").hidden=!S.commercial; document.body.classList.toggle("comm",S.commercial); refresh();
+});
+
+function go(step){
+  S.step=step;
+  $$(".step").forEach(b=>b.setAttribute("aria-selected", +b.dataset.step===step));
+  $("#designView").hidden = step>2;
+  $("#s1").hidden = step!==1; $("#s2").hidden = step!==2;
+  $("#s3").hidden = step!==3; $("#s4").hidden = step!==4;
+  if(step<=2) setTimeout(resize,30);
+  if(step===4){ setTimeout(sizeSig,30); snapshotProp(); }
+  window.scrollTo({top:0,behavior:"smooth"});
+  refresh();
+}
+$$(".step").forEach(b=>b.addEventListener("click",()=>go(+b.dataset.step)));
+$$("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(+b.dataset.goto)));
+
+/* compass dial */
+function updateDial(){
+  $("#needle").setAttribute("transform",`rotate(${S.ori})`);
+  const a=S.ori, lbl = a===0?"Sud":Math.abs(a)>=80?(a<0?"Est":"Ovest"):(a<0?"Sud-Est ":"Sud-Ovest ")+Math.abs(a)+"°";
+  $("#oriOut").textContent=lbl;
+  $$("[data-ori]").forEach(x=>x.classList.toggle("on",+x.dataset.ori===S.ori));
+}
+(()=>{
+  const svg=$("#dial"); let drag=false;
+  const set=(e)=>{
+    const r=svg.getBoundingClientRect(), x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
+    let a=Math.atan2(-x,y)*180/Math.PI; a=Math.max(-90,Math.min(90,Math.round(a/5)*5));
+    S.ori=a; updateDial(); rebuildHouse(); refresh();
+  };
+  svg.addEventListener("pointerdown",e=>{drag=true; svg.setPointerCapture(e.pointerId); set(e);});
+  svg.addEventListener("pointermove",e=>{ if(drag) set(e); });
+  svg.addEventListener("pointerup",()=>drag=false);
+  svg.addEventListener("keydown",e=>{
+    if(e.key==="ArrowLeft"){S.ori=Math.max(-90,S.ori-5);} else if(e.key==="ArrowRight"){S.ori=Math.min(90,S.ori+5);} else return;
+    e.preventDefault(); updateDial(); rebuildHouse(); refresh();
+  });
+})();
+
+/* ======================= 3D ======================= */
+let renderer, scene, camera, sun, sunMesh, houseGroup, panelMeshes=[], arcLine, hemi, slopeNormalLocal;
+const stage=$("#stage");
+const cam={theta:0.75, phi:1.02, r:34};
+function initThree(){
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(2,window.devicePixelRatio));
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  stage.prepend(renderer.domElement);
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(40,1,0.1,400);
+  hemi=new THREE.HemisphereLight(0xcfe5ff,0x6d8a4a,0.55); scene.add(hemi);
+  sun=new THREE.DirectionalLight(0xfff2d6,1.1); sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048);
+  Object.assign(sun.shadow.camera,{left:-22,right:22,top:22,bottom:-22,near:1,far:120});
+  scene.add(sun); scene.add(sun.target);
+  sunMesh=new THREE.Mesh(new THREE.SphereGeometry(1.6,32,16),new THREE.MeshBasicMaterial({color:0xffc94a}));
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,16),new THREE.MeshBasicMaterial({color:0xffd77a,transparent:true,opacity:.25}));
+  sunMesh.add(glow); scene.add(sunMesh);
+
+  const ground=new THREE.Mesh(new THREE.CircleGeometry(60,64),new THREE.MeshStandardMaterial({color:0x8fb36a,roughness:1}));
+  ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
+  const ring=new THREE.Mesh(new THREE.RingGeometry(17.6,18,96),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.55}));
+  ring.rotation.x=-Math.PI/2; ring.position.y=0.02; scene.add(ring);
+  [["N",0,-1],["S",0,1],["E",1,0],["O",-1,0]].forEach(([t,x,z])=>{
+    const s=label(t); s.position.set(x*20,0.8,z*20); scene.add(s);
+  });
+  // alberi
+  [[-12,-4,1],[13,-6,1.2],[-14,9,.9]].forEach(([x,z,k])=>{
+    const g=new THREE.Group();
+    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.25*k,.35*k,2.2*k,8),new THREE.MeshStandardMaterial({color:0x7a5536}));
+    trunk.position.y=1.1*k; const crown=new THREE.Mesh(new THREE.ConeGeometry(2*k,5*k,10),new THREE.MeshStandardMaterial({color:0x3f7d48,roughness:.9}));
+    crown.position.y=4.6*k; [trunk,crown].forEach(m=>{m.castShadow=true; g.add(m);}); g.position.set(x,0,z); scene.add(g);
+  });
+  rebuildHouse(); updateSunPath(); resize(); controls(); loop();
+}
+function label(t){
+  const c=document.createElement("canvas"); c.width=c.height=128; const g=c.getContext("2d");
+  g.fillStyle="rgba(19,35,61,.75)"; g.beginPath(); g.arc(64,64,52,0,7); g.fill();
+  g.fillStyle="#fff"; g.font="bold 64px Figtree, sans-serif"; g.textAlign="center"; g.textBaseline="middle"; g.fillText(t,64,68);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c)})); s.scale.set(2.2,2.2,1); return s;
+}
+function rebuildHouse(){
+  if(!scene) return;
+  if(houseGroup){ scene.remove(houseGroup); houseGroup.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); }
+  houseGroup=new THREE.Group(); panelMeshes=[];
+  const W=12, D=10, H=3.2, t=S.tilt*Math.PI/180, h=(D/2)*Math.tan(t), L=(D/2)/Math.cos(t);
+  const wallMat=new THREE.MeshStandardMaterial({color:0xf3ece0,roughness:.9});
+  const body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D),wallMat); body.position.y=H/2; body.castShadow=body.receiveShadow=true; houseGroup.add(body);
+  const shape=new THREE.Shape(); shape.moveTo(-D/2,0); shape.lineTo(D/2,0); shape.lineTo(0,h); shape.lineTo(-D/2,0);
+  const gable=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:W,bevelEnabled:false}),wallMat);
+  gable.rotation.y=Math.PI/2; gable.position.set(-W/2,H,0); gable.castShadow=gable.receiveShadow=true; houseGroup.add(gable);
+  const roofMat=new THREE.MeshStandardMaterial({color:0xa4513a,roughness:.8});
+  const mk=(sign)=>{ const m=new THREE.Mesh(new THREE.BoxGeometry(W+0.6,0.18,L+0.4),roofMat);
+    m.position.set(0,H+h/2+0.09,sign*D/4); m.rotation.x=sign*t; m.castShadow=m.receiveShadow=true; houseGroup.add(m); return m; };
+  const south=mk(1); mk(-1);
+  // finestre e porta
+  const winMat=new THREE.MeshStandardMaterial({color:0x2c4a6e,roughness:.2,metalness:.3});
+  [[-3.5,1.8],[3.5,1.8]].forEach(([x,y])=>{const w=new THREE.Mesh(new THREE.BoxGeometry(1.8,1.3,.1),winMat); w.position.set(x,y,D/2+.03); houseGroup.add(w);});
+  const door=new THREE.Mesh(new THREE.BoxGeometry(1.3,2.2,.1),new THREE.MeshStandardMaterial({color:0x5a3d2b})); door.position.set(0,1.1,D/2+.03); houseGroup.add(door);
+  // pannelli
+  const pMat=()=>new THREE.MeshStandardMaterial({color:0x14284a,roughness:.25,metalness:.55,emissive:0xf2a71b,emissiveIntensity:0});
+  const frame=new THREE.MeshStandardMaterial({color:0xc9d1dc,metalness:.6,roughness:.4});
+  const pan=curPanel(), cp=pan.w+0.03, rp=pan.h+0.04, rows=Math.floor((L-0.2)/rp), cols=Math.floor((W-0.2)/cp);
+  let n=0;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    if(n>=S.panels) break;
+    const g=new THREE.Group();
+    const f=new THREE.Mesh(new THREE.BoxGeometry(pan.w+0.02,.06,pan.h+0.02),frame); g.add(f);
+    const cell=new THREE.Mesh(new THREE.BoxGeometry(pan.w-0.06,.07,pan.h-0.06),pMat()); g.add(cell); panelMeshes.push(cell);
+    g.position.set(-cols*cp/2+cp/2+c*cp, 0.14, L/2-rp/2-0.1-r*rp);
+    g.traverse(o=>{o.castShadow=true;});
+    south.add(g); n++;
+  }
+  houseGroup.rotation.y=-S.ori*Math.PI/180;
+  scene.add(houseGroup);
+  slopeNormalLocal=new THREE.Vector3(0,Math.cos(t),Math.sin(t));
+}
+function sunPos(lat,doy,hour){
+  const r=Math.PI/180, dec=23.44*Math.sin(2*Math.PI*(284+doy)/365)*r, H=15*(hour-12)*r, p=lat*r;
+  const sinEl=Math.sin(p)*Math.sin(dec)+Math.cos(p)*Math.cos(dec)*Math.cos(H);
+  const el=Math.asin(sinEl);
+  const az=Math.atan2(Math.sin(H), Math.cos(H)*Math.sin(p)-Math.tan(dec)*Math.cos(p));
+  return {el,az,dir:new THREE.Vector3(-Math.cos(el)*Math.sin(az),Math.sin(el),Math.cos(el)*Math.cos(az))};
+}
+function updateSunPath(){
+  if(!scene) return;
+  if(arcLine){scene.remove(arcLine); arcLine.geometry.dispose();}
+  const pts=[]; const c=CITIES[S.city];
+  for(let h=3;h<=21;h+=0.2){ const s=sunPos(c.lat,DOY[S.month],h); if(s.el>-0.02) pts.push(s.dir.clone().multiplyScalar(38)); }
+  arcLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineDashedMaterial({color:0xffffff,dashSize:.8,gapSize:.6,transparent:true,opacity:.8}));
+  arcLine.computeLineDistances(); scene.add(arcLine);
+}
+const skyDay=new THREE.Color(0x8ec3ef), skyDusk=new THREE.Color(0xf3a86b), skyNight=new THREE.Color(0x1b2a4a);
+function updateSun(){
+  const c=CITIES[S.city], s=sunPos(c.lat,DOY[S.month],S.hour);
+  sunMesh.position.copy(s.dir).multiplyScalar(38);
+  sun.position.copy(s.dir).multiplyScalar(50);
+  const e=Math.sin(s.el);
+  sun.intensity=Math.max(0,Math.min(1.25,e*2.2));
+  hemi.intensity=0.18+Math.max(0,e)*0.5;
+  sunMesh.visible=s.el>-0.03;
+  const bg=e<0?skyNight.clone():e<0.18?skyDusk.clone().lerp(skyDay,e/0.18):skyDay.clone();
+  if(e<0 && e>-0.12) bg.lerp(skyDusk,1+e/0.12);
+  scene.background=bg;
+  // potenza istantanea
+  const n=slopeNormalLocal.clone().applyAxisAngle(new THREE.Vector3(0,1,0),-S.ori*Math.PI/180);
+  const inc=Math.max(0,n.dot(s.dir)), atm=s.el>0?0.88*Math.min(1,e*2.6):0;
+  const kw=S.panels*PANEL_KW*inc*atm*0.9;
+  panelMeshes.forEach(m=>m.material.emissiveIntensity=inc*atm*0.35);
+  $("#nowKw").textContent=fmt(kw,1)+" kW";
+  $("#nowLbl").textContent="Il "+DOY[S.month]%30+" "+MONTH_FULL[S.month].toLowerCase()+" alle "+hh(S.hour)+" produce";
+}
+function placeCam(){
+  camera.position.set(cam.r*Math.sin(cam.phi)*Math.sin(cam.theta), cam.r*Math.cos(cam.phi), cam.r*Math.sin(cam.phi)*Math.cos(cam.theta));
+  camera.lookAt(0,3,0);
+}
+function controls(){
+  const el=renderer.domElement, pts=new Map(); let pinch=0;
+  el.addEventListener("pointerdown",e=>{pts.set(e.pointerId,e); el.setPointerCapture(e.pointerId);});
+  el.addEventListener("pointermove",e=>{
+    if(!pts.has(e.pointerId)) return;
+    const prev=pts.get(e.pointerId); pts.set(e.pointerId,e);
+    if(pts.size===1){ cam.theta-= (e.clientX-prev.clientX)*0.008; cam.phi=Math.max(0.25,Math.min(1.45,cam.phi-(e.clientY-prev.clientY)*0.006)); }
+    else if(pts.size===2){ const [a,b]=[...pts.values()]; const d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY); if(pinch) cam.r=Math.max(16,Math.min(70,cam.r*pinch/d)); pinch=d; }
+  });
+  const up=e=>{pts.delete(e.pointerId); pinch=0;};
+  el.addEventListener("pointerup",up); el.addEventListener("pointercancel",up);
+  el.addEventListener("wheel",e=>{e.preventDefault(); cam.r=Math.max(16,Math.min(70,cam.r*(1+e.deltaY*0.001)));},{passive:false});
+}
+function resize(){
+  if(!renderer) return;
+  const w=stage.clientWidth, h=stage.clientHeight; if(!w||!h) return;
+  renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(()=>{ resize(); if(S.mode==="photo") drawPhoto(); }).observe(stage);
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function loop(){
+  if(S.playing){ S.hour+=reduced?0.15:0.035; if(S.hour>21) S.hour=5; const el=$("#hour"); el.value=S.hour; setP(el); $("#hourOut").textContent=hh(S.hour); }
+  if(!$("#designView").hidden && S.mode==="3d"){ updateSun(); placeCam(); renderer.render(scene,camera); }
+  requestAnimationFrame(loop);
+}
+$("#play").addEventListener("click",e=>{ S.playing=!S.playing; e.currentTarget.textContent=S.playing?"❚❚":"▶"; e.currentTarget.setAttribute("aria-label",S.playing?"Ferma la giornata":"Avvia la giornata"); });
+
+/* ======================= GRAFICI ======================= */
+function monthChart(pm,cm){
+  const W=640,H=250,pad=34,mx=Math.max(...pm,...cm)*1.1, bw=(W-pad)/12;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Produzione e consumi mensili">`;
+  for(let i=0;i<=4;i++){ const y=H-24-(H-44)*i/4; s+=`<line x1="${pad}" x2="${W}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${pad-6}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--muted)">${fmt(mx*i/4/1000,1)}k</text>`; }
+  pm.forEach((p,i)=>{
+    const x=pad+i*bw, hp=(H-44)*p/mx, hc=(H-44)*cm[i]/mx;
+    s+=`<rect x="${x+bw*.14}" y="${H-24-hp}" width="${bw*.36}" height="${hp}" rx="5" fill="var(--sun)"/>`;
+    s+=`<rect x="${x+bw*.52}" y="${H-24-hc}" width="${bw*.36}" height="${hc}" rx="5" fill="var(--panel)"/>`;
+    s+=`<text x="${x+bw/2}" y="${H-6}" text-anchor="middle" font-size="12" fill="var(--muted)">${MONTHS[i]}</text>`;
+  });
+  return s+`</svg>`;
+}
+function cashChart(cf){
+  const W=760,H=270,pl=58,pb=28,pts=cf.pts, mn=Math.min(...pts), mx=Math.max(...pts,1), rng=mx-mn;
+  const X=i=>pl+(W-pl-10)*i/25, Y=v=>10+(H-pb-10)*(mx-v)/rng;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Guadagno cumulato in 25 anni">`;
+  [mn,0,mx].forEach(v=>{ s+=`<line x1="${pl}" x2="${W}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" ${v===0?'stroke-width="2"':''}/><text x="${pl-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${eur(v)}</text>`; });
+  for(let t=0;t<=25;t+=5) s+=`<text x="${X(t)}" y="${H-8}" text-anchor="middle" font-size="12" fill="var(--muted)">${t===0?"oggi":"anno "+t}</text>`;
+  const area=pts.map((v,i)=>`${X(i)},${Y(v)}`).join(" ");
+  s+=`<polygon points="${X(0)},${Y(0)} ${area} ${X(25)},${Y(0)}" fill="var(--save)" opacity=".14"/>`;
+  s+=`<polyline points="${area}" fill="none" stroke="var(--save)" stroke-width="4" stroke-linejoin="round"/>`;
+  if(cf.pay!==null && cf.pay<=25){ const x=X(cf.pay); s+=`<line x1="${x}" x2="${x}" y1="10" y2="${H-pb}" stroke="var(--sun)" stroke-width="2" stroke-dasharray="6 5"/><circle cx="${x}" cy="${Y(0)}" r="8" fill="var(--sun)" stroke="var(--surface)" stroke-width="3"/><text x="${x+12}" y="${Y(0)-14}" font-size="14" font-weight="700" fill="var(--sunInk)">Rientrato in ${fmt(cf.pay,1)} anni</text>`; }
+  s+=`<circle cx="${X(25)}" cy="${Y(pts[25])}" r="7" fill="var(--save)"/><text x="${X(25)-10}" y="${Y(pts[25])+24}" text-anchor="end" font-size="15" font-weight="700" fill="var(--save)">+${eur(pts[25])}</text>`;
+  return s+`</svg>`;
+}
+function donut(r){
+  const parts=[["Dal tetto, subito",r.direct,"var(--sun)"],["Dalla batteria",r.fromBatt,"var(--save)"],["Dalla rete",r.imp,"var(--muted)"]];
+  const tot=parts.reduce((a,p)=>a+p[1],0); let a0=-Math.PI/2, s=`<svg viewBox="-60 -60 120 120" width="170" height="170" role="img" aria-label="Provenienza dell’energia">`;
+  parts.forEach(([n,v,c])=>{ if(v<=0) return; const a1=a0+2*Math.PI*v/tot, large=a1-a0>Math.PI?1:0;
+    s+=`<path d="M${50*Math.cos(a0)} ${50*Math.sin(a0)} A50 50 0 ${large} 1 ${50*Math.cos(a1)} ${50*Math.sin(a1)}" fill="none" stroke="${c}" stroke-width="18"/>`; a0=a1; });
+  s+=`<text text-anchor="middle" y="2" font-family="Bricolage Grotesque" font-size="24" font-weight="800" fill="var(--ink)">${Math.round(r.selfShare*100)}%</text><text text-anchor="middle" y="18" font-size="9" fill="var(--muted)">indipendenza</text></svg>`;
+  $("#donut").innerHTML=s;
+  $("#donutLeg").innerHTML=parts.map(([n,v,c])=>`<span><i style="background:${c}"></i>${n}: <b>${fmt(v)} kWh</b></span>`).join("");
+}
+
+/* ======================= REFRESH ======================= */
+function refresh(){
+  const c=CITIES[S.city];
+  $("#zoneOut").textContent=c.zone;
+  $$("#zones div").forEach(d=>d.classList.toggle("dim",d.dataset.z!==c.zone));
+  $("#zinfo").innerHTML=`<strong>${c.n}</strong>: circa ${fmt(c.y)} kWh per ogni kW installato verso sud. ${ZONES[c.zone].t}`;
+  $("#pVal").textContent=S.panels;
+  const r=simulate(S.batt), cf=cashflow(r);
+  $("#kKwp").textContent=fmt(r.kwp,2)+" kWp";
+  $("#kProd").textContent=fmt(r.prodY)+" kWh";
+  $("#kSave").textContent=eur(r.saving);
+  $("#kPay").textContent=cf.pay===null||cf.pay>25?"oltre 25 anni":fmt(cf.pay,1)+" anni";
+  $("#effOut").textContent=Math.round(orientFactor()*100)+"%";
+
+  // bollette
+  const rPV=simulate(0), bCmp=S.batt||10, rB=simulate(bCmp);
+  const max=r.billToday;
+  const bill=(cls,who,v,extra)=>`<div class="bill ${cls}"><div class="who">${who}</div><div class="amt">${eur(v)}</div><div class="per">all’anno, circa ${eur(v/12)} al mese</div><div class="bar"><i style="width:${Math.max(3,v/max*100)}%"></i></div>${extra||""}</div>`;
+  $("#bills").innerHTML=
+    bill("today","Oggi, senza impianto",r.billToday)+
+    bill("pv",`Con ${fmt(rPV.kwp,1)} kWp sul tetto`,rPV.billAfter,`<div class="delta">Risparmi ${eur(r.billToday-rPV.billAfter)} all’anno</div>`)+
+    bill("batt",`Con tetto e batteria da ${bCmp} kWh`,rB.billAfter,`<div class="delta">Risparmi ${eur(r.billToday-rB.billAfter)} all’anno</div>`);
+  $("#monthChart").innerHTML=monthChart(r.pm,r.cm);
+  $("#cashChart").innerHTML=cashChart(cf);
+  donut(r);
+  $("#co2").textContent=fmt(r.prodY*CO2F/1000,1);
+  $("#trees").textContent=fmt(r.prodY*CO2F/20);
+
+  // proposta
+  const who=S.cliente||"Cliente";
+  $("#propTitle").textContent="Proposta per "+who;
+  $("#propSub").textContent=`${c.n}, falda ${$("#oriOut").textContent.toLowerCase()} inclinata ${S.tilt}°. Stima preliminare, da confermare con sopralluogo.`;
+  const pan=curPanel(), inv=curInv(), pv=r.kwp*S.ckwp, bt=S.batt*S.cbat, det=r.cost*S.detr;
+  $("#lines").innerHTML=`
+    <tr><td>${S.panels} moduli ${esc(pan.n)}, totale ${fmt(r.kwp,2)} kWp</td><td>${eur(S.panels*pan.price)}</td></tr>
+    <tr><td>Inverter ${esc(inv.n)}</td><td>${eur(inv.price)}</td></tr>
+    <tr><td>Strutture, cavi, quadri e posa in opera</td><td>${eur(pv)}</td></tr>
+    ${S.batt?`<tr><td>Batteria di accumulo ${S.batt} kWh</td><td>${eur(bt)}</td></tr>`:""}
+    <tr><td>Pratiche, allaccio e collaudo</td><td>incluso</td></tr>
+    <tr class="tot"><td>Investimento</td><td>${eur(r.cost)}</td></tr>
+    ${S.detr?`<tr class="neg"><td>Detrazione fiscale ${Math.round(S.detr*100)}% in 10 anni</td><td>−${eur(det)}</td></tr>
+    <tr class="tot"><td>Costo reale per te</td><td>${eur(r.cost-det)}</td></tr>`:""}
+    <tr class="neg"><td>Risparmio stimato in 25 anni</td><td>${eur(cf.total+r.cost)}</td></tr>
+    ${addonHtml(r)}`;
+  renderParts(r);
+  if(S.mode==="photo") drawPhoto();
+  saveToServer();
+  const months=S.months, i=0.069/12, rataM=r.cost*i/(1-Math.pow(1+i,-months)), interessi=rataM*months-r.cost;
+  const tile=(l,v)=>`<div>${l}<strong>${v}</strong></div>`;
+  if(S.pay==="cash"){
+    $("#payopt").innerHTML=tile("Paghi oggi",eur(r.cost))+tile("Rientro",cf.pay===null||cf.pay>25?"oltre 25 anni":fmt(cf.pay,1)+" anni")+tile("Detrazione al mese per 10 anni",S.detr?eur(det/120):"nessuna")+tile("Guadagno in 25 anni",eur(cf.total));
+    $("#rataVs").textContent=`La bolletta scende subito di circa ${eur(r.saving/12)} al mese.`;
+  } else {
+    const net=r.saving/12+det/120-rataM;
+    $("#payopt").innerHTML=tile("Rata mensile",eur(rataM))+tile("Paghi oggi","€ 0")+tile("Saldo del mese, primo anno",(net>=0?"+":"−")+eur(Math.abs(net)))+tile("Guadagno in 25 anni",eur(cf.total-interessi));
+    $("#rataVs").textContent=(net>=0?`Risparmio e detrazione coprono la rata: ogni mese restano ${eur(net)} in tasca.`:`Per ${months/12} anni metti ${eur(-net)} al mese in più, poi l’energia del tetto è gratis.`)+" Esempio con TAN 6,9%, soggetto ad approvazione.";
+  }
+  $("#future").textContent=`A questo ritmo, fra 10 anni la bolletta senza impianto sarebbe di circa ${eur(r.billToday*Math.pow(1+S.infl/100,10))} all’anno.`;
+  renderAddons();
+  const costBase=S.panels*pan.cost+inv.cost+r.kwp*520+S.batt*380;
+  $("#margin").textContent=`Margine indicativo su costo standard: ${eur(r.cost-costBase)} (${fmt((r.cost-costBase)/r.cost*100,1)}%). Valori di costo da collegare al listino reale.`;
+}
+
+/* ======================= FIRMA ======================= */
+const sig=$("#sig"), sg=sig.getContext("2d"); let drawing=false, hasSig=false;
+function sizeSig(){ const r=sig.getBoundingClientRect(); if(!r.width) return; sig.width=r.width*2; sig.height=r.height*2; sg.scale(2,2); sg.lineWidth=2.6; sg.lineCap="round"; sg.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--ink"); hasSig=false; }
+sig.addEventListener("pointerdown",e=>{drawing=true; sig.setPointerCapture(e.pointerId); const r=sig.getBoundingClientRect(); sg.beginPath(); sg.moveTo(e.clientX-r.left,e.clientY-r.top);});
+sig.addEventListener("pointermove",e=>{ if(!drawing) return; const r=sig.getBoundingClientRect(); sg.lineTo(e.clientX-r.left,e.clientY-r.top); sg.stroke(); hasSig=true; });
+sig.addEventListener("pointerup",()=>drawing=false);
+$("#sigClear").addEventListener("click",sizeSig);
+$("#sigOk").addEventListener("click",()=>{
+  if(!hasSig){ toast("Manca la firma: il cliente firma nel riquadro"); return; }
+  try{ localStorage.setItem("solaris-ultima-proposta",JSON.stringify({...S,quando:new Date().toISOString()})); }catch(e){}
+  toast("Proposta confermata per "+(S.cliente||"il cliente"));
+});
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("show"),2600); }
+
+/* ======================= FOTO DEL TETTO ======================= */
+const P=S.photo, pc=$("#photoCanvas"), px=pc.getContext("2d");
+const TIPS=["Tocca l’angolo in basso a sinistra della falda","Ora l’angolo in basso a destra","Ora l’angolo in alto a destra","Infine l’angolo in alto a sinistra"];
+let fit={x:0,y:0,s:1}, dragIdx=-1, downloads=null;
+(async()=>{ if(window.claude&&claude.use){ try{ downloads=await claude.use("downloads"); }catch(e){} } })();
+
+function setMode(m){
+  S.mode=m; stage.classList.toggle("photo",m==="photo");
+  $("#m3d").setAttribute("aria-pressed",m==="3d"); $("#mPhoto").setAttribute("aria-pressed",m==="photo");
+  $("#photoStage").hidden=m!=="photo"; $("#photoGrid").hidden=m!=="photo";
+  if(m==="photo") setTimeout(drawPhoto,20); else setTimeout(resize,20);
+}
+$("#m3d").addEventListener("click",()=>setMode("3d"));
+$("#mPhoto").addEventListener("click",()=>{ if(S.step!==2) go(2); setMode("photo"); });
+
+/* posizione e direzione dai dati EXIF della foto */
+function exifGPS(buf){
+  try{
+    const v=new DataView(buf); if(v.getUint16(0)!==0xFFD8) return null;
+    let o=2;
+    while(o<v.byteLength-4){
+      const mk=v.getUint16(o), len=v.getUint16(o+2);
+      if(mk===0xFFE1 && v.getUint32(o+4)===0x45786966){
+        const t=o+10, le=v.getUint16(t)===0x4949;
+        const u16=p=>v.getUint16(p,le), u32=p=>v.getUint32(p,le);
+        const ifd0=t+u32(t+4); let gps=null;
+        for(let i=0;i<u16(ifd0);i++){ const e=ifd0+2+i*12; if(u16(e)===0x8825) gps=t+u32(e+8); }
+        if(gps===null) return null;
+        const g={};
+        for(let i=0;i<u16(gps);i++){
+          const e=gps+2+i*12, tag=u16(e), type=u16(e+2), cnt=u32(e+4);
+          if(type===2) g[tag]=String.fromCharCode(v.getUint8(e+8));
+          else if(type===5){ const p=t+u32(e+8), r=k=>u32(p+k*8)/(u32(p+k*8+4)||1); g[tag]=cnt>=3?r(0)+r(1)/60+r(2)/3600:r(0); }
+        }
+        if(g[2]==null||g[4]==null) return null;
+        return {lat:g[2]*(g[1]==="S"?-1:1), lon:g[4]*(g[3]==="W"?-1:1), dir:g[17]!=null?g[17]:null};
+      }
+      if((mk&0xFF00)!==0xFF00) break;
+      o+=2+len;
+    }
+  }catch(e){}
+  return null;
+}
+function useLocation(lat,lon,src){
+  P.lat=lat; P.lon=lon;
+  let best=0,bd=1e9;
+  CITIES.forEach((c,i)=>{ if(c.gps) return; const d=Math.hypot(c.lat-lat,(c.lon-lon)*Math.cos(lat*Math.PI/180)); if(d<bd){bd=d;best=i;} });
+  const near=CITIES[best];
+  const entry={n:`Sopralluogo vicino a ${near.n}`,lat,lon,zone:near.zone,y:Math.round(1270+(45.07-lat)*45),gps:true};
+  let gi=CITIES.findIndex(c=>c.gps);
+  if(gi<0){ CITIES.push(entry); gi=CITIES.length-1; $("#city").insertAdjacentHTML("beforeend",`<option value="${gi}"></option>`); } else CITIES[gi]=entry;
+  $("#city").options[gi].textContent=entry.n;
+  $("#city").value=gi; S.city=gi; updateSunPath(); refresh();
+  toast(`Posizione ${src}: ${fmt(lat,4)}, ${fmt(lon,4)}`);
+}
+function setHeading(h,src){
+  P.heading=h;
+  const roof=(h+180)%360; let ori=Math.round((roof-180)/5)*5;
+  const north=Math.abs(ori)>100;
+  S.ori=Math.max(-90,Math.min(90,ori)); updateDial(); rebuildHouse(); refresh();
+  toast(north?"Attenzione: la falda sembra guardare a nord":`Falda orientata ${$("#oriOut").textContent} (${src})`);
+}
+$("#roofFile").addEventListener("change",async e=>{
+  const f=e.target.files&&e.target.files[0]; e.target.value=""; if(!f) return;
+  let g=null; try{ g=exifGPS(await f.arrayBuffer()); }catch(err){}
+  const img=new Image();
+  img.onload=()=>{ P.img=img; P.corners=[]; P.when=new Date(); $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#photoTip").hidden=false; drawPhoto(); };
+  img.src=URL.createObjectURL(f);
+  if(g){ useLocation(g.lat,g.lon,"dalla foto"); if(g.dir!=null&&P.view==="ground") setHeading(g.dir,"dalla foto"); }
+  else if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(p=>useLocation(p.coords.latitude,p.coords.longitude,"dal GPS"),
+      ()=>toast("La foto non contiene la posizione: scegli la località al passo 1"),{enableHighAccuracy:true,timeout:9000});
+  } else toast("La foto non contiene la posizione: scegli la località al passo 1");
+});
+$("#compassBtn").addEventListener("click",async()=>{
+  const D=window.DeviceOrientationEvent;
+  if(!D){ toast("Bussola non disponibile: usa la rosa dei venti a sinistra"); return; }
+  try{ if(typeof D.requestPermission==="function"){ const r=await D.requestPermission(); if(r!=="granted") throw 0; } }
+  catch(e){ toast("Bussola non autorizzata: usa la rosa dei venti a sinistra"); return; }
+  let done=false;
+  const stop=()=>{ window.removeEventListener("deviceorientation",on); window.removeEventListener("deviceorientationabsolute",on); };
+  const on=ev=>{ let h=ev.webkitCompassHeading; if(h==null&&ev.absolute&&ev.alpha!=null) h=(360-ev.alpha)%360; if(h==null) return; done=true; stop(); setHeading(h,"dalla bussola"); };
+  window.addEventListener("deviceorientation",on); window.addEventListener("deviceorientationabsolute",on);
+  setTimeout(()=>{ if(!done){ stop(); toast("Bussola non disponibile qui: usa la rosa dei venti a sinistra"); } },5000);
+});
+$("#resetCorners").addEventListener("click",()=>{ P.corners=[]; drawPhoto(); });
+$("#toggleLabels").addEventListener("click",e=>{ P.hideLabels=!P.hideLabels; e.currentTarget.textContent=P.hideLabels?"Mostra scritte":"Nascondi scritte"; drawPhoto(); });
+
+/* disegno */
+function homog(q){
+  const [x0,y0]=q[0],[x1,y1]=q[1],[x2,y2]=q[2],[x3,y3]=q[3];
+  const dx1=x1-x2,dx2=x3-x2,dx3=x0-x1+x2-x3,dy1=y1-y2,dy2=y3-y2,dy3=y0-y1+y2-y3;
+  let a,b,c,d,e,f,g,h;
+  if(Math.abs(dx3)<1e-9&&Math.abs(dy3)<1e-9){a=x1-x0;b=x3-x0;c=x0;d=y1-y0;e=y3-y0;f=y0;g=0;h=0;}
+  else{const det=dx1*dy2-dx2*dy1; g=(dx3*dy2-dx2*dy3)/det; h=(dx1*dy3-dx3*dy1)/det; a=x1-x0+g*x1; b=x3-x0+h*x3; c=x0; d=y1-y0+g*y1; e=y3-y0+h*y3; f=y0;}
+  return (u,v)=>{const w=g*u+h*v+1; return [(a*u+b*v+c)/w,(d*u+e*v+f)/w];};
+}
+function poly(ctx,q){ ctx.beginPath(); q.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); }
+function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function handle(ctx,p,n,u){
+  ctx.beginPath(); ctx.arc(p[0],p[1],15*u,0,7); ctx.fillStyle="#fff"; ctx.fill(); ctx.lineWidth=4*u; ctx.strokeStyle="#F2A71B"; ctx.stroke();
+  ctx.fillStyle="#13233D"; ctx.font=`800 ${15*u}px Figtree, sans-serif`; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(n,p[0],p[1]+u);
+}
+function pill(ctx,p,text,u){
+  ctx.font=`700 ${14*u}px Figtree, sans-serif`; const w=ctx.measureText(text).width+20*u, h=26*u;
+  rr(ctx,p[0]-w/2,p[1]-h/2,w,h,h/2); ctx.fillStyle="#F2A71B"; ctx.fill();
+  ctx.fillStyle="#3a2400"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(text,p[0],p[1]+u);
+}
+function renderOverlay(ctx,T,u,live,B){
+  const cs=P.corners.map(p=>T(p[0],p[1]));
+  if(cs.length<4){
+    if(live&&cs.length){ ctx.strokeStyle="#F2A71B"; ctx.lineWidth=3*u; ctx.setLineDash([8*u,6*u]); ctx.beginPath(); cs.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.stroke(); ctx.setLineDash([]); cs.forEach((p,i)=>handle(ctx,p,i+1,u)); }
+    return;
+  }
+  const H=homog(cs), cols=P.cols, rows=P.rows, m=.035, gu=.012, gv=.022;
+  const cw=(1-2*m-gu*(cols-1))/cols, rh=(1-2*m-gv*(rows-1))/rows;
+  ctx.fillStyle="rgba(242,167,27,.12)"; poly(ctx,cs); ctx.fill();
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const u0=m+c*(cw+gu), v0=m+r*(rh+gv);
+    const q=[H(u0,v0),H(u0+cw,v0),H(u0+cw,v0+rh),H(u0,v0+rh)];
+    const gr=ctx.createLinearGradient(q[3][0],q[3][1],q[1][0],q[1][1]);
+    gr.addColorStop(0,"#33609e"); gr.addColorStop(.5,"#15294b"); gr.addColorStop(1,"#0c1a33");
+    ctx.fillStyle=gr; poly(ctx,q); ctx.fill();
+    ctx.strokeStyle="rgba(140,170,210,.45)"; ctx.lineWidth=.8*u;
+    for(let k=1;k<6;k++){ const t=k/6, a=H(u0,v0+rh*t), b=H(u0+cw,v0+rh*t); ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
+    for(let k=1;k<3;k++){ const t=k/3, a=H(u0+cw*t,v0), b=H(u0+cw*t,v0+rh); ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
+    ctx.strokeStyle="#dfe5ee"; ctx.lineWidth=1.6*u; poly(ctx,q); ctx.stroke();
+  }
+  ctx.strokeStyle="#F2A71B"; ctx.lineWidth=2.5*u; ctx.setLineDash([8*u,6*u]); poly(ctx,cs); ctx.stroke(); ctx.setLineDash([]);
+  if(P.w){ const p=H(.5,0); pill(ctx,[p[0],p[1]+22*u],fmt(P.w,1)+" m",u); }
+  if(P.l){ const p=H(0,.5); pill(ctx,[p[0]-34*u,p[1]],fmt(P.l,1)+" m",u); }
+  if(live) cs.forEach((p,i)=>handle(ctx,p,i+1,u));
+  // scheda con le indicazioni
+  if(!P.hideLabels){
+  const r=simulate(S.batt);
+  const L=[[`Falda ${$("#oriOut").textContent.trim()}, inclinata ${S.tilt}°`,600,13,"#5B6B82"],
+           [`${cols*rows} pannelli, ${fmt(r.kwp,2)} kWp`,800,21,"#13233D"],
+           [`circa ${fmt(Math.round(r.prodY/100)*100)} kWh all’anno`,700,15,"#1F8A5B"]];
+  let w=0; L.forEach(([t,wt,sz])=>{ ctx.font=`${wt} ${sz*u}px Figtree, sans-serif`; w=Math.max(w,ctx.measureText(t).width); });
+  w+=32*u; const h=(13+21+15)*u+40*u;
+  const top=H(.5,1), x=16*u, y=16*u;
+  ctx.beginPath(); ctx.moveTo(x+w/2,y+h); ctx.lineTo(top[0],top[1]); ctx.strokeStyle="rgba(255,255,255,.9)"; ctx.lineWidth=2*u; ctx.setLineDash([6*u,5*u]); ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(top[0],top[1],6*u,0,7); ctx.fillStyle="#fff"; ctx.fill();
+  ctx.save(); ctx.shadowColor="rgba(10,30,60,.35)"; ctx.shadowBlur=18*u; rr(ctx,x,y,w,h,14*u); ctx.fillStyle="rgba(255,255,255,.96)"; ctx.fill(); ctx.restore();
+  let ty=y+16*u; ctx.textAlign="left"; ctx.textBaseline="top";
+  L.forEach(([t,wt,sz,col])=>{ ctx.font=`${wt} ${sz*u}px Figtree, sans-serif`; ctx.fillStyle=col; ctx.fillText(t,x+16*u,ty); ty+=sz*u+5*u; });
+  }
+  if(!live){
+    const d=P.when||new Date();
+    const pos=P.lat!=null?`${fmt(Math.abs(P.lat),5)} ${P.lat>=0?"N":"S"}, ${fmt(Math.abs(P.lon),5)} ${P.lon>=0?"E":"O"}`:"Posizione non rilevata";
+    const st=`${pos}   ${d.toLocaleDateString("it-IT")} ${d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}   Solaris Studio, Gruppo P&C`;
+    ctx.font=`600 ${14*u}px Figtree, sans-serif`; const sw=ctx.measureText(st).width+24*u;
+    rr(ctx,12*u,B.h-44*u,sw,32*u,10*u); ctx.fillStyle="rgba(19,35,61,.82)"; ctx.fill();
+    ctx.fillStyle="#fff"; ctx.textBaseline="middle"; ctx.fillText(st,24*u,B.h-28*u);
+  }
+}
+function drawPhoto(){
+  const r=pc.getBoundingClientRect(); if(!r.width) return;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  if(pc.width!==Math.round(r.width*dpr)||pc.height!==Math.round(r.height*dpr)){ pc.width=Math.round(r.width*dpr); pc.height=Math.round(r.height*dpr); }
+  px.setTransform(dpr,0,0,dpr,0,0); px.clearRect(0,0,r.width,r.height);
+  if(!P.img) return;
+  const s=Math.min(r.width/P.img.width,r.height/P.img.height);
+  fit={s,x:(r.width-P.img.width*s)/2,y:(r.height-P.img.height*s)/2};
+  px.drawImage(P.img,fit.x,fit.y,P.img.width*s,P.img.height*s);
+  renderOverlay(px,(x,y)=>[fit.x+x*s,fit.y+y*s],1,true,{w:r.width,h:r.height});
+  const n=P.corners.length;
+  $("#photoTip").hidden=n>=4;
+  $("#tipLbl").textContent=n<4?`Angolo ${n+1} di 4`:"Pannelli posati";
+  const top=P.view==="top";
+  $("#tipTxt").textContent=n<4?(top?TIPS_TOP[n]:TIPS[n]):"";
+}
+function toImg(e){ const r=pc.getBoundingClientRect(); return [(e.clientX-r.left-fit.x)/fit.s,(e.clientY-r.top-fit.y)/fit.s]; }
+pc.addEventListener("pointerdown",e=>{
+  if(!P.img) return; const p=toImg(e);
+  if(P.corners.length<4){ P.corners.push(p); if(P.corners.length===4) fitGrid(); else drawPhoto(); return; }
+  let best=-1,bd=34/fit.s;
+  P.corners.forEach((c,i)=>{ const d=Math.hypot(c[0]-p[0],c[1]-p[1]); if(d<bd){bd=d;best=i;} });
+  if(best<0 && inQuad(p,P.corners)){ best=-2; lastP=p; }
+  dragIdx=best; if(best!==-1) pc.setPointerCapture(e.pointerId);
+});
+let lastP=null;
+function inQuad(p,q){ let ins=false; for(let i=0,j=q.length-1;i<q.length;j=i++){ const [xi,yi]=q[i],[xj,yj]=q[j]; if(((yi>p[1])!==(yj>p[1]))&&(p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi)) ins=!ins; } return ins; }
+pc.addEventListener("pointermove",e=>{
+  if(dragIdx===-1) return; const p=toImg(e);
+  if(dragIdx===-2){ const dx=p[0]-lastP[0], dy=p[1]-lastP[1]; P.corners=P.corners.map(c=>[c[0]+dx,c[1]+dy]); lastP=p; }
+  else P.corners[dragIdx]=p;
+  drawPhoto();
+});
+pc.addEventListener("pointerup",()=>{ const was=dragIdx!==-1; dragIdx=-1; if(was&&P.view==="top") fitGrid(); });
+pc.addEventListener("pointercancel",()=>{ dragIdx=-1; });
+
+/* griglia pannelli */
+function applyGrid(){ $("#gCols").textContent=P.cols; $("#gRows").textContent=P.rows; S.panels=P.cols*P.rows; $("#gridOut").textContent=S.panels+" pannelli"; rebuildHouse(); refresh(); }
+const TIPS_TOP=["Tocca l’angolo sinistro sul lato della grondaia","Ora l’angolo destro sulla grondaia","Ora l’angolo destro sul colmo","Infine l’angolo sinistro sul colmo"];
+function topGeometry(){
+  if(P.view!=="top"||P.corners.length<4) return;
+  const c=P.corners, d=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+  const mb=[(c[0][0]+c[1][0])/2,(c[0][1]+c[1][1])/2], mt=[(c[2][0]+c[3][0])/2,(c[2][1]+c[3][1])/2];
+  const az=(Math.atan2(mb[0]-mt[0],-(mb[1]-mt[1]))*180/Math.PI+360)%360;
+  let ori=Math.round((az-180)/5)*5; if(ori<-180) ori+=360; if(ori>180) ori-=360;
+  if(Math.abs(ori)>100) toast("Attenzione: questa falda guarda a nord, valuta l’altra");
+  S.ori=Math.max(-90,Math.min(90,ori)); updateDial(); rebuildHouse();
+  if(P.w){ const wpx=(d(c[0],c[1])+d(c[3],c[2]))/2, lpx=(d(c[0],c[3])+d(c[1],c[2]))/2;
+    P.l=Math.round(P.w*lpx/wpx/Math.cos(S.tilt*Math.PI/180)*10)/10; $("#slopeL").value=fmt(P.l,1); }
+}
+function fitGrid(){ topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)))); } applyGrid(); }
+$$("[data-pv]").forEach(b=>b.addEventListener("click",()=>{
+  P.view=b.dataset.pv; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  $("#compassBtn").hidden=P.view==="top";
+  if(P.corners.length===4) fitGrid(); drawPhoto();
+}));
+$$("[data-grid]").forEach(b=>b.addEventListener("click",()=>{
+  const k=b.dataset.grid;
+  if(k==="c+") P.cols=Math.min(20,P.cols+1); if(k==="c-") P.cols=Math.max(1,P.cols-1);
+  if(k==="r+") P.rows=Math.min(8,P.rows+1); if(k==="r-") P.rows=Math.max(1,P.rows-1);
+  applyGrid();
+}));
+const num=v=>{ const n=parseFloat(String(v).replace(",",".")); return isFinite(n)&&n>0?n:null; };
+["slopeW","slopeL"].forEach(id=>$("#"+id).addEventListener("input",()=>{ P.w=num($("#slopeW").value); P.l=num($("#slopeL").value); if(P.w&&(P.l||P.view==="top")) fitGrid(); else drawPhoto(); }));
+
+/* esporta e metti in proposta */
+async function exportBlob(){
+  const c=document.createElement("canvas"); c.width=P.img.width; c.height=P.img.height; const g=c.getContext("2d");
+  g.drawImage(P.img,0,0); renderOverlay(g,(x,y)=>[x,y],1/fit.s,false,{w:c.width,h:c.height});
+  return await new Promise(r=>c.toBlob(r,"image/jpeg",0.9));
+}
+async function snapshotProp(blob){
+  if(!P.img||P.corners.length<4) return;
+  blob=blob||await exportBlob(); if(!blob) return;
+  const im=$("#propPhoto"); if(im.dataset.u) URL.revokeObjectURL(im.dataset.u);
+  const url=URL.createObjectURL(blob); im.src=url; im.dataset.u=url; im.hidden=false;
+}
+$("#savePhoto").addEventListener("click",async()=>{
+  if(!P.img||P.corners.length<4){ toast("Prima tocca i 4 angoli della falda"); return; }
+  const blob=await exportBlob(); await snapshotProp(blob);
+  if(!downloads){ toast("Immagine aggiunta alla proposta"); return; }
+  try{
+    const res=await downloads.save({filename:`Solaris-${(S.cliente||"tetto").replace(/[^\w-]+/g,"-")}.jpg`,data:blob});
+    toast(res&&res.status==="saved"?"Immagine salvata e aggiunta alla proposta":"Immagine aggiunta alla proposta");
+  }catch(e){ toast(e&&e.code==="unavailable"?"Immagine aggiunta alla proposta":"Salvataggio annullato, l’immagine è comunque nella proposta"); }
+});
+
+/* ======================= COMPONENTI ======================= */
+function fillSelects(){
+  $("#panSel").innerHTML=PANELS.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
+  $("#invSel").innerHTML=INVERTERS.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
+  $("#panSel").value=S.panelId; $("#invSel").value=S.invId; PANEL_KW=curPanel().kw;
+}
+$("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(S.mode==="photo"&&P.corners.length===4) fitGrid(); refresh(); });
+$("#invSel").addEventListener("change",e=>{ S.invId=e.target.value; refresh(); });
+$("#newCompBtn").addEventListener("click",()=>{ $("#newComp").hidden=!$("#newComp").hidden; });
+$("#ncType").addEventListener("change",e=>{ const pan=e.target.value==="pan"; $("#ncDim").hidden=!pan; $("#ncHyb").parentElement.hidden=pan; });
+$("#ncSave").addEventListener("click",()=>{
+  const t=$("#ncType").value, n=$("#ncName").value.trim(), pow=num($("#ncPow").value), price=num($("#ncPrice").value);
+  const cost=num($("#ncCost").value)||Math.round((price||0)*0.65);
+  if(!n||!pow||!price){ toast("Servono nome, potenza e prezzo"); return; }
+  const id="c"+Date.now().toString(36); let item;
+  if(t==="pan"){
+    const dm=String($("#ncDim").value).replace(/,/g,".").split(/[x×*]/i).map(parseFloat).filter(v=>v>0);
+    item={id,n,kw:pow>20?pow/1000:pow,w:dm[0]||1.134,h:dm[1]||1.762,price,cost}; PANELS.push(item); S.panelId=id;
+  } else { item={id,n,kw:pow>100?pow/1000:pow,hyb:$("#ncHyb").checked,price,cost}; INVERTERS.push(item); S.invId=id; }
+  try{ const ex=JSON.parse(localStorage.getItem("solaris-catalogo")||"{}"); const k=t==="pan"?"pan":"inv"; (ex[k]=ex[k]||[]).push(item); localStorage.setItem("solaris-catalogo",JSON.stringify(ex)); }catch(e){}
+  fillSelects(); clampPanels(); rebuildHouse(); refresh(); $("#newComp").hidden=true;
+  ["ncName","ncPow","ncPrice","ncCost","ncDim"].forEach(i=>$("#"+i).value="");
+  toast("Aggiunto al catalogo: "+n);
+});
+function invCheck(r){
+  const inv=curInv(), ratio=r.kwp/inv.kw;
+  if(S.batt>0&&!inv.hyb) return ["warn",`Con la batteria serve un inverter ibrido: questo non lo è.`];
+  if(ratio>1.35) return ["warn",`Inverter piccolo per ${fmt(r.kwp,1)} kWp (rapporto ${fmt(ratio,2)}): scegline uno più grande.`];
+  if(ratio<0.75) return ["warn",`Inverter sovradimensionato (rapporto ${fmt(ratio,2)}): costa di più senza produrre di più.`];
+  return ["ok",`Abbinamento corretto: ${fmt(r.kwp,1)} kWp su ${fmt(inv.kw,1)} kW, rapporto ${fmt(ratio,2)}.`];
+}
+
+/* ======================= TROVA LA CASA ======================= */
+$("#addr").addEventListener("input",e=>{
+  S.addr=e.target.value.trim(); const q=encodeURIComponent(S.addr);
+  $("#gmaps").href=S.addr?`https://www.google.com/maps/search/?api=1&query=${q}`:"https://www.google.com/maps";
+  $("#gearth").href=S.addr?`https://earth.google.com/web/search/${q}`:"https://earth.google.com/web/";
+});
+
+/* ======================= ABITUDINI DI CASA ======================= */
+const QUIZ=[
+  {k:"persone",t:"Quante persone vivono in casa?",o:["1","2","3","4","5+"]},
+  {k:"giorno",t:"Nei giorni feriali c’è qualcuno in casa di giorno?",o:["Nessuno","Mezza giornata","Sempre"]},
+  {k:"elettro",t:"Lavatrice e lavastoviglie, quando?",o:["Sera","Weekend","Di giorno"]},
+  {k:"cucina",t:"Piano cottura",o:["Gas","Induzione"]},
+  {k:"acqua",t:"Acqua calda",o:["Caldaia","Boiler elettrico","Pompa di calore"]},
+  {k:"clima",t:"Condizionatore d’estate",o:["No","La sera","Di giorno"]},
+  {k:"auto",t:"Auto elettrica",o:["No","Ricarica di notte","Ricarica di giorno"]}];
+function renderQuiz(){
+  $("#quiz").innerHTML=QUIZ.map(q=>`<div class="q"><span>${q.t}</span><div class="seg">${q.o.map((o,i)=>`<button class="b3d${S.q[q.k]===i?" on":""}" data-q="${q.k}" data-i="${i}" aria-pressed="${S.q[q.k]===i}">${o}</button>`).join("")}</div></div>`).join("");
+}
+$("#quiz").addEventListener("click",e=>{
+  const b=e.target.closest("[data-q]"); if(!b) return;
+  S.q[b.dataset.q]=+b.dataset.i; S.qTouched=true; if(b.dataset.q==="giorno") S.presence=S.q.giorno;
+  applyQuiz();
+});
+function dayProfile(){
+  const q=S.q, p=q.persone+1, pf=Math.pow(p,0.6), h=new Array(24).fill(0.11);
+  const add=(a,b,kwh)=>{ for(let i=a;i<=b;i++) h[i]+=kwh/(b-a+1); };
+  add(7,8,0.45*pf); add(19,22,1.3*pf);
+  if(q.giorno>0) add(12,13,0.35*pf);
+  add(9,17,[0,1.0,2.0][q.giorno]);
+  const el=1.6*Math.sqrt(p/2);
+  if(q.elettro===0) add(20,22,el); else if(q.elettro===1){ add(10,15,el*.5); add(20,22,el*.5); } else add(10,15,el);
+  if(q.cucina===1){ add(19,20,0.9); if(q.giorno>0) add(12,13,0.6); }
+  if(q.acqua===1){ add(6,8,1.6); add(20,22,1.4); } else if(q.acqua===2) add(12,15,1.2);
+  if(q.clima===1) add(18,23,1.0); else if(q.clima===2) add(13,18,1.2);
+  if(q.auto===1) add(0,5,5.5); else if(q.auto===2) add(10,15,5.5);
+  return h;
+}
+function quizNumbers(){
+  const h=dayProfile(), tot=h.reduce((a,b)=>a+b,0); let day=0; for(let i=8;i<=18;i++) day+=h[i];
+  const clima=[0,1.0,1.2][S.q.clima];
+  return {h, f1:day/tot*5/7, est:Math.round((tot-clima*2/3)*365/100)*100};
+}
+function applyQuiz(){
+  const n=quizNumbers(); S.f1=n.f1;
+  $("#fasceBox").hidden=false;
+  const f1=Math.round(n.f1*100);
+  $("#fasceBar").innerHTML=`<i style="width:${f1}%;background:var(--sun)"></i><i style="width:${100-f1}%;background:var(--panel)"></i>`;
+  $("#fasceOut").textContent=`F1 ${f1}% / F23 ${100-f1}% (stima dalle abitudini)`;
+  refresh();
+}
+$("#useEst").addEventListener("click",()=>{
+  const n=quizNumbers();
+  S.billMode="kwh"; $$("[data-billmode]").forEach(x=>x.classList.toggle("on",x.dataset.billmode==="kwh")); onSeg("billMode");
+  S.kwh=Math.max(1500,Math.min(15000,n.est)); setRange("kwh",S.kwh,"#kwhOut",v=>fmt(v)+" kWh"); refresh();
+  toast("Consumi stimati dalle abitudini: "+fmt(S.kwh)+" kWh");
+});
+function dayChart(h,r){
+  const W=640,H=200,pl=34,pb=24, prodD=r.prodY/365;
+  const sh=h.map((_,i)=>Math.max(0,Math.sin(Math.PI*(i+0.5-6)/14)));
+  const ss=sh.reduce((a,b)=>a+b,0)||1, pr=sh.map(v=>v/ss*prodD);
+  const top=Math.max(...h,...pr), mx=top*1.15, bw=(W-pl)/24, Y=v=>H-pb-(H-pb-10)*v/mx;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Consumi e produzione in una giornata tipo">`;
+  h.forEach((v,i)=>{ const x=pl+i*bw; s+=`<rect x="${x+bw*.15}" y="${Y(v)}" width="${bw*.7}" height="${H-pb-Y(v)}" rx="3" fill="var(--panel)" opacity=".85"/>`; });
+  const pts=pr.map((v,i)=>`${pl+(i+.5)*bw},${Y(v)}`).join(" ");
+  s+=`<polygon points="${pl},${H-pb} ${pts} ${W},${H-pb}" fill="var(--sun)" opacity=".3"/><polyline points="${pts}" fill="none" stroke="var(--sun)" stroke-width="3" stroke-linejoin="round"/>`;
+  [0,6,12,18].forEach(t=>{ s+=`<text x="${pl+t*bw}" y="${H-6}" font-size="11" fill="var(--muted)">${t}:00</text>`; });
+  s+=`<text x="${pl-6}" y="${Y(top)+4}" text-anchor="end" font-size="10" fill="var(--muted)">${fmt(top,1)}</text><text x="${pl-6}" y="${H-pb}" text-anchor="end" font-size="10" fill="var(--muted)">0</text>`;
+  return s+`</svg>`;
+}
+function renderParts(r){
+  renderQuiz();
+  $("#panLbl").textContent=curPanel().n;
+  const [cls,msg]=invCheck(r); const ic=$("#invCheck"); ic.className="check "+cls; ic.textContent=msg;
+  const n=quizNumbers();
+  $("#dayChart").innerHTML=dayChart(n.h,r); $("#dayChart2").innerHTML=dayChart(n.h,r);
+  $("#qOut").textContent=S.qTouched?`circa ${fmt(n.est)} kWh all’anno`:"";
+  const ue=$("#useEst"); ue.hidden=!S.qTouched; ue.textContent=`Usa questa stima dei consumi: ${fmt(n.est)} kWh all’anno`;
+}
+
+/* ======================= AUTO-SAVE ======================= */
+let _saveTimer=null;
+function _setSaveStatus(t){
+  const el=document.getElementById("_saveStatus");
+  if(el){ el.textContent=t; el.style.opacity=t?"1":"0"; }
+}
+function saveToServer(){
+  if(!_PROGETTO_ID) return;
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(async()=>{
+    _setSaveStatus("↑ salvataggio…");
+    try{
+      const r=simulate(S.batt), cf=cashflow(r);
+      const body={
+        statoJson:{...S,addons:[...S.addons]},
+        kwp:+r.kwp.toFixed(3),
+        produzioneStimaKwh:Math.round(r.prodY),
+        risparmioAnno1:Math.round(r.saving),
+        rientroAnni:+(cf.pay||0).toFixed(1),
+        risparmio25anni:Math.round(cf.total+r.cost),
+        autonomiaPercent:Math.round(r.selfShare*100),
+        nomeCliente:S.cliente,
+        indirizzo:S.addr,
+        orientamento:S.ori,
+        inclinazione:S.tilt,
+        numeroPannelli:S.panels,
+        batteria:S.batt,
+        panelId:S.panelId,
+        inverterId:S.invId,
+        consumoKwh:S.kwh,
+        prezzoEnergia:S.price,
+        detrazioneFlag:S.detr,
+        costoKwp:S.ckwp,
+        costoBatteria:S.cbat,
+      };
+      const resp=await fetch(`/api/solaris/progetto/${_PROGETTO_ID}/save`,{
+        method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)
+      });
+      _setSaveStatus(resp.ok?"✓ salvato":"⚠ errore salvataggio");
+      setTimeout(()=>_setSaveStatus(""),3000);
+    }catch(e){
+      _setSaveStatus("⚠ errore rete");
+      setTimeout(()=>_setSaveStatus(""),3000);
+    }
+  },800);
+}
+
+/* ======================= AVVIO ======================= */
+fillSelects(); clampPanels(); updateDial(); refresh();
+if(window.THREE){ initThree(); } else { $("#nowKw").textContent="3D non disponibile"; }
+</script>
+</body>
+</html>
