@@ -228,7 +228,8 @@ model ClienteCorrelazione {
   principale  Boolean  @default(false)
   createdAt   DateTime @default(now())
 
-  @@unique([clienteId, correlatoId, tipologia])}
+  @@unique([clienteId, correlatoId, tipologia])
+}
 
 model Appuntamento {
   id        String   @id @default(cuid())
@@ -311,7 +312,8 @@ model Preventivo {
   solarisProgetto SolarisProgetto?
   commessa             Commessa?
   createdAt            DateTime            @default(now())
-  scadenza             DateTime?}
+  scadenza             DateTime?
+}
 
 model RigaPreventivo {
   id                        String             @id @default(cuid())
