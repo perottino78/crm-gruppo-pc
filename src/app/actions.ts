@@ -1524,3 +1524,100 @@ export async function aggiornaSolarisRuolo(formData: FormData) {
   });
   revalidatePath("/impostazioni");
 }
+
+export async function importaSolarisInPreventivo(formData: FormData) {
+  const progettoId = str(formData, "progettoId");
+  if (!progettoId) return;
+  const utente = await getCurrentUser();
+  if (!utente) return;
+
+  const progetto = await prisma.solarisProgetto.findUnique({
+    where: { id: progettoId },
+    select: {
+      id: true,
+      preventivoId: true,
+      commercialeId: true,
+      kwp: true,
+      numeroPannelli: true,
+      batteria: true,
+      panelId: true,
+      inverterId: true,
+      costoKwp: true,
+      costoBatteria: true,
+    },
+  });
+  if (!progetto || !progetto.preventivoId) return;
+  if (!isAmministratore(utente) && progetto.commercialeId !== utente.id) return;
+
+  const [pannello, inverter] = await Promise.all([
+    progetto.panelId
+      ? prisma.solarisComponente.findUnique({ where: { id: progetto.panelId }, select: { nome: true, potenzaW: true, prezzoVendita: true } })
+      : null,
+    progetto.inverterId
+      ? prisma.solarisComponente.findUnique({ where: { id: progetto.inverterId }, select: { nome: true, prezzoVendita: true } })
+      : null,
+  ]);
+
+  const preventivoId = progetto.preventivoId;
+  const righe: {
+    preventivoId: string;
+    testoLibero: string;
+    quantita: number;
+    prezzoUnitario: number;
+    ordine: number;
+  }[] = [];
+
+  const ordineBase = await prossimoOrdine(preventivoId, null);
+
+  // Pannelli fotovoltaici
+  if (pannello && progetto.numeroPannelli) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Pannello ${pannello.nome} ${pannello.potenzaW}W — ${progetto.numeroPannelli} pz (${progetto.kwp?.toFixed(2) ?? "?"} kWp totali)`,
+      quantita: progetto.numeroPannelli,
+      prezzoUnitario: pannello.prezzoVendita ?? 0,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  // Inverter
+  if (inverter) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Inverter ${inverter.nome}`,
+      quantita: 1,
+      prezzoUnitario: inverter.prezzoVendita ?? 0,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  // Sistema di accumulo
+  const battKwh = progetto.batteria ?? 0;
+  if (battKwh > 0 && progetto.costoBatteria != null) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Sistema di accumulo ${battKwh} kWh`,
+      quantita: 1,
+      prezzoUnitario: battKwh * progetto.costoBatteria,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  // Installazione, strutture e pratiche
+  if (progetto.kwp && progetto.costoKwp != null) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Installazione, strutture e pratiche — ${progetto.kwp.toFixed(2)} kWp`,
+      quantita: 1,
+      prezzoUnitario: progetto.kwp * progetto.costoKwp,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  if (righe.length > 0) {
+    await prisma.rigaPreventivo.createMany({ data: righe });
+    await ricalcolaTotali(preventivoId);
+  }
+
+  redirect(`/preventivi/${preventivoId}`);
+}

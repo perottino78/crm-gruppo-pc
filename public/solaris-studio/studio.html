@@ -505,13 +505,11 @@ section[hidden]{display:none}
           <div class="field"><label for="cbat">Prezzo accumulo <output id="cbatOut"></output></label><input type="range" id="cbat" min="300" max="900" step="10" value="520"></div>
           <p class="hint" id="margin"></p>
         </div>
-        <div class="card">
-          <h3>Firma qui</h3>
-          <p class="sub">Accettazione della proposta preliminare, soggetta a sopralluogo tecnico.</p>
-          <canvas class="sig" id="sig"></canvas>
+        <div id="tornaPrevCard" class="card" style="display:none">
+          <h3>Progettazione completata</h3>
+          <p class="sub">Torna al preventivo CRM per aggiungere i componenti e stampare l'offerta.</p>
           <div class="row" style="margin-top:14px">
-            <button class="b3d" id="sigClear">Cancella firma</button>
-            <button class="b3d go" id="sigOk">Conferma proposta</button>
+            <button class="b3d go" id="tornaPrevBtn">← Torna al preventivo</button>
           </div>
         </div>
       </div>
@@ -1094,17 +1092,15 @@ function refresh(){
 }
 
 /* ======================= FIRMA ======================= */
-const sig=$("#sig"), sg=sig.getContext("2d"); let drawing=false, hasSig=false;
-function sizeSig(){ const r=sig.getBoundingClientRect(); if(!r.width) return; sig.width=r.width*2; sig.height=r.height*2; sg.scale(2,2); sg.lineWidth=2.6; sg.lineCap="round"; sg.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--ink"); hasSig=false; }
-sig.addEventListener("pointerdown",e=>{drawing=true; sig.setPointerCapture(e.pointerId); const r=sig.getBoundingClientRect(); sg.beginPath(); sg.moveTo(e.clientX-r.left,e.clientY-r.top);});
-sig.addEventListener("pointermove",e=>{ if(!drawing) return; const r=sig.getBoundingClientRect(); sg.lineTo(e.clientX-r.left,e.clientY-r.top); sg.stroke(); hasSig=true; });
-sig.addEventListener("pointerup",()=>drawing=false);
-$("#sigClear").addEventListener("click",sizeSig);
-$("#sigOk").addEventListener("click",()=>{
-  if(!hasSig){ toast("Manca la firma: il cliente firma nel riquadro"); return; }
-  try{ localStorage.setItem("solaris-ultima-proposta",JSON.stringify({...S,quando:new Date().toISOString()})); }catch(e){}
-  toast("Proposta confermata per "+(S.cliente||"il cliente"));
-});
+// Pulsante "Torna al preventivo" — visibile solo se lanciato dal CRM (preventivoId iniettato)
+const _tornaPrevCard=document.getElementById("tornaPrevCard");
+const _tornaPrevBtn=document.getElementById("tornaPrevBtn");
+if(_INIT.preventivoId && _tornaPrevCard && _tornaPrevBtn){
+  _tornaPrevCard.style.display="";
+  _tornaPrevBtn.addEventListener("click",()=>{
+    window.top.location.href="/preventivi/"+_INIT.preventivoId;
+  });
+}
 function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("show"),2600); }
 
 /* ======================= FOTO DEL TETTO ======================= */

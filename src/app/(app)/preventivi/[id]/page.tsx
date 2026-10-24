@@ -33,6 +33,7 @@ import {
   spostaSezioneSu,
   spostaSezioneGiu,
   creaProgettoSolaris,
+  importaSolarisInPreventivo,
   duplicaPreventivo,
   archiviaPreventivo,
   ripristinaPreventivo,
@@ -432,28 +433,23 @@ export default async function PreventivoPage({
             preventivo.solarisProgetto ? (
               <Link
                 href={`/solaris/progetto/${preventivo.solarisProgetto.id}`}
-                className="btn-3d text-sm px-3 py-1.5"
-                style={{ background: "#16A34A", color: "#fff", borderColor: "#15803D" }}
+                className="btn-3d btn-3d-green text-sm px-3 py-1.5"
               >
-                ☀️ Apri Studio Solaris
+                ☀️ Studio Solaris
               </Link>
             ) : (
               <form action={creaProgettoSolaris}>
                 <input type="hidden" name="preventivoId" value={preventivo.id} />
-                <button
-                  type="submit"
-                  className="btn-3d text-sm px-3 py-1.5"
-                  style={{ background: "#16A34A", color: "#fff", borderColor: "#15803D" }}
-                >
-                  ☀️ Crea progetto Solaris
+                <button type="submit" className="btn-3d btn-3d-green text-sm px-3 py-1.5">
+                  ☀️ Studio Solaris
                 </button>
               </form>
             )
           )}
           <form action={duplicaPreventivo}>
             <input type="hidden" name="id" value={preventivo.id} />
-            <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Crea una copia con data odierna e nuovo numero offerta">
-              📄 Duplica offerta
+            <button type="submit" className="btn-3d btn-3d-blue text-sm px-3 py-1.5" title="Crea una copia con data odierna e nuovo numero offerta">
+              📄 Duplica
             </button>
           </form>
           {preventivo.archiviato ? (
@@ -464,7 +460,7 @@ export default async function PreventivoPage({
           ) : (
             <form action={archiviaPreventivo}>
               <input type="hidden" name="id" value={preventivo.id} />
-              <button type="submit" className="btn-3d text-sm px-3 py-1.5" title="Sposta l'offerta nell'archivio">🗄️ Archivia</button>
+              <button type="submit" className="btn-3d btn-3d-outline text-sm px-3 py-1.5" title="Sposta l'offerta nell'archivio">🗄️ Archivia</button>
             </form>
           )}
           <form action={eliminaPreventivo}>
@@ -505,6 +501,29 @@ export default async function PreventivoPage({
       </div>
 
       <AvvisoMisuraFuoriListino errore={errore} />
+
+      {preventivo.brand.nome === "Solaris" && preventivo.solarisProgetto && (
+        <div className="mb-4 flex items-center justify-between bg-green-50 border border-green-200 rounded-lg px-4 py-3">
+          <div>
+            <p className="text-sm font-semibold text-green-900">☀️ Progetto Solaris Studio collegato</p>
+            <p className="text-xs text-green-700 mt-0.5">Importa i componenti (pannelli, inverter, batteria, installazione) come righe nel preventivo.</p>
+          </div>
+          <div className="flex items-center gap-2 ml-4 shrink-0">
+            <Link
+              href={`/solaris/progetto/${preventivo.solarisProgetto.id}`}
+              className="btn-3d btn-3d-outline text-sm px-3 py-1.5"
+            >
+              ☀️ Apri Studio
+            </Link>
+            <form action={importaSolarisInPreventivo}>
+              <input type="hidden" name="progettoId" value={preventivo.solarisProgetto.id} />
+              <button type="submit" className="btn-3d btn-3d-green text-sm px-3 py-1.5">
+                ↓ Importa nel preventivo
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {errore && (
         <div className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5">
