@@ -141,6 +141,54 @@ async function main() {
     },
   });
 
+  // ── Catalogo Solaris: inverter e batterie ──────────────────────────────
+  const solarisId = brands["Solaris"];
+
+  const inverterItems = [
+    // Monofase ibrido
+    { nome: "Inverter Ibrido Monofase 3kW", potenzaW: 3000, faseTipo: "MONOFASE", ibrido: true, note: "Eff. max 97,6% – Vbatt 85-460V – Imax 25A – IP65 – Garanzia 7-15 anni – 411×505×192 mm" },
+    { nome: "Inverter Ibrido Monofase 4kW", potenzaW: 4000, faseTipo: "MONOFASE", ibrido: true, note: "Eff. max 97,6% – Vbatt 85-460V – Imax 25A – IP65 – Garanzia 7-15 anni – 411×505×192 mm" },
+    { nome: "Inverter Ibrido Monofase 5kW", potenzaW: 5000, faseTipo: "MONOFASE", ibrido: true, note: "Eff. max 97,6% – Vbatt 85-460V – Imax 25A – IP65 – Garanzia 7-15 anni – 411×505×192 mm" },
+    // Trifase ibrido
+    { nome: "Inverter Ibrido Trifase 5kW",  potenzaW: 5000,  faseTipo: "TRIFASE", ibrido: true, note: "Eff. max 98,6% – Vbatt 180-600V – Imax 25A – IP65 – Garanzia 7-15 anni – 457×654×228 mm – max 16 in parallelo" },
+    { nome: "Inverter Ibrido Trifase 6kW",  potenzaW: 6000,  faseTipo: "TRIFASE", ibrido: true, note: "Eff. max 98,6% – Vbatt 180-600V – Imax 25A – IP65 – Garanzia 7-15 anni – 457×654×228 mm" },
+    { nome: "Inverter Ibrido Trifase 8kW",  potenzaW: 8000,  faseTipo: "TRIFASE", ibrido: true, note: "Eff. max 98,6% – Vbatt 180-600V – Imax 25A – IP65 – Garanzia 7-15 anni – 457×654×228 mm" },
+    { nome: "Inverter Ibrido Trifase 10kW", potenzaW: 10000, faseTipo: "TRIFASE", ibrido: true, note: "Eff. max 98,6% – Vbatt 180-600V – Imax 25A – IP65 – Garanzia 7-15 anni – 457×654×228 mm" },
+  ];
+
+  for (const inv of inverterItems) {
+    await prisma.solarisComponente.upsert({
+      where: { brandId_categoria_nome: { brandId: solarisId, categoria: "INVERTER", nome: inv.nome } },
+      update: { note: inv.note },
+      create: { brandId: solarisId, categoria: "INVERTER", prezzoVendita: 0, costoAcquisto: 0, ...inv },
+    });
+  }
+  console.log(`Inverter Solaris: ${inverterItems.length} inseriti/aggiornati`);
+
+  const batteriaItems = [
+    // Bassa tensione 48V
+    { nome: "Accumulo LFP 48V – 2,4kWh",   potenzaW: 2400,  note: "48V LFP – DoD 90% – Imax 50A – IP20 – Garanzia 10 anni – 650×230×1500 mm – Espandibile 2,4÷14,4kWh" },
+    { nome: "Accumulo LFP 48V – 4,8kWh",   potenzaW: 4800,  note: "48V LFP – DoD 90% – Imax 100A – IP20 – Garanzia 10 anni – 650×230×1500 mm" },
+    { nome: "Accumulo LFP 48V – 7,2kWh",   potenzaW: 7200,  note: "48V LFP – DoD 90% – Imax 100A – IP20 – Garanzia 10 anni – 650×230×1500 mm" },
+    { nome: "Accumulo LFP 48V – 9,6kWh",   potenzaW: 9600,  note: "48V LFP – DoD 90% – Imax 100A – IP20 – Garanzia 10 anni – 650×230×1500 mm" },
+    { nome: "Accumulo LFP 48V – 14,4kWh",  potenzaW: 14400, note: "48V LFP – DoD 90% – Imax 100A – IP20 – Garanzia 10 anni – 650×230×1500 mm" },
+    // Alta tensione 80-576V
+    { nome: "Accumulo LFP HV – 5,52kWh",   potenzaW: 5520,  note: "HV 80-576V LFP – DoD 95% – Imax 25A – IP65 – Garanzia 10 anni – 640×220×1500 mm – Espandibile ÷55kWh" },
+    { nome: "Accumulo LFP HV – 11,04kWh",  potenzaW: 11040, note: "HV 80-576V LFP – DoD 95% – Imax 25A – IP65 – Garanzia 10 anni – 640×220×1500 mm" },
+    { nome: "Accumulo LFP HV – 13,8kWh",   potenzaW: 13800, note: "HV 80-576V LFP – DoD 95% – Imax 25A – IP65 – Garanzia 10 anni – 640×220×1500 mm" },
+    // AIO all-in-one
+    { nome: "Sistema AIO 5kW + 5,52kWh",   potenzaW: 5000,  note: "All-in-One – 5kW AC uscita – 5,52-8,29kWh LFP – DoD 95% – IP65 – Garanzia 10 anni – Espandibile ÷33kWh – Installazione 30 min" },
+  ];
+
+  for (const bat of batteriaItems) {
+    await prisma.solarisComponente.upsert({
+      where: { brandId_categoria_nome: { brandId: solarisId, categoria: "BATTERIA", nome: bat.nome } },
+      update: { note: bat.note },
+      create: { brandId: solarisId, categoria: "BATTERIA", prezzoVendita: 0, costoAcquisto: 0, ibrido: false, faseTipo: "MONOFASE", ...bat },
+    });
+  }
+  console.log(`Batterie Solaris: ${batteriaItems.length} inserite/aggiornate`);
+
   console.log("Seed completato.");
 }
 
