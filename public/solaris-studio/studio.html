@@ -1338,7 +1338,13 @@ function topGeometry(){
   if(P.w){ const wpx=(d(c[0],c[1])+d(c[3],c[2]))/2, lpx=(d(c[0],c[3])+d(c[1],c[2]))/2;
     P.l=Math.round(P.w*lpx/wpx/Math.cos(S.tilt*Math.PI/180)*10)/10; $("#slopeL").value=fmt(P.l,1); }
 }
-function fitGrid(){ topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)))); } applyGrid(); }
+function gridToSlope(){
+  const p=curPanel(); if(!P.cols||!P.rows) return;
+  P.w=P.cols*(p.w+0.03)+0.3; P.l=P.rows*(p.h+0.04)+0.3;
+  const sw=document.getElementById("slopeW"), sl=document.getElementById("slopeL");
+  if(sw) sw.value=fmt(P.w,2); if(sl) sl.value=fmt(P.l,2);
+}
+function fitGrid(){ if(!P.w&&P.cols) gridToSlope(); topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)))); } applyGrid(); }
 $$("[data-pv]").forEach(b=>b.addEventListener("click",()=>{
   P.view=b.dataset.pv; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x===b));
   $("#compassBtn").hidden=P.view==="top";
@@ -1348,7 +1354,7 @@ $$("[data-grid]").forEach(b=>b.addEventListener("click",()=>{
   const k=b.dataset.grid;
   if(k==="c+") P.cols=Math.min(20,P.cols+1); if(k==="c-") P.cols=Math.max(1,P.cols-1);
   if(k==="r+") P.rows=Math.min(8,P.rows+1); if(k==="r-") P.rows=Math.max(1,P.rows-1);
-  applyGrid();
+  applyGrid(); gridToSlope(); if(S.mode==="photo") drawPhoto();
 }));
 const num=v=>{ const n=parseFloat(String(v).replace(",",".")); return isFinite(n)&&n>0?n:null; };
 ["slopeW","slopeL"].forEach(id=>$("#"+id).addEventListener("input",()=>{ P.w=num($("#slopeW").value); P.l=num($("#slopeL").value); if(P.w&&(P.l||P.view==="top")) fitGrid(); else drawPhoto(); }));
