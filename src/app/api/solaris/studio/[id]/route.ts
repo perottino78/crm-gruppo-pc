@@ -56,6 +56,8 @@ export async function GET(
     .map((c) => ({
       id: c.id,
       n: c.nome,
+      kw: c.potenzaW / 1000,
+      faseTipo: c.faseTipo,
       price: livello !== "TECNICO" ? c.prezzoVendita : null,
       cost: mostraCosti ? c.costoAcquisto : null,
       ibrido: c.ibrido,
@@ -68,6 +70,7 @@ export async function GET(
     // mantenuto per retrocompatibilità con lo studio HTML esistente
     isAmministratore: livello === "AMMINISTRATORE",
     stato: (progetto.statoJson as Record<string, unknown> | null) ?? null,
+    categoriaImpianto: progetto.categoriaImpianto ?? null,
     catalogo: pannelli.length > 0 || inverter.length > 0
       ? { pannelli, inverter }
       : null,

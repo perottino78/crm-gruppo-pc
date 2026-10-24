@@ -901,6 +901,11 @@ model SolarisProgetto {
   // Snapshot completo per riaprire il progetto nello stesso stato (oggetto S del prototipo)
   statoJson     Json?
 
+  // Tipo impianto e dati normativi
+  categoriaImpianto String?   // MONOFASE | TRIFASE_RESIDENZIALE | TRIFASE_INDUSTRIALE
+  spiEsterno        Boolean?  // true = SPI esterno obbligatorio (>11.08 kWp, CEI 0-21 §9.5.1)
+  checklistJson     Json?     // checklist pratiche per impianti industriali ≥20 kWp
+
   stato         String    @default("BOZZA")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -931,6 +936,7 @@ model SolarisComponente {
   prezzoVendita Float
   costoAcquisto Float
   ibrido        Boolean  @default(false) // true = inverter ibrido (gestisce batteria)
+  faseTipo      String   @default("MONOFASE") // MONOFASE | TRIFASE
   attivo        Boolean  @default(true)
   note          String?
   createdAt     DateTime @default(now())

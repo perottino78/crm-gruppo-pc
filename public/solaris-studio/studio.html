@@ -325,6 +325,18 @@ section[hidden]{display:none}
         <h2>Il tuo tetto al sole</h2>
         <p class="lead">Ruota la casa, scegli i pannelli, guarda il sole muoversi.</p>
         <div class="field">
+          <div class="lbl">Tipo di impianto</div>
+          <div class="seg" id="categoriaSeg">
+            <button class="b3d on" data-categoria="MONOFASE">Monofase</button>
+            <button class="b3d" data-categoria="TRIFASE_RESIDENZIALE">Trifase</button>
+            <button class="b3d" data-categoria="TRIFASE_INDUSTRIALE">Industriale</button>
+          </div>
+        </div>
+        <div class="field" id="kwpTargetField">
+          <div class="lbl">Potenza target</div>
+          <div id="kwpTargetSeg" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+        </div>
+        <div class="field">
           <div class="lbl">Orientamento della falda <output id="oriOut">Sud</output></div>
           <div class="dial">
             <svg id="dial" viewBox="-80 -80 160 160" role="slider" aria-label="Orientamento" tabindex="0">
@@ -350,6 +362,7 @@ section[hidden]{display:none}
           <label class="hint" for="invSel">Inverter</label>
           <select id="invSel"></select>
           <div class="check" id="invCheck"></div>
+          <div class="check warn" id="spiWarn" hidden>⚠ Impianto &gt; 11.08 kWp: SPI esterno (DDI) obbligatorio per CEI 0-21 §9.5.1 — aggiungi voce separata a preventivo</div>
           <button class="b3d commOnly" id="newCompBtn">+ Nuovo pannello o inverter</button>
           <div class="newcomp commOnly" id="newComp" hidden>
             <div class="two"><select id="ncType" aria-label="Tipo di componente"><option value="pan">Pannello</option><option value="inv">Inverter</option></select><input type="text" id="ncName" placeholder="Marca e modello"></div>
@@ -499,6 +512,11 @@ section[hidden]{display:none}
           <div class="payopt" id="payopt"></div>
           <p class="hint" id="rataVs" style="margin-top:12px"></p>
         </div>
+        <div class="card" id="checklistCard" hidden>
+          <h3>Checklist normativa ≥ 20 kWp</h3>
+          <p class="sub">Pratiche obbligatorie per impianti industriali. Spunta ogni adempimento concordato con il cliente.</p>
+          <div id="checklistItems" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
+        </div>
         <div class="commercial card" id="commercial" hidden>
           <h3>Solo per il commerciale</h3>
           <div class="field"><label for="ckwp">Posa, strutture e pratiche <output id="ckwpOut"></output></label><input type="range" id="ckwp" min="400" max="1500" step="25" value="850"></div>
@@ -577,12 +595,12 @@ const PANELS=[
   {id:"trina445",n:"Trina Vertex S+ 445 W",kw:.445,w:1.134,h:1.762,price:130,cost:82},
   {id:"aiko460",n:"Aiko Neostar 460 W full black",kw:.46,w:1.134,h:1.762,price:165,cost:108}];
 const INVERTERS=[
-  {id:"hw3",n:"Huawei SUN2000-3KTL-L1 (ibrido)",kw:3,hyb:true,price:1150,cost:760},
-  {id:"hw6",n:"Huawei SUN2000-6KTL-L1 (ibrido)",kw:6,hyb:true,price:1450,cost:980},
-  {id:"zcs6",n:"ZCS Azzurro HYD 6000 ZSS (ibrido)",kw:6,hyb:true,price:1350,cost:900},
-  {id:"fr6",n:"Fronius Primo GEN24 6.0 Plus (ibrido)",kw:6,hyb:true,price:2200,cost:1500},
-  {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,price:2100,cost:1450},
-  {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,price:950,cost:620}];
+  {id:"hw3",n:"Huawei SUN2000-3KTL-L1 (ibrido)",kw:3,hyb:true,faseTipo:"MONOFASE",price:1150,cost:760},
+  {id:"hw6",n:"Huawei SUN2000-6KTL-L1 (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1450,cost:980},
+  {id:"zcs6",n:"ZCS Azzurro HYD 6000 ZSS (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1350,cost:900},
+  {id:"fr6",n:"Fronius Primo GEN24 6.0 Plus (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2200,cost:1500},
+  {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450},
+  {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620}];
 if(_INIT.catalogo){
   (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
   (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
@@ -590,12 +608,21 @@ if(_INIT.catalogo){
   try{ const ex=JSON.parse(localStorage.getItem("solaris-catalogo")||"{}"); (ex.pan||[]).forEach(p=>PANELS.push(p)); (ex.inv||[]).forEach(p=>INVERTERS.push(p)); }catch(e){}
 }
 function curPanel(){ return PANELS.find(p=>p.id===S.panelId)||PANELS[0]; }
-function curInv(){ return INVERTERS.find(p=>p.id===S.invId)||INVERTERS[0]; }
+function filteredInverters(){
+  const isTri = S.categoria !== "MONOFASE";
+  const fi = INVERTERS.filter(inv=>{
+    const ft = inv.faseTipo || (inv.kw > 6 ? "TRIFASE" : "MONOFASE");
+    return isTri ? ft === "TRIFASE" : ft === "MONOFASE";
+  });
+  return fi.length ? fi : INVERTERS;
+}
+function curInv(){ const fi=filteredInverters(); return fi.find(p=>p.id===S.invId)||fi[0]; }
 
 const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,tilt:28,panels:12,batt:5,
   month:5,hour:12,playing:false,step:1,ckwp:850,cbat:520,detr:0.5,commercial:false,cliente:"",
   panelId:"jinko440",invId:"hw6",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
   f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
+  categoria:"MONOFASE",spiEsterno:false,checklist:{vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false},
   mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null}};
 
 /* Ripristina stato salvato dal server */
@@ -605,7 +632,9 @@ if(_INIT.stato){
   Object.assign(S,st);
   S.addons=new Set(Array.isArray(addonsArr)?addonsArr:[]);
   if(!S.photo||typeof S.photo!=="object") S.photo={view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null};
+  if(!S.checklist||typeof S.checklist!=="object") S.checklist={vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false};
 }
+if(!S.categoria) S.categoria = _INIT.categoriaImpianto || "MONOFASE";
 /* Visualizzazione commerciale basata su ruolo */
 if(_LIVELLO==="AMMINISTRATORE") S.commercial=true;
 /* Modalità TECNICO: sola lettura, nessun prezzo */
@@ -1349,11 +1378,58 @@ $("#savePhoto").addEventListener("click",async()=>{
 /* ======================= COMPONENTI ======================= */
 function fillSelects(){
   $("#panSel").innerHTML=PANELS.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
-  $("#invSel").innerHTML=INVERTERS.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
+  const fi=filteredInverters();
+  $("#invSel").innerHTML=fi.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
+  if(!fi.find(p=>p.id===S.invId)) S.invId=(fi[0]||INVERTERS[0]).id;
   $("#panSel").value=S.panelId; $("#invSel").value=S.invId; PANEL_KW=curPanel().kw;
 }
 $("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(S.mode==="photo"&&P.corners.length===4) fitGrid(); refresh(); });
 $("#invSel").addEventListener("change",e=>{ S.invId=e.target.value; refresh(); });
+
+/* ===================== TIPO IMPIANTO ===================== */
+const TAGLIE={
+  MONOFASE:[{kw:4.5,p:10},{kw:6,p:14},{kw:9,p:20}],
+  TRIFASE_RESIDENZIALE:[{kw:6,p:14},{kw:9,p:20},{kw:12,p:27},{kw:15,p:34},{kw:20,p:45}],
+  TRIFASE_INDUSTRIALE:[{kw:20,p:45},{kw:30,p:67},{kw:50,p:112},{kw:100,p:223}]
+};
+const CHECKLIST_ITEMS=[
+  {k:"vvf",l:"VVF — Notifica Vigili del Fuoco (≥20 kWp, DPR 151/2011 cat. 74)"},
+  {k:"officinaEl",l:"Officina Elettrica — Licenza ADM (Dogane e Monopoli)"},
+  {k:"pas",l:"PAS/SUAP — Procedura Abilitativa Semplificata al Comune"},
+  {k:"telecontrollo",l:"Telecontrollo obbligatorio — collegamento GSE attivo"},
+  {k:"dnsh",l:"DNSH — Verifica Do No Significant Harm (se con incentivi Conto Energia o PNRR)"},
+  {k:"terna",l:"TERNA — Prenotazione potenza sulla rete (impianti >100 kWp)"},
+  {k:"strutturale",l:"Perizia strutturale del capannone per i carichi aggiuntivi"},
+  {k:"vincoli",l:"Verifica vincoli paesaggistici/monumentali sull'area (art. 146 D.Lgs. 42/2004)"}
+];
+function renderKwpTargets(){
+  const taglie=TAGLIE[S.categoria]||TAGLIE.MONOFASE;
+  const c=document.getElementById("kwpTargetSeg"); if(!c) return;
+  c.innerHTML=taglie.map(t=>`<button class="b3d" style="font-size:13px;min-height:44px;padding:0 14px;flex:0 0 auto" data-kwptarget="${t.p}" title="${t.kw} kWp"><strong>${t.kw} kWp</strong><small style="display:block;font-size:11px;font-weight:500;opacity:.7">${t.p} pannelli</small></button>`).join("");
+}
+function renderChecklist(){
+  const card=document.getElementById("checklistCard"); if(!card) return;
+  const isInd=S.categoria==="TRIFASE_INDUSTRIALE";
+  card.hidden=!isInd;
+  if(!isInd) return;
+  const el=document.getElementById("checklistItems");
+  el.innerHTML=CHECKLIST_ITEMS.map(i=>`<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 12px;background:var(--surface2);border-radius:10px;border:1px solid var(--line)"><input type="checkbox" style="margin-top:3px;flex:none" ${S.checklist[i.k]?"checked":""} data-cl="${i.k}"><span style="font-size:14px">${i.l}</span></label>`).join("");
+}
+document.getElementById("checklistItems").addEventListener("change",e=>{
+  const cb=e.target.closest("[data-cl]"); if(!cb) return;
+  S.checklist[cb.dataset.cl]=cb.checked; saveToServer();
+});
+document.getElementById("categoriaSeg").addEventListener("click",e=>{
+  const b=e.target.closest("[data-categoria]"); if(!b) return;
+  S.categoria=b.dataset.categoria;
+  $$("[data-categoria]").forEach(x=>x.classList.toggle("on",x.dataset.categoria===S.categoria));
+  renderKwpTargets(); fillSelects(); refresh();
+});
+document.getElementById("kwpTargetSeg").addEventListener("click",e=>{
+  const b=e.target.closest("[data-kwptarget]"); if(!b) return;
+  S.panels=+b.dataset.kwptarget; clampPanels(); rebuildHouse(); refresh();
+  toast("Impianto impostato a "+S.panels+" pannelli");
+});
 $("#newCompBtn").addEventListener("click",()=>{ $("#newComp").hidden=!$("#newComp").hidden; });
 $("#ncType").addEventListener("change",e=>{ const pan=e.target.value==="pan"; $("#ncDim").hidden=!pan; $("#ncHyb").parentElement.hidden=pan; });
 $("#ncSave").addEventListener("click",()=>{
@@ -1452,6 +1528,10 @@ function renderParts(r){
   renderQuiz();
   $("#panLbl").textContent=curPanel().n;
   const [cls,msg]=invCheck(r); const ic=$("#invCheck"); ic.className="check "+cls; ic.textContent=msg;
+  S.spiEsterno=r.kwp>11.08;
+  const spiEl=document.getElementById("spiWarn"); if(spiEl) spiEl.hidden=!S.spiEsterno;
+  $$("[data-categoria]").forEach(b=>b.classList.toggle("on",b.dataset.categoria===S.categoria));
+  renderChecklist();
   const n=quizNumbers();
   $("#dayChart").innerHTML=dayChart(n.h,r); $("#dayChart2").innerHTML=dayChart(n.h,r);
   $("#qOut").textContent=S.qTouched?`circa ${fmt(n.est)} kWh all’anno`:"";
@@ -1492,6 +1572,9 @@ function saveToServer(){
         detrazioneFlag:S.detr,
         costoKwp:S.ckwp,
         costoBatteria:S.cbat,
+        categoriaImpianto:S.categoria,
+        spiEsterno:S.spiEsterno||false,
+        checklistJson:S.checklist,
       };
       const resp=await fetch(`/api/solaris/progetto/${_PROGETTO_ID}/save`,{
         method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)
@@ -1506,7 +1589,7 @@ function saveToServer(){
 }
 
 /* ======================= AVVIO ======================= */
-fillSelects(); clampPanels(); updateDial(); refresh();
+fillSelects(); renderKwpTargets(); clampPanels(); updateDial(); refresh();
 if(window.THREE){ initThree(); } else { $("#nowKw").textContent="3D non disponibile"; }
 </script>
 </body>

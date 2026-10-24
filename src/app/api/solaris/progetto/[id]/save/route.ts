@@ -43,6 +43,9 @@ export async function POST(
     detrazioneFlag?: number;
     costoKwp?: number;
     costoBatteria?: number;
+    categoriaImpianto?: string;
+    spiEsterno?: boolean;
+    checklistJson?: Record<string, boolean>;
   };
 
   await prisma.solarisProgetto.update({
@@ -68,6 +71,9 @@ export async function POST(
       detrazioneFlag: body.detrazioneFlag ?? undefined,
       costoKwp: body.costoKwp ?? undefined,
       costoBatteria: body.costoBatteria ?? undefined,
+      categoriaImpianto: body.categoriaImpianto ?? undefined,
+      spiEsterno: body.spiEsterno ?? undefined,
+      checklistJson: body.checklistJson as Prisma.InputJsonValue | undefined,
     },
   });
 
