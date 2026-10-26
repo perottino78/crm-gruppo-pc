@@ -4,6 +4,7 @@ export const UFFICI: { chiave: string; nome: string }[] = [
   { chiave: "FATTURAZIONE", nome: "Fatturazione" },
   { chiave: "TECNICO", nome: "Tecnico / Rilievi" },
   { chiave: "ORDINI", nome: "Ufficio ordini" },
+  { chiave: "MAGAZZINO", nome: "Magazzino" },
   { chiave: "POSA", nome: "Posa" },
   { chiave: "AMMINISTRAZIONE", nome: "Amministrazione" },
 ];
