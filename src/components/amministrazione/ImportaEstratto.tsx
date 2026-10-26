@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { anteprimaImport, confermaImport, type AnteprimaImport, type EsitoImport } from "@/app/amministrazione-actions";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" as unknown as boolean });
 const dataIt = (s: string) => s.split("-").reverse().join("/");
 
 async function leggiTesto(f: File): Promise<string> {

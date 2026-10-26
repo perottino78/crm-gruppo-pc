@@ -6,6 +6,7 @@ const tab = [
   { href: "/amministrazione", label: "Cruscotto" },
   { href: "/amministrazione/scadenzario", label: "Scadenzario" },
   { href: "/amministrazione/prima-nota", label: "Prima nota" },
+  { href: "/amministrazione/costi-ricavi", label: "Costi e ricavi" },
   { href: "/amministrazione/banche", label: "Banche e importazioni" },
 ];
 
