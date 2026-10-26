@@ -1018,6 +1018,8 @@ model MovimentoFinanziario {
   // DA_ABBINARE | ABBINATO (collegato a scadenze) | REGISTRATO (classificato senza scadenza)
   stato          String                @default("DA_ABBINARE")
   categoria      String?
+  // Divisione a cui imputare il movimento (P&C, Solaris, Purafonte…), per costi e ricavi per centro
+  divisione      String?
   note           String?
   stornoDiId     String?
   stornatoDaId   String?
@@ -1115,4 +1117,16 @@ model RegistroAmministrazione {
   createdAt  DateTime @default(now())
 
   @@index([createdAt])
+}
+
+// Filtri salvati da un utente su una pagina (es. «Costi Solaris trimestre»)
+model VistaSalvata {
+  id        String   @id @default(cuid())
+  utenteId  String
+  pagina    String
+  nome      String
+  query     String
+  createdAt DateTime @default(now())
+
+  @@index([utenteId, pagina])
 }
