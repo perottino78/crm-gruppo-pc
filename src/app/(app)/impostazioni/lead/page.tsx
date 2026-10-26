@@ -7,7 +7,7 @@ import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { BRAND_SLUGS, getLeadKey } from "@/lib/leadIngest";
 import { configPresence } from "@/lib/meta/config";
 import { prisma } from "@/lib/prisma";
-import { rigeneraChiaveLead } from "@/app/lead-actions";
+import { rigeneraChiaveLead, impostaTelefonistaBrand } from "@/app/lead-actions";
 
 export default async function LeadSettings() {
   const u = await getCurrentUser();
@@ -17,6 +17,13 @@ export default async function LeadSettings() {
   const base = `https://${host}`;
   const chiave = await getLeadKey();
   const presenza = configPresence();
+  const [brands, telefoniste, configTel] = await Promise.all([
+    prisma.brand.findMany({ orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { ruolo: "TELEFONISTA" }, orderBy: { nome: "asc" } }),
+    prisma.configurazione.findMany({ where: { chiave: { startsWith: "lead_telefonista_" } } }),
+  ]);
+  const telMap: Record<string, string> = Object.fromEntries(configTel.map((c) => [c.chiave.replace("lead_telefonista_", ""), c.valore]));
+
   const [conteggi, recenti] = await Promise.all([
     prisma.metaDelivery.groupBy({ by: ["stato"], _count: true }),
     prisma.metaDelivery.findMany({ orderBy: { receivedAt: "desc" }, take: 10, select: { leadgenId: true, stato: true, tentativi: true, erroreCodice: true, receivedAt: true } }),
@@ -56,6 +63,36 @@ export default async function LeadSettings() {
         <form action={rigeneraChiaveLead} className="mt-3">
           <button className="text-xs text-red-700 underline">Rigenera chiave (la vecchia smette di funzionare)</button>
         </form>
+      </section>
+
+      <section className="bg-white rounded-lg border border-neutral-200 p-4">
+        <h2 className="font-bold text-neutral-900 mb-1">Telefonista di default per brand</h2>
+        <p className="text-xs text-neutral-600 mb-3">
+          Quando arriva un lead da Meta, Zapier o dal form del sito, viene assegnato automaticamente a questa telefonista.
+          Se non ne selezioni una, il sistema usa la prima telefonista attiva in ordine alfabetico.
+        </p>
+        {telefoniste.length === 0 ? (
+          <p className="text-xs text-amber-700">Nessuna telefonista configurata nel sistema. Aggiungi utenti con ruolo TELEFONISTA.</p>
+        ) : (
+          <form action={impostaTelefonistaBrand} className="space-y-2">
+            {brands.map((b) => (
+              <div key={b.id} className="flex items-center gap-3 flex-wrap">
+                <span className="text-sm font-semibold w-36">{b.nome}</span>
+                <select
+                  name={`tel_brand_${b.id}`}
+                  defaultValue={telMap[b.id] ?? ""}
+                  className="border border-neutral-200 rounded px-2 py-1 text-sm"
+                >
+                  <option value="">— automatica (prima telefonista) —</option>
+                  {telefoniste.map((t) => (
+                    <option key={t.id} value={t.id}>{t.nome}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+            <button className="mt-2 px-3 py-1 bg-neutral-900 text-white text-sm rounded hover:bg-neutral-700">Salva</button>
+          </form>
+        )}
       </section>
 
       <section className="bg-white rounded-lg border border-neutral-200 p-4">

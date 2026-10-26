@@ -54,6 +54,19 @@ export type DatiLead = {
   metaAdId?: string | null;
 };
 
+// Trova la telefonista di default per un brand (configurabile via DB, fallback alla prima TELEFONISTA).
+export async function telefonistaDefaultPerBrand(brandId: string): Promise<string | null> {
+  // Configurazione esplicita: chiave "lead_telefonista_{brandId}"
+  const cfg = await getConfig(`lead_telefonista_${brandId}`);
+  if (cfg) {
+    const ut = await prisma.utente.findUnique({ where: { id: cfg } });
+    if (ut) return ut.id;
+  }
+  // Fallback: prima TELEFONISTA attiva
+  const tel = await prisma.utente.findFirst({ where: { ruolo: "TELEFONISTA" }, orderBy: { nome: "asc" } });
+  return tel?.id ?? null;
+}
+
 // Crea il lead evitando doppioni (stesso telefono o email negli ultimi 30 giorni).
 export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato: boolean } | null> {
   const nome = (d.nome ?? "").trim().slice(0, 200);
@@ -82,6 +95,8 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
     }
     return { id: dup.id, duplicato: true };
   }
+  const telefonistaId = await telefonistaDefaultPerBrand(brandId);
+
   let l;
   try {
     l = await prisma.lead.create({
@@ -95,6 +110,7 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
       metaLeadgenId: d.externalId ?? null,
       metaFormId: d.metaFormId ?? null,
       metaAdId: d.metaAdId ?? null,
+      telefonistaId,
     },
   });
   } catch (e) {
