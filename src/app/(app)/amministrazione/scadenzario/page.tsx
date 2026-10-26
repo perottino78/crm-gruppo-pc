@@ -5,7 +5,9 @@ import { prisma } from "@/lib/prisma";
 import { sincronizzaScadenzeCommesse, residuoScadenza } from "@/lib/amministrazione/server";
 import { whereScadenze, oggiUtc, type ParametriScadenze } from "@/lib/amministrazione/filtri";
 import { cent } from "@/lib/amministrazione/estratto";
-import { eur, dataIt, STATI_SCADENZA } from "@/lib/amministrazione/costanti";
+import { eur, dataIt, STATI_SCADENZA, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
+import { BRANDS } from "@/lib/brands";
+import VisteSalvate from "@/components/amministrazione/VisteSalvate";
 import { nuovaScadenza, modificaScadenza, saldaManualmente, annullaScadenza } from "@/app/amministrazione-actions";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm bg-white";
@@ -66,6 +68,7 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
         </form>
       </div>
 
+      <VisteSalvate pagina="/amministrazione/scadenzario" query={qs({})} />
       <div className="grid grid-cols-3 gap-3">
         <Tot titolo="Da incassare (filtro attuale)" valore={daIncassare} cls="text-green-700" />
         <Tot titolo="Da pagare (filtro attuale)" valore={daPagare} cls="text-orange-700" />
@@ -84,8 +87,10 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
             <input name="importo" required inputMode="decimal" placeholder="Importo € (IVA incl.) *" className={inp} />
             <input name="dataScadenza" type="date" className={inp} title="Prima scadenza" />
             <input name="rate" type="number" min="1" max="24" defaultValue="1" className={inp} title="Numero di rate mensili" />
-            <input name="categoria" placeholder="Categoria (es. Fornitori, Utenze)" className={inp} />
-            <input name="note" placeholder="Note" className={`${inp} md:col-span-2`} />
+            <input name="categoria" list="elenco-categorie" placeholder="Categoria (es. Utenze)" className={inp} />
+            <datalist id="elenco-categorie">{CATEGORIE_MOVIMENTO.map((c) => <option key={c} value={c} />)}</datalist>
+            <select name="brand" className={inp}><option value="">Divisione…</option>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select>
+            <input name="note" placeholder="Note" className={inp} />
             <p className="text-[11px] text-neutral-500 md:col-span-3 self-center">Con più rate l&apos;importo viene diviso in scadenze mensili a partire dalla data indicata.</p>
             <button className="btn-3d btn-3d-green text-sm">Salva scadenza</button>
           </form>
