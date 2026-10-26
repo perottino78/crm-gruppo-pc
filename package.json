@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
-    "test:meta": "tsx --test tests/meta/*.test.ts"
+    "test:meta": "tsx --test tests/meta/*.test.ts",
+    "test:amministrazione": "tsx --test tests/amministrazione/*.test.ts"
   },
   "dependencies": {
     "@marketto/belfiore-connector-embedded": "^1.2.1",
