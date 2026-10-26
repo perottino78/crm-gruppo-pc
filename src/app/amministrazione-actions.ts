@@ -264,8 +264,9 @@ export async function registraMovimento(fd: FormData) {
   if (!id || !categoria) return;
   const m = await prisma.movimentoFinanziario.findUnique({ where: { id }, include: { abbinamenti: true } });
   if (!m || m.abbinamenti.length || (await eMeseChiuso(m.data))) return;
-  await prisma.movimentoFinanziario.update({ where: { id }, data: { stato: "REGISTRATO", categoria, note: str(fd, "note") ?? m.note } });
-  await registra("Movimento", id, "Registrato", `${giorno(m.data)} ${eur(m.importo)} «${m.descrizione.slice(0, 60)}» → ${categoria}`, u.nome);
+  const divisione = str(fd, "divisione");
+  await prisma.movimentoFinanziario.update({ where: { id }, data: { stato: "REGISTRATO", categoria, divisione: divisione ?? m.divisione, note: str(fd, "note") ?? m.note } });
+  await registra("Movimento", id, "Registrato", `${giorno(m.data)} ${eur(m.importo)} «${m.descrizione.slice(0, 60)}» → ${categoria}${divisione ? " · " + divisione : ""}`, u.nome);
   aggiorna();
 }
 
@@ -295,7 +296,7 @@ export async function nuovoMovimento(fd: FormData) {
   const m = await prisma.movimentoFinanziario.create({
     data: {
       contoId, data, importo, descrizione, origine: "MANUALE", impronta: `MAN-${randomUUID()}`,
-      stato: categoria ? "REGISTRATO" : "DA_ABBINARE", categoria, creatoDaNome: u.nome,
+      stato: categoria ? "REGISTRATO" : "DA_ABBINARE", categoria, divisione: str(fd, "divisione"), creatoDaNome: u.nome,
     },
   });
   await registra("Movimento", m.id, "Inserito a mano", `${giorno(data)} ${eur(importo)} «${descrizione}»${categoria ? " → " + categoria : ""}`, u.nome);
@@ -343,7 +344,7 @@ export async function nuovaScadenza(fd: FormData) {
       data: {
         tipo, controparte, descrizione: rate > 1 ? `${descrizione} (rata ${i + 1}/${rate})` : descrizione,
         importo: imp, dataScadenza: data, dataModificata: true, numeroDocumento: str(fd, "numeroDocumento"),
-        categoria: str(fd, "categoria"), soggettoId: str(fd, "soggettoId"), clienteId: str(fd, "clienteId"), note: str(fd, "note"),
+        categoria: str(fd, "categoria"), brand: str(fd, "brand"), soggettoId: str(fd, "soggettoId"), clienteId: str(fd, "clienteId"), note: str(fd, "note"),
       },
     });
     await registra("Scadenza", s.id, "Creata", `${tipo === "INCASSO" ? "Incasso" : "Pagamento"} ${controparte} · ${s.descrizione} · ${eur(imp)}${data ? " al " + giorno(data) : ""}`, u.nome);
@@ -435,5 +436,41 @@ export async function riapriMese(fd: FormData) {
   if (!motivo) return;
   await prisma.chiusuraMese.deleteMany({ where: { anno, mese } });
   await registra("Chiusura", `${anno}-${mese}`, "Mese riaperto", `${String(mese).padStart(2, "0")}/${anno} — motivo: ${motivo}`, u.nome);
+  aggiorna();
+}
+
+/** Imposta la divisione (centro) di un movimento. */
+export async function impostaDivisione(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id");
+  if (!id) return;
+  const m = await prisma.movimentoFinanziario.findUnique({ where: { id } });
+  if (!m || (await eMeseChiuso(m.data))) return;
+  const divisione = str(fd, "divisione");
+  if (divisione === m.divisione) return;
+  await prisma.movimentoFinanziario.update({ where: { id }, data: { divisione } });
+  await registra("Movimento", id, "Divisione", `${giorno(m.data)} ${eur(m.importo)} → ${divisione ?? "nessuna"}`, u.nome);
+  aggiorna();
+}
+
+// ======================= VISTE SALVATE =======================
+
+export async function salvaVista(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const pagina = str(fd, "pagina"), nome = str(fd, "nome");
+  const query = (str(fd, "query") ?? "").replace(/^\?/, "").slice(0, 500);
+  if (!pagina || !nome || !pagina.startsWith("/amministrazione")) return;
+  await prisma.vistaSalvata.create({ data: { utenteId: u.id, pagina, nome: nome.slice(0, 60), query } });
+  aggiorna();
+}
+
+export async function eliminaVista(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id");
+  if (!id) return;
+  await prisma.vistaSalvata.deleteMany({ where: { id, utenteId: u.id } });
   aggiorna();
 }
