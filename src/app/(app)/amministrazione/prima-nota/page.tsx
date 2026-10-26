@@ -7,8 +7,10 @@ import { whereMovimenti, type ParametriMovimenti } from "@/lib/amministrazione/f
 import { suggerisci } from "@/lib/amministrazione/abbinamento";
 import { cent } from "@/lib/amministrazione/estratto";
 import { eur, dataIt, STATI_MOVIMENTO, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
+import { BRANDS } from "@/lib/brands";
+import VisteSalvate from "@/components/amministrazione/VisteSalvate";
 import {
-  abbinaMovimento, abbinaSicuri, scollegaAbbinamento, registraMovimento, annullaRegistrazione, nuovoMovimento, stornaMovimento,
+  abbinaMovimento, abbinaSicuri, scollegaAbbinamento, registraMovimento, annullaRegistrazione, nuovoMovimento, stornaMovimento, impostaDivisione,
 } from "@/app/amministrazione-actions";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-xs bg-white";
@@ -81,6 +83,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
           </form>
         </div>
 
+        <VisteSalvate pagina="/amministrazione/prima-nota" query={qs({})} />
         <div className="flex flex-wrap gap-3 items-center bg-white border border-neutral-200 rounded-lg px-4 py-2 text-sm">
           <span>{conteggio} movimenti</span>
           <span className="text-green-700 font-semibold">Entrate {eur(totEntrate)}</span>
@@ -106,7 +109,8 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
               <option value="">— da abbinare a una scadenza —</option>
               {CATEGORIE_MOVIMENTO.map((c) => <option key={c}>{c}</option>)}
             </select>
-            <p className="text-[11px] text-neutral-500 md:col-span-3 self-center">I movimenti delle banche non si scrivono a mano: si importano dall&apos;estratto conto.</p>
+            <select name="divisione" className={`${inp} py-1.5`}><option value="">Divisione…</option>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select>
+            <p className="text-[11px] text-neutral-500 md:col-span-2 self-center">I movimenti delle banche non si scrivono a mano: si importano dall&apos;estratto conto.</p>
             <button className="btn-3d btn-3d-green text-xs">Registra</button>
           </form>
         </details>
@@ -180,6 +184,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
                                   <option value="" disabled>Registra senza scadenza come…</option>
                                   {CATEGORIE_MOVIMENTO.map((c) => <option key={c}>{c}</option>)}
                                 </select>
+                                <select name="divisione" className={inp} defaultValue={m.divisione ?? ""}><option value="">Divisione…</option>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select>
                                 <button className="btn-3d btn-3d-dark text-[11px] px-2" disabled={m.abbinamenti.length > 0}>OK</button>
                               </form>
                               <Link href={`/amministrazione/scadenzario?tipo=${tipo}`} className="text-[11px] underline text-neutral-600">La scadenza non c&apos;è? Creala nello scadenzario</Link>
@@ -198,6 +203,13 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
                         </form>
                       )}
                       {m.stornatoDaId && <p className="text-[11px] text-purple-700">Stornato</p>}
+                      {m.stato !== "DA_ABBINARE" && !chiuso && !m.stornatoDaId && m.origine !== "STORNO" && (
+                        <form action={impostaDivisione} className="flex gap-1 items-center">
+                          <input type="hidden" name="id" value={m.id} />
+                          <select name="divisione" defaultValue={m.divisione ?? ""} className={`${inp} py-0.5`}><option value="">Divisione: —</option>{BRANDS.map((b) => <option key={b.nome} value={b.nome}>Divisione: {b.nome}</option>)}</select>
+                          <button className="text-[11px] underline text-neutral-600">ok</button>
+                        </form>
+                      )}
                     </td>
                   </tr>
                 );
