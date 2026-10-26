@@ -977,3 +977,142 @@ model LeadSimulazione {
   simulazioneJson  Json?
   createdAt        DateTime @default(now())
 }
+
+// ============ AMMINISTRAZIONE: banche, prima nota, scadenzario ============
+// Tabelle indipendenti (nessuna relazione verso Commessa/Cliente/Soggetto: si referenziano per id)
+// per non toccare i modelli esistenti. Importi in euro, IVA inclusa.
+
+// Conto finanziario: conto corrente (BANCA), cassa contanti (CASSA) o carta (CARTA)
+model ContoFinanziario {
+  id                String                 @id @default(cuid())
+  nome              String
+  tipo              String                 @default("BANCA") // BANCA | CASSA | CARTA
+  banca             String?
+  iban              String?
+  // Saldo di partenza: i movimenti con data successiva a dataSaldoIniziale si sommano a questo
+  saldoIniziale     Float                  @default(0)
+  dataSaldoIniziale DateTime
+  fido              Float                  @default(0)
+  attivo            Boolean                @default(true)
+  ordine            Int                    @default(0)
+  movimenti         MovimentoFinanziario[]
+  importazioni      ImportazioneEstratto[]
+  createdAt         DateTime               @default(now())
+}
+
+// Movimento di prima nota. Origine IMPORT (dall'estratto conto, non modificabile) o MANUALE
+// (cassa, rettifiche). Non si cancella mai: un errore si corregge con uno storno.
+// importo: positivo = entrata, negativo = uscita
+model MovimentoFinanziario {
+  id             String                @id @default(cuid())
+  conto          ContoFinanziario      @relation(fields: [contoId], references: [id])
+  contoId        String
+  data           DateTime
+  dataValuta     DateTime?
+  importo        Float
+  descrizione    String
+  origine        String                @default("IMPORT") // IMPORT | MANUALE | STORNO
+  // Impronta univoca per bloccare i doppioni quando si reimporta lo stesso estratto
+  impronta       String                @unique
+  importazioneId String?
+  // DA_ABBINARE | ABBINATO (collegato a scadenze) | REGISTRATO (classificato senza scadenza)
+  stato          String                @default("DA_ABBINARE")
+  categoria      String?
+  note           String?
+  stornoDiId     String?
+  stornatoDaId   String?
+  creatoDaNome   String?
+  abbinamenti    AbbinamentoScadenza[]
+  createdAt      DateTime              @default(now())
+
+  @@index([contoId, data])
+  @@index([stato])
+}
+
+// Scadenza da incassare (INCASSO) o da pagare (PAGAMENTO).
+// origine COMMESSA_ACCONTO / COMMESSA_SALDO: generata in automatico dalla commessa.
+model Scadenza {
+  id               String                @id @default(cuid())
+  tipo             String // INCASSO | PAGAMENTO
+  descrizione      String
+  controparte      String
+  clienteId        String?
+  soggettoId       String?
+  commessaId       String?
+  origine          String                @default("MANUALE") // MANUALE | COMMESSA_ACCONTO | COMMESSA_SALDO
+  importo          Float
+  dataScadenza     DateTime?
+  // true se la data è stata cambiata a mano: la sincronizzazione con la commessa non la tocca più
+  dataModificata   Boolean               @default(false)
+  // APERTA | PARZIALE | PAGATA | ANNULLATA
+  stato            String                @default("APERTA")
+  // Parte saldata senza movimento bancario (es. incasso registrato prima dell'uso della prima nota)
+  pagatoManuale    Float                 @default(0)
+  numeroDocumento  String?
+  categoria        String?
+  brand            String?
+  note             String?
+  abbinamenti      AbbinamentoScadenza[]
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+
+  @@unique([commessaId, origine])
+  @@index([stato, dataScadenza])
+}
+
+// Collegamento movimento ↔ scadenza (un bonifico può saldare più fatture e viceversa)
+model AbbinamentoScadenza {
+  id           String               @id @default(cuid())
+  movimento    MovimentoFinanziario @relation(fields: [movimentoId], references: [id])
+  movimentoId  String
+  scadenza     Scadenza             @relation(fields: [scadenzaId], references: [id])
+  scadenzaId   String
+  importo      Float
+  creatoDaNome String?
+  createdAt    DateTime             @default(now())
+
+  @@unique([movimentoId, scadenzaId])
+}
+
+// Storico importazioni estratti conto, con l'esito della quadratura
+model ImportazioneEstratto {
+  id               String           @id @default(cuid())
+  conto            ContoFinanziario @relation(fields: [contoId], references: [id])
+  contoId          String
+  nomeFile         String
+  righeTotali      Int
+  righeNuove       Int
+  doppioni         Int
+  scartate         Int              @default(0)
+  dataDa           DateTime?
+  dataA            DateTime?
+  // Saldo finale indicato dalla banca e saldo calcolato dal CRM a fine importazione
+  saldoFinaleBanca Float?
+  saldoCalcolato   Float?
+  utenteNome       String?
+  createdAt        DateTime         @default(now())
+}
+
+// Mese chiuso: movimenti e abbinamenti di quel mese non si possono più modificare
+model ChiusuraMese {
+  id           String   @id @default(cuid())
+  anno         Int
+  mese         Int
+  chiusoDaNome String?
+  createdAt    DateTime @default(now())
+
+  @@unique([anno, mese])
+}
+
+// Registro di ogni operazione amministrativa (chi, cosa, quando)
+model RegistroAmministrazione {
+  id         String   @id @default(cuid())
+  entita     String
+  entitaId   String?
+  azione     String
+  dettaglio  String?
+  utenteNome String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+}
