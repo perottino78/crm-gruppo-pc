@@ -31,5 +31,6 @@ export const STATI_MOVIMENTO: Record<string, { label: string; cls: string }> = {
 // Giorni dopo la creazione della commessa entro cui è atteso l'acconto
 export const GIORNI_ATTESA_ACCONTO = 7;
 
-export const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// useGrouping "always": in italiano il punto delle migliaia altrimenti manca sui numeri di 4 cifre (3286,08 → 3.286,08)
+export const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" as unknown as boolean });
 export const dataIt = (d: Date | null | undefined) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric" }) : "—");
