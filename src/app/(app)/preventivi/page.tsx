@@ -29,12 +29,14 @@ export default async function PreventiviPage({
   const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
 
+  // numeroOfferta è Int, non supporta contains — lo cerchiamo per conversione numerica
+  const numeroRicercato = ricerca ? parseInt(ricerca, 10) : NaN;
   const ricercaWhere: Prisma.PreventivoWhereInput = ricerca
     ? {
         OR: [
           { cliente: { nome: { contains: ricerca, mode: "insensitive" } } },
           { commerciale: { nome: { contains: ricerca, mode: "insensitive" } } },
-          { numeroOfferta: { contains: ricerca, mode: "insensitive" } },
+          ...(isNaN(numeroRicercato) ? [] : [{ numeroOfferta: numeroRicercato }]),
         ],
       }
     : {};
