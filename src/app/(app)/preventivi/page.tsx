@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { creaPreventivo, aggiornaStatoPreventivo, archiviaOfferteScadute } from "@/app/actions";
 import Link from "next/link";
@@ -17,19 +18,30 @@ const COLONNE = [
 export default async function PreventiviPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string; archivio?: string }>;
+  searchParams: Promise<{ brand?: string; archivio?: string; q?: string }>;
 }) {
-  const { brand, archivio } = await searchParams;
+  const { brand, archivio, q } = await searchParams;
   const inArchivio = archivio === "1";
+  const ricerca = q?.trim();
   await archiviaOfferteScadute();
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
 
+  const ricercaWhere: Prisma.PreventivoWhereInput = ricerca
+    ? {
+        OR: [
+          { cliente: { nome: { contains: ricerca, mode: "insensitive" } } },
+          { commerciale: { nome: { contains: ricerca, mode: "insensitive" } } },
+          { numeroOfferta: { contains: ricerca, mode: "insensitive" } },
+        ],
+      }
+    : {};
+
   const [preventivi, clienti, brands, commerciali] = await Promise.all([
     prisma.preventivo.findMany({
-      where: { ...brandFiltro, ...preventivoScope, archiviato: inArchivio },
+      where: { AND: [brandFiltro, preventivoScope, { archiviato: inArchivio }, ricercaWhere] },
       include: { cliente: true, commerciale: true },
       orderBy: { createdAt: "desc" },
     }),
@@ -50,6 +62,28 @@ export default async function PreventiviPage({
         </Link>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+
+      {/* Barra di ricerca preventivi */}
+      <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-3 mb-4 flex flex-col sm:flex-row gap-2">
+        {brand && brand !== "Tutti" && <input type="hidden" name="brand" value={brand} />}
+        {inArchivio && <input type="hidden" name="archivio" value="1" />}
+        <input
+          type="text"
+          name="q"
+          defaultValue={q ?? ""}
+          placeholder="Cerca per cliente, commerciale o n° offerta…"
+          className="flex-1 border border-neutral-200 rounded px-3 py-2 text-sm"
+        />
+        <button className="btn-3d btn-3d-teal text-sm px-4 py-2 whitespace-nowrap">Cerca</button>
+        {ricerca && (
+          <Link
+            href={`/preventivi${brand && brand !== "Tutti" ? `?brand=${encodeURIComponent(brand)}` : ""}${inArchivio ? (brand && brand !== "Tutti" ? "&archivio=1" : "?archivio=1") : ""}`}
+            className="text-xs text-neutral-600 underline self-center whitespace-nowrap"
+          >
+            azzera
+          </Link>
+        )}
+      </form>
 
       <form action={creaPreventivo} className="bg-white rounded-lg border border-neutral-200 p-4 mb-8 flex flex-wrap items-end gap-2">
         <div className="flex flex-col gap-1">

@@ -96,7 +96,18 @@ export default async function ClientiPage({
     AND: [brandFiltro, clienteScope, ricercaStdWhere, ...filtriAvanzati],
   };
 
-  const leadWhere = { ...brandFiltro, ...leadScope };
+  // Ricerca lead: nome, telefono, email
+  const leadRicercaWhere: Prisma.LeadWhereInput = ricercaStd
+    ? {
+        OR: [
+          { nome: { contains: ricercaStd, mode: "insensitive" } },
+          { telefono: { contains: ricercaStd, mode: "insensitive" } },
+          { email: { contains: ricercaStd, mode: "insensitive" } },
+        ],
+      }
+    : {};
+
+  const leadWhere: Prisma.LeadWhereInput = { AND: [brandFiltro, leadScope, leadRicercaWhere] };
   const [clienti, clientiTotali, lead, leadTotali, brands] = await Promise.all([
     prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake }),
     prisma.cliente.count({ where: clientiWhere }),
@@ -112,10 +123,51 @@ export default async function ClientiPage({
 
   return (
     <div className="max-w-5xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold text-neutral-900">Clienti</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+
+      {/* Barra di ricerca unificata — filtra sia lead che clienti */}
+      <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
+        <input type="hidden" name="brand" value={brand ?? "Tutti"} />
+        {leadMostrati !== LEAD_DEFAULT && <input type="hidden" name="lead" value={leadMostrati} />}
+        {clientiMostrati !== LEAD_DEFAULT && <input type="hidden" name="clienti" value={clientiMostrati} />}
+        <div className="flex flex-col sm:flex-row gap-2">
+          <input
+            type="text"
+            name="q"
+            defaultValue={q ?? ""}
+            placeholder="Cerca per nome, telefono o email…"
+            className="flex-1 border border-neutral-200 rounded px-3 py-2 text-sm"
+          />
+          <button className="btn-3d btn-3d-teal text-sm px-4 py-2 whitespace-nowrap">Cerca</button>
+          {ricercaAttiva && (
+            <Link
+              href={`/clienti?brand=${encodeURIComponent(brand ?? "Tutti")}`}
+              className="text-xs text-neutral-600 underline self-center whitespace-nowrap"
+            >
+              azzera ricerca
+            </Link>
+          )}
+        </div>
+        <details className="mt-3" open={Boolean(indirizzo || comune || provincia || cap || (paese && paese !== "Tutti"))}>
+          <summary className="text-xs text-neutral-600 cursor-pointer select-none">🔍 Ricerca avanzata per indirizzo (solo clienti)</summary>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2">
+            <input type="text" name="indirizzo" defaultValue={indirizzo ?? ""} placeholder="Via" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <input type="text" name="comune" defaultValue={comune ?? ""} placeholder="Comune" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <input type="text" name="provincia" defaultValue={provincia ?? ""} placeholder="Prov." maxLength={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <input type="text" name="cap" defaultValue={cap ?? ""} placeholder="CAP" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            <select name="paese" defaultValue={paese ?? "Tutti"} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              <option value="Tutti">Paese: tutti</option>
+              <option value="IT">Italia</option>
+              <option value="FR">Francia</option>
+              <option value="DE">Germania</option>
+              <option value="CH">Svizzera (extra-UE)</option>
+            </select>
+          </div>
+        </details>
+      </form>
 
       <div className="grid grid-cols-2 gap-6 mb-8">
         <form action={creaLead} className="bg-white rounded-lg border border-neutral-200 p-4">
@@ -250,72 +302,6 @@ export default async function ClientiPage({
           ))}
         </div>
       </div>
-
-      <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-4 mb-4">
-        <input type="hidden" name="brand" value={brand ?? "Tutti"} />
-        {leadMostrati !== LEAD_DEFAULT && <input type="hidden" name="lead" value={leadMostrati} />}
-        {clientiMostrati !== LEAD_DEFAULT && <input type="hidden" name="clienti" value={clientiMostrati} />}
-        <div className="flex flex-col sm:flex-row gap-2">
-          <input
-            type="text"
-            name="q"
-            defaultValue={q ?? ""}
-            placeholder="Cerca per nome, telefono o email..."
-            className="flex-1 border border-neutral-200 rounded px-3 py-2 text-sm"
-          />
-          <button className="btn-3d btn-3d-teal text-sm px-4 py-2 whitespace-nowrap">Cerca</button>
-          {ricercaAttiva && (
-            <Link
-              href={`/clienti?brand=${encodeURIComponent(brand ?? "Tutti")}`}
-              className="text-xs text-neutral-600 underline self-center whitespace-nowrap"
-            >
-              azzera ricerca
-            </Link>
-          )}
-        </div>
-
-        <details className="mt-3" open={Boolean(indirizzo || comune || provincia || cap || (paese && paese !== "Tutti"))}>
-          <summary className="text-xs text-neutral-600 cursor-pointer select-none">🔍 Ricerca avanzata</summary>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2">
-            <input
-              type="text"
-              name="indirizzo"
-              defaultValue={indirizzo ?? ""}
-              placeholder="Indirizzo"
-              className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
-            />
-            <input
-              type="text"
-              name="comune"
-              defaultValue={comune ?? ""}
-              placeholder="Comune"
-              className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
-            />
-            <input
-              type="text"
-              name="provincia"
-              defaultValue={provincia ?? ""}
-              placeholder="Provincia"
-              maxLength={2}
-              className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
-            />
-            <input
-              type="text"
-              name="cap"
-              defaultValue={cap ?? ""}
-              placeholder="CAP"
-              className="border border-neutral-200 rounded px-2 py-1.5 text-sm"
-            />
-            <select name="paese" defaultValue={paese ?? "Tutti"} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
-              <option value="Tutti">Paese: tutti</option>
-              <option value="IT">Italia</option>
-              <option value="FR">Francia</option>
-              <option value="DE">Germania</option>
-              <option value="CH">Svizzera (extra-UE)</option>
-            </select>
-          </div>
-        </details>
-      </form>
 
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
         {clienti.map((c) => (
