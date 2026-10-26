@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
 
-const moduli = [
+const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean }[] = [
   { href: "/", label: "Dashboard", icon: "🏠" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
@@ -14,6 +14,7 @@ const moduli = [
   { href: "/assistenza", label: "Assistenza", icon: "🛟" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
   { href: "/commerciali", label: "Team & performance", icon: "🏆" },
+  { href: "/amministrazione", label: "Amministrazione", icon: "💶", soloAmministrazione: true },
   { href: "/report", label: "Report", icon: "📊" },
   { href: "/impostazioni", label: "Impostazioni", icon: "⚙️" },
 ];
@@ -47,8 +48,8 @@ export default function Sidebar({
         </div>
       </div>
       <nav className="flex flex-col gap-1 px-2">
-        {moduli.map((m) => {
-          const active = pathname === m.href;
+        {moduli.filter((m) => !m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO").map((m) => {
+          const active = m.href === "/" ? pathname === "/" : pathname === m.href || pathname.startsWith(m.href + "/");
           const href = brand !== "Tutti" ? `${m.href}?brand=${encodeURIComponent(brand)}` : m.href;
           return (
             <Link
