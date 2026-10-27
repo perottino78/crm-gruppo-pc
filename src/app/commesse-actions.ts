@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { avviaFaseFlusso } from "@/app/flusso-actions";
+import { datiAcquisto } from "@/lib/ordini/server";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -448,14 +449,16 @@ export async function generaRigheOrdine(formData: FormData) {
   });
   if (!c) return;
   const giaPresenti = new Set(c.righeOrdine.map((r) => r.rigaPreventivoId).filter(Boolean));
-  const nuove = c.preventivo.righe
-    .filter((r) => !giaPresenti.has(r.id))
+  const daAggiungere = c.preventivo.righe.filter((r) => !giaPresenti.has(r.id));
+  const acquisto = await datiAcquisto(daAggiungere);
+  const nuove = daAggiungere
     .map((r) => {
       let desc = r.testoLibero ?? (r.prodotto ? r.prodotto.tipologia.replace(/_/g, " ") : "Riga");
       if (r.prodotto && r.prodotto.colore && !/TARIFFA|Prezzo a/.test(r.prodotto.colore)) desc += ` — ${r.prodotto.colore}`;
       if (r.misuraLarghezza && r.misuraAltezza) desc += ` (${r.misuraLarghezza}×${r.misuraAltezza})`;
       if (r.optionalDescrizione) desc += ` + ${r.optionalDescrizione}`;
-      return { commessaId: id, rigaPreventivoId: r.id, descrizione: desc, quantita: r.quantita };
+      const acq = acquisto.get(r.id);
+      return { commessaId: id, rigaPreventivoId: r.id, descrizione: desc, quantita: r.quantita, ...acq };
     });
   if (nuove.length) {
     await prisma.rigaOrdine.createMany({ data: nuove });
@@ -484,12 +487,15 @@ export async function aggiornaRigaOrdine(formData: FormData) {
       ordinatoDaNome: ordinato ? (prima.ordinatoDaNome ?? u.nome) : null,
       arrivato,
       arrivatoIl: arrivato ? (prima.arrivatoIl ?? new Date()) : null,
-      fornitoreId,
-      fornitoreNome: forn?.ragioneSociale ?? null,
+      // una riga già in un ordine fornitore resta di quel fornitore
+      fornitoreId: prima.ordineFornitoreId ? prima.fornitoreId : fornitoreId,
+      fornitoreNome: prima.ordineFornitoreId ? prima.fornitoreNome : (forn?.ragioneSociale ?? null),
+      ...(prima.ordineFornitoreId || fornitoreId === prima.fornitoreId ? {} : { costoPrevisto: null, scontoAcquisto: null }),
       costoEffettivo: costo,
       note: str(formData, "note"),
     },
   });
+  if (!prima.commessaId) return;
   if (ordinato && !prima.ordinato) await log(prima.commessaId, `Ordine vidimato: ${prima.descrizione}${forn ? " (" + forn.ragioneSociale + ")" : ""}.`);
   if (arrivato && !prima.arrivato) await log(prima.commessaId, `Merce arrivata: ${prima.descrizione}.`);
   revalidatePath(`/commesse/${prima.commessaId}`);
