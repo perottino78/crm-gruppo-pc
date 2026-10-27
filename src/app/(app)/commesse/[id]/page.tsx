@@ -3,6 +3,9 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import StatoAcquisti from "@/components/ordini/StatoAcquisti";
+import Documenti from "@/components/documenti/Documenti";
+import { puoGestireOrdini } from "@/lib/ordini/server";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
   aggiornaCondizioniAcconto,
@@ -58,7 +61,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       eventi: { orderBy: { createdAt: "desc" } },
       fasi: { orderBy: { ordine: "asc" } },
       tasks: { orderBy: { createdAt: "desc" } },
-      righeOrdine: { orderBy: { createdAt: "asc" } },
+      righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true } } } },
       costiManuali: { orderBy: { data: "asc" } },
       assistenze: { orderBy: { createdAt: "desc" } },
       pose: { include: { foto: { orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
@@ -426,8 +429,9 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
 
       {/* RIGHE DA VIDIMARE */}
       <section className="card-fase" style={{ "--fase": "#ea580c" } as React.CSSProperties}>
-        <h2 className="mb-1">4 · Righe da ordinare (vidimazione)</h2>
+        <h2 className="mb-1">4 · Acquisti e ordini fornitori</h2>
         <p className="text-xs text-neutral-600 mb-3">La spunta &quot;ordinato&quot; attesta che l&apos;ordine è stato eseguito con il modulo del prodotto. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
+        <StatoAcquisti commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
         <div className="bg-amber-50 border border-amber-300 rounded p-3 mb-4">
           <p className="text-sm font-bold text-neutral-900 mb-1">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""}</p>
           <p className="text-xs text-neutral-700 mb-2">Inserisci un solo importo per fornitore/fattura invece del costo di ogni riga. Se presente, sostituisce i costi per riga nella scheda costi.</p>
@@ -460,9 +464,11 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             {c.righeOrdine.map((r) => (
               <form key={r.id} action={aggiornaRigaOrdine} className={`border rounded p-2 ${r.arrivato ? "border-green-300 bg-green-50" : r.ordinato ? "border-indigo-200 bg-indigo-50" : "border-neutral-200"}`}>
                 <input type="hidden" name="rigaId" value={r.id} />
-                <p className="text-sm font-medium text-neutral-900">{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span></p>
+                <p className="text-sm font-medium text-neutral-900">{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span>
+                  {r.ordineFornitore && <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="ml-2 text-xs text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>}
+                  {r.costoPrevisto !== null && <span className="ml-2 text-xs text-neutral-600">costo previsto {eur(r.costoPrevisto)}</span>}</p>
                 <div className="flex flex-wrap items-center gap-3 mt-1.5">
-                  <select name="fornitoreId" defaultValue={r.fornitoreId ?? ""} className={inp}>
+                  <select name="fornitoreId" defaultValue={r.fornitoreId ?? ""} disabled={!!r.ordineFornitoreId} title={r.ordineFornitoreId ? "La riga è già in un ordine: il fornitore non si cambia" : undefined} className={inp}>
                     <option value="">Fornitore…</option>
                     {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
                   </select>
@@ -786,6 +792,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
           ))}
         </ul>
       </section>
+      <Documenti entita="COMMESSA" entitaId={c.id} titolo="Documenti della commessa" />
     </div>
   );
 }
