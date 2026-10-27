@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
+import Documenti from "@/components/documenti/Documenti";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
@@ -1703,6 +1704,7 @@ export default async function PreventivoPage({
           )}
         </div>
       </details>
+      <Documenti entita="PREVENTIVO" entitaId={preventivo.id} titolo="Documenti dell’offerta" />
     </div>
   );
 }
