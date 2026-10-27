@@ -126,6 +126,7 @@ export default async function ProdottiPage({
     <div className="max-w-5xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-neutral-900">Prodotti &amp; listini</h1>
+        <a href="/prodotti/fornitori" className="text-sm text-blue-800 underline">🚚 Fornitori dei prodotti (a chi si ordina ogni modello)</a>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
