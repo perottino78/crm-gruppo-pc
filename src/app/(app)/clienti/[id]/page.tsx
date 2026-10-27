@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
+import Documenti from "@/components/documenti/Documenti";
 import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -204,6 +205,7 @@ export default async function SchedaClientePage({
           <p className="px-4 py-6 text-sm text-neutral-600">Nessuna attività registrata ancora.</p>
         )}
       </div>
+      <Documenti entita="CLIENTE" entitaId={cliente.id} titolo="Documenti del cliente" />
     </div>
   );
 }
