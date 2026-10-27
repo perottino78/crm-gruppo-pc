@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
 import { leggiEstratto, leggiImporto, improntePer, cent, giorno } from "@/lib/amministrazione/estratto";
+import { leggiPrimaNotaFoglio, descrizioneRiga, categoriaDaFoglio } from "@/lib/amministrazione/foglio";
+import { createHash } from "crypto";
 import { suggerisci } from "@/lib/amministrazione/abbinamento";
 import {
   utenteAmministrazione, registra, eMeseChiuso, mesiChiusi, meseDi, saldoConto,
@@ -43,6 +45,7 @@ export async function salvaConto(fd: FormData) {
     dataSaldoIniziale: dataSaldo,
     fido: cent(num(fd, "fido") ?? 0),
     ordine: Math.round(num(fd, "ordine") ?? 0),
+    divisione: str(fd, "divisione"),
     attivo: fd.get("attivo") !== "no",
   };
   if (id) {
@@ -473,4 +476,166 @@ export async function eliminaVista(fd: FormData) {
   if (!id) return;
   await prisma.vistaSalvata.deleteMany({ where: { id, utenteId: u.id } });
   aggiorna();
+}
+
+// ======================= IMPORTAZIONE PRIMA NOTA DA FOGLIO =======================
+
+export type AnteprimaFoglio = {
+  ok: boolean;
+  errore?: string;
+  aperturaFoglio?: { importo: number; etichetta: string; data: string | null };
+  contoSenzaMovimenti: boolean;
+  saldoInizialeConto: number;
+  dataSaldoInizialeConto: string;
+  movimenti: number;
+  nuovi: number;
+  doppioni: number;
+  inMesiChiusi: number;
+  primaDelSaldo: number;
+  periodo?: { da: string; a: string };
+  entrate: number;
+  uscite: number;
+  categorie: { categoria: string; n: number; totale: number }[];
+  daAbbinare: number;
+  salti: { riga: number; atteso: number; foglio: number; differenza: number }[];
+  saldoFinaleFoglio: number | null;
+  saldoCalcolatoFoglio: number | null;
+  programmate: { data: string; importo: number; descrizione: string; passata: boolean; giaPresente: boolean }[];
+  righeVuote: number;
+};
+
+/** Inizio di oggi (ora italiana ≈ UTC del giorno): righe senza totale prima di oggi sono da verificare. */
+const oggiInizio = () => new Date(`${giorno(new Date())}T00:00:00Z`);
+
+const chiaveScadenzaFoglio = (contoId: string, r: { data: Date; importo: number; tipo: string; rif: string; controparte: string }, n: number) =>
+  createHash("sha256").update([contoId, giorno(r.data), Math.round(r.importo * 100), descrizioneRiga(r).toUpperCase().replace(/\s+/g, ""), n].join("|")).digest("hex");
+
+async function analizzaFoglio(contoId: string, testo: string) {
+  const f = leggiPrimaNotaFoglio(testo);
+  const conto = await prisma.contoFinanziario.findUnique({ where: { id: contoId } });
+  const descr = f.movimenti.map((r) => ({ data: r.data, importo: r.importo, descrizione: descrizioneRiga(r) }));
+  const impronte = improntePer(contoId, descr);
+  const gia = new Set((await prisma.movimentoFinanziario.findMany({ where: { impronta: { in: impronte } }, select: { impronta: true } })).map((m) => m.impronta));
+  const chiusi = await mesiChiusi();
+  const righe = f.movimenti.map((r, i) => {
+    const { anno, mese } = meseDi(r.data);
+    return { ...r, descrizione: descr[i].descrizione, impronta: impronte[i], doppione: gia.has(impronte[i]), meseChiuso: chiusi.has(`${anno}-${mese}`), categoria: categoriaDaFoglio(r) };
+  });
+  const visti = new Map<string, number>();
+  const programmate = f.senzaTotale.map((r) => {
+    const base = descrizioneRiga(r) + giorno(r.data) + r.importo;
+    const n = (visti.get(base) ?? 0) + 1; visti.set(base, n);
+    return { ...r, chiave: chiaveScadenzaFoglio(contoId, r, n) };
+  });
+  const giaScad = new Set((await prisma.scadenza.findMany({ where: { chiaveImport: { in: programmate.map((p) => p.chiave) } }, select: { chiaveImport: true } })).map((s) => s.chiaveImport));
+  const nMov = conto ? await prisma.movimentoFinanziario.count({ where: { contoId } }) : 0;
+  return { f, conto, righe, programmate, giaScad, contoSenzaMovimenti: nMov === 0 };
+}
+
+export async function anteprimaFoglio(contoId: string, testo: string, dataApertura: string | null): Promise<AnteprimaFoglio> {
+  const base = { contoSenzaMovimenti: false, saldoInizialeConto: 0, dataSaldoInizialeConto: "", movimenti: 0, nuovi: 0, doppioni: 0, inMesiChiusi: 0, primaDelSaldo: 0, entrate: 0, uscite: 0, categorie: [], daAbbinare: 0, salti: [], saldoFinaleFoglio: null, saldoCalcolatoFoglio: null, programmate: [], righeVuote: 0 };
+  const u = await utenteAmministrazione();
+  if (!u) return { ok: false, errore: "Non autorizzato.", ...base };
+  if (testo.length > 5_000_000) return { ok: false, errore: "File troppo grande.", ...base };
+  const { f, conto, righe, programmate, giaScad, contoSenzaMovimenti } = await analizzaFoglio(contoId, testo);
+  if (!conto) return { ok: false, errore: "Conto non trovato.", ...base };
+  if (!f.ok) return { ok: false, errore: f.errore, ...base };
+  // con il saldo iniziale che verrà impostato (conto vuoto) la data di riferimento è quella di apertura
+  const dataRif = contoSenzaMovimenti && dataApertura ? new Date(`${dataApertura}T12:00:00Z`) : conto.dataSaldoIniziale;
+  const valide = righe.filter((r) => !r.doppione && !r.meseChiuso && r.data > dataRif);
+  const cat = new Map<string, { n: number; totale: number }>();
+  for (const r of valide) {
+    const k = r.categoria ?? "Da abbinare (incassi clienti, fornitori…)";
+    const x = cat.get(k) ?? { n: 0, totale: 0 };
+    x.n++; x.totale = cent(x.totale + r.importo); cat.set(k, x);
+  }
+  return {
+    ok: true,
+    aperturaFoglio: f.saldoIniziale ? { importo: f.saldoIniziale.importo, etichetta: f.saldoIniziale.etichetta, data: f.saldoIniziale.data ? giorno(f.saldoIniziale.data) : null } : undefined,
+    contoSenzaMovimenti,
+    saldoInizialeConto: conto.saldoIniziale,
+    dataSaldoInizialeConto: giorno(conto.dataSaldoIniziale),
+    movimenti: righe.length,
+    nuovi: valide.length,
+    doppioni: righe.filter((r) => r.doppione).length,
+    inMesiChiusi: righe.filter((r) => !r.doppione && r.meseChiuso).length,
+    primaDelSaldo: righe.filter((r) => !r.doppione && r.data <= dataRif).length,
+    periodo: righe.length ? { da: giorno(new Date(Math.min(...righe.map((r) => r.data.getTime())))), a: giorno(new Date(Math.max(...righe.map((r) => r.data.getTime())))) } : undefined,
+    entrate: cent(valide.filter((r) => r.importo > 0).reduce((t, r) => t + r.importo, 0)),
+    uscite: cent(valide.filter((r) => r.importo < 0).reduce((t, r) => t + r.importo, 0)),
+    categorie: [...cat.entries()].map(([categoria, v]) => ({ categoria, ...v })).sort((a, b) => b.n - a.n),
+    daAbbinare: valide.filter((r) => !r.categoria).length,
+    salti: f.salti.slice(0, 20),
+    saldoFinaleFoglio: f.saldoFinaleFoglio,
+    saldoCalcolatoFoglio: f.saldoCalcolato,
+    programmate: programmate.map((p) => ({ data: giorno(p.data), importo: p.importo, descrizione: descrizioneRiga(p), passata: p.data < oggiInizio(), giaPresente: giaScad.has(p.chiave) })),
+    righeVuote: f.righeVuote,
+  };
+}
+
+export async function confermaFoglio(contoId: string, testo: string, nomeFile: string, impostaApertura: boolean, dataApertura: string | null): Promise<EsitoImport> {
+  const u = await utenteAmministrazione();
+  if (!u) return { ok: false, messaggio: "Non autorizzato." };
+  const analisi = await analizzaFoglio(contoId, testo);
+  const { f, righe, programmate, contoSenzaMovimenti } = analisi;
+  let conto = analisi.conto;
+  if (!conto) return { ok: false, messaggio: "Conto non trovato." };
+  if (!f.ok || !f.saldoIniziale) return { ok: false, messaggio: f.errore ?? "Foglio non leggibile." };
+  if (f.salti.length) return { ok: false, messaggio: `Il totale progressivo del foglio ha ${f.salti.length} salti (prima alla riga ${f.salti[0].riga}): correggi il foglio prima di importare.` };
+  // saldo di apertura del foglio come saldo iniziale del conto (solo su un conto ancora vuoto)
+  if (impostaApertura) {
+    if (!contoSenzaMovimenti) return { ok: false, messaggio: "Il saldo iniziale si può impostare dal foglio solo su un conto senza movimenti." };
+    if (!dataApertura || !/^\d{4}-\d{2}-\d{2}$/.test(dataApertura)) return { ok: false, messaggio: "Indica la data del saldo di apertura." };
+    const prima = conto.saldoIniziale;
+    conto = await prisma.contoFinanziario.update({ where: { id: contoId }, data: { saldoIniziale: f.saldoIniziale.importo, dataSaldoIniziale: new Date(`${dataApertura}T12:00:00Z`) } });
+    await registra("Conto", contoId, "Saldo iniziale dal foglio", `${conto.nome}: ${eur(prima)} → ${eur(f.saldoIniziale.importo)} al ${dataApertura} («${f.saldoIniziale.etichetta}» in ${nomeFile})`, u.nome);
+  }
+  const dataRif = conto.dataSaldoIniziale;
+  const daInserire = righe.filter((r) => !r.doppione && !r.meseChiuso && r.data > dataRif);
+  const imp = await prisma.importazioneEstratto.create({
+    data: {
+      contoId, nomeFile: `[Foglio] ${nomeFile}`.slice(0, 200), righeTotali: righe.length, righeNuove: 0,
+      doppioni: righe.filter((r) => r.doppione).length, scartate: f.righeVuote,
+      dataDa: righe.length ? new Date(Math.min(...righe.map((r) => r.data.getTime()))) : null,
+      dataA: righe.length ? new Date(Math.max(...righe.map((r) => r.data.getTime()))) : null,
+      utenteNome: u.nome,
+    },
+  });
+  const res = await prisma.movimentoFinanziario.createMany({
+    data: daInserire.map((r) => ({
+      contoId, data: r.data, importo: r.importo, descrizione: r.descrizione.slice(0, 500), origine: "FOGLIO", impronta: r.impronta,
+      importazioneId: imp.id, creatoDaNome: u.nome, stato: r.categoria ? "REGISTRATO" : "DA_ABBINARE", categoria: r.categoria,
+      divisione: conto!.divisione, note: r.appunti ? r.appunti.slice(0, 500) : null,
+    })),
+    skipDuplicates: true,
+  });
+  // righe senza totale → scadenze (programmate o da verificare)
+  const ultima = f.movimenti.reduce((a, r) => (r.data > a ? r.data : a), f.movimenti[0].data);
+  // nessun doppione anche con due importazioni contemporanee: blocco per conto e nuovo controllo dentro la transazione
+  const sc = await prisma.$transaction(async (tx) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${"foglio:" + contoId}))`;
+    const esistenti = new Set((await tx.scadenza.findMany({ where: { chiaveImport: { in: programmate.map((p) => p.chiave) } }, select: { chiaveImport: true } })).map((s) => s.chiaveImport));
+    const nuoveScad = programmate.filter((p) => !esistenti.has(p.chiave));
+    return tx.scadenza.createMany({
+    data: nuoveScad.map((p) => ({
+      tipo: p.importo < 0 ? "PAGAMENTO" : "INCASSO", origine: "FOGLIO", chiaveImport: p.chiave,
+      controparte: p.controparte || p.tipo || "—", descrizione: [p.tipo, p.rif].filter(Boolean).join(" · ").slice(0, 300) || "Movimento programmato",
+      importo: cent(Math.abs(p.importo)), dataScadenza: p.data, dataModificata: true, brand: conto!.divisione, categoria: "Da prima nota foglio",
+      note: p.data < oggiInizio() ? `Riga del foglio ${nomeFile} senza totale (non conteggiata nel saldo): verificare se pagata, insoluta o da correggere.` : `Programmato nel foglio ${nomeFile} (${conto!.nome}).`,
+    })),
+    });
+  });
+  // quadratura: saldo CRM alla data dell'ultima riga del foglio contro il totale finale del foglio
+  const saldoCalcolato = await saldoConto(contoId, new Date(ultima.getTime() + 12 * 3600000));
+  const differenza = f.saldoFinaleFoglio === null ? undefined : cent(f.saldoFinaleFoglio - saldoCalcolato);
+  await prisma.importazioneEstratto.update({ where: { id: imp.id }, data: { righeNuove: res.count, saldoFinaleBanca: f.saldoFinaleFoglio, saldoCalcolato } });
+  await registra("Importazione", imp.id, "Prima nota da foglio", `${conto.nome} · ${nomeFile} · ${res.count} movimenti, ${sc.count} scadenze${differenza === undefined ? "" : Math.abs(differenza) < 0.005 ? " · quadratura OK" : ` · DIFFERENZA ${eur(differenza)}`}`, u.nome);
+  const abbinatiAuto = await abbinaSicuriInterno(u.nome, imp.id);
+  aggiorna();
+  return {
+    ok: true,
+    messaggio: `Importati ${res.count} movimenti (${righe.filter((r) => r.doppione).length} già presenti) e ${sc.count} scadenze dalle righe senza totale.${abbinatiAuto ? ` ${abbinatiAuto} abbinati in automatico.` : ""}`,
+    quadratura: differenza === undefined ? "NON_VERIFICATA" : Math.abs(differenza) < 0.005 ? "OK" : "DIFFERENZA",
+    differenza, abbinatiAuto,
+  };
 }
