@@ -4,12 +4,13 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
 
-const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean }[] = [
+const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean; soloOrdini?: boolean }[] = [
   { href: "/", label: "Dashboard", icon: "🏠" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
+  { href: "/ordini-fornitori", label: "Ordini fornitori", icon: "🚚", soloOrdini: true },
   { href: "/lavori", label: "Lavori / squadre", icon: "🔧" },
   { href: "/assistenza", label: "Assistenza", icon: "🛟" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
@@ -48,7 +49,7 @@ export default function Sidebar({
         </div>
       </div>
       <nav className="flex flex-col gap-1 px-2">
-        {moduli.filter((m) => !m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO").map((m) => {
+        {moduli.filter((m) => (!m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO") && (!m.soloOrdini || (!!utente && utente.ruolo !== "COMMERCIALE"))).map((m) => {
           const active = m.href === "/" ? pathname === "/" : pathname === m.href || pathname.startsWith(m.href + "/");
           const href = brand !== "Tutti" ? `${m.href}?brand=${encodeURIComponent(brand)}` : m.href;
           return (
