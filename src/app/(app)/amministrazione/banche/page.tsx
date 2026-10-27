@@ -3,9 +3,11 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { cent } from "@/lib/amministrazione/estratto";
+import { BRANDS } from "@/lib/brands";
 import { eur, dataIt } from "@/lib/amministrazione/costanti";
 import { salvaConto, annullaImportazione, chiudiMese, riapriMese } from "@/app/amministrazione-actions";
 import ImportaEstratto from "@/components/amministrazione/ImportaEstratto";
+import ImportaFoglio from "@/components/amministrazione/ImportaFoglio";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm bg-white";
 
@@ -46,13 +48,19 @@ export default async function BanchePage() {
       </section>
 
       <section className="bg-white border border-neutral-200 rounded-lg p-4">
+        <h2 className="font-bold text-neutral-900 mb-1">1b · Importa la prima nota da foglio (Excel / Google Fogli)</h2>
+        <p className="text-xs text-neutral-600 mb-3">Per i movimenti già registrati a mano sul foglio della prima nota: scarica il foglio dell&apos;anno in CSV e caricalo qui. Le righe con il totale diventano movimenti, quelle senza totale vanno nello scadenzario. Puoi ricaricare lo stesso foglio aggiornato: le righe già importate vengono saltate. <b>Per lo stesso conto e periodo usa o il foglio o l&apos;estratto della banca, non entrambi</b>: le descrizioni sono diverse e i movimenti risulterebbero doppi.</p>
+        <ImportaFoglio conti={conti.filter((c) => c.attivo && c.tipo !== "CASSA").map((c) => ({ id: c.id, nome: c.nome }))} />
+      </section>
+
+      <section className="bg-white border border-neutral-200 rounded-lg p-4">
         <h2 className="font-bold text-neutral-900 mb-1">2 · Conti</h2>
         <p className="text-xs text-neutral-600 mb-3">Il <b>saldo iniziale</b> è il saldo del conto alla data indicata (es. 30/09 dall&apos;estratto di settembre): i movimenti successivi a quella data si importano e si sommano. Va impostato una volta sola.</p>
         <div className="space-y-2">
           {conti.map((c) => (
             <details key={c.id} className="border border-neutral-200 rounded-lg">
               <summary className="cursor-pointer px-3 py-2 flex flex-wrap justify-between gap-2 text-sm">
-                <span><b>{c.nome}</b> <span className="text-neutral-500">· {c.tipo === "CASSA" ? "Cassa" : c.tipo === "CARTA" ? "Carta" : c.banca ?? "Banca"}{c.iban ? ` · ${c.iban}` : ""}{!c.attivo ? " · NON ATTIVO" : ""}</span></span>
+                <span><b>{c.nome}</b> <span className="text-neutral-500">· {c.tipo === "CASSA" ? "Cassa" : c.tipo === "CARTA" ? "Carta" : c.banca ?? "Banca"}{c.iban ? ` · ${c.iban}` : ""}{c.divisione ? ` · ${c.divisione}` : ""}{!c.attivo ? " · NON ATTIVO" : ""}</span></span>
                 <span className="text-neutral-600">saldo iniziale {eur(c.saldoIniziale)} al {dataIt(c.dataSaldoIniziale)}{c.fido ? ` · fido ${eur(c.fido)}` : ""}</span>
               </summary>
               <FormConto conto={c} />
@@ -160,7 +168,7 @@ export default async function BanchePage() {
   );
 }
 
-function FormConto({ conto }: { conto?: { id: string; nome: string; tipo: string; banca: string | null; iban: string | null; saldoIniziale: number; dataSaldoIniziale: Date; fido: number; ordine: number; attivo: boolean } }) {
+function FormConto({ conto }: { conto?: { id: string; nome: string; tipo: string; banca: string | null; iban: string | null; saldoIniziale: number; dataSaldoIniziale: Date; fido: number; ordine: number; attivo: boolean; divisione: string | null } }) {
   return (
     <form action={salvaConto} className="grid md:grid-cols-4 gap-2 p-3 border-t border-neutral-100">
       {conto && <input type="hidden" name="id" value={conto.id} />}
@@ -172,6 +180,8 @@ function FormConto({ conto }: { conto?: { id: string; nome: string; tipo: string
       <label className="text-xs font-semibold">Saldo iniziale € *<input name="saldoIniziale" required defaultValue={conto ? conto.saldoIniziale.toFixed(2).replace(".", ",") : ""} placeholder="es. 12.500,00" className={`${inp} w-full`} /></label>
       <label className="text-xs font-semibold">…alla data (fine giornata) *<input type="date" name="dataSaldoIniziale" required defaultValue={conto?.dataSaldoIniziale.toISOString().slice(0, 10)} className={`${inp} w-full`} /></label>
       <label className="text-xs font-semibold">Fido €<input name="fido" defaultValue={conto ? conto.fido.toFixed(2).replace(".", ",") : "0"} className={`${inp} w-full`} /></label>
+      <label className="text-xs font-semibold">Società / divisione
+        <select name="divisione" defaultValue={conto?.divisione ?? ""} className={`${inp} w-full`}><option value="">—</option>{BRANDS.map((b) => <option key={b.nome} value={b.nome}>{b.nome}</option>)}</select></label>
       <label className="text-xs font-semibold">Ordine<input name="ordine" type="number" defaultValue={conto?.ordine ?? 0} className={`${inp} w-full`} /></label>
       {conto && <label className="text-xs font-semibold">Stato<select name="attivo" defaultValue={conto.attivo ? "si" : "no"} className={`${inp} w-full`}><option value="si">Attivo</option><option value="no">Non attivo</option></select></label>}
       <div className="md:col-span-3 flex items-end"><button className="btn-3d btn-3d-green text-sm">{conto ? "Salva conto" : "Crea conto"}</button></div>
