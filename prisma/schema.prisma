@@ -993,6 +993,8 @@ model ContoFinanziario {
   saldoIniziale     Float                  @default(0)
   dataSaldoIniziale DateTime
   fido              Float                  @default(0)
+  // Divisione/società a cui appartiene il conto (P&C, Work & Services…): i movimenti la ereditano
+  divisione         String?
   attivo            Boolean                @default(true)
   ordine            Int                    @default(0)
   movimenti         MovimentoFinanziario[]
@@ -1011,7 +1013,7 @@ model MovimentoFinanziario {
   dataValuta     DateTime?
   importo        Float
   descrizione    String
-  origine        String                @default("IMPORT") // IMPORT | MANUALE | STORNO
+  origine        String                @default("IMPORT") // IMPORT | FOGLIO | MANUALE | STORNO
   // Impronta univoca per bloccare i doppioni quando si reimporta lo stesso estratto
   impronta       String                @unique
   importazioneId String?
@@ -1041,7 +1043,10 @@ model Scadenza {
   clienteId        String?
   soggettoId       String?
   commessaId       String?
-  origine          String                @default("MANUALE") // MANUALE | COMMESSA_ACCONTO | COMMESSA_SALDO
+  origine          String                @default("MANUALE") // MANUALE | COMMESSA_ACCONTO | COMMESSA_SALDO | FOGLIO
+  // Chiave delle scadenze importate da un foglio: reimportando lo stesso foglio non si duplicano
+  // (indice semplice e non @unique: aggiungere un vincolo unico a una tabella già piena blocca il build)
+  chiaveImport     String?
   importo          Float
   dataScadenza     DateTime?
   // true se la data è stata cambiata a mano: la sincronizzazione con la commessa non la tocca più
@@ -1060,6 +1065,8 @@ model Scadenza {
 
   @@unique([commessaId, origine])
   @@index([stato, dataScadenza])
+
+  @@index([chiaveImport])
 }
 
 // Collegamento movimento ↔ scadenza (un bonifico può saldare più fatture e viceversa)
