@@ -15,6 +15,7 @@ export async function puoVedereEntita(u: Pick<Utente, "id" | "ruolo">, entita: s
       if (u.ruolo !== "COMMERCIALE") return true;
       return !!(await prisma.commessa.findFirst({ where: { id: entitaId, preventivo: scopePreventivoWhere(u) }, select: { id: true } }));
     case "ORDINE_FORNITORE":
+    case "ARTICOLO":
       return puoGestireOrdini(u);
     default:
       return false;
