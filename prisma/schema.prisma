@@ -625,6 +625,7 @@ model Soggetto {
   note                  String?
   createdAt             DateTime          @default(now())
   ordiniFornitore       OrdineFornitore[]
+  articoli              Articolo[]
 }
 
 // ============ FASI, VIDIMAZIONE ORDINI E COSTI A SCALARE ============
@@ -682,6 +683,8 @@ model RigaOrdine {
   prezzoAcquisto    Float?
   scontoAcquisto    Float?
   costoPrevisto     Float?
+  // Articolo dell'anagrafica da cui è stata creata la riga (se presa dal catalogo)
+  articoloId        String?
 
   @@index([ordineFornitoreId])
 }
@@ -1205,4 +1208,101 @@ model Documento {
   createdAt      DateTime @default(now())
 
   @@index([entita, entitaId])
+}
+
+// ============ ANAGRAFICA ARTICOLI (catalogo a pezzo, come in Bconsole) ============
+// Categorie ad albero (categoria > sottocategoria) con la regola di prezzo:
+// metodoPrezzo RICARICO -> prezzo = costo x valore (coefficiente, es. 3,3)
+// metodoPrezzo MARGINE  -> prezzo = costo / (1 - valore/100) (valore = margine %, es. 40)
+// Se una sottocategoria non ha regola vale quella della categoria madre.
+model CategoriaArticolo {
+  id             String              @id @default(cuid())
+  nome           String
+  padre          CategoriaArticolo?  @relation("SottoCategorie", fields: [padreId], references: [id], onDelete: Cascade)
+  padreId        String?
+  figlie         CategoriaArticolo[] @relation("SottoCategorie")
+  divisione      String?
+  metodoPrezzo   String?
+  valore         Float?
+  // passo di arrotondamento per eccesso del prezzo di vendita (es. 0,5 / 1 / 5); vuoto = al centesimo
+  arrotondamento Float?
+  // margine minimo sotto cui l'articolo viene segnalato (in %)
+  margineMinimo  Float?
+  ordine         Int                 @default(0)
+  articoli       Articolo[]
+  createdAt      DateTime            @default(now())
+
+  @@unique([padreId, nome])
+}
+
+model Articolo {
+  id                String                  @id @default(cuid())
+  codice            String                  @unique
+  codiceFornitore   String?
+  ean               String?
+  descrizione       String
+  descrizioneEstesa String?
+  divisione         String?
+  categoria         CategoriaArticolo?      @relation(fields: [categoriaId], references: [id], onDelete: SetNull)
+  categoriaId       String?
+  fornitore         Soggetto?               @relation(fields: [fornitoreId], references: [id], onDelete: SetNull)
+  fornitoreId       String?
+  marca             String?
+  um                String                  @default("pz")
+  aliquotaIva       Float                   @default(22)
+  // Acquisto: listino del fornitore e sconti a cascata (es. "50+10") -> costo netto.
+  // Se il listino è vuoto il costo si inserisce direttamente.
+  prezzoListino     Float?
+  sconti            String?
+  costoAcquisto     Float?
+  // Vendita: regola propria dell'articolo (vuota = quella della categoria) oppure prezzo a mano (MANUALE)
+  metodoPrezzo      String?
+  valorePrezzo      Float?
+  prezzoVendita     Float?
+  immagineUrl       String?
+  note              String?
+  attivo            Boolean                 @default(true)
+  aggiornatoDaNome  String?
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+  storico           StoricoPrezzoArticolo[]
+
+  @@index([fornitoreId, codiceFornitore])
+  @@index([categoriaId])
+}
+
+model StoricoPrezzoArticolo {
+  id            String   @id @default(cuid())
+  articolo      Articolo @relation(fields: [articoloId], references: [id], onDelete: Cascade)
+  articoloId    String
+  prezzoListino Float?
+  costoAcquisto Float?
+  prezzoVendita Float?
+  // MANUALE | IMPORTAZIONE | REGOLA | AGGIORNAMENTO
+  origine       String
+  nota          String?
+  utenteNome    String?
+  createdAt     DateTime @default(now())
+
+  @@index([articoloId])
+}
+
+// Importazione di un listino (Excel/CSV o letto dall'AI): prima l'anteprima, poi la conferma.
+model ImportazioneArticoli {
+  id           String    @id @default(cuid())
+  nomeFile     String
+  // FILE | AI
+  origine      String    @default("FILE")
+  // ANTEPRIMA | ESEGUITA | ANNULLATA
+  stato        String    @default("ANTEPRIMA")
+  opzioni      Json
+  righe        Json
+  controlloAi  String?
+  creati       Int       @default(0)
+  aggiornati   Int       @default(0)
+  invariati    Int       @default(0)
+  scartati     Int       @default(0)
+  creataDaNome String?
+  eseguitaIl   DateTime?
+  createdAt    DateTime  @default(now())
 }
