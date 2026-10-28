@@ -9,7 +9,7 @@ import { ENTITA_DOCUMENTI, MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/ca
 export type EsitoDocumenti = { ok: boolean; messaggio: string };
 
 const percorso = (entita: string, id: string) =>
-  ({ CLIENTE: `/clienti/${id}`, PREVENTIVO: `/preventivi/${id}`, COMMESSA: `/commesse/${id}`, ORDINE_FORNITORE: `/ordini-fornitori/${id}` })[entita];
+  ({ CLIENTE: `/clienti/${id}`, PREVENTIVO: `/preventivi/${id}`, COMMESSA: `/commesse/${id}`, ORDINE_FORNITORE: `/ordini-fornitori/${id}`, ARTICOLO: `/prodotti/articoli/${id}` })[entita];
 
 const TIPI_AMMESSI = /^(application\/pdf|image\/(jpeg|png|webp|gif|heic|heif)|text\/(plain|csv)|application\/(msword|vnd\.openxmlformats-officedocument\.[\w.]+|vnd\.ms-excel|zip|x-zip-compressed|octet-stream)|message\/rfc822)$/;
 
