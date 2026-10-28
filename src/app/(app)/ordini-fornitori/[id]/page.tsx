@@ -13,6 +13,7 @@ import {
 } from "@/app/ordini-actions";
 import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
+import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
@@ -25,6 +26,7 @@ export default async function OrdineFornitorePage({ params }: { params: Promise<
   const { id } = await params;
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, commessa: { include: { cliente: true } }, righe: { orderBy: { createdAt: "asc" } } } });
   if (!o) notFound();
+  const catalogo = await prisma.articolo.findMany({ where: { fornitoreId: o.fornitoreId, attivo: true }, select: { codice: true, descrizione: true, codiceFornitore: true }, orderBy: { codice: "asc" }, take: 3000 });
   const s = statoOrdine(o.stato);
   const bozza = o.stato === "BOZZA", annullato = o.stato === "ANNULLATO";
   const t = totaleOrdine(o.righe);
@@ -83,6 +85,17 @@ export default async function OrdineFornitorePage({ params }: { params: Promise<
           ))}
           {o.righe.length === 0 && <p className="text-sm text-neutral-500">Nessuna riga: aggiungile qui sotto.</p>}
         </div>
+        {!annullato && !["EVASO"].includes(o.stato) && catalogo.length > 0 && (
+          <form action={aggiungiArticoloAOrdine} className="mt-3 flex flex-wrap gap-1.5 items-end border-t border-neutral-200 pt-3">
+            <input type="hidden" name="ordineId" value={o.id} />
+            <span className="text-xs font-bold w-full">+ Dal catalogo articoli di {o.fornitore.ragioneSociale} ({catalogo.length})</span>
+            <input name="articolo" list={`cat-${o.id}`} required placeholder="Scrivi codice o descrizione e scegli…" className={`${inp} flex-1 min-w-64`} />
+            <datalist id={`cat-${o.id}`}>{catalogo.map((a) => <option key={a.codice} value={`${a.codice} — ${a.descrizione}${a.codiceFornitore ? ` [${a.codiceFornitore}]` : ""}`} />)}</datalist>
+            <input name="quantita" placeholder="Q.tà" defaultValue="1" className={`${inp} w-16`} />
+            <button className="btn-3d btn-3d-purple text-[11px] px-2 py-1">Aggiungi</button>
+            <span className="text-[11px] text-neutral-500 w-full">Codice fornitore, prezzo di listino e sconto arrivano dall&apos;anagrafica articoli.</span>
+          </form>
+        )}
         {!annullato && !["EVASO"].includes(o.stato) && (
           <form action={aggiungiRigaAOrdine} className="mt-3 grid grid-cols-2 md:grid-cols-12 gap-1.5 items-end border-t border-neutral-200 pt-3">
             <input type="hidden" name="ordineId" value={o.id} />
