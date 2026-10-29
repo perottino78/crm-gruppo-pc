@@ -145,6 +145,15 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .newcomp{display:flex;flex-direction:column;gap:10px;border:2px dashed var(--line);border-radius:14px;padding:12px}
 .newcomp .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .newcomp input[type=text],.newcomp select{min-height:44px;border:1px solid var(--line);background:var(--surface2);border-radius:10px;padding:0 10px;width:100%}
+.scheda{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.scheda-card{background:var(--surface2);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.scheda-card .sc-title{font-family:var(--display);font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.scheda-card .sc-title span{font-family:var(--body);font-weight:500;font-size:12px;color:var(--muted)}
+.sc-row{display:flex;justify-content:space-between;gap:6px;font-size:13.5px;padding:5px 0;border-bottom:1px solid var(--line)}
+.sc-row:last-child{border-bottom:0}
+.sc-row b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.sc-badge{display:inline-block;background:var(--panelSoft);color:var(--panel);border-radius:8px;font-size:11px;font-weight:700;padding:2px 8px;letter-spacing:.02em}
+@media(max-width:700px){.scheda{grid-template-columns:1fr}}
 .linkrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .linkrow a.b3d{display:flex;align-items:center;justify-content:center;text-decoration:none}
 .viewSeg{display:flex;gap:4px;background:#fff;border-radius:14px;padding:4px;box-shadow:inset 0 0 0 1px #D5DEEA}
@@ -363,6 +372,7 @@ section[hidden]{display:none}
           <select id="invSel"></select>
           <div class="check" id="invCheck"></div>
           <div class="check warn" id="spiWarn" hidden>⚠ Impianto &gt; 11.08 kWp: SPI esterno (DDI) obbligatorio per CEI 0-21 §9.5.1 — aggiungi voce separata a preventivo</div>
+          <div class="scheda" id="schedaComp"></div>
           <button class="b3d commOnly" id="newCompBtn">+ Nuovo pannello o inverter</button>
           <div class="newcomp commOnly" id="newComp" hidden>
             <div class="two"><select id="ncType" aria-label="Tipo di componente"><option value="pan">Pannello</option><option value="inv">Inverter</option></select><input type="text" id="ncName" placeholder="Marca e modello"></div>
@@ -487,6 +497,10 @@ section[hidden]{display:none}
         <h3 id="propTitle">Proposta</h3>
         <p class="sub" id="propSub"></p>
         <table class="lines" id="lines"></table>
+        <details style="margin-top:14px">
+          <summary style="cursor:pointer;font-weight:600;font-size:14px;color:var(--muted);list-style:none;display:flex;align-items:center;gap:6px"><span>▸</span> Scheda tecnica dei componenti</summary>
+          <div class="scheda" id="schedaProp" style="margin-top:10px"></div>
+        </details>
         <img class="propPhoto" id="propPhoto" alt="Il tetto del cliente con i pannelli" hidden>
         <div class="field" style="margin-top:18px">
           <div class="lbl">Detrazione fiscale applicabile</div>
@@ -593,17 +607,27 @@ const CONS_SHARE = CONS_W.map(v=>v/CONS_W.reduce((a,b)=>a+b,0));
 let PANEL_KW = 0.44; const RID = 0.09, FIXED = 120, CO2F = 0.26;
 /* catalogo di esempio: prezzi segnaposto da sostituire con il listino Solaris */
 const PANELS=[
-  {id:"jinko440",n:"Jinko Tiger Neo 440 W",kw:.44,w:1.134,h:1.762,price:125,cost:78},
-  {id:"longi430",n:"LONGi Hi-MO 6 430 W",kw:.43,w:1.134,h:1.722,price:120,cost:74},
-  {id:"trina445",n:"Trina Vertex S+ 445 W",kw:.445,w:1.134,h:1.762,price:130,cost:82},
-  {id:"aiko460",n:"Aiko Neostar 460 W full black",kw:.46,w:1.134,h:1.762,price:165,cost:108}];
+  {id:"jinko440",n:"Jinko Tiger Neo 440 W",kw:.44,w:1.134,h:1.762,price:125,cost:78,
+   specs:{celle:"182mm monocristallino TOPCon N-type",eff:22.8,peso:"24,9 kg",dim:"1134 × 1762 × 30 mm",voc:"37,0 V",isc:"14,51 A",vmp:"31,0 V",imp:"14,21 A",gar_prod:12,gar_rend:25,cert:"IEC 61215 / IEC 61730 / MCS"}},
+  {id:"longi430",n:"LONGi Hi-MO 6 430 W",kw:.43,w:1.134,h:1.722,price:120,cost:74,
+   specs:{celle:"182mm monocristallino HPBC",eff:22.3,peso:"23,5 kg",dim:"1134 × 1722 × 30 mm",voc:"36,9 V",isc:"13,74 A",vmp:"30,8 V",imp:"13,42 A",gar_prod:12,gar_rend:25,cert:"IEC 61215 / IEC 61730 / MCS"}},
+  {id:"trina445",n:"Trina Vertex S+ 445 W",kw:.445,w:1.134,h:1.762,price:130,cost:82,
+   specs:{celle:"182mm monocristallino TOPCon",eff:22.5,peso:"24,9 kg",dim:"1134 × 1762 × 30 mm",voc:"38,0 V",isc:"13,98 A",vmp:"31,6 V",imp:"14,18 A",gar_prod:12,gar_rend:25,cert:"IEC 61215 / IEC 61730 / CE"}},
+  {id:"aiko460",n:"Aiko Neostar 460 W full black",kw:.46,w:1.134,h:1.762,price:165,cost:108,
+   specs:{celle:"182mm monocristallino ABC (Annealed Back Contact)",eff:23.6,peso:"25,0 kg",dim:"1134 × 1762 × 30 mm",voc:"37,5 V",isc:"14,70 A",vmp:"31,2 V",imp:"14,24 A",gar_prod:15,gar_rend:30,cert:"IEC 61215 / IEC 61730 / CE"}}];
 const INVERTERS=[
-  {id:"hw3",n:"Huawei SUN2000-3KTL-L1 (ibrido)",kw:3,hyb:true,faseTipo:"MONOFASE",price:1150,cost:760},
-  {id:"hw6",n:"Huawei SUN2000-6KTL-L1 (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1450,cost:980},
-  {id:"zcs6",n:"ZCS Azzurro HYD 6000 ZSS (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1350,cost:900},
-  {id:"fr6",n:"Fronius Primo GEN24 6.0 Plus (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2200,cost:1500},
-  {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450},
-  {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620}];
+  {id:"hw3",n:"Huawei SUN2000-3KTL-L1 (ibrido)",kw:3,hyb:true,faseTipo:"MONOFASE",price:1150,cost:760,
+   specs:{eff:97.9,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · 4G · RS485",gar:10,cert:"CE / IEC 62109"}},
+  {id:"hw6",n:"Huawei SUN2000-6KTL-L1 (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1450,cost:980,
+   specs:{eff:98.3,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · 4G · RS485",gar:10,cert:"CE / IEC 62109"}},
+  {id:"zcs6",n:"ZCS Azzurro HYD 6000 ZSS (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:1350,cost:900,
+   specs:{eff:97.6,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IEC 62109"}},
+  {id:"fr6",n:"Fronius Primo GEN24 6.0 Plus (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2200,cost:1500,
+   specs:{eff:97.9,mppt:2,vdc_max:"800 V",vac:"220–240 V",comm:"LAN · WiFi · Modbus",gar:10,cert:"CE / IEC 62109 / VDE0126"}},
+  {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450,
+   specs:{eff:99.0,mppt:1,vdc_max:"850 V",vac:"220–240 V",comm:"WiFi · ZigBee · RS485",gar:12,cert:"CE / IEC 62109 / Grid Guard"}},
+  {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620,
+   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}}];
 if(_INIT.catalogo){
   (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
   (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
@@ -1136,8 +1160,48 @@ function refresh(){
   }
   $("#future").textContent=`A questo ritmo, fra 10 anni la bolletta senza impianto sarebbe di circa ${eur(r.billToday*Math.pow(1+S.infl/100,10))} all’anno.`;
   renderAddons();
+  renderScheda();
   const costBase=S.panels*pan.cost+inv.cost+r.kwp*520+S.batt*380;
   $("#margin").textContent=`Margine indicativo su costo standard: ${eur(r.cost-costBase)} (${fmt((r.cost-costBase)/r.cost*100,1)}%). Valori di costo da collegare al listino reale.`;
+}
+
+/* ======================= SCHEDA TECNICA ======================= */
+function schedaHtml(){
+  const pan=curPanel(), inv=curInv();
+  const ps=pan.specs||{}, is=inv.specs||{};
+  const row=(l,v)=>`<div class="sc-row"><span>${l}</span><b>${v}</b></div>`;
+  const badge=(t)=>`<span class="sc-badge">${t}</span>`;
+  let ph=`<div class="scheda-card">
+    <div class="sc-title">☀️ Modulo ${esc(pan.n)}</div>
+    ${ps.celle?row("Tecnologia celle",ps.celle):""}
+    ${ps.eff?row("Efficienza",ps.eff+"%"):""}
+    ${row("Potenza nominale",fmt(pan.kw*1000,0)+" Wp")}
+    ${ps.dim?row("Dimensioni",ps.dim):""}
+    ${ps.peso?row("Peso",ps.peso):""}
+    ${ps.voc?row("Tensione a vuoto (Voc)",ps.voc):""}
+    ${ps.isc?row("Corrente di corto (Isc)",ps.isc):""}
+    ${ps.vmp?row("Tensione MPP (Vmp)",ps.vmp):""}
+    ${ps.imp?row("Corrente MPP (Imp)",ps.imp):""}
+    ${ps.gar_prod||ps.gar_rend?row("Garanzia",`${ps.gar_prod||"?"}  anni prodotto · ${ps.gar_rend||"?"}  anni rendimento`):""}
+    ${ps.cert?row("Certificazioni",ps.cert):""}
+  </div>`;
+  let ih=`<div class="scheda-card">
+    <div class="sc-title">⚡ Inverter ${esc(inv.n)} <span>${inv.hyb?badge("Ibrido"):""}${inv.faseTipo==="MONOFASE"?" "+badge("Monofase"):" "+badge("Trifase")}</span></div>
+    ${row("Potenza nominale AC",fmt(inv.kw,0)+" kW")}
+    ${is.eff?row("Efficienza massima",is.eff+"%"):""}
+    ${is.mppt?row("N° MPPT",is.mppt):""}
+    ${is.vdc_max?row("Tensione CC max",is.vdc_max):""}
+    ${is.vac?row("Tensione AC uscita",is.vac):""}
+    ${is.comm?row("Comunicazione",is.comm):""}
+    ${is.gar?row("Garanzia",is.gar+" anni"):""}
+    ${is.cert?row("Certificazioni",is.cert):""}
+  </div>`;
+  return ph+ih;
+}
+function renderScheda(){
+  const h=schedaHtml();
+  const c=$("#schedaComp"); if(c) c.innerHTML=h;
+  const p=$("#schedaProp"); if(p) p.innerHTML=h;
 }
 
 /* ======================= FIRMA ======================= */
