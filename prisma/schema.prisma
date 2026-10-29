@@ -301,6 +301,9 @@ model Preventivo {
   duplicatoDaId        String?
   // Offerta archiviata (a mano o in automatico alla scadenza); non compare più nella lavagna ma resta consultabile
   archiviato           Boolean             @default(false)
+  // Conferma ordine dal commerciale: offerta bloccata così com'è, pratica passata alla contabilità
+  confermatoIl         DateTime?
+  confermatoDaNome     String?
   righe                RigaPreventivo[]
   // Sezioni/stanze in cui il commerciale può raggruppare le righe (es. "Cucina",
   // "Camera 1"...) per organizzare preventivi con molti articoli misti (finestre,

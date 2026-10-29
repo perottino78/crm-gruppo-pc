@@ -5,7 +5,9 @@ import { prisma } from "@/lib/prisma";
 import Documenti from "@/components/documenti/Documenti";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import PannelloConferma from "@/components/preventivi/PannelloConferma";
+import { numeroCommessa } from "@/lib/commesse";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
@@ -116,10 +118,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; errore?: string }>;
+  searchParams: Promise<{ q?: string; errore?: string; confermata?: string }>;
 }) {
   const { id } = await params;
-  const { q, errore } = await searchParams;
+  const { q, errore, confermata } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -135,9 +137,15 @@ export default async function PreventivoPage({
       },
       sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
       solarisProgetto: { select: { id: true } },
+      commessa: { select: { id: true, numero: true, anno: true, tasks: { where: { completatoIl: null, stato: { not: "ANNULLATO" } }, orderBy: { createdAt: "desc" }, take: 1, select: { titolo: true, ufficio: true } } } },
     },
   });
   if (!preventivo) notFound();
+  const bloccata = !!preventivo.confermatoIl;
+  const [nContratto, nFoto] = await Promise.all([
+    prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: preventivo.id, cartella: "Contratto firmato" } }),
+    prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: preventivo.id, cartella: "Foto" } }),
+  ]);
 
   const [optionaliDisponibili, prodottiTrovati, tipologieMisure, modelliBrand, blindatiMisure] = await Promise.all([
     prisma.optional.findMany({ where: { brandId: preventivo.brandId }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
@@ -464,6 +472,7 @@ export default async function PreventivoPage({
               <button type="submit" className="btn-3d btn-3d-outline text-sm px-3 py-1.5" title="Sposta l'offerta nell'archivio">🗄️ Archivia</button>
             </form>
           )}
+          {!bloccata && (
           <form action={eliminaPreventivo}>
             <input type="hidden" name="id" value={preventivo.id} />
             <BottoneConferma
@@ -473,6 +482,7 @@ export default async function PreventivoPage({
               🗑️ Elimina
             </BottoneConferma>
           </form>
+          )}
           <Link
             href={`/preventivi/${preventivo.id}/stampa`}
             target="_blank"
@@ -532,6 +542,19 @@ export default async function PreventivoPage({
         </div>
       )}
 
+      <PannelloConferma
+        preventivoId={preventivo.id}
+        stato={preventivo.stato}
+        confermatoIl={preventivo.confermatoIl}
+        confermatoDaNome={preventivo.confermatoDaNome}
+        nContratto={nContratto}
+        nFoto={nFoto}
+        commessa={preventivo.commessa ? { id: preventivo.commessa.id, numero: numeroCommessa(preventivo.commessa), prossimo: preventivo.commessa.tasks[0] ?? null } : null}
+        amministratore={isAmministratore(utenteCorrente)}
+        appenaConfermata={confermata === "1"}
+      />
+
+      <fieldset disabled={bloccata} className={bloccata ? "opacity-75" : ""}>
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <p className="text-xs text-neutral-600 mb-1">Commerciale</p>
@@ -1704,7 +1727,10 @@ export default async function PreventivoPage({
           )}
         </div>
       </details>
-      <Documenti entita="PREVENTIVO" entitaId={preventivo.id} titolo="Documenti dell’offerta" />
+      </fieldset>
+      <div id="documenti-offerta">
+        <Documenti entita="PREVENTIVO" entitaId={preventivo.id} titolo="Documenti dell’offerta (contratto firmato, foto, rilievi…)" />
+      </div>
     </div>
   );
 }
