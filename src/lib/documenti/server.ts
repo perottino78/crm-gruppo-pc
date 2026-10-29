@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import type { Utente } from "@prisma/client";
 import { scopeClienteWhere, scopePreventivoWhere } from "@/lib/scope";
 import { puoGestireOrdini } from "@/lib/ordini/server";
+import { puoAmministrazione } from "@/lib/amministrazione/server";
 
 export async function puoVedereEntita(u: Pick<Utente, "id" | "ruolo">, entita: string, entitaId: string): Promise<boolean> {
   if (u.ruolo === "AMMINISTRATORE") return true;
@@ -16,7 +17,10 @@ export async function puoVedereEntita(u: Pick<Utente, "id" | "ruolo">, entita: s
       return !!(await prisma.commessa.findFirst({ where: { id: entitaId, preventivo: scopePreventivoWhere(u) }, select: { id: true } }));
     case "ORDINE_FORNITORE":
     case "ARTICOLO":
+    case "BOLLA_ENTRATA":
       return puoGestireOrdini(u);
+    case "FATTURA_ACQUISTO":
+      return puoAmministrazione(u);
     default:
       return false;
   }

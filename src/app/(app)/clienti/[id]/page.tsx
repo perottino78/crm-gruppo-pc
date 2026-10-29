@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import Documenti from "@/components/documenti/Documenti";
+import DocumentiCorrelati from "@/components/documenti/DocumentiCorrelati";
+import { correlatiCliente } from "@/lib/documenti/correlati";
 import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -206,6 +208,7 @@ export default async function SchedaClientePage({
         )}
       </div>
       <Documenti entita="CLIENTE" entitaId={cliente.id} titolo="Documenti del cliente" />
+      {utenteCorrente && <DocumentiCorrelati gruppi={(await correlatiCliente(utenteCorrente, cliente.id)).filter((g) => g.entita !== "CLIENTE")} titolo="Documenti delle pratiche del cliente (preventivi, commesse, ordini, bolle, fatture)" />}
     </div>
   );
 }

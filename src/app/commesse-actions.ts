@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -487,6 +488,8 @@ export async function aggiornaRigaOrdine(formData: FormData) {
       ordinatoDaNome: ordinato ? (prima.ordinatoDaNome ?? u.nome) : null,
       arrivato,
       arrivatoIl: arrivato ? (prima.arrivatoIl ?? new Date()) : null,
+      // la spunta a mano vale come arrivo completo (le bolle registrano gli arrivi parziali)
+      ...(arrivato !== prima.arrivato ? { quantitaArrivata: arrivato ? prima.quantita : 0 } : {}),
       // una riga già in un ordine fornitore resta di quel fornitore
       fornitoreId: prima.ordineFornitoreId ? prima.fornitoreId : fornitoreId,
       fornitoreNome: prima.ordineFornitoreId ? prima.fornitoreNome : (forn?.ragioneSociale ?? null),
@@ -498,6 +501,7 @@ export async function aggiornaRigaOrdine(formData: FormData) {
   if (!prima.commessaId) return;
   if (ordinato && !prima.ordinato) await log(prima.commessaId, `Ordine vidimato: ${prima.descrizione}${forn ? " (" + forn.ragioneSociale + ")" : ""}.`);
   if (arrivato && !prima.arrivato) await log(prima.commessaId, `Merce arrivata: ${prima.descrizione}.`);
+  if (arrivato !== prima.arrivato) await prisma.$transaction((tx) => verificaMaterialeCommessa(tx, prima.commessaId!, u.nome));
   revalidatePath(`/commesse/${prima.commessaId}`);
 }
 

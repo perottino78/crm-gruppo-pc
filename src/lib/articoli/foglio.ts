@@ -222,3 +222,13 @@ export function scriviCsv(righe: Cella[][]): string {
   };
   return "\uFEFF" + righe.map((r) => r.map(campo).join(";")).join("\r\n") + "\r\n";
 }
+
+/** Contenuto di un archivio ZIP (nome file → dati), es. le fatture scaricate dal cassetto fiscale. */
+export function leggiZip(buf: Buffer): Map<string, Buffer> {
+  return voci(buf);
+}
+
+/** Crea un archivio ZIP (usato nei test e per esportazioni future). */
+export function scriviZip(file: { nome: string; dati: Buffer }[]): Buffer {
+  return creaZip(file);
+}

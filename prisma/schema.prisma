@@ -537,6 +537,8 @@ model Commessa {
   assistenze              Assistenza[]
   createdAt               DateTime          @default(now())
   ordiniFornitore         OrdineFornitore[]
+  // Avvio commessa: quando tutto il materiale è arrivato (o prelevato dal magazzino)
+  materialeCompletoIl     DateTime?
 
   @@unique([anno, numero])
 }
@@ -685,20 +687,28 @@ model RigaOrdine {
   costoPrevisto     Float?
   // Articolo dell'anagrafica da cui è stata creata la riga (se presa dal catalogo)
   articoloId        String?
+  // Arrivi parziali: somma delle quantità ricevute con le bolle (la riga è «arrivata» quando copre la quantità)
+  quantitaArrivata  Float            @default(0)
+  // Materiale preso dalle scorte di magazzino invece che ordinato al fornitore
+  daMagazzino       Boolean          @default(false)
+  prelevatoIl       DateTime?
+  righeBolla        RigaBolla[]
 
   @@index([ordineFornitoreId])
 }
 
 // Altri costi diretti inseriti a mano (trasporti, noleggi, extra, ecc.)
 model CostoManuale {
-  id          String   @id @default(cuid())
-  commessa    Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
-  commessaId  String
-  categoria   String   @default("ALTRO")
-  descrizione String
-  importo     Float
-  data        DateTime @default(now())
-  autoreNome  String?
+  id                String   @id @default(cuid())
+  commessa          Commessa @relation(fields: [commessaId], references: [id], onDelete: Cascade)
+  commessaId        String
+  categoria         String   @default("ALTRO")
+  descrizione       String
+  importo           Float
+  data              DateTime @default(now())
+  autoreNome        String?
+  // Costo generato da una fattura d'acquisto (si rigenera se la fattura cambia)
+  fatturaAcquistoId String?
 }
 
 // ============ POSA E FINE LAVORI ============
@@ -1262,6 +1272,9 @@ model Articolo {
   immagineUrl       String?
   note              String?
   attivo            Boolean                 @default(true)
+  // Magazzino: scorta minima (sotto si propone il riordino) e posizione sugli scaffali
+  scortaMinima      Float?
+  ubicazione        String?
   aggiornatoDaNome  String?
   createdAt         DateTime                @default(now())
   updatedAt         DateTime                @updatedAt
@@ -1305,4 +1318,147 @@ model ImportazioneArticoli {
   creataDaNome String?
   eseguitaIl   DateTime?
   createdAt    DateTime  @default(now())
+}
+
+// ============ MAGAZZINO: BOLLE D'ENTRATA, SPUNTA MATERIALI, SCORTE ============
+// Bolla (DDT) del fornitore registrata all'arrivo della merce. Le righe si spuntano una per una
+// (quantità ricevuta ed esito); alla registrazione aggiornano gli ordini fornitori, le commesse
+// e, per il materiale a scorta, il magazzino.
+// stato: APERTA (in spunta) | DA_FATTURARE | FATTURATA | ANNULLATA
+// causale: ACQUISTO | OMAGGIO | RIENTRO_RIPARAZIONE | CONTO_VISIONE | RESO_CANTIERE | ALTRO
+model BollaEntrata {
+  id                String           @id @default(cuid())
+  numero            Int
+  anno              Int
+  fornitoreId       String?
+  fornitoreNome     String
+  numeroDdt         String?
+  dataDdt           DateTime?
+  dataArrivo        DateTime         @default(now())
+  causale           String           @default("ACQUISTO")
+  stato             String           @default("APERTA")
+  riferimento       String?
+  note              String?
+  registrataIl      DateTime?
+  registrataDaNome  String?
+  creatoDaNome      String?
+  // Lettura della bolla con l'AI (testo grezzo restituito, per controllo)
+  letturaAi         Json?
+  fatturaAcquisto   FatturaAcquisto? @relation(fields: [fatturaAcquistoId], references: [id], onDelete: SetNull)
+  fatturaAcquistoId String?
+  righe             RigaBolla[]
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@unique([anno, numero])
+  @@index([fornitoreId])
+  @@index([stato])
+}
+
+// esito: DA_CONTROLLARE | OK | PARZIALE | MANCANTE | DANNEGGIATO
+// destinazione: COMMESSA (va al cliente, non entra a scorta) | MAGAZZINO (carico a scorta)
+model RigaBolla {
+  id                String       @id @default(cuid())
+  bolla             BollaEntrata @relation(fields: [bollaId], references: [id], onDelete: Cascade)
+  bollaId           String
+  posizione         Int          @default(0)
+  rigaOrdine        RigaOrdine?  @relation(fields: [rigaOrdineId], references: [id], onDelete: SetNull)
+  rigaOrdineId      String?
+  ordineFornitoreId String?
+  commessaId        String?
+  articoloId        String?
+  codice            String?
+  codiceFornitore   String?
+  descrizione       String
+  um                String?
+  quantitaBolla     Float        @default(1)
+  quantitaRicevuta  Float?
+  esito             String       @default("DA_CONTROLLARE")
+  destinazione      String       @default("COMMESSA")
+  prezzo            Float?
+  note              String?
+  // Movimento di magazzino creato alla registrazione (per poterlo stornare)
+  movimentoId       String?
+
+  @@index([bollaId])
+  @@index([rigaOrdineId])
+}
+
+// Movimenti di magazzino: la giacenza di un articolo è la somma delle quantità (positive = carico).
+// tipo: CARICO | SCARICO | RETTIFICA | INVENTARIO
+// causale: ACQUISTO | OMAGGIO | RESO_CANTIERE | PRELIEVO_COMMESSA | RESO_FORNITORE | RETTIFICA | INVENTARIO | STORNO
+model MovimentoMagazzino {
+  id            String   @id @default(cuid())
+  data          DateTime @default(now())
+  tipo          String
+  causale       String
+  articoloId    String
+  quantita      Float
+  costoUnitario Float?
+  commessaId    String?
+  rigaOrdineId  String?
+  bollaId       String?
+  note          String?
+  creatoDaNome  String?
+  createdAt     DateTime @default(now())
+
+  @@index([articoloId, data])
+  @@index([commessaId])
+  @@index([bollaId])
+}
+
+// ============ FATTURE D'ACQUISTO ============
+// Caricate da XML FatturaPA (anche .p7m e .zip del cassetto fiscale) o da PDF (a mano o con l'AI).
+// Collegate alle bolle (che passano a FATTURATA), alle commesse (costi reali) e allo scadenzario.
+// stato: DA_VERIFICARE | REGISTRATA | ANNULLATA ; origine: XML | PDF | MANUALE
+model FatturaAcquisto {
+  id                String                @id @default(cuid())
+  chiave            String                @unique
+  fornitoreId       String?
+  fornitoreNome     String
+  partitaIva        String?
+  tipoDocumento     String                @default("TD01")
+  numero            String
+  data              DateTime
+  imponibile        Float                 @default(0)
+  iva               Float                 @default(0)
+  totale            Float                 @default(0)
+  divisione         String?
+  stato             String                @default("DA_VERIFICARE")
+  origine           String                @default("MANUALE")
+  riferimentiOrdine String?
+  riferimentiDdt    String?
+  scadenzePreviste  Json?
+  xml               String?
+  note              String?
+  registrataIl      DateTime?
+  registrataDaNome  String?
+  creatoDaNome      String?
+  righe             RigaFatturaAcquisto[]
+  bolle             BollaEntrata[]
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@index([fornitoreId])
+  @@index([stato])
+  @@index([data])
+}
+
+model RigaFatturaAcquisto {
+  id             String          @id @default(cuid())
+  fattura        FatturaAcquisto @relation(fields: [fatturaId], references: [id], onDelete: Cascade)
+  fatturaId      String
+  posizione      Int             @default(0)
+  codice         String?
+  descrizione    String
+  quantita       Float?
+  um             String?
+  prezzoUnitario Float?
+  importo        Float           @default(0)
+  aliquotaIva    Float?
+  commessaId     String?
+  rigaOrdineId   String?
+
+  @@index([fatturaId])
+  @@index([commessaId])
 }
