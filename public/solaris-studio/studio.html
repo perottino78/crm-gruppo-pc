@@ -282,11 +282,11 @@ section[hidden]{display:none}
           <div class="zones" id="zones"></div>
           <div class="zinfo" id="zinfo"></div>
         </div>
-        <div class="billcam" id="billcam" hidden>
+        <div class="billcam" id="billcam">
           <img id="billImg" alt="Foto della bolletta" hidden>
-          <div class="t" id="billTxt"><b>Fotografa la bolletta</b>Leggo consumi, fasce F1/F2/F3 e prezzo in automatico.</div>
-          <label class="b3d sun" for="billFile">Scatta</label>
-          <input type="file" id="billFile" accept="image/*" hidden>
+          <div class="t" id="billTxt"><b>Carica bolletta o foto</b>Allega il PDF o uno screenshot: compilo i consumi in automatico dove supportato.</div>
+          <label class="b3d sun" for="billFile">Carica</label>
+          <input type="file" id="billFile" accept="image/*,application/pdf" hidden>
         </div>
         <div class="field">
           <div class="lbl">Come conosciamo i consumi</div>
@@ -519,7 +519,10 @@ section[hidden]{display:none}
         </div>
         <div class="commercial card" id="commercial" hidden>
           <h3>Solo per il commerciale</h3>
-          <div class="field"><label for="ckwp">Posa, strutture e pratiche <output id="ckwpOut"></output></label><input type="range" id="ckwp" min="400" max="1500" step="25" value="850"></div>
+          <div class="field"><label for="ckwp">Posa e cavi (costo base/kWp) <output id="ckwpOut"></output></label><input type="range" id="ckwp" min="400" max="1500" step="25" value="850"></div>
+          <div class="field"><label for="csott">Sottostruttura e staffe <output id="csottOut"></output></label><input type="range" id="csott" min="0" max="5000" step="50" value="0"></div>
+          <div class="field"><label for="cprat">Costi pratiche e allaccio <output id="cpratOut"></output></label><input type="range" id="cprat" min="0" max="4000" step="50" value="0"></div>
+          <div class="field"><label for="cpiat">Piattaforma per la posa <output id="cpiatOut"></output></label><input type="range" id="cpiat" min="0" max="4000" step="50" value="0"></div>
           <div class="field"><label for="cbat">Prezzo accumulo <output id="cbatOut"></output></label><input type="range" id="cbat" min="300" max="900" step="10" value="520"></div>
           <p class="hint" id="margin"></p>
         </div>
@@ -623,7 +626,8 @@ const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,ti
   panelId:"jinko440",invId:"hw6",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
   f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
   categoria:"MONOFASE",spiEsterno:false,checklist:{vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false},
-  mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null}};
+  mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null},
+  sottostruttura:0,pratiche:0,piattaforma:0};
 
 /* Ripristina stato salvato dal server */
 if(_INIT.stato){
@@ -684,7 +688,7 @@ function simulate(batt){
   }
   const billToday = cons*S.price+FIXED;
   const billAfter = imp*S.price+FIXED - exp*RID;
-  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + batt*S.cbat;
+  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + batt*S.cbat + S.sottostruttura + S.pratiche + S.piattaforma;
   return {kwp,prodY,cons,direct,fromBatt,imp,exp,billToday,billAfter,saving:billToday-billAfter,cost,pm,cm,
     selfShare:(direct+fromBatt)/cons};
 }
@@ -733,6 +737,9 @@ bindRange("price","price","#priceOut",v=>"€ "+fmt(v,2));
 bindRange("tilt","tilt","#tiltOut",v=>v+"°");
 bindRange("hour","hour","#hourOut",hh);
 bindRange("ckwp","ckwp","#ckwpOut",v=>"€ "+fmt(v)+" al kWp");
+bindRange("csott","sottostruttura","#csottOut",v=>v>0?"€ "+fmt(v):"non inclusa");
+bindRange("cprat","pratiche","#cpratOut",v=>v>0?"€ "+fmt(v):"non incluse");
+bindRange("cpiat","piattaforma","#cpiatOut",v=>v>0?"€ "+fmt(v):"non inclusa");
 bindRange("cbat","cbat","#cbatOut",v=>"€ "+fmt(v)+" al kWh");
 $("#tilt").addEventListener("input",()=>{ clampPanels(); rebuildHouse(); });
 function hh(v){ const h=Math.floor(v), m=Math.round((v-h)*60); return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0"); }
@@ -777,17 +784,28 @@ async function shrink(file){
 function setRange(id,val,out,f){ const el=$("#"+id); el.value=val; setP(el); $(out).textContent=f(+el.value); }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 (async()=>{
-  if(!window.claude||!claude.use) return;
-  const sample=await claude.use("sample"); if(!sample) return;
-  let lim=null; try{ lim=await sample.limits(); }catch(e){}
-  if(!lim||!lim.images) return;
-  $("#billcam").hidden=false;
   const txt=$("#billTxt");
+  let aiAvail=false;
+  if(window.claude&&claude.use){
+    try{
+      const sample=await claude.use("sample");
+      if(sample){ let lim=null; try{ lim=await sample.limits(); }catch(e){} if(lim&&lim.images) aiAvail=true; }
+    }catch(e){}
+  }
+  if(aiAvail){
+    txt.innerHTML="<b>Fotografa la bolletta</b>Leggo consumi, fasce F1/F2/F3 e prezzo in automatico.";
+  } else {
+    txt.innerHTML="<b>Carica bolletta o foto</b>Inserisci poi i consumi a mano nei campi qui sotto.";
+  }
   $("#billFile").addEventListener("change",async e=>{
     const f=e.target.files&&e.target.files[0]; e.target.value=""; if(!f) return;
-    const img=$("#billImg"); img.src=URL.createObjectURL(f); img.hidden=false;
+    const img=$("#billImg");
+    if(f.type!=="application/pdf"){ img.src=URL.createObjectURL(f); img.hidden=false; }
+    else { img.hidden=true; }
+    if(!aiAvail){ txt.innerHTML="<b>File caricato</b>Inserisci manualmente i consumi nei campi qui sotto."; return; }
     txt.innerHTML="<b>Sto leggendo la bolletta…</b>Ci vogliono alcuni secondi.";
     try{
+      const sample=await claude.use("sample");
       const blob=await shrink(f);
       const d=await sample.json(BILL_PROMPT,{images:[blob],modelTier:"default"});
       applyBill(d);
@@ -1094,8 +1112,10 @@ function refresh(){
     <tr><td>${S.panels} moduli ${esc(pan.n)}, totale ${fmt(r.kwp,2)} kWp</td><td>${eur(S.panels*pan.price)}</td></tr>
     <tr><td>Inverter ${esc(inv.n)}</td><td>${eur(inv.price)}</td></tr>
     <tr><td>Strutture, cavi, quadri e posa in opera</td><td>${eur(pv)}</td></tr>
+    ${S.sottostruttura>0?`<tr><td>Sottostruttura e staffe</td><td>${eur(S.sottostruttura)}</td></tr>`:""}
     ${S.batt?`<tr><td>Batteria di accumulo ${S.batt} kWh</td><td>${eur(bt)}</td></tr>`:""}
-    <tr><td>Pratiche, allaccio e collaudo</td><td>incluso</td></tr>
+    <tr><td>Pratiche, allaccio e collaudo</td><td>${S.pratiche>0?eur(S.pratiche):"incluso"}</td></tr>
+    ${S.piattaforma>0?`<tr><td>Piattaforma per la posa</td><td>${eur(S.piattaforma)}</td></tr>`:""}
     <tr class="tot"><td>Investimento</td><td>${eur(r.cost)}</td></tr>
     ${S.detr?`<tr class="neg"><td>Detrazione fiscale ${Math.round(S.detr*100)}% in 10 anni</td><td>−${eur(det)}</td></tr>
     <tr class="tot"><td>Costo reale per te</td><td>${eur(r.cost-det)}</td></tr>`:""}

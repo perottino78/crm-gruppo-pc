@@ -1544,6 +1544,7 @@ export async function importaSolarisInPreventivo(formData: FormData) {
       inverterId: true,
       costoKwp: true,
       costoBatteria: true,
+      statoJson: true,
     },
   });
   if (!progetto || !progetto.preventivoId) return;
@@ -1607,9 +1608,46 @@ export async function importaSolarisInPreventivo(formData: FormData) {
   if (progetto.kwp && progetto.costoKwp != null) {
     righe.push({
       preventivoId,
-      testoLibero: `☀️ Installazione, strutture e pratiche — ${progetto.kwp.toFixed(2)} kWp`,
+      testoLibero: `☀️ Installazione, cavi e quadri — ${progetto.kwp.toFixed(2)} kWp`,
       quantita: 1,
       prezzoUnitario: progetto.kwp * progetto.costoKwp,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  // Kit fotovoltaici (voci opzionali salvate nel statoJson dallo Studio)
+  const stato = progetto.statoJson as Record<string, unknown> | null;
+  const n = (k: string) => { const v = stato?.[k]; return typeof v === "number" && v > 0 ? v : 0; };
+
+  const sottostruttura = n("sottostruttura");
+  if (sottostruttura > 0) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Sottostruttura e staffe`,
+      quantita: 1,
+      prezzoUnitario: sottostruttura,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  const pratiche = n("pratiche");
+  if (pratiche > 0) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Pratiche, allaccio e collaudo`,
+      quantita: 1,
+      prezzoUnitario: pratiche,
+      ordine: ordineBase + righe.length,
+    });
+  }
+
+  const piattaforma = n("piattaforma");
+  if (piattaforma > 0) {
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Piattaforma per la posa`,
+      quantita: 1,
+      prezzoUnitario: piattaforma,
       ordine: ordineBase + righe.length,
     });
   }
