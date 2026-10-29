@@ -5,7 +5,7 @@ import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { avviaFaseFlusso } from "@/app/flusso-actions";
+import { avviaFaseFlusso, fattoTask } from "@/app/flusso-actions";
 import { datiAcquisto } from "@/lib/ordini/server";
 
 function str(fd: FormData, key: string): string | null {
@@ -45,14 +45,10 @@ async function ricalcolaStato(commessaId: string) {
   if (stato !== c.stato) await prisma.commessa.update({ where: { id: c.id }, data: { stato } });
 }
 
-export async function creaCommessaDaPreventivo(formData: FormData) {
-  const utente = await getCurrentUser();
-  if (!utente) redirect("/login");
-  const preventivoId = str(formData, "preventivoId");
-  if (!preventivoId) return;
+async function apriCommessa(preventivoId: string, utenteNome: string): Promise<string | null> {
   const p = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { commessa: true } });
-  if (!p || p.stato !== "ACCETTATO") return;
-  if (p.commessa) redirect(`/commesse/${p.commessa.id}`);
+  if (!p || p.stato !== "ACCETTATO") return null;
+  if (p.commessa) return p.commessa.id;
   const anno = new Date().getFullYear();
   const ultimo = await prisma.commessa.findFirst({ where: { anno }, orderBy: { numero: "desc" } });
   const numero = (ultimo?.numero ?? 0) + 1;
@@ -73,9 +69,92 @@ export async function creaCommessaDaPreventivo(formData: FormData) {
     },
   });
   await creaFasiStandard(c.id);
-  await avviaFaseFlusso(c.id, "ACCETTAZIONE", null, utente.nome);
+  await avviaFaseFlusso(c.id, "ACCETTAZIONE", null, utenteNome);
   await log(c.id, `Commessa creata dal preventivo accettato (totale ${totale.toFixed(2)} € IVA incl.).`);
-  redirect(`/commesse/${c.id}`);
+  return c.id;
+}
+
+export async function creaCommessaDaPreventivo(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const preventivoId = str(formData, "preventivoId");
+  if (!preventivoId) return;
+  const id = await apriCommessa(preventivoId, utente.nome);
+  if (id) redirect(`/commesse/${id}`);
+}
+
+// Il commerciale chiude il contratto: l'offerta si blocca così com'è, si apre la commessa,
+// la fase "Accettazione" si chiude da sola e la pratica passa all'ufficio successivo del flusso
+// (di norma la contabilità per la fattura d'acconto), con la nota del commerciale.
+export async function confermaOrdinePreventivo(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const preventivoId = str(formData, "preventivoId");
+  if (!preventivoId) return;
+  const torna = (errore?: string) =>
+    redirect(`/preventivi/${preventivoId}${errore ? `?errore=${encodeURIComponent(errore)}` : "?confermata=1"}#conferma`);
+  const p = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { commessa: true } });
+  if (!p) return;
+  if (p.confermatoIl) torna();
+  if (["ANNULLATO"].includes(p.stato)) torna("Un'offerta annullata non si può confermare.");
+  if (!p.numeroOfferta && p.totaleNetto <= 0) torna("L'offerta è vuota: aggiungi le righe prima di confermarla.");
+
+  const [nContratto, nFoto] = await Promise.all([
+    prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: p.id, cartella: "Contratto firmato" } }),
+    prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: p.id, cartella: "Foto" } }),
+  ]);
+  const cartaceo = formData.get("contrattoCartaceo") === "on";
+  if (nContratto === 0 && !cartaceo)
+    torna("Carica il contratto firmato nella cartella «Contratto firmato» qui sotto, oppure spunta «firmato su carta, lo consegno in ufficio».");
+  const nota = str(formData, "nota");
+
+  await prisma.preventivo.update({
+    where: { id: p.id },
+    data: { stato: "ACCETTATO", archiviato: false, confermatoIl: new Date(), confermatoDaNome: utente.nome },
+  });
+  const commessaId = await apriCommessa(p.id, utente.nome);
+  if (!commessaId) torna("Non sono riuscito ad aprire la commessa.");
+  const cid = commessaId as string;
+
+  const righeLog = [
+    `Ordine confermato da ${utente.nome}: offerta ${p.numeroOfferta ?? ""} bloccata.`,
+    nContratto ? `Contratto firmato allegato (${nContratto} file).` : "Contratto firmato su carta: da consegnare in ufficio.",
+    nFoto ? `Foto allegate: ${nFoto}.` : null,
+    nota ? `Nota per la contabilità: ${nota}` : null,
+  ].filter(Boolean).join(" ");
+  await log(cid, righeLog);
+
+  // chiude la fase di accettazione (fatta dal commerciale) → il flusso crea il task dell'ufficio successivo
+  const acc = await prisma.taskPratica.findFirst({ where: { commessaId: cid, faseChiave: "ACCETTAZIONE", completatoIl: null }, orderBy: { createdAt: "desc" } });
+  if (acc) {
+    const fd = new FormData();
+    fd.set("taskId", acc.id);
+    await fattoTask(fd);
+  }
+  // la nota del commerciale va sul task appena creato per il prossimo ufficio
+  if (nota || !nContratto) {
+    const prossimo = await prisma.taskPratica.findFirst({ where: { commessaId: cid, completatoIl: null, stato: { notIn: ["ANNULLATO"] } }, orderBy: { createdAt: "desc" } });
+    if (prossimo) {
+      const extra = [nota ? `Nota del commerciale (${utente.nome}): ${nota}` : null, !nContratto ? "⚠ Contratto firmato su carta: verificare che arrivi in ufficio." : null].filter(Boolean).join("\n");
+      await prisma.taskPratica.update({ where: { id: prossimo.id }, data: { descrizione: [prossimo.descrizione, extra].filter(Boolean).join("\n\n") } });
+    }
+  }
+  revalidatePath(`/preventivi/${p.id}`);
+  revalidatePath(`/clienti/${p.clienteId}`);
+  revalidatePath("/task");
+  revalidatePath("/commesse");
+  torna();
+}
+
+// Solo l'amministratore: riapre l'offerta confermata per una variante (la commessa resta)
+export async function sbloccaPreventivo(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!isAmministratore(utente)) return;
+  const id = str(formData, "preventivoId");
+  if (!id) return;
+  const p = await prisma.preventivo.update({ where: { id }, data: { confermatoIl: null, confermatoDaNome: null }, include: { commessa: true } });
+  if (p.commessa) await log(p.commessa.id, `Offerta ${p.numeroOfferta ?? ""} sbloccata da ${utente!.nome} per una variante.`);
+  revalidatePath(`/preventivi/${id}`);
 }
 
 // Solo l'amministratore (responsabile) può modificare le condizioni di acconto

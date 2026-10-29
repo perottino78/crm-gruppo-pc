@@ -31,6 +31,15 @@ function dataOrNull(fd: FormData, key: string): Date | null {
   return isNaN(d.getTime()) ? null : d;
 }
 
+
+// Offerta confermata = bloccata: righe, prezzi e condizioni non si toccano più (si sblocca solo da amministratore)
+async function offertaBloccata(formData: FormData, idEPreventivo = false): Promise<boolean> {
+  const id = str(formData, "preventivoId") ?? (idEPreventivo ? str(formData, "id") : null);
+  if (!id) return false;
+  const p = await prisma.preventivo.findUnique({ where: { id }, select: { confermatoIl: true } });
+  return !!p?.confermatoIl;
+}
+
 export async function creaLead(formData: FormData) {
   const nome = str(formData, "nome");
   const brandId = str(formData, "brandId");
@@ -430,6 +439,7 @@ export async function aggiornaScadenzaPreventivo(formData: FormData) {
 // Eliminazione definitiva: righe, optional, sezioni e promemoria vanno via con l'offerta.
 // Non consentita se esiste già un progetto/commessa collegato (offerta accettata e lavorata): in quel caso archiviare.
 export async function eliminaPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
   const p = await prisma.preventivo.findUnique({ where: { id }, include: { progetto: true, commessa: true } });
@@ -590,6 +600,7 @@ async function ricalcolaTotali(preventivoId: string) {
 }
 
 export async function aggiornaCondizioniOfferta(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
   const oggetto = str(formData, "oggetto");
@@ -609,6 +620,7 @@ export async function aggiornaCondizioniOfferta(formData: FormData) {
 // riquadro del totale nella pagina preventivo, con salvataggio immediato e ricalcolo
 // del netto/IVA, cosi' non serve aprire la scheda condizioni per modificarlo.
 export async function aggiornaSconto(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
   const scontoStr = str(formData, "scontoPercentuale");
@@ -631,6 +643,7 @@ export async function aggiornaSconto(formData: FormData) {
 // arredi/serramenti, o un'aliquota estera). Tendina coi valori più comuni +
 // slot libero per qualunque altro valore.
 export async function aggiornaIva(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
   const preset = str(formData, "aliquotaPreset");
@@ -660,6 +673,7 @@ export async function aggiornaIva(formData: FormData) {
 // sconto applicata. Quando attivo, la stampa mostra solo un imponibile+IVA "puliti"
 // ricavati a ritroso da questa cifra, indistinguibili da un preventivo calcolato normalmente.
 export async function aggiornaPrezzoManuale(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
   const attivo = formData.get("prezzoManualeAttivo") === "on";
@@ -696,6 +710,7 @@ export async function aggiornaPrezzoManuale(formData: FormData) {
 // anche in stampa). L'importo è facoltativo e può essere negativo per rappresentare uno
 // sconto extra concordato manualmente.
 export async function aggiungiRigaTestoLibero(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const testoLibero = str(formData, "testoLibero");
   if (!preventivoId || !testoLibero) return;
@@ -749,6 +764,7 @@ async function resequenceRighe(preventivoId: string, sezioneId: string | null): 
 }
 
 async function spostaRiga(formData: FormData, direzione: 1 | -1) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -780,6 +796,7 @@ export async function spostaRigaGiu(formData: FormData) {
 // sceglie l'opzione vuota): finisce in coda alla sezione di destinazione,
 // poi eventualmente riordinabile con le frecce su/giu.
 export async function spostaRigaSezione(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -792,6 +809,7 @@ export async function spostaRigaSezione(formData: FormData) {
 }
 
 export async function creaSezione(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const nome = str(formData, "nome");
   if (!preventivoId || !nome || !nome.trim()) return;
@@ -809,6 +827,7 @@ export async function creaSezione(formData: FormData) {
 }
 
 export async function rinominaSezione(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   const nome = str(formData, "nome");
@@ -822,6 +841,7 @@ export async function rinominaSezione(formData: FormData) {
 // non mostra comunque il pulsante in quel caso): evita di cancellare per sbaglio
 // righe/articoli insieme alla sezione.
 export async function eliminaSezione(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -845,6 +865,7 @@ async function resequenceSezioni(preventivoId: string): Promise<{ id: string; or
 }
 
 async function spostaSezione(formData: FormData, direzione: 1 | -1) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -870,6 +891,7 @@ export async function spostaSezioneGiu(formData: FormData) {
 }
 
 export async function aggiungiRigaPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const prodottoId = str(formData, "prodottoId");
   const quantitaStr = str(formData, "quantita");
@@ -890,6 +912,7 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
 }
 
 export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const brandId = str(formData, "brandId");
   const tipologia = str(formData, "tipologia");
@@ -1020,6 +1043,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
 }
 
 export async function aggiornaDescrizionePersonalizzata(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -1032,6 +1056,7 @@ export async function aggiornaDescrizionePersonalizzata(formData: FormData) {
 }
 
 export async function rimuoviRigaPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -1058,6 +1083,7 @@ export async function rimuoviRigaPreventivo(formData: FormData) {
 // è anche più veloce l'inserimento di articoli uguali". La copia viene creata
 // subito dopo l'originale nello stesso ordinamento/sezione.
 export async function duplicaRigaPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -1103,6 +1129,7 @@ export async function duplicaRigaPreventivo(formData: FormData) {
 }
 
 export async function modificaRigaPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -1196,6 +1223,7 @@ export async function modificaRigaPreventivo(formData: FormData) {
 }
 
 export async function aggiungiOptionalARiga(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const rigaId = str(formData, "rigaId");
   const optionalId = str(formData, "optionalId");
   const preventivoId = str(formData, "preventivoId");
@@ -1232,6 +1260,7 @@ export async function aggiungiOptionalARiga(formData: FormData) {
 }
 
 export async function rimuoviOptionalDaRiga(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
@@ -1244,8 +1273,10 @@ export async function aggiornaStatoPreventivo(formData: FormData) {
   const id = str(formData, "id");
   const stato = str(formData, "stato");
   if (!id || !stato) return;
-  await prisma.preventivo.update({ where: { id }, data: { stato } });
+  const p = await prisma.preventivo.update({ where: { id }, data: { stato } });
   revalidatePath("/preventivi");
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/clienti/${p.clienteId}`);
   revalidatePath("/");
 }
 
@@ -1501,6 +1532,7 @@ export async function creaProgettoSolaris(formData: FormData) {
 }
 
 export async function toggleDescrizioneRiga(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
   const id = str(formData, "id");
   const preventivoId = str(formData, "preventivoId");
   const mostraStr = str(formData, "mostra");
@@ -1528,6 +1560,8 @@ export async function aggiornaSolarisRuolo(formData: FormData) {
 export async function importaSolarisInPreventivo(formData: FormData) {
   const progettoId = str(formData, "progettoId");
   if (!progettoId) return;
+  const prog = await prisma.solarisProgetto.findUnique({ where: { id: progettoId }, select: { preventivo: { select: { confermatoIl: true } } } });
+  if (prog?.preventivo?.confermatoIl) return;
   const utente = await getCurrentUser();
   if (!utente) return;
 
