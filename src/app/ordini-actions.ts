@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine } from "@/lib/ordini/server";
 import { numeroOrdine, statoDaArrivi } from "@/lib/ordini/calcoli";
 import { pdfOrdineFornitore } from "@/lib/ordini/pdfOrdine";
+import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { configEmail, inviaEmail, linkMailto, emailValida } from "@/lib/ordini/email";
 
 function str(fd: FormData, k: string): string | null {
@@ -228,12 +229,13 @@ export async function registraArrivi(fd: FormData) {
   for (const r of o.righe) {
     const arr = arrivate.has(r.id);
     if (arr === r.arrivato) continue;
-    await prisma.rigaOrdine.update({ where: { id: r.id }, data: { arrivato: arr, arrivatoIl: arr ? ora : null } });
+    await prisma.rigaOrdine.update({ where: { id: r.id }, data: { arrivato: arr, arrivatoIl: arr ? ora : null, quantitaArrivata: arr ? Math.max(r.quantitaArrivata, r.quantita) : 0 } });
     if (arr) nuove.push(r.descrizione);
   }
   const stato = statoDaArrivi(o.stato, o.righe.map((r) => ({ arrivato: arrivate.has(r.id) })));
   await prisma.ordineFornitore.update({ where: { id }, data: { stato } });
   if (nuove.length) await logCommessa(o.commessaId, `Merce arrivata (ordine ${numeroOrdine(o)}): ${nuove.join("; ").slice(0, 400)}.${stato === "EVASO" ? " Ordine completo." : ""}`, u.nome);
+  if (o.commessaId) await prisma.$transaction((tx) => verificaMaterialeCommessa(tx, o.commessaId!, u.nome));
   aggiorna(id, o.commessaId);
 }
 

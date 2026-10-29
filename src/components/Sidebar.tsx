@@ -11,11 +11,13 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
   { href: "/ordini-fornitori", label: "Ordini fornitori", icon: "🚚", soloOrdini: true },
+  { href: "/magazzino", label: "Magazzino", icon: "🏬", soloOrdini: true },
   { href: "/lavori", label: "Lavori / squadre", icon: "🔧" },
   { href: "/assistenza", label: "Assistenza", icon: "🛟" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
   { href: "/commerciali", label: "Team & performance", icon: "🏆" },
   { href: "/amministrazione", label: "Amministrazione", icon: "💶", soloAmministrazione: true },
+  { href: "/archivio", label: "Archivio file", icon: "📁" },
   { href: "/report", label: "Report", icon: "📊" },
   { href: "/impostazioni", label: "Impostazioni", icon: "⚙️" },
 ];

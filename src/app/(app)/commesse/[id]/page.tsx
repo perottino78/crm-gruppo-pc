@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import StatoAcquisti from "@/components/ordini/StatoAcquisti";
+import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { puoGestireOrdini } from "@/lib/ordini/server";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -88,7 +89,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
   const movimenti: Mov[] = [
     ...c.fasi.filter((f) => f.stato === "CHIUSA" && f.costoTotale > 0).map((f) => ({ data: f.chiusaIl ?? f.createdAt, voce: `Fase: ${f.nome}${f.assegnatoNome ? " (" + f.assegnatoNome + ")" : ""}`, tipo: "Manodopera", importo: f.costoTotale })),
     ...(haAcquistiTotali ? [] : c.righeOrdine).filter((r) => r.costoEffettivo !== null).map((r) => ({ data: r.arrivatoIl ?? r.ordinatoIl ?? r.createdAt, voce: `${r.descrizione}${r.fornitoreNome ? " — " + r.fornitoreNome : ""}`, tipo: "Materiale", importo: r.costoEffettivo ?? 0 })),
-    ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria === "ACQUISTO_MATERIALE" ? "Materiale (totale)" : m.categoria, importo: m.importo })),
+    ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria === "ACQUISTO_MATERIALE" ? "Materiale (totale)" : m.categoria === "FATTURA_FORNITORE" ? "Fattura fornitore" : m.categoria, importo: m.importo })),
   ].sort((a, b) => a.data.getTime() - b.data.getTime());
   const totaleCosti = movimenti.reduce((t, m) => t + m.importo, 0);
   const margine = c.totaleImponibile - totaleCosti;
@@ -432,6 +433,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
         <h2 className="mb-1">4 · Acquisti e ordini fornitori</h2>
         <p className="text-xs text-neutral-600 mb-3">La spunta &quot;ordinato&quot; attesta che l&apos;ordine è stato eseguito con il modulo del prodotto. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
         <StatoAcquisti commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
+        <MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
         <div className="bg-amber-50 border border-amber-300 rounded p-3 mb-4">
           <p className="text-sm font-bold text-neutral-900 mb-1">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""}</p>
           <p className="text-xs text-neutral-700 mb-2">Inserisci un solo importo per fornitore/fattura invece del costo di ogni riga. Se presente, sostituisce i costi per riga nella scheda costi.</p>
