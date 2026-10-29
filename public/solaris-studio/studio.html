@@ -627,7 +627,19 @@ const INVERTERS=[
   {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450,
    specs:{eff:99.0,mppt:1,vdc_max:"850 V",vac:"220–240 V",comm:"WiFi · ZigBee · RS485",gar:12,cert:"CE / IEC 62109 / Grid Guard"}},
   {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620,
-   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}}];
+   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}},
+  {id:"st3",n:"Inverter Ibrido ST-INV-S 3 kW",kw:3,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
+   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
+  {id:"st368",n:"Inverter Ibrido ST-INV-S 3.68 kW",kw:3.68,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
+   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
+  {id:"st4",n:"Inverter Ibrido ST-INV-S 4 kW",kw:4,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
+   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
+  {id:"st5",n:"Inverter Ibrido ST-INV-S 5 kW",kw:5,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
+   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
+  {id:"st10t",n:"Inverter Ibrido Trifase ST-INV-T 10 kW",kw:10,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
+   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
+  {id:"st15t",n:"Inverter Ibrido Trifase ST-INV-T 15 kW",kw:15,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
+   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}}];
 if(_INIT.catalogo){
   (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
   (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
