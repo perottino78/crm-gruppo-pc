@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
   const t = token.replace(/\.ics$/, "");
-  const u = t.length >= 20 ? await prisma.utente.findUnique({ where: { calendarioToken: t } }) : null;
+  const u = t.length >= 20 ? await prisma.utente.findFirst({ where: { calendarioToken: t } }) : null;
   if (!u) return new Response("Calendario non trovato", { status: 404 });
   const ora = Date.now();
   const eventi = await eventiPeriodo({ da: new Date(ora - 60 * 86400_000), a: new Date(ora + 365 * 86400_000), utenteId: u.id });

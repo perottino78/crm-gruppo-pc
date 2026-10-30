@@ -50,7 +50,7 @@ model Utente {
   // amministratore con password temporanea).
   mustChangePassword   Boolean           @default(true)
   // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
-  calendarioToken      String?           @unique
+  calendarioToken      String?
   createdAt            DateTime          @default(now())
   leadAssegnati        Lead[]
   appuntamenti         Appuntamento[]
