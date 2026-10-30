@@ -66,19 +66,23 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 - **Filtri campagne** (pagina Clienti, `src/lib/clienti/provenienza.ts`): provenienza, stato lead, commerciale, periodo;
   esportazione `GET /api/clienti/esporta` (Excel `;` o `formato=facebook` per i pubblici personalizzati Meta). Ogni ingresso
   (form, lead convertito, landing `?utm_source=`, Meta, simulatore) passa da `provenienzaDaFonte()`.
+- **Aumenti listini** (`/prodotti/aumenti`, `src/app/listini-actions.ts`, `src/lib/listini/aumenti.ts`, solo AMMINISTRATORE):
+  percentuale del fornitore su griglie `Prodotto.prezzoBase`, optional a prezzo fisso del listino (`Optional.listino` = tipologia o
+  `listinoDiTipologia`) e articoli del fornitore; storico in `AumentoListino` con i valori di prima → "Annulla".
+  Attenzione: le rotte `seed-*` riscrivono i prezzi di griglia dai dati originali (cancellerebbero gli aumenti).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 144, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 148, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

@@ -1493,3 +1493,27 @@ model RigaFatturaAcquisto {
   @@index([fatturaId])
   @@index([commessaId])
 }
+
+// ============ AUMENTI LISTINI ============
+// Ogni aumento percentuale comunicato da un fornitore, applicato a griglie prezzi, optional a prezzo fisso
+// e articoli a pezzo. Conserva i valori di prima per poterlo annullare.
+model AumentoListino {
+  id               String    @id @default(cuid())
+  createdAt        DateTime  @default(now())
+  utenteNome       String?
+  percentuale      Float
+  arrotondamento   String    @default("CENTESIMI")
+  descrizione      String // es. "Fornitore ALIAS SRL — 12 listini"
+  fornitoreId      String?
+  listini          String[]  @default([]) // "P&C · BRILLANTE"
+  prezzi           Int       @default(0) // righe di griglia aggiornate
+  optional         Int       @default(0)
+  articoli         Int       @default(0)
+  nota             String?
+  // [tabella, id, valori di prima…] — vedi ValorePrecedente in src/lib/listini/aumenti.ts
+  valoriPrecedenti Json
+  annullatoIl      DateTime?
+  annullatoDa      String?
+
+  @@index([createdAt])
+}
