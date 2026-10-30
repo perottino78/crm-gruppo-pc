@@ -7,6 +7,8 @@ import { creaLead, creaCliente, aggiornaFaseLead, convertiLeadInCliente } from "
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
+import { PROVENIENZE, NESSUNA, whereFiltriClienti, filtriCampagnaAttivi } from "@/lib/clienti/provenienza";
+import { daOraRoma, aggiungiGiorni } from "@/lib/calendario/tempo";
 
 const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
@@ -41,6 +43,11 @@ type ClientiSearchParams = {
   paese?: string;
   lead?: string;
   clienti?: string;
+  provenienza?: string;
+  stato?: string;
+  commerciale?: string;
+  dal?: string;
+  al?: string;
 };
 
 export default async function ClientiPage({
@@ -48,7 +55,8 @@ export default async function ClientiPage({
 }: {
   searchParams: Promise<ClientiSearchParams>;
 }) {
-  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam, clienti: clientiParam } = await searchParams;
+  const filtri = await searchParams;
+  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam, clienti: clientiParam, provenienza, stato, commerciale, dal, al } = filtri;
   const leadMostrati = leggiQuante(leadParam);
   const leadTake = quanteTake(leadMostrati);
   const clientiMostrati = leggiQuante(clientiParam);
@@ -56,7 +64,7 @@ export default async function ClientiPage({
   // Link "Mostra: 10/20/50/100/tutti" che conserva brand, ricerca e l'altra scelta.
   const hrefQuante = (cambia: { lead?: string; clienti?: string }) => {
     const parametri = new URLSearchParams();
-    for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese })) if (v) parametri.set(k, v);
+    for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametri.set(k, v);
     const l = cambia.lead ?? leadMostrati;
     const c = cambia.clienti ?? clientiMostrati;
     if (l !== LEAD_DEFAULT) parametri.set("lead", l);
@@ -70,31 +78,18 @@ export default async function ClientiPage({
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
   const leadScope = utente ? scopeLeadWhere(utente) : {};
 
-  // Ricerca standard: nome (o ragione sociale), telefono, email in un unico campo.
+  // Filtri dell'elenco clienti (ricerca, indirizzo e campagne): stessa funzione dell'esportazione
+  const dataDa = dal ? daOraRoma(`${dal}T00:00`) : null;
+  const dataA = al ? daOraRoma(`${aggiungiGiorni(al, 1)}T00:00`) : null;
+  const condizioni = whereFiltriClienti({ ...filtri, brand: undefined }, dataDa, dataA);
   const ricercaStd = q?.trim();
-  const ricercaStdWhere: Prisma.ClienteWhereInput = ricercaStd
-    ? {
-        OR: [
-          { nome: { contains: ricercaStd, mode: "insensitive" } },
-          { telefono: { contains: ricercaStd, mode: "insensitive" } },
-          { email: { contains: ricercaStd, mode: "insensitive" } },
-        ],
-      }
-    : {};
-
-  // Ricerca avanzata: indirizzo, comune, provincia, CAP, paese — combinati in AND fra loro.
-  const filtriAvanzati: Prisma.ClienteWhereInput[] = [];
-  if (indirizzo?.trim()) filtriAvanzati.push({ indirizzo: { contains: indirizzo.trim(), mode: "insensitive" } });
-  if (comune?.trim()) filtriAvanzati.push({ comune: { contains: comune.trim(), mode: "insensitive" } });
-  if (provincia?.trim()) filtriAvanzati.push({ provincia: { contains: provincia.trim(), mode: "insensitive" } });
-  if (cap?.trim()) filtriAvanzati.push({ cap: { contains: cap.trim(), mode: "insensitive" } });
-  if (paese?.trim() && paese !== "Tutti") filtriAvanzati.push({ paese: paese.trim() });
-
-  const ricercaAttiva = Boolean(ricercaStd || filtriAvanzati.length > 0);
-
-  const clientiWhere: Prisma.ClienteWhereInput = {
-    AND: [brandFiltro, clienteScope, ricercaStdWhere, ...filtriAvanzati],
-  };
+  const ricercaAttiva = condizioni.length > 0;
+  const clientiWhere: Prisma.ClienteWhereInput = { AND: [brandFiltro, clienteScope, ...condizioni] };
+  // Per le tendine dei filtri: valori presenti con quanti clienti (solo quelli che l'utente può vedere)
+  const scopeEBrand: Prisma.ClienteWhereInput = { AND: [brandFiltro, clienteScope] };
+  const isAdmin = utente?.ruolo === "AMMINISTRATORE";
+  const parametriEsporta = new URLSearchParams();
+  for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametriEsporta.set(k, v);
 
   // Ricerca lead: nome, telefono, email
   const leadRicercaWhere: Prisma.LeadWhereInput = ricercaStd
@@ -108,8 +103,8 @@ export default async function ClientiPage({
     : {};
 
   const leadWhere: Prisma.LeadWhereInput = { AND: [brandFiltro, leadScope, leadRicercaWhere] };
-  const [clienti, clientiTotali, lead, leadTotali, brands] = await Promise.all([
-    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake }),
+  const [clienti, clientiTotali, lead, leadTotali, brands, perProvenienza, perStato, commerciali] = await Promise.all([
+    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake, include: { brand: true, responsabile: { select: { nome: true } } } }),
     prisma.cliente.count({ where: clientiWhere }),
     prisma.lead.findMany({
       where: leadWhere,
@@ -119,6 +114,9 @@ export default async function ClientiPage({
     }),
     prisma.lead.count({ where: leadWhere }),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
+    prisma.cliente.groupBy({ by: ["origine"], where: scopeEBrand, _count: { _all: true }, orderBy: { _count: { origine: "desc" } } }),
+    prisma.cliente.groupBy({ by: ["statoLead"], where: scopeEBrand, _count: { _all: true }, orderBy: { _count: { statoLead: "desc" } } }),
+    isAdmin ? prisma.utente.findMany({ where: { clientiResponsabile: { some: {} } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }) : Promise.resolve([]),
   ]);
 
   return (
@@ -167,6 +165,46 @@ export default async function ClientiPage({
             </select>
           </div>
         </details>
+
+        {/* Filtri campagne: provenienza, stato del lead, commerciale e periodo di arrivo (solo clienti) */}
+        <div className="mt-3 border-t border-neutral-100 pt-3">
+          <p className="text-xs font-semibold text-neutral-700 mb-2">📣 Filtri campagne</p>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <select name="provenienza" defaultValue={provenienza ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              <option value="">Provenienza: tutte</option>
+              {perProvenienza.filter((r) => r.origine && r.origine !== "NON INDICATA").map((r) => (
+                <option key={r.origine} value={r.origine!}>{r.origine} ({r._count._all})</option>
+              ))}
+              <option value={NESSUNA}>Non indicata ({perProvenienza.filter((r) => !r.origine || r.origine === "NON INDICATA").reduce((t, r) => t + r._count._all, 0)})</option>
+            </select>
+            <select name="stato" defaultValue={stato ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              <option value="">Stato lead: tutti</option>
+              {perStato.filter((r) => r.statoLead).map((r) => (
+                <option key={r.statoLead} value={r.statoLead!}>{r.statoLead} ({r._count._all})</option>
+              ))}
+              <option value={NESSUNA}>Senza stato ({perStato.filter((r) => !r.statoLead).reduce((t, r) => t + r._count._all, 0)})</option>
+            </select>
+            {isAdmin ? (
+              <select name="commerciale" defaultValue={commerciale ?? ""} className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+                <option value="">Commerciale: tutti</option>
+                {commerciali.map((u) => <option key={u.id} value={u.id}>{u.nome}</option>)}
+                <option value={NESSUNA}>Nessun commerciale</option>
+              </select>
+            ) : <span />}
+            <label className="flex items-center gap-1 text-xs text-neutral-600">dal
+              <input type="date" name="dal" defaultValue={dal ?? ""} className="flex-1 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            </label>
+            <label className="flex items-center gap-1 text-xs text-neutral-600">al
+              <input type="date" name="al" defaultValue={al ?? ""} className="flex-1 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
+            </label>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Applica filtri</button>
+            <a href={`/api/clienti/esporta?${parametriEsporta.toString()}`} className="btn-3d btn-3d-green text-sm px-4 py-2">⬇ Esporta per Excel</a>
+            <a href={`/api/clienti/esporta?formato=facebook&${parametriEsporta.toString()}`} className="btn-3d btn-3d-blue text-sm px-4 py-2">⬇ Esporta per Facebook</a>
+            {filtriCampagnaAttivi(filtri) && <span className="text-xs text-neutral-600">Esportano i {clientiTotali} clienti filtrati.</span>}
+          </div>
+        </div>
       </form>
 
       <div className="grid grid-cols-2 gap-6 mb-8">
@@ -176,11 +214,8 @@ export default async function ClientiPage({
             <input name="nome" placeholder="Nome" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="email" placeholder="Email" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
-            <select name="fonte" defaultValue="facebook" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
-              <option value="facebook">Facebook</option>
-              <option value="instagram">Instagram</option>
-              <option value="telefono">Telefono</option>
-              <option value="altro">Altro</option>
+            <select name="fonte" defaultValue="FACEBOOK" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              {PROVENIENZE.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
             <select name="brandId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
               <option value="">Brand...</option>
@@ -215,6 +250,10 @@ export default async function ClientiPage({
               {brands.map((b) => (
                 <option key={b.id} value={b.id}>{b.nome}</option>
               ))}
+            </select>
+            <select name="origine" required defaultValue="" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
+              <option value="" disabled>Da dove arriva? (provenienza)</option>
+              {PROVENIENZE.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
             <button className="btn-3d btn-3d-teal text-sm px-4 py-2 mt-1">Crea cliente</button>
           </div>
@@ -313,15 +352,20 @@ export default async function ClientiPage({
             <div>
               <p className="font-medium">{c.nome}</p>
               <p className="text-xs text-neutral-600">
-                {c.telefono} · {c.email}
+                {[c.telefono, c.email].filter(Boolean).join(" · ")}
               </p>
               {(c.indirizzo || c.comune) && (
                 <p className="text-xs text-neutral-500">
                   {[c.indirizzo, c.cap, c.comune, c.provincia].filter(Boolean).join(", ")}
                 </p>
               )}
+              <p className="flex flex-wrap gap-1 mt-1">
+                {c.origine && c.origine !== "NON INDICATA" && <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-800">📣 {c.origine}</span>}
+                {c.statoLead && <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-900">{c.statoLead}</span>}
+                {c.responsabile && <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">👤 {c.responsabile.nome}</span>}
+              </p>
             </div>
-            <span className="text-xs text-neutral-600">{c.paese}</span>
+            <span className="text-xs text-neutral-600 text-right">{c.brand.nome}<br />{c.paese}</span>
           </Link>
         ))}
         {clienti.length === 0 && ricercaAttiva && (

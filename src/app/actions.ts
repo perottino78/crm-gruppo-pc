@@ -7,6 +7,7 @@ import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
 import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
+import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -51,7 +52,7 @@ export async function creaLead(formData: FormData) {
       nome,
       telefono: str(formData, "telefono"),
       email: str(formData, "email"),
-      fonte: str(formData, "fonte") ?? "facebook",
+      fonte: provenienzaDaFonte(str(formData, "fonte") ?? "FACEBOOK"),
       brandId,
       telefonistaId: utente?.id,
     },
@@ -74,6 +75,7 @@ export async function convertiLeadInCliente(formData: FormData) {
   if (!id) return;
   const lead = await prisma.lead.findUnique({ where: { id } });
   if (!lead) return;
+  const utente = await getCurrentUser();
   await prisma.cliente.create({
     data: {
       nome: lead.nome,
@@ -81,6 +83,10 @@ export async function convertiLeadInCliente(formData: FormData) {
       email: lead.email,
       brandId: lead.brandId,
       leadOrigineId: lead.id,
+      // la provenienza del lead passa al cliente: così finisce subito nel filtro campagne giusto
+      origine: provenienzaDaFonte(lead.fonte),
+      categoria: "Lead",
+      responsabileId: utente?.id ?? lead.telefonistaId,
     },
   });
   await prisma.lead.update({ where: { id }, data: { fase: "APPUNTAMENTO_FISSATO" } });
@@ -104,6 +110,7 @@ export async function creaCliente(formData: FormData) {
       paese: str(formData, "paese") ?? "IT",
       brandId,
       responsabileId: utente?.id,
+      origine: provenienzaDaFonte(str(formData, "origine")),
     },
   });
   revalidatePath("/clienti");
@@ -208,7 +215,8 @@ export async function aggiornaClienteProfilazione(formData: FormData) {
     where: { id },
     data: {
       bloccato: boolCheckbox(formData, "bloccato"),
-      origine: str(formData, "origine"),
+      origine: str(formData, "origine")?.toUpperCase() ?? null,
+      statoLead: str(formData, "statoLead"),
       settore: str(formData, "settore"),
       km: flt(formData, "km") ?? 0,
       tipologia: str(formData, "tipologia"),

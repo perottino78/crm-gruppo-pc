@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PROVENIENZE, STATI_LEAD } from "@/lib/clienti/provenienza";
 import type { Cliente, Utente, Referente, IndirizzoCliente, ClienteCorrelazione } from "@prisma/client";
 import {
   aggiornaClienteAnagrafica,
@@ -275,8 +276,13 @@ export default function SchedaClienteTabs({
             <Campo label="Categoria">
               <input name="categoria" placeholder="es. Account, Cliente" defaultValue={cliente.categoria ?? ""} className={inputCls} />
             </Campo>
-            <Campo label="Origine">
-              <input name="origine" defaultValue={cliente.origine ?? ""} className={inputCls} />
+            <Campo label="Provenienza (campagne)">
+              <input name="origine" list="elenco-provenienze" placeholder="es. FACEBOOK, FIERA, PASSAPAROLA" defaultValue={cliente.origine ?? ""} className={inputCls} />
+              <datalist id="elenco-provenienze">{PROVENIENZE.map((p) => <option key={p} value={p} />)}</datalist>
+            </Campo>
+            <Campo label="Stato del lead">
+              <input name="statoLead" list="elenco-stati-lead" placeholder="es. CALDO (interessato)" defaultValue={cliente.statoLead ?? ""} className={inputCls} />
+              <datalist id="elenco-stati-lead">{STATI_LEAD.map((p) => <option key={p} value={p} />)}</datalist>
             </Campo>
             <Campo label="Condivisioni">
               <input name="condivisioni" defaultValue={cliente.condivisioni ?? ""} className={inputCls} />
