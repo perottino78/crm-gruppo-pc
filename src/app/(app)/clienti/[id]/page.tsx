@@ -1,5 +1,9 @@
 export const dynamic = "force-dynamic";
 
+import FormAppuntamento from "@/components/calendario/FormAppuntamento";
+import { nomeTipoAppuntamento, vedeTutti } from "@/lib/calendario/eventi";
+import { aggiungiGiorni, chiaveGiorno } from "@/lib/calendario/tempo";
+import { mailConfigurata } from "@/lib/mail/invio";
 import { prisma } from "@/lib/prisma";
 import Documenti from "@/components/documenti/Documenti";
 import DocumentiCorrelati from "@/components/documenti/DocumentiCorrelati";
@@ -39,6 +43,7 @@ export default async function SchedaClientePage({
   const { id } = await params;
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
+  const utentiCal = await prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   if (!utenteCorrente) notFound();
 
   const cliente = await prisma.cliente.findFirst({
@@ -130,7 +135,7 @@ export default async function SchedaClientePage({
           {[
             { ico: "➕", t: "Nuova offerta", h: `${href("pratiche")}#nuova-offerta`, c: "btn-3d-green" },
             { ico: "📝", t: "Nota / chiamata", h: `${href("attivita")}#nuova-attivita`, c: "btn-3d-blue" },
-            { ico: "📅", t: "Appuntamento", h: href("appuntamenti"), c: "btn-3d-purple" },
+            { ico: "📅", t: "Appuntamento", h: `${href("appuntamenti")}#nuovo-appuntamento`, c: "btn-3d-purple" },
             { ico: "✅", t: "Task", h: href("task"), c: "btn-3d-amber" },
             { ico: "📎", t: "Carica file", h: href("file"), c: "btn-3d-teal" },
             { ico: "📞", t: "Chiama", h: telefono ? `tel:${telefono}` : null, c: "btn-3d-dark" },
@@ -363,24 +368,38 @@ export default async function SchedaClientePage({
 
         {/* ── Appuntamenti ── */}
         {sez === "appuntamenti" && (
-          <div className="bg-white rounded-xl border border-neutral-200 divide-y divide-neutral-100">
-            {[
-              ...cliente.appuntamenti.map((a) => ({ id: a.id, data: a.dataOra, titolo: `Appuntamento ${a.tipo.toLowerCase()}`, chi: a.utente.nome, stato: a.stato, link: null as string | null })),
-              ...commesse.flatMap((c) => c.rilievi.map((r) => ({ id: r.id, data: r.dataOra, titolo: `Rilievo misure · ${c.numeroTxt}`, chi: null, stato: r.stato, link: `/commesse/${c.id}` }))),
-            ]
-              .sort((a, b) => b.data.getTime() - a.data.getTime())
-              .map((a) => (
-                <div key={a.id} className="px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-sm">
-                  <span>
-                    <strong className="tabular-nums">{a.data.toLocaleString("it-IT", { dateStyle: "medium", timeStyle: "short" })}</strong> · {a.link ? <Link href={a.link} className="underline">{a.titolo}</Link> : a.titolo}
-                    {a.chi && <span className="text-neutral-500"> · {a.chi}</span>}
-                  </span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{a.stato.toLowerCase()}</span>
-                </div>
-              ))}
-            {cliente.appuntamenti.length === 0 && commesse.every((c) => c.rilievi.length === 0) && (
-              <p className="px-4 py-6 text-sm text-neutral-500 text-center">Nessun appuntamento.</p>
-            )}
+          <div className="space-y-4">
+            <div className="bg-white rounded-xl border border-neutral-200 divide-y divide-neutral-100">
+              {[
+                ...cliente.appuntamenti.map((a) => ({ id: a.id, data: a.dataOra, titolo: a.titolo || nomeTipoAppuntamento(a.tipo), chi: a.utente.nome, stato: a.stato, link: `/calendario/appuntamento/${a.id}`, esito: a.esito })),
+                ...commesse.flatMap((c) => c.rilievi.map((r) => ({ id: r.id, data: r.dataOra, titolo: `Rilievo misure · ${c.numeroTxt}`, chi: null as string | null, stato: r.stato, link: `/commesse/${c.id}`, esito: null as string | null }))),
+              ]
+                .sort((a, b) => b.data.getTime() - a.data.getTime())
+                .map((a) => (
+                  <Link key={a.id} href={a.link} className="px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-sm hover:bg-neutral-50">
+                    <span>
+                      <strong className="tabular-nums">{a.data.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "medium", timeStyle: "short" })}</strong> · <span className="underline">{a.titolo}</span>
+                      {a.chi && <span className="text-neutral-500"> · {a.chi}</span>}
+                      {a.esito && <span className="block text-xs text-neutral-600">esito: {a.esito}</span>}
+                    </span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{a.stato.toLowerCase()}</span>
+                  </Link>
+                ))}
+              {cliente.appuntamenti.length === 0 && commesse.every((c) => c.rilievi.length === 0) && (
+                <p className="px-4 py-6 text-sm text-neutral-500 text-center">Nessun appuntamento.</p>
+              )}
+            </div>
+            <section id="nuovo-appuntamento" className="card-fase scroll-mt-4" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <h2>📅 Fissa un appuntamento con {cliente.nome}</h2>
+                <Link href={`/calendario?cliente=${cliente.id}#nuovo`} className="text-xs font-bold text-blue-800 underline">guarda prima il calendario →</Link>
+              </div>
+              <FormAppuntamento
+                utenti={utentiCal} utenteId={cliente.responsabileId ?? utenteCorrente!.id} puoAssegnare={vedeTutti(utenteCorrente!.ruolo)}
+                data={`${aggiungiGiorni(chiaveGiorno(new Date()), 1)}T09:00`}
+                cliente={{ id: cliente.id, nome: cliente.nome, email: cliente.email }} ritorno={`/clienti/${cliente.id}?sez=appuntamenti`} mailAttiva={mailConfigurata()}
+              />
+            </section>
           </div>
         )}
 

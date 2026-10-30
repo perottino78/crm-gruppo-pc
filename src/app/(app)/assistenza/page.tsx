@@ -1,3 +1,4 @@
+import { perInput } from "@/lib/calendario/tempo";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -46,7 +47,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
                 <option value="">Tecnico…</option>
                 {utenti.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
               </select>
-              <input type="datetime-local" name="dataIntervento" defaultValue={a.dataIntervento ? a.dataIntervento.toISOString().slice(0, 16) : ""} className={inp} />
+              <input type="datetime-local" name="dataIntervento" defaultValue={a.dataIntervento ? perInput(a.dataIntervento) : ""} className={inp} />
               <input name="ricambioNote" defaultValue={a.ricambioNote ?? ""} placeholder="Ricambio / ordine fornitore" className={`${inp} w-52`} />
               <input name="esito" defaultValue={a.esito ?? ""} placeholder="Esito intervento" className={`${inp} w-52`} />
               <input name="costo" defaultValue={a.costo ?? ""} placeholder="Costo €" className={`${inp} w-24`} />

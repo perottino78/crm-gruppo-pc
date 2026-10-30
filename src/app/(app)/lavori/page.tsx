@@ -30,7 +30,7 @@ export default async function LavoriPage() {
       <div className="space-y-2 mb-6">
         {rilievi.map((r) => (
           <Link key={r.id} href={`/commesse/${r.commessaId}`} className={card}>
-            <p className="text-sm font-semibold text-neutral-900">📅 {r.dataOra.toLocaleString("it-IT", { weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })} · {r.commessa.cliente.nome}</p>
+            <p className="text-sm font-semibold text-neutral-900">📅 {r.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })} · {r.commessa.cliente.nome}</p>
             <p className="text-xs text-neutral-700">{numeroCommessa(r.commessa)}{r.indirizzo ? ` · 📍 ${r.indirizzo}` : ""}{tutti ? ` · ${r.tecnico.nome}` : ""}</p>
           </Link>
         ))}
@@ -41,7 +41,7 @@ export default async function LavoriPage() {
       <div className="space-y-2">
         {pose.map((p) => (
           <Link key={p.id} href={`/commesse/${p.commessaId}`} className={card}>
-            <p className="text-sm font-semibold text-neutral-900">🛠️ dal {p.dataInizio.toLocaleDateString("it-IT")} · {p.commessa.cliente.nome} <span className="text-xs font-normal text-neutral-600">({p.stato.replace("_", " ").toLowerCase()})</span></p>
+            <p className="text-sm font-semibold text-neutral-900">🛠️ dal {p.dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} · {p.commessa.cliente.nome} <span className="text-xs font-normal text-neutral-600">({p.stato.replace("_", " ").toLowerCase()})</span></p>
             <p className="text-xs text-neutral-700">{numeroCommessa(p.commessa)}{p.indirizzo ? ` · 📍 ${p.indirizzo}` : ""}{tutti && p.assegnatoNome ? ` · ${p.assegnatoNome}` : ""}</p>
           </Link>
         ))}

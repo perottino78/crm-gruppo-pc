@@ -205,7 +205,7 @@ export default async function SchedaCommercialePage({
                   <span>{a.cliente.nome} <span className="text-xs text-neutral-600">· {a.tipo}</span></span>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{a.stato}</span>
                 </div>
-                <p className="text-xs text-neutral-600">{a.dataOra.toLocaleString("it-IT")}</p>
+                <p className="text-xs text-neutral-600">{a.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}</p>
               </div>
             ))}
             {utente.appuntamenti.length === 0 && <p className="text-xs text-neutral-500 italic py-2">Nessuno</p>}

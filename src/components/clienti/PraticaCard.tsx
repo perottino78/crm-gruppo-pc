@@ -108,7 +108,7 @@ export default function PraticaCard({ p, vediAcquisti }: { p: PraticaCliente; ve
         <div className="flex flex-wrap gap-1.5">
           {p.rilievo && (
             <span className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-indigo-200 bg-indigo-50 text-indigo-800">
-              📐 Rilievo {p.rilievo.dataOra.toLocaleDateString("it-IT", { day: "2-digit", month: "short" })} · {p.rilievo.stato.toLowerCase()}
+              📐 Rilievo {p.rilievo.dataOra.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "short" })} · {p.rilievo.stato.toLowerCase()}
             </span>
           )}
           {vediAcquisti && (
