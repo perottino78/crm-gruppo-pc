@@ -1,5 +1,7 @@
 "use server";
 
+import { daOraRoma } from "@/lib/calendario/tempo";
+import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
@@ -256,8 +258,8 @@ export async function programmaRilievo(formData: FormData) {
   const tecnicoId = str(formData, "tecnicoId");
   const dataStr = str(formData, "dataOra");
   if (!commessaId || !tecnicoId || !dataStr) return;
-  const dataOra = new Date(dataStr);
-  if (isNaN(dataOra.getTime())) return;
+  const dataOra = daOraRoma(dataStr);
+  if (!dataOra) return;
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { cliente: true } });
   if (!c) return;
   const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
@@ -269,7 +271,9 @@ export async function programmaRilievo(formData: FormData) {
     data: { commessaId, tecnicoId, dataOra, indirizzo: indirizzo || null, note: str(formData, "note") },
     include: { tecnico: true },
   });
-  await log(commessaId, `Rilievo programmato il ${dataOra.toLocaleString("it-IT")} con ${r.tecnico.nome}.`);
+  await log(commessaId, `Rilievo programmato il ${dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome" })} con ${r.tecnico.nome}.`);
+  const inv = await inviaInvito(`RILIEVO:${r.id}`);
+  if (inv.inviati.length) await log(commessaId, `Invito calendario inviato a ${inv.inviati.join(", ")}.`);
   await ricalcolaStato(commessaId);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/commesse");
@@ -282,6 +286,7 @@ export async function annullaRilievo(formData: FormData) {
   if (!id) return;
   const r = await prisma.rilievo.update({ where: { id }, data: { stato: "ANNULLATO" } });
   await log(r.commessaId, "Rilievo annullato.");
+  await inviaInvito(`RILIEVO:${r.id}`, "CANCEL");
   await ricalcolaStato(r.commessaId);
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
@@ -628,8 +633,8 @@ export async function programmaPosa(formData: FormData) {
   const commessaId = str(formData, "commessaId");
   const dataStr = str(formData, "dataInizio");
   if (!commessaId || !dataStr) return;
-  const dataInizio = new Date(dataStr);
-  if (isNaN(dataInizio.getTime())) return;
+  const dataInizio = daOraRoma(dataStr);
+  if (!dataInizio) return;
   const sel = str(formData, "assegnatario") ?? "";
   let ass: { assegnatoUtenteId: string | null; assegnatoSoggettoId: string | null; assegnatoNome: string | null; tipo: string } = {
     assegnatoUtenteId: null, assegnatoSoggettoId: null, assegnatoNome: null, tipo: "INTERNA",
@@ -645,7 +650,7 @@ export async function programmaPosa(formData: FormData) {
   if (!c) return;
   const indirizzo = str(formData, "indirizzo") ?? [c.cliente.indirizzo, c.cliente.cap, c.cliente.comune, c.cliente.provincia].filter(Boolean).join(", ");
   const giorni = Math.max(1, Math.round(flt(formData, "giorniPrevisti") ?? 1));
-  await prisma.posa.create({
+  const nuovaPosa = await prisma.posa.create({
     data: { commessaId, ...ass, squadra: str(formData, "squadra"), dataInizio, giorniPrevisti: giorni, indirizzo: indirizzo || null, note: str(formData, "note") },
   });
   await prisma.commessa.update({ where: { id: commessaId }, data: { stato: "POSA" } });
@@ -654,9 +659,12 @@ export async function programmaPosa(formData: FormData) {
     where: { commessaId, tipo: "POSA", stato: { not: "CHIUSA" } },
     data: { stato: "IN_CORSO", assegnatoUtenteId: ass.assegnatoUtenteId, assegnatoSoggettoId: ass.assegnatoSoggettoId, assegnatoNome: ass.assegnatoNome },
   });
-  await log(commessaId, `Posa programmata dal ${dataInizio.toLocaleDateString("it-IT")} (${giorni} gg) — ${ass.tipo === "ESTERNA" ? "posatore esterno" : "squadra interna"}${ass.assegnatoNome ? ": " + ass.assegnatoNome : ""}.`);
+  await log(commessaId, `Posa programmata dal ${dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} (${giorni} gg) — ${ass.tipo === "ESTERNA" ? "posatore esterno" : "squadra interna"}${ass.assegnatoNome ? ": " + ass.assegnatoNome : ""}.`);
+  const invP = await inviaInvito(`POSA:${nuovaPosa.id}`);
+  if (invP.inviati.length) await log(commessaId, `Invito calendario della posa inviato a ${invP.inviati.join(", ")}.`);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/lavori");
+  revalidatePath("/calendario");
 }
 
 export async function annullaPosa(formData: FormData) {
@@ -666,6 +674,7 @@ export async function annullaPosa(formData: FormData) {
   if (!id) return;
   const p = await prisma.posa.update({ where: { id }, data: { stato: "ANNULLATA" } });
   await log(p.commessaId, "Posa annullata.");
+  await inviaInvito(`POSA:${p.id}`, "CANCEL");
   revalidatePath(`/commesse/${p.commessaId}`);
   revalidatePath("/lavori");
 }
@@ -805,7 +814,7 @@ export async function confermaGiornoPosa(formData: FormData) {
   const p = await prisma.posa.findUnique({ where: { id }, include: { commessa: true } });
   if (!p || !p.commessa.saldoIncassato) return;
   await prisma.posa.update({ where: { id }, data: { confermata: true, confermataIl: new Date() } });
-  await log(p.commessaId, `Giorno di posa confermato al cliente (${p.dataInizio.toLocaleDateString("it-IT")}) da ${u.nome}.`);
+  await log(p.commessaId, `Giorno di posa confermato al cliente (${p.dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}) da ${u.nome}.`);
   revalidatePath(`/commesse/${p.commessaId}`);
 }
 
@@ -876,7 +885,7 @@ export async function creaAssistenza(formData: FormData) {
       inGaranzia,
       assegnatoUtenteId: ut?.id ?? null,
       assegnatoNome: ut?.nome ?? null,
-      dataIntervento: dt ? new Date(dt) : null,
+      dataIntervento: dt ? daOraRoma(dt) : null,
       stato: dt ? "PROGRAMMATA" : "APERTA",
       aperturaDa: u.nome,
     },
@@ -904,7 +913,7 @@ export async function aggiornaAssistenza(formData: FormData) {
       stato,
       assegnatoUtenteId: ut?.id ?? null,
       assegnatoNome: ut?.nome ?? null,
-      dataIntervento: dt ? new Date(dt) : null,
+      dataIntervento: dt ? daOraRoma(dt) : null,
       ricambioNote: str(formData, "ricambioNote"),
       esito: str(formData, "esito"),
       costo: flt(formData, "costo"),

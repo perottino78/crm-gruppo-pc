@@ -8,6 +8,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/", label: "Dashboard", icon: "🏠" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
+  { href: "/calendario", label: "Calendario", icon: "📅" },
   { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
   { href: "/ordini-fornitori", label: "Ordini fornitori", icon: "🚚", soloOrdini: true },

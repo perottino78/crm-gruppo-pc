@@ -66,7 +66,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
           <div className="divide-y divide-neutral-100">
             {rilievi.map((r) => (
               <Link key={r.id} href={`/commesse/${r.commessaId}`} className="flex items-center justify-between py-1.5 text-sm hover:bg-neutral-50">
-                <span className="font-medium text-neutral-900">{r.dataOra.toLocaleString("it-IT", { weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</span>
+                <span className="font-medium text-neutral-900">{r.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</span>
                 <span className="text-neutral-800">{r.commessa.cliente.nome}</span>
                 <span className="text-neutral-600">{r.tecnico.nome}</span>
               </Link>
@@ -90,7 +90,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
                     <p className="text-sm font-semibold text-neutral-900">{c.cliente.nome}</p>
                     <p className="text-xs text-neutral-700">{eur(c.totaleVendita)}</p>
                     {c.rilievi[0] && (
-                      <p className="text-[11px] text-indigo-800 mt-1">📅 {c.rilievi[0].dataOra.toLocaleString("it-IT", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
+                      <p className="text-[11px] text-indigo-800 mt-1">📅 {c.rilievi[0].dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
                     )}
                   </Link>
                 ))}

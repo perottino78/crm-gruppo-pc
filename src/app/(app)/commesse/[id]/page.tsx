@@ -320,7 +320,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             <div key={r.id} className="border border-neutral-200 rounded p-3">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-neutral-900">
-                  📅 {r.dataOra.toLocaleString("it-IT", { weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit" })} · {r.tecnico.nome}
+                  📅 {r.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit" })} · {r.tecnico.nome}
                 </p>
                 <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${r.stato === "ESEGUITO" ? "bg-green-100 text-green-900" : r.stato === "ANNULLATO" ? "bg-red-100 text-red-900" : "bg-indigo-100 text-indigo-900"}`}>{r.stato}</span>
               </div>
@@ -635,7 +635,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             <div key={p.id} className="border border-neutral-200 rounded p-3">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-neutral-900">
-                  🛠️ dal {p.dataInizio.toLocaleDateString("it-IT")} · {p.giorniPrevisti} gg · {p.tipo === "ESTERNA" ? "esterna" : "interna"}{p.assegnatoNome ? ` · ${p.assegnatoNome}` : ""}
+                  🛠️ dal {p.dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} · {p.giorniPrevisti} gg · {p.tipo === "ESTERNA" ? "esterna" : "interna"}{p.assegnatoNome ? ` · ${p.assegnatoNome}` : ""}
                 </p>
                 <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${p.stato === "COMPLETATA" ? "bg-green-100 text-green-900" : p.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : p.stato === "ANNULLATA" ? "bg-red-100 text-red-900" : "bg-amber-100 text-amber-900"}`}>{p.stato.replace("_", " ")}</span>
               </div>
@@ -682,7 +682,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                       {c.cliente.email && (
                         <a
                           className="text-xs text-blue-800 underline"
-                          href={`mailto:${c.cliente.email}?subject=${encodeURIComponent("Conferma giorno di posa — commessa " + numeroCommessa(c))}&body=${encodeURIComponent(`Gentile ${c.cliente.nome},\n\nconfermiamo che la posa avrà inizio il ${p.dataInizio.toLocaleDateString("it-IT")} (durata prevista ${p.giorniPrevisti} giorni).\n\nCordiali saluti`)}`}
+                          href={`mailto:${c.cliente.email}?subject=${encodeURIComponent("Conferma giorno di posa — commessa " + numeroCommessa(c))}&body=${encodeURIComponent(`Gentile ${c.cliente.nome},\n\nconfermiamo che la posa avrà inizio il ${p.dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} (durata prevista ${p.giorniPrevisti} giorni).\n\nCordiali saluti`)}`}
                         >
                           ✉ scrivi la conferma al cliente
                         </a>
@@ -786,7 +786,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
         </div>
         {c.assistenze.map((a) => (
           <p key={a.id} className="text-sm text-neutral-900 border-b border-neutral-100 py-1">
-            #{a.numero} · <b>{a.stato}</b> · {a.descrizione}{a.inGaranzia ? "" : " (fuori garanzia)"}{a.dataIntervento ? ` · intervento ${a.dataIntervento.toLocaleDateString("it-IT")}` : ""}
+            #{a.numero} · <b>{a.stato}</b> · {a.descrizione}{a.inGaranzia ? "" : " (fuori garanzia)"}{a.dataIntervento ? ` · intervento ${a.dataIntervento.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}
           </p>
         ))}
         <form action={creaAssistenza} className="flex flex-wrap items-end gap-2 mt-3">

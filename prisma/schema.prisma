@@ -49,6 +49,8 @@ model Utente {
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
   mustChangePassword   Boolean           @default(true)
+  // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
+  calendarioToken      String?
   createdAt            DateTime          @default(now())
   leadAssegnati        Lead[]
   appuntamenti         Appuntamento[]
@@ -232,15 +234,28 @@ model ClienteCorrelazione {
 }
 
 model Appuntamento {
-  id        String   @id @default(cuid())
-  cliente   Cliente  @relation(fields: [clienteId], references: [id])
-  clienteId String
-  utente    Utente   @relation(fields: [utenteId], references: [id])
-  utenteId  String
-  tipo      String   @default("COMMERCIALE")
-  dataOra   DateTime
-  stato     String   @default("PROGRAMMATO")
-  createdAt DateTime @default(now())
+  id              String    @id @default(cuid())
+  cliente         Cliente   @relation(fields: [clienteId], references: [id])
+  clienteId       String
+  utente          Utente    @relation(fields: [utenteId], references: [id])
+  utenteId        String
+  tipo            String    @default("COMMERCIALE") // COMMERCIALE | SOPRALLUOGO | CONSEGNA | FIRMA | TELEFONICO | ALTRO
+  dataOra         DateTime
+  // Calendario: durata, titolo, luogo, note, pratica collegata
+  durataMin       Int       @default(60)
+  titolo          String?
+  luogo           String?
+  note            String?
+  commessaId      String?
+  preventivoId    String?
+  creatoDaNome    String?
+  // Inviti via email (file .ics): all'incaricato sempre, al cliente se richiesto
+  invitaCliente   Boolean   @default(false)
+  invitoInviatoIl DateTime?
+  esito           String?
+  stato           String    @default("PROGRAMMATO") // PROGRAMMATO | CONFERMATO | COMPLETATO | ANNULLATO
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
 }
 
 model Prodotto {
