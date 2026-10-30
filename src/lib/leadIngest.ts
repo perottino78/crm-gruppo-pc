@@ -1,6 +1,7 @@
 import { randomBytes } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { BRANDS } from "@/lib/brands";
+import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
 
 export function slugBrand(nome: string): string {
   return nome.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -105,7 +106,8 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
       telefono,
       email,
       brandId,
-      fonte: (d.fonte ?? "facebook").trim().slice(0, 60) || "facebook",
+      // provenienza uniforme (fb, utm_source=instagram, simulatore_web… → FACEBOOK, INSTAGRAM, SIMULATORE WEB)
+      fonte: provenienzaDaFonte(d.fonte || "facebook"),
       note: d.note?.trim().slice(0, 2000) || null,
       metaLeadgenId: d.externalId ?? null,
       metaFormId: d.metaFormId ?? null,
