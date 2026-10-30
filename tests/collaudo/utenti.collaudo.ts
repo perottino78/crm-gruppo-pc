@@ -48,6 +48,14 @@ async function main() {
   verifica(r2.creati.length === 0 && r2.completati.length === 0 && r2.invariati.length === 15, "tutto invariato", r2);
   verifica((await prisma.utente.count()) === 16, "sempre 16 utenti");
 
+  console.log("5. Cambio di ruolo solo per chi è indicato");
+  await prisma.utente.update({ where: { email: "amministrazione@gruppopec.com" }, data: { ruolo: "AMMINISTRATIVO" } });
+  const pr = await (await chiama("prova=1&ruoli=dgirodo,mpiccatti")).json();
+  verifica(pr.ruoliCambiati.length === 2 && (await prisma.utente.findUniqueOrThrow({ where: { email: "amministrazione@gruppopec.com" } })).ruolo === "AMMINISTRATIVO", "in prova propone 2 cambi e non scrive", pr.ruoliCambiati);
+  const rr = await (await chiama("ruoli=dgirodo")).json();
+  verifica(rr.ruoliCambiati.length === 1 && (await prisma.utente.findUniqueOrThrow({ where: { email: "amministrazione@gruppopec.com" } })).ruolo === "AMMINISTRATORE", "Debora diventa amministratore");
+  verifica((await prisma.utente.findUniqueOrThrow({ where: { email: "marco.piccatti@gruppopec.com" } })).ruolo === "AMMINISTRATIVO", "Piccatti non indicato: ruolo intatto");
+
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
   if (ko) process.exit(1);

@@ -9,10 +9,12 @@ const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 // Senza password: nessuno entra finché l'amministratore non imposta l'accesso da Impostazioni.
 // Non duplica: riconosce per email, username o nome; sugli utenti già presenti completa solo i campi vuoti.
 // ?prova=1 mostra cosa farebbe senza scrivere nulla.
+// ?ruoli=dgirodo,lpinto porta al ruolo dell'elenco anche chi c'è già (solo per gli username indicati, deciso da Ugo).
 export async function POST(req: NextRequest) {
   const key = req.headers.get("x-seed-key") || req.nextUrl.searchParams.get("key");
   if (key !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const prova = req.nextUrl.searchParams.get("prova") === "1";
+  const forzaRuolo = new Set((req.nextUrl.searchParams.get("ruoli") ?? "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean));
 
   const [utenti, brand] = await Promise.all([
     prisma.utente.findMany({ include: { brandAutorizzati: { select: { id: true } } } }),
@@ -40,6 +42,14 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // Cambi di ruolo espliciti: solo per chi è già nel CRM e solo se il ruolo è diverso
+  const ruoliCambiati: { nome: string; da: string; a: string }[] = [];
+  for (const a of piano) {
+    if (a.tipo === "CREA" || !forzaRuolo.has(a.persona.username.toLowerCase()) || a.ruoloNelCrm === a.persona.ruolo) continue;
+    if (!prova) await prisma.utente.update({ where: { id: a.id }, data: { ruolo: a.persona.ruolo } });
+    ruoliCambiati.push({ nome: a.persona.nome, da: a.ruoloNelCrm, a: a.persona.ruolo });
+  }
+
   const riga = (a: (typeof piano)[number]) => ({
     nome: a.persona.nome, username: a.persona.username, ruolo: a.persona.ruolo, ufficio: a.persona.ufficio,
     ...(a.tipo !== "CREA" ? { ruoloNelCrm: a.ruoloNelCrm } : {}),
@@ -52,5 +62,6 @@ export async function POST(req: NextRequest) {
     creati: piano.filter((a) => a.tipo === "CREA").map(riga),
     completati: piano.filter((a) => a.tipo === "COMPLETA").map(riga),
     invariati: piano.filter((a) => a.tipo === "INVARIATO").map(riga),
+    ruoliCambiati,
   });
 }
