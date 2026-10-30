@@ -261,9 +261,17 @@ export async function salvaFornitoreModelli(fd: FormData) {
   await utente();
   const ids = fd.getAll("modelloId").map(String).filter(Boolean);
   if (!ids.length) return;
-  const fornitoreId = str(fd, "fornitoreId");
+  const scelta = str(fd, "fornitoreId");
+  const fornitoreId = scelta === "__nessuno__" ? null : scelta;
   const dati: { fornitoreId: string | null; codiceFornitore?: string | null; scontoAcquisto?: number | null } = { fornitoreId };
   if (ids.length === 1) { dati.codiceFornitore = str(fd, "codiceFornitore"); dati.scontoAcquisto = num(fd, "scontoAcquisto"); }
-  await prisma.modelloProdotto.updateMany({ where: { id: { in: ids } }, data: dati });
+  const r = await prisma.modelloProdotto.updateMany({ where: { id: { in: ids } }, data: dati });
   revalidatePath("/prodotti/fornitori");
+  // torna alla stessa pagina (filtri compresi) con la conferma di cosa è stato salvato
+  const ritorno = str(fd, "ritorno");
+  if (ritorno?.startsWith("?")) {
+    const nome = fornitoreId ? (await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { ragioneSociale: true } }))?.ragioneSociale : null;
+    const testo = `${r.count === 1 ? "1 modello" : `${r.count} modelli`} → ${nome ?? "senza fornitore"}`;
+    redirect(`/prodotti/fornitori${ritorno}${ritorno.length > 1 ? "&" : ""}fatto=${encodeURIComponent(testo)}`);
+  }
 }
