@@ -134,7 +134,13 @@ model Cliente {
 
   // --- Profilazione ---
   bloccato     Boolean @default(false)
+  // Provenienza del contatto (FACEBOOK, FIERA, PASSAPAROLA, QUOTALO…): serve per le campagne
   origine      String?
+  // Stato del lead come in BConsole (CALDO, Non interessato, COMPRATO MA NON DA NOI…)
+  statoLead    String?
+  // Numero anagrafica BConsole (id_ana): aggancia offerte, ordini e fatture importati dopo.
+  // Indice semplice, non @unique: un vincolo unico su una tabella già piena bloccherebbe il build.
+  bconsoleId   String?
   settore      String?
   km           Float?  @default(0)
   tipologia    String?
@@ -191,6 +197,8 @@ model Cliente {
   indirizziAltri IndirizzoCliente[]
   correlazioniDa ClienteCorrelazione[] @relation("CorrelazioneDa")
   correlazioniA  ClienteCorrelazione[] @relation("CorrelazioneA")
+
+  @@index([bconsoleId])
 }
 
 model Referente {
