@@ -17,6 +17,7 @@ const LEAD: AnagraficaBConsole[] = [
   { idAna: "30001", categoria: "Lead", creatoIl: "02/07/2026", ragioneSociale: "Rossi Luca", telefono: "+39 340 000 1111", origine: "", stato: "COMPRATO MA NON DA NOI", venditore: "MZ", tag: ["META PREVENTIVO ONLINE SOLARIS"] },
   // stessa persona di Rossi Luca, seconda richiesta in BConsole: deve diventare un solo cliente
   { idAna: "30002", categoria: "Lead", creatoIl: "05/07/2026", ragioneSociale: "LUCA ROSSI", telefono: "3400001111", origine: "FACEBOOK", venditore: "NDA" },
+  { idAna: "30010", categoria: "Lead", ragioneSociale: "Verdi Paola", telefono: "3471112222", venditore: "MGI" },
   { idAna: null, categoria: "Account,Cliente", creatoIl: "15/03/2026", ragioneSociale: "EDIL ROSTA SRL", piva: "IT01234567890", email: "info@edilrosta.it", origine: "PASSA PAROLA" },
   { idAna: "30003", categoria: "Lead", ragioneSociale: "", telefono: "", email: "" },
 ];
@@ -26,19 +27,21 @@ async function main() {
   for (const nome of ["P&C", "Solaris", "Purafonte", "Work & Services"]) await prisma.brand.create({ data: { nome } });
   const ugo = await prisma.utente.create({ data: { nome: "Ugo Perottino", email: "ugo@x.it", username: "uperottino", ruolo: "AMMINISTRATORE" } });
   const marco = await prisma.utente.create({ data: { nome: "Marco Piccatti", email: "marco@x.it", username: "mpiccatti", ruolo: "COMMERCIALE" } });
+  // nel CRM con uno username diverso da BConsole: va riconosciuto per nome
+  const massimo = await prisma.utente.create({ data: { nome: "Giordano Massimo", email: "massimo@x.it", username: "massimo.g", ruolo: "COMMERCIALE" } });
   const pc = await prisma.brand.findFirstOrThrow({ where: { nome: "P&C" } });
   // Già nel CRM, inserito a mano con provenienza diversa: non va duplicato né sovrascritto
   await prisma.cliente.create({ data: { nome: "Arnaldo Ceparano", telefono: "333 7370376", brandId: pc.id, origine: "UFFICIO", responsabileId: marco.id } });
 
   console.log("1. Prova a vuoto");
   const p = await chiama(LEAD, "prova=1");
-  verifica(p.creati === 3 && p.completati === 1 && p.doppioniUniti === 1 && p.scartati === 1, "3 nuovi, 1 completato, 1 doppione unito, 1 vuoto scartato", p);
+  verifica(p.creati === 4 && p.completati === 1 && p.doppioniUniti === 1 && p.scartati === 1, "4 nuovi, 1 completato, 1 doppione unito, 1 vuoto scartato", p);
   verifica((await prisma.cliente.count()) === 1, "non scrive niente");
 
   console.log("2. Caricamento");
   await chiama(LEAD);
   const tutti = await prisma.cliente.findMany({ include: { brand: true, responsabile: true } });
-  verifica(tutti.length === 4, "4 clienti in tutto", tutti.map((c) => c.nome));
+  verifica(tutti.length === 5, "5 clienti in tutto", tutti.map((c) => c.nome));
   const bori = tutti.find((c) => c.bconsoleId === "33782")!;
   verifica(bori.nome === "Bori Barbara" && bori.origine === "QUOTALO" && bori.statoLead === "Ricontattare" && bori.responsabileId === marco.id && bori.brand.nome === "P&C", "Bori: provenienza, stato, Piccatti, P&C", bori);
   verifica(bori.createdAt.toISOString() === "2026-10-26T11:31:00.000Z", "data di arrivo in ora di Roma", bori.createdAt);
@@ -46,13 +49,14 @@ async function main() {
   verifica(cep.origine === "UFFICIO" && cep.responsabileId === marco.id && cep.email === "arnaldo.ceparano@alice.it" && cep.bconsoleId === "33628" && cep.statoLead === "CALDO (interessato)", "Ceparano: completati email, n. BConsole e stato; provenienza e commerciale intatti", cep);
   const rossi = tutti.find((c) => c.bconsoleId === "30001")!;
   verifica(rossi.brand.nome === "Solaris" && rossi.responsabileId === ugo.id && rossi.origine === "FACEBOOK" && rossi.statoLead === "COMPRATO MA NON DA NOI", "Rossi: Solaris, commerciale non trovato → Ugo", rossi);
+  verifica(tutti.find((c) => c.bconsoleId === "30010")!.responsabileId === massimo.id, "Verdi: a Giordano riconosciuto per nome");
   const edil = tutti.find((c) => c.piva === "01234567890")!;
   verifica(edil && edil.categoria === "Account, Cliente" && edil.tipoAnagrafica === "AZIENDA" && edil.origine?.startsWith("PASSAPAROLA"), "Edil Rosta: cliente azienda, passaparola", edil);
 
   console.log("3. Rilanciato: niente doppioni");
   const r2 = await chiama(LEAD);
   verifica(r2.creati === 0 && r2.completati === 0, "nessun nuovo e nessuna modifica", r2);
-  verifica((await prisma.cliente.count()) === 4, "sempre 4 clienti");
+  verifica((await prisma.cliente.count()) === 5, "sempre 5 clienti");
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();

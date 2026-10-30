@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { convertiAnagrafica, completaCliente, indiceClienti, marchio, usernameCommerciale, dataRoma, COMMERCIALE_DI_RISERVA, type AnagraficaBConsole } from "@/lib/clienti/bconsole";
+import { convertiAnagrafica, completaCliente, indiceClienti, marchio, usernameCommerciale, dataRoma, chiaveNomeCliente, COMMERCIALE_DI_RISERVA, NOMI_COMMERCIALI, type AnagraficaBConsole } from "@/lib/clienti/bconsole";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -26,11 +26,14 @@ export async function POST(req: NextRequest) {
 
   const [brand, utenti, esistenti] = await Promise.all([
     prisma.brand.findMany({ select: { id: true, nome: true } }),
-    prisma.utente.findMany({ select: { id: true, username: true } }),
+    prisma.utente.findMany({ select: { id: true, username: true, nome: true } }),
     prisma.cliente.findMany({ select: { id: true, nome: true, telefono: true, cellulare: true, email: true, piva: true, codiceFiscale: true, bconsoleId: true } }),
   ]);
   const brandId = (nome: string) => (brand.find((b) => b.nome.toUpperCase() === nome.toUpperCase()) ?? brand.find((b) => b.nome === "P&C"))?.id;
-  const utenteId = (username: string) => utenti.find((u) => u.username === username)?.id ?? utenti.find((u) => u.username === COMMERCIALE_DI_RISERVA)?.id ?? null;
+  // per username, oppure per nome e cognome (se nel CRM l'utente ha uno username diverso da BConsole)
+  const cercaUtente = (username: string) =>
+    utenti.find((u) => u.username === username) ?? (NOMI_COMMERCIALI[username] ? utenti.find((u) => chiaveNomeCliente(u.nome) === chiaveNomeCliente(NOMI_COMMERCIALI[username])) : undefined);
+  const utenteId = (username: string) => (cercaUtente(username) ?? cercaUtente(COMMERCIALE_DI_RISERVA))?.id ?? null;
   if (!brandId("P&C")) return NextResponse.json({ error: "manca il marchio P&C nel CRM" }, { status: 500 });
 
   const indice = indiceClienti(esistenti);
@@ -61,7 +64,7 @@ export async function POST(req: NextRequest) {
     esito.creati++;
     conta(esito.perProvenienza, d.origine);
     conta(esito.perMarchio, m);
-    conta(esito.perCommerciale, utenti.some((u) => u.username === commerciale) ? commerciale : COMMERCIALE_DI_RISERVA);
+    conta(esito.perCommerciale, cercaUtente(commerciale) ? commerciale : COMMERCIALE_DI_RISERVA);
     conta(esito.perStato, d.statoLead ?? "(nessuno)");
   }
   if (!prova && daCreare.length) await prisma.cliente.createMany({ data: daCreare });

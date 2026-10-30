@@ -10,6 +10,8 @@ test("provenienza per le campagne", () => {
   assert.equal(provenienza({ origine: "QUOTALO" }), "QUOTALO");
   assert.equal(provenienza({ origine: "", tag: ["META PERGOLE P&C"] }), "FACEBOOK");
   assert.equal(provenienza({ origine: null, note: "Richiesta web del 05/12/2024" }), "WEB");
+  assert.equal(provenienza({ note: "FIERA CARMAGNOLA 11-12/04/2026" }), "FIERA");
+  assert.equal(provenienza({ note: "CLIMA CLIENTI PER TE" }), "CLIENTI PER TE");
   assert.equal(provenienza({}), "NON INDICATA");
 });
 
