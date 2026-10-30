@@ -41,6 +41,12 @@ export const SIGLE_COMMERCIALI: Record<string, string> = {
   LPI: "lpinto", AVA: "alessiav", GRO: "grosaclot", DGI: "dgirodo", MPE: "mpec", UPE: "uperottino", UOR: "ordini",
 };
 export const COMMERCIALE_DI_RISERVA = "uperottino";
+/** Nome e cognome delle stesse persone: serve se nel CRM l'utente ha uno username diverso da BConsole. */
+export const NOMI_COMMERCIALI: Record<string, string> = {
+  mgiordano: "Massimo Giordano", mroberto: "Roberto Marongiu", mpiccatti: "Marco Piccatti", ctrimboli: "Claudio Trimboli",
+  vpaolo: "Gian Paolo Visconti", lpinto: "Laura Pinto", alessiav: "Alessia Vaccaro", grosaclot: "Giorgia Rosa Clot",
+  dgirodo: "Debora Girodo", mpec: "Rocco Zaccaro", uperottino: "Ugo Perottino", ordini: "Cristina Rege",
+};
 
 const pulisci = (s?: string | null) => {
   const t = (s ?? "").replace(/<br\s*\/?>/gi, "\n").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, "\n").trim();
@@ -73,7 +79,11 @@ export function provenienza(a: AnagraficaBConsole): string {
     return u;
   }
   const tag = (a.tag ?? []).join(" ").toUpperCase();
+  const note = (a.note ?? "").toUpperCase();
   if (/\bMETA\b/.test(tag)) return "FACEBOOK";
+  if (/CLIENTI PER TE/.test(note)) return "CLIENTI PER TE";
+  if (/\bFIERA\b/.test(note)) return "FIERA";
+  if (/PASSA ?PAROLA/.test(note)) return "PASSAPAROLA";
   if (/GOOGLE/.test(tag)) return "GOOGLE";
   if (/SITO/.test(tag) || /richiesta web/i.test(a.note ?? "")) return "WEB";
   return "NON INDICATA";
