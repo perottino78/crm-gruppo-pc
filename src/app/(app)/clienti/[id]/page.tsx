@@ -369,6 +369,10 @@ export default async function SchedaClientePage({
         {/* ── Appuntamenti ── */}
         {sez === "appuntamenti" && (
           <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
+              <a href="#nuovo-appuntamento" className="btn-3d btn-3d-green px-5 py-3 text-base">📅 Fissa un appuntamento</a>
+              <Link href={`/calendario?cliente=${cliente.id}#nuovo`} className="btn-3d btn-3d-purple px-5 py-3 text-base">🗓 Apri il calendario</Link>
+            </div>
             <div className="bg-white rounded-xl border border-neutral-200 divide-y divide-neutral-100">
               {[
                 ...cliente.appuntamenti.map((a) => ({ id: a.id, data: a.dataOra, titolo: a.titolo || nomeTipoAppuntamento(a.tipo), chi: a.utente.nome, stato: a.stato, link: `/calendario/appuntamento/${a.id}`, esito: a.esito })),
