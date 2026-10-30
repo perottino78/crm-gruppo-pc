@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { fattoTask, cambiaStatoTask, prendiInCaricoTask, segnaMailTaskInviata } from "@/app/flusso-actions";
+import { fattoTask, cambiaStatoTask, prendiInCaricoTask, segnaMailTaskInviata, inviaMailTask } from "@/app/flusso-actions";
 import { STATI_TASK, STATI_CHIUSI, nomeUfficio, statoTask } from "@/lib/flusso";
 import { prisma } from "@/lib/prisma";
 
@@ -46,6 +46,11 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
             <span className="text-[11px] text-green-700 font-bold">inviata {dt(task.mailInviataIl)}</span>
           ) : (
             <>
+              <form action={inviaMailTask} className="flex items-center gap-1">
+                <input type="hidden" name="taskId" value={task.id} />
+                {!task.mailA && <input name="mailA" placeholder="email destinatario" className="border border-purple-200 rounded px-1.5 py-0.5 text-[11px] w-40" />}
+                <button className="btn-3d btn-3d-green text-[11px] px-2.5 py-1">🚀 Invia ora</button>
+              </form>
               <a href={mailto} className="btn-3d btn-3d-purple text-[11px] px-2.5 py-1">Apri email</a>
               <form action={segnaMailTaskInviata}>
                 <input type="hidden" name="taskId" value={task.id} />

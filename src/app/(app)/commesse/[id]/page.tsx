@@ -74,6 +74,9 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
     prisma.soggetto.findMany({ where: { attivo: true, ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" } }),
     prisma.soggetto.findMany({ where: { attivo: true, OR: [{ ruoli: { has: "POSATORE_ESTERNO" } }, { ruoli: { has: "TECNICO_INTERNO" } }] }, orderBy: { ragioneSociale: "asc" } }),
   ]);
+  const nContratto = await prisma.documento.count({
+    where: { cartella: "Contratto firmato", OR: [{ entita: "COMMESSA", entitaId: c.id }, { entita: "PREVENTIVO", entitaId: c.preventivoId }] },
+  });
   const righePrev = await prisma.rigaPreventivo.findMany({ where: { preventivoId: c.preventivoId }, include: { optionali: true } });
   const venditaRiga = (rid?: string | null) => {
     const r = righePrev.find((x) => x.id === rid);
@@ -112,6 +115,24 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
           {numeroCommessa(c)} · {c.cliente.nome}
         </h1>
         <span className={`text-xs font-bold px-3 py-1 rounded ${stato.cls}`}>{stato.label}</span>
+      </div>
+
+      {/* CONTRATTO E CONFERMA ORDINE */}
+      <div className={`mb-4 rounded-xl border-2 px-4 py-3 flex flex-wrap items-center gap-3 ${c.preventivo.confermatoIl ? "border-green-300 bg-green-50" : "border-amber-400 bg-amber-50"}`}>
+        {c.preventivo.confermatoIl ? (
+          <p className="text-sm text-green-900 flex-1">
+            🔒 <strong>Ordine confermato</strong> il {c.preventivo.confermatoIl.toLocaleDateString("it-IT")}{c.preventivo.confermatoDaNome ? ` da ${c.preventivo.confermatoDaNome}` : ""}.
+            {nContratto > 0 ? ` Contratto firmato: ${nContratto} file.` : " Contratto firmato non ancora caricato."}
+          </p>
+        ) : (
+          <p className="text-sm text-amber-900 flex-1">
+            <strong>⚠ Ordine non ancora confermato.</strong> Carica il contratto firmato e conferma l&apos;ordine dall&apos;offerta: la contabilità riceve il task della fattura d&apos;acconto.
+          </p>
+        )}
+        <a href="#documenti" className="btn-3d btn-3d-blue text-sm px-4 py-2">📎 Carica contratto firmato</a>
+        {!c.preventivo.confermatoIl && (
+          <Link href={`/preventivi/${c.preventivoId}#conferma`} className="btn-3d btn-3d-green text-sm px-4 py-2">🔒 Vai alla conferma ordine</Link>
+        )}
       </div>
 
       <div className="grid grid-cols-4 gap-3 mb-6">
@@ -794,7 +815,9 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
           ))}
         </ul>
       </section>
-      <Documenti entita="COMMESSA" entitaId={c.id} titolo="Documenti della commessa" />
+      <div id="documenti" className="scroll-mt-4">
+        <Documenti entita="COMMESSA" entitaId={c.id} titolo="Documenti della commessa" />
+      </div>
     </div>
   );
 }

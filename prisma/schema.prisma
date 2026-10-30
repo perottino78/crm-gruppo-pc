@@ -796,6 +796,10 @@ model FlussoFase {
   mailDestinatario String  @default("CLIENTE") // CLIENTE | INTERNO
   mailOggetto      String?
   mailTesto        String?
+  // Email vere (quando l'SMTP è configurato): avviso automatico all'ufficio che riceve il task
+  // e invio automatico al cliente della email della fase, senza passare dalla bozza
+  avvisaUfficio    Boolean @default(true)
+  mailAutomatica   Boolean @default(false)
 }
 
 // Task di una pratica (commessa) assegnato a un ufficio; "Fatto" crea il task dell'ufficio successivo
@@ -817,6 +821,7 @@ model TaskPratica {
   mailOggetto       String?
   mailTesto         String?
   mailInviataIl     DateTime?
+  avvisoInviatoIl   DateTime?
   createdAt         DateTime  @default(now())
 }
 

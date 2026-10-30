@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { mailConfigurata } from "@/lib/mail/invio";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -13,8 +14,23 @@ export default async function FlussoImpostazioniPage() {
   if (!isAmministratore(u)) return <p className="text-sm text-neutral-700">Sezione riservata all&apos;amministratore.</p>;
   await assicuraFlusso();
   const fasi = await prisma.flussoFase.findMany({ orderBy: { ordine: "asc" } });
+  const smtp = mailConfigurata();
+  const ufficiSenzaEmail = await prisma.utente.findMany({ where: { ufficio: null }, select: { nome: true } });
   return (
     <div className="max-w-4xl">
+      <div className={`mb-4 rounded-lg border px-4 py-3 text-sm ${smtp ? "border-green-300 bg-green-50 text-green-900" : "border-amber-300 bg-amber-50 text-amber-900"}`}>
+        {smtp ? (
+          <p><strong>✅ Invio email automatico attivo.</strong> Gli uffici ricevono l&apos;avviso dei nuovi task; le email delle fasi con «Inviala da sola» partono senza bozza.</p>
+        ) : (
+          <p>
+            <strong>✉ Invio email automatico non ancora attivo.</strong> Oggi il CRM prepara le bozze e l&apos;ufficio le invia con «Apri email». Per farle partire da sole
+            aggiungi su Vercel le variabili <code>SMTP_HOST</code>, <code>SMTP_PORT</code>, <code>SMTP_USER</code>, <code>SMTP_PASS</code>, <code>MAIL_FROM</code> (casella da cui scrivere).
+          </p>
+        )}
+        {ufficiSenzaEmail.length > 0 && (
+          <p className="mt-1 text-xs">Utenti senza ufficio (non ricevono gli avvisi): {ufficiSenzaEmail.map((u) => u.nome).join(", ")} — impostalo in Impostazioni › Utenti.</p>
+        )}
+      </div>
       <Link href="/impostazioni" className="text-xs text-blue-700 underline">← Impostazioni</Link>
       <h1 className="text-2xl font-extrabold text-neutral-900 mt-1 mb-1">Flusso pratiche fra uffici</h1>
       <p className="text-sm text-neutral-700 mb-1">
@@ -40,6 +56,7 @@ export default async function FlussoImpostazioniPage() {
                 </select></div>
             </div>
             <label className="text-sm font-bold flex items-center gap-2"><input type="checkbox" name="taskAttivo" defaultChecked={f.taskAttivo} /> Crea il task per questo ufficio</label>
+            <label className="text-sm flex items-center gap-2"><input type="checkbox" name="avvisaUfficio" defaultChecked={f.avvisaUfficio} /> 📨 Avvisa l&apos;ufficio via email quando arriva il task {!smtp && <span className="text-[11px] text-amber-700">(attivo quando configuri l&apos;invio email)</span>}</label>
             <div><label className="text-[11px] font-bold text-neutral-700">Titolo del task</label><input name="taskTitolo" defaultValue={f.taskTitolo} className={inp} /></div>
             <div><label className="text-[11px] font-bold text-neutral-700">Testo del task</label><textarea name="taskTesto" defaultValue={f.taskTesto ?? ""} rows={2} className={inp} /></div>
             <div className="rounded border border-purple-200 bg-purple-50 p-3 flex flex-col gap-2">
@@ -56,6 +73,7 @@ export default async function FlussoImpostazioniPage() {
                     <option value="INTERNO">Interno (indirizzo da inserire)</option>
                   </select></div>
               </div>
+              <label className="text-sm flex items-center gap-2"><input type="checkbox" name="mailAutomatica" defaultChecked={f.mailAutomatica} /> 🚀 Inviala da sola (senza passare dalla bozza) {!smtp && <span className="text-[11px] text-amber-700">(richiede l&apos;invio email configurato)</span>}</label>
               <div><label className="text-[11px] font-bold text-neutral-700">Oggetto</label><input name="mailOggetto" defaultValue={f.mailOggetto ?? ""} className={inp} /></div>
               <div><label className="text-[11px] font-bold text-neutral-700">Testo email</label><textarea name="mailTesto" defaultValue={f.mailTesto ?? ""} rows={5} className={inp} /></div>
             </div>
