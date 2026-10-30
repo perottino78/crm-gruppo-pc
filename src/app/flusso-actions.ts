@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
 
 function str(fd: FormData, key: string): string | null {
@@ -51,7 +52,7 @@ export async function avviaFaseFlusso(commessaId: string, chiave: string, daUffi
   const { c, v } = ctx;
   if (f.taskAttivo) {
     const mail = f.mailAttiva && f.mailQuando === "INIZIO";
-    await prisma.taskPratica.create({
+    const nuovo = await prisma.taskPratica.create({
       data: {
         commessaId, faseChiave: f.chiave, titolo: compila(f.taskTitolo, v), descrizione: compila(f.taskTesto, v) || null,
         ufficio: f.ufficio, creatoDa: creatoDa ?? null,
@@ -61,6 +62,8 @@ export async function avviaFaseFlusso(commessaId: string, chiave: string, daUffi
       },
     });
     await prisma.commessaEvento.create({ data: { commessaId, utenteNome: creatoDa ?? null, testo: `Task per ${nomeUfficio(f.ufficio)}: ${compila(f.taskTitolo, v)}` } });
+    if (f.avvisaUfficio) await avvisaUfficioTask(nuovo.id);
+    if (mail && f.mailAutomatica) await spedisciMailTask(nuovo.id, creatoDa ?? null);
   }
 }
 
@@ -94,6 +97,7 @@ async function completa(taskId: string, stato: string) {
       if (f.mailAttiva && f.mailQuando === "FATTO") {
         const ctx = await variabili(t.commessaId, t.ufficio);
         if (ctx) await prisma.taskPratica.update({ where: { id: taskId }, data: bozzaMail(f, ctx.c.cliente.email, ctx.v) });
+        if (ctx && f.mailAutomatica) await spedisciMailTask(taskId, u.nome);
       }
       if (f.prossimaChiave) await avviaFaseFlusso(t.commessaId, f.prossimaChiave, t.ufficio, u.nome);
     }
@@ -124,6 +128,19 @@ export async function prendiInCaricoTask(formData: FormData) {
   revalidatePath(`/commesse/${t.commessaId}`);
 }
 
+// Invio vero della email preparata nel task (pulsante "Invia ora")
+export async function inviaMailTask(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "taskId");
+  if (!id) return;
+  const a = str(formData, "mailA");
+  if (a) await prisma.taskPratica.update({ where: { id }, data: { mailA: a } });
+  const t = await spedisciMailTask(id, u.nome);
+  revalidatePath("/task");
+  if (t) revalidatePath(`/commesse/${t}`);
+}
+
 export async function segnaMailTaskInviata(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
@@ -143,7 +160,8 @@ export async function creaTaskManuale(formData: FormData) {
   const ufficio = str(formData, "ufficio");
   const titolo = str(formData, "titolo");
   if (!commessaId || !ufficio || !titolo) return;
-  await prisma.taskPratica.create({ data: { commessaId, ufficio, titolo, descrizione: str(formData, "descrizione"), creatoDa: u.nome } });
+  const tm = await prisma.taskPratica.create({ data: { commessaId, ufficio, titolo, descrizione: str(formData, "descrizione"), creatoDa: u.nome } });
+  await avvisaUfficioTask(tm.id);
   await prisma.commessaEvento.create({ data: { commessaId, utenteNome: u.nome, testo: `Task per ${nomeUfficio(ufficio)}: ${titolo}` } });
   revalidatePath("/task");
   revalidatePath(`/commesse/${commessaId}`);
@@ -171,6 +189,8 @@ export async function salvaFlussoFase(formData: FormData) {
       mailAttiva: formData.get("mailAttiva") === "on",
       mailQuando: str(formData, "mailQuando") ?? "FATTO",
       mailDestinatario: str(formData, "mailDestinatario") ?? "CLIENTE",
+      avvisaUfficio: formData.get("avvisaUfficio") === "on",
+      mailAutomatica: formData.get("mailAutomatica") === "on",
       mailOggetto: str(formData, "mailOggetto"),
       mailTesto: str(formData, "mailTesto"),
     },
@@ -218,4 +238,48 @@ export async function avviaFlussoCommessa(formData: FormData) {
   await avviaFaseFlusso(commessaId, str(formData, "fase") ?? "ACCETTAZIONE", null, u.nome);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/task");
+}
+
+// ── Email automatiche ─────────────────────────────────────────────────────────
+// Avviso interno: chi lavora nell'ufficio del task riceve una email con il link alla pratica.
+async function avvisaUfficioTask(taskId: string) {
+  if (!mailConfigurata()) return;
+  const t = await prisma.taskPratica.findUnique({ where: { id: taskId }, include: { commessa: { include: { cliente: true } } } });
+  if (!t) return;
+  const destinatari = await prisma.utente.findMany({
+    where: t.assegnatoUtenteId ? { id: t.assegnatoUtenteId } : { ufficio: t.ufficio },
+    select: { email: true },
+  });
+  const num = `C${t.commessa.anno}-${String(t.commessa.numero).padStart(3, "0")}`;
+  const esito = await inviaMail({
+    a: destinatari.map((d) => d.email),
+    oggetto: `[CRM P&C] Nuovo task per ${nomeUfficio(t.ufficio)}: ${t.titolo} — ${t.commessa.cliente.nome}`,
+    testo: [
+      `Nuovo task per l'ufficio ${nomeUfficio(t.ufficio)}.`,
+      ``,
+      `Pratica: ${num} — ${t.commessa.cliente.nome}`,
+      `Task: ${t.titolo}`,
+      t.descrizione ? `\n${t.descrizione}` : "",
+      ``,
+      `Apri la pratica: ${APP_URL}/commesse/${t.commessaId}`,
+      `Tutti i task: ${APP_URL}/task`,
+    ].join("\n"),
+  });
+  if (esito.inviata) await prisma.taskPratica.update({ where: { id: taskId }, data: { avvisoInviatoIl: new Date() } });
+}
+
+// Email della fase (di solito al cliente): la spedisce davvero e la segna come inviata. Ritorna l'id commessa.
+async function spedisciMailTask(taskId: string, chi: string | null): Promise<string | null> {
+  const t = await prisma.taskPratica.findUnique({ where: { id: taskId }, include: { commessa: { include: { responsabile: true } } } });
+  if (!t || t.mailInviataIl || !t.mailA || !(t.mailOggetto || t.mailTesto)) return t?.commessaId ?? null;
+  const esito = await inviaMail({ a: t.mailA.split(/[;,]/), oggetto: t.mailOggetto ?? "", testo: t.mailTesto ?? "", rispondiA: t.commessa.responsabile?.email });
+  await prisma.commessaEvento.create({
+    data: {
+      commessaId: t.commessaId,
+      utenteNome: chi,
+      testo: esito.inviata ? `Email "${t.mailOggetto ?? ""}" inviata a ${t.mailA}.` : `Email "${t.mailOggetto ?? ""}" NON inviata (${esito.motivo}): resta da inviare a mano.`,
+    },
+  });
+  if (esito.inviata) await prisma.taskPratica.update({ where: { id: taskId }, data: { mailInviataIl: new Date() } });
+  return t.commessaId;
 }

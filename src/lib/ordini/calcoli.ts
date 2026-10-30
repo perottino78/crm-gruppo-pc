@@ -13,7 +13,7 @@ export const statoOrdine = (k: string) => STATI_ORDINE.find((s) => s.chiave === 
 export const CARTELLE: Record<string, string[]> = {
   CLIENTE: ["Generale", "Documenti identità", "Contratti firmati", "Pratiche e detrazioni", "Foto", "Corrispondenza"],
   PREVENTIVO: ["Contratto firmato", "Foto", "Generale", "Rilievi e disegni", "Offerte fornitori", "Corrispondenza"],
-  COMMESSA: ["Generale", "Conferme d'ordine fornitori", "DDT e bolle", "Fatture fornitori", "Foto", "Pratiche"],
+  COMMESSA: ["Contratto firmato", "Generale", "Conferme d'ordine fornitori", "DDT e bolle", "Fatture fornitori", "Foto", "Pratiche"],
   ORDINE_FORNITORE: ["Generale", "Conferma del fornitore", "DDT e bolle", "Fattura"],
   ARTICOLO: ["Foto", "Schede tecniche", "Certificazioni", "Istruzioni"],
   BOLLA_ENTRATA: ["Bolla", "Foto della merce", "Contestazioni"],

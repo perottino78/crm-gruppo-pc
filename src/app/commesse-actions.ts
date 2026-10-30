@@ -100,7 +100,13 @@ export async function confermaOrdinePreventivo(formData: FormData) {
   if (!p.numeroOfferta && p.totaleNetto <= 0) torna("L'offerta è vuota: aggiungi le righe prima di confermarla.");
 
   const [nContratto, nFoto] = await Promise.all([
-    prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: p.id, cartella: "Contratto firmato" } }),
+    // il contratto vale sia se caricato nell'offerta sia nella commessa (se già aperta)
+    prisma.documento.count({
+      where: {
+        cartella: "Contratto firmato",
+        OR: [{ entita: "PREVENTIVO", entitaId: p.id }, ...(p.commessa ? [{ entita: "COMMESSA", entitaId: p.commessa.id }] : [])],
+      },
+    }),
     prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: p.id, cartella: "Foto" } }),
   ]);
   const cartaceo = formData.get("contrattoCartaceo") === "on";

@@ -122,11 +122,34 @@ export default async function SchedaClientePage({
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Link href={`${href("pratiche")}#nuova-offerta`} className="btn-3d btn-3d-green text-sm px-3 py-2">+ Nuova offerta</Link>
-            <Link href={`${href("attivita")}#nuova-attivita`} className="btn-3d btn-3d-blue text-sm px-3 py-2">+ Attività</Link>
-            <Link href={href("anagrafica")} className="btn-3d btn-3d-outline text-sm px-3 py-2">✎ Anagrafica</Link>
-          </div>
+
+        </div>
+
+        {/* azioni rapide: pulsanti grandi 3D */}
+        <div className="px-4 pb-4 grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
+          {[
+            { ico: "➕", t: "Nuova offerta", h: `${href("pratiche")}#nuova-offerta`, c: "btn-3d-green" },
+            { ico: "📝", t: "Nota / chiamata", h: `${href("attivita")}#nuova-attivita`, c: "btn-3d-blue" },
+            { ico: "📅", t: "Appuntamento", h: href("appuntamenti"), c: "btn-3d-purple" },
+            { ico: "✅", t: "Task", h: href("task"), c: "btn-3d-amber" },
+            { ico: "📎", t: "Carica file", h: href("file"), c: "btn-3d-teal" },
+            { ico: "📞", t: "Chiama", h: telefono ? `tel:${telefono}` : null, c: "btn-3d-dark" },
+            { ico: "✉️", t: "Email", h: cliente.email ? `mailto:${cliente.email}` : null, c: "btn-3d-pink" },
+            { ico: "📍", t: "Naviga", h: indirizzo ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(indirizzo)}` : null, c: "btn-3d-orange" },
+            { ico: "✎", t: "Anagrafica", h: href("anagrafica"), c: "btn-3d-outline" },
+          ].map((b) =>
+            b.h ? (
+              <a key={b.t} href={b.h} target={b.h.startsWith("https://") ? "_blank" : undefined} className={`btn-3d tile-3d ${b.c}`}>
+                <span className="text-xl leading-none">{b.ico}</span>
+                <span>{b.t}</span>
+              </a>
+            ) : (
+              <span key={b.t} className="btn-3d tile-3d btn-3d-outline opacity-40 cursor-not-allowed" title="dato mancante in anagrafica">
+                <span className="text-xl leading-none">{b.ico}</span>
+                <span>{b.t}</span>
+              </span>
+            ),
+          )}
         </div>
 
         {/* indicatori */}
