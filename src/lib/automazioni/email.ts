@@ -94,9 +94,9 @@ export const MODELLI: Record<string, Modello> = {
   "appointment-cancelled-seller": { chiave: "appointment-cancelled-seller", versione: 1, categoria: "INTERNA" },
   "cancellation-follow-up-requested": { chiave: "cancellation-follow-up-requested", versione: 1, categoria: "INTERNA" },
   "sales-letter-1": { chiave: "sales-letter-1", versione: 1, categoria: "CLIENTE" },
-  "sales-letter-2": { chiave: "sales-letter-2", versione: 1, categoria: "CLIENTE" },
+  "sales-letter-2": { chiave: "sales-letter-2", versione: 2, categoria: "CLIENTE" },
   "sales-letter-3": { chiave: "sales-letter-3", versione: 2, categoria: "CLIENTE" },
-  "sales-letter-4": { chiave: "sales-letter-4", versione: 1, categoria: "CLIENTE" },
+  "sales-letter-4": { chiave: "sales-letter-4", versione: 2, categoria: "CLIENTE" },
   "qualification-requested": { chiave: "qualification-requested", versione: 1, categoria: "INTERNA" },
   "request-received": { chiave: "request-received", versione: 1, categoria: "CLIENTE" },
   "region-not-served": { chiave: "region-not-served", versione: 1, categoria: "CLIENTE" },
@@ -248,8 +248,8 @@ export function letteraDiVendita(n: number, d: DatiLeadEmail): { oggetto: string
   }
   if (n === 2) return { oggetto: "Perché tante famiglie scelgono P&C", testo: p(
     `Ciao ${nome},`, "quando si sceglie a chi affidare la propria casa contano tre cose: chi ti consiglia, chi installa e chi resta al tuo fianco dopo.",
-    ["• Consulenti tecnici e finanziari: il nostro consulente non ti propone solo un prodotto, ti aiuta a trovare la soluzione giusta e il modo migliore per realizzarla.",
-      "• Posa certificata: i lavori sono eseguiti da posatori qualificati e a fine lavori facciamo un sopralluogo per certificare il lavoro eseguito.",
+    ["• Consulenti tecnici preparati anche sui finanziamenti: il nostro consulente non ti propone solo un prodotto, ti aiuta a trovare la soluzione giusta e, grazie al corso specifico che ha seguito sui finanziamenti, anche il modo migliore per realizzarla.",
+      "• Posatori qualificati QF4: i lavori sono eseguiti da posatori con la qualifica professionale QF4 e a fine lavori facciamo un sopralluogo per verificare e certificare il lavoro eseguito.",
       "• Dopo la posa non ti lasciamo solo: ti consegniamo il kit di manutenzione e restiamo il tuo riferimento.",
       "• Un team familiare, sempre presente in ufficio: quando chiami trovi persone che conoscono il tuo progetto."].join("\n"),
     firma) };
@@ -260,6 +260,6 @@ export function letteraDiVendita(n: number, d: DatiLeadEmail): { oggetto: string
     "Leggine qualcuna: ritroverai quello che toccherai con mano anche tu, la consulenza senza fretta, la cura nella posa e un'azienda che resta al tuo fianco anche dopo i lavori.",
     `Da 20 anni lavoriamo così, una famiglia alla volta. La prossima potrebbe essere la tua.${quando}`, firma) };
   return { oggetto: "Il tuo progetto, con il finanziamento cucito su misura", testo: p(
-    `Ciao ${nome},`, "realizzare un progetto per la casa non deve essere un pensiero. Su molti prodotti abbiamo promozioni attive, e i nostri consulenti sono anche consulenti finanziari: insieme troviamo la soluzione di pagamento su misura per le tue esigenze.",
+    `Ciao ${nome},`, "realizzare un progetto per la casa non deve essere un pensiero. Su molti prodotti abbiamo promozioni attive, e i nostri consulenti hanno seguito un corso specifico sui finanziamenti: insieme troviamo la soluzione di pagamento su misura per le tue esigenze.",
     `Durante l'incontro ti mostreremo le opportunità valide in questo momento per i prodotti che ti interessano.${quando}`, firma) };
 }

@@ -87,6 +87,9 @@ test("fase 2: percorso dell'appuntamento e lettere di vendita", () => {
   const senzaRecapiti = componiEmail("appointment-confirmed-contact", { nome: "Anna", venditore: { nome: "Paolo", email: "p@senza-email.invalid" } }, link, "CASA");
   assert.ok(!senzaRecapiti.testo.includes("ufficio è chiuso"));
   assert.ok(letteraDiVendita(3, { nome: "Anna" }).testo.includes("https://gruppopec.com/recensioni/"));
+  // "consulente finanziario" è un titolo protetto: le lettere parlano del corso sui finanziamenti; QF4 è dei posatori
+  for (const n of [1, 2, 3, 4]) assert.ok(!/consulent[ei] finanziar/i.test(letteraDiVendita(n, { nome: "Anna" }).testo), `lettera ${n}`);
+  assert.ok(letteraDiVendita(2, { nome: "Anna" }).testo.includes("Posatori qualificati QF4"));
   const promemoria = componiEmail("appointment-reminder-contact", { nome: "Anna", marchio: "Solaris", appuntamentoIl: app, indirizzoAppuntamento: "Via Roma 1, Rivoli" }, link, "CASA");
   assert.ok(promemoria.testo.includes("Via Roma 1, Rivoli") && promemoria.testo.includes("bollette"));
   assert.ok(componiEmail("appointment-confirmed-seller", { nome: "Anna", venditore: { nome: "Marco Piccatti" } }, link, "CASA").testo.startsWith("Ciao Marco,"));
