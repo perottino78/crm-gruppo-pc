@@ -7,13 +7,32 @@ import { after } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
-import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare } from "./percorsi";
+import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare, MAX_RECUPERI, MESI_RECUPERO_DEFAULT } from "./percorsi";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
-import { chiusuraGiornata, troppoInRitardo } from "./tempi";
+import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
+import { chiaveGiorno, daOraRoma } from "@/lib/calendario/tempo";
 import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
 
 type Db = Prisma.TransactionClient | typeof prisma;
 export const CHIAVE_ATTIVE = "automazioni_lead_attive";
+// Recupero dopo N mesi: mesi di attesa e promozione del momento (testo e "valida fino al" YYYY-MM-DD), da Impostazioni
+export const CHIAVE_MESI_RECUPERO = "recupero_mesi";
+export const CHIAVE_PROMO_TESTO = "recupero_promo_testo";
+export const CHIAVE_PROMO_FINO = "recupero_promo_fino";
+
+async function config(db: Db, chiave: string): Promise<string | null> {
+  return (await db.configurazione.findUnique({ where: { chiave } }))?.valore ?? null;
+}
+export async function mesiRecupero(db: Db = prisma): Promise<number> {
+  const n = Number(await config(db, CHIAVE_MESI_RECUPERO));
+  return Number.isInteger(n) && n >= 1 && n <= 24 ? n : MESI_RECUPERO_DEFAULT;
+}
+/** La promozione vale solo se c'è il testo e non è scaduta: il CRM non inventa offerte né manda promozioni vecchie. */
+export async function promozioneValida(adesso: Date, db: Db = prisma): Promise<{ testo: string; validaFino: Date } | null> {
+  const [testo, fino] = await Promise.all([config(db, CHIAVE_PROMO_TESTO), config(db, CHIAVE_PROMO_FINO)]);
+  if (!testo?.trim() || !fino || !/^\d{4}-\d{2}-\d{2}$/.test(fino) || chiaveGiorno(adesso) > fino) return null;
+  return { testo: testo.trim(), validaFino: daOraRoma(`${fino}T12:00`)! };
+}
 
 /** Le email automatiche partono solo se accese in Impostazioni (finché Keap è attivo restano in pausa) e se c'è la posta. */
 export async function statoAutomazioni(): Promise<{ attive: boolean; posta: boolean }> {
@@ -30,7 +49,7 @@ export async function evento(db: Db, leadId: string, tipo: string, testo: string
   await db.leadEvento.create({ data: { leadId, tipo, testo, utenteNome: utenteNome ?? null } });
 }
 
-type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null };
+type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null; mesiRecupero?: number };
 
 /**
  * Programma il prossimo passo utile del ciclo a partire da `da`. I passi da saltare (lettere troppo vicine
@@ -39,6 +58,7 @@ type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null };
  */
 async function programmaDa(db: Db, leadId: string, run: string, percorso: string, da: number, riferimento: Date, date: DateLead) {
   const passi = PERCORSI[percorso] ?? [];
+  if (date.mesiRecupero === undefined && passi.slice(da).some((p) => "dopoMesi" in p.quando)) date = { ...date, mesiRecupero: await mesiRecupero(db) };
   for (let i = da; i < passi.length; i++) {
     const quando = quandoPasso(passi[i].quando, riferimento, date);
     const salta = passi[i].tipo === "EMAIL" ? daSaltare((passi[i] as { condizione?: Parameters<typeof daSaltare>[0] }).condizione, quando, riferimento, date.appuntamentoIl) : null;
@@ -163,8 +183,9 @@ async function cicloCorrente(leadId: string): Promise<string | null> {
 }
 
 type LeadPerEmail = { nome: string; telefono: string | null; email: string | null; comune: string | null; cap: string | null; prodotto: string | null; fonte: string; note: string | null; richiamoIl: Date | null; appuntamentoIl: Date | null; indirizzoAppuntamento: string | null; brand: { nome: string } };
-function datiEmail(l: LeadPerEmail, venditore: { nome: string; telefono: string | null; email: string } | null): DatiLeadEmail {
+function datiEmail(l: LeadPerEmail & { recuperoIl?: Date | null }, venditore: { nome: string; telefono: string | null; email: string } | null, extra: Partial<DatiLeadEmail> = {}): DatiLeadEmail {
   return {
+    ...extra, recuperoIl: l.recuperoIl ?? null,
     nome: l.nome, telefono: l.telefono, email: l.email, comune: l.comune, cap: l.cap, prodotto: l.prodotto, fonte: l.fonte, marchio: l.brand.nome,
     richiamoIl: l.richiamoIl, appuntamentoIl: l.appuntamentoIl, indirizzoAppuntamento: l.indirizzoAppuntamento, note: l.note,
     venditore: venditore ? { nome: venditore.nome, telefono: venditore.telefono, email: venditore.email } : null,
@@ -204,48 +225,74 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       continue;
     }
 
-    if (passo.tipo === "TIMEOUT") {
-      await prisma.lead.update({ where: { id: lead.id }, data: { nonGestitoIl: ora() } });
-      await evento(prisma, lead.id, "lead.non_gestito", passo.nome);
-      await chiudi({ stato: "FATTO" });
-    } else {
+    /** Prepara, registra e spedisce l'email del passo. "RIPROVA" = non partita, riprogrammata o fermata. */
+    const emailDelPasso = async (modello: string, destinatario: "CLIENTE" | "CENTRALINO" | "VENDITORE", variante?: string, extra: Partial<DatiLeadEmail> = {}): Promise<"FATTO" | "RIPROVA"> => {
       const link = { lead: linkLead(lead.id), disiscrizione: linkDisiscrizione(lead.id) };
       const venditore = lead.venditoreId ? await prisma.utente.findUnique({ where: { id: lead.venditoreId }, select: { nome: true, telefono: true, email: true } }) : null;
-      const e = componiEmail(passo.modello, datiEmail(lead, venditore), link, passo.variante);
-      const a = passo.a === "CLIENTE" ? lead.email : passo.a === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
-      const da = passo.a === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
-      const soppressa = passo.a === "CLIENTE"
+      const promozione = extra.promozione ?? (modello === "lost-recovery-call-requested" ? await promozioneValida(ora()) : null);
+      const e = componiEmail(modello, datiEmail(lead, venditore, { ...extra, promozione, adesso: ora() }), link, variante);
+      const a = destinatario === "CLIENTE" ? lead.email : destinatario === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
+      const da = destinatario === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
+      const soppressa = destinatario === "CLIENTE"
         ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto" : null)
-        : passo.a === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
+        : destinatario === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
       const base = { leadId: lead.id, chiave: e.chiave, versione: e.versione, categoria: e.categoria, da, a, oggetto: e.oggetto, testo: testoEmail(e, link), html: htmlEmail(e, link) };
       const reg = await prisma.emailLead.upsert({ where: { chiaveIdempotenza: job.chiave }, create: { ...base, chiaveIdempotenza: job.chiave, stato: "PREPARATA" }, update: {} });
       if (reg.stato === "INVIATA") {
         await chiudi({ stato: "FATTO", emailId: reg.id }); // già partita in un tentativo precedente: non si rimanda
-      } else if (soppressa) {
+        return "FATTO";
+      }
+      if (soppressa) {
         await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "SOPPRESSA", motivo: soppressa } });
         await evento(prisma, lead.id, "email.soppressa", `${e.oggetto} — non inviata: ${soppressa}`);
         await chiudi({ stato: "FATTO", emailId: reg.id });
         r.soppresse++;
-      } else {
-        const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.html, da: reg.da ?? undefined });
-        if (esito.inviata) {
-          await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
-          await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);
-          await chiudi({ stato: "FATTO", emailId: reg.id });
-          r.email++;
-        } else {
-          await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "FALLITA", motivo: esito.motivo ?? "errore di invio" } });
-          // al massimo tre tentativi: dopo 1 minuto e dopo 5 minuti, poi si ferma
-          if (job.tentativi + 1 < 3) {
-            await prisma.invioProgrammato.update({ where: { id: job.id }, data: { stato: "IN_ATTESA", bloccatoFino: null, errore: esito.motivo ?? null, eseguiDopo: new Date(ora().getTime() + (job.tentativi === 0 ? 1 : 5) * 60_000) } });
-          } else {
-            await chiudi({ stato: "FALLITO", errore: esito.motivo ?? "errore di invio" });
-            await evento(prisma, lead.id, "email.fallita", `${e.oggetto} — non inviata: ${esito.motivo ?? "errore"}`);
-          }
-          r.fallite++;
-          continue;
-        }
+        return "FATTO";
       }
+      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.html, da: reg.da ?? undefined });
+      if (esito.inviata) {
+        await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
+        await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);
+        await chiudi({ stato: "FATTO", emailId: reg.id });
+        r.email++;
+        return "FATTO";
+      }
+      await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "FALLITA", motivo: esito.motivo ?? "errore di invio" } });
+      // al massimo tre tentativi: dopo 1 minuto e dopo 5 minuti, poi si ferma
+      if (job.tentativi + 1 < 3) {
+        await prisma.invioProgrammato.update({ where: { id: job.id }, data: { stato: "IN_ATTESA", bloccatoFino: null, errore: esito.motivo ?? null, eseguiDopo: new Date(ora().getTime() + (job.tentativi === 0 ? 1 : 5) * 60_000) } });
+      } else {
+        await chiudi({ stato: "FALLITO", errore: esito.motivo ?? "errore di invio" });
+        await evento(prisma, lead.id, "email.fallita", `${e.oggetto} — non inviata: ${esito.motivo ?? "errore"}`);
+      }
+      r.fallite++;
+      return "RIPROVA";
+    };
+
+    if (passo.tipo === "TIMEOUT") {
+      await prisma.lead.update({ where: { id: lead.id }, data: { nonGestitoIl: ora() } });
+      await evento(prisma, lead.id, "lead.non_gestito", passo.nome);
+      await chiudi({ stato: "FATTO" });
+    } else if (passo.tipo === "RECUPERO") {
+      if (lead.recuperi >= MAX_RECUPERI) { await chiudi({ stato: "SALTATO", errore: `già recuperato ${lead.recuperi} volte` }); continue; }
+      const promo = await promozioneValida(ora());
+      if (!promo) {
+        // nessuna promozione valida in Impostazioni: il recupero aspetta e riprova fra una settimana
+        await prisma.invioProgrammato.update({ where: { id: job.id }, data: { stato: "IN_ATTESA", bloccatoFino: null, tentativi: 0, errore: "manca una promozione valida (Impostazioni › Email automatiche)", eseguiDopo: dopoGiorniAlle08(ora(), 7) } });
+        if (!job.errore) await evento(prisma, lead.id, "recupero.in_attesa", "Recupero rimandato: manca una promozione valida.");
+        continue;
+      }
+      const esito = await emailDelPasso("lost-recovery-promotion", "CLIENTE", undefined, { promozione: promo });
+      if (esito === "RIPROVA") continue;
+      // promozione mandata (o non mandabile per email): il lead torna in coda al centralino come "Da recuperare"
+      await prisma.$transaction(async (tx) => {
+        await tx.lead.update({ where: { id: lead.id }, data: { fase: "RECUPERO", recuperoIl: ora(), recuperi: { increment: 1 }, nonGestitoIl: null, scadenzaAzione: chiusuraGiornata(dopoGiorniAlle08(ora(), 3)) } });
+        await evento(tx, lead.id, "lead.recupero", `Recupero n. ${lead.recuperi + 1}: promozione inviata, di nuovo in coda al centralino.`);
+        await avviaPercorso(tx, lead.id, "RECUPERO", ora());
+      });
+      continue;
+    } else {
+      if ((await emailDelPasso(passo.modello, passo.a, passo.variante)) === "RIPROVA") continue;
     }
     // passo concluso: si programma il successivo partendo da adesso (niente raffiche di arretrati)
     if (passi[job.passo + 1] && (await cicloCorrente(lead.id)) === job.run) {

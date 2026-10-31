@@ -4,19 +4,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { statoAutomazioni } from "@/lib/automazioni/motore";
+import { statoAutomazioni, mesiRecupero, promozioneValida, CHIAVE_PROMO_TESTO, CHIAVE_PROMO_FINO } from "@/lib/automazioni/motore";
+import { MAX_RECUPERI } from "@/lib/automazioni/percorsi";
 import { PERCORSI, ESITI, type Quando } from "@/lib/automazioni/percorsi";
 import { CONTATTI, MODELLI, componiEmail } from "@/lib/automazioni/email";
-import { impostaAutomazioni, eseguiOra } from "@/app/lead-percorso-actions";
+import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percorso-actions";
 
-type P = { ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
+type P = { recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
+  promozione: ESEMPIO_PROMO, recuperoIl: new Date(Date.now() - 3 * 86400000),
   nome: "Mario Rossi", telefono: "333 1234567", email: "mario.rossi@email.it", comune: "Rivoli", cap: "10098", prodotto: "Pergola bioclimatica", fonte: "FACEBOOK", marchio: "P&C",
   richiamoIl: new Date(Date.now() + 2 * 86400000), appuntamentoIl: new Date(Date.now() + 5 * 86400000), indirizzoAppuntamento: "Via Roma 10, 10098 Rivoli",
   note: "Interessato anche alle zanzariere", venditore: { nome: "Marco Piccatti", telefono: "333 0000000", email: "marco.piccatti@gruppopec.com" },
 };
-const NOME_PERCORSO: Record<string, string> = { NUOVO: "Nuovo lead", ASSEGNA_VENDITORE_CASA: "Appuntamento a casa senza venditore", ASSEGNA_VENDITORE_SHOWROOM: "Appuntamento in showroom senza venditore" };
+const NOME_PERCORSO: Record<string, string> = { RECUPERO: "Lead recuperato (dopo la promozione)", NUOVO: "Nuovo lead", ASSEGNA_VENDITORE_CASA: "Appuntamento a casa senza venditore", ASSEGNA_VENDITORE_SHOWROOM: "Appuntamento in showroom senza venditore" };
 const VARIANTI: Record<string, string[]> = {
   "call-requested": ["initial-prequalification", "scheduled-first-contact", "call-unanswered-reminder"],
   "appointment-confirmed-contact": ["CASA", "SHOWROOM"], "appointment-reminder-contact": ["CASA", "SHOWROOM"],
@@ -25,6 +28,7 @@ const descriviQuando = (q: Quando) =>
   "subito" in q ? "subito"
     : "dopoGiorni" in q ? `dopo almeno ${q.dopoGiorni} giorn${q.dopoGiorni === 1 ? "o" : "i"}, alle 08:00 (lun–${q.conSabato === false ? "ven" : "sab"})`
       : "giornoDopo" in q ? "il giorno lavorativo dopo, alle 08:00"
+      : "dopoMesi" in q ? "dopo i mesi di recupero impostati qui sopra, un giorno feriale alle 10:00"
       : "daAppuntamento" in q ? "il giorno prima dell'appuntamento, alla stessa ora"
         : `giorno del ricontatto${q.daRichiamo ? ` +${q.daRichiamo}` : ""}`;
 
@@ -33,12 +37,19 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
   const u = await getCurrentUser();
   if (!u || u.ruolo !== "AMMINISTRATORE") notFound();
   const p = await searchParams;
-  const [stato, perStato, ultime, daVerificare] = await Promise.all([
+  const [stato, perStato, ultime, daVerificare, mesi, promo, testoPromo, finoPromo, inAttesa] = await Promise.all([
     statoAutomazioni(),
     prisma.invioProgrammato.groupBy({ by: ["stato"], _count: { _all: true } }),
     prisma.emailLead.findMany({ orderBy: { createdAt: "desc" }, take: 30, include: { lead: { select: { id: true, nome: true } } } }),
     prisma.invioProgrammato.findMany({ where: { stato: { in: ["DA_VERIFICARE", "FALLITO"] } }, orderBy: { eseguiDopo: "desc" }, take: 20, include: { lead: { select: { id: true, nome: true } } } }),
+    mesiRecupero(),
+    promozioneValida(new Date()),
+    prisma.configurazione.findUnique({ where: { chiave: CHIAVE_PROMO_TESTO } }),
+    prisma.configurazione.findUnique({ where: { chiave: CHIAVE_PROMO_FINO } }),
+    prisma.invioProgrammato.findMany({ where: { stato: "IN_ATTESA" }, orderBy: { eseguiDopo: "asc" }, select: { percorso: true, passo: true, eseguiDopo: true, errore: true } }),
   ]);
+  // recuperi programmati: i passi di tipo RECUPERO in attesa
+  const recuperi = inAttesa.filter((i) => PERCORSI[i.percorso]?.[i.passo]?.tipo === "RECUPERO");
   const n = (s: string) => perStato.find((x) => x.stato === s)?._count._all ?? 0;
   const link = { lead: "https://crm-gruppo-pc.vercel.app/lead?id=…", disiscrizione: "https://crm-gruppo-pc.vercel.app/api/disiscrizione?…" };
 
@@ -71,6 +82,32 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
           <p>Telefoni nelle email: <b>{CONTATTI.telefonoUfficio}</b> · {CONTATTI.cellulariUfficio}</p>
         </div>
         <p className="text-sm">Invii programmati: <b>{n("IN_ATTESA")}</b> in attesa · {n("FATTO")} fatti · {n("ANNULLATO")} annullati da un nuovo esito · <span className={n("DA_VERIFICARE") + n("FALLITO") ? "text-red-700 font-semibold" : ""}>{n("DA_VERIFICARE") + n("FALLITO")} da verificare</span></p>
+      </div>
+
+      {p.recupero && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">♻️ Impostazioni del recupero salvate.</p>}
+      <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
+        <p className="font-semibold">♻️ Recupero dei lead persi</p>
+        <p className="text-sm text-neutral-600">
+          I lead &quot;non interessato&quot; e quelli rimasti &quot;non gestiti&quot; dopo i solleciti, passati i mesi indicati, ricevono una email con la promozione
+          del momento e tornano nella coda delle telefoniste come <b>Da recuperare</b> (3 solleciti al centralino). Al massimo {MAX_RECUPERI} recuperi per lead;
+          chi si è disiscritto non riceve l&apos;email ma viene comunque richiamato. Senza una promozione valida il recupero aspetta: il CRM non inventa offerte.
+        </p>
+        <p className={`text-sm font-semibold ${promo ? "text-green-800" : "text-red-700"}`}>
+          {promo ? `✅ Promozione valida fino al ${promo.validaFino.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : "⚠️ Nessuna promozione valida: i recuperi restano in attesa"}
+          {" · "}{recuperi.length} recuperi programmati{recuperi[0] ? `, il prossimo ${quando(recuperi[0].eseguiDopo)}` : ""}
+        </p>
+        <form action={salvaRecupero} className="space-y-2">
+          <label className="text-sm block">Recupero dopo quanti mesi
+            <input name="mesi" type="number" min={1} max={24} defaultValue={mesi} className="ml-2 w-20 border border-neutral-300 rounded px-2 py-1 text-sm" />
+          </label>
+          <label className="text-sm block">Promozione del momento (il testo che il cliente legge nell&apos;email)
+            <textarea name="testo" rows={5} defaultValue={testoPromo?.valore ?? ""} placeholder={"es. • Sconto in fattura del 50% sulle pergole bioclimatiche\n• Finanziamento a tasso zero in 12 mesi sugli infissi"} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-sm block">Valida fino al
+            <input name="fino" type="date" defaultValue={finoPromo?.valore ?? ""} className="ml-2 border border-neutral-300 rounded px-2 py-1 text-sm" />
+          </label>
+          <button className="btn-3d btn-3d-teal text-sm px-4 py-2">Salva recupero e promozione</button>
+        </form>
       </div>
 
       {daVerificare.length > 0 && (

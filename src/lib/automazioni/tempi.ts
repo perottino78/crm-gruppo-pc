@@ -29,6 +29,24 @@ export function giornoDopoAlle08(da: Date): Date {
   return primaFinestra08(daOraRoma(`${aggiungiGiorni(chiaveGiorno(da), 1)}T00:00`)!);
 }
 
+/** Recupero: stesso giorno N mesi dopo (fine mese limitata, es. 31/08 + 3 → 30/11), poi il primo giorno lun–ven alle 10:00. */
+export function dopoMesiAlle10(da: Date, mesi: number): Date {
+  const [y, m, g] = chiaveGiorno(da).split("-").map(Number);
+  const totale = m - 1 + mesi;
+  const anno = y + Math.floor(totale / 12);
+  const mese = (totale % 12) + 1;
+  const ultimo = new Date(Date.UTC(anno, mese, 0)).getUTCDate();
+  let chiave = `${anno}-${String(mese).padStart(2, "0")}-${String(Math.min(g, ultimo)).padStart(2, "0")}`;
+  while (giornoSettimana(chiave) > 5) chiave = aggiungiGiorni(chiave, 1);
+  return daOraRoma(`${chiave}T10:00`)!;
+}
+
+/** "Oggi", "Ieri", "N giorni fa" dalla data reale di invio (ora di Roma). */
+export function giorniFa(quando: Date, adesso: Date): string {
+  const giorni = Math.round((Date.parse(chiaveGiorno(adesso)) - Date.parse(chiaveGiorno(quando))) / 86400000);
+  return giorni <= 0 ? "Oggi" : giorni === 1 ? "Ieri" : `${giorni} giorni fa`;
+}
+
 /** Scadenza di un task automatico: le 18:30 di oggi, o di domani se è già passata quell'ora. */
 export function chiusuraGiornata(creato: Date): Date {
   const p = partiRoma(creato);

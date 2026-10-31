@@ -94,3 +94,16 @@ test("fase 2: percorso dell'appuntamento e lettere di vendita", () => {
   assert.ok(promemoria.testo.includes("Via Roma 1, Rivoli") && promemoria.testo.includes("bollette"));
   assert.ok(componiEmail("appointment-confirmed-seller", { nome: "Anna", venditore: { nome: "Marco Piccatti" } }, link, "CASA").testo.startsWith("Ciao Marco,"));
 });
+
+test("recupero: percorsi e testi", () => {
+  // il recupero arriva dopo "non interessato" e dopo ogni timeout "non gestito", ed è l'ultimo passo
+  for (const k of ["NON_INTERESSATO", "IN_TARGET", "NON_RISPONDE", "DA_RICHIAMARE", "RECUPERO"]) assert.equal(PERCORSI[k].at(-1)?.tipo, "RECUPERO", k);
+  assert.ok(!PERCORSI.FUORI_REGIONE.some((p) => p.tipo === "RECUPERO"));
+  assert.ok(esitiPossibili("RECUPERO").includes("APPUNTAMENTO_CASA"));
+  assert.equal(perInput(quandoPasso({ dopoMesi: true }, r("2026-11-03T15:00"), { mesiRecupero: 3 })), "2027-02-03T10:00");
+  const link = { lead: "https://crm/lead?id=1", disiscrizione: "https://crm/d" };
+  const promo = componiEmail("lost-recovery-promotion", { nome: "Anna Bianchi", promozione: { testo: "• Sconto pergole", validaFino: r("2027-02-28T12:00") } }, link);
+  assert.ok(promo.testo.startsWith("Ciao Anna,") && promo.testo.includes("• Sconto pergole") && promo.testo.includes("valide fino al 28 febbraio 2027"));
+  const chiama = componiEmail("lost-recovery-call-requested", { nome: "Anna Bianchi", promozione: { testo: "• Sconto pergole" }, recuperoIl: r("2027-02-03T10:00"), adesso: r("2027-02-06T08:00") }, link);
+  assert.ok(chiama.testo.includes("3 giorni fa gli abbiamo inviato la promozione") && chiama.testo.includes("https://crm/lead?id=1"));
+});
