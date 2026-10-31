@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { scopeLeadWhere } from "@/lib/scope";
-import { registraEsito, assegnaVenditore, eseguiDopoRisposta, eseguiInviiScaduti, CHIAVE_ATTIVE } from "@/lib/automazioni/motore";
+import { registraEsito, assegnaVenditore, eseguiDopoRisposta, eseguiInviiScaduti, CHIAVE_ATTIVE, CHIAVE_MESI_RECUPERO, CHIAVE_PROMO_TESTO, CHIAVE_PROMO_FINO } from "@/lib/automazioni/motore";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const torna = (ritorno: string | null, parametri: Record<string, string>) => {
@@ -76,4 +76,19 @@ export async function eseguiOra() {
   const r = await eseguiInviiScaduti();
   revalidatePath("/impostazioni/automazioni");
   redirect(`/impostazioni/automazioni?eseguiti=${r.eseguiti}&inviate=${r.email}${r.motivo ? `&motivo=${encodeURIComponent(r.motivo)}` : ""}`);
+}
+
+/** Recupero dei lead persi: mesi di attesa e promozione del momento (testo e scadenza). */
+export async function salvaRecupero(fd: FormData) {
+  await amministratore();
+  const mesi = Math.round(Number(str(fd, "mesi")));
+  const fino = str(fd, "fino");
+  const valori: [string, string][] = [
+    [CHIAVE_MESI_RECUPERO, String(Number.isFinite(mesi) && mesi >= 1 && mesi <= 24 ? mesi : 3)],
+    [CHIAVE_PROMO_TESTO, (str(fd, "testo") ?? "").slice(0, 3000)],
+    [CHIAVE_PROMO_FINO, fino && /^\d{4}-\d{2}-\d{2}$/.test(fino) ? fino : ""],
+  ];
+  for (const [chiave, valore] of valori) await prisma.configurazione.upsert({ where: { chiave }, update: { valore }, create: { chiave, valore } });
+  revalidatePath("/impostazioni/automazioni");
+  redirect("/impostazioni/automazioni?recupero=1");
 }

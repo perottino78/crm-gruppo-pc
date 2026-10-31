@@ -3,6 +3,8 @@
 // Ogni modello ha chiave e versione: se si cambia un testo si alza la versione, il registro conserva quella inviata.
 // Funzioni pure: testabili senza database.
 
+import { giorniFa } from "./tempi";
+
 export const CONTATTI = {
   telefonoUfficio: process.env.TELEFONO_UFFICIO || "011 19887497",
   cellulariUfficio: process.env.CELLULARI_UFFICIO || "392 7431645 / 327 7222576",
@@ -29,6 +31,10 @@ export type DatiLeadEmail = {
   indirizzoAppuntamento?: string | null;
   note?: string | null;
   venditore?: { nome: string; telefono?: string | null; email?: string | null } | null;
+  // Recupero: la promozione del momento (scritta in Impostazioni) e quando gliel'abbiamo mandata
+  promozione?: { testo: string; validaFino?: Date | null } | null;
+  recuperoIl?: Date | null;
+  adesso?: Date;
 };
 
 export type Link = { lead: string; disiscrizione?: string };
@@ -93,6 +99,8 @@ export const MODELLI: Record<string, Modello> = {
   "appointment-reminder-seller": { chiave: "appointment-reminder-seller", versione: 1, categoria: "INTERNA" },
   "appointment-cancelled-seller": { chiave: "appointment-cancelled-seller", versione: 1, categoria: "INTERNA" },
   "cancellation-follow-up-requested": { chiave: "cancellation-follow-up-requested", versione: 1, categoria: "INTERNA" },
+  "lost-recovery-promotion": { chiave: "lost-recovery-promotion", versione: 1, categoria: "CLIENTE" },
+  "lost-recovery-call-requested": { chiave: "lost-recovery-call-requested", versione: 1, categoria: "INTERNA" },
   "sales-letter-1": { chiave: "sales-letter-1", versione: 1, categoria: "CLIENTE" },
   "sales-letter-2": { chiave: "sales-letter-2", versione: 2, categoria: "CLIENTE" },
   "sales-letter-3": { chiave: "sales-letter-3", versione: 2, categoria: "CLIENTE" },
@@ -199,6 +207,22 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
     case "sales-letter-3":
     case "sales-letter-4":
       return { ...m, ...letteraDiVendita(Number(chiave.slice(-1)), d) };
+    case "lost-recovery-promotion": {
+      const fino = d.promozione?.validaFino ? d.promozione.validaFino.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "numeric", month: "long", year: "numeric" }) : null;
+      return { ...m, oggetto: "GRUPPO P&C: Nuove opportunità per rinnovare casa", testo: blocco(
+        ciao, "è passato un po' di tempo dalla nostra ultima conversazione e speriamo che i tuoi progetti per la casa stiano prendendo forma come desideravi.",
+        "Vorremmo presentarti le novità e le promozioni Gruppo P&C disponibili in questo periodo:", d.promozione?.testo ?? "",
+        fino && `Le promozioni sono valide fino al ${fino}.`,
+        `Se desideri un preventivo aggiornato o una consulenza gratuita, il nostro team è pronto ad aiutarti: chiamaci al numero ${CONTATTI.telefonoUfficio} oppure rispondi a questa email. Trovi tutte le novità anche su ${CONTATTI.sito}`,
+        firmaCliente) };
+    }
+    case "lost-recovery-call-requested":
+      return { ...m, oggetto: `[CRM P&C] Recupera il contatto — ${d.nome}`, testo: blocco(
+        "Ciao Centralino P&C,", "richiama il contatto che la volta scorsa non era andato avanti (non interessato o non raggiunto).",
+        d.recuperoIl ? `${giorniFa(d.recuperoIl, d.adesso ?? new Date())} gli abbiamo inviato la promozione del momento:` : "Gli abbiamo inviato la promozione del momento:",
+        d.promozione?.testo,
+        "Cerca di capire se le sue esigenze sono cambiate e, se è interessato, proponi un appuntamento.", contatto, richiesta,
+        `Dopo la telefonata registra l'esito nel lead: ${link.lead}`, firmaInterna) };
     case "interest-closed":
       return { ...m, oggetto: "GRUPPO P&C: Restiamo in contatto per future opportunità", testo: blocco(
         ciao, "grazie per il tempo che ci hai dedicato e per aver valutato i nostri prodotti. Ci dispiace che al momento non siano di tuo interesse, ma comprendiamo che le esigenze possono cambiare.",

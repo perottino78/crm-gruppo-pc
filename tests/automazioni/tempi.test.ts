@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { primaFinestra08, dopoGiorniAlle08, chiusuraGiornata, scadenzaNuovoTentativo, stessaOraFra, troppoInRitardo } from "../../src/lib/automazioni/tempi";
+import { primaFinestra08, dopoGiorniAlle08, chiusuraGiornata, scadenzaNuovoTentativo, stessaOraFra, troppoInRitardo, dopoMesiAlle10, giorniFa } from "../../src/lib/automazioni/tempi";
 import { daOraRoma, perInput } from "../../src/lib/calendario/tempo";
 
 const r = (s: string) => daOraRoma(s)!;
@@ -40,4 +40,17 @@ test("ricontatto: stesso orario R+1, R+2, R+20", () => {
 test("niente raffiche di email vecchie", () => {
   assert.equal(troppoInRitardo(r("2026-11-03T08:00"), r("2026-11-04T07:59")), false);
   assert.equal(troppoInRitardo(r("2026-11-03T08:00"), r("2026-11-04T08:01")), true);
+});
+
+test("recupero dopo N mesi, un giorno feriale alle 10:00", () => {
+  assert.equal(vedi(dopoMesiAlle10(r("2026-11-03T15:00"), 3)), "2027-02-03T10:00"); // mercoledì
+  assert.equal(vedi(dopoMesiAlle10(r("2026-08-31T09:00"), 3)), "2026-11-30T10:00"); // 31/08 + 3 mesi → 30/11 (lunedì)
+  assert.equal(vedi(dopoMesiAlle10(r("2026-11-30T09:00"), 3)), "2027-03-01T10:00"); // 28/02/2027 è domenica → lunedì 1/3
+  assert.equal(vedi(dopoMesiAlle10(r("2026-12-15T09:00"), 1)), "2027-01-15T10:00");
+});
+
+test("oggi, ieri, N giorni fa", () => {
+  assert.equal(giorniFa(r("2026-11-03T23:30"), r("2026-11-03T23:50")), "Oggi");
+  assert.equal(giorniFa(r("2026-11-03T23:30"), r("2026-11-04T00:10")), "Ieri");
+  assert.equal(giorniFa(r("2026-11-03T10:00"), r("2026-11-06T09:00")), "3 giorni fa");
 });

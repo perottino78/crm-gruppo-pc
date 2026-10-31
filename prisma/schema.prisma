@@ -98,6 +98,9 @@ model Lead {
   venditoreId           String?
   indirizzoAppuntamento String?
   appuntamentoId        String?
+  // Recupero dopo N mesi: quando gli è stata mandata la promozione e quante volte è già stato recuperato
+  recuperoIl            DateTime?
+  recuperi              Int                @default(0)
   // Solleciti finiti senza esito: il lead è rimasto "non gestito"
   nonGestitoIl          DateTime?
   disiscritto           Boolean            @default(false)

@@ -132,7 +132,7 @@ async function main() {
     await esegui();
   }
   const l8 = await prisma.lead.findUniqueOrThrow({ where: { id: r8!.id } });
-  verifica(l8.nonGestitoIl !== null && (await prossimi(r8!.id)).length === 0, "dopo #3 e 20 giorni il lead risulta non gestito", await prossimi(r8!.id));
+  verifica(l8.nonGestitoIl !== null && (await prossimi(r8!.id)).every((x) => x.startsWith("IN_TARGET#5@")), "dopo #3 e 20 giorni il lead risulta non gestito (resta solo il recupero fra qualche mese)", await prossimi(r8!.id));
 
   console.log("9. Posta irraggiungibile: tre tentativi e poi stop, senza doppioni");
   const r9 = await registraLead({ nome: "Anna Neri", telefono: "3405556666", email: "anna@n.it", fonte: "web" });

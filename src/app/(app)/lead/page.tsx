@@ -98,6 +98,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
                   {fase.azione && <p className={`text-xs ${scaduto ? "text-red-700 font-semibold" : "text-neutral-600"}`}>{fase.azione}{l.scadenzaAzione ? ` · entro ${quando(l.scadenzaAzione)}` : ""}{scaduto ? " · SCADUTO" : ""}</p>}
                   {l.nonGestitoIl && <p className="text-xs text-red-700">⚠️ non gestito dal {quando(l.nonGestitoIl)}</p>}
                   {l.disiscritto && <p className="text-xs text-neutral-500">🚫 non vuole email</p>}
+                  {l.recuperi > 0 && <p className="text-xs text-teal-800">♻️ recuperato {l.recuperi} {l.recuperi === 1 ? "volta" : "volte"}{l.recuperoIl ? `, promozione del ${quando(l.recuperoIl)}` : ""}</p>}
                 </div>
               </div>
               {l.note && <p className="mt-2 text-xs text-neutral-700 whitespace-pre-line bg-neutral-50 rounded p-2">{l.note}</p>}

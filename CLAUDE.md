@@ -81,7 +81,10 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   versioni P&C/Solaris/Purafonte, una al giorno lavorativo, mai nel giorno del promemoria), promemoria il giorno prima; senza
   venditore → percorso `ASSEGNA_VENDITORE_*` (avviso al centralino) e poi `assegnaVenditore`. `sincronizzaCalendario` crea il
   cliente e l'`Appuntamento` del venditore (spostato/annullato con il lead). Passi saltati decisi in `programmaDa` (stato SALTATO).
-  Da fare: Referee e Recovery (decisioni A-02/A-03 del dossier). Variabili facoltative: `RECENSIONI_URL` (default gruppopec.com/recensioni), `SITO_URL`. Conferma e promemoria al cliente
+  Recupero (Recovery Keap, qui dopo N mesi, default 3): passo `RECUPERO` in coda a NON_INTERESSATO e ai percorsi che finiscono
+  con il timeout "non gestito"; manda la promozione del momento (E-18, testo e "valida fino al" in Impostazioni, chiavi
+  `recupero_*`; senza promozione valida riprova ogni 7 giorni) e rimette il lead in fase RECUPERO (E-19 ×3 al centralino).
+  Massimo `MAX_RECUPERI` = 2. Da fare: Referee (decisione A-02 del dossier). Variabili facoltative: `RECENSIONI_URL` (default gruppopec.com/recensioni), `SITO_URL`. Conferma e promemoria al cliente
   riportano telefono ed email del consulente (`contattiConsulente`) per il sabato e gli orari di ufficio chiuso.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
@@ -89,13 +92,13 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 160, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 163, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
