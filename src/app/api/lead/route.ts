@@ -52,6 +52,9 @@ export async function POST(req: NextRequest) {
     brand: pick(body, "brand", "azienda"),
     fonte: pick(body, "fonte", "source", "utm_source") ?? "facebook",
     note: pick(body, "note", "messaggio", "message", "campagna", "campaign_name"),
+    comune: pick(body, "comune", "citta", "city"),
+    cap: pick(body, "cap", "zip", "post_code", "postal_code"),
+    prodotto: pick(body, "prodotto", "interesse", "product"),
   });
   if (!r) return NextResponse.json({ ok: false, errore: "servono nome e telefono o email" }, { status: 422, headers: CORS });
   return NextResponse.json({ ok: true, id: r.id, duplicato: r.duplicato }, { headers: CORS });

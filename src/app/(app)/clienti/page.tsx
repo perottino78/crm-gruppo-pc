@@ -3,14 +3,14 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import BrandSwitcher from "@/components/BrandSwitcher";
-import { creaLead, creaCliente, aggiornaFaseLead, convertiLeadInCliente } from "@/app/actions";
+import { creaLead, creaCliente, convertiLeadInCliente } from "@/app/actions";
+import { FASI_LEAD } from "@/lib/automazioni/percorsi";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
 import { PROVENIENZE, NESSUNA, whereFiltriClienti, filtriCampagnaAttivi } from "@/lib/clienti/provenienza";
 import { daOraRoma, aggiungiGiorni } from "@/lib/calendario/tempo";
 
-const FASI = ["NUOVO", "CONTATTATO", "APPUNTAMENTO_FISSATO", "NON_RISPONDE", "NON_INTERESSATO"];
 
 // Quante righe mostrare (lead: ?lead=, anagrafica clienti: ?clienti=): di default le 10
 // piu' recenti, poi 20/50/100/tutte a scelta, per non dover scorrere liste lunghissime.
@@ -296,19 +296,9 @@ export default async function ClientiPage({
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <form action={aggiornaFaseLead} className="flex items-center gap-1">
-                <input type="hidden" name="id" value={l.id} />
-                <select
-                  name="fase"
-                  defaultValue={l.fase}
-                  className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600 border-0"
-                >
-                  {FASI.map((f) => (
-                    <option key={f} value={f}>{f}</option>
-                  ))}
-                </select>
-                <button className="text-xs text-neutral-600 underline">salva</button>
-              </form>
+              <Link href={`/lead?id=${l.id}`} className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-700 whitespace-nowrap">
+                {FASI_LEAD[l.fase]?.nome ?? l.fase} · lavora →
+              </Link>
               {!l.clienteGenerato && (
                 <form action={convertiLeadInCliente}>
                   <input type="hidden" name="id" value={l.id} />

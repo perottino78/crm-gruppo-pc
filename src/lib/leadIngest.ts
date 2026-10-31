@@ -2,6 +2,7 @@ import { randomBytes } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { BRANDS } from "@/lib/brands";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
+import { avviaNuovoLead, eseguiDopoRisposta } from "@/lib/automazioni/motore";
 
 export function slugBrand(nome: string): string {
   return nome.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -49,6 +50,9 @@ export type DatiLead = {
   brand?: string | null;
   fonte?: string | null;
   note?: string | null;
+  comune?: string | null;
+  cap?: string | null;
+  prodotto?: string | null;
   // Tracciamento Meta Lead Ads (idempotenza)
   externalId?: string | null;
   metaFormId?: string | null;
@@ -109,6 +113,9 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
       // provenienza uniforme (fb, utm_source=instagram, simulatore_web… → FACEBOOK, INSTAGRAM, SIMULATORE WEB)
       fonte: provenienzaDaFonte(d.fonte || "facebook"),
       note: d.note?.trim().slice(0, 2000) || null,
+      comune: d.comune?.trim().slice(0, 120) || null,
+      cap: d.cap?.trim().slice(0, 20) || null,
+      prodotto: d.prodotto?.trim().slice(0, 120) || null,
       metaLeadgenId: d.externalId ?? null,
       metaFormId: d.metaFormId ?? null,
       metaAdId: d.metaAdId ?? null,
@@ -123,5 +130,8 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
     }
     throw e;
   }
+  // percorso automatico: da classificare entro le 18:30 + avviso al centralino (Keap → CRM)
+  await avviaNuovoLead(l.id);
+  eseguiDopoRisposta();
   return { id: l.id, duplicato: false };
 }

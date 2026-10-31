@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere, scopeLeadWhere } from "@/lib/scope";
+import { FASI_APERTE } from "@/lib/automazioni/percorsi";
 
 export default async function DashboardPage({
   searchParams,
@@ -19,7 +20,7 @@ export default async function DashboardPage({
   const [preventiviAperti, valorePipeline, leadDaLavorare] = await Promise.all([
     prisma.preventivo.count({ where: { stato: "APERTO", ...brandFiltro, ...preventivoScope } }),
     prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO", ...brandFiltro, ...preventivoScope } }),
-    prisma.lead.count({ where: { fase: { in: ["NUOVO", "CONTATTATO"] }, ...brandFiltro, ...leadScope } }),
+    prisma.lead.count({ where: { fase: { in: FASI_APERTE }, ...brandFiltro, ...leadScope } }),
   ]);
 
   const taskAperti = await prisma.taskPratica.count({
