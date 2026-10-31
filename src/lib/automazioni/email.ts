@@ -11,8 +11,8 @@ export const CONTATTI = {
   centralino: process.env.MAIL_CENTRALINO || "promozionale@gruppopec.com",
   showroom: process.env.INDIRIZZO_SHOWROOM || "Corso Moncenisio 28, 10090 Rosta (TO)",
   sito: process.env.SITO_URL || "https://gruppopec.com",
-  // link alla scheda Google con le recensioni: se manca la lettera invita a cercarci su Google
-  recensioni: process.env.RECENSIONI_URL || "",
+  // pagina con le recensioni dei clienti (lettera 3)
+  recensioni: process.env.RECENSIONI_URL || "https://gruppopec.com/recensioni/",
 };
 
 export type DatiLeadEmail = {
@@ -63,6 +63,15 @@ export function riepilogoAppuntamento(d: DatiLeadEmail, luogo?: string): string 
   ].filter(Boolean).join("\n");
 }
 
+/** Il sabato o a ufficio chiuso il cliente può chiamare direttamente il suo consulente: telefono ed email, se ci sono. */
+export function contattiConsulente(d: DatiLeadEmail): string | null {
+  const v = d.venditore;
+  if (!v) return null;
+  const email = v.email && /.+@.+\..+/.test(v.email) && !v.email.endsWith(".invalid") ? v.email : null;
+  const recapiti = [v.telefono && `telefono ${v.telefono}`, email && `email ${email}`].filter(Boolean).join(", ");
+  return recapiti ? `Il sabato o quando il nostro ufficio è chiuso puoi contattare direttamente il tuo consulente ${v.nome}: ${recapiti}.` : null;
+}
+
 /** Marchio delle lettere di vendita: Solaris e Purafonte hanno la loro versione, tutto il resto è P&C. */
 export const famigliaLettere = (marchio?: string | null) => (/solaris/i.test(marchio ?? "") ? "SOLARIS" : /pura/i.test(marchio ?? "") ? "PURAFONTE" : "PC");
 
@@ -78,15 +87,15 @@ const CONTESTO_CHIAMATA: Record<string, { oggetto: string; frase: string }> = {
 
 export const MODELLI: Record<string, Modello> = {
   "seller-assignment-requested": { chiave: "seller-assignment-requested", versione: 1, categoria: "INTERNA" },
-  "appointment-confirmed-contact": { chiave: "appointment-confirmed-contact", versione: 1, categoria: "CLIENTE" },
+  "appointment-confirmed-contact": { chiave: "appointment-confirmed-contact", versione: 2, categoria: "CLIENTE" },
   "appointment-confirmed-seller": { chiave: "appointment-confirmed-seller", versione: 1, categoria: "INTERNA" },
-  "appointment-reminder-contact": { chiave: "appointment-reminder-contact", versione: 1, categoria: "CLIENTE" },
+  "appointment-reminder-contact": { chiave: "appointment-reminder-contact", versione: 2, categoria: "CLIENTE" },
   "appointment-reminder-seller": { chiave: "appointment-reminder-seller", versione: 1, categoria: "INTERNA" },
   "appointment-cancelled-seller": { chiave: "appointment-cancelled-seller", versione: 1, categoria: "INTERNA" },
   "cancellation-follow-up-requested": { chiave: "cancellation-follow-up-requested", versione: 1, categoria: "INTERNA" },
   "sales-letter-1": { chiave: "sales-letter-1", versione: 1, categoria: "CLIENTE" },
   "sales-letter-2": { chiave: "sales-letter-2", versione: 1, categoria: "CLIENTE" },
-  "sales-letter-3": { chiave: "sales-letter-3", versione: 1, categoria: "CLIENTE" },
+  "sales-letter-3": { chiave: "sales-letter-3", versione: 2, categoria: "CLIENTE" },
   "sales-letter-4": { chiave: "sales-letter-4", versione: 1, categoria: "CLIENTE" },
   "qualification-requested": { chiave: "qualification-requested", versione: 1, categoria: "INTERNA" },
   "request-received": { chiave: "request-received", versione: 1, categoria: "CLIENTE" },
@@ -154,6 +163,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         `Il nostro consulente tecnico${d.venditore ? ` ${d.venditore.nome}` : ""}${d.venditore?.telefono ? ` (telefono: ${d.venditore.telefono})` : ""} ti presenterà nel dettaglio le caratteristiche e i vantaggi dei prodotti P&C di tuo interesse. In questa occasione potrai comunicarci tutte le tue necessità e i tuoi desideri.`,
         "Per garantire condizioni più vantaggiose è richiesta la partecipazione di tutti i soggetti interessati all'acquisto durante l'incontro programmato.",
         `Se un imprevisto non ti permette di essere presente nella data o all'ora stabilita, contattaci al numero ${CONTATTI.telefonoUfficio}, così potremo concordare una nuova data o un orario differente.`,
+        contattiConsulente(d),
         "Nell'attesa di conoscerti meglio, ti auguriamo una buona giornata!\nGruppo P&C") };
     case "appointment-confirmed-seller":
       return { ...m, oggetto: `[CRM P&C] Nuovo appuntamento ${variante === "SHOWROOM" ? "in showroom" : "a casa"} — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
@@ -168,7 +178,8 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         ["Per sfruttare al meglio l'incontro:", "• è importante la presenza di tutte le persone che decideranno sull'acquisto;",
           famigliaLettere(d.marchio) === "SOLARIS" ? "• tieni a portata di mano le ultime bollette della luce: ci aiutano a calcolare il tuo risparmio;" : "• tieni a portata di mano idee, foto o esempi di ciò che ti piace;",
           "• segnati le domande da farci: rispondiamo a tutto."].join("\n"),
-        `Se non potrai essere presente, contattaci al numero ${CONTATTI.telefonoUfficio} per concordare una nuova data o un orario diverso.`, firmaCliente) };
+        `Se non potrai essere presente, contattaci al numero ${CONTATTI.telefonoUfficio} per concordare una nuova data o un orario diverso.`,
+        contattiConsulente(d), firmaCliente) };
     case "appointment-reminder-seller":
       return { ...m, oggetto: `[CRM P&C] Promemoria appuntamento — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
         `Ciao ${d.venditore ? nomeProprio(d.venditore.nome) : ""},`.replace(" ,", ","), `ti ricordiamo l'appuntamento con ${d.nome}${d.appuntamentoIl ? ` ${dataOra(d.appuntamentoIl)}` : ""}.`,
@@ -242,10 +253,12 @@ export function letteraDiVendita(n: number, d: DatiLeadEmail): { oggetto: string
       "• Dopo la posa non ti lasciamo solo: ti consegniamo il kit di manutenzione e restiamo il tuo riferimento.",
       "• Un team familiare, sempre presente in ufficio: quando chiami trovi persone che conoscono il tuo progetto."].join("\n"),
     firma) };
-  if (n === 3) return { oggetto: "Non crederci sulla parola: chiedilo ai nostri clienti", testo: p(
-    `Ciao ${nome},`, "le recensioni più belle sono quelle dei clienti che abbiamo visitato a fine posa.",
-    CONTATTI.recensioni ? `Su Google ne trovi tante, recentissime e tutte di clienti veri: ${CONTATTI.recensioni}` : "Su Google ne trovi tante, recentissime e tutte di clienti veri: cerca \"Gruppo P&C Rosta\" e leggile.",
-    "Il giorno dell'appuntamento potrai farci tutte le domande che vuoi: siamo abituati a spiegare ogni dettaglio, senza fretta.", firma) };
+  if (n === 3) return { oggetto: "Cosa dicono di noi le famiglie che ci hanno già scelto", testo: p(
+    `Ciao ${nome},`, "prima di affidare la propria casa a qualcuno, tutti fanno la stessa cosa: chiedono a chi ci è già passato. Ed è giusto così.",
+    "Per questo, a fine posa, andiamo di persona a trovare i nostri clienti: controlliamo insieme il lavoro finito e chiediamo com'è andata. Le loro parole sono la cosa di cui andiamo più fieri.",
+    `Qui trovi le loro recensioni, recentissime e tutte di persone vere che abbiamo seguito dal primo incontro fino all'ultimo dettaglio:\n${CONTATTI.recensioni}`,
+    "Leggine qualcuna: ritroverai quello che toccherai con mano anche tu, la consulenza senza fretta, la cura nella posa e un'azienda che resta al tuo fianco anche dopo i lavori.",
+    `Da 20 anni lavoriamo così, una famiglia alla volta. La prossima potrebbe essere la tua.${quando}`, firma) };
   return { oggetto: "Il tuo progetto, con il finanziamento cucito su misura", testo: p(
     `Ciao ${nome},`, "realizzare un progetto per la casa non deve essere un pensiero. Su molti prodotti abbiamo promozioni attive, e i nostri consulenti sono anche consulenti finanziari: insieme troviamo la soluzione di pagamento su misura per le tue esigenze.",
     `Durante l'incontro ti mostreremo le opportunità valide in questo momento per i prodotti che ti interessano.${quando}`, firma) };
