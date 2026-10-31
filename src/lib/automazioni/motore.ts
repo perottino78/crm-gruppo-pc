@@ -7,7 +7,8 @@ import { after } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
-import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito } from "./percorsi";
+import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare } from "./percorsi";
+import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
 import { chiusuraGiornata, troppoInRitardo } from "./tempi";
 import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
 
@@ -29,13 +30,31 @@ export async function evento(db: Db, leadId: string, tipo: string, testo: string
   await db.leadEvento.create({ data: { leadId, tipo, testo, utenteNome: utenteNome ?? null } });
 }
 
-/** Apre un nuovo ciclo per il lead: annulla le azioni future rimaste e programma il primo passo del percorso. */
-export async function avviaPercorso(db: Db, leadId: string, percorso: string, adesso: Date, richiamoIl?: Date | null) {
-  await db.invioProgrammato.updateMany({ where: { leadId, stato: "IN_ATTESA" }, data: { stato: "ANNULLATO", errore: "superato da un nuovo esito" } });
+type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null };
+
+/**
+ * Programma il prossimo passo utile del ciclo a partire da `da`. I passi da saltare (lettere troppo vicine
+ * all'appuntamento, promemoria già superati) si decidono qui, subito, e restano nello storico come SALTATO:
+ * così un'attesa lunga non fa mai scavalcare il promemoria del giorno prima.
+ */
+async function programmaDa(db: Db, leadId: string, run: string, percorso: string, da: number, riferimento: Date, date: DateLead) {
   const passi = PERCORSI[percorso] ?? [];
-  if (!passi.length) return;
-  const run = randomUUID();
-  await db.invioProgrammato.create({ data: { leadId, run, percorso, passo: 0, chiave: `${run}:0`, eseguiDopo: quandoPasso(passi[0].quando, adesso, richiamoIl) } });
+  for (let i = da; i < passi.length; i++) {
+    const quando = quandoPasso(passi[i].quando, riferimento, date);
+    const salta = passi[i].tipo === "EMAIL" ? daSaltare((passi[i] as { condizione?: Parameters<typeof daSaltare>[0] }).condizione, quando, riferimento, date.appuntamentoIl) : null;
+    if (!salta) {
+      await db.invioProgrammato.create({ data: { leadId, run, percorso, passo: i, chiave: `${run}:${i}`, eseguiDopo: quando } });
+      return;
+    }
+    await db.invioProgrammato.create({ data: { leadId, run, percorso, passo: i, chiave: `${run}:${i}`, eseguiDopo: quando, stato: "SALTATO", errore: salta, eseguitoIl: riferimento } });
+  }
+}
+
+/** Apre un nuovo ciclo per il lead: annulla le azioni future rimaste e programma il primo passo del percorso. */
+export async function avviaPercorso(db: Db, leadId: string, percorso: string, adesso: Date, date: DateLead = {}) {
+  await db.invioProgrammato.updateMany({ where: { leadId, stato: "IN_ATTESA" }, data: { stato: "ANNULLATO", errore: "superato da un nuovo esito" } });
+  if (!(PERCORSI[percorso] ?? []).length) return;
+  await programmaDa(db, leadId, randomUUID(), percorso, 0, adesso, date);
 }
 
 /** Lead appena arrivato (Facebook, landing, form): scadenza alle 18:30 e avviso al centralino. */
@@ -47,7 +66,7 @@ export async function avviaNuovoLead(leadId: string, adesso = new Date()) {
   });
 }
 
-export type EsitoLead = { leadId: string; esito: string; data?: Date | null; note?: string | null; utenteNome?: string | null };
+export type EsitoLead = { leadId: string; esito: string; data?: Date | null; note?: string | null; utenteNome?: string | null; venditoreId?: string | null; indirizzo?: string | null };
 
 /** Registra l'esito di una telefonata/classificazione e avvia il percorso corrispondente. Ritorna un errore leggibile. */
 export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<{ ok: true } | { ok: false; errore: string }> {
@@ -59,6 +78,13 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
   if (def.serveData && !e.data) return { ok: false, errore: def.serveData === "richiamo" ? "Indica data e ora del ricontatto." : "Indica data e ora dell'appuntamento." };
   if (def.serveData && e.data && e.data.getTime() < adesso.getTime() - 60_000) return { ok: false, errore: "La data indicata è già passata." };
   const quando = e.data ? e.data.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" }) : null;
+  const appuntamento = e.esito === "APPUNTAMENTO_CASA" || e.esito === "APPUNTAMENTO_SHOWROOM";
+  const indirizzo = e.indirizzo?.trim() || (e.esito === "APPUNTAMENTO_CASA" ? [lead.cap, lead.comune].filter(Boolean).join(" ") : "") || null;
+  if (e.esito === "APPUNTAMENTO_CASA" && !indirizzo) return { ok: false, errore: "Indica l'indirizzo dell'appuntamento a casa." };
+  const venditore = appuntamento && e.venditoreId ? await prisma.utente.findUnique({ where: { id: e.venditoreId }, select: { id: true, nome: true } }) : null;
+  if (appuntamento && e.venditoreId && !venditore) return { ok: false, errore: "Venditore non trovato." };
+  // appuntamento senza venditore: prima il centralino lo assegna, poi partono conferme e lettere
+  const percorso = appuntamento && !venditore ? e.esito.replace("APPUNTAMENTO_", "ASSEGNA_VENDITORE_") : e.esito;
   await prisma.$transaction(async (tx) => {
     await tx.lead.update({
       where: { id: e.leadId },
@@ -67,14 +93,68 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
         scadenzaAzione: scadenzaDopoEsito(e.esito, adesso, e.data),
         nonGestitoIl: null,
         ...(def.serveData === "richiamo" ? { richiamoIl: e.data } : {}),
-        ...(def.serveData === "appuntamento" ? { appuntamentoIl: e.data } : {}),
-        ...(e.note ? { note: [lead.note, `[${adesso.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} ${e.utenteNome ?? ""}] ${e.note}`].filter(Boolean).join("\n") } : {}),
+        ...(def.serveData === "appuntamento" ? { appuntamentoIl: e.data, venditoreId: venditore?.id ?? null, indirizzoAppuntamento: e.esito === "APPUNTAMENTO_CASA" ? indirizzo : null } : {}),
+        ...(e.note ? { note: [lead.note, `[${adesso.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}${e.utenteNome ? ` ${e.utenteNome}` : ""}] ${e.note}`].filter(Boolean).join("\n") } : {}),
       },
     });
-    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${e.note ? ` · ${e.note}` : ""}`, e.utenteNome);
-    await avviaPercorso(tx, e.leadId, e.esito, adesso, def.serveData === "richiamo" ? e.data : null);
+    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${venditore ? ` con ${venditore.nome}` : appuntamento ? " (venditore da assegnare)" : ""}${e.note ? ` · ${e.note}` : ""}`, e.utenteNome);
+    await avviaPercorso(tx, e.leadId, percorso, adesso, { richiamoIl: def.serveData === "richiamo" ? e.data : null, appuntamentoIl: def.serveData === "appuntamento" ? e.data : null });
   });
+  if (appuntamento || e.esito === "APPUNTAMENTO_ANNULLATO") await sincronizzaCalendario(e.leadId, e.utenteNome);
   return { ok: true };
+}
+
+/** Il centralino assegna (o cambia) il venditore di un appuntamento: partono conferme, lettere e promemoria. */
+export async function assegnaVenditore(leadId: string, venditoreId: string, utenteNome?: string | null, adesso = new Date()): Promise<{ ok: true } | { ok: false; errore: string }> {
+  const lead = await prisma.lead.findUnique({ where: { id: leadId } });
+  if (!lead || (lead.fase !== "APPUNTAMENTO_CASA" && lead.fase !== "APPUNTAMENTO_SHOWROOM") || !lead.appuntamentoIl) return { ok: false, errore: "Il lead non ha un appuntamento fissato." };
+  if (lead.appuntamentoIl.getTime() < adesso.getTime()) return { ok: false, errore: "L'appuntamento è già passato." };
+  const venditore = await prisma.utente.findUnique({ where: { id: venditoreId }, select: { id: true, nome: true } });
+  if (!venditore) return { ok: false, errore: "Venditore non trovato." };
+  if (lead.venditoreId === venditore.id) return { ok: true };
+  await prisma.$transaction(async (tx) => {
+    await tx.lead.update({ where: { id: leadId }, data: { venditoreId: venditore.id } });
+    await evento(tx, leadId, "lead.venditore", `Venditore dell'appuntamento: ${venditore.nome}`, utenteNome);
+    await avviaPercorso(tx, leadId, lead.fase, adesso, { appuntamentoIl: lead.appuntamentoIl });
+  });
+  await sincronizzaCalendario(leadId, utenteNome);
+  return { ok: true };
+}
+
+/**
+ * Riporta l'appuntamento del lead nel calendario del venditore: crea il cliente (se il lead non lo è ancora) e
+ * l'appuntamento, lo sposta se cambiano data/venditore, lo annulla se il cliente annulla. Non blocca mai l'esito.
+ */
+export async function sincronizzaCalendario(leadId: string, utenteNome?: string | null) {
+  try {
+    const lead = await prisma.lead.findUniqueOrThrow({ where: { id: leadId }, include: { clienteGenerato: { select: { id: true } } } });
+    const esistente = lead.appuntamentoId ? await prisma.appuntamento.findUnique({ where: { id: lead.appuntamentoId } }) : null;
+    if (lead.fase === "APPUNTAMENTO_ANNULLATO") {
+      if (esistente) await prisma.appuntamento.update({ where: { id: esistente.id }, data: { stato: "ANNULLATO" } });
+      return;
+    }
+    if ((lead.fase !== "APPUNTAMENTO_CASA" && lead.fase !== "APPUNTAMENTO_SHOWROOM") || !lead.venditoreId || !lead.appuntamentoIl) return;
+    const casa = lead.fase === "APPUNTAMENTO_CASA";
+    const clienteId = lead.clienteGenerato?.id ?? (await prisma.cliente.create({
+      data: {
+        nome: lead.nome, telefono: lead.telefono, email: lead.email, brandId: lead.brandId, leadOrigineId: lead.id,
+        origine: provenienzaDaFonte(lead.fonte), categoria: "Lead", responsabileId: lead.venditoreId,
+        comune: lead.comune, cap: lead.cap, indirizzo: casa ? lead.indirizzoAppuntamento : null,
+      },
+    })).id;
+    const dati = {
+      dataOra: lead.appuntamentoIl, utenteId: lead.venditoreId, stato: "PROGRAMMATO", durataMin: 90,
+      titolo: `Appuntamento ${casa ? "a casa" : "in showroom"}${lead.prodotto ? ` — ${lead.prodotto}` : ""}`,
+      luogo: casa ? lead.indirizzoAppuntamento : CONTATTI.showroom, note: lead.note,
+    };
+    if (esistente) await prisma.appuntamento.update({ where: { id: esistente.id }, data: dati });
+    else {
+      const a = await prisma.appuntamento.create({ data: { ...dati, clienteId, tipo: "COMMERCIALE", creatoDaNome: utenteNome ?? "Lead da lavorare" } });
+      await prisma.lead.update({ where: { id: leadId }, data: { appuntamentoId: a.id } });
+    }
+  } catch (err) {
+    await evento(prisma, leadId, "calendario.errore", `Calendario non aggiornato: ${(err as Error).message.slice(0, 150)}`).catch(() => undefined);
+  }
 }
 
 /** Il ciclo valido del lead è l'ultimo aperto: un passo di un ciclo vecchio non va eseguito né proseguito. */
@@ -82,8 +162,13 @@ async function cicloCorrente(leadId: string): Promise<string | null> {
   return (await prisma.invioProgrammato.findFirst({ where: { leadId }, orderBy: [{ createdAt: "desc" }, { passo: "desc" }], select: { run: true } }))?.run ?? null;
 }
 
-function datiEmail(l: { nome: string; telefono: string | null; email: string | null; comune: string | null; cap: string | null; prodotto: string | null; fonte: string; richiamoIl: Date | null; brand: { nome: string } }): DatiLeadEmail {
-  return { nome: l.nome, telefono: l.telefono, email: l.email, comune: l.comune, cap: l.cap, prodotto: l.prodotto, fonte: l.fonte, marchio: l.brand.nome, richiamoIl: l.richiamoIl };
+type LeadPerEmail = { nome: string; telefono: string | null; email: string | null; comune: string | null; cap: string | null; prodotto: string | null; fonte: string; note: string | null; richiamoIl: Date | null; appuntamentoIl: Date | null; indirizzoAppuntamento: string | null; brand: { nome: string } };
+function datiEmail(l: LeadPerEmail, venditore: { nome: string; telefono: string | null; email: string } | null): DatiLeadEmail {
+  return {
+    nome: l.nome, telefono: l.telefono, email: l.email, comune: l.comune, cap: l.cap, prodotto: l.prodotto, fonte: l.fonte, marchio: l.brand.nome,
+    richiamoIl: l.richiamoIl, appuntamentoIl: l.appuntamentoIl, indirizzoAppuntamento: l.indirizzoAppuntamento, note: l.note,
+    venditore: venditore ? { nome: venditore.nome, telefono: venditore.telefono, email: venditore.email } : null,
+  };
 }
 
 export type Resoconto = { eseguiti: number; email: number; soppresse: number; fallite: number; annullati: number; daVerificare: number; motivo?: string };
@@ -111,7 +196,7 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
     const passi = PERCORSI[job.percorso] ?? [];
     const passo = passi[job.passo];
     const lead = await prisma.lead.findUnique({ where: { id: job.leadId }, include: { brand: true } });
-    if (!lead || !passo || lead.fase !== job.percorso || (await cicloCorrente(lead.id)) !== job.run) { await chiudi({ stato: "ANNULLATO", errore: "il lead ha cambiato fase" }); r.annullati++; continue; }
+    if (!lead || !passo || lead.fase !== faseDelPercorso(job.percorso) || (await cicloCorrente(lead.id)) !== job.run) { await chiudi({ stato: "ANNULLATO", errore: "il lead ha cambiato fase" }); r.annullati++; continue; }
     if (troppoInRitardo(job.eseguiDopo, ora())) {
       await chiudi({ stato: "DA_VERIFICARE", errore: "in ritardo di oltre 24 ore: non inviato in automatico" });
       await evento(prisma, lead.id, "automazione.da_verificare", `"${passo.nome}" non inviato: in ritardo di oltre 24 ore.`);
@@ -125,10 +210,13 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       await chiudi({ stato: "FATTO" });
     } else {
       const link = { lead: linkLead(lead.id), disiscrizione: linkDisiscrizione(lead.id) };
-      const e = componiEmail(passo.modello, datiEmail(lead), link, passo.variante);
-      const a = passo.a === "CLIENTE" ? lead.email : CONTATTI.centralino;
+      const venditore = lead.venditoreId ? await prisma.utente.findUnique({ where: { id: lead.venditoreId }, select: { nome: true, telefono: true, email: true } }) : null;
+      const e = componiEmail(passo.modello, datiEmail(lead, venditore), link, passo.variante);
+      const a = passo.a === "CLIENTE" ? lead.email : passo.a === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
       const da = passo.a === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
-      const soppressa = passo.a === "CLIENTE" && (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto" : null);
+      const soppressa = passo.a === "CLIENTE"
+        ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto" : null)
+        : passo.a === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
       const base = { leadId: lead.id, chiave: e.chiave, versione: e.versione, categoria: e.categoria, da, a, oggetto: e.oggetto, testo: testoEmail(e, link), html: htmlEmail(e, link) };
       const reg = await prisma.emailLead.upsert({ where: { chiaveIdempotenza: job.chiave }, create: { ...base, chiaveIdempotenza: job.chiave, stato: "PREPARATA" }, update: {} });
       if (reg.stato === "INVIATA") {
@@ -160,9 +248,8 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       }
     }
     // passo concluso: si programma il successivo partendo da adesso (niente raffiche di arretrati)
-    const prossimo = passi[job.passo + 1];
-    if (prossimo && (await cicloCorrente(lead.id)) === job.run) {
-      await prisma.invioProgrammato.create({ data: { leadId: lead.id, run: job.run, percorso: job.percorso, passo: job.passo + 1, chiave: `${job.run}:${job.passo + 1}`, eseguiDopo: quandoPasso(prossimo.quando, ora(), lead.richiamoIl) } }).catch(() => undefined);
+    if (passi[job.passo + 1] && (await cicloCorrente(lead.id)) === job.run) {
+      await programmaDa(prisma, lead.id, job.run, job.percorso, job.passo + 1, ora(), { richiamoIl: lead.richiamoIl, appuntamentoIl: lead.appuntamentoIl }).catch(() => undefined);
     }
   }
   return r;

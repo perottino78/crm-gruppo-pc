@@ -76,20 +76,25 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   `EmailLead`, storico `LeadEvento`. Tempi Keap in `tempi.ts` (lun–sab 08:00, task alle 18:30, R/R+1/R+2). Esecuzione:
   `eseguiInviiScaduti()` dopo ogni esito, all'apertura del CRM (max 1/min), cron Vercel giornaliero e `GET /api/automazioni/esegui`.
   Accensione in Impostazioni (chiave `automazioni_lead_attive`, default pausa finché Keap è attivo). Testi in `email.ts`
-  (dal dossier Keap `crm-interno/docs/automazioni/lead-generation`). Fase 2: appuntamenti e lettere di vendita.
+  (dal dossier Keap `crm-interno/docs/automazioni/lead-generation`).
+  Fase 2 (appuntamenti): esito CASA/SHOWROOM con venditore → conferme cliente+venditore, 4 lettere di vendita (`letteraDiVendita`,
+  versioni P&C/Solaris/Purafonte, una al giorno lavorativo, mai nel giorno del promemoria), promemoria il giorno prima; senza
+  venditore → percorso `ASSEGNA_VENDITORE_*` (avviso al centralino) e poi `assegnaVenditore`. `sincronizzaCalendario` crea il
+  cliente e l'`Appuntamento` del venditore (spostato/annullato con il lead). Passi saltati decisi in `programmaDa` (stato SALTATO).
+  Da fare: Referee e Recovery (decisioni A-02/A-03 del dossier). Variabili facoltative: `RECENSIONI_URL`, `SITO_URL`.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 159, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 160, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

@@ -8,7 +8,8 @@ import { scopeLeadWhere } from "@/lib/scope";
 import { perInput } from "@/lib/calendario/tempo";
 import { FASI_LEAD, FASI_APERTE, ESITI, PERCORSI, esitiPossibili } from "@/lib/automazioni/percorsi";
 import { statoAutomazioni } from "@/lib/automazioni/motore";
-import { esitoLead } from "@/app/lead-percorso-actions";
+import { esitoLead, assegnaVenditoreLead } from "@/app/lead-percorso-actions";
+import { CONTATTI } from "@/lib/automazioni/email";
 
 type P = { vista?: string; id?: string; q?: string; fatto?: string; errore?: string };
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -26,7 +27,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
     : {};
   const filtroVista: Prisma.LeadWhereInput = vista === "dafare" ? { fase: { in: FASI_APERTE } } : vista === "chiusi" ? { fase: { notIn: FASI_APERTE } } : {};
   const where: Prisma.LeadWhereInput = { AND: [scope, ricerca, p.id ? { id: p.id } : filtroVista] };
-  const [lead, totali, stato] = await Promise.all([
+  const [lead, totali, stato, venditori] = await Promise.all([
     prisma.lead.findMany({
       where,
       orderBy: vista === "dafare" ? [{ scadenzaAzione: { sort: "asc", nulls: "last" } }, { createdAt: "asc" }] : [{ createdAt: "desc" }],
@@ -40,7 +41,10 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
     }),
     prisma.lead.groupBy({ by: ["fase"], where: { AND: [scope] }, _count: { _all: true } }),
     statoAutomazioni(),
+    prisma.utente.findMany({ where: { ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
   ]);
+  const nomeVenditore = (id?: string | null) => venditori.find((v) => v.id === id)?.nome;
+  const opzioniVenditori = venditori.map((v) => <option key={v.id} value={v.id}>{v.nome}</option>);
   const conta = (fasi: string[]) => totali.filter((t) => fasi.includes(t.fase)).reduce((s, t) => s + t._count._all, 0);
   const adesso = Date.now();
   const ritorno = `/lead?${new URLSearchParams(Object.entries({ vista: p.vista, q: p.q }).filter(([, v]) => v) as [string, string][])}`;
@@ -98,6 +102,18 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
               </div>
               {l.note && <p className="mt-2 text-xs text-neutral-700 whitespace-pre-line bg-neutral-50 rounded p-2">{l.note}</p>}
 
+              {(l.fase === "APPUNTAMENTO_CASA" || l.fase === "APPUNTAMENTO_SHOWROOM") && l.appuntamentoIl && (
+                <div className="mt-2 flex flex-wrap items-center gap-2 rounded border border-purple-200 bg-purple-50 px-3 py-2 text-sm">
+                  <span>📅 <b>{quando(l.appuntamentoIl)}</b> · {l.fase === "APPUNTAMENTO_CASA" ? `a casa: ${l.indirizzoAppuntamento ?? "—"}` : `showroom: ${CONTATTI.showroom}`}</span>
+                  <span>{l.venditoreId ? <>· venditore <b>{nomeVenditore(l.venditoreId) ?? "—"}</b> <Link href={`/calendario?giorno=${perInput(l.appuntamentoIl).slice(0, 10)}`} className="underline text-xs">calendario</Link></> : <b className="text-red-700">· ⚠️ venditore da assegnare</b>}</span>
+                  <form action={assegnaVenditoreLead} className="flex items-center gap-1 ml-auto">
+                    <input type="hidden" name="leadId" value={l.id} /><input type="hidden" name="ritorno" value={ritorno} />
+                    <select name="venditoreId" required defaultValue={l.venditoreId ?? ""} className={inp}><option value="" disabled>venditore…</option>{opzioniVenditori}</select>
+                    <button className="btn-3d btn-3d-purple text-xs px-3 py-1.5">{l.venditoreId ? "Cambia venditore" : "Assegna venditore"}</button>
+                  </form>
+                </div>
+              )}
+
               {classificazione ? (
                 <div className="mt-3 flex flex-wrap gap-2">
                   {["IN_TARGET", "FUORI_REGIONE"].map((e) => (
@@ -108,7 +124,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
                   ))}
                 </div>
               ) : (
-                <form action={esitoLead} className="mt-3 grid grid-cols-1 sm:grid-cols-[1.4fr_1fr_1.4fr_auto] gap-2 items-end">
+                <form action={esitoLead} className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 items-end">
                   <input type="hidden" name="leadId" value={l.id} /><input type="hidden" name="ritorno" value={ritorno} />
                   <label className="text-xs text-neutral-600">Esito della chiamata
                     <select name="esito" required defaultValue="" className={`${inp} w-full`}>
@@ -118,6 +134,12 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
                   </label>
                   <label className="text-xs text-neutral-600">Data e ora (ricontatto / appuntamento)
                     <input type="datetime-local" name="data" defaultValue={l.fase.startsWith("APPUNTAMENTO") && l.appuntamentoIl ? perInput(l.appuntamentoIl) : ""} className={`${inp} w-full`} />
+                  </label>
+                  <label className="text-xs text-neutral-600">Venditore (per l&apos;appuntamento)
+                    <select name="venditoreId" defaultValue={l.venditoreId ?? ""} className={`${inp} w-full`}><option value="">da assegnare dopo</option>{opzioniVenditori}</select>
+                  </label>
+                  <label className="text-xs text-neutral-600">Indirizzo (appuntamento a casa)
+                    <input name="indirizzo" defaultValue={l.indirizzoAppuntamento ?? [l.cap, l.comune].filter(Boolean).join(" ")} placeholder="via, numero, comune" className={`${inp} w-full`} />
                   </label>
                   <label className="text-xs text-neutral-600">Note utili al venditore
                     <input name="note" placeholder="facoltative" className={`${inp} w-full`} />

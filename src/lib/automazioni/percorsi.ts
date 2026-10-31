@@ -1,12 +1,28 @@
-// Percorsi automatici del lead (Fase 1): per ogni esito, quali email/solleciti partono e quando.
-// Ripresi dalla campagna Keap (acquisizione, In Target, Fuori Regione, Non risponde, Ricontatto, Non interessato).
+// Percorsi automatici del lead: per ogni esito, quali email/solleciti partono e quando.
+// Fase 1 dalla campagna Keap (acquisizione, In Target, Fuori Regione, Non risponde, Ricontatto, Non interessato);
+// Fase 2: appuntamento (conferme, lettere di vendita, promemoria) e annullamento.
 // Ogni nuovo esito annulla le azioni future del ciclo precedente. Funzioni pure: testabili senza database.
-import { chiusuraGiornata, dopoGiorniAlle08, scadenzaNuovoTentativo, stessaOraFra } from "./tempi";
+import { chiusuraGiornata, dopoGiorniAlle08, giornoDopoAlle08, scadenzaNuovoTentativo, stessaOraFra } from "./tempi";
+import { chiaveGiorno } from "@/lib/calendario/tempo";
 
-export type Quando = { subito: true } | { dopoGiorni: number; conSabato?: boolean } | { daRichiamo: number };
+export type Quando = { subito: true } | { dopoGiorni: number; conSabato?: boolean } | { giornoDopo: true } | { daRichiamo: number } | { daAppuntamento: number };
+// PRIMA_DEL_PROMEMORIA: lettera di vendita, si salta se cadrebbe nel giorno del promemoria o dopo (una email al giorno).
+// NON_GIA_PASSATO: promemoria, si salta se l'appuntamento è stato fissato a meno di 24 ore (basta la conferma).
+export type Condizione = "PRIMA_DEL_PROMEMORIA" | "NON_GIA_PASSATO";
 export type Passo =
-  | { tipo: "EMAIL"; modello: string; a: "CLIENTE" | "CENTRALINO"; variante?: string; quando: Quando; nome: string }
+  | { tipo: "EMAIL"; modello: string; a: "CLIENTE" | "CENTRALINO" | "VENDITORE"; variante?: string; quando: Quando; nome: string; condizione?: Condizione }
   | { tipo: "TIMEOUT"; quando: Quando; nome: string };
+
+const appuntamento = (luogo: "CASA" | "SHOWROOM"): Passo[] => [
+  { tipo: "EMAIL", modello: "appointment-confirmed-contact", variante: luogo, a: "CLIENTE", quando: { subito: true }, nome: "Conferma appuntamento (cliente)" },
+  { tipo: "EMAIL", modello: "appointment-confirmed-seller", variante: luogo, a: "VENDITORE", quando: { subito: true }, nome: "Nuovo appuntamento (venditore)" },
+  { tipo: "EMAIL", modello: "sales-letter-1", a: "CLIENTE", quando: { giornoDopo: true }, nome: "Lettera 1: chi siamo", condizione: "PRIMA_DEL_PROMEMORIA" },
+  { tipo: "EMAIL", modello: "sales-letter-2", a: "CLIENTE", quando: { giornoDopo: true }, nome: "Lettera 2: perché sceglierci", condizione: "PRIMA_DEL_PROMEMORIA" },
+  { tipo: "EMAIL", modello: "sales-letter-3", a: "CLIENTE", quando: { giornoDopo: true }, nome: "Lettera 3: cosa dicono i clienti", condizione: "PRIMA_DEL_PROMEMORIA" },
+  { tipo: "EMAIL", modello: "sales-letter-4", a: "CLIENTE", quando: { giornoDopo: true }, nome: "Lettera 4: promozioni e finanziamenti", condizione: "PRIMA_DEL_PROMEMORIA" },
+  { tipo: "EMAIL", modello: "appointment-reminder-contact", variante: luogo, a: "CLIENTE", quando: { daAppuntamento: -1 }, nome: "Promemoria il giorno prima (cliente)", condizione: "NON_GIA_PASSATO" },
+  { tipo: "EMAIL", modello: "appointment-reminder-seller", variante: luogo, a: "VENDITORE", quando: { daAppuntamento: -1 }, nome: "Promemoria il giorno prima (venditore)", condizione: "NON_GIA_PASSATO" },
+];
 
 export const PERCORSI: Record<string, Passo[]> = {
   NUOVO: [{ tipo: "EMAIL", modello: "qualification-requested", a: "CENTRALINO", quando: { subito: true }, nome: "Avviso al centralino: da classificare" }],
@@ -33,18 +49,41 @@ export const PERCORSI: Record<string, Passo[]> = {
     { tipo: "TIMEOUT", quando: { daRichiamo: 20 }, nome: "Non gestito dopo R+20" },
   ],
   NON_INTERESSATO: [{ tipo: "EMAIL", modello: "interest-closed", a: "CLIENTE", quando: { subito: true }, nome: "Restiamo in contatto (cliente)" }],
-  // Fase 2: conferme, promemoria e lettere di vendita degli appuntamenti
-  APPUNTAMENTO_CASA: [],
-  APPUNTAMENTO_SHOWROOM: [],
-  APPUNTAMENTO_ANNULLATO: [],
+  // Appuntamento fissato con il venditore già scelto
+  APPUNTAMENTO_CASA: appuntamento("CASA"),
+  APPUNTAMENTO_SHOWROOM: appuntamento("SHOWROOM"),
+  // Appuntamento fissato senza venditore: il centralino lo assegna, poi parte il percorso dell'appuntamento
+  ASSEGNA_VENDITORE_CASA: [{ tipo: "EMAIL", modello: "seller-assignment-requested", variante: "CASA", a: "CENTRALINO", quando: { subito: true }, nome: "Venditore da assegnare (centralino)" }],
+  ASSEGNA_VENDITORE_SHOWROOM: [{ tipo: "EMAIL", modello: "seller-assignment-requested", variante: "SHOWROOM", a: "CENTRALINO", quando: { subito: true }, nome: "Venditore da assegnare (centralino)" }],
+  APPUNTAMENTO_ANNULLATO: [
+    { tipo: "EMAIL", modello: "appointment-cancelled-seller", a: "VENDITORE", quando: { subito: true }, nome: "Appuntamento annullato (venditore)" },
+    { tipo: "EMAIL", modello: "cancellation-follow-up-requested", a: "CENTRALINO", quando: { subito: true }, nome: "Definisci il seguito (centralino)" },
+  ],
 };
 
+/** Fase del lead in cui un percorso resta valido (i percorsi "assegna venditore" vivono nella fase dell'appuntamento). */
+export const faseDelPercorso = (percorso: string) => percorso.replace(/^ASSEGNA_VENDITORE_/, "APPUNTAMENTO_");
+
 /** Quando eseguire un passo: `riferimento` è il momento in cui si è concluso il passo precedente (o l'esito). */
-export function quandoPasso(q: Quando, riferimento: Date, richiamoIl?: Date | null): Date {
+export function quandoPasso(q: Quando, riferimento: Date, date: { richiamoIl?: Date | null; appuntamentoIl?: Date | null } = {}): Date {
   if ("subito" in q) return riferimento;
   if ("dopoGiorni" in q) return dopoGiorniAlle08(riferimento, q.dopoGiorni, q.conSabato ?? true);
-  if (!richiamoIl) throw new Error("Manca la data del ricontatto");
-  return stessaOraFra(richiamoIl, q.daRichiamo);
+  if ("giornoDopo" in q) return giornoDopoAlle08(riferimento);
+  if ("daAppuntamento" in q) {
+    if (!date.appuntamentoIl) throw new Error("Manca la data dell'appuntamento");
+    return stessaOraFra(date.appuntamentoIl, q.daAppuntamento);
+  }
+  if (!date.richiamoIl) throw new Error("Manca la data del ricontatto");
+  return stessaOraFra(date.richiamoIl, q.daRichiamo);
+}
+
+/** Un passo con condizione va saltato? (lettere troppo vicine all'appuntamento, promemoria già superati) */
+export function daSaltare(c: Condizione | undefined, previsto: Date, programmatoIl: Date, appuntamentoIl?: Date | null): string | null {
+  if (!c || !appuntamentoIl) return null;
+  const promemoria = appuntamentoIl.getTime() - 24 * 3600 * 1000;
+  if (c === "PRIMA_DEL_PROMEMORIA" && chiaveGiorno(previsto) >= chiaveGiorno(new Date(promemoria))) return "troppo vicina all'appuntamento";
+  if (c === "NON_GIA_PASSATO" && previsto.getTime() < programmatoIl.getTime() - 60_000) return "appuntamento fissato a meno di 24 ore: basta la conferma";
+  return null;
 }
 
 // ---- Fasi ed esiti del lead ----
@@ -54,8 +93,8 @@ export const FASI_LEAD: Record<string, { nome: string; azione: string | null; ch
   IN_TARGET: { nome: "In target", azione: "Chiamata di prequalifica", colore: "bg-green-100 text-green-900" },
   NON_RISPONDE: { nome: "Non risponde", azione: "Nuovo tentativo di chiamata", colore: "bg-amber-100 text-amber-900" },
   DA_RICHIAMARE: { nome: "Da richiamare", azione: "Ricontatto concordato", colore: "bg-amber-100 text-amber-900" },
-  APPUNTAMENTO_CASA: { nome: "Appuntamento a casa", azione: "Appuntamento fissato", colore: "bg-purple-100 text-purple-900" },
-  APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento in showroom", azione: "Appuntamento fissato", colore: "bg-purple-100 text-purple-900" },
+  APPUNTAMENTO_CASA: { nome: "Appuntamento a casa", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
+  APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento in showroom", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato", azione: "Definisci il seguito", colore: "bg-red-100 text-red-900" },
   NON_INTERESSATO: { nome: "Non interessato", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
   FUORI_REGIONE: { nome: "Fuori regione", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
@@ -87,6 +126,7 @@ export function esitiPossibili(fase: string): string[] {
 
 /** Scadenza dell'azione da fare dopo l'esito (le fasi chiuse non hanno scadenza). */
 export function scadenzaDopoEsito(esito: string, adesso: Date, data?: Date | null): Date | null {
+  // appuntamento fissato: la "scadenza" è l'appuntamento stesso
   if (esito === "DA_RICHIAMARE" || esito === "APPUNTAMENTO_CASA" || esito === "APPUNTAMENTO_SHOWROOM") return data ?? null;
   if (esito === "NON_RISPONDE") return scadenzaNuovoTentativo(adesso);
   if (esito === "FUORI_REGIONE" || esito === "NON_INTERESSATO") return null;
