@@ -56,6 +56,11 @@ export default async function ImpostazioniPage() {
         <span className="block text-xs text-neutral-600">Link per le inserzioni, indirizzo per collegare il gestionale pubblicità e Meta Lead Ads.</span>
       </Link>
 
+      <Link href="/impostazioni/automazioni" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-4 hover:border-neutral-400">
+        <span className="text-base font-bold text-neutral-900">✉️ Email automatiche dei lead (ex Keap) →</span>
+        <span className="block text-xs text-neutral-600">Accensione/pausa, stato della posta, registro delle email, anteprima dei testi dei percorsi.</span>
+      </Link>
+
       <Link href="/impostazioni/flusso" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
         <span className="text-base font-bold text-neutral-900">Flusso pratiche fra uffici: task ed email →</span>
         <span className="block text-xs text-neutral-600">Per ogni fase: ufficio, fase successiva, testo del task e email con testo personalizzabile.</span>

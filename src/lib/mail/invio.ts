@@ -32,17 +32,18 @@ function smtp() {
 export type EsitoMail = { inviata: boolean; motivo?: string };
 
 /** Invia una email. Non lancia mai errori: un problema di posta non deve bloccare il lavoro nel CRM. */
-export async function inviaMail(m: { a: string[]; oggetto: string; testo: string; rispondiA?: string | null; invito?: { metodo: "REQUEST" | "CANCEL"; ics: string } }): Promise<EsitoMail> {
+export async function inviaMail(m: { a: string[]; oggetto: string; testo: string; html?: string; da?: string; rispondiA?: string | null; invito?: { metodo: "REQUEST" | "CANCEL"; ics: string } }): Promise<EsitoMail> {
   const a = [...new Set(m.a.map((x) => x.trim()).filter((x) => /.+@.+\..+/.test(x)))];
   if (!a.length) return { inviata: false, motivo: "nessun indirizzo email valido" };
   if (!mailConfigurata()) return { inviata: false, motivo: "invio automatico non configurato" };
   try {
     await smtp().sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
+      from: m.da || process.env.MAIL_FROM || process.env.SMTP_USER,
       to: a.join(", "),
       replyTo: m.rispondiA || undefined,
       subject: m.oggetto,
       text: m.testo,
+      ...(m.html ? { html: m.html } : {}),
       // Invito calendario: i programmi di posta (Gmail, Outlook, iPhone) lo mostrano con "Aggiungi al calendario"
       ...(m.invito ? { icalEvent: { method: m.invito.metodo, filename: "invito.ics", content: m.invito.ics } } : {}),
     });

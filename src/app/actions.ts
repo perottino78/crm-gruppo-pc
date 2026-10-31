@@ -8,6 +8,7 @@ import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura"
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
 import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
+import { avviaNuovoLead, eseguiDopoRisposta } from "@/lib/automazioni/motore";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -47,7 +48,7 @@ export async function creaLead(formData: FormData) {
   if (!nome || !brandId) return;
   const utente = await getCurrentUser();
 
-  await prisma.lead.create({
+  const lead = await prisma.lead.create({
     data: {
       nome,
       telefono: str(formData, "telefono"),
@@ -57,6 +58,8 @@ export async function creaLead(formData: FormData) {
       telefonistaId: utente?.id,
     },
   });
+  await avviaNuovoLead(lead.id);
+  eseguiDopoRisposta();
   revalidatePath("/clienti");
   revalidatePath("/");
 }

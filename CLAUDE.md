@@ -70,19 +70,26 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   percentuale del fornitore su griglie `Prodotto.prezzoBase`, optional a prezzo fisso del listino (`Optional.listino` = tipologia o
   `listinoDiTipologia`) e articoli del fornitore; storico in `AumentoListino` con i valori di prima → "Annulla".
   Attenzione: le rotte `seed-*` riscrivono i prezzi di griglia dai dati originali (cancellerebbero gli aumenti).
+- **Lead da lavorare + email automatiche (ex Keap, Fase 1)** (`/lead`, `/impostazioni/automazioni`, `src/lib/automazioni/`):
+  fasi `Lead.fase` NUOVO → IN_TARGET/FUORI_REGIONE → NON_RISPONDE/DA_RICHIAMARE/APPUNTAMENTO_*/NON_INTERESSATO; ogni esito
+  (`registraEsito`) annulla gli invii futuri e avvia il percorso (`PERCORSI`); invii persistenti in `InvioProgrammato`, registro
+  `EmailLead`, storico `LeadEvento`. Tempi Keap in `tempi.ts` (lun–sab 08:00, task alle 18:30, R/R+1/R+2). Esecuzione:
+  `eseguiInviiScaduti()` dopo ogni esito, all'apertura del CRM (max 1/min), cron Vercel giornaliero e `GET /api/automazioni/esegui`.
+  Accensione in Impostazioni (chiave `automazioni_lead_attive`, default pausa finché Keap è attivo). Testi in `email.ts`
+  (dal dossier Keap `crm-interno/docs/automazioni/lead-generation`). Fase 2: appuntamenti e lettere di vendita.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 148, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 159, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
@@ -96,7 +103,9 @@ tipi ✓ · test unitari ✓ · collaudi toccati ✓ · `next build` ✓ · se c
 `MAIL_FROM`. La posta aziendale è su hosting proprio (nome.cognome@gruppopec.com), non Google Workspace.
 
 ## In sospeso (ottobre 2026)
-- Inserire su Vercel le variabili SMTP, poi provare un invito di calendario verso Ugo.
+- Inserire su Vercel le variabili SMTP (la casella deve poter spedire come promozionale@ e marketing@gruppopec.com), poi
+  spegnere in Keap i percorsi e accendere le email automatiche in Impostazioni › Email automatiche.
+- Consigliato: un controllo esterno ogni 5-10 minuti su `GET /api/automazioni/esegui` (es. cron-job.org) per gli invii a orario.
 - Inserire `ANTHROPIC_API_KEY` su Vercel (lettura AI di bolle e fatture).
 - Consigliato: database di sviluppo separato (ramo Neon) per non far girare le anteprime sul DB di produzione.
 - Documento "flusso pratica per ufficio": cosa fa ciascun ufficio e come usare il CRM.

@@ -41,6 +41,7 @@ export default async function Pagina({
       email,
       brand: b!.nome,
       fonte: String(fd.get("fonte") ?? "facebook"),
+      prodotto: String(fd.get("interesse") ?? "") || null,
       note: [String(fd.get("interesse") ?? ""), String(fd.get("campagna") ?? "") && `Campagna: ${fd.get("campagna")}`, String(fd.get("messaggio") ?? "")]
         .filter(Boolean)
         .join(" · "),

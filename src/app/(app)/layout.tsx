@@ -4,10 +4,18 @@ import Sidebar from "@/components/Sidebar";
 import AccentBar from "@/components/AccentBar";
 import { getCurrentUser } from "@/lib/auth";
 import { logout } from "@/app/actions";
+import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
+
+// Mentre qualcuno usa il CRM gli invii scaduti partono anche senza il controllo periodico (al massimo una volta al minuto).
+let ultimoControllo = 0;
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
+  if (Date.now() - ultimoControllo > 60_000) {
+    ultimoControllo = Date.now();
+    eseguiDopoRisposta();
+  }
 
   return (
     <div className="flex min-h-screen">

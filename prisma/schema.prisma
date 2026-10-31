@@ -83,6 +83,82 @@ model Lead {
   metaFormId      String?
   metaAdId        String?
   createdAt       DateTime @default(now())
+
+  // ===== Percorso del lead (prequalifica ed email automatiche, come in Keap) =====
+  // fase: NUOVO (da classificare) → IN_TARGET / FUORI_REGIONE → NON_RISPONDE / DA_RICHIAMARE /
+  // APPUNTAMENTO_CASA / APPUNTAMENTO_SHOWROOM / APPUNTAMENTO_ANNULLATO / NON_INTERESSATO
+  comune         String?
+  cap            String?
+  prodotto       String?
+  // Scadenza dell'azione da fare adesso (chiusura alle 18:30 ora di Roma, o la data concordata)
+  scadenzaAzione DateTime?
+  richiamoIl     DateTime?
+  appuntamentoIl DateTime?
+  // Solleciti finiti senza esito: il lead è rimasto "non gestito"
+  nonGestitoIl   DateTime?
+  disiscritto    Boolean            @default(false)
+  disiscrittoIl  DateTime?
+  emailLead      EmailLead[]
+  invii          InvioProgrammato[]
+  eventi         LeadEvento[]
+}
+
+// Registro di ogni email del percorso lead (al cliente o interna): cosa, a chi, quando, com'è andata.
+model EmailLead {
+  id                String    @id @default(cuid())
+  lead              Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId            String
+  chiave            String // es. request-received (vedi src/lib/automazioni/email.ts)
+  versione          Int       @default(1)
+  categoria         String // CLIENTE | INTERNA
+  da                String?
+  a                 String?
+  oggetto           String
+  testo             String
+  html              String
+  stato             String // INVIATA | FALLITA | SOPPRESSA
+  motivo            String?
+  // Un invio programmato produce al massimo un'email
+  chiaveIdempotenza String?   @unique
+  inviataIl         DateTime?
+  createdAt         DateTime  @default(now())
+
+  @@index([leadId, createdAt])
+}
+
+// Azione futura di un percorso automatico (email, sollecito, timeout). Persistente: sopravvive ai riavvii.
+model InvioProgrammato {
+  id           String    @id @default(cuid())
+  lead         Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId       String
+  run          String // identifica il ciclo: ogni nuovo esito apre un ciclo nuovo e annulla il precedente
+  percorso     String // es. IN_TARGET, NON_RISPONDE (vedi src/lib/automazioni/percorsi.ts)
+  passo        Int
+  chiave       String    @unique // run:passo — un passo non viene mai eseguito due volte
+  eseguiDopo   DateTime
+  stato        String    @default("IN_ATTESA") // IN_ATTESA | IN_CORSO | FATTO | ANNULLATO | FALLITO | DA_VERIFICARE
+  tentativi    Int       @default(0)
+  errore       String?
+  bloccatoFino DateTime?
+  emailId      String?
+  createdAt    DateTime  @default(now())
+  eseguitoIl   DateTime?
+
+  @@index([stato, eseguiDopo])
+  @@index([leadId, stato])
+}
+
+// Storico del lead: esiti, email, solleciti (solo aggiunte, mai modifiche)
+model LeadEvento {
+  id         String   @id @default(cuid())
+  lead       Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId     String
+  tipo       String
+  testo      String
+  utenteNome String?
+  createdAt  DateTime @default(now())
+
+  @@index([leadId, createdAt])
 }
 
 model Cliente {

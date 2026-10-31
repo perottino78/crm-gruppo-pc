@@ -6,6 +6,7 @@ import { brandInfo } from "@/lib/brands";
 
 const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean; soloOrdini?: boolean }[] = [
   { href: "/", label: "Dashboard", icon: "🏠" },
+  { href: "/lead", label: "Lead da lavorare", icon: "📞" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/calendario", label: "Calendario", icon: "📅" },
