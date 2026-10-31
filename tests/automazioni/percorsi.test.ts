@@ -81,6 +81,12 @@ test("fase 2: percorso dell'appuntamento e lettere di vendita", () => {
   const link = { lead: "https://crm/lead?id=1" };
   const conferma = componiEmail("appointment-confirmed-contact", { nome: "Anna Bianchi", appuntamentoIl: app, venditore: { nome: "Marco Piccatti", telefono: "333 1" } }, link, "SHOWROOM");
   assert.ok(conferma.testo.includes("Corso Moncenisio 28") && conferma.testo.includes("Marco Piccatti (telefono: 333 1)"));
+  assert.ok(conferma.testo.includes("Il sabato o quando il nostro ufficio è chiuso puoi contattare direttamente il tuo consulente Marco Piccatti: telefono 333 1."));
+  const conMail = componiEmail("appointment-reminder-contact", { nome: "Anna", venditore: { nome: "Marco Piccatti", telefono: "333 1", email: "marco@gruppopec.com" } }, link, "CASA");
+  assert.ok(conMail.testo.includes("telefono 333 1, email marco@gruppopec.com"));
+  const senzaRecapiti = componiEmail("appointment-confirmed-contact", { nome: "Anna", venditore: { nome: "Paolo", email: "p@senza-email.invalid" } }, link, "CASA");
+  assert.ok(!senzaRecapiti.testo.includes("ufficio è chiuso"));
+  assert.ok(letteraDiVendita(3, { nome: "Anna" }).testo.includes("https://gruppopec.com/recensioni/"));
   const promemoria = componiEmail("appointment-reminder-contact", { nome: "Anna", marchio: "Solaris", appuntamentoIl: app, indirizzoAppuntamento: "Via Roma 1, Rivoli" }, link, "CASA");
   assert.ok(promemoria.testo.includes("Via Roma 1, Rivoli") && promemoria.testo.includes("bollette"));
   assert.ok(componiEmail("appointment-confirmed-seller", { nome: "Anna", venditore: { nome: "Marco Piccatti" } }, link, "CASA").testo.startsWith("Ciao Marco,"));

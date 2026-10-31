@@ -81,7 +81,8 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   versioni P&C/Solaris/Purafonte, una al giorno lavorativo, mai nel giorno del promemoria), promemoria il giorno prima; senza
   venditore → percorso `ASSEGNA_VENDITORE_*` (avviso al centralino) e poi `assegnaVenditore`. `sincronizzaCalendario` crea il
   cliente e l'`Appuntamento` del venditore (spostato/annullato con il lead). Passi saltati decisi in `programmaDa` (stato SALTATO).
-  Da fare: Referee e Recovery (decisioni A-02/A-03 del dossier). Variabili facoltative: `RECENSIONI_URL`, `SITO_URL`.
+  Da fare: Referee e Recovery (decisioni A-02/A-03 del dossier). Variabili facoltative: `RECENSIONI_URL` (default gruppopec.com/recensioni), `SITO_URL`. Conferma e promemoria al cliente
+  riportano telefono ed email del consulente (`contattiConsulente`) per il sabato e gli orari di ufficio chiuso.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
