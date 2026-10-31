@@ -24,6 +24,11 @@ export function dopoGiorniAlle08(da: Date, giorni: number, conSabato = true): Da
   return primaFinestra08(new Date(da.getTime() + giorni * 24 * ORA), conSabato);
 }
 
+/** Il giorno lavorativo (lun–sab) successivo a `da`, alle 08:00: per le lettere, una al giorno. */
+export function giornoDopoAlle08(da: Date): Date {
+  return primaFinestra08(daOraRoma(`${aggiungiGiorni(chiaveGiorno(da), 1)}T00:00`)!);
+}
+
 /** Scadenza di un task automatico: le 18:30 di oggi, o di domani se è già passata quell'ora. */
 export function chiusuraGiornata(creato: Date): Date {
   const p = partiRoma(creato);

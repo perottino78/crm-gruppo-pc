@@ -5,14 +5,28 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { statoAutomazioni } from "@/lib/automazioni/motore";
-import { PERCORSI, ESITI } from "@/lib/automazioni/percorsi";
+import { PERCORSI, ESITI, type Quando } from "@/lib/automazioni/percorsi";
 import { CONTATTI, MODELLI, componiEmail } from "@/lib/automazioni/email";
 import { impostaAutomazioni, eseguiOra } from "@/app/lead-percorso-actions";
 
 type P = { ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-const ESEMPIO = { nome: "Mario Rossi", telefono: "333 1234567", email: "mario.rossi@email.it", comune: "Rivoli", cap: "10098", prodotto: "Pergola bioclimatica", fonte: "FACEBOOK", marchio: "P&C", richiamoIl: new Date(Date.now() + 2 * 86400000) };
-const VARIANTI: Record<string, string[]> = { "call-requested": ["initial-prequalification", "scheduled-first-contact", "call-unanswered-reminder"] };
+const ESEMPIO = {
+  nome: "Mario Rossi", telefono: "333 1234567", email: "mario.rossi@email.it", comune: "Rivoli", cap: "10098", prodotto: "Pergola bioclimatica", fonte: "FACEBOOK", marchio: "P&C",
+  richiamoIl: new Date(Date.now() + 2 * 86400000), appuntamentoIl: new Date(Date.now() + 5 * 86400000), indirizzoAppuntamento: "Via Roma 10, 10098 Rivoli",
+  note: "Interessato anche alle zanzariere", venditore: { nome: "Marco Piccatti", telefono: "333 0000000", email: "marco.piccatti@gruppopec.com" },
+};
+const NOME_PERCORSO: Record<string, string> = { NUOVO: "Nuovo lead", ASSEGNA_VENDITORE_CASA: "Appuntamento a casa senza venditore", ASSEGNA_VENDITORE_SHOWROOM: "Appuntamento in showroom senza venditore" };
+const VARIANTI: Record<string, string[]> = {
+  "call-requested": ["initial-prequalification", "scheduled-first-contact", "call-unanswered-reminder"],
+  "appointment-confirmed-contact": ["CASA", "SHOWROOM"], "appointment-reminder-contact": ["CASA", "SHOWROOM"],
+};
+const descriviQuando = (q: Quando) =>
+  "subito" in q ? "subito"
+    : "dopoGiorni" in q ? `dopo almeno ${q.dopoGiorni} giorn${q.dopoGiorni === 1 ? "o" : "i"}, alle 08:00 (lun–${q.conSabato === false ? "ven" : "sab"})`
+      : "giornoDopo" in q ? "il giorno lavorativo dopo, alle 08:00"
+      : "daAppuntamento" in q ? "il giorno prima dell'appuntamento, alla stessa ora"
+        : `giorno del ricontatto${q.daRichiamo ? ` +${q.daRichiamo}` : ""}`;
 
 /** Email automatiche dei lead: accensione, stato della posta, registro e anteprima dei testi. */
 export default async function AutomazioniPage({ searchParams }: { searchParams: Promise<P> }) {
@@ -78,8 +92,8 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
         <p className="font-semibold">Percorsi e testi (anteprima con dati di esempio)</p>
         {Object.entries(PERCORSI).filter(([, passi]) => passi.length).map(([k, passi]) => (
           <div key={k} className="text-sm">
-            <p className="font-medium">{k === "NUOVO" ? "Nuovo lead" : ESITI[k]?.nome ?? k}</p>
-            <ol className="list-decimal ml-5 text-neutral-700">{passi.map((s, i) => <li key={i}>{s.nome} — {"subito" in s.quando ? "subito" : "dopoGiorni" in s.quando ? `dopo almeno ${s.quando.dopoGiorni} giorn${s.quando.dopoGiorni === 1 ? "o" : "i"}, alle 08:00 (lun–${s.quando.conSabato === false ? "ven" : "sab"})` : `giorno del ricontatto${s.quando.daRichiamo ? ` +${s.quando.daRichiamo}` : ""}`}</li>)}</ol>
+            <p className="font-medium">{NOME_PERCORSO[k] ?? ESITI[k]?.nome ?? k}</p>
+            <ol className="list-decimal ml-5 text-neutral-700">{passi.map((x, n) => <li key={n}>{x.nome} — {descriviQuando(x.quando)}{x.tipo === "EMAIL" && x.condizione === "PRIMA_DEL_PROMEMORIA" ? " (solo se c'è tempo prima del promemoria)" : ""}</li>)}</ol>
           </div>
         ))}
         {Object.keys(MODELLI).flatMap((m) => (VARIANTI[m] ?? [undefined]).map((v) => ({ m, v }))).map(({ m, v }) => {

@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { scopeLeadWhere } from "@/lib/scope";
-import { registraEsito, eseguiDopoRisposta, eseguiInviiScaduti, CHIAVE_ATTIVE } from "@/lib/automazioni/motore";
+import { registraEsito, assegnaVenditore, eseguiDopoRisposta, eseguiInviiScaduti, CHIAVE_ATTIVE } from "@/lib/automazioni/motore";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const torna = (ritorno: string | null, parametri: Record<string, string>) => {
@@ -27,12 +27,30 @@ export async function esitoLead(fd: FormData) {
   // solo chi vede il lead può registrarne l'esito
   const visibile = await prisma.lead.count({ where: { AND: [{ id: leadId }, scopeLeadWhere(u)] } });
   if (!visibile) redirect(torna(ritorno, { errore: "Lead non trovato." }));
-  const r = await registraEsito({ leadId, esito, data: daOraRoma(str(fd, "data")), note: str(fd, "note"), utenteNome: u.nome });
+  const r = await registraEsito({ leadId, esito, data: daOraRoma(str(fd, "data")), note: str(fd, "note"), utenteNome: u.nome, venditoreId: str(fd, "venditoreId"), indirizzo: str(fd, "indirizzo") });
   if (!r.ok) redirect(torna(ritorno, { errore: r.errore, id: leadId }));
   eseguiDopoRisposta();
   revalidatePath("/lead");
   revalidatePath("/clienti");
   revalidatePath("/");
+  redirect(torna(ritorno, { fatto: leadId }));
+}
+
+/** Il centralino sceglie (o cambia) il venditore dell'appuntamento: partono conferme, lettere e promemoria. */
+export async function assegnaVenditoreLead(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const leadId = str(fd, "leadId");
+  const venditoreId = str(fd, "venditoreId");
+  const ritorno = str(fd, "ritorno");
+  if (!leadId || !venditoreId) redirect(torna(ritorno, { errore: "Scegli il venditore." }));
+  const visibile = await prisma.lead.count({ where: { AND: [{ id: leadId }, scopeLeadWhere(u)] } });
+  if (!visibile) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  const r = await assegnaVenditore(leadId, venditoreId, u.nome);
+  if (!r.ok) redirect(torna(ritorno, { errore: r.errore, id: leadId }));
+  eseguiDopoRisposta();
+  revalidatePath("/lead");
+  revalidatePath("/calendario");
   redirect(torna(ritorno, { fatto: leadId }));
 }
 

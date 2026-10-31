@@ -87,20 +87,24 @@ model Lead {
   // ===== Percorso del lead (prequalifica ed email automatiche, come in Keap) =====
   // fase: NUOVO (da classificare) → IN_TARGET / FUORI_REGIONE → NON_RISPONDE / DA_RICHIAMARE /
   // APPUNTAMENTO_CASA / APPUNTAMENTO_SHOWROOM / APPUNTAMENTO_ANNULLATO / NON_INTERESSATO
-  comune         String?
-  cap            String?
-  prodotto       String?
+  comune                String?
+  cap                   String?
+  prodotto              String?
   // Scadenza dell'azione da fare adesso (chiusura alle 18:30 ora di Roma, o la data concordata)
-  scadenzaAzione DateTime?
-  richiamoIl     DateTime?
-  appuntamentoIl DateTime?
+  scadenzaAzione        DateTime?
+  richiamoIl            DateTime?
+  appuntamentoIl        DateTime?
+  // Appuntamento fissato dalla prequalifica (Fase 2): venditore, indirizzo (a casa) e appuntamento creato nel calendario
+  venditoreId           String?
+  indirizzoAppuntamento String?
+  appuntamentoId        String?
   // Solleciti finiti senza esito: il lead è rimasto "non gestito"
-  nonGestitoIl   DateTime?
-  disiscritto    Boolean            @default(false)
-  disiscrittoIl  DateTime?
-  emailLead      EmailLead[]
-  invii          InvioProgrammato[]
-  eventi         LeadEvento[]
+  nonGestitoIl          DateTime?
+  disiscritto           Boolean            @default(false)
+  disiscrittoIl         DateTime?
+  emailLead             EmailLead[]
+  invii                 InvioProgrammato[]
+  eventi                LeadEvento[]
 }
 
 // Registro di ogni email del percorso lead (al cliente o interna): cosa, a chi, quando, com'è andata.
