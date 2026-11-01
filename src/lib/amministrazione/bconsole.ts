@@ -5,6 +5,7 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { chiaveFattura } from "@/lib/fatture/fatturapa";
 import { nomeNorm, sezionaleDaNumero } from "@/lib/fatture/vendite";
+import { categoriaFattura, descrizioneBreve } from "@/lib/report/categorie";
 
 const cent = (n: number) => Math.round(n * 100) / 100;
 const pivaNorm = (p: string | null | undefined) => (p ?? "").toUpperCase().replace(/^IT/, "").replace(/\s/g, "");
@@ -30,7 +31,26 @@ export type DocumentoBC = {
   tipologia?: string | null; // P&C, Solaris, Pura Fonte, Plasma30
   progetti?: string[];
   rate: RataBC[];
+  // per i report (vendite): sigla del venditore, righe della fattura e descrizione del progetto BConsole
+  venditore?: string | null;
+  righe?: string[];
+  progettoDescrizione?: string | null;
 };
+
+/** Campi dei report di una fattura di vendita: venditore, progetto, linea di prodotto, descrizione delle righe. */
+export function datiReportVendita(d: DocumentoBC) {
+  return {
+    venditore: d.venditore?.trim().toUpperCase() || null,
+    progetto: d.progetti?.[0] ?? null,
+    categoria: categoriaFattura({ progetto: d.progettoDescrizione, righe: d.righe, riferimento: d.riferimento, marchio: d.tipologia }),
+    descrizione: descrizioneBreve(d.righe ?? []) ?? d.progettoDescrizione?.replace(/\s*Rif\.prev\..*$/i, "").trim() ?? null,
+  };
+}
+
+/** Solo i campi ancora vuoti (non si sovrascrive ciò che è già stato scritto). */
+export function soloVuoti<T extends Record<string, unknown>>(attuale: Record<string, unknown>, nuovi: T): Partial<T> {
+  return Object.fromEntries(Object.entries(nuovi).filter(([k, v]) => v !== null && v !== undefined && v !== "" && (attuale[k] === null || attuale[k] === undefined || attuale[k] === ""))) as Partial<T>;
+}
 
 /** Stato della rata in BConsole → come la tratta il CRM. */
 export function statoRata(dsc: string): "PAGATA" | "RITENUTA" | "STORNATA" | "PARZIALE" | "APERTA" {
@@ -99,8 +119,12 @@ export async function importaVenditaBC(d: DocumentoBC, e: Esito, prova = false) 
   const rate = d.rate.filter((r) => r.importo !== 0);
   if (esiste) {
     if (prova) { e.invariate++; return; }
-    // già nel CRM: si allineano solo gli stati delle rate venute da BConsole
+    // già nel CRM: si completano i campi dei report ancora vuoti e si allineano gli stati delle rate venute da BConsole
+    // "Altro" si può migliorare a un rilancio con più informazioni (es. la descrizione del progetto)
+    const nuovi = datiReportVendita(d);
+    const completa = soloVuoti({ ...esiste, categoria: esiste.categoria === "Altro" && nuovi.categoria !== "Altro" ? null : esiste.categoria }, nuovi);
     let cambiate = 0;
+    if (Object.keys(completa).length) { await prisma.fatturaVendita.update({ where: { id: esiste.id }, data: completa }); cambiate++; }
     for (const r of rate) {
       const s = await prisma.scadenza.findFirst({ where: { OR: [{ chiaveImport: `BCV:${r.bcId}` }, { fatturaVenditaId: esiste.id, note: { contains: `[rata BC ${r.bcId}]` } }] }, select: { id: true } });
       if (s && (await prisma.$transaction((tx) => allineaScadenza(tx, s.id, r)))) cambiate++;
@@ -122,6 +146,7 @@ export async function importaVenditaBC(d: DocumentoBC, e: Esito, prova = false) 
         imponibile: cent(segno * Math.abs(d.imponibile)), iva: cent(segno * Math.abs(d.iva)), totale: cent(segno * Math.abs(d.totale)),
         detrazione: rate.some((r) => statoRata(r.stato) === "RITENUTA"), causale: d.riferimento || null, origine: "BCONSOLE",
         note: `Importata da BConsole${d.progetti?.length ? ` · progetto ${d.progetti.join(", ")}` : ""}`, creatoDaNome: "Import BConsole",
+        ...datiReportVendita(d),
       },
     });
     if (tipo === "TD04") return; // nota di credito: nessun incasso
@@ -186,6 +211,7 @@ export async function importaAcquistoBC(d: DocumentoBC, e: Esito, prova = false)
   if (esiste) {
     if (prova) { e.invariate++; return; }
     let cambiate = 0;
+    if (!esiste.progetto && d.progetti?.length) { await prisma.fatturaAcquisto.update({ where: { id: esiste.id }, data: { progetto: d.progetti[0] } }); cambiate++; }
     for (const r of rate) {
       const s = await prisma.scadenza.findFirst({ where: { chiaveImport: `FA:${esiste.id}:bc${r.bcId}` }, select: { id: true } });
       if (s && (await prisma.$transaction((tx) => allineaScadenza(tx, s.id, r)))) cambiate++;
@@ -202,7 +228,7 @@ export async function importaAcquistoBC(d: DocumentoBC, e: Esito, prova = false)
         chiave, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? d.controparte, partitaIva: pivaNorm(d.partitaIva) || null,
         tipoDocumento: tipo, numero: d.numero, data: data12(d.data),
         imponibile: cent(segno * Math.abs(d.imponibile)), iva: cent(segno * Math.abs(d.iva)), totale: cent(segno * Math.abs(d.totale)),
-        divisione: "P&C", stato: "REGISTRATA", origine: "BCONSOLE", registrataIl: new Date(), registrataDaNome: "Import BConsole", creatoDaNome: "Import BConsole",
+        divisione: "P&C", stato: "REGISTRATA", origine: "BCONSOLE", progetto: d.progetti?.[0] ?? null, registrataIl: new Date(), registrataDaNome: "Import BConsole", creatoDaNome: "Import BConsole",
         note: [`Importata da BConsole (protocollo ${d.protocollo || d.bcId})`, d.progetti?.length ? `progetti BConsole ${d.progetti.join(", ")}` : "", brand ? `centro di costo ${brand}` : "", d.riferimento ? d.riferimento.slice(0, 300) : ""].filter(Boolean).join(" · "),
         righe: { create: [{ posizione: 1, descrizione: (d.riferimento?.trim() || "Totale fattura").slice(0, 500), importo: cent(segno * Math.abs(d.imponibile)) }] },
       },

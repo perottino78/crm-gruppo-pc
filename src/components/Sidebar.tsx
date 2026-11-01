@@ -21,7 +21,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/commerciali", label: "Team & performance", icon: "🏆" },
   { href: "/amministrazione", label: "Amministrazione", icon: "💶", soloAmministrazione: true },
   { href: "/archivio", label: "Archivio file", icon: "📁" },
-  { href: "/report", label: "Report", icon: "📊" },
+  { href: "/report", label: "Report", icon: "📊", soloAmministrazione: true },
   { href: "/impostazioni", label: "Impostazioni", icon: "⚙️" },
 ];
 
