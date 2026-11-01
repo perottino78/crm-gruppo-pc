@@ -50,7 +50,7 @@ export async function saldoConto(contoId: string, finoA?: Date): Promise<number>
 export async function ricalcolaScadenza(scadenzaId: string) {
   const s = await prisma.scadenza.findUnique({ where: { id: scadenzaId }, include: { abbinamenti: true } });
   if (!s || s.stato === "ANNULLATA") return;
-  const pagato = cent(s.abbinamenti.reduce((t, a) => t + a.importo, 0) + s.pagatoManuale);
+  const pagato = cent(s.abbinamenti.reduce((t, a) => t + a.importo, 0) + s.pagatoManuale + s.ritenuta);
   const stato = pagato <= 0.004 ? "APERTA" : pagato >= cent(s.importo) - 0.004 ? "PAGATA" : "PARZIALE";
   if (stato !== s.stato) await prisma.scadenza.update({ where: { id: s.id }, data: { stato } });
 }
@@ -64,8 +64,9 @@ export async function ricalcolaMovimento(movimentoId: string) {
   if (stato !== m.stato) await prisma.movimentoFinanziario.update({ where: { id: m.id }, data: { stato } });
 }
 
-export function residuoScadenza(s: { importo: number; pagatoManuale: number; abbinamenti: { importo: number }[] }): number {
-  return cent(s.importo - s.pagatoManuale - s.abbinamenti.reduce((t, a) => t + a.importo, 0));
+export function residuoScadenza(s: { importo: number; pagatoManuale: number; ritenuta?: number; abbinamenti: { importo: number }[] }): number {
+  // la ritenuta dell'11% trattenuta dalla banca sui bonifici per detrazione conta come incassata
+  return cent(s.importo - s.pagatoManuale - (s.ritenuta ?? 0) - s.abbinamenti.reduce((t, a) => t + a.importo, 0));
 }
 
 export function residuoMovimento(m: { importo: number; abbinamenti: { importo: number }[] }): number {
@@ -127,7 +128,7 @@ export async function sincronizzaScadenzeCommesse(): Promise<number> {
         modifiche++;
         continue;
       }
-      const toccata = s.abbinamenti.length > 0 || s.pagatoManuale > 0;
+      const toccata = s.abbinamenti.length > 0 || s.pagatoManuale > 0 || s.ritenuta > 0;
       if (annullata && !toccata && s.stato !== "ANNULLATA") {
         await prisma.scadenza.update({ where: { id: s.id }, data: { stato: "ANNULLATA", note: "Commessa annullata" } });
         modifiche++;

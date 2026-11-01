@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 const tab = [
   { href: "/amministrazione", label: "Cruscotto" },
   { href: "/amministrazione/scadenzario", label: "Scadenzario" },
+  { href: "/amministrazione/fatture-vendita", label: "Fatture di vendita" },
   { href: "/amministrazione/fatture-acquisto", label: "Fatture d'acquisto" },
   { href: "/amministrazione/prima-nota", label: "Prima nota" },
   { href: "/amministrazione/costi-ricavi", label: "Costi e ricavi" },

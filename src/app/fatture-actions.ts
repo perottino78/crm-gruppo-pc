@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { puoAmministrazione, registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiFileFatture, chiaveFattura } from "@/lib/fatture/fatturapa";
-import { importaFattura, registraFattura, riapriFattura, ordiniCitati, type EsitoImport } from "@/lib/fatture/server";
+import { importaFattura, registraFattura, riapriFattura, ordiniCitati, trasferisciProforma, type EsitoImport } from "@/lib/fatture/server";
 import { abbinaRighe, leggiQuantita } from "@/lib/magazzino/calcoli";
 import { MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/calcoli";
 
@@ -61,6 +61,15 @@ export async function caricaFattureXml(_: EsitoCaricamento | null, fd: FormData)
   return { ok: nuove > 0, messaggio: `${nuove} fatture caricate${doppie ? `, ${doppie} già presenti` : ""}${errori ? `, ${errori} non lette` : ""}.`, voci };
 }
 
+/** "C2026-012 · ROSSI MARIO" (scelto dalla ricerca) o "12/2026" → id della commessa. */
+async function commessaDaTesto(t: string | null): Promise<string | null> {
+  if (!t) return null;
+  const a = /^\s*C(20\d{2})-(\d{1,5})/i.exec(t), b = /^\s*(\d{1,5})\s*\/\s*(20\d{2})/.exec(t);
+  const [anno, numero] = a ? [Number(a[1]), Number(a[2])] : b ? [Number(b[2]), Number(b[1])] : [0, 0];
+  if (!anno) return null;
+  return (await prisma.commessa.findUnique({ where: { anno_numero: { anno, numero } }, select: { id: true } }))?.id ?? null;
+}
+
 /** Fattura da PDF (o cartacea) inserita a mano: testata, importi e, se c'è, il PDF. */
 export async function creaFatturaManuale(fd: FormData) {
   const u = await utente();
@@ -73,6 +82,7 @@ export async function creaFatturaManuale(fd: FormData) {
   const totale = num(fd, "totale") ?? cent(imponibile + iva);
   const tipo = str(fd, "tipoDocumento") ?? "TD01";
   const segno = tipo === "TD04" ? -1 : 1;
+  const commessaId = str(fd, "commessaId") ?? (await commessaDaTesto(str(fd, "commessa")));
   const chiave = chiaveFattura(forn?.partitaIva ?? null, fornitoreNome, tipo, numero, d.toISOString());
   const doppia = await prisma.fatturaAcquisto.findUnique({ where: { chiave }, select: { id: true } });
   if (doppia) redirect(`/amministrazione/fatture-acquisto/${doppia.id}`);
@@ -81,8 +91,9 @@ export async function creaFatturaManuale(fd: FormData) {
     data: {
       chiave, fornitoreId: forn?.id ?? null, fornitoreNome, partitaIva: forn?.partitaIva ?? null, tipoDocumento: tipo, numero, data: d,
       imponibile: cent(segno * Math.abs(imponibile)), iva: cent(segno * Math.abs(iva)), totale: cent(segno * Math.abs(totale)), divisione: str(fd, "divisione"), origine: "PDF", creatoDaNome: u.nome,
+      modoPagamento: str(fd, "modoPagamento"), bancaPrevista: str(fd, "bancaPrevista"), note: str(fd, "note"),
       scadenzePreviste: scad ? [{ data: scad.toISOString().slice(0, 10), importo: Math.abs(totale), modalita: null }] : undefined,
-      righe: { create: [{ posizione: 1, descrizione: str(fd, "descrizione") ?? "Totale fattura", importo: cent(segno * Math.abs(imponibile)), commessaId: str(fd, "commessaId") }] },
+      righe: { create: [{ posizione: 1, descrizione: str(fd, "descrizione") ?? (tipo === "PROFORMA" ? "Totale proforma" : "Totale fattura"), importo: cent(segno * Math.abs(imponibile)), commessaId }] },
     },
   });
   const pdf = fd.get("pdf");
@@ -200,6 +211,7 @@ export async function registraFatturaAcquisto(fd: FormData) {
   const r = await prisma.$transaction((tx) => registraFattura(tx, f.id, u.nome));
   await registraLog("FATTURA_ACQUISTO", f.id, "REGISTRATA", `${f.fornitoreNome} n. ${f.numero}`, u.nome);
   aggiorna(f.id, r.commesse);
+  if (r.avvisi.length) redirect(`/amministrazione/fatture-acquisto/${f.id}?ok=${encodeURIComponent(`Registrata. ${r.avvisi.join(" ")}`)}`);
 }
 
 export async function riapriFatturaAcquisto(fd: FormData) {
@@ -222,4 +234,43 @@ export async function eliminaFatturaAcquisto(fd: FormData) {
   await registraLog("FATTURA_ACQUISTO", f.id, "ELIMINATA", `${f.fornitoreNome} n. ${f.numero}`, u.nome);
   aggiorna();
   redirect("/amministrazione/fatture-acquisto");
+}
+
+/** La fattura definitiva sostituisce una proforma: se è già registrata i pagamenti passano subito, altrimenti alla registrazione. */
+export async function collegaProforma(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id"), proformaId = str(fd, "proformaId");
+  const f = id ? await prisma.fatturaAcquisto.findUnique({ where: { id } }) : null;
+  const pf = proformaId ? await prisma.fatturaAcquisto.findUnique({ where: { id: proformaId } }) : null;
+  if (!f || !pf || pf.tipoDocumento !== "PROFORMA" || pf.stato !== "REGISTRATA" || f.tipoDocumento === "PROFORMA") return;
+  await prisma.fatturaAcquisto.update({ where: { id: f.id }, data: { proformaId: pf.id } });
+  let msg = "Collegata: i pagamenti della proforma passeranno sulla fattura quando la registri.";
+  if (f.stato === "REGISTRATA") msg = (await prisma.$transaction((tx) => trasferisciProforma(tx, f.id, u.nome))) ?? msg;
+  await registraLog("FATTURA_ACQUISTO", f.id, "PROFORMA COLLEGATA", `${f.fornitoreNome} fattura ${f.numero} ← proforma ${pf.numero}`, u.nome);
+  aggiorna(f.id);
+  aggiorna(pf.id);
+  redirect(`/amministrazione/fatture-acquisto/${f.id}?ok=${encodeURIComponent(msg)}`);
+}
+
+export async function scollegaProforma(fd: FormData) {
+  await utente();
+  const id = str(fd, "id");
+  const f = id ? await prisma.fatturaAcquisto.findUnique({ where: { id } }) : null;
+  if (!f?.proformaId) return;
+  const pf = await prisma.fatturaAcquisto.findUnique({ where: { id: f.proformaId } });
+  if (pf?.stato === "SOSTITUITA") return; // pagamenti già spostati: non si torna indietro
+  await prisma.fatturaAcquisto.update({ where: { id: f.id }, data: { proformaId: null } });
+  aggiorna(f.id);
+}
+
+/** Tutte le righe della fattura sulla stessa commessa (cercata per numero o nome del cliente). */
+export async function assegnaCommessaATutte(fd: FormData) {
+  await utente();
+  const id = str(fd, "id");
+  const f = id ? await prisma.fatturaAcquisto.findUnique({ where: { id } }) : null;
+  if (!f || f.stato !== "DA_VERIFICARE") return;
+  const commessaId = await commessaDaTesto(str(fd, "commessa"));
+  if (!commessaId && str(fd, "commessa")) redirect(`/amministrazione/fatture-acquisto/${f.id}?errore=${encodeURIComponent("Commessa non trovata: sceglila dall'elenco che compare mentre scrivi.")}`);
+  await prisma.rigaFatturaAcquisto.updateMany({ where: { fatturaId: f.id, rigaOrdineId: null }, data: { commessaId } });
+  aggiorna(f.id);
 }

@@ -108,19 +108,33 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   (`soloAttivi(lista, giàAssegnato)`), né riceve lead (`telefonistaDefaultPerBrand`) o avvisi d'ufficio. Cambio mansione (ruolo+ufficio),
   "passa il lavoro" aperto a un collega attivo (clienti, offerte aperte, pratiche, lead aperti, appuntamenti/rilievi/pose futuri, task,
   assistenze), elimina solo senza dati collegati (`datiCollegati`). Mai sé stessi, sempre almeno un amministratore attivo.
+- **Pagamenti e incassi a mano** (`src/app/pagamenti-actions.ts`, `src/lib/amministrazione/pagamenti.ts`, `components/amministrazione/RegistraPagamento.tsx`,
+  come in BConsole): su ogni scadenza (scadenzario, fattura d'acquisto, fattura di vendita) data, importo totale/parziale, banca, metodo
+  (`METODI_PAGAMENTO`), commissione (movimento a parte, `commissioneDiId`) e, per gli incassi, ritenuta 11% dei bonifici per detrazione
+  (`Scadenza.ritenuta`, conta come incassata in `residuoScadenza`). Sulle banche il movimento resta `daConfermare` finché l'estratto
+  importato non lo ritrova (`confermePagamentiManuali`: stesso importo, ±7 giorni → prende l'impronta della banca, niente doppioni).
+  `annullaPagamento` solo se non confermato e mese aperto.
+- **Proforma fornitori** (`FatturaAcquisto.tipoDocumento = "PROFORMA"`): si registra e si paga come una fattura; la fattura definitiva si
+  collega (`proformaId`, `collegaProforma`) e alla registrazione `trasferisciProforma` sposta i pagamenti, chiude le scadenze della proforma
+  (stato `SOSTITUITA`) e toglie i suoi costi dalla commessa. Commessa cercata per nome cliente o numero (`C2026-012`).
+- **Fatture di vendita** (`/amministrazione/fatture-vendita`, `FatturaVendita`, `src/lib/fatture/vendite.ts`, `src/app/vendite-actions.ts`):
+  fatte da Giorgia in BConsole e caricate dagli XML (o a mano) fino all'emissione dal CRM con SDI (2027). Cliente per P.IVA/CF/nome,
+  commessa aperta unica, detrazione dalla causale, sezionale dal numero; scadenze INCASSO (`origine FATTURA_VENDITA`, `fatturaVenditaId`)
+  o aggancio all'acconto/saldo della commessa con lo stesso importo (±1 €). Gli XML emessi da noi sono rifiutati tra gli acquisti e viceversa.
+  Arrivo automatico dal cassetto fiscale/SDI: non ancora (per ora carico manuale degli zip).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 175, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 180, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (22)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (22), fatture-incassi (32)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
@@ -142,5 +156,6 @@ tipi ✓ · test unitari ✓ · collaudi toccati ✓ · `next build` ✓ · se c
 - Consigliato: database di sviluppo separato (ramo Neon) per non far girare le anteprime sul DB di produzione.
 - Documento "flusso pratica per ufficio": cosa fa ciascun ufficio e come usare il CRM.
 - Rilievi/assistenze inseriti prima del 30/10/2026 possono risultare spostati di un'ora (vecchio errore di fuso orario).
-- Fatturazione elettronica verso SDI: avvio previsto 1° gennaio 2027.
+- Fatturazione elettronica verso SDI: avvio previsto 1° gennaio 2027 (emissione fatture di vendita dal CRM).
+- Collegamento automatico cassetto fiscale / SDI per le fatture dei fornitori: da scegliere l'intermediario (per ora zip caricati a mano).
 - Foto guida ferro zincato da aggiungere: `public/immagini/tapparelle/guida-ferro-zincato.jpg`.

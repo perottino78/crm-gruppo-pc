@@ -9,14 +9,17 @@ import { BRANDS } from "@/lib/brands";
 import { creaFatturaManuale } from "@/app/fatture-actions";
 import CaricaFattureXml from "@/components/fatture/CaricaFattureXml";
 import LeggiFatturaAI from "@/components/fatture/LeggiFatturaAI";
+import { numeroCommessa } from "@/lib/commesse";
+import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
 
-type P = { stato?: string; fornitore?: string; q?: string; anno?: string };
+type P = { stato?: string; fornitore?: string; q?: string; anno?: string; tipo?: string };
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 const STATI: Record<string, { nome: string; cls: string }> = {
   DA_VERIFICARE: { nome: "Da verificare", cls: "bg-amber-100 text-amber-900" },
   REGISTRATA: { nome: "Registrata", cls: "bg-green-100 text-green-900" },
+  SOSTITUITA: { nome: "Proforma sostituita", cls: "bg-neutral-200 text-neutral-700" },
 };
 
 export default async function FattureAcquistoPage({ searchParams }: { searchParams: Promise<P> }) {
@@ -25,12 +28,15 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
   const where: Prisma.FatturaAcquistoWhereInput = { data: { gte: new Date(`${anno}-01-01T00:00:00Z`), lt: new Date(`${anno + 1}-01-01T00:00:00Z`) } };
   if (p.stato && STATI[p.stato]) where.stato = p.stato;
   if (p.fornitore) where.fornitoreId = p.fornitore;
+  if (p.tipo === "proforma") { where.tipoDocumento = "PROFORMA"; where.stato = p.stato && STATI[p.stato] ? p.stato : "REGISTRATA"; }
   if (p.q?.trim()) { const q = p.q.trim(); where.OR = [{ numero: { contains: q, mode: "insensitive" } }, { fornitoreNome: { contains: q, mode: "insensitive" } }, { righe: { some: { descrizione: { contains: q, mode: "insensitive" } } } }]; }
-  const [fatture, fornitori, conteggi, commesse] = await Promise.all([
+  const [fatture, fornitori, conteggi, commesse, proformeAperte, conti] = await Promise.all([
     prisma.fatturaAcquisto.findMany({ where, include: { righe: { select: { commessaId: true } }, bolle: { select: { id: true } } }, orderBy: [{ data: "desc" }, { createdAt: "desc" }], take: 400 }),
     prisma.soggetto.findMany({ where: { attivo: true, ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" }, select: { id: true, ragioneSociale: true } }),
     prisma.fatturaAcquisto.groupBy({ by: ["stato"], where: { data: where.data }, _count: true, _sum: { totale: true } }),
-    prisma.commessa.findMany({ where: { stato: { notIn: ["ANNULLATA"] } }, select: { id: true, numero: true, anno: true, cliente: { select: { nome: true } } }, orderBy: [{ anno: "desc" }, { numero: "desc" }], take: 300 }),
+    prisma.commessa.findMany({ where: { stato: { notIn: ["ANNULLATA"] } }, select: { id: true, numero: true, anno: true, cliente: { select: { nome: true } } }, orderBy: [{ anno: "desc" }, { numero: "desc" }], take: 1500 }),
+    prisma.fatturaAcquisto.count({ where: { tipoDocumento: "PROFORMA", stato: "REGISTRATA" } }),
+    prisma.contoFinanziario.findMany({ where: { attivo: true }, select: { nome: true }, orderBy: [{ ordine: "asc" }, { nome: "asc" }] }),
   ]);
   const c = (s: string) => conteggi.find((x) => x.stato === s);
   const qs = (x: Partial<P>) => `?${new URLSearchParams(Object.entries({ ...p, ...x }).filter(([, v]) => v) as [string, string][])}`;
@@ -50,7 +56,7 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
             <form action={creaFatturaManuale} className="grid grid-cols-2 gap-2 mt-2">
               <label className="text-xs font-semibold col-span-2">Fornitore<select name="fornitoreId" className={`${inp} w-full`} defaultValue=""><option value="">— scegli —</option>{fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}</select></label>
               <label className="text-xs font-semibold col-span-2">…oppure fornitore non in anagrafica<input name="fornitoreNome" className={`${inp} w-full`} /></label>
-              <label className="text-xs font-semibold">Tipo<select name="tipoDocumento" className={`${inp} w-full`}><option value="TD01">Fattura</option><option value="TD04">Nota di credito</option></select></label>
+              <label className="text-xs font-semibold">Tipo<select name="tipoDocumento" className={`${inp} w-full`}><option value="TD01">Fattura</option><option value="PROFORMA">Proforma (si paga prima della fattura)</option><option value="TD04">Nota di credito</option></select></label>
               <label className="text-xs font-semibold">Società<select name="divisione" className={`${inp} w-full`} defaultValue="P&C">{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select></label>
               <label className="text-xs font-semibold">Numero<input name="numero" required className={`${inp} w-full`} /></label>
               <label className="text-xs font-semibold">Data<input type="date" name="data" required className={`${inp} w-full`} /></label>
@@ -58,7 +64,13 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
               <label className="text-xs font-semibold">IVA €<input name="iva" className={`${inp} w-full`} /></label>
               <label className="text-xs font-semibold">Totale € (vuoto = imponibile + IVA)<input name="totale" className={`${inp} w-full`} /></label>
               <label className="text-xs font-semibold">Scadenza pagamento<input type="date" name="scadenza" className={`${inp} w-full`} /></label>
-              <label className="text-xs font-semibold col-span-2">Commessa (se è tutta per un cliente)<select name="commessaId" className={`${inp} w-full`} defaultValue=""><option value="">— nessuna / da ripartire —</option>{commesse.map((x) => <option key={x.id} value={x.id}>{x.numero}/{x.anno} {x.cliente.nome}</option>)}</select></label>
+              <label className="text-xs font-semibold">Modo di pagamento<select name="modoPagamento" className={`${inp} w-full`} defaultValue=""><option value="">—</option>{METODI_PAGAMENTO.filter((m) => !("soloIncassi" in m)).map((m) => <option key={m.chiave} value={m.chiave}>{m.nome}</option>)}</select></label>
+              <label className="text-xs font-semibold">Banca<select name="bancaPrevista" className={`${inp} w-full`} defaultValue=""><option value="">—</option>{conti.map((c) => <option key={c.nome}>{c.nome}</option>)}</select></label>
+              <label className="text-xs font-semibold col-span-2">Commessa / cliente (se è tutta per un lavoro): scrivi il nome del cliente o il numero
+                <input name="commessa" list="elenco-commesse" placeholder="es. Rossi… oppure C2026-012" className={`${inp} w-full`} />
+              </label>
+              <datalist id="elenco-commesse">{commesse.map((x) => <option key={x.id} value={`${numeroCommessa(x)} · ${x.cliente.nome}`} />)}</datalist>
+              <label className="text-xs font-semibold col-span-2">Note<input name="note" className={`${inp} w-full`} /></label>
               <label className="text-xs font-semibold col-span-2">PDF della fattura<input type="file" name="pdf" accept="application/pdf,image/*" className="block text-sm" /></label>
               <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 col-span-2">Crea fattura da verificare</button>
             </form>
@@ -67,7 +79,8 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
       </div>
 
       <div className="flex flex-wrap gap-1.5 items-center">
-        <Link href={qs({ stato: undefined })} className={pill(!p.stato)}>Tutte</Link>
+        <Link href={qs({ stato: undefined, tipo: undefined })} className={pill(!p.stato && !p.tipo)}>Tutte</Link>
+        <Link href={qs({ tipo: "proforma", stato: undefined })} className={pill(p.tipo === "proforma")}>Proforma in attesa di fattura ({proformeAperte})</Link>
         {Object.entries(STATI).map(([k, s]) => <Link key={k} href={qs({ stato: k })} className={pill(p.stato === k)}>{s.nome} ({c(k)?._count ?? 0}{c(k)?._sum.totale ? ` · ${eur(c(k)!._sum.totale!)}` : ""})</Link>)}
       </div>
       <form className="flex flex-wrap gap-2 items-end">

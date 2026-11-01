@@ -12,6 +12,7 @@ import {
   ricalcolaScadenza, ricalcolaMovimento, residuoScadenza, residuoMovimento,
 } from "@/lib/amministrazione/server";
 import { eur } from "@/lib/amministrazione/costanti";
+import { confermePagamentiManuali } from "@/lib/amministrazione/pagamenti";
 
 function str(fd: FormData, k: string): string | null {
   const v = fd.get(k);
@@ -86,10 +87,20 @@ async function analizza(contoId: string, testo: string) {
   );
   const chiusi = await mesiChiusi();
   const conto = await prisma.contoFinanziario.findUnique({ where: { id: contoId } });
-  const righe = lettura.righe.map((r, i) => {
+  const base = lettura.righe.map((r, i) => {
     const { anno, mese } = meseDi(r.data);
     return { ...r, impronta: impronte[i], doppione: gia.has(impronte[i]), meseChiuso: chiusi.has(`${anno}-${mese}`), primaDelSaldo: !!conto && r.data <= conto.dataSaldoIniziale };
   });
+  // pagamenti già registrati a mano dallo scadenzario su questa banca: l'estratto li conferma invece di raddoppiarli
+  const candidate = base.filter((r) => !r.doppione && !r.meseChiuso && !r.primaDelSaldo);
+  const date = candidate.map((r) => r.data.getTime());
+  const manuali = candidate.length ? await prisma.movimentoFinanziario.findMany({
+    where: { contoId, daConfermare: true, confermatoIl: null, data: { gte: new Date(Math.min(...date) - 8 * 86400000), lte: new Date(Math.max(...date) + 8 * 86400000) } },
+    select: { id: true, data: true, importo: true },
+  }) : [];
+  const conferme = confermePagamentiManuali(candidate, manuali);
+  const confermaDi = new Map(candidate.map((r, i) => [r, conferme[i]]));
+  const righe = base.map((r) => ({ ...r, giaRegistrato: confermaDi.get(r) ?? null }));
   return { lettura, righe, conto };
 }
 
@@ -101,13 +112,15 @@ export async function anteprimaImport(contoId: string, testo: string): Promise<A
   const { lettura, righe, conto } = await analizza(contoId, testo);
   if (!conto) return { ok: false, errore: "Conto non trovato.", ...vuota };
   if (!lettura.ok) return { ok: false, errore: lettura.errore, ...vuota, scartate: lettura.scartate.slice(0, 20) };
-  const nuove = righe.filter((r) => !r.doppione && !r.meseChiuso && !r.primaDelSaldo);
+  const nuove = righe.filter((r) => !r.doppione && !r.meseChiuso && !r.primaDelSaldo && !r.giaRegistrato);
+  const confermati = righe.filter((r) => r.giaRegistrato).length;
   const date = righe.map((r) => r.data.getTime());
   const saldoAttuale = await saldoConto(contoId);
   const prima = righe.filter((r) => !r.doppione && r.primaDelSaldo).length;
   return {
     ok: true,
-    errore: prima ? `${prima} movimenti hanno data uguale o precedente al saldo iniziale del conto (${giorno(conto.dataSaldoIniziale)}): sono già compresi in quel saldo e non verranno importati.` : undefined,
+    errore: [prima ? `${prima} movimenti hanno data uguale o precedente al saldo iniziale del conto (${giorno(conto.dataSaldoIniziale)}): sono già compresi in quel saldo e non verranno importati.` : "",
+      confermati ? `${confermati} movimenti erano già stati registrati a mano dallo scadenzario: non verranno duplicati, vengono solo confermati.` : ""].filter(Boolean).join(" ") || undefined,
     colonne: lettura.colonne,
     totaleRighe: righe.length,
     nuove: nuove.length,
@@ -131,7 +144,8 @@ export async function confermaImport(contoId: string, testo: string, nomeFile: s
   const { lettura, righe, conto } = await analizza(contoId, testo);
   if (!conto) return { ok: false, messaggio: "Conto non trovato." };
   if (!lettura.ok) return { ok: false, messaggio: lettura.errore ?? "File non leggibile." };
-  const daInserire = righe.filter((r) => !r.doppione && !r.meseChiuso && !r.primaDelSaldo);
+  const daConfermare = righe.filter((r) => r.giaRegistrato);
+  const daInserire = righe.filter((r) => !r.doppione && !r.meseChiuso && !r.primaDelSaldo && !r.giaRegistrato);
   const imp = await prisma.importazioneEstratto.create({
     data: {
       contoId, nomeFile: nomeFile.slice(0, 200), righeTotali: righe.length, righeNuove: 0,
@@ -149,6 +163,13 @@ export async function confermaImport(contoId: string, testo: string, nomeFile: s
     })),
     skipDuplicates: true,
   });
+  // pagamenti registrati a mano ritrovati nell'estratto: confermati (prendono l'impronta della banca, così un nuovo import li riconosce)
+  for (const r of daConfermare) {
+    await prisma.movimentoFinanziario.update({
+      where: { id: r.giaRegistrato! },
+      data: { daConfermare: false, confermatoIl: new Date(), impronta: r.impronta, importazioneId: imp.id, dataValuta: r.dataValuta, data: r.data, note: `Estratto: ${r.descrizione.slice(0, 300)}` },
+    }).catch(() => null); // impronta già usata (caso rarissimo): resta da confermare
+  }
   // Quadratura: saldo del CRM alla data dell'ultimo movimento del file contro il saldo della banca
   let quadratura: EsitoImport["quadratura"] = "NON_VERIFICATA";
   let differenza: number | undefined;
@@ -167,7 +188,7 @@ export async function confermaImport(contoId: string, testo: string, nomeFile: s
   aggiorna();
   return {
     ok: true,
-    messaggio: `Importati ${res.count} movimenti nuovi su ${righe.length}. ${imp.doppioni} doppioni ignorati.${abbinatiAuto ? ` ${abbinatiAuto} abbinati in automatico (importo e nome coincidono).` : ""}`,
+    messaggio: `Importati ${res.count} movimenti nuovi su ${righe.length}. ${imp.doppioni} doppioni ignorati.${daConfermare.length ? ` ${daConfermare.length} pagamenti registrati a mano confermati dall'estratto.` : ""}${abbinatiAuto ? ` ${abbinatiAuto} abbinati in automatico (importo e nome coincidono).` : ""}`,
     quadratura, differenza, abbinatiAuto,
   };
 }

@@ -4,13 +4,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { TIPI_DOCUMENTO } from "@/lib/fatture/fatturapa";
-import { ratePagamento } from "@/lib/fatture/server";
+import { ratePagamento, proformeAperte } from "@/lib/fatture/server";
+import { residuoScadenza } from "@/lib/amministrazione/server";
+import RegistraPagamento from "@/components/amministrazione/RegistraPagamento";
 import { numeroBolla, statoBolla } from "@/lib/magazzino/calcoli";
 import { numeroCommessa } from "@/lib/commesse";
 import { BRANDS } from "@/lib/brands";
 import {
   salvaTestataFattura, salvaRigheFattura, aggiungiRigaFattura, togliRigaFattura, collegaBolle, abbinaFattura,
-  registraFatturaAcquisto, riapriFatturaAcquisto, eliminaFatturaAcquisto,
+  registraFatturaAcquisto, riapriFatturaAcquisto, eliminaFatturaAcquisto, collegaProforma, scollegaProforma, assegnaCommessaATutte,
 } from "@/app/fatture-actions";
 import Documenti from "@/components/documenti/Documenti";
 
@@ -19,8 +21,9 @@ const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const iso = (d?: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default async function FatturaAcquistoPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function FatturaAcquistoPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const { id } = await params;
+  const msg = await searchParams;
   const f = await prisma.fatturaAcquisto.findUnique({ where: { id }, include: { righe: { orderBy: { posizione: "asc" } }, bolle: { include: { righe: { select: { rigaOrdineId: true } } } } } });
   if (!f) notFound();
   const modificabile = f.stato === "DA_VERIFICARE";
@@ -30,9 +33,20 @@ export default async function FatturaAcquistoPage({ params }: { params: Promise<
     prisma.commessa.findMany({ where: { OR: [{ stato: { notIn: ["ANNULLATA"] }, createdAt: { gte: unAnnoFa } }, { id: { in: f.righe.map((r) => r.commessaId).filter(Boolean) as string[] } }] }, select: { id: true, numero: true, anno: true, cliente: { select: { nome: true } } }, orderBy: [{ anno: "desc" }, { numero: "desc" }], take: 400 }),
     f.fornitoreId ? prisma.bollaEntrata.findMany({ where: { fornitoreId: f.fornitoreId, OR: [{ stato: "DA_FATTURARE" }, { fatturaAcquistoId: f.id }] }, orderBy: [{ anno: "desc" }, { numero: "desc" }], take: 60 }) : Promise.resolve([]),
     f.fornitoreId ? prisma.rigaOrdine.findMany({ where: { OR: [{ ordineFornitore: { fornitoreId: f.fornitoreId, dataOrdine: { gte: unAnnoFa } } }, { id: { in: f.righe.map((r) => r.rigaOrdineId).filter(Boolean) as string[] } }] }, include: { ordineFornitore: { select: { numero: true, anno: true } } }, orderBy: { createdAt: "desc" }, take: 500 }) : Promise.resolve([]),
-    prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, orderBy: { dataScadenza: "asc" } }),
+    prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, orderBy: { dataScadenza: "asc" }, include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } } }),
     f.fornitoreId ? prisma.soggetto.findUnique({ where: { id: f.fornitoreId }, select: { giorniPagamento: true } }) : Promise.resolve(null),
   ]);
+  const proforma = f.tipoDocumento === "PROFORMA";
+  const [conti, proformaCollegata, candidateProforma, sostituitaDa] = await Promise.all([
+    prisma.contoFinanziario.findMany({ where: { attivo: true }, select: { id: true, nome: true, tipo: true }, orderBy: [{ ordine: "asc" }, { nome: "asc" }] }),
+    f.proformaId ? prisma.fatturaAcquisto.findUnique({ where: { id: f.proformaId } }) : Promise.resolve(null),
+    !proforma && !f.proformaId ? proformeAperte(f) : Promise.resolve([]),
+    proforma ? prisma.fatturaAcquisto.findFirst({ where: { proformaId: f.id }, select: { id: true, numero: true, data: true } }) : Promise.resolve(null),
+  ]);
+  // la banca prevista in fattura viene proposta per prima
+  const contiOrdinati = [...conti].sort((a, b) => (a.nome === f.bancaPrevista ? -1 : b.nome === f.bancaPrevista ? 1 : 0));
+  const pagatoDi = async (pid: string) => (await prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${pid}:` } }, include: { abbinamenti: true } })).reduce((t, s) => t + s.importo - residuoScadenza(s), 0);
+  const pagatoProforme = new Map(await Promise.all(candidateProforma.map(async (x) => [x.id, await pagatoDi(x.id)] as const)));
   const collegate = new Set(f.bolle.map((b) => b.id));
   const rate = ratePagamento(f, forn?.giorniPagamento ?? null);
   const senzaCommessa = f.righe.filter((r) => !r.commessaId);
@@ -41,6 +55,8 @@ export default async function FatturaAcquistoPage({ params }: { params: Promise<
 
   return (
     <div className="space-y-4">
+      {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
+      {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link href="/amministrazione/fatture-acquisto" className="text-sm text-blue-800 underline">← Fatture d&apos;acquisto</Link>
@@ -52,9 +68,38 @@ export default async function FatturaAcquistoPage({ params }: { params: Promise<
         <div className="text-right">
           <p className="text-2xl font-bold">{eur(f.totale)}</p>
           <p className="text-xs text-neutral-600">imponibile {eur(f.imponibile)} · IVA {eur(f.iva)}</p>
-          <span className={`text-xs px-2 py-0.5 rounded-full ${modificabile ? "bg-amber-100 text-amber-900" : "bg-green-100 text-green-900"}`}>{modificabile ? "Da verificare" : `Registrata il ${dataIt(f.registrataIl)} da ${f.registrataDaNome ?? ""}`}</span>
+          <span className={`text-xs px-2 py-0.5 rounded-full ${modificabile ? "bg-amber-100 text-amber-900" : f.stato === "SOSTITUITA" ? "bg-neutral-200 text-neutral-700" : "bg-green-100 text-green-900"}`}>{modificabile ? "Da verificare" : f.stato === "SOSTITUITA" ? "Proforma sostituita dalla fattura" : `Registrata il ${dataIt(f.registrataIl)} da ${f.registrataDaNome ?? ""}`}</span>
         </div>
       </div>
+
+      {proforma && (
+        <section className="bg-sky-50 border border-sky-200 rounded-lg p-3 text-sm">
+          {sostituitaDa ? <>📄 Sostituita dalla <Link href={`/amministrazione/fatture-acquisto/${sostituitaDa.id}`} className="underline font-semibold">fattura {sostituitaDa.numero} del {dataIt(sostituitaDa.data)}</Link>: i pagamenti sono passati lì.</>
+            : <>⏳ Proforma: si registra e si paga come una fattura. Quando arriva la fattura definitiva, aprila e collegala a questa proforma: i pagamenti passano sulla fattura e il costo non viene contato due volte.</>}
+        </section>
+      )}
+      {!proforma && proformaCollegata && (
+        <section className="bg-sky-50 border border-sky-200 rounded-lg p-3 text-sm flex flex-wrap items-center gap-2">
+          📄 Sostituisce la <Link href={`/amministrazione/fatture-acquisto/${proformaCollegata.id}`} className="underline font-semibold">proforma {proformaCollegata.numero} del {dataIt(proformaCollegata.data)}</Link> ({eur(proformaCollegata.totale)})
+          {proformaCollegata.stato === "SOSTITUITA" ? <span className="text-green-800">· pagamenti spostati sulla fattura</span> : <span className="text-neutral-600">· i pagamenti passano alla registrazione</span>}
+          {proformaCollegata.stato !== "SOSTITUITA" && <form action={scollegaProforma}><input type="hidden" name="id" value={f.id} /><button className="text-xs underline text-red-700">scollega</button></form>}
+        </section>
+      )}
+      {candidateProforma.length > 0 && (
+        <section className="bg-amber-50 border border-amber-300 rounded-lg p-3 text-sm space-y-1">
+          <p className="font-semibold">Questo fornitore ha proforma in attesa della fattura definitiva: è una di queste?</p>
+          {candidateProforma.map((x) => {
+            const vicino = Math.abs(Math.abs(x.totale) - Math.abs(f.totale)) <= Math.max(1, Math.abs(f.totale) * 0.01);
+            return (
+              <form key={x.id} action={collegaProforma} className="flex flex-wrap items-center gap-2">
+                <input type="hidden" name="id" value={f.id} /><input type="hidden" name="proformaId" value={x.id} />
+                <span>Proforma <Link href={`/amministrazione/fatture-acquisto/${x.id}`} className="underline">{x.numero}</Link> del {dataIt(x.data)} · {eur(x.totale)} · pagati {eur(pagatoProforme.get(x.id) ?? 0)}{vicino && <b className="text-green-800"> · stesso importo</b>}</span>
+                <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">Questa fattura sostituisce la proforma</button>
+              </form>
+            );
+          })}
+        </section>
+      )}
 
       {modificabile && (
         <form action={salvaTestataFattura} className="bg-white border border-neutral-200 rounded-lg p-3 grid md:grid-cols-6 gap-2 items-end">
@@ -71,6 +116,18 @@ export default async function FatturaAcquistoPage({ params }: { params: Promise<
           <label className="text-xs font-semibold">Scadenza (una rata)<input type="date" name="scadenza" className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold md:col-span-3">Note<input name="note" defaultValue={f.note ?? ""} className={`${inp} w-full`} /></label>
           <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5">Salva</button>
+        </form>
+      )}
+
+      {modificabile && (
+        <form action={assegnaCommessaATutte} className="bg-white border border-neutral-200 rounded-lg p-3 flex flex-wrap items-end gap-2">
+          <input type="hidden" name="id" value={f.id} />
+          <label className="text-xs font-semibold flex-1 min-w-64">Materiale per un cliente? Metti tutta la fattura sulla sua commessa (scrivi il nome del cliente o il numero)
+            <input name="commessa" list="commesse-fattura" placeholder="es. Rossi… oppure C2026-012" className={`${inp} w-full`} />
+          </label>
+          <datalist id="commesse-fattura">{commesse.map((c) => <option key={c.id} value={`${numeroCommessa(c)} · ${c.cliente.nome}`} />)}</datalist>
+          <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Assegna a tutte le righe</button>
+          <span className="text-[11px] text-neutral-500 w-full">Così la spesa del materiale entra nei costi reali della commessa. Le righe già abbinate a un ordine restano come sono; per dividere su più commesse usa la tabella qui sotto.</span>
         </form>
       )}
 
@@ -141,7 +198,13 @@ export default async function FatturaAcquistoPage({ params }: { params: Promise<
       <section className="bg-white border border-neutral-200 rounded-lg p-4">
         <h3 className="font-bold mb-1">Pagamento</h3>
         {scadenze.length ? (
-          <ul className="text-sm">{scadenze.map((s) => <li key={s.id}>{dataIt(s.dataScadenza)} · {eur(s.importo)} · {s.descrizione} <span className="text-xs text-neutral-600">({s.stato.toLowerCase()})</span></li>)}</ul>
+          <div className="space-y-3">{scadenze.map((s) => (
+            <div key={s.id} className="border-t border-neutral-100 pt-2 first:border-0 first:pt-0">
+              <p className="text-sm">{dataIt(s.dataScadenza)} · {eur(s.importo)} · {s.descrizione} <span className="text-xs text-neutral-600">({s.stato === "PAGATA" ? "saldata" : s.stato === "PARZIALE" ? "pagata in parte" : s.stato.toLowerCase()})</span></p>
+              {s.stato !== "ANNULLATA" && <RegistraPagamento conti={contiOrdinati} ritorno={`/amministrazione/fatture-acquisto/${f.id}`} metodoSuggerito={f.modoPagamento}
+                scadenza={{ id: s.id, tipo: s.tipo, residuo: residuoScadenza(s), ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />}
+            </div>
+          ))}</div>
         ) : f.totale < 0 ? <p className="text-sm text-neutral-600">Nota di credito: riduce il debito verso il fornitore, nessuna scadenza.</p> : (
           <ul className="text-sm text-neutral-700">{rate.map((r, i) => <li key={i}>{dataIt(r.data)} · {eur(r.importo)}{r.modalita ? ` · ${r.modalita}` : ""} <span className="text-xs text-neutral-500">(entra nello scadenzario alla registrazione)</span></li>)}</ul>
         )}
