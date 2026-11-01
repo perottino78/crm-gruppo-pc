@@ -11,7 +11,8 @@ let ultimoControllo = 0;
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const utente = await getCurrentUser();
-  if (!utente) redirect("/login");
+  // sessione valida ma utente non più attivo (pausa/disattivato) o cancellato: si chiude la sessione
+  if (!utente) redirect("/api/esci");
   if (Date.now() - ultimoControllo > 60_000) {
     ultimoControllo = Date.now();
     eseguiDopoRisposta();

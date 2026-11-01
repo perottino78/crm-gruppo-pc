@@ -5,6 +5,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { aggiornaPermessiBrand, impostaObiettivo, completaAttivita } from "@/app/actions";
+import GestioneUtente from "@/components/team/GestioneUtente";
+import { datiCollegati, LEAD_CHIUSI, statoUtente } from "@/lib/utenti/stato";
 
 const STATI_PREVENTIVO_APERTI = ["APERTO"];
 const STATI_APPUNTAMENTO_APERTI = ["PROGRAMMATO", "CONFERMATO"];
@@ -22,10 +24,13 @@ function labelPeriodo(periodo: string): string {
 
 export default async function SchedaCommercialePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ ok?: string; errore?: string }>;
 }) {
   const { id } = await params;
+  const msg = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
   const admin = isAmministratore(utenteCorrente);
@@ -66,6 +71,23 @@ export default async function SchedaCommercialePage({
     ? Math.min(999, Math.round((realizzatoMese / obiettivoCorrente.importoTarget) * 100))
     : null;
 
+  const ora = new Date();
+  const [colleghi, collegati, lavoroAperto] = admin ? await Promise.all([
+    prisma.utente.findMany({ where: { stato: "ATTIVO", id: { not: id } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
+    datiCollegati(id),
+    Promise.all([
+      prisma.cliente.count({ where: { responsabileId: id } }),
+      prisma.preventivo.count({ where: { commercialeId: id, stato: "APERTO", confermatoIl: null } }),
+      prisma.commessa.count({ where: { responsabileId: id, chiusaIl: null } }),
+      prisma.lead.count({ where: { OR: [{ telefonistaId: id }, { venditoreId: id }], fase: { notIn: LEAD_CHIUSI } } }),
+      prisma.appuntamento.count({ where: { utenteId: id, dataOra: { gte: ora }, stato: { in: ["PROGRAMMATO", "CONFERMATO"] } } }),
+      prisma.rilievo.count({ where: { tecnicoId: id, dataOra: { gte: ora }, stato: "PROGRAMMATO" } }),
+      prisma.posa.count({ where: { assegnatoUtenteId: id, dataInizio: { gte: ora }, stato: "PROGRAMMATA" } }),
+      prisma.taskPratica.count({ where: { assegnatoUtenteId: id, completatoIl: null } }),
+      prisma.assistenza.count({ where: { assegnatoUtenteId: id, stato: { notIn: ["RISOLTA", "ANNULLATA"] } } }),
+    ]).then(([clienti, offerte, pratiche, lead, appuntamenti, rilievi, pose, task, assistenze]) => ({ clienti, offerte, pratiche, lead, appuntamenti, rilievi, pose, task, assistenze })),
+  ]) : [[], {}, {}];
+
   const taskAperti = utente.attivita.filter((a) => !a.completata);
   const taskCompletati = utente.attivita.filter((a) => a.completata);
 
@@ -76,9 +98,15 @@ export default async function SchedaCommercialePage({
       </Link>
       <div className="flex items-center justify-between mt-2 mb-1">
         <h1 className="text-2xl font-bold text-neutral-900">{utente.nome}</h1>
-        <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{utente.ruolo}</span>
+        <span className="flex gap-1">
+          {utente.stato !== "ATTIVO" && <span className={`text-xs px-2 py-1 rounded-full ${statoUtente(utente.stato).classe}`}>{statoUtente(utente.stato).nome}</span>}
+          <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{utente.ruolo}</span>
+        </span>
       </div>
       <p className="text-sm text-neutral-600 mb-6">{utente.email} · in squadra dal {utente.createdAt.toLocaleDateString("it-IT")}</p>
+      {msg.ok && <p className="mb-3 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
+      {msg.errore && <p className="mb-3 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
+      {admin && <GestioneUtente utente={utente} colleghi={colleghi} collegati={collegati} lavoroAperto={lavoroAperto} io={utente.id === utenteCorrente.id} />}
 
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg border border-neutral-200 border-l-4 border-l-blue-500 p-4 shadow-sm">

@@ -65,10 +65,10 @@ export async function telefonistaDefaultPerBrand(brandId: string): Promise<strin
   const cfg = await getConfig(`lead_telefonista_${brandId}`);
   if (cfg) {
     const ut = await prisma.utente.findUnique({ where: { id: cfg } });
-    if (ut) return ut.id;
+    if (ut && ut.stato === "ATTIVO") return ut.id; // in pausa o disattivata: si passa alla prima attiva
   }
   // Fallback: prima TELEFONISTA attiva
-  const tel = await prisma.utente.findFirst({ where: { ruolo: "TELEFONISTA" }, orderBy: { nome: "asc" } });
+  const tel = await prisma.utente.findFirst({ where: { ruolo: "TELEFONISTA", stato: "ATTIVO" }, orderBy: { nome: "asc" } });
   return tel?.id ?? null;
 }
 

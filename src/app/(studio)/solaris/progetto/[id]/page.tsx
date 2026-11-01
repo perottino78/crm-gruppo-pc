@@ -8,7 +8,7 @@ export default async function SolarisStudioPage({
   params: Promise<{ id: string }>;
 }) {
   const utente = await getCurrentUser();
-  if (!utente) redirect("/login");
+  if (!utente) redirect("/api/esci");
 
   const { id } = await params;
 

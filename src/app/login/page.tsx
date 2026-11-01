@@ -26,7 +26,10 @@ export default async function LoginPage({
 
           {errore && (
             <div className="text-sm font-medium text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
-              Username o password non corretti.
+              {errore === "pausa" ? "Il tuo accesso è in pausa: per riattivarlo rivolgiti all'amministratore."
+                : errore === "disattivato" ? "Il tuo accesso è stato disattivato. Per informazioni rivolgiti all'amministratore."
+                : errore === "sessione" ? "La sessione è scaduta: accedi di nuovo."
+                : "Username o password non corretti."}
             </div>
           )}
 

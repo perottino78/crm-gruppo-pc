@@ -43,7 +43,7 @@ export default async function SchedaClientePage({
   const { id } = await params;
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
-  const utentiCal = await prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
+  const utentiCal = await prisma.utente.findMany({ where: { passwordHash: { not: null }, stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   if (!utenteCorrente) notFound();
 
   const cliente = await prisma.cliente.findFirst({
@@ -247,7 +247,7 @@ export default async function SchedaClientePage({
                 </div>
                 <select name="commercialeId" required className="border border-neutral-200 rounded-lg px-2 py-1.5 text-sm">
                   <option value="">Commerciale…</option>
-                  {(await prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } })).map((u) => (
+                  {(await prisma.utente.findMany({ where: { ruolo: "COMMERCIALE", stato: "ATTIVO" }, orderBy: { nome: "asc" } })).map((u) => (
                     <option key={u.id} value={u.id}>{u.nome}</option>
                   ))}
                 </select>
@@ -298,7 +298,7 @@ export default async function SchedaClientePage({
                 <label className="text-xs text-neutral-700">Chi</label>
                 <select name="utenteId" className="border border-neutral-200 rounded px-2 py-1.5 text-sm">
                   <option value="">—</option>
-                  {(await prisma.utente.findMany({ orderBy: { nome: "asc" } })).map((u) => <option key={u.id} value={u.id}>{u.nome}</option>)}
+                  {(await prisma.utente.findMany({ where: { stato: "ATTIVO" }, orderBy: { nome: "asc" } })).map((u) => <option key={u.id} value={u.id}>{u.nome}</option>)}
                 </select>
               </div>
               <div className="flex flex-col gap-1 w-full">
@@ -450,7 +450,7 @@ export default async function SchedaClientePage({
         {sez === "anagrafica" && (
           <SchedaClienteTabs
             cliente={cliente}
-            utenti={await prisma.utente.findMany({ orderBy: { nome: "asc" } })}
+            utenti={await prisma.utente.findMany({ where: { OR: [{ stato: "ATTIVO" }, ...(cliente.responsabileId ? [{ id: cliente.responsabileId }] : [])] }, orderBy: { nome: "asc" } })}
             altriClienti={await prisma.cliente.findMany({
               where: { id: { not: cliente.id } },
               select: { id: true, nome: true, comune: true },

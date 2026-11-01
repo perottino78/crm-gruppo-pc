@@ -1300,6 +1300,8 @@ export async function aggiornaConfigurazione(formData: FormData) {
 }
 
 export async function creaUtente(formData: FormData) {
+  const admin = await getCurrentUser();
+  if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
   const nome = str(formData, "nome");
   const email = str(formData, "email");
   const ruolo = str(formData, "ruolo");
@@ -1336,6 +1338,7 @@ export async function login(formData: FormData) {
     redirect(`/login?errore=1${next ? `&next=${encodeURIComponent(next)}` : ""}`);
   }
 
+  if (utente!.stato !== "ATTIVO") redirect(`/login?errore=${utente!.stato === "PAUSA" ? "pausa" : "disattivato"}`);
   await creaSessione(utente!.id);
   redirect(next && next.startsWith("/") ? next : "/");
 }
@@ -1486,6 +1489,8 @@ export async function salvaPrezzoProdotto(formData: FormData) {
 }
 
 export async function aggiornaPermessiBrand(formData: FormData) {
+  const admin = await getCurrentUser();
+  if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
   const utenteId = str(formData, "utenteId");
   if (!utenteId) return;
   const brandIds = formData.getAll("brandIds").map((v) => String(v));

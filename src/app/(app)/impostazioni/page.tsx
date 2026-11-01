@@ -8,6 +8,7 @@ import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { aggiornaUfficioUtente } from "@/app/flusso-actions";
 import { UFFICI } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
+import { statoUtente } from "@/lib/utenti/stato";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
@@ -86,7 +87,8 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         })}
       </div>
 
-      <h2 className="text-base font-bold text-neutral-900 mb-3">Utenti, ruoli e credenziali</h2>
+      <h2 className="text-base font-bold text-neutral-900 mb-1">Utenti, ruoli e credenziali</h2>
+      {admin && <p className="text-sm text-neutral-600 mb-3">Per mettere in pausa, disattivare, cambiare mansione, passare il lavoro a un collega o eliminare: apri il nome della persona (o <Link href="/commerciali" className="underline">Team &amp; performance</Link>).</p>}
 
       {!admin ? (
         <div className="bg-white rounded-lg border border-neutral-200 p-4 text-sm font-medium text-neutral-600">
@@ -110,8 +112,9 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                       {u.telefono && <span> · tel. {u.telefono}</span>}
                     </p>
                   </div>
-                  <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600 shrink-0">
-                    {u.ruolo}
+                  <span className="flex gap-1 shrink-0">
+                    {u.stato !== "ATTIVO" && <Link href={`/commerciali/${u.id}#gestione`} className={`text-xs px-2 py-1 rounded-full ${statoUtente(u.stato).classe}`}>{statoUtente(u.stato).nome}</Link>}
+                    <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{u.ruolo}</span>
                   </span>
                 </div>
                 <form action={adminResetPassword} className="flex flex-wrap items-end gap-2 pt-1 border-t border-neutral-50">

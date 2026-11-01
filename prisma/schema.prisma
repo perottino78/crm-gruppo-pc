@@ -51,6 +51,11 @@ model Utente {
   mustChangePassword   Boolean           @default(true)
   // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
   calendarioToken      String?
+  // ATTIVO | PAUSA (assente per un periodo) | DISATTIVATO (ha lasciato l'azienda). Chi non è attivo non entra nel CRM
+  // e non compare nelle tendine per assegnare lavoro nuovo; i suoi dati (offerte, clienti, storico) restano.
+  stato                String            @default("ATTIVO")
+  statoDal             DateTime?
+  statoNota            String?
   // Casella email personale: le email ai clienti mandate a nome di questa persona partono da qui.
   // La password è cifrata (src/lib/mail/caselle.ts), mai salvata in chiaro. Server e porta vuoti = quelli aziendali.
   smtpUtente           String?

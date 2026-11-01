@@ -49,7 +49,7 @@ export default async function PreventiviPage({
     }),
     prisma.cliente.findMany({ where: { ...brandFiltro, ...clienteScope }, orderBy: { nome: "asc" } }),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
-    prisma.utente.findMany({ where: { ruolo: "COMMERCIALE" }, orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { ruolo: "COMMERCIALE", stato: "ATTIVO" }, orderBy: { nome: "asc" } }),
   ]);
 
   return (

@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import StatoAcquisti from "@/components/ordini/StatoAcquisti";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
+import { soloAttivi } from "@/lib/utenti/stato";
 import { puoGestireOrdini } from "@/lib/ordini/server";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
@@ -296,7 +297,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
               <label className="text-xs font-bold text-neutral-800">Tecnico</label>
               <select name="tecnicoId" required className={inp}>
                 <option value="">Seleziona…</option>
-                {tecnici.map((t) => <option key={t.id} value={t.id}>{t.nome}{t.ruolo === "POSATORE" ? " (posatore)" : ""}</option>)}
+                {soloAttivi(tecnici).map((t) => <option key={t.id} value={t.id}>{t.nome}{t.ruolo === "POSATORE" ? " (posatore)" : ""}</option>)}
               </select>
             </div>
             <div className="flex flex-col gap-1">
@@ -405,7 +406,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                       <select name="assegnatario" defaultValue={f.assegnatoUtenteId ? `U:${f.assegnatoUtenteId}` : f.assegnatoSoggettoId ? `S:${f.assegnatoSoggettoId}` : ""} className={inp}>
                         <option value="">Assegna a…</option>
                         <optgroup label="Utenti CRM">
-                          {tecnici.map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
+                          {soloAttivi(tecnici, f.assegnatoUtenteId).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
                         </optgroup>
                         {soggettiOperativi.length > 0 && (
                           <optgroup label="Posatori / tecnici in anagrafica">
@@ -613,7 +614,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             <select name="assegnatario" className={inp}>
               <option value="">Seleziona…</option>
               <optgroup label="Interni (utenti CRM)">
-                {tecnici.map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
+                {soloAttivi(tecnici).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
               </optgroup>
               {soggettiOperativi.length > 0 && (
                 <optgroup label="Anagrafica (interni ed esterni)">
