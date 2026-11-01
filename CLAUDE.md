@@ -98,6 +98,10 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   aziendali. Password cifrata AES-GCM con `MAIL_SECRET` o `SESSION_SECRET` (se cambia, vanno reinserite). `inviaMail({ daUtenteId })`
   spedisce dalla sua casella; se non c'è o fallisce (errore salvato in `Utente.smtpErrore`) parte dall'aziendale con "rispondi a" lui.
   Usata per le email di fase della pratica (responsabile della commessa) e per l'invito dell'appuntamento al cliente (venditore).
+- **Fornitore alternativo in ordine** (`spostaRigaAFornitore` in `ordini-actions.ts`): in un ordine in BOZZA ogni riga si può
+  ordinare da un altro fornitore; va nella bozza già aperta per quel fornitore e commessa o in un nuovo ordine con gli stessi dati;
+  prezzo/codice/costo previsto azzerati, sconto del nuovo fornitore; bozza rimasta vuota (senza documenti) eliminata. Il fornitore
+  predefinito del prodotto non cambia. Ordini già inviati: rifiutato.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
@@ -110,7 +114,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

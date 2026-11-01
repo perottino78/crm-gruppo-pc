@@ -163,6 +163,55 @@ export async function togliRigaDaOrdine(fd: FormData) {
   aggiorna(r.ordineFornitoreId!, r.commessaId);
 }
 
+/**
+ * Prima dell'invio: sposta una riga a un altro fornitore (non disponibile dal solito, o più conveniente).
+ * La riga va nella bozza già aperta per quel fornitore e quella commessa, altrimenti in un nuovo ordine con gli stessi dati.
+ * Prezzo e codice del vecchio fornitore non valgono per il nuovo: si azzerano e si applica lo sconto del nuovo fornitore.
+ * Il fornitore predefinito del prodotto non cambia.
+ */
+export async function spostaRigaAFornitore(fd: FormData) {
+  const u = await utente();
+  const rigaId = str(fd, "rigaId"), fornitoreId = str(fd, "nuovoFornitoreId");
+  if (!rigaId || !fornitoreId) return;
+  const r = await prisma.rigaOrdine.findUnique({ where: { id: rigaId }, include: { ordineFornitore: true } });
+  const da = r?.ordineFornitore;
+  if (!r || !da) return;
+  if (da.stato !== "BOZZA") redirect(`/ordini-fornitori/${da.id}?errore=${encodeURIComponent("L'ordine è già stato inviato: per cambiare fornitore annullalo o togli la riga.")}`);
+  if (da.fornitoreId === fornitoreId) return;
+  const f = await prisma.soggetto.findUnique({ where: { id: fornitoreId } });
+  if (!f) return;
+  const { verso, nuovo } = await prisma.$transaction(async (tx) => {
+    // per una commessa si riusa la bozza già aperta per quel fornitore; un ordine senza commessa ne apre sempre uno nuovo
+    let verso = da.commessaId ? await tx.ordineFornitore.findFirst({ where: { fornitoreId, stato: "BOZZA", commessaId: da.commessaId }, orderBy: { createdAt: "desc" } }) : null;
+    let nuovo = false;
+    if (!verso) {
+      const numero = await prossimoNumeroOrdine(tx, da.anno);
+      verso = await tx.ordineFornitore.create({
+        data: {
+          numero, anno: da.anno, fornitoreId, commessaId: da.commessaId, divisione: da.divisione, creatoDaNome: u.nome,
+          clienteFinale: da.clienteFinale, riferimento: da.riferimento, indirizzoSpedizione: da.indirizzoSpedizione,
+          consegnaRichiesta: da.consegnaRichiesta, trasporto: da.trasporto,
+        },
+      });
+      nuovo = true;
+    }
+    await tx.rigaOrdine.update({
+      where: { id: r.id },
+      data: { ordineFornitoreId: verso.id, fornitoreId, fornitoreNome: f.ragioneSociale, codiceFornitore: null, prezzoAcquisto: null, costoPrevisto: null, scontoAcquisto: f.scontoFornitore ?? null },
+    });
+    return { verso, nuovo };
+  });
+  // la bozza rimasta vuota non serve più
+  const rimaste = await prisma.rigaOrdine.count({ where: { ordineFornitoreId: da.id } });
+  const docs = rimaste ? 1 : await prisma.documento.count({ where: { entita: "ORDINE_FORNITORE", entitaId: da.id } });
+  if (!rimaste && !docs) await prisma.ordineFornitore.delete({ where: { id: da.id } });
+  await logCommessa(da.commessaId, `Riga «${r.descrizione}» spostata da ${r.fornitoreNome ?? "?"} (ordine ${numeroOrdine(da)}) a ${f.ragioneSociale} (ordine ${numeroOrdine(verso)}${nuovo ? ", nuovo" : ""}).`, u.nome);
+  aggiorna(verso.id, da.commessaId);
+  revalidatePath(`/ordini-fornitori/${da.id}`);
+  const msg = `«${r.descrizione}» spostata a ${f.ragioneSociale} nell'ordine ${numeroOrdine(verso)}${nuovo ? " (nuovo)" : ""}: controlla prezzo e codice del fornitore.`;
+  redirect(rimaste || docs ? `/ordini-fornitori/${da.id}?ok=${encodeURIComponent(msg)}` : `/ordini-fornitori/${verso.id}?ok=${encodeURIComponent(msg + " L'ordine di prima era vuoto ed è stato eliminato.")}`);
+}
+
 async function segnaInviato(id: string, modalita: "EMAIL" | "MANUALE", a: string | null, nome: string) {
   const o = await prisma.ordineFornitore.update({ where: { id }, data: { stato: "INVIATO", inviatoIl: new Date(), inviatoA: a, inviatoDaNome: nome, modalitaInvio: modalita } });
   await prisma.rigaOrdine.updateMany({ where: { ordineFornitoreId: id, ordinato: false }, data: { ordinato: true, ordinatoIl: new Date(), ordinatoDaNome: nome } });
