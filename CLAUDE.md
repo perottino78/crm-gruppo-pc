@@ -128,19 +128,26 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   commessa aperta unica, detrazione dalla causale, sezionale dal numero; scadenze INCASSO (`origine FATTURA_VENDITA`, `fatturaVenditaId`)
   o aggancio all'acconto/saldo della commessa con lo stesso importo (±1 €). Gli XML emessi da noi sono rifiutati tra gli acquisti e viceversa.
   Arrivo automatico dal cassetto fiscale/SDI: non ancora (per ora carico manuale degli zip).
+- **Contabilità da BConsole** (rotta `api/admin/importa-contabilita-bconsole`, logica `src/lib/amministrazione/bconsole.ts`): fatture di
+  vendita e d'acquisto con lo stato di ogni rata (lette in sola lettura dalle liste JSON di BConsole, script in scratchpad
+  `bc/estrai*.js` + `prepara-contabilita.py`). Rilanciabile: chiavi `BCV|id` / `BCA|id`, scadenze `BCV:<rata>` / `FA:<id>:bc<rata>`;
+  ai rilanci aggiorna solo gli stati delle rate (`allineaScadenza`, mai sopra i pagamenti registrati nel CRM). Saldate →
+  `pagatoManuale` con nota "Saldata in BConsole il …"; "Rit. Fis Compensazione" → `ritenuta`; Stornata → ANNULLATA; parziali → aperte
+  con nota "verificare". Vendite agganciate all'acconto/saldo della commessa con lo stesso importo; fornitori per P.IVA/CF/nome
+  (creati se mancano). Gli XML caricati dopo riconoscono le fatture già importate (fornitore/numero/anno/segno).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 183, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 186, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

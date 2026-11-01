@@ -41,9 +41,14 @@ export async function importaFattura(f: FatturaLetta, opz: { xml: string | null;
   if (!f.numero || !/^\d{4}-\d{2}-\d{2}/.test(f.data)) return { stato: "ERRORE", titolo, messaggio: "Mancano numero o data della fattura." };
   if (divisioneDaCliente(f.fornitore.partitaIva)) return { stato: "ERRORE", titolo, messaggio: "È una fattura emessa da noi (di vendita): caricala in Fatture di vendita." };
   const chiave = chiaveFattura(pivaNorm(f.fornitore.partitaIva) || null, f.fornitore.denominazione, f.tipoDocumento, f.numero, f.data);
-  const esiste = await prisma.fatturaAcquisto.findUnique({ where: { chiave }, select: { id: true } });
-  if (esiste) return { stato: "DOPPIA", id: esiste.id, titolo, messaggio: "Già caricata." };
+  const anno = f.data.slice(0, 4);
+  const piva = pivaNorm(f.fornitore.partitaIva);
   let forn = await trovaFornitore(f.fornitore.partitaIva, f.fornitore.denominazione);
+  // già presente: stessa chiave, oppure stesso fornitore (P.IVA o anagrafica) + numero + anno (es. importata da BConsole)
+  const nellAnno = { gte: new Date(`${anno}-01-01T00:00:00Z`), lt: new Date(`${Number(anno) + 1}-01-01T00:00:00Z`) };
+  const esiste = (await prisma.fatturaAcquisto.findUnique({ where: { chiave }, select: { id: true } }))
+    ?? (piva || forn ? await prisma.fatturaAcquisto.findFirst({ where: { numero: f.numero, data: nellAnno, totale: f.notaCredito ? { lt: 0 } : { gte: 0 }, OR: [...(piva ? [{ partitaIva: piva }] : []), ...(forn ? [{ fornitoreId: forn.id }] : [])] }, select: { id: true } }) : null);
+  if (esiste) return { stato: "DOPPIA", id: esiste.id, titolo, messaggio: "Già caricata." };
   if (!forn && opz.creaFornitore !== false && f.fornitore.partitaIva) {
     forn = await prisma.soggetto.create({
       data: { ragioneSociale: f.fornitore.denominazione, ruoli: ["FORNITORE"], partitaIva: pivaNorm(f.fornitore.partitaIva), codiceFiscale: f.fornitore.codiceFiscale, indirizzo: f.fornitore.indirizzo, cap: f.fornitore.cap, comune: f.fornitore.comune, provincia: f.fornitore.provincia, email: f.fornitore.email, note: `Creato dalla fattura ${f.numero} del ${f.data}` },
