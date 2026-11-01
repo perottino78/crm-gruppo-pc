@@ -94,7 +94,7 @@ export function estraiXml(buf: Buffer): string | null {
 
 export type FatturaLetta = {
   fornitore: { denominazione: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; cap: string | null; comune: string | null; provincia: string | null; email: string | null };
-  cliente: { denominazione: string; partitaIva: string | null };
+  cliente: { denominazione: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; comune: string | null };
   tipoDocumento: string;
   notaCredito: boolean;
   numero: string;
@@ -130,7 +130,12 @@ export function leggiFatturaPA(xml: string): FatturaLetta[] {
     cap: testo(sede, "CAP") || null, comune: testo(sede, "Comune") || null, provincia: testo(sede, "Provincia") || null,
     email: testo(ced, "Contatti/Email") || null,
   };
-  const cliente = { denominazione: denominazione(trova(trova(ces, "DatiAnagrafici"), "Anagrafica")), partitaIva: piva(trova(ces, "DatiAnagrafici")) };
+  const sedeCes = trova(ces, "Sede");
+  const cliente = {
+    denominazione: denominazione(trova(trova(ces, "DatiAnagrafici"), "Anagrafica")), partitaIva: piva(trova(ces, "DatiAnagrafici")),
+    codiceFiscale: testo(trova(ces, "DatiAnagrafici"), "CodiceFiscale") || null,
+    indirizzo: [testo(sedeCes, "Indirizzo"), testo(sedeCes, "NumeroCivico")].filter(Boolean).join(" ") || null, comune: testo(sedeCes, "Comune") || null,
+  };
   const corpi = figli(fe, "FatturaElettronicaBody");
   if (!corpi.length) throw new Error("La fattura non ha il corpo (FatturaElettronicaBody).");
   return corpi.map((b) => {
@@ -194,6 +199,6 @@ export const MODALITA_PAGAMENTO: Record<string, string> = {
   MP01: "Contanti", MP02: "Assegno", MP05: "Bonifico", MP08: "Carta di pagamento", MP12: "RIBA", MP19: "SEPA Direct Debit", MP21: "SEPA Direct Debit B2B", MP23: "PagoPA",
 };
 export const TIPI_DOCUMENTO: Record<string, string> = {
-  TD01: "Fattura", TD02: "Acconto su fattura", TD04: "Nota di credito", TD05: "Nota di debito", TD06: "Parcella", TD08: "Nota di credito semplificata",
+  PROFORMA: "Proforma", TD01: "Fattura", TD02: "Acconto su fattura", TD04: "Nota di credito", TD05: "Nota di debito", TD06: "Parcella", TD08: "Nota di credito semplificata",
   TD24: "Fattura differita", TD25: "Fattura differita (triangolare)", TD16: "Integrazione reverse charge", TD17: "Autofattura servizi estero",
 };

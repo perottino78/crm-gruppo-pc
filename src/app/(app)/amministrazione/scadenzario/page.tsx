@@ -9,23 +9,33 @@ import { eur, dataIt, STATI_SCADENZA, CATEGORIE_MOVIMENTO } from "@/lib/amminist
 import { BRANDS } from "@/lib/brands";
 import VisteSalvate from "@/components/amministrazione/VisteSalvate";
 import { nuovaScadenza, modificaScadenza, saldaManualmente, annullaScadenza } from "@/app/amministrazione-actions";
+import RegistraPagamento, { type ContoPerPagamento } from "@/components/amministrazione/RegistraPagamento";
+import { ritenutaPrevista } from "@/lib/amministrazione/pagamenti";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm bg-white";
 
-export default async function ScadenzarioPage({ searchParams }: { searchParams: Promise<ParametriScadenze> }) {
+export default async function ScadenzarioPage({ searchParams }: { searchParams: Promise<ParametriScadenze & { ok?: string; errore?: string }> }) {
   const p = await searchParams;
   await sincronizzaScadenzeCommesse();
   const oggi = oggiUtc();
-  const [scadenze, fornitori] = await Promise.all([
+  const [scadenze, fornitori, conti] = await Promise.all([
     prisma.scadenza.findMany({
       where: whereScadenze(p),
-      include: { abbinamenti: { include: { movimento: { include: { conto: { select: { nome: true } } } } } } },
+      include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } },
       orderBy: [{ dataScadenza: { sort: "asc", nulls: "last" } }, { createdAt: "asc" }],
       take: 1000,
     }),
     prisma.soggetto.findMany({ where: { attivo: true }, select: { id: true, ragioneSociale: true }, orderBy: { ragioneSociale: "asc" } }),
+    prisma.contoFinanziario.findMany({ where: { attivo: true }, select: { id: true, nome: true, tipo: true }, orderBy: [{ ordine: "asc" }, { nome: "asc" }] }),
   ]);
-  const righe = scadenze.map((s) => ({ ...s, residuo: residuoScadenza(s), scaduta: !!s.dataScadenza && s.dataScadenza < oggi && ["APERTA", "PARZIALE"].includes(s.stato) }));
+  // incassi di fatture con detrazione: si propone la ritenuta dell'11%
+  const fv = await prisma.fatturaVendita.findMany({ where: { id: { in: scadenze.map((x) => x.fatturaVenditaId).filter(Boolean) as string[] }, detrazione: true }, select: { id: true, imponibile: true, totale: true } });
+  const fvDi = new Map(fv.map((f) => [f.id, f]));
+  const righe = scadenze.map((s) => ({
+    ...s, residuo: residuoScadenza(s), scaduta: !!s.dataScadenza && s.dataScadenza < oggi && ["APERTA", "PARZIALE"].includes(s.stato),
+    ritenutaSuggerita: s.fatturaVenditaId && fvDi.has(s.fatturaVenditaId) && s.ritenuta === 0 ? ritenutaPrevista(fvDi.get(s.fatturaVenditaId)!, s.importo) : 0,
+  }));
+  const ritorno = `/amministrazione/scadenzario${qsBase(p)}`;
   const tot = (tipo: string) => cent(righe.filter((r) => r.tipo === tipo && r.stato !== "ANNULLATA").reduce((t, r) => t + r.residuo, 0));
   const daIncassare = tot("INCASSO"), daPagare = tot("PAGAMENTO");
 
@@ -48,6 +58,8 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
 
   return (
     <div className="space-y-4">
+      {p.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {p.ok}</p>}
+      {p.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{p.errore}</p>}
       <div className="flex flex-wrap gap-2 items-center">
         {[["", "Incassi e pagamenti"], ["INCASSO", "Solo incassi"], ["PAGAMENTO", "Solo pagamenti"]].map(([v, l]) => (
           <Link key={v} href={qs({ tipo: v || undefined })} className={pill((p.tipo ?? "") === v)}>{l}</Link>
@@ -110,7 +122,7 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
           <tbody>
             {righe.length === 0 && <tr><td colSpan={8} className="px-3 py-8 text-center text-neutral-500">Nessuna scadenza con questi filtri.</td></tr>}
             {[...gruppi.entries()].map(([k, g]) => (
-              <Gruppo key={k} titolo={nomeMese(k)} righe={g} />
+              <Gruppo key={k} titolo={nomeMese(k)} righe={g} conti={conti} ritorno={ritorno} />
             ))}
           </tbody>
         </table>
@@ -121,11 +133,19 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
 }
 
 type Riga = Awaited<ReturnType<typeof prisma.scadenza.findMany>>[number] & {
-  residuo: number; scaduta: boolean;
-  abbinamenti: { id: string; importo: number; movimento: { data: Date; descrizione: string; conto: { nome: string } } }[];
+  residuo: number; scaduta: boolean; ritenutaSuggerita: number;
+  abbinamenti: { id: string; importo: number; movimento: { id: string; data: Date; metodo: string | null; origine: string; confermatoIl: Date | null; daConfermare: boolean; conto: { nome: string } } }[];
 };
 
-function Gruppo({ titolo, righe }: { titolo: string; righe: Riga[] }) {
+/** Filtri attuali, per tornare alla stessa vista dopo aver registrato un pagamento. */
+function qsBase(p: ParametriScadenze) {
+  const u = new URLSearchParams();
+  for (const k of ["tipo", "periodo", "stato", "q"] as const) if (p[k]) u.set(k, p[k]!);
+  const t = u.toString();
+  return t ? `?${t}` : "";
+}
+
+function Gruppo({ titolo, righe, conti, ritorno }: { titolo: string; righe: Riga[]; conti: ContoPerPagamento[]; ritorno: string }) {
   const inc = cent(righe.filter((r) => r.tipo === "INCASSO").reduce((t, r) => t + r.residuo, 0));
   const pag = cent(righe.filter((r) => r.tipo === "PAGAMENTO").reduce((t, r) => t + r.residuo, 0));
   return (
@@ -147,8 +167,9 @@ function Gruppo({ titolo, righe }: { titolo: string; righe: Riga[] }) {
               {s.commessaId ? <Link href={`/commesse/${s.commessaId}`} className="underline">{s.descrizione}</Link> : s.descrizione}
               {s.numeroDocumento && <span className="text-neutral-500"> · doc. {s.numeroDocumento}</span>}
               {s.abbinamenti.map((a) => (
-                <span key={a.id} className="block text-[11px] text-green-800">✓ {dataIt(a.movimento.data)} {a.movimento.conto.nome}: {eur(a.importo)}</span>
+                <span key={a.id} className="block text-[11px] text-green-800">✓ {dataIt(a.movimento.data)} {a.movimento.conto.nome}: {eur(a.importo)}{a.movimento.daConfermare && !a.movimento.confermatoIl ? " (da confermare)" : ""}</span>
               ))}
+              {s.ritenuta > 0 && <span className="block text-[11px] text-green-800">✓ ritenuta 11%: {eur(s.ritenuta)}</span>}
               {s.note && <span className="block text-[11px] text-neutral-500 whitespace-pre-line">{s.note}</span>}
             </td>
             <td className="px-3 py-2 text-right whitespace-nowrap">{eur(s.importo)}</td>
@@ -158,8 +179,10 @@ function Gruppo({ titolo, righe }: { titolo: string; righe: Riga[] }) {
               {s.stato !== "ANNULLATA" && (
                 <details className="relative inline-block text-left">
                   <summary className="cursor-pointer text-xs underline text-neutral-700 list-none">Gestisci</summary>
-                  <div className="absolute right-0 z-20 mt-1 w-80 bg-white border border-neutral-300 rounded-lg shadow-lg p-3 space-y-3">
-                    <form action={modificaScadenza} className="space-y-1.5">
+                  <div className="absolute right-0 z-20 mt-1 w-[26rem] max-w-[90vw] bg-white border border-neutral-300 rounded-lg shadow-lg p-3 space-y-3">
+                    <RegistraPagamento compatto conti={conti} ritorno={ritorno} ritenutaSuggerita={s.ritenutaSuggerita}
+                      scadenza={{ id: s.id, tipo: s.tipo, residuo: s.residuo, ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />
+                    <form action={modificaScadenza} className="space-y-1.5 border-t pt-2">
                       <input type="hidden" name="id" value={s.id} />
                       <label className="block text-[11px] font-semibold">Data scadenza
                         <input type="date" name="dataScadenza" defaultValue={s.dataScadenza?.toISOString().slice(0, 10)} className={`${inp} w-full`} /></label>
@@ -167,7 +190,7 @@ function Gruppo({ titolo, righe }: { titolo: string; righe: Riga[] }) {
                         <input name="importo" defaultValue={s.importo.toFixed(2).replace(".", ",")} className={`${inp} w-full`} /></label>}
                       <input name="numeroDocumento" defaultValue={s.numeroDocumento ?? ""} placeholder="N° documento" className={`${inp} w-full`} />
                       <button className="btn-3d btn-3d-blue text-xs w-full">Salva modifiche</button>
-                      {daCommessa && <p className="text-[10px] text-neutral-500">L&apos;importo arriva dalla commessa: si cambia lì.</p>}
+                      {daCommessa && <p className="text-[10px] text-neutral-500">L&apos;importo arriva {s.origine === "FATTURA_VENDITA" || s.origine === "FATTURA_ACQUISTO" ? "dalla fattura" : "dalla commessa"}: si cambia lì.</p>}
                     </form>
                     {s.residuo > 0.004 && (
                       <form action={saldaManualmente} className="space-y-1.5 border-t pt-2">

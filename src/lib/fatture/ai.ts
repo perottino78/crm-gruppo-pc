@@ -51,7 +51,7 @@ export function normalizzaFatturaAi(j: FatturaAi | null): FatturaLetta | null {
   const tipo = /TD0?4|nota/i.test(s(j.tipo)) ? "TD04" : "TD01";
   return {
     fornitore: { denominazione: nome, partitaIva: s(j.fornitore?.partitaIva).replace(/\D/g, "") || null, codiceFiscale: s(j.fornitore?.codiceFiscale) || null, indirizzo: s(j.fornitore?.indirizzo) || null, cap: s(j.fornitore?.cap) || null, comune: s(j.fornitore?.comune) || null, provincia: s(j.fornitore?.provincia) || null, email: null },
-    cliente: { denominazione: "", partitaIva: s(j.clientePartitaIva).replace(/\D/g, "") || null },
+    cliente: { denominazione: "", partitaIva: s(j.clientePartitaIva).replace(/\D/g, "") || null, codiceFiscale: null, indirizzo: null, comune: null },
     tipoDocumento: tipo, notaCredito: tipo === "TD04", numero, data, divisa: "EUR",
     totale: n(j.totale) ?? Math.round((imponibile + iva) * 100) / 100, imponibile, iva, causale: "",
     righe: righe.length ? righe : [{ posizione: 1, codice: null, descrizione: "Totale fattura", quantita: null, um: null, prezzoUnitario: null, importo: imponibile, aliquotaIva: null }],

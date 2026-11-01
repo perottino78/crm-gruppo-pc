@@ -39,6 +39,7 @@ export type EsitoImport = { stato: "NUOVA" | "DOPPIA" | "ERRORE"; id?: string; t
 export async function importaFattura(f: FatturaLetta, opz: { xml: string | null; origine: "XML" | "PDF" | "MANUALE"; creatoDaNome: string; creaFornitore?: boolean }): Promise<EsitoImport> {
   const titolo = `${f.fornitore.denominazione} n. ${f.numero} del ${f.data.split("-").reverse().join("/")}`;
   if (!f.numero || !/^\d{4}-\d{2}-\d{2}/.test(f.data)) return { stato: "ERRORE", titolo, messaggio: "Mancano numero o data della fattura." };
+  if (divisioneDaCliente(f.fornitore.partitaIva)) return { stato: "ERRORE", titolo, messaggio: "È una fattura emessa da noi (di vendita): caricala in Fatture di vendita." };
   const chiave = chiaveFattura(pivaNorm(f.fornitore.partitaIva) || null, f.fornitore.denominazione, f.tipoDocumento, f.numero, f.data);
   const esiste = await prisma.fatturaAcquisto.findUnique({ where: { chiave }, select: { id: true } });
   if (esiste) return { stato: "DOPPIA", id: esiste.id, titolo, messaggio: "Già caricata." };
@@ -124,16 +125,80 @@ export async function registraFattura(tx: Tx, id: string, nome: string) {
     const rate = ratePagamento(f, forn?.giorniPagamento ?? null);
     for (const [i, r] of rate.entries()) {
       await tx.scadenza.create({
-        data: { tipo: "PAGAMENTO", descrizione: `Fattura ${f.numero} del ${f.data.toLocaleDateString("it-IT")}${rate.length > 1 ? ` — rata ${i + 1}/${rate.length}` : ""}${r.modalita ? ` (${r.modalita})` : ""}`, controparte: f.fornitoreNome, soggettoId: f.fornitoreId, commessaId: null, origine: "FATTURA_ACQUISTO", chiaveImport: `FA:${id}:${i}`, importo: r.importo, dataScadenza: r.data, numeroDocumento: f.numero, categoria: "Acquisti", brand: f.divisione },
+        data: { tipo: "PAGAMENTO", descrizione: `${f.tipoDocumento === "PROFORMA" ? "Proforma" : "Fattura"} ${f.numero} del ${f.data.toLocaleDateString("it-IT")}${rate.length > 1 ? ` — rata ${i + 1}/${rate.length}` : ""}${r.modalita ? ` (${r.modalita})` : ""}`, controparte: f.fornitoreNome, soggettoId: f.fornitoreId, commessaId: null, origine: "FATTURA_ACQUISTO", chiaveImport: `FA:${id}:${i}`, importo: r.importo, dataScadenza: r.data, numeroDocumento: f.numero, categoria: "Acquisti", brand: f.divisione },
       });
     }
   }
+  // fattura definitiva di una proforma già pagata: i pagamenti passano sulla fattura
+  if (f.proformaId) {
+    const t = await trasferisciProforma(tx, id, nome);
+    if (t) avvisi.push(t);
+  }
   return { commesse: [...commesse], avvisi };
+}
+
+/**
+ * Proforma → fattura definitiva: pagamenti (movimenti abbinati, pagamenti a mano, ritenute) passano sulle scadenze
+ * della fattura, le scadenze della proforma si chiudono, i costi della proforma si tolgono (li porta la fattura).
+ * Si fa una volta sola: la proforma diventa SOSTITUITA. Ritorna un messaggio o null.
+ */
+export async function trasferisciProforma(tx: Tx, fatturaId: string, nome: string): Promise<string | null> {
+  const f = await tx.fatturaAcquisto.findUniqueOrThrow({ where: { id: fatturaId } });
+  if (!f.proformaId || f.stato !== "REGISTRATA") return null;
+  const pf = await tx.fatturaAcquisto.findUnique({ where: { id: f.proformaId }, include: { righe: { select: { rigaOrdineId: true, commessaId: true } } } });
+  if (!pf || pf.stato === "SOSTITUITA") return null;
+  const scadF = await tx.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, include: { abbinamenti: true }, orderBy: [{ dataScadenza: "asc" }, { chiaveImport: "asc" }] });
+  const scadP = await tx.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${pf.id}:` }, stato: { not: "ANNULLATA" } }, include: { abbinamenti: true } });
+  if (!scadF.length) return "Collegata alla proforma, ma la fattura non ha scadenze su cui spostare i pagamenti.";
+  // spazio libero su ogni scadenza della fattura
+  const libero = scadF.map((s) => cent(s.importo - s.pagatoManuale - s.ritenuta - s.abbinamenti.reduce((t, a) => t + a.importo, 0)));
+  let spostato = 0;
+  const posa = async (movimentoId: string, importo: number, creatoDaNome: string | null) => {
+    let resto = importo;
+    for (let i = 0; i < scadF.length && resto > 0.004; i++) {
+      const quota = i === scadF.length - 1 ? resto : Math.min(resto, Math.max(0, libero[i]));
+      if (quota <= 0.004) continue;
+      const gia = await tx.abbinamentoScadenza.findUnique({ where: { movimentoId_scadenzaId: { movimentoId, scadenzaId: scadF[i].id } } });
+      if (gia) await tx.abbinamentoScadenza.update({ where: { id: gia.id }, data: { importo: cent(gia.importo + quota) } });
+      else await tx.abbinamentoScadenza.create({ data: { movimentoId, scadenzaId: scadF[i].id, importo: cent(quota), creatoDaNome } });
+      libero[i] = cent(libero[i] - quota); resto = cent(resto - quota);
+    }
+  };
+  for (const s of scadP) {
+    for (const a of s.abbinamenti) { await posa(a.movimentoId, a.importo, a.creatoDaNome); spostato += a.importo; }
+    await tx.abbinamentoScadenza.deleteMany({ where: { scadenzaId: s.id } });
+    if (s.pagatoManuale > 0 || s.ritenuta > 0) {
+      await tx.scadenza.update({ where: { id: scadF[0].id }, data: { pagatoManuale: { increment: s.pagatoManuale }, ritenuta: { increment: s.ritenuta } } });
+      spostato += s.pagatoManuale + s.ritenuta;
+    }
+    await tx.scadenza.update({ where: { id: s.id }, data: { stato: "ANNULLATA", pagatoManuale: 0, ritenuta: 0, note: [s.note, `Sostituita dalla fattura ${f.numero} del ${f.data.toLocaleDateString("it-IT")}: pagamenti spostati lì.`].filter(Boolean).join("\n") } });
+  }
+  // stato delle scadenze della fattura dopo lo spostamento
+  for (const s of scadF) {
+    const r = await tx.scadenza.findUniqueOrThrow({ where: { id: s.id }, include: { abbinamenti: true } });
+    const pagato = cent(r.abbinamenti.reduce((t, a) => t + a.importo, 0) + r.pagatoManuale + r.ritenuta);
+    await tx.scadenza.update({ where: { id: r.id }, data: { stato: pagato <= 0.004 ? "APERTA" : pagato >= cent(r.importo) - 0.004 ? "PAGATA" : "PARZIALE" } });
+  }
+  await tx.fatturaAcquisto.update({ where: { id: pf.id }, data: { stato: "SOSTITUITA", note: [pf.note, `Sostituita dalla fattura ${f.numero} del ${f.data.toLocaleDateString("it-IT")} (registrata da ${nome}).`].filter(Boolean).join("\n") } });
+  // i costi li porta la fattura definitiva
+  await tx.costoManuale.deleteMany({ where: { fatturaAcquistoId: pf.id } });
+  await ricalcolaCostiRighe(tx, [...new Set(pf.righe.map((r) => r.rigaOrdineId).filter(Boolean))] as string[]);
+  return `Proforma ${pf.numero} sostituita: ${spostato > 0 ? `${spostato.toFixed(2).replace(".", ",")} € già pagati spostati sulla fattura` : "nessun pagamento da spostare"}.`;
+}
+
+/** Proforme dello stesso fornitore ancora in attesa della fattura definitiva. */
+export async function proformeAperte(f: { id: string; fornitoreId: string | null; fornitoreNome: string }) {
+  const gia = (await prisma.fatturaAcquisto.findMany({ where: { proformaId: { not: null }, id: { not: f.id } }, select: { proformaId: true } })).map((x) => x.proformaId!);
+  return prisma.fatturaAcquisto.findMany({
+    where: { tipoDocumento: "PROFORMA", stato: "REGISTRATA", id: { notIn: [f.id, ...gia] }, ...(f.fornitoreId ? { fornitoreId: f.fornitoreId } : { fornitoreNome: { equals: f.fornitoreNome, mode: "insensitive" } }) },
+    orderBy: { data: "desc" }, take: 20,
+  });
 }
 
 /** Riapre una fattura registrata (per correggerla): toglie costi, riporta le bolle «da fatturare», toglie le scadenze non pagate. */
 export async function riapriFattura(tx: Tx, id: string) {
   const f = await tx.fatturaAcquisto.findUniqueOrThrow({ where: { id }, include: { righe: true, bolle: { select: { id: true } } } });
+  if (f.stato === "SOSTITUITA") throw new Error("La proforma è già stata sostituita dalla fattura definitiva.");
   const scad = await tx.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${id}:` } }, include: { abbinamenti: { select: { id: true } } } });
   if (scad.some((s) => s.abbinamenti.length || s.pagatoManuale > 0 || s.stato !== "APERTA")) throw new Error("La fattura ha già pagamenti registrati: non si può riaprire.");
   await tx.scadenza.deleteMany({ where: { id: { in: scad.map((s) => s.id) } } });

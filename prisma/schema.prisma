@@ -1186,6 +1186,15 @@ model MovimentoFinanziario {
   stornoDiId     String?
   stornatoDaId   String?
   creatoDaNome   String?
+  // Pagamento/incasso registrato a mano dallo scadenzario: come è stato pagato (bonifico, carta, assegno…).
+  // Sui conti in banca resta "da confermare" finché l'estratto conto importato non lo ritrova (stesso importo, data vicina).
+  metodo          String?
+  daConfermare    Boolean               @default(false)
+  confermatoIl    DateTime?
+  // Commissione bancaria legata a un pagamento registrato a mano (si annulla insieme al pagamento)
+  commissioneDiId String?
+  // Ritenuta registrata insieme a questo incasso (si toglie dalla scadenza se il pagamento viene annullato)
+  ritenuta        Float                 @default(0)
   abbinamenti    AbbinamentoScadenza[]
   createdAt      DateTime              @default(now())
 
@@ -1215,6 +1224,10 @@ model Scadenza {
   stato           String                @default("APERTA")
   // Parte saldata senza movimento bancario (es. incasso registrato prima dell'uso della prima nota)
   pagatoManuale   Float                 @default(0)
+  // Parte coperta dalla ritenuta d'acconto trattenuta dalla banca sui bonifici per detrazione (11% dell'imponibile)
+  ritenuta        Float                 @default(0)
+  // Fattura di vendita a cui appartiene l'incasso
+  fatturaVenditaId String?
   numeroDocumento String?
   categoria       String?
   brand           String?
@@ -1226,6 +1239,7 @@ model Scadenza {
   @@unique([commessaId, origine])
   @@index([stato, dataScadenza])
   @@index([chiaveImport])
+  @@index([fatturaVenditaId])
 }
 
 // Collegamento movimento ↔ scadenza (un bonifico può saldare più fatture e viceversa)
@@ -1564,6 +1578,11 @@ model FatturaAcquisto {
   registrataIl      DateTime?
   registrataDaNome  String?
   creatoDaNome      String?
+  // Fattura definitiva che sostituisce una proforma (tipoDocumento PROFORMA, poi stato SOSTITUITA): i pagamenti passano qui
+  proformaId        String?
+  // Banca e modo di pagamento previsti (come in BConsole)
+  bancaPrevista     String?
+  modoPagamento     String?
   righe             RigaFatturaAcquisto[]
   bolle             BollaEntrata[]
   createdAt         DateTime              @default(now())
@@ -1657,3 +1676,39 @@ model CampagnaInvio {
   @@unique([campagnaId, clienteId])
   @@index([stato, createdAt])
 }
+
+// ============ FATTURE DI VENDITA ============
+// Fatte in BConsole (fino all'emissione dal CRM con SDI) e importate dagli XML: servono per scaduto e incassi.
+model FatturaVendita {
+  id             String    @id @default(cuid())
+  chiave         String    @unique
+  sezionale      String?
+  tipoDocumento  String    @default("TD01")
+  numero         String
+  data           DateTime
+  clienteId      String?
+  clienteNome    String
+  partitaIva     String?
+  codiceFiscale  String?
+  commessaId     String?
+  // Società che emette (P&C, Work & Services) e marchio/centro di ricavo
+  divisione      String?
+  brand          String?
+  imponibile     Float     @default(0)
+  iva            Float     @default(0)
+  totale         Float     @default(0)
+  // Lavori con detrazione fiscale: il cliente paga con bonifico "parlante" e la banca trattiene l'11% dell'imponibile
+  detrazione     Boolean   @default(false)
+  causale        String?
+  origine        String    @default("XML") // XML | MANUALE
+  xml            String?
+  note           String?
+  creatoDaNome   String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([clienteId])
+  @@index([commessaId])
+  @@index([data])
+}
+
