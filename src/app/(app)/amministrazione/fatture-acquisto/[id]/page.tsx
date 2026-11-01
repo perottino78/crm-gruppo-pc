@@ -61,7 +61,7 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
         <div>
           <Link href="/amministrazione/fatture-acquisto" className="text-sm text-blue-800 underline">← Fatture d&apos;acquisto</Link>
           <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.numero} del {dataIt(f.data)}</h2>
-          <p className="text-sm text-neutral-700"><b>{f.fornitoreNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : ""} · {f.divisione ?? "società non indicata"} · {f.origine === "XML" ? "fattura elettronica" : f.origine === "PDF" ? "da PDF" : "inserita a mano"}</p>
+          <p className="text-sm text-neutral-700"><b>{f.fornitoreNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : ""} · {f.divisione ?? "società non indicata"} · {f.origine === "XML" ? "fattura elettronica" : f.origine === "PDF" ? "da PDF" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}</p>
           {(f.riferimentiOrdine || f.riferimentiDdt) && <p className="text-xs text-neutral-600">{f.riferimentiOrdine ? `Ordini citati: ${f.riferimentiOrdine}` : ""}{f.riferimentiOrdine && f.riferimentiDdt ? " · " : ""}{f.riferimentiDdt ? `DDT citati: ${f.riferimentiDdt}` : ""}</p>}
           {!f.fornitoreId && <p className="text-xs text-amber-800">Fornitore non trovato in anagrafica: sceglilo qui sotto per collegare bolle e ordini.</p>}
         </div>

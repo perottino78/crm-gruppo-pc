@@ -43,7 +43,7 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
           <Link href="/amministrazione/fatture-vendita" className="text-sm text-blue-800 underline">← Fatture di vendita</Link>
           <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.numero} del {dataIt(f.data)}</h2>
           <p className="text-sm text-neutral-700">
-            <b>{f.clienteNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : f.codiceFiscale ? ` · CF ${f.codiceFiscale}` : ""} · {f.divisione ?? "P&C"}{f.brand && f.brand !== (f.divisione ?? "P&C") ? ` · ${f.brand}` : ""} · {f.origine === "XML" ? "da XML BConsole" : "inserita a mano"}
+            <b>{f.clienteNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : f.codiceFiscale ? ` · CF ${f.codiceFiscale}` : ""} · {f.divisione ?? "P&C"}{f.brand && f.brand !== (f.divisione ?? "P&C") ? ` · ${f.brand}` : ""} · {f.origine === "XML" ? "da XML" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}
           </p>
           <p className="text-xs text-neutral-600">
             {cliente ? <Link href={`/clienti/${cliente.id}`} className="underline">Scheda cliente</Link> : <span className="text-amber-800">Cliente non collegato al CRM: sceglilo qui sotto.</span>}

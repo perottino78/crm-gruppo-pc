@@ -78,7 +78,10 @@ export async function importaFatturaVendita(f: FatturaLetta, opz: { xml: string 
   if (!f.numero || !/^\d{4}-\d{2}-\d{2}/.test(f.data)) return { stato: "ERRORE", titolo, messaggio: "Mancano numero o data." };
   if (opz.origine === "XML" && !emessaDalGruppo(f)) return { stato: "ERRORE", titolo, messaggio: `Non è emessa da P&C o Work & Services (emessa da ${f.fornitore.denominazione}): è una fattura d'acquisto, caricala in Fatture d'acquisto.` };
   const chiave = chiaveVendita({ numero: f.numero, data: f.data, tipoDocumento: f.tipoDocumento, cedente: f.fornitore.partitaIva });
-  const esiste = await prisma.fatturaVendita.findUnique({ where: { chiave }, select: { id: true } });
+  const anno = f.data.slice(0, 4);
+  // già presente: stessa chiave, oppure stesso numero nello stesso anno (es. importata da BConsole)
+  const esiste = (await prisma.fatturaVendita.findUnique({ where: { chiave }, select: { id: true } }))
+    ?? (await prisma.fatturaVendita.findFirst({ where: { numero: f.numero, data: { gte: new Date(`${anno}-01-01T00:00:00Z`), lt: new Date(`${Number(anno) + 1}-01-01T00:00:00Z`) } }, select: { id: true } }));
   if (esiste) return { stato: "DOPPIA", id: esiste.id, titolo, messaggio: "Già caricata." };
   const cliente = await trovaCliente(f.cliente);
   // commessa: quella aperta del cliente, se è una sola
