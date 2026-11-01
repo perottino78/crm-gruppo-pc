@@ -38,7 +38,7 @@ export async function promozioneValida(adesso: Date, db: Db = prisma): Promise<{
 /** Le email automatiche partono solo se accese in Impostazioni (finché Keap è attivo restano in pausa) e se c'è la posta. */
 export async function statoAutomazioni(): Promise<{ attive: boolean; posta: boolean }> {
   const c = await prisma.configurazione.findUnique({ where: { chiave: CHIAVE_ATTIVE } });
-  return { attive: c?.valore === "1", posta: mailConfigurata() };
+  return { attive: c?.valore === "1", posta: await mailConfigurata() };
 }
 
 const SEGRETO = process.env.SESSION_SECRET || "gpc-2026-session-secret-x7f2-cambiami-in-produzione";

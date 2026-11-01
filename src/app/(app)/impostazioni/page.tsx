@@ -7,15 +7,18 @@ import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { aggiornaUfficioUtente } from "@/app/flusso-actions";
 import { UFFICI } from "@/lib/flusso";
+import { CasellaEmailAdmin } from "@/components/CasellaEmail";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
-export default async function ImpostazioniPage() {
+export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string }> }) {
+  const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
   const admin = isAmministratore(utenteCorrente);
 
   const [config, utenti, brands] = await Promise.all([
-    prisma.configurazione.findMany({ orderBy: { chiave: "asc" } }),
+    // la posta aziendale ha il suo riquadro (Email automatiche): la password non deve comparire qui
+    prisma.configurazione.findMany({ where: { NOT: { chiave: { startsWith: "posta_" } } }, orderBy: { chiave: "asc" } }),
     admin ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);
@@ -156,6 +159,11 @@ export default async function ImpostazioniPage() {
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva telefono</button>
                 </form>
+                <div id={sp.utente === u.id ? "posta" : undefined}>
+                  <CasellaEmailAdmin utente={u} />
+                  {sp.utente === u.id && sp.posta && <p className="text-xs text-emerald-700 mt-1">✅ {sp.posta}</p>}
+                  {sp.utente === u.id && sp.postaErrore && <p className="text-xs text-red-700 mt-1">{sp.postaErrore}</p>}
+                </div>
                 <form action={aggiornaSolarisRuolo} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />
                   <div className="flex flex-col gap-1">

@@ -401,7 +401,7 @@ export default async function SchedaClientePage({
               <FormAppuntamento
                 utenti={utentiCal} utenteId={cliente.responsabileId ?? utenteCorrente!.id} puoAssegnare={vedeTutti(utenteCorrente!.ruolo)}
                 data={`${aggiungiGiorni(chiaveGiorno(new Date()), 1)}T09:00`}
-                cliente={{ id: cliente.id, nome: cliente.nome, email: cliente.email }} ritorno={`/clienti/${cliente.id}?sez=appuntamenti`} mailAttiva={mailConfigurata()}
+                cliente={{ id: cliente.id, nome: cliente.nome, email: cliente.email }} ritorno={`/clienti/${cliente.id}?sez=appuntamenti`} mailAttiva={await mailConfigurata()}
               />
             </section>
           </div>

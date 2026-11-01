@@ -97,11 +97,11 @@ export function voceIcs(e: EventoCal): VoceIcs {
   };
 }
 
-async function evento(chiave: string): Promise<{ e: EventoCal; emailUtente: string | null; emailCliente: string | null; invitaCliente: boolean } | null> {
+async function evento(chiave: string): Promise<{ e: EventoCal; emailUtente: string | null; emailCliente: string | null; invitaCliente: boolean; utenteId?: string } | null> {
   const [tipo, id] = chiave.split(":");
   if (tipo === "APPUNTAMENTO") {
     const a = await prisma.appuntamento.findUnique({ where: { id }, include: { cliente: true, utente: true } });
-    return a && { e: daAppuntamento(a), emailUtente: a.utente.email, emailCliente: a.cliente.email, invitaCliente: a.invitaCliente };
+    return a && { e: daAppuntamento(a), emailUtente: a.utente.email, emailCliente: a.cliente.email, invitaCliente: a.invitaCliente, utenteId: a.utenteId };
   }
   if (tipo === "RILIEVO") {
     const r = await prisma.rilievo.findUnique({ where: { id }, include: { commessa: incCliente, tecnico: true } });
@@ -127,7 +127,7 @@ export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" =
   if (!x) return { inviati: [], motivo: "evento non trovato" };
   const { e } = x;
   const v = voceIcs(e);
-  const mittente = indirizzoMittente();
+  const mittente = await indirizzoMittente();
   const quando = e.giornataIntera ? giornoBreve(chiaveGiorno(e.inizio)) : `${giornoBreve(chiaveGiorno(e.inizio))} ore ${oraRoma(e.inizio)}`;
   const inviati: string[] = [];
   let motivo: string | undefined;
@@ -149,6 +149,8 @@ export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" =
         ? [`${annulla ? "Annullato" : "Nuovo impegno in calendario"}: ${e.titolo}`, `Quando: ${quando}`, e.luogo ? `Dove: ${e.luogo}` : "", e.note ? `Note: ${e.note}` : "", "", `Apri nel CRM: ${APP_URL}${e.href}`].filter((r) => r !== null).join("\n")
         : [`Gentile cliente,`, annulla ? `l'appuntamento del ${quando} è stato annullato. La ricontatteremo per fissare una nuova data.` : `le confermiamo l'appuntamento del ${quando}${e.luogo ? ` presso ${e.luogo}` : ""}${e.chi ? ` con ${e.chi}` : ""}.`, "", "Per qualsiasi necessità può rispondere a questa email.", "", "Gruppo P&C"].join("\n"),
       invito: { metodo, ics: calendarioIcs([vv], { metodo }) },
+      // al cliente l'invito parte dalla casella del venditore, se l'ha collegata nel Profilo
+      daUtenteId: d.interno ? null : x.utenteId,
     });
     if (esito.inviata) inviati.push(d.email);
     else motivo = esito.motivo;

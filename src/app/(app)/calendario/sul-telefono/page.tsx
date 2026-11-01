@@ -24,7 +24,7 @@ export default async function SulTelefonoPage() {
         <p className="text-sm text-neutral-700">
           Ogni volta che ti viene fissato un appuntamento, un rilievo o una posa ricevi un&apos;email su <b>{u.email}</b> con l&apos;invito: tocca «Aggiungi al calendario» e l&apos;impegno entra nel telefono con il promemoria un&apos;ora prima. Se viene spostato o annullato arriva l&apos;aggiornamento.
         </p>
-        {!mailConfigurata() && <p className="mt-2 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1">Gli inviti partiranno appena l&apos;amministratore attiva l&apos;invio email.</p>}
+        {!(await mailConfigurata()) && <p className="mt-2 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1">Gli inviti partiranno appena l&apos;amministratore attiva l&apos;invio email.</p>}
       </div>
 
       <div className={passo}>

@@ -11,8 +11,11 @@ import { CONTATTI, MODELLI, componiEmail } from "@/lib/automazioni/email";
 import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percorso-actions";
 import { salvaPromemoriaCampagne } from "@/app/campagne-actions";
 import { impostazioniPromemoria } from "@/lib/campagne/motore";
+import { salvaPostaAziendale } from "@/app/posta-actions";
+import { postaAziendale } from "@/lib/mail/invio";
+import { HOST_PREDEFINITO, PORTA_PREDEFINITA } from "@/lib/mail/caselle";
 
-type P = { promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
+type P = { posta?: string; postaErrore?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
@@ -51,6 +54,13 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
     prisma.invioProgrammato.findMany({ where: { stato: "IN_ATTESA" }, orderBy: { eseguiDopo: "asc" }, select: { percorso: true, passo: true, eseguiDopo: true, errore: true } }),
     impostazioniPromemoria(),
   ]);
+  const [posta, postaNelCrm, caselle] = await Promise.all([
+    postaAziendale(),
+    prisma.configurazione.findUnique({ where: { chiave: "posta_utente" } }),
+    prisma.utente.groupBy({ by: ["smtpErrore"], where: { smtpPassword: { not: null } }, _count: { _all: true } }),
+  ]);
+  const caselleOk = caselle.filter((c) => !c.smtpErrore).reduce((t, c) => t + c._count._all, 0);
+  const caselleKo = caselle.filter((c) => c.smtpErrore).reduce((t, c) => t + c._count._all, 0);
   // recuperi programmati: i passi di tipo RECUPERO in attesa
   const recuperi = inAttesa.filter((i) => PERCORSI[i.percorso]?.[i.passo]?.tipo === "RECUPERO");
   const n = (s: string) => perStato.find((x) => x.stato === s)?._count._all ?? 0;
@@ -67,10 +77,45 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
       {p.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">{p.ok === "attive" ? "▶️ Email automatiche ACCESE." : "⏸ Email automatiche in PAUSA."}</p>}
       {p.eseguiti && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">Controllo eseguito: {p.eseguiti} invii elaborati, {p.inviate} email spedite.{p.motivo ? ` (${p.motivo})` : ""}</p>}
 
+      <div id="posta" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="font-semibold">📮 Posta aziendale</p>
+          <span className={`text-sm px-3 py-1 rounded-full ${posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>
+            {posta ? `✓ collegata: ${posta.utente} (${postaNelCrm ? "impostata qui" : "impostata su Vercel"})` : "non collegata: nessuna email parte"}
+          </span>
+        </div>
+        <p className="text-sm text-neutral-600">
+          La casella da cui partono le email del CRM (avvisi agli uffici, email automatiche, campagne) e quelle di chi non ha collegato la sua.
+          Si imposta una volta sola: il CRM la prova con un&apos;email a te prima di salvarla. Ogni collega può poi collegare la propria casella
+          dal suo <Link href="/profilo#posta" className="underline">Profilo</Link> (oppure lo fai tu in <Link href="/impostazioni" className="underline">Impostazioni › Utenti</Link>):
+          basta la password della sua email. Caselle personali collegate: <b>{caselleOk}</b>{caselleKo ? <span className="text-red-700"> · {caselleKo} non funzionano</span> : null}.
+        </p>
+        {p.posta && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {p.posta}</p>}
+        {p.postaErrore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{p.postaErrore}</p>}
+        <form action={salvaPostaAziendale} className="grid sm:grid-cols-4 gap-2 items-end">
+          <label className="text-xs text-neutral-600 sm:col-span-2">Casella (email)
+            <input name="utente" type="email" defaultValue={posta?.utente ?? ""} placeholder="es. crm@gruppopec.com" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-xs text-neutral-600 sm:col-span-2">Password
+            <input name="password" type="password" autoComplete="new-password" placeholder={postaNelCrm ? "•••••••• (lascia vuoto per non cambiarla)" : ""} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-xs text-neutral-600 sm:col-span-2">Server in uscita (SMTP)
+            <input name="host" defaultValue={posta?.host ?? HOST_PREDEFINITO} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-xs text-neutral-600">Porta
+            <input name="porta" inputMode="numeric" defaultValue={posta?.porta ?? PORTA_PREDEFINITA} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-xs text-neutral-600">Nome mittente
+            <input name="mittente" defaultValue={posta?.mittente ?? ""} placeholder="Gruppo P&C <crm@gruppopec.com>" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <button className="btn-3d btn-3d-teal text-sm px-4 py-2 sm:col-span-4 justify-self-start">Salva e manda una prova</button>
+        </form>
+      </div>
+
       <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <div className="flex flex-wrap items-center gap-3">
           <span className={`text-sm font-semibold px-3 py-1 rounded-full ${stato.attive ? "bg-green-100 text-green-900" : "bg-amber-100 text-amber-900"}`}>{stato.attive ? "▶️ Accese" : "⏸ In pausa"}</span>
-          <span className={`text-sm px-3 py-1 rounded-full ${stato.posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>{stato.posta ? "Posta (SMTP) configurata" : "Posta (SMTP) NON configurata su Vercel"}</span>
+          <span className={`text-sm px-3 py-1 rounded-full ${stato.posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>{stato.posta ? "Posta aziendale collegata" : "Posta aziendale NON collegata (vedi sotto)"}</span>
           <form action={impostaAutomazioni}>
             <input type="hidden" name="attive" value={stato.attive ? "0" : "1"} />
             <button className={`btn-3d ${stato.attive ? "btn-3d-amber" : "btn-3d-green"} text-sm px-4 py-2`}>{stato.attive ? "Metti in pausa" : "Accendi le email automatiche"}</button>

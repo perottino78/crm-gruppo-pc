@@ -14,7 +14,7 @@ export default async function FlussoImpostazioniPage() {
   if (!isAmministratore(u)) return <p className="text-sm text-neutral-700">Sezione riservata all&apos;amministratore.</p>;
   await assicuraFlusso();
   const fasi = await prisma.flussoFase.findMany({ orderBy: { ordine: "asc" } });
-  const smtp = mailConfigurata();
+  const smtp = await mailConfigurata();
   const ufficiSenzaEmail = await prisma.utente.findMany({ where: { ufficio: null }, select: { nome: true } });
   return (
     <div className="max-w-4xl">

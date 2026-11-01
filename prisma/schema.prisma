@@ -51,6 +51,14 @@ model Utente {
   mustChangePassword   Boolean           @default(true)
   // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
   calendarioToken      String?
+  // Casella email personale: le email ai clienti mandate a nome di questa persona partono da qui.
+  // La password è cifrata (src/lib/mail/caselle.ts), mai salvata in chiaro. Server e porta vuoti = quelli aziendali.
+  smtpUtente           String?
+  smtpPassword         String?
+  smtpHost             String?
+  smtpPorta            Int?
+  smtpVerificataIl     DateTime?
+  smtpErrore           String?
   createdAt            DateTime          @default(now())
   leadAssegnati        Lead[]
   appuntamenti         Appuntamento[]

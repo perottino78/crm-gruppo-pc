@@ -115,7 +115,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
         <h2 className="mb-3">✎ Modifica o sposta</h2>
         <FormAppuntamento
           utenti={utenti} utenteId={a.utenteId} puoAssegnare={tutti} data={perInput(a.dataOra)} cliente={{ id: a.clienteId, nome: a.cliente.nome, email: a.cliente.email }}
-          esistente={a} ritorno={ritorno} mailAttiva={mailConfigurata()}
+          esistente={a} ritorno={ritorno} mailAttiva={await mailConfigurata()}
         />
       </section>
     </div>
