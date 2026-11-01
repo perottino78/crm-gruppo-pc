@@ -5,7 +5,8 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { cifra, casellaPersonale, casellaAziendale, portaValida, HOST_PREDEFINITO, PORTA_PREDEFINITA } from "@/lib/mail/caselle";
-import { postaAziendale, provaCasella, CHIAVI_POSTA } from "@/lib/mail/invio";
+import { postaAziendale, cercaImpostazioni, CHIAVI_POSTA } from "@/lib/mail/invio";
+import { usaSsl } from "@/lib/mail/diagnosi";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const emailOk = (e: string | null) => !!e && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
@@ -25,10 +26,20 @@ async function collega(utenteId: string, fd: FormData, ritorno: string) {
     ...(password ? { smtpPassword: cifra(password) } : {}),
   };
   const agg = await prisma.utente.update({ where: { id: utenteId }, data: dati });
-  const c = casellaPersonale(agg, await postaAziendale());
+  const aziendale = await postaAziendale();
+  const c = casellaPersonale(agg, aziendale);
   if (!c) vai(ritorno, { postaErrore: "Password non leggibile: inseriscila di nuovo." });
-  const esito = await provaCasella(c!, u.email);
-  await prisma.utente.update({ where: { id: utenteId }, data: esito.inviata ? { smtpVerificataIl: new Date(), smtpErrore: null } : { smtpVerificataIl: null, smtpErrore: esito.motivo ?? "errore" } });
+  // prova e, se serve, corregge da sola server/porta (stesse regole della posta aziendale)
+  const esito = await cercaImpostazioni(c!, u.email, { accettaCertificato: !!aziendale?.accettaCertificato });
+  const ok = esito.inviata && esito.casella;
+  await prisma.utente.update({
+    where: { id: utenteId },
+    data: ok
+      ? { smtpVerificataIl: new Date(), smtpErrore: null,
+          ...(esito.casella!.host !== c!.host ? { smtpHost: esito.casella!.host } : {}),
+          ...(esito.casella!.porta !== c!.porta ? { smtpPorta: esito.casella!.porta } : {}) }
+      : { smtpVerificataIl: null, smtpErrore: (esito.motivo ?? "errore").slice(0, 300) },
+  });
   revalidatePath("/profilo");
   revalidatePath("/impostazioni");
   vai(ritorno, esito.inviata ? { posta: `Casella collegata: email di prova inviata a ${u.email}.` } : { postaErrore: `La casella non funziona: ${esito.motivo}.` });
@@ -76,10 +87,16 @@ export async function salvaPostaAziendale(fd: FormData) {
   };
   const c = casellaAziendale(valori, {});
   if (!c) vai(dove, { postaErrore: "Password non leggibile: inseriscila di nuovo." });
-  // si prova prima di salvare: una casella aziendale sbagliata fermerebbe tutte le email del CRM
-  const esito = await provaCasella(c!, u.email);
-  if (!esito.inviata) vai(dove, { postaErrore: `Non salvata, la casella non funziona: ${esito.motivo}.` });
+  // si prova prima di salvare: una casella aziendale sbagliata fermerebbe tutte le email del CRM.
+  // Se la connessione sicura non va, il CRM prova da solo nome del server dal certificato, l'altra cifratura e l'altra porta.
+  const accetta = fd.get("accettaCertificato") === "on";
+  const esito = await cercaImpostazioni(c!, u.email, { accettaCertificato: accetta });
+  // non salvata: si ripropongono i dati scritti (tranne la password) e l'elenco delle prove fatte
+  if (!esito.inviata || !esito.casella) vai(dove, { postaErrore: `Non salvata, la casella non funziona: ${esito.motivo}.`, prove: esito.prove.join("\n"), u: utente!, h: valori.posta_host, pt: valori.posta_porta, m: valori.posta_mittente, ...(accetta ? { ac: "1" } : {}) });
+  const t = esito.casella!;
+  Object.assign(valori, { posta_host: t.host, posta_porta: String(t.porta), posta_sicura: usaSsl(t) ? "1" : "0", posta_tls_libero: t.accettaCertificato ? "1" : "0" });
+  const corretto = t.host !== c!.host || t.porta !== c!.porta || usaSsl(t) !== usaSsl(c!) || !!t.accettaCertificato;
   for (const [chiave, valore] of Object.entries(valori)) await prisma.configurazione.upsert({ where: { chiave }, update: { valore }, create: { chiave, valore } });
   revalidatePath(dove);
-  vai(dove, { posta: `Posta aziendale collegata: email di prova inviata a ${u.email}.` });
+  vai(dove, { posta: `Posta aziendale collegata: email di prova inviata a ${u.email}.${corretto ? ` Impostazioni corrette in automatico: server ${t.host}, porta ${t.porta} ${usaSsl(t) ? "SSL" : "STARTTLS"}${t.accettaCertificato ? ", certificato del server accettato" : ""}.` : ""}` });
 }

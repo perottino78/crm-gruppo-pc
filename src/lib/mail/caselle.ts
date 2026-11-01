@@ -2,7 +2,13 @@
 // Funzioni pure: cifratura della password e scelta dei parametri del server. Testate senza database.
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from "crypto";
 
-export type Casella = { host: string; porta: number; utente: string; password: string; mittente: string };
+export type Casella = {
+  host: string; porta: number; utente: string; password: string; mittente: string;
+  /** SSL diretto (true, porta 465) o STARTTLS (false, porta 587); se manca si deduce dalla porta */
+  sicura?: boolean;
+  /** Accetta il certificato del server anche se non riconosciuto (hosting con certificato di un altro nome o autofirmato) */
+  accettaCertificato?: boolean;
+};
 
 /** Server della posta aziendale (hosting proprio, nome.cognome@gruppopec.com). */
 export const HOST_PREDEFINITO = "mail.gruppopec.com";
@@ -37,7 +43,10 @@ export const portaValida = (n: unknown) => (Number.isInteger(Number(n)) && Numbe
 export function casellaAziendale(conf: Record<string, string | undefined>, env: Record<string, string | undefined>): Casella | null {
   const pass = decifra(conf.posta_password);
   if (conf.posta_utente && pass) {
-    return { host: conf.posta_host || HOST_PREDEFINITO, porta: portaValida(conf.posta_porta) ?? PORTA_PREDEFINITA, utente: conf.posta_utente, password: pass, mittente: conf.posta_mittente || conf.posta_utente };
+    return {
+      host: conf.posta_host || HOST_PREDEFINITO, porta: portaValida(conf.posta_porta) ?? PORTA_PREDEFINITA, utente: conf.posta_utente, password: pass, mittente: conf.posta_mittente || conf.posta_utente,
+      ...(conf.posta_sicura ? { sicura: conf.posta_sicura === "1" } : {}), ...(conf.posta_tls_libero === "1" ? { accettaCertificato: true } : {}),
+    };
   }
   if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
     return { host: env.SMTP_HOST, porta: portaValida(env.SMTP_PORT) ?? PORTA_PREDEFINITA, utente: env.SMTP_USER, password: env.SMTP_PASS, mittente: env.MAIL_FROM || env.SMTP_USER };
@@ -53,7 +62,11 @@ export function casellaPersonale(
   const pass = decifra(u.smtpPassword);
   if (!pass) return null;
   const utente = u.smtpUtente?.trim() || u.email;
+  // stesso server dell'aziendale: valgono anche il tipo di cifratura e il certificato accettato lì
+  const stessoServer = !u.smtpHost?.trim() || u.smtpHost.trim() === aziendale?.host;
   return {
+    ...(stessoServer && aziendale?.accettaCertificato ? { accettaCertificato: true } : {}),
+    ...(stessoServer && aziendale?.sicura !== undefined && !u.smtpPorta ? { sicura: aziendale.sicura } : {}),
     host: u.smtpHost?.trim() || aziendale?.host || HOST_PREDEFINITO,
     porta: u.smtpPorta ?? aziendale?.porta ?? PORTA_PREDEFINITA,
     utente,

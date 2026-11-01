@@ -15,7 +15,7 @@ import { salvaPostaAziendale } from "@/app/posta-actions";
 import { postaAziendale } from "@/lib/mail/invio";
 import { HOST_PREDEFINITO, PORTA_PREDEFINITA } from "@/lib/mail/caselle";
 
-type P = { posta?: string; postaErrore?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
+type P = { posta?: string; postaErrore?: string; prove?: string; u?: string; h?: string; pt?: string; m?: string; ac?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
@@ -91,24 +91,35 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
           basta la password della sua email. Caselle personali collegate: <b>{caselleOk}</b>{caselleKo ? <span className="text-red-700"> · {caselleKo} non funzionano</span> : null}.
         </p>
         {p.posta && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {p.posta}</p>}
-        {p.postaErrore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{p.postaErrore}</p>}
+        {p.postaErrore && (
+          <div className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800 space-y-1">
+            <p>{p.postaErrore}</p>
+            {p.prove && <details><summary className="cursor-pointer text-xs">Prove fatte dal CRM ({p.prove.split("\n").length})</summary><pre className="text-[11px] whitespace-pre-wrap text-neutral-700 mt-1">{p.prove}</pre></details>}
+            <p className="text-xs">Riscrivi la password e riprova.</p>
+          </div>
+        )}
         <form action={salvaPostaAziendale} className="grid sm:grid-cols-4 gap-2 items-end">
           <label className="text-xs text-neutral-600 sm:col-span-2">Casella (email)
-            <input name="utente" type="email" defaultValue={posta?.utente ?? ""} placeholder="es. crm@gruppopec.com" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+            <input name="utente" type="email" defaultValue={p.u ?? posta?.utente ?? ""} placeholder="es. crm@gruppopec.com" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
           </label>
           <label className="text-xs text-neutral-600 sm:col-span-2">Password
             <input name="password" type="password" autoComplete="new-password" placeholder={postaNelCrm ? "•••••••• (lascia vuoto per non cambiarla)" : ""} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
           </label>
           <label className="text-xs text-neutral-600 sm:col-span-2">Server in uscita (SMTP)
-            <input name="host" defaultValue={posta?.host ?? HOST_PREDEFINITO} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+            <input name="host" defaultValue={p.h ?? posta?.host ?? HOST_PREDEFINITO} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
           </label>
           <label className="text-xs text-neutral-600">Porta
-            <input name="porta" inputMode="numeric" defaultValue={posta?.porta ?? PORTA_PREDEFINITA} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+            <input name="porta" inputMode="numeric" defaultValue={p.pt ?? posta?.porta ?? PORTA_PREDEFINITA} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
           </label>
           <label className="text-xs text-neutral-600">Nome mittente
-            <input name="mittente" defaultValue={posta?.mittente ?? ""} placeholder="Gruppo P&C <crm@gruppopec.com>" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+            <input name="mittente" defaultValue={p.m ?? posta?.mittente ?? ""} placeholder="Gruppo P&C <crm@gruppopec.com>" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+          </label>
+          <label className="text-xs text-neutral-700 sm:col-span-4 flex items-start gap-2">
+            <input type="checkbox" name="accettaCertificato" defaultChecked={p.ac === "1" || !!posta?.accettaCertificato} className="mt-0.5" />
+            <span>Collega comunque se il server ha un certificato di sicurezza non riconosciuto (succede con molti hosting: la posta resta cifrata). Il CRM lo usa solo se senza non funziona.</span>
           </label>
           <button className="btn-3d btn-3d-teal text-sm px-4 py-2 sm:col-span-4 justify-self-start">Salva e manda una prova</button>
+          <p className="text-[11px] text-neutral-500 sm:col-span-4">Se la prova non va, il CRM prova da solo il nome del server indicato nel certificato, l&apos;altra porta (465 SSL / 587 STARTTLS) e salva le impostazioni che funzionano.</p>
         </form>
       </div>
 
