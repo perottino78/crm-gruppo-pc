@@ -5,10 +5,10 @@ import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTe
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { cambiaMansioneUtente } from "@/app/team-actions";
+import { cambiaMansioneUtente, impostaStatoUtente } from "@/app/team-actions";
 import { UFFICI } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
-import { statoUtente, RUOLI_UTENTE } from "@/lib/utenti/stato";
+import { statoUtente, RUOLI_UTENTE, STATI_UTENTE } from "@/lib/utenti/stato";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
@@ -23,6 +23,10 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
     admin ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);
+
+  // il team attivo (e in pausa) in elenco; i disattivati a parte, in fondo
+  const attivi = utenti.filter((u) => u.stato !== "DISATTIVATO");
+  const disattivati = utenti.filter((u) => u.stato === "DISATTIVATO");
 
   return (
     <div className="max-w-5xl">
@@ -88,7 +92,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
       </div>
 
       <h2 className="text-base font-bold text-neutral-900 mb-1">Utenti, ruoli e credenziali</h2>
-      {admin && <p className="text-sm text-neutral-600 mb-3">Per mettere in pausa, disattivare, cambiare mansione, passare il lavoro a un collega o eliminare: apri il nome della persona (o <Link href="/commerciali" className="underline">Team &amp; performance</Link>).</p>}
+      {admin && <p className="text-sm text-neutral-600 mb-3">Clicca sul nome della persona per aprire la sua scheda: accesso, ruolo, ufficio, email, stato. I disattivati sono in fondo: tornano nell&apos;elenco solo se li riattivi.</p>}
 
       {!admin ? (
         <div className="bg-white rounded-lg border border-neutral-200 p-4 text-sm font-medium text-neutral-600">
@@ -97,26 +101,47 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-6">
-            {utenti.map((u) => (
-              <div key={u.id} className="px-4 py-3 text-sm flex flex-col gap-2">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <Link href={`/commerciali/${u.id}`} className="text-blue-700 font-medium hover:underline">
-                      {u.nome}
-                    </Link>
-                    <p className="text-xs text-neutral-600">
-                      {u.email}
-                      {u.username && <span> · username: <span className="font-mono">{u.username}</span></span>}
-                      {!u.username && <span className="text-amber-700"> · nessun accesso attivato</span>}
-                      {u.telefono && <span> · tel. {u.telefono}</span>}
-                    </p>
-                  </div>
-                  <span className="flex gap-1 shrink-0">
-                    {u.stato !== "ATTIVO" && <Link href={`/commerciali/${u.id}#gestione`} className={`text-xs px-2 py-1 rounded-full ${statoUtente(u.stato).classe}`}>{statoUtente(u.stato).nome}</Link>}
+          <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-4">
+            {attivi.map((u) => (
+              <details key={u.id} id={`utente-${u.id}`} open={sp.utente === u.id} className="group text-sm">
+                <summary className="px-4 py-2.5 flex items-center justify-between gap-3 cursor-pointer list-none hover:bg-neutral-50">
+                  <span className="flex items-center gap-2">
+                    <span className="text-neutral-400 group-open:rotate-90 transition-transform">▶</span>
+                    <span className="text-blue-700 font-semibold">{u.nome}</span>
+                    <span className="text-xs text-neutral-500 hidden sm:inline">{u.email}</span>
+                  </span>
+                  <span className="flex gap-1 shrink-0 items-center">
+                    {/* casella email: verde se collegata e funzionante, rossa se dà errore, grigia se non collegata */}
+                    {u.smtpPassword && !u.smtpErrore ? <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800" title={u.smtpVerificataIl ? `provata il ${u.smtpVerificataIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : undefined}>✉️ ✓ email attiva</span>
+                      : u.smtpPassword ? <span className="text-xs px-2 py-1 rounded-full bg-red-100 text-red-700" title={u.smtpErrore ?? undefined}>✉️ ✗ non funziona</span>
+                      : <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-500">✉️ non collegata</span>}
+                    {u.stato !== "ATTIVO" && <span className={`text-xs px-2 py-1 rounded-full ${statoUtente(u.stato).classe}`}>{statoUtente(u.stato).nome}</span>}
                     <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{u.ruolo}</span>
                   </span>
-                </div>
+                </summary>
+                <div className="px-4 pb-4 pt-1 flex flex-col gap-2 bg-neutral-50/50">
+                <p className="text-xs text-neutral-600">
+                  {u.email}
+                  {u.username && <span> · username: <span className="font-mono">{u.username}</span></span>}
+                  {!u.username && <span className="text-amber-700"> · nessun accesso attivato</span>}
+                  {u.telefono && <span> · tel. {u.telefono}</span>}
+                  {" · "}<Link href={`/commerciali/${u.id}#gestione`} className="underline">scheda completa (passa il lavoro, elimina)</Link>
+                </p>
+                <form action={impostaStatoUtente} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="utenteId" value={u.id} />
+                  <input type="hidden" name="ritorno" value={`/impostazioni?utente=${u.id}`} />
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Stato</label>
+                    <select name="stato" defaultValue={u.stato} disabled={u.id === utenteCorrente?.id} className="border border-neutral-200 rounded px-2 py-1 text-xs w-36">
+                      {STATI_UTENTE.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Nota (facoltativa)</label>
+                    <input name="nota" defaultValue={u.statoNota ?? ""} placeholder="es. maternità fino a marzo" className="border border-neutral-200 rounded px-2 py-1 text-xs w-64" />
+                  </div>
+                  <button disabled={u.id === utenteCorrente?.id} className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5 disabled:opacity-50">Salva stato</button>
+                </form>
                 <form action={adminResetPassword} className="flex flex-wrap items-end gap-2 pt-1 border-t border-neutral-50">
                   <input type="hidden" name="utenteId" value={u.id} />
                   <div className="flex flex-col gap-1">
@@ -192,9 +217,31 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva Solaris</button>
                 </form>
-              </div>
+                </div>
+              </details>
             ))}
           </div>
+
+          {disattivati.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-bold text-neutral-700 mb-1">Disattivati ({disattivati.length})</h3>
+              <p className="text-xs text-neutral-500 mb-2">Non entrano nel CRM e non compaiono nelle assegnazioni; i loro dati restano. Con &quot;Riattiva&quot; tornano nell&apos;elenco del team.</p>
+              <div className="bg-neutral-50 rounded-lg border border-neutral-200 divide-y divide-neutral-100">
+                {disattivati.map((u) => (
+                  <form key={u.id} action={impostaStatoUtente} className="px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-sm">
+                    <input type="hidden" name="utenteId" value={u.id} />
+                    <input type="hidden" name="stato" value="ATTIVO" />
+                    <input type="hidden" name="ritorno" value={`/impostazioni?utente=${u.id}`} />
+                    <span className="text-neutral-600">
+                      <b className="text-neutral-800">{u.nome}</b> · {u.ruolo} · {u.email}
+                      <span className="text-xs text-neutral-500">{u.statoDal ? ` · disattivato il ${u.statoDal.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}{u.statoNota ? ` · ${u.statoNota}` : ""}</span>
+                    </span>
+                    <button className="btn-3d btn-3d-green text-[11px] px-3 py-1.5">Riattiva</button>
+                  </form>
+                ))}
+              </div>
+            </div>
+          )}
 
           <form action={creaUtente} className="bg-white rounded-lg border border-neutral-200 p-4 flex flex-wrap items-end gap-2">
             <div className="flex flex-col gap-1">

@@ -112,7 +112,8 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   (`soloAttivi(lista, giàAssegnato)`), né riceve lead (`telefonistaDefaultPerBrand`) o avvisi d'ufficio. Cambio mansione (ruolo+ufficio),
   email di lavoro modificabile con ruolo e ufficio (`cambiaMansioneUtente`, anche da Impostazioni › Utenti;
   email unica, se cambia la casella collegata alla vecchia email si scollega); "passa il lavoro" aperto a un collega attivo (clienti, offerte aperte, pratiche, lead aperti, appuntamenti/rilievi/pose futuri, task,
-  assistenze), elimina solo senza dati collegati (`datiCollegati`). Mai sé stessi, sempre almeno un amministratore attivo.
+  assistenze), elimina solo senza dati collegati (`datiCollegati`). In Impostazioni › Utenti: elenco compatto (nome, ✉️ stato casella,
+  stato, ruolo) che si apre sul nome; disattivati in una lista a parte in fondo con "Riattiva". Mai sé stessi, sempre almeno un amministratore attivo.
 - **Pagamenti e incassi a mano** (`src/app/pagamenti-actions.ts`, `src/lib/amministrazione/pagamenti.ts`, `components/amministrazione/RegistraPagamento.tsx`,
   come in BConsole): su ogni scadenza (scadenzario, fattura d'acquisto, fattura di vendita) data, importo totale/parziale, banca, metodo
   (`METODI_PAGAMENTO`), commissione (movimento a parte, `commissioneDiId`) e, per gli incassi, ritenuta 11% dei bonifici per detrazione
