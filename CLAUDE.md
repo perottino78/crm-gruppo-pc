@@ -16,7 +16,8 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 - **Prisma + PostgreSQL (Neon)**. Lo schema è `prisma/schema.prisma`; **non ci sono migrazioni**: la build fa `prisma db push`.
 - Tailwind; stile dei pulsanti "3D" in `src/app/globals.css` (`btn-3d btn-3d-green|blue|purple|amber|teal|dark|orange|pink|red|outline`, `tile-3d` per le tessere grandi, `card-fase` per i riquadri sezione).
 - Login con sessione firmata (`src/lib/session.ts`, cookie `gpc_session`, payload `{ utenteId, exp }`); `src/middleware.ts` protegge tutto tranne `/login`, `/api`, `/simula`, `/richiedi`.
-- Email: `nodemailer` via SMTP (`src/lib/mail/invio.ts`), si attiva solo se ci sono le variabili SMTP.
+- Email: `nodemailer` via SMTP (`src/lib/mail/invio.ts`). Casella aziendale da Impostazioni › Email automatiche › Posta aziendale
+  (chiavi `posta_*`, password cifrata) o, in mancanza, dalle variabili SMTP di Vercel. `mailConfigurata()` è **async**.
 
 ## Regole che NON vanno violate
 1. **Mai `prisma db push --accept-data-loss` in produzione.** Le anteprime Vercel usano lo **stesso database di produzione**:
@@ -92,19 +93,24 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   doppioni) a ogni controllo (`eseguiCampagne` insieme a `eseguiInviiScaduti`); disiscrizione cliente `?c=` (`Cliente.disiscritto`).
   Avvisi di scadenza (`validaFino`) ai giorni di Impostazioni › Email automatiche (default 3,2,1, chiavi `campagne_promemoria_*`,
   una volta per giorno in `promemoriaInviati`), anche per la promozione del recupero. Funzionano anche con le automazioni in pausa.
+- **Caselle email personali** (`src/lib/mail/caselle.ts`, `src/app/posta-actions.ts`, `src/components/CasellaEmail.tsx`): ogni utente
+  nel Profilo (o l'amministratore in Impostazioni › Utenti) inserisce la password della sua email; server/porta vuoti = quelli
+  aziendali. Password cifrata AES-GCM con `MAIL_SECRET` o `SESSION_SECRET` (se cambia, vanno reinserite). `inviaMail({ daUtenteId })`
+  spedisce dalla sua casella; se non c'è o fallisce (errore salvato in `Utente.smtpErrore`) parte dall'aziendale con "rispondi a" lui.
+  Usata per le email di fase della pratica (responsabile della commessa) e per l'invito dell'appuntamento al cliente (venditore).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 169, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 173, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
@@ -118,7 +124,8 @@ tipi ✓ · test unitari ✓ · collaudi toccati ✓ · `next build` ✓ · se c
 `MAIL_FROM`. La posta aziendale è su hosting proprio (nome.cognome@gruppopec.com), non Google Workspace.
 
 ## In sospeso (ottobre 2026)
-- Inserire su Vercel le variabili SMTP (la casella deve poter spedire come promozionale@ e marketing@gruppopec.com), poi
+- Collegare la posta aziendale in Impostazioni › Email automatiche (o variabili SMTP su Vercel; deve poter spedire come
+  promozionale@ e marketing@gruppopec.com) e far collegare a ognuno la sua casella dal Profilo, poi
   spegnere in Keap i percorsi e accendere le email automatiche in Impostazioni › Email automatiche.
 - Consigliato: un controllo esterno ogni 5-10 minuti su `GET /api/automazioni/esegui` (es. cron-job.org) per gli invii a orario.
 - Inserire `ANTHROPIC_API_KEY` su Vercel (lettura AI di bolle e fatture).

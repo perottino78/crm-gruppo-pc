@@ -76,7 +76,7 @@ export type ResocontoCampagne = { inviate: number; fallite: number; saltate: num
 export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } = {}): Promise<ResocontoCampagne> {
   const ora = opz.adesso ?? (() => new Date());
   const r: ResocontoCampagne = { inviate: 0, fallite: 0, saltate: 0, promemoria: 0 };
-  if (!mailConfigurata()) return { ...r, motivo: "posta (SMTP) non configurata" };
+  if (!(await mailConfigurata())) return { ...r, motivo: "posta (SMTP) non configurata" };
 
   // 1. Avvisi di scadenza: "la campagna scade fra N giorni, aggiornala"
   const imp = await impostazioniPromemoria();

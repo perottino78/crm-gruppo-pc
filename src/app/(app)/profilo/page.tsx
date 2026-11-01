@@ -1,15 +1,18 @@
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { cambiaPassword, aggiornaUsername, aggiornaContattiUtente } from "@/app/actions";
+import CasellaEmail from "@/components/CasellaEmail";
+import { postaAziendale } from "@/lib/mail/invio";
 
 export default async function ProfiloPage({
   searchParams,
 }: {
-  searchParams: Promise<{ errore?: string; ok?: string }>;
+  searchParams: Promise<{ errore?: string; ok?: string; posta?: string; postaErrore?: string }>;
 }) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
-  const { errore, ok } = await searchParams;
+  const { errore, ok, posta, postaErrore } = await searchParams;
+  const aziendale = await postaAziendale();
 
   return (
     <div className="max-w-lg flex flex-col gap-6">
@@ -62,6 +65,8 @@ export default async function ProfiloPage({
         </form>
         <p className="text-xs text-neutral-500 mt-2">Mostrato come riferimento commerciale nella stampa delle offerte.</p>
       </div>
+
+      <CasellaEmail utente={utente} aziendale={aziendale ? { host: aziendale.host, porta: aziendale.porta, utente: aziendale.utente } : null} messaggio={posta} errore={postaErrore} />
 
       <div className="bg-white rounded-lg border border-neutral-200 p-5">
         <h2 className="text-base font-bold text-neutral-900 mb-3">Cambia password</h2>

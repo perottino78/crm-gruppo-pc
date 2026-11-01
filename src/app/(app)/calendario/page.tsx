@@ -121,7 +121,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         <h2 className="mb-3">+ Nuovo appuntamento</h2>
         <FormAppuntamento
           utenti={utenti} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
-          cliente={clientePreset} ritorno={qs({})} mailAttiva={mailConfigurata()}
+          cliente={clientePreset} ritorno={qs({})} mailAttiva={await mailConfigurata()}
         />
       </section>
     </div>

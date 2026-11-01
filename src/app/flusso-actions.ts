@@ -243,7 +243,7 @@ export async function avviaFlussoCommessa(formData: FormData) {
 // ── Email automatiche ─────────────────────────────────────────────────────────
 // Avviso interno: chi lavora nell'ufficio del task riceve una email con il link alla pratica.
 async function avvisaUfficioTask(taskId: string) {
-  if (!mailConfigurata()) return;
+  if (!(await mailConfigurata())) return;
   const t = await prisma.taskPratica.findUnique({ where: { id: taskId }, include: { commessa: { include: { cliente: true } } } });
   if (!t) return;
   const destinatari = await prisma.utente.findMany({
@@ -272,7 +272,7 @@ async function avvisaUfficioTask(taskId: string) {
 async function spedisciMailTask(taskId: string, chi: string | null): Promise<string | null> {
   const t = await prisma.taskPratica.findUnique({ where: { id: taskId }, include: { commessa: { include: { responsabile: true } } } });
   if (!t || t.mailInviataIl || !t.mailA || !(t.mailOggetto || t.mailTesto)) return t?.commessaId ?? null;
-  const esito = await inviaMail({ a: t.mailA.split(/[;,]/), oggetto: t.mailOggetto ?? "", testo: t.mailTesto ?? "", rispondiA: t.commessa.responsabile?.email });
+  const esito = await inviaMail({ a: t.mailA.split(/[;,]/), oggetto: t.mailOggetto ?? "", testo: t.mailTesto ?? "", rispondiA: t.commessa.responsabile?.email, daUtenteId: t.commessa.responsabileId });
   await prisma.commessaEvento.create({
     data: {
       commessaId: t.commessaId,
