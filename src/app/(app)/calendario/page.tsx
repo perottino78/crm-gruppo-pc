@@ -36,7 +36,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
     : [giorno, aggiungiGiorni(giorno, 30)];
   const [eventi, utenti] = await Promise.all([
     eventiPeriodo({ da: inizioGiorno(daK), a: inizioGiorno(aK), utenteId: filtroUtente, tipi }),
-    prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true, ufficio: true }, orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true, ufficio: true, stato: true }, orderBy: { nome: "asc" } }),
   ]);
   const clientePreset = sp.cliente ? await prisma.cliente.findUnique({ where: { id: sp.cliente }, select: { id: true, nome: true, email: true } }) : null;
 
@@ -120,7 +120,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
       <section id="nuovo" className="card-fase mt-6 scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
         <h2 className="mb-3">+ Nuovo appuntamento</h2>
         <FormAppuntamento
-          utenti={utenti} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
+          utenti={utenti.filter((x) => x.stato === "ATTIVO")} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
           cliente={clientePreset} ritorno={qs({})} mailAttiva={await mailConfigurata()}
         />
       </section>

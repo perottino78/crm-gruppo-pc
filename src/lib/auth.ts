@@ -38,7 +38,9 @@ export async function getCurrentUser(): Promise<Utente | null> {
   const token = store.get(SESSION_COOKIE_NAME)?.value;
   const payload = await verifySession(token);
   if (!payload) return null;
-  return prisma.utente.findUnique({ where: { id: payload.utenteId } });
+  const u = await prisma.utente.findUnique({ where: { id: payload.utenteId } });
+  // in pausa o disattivato: la sessione aperta non vale più (al prossimo clic torna al login)
+  return u && u.stato === "ATTIVO" ? u : null;
 }
 
 export function isAmministratore(utente: Pick<Utente, "ruolo"> | null | undefined): boolean {

@@ -247,7 +247,7 @@ async function avvisaUfficioTask(taskId: string) {
   const t = await prisma.taskPratica.findUnique({ where: { id: taskId }, include: { commessa: { include: { cliente: true } } } });
   if (!t) return;
   const destinatari = await prisma.utente.findMany({
-    where: t.assegnatoUtenteId ? { id: t.assegnatoUtenteId } : { ufficio: t.ufficio },
+    where: { stato: "ATTIVO", ...(t.assegnatoUtenteId ? { id: t.assegnatoUtenteId } : { ufficio: t.ufficio }) },
     select: { email: true },
   });
   const num = `C${t.commessa.anno}-${String(t.commessa.numero).padStart(3, "0")}`;

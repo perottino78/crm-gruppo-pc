@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { numeroCommessa } from "@/lib/commesse";
 import { aggiornaAssistenza } from "@/app/commesse-actions";
+import { soloAttivi } from "@/lib/utenti/stato";
 
 export const dynamic = "force-dynamic";
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -45,7 +46,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
               <select name="stato" defaultValue={a.stato} className={inp}>{STATI.map((s) => <option key={s}>{s}</option>)}</select>
               <select name="assegnatoUtenteId" defaultValue={a.assegnatoUtenteId ?? ""} className={inp}>
                 <option value="">Tecnico…</option>
-                {utenti.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
+                {soloAttivi(utenti, a.assegnatoUtenteId).map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
               </select>
               <input type="datetime-local" name="dataIntervento" defaultValue={a.dataIntervento ? perInput(a.dataIntervento) : ""} className={inp} />
               <input name="ricambioNote" defaultValue={a.ricambioNote ?? ""} placeholder="Ricambio / ordine fornitore" className={`${inp} w-52`} />
