@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { disiscrivi } from "@/lib/automazioni/motore";
+import { disiscriviCliente } from "@/lib/campagne/motore";
 
 export const dynamic = "force-dynamic";
 
 // Link "Non voglio più ricevere email" in fondo alle email ai clienti (firmato: non si può disiscrivere un altro).
 export async function GET(req: NextRequest) {
-  const ok = await disiscrivi(req.nextUrl.searchParams.get("l") ?? "", req.nextUrl.searchParams.get("t") ?? "");
+  const q = req.nextUrl.searchParams;
+  // l = lead (email automatiche), c = cliente (campagne)
+  const ok = q.get("c") ? await disiscriviCliente(q.get("c") ?? "", q.get("t") ?? "") : await disiscrivi(q.get("l") ?? "", q.get("t") ?? "");
   const testo = ok
     ? "Fatto: non riceverai più le nostre email automatiche. Se hai bisogno di noi chiamaci allo 011 19887497."
     : "Il link non è valido o è scaduto. Per non ricevere più email rispondi a una nostra email o chiamaci allo 011 19887497.";

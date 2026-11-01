@@ -9,6 +9,7 @@ import { prisma } from "@/lib/prisma";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare, MAX_RECUPERI, MESI_RECUPERO_DEFAULT } from "./percorsi";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
+import { eseguiCampagne } from "@/lib/campagne/motore";
 import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
 import { chiaveGiorno, daOraRoma } from "@/lib/calendario/tempo";
 import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
@@ -317,7 +318,10 @@ export async function disiscrivi(leadId: string, firma: string): Promise<boolean
 /** Esegue gli invii scaduti dopo aver risposto all'utente (fuori da una richiesta, ad es. nei collaudi, non fa nulla). */
 export function eseguiDopoRisposta() {
   try {
-    after(() => eseguiInviiScaduti().then(() => undefined, () => undefined));
+    after(async () => {
+      await eseguiInviiScaduti().catch(() => undefined);
+      await eseguiCampagne().catch(() => undefined);
+    });
   } catch {
     // fuori dal contesto di una richiesta Next: ci penserà il controllo periodico
   }

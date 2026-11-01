@@ -9,8 +9,10 @@ import { MAX_RECUPERI } from "@/lib/automazioni/percorsi";
 import { PERCORSI, ESITI, type Quando } from "@/lib/automazioni/percorsi";
 import { CONTATTI, MODELLI, componiEmail } from "@/lib/automazioni/email";
 import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percorso-actions";
+import { salvaPromemoriaCampagne } from "@/app/campagne-actions";
+import { impostazioniPromemoria } from "@/lib/campagne/motore";
 
-type P = { recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
+type P = { promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
@@ -37,7 +39,7 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
   const u = await getCurrentUser();
   if (!u || u.ruolo !== "AMMINISTRATORE") notFound();
   const p = await searchParams;
-  const [stato, perStato, ultime, daVerificare, mesi, promo, testoPromo, finoPromo, inAttesa] = await Promise.all([
+  const [stato, perStato, ultime, daVerificare, mesi, promo, testoPromo, finoPromo, inAttesa, avvisi] = await Promise.all([
     statoAutomazioni(),
     prisma.invioProgrammato.groupBy({ by: ["stato"], _count: { _all: true } }),
     prisma.emailLead.findMany({ orderBy: { createdAt: "desc" }, take: 30, include: { lead: { select: { id: true, nome: true } } } }),
@@ -47,6 +49,7 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
     prisma.configurazione.findUnique({ where: { chiave: CHIAVE_PROMO_TESTO } }),
     prisma.configurazione.findUnique({ where: { chiave: CHIAVE_PROMO_FINO } }),
     prisma.invioProgrammato.findMany({ where: { stato: "IN_ATTESA" }, orderBy: { eseguiDopo: "asc" }, select: { percorso: true, passo: true, eseguiDopo: true, errore: true } }),
+    impostazioniPromemoria(),
   ]);
   // recuperi programmati: i passi di tipo RECUPERO in attesa
   const recuperi = inAttesa.filter((i) => PERCORSI[i.percorso]?.[i.passo]?.tipo === "RECUPERO");
@@ -107,6 +110,21 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
             <input name="fino" type="date" defaultValue={finoPromo?.valore ?? ""} className="ml-2 border border-neutral-300 rounded px-2 py-1 text-sm" />
           </label>
           <button className="btn-3d btn-3d-teal text-sm px-4 py-2">Salva recupero e promozione</button>
+        </form>
+      </div>
+
+      {p.promemoria && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">⏰ Avvisi di scadenza salvati.</p>}
+      <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-2">
+        <p className="font-semibold">⏰ Avvisi di scadenza delle campagne e della promozione del recupero</p>
+        <p className="text-sm text-neutral-600">Quando una <Link href="/campagne" className="underline">campagna</Link> o la promozione del recupero sta per scadere, arriva un&apos;email per ricordarvi di aggiornarla.</p>
+        <form action={salvaPromemoriaCampagne} className="flex flex-wrap items-end gap-3">
+          <label className="text-sm">Quanti giorni prima (separati da virgola)
+            <input name="giorni" defaultValue={avvisi.giorni.join(",")} placeholder="3,2,1" className="block border border-neutral-300 rounded px-2 py-1.5 text-sm w-40" />
+          </label>
+          <label className="text-sm">A chi mandare l&apos;avviso (più indirizzi separati da virgola)
+            <input name="a" defaultValue={avvisi.a.join(", ")} className="block border border-neutral-300 rounded px-2 py-1.5 text-sm w-96" />
+          </label>
+          <button className="btn-3d btn-3d-teal text-sm px-4 py-2">Salva avvisi</button>
         </form>
       </div>
 
