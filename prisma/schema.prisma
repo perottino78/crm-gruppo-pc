@@ -1166,26 +1166,26 @@ model ContoFinanziario {
 // (cassa, rettifiche). Non si cancella mai: un errore si corregge con uno storno.
 // importo: positivo = entrata, negativo = uscita
 model MovimentoFinanziario {
-  id             String                @id @default(cuid())
-  conto          ContoFinanziario      @relation(fields: [contoId], references: [id])
-  contoId        String
-  data           DateTime
-  dataValuta     DateTime?
-  importo        Float
-  descrizione    String
-  origine        String                @default("IMPORT") // IMPORT | FOGLIO | MANUALE | STORNO
+  id              String                @id @default(cuid())
+  conto           ContoFinanziario      @relation(fields: [contoId], references: [id])
+  contoId         String
+  data            DateTime
+  dataValuta      DateTime?
+  importo         Float
+  descrizione     String
+  origine         String                @default("IMPORT") // IMPORT | FOGLIO | MANUALE | STORNO
   // Impronta univoca per bloccare i doppioni quando si reimporta lo stesso estratto
-  impronta       String                @unique
-  importazioneId String?
+  impronta        String                @unique
+  importazioneId  String?
   // DA_ABBINARE | ABBINATO (collegato a scadenze) | REGISTRATO (classificato senza scadenza)
-  stato          String                @default("DA_ABBINARE")
-  categoria      String?
+  stato           String                @default("DA_ABBINARE")
+  categoria       String?
   // Divisione a cui imputare il movimento (P&C, Solaris, Purafonte…), per costi e ricavi per centro
-  divisione      String?
-  note           String?
-  stornoDiId     String?
-  stornatoDaId   String?
-  creatoDaNome   String?
+  divisione       String?
+  note            String?
+  stornoDiId      String?
+  stornatoDaId    String?
+  creatoDaNome    String?
   // Pagamento/incasso registrato a mano dallo scadenzario: come è stato pagato (bonifico, carta, assegno…).
   // Sui conti in banca resta "da confermare" finché l'estratto conto importato non lo ritrova (stesso importo, data vicina).
   metodo          String?
@@ -1195,8 +1195,8 @@ model MovimentoFinanziario {
   commissioneDiId String?
   // Ritenuta registrata insieme a questo incasso (si toglie dalla scadenza se il pagamento viene annullato)
   ritenuta        Float                 @default(0)
-  abbinamenti    AbbinamentoScadenza[]
-  createdAt      DateTime              @default(now())
+  abbinamenti     AbbinamentoScadenza[]
+  createdAt       DateTime              @default(now())
 
   @@index([contoId, data])
   @@index([stato])
@@ -1205,36 +1205,36 @@ model MovimentoFinanziario {
 // Scadenza da incassare (INCASSO) o da pagare (PAGAMENTO).
 // origine COMMESSA_ACCONTO / COMMESSA_SALDO: generata in automatico dalla commessa.
 model Scadenza {
-  id              String                @id @default(cuid())
-  tipo            String // INCASSO | PAGAMENTO
-  descrizione     String
-  controparte     String
-  clienteId       String?
-  soggettoId      String?
-  commessaId      String?
-  origine         String                @default("MANUALE") // MANUALE | COMMESSA_ACCONTO | COMMESSA_SALDO | FOGLIO
+  id               String                @id @default(cuid())
+  tipo             String // INCASSO | PAGAMENTO
+  descrizione      String
+  controparte      String
+  clienteId        String?
+  soggettoId       String?
+  commessaId       String?
+  origine          String                @default("MANUALE") // MANUALE | COMMESSA_ACCONTO | COMMESSA_SALDO | FOGLIO
   // Chiave delle scadenze importate da un foglio: reimportando lo stesso foglio non si duplicano
   // (indice semplice e non @unique: aggiungere un vincolo unico a una tabella già piena blocca il build)
-  chiaveImport    String?
-  importo         Float
-  dataScadenza    DateTime?
+  chiaveImport     String?
+  importo          Float
+  dataScadenza     DateTime?
   // true se la data è stata cambiata a mano: la sincronizzazione con la commessa non la tocca più
-  dataModificata  Boolean               @default(false)
+  dataModificata   Boolean               @default(false)
   // APERTA | PARZIALE | PAGATA | ANNULLATA
-  stato           String                @default("APERTA")
+  stato            String                @default("APERTA")
   // Parte saldata senza movimento bancario (es. incasso registrato prima dell'uso della prima nota)
-  pagatoManuale   Float                 @default(0)
+  pagatoManuale    Float                 @default(0)
   // Parte coperta dalla ritenuta d'acconto trattenuta dalla banca sui bonifici per detrazione (11% dell'imponibile)
-  ritenuta        Float                 @default(0)
+  ritenuta         Float                 @default(0)
   // Fattura di vendita a cui appartiene l'incasso
   fatturaVenditaId String?
-  numeroDocumento String?
-  categoria       String?
-  brand           String?
-  note            String?
-  abbinamenti     AbbinamentoScadenza[]
-  createdAt       DateTime              @default(now())
-  updatedAt       DateTime              @updatedAt
+  numeroDocumento  String?
+  categoria        String?
+  brand            String?
+  note             String?
+  abbinamenti      AbbinamentoScadenza[]
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
 
   @@unique([commessaId, origine])
   @@index([stato, dataScadenza])
@@ -1583,6 +1583,8 @@ model FatturaAcquisto {
   // Banca e modo di pagamento previsti (come in BConsole)
   bancaPrevista     String?
   modoPagamento     String?
+  // Progetto/commessa BConsole a cui è imputata ("623/26"), per i margini nei report
+  progetto          String?
   righe             RigaFatturaAcquisto[]
   bolle             BollaEntrata[]
   createdAt         DateTime              @default(now())
@@ -1680,35 +1682,60 @@ model CampagnaInvio {
 // ============ FATTURE DI VENDITA ============
 // Fatte in BConsole (fino all'emissione dal CRM con SDI) e importate dagli XML: servono per scaduto e incassi.
 model FatturaVendita {
-  id             String    @id @default(cuid())
-  chiave         String    @unique
-  sezionale      String?
-  tipoDocumento  String    @default("TD01")
-  numero         String
-  data           DateTime
-  clienteId      String?
-  clienteNome    String
-  partitaIva     String?
-  codiceFiscale  String?
-  commessaId     String?
+  id            String   @id @default(cuid())
+  chiave        String   @unique
+  sezionale     String?
+  tipoDocumento String   @default("TD01")
+  numero        String
+  data          DateTime
+  clienteId     String?
+  clienteNome   String
+  partitaIva    String?
+  codiceFiscale String?
+  commessaId    String?
   // Società che emette (P&C, Work & Services) e marchio/centro di ricavo
-  divisione      String?
-  brand          String?
-  imponibile     Float     @default(0)
-  iva            Float     @default(0)
-  totale         Float     @default(0)
+  divisione     String?
+  brand         String?
+  imponibile    Float    @default(0)
+  iva           Float    @default(0)
+  totale        Float    @default(0)
   // Lavori con detrazione fiscale: il cliente paga con bonifico "parlante" e la banca trattiene l'11% dell'imponibile
-  detrazione     Boolean   @default(false)
-  causale        String?
-  origine        String    @default("XML") // XML | MANUALE
-  xml            String?
-  note           String?
-  creatoDaNome   String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  detrazione    Boolean  @default(false)
+  causale       String?
+  origine       String   @default("XML") // XML | MANUALE
+  xml           String?
+  note          String?
+  creatoDaNome  String?
+  // Per i report (da BConsole): sigla del venditore (MGI, UPE…), progetto/commessa BConsole ("758/26"),
+  // linea di prodotto (LINEE di src/lib/amministrazione/linee.ts) e descrizione breve delle righe
+  venditore     String?
+  progetto      String?
+  categoria     String?
+  descrizione   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([clienteId])
   @@index([commessaId])
   @@index([data])
 }
 
+// Progetto (commessa) di BConsole: valore offerto e costi che BConsole ha imputato, per i margini nei report.
+model ProgettoBC {
+  id              String    @id // id BConsole
+  numero          String // "758/26"
+  clienteNome     String
+  descrizione     String?
+  tipologia       String? // P&C, Solaris, Pura Fonte
+  capoProgetto    String?
+  stato           String?
+  categoria       String?
+  totaleOfferto   Float     @default(0)
+  costoAttuale    Float     @default(0)
+  fattureAcquisto Float     @default(0)
+  costiPersonale  Float     @default(0)
+  creatoIl        DateTime?
+  aggiornatoIl    DateTime  @updatedAt
+
+  @@index([numero])
+}

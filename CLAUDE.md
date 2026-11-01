@@ -135,13 +135,20 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   `pagatoManuale` con nota "Saldata in BConsole il …"; "Rit. Fis Compensazione" → `ritenuta`; Stornata → ANNULLATA; parziali → aperte
   con nota "verificare". Vendite agganciate all'acconto/saldo della commessa con lo stesso importo; fornitori per P.IVA/CF/nome
   (creati se mancano). Gli XML caricati dopo riconoscono le fatture già importate (fornitore/numero/anno/segno).
+- **Report** (`/report`, solo amministrazione; `src/lib/report/`: `categorie.ts` linea di prodotto dal testo, `calcoli.ts` puro e testato,
+  `server.ts` dati, `components/report/Grafici.tsx` e `Simulatore.tsx`): KPI, "in breve", vendite/acquisti per mese, fatturato e margine per
+  venditore (`FatturaVendita.venditore` = sigla BConsole) e per linea di prodotto (`categoria`), commesse con più/meno margine (progetti
+  BConsole in `ProgettoBC`, costi = `costoAttuale` o fatture d'acquisto con `progetto`; giudicate solo se fatturate ≥70% e, se aperte, con costi),
+  clienti/marchi/provenienza, anzianità crediti e debiti, fornitori, costo delle banche (`bancaDi`), simulatore (prezzi, costi, volumi, incassi,
+  cassa prevista 13 settimane). Dati: import contabilità (campi report riempiti solo se vuoti) + rotta `api/admin/importa-progetti-bconsole`.
+  Grafici secondo la skill dataviz (palette fissa in `src/lib/report/formato.ts`, tooltip, tabella sotto ogni grafico).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 186, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 195, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
