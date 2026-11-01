@@ -9,7 +9,7 @@ import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordi
 import { BRANDS } from "@/lib/brands";
 import {
   salvaTestataOrdine, salvaRigaOrdineFornitore, aggiungiRigaAOrdine, togliRigaDaOrdine, segnaOrdineInviatoAMano,
-  registraConfermaFornitore, registraArrivi, annullaOrdine,
+  registraConfermaFornitore, registraArrivi, annullaOrdine, spostaRigaAFornitore,
 } from "@/app/ordini-actions";
 import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
@@ -20,12 +20,20 @@ const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const iso = (d?: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default async function OrdineFornitorePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
   const { id } = await params;
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, commessa: { include: { cliente: true } }, righe: { orderBy: { createdAt: "asc" } } } });
   if (!o) notFound();
+  const msg = await searchParams;
+  const bozzaAperta = o.stato === "BOZZA";
+  // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
+  const [fornitori, altreBozze] = bozzaAperta ? await Promise.all([
+    prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" }, attivo: true, id: { not: o.fornitoreId } }, select: { id: true, ragioneSociale: true }, orderBy: { ragioneSociale: "asc" } }),
+    o.commessaId ? prisma.ordineFornitore.findMany({ where: { commessaId: o.commessaId, stato: "BOZZA", id: { not: o.id } }, select: { fornitoreId: true, numero: true, anno: true } }) : Promise.resolve([]),
+  ]) : [[], []];
+  const conBozza = new Map(altreBozze.map((b) => [b.fornitoreId, numeroOrdine(b)]));
   const catalogo = await prisma.articolo.findMany({ where: { fornitoreId: o.fornitoreId, attivo: true }, select: { codice: true, descrizione: true, codiceFornitore: true }, orderBy: { codice: "asc" }, take: 3000 });
   const s = statoOrdine(o.stato);
   const bozza = o.stato === "BOZZA", annullato = o.stato === "ANNULLATO";
@@ -46,6 +54,8 @@ export default async function OrdineFornitorePage({ params }: { params: Promise<
         </div>
         <span className="text-sm px-3 py-1 rounded-full text-white" style={{ background: s.colore }}>{s.nome}</span>
       </div>
+      {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
+      {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       {o.inviatoIl && <p className="text-xs text-neutral-600">Inviato il {o.inviatoIl.toLocaleString("it-IT")} {o.inviatoA ? `a ${o.inviatoA}` : ""} ({o.modalitaInvio === "EMAIL" ? "email dal CRM" : "a mano"}) da {o.inviatoDaNome}</p>}
 
       <section className="bg-white border border-neutral-200 rounded-lg p-4">
@@ -67,7 +77,8 @@ export default async function OrdineFornitorePage({ params }: { params: Promise<
         <h2 className="font-bold mb-2">Righe ({o.righe.length}){t.totale ? ` · totale imponibile ${eur(t.totale)}` : ""}{t.righeSenzaPrezzo && t.totale ? ` (${t.righeSenzaPrezzo} senza prezzo)` : ""}</h2>
         <div className="space-y-2">
           {o.righe.map((r, i) => (
-            <form key={r.id} action={salvaRigaOrdineFornitore} className={`border rounded p-2 grid grid-cols-2 md:grid-cols-12 gap-1.5 items-end ${r.arrivato ? "bg-green-50 border-green-300" : "border-neutral-200"}`}>
+            <div key={r.id}>
+            <form action={salvaRigaOrdineFornitore} className={`border rounded p-2 grid grid-cols-2 md:grid-cols-12 gap-1.5 items-end ${r.arrivato ? "bg-green-50 border-green-300" : "border-neutral-200"}`}>
               <input type="hidden" name="rigaId" value={r.id} />
               <span className="text-xs font-bold text-neutral-500 md:col-span-12">Riga {i + 1}{r.arrivato ? ` · arrivata il ${dataIt(r.arrivatoIl)}` : ""}{r.costoPrevisto !== null ? ` · costo previsto da listino ${eur(r.costoPrevisto)}` : ""}</span>
               <label className="text-[11px] md:col-span-2">Codice<input name="codice" defaultValue={r.codice ?? ""} className={`${inp} w-full`} /></label>
@@ -82,6 +93,26 @@ export default async function OrdineFornitorePage({ params }: { params: Promise<
               {!annullato && <div className="flex gap-2 md:col-span-2"><button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
                 {bozza && <button formAction={togliRigaDaOrdine} className="text-[11px] text-red-700 underline">togli</button>}</div>}
             </form>
+            {bozza && fornitori.length > 0 && (
+              <details className="ml-2 mt-0.5">
+                <summary className="text-[11px] text-blue-800 cursor-pointer">↪ Ordina questa riga da un altro fornitore</summary>
+                <form action={spostaRigaAFornitore} className="flex flex-wrap items-center gap-1.5 mt-1">
+                  <input type="hidden" name="rigaId" value={r.id} />
+                  <select name="nuovoFornitoreId" required defaultValue="" className={`${inp} min-w-64`}>
+                    <option value="" disabled>Scegli il fornitore…</option>
+                    {conBozza.size > 0 && <optgroup label="Hanno già un ordine in bozza per questa commessa">
+                      {fornitori.filter((f) => conBozza.has(f.id)).map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale} (ordine {conBozza.get(f.id)})</option>)}
+                    </optgroup>}
+                    <optgroup label="Tutti i fornitori">
+                      {fornitori.filter((f) => !conBozza.has(f.id)).map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
+                    </optgroup>
+                  </select>
+                  <button className="btn-3d btn-3d-amber text-[11px] px-2 py-1">Sposta</button>
+                  <span className="text-[11px] text-neutral-500">Va nella sua bozza per questa commessa o in un nuovo ordine. Solo per questo ordine: il fornitore abituale del prodotto non cambia.</span>
+                </form>
+              </details>
+            )}
+            </div>
           ))}
           {o.righe.length === 0 && <p className="text-sm text-neutral-500">Nessuna riga: aggiungile qui sotto.</p>}
         </div>

@@ -491,7 +491,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                   {r.ordineFornitore && <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="ml-2 text-xs text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>}
                   {r.costoPrevisto !== null && <span className="ml-2 text-xs text-neutral-600">costo previsto {eur(r.costoPrevisto)}</span>}</p>
                 <div className="flex flex-wrap items-center gap-3 mt-1.5">
-                  <select name="fornitoreId" defaultValue={r.fornitoreId ?? ""} disabled={!!r.ordineFornitoreId} title={r.ordineFornitoreId ? "La riga è già in un ordine: il fornitore non si cambia" : undefined} className={inp}>
+                  <select name="fornitoreId" defaultValue={r.fornitoreId ?? ""} disabled={!!r.ordineFornitoreId} title={r.ordineFornitoreId ? "La riga è già in un ordine: se non è ancora inviato, cambi il fornitore dall'ordine (↪ Ordina da un altro fornitore)" : undefined} className={inp}>
                     <option value="">Fornitore…</option>
                     {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
                   </select>
