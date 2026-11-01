@@ -5,14 +5,14 @@ import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTe
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { aggiornaUfficioUtente } from "@/app/flusso-actions";
+import { cambiaMansioneUtente } from "@/app/team-actions";
 import { UFFICI } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
-import { statoUtente } from "@/lib/utenti/stato";
+import { statoUtente, RUOLI_UTENTE } from "@/lib/utenti/stato";
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
-export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string }> }) {
+export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string; ok?: string; errore?: string }> }) {
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
   const admin = isAmministratore(utenteCorrente);
@@ -138,17 +138,30 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Reset accesso</button>
                 </form>
-                <form action={aggiornaUfficioUtente} className="flex flex-wrap items-end gap-2">
+                <form action={cambiaMansioneUtente} id={`mansione-${u.id}`} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />
+                  <input type="hidden" name="ritorno" value={`/impostazioni?utente=${u.id}`} />
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Ruolo</label>
+                    <select name="ruolo" defaultValue={u.ruolo} className="border border-neutral-200 rounded px-2 py-1 text-xs w-36">
+                      {RUOLI_UTENTE.map((r) => <option key={r} value={r}>{r}</option>)}
+                    </select>
+                  </div>
                   <div className="flex flex-col gap-1">
                     <label className="text-[11px] text-neutral-600">Ufficio (per i task di pratica)</label>
-                    <select name="ufficio" defaultValue={u.ufficio ?? ""} className="border border-neutral-200 rounded px-2 py-1 text-xs w-44">
-                      <option value="">— nessuno —</option>
+                    <select name="ufficio" defaultValue={u.ufficio ?? "__nessuno__"} className="border border-neutral-200 rounded px-2 py-1 text-xs w-44">
+                      <option value="__nessuno__">— nessuno —</option>
                       {UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}
                     </select>
                   </div>
-                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva ufficio</button>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] text-neutral-600">Email di lavoro</label>
+                    <input name="email" type="email" required defaultValue={u.email} className="border border-neutral-200 rounded px-2 py-1 text-xs w-56" />
+                  </div>
+                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva mansione ed email</button>
                 </form>
+                {sp.utente === u.id && sp.ok && <p className="text-xs text-emerald-700">✅ {sp.ok}</p>}
+                {sp.utente === u.id && sp.errore && <p className="text-xs text-red-700">{sp.errore}</p>}
                 <form action={adminAggiornaTelefonoUtente} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />
                   <div className="flex flex-col gap-1">

@@ -48,7 +48,7 @@ export default function GestioneUtente({ utente: u, colleghi, collegati, lavoroA
       <form action={cambiaMansioneUtente} className="space-y-2 border-t border-neutral-100 pt-3">
         <input type="hidden" name="utenteId" value={u.id} />
         <input type="hidden" name="ritorno" value={ritorno} />
-        <p className="text-sm font-semibold">2. Mansione</p>
+        <p className="text-sm font-semibold">2. Mansione ed email</p>
         <div className="flex flex-wrap items-end gap-2">
           <label className="text-xs text-neutral-600">Ruolo (cosa vede e può fare)
             <select name="ruolo" defaultValue={u.ruolo} className={`${inp} block`}>{RUOLI_UTENTE.map((r) => <option key={r} value={r}>{r}</option>)}</select>
@@ -59,7 +59,10 @@ export default function GestioneUtente({ utente: u, colleghi, collegati, lavoroA
               {UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}
             </select>
           </label>
-          <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva mansione</button>
+          <label className="text-xs text-neutral-600">Email di lavoro (dell&apos;ufficio)
+            <input name="email" type="email" required defaultValue={u.email} className={`${inp} block w-72 max-w-full`} />
+          </label>
+          <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva mansione ed email</button>
         </div>
       </form>
 
