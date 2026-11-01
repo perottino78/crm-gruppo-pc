@@ -5,6 +5,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { nomeUfficio } from "@/lib/flusso";
 import { getCurrentUser } from "@/lib/auth";
 import { STATI_UTENTE, RUOLI_UTENTE, LEAD_CHIUSI, datiCollegati, totaleCollegati } from "@/lib/utenti/stato";
 
@@ -18,7 +19,11 @@ async function amministratore() {
 }
 const torna = (ritorno: string | null, p: Record<string, string>) => {
   const dove = ritorno && ritorno.startsWith("/") ? ritorno : "/commerciali";
-  redirect(`${dove.split("?")[0]}?${new URLSearchParams(p)}`);
+  const [base, q] = dove.split("?");
+  const u = new URLSearchParams(q); // si tengono i parametri della pagina (es. ?utente=…)
+  u.delete("ok"); u.delete("errore");
+  for (const [k, v] of Object.entries(p)) u.set(k, v);
+  redirect(`${base}?${u}`);
 };
 const aggiorna = (id: string) => { revalidatePath("/commerciali"); revalidatePath(`/commerciali/${id}`); revalidatePath("/impostazioni"); };
 
@@ -51,9 +56,28 @@ export async function cambiaMansioneUtente(fd: FormData) {
     if ((await prisma.utente.count({ where: { ruolo: "AMMINISTRATORE", stato: "ATTIVO", id: { not: id } } })) === 0) torna(ritorno, { errore: "Deve restare almeno un amministratore attivo." });
   }
   const ufficio = str(fd, "ufficio");
-  await prisma.utente.update({ where: { id }, data: { ruolo, ufficio: ufficio === "__nessuno__" ? null : ufficio ?? u.ufficio } });
+  const nuovoUfficio = ufficio === "__nessuno__" ? null : ufficio ?? u.ufficio;
+  // email di lavoro: cambia con l'ufficio (es. ordini@ → promozionale@)
+  const email = str(fd, "email")?.toLowerCase() ?? u.email;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) torna(ritorno, { errore: "Scrivi un indirizzo email valido." });
+  const cambiaEmail = email !== u.email.toLowerCase();
+  if (cambiaEmail) {
+    const altro = await prisma.utente.findFirst({ where: { email: { equals: email, mode: "insensitive" }, id: { not: id } }, select: { nome: true } });
+    if (altro) torna(ritorno, { errore: `${email} è già l'email di ${altro.nome}: cambia prima la sua (o lascia a lei/lui quella casella).` });
+  }
+  // la casella collegata era quella della vecchia email: va ricollegata con la password della nuova
+  const vecchiaCasella = cambiaEmail && !!u.smtpPassword && (!u.smtpUtente || u.smtpUtente.toLowerCase() === u.email.toLowerCase());
+  await prisma.utente.update({
+    where: { id },
+    data: {
+      ruolo, ufficio: nuovoUfficio,
+      ...(cambiaEmail ? { email } : {}),
+      ...(vecchiaCasella ? { smtpPassword: null, smtpUtente: null, smtpVerificataIl: null, smtpErrore: null } : {}),
+    },
+  });
   aggiorna(id);
-  torna(ritorno, { ok: `${u.nome}: mansione aggiornata.` });
+  const cambi = [u.ruolo !== ruolo ? `ruolo ${ruolo}` : "", (u.ufficio ?? null) !== nuovoUfficio ? `ufficio ${nuovoUfficio ? nomeUfficio(nuovoUfficio) : "nessuno"}` : "", cambiaEmail ? `email ${email}` : ""].filter(Boolean);
+  torna(ritorno, { ok: `${u.nome}: ${cambi.length ? cambi.join(", ") : "nessuna modifica"}.${vecchiaCasella ? ` La casella collegata era ${u.email}: ricollegala con la password di ${email} (qui sotto o dal suo Profilo).` : ""}` });
 }
 
 /**

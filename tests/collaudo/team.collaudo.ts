@@ -61,6 +61,15 @@ async function main() {
   verifica(lc.ruolo === "AMMINISTRATIVO" && lc.ufficio === "ORDINI", "ruolo e ufficio cambiati", lc);
   await dove(T.cambiaMansioneUtente(fd({ utenteId: luca.id, ruolo: "COMMERCIALE", ufficio: "__nessuno__" })));
   verifica((await utente(luca.id)).ufficio === null, "ufficio tolto");
+  // Cristina: da ordini@ a telefonista con promozionale@ (la casella collegata alla vecchia email va ricollegata)
+  await prisma.utente.update({ where: { id: cristina.id }, data: { email: "ordini@gruppopec.com", ruolo: "AMMINISTRATIVO", ufficio: "ORDINI", smtpPassword: "v1:cifrata", smtpVerificataIl: new Date() } });
+  const dm = await dove(T.cambiaMansioneUtente(fd({ utenteId: cristina.id, ruolo: "TELEFONISTA", ufficio: "CENTRALINO", email: "Promozionale@gruppopec.com", ritorno: `/impostazioni?utente=${cristina.id}` })));
+  const cr = await utente(cristina.id);
+  verifica(cr.ruolo === "TELEFONISTA" && cr.ufficio === "CENTRALINO" && cr.email === "promozionale@gruppopec.com", "ruolo, ufficio ed email cambiati insieme", cr);
+  verifica(cr.smtpPassword === null && dm?.startsWith(`/impostazioni?utente=${cristina.id}&ok=`) && dm.includes("ricollegala"), "casella della vecchia email scollegata, con avviso; si torna sulla stessa persona", dm);
+  const dd = await dove(T.cambiaMansioneUtente(fd({ utenteId: luca.id, ruolo: "COMMERCIALE", email: "promozionale@gruppopec.com" })));
+  verifica(dd?.includes("errore=") && dd.includes("Cristina") && (await utente(luca.id)).email === "luca@x.it", "un'email già usata da un collega non si assegna due volte", dd);
+  verifica((await dove(T.cambiaMansioneUtente(fd({ utenteId: luca.id, ruolo: "COMMERCIALE", email: "non-valida" }))))?.includes("errore="), "email non valida rifiutata");
 
   console.log("6. Marco lascia: il suo lavoro aperto passa a Luca");
   const cli = await prisma.cliente.create({ data: { nome: "ROSSI", brandId: b.id, responsabileId: marco.id } });

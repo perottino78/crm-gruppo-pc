@@ -110,8 +110,10 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   pagina Team › scheda persona): `Utente.stato` ATTIVO | PAUSA | DISATTIVATO (+ `statoDal`, `statoNota`). Chi non è attivo non entra
   (`login` rifiuta, `getCurrentUser` → null, layout → `/api/esci` che chiude la sessione) e non compare nelle tendine per lavoro nuovo
   (`soloAttivi(lista, giàAssegnato)`), né riceve lead (`telefonistaDefaultPerBrand`) o avvisi d'ufficio. Cambio mansione (ruolo+ufficio),
-  "passa il lavoro" aperto a un collega attivo (clienti, offerte aperte, pratiche, lead aperti, appuntamenti/rilievi/pose futuri, task,
-  assistenze), elimina solo senza dati collegati (`datiCollegati`). Mai sé stessi, sempre almeno un amministratore attivo.
+  email di lavoro modificabile con ruolo e ufficio (`cambiaMansioneUtente`, anche da Impostazioni › Utenti;
+  email unica, se cambia la casella collegata alla vecchia email si scollega); "passa il lavoro" aperto a un collega attivo (clienti, offerte aperte, pratiche, lead aperti, appuntamenti/rilievi/pose futuri, task,
+  assistenze), elimina solo senza dati collegati (`datiCollegati`). In Impostazioni › Utenti: elenco compatto (nome, ✉️ stato casella,
+  stato, ruolo) che si apre sul nome; disattivati in una lista a parte in fondo con "Riattiva". Mai sé stessi, sempre almeno un amministratore attivo.
 - **Pagamenti e incassi a mano** (`src/app/pagamenti-actions.ts`, `src/lib/amministrazione/pagamenti.ts`, `components/amministrazione/RegistraPagamento.tsx`,
   come in BConsole): su ogni scadenza (scadenzario, fattura d'acquisto, fattura di vendita) data, importo totale/parziale, banca, metodo
   (`METODI_PAGAMENTO`), commissione (movimento a parte, `commissioneDiId`) e, per gli incassi, ritenuta 11% dei bonifici per detrazione
@@ -138,7 +140,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (22), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

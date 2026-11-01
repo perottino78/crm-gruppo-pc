@@ -8,6 +8,7 @@ export const UFFICI: { chiave: string; nome: string }[] = [
   { chiave: "POSA", nome: "Posa" },
   { chiave: "AMMINISTRAZIONE", nome: "Amministrazione" },
   { chiave: "MARKETING", nome: "Marketing" },
+  { chiave: "CENTRALINO", nome: "Centralino / telefoniste" },
 ];
 export const nomeUfficio = (k?: string | null) => UFFICI.find((u) => u.chiave === k)?.nome ?? k ?? "—";
 
