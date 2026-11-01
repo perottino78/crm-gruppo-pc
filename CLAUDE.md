@@ -98,6 +98,10 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   aziendali. Password cifrata AES-GCM con `MAIL_SECRET` o `SESSION_SECRET` (se cambia, vanno reinserite). `inviaMail({ daUtenteId })`
   spedisce dalla sua casella; se non c'è o fallisce (errore salvato in `Utente.smtpErrore`) parte dall'aziendale con "rispondi a" lui.
   Usata per le email di fase della pratica (responsabile della commessa) e per l'invito dell'appuntamento al cliente (venditore).
+  Connessione: `cercaImpostazioni` (invio.ts) + `src/lib/mail/diagnosi.ts` provano da sole il nome del server letto dal certificato
+  (hosting condiviso), l'altra cifratura/porta (465 SSL, 587 STARTTLS) e, solo con la spunta "collega comunque", il certificato non
+  riconosciuto (`posta_tls_libero`, `tls.rejectUnauthorized=false`, sempre cifrato); salvano ciò che funziona (`posta_sicura`).
+  Gli errori mostrano il dettaglio tecnico e l'elenco delle prove.
 - **Fornitore alternativo in ordine** (`spostaRigaAFornitore` in `ordini-actions.ts`): in un ordine in BOZZA ogni riga si può
   ordinare da un altro fornitore; va nella bozza già aperta per quel fornitore e commessa o in un nuovo ordine con gli stessi dati;
   prezzo/codice/costo previsto azzerati, sconto del nuovo fornitore; bozza rimasta vuota (senza documenti) eliminata. Il fornitore
@@ -128,13 +132,13 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 180, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 183, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (22), fatture-incassi (32)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (22), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
