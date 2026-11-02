@@ -111,7 +111,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
       </Sezione>
 
       <Sezione titolo="🏆 Chi vende" sotto="Fatturato per venditore (dalla sigla in BConsole) e margine delle sue commesse con i costi completi." colore="#ea580c">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           <div>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Fatturato</h3>
             <Barre voci={barre(primeEAltri(d.perVenditore, 10), (x) => { const m = margVend.get(x.chiave); return m ? [["Margine commesse", perc1(m.perc)], ["Commesse valutate", String(m.n)]] : []; })} />
@@ -132,7 +132,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
       </Sezione>
 
       <Sezione titolo="📦 Cosa si vende e quanto rende" sotto="Linea di prodotto riconosciuta dalla descrizione della commessa e dalle righe della fattura. Il margine conta solo le commesse con i costi completi." colore="#16a34a">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           <div>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Fatturato per prodotto</h3>
             <Barre voci={barre(d.perCategoria, (x) => { const m = margCat.get(x.chiave); return m ? [["Margine", perc1(m.perc)]] : []; })} />
@@ -143,7 +143,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
               voci={[...catMarg].sort((a, b) => (b.perc ?? 0) - (a.perc ?? 0)).map((c) => ({ etichetta: c.chiave, valore: c.perc ?? 0, nota: c === migliore ? "▲ top" : c === peggiore ? "▼ ultimo" : undefined, dettagli: [["Ricavo", eur0(c.ricavo)], ["Costi", eur0(c.costo)], ["Margine", eur0(c.margine)], ["Commesse", String(c.n)]] }))} />
           </div>
         </div>
-        <div className="mt-5 grid gap-6 lg:grid-cols-2">
+        <div className="mt-5 grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           {[["💰 Commesse con più guadagno", piuGuadagno], ["🔻 Commesse con meno rendimento", menoRendimento]].map(([titolo, elenco]) => (
             <div key={titolo as string}>
               <h3 className="mb-2 text-sm font-bold text-neutral-900">{titolo as string}</h3>
@@ -169,7 +169,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
       </Sezione>
 
       <Sezione titolo="👥 Clienti, marchi e marketing" colore="#0d9488">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3 [&>*]:min-w-0">
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Migliori clienti</h3><Barre voci={barre(d.clienti.slice(0, 10))} /></div>
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Per marchio</h3><Barre voci={barre(d.perMarchio)} /></div>
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Da dove arrivano (provenienza)</h3><Barre voci={barre(primeEAltri(d.perOrigine, 8))} /></div>
@@ -177,7 +177,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
       </Sezione>
 
       <Sezione titolo="⏳ Crediti e debiti" sotto="Quanto c'è da incassare e da pagare, diviso per ritardo. Contano le rate aperte dello scadenzario." colore="#dc2626">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3 [&>*]:min-w-0">
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Da incassare</h3><Barre voci={d.anzianitaCrediti.map((a) => ({ etichetta: a.fascia, valore: a.importo, dettagli: [["Rate", String(a.n)]] }))} /></div>
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Da pagare</h3><Barre colore={COLORI[1]} voci={d.anzianitaDebiti.map((a) => ({ etichetta: a.fascia, valore: a.importo, dettagli: [["Rate", String(a.n)]] }))} /></div>
           <div><h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Clienti con più scaduto</h3><Barre voci={barre(d.debitori.slice(0, 8))} vuoto="Nessun credito scaduto. 👍" /></div>
@@ -190,7 +190,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
       </Sezione>
 
       <Sezione titolo="🏦 Banche" sotto="Saldo dei conti e quanto costano: fatture delle banche (interessi, anticipi, servizi) e commissioni registrate sui conti." colore="#334155">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           <div>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">Costo delle banche nel periodo</h3>
             <Barre colore={COLORI[6]} voci={d.banche.map((b) => ({ etichetta: b.banca, valore: b.totale, dettagli: [["Fatture della banca", eur0(b.fatture)], ["Commissioni sui conti", eur0(b.commissioni)]] }))} vuoto="Nessun costo bancario registrato nel periodo." />
