@@ -56,7 +56,7 @@ export function riepilogoContatto(d: DatiLeadEmail): string {
   ].filter(Boolean).join("\n");
 }
 
-function riepilogoRichiesta(d: DatiLeadEmail): string {
+export function riepilogoRichiesta(d: DatiLeadEmail): string {
   return [d.fonte && `Fonte: ${d.fonte}`, d.marchio && `Marchio: ${d.marchio}`, d.prodotto && `Prodotto: ${d.prodotto}`].filter(Boolean).join("\n");
 }
 

@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puoMarketing } from "@/lib/utenti/stato";
 import Link from "next/link";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +12,7 @@ import { statoAutomazioni } from "@/lib/automazioni/motore";
 import { esitoLead, assegnaVenditoreLead } from "@/app/lead-percorso-actions";
 import { CONTATTI } from "@/lib/automazioni/email";
 
-type P = { vista?: string; id?: string; q?: string; fatto?: string; errore?: string };
+type P = { vista?: string; id?: string; q?: string; fatto?: string; errore?: string; fase?: string };
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const STATO_EMAIL: Record<string, string> = { INVIATA: "✅ inviata", FALLITA: "❌ non inviata", SOPPRESSA: "🚫 non inviata", PREPARATA: "⏳ in preparazione" };
@@ -26,7 +27,8 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
     ? { OR: [{ nome: { contains: p.q.trim(), mode: "insensitive" } }, { telefono: { contains: p.q.trim() } }, { email: { contains: p.q.trim(), mode: "insensitive" } }] }
     : {};
   const filtroVista: Prisma.LeadWhereInput = vista === "dafare" ? { fase: { in: FASI_APERTE } } : vista === "chiusi" ? { fase: { notIn: FASI_APERTE } } : {};
-  const where: Prisma.LeadWhereInput = { AND: [scope, ricerca, p.id ? { id: p.id } : filtroVista] };
+  // ?fase=… (dal percorso nella pagina Marketing): solo i lead in quella fase, aperti o chiusi
+  const where: Prisma.LeadWhereInput = { AND: [scope, ricerca, p.id ? { id: p.id } : p.fase ? { fase: p.fase } : filtroVista] };
   const [lead, totali, stato, venditori] = await Promise.all([
     prisma.lead.findMany({
       where,
@@ -69,7 +71,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
       {(!stato.attive || !stato.posta) && (
         <p className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
           ⏸ Email automatiche {!stato.posta ? "non attive: manca la configurazione della posta (SMTP)" : "in pausa"}. Gli esiti si registrano e gli invii vengono programmati, ma le email non partono.
-          {u?.ruolo === "AMMINISTRATORE" && <> <Link href="/impostazioni/automazioni" className="underline">Impostazioni › Email automatiche</Link></>}
+          {puoMarketing(u) && <> <Link href="/impostazioni/automazioni" className="underline">Impostazioni › Email automatiche</Link></>}
         </p>
       )}
       {p.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{p.errore}</p>}

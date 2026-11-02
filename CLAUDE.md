@@ -142,19 +142,25 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   clienti/marchi/provenienza, anzianità crediti e debiti, fornitori, costo delle banche (`bancaDi`), simulatore (prezzi, costi, volumi, incassi,
   cassa prevista 13 settimane). Dati: import contabilità (campi report riempiti solo se vuoti) + rotta `api/admin/importa-progetti-bconsole`.
   Grafici secondo la skill dataviz (palette fissa in `src/lib/report/formato.ts`, tooltip, tabella sotto ogni grafico).
+- **Marketing** (ruolo `MARKETING` o ufficio MARKETING; `puoMarketing`/`eMarketing` in `src/lib/utenti/stato.ts`): pagina `/marketing`
+  (numeri dei lead, percorso a tappe come la tela di Keap con le email di ogni tappa, fonti, campagne, strumenti) e `/marketing/email`
+  (testi di tutte le email automatiche modificabili con segnaposto `{nome}`, `{data_appuntamento}`…, anteprima mentre si scrive, ritorno allo
+  standard; `src/lib/automazioni/personalizza.ts`, chiavi `email_testo:<modello>[:<variante>]`, applicati in `eseguiInviiScaduti`).
+  Il marketing vede tutti i clienti e lead (scope), gestisce email automatiche (non la posta aziendale), promozione del recupero, avvisi,
+  campagne, lead da pubblicità (`/impostazioni/lead`), articoli/listini e aumenti, e crea utenti non amministrativi (`RUOLI_CREABILI_MARKETING`).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 195, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 200, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

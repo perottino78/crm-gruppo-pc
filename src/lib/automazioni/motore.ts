@@ -13,6 +13,15 @@ import { eseguiCampagne } from "@/lib/campagne/motore";
 import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
 import { chiaveGiorno, daOraRoma } from "@/lib/calendario/tempo";
 import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
+import { personalizza, valoriSegnaposto, chiaveTesto, varianteTesto, PREFISSO_TESTO, type TestoPersonalizzato } from "./personalizza";
+
+/** Testi delle email scritti dal Marketing (Marketing › Email automatiche), per chiave "email_testo:…". */
+export async function testiPersonalizzati(): Promise<Map<string, TestoPersonalizzato>> {
+  const righe = await prisma.configurazione.findMany({ where: { chiave: { startsWith: PREFISSO_TESTO } } });
+  const out = new Map<string, TestoPersonalizzato>();
+  for (const r of righe) { try { const t = JSON.parse(r.valore); if (t?.testo) out.set(r.chiave, t); } catch { /* testo non leggibile: si usa lo standard */ } }
+  return out;
+}
 
 type Db = Prisma.TransactionClient | typeof prisma;
 export const CHIAVE_ATTIVE = "automazioni_lead_attive";
@@ -207,6 +216,7 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
   if (!stato.posta) return { ...r, motivo: "posta (SMTP) non configurata" };
   // un invio rimasto "in corso" oltre la prenotazione: non si sa se è partito → da verificare, senza reinviare
   r.daVerificare += (await prisma.invioProgrammato.updateMany({ where: { stato: "IN_CORSO", bloccatoFino: { lt: ora() } }, data: { stato: "DA_VERIFICARE", errore: "interrotto durante l'invio: controllare prima di reinviare" } })).count;
+  const testi = await testiPersonalizzati();
 
   for (let giro = 0; giro < (opz.max ?? 25); giro++) {
     const job = await prisma.invioProgrammato.findFirst({ where: { stato: "IN_ATTESA", eseguiDopo: { lte: ora() } }, orderBy: { eseguiDopo: "asc" } });
@@ -231,7 +241,9 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       const link = { lead: linkLead(lead.id), disiscrizione: linkDisiscrizione(lead.id) };
       const venditore = lead.venditoreId ? await prisma.utente.findUnique({ where: { id: lead.venditoreId }, select: { nome: true, telefono: true, email: true } }) : null;
       const promozione = extra.promozione ?? (modello === "lost-recovery-call-requested" ? await promozioneValida(ora()) : null);
-      const e = componiEmail(modello, datiEmail(lead, venditore, { ...extra, promozione, adesso: ora() }), link, variante);
+      const dati = datiEmail(lead, venditore, { ...extra, promozione, adesso: ora() });
+      // il testo scritto dal Marketing, se c'è, sostituisce quello standard (stessi dati, segnaposto riempiti)
+      const e = personalizza(componiEmail(modello, dati, link, variante), testi.get(chiaveTesto(modello, varianteTesto(modello, variante, dati))), valoriSegnaposto(dati, link, variante));
       const a = destinatario === "CLIENTE" ? lead.email : destinatario === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
       const da = destinatario === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
       const soppressa = destinatario === "CLIENTE"

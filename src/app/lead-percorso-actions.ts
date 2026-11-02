@@ -1,5 +1,6 @@
 "use server";
 
+import { puoMarketing } from "@/lib/utenti/stato";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -57,7 +58,7 @@ export async function assegnaVenditoreLead(fd: FormData) {
 async function amministratore() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (u.ruolo !== "AMMINISTRATORE") redirect("/impostazioni/automazioni?errore=permesso");
+  if (!puoMarketing(u)) redirect("/impostazioni/automazioni?errore=permesso");
   return u;
 }
 

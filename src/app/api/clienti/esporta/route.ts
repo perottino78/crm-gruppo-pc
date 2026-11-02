@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const p = req.nextUrl.searchParams;
   const f: FiltriClienti = Object.fromEntries(["brand", "q", "indirizzo", "comune", "provincia", "cap", "paese", "provenienza", "stato", "commerciale", "dal", "al"].map((k) => [k, p.get(k) ?? undefined]));
   // Il filtro per commerciale è solo dell'amministratore (gli altri vedono già solo i propri)
-  if (utente.ruolo !== "AMMINISTRATORE") f.commerciale = undefined;
+  if (utente.ruolo !== "AMMINISTRATORE" && utente.ruolo !== "MARKETING") f.commerciale = undefined;
   const dataDa = f.dal ? daOraRoma(`${f.dal}T00:00`) : null;
   const dataA = f.al ? daOraRoma(`${aggiungiGiorni(f.al, 1)}T00:00`) : null;
   const where: Prisma.ClienteWhereInput = { AND: [scopeClienteWhere(utente), ...whereFiltriClienti(f, dataDa, dataA)] };

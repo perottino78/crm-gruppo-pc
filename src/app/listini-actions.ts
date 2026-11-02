@@ -1,5 +1,6 @@
 "use server";
 
+import { puoMarketing } from "@/lib/utenti/stato";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -16,7 +17,7 @@ const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v 
 async function amministratore() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (u.ruolo !== "AMMINISTRATORE") redirect("/prodotti/aumenti?errore=permesso");
+  if (!puoMarketing(u)) redirect("/prodotti/aumenti?errore=permesso");
   return u;
 }
 

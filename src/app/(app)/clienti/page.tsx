@@ -87,7 +87,8 @@ export default async function ClientiPage({
   const clientiWhere: Prisma.ClienteWhereInput = { AND: [brandFiltro, clienteScope, ...condizioni] };
   // Per le tendine dei filtri: valori presenti con quanti clienti (solo quelli che l'utente può vedere)
   const scopeEBrand: Prisma.ClienteWhereInput = { AND: [brandFiltro, clienteScope] };
-  const isAdmin = utente?.ruolo === "AMMINISTRATORE";
+  // amministratore e marketing vedono tutti i clienti: possono filtrare per commerciale
+  const isAdmin = utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "MARKETING";
   const parametriEsporta = new URLSearchParams();
   for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametriEsporta.set(k, v);
 

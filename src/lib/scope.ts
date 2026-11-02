@@ -5,7 +5,8 @@
 import type { Prisma, Utente } from "@prisma/client";
 
 export function scopeClienteWhere(utente: Pick<Utente, "id" | "ruolo">): Prisma.ClienteWhereInput {
-  if (utente.ruolo === "AMMINISTRATORE") return {};
+  // il marketing lavora su tutta l'anagrafica (filtri, campagne, pubblici per le inserzioni)
+  if (utente.ruolo === "AMMINISTRATORE" || utente.ruolo === "MARKETING") return {};
   return {
     OR: [
       { responsabileId: utente.id },
@@ -18,7 +19,7 @@ export function scopeClienteWhere(utente: Pick<Utente, "id" | "ruolo">): Prisma.
 }
 
 export function scopeLeadWhere(utente: Pick<Utente, "id" | "ruolo">): Prisma.LeadWhereInput {
-  if (utente.ruolo === "AMMINISTRATORE") return {};
+  if (utente.ruolo === "AMMINISTRATORE" || utente.ruolo === "MARKETING") return {};
   return { telefonistaId: utente.id };
 }
 

@@ -1,4 +1,5 @@
 // Anagrafica articoli: funzioni lato server (permessi, categorie, ricalcolo prezzi, codici).
+import { puoMarketing } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { calcolaArticolo, type CategoriaRegola } from "./prezzi";
@@ -7,7 +8,7 @@ import type { Esistente } from "./importa";
 /** Consultare il catalogo (costi compresi): tutti tranne i commerciali. */
 export const puoVedereArticoli = (u: Pick<Utente, "ruolo"> | null | undefined) => !!u && u.ruolo !== "COMMERCIALE";
 /** Inserire, modificare, importare: solo gli amministratori. */
-export const puoModificareArticoli = (u: Pick<Utente, "ruolo"> | null | undefined) => u?.ruolo === "AMMINISTRATORE";
+export const puoModificareArticoli = (u: Pick<Utente, "ruolo"> & { ufficio?: string | null } | null | undefined) => puoMarketing(u);
 
 type Db = Prisma.TransactionClient | typeof prisma;
 

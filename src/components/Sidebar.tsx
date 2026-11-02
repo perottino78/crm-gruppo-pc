@@ -8,6 +8,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/", label: "Dashboard", icon: "🏠" },
   { href: "/lead", label: "Lead da lavorare", icon: "📞" },
   { href: "/clienti", label: "Clienti", icon: "👥" },
+  { href: "/marketing", label: "Marketing", icon: "🚀", soloMarketing: true },
   { href: "/campagne", label: "Campagne", icon: "📣", soloMarketing: true },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/calendario", label: "Calendario", icon: "📅" },
@@ -54,7 +55,7 @@ export default function Sidebar({
         </div>
       </div>
       <nav className="flex flex-col gap-1 px-2">
-        {moduli.filter((m) => (!m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO") && (!m.soloOrdini || (!!utente && utente.ruolo !== "COMMERCIALE")) && (!m.soloMarketing || utente?.ruolo === "AMMINISTRATORE" || utente?.ufficio === "MARKETING")).map((m) => {
+        {moduli.filter((m) => (!m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO") && (!m.soloOrdini || (!!utente && utente.ruolo !== "COMMERCIALE")) && (!m.soloMarketing || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "MARKETING" || utente?.ufficio === "MARKETING")).map((m) => {
           const active = m.href === "/" ? pathname === "/" : pathname === m.href || pathname.startsWith(m.href + "/");
           const href = brand !== "Tutti" ? `${m.href}?brand=${encodeURIComponent(brand)}` : m.href;
           return (

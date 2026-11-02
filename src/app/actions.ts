@@ -1,5 +1,6 @@
 "use server";
 
+import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -1301,11 +1302,15 @@ export async function aggiornaConfigurazione(formData: FormData) {
 
 export async function creaUtente(formData: FormData) {
   const admin = await getCurrentUser();
-  if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
+  if (!admin || !puoMarketing(admin)) redirect("/impostazioni");
   const nome = str(formData, "nome");
   const email = str(formData, "email");
   const ruolo = str(formData, "ruolo");
   if (!nome || !email || !ruolo) return;
+  // il marketing crea solo colleghi operativi: amministrazione e amministratori li crea l'amministratore
+  if (!isAmministratore(admin) && !RUOLI_CREABILI_MARKETING.includes(ruolo)) redirect("/impostazioni?errore=" + encodeURIComponent("Questo ruolo lo può dare solo l'amministratore."));
+  if (await prisma.utente.findFirst({ where: { OR: [{ email: { equals: email, mode: "insensitive" } }, { username: { equals: str(formData, "username") ?? email, mode: "insensitive" } }] }, select: { id: true } }))
+    redirect("/impostazioni?errore=" + encodeURIComponent(`${email} (o lo username) è già usato da un altro utente.`));
   const username = str(formData, "username") ?? email;
   const passwordIniziale = str(formData, "password");
   const passwordHash = passwordIniziale ? await hashPassword(passwordIniziale) : null;
@@ -1321,6 +1326,7 @@ export async function creaUtente(formData: FormData) {
     },
   });
   revalidatePath("/impostazioni");
+  redirect("/impostazioni?ok=" + encodeURIComponent(`${nome} aggiunto al team (${ruolo}).`));
 }
 
 // --- Autenticazione ---
