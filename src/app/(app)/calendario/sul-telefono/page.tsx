@@ -17,7 +17,7 @@ export default async function SulTelefonoPage({ searchParams }: { searchParams: 
   const { msg } = await searchParams;
   const https = u.calendarioToken ? `${APP_URL}/api/calendario/${u.calendarioToken}` : null;
   const webcal = https?.replace(/^https:/, "webcal:");
-  const tutti = vedeTutti(u.ruolo);
+  const tutti = vedeTutti(u);
   const admin = u.ruolo === "AMMINISTRATORE";
   const colleghi = tutti ? await prisma.utente.findMany({ where: { stato: "ATTIVO", id: { not: u.id } }, select: { id: true, nome: true, ufficio: true, email: true, calendarioToken: true }, orderBy: { nome: "asc" } }) : [];
   const passo = "rounded-xl border border-neutral-200 bg-white p-4";

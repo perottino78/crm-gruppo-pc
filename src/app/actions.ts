@@ -1,5 +1,6 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -1302,7 +1303,7 @@ export async function aggiornaConfigurazione(formData: FormData) {
 
 export async function creaUtente(formData: FormData) {
   const admin = await getCurrentUser();
-  if (!admin || !puoMarketing(admin)) redirect("/impostazioni");
+  if (!admin || !puo(admin, "utenti.crea")) redirect("/impostazioni");
   const nome = str(formData, "nome");
   const email = str(formData, "email");
   const ruolo = str(formData, "ruolo");

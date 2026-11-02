@@ -64,6 +64,17 @@ model Utente {
   smtpPorta            Int?
   smtpVerificataIl     DateTime?
   smtpErrore           String?
+  // Ruoli e permessi (Impostazioni › Ruoli e permessi, come i Gruppi di BConsole): profilo assegnato e copia dei suoi
+  // permessi e della visibilità dei dati (PROPRI | ZONA | TUTTI). Senza profilo valgono i permessi predefiniti del ruolo.
+  profiloId            String?
+  permessi             String[]          @default([])
+  visibilita           String?
+  // Zona commerciale (Piemonte, Liguria…) e responsabile del proprio ufficio (es. Rocco per il Marketing)
+  zonaId               String?
+  responsabileUfficio  Boolean           @default(false)
+  // Calcolati dalle zone: province e colleghi i cui dati vede chi ha visibilità ZONA
+  visibileProvince     String[]          @default([])
+  visibileUtenti       String[]          @default([])
   createdAt            DateTime          @default(now())
   leadAssegnati        Lead[]
   appuntamenti         Appuntamento[]
@@ -1738,4 +1749,28 @@ model ProgettoBC {
   aggiornatoIl    DateTime  @updatedAt
 
   @@index([numero])
+}
+
+// Profilo di accesso (come i Gruppi di BConsole): cosa si può vedere e fare (permessi a spunta) e quali dati (visibilità).
+model ProfiloAccesso {
+  id          String   @id @default(cuid())
+  nome        String
+  descrizione String?
+  permessi    String[] @default([])
+  visibilita  String   @default("PROPRI") // PROPRI | ZONA | TUTTI
+  ordine      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
+// Zona commerciale: una o più regioni (e province in più), con il responsabile commerciale di zona.
+model ZonaCommerciale {
+  id             String   @id @default(cuid())
+  nome           String
+  regioni        String[] @default([])
+  provinceExtra  String[] @default([])
+  responsabileId String?
+  attiva         Boolean  @default(true)
+  ordine         Int      @default(0)
+  createdAt      DateTime @default(now())
 }

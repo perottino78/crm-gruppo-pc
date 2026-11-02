@@ -1,5 +1,6 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { puoMarketing } from "@/lib/utenti/stato";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -17,7 +18,7 @@ const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v 
 async function amministratore() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (!puoMarketing(u)) redirect("/prodotti/aumenti?errore=permesso");
+  if (!puo(u, "listini.modifica")) redirect("/prodotti/aumenti?errore=permesso");
   return u;
 }
 

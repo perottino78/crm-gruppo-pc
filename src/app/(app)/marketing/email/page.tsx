@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
@@ -30,7 +31,7 @@ function dovePart(modello: string): string[] {
 
 export default async function EmailAutomatichePage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
-  if (!u || !puoMarketing(u)) notFound();
+  if (!u || !puo(u, "automazioni")) notFound();
   const p = await searchParams;
   const testi = await testiPersonalizzati();
   const voci = Object.keys(MODELLI).flatMap((m) => (VARIANTI[m] ?? [undefined]).map((v) => ({ m, v })));

@@ -1,3 +1,4 @@
+import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Stato delle persone del team (attivo / in pausa / disattivato) e dati collegati che impediscono l'eliminazione.
 import { prisma } from "@/lib/prisma";
 
@@ -14,7 +15,7 @@ export const RUOLI_UTENTE = ["AMMINISTRATORE", "AMMINISTRATIVO", "COMMERCIALE", 
 export const eMarketing = (u: { ruolo?: string | null; ufficio?: string | null } | null | undefined) => !!u && (u.ruolo === "MARKETING" || u.ufficio === "MARKETING");
 
 /** Amministratore o marketing: pubblicità e lead, listini e articoli, nuovi utenti (non amministratori). */
-export const puoMarketing = (u: { ruolo?: string | null; ufficio?: string | null } | null | undefined) => u?.ruolo === "AMMINISTRATORE" || eMarketing(u);
+export const puoMarketing = (u: ConPermessi | null | undefined) => puo(u, "marketing");
 
 /** Ruoli che il marketing può dare creando un utente: l'amministrazione e gli amministratori li crea solo l'amministratore. */
 export const RUOLI_CREABILI_MARKETING = ["COMMERCIALE", "TELEFONISTA", "MARKETING", "TECNICO", "POSATORE"];

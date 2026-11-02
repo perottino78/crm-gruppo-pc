@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -12,7 +13,7 @@ import { rigeneraChiaveLead, impostaTelefonistaBrand } from "@/app/lead-actions"
 
 export default async function LeadSettings() {
   const u = await getCurrentUser();
-  if (!puoMarketing(u)) redirect("/impostazioni");
+  if (!puo(u, "pubblicita")) redirect("/impostazioni");
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host") ?? "crm-gruppo-pc.vercel.app";
   const base = `https://${host}`;

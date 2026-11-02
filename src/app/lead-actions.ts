@@ -1,5 +1,6 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { revalidatePath } from "next/cache";
 import { randomBytes } from "crypto";
 import { getCurrentUser } from "@/lib/auth";
@@ -9,7 +10,7 @@ import { prisma } from "@/lib/prisma";
 
 async function soloAdmin() {
   const u = await getCurrentUser();
-  if (!puoMarketing(u)) throw new Error("Non autorizzato");
+  if (!puo(u, "pubblicita")) throw new Error("Non autorizzato");
 }
 
 export async function rigeneraChiaveLead() {

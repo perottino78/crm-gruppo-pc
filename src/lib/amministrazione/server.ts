@@ -1,3 +1,4 @@
+import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Funzioni lato server del modulo Amministrazione (accesso al database)
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
@@ -5,8 +6,8 @@ import type { Utente } from "@prisma/client";
 import { cent } from "./estratto";
 import { GIORNI_ATTESA_ACCONTO } from "./costanti";
 
-export function puoAmministrazione(utente: Pick<Utente, "ruolo"> | null | undefined): boolean {
-  return utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO";
+export function puoAmministrazione(utente: ConPermessi | null | undefined): boolean {
+  return puo(utente, "amministrazione");
 }
 
 /** Utente corrente, solo se abilitato all'amministrazione (altrimenti null). */

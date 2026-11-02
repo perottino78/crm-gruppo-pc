@@ -1,5 +1,6 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { puoMarketing } from "@/lib/utenti/stato";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -58,7 +59,7 @@ export async function assegnaVenditoreLead(fd: FormData) {
 async function amministratore() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (!puoMarketing(u)) redirect("/impostazioni/automazioni?errore=permesso");
+  if (!puo(u, "automazioni")) redirect("/impostazioni/automazioni?errore=permesso");
   return u;
 }
 

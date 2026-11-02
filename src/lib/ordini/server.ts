@@ -1,10 +1,11 @@
+import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Acquisti: funzioni lato server condivise (fornitore predefinito, costo previsto, permessi, numerazione).
 import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { costoPrevisto, numeroOrdine } from "./calcoli";
 import type { DatiPdfOrdine } from "./pdfOrdine";
 
-export const puoGestireOrdini = (u: Pick<Utente, "ruolo"> | null | undefined) => !!u && u.ruolo !== "COMMERCIALE";
+export const puoGestireOrdini = (u: ConPermessi | null | undefined) => puo(u, "ordini");
 
 type RigaPrev = { id: string; prezzoUnitario: number; optionalPrezzo: number; quantita: number; prodotto: { brandId: string; tipologia: string } | null };
 

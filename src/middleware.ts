@@ -20,7 +20,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  return NextResponse.next();
+  // la pagina richiesta passa al layout, che controlla i permessi del profilo (Impostazioni › Ruoli e permessi)
+  const h = new Headers(req.headers);
+  h.set("x-percorso", pathname);
+  return NextResponse.next({ request: { headers: h } });
 }
 
 export const config = {
