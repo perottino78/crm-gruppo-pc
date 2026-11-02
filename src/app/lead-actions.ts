@@ -2,13 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { randomBytes } from "crypto";
-import { getCurrentUser, isAmministratore } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
+import { puoMarketing } from "@/lib/utenti/stato";
 import { setConfig } from "@/lib/leadIngest";
 import { prisma } from "@/lib/prisma";
 
 async function soloAdmin() {
   const u = await getCurrentUser();
-  if (!isAmministratore(u)) throw new Error("Non autorizzato");
+  if (!puoMarketing(u)) throw new Error("Non autorizzato");
 }
 
 export async function rigeneraChiaveLead() {

@@ -1,5 +1,6 @@
 "use server";
 
+import { puoMarketing } from "@/lib/utenti/stato";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { Utente } from "@prisma/client";
@@ -14,7 +15,7 @@ const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v 
 const lista = (fd: FormData, k: string) => fd.getAll(k).filter((x): x is string => typeof x === "string" && !!x.trim());
 
 /** Le campagne le fanno l'amministratore e l'ufficio Marketing. */
-export const puoFareCampagne = async (u: Pick<Utente, "ruolo" | "ufficio"> | null) => !!u && (u.ruolo === "AMMINISTRATORE" || u.ufficio === "MARKETING");
+export const puoFareCampagne = async (u: Pick<Utente, "ruolo" | "ufficio"> | null) => !!u && (u.ruolo === "AMMINISTRATORE" || u.ruolo === "MARKETING" || u.ufficio === "MARKETING");
 
 async function marketing() {
   const u = await getCurrentUser();
@@ -96,7 +97,7 @@ export async function eliminaCampagna(fd: FormData) {
 /** Impostazioni: giorni degli avvisi di scadenza (es. 3,2,1) e a chi mandarli. */
 export async function salvaPromemoriaCampagne(fd: FormData) {
   const u = await getCurrentUser();
-  if (!u || u.ruolo !== "AMMINISTRATORE") redirect("/impostazioni/automazioni?errore=permesso");
+  if (!u || !puoMarketing(u)) redirect("/impostazioni/automazioni?errore=permesso");
   const giorni = leggiGiorniPromemoria(str(fd, "giorni") ?? "").join(",");
   const a = (str(fd, "a") ?? "").split(/[,;\s]+/).filter(emailValida).join(", ");
   for (const [chiave, valore] of [[CHIAVE_PROMEMORIA_GIORNI, giorni], [CHIAVE_PROMEMORIA_A, a]] as const)

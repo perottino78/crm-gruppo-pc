@@ -18,7 +18,7 @@ const num = (fd: FormData, k: string) => leggiNumero(str(fd, k));
 async function amministratore() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (!puoModificareArticoli(u)) throw new Error("Solo gli amministratori possono modificare l'anagrafica articoli.");
+  if (!puoModificareArticoli(u)) throw new Error("Solo amministrazione e marketing possono modificare l'anagrafica articoli.");
   return u;
 }
 const aggiorna = (id?: string) => {

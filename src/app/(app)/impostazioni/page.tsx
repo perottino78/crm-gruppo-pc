@@ -6,21 +6,23 @@ import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { cambiaMansioneUtente, impostaStatoUtente } from "@/app/team-actions";
-import { UFFICI } from "@/lib/flusso";
+import { UFFICI, nomeUfficio } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
-import { statoUtente, RUOLI_UTENTE, STATI_UTENTE } from "@/lib/utenti/stato";
+import { statoUtente, RUOLI_UTENTE, STATI_UTENTE, puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 
-const RUOLI = ["COMMERCIALE", "TELEFONISTA", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
+const RUOLI = ["COMMERCIALE", "TELEFONISTA", "MARKETING", "TECNICO", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
 export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string; ok?: string; errore?: string }> }) {
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
   const admin = isAmministratore(utenteCorrente);
+  // il marketing vede il team e aggiunge colleghi (non amministratori); ruoli, password e stati restano all'amministratore
+  const marketing = !admin && puoMarketing(utenteCorrente);
 
   const [config, utenti, brands] = await Promise.all([
     // la posta aziendale ha il suo riquadro (Email automatiche): la password non deve comparire qui
-    prisma.configurazione.findMany({ where: { NOT: { chiave: { startsWith: "posta_" } } }, orderBy: { chiave: "asc" } }),
-    admin ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
+    prisma.configurazione.findMany({ where: { AND: [{ NOT: { chiave: { startsWith: "posta_" } } }, { NOT: { chiave: { startsWith: "email_testo:" } } }] }, orderBy: { chiave: "asc" } }),
+    admin || marketing ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);
 
@@ -94,11 +96,39 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
       <h2 className="text-base font-bold text-neutral-900 mb-1">Utenti, ruoli e credenziali</h2>
       {admin && <p className="text-sm text-neutral-600 mb-3">Clicca sul nome della persona per aprire la sua scheda: accesso, ruolo, ufficio, email, stato. I disattivati sono in fondo: tornano nell&apos;elenco solo se li riattivi.</p>}
 
-      {!admin ? (
+      {(sp.ok || sp.errore) && !sp.utente && (
+        <p className={`mb-3 rounded-lg border px-3 py-2 text-sm font-semibold ${sp.errore ? "border-red-300 bg-red-50 text-red-800" : "border-green-300 bg-green-50 text-green-800"}`}>{sp.errore ?? sp.ok}</p>
+      )}
+      {!admin && !marketing ? (
         <div className="bg-white rounded-lg border border-neutral-200 p-4 text-sm font-medium text-neutral-600">
           Sezione riservata all&apos;amministratore. Per un reset della password o dello username,
           contatta chi gestisce il CRM.
         </div>
+      ) : marketing ? (
+        <>
+          <p className="text-sm text-neutral-600 mb-3">Il team del CRM. Puoi aggiungere nuovi colleghi; ruoli, password e disattivazioni li gestisce l&apos;amministratore.</p>
+          <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-4">
+            {attivi.map((u) => (
+              <div key={u.id} className="px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-sm">
+                <span><b className="text-neutral-900">{u.nome}</b> <span className="text-xs text-neutral-500">{u.email}{u.ufficio ? ` · ${nomeUfficio(u.ufficio)}` : ""}</span></span>
+                <span className="flex gap-1 items-center">
+                  {u.smtpPassword && !u.smtpErrore ? <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800">✉️ ✓ email attiva</span> : <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-500">✉️ non collegata</span>}
+                  {u.stato !== "ATTIVO" && <span className={`text-xs px-2 py-1 rounded-full ${statoUtente(u.stato).classe}`}>{statoUtente(u.stato).nome}</span>}
+                  <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{u.ruolo}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+          <form action={creaUtente} className="bg-white rounded-lg border border-neutral-200 p-4 flex flex-wrap items-end gap-2">
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Nome</label><input name="nome" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Email</label><input name="email" type="email" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Username (opz.)</label><input name="username" placeholder="lascia vuoto per usare l'email" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Password iniziale (opz.)</label><input name="password" placeholder="min. 6 caratteri" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs text-neutral-700">Ruolo</label>
+              <select name="ruolo" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm">{RUOLI_CREABILI_MARKETING.map((r) => <option key={r} value={r}>{r}</option>)}</select></div>
+            <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Aggiungi utente</button>
+          </form>
+        </>
       ) : (
         <>
           <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-4">

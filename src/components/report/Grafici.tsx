@@ -67,9 +67,9 @@ export function Tabella({ titolo = "Vedi i numeri in tabella", intestazioni, rig
 export type VoceBarra = { etichetta: string; valore: number; dettagli?: [string, string][]; nota?: string };
 
 /** Classifica a barre orizzontali (una sola serie: il titolo dice cosa misura, niente legenda). */
-export function Barre({ voci, colore = COLORI[0], unita = "eur", vuoto = "Nessun dato nel periodo." }: { voci: VoceBarra[]; colore?: string; unita?: "eur" | "perc"; vuoto?: string }) {
+export function Barre({ voci, colore = COLORI[0], unita = "eur", vuoto = "Nessun dato nel periodo." }: { voci: VoceBarra[]; colore?: string; unita?: "eur" | "perc" | "numero"; vuoto?: string }) {
   const t = useTooltip();
-  const formato = unita === "perc" ? perc1 : eur0;
+  const formato = unita === "perc" ? perc1 : unita === "numero" ? (n: number) => n.toLocaleString("it-IT") : eur0;
   if (!voci.length) return <p className="py-6 text-center text-sm text-neutral-500">{vuoto}</p>;
   const max = Math.max(...voci.map((v) => Math.abs(v.valore)), 1);
   return (

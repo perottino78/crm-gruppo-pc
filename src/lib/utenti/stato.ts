@@ -8,7 +8,16 @@ export const STATI_UTENTE = [
 ] as const;
 export const statoUtente = (s?: string | null) => STATI_UTENTE.find((x) => x.chiave === s) ?? STATI_UTENTE[0];
 
-export const RUOLI_UTENTE = ["AMMINISTRATORE", "AMMINISTRATIVO", "COMMERCIALE", "TELEFONISTA", "TECNICO", "POSATORE"];
+export const RUOLI_UTENTE = ["AMMINISTRATORE", "AMMINISTRATIVO", "COMMERCIALE", "TELEFONISTA", "MARKETING", "TECNICO", "POSATORE"];
+
+/** Marketing: per ruolo o per ufficio (campagne email, filtri ed esportazione di tutti i clienti). */
+export const eMarketing = (u: { ruolo?: string | null; ufficio?: string | null } | null | undefined) => !!u && (u.ruolo === "MARKETING" || u.ufficio === "MARKETING");
+
+/** Amministratore o marketing: pubblicità e lead, listini e articoli, nuovi utenti (non amministratori). */
+export const puoMarketing = (u: { ruolo?: string | null; ufficio?: string | null } | null | undefined) => u?.ruolo === "AMMINISTRATORE" || eMarketing(u);
+
+/** Ruoli che il marketing può dare creando un utente: l'amministrazione e gli amministratori li crea solo l'amministratore. */
+export const RUOLI_CREABILI_MARKETING = ["COMMERCIALE", "TELEFONISTA", "MARKETING", "TECNICO", "POSATORE"];
 
 /** Lead che non vanno più lavorati: non si passano a un collega. */
 export const LEAD_CHIUSI = ["NON_INTERESSATO", "FUORI_REGIONE", "APPUNTAMENTO_FISSATO"];

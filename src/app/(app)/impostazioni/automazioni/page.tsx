@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
+import { puoMarketing } from "@/lib/utenti/stato";
 import { statoAutomazioni, mesiRecupero, promozioneValida, CHIAVE_PROMO_TESTO, CHIAVE_PROMO_FINO } from "@/lib/automazioni/motore";
 import { MAX_RECUPERI } from "@/lib/automazioni/percorsi";
 import { PERCORSI, ESITI, type Quando } from "@/lib/automazioni/percorsi";
@@ -40,7 +41,8 @@ const descriviQuando = (q: Quando) =>
 /** Email automatiche dei lead: accensione, stato della posta, registro e anteprima dei testi. */
 export default async function AutomazioniPage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
-  if (!u || u.ruolo !== "AMMINISTRATORE") notFound();
+  if (!u || !puoMarketing(u)) notFound();
+  const admin = u.ruolo === "AMMINISTRATORE";
   const p = await searchParams;
   const [stato, perStato, ultime, daVerificare, mesi, promo, testoPromo, finoPromo, inAttesa, avvisi] = await Promise.all([
     statoAutomazioni(),
@@ -69,15 +71,15 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
   return (
     <div className="max-w-5xl space-y-4">
       <div>
-        <Link href="/impostazioni" className="text-sm text-blue-800 underline">← Impostazioni</Link>
+        <Link href={admin ? "/impostazioni" : "/marketing"} className="text-sm text-blue-800 underline">← {admin ? "Impostazioni" : "Marketing"}</Link>
         <h1 className="text-2xl font-bold text-neutral-900">✉️ Email automatiche dei lead</h1>
         <p className="text-sm text-neutral-600">I percorsi di Keap ricostruiti nel CRM: dopo ogni esito registrato in <Link href="/lead" className="underline">Lead da lavorare</Link> partono le email al cliente e i solleciti al centralino, con gli stessi tempi (lun–sab dalle 08:00, chiusura task alle 18:30).</p>
       </div>
-      {p.errore === "permesso" && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">Solo l&apos;amministratore può cambiare queste impostazioni.</p>}
+      {p.errore === "permesso" && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">Solo amministrazione e marketing possono cambiare queste impostazioni.</p>}
       {p.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">{p.ok === "attive" ? "▶️ Email automatiche ACCESE." : "⏸ Email automatiche in PAUSA."}</p>}
       {p.eseguiti && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">Controllo eseguito: {p.eseguiti} invii elaborati, {p.inviate} email spedite.{p.motivo ? ` (${p.motivo})` : ""}</p>}
 
-      <div id="posta" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
+      {admin && <div id="posta" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="font-semibold">📮 Posta aziendale</p>
           <span className={`text-sm px-3 py-1 rounded-full ${posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>
@@ -121,12 +123,12 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
           <button className="btn-3d btn-3d-teal text-sm px-4 py-2 sm:col-span-4 justify-self-start">Salva e manda una prova</button>
           <p className="text-[11px] text-neutral-500 sm:col-span-4">Se la prova non va, il CRM prova da solo il nome del server indicato nel certificato, l&apos;altra porta (465 SSL / 587 STARTTLS) e salva le impostazioni che funzionano.</p>
         </form>
-      </div>
+      </div>}
 
       <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <div className="flex flex-wrap items-center gap-3">
           <span className={`text-sm font-semibold px-3 py-1 rounded-full ${stato.attive ? "bg-green-100 text-green-900" : "bg-amber-100 text-amber-900"}`}>{stato.attive ? "▶️ Accese" : "⏸ In pausa"}</span>
-          <span className={`text-sm px-3 py-1 rounded-full ${stato.posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>{stato.posta ? "Posta aziendale collegata" : "Posta aziendale NON collegata (vedi sotto)"}</span>
+          <span className={`text-sm px-3 py-1 rounded-full ${stato.posta ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>{stato.posta ? "Posta aziendale collegata" : `Posta aziendale NON collegata (${admin ? "vedi sotto" : "la collega l'amministratore"})`}</span>
           <form action={impostaAutomazioni}>
             <input type="hidden" name="attive" value={stato.attive ? "0" : "1"} />
             <button className={`btn-3d ${stato.attive ? "btn-3d-amber" : "btn-3d-green"} text-sm px-4 py-2`}>{stato.attive ? "Metti in pausa" : "Accendi le email automatiche"}</button>
@@ -200,7 +202,7 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
       </div>
 
       <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
-        <p className="font-semibold">Percorsi e testi (anteprima con dati di esempio)</p>
+        <div className="flex flex-wrap items-center justify-between gap-2"><p className="font-semibold">Percorsi e testi (anteprima con dati di esempio)</p><Link href="/marketing/email" className="btn-3d btn-3d-purple text-sm px-4 py-2">✏️ Modifica i testi delle email</Link></div>
         {Object.entries(PERCORSI).filter(([, passi]) => passi.length).map(([k, passi]) => (
           <div key={k} className="text-sm">
             <p className="font-medium">{NOME_PERCORSO[k] ?? ESITI[k]?.nome ?? k}</p>
