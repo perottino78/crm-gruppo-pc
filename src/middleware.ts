@@ -28,5 +28,5 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   // icone e manifest dell'app (P&C ONE) devono essere raggiungibili anche senza login
-  matcher: ["/((?!api|simula|richiedi|_next|immagini|icone|favicon.ico|icon|apple-icon|manifest.webmanifest).*)"],
+  matcher: ["/((?!api|simula|richiedi|offerta/|_next|immagini|icone|favicon.ico|icon|apple-icon|manifest.webmanifest).*)"],
 };

@@ -3,15 +3,17 @@ import { redirect } from "next/navigation";
 import { cambiaPassword, aggiornaUsername, aggiornaContattiUtente } from "@/app/actions";
 import CasellaEmail from "@/components/CasellaEmail";
 import { postaAziendale } from "@/lib/mail/invio";
+import EditorFirma from "@/components/mail/EditorFirma";
+import { firmaPredefinita } from "@/lib/mail/firma";
 
 export default async function ProfiloPage({
   searchParams,
 }: {
-  searchParams: Promise<{ errore?: string; ok?: string; posta?: string; postaErrore?: string }>;
+  searchParams: Promise<{ errore?: string; ok?: string; posta?: string; postaErrore?: string; firmaSalvata?: string }>;
 }) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
-  const { errore, ok, posta, postaErrore } = await searchParams;
+  const { errore, ok, posta, postaErrore, firmaSalvata } = await searchParams;
   const aziendale = await postaAziendale();
 
   return (
@@ -64,6 +66,12 @@ export default async function ProfiloPage({
           <button className="btn-3d btn-3d-outline">Salva</button>
         </form>
         <p className="text-xs text-neutral-500 mt-2">Mostrato come riferimento commerciale nella stampa delle offerte.</p>
+      </div>
+
+      <div id="firma" className="bg-white rounded-lg border border-neutral-200 p-5">
+        <h2 className="text-base font-bold text-neutral-900 mb-1">✍️ La mia firma email</h2>
+        <p className="text-xs text-neutral-500 mb-3">Va in fondo alle email che mandi dal CRM, come «Invia offerta».</p>
+        <EditorFirma utenteId={utente.id} firma={utente.firmaEmail} predefinita={firmaPredefinita(utente)} torna="/profilo" salvata={!!firmaSalvata} compatto />
       </div>
 
       <CasellaEmail utente={utente} aziendale={aziendale ? { host: aziendale.host, porta: aziendale.porta, utente: aziendale.utente } : null} messaggio={posta} errore={postaErrore} />

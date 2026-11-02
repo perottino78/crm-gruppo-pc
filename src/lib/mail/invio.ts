@@ -54,14 +54,21 @@ export type MailDaInviare = {
   daUtenteId?: string | null;
   /** Intestazioni in più (es. X-CRM-Invio: serve a riconoscere a quale invio si riferisce un'email rimbalzata). */
   intestazioni?: Record<string, string>;
+  /** In copia (es. il commerciale o un collega) */
+  cc?: string[];
+  /** File allegati (es. l'offerta in PDF, foto, schede tecniche) */
+  allegati?: { nome: string; contenuto: Buffer; mime?: string }[];
 };
 
 async function spedisci(c: Casella, m: MailDaInviare, a: string[], da: string, rispondiA?: string | null) {
+  const cc = (m.cc ?? []).filter((x) => /.+@.+\..+/.test(x) && !a.includes(x));
   await trasporto(c).sendMail({
     from: da,
     to: a.join(", "),
+    ...(cc.length ? { cc: cc.join(", ") } : {}),
     // i "mancato recapito" tornano alla casella che spedisce, dove il CRM li legge (vedi rimbalzi-server.ts)
-    envelope: { from: c.utente, to: a },
+    envelope: { from: c.utente, to: [...a, ...cc] },
+    ...(m.allegati?.length ? { attachments: m.allegati.map((f) => ({ filename: f.nome, content: f.contenuto, ...(f.mime ? { contentType: f.mime } : {}) })) } : {}),
     replyTo: rispondiA || undefined,
     ...(m.intestazioni ? { headers: m.intestazioni } : {}),
     subject: m.oggetto,

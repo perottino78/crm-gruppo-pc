@@ -179,19 +179,27 @@ login nel `matcher` del middleware.
   `Utente.visibileProvince/visibileUtenti` per chi vede «La sua zona». `Utente.responsabileUfficio` (es. Rocco per il Marketing).
   Profili e zone di partenza creati da `assicuraIniziali` alla prima apertura. Il team di una zona si spunta nel riquadro della zona
   (`membri` + `conTeam` in `salvaZona`); dopo il salvataggio la riga/zona mostra «✓ Salvato» (`?salvato=<id>`).
+- **Invia offerta e firme email** (`src/app/offerte-email-actions.ts`, `src/lib/mail/firma.ts` puro, `src/lib/mail/link-offerta.ts`,
+  pagina `/preventivi/[id]/invia` con `EditorInvioOfferta`): pulsante «✉️ Invia offerta» nella scheda dell'offerta → editor con A/Cc/oggetto/testo,
+  firma di chi manda, pulsante «Vedi e scarica l'offerta» (link firmato `/offerta/<id>.<firma>`, pubblico, stessa vista della stampa
+  `components/preventivi/StampaOfferta.tsx`; aperture del cliente in `Preventivo.vistoIl/visite`) e allegati (documenti dell'offerta/cliente o
+  file dal computer, salvati in «Corrispondenza»). Parte dalla casella di chi manda (`inviaMail` con `cc` e `allegati`); storico `EmailOfferta`,
+  `Preventivo.inviatoIl/inviatoA`; email mancante del cliente salvata nella scheda. Firme: `Utente.firmaEmail` (righe di testo o HTML incollato;
+  vuota = `firmaPredefinita` dai dati della scheda), dal Profilo o per tutti in Impostazioni › Firme email (`/impostazioni/firme`, permesso
+  `firme` o marketing). BConsole: firma per utente nella scheda agente (campo «Firma»).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 214, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 223, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
