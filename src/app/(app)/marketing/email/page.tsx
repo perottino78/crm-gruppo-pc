@@ -87,7 +87,7 @@ export default async function EmailAutomatichePage({ searchParams }: { searchPar
                   </summary>
                   <div className="bg-neutral-50/60 px-4 pb-4 pt-2">
                     {dove.length > 0 && <p className="mb-2 text-xs text-neutral-600">Parte nel percorso: {dove.join(" · ")}</p>}
-                    <EditorEmail modello={m} variante={v} oggetto={pers?.oggetto ?? std.oggetto} testo={pers?.testo ?? std.testo} valori={valori}
+                    <EditorEmail modello={m} variante={v} oggetto={pers?.oggetto ?? std.oggetto} testo={pers?.testo ?? std.testo} preheader={pers?.preheader ?? ""} valori={valori}
                       salva={salvaTestoEmail} ripristina={ripristinaTestoEmail} personalizzata={!!pers} />
                   </div>
                 </details>

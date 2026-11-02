@@ -4,11 +4,12 @@
 import { useRef, useState } from "react";
 import { riempi } from "@/lib/automazioni/personalizza";
 
-export default function EditorEmail({ modello, variante, oggetto, testo, valori, salva, ripristina, personalizzata }: {
-  modello: string; variante?: string; oggetto: string; testo: string; valori: Record<string, string>;
+export default function EditorEmail({ modello, variante, oggetto, testo, preheader = "", valori, salva, ripristina, personalizzata }: {
+  modello: string; variante?: string; oggetto: string; testo: string; preheader?: string; valori: Record<string, string>;
   salva: (fd: FormData) => Promise<void>; ripristina: (fd: FormData) => Promise<void>; personalizzata: boolean;
 }) {
   const [ogg, setOgg] = useState(oggetto);
+  const [ph, setPh] = useState(preheader);
   const [txt, setTxt] = useState(testo);
   const area = useRef<HTMLTextAreaElement>(null);
   const sconosciuti = [...new Set([...`${ogg} ${txt}`.matchAll(/\{([a-z_]+)\}/g)].map((m) => m[1]).filter((k) => !(k in valori)))];
@@ -28,6 +29,9 @@ export default function EditorEmail({ modello, variante, oggetto, testo, valori,
         <label className="block text-xs font-bold text-neutral-700">Oggetto
           <input name="oggetto" value={ogg} onChange={(e) => setOgg(e.target.value)} className="mt-1 w-full rounded border border-neutral-300 px-2 py-1.5 text-sm font-normal" />
         </label>
+        <label className="block text-xs font-bold text-neutral-700">Preheader <span className="font-normal text-neutral-500">(il testo grigio accanto all&apos;oggetto nella casella; facoltativo, {ph.length}/120)</span>
+          <input name="preheader" value={ph} onChange={(e) => setPh(e.target.value)} maxLength={200} placeholder="es. {nome}, il tuo consulente ti aspetta" className="mt-1 w-full rounded border border-neutral-300 px-2 py-1.5 text-sm font-normal" />
+        </label>
         <label className="block text-xs font-bold text-neutral-700">Testo
           <textarea ref={area} name="testo" value={txt} onChange={(e) => setTxt(e.target.value)} rows={16} className="mt-1 w-full rounded border border-neutral-300 px-2 py-1.5 font-mono text-[13px] font-normal leading-5" />
         </label>
@@ -46,7 +50,7 @@ export default function EditorEmail({ modello, variante, oggetto, testo, valori,
         <div className="mb-1 text-xs font-bold text-neutral-700">Anteprima (cliente di esempio)</div>
         <div className="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
           <div className="bg-orange-600 px-4 py-2 text-sm font-bold text-white">Gruppo P&amp;C</div>
-          <div className="border-b border-neutral-100 px-4 py-2 text-sm font-bold text-neutral-900">{riempi(ogg, valori).replace(/\s+/g, " ")}</div>
+          <div className="border-b border-neutral-100 px-4 py-2 text-sm font-bold text-neutral-900">{riempi(ogg, valori).replace(/\s+/g, " ")}{ph && <span className="block text-xs font-normal text-neutral-500">{riempi(ph, valori)}</span>}</div>
           <pre className="whitespace-pre-wrap px-4 py-3 font-sans text-[13px] leading-5 text-neutral-800">{riempi(txt, valori)}</pre>
         </div>
       </div>

@@ -6,7 +6,7 @@ import {
   type DatiLeadEmail, type EmailPronta, type Link,
 } from "./email";
 
-export type TestoPersonalizzato = { oggetto: string; testo: string; aggiornatoDa?: string | null; aggiornatoIl?: string | null };
+export type TestoPersonalizzato = { oggetto: string; testo: string; preheader?: string | null; aggiornatoDa?: string | null; aggiornatoIl?: string | null };
 
 export const PREFISSO_TESTO = "email_testo:";
 

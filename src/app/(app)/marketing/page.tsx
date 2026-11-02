@@ -36,10 +36,12 @@ export default async function MarketingPage() {
   const u = await getCurrentUser();
   if (!u || !puoMarketing(u)) notFound();
   const da30 = new Date(Date.now() - 30 * GIORNO);
-  const [perFase, lead30, email30, disiscritti, campagne, stato, promo, testi] = await Promise.all([
+  const [perFase, lead30, email30, aperteCliente30, inviateCliente30, disiscritti, campagne, stato, promo, testi] = await Promise.all([
     prisma.lead.groupBy({ by: ["fase"], _count: { _all: true } }),
     prisma.lead.findMany({ where: { createdAt: { gte: da30 } }, select: { fonte: true, fase: true, brand: { select: { nome: true } } } }),
     prisma.emailLead.groupBy({ by: ["stato"], where: { createdAt: { gte: da30 } }, _count: { _all: true } }),
+    prisma.emailLead.count({ where: { createdAt: { gte: da30 }, stato: "INVIATA", categoria: "CLIENTE", apertaIl: { not: null } } }),
+    prisma.emailLead.count({ where: { createdAt: { gte: da30 }, stato: "INVIATA", categoria: "CLIENTE" } }),
     prisma.cliente.count({ where: { disiscritto: true } }),
     prisma.campagna.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, nome: true, stato: true, validaFino: true, _count: { select: { invii: true } } } }),
     statoAutomazioni(),
@@ -78,7 +80,7 @@ export default async function MarketingPage() {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Numero titolo="Nuovi lead (30 giorni)" valore={String(lead30.length)} sotto={`${fase("NUOVO")} ancora da classificare`} />
         <Numero titolo="Appuntamenti (30 giorni)" valore={String(appuntamenti30)} sotto={lead30.length ? `${Math.round((appuntamenti30 / lead30.length) * 100)}% dei nuovi lead` : undefined} />
-        <Numero titolo="Email automatiche inviate" valore={String(inviate30)} sotto="ultimi 30 giorni" />
+        <Numero titolo="Email automatiche inviate" valore={String(inviate30)} sotto={inviateCliente30 ? `ultimi 30 giorni · ${Math.round((aperteCliente30 / inviateCliente30) * 100)}% aperte dai clienti` : "ultimi 30 giorni"} />
         <Numero titolo="Disiscritti" valore={String(disiscritti)} sotto="clienti che non ricevono email" />
       </div>
 

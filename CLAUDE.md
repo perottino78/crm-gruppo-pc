@@ -99,6 +99,11 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   doppioni) a ogni controllo (`eseguiCampagne` insieme a `eseguiInviiScaduti`); disiscrizione cliente `?c=` (`Cliente.disiscritto`).
   Avvisi di scadenza (`validaFino`) ai giorni di Impostazioni › Email automatiche (default 3,2,1, chiavi `campagne_promemoria_*`,
   una volta per giorno in `promemoriaInviati`), anche per la promozione del recupero. Funzionano anche con le automazioni in pausa.
+  Preheader (`Campagna.preheader`), formato TESTO (grafica P&C) o HTML (template incollato o file .html caricato, `{disiscrizione}` o piede
+  aggiunto da `htmlCampagna`, testo semplice da `testoDaHtml`), anteprima in iframe. Tracciamento (`src/lib/mail/tracciamento.ts`, rotta
+  `GET /api/traccia/<c|l>-<id>.<firma>`): pixel per le aperture e link riscritti per i clic (`apertaIl/aperture/clicIl/clic` su
+  `CampagnaInvio` ed `EmailLead`; il clic conta anche come apertura; codice firmato HMAC, niente redirect con codice falso); spegnibile per
+  campagna (`tracciamento`). Le email automatiche al cliente sono tracciate e hanno il preheader personalizzabile (Marketing › Testi).
 - **Caselle email personali** (`src/lib/mail/caselle.ts`, `src/app/posta-actions.ts`, `src/components/CasellaEmail.tsx`): ogni utente
   nel Profilo (o l'amministratore in Impostazioni › Utenti) inserisce la password della sua email; server/porta vuoti = quelli
   aziendali. Password cifrata AES-GCM con `MAIL_SECRET` o `SESSION_SECRET` (se cambia, vanno reinserite). `inviaMail({ daUtenteId })`
@@ -160,20 +165,21 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   Il layout blocca le pagine non spuntate (`permessoPagina`, header `x-percorso` dal middleware), la Sidebar mostra solo le sezioni
   permesse. `ZonaCommerciale` (regioni + province extra, responsabile; tabella `src/lib/zone/regioni.ts`): `ricalcolaVisibilita` scrive
   `Utente.visibileProvince/visibileUtenti` per chi vede «La sua zona». `Utente.responsabileUfficio` (es. Rocco per il Marketing).
-  Profili e zone di partenza creati da `assicuraIniziali` alla prima apertura.
+  Profili e zone di partenza creati da `assicuraIniziali` alla prima apertura. Il team di una zona si spunta nel riquadro della zona
+  (`membri` + `conTeam` in `salvaZona`); dopo il salvataggio la riga/zona mostra «✓ Salvato» (`?salvato=<id>`).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 205, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 209, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

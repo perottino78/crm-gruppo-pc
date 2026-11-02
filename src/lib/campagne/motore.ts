@@ -6,6 +6,7 @@ import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { CONTATTI, htmlEmail, testoEmail, type EmailPronta } from "@/lib/automazioni/email";
 import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, type FiltriCampagna } from "./regole";
 import { daOraRoma } from "@/lib/calendario/tempo";
+import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/mail/tracciamento";
 
 export const CHIAVE_PROMEMORIA_GIORNI = "campagne_promemoria_giorni";
 export const CHIAVE_PROMEMORIA_A = "campagne_promemoria_a";
@@ -57,11 +58,28 @@ export async function accodaCampagna(campagnaId: string, adesso = new Date()): P
   return r.count;
 }
 
-/** L'email della campagna per un cliente: oggetto e testo con {nome}, fascia P&C e link per disiscriversi. */
-export function emailCampagna(c: { oggetto: string; testo: string }, cliente: { id: string; nome: string; nomePersona?: string | null }) {
-  const e: EmailPronta = { chiave: "campagna", versione: 1, categoria: "CLIENTE", oggetto: personalizza(c.oggetto, cliente.nome, cliente.nomePersona), testo: personalizza(c.testo, cliente.nome, cliente.nomePersona) };
+type ContenutoCampagna = { oggetto: string; testo: string; preheader?: string | null; formato?: string | null; html?: string | null; tracciamento?: boolean | null };
+
+/**
+ * L'email della campagna per un cliente: oggetto e testo con {nome}, preheader, grafica P&C (o il template HTML
+ * del marketing) e link per disiscriversi. Con `codiceTraccia` conta aperture e clic.
+ */
+export function emailCampagna(c: ContenutoCampagna, cliente: { id: string; nome: string; nomePersona?: string | null }, codiceTraccia?: string) {
+  const pers = (t: string) => personalizza(t, cliente.nome, cliente.nomePersona);
   const link = { lead: "", disiscrizione: linkDisiscrizioneCliente(cliente.id) };
-  return { oggetto: e.oggetto, testo: testoEmail(e, link), html: htmlEmail(e, link) };
+  const oggetto = pers(c.oggetto);
+  let html: string, testo: string;
+  if (c.formato === "HTML" && c.html?.trim()) {
+    html = htmlCampagna(pers(c.html), link.disiscrizione);
+    testo = `${testoDaHtml(html)}`;
+  } else {
+    const e: EmailPronta = { chiave: "campagna", versione: 1, categoria: "CLIENTE", oggetto, testo: pers(c.testo) };
+    html = htmlEmail(e, link);
+    testo = testoEmail(e, link);
+  }
+  html = conPreheader(html, c.preheader ? pers(c.preheader) : "");
+  if (codiceTraccia && c.tracciamento !== false) html = conTracciamento(html, APP_URL, codiceTraccia);
+  return { oggetto, testo, html };
 }
 
 export async function inviaProva(campagnaId: string, a: string): Promise<{ inviata: boolean; motivo?: string }> {
@@ -119,7 +137,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
       r.saltate++;
       continue;
     }
-    const m = emailCampagna(inv.campagna, cliente);
+    const m = emailCampagna(inv.campagna, cliente, `c-${inv.id}`);
     const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti });
     if (esito.inviata) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
