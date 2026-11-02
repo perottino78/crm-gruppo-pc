@@ -16,7 +16,7 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
   const p = await searchParams;
   const campagne = await prisma.campagna.findMany({
     orderBy: { createdAt: "desc" },
-    include: { invii: { select: { stato: true } } },
+    include: { invii: { select: { stato: true, apertaIl: true, clicIl: true } } },
   });
   const adesso = new Date();
   return (
@@ -45,7 +45,8 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
               <p className="text-xs text-neutral-600 mt-1">
                 {[c.marchi.join(", ") || "tutti i marchi", c.stati.join(", ") || "tutti gli stati", c.categorie.join(", ") || "lead e clienti"].join(" · ")}
               </p>
-              {c.invii.length > 0 && <p className="text-xs text-neutral-700 mt-1">✉️ {n("INVIATA")} inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · {n("FALLITA")} non inviate · {n("SOPPRESSA")} disiscritti</p>}
+              {c.invii.length > 0 && <p className="text-xs text-neutral-700 mt-1">✉️ {n("INVIATA")} inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · {n("FALLITA")} non inviate · {n("SOPPRESSA")} disiscritti
+                {n("INVIATA") > 0 && <> · <b>👁 {Math.round((c.invii.filter((i) => i.apertaIl).length / n("INVIATA")) * 100)}% aperte</b> · <b>👆 {Math.round((c.invii.filter((i) => i.clicIl).length / n("INVIATA")) * 100)}% clic</b></>}</p>}
             </Link>
           );
         })}

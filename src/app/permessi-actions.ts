@@ -38,7 +38,7 @@ export async function salvaProfilo(fd: FormData) {
   const n = await propagaProfilo(p.id);
   await ricalcolaVisibilita();
   aggiorna();
-  torna(PAG_RUOLI, { ok: `Profilo «${p.nome}» salvato${n ? `: aggiornati ${n} ${n === 1 ? "collega" : "colleghi"}` : ""}.`, aperto: p.id }, `profilo-${p.id}`);
+  torna(PAG_RUOLI, { ok: `Profilo «${p.nome}» salvato${n ? `: aggiornati ${n} ${n === 1 ? "collega" : "colleghi"}` : ""}.`, aperto: p.id, salvato: p.id }, `profilo-${p.id}`);
 }
 
 /** Elimina un profilo: chi lo aveva torna ai permessi predefiniti del suo ruolo. */
@@ -68,7 +68,7 @@ export async function assegnaAccesso(fd: FormData) {
   await prisma.utente.update({ where: { id: utenteId }, data: { zonaId: str(fd, "zonaId"), responsabileUfficio: fd.get("responsabileUfficio") === "on" } });
   await ricalcolaVisibilita();
   aggiorna();
-  torna(PAG_RUOLI, { ok: `${u.nome}: accesso aggiornato.` }, `persona-${utenteId}`);
+  torna(PAG_RUOLI, { ok: `${u.nome}: accesso aggiornato.`, salvato: utenteId }, `persona-${utenteId}`);
 }
 
 /** Crea o modifica una zona commerciale: regioni a spunta, province in più, responsabile di zona. */
@@ -82,11 +82,16 @@ export async function salvaZona(fd: FormData) {
   const provinceExtra = [...new Set((str(fd, "provinceExtra") ?? "").split(/[,;\s]+/).map(siglaProvincia).filter((x): x is string => !!x))];
   const dati = { nome: nome!.slice(0, 80), regioni, provinceExtra, responsabileId: str(fd, "responsabileId"), attiva: fd.get("attiva") !== "off" };
   const z = id ? await prisma.zonaCommerciale.update({ where: { id }, data: dati }) : await prisma.zonaCommerciale.create({ data: { ...dati, ordine: await prisma.zonaCommerciale.count() } });
-  // il responsabile di zona fa parte della zona
-  if (z.responsabileId) await prisma.utente.update({ where: { id: z.responsabileId }, data: { zonaId: z.id } });
+  // il team della zona, spuntato nello stesso riquadro (il responsabile ne fa sempre parte)
+  if (id && fd.get("conTeam") === "1") {
+    const membri = new Set(fd.getAll("membri").filter((x): x is string => typeof x === "string"));
+    if (z.responsabileId) membri.add(z.responsabileId);
+    await prisma.utente.updateMany({ where: { zonaId: z.id, id: { notIn: [...membri] } }, data: { zonaId: null } });
+    if (membri.size) await prisma.utente.updateMany({ where: { id: { in: [...membri] } }, data: { zonaId: z.id } });
+  } else if (z.responsabileId) await prisma.utente.update({ where: { id: z.responsabileId }, data: { zonaId: z.id } });
   await ricalcolaVisibilita();
   aggiorna();
-  torna(PAG_ZONE, { ok: `Zona «${z.nome}» salvata${!regioni.length && !provinceExtra.length ? " (senza regioni: aggiungine almeno una)" : ""}.` }, `zona-${z.id}`);
+  torna(PAG_ZONE, { ok: `Zona «${z.nome}» salvata${!regioni.length && !provinceExtra.length ? " (senza regioni: aggiungine almeno una)" : ""}.`, salvato: z.id }, `zona-${z.id}`);
 }
 
 export async function eliminaZona(fd: FormData) {

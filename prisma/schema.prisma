@@ -153,6 +153,11 @@ model EmailLead {
   chiaveIdempotenza String?   @unique
   inviataIl         DateTime?
   createdAt         DateTime  @default(now())
+  // Tracciamento: prima apertura / primo clic e quante volte
+  apertaIl          DateTime?
+  aperture          Int       @default(0)
+  clicIl            DateTime?
+  clic              Int       @default(0)
 
   @@index([leadId, createdAt])
 }
@@ -1657,6 +1662,13 @@ model Campagna {
   nome              String
   oggetto           String          @default("")
   testo             String          @default("")
+  // Anteprima mostrata dai programmi di posta accanto all'oggetto (preheader)
+  preheader         String          @default("")
+  // TESTO = testo semplice nella grafica P&C; HTML = template HTML incollato o caricato
+  formato           String          @default("TESTO")
+  html              String          @default("")
+  // Tracciamento di aperture (pixel invisibile) e clic sui link
+  tracciamento      Boolean         @default(true)
   marchi            String[]        @default([])
   stati             String[]        @default([]) // statoLead (es. "Non interessato", "VISITATO"); "(nessuno)" = senza stato
   categorie         String[]        @default([]) // Lead | Cliente | Account
@@ -1683,6 +1695,11 @@ model CampagnaInvio {
   motivo     String?
   tentativi  Int       @default(0)
   inviataIl  DateTime?
+  // Tracciamento: prima apertura / primo clic e quante volte
+  apertaIl   DateTime?
+  aperture   Int       @default(0)
+  clicIl     DateTime?
+  clic       Int       @default(0)
   createdAt  DateTime  @default(now())
 
   // un cliente riceve una campagna una volta sola (tabella nuova: il vincolo non tocca dati esistenti)

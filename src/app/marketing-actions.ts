@@ -33,7 +33,8 @@ export async function salvaTestoEmail(fd: FormData) {
   const oggetto = (str(fd, "oggetto") ?? "").trim().slice(0, 300);
   const testo = (str(fd, "testo") ?? "").replace(/\r\n/g, "\n").trim().slice(0, 10000);
   if (!oggetto || !testo) torna(chiave, { errore: "Oggetto e testo non possono essere vuoti." });
-  const valore = JSON.stringify({ oggetto, testo, aggiornatoDa: u.nome, aggiornatoIl: new Date().toISOString() });
+  const preheader = (str(fd, "preheader") ?? "").trim().slice(0, 200);
+  const valore = JSON.stringify({ oggetto, testo, ...(preheader ? { preheader } : {}), aggiornatoDa: u.nome, aggiornatoIl: new Date().toISOString() });
   await prisma.configurazione.upsert({ where: { chiave }, update: { valore }, create: { chiave, valore } });
   revalidatePath(PAGINA);
   torna(chiave, { ok: "Testo salvato: da ora le email partono con questo testo." });

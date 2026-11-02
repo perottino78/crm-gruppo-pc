@@ -9,7 +9,7 @@ import { assicuraIniziali } from "@/lib/permessi/server";
 import { nomeUfficio } from "@/lib/flusso";
 import { salvaProfilo, eliminaProfilo, assegnaAccesso } from "@/app/permessi-actions";
 
-type P = { ok?: string; errore?: string; aperto?: string };
+type P = { ok?: string; errore?: string; aperto?: string; salvato?: string };
 
 export default async function RuoliPage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
@@ -43,7 +43,7 @@ export default async function RuoliPage({ searchParams }: { searchParams: Promis
           {utenti.map((x) => {
             const prof = profili.find((pr) => pr.id === x.profiloId);
             return (
-              <form key={x.id} id={`persona-${x.id}`} action={assegnaAccesso} className="grid items-end gap-2 px-3 py-2.5 text-sm md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.3fr)_minmax(0,1fr)_auto_auto]">
+              <form key={x.id} id={`persona-${x.id}`} action={assegnaAccesso} className={`${p.salvato === x.id ? "bg-green-50 " : ""}grid items-end gap-2 px-3 py-2.5 text-sm md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.3fr)_minmax(0,1fr)_auto_auto]`}>
                 <input type="hidden" name="utenteId" value={x.id} />
                 <div className="min-w-0">
                   <b className="text-neutral-900">{x.nome}</b>
@@ -66,7 +66,9 @@ export default async function RuoliPage({ searchParams }: { searchParams: Promis
                 <label className="flex items-center gap-1.5 text-xs text-neutral-700" title="Responsabile del suo ufficio (es. Rocco per il Marketing)">
                   <input type="checkbox" name="responsabileUfficio" defaultChecked={x.responsabileUfficio} /> Resp. ufficio{x.ufficio ? ` ${nomeUfficio(x.ufficio)}` : ""}
                 </label>
-                <button className="btn-3d btn-3d-blue px-3 py-1.5 text-xs">Salva</button>
+                {p.salvato === x.id
+                  ? <button className="btn-3d btn-3d-green px-3 py-1.5 text-xs">✓ Salvato</button>
+                  : <button className="btn-3d btn-3d-blue px-3 py-1.5 text-xs">Salva</button>}
                 {prof && <span className="text-[11px] text-violet-700 md:col-span-5">Profilo: {prof.nome}</span>}
               </form>
             );
@@ -129,6 +131,7 @@ export default async function RuoliPage({ searchParams }: { searchParams: Promis
                     {membri.length > 0 && <p className="text-xs text-neutral-600">Ce l&apos;hanno: {membri.map((m) => m.nome).join(", ")}. Salvando si aggiornano anche loro.</p>}
                     <div className="flex flex-wrap gap-2">
                       <button className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva il profilo</button>
+                      {p.salvato === pr.id && <span className="self-center rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-800">✓ Salvato e aggiornato</span>}
                       <button formAction={eliminaProfilo} className="btn-3d btn-3d-outline px-3 py-2 text-xs">Elimina profilo</button>
                     </div>
                   </form>

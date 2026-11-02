@@ -8,6 +8,10 @@ import { chiaveGiorno } from "@/lib/calendario/tempo";
 import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne } from "@/app/campagne-actions";
 import { contaDestinatari, filtriDi, emailCampagna } from "@/lib/campagne/motore";
 import { CATEGORIE, SENZA_STATO, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
+import CampiEmail from "@/components/campagne/CampiEmail";
+
+const perc = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : "—");
+const quando = (d: Date | null) => (d ? d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "");
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 const casella = (attivo: boolean) => `flex items-center gap-1.5 text-sm px-2 py-1 rounded border ${attivo ? "border-teal-400 bg-teal-50" : "border-neutral-200 bg-white"}`;
@@ -18,7 +22,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   if (!(await puoFareCampagne(u))) notFound();
   const { id } = await params;
   const p = await searchParams;
-  const c = await prisma.campagna.findUnique({ where: { id }, include: { invii: { select: { stato: true, motivo: true } } } });
+  const c = await prisma.campagna.findUnique({ where: { id }, include: { invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
   if (!c) notFound();
   const [brand, perStato, perProvenienza, commerciali, conti] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" }, select: { nome: true } }),
@@ -82,9 +86,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
           <p className="font-semibold">2. L&apos;email</p>
           <label className="text-xs text-neutral-600 block">Nome della campagna (interno)<input name="nome" defaultValue={c.nome} className={`${inp} w-full`} /></label>
           <label className="text-xs text-neutral-600 block">Oggetto<input name="oggetto" defaultValue={c.oggetto} placeholder="es. {nome}, la tua pergola con lo sconto in fattura" className={`${inp} w-full`} /></label>
-          <label className="text-xs text-neutral-600 block">Testo (scrivi {"{nome}"} dove vuoi il nome del cliente)
-            <textarea name="testo" rows={10} defaultValue={c.testo} placeholder={"Ciao {nome},\n\nfino al 31 marzo …\n\nA presto,\nGruppo P&C"} className={`${inp} w-full`} />
-          </label>
+          <CampiEmail preheader={c.preheader} formato={c.formato} testo={c.testo} html={c.html} tracciamento={c.tracciamento} />
           <label className="text-xs text-neutral-600 block">Valida fino al
             <input type="date" name="validaFino" defaultValue={c.validaFino ? chiaveGiorno(c.validaFino) : ""} className={`${inp} ml-2`} />
             <span className="ml-2 font-normal text-neutral-500">prima della scadenza arriva l&apos;avviso di aggiornarla (giorni e destinatari in Impostazioni › Email automatiche)</span>
@@ -95,10 +97,12 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
 
       <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <p className="font-semibold">3. Prova e invio</p>
-        <details>
-          <summary className="text-sm cursor-pointer">Anteprima (con un nome di esempio)</summary>
-          <p className="text-sm font-semibold mt-2">{anteprima.oggetto || "— oggetto mancante —"}</p>
-          <pre className="whitespace-pre-wrap text-sm font-sans text-neutral-800 bg-neutral-50 rounded p-3 mt-1">{anteprima.testo}</pre>
+        <details open>
+          <summary className="text-sm cursor-pointer">Anteprima com&apos;è salvata (con un nome di esempio)</summary>
+          <div className="mt-2 rounded-lg border border-neutral-200 bg-neutral-50 p-2">
+            <p className="text-sm"><b>{anteprima.oggetto || "— oggetto mancante —"}</b> <span className="text-neutral-500">— {c.preheader || <i>senza preheader</i>}</span></p>
+            <iframe title="Anteprima dell'email" srcDoc={anteprima.html} sandbox="" className="mt-2 h-[520px] w-full rounded border border-neutral-200 bg-white" />
+          </div>
         </details>
         <div className="flex flex-wrap items-end gap-2">
           <form action={provaCampagna} className="flex items-end gap-2">
@@ -118,6 +122,40 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
           <p className="text-sm">✉️ <b>{n("INVIATA")}</b> inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · <span className={n("FALLITA") ? "text-red-700" : ""}>{n("FALLITA")} non inviate</span> · {n("SOPPRESSA")} disiscritti nel frattempo</p>
         )}
       </div>
+
+      {c.invii.some((i) => i.stato === "INVIATA") && (() => {
+        const inviate = c.invii.filter((i) => i.stato === "INVIATA");
+        const aperte = inviate.filter((i) => i.apertaIl).length, cliccate = inviate.filter((i) => i.clicIl).length;
+        return (
+          <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3" style={{ ["--fase" as string]: "#0d9488" }}>
+            <p className="font-semibold">4. Com&apos;è andata</p>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {[["Consegnate al server", String(inviate.length), "accettate dalla posta"], ["Aperte", String(aperte), `${perc(aperte, inviate.length)} delle inviate`], ["Hanno cliccato", String(cliccate), `${perc(cliccate, inviate.length)} delle inviate · ${perc(cliccate, aperte)} di chi l'ha aperta`], ["Disiscritti / falliti", `${n("SOPPRESSA")} / ${n("FALLITA")}`, "non raggiunti"]].map(([t, v, d]) => (
+                <div key={t} className="rounded-lg border border-neutral-200 p-3"><div className="text-[11px] font-bold uppercase text-neutral-500">{t}</div><div className="text-2xl font-extrabold tabular-nums">{v}</div><div className="text-xs text-neutral-600">{d}</div></div>
+              ))}
+            </div>
+            {!c.tracciamento && <p className="text-xs text-amber-800">Il tracciamento di aperture e clic è spento per questa campagna.</p>}
+            <details>
+              <summary className="cursor-pointer text-sm">Destinatari ({inviate.length}): prima chi ha cliccato, poi chi ha aperto</summary>
+              <div className="mt-2 max-h-96 overflow-auto rounded border border-neutral-200">
+                <table className="w-full text-xs">
+                  <thead className="sticky top-0 bg-neutral-50 text-neutral-600"><tr><th className="px-2 py-1 text-left">Email</th><th className="px-2 text-left">Inviata</th><th className="px-2 text-left">Aperta</th><th className="px-2 text-left">Clic</th></tr></thead>
+                  <tbody>
+                    {inviate.slice(0, 500).map((i) => (
+                      <tr key={i.id} className="border-t border-neutral-100">
+                        <td className="px-2 py-1"><Link href={`/clienti/${i.clienteId}`} className="underline">{i.email}</Link></td>
+                        <td className="px-2">{quando(i.inviataIl)}</td>
+                        <td className="px-2">{i.apertaIl ? `✓ ${quando(i.apertaIl)}${i.aperture > 1 ? ` (${i.aperture} volte)` : ""}` : "—"}</td>
+                        <td className="px-2">{i.clicIl ? `👆 ${quando(i.clicIl)}${i.clic > 1 ? ` (${i.clic})` : ""}` : "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </div>
+        );
+      })()}
     </div>
   );
 }

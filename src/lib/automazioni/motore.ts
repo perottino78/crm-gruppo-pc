@@ -13,7 +13,8 @@ import { eseguiCampagne } from "@/lib/campagne/motore";
 import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
 import { chiaveGiorno, daOraRoma } from "@/lib/calendario/tempo";
 import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
-import { personalizza, valoriSegnaposto, chiaveTesto, varianteTesto, PREFISSO_TESTO, type TestoPersonalizzato } from "./personalizza";
+import { personalizza, valoriSegnaposto, chiaveTesto, varianteTesto, riempi, PREFISSO_TESTO, type TestoPersonalizzato } from "./personalizza";
+import { conPreheader, conTracciamento } from "@/lib/mail/tracciamento";
 
 /** Testi delle email scritti dal Marketing (Marketing › Email automatiche), per chiave "email_testo:…". */
 export async function testiPersonalizzati(): Promise<Map<string, TestoPersonalizzato>> {
@@ -249,7 +250,9 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       const soppressa = destinatario === "CLIENTE"
         ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto" : null)
         : destinatario === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
-      const base = { leadId: lead.id, chiave: e.chiave, versione: e.versione, categoria: e.categoria, da, a, oggetto: e.oggetto, testo: testoEmail(e, link), html: htmlEmail(e, link) };
+      const pers = testi.get(chiaveTesto(modello, varianteTesto(modello, variante, dati)));
+      const preheader = pers?.preheader ? riempi(pers.preheader, valoriSegnaposto(dati, link, variante)) : "";
+      const base = { leadId: lead.id, chiave: e.chiave, versione: e.versione, categoria: e.categoria, da, a, oggetto: e.oggetto, testo: testoEmail(e, link), html: conPreheader(htmlEmail(e, link), preheader) };
       const reg = await prisma.emailLead.upsert({ where: { chiaveIdempotenza: job.chiave }, create: { ...base, chiaveIdempotenza: job.chiave, stato: "PREPARATA" }, update: {} });
       if (reg.stato === "INVIATA") {
         await chiudi({ stato: "FATTO", emailId: reg.id }); // già partita in un tentativo precedente: non si rimanda
@@ -262,7 +265,8 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
         r.soppresse++;
         return "FATTO";
       }
-      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.html, da: reg.da ?? undefined });
+      // aperture e clic: solo le email al cliente (quelle interne non serve contarle)
+      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined });
       if (esito.inviata) {
         await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
         await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);

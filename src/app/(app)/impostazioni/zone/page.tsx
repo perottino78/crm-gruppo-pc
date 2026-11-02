@@ -9,7 +9,7 @@ import { REGIONI, provinceDi, varianti } from "@/lib/zone/regioni";
 import { visibilitaDi } from "@/lib/permessi/catalogo";
 import { salvaZona, eliminaZona } from "@/app/permessi-actions";
 
-type P = { ok?: string; errore?: string };
+type P = { ok?: string; errore?: string; salvato?: string };
 
 export default async function ZonePage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
@@ -72,9 +72,24 @@ export default async function ZonePage({ searchParams }: { searchParams: Promise
                 <label className="block text-xs font-bold text-neutral-700">Province in più (sigle, es. PC, PR)
                   <input name="provinceExtra" defaultValue={z.provinceExtra.join(", ")} className="mt-1 block w-full rounded border border-neutral-300 px-2 py-1.5 text-sm font-normal" />
                 </label>
-                <p className="text-xs text-neutral-600">Venditori della zona: {venditori.length ? venditori.map((v) => v.nome).join(", ") : "nessuno (si assegnano in Ruoli e permessi)"}</p>
+                <fieldset>
+                  <input type="hidden" name="conTeam" value="1" />
+                  <legend className="mb-1 text-xs font-bold text-neutral-700">Team della zona ({venditori.length}) — spunta chi lavora qui</legend>
+                  <div className="grid max-h-56 grid-cols-1 gap-x-3 gap-y-0.5 overflow-y-auto rounded border border-neutral-200 p-2 sm:grid-cols-2">
+                    {utenti.map((x) => {
+                      const altrove = x.zonaId && x.zonaId !== z.id ? zone.find((zz) => zz.id === x.zonaId)?.nome : null;
+                      return (
+                        <label key={x.id} className="flex items-center gap-1.5 text-sm">
+                          <input type="checkbox" name="membri" value={x.id} defaultChecked={x.zonaId === z.id || z.responsabileId === x.id} />
+                          {x.nome}{altrove && <span className="text-[11px] text-neutral-400"> (ora in {altrove})</span>}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
                 <div className="flex flex-wrap gap-2">
                   <button className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva la zona</button>
+                  {p.salvato === z.id && <span className="self-center rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-800">✓ Salvata</span>}
                   <button formAction={eliminaZona} className="btn-3d btn-3d-outline px-3 py-2 text-xs">Elimina zona</button>
                 </div>
               </form>
