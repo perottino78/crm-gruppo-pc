@@ -30,6 +30,15 @@ export default async function SulTelefonoPage({ searchParams }: { searchParams: 
         Due modi, che funzionano insieme: gli <b>inviti via email</b> (arrivano subito, con il promemoria) e il <b>tuo calendario personale</b> (si aggiorna da solo con tutti i tuoi appuntamenti, rilievi e pose).
       </p>
 
+      <div className={`${passo} mb-4 border-orange-200 bg-orange-50/50`}>
+        <h2 className="font-bold text-neutral-900 mb-1">📲 P&amp;C ONE come app sul telefono</h2>
+        <ul className="text-sm text-neutral-700 list-disc pl-5 space-y-1">
+          <li><b>iPhone:</b> apri P&amp;C ONE con Safari, tocca il pulsante Condividi (il quadrato con la freccia) › «Aggiungi alla schermata Home».</li>
+          <li><b>Android:</b> apri P&amp;C ONE con Chrome, tocca i tre puntini in alto › «Installa app» (o «Aggiungi a schermata Home»).</li>
+          <li>Compare l&apos;icona arancio con il simbolo di accensione: si apre a tutto schermo come un&apos;app e resti collegato.</li>
+        </ul>
+      </div>
+
       <div className={`${passo} mb-4`}>
         <h2 className="font-bold text-neutral-900 mb-1">1 · Inviti via email</h2>
         <p className="text-sm text-neutral-700">
@@ -52,11 +61,11 @@ export default async function SulTelefonoPage({ searchParams }: { searchParams: 
             <div className="grid gap-2 sm:flex sm:flex-wrap mb-4">
               <a href={webcal!} className="btn-3d btn-3d-dark px-4 py-2 text-sm">🍎 Aggiungi a iPhone / Mac</a>
               <a href={`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal!)}`} target="_blank" className="btn-3d btn-3d-blue px-4 py-2 text-sm">📆 Aggiungi a Google Calendar</a>
-              <a href={`https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("CRM P&C")}`} target="_blank" className="btn-3d btn-3d-teal px-4 py-2 text-sm">📧 Aggiungi a Outlook</a>
+              <a href={`https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("P&C ONE")}`} target="_blank" className="btn-3d btn-3d-teal px-4 py-2 text-sm">📧 Aggiungi a Outlook</a>
             </div>
             <ul className="text-sm text-neutral-700 list-disc pl-5 space-y-1">
               <li><b>iPhone:</b> tocca il pulsante nero dal telefono e conferma «Abbonati». In alternativa: Impostazioni › Calendario › Account › Aggiungi account › Altro › Aggiungi calendario sottoscritto, e incolla il link.</li>
-              <li><b>Android:</b> aprilo dal computer con «Aggiungi a Google Calendar» usando lo stesso account Google del telefono; poi sul telefono, in Google Calendar › Impostazioni, attiva la sincronizzazione del calendario «CRM P&amp;C».</li>
+              <li><b>Android:</b> aprilo dal computer con «Aggiungi a Google Calendar» usando lo stesso account Google del telefono; poi sul telefono, in Google Calendar › Impostazioni, attiva la sincronizzazione del calendario «P&amp;C ONE».</li>
               <li>iPhone e Outlook si aggiornano ogni pochi minuti; Google Calendar ogni qualche ora (per le novità urgenti fa fede l&apos;invito via email).</li>
             </ul>
             <form action={generaLinkCalendario} className="mt-4">

@@ -253,7 +253,7 @@ async function avvisaUfficioTask(taskId: string) {
   const num = `C${t.commessa.anno}-${String(t.commessa.numero).padStart(3, "0")}`;
   const esito = await inviaMail({
     a: destinatari.map((d) => d.email),
-    oggetto: `[CRM P&C] Nuovo task per ${nomeUfficio(t.ufficio)}: ${t.titolo} — ${t.commessa.cliente.nome}`,
+    oggetto: `[P&C ONE] Nuovo task per ${nomeUfficio(t.ufficio)}: ${t.titolo} — ${t.commessa.cliente.nome}`,
     testo: [
       `Nuovo task per l'ufficio ${nomeUfficio(t.ufficio)}.`,
       ``,

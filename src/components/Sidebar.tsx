@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
+import { IconaOne, LogoOne } from "@/components/LogoOne";
 import { puo, permessoPagina } from "@/lib/permessi/catalogo";
 
 const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean; soloOrdini?: boolean; soloMarketing?: boolean }[] = [
@@ -49,25 +50,14 @@ export default function Sidebar({
     {/* barra in alto sul telefono */}
     <div className="md:hidden fixed inset-x-0 top-0 z-40 flex h-12 items-center gap-3 border-b border-neutral-200 bg-white px-3 print:hidden">
       <button type="button" onClick={() => setAperto(true)} aria-label="Apri il menu" className="btn-3d btn-3d-outline px-3 py-1 text-lg leading-none">☰</button>
-      <span className="w-8 h-8 rounded-md flex items-center justify-center text-white text-xs font-extrabold" style={{ background: `linear-gradient(135deg, ${info.primary}, ${info.accent})` }}>PC</span>
-      <span className="truncate text-sm font-bold text-neutral-900">{voceAttiva ? `${voceAttiva.icon} ${voceAttiva.label}` : "Gruppo P&C"}</span>
+      <Link href="/" aria-label="P&C ONE: dashboard"><IconaOne size={32} /></Link>
+      <span className="truncate text-sm font-bold text-neutral-900">{voceAttiva ? `${voceAttiva.icon} ${voceAttiva.label}` : "P&C ONE"}</span>
     </div>
     {aperto && <div className="md:hidden fixed inset-0 z-40 bg-black/40" onClick={() => setAperto(false)} />}
     <aside className={`${aperto ? "flex" : "hidden"} md:flex fixed md:static inset-y-0 left-0 z-50 w-64 md:w-56 shrink-0 overflow-y-auto border-r border-neutral-200 bg-white flex-col py-4 shadow-2xl md:shadow-none print:hidden`}>
       <button type="button" onClick={() => setAperto(false)} aria-label="Chiudi il menu" className="md:hidden absolute right-2 top-2 rounded px-2 text-2xl leading-none text-neutral-500">×</button>
       <div className="px-4 pb-4 mb-2 border-b border-neutral-100">
-        <div className="flex items-center gap-2.5">
-          <span
-            className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-base font-extrabold shadow-sm"
-            style={{ background: `linear-gradient(135deg, ${info.primary}, ${info.accent})` }}
-          >
-            PC
-          </span>
-          <div>
-            <span className="text-lg font-extrabold text-neutral-900 leading-none block">Gruppo P&amp;C</span>
-            <p className="text-[11px] font-medium text-neutral-600 leading-none mt-1">CRM Gestionale</p>
-          </div>
-        </div>
+        <Link href="/" className="block"><LogoOne size={40} motto="Gruppo P&C" /></Link>
       </div>
       <nav className="flex flex-col gap-1 px-2">
         {moduli.filter((m) => { const k = permessoPagina(m.href); return !k || !utente || puo(utente, k); }).map((m) => {
