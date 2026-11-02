@@ -20,14 +20,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen">
-      <Suspense fallback={<div className="w-56 shrink-0 border-r border-neutral-200 bg-white" />}>
+      <Suspense fallback={<div className="hidden md:block w-56 shrink-0 border-r border-neutral-200 bg-white" />}>
         <Sidebar utente={{ nome: utente.nome, ruolo: utente.ruolo, ufficio: utente.ufficio }} logoutAction={logout} />
       </Suspense>
       <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={<div className="h-1.5 w-full" />}>
           <AccentBar />
         </Suspense>
-        <main className="flex-1 p-8 print:p-0">{children}</main>
+        <main className="flex-1 px-3 pb-6 pt-16 md:p-8 print:p-0">{children}</main>
       </div>
     </div>
   );

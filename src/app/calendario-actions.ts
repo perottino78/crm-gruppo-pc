@@ -140,3 +140,38 @@ export async function spostaAppuntamentoRapido(formData: FormData) {
   if (a.invitaCliente) fd.set("invitaCliente", "on");
   return modificaAppuntamento(fd);
 }
+
+/** Testo dell'email con il link del calendario personale (per Google, iPhone, Outlook). */
+function emailLinkCalendario(nome: string, https: string) {
+  const webcal = https.replace(/^https:/, "webcal:");
+  return [
+    `Ciao ${nome.split(" ")[0]},`,
+    "da oggi i tuoi appuntamenti, rilievi e pose del CRM possono comparire da soli nel calendario del tuo telefono.",
+    `• Google Calendar (Android o computer): apri questo link dal computer, con il tuo account Google, e conferma «Aggiungi»:\n${`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`}\nPoi sul telefono, in Google Calendar › Impostazioni, attiva il calendario «CRM P&C».`,
+    `• iPhone: tocca questo link dal telefono e conferma «Abbonati»:\n${webcal}`,
+    `• Outlook: https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("CRM P&C")}`,
+    "Il link è personale: non inoltrarlo. Google aggiorna il calendario ogni qualche ora; per le novità urgenti arriva comunque l'invito via email.",
+    "Gruppo P&C",
+  ].join("\n\n");
+}
+
+/** Amministratore: crea il link calendario a chi non l'ha ancora e manda a ogni collega attivo il suo, con le istruzioni. */
+export async function inviaLinkCalendarioATutti(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  if (u.ruolo !== "AMMINISTRATORE") redirect(ritorno(formData, "/calendario/sul-telefono", "Solo l'amministratore può mandare i link a tutti."));
+  const { APP_URL, inviaMail } = await import("@/lib/mail/invio");
+  const solo = str(formData, "utenteId");
+  const team = await prisma.utente.findMany({ where: { stato: "ATTIVO", ...(solo ? { id: solo } : {}) }, select: { id: true, nome: true, email: true, calendarioToken: true } });
+  let inviati = 0;
+  const falliti: string[] = [];
+  for (const p of team) {
+    if (!/.+@.+\..+/.test(p.email) || p.email.endsWith(".invalid")) { falliti.push(`${p.nome} (senza email)`); continue; }
+    const token = p.calendarioToken ?? randomBytes(24).toString("base64url");
+    if (!p.calendarioToken) await prisma.utente.update({ where: { id: p.id }, data: { calendarioToken: token } });
+    const e = await inviaMail({ a: [p.email], oggetto: "Il tuo calendario del CRM sul telefono", testo: emailLinkCalendario(p.nome, `${APP_URL}/api/calendario/${token}`) });
+    if (e.inviata) inviati++; else falliti.push(`${p.nome} (${e.motivo ?? "non partita"})`);
+  }
+  revalidatePath("/calendario/sul-telefono");
+  redirect(ritorno(formData, "/calendario/sul-telefono", `Link del calendario mandato a ${inviati} ${inviati === 1 ? "persona" : "persone"}.${falliti.length ? ` Non partito: ${falliti.join(", ")}.` : ""}`));
+}

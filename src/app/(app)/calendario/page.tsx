@@ -60,17 +60,17 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
   return (
     <div className="max-w-[1400px]">
       {/* testata */}
-      <div className="flex flex-wrap items-center gap-3 mb-3">
-        <h1 className="text-2xl font-black text-neutral-900">📅 Calendario</h1>
+      <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3">
+        <h1 className="hidden md:block text-2xl font-black text-neutral-900">📅 Calendario</h1>
         <div className="flex items-center gap-1">
           <Link href={qs({ giorno: prima })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">‹</Link>
           <Link href={qs({ giorno: oggi })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">Oggi</Link>
           <Link href={qs({ giorno: dopo })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">›</Link>
         </div>
-        <p className="text-lg font-bold text-neutral-800 capitalize">{titolo}</p>
-        <div className="ml-auto flex flex-wrap gap-2">
-          <a href={linkNuovo(nuovoData)} className="btn-3d btn-3d-green px-4 py-2 text-sm">+ Nuovo appuntamento</a>
-          <Link href="/calendario/sul-telefono" className="btn-3d btn-3d-dark px-4 py-2 text-sm">📱 Sul telefono</Link>
+        <p className="text-base md:text-lg font-bold text-neutral-800 capitalize">{titolo}</p>
+        <div className="w-full md:w-auto md:ml-auto flex flex-wrap gap-2">
+          <a href={linkNuovo(nuovoData)} className="btn-3d btn-3d-green px-4 py-2 text-sm flex-1 md:flex-none text-center">+ Nuovo appuntamento</a>
+          <Link href="/calendario/sul-telefono" className="btn-3d btn-3d-dark px-4 py-2 text-sm flex-1 md:flex-none text-center">📱 Su Google / telefono</Link>
         </div>
       </div>
 
@@ -94,11 +94,11 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
           );
         })}
         {tutti && (
-          <form action="/calendario" className="ml-auto flex items-center gap-2">
+          <form action="/calendario" className="w-full md:w-auto md:ml-auto flex items-center gap-2">
             <input type="hidden" name="vista" value={vista} />
             <input type="hidden" name="giorno" value={giorno} />
             {sp.tipi && <input type="hidden" name="tipi" value={sp.tipi} />}
-            <select name="persona" defaultValue={persona} className="border border-neutral-300 rounded px-2 py-1.5 text-sm">
+            <select name="persona" defaultValue={persona} className="flex-1 md:flex-none border border-neutral-300 rounded px-2 py-1.5 text-sm">
               <option value="tutti">👥 Tutto il team</option>
               <option value={u.id}>👤 Solo io</option>
               {utenti.filter((x) => x.id !== u.id).map((x) => <option key={x.id} value={x.id}>{x.nome}{x.ufficio ? ` · ${x.ufficio.toLowerCase()}` : ""}</option>)}
@@ -108,11 +108,18 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         )}
       </div>
 
-      {vista === "settimana" && <Griglia giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} />}
-      {vista === "giorno" && (
-        <GrigliaPersone giorno={giorno} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo}
-          persone={filtroUtente ? utenti.filter((x) => x.id === filtroUtente) : utenti.filter((x) => eventi.some((e) => e.utenteId === x.id))} />
-      )}
+      {/* sul computer: griglia con le ore; sul telefono: elenco giorno per giorno, facile da scorrere col pollice */}
+      {vista === "settimana" && <>
+        <div className="hidden md:block"><Griglia giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
+        <div className="md:hidden"><ListaGiorni giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
+      </>}
+      {vista === "giorno" && <>
+        <div className="hidden md:block">
+          <GrigliaPersone giorno={giorno} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo}
+            persone={filtroUtente ? utenti.filter((x) => x.id === filtroUtente) : utenti.filter((x) => eventi.some((e) => e.utenteId === x.id))} />
+        </div>
+        <div className="md:hidden"><ListaGiorni giorni={[giorno]} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
+      </>}
       {vista === "mese" && <Mese giorno={giorno} eventi={eventi} oggi={oggi} qs={qs} />}
       {vista === "agenda" && <Agenda eventi={eventi} />}
 
@@ -234,9 +241,16 @@ function Mese({ giorno, eventi, oggi, qs }: { giorno: string; eventi: EventoCal[
         {giorni.map((g) => {
           const ev = eventi.filter((e) => giorniEvento(e).includes(g));
           return (
-            <div key={g} className={`min-h-[110px] border-t border-l border-neutral-100 p-1 ${g.slice(0, 7) !== mese ? "bg-neutral-50/70 text-neutral-400" : ""}`}>
+            <div key={g} className={`min-h-[56px] md:min-h-[110px] border-t border-l border-neutral-100 p-1 ${g.slice(0, 7) !== mese ? "bg-neutral-50/70 text-neutral-400" : ""}`}>
               <Link href={qs({ vista: "giorno", giorno: g })} className={`inline-block text-xs font-black px-1.5 rounded ${g === oggi ? "bg-blue-600 text-white" : ""}`}>{+g.slice(8)}</Link>
-              <div className="space-y-0.5 mt-0.5">
+              {/* telefono: un pallino colorato per impegno, tocca il giorno per vederli */}
+              {ev.length > 0 && (
+                <Link href={qs({ vista: "giorno", giorno: g })} className="md:hidden mt-1 flex flex-wrap items-center gap-0.5">
+                  {ev.slice(0, 6).map((e) => <span key={e.id} className="h-2 w-2 rounded-full" style={{ background: STILE_TIPO[e.tipo].colore, opacity: annullato(e) ? 0.35 : 1 }} />)}
+                  {ev.length > 6 && <span className="text-[9px] font-bold text-neutral-600">+{ev.length - 6}</span>}
+                </Link>
+              )}
+              <div className="hidden md:block space-y-0.5 mt-0.5">
                 {ev.slice(0, 4).map((e) => <div key={e.id} className="h-5"><Scheda e={e} compatta /></div>)}
                 {ev.length > 4 && <Link href={qs({ vista: "giorno", giorno: g })} className="block text-[10px] font-bold text-blue-700">+ altri {ev.length - 4}</Link>}
               </div>
@@ -244,6 +258,39 @@ function Mese({ giorno, eventi, oggi, qs }: { giorno: string; eventi: EventoCal[
           );
         })}
       </div>
+    </div>
+  );
+}
+
+/** Telefono: un riquadro per giorno con gli impegni in ordine di ora (anche i giorni liberi, con "+ fissa"). */
+function ListaGiorni({ giorni, eventi, oggi, linkNuovo }: { giorni: string[]; eventi: EventoCal[]; oggi: string; linkNuovo: (d: string) => string }) {
+  return (
+    <div className="space-y-2">
+      {giorni.map((g) => {
+        const ev = eventi.filter((e) => giorniEvento(e).includes(g)).sort((a, b) => Number(b.giornataIntera) - Number(a.giornataIntera) || a.inizio.getTime() - b.inizio.getTime());
+        return (
+          <div key={g} className={`overflow-hidden rounded-xl border bg-white ${g === oggi ? "border-blue-500 ring-1 ring-blue-500" : "border-neutral-200"}`}>
+            <div className={`flex items-center justify-between px-3 py-2 ${g === oggi ? "bg-blue-600 text-white" : "bg-neutral-50"}`}>
+              <span className="text-sm font-black capitalize">{nomeGiorno(g)} {+g.slice(8)} {nomeMese(g).split(" ")[0]}{g === oggi ? " · oggi" : ""}</span>
+              <a href={linkNuovo(`${g}T09:00`)} className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${g === oggi ? "bg-white/20" : "bg-green-100 text-green-800"}`}>+ fissa</a>
+            </div>
+            {ev.map((e) => {
+              const st = STILE_TIPO[e.tipo];
+              return (
+                <Link key={e.id} href={e.href} className={`flex items-stretch gap-3 border-t border-neutral-100 px-3 py-2.5 active:bg-neutral-100 ${annullato(e) ? "opacity-50 line-through" : ""}`}>
+                  <span className="w-1 shrink-0 rounded-full" style={{ background: st.colore }} />
+                  <span className="w-12 shrink-0 text-sm font-black tabular-nums" style={{ color: st.colore }}>{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-bold text-neutral-900">{st.icona} {e.cliente ?? e.titolo}</span>
+                    <span className="block text-xs text-neutral-600">{[e.chi, e.luogo].filter(Boolean).join(" · ") || st.nome}</span>
+                  </span>
+                </Link>
+              );
+            })}
+            {!ev.length && <p className="border-t border-neutral-100 px-3 py-2 text-xs text-neutral-400">Libero</p>}
+          </div>
+        );
+      })}
     </div>
   );
 }

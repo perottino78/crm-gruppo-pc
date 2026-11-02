@@ -60,7 +60,12 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   fatture (serve `ANTHROPIC_API_KEY`).
 - **Calendario** (`src/lib/calendario/`): unisce Appuntamenti, Rilievi, Pose, Assistenze; viste giorno (colonne per persona),
   settimana, mese, agenda. Inviti `.ics` via email all'incaricato (e al cliente se richiesto), annullamento quando si sposta o
-  cambia incaricato. Link calendario personale `GET /api/calendario/<token>` (token in `Utente.calendarioToken`).
+  cambia incaricato. Link calendario personale `GET /api/calendario/<token>` (token in `Utente.calendarioToken`); chi vede tutti
+  (`vedeTutti`: non commerciali/posatori) aggiunge anche `?persona=<id>` (un collega, calendario a parte su Google) e `?team=1`
+  (tutto il team, titolo con il nome). Pagina «Su Google / telefono»: pulsanti Google/iPhone/Outlook, calendari dei colleghi e, per
+  l'amministratore, `inviaLinkCalendarioATutti` (crea i link mancanti e manda a ognuno la sua email con le istruzioni).
+- **Telefono**: menu laterale a scomparsa (☰, `Sidebar.tsx`), `main` con margini stretti; nel calendario settimana e giorno diventano
+  `ListaGiorni` sotto `md`, il mese mostra pallini colorati. Controllo: nessuna pagina più larga dello schermo (iPhone 13, 390 px).
 - **Clienti e lead da BConsole** (rotta `api/admin/importa-clienti-bconsole`, logica `src/lib/clienti/bconsole.ts`): provenienza in
   `Cliente.origine`, stato lead in `Cliente.statoLead`, n. anagrafica in `Cliente.bconsoleId` (per agganciare offerte/ordini/fatture).
   Commerciale dalla sigla BConsole, se manca va a Ugo.
@@ -160,7 +165,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

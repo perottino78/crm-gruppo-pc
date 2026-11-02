@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
 
@@ -37,9 +38,22 @@ export default function Sidebar({
   const searchParams = useSearchParams();
   const brand = searchParams.get("brand") ?? "Tutti";
   const info = brandInfo(brand === "Tutti" ? undefined : brand);
+  // sul telefono il menu è nascosto: si apre con ☰ e si chiude da solo quando si cambia pagina
+  const [aperto, setAperto] = useState(false);
+  useEffect(() => { setAperto(false); }, [pathname, searchParams]);
+  const voceAttiva = moduli.find((m) => (m.href === "/" ? pathname === "/" : pathname === m.href || pathname.startsWith(m.href + "/")));
 
   return (
-    <aside className="w-56 shrink-0 border-r border-neutral-200 bg-white flex flex-col py-4 print:hidden">
+    <>
+    {/* barra in alto sul telefono */}
+    <div className="md:hidden fixed inset-x-0 top-0 z-40 flex h-12 items-center gap-3 border-b border-neutral-200 bg-white px-3 print:hidden">
+      <button type="button" onClick={() => setAperto(true)} aria-label="Apri il menu" className="btn-3d btn-3d-outline px-3 py-1 text-lg leading-none">☰</button>
+      <span className="w-8 h-8 rounded-md flex items-center justify-center text-white text-xs font-extrabold" style={{ background: `linear-gradient(135deg, ${info.primary}, ${info.accent})` }}>PC</span>
+      <span className="truncate text-sm font-bold text-neutral-900">{voceAttiva ? `${voceAttiva.icon} ${voceAttiva.label}` : "Gruppo P&C"}</span>
+    </div>
+    {aperto && <div className="md:hidden fixed inset-0 z-40 bg-black/40" onClick={() => setAperto(false)} />}
+    <aside className={`${aperto ? "flex" : "hidden"} md:flex fixed md:static inset-y-0 left-0 z-50 w-64 md:w-56 shrink-0 overflow-y-auto border-r border-neutral-200 bg-white flex-col py-4 shadow-2xl md:shadow-none print:hidden`}>
+      <button type="button" onClick={() => setAperto(false)} aria-label="Chiudi il menu" className="md:hidden absolute right-2 top-2 rounded px-2 text-2xl leading-none text-neutral-500">×</button>
       <div className="px-4 pb-4 mb-2 border-b border-neutral-100">
         <div className="flex items-center gap-2.5">
           <span
@@ -62,7 +76,7 @@ export default function Sidebar({
             <Link
               key={m.href}
               href={href}
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-sm border-l-4 transition-colors hover:bg-neutral-50"
+              className="flex items-center gap-2 px-3 py-2.5 md:py-2 rounded-md text-sm border-l-4 transition-colors hover:bg-neutral-50"
               style={
                 active
                   ? { background: info.primarySoft, color: info.primary, fontWeight: 700, borderLeftColor: info.primary }
@@ -96,5 +110,6 @@ export default function Sidebar({
         </div>
       )}
     </aside>
+    </>
   );
 }
