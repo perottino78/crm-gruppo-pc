@@ -118,10 +118,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; errore?: string; confermata?: string }>;
+  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string }>;
 }) {
   const { id } = await params;
-  const { q, errore, confermata } = await searchParams;
+  const { q, errore, confermata, inviata } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -131,6 +131,7 @@ export default async function PreventivoPage({
       cliente: true,
       brand: true,
       commerciale: true,
+      emailInviate: { orderBy: { createdAt: "desc" }, take: 10 },
       righe: {
         include: { prodotto: true, optionali: { include: { optional: true } } },
         orderBy: [{ ordine: "asc" }, { id: "asc" }],
@@ -490,8 +491,36 @@ export default async function PreventivoPage({
           >
             🖨️ Stampa offerta
           </Link>
+          <Link href={`/preventivi/${preventivo.id}/invia`} className="btn-3d btn-3d-green text-sm px-3 py-1.5">
+            ✉️ Invia offerta
+          </Link>
         </div>
       </div>
+
+      {inviata && (
+        <p className="mb-3 rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ Offerta inviata a {inviata}</p>
+      )}
+      {preventivo.emailInviate.length > 0 && (
+        <details className="mb-4 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm">
+          <summary className="cursor-pointer">
+            ✉️ <b>Inviata</b> il {preventivo.inviatoIl?.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) ?? "—"} a {preventivo.inviatoA ?? "—"}
+            {" · "}
+            {preventivo.vistoIl
+              ? <span className="font-semibold text-green-800">👁️ vista dal cliente {preventivo.visite > 1 ? `${preventivo.visite} volte, l'ultima ` : ""}il {preventivo.vistoIl.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
+              : <span className="text-neutral-500">non ancora aperta dal cliente</span>}
+          </summary>
+          <ul className="mt-2 divide-y divide-neutral-100">
+            {preventivo.emailInviate.map((e) => (
+              <li key={e.id} className="py-1.5">
+                <span className={e.stato === "INVIATA" ? "text-green-800" : "text-red-700"}>{e.stato === "INVIATA" ? "✓" : "✗"}</span>{" "}
+                {e.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })} · <b>{e.oggetto}</b> → {e.a}{e.cc ? ` (cc ${e.cc})` : ""}
+                {e.inviataDa ? ` · da ${e.inviataDa}` : ""}{e.allegati.length ? ` · 📎 ${e.allegati.join(", ")}` : ""}
+                {e.motivo && <span className="text-red-700"> · {e.motivo}</span>}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
 
       <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
         {preventivo.archiviato && (

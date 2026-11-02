@@ -62,6 +62,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
 
+      {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
+        <Link href="/impostazioni/firme" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
+          <span className="text-base font-bold text-neutral-900">✍️ Firme email del team →</span>
+          <span className="block text-xs text-neutral-600">La firma di ognuno (nome, ruolo, telefono, sito) in fondo alle email del CRM, come «Invia offerta».</span>
+        </Link>
+      )}
+
       {admin && (
         <div className="mb-8 grid gap-3 md:grid-cols-2">
           <Link href="/impostazioni/ruoli" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 hover:border-neutral-400">

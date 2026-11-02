@@ -42,6 +42,8 @@ model Utente {
   passwordHash         String?
   // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
   telefono             String?
+  // Firma delle email (righe di testo, o HTML incollato): vuota = firma pronta dai dati della scheda (src/lib/mail/firma.ts)
+  firmaEmail           String?
   // Ufficio di appartenenza (COMMERCIALE | FATTURAZIONE | TECNICO | ORDINI | POSA | AMMINISTRAZIONE): determina quali task di pratica vede
   ufficio              String?
   // Accesso Solaris Studio: null=nessun accesso, COMMERCIALE=solo propri clienti (no costi acquisto), TECNICO=tutti i progetti (no prezzi)
@@ -459,6 +461,12 @@ model Preventivo {
   // sezioneId restano nell'elenco "senza sezione" in cima.
   sezioni              SezionePreventivo[]
   promemoria           PromemoriaInviato[]
+  // "Invia offerta": ultima email mandata al cliente e aperture del link all'offerta
+  inviatoIl            DateTime?
+  inviatoA             String?
+  vistoIl              DateTime?
+  visite               Int                 @default(0)
+  emailInviate         EmailOfferta[]
   progetto             Progetto?
   solarisProgetto      SolarisProgetto?
   commessa             Commessa?
@@ -1800,4 +1808,25 @@ model ZonaCommerciale {
   attiva         Boolean  @default(true)
   ordine         Int      @default(0)
   createdAt      DateTime @default(now())
+}
+
+// Email "Invia offerta" mandate al cliente dalla scheda dell'offerta (storico).
+model EmailOfferta {
+  id           String     @id @default(cuid())
+  preventivo   Preventivo @relation(fields: [preventivoId], references: [id], onDelete: Cascade)
+  preventivoId String
+  a            String
+  cc           String?
+  oggetto      String
+  testo        String
+  allegati     String[]   @default([])
+  conLink      Boolean    @default(true)
+  inviataDa    String?
+  da           String?
+  // INVIATA | NON_INVIATA
+  stato        String
+  motivo       String?
+  createdAt    DateTime   @default(now())
+
+  @@index([preventivoId])
 }

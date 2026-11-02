@@ -60,6 +60,7 @@ export default async function MarketingPage() {
     ["/marketing/email", "✏️", "Testi delle email", "Modifica oggetto e testo di ogni email del percorso, con anteprima"],
     ["/impostazioni/lead", "🔗", "Pagine di atterraggio e collegamenti", "Link per le inserzioni, Meta Lead Ads, chiave per il gestionale pubblicità"],
     ["/prodotti", "📦", "Listini e prodotti", "Carica listini e articoli dei fornitori, applica gli aumenti"],
+    ["/impostazioni/firme", "✍️", "Firme email", "La firma di ogni collega: nome, ruolo, telefono e sito"],
     ["/impostazioni", "🧑‍🤝‍🧑", "Team", "Vedi il team e aggiungi nuovi colleghi"],
   ];
 
