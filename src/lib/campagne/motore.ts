@@ -7,6 +7,12 @@ import { CONTATTI, htmlEmail, testoEmail, type EmailPronta } from "@/lib/automaz
 import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, type FiltriCampagna } from "./regole";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/mail/tracciamento";
+import { controllaRimbalzi } from "@/lib/mail/rimbalzi-server";
+import { INTESTAZIONE } from "@/lib/mail/rimbalzi";
+
+/** L'indirizzo della scheda è quello già rimbalzato? (se qualcuno lo corregge, si torna a scrivergli) */
+const uguali = (a?: string | null, b?: string | null) => !!a && !!b && a.trim().toLowerCase() === b.trim().toLowerCase();
+export const rimbalzato = (c: { email?: string | null; emailRimbalzata?: string | null }) => !!c.email && !!c.emailRimbalzata && c.email.trim().toLowerCase() === c.emailRimbalzata.trim().toLowerCase();
 
 export const CHIAVE_PROMEMORIA_GIORNI = "campagne_promemoria_giorni";
 export const CHIAVE_PROMEMORIA_A = "campagne_promemoria_a";
@@ -40,19 +46,22 @@ export const filtriDi = (c: { marchi: string[]; stati: string[]; categorie: stri
 /** Quanti clienti rientrano nei filtri e quanti si possono davvero raggiungere via email. */
 export async function contaDestinatari(f: FiltriCampagna) {
   const base = whereCampagna(f);
-  const [totale, raggiungibili, disiscritti] = await Promise.all([
+  const [totale, raggiungibiliTutti, disiscritti, conRimbalzo] = await Promise.all([
     prisma.cliente.count({ where: base }),
     prisma.cliente.count({ where: { AND: [base, whereRaggiungibile] } }),
     prisma.cliente.count({ where: { AND: [base, { OR: [{ disiscritto: true }, { leadOrigine: { disiscritto: true } }] }] } }),
+    prisma.cliente.findMany({ where: { AND: [base, whereRaggiungibile, { emailRimbalzata: { not: null } }] }, select: { email: true, emailRimbalzata: true } }),
   ]);
-  return { totale, raggiungibili, disiscritti, senzaEmail: Math.max(0, totale - raggiungibili - disiscritti) };
+  const rimbalzati = conRimbalzo.filter(rimbalzato).length;
+  const raggiungibili = raggiungibiliTutti - rimbalzati;
+  return { totale, raggiungibili, disiscritti, rimbalzati, senzaEmail: Math.max(0, totale - raggiungibiliTutti - disiscritti) };
 }
 
 /** Mette in coda i destinatari della campagna (chi l'ha già ricevuta non la riceve di nuovo). Ritorna quanti nuovi. */
 export async function accodaCampagna(campagnaId: string, adesso = new Date()): Promise<number> {
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id: campagnaId } });
-  const clienti = await prisma.cliente.findMany({ where: { AND: [whereCampagna(filtriDi(c)), whereRaggiungibile] }, select: { id: true, email: true } });
-  const validi = clienti.filter((x) => emailValida(x.email));
+  const clienti = await prisma.cliente.findMany({ where: { AND: [whereCampagna(filtriDi(c)), whereRaggiungibile] }, select: { id: true, email: true, emailRimbalzata: true } });
+  const validi = clienti.filter((x) => emailValida(x.email) && !rimbalzato(x));
   const r = await prisma.campagnaInvio.createMany({ data: validi.map((x) => ({ campagnaId, clienteId: x.id, email: x.email!.trim().toLowerCase() })), skipDuplicates: true });
   await prisma.campagna.update({ where: { id: campagnaId }, data: { stato: "IN_INVIO", inviataIl: c.inviataIl ?? adesso } });
   return r.count;
@@ -95,6 +104,8 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
   const ora = opz.adesso ?? (() => new Date());
   const r: ResocontoCampagne = { inviate: 0, fallite: 0, saltate: 0, promemoria: 0 };
   if (!(await mailConfigurata())) return { ...r, motivo: "posta (SMTP) non configurata" };
+  // email rimbalzate: la casella aziendale si legge al massimo ogni 10 minuti (un errore non ferma gli invii)
+  await controllaRimbalzi({ adesso: ora }).catch(() => null);
 
   // 1. Avvisi di scadenza: "la campagna scade fra N giorni, aggiornala"
   const imp = await impostazioniPromemoria();
@@ -131,14 +142,14 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
     if (!inv) break;
     const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", tentativi: { increment: 1 } } });
     if (!preso.count) continue;
-    const cliente = await prisma.cliente.findUnique({ where: { id: inv.clienteId }, select: { id: true, nome: true, nomePersona: true, disiscritto: true, leadOrigine: { select: { disiscritto: true } } } });
-    if (!cliente || cliente.disiscritto || cliente.leadOrigine?.disiscritto) {
-      await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "SOPPRESSA", motivo: cliente ? "si è disiscritto" : "cliente non più presente" } });
+    const cliente = await prisma.cliente.findUnique({ where: { id: inv.clienteId }, select: { id: true, nome: true, nomePersona: true, email: true, emailRimbalzata: true, disiscritto: true, leadOrigine: { select: { disiscritto: true } } } });
+    if (!cliente || cliente.disiscritto || cliente.leadOrigine?.disiscritto || (rimbalzato(cliente) && uguali(cliente.email, inv.email))) {
+      await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "SOPPRESSA", motivo: !cliente ? "cliente non più presente" : cliente.disiscritto || cliente.leadOrigine?.disiscritto ? "si è disiscritto" : "email rimbalzata in precedenza" } });
       r.saltate++;
       continue;
     }
     const m = emailCampagna(inv.campagna, cliente, `c-${inv.id}`);
-    const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti });
+    const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti, intestazioni: { [INTESTAZIONE]: `c-${inv.id}` } });
     if (esito.inviata) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
       r.inviate++;

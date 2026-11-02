@@ -248,7 +248,8 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       const a = destinatario === "CLIENTE" ? lead.email : destinatario === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
       const da = destinatario === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
       const soppressa = destinatario === "CLIENTE"
-        ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto" : null)
+        ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto"
+          : lead.emailRimbalzata && lead.email.trim().toLowerCase() === lead.emailRimbalzata.trim().toLowerCase() ? `l'email del cliente è rimbalzata (${lead.rimbalzoMotivo ?? "non recapitata"}): correggila nel lead` : null)
         : destinatario === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
       const pers = testi.get(chiaveTesto(modello, varianteTesto(modello, variante, dati)));
       const preheader = pers?.preheader ? riempi(pers.preheader, valoriSegnaposto(dati, link, variante)) : "";
@@ -266,7 +267,7 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
         return "FATTO";
       }
       // aperture e clic: solo le email al cliente (quelle interne non serve contarle)
-      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined });
+      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined, intestazioni: { "X-CRM-Invio": `l-${reg.id}` } });
       if (esito.inviata) {
         await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
         await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);

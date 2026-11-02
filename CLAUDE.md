@@ -104,6 +104,12 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   `GET /api/traccia/<c|l>-<id>.<firma>`): pixel per le aperture e link riscritti per i clic (`apertaIl/aperture/clicIl/clic` su
   `CampagnaInvio` ed `EmailLead`; il clic conta anche come apertura; codice firmato HMAC, niente redirect con codice falso); spegnibile per
   campagna (`tracciamento`). Le email automatiche al cliente sono tracciate e hanno il preheader personalizzabile (Marketing › Testi).
+  Rimbalzi (`src/lib/mail/rimbalzi.ts` puro, `rimbalzi-server.ts`): ogni email parte con `X-CRM-Invio: c-<invio>|l-<emailLead>` e busta
+  `envelope.from` = casella aziendale; `controllaRimbalzi` (in `eseguiCampagne`, max ogni 10 min, o «Controlla ora» in Email automatiche)
+  legge la casella via IMAP (`imapflow`, stesso server/password, porta 993, `IMAP_HOST`/`IMAP_PORT` facoltative) dall'ultimo UID
+  (`rimbalzi_ultimo_uid`), riconosce i «mancato recapito» (RFC 3464 o a parole), segna l'invio RIMBALZATA con il motivo e, se permanente,
+  `Cliente/Lead.emailRimbalzata`: niente più email finché l'indirizzo della scheda resta quello (`rimbalzato()`). Collaudi con casella simulata
+  (`globalThis.__casellaFinta`): il protocollo IMAP vero è da verificare in produzione.
 - **Caselle email personali** (`src/lib/mail/caselle.ts`, `src/app/posta-actions.ts`, `src/components/CasellaEmail.tsx`): ogni utente
   nel Profilo (o l'amministratore in Impostazioni › Utenti) inserisce la password della sua email; server/porta vuoti = quelli
   aziendali. Password cifrata AES-GCM con `MAIL_SECRET` o `SESSION_SECRET` (se cambia, vanno reinserite). `inviaMail({ daUtenteId })`
@@ -173,13 +179,13 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 209, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 214, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

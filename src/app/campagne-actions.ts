@@ -89,6 +89,16 @@ export async function inviaCampagna(fd: FormData) {
   torna(id, { ok: n ? `Invio avviato: ${n} email in coda, partono a blocchi nei prossimi minuti.` : "Nessun nuovo destinatario: chi rientra nei filtri l'ha già ricevuta." });
 }
 
+/** Controlla subito la casella aziendale per le email rimbalzate (di solito lo fa da sola ogni 10 minuti). */
+export async function controllaRimbalziOra() {
+  const u = await getCurrentUser();
+  if (!u || !puo(u, "automazioni")) redirect("/impostazioni/automazioni?errore=permesso");
+  const { controllaRimbalzi } = await import("@/lib/mail/rimbalzi-server");
+  const e = await controllaRimbalzi({ forza: true });
+  revalidatePath("/impostazioni/automazioni");
+  redirect(`/impostazioni/automazioni?rimbalzi=${encodeURIComponent(e?.motivo ? `Controllo non riuscito: ${e.motivo}` : `Controllate ${e?.controllati ?? 0} email nuove della casella: ${e?.rimbalzi ?? 0} rimbalzi.`)}#rimbalzi`);
+}
+
 export async function duplicaCampagna(fd: FormData) {
   const u = await marketing();
   const id = str(fd, "id");

@@ -52,13 +52,18 @@ export type MailDaInviare = {
   invito?: { metodo: "REQUEST" | "CANCEL"; ics: string };
   /** Manda dalla casella personale di questo utente (se l'ha collegata nel Profilo). */
   daUtenteId?: string | null;
+  /** Intestazioni in più (es. X-CRM-Invio: serve a riconoscere a quale invio si riferisce un'email rimbalzata). */
+  intestazioni?: Record<string, string>;
 };
 
 async function spedisci(c: Casella, m: MailDaInviare, a: string[], da: string, rispondiA?: string | null) {
   await trasporto(c).sendMail({
     from: da,
     to: a.join(", "),
+    // i "mancato recapito" tornano alla casella che spedisce, dove il CRM li legge (vedi rimbalzi-server.ts)
+    envelope: { from: c.utente, to: a },
     replyTo: rispondiA || undefined,
+    ...(m.intestazioni ? { headers: m.intestazioni } : {}),
     subject: m.oggetto,
     text: m.testo,
     ...(m.html ? { html: m.html } : {}),

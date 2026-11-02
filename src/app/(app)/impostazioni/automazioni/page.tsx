@@ -11,13 +11,14 @@ import { MAX_RECUPERI } from "@/lib/automazioni/percorsi";
 import { PERCORSI, ESITI, type Quando } from "@/lib/automazioni/percorsi";
 import { CONTATTI, MODELLI, componiEmail } from "@/lib/automazioni/email";
 import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percorso-actions";
-import { salvaPromemoriaCampagne } from "@/app/campagne-actions";
+import { salvaPromemoriaCampagne, controllaRimbalziOra } from "@/app/campagne-actions";
+import { ultimoEsitoRimbalzi } from "@/lib/mail/rimbalzi-server";
 import { impostazioniPromemoria } from "@/lib/campagne/motore";
 import { salvaPostaAziendale } from "@/app/posta-actions";
 import { postaAziendale } from "@/lib/mail/invio";
 import { HOST_PREDEFINITO, PORTA_PREDEFINITA } from "@/lib/mail/caselle";
 
-type P = { posta?: string; postaErrore?: string; prove?: string; u?: string; h?: string; pt?: string; m?: string; ac?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string };
+type P = { posta?: string; postaErrore?: string; prove?: string; u?: string; h?: string; pt?: string; m?: string; ac?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string; rimbalzi?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
@@ -62,6 +63,12 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
     prisma.configurazione.findUnique({ where: { chiave: "posta_utente" } }),
     prisma.utente.groupBy({ by: ["smtpErrore"], where: { smtpPassword: { not: null } }, _count: { _all: true } }),
   ]);
+  const [rimbalzi, rimbalzatiTutti] = await Promise.all([
+    ultimoEsitoRimbalzi(),
+    prisma.cliente.findMany({ where: { emailRimbalzata: { not: null } }, orderBy: { emailRimbalzataIl: "desc" }, take: 60, select: { id: true, nome: true, email: true, emailRimbalzata: true, emailRimbalzataIl: true, rimbalzoMotivo: true } }),
+  ]);
+  // solo quelli con l'indirizzo ancora sbagliato (se è stato corretto non serve più segnalarli)
+  const clientiRimbalzati = rimbalzatiTutti.filter((x) => x.email && x.emailRimbalzata && x.email.toLowerCase() === x.emailRimbalzata.toLowerCase()).slice(0, 30);
   const caselleOk = caselle.filter((c) => !c.smtpErrore).reduce((t, c) => t + c._count._all, 0);
   const caselleKo = caselle.filter((c) => c.smtpErrore).reduce((t, c) => t + c._count._all, 0);
   // recuperi programmati: i passi di tipo RECUPERO in attesa
@@ -185,6 +192,22 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
           </label>
           <button className="btn-3d btn-3d-teal text-sm px-4 py-2">Salva avvisi</button>
         </form>
+      </div>
+
+      <div id="rimbalzi" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="font-semibold">📭 Email rimbalzate (indirizzi sbagliati, caselle piene)</p>
+          <form action={controllaRimbalziOra}><button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Controlla ora</button></form>
+        </div>
+        <p className="text-sm text-neutral-600">Ogni 10 minuti il CRM legge la casella aziendale e riconosce i messaggi di «mancato recapito». L&apos;invio viene segnato come rimbalzato e, se l&apos;indirizzo non esiste, il cliente o il lead non riceve più email finché qualcuno non corregge l&apos;indirizzo nella sua scheda. Le caselle piene si riprovano la volta dopo.</p>
+        {p.rimbalzi && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">{p.rimbalzi}</p>}
+        {rimbalzi && <p className="text-sm">Ultimo controllo: <b>{quando(new Date(rimbalzi.quando))}</b> · {rimbalzi.controllati} email nuove lette · {rimbalzi.rimbalzi} rimbalzi{rimbalzi.motivo && <span className="text-red-700"> · ⚠ {rimbalzi.motivo}</span>}</p>}
+        {clientiRimbalzati.length > 0 && (
+          <div className="text-sm">
+            <p className="font-medium">Clienti con l&apos;email da correggere ({clientiRimbalzati.length}):</p>
+            <ul className="mt-1 space-y-0.5">{clientiRimbalzati.map((x) => <li key={x.id}><Link href={`/clienti/${x.id}`} className="underline">{x.nome}</Link> <span className="text-neutral-600">· {x.email} · {x.rimbalzoMotivo}{x.emailRimbalzataIl ? ` (${quando(x.emailRimbalzataIl)})` : ""}</span></li>)}</ul>
+          </div>
+        )}
       </div>
 
       {daVerificare.length > 0 && (
