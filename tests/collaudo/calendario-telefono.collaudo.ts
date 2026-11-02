@@ -61,14 +61,14 @@ async function main() {
 
   console.log("1. Il calendario personale");
   const m = await leggi(T("marco"));
-  verifica(m.status === 200 && m.testo.includes("Visita Rossi") && !m.testo.includes("Visita Bianchi") && m.testo.includes("P&C ONE — Marco Piccatti"), "il commerciale vede solo i suoi impegni");
+  verifica(m.status === 200 && m.testo.includes("Visita Rossi") && !m.testo.includes("Visita Bianchi") && m.testo.includes("CRM P&C — Marco Piccatti"), "il commerciale vede solo i suoi impegni");
   verifica((await leggi(T("ex"))).status === 404, "il link di chi è disattivato non funziona più");
   verifica((await leggi("corto")).status === 404, "link inventato: non trovato");
 
   console.log("2. Colleghi e tutto il team");
   verifica((await leggi(T("marco"), `?persona=${max.id}`)).status === 403 && (await leggi(T("marco"), "?team=1")).status === 403, "un commerciale non vede i calendari degli altri");
   const p = await leggi(T("ale"), `?persona=${max.id}`);
-  verifica(p.status === 200 && p.testo.includes("Visita Bianchi") && !p.testo.includes("Visita Rossi") && p.testo.includes("P&C ONE — Massimo Giordano"), "la telefonista aggiunge il calendario di un collega");
+  verifica(p.status === 200 && p.testo.includes("Visita Bianchi") && !p.testo.includes("Visita Rossi") && p.testo.includes("CRM P&C — Massimo Giordano"), "la telefonista aggiunge il calendario di un collega");
   const t = await leggi(T("ugo"), "?team=1");
   verifica(t.status === 200 && t.testo.includes("Visita Rossi · Marco Piccatti") && t.testo.includes("Visita Bianchi · Massimo Giordano") && t.testo.includes("tutto il team"), "l'amministratore vede tutto il team, con il nome di chi ha l'impegno");
   verifica((await leggi(T("ugo"), "?persona=inesistente")).status === 404, "collega inesistente: non trovato");

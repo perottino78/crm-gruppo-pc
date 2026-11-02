@@ -61,11 +61,11 @@ export default async function SulTelefonoPage({ searchParams }: { searchParams: 
             <div className="grid gap-2 sm:flex sm:flex-wrap mb-4">
               <a href={webcal!} className="btn-3d btn-3d-dark px-4 py-2 text-sm">🍎 Aggiungi a iPhone / Mac</a>
               <a href={`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal!)}`} target="_blank" className="btn-3d btn-3d-blue px-4 py-2 text-sm">📆 Aggiungi a Google Calendar</a>
-              <a href={`https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("P&C ONE")}`} target="_blank" className="btn-3d btn-3d-teal px-4 py-2 text-sm">📧 Aggiungi a Outlook</a>
+              <a href={`https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("CRM P&C")}`} target="_blank" className="btn-3d btn-3d-teal px-4 py-2 text-sm">📧 Aggiungi a Outlook</a>
             </div>
             <ul className="text-sm text-neutral-700 list-disc pl-5 space-y-1">
               <li><b>iPhone:</b> tocca il pulsante nero dal telefono e conferma «Abbonati». In alternativa: Impostazioni › Calendario › Account › Aggiungi account › Altro › Aggiungi calendario sottoscritto, e incolla il link.</li>
-              <li><b>Android:</b> aprilo dal computer con «Aggiungi a Google Calendar» usando lo stesso account Google del telefono; poi sul telefono, in Google Calendar › Impostazioni, attiva la sincronizzazione del calendario «P&amp;C ONE».</li>
+              <li><b>Android:</b> aprilo dal computer con «Aggiungi a Google Calendar» usando lo stesso account Google del telefono; poi sul telefono, in Google Calendar › Impostazioni, attiva la sincronizzazione del calendario «CRM P&amp;C».</li>
               <li>iPhone e Outlook si aggiornano ogni pochi minuti; Google Calendar ogni qualche ora (per le novità urgenti fa fede l&apos;invito via email).</li>
             </ul>
             <form action={generaLinkCalendario} className="mt-4">

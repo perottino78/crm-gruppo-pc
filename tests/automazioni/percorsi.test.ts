@@ -54,7 +54,7 @@ test("testi delle email: niente segnaposto vuoti, disiscrizione solo ai clienti"
   assert.ok(testoEmail(cliente, link).includes("Non vuoi più ricevere email?"));
   assert.ok(htmlEmail(cliente, link).includes("Non voglio più ricevere email"));
   const interna = componiEmail("call-requested", d, link, "scheduled-first-contact");
-  assert.equal(interna.oggetto, "[P&C ONE] Richiama il contatto interessato — Mario Rossi");
+  assert.equal(interna.oggetto, "[CRM P&C] Richiama il contatto interessato — Mario Rossi");
   assert.ok(interna.testo.includes("https://crm/lead?id=1"));
   assert.ok(!testoEmail(interna, link).includes("disiscrizione"));
   assert.ok(htmlEmail(componiEmail("request-received", { nome: "<b>x</b>" }, link), link).includes("&lt;b&gt;"));
