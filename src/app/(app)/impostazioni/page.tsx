@@ -22,7 +22,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
 
   const [config, utenti, brands] = await Promise.all([
     // la posta aziendale ha il suo riquadro (Email automatiche): la password non deve comparire qui
-    prisma.configurazione.findMany({ where: { AND: [{ NOT: { chiave: { startsWith: "posta_" } } }, { NOT: { chiave: { startsWith: "email_testo:" } } }] }, orderBy: { chiave: "asc" } }),
+    prisma.configurazione.findMany({ where: { AND: [{ NOT: { chiave: { startsWith: "posta_" } } }, { NOT: { chiave: { startsWith: "email_testo:" } } }, { NOT: { chiave: { startsWith: "rimbalzi_" } } }] }, orderBy: { chiave: "asc" } }),
     admin || marketing ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);

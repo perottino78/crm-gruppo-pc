@@ -128,6 +128,11 @@ model Lead {
   // Solleciti finiti senza esito: il lead è rimasto "non gestito"
   nonGestitoIl          DateTime?
   disiscritto           Boolean            @default(false)
+  // Email rimbalzata (indirizzo inesistente, casella piena…): l'indirizzo che è tornato indietro, quando e perché.
+  // Finché l'email della scheda è quella, non si manda più (si riprova da solo se qualcuno corregge l'indirizzo).
+  emailRimbalzata       String?
+  emailRimbalzataIl     DateTime?
+  rimbalzoMotivo        String?
   disiscrittoIl         DateTime?
   emailLead             EmailLead[]
   invii                 InvioProgrammato[]
@@ -305,13 +310,18 @@ model Cliente {
   noteLibere String?
 
   // --- Relazioni nuove sezioni ---
-  referenti      Referente[]
-  indirizziAltri IndirizzoCliente[]
-  correlazioniDa ClienteCorrelazione[] @relation("CorrelazioneDa")
-  correlazioniA  ClienteCorrelazione[] @relation("CorrelazioneA")
+  referenti         Referente[]
+  indirizziAltri    IndirizzoCliente[]
+  correlazioniDa    ClienteCorrelazione[] @relation("CorrelazioneDa")
+  correlazioniA     ClienteCorrelazione[] @relation("CorrelazioneA")
   // Non vuole più email di campagne/promozioni (link nelle email)
-  disiscritto    Boolean               @default(false)
-  disiscrittoIl  DateTime?
+  disiscritto       Boolean               @default(false)
+  // Email rimbalzata (indirizzo inesistente, casella piena…): l'indirizzo che è tornato indietro, quando e perché.
+  // Finché l'email della scheda è quella, non si manda più (si riprova da solo se qualcuno corregge l'indirizzo).
+  emailRimbalzata   String?
+  emailRimbalzataIl DateTime?
+  rimbalzoMotivo    String?
+  disiscrittoIl     DateTime?
 
   @@index([bconsoleId])
 }

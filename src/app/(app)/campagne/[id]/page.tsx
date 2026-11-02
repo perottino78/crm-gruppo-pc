@@ -77,7 +77,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             </label>
           </div>
           <p className="text-sm rounded bg-teal-50 border border-teal-200 px-3 py-2">
-            👥 <b>{conti.raggiungibili}</b> riceveranno l&apos;email · {conti.totale} rientrano nei filtri ({conti.senzaEmail} senza email, {conti.disiscritti} disiscritti).
+            👥 <b>{conti.raggiungibili}</b> riceveranno l&apos;email · {conti.totale} rientrano nei filtri ({conti.senzaEmail} senza email, {conti.disiscritti} disiscritti{conti.rimbalzati ? `, ${conti.rimbalzati} con email rimbalzata` : ""}).
             <span className="text-xs text-neutral-600"> Il conteggio si aggiorna quando salvi.</span>
           </p>
         </div>
@@ -123,14 +123,15 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
         )}
       </div>
 
-      {c.invii.some((i) => i.stato === "INVIATA") && (() => {
-        const inviate = c.invii.filter((i) => i.stato === "INVIATA");
+      {c.invii.some((i) => i.stato === "INVIATA" || i.stato === "RIMBALZATA") && (() => {
+        const inviate = c.invii.filter((i) => i.stato === "INVIATA" || i.stato === "RIMBALZATA");
+        const rimbalzate = c.invii.filter((i) => i.stato === "RIMBALZATA");
         const aperte = inviate.filter((i) => i.apertaIl).length, cliccate = inviate.filter((i) => i.clicIl).length;
         return (
           <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3" style={{ ["--fase" as string]: "#0d9488" }}>
             <p className="font-semibold">4. Com&apos;è andata</p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {[["Consegnate al server", String(inviate.length), "accettate dalla posta"], ["Aperte", String(aperte), `${perc(aperte, inviate.length)} delle inviate`], ["Hanno cliccato", String(cliccate), `${perc(cliccate, inviate.length)} delle inviate · ${perc(cliccate, aperte)} di chi l'ha aperta`], ["Disiscritti / falliti", `${n("SOPPRESSA")} / ${n("FALLITA")}`, "non raggiunti"]].map(([t, v, d]) => (
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+              {[["Inviate", String(inviate.length), `${inviate.length - rimbalzate.length} recapitate`], ["Aperte", String(aperte), `${perc(aperte, inviate.length)} delle inviate`], ["Hanno cliccato", String(cliccate), `${perc(cliccate, inviate.length)} delle inviate · ${perc(cliccate, aperte)} di chi l'ha aperta`], ["Rimbalzate", String(rimbalzate.length), rimbalzate.length ? "indirizzo sbagliato, casella piena…" : "nessun mancato recapito"], ["Disiscritti / falliti", `${n("SOPPRESSA")} / ${n("FALLITA")}`, "non raggiunti"]].map(([t, v, d]) => (
                 <div key={t} className="rounded-lg border border-neutral-200 p-3"><div className="text-[11px] font-bold uppercase text-neutral-500">{t}</div><div className="text-2xl font-extrabold tabular-nums">{v}</div><div className="text-xs text-neutral-600">{d}</div></div>
               ))}
             </div>
@@ -146,7 +147,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
                         <td className="px-2 py-1"><Link href={`/clienti/${i.clienteId}`} className="underline">{i.email}</Link></td>
                         <td className="px-2">{quando(i.inviataIl)}</td>
                         <td className="px-2">{i.apertaIl ? `✓ ${quando(i.apertaIl)}${i.aperture > 1 ? ` (${i.aperture} volte)` : ""}` : "—"}</td>
-                        <td className="px-2">{i.clicIl ? `👆 ${quando(i.clicIl)}${i.clic > 1 ? ` (${i.clic})` : ""}` : "—"}</td>
+                        <td className="px-2">{i.stato === "RIMBALZATA" ? <span className="font-semibold text-red-700">📭 rimbalzata: {i.motivo}</span> : i.clicIl ? `👆 ${quando(i.clicIl)}${i.clic > 1 ? ` (${i.clic})` : ""}` : "—"}</td>
                       </tr>
                     ))}
                   </tbody>

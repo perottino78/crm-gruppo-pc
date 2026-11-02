@@ -114,6 +114,9 @@ export default async function SchedaClientePage({
               <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-700">
                 {telefono && <a href={`tel:${telefono}`} className="hover:underline">📞 {telefono}</a>}
                 {cliente.email && <a href={`mailto:${cliente.email}`} className="hover:underline">✉️ {cliente.email}</a>}
+                {cliente.email && cliente.emailRimbalzata && cliente.email.toLowerCase() === cliente.emailRimbalzata.toLowerCase() && (
+                  <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800" title={cliente.emailRimbalzataIl ? `rimbalzata il ${cliente.emailRimbalzataIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : undefined}>📭 email non recapitata ({cliente.rimbalzoMotivo ?? "rimbalzata"}): correggila, finché resta questa non riceve email</span>
+                )}
                 {indirizzo && (
                   <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(indirizzo)}`}
