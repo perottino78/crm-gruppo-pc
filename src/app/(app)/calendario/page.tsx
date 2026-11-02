@@ -21,7 +21,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
   const sp = await searchParams;
   const u = await getCurrentUser();
   if (!u) return null;
-  const tutti = vedeTutti(u.ruolo);
+  const tutti = vedeTutti(u);
   const oggi = chiaveGiorno(new Date());
   const giorno = /^\d{4}-\d{2}-\d{2}$/.test(sp.giorno ?? "") ? sp.giorno! : oggi;
   const vista: Vista = (["giorno", "settimana", "mese", "agenda"] as Vista[]).includes(sp.vista as Vista) ? (sp.vista as Vista) : "settimana";

@@ -1,3 +1,4 @@
+import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Un solo formato per tutto ciò che va in calendario: appuntamenti, rilievi, pose, interventi di assistenza.
 import { chiaveGiorno, partiRoma, aggiungiGiorni } from "./tempo";
 
@@ -92,4 +93,4 @@ export function impagina(eventi: EventoCal[], oraInizio: number, oraFine: number
 }
 
 /** Chi può vedere e organizzare il calendario di tutti: tutti tranne commerciali e posatori, che vedono il proprio */
-export const vedeTutti = (ruolo: string) => !["COMMERCIALE", "POSATORE"].includes(ruolo);
+export const vedeTutti = (u: string | ConPermessi) => (typeof u === "string" ? !["COMMERCIALE", "POSATORE"].includes(u) : puo(u, "calendario.tutti"));

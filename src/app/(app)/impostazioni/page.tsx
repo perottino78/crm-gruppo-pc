@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { prisma } from "@/lib/prisma";
 import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTelefonoUtente, aggiornaSolarisRuolo } from "@/app/actions";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
   const utenteCorrente = await getCurrentUser();
   const admin = isAmministratore(utenteCorrente);
   // il marketing vede il team e aggiunge colleghi (non amministratori); ruoli, password e stati restano all'amministratore
-  const marketing = !admin && puoMarketing(utenteCorrente);
+  const marketing = !admin && puo(utenteCorrente, "utenti.crea");
 
   const [config, utenti, brands] = await Promise.all([
     // la posta aziendale ha il suo riquadro (Email automatiche): la password non deve comparire qui
@@ -60,6 +61,19 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         <span className="text-base font-bold text-neutral-900">Anagrafica fornitori, posatori e tecnici →</span>
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
+
+      {admin && (
+        <div className="mb-8 grid gap-3 md:grid-cols-2">
+          <Link href="/impostazioni/ruoli" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 hover:border-neutral-400">
+            <span className="text-base font-bold text-neutral-900">🔐 Ruoli e permessi →</span>
+            <span className="block text-xs text-neutral-600">Profili come in BConsole: cosa può vedere e fare ognuno (a spunta) e quali dati (suoi, zona, tutto).</span>
+          </Link>
+          <Link href="/impostazioni/zone" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 hover:border-neutral-400">
+            <span className="text-base font-bold text-neutral-900">🗺️ Zone commerciali →</span>
+            <span className="block text-xs text-neutral-600">Piemonte, Liguria, Valle d&apos;Aosta, Lombardia e altre: regioni e responsabile commerciale di zona.</span>
+          </Link>
+        </div>
+      )}
 
       <Link href="/impostazioni/lead" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
         <span className="text-base font-bold text-neutral-900">Lead da pubblicità online: pagine di atterraggio e collegamenti →</span>

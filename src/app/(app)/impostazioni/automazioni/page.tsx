@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -41,7 +42,7 @@ const descriviQuando = (q: Quando) =>
 /** Email automatiche dei lead: accensione, stato della posta, registro e anteprima dei testi. */
 export default async function AutomazioniPage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
-  if (!u || !puoMarketing(u)) notFound();
+  if (!u || !puo(u, "automazioni")) notFound();
   const admin = u.ruolo === "AMMINISTRATORE";
   const p = await searchParams;
   const [stato, perStato, ultime, daVerificare, mesi, promo, testoPromo, finoPromo, inAttesa, avvisi] = await Promise.all([

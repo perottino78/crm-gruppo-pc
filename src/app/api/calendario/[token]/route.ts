@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
   const personaId = q.get("persona");
   const team = q.get("team") === "1";
   if ((personaId && personaId !== u.id) || team) {
-    if (!vedeTutti(u.ruolo)) return new Response("Puoi vedere solo il tuo calendario", { status: 403 });
+    if (!vedeTutti(u)) return new Response("Puoi vedere solo il tuo calendario", { status: 403 });
   }
   const persona = personaId && personaId !== u.id ? await prisma.utente.findUnique({ where: { id: personaId }, select: { id: true, nome: true } }) : null;
   if (personaId && personaId !== u.id && !persona) return new Response("Collega non trovato", { status: 404 });

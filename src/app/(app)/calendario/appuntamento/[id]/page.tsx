@@ -19,7 +19,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   if (!u) return null;
   const a = await prisma.appuntamento.findUnique({ where: { id }, include: { cliente: true, utente: true } });
   if (!a) notFound();
-  const tutti = vedeTutti(u.ruolo);
+  const tutti = vedeTutti(u);
   if (!tutti && a.utenteId !== u.id) notFound();
   const utenti = await prisma.utente.findMany({ where: { passwordHash: { not: null }, OR: [{ stato: "ATTIVO" }, { id: a.utenteId }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   const luogo = a.luogo || [a.cliente.indirizzo, [a.cliente.cap, a.cliente.comune].filter(Boolean).join(" "), a.cliente.provincia].filter(Boolean).join(", ");

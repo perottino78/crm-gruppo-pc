@@ -1,5 +1,6 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
 // Marketing (come in Keap): testi delle email automatiche modificabili dal CRM.
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -15,7 +16,7 @@ const PAGINA = "/marketing/email";
 async function marketing() {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
-  if (!puoMarketing(u)) redirect(`${PAGINA}?errore=${encodeURIComponent("Solo amministrazione e marketing possono modificare le email.")}`);
+  if (!puo(u, "automazioni")) redirect(`${PAGINA}?errore=${encodeURIComponent("Solo amministrazione e marketing possono modificare le email.")}`);
   return u;
 }
 function modelloValido(fd: FormData) {

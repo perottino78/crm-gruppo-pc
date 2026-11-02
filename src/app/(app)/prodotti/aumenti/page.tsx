@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { puoMarketing } from "@/lib/utenti/stato";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -21,7 +22,7 @@ const ERRORI: Record<string, string> = {
 /** Aumenti listini: il fornitore manda la percentuale, qui la si applica a tutti i suoi listini in un colpo. */
 export default async function AumentiListiniPage({ searchParams }: { searchParams: Promise<P> }) {
   const u = await getCurrentUser();
-  if (!u || !puoMarketing(u)) notFound();
+  if (!u || !puo(u, "listini.modifica")) notFound();
   const p = await searchParams;
   const perc = leggiPercentuale(p.perc);
   const arr = (ARROTONDAMENTI.some((a) => a.chiave === p.arr) ? p.arr : "CENTESIMI") as Arrotondamento;

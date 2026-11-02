@@ -32,8 +32,9 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
 4. **Import senza doppioni**: riconosci per P.IVA o nome normalizzato, completa solo i campi vuoti, non sovrascrivere ciò che
    è stato scritto a mano (esempio: `src/lib/fornitori/bconsole.ts`).
 5. **Le email non devono mai bloccare il lavoro**: `inviaMail()` non lancia errori, ritorna `{ inviata, motivo }`.
-6. Visibilità dati per ruolo: `src/lib/scope.ts` (AMMINISTRATORE vede tutto). Ruoli: AMMINISTRATORE, AMMINISTRATIVO,
-   COMMERCIALE, TELEFONISTA, TECNICO, POSATORE. Uffici (`Utente.ufficio`): COMMERCIALE, FATTURAZIONE, TECNICO, ORDINI,
+6. Permessi e visibilità dati: `src/lib/permessi/catalogo.ts` (`puo(u, "sezione")`, `visibilitaDi`) e `src/lib/scope.ts`
+   (PROPRI | ZONA | TUTTI). Non scrivere controlli `ruolo === …` nuovi: aggiungi la voce al catalogo (`AREE`) e usa `puo`.
+   Ruoli: AMMINISTRATORE (sempre tutto), AMMINISTRATIVO, COMMERCIALE, TELEFONISTA, MARKETING, TECNICO, POSATORE. Uffici (`Utente.ufficio`): COMMERCIALE, FATTURAZIONE, TECNICO, ORDINI,
    MAGAZZINO, POSA, AMMINISTRAZIONE.
 
 ## Mappa del codice
@@ -153,19 +154,26 @@ Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc`
   standard; `src/lib/automazioni/personalizza.ts`, chiavi `email_testo:<modello>[:<variante>]`, applicati in `eseguiInviiScaduti`).
   Il marketing vede tutti i clienti e lead (scope), gestisce email automatiche (non la posta aziendale), promozione del recupero, avvisi,
   campagne, lead da pubblicità (`/impostazioni/lead`), articoli/listini e aumenti, e crea utenti non amministrativi (`RUOLI_CREABILI_MARKETING`).
+- **Ruoli e permessi** (come i Gruppi di BConsole; `/impostazioni/ruoli`, `/impostazioni/zone`, `src/app/permessi-actions.ts`,
+  `src/lib/permessi/`, solo AMMINISTRATORE): `ProfiloAccesso` (permessi a spunta per sezione + visibilità PROPRI/ZONA/TUTTI), copiati
+  sull'utente (`Utente.profiloId/permessi/visibilita`); senza profilo valgono `permessiPredefiniti(ruolo)` = comportamento di prima.
+  Il layout blocca le pagine non spuntate (`permessoPagina`, header `x-percorso` dal middleware), la Sidebar mostra solo le sezioni
+  permesse. `ZonaCommerciale` (regioni + province extra, responsabile; tabella `src/lib/zone/regioni.ts`): `ricalcolaVisibilita` scrive
+  `Utente.visibileProvince/visibileUtenti` per chi vede «La sua zona». `Utente.responsabileUfficio` (es. Rocco per il Marketing).
+  Profili e zone di partenza creati da `assicuraIniziali` alla prima apertura.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 200, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 205, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

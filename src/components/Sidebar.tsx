@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
+import { puo, permessoPagina } from "@/lib/permessi/catalogo";
 
 const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean; soloOrdini?: boolean; soloMarketing?: boolean }[] = [
   { href: "/", label: "Dashboard", icon: "🏠" },
@@ -31,7 +32,7 @@ export default function Sidebar({
   utente,
   logoutAction,
 }: {
-  utente?: { nome: string; ruolo: string; ufficio?: string | null };
+  utente?: { nome: string; ruolo: string; ufficio?: string | null; permessi?: string[]; profiloId?: string | null };
   logoutAction?: () => void;
 }) {
   const pathname = usePathname();
@@ -69,7 +70,7 @@ export default function Sidebar({
         </div>
       </div>
       <nav className="flex flex-col gap-1 px-2">
-        {moduli.filter((m) => (!m.soloAmministrazione || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "AMMINISTRATIVO") && (!m.soloOrdini || (!!utente && utente.ruolo !== "COMMERCIALE")) && (!m.soloMarketing || utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "MARKETING" || utente?.ufficio === "MARKETING")).map((m) => {
+        {moduli.filter((m) => { const k = permessoPagina(m.href); return !k || !utente || puo(utente, k); }).map((m) => {
           const active = m.href === "/" ? pathname === "/" : pathname === m.href || pathname.startsWith(m.href + "/");
           const href = brand !== "Tutti" ? `${m.href}?brand=${encodeURIComponent(brand)}` : m.href;
           return (

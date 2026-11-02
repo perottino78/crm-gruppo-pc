@@ -2,7 +2,8 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { periodoDa } from "@/lib/amministrazione/analisi";
-import { utenteAmministrazione } from "@/lib/amministrazione/server";
+import { getCurrentUser } from "@/lib/auth";
+import { puo } from "@/lib/permessi/catalogo";
 import { datiReport } from "@/lib/report/server";
 import { primeEAltri, type Voce } from "@/lib/report/calcoli";
 import { Barre, Colonne, Tabella, type VoceBarra } from "@/components/report/Grafici";
@@ -38,7 +39,7 @@ const barre = (v: Voce[], extra?: (x: Voce) => [string, string][]): VoceBarra[] 
   v.map((x) => ({ etichetta: x.chiave, valore: x.valore, nota: perc1(x.quota).replace(",0%", "%"), dettagli: [["Quota sul totale", perc1(x.quota)], ["Documenti", String(x.n)], ...(extra?.(x) ?? [])] }));
 
 export default async function ReportPage({ searchParams }: { searchParams: Promise<P> }) {
-  if (!(await utenteAmministrazione())) {
+  if (!puo(await getCurrentUser(), "report")) {
     return <div className="max-w-xl"><h1 className="mb-3 text-2xl font-bold">Report</h1><p className="text-sm text-neutral-700">I report con fatturato, margini e banche sono visibili all&apos;amministrazione.</p></div>;
   }
   const p = await searchParams;

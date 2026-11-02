@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { puo } from "@/lib/permessi/catalogo";
 import { puoMarketing } from "@/lib/utenti/stato";
 import Link from "next/link";
 import type { Prisma } from "@prisma/client";
@@ -71,7 +72,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
       {(!stato.attive || !stato.posta) && (
         <p className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
           ⏸ Email automatiche {!stato.posta ? "non attive: manca la configurazione della posta (SMTP)" : "in pausa"}. Gli esiti si registrano e gli invii vengono programmati, ma le email non partono.
-          {puoMarketing(u) && <> <Link href="/impostazioni/automazioni" className="underline">Impostazioni › Email automatiche</Link></>}
+          {puo(u, "automazioni") && <> <Link href="/impostazioni/automazioni" className="underline">Impostazioni › Email automatiche</Link></>}
         </p>
       )}
       {p.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{p.errore}</p>}

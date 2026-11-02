@@ -1,14 +1,14 @@
+import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Anagrafica articoli: funzioni lato server (permessi, categorie, ricalcolo prezzi, codici).
-import { puoMarketing } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { calcolaArticolo, type CategoriaRegola } from "./prezzi";
 import type { Esistente } from "./importa";
 
 /** Consultare il catalogo (costi compresi): tutti tranne i commerciali. */
-export const puoVedereArticoli = (u: Pick<Utente, "ruolo"> | null | undefined) => !!u && u.ruolo !== "COMMERCIALE";
+export const puoVedereArticoli = (u: ConPermessi | null | undefined) => puo(u, "articoli");
 /** Inserire, modificare, importare: solo gli amministratori. */
-export const puoModificareArticoli = (u: Pick<Utente, "ruolo"> & { ufficio?: string | null } | null | undefined) => puoMarketing(u);
+export const puoModificareArticoli = (u: ConPermessi | null | undefined) => puo(u, "listini.modifica");
 
 type Db = Prisma.TransactionClient | typeof prisma;
 
