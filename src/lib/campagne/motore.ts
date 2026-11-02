@@ -118,7 +118,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
       const segnato = await prisma.campagna.updateMany({ where: { id: c.id, NOT: { promemoriaInviati: { has: String(g) } } }, data: { promemoriaInviati: { push: String(g) } } });
       if (!segnato.count) continue;
       const fino = c.validaFino!.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
-      await inviaMail({ a: imp.a, da: CONTATTI.mittenteInterne, oggetto: `[P&C ONE] La campagna "${c.nome}" scade ${testoGiorni(g)}`,
+      await inviaMail({ a: imp.a, da: CONTATTI.mittenteInterne, oggetto: `[CRM P&C] La campagna "${c.nome}" scade ${testoGiorni(g)}`,
         testo: `Ciao,\n\nla campagna "${c.nome}" è valida fino al ${fino}: scade ${testoGiorni(g)}.\n\nAggiorna il testo e la scadenza, oppure preparane una nuova: ${APP_URL}/campagne/${c.id}\n\nGrazie,\nIl tuo assistente virtuale` });
       r.promemoria++;
     }
@@ -129,7 +129,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
       const g = promemoriaDiOggi(daOraRoma(`${fino}T12:00`), imp.giorni, inviati, ora());
       if (g !== null) {
         await salvaConfig(CHIAVE_PROMEMORIA_RECUPERO, [...inviati.map((x) => `${fino}:${x}`), `${fino}:${g}`].join(","));
-        await inviaMail({ a: imp.a, da: CONTATTI.mittenteInterne, oggetto: `[P&C ONE] La promozione del recupero lead scade ${testoGiorni(g)}`,
+        await inviaMail({ a: imp.a, da: CONTATTI.mittenteInterne, oggetto: `[CRM P&C] La promozione del recupero lead scade ${testoGiorni(g)}`,
           testo: `Ciao,\n\nla promozione usata per recuperare i lead persi scade ${testoGiorni(g)}. Senza una promozione valida i recuperi restano in attesa.\n\nAggiornala qui: ${APP_URL}/impostazioni/automazioni\n\nGrazie,\nIl tuo assistente virtuale` });
         r.promemoria++;
       }

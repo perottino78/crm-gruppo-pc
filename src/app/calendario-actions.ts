@@ -147,9 +147,9 @@ function emailLinkCalendario(nome: string, https: string) {
   return [
     `Ciao ${nome.split(" ")[0]},`,
     "da oggi i tuoi appuntamenti, rilievi e pose del CRM possono comparire da soli nel calendario del tuo telefono.",
-    `• Google Calendar (Android o computer): apri questo link dal computer, con il tuo account Google, e conferma «Aggiungi»:\n${`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`}\nPoi sul telefono, in Google Calendar › Impostazioni, attiva il calendario «P&C ONE».`,
+    `• Google Calendar (Android o computer): apri questo link dal computer, con il tuo account Google, e conferma «Aggiungi»:\n${`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`}\nPoi sul telefono, in Google Calendar › Impostazioni, attiva il calendario «CRM P&C».`,
     `• iPhone: tocca questo link dal telefono e conferma «Abbonati»:\n${webcal}`,
-    `• Outlook: https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("P&C ONE")}`,
+    `• Outlook: https://outlook.office.com/calendar/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent("CRM P&C")}`,
     "Il link è personale: non inoltrarlo. Google aggiorna il calendario ogni qualche ora; per le novità urgenti arriva comunque l'invito via email.",
     "Gruppo P&C",
   ].join("\n\n");

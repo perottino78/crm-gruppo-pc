@@ -124,7 +124,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
   const blocco = (...p: (string | null | undefined | false)[]) => p.filter(Boolean).join("\n\n");
   switch (chiave) {
     case "qualification-requested":
-      return { ...m, oggetto: `[P&C ONE] Nuovo contatto ${d.fonte ?? ""} da classificare — ${d.nome}`.replace(/\s+/g, " "), testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Nuovo contatto ${d.fonte ?? ""} da classificare — ${d.nome}`.replace(/\s+/g, " "), testo: blocco(
         "Ciao Centralino P&C,", `abbiamo acquisito una nuova richiesta${d.fonte ? ` da ${d.fonte}` : ""}.`, contatto, richiesta,
         "Apri il lead e scegli uno dei due esiti:\n- In Target\n- Fuori Regione", `Apri il lead: ${link.lead}`, firmaInterna) };
     case "request-received":
@@ -147,7 +147,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         "Ti auguriamo una buona giornata!", firmaCliente) };
     case "call-requested": {
       const c = CONTESTO_CHIAMATA[variante ?? "initial-prequalification"] ?? CONTESTO_CHIAMATA["initial-prequalification"];
-      return { ...m, oggetto: `[P&C ONE] ${c.oggetto} — ${d.nome}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] ${c.oggetto} — ${d.nome}`, testo: blocco(
         "Ciao Centralino P&C,", c.frase, contatto, richiesta,
         variante === "scheduled-first-contact" && d.richiamoIl ? `Ricontatto concordato: ${dataOra(d.richiamoIl)}` : null,
         `Apri il lead e registra l'esito della telefonata: ${link.lead}`,
@@ -159,7 +159,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         `Proveremo di nuovo${d.telefono ? ` al numero che ci hai lasciato, ${d.telefono},` : ""} utilizzando il nostro numero fisso ${CONTATTI.telefonoUfficio} oppure i numeri mobili ${CONTATTI.cellulariUfficio}.`,
         "Se il numero non è corretto, rispondi a questa email o chiamaci per comunicarci quello esatto. Puoi anche indicarci i giorni o le fasce orarie in cui preferisci essere contattato.", firmaCliente) };
     case "seller-assignment-requested":
-      return { ...m, oggetto: `[P&C ONE] Venditore da assegnare — ${d.nome}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Venditore da assegnare — ${d.nome}`, testo: blocco(
         "Ciao Centralino P&C,", `è stato fissato un appuntamento ${variante === "SHOWROOM" ? "in showroom" : "a casa del cliente"} per ${d.nome}.`,
         riepilogoAppuntamento(d, variante), contatto, richiesta,
         "Scegli il venditore che effettuerà l'appuntamento: partiranno da sole la conferma al cliente e al venditore e le lettere di presentazione.",
@@ -174,7 +174,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         contattiConsulente(d),
         "Nell'attesa di conoscerti meglio, ti auguriamo una buona giornata!\nGruppo P&C") };
     case "appointment-confirmed-seller":
-      return { ...m, oggetto: `[P&C ONE] Nuovo appuntamento ${variante === "SHOWROOM" ? "in showroom" : "a casa"} — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Nuovo appuntamento ${variante === "SHOWROOM" ? "in showroom" : "a casa"} — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
         `Ciao ${d.venditore ? nomeProprio(d.venditore.nome) : ""},`.replace(" ,", ","), `hai un nuovo appuntamento${d.appuntamentoIl ? ` ${dataOra(d.appuntamentoIl)}` : ""}.`,
         riepilogoAppuntamento(d, variante), contatto, richiesta, d.note && `Note utili:\n${d.note}`,
         `Consulta la scheda del contatto prima dell'incontro: ${link.lead}`, "L'appuntamento è già nel tuo calendario del CRM.", firmaInterna) };
@@ -189,16 +189,16 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         `Se non potrai essere presente, contattaci al numero ${CONTATTI.telefonoUfficio} per concordare una nuova data o un orario diverso.`,
         contattiConsulente(d), firmaCliente) };
     case "appointment-reminder-seller":
-      return { ...m, oggetto: `[P&C ONE] Promemoria appuntamento — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Promemoria appuntamento — ${d.nome} — ${d.appuntamentoIl ? dataOra(d.appuntamentoIl) : ""}`, testo: blocco(
         `Ciao ${d.venditore ? nomeProprio(d.venditore.nome) : ""},`.replace(" ,", ","), `ti ricordiamo l'appuntamento con ${d.nome}${d.appuntamentoIl ? ` ${dataOra(d.appuntamentoIl)}` : ""}.`,
         riepilogoAppuntamento(d, variante), d.note && `Note utili:\n${d.note}`,
         `Per prepararti, consulta i dati della richiesta e le note nella scheda del contatto: ${link.lead}`, "In caso di dubbi contatta l'ufficio.", firmaInterna) };
     case "appointment-cancelled-seller":
-      return { ...m, oggetto: `[P&C ONE] Appuntamento annullato — ${d.nome}${d.appuntamentoIl ? ` — ${dataOra(d.appuntamentoIl)}` : ""}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Appuntamento annullato — ${d.nome}${d.appuntamentoIl ? ` — ${dataOra(d.appuntamentoIl)}` : ""}`, testo: blocco(
         `Ciao ${d.venditore ? nomeProprio(d.venditore.nome) : ""},`.replace(" ,", ","), `l'appuntamento con ${d.nome}${d.appuntamentoIl ? ` previsto ${dataOra(d.appuntamentoIl)}` : ""} è stato annullato.`,
         "Non è richiesta alcuna operazione da parte tua: l'appuntamento è stato tolto dal tuo calendario.", contatto, `Scheda del contatto: ${link.lead}`, firmaInterna) };
     case "cancellation-follow-up-requested":
-      return { ...m, oggetto: `[P&C ONE] Definisci il seguito dell'appuntamento annullato — ${d.nome}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Definisci il seguito dell'appuntamento annullato — ${d.nome}`, testo: blocco(
         "Ciao Centralino P&C,", `l'appuntamento con ${d.nome}${d.appuntamentoIl ? ` ${dataOra(d.appuntamentoIl)}` : ""} è stato annullato.`, contatto,
         "Apri il lead e indica il seguito corretto:\n- nuovo appuntamento a casa;\n- nuovo appuntamento in showroom;\n- ricontatto in una data futura;\n- contatto non interessato.",
         `Definisci il seguito: ${link.lead}`, firmaInterna) };
@@ -217,7 +217,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
         firmaCliente) };
     }
     case "lost-recovery-call-requested":
-      return { ...m, oggetto: `[P&C ONE] Recupera il contatto — ${d.nome}`, testo: blocco(
+      return { ...m, oggetto: `[CRM P&C] Recupera il contatto — ${d.nome}`, testo: blocco(
         "Ciao Centralino P&C,", "richiama il contatto che la volta scorsa non era andato avanti (non interessato o non raggiunto).",
         d.recuperoIl ? `${giorniFa(d.recuperoIl, d.adesso ?? new Date())} gli abbiamo inviato la promozione del momento:` : "Gli abbiamo inviato la promozione del momento:",
         d.promozione?.testo,

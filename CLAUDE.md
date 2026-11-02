@@ -11,7 +11,8 @@ pompe di calore), **PTC** (climatizzazione), **Purafonte** (depurazione acqua), 
 
 Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc` · deploy automatico Vercel da `main`.
 
-Marchio: `src/lib/marchio.ts` (`NOME_APP`, `MOTTO`, `PREFISSO` = "[P&C ONE]" per l'oggetto delle email interne, colori),
+Marchio: `src/lib/marchio.ts` (`NOME_APP`, `MOTTO`, colori). P&C ONE è solo il nome dell'app (titolo, accesso, menu, icona):
+email e calendari restano "[CRM P&C]" / "CRM P&C — nome" (scelta di Ugo, non cambiarli).
 logo `src/components/LogoOne.tsx` (simbolo di accensione = "1"), icone `src/app/icon.svg|icon.png|apple-icon.png` e `public/icone/`,
 `src/app/manifest.ts` (app installabile dal telefono). Nei testi sempre "P&C ONE", mai "PEC ONE". Icone e manifest sono esclusi dal
 login nel `matcher` del middleware.

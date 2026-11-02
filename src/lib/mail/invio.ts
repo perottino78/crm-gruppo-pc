@@ -146,8 +146,8 @@ async function provaCasellaGrezza(c: Casella, a: string): Promise<{ errore?: str
   try {
     await trasporto(c).verify();
     await trasporto(c).sendMail({
-      from: c.mittente, to: a, subject: "Prova email da P&C ONE",
-      text: `Ciao,\n\nquesta è un'email di prova: la casella ${c.utente} è collegata correttamente a P&C ONE.\n\nP&C ONE — Gruppo P&C\n${APP_URL}`,
+      from: c.mittente, to: a, subject: "Prova email dal CRM Gruppo P&C",
+      text: `Ciao,\n\nquesta è un'email di prova: la casella ${c.utente} è collegata correttamente al CRM.\n\nCRM Gruppo P&C\n${APP_URL}`,
     });
     return {};
   } catch (e) {
