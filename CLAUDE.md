@@ -1,8 +1,8 @@
 @AGENTS.md
 
-# CRM Gruppo P&C — guida per Claude Code
+# P&C ONE (CRM Gruppo P&C) — guida per Claude Code
 
-CRM gestionale di **Gruppo P&C** (Rosta, TO), titolare **Ugo Perottino**. Tutto in **italiano**: interfaccia, testi,
+**P&C ONE** («Tutto il Gruppo, in un clic.») è il CRM gestionale di **Gruppo P&C** (Rosta, TO), titolare **Ugo Perottino**. Tutto in **italiano**: interfaccia, testi,
 commenti nel codice, messaggi di commit. Ugo non è uno sviluppatore: spiegagli le cose in modo semplice, mostra il
 risultato (screenshot) e non chiedergli dettagli tecnici che puoi verificare da solo.
 
@@ -10,6 +10,11 @@ Divisioni / brand: **P&C** (serramenti, pergole, vetrate, tende, zanzariere, bli
 pompe di calore), **PTC** (climatizzazione), **Purafonte** (depurazione acqua), più **Plasma30** e **Work & Services**.
 
 Produzione: https://crm-gruppo-pc.vercel.app · repo `perottino78/crm-gruppo-pc` · deploy automatico Vercel da `main`.
+
+Marchio: `src/lib/marchio.ts` (`NOME_APP`, `MOTTO`, `PREFISSO` = "[P&C ONE]" per l'oggetto delle email interne, colori),
+logo `src/components/LogoOne.tsx` (simbolo di accensione = "1"), icone `src/app/icon.svg|icon.png|apple-icon.png` e `public/icone/`,
+`src/app/manifest.ts` (app installabile dal telefono). Nei testi sempre "P&C ONE", mai "PEC ONE". Icone e manifest sono esclusi dal
+login nel `matcher` del middleware.
 
 ## Stack
 - **Next.js 16** (App Router, Server Components + Server Actions) — vedi AGENTS.md: leggi la doc in `node_modules/next/dist/docs/` prima di usare API che non conosci.

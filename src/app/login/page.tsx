@@ -1,4 +1,6 @@
 import { login } from "@/app/actions";
+import { IconaOne } from "@/components/LogoOne";
+import { MOTTO } from "@/lib/marchio";
 
 export default async function LoginPage({
   searchParams,
@@ -11,14 +13,10 @@ export default async function LoginPage({
     <div className="min-h-screen flex items-center justify-center bg-neutral-50">
       <div className="w-full max-w-sm">
         <div className="text-center mb-6">
-          <span
-            className="inline-flex w-14 h-14 rounded-xl items-center justify-center text-white text-xl font-extrabold shadow-sm mb-3"
-            style={{ background: "linear-gradient(135deg, #ea580c, #111827)" }}
-          >
-            PC
-          </span>
-          <h1 className="text-2xl font-bold text-neutral-900">Gruppo P&amp;C</h1>
-          <p className="text-sm font-medium text-neutral-600">Accedi al CRM Gestionale</p>
+          <IconaOne size={72} className="mx-auto mb-3 drop-shadow-md" />
+          <h1 className="text-3xl font-black tracking-tight text-neutral-900">P&amp;C <span className="text-orange-600">ONE</span></h1>
+          <p className="text-sm font-medium text-neutral-600">{MOTTO}</p>
+          <p className="mt-1 text-xs text-neutral-500">Il gestionale del Gruppo P&amp;C</p>
         </div>
 
         <form action={login} className="bg-white rounded-lg border border-neutral-200 p-6 flex flex-col gap-4">

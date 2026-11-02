@@ -93,7 +93,7 @@ async function main() {
   verifica(tok && tok.length >= 30, "link privato creato");
   const res = await GET(new Request("http://x") as never, { params: Promise.resolve({ token: tok }) });
   const ics = await res.text();
-  verifica(res.status === 200 && /BEGIN:VCALENDAR/.test(ics) && /ROSSI MARIO/.test(ics) && /X-WR-CALNAME:CRM P&C — Pavel/.test(ics), "il link restituisce il calendario di Pavel");
+  verifica(res.status === 200 && /BEGIN:VCALENDAR/.test(ics) && /ROSSI MARIO/.test(ics) && /X-WR-CALNAME:P&C ONE — Pavel/.test(ics), "il link restituisce il calendario di Pavel");
   const bad = await GET(new Request("http://x") as never, { params: Promise.resolve({ token: "a".repeat(32) }) });
   verifica(bad.status === 404, "un link sbagliato non mostra nulla");
 

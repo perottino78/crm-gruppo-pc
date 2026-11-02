@@ -31,7 +31,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
       // nel calendario di tutto il team si vede di chi è l'impegno
       return team && e.chi ? { ...v, titolo: `${v.titolo} · ${e.chi}` } : v;
     }),
-    { nome: team ? "CRM P&C — tutto il team" : `CRM P&C — ${persona?.nome ?? u.nome}` },
+    { nome: team ? "P&C ONE — tutto il team" : `P&C ONE — ${persona?.nome ?? u.nome}` },
   );
   return new Response(ics, {
     headers: { "Content-Type": "text/calendar; charset=utf-8", "Content-Disposition": `inline; filename="crm-pc.ics"`, "Cache-Control": "no-store" },
