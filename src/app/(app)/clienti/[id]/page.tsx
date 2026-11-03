@@ -20,6 +20,7 @@ import { praticheCliente, diarioCliente } from "@/lib/clienti/scheda";
 import { STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
 import { eur } from "@/lib/commesse";
 import { statoOrdine } from "@/lib/ordini/calcoli";
+import { storicoBConsole } from "@/lib/clienti/storico-bconsole";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -28,7 +29,7 @@ const TIPI = [
   { v: "TASK", label: "Task / scadenza", icon: "✅" },
 ];
 
-type Sezione = "pratiche" | "attivita" | "task" | "appuntamenti" | "acquisti" | "file" | "anagrafica";
+type Sezione = "pratiche" | "attivita" | "task" | "appuntamenti" | "acquisti" | "file" | "bconsole" | "anagrafica";
 
 const iniziali = (nome: string) =>
   nome.split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]?.toUpperCase()).join("") || "?";
@@ -64,6 +65,8 @@ export default async function SchedaClientePage({
 
   const dati = await praticheCliente(utenteCorrente, cliente.id);
   const { pratiche, commesse, ordini, vediAcquisti } = dati;
+  const storico = await storicoBConsole(cliente);
+  const nStorico = storico.fatture.length + storico.progetti.length;
 
   const taskCommesse = commesse.filter((c) => !["CHIUSA", "LAVORI_ESEGUITI", "ANNULLATA"].includes(c.stato)).flatMap((c) => c.tasks.filter((t) => !STATI_CHIUSI.includes(t.stato)).map((t) => ({ t, c })));
   const taskAttivita = cliente.attivita.filter((a) => a.tipo === "TASK" && !a.completata);
@@ -80,6 +83,7 @@ export default async function SchedaClientePage({
     { id: "appuntamenti", label: "Appuntamenti", n: cliente.appuntamenti.length, colore: "bg-pink-600", visibile: true },
     { id: "acquisti", label: "Ordini e bolle", n: ordini.length, colore: "bg-purple-600", visibile: vediAcquisti },
     { id: "file", label: "File", n: dati.fileTotali, colore: "bg-red-700", visibile: true },
+    { id: "bconsole", label: "Storico BConsole", n: nStorico, colore: "bg-stone-600", visibile: nStorico > 0 },
     { id: "anagrafica", label: "Anagrafica", colore: "bg-teal-600", visibile: true },
   ];
   const sezioni = sezioniTutte.filter((s) => s.visibile);
@@ -233,6 +237,12 @@ export default async function SchedaClientePage({
         {/* ── Offerte e pratiche ── */}
         {sez === "pratiche" && (
           <div className="space-y-4">
+            {nStorico > 0 && pratiche.length === 0 && (
+              <Link href={href("bconsole")} className="block rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm hover:border-stone-500">
+                📚 In BConsole questo cliente ha <b>{storico.fatture.length} fatture</b> e <b>{storico.progetti.length} progetti</b>
+                {storico.totali.fatturato ? <> per {eur(storico.totali.fatturato)}</> : null}: <span className="underline">vedi lo storico BConsole</span>
+              </Link>
+            )}
             <details id="nuova-offerta" className="bg-white rounded-xl border border-neutral-200 group">
               <summary className="cursor-pointer list-none px-4 py-3 flex items-center justify-between">
                 <span className="text-sm font-bold text-neutral-900">+ Nuova offerta per {cliente.nome}</span>
@@ -435,6 +445,55 @@ export default async function SchedaClientePage({
             </table>
             {ordini.length === 0 && <p className="px-4 py-6 text-sm text-neutral-500 text-center">Nessun ordine fornitore sulle pratiche di questo cliente.</p>}
             <p className="px-4 py-2 text-xs text-neutral-500 border-t border-neutral-100">Bolle e fatture dei fornitori collegate sono nella sezione File e nella scheda di ogni commessa.</p>
+          </div>
+        )}
+
+        {/* ── Storico BConsole ── */}
+        {sez === "bconsole" && (
+          <div className="space-y-4">
+            <p className="text-xs text-neutral-600">Dati portati da BConsole (fatture di vendita del 2026 e progetti/commesse). Sono in sola lettura: il lavoro nuovo si fa nelle offerte e pratiche del CRM.</p>
+            <div className="grid grid-cols-3 gap-2 [&>*]:min-w-0">
+              {([["Fatturato", storico.totali.fatturato], ["Pagato", storico.totali.incassato], ["Da incassare", storico.totali.residuo]] as const).map(([t, v]) => (
+                <div key={t} className="rounded-lg border border-neutral-200 bg-white px-3 py-2"><p className="text-xs text-neutral-600">{t}</p><p className="truncate text-lg font-extrabold">{eur(v)}</p></div>
+              ))}
+            </div>
+            {storico.progetti.length > 0 && (
+              <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+                <p className="border-b border-neutral-100 px-4 py-2 text-sm font-bold">📁 Progetti / commesse BConsole</p>
+                <table className="w-full text-sm">
+                  <thead className="bg-neutral-50 text-xs text-neutral-600"><tr><th className="px-4 py-1.5 text-left">N.</th><th className="px-2 text-left">Lavoro</th><th className="px-2 text-left">Marchio</th><th className="px-2 text-left">Iniziato</th><th className="px-2 text-left">Stato</th><th className="px-2 text-right">Valore</th></tr></thead>
+                  <tbody>
+                    {storico.progetti.map((pr) => (
+                      <tr key={pr.numero} className="border-t border-neutral-100">
+                        <td className="px-4 py-1.5 font-semibold">{pr.numero}</td><td className="px-2">{pr.descrizione ?? "—"}</td><td className="px-2">{pr.tipologia ?? "—"}</td>
+                        <td className="px-2 tabular-nums">{pr.creatoIl ? pr.creatoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "—"}</td><td className="px-2">{pr.stato ?? "—"}</td>
+                        <td className="px-2 text-right tabular-nums">{pr.totaleOfferto ? eur(pr.totaleOfferto) : "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {storico.fatture.length > 0 && (
+              <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+                <p className="border-b border-neutral-100 px-4 py-2 text-sm font-bold">🧾 Fatture di vendita</p>
+                <table className="w-full text-sm">
+                  <thead className="bg-neutral-50 text-xs text-neutral-600"><tr><th className="px-4 py-1.5 text-left">Fattura</th><th className="px-2 text-left">Data</th><th className="px-2 text-left">Riferimento</th><th className="px-2 text-right">Totale</th><th className="px-2 text-right">Pagato</th><th className="px-2 text-right">Resta</th></tr></thead>
+                  <tbody>
+                    {storico.fatture.map((f) => (
+                      <tr key={f.id} className="border-t border-neutral-100">
+                        <td className="px-4 py-1.5 font-semibold">{f.numero}{f.tipo === "TD04" ? " (nota di credito)" : ""}</td>
+                        <td className="px-2 tabular-nums">{f.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</td>
+                        <td className="px-2">{[f.descrizione, f.progetto && `progetto ${f.progetto}`].filter(Boolean).join(" · ") || "—"}</td>
+                        <td className="px-2 text-right tabular-nums">{eur(f.totale)}</td>
+                        <td className="px-2 text-right tabular-nums text-green-800">{f.incassato ? eur(f.incassato) : "—"}</td>
+                        <td className={`px-2 text-right tabular-nums ${f.residuo > 0.5 ? "font-semibold text-red-700" : ""}`}>{f.residuo > 0.5 ? eur(f.residuo) : "✓"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 
