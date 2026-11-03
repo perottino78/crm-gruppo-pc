@@ -8,6 +8,11 @@ export type FatturaStorico = {
   id: string; numero: string; data: Date; tipo: string; descrizione: string | null; progetto: string | null; brand: string | null;
   imponibile: number; totale: number; incassato: number; residuo: number; venditore: string | null;
 };
+export type DocumentoStorico = {
+  id: string; tipo: string; numero: string; data: Date | null; riferimento: string | null; stato: string | null; imponibile: number; totale: number;
+  marchio: string | null; agente: string | null; pagamento: string | null; offertaRif: string | null; progetto: string | null;
+  righe: { dsc: string; qta?: number | null; imponibile?: number | null; iva?: string | null }[];
+};
 export type ProgettoStorico = { numero: string; descrizione: string | null; tipologia: string | null; stato: string | null; capoProgetto: string | null; totaleOfferto: number; creatoIl: Date | null };
 
 /** "Luca Armentano" e "ARMENTANO LUCA" sono la stessa persona: varianti del nome per la ricerca. */
@@ -42,6 +47,16 @@ export async function storicoBConsole(c: { id: string; nome: string; piva?: stri
     orderBy: { creatoIl: "desc" },
     take: 100,
   });
+  const documenti = await prisma.documentoBC.findMany({
+    where: { OR: [{ clienteId: c.id }, { AND: [{ clienteId: null }, { OR: perNome }] }] },
+    orderBy: [{ data: "desc" }, { numero: "desc" }],
+    take: 200,
+  });
+  const doc = (d: (typeof documenti)[number]): DocumentoStorico => ({
+    id: d.id, tipo: d.tipo, numero: d.numero, data: d.data, riferimento: d.riferimento, stato: d.stato, imponibile: d.imponibile, totale: d.totale,
+    marchio: d.marchio, agente: d.agente, pagamento: d.pagamento, offertaRif: d.offertaRif, progetto: d.progetto,
+    righe: Array.isArray(d.righe) ? (d.righe as DocumentoStorico["righe"]) : [],
+  });
   const righe: FatturaStorico[] = fatture.map((f) => {
     const sue = scadenze.filter((s) => s.fatturaVenditaId === f.id);
     const incassato = cent(sue.reduce((t, s) => t + incassatoScadenza({ importo: s.importo, residuo: residuoScadenza(s), stato: s.stato }), 0));
@@ -52,6 +67,8 @@ export async function storicoBConsole(c: { id: string; nome: string; piva?: stri
     };
   });
   return {
+    offerte: documenti.filter((d) => d.tipo === "OFFERTA").map(doc),
+    ordini: documenti.filter((d) => d.tipo === "ORDINE").map(doc),
     fatture: righe,
     progetti: progetti.map((p): ProgettoStorico => ({ numero: p.numero, descrizione: p.descrizione, tipologia: p.tipologia, stato: p.stato, capoProgetto: p.capoProgetto, totaleOfferto: p.totaleOfferto, creatoIl: p.creatoIl })),
     totali: { fatturato: cent(righe.reduce((t, f) => t + f.totale, 0)), incassato: cent(righe.reduce((t, f) => t + f.incassato, 0)), residuo: cent(righe.reduce((t, f) => t + f.residuo, 0)) },
