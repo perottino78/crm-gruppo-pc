@@ -15,6 +15,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/campagne", label: "Campagne", icon: "📣", soloMarketing: true },
   { href: "/preventivi", label: "Preventivi", icon: "📄" },
   { href: "/calendario", label: "Calendario", icon: "📅" },
+  { href: "/comunicazioni", label: "Comunicazioni", icon: "💬" },
   { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
   { href: "/contratti", label: "Contratti e provvigioni", icon: "💼" },

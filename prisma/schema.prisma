@@ -1871,3 +1871,37 @@ model LiquidazioneProvvigione {
 
   @@index([provvigioneId])
 }
+
+// Comunicazioni interne al team (amministratore e marketing): email a chi si sceglie e, se serve, un task per ognuno.
+model Comunicazione {
+  id           String                      @id @default(cuid())
+  oggetto      String
+  // testo con i segnaposto ({nome}, {username}…): le password provvisorie non si salvano mai
+  testo        String
+  mittenteId   String?
+  mittenteNome String
+  conTask      Boolean                     @default(false)
+  titoloTask   String?
+  scadenzaTask DateTime?
+  conPassword  Boolean                     @default(false)
+  destinatari  ComunicazioneDestinatario[]
+  createdAt    DateTime                    @default(now())
+}
+
+model ComunicazioneDestinatario {
+  id              String        @id @default(cuid())
+  comunicazione   Comunicazione @relation(fields: [comunicazioneId], references: [id], onDelete: Cascade)
+  comunicazioneId String
+  utenteId        String
+  nome            String
+  email           String
+  // INVIATA | NON_INVIATA
+  stato           String
+  motivo          String?
+  lettaIl         DateTime?
+  fattoIl         DateTime?
+  createdAt       DateTime      @default(now())
+
+  @@unique([comunicazioneId, utenteId])
+  @@index([utenteId])
+}
