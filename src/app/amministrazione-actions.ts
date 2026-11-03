@@ -13,6 +13,7 @@ import {
 } from "@/lib/amministrazione/server";
 import { eur } from "@/lib/amministrazione/costanti";
 import { confermePagamentiManuali } from "@/lib/amministrazione/pagamenti";
+import { praticaDiIncasso, avanzaDopoIncasso } from "@/app/flusso-actions";
 
 function str(fd: FormData, k: string): string | null {
   const v = fd.get(k);
@@ -228,6 +229,8 @@ async function abbina(movimentoId: string, scadenzaId: string, importoRichiesto:
   await prisma.abbinamentoScadenza.create({ data: { movimentoId: m.id, scadenzaId: s.id, importo, creatoDaNome: utenteNome } });
   await ricalcolaMovimento(m.id);
   await ricalcolaScadenza(s.id);
+  const pratica = s.tipo === "INCASSO" ? await praticaDiIncasso(s.id) : null;
+  if (pratica) await avanzaDopoIncasso(pratica, m.data);
   await registra("Abbinamento", m.id, "Abbinato", `${giorno(m.data)} ${eur(m.importo)} «${m.descrizione.slice(0, 60)}» → ${s.controparte} · ${s.descrizione} (${eur(importo)})`, utenteNome);
   return null;
 }

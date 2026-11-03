@@ -83,7 +83,8 @@ export function residuoMovimento(m: { importo: number; abbinamenti: { importo: n
  */
 export async function sincronizzaScadenzeCommesse(): Promise<number> {
   const [commesse, esistenti] = await Promise.all([
-    prisma.commessa.findMany({ include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } }),
+    // le pratiche prese da BConsole incassano dalle fatture BConsole agganciate: niente rate automatiche
+    prisma.commessa.findMany({ where: { ordineBC: null }, include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } }),
     prisma.scadenza.findMany({ where: { commessaId: { not: null } }, include: { abbinamenti: true } }),
   ]);
   const mappa = new Map(esistenti.map((s) => [`${s.commessaId}|${s.origine}`, s]));
