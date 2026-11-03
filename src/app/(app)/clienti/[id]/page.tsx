@@ -21,6 +21,8 @@ import { STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
 import { eur } from "@/lib/commesse";
 import { statoOrdine } from "@/lib/ordini/calcoli";
 import { storicoBConsole } from "@/lib/clienti/storico-bconsole";
+import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
+import { puo } from "@/lib/permessi/catalogo";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -66,6 +68,10 @@ export default async function SchedaClientePage({
   const dati = await praticheCliente(utenteCorrente, cliente.id);
   const { pratiche, commesse, ordini, vediAcquisti } = dati;
   const storico = await storicoBConsole(cliente);
+  const fasiFlusso = storico.ordini.some((d) => !d.commessaId) && (puo(utenteCorrente, "amministrazione") || puo(utenteCorrente, "provvigioni"))
+    ? await prisma.flussoFase.findMany({ orderBy: { ordine: "asc" }, select: { chiave: true, nome: true, ufficio: true } })
+    : [];
+  const praticheBC = new Map((await prisma.commessa.findMany({ where: { id: { in: storico.ordini.map((d) => d.commessaId).filter((x): x is string => !!x) } }, select: { id: true, numero: true, anno: true } })).map((c) => [c.id, `C${c.anno}-${String(c.numero).padStart(3, "0")}`]));
   const nStorico = storico.offerte.length + storico.ordini.length + storico.fatture.length + storico.progetti.length;
 
   const taskCommesse = commesse.filter((c) => !["CHIUSA", "LAVORI_ESEGUITI", "ANNULLATA"].includes(c.stato)).flatMap((c) => c.tasks.filter((t) => !STATI_CHIUSI.includes(t.stato)).map((t) => ({ t, c })));
@@ -488,6 +494,20 @@ export default async function SchedaClientePage({
                             </tbody>
                           </table>
                         ) : <p className="text-neutral-500">Righe non disponibili.</p>}
+                        {d.tipo === "ORDINE" && (d.commessaId ? (
+                          <p className="mt-2"><Link href={`/commesse/${d.commessaId}`} className="font-semibold text-blue-800 underline">✓ Preso in carico nel CRM: pratica {praticheBC.get(d.commessaId) ?? ""}</Link></p>
+                        ) : fasiFlusso.length > 0 ? (
+                          <form action={prendiInCaricoOrdineBC} className="mt-2 flex flex-wrap items-end gap-2 rounded-md border border-orange-200 bg-orange-50 p-2">
+                            <input type="hidden" name="docId" value={d.id} /><input type="hidden" name="ritorno" value={`/clienti/${cliente.id}?sez=bconsole`} />
+                            <label className="font-semibold">A che punto è il lavoro? Riparte da
+                              <select name="fase" defaultValue="FATT_ACCONTO" className="mt-0.5 block rounded border border-neutral-300 px-2 py-1 text-xs">
+                                {fasiFlusso.map((f) => <option key={f.chiave} value={f.chiave}>{f.nome}</option>)}
+                              </select>
+                            </label>
+                            <button className="btn-3d btn-3d-orange px-3 py-1.5 text-xs">🛠️ Prendi in carico nel CRM</button>
+                            <span className="text-[11px] text-neutral-600">Crea la pratica con le fatture BConsole del progetto{d.progetto ? ` ${d.progetto}` : ""} e manda il task all&apos;ufficio di quella fase. Se l&apos;acconto è già pagato, la «Fattura acconto» si chiude da sola.</span>
+                          </form>
+                        ) : null)}
                       </div>
                     </details>
                   ))}

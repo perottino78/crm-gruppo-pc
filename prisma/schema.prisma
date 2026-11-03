@@ -701,6 +701,8 @@ model Commessa {
   ordiniFornitore         OrdineFornitore[]
   // Avvio commessa: quando tutto il materiale è arrivato (o prelevato dal magazzino)
   materialeCompletoIl     DateTime?
+  // Pratica presa in carico da un ordine BConsole (n. ordine): incassi dalle fatture BConsole agganciate, niente rate di acconto/saldo automatiche
+  ordineBC                String?
 
   @@unique([anno, numero])
 }
@@ -1265,6 +1267,10 @@ model Scadenza {
   ritenuta         Float                 @default(0)
   // Fattura di vendita a cui appartiene l'incasso
   fatturaVenditaId String?
+  // come è stata pagata secondo BConsole (import): data, metodo, banca. I pagamenti registrati nel CRM stanno nei movimenti.
+  pagataIl         DateTime?
+  metodoPagamento  String?
+  bancaPagamento   String?
   numeroDocumento  String?
   categoria        String?
   brand            String?
@@ -1926,6 +1932,8 @@ model DocumentoBC {
   offertaRif   String?
   progetto     String?
   righe        Json?
+  // pratica del CRM creata con «Prendi in carico» da questo ordine
+  commessaId   String?
   aggiornatoIl DateTime  @updatedAt
   createdAt    DateTime  @default(now())
 

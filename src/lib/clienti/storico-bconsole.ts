@@ -10,7 +10,7 @@ export type FatturaStorico = {
 };
 export type DocumentoStorico = {
   id: string; tipo: string; numero: string; data: Date | null; riferimento: string | null; stato: string | null; imponibile: number; totale: number;
-  marchio: string | null; agente: string | null; pagamento: string | null; offertaRif: string | null; progetto: string | null;
+  marchio: string | null; agente: string | null; pagamento: string | null; offertaRif: string | null; progetto: string | null; commessaId: string | null;
   righe: { dsc: string; qta?: number | null; imponibile?: number | null; iva?: string | null }[];
 };
 export type ProgettoStorico = { numero: string; descrizione: string | null; tipologia: string | null; stato: string | null; capoProgetto: string | null; totaleOfferto: number; creatoIl: Date | null };
@@ -54,7 +54,7 @@ export async function storicoBConsole(c: { id: string; nome: string; piva?: stri
   });
   const doc = (d: (typeof documenti)[number]): DocumentoStorico => ({
     id: d.id, tipo: d.tipo, numero: d.numero, data: d.data, riferimento: d.riferimento, stato: d.stato, imponibile: d.imponibile, totale: d.totale,
-    marchio: d.marchio, agente: d.agente, pagamento: d.pagamento, offertaRif: d.offertaRif, progetto: d.progetto,
+    marchio: d.marchio, agente: d.agente, pagamento: d.pagamento, offertaRif: d.offertaRif, progetto: d.progetto, commessaId: d.commessaId,
     righe: Array.isArray(d.righe) ? (d.righe as DocumentoStorico["righe"]) : [],
   });
   const righe: FatturaStorico[] = fatture.map((f) => {

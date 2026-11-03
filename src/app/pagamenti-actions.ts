@@ -10,6 +10,7 @@ import { leggiImporto } from "@/lib/amministrazione/estratto";
 import { utenteAmministrazione, registra, eMeseChiuso, ricalcolaScadenza, residuoScadenza } from "@/lib/amministrazione/server";
 import { eur, dataIt as giorno } from "@/lib/amministrazione/costanti";
 import { controllaPagamento, nomeMetodo, METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
+import { praticaDiIncasso, avanzaDopoIncasso } from "@/app/flusso-actions";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const num = (fd: FormData, k: string) => leggiImporto(str(fd, k)) ?? 0;
@@ -79,11 +80,14 @@ export async function registraPagamento(fd: FormData) {
     }
   });
   await ricalcolaScadenza(s!.id);
+  // incasso di una pratica: la trafila dei task va avanti da sola (acconto → ufficio successivo, saldo → posa)
+  const pratica = incasso ? await praticaDiIncasso(s!.id) : null;
+  const avanzate = pratica ? await avanzaDopoIncasso(pratica, data) : [];
   const testo = `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)}${ritenuta ? ` + ritenuta ${eur(ritenuta)}` : ""} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} · ${giorno(data)}${commissione ? ` · commissione ${eur(commissione)}` : ""}`;
   await registra("Scadenza", s!.id, incasso ? "Incasso registrato" : "Pagamento registrato", `${s!.controparte} · ${s!.descrizione} — ${testo}`, u!.nome);
   aggiorna();
   revalidatePath("/commesse/[id]", "page");
-  torna(ritorno, { ok: `${testo}. ${residuo - importo - ritenuta > 0.004 ? `Resta da saldare ${eur(cent(residuo - importo - ritenuta))}.` : "Scadenza saldata."}` });
+  torna(ritorno, { ok: `${testo}. ${residuo - importo - ritenuta > 0.004 ? `Resta da saldare ${eur(cent(residuo - importo - ritenuta))}.` : "Scadenza saldata."}${avanzate.length ? ` Pratica avanzata: chiusa la fase «${avanzate.join("», «")}», task all'ufficio successivo.` : ""}` });
 }
 
 /** Annulla un pagamento registrato a mano (sbagliato): solo se l'estratto conto non l'ha ancora confermato e il mese è aperto. */

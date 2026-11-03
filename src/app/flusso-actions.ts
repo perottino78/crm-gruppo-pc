@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
-import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
+import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_CHIUSI, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
+import { residuoScadenza } from "@/lib/amministrazione/server";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -104,6 +105,49 @@ async function completa(taskId: string, stato: string) {
   }
   revalidatePath("/task");
   revalidatePath(`/commesse/${t.commessaId}`);
+}
+
+/** La pratica di una scadenza d'incasso: quella della scadenza o quella della fattura di vendita collegata. */
+export async function praticaDiIncasso(scadenzaId: string): Promise<string | null> {
+  const s = await prisma.scadenza.findUnique({ where: { id: scadenzaId }, select: { tipo: true, commessaId: true, fatturaVenditaId: true } });
+  if (!s || s.tipo !== "INCASSO") return null;
+  if (s.commessaId) return s.commessaId;
+  if (!s.fatturaVenditaId) return null;
+  return (await prisma.fatturaVendita.findUnique({ where: { id: s.fatturaVenditaId }, select: { commessaId: true } }))?.commessaId ?? null;
+}
+
+/**
+ * Incasso registrato su una pratica (scadenzario, banca o «acconto incassato» in commessa):
+ * se la pratica è ferma alla «Fattura acconto» la fase si chiude da sola e parte il task dell'ufficio successivo;
+ * se la pratica è pagata tutta e aspetta la «Fattura saldo», si chiude anche quella (parte la posa).
+ */
+export async function avanzaDopoIncasso(commessaId: string, quando: Date = new Date()): Promise<string[]> {
+  const u = await getCurrentUser();
+  if (!u) return [];
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { tasks: { where: { completatoIl: null, stato: { notIn: STATI_CHIUSI } }, orderBy: { createdAt: "asc" } } } });
+  if (!c) return [];
+  // quanto ha pagato davvero il cliente su questa pratica (scadenze della commessa e delle sue fatture di vendita)
+  const fatture = await prisma.fatturaVendita.findMany({ where: { commessaId }, select: { id: true } });
+  const scadenze = await prisma.scadenza.findMany({
+    where: { tipo: "INCASSO", stato: { notIn: ["ANNULLATA", "SOSTITUITA"] }, OR: [{ commessaId }, ...(fatture.length ? [{ fatturaVenditaId: { in: fatture.map((f) => f.id) } }] : [])] },
+    include: { abbinamenti: { select: { importo: true } } },
+  });
+  const pagato = scadenze.reduce((t, s) => t + Math.max(0, s.importo - residuoScadenza(s)), 0);
+  const giorno = quando.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
+  if (pagato > 0.5 && !c.accontoIncassato && c.accontoTipo !== "FINANZIAMENTO") {
+    await prisma.commessa.update({ where: { id: commessaId }, data: { accontoIncassato: true, accontoIncassatoIl: quando, accontoImportoIncassato: Math.round(Math.min(pagato, c.accontoImporto || pagato) * 100) / 100 } });
+  }
+  const tutto = c.totaleVendita > 0 && pagato >= c.totaleVendita - 0.5;
+  const chiuse: string[] = [];
+  for (const t of c.tasks) {
+    const daChiudere = (t.faseChiave === "FATT_ACCONTO" && (pagato > 0.5 || c.accontoIncassato)) || (t.faseChiave === "FATT_SALDO" && tutto);
+    if (!daChiudere) continue;
+    const nota = t.faseChiave === "FATT_SALDO" ? `Saldo incassato il ${giorno}: fase chiusa in automatico.` : `Acconto incassato il ${giorno}: fase chiusa in automatico.`;
+    await prisma.taskPratica.update({ where: { id: t.id }, data: { descrizione: [t.descrizione, nota].filter(Boolean).join("\n\n") } });
+    await completa(t.id, "COMPLETATO");
+    chiuse.push(t.titolo);
+  }
+  return chiuse;
 }
 
 export async function fattoTask(formData: FormData) {

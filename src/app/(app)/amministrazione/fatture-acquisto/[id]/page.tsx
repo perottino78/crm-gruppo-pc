@@ -36,6 +36,7 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
     prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, orderBy: { dataScadenza: "asc" }, include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } } }),
     f.fornitoreId ? prisma.soggetto.findUnique({ where: { id: f.fornitoreId }, select: { giorniPagamento: true } }) : Promise.resolve(null),
   ]);
+  const fileFattura = await prisma.documento.findMany({ where: { entita: "FATTURA_ACQUISTO", entitaId: f.id }, select: { id: true, nome: true, mime: true }, orderBy: [{ cartella: "asc" }, { createdAt: "asc" }] });
   const proforma = f.tipoDocumento === "PROFORMA";
   const [conti, proformaCollegata, candidateProforma, sostituitaDa] = await Promise.all([
     prisma.contoFinanziario.findMany({ where: { attivo: true }, select: { id: true, nome: true, tipo: true }, orderBy: [{ ordine: "asc" }, { nome: "asc" }] }),
@@ -64,6 +65,14 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
           <p className="text-sm text-neutral-700"><b>{f.fornitoreNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : ""} · {f.divisione ?? "società non indicata"} · {f.origine === "XML" ? "fattura elettronica" : f.origine === "PDF" ? "da PDF" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}</p>
           {(f.riferimentiOrdine || f.riferimentiDdt) && <p className="text-xs text-neutral-600">{f.riferimentiOrdine ? `Ordini citati: ${f.riferimentiOrdine}` : ""}{f.riferimentiOrdine && f.riferimentiDdt ? " · " : ""}{f.riferimentiDdt ? `DDT citati: ${f.riferimentiDdt}` : ""}</p>}
           {!f.fornitoreId && <p className="text-xs text-amber-800">Fornitore non trovato in anagrafica: sceglilo qui sotto per collegare bolle e ordini.</p>}
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            {fileFattura.map((d) => (
+              <a key={d.id} href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="btn-3d btn-3d-outline px-3 py-1 text-xs">
+                {/pdf/i.test(d.mime) ? "📄 Apri il PDF" : /xml/i.test(d.mime) ? "🧾 Fattura elettronica (XML)" : `📎 ${d.nome}`}
+              </a>
+            ))}
+            {!fileFattura.length && <span className="text-xs text-neutral-500">Nessun file della fattura: caricalo in fondo alla pagina («Documenti della fattura»).</span>}
+          </div>
         </div>
         <div className="text-right">
           <p className="text-2xl font-bold">{eur(f.totale)}</p>
@@ -201,6 +210,13 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
           <div className="space-y-3">{scadenze.map((s) => (
             <div key={s.id} className="border-t border-neutral-100 pt-2 first:border-0 first:pt-0">
               <p className="text-sm">{dataIt(s.dataScadenza)} · {eur(s.importo)} · {s.descrizione} <span className="text-xs text-neutral-600">({s.stato === "PAGATA" ? "saldata" : s.stato === "PARZIALE" ? "pagata in parte" : s.stato.toLowerCase()})</span></p>
+              {(s.pagatoManuale > 0 || s.pagataIl) && (
+                <p className="mt-1 rounded border border-green-200 bg-green-50 px-2 py-1 text-xs text-green-900">
+                  ✓ {s.pagataIl ? `Pagata il ${dataIt(s.pagataIl)}` : "Pagata"}{s.pagatoManuale > 0 ? ` · ${eur(s.pagatoManuale)}` : ""}
+                  {s.metodoPagamento ? ` · ${s.metodoPagamento}` : ""}{s.bancaPagamento ? ` · banca: ${s.bancaPagamento}` : ""}
+                  {!s.pagataIl && !s.metodoPagamento && s.note ? ` · ${s.note}` : ""}
+                </p>
+              )}
               {s.stato !== "ANNULLATA" && <RegistraPagamento conti={contiOrdinati} ritorno={`/amministrazione/fatture-acquisto/${f.id}`} metodoSuggerito={f.modoPagamento}
                 scadenza={{ id: s.id, tipo: s.tipo, residuo: residuoScadenza(s), ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />}
             </div>

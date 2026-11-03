@@ -206,6 +206,18 @@ login nel `matcher` del middleware.
   `ProgettoBC`; in sola lettura. Offerte e ordini clienti BConsole del 2026 in `DocumentoBC` (id `OFF|<id>`/`ORD|<id>`, righe in JSON,
   offerta di partenza e progetto), agganciati al cliente con `indiceClienti` (n. anagrafica, email, telefono, nome in qualsiasi ordine); import
   rilanciabile da rotta `api/admin/importa-documenti-bconsole` (dati da `bc/estrai-off.js` + `bc/prepara-documenti.py` in scratchpad).
+- **Trafila task dagli incassi** (`avanzaDopoIncasso` / `praticaDiIncasso` in `src/app/flusso-actions.ts`): ogni incasso su una pratica
+  (`registraPagamento`, abbinamento di un movimento di banca, «acconto incassato» in commessa; anche su fatture di vendita agganciate alla
+  commessa) segna l'acconto incassato e chiude da solo il task aperto «Fattura acconto» (poi «Fattura saldo» quando è pagato tutto):
+  `completa()` crea il task dell'ufficio successivo. Collaudo `trafila-incassi`.
+- **Presa in carico dei lavori BConsole** (`prendiInCaricoOrdineBC` in `commesse-actions.ts`, pulsante nello «Storico BConsole» degli ordini,
+  solo amministrazione/fatturazione): dall'ordine `DocumentoBC` nascono offerta confermata (righe in testo libero) e commessa
+  (`Commessa.ordineBC`, `DocumentoBC.commessaId`), si agganciano le fatture BConsole dello stesso progetto e parte il task della fase scelta.
+  Le commesse con `ordineBC` non hanno rate acconto/saldo automatiche (`sincronizzaScadenzeCommesse` le salta): gli incassi sono quelli delle fatture.
+- **File e pagamenti delle fatture d'acquisto BConsole** (`src/lib/amministrazione/file-acquisti-bconsole.ts`, rotta
+  `api/admin/importa-file-acquisti-bconsole`, dati da `bc/estrai-ffo.js` + `bc/prepara-file-acquisti.py`): XML della fattura elettronica, PDF
+  allegati in BConsole e PDF dentro l'XML come `Documento` (cartella «Fattura»), e per ogni rata `Scadenza.pagataIl/metodoPagamento/bancaPagamento`
+  (solo se vuoti). Nella fattura: pulsanti «Apri il PDF» / «Fattura elettronica (XML)» in alto e «✓ Pagata il … · metodo · banca» nel Pagamento.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
@@ -218,7 +230,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

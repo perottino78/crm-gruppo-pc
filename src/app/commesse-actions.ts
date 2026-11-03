@@ -7,7 +7,7 @@ import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { avviaFaseFlusso, fattoTask } from "@/app/flusso-actions";
+import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso } from "@/app/flusso-actions";
 import { datiAcquisto } from "@/lib/ordini/server";
 
 function str(fd: FormData, key: string): string | null {
@@ -216,6 +216,7 @@ export async function registraIncassoAcconto(formData: FormData) {
   });
   await log(id, `Acconto incassato: ${importo.toFixed(2)} €${modalita ? " (" + modalita + ")" : ""}. Rilievo sbloccato.`);
   await ricalcolaStato(id);
+  await avanzaDopoIncasso(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
 }
@@ -923,4 +924,81 @@ export async function aggiornaAssistenza(formData: FormData) {
   if (stato !== prima.stato) await log(prima.commessaId, `Assistenza #${prima.numero}: ${prima.stato} → ${stato} (${u.nome}).`);
   revalidatePath(`/commesse/${prima.commessaId}`);
   revalidatePath("/assistenza");
+}
+
+// ── Presa in carico di un lavoro iniziato in BConsole ─────────────────────────
+// Dall'ordine cliente BConsole (DocumentoBC) nasce l'offerta (già confermata, con le righe dell'ordine) e la pratica:
+// si agganciano le fatture BConsole dello stesso progetto (gli incassi arrivano da lì, niente rate automatiche)
+// e la trafila dei task riparte dalla fase scelta (es. «Evasione ordini»).
+const STATO_PER_FASE: Record<string, string> = {
+  ACCETTAZIONE: "IN_ATTESA_ACCONTO", FATT_ACCONTO: "IN_ATTESA_ACCONTO", RILIEVO: "RILIEVO_DA_PROGRAMMARE", ORDINI: "ORDINI", FATT_SALDO: "ORDINI", POSA: "POSA",
+};
+
+export async function prendiInCaricoOrdineBC(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const { puo } = await import("@/lib/permessi/catalogo");
+  const docId = str(formData, "docId") ?? "";
+  const fase = str(formData, "fase") ?? "FATT_ACCONTO";
+  const ritorno = str(formData, "ritorno") ?? "/clienti";
+  const dove = (p: Record<string, string>) => redirect(`${ritorno}${ritorno.includes("?") ? "&" : "?"}${new URLSearchParams(p)}`);
+  // la presa in carico la fa l'ufficio (amministrazione / fatturazione), non tecnici o posatori
+  if (!puo(u, "amministrazione") && !puo(u, "provvigioni")) dove({ errore: "Non hai il permesso di prendere in carico i lavori di BConsole" });
+  const d = await prisma.documentoBC.findUnique({ where: { id: docId } });
+  if (!d || d.tipo !== "ORDINE") dove({ errore: "Ordine BConsole non trovato" });
+  if (d!.commessaId) redirect(`/commesse/${d!.commessaId}`);
+  if (!d!.clienteId) dove({ errore: "L'ordine non è collegato a un cliente del CRM" });
+  await assicuraFlusso();
+  const f = await prisma.flussoFase.findUnique({ where: { chiave: fase } });
+  if (!f) dove({ errore: "Fase non valida" });
+  const cliente = (await prisma.cliente.findUnique({ where: { id: d!.clienteId! } }))!;
+
+  // commerciale dalla sigla BConsole, marchio dal nome
+  const { SIGLE_COMMERCIALI } = await import("@/lib/clienti/bconsole");
+  const username = d!.agente ? SIGLE_COMMERCIALI[d!.agente.toUpperCase()] : undefined;
+  const commerciale = (username && (await prisma.utente.findFirst({ where: { username } }))) || u;
+  const brand = (d!.marchio && (await prisma.brand.findFirst({ where: { nome: { equals: d!.marchio, mode: "insensitive" } } }))) || { id: cliente.brandId };
+  const righe = (Array.isArray(d!.righe) ? d!.righe : []) as { dsc?: string; qta?: number | null; imponibile?: number | null }[];
+  const imponibile = d!.imponibile || righe.reduce((t, r) => t + (r.imponibile ?? 0), 0);
+  const totale = d!.totale || imponibile;
+
+  // fatture BConsole dello stesso progetto (non ancora agganciate ad altre pratiche)
+  const fatture = d!.progetto
+    ? await prisma.fatturaVendita.findMany({ where: { progetto: d!.progetto, commessaId: null } })
+    : [];
+  const scadenze = fatture.length ? await prisma.scadenza.findMany({ where: { tipo: "INCASSO", fatturaVenditaId: { in: fatture.map((x) => x.id) } }, include: { abbinamenti: true } }) : [];
+  const { residuoScadenza } = await import("@/lib/amministrazione/server");
+  const pagato = scadenze.filter((s) => !["ANNULLATA", "SOSTITUITA"].includes(s.stato)).reduce((t, s) => t + Math.max(0, s.importo - residuoScadenza(s)), 0);
+  const acconto = fatture.filter((x) => /acconto/i.test(`${x.descrizione ?? ""} ${x.causale ?? ""}`)).reduce((t, x) => t + x.totale, 0);
+  const finanziamento = /finanz/i.test(d!.pagamento ?? "");
+
+  const p = await prisma.preventivo.create({
+    data: {
+      clienteId: cliente.id, brandId: brand.id, commercialeId: commerciale.id, stato: "ACCETTATO", confermatoIl: new Date(),
+      oggetto: [d!.riferimento, `ordine BConsole n. ${d!.numero}${d!.offertaRif ? `, offerta ${d!.offertaRif}` : ""}`].filter(Boolean).join(" · ").slice(0, 300),
+      totaleNetto: Math.round(imponibile * 100) / 100, totaleIva: Math.round(Math.max(0, totale - imponibile) * 100) / 100,
+      righe: { create: (righe.length ? righe : [{ dsc: d!.riferimento ?? `Ordine BConsole ${d!.numero}`, qta: 1, imponibile }]).map((r, i) => ({
+        testoLibero: (r.dsc || "—").slice(0, 2000), quantita: Math.max(1, Math.round(r.qta ?? 1)), prezzoUnitario: Math.round(((r.imponibile ?? 0) / Math.max(1, Math.round(r.qta ?? 1))) * 100) / 100, ordine: i,
+      })) },
+    },
+  });
+  const anno = new Date().getFullYear();
+  const ultimo = await prisma.commessa.findFirst({ where: { anno }, orderBy: { numero: "desc" } });
+  const c = await prisma.commessa.create({
+    data: {
+      numero: (ultimo?.numero ?? 0) + 1, anno, preventivoId: p.id, clienteId: cliente.id, brandId: brand.id, responsabileId: commerciale.id,
+      totaleVendita: Math.round(totale * 100) / 100, totaleImponibile: Math.round(imponibile * 100) / 100,
+      accontoTipo: finanziamento ? "FINANZIAMENTO" : "ACCONTO", accontoPercentuale: totale > 0 ? Math.round((acconto / totale) * 100) : 0, accontoImporto: Math.round(acconto * 100) / 100,
+      accontoIncassato: pagato > 0.5, accontoIncassatoIl: pagato > 0.5 ? new Date() : null, accontoImportoIncassato: pagato > 0.5 ? Math.round(pagato * 100) / 100 : null,
+      finanziamentoStato: finanziamento ? "APPROVATO" : null, stato: STATO_PER_FASE[fase] ?? "IN_ATTESA_ACCONTO", ordineBC: d!.numero,
+    },
+  });
+  if (fatture.length) await prisma.fatturaVendita.updateMany({ where: { id: { in: fatture.map((x) => x.id) } }, data: { commessaId: c.id } });
+  await prisma.documentoBC.update({ where: { id: d!.id }, data: { commessaId: c.id } });
+  await creaFasiStandard(c.id);
+  await log(c.id, `Pratica presa in carico da BConsole (ordine n. ${d!.numero}${d!.progetto ? `, progetto ${d!.progetto}` : ""}) da ${u.nome}. ${fatture.length ? `Fatture agganciate: ${fatture.map((x) => x.numero).join(", ")} (pagato ${pagato.toFixed(2)} €).` : "Nessuna fattura BConsole agganciata."} Si riparte dalla fase «${f!.nome}».`);
+  await avviaFaseFlusso(c.id, fase, null, u.nome);
+  if (fase === "FATT_ACCONTO" || fase === "FATT_SALDO") await avanzaDopoIncasso(c.id);
+  revalidatePath(`/clienti/${cliente.id}`);
+  redirect(`/commesse/${c.id}?ok=${encodeURIComponent(`Pratica presa in carico da BConsole: il task è passato a ${f!.nome}`)}`);
 }
