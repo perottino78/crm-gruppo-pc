@@ -23,6 +23,13 @@ export default async function DashboardPage({
     prisma.lead.count({ where: { fase: { in: FASI_APERTE }, ...brandFiltro, ...leadScope } }),
   ]);
 
+  // comunicazioni del team non lette o con un task ancora da fare
+  const comunicazioni = utente ? await prisma.comunicazioneDestinatario.findMany({
+    where: { utenteId: utente.id, OR: [{ lettaIl: null }, { fattoIl: null, comunicazione: { conTask: true } }] },
+    include: { comunicazione: { select: { oggetto: true, titoloTask: true, conTask: true, mittenteNome: true } } },
+    orderBy: { createdAt: "desc" }, take: 5,
+  }) : [];
+
   const taskAperti = await prisma.taskPratica.count({
     where: { stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] }, ...(utente?.ufficio ? { ufficio: utente.ufficio } : {}) },
   });
@@ -40,6 +47,17 @@ export default async function DashboardPage({
         <h1 className="text-2xl font-bold text-neutral-900">Dashboard</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+
+      {comunicazioni.length > 0 && (
+        <a href="/comunicazioni" className="block bg-white rounded-lg border border-neutral-200 border-l-4 border-l-orange-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
+          <span className="text-sm font-extrabold text-neutral-900">💬 Dal team: {comunicazioni.length} {comunicazioni.length === 1 ? "comunicazione da vedere" : "comunicazioni da vedere"}</span>
+          {comunicazioni.map((r) => (
+            <span key={r.id} className="block truncate text-xs text-neutral-700">
+              {r.comunicazione.conTask ? `📌 ${r.comunicazione.titoloTask}` : `✉️ ${r.comunicazione.oggetto.replace(/\{[a-z_]+\}/g, "")}`} <span className="text-neutral-400">· {r.comunicazione.mittenteNome}</span>
+            </span>
+          ))}
+        </a>
+      )}
 
       <a href="/task" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-green-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
         <span className="text-sm font-extrabold text-neutral-900">✅ Task pratiche aperti{utente?.ufficio ? " per il tuo ufficio" : ""}</span>
