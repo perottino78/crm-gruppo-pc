@@ -17,6 +17,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/calendario", label: "Calendario", icon: "📅" },
   { href: "/task", label: "Task pratiche", icon: "✅" },
   { href: "/commesse", label: "Commesse", icon: "🛠️" },
+  { href: "/contratti", label: "Contratti e provvigioni", icon: "💼" },
   { href: "/ordini-fornitori", label: "Ordini fornitori", icon: "🚚", soloOrdini: true },
   { href: "/magazzino", label: "Magazzino", icon: "🏬", soloOrdini: true },
   { href: "/lavori", label: "Lavori / squadre", icon: "🔧" },
