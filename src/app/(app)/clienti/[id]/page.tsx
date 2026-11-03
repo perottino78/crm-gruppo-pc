@@ -66,7 +66,7 @@ export default async function SchedaClientePage({
   const dati = await praticheCliente(utenteCorrente, cliente.id);
   const { pratiche, commesse, ordini, vediAcquisti } = dati;
   const storico = await storicoBConsole(cliente);
-  const nStorico = storico.fatture.length + storico.progetti.length;
+  const nStorico = storico.offerte.length + storico.ordini.length + storico.fatture.length + storico.progetti.length;
 
   const taskCommesse = commesse.filter((c) => !["CHIUSA", "LAVORI_ESEGUITI", "ANNULLATA"].includes(c.stato)).flatMap((c) => c.tasks.filter((t) => !STATI_CHIUSI.includes(t.stato)).map((t) => ({ t, c })));
   const taskAttivita = cliente.attivita.filter((a) => a.tipo === "TASK" && !a.completata);
@@ -239,7 +239,7 @@ export default async function SchedaClientePage({
           <div className="space-y-4">
             {nStorico > 0 && pratiche.length === 0 && (
               <Link href={href("bconsole")} className="block rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm hover:border-stone-500">
-                📚 In BConsole questo cliente ha <b>{storico.fatture.length} fatture</b> e <b>{storico.progetti.length} progetti</b>
+                📚 In BConsole questo cliente ha <b>{storico.offerte.length} offerte</b>, <b>{storico.ordini.length} ordini</b> e <b>{storico.fatture.length} fatture</b>
                 {storico.totali.fatturato ? <> per {eur(storico.totali.fatturato)}</> : null}: <span className="underline">vedi lo storico BConsole</span>
               </Link>
             )}
@@ -451,12 +451,49 @@ export default async function SchedaClientePage({
         {/* ── Storico BConsole ── */}
         {sez === "bconsole" && (
           <div className="space-y-4">
-            <p className="text-xs text-neutral-600">Dati portati da BConsole (fatture di vendita del 2026 e progetti/commesse). Sono in sola lettura: il lavoro nuovo si fa nelle offerte e pratiche del CRM.</p>
+            <p className="text-xs text-neutral-600">Dati portati da BConsole (offerte, ordini e fatture del 2026, progetti/commesse). Sono in sola lettura: il lavoro nuovo si fa nelle offerte e pratiche del CRM.</p>
             <div className="grid grid-cols-3 gap-2 [&>*]:min-w-0">
               {([["Fatturato", storico.totali.fatturato], ["Pagato", storico.totali.incassato], ["Da incassare", storico.totali.residuo]] as const).map(([t, v]) => (
                 <div key={t} className="rounded-lg border border-neutral-200 bg-white px-3 py-2"><p className="text-xs text-neutral-600">{t}</p><p className="truncate text-lg font-extrabold">{eur(v)}</p></div>
               ))}
             </div>
+            {([["📄 Offerte BConsole", storico.offerte], ["🤝 Ordini clienti BConsole", storico.ordini]] as const).map(([titolo, elenco]) => elenco.length > 0 && (
+              <div key={titolo} className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+                <p className="border-b border-neutral-100 px-4 py-2 text-sm font-bold">{titolo}</p>
+                <div className="divide-y divide-neutral-100">
+                  {elenco.map((d) => (
+                    <details key={d.id} className="group">
+                      <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-0.5 px-4 py-1.5 text-sm hover:bg-neutral-50 md:grid md:grid-cols-[110px_90px_minmax(0,1fr)_110px_110px] md:gap-2">
+                        <span className="font-semibold"><span className="mr-1 inline-block text-neutral-400 transition-transform group-open:rotate-90">▶</span>{d.numero}</span>
+                        <span className="tabular-nums">{d.data ? d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "—"}</span>
+                        <span className="truncate">{[d.riferimento, d.marchio].filter(Boolean).join(" · ") || "—"}</span>
+                        <span className="text-xs text-neutral-600">{d.stato ?? "—"}</span>
+                        <span className="text-right tabular-nums">{eur(d.totale || d.imponibile)}</span>
+                      </summary>
+                      <div className="bg-neutral-50/70 px-4 pb-3 pt-1 text-xs">
+                        <p className="mb-1 text-neutral-600">
+                          {[d.agente && `venditore ${d.agente}`, d.pagamento && `pagamento: ${d.pagamento}`, d.offertaRif && `dall'offerta ${d.offertaRif}`, d.progetto && `progetto ${d.progetto}`, `imponibile ${eur(d.imponibile)}`].filter(Boolean).join(" · ")}
+                        </p>
+                        {d.righe.length > 0 ? (
+                          <table className="w-full">
+                            <tbody>
+                              {d.righe.map((r, i) => (
+                                <tr key={i} className="border-t border-neutral-200 align-top">
+                                  <td className="py-1 pr-2 whitespace-pre-line">{r.dsc}</td>
+                                  <td className="py-1 pr-2 text-right tabular-nums">{r.qta ?? ""}</td>
+                                  <td className="py-1 pr-2 text-right tabular-nums">{r.imponibile ? eur(r.imponibile) : ""}</td>
+                                  <td className="py-1 text-right">{r.iva ?? ""}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        ) : <p className="text-neutral-500">Righe non disponibili.</p>}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            ))}
             {storico.progetti.length > 0 && (
               <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
                 <p className="border-b border-neutral-100 px-4 py-2 text-sm font-bold">📁 Progetti / commesse BConsole</p>

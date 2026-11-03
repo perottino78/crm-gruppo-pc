@@ -1905,3 +1905,30 @@ model ComunicazioneDestinatario {
   @@unique([comunicazioneId, utenteId])
   @@index([utenteId])
 }
+
+// Offerte e ordini clienti di BConsole (storico in sola lettura, nella scheda cliente). id = "OFF|<id BConsole>" | "ORD|<id BConsole>".
+model DocumentoBC {
+  id           String    @id
+  tipo         String // OFFERTA | ORDINE
+  numero       String
+  data         DateTime?
+  clienteId    String?
+  clienteNome  String
+  idana        String?
+  agente       String?
+  riferimento  String?
+  stato        String?
+  imponibile   Float     @default(0)
+  totale       Float     @default(0)
+  marchio      String?
+  pagamento    String?
+  // per gli ordini: offerta di partenza ("763/2026") e progetto BConsole ("708/26")
+  offertaRif   String?
+  progetto     String?
+  righe        Json?
+  aggiornatoIl DateTime  @updatedAt
+  createdAt    DateTime  @default(now())
+
+  @@index([clienteId])
+  @@index([clienteNome])
+}
