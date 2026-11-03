@@ -14,7 +14,7 @@ export const AREE: { area: string; voci: [Permesso, string][] }[] = [
   { area: "Lavori e assistenza", voci: [["lavori", "Lavori e squadre"], ["assistenza", "Assistenza"]] },
   { area: "Prodotti", voci: [["prodotti", "Prodotti e listini (consultare)"], ["articoli", "Articoli dei fornitori"], ["listini.modifica", "Caricare listini e articoli, applicare aumenti"]] },
   { area: "Marketing", voci: [["marketing", "Pagina Marketing"], ["campagne", "Campagne email"], ["automazioni", "Email automatiche e loro testi"], ["pubblicita", "Lead da pubblicità e pagine di atterraggio"]] },
-  { area: "Amministrazione", voci: [["amministrazione", "Amministrazione: banche, fatture, scadenze"], ["report", "Report: fatturato, margini, cassa"]] },
+  { area: "Amministrazione", voci: [["amministrazione", "Amministrazione: banche, fatture, scadenze"], ["report", "Report: fatturato, margini, cassa"], ["provvigioni", "Provvigioni: controllare i contratti, inserire e liquidare le provvigioni"]] },
   { area: "Team", voci: [["team", "Team e performance"], ["utenti.crea", "Aggiungere nuovi colleghi"], ["firme", "Firme email di tutti i colleghi"], ["archivio", "Archivio file"]] },
 ];
 export const TUTTI_PERMESSI: Permesso[] = AREE.flatMap((a) => a.voci.map((v) => v[0]));
@@ -35,7 +35,8 @@ export function permessiPredefiniti(ruolo: string, ufficio?: string | null): Per
   const p = new Set<Permesso>(BASE);
   if (ruolo !== "COMMERCIALE") { p.add("ordini"); p.add("magazzino"); p.add("articoli"); }
   if (!["COMMERCIALE", "POSATORE"].includes(ruolo)) p.add("calendario.tutti");
-  if (ruolo === "AMMINISTRATIVO") { p.add("amministrazione"); p.add("report"); }
+  if (ruolo === "AMMINISTRATIVO") { p.add("amministrazione"); p.add("report"); p.add("provvigioni"); }
+  if (ufficio === "FATTURAZIONE" || ufficio === "AMMINISTRAZIONE") p.add("provvigioni");
   if (ruolo === "MARKETING" || ufficio === "MARKETING") MARKETING.forEach((x) => p.add(x));
   return TUTTI_PERMESSI.filter((x) => p.has(x));
 }
@@ -70,7 +71,7 @@ export function visibilitaDi(u: ConPermessi | null | undefined): Visibilita {
 const PAGINE: [string, Permesso][] = [
   ["/impostazioni/automazioni", "automazioni"], ["/impostazioni/lead", "pubblicita"], ["/marketing/email", "automazioni"],
   ["/prodotti/aumenti", "listini.modifica"], ["/prodotti/articoli", "articoli"], ["/prodotti", "prodotti"],
-  ["/lead", "lead"], ["/clienti", "clienti"], ["/preventivi", "preventivi"], ["/commesse", "commesse"], ["/task", "task"],
+  ["/lead", "lead"], ["/clienti", "clienti"], ["/preventivi", "preventivi"], ["/contratti", "preventivi"], ["/commesse", "commesse"], ["/task", "task"],
   ["/calendario", "calendario"], ["/ordini-fornitori", "ordini"], ["/magazzino", "magazzino"], ["/lavori", "lavori"],
   ["/assistenza", "assistenza"], ["/marketing", "marketing"], ["/campagne", "campagne"], ["/amministrazione", "amministrazione"],
   ["/report", "report"], ["/commerciali", "team"], ["/archivio", "archivio"],

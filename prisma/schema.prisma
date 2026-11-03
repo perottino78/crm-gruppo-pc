@@ -31,64 +31,67 @@ model Brand {
 }
 
 model Utente {
-  id                   String            @id @default(cuid())
-  nome                 String
-  email                String            @unique
-  ruolo                String
+  id                     String            @id @default(cuid())
+  nome                   String
+  email                  String            @unique
+  ruolo                  String
   // Credenziali di accesso al CRM. Username nullable per compatibilità con gli utenti creati
   // prima dell'introduzione del login (vanno attivati impostando username+password da Impostazioni).
   // Senza passwordHash l'utente non può accedere.
-  username             String?           @unique
-  passwordHash         String?
+  username               String?           @unique
+  passwordHash           String?
   // Telefono di contatto mostrato nella stampa dell'offerta come riferimento commerciale.
-  telefono             String?
+  telefono               String?
   // Firma delle email (righe di testo, o HTML incollato): vuota = firma pronta dai dati della scheda (src/lib/mail/firma.ts)
-  firmaEmail           String?
+  firmaEmail             String?
+  // Provvigione abituale del commerciale (%): la fatturazione la trova già scritta quando controlla un contratto
+  provvigionePercentuale Float?
+  provvigioni            Provvigione[]
   // Ufficio di appartenenza (COMMERCIALE | FATTURAZIONE | TECNICO | ORDINI | POSA | AMMINISTRAZIONE): determina quali task di pratica vede
-  ufficio              String?
+  ufficio                String?
   // Accesso Solaris Studio: null=nessun accesso, COMMERCIALE=solo propri clienti (no costi acquisto), TECNICO=tutti i progetti (no prezzi)
-  solarisRuolo         String?
+  solarisRuolo           String?
   // Se true, al login successivo l'utente deve impostare una nuova password (es. dopo un reset
   // amministratore con password temporanea).
-  mustChangePassword   Boolean           @default(true)
+  mustChangePassword     Boolean           @default(true)
   // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
-  calendarioToken      String?
+  calendarioToken        String?
   // ATTIVO | PAUSA (assente per un periodo) | DISATTIVATO (ha lasciato l'azienda). Chi non è attivo non entra nel CRM
   // e non compare nelle tendine per assegnare lavoro nuovo; i suoi dati (offerte, clienti, storico) restano.
-  stato                String            @default("ATTIVO")
-  statoDal             DateTime?
-  statoNota            String?
+  stato                  String            @default("ATTIVO")
+  statoDal               DateTime?
+  statoNota              String?
   // Casella email personale: le email ai clienti mandate a nome di questa persona partono da qui.
   // La password è cifrata (src/lib/mail/caselle.ts), mai salvata in chiaro. Server e porta vuoti = quelli aziendali.
-  smtpUtente           String?
-  smtpPassword         String?
-  smtpHost             String?
-  smtpPorta            Int?
-  smtpVerificataIl     DateTime?
-  smtpErrore           String?
+  smtpUtente             String?
+  smtpPassword           String?
+  smtpHost               String?
+  smtpPorta              Int?
+  smtpVerificataIl       DateTime?
+  smtpErrore             String?
   // Ruoli e permessi (Impostazioni › Ruoli e permessi, come i Gruppi di BConsole): profilo assegnato e copia dei suoi
   // permessi e della visibilità dei dati (PROPRI | ZONA | TUTTI). Senza profilo valgono i permessi predefiniti del ruolo.
-  profiloId            String?
-  permessi             String[]          @default([])
-  visibilita           String?
+  profiloId              String?
+  permessi               String[]          @default([])
+  visibilita             String?
   // Zona commerciale (Piemonte, Liguria…) e responsabile del proprio ufficio (es. Rocco per il Marketing)
-  zonaId               String?
-  responsabileUfficio  Boolean           @default(false)
+  zonaId                 String?
+  responsabileUfficio    Boolean           @default(false)
   // Calcolati dalle zone: province e colleghi i cui dati vede chi ha visibilità ZONA
-  visibileProvince     String[]          @default([])
-  visibileUtenti       String[]          @default([])
-  createdAt            DateTime          @default(now())
-  leadAssegnati        Lead[]
-  appuntamenti         Appuntamento[]
-  preventivi           Preventivo[]
-  attivita             Attivita[]
-  obiettivi            Obiettivo[]
-  clientiResponsabile  Cliente[]         @relation("ResponsabileCliente")
+  visibileProvince       String[]          @default([])
+  visibileUtenti         String[]          @default([])
+  createdAt              DateTime          @default(now())
+  leadAssegnati          Lead[]
+  appuntamenti           Appuntamento[]
+  preventivi             Preventivo[]
+  attivita               Attivita[]
+  obiettivi              Obiettivo[]
+  clientiResponsabile    Cliente[]         @relation("ResponsabileCliente")
   // Listini/brand per cui questo utente è autorizzato a operare (assegnati dall'amministratore)
-  brandAutorizzati     Brand[]           @relation("PermessoListino")
-  commesseResponsabile Commessa[]        @relation("ResponsabileCommessa")
-  rilieviAssegnati     Rilievo[]
-  solarisProgetti      SolarisProgetto[]
+  brandAutorizzati       Brand[]           @relation("PermessoListino")
+  commesseResponsabile   Commessa[]        @relation("ResponsabileCommessa")
+  rilieviAssegnati       Rilievo[]
+  solarisProgetti        SolarisProgetto[]
 }
 
 model Lead {
@@ -1829,4 +1832,42 @@ model EmailOfferta {
   createdAt    DateTime   @default(now())
 
   @@index([preventivoId])
+}
+
+// Provvigione del commerciale su un contratto: la inserisce l'ufficio fatturazione quando controlla il contratto.
+// contratto = "C:<id commessa>" | "BC:<numero progetto BConsole>" | "FV:<id fattura di vendita>" (src/lib/provvigioni/).
+model Provvigione {
+  id            String                    @id @default(cuid())
+  contratto     String
+  utente        Utente                    @relation(fields: [utenteId], references: [id])
+  utenteId      String
+  commessaId    String?
+  clienteNome   String
+  descrizione   String?
+  base          Float
+  percentuale   Float
+  importo       Float
+  note          String?
+  controllataDa String?
+  controllataIl DateTime                  @default(now())
+  liquidazioni  LiquidazioneProvvigione[]
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+
+  @@unique([contratto, utenteId])
+  @@index([utenteId])
+}
+
+// Provvigione pagata al commerciale (anche in più volte).
+model LiquidazioneProvvigione {
+  id            String      @id @default(cuid())
+  provvigione   Provvigione @relation(fields: [provvigioneId], references: [id], onDelete: Cascade)
+  provvigioneId String
+  importo       Float
+  data          DateTime
+  note          String?
+  registrataDa  String?
+  createdAt     DateTime    @default(now())
+
+  @@index([provvigioneId])
 }

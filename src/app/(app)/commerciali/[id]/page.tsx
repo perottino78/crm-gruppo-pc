@@ -102,6 +102,7 @@ export default async function SchedaCommercialePage({
           {utente.stato !== "ATTIVO" && <span className={`text-xs px-2 py-1 rounded-full ${statoUtente(utente.stato).classe}`}>{statoUtente(utente.stato).nome}</span>}
           <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600">{utente.ruolo}</span>
         </span>
+        <Link href={`/contratti?persona=${utente.id}`} className="btn-3d btn-3d-purple text-xs px-3 py-1.5">💼 Contratti e provvigioni</Link>
       </div>
       <p className="text-sm text-neutral-600 mb-6">{utente.email} · in squadra dal {utente.createdAt.toLocaleDateString("it-IT")}</p>
       {msg.ok && <p className="mb-3 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
