@@ -201,6 +201,9 @@ login nel `matcher` del middleware.
   `{password}` `{link}`…, modello pronto «Invito a scaricare P&C ONE», prova a sé stessi, e facoltativo un task per ognuno (`Comunicazione` +
   `ComunicazioneDestinatario`: inviata/letta/fatto). Password provvisoria nuova (`{password}`) solo per l'amministratore: cambiata solo se l'email
   parte, mai quella di chi manda, mai salvata nello storico, `mustChangePassword`. Le ricevute (e i task) le vede ognuno in «💬 Comunicazioni» e sulla Dashboard.
+- **Storico BConsole nella scheda cliente** (sezione «Storico BConsole», `src/lib/clienti/storico-bconsole.ts`): fatture di vendita importate
+  (per `clienteId`, codice fiscale/P.IVA o nome anche rovesciato «COGNOME NOME», `variantiNome`) con pagato/da incassare dalle scadenze, e progetti
+  `ProgettoBC`; in sola lettura. Offerte e conferme d'ordine di BConsole NON sono ancora importate (serve l'accesso a BConsole).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
@@ -213,7 +216,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
