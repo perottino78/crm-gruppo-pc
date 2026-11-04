@@ -218,6 +218,9 @@ login nel `matcher` del middleware.
   `api/admin/importa-file-acquisti-bconsole`, dati da `bc/estrai-ffo.js` + `bc/prepara-file-acquisti.py`): XML della fattura elettronica, PDF
   allegati in BConsole e PDF dentro l'XML come `Documento` (cartella «Fattura»), e per ogni rata `Scadenza.pagataIl/metodoPagamento/bancaPagamento`
   (solo se vuoti). Nella fattura: pulsanti «Apri il PDF» / «Fattura elettronica (XML)» in alto e «✓ Pagata il … · metodo · banca» nel Pagamento.
+- **Foto di rilievi e pose**: salvate come data URI (`RilievoAllegato`, `PosaFoto`) ma servite da `GET /api/foto/<rilievo|posa>/<id>` (solo utenti
+  collegati): la pagina della commessa NON deve mai includere i data URI (con poche foto superava il limite di Vercel e non si apriva).
+  `FotoRilievo` riduce a 1280 px JPEG 0,7 e tiene ogni invio sotto ~3,4 MB (limite richieste Vercel 4,5 MB).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi

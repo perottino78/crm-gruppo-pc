@@ -59,14 +59,14 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       brand: true,
       preventivo: true,
       responsabile: true,
-      rilievi: { include: { tecnico: true, allegati: true }, orderBy: { dataOra: "desc" } },
+      rilievi: { include: { tecnico: true, allegati: { select: { id: true, nome: true } } }, orderBy: { dataOra: "desc" } },
       eventi: { orderBy: { createdAt: "desc" } },
       fasi: { orderBy: { ordine: "asc" } },
       tasks: { orderBy: { createdAt: "desc" } },
       righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true } } } },
       costiManuali: { orderBy: { data: "asc" } },
       assistenze: { orderBy: { createdAt: "desc" } },
-      pose: { include: { foto: { orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
+      pose: { include: { foto: { select: { id: true, nome: true, categoria: true }, orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
     },
   });
   if (!c) notFound();
@@ -334,9 +334,9 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                   {r.allegati.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {r.allegati.map((a) => (
-                        <a key={a.id} href={a.dataUri} target="_blank" rel="noreferrer">
+                        <a key={a.id} href={`/api/foto/rilievo/${a.id}`} target="_blank" rel="noreferrer">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={a.dataUri} alt={a.nome ?? "foto rilievo"} className="h-24 w-24 object-cover rounded border border-neutral-300" />
+                          <img src={`/api/foto/rilievo/${a.id}`} loading="lazy" alt={a.nome ?? "foto rilievo"} className="h-24 w-24 object-cover rounded border border-neutral-300" />
                         </a>
                       ))}
                     </div>
@@ -647,9 +647,9 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
               {p.foto.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {p.foto.map((f) => (
-                    <a key={f.id} href={f.dataUri} target="_blank" rel="noreferrer" className="relative">
+                    <a key={f.id} href={`/api/foto/posa/${f.id}`} target="_blank" rel="noreferrer" className="relative">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={f.dataUri} alt={f.nome ?? "foto posa"} className="h-20 w-20 object-cover rounded border border-neutral-300" />
+                      <img src={`/api/foto/posa/${f.id}`} loading="lazy" alt={f.nome ?? "foto posa"} className="h-20 w-20 object-cover rounded border border-neutral-300" />
                       <span className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[9px] text-center">{f.categoria.toLowerCase()}</span>
                     </a>
                   ))}
