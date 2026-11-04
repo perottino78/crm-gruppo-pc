@@ -8,7 +8,9 @@ export default function FotoRilievo({ name }: { name: string }) {
   const [errore, setErrore] = useState<string | null>(null);
   const [caricamento, setCaricamento] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
-  const MAX_LATO = 1400;
+  // foto ridotte a 1280 px: nitide per misure e dettagli, ma leggere. L'invio deve restare sotto il limite di Vercel (≈4,5 MB).
+  const MAX_LATO = 1280;
+  const MAX_INVIO = 3_400_000;
 
   function comprimi(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -28,7 +30,7 @@ export default function FotoRilievo({ name }: { name: string }) {
           canvas.width = width;
           canvas.height = height;
           canvas.getContext("2d")!.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL("image/jpeg", 0.72));
+          resolve(canvas.toDataURL("image/jpeg", 0.7));
         };
         img.src = reader.result as string;
       };
@@ -46,8 +48,13 @@ export default function FotoRilievo({ name }: { name: string }) {
       for (const f of files) nuove.push({ nome: f.name, dataUri: await comprimi(f) });
       const tot = [...foto, ...nuove].slice(0, 12);
       const peso = tot.reduce((s, x) => s + x.dataUri.length, 0);
-      if (peso > 5_000_000) setErrore("Troppe foto in un solo invio: salva e caricane altre dopo.");
-      else setFoto(tot);
+      if (peso > MAX_INVIO) {
+        // tiene quelle che ci stanno e avvisa: le altre si aggiungono con un secondo invio
+        const ok: typeof tot = []; let p = 0;
+        for (const x of tot) { if (p + x.dataUri.length > MAX_INVIO) break; ok.push(x); p += x.dataUri.length; }
+        setFoto(ok);
+        setErrore(`Troppe foto per un solo invio: ne ho tenute ${ok.length}. Salva, poi aggiungi le altre.`);
+      } else setFoto(tot);
     } catch (err) {
       setErrore(err instanceof Error ? err.message : "Errore nel caricamento");
     } finally {
