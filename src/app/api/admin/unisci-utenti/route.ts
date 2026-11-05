@@ -42,21 +42,25 @@ export async function GET(req: NextRequest) {
   if (!ok(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const nome = req.nextUrl.searchParams.get("nome") ?? "";
   const fks = await tutteLeColonne();
-  const utenti = await prisma.utente.findMany({ where: { nome: { contains: nome, mode: "insensitive" } }, select: { id: true, nome: true, username: true, email: true, ruolo: true, stato: true, passwordHash: true, mustChangePassword: true, createdAt: true } });
+  const utenti = await prisma.utente.findMany({ where: { nome: { contains: nome, mode: "insensitive" } }, select: { id: true, nome: true, username: true, email: true, ruolo: true, stato: true, passwordHash: true, mustChangePassword: true, createdAt: true, telefono: true, firmaEmail: true, smtpUtente: true, smtpPassword: true, calendarioToken: true, provvigionePercentuale: true } });
   const out = [];
-  for (const u of utenti) out.push({ ...u, passwordHash: !!u.passwordHash, dati: await conteggi(u.id, fks) });
+  for (const u of utenti) {
+    const { smtpPassword, firmaEmail, calendarioToken, ...resto } = u;
+    out.push({ ...resto, passwordHash: !!u.passwordHash, casellaCollegata: !!smtpPassword, firma: !!firmaEmail, calendario: !!calendarioToken, dati: await conteggi(u.id, fks) });
+  }
   return NextResponse.json({ utenti: out });
 }
 
 export async function POST(req: NextRequest) {
   if (!ok(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  const b = (await req.json().catch(() => ({}))) as { tieni?: string; elimina?: string; prova?: boolean };
+  const b = (await req.json().catch(() => ({}))) as { tieni?: string; elimina?: string; prova?: boolean; prendiEmail?: boolean };
   if (!b.tieni || !b.elimina || b.tieni === b.elimina) return NextResponse.json({ error: "tieni/elimina" }, { status: 400 });
   const [tieni, elimina] = await Promise.all([prisma.utente.findUnique({ where: { id: b.tieni } }), prisma.utente.findUnique({ where: { id: b.elimina } })]);
   if (!tieni || !elimina) return NextResponse.json({ error: "utente non trovato" }, { status: 404 });
   const fks = await tutteLeColonne();
   const spostati: Record<string, number> = {};
   const scartatiDoppi: Record<string, number> = {};
+  const copiati: string[] = [];
   try {
     await prisma.$transaction(async (tx) => {
       for (const f of fks) {
@@ -77,11 +81,20 @@ export async function POST(req: NextRequest) {
       await tx.$executeRawUnsafe(`update "Utente" set "visibileUtenti" = array_replace("visibileUtenti", $2, $1) where $2 = any("visibileUtenti")`, tieni.id, elimina.id);
       await tx.configurazione.updateMany({ where: { chiave: { startsWith: "lead_telefonista_" }, valore: elimina.id }, data: { valore: tieni.id } });
       await tx.utente.delete({ where: { id: elimina.id } });
+      // dati della scheda che il doppione ha e quello da tenere no (casella email, firma, telefono…); l'email solo se richiesto
+      const vuoto = (v: unknown) => v === null || v === undefined || v === "";
+      const dati: Record<string, unknown> = {};
+      for (const k of ["telefono", "firmaEmail", "provvigionePercentuale", "smtpUtente", "smtpPassword", "smtpHost", "smtpPorta", "smtpVerificataIl"] as const) {
+        if (vuoto(tieni[k]) && !vuoto(elimina[k])) dati[k] = elimina[k];
+      }
+      if (b.prendiEmail) dati.email = elimina.email;
+      if (Object.keys(dati).length) await tx.utente.update({ where: { id: tieni.id }, data: dati });
+      copiati.push(...Object.keys(dati).map((k) => (k === "smtpPassword" ? "casella email" : k)));
       if (b.prova) throw new Error("PROVA");
     }, { timeout: 60_000 });
   } catch (e) {
     if ((e as Error).message !== "PROVA") return NextResponse.json({ error: (e as Error).message.slice(0, 300) }, { status: 500 });
-    return NextResponse.json({ prova: true, tieni: tieni.nome, elimina: elimina.nome, spostati, scartatiDoppi });
+    return NextResponse.json({ prova: true, tieni: tieni.nome, elimina: elimina.nome, spostati, scartatiDoppi, copiati });
   }
-  return NextResponse.json({ fatto: true, tieni: tieni.nome, elimina: elimina.nome, spostati, scartatiDoppi });
+  return NextResponse.json({ fatto: true, tieni: tieni.nome, elimina: elimina.nome, spostati, scartatiDoppi, copiati });
 }
