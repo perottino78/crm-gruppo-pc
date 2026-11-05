@@ -26,7 +26,7 @@ export default async function RuoliPage({ searchParams }: { searchParams: Promis
   return (
     <div className="max-w-6xl space-y-5">
       <div>
-        <Link href="/impostazioni" className="text-sm text-blue-800 underline">← Impostazioni</Link>
+        <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
         <h1 className="text-2xl font-extrabold text-neutral-900">🔐 Ruoli e permessi</h1>
         <p className="text-sm text-neutral-600">
           Come i Gruppi di BConsole: ogni <b>profilo</b> dice <b>cosa</b> si può vedere e fare (le spunte) e <b>quali dati</b> (solo i propri, la propria

@@ -28,7 +28,7 @@ export default async function AnteprimaPage({ params }: { params: Promise<{ id: 
   if (imp.stato !== "ANTEPRIMA") {
     return (
       <div className="p-4 md:p-6 space-y-4 max-w-4xl">
-        <Link href="/prodotti/articoli/importa" className="text-sm text-blue-800 underline">← Importazioni</Link>
+        <Link href="/prodotti/articoli/importa" className="btn-indietro">← Importazioni</Link>
         <h1 className="text-2xl font-bold">{imp.nomeFile}</h1>
         {imp.stato === "ESEGUITA" ? (
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm space-y-1">
@@ -82,7 +82,7 @@ export default async function AnteprimaPage({ params }: { params: Promise<{ id: 
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-7xl">
       <div>
-        <Link href="/prodotti/articoli/importa" className="text-sm text-blue-800 underline">← Importazioni</Link>
+        <Link href="/prodotti/articoli/importa" className="btn-indietro">← Importazioni</Link>
         <h1 className="text-2xl font-bold text-neutral-900">Anteprima: {imp.nomeFile}</h1>
         <p className="text-sm text-neutral-600">Caricato da {imp.creataDaNome} il {imp.createdAt.toLocaleString("it-IT")}. Niente è ancora stato salvato.</p>
       </div>

@@ -34,15 +34,19 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
     : vista === "settimana" ? [lunediDi(giorno), aggiungiGiorni(lunediDi(giorno), 7)]
     : vista === "mese" ? [grigliaMese(giorno)[0], aggiungiGiorni(grigliaMese(giorno)[41], 1)]
     : [giorno, aggiungiGiorni(giorno, 30)];
-  const [eventi, utenti] = await Promise.all([
+  const [tuttiEventi, utenti] = await Promise.all([
     eventiPeriodo({ da: inizioGiorno(daK), a: inizioGiorno(aK), utenteId: filtroUtente, tipi }),
     prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true, ufficio: true, stato: true }, orderBy: { nome: "asc" } }),
   ]);
+  // gli annullati non occupano spazio: si vedono solo a richiesta (?annullati=1)
+  const conAnnullati = sp.annullati === "1";
+  const nAnnullati = tuttiEventi.filter(annullato).length;
+  const eventi = conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e));
   const clientePreset = sp.cliente ? await prisma.cliente.findUnique({ where: { id: sp.cliente }, select: { id: true, nome: true, email: true } }) : null;
 
   const qs = (o: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
-    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, ...o };
+    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, annullati: conAnnullati ? "1" : undefined, ...o };
     for (const [k, v] of Object.entries(base)) if (v) p.set(k, v);
     return `/calendario?${p.toString()}`;
   };
@@ -93,11 +97,17 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
             </Link>
           );
         })}
+        {(nAnnullati > 0 || conAnnullati) && (
+          <Link href={qs({ annullati: conAnnullati ? "" : "1" })} className="text-xs font-semibold text-neutral-600 underline">
+            {conAnnullati ? "Nascondi gli annullati" : `Mostra annullati (${nAnnullati})`}
+          </Link>
+        )}
         {tutti && (
           <form action="/calendario" className="w-full md:w-auto md:ml-auto flex items-center gap-2">
             <input type="hidden" name="vista" value={vista} />
             <input type="hidden" name="giorno" value={giorno} />
             {sp.tipi && <input type="hidden" name="tipi" value={sp.tipi} />}
+            {conAnnullati && <input type="hidden" name="annullati" value="1" />}
             <select name="persona" defaultValue={persona} className="flex-1 md:flex-none border border-neutral-300 rounded px-2 py-1.5 text-sm">
               <option value="tutti">👥 Tutto il team</option>
               <option value={u.id}>👤 Solo io</option>

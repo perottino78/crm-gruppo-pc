@@ -44,7 +44,7 @@ export default async function EmailAutomatichePage({ searchParams }: { searchPar
   return (
     <div className="max-w-6xl space-y-5">
       <div>
-        <Link href="/marketing" className="text-sm text-blue-800 underline">← Marketing</Link>
+        <Link href="/marketing" className="btn-indietro">← Marketing</Link>
         <h1 className="text-2xl font-extrabold text-neutral-900">✏️ Testi delle email automatiche</h1>
         <p className="text-sm text-neutral-600">
           Tutte le email che il CRM manda da solo durante il percorso dei lead. Apri un&apos;email, cambia oggetto e testo e salva: da quel momento

@@ -29,7 +29,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
       <div>
-        <Link href="/prodotti/articoli" className="text-sm text-blue-800 underline">← Anagrafica articoli</Link>
+        <Link href="/prodotti/articoli" className="btn-indietro">← Anagrafica articoli</Link>
         <h1 className="text-2xl font-bold text-neutral-900">🗂 Categorie e regole di prezzo</h1>
         <p className="text-sm text-neutral-600">Ogni categoria ha la sua regola. <b>Ricarico</b>: prezzo = costo × coefficiente (es. ×3,3: costo 100 € → vendita 330 €). <b>Margine</b>: prezzo = costo ÷ (1 − margine) (es. 40%: costo 60 € → vendita 100 €, e su 100 € ne guadagni 40). Le sottocategorie senza regola usano quella della categoria madre. L&apos;arrotondamento è sempre per eccesso.</p>
       </div>

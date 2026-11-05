@@ -31,7 +31,7 @@ export default async function FlussoImpostazioniPage() {
           <p className="mt-1 text-xs">Utenti senza ufficio (non ricevono gli avvisi): {ufficiSenzaEmail.map((u) => u.nome).join(", ")} — impostalo in Impostazioni › Utenti.</p>
         )}
       </div>
-      <Link href="/impostazioni" className="text-xs text-blue-700 underline">← Impostazioni</Link>
+      <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
       <h1 className="text-2xl font-extrabold text-neutral-900 mt-1 mb-1">Flusso pratiche fra uffici</h1>
       <p className="text-sm text-neutral-700 mb-1">
         Per ogni fase scegli l&apos;ufficio che la porta avanti, la fase successiva (a cui passa premendo <b>Fatto</b>), il testo del task e, se vuoi, l&apos;email.

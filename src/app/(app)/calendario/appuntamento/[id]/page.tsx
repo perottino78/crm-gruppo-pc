@@ -9,6 +9,8 @@ import { nomeTipoAppuntamento, vedeTutti, STILE_TIPO } from "@/lib/calendario/ev
 import { perInput, chiaveGiorno, giornoBreve, oraRoma } from "@/lib/calendario/tempo";
 import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido } from "@/app/calendario-actions";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
+import RisposteModulo from "@/components/lead/RisposteModulo";
+import { leggiNoteLead } from "@/lib/automazioni/note-lead";
 
 const STATI: Record<string, string> = { PROGRAMMATO: "bg-blue-100 text-blue-900", CONFERMATO: "bg-green-100 text-green-900", COMPLETATO: "bg-neutral-200 text-neutral-800", ANNULLATO: "bg-red-100 text-red-900" };
 
@@ -25,6 +27,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   const luogo = a.luogo || [a.cliente.indirizzo, [a.cliente.cap, a.cliente.comune].filter(Boolean).join(" "), a.cliente.provincia].filter(Boolean).join(", ");
   const tel = a.cliente.telefono;
   const fine = new Date(a.dataOra.getTime() + a.durataMin * 60_000);
+  const noteLette = leggiNoteLead(a.note);
   const chiuso = a.stato === "COMPLETATO" || a.stato === "ANNULLATO";
   const ritorno = `/calendario/appuntamento/${a.id}`;
   const btnStato = (stato: string, testo: string, cls: string) => (
@@ -38,7 +41,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
 
   return (
     <div className="max-w-4xl">
-      <Link href={`/calendario?giorno=${chiaveGiorno(a.dataOra)}`} className="text-xs text-neutral-600 hover:underline">← Calendario</Link>
+      <Link href={`/calendario?giorno=${chiaveGiorno(a.dataOra)}`} className="btn-indietro">← Calendario</Link>
       {msg && <p className="mt-2 rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-900">{msg}</p>}
 
       <div className="mt-2 rounded-2xl border-2 bg-white overflow-hidden" style={{ borderColor: STILE_TIPO.APPUNTAMENTO.colore }}>
@@ -56,7 +59,9 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
             <p className="text-sm text-neutral-700 mt-0.5">
               {nomeTipoAppuntamento(a.tipo)} con <Link href={`/clienti/${a.clienteId}`} className="font-bold text-blue-800 hover:underline">{a.cliente.nome}</Link> · incaricato <b>{a.utente.nome}</b>
             </p>
-            {a.note && <p className="text-sm text-neutral-800 mt-1 whitespace-pre-line">📝 {a.note}</p>}
+            {a.note && (noteLette.risposte.length > 0 || noteLette.noteDatate.length > 0
+              ? <div className="mt-2 rounded-lg bg-neutral-50 p-3"><RisposteModulo note={a.note} /></div>
+              : <p className="text-sm text-neutral-800 mt-1 whitespace-pre-line">📝 {a.note}</p>)}
             <p className="text-[11px] text-neutral-500 mt-1">
               Fissato da {a.creatoDaNome ?? "—"} · {a.invitoInviatoIl ? `invito inviato il ${a.invitoInviatoIl.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" })}` : "invito non ancora inviato"}
               {a.invitaCliente ? " · conferma anche al cliente" : ""}

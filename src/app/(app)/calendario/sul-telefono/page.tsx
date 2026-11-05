@@ -23,7 +23,7 @@ export default async function SulTelefonoPage({ searchParams }: { searchParams: 
   const passo = "rounded-xl border border-neutral-200 bg-white p-4";
   return (
     <div className="max-w-3xl">
-      <Link href="/calendario" className="text-xs text-neutral-600 hover:underline">← Calendario</Link>
+      <Link href="/calendario" className="btn-indietro">← Calendario</Link>
       <h1 className="text-2xl font-black text-neutral-900 mt-2">📱 Il calendario del CRM sul tuo telefono</h1>
       {msg && <p className="mt-3 rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-900">{msg}</p>}
       <p className="text-sm text-neutral-700 mt-1 mb-5">

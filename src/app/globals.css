@@ -119,3 +119,18 @@ body {
   text-align: center; border-bottom-width: 4px; box-shadow: 0 5px 0 rgba(0, 0, 0, 0.28);
 }
 .tile-3d:active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28); }
+
+/* Pulsante "torna indietro" ben visibile (← Calendario, ← Task di oggi…) */
+.btn-indietro {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 9999px;
+  background: #fff; color: #1e3a8a; font-weight: 800; font-size: 14px;
+  border: 2px solid #bfdbfe; box-shadow: 0 2px 0 #bfdbfe;
+}
+.btn-indietro:hover { background: #eff6ff; border-color: #93c5fd; }
+.btn-indietro:active { transform: translateY(2px); box-shadow: none; }
+
+/* Mentre un modulo sta salvando (vedi components/InvioInCorso.tsx) */
+button.sta-inviando, input.sta-inviando { opacity: 0.6; cursor: progress; pointer-events: none; }
+@keyframes barra-attesa { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+.barra-attesa { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; overflow: hidden; background: rgba(37, 99, 235, 0.15); }
+.barra-attesa::after { content: ""; position: absolute; inset: 0; width: 40%; background: #2563eb; animation: barra-attesa 1s ease-in-out infinite; }

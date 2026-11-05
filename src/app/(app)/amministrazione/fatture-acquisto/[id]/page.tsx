@@ -60,7 +60,7 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/amministrazione/fatture-acquisto" className="text-sm text-blue-800 underline">← Fatture d&apos;acquisto</Link>
+          <Link href="/amministrazione/fatture-acquisto" className="btn-indietro">← Fatture d&apos;acquisto</Link>
           <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.numero} del {dataIt(f.data)}</h2>
           <p className="text-sm text-neutral-700"><b>{f.fornitoreNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : ""} · {f.divisione ?? "società non indicata"} · {f.origine === "XML" ? "fattura elettronica" : f.origine === "PDF" ? "da PDF" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}</p>
           {(f.riferimentiOrdine || f.riferimentiDdt) && <p className="text-xs text-neutral-600">{f.riferimentiOrdine ? `Ordini citati: ${f.riferimentiOrdine}` : ""}{f.riferimentiOrdine && f.riferimentiDdt ? " · " : ""}{f.riferimentiDdt ? `DDT citati: ${f.riferimentiDdt}` : ""}</p>}

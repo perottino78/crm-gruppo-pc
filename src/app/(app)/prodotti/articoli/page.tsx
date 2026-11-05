@@ -43,7 +43,7 @@ export default async function ArticoliPage({ searchParams }: { searchParams: Pro
     <div className="p-4 md:p-6 space-y-4 max-w-7xl">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/prodotti" className="text-sm text-blue-800 underline">← Prodotti & listini</Link>
+          <Link href="/prodotti" className="btn-indietro">← Prodotti & listini</Link>
           <h1 className="text-2xl font-bold text-neutral-900">📦 Anagrafica articoli</h1>
           <p className="text-sm text-neutral-600">Catalogo a pezzo con fornitore, costo d&apos;acquisto, regola di ricarico o margine e prezzo di vendita. {totaleTutti} articoli in anagrafica.</p>
         </div>

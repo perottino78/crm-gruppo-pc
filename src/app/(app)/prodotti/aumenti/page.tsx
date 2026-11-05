@@ -62,7 +62,7 @@ export default async function AumentiListiniPage({ searchParams }: { searchParam
   return (
     <div className="p-4 md:p-6 space-y-5 max-w-6xl">
       <div>
-        <Link href="/prodotti" className="text-sm text-blue-800 underline">← Prodotti & listini</Link>
+        <Link href="/prodotti" className="btn-indietro">← Prodotti & listini</Link>
         <h1 className="text-2xl font-bold text-neutral-900">📈 Aumenti listini</h1>
         <p className="text-sm text-neutral-600">
           Quando un fornitore comunica un aumento, scegli i suoi listini, scrivi la percentuale e applicala in un colpo a:

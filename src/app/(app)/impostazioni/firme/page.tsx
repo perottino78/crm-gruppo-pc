@@ -23,7 +23,7 @@ export default async function FirmePage({ searchParams }: { searchParams: Promis
   return (
     <div className="max-w-5xl space-y-4">
       <div>
-        <Link href="/impostazioni" className="text-xs text-neutral-600 hover:underline">← Impostazioni</Link>
+        <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
         <h1 className="text-2xl font-extrabold text-neutral-900">✍️ Firme email del team</h1>
         <p className="text-sm text-neutral-600">
           La firma di ognuno va in fondo alle email che manda dal CRM (es. «Invia offerta»). Chi non ha ancora una firma usa quella pronta, fatta

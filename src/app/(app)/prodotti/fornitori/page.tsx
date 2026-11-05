@@ -43,7 +43,7 @@ export default async function FornitoriProdottiPage({ searchParams }: { searchPa
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
       <div>
-        <Link href="/prodotti" className="text-sm text-blue-800 underline">← Prodotti & listini</Link>
+        <Link href="/prodotti" className="btn-indietro">← Prodotti & listini</Link>
         <h1 className="text-2xl font-bold text-neutral-900">Fornitori dei prodotti</h1>
         <p className="text-sm text-neutral-600">A chi si ordina ogni modello del listino. Serve a compilare da solo il fornitore nelle commesse e a stimare il costo: <b>listino − sconto d&apos;acquisto</b> (se lo sconto del modello è vuoto vale quello del fornitore in anagrafica). {brand?.nome}: {assegnati} modelli su {modelli.length} hanno il fornitore.</p>
       </div>

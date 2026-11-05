@@ -38,7 +38,7 @@ export default async function InviaOffertaPage({ params, searchParams }: { param
   return (
     <div className="max-w-6xl space-y-4">
       <div>
-        <Link href={`/preventivi/${p.id}`} className="text-sm text-blue-800 underline">← Offerta n. {numero}</Link>
+        <Link href={`/preventivi/${p.id}`} className="btn-indietro">← Offerta n. {numero}</Link>
         <h1 className="text-2xl font-extrabold text-neutral-900">✉️ Invia offerta a {p.cliente.nome}</h1>
         <p className="text-sm text-neutral-600">Controlla il testo, la tua firma e gli allegati, poi premi «Invia offerta». L&apos;email resta nello storico dell&apos;offerta.</p>
       </div>

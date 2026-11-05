@@ -35,7 +35,7 @@ export default async function ImportaPage({ searchParams }: { searchParams: Prom
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-5xl">
       <div>
-        <Link href="/prodotti/articoli" className="text-sm text-blue-800 underline">← Anagrafica articoli</Link>
+        <Link href="/prodotti/articoli" className="btn-indietro">← Anagrafica articoli</Link>
         <h1 className="text-2xl font-bold text-neutral-900">⬆ Importa articoli e listini</h1>
         <p className="text-sm text-neutral-600">Prima vedi l&apos;anteprima con nuovi, modifiche (prezzo vecchio → nuovo) ed errori; niente cambia finché non confermi.</p>
       </div>

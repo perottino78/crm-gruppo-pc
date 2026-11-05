@@ -43,6 +43,8 @@ type ClientiSearchParams = {
   paese?: string;
   lead?: string;
   clienti?: string;
+  pc?: string;
+  pl?: string;
   provenienza?: string;
   stato?: string;
   commerciale?: string;
@@ -61,14 +63,23 @@ export default async function ClientiPage({
   const leadTake = quanteTake(leadMostrati);
   const clientiMostrati = leggiQuante(clientiParam);
   const clientiTake = quanteTake(clientiMostrati);
+  // pagina dell'elenco (?pc= clienti, ?pl= lead): con 10/20/50/100 per volta si va avanti e indietro
+  const pagina = (v: string | undefined) => Math.max(1, Math.floor(Number(v)) || 1);
+  const paginaClienti = clientiTake ? pagina(filtri.pc) : 1;
+  const paginaLead = leadTake ? pagina(filtri.pl) : 1;
   // Link "Mostra: 10/20/50/100/tutti" che conserva brand, ricerca e l'altra scelta.
-  const hrefQuante = (cambia: { lead?: string; clienti?: string }) => {
+  const hrefQuante = (cambia: { lead?: string; clienti?: string; pc?: number; pl?: number }) => {
     const parametri = new URLSearchParams();
     for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametri.set(k, v);
     const l = cambia.lead ?? leadMostrati;
     const c = cambia.clienti ?? clientiMostrati;
     if (l !== LEAD_DEFAULT) parametri.set("lead", l);
     if (c !== LEAD_DEFAULT) parametri.set("clienti", c);
+    // cambiando quante righe vedere si riparte dalla prima pagina
+    const pc = cambia.clienti ? 1 : cambia.pc ?? paginaClienti;
+    const pl = cambia.lead ? 1 : cambia.pl ?? paginaLead;
+    if (pc > 1) parametri.set("pc", String(pc));
+    if (pl > 1) parametri.set("pl", String(pl));
     return `/clienti${parametri.toString() ? `?${parametri.toString()}` : ""}`;
   };
   const classePulsante = (attivo: boolean) =>
@@ -105,12 +116,13 @@ export default async function ClientiPage({
 
   const leadWhere: Prisma.LeadWhereInput = { AND: [brandFiltro, leadScope, leadRicercaWhere] };
   const [clienti, clientiTotali, lead, leadTotali, brands, perProvenienza, perStato, commerciali] = await Promise.all([
-    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake, include: { brand: true, responsabile: { select: { nome: true } } } }),
+    prisma.cliente.findMany({ where: clientiWhere, orderBy: { createdAt: "desc" }, take: clientiTake, skip: clientiTake ? (paginaClienti - 1) * clientiTake : 0, include: { brand: true, responsabile: { select: { nome: true } } } }),
     prisma.cliente.count({ where: clientiWhere }),
     prisma.lead.findMany({
       where: leadWhere,
       orderBy: { createdAt: "desc" },
       take: leadTake,
+      skip: leadTake ? (paginaLead - 1) * leadTake : 0,
       include: { telefonista: true, brand: true, clienteGenerato: true },
     }),
     prisma.lead.count({ where: leadWhere }),
@@ -119,6 +131,21 @@ export default async function ClientiPage({
     prisma.cliente.groupBy({ by: ["statoLead"], where: scopeEBrand, _count: { _all: true }, orderBy: { _count: { statoLead: "desc" } } }),
     isAdmin ? prisma.utente.findMany({ where: { clientiResponsabile: { some: {} } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }) : Promise.resolve([]),
   ]);
+
+  const navigazione = (tipo: "pc" | "pl", attuale: number, perPagina: number | undefined, totale: number, mostrati: number) => {
+    if (!perPagina || totale <= perPagina) return null;
+    const pagine = Math.ceil(totale / perPagina);
+    const da = (attuale - 1) * perPagina + 1;
+    return (
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm">
+        <span className="text-neutral-600">{mostrati ? `${da}–${da + mostrati - 1}` : "0"} di {totale} · pagina {attuale} di {pagine}</span>
+        <div className="flex gap-2">
+          {attuale > 1 ? <Link href={hrefQuante({ [tipo]: attuale - 1 })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">‹ Precedenti</Link> : <span className="btn-3d btn-3d-outline px-3 py-1.5 text-sm opacity-40">‹ Precedenti</span>}
+          {attuale < pagine ? <Link href={hrefQuante({ [tipo]: attuale + 1 })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">Successivi ›</Link> : <span className="btn-3d btn-3d-outline px-3 py-1.5 text-sm opacity-40">Successivi ›</span>}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="max-w-5xl">
@@ -297,7 +324,7 @@ export default async function ClientiPage({
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Link href={`/lead?id=${l.id}`} className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-700 whitespace-nowrap">
+              <Link href={`/lead/${l.id}`} className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-700 whitespace-nowrap">
                 {FASI_LEAD[l.fase]?.nome ?? l.fase} · lavora →
               </Link>
               {!l.clienteGenerato && (
@@ -313,13 +340,14 @@ export default async function ClientiPage({
           <p className="px-4 py-6 text-sm text-neutral-600">Nessun lead ancora.</p>
         )}
       </div>
+      {leadTake && leadTotali > leadTake && <div className="-mt-6 mb-8">{navigazione("pl", paginaLead, leadTake, leadTotali, lead.length)}</div>}
 
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <h2 className="text-base font-bold text-neutral-900">
           Anagrafica clienti ({clientiTotali})
           {clienti.length < clientiTotali && (
             <span className="ml-2 text-xs font-normal text-neutral-600">
-              {ricercaAttiva ? "mostrati" : "ultimi"} {clienti.length} di {clientiTotali}
+              {ricercaAttiva || paginaClienti > 1 ? "mostrati" : "ultimi"} {clienti.length} di {clientiTotali}
             </span>
           )}
         </h2>
@@ -366,6 +394,7 @@ export default async function ClientiPage({
           <p className="px-4 py-6 text-sm text-neutral-600">Nessun cliente ancora.</p>
         )}
       </div>
+      {navigazione("pc", paginaClienti, clientiTake, clientiTotali, clienti.length)}
     </div>
   );
 }

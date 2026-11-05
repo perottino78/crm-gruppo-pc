@@ -10,8 +10,11 @@ import { BRAND_SLUGS, getLeadKey } from "@/lib/leadIngest";
 import { configPresence } from "@/lib/meta/config";
 import { prisma } from "@/lib/prisma";
 import { rigeneraChiaveLead, impostaTelefonistaBrand } from "@/app/lead-actions";
+import { passaLeadAperti } from "@/app/lead-percorso-actions";
+import { FASI_APERTE } from "@/lib/automazioni/percorsi";
 
-export default async function LeadSettings() {
+export default async function LeadSettings({ searchParams }: { searchParams: Promise<{ ok?: string; errore?: string }> }) {
+  const msg = await searchParams;
   const u = await getCurrentUser();
   if (!puo(u, "pubblicita")) redirect("/impostazioni");
   const h = await headers();
@@ -21,9 +24,13 @@ export default async function LeadSettings() {
   const presenza = configPresence();
   const [brands, telefoniste, configTel] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
-    prisma.utente.findMany({ where: { ruolo: "TELEFONISTA" }, orderBy: { nome: "asc" } }),
+    // telefoniste prima, poi gli altri attivi (chi fa il centralino può avere un altro ruolo con il profilo da telefonista)
+    prisma.utente.findMany({ where: { stato: "ATTIVO" }, orderBy: { nome: "asc" } }).then((us) => [...us.filter((x) => x.ruolo === "TELEFONISTA"), ...us.filter((x) => x.ruolo !== "TELEFONISTA" && x.ruolo !== "POSATORE")]),
     prisma.configurazione.findMany({ where: { chiave: { startsWith: "lead_telefonista_" } } }),
   ]);
+  const apertiPer = await prisma.lead.groupBy({ by: ["telefonistaId"], where: { fase: { in: FASI_APERTE } }, _count: { _all: true } });
+  const conLead = apertiPer.filter((x) => x.telefonistaId).map((x) => ({ id: x.telefonistaId!, n: x._count._all }));
+  const nomiTutti = new Map((await prisma.utente.findMany({ where: { id: { in: conLead.map((x) => x.id) } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome]));
   const telMap: Record<string, string> = Object.fromEntries(configTel.map((c) => [c.chiave.replace("lead_telefonista_", ""), c.valore]));
 
   const [conteggi, recenti] = await Promise.all([
@@ -35,7 +42,7 @@ export default async function LeadSettings() {
   return (
     <div className="max-w-4xl space-y-8">
       <div>
-        <Link href="/impostazioni" className="text-xs text-blue-600 underline">← Impostazioni</Link>
+        <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
         <h1 className="text-2xl font-bold text-neutral-900 mt-1">Lead da pubblicità online</h1>
         <p className="text-sm text-neutral-600">Tre modi per far arrivare automaticamente i nominativi nel CRM (sezione Clienti → Lead).</p>
       </div>
@@ -67,7 +74,9 @@ export default async function LeadSettings() {
         </form>
       </section>
 
-      <section className="bg-white rounded-lg border border-neutral-200 p-4">
+      {msg.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {msg.ok}</p>}
+      {msg.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{msg.errore}</p>}
+      <section id="telefoniste" className="bg-white rounded-lg border border-neutral-200 p-4 scroll-mt-4">
         <h2 className="font-bold text-neutral-900 mb-1">Telefonista di default per brand</h2>
         <p className="text-xs text-neutral-600 mb-3">
           Quando arriva un lead da Meta, Zapier o dal form del sito, viene assegnato automaticamente a questa telefonista.
@@ -87,13 +96,34 @@ export default async function LeadSettings() {
                 >
                   <option value="">— automatica (prima telefonista) —</option>
                   {telefoniste.map((t) => (
-                    <option key={t.id} value={t.id}>{t.nome}</option>
+                    <option key={t.id} value={t.id}>{t.nome}{t.ruolo === "TELEFONISTA" ? "" : ` (${t.ruolo.toLowerCase()})`}</option>
                   ))}
                 </select>
               </div>
             ))}
             <button className="mt-2 px-3 py-1 bg-neutral-900 text-white text-sm rounded hover:bg-neutral-700">Salva</button>
           </form>
+        )}
+        {conLead.length > 0 && (
+          <div className="mt-5 border-t border-neutral-200 pt-4">
+            <h3 className="text-sm font-bold text-neutral-900">Lead aperti per persona</h3>
+            <p className="text-xs text-neutral-600 mb-2">{conLead.map((x) => `${nomiTutti.get(x.id) ?? "—"}: ${x.n}`).join(" · ")}</p>
+            <form action={passaLeadAperti} className="flex flex-wrap items-end gap-2 text-sm">
+              <label className="text-xs font-semibold">Passa tutti i lead aperti di
+                <select name="da" required defaultValue="" className="block border border-neutral-200 rounded px-2 py-1 text-sm">
+                  <option value="" disabled>scegli…</option>
+                  {conLead.map((x) => <option key={x.id} value={x.id}>{nomiTutti.get(x.id) ?? x.id} ({x.n})</option>)}
+                </select>
+              </label>
+              <label className="text-xs font-semibold">a
+                <select name="a" required defaultValue="" className="block border border-neutral-200 rounded px-2 py-1 text-sm">
+                  <option value="" disabled>scegli…</option>
+                  {telefoniste.map((t) => <option key={t.id} value={t.id}>{t.nome}</option>)}
+                </select>
+              </label>
+              <button className="btn-3d btn-3d-purple px-3 py-1.5 text-xs">Passa i lead</button>
+            </form>
+          </div>
         )}
       </section>
 
