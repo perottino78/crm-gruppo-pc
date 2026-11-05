@@ -52,6 +52,9 @@ async function main() {
   d = await dove(spostaAppuntamentoA(fd({ id: a3.id, dataOra: nuova })));
   const a3b = (await prisma.appuntamento.findUnique({ where: { id: a3.id } }))!;
   verifica(a3b.dataOra.getTime() === daOraRoma(nuova)!.getTime() && a3b.titolo === "Preventivo infissi", "nuova data, resto invariato", { d, data: a3b.dataOra });
+  verifica(!a3b.invitaCliente, "senza spunta: niente conferma al cliente");
+  await dove(spostaAppuntamentoA(fd({ id: a3.id, dataOra: nuova, invitaCliente: "on" })));
+  verifica((await prisma.appuntamento.findUnique({ where: { id: a3.id } }))?.invitaCliente, "con la spunta: conferma anche al cliente");
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();

@@ -195,7 +195,8 @@ export async function spostaAppuntamentoA(formData: FormData) {
   if (a.titolo) fd.set("titolo", a.titolo);
   if (a.luogo) fd.set("luogo", a.luogo);
   if (a.note) fd.set("note", a.note);
-  if (a.invitaCliente) fd.set("invitaCliente", "on");
+  // la spunta «manda la conferma anche al cliente» accanto a «Lo rifisso io»
+  if (formData.get("invitaCliente") === "on") fd.set("invitaCliente", "on");
   return modificaAppuntamento(fd);
 }
 
