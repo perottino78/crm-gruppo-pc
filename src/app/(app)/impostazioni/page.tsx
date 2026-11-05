@@ -83,8 +83,8 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
       )}
 
       <Link href="/impostazioni/lead" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
-        <span className="text-base font-bold text-neutral-900">Lead da pubblicità online: pagine di atterraggio e collegamenti →</span>
-        <span className="block text-xs text-neutral-600">Link per le inserzioni, indirizzo per collegare il gestionale pubblicità e Meta Lead Ads.</span>
+        <span className="text-base font-bold text-neutral-900">📘 Lead da pubblicità: moduli istantanei di Meta e collegamenti →</span>
+        <span className="block text-xs text-neutral-600">Collega i moduli di Facebook e Instagram, link per le inserzioni, gestionale pubblicità, telefoniste per marchio.</span>
       </Link>
 
       <Link href="/impostazioni/automazioni" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-4 hover:border-neutral-400">

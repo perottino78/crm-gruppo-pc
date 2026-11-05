@@ -1,6 +1,6 @@
 // Esecuzione locale degli stessi handler di produzione (test end-to-end e sviluppo).
 import { createServer, type Server } from "node:http";
-import { health, replay, requeue, status, tick, webhookGET, webhookPOST, type Factory } from "./lib/handlers";
+import { health, one, replay, requeue, status, tick, webhookGET, webhookPOST, type Factory } from "./lib/handlers";
 
 export function startGateway(make: Factory, port = 0): Promise<{ server: Server; url: string }> {
   const routes: Record<string, Record<string, (r: Request) => Promise<Response> | Response>> = {
@@ -9,6 +9,7 @@ export function startGateway(make: Factory, port = 0): Promise<{ server: Server;
     "/api/internal/requeue": { POST: requeue(make) },
     "/api/internal/replay": { POST: replay(make) },
     "/api/internal/status": { GET: status(make), POST: status(make) },
+    "/api/internal/one": { POST: one(make) },
     "/api/health": { GET: health },
   };
   const server = createServer(async (req, res) => {

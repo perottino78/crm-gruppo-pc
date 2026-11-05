@@ -2,6 +2,7 @@ import { PrismaClient } from "../generated/client";
 import { loadMetaConfig } from "../../src/lib/meta/config";
 import { consoleLogger } from "../../src/lib/meta/log";
 import { makePrismaMetaStore, type MetaPrisma } from "../../src/lib/meta/prismaStoreFactory";
+import { moduliDaOne } from "./moduli-one";
 import type { Deps } from "../../src/lib/meta/service";
 
 let client: PrismaClient | undefined;
@@ -18,5 +19,6 @@ export function makeDeps(env: Record<string, string | undefined> = process.env):
     fetchImpl: fetch,
     now: () => new Date(),
     log: consoleLogger,
+    moduliExtra: () => moduliDaOne(cfg),
   };
 }
