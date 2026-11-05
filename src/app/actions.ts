@@ -1371,6 +1371,11 @@ export async function cambiaPassword(formData: FormData) {
   const t = str(formData, "torna");
   const torna = t && /^\/[A-Za-z]?/.test(t) && !t.startsWith("//") ? t : "/profilo";
   const errore = (m: string) => redirect(`${torna}${torna.includes("?") ? "&" : "?"}errore=${encodeURIComponent(m)}`);
+  // dalla finestra del primo accesso ma la password è già stata cambiata (es. doppio invio): niente errore, si entra
+  if (str(formData, "finestra") === "1" && !utente!.mustChangePassword) {
+    revalidatePath("/", "layout");
+    redirect(torna);
+  }
 
   if (!nuovaPassword || nuovaPassword.length < (utente!.mustChangePassword ? 8 : 6)) {
     errore(`La nuova password deve avere almeno ${utente!.mustChangePassword ? 8 : 6} caratteri`);
@@ -1392,6 +1397,8 @@ export async function cambiaPassword(formData: FormData) {
     where: { id: utente!.id },
     data: { passwordHash, mustChangePassword: false },
   });
+  // ricarica tutto il CRM (anche la cornice con la finestra), altrimenti la finestra resterebbe aperta
+  revalidatePath("/", "layout");
   redirect(torna === "/profilo" ? "/profilo?ok=1" : torna);
 }
 
