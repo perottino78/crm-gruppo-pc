@@ -235,9 +235,13 @@ export default async function ClientiPage({
         </div>
       </form>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
-        <form action={creaLead} className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-base font-bold text-neutral-900 mb-3">Nuovo lead</h2>
+      {/* nuovo lead / nuovo cliente: pulsanti a bandiera, il modulo si apre solo premendo */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 items-start">
+        <details className="group">
+          <summary className="btn-3d btn-3d-orange flex cursor-pointer list-none items-center justify-between px-4 py-2.5 text-sm [&::-webkit-details-marker]:hidden">
+            <span>➕ Nuovo lead</span><span className="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+        <form action={creaLead} className="mt-2 bg-white rounded-lg border border-neutral-200 p-4">
           <div className="flex flex-col gap-2">
             <input name="nome" placeholder="Nome" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
@@ -254,9 +258,13 @@ export default async function ClientiPage({
             <button className="btn-3d btn-3d-orange text-sm px-4 py-2 mt-1">Crea lead</button>
           </div>
         </form>
+        </details>
 
-        <form action={creaCliente} className="bg-white rounded-lg border border-neutral-200 p-4">
-          <h2 className="text-base font-bold text-neutral-900 mb-3">Nuovo cliente</h2>
+        <details className="group">
+          <summary className="btn-3d btn-3d-teal flex cursor-pointer list-none items-center justify-between px-4 py-2.5 text-sm [&::-webkit-details-marker]:hidden">
+            <span>➕ Nuovo cliente</span><span className="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+        <form action={creaCliente} className="mt-2 bg-white rounded-lg border border-neutral-200 p-4">
           <div className="flex flex-col gap-2">
             <input name="nome" placeholder="Nome / ragione sociale" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input name="telefono" placeholder="Telefono" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
@@ -286,6 +294,7 @@ export default async function ClientiPage({
             <button className="btn-3d btn-3d-teal text-sm px-4 py-2 mt-1">Crea cliente</button>
           </div>
         </form>
+        </details>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
@@ -310,7 +319,7 @@ export default async function ClientiPage({
         {lead.map((l) => (
           <div key={l.id} className="flex items-center justify-between px-4 py-3 text-sm gap-3">
             <div>
-              <p className="font-medium">{l.nome}</p>
+              <p className="text-base font-bold text-neutral-900">{l.nome}</p>
               <p className="text-xs text-neutral-800">
                 🕒 Arrivato il {arrivoLead(l.createdAt)}
               </p>
@@ -369,7 +378,7 @@ export default async function ClientiPage({
             className="flex items-center justify-between px-4 py-3 text-sm hover:bg-neutral-50"
           >
             <div>
-              <p className="font-medium">{c.nome}</p>
+              <p className="text-base font-bold text-neutral-900">{c.nome}</p>
               <p className="text-xs text-neutral-600">
                 {[c.telefono, c.email].filter(Boolean).join(" · ")}
               </p>
