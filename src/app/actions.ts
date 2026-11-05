@@ -917,9 +917,21 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
   const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : 1;
   const prezzoUnitario = prezzoStr ? parseFloat(prezzoStr) : prodotto.prezzoBase;
 
-  await prisma.rigaPreventivo.create({
-    data: { preventivoId, prodottoId, quantita, prezzoUnitario },
+  // Porte interne Isomax: 70 e 80 cm di luce netta sono standard; 60 e 90 cm aggiungono da sole la maggiorazione del listino
+  const luce = Number(str(formData, "luceNetta") ?? "");
+  const isomax = prodotto.tipologia.startsWith("ISOMAX_") && [60, 70, 80, 90].includes(luce);
+  const riga = await prisma.rigaPreventivo.create({
+    data: { preventivoId, prodottoId, quantita, prezzoUnitario, ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : {}) },
   });
+  if (isomax && (luce === 60 || luce === 90)) {
+    const opt = await prisma.optional.findFirst({
+      where: { categoria: "Maggiorazione taglio/luce netta", nome: { startsWith: luce === 60 ? "Riduzione a 60" : "Allargamento a 90" } },
+    });
+    if (opt) {
+      const prezzo = opt.tipoPrezzo === "PERCENTUALE" ? Math.round(quantita * prezzoUnitario * (opt.valore / 100) * 100) / 100 : opt.valore;
+      await prisma.rigaOptional.create({ data: { rigaId: riga.id, optionalId: opt.id, quantita: 1, prezzoUnitario: prezzo, nota: `Luce netta ${luce} cm` } });
+    }
+  }
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

@@ -2103,6 +2103,14 @@ export default function SelettoreProdotto({
                   <input type="hidden" name="preventivoId" value={preventivoId} />
                   <input type="hidden" name="prodottoId" value={v.id} />
                   <span className="text-xs flex-1">{v.colore} — {v.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
+                  {scelto.value.startsWith("ISOMAX_") && (
+                    <select name="luceNetta" defaultValue="80" aria-label="Larghezza luce netta" title="70 e 80 cm sono standard; 60 e 90 cm aggiungono la maggiorazione" className="border border-neutral-200 rounded px-1.5 py-1 text-xs">
+                      <option value="70">70 × 210 (standard)</option>
+                      <option value="80">80 × 210 (standard)</option>
+                      <option value="60">60 × 210 (+ maggiorazione)</option>
+                      <option value="90">90 × 210 (+ maggiorazione)</option>
+                    </select>
+                  )}
                   <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ aggiungi</button>
                 </form>
