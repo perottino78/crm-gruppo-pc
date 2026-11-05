@@ -16,9 +16,9 @@ import { leggiNoteLead } from "@/lib/automazioni/note-lead";
 
 const STATI: Record<string, string> = { PROGRAMMATO: "bg-blue-100 text-blue-900", CONFERMATO: "bg-green-100 text-green-900", COMPLETATO: "bg-neutral-200 text-neutral-800", ANNULLATO: "bg-red-100 text-red-900" };
 
-export default async function AppuntamentoPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ msg?: string }> }) {
+export default async function AppuntamentoPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ msg?: string; modifica?: string }> }) {
   const { id } = await params;
-  const { msg } = await searchParams;
+  const { msg, modifica } = await searchParams;
   const u = await getCurrentUser();
   if (!u) return null;
   const a = await prisma.appuntamento.findUnique({ where: { id }, include: { cliente: true, utente: true } });
@@ -86,7 +86,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
             <input type="hidden" name="ritorno" value={ritorno} />
             <button className="btn-3d tile-3d btn-3d-purple"><span className="text-xl">📨</span><span>Rimanda invito</span></button>
           </form>
-          <a href="#modifica" className="btn-3d tile-3d btn-3d-outline"><span className="text-xl">✎</span><span>Modifica</span></a>
+          <Link href={modifica ? ritorno : `${ritorno}?modifica=1#modifica`} scroll={!modifica} className="btn-3d tile-3d btn-3d-outline"><span className="text-xl">✎</span><span>{modifica ? "Chiudi modifica" : "Modifica"}</span></Link>
         </div>
         {luogo && <p className="px-5 pb-4 text-sm text-neutral-700">📍 {luogo}</p>}
       </div>
@@ -122,6 +122,10 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
                 <label className="text-[11px] font-bold text-neutral-700">Nuovo giorno e ora
                   <input type="datetime-local" name="dataOra" required defaultValue={perInput(a.dataOra)} className="mt-0.5 w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
                 </label>
+                <label className="flex items-start gap-2 text-xs text-neutral-800">
+                  <input type="checkbox" name="invitaCliente" defaultChecked={a.invitaCliente && !!a.cliente.email} disabled={!a.cliente.email} className="mt-0.5" />
+                  <span>✉️ Manda la conferma anche al cliente{!a.cliente.email && <span className="text-red-700"> (cliente senza email)</span>}</span>
+                </label>
                 <button className="btn-3d btn-3d-blue px-4 py-2 text-sm">↪ Sposta l&apos;appuntamento</button>
               </form>
               <div className="flex flex-wrap gap-1">
@@ -132,7 +136,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
                   </form>
                 ))}
               </div>
-              <p className="text-[11px] text-neutral-600">L&apos;invito aggiornato parte da solo.</p>
+              <p className="text-[11px] text-neutral-600">L&apos;invito aggiornato parte da solo a {a.utente.nome.split(" ")[0]}.</p>
             </div>
             <div className="flex flex-wrap gap-2 md:col-span-3">
               {a.stato !== "CONFERMATO" && btnStato("CONFERMATO", "👍 Confermato dal cliente (prima di andare)", "btn-3d-outline")}
@@ -144,13 +148,19 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
         )}
       </section>
 
+      {/* modifica completa (tipo, incaricato, luogo, note): solo dal pulsante «Modifica», per i casi rari */}
+      {modifica && (
       <section id="modifica" className="card-fase mt-5 scroll-mt-4" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
-        <h2 className="mb-3">✎ Modifica o sposta</h2>
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <h2>✎ Modifica l&apos;appuntamento</h2>
+          <Link href={ritorno} scroll={false} className="text-xs font-bold text-neutral-600 underline">✕ chiudi</Link>
+        </div>
         <FormAppuntamento
           utenti={utenti} utenteId={a.utenteId} puoAssegnare={tutti} data={perInput(a.dataOra)} cliente={{ id: a.clienteId, nome: a.cliente.nome, email: a.cliente.email }}
           esistente={a} ritorno={ritorno} mailAttiva={await mailConfigurata()}
         />
       </section>
+      )}
     </div>
   );
 }
