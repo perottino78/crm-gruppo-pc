@@ -5,8 +5,9 @@ import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { prisma } from "@/lib/prisma";
-import { aggiornaModulo, pulisciCatalogo, type CatalogoMeta } from "@/lib/meta/moduli";
-import { catalogo, cfgConModuli, chiediAlGateway, importaLeadDaGraph, moduliCollegati, salvaCatalogo, salvaIndirizzoGateway, salvaModuli } from "@/lib/meta/moduli-server";
+import { aggiornaModulo, marchioDaNome, pulisciCatalogo, spiegaErrore, type CatalogoMeta } from "@/lib/meta/moduli";
+import { catalogo, cfgConModuli, chiediAlGateway, importaLeadDaGraph, moduliCollegati, pagineCollegate, salvaCatalogo, salvaIndirizzoGateway, salvaModuli, salvaPagine } from "@/lib/meta/moduli-server";
+import { loadMetaConfig } from "@/lib/meta/config";
 import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
 import type { GraphLead } from "@/lib/meta/types";
 
@@ -63,14 +64,55 @@ export async function recuperaLeadModuloMeta(fd: FormData) {
   if (!/^\d{5,25}$/.test(formId)) vai({ errore: "ID del modulo non valido." });
   const cfg = await cfgConModuli();
   if (!cfg.allowedFormIds.includes(formId)) vai({ errore: "Prima collega il modulo, poi recupera i lead." });
-  const r = await chiediAlGateway<{ leads?: GraphLead[] }>({ azione: "lead", form_id: formId, giorni }, 55_000);
-  if (!r.ok) vai({ errore: `Lead non recuperati: ${r.errore}` });
-  const leads = ((r as { dati: { leads?: GraphLead[] } }).dati.leads ?? []).filter((l) => l && typeof l.id === "string" && Array.isArray(l.field_data));
   const pageId = (await catalogo())?.pagine.find((p) => p.moduli.some((m) => m.id === formId))?.id;
+  const r = await chiediAlGateway<{ leads?: GraphLead[] }>({ azione: "lead", form_id: formId, giorni, page_id: pageId }, 55_000);
+  if (!r.ok) vai({ errore: `Lead non recuperati: ${spiegaErrore((r as { errore: string }).errore) || (r as { errore: string }).errore}` });
+  const leads = ((r as { dati: { leads?: GraphLead[] } }).dati.leads ?? []).filter((l) => l && typeof l.id === "string" && Array.isArray(l.field_data));
   const brand = cfg.formBrands[formId] ?? (pageId ? cfg.pageBrands[pageId] : undefined) ?? cfg.defaultBrand;
   const esito = await importaLeadDaGraph(leads, formId, brand);
   if (esito.nuovi) eseguiDopoRisposta();
   revalidatePath(PAGINA);
   revalidatePath("/lead");
   vai({ ok: `Ultimi ${giorni} giorni: ${leads.length} lead in Meta · ${esito.nuovi} nuovi in P&C ONE · ${esito.gia} c'erano già${esito.scartati ? ` · ${esito.scartati} senza telefono/email` : ""}.` });
+}
+
+/** Chiave incollata (generata nello strumento di Meta): il gateway ne ricava le chiavi senza scadenza delle pagine, salvate cifrate. */
+export async function collegaChiaveMeta(fd: FormData) {
+  const u = await gestore();
+  const token = str(fd, "chiave").replace(/\s+/g, "");
+  if (token.length < 20) vai({ errore: "Incolla la chiave copiata da Meta (è un testo lungo)." });
+  const r = await chiediAlGateway<{ pagine?: { id: string; nome: string; token: string }[]; lunga?: boolean }>({ azione: "chiave", token });
+  if (!r.ok) vai({ errore: `Chiave non accettata: ${spiegaErrore((r as { errore: string }).errore) || (r as { errore: string }).errore}` });
+  const pagine = ((r as { dati: { pagine?: { id: string; nome: string; token: string }[] } }).dati.pagine ?? []).filter((p) => /^\d+$/.test(p.id) && p.token);
+  if (!pagine.length) vai({ errore: "La chiave non dà accesso a nessuna pagina." });
+  const env = loadMetaConfig();
+  const marchi = (await prisma.brand.findMany({ select: { nome: true } })).map((b) => b.nome);
+  const gia = new Map((await pagineCollegate()).map((p) => [p.id, p]));
+  await salvaPagine(pagine.map((p) => ({ id: p.id, nome: p.nome, tokenChiaro: p.token, brand: gia.get(p.id)?.brand ?? env.pageBrands[p.id] ?? marchioDaNome(p.nome, marchi, env.defaultBrand) })));
+  revalidatePath(PAGINA);
+  void u;
+  vai({ ok: `Chiave salvata per ${pagine.length} ${pagine.length === 1 ? "pagina" : "pagine"}: ${pagine.map((p) => p.nome).join(", ")}. Tra un minuto premi «Aggiorna l'elenco da Meta».` });
+}
+
+/** Attiva l'arrivo dei lead di una pagina (iscrizione dell'app alla pagina su Meta). */
+export async function attivaLeadPaginaMeta(fd: FormData) {
+  await gestore();
+  const pageId = str(fd, "pageId");
+  if (!/^\d+$/.test(pageId)) vai({ errore: "Pagina non valida." });
+  const r = await chiediAlGateway({ azione: "iscrivi", page_id: pageId });
+  if (!r.ok) vai({ errore: (r as { errore: string }).errore === "chiave_pagina_mancante" ? "Prima incolla la chiave di Meta che comprende questa pagina." : `Non attivato: ${spiegaErrore((r as { errore: string }).errore) || (r as { errore: string }).errore}` });
+  revalidatePath(PAGINA);
+  vai({ ok: "Arrivo dei lead attivato per la pagina: tra 5 minuti l'elenco lo conferma. Fai un lead di prova." });
+}
+
+/** Marchio di base di una pagina collegata (i suoi moduli lo propongono quando si collegano). */
+export async function marchioPaginaMeta(fd: FormData) {
+  await gestore();
+  const pageId = str(fd, "pageId");
+  const brand = str(fd, "brand");
+  const p = (await pagineCollegate()).find((x) => x.id === pageId);
+  if (!p || !(await prisma.brand.findFirst({ where: { nome: brand } }))) vai({ errore: "Pagina o marchio non validi." });
+  await salvaPagine([{ ...p!, brand }]);
+  revalidatePath(PAGINA);
+  vai({ ok: `Pagina ${p!.nome}: marchio di base ${brand}.` });
 }

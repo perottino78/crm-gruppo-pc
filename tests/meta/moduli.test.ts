@@ -60,7 +60,7 @@ test("catalogo ripulito, scartati contati, errori spiegati", () => {
   let s = annotaScartato({}, { formId: NUOVO, pageId: T.pageId }, new Date("2026-11-05T10:00:00Z"));
   s = annotaScartato(s, { formId: NUOVO, pageId: T.pageId }, new Date("2026-11-05T11:00:00Z"));
   assert.equal(s[NUOVO].n, 2);
-  assert.match(spiegaErrore("graph_400_c190"), /token/);
+  assert.match(spiegaErrore("graph_400_c190"), /chiave/);
   assert.match(spiegaErrore("graph_403_c200"), /Accesso ai lead/);
 });
 
@@ -125,7 +125,7 @@ test("gateway → ONE: richiesta firmata con il segreto di ONE, risposta ricorda
     return json(200, { ok: true, moduli: [NUOVO, "x"], pagine: ["107076085330590"] });
   }) as unknown as typeof fetch;
   const lista = await moduliDaOne(gatewayCfg(), f, { catalogo: { pagine: [] } });
-  assert.deepEqual(lista, { moduli: [NUOVO], pagine: ["107076085330590"] });
+  assert.deepEqual(lista, { moduli: [NUOVO], pagine: ["107076085330590"], token: {} });
   assert.equal(viste[0].url, "https://one.example.test/api/lead/meta/moduli");
   assert.ok(viste[0].ok, "firmata con il segreto di ONE");
   assert.deepEqual((await moduliDaOne(gatewayCfg(), (async () => { throw new Error("giù"); }) as unknown as typeof fetch))?.moduli, [NUOVO], "dalla memoria");
@@ -162,4 +162,84 @@ test("ONE: evento di un modulo non collegato annotato come scartato (per poterlo
   const r = await handleInternalEvent({ raw: Buffer.from(corpo), timestamp: hh.ts, signature: hh.sig }, deps);
   assert.equal(r.status, 200);
   assert.deepEqual(visti, [NUOVO]);
+});
+
+// ============================================================ chiavi delle pagine (Solaris senza toccare Vercel)
+import { chiaviPagineDa, iscriviPagina } from "../../src/lib/meta/graph";
+import { marchioDaNome, leggiPagine } from "../../src/lib/meta/moduli";
+import { processDelivery } from "../../src/lib/meta/service";
+
+test("chiave utente incollata: scambio con chiave lunga e chiavi delle pagine; nessuna chiave nell'URL tranne lo scambio previsto da Meta", async () => {
+  const urls: string[] = [];
+  const f = (async (u: string, init: RequestInit) => {
+    urls.push(u);
+    const auth = String((init.headers as Record<string, string>).Authorization ?? "");
+    if (u.includes("/oauth/access_token")) return json(200, { access_token: "LUNGA_utente_finta_0123456789" });
+    if (u.includes("/me/accounts")) {
+      assert.ok(auth.includes("LUNGA_utente_finta"), "le pagine si leggono con la chiave lunga");
+      return json(200, { data: [{ id: T.pageId, name: "Gruppo P&C", access_token: "PAGINA_pec_finta_0123456789" }, { id: "107076085330590", name: "Solaris Energia", access_token: "PAGINA_sol_finta_0123456789" }] });
+    }
+    if (u.includes("/app?")) return json(200, { id: "1842181417134760" });
+    return json(200, { id: "99999", name: "Ugo" });
+  }) as unknown as typeof fetch;
+  const r = await chiaviPagineDa("UTENTE_breve_finta_0123456789", cfg(), f);
+  assert.ok(r.ok);
+  if (r.ok) {
+    assert.equal(r.lunga, true);
+    assert.deepEqual(r.pagine.map((p) => [p.id, p.nome]), [[T.pageId, "Gruppo P&C"], ["107076085330590", "Solaris Energia"]]);
+  }
+  assert.ok(urls.filter((u) => !u.includes("/oauth/")).every((u) => !u.includes("finta")), "chiavi solo nell'intestazione");
+  assert.equal((await chiaviPagineDa("corta", cfg(), f)).ok, false);
+  const altra = (async (u: string) => (u.includes("/app?") ? json(200, { id: "123" }) : json(200, { id: "1" }))) as unknown as typeof fetch;
+  const ko = await chiaviPagineDa("UTENTE_breve_finta_0123456789", cfg(), altra);
+  assert.ok(!ko.ok && ko.code === "app_diversa", "chiave di un'altra app rifiutata");
+});
+
+test("attivazione lead della pagina e lettura del lead con la chiave della sua pagina", async () => {
+  let viste = "";
+  const ok = await iscriviPagina("107076085330590", "PAGINA_sol_finta_0123456789", cfg(), (async (u: string, init: RequestInit) => { viste = `${init.method} ${u}`; return json(200, { success: true }); }) as unknown as typeof fetch);
+  assert.ok(ok.ok);
+  assert.match(viste, /^POST .*\/107076085330590\/subscribed_apps\?subscribed_fields=leadgen/);
+  // processDelivery usa la chiave della pagina del lead
+  const { deps } = makeDeps({ config: gatewayCfg(), fetchImpl: async (u, init) => {
+    if (u.startsWith("https://graph.facebook.com")) {
+      assert.ok(String((init.headers as Record<string, string>).Authorization).includes("PAGINA_sol"), "chiave della pagina Solaris");
+      return json(200, graphLead({ form_id: NUOVO }));
+    }
+    return json(200, {});
+  } });
+  deps.moduliExtra = async () => ({ moduli: [NUOVO], pagine: ["107076085330590"] });
+  deps.tokenPagina = async (p) => (p === "107076085330590" ? "PAGINA_sol_finta_0123456789" : undefined);
+  const raw = rawOf(notification({ pageId: "107076085330590", formId: NUOVO }));
+  const r = await handleNotification({ raw, signature: signed(raw) }, deps);
+  assert.equal(await processDelivery(deps, r.toProcess[0]), "processed");
+});
+
+test("pagine collegate dal CRM nella configurazione, marchio proposto dal nome", () => {
+  const u = unisciModuli(cfg(), [], [{ id: "107076085330590", nome: "Solaris", brand: "Solaris" }]);
+  assert.deepEqual(u.pageIds, [T.pageId, "107076085330590"]);
+  assert.equal(u.pageBrands["107076085330590"], "Solaris");
+  assert.equal(marchioDaNome("Solaris Energia srl", ["P&C", "Solaris", "PTC"], "P&C"), "Solaris");
+  assert.equal(marchioDaNome("Gruppo P&C", ["P&C", "Solaris"], "P&C"), "P&C");
+  assert.deepEqual(leggiPagine('[{"id":"x"},{"id":"107076085330590","nome":"S"}]').map((p) => p.id), ["107076085330590"]);
+});
+
+test("gateway: «chiave» restituisce le chiavi delle pagine, «iscrivi» usa la chiave della pagina avuta da ONE", async () => {
+  ricordaModuli(null);
+  const graph = async (u: string, init: RequestInit) => {
+    if (u.includes("/api/lead/meta/moduli")) return json(200, { ok: true, moduli: [], pagine: ["107076085330590"], token: { "107076085330590": "PAGINA_sol_finta_0123456789" } });
+    if (u.includes("/oauth/access_token")) return json(200, { access_token: "LUNGA_utente_finta_0123456789" });
+    if (u.includes("/me/accounts")) return json(200, { data: [{ id: "107076085330590", name: "Solaris", access_token: "PAGINA_sol_finta_0123456789" }] });
+    if (u.includes("/subscribed_apps") && init.method === "POST") return json(200, { success: true });
+    if (u.includes("/app?")) return json(200, { id: "1842181417134760" });
+    return json(200, { id: "1", name: "Ugo" });
+  };
+  const make = () => makeDeps({ config: gatewayCfg(), fetchImpl: graph }).deps;
+  const h = one(make);
+  const chiedi = (corpo: unknown) => { const testo = JSON.stringify(corpo); return h(new Request("https://gw.example.test/api/internal/one", { method: "POST", headers: intestazioniFirmate(T.crmBSecret, testo), body: testo })); };
+  const c = await (await chiedi({ azione: "chiave", token: "UTENTE_breve_finta_0123456789" })).json();
+  assert.equal(c.pagine[0].id, "107076085330590");
+  assert.equal((await chiedi({ azione: "iscrivi", page_id: "107076085330590" })).status, 200);
+  ricordaModuli(null);
+  assert.equal((await chiedi({ azione: "iscrivi", page_id: "555" })).status, 400, "senza chiave della pagina");
 });

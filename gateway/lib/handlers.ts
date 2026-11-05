@@ -1,7 +1,7 @@
 import { authorizeScheduler } from "../../src/lib/meta/schedulerAuth";
 import { MAX_PAYLOAD_BYTES } from "../../src/lib/meta/parse";
 import { handleNotification, handleVerification, pollLeads, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
-import { fetchFormLeads, fetchIdentita, fetchPageForms, fetchPageSubscription } from "../../src/lib/meta/graph";
+import { chiaviPagineDa, fetchFormLeads, fetchIdentita, fetchPageForms, fetchPageSubscription, iscriviPagina } from "../../src/lib/meta/graph";
 import { destinatarioOne, firmaValida, type CatalogoMeta } from "../../src/lib/meta/moduli";
 import { moduliDaOne } from "./moduli-one";
 
@@ -103,14 +103,19 @@ export const health = () => j(200, { ok: true });
 // -------- Moduli istantanei: elenco letto da Meta e lead di un modulo, per P&C ONE (Impostazioni › Lead)
 const indirizzoGateway = (req: Request) => (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : new URL(req.url).origin);
 
-/** Pagine da leggere: quelle delle variabili del gateway + quelle che conosce P&C ONE. */
-async function tuttePagine(deps: Deps): Promise<string[]> {
+/** Pagine da leggere (variabili del gateway + quelle che conosce P&C ONE) con la chiave di ciascuna, se incollata in ONE. */
+async function tuttePagine(deps: Deps): Promise<{ ids: string[]; token: Record<string, string> }> {
   const daOne = await moduliDaOne(deps.cfg, deps.fetchImpl).catch(() => null);
-  return [...new Set([...deps.cfg.pageIds, ...(daOne?.pagine ?? [])])];
+  return { ids: [...new Set([...deps.cfg.pageIds, ...(daOne?.pagine ?? [])])], token: daOne?.token ?? {} };
 }
 export async function leggiCatalogo(deps: Deps): Promise<CatalogoMeta> {
   const pagine = [];
-  for (const id of await tuttePagine(deps)) pagine.push(await fetchPageForms(id, deps.cfg, deps.fetchImpl));
+  const { ids, token } = await tuttePagine(deps);
+  for (const id of ids) {
+    const p = await fetchPageForms(id, deps.cfg, deps.fetchImpl, token[id]);
+    const isc = await fetchPageSubscription(id, deps.cfg, deps.fetchImpl, token[id]);
+    pagine.push({ ...p, iscritta: isc.iscritta, nome: p.nome ?? isc.nome });
+  }
   return { lettoIl: deps.now().toISOString(), pagine };
 }
 async function inviaCatalogo(deps: Deps, gateway: string): Promise<boolean> {
@@ -125,12 +130,27 @@ export function one(make: Factory) {
     const dest = destinatarioOne(deps.cfg);
     const corpo = await req.text();
     if (!dest || !firmaValida([dest.secret], req.headers.get("x-gpc-timestamp"), req.headers.get("x-gpc-signature"), corpo)) return j(401, { ok: false });
-    let b: { azione?: unknown; form_id?: unknown; giorni?: unknown };
+    let b: { azione?: unknown; form_id?: unknown; giorni?: unknown; token?: unknown; page_id?: unknown };
     try { b = JSON.parse(corpo || "{}"); } catch { return j(400, { ok: false }); }
     if (b.azione === "pagine") {
       const pagine = [];
-      for (const id of await tuttePagine(deps)) pagine.push({ ...(await fetchPageSubscription(id, deps.cfg, deps.fetchImpl)), nelleVariabili: deps.cfg.pageIds.includes(id) });
+      const { ids, token } = await tuttePagine(deps);
+      for (const id of ids) pagine.push({ ...(await fetchPageSubscription(id, deps.cfg, deps.fetchImpl, token[id])), nelleVariabili: deps.cfg.pageIds.includes(id), chiaveDaOne: !!token[id] });
       return j(200, { ok: true, pagine, identita: await fetchIdentita(deps.cfg, deps.fetchImpl) });
+    }
+    // chiave incollata in ONE → chiavi (senza scadenza) delle pagine; la chiave incollata non si conserva
+    if (b.azione === "chiave") {
+      const r = await chiaviPagineDa(String((b as { token?: unknown }).token ?? ""), deps.cfg, deps.fetchImpl);
+      return r.ok ? j(200, { ok: true, pagine: r.pagine, lunga: r.lunga }) : j(400, { ok: false, error: r.code });
+    }
+    // attiva l'arrivo dei lead di una pagina (solo su richiesta esplicita da Impostazioni › Lead)
+    if (b.azione === "iscrivi") {
+      const pageId = String((b as { page_id?: unknown }).page_id ?? "");
+      const { token } = await tuttePagine(deps);
+      const tok = token[pageId];
+      if (!tok) return j(400, { ok: false, error: "chiave_pagina_mancante" });
+      const r = await iscriviPagina(pageId, tok, deps.cfg, deps.fetchImpl);
+      return r.ok ? j(200, { ok: true }) : j(502, { ok: false, error: r.code });
     }
     if (b.azione === "catalogo") return j(200, { ok: true, catalogo: await leggiCatalogo(deps), gateway_url: indirizzoGateway(req) });
     if (b.azione === "lead") {
@@ -140,8 +160,11 @@ export function one(make: Factory) {
       const sinceSec = Math.floor(deps.now().getTime() / 1000) - giorni * 86400;
       const leads = [];
       let after: string | null = null;
+      const pageId = String((b as { page_id?: unknown }).page_id ?? "");
+      const tok = /^\d+$/.test(pageId) ? (await tuttePagine(deps)).token[pageId] : undefined;
+      const cfgLettura = tok ? { ...deps.cfg, accessToken: tok } : deps.cfg;
       for (let i = 0; i < 5; i++) { // al massimo 500 lead per richiesta
-        const r = await fetchFormLeads(formId, deps.cfg, deps.fetchImpl, { sinceSec, after });
+        const r = await fetchFormLeads(formId, cfgLettura, deps.fetchImpl, { sinceSec, after });
         if (!r.ok) return j(502, { ok: false, error: r.code, leads });
         leads.push(...r.leads);
         if (!r.after) break;

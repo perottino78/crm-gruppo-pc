@@ -20,5 +20,6 @@ export function makeDeps(env: Record<string, string | undefined> = process.env):
     now: () => new Date(),
     log: consoleLogger,
     moduliExtra: () => moduliDaOne(cfg),
+    tokenPagina: async (pageId) => (await moduliDaOne(cfg))?.token?.[pageId],
   };
 }

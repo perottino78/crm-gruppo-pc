@@ -3,7 +3,8 @@ import type { MetaConfig } from "../../src/lib/meta/config";
 import { baseDi, destinatarioOne, intestazioniFirmate } from "../../src/lib/meta/moduli";
 
 // Moduli collegati da P&C ONE (Impostazioni › Lead): ricordati per 60 s finché la funzione resta calda.
-export type DaOne = { moduli: string[]; pagine: string[] };
+/** Da P&C ONE: moduli e pagine collegati e chiavi delle pagine incollate in Impostazioni › Lead. */
+export type DaOne = { moduli: string[]; pagine: string[]; token?: Record<string, string> };
 let moduliCache: { at: number; dati: DaOne } | null = null;
 export function ricordaModuli(dati: DaOne | null) {
   moduliCache = dati ? { at: Date.now(), dati } : null;
@@ -18,9 +19,11 @@ export async function moduliDaOne(cfg: MetaConfig, fetchImpl: typeof fetch = fet
   try {
     const res = await fetchImpl(`${baseDi(one.url)}/api/lead/meta/moduli`, { method: "POST", headers: intestazioniFirmate(one.secret, corpo), body: corpo, signal: AbortSignal.timeout(timeoutMs) });
     if (!res.ok) return moduliCache?.dati ?? null;
-    const j = (await res.json()) as { moduli?: unknown; pagine?: unknown };
+    const j = (await res.json()) as { moduli?: unknown; pagine?: unknown; token?: unknown };
     const ids = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string" && /^\d+$/.test(x)) : []);
-    const dati = { moduli: ids(j.moduli), pagine: ids(j.pagine) };
+    const token: Record<string, string> = {};
+    if (j.token && typeof j.token === "object") for (const [k, v] of Object.entries(j.token as Record<string, unknown>)) if (/^\d+$/.test(k) && typeof v === "string" && v.length > 20) token[k] = v;
+    const dati = { moduli: ids(j.moduli), pagine: ids(j.pagine), token };
     ricordaModuli(dati);
     return dati;
   } catch {

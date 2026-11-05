@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadMetaConfig } from "@/lib/meta/config";
 import { firmaValida, pulisciCatalogo } from "@/lib/meta/moduli";
-import { moduliCollegati, salvaCatalogo, salvaIndirizzoGateway } from "@/lib/meta/moduli-server";
+import { cfgConModuli, chiaviPagine, salvaCatalogo, salvaIndirizzoGateway } from "@/lib/meta/moduli-server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const c = b.catalogo ? pulisciCatalogo(b.catalogo) : null;
   if (c) await salvaCatalogo(c);
   await salvaIndirizzoGateway(b.gateway_url);
-  const moduli = (await moduliCollegati()).filter((m) => m.attivo).map((m) => m.formId);
-  // anche le pagine che conosce ONE: il gateway le accetta e le legge senza dover cambiare le sue variabili
-  return NextResponse.json({ ok: true, moduli: [...new Set([...cfg.allowedFormIds, ...moduli])], pagine: cfg.pageIds });
+  const eff = await cfgConModuli(cfg);
+  // anche le pagine che conosce ONE (e le loro chiavi): il gateway le accetta e le legge senza cambiare le sue variabili
+  return NextResponse.json({ ok: true, moduli: eff.allowedFormIds, pagine: eff.pageIds, token: await chiaviPagine() });
 }

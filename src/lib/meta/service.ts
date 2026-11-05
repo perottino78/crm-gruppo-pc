@@ -19,6 +19,8 @@ export type Deps = {
    * null = CRM non raggiungibile: per le pagine autorizzate si accetta comunque (il CRM ricontrolla e scarta i moduli non collegati).
    */
   moduliExtra?: () => Promise<{ moduli: string[]; pagine: string[] } | null>;
+  /** Solo gateway: chiave della pagina (incollata in P&C ONE) per leggere i lead di quella pagina; se manca si usa META_ACCESS_TOKEN. */
+  tokenPagina?: (pageId: string) => Promise<string | undefined>;
   /** Solo CRM: evento di un modulo non collegato, per mostrarlo in Impostazioni (così si può collegare e recuperare). */
   onScartato?: (ev: LeadgenEvent) => Promise<void>;
 };
@@ -146,7 +148,8 @@ export async function processDelivery(deps: Deps, id: string): Promise<"processe
     let lead: GraphLead | null = d.leadJson ? (JSON.parse(d.leadJson) as GraphLead) : null;
     if (!lead) {
       const ev: LeadgenEvent = { leadgenId: d.leadgenId, pageId: d.pageId, formId: d.formId };
-      const res = await fetchLead(ev, cfg, deps.fetchImpl);
+      const tok = await deps.tokenPagina?.(d.pageId).catch(() => undefined);
+      const res = await fetchLead(ev, tok ? { ...cfg, accessToken: tok } : cfg, deps.fetchImpl);
       if (!res.ok) return await failWith(res.code, res.retriable);
       lead = res.lead;
       await store.saveLead(d.id, JSON.stringify(lead));

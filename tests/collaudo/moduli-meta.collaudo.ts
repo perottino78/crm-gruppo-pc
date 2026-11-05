@@ -24,7 +24,7 @@ async function main() {
   await prisma.$executeRawUnsafe('TRUNCATE "LeadEvento","EmailLead","InvioProgrammato","MetaInboundEvent","Lead","Configurazione","Utente","Brand" CASCADE');
   const { POST: moduliPOST } = await import("../../src/app/api/lead/meta/moduli/route");
   const { POST: internoPOST } = await import("../../src/app/api/lead/meta/internal/route");
-  const { collegaModuloMeta, aggiornaElencoMeta, recuperaLeadModuloMeta } = await import("../../src/app/meta-actions");
+  const { collegaModuloMeta, aggiornaElencoMeta, recuperaLeadModuloMeta, collegaChiaveMeta, attivaLeadPaginaMeta } = await import("../../src/app/meta-actions");
   await prisma.brand.createMany({ data: [{ nome: "P&C" }, { nome: "Solaris" }] });
   const rocco = await prisma.utente.create({ data: { nome: "Rocco Marketing", email: "r@x.it", username: "rocco", ruolo: "MARKETING" } });
   const cristina = await prisma.utente.create({ data: { nome: "Cristina Rege", email: "c@x.it", username: "cristina", ruolo: "TELEFONISTA" } });
@@ -98,6 +98,37 @@ async function main() {
   verifica(d?.includes("scollegato"), "conferma «scollegato»", d);
   j = await (await moduliPOST(firmata("https://one.test/api/lead/meta/moduli", {}))).json();
   verifica(!j.moduli.includes(NUOVO), "non più tra i collegati", j);
+
+  console.log("7. Chiave di Meta incollata: pagine nuove (es. Purafonte) con chiave cifrata, passate al gateway");
+  const vera = globalThis.fetch;
+  const viste: string[] = [];
+  globalThis.fetch = (async (_u: string, init: RequestInit) => {
+    const b = JSON.parse(String(init.body));
+    viste.push(b.azione);
+    if (b.azione === "chiave") return new Response(JSON.stringify({ ok: true, lunga: true, pagine: [{ id: "555666777888", nome: "Purafonte Acqua", token: "PAGINA_pura_finta_0123456789" }] }), { status: 200 });
+    if (b.azione === "iscrivi") return new Response(JSON.stringify(b.page_id === "555666777888" ? { ok: true } : { ok: false, error: "chiave_pagina_mancante" }), { status: b.page_id === "555666777888" ? 200 : 400 });
+    return new Response("{}", { status: 500 });
+  }) as unknown as typeof fetch;
+  g.__utente = cristina;
+  d = await dove(collegaChiaveMeta(fd({ chiave: "UTENTE_breve_finta_0123456789" })));
+  verifica(d?.includes("Solo amministratore"), "la telefonista non può incollare chiavi", d);
+  g.__utente = rocco;
+  d = await dove(collegaChiaveMeta(fd({ chiave: "UTENTE_breve_finta_0123456789" })));
+  verifica(d?.includes("Chiave salvata per 1 pagina: Purafonte Acqua"), "chiave accettata", d);
+  await prisma.brand.create({ data: { nome: "Purafonte" } });
+  d = await dove(collegaChiaveMeta(fd({ chiave: "UTENTE_breve_finta_0123456789" })));
+  const salvata = (await prisma.configurazione.findUnique({ where: { chiave: "meta_pagine" } }))?.valore ?? "";
+  verifica(salvata.includes("555666777888") && !salvata.includes("PAGINA_pura_finta"), "nel database la chiave è cifrata, mai in chiaro");
+  verifica(JSON.parse(salvata)[0].brand === "P&C", "marchio della prima volta conservato (si cambia a mano)", salvata.slice(0, 80));
+  j = await (await moduliPOST(firmata("https://one.test/api/lead/meta/moduli", {}))).json();
+  verifica(j.pagine.includes("555666777888") && j.token["555666777888"] === "PAGINA_pura_finta_0123456789", "il gateway riceve la pagina nuova e la sua chiave", j.pagine);
+  d = await dove(attivaLeadPaginaMeta(fd({ pageId: "555666777888" })));
+  verifica(d?.includes("Arrivo dei lead attivato"), "attivazione arrivo lead", d);
+  d = await dove(attivaLeadPaginaMeta(fd({ pageId: "111" })));
+  verifica(d?.includes("Prima incolla la chiave"), "pagina senza chiave: messaggio chiaro", d);
+  r = await internoPOST(evento("5009", NUOVO, lead("5009", "Test Pagina", "3330009999")));
+  verifica(viste.includes("chiave") && viste.includes("iscrivi"), "richieste al gateway fatte");
+  globalThis.fetch = vera;
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
