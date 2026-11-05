@@ -17,7 +17,7 @@ export default function CambioPasswordObbligatorio({ nome }: { nome: string }) {
         <h2 id="titolo-pw" className="mt-1 text-xl font-extrabold text-neutral-900">Scegli la tua password</h2>
         <p className="mt-1 text-sm text-neutral-600">Ciao {nome.split(" ")[0]}, stai usando una password provvisoria. Prima di continuare scegline una tua (almeno 8 caratteri).</p>
         {errore && <p className="mt-3 rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{errore}</p>}
-        <input type="hidden" name="torna" value={percorso} />
+        <input type="hidden" name="torna" value={percorso} /><input type="hidden" name="finestra" value="1" />
         <label className="mt-4 block text-xs font-semibold text-neutral-700">Nuova password
           <input type="password" name="nuovaPassword" required minLength={8} autoComplete="new-password" autoFocus className={campo} />
         </label>

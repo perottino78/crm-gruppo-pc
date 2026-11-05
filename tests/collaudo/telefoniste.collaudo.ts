@@ -34,9 +34,13 @@ async function main() {
   verifica(r?.includes("/lead?errore=") && r.includes("troppo semplice"), "una password semplice viene rifiutata, si resta sulla pagina", r);
   r = await dove(cambiaPassword(fd({ nuovaPassword: "corta", conferma: "corta", torna: "/lead" })));
   verifica(r?.includes("almeno 8"), "servono almeno 8 caratteri", r);
-  r = await dove(cambiaPassword(fd({ nuovaPassword: "Serramenti2026", conferma: "Serramenti2026", torna: "/lead" })));
+  r = await dove(cambiaPassword(fd({ nuovaPassword: "Serramenti2026", conferma: "Serramenti2026", torna: "/lead", finestra: "1" })));
   c = (await prisma.utente.findUnique({ where: { id: cristina.id } }))!;
   verifica(r?.includes(";/lead") && !c.mustChangePassword && (await verificaPassword("Serramenti2026", c.passwordHash!)), "password cambiata, torna dov'era", r);
+  g.__utente = c; // la finestra era rimasta aperta e si preme di nuovo «Salva»: si entra, niente errore né «password attuale»
+  r = await dove(cambiaPassword(fd({ nuovaPassword: "AltraPassword1", conferma: "AltraPassword1", torna: "/lead", finestra: "1" })));
+  c = (await prisma.utente.findUnique({ where: { id: cristina.id } }))!;
+  verifica(r?.includes(";/lead") && !r.includes("errore") && (await verificaPassword("Serramenti2026", c.passwordHash!)), "secondo invio dalla finestra: entra senza errori e la password resta quella scelta", r);
 
   console.log("2. Perché i lead vanno ad Alessia");
   verifica((await telefonistaDefaultPerBrand(b.id)) === alessia.id, "senza scelta: la prima telefonista in ordine alfabetico (Alessia)");
