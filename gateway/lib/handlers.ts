@@ -1,7 +1,7 @@
 import { authorizeScheduler } from "../../src/lib/meta/schedulerAuth";
 import { MAX_PAYLOAD_BYTES } from "../../src/lib/meta/parse";
 import { handleNotification, handleVerification, pollLeads, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
-import { fetchFormLeads, fetchPageForms, fetchPageSubscription } from "../../src/lib/meta/graph";
+import { fetchFormLeads, fetchIdentita, fetchPageForms, fetchPageSubscription } from "../../src/lib/meta/graph";
 import { destinatarioOne, firmaValida, type CatalogoMeta } from "../../src/lib/meta/moduli";
 import { moduliDaOne } from "./moduli-one";
 
@@ -130,7 +130,7 @@ export function one(make: Factory) {
     if (b.azione === "pagine") {
       const pagine = [];
       for (const id of await tuttePagine(deps)) pagine.push({ ...(await fetchPageSubscription(id, deps.cfg, deps.fetchImpl)), nelleVariabili: deps.cfg.pageIds.includes(id) });
-      return j(200, { ok: true, pagine });
+      return j(200, { ok: true, pagine, identita: await fetchIdentita(deps.cfg, deps.fetchImpl) });
     }
     if (b.azione === "catalogo") return j(200, { ok: true, catalogo: await leggiCatalogo(deps), gateway_url: indirizzoGateway(req) });
     if (b.azione === "lead") {
