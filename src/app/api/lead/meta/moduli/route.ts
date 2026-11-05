@@ -21,5 +21,6 @@ export async function POST(req: NextRequest) {
   if (c) await salvaCatalogo(c);
   await salvaIndirizzoGateway(b.gateway_url);
   const moduli = (await moduliCollegati()).filter((m) => m.attivo).map((m) => m.formId);
-  return NextResponse.json({ ok: true, moduli: [...new Set([...cfg.allowedFormIds, ...moduli])] });
+  // anche le pagine che conosce ONE: il gateway le accetta e le legge senza dover cambiare le sue variabili
+  return NextResponse.json({ ok: true, moduli: [...new Set([...cfg.allowedFormIds, ...moduli])], pagine: cfg.pageIds });
 }

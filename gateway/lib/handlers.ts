@@ -1,7 +1,7 @@
 import { authorizeScheduler } from "../../src/lib/meta/schedulerAuth";
 import { MAX_PAYLOAD_BYTES } from "../../src/lib/meta/parse";
 import { handleNotification, handleVerification, pollLeads, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
-import { fetchFormLeads, fetchPageForms } from "../../src/lib/meta/graph";
+import { fetchFormLeads, fetchPageForms, fetchPageSubscription } from "../../src/lib/meta/graph";
 import { destinatarioOne, firmaValida, type CatalogoMeta } from "../../src/lib/meta/moduli";
 import { moduliDaOne } from "./moduli-one";
 
@@ -103,9 +103,14 @@ export const health = () => j(200, { ok: true });
 // -------- Moduli istantanei: elenco letto da Meta e lead di un modulo, per P&C ONE (Impostazioni › Lead)
 const indirizzoGateway = (req: Request) => (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : new URL(req.url).origin);
 
+/** Pagine da leggere: quelle delle variabili del gateway + quelle che conosce P&C ONE. */
+async function tuttePagine(deps: Deps): Promise<string[]> {
+  const daOne = await moduliDaOne(deps.cfg, deps.fetchImpl).catch(() => null);
+  return [...new Set([...deps.cfg.pageIds, ...(daOne?.pagine ?? [])])];
+}
 export async function leggiCatalogo(deps: Deps): Promise<CatalogoMeta> {
   const pagine = [];
-  for (const id of deps.cfg.pageIds) pagine.push(await fetchPageForms(id, deps.cfg, deps.fetchImpl));
+  for (const id of await tuttePagine(deps)) pagine.push(await fetchPageForms(id, deps.cfg, deps.fetchImpl));
   return { lettoIl: deps.now().toISOString(), pagine };
 }
 async function inviaCatalogo(deps: Deps, gateway: string): Promise<boolean> {
@@ -122,6 +127,11 @@ export function one(make: Factory) {
     if (!dest || !firmaValida([dest.secret], req.headers.get("x-gpc-timestamp"), req.headers.get("x-gpc-signature"), corpo)) return j(401, { ok: false });
     let b: { azione?: unknown; form_id?: unknown; giorni?: unknown };
     try { b = JSON.parse(corpo || "{}"); } catch { return j(400, { ok: false }); }
+    if (b.azione === "pagine") {
+      const pagine = [];
+      for (const id of await tuttePagine(deps)) pagine.push({ ...(await fetchPageSubscription(id, deps.cfg, deps.fetchImpl)), nelleVariabili: deps.cfg.pageIds.includes(id) });
+      return j(200, { ok: true, pagine });
+    }
     if (b.azione === "catalogo") return j(200, { ok: true, catalogo: await leggiCatalogo(deps), gateway_url: indirizzoGateway(req) });
     if (b.azione === "lead") {
       const formId = String(b.form_id ?? "");
