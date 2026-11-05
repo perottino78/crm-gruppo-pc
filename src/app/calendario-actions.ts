@@ -175,3 +175,73 @@ export async function inviaLinkCalendarioATutti(formData: FormData) {
   revalidatePath("/calendario/sul-telefono");
   redirect(ritorno(formData, "/calendario/sul-telefono", `Link del calendario mandato a ${inviati} ${inviati === 1 ? "persona" : "persone"}.${falliti.length ? ` Non partito: ${falliti.join(", ")}.` : ""}`));
 }
+
+/** «Lo rifisso io»: il commerciale sposta l'appuntamento al giorno e all'ora che ha concordato con il cliente. */
+export async function spostaAppuntamentoA(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  const quando = daOraRoma(str(formData, "dataOra"));
+  if (!id) return;
+  if (!quando) redirect(ritorno(formData, `/calendario/appuntamento/${id}`, "Scegli giorno e ora."));
+  const a = await prisma.appuntamento.findUnique({ where: { id } });
+  if (!a) return;
+  const fd = new FormData();
+  fd.set("id", id);
+  fd.set("dataOra", perInput(quando!));
+  fd.set("utenteId", a.utenteId);
+  fd.set("tipo", a.tipo);
+  fd.set("durataMin", String(a.durataMin));
+  if (a.titolo) fd.set("titolo", a.titolo);
+  if (a.luogo) fd.set("luogo", a.luogo);
+  if (a.note) fd.set("note", a.note);
+  if (a.invitaCliente) fd.set("invitaCliente", "on");
+  return modificaAppuntamento(fd);
+}
+
+/**
+ * «Da rifissare: ci pensa il centralino». L'appuntamento si chiude (annullato, con il motivo) e il lead torna alla
+ * telefonista come «Appuntamento annullato · Definisci il seguito» per il giorno indicato. Se il cliente non viene da un
+ * lead, se ne crea uno apposta così la telefonista lo trova nei suoi «Task di oggi».
+ */
+export async function rifissaDalCentralino(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  const quando = daOraRoma(str(formData, "richiamaIl")) ?? new Date();
+  const note = str(formData, "note");
+  const a = await prisma.appuntamento.findUnique({ where: { id }, include: { cliente: true } });
+  if (!a) return;
+  const { registraEsito } = await import("@/lib/automazioni/motore");
+  const { esitiPossibili } = await import("@/lib/automazioni/percorsi");
+  const { telefonistaDefaultPerBrand } = await import("@/lib/leadIngest");
+  const testo = `Da rifissare (${u.nome}, dopo l'appuntamento del ${giornoBreve(chiaveGiorno(a.dataOra))} ${oraRoma(a.dataOra)})${note ? `: ${note}` : ""}`;
+  let lead = await prisma.lead.findFirst({ where: { appuntamentoId: a.id } })
+    ?? (a.cliente.leadOrigineId ? await prisma.lead.findUnique({ where: { id: a.cliente.leadOrigineId } }) : null);
+  if (lead && esitiPossibili(lead.fase).includes("APPUNTAMENTO_ANNULLATO")) {
+    // stesso percorso di quando lo annulla il cliente: si fermano lettere e promemoria, avviso a centralino e venditore
+    await registraEsito({ leadId: lead.id, esito: "APPUNTAMENTO_ANNULLATO", note: testo, utenteNome: u.nome });
+  } else if (lead) {
+    await prisma.lead.update({ where: { id: lead.id }, data: { fase: "APPUNTAMENTO_ANNULLATO", nonGestitoIl: null } });
+    await prisma.leadEvento.create({ data: { leadId: lead.id, tipo: "lead.esito", testo, utenteNome: u.nome } });
+  } else {
+    const c = a.cliente;
+    lead = await prisma.lead.create({
+      data: {
+        nome: c.nome, telefono: c.telefono ?? c.cellulare, email: c.email, brandId: c.brandId, fonte: "rifissare", fase: "APPUNTAMENTO_ANNULLATO",
+        comune: c.comune, cap: c.cap, telefonistaId: await telefonistaDefaultPerBrand(c.brandId), note: `[${new Date().toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} ${u.nome}] ${testo}`,
+      },
+    });
+    await prisma.leadEvento.create({ data: { leadId: lead.id, tipo: "lead.esito", testo, utenteNome: u.nome } });
+    if (!c.leadOrigineId) await prisma.cliente.update({ where: { id: c.id }, data: { leadOrigineId: lead.id } }).catch(() => null);
+  }
+  // la telefonista lo trova nei «Task di oggi» dal giorno scelto
+  const l = await prisma.lead.update({ where: { id: lead!.id }, data: { scadenzaAzione: quando, telefonistaId: lead!.telefonistaId ?? (await telefonistaDefaultPerBrand(a.cliente.brandId)) }, include: { telefonista: { select: { nome: true } } } });
+  await prisma.appuntamento.update({ where: { id }, data: { stato: "ANNULLATO", esito: testo } });
+  await inviaInvito(`APPUNTAMENTO:${id}`, "CANCEL").catch(() => null);
+  revalidatePath("/calendario");
+  revalidatePath("/lead");
+  revalidatePath(`/clienti/${a.clienteId}`);
+  redirect(ritorno(formData, `/calendario/appuntamento/${id}`, `📞 Mandato al centralino: ${l.telefonista?.nome ?? "la telefonista"} lo trova nei «Task di oggi» dal ${quando.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })} per richiamare e rifissare.`));
+}

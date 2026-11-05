@@ -242,6 +242,12 @@ login nel `matcher` del middleware.
   → salvate cifrate (`cifra` di `mail/caselle.ts`) in `Configurazione.meta_pagine` con il marchio; `/moduli` le passa al gateway (`token`), che le usa
   per lead, moduli e iscrizione (`deps.tokenPagina`). «📡 Attiva l'arrivo dei lead» = `azione: "iscrivi"` (`POST /{page}/subscribed_apps`).
   Diagnostica: `GET /api/admin/stato-meta` (x-seed-key, niente dati personali). Test `tests/meta/moduli.test.ts`, collaudo `moduli-meta` (28).
+- **Dopo l'appuntamento** (`/calendario/appuntamento/[id]`): riquadro «ℹ️ Da sapere prima di andare» (risposte del modulo e note del centralino,
+  sola lettura) e tre strade per chi è andato: ✅ Svolto (`esitoAppuntamento`), 📞 Da rifissare dal centralino (`rifissaDalCentralino`: appuntamento
+  ANNULLATO con il motivo, lead → APPUNTAMENTO_ANNULLATO con `registraEsito` se possibile, `scadenzaAzione` = giorno scelto; senza lead se ne crea
+  uno per la telefonista del marchio, collegato a `Cliente.leadOrigineId`), ↪ Lo rifisso io (`spostaAppuntamentoA`). Il modulo «Nuovo appuntamento»
+  si apre solo con `?nuovo=` (clic sull'agenda o pulsante), nella scheda cliente con `?fissa=1`; `?cliente=` resta nei link del calendario.
+  Collaudo `dopo-appuntamento` (11).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
@@ -254,7 +260,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (11)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
