@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiPersianeBlindate, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
@@ -1332,7 +1333,7 @@ function SelettoreCascataIsomax({
       </div>
       {modello && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">2. Tipo apertura</label>
+          <label className="text-[11px] text-neutral-600">{tipologie.some((t) => t.value.startsWith("RASOMURO_")) ? "2. Misura" : "2. Tipo apertura"}</label>
           <select
             value={apertura}
             onChange={(e) => setApertura(e.target.value)}
@@ -2111,7 +2112,21 @@ export default function SelettoreProdotto({
                       <option value="90">90 × 210 (+ maggiorazione)</option>
                     </select>
                   )}
-                  <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
+                  {(() => {
+                    const m = misureRasomuro(scelto.value);
+                    if (!m) return null;
+                    return (
+                      <>
+                        <select name="rmL" defaultValue={String(m.larghezze[m.larghezze.length - 1])} aria-label="Larghezza" title={m.perAnta ? "Larghezza di ogni anta" : "Larghezza di listino"} className="border border-neutral-200 rounded px-1.5 py-1 text-xs">
+                          {m.larghezze.map((l) => <option key={l} value={l}>L {l}{m.perAnta ? " (anta)" : ""}</option>)}
+                        </select>
+                        <select name="rmH" defaultValue={String(m.altezze[m.altezze.length - 1])} aria-label="Altezza" className="border border-neutral-200 rounded px-1.5 py-1 text-xs">
+                          {m.altezze.map((h) => <option key={h} value={h}>H {h}</option>)}
+                        </select>
+                      </>
+                    );
+                  })()}
+                  <input name="quantita" type="number" defaultValue={1} min={1} title={scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : "Quantità"} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ aggiungi</button>
                 </form>
               ))}

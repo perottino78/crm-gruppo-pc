@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
+import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
 import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
@@ -920,8 +921,12 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
   // Porte interne Isomax: 70 e 80 cm di luce netta sono standard; 60 e 90 cm aggiungono da sole la maggiorazione del listino
   const luce = Number(str(formData, "luceNetta") ?? "");
   const isomax = prodotto.tipologia.startsWith("ISOMAX_") && [60, 70, 80, 90].includes(luce);
+  // Porte raso muro: larghezza e altezza scelte fra quelle di listino, scritte sulla riga
+  const mRaso = misureRasomuro(prodotto.tipologia);
+  const rmL = Number(str(formData, "rmL") ?? ""), rmH = Number(str(formData, "rmH") ?? "");
+  const misuraRaso = mRaso && mRaso.larghezze.includes(rmL) && mRaso.altezze.includes(rmH) ? { misuraLarghezza: rmL, misuraAltezza: rmH } : {};
   const riga = await prisma.rigaPreventivo.create({
-    data: { preventivoId, prodottoId, quantita, prezzoUnitario, ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : {}) },
+    data: { preventivoId, prodottoId, quantita, prezzoUnitario, ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : misuraRaso) },
   });
   if (isomax && (luce === 60 || luce === 90)) {
     const opt = await prisma.optional.findFirst({

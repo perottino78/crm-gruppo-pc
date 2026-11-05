@@ -10,6 +10,7 @@ import PannelloConferma from "@/components/preventivi/PannelloConferma";
 import { numeroCommessa } from "@/lib/commesse";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
+import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listini/rasomuro";
 import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
@@ -817,9 +818,10 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia} · {prodotto.colore}
+                      {prodotto.tipologia.startsWith("RASOMURO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia} · {prodotto.colore}
                       {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
-                      {r.misuraLarghezza && (
+                      {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
+                      {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && (
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
@@ -900,7 +902,9 @@ export default async function PreventivoPage({
 
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia))
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? ""))
+                  /* Porte raso muro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
+                  .filter((o) => !prodotto.tipologia.startsWith("RASOMURO_") || o.listino !== null || o.gruppiApplicabili.length === 0)
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -1139,6 +1143,41 @@ export default async function PreventivoPage({
                 // (ISOMAX_A/B/L applicato sopra), quindi qui basta isolare la categoria
                 // "Colore" per renderla immediatamente visibile invece di perderla in
                 // mezzo a una quindicina di altre voci.
+                // Porte raso muro (MYA, KIUSO, STRIP): una tendina per ogni gruppo di voci del listino
+                // (finitura/anta, su misura, telaio, chiusure, maniglie, accessori, lavorazioni, trasporto).
+                if (prodotto.tipologia.startsWith("RASOMURO_")) {
+                  const ordine = ["Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
+                  const categorie = [...new Set(optionaliRigaFiltrati.map((o) => o.categoria))].sort((a, b) => (ordine.indexOf(a) + 1 || 99) - (ordine.indexOf(b) + 1 || 99));
+                  return (
+                    <div className="mt-2 flex flex-col gap-1">
+                      <p className="text-[11px] text-neutral-500">
+                        {guidaRasomuro(prodotto.tipologia)}{" "}
+                        {CATALOGHI_RASOMURO.map((c) => (
+                          <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
+                        ))}
+                      </p>
+                      {categorie.map((cat) => {
+                        const voci = optionaliRigaFiltrati.filter((o) => o.categoria === cat);
+                        return (
+                          <form key={cat} action={aggiungiOptionalARiga} className="flex flex-wrap items-center gap-1">
+                            <input type="hidden" name="rigaId" value={r.id} />
+                            <input type="hidden" name="preventivoId" value={preventivo.id} />
+                            <select name="optionalId" aria-label={cat} className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[320px]">
+                              {voci.map((o) => (
+                                <option key={o.id} value={o.id}>
+                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT")}€`})
+                                </option>
+                              ))}
+                            </select>
+                            <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                            <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ {cat.toLowerCase()}</button>
+                          </form>
+                        );
+                      })}
+                    </div>
+                  );
+                }
+
                 if (modello?.gruppo === "PORTE INTERNE") {
                   const coloriIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Colore");
                   const fuoriMisuraIsomax = optionaliRigaFiltrati.filter((o) => o.categoria === "Maggiorazione taglio/luce netta");
