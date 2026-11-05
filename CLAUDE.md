@@ -80,7 +80,7 @@ login nel `matcher` del middleware.
   esportazione `GET /api/clienti/esporta` (Excel `;` o `formato=facebook` per i pubblici personalizzati Meta). Ogni ingresso
   (form, lead convertito, landing `?utm_source=`, Meta, simulatore) passa da `provenienzaDaFonte()`.
 - **Aumenti listini** (`/prodotti/aumenti`, `src/app/listini-actions.ts`, `src/lib/listini/aumenti.ts`, solo AMMINISTRATORE):
-  percentuale del fornitore su griglie `Prodotto.prezzoBase`, optional a prezzo fisso del listino (`Optional.listino` = tipologia o
+  percentuale del fornitore (aumenti fino al +100%, ribassi fino al -50%) su griglie `Prodotto.prezzoBase`, optional a prezzo fisso del listino (`Optional.listino` = tipologia o
   `listinoDiTipologia`) e articoli del fornitore; storico in `AumentoListino` con i valori di prima → "Annulla".
   Attenzione: le rotte `seed-*` riscrivono i prezzi di griglia dai dati originali (cancellerebbero gli aumenti).
 - **Lead da lavorare + email automatiche (ex Keap, Fase 1)** (`/lead`, `/impostazioni/automazioni`, `src/lib/automazioni/`):

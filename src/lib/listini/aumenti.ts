@@ -9,12 +9,12 @@ export const ARROTONDAMENTI: { chiave: Arrotondamento; nome: string }[] = [
   { chiave: "EURO", nome: "all'euro" },
 ];
 
-/** "3,5" / "3.5" / "+3,5%" → 3.5. Accetta anche ribassi ("-2"). Fuori da ±50% è quasi certamente un errore. */
+/** "3,5" / "3.5" / "+3,5%" → 3.5. Accetta anche ribassi ("-2"). Aumenti fino al +100%, ribassi fino al -50%: oltre è quasi certamente un errore. */
 export function leggiPercentuale(s?: string | null): number | null {
   const t = (s ?? "").replace("%", "").replace(",", ".").replace(/\s+/g, "").replace(/^\+/, "");
   if (!t) return null;
   const n = Number(t);
-  if (!Number.isFinite(n) || n === 0 || Math.abs(n) > 50) return null;
+  if (!Number.isFinite(n) || n === 0 || n > 100 || n < -50) return null;
   return n;
 }
 
