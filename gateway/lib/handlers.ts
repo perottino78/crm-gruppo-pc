@@ -140,7 +140,7 @@ export function one(make: Factory) {
     }
     // chiave incollata in ONE → chiavi (senza scadenza) delle pagine; la chiave incollata non si conserva
     if (b.azione === "chiave") {
-      const r = await chiaviPagineDa(String((b as { token?: unknown }).token ?? ""), deps.cfg, deps.fetchImpl);
+      const r = await chiaviPagineDa(String((b as { token?: unknown }).token ?? ""), deps.cfg, deps.fetchImpl, (await tuttePagine(deps)).ids);
       return r.ok ? j(200, { ok: true, pagine: r.pagine, lunga: r.lunga }) : j(400, { ok: false, error: r.code });
     }
     // attiva l'arrivo dei lead di una pagina (solo su richiesta esplicita da Impostazioni › Lead)

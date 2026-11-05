@@ -243,3 +243,26 @@ test("gateway: «chiave» restituisce le chiavi delle pagine, «iscrivi» usa la
   ricordaModuli(null);
   assert.equal((await chiedi({ azione: "iscrivi", page_id: "555" })).status, 400, "senza chiave della pagina");
 });
+
+test("chiave: pagine del Business Manager e pagine già note; se mancano autorizzazioni lo dice", async () => {
+  const base = (extra: (u: string) => Response | null) => (async (u: string) => {
+    const e = extra(u); if (e) return e;
+    if (u.includes("/oauth/access_token")) return json(200, { access_token: "LUNGA_utente_finta_0123456789" });
+    if (u.includes("/app?")) return json(200, { id: "1842181417134760" });
+    if (u.includes("/me/accounts")) return json(200, { data: [] });
+    if (u.includes("/me?")) return json(200, { id: "99999", name: "Ugo" });
+    return json(400, { error: { code: 100 } });
+  }) as unknown as typeof fetch;
+  const viaBusiness = await chiaviPagineDa("UTENTE_breve_finta_0123456789", cfg(), base((u) =>
+    u.includes("/me/businesses") ? json(200, { data: [{ id: "4444" }] })
+    : u.includes("/4444/owned_pages") ? json(200, { data: [{ id: "107076085330590", name: "Solaris", access_token: "PAGINA_sol_finta_0123456789" }] })
+    : u.includes("/4444/client_pages") ? json(200, { data: [] }) : null));
+  assert.ok(viaBusiness.ok && viaBusiness.pagine[0].nome === "Solaris", "trovata nel Business Manager");
+  const viaNote = await chiaviPagineDa("UTENTE_breve_finta_0123456789", cfg(), base((u) =>
+    u.includes(`/${T.pageId}?`) ? json(200, { id: T.pageId, name: "Gruppo P&C", access_token: "PAGINA_pec_finta_0123456789" }) : null), [T.pageId]);
+  assert.ok(viaNote.ok && viaNote.pagine[0].id === T.pageId, "trovata chiedendo la pagina nota");
+  const senza = await chiaviPagineDa("UTENTE_breve_finta_0123456789", cfg(), base((u) =>
+    u.includes("/me/permissions") ? json(200, { data: [{ permission: "pages_show_list", status: "granted" }, { permission: "leads_retrieval", status: "declined" }] }) : null));
+  assert.ok(!senza.ok && senza.code.startsWith("permessi_mancanti:") && senza.code.includes("leads_retrieval") && !senza.code.includes("pages_show_list"), !senza.ok ? senza.code : "");
+  assert.match(spiegaErrore(!senza.ok ? senza.code : ""), /mancano queste autorizzazioni: pages_read_engagement/);
+});

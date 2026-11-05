@@ -111,7 +111,8 @@ export function spiegaErrore(code: string | null | undefined): string {
   if (/_c190$/.test(code)) return "La chiave di Meta è scaduta o non valida: incollane una nuova («Chiave di Meta» qui sotto).";
   if (code === "chiave_non_valida") return "Il testo incollato non sembra una chiave di Meta.";
   if (code === "app_diversa") return "La chiave è stata generata per un'altra app: nello strumento di Meta scegli l'app «CRM Interno P&C».";
-  if (code === "nessuna_pagina") return "La chiave non dà accesso a nessuna pagina: rigenerala spuntando le pagine (Gruppo P&C, Solaris…).";
+  if (code.startsWith("permessi_mancanti:")) return `Nella chiave mancano queste autorizzazioni: ${code.slice(18).split(",").join(", ")}. Rigenerala aggiungendole in «Autorizzazioni» e spunta le pagine nella finestra di Facebook.`;
+  if (code === "nessuna_pagina") return "La chiave non dà accesso a nessuna pagina. Rigenerala e, nella finestra di Facebook che si apre, premi «Modifica impostazioni» / «Scegli le pagine» e spunta Gruppo P&C e Solaris (e il Business Gruppo P&C). Serve che il tuo profilo sia amministratore di quelle pagine.";
   if (/_c(10|200|283|299)$/.test(code)) return "L'app di P&C ONE non ha il permesso su questa pagina: in Meta Business, Impostazioni › Accesso ai lead, dai l'accesso al CRM.";
   if (/_c100$/.test(code)) return "Meta non fa vedere questa pagina con la chiave attuale: incolla una chiave che comprenda anche questa pagina.";
   return `Errore di Meta (${code}).`;
