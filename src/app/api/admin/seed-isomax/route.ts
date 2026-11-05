@@ -120,8 +120,9 @@ export async function POST(req: NextRequest) {
     }
 
     const optionaliNuovi = optionaliData as OptionalRow[];
+    // Le voci del listino Raso Muro (stesso gruppo PORTE INTERNE) non si toccano: hanno la loro rotta seed-rasomuro.
     let optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, OR: [{ listino: null }, { NOT: { listino: { startsWith: "RASOMURO" } } }] },
     });
 
     // Dedup: se più righe condividono la stessa chiave (categoria|nome|listino),

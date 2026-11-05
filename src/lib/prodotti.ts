@@ -1,4 +1,5 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
+import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
@@ -34,6 +35,8 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   // Porte interne Isomax: modello + tipo apertura a prezzo fisso (misura standard
   // 60/70/80/90cm), stessa convenzione cm dei cataloghi porte/serramenti.
   "ISOMAX_",
+  // Porte e chiusure raso muro (MYA, KIUSO, STRIP): misure di listino in cm.
+  "RASOMURO_",
   // Tende a rullo da interno (P&C): griglia larghezza x altezza in cm come da listino
   // fornitore (RULLO A CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO — vedi task #283).
   "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_",
@@ -743,6 +746,7 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
@@ -1214,6 +1218,8 @@ const ISOMAX_APERTURA_LABELS: Record<string, string> = {
 };
 
 export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
+  // Porte raso muro: stesse 2 tendine (modello/apertura -> misura).
+  if (tipologia.startsWith("RASOMURO_")) return assiSelezioneRasomuro(tipologia);
   if (!tipologia.startsWith("ISOMAX_")) return null;
   const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_([A-Z0-9]+)$/);
   if (!match) return null;
@@ -2041,6 +2047,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
+  if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
@@ -2147,7 +2154,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
-  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
+  if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("RASOMURO_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
   if (unitaMisura(tipologia) === "cm") return { larghezza: "Larghezza", altezza: "Sporgenza" };
   return { larghezza: "Larghezza", altezza: "Altezza" };
 }
