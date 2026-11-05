@@ -12,6 +12,7 @@ import { prisma } from "@/lib/prisma";
 import { rigeneraChiaveLead, impostaTelefonistaBrand } from "@/app/lead-actions";
 import { passaLeadAperti } from "@/app/lead-percorso-actions";
 import { FASI_APERTE } from "@/lib/automazioni/percorsi";
+import ModuliMeta from "@/components/lead/ModuliMeta";
 
 export default async function LeadSettings({ searchParams }: { searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const msg = await searchParams;
@@ -44,8 +45,12 @@ export default async function LeadSettings({ searchParams }: { searchParams: Pro
       <div>
         <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
         <h1 className="text-2xl font-bold text-neutral-900 mt-1">Lead da pubblicità online</h1>
-        <p className="text-sm text-neutral-600">Tre modi per far arrivare automaticamente i nominativi nel CRM (sezione Clienti → Lead).</p>
+        <p className="text-sm text-neutral-600">Come arrivano i nominativi nel CRM: moduli istantanei di Meta, pagine di atterraggio, collegamenti esterni. Sotto, a chi vanno.</p>
       </div>
+
+      {msg.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {msg.ok}</p>}
+      {msg.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{msg.errore}</p>}
+      <ModuliMeta />
 
       <section className="bg-white rounded-lg border border-neutral-200 p-4">
         <h2 className="font-bold text-neutral-900 mb-1">1 · Pagine di atterraggio (per le inserzioni)</h2>
@@ -74,8 +79,6 @@ export default async function LeadSettings({ searchParams }: { searchParams: Pro
         </form>
       </section>
 
-      {msg.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {msg.ok}</p>}
-      {msg.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{msg.errore}</p>}
       <section id="telefoniste" className="bg-white rounded-lg border border-neutral-200 p-4 scroll-mt-4">
         <h2 className="font-bold text-neutral-900 mb-1">Telefonista di default per brand</h2>
         <p className="text-xs text-neutral-600 mb-3">
@@ -127,24 +130,22 @@ export default async function LeadSettings({ searchParams }: { searchParams: Pro
         )}
       </section>
 
-      <section className="bg-white rounded-lg border border-neutral-200 p-4">
-        <h2 className="font-bold text-neutral-900 mb-1">3 · Meta Lead Ads diretto: receiver (NON ancora collegato a Meta)</h2>
-        <p className="text-xs text-neutral-600 mb-3">
-          Il receiver è pronto ma non è registrato nella dashboard Meta: per la stessa app esiste già un callback principale.
-          Prima del collegamento va scelto l&apos;assetto (gateway, inoltro transitorio o cutover): vedi <code>docs/META_LEADS.md</code>.
-          Le credenziali si impostano solo come variabili d&apos;ambiente su Vercel, mai da qui.
+      <details className="bg-white rounded-lg border border-neutral-200 p-4">
+        <summary className="cursor-pointer select-none text-sm font-semibold text-neutral-700">Dettagli tecnici del collegamento Meta</summary>
+        <p className="text-xs text-neutral-600 my-2">
+          Meta manda i lead al gateway (servizio a parte con le chiavi di Meta), che li passa a P&C ONE su <span className={box}>{base}/api/lead/meta/internal</span>.
+          Le credenziali sono solo nelle variabili d&apos;ambiente di Vercel, mai qui.
         </p>
-        <div className="text-sm mb-3">Indirizzo receiver: <span className={box}>{base}/api/lead/meta</span></div>
         <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1 text-xs mb-3">
           {presenza.map((v) => (
             <div key={v.name} className="flex justify-between border-b border-neutral-100 py-0.5">
-              <span className="font-mono">{v.name}{v.required ? " *" : ""}</span>
-              <span className={v.set ? "text-green-700 font-bold" : v.required ? "text-red-700 font-bold" : "text-neutral-400"}>{v.set ? "impostata" : "mancante"}</span>
+              <span className="font-mono">{v.name}</span>
+              <span className={v.set ? "text-green-700 font-bold" : "text-neutral-400"}>{v.set ? "impostata" : "—"}</span>
             </div>
           ))}
         </div>
-        <div className="text-xs text-neutral-700 mb-1 font-semibold">
-          Eventi ricevuti: {conteggi.length === 0 ? "nessuno" : conteggi.map((c) => `${c.stato} ${c._count}`).join(" · ")}
+        <div className="text-xs text-neutral-700 font-semibold">
+          Ricezione diretta da Meta: {conteggi.length === 0 ? "non usata" : conteggi.map((c) => `${c.stato} ${c._count}`).join(" · ")}
         </div>
         {recenti.length > 0 && (
           <table className="w-full text-xs">
@@ -155,13 +156,13 @@ export default async function LeadSettings({ searchParams }: { searchParams: Pro
                   <td>{r.stato}</td>
                   <td>tentativi {r.tentativi}</td>
                   <td className="text-red-700">{r.erroreCodice ?? ""}</td>
-                  <td className="text-neutral-500">{r.receivedAt.toLocaleString("it-IT")}</td>
+                  <td className="text-neutral-500">{r.receivedAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-      </section>
+      </details>
     </div>
   );
 }

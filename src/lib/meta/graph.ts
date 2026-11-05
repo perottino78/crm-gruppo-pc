@@ -125,3 +125,52 @@ export async function fetchFormLeads(
   const after = body.paging?.next && typeof body.paging.cursors?.after === "string" ? body.paging.cursors.after : null;
   return { ok: true, leads, after };
 }
+
+export type ModuloGraph = { id: string; nome: string; stato: string | null; leadTotali: number | null; creatoIl: string | null };
+export type PaginaGraph = { id: string; nome: string | null; moduli: ModuloGraph[]; errore?: string };
+
+/**
+ * Moduli istantanei di una pagina (SOLA LETTURA): GET /{page}/leadgen_forms. Prima con il token di sistema; se Meta chiede
+ * il token della pagina, lo legge (GET /{page}?fields=access_token) e riprova. Nessun token nei risultati né nei codici d'errore.
+ */
+export async function fetchPageForms(
+  pageId: string,
+  cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl">,
+  fetchImpl: typeof fetch = fetch,
+): Promise<PaginaGraph> {
+  if (!cfg.accessToken || !cfg.appSecret) return { id: pageId, nome: null, moduli: [], errore: "config_missing" };
+  if (!/^\d+$/.test(pageId)) return { id: pageId, nome: null, moduli: [], errore: "invalid_page_id" };
+  const base = `${cfg.graphBaseUrl}/${cfg.graphVersion}`;
+  const leggi = async (path: string, token: string, q: Record<string, string>) => {
+    const qs = new URLSearchParams({ ...q, appsecret_proof: appSecretProof(token, cfg.appSecret!) });
+    try {
+      const res = await fetchImpl(`${base}/${path}?${qs}`, { method: "GET", headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }, signal: AbortSignal.timeout(12_000) });
+      const json = (await res.json().catch(() => null)) as Record<string, unknown> | null;
+      if (!res.ok) {
+        const c = (json?.error as { code?: number } | undefined)?.code;
+        return { ok: false as const, code: typeof c === "number" ? `graph_${res.status}_c${c}` : `graph_${res.status}` };
+      }
+      return { ok: true as const, json: json ?? {} };
+    } catch {
+      return { ok: false as const, code: "graph_network" };
+    }
+  };
+  const campi = { fields: "id,name,status,leads_count,created_time", limit: "100" };
+  const info = await leggi(pageId, cfg.accessToken, { fields: "name,access_token" });
+  const nome = info.ok && typeof info.json.name === "string" ? info.json.name : null;
+  const tokenPagina = info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null;
+  let r = await leggi(`${pageId}/leadgen_forms`, cfg.accessToken, campi);
+  if (!r.ok && tokenPagina) r = await leggi(`${pageId}/leadgen_forms`, tokenPagina, campi);
+  if (!r.ok) return { id: pageId, nome, moduli: [], errore: r.code };
+  const dati = Array.isArray(r.json.data) ? (r.json.data as Record<string, unknown>[]) : [];
+  const moduli = dati
+    .filter((f) => typeof f.id === "string" && /^\d+$/.test(f.id))
+    .map((f) => ({
+      id: f.id as string,
+      nome: typeof f.name === "string" ? f.name.slice(0, 200) : `Modulo ${f.id}`,
+      stato: typeof f.status === "string" ? f.status : null,
+      leadTotali: typeof f.leads_count === "number" ? f.leads_count : null,
+      creatoIl: typeof f.created_time === "string" ? f.created_time : null,
+    }));
+  return { id: pageId, nome, moduli };
+}

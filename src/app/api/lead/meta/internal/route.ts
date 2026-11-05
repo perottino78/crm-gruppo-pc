@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handleInternalEvent } from "@/lib/meta/service";
-import { makeDeps } from "@/lib/meta/runtime";
+import { makeDepsConModuli } from "@/lib/meta/runtime";
 import { MAX_PAYLOAD_BYTES } from "@/lib/meta/parse";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   const raw = Buffer.from(await req.arrayBuffer());
   const r = await handleInternalEvent(
     { raw, timestamp: req.headers.get("x-gpc-timestamp"), signature: req.headers.get("x-gpc-signature"), eventIdHeader: req.headers.get("x-gpc-event-id") },
-    makeDeps(),
+    await makeDepsConModuli(),
   );
   return NextResponse.json(r.body, { status: r.status });
 }

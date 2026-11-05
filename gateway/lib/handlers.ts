@@ -1,6 +1,9 @@
 import { authorizeScheduler } from "../../src/lib/meta/schedulerAuth";
 import { MAX_PAYLOAD_BYTES } from "../../src/lib/meta/parse";
 import { handleNotification, handleVerification, pollLeads, replayLead, runSweep, type Deps } from "../../src/lib/meta/service";
+import { fetchFormLeads, fetchPageForms } from "../../src/lib/meta/graph";
+import { destinatarioOne, firmaValida, type CatalogoMeta } from "../../src/lib/meta/moduli";
+import { moduliDaOne } from "./moduli-one";
 
 export type Factory = () => Deps;
 const j = (status: number, body: unknown) => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
@@ -57,7 +60,9 @@ export function tick(make: Factory) {
     if (!(await authed(req, deps)).ok) return j(401, { ok: false });
     const poll = await pollLeads(deps).catch(() => undefined); // sola lettura; mai bloccante per lo sweep
     const out = await runSweep(deps, { limit: 25, budgetMs: 40_000 });
-    return j(200, { ok: true, ...out, poll }); // solo contatori
+    // ogni 5 minuti: elenco dei moduli di Meta a P&C ONE (Impostazioni › Lead), che risponde con i moduli collegati
+    const catalogo = deps.now().getUTCMinutes() % 5 === 0 ? await inviaCatalogo(deps, indirizzoGateway(req)).catch(() => false) : undefined;
+    return j(200, { ok: true, ...out, poll, catalogo }); // solo contatori
   };
 }
 
@@ -94,3 +99,46 @@ export function status(make: Factory) {
 }
 
 export const health = () => j(200, { ok: true });
+
+// -------- Moduli istantanei: elenco letto da Meta e lead di un modulo, per P&C ONE (Impostazioni › Lead)
+const indirizzoGateway = (req: Request) => (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : new URL(req.url).origin);
+
+export async function leggiCatalogo(deps: Deps): Promise<CatalogoMeta> {
+  const pagine = [];
+  for (const id of deps.cfg.pageIds) pagine.push(await fetchPageForms(id, deps.cfg, deps.fetchImpl));
+  return { lettoIl: deps.now().toISOString(), pagine };
+}
+async function inviaCatalogo(deps: Deps, gateway: string): Promise<boolean> {
+  const catalogo = await leggiCatalogo(deps);
+  return (await moduliDaOne(deps.cfg, deps.fetchImpl, { catalogo, gateway_url: gateway }, 10_000)) !== null;
+}
+
+/** Richieste di P&C ONE, firmate con il segreto di ONE: «catalogo» (moduli delle pagine) o «lead» (ultimi lead di un modulo). */
+export function one(make: Factory) {
+  return async (req: Request) => {
+    const deps = make();
+    const dest = destinatarioOne(deps.cfg);
+    const corpo = await req.text();
+    if (!dest || !firmaValida([dest.secret], req.headers.get("x-gpc-timestamp"), req.headers.get("x-gpc-signature"), corpo)) return j(401, { ok: false });
+    let b: { azione?: unknown; form_id?: unknown; giorni?: unknown };
+    try { b = JSON.parse(corpo || "{}"); } catch { return j(400, { ok: false }); }
+    if (b.azione === "catalogo") return j(200, { ok: true, catalogo: await leggiCatalogo(deps), gateway_url: indirizzoGateway(req) });
+    if (b.azione === "lead") {
+      const formId = String(b.form_id ?? "");
+      if (!/^\d+$/.test(formId)) return j(400, { ok: false, error: "form_id" });
+      const giorni = Math.min(90, Math.max(1, Number(b.giorni) || 7));
+      const sinceSec = Math.floor(deps.now().getTime() / 1000) - giorni * 86400;
+      const leads = [];
+      let after: string | null = null;
+      for (let i = 0; i < 5; i++) { // al massimo 500 lead per richiesta
+        const r = await fetchFormLeads(formId, deps.cfg, deps.fetchImpl, { sinceSec, after });
+        if (!r.ok) return j(502, { ok: false, error: r.code, leads });
+        leads.push(...r.leads);
+        if (!r.after) break;
+        after = r.after;
+      }
+      return j(200, { ok: true, leads });
+    }
+    return j(400, { ok: false, error: "azione" });
+  };
+}

@@ -229,19 +229,28 @@ login nel `matcher` del middleware.
   sposta in blocco. Password di default: `login` segna `mustChangePassword` (lista `PASSWORD_DEBOLI`), finestra bloccante `CambioPasswordObbligatorio`;
   rotta una tantum `api/admin/segna-password-deboli`. `InvioInCorso` (layout): barra blu e pulsante spento dopo ogni invio/clic. Classe `btn-indietro`
   per i link «← …». Calendario: annullati nascosti (`?annullati=1` per vederli). Clienti: pagine `?pc=`/`?pl=`. Collaudo `telefoniste` (20).
+- **Moduli istantanei di Meta** (Impostazioni › Lead, sezione `#meta`, `components/lead/ModuliMeta.tsx`, `src/app/meta-actions.ts`, permesso
+  `pubblicita`): Meta → gateway (progetto Vercel `gpc-meta-gateway`, cartella `gateway/`, ha le chiavi Meta) → ONE `/api/lead/meta/internal`
+  (`META_INTERNAL_MODE=live`). Moduli collegati dal CRM in `Configurazione.meta_moduli` (con marchio), uniti a `META_ALLOWED_FORM_IDS`
+  (`unisciModuli`, `src/lib/meta/moduli.ts` puro + `moduli-server.ts`). Il gateway chiede a ONE i moduli collegati (`POST /api/lead/meta/moduli`,
+  firmato con il segreto del destinatario ONE = `META_INTERNAL_SECRET`, memoria 60 s; se ONE non risponde accetta e ONE ricontrolla) e ogni
+  5 minuti (tick) porta l'elenco dei moduli letti da Meta (`fetchPageForms`) e il proprio indirizzo (`meta_catalogo`, `meta_gateway_url`).
+  ONE chiede al gateway `POST /api/internal/one` (`catalogo` | `lead` di un modulo per N giorni → `importaLeadDaGraph`, senza doppioni).
+  Lead di moduli non collegati: annotati in `meta_scartati`. Pagine nuove: ancora da variabili (`META_PAGE_ID`/`META_EXTRA_PAGE_IDS`, gateway e ONE).
+  Diagnostica: `GET /api/admin/stato-meta` (x-seed-key, niente dati personali). Test `tests/meta/moduli.test.ts`, collaudo `moduli-meta` (20).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 241, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 250, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (20)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
