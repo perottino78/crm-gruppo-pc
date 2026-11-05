@@ -45,3 +45,14 @@ export async function datiCollegati(id: string) {
   return { clienti, offerte, pratiche, lead, appuntamenti, rilievi, pose, task, assistenze, attivita, obiettivi, "progetti Solaris": progettiSolaris };
 }
 export const totaleCollegati = (c: Record<string, number>) => Object.values(c).reduce((t, v) => t + v, 0);
+
+/**
+ * Chi può comparire come commerciale di un'offerta: ruolo COMMERCIALE, ufficio commerciale, oppure chi fa già offerte
+ * (es. l'amministratore che vende anche lui). Solo persone attive.
+ */
+export function commercialiAttivi() {
+  return prisma.utente.findMany({
+    where: { stato: "ATTIVO", OR: [{ ruolo: "COMMERCIALE" }, { ufficio: "COMMERCIALE" }, { preventivi: { some: {} } }] },
+    orderBy: { nome: "asc" },
+  });
+}

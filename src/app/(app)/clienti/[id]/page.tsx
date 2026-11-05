@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { commercialiAttivi } from "@/lib/utenti/stato";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
 import { nomeTipoAppuntamento, vedeTutti } from "@/lib/calendario/eventi";
 import { aggiungiGiorni, chiaveGiorno } from "@/lib/calendario/tempo";
@@ -266,7 +267,7 @@ export default async function SchedaClientePage({
                 </div>
                 <select name="commercialeId" required className="border border-neutral-200 rounded-lg px-2 py-1.5 text-sm">
                   <option value="">Commerciale…</option>
-                  {(await prisma.utente.findMany({ where: { ruolo: "COMMERCIALE", stato: "ATTIVO" }, orderBy: { nome: "asc" } })).map((u) => (
+                  {(await commercialiAttivi()).map((u) => (
                     <option key={u.id} value={u.id}>{u.nome}</option>
                   ))}
                 </select>
