@@ -46,7 +46,7 @@ export default async function SchedaClientePage({
   const { id } = await params;
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
-  const utentiCal = await prisma.utente.findMany({ where: { passwordHash: { not: null }, stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
+  const utentiCal = await prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   if (!utenteCorrente) notFound();
 
   const cliente = await prisma.cliente.findFirst({
