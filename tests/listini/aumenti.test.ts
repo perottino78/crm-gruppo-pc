@@ -8,7 +8,10 @@ test("percentuale scritta come capita", () => {
   assert.equal(leggiPercentuale(" -2 "), -2);
   assert.equal(leggiPercentuale("0"), null);
   assert.equal(leggiPercentuale("abc"), null);
-  assert.equal(leggiPercentuale("80"), null); // quasi certamente un errore di battitura
+  assert.equal(leggiPercentuale("80"), 80); // aumenti fino al +100%
+  assert.equal(leggiPercentuale("100"), 100);
+  assert.equal(leggiPercentuale("150"), null); // quasi certamente un errore di battitura
+  assert.equal(leggiPercentuale("-60"), null); // ribasso oltre il -50%
   assert.equal(leggiPercentuale(""), null);
 });
 

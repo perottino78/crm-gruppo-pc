@@ -14,7 +14,7 @@ type P = { brand?: string; fornitore?: string; famiglia?: string; q?: string; pe
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 const euro = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
 const ERRORI: Record<string, string> = {
-  percentuale: "Scrivi la percentuale di aumento (es. 3,5). Per un ribasso usa il meno (es. -2).",
+  percentuale: "Scrivi la percentuale di aumento (es. 3,5; massimo 100). Per un ribasso usa il meno (es. -2; massimo -50).",
   vuoto: "Seleziona almeno un listino (o gli articoli del fornitore).",
   permesso: "Solo l'amministratore può applicare gli aumenti.",
 };
