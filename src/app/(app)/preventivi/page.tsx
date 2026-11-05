@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { commercialiAttivi } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import BrandSwitcher from "@/components/BrandSwitcher";
@@ -49,7 +50,7 @@ export default async function PreventiviPage({
     }),
     prisma.cliente.findMany({ where: { ...brandFiltro, ...clienteScope }, orderBy: { nome: "asc" } }),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
-    prisma.utente.findMany({ where: { ruolo: "COMMERCIALE", stato: "ATTIVO" }, orderBy: { nome: "asc" } }),
+    commercialiAttivi(),
   ]);
 
   return (
