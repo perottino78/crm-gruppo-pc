@@ -41,7 +41,7 @@ export default async function SchedaClientePage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ sez?: string; chiuse?: string }>;
+  searchParams: Promise<{ sez?: string; chiuse?: string; fissa?: string }>;
 }) {
   const { id } = await params;
   const sp = await searchParams;
@@ -389,8 +389,8 @@ export default async function SchedaClientePage({
         {sez === "appuntamenti" && (
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">
-              <a href="#nuovo-appuntamento" className="btn-3d btn-3d-green px-5 py-3 text-base">📅 Fissa un appuntamento</a>
-              <Link href={`/calendario?cliente=${cliente.id}#nuovo`} className="btn-3d btn-3d-purple px-5 py-3 text-base">🗓 Apri il calendario</Link>
+              <Link href={`/clienti/${cliente.id}?sez=appuntamenti&fissa=1#nuovo-appuntamento`} scroll={false} className="btn-3d btn-3d-green px-5 py-3 text-base">📅 Fissa un appuntamento</Link>
+              <Link href={`/calendario?cliente=${cliente.id}`} className="btn-3d btn-3d-purple px-5 py-3 text-base">🗓 Apri il calendario</Link>
             </div>
             <div className="bg-white rounded-xl border border-neutral-200 divide-y divide-neutral-100">
               {[
@@ -412,10 +412,15 @@ export default async function SchedaClientePage({
                 <p className="px-4 py-6 text-sm text-neutral-500 text-center">Nessun appuntamento.</p>
               )}
             </div>
+            {/* il modulo si apre solo con «Fissa un appuntamento» */}
+            {sp.fissa === "1" && (
             <section id="nuovo-appuntamento" className="card-fase scroll-mt-4" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <h2>📅 Fissa un appuntamento con {cliente.nome}</h2>
-                <Link href={`/calendario?cliente=${cliente.id}#nuovo`} className="text-xs font-bold text-blue-800 underline">guarda prima il calendario →</Link>
+                <span className="flex items-center gap-3">
+                  <Link href={`/calendario?cliente=${cliente.id}`} className="text-xs font-bold text-blue-800 underline">guarda prima il calendario →</Link>
+                  <Link href={`/clienti/${cliente.id}?sez=appuntamenti`} scroll={false} className="text-xs font-bold text-neutral-600 underline">✕ chiudi</Link>
+                </span>
               </div>
               <FormAppuntamento
                 utenti={utentiCal} utenteId={cliente.responsabileId ?? utenteCorrente!.id} puoAssegnare={vedeTutti(utenteCorrente!)}
@@ -423,6 +428,7 @@ export default async function SchedaClientePage({
                 cliente={{ id: cliente.id, nome: cliente.nome, email: cliente.email }} ritorno={`/clienti/${cliente.id}?sez=appuntamenti`} mailAttiva={await mailConfigurata()}
               />
             </section>
+            )}
           </div>
         )}
 

@@ -46,7 +46,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
 
   const qs = (o: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
-    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, annullati: conAnnullati ? "1" : undefined, ...o };
+    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, annullati: conAnnullati ? "1" : undefined, cliente: sp.cliente, ...o };
     for (const [k, v] of Object.entries(base)) if (v) p.set(k, v);
     return `/calendario?${p.toString()}`;
   };
@@ -79,6 +79,12 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
       </div>
 
       {sp.msg && <p className="mb-3 rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-900">{sp.msg}</p>}
+      {clientePreset && !sp.nuovo && (
+        <p className="mb-3 rounded-lg border border-purple-300 bg-purple-50 px-4 py-2 text-sm text-purple-900">
+          📅 Appuntamento per <b>{clientePreset.nome}</b>: premi sull&apos;orario libero nell&apos;agenda oppure <a href={linkNuovo(nuovoData)} className="font-bold underline">apri il modulo</a>.
+          <Link href={qs({ cliente: undefined })} className="ml-2 text-xs underline">annulla</Link>
+        </p>
+      )}
 
       {/* barra viste e filtri */}
       <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -133,14 +139,19 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
       {vista === "mese" && <Mese giorno={giorno} eventi={eventi} oggi={oggi} qs={qs} />}
       {vista === "agenda" && <Agenda eventi={eventi} />}
 
-      {/* nuovo appuntamento */}
+      {/* nuovo appuntamento: si apre solo premendo su un orario dell'agenda o su «+ Nuovo appuntamento» */}
+      {sp.nuovo && (
       <section id="nuovo" className="card-fase mt-6 scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
-        <h2 className="mb-3">+ Nuovo appuntamento</h2>
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <h2>+ Nuovo appuntamento{clientePreset ? ` con ${clientePreset.nome}` : ""}</h2>
+          <Link href={qs({})} scroll={false} className="text-xs font-bold text-neutral-600 underline">✕ chiudi</Link>
+        </div>
         <FormAppuntamento
           utenti={utenti.filter((x) => x.stato === "ATTIVO")} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
-          cliente={clientePreset} ritorno={qs({})} mailAttiva={await mailConfigurata()}
+          cliente={clientePreset} ritorno={qs({ cliente: undefined })} mailAttiva={await mailConfigurata()}
         />
       </section>
+      )}
     </div>
   );
 }

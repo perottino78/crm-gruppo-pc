@@ -7,7 +7,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { nomeTipoAppuntamento, vedeTutti, STILE_TIPO } from "@/lib/calendario/eventi";
 import { perInput, chiaveGiorno, giornoBreve, oraRoma } from "@/lib/calendario/tempo";
-import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido } from "@/app/calendario-actions";
+import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino } from "@/app/calendario-actions";
+import { telefonistaDefaultPerBrand } from "@/lib/leadIngest";
+import { aggiungiGiorni } from "@/lib/calendario/tempo";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
 import RisposteModulo from "@/components/lead/RisposteModulo";
 import { leggiNoteLead } from "@/lib/automazioni/note-lead";
@@ -28,6 +30,9 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   const tel = a.cliente.telefono;
   const fine = new Date(a.dataOra.getTime() + a.durataMin * 60_000);
   const noteLette = leggiNoteLead(a.note);
+  const idTel = await telefonistaDefaultPerBrand(a.cliente.brandId);
+  const telefonista = idTel ? (await prisma.utente.findUnique({ where: { id: idTel }, select: { nome: true } }))?.nome.split(" ")[0] ?? null : null;
+  const richiamaDefault = `${aggiungiGiorni(chiaveGiorno(new Date()), 1)}T10:00`;
   const chiuso = a.stato === "COMPLETATO" || a.stato === "ANNULLATO";
   const ritorno = `/calendario/appuntamento/${a.id}`;
   const btnStato = (stato: string, testo: string, cls: string) => (
@@ -60,7 +65,10 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
               {nomeTipoAppuntamento(a.tipo)} con <Link href={`/clienti/${a.clienteId}`} className="font-bold text-blue-800 hover:underline">{a.cliente.nome}</Link> · incaricato <b>{a.utente.nome}</b>
             </p>
             {a.note && (noteLette.risposte.length > 0 || noteLette.noteDatate.length > 0
-              ? <div className="mt-2 rounded-lg bg-neutral-50 p-3"><RisposteModulo note={a.note} /></div>
+              ? <div className="mt-2 rounded-lg border border-sky-200 bg-sky-50/60 p-3">
+                  <p className="mb-2 text-xs font-bold text-sky-900">ℹ️ Da sapere prima di andare (solo da leggere): cosa ha chiesto il cliente e cosa ha annotato il centralino</p>
+                  <RisposteModulo note={a.note} />
+                </div>
               : <p className="text-sm text-neutral-800 mt-1 whitespace-pre-line">📝 {a.note}</p>)}
             <p className="text-[11px] text-neutral-500 mt-1">
               Fissato da {a.creatoDaNome ?? "—"} · {a.invitoInviatoIl ? `invito inviato il ${a.invitoInviatoIl.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" })}` : "invito non ancora inviato"}
@@ -83,32 +91,52 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
         {luogo && <p className="px-5 pb-4 text-sm text-neutral-700">📍 {luogo}</p>}
       </div>
 
-      {/* esito */}
+      {/* dopo l'appuntamento: lo compila chi ci è andato */}
       <section className="card-fase mt-5" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
-        <h2 className="mb-2">Com&apos;è andato?</h2>
-        {a.esito && <p className="text-sm mb-2">Esito: <b>{a.esito}</b></p>}
+        <h2 className="mb-1">Dopo l&apos;appuntamento: com&apos;è andato?</h2>
+        <p className="mb-3 text-xs text-neutral-600">Lo compila chi è andato dal cliente ({a.utente.nome}). Scegli una delle strade qui sotto.</p>
+        {a.esito && <p className="mb-3 rounded border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm">Esito registrato: <b>{a.esito}</b></p>}
         {!chiuso ? (
-          <div className="flex flex-col gap-3">
-            <form action={esitoAppuntamento} className="flex flex-wrap items-end gap-2">
-              <input type="hidden" name="id" value={a.id} />
-              <input type="hidden" name="stato" value="COMPLETATO" />
-              <input type="hidden" name="ritorno" value={ritorno} />
-              <div className="flex-1 min-w-[240px]">
-                <label className="text-[11px] font-bold text-neutral-700">Esito in breve</label>
-                <input name="esito" placeholder="es. interessato, preparo l'offerta entro venerdì" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
-              </div>
-              <button className="btn-3d btn-3d-green text-sm px-4 py-2">✅ Svolto</button>
+          <div className="grid gap-3 md:grid-cols-3">
+            <form action={esitoAppuntamento} className="flex flex-col gap-2 rounded-lg border border-green-200 bg-green-50/50 p-3">
+              <p className="text-sm font-bold text-green-900">✅ Svolto</p>
+              <input type="hidden" name="id" value={a.id} /><input type="hidden" name="stato" value="COMPLETATO" /><input type="hidden" name="ritorno" value={ritorno} />
+              <textarea name="esito" rows={3} placeholder="Com'è andata? es. interessato a 3 infissi, preparo l'offerta entro venerdì" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+              <button className="btn-3d btn-3d-green px-4 py-2 text-sm">✅ Segna come svolto</button>
+              <p className="text-[11px] text-neutral-600">Poi fai l&apos;offerta con il pulsante «Nuova offerta» qui sopra.</p>
             </form>
-            <div className="flex flex-wrap gap-2">
-              {a.stato !== "CONFERMATO" && btnStato("CONFERMATO", "👍 Confermato dal cliente", "btn-3d-blue")}
-              {[1, 7].map((g) => (
-                <form key={g} action={spostaAppuntamentoRapido}>
-                  <input type="hidden" name="id" value={a.id} />
-                  <input type="hidden" name="giorni" value={g} />
-                  <button className="btn-3d btn-3d-outline text-sm px-4 py-2">↪ Sposta di {g === 1 ? "1 giorno" : "1 settimana"}</button>
-                </form>
-              ))}
-              {btnStato("ANNULLATO", "❌ Annulla appuntamento", "btn-3d-red")}
+            <form action={rifissaDalCentralino} className="flex flex-col gap-2 rounded-lg border border-amber-200 bg-amber-50/50 p-3">
+              <p className="text-sm font-bold text-amber-900">📞 Da rifissare: ci pensa il centralino</p>
+              <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+              <label className="text-[11px] font-bold text-neutral-700">Richiamare il cliente dal
+                <input type="datetime-local" name="richiamaIl" required defaultValue={richiamaDefault} className="mt-0.5 w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+              </label>
+              <textarea name="note" rows={2} placeholder="Perché va rifissato? es. c'era solo la moglie, richiamare dopo le 18" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+              <button className="btn-3d btn-3d-amber px-4 py-2 text-sm">📞 Manda a {telefonista ?? "centralino"}</button>
+              <p className="text-[11px] text-neutral-600">L&apos;appuntamento si chiude e {telefonista ?? "la telefonista"} lo trova nei suoi «Task di oggi» dal giorno scelto, con la tua nota, per richiamare e rifissare.</p>
+            </form>
+            <div className="flex flex-col gap-2 rounded-lg border border-blue-200 bg-blue-50/50 p-3">
+              <p className="text-sm font-bold text-blue-900">↪ Lo rifisso io</p>
+              <form action={spostaAppuntamentoA} className="flex flex-col gap-2">
+                <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+                <label className="text-[11px] font-bold text-neutral-700">Nuovo giorno e ora
+                  <input type="datetime-local" name="dataOra" required defaultValue={perInput(a.dataOra)} className="mt-0.5 w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+                </label>
+                <button className="btn-3d btn-3d-blue px-4 py-2 text-sm">↪ Sposta l&apos;appuntamento</button>
+              </form>
+              <div className="flex flex-wrap gap-1">
+                {[1, 7].map((g) => (
+                  <form key={g} action={spostaAppuntamentoRapido}>
+                    <input type="hidden" name="id" value={a.id} /><input type="hidden" name="giorni" value={g} />
+                    <button className="btn-3d btn-3d-outline px-2 py-1 text-xs">+{g === 1 ? "1 giorno" : "1 settimana"}</button>
+                  </form>
+                ))}
+              </div>
+              <p className="text-[11px] text-neutral-600">L&apos;invito aggiornato parte da solo.</p>
+            </div>
+            <div className="flex flex-wrap gap-2 md:col-span-3">
+              {a.stato !== "CONFERMATO" && btnStato("CONFERMATO", "👍 Confermato dal cliente (prima di andare)", "btn-3d-outline")}
+              {btnStato("ANNULLATO", "❌ Annulla (non interessato)", "btn-3d-red")}
             </div>
           </div>
         ) : (
