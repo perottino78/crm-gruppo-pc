@@ -175,7 +175,7 @@ export async function fetchPageForms(
   return { id: pageId, nome, moduli };
 }
 
-export type IscrizionePagina = { id: string; nome: string | null; iscritta: boolean | null; campi: string[]; errore?: string };
+export type IscrizionePagina = { id: string; nome: string | null; iscritta: boolean | null; campi: string[]; app?: string[]; errore?: string };
 
 /**
  * SOLA LETTURA: la pagina manda i lead a questa app? GET /{page}/subscribed_apps (con il token della pagina).
@@ -209,7 +209,27 @@ export async function fetchPageSubscription(
   if (!info.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: info.code };
   const r = await leggi(`${pageId}/subscribed_apps`, tokenPagina ?? cfg.accessToken, { fields: "id,name,subscribed_fields" });
   if (!r.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: r.code };
-  const app = (Array.isArray(r.json.data) ? (r.json.data as Record<string, unknown>[]) : []).find((a) => !cfg.appId || a.id === cfg.appId);
+  const tutte = Array.isArray(r.json.data) ? (r.json.data as Record<string, unknown>[]) : [];
+  const app = tutte.find((a) => !cfg.appId || a.id === cfg.appId);
   const campi = Array.isArray(app?.subscribed_fields) ? (app!.subscribed_fields as unknown[]).filter((x): x is string => typeof x === "string") : [];
-  return { id: pageId, nome, iscritta: !!app && campi.includes("leadgen"), campi };
+  // nomi delle app iscritte alla pagina (per riconoscere in Meta Business quale app usa P&C ONE)
+  const nomi = tutte.map((a) => `${typeof a.name === "string" ? a.name : "?"} (${typeof a.id === "string" ? a.id : "?"})`);
+  return { id: pageId, nome, iscritta: !!app && campi.includes("leadgen"), campi, app: nomi };
+}
+
+/** SOLA LETTURA: con quale app e quale utente il gateway parla con Meta (solo nomi e ID, mai token). */
+export async function fetchIdentita(cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl">, fetchImpl: typeof fetch = fetch) {
+  if (!cfg.accessToken || !cfg.appSecret) return { errore: "config_missing" };
+  const proof = appSecretProof(cfg.accessToken, cfg.appSecret);
+  const leggi = async (path: string, fields: string) => {
+    try {
+      const res = await fetchImpl(`${cfg.graphBaseUrl}/${cfg.graphVersion}/${path}?fields=${fields}&appsecret_proof=${proof}`, { headers: { Authorization: `Bearer ${cfg.accessToken}` }, signal: AbortSignal.timeout(10_000) });
+      const j = (await res.json().catch(() => null)) as Record<string, unknown> | null;
+      if (!res.ok) return { errore: `graph_${res.status}_c${(j?.error as { code?: number } | undefined)?.code ?? ""}` };
+      return { id: typeof j?.id === "string" ? j.id : null, nome: typeof j?.name === "string" ? j.name : null };
+    } catch {
+      return { errore: "graph_network" };
+    }
+  };
+  return { utente: await leggi("me", "id,name"), app: await leggi("app", "id,name") };
 }

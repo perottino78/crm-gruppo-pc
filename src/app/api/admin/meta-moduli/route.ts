@@ -30,10 +30,10 @@ export async function GET(req: NextRequest) {
   if (!ok(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const giorni = Math.min(90, Math.max(1, Number(req.nextUrl.searchParams.get("giorni")) || 30));
   const moduli = (req.nextUrl.searchParams.get("moduli") ?? "").split(",").filter((x) => /^\d+$/.test(x));
-  const pagine = await chiediAlGateway<{ pagine?: unknown }>({ azione: "pagine" });
+  const pagine = await chiediAlGateway<{ pagine?: unknown; identita?: unknown }>({ azione: "pagine" });
   const conteggi = [];
   for (const m of moduli) conteggi.push(await conta(m, giorni));
-  return NextResponse.json({ automazioni: await statoAutomazioni(), pagine: pagine.ok ? pagine.dati.pagine : pagine.errore, conteggi, collegati: await moduliCollegati() });
+  return NextResponse.json({ automazioni: await statoAutomazioni(), pagine: pagine.ok ? pagine.dati.pagine : pagine.errore, identita: pagine.ok ? pagine.dati.identita : null, conteggi, collegati: await moduliCollegati() });
 }
 
 export async function POST(req: NextRequest) {
