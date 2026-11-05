@@ -105,13 +105,11 @@ export default async function ClientiPage({
 
   // Ricerca lead: nome, telefono, email
   const leadRicercaWhere: Prisma.LeadWhereInput = ricercaStd
-    ? {
-        OR: [
-          { nome: { contains: ricercaStd, mode: "insensitive" } },
-          { telefono: { contains: ricercaStd, mode: "insensitive" } },
-          { email: { contains: ricercaStd, mode: "insensitive" } },
-        ],
-      }
+    ? { AND: ricercaStd.split(/\s+/).filter(Boolean).slice(0, 6).map((p) => ({ OR: [
+        { nome: { contains: p, mode: "insensitive" as const } },
+        { telefono: { contains: p, mode: "insensitive" as const } },
+        { email: { contains: p, mode: "insensitive" as const } },
+      ] })) }
     : {};
 
   const leadWhere: Prisma.LeadWhereInput = { AND: [brandFiltro, leadScope, leadRicercaWhere] };
