@@ -36,7 +36,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
     : [giorno, aggiungiGiorni(giorno, 30)];
   const [tuttiEventi, utenti] = await Promise.all([
     eventiPeriodo({ da: inizioGiorno(daK), a: inizioGiorno(aK), utenteId: filtroUtente, tipi }),
-    prisma.utente.findMany({ where: { passwordHash: { not: null } }, select: { id: true, nome: true, ufficio: true, stato: true }, orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { OR: [{ stato: "ATTIVO" }, { passwordHash: { not: null } }] }, select: { id: true, nome: true, ufficio: true, stato: true }, orderBy: { nome: "asc" } }),
   ]);
   // gli annullati non occupano spazio: si vedono solo a richiesta (?annullati=1)
   const conAnnullati = sp.annullati === "1";
