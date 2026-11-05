@@ -248,6 +248,7 @@ export async function chiaviPagineDa(
   token: string,
   cfg: Pick<MetaConfig, "appSecret" | "appId" | "graphVersion" | "graphBaseUrl">,
   fetchImpl: typeof fetch = fetch,
+  paginePossibili: string[] = [],
 ): Promise<{ ok: true; pagine: PaginaConChiave[]; lunga: boolean } | { ok: false; code: string }> {
   if (!cfg.appSecret) return { ok: false, code: "config_missing" };
   const t = token.trim();
@@ -280,22 +281,50 @@ export async function chiaviPagineDa(
   const ex = await get(`${base}/oauth/access_token?${q}`);
   const lunga = ex.ok && typeof ex.json.access_token === "string" ? (ex.json.access_token as string) : null;
   const tok = lunga ?? t;
-  // pagine gestite (chiave utente) …
+  const trovate = new Map<string, PaginaConChiave>();
+  const aggiungi = (dati: unknown) => {
+    for (const p of Array.isArray(dati) ? (dati as Record<string, unknown>[]) : []) {
+      if (typeof p.id === "string" && /^\d+$/.test(p.id) && typeof p.access_token === "string" && !trovate.has(p.id)) {
+        trovate.set(p.id, { id: p.id, nome: typeof p.name === "string" ? p.name : `Pagina ${p.id}`, token: p.access_token });
+      }
+    }
+  };
+  // 1) pagine gestite direttamente dal profilo
   const acc = await get(`${base}/me/accounts?fields=id,name,access_token&limit=100&appsecret_proof=${proof(tok)}`, tok);
-  if (acc.ok && Array.isArray(acc.json.data)) {
-    const pagine = (acc.json.data as Record<string, unknown>[])
-      .filter((p) => typeof p.id === "string" && /^\d+$/.test(p.id) && typeof p.access_token === "string")
-      .map((p) => ({ id: p.id as string, nome: typeof p.name === "string" ? p.name : `Pagina ${p.id}`, token: p.access_token as string }));
-    if (pagine.length) return { ok: true, pagine, lunga: !!lunga };
+  if (acc.ok) aggiungi(acc.json.data);
+  // 2) pagine del Business Manager (di proprietà o in gestione per clienti)
+  const biz = await get(`${base}/me/businesses?fields=id&limit=50&appsecret_proof=${proof(tok)}`, tok);
+  if (biz.ok && Array.isArray(biz.json.data)) {
+    for (const b of (biz.json.data as Record<string, unknown>[]).slice(0, 10)) {
+      if (typeof b.id !== "string" || !/^\d+$/.test(b.id)) continue;
+      for (const tipo of ["owned_pages", "client_pages"]) {
+        const r = await get(`${base}/${b.id}/${tipo}?fields=id,name,access_token&limit=100&appsecret_proof=${proof(tok)}`, tok);
+        if (r.ok) aggiungi(r.json.data);
+      }
+    }
   }
-  // … oppure è già la chiave di una pagina
-  if (typeof me.json.id === "string" && /^\d+$/.test(me.json.id)) {
+  // 3) le pagine che il CRM conosce già (Gruppo P&C, Solaris…), chieste una per una
+  for (const id of paginePossibili.filter((x) => /^\d+$/.test(x) && !trovate.has(x)).slice(0, 20)) {
+    const r = await get(`${base}/${id}?fields=id,name,access_token&appsecret_proof=${proof(tok)}`, tok);
+    if (r.ok) aggiungi([r.json]);
+  }
+  // 4) oppure è già la chiave di una pagina
+  if (!trovate.size && typeof me.json.id === "string" && /^\d+$/.test(me.json.id)) {
     const p = await get(`${base}/${me.json.id}?fields=id,name,access_token&appsecret_proof=${proof(tok)}`, tok);
-    if (p.ok && typeof p.json.access_token === "string") return { ok: true, pagine: [{ id: me.json.id, nome: String(me.json.name ?? me.json.id), token: p.json.access_token }], lunga: !!lunga };
-    if (p.ok) return { ok: true, pagine: [{ id: me.json.id, nome: String(me.json.name ?? me.json.id), token: tok }], lunga: !!lunga };
+    if (p.ok && typeof p.json.access_token === "string") aggiungi([p.json]);
+    else if (p.ok && typeof p.json.name === "string" && !("first_name" in p.json)) trovate.set(me.json.id, { id: me.json.id, nome: p.json.name, token: tok });
   }
+  if (trovate.size) return { ok: true, pagine: [...trovate.values()], lunga: !!lunga };
+  // niente: si spiega quali autorizzazioni mancano
+  const perm = await get(`${base}/me/permissions?appsecret_proof=${proof(tok)}`, tok);
+  const concesse = new Set(perm.ok && Array.isArray(perm.json.data) ? (perm.json.data as Record<string, unknown>[]).filter((x) => x.status === "granted").map((x) => String(x.permission)) : []);
+  const mancano = PERMESSI_CHIAVE.filter((x) => !concesse.has(x));
+  if (perm.ok && mancano.length) return { ok: false, code: `permessi_mancanti:${mancano.join(",")}` };
   return { ok: false, code: "nessuna_pagina" };
 }
+
+/** Autorizzazioni da spuntare quando si genera la chiave in Graph API Explorer. */
+export const PERMESSI_CHIAVE = ["pages_show_list", "pages_read_engagement", "pages_manage_metadata", "pages_manage_ads", "leads_retrieval", "business_management"];
 
 /** Attiva l'arrivo dei lead di una pagina verso l'app del CRM (POST /{page}/subscribed_apps, campo leadgen). Solo su richiesta esplicita. */
 export async function iscriviPagina(

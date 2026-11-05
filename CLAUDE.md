@@ -238,7 +238,7 @@ login nel `matcher` del middleware.
   ONE chiede al gateway `POST /api/internal/one` (`catalogo` | `lead` di un modulo per N giorni → `importaLeadDaGraph`, senza doppioni).
   Lead di moduli non collegati: annotati in `meta_scartati`. Pagine: quelle delle variabili di ONE (`META_PAGE_ID`/`META_EXTRA_PAGE_IDS`) arrivano al gateway con la risposta di `/moduli` (non serve toccare il gateway); `azione: "pagine"` controlla in sola lettura se la pagina è iscritta ai lead dell'app. Rotta tecnica `api/admin/meta-moduli` (GET conteggi, POST collega/recupera).
   Chiavi delle pagine (il `META_ACCESS_TOKEN` del gateway è la chiave della sola pagina Gruppo P&C, app «CRM Interno P&C» 1842181417134760): «🔑 Chiave di Meta»
-  in `#meta` → gateway `azione: "chiave"` (`chiaviPagineDa`: scambio fb_exchange_token con l'App Secret + `/me/accounts` = chiavi di pagina senza scadenza)
+  in `#meta` → gateway `azione: "chiave"` (`chiaviPagineDa`: scambio fb_exchange_token con l'App Secret, poi chiavi di pagina senza scadenza da `/me/accounts`, Business Manager `owned_pages`/`client_pages` e pagine già note; se nessuna, `permessi_mancanti:` da `/me/permissions`)
   → salvate cifrate (`cifra` di `mail/caselle.ts`) in `Configurazione.meta_pagine` con il marchio; `/moduli` le passa al gateway (`token`), che le usa
   per lead, moduli e iscrizione (`deps.tokenPagina`). «📡 Attiva l'arrivo dei lead» = `azione: "iscrivi"` (`POST /{page}/subscribed_apps`).
   Diagnostica: `GET /api/admin/stato-meta` (x-seed-key, niente dati personali). Test `tests/meta/moduli.test.ts`, collaudo `moduli-meta` (28).
@@ -248,7 +248,7 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 255, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 256, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

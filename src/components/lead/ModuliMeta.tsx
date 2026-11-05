@@ -155,7 +155,7 @@ export default async function ModuliMeta() {
             <li>Apri <a href="https://developers.facebook.com/tools/explorer" target="_blank" rel="noreferrer" className="text-blue-800 underline">Graph API Explorer di Meta</a> con il Facebook che amministra le pagine (serve essere amministratore o sviluppatore dell&apos;app).</li>
             <li>A destra, in <b>«App Meta»</b>, scegli <b>CRM Interno P&C</b>. In <b>«Utente o pagina»</b> scegli <b>«Token d&apos;accesso utente»</b>.</li>
             <li>In <b>«Autorizzazioni»</b> aggiungi: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>pages_manage_metadata</code>, <code>pages_manage_ads</code>, <code>leads_retrieval</code>, <code>business_management</code>.</li>
-            <li>Premi <b>«Generate Access Token»</b>: nella finestra di Facebook spunta <b>tutte le pagine</b> (Gruppo P&C, Solaris…) e conferma.</li>
+            <li>Premi <b>«Generate Access Token»</b>. Nella finestra di Facebook premi <b>«Modifica impostazioni»</b> (o «Scegli cosa consentire»): spunta <b>tutte le pagine</b> (Gruppo P&C, Solaris…) e, se compare, anche il <b>Business</b>; poi conferma fino alla fine.</li>
             <li>Copia il testo lungo del campo <b>«Token d&apos;accesso»</b>, incollalo qui sotto e premi «Salva la chiave». P&C ONE la trasforma in chiavi che non scadono, una per pagina, e le conserva cifrate.</li>
             <li>Poi premi <b>«Aggiorna l&apos;elenco da Meta»</b>: compare la pagina nuova. Se serve, premi <b>«📡 Attiva l&apos;arrivo dei lead»</b> e collega i suoi moduli.</li>
           </ol>
