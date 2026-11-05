@@ -18,7 +18,7 @@ export default async function SoggettoPage({ params }: { params: Promise<{ id: s
   if (!s) notFound();
   return (
     <div className="max-w-5xl">
-      <Link href="/impostazioni/anagrafica" className="text-xs text-neutral-600 hover:underline">← Anagrafica</Link>
+      <Link href="/impostazioni/anagrafica" className="btn-indietro">← Anagrafica</Link>
       <h1 className="text-2xl font-bold text-neutral-900 mt-2 mb-4">{s.ragioneSociale}</h1>
       <form action={aggiornaSoggetto} className="bg-white rounded-lg border border-neutral-200 p-4">
         <input type="hidden" name="id" value={s.id} />

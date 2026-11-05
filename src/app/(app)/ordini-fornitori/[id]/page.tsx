@@ -47,7 +47,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/ordini-fornitori" className="text-sm text-blue-800 underline">← Ordini fornitori</Link>
+          <Link href="/ordini-fornitori" className="btn-indietro">← Ordini fornitori</Link>
           <h1 className="text-2xl font-bold text-neutral-900">Ordine fornitore {nr}</h1>
           <p className="text-sm text-neutral-700"><b>{o.fornitore.ragioneSociale}</b> · del {dataIt(o.dataOrdine)} · {o.divisione ?? "P&C"}{o.creatoDaNome ? ` · emesso da ${o.creatoDaNome}` : ""}
             {o.commessa && <> · commessa <Link href={`/commesse/${o.commessaId}#acquisti`} className="underline">{o.commessa.numero}/{o.commessa.anno} ({o.commessa.cliente.nome})</Link></>}</p>

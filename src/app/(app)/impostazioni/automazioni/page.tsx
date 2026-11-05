@@ -79,7 +79,7 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
   return (
     <div className="max-w-5xl space-y-4">
       <div>
-        <Link href={admin ? "/impostazioni" : "/marketing"} className="text-sm text-blue-800 underline">← {admin ? "Impostazioni" : "Marketing"}</Link>
+        <Link href={admin ? "/impostazioni" : "/marketing"} className="btn-indietro">← {admin ? "Impostazioni" : "Marketing"}</Link>
         <h1 className="text-2xl font-bold text-neutral-900">✉️ Email automatiche dei lead</h1>
         <p className="text-sm text-neutral-600">I percorsi di Keap ricostruiti nel CRM: dopo ogni esito registrato in <Link href="/lead" className="underline">Lead da lavorare</Link> partono le email al cliente e i solleciti al centralino, con gli stessi tempi (lun–sab dalle 08:00, chiusura task alle 18:30).</p>
       </div>

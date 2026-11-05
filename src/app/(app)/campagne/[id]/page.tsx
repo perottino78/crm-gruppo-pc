@@ -39,7 +39,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   return (
     <div className="max-w-5xl space-y-4">
       <div>
-        <Link href="/campagne" className="text-sm text-blue-800 underline">← Campagne</Link>
+        <Link href="/campagne" className="btn-indietro">← Campagne</Link>
         <h1 className="text-2xl font-bold text-neutral-900">📣 {c.nome}</h1>
         <p className="text-sm text-neutral-600">
           {c.stato === "BOZZA" ? "Bozza" : c.stato === "IN_INVIO" ? "In invio" : "Inviata"}{c.creataDa ? ` · creata da ${c.creataDa}` : ""}

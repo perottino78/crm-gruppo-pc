@@ -103,7 +103,7 @@ export default async function SchedaClientePage({
 
   return (
     <div className="max-w-6xl">
-      <Link href="/clienti" className="text-xs text-neutral-600 hover:underline">← Clienti</Link>
+      <Link href="/clienti" className="btn-indietro">← Clienti</Link>
 
       {/* ── Testata ─────────────────────────────────────────────── */}
       <section className="mt-2 bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden">

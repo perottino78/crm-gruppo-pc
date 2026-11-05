@@ -40,7 +40,7 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/amministrazione/fatture-vendita" className="text-sm text-blue-800 underline">← Fatture di vendita</Link>
+          <Link href="/amministrazione/fatture-vendita" className="btn-indietro">← Fatture di vendita</Link>
           <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.numero} del {dataIt(f.data)}</h2>
           <p className="text-sm text-neutral-700">
             <b>{f.clienteNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : f.codiceFiscale ? ` · CF ${f.codiceFiscale}` : ""} · {f.divisione ?? "P&C"}{f.brand && f.brand !== (f.divisione ?? "P&C") ? ` · ${f.brand}` : ""} · {f.origine === "XML" ? "da XML" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}

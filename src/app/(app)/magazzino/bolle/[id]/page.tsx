@@ -42,7 +42,7 @@ export default async function BollaPage({ params }: { params: Promise<{ id: stri
     <div className="space-y-4 max-w-6xl">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/magazzino/bolle" className="text-sm text-blue-800 underline">← Bolle d&apos;entrata</Link>
+          <Link href="/magazzino/bolle" className="btn-indietro">← Bolle d&apos;entrata</Link>
           <h2 className="text-xl font-bold text-neutral-900">Bolla {numeroBolla(b)} · {b.fornitoreNome}</h2>
           <p className="text-sm text-neutral-700">{CAUSALI_BOLLA[b.causale] ?? b.causale} · arrivata il {dataIt(b.dataArrivo)}{b.numeroDdt ? ` · DDT ${b.numeroDdt}` : ""}{b.dataDdt ? ` del ${dataIt(b.dataDdt)}` : ""}{b.creatoDaNome ? ` · inserita da ${b.creatoDaNome}` : ""}</p>
           {b.registrataIl && <p className="text-xs text-neutral-600">Registrata il {b.registrataIl.toLocaleString("it-IT")} da {b.registrataDaNome}</p>}

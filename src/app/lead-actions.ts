@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 
 import { puo } from "@/lib/permessi/catalogo";
 import { revalidatePath } from "next/cache";
@@ -20,7 +21,9 @@ export async function rigeneraChiaveLead() {
 }
 
 export async function impostaTelefonistaBrand(formData: FormData) {
-  await soloAdmin();
+  // amministratore o marketing (chi gestisce i lead da pubblicità)
+  const u = await getCurrentUser();
+  if (!u || !puo(u, "pubblicita")) redirect("/impostazioni");
   const brands = await prisma.brand.findMany();
   for (const b of brands) {
     const val = formData.get(`tel_brand_${b.id}`) as string | null;
@@ -32,4 +35,5 @@ export async function impostaTelefonistaBrand(formData: FormData) {
     }
   }
   revalidatePath("/impostazioni/lead");
+  redirect(`/impostazioni/lead?ok=${encodeURIComponent("Telefoniste salvate: i prossimi lead arriveranno a loro")}#telefoniste`);
 }

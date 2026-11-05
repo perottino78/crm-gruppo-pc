@@ -221,19 +221,27 @@ login nel `matcher` del middleware.
 - **Foto di rilievi e pose**: salvate come data URI (`RilievoAllegato`, `PosaFoto`) ma servite da `GET /api/foto/<rilievo|posa>/<id>` (solo utenti
   collegati): la pagina della commessa NON deve mai includere i data URI (con poche foto superava il limite di Vercel e non si apriva).
   `FotoRilievo` riduce a 1280 px JPEG 0,7 e tiene ogni invio sotto ~3,4 MB (limite richieste Vercel 4,5 MB).
+- **Area telefoniste** (richieste di Cristina e Rocco, nov 2026): `/lead` = «Task di oggi» compatto (da fare entro oggi + scaduti, «In programma»
+  e «✓ Lavorati oggi» a scomparsa, ricerca e Chiusi/Tutti); ogni riga apre `/lead/[id]` (attività dedicata: contatto, provenienza, risposte del modulo
+  a elenco `components/lead/RisposteModulo.tsx` + `src/lib/automazioni/note-lead.ts` puro, esito con `EsitoLead` che mostra solo i campi utili, ultima/prossima
+  attività con `spostaProssimaAttivita`, `riassegnaLead`, cronologia con `aggiungiNotaLead`). `/lead?id=` reindirizza. Dopo l'esito si torna a `/lead?fatto=`.
+  Lead nuovi: telefonista del marchio da Impostazioni › Lead (anche marketing), altrimenti la prima TELEFONISTA in ordine alfabetico; `passaLeadAperti`
+  sposta in blocco. Password di default: `login` segna `mustChangePassword` (lista `PASSWORD_DEBOLI`), finestra bloccante `CambioPasswordObbligatorio`;
+  rotta una tantum `api/admin/segna-password-deboli`. `InvioInCorso` (layout): barra blu e pulsante spento dopo ogni invio/clic. Classe `btn-indietro`
+  per i link «← …». Calendario: annullati nascosti (`?annullati=1` per vederli). Clienti: pagine `?pc=`/`?pl=`. Collaudo `telefoniste` (19).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 237, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 241, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (19)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

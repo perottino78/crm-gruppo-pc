@@ -8,6 +8,8 @@ import AccentBar from "@/components/AccentBar";
 import { getCurrentUser } from "@/lib/auth";
 import { logout } from "@/app/actions";
 import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
+import CambioPasswordObbligatorio from "@/components/CambioPasswordObbligatorio";
+import InvioInCorso from "@/components/InvioInCorso";
 
 // Mentre qualcuno usa il CRM gli invii scaduti partono anche senza il controllo periodico (al massimo una volta al minuto).
 let ultimoControllo = 0;
@@ -43,6 +45,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             </div>
           ) : children}
         </main>
+        <Suspense fallback={null}><InvioInCorso /></Suspense>
+        {utente.mustChangePassword && (
+          <Suspense fallback={null}><CambioPasswordObbligatorio nome={utente.nome} /></Suspense>
+        )}
       </div>
     </div>
   );

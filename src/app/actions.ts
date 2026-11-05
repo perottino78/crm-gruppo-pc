@@ -1346,6 +1346,8 @@ export async function login(formData: FormData) {
   }
 
   if (utente!.stato !== "ATTIVO") redirect(`/login?errore=${utente!.stato === "PAUSA" ? "pausa" : "disattivato"}`);
+  // password di default o troppo semplice: al primo ingresso il CRM chiede subito di cambiarla
+  if (PASSWORD_DEBOLI.includes(password!) && !utente!.mustChangePassword) await prisma.utente.update({ where: { id: utente!.id }, data: { mustChangePassword: true } });
   await creaSessione(utente!.id);
   redirect(next && next.startsWith("/") ? next : "/");
 }
@@ -1355,6 +1357,9 @@ export async function logout() {
   redirect("/login");
 }
 
+/** Password di default o troppo semplici: chi entra con queste deve cambiarla subito. */
+const PASSWORD_DEBOLI = ["123456", "12345678", "123456789", "password", "qwerty", "000000", "111111"];
+
 export async function cambiaPassword(formData: FormData) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
@@ -1362,12 +1367,17 @@ export async function cambiaPassword(formData: FormData) {
   const passwordAttuale = str(formData, "passwordAttuale");
   const nuovaPassword = str(formData, "nuovaPassword");
   const conferma = str(formData, "conferma");
+  // dalla finestra del primo accesso si torna alla pagina dov'era; dal Profilo al Profilo
+  const t = str(formData, "torna");
+  const torna = t && /^\/[A-Za-z]?/.test(t) && !t.startsWith("//") ? t : "/profilo";
+  const errore = (m: string) => redirect(`${torna}${torna.includes("?") ? "&" : "?"}errore=${encodeURIComponent(m)}`);
 
-  if (!nuovaPassword || nuovaPassword.length < 6) {
-    redirect("/profilo?errore=" + encodeURIComponent("La nuova password deve avere almeno 6 caratteri"));
+  if (!nuovaPassword || nuovaPassword.length < (utente!.mustChangePassword ? 8 : 6)) {
+    errore(`La nuova password deve avere almeno ${utente!.mustChangePassword ? 8 : 6} caratteri`);
   }
+  if (PASSWORD_DEBOLI.includes(nuovaPassword!)) errore("Questa password è troppo semplice: scegline un'altra");
   if (nuovaPassword !== conferma) {
-    redirect("/profilo?errore=" + encodeURIComponent("Le due password non coincidono"));
+    errore("Le due password non coincidono");
   }
   // Se l'utente ha già una password impostata (non è il primo accesso forzato),
   // richiediamo comunque la password attuale per sicurezza.
@@ -1382,7 +1392,7 @@ export async function cambiaPassword(formData: FormData) {
     where: { id: utente!.id },
     data: { passwordHash, mustChangePassword: false },
   });
-  redirect("/profilo?ok=1");
+  redirect(torna === "/profilo" ? "/profilo?ok=1" : torna);
 }
 
 export async function aggiornaUsername(formData: FormData) {

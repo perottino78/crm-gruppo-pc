@@ -24,7 +24,7 @@ export default async function AnagraficaPage({ searchParams }: { searchParams: P
 
   return (
     <div className="max-w-5xl">
-      <Link href="/impostazioni" className="text-xs text-neutral-600 hover:underline">← Impostazioni</Link>
+      <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
       <h1 className="text-2xl font-bold text-neutral-900 mt-2 mb-1">Anagrafica fornitori, posatori e tecnici</h1>
       <p className="text-sm text-neutral-700 mb-4">Un solo elenco: ogni soggetto può avere più ruoli (es. un cliente che diventa anche fornitore).</p>
 

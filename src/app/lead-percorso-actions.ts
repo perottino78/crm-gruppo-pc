@@ -94,3 +94,77 @@ export async function salvaRecupero(fd: FormData) {
   revalidatePath("/impostazioni/automazioni");
   redirect("/impostazioni/automazioni?recupero=1");
 }
+
+/** Chi può spostare i lead da una persona all'altra: amministratore e marketing (pubblicità). */
+const gestisceAssegnazioni = (u: Parameters<typeof puo>[0]) => puo(u, "pubblicita") || puo(u, "marketing");
+
+/** Cambia a chi è assegnato un lead (il marketing/amministratore, o chi lo ha in mano e lo passa a un collega). */
+export async function riassegnaLead(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const leadId = str(fd, "leadId");
+  const a = str(fd, "telefonistaId");
+  const ritorno = str(fd, "ritorno");
+  if (!leadId || !a) redirect(torna(ritorno, { errore: "Scegli a chi assegnarlo." }));
+  const lead = await prisma.lead.findFirst({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] }, select: { id: true, telefonistaId: true } });
+  if (!lead) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  if (!gestisceAssegnazioni(u) && lead!.telefonistaId !== u!.id) redirect(torna(ritorno, { errore: "Puoi passare solo i lead assegnati a te." }));
+  const dest = await prisma.utente.findFirst({ where: { id: a!, stato: "ATTIVO" }, select: { id: true, nome: true } });
+  if (!dest) redirect(torna(ritorno, { errore: "Persona non trovata o non attiva." }));
+  await prisma.lead.update({ where: { id: leadId! }, data: { telefonistaId: dest!.id } });
+  await prisma.leadEvento.create({ data: { leadId: leadId!, tipo: "lead.assegnato", testo: `Assegnato a ${dest!.nome}`, utenteNome: u!.nome } });
+  revalidatePath("/lead");
+  redirect(torna(ritorno, { ok: `Lead assegnato a ${dest!.nome}` }));
+}
+
+/** Passa tutti i lead ancora aperti da una persona a un'altra (es. da Alessia a Cristina). */
+export async function passaLeadAperti(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const dove = "/impostazioni/lead";
+  if (!gestisceAssegnazioni(u)) redirect(`${dove}?errore=${encodeURIComponent("Solo amministratore e marketing")}`);
+  const da = str(fd, "da"), a = str(fd, "a");
+  if (!da || !a || da === a) redirect(`${dove}?errore=${encodeURIComponent("Scegli da chi e a chi passare i lead")}`);
+  const dest = await prisma.utente.findFirst({ where: { id: a!, stato: "ATTIVO" }, select: { id: true, nome: true } });
+  if (!dest) redirect(`${dove}?errore=${encodeURIComponent("La persona che li riceve non è attiva")}`);
+  const { FASI_APERTE } = await import("@/lib/automazioni/percorsi");
+  const aperti = await prisma.lead.findMany({ where: { telefonistaId: da!, fase: { in: FASI_APERTE } }, select: { id: true } });
+  if (aperti.length) {
+    await prisma.lead.updateMany({ where: { id: { in: aperti.map((l) => l.id) } }, data: { telefonistaId: dest!.id } });
+    await prisma.leadEvento.createMany({ data: aperti.map((l) => ({ leadId: l.id, tipo: "lead.assegnato", testo: `Passato a ${dest!.nome} (tutti i lead aperti)`, utenteNome: u!.nome })) });
+  }
+  revalidatePath("/lead");
+  redirect(`${dove}?ok=${encodeURIComponent(`${aperti.length} lead aperti passati a ${dest!.nome}`)}#telefoniste`);
+}
+
+/** Nota nella cronologia del lead (resta nello storico, non cambia la fase). */
+export async function aggiungiNotaLead(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const leadId = str(fd, "leadId");
+  const testo = str(fd, "testo");
+  const ritorno = str(fd, "ritorno");
+  if (!leadId || !testo) redirect(torna(ritorno, { errore: "Scrivi la nota." }));
+  const visibile = await prisma.lead.count({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] } });
+  if (!visibile) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  await prisma.leadEvento.create({ data: { leadId: leadId!, tipo: "lead.nota", testo: testo!.slice(0, 2000), utenteNome: u!.nome } });
+  revalidatePath(`/lead/${leadId}`);
+  redirect(torna(ritorno, { ok: "Nota aggiunta" }));
+}
+
+/** Sposta la prossima attività (quando richiamare): cambia solo la scadenza in elenco, il percorso automatico resta quello. */
+export async function spostaProssimaAttivita(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const leadId = str(fd, "leadId");
+  const quando = daOraRoma(str(fd, "data"));
+  const ritorno = str(fd, "ritorno");
+  if (!leadId || !quando) redirect(torna(ritorno, { errore: "Scegli giorno e ora." }));
+  const visibile = await prisma.lead.count({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] } });
+  if (!visibile) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  await prisma.lead.update({ where: { id: leadId! }, data: { scadenzaAzione: quando } });
+  const testo = quando!.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+  await prisma.leadEvento.create({ data: { leadId: leadId!, tipo: "lead.spostato", testo: `Prossima attività spostata a ${testo}`, utenteNome: u!.nome } });
+  revalidatePath("/lead");
+  redirect(torna(ritorno, { ok: `Prossima attività: ${testo}` }));
+}

@@ -38,7 +38,7 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
     <div className="p-4 md:p-6 space-y-4 max-w-7xl">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/prodotti/articoli" className="text-sm text-blue-800 underline">← Anagrafica articoli</Link>
+          <Link href="/prodotti/articoli" className="btn-indietro">← Anagrafica articoli</Link>
           <h1 className="text-2xl font-bold text-neutral-900">{nuovo ? "Nuovo articolo" : <><span className="font-mono text-lg text-neutral-500">{a!.codice}</span> {a!.descrizione}</>}</h1>
           {a && <p className="text-xs text-neutral-500">Ultima modifica {a.updatedAt.toLocaleString("it-IT")}{a.aggiornatoDaNome ? ` · ${a.aggiornatoDaNome}` : ""}{!a.attivo ? " · DISATTIVATO" : ""}</p>}
         </div>

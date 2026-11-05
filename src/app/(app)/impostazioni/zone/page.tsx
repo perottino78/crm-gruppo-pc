@@ -28,7 +28,7 @@ export default async function ZonePage({ searchParams }: { searchParams: Promise
   return (
     <div className="max-w-6xl space-y-5">
       <div>
-        <Link href="/impostazioni" className="text-sm text-blue-800 underline">← Impostazioni</Link>
+        <Link href="/impostazioni" className="btn-indietro">← Impostazioni</Link>
         <h1 className="text-2xl font-extrabold text-neutral-900">🗺️ Zone commerciali</h1>
         <p className="text-sm text-neutral-600">
           Ogni zona raccoglie una o più regioni (e, se serve, province in più) con il suo <b>responsabile commerciale</b>. Il responsabile, con un profilo
