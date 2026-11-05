@@ -7,9 +7,10 @@ import { mapLead } from "./mapping";
 import { prismaLeadSink } from "./prismaSink";
 import type { GraphLead, LeadgenEvent } from "./types";
 import {
-  CHIAVE_CATALOGO, CHIAVE_GATEWAY, CHIAVE_MODULI, CHIAVE_SCARTATI, annotaScartato, intestazioniFirmate, leggiModuli, pulisciCatalogo, unisciModuli,
-  type CatalogoMeta, type ModuloMeta, type Scartati,
+  CHIAVE_CATALOGO, CHIAVE_GATEWAY, CHIAVE_MODULI, CHIAVE_PAGINE, CHIAVE_SCARTATI, annotaScartato, intestazioniFirmate, leggiModuli, leggiPagine, pulisciCatalogo, unisciModuli,
+  type CatalogoMeta, type ModuloMeta, type PaginaCollegata, type Scartati,
 } from "./moduli";
+import { cifra, decifra } from "@/lib/mail/caselle";
 
 export async function moduliCollegati(): Promise<ModuloMeta[]> {
   return leggiModuli(await getConfig(CHIAVE_MODULI));
@@ -17,9 +18,29 @@ export async function moduliCollegati(): Promise<ModuloMeta[]> {
 export async function salvaModuli(lista: ModuloMeta[]) {
   await setConfig(CHIAVE_MODULI, JSON.stringify(lista));
 }
-/** Configurazione Meta effettiva: variabili di Vercel + moduli collegati dal CRM. */
+/** Pagine collegate dal CRM (chiavi cifrate; per mostrarle non si decifrano). */
+export async function pagineCollegate(): Promise<PaginaCollegata[]> {
+  return leggiPagine(await getConfig(CHIAVE_PAGINE));
+}
+/** Salva o aggiorna le pagine; la chiave arriva in chiaro e si salva cifrata (AES-GCM). */
+export async function salvaPagine(nuove: (PaginaCollegata & { tokenChiaro?: string })[]) {
+  const lista = await pagineCollegate();
+  for (const n of nuove) {
+    const i = lista.findIndex((p) => p.id === n.id);
+    const voce: PaginaCollegata = { id: n.id, nome: n.nome, brand: n.brand ?? lista[i]?.brand ?? null, token: n.tokenChiaro ? cifra(n.tokenChiaro) : lista[i]?.token ?? null, il: n.tokenChiaro ? new Date().toISOString() : lista[i]?.il ?? null };
+    if (i < 0) lista.push(voce); else lista[i] = voce;
+  }
+  await setConfig(CHIAVE_PAGINE, JSON.stringify(lista));
+}
+/** Chiavi delle pagine in chiaro: solo per il gateway (risposta alla sua richiesta firmata). */
+export async function chiaviPagine(): Promise<Record<string, string>> {
+  const out: Record<string, string> = {};
+  for (const p of await pagineCollegate()) { const t = decifra(p.token); if (t) out[p.id] = t; }
+  return out;
+}
+/** Configurazione Meta effettiva: variabili di Vercel + moduli e pagine collegati dal CRM. */
 export async function cfgConModuli(base: MetaConfig = loadMetaConfig()): Promise<MetaConfig> {
-  return unisciModuli(base, await moduliCollegati());
+  return unisciModuli(base, await moduliCollegati(), await pagineCollegate());
 }
 export async function catalogo(): Promise<CatalogoMeta | null> {
   try { return pulisciCatalogo(JSON.parse((await getConfig(CHIAVE_CATALOGO)) ?? "null")); } catch { return null; }

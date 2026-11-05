@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { loadMetaConfig } from "@/lib/meta/config";
 import { spiegaErrore, type ModuloMeta } from "@/lib/meta/moduli";
-import { arriviPerModulo, catalogo, indirizzoGateway, moduliCollegati, scartati } from "@/lib/meta/moduli-server";
-import { aggiornaElencoMeta, collegaModuloMeta, recuperaLeadModuloMeta } from "@/app/meta-actions";
+import { arriviPerModulo, catalogo, cfgConModuli, indirizzoGateway, moduliCollegati, pagineCollegate, scartati } from "@/lib/meta/moduli-server";
+import { aggiornaElencoMeta, attivaLeadPaginaMeta, collegaChiaveMeta, collegaModuloMeta, marchioPaginaMeta, recuperaLeadModuloMeta } from "@/app/meta-actions";
 import type { ModuloGraph } from "@/lib/meta/graph";
 
 const quando = (d: Date | string | null | undefined) =>
@@ -11,16 +11,20 @@ const sel = "rounded-md border border-neutral-300 px-2 py-1.5 text-sm";
 
 /** Impostazioni › Lead › Moduli istantanei di Meta: elenco letto da Meta, collega/scollega con il marchio, recupero dei lead. */
 export default async function ModuliMeta() {
-  const env = loadMetaConfig();
-  const [cat, collegati, arrivi, scart, gateway, brands, oggi] = await Promise.all([
-    catalogo(), moduliCollegati(), arriviPerModulo(), scartati(), indirizzoGateway(),
+  const fisse = loadMetaConfig();
+  const [env, pagCrm, cat, collegati, arrivi, scart, gateway, brands, oggi] = await Promise.all([
+    cfgConModuli(fisse), pagineCollegate(), catalogo(), moduliCollegati(), arriviPerModulo(), scartati(), indirizzoGateway(),
     prisma.brand.findMany({ select: { nome: true }, orderBy: { nome: "asc" } }),
     prisma.lead.count({ where: { metaFormId: { not: null }, createdAt: { gte: new Date(Date.now() - 86400_000) } } }),
   ]);
-  const fissi = new Set(env.allowedFormIds);
+  const fissi = new Set(fisse.allowedFormIds);
+  const paginaCrm = new Map(pagCrm.map((p) => [p.id, p]));
   const delCrm = new Map(collegati.map((m) => [m.formId, m]));
   const brandPagina = (pageId?: string | null) => (pageId ? env.pageBrands[pageId] : undefined) ?? env.defaultBrand;
-  const pagine = cat?.pagine ?? env.pageIds.map((id) => ({ id, nome: null, moduli: [] as ModuloGraph[], errore: undefined as string | undefined }));
+  const pagine: { id: string; nome: string | null; moduli: ModuloGraph[]; errore?: string; iscritta?: boolean | null }[] = [
+    ...(cat?.pagine ?? []),
+    ...env.pageIds.filter((id) => !cat?.pagine.some((p) => p.id === id)).map((id) => ({ id, nome: paginaCrm.get(id)?.nome ?? null, moduli: [] as ModuloGraph[] })),
+  ];
   const nelCatalogo = new Set(pagine.flatMap((p) => p.moduli.map((m) => m.id)));
   const altri = collegati.filter((m) => !nelCatalogo.has(m.formId));
   const scartatiFuori = Object.entries(scart).filter(([id]) => !nelCatalogo.has(id) && !delCrm.get(id)?.attivo && !fissi.has(id));
@@ -102,10 +106,28 @@ export default async function ModuliMeta() {
           const archiviati = p.moduli.filter((m) => !attivi.includes(m));
           return (
             <div key={p.id} className="overflow-hidden rounded-lg border border-neutral-200">
-              <p className="bg-neutral-50 px-3 py-2 text-sm font-bold text-neutral-900">Pagina {p.nome ?? p.id} <span className="font-normal text-neutral-500">· marchio di base {brandPagina(p.id)}</span></p>
+              <div className="flex flex-wrap items-center justify-between gap-2 bg-neutral-50 px-3 py-2">
+                <p className="text-sm font-bold text-neutral-900">Pagina {p.nome ?? paginaCrm.get(p.id)?.nome ?? p.id}
+                  <span className="font-normal text-neutral-500"> · marchio di base {brandPagina(p.id)}</span>
+                  {p.iscritta === true && <span className="ml-2 rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-bold text-green-800">📡 riceve i lead</span>}
+                  {paginaCrm.get(p.id)?.token && <span className="ml-2 text-[11px] font-normal text-neutral-500">🔑 chiave salvata il {quando(paginaCrm.get(p.id)?.il)}</span>}
+                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  {paginaCrm.has(p.id) && (
+                    <form action={marchioPaginaMeta} className="flex items-center gap-1">
+                      <input type="hidden" name="pageId" value={p.id} />
+                      <select name="brand" defaultValue={brandPagina(p.id)} className={sel} aria-label="Marchio di base della pagina">{brands.map((b) => <option key={b.nome} value={b.nome}>{b.nome}</option>)}</select>
+                      <button className="btn-3d btn-3d-outline px-2 py-1 text-xs">Salva</button>
+                    </form>
+                  )}
+                  {p.iscritta === false && (
+                    <form action={attivaLeadPaginaMeta}><input type="hidden" name="pageId" value={p.id} /><button className="btn-3d btn-3d-purple px-3 py-1.5 text-xs">📡 Attiva l&apos;arrivo dei lead</button></form>
+                  )}
+                </div>
+              </div>
               {p.errore && <p className="px-3 py-2 text-xs font-semibold text-red-700">Moduli non letti: {spiegaErrore(p.errore)}</p>}
               <ul className="divide-y divide-neutral-100">{attivi.map((m) => riga(m, p.id))}</ul>
-              {!p.moduli.length && !p.errore && <p className="px-3 py-2 text-xs text-neutral-500">{cat ? "Nessun modulo in questa pagina." : "Elenco non ancora letto: premi «Aggiorna l'elenco da Meta»."}</p>}
+              {!p.moduli.length && !p.errore && <p className="px-3 py-2 text-xs text-neutral-500">{cat?.pagine.some((x) => x.id === p.id) ? "Nessun modulo in questa pagina." : "Elenco non ancora letto: premi «Aggiorna l'elenco da Meta»."}</p>}
               {archiviati.length > 0 && (
                 <details className="border-t border-neutral-100">
                   <summary className="cursor-pointer select-none px-3 py-2 text-xs font-semibold text-neutral-600">Moduli archiviati in Meta · {archiviati.length}</summary>
@@ -126,6 +148,24 @@ export default async function ModuliMeta() {
             </ul>
           </div>
         )}
+
+        <details id="chiave" className="rounded-lg border border-purple-200 bg-purple-50/40 px-3 py-2" open={pagine.some((p) => p.errore && /_c(100|190)$/.test(p.errore))}>
+          <summary className="cursor-pointer select-none text-sm font-semibold text-purple-900">🔑 Chiave di Meta: aggiungi una pagina (es. Solaris) o rinnova l&apos;accesso</summary>
+          <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-neutral-800">
+            <li>Apri <a href="https://developers.facebook.com/tools/explorer" target="_blank" rel="noreferrer" className="text-blue-800 underline">Graph API Explorer di Meta</a> con il Facebook che amministra le pagine (serve essere amministratore o sviluppatore dell&apos;app).</li>
+            <li>A destra, in <b>«App Meta»</b>, scegli <b>CRM Interno P&C</b>. In <b>«Utente o pagina»</b> scegli <b>«Token d&apos;accesso utente»</b>.</li>
+            <li>In <b>«Autorizzazioni»</b> aggiungi: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>pages_manage_metadata</code>, <code>pages_manage_ads</code>, <code>leads_retrieval</code>, <code>business_management</code>.</li>
+            <li>Premi <b>«Generate Access Token»</b>: nella finestra di Facebook spunta <b>tutte le pagine</b> (Gruppo P&C, Solaris…) e conferma.</li>
+            <li>Copia il testo lungo del campo <b>«Token d&apos;accesso»</b>, incollalo qui sotto e premi «Salva la chiave». P&C ONE la trasforma in chiavi che non scadono, una per pagina, e le conserva cifrate.</li>
+            <li>Poi premi <b>«Aggiorna l&apos;elenco da Meta»</b>: compare la pagina nuova. Se serve, premi <b>«📡 Attiva l&apos;arrivo dei lead»</b> e collega i suoi moduli.</li>
+          </ol>
+          <form action={collegaChiaveMeta} className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-end">
+            <label className="flex-1 text-xs font-semibold">Chiave copiata da Meta
+              <textarea name="chiave" required rows={2} autoComplete="off" spellCheck={false} placeholder="EAAB…" className={`block w-full font-mono ${sel}`} />
+            </label>
+            <button className="btn-3d btn-3d-purple px-3 py-2 text-sm">Salva la chiave</button>
+          </form>
+        </details>
 
         <details className="rounded-lg border border-neutral-200 px-3 py-2">
           <summary className="cursor-pointer select-none text-sm font-semibold text-neutral-800">➕ Collega un modulo con il suo ID</summary>
@@ -148,7 +188,7 @@ export default async function ModuliMeta() {
             <li>Se il modulo ha già raccolto lead prima del collegamento, premi <b>«Recupera lead»</b> scegliendo i giorni: entrano solo quelli che mancano, senza doppioni.</li>
             <li>Prova: con lo <a href="https://developers.facebook.com/tools/lead-ads-testing" target="_blank" rel="noreferrer" className="text-blue-800 underline">strumento di test dei lead di Meta</a> invia un lead di prova al modulo: dopo un minuto lo trovi in «Lead da lavorare».</li>
             <li>Se compare «L&apos;app non ha il permesso su questa pagina»: in Meta Business › Impostazioni › Integrazioni › <b>Accesso ai lead</b> dai l&apos;accesso all&apos;app del CRM.</li>
-            <li>Una pagina Facebook nuova (diversa da quelle qui sopra) va abilitata una volta sola da chi gestisce il CRM: scrivi a Ugo.</li>
+            <li>Una pagina Facebook nuova (es. Solaris): si aggiunge una volta sola con la «Chiave di Meta» qui sopra (serve chi amministra l&apos;app su Meta).</li>
           </ol>
         </details>
       </div>

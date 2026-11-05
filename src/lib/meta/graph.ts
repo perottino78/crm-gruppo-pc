@@ -127,7 +127,7 @@ export async function fetchFormLeads(
 }
 
 export type ModuloGraph = { id: string; nome: string; stato: string | null; leadTotali: number | null; creatoIl: string | null };
-export type PaginaGraph = { id: string; nome: string | null; moduli: ModuloGraph[]; errore?: string };
+export type PaginaGraph = { id: string; nome: string | null; moduli: ModuloGraph[]; errore?: string; iscritta?: boolean | null };
 
 /**
  * Moduli istantanei di una pagina (SOLA LETTURA): GET /{page}/leadgen_forms. Prima con il token di sistema; se Meta chiede
@@ -137,6 +137,7 @@ export async function fetchPageForms(
   pageId: string,
   cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl">,
   fetchImpl: typeof fetch = fetch,
+  tokenPaginaNoto?: string,
 ): Promise<PaginaGraph> {
   if (!cfg.accessToken || !cfg.appSecret) return { id: pageId, nome: null, moduli: [], errore: "config_missing" };
   if (!/^\d+$/.test(pageId)) return { id: pageId, nome: null, moduli: [], errore: "invalid_page_id" };
@@ -156,11 +157,11 @@ export async function fetchPageForms(
     }
   };
   const campi = { fields: "id,name,status,leads_count,created_time", limit: "100" };
-  const info = await leggi(pageId, cfg.accessToken, { fields: "name,access_token" });
+  const info = await leggi(pageId, tokenPaginaNoto ?? cfg.accessToken, { fields: tokenPaginaNoto ? "name" : "name,access_token" });
   const nome = info.ok && typeof info.json.name === "string" ? info.json.name : null;
-  const tokenPagina = info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null;
-  let r = await leggi(`${pageId}/leadgen_forms`, cfg.accessToken, campi);
-  if (!r.ok && tokenPagina) r = await leggi(`${pageId}/leadgen_forms`, tokenPagina, campi);
+  const tokenPagina = tokenPaginaNoto ?? (info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null);
+  let r = await leggi(`${pageId}/leadgen_forms`, tokenPaginaNoto ?? cfg.accessToken, campi);
+  if (!r.ok && tokenPagina && !tokenPaginaNoto) r = await leggi(`${pageId}/leadgen_forms`, tokenPagina, campi);
   if (!r.ok) return { id: pageId, nome, moduli: [], errore: r.code };
   const dati = Array.isArray(r.json.data) ? (r.json.data as Record<string, unknown>[]) : [];
   const moduli = dati
@@ -185,6 +186,7 @@ export async function fetchPageSubscription(
   pageId: string,
   cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl" | "appId">,
   fetchImpl: typeof fetch = fetch,
+  tokenPaginaNoto?: string,
 ): Promise<IscrizionePagina> {
   if (!cfg.accessToken || !cfg.appSecret) return { id: pageId, nome: null, iscritta: null, campi: [], errore: "config_missing" };
   if (!/^\d+$/.test(pageId)) return { id: pageId, nome: null, iscritta: null, campi: [], errore: "invalid_page_id" };
@@ -203,9 +205,9 @@ export async function fetchPageSubscription(
       return { ok: false as const, code: "graph_network" };
     }
   };
-  const info = await leggi(pageId, cfg.accessToken, { fields: "name,access_token" });
+  const info = await leggi(pageId, tokenPaginaNoto ?? cfg.accessToken, { fields: tokenPaginaNoto ? "name" : "name,access_token" });
   const nome = info.ok && typeof info.json.name === "string" ? info.json.name : null;
-  const tokenPagina = info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null;
+  const tokenPagina = tokenPaginaNoto ?? (info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null);
   if (!info.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: info.code };
   const r = await leggi(`${pageId}/subscribed_apps`, tokenPagina ?? cfg.accessToken, { fields: "id,name,subscribed_fields" });
   if (!r.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: r.code };
@@ -232,4 +234,85 @@ export async function fetchIdentita(cfg: Pick<MetaConfig, "accessToken" | "appSe
     }
   };
   return { utente: await leggi("me", "id,name"), app: await leggi("app", "id,name") };
+}
+
+export type PaginaConChiave = { id: string; nome: string; token: string };
+
+/**
+ * Da una chiave incollata (token utente o di pagina, generato nello strumento Graph API Explorer per l'app del CRM):
+ * 1) se è di un utente, la scambia con una a lunga durata (serve l'App Secret, che ha solo il gateway);
+ * 2) ricava le chiavi delle pagine che quell'utente gestisce (dalla chiave lunga sono senza scadenza).
+ * La chiave incollata non viene mai salvata; si restituiscono solo le chiavi delle pagine.
+ */
+export async function chiaviPagineDa(
+  token: string,
+  cfg: Pick<MetaConfig, "appSecret" | "appId" | "graphVersion" | "graphBaseUrl">,
+  fetchImpl: typeof fetch = fetch,
+): Promise<{ ok: true; pagine: PaginaConChiave[]; lunga: boolean } | { ok: false; code: string }> {
+  if (!cfg.appSecret) return { ok: false, code: "config_missing" };
+  const t = token.trim();
+  if (!/^[A-Za-z0-9_\-|.]{20,600}$/.test(t)) return { ok: false, code: "chiave_non_valida" };
+  const base = `${cfg.graphBaseUrl}/${cfg.graphVersion}`;
+  const get = async (url: string, tok?: string) => {
+    try {
+      const res = await fetchImpl(url, { method: "GET", headers: tok ? { Authorization: `Bearer ${tok}`, Accept: "application/json" } : { Accept: "application/json" }, signal: AbortSignal.timeout(15_000) });
+      const json = (await res.json().catch(() => null)) as Record<string, unknown> | null;
+      if (!res.ok) {
+        const c = (json?.error as { code?: number } | undefined)?.code;
+        return { ok: false as const, code: typeof c === "number" ? `graph_${res.status}_c${c}` : `graph_${res.status}` };
+      }
+      return { ok: true as const, json: json ?? {} };
+    } catch {
+      return { ok: false as const, code: "graph_network" };
+    }
+  };
+  const proof = (tok: string) => appSecretProof(tok, cfg.appSecret!);
+  // chi è? (pagina o utente)
+  const me = await get(`${base}/me?fields=id,name&appsecret_proof=${proof(t)}`, t);
+  if (!me.ok) return { ok: false, code: me.code };
+  // l'app della chiave deve essere quella del CRM
+  const app = await get(`${base}/app?fields=id&appsecret_proof=${proof(t)}`, t);
+  const appId = cfg.appId ?? (app.ok && typeof app.json.id === "string" ? app.json.id : undefined);
+  if (app.ok && cfg.appId && app.json.id !== cfg.appId) return { ok: false, code: "app_diversa" };
+  if (!appId) return { ok: false, code: "app_sconosciuta" };
+  // scambio con chiave a lunga durata (per un token di pagina Meta risponde con un'altra chiave di pagina valida)
+  const q = new URLSearchParams({ grant_type: "fb_exchange_token", client_id: appId, client_secret: cfg.appSecret, fb_exchange_token: t });
+  const ex = await get(`${base}/oauth/access_token?${q}`);
+  const lunga = ex.ok && typeof ex.json.access_token === "string" ? (ex.json.access_token as string) : null;
+  const tok = lunga ?? t;
+  // pagine gestite (chiave utente) …
+  const acc = await get(`${base}/me/accounts?fields=id,name,access_token&limit=100&appsecret_proof=${proof(tok)}`, tok);
+  if (acc.ok && Array.isArray(acc.json.data)) {
+    const pagine = (acc.json.data as Record<string, unknown>[])
+      .filter((p) => typeof p.id === "string" && /^\d+$/.test(p.id) && typeof p.access_token === "string")
+      .map((p) => ({ id: p.id as string, nome: typeof p.name === "string" ? p.name : `Pagina ${p.id}`, token: p.access_token as string }));
+    if (pagine.length) return { ok: true, pagine, lunga: !!lunga };
+  }
+  // … oppure è già la chiave di una pagina
+  if (typeof me.json.id === "string" && /^\d+$/.test(me.json.id)) {
+    const p = await get(`${base}/${me.json.id}?fields=id,name,access_token&appsecret_proof=${proof(tok)}`, tok);
+    if (p.ok && typeof p.json.access_token === "string") return { ok: true, pagine: [{ id: me.json.id, nome: String(me.json.name ?? me.json.id), token: p.json.access_token }], lunga: !!lunga };
+    if (p.ok) return { ok: true, pagine: [{ id: me.json.id, nome: String(me.json.name ?? me.json.id), token: tok }], lunga: !!lunga };
+  }
+  return { ok: false, code: "nessuna_pagina" };
+}
+
+/** Attiva l'arrivo dei lead di una pagina verso l'app del CRM (POST /{page}/subscribed_apps, campo leadgen). Solo su richiesta esplicita. */
+export async function iscriviPagina(
+  pageId: string,
+  tokenPagina: string,
+  cfg: Pick<MetaConfig, "appSecret" | "graphVersion" | "graphBaseUrl">,
+  fetchImpl: typeof fetch = fetch,
+): Promise<{ ok: boolean; code?: string }> {
+  if (!cfg.appSecret) return { ok: false, code: "config_missing" };
+  if (!/^\d+$/.test(pageId)) return { ok: false, code: "invalid_page_id" };
+  const q = new URLSearchParams({ subscribed_fields: "leadgen", appsecret_proof: appSecretProof(tokenPagina, cfg.appSecret) });
+  try {
+    const res = await fetchImpl(`${cfg.graphBaseUrl}/${cfg.graphVersion}/${pageId}/subscribed_apps?${q}`, { method: "POST", headers: { Authorization: `Bearer ${tokenPagina}`, Accept: "application/json" }, signal: AbortSignal.timeout(15_000) });
+    const j = (await res.json().catch(() => null)) as { success?: boolean; error?: { code?: number } } | null;
+    if (!res.ok || !j?.success) return { ok: false, code: j?.error?.code !== undefined ? `graph_${res.status}_c${j.error.code}` : `graph_${res.status}` };
+    return { ok: true };
+  } catch {
+    return { ok: false, code: "graph_network" };
+  }
 }

@@ -9,11 +9,14 @@ export type ModuloMeta = { formId: string; nome: string; pageId?: string | null;
 /** Elenco letto da Meta (dal gateway, che ha le chiavi). */
 export type CatalogoMeta = { lettoIl: string; pagine: PaginaGraph[] };
 export type Scartati = Record<string, { n: number; ultimo: string; pageId: string }>;
+/** Pagina Facebook collegata da P&C ONE con la sua chiave (cifrata nel database). */
+export type PaginaCollegata = { id: string; nome: string; brand?: string | null; token?: string | null; il?: string | null };
 
 export const CHIAVE_MODULI = "meta_moduli";
 export const CHIAVE_CATALOGO = "meta_catalogo";
 export const CHIAVE_GATEWAY = "meta_gateway_url";
 export const CHIAVE_SCARTATI = "meta_scartati";
+export const CHIAVE_PAGINE = "meta_pagine";
 
 const ID = /^\d{5,25}$/;
 
@@ -36,13 +39,31 @@ export function aggiornaModulo(lista: ModuloMeta[], m: ModuloMeta): ModuloMeta[]
   return i < 0 ? [...lista, m] : lista.map((x, j) => (j === i ? { ...x, ...m } : x));
 }
 
-/** Configurazione effettiva: moduli delle variabili di Vercel + moduli collegati dal CRM (con il loro marchio). */
-export function unisciModuli(cfg: MetaConfig, moduli: ModuloMeta[]): MetaConfig {
+/** Configurazione effettiva: moduli e pagine delle variabili di Vercel + quelli collegati dal CRM (con il loro marchio). */
+export function unisciModuli(cfg: MetaConfig, moduli: ModuloMeta[], pagine: PaginaCollegata[] = []): MetaConfig {
   const attivi = moduli.filter((m) => m.attivo);
   const allowed = [...new Set([...cfg.allowedFormIds, ...attivi.map((m) => m.formId)])];
   const formBrands = { ...cfg.formBrands };
   for (const m of attivi) if (m.brand) formBrands[m.formId] = m.brand;
-  return { ...cfg, allowedFormIds: allowed, formBrands };
+  const pageIds = [...new Set([...cfg.pageIds, ...pagine.map((p) => p.id)])];
+  const pageBrands = { ...cfg.pageBrands };
+  for (const p of pagine) if (p.brand) pageBrands[p.id] = p.brand;
+  return { ...cfg, allowedFormIds: allowed, formBrands, pageIds, pageId: cfg.pageId ?? pageIds[0], pageBrands };
+}
+
+export function leggiPagine(json: string | null | undefined): PaginaCollegata[] {
+  try {
+    const v = JSON.parse(json ?? "[]");
+    return Array.isArray(v) ? v.filter((p) => p && typeof p.id === "string" && ID.test(p.id)).map((p) => ({ id: p.id, nome: String(p.nome ?? p.id).slice(0, 200), brand: typeof p.brand === "string" ? p.brand : null, token: typeof p.token === "string" ? p.token : null, il: p.il ?? null })) : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Marchio proposto per una pagina dal suo nome (es. «Solaris Energia» → Solaris). */
+export function marchioDaNome(nome: string, marchi: string[], predefinito: string): string {
+  const n = nome.toLowerCase();
+  return marchi.find((m) => m !== predefinito && n.includes(m.toLowerCase())) ?? predefinito;
 }
 
 /** Il destinatario del gateway che è P&C ONE (riconosciuto dall'indirizzo di ricezione). */
@@ -77,7 +98,7 @@ export function pulisciCatalogo(v: unknown): CatalogoMeta | null {
       .filter((m) => m && typeof m.id === "string" && ID.test(m.id))
       .slice(0, 300)
       .map((m) => ({ id: m.id as string, nome: String(m.nome ?? "").slice(0, 200), stato: typeof m.stato === "string" ? m.stato.slice(0, 30) : null, leadTotali: typeof m.leadTotali === "number" ? m.leadTotali : null, creatoIl: typeof m.creatoIl === "string" ? m.creatoIl.slice(0, 40) : null }));
-    pagine.push({ id: p.id, nome: typeof p.nome === "string" ? p.nome.slice(0, 200) : null, moduli, ...(typeof p.errore === "string" ? { errore: p.errore.slice(0, 60) } : {}) });
+    pagine.push({ id: p.id, nome: typeof p.nome === "string" ? p.nome.slice(0, 200) : null, moduli, ...(typeof p.errore === "string" ? { errore: p.errore.slice(0, 60) } : {}), ...(typeof p.iscritta === "boolean" ? { iscritta: p.iscritta } : {}) });
   }
   return { lettoIl: typeof c.lettoIl === "string" ? c.lettoIl : new Date().toISOString(), pagine };
 }
@@ -87,8 +108,11 @@ export function spiegaErrore(code: string | null | undefined): string {
   if (!code) return "";
   if (code === "config_missing") return "Nel gateway mancano le chiavi di Meta.";
   if (code === "graph_network") return "Meta non risponde: riprova tra poco.";
-  if (/_c190$/.test(code)) return "Il token di Meta è scaduto o non valido: va rinnovato nel gateway.";
+  if (/_c190$/.test(code)) return "La chiave di Meta è scaduta o non valida: incollane una nuova («Chiave di Meta» qui sotto).";
+  if (code === "chiave_non_valida") return "Il testo incollato non sembra una chiave di Meta.";
+  if (code === "app_diversa") return "La chiave è stata generata per un'altra app: nello strumento di Meta scegli l'app «CRM Interno P&C».";
+  if (code === "nessuna_pagina") return "La chiave non dà accesso a nessuna pagina: rigenerala spuntando le pagine (Gruppo P&C, Solaris…).";
   if (/_c(10|200|283|299)$/.test(code)) return "L'app di P&C ONE non ha il permesso su questa pagina: in Meta Business, Impostazioni › Accesso ai lead, dai l'accesso al CRM.";
-  if (/_c100$/.test(code)) return "Pagina o modulo non trovato in Meta.";
+  if (/_c100$/.test(code)) return "Meta non fa vedere questa pagina con la chiave attuale: incolla una chiave che comprenda anche questa pagina.";
   return `Errore di Meta (${code}).`;
 }
