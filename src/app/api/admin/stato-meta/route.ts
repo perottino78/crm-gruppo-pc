@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { configPresence, loadMetaConfig } from "@/lib/meta/config";
+import { catalogo, indirizzoGateway, moduliCollegati, scartati } from "@/lib/meta/moduli-server";
 
 export const dynamic = "force-dynamic";
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
@@ -24,6 +25,9 @@ export async function GET(req: NextRequest) {
       pageIds: cfg.pageIds, allowedFormIds: cfg.allowedFormIds, formBrands: cfg.formBrands, pageBrands: cfg.pageBrands, defaultBrand: cfg.defaultBrand,
       inboundMode: cfg.inboundMode, localIngest: cfg.localIngest, pollEnabled: cfg.pollEnabled, graphVersion: cfg.graphVersion, downstreams: cfg.downstreams.map((d) => d.name),
     },
+    gatewayPresentato: !!(await indirizzoGateway()),
+    catalogo: await catalogo().then((c) => c && { lettoIl: c.lettoIl, pagine: c.pagine.map((p) => ({ id: p.id, nome: p.nome, errore: p.errore ?? null, moduli: p.moduli.map((m) => `${m.id} ${m.stato ?? ""} ${m.nome}`) })) }),
+    moduliCollegati: await moduliCollegati(), scartati: await scartati(),
     consegne, inbound, leadPerModulo60gg: perForm, leadPerFonte60gg: perFonte, ultimoLead: ultimo,
   });
 }
