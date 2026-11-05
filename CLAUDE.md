@@ -236,7 +236,7 @@ login nel `matcher` del middleware.
   firmato con il segreto del destinatario ONE = `META_INTERNAL_SECRET`, memoria 60 s; se ONE non risponde accetta e ONE ricontrolla) e ogni
   5 minuti (tick) porta l'elenco dei moduli letti da Meta (`fetchPageForms`) e il proprio indirizzo (`meta_catalogo`, `meta_gateway_url`).
   ONE chiede al gateway `POST /api/internal/one` (`catalogo` | `lead` di un modulo per N giorni → `importaLeadDaGraph`, senza doppioni).
-  Lead di moduli non collegati: annotati in `meta_scartati`. Pagine nuove: ancora da variabili (`META_PAGE_ID`/`META_EXTRA_PAGE_IDS`, gateway e ONE).
+  Lead di moduli non collegati: annotati in `meta_scartati`. Pagine: quelle delle variabili di ONE (`META_PAGE_ID`/`META_EXTRA_PAGE_IDS`) arrivano al gateway con la risposta di `/moduli` (non serve toccare il gateway); `azione: "pagine"` controlla in sola lettura se la pagina è iscritta ai lead dell'app. Rotta tecnica `api/admin/meta-moduli` (GET conteggi, POST collega/recupera).
   Diagnostica: `GET /api/admin/stato-meta` (x-seed-key, niente dati personali). Test `tests/meta/moduli.test.ts`, collaudo `moduli-meta` (20).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 

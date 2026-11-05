@@ -85,10 +85,10 @@ test("moduli della pagina da Meta: se serve, riprova con il token della pagina; 
 });
 
 test("gateway: un modulo non nelle variabili passa se P&C ONE lo ha collegato; se ONE non risponde passa comunque; altrimenti scartato", async () => {
-  for (const [extra, atteso] of [[[NUOVO], 1], [null, 1], [["123456789"], 0]] as const) {
+  for (const [extra, atteso] of [[{ moduli: [NUOVO], pagine: [] }, 1], [null, 1], [{ moduli: ["123456789"], pagine: [] }, 0]] as const) {
     const { deps } = makeDeps({ config: gatewayCfg() });
     let chiamate = 0;
-    deps.moduliExtra = async () => { chiamate++; return extra as string[] | null; };
+    deps.moduliExtra = async () => { chiamate++; return extra as { moduli: string[]; pagine: string[] } | null; };
     const raw = rawOf(notification({ formId: NUOVO }));
     const r = await handleNotification({ raw, signature: signed(raw) }, deps);
     assert.equal(r.status, 200);
@@ -98,26 +98,37 @@ test("gateway: un modulo non nelle variabili passa se P&C ONE lo ha collegato; s
   // modulo già nelle variabili: ONE non viene nemmeno interpellato
   const { deps } = makeDeps({ config: gatewayCfg() });
   let chiamate = 0;
-  deps.moduliExtra = async () => { chiamate++; return []; };
+  deps.moduliExtra = async () => { chiamate++; return { moduli: [], pagine: [] }; };
   const raw = rawOf(notification());
   assert.equal((await handleNotification({ raw, signature: signed(raw) }, deps)).toProcess.length, 1);
   assert.equal(chiamate, 0);
 });
 
+test("gateway: una pagina nuova (es. Solaris) passa se la conosce P&C ONE, anche senza toccare le variabili del gateway", async () => {
+  const SOLARIS = "107076085330590";
+  for (const [extra, atteso] of [[{ moduli: [NUOVO], pagine: [SOLARIS] }, 1], [{ moduli: [NUOVO], pagine: [] }, 0], [null, 0]] as const) {
+    const { deps } = makeDeps({ config: gatewayCfg() });
+    deps.moduliExtra = async () => extra as { moduli: string[]; pagine: string[] } | null;
+    const raw = rawOf(notification({ pageId: SOLARIS, formId: NUOVO }));
+    const r = await handleNotification({ raw, signature: signed(raw) }, deps);
+    assert.equal(r.toProcess.length, atteso, `extra=${JSON.stringify(extra)}`);
+  }
+});
+
 test("gateway → ONE: richiesta firmata con il segreto di ONE, risposta ricordata 60 secondi, ONE giù = null", async () => {
-  ricordaModuli([]); // azzera
+  ricordaModuli(null); // azzera
   const viste: { url: string; body: string; ok: boolean }[] = [];
   const f = (async (u: string, init: RequestInit) => {
     const h = init.headers as Record<string, string>;
     const body = String(init.body);
     viste.push({ url: u, body, ok: firmaValida([T.crmBSecret], h["x-gpc-timestamp"], h["x-gpc-signature"], body) });
-    return json(200, { ok: true, moduli: [NUOVO, "x"] });
+    return json(200, { ok: true, moduli: [NUOVO, "x"], pagine: ["107076085330590"] });
   }) as unknown as typeof fetch;
   const lista = await moduliDaOne(gatewayCfg(), f, { catalogo: { pagine: [] } });
-  assert.deepEqual(lista, [NUOVO]);
+  assert.deepEqual(lista, { moduli: [NUOVO], pagine: ["107076085330590"] });
   assert.equal(viste[0].url, "https://one.example.test/api/lead/meta/moduli");
   assert.ok(viste[0].ok, "firmata con il segreto di ONE");
-  assert.deepEqual(await moduliDaOne(gatewayCfg(), (async () => { throw new Error("giù"); }) as unknown as typeof fetch), [NUOVO], "dalla memoria");
+  assert.deepEqual((await moduliDaOne(gatewayCfg(), (async () => { throw new Error("giù"); }) as unknown as typeof fetch))?.moduli, [NUOVO], "dalla memoria");
   assert.equal(await moduliDaOne(cfg(), f), null, "senza destinatario ONE");
 });
 

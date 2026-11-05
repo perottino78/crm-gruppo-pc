@@ -174,3 +174,42 @@ export async function fetchPageForms(
     }));
   return { id: pageId, nome, moduli };
 }
+
+export type IscrizionePagina = { id: string; nome: string | null; iscritta: boolean | null; campi: string[]; errore?: string };
+
+/**
+ * SOLA LETTURA: la pagina manda i lead a questa app? GET /{page}/subscribed_apps (con il token della pagina).
+ * Non iscrive niente: iscrivere una pagina è una modifica a Meta che si fa solo su autorizzazione.
+ */
+export async function fetchPageSubscription(
+  pageId: string,
+  cfg: Pick<MetaConfig, "accessToken" | "appSecret" | "graphVersion" | "graphBaseUrl" | "appId">,
+  fetchImpl: typeof fetch = fetch,
+): Promise<IscrizionePagina> {
+  if (!cfg.accessToken || !cfg.appSecret) return { id: pageId, nome: null, iscritta: null, campi: [], errore: "config_missing" };
+  if (!/^\d+$/.test(pageId)) return { id: pageId, nome: null, iscritta: null, campi: [], errore: "invalid_page_id" };
+  const base = `${cfg.graphBaseUrl}/${cfg.graphVersion}`;
+  const leggi = async (path: string, token: string, q: Record<string, string>) => {
+    const qs = new URLSearchParams({ ...q, appsecret_proof: appSecretProof(token, cfg.appSecret!) });
+    try {
+      const res = await fetchImpl(`${base}/${path}?${qs}`, { method: "GET", headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }, signal: AbortSignal.timeout(12_000) });
+      const json = (await res.json().catch(() => null)) as Record<string, unknown> | null;
+      if (!res.ok) {
+        const c = (json?.error as { code?: number } | undefined)?.code;
+        return { ok: false as const, code: typeof c === "number" ? `graph_${res.status}_c${c}` : `graph_${res.status}` };
+      }
+      return { ok: true as const, json: json ?? {} };
+    } catch {
+      return { ok: false as const, code: "graph_network" };
+    }
+  };
+  const info = await leggi(pageId, cfg.accessToken, { fields: "name,access_token" });
+  const nome = info.ok && typeof info.json.name === "string" ? info.json.name : null;
+  const tokenPagina = info.ok && typeof info.json.access_token === "string" ? info.json.access_token : null;
+  if (!info.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: info.code };
+  const r = await leggi(`${pageId}/subscribed_apps`, tokenPagina ?? cfg.accessToken, { fields: "id,name,subscribed_fields" });
+  if (!r.ok) return { id: pageId, nome, iscritta: null, campi: [], errore: r.code };
+  const app = (Array.isArray(r.json.data) ? (r.json.data as Record<string, unknown>[]) : []).find((a) => !cfg.appId || a.id === cfg.appId);
+  const campi = Array.isArray(app?.subscribed_fields) ? (app!.subscribed_fields as unknown[]).filter((x): x is string => typeof x === "string") : [];
+  return { id: pageId, nome, iscritta: !!app && campi.includes("leadgen"), campi };
+}

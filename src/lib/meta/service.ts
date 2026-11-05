@@ -18,7 +18,7 @@ export type Deps = {
    * Solo gateway: moduli collegati in più dal CRM (Impostazioni › Lead › Moduli Meta), oltre a META_ALLOWED_FORM_IDS.
    * null = CRM non raggiungibile: per le pagine autorizzate si accetta comunque (il CRM ricontrolla e scarta i moduli non collegati).
    */
-  moduliExtra?: () => Promise<string[] | null>;
+  moduliExtra?: () => Promise<{ moduli: string[]; pagine: string[] } | null>;
   /** Solo CRM: evento di un modulo non collegato, per mostrarlo in Impostazioni (così si può collegare e recuperare). */
   onScartato?: (ev: LeadgenEvent) => Promise<void>;
 };
@@ -89,7 +89,7 @@ export async function handleNotification(
   let received = 0;
   const toProcess: string[] = [];
   const seen = new Set<string>();
-  let extra: string[] | null | undefined; // letto una volta sola, e solo se serve
+  let extra: { moduli: string[]; pagine: string[] } | null | undefined; // letto una volta sola, e solo se serve
   for (const ev of parsed.events) {
     if (seen.has(ev.leadgenId)) {
       duplicates++;
@@ -97,9 +97,13 @@ export async function handleNotification(
     }
     seen.add(ev.leadgenId);
     let auth = authorizeEvent(ev, cfg);
-    if (auth === "form" && deps.moduliExtra) {
+    if (auth !== "ok" && deps.moduliExtra) {
       if (extra === undefined) extra = await deps.moduliExtra().catch(() => null);
-      if (extra === null || extra.includes(ev.formId)) auth = "ok";
+      if (extra === null) {
+        if (auth === "form") auth = "ok"; // ONE non risponde: pagina già autorizzata, il modulo lo ricontrolla ONE
+      } else {
+        auth = authorizeEvent(ev, { ...cfg, pageIds: [...cfg.pageIds, ...extra.pagine], allowedFormIds: [...cfg.allowedFormIds, ...extra.moduli] });
+      }
     }
     if (auth !== "ok") {
       ignored++;

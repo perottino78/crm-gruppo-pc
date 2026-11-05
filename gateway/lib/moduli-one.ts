@@ -3,26 +3,28 @@ import type { MetaConfig } from "../../src/lib/meta/config";
 import { baseDi, destinatarioOne, intestazioniFirmate } from "../../src/lib/meta/moduli";
 
 // Moduli collegati da P&C ONE (Impostazioni › Lead): ricordati per 60 s finché la funzione resta calda.
-let moduliCache: { at: number; lista: string[] } | null = null;
-export function ricordaModuli(lista: string[]) {
-  moduliCache = { at: Date.now(), lista };
+export type DaOne = { moduli: string[]; pagine: string[] };
+let moduliCache: { at: number; dati: DaOne } | null = null;
+export function ricordaModuli(dati: DaOne | null) {
+  moduliCache = dati ? { at: Date.now(), dati } : null;
 }
 
-/** Chiede a P&C ONE quali moduli sono collegati (risposta firmata con il segreto di ONE). null = non raggiungibile. */
-export async function moduliDaOne(cfg: MetaConfig, fetchImpl: typeof fetch = fetch, corpoExtra: Record<string, unknown> = {}, timeoutMs = 2500): Promise<string[] | null> {
+/** Chiede a P&C ONE quali moduli (e pagine) sono collegati (richiesta firmata con il segreto di ONE). null = non raggiungibile. */
+export async function moduliDaOne(cfg: MetaConfig, fetchImpl: typeof fetch = fetch, corpoExtra: Record<string, unknown> = {}, timeoutMs = 2500): Promise<DaOne | null> {
   const one = destinatarioOne(cfg);
   if (!one) return null;
-  if (!Object.keys(corpoExtra).length && moduliCache && Date.now() - moduliCache.at < 60_000) return moduliCache.lista;
+  if (!Object.keys(corpoExtra).length && moduliCache && Date.now() - moduliCache.at < 60_000) return moduliCache.dati;
   const corpo = JSON.stringify(corpoExtra);
   try {
     const res = await fetchImpl(`${baseDi(one.url)}/api/lead/meta/moduli`, { method: "POST", headers: intestazioniFirmate(one.secret, corpo), body: corpo, signal: AbortSignal.timeout(timeoutMs) });
-    if (!res.ok) return moduliCache?.lista ?? null;
-    const j = (await res.json()) as { moduli?: unknown };
-    const lista = Array.isArray(j.moduli) ? j.moduli.filter((x): x is string => typeof x === "string" && /^\d+$/.test(x)) : [];
-    ricordaModuli(lista);
-    return lista;
+    if (!res.ok) return moduliCache?.dati ?? null;
+    const j = (await res.json()) as { moduli?: unknown; pagine?: unknown };
+    const ids = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string" && /^\d+$/.test(x)) : []);
+    const dati = { moduli: ids(j.moduli), pagine: ids(j.pagine) };
+    ricordaModuli(dati);
+    return dati;
   } catch {
-    return moduliCache?.lista ?? null;
+    return moduliCache?.dati ?? null;
   }
 }
 

@@ -11,5 +11,5 @@
     "isolatedModules": true
   },
   "include": ["api/**/*.ts", "lib/**/*.ts", "dev-server.ts", "../src/lib/meta/**/*.ts"],
-  "exclude": ["../src/lib/meta/prismaStore.ts", "../src/lib/meta/runtime.ts", "../src/lib/meta/prismaSink.ts"]
+  "exclude": ["../src/lib/meta/prismaStore.ts", "../src/lib/meta/runtime.ts", "../src/lib/meta/prismaSink.ts", "../src/lib/meta/moduli-server.ts"]
 }
