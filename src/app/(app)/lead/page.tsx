@@ -41,7 +41,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const elenco = !!q || !!p.fase || vista !== "dafare";
 
   const filtroElenco: Prisma.LeadWhereInput = q
-    ? { OR: [{ nome: { contains: q, mode: "insensitive" } }, { telefono: { contains: q } }, { email: { contains: q, mode: "insensitive" } }] }
+    ? { AND: q.split(/\s+/).filter(Boolean).slice(0, 6).map((p) => ({ OR: [{ nome: { contains: p, mode: "insensitive" as const } }, { telefono: { contains: p } }, { email: { contains: p, mode: "insensitive" as const } }] })) }
     : p.fase ? { fase: p.fase } : vista === "chiusi" ? { fase: { notIn: FASI_APERTE } } : {};
 
   const [daFare, inProgramma, lavoratiOggi, risultati, totali, stato, fatto] = await Promise.all([

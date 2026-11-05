@@ -51,7 +51,11 @@ export function whereFiltriClienti(f: FiltriClienti, dataDa?: Date | null, dataA
   const w: Prisma.ClienteWhereInput[] = [];
   if (f.brand && f.brand !== "Tutti") w.push({ brand: { nome: f.brand } });
   const q = f.q?.trim();
-  if (q) w.push({ OR: [{ nome: { contains: q, mode: "insensitive" } }, { telefono: { contains: q, mode: "insensitive" } }, { email: { contains: q, mode: "insensitive" } }] });
+  // ogni parola deve comparire (in qualsiasi ordine): «Germano Bertone» trova anche «BERTONE GERMANO»
+  if (q) {
+    const parole = q.split(/\s+/).filter(Boolean).slice(0, 6);
+    w.push({ AND: parole.map((p) => ({ OR: [{ nome: { contains: p, mode: "insensitive" as const } }, { telefono: { contains: p, mode: "insensitive" as const } }, { cellulare: { contains: p, mode: "insensitive" as const } }, { email: { contains: p, mode: "insensitive" as const } }] })) });
+  }
   for (const k of ["indirizzo", "comune", "provincia", "cap"] as const) {
     const v = f[k]?.trim();
     if (v) w.push({ [k]: { contains: v, mode: "insensitive" } });
