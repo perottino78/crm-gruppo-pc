@@ -257,19 +257,27 @@ login nel `matcher` del middleware.
   con `listino` = tipologia, accessori per listino `RASOMURO_MYA|_BPB|_SC|_BATT|_LAV|_TRASP` (`listiniRasomuro`). Nell'offerta si sceglie L e H di listino
   (`rmL`/`rmH`, scritte sulla riga) e c'è una tendina per gruppo di voci + link ai cataloghi (`public/cataloghi/rasomuro/`, foto in `public/immagini/rasomuro/`).
   `seed-isomax` non tocca le voci RASOMURO. Refusi del PDF corretti: telaio muratura SCI H210 «110» → 1.110, RAL bilico bidirezionale H245 «725» → 1.349. Collaudo `rasomuro` (11).
+- **Serramenti Fidra** (alluminio con cuore PVC, gruppo SERRAMENTI, sottogruppo «Alluminio — Fidra»; ha sostituito il segnaposto
+  `SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER`): 12 tipologie `FIDRA_<F1A|F2A|F3A|FF|W|PF1A|PF2A|PF3A>[_SOGLIA]|FIDRA_TRASLANTE`, griglie L×H in mm già
+  al cliente finale (×2,2 del fornitore) in `prisma/seed-data/fidra_prodotti.json` (estratte dal file Excel UKW 1.3 con `python3 -I scripts/listini/estrai_fidra.py <file.xlsx> prisma/seed-data/fidra_prodotti.json`:
+  «*» = primo prezzo disponibile, «-» = non eseguibile). Optional in `src/lib/listini/fidra.ts` (listini `FIDRA` comune, `FIDRA_F` finestre, `FIDRA_PF`
+  portefinestre, `FIDRA_WAS` wasistas; `listiniFidra`): colori standard compresi, fuori standard +30%, due lati diversi +100%, vetro STC, satinato
+  90 €/anta finestre e 150 €/anta portefinestre, maniglia passante, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
+  di produzione, autoscala, ENEA, smaltimento. Rotta `api/admin/seed-fidra` (GET prova, POST carica). Disegni in `public/immagini/fidra/`, brochure e
+  dispositivi Matter in `public/cataloghi/fidra/`. Nell'offerta stesso riquadro a tendine del raso muro. Test `tests/listini/fidra.test.ts`, collaudo `fidra` (8).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 262, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 266, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
