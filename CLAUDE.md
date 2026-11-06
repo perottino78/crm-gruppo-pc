@@ -262,7 +262,7 @@ login nel `matcher` del middleware.
   al cliente finale (×2,2 del fornitore) in `prisma/seed-data/fidra_prodotti.json` (estratte dal file Excel UKW 1.3 con `python3 -I scripts/listini/estrai_fidra.py <file.xlsx> prisma/seed-data/fidra_prodotti.json`:
   «*» = primo prezzo disponibile, «-» = non eseguibile). Optional in `src/lib/listini/fidra.ts` (listini `FIDRA` comune, `FIDRA_F` finestre, `FIDRA_PF`
   portefinestre, `FIDRA_WAS` wasistas; `listiniFidra`): colori standard compresi, fuori standard +30%, due lati diversi +100%, vetro STC, satinato
-  90 €/anta finestre e 150 €/anta portefinestre, maniglia passante, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
+  90 €/anta finestre e 150 €/anta portefinestre (su tutte le tipologie), maniglia passante 500 € su tutte, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
   di produzione, autoscala, ENEA, smaltimento. Rotta `api/admin/seed-fidra` (GET prova, POST carica). Disegni in `public/immagini/fidra/`, brochure e
   dispositivi Matter in `public/cataloghi/fidra/`. Nell'offerta stesso riquadro a tendine del raso muro. Test `tests/listini/fidra.test.ts`, collaudo `fidra` (8).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).

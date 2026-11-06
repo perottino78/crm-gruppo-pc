@@ -35,13 +35,14 @@ test("tutte le tipologie hanno griglia, etichetta e sottogruppo", () => {
   assert.equal(notaInArrivo("SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER"), null);
 });
 
-test("optional: satinato 90 € sulle finestre, 150 € sulle portefinestre; motoriduttore solo wasistas", () => {
+test("optional: satinato e maniglia passante su tutti; satinato 90 € finestre / 150 € portefinestre; motoriduttore solo wasistas", () => {
   const opt = optionalFidra();
   const visibili = (t: string) => opt.filter((o) => listiniFidra(t).includes(o.listino));
   assert.equal(visibili("FIDRA_F2A").find((o) => o.nome.startsWith("Vetro satinato"))?.valore, 90);
   assert.equal(visibili("FIDRA_PF2A").find((o) => o.nome.startsWith("Vetro satinato"))?.valore, 150);
   assert.ok(visibili("FIDRA_PF1A").some((o) => o.nome.startsWith("Maniglia passante")));
-  assert.ok(!visibili("FIDRA_F1A").some((o) => o.nome.startsWith("Maniglia passante")));
+  assert.ok(visibili("FIDRA_F1A").some((o) => o.nome.startsWith("Maniglia passante"))); // su tutti i serramenti (richiesta di Ugo)
+  for (const t of ["FIDRA_FF", "FIDRA_W", "FIDRA_F3A", "FIDRA_TRASLANTE"]) assert.ok(visibili(t).some((o) => o.nome.startsWith("Vetro satinato")), t);
   assert.ok(visibili("FIDRA_W").some((o) => o.nome.startsWith("Motoriduttore")));
   assert.ok(!visibili("FIDRA_F1A").some((o) => o.nome.startsWith("Motoriduttore")));
   assert.equal(new Set(opt.map((o) => `${o.listino}|${o.categoria}|${o.nome}`)).size, opt.length);

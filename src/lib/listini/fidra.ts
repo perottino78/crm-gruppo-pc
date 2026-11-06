@@ -55,7 +55,7 @@ export function optionalFidra(): OptionalFidra[] {
     o("Vetri", "Vetro STC (a vetro)", 150, "FIDRA", "FISSO", "vetro"),
     o("Vetri", "Vetro satinato (ad anta)", 90, "FIDRA_F", "FISSO", "anta"),
     o("Vetri", "Vetro satinato (ad anta)", 150, "FIDRA_PF", "FISSO", "anta"),
-    o("Maniglie e ferramenta", "Maniglia passante con cilindro europeo", 500, "FIDRA_PF"),
+    o("Maniglie e ferramenta", "Maniglia passante con cilindro europeo", 500),
     o("Maniglie e ferramenta", "Motoriduttore a catena (apertura motorizzata wasistas)", 350, "FIDRA_WAS"),
     o("Traversi e pannelli", "Traverso aggiuntivo orizzontale (cad.)", 90),
     o("Traversi e pannelli", "Traverso aggiuntivo verticale (cad.)", 120),
