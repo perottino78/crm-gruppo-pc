@@ -1,5 +1,6 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
+import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -59,6 +60,8 @@ export function formatDimensioni(tipologia: string, larghezza: number, altezza: 
 export function listinoDiTipologia(tipologia: string): string | null {
   // Serramenti Fidra: optional comuni a tutte le tipologie (gli altri listini FIDRA_F/FIDRA_PF/FIDRA_WAS da listiniFidra).
   if (tipologia.startsWith("FIDRA_")) return "FIDRA";
+  // Porte a vetro per vetrate: optional comuni (gli specifici hanno listino = tipologia).
+  if (tipologia.startsWith("PORTAVETRO_")) return "PORTAVETRO";
   if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
   if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
   if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
@@ -2051,6 +2054,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
