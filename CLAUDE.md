@@ -269,19 +269,25 @@ login nel `matcher` del middleware.
   alluminio, varianti telaio 3/4 lati) e `PORTAVETRO_PTV` (tutto vetro), prezzo fisso = listino fornitore +60% (`src/lib/listini/porte-vetro.ts`, test
   `tests/listini/porte-vetro.test.ts`); optional: apertura, maniglione antipanico (solo PAL), colore RAL di serie, altezza oltre 2500 +5%. Rotta
   `api/admin/seed-porte-vetro` (GET prova, POST carica). Finiture vetro (pag. 19 del listino fornitore) non ancora a listino. Collaudo `porte-vetro` (6).
+- **Pergola Tempra** (= sistema STABYLA, copertura a pannelli termici coibentati; OUTDOOR › PERGOLE › «Tempra (pannelli coibentati)»): 8 tipologie
+  `STABYLA_<A701|A703|A705|A707>_<AD|AU>` (base/245/Maxy/Maxy 260 × addossata/autoportante), griglie larghezza × sporgenza in mm = listino fornitore +60%
+  in `prisma/seed-data/tempra_prodotti.json` (dal PDF con `pdftotext -layout` + `scripts/listini/estrai_tempra.py`, campo `listino` = prezzo fornitore).
+  `src/lib/listini/tempra.ts`: tendine modello → installazione (via `assiSelezioneIsomax`), descrizioni, optional `TEMPRA` (pannello acustico +3%, strip LED
+  5/4 m, profili spot RGB 4/5 m, centralina). Rotta `api/admin/seed-tempra` (GET prova, POST carica). Foto in `public/immagini/tempra/`.
+  Possibile refuso del PDF lasciato com'è: A703 autoportante 3780×3000 = 8.886. Test `tests/listini/tempra.test.ts`, collaudo `tempra` (6).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 268, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 271, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

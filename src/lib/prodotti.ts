@@ -1,6 +1,7 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
+import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -62,6 +63,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("FIDRA_")) return "FIDRA";
   // Porte a vetro per vetrate: optional comuni (gli specifici hanno listino = tipologia).
   if (tipologia.startsWith("PORTAVETRO_")) return "PORTAVETRO";
+  // Pergola Tempra (STABYLA): optional comuni a tutti i modelli.
+  if (tipologia.startsWith("STABYLA_")) return "TEMPRA";
   if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
   if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
   if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
@@ -754,6 +757,7 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
+  if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
@@ -1226,6 +1230,8 @@ const ISOMAX_APERTURA_LABELS: Record<string, string> = {
 export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
   // Porte raso muro: stesse 2 tendine (modello/apertura -> misura).
   if (tipologia.startsWith("RASOMURO_")) return assiSelezioneRasomuro(tipologia);
+  // Pergola Tempra: stesse 2 tendine (modello -> installazione).
+  if (tipologia.startsWith("STABYLA_")) return assiSelezioneTempra(tipologia);
   if (!tipologia.startsWith("ISOMAX_")) return null;
   const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_([A-Z0-9]+)$/);
   if (!match) return null;
@@ -2055,6 +2061,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
@@ -2159,6 +2166,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 }
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
+  if (tipologia.startsWith("STABYLA_")) return { larghezza: "Larghezza", altezza: "Sporgenza" };
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("RASOMURO_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
