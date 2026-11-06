@@ -1,4 +1,5 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
+import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -56,6 +57,8 @@ export function formatDimensioni(tipologia: string, larghezza: number, altezza: 
 }
 
 export function listinoDiTipologia(tipologia: string): string | null {
+  // Serramenti Fidra: optional comuni a tutte le tipologie (gli altri listini FIDRA_F/FIDRA_PF/FIDRA_WAS da listiniFidra).
+  if (tipologia.startsWith("FIDRA_")) return "FIDRA";
   if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
   if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
   if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
@@ -747,6 +750,7 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
+  if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
@@ -860,9 +864,8 @@ const SERRAMENTI_MATERIALE_LABELS: Record<string, string> = {
   SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "PVC — Optima",
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "PVC — Plasma 30",
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "PVC — Fenix",
-  // PVC-Alluminio: 3 linee, nessuna ancora a listino.
+  // PVC-Alluminio: Fidra ora ha il listino vero (tipologie FIDRA_*, sottogruppo «Alluminio — Fidra»).
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "PVC-Alluminio — Plasma 30",
-  SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER: "PVC-Alluminio — Fidra",
   SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "PVC-Alluminio — Fenix K",
   SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Alluminio a taglio freddo",
   SERRAMENTI_LEGNO_PLACEHOLDER: "Legno",
@@ -2013,7 +2016,6 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Plasma 30 non ancora caricato — in arrivo",
-  SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fidra non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fenix K non ancora caricato — in arrivo",
   SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo",
   SERRAMENTI_LEGNO_PLACEHOLDER: "Listino Serramenti Legno non ancora caricato — in arrivo",
@@ -2048,6 +2050,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;

@@ -10,6 +10,7 @@ import PannelloConferma from "@/components/preventivi/PannelloConferma";
 import { numeroCommessa } from "@/lib/commesse";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
+import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listini/rasomuro";
 import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
@@ -818,7 +819,7 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia} · {prodotto.colore}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : ` · ${prodotto.colore}`}
                       {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
                       {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && (
@@ -902,9 +903,9 @@ export default async function PreventivoPage({
 
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? ""))
-                  /* Porte raso muro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
-                  .filter((o) => !prodotto.tipologia.startsWith("RASOMURO_") || o.listino !== null || o.gruppiApplicabili.length === 0)
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? ""))
+                  /* Porte raso muro e serramenti Fidra: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
+                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_")) || o.listino !== null || o.gruppiApplicabili.length === 0)
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -1145,19 +1146,21 @@ export default async function PreventivoPage({
                 // mezzo a una quindicina di altre voci.
                 // Porte raso muro (MYA, KIUSO, STRIP): una tendina per ogni gruppo di voci del listino
                 // (finitura/anta, su misura, telaio, chiusure, maniglie, accessori, lavorazioni, trasporto).
-                if (prodotto.tipologia.startsWith("RASOMURO_")) {
-                  const ordine = ["Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
+                // Serramenti Fidra: stesso schema (colore, vetri, maniglie, traversi, misure, servizi).
+                const fidra = prodotto.tipologia.startsWith("FIDRA_");
+                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra) {
+                  const ordine = ["Colore", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
                   const categorie = [...new Set(optionaliRigaFiltrati.map((o) => o.categoria))].sort((a, b) => (ordine.indexOf(a) + 1 || 99) - (ordine.indexOf(b) + 1 || 99));
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
-                        {guidaRasomuro(prodotto.tipologia)}{" "}
-                        {CATALOGHI_RASOMURO.map((c) => (
+                        {fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
+                        {(fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>
                       {categorie.map((cat) => {
-                        const voci = optionaliRigaFiltrati.filter((o) => o.categoria === cat);
+                        const voci = optionaliRigaFiltrati.filter((o) => o.categoria === cat).sort((a, b) => Number(a.valore !== 0) - Number(b.valore !== 0)); // le voci comprese (colori standard) per prime
                         return (
                           <form key={cat} action={aggiungiOptionalARiga} className="flex flex-wrap items-center gap-1">
                             <input type="hidden" name="rigaId" value={r.id} />
@@ -1165,7 +1168,7 @@ export default async function PreventivoPage({
                             <select name="optionalId" aria-label={cat} className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[320px]">
                               {voci.map((o) => (
                                 <option key={o.id} value={o.id}>
-                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT")}€`})
+                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT")}€${o.unita ? `/${o.unita}` : ""}`})
                                 </option>
                               ))}
                             </select>
