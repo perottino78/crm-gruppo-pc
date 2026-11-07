@@ -109,7 +109,8 @@ export async function POST(req: NextRequest) {
 
     const optionaliNuovi = optionaliData as OptionalRow[];
     const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
+      // gli optional dei pavimenti galleggianti (listino PAVGAL*) hanno la loro rotta seed-pavimenti-galleggianti
+      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO }, OR: [{ listino: null }, { NOT: { listino: { startsWith: "PAVGAL" } } }] },
     });
     const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
 

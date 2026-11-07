@@ -14,6 +14,7 @@ import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra"
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
 import { GUIDA_PEDANE } from "@/lib/listini/pedane";
+import { GUIDA_PAVGAL, listiniPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listini/rasomuro";
 import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
@@ -824,7 +825,7 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? "" : ` · ${prodotto.colore}`}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? "" : ` · ${prodotto.colore}`}
                       {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
                       {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && (
@@ -908,9 +909,9 @@ export default async function PreventivoPage({
 
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? ""))
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
                   /* Porte raso muro, serramenti Fidra e porte a vetro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
-                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
+                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -1156,14 +1157,15 @@ export default async function PreventivoPage({
                 const portaVetro = prodotto.tipologia.startsWith("PORTAVETRO_");
                 const tempra = prodotto.tipologia.startsWith("STABYLA_");
                 const pedana = prodotto.tipologia.startsWith("PEDANA_");
-                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || portaVetro || tempra || pedana) {
-                  const ordine = ["Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
+                const pavgal = prodotto.tipologia.startsWith("PAVGAL_");
+                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || portaVetro || tempra || pedana || pavgal) {
+                  const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
                   const categorie = [...new Set(optionaliRigaFiltrati.map((o) => o.categoria))].sort((a, b) => (ordine.indexOf(a) + 1 || 99) - (ordine.indexOf(b) + 1 || 99));
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
-                        {pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
-                        {(portaVetro || tempra || pedana ? [] : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
+                        {pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
+                        {(portaVetro || tempra || pedana || pavgal ? [] : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>

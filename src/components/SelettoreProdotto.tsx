@@ -2126,7 +2126,7 @@ export default function SelettoreProdotto({
                       </>
                     );
                   })()}
-                  <input name="quantita" type="number" defaultValue={1} min={1} title={scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : "Quantità"} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
+                  <input name="quantita" type="number" defaultValue={1} min={1} title={scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ aggiungi</button>
                 </form>
               ))}

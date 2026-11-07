@@ -1,0 +1,1002 @@
+[
+{
+"codice": "193272",
+"nome": "BLANCO 90A ASRM",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "193273",
+"nome": "BLANCO 90B ASRM",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "193274",
+"nome": "BLANCO 90G ASRM",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "193275",
+"nome": "BLANCO 90W ASRM",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "194521",
+"nome": "BLANCO SB90A AS",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "194522",
+"nome": "BLANCO SB90B AS",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "194523",
+"nome": "BLANCO SB90G AS",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "194524",
+"nome": "BLANCO SB90W AS",
+"famiglia": "BLANCO",
+"collezione": "Blanco",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "189691",
+"nome": "FVNT 90B AS RM",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 43.86
+},
+{
+"codice": "189692",
+"nome": "FVNT 90TC AS RM",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 43.86
+},
+{
+"codice": "188769",
+"nome": "FVNT 60B AS RM",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 44.28
+},
+{
+"codice": "188770",
+"nome": "FVNT 60TC AS RM",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 44.28
+},
+{
+"codice": "189693",
+"nome": "FVNT SB90B AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "189694",
+"nome": "FVNT SB90TC AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "188771",
+"nome": "FVNT SB60B AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188772",
+"nome": "FVNT SB60TC AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188773",
+"nome": "FVNT GR336B AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "188774",
+"nome": "FVNT GR336TC AS",
+"famiglia": "FVNT",
+"collezione": "Cocoon",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "186928",
+"nome": "LOIRA 90A AS RM",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "186929",
+"nome": "LOIRA 90B AS RM",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.57
+},
+{
+"codice": "187944",
+"nome": "LOIRA 60A AS RM",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 43.93
+},
+{
+"codice": "187945",
+"nome": "LOIRA 60B AS RM",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 43.93
+},
+{
+"codice": "188806",
+"nome": "LOIRA SB90A AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "188807",
+"nome": "LOIRA SB90B AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "188808",
+"nome": "LOIRA SB60A AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188809",
+"nome": "LOIRA SB60B AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188810",
+"nome": "LOIRA GR336A AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "188811",
+"nome": "LOIRA GR336B AS",
+"famiglia": "LOIRA",
+"collezione": "Loira (Cottofaenza)",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "183350",
+"nome": "DAMA3012B ASRM",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.72
+},
+{
+"codice": "183349",
+"nome": "DAMA3012HY ASRM",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.72
+},
+{
+"codice": "183351",
+"nome": "DAMA3012NO ASRM",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.72
+},
+{
+"codice": "183355",
+"nome": "DAMA GR3012B AS",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+},
+{
+"codice": "183356",
+"nome": "DAMA GR3012HYAS",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+},
+{
+"codice": "183357",
+"nome": "DAMA GR3012NOAS",
+"famiglia": "DAMA",
+"collezione": "Dama",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+},
+{
+"codice": "178178",
+"nome": "GEA 90AG AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.54
+},
+{
+"codice": "178176",
+"nome": "GEA 90AV AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.54
+},
+{
+"codice": "178179",
+"nome": "GEA 90G AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.54
+},
+{
+"codice": "178177",
+"nome": "GEA 90S AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.54
+},
+{
+"codice": "179201",
+"nome": "GEA 60AG AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.19
+},
+{
+"codice": "179199",
+"nome": "GEA 60AV AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.19
+},
+{
+"codice": "179202",
+"nome": "GEA 60G AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.19
+},
+{
+"codice": "179200",
+"nome": "GEA 60S AS RM",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.19
+},
+{
+"codice": "179348",
+"nome": "GEA SB90AG AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "179346",
+"nome": "GEA SB90AV AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "179349",
+"nome": "GEA SB90G AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "179347",
+"nome": "GEA SB90S AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "179408",
+"nome": "GEA SB60AG AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "179409",
+"nome": "GEA SB60AV AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "179411",
+"nome": "GEA SB60G AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "179410",
+"nome": "GEA SB60S AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "179622",
+"nome": "GEA GR336AG AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "179620",
+"nome": "GEA GR336AV AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "179623",
+"nome": "GEA GR336G AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "179621",
+"nome": "GEA GR336S AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "179637",
+"nome": "GEA BP60AG AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "30x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179636",
+"nome": "GEA BP60AV AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "30x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179638",
+"nome": "GEA BP60G AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "30x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179639",
+"nome": "GEA BP60S AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "30x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179641",
+"nome": "GEA GP60AG AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "20x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179640",
+"nome": "GEA GP60AV AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "20x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179642",
+"nome": "GEA GP60G AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "20x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "179643",
+"nome": "GEA GP60S AS",
+"famiglia": "GEA",
+"collezione": "Gea",
+"formato": "20x60",
+"um": "PZ",
+"prezzo": 146.9,
+"kgMq": 46.17
+},
+{
+"codice": "193301",
+"nome": "MAXXI 60AG ASRM",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.04
+},
+{
+"codice": "193303",
+"nome": "MAXXI 60DG ASRM",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.04
+},
+{
+"codice": "193302",
+"nome": "MAXXI 60G ASRM",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 45.04
+},
+{
+"codice": "193728",
+"nome": "MAXXI SB60AG AS",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "193730",
+"nome": "MAXXI SB60DG AS",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "193729",
+"nome": "MAXXI SB60G AS",
+"famiglia": "MAXXI",
+"collezione": "Maxxi",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "186958",
+"nome": "ALGAR 90DG ASRM",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.17
+},
+{
+"codice": "186957",
+"nome": "ALGAR 90G AS RM",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.17
+},
+{
+"codice": "187951",
+"nome": "ALGAR 60DG ASRM",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 43.75
+},
+{
+"codice": "187950",
+"nome": "ALGAR 60G AS RM",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "60x60",
+"um": "MQ",
+"prezzo": 91.05,
+"kgMq": 43.75
+},
+{
+"codice": "188784",
+"nome": "ALGAR SB90DG AS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "188783",
+"nome": "ALGAR SB90G AS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "188786",
+"nome": "ALGAR SB60DG AS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188785",
+"nome": "ALGAR SB60G AS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "60x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.18
+},
+{
+"codice": "188799",
+"nome": "ALGAR GR336DGAS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "188787",
+"nome": "ALGAR GR336G AS",
+"famiglia": "ALGAR",
+"collezione": "Algar",
+"formato": "33x60",
+"um": "PZ",
+"prezzo": 91.85,
+"kgMq": 46.79
+},
+{
+"codice": "175995",
+"nome": "VIS 90A AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "193362",
+"nome": "VIS 90BC AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "193363",
+"nome": "VIS 90BN AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "175996",
+"nome": "VIS 90MG AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "193360",
+"nome": "VIS 90PB AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "193361",
+"nome": "VIS 90PH AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "175997",
+"nome": "VIS 90TP AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "175994",
+"nome": "VIS 90W AS RM",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "MQ",
+"prezzo": 124.15,
+"kgMq": 44.23
+},
+{
+"codice": "176715",
+"nome": "VIS SB90A AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "193758",
+"nome": "VIS SB90BC AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "193759",
+"nome": "VIS SB90BN AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "176716",
+"nome": "VIS SB90MG AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "193756",
+"nome": "VIS SB90PB AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "193757",
+"nome": "VIS SB90PH AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "176717",
+"nome": "VIS SB90TP AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "176718",
+"nome": "VIS SB90W AS",
+"famiglia": "VIS",
+"collezione": "Vis",
+"formato": "90x90",
+"um": "PZ",
+"prezzo": 134.65,
+"kgMq": 46.19
+},
+{
+"codice": "193279",
+"nome": "YKSG3012B ASRM",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.83
+},
+{
+"codice": "193280",
+"nome": "YKSG3012BS ASRM",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.83
+},
+{
+"codice": "193281",
+"nome": "YKSG3012TN ASRM",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "MQ",
+"prezzo": 130.45,
+"kgMq": 45.83
+},
+{
+"codice": "194541",
+"nome": "YKSG GR3012BAS",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+},
+{
+"codice": "194542",
+"nome": "YKSG GR3012BSAS",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+},
+{
+"codice": "194543",
+"nome": "YKSG GR3012TNAS",
+"famiglia": "YKSG",
+"collezione": "Yakisugi",
+"formato": "30x120",
+"um": "PZ",
+"prezzo": 183.7,
+"kgMq": 46.33
+}
+]
