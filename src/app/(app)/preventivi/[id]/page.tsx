@@ -825,9 +825,10 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? "" : ` · ${prodotto.colore}`}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? "" : ` · ${prodotto.colore}`}
                       {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
+                      {prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
                       {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && (
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}

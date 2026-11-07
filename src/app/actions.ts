@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
+import { lattAlMetro, prezzoPerLunghezza } from "@/lib/listini/lattoneria";
 import { hashPassword, verificaPassword, creaSessione, distruggiSessione, getCurrentUser, isAmministratore } from "@/lib/auth";
 import { calcolaCodiceFiscale } from "@/lib/codiceFiscale";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
@@ -925,8 +926,15 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
   const mRaso = misureRasomuro(prodotto.tipologia);
   const rmL = Number(str(formData, "rmL") ?? ""), rmH = Number(str(formData, "rmH") ?? "");
   const misuraRaso = mRaso && mRaso.larghezze.includes(rmL) && mRaso.altezze.includes(rmH) ? { misuraLarghezza: rmL, misuraAltezza: rmH } : {};
+  // Lattoneria al metro: prezzo al metro × lunghezza del pezzo (cm), scritta sulla riga (senza altezza: la riga resta a prezzo fisso)
+  const lattCm = Number((str(formData, "lattCm") ?? "").replace(",", "."));
+  const latt = lattAlMetro(prodotto.tipologia) && Number.isFinite(lattCm) && lattCm > 0 && lattCm <= 2000;
   const riga = await prisma.rigaPreventivo.create({
-    data: { preventivoId, prodottoId, quantita, prezzoUnitario, ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : misuraRaso) },
+    data: {
+      preventivoId, prodottoId, quantita,
+      prezzoUnitario: latt && !prezzoStr ? prezzoPerLunghezza(prodotto.prezzoBase, lattCm) : prezzoUnitario,
+      ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : latt ? { misuraLarghezza: lattCm } : misuraRaso),
+    },
   });
   if (isomax && (luce === 60 || luce === 90)) {
     const opt = await prisma.optional.findFirst({

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
+import { lattAlMetro, GUIDA_LATTONERIA } from "@/lib/listini/lattoneria";
 import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiPersianeBlindate, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
 
@@ -2098,7 +2099,7 @@ export default function SelettoreProdotto({
             </>
           ) : scelto.varianti && scelto.varianti.length > 0 ? (
             <div className="flex flex-col gap-1.5">
-              <p className="text-[11px] text-neutral-600 mb-1">Prodotto a prezzo fisso (senza misura) — scegli la variante:</p>
+              <p className="text-[11px] text-neutral-600 mb-1">{scelto.value.startsWith("LATT_") ? GUIDA_LATTONERIA : "Prodotto a prezzo fisso (senza misura) — scegli la variante:"}</p>
               {scelto.varianti.map((v) => (
                 <form key={v.id} action={azionePerProdotto} className="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded px-2 py-1.5">
                   <input type="hidden" name="preventivoId" value={preventivoId} />
@@ -2126,7 +2127,10 @@ export default function SelettoreProdotto({
                       </>
                     );
                   })()}
-                  <input name="quantita" type="number" defaultValue={1} min={1} title={scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
+                  {lattAlMetro(scelto.value) && (
+                    <input name="lattCm" type="number" step="0.1" min={1} max={2000} defaultValue={300} required aria-label="Lunghezza di ogni pezzo in cm" title="Lunghezza di ogni pezzo in cm (prezzo al metro × lunghezza)" placeholder="cm" className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
+                  )}
+                  <input name="quantita" type="number" defaultValue={1} min={1} title={lattAlMetro(scelto.value) ? "Numero di pezzi" : scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ aggiungi</button>
                 </form>
               ))}

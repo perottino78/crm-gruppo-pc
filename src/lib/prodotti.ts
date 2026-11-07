@@ -4,6 +4,7 @@ import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
 import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-galleggianti";
+import { sottogruppoLatt, labelLatt } from "@/lib/listini/lattoneria";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -764,6 +765,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
   if (tipologia.startsWith("PEDANA_")) return SOTTOGRUPPO_PEDANE;
   if (tipologia.startsWith("PAVGAL_")) return SOTTOGRUPPO_PAVGAL;
+  if (tipologia.startsWith("LATT_")) return sottogruppoLatt(tipologia);
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
@@ -2067,6 +2069,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PEDANA_")) return labelPedana(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PAVGAL_")) return labelPavgal(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("LATT_")) return labelLatt(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
