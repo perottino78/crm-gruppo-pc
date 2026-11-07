@@ -22,22 +22,51 @@ export function piedini(formato: string): { piastrelleMq: number; piediniMq: num
   return { piastrelleMq, piediniMq: piastrelleMq * 4, prezzoPiedino };
 }
 
+// Collezioni e nomi dei colori dal sito lafaenzaceramica.com (sigla del colore nel codice articolo → nome).
+// Sul sito LOIRA è la collezione Couture, ALGAR è Party, FVNT è Cocoon.
+const COLLEZIONE: Record<string, { nome: string; foto: string }> = {
+  BLANCO: { nome: "Blanco", foto: "blanco" }, FVNT: { nome: "Cocoon", foto: "cocoon" }, LOIRA: { nome: "Couture", foto: "couture" },
+  DAMA: { nome: "Dama", foto: "dama" }, GEA: { nome: "Gea", foto: "gea" }, MAXXI: { nome: "Maxxi", foto: "maxxi" },
+  ALGAR: { nome: "Party", foto: "party" }, VIS: { nome: "Vis", foto: "vis" }, YKSG: { nome: "Yakisugi", foto: "yakisugi" },
+};
+const COLORI: Record<string, Record<string, string>> = {
+  BLANCO: { A: "Almond", B: "Beige", G: "Grigio", W: "Bianco" },
+  FVNT: { B: "Beige", TC: "Terracotta" },
+  LOIRA: { A: "Almond", B: "Beige" },
+  DAMA: { B: "Beige", HY: "Miele", NO: "Nocciola" },
+  GEA: { AG: "Argento", AV: "Avorio", G: "Grigio", S: "Sabbia" },
+  MAXXI: { AG: "Argento", G: "Grigio", DG: "Grigio scuro" },
+  ALGAR: { G: "Grigio", DG: "Grigio scuro" },
+  VIS: { A: "Almond", BC: "Biscuit", BN: "Bone", MG: "Middle grey", PB: "Piombo", PH: "Phard", TP: "Taupe", W: "Bianco" },
+  YKSG: { B: "Beige", BS: "Beige scuro", TN: "Nero (TN)" },
+};
+/** Sigla del colore dal nome articolo: «GEA 60AG AS RM» → «AG», «DAMA3012HY ASRM» → «HY», «GEA SB60AG AS» → «AG». */
+export function siglaColore(a: { nome: string; famiglia: string }): string {
+  const resto = a.nome.replace(/\s+/g, "").slice(a.famiglia.length).replace(/^(SB|GR|BP|GP)/, "").replace(/^\d+/, "");
+  return resto.replace(/AS(RM)?$/, "");
+}
+export function nomeColore(a: { nome: string; famiglia: string }): string {
+  const sigla = siglaColore(a);
+  return COLORI[a.famiglia]?.[sigla] ?? sigla;
+}
+export const nomeCollezione = (famiglia: string) => COLLEZIONE[famiglia]?.nome ?? famiglia;
+
 export function catalogoPavgal(articoli: ArticoloPavgal[]) {
   const piastrelle = articoli.filter((a) => a.um === "MQ");
   const tipologie = new Map<string, { famiglia: string; collezione: string; formato: string }>();
   for (const a of piastrelle) tipologie.set(tipologiaPavgal(a.famiglia, a.formato), { famiglia: a.famiglia, collezione: a.collezione, formato: a.formato });
 
   const prodotti = piastrelle.map((a) => ({
-    tipologia: tipologiaPavgal(a.famiglia, a.formato), colore: `${a.nome} (cod. ${a.codice}) — al m²`, larghezzaMm: 0, altezzaMm: 0, prezzoBase: a.prezzo,
+    tipologia: tipologiaPavgal(a.famiglia, a.formato), colore: `${nomeColore(a)} — ${a.nome} (cod. ${a.codice}) — al m²`, larghezzaMm: 0, altezzaMm: 0, prezzoBase: a.prezzo,
   }));
 
   const modelli = [...tipologie.entries()].map(([tipologia, t]) => {
     const p = piedini(t.formato);
     return {
       tipologia,
-      immagineUrl: "/immagini/pavimenti-galleggianti/terrazza.jpg",
+      immagineUrl: `/immagini/pavimenti-galleggianti/${COLLEZIONE[t.famiglia]?.foto ?? "terrazza"}.jpg`,
       descrizioneTecnica:
-        `Pavimento galleggiante per esterni su piedini regolabili: piastrelle in gres porcellanato colorato in massa ${t.collezione}, ` +
+        `Pavimento galleggiante per esterni su piedini regolabili: piastrelle in gres porcellanato colorato in massa ${nomeCollezione(t.famiglia)}, ` +
         `formato ${t.formato.replace("x", "×")} cm, spessore 2 cm, antiscivolo, rettificate (Ceramica La Faenza). Posa a secco su piedini ` +
         `regolabili in altezza (4 per piastrella, circa ${p.piediniMq.toFixed(1).replace(".", ",")} al m²), senza colla né massetto: ` +
         `ideale per terrazzi e lastrici, ispezionabile. Peso circa 45 kg/m² (verificare la portata dei piani superiori: 60 kg/m² con i piedini). Prezzo al m².`,
@@ -49,7 +78,7 @@ export function catalogoPavgal(articoli: ArticoloPavgal[]) {
   for (const a of articoli.filter((x) => x.um === "PZ")) {
     const sigla = a.nome.replace(a.famiglia, "").trim().slice(0, 2);
     const tipo = NOME_PEZZO[sigla] ?? "Pezzo speciale";
-    optional.push({ categoria: "Pezzi speciali", nome: `${tipo} ${a.formato.replace("x", "×")} — ${a.nome} (cod. ${a.codice})`, tipoPrezzo: "FISSO", valore: a.prezzo, unita: "pz", listino: `${PREFISSO_PAVGAL}${a.famiglia}` });
+    optional.push({ categoria: "Pezzi speciali", nome: `${tipo} ${a.formato.replace("x", "×")} ${nomeColore(a)} — ${a.nome} (cod. ${a.codice})`, tipoPrezzo: "FISSO", valore: a.prezzo, unita: "pz", listino: `${PREFISSO_PAVGAL}${a.famiglia}` });
   }
   // piedini al m² per formato
   for (const f of [...new Set(piastrelle.map((a) => a.formato))]) {
@@ -78,10 +107,9 @@ export function listiniPavgal(tipologia: string): string[] {
   return m ? ["PAVGAL", `${PREFISSO_PAVGAL}${m[1]}`, `${PREFISSO_PAVGAL}F${m[2]}`] : [];
 }
 
-const COLLEZIONI: Record<string, string> = { BLANCO: "Blanco", FVNT: "Cocoon", LOIRA: "Loira (Cottofaenza)", DAMA: "Dama", GEA: "Gea", MAXXI: "Maxxi", ALGAR: "Algar", VIS: "Vis", YKSG: "Yakisugi" };
 export function labelPavgal(tipologia: string): string | null {
   const m = tipologia.match(/^PAVGAL_([A-Z]+)_(\d+)X(\d+)$/);
-  return m && COLLEZIONI[m[1]] ? `${COLLEZIONI[m[1]]} ${m[2]}×${m[3]} — gres 2 cm` : null;
+  return m && COLLEZIONE[m[1]] ? `${COLLEZIONE[m[1]].nome} ${m[2]}×${m[3]} — gres 2 cm` : null;
 }
 
 export const GUIDA_PAVGAL =

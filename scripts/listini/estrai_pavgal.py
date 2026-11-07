@@ -2,8 +2,8 @@
 # adatte ai pavimenti galleggianti su piedini, con i pezzi speciali delle stesse collezioni. Prezzo = colonna «1^ Sc.» del listino.
 # Uso: pdftotext -layout listino.pdf t.txt && python3 -I scripts/listini/estrai_pavgal.py t.txt prisma/seed-data/pavgal_articoli.json
 import re, sys, json
-FAMIGLIE = {"BLANCO": "Blanco", "FVNT": "Cocoon", "LOIRA": "Loira (Cottofaenza)", "DAMA": "Dama", "GEA": "Gea", "MAXXI": "Maxxi",
-            "ALGAR": "Algar", "VIS": "Vis", "YKSG": "Yakisugi"}
+FAMIGLIE = {"BLANCO": "Blanco", "FVNT": "Cocoon", "LOIRA": "Couture", "DAMA": "Dama", "GEA": "Gea", "MAXXI": "Maxxi",
+            "ALGAR": "Party", "VIS": "Vis", "YKSG": "Yakisugi"}
 out = []
 for riga in open(sys.argv[1], encoding="utf-8"):
     s = riga.strip()
