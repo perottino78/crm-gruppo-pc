@@ -274,19 +274,21 @@ login nel `matcher` del middleware.
   in `prisma/seed-data/tempra_prodotti.json` (dal PDF con `pdftotext -layout` + `scripts/listini/estrai_tempra.py`, campo `listino` = prezzo fornitore).
   `src/lib/listini/tempra.ts`: tendine modello → installazione (via `assiSelezioneIsomax`), descrizioni, optional `TEMPRA` (pannello acustico +3%, strip LED
   5/4 m, profili spot RGB 4/5 m, centralina). Rotta `api/admin/seed-tempra` (GET prova, POST carica). Foto in `public/immagini/tempra/`.
-  Possibile refuso del PDF lasciato com'è: A703 autoportante 3780×3000 = 8.886. Test `tests/listini/tempra.test.ts`, collaudo `tempra` (6).
+  Possibile refuso del PDF lasciato com'è: A703 autoportante 3780×3000 = 8.886.
+  Nel riquadro a tendine (raso muro/Fidra/porte a vetro/Tempra/pedane/galleggianti) tutte le voci «(Work&Service)» stanno in un'unica tendina «Posa e servizi» con `optgroup` per tipo. Test `tests/listini/tempra.test.ts`, collaudo `tempra` (6).
 - **Pedane autoportanti per dehors** (OUTDOOR › PAVIMENTI › «Pedane autoportanti (bar e ristoranti)»): `PEDANA_BETULLA|GRES|WPC|IPE`, griglia A × B
   in cm (200–600 × 200–1100) = listino fornitore × 2 (per ora, `RICARICO_PEDANE`). Il listino fornitore è a m²: 320 €/m² betulla/gres, 450 €/m² WPC/Ipè
   arrotondato ai 10 € (`listinoPedana`, verificato sulle tabelle di pag. 319). `src/lib/listini/pedane.ts`, rotta `api/admin/seed-pedane` (GET prova,
   POST carica), foto in `public/immagini/pedane/`. Cementine a preventivo. Test `tests/listini/pedane.test.ts`, collaudo `pedane` (5).
 - **Pavimenti galleggianti** (OUTDOOR › PAVIMENTI › «Pavimenti galleggianti»; ha sostituito il segnaposto `PAVGALLEGGIANTI_PLACEHOLDER`): piastrelle
   CERAMICA LA FAENZA 2025 da esterno 2 cm antiscivolo (codici «AS», ≥40 kg/m²) estratte dal listino con `scripts/listini/estrai_pavgal.py` in
-  `prisma/seed-data/pavgal_articoli.json` (prezzo = «1^ Sc.», già al cliente). Tipologie `PAVGAL_<collezione>_<formato>` (13: Algar, Blanco, Cocoon=FVNT,
-  Dama, Gea, Loira, Maxxi, Vis, Yakisugi=YKSG in 60×60/90×90/30×120), varianti = colori al m² (quantità = m²). Optional (`listiniPavgal`): pezzi speciali
+  `prisma/seed-data/pavgal_articoli.json` (prezzo = «1^ Sc.», già al cliente). Tipologie `PAVGAL_<codice collezione>_<formato>` (13: Party=ALGAR, Blanco, Cocoon=FVNT,
+  Dama, Gea, Couture=LOIRA, Maxxi, Vis, Yakisugi=YKSG in 60×60/90×90/30×120), varianti = colori al m² (quantità = m²) con il nome del colore
+  (`COLORI`/`nomeColore`, presi dal sito lafaenzaceramica.com; Yakisugi «TN» da confermare) e foto di ambientazione per collezione dal sito. Optional (`listiniPavgal`): pezzi speciali
   della collezione (`PAVGAL_<coll>`: square border, gradone, bordo/griglia piscina, al pezzo), piedini al m² del formato (`PAVGAL_F<formato>`, 4 per
   piastrella, 4 € il 60×60, 6 € i formati lunghi), comuni `PAVGAL` (piedino singolo, angolari 15 €/ml, posa 50 €/m², trasferta 150, autoscala 250/500).
   Optional con `gruppiApplicabili` vuoto e `seed-wpc` li esclude (cancellava tutti gli optional PAVIMENTI non suoi). Rotta `api/admin/seed-pavimenti-galleggianti`.
-  Attenzione: in Prisma `startsWith: "X_"` diventa LIKE e «_» vale qualsiasi carattere → ricontrollare il prefisso in JS. Foto e colori: in arrivo da Ugo.
+  Attenzione: in Prisma `startsWith: "X_"` diventa LIKE e «_» vale qualsiasi carattere → ricontrollare il prefisso in JS. Host del sito La Faenza aggiunti alla rete dell'ambiente.
   Test `tests/listini/pavimenti-galleggianti.test.ts`, collaudo `pavimenti-galleggianti` (7).
 - **Lattoneria in alluminio a peso** (OUTDOOR › LATTONERIA, 11 famiglie = sottogruppi `FAMIGLIE_LATTONERIA` da `famigliaDi(codice)`: angolari, profili
   U/Z/piatti/lamiere, scossaline, copertine, fasce e carter, gronde, pluviali, curve e terminali, tappi e testate, angoli/giunti/bocchettoni, staffe e collari):
@@ -303,7 +305,7 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 281, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 282, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

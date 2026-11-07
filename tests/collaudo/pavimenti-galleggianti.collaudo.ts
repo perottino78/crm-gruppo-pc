@@ -29,11 +29,11 @@ async function main() {
   const r2 = await (await seed.POST(req("POST"))).json();
   verifica(r2.prodottiCreati === 0 && r2.prodottiAggiornati === 0 && r2.optCreati === 0 && r2.optRimossi === 0, "rilancio senza doppioni", r2);
   const m = await prisma.modelloProdotto.findFirst({ where: { tipologia: "PAVGAL_GEA_60X60" } });
-  verifica(m?.gruppo === "PAVIMENTI" && m.immagineUrl === "/immagini/pavimenti-galleggianti/terrazza.jpg", "nei Pavimenti con la foto", m);
+  verifica(m?.gruppo === "PAVIMENTI" && m.immagineUrl === "/immagini/pavimenti-galleggianti/gea.jpg", "nei Pavimenti con la foto", m);
 
   const c = await prisma.cliente.create({ data: { nome: "Rossi terrazzo", brandId: b.id } });
   const pr = await prisma.preventivo.create({ data: { clienteId: c.id, brandId: b.id, commercialeId: u.id } });
-  const pia = await prisma.prodotto.findFirstOrThrow({ where: { tipologia: "PAVGAL_GEA_60X60", colore: { startsWith: "GEA 60AG" } } });
+  const pia = await prisma.prodotto.findFirstOrThrow({ where: { tipologia: "PAVGAL_GEA_60X60", colore: { startsWith: "Argento — GEA 60AG" } } });
   await aggiungiRigaPreventivo(fd({ preventivoId: pr.id, prodottoId: pia.id, quantita: "40" }));
   const riga = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: pr.id } });
   verifica(riga.quantita === 40 && riga.prezzoUnitario === 91.05, "40 m² di Gea 60×60 a 91,05 €/m²", riga);

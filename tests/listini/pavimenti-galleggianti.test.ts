@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import articoli from "../../prisma/seed-data/pavgal_articoli.json";
-import { catalogoPavgal, listiniPavgal, labelPavgal, piedini, type ArticoloPavgal } from "../../src/lib/listini/pavimenti-galleggianti";
+import { catalogoPavgal, listiniPavgal, labelPavgal, piedini, nomeColore, siglaColore, type ArticoloPavgal } from "../../src/lib/listini/pavimenti-galleggianti";
 import { sottogruppoDiTipologia, labelBreveTipologia, notaInArrivo } from "../../src/lib/prodotti";
 
 const art = articoli as ArticoloPavgal[];
@@ -41,4 +41,16 @@ test("optional giusti per ogni pavimento", () => {
   assert.ok(!gea.some((o) => o.nome.startsWith("Piedini regolabili per 90×90")));
   assert.ok(!vis("PAVGAL_VIS_90X90").some((o) => o.nome.includes("GEA")));
   assert.equal(new Set(cat.optional.map((o) => `${o.listino}|${o.categoria}|${o.nome}`)).size, cat.optional.length);
+});
+
+test("nomi dei colori dal sito La Faenza", () => {
+  assert.equal(siglaColore({ nome: "GEA 60AG AS RM", famiglia: "GEA" }), "AG");
+  assert.equal(siglaColore({ nome: "DAMA3012HY ASRM", famiglia: "DAMA" }), "HY");
+  assert.equal(siglaColore({ nome: "YKSG GR3012BSAS", famiglia: "YKSG" }), "BS");
+  assert.equal(siglaColore({ nome: "GEA SB60AV AS", famiglia: "GEA" }), "AV");
+  // ogni articolo ha il suo colore con un nome
+  for (const a of art) assert.notEqual(nomeColore(a), siglaColore(a), a.nome);
+  assert.equal(labelPavgal("PAVGAL_LOIRA_60X60"), "Couture 60×60 — gres 2 cm");
+  assert.ok(cat.prodotti.some((p) => p.colore.startsWith("Middle grey — VIS 90MG")));
+  assert.ok(cat.modelli.every((m) => m.immagineUrl.startsWith("/immagini/pavimenti-galleggianti/") && !m.immagineUrl.endsWith("terrazza.jpg")));
 });
