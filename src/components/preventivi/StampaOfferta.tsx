@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, haMisura } from "@/lib/prodotti";
+import { unitaMisura, haMisura, labelBreveTipologia } from "@/lib/prodotti";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
@@ -175,10 +175,11 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
               <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-16 h-16 object-cover rounded shrink-0" />
             )}
             <div>
-              <p className="font-medium">{r.prodotto.tipologia.replace(/_/g, " ")}</p>
+              <p className="font-medium">{r.prodotto.tipologia.startsWith("LATT_") ? labelBreveTipologia(r.prodotto.tipologia) : r.prodotto.tipologia.replace(/_/g, " ")}</p>
               <p className="text-xs text-neutral-600">
                 colore {r.prodotto.colore}
                 {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
+                {r.prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
               </p>
               {mostraScheda && descrizioneEffettiva && (
                 <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
