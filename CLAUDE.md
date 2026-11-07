@@ -290,6 +290,8 @@ login nel `matcher` del middleware.
   Optional con `gruppiApplicabili` vuoto e `seed-wpc` li esclude (cancellava tutti gli optional PAVIMENTI non suoi). Rotta `api/admin/seed-pavimenti-galleggianti`.
   Attenzione: in Prisma `startsWith: "X_"` diventa LIKE e «_» vale qualsiasi carattere → ricontrollare il prefisso in JS. Host del sito La Faenza aggiunti alla rete dell'ambiente.
   Test `tests/listini/pavimenti-galleggianti.test.ts`, collaudo `pavimenti-galleggianti` (7).
+- **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
+  da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
