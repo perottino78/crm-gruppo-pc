@@ -2,6 +2,7 @@ import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
+import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -48,7 +49,9 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "NUBES_", "NESOS_", "ERMES_",
   // Pavimenti Outdoor: WPC Novowood (pavimenti/rivestimenti/soffitti/recinzioni) + segnaposto
   // galleggianti e gres porcellanato. Misure a m²/ml digitate in cm.
-  "WPC_", "PAVGALLEGGIANTI_", "PAVGRES_"];
+  "WPC_", "PAVGALLEGGIANTI_", "PAVGRES_",
+  // Pedane autoportanti per dehors: griglia A × B in cm come il listino fornitore.
+  "PEDANA_"];
 
 export function unitaMisura(tipologia: string): "cm" | "mm" {
   return TIPOLOGIE_IN_CM.some((p) => tipologia.startsWith(p)) ? "cm" : "mm";
@@ -758,6 +761,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
+  if (tipologia.startsWith("PEDANA_")) return SOTTOGRUPPO_PEDANE;
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
@@ -2062,6 +2066,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("PEDANA_")) return labelPedana(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;
@@ -2166,7 +2171,7 @@ export function finituraDiTipologia(tipologia: string): string | null {
 }
 
 export function etichetteDimensioni(tipologia: string): { larghezza: string; altezza: string } {
-  if (tipologia.startsWith("STABYLA_")) return { larghezza: "Larghezza", altezza: "Sporgenza" };
+  if (tipologia.startsWith("STABYLA_") || tipologia.startsWith("PEDANA_")) return { larghezza: "Larghezza", altezza: "Sporgenza" };
   if (tipologia.startsWith("SCATOLATO_")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("TAPPARELLE_GUIDA_") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_SPAZZOLINO") || tipologia.startsWith("TAPPARELLE_ACCESSORIO_GUARNIZIONE")) return { larghezza: "Lunghezza", altezza: "Non utilizzato — inserire 1" };
   if (tipologia.startsWith("KOPEN_") || tipologia.startsWith("BLINDATI_") || tipologia.startsWith("PERSIANEBLINDATE_") || tipologia.startsWith("ACCIAIO_") || tipologia.startsWith("TAPPARELLE_") || tipologia.startsWith("ISOMAX_") || tipologia.startsWith("RASOMURO_") || tipologia.startsWith("PERSIANEGOCCIA_")) return { larghezza: "Larghezza", altezza: "Altezza" };
