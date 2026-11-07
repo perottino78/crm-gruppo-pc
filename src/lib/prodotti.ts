@@ -3,6 +3,7 @@ import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
+import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
@@ -762,10 +763,10 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
   if (tipologia.startsWith("PEDANA_")) return SOTTOGRUPPO_PEDANE;
+  if (tipologia.startsWith("PAVGAL_")) return SOTTOGRUPPO_PAVGAL;
   if (tipologia.startsWith("FRANGISOLE_")) return "Frangisole Verticale (pale)";
   if (tipologia.startsWith("SERAFRANG_")) return "Frangisole Seraplastic (veneziane esterne)";
   if (tipologia.startsWith("WPC_")) return "WPC (Novowood)";
-  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti";
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato";
   if (LAMBORGHINI_SOTTOGRUPPI[tipologia]) return LAMBORGHINI_SOTTOGRUPPI[tipologia];
   // Persiane: organizzate per materiale — "ACCIAIO (Blindate)" per il catalogo
@@ -2023,7 +2024,6 @@ const TAPPARELLE_LABELS: Record<string, string> = {
 const IN_ARRIVO: Record<string, string> = {
   PORTEPC_PLACEHOLDER: "Listino Porte P&C non ancora caricato — in arrivo",
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
-  PAVGALLEGGIANTI_PLACEHOLDER: "Listino Pavimenti galleggianti non ancora caricato — in arrivo",
   PAVGRES_PLACEHOLDER: "Listino Gres porcellanato non ancora caricato — in arrivo",
   SERRAMENTI_PVC_OPTIMA_PLACEHOLDER: "Listino Serramenti PVC Optima non ancora caricato — in arrivo",
   SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
@@ -2058,7 +2058,6 @@ export function labelBreveTipologia(tipologia: string): string {
     if (a) return a.materiale.valore === "VEL" ? `${a.materiale.label} — ${a.modello.label}` : `${a.materiale.label} — ${a.modello.label} — ${a.colore.label}`;
   }
   if (WPC_TIPOLOGIE[tipologia]) return `${WPC_TIPOLOGIE[tipologia].prodLabel} — ${WPC_TIPOLOGIE[tipologia].varLabel}`;
-  if (tipologia === "PAVGALLEGGIANTI_PLACEHOLDER") return "Pavimenti galleggianti (listino in arrivo)";
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
@@ -2067,6 +2066,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PEDANA_")) return labelPedana(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("PAVGAL_")) return labelPavgal(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LUCILLA_") || tipologia.startsWith("NUVOLA_") || tipologia.startsWith("PANAREA_")) {
     const assi = assiSelezionePergola(tipologia);
     if (assi) return `${assi.modello.label} — ${assi.installazione.label}`;

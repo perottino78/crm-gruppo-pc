@@ -279,19 +279,28 @@ login nel `matcher` del middleware.
   in cm (200–600 × 200–1100) = listino fornitore × 2 (per ora, `RICARICO_PEDANE`). Il listino fornitore è a m²: 320 €/m² betulla/gres, 450 €/m² WPC/Ipè
   arrotondato ai 10 € (`listinoPedana`, verificato sulle tabelle di pag. 319). `src/lib/listini/pedane.ts`, rotta `api/admin/seed-pedane` (GET prova,
   POST carica), foto in `public/immagini/pedane/`. Cementine a preventivo. Test `tests/listini/pedane.test.ts`, collaudo `pedane` (5).
+- **Pavimenti galleggianti** (OUTDOOR › PAVIMENTI › «Pavimenti galleggianti»; ha sostituito il segnaposto `PAVGALLEGGIANTI_PLACEHOLDER`): piastrelle
+  CERAMICA LA FAENZA 2025 da esterno 2 cm antiscivolo (codici «AS», ≥40 kg/m²) estratte dal listino con `scripts/listini/estrai_pavgal.py` in
+  `prisma/seed-data/pavgal_articoli.json` (prezzo = «1^ Sc.», già al cliente). Tipologie `PAVGAL_<collezione>_<formato>` (13: Algar, Blanco, Cocoon=FVNT,
+  Dama, Gea, Loira, Maxxi, Vis, Yakisugi=YKSG in 60×60/90×90/30×120), varianti = colori al m² (quantità = m²). Optional (`listiniPavgal`): pezzi speciali
+  della collezione (`PAVGAL_<coll>`: square border, gradone, bordo/griglia piscina, al pezzo), piedini al m² del formato (`PAVGAL_F<formato>`, 4 per
+  piastrella, 4 € il 60×60, 6 € i formati lunghi), comuni `PAVGAL` (piedino singolo, angolari 15 €/ml, posa 50 €/m², trasferta 150, autoscala 250/500).
+  Optional con `gruppiApplicabili` vuoto e `seed-wpc` li esclude (cancellava tutti gli optional PAVIMENTI non suoi). Rotta `api/admin/seed-pavimenti-galleggianti`.
+  Attenzione: in Prisma `startsWith: "X_"` diventa LIKE e «_» vale qualsiasi carattere → ricontrollare il prefisso in JS. Foto e colori: in arrivo da Ugo.
+  Test `tests/listini/pavimenti-galleggianti.test.ts`, collaudo `pavimenti-galleggianti` (7).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 273, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 277, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
