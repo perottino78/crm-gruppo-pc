@@ -274,7 +274,8 @@ login nel `matcher` del middleware.
   in `prisma/seed-data/tempra_prodotti.json` (dal PDF con `pdftotext -layout` + `scripts/listini/estrai_tempra.py`, campo `listino` = prezzo fornitore).
   `src/lib/listini/tempra.ts`: tendine modello → installazione (via `assiSelezioneIsomax`), descrizioni, optional `TEMPRA` (pannello acustico +3%, strip LED
   5/4 m, profili spot RGB 4/5 m, centralina). Rotta `api/admin/seed-tempra` (GET prova, POST carica). Foto in `public/immagini/tempra/`.
-  Possibile refuso del PDF lasciato com'è: A703 autoportante 3780×3000 = 8.886. Test `tests/listini/tempra.test.ts`, collaudo `tempra` (6).
+  Possibile refuso del PDF lasciato com'è: A703 autoportante 3780×3000 = 8.886.
+  Nel riquadro a tendine (raso muro/Fidra/porte a vetro/Tempra/pedane/galleggianti) tutte le voci «(Work&Service)» stanno in un'unica tendina «Posa e servizi» con `optgroup` per tipo. Test `tests/listini/tempra.test.ts`, collaudo `tempra` (6).
 - **Pedane autoportanti per dehors** (OUTDOOR › PAVIMENTI › «Pedane autoportanti (bar e ristoranti)»): `PEDANA_BETULLA|GRES|WPC|IPE`, griglia A × B
   in cm (200–600 × 200–1100) = listino fornitore × 2 (per ora, `RICARICO_PEDANE`). Il listino fornitore è a m²: 320 €/m² betulla/gres, 450 €/m² WPC/Ipè
   arrotondato ai 10 € (`listinoPedana`, verificato sulle tabelle di pag. 319). `src/lib/listini/pedane.ts`, rotta `api/admin/seed-pedane` (GET prova,
