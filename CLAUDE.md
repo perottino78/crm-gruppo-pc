@@ -299,6 +299,8 @@ login nel `matcher` del middleware.
   = prezzo del fornitore (campi riempiti solo se vuoti). Al metro: nell'offerta si scrive la lunghezza del pezzo in cm (`lattCm` → prezzo al metro × lunghezza,
   `misuraLarghezza` senza altezza); curve/tappi/staffe al pezzo. Rotta `api/admin/seed-lattoneria` (GET prova, POST carica). Test `tests/listini/lattoneria.test.ts`,
   collaudo `lattoneria` (12).
+- **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
+  da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
