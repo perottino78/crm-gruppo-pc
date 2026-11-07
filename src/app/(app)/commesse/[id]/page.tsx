@@ -113,7 +113,10 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       <Link href="/commesse" className="btn-indietro">← Commesse</Link>
       <div className="flex items-center justify-between mt-2 mb-4">
         <h1 className="text-2xl font-bold text-neutral-900">
-          {numeroCommessa(c)} · {c.cliente.nome}
+          {numeroCommessa(c)} ·{" "}
+          <Link href={`/clienti/${c.clienteId}`} title="Apri la scheda del cliente" className="text-blue-800 underline decoration-blue-300 underline-offset-4 hover:decoration-blue-700">
+            {c.cliente.nome}
+          </Link>
         </h1>
         <span className={`text-xs font-bold px-3 py-1 rounded ${stato.cls}`}>{stato.label}</span>
       </div>
