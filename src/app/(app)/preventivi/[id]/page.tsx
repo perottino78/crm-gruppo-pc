@@ -1160,7 +1160,12 @@ export default async function PreventivoPage({
                 const pavgal = prodotto.tipologia.startsWith("PAVGAL_");
                 if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || portaVetro || tempra || pedana || pavgal) {
                   const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
-                  const categorie = [...new Set(optionaliRigaFiltrati.map((o) => o.categoria))].sort((a, b) => (ordine.indexOf(a) + 1 || 99) - (ordine.indexOf(b) + 1 || 99));
+                  // le voci Work&Service (posa, rilievo, trasporto, trasferte, magazzino…) stanno tutte in un'unica tendina, divise per tipo
+                  const WS = "Posa e servizi (Work&Service)";
+                  const gruppoDi = (o: { categoria: string }) => (o.categoria.endsWith("(Work&Service)") ? WS : o.categoria);
+                  const categorie = [...new Set(optionaliRigaFiltrati.map(gruppoDi))].sort((a, b) => (ordine.indexOf(a) + 1 || (a === WS ? 98 : 99)) - (ordine.indexOf(b) + 1 || (b === WS ? 98 : 99)));
+                  const testoVoce = (o: (typeof optionaliRigaFiltrati)[number]) =>
+                    `${o.nome} (${o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT", { maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(o.valore) ? 0 : 2 })}€${o.unita ? `/${o.unita}` : ""}`})`;
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
@@ -1170,17 +1175,24 @@ export default async function PreventivoPage({
                         ))}
                       </p>
                       {categorie.map((cat) => {
-                        const voci = optionaliRigaFiltrati.filter((o) => o.categoria === cat).sort((a, b) => Number(a.valore !== 0) - Number(b.valore !== 0)); // le voci comprese (colori standard) per prime
+                        const voci = optionaliRigaFiltrati.filter((o) => gruppoDi(o) === cat).sort((a, b) => Number(a.valore !== 0) - Number(b.valore !== 0)); // le voci comprese (colori standard) per prime
+                        const sottogruppi = cat === WS ? [...new Set(voci.map((o) => o.categoria))] : [];
                         return (
                           <form key={cat} action={aggiungiOptionalARiga} className="flex flex-wrap items-center gap-1">
                             <input type="hidden" name="rigaId" value={r.id} />
                             <input type="hidden" name="preventivoId" value={preventivo.id} />
-                            <select name="optionalId" aria-label={cat} className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[320px]">
-                              {voci.map((o) => (
-                                <option key={o.id} value={o.id}>
-                                  {o.nome} ({o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT", { maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(o.valore) ? 0 : 2 })}€${o.unita ? `/${o.unita}` : ""}`})
-                                </option>
-                              ))}
+                            <select name="optionalId" aria-label={cat} className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[420px]">
+                              {cat === WS
+                                ? sottogruppi.map((sg) => (
+                                    <optgroup key={sg} label={sg.replace(" (Work&Service)", "")}>
+                                      {voci.filter((o) => o.categoria === sg).map((o) => (
+                                        <option key={o.id} value={o.id}>{testoVoce(o)}</option>
+                                      ))}
+                                    </optgroup>
+                                  ))
+                                : voci.map((o) => (
+                                    <option key={o.id} value={o.id}>{testoVoce(o)}</option>
+                                  ))}
                             </select>
                             <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                             <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ {cat.toLowerCase()}</button>
