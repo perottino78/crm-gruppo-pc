@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { catalogoLattoneria, GRUPPO_LATTONERIA, PREFISSO_LATTONERIA } from "@/lib/listini/lattoneria";
+import { catalogoLattoneria, GRUPPO_LATTONERIA, PREFISSO_LATTONERIA, FORNITORE_LATTONERIA, SCONTO_ACQUISTO_LATTONERIA } from "@/lib/listini/lattoneria";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -8,6 +8,7 @@ export const maxDuration = 120;
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const ok = (req: NextRequest) => req.headers.get("x-seed-key") === SECRET;
 type Riga = { tipologia: string; colore: string; larghezzaMm: number; altezzaMm: number; prezzoBase: number };
+const norm = (t: string) => t.toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/(SRLS|SRL)$/, "");
 const kP = (p: Riga) => `${p.tipologia}|${p.colore}|${p.larghezzaMm}|${p.altezzaMm}`;
 
 /** Lattoneria in alluminio pressopiegato (OUTDOOR › LATTONERIA): prezzi a peso dal prezzario Il Mastro.
@@ -37,10 +38,27 @@ async function esegui(prova: boolean) {
     if (prova) { st.prodottiRimossi++; continue; }
     try { await prisma.prodotto.delete({ where: { id: v.id } }); st.prodottiRimossi++; } catch { st.prodottiNonRimovibili++; }
   }
+  // Fornitore Il Mastro: cercato per nome (senza doppioni), creato se manca. Sul modello: fornitore, codice e sconto d'acquisto
+  // (vendita × 50% = costo del fornitore → «costo previsto» negli ordini). Si riempiono solo se vuoti (mai sopra a scelte fatte a mano).
+  const fornitori = await prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, select: { id: true, ragioneSociale: true } });
+  let fornitore = fornitori.find((f) => norm(f.ragioneSociale) === norm(FORNITORE_LATTONERIA)) ?? null;
+  const fornitoreCreato = !fornitore;
+  if (!fornitore && !prova) fornitore = await prisma.soggetto.create({ data: { ragioneSociale: FORNITORE_LATTONERIA, ruoli: ["FORNITORE"] }, select: { id: true, ragioneSociale: true } });
   if (!prova) {
     for (const m of cat.modelli) {
       const dati = { descrizioneTecnica: m.descrizioneTecnica, famiglia: "OUTDOOR", gruppo: GRUPPO_LATTONERIA, modalitaCalcolo: "GRIGLIA", parametriCalcolo: {} };
-      await prisma.modelloProdotto.upsert({ where: { brandId_tipologia: { brandId: brand.id, tipologia: m.tipologia } }, create: { brandId: brand.id, tipologia: m.tipologia, ...dati }, update: dati });
+      const acquisto = { fornitoreId: fornitore!.id, codiceFornitore: m.tipologia.slice(PREFISSO_LATTONERIA.length), scontoAcquisto: SCONTO_ACQUISTO_LATTONERIA };
+      const e = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: brand.id, tipologia: m.tipologia } } });
+      if (!e) await prisma.modelloProdotto.create({ data: { brandId: brand.id, tipologia: m.tipologia, ...dati, ...acquisto } });
+      else await prisma.modelloProdotto.update({
+        where: { id: e.id },
+        data: {
+          ...dati,
+          ...(e.fornitoreId ? {} : { fornitoreId: acquisto.fornitoreId }),
+          ...(e.codiceFornitore ? {} : { codiceFornitore: acquisto.codiceFornitore }),
+          ...(e.scontoAcquisto != null ? {} : { scontoAcquisto: acquisto.scontoAcquisto }),
+        },
+      });
     }
     // modelli di articoli tolti dal listino e senza più varianti
     const tipologie = new Set(cat.modelli.map((m) => m.tipologia));
@@ -51,7 +69,7 @@ async function esegui(prova: boolean) {
       st.modelliRimossi++;
     }
   }
-  return { ok: true, prova, prodotti: cat.prodotti.length, modelli: cat.modelli.length, ...st };
+  return { ok: true, prova, prodotti: cat.prodotti.length, modelli: cat.modelli.length, fornitore: FORNITORE_LATTONERIA, fornitoreCreato, scontoAcquisto: SCONTO_ACQUISTO_LATTONERIA, ...st };
 }
 
 export async function GET(req: NextRequest) {

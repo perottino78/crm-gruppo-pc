@@ -16,7 +16,7 @@ const req = (m: string) => new NextRequest("http://x/api/admin/seed-lattoneria",
 const TOT = ARTICOLI_LATTONERIA.length * COLORI_LATTONERIA.length;
 
 async function main() {
-  await prisma.$executeRawUnsafe('TRUNCATE "RigaOptional","RigaPreventivo","Preventivo","Optional","Prodotto","ModelloProdotto","Cliente","Utente","Brand" CASCADE');
+  await prisma.$executeRawUnsafe('TRUNCATE "RigaOptional","RigaPreventivo","Preventivo","Optional","Prodotto","ModelloProdotto","Cliente","Utente","Brand","Soggetto" CASCADE');
   const b = await prisma.brand.create({ data: { nome: "P&C" } });
   const u = await prisma.utente.create({ data: { nome: "Ugo Perottino", email: "u@x.it", username: "ugo", ruolo: "AMMINISTRATORE" } });
   g.__utente = u;
@@ -30,7 +30,14 @@ async function main() {
   verifica(r2.prodottiCreati === 0 && r2.prodottiAggiornati === 0, "rilancio senza doppioni", r2);
   verifica(await prisma.prodotto.count({ where: { tipologia: "LATTX_ALTRO" } }) === 1, "non tocca altri prodotti");
   const m = await prisma.modelloProdotto.findFirst({ where: { tipologia: "LATT_ANG50X50" } });
-  verifica(m?.famiglia === "OUTDOOR" && m.gruppo === "LATTONERIA" && m.descrizioneTecnica?.includes("0,405 kg al metro"), "in Outdoor › Lattoneria con il peso al metro", m);
+  verifica(m?.famiglia === "OUTDOOR" && m.gruppo === "LATTONERIA" && m.descrizioneTecnica?.includes("0,405 kg al metro") && !m.descrizioneTecnica.includes("€"), "in Outdoor › Lattoneria con il peso al metro, senza prezzi del fornitore", m);
+  const mastro = await prisma.soggetto.findMany({ where: { ragioneSociale: "IL MASTRO srls" } });
+  verifica(mastro.length === 1 && m?.fornitoreId === mastro[0].id && m.scontoAcquisto === 50 && m.codiceFornitore === "ANG50X50", "fornitore Il Mastro (uno solo) con sconto d'acquisto 50% sul modello", { mastro, m });
+  // una scelta fatta a mano sul modello non viene sovrascritta dal rilancio
+  await prisma.modelloProdotto.update({ where: { id: m!.id }, data: { scontoAcquisto: 45 } });
+  await seed.POST(req("POST"));
+  verifica((await prisma.modelloProdotto.findUniqueOrThrow({ where: { id: m!.id } })).scontoAcquisto === 45 && (await prisma.soggetto.count({ where: { ragioneSociale: "IL MASTRO srls" } })) === 1, "rilancio: sconto scritto a mano rispettato, fornitore non duplicato");
+  await prisma.modelloProdotto.update({ where: { id: m!.id }, data: { scontoAcquisto: 50 } });
 
   const c = await prisma.cliente.create({ data: { nome: "Rossi Mario", brandId: b.id } });
   const pr = await prisma.preventivo.create({ data: { clienteId: c.id, brandId: b.id, commercialeId: u.id } });
@@ -45,6 +52,10 @@ async function main() {
   await aggiungiRigaPreventivo(fd({ preventivoId: pr.id, prodottoId: st.id, quantita: "6" }));
   const rs = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: pr.id, prodottoId: st.id } });
   verifica(rs.prezzoUnitario === 3.6 && rs.quantita === 6 && rs.misuraLarghezza === null, "6 staffe al pezzo a 3,60 €", rs);
+  // costo previsto per l'ordine al fornitore = prezzo di Il Mastro (vendita × 50%): 4 × 32,50 × 0,5 = 65 €
+  const { datiAcquisto } = await import("../../src/lib/ordini/server");
+  const acq = await datiAcquisto([{ ...r, prodotto: { brandId: b.id, tipologia: "LATT_ANG50X50" } }]);
+  verifica(acq.get(r.id)?.costoPrevisto === 65 && acq.get(r.id)?.fornitoreNome === "IL MASTRO srls", "costo previsto Il Mastro 65 € (guadagno 65 €)", acq.get(r.id));
   const p = await prisma.preventivo.findUniqueOrThrow({ where: { id: pr.id } });
   verifica(Math.abs(p.totaleNetto - (4 * 32.5 + 6 * 3.6)) < 0.01, "totale dell'offerta 151,60 €", p.totaleNetto);
 

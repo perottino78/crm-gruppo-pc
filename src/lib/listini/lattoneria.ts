@@ -9,9 +9,12 @@
 export const PREFISSO_LATTONERIA = "LATT_";
 export const GRUPPO_LATTONERIA = "LATTONERIA";
 export const DENSITA_ALLUMINIO = 2.7; // kg/dm³
-/** Ricarico sul costo del materiale (per ora ×2, come le pedane: comprende piega, taglio e sfrido). */
+/** Prezzo di vendita = costo del fornitore × 2 (decisione di Ugo, nov 2026). */
 export const RICARICO_LATTONERIA = 2;
 export const FORNITORE_LATTONERIA = "IL MASTRO srls";
+/** Il costo del fornitore resta solo per i conti di guadagno: sul modello si salva il fornitore con lo sconto d'acquisto
+ *  equivalente (vendita × (1 − 50%) = costo), così negli ordini al fornitore il «costo previsto» è il prezzo di Il Mastro. */
+export const SCONTO_ACQUISTO_LATTONERIA = Math.round((1 - 1 / RICARICO_LATTONERIA) * 10000) / 100;
 
 export type FasciaColore = "STD" | "RAL" | "BRONZO" | "FUORI_STD";
 export const FASCE: Record<FasciaColore, { label: string; euroKg: number; nota?: string }> = {
@@ -37,7 +40,27 @@ export const COLORI_LATTONERIA: { nome: string; fascia: FasciaColore }[] = [
   { nome: "RAL fuori standard (a richiesta)", fascia: "FUORI_STD" },
 ];
 
-export type SottogruppoLatt = "Angolari e profili" | "Scossaline e copertine" | "Gronde e pluviali" | "Curve, tappi e staffe";
+/** Famiglie (sottogruppi nella tendina dell'offerta), nell'ordine in cui compaiono. */
+export const FAMIGLIE_LATTONERIA = [
+  "Angolari", "Profili a U e a Z, piatti e lamiere", "Scossaline", "Copertine per muretti", "Fasce frontali e carter",
+  "Gronde (canali)", "Pluviali", "Curve e terminali", "Tappi e testate", "Angoli, giunti e bocchettoni", "Staffe e collari",
+] as const;
+export type SottogruppoLatt = (typeof FAMIGLIE_LATTONERIA)[number];
+
+/** Famiglia dal codice dell'articolo. */
+export function famigliaDi(codice: string): SottogruppoLatt {
+  if (/^(ANGOLO|GIUNTO|BOCCHETTONE|COPRIGIUNTO)/.test(codice)) return "Angoli, giunti e bocchettoni";
+  if (codice.startsWith("ANG")) return "Angolari";
+  if (/^(U\d|Z\d|PIATTO|LAMIERA|GOCCIOLATOIO)/.test(codice)) return "Profili a U e a Z, piatti e lamiere";
+  if (codice.startsWith("SCOSS")) return "Scossaline";
+  if (codice.startsWith("COPERT")) return "Copertine per muretti";
+  if (/^(FASCIA|CARTER)/.test(codice)) return "Fasce frontali e carter";
+  if (codice.startsWith("GRONDA")) return "Gronde (canali)";
+  if (codice.startsWith("PLUV")) return "Pluviali";
+  if (/^(CURVA|TERMINALE)/.test(codice)) return "Curve e terminali";
+  if (/^(TESTATA|TAPPO)/.test(codice)) return "Tappi e testate";
+  return "Staffe e collari";
+}
 export type ArticoloLatt = {
   codice: string; // diventa la tipologia LATT_<codice>
   nome: string;
@@ -53,13 +76,13 @@ export type ArticoloLatt = {
 };
 
 const A = (codice: string, nome: string, sviluppoMm: number, spessoreMm: number, uso: string): ArticoloLatt =>
-  ({ codice, nome, sottogruppo: "Angolari e profili", sviluppoMm, spessoreMm, um: "ML", uso });
+  ({ codice, nome, sottogruppo: famigliaDi(codice), sviluppoMm, spessoreMm, um: "ML", uso });
 const S = (codice: string, nome: string, sviluppoMm: number, spessoreMm: number, uso: string): ArticoloLatt =>
-  ({ codice, nome, sottogruppo: "Scossaline e copertine", sviluppoMm, spessoreMm, um: "ML", uso });
+  ({ codice, nome, sottogruppo: famigliaDi(codice), sviluppoMm, spessoreMm, um: "ML", uso });
 const G = (codice: string, nome: string, sviluppoMm: number, spessoreMm: number, uso: string): ArticoloLatt =>
-  ({ codice, nome, sottogruppo: "Gronde e pluviali", sviluppoMm, spessoreMm, um: "ML", uso });
+  ({ codice, nome, sottogruppo: famigliaDi(codice), sviluppoMm, spessoreMm, um: "ML", uso });
 const P = (codice: string, nome: string, sviluppoMm: number, spessoreMm: number, lunghezzaPezzoMm: number, uso: string): ArticoloLatt =>
-  ({ codice, nome, sottogruppo: "Curve, tappi e staffe", sviluppoMm, spessoreMm, um: "PZ", lunghezzaPezzoMm, uso });
+  ({ codice, nome, sottogruppo: famigliaDi(codice), sviluppoMm, spessoreMm, um: "PZ", lunghezzaPezzoMm, uso });
 
 export const ARTICOLI_LATTONERIA: ArticoloLatt[] = [
   // — Angolari a L lati uguali e disuguali, profili a U, Z, piatti
@@ -139,19 +162,24 @@ export function pesoKg(a: ArticoloLatt): number {
   return a.um === "ML" ? kgMl : (kgMl * (a.lunghezzaPezzoMm ?? 1000)) / 1000;
 }
 
-/** Prezzo di vendita (al metro o al pezzo) per un €/kg: arrotondato ai 10 centesimi, mai sotto 1 €. */
+/** Costo del fornitore (al metro o al pezzo): kg × €/kg, ai 5 centesimi, mai sotto 0,50 €. */
+export function costoLatt(a: ArticoloLatt, euroKg: number): number {
+  return Math.max(0.5, Math.round(pesoKg(a) * euroKg * 20) / 20);
+}
+
+/** Prezzo di vendita = costo del fornitore × ricarico (con ×2: ai 10 centesimi, mai sotto 1 €). */
 export function prezzoLatt(a: ArticoloLatt, euroKg: number, ricarico = RICARICO_LATTONERIA): number {
-  return Math.max(1, Math.round(pesoKg(a) * euroKg * ricarico * 10) / 10);
+  return Math.round(costoLatt(a, euroKg) * ricarico * 100) / 100;
 }
 
 const fmt = (n: number, d = 2) => n.toFixed(d).replace(".", ",");
-export const coloreLatt = (nome: string, fascia: FasciaColore, um: "ML" | "PZ") =>
-  `${nome} — ${FASCE[fascia].euroKg} €/kg${FASCE[fascia].nota ? ` (${FASCE[fascia].nota})` : ""} — ${um === "ML" ? "al metro" : "al pezzo"}`;
+/** Nome della variante: lo vede anche il cliente nell'offerta, quindi niente prezzi del fornitore. */
+export const coloreLatt = (nome: string, um: "ML" | "PZ") => `${nome} — ${um === "ML" ? "al metro" : "al pezzo"}`;
 
 export function catalogoLattoneria() {
   const prodotti = ARTICOLI_LATTONERIA.flatMap((a) =>
     COLORI_LATTONERIA.map((c) => ({
-      tipologia: tipologiaLatt(a.codice), colore: coloreLatt(c.nome, c.fascia, a.um), larghezzaMm: 0, altezzaMm: 0,
+      tipologia: tipologiaLatt(a.codice), colore: coloreLatt(c.nome, a.um), larghezzaMm: 0, altezzaMm: 0,
       prezzoBase: prezzoLatt(a, FASCE[c.fascia].euroKg),
     })));
   const modelli = ARTICOLI_LATTONERIA.map((a) => {
@@ -161,10 +189,9 @@ export function catalogoLattoneria() {
       descrizioneTecnica:
         `${a.nome}: alluminio pressopiegato preverniciato, uso: ${a.uso}. ` +
         (a.um === "ML"
-          ? `Sviluppo ${a.sviluppoMm} mm, spessore ${fmt(a.spessoreMm, 1)} mm, peso circa ${fmt(kg, 3)} kg al metro. Prezzo al metro lineare (si scrive la lunghezza in cm). `
+          ? `Sviluppo ${a.sviluppoMm} mm, spessore ${fmt(a.spessoreMm, 1)} mm, peso circa ${fmt(kg, 3)} kg al metro. Prezzo al metro lineare. `
           : `Peso circa ${fmt(kg, 3)} kg al pezzo. Prezzo al pezzo. `) +
-        `Prezzo a peso dal prezzario ${FORNITORE_LATTONERIA}: standard (bianco, avorio, argento) 14 €/kg, RAL (argento OX5, 7035, 7001, 7016, nero, 8017, 6005) 16 €/kg, ` +
-        `bronzo 18 €/kg; RAL fuori standard da confermare; tinta legno su ordinazione (a preventivo). Il prezzo può variare con la lavorazione.`,
+        `Colori: bianco, avorio, argento, argento OX5, RAL 7035, 7001, 7016, nero, 8017, 6005, bronzo; altri RAL a richiesta; tinta legno su ordinazione.`,
     };
   });
   return { prodotti, modelli };
@@ -179,5 +206,5 @@ export const lattAlMetro = (tipologia: string) => articoloLatt(tipologia)?.um ==
 export const prezzoPerLunghezza = (prezzoMl: number, cm: number) => Math.round(prezzoMl * (cm / 100) * 100) / 100;
 
 export const GUIDA_LATTONERIA =
-  "Prezzo a peso (kg × €/kg del colore, ricarico compreso). Per i profili al metro scrivi la lunghezza di ogni pezzo in cm e la quantità di pezzi; " +
+  "Prezzo a peso (kg × €/kg del colore × 2; il costo di Il Mastro resta come costo previsto negli ordini). Per i profili al metro scrivi la lunghezza di ogni pezzo in cm e la quantità di pezzi; " +
   "curve, tappi e staffe sono al pezzo. Tinta legno e lavorazioni speciali (più pieghe, sagome, fori): a preventivo dal fornitore.";
