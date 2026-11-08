@@ -101,3 +101,23 @@ export async function costiMaterialeCommesse(ids: string[]) {
   }
   return out;
 }
+
+/** Indirizzo dell'ufficio ordini: gli ordini partono da qui e le conferme dei fornitori tornano qui. */
+export const EMAIL_ORDINI = () => process.env.EMAIL_ORDINI || "ordini@gruppopec.com";
+
+/** File del rilievo della commessa (PDF e foto dei rilievi non annullati), da allegare all'ordine al fornitore. */
+export async function fileRilievo(commessaId: string | null | undefined, conContenuto = true) {
+  if (!commessaId) return [];
+  const righe = await prisma.rilievoAllegato.findMany({
+    where: { rilievo: { commessaId, stato: { not: "ANNULLATO" } } },
+    select: { id: true, nome: true, ...(conContenuto ? { dataUri: true } : {}) }, orderBy: { createdAt: "asc" },
+  });
+  return righe.map((r, i) => {
+    const d = (r as { dataUri?: string }).dataUri ?? "";
+    const m = /^data:([^;,]+)?(;base64)?,([\s\S]*)$/.exec(d);
+    const mime = m?.[1] || "image/jpeg";
+    const est = mime === "application/pdf" ? "pdf" : mime.split("/")[1] ?? "jpg";
+    const nome = (r.nome && /\.[a-z0-9]{2,4}$/i.test(r.nome) ? r.nome : `rilievo-${i + 1}.${est}`).replace(/[^\w.\- ]+/g, "_");
+    return { id: r.id, nome, mime, contenuto: m ? (m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]))) : Buffer.alloc(0) };
+  }).filter((f) => !conContenuto || f.contenuto.length > 0);
+}

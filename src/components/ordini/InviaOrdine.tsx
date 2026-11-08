@@ -3,13 +3,15 @@
 import { useState, useTransition } from "react";
 import { inviaOrdineEmail, type EsitoInvio } from "@/app/ordini-actions";
 
-export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean }) {
+/** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
+export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], mittente }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fileRilievo?: string[]; mittente: string }) {
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
+  const [senzaPrezzi, setSenzaPrezzi] = useState(true), [conRilievo, setConRilievo] = useState(fileRilievo.length > 0);
   const [esito, setEsito] = useState<EsitoInvio | null>(null);
   const [inCorso, avvia] = useTransition();
   const inp = "border border-neutral-300 rounded px-2 py-1 text-sm w-full";
   const invia = () => avvia(async () => {
-    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo);
+    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, conRilievo });
     setEsito(r);
     if (r.mailto) window.location.href = r.mailto;
   });
@@ -21,10 +23,18 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
       </div>
       <label className="text-xs font-semibold block">Oggetto<input value={ogg} onChange={(e) => setOgg(e.target.value)} className={inp} /></label>
       <label className="text-xs font-semibold block">Messaggio<textarea value={corpo} onChange={(e) => setCorpo(e.target.value)} rows={6} className={inp} /></label>
+      <div className="rounded border border-neutral-200 bg-neutral-50 p-2 space-y-1 text-sm">
+        <p className="text-xs text-neutral-700">Parte da <b>{mittente}</b>: le conferme del fornitore arrivano lì.</p>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={senzaPrezzi} onChange={(e) => setSenzaPrezzi(e.target.checked)} /> PDF senza prezzi (lista prodotti: il prezzo lo dà il fornitore con la conferma)</label>
+        {fileRilievo.length > 0 ? (
+          <label className="flex items-start gap-2"><input type="checkbox" checked={conRilievo} onChange={(e) => setConRilievo(e.target.checked)} className="mt-1" />
+            <span>Allega il rilievo della pratica ({fileRilievo.length} file: {fileRilievo.slice(0, 6).join(", ")}{fileRilievo.length > 6 ? "…" : ""})</span></label>
+        ) : <p className="text-xs text-neutral-500">Nessun rilievo caricato nella pratica da allegare.</p>}
+      </div>
       <div className="flex flex-wrap gap-2 items-center">
         <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green text-sm px-4 py-2 disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email con PDF" : "✉ Invia per email con PDF"}</button>
-        <a href={`${pdfUrl}?scarica=1`} className="btn-3d btn-3d-dark text-sm px-4 py-2">⬇ Scarica PDF</a>
-        <a href={pdfUrl} target="_blank" rel="noopener" className="text-sm text-blue-800 underline">anteprima</a>
+        <a href={`${pdfUrl}?scarica=1${senzaPrezzi ? "&prezzi=0" : ""}`} className="btn-3d btn-3d-dark text-sm px-4 py-2">⬇ Scarica PDF</a>
+        <a href={`${pdfUrl}${senzaPrezzi ? "?prezzi=0" : ""}`} target="_blank" rel="noopener" className="text-sm text-blue-800 underline">anteprima</a>
       </div>
       {esito && <p className={`text-sm rounded p-2 ${esito.ok ? "bg-green-50 text-green-900" : esito.mailto ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-800"}`}>{esito.messaggio}</p>}
     </div>

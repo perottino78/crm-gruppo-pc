@@ -9,7 +9,8 @@ import StatoAcquisti from "@/components/ordini/StatoAcquisti";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
-import { puoGestireOrdini } from "@/lib/ordini/server";
+import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { creaOrdineDaRighe } from "@/app/ordini-actions";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
   aggiornaCondizioniAcconto,
@@ -52,9 +53,9 @@ import FirmaCliente from "@/components/FirmaCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ complemento?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string }> }) {
   const { id } = await params;
-  const { complemento: erroreComplemento } = await searchParams;
+  const { avviso } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -93,7 +94,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   // Scheda costi a scalare: movimenti in ordine cronologico con residuo progressivo
   const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
-  const complementi = c.righeOrdine.filter((r) => r.complemento);
+  // materiale della pratica, raggruppato per fornitore (così si spuntano insieme le righe dello stesso fornitore)
+  const materialePratica = [...c.righeOrdine].sort((a, b) => (a.fornitoreNome ?? "~").localeCompare(b.fornitoreNome ?? "~"));
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
@@ -382,26 +384,53 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           {c.rilievi.length === 0 && <p className="text-xs text-neutral-600">Nessun rilievo programmato.</p>}
         </div>
 
-        <div className="mt-4 border-t border-neutral-200 pt-3">
-          <p className="text-sm font-bold text-neutral-900">🧩 Complementi trovati al rilievo <span className="font-normal text-neutral-600">— solo acquisto: la vendita al cliente non cambia</span></p>
-          <p className="text-xs text-neutral-600 mb-2">Vanno nell&apos;elenco «4 · Acquisti» da ordinare al fornitore, con il costo previsto. Il costo vero arriva dalla conferma del fornitore o dalla fattura.</p>
-          {erroreComplemento && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{erroreComplemento}</p>}
-          {complementi.length > 0 && (
-            <ul className="mb-3 divide-y divide-neutral-100 text-sm">
-              {complementi.map((r) => (
-                <li key={r.id} className="py-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="font-medium text-neutral-900">{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span></span>
-                  <span className="text-xs text-neutral-700">{r.fornitoreNome ?? "fornitore da scegliere"}</span>
-                  {r.costoPrevisto !== null && <span className="text-xs text-neutral-700">costo previsto {eur(r.costoPrevisto)}</span>}
-                  {r.note && <span className="text-xs text-neutral-600">({r.note})</span>}
-                  {r.ordineFornitore
-                    ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-xs text-purple-800 underline">in ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
-                    : <form action={eliminaComplemento}><input type="hidden" name="rigaId" value={r.id} /><button className="text-xs text-red-700 underline">togli</button></form>}
-                </li>
-              ))}
-            </ul>
+        <div id="materiale-pratica" className="mt-4 border-t border-neutral-200 pt-3 scroll-mt-4">
+          <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello segnato dal commerciale nell&apos;offerta più i complementi del rilievo</span></p>
+          <p className="text-xs text-neutral-600 mb-2">Come in BConsole: aggiungi qui sotto il materiale mancante (🧩 solo acquisto, la vendita non cambia), poi <b>spunta le righe dello stesso fornitore</b> e crea l&apos;ordine: si invia da {EMAIL_ORDINI()} con la lista senza prezzi e il rilievo allegato.</p>
+          {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
+          {materialePratica.length === 0 ? (
+            <form action={generaRigheOrdine} className="mb-3"><input type="hidden" name="id" value={c.id} />
+              <button className="text-xs text-blue-800 underline">Carica il materiale dell&apos;offerta</button></form>
+          ) : (
+            <form action={creaOrdineDaRighe} className="mb-3">
+              <input type="hidden" name="commessaId" value={c.id} />
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200"><th className="py-1 w-6"></th><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th><th></th></tr></thead>
+                  <tbody>
+                    {materialePratica.map((r) => {
+                      const libera = !r.ordineFornitoreId && !r.ordinato && !r.daMagazzino;
+                      return (
+                        <tr key={r.id} className="border-b border-neutral-100 align-top">
+                          <td className="py-1.5">{libera && <input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} />}</td>
+                          <td className="py-1.5 pr-2">{r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
+                          <td className="py-1.5 text-right pr-3">{r.quantita}</td>
+                          <td className="py-1.5 text-xs">{r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>}</td>
+                          <td className="py-1.5 text-xs">{r.ordineFornitore
+                            ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
+                            : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>
+                          <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
+                          <td className="py-1.5 text-right">{r.complemento && libera && <button formAction={eliminaComplemento} name="rigaId" value={r.id} className="text-xs text-red-700 underline">togli</button>}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              {puoGestireOrdini(utente) && materialePratica.some((r) => !r.ordineFornitoreId && !r.ordinato && !r.daMagazzino) && (
+                <div className="flex flex-wrap items-end gap-2 mt-2">
+                  <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Fornitore
+                    <select name="fornitoreId" className={`${inp} max-w-60`}>
+                      <option value="">quello delle righe spuntate</option>
+                      {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
+                    </select>
+                  </label>
+                  <button className="btn-3d btn-3d-purple text-sm px-4 py-2">📨 Crea l&apos;ordine al fornitore con le righe spuntate</button>
+                </div>
+              )}
+            </form>
           )}
-          <AggiungiComplemento commessaId={c.id} fornitori={fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }))} />
+          <p className="text-sm font-bold text-neutral-900 mt-2 mb-1">🧩 Aggiungi materiale mancante <span className="font-normal text-neutral-600">— solo acquisto</span></p>          <AggiungiComplemento commessaId={c.id} fornitori={fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }))} />
         </div>
       </section>
 

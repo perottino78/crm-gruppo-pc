@@ -58,7 +58,7 @@ async function main() {
   const sc = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, descrizione: { contains: "Scossalina" } } });
   verifica(sc.complemento && sc.rigaPreventivoId === null && sc.fornitoreId === mastro.id && sc.prezzoAcquisto === 70, "scossalina 1500: fascia 2000 del listino, fornitore Il Mastro", sc);
   verifica(sc.costoPrevisto === 105 && sc.descrizione.includes("Bianco") && sc.descrizione.includes("1500"), "costo previsto 70 × 3 − 50% = 105, colore e misura nella descrizione", sc);
-  verifica(d1 === `/commesse/${c.id}#rilievo`, "si torna al rilievo", d1);
+  verifica(d1 === `/commesse/${c.id}#materiale-pratica`, "si torna al materiale della pratica", d1);
   await dove(C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "A", articoloId: art.id, quantita: "4" })));
   const si = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, articoloId: art.id } });
   verifica(si.complemento && si.costoPrevisto === 26 && si.fornitoreId === ferr.id && si.codice === "SIL-01", "articolo: costo 6,50 × 4 = 26, fornitore dell'anagrafica", si);
@@ -66,7 +66,7 @@ async function main() {
   const cf = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, descrizione: "Coprifilo 70 mm noce" } });
   verifica(cf.complemento && cf.fornitoreId === mastro.id && cf.costoPrevisto === null && cf.note === "lato bagno", "testo libero con fornitore scelto a mano", cf);
   const fuori = await dove(C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "SCOSSALINA_PROVA", colore: "Bianco", larghezza: "3000" })));
-  verifica(fuori?.includes("complemento=") && fuori.includes("fuori"), "misura fuori listino: messaggio, nessuna riga", fuori);
+  verifica(fuori?.includes("avviso=") && fuori.includes("fuori"), "misura fuori listino: messaggio, nessuna riga", fuori);
   verifica(await prisma.rigaOrdine.count({ where: { commessaId: c.id } }) === 3, "tre complementi");
   verifica((await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).totaleNetto === totPrima, "la vendita al cliente non cambia");
 

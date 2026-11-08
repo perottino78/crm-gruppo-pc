@@ -324,6 +324,7 @@ export async function caricaRilievo(formData: FormData) {
         .map((f) => ({ rilievoId: id, nome: f.nome ?? null, dataUri: f.dataUri })),
     });
   }
+  await assicuraRigheOfferta(r.commessaId);
   await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} file tra foto e PDF)` : ""}.`);
   await ricalcolaStato(r.commessaId);
   revalidatePath(`/commesse/${r.commessaId}`);
@@ -539,6 +540,12 @@ export async function generaRigheOrdine(formData: FormData) {
   if (!u) redirect("/login");
   const id = str(formData, "id");
   if (!id) return;
+  await assicuraRigheOfferta(id);
+  revalidatePath(`/commesse/${id}`);
+}
+
+/** Porta nell'elenco del materiale le righe dell'offerta (quello che ha segnato il commerciale) non ancora presenti. */
+async function assicuraRigheOfferta(id: string) {
   const c = await prisma.commessa.findUnique({
     where: { id },
     include: { righeOrdine: true, preventivo: { include: { righe: { include: { prodotto: true }, orderBy: [{ ordine: "asc" }, { id: "asc" }] } } } },
@@ -560,7 +567,6 @@ export async function generaRigheOrdine(formData: FormData) {
     await prisma.rigaOrdine.createMany({ data: nuove });
     await log(id, `Elenco ordini generato: ${nuove.length} righe da vidimare.`);
   }
-  revalidatePath(`/commesse/${id}`);
 }
 
 export async function aggiornaRigaOrdine(formData: FormData) {
@@ -1019,7 +1025,7 @@ export async function aggiungiComplemento(formData: FormData) {
   if (!commessaId) return;
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true } });
   if (!c) return;
-  const torna = (errore?: string) => redirect(`/commesse/${commessaId}${errore ? `?complemento=${encodeURIComponent(errore)}` : ""}#rilievo`);
+  const torna = (errore?: string) => redirect(`/commesse/${commessaId}${errore ? `?avviso=${encodeURIComponent(errore)}` : ""}#materiale-pratica`);
   const q = Math.max(1, Math.round(flt(formData, "quantita") ?? 1));
   const tipo = str(formData, "tipo") ?? "T";
   let fornitoreId = str(formData, "fornitoreId");
@@ -1063,6 +1069,7 @@ export async function aggiungiComplemento(formData: FormData) {
   if (!descrizione) torna("Scrivi la descrizione del complemento.");
   const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
   const note = str(formData, "note");
+  await assicuraRigheOfferta(commessaId);
   await prisma.rigaOrdine.create({
     data: { commessaId, descrizione: descrizione!, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note, ...dati },
   });
