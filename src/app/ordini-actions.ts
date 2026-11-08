@@ -257,11 +257,17 @@ export async function registraConfermaFornitore(fd: FormData) {
   const prima = await prisma.ordineFornitore.findUnique({ where: { id }, include: { righe: true } });
   if (!prima || ["ANNULLATO", "BOZZA"].includes(prima.stato)) return;
   const consegna = data(fd, "consegnaConfermata");
+  // totale imponibile della conferma: diventa il costo della commessa per questo ordine (finché non arriva la fattura)
+  const totale = num(fd, "totaleConfermato");
+  const totaleCambiato = totale !== prima.totaleConfermato;
   const o = await prisma.ordineFornitore.update({
     where: { id },
-    data: { numeroConfermaFornitore: str(fd, "numeroConfermaFornitore"), consegnaConfermata: consegna, stato: prima.stato === "INVIATO" ? "CONFERMATO" : prima.stato },
+    data: {
+      numeroConfermaFornitore: str(fd, "numeroConfermaFornitore"), consegnaConfermata: consegna, stato: prima.stato === "INVIATO" ? "CONFERMATO" : prima.stato,
+      ...(totaleCambiato ? { totaleConfermato: totale !== null && totale >= 0 ? Math.round(totale * 100) / 100 : null, totaleConfermatoIl: totale !== null ? new Date() : null, totaleConfermatoDaNome: totale !== null ? u.nome : null } : {}),
+    },
   });
-  await logCommessa(o.commessaId, `Ordine ${numeroOrdine(o)} confermato dal fornitore${o.numeroConfermaFornitore ? ` (conferma n. ${o.numeroConfermaFornitore})` : ""}${consegna ? `, consegna prevista ${consegna.toLocaleDateString("it-IT")}` : ""}.`, u.nome);
+  await logCommessa(o.commessaId, `Ordine ${numeroOrdine(o)} confermato dal fornitore${o.numeroConfermaFornitore ? ` (conferma n. ${o.numeroConfermaFornitore})` : ""}${consegna ? `, consegna prevista ${consegna.toLocaleDateString("it-IT")}` : ""}${totaleCambiato && o.totaleConfermato !== null ? `: totale confermato ${o.totaleConfermato.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} caricato nei costi della commessa` : ""}.`, u.nome);
   aggiorna(id, o.commessaId);
 }
 

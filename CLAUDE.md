@@ -299,6 +299,15 @@ login nel `matcher` del middleware.
   = prezzo del fornitore (campi riempiti solo se vuoti). Al metro: nell'offerta si scrive la lunghezza del pezzo in cm (`lattCm` → prezzo al metro × lunghezza,
   `misuraLarghezza` senza altezza); curve/tappi/staffe al pezzo. Rotta `api/admin/seed-lattoneria` (GET prova, POST carica). Test `tests/listini/lattoneria.test.ts`,
   collaudo `lattoneria` (12).
+- **Rilievo, complementi e costi dalla conferma del fornitore** (richiesta di Ugo, nov 2026, come «carica rilievo» di BConsole): nel rilievo si caricano
+  anche PDF (`FotoRilievo pdf`, salvati in `RilievoAllegato` come data URI, max ~2,5 MB l'uno; nella pratica il riquadro 📄 si riconosce dal nome `.pdf`).
+  «🧩 Complementi trovati al rilievo» (`components/commesse/AggiungiComplemento.tsx`, ricerca `GET /api/complementi?q=` su articoli e modelli di listino
+  con colori, `aggiungiComplemento`/`eliminaComplemento` in `commesse-actions.ts`): righe d'ordine `RigaOrdine.complemento` senza riga di preventivo
+  (solo acquisto, la vendita non cambia), da articolo (costo anagrafica), da listino (colore + misura → `trovaFasciaPrezzo`, costo come `datiAcquisto`) o testo libero.
+  Conferma del fornitore: `OrdineFornitore.totaleConfermato` (+ `totaleConfermatoIl/DaNome`, in `registraConfermaFornitore`) = costo della commessa per
+  quell'ordine al posto delle sue righe, finché non c'è una fattura registrata (riga d'ordine in fattura o fattura dello stesso fornitore sulla commessa):
+  regola pura `vociMateriale` (`src/lib/ordini/costi-materiale.ts`, test) + `costiMaterialeCommesse` (`lib/ordini/server.ts`), usata da scheda costi e report
+  (`costiCommesse`). Il «modo rapido» (ACQUISTO_MATERIALE) continua a escludere righe e conferme. Collaudo `rilievo-complementi` (21).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
   da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
@@ -307,13 +316,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 282, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 287, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

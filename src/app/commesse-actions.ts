@@ -9,6 +9,10 @@ import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso } from "@/app/flusso-actions";
 import { datiAcquisto } from "@/lib/ordini/server";
+import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
+import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
+import { costoPrevisto } from "@/lib/ordini/calcoli";
+import { scontoEquivalente } from "@/lib/articoli/prezzi";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -320,7 +324,7 @@ export async function caricaRilievo(formData: FormData) {
         .map((f) => ({ rilievoId: id, nome: f.nome ?? null, dataUri: f.dataUri })),
     });
   }
-  await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} foto)` : ""}.`);
+  await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} file tra foto e PDF)` : ""}.`);
   await ricalcolaStato(r.commessaId);
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
@@ -1001,4 +1005,81 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
   if (fase === "FATT_ACCONTO" || fase === "FATT_SALDO") await avanzaDopoIncasso(c.id);
   revalidatePath(`/clienti/${cliente.id}`);
   redirect(`/commesse/${c.id}?ok=${encodeURIComponent(`Pratica presa in carico da BConsole: il task è passato a ${f!.nome}`)}`);
+}
+
+// ============ COMPLEMENTI DEL RILIEVO (solo acquisto) ============
+/**
+ * Aggiunge alla commessa un complemento trovato al rilievo: articolo dell'anagrafica, prodotto di listino (colore e misura)
+ * o testo libero. Diventa una riga da ordinare al fornitore con il costo previsto; la vendita al cliente non cambia.
+ */
+export async function aggiungiComplemento(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true } });
+  if (!c) return;
+  const torna = (errore?: string) => redirect(`/commesse/${commessaId}${errore ? `?complemento=${encodeURIComponent(errore)}` : ""}#rilievo`);
+  const q = Math.max(1, Math.round(flt(formData, "quantita") ?? 1));
+  const tipo = str(formData, "tipo") ?? "T";
+  let fornitoreId = str(formData, "fornitoreId");
+  let descrizione = str(formData, "descrizione");
+  const dati: { articoloId?: string; codice?: string | null; codiceFornitore?: string | null; um?: string | null; prezzoAcquisto?: number | null; scontoAcquisto?: number | null; costoPrevisto?: number | null } = {};
+
+  if (tipo === "A") {
+    const a = await prisma.articolo.findUnique({ where: { id: str(formData, "articoloId") ?? "" } });
+    if (!a) torna("Articolo non trovato.");
+    const art = a!;
+    const prezzo = art.prezzoListino ?? art.costoAcquisto;
+    Object.assign(dati, {
+      articoloId: art.id, codice: art.codice, codiceFornitore: art.codiceFornitore, um: art.um, prezzoAcquisto: prezzo,
+      scontoAcquisto: art.prezzoListino !== null ? scontoEquivalente(art.sconti) : 0,
+      costoPrevisto: art.costoAcquisto !== null ? Math.round(art.costoAcquisto * q * 100) / 100 : null,
+    });
+    descrizione = descrizione ?? art.descrizione;
+    fornitoreId = fornitoreId ?? art.fornitoreId;
+  } else if (tipo === "P") {
+    const brandId = str(formData, "brandId"), tipologia = str(formData, "tipologia"), colore = str(formData, "colore");
+    if (!brandId || !tipologia || !colore) torna("Scegli il prodotto e il colore.");
+    const L = flt(formData, "larghezza") ?? 0, H = flt(formData, "altezza") ?? 0;
+    const griglia = (await prisma.prodotto.count({ where: { brandId: brandId!, tipologia: tipologia!, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
+    if (griglia && L <= 0) torna("Per questo prodotto scrivi la misura.");
+    const p = griglia
+      ? await trovaFasciaPrezzo({ brandId: brandId!, tipologia: tipologia!, colore: colore!, larghezza: L, altezza: H })
+      : await prisma.prodotto.findFirst({ where: { brandId: brandId!, tipologia: tipologia!, colore: colore! } });
+    if (!p) torna("Misura fuori listino per questo prodotto: scrivilo come testo libero.");
+    const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: brandId!, tipologia: tipologia! } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
+    fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
+    const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
+    const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
+    const unita = unitaMisura(tipologia!);
+    const misura = griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unita})` : "";
+    Object.assign(dati, {
+      codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: p!.prezzoBase, scontoAcquisto: f ? sconto : null,
+      costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p!.prezzoBase, quantita: q }, sconto) : null,
+    });
+    descrizione = `${descrizione ?? labelBreveTipologia(tipologia!)} — ${colore}${misura}`;
+  }
+  if (!descrizione) torna("Scrivi la descrizione del complemento.");
+  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
+  const note = str(formData, "note");
+  await prisma.rigaOrdine.create({
+    data: { commessaId, descrizione: descrizione!, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note, ...dati },
+  });
+  await log(commessaId, `Complemento aggiunto al rilievo (solo acquisto) — ${descrizione} × ${q}${forn ? `, fornitore ${forn.ragioneSociale}` : ""}.`);
+  revalidatePath(`/commesse/${commessaId}`);
+  torna();
+}
+
+/** Toglie un complemento non ancora messo in un ordine al fornitore. */
+export async function eliminaComplemento(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "rigaId");
+  if (!id) return;
+  const r = await prisma.rigaOrdine.findUnique({ where: { id } });
+  if (!r || !r.complemento || r.ordineFornitoreId || !r.commessaId) return;
+  await prisma.rigaOrdine.delete({ where: { id } });
+  await log(r.commessaId, `Tolto il complemento «${r.descrizione}».`);
+  revalidatePath(`/commesse/${r.commessaId}`);
 }

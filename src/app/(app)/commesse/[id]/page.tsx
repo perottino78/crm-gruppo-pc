@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { costiMaterialeCommesse } from "@/lib/ordini/server";
+import AggiungiComplemento from "@/components/commesse/AggiungiComplemento";
 import { notFound } from "next/navigation";
 import StatoAcquisti from "@/components/ordini/StatoAcquisti";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
@@ -26,6 +28,7 @@ import {
   generaRigheOrdine,
   aggiornaRigaOrdine,
   aggiungiCostoManuale,
+  eliminaComplemento,
   eliminaCostoManuale,
   programmaPosa,
   annullaPosa,
@@ -49,8 +52,9 @@ import FirmaCliente from "@/components/FirmaCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ complemento?: string }> }) {
   const { id } = await params;
+  const { complemento: erroreComplemento } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -89,16 +93,19 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
   // Scheda costi a scalare: movimenti in ordine cronologico con residuo progressivo
   const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
+  const complementi = c.righeOrdine.filter((r) => r.complemento);
+  // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
+  const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
   const movimenti: Mov[] = [
     ...c.fasi.filter((f) => f.stato === "CHIUSA" && f.costoTotale > 0).map((f) => ({ data: f.chiusaIl ?? f.createdAt, voce: `Fase: ${f.nome}${f.assegnatoNome ? " (" + f.assegnatoNome + ")" : ""}`, tipo: "Manodopera", importo: f.costoTotale })),
-    ...(haAcquistiTotali ? [] : c.righeOrdine).filter((r) => r.costoEffettivo !== null).map((r) => ({ data: r.arrivatoIl ?? r.ordinatoIl ?? r.createdAt, voce: `${r.descrizione}${r.fornitoreNome ? " — " + r.fornitoreNome : ""}`, tipo: "Materiale", importo: r.costoEffettivo ?? 0 })),
+    ...materiale.voci,
     ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria === "ACQUISTO_MATERIALE" ? "Materiale (totale)" : m.categoria === "FATTURA_FORNITORE" ? "Fattura fornitore" : m.categoria, importo: m.importo })),
   ].sort((a, b) => a.data.getTime() - b.data.getTime());
   const totaleCosti = movimenti.reduce((t, m) => t + m.importo, 0);
   const margine = c.totaleImponibile - totaleCosti;
   const marginePerc = c.totaleImponibile > 0 ? (margine / c.totaleImponibile) * 100 : 0;
-  const righeSenzaCosto = haAcquistiTotali ? 0 : c.righeOrdine.filter((r) => r.costoEffettivo === null).length;
+  const righeSenzaCosto = materiale.righeSenzaCosto;
   const fasiAperte = c.fasi.filter((f) => f.stato !== "CHIUSA").length;
   let residuo = c.totaleImponibile;
   const admin = isAmministratore(utente);
@@ -287,7 +294,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
       </section>
 
       {/* RILIEVO */}
-      <section className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
+      <section id="rilievo" className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
         <h2 className="mb-3">2 · Rilievo misure</h2>
         {!viaLibera ? (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">
@@ -336,7 +343,11 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
                   {r.misure && <pre className="text-xs whitespace-pre-wrap bg-neutral-50 border border-neutral-200 rounded p-2 text-neutral-900">{r.misure}</pre>}
                   {r.allegati.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {r.allegati.map((a) => (
+                      {r.allegati.map((a) => /\.pdf$/i.test(a.nome ?? "") ? (
+                        <a key={a.id} href={`/api/foto/rilievo/${a.id}`} target="_blank" rel="noreferrer" title={a.nome ?? "PDF"} className="h-24 w-24 rounded border border-red-200 bg-red-50 flex flex-col items-center justify-center text-xs text-red-900 px-1 text-center hover:border-red-400">
+                          <span className="text-2xl">📄</span><span className="truncate w-full">{a.nome}</span>
+                        </a>
+                      ) : (
                         <a key={a.id} href={`/api/foto/rilievo/${a.id}`} target="_blank" rel="noreferrer">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={`/api/foto/rilievo/${a.id}`} loading="lazy" alt={a.nome ?? "foto rilievo"} className="h-24 w-24 object-cover rounded border border-neutral-300" />
@@ -350,12 +361,12 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
               {r.stato !== "ANNULLATO" && (
                 <details className="mt-2">
                   <summary className="text-xs font-semibold text-blue-800 cursor-pointer">
-                    {r.stato === "ESEGUITO" ? "Aggiungi misure / altre foto" : "Carica rilievo (misure e foto)"}
+                    {r.stato === "ESEGUITO" ? "Aggiungi misure / altre foto o PDF" : "Carica rilievo (misure, foto e PDF)"}
                   </summary>
                   <form action={caricaRilievo} className="mt-2 space-y-2">
                     <input type="hidden" name="rilievoId" value={r.id} />
                     <textarea name="misure" rows={6} defaultValue={r.misure ?? ""} placeholder={"Misure per ogni apertura/elemento, es.\nSoggiorno – finestra 2 ante: L 1200 × H 1400 …"} className={`${inp} w-full`} />
-                    <FotoRilievo name="foto" />
+                    <FotoRilievo name="foto" pdf />
                     <button className="btn-3d btn-3d-green text-sm px-4 py-2">Salva rilievo eseguito</button>
                   </form>
                 </details>
@@ -369,6 +380,28 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             </div>
           ))}
           {c.rilievi.length === 0 && <p className="text-xs text-neutral-600">Nessun rilievo programmato.</p>}
+        </div>
+
+        <div className="mt-4 border-t border-neutral-200 pt-3">
+          <p className="text-sm font-bold text-neutral-900">🧩 Complementi trovati al rilievo <span className="font-normal text-neutral-600">— solo acquisto: la vendita al cliente non cambia</span></p>
+          <p className="text-xs text-neutral-600 mb-2">Vanno nell&apos;elenco «4 · Acquisti» da ordinare al fornitore, con il costo previsto. Il costo vero arriva dalla conferma del fornitore o dalla fattura.</p>
+          {erroreComplemento && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{erroreComplemento}</p>}
+          {complementi.length > 0 && (
+            <ul className="mb-3 divide-y divide-neutral-100 text-sm">
+              {complementi.map((r) => (
+                <li key={r.id} className="py-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="font-medium text-neutral-900">{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span></span>
+                  <span className="text-xs text-neutral-700">{r.fornitoreNome ?? "fornitore da scegliere"}</span>
+                  {r.costoPrevisto !== null && <span className="text-xs text-neutral-700">costo previsto {eur(r.costoPrevisto)}</span>}
+                  {r.note && <span className="text-xs text-neutral-600">({r.note})</span>}
+                  {r.ordineFornitore
+                    ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-xs text-purple-800 underline">in ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
+                    : <form action={eliminaComplemento}><input type="hidden" name="rigaId" value={r.id} /><button className="text-xs text-red-700 underline">togli</button></form>}
+                </li>
+              ))}
+            </ul>
+          )}
+          <AggiungiComplemento commessaId={c.id} fornitori={fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }))} />
         </div>
       </section>
 
@@ -491,7 +524,7 @@ export default async function CommessaPage({ params }: { params: Promise<{ id: s
             {c.righeOrdine.map((r) => (
               <form key={r.id} action={aggiornaRigaOrdine} className={`border rounded p-2 ${r.arrivato ? "border-green-300 bg-green-50" : r.ordinato ? "border-indigo-200 bg-indigo-50" : "border-neutral-200"}`}>
                 <input type="hidden" name="rigaId" value={r.id} />
-                <p className="text-sm font-medium text-neutral-900">{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span>
+                <p className="text-sm font-medium text-neutral-900">{r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto, la vendita non cambia">🧩 COMPLEMENTO</span>}{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span>
                   {r.ordineFornitore && <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="ml-2 text-xs text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>}
                   {r.costoPrevisto !== null && <span className="ml-2 text-xs text-neutral-600">costo previsto {eur(r.costoPrevisto)}</span>}</p>
                 <div className="flex flex-wrap items-center gap-3 mt-1.5">
