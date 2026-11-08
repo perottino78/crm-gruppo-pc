@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { costoPrevisto, numeroOrdine } from "./calcoli";
 import type { DatiPdfOrdine } from "./pdfOrdine";
+import { vociMateriale } from "./costi-materiale";
 
 export const puoGestireOrdini = (u: ConPermessi | null | undefined) => puo(u, "ordini");
 
@@ -65,3 +66,38 @@ export async function datiPdfOrdine(id: string) {
   };
 }
 
+
+/**
+ * Voci di costo del materiale per commessa (righe, conferme del fornitore, regola della fattura): vedi `vociMateriale`.
+ * Un ordine è «fatturato» se una sua riga è in una fattura d'acquisto registrata, o se sulla commessa c'è una fattura
+ * registrata dello stesso fornitore.
+ */
+export async function costiMaterialeCommesse(ids: string[]) {
+  const out = new Map<string, ReturnType<typeof vociMateriale>>();
+  if (!ids.length) return out;
+  const [righe, ordini, manuali] = await Promise.all([
+    prisma.rigaOrdine.findMany({ where: { commessaId: { in: ids } }, select: { id: true, commessaId: true, descrizione: true, fornitoreNome: true, costoEffettivo: true, ordineFornitoreId: true, arrivatoIl: true, ordinatoIl: true, createdAt: true } }),
+    prisma.ordineFornitore.findMany({ where: { commessaId: { in: ids }, totaleConfermato: { not: null }, stato: { not: "ANNULLATO" } }, select: { id: true, numero: true, anno: true, commessaId: true, fornitoreId: true, totaleConfermato: true, totaleConfermatoIl: true, fornitore: { select: { ragioneSociale: true } } } }),
+    prisma.costoManuale.findMany({ where: { commessaId: { in: ids }, categoria: { in: ["ACQUISTO_MATERIALE", "FATTURA_FORNITORE"] } }, select: { commessaId: true, categoria: true, fatturaAcquistoId: true } }),
+  ]);
+  const idRigheConfermate = righe.filter((r) => r.ordineFornitoreId && ordini.some((o) => o.id === r.ordineFornitoreId)).map((r) => r.id);
+  const [righeFatturate, fatture] = await Promise.all([
+    idRigheConfermate.length ? prisma.rigaFatturaAcquisto.findMany({ where: { rigaOrdineId: { in: idRigheConfermate }, fattura: { stato: "REGISTRATA" } }, select: { rigaOrdineId: true } }) : Promise.resolve([]),
+    prisma.fatturaAcquisto.findMany({ where: { id: { in: manuali.map((m) => m.fatturaAcquistoId).filter(Boolean) as string[] }, stato: "REGISTRATA" }, select: { id: true, fornitoreId: true } }),
+  ]);
+  const rigaFatturata = new Set(righeFatturate.map((r) => r.rigaOrdineId));
+  for (const id of ids) {
+    const man = manuali.filter((m) => m.commessaId === id);
+    const fornitoriFatturati = new Set(man.map((m) => fatture.find((f) => f.id === m.fatturaAcquistoId)?.fornitoreId).filter(Boolean));
+    const rr = righe.filter((r) => r.commessaId === id);
+    out.set(id, vociMateriale(
+      rr.map((r) => ({ descrizione: r.descrizione, fornitoreNome: r.fornitoreNome, costoEffettivo: r.costoEffettivo, ordineFornitoreId: r.ordineFornitoreId, data: r.arrivatoIl ?? r.ordinatoIl ?? r.createdAt })),
+      ordini.filter((o) => o.commessaId === id).map((o) => ({
+        id: o.id, numero: `${o.numero}/${o.anno}`, fornitoreNome: o.fornitore.ragioneSociale, totaleConfermato: o.totaleConfermato, confermatoIl: o.totaleConfermatoIl,
+        fatturato: fornitoriFatturati.has(o.fornitoreId) || rr.some((r) => r.ordineFornitoreId === o.id && rigaFatturata.has(r.id)),
+      })),
+      man.some((m) => m.categoria === "ACQUISTO_MATERIALE"),
+    ));
+  }
+  return out;
+}

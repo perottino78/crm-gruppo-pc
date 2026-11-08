@@ -166,6 +166,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               <input type="hidden" name="id" value={o.id} />
               <label className="text-xs font-semibold block">N° conferma del fornitore<input name="numeroConfermaFornitore" defaultValue={o.numeroConfermaFornitore ?? ""} className={`${inp} w-full`} /></label>
               <label className="text-xs font-semibold block">Consegna confermata<input type="date" name="consegnaConfermata" defaultValue={iso(o.consegnaConfermata)} className={`${inp} w-full`} /></label>
+              <label className="text-xs font-semibold block">Totale confermato dal fornitore € (imponibile)
+                <input name="totaleConfermato" inputMode="decimal" defaultValue={o.totaleConfermato ?? ""} placeholder="es. 3.250,00" className={`${inp} w-full border-amber-400`} /></label>
+              {o.commessaId && <p className="text-xs text-neutral-700">Il totale confermato va nella <b>scheda costi della commessa</b> al posto dei costi riga per riga di quest&apos;ordine. Quando arriva e si registra la fattura del fornitore, conta la fattura.</p>}
+              {o.totaleConfermato !== null && <p className="text-xs text-green-900">✔ Confermato {eur(o.totaleConfermato)}{o.totaleConfermatoIl ? ` il ${dataIt(o.totaleConfermatoIl)}` : ""}{o.totaleConfermatoDaNome ? ` da ${o.totaleConfermatoDaNome}` : ""}{t.totale ? ` · ordine ${eur(t.totale)}, differenza ${eur(o.totaleConfermato - t.totale)}` : ""}</p>}
               <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Salva conferma</button>
               <p className="text-xs text-neutral-500">La conferma d&apos;ordine del fornitore (PDF) caricala nei documenti qui sotto, cartella «Conferma del fornitore».</p>
             </form>

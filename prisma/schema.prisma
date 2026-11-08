@@ -856,6 +856,8 @@ model RigaOrdine {
   // Materiale preso dalle scorte di magazzino invece che ordinato al fornitore
   daMagazzino       Boolean          @default(false)
   prelevatoIl       DateTime?
+  // Complemento aggiunto al rilievo: solo acquisto, non cambia la vendita al cliente
+  complemento       Boolean          @default(false)
   righeBolla        RigaBolla[]
 
   @@index([ordineFornitoreId])
@@ -1370,6 +1372,10 @@ model OrdineFornitore {
   consegnaRichiesta       DateTime?
   numeroConfermaFornitore String?
   consegnaConfermata      DateTime?
+  // Totale imponibile confermato dal fornitore: diventa il costo della commessa per questo ordine finché non arriva la fattura
+  totaleConfermato        Float?
+  totaleConfermatoIl      DateTime?
+  totaleConfermatoDaNome  String?
   clienteFinale           String?
   indirizzoSpedizione     String?
   trasporto               String?
