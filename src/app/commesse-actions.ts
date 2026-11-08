@@ -102,6 +102,7 @@ export async function confermaOrdinePreventivo(formData: FormData) {
   const p = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { commessa: true } });
   if (!p) return;
   if (p.confermatoIl) torna();
+  if (p.commessa) { await salvaVariante(formData); return; }
   if (["ANNULLATO"].includes(p.stato)) torna("Un'offerta annullata non si può confermare.");
   if (!p.numeroOfferta && p.totaleNetto <= 0) torna("L'offerta è vuota: aggiungi le righe prima di confermarla.");
 
@@ -110,7 +111,7 @@ export async function confermaOrdinePreventivo(formData: FormData) {
     prisma.documento.count({
       where: {
         cartella: "Contratto firmato",
-        OR: [{ entita: "PREVENTIVO", entitaId: p.id }, ...(p.commessa ? [{ entita: "COMMESSA", entitaId: p.commessa.id }] : [])],
+        OR: [{ entita: "PREVENTIVO", entitaId: p.id }], // con la commessa già aperta si salva la variante (sopra)
       },
     }),
     prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: p.id, cartella: "Foto" } }),
@@ -167,6 +168,45 @@ export async function sbloccaPreventivo(formData: FormData) {
   const p = await prisma.preventivo.update({ where: { id }, data: { confermatoIl: null, confermatoDaNome: null }, include: { commessa: true } });
   if (p.commessa) await log(p.commessa.id, `Offerta ${p.numeroOfferta ?? ""} sbloccata da ${utente!.nome} per una variante.`);
   revalidatePath(`/preventivi/${id}`);
+}
+
+/**
+ * Salva la variante di un'offerta sbloccata (solo amministratore): riblocca l'offerta e aggiorna la commessa già aperta
+ * (totali, acconto se non ancora incassato, materiale da ordinare). Le righe già ordinate al fornitore non si toccano.
+ */
+export async function salvaVariante(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!isAmministratore(utente)) return;
+  const id = str(formData, "preventivoId");
+  if (!id) return;
+  const p = await prisma.preventivo.findUnique({ where: { id }, include: { commessa: true, righe: { select: { id: true } } } });
+  if (!p?.commessa) return;
+  const c = p.commessa;
+  const totale = Math.round((p.totaleNetto + p.totaleIva) * 100) / 100;
+  await prisma.preventivo.update({ where: { id }, data: { stato: "ACCETTATO", confermatoIl: new Date(), confermatoDaNome: utente!.nome } });
+  await prisma.commessa.update({
+    where: { id: c.id },
+    data: {
+      totaleVendita: totale, totaleImponibile: p.totaleNetto,
+      ...(!c.accontoIncassato && c.accontoTipo === "ACCONTO" ? { accontoImporto: Math.round(totale * c.accontoPercentuale) / 100 } : {}),
+    },
+  });
+  // materiale: le righe non ancora ordinate si rigenerano dall'offerta (tenendo il fornitore scelto), le nuove entrano
+  const vecchie = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, rigaPreventivoId: { not: null }, complemento: false, ordineFornitoreId: null, ordinato: false, daMagazzino: false } });
+  await prisma.rigaOrdine.deleteMany({ where: { id: { in: vecchie.map((r) => r.id) } } });
+  await assicuraRigheOfferta(c.id, true);
+  for (const v of vecchie.filter((r) => r.fornitoreId)) {
+    await prisma.rigaOrdine.updateMany({ where: { commessaId: c.id, rigaPreventivoId: v.rigaPreventivoId, ordineFornitoreId: null, fornitoreId: null }, data: { fornitoreId: v.fornitoreId, fornitoreNome: v.fornitoreNome } });
+  }
+  const idRighe = new Set(p.righe.map((r) => r.id));
+  const tolteGiaOrdinate = await prisma.rigaOrdine.count({ where: { commessaId: c.id, complemento: false, rigaPreventivoId: { not: null }, NOT: { rigaPreventivoId: { in: [...idRighe] } } } });
+  const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  await log(c.id, `Variante dell'offerta ${p.numeroOfferta ?? ""} salvata da ${utente!.nome}: totale ${eur(c.totaleVendita)} → ${eur(totale)} IVA incl.; materiale aggiornato.${tolteGiaOrdinate ? ` ⚠ ${tolteGiaOrdinate} righe tolte dall'offerta erano già ordinate al fornitore: verificare.` : ""}`);
+  await ricalcolaStato(c.id);
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/commesse/${c.id}`);
+  revalidatePath("/commesse");
+  redirect(`/preventivi/${id}?variante=1#conferma`);
 }
 
 // Solo l'amministratore (responsabile) può modificare le condizioni di acconto
@@ -325,10 +365,20 @@ export async function caricaRilievo(formData: FormData) {
     });
   }
   await assicuraRigheOfferta(r.commessaId);
-  await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} file tra foto e PDF)` : ""}.`);
+  // materiale aggiunto nel modulo del rilievo (solo acquisto): si salva tutto insieme al rilievo
+  let complementi: Complemento[] = [];
+  try { const raw = str(formData, "complementi"); if (raw) complementi = JSON.parse(raw); } catch { complementi = []; }
+  const aggiunti: string[] = [], errori: string[] = [];
+  for (const x of (Array.isArray(complementi) ? complementi : []).slice(0, 60)) {
+    const e = await creaComplemento(r.commessaId, x);
+    if (e.errore) errori.push(e.errore); else if (e.descrizione) aggiunti.push(e.descrizione);
+  }
+  await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} file tra foto e PDF)` : ""}${aggiunti.length ? `; materiale aggiunto (solo acquisto): ${aggiunti.join("; ")}` : ""}.`);
   await ricalcolaStato(r.commessaId);
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
+  const fatto = `Rilievo salvato${foto.length ? `: ${foto.length} file` : ""}${aggiunti.length ? `, ${aggiunti.length} materiali aggiunti` : ""}.`;
+  redirect(`/commesse/${r.commessaId}?fatto=${encodeURIComponent(fatto)}${errori.length ? `&avvisoRilievo=${encodeURIComponent(`Non aggiunti: ${errori.join(" · ")}`)}` : ""}#rilievo`);
 }
 
 export async function aggiungiNotaCommessa(formData: FormData) {
@@ -545,7 +595,7 @@ export async function generaRigheOrdine(formData: FormData) {
 }
 
 /** Porta nell'elenco del materiale le righe dell'offerta (quello che ha segnato il commerciale) non ancora presenti. */
-async function assicuraRigheOfferta(id: string) {
+async function assicuraRigheOfferta(id: string, silenzioso = false) {
   const c = await prisma.commessa.findUnique({
     where: { id },
     include: { righeOrdine: true, preventivo: { include: { righe: { include: { prodotto: true }, orderBy: [{ ordine: "asc" }, { id: "asc" }] } } } },
@@ -565,7 +615,7 @@ async function assicuraRigheOfferta(id: string) {
     });
   if (nuove.length) {
     await prisma.rigaOrdine.createMany({ data: nuove });
-    await log(id, `Elenco ordini generato: ${nuove.length} righe da vidimare.`);
+    if (!silenzioso) await log(id, `Materiale dell'offerta portato nella pratica: ${nuove.length} righe da ordinare.`);
   }
 }
 
@@ -1014,10 +1064,66 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
 }
 
 // ============ COMPLEMENTI DEL RILIEVO (solo acquisto) ============
+/** Materiale aggiunto al rilievo: articolo («A»), prodotto di listino («P», colore e misura) o testo libero («T»). */
+export type Complemento = {
+  tipo?: string; articoloId?: string; brandId?: string; tipologia?: string; colore?: string; larghezza?: number | string | null; altezza?: number | string | null;
+  quantita?: number | string | null; fornitoreId?: string | null; descrizione?: string | null; note?: string | null;
+};
+const numero = (v: unknown) => { if (v === null || v === undefined || v === "") return null; const n = Number(String(v).replace(",", ".")); return Number.isFinite(n) ? n : null; };
+const testo = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
+
 /**
- * Aggiunge alla commessa un complemento trovato al rilievo: articolo dell'anagrafica, prodotto di listino (colore e misura)
- * o testo libero. Diventa una riga da ordinare al fornitore con il costo previsto; la vendita al cliente non cambia.
+ * Crea la riga del complemento: diventa materiale da ordinare al fornitore con il costo previsto; la vendita non cambia.
+ * Ritorna l'errore da mostrare (niente riga) oppure la descrizione scritta.
  */
+async function creaComplemento(commessaId: string, x: Complemento): Promise<{ errore?: string; descrizione?: string }> {
+  const q = Math.max(1, Math.round(numero(x.quantita) ?? 1));
+  const tipo = testo(x.tipo) ?? "T";
+  let fornitoreId = testo(x.fornitoreId);
+  let descrizione = testo(x.descrizione);
+  const dati: { articoloId?: string; codice?: string | null; codiceFornitore?: string | null; um?: string | null; prezzoAcquisto?: number | null; scontoAcquisto?: number | null; costoPrevisto?: number | null } = {};
+
+  if (tipo === "A") {
+    const art = await prisma.articolo.findUnique({ where: { id: testo(x.articoloId) ?? "" } });
+    if (!art) return { errore: "Articolo non trovato." };
+    Object.assign(dati, {
+      articoloId: art.id, codice: art.codice, codiceFornitore: art.codiceFornitore, um: art.um, prezzoAcquisto: art.prezzoListino ?? art.costoAcquisto,
+      scontoAcquisto: art.prezzoListino !== null ? scontoEquivalente(art.sconti) : 0,
+      costoPrevisto: art.costoAcquisto !== null ? Math.round(art.costoAcquisto * q * 100) / 100 : null,
+    });
+    descrizione = descrizione ?? art.descrizione;
+    fornitoreId = fornitoreId ?? art.fornitoreId;
+  } else if (tipo === "P") {
+    const brandId = testo(x.brandId), tipologia = testo(x.tipologia), colore = testo(x.colore);
+    if (!brandId || !tipologia || !colore) return { errore: "Scegli il prodotto e il colore." };
+    const L = numero(x.larghezza) ?? 0, H = numero(x.altezza) ?? 0;
+    const griglia = (await prisma.prodotto.count({ where: { brandId, tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
+    const nome = descrizione ?? labelBreveTipologia(tipologia);
+    if (griglia && L <= 0) return { errore: `${nome}: scrivi la misura.` };
+    const p = griglia
+      ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
+      : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
+    if (!p) return { errore: `${nome}: misura fuori listino, scrivilo come testo libero.` };
+    const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId, tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
+    fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
+    const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
+    const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
+    const misura = griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unitaMisura(tipologia)})` : "";
+    Object.assign(dati, {
+      codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: p.prezzoBase, scontoAcquisto: f ? sconto : null,
+      costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p.prezzoBase, quantita: q }, sconto) : null,
+    });
+    descrizione = `${nome} — ${colore}${misura}`;
+  }
+  if (!descrizione) return { errore: "Scrivi la descrizione del complemento." };
+  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
+  await prisma.rigaOrdine.create({
+    data: { commessaId, descrizione, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note: testo(x.note), ...dati },
+  });
+  return { descrizione: `${descrizione} × ${q}${forn ? ` (${forn.ragioneSociale})` : ""}` };
+}
+
+/** Aggiunge un complemento singolo (fuori dal modulo del rilievo). */
 export async function aggiungiComplemento(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
@@ -1026,54 +1132,10 @@ export async function aggiungiComplemento(formData: FormData) {
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true } });
   if (!c) return;
   const torna = (errore?: string) => redirect(`/commesse/${commessaId}${errore ? `?avviso=${encodeURIComponent(errore)}` : ""}#materiale-pratica`);
-  const q = Math.max(1, Math.round(flt(formData, "quantita") ?? 1));
-  const tipo = str(formData, "tipo") ?? "T";
-  let fornitoreId = str(formData, "fornitoreId");
-  let descrizione = str(formData, "descrizione");
-  const dati: { articoloId?: string; codice?: string | null; codiceFornitore?: string | null; um?: string | null; prezzoAcquisto?: number | null; scontoAcquisto?: number | null; costoPrevisto?: number | null } = {};
-
-  if (tipo === "A") {
-    const a = await prisma.articolo.findUnique({ where: { id: str(formData, "articoloId") ?? "" } });
-    if (!a) torna("Articolo non trovato.");
-    const art = a!;
-    const prezzo = art.prezzoListino ?? art.costoAcquisto;
-    Object.assign(dati, {
-      articoloId: art.id, codice: art.codice, codiceFornitore: art.codiceFornitore, um: art.um, prezzoAcquisto: prezzo,
-      scontoAcquisto: art.prezzoListino !== null ? scontoEquivalente(art.sconti) : 0,
-      costoPrevisto: art.costoAcquisto !== null ? Math.round(art.costoAcquisto * q * 100) / 100 : null,
-    });
-    descrizione = descrizione ?? art.descrizione;
-    fornitoreId = fornitoreId ?? art.fornitoreId;
-  } else if (tipo === "P") {
-    const brandId = str(formData, "brandId"), tipologia = str(formData, "tipologia"), colore = str(formData, "colore");
-    if (!brandId || !tipologia || !colore) torna("Scegli il prodotto e il colore.");
-    const L = flt(formData, "larghezza") ?? 0, H = flt(formData, "altezza") ?? 0;
-    const griglia = (await prisma.prodotto.count({ where: { brandId: brandId!, tipologia: tipologia!, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
-    if (griglia && L <= 0) torna("Per questo prodotto scrivi la misura.");
-    const p = griglia
-      ? await trovaFasciaPrezzo({ brandId: brandId!, tipologia: tipologia!, colore: colore!, larghezza: L, altezza: H })
-      : await prisma.prodotto.findFirst({ where: { brandId: brandId!, tipologia: tipologia!, colore: colore! } });
-    if (!p) torna("Misura fuori listino per questo prodotto: scrivilo come testo libero.");
-    const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: brandId!, tipologia: tipologia! } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
-    fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
-    const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
-    const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
-    const unita = unitaMisura(tipologia!);
-    const misura = griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unita})` : "";
-    Object.assign(dati, {
-      codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: p!.prezzoBase, scontoAcquisto: f ? sconto : null,
-      costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p!.prezzoBase, quantita: q }, sconto) : null,
-    });
-    descrizione = `${descrizione ?? labelBreveTipologia(tipologia!)} — ${colore}${misura}`;
-  }
-  if (!descrizione) torna("Scrivi la descrizione del complemento.");
-  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
-  const note = str(formData, "note");
   await assicuraRigheOfferta(commessaId);
-  await prisma.rigaOrdine.create({
-    data: { commessaId, descrizione: descrizione!, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note, ...dati },
-  });
-  await log(commessaId, `Complemento aggiunto al rilievo (solo acquisto) — ${descrizione} × ${q}${forn ? `, fornitore ${forn.ragioneSociale}` : ""}.`);
+  const r = await creaComplemento(commessaId, Object.fromEntries(formData) as Complemento);
+  if (r.errore) torna(r.errore);
+  await log(commessaId, `Complemento aggiunto al rilievo (solo acquisto) — ${r.descrizione}.`);
   revalidatePath(`/commesse/${commessaId}`);
   torna();
 }

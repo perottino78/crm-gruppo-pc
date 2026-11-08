@@ -110,6 +110,43 @@ async function main() {
   const m2 = posta[1]?.dati ?? "";
   verifica(!m2.includes("rilievo cartaceo.pdf"), "senza la spunta il rilievo non parte");
 
+  console.log("6. Rilievo salvato insieme al materiale (un solo «Salva»)");
+  const ril2 = await prisma.rilievo.create({ data: { commessaId: c.id, tecnicoId: ugo.id, dataOra: new Date() } });
+  const foto = "data:image/jpeg;base64,/9j/AAAA";
+  const d6 = await dove(C.caricaRilievo(fd({ rilievoId: ril2.id, misure: "Bagno L 600 × H 800", foto: JSON.stringify([{ nome: "bagno.jpg", dataUri: foto }, { nome: "rilievo bagno.pdf", dataUri: pdf }]),
+    complementi: JSON.stringify([{ tipo: "T", descrizione: "Guarnizione", quantita: "3", fornitoreId: fidra.id }, { tipo: "P", brandId: brand.id, tipologia: "NON_ESISTE", colore: "X", descrizione: "Prodotto sbagliato" }]) })));
+  verifica(await prisma.rigaOrdine.count({ where: { commessaId: c.id, descrizione: "Guarnizione", complemento: true, fornitoreId: fidra.id, quantita: 3 } }) === 1, "il materiale della lista è salvato con il rilievo");
+  verifica(d6?.includes("fatto=") && d6.includes("1 materiali aggiunti") && d6.includes("avvisoRilievo=") && d6.includes("Prodotto sbagliato") && d6.endsWith("#rilievo"), "messaggio di conferma e avviso per quello non aggiunto", d6);
+
+  console.log("7. Nell'invio si sceglie quale file del rilievo allegare");
+  await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [(await prisma.rigaOrdine.findFirstOrThrow({ where: { descrizione: "Guarnizione" } })).id] })));
+  const o3 = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: fidra.id, stato: "BOZZA" } });
+  const pdfBagno = await prisma.rilievoAllegato.findFirstOrThrow({ where: { nome: "rilievo bagno.pdf" } });
+  const n = posta.length;
+  const e3 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Ordine", "Testo", { senzaPrezzi: true, fileRilievo: [pdfBagno.id] });
+  const m3 = posta[n]?.dati ?? "";
+  verifica(e3.ok && m3.includes("rilievo bagno.pdf") && !m3.includes("rilievo cartaceo.pdf") && !m3.includes("bagno.jpg"), "allegato solo il PDF scelto", e3);
+
+  console.log("8. Variante dell'offerta: si salva e aggiorna la commessa");
+  await C.sbloccaPreventivo(fd({ preventivoId: prev.id }));
+  verifica(!(await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).confermatoIl, "offerta sbloccata");
+  await prisma.rigaPreventivo.create({ data: { preventivoId: prev.id, testoLibero: "Zanzariera aggiunta in variante", prezzoUnitario: 150, quantita: 1, ordine: 3 } });
+  await prisma.rigaPreventivo.updateMany({ where: { preventivoId: prev.id, testoLibero: "Scossalina davanzale" }, data: { quantita: 2 } });
+  await prisma.preventivo.update({ where: { id: prev.id }, data: { totaleNetto: 2010, totaleIva: 442.2 } });
+  const dv = await dove(C.salvaVariante(fd({ preventivoId: prev.id })));
+  const pv = await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } });
+  const cv = await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } });
+  verifica(pv.confermatoIl && dv?.includes("variante=1"), "offerta di nuovo bloccata, messaggio di variante salvata", dv);
+  verifica(cv.totaleImponibile === 2010 && cv.totaleVendita === 2452.2 && cv.accontoImporto === 1226.1, "commessa: nuovo totale e acconto (non ancora incassato)", cv);
+  verifica(await prisma.rigaOrdine.count({ where: { commessaId: c.id, descrizione: "Zanzariera aggiunta in variante" } }) === 1, "la riga nuova dell'offerta è nel materiale da ordinare");
+  const sc2 = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, descrizione: { startsWith: "Scossalina" } } });
+  verifica(sc2.quantita === 2 && sc2.fornitoreId === mastro.id, "riga non ancora ordinata aggiornata dall'offerta, fornitore tenuto", sc2);
+  verifica((await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: finestra.id } })).ordineFornitoreId === o1.id, "la riga già ordinata resta com'è");
+  verifica(await prisma.commessaEvento.findFirst({ where: { commessaId: c.id, testo: { contains: "Variante dell'offerta" } } }), "scritto nella storia della pratica");
+  await prisma.preventivo.update({ where: { id: prev.id }, data: { confermatoIl: null } });
+  const dc = await dove(C.confermaOrdinePreventivo(fd({ preventivoId: prev.id })));
+  verifica(dc?.includes("variante=1") && await prisma.commessa.count() === 1, "anche «Conferma ordine» su un'offerta con commessa salva la variante (niente seconda commessa)", dc);
+
   console.log(`\n${ok} ok, ${ko} falliti`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { smtp.close(); await prisma.$disconnect(); process.exit(ko ? 1 : 0); });

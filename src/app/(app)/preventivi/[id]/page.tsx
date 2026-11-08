@@ -126,10 +126,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string }>;
+  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string; variante?: string }>;
 }) {
   const { id } = await params;
-  const { q, errore, confermata, inviata } = await searchParams;
+  const { q, errore, confermata, inviata, variante } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -589,6 +589,7 @@ export default async function PreventivoPage({
         commessa={preventivo.commessa ? { id: preventivo.commessa.id, numero: numeroCommessa(preventivo.commessa), prossimo: preventivo.commessa.tasks[0] ?? null } : null}
         amministratore={isAmministratore(utenteCorrente)}
         appenaConfermata={confermata === "1"}
+        varianteSalvata={variante === "1"}
       />
 
       <fieldset disabled={bloccata} className={bloccata ? "opacity-75" : ""}>

@@ -24,7 +24,7 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
         <div className="min-w-0">
           <p className="text-sm font-extrabold text-neutral-900">{task.titolo}</p>
           {pratica && (
-            <Link href={`/commesse/${task.commessaId}`} className="text-xs font-bold text-blue-700 underline">
+            <Link href={`/commesse/${task.commessaId}${task.faseChiave === "RILIEVO" ? "#rilievo" : task.faseChiave === "ORDINI" ? "#evasione" : ""}`} className="text-xs font-bold text-blue-700 underline">
               Commessa {pratica.numero} · {pratica.cliente}
             </Link>
           )}
