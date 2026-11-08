@@ -101,3 +101,8 @@ export function pdfOrdineFornitore(d: DatiPdfOrdine): Uint8Array {
   if (d.firma) { pdf.y -= 10; pdf.paragrafo(d.firma, 9, true); }
   return pdf.toBytes((n, tot) => `Ordine fornitore ${d.numero} - ${d.azienda.ragioneSociale} - pagina ${n} di ${tot}`);
 }
+
+/** Lista prodotti per il fornitore: stesso ordine senza prezzi né sconti (il prezzo lo dà lui con la conferma). */
+export function senzaPrezzi(d: DatiPdfOrdine): DatiPdfOrdine {
+  return { ...d, righe: d.righe.map((r) => ({ ...r, prezzoAcquisto: null, scontoAcquisto: null })) };
+}

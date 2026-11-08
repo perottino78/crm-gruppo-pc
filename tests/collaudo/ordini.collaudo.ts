@@ -85,7 +85,7 @@ async function main() {
   const e1 = await A.inviaOrdineEmail(o1.id, "ordini@serramenti.it", "ufficio@gruppopec.com", "Ordine 1", "Buongiorno");
   globalThis.fetch = vero;
   const i = inviato as unknown as { url: string; body: { to: string[]; attachments: { filename: string; content: string }[]; reply_to: string } };
-  verifica(e1.ok && i.url === "https://api.resend.com/emails" && i.body.to[0] === "ordini@serramenti.it" && i.body.reply_to === "laura@prova.it", "email inviata al fornitore, risposte a chi ha emesso l'ordine", e1);
+  verifica(e1.ok && i.url === "https://api.resend.com/emails" && i.body.to[0] === "ordini@serramenti.it" && i.body.reply_to === "ordini@gruppopec.com", "email inviata al fornitore (servizio di riserva), risposte all'ufficio ordini", e1);
   verifica(Buffer.from(i.body.attachments[0].content, "base64").toString("latin1").startsWith("%PDF") && i.body.attachments[0].filename.endsWith(".pdf"), "PDF allegato");
   const o1b = await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: o1.id }, include: { righe: true } });
   verifica(o1b.stato === "INVIATO" && o1b.modalitaInvio === "EMAIL" && o1b.righe.every((r) => r.ordinato && r.ordinatoDaNome === "Laura Ordini"), "ordine inviato e righe segnate ordinate");

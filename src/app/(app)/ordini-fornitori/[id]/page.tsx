@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { puoGestireOrdini } from "@/lib/ordini/server";
+import { puoGestireOrdini, fileRilievo, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordini/calcoli";
 import { BRANDS } from "@/lib/brands";
 import {
@@ -40,8 +40,9 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const t = totaleOrdine(o.righe);
   const nr = numeroOrdine(o);
   const emailForn = o.fornitore.emailOrdini ?? o.fornitore.email ?? "";
+  const rilievo = await fileRilievo(o.commessaId, false);
   const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.clienteFinale ? ` - rif. ${o.clienteFinale.split(" - ")[0]}` : ""}`;
-  const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con data di consegna, citando il nostro numero d'ordine.\n\nGrazie, cordiali saluti\n${u.nome}\nUfficio ordini ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}\nTel. 011 1988 7497`;
+  const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${rilievo.length ? " con il rilievo misure" : ""}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con prezzi e data di consegna, citando il nostro numero d'ordine, rispondendo a ${EMAIL_ORDINI()}.\n\nGrazie, cordiali saluti\n${u.nome}\nUfficio ordini ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}\nTel. 011 1988 7497`;
 
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
@@ -143,10 +144,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       </section>
 
       {!annullato && o.righe.length > 0 && (
-        <section className="bg-white border border-neutral-200 rounded-lg p-4">
+        <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
-          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} />
+          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => f.nome)} mittente={EMAIL_ORDINI()} />
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />
