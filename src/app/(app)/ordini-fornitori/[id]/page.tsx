@@ -147,7 +147,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
-          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => f.nome)} mittente={EMAIL_ORDINI()} />
+          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} mittente={EMAIL_ORDINI()} />
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />

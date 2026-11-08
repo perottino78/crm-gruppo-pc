@@ -4,14 +4,16 @@ import { useState, useTransition } from "react";
 import { inviaOrdineEmail, type EsitoInvio } from "@/app/ordini-actions";
 
 /** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
-export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], mittente }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fileRilievo?: string[]; mittente: string }) {
+export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], mittente }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fileRilievo?: { id: string; nome: string }[]; mittente: string }) {
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
-  const [senzaPrezzi, setSenzaPrezzi] = useState(true), [conRilievo, setConRilievo] = useState(fileRilievo.length > 0);
+  const [senzaPrezzi, setSenzaPrezzi] = useState(true);
+  // file del rilievo da allegare: si sceglie quale (di partenza i PDF)
+  const [scelti, setScelti] = useState<string[]>(fileRilievo.filter((f) => /\.pdf$/i.test(f.nome)).map((f) => f.id));
   const [esito, setEsito] = useState<EsitoInvio | null>(null);
   const [inCorso, avvia] = useTransition();
   const inp = "border border-neutral-300 rounded px-2 py-1 text-sm w-full";
   const invia = () => avvia(async () => {
-    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, conRilievo });
+    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, fileRilievo: scelti });
     setEsito(r);
     if (r.mailto) window.location.href = r.mailto;
   });
@@ -27,8 +29,16 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
         <p className="text-xs text-neutral-700">Parte da <b>{mittente}</b>: le conferme del fornitore arrivano lì.</p>
         <label className="flex items-center gap-2"><input type="checkbox" checked={senzaPrezzi} onChange={(e) => setSenzaPrezzi(e.target.checked)} /> PDF senza prezzi (lista prodotti: il prezzo lo dà il fornitore con la conferma)</label>
         {fileRilievo.length > 0 ? (
-          <label className="flex items-start gap-2"><input type="checkbox" checked={conRilievo} onChange={(e) => setConRilievo(e.target.checked)} className="mt-1" />
-            <span>Allega il rilievo della pratica ({fileRilievo.length} file: {fileRilievo.slice(0, 6).join(", ")}{fileRilievo.length > 6 ? "…" : ""})</span></label>
+          <div>
+            <p className="text-xs font-bold text-neutral-800 mt-1">File del rilievo da allegare (scegli quelli di questo fornitore):</p>
+            {fileRilievo.map((f) => (
+              <label key={f.id} className="flex items-center gap-2 ml-2">
+                <input type="checkbox" checked={scelti.includes(f.id)} onChange={(e) => setScelti(e.target.checked ? [...scelti, f.id] : scelti.filter((x) => x !== f.id))} />
+                <span>{/\.pdf$/i.test(f.nome) ? "📄" : "🖼️"} {f.nome}</span>
+                <a href={`/api/foto/rilievo/${f.id}`} target="_blank" rel="noopener" className="text-xs text-blue-800 underline">apri</a>
+              </label>
+            ))}
+          </div>
         ) : <p className="text-xs text-neutral-500">Nessun rilievo caricato nella pratica da allegare.</p>}
       </div>
       <div className="flex flex-wrap gap-2 items-center">

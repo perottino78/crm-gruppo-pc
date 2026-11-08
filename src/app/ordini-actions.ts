@@ -272,7 +272,7 @@ export type EsitoInvio = { ok: boolean; messaggio: string; mailto?: string };
  * fornitore tornano lì). Come in BConsole: lista prodotti senza prezzi e rilievo della pratica allegato, se scelti.
  * Se la posta non è configurata restituisce il link mailto di riserva.
  */
-export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean } = {}): Promise<EsitoInvio> {
+export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean; fileRilievo?: string[] } = {}): Promise<EsitoInvio> {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) return { ok: false, messaggio: "Non autorizzato." };
   const a = destinatari.split(/[,;\s]+/).filter(Boolean), copia = cc.split(/[,;\s]+/).filter(Boolean);
@@ -282,7 +282,8 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   if (!p.ordine.righe.length) return { ok: false, messaggio: "L'ordine non ha righe." };
   if (p.ordine.stato === "ANNULLATO") return { ok: false, messaggio: "L'ordine è annullato." };
   const pdf = pdfOrdineFornitore(opz.senzaPrezzi ? senzaPrezzi(p.dati) : p.dati);
-  const rilievo = opz.conRilievo ? await fileRilievo(p.ordine.commessaId) : [];
+  // file del rilievo scelti da chi invia (o tutti con «conRilievo»)
+  const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : opz.conRilievo ? await fileRilievo(p.ordine.commessaId) : [];
   const allegati = [
     { nome: `Ordine ${p.dati.numero.replace("/", "-")} ${p.ordine.fornitore.ragioneSociale}.pdf`.replace(/[^\w.\- ]+/g, "_"), contenuto: Buffer.from(pdf), mime: "application/pdf" },
     ...rilievo.map((f) => ({ nome: f.nome, contenuto: f.contenuto, mime: f.mime })),

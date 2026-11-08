@@ -106,10 +106,10 @@ export async function costiMaterialeCommesse(ids: string[]) {
 export const EMAIL_ORDINI = () => process.env.EMAIL_ORDINI || "ordini@gruppopec.com";
 
 /** File del rilievo della commessa (PDF e foto dei rilievi non annullati), da allegare all'ordine al fornitore. */
-export async function fileRilievo(commessaId: string | null | undefined, conContenuto = true) {
+export async function fileRilievo(commessaId: string | null | undefined, conContenuto = true, soloId?: string[]) {
   if (!commessaId) return [];
   const righe = await prisma.rilievoAllegato.findMany({
-    where: { rilievo: { commessaId, stato: { not: "ANNULLATO" } } },
+    where: { rilievo: { commessaId, stato: { not: "ANNULLATO" } }, ...(soloId ? { id: { in: soloId } } : {}) },
     select: { id: true, nome: true, ...(conContenuto ? { dataUri: true } : {}) }, orderBy: { createdAt: "asc" },
   });
   return righe.map((r, i) => {

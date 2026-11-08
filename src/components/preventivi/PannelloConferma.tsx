@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BottoneConferma from "@/components/BottoneConferma";
-import { confermaOrdinePreventivo, sbloccaPreventivo } from "@/app/commesse-actions";
+import { confermaOrdinePreventivo, sbloccaPreventivo, salvaVariante } from "@/app/commesse-actions";
 import { nomeUfficio } from "@/lib/flusso";
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
   commessa: { id: string; numero: string; prossimo: { titolo: string; ufficio: string } | null } | null;
   amministratore: boolean;
   appenaConfermata: boolean;
+  varianteSalvata?: boolean;
 };
 
 export default function PannelloConferma(p: Props) {
@@ -31,6 +32,9 @@ export default function PannelloConferma(p: Props) {
               {p.nContratto ? ` Contratto firmato: ${p.nContratto} file.` : " Contratto: firmato su carta."}
               {p.nFoto ? ` Foto: ${p.nFoto}.` : ""}
             </p>
+            {p.varianteSalvata && (
+              <p className="text-sm text-emerald-900 mt-2 font-semibold">✅ Variante salvata: la commessa {p.commessa?.numero} ha il nuovo totale e il materiale aggiornato.</p>
+            )}
             {p.appenaConfermata && p.commessa?.prossimo && (
               <p className="text-sm text-emerald-900 mt-2 font-semibold">
                 ✅ Pratica inviata a <strong>{nomeUfficio(p.commessa.prossimo.ufficio)}</strong>: «{p.commessa.prossimo.titolo}»
@@ -60,6 +64,29 @@ export default function PannelloConferma(p: Props) {
     );
   }
   if (p.stato === "ANNULLATO") return null;
+
+  // offerta sbloccata per una variante: la commessa c'è già, si salva la variante (niente nuova conferma né task)
+  if (p.commessa) {
+    return (
+      <section id="conferma" className="mb-5 rounded-xl border-2 border-amber-500 bg-amber-50 px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="text-sm font-extrabold text-amber-900">🔓 Offerta sbloccata per una variante — commessa {p.commessa.numero}</p>
+            <p className="text-xs text-amber-900 mt-0.5">Le righe si salvano man mano che le aggiungi o modifichi. Quando hai finito premi «Salva la variante»:
+              la commessa prende il nuovo totale e il materiale aggiornato da ordinare, e l&apos;offerta torna bloccata.</p>
+          </div>
+          {p.amministratore ? (
+            <form action={salvaVariante}>
+              <input type="hidden" name="preventivoId" value={p.preventivoId} />
+              <BottoneConferma messaggio="Salvare la variante? La commessa prende il nuovo totale e il materiale aggiornato, l'offerta torna bloccata." className="btn-3d btn-3d-orange text-sm px-4 py-2">
+                💾 Salva la variante e aggiorna la commessa
+              </BottoneConferma>
+            </form>
+          ) : <p className="text-xs text-amber-900">Solo l&apos;amministratore salva la variante.</p>}
+        </div>
+      </section>
+    );
+  }
 
   const ok = p.nContratto > 0;
   return (
