@@ -12,7 +12,7 @@ import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
 import { eseguiCampagne } from "@/lib/campagne/motore";
 import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
 import { chiaveGiorno, daOraRoma } from "@/lib/calendario/tempo";
-import { componiEmail, htmlEmail, testoEmail, CONTATTI, type DatiLeadEmail } from "./email";
+import { componiEmail, htmlEmail, testoEmail, CONTATTI, MODELLI, type DatiLeadEmail } from "./email";
 import { personalizza, valoriSegnaposto, chiaveTesto, varianteTesto, riempi, PREFISSO_TESTO, type TestoPersonalizzato } from "./personalizza";
 import { conPreheader, conTracciamento } from "@/lib/mail/tracciamento";
 
@@ -259,7 +259,7 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
       const a = destinatario === "CLIENTE" ? lead.email : destinatario === "VENDITORE" ? venditore?.email ?? null : CONTATTI.centralino;
       const da = destinatario === "CLIENTE" ? CONTATTI.mittenteClienti : CONTATTI.mittenteInterne;
       const soppressa = destinatario === "CLIENTE"
-        ? (!lead.email ? "il cliente non ha email" : lead.disiscritto ? "il cliente si è disiscritto"
+        ? (!lead.email ? "il cliente non ha email" : lead.disiscritto && MODELLI[modello]?.commerciale ? "il cliente si è disiscritto dalle email promozionali"
           : lead.emailRimbalzata && lead.email.trim().toLowerCase() === lead.emailRimbalzata.trim().toLowerCase() ? `l'email del cliente è rimbalzata (${lead.rimbalzoMotivo ?? "non recapitata"}): correggila nel lead` : null)
         : destinatario === "VENDITORE" && (!/.+@.+\..+/.test(a ?? "") || (a ?? "").endsWith(".invalid")) ? "il venditore non ha un'email valida" : null;
       const pers = testi.get(chiaveTesto(modello, varianteTesto(modello, variante, dati)));

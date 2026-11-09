@@ -46,16 +46,7 @@ export function conPreheader(html: string, preheader: string | null | undefined)
   return /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (b) => `${b}${div}`) : `${div}${html}`;
 }
 
-/** Versione di solo testo di un template HTML (per i programmi che non mostrano l'HTML). */
-export function testoDaHtml(html: string): string {
-  return html
-    .replace(/<(style|script|head)[^>]*>[\s\S]*?<\/\1>/gi, "")
-    .replace(/<a [^>]*href=(["'])(https?:\/\/[^"']+)\1[^>]*>([\s\S]*?)<\/a>/gi, (_t, _q, url, txt) => `${txt.replace(/<[^>]+>/g, "").trim()} (${url})`)
-    .replace(/<br\s*\/?>/gi, "\n").replace(/<\/(p|div|h[1-6]|li|tr|table)>/gi, "\n").replace(/<li[^>]*>/gi, "• ")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'")
-    .replace(/[ \t]+/g, " ").replace(/\n[ \t]+/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
-}
+export { testoDaHtml } from "./html";
 
 /** Il template HTML incollato: se manca il link per disiscriversi ({disiscrizione}), lo aggiunge in fondo (obbligatorio). */
 export function htmlCampagna(template: string, linkDisiscrizione: string): string {

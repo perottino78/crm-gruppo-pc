@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MODELLI, componiEmail } from "../../src/lib/automazioni/email";
+import { MODELLI, componiEmail, htmlEmail } from "../../src/lib/automazioni/email";
 import { testoStandard, VARIANTI, valoriSegnaposto, personalizza, riempi, chiaveTesto, varianteTesto, NOMI_EMAIL } from "../../src/lib/automazioni/personalizza";
 
 const d = {
@@ -41,4 +41,15 @@ test("testo personalizzato: si applica solo se c'è, chiave per modello e varian
   assert.equal(chiaveTesto("request-received"), "email_testo:request-received");
   assert.equal(varianteTesto("sales-letter-1", undefined, { marchio: "Pura Fonte" }), "PURAFONTE");
   assert.equal(varianteTesto("appointment-confirmed-contact", "CASA", { marchio: "Solaris" }), "CASA");
+});
+
+test("testo personalizzato in HTML: valori protetti, testo semplice ricavato, piede con la disiscrizione per i clienti", () => {
+  const base = componiEmail("request-received", { nome: "Mario <Rossi>", telefono: "333", email: "m@x.it", prodotto: "Pergola", fonte: "facebook", marchio: "P&C" } as never, { lead: "" });
+  const e = personalizza(base, { oggetto: "Ciao {nome}", testo: "<html><body><h1>Ciao {nome}</h1><p>Hai chiesto: {prodotto}</p></body></html>", formato: "HTML" }, { nome: "Mario <Rossi>", prodotto: "Pergola" });
+  assert.equal(e.html, "<html><body><h1>Ciao Mario &lt;Rossi&gt;</h1><p>Hai chiesto: Pergola</p></body></html>");
+  assert.ok(e.testo.includes("Ciao Mario <Rossi>") && e.testo.includes("Hai chiesto: Pergola") && !e.testo.includes("<h1>"));
+  const h = htmlEmail(e, { lead: "", disiscrizione: "https://x/d?l=1" });
+  assert.ok(h.includes("Ciao Mario &lt;Rossi&gt;") && h.includes('href="https://x/d?l=1"') && h.indexOf("disiscr") < h.indexOf("</body>") && !h.includes("Gruppo P&amp;C</div>"));
+  const conPosto = htmlEmail({ ...e, html: "<p>x <a href=\"{disiscrizione}\">esci</a></p>" }, { lead: "", disiscrizione: "https://x/d?l=1" });
+  assert.equal(conPosto, '<p>x <a href="https://x/d?l=1">esci</a></p>');
 });

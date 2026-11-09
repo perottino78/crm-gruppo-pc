@@ -37,7 +37,8 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const oggi = chiaveGiorno(new Date());
   const inizioOggi = inizioGiorno(oggi);
   const fineOggi = inizioGiorno(aggiungiGiorni(oggi, 1));
-  const aperti: Prisma.LeadWhereInput = { fase: { in: FASI_APERTE } };
+  // i «non gestiti» (finiti i tentativi senza risposta) non sono più task di oggi: stanno in «Recupero contatti»
+  const aperti: Prisma.LeadWhereInput = { fase: { in: FASI_APERTE }, nonGestitoIl: null };
   // visite già passate: non sono un compito del centralino (le esita il venditore dal calendario)
   const VISITE = ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO"];
   // «chiamata con commerciale»: il task è del commerciale che chiama, non della telefonista
@@ -121,6 +122,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
       </div>
       <div className="flex flex-wrap gap-2">
         {tab("dafare", `Da fare (${conta(FASI_APERTE)})`)}{tab("chiusi", `Chiusi (${tutti - conta(FASI_APERTE)})`)}{tab("tutti", `Tutti (${tutti})`)}
+        <Link href="/lead/recupero" className="rounded-full border border-teal-600 bg-teal-50 px-3 py-1.5 text-sm font-semibold text-teal-900 hover:bg-teal-100">♻️ Recupero contatti</Link>
       </div>
 
       {(!stato.attive || !stato.posta) && (
