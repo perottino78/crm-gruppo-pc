@@ -1975,3 +1975,164 @@ model ComponenteKit {
 
   @@index([brandId, tipologia])
 }
+
+// ============ FATTURAZIONE (ufficio Giorgia): fatture emesse dal CRM e DDT di uscita ============
+// Tabelle nuove e indipendenti: alla vera emissione la fattura crea anche la FatturaVendita (scadenze, report, provvigioni
+// restano quelli di sempre). Bozze e fatture di prova non toccano mai FatturaVendita.
+// stato: BOZZA | PROVA (numero "PROVA …", non valida) | EMESSA | ANNULLATA
+// tipo: FATTURA | ACCONTO | SALDO | ACCOMPAGNATORIA | DIFFERITA | NOTA_CREDITO | NOTA_DEBITO | PROFORMA (vedi src/lib/fatturazione/tabelle.ts)
+model FatturaEmessa {
+  id                 String              @id @default(cuid())
+  stato              String              @default("BOZZA")
+  tipo               String              @default("FATTURA")
+  sezionale          String              @default("PC")
+  progressivo        Int?
+  anno               Int
+  numero             String?
+  data               DateTime
+  // Cliente (copia dei dati al momento della fattura)
+  clienteId          String?
+  clienteNome        String
+  persona            Boolean             @default(true)
+  nomePersona        String?
+  cognome            String?
+  partitaIva         String?
+  codiceFiscale      String?
+  indirizzo          String?
+  cap                String?
+  comune             String?
+  provincia          String?
+  nazione            String              @default("IT")
+  codiceDestinatario String?
+  pec                String?
+  email              String?
+  commessaId         String?
+  brand              String?
+  venditore          String?
+  riferimento        String?
+  causale            String?
+  note               String?
+  noteInterne        String?
+  // Pagamento: metodo (METODI_PAGAMENTO_FATTURA), banca e IBAN per l'incasso, rate [{data, importo}]
+  metodoPagamento    String?
+  banca              String?
+  iban               String?
+  rate               Json?
+  bollo              Boolean             @default(false)
+  addebitoBollo      Boolean             @default(false)
+  detrazione         Boolean             @default(false)
+  // Trasporto (fattura accompagnatoria)
+  causaleTrasporto   String?
+  trasportoACura     String?
+  vettore            String?
+  aspettoBeni        String?
+  colli              Int?
+  pesoLordo          Float?
+  pesoNetto          Float?
+  porto              String?
+  inizioTrasporto    DateTime?
+  destinazione       String?
+  // Nota di credito: fattura stornata
+  fatturaCollegataId String?
+  imponibile         Float               @default(0)
+  iva                Float               @default(0)
+  totale             Float               @default(0)
+  xml                String?
+  // Fattura di vendita creata all'emissione (scadenze di incasso, report)
+  fatturaVenditaId   String?
+  creatoDaNome       String?
+  emessaDaNome       String?
+  emessaIl           DateTime?
+  righe              RigaFatturaEmessa[]
+  ddt                DdtUscita[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([stato, anno, sezionale])
+  @@index([clienteId])
+  @@index([commessaId])
+}
+
+model RigaFatturaEmessa {
+  id          String        @id @default(cuid())
+  fattura     FatturaEmessa @relation(fields: [fatturaId], references: [id], onDelete: Cascade)
+  fatturaId   String
+  posizione   Int           @default(0)
+  codice      String?
+  descrizione String
+  quantita    Float         @default(1)
+  um          String?
+  prezzo      Float         @default(0)
+  sconto      Float?
+  aliquota    Float         @default(22)
+  natura      String?
+  // Riga del DDT da cui viene (fattura differita)
+  rigaDdtId   String?
+
+  @@index([fatturaId])
+}
+
+// DDT di uscita (bolla verso il cliente). stato: BOZZA | DA_FATTURARE | PARZ_FATTURATO | FATTURATO | CHIUSO
+model DdtUscita {
+  id              String          @id @default(cuid())
+  stato           String          @default("BOZZA")
+  prova           Boolean         @default(false)
+  numero          Int?
+  anno            Int
+  data            DateTime
+  clienteId       String?
+  clienteNome     String
+  indirizzo       String?
+  cap             String?
+  comune          String?
+  provincia       String?
+  partitaIva      String?
+  codiceFiscale   String?
+  destinazione    String?
+  commessaId      String?
+  brand           String?
+  riferimento     String?
+  causale         String          @default("Vendita merce")
+  trasportoACura  String          @default("MITTENTE")
+  vettore         String?
+  aspettoBeni     String?
+  colli           Int?
+  pesoLordo       Float?
+  pesoNetto       Float?
+  volume          Float?
+  porto           String?
+  inizioTrasporto DateTime?
+  note            String?
+  noteConsegna    String?
+  noteInterne     String?
+  // Fattura (differita) in cui è finito
+  fattura         FatturaEmessa?  @relation(fields: [fatturaId], references: [id], onDelete: SetNull)
+  fatturaId       String?
+  righe           RigaDdtUscita[]
+  creatoDaNome    String?
+  emessoDaNome    String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([stato, anno])
+  @@index([clienteId])
+  @@index([commessaId])
+}
+
+model RigaDdtUscita {
+  id          String    @id @default(cuid())
+  ddt         DdtUscita @relation(fields: [ddtId], references: [id], onDelete: Cascade)
+  ddtId       String
+  posizione   Int       @default(0)
+  codice      String?
+  descrizione String
+  quantita    Float     @default(1)
+  um          String?
+  prezzo      Float     @default(0)
+  sconto      Float?
+  aliquota    Float     @default(22)
+  natura      String?
+  fatturata   Boolean   @default(false)
+
+  @@index([ddtId])
+}

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 type Voce = { id: string; nome: string; sotto: string; indirizzo: string };
 
 /** Campo "Cliente" con ricerca mentre si scrive; compila anche il luogo con l'indirizzo del cliente */
-export default function ClientePicker({ iniziale }: { iniziale?: { id: string; nome: string } | null }) {
+export default function ClientePicker({ iniziale, endpoint = "/api/clienti/cerca" }: { iniziale?: { id: string; nome: string } | null; endpoint?: string }) {
   const [q, setQ] = useState(iniziale?.nome ?? "");
   const [scelto, setScelto] = useState<{ id: string; nome: string } | null>(iniziale ?? null);
   const [voci, setVoci] = useState<Voce[]>([]);
@@ -16,14 +16,14 @@ export default function ClientePicker({ iniziale }: { iniziale?: { id: string; n
     if (scelto && q === scelto.nome) return;
     const t = setTimeout(async () => {
       if (q.trim().length < 2) return setVoci([]);
-      const r = await fetch(`/api/clienti/cerca?q=${encodeURIComponent(q)}`);
+      const r = await fetch(`${endpoint}?q=${encodeURIComponent(q)}`);
       if (r.ok) {
         setVoci(await r.json());
         setAperto(true);
       }
     }, 200);
     return () => clearTimeout(t);
-  }, [q, scelto]);
+  }, [q, scelto, endpoint]);
 
   function scegli(v: Voce) {
     setScelto({ id: v.id, nome: v.nome });

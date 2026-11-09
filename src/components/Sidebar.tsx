@@ -25,6 +25,7 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
   { href: "/assistenza", label: "Assistenza", icon: "🛟" },
   { href: "/prodotti", label: "Prodotti & listini", icon: "📦" },
   { href: "/commerciali", label: "Team & performance", icon: "🏆" },
+  { href: "/fatturazione", label: "Fatture e DDT", icon: "🧾" },
   { href: "/amministrazione", label: "Amministrazione", icon: "💶", soloAmministrazione: true },
   { href: "/archivio", label: "Archivio file", icon: "📁" },
   { href: "/report", label: "Report", icon: "📊", soloAmministrazione: true },
