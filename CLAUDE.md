@@ -299,6 +299,13 @@ login nel `matcher` del middleware.
   = prezzo del fornitore (campi riempiti solo se vuoti). Al metro: nell'offerta si scrive la lunghezza del pezzo in cm (`lattCm` → prezzo al metro × lunghezza,
   `misuraLarghezza` senza altezza); curve/tappi/staffe al pezzo. Rotta `api/admin/seed-lattoneria` (GET prova, POST carica). Test `tests/listini/lattoneria.test.ts`,
   collaudo `lattoneria` (12).
+- **Serramenti alluminio a taglio freddo e verande** (INDOOR › SERRAMENTI › «Alluminio — Taglio freddo e verande»; ha sostituito il segnaposto
+  `SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER`): listino P&C già di vendita al m² in `src/lib/listini/taglio-freddo.ts` (puro). 10 tipologie
+  `TAGLIOFREDDO_<SCORR|SCORRTT|BATT|BATTTT|PIEG|FISSO>_<33|VC>` (sistema × vetro 3+3 / vetrocamera 2+2/12/4; le combinazioni «/» del listino non ci sono),
+  `MQ_CON_MINIMI` (una riga «TARIFFA AL M²», misure in cm arrotondate ai 5 cm, nessuna area minima), 2 tendine sistema → vetro. Optional listino `TAGLIOFREDDO`:
+  colori (bianco/argento/avorio compresi, altri +10%), supplementi (doppio telaio 720, foro vetrocamera 100, wasistas 245 cad. oltre al m², centinate +40%),
+  smontaggio veranda 24 €/m² (quantità = m²), sconti per quantità −5/−10/−15% (percentuali negative, da mettere su ogni riga oltre 10/20/30 m² totali).
+  Rotta `api/admin/seed-taglio-freddo` (GET prova, POST carica), foto in `public/immagini/taglio-freddo/`. Test `tests/listini/taglio-freddo.test.ts`, collaudo `taglio-freddo` (11).
 - **Rilievo, complementi e costi dalla conferma del fornitore** (richiesta di Ugo, nov 2026, come «carica rilievo» di BConsole): nel rilievo si caricano
   anche PDF (`FotoRilievo pdf`, salvati in `RilievoAllegato` come data URI, max ~2,5 MB l'uno; nella pratica il riquadro 📄 si riconosce dal nome `.pdf`).
   «🧩 Complementi trovati al rilievo» (`components/commesse/AggiungiComplemento.tsx`, ricerca `GET /api/complementi?q=` su articoli e modelli di listino
@@ -360,13 +367,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 293, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 296, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

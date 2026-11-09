@@ -13,6 +13,7 @@ import { brandInfo } from "@/lib/brands";
 import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
+import { GUIDA_TAGLIO_FREDDO } from "@/lib/listini/taglio-freddo";
 import { GUIDA_PEDANE } from "@/lib/listini/pedane";
 import { GUIDA_PAVGAL, listiniPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listini/rasomuro";
@@ -568,11 +569,11 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") ? "" : ` · ${prodotto.colore}`}
-                      {haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? "" : ` · ${prodotto.colore}`}
+                      {prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? (r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null) : haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
                       {prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
-                      {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && (
+                      {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && !prodotto.tipologia.startsWith("TAGLIOFREDDO_") && (
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
@@ -655,7 +656,7 @@ export default async function PreventivoPage({
                 const optionaliRigaFiltrati = optionaliDisponibili
                   .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
                   /* Porte raso muro, serramenti Fidra e porte a vetro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
-                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
+                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -902,19 +903,20 @@ export default async function PreventivoPage({
                 const tempra = prodotto.tipologia.startsWith("STABYLA_");
                 const pedana = prodotto.tipologia.startsWith("PEDANA_");
                 const pavgal = prodotto.tipologia.startsWith("PAVGAL_");
-                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || portaVetro || tempra || pedana || pavgal) {
-                  const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
+                const tagliofreddo = prodotto.tipologia.startsWith("TAGLIOFREDDO_");
+                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || portaVetro || tempra || pedana || pavgal || tagliofreddo) {
+                  const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Supplementi", "Smontaggio", "Sconti per quantità", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
                   // le voci Work&Service (posa, rilievo, trasporto, trasferte, magazzino…) stanno tutte in un'unica tendina, divise per tipo
                   const WS = "Posa e servizi (Work&Service)";
                   const gruppoDi = (o: { categoria: string }) => (o.categoria.endsWith("(Work&Service)") ? WS : o.categoria);
                   const categorie = [...new Set(optionaliRigaFiltrati.map(gruppoDi))].sort((a, b) => (ordine.indexOf(a) + 1 || (a === WS ? 98 : 99)) - (ordine.indexOf(b) + 1 || (b === WS ? 98 : 99)));
                   const testoVoce = (o: (typeof optionaliRigaFiltrati)[number]) =>
-                    `${o.nome} (${o.tipoPrezzo === "PERCENTUALE" ? `+${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT", { maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(o.valore) ? 0 : 2 })}€${o.unita ? `/${o.unita}` : ""}`})`;
+                    `${o.nome} (${o.tipoPrezzo === "PERCENTUALE" ? `${o.valore > 0 ? "+" : ""}${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT", { maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(o.valore) ? 0 : 2 })}€${o.unita ? `/${o.unita}` : ""}`})`;
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
-                        {pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
-                        {(portaVetro || tempra || pedana || pavgal ? [] : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
+                        {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
+                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo ? [] : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>
