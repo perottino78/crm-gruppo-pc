@@ -314,7 +314,7 @@ login nel `matcher` del middleware.
   delle righe spuntate (un solo fornitore, o quello scelto nella tendina) e apre l'ordine su `#invia`. Invio (`inviaOrdineEmail` con `senzaPrezzi`/
   `conRilievo`): parte con `inviaMail` da `EMAIL_ORDINI` (default ordini@gruppopec.com, dalla casella dell'utente con quell'email se collegata,
   altrimenti aziendale con `da`), rispondi-a ordini@, PDF senza prezzi (`senzaPrezzi`, anche `?prezzi=0` nella rotta del PDF) e file del rilievo
-  (`fileRilievo`); servizio API Resend/Brevo solo di riserva. Collaudo `ordine-da-rilievo` (29, SMTP finto).
+  (`fileRilievo`); servizio API Resend/Brevo solo di riserva. Collaudo `ordine-da-rilievo` (30, SMTP finto).
   Dopo la prova di Ugo (pratica Armentano): il rilievo è un modulo unico `components/commesse/CaricaRilievo.tsx` (misure, PDF/foto, «già nella pratica»
   = righe d'ordine o, prima del rilievo, righe dell'offerta, e «da aggiungere» con `ScegliMateriale.tsx`, lista solo nel browser) con un solo «💾 Salva»:
   `caricaRilievo` riceve `complementi` (JSON) e li crea con `creaComplemento` (errori in `?avvisoRilievo=`, conferma in `?fatto=`). Il materiale con le spunte
@@ -331,6 +331,10 @@ login nel `matcher` del middleware.
   `complementoDaListinoPerMisura`, il campo «preventivoId» porta l'id della commessa; complemento tipo «PR» = prodotto già individuato) e barra delle righe
   spuntate (`components/commesse/BarraAzioniMateriale.tsx`, sticky in fondo al riquadro): ordine al fornitore, sposta in un altro progetto dello stesso cliente
   (`spostaRigheProgetto`, solo righe non ordinate), task a un ufficio con l'elenco (`taskDaRighe`), togli il materiale aggiunto (`eliminaRigheMateriale`).
+  File del progetto come in BConsole: cartelle della commessa «Rilievi misura», «Foto rilievi», «Conferme d'ordine fornitori», «Foto posa», «Documenti posa»,
+  «Contratto firmato», «Documentazione finanziamento» + quelle di prima (`CARTELLE.COMMESSA`; nel progetto si vedono tutte, anche vuote); in fondo alla pratica
+  «📷 Foto del progetto» (`components/commesse/FotoProgetto.tsx`: rilievi, posa, immagini dei documenti di pratica e offerta). Nell'invio dell'ordine si scelgono
+  anche i file delle cartelle (`documentiProgetto` in `lib/ordini/server.ts`, opzione `documenti: id[]`, di partenza quelli di «Rilievi misura»).
   Da fare (chiesto da Ugo): distinta base / prodotti correlati (kit), bolla di consegna al cliente e fattura dalle righe, «crea progetto» dalle righe.
   Collaudo `progetti` (14).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
@@ -347,7 +351,7 @@ npx next build                  # build (in locale senza db push)
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21), ordine-da-rilievo (29, SMTP finto), progetti (14)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

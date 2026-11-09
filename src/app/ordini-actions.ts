@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { inviaMail } from "@/lib/mail/invio";
 import { numeroOrdine, statoDaArrivi } from "@/lib/ordini/calcoli";
 import { pdfOrdineFornitore, senzaPrezzi } from "@/lib/ordini/pdfOrdine";
@@ -272,7 +272,7 @@ export type EsitoInvio = { ok: boolean; messaggio: string; mailto?: string };
  * fornitore tornano lì). Come in BConsole: lista prodotti senza prezzi e rilievo della pratica allegato, se scelti.
  * Se la posta non è configurata restituisce il link mailto di riserva.
  */
-export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean; fileRilievo?: string[] } = {}): Promise<EsitoInvio> {
+export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean; fileRilievo?: string[]; documenti?: string[] } = {}): Promise<EsitoInvio> {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) return { ok: false, messaggio: "Non autorizzato." };
   const a = destinatari.split(/[,;\s]+/).filter(Boolean), copia = cc.split(/[,;\s]+/).filter(Boolean);
@@ -284,10 +284,14 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   const pdf = pdfOrdineFornitore(opz.senzaPrezzi ? senzaPrezzi(p.dati) : p.dati);
   // file del rilievo scelti da chi invia (o tutti con «conRilievo»)
   const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : opz.conRilievo ? await fileRilievo(p.ordine.commessaId) : [];
+  // file scelti dalle cartelle del progetto (es. «Rilievi misura»)
+  const documenti = opz.documenti?.length ? await documentiProgetto(p.ordine.commessaId, true, opz.documenti) : [];
   const allegati = [
     { nome: `Ordine ${p.dati.numero.replace("/", "-")} ${p.ordine.fornitore.ragioneSociale}.pdf`.replace(/[^\w.\- ]+/g, "_"), contenuto: Buffer.from(pdf), mime: "application/pdf" },
     ...rilievo.map((f) => ({ nome: f.nome, contenuto: f.contenuto, mime: f.mime })),
+    ...documenti.map((d) => ({ nome: d.nome.replace(/[^\w.\- ]+/g, "_"), contenuto: d.contenuto, mime: d.mime })),
   ];
+  const nAllegati = rilievo.length + documenti.length;
   const ordini = EMAIL_ORDINI();
   const casellaOrdini = await prisma.utente.findFirst({ where: { email: { equals: ordini, mode: "insensitive" } }, select: { id: true } });
   const esito = await inviaMail({ a, cc: copia, oggetto, testo, da: `Ufficio ordini ${p.dati.azienda.ragioneSociale} <${ordini}>`, rispondiA: ordini, daUtenteId: casellaOrdini?.id, allegati });
@@ -295,12 +299,12 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   if (!esito.inviata) {
     // riserva: servizio di invio via API, se configurato su Vercel
     const cfg = configEmail();
-    if (!cfg) return { ok: false, messaggio: `Invio automatico non riuscito (${esito.motivo ?? "posta non configurata"}): si apre la tua posta con il messaggio pronto. Allega il PDF scaricato${rilievo.length ? " e il rilievo" : ""} e poi premi «Segna come inviato».`, mailto: linkMailto({ a, cc: copia, oggetto, testo }) };
+    if (!cfg) return { ok: false, messaggio: `Invio automatico non riuscito (${esito.motivo ?? "posta non configurata"}): si apre la tua posta con il messaggio pronto. Allega il PDF scaricato${nAllegati ? " e gli altri file" : ""} e poi premi «Segna come inviato».`, mailto: linkMailto({ a, cc: copia, oggetto, testo }) };
     const e2 = await inviaEmail(cfg, { a, cc: copia, oggetto, testo, rispondiA: ordini, allegati: allegati.map((x) => ({ nome: x.nome, contenuto: new Uint8Array(x.contenuto), mime: x.mime })) });
     if (!e2.ok) return { ok: false, messaggio: e2.errore ?? "Invio non riuscito." };
     da = cfg.mittente;
   }
-  const cosa = `${opz.senzaPrezzi ? "lista senza prezzi" : "con i prezzi"}${rilievo.length ? `, rilievo allegato (${rilievo.length} file)` : ""}`;
+  const cosa = `${opz.senzaPrezzi ? "lista senza prezzi" : "con i prezzi"}${rilievo.length ? `, rilievo allegato (${rilievo.length} file)` : ""}${documenti.length ? `, ${documenti.length} file del progetto` : ""}`;
   if (p.ordine.stato === "BOZZA") { await segnaInviato(id, "EMAIL", a.join(", "), u.nome); await logCommessa(p.ordine.commessaId, `Ordine ${p.dati.numero} inviato da ${da} (${cosa}).`, u.nome); }
   else { await logCommessa(p.ordine.commessaId, `Ordine ${p.dati.numero} reinviato a ${a.join(", ")} da ${da} (${cosa}).`, u.nome); aggiorna(id, p.ordine.commessaId); }
   return { ok: true, messaggio: `Ordine inviato a ${a.join(", ")}${copia.length ? ` (copia a ${copia.join(", ")})` : ""} da ${da}: ${cosa}. Le conferme del fornitore arriveranno a ${ordini}.` };

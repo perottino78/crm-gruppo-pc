@@ -127,6 +127,14 @@ async function main() {
   const m3 = posta[n]?.dati ?? "";
   verifica(e3.ok && m3.includes("rilievo bagno.pdf") && !m3.includes("rilievo cartaceo.pdf") && !m3.includes("bagno.jpg"), "allegato solo il PDF scelto", e3);
 
+  console.log("7b. Allegato preso da una cartella del progetto («Rilievi misura»)");
+  const docRil = await prisma.documento.create({ data: { entita: "COMMESSA", entitaId: c.id, cartella: "Rilievi misura", nome: "misure C3.pdf", mime: "application/pdf", dimensione: 20, contenuto: Buffer.from("%PDF-1.4 misure") } });
+  await prisma.documento.create({ data: { entita: "COMMESSA", entitaId: c.id, cartella: "Contratto firmato", nome: "contratto.pdf", mime: "application/pdf", dimensione: 20, contenuto: Buffer.from("%PDF-1.4 contratto") } });
+  const n2 = posta.length;
+  const e4 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Richiesta", "Testo", { senzaPrezzi: true, documenti: [docRil.id] });
+  const m4 = posta[n2]?.dati ?? "";
+  verifica(e4.ok && m4.includes("misure C3.pdf") && !m4.includes("contratto.pdf") && e4.messaggio.includes("1 file del progetto"), "allegato solo il file scelto della cartella", e4);
+
   console.log("8. Variante dell'offerta: si salva e aggiorna la commessa");
   await C.sbloccaPreventivo(fd({ preventivoId: prev.id }));
   verifica(!(await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).confermatoIl, "offerta sbloccata");

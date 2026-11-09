@@ -14,6 +14,7 @@ import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { creaOrdineDaRighe } from "@/app/ordini-actions";
 import { salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
+import FotoProgetto from "@/components/commesse/FotoProgetto";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { UFFICI } from "@/lib/flusso";
@@ -156,7 +157,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </form>
       </div>
       <nav aria-label="Vai alla sezione" className="mb-4 flex flex-wrap gap-1.5">
-        {[["#rilievo", "📏 Rilievo"], ["#evasione", "📦 Materiale e ordini"], ["#acconto", "💶 Acconto e fatture"], ["#costi", "📊 Costi"], ["#posa", "🔧 Posa"], ["#storico", "🕘 Storico"], ["#documenti", "📂 File"]].map(([h, t]) => (
+        {[["#rilievo", "📏 Rilievo"], ["#evasione", "📦 Materiale e ordini"], ["#acconto", "💶 Acconto e fatture"], ["#costi", "📊 Costi"], ["#posa", "🔧 Posa"], ["#storico", "🕘 Storico"], ["#foto", "📷 Foto"], ["#documenti", "📂 File"]].map(([h, t]) => (
           <a key={h} href={h} className="btn-3d btn-3d-outline text-xs px-2.5 py-1">{t}</a>
         ))}
       </nav>
@@ -537,7 +538,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                 azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
             </form>
           )}
-          <details className="mt-2 rounded border border-blue-200 bg-blue-50/40 p-2">
+          <details open={!!fattoMateriale?.startsWith("Aggiunto")} className="mt-2 rounded border border-blue-200 bg-blue-50/40 p-2">
             <summary className="cursor-pointer text-sm font-bold text-blue-900">📚 Aggiungi materiale dal listino (Indoor / Outdoor, come nell&apos;offerta) — solo acquisto</summary>
             <div className="mt-2">
               <SelettoreProdotto preventivoId={c.id} brandId={c.brandId} brandColor="#1d4ed8" tassonomia={tassonomia} azionePerMisura={complementoDaListinoPerMisura} azionePerProdotto={complementoDaListino} />
@@ -906,6 +907,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           ))}
         </ul>
       </section>
+      <div className="mb-4"><FotoProgetto commessaId={c.id} preventivoId={c.preventivoId} /></div>
       <div id="documenti" className="scroll-mt-4">
         <Documenti entita="COMMESSA" entitaId={c.id} titolo="Documenti della commessa" />
       </div>
