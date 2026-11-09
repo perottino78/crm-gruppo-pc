@@ -363,7 +363,7 @@ login nel `matcher` del middleware.
   Riordino dopo l'import (rotta `api/admin/riordina-appuntamenti`, GET prova con l'elenco, POST esegue, rilanciabile; regole pure in
   `src/lib/calendario/riordino.ts`, test): `doppioniImportati` toglie gli appuntamenti «BC|» che doppiano uno di P&C ONE (stessa persona per cliente,
   telefono, email o nome in qualsiasi ordine, stesso giorno di Roma; non se quello di ONE è annullato) e i clienti creati dall'import rimasti vuoti;
-  `leadDaAvanzare` porta i lead appesi (`FASI_DA_FISSARE`) ad APPUNTAMENTO_CASA/SHOWROOM quando la persona ha un appuntamento (non telefonico, non di una telefonista) dopo l'ultimo esito
+  `leadDaAvanzare` porta i lead appesi (`FASI_DA_FISSARE`) ad APPUNTAMENTO_CASA/SHOWROOM quando la persona ha un appuntamento (non telefonico, non di una telefonista) dopo l'arrivo del lead (dopo l'ultimo esito solo per DA_RICHIAMARE / APPUNTAMENTO_ANNULLATO; diagnosi in sola lettura con `?diagnosi=1`)
   (storico «aggiornato in automatico», utente «Automatico», invii in coda annullati, nessuna email, cliente collegato con `leadOrigineId`).
   Nei «Task di oggi» i lead con appuntamento già passato non compaiono più (li esita il venditore). Collaudo `riordino-appuntamenti` (15).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
