@@ -36,8 +36,11 @@ export async function POST(req: NextRequest) {
   if (!pc) return NextResponse.json({ error: "nessun marchio nel CRM" }, { status: 500 });
   const staff = [...(corpo.staff ?? []), ...utenti.map((u) => u.nome)];
   const perNome = new Map(utenti.map((u) => [chiaveNome(u.nome), u]));
-  // il centralino «Info P&C» di BConsole è la telefonista (la prima attiva in ordine alfabetico)
-  const centralino = utenti.find((u) => u.ruolo === "TELEFONISTA" && u.stato === "ATTIVO") ?? utenti.find((u) => u.ruolo === "TELEFONISTA");
+  // il centralino «Info P&C» di BConsole: la persona indicata con ?centralino=<nome> (es. Cristina), altrimenti la prima telefonista attiva
+  const nomeCentralino = req.nextUrl.searchParams.get("centralino")?.trim().toLowerCase();
+  const centralino = (nomeCentralino ? utenti.find((u) => u.nome.toLowerCase().includes(nomeCentralino)) : undefined)
+    ?? utenti.find((u) => u.ruolo === "TELEFONISTA" && u.stato === "ATTIVO") ?? utenti.find((u) => u.ruolo === "TELEFONISTA");
+  if (nomeCentralino && !centralino?.nome.toLowerCase().includes(nomeCentralino)) return NextResponse.json({ error: `nessun utente «${nomeCentralino}» per il centralino` }, { status: 400 });
   const utenteDi = (nome: string) => (/^info /i.test(nome) ? centralino : perNome.get(chiaveNome(nome)));
   const portati = new Map(giaPortati.map((a) => [a.chiaveImport!, a.id]));
   const indice = indiceClienti(esistenti);
@@ -45,7 +48,7 @@ export async function POST(req: NextRequest) {
 
   const conta = (m: Record<string, number>, k: string) => { m[k] = (m[k] ?? 0) + 1; };
   const esito = {
-    prova, ricevuti: corpo.eventi.length, creati: 0, aggiornati: 0, giaPresenti: 0, interni: 0, senzaIncaricato: 0, clientiTrovati: 0, clientiCreati: 0,
+    prova, centralino: centralino?.nome ?? null, ricevuti: corpo.eventi.length, creati: 0, aggiornati: 0, giaPresenti: 0, interni: 0, senzaIncaricato: 0, clientiTrovati: 0, clientiCreati: 0,
     perIncaricato: {} as Record<string, number>, perStato: {} as Record<string, number>, perMese: {} as Record<string, number>, incaricatiNonTrovati: {} as Record<string, number>,
     esempiClientiCreati: [] as string[],
   };

@@ -55,6 +55,14 @@ async function main() {
   const a1b = await prisma.appuntamento.findUniqueOrThrow({ where: { id: a1.id } });
   verifica(r3.aggiornati === 1 && a1b.stato === "ANNULLATO" && a1b.dataOra.toISOString() === "2026-09-16T07:00:00.000Z" && a1b.durataMin === 60, "con ?aggiorna=1 prende data, durata e stato di BConsole", a1b);
 
+  console.log("4b. Centralino indicato per nome");
+  const alessia = await prisma.utente.create({ data: { nome: "Alessia Vaccaro", email: "a@x.it", ruolo: "TELEFONISTA" } });
+  const r4 = await chiama({ ...corpo, eventi: [ev("9", "Neri Anna - da risentire", { assegnato: "Info P&C" })] }, "centralino=cristina");
+  const a9 = await prisma.appuntamento.findFirstOrThrow({ where: { chiaveImport: "BC|9" } });
+  verifica(r4.centralino === "Cristina Centralino" && a9.utenteId === cristina.id && a9.utenteId !== alessia.id, "«Info P&C» va a Cristina anche se Alessia viene prima in ordine alfabetico", r4);
+  const r5 = await chiama(corpo, "prova=1&centralino=nessuno");
+  verifica(r5.error?.includes("nessuno"), "nome del centralino sbagliato: errore, niente importazione", r5);
+
   console.log("5. Senza chiave: rifiutato");
   const no = await POST(new NextRequest("http://x/api/admin/importa-appuntamenti-bconsole", { method: "POST", body: "{}" }));
   verifica(no.status === 401, "401 senza chiave");
