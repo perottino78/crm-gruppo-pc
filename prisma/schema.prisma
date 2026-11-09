@@ -860,6 +860,10 @@ model RigaOrdine {
   prelevatoIl       DateTime?
   // Complemento aggiunto al rilievo: solo acquisto, non cambia la vendita al cliente
   complemento       Boolean          @default(false)
+  // Pezzo della distinta base (kit) di un'altra riga del materiale: id della riga «madre»
+  kitDiId           String?
+  // Prodotto di listino della riga (offerta o materiale aggiunto dal listino): serve per la distinta base
+  prodottoId        String?
   righeBolla        RigaBolla[]
 
   @@index([ordineFornitoreId])
@@ -1947,4 +1951,25 @@ model DocumentoBC {
 
   @@index([clienteId])
   @@index([clienteNome])
+}
+
+// Distinta base (kit) di un modello di listino: pezzi che vanno ordinati insieme al prodotto (es. la vetrata panoramica con angolari
+// e legni, il kit della tapparella). Solo acquisto: la vendita al cliente non cambia. Si aggiungono da soli al materiale del progetto
+// (i facoltativi si propongono). calcolo: PEZZO (× pezzi venduti) | METRO (× metri di larghezza) | MQ (× m²) | FISSO (una volta per riga)
+model ComponenteKit {
+  id            String   @id @default(cuid())
+  brandId       String
+  tipologia     String
+  descrizione   String
+  quantita      Float    @default(1)
+  calcolo       String   @default("PEZZO")
+  facoltativo   Boolean  @default(false)
+  articoloId    String?
+  fornitoreId   String?
+  costoUnitario Float?
+  ordine        Int      @default(0)
+  creatoDaNome  String?
+  createdAt     DateTime @default(now())
+
+  @@index([brandId, tipologia])
 }

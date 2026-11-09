@@ -12,11 +12,12 @@ import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
 import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { creaOrdineDaRighe } from "@/app/ordini-actions";
-import { salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
+import { aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
+import { labelCalcolo } from "@/lib/listini/kit";
 import { UFFICI } from "@/lib/flusso";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
@@ -111,8 +112,21 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const materialeOfferta = c.righeOrdine.length
     ? c.righeOrdine.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, complemento: r.complemento, fornitore: r.fornitoreNome }))
     : righeOfferta.map((r) => ({ descrizione: r.testoLibero ?? (r.prodotto ? `${labelBreveTipologia(r.prodotto.tipologia) || r.prodotto.tipologia.replace(/_/g, " ")}${r.prodotto.colore ? ` — ${r.prodotto.colore}` : ""}${r.misuraLarghezza && r.misuraAltezza ? ` (${r.misuraLarghezza}×${r.misuraAltezza})` : ""}` : "Riga"), quantita: r.quantita, complemento: false, fornitore: null }));
+  // distinta base: correlati facoltativi ancora da proporre
+  const conProdotto = c.righeOrdine.filter((r) => r.prodottoId && !r.kitDiId);
+  const prodottiRighe = conProdotto.length ? await prisma.prodotto.findMany({ where: { id: { in: conProdotto.map((r) => r.prodottoId!) } }, select: { id: true, brandId: true, tipologia: true } }) : [];
+  const facoltativi = prodottiRighe.length ? await prisma.componenteKit.findMany({ where: { facoltativo: true, OR: prodottiRighe.map((p) => ({ brandId: p.brandId, tipologia: p.tipologia })) }, orderBy: { ordine: "asc" } }) : [];
+  const correlatiSuggeriti = conProdotto.flatMap((r) => {
+    const p = prodottiRighe.find((x) => x.id === r.prodottoId);
+    return facoltativi.filter((k) => p && k.brandId === p.brandId && k.tipologia === p.tipologia)
+      .filter((k) => !c.righeOrdine.some((x) => x.kitDiId === r.id && x.descrizione === k.descrizione))
+      .map((k) => ({ rigaId: r.id, componenteId: k.id, descrizione: k.descrizione, madre: r.descrizione, come: `${String(k.quantita).replace(".", ",")} ${labelCalcolo(k.calcolo)}` }));
+  });
+  const nomeRiga = new Map(c.righeOrdine.map((r) => [r.id, r.descrizione]));
   // materiale della pratica, raggruppato per fornitore (così si spuntano insieme le righe dello stesso fornitore)
-  const materialePratica = [...c.righeOrdine].sort((a, b) => (a.fornitoreNome ?? "~").localeCompare(b.fornitoreNome ?? "~"));
+  // (i pezzi del kit stanno subito sotto il loro prodotto)
+  const radici = c.righeOrdine.filter((r) => !r.kitDiId || !nomeRiga.has(r.kitDiId)).sort((a, b) => (a.fornitoreNome ?? "~").localeCompare(b.fornitoreNome ?? "~"));
+  const materialePratica = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
@@ -520,7 +534,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                       return (
                         <tr key={r.id} className="border-b border-neutral-100 align-top">
                           <td className="py-1.5"><input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} /></td>
-                          <td className="py-1.5 pr-2">{r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
+                          <td className="py-1.5 pr-2">{r.kitDiId ? <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-indigo-100 text-indigo-900" title="Pezzo della distinta base: solo acquisto">🔗 KIT di {nomeRiga.get(r.kitDiId) ?? "—"}</span> : r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
                           <td className="py-1.5 text-right pr-3">{r.quantita}</td>
                           <td className="py-1.5 text-xs">{r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>}</td>
                           <td className="py-1.5 text-xs">{r.ordineFornitore
@@ -537,6 +551,20 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
                 azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
             </form>
+          )}
+          {correlatiSuggeriti.length > 0 && (
+            <div className="mt-2 rounded border border-indigo-200 bg-indigo-50/50 p-2">
+              <p className="text-xs font-bold text-indigo-900 mb-1">🔗 Correlati suggeriti (distinta base, facoltativi)</p>
+              <ul className="text-sm divide-y divide-indigo-100">
+                {correlatiSuggeriti.map((x) => (
+                  <li key={`${x.rigaId}-${x.componenteId}`} className="py-1 flex flex-wrap items-center gap-2">
+                    <span>{x.descrizione}</span><span className="text-xs text-neutral-600">per «{x.madre}» · {x.come}</span>
+                    <form action={aggiungiCorrelato}><input type="hidden" name="rigaId" value={x.rigaId} /><input type="hidden" name="componenteId" value={x.componenteId} />
+                      <button className="btn-3d btn-3d-teal text-[11px] px-2 py-0.5">➕ aggiungi</button></form>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           <details open={!!fattoMateriale?.startsWith("Aggiunto")} className="mt-2 rounded border border-blue-200 bg-blue-50/40 p-2">
             <summary className="cursor-pointer text-sm font-bold text-blue-900">📚 Aggiungi materiale dal listino (Indoor / Outdoor, come nell&apos;offerta) — solo acquisto</summary>
