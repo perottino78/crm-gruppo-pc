@@ -13,6 +13,7 @@ import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
 import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
 import { costoPrevisto } from "@/lib/ordini/calcoli";
 import { scontoEquivalente } from "@/lib/articoli/prezzi";
+import { quantitaComponente } from "@/lib/listini/kit";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -193,8 +194,18 @@ export async function salvaVariante(formData: FormData) {
   });
   // materiale: le righe non ancora ordinate si rigenerano dall'offerta (tenendo il fornitore scelto), le nuove entrano
   const vecchie = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, rigaPreventivoId: { not: null }, complemento: false, ordineFornitoreId: null, ordinato: false, daMagazzino: false } });
+  await prisma.rigaOrdine.deleteMany({ where: { kitDiId: { in: vecchie.map((r) => r.id) }, ordineFornitoreId: null, ordinato: false } });
+  // pezzi del kit già ordinati: restano e si ricollegano alla riga rigenerata, senza ordinarli due volte
+  const kitOrdinati = await prisma.rigaOrdine.findMany({ where: { kitDiId: { in: vecchie.map((r) => r.id) } } });
   await prisma.rigaOrdine.deleteMany({ where: { id: { in: vecchie.map((r) => r.id) } } });
   await assicuraRigheOfferta(c.id, true);
+  for (const k of kitOrdinati) {
+    const rp = vecchie.find((v) => v.id === k.kitDiId)?.rigaPreventivoId;
+    const nuova = rp ? await prisma.rigaOrdine.findFirst({ where: { commessaId: c.id, rigaPreventivoId: rp, kitDiId: null } }) : null;
+    if (!nuova) continue;
+    await prisma.rigaOrdine.deleteMany({ where: { kitDiId: nuova.id, descrizione: k.descrizione, ordineFornitoreId: null, ordinato: false } });
+    await prisma.rigaOrdine.update({ where: { id: k.id }, data: { kitDiId: nuova.id } });
+  }
   for (const v of vecchie.filter((r) => r.fornitoreId)) {
     await prisma.rigaOrdine.updateMany({ where: { commessaId: c.id, rigaPreventivoId: v.rigaPreventivoId, ordineFornitoreId: null, fornitoreId: null }, data: { fornitoreId: v.fornitoreId, fornitoreNome: v.fornitoreNome } });
   }
@@ -614,7 +625,11 @@ async function assicuraRigheOfferta(id: string, silenzioso = false) {
       return { commessaId: id, rigaPreventivoId: r.id, descrizione: desc, quantita: r.quantita, ...acq };
     });
   if (nuove.length) {
-    await prisma.rigaOrdine.createMany({ data: nuove });
+    for (const [i, n] of nuove.entries()) {
+      const rp = daAggiungere[i];
+      const creata = await prisma.rigaOrdine.create({ data: { ...n, prodottoId: rp.prodottoId ?? null } });
+      await aggiungiKit(id, { id: creata.id, quantita: creata.quantita, prodottoId: rp.prodottoId ?? null, larghezza: rp.misuraLarghezza, altezza: rp.misuraAltezza });
+    }
     if (!silenzioso) await log(id, `Materiale dell'offerta portato nella pratica: ${nuove.length} righe da ordinare.`);
   }
 }
@@ -1063,6 +1078,50 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
   redirect(`/commesse/${c.id}?ok=${encodeURIComponent(`Pratica presa in carico da BConsole: il task è passato a ${f!.nome}`)}`);
 }
 
+// ============ DISTINTA BASE (KIT) ============
+/**
+ * Aggiunge al materiale della pratica i pezzi della distinta base del modello di una riga (solo acquisto).
+ * Di norma solo quelli «sempre»; con `soloId` un componente preciso (anche facoltativo). Ritorna quante righe ha aggiunto.
+ */
+async function aggiungiKit(commessaId: string, madre: { id: string; quantita: number; prodottoId: string | null; larghezza?: number | null; altezza?: number | null }, soloId?: string): Promise<number> {
+  if (!madre.prodottoId) return 0;
+  const p = await prisma.prodotto.findUnique({ where: { id: madre.prodottoId }, select: { brandId: true, tipologia: true } });
+  if (!p) return 0;
+  const componenti = await prisma.componenteKit.findMany({ where: { brandId: p.brandId, tipologia: p.tipologia, ...(soloId ? { id: soloId } : { facoltativo: false }) }, orderBy: [{ ordine: "asc" }, { createdAt: "asc" }] });
+  if (!componenti.length) return 0;
+  const modello = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: p.brandId, tipologia: p.tipologia } }, select: { fornitoreId: true } });
+  for (const c of componenti) {
+    const art = c.articoloId ? await prisma.articolo.findUnique({ where: { id: c.articoloId } }) : null;
+    const fornitoreId = c.fornitoreId ?? art?.fornitoreId ?? modello?.fornitoreId ?? null;
+    const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
+    const q = quantitaComponente(c, { quantita: madre.quantita, larghezza: madre.larghezza, altezza: madre.altezza, unita: unitaMisura(p.tipologia) });
+    const costo = c.costoUnitario ?? art?.costoAcquisto ?? null;
+    await prisma.rigaOrdine.create({
+      data: {
+        commessaId, descrizione: c.descrizione, quantita: q, complemento: true, kitDiId: madre.id, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null,
+        articoloId: art?.id ?? null, codice: art?.codice ?? null, codiceFornitore: art?.codiceFornitore ?? null, um: art?.um ?? null,
+        prezzoAcquisto: costo, costoPrevisto: costo !== null ? Math.round(costo * q * 100) / 100 : null,
+      },
+    });
+  }
+  return componenti.length;
+}
+
+/** Aggiunge un correlato facoltativo della distinta base a una riga del materiale (pulsante «➕» nei suggeriti). */
+export async function aggiungiCorrelato(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const rigaId = str(formData, "rigaId"), componenteId = str(formData, "componenteId");
+  if (!rigaId || !componenteId) return;
+  const r = await prisma.rigaOrdine.findUnique({ where: { id: rigaId } });
+  if (!r?.commessaId) return;
+  const misura = r.rigaPreventivoId ? await prisma.rigaPreventivo.findUnique({ where: { id: r.rigaPreventivoId }, select: { misuraLarghezza: true, misuraAltezza: true } }) : null;
+  const n = await aggiungiKit(r.commessaId, { id: r.id, quantita: r.quantita, prodottoId: r.prodottoId, larghezza: misura?.misuraLarghezza, altezza: misura?.misuraAltezza }, componenteId);
+  if (n) await log(r.commessaId, `Aggiunto il correlato della distinta base di «${r.descrizione}».`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  redirect(`/commesse/${r.commessaId}?fattoMateriale=${encodeURIComponent(n ? "Correlato aggiunto al materiale." : "Correlato non trovato.")}#materiale-pratica`);
+}
+
 // ============ COMPLEMENTI DEL RILIEVO (solo acquisto) ============
 /** Materiale aggiunto al rilievo: articolo («A»), prodotto di listino («P», colore e misura) o testo libero («T»). */
 export type Complemento = {
@@ -1082,6 +1141,7 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
   let fornitoreId = testo(x.fornitoreId);
   let descrizione = testo(x.descrizione);
   const dati: { articoloId?: string; codice?: string | null; codiceFornitore?: string | null; um?: string | null; prezzoAcquisto?: number | null; scontoAcquisto?: number | null; costoPrevisto?: number | null } = {};
+  let prodottoKit: string | null = null;
 
   if (tipo === "A") {
     const art = await prisma.articolo.findUnique({ where: { id: testo(x.articoloId) ?? "" } });
@@ -1096,6 +1156,7 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
   } else if (tipo === "PR") {
     const p = await prisma.prodotto.findUnique({ where: { id: testo(x.articoloId) ?? "" } });
     if (!p) return { errore: "Prodotto di listino non trovato." };
+    prodottoKit = p.id;
     const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: p.brandId, tipologia: p.tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
     fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
     const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
@@ -1119,6 +1180,7 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
       ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
       : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
     if (!p) return { errore: `${nome}: misura fuori listino, scrivilo come testo libero.` };
+    prodottoKit = p.id;
     const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId, tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
     fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
     const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
@@ -1132,10 +1194,12 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
   }
   if (!descrizione) return { errore: "Scrivi la descrizione del complemento." };
   const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
-  await prisma.rigaOrdine.create({
-    data: { commessaId, descrizione, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note: testo(x.note), ...dati },
+  const creata = await prisma.rigaOrdine.create({
+    data: { commessaId, descrizione, quantita: q, complemento: true, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? null, note: testo(x.note), prodottoId: prodottoKit, ...dati },
   });
-  return { descrizione: `${descrizione} × ${q}${forn ? ` (${forn.ragioneSociale})` : ""}` };
+  // pezzi della distinta base del prodotto di listino (kit), solo acquisto
+  const nKit = await aggiungiKit(commessaId, { id: creata.id, quantita: q, prodottoId: prodottoKit, larghezza: numero(x.larghezza), altezza: numero(x.altezza) });
+  return { descrizione: `${descrizione} × ${q}${forn ? ` (${forn.ragioneSociale})` : ""}${nKit ? ` + ${nKit} pezzi del kit` : ""}` };
 }
 
 /** Aggiunge un complemento singolo (fuori dal modulo del rilievo). */
@@ -1261,6 +1325,8 @@ export async function eliminaRigheMateriale(formData: FormData) {
   const ids = righeSpuntate(formData);
   const via = await prisma.rigaOrdine.findMany({ where: { id: { in: ids }, commessaId, complemento: true, ordineFornitoreId: null, ordinato: false } });
   if (via.length) {
+    // con la riga vanno via anche i pezzi del suo kit non ancora ordinati
+    await prisma.rigaOrdine.deleteMany({ where: { kitDiId: { in: via.map((r) => r.id) }, ordineFornitoreId: null, ordinato: false } });
     await prisma.rigaOrdine.deleteMany({ where: { id: { in: via.map((r) => r.id) } } });
     await log(commessaId, `Tolto il materiale aggiunto: ${via.map((r) => r.descrizione).join("; ")}.`);
   }
