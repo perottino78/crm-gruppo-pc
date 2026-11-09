@@ -76,3 +76,16 @@ export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[
   }
   return out;
 }
+
+/** Diagnosi: per ogni lead, tutti gli appuntamenti della stessa persona (qualsiasi data, tipo e stato). */
+export function appuntamentiDeiLead(leads: LeadRiordino[], appuntamenti: AppRiordino[], clienti: ClienteRiordino[]): Map<string, AppRiordino[]> {
+  const perId = new Map(clienti.map((c) => [c.id, c]));
+  const perChiave = new Map<string, AppRiordino[]>();
+  for (const a of appuntamenti) for (const k of chiaviCliente(perId.get(a.clienteId), a.clienteId)) perChiave.set(k, [...(perChiave.get(k) ?? []), a]);
+  const out = new Map<string, AppRiordino[]>();
+  for (const l of leads) {
+    const chiavi = chiaviPersona({ clienteId: l.clienteId, nome: l.nome, telefoni: [l.telefono], email: l.email });
+    out.set(l.id, [...new Set(chiavi.flatMap((k) => perChiave.get(k) ?? []))].sort((x, y) => x.dataOra.getTime() - y.dataOra.getTime()));
+  }
+  return out;
+}
