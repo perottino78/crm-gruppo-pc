@@ -2,6 +2,7 @@ import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
+import { SOTTOGRUPPO_TAGLIO_FREDDO, labelTaglioFreddo, assiSelezioneTaglioFreddo } from "@/lib/listini/taglio-freddo";
 import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
 import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { sottogruppoLatt, labelLatt } from "@/lib/listini/lattoneria";
@@ -43,6 +44,8 @@ const TIPOLOGIE_IN_CM = ["LUCILLA_", "NUVOLA_", "PANAREA_", "COMPSFUSI_", "WAWE_
   "ISOMAX_",
   // Porte e chiusure raso muro (MYA, KIUSO, STRIP): misure di listino in cm.
   "RASOMURO_",
+  // Serramenti in alluminio a taglio freddo e verande: tariffa al m² (MQ_CON_MINIMI), misure in cm.
+  "TAGLIOFREDDO_",
   // Tende a rullo da interno (P&C): griglia larghezza x altezza in cm come da listino
   // fornitore (RULLO A CATENA, RULLO XS, LOOK IN, TAGLI TESSUTO — vedi task #283).
   "RULLOCATENA_", "RULLOXS_", "LOOKIN_", "TAGLIOTESSUTO_",
@@ -70,6 +73,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("PORTAVETRO_")) return "PORTAVETRO";
   // Pergola Tempra (STABYLA): optional comuni a tutti i modelli.
   if (tipologia.startsWith("STABYLA_")) return "TEMPRA";
+  // Taglio freddo e verande: supplementi, colori e sconti comuni a tutti i sistemi.
+  if (tipologia.startsWith("TAGLIOFREDDO_")) return "TAGLIOFREDDO";
   if (tipologia.startsWith("FRANGISOLE_")) return "FRANGISOLE_VERT";
   if (tipologia.startsWith("SERAFRANG_")) return "SERAFRANG";
   if (tipologia.startsWith("WPC_")) return tipologia.split("_").slice(0, 2).join("_");
@@ -763,6 +768,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
+  if (tipologia.startsWith("TAGLIOFREDDO_")) return SOTTOGRUPPO_TAGLIO_FREDDO;
   if (tipologia.startsWith("PEDANA_")) return SOTTOGRUPPO_PEDANE;
   if (tipologia.startsWith("PAVGAL_")) return SOTTOGRUPPO_PAVGAL;
   if (tipologia.startsWith("LATT_")) return sottogruppoLatt(tipologia);
@@ -881,7 +887,7 @@ const SERRAMENTI_MATERIALE_LABELS: Record<string, string> = {
   // PVC-Alluminio: Fidra ora ha il listino vero (tipologie FIDRA_*, sottogruppo «Alluminio — Fidra»).
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "PVC-Alluminio — Plasma 30",
   SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "PVC-Alluminio — Fenix K",
-  SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Alluminio a taglio freddo",
+  // Alluminio a taglio freddo: listino vero (tipologie TAGLIOFREDDO_*, sottogruppo «Alluminio — Taglio freddo e verande»).
   SERRAMENTI_LEGNO_PLACEHOLDER: "Legno",
   // Alluminio: unica linea comunicata finora (Plasma 30 Alu).
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Alluminio — Plasma 30 Alu",
@@ -1239,6 +1245,8 @@ export function assiSelezioneIsomax(tipologia: string): AssiIsomax | null {
   if (tipologia.startsWith("RASOMURO_")) return assiSelezioneRasomuro(tipologia);
   // Pergola Tempra: stesse 2 tendine (modello -> installazione).
   if (tipologia.startsWith("STABYLA_")) return assiSelezioneTempra(tipologia);
+  // Taglio freddo e verande: 2 tendine (sistema -> vetro).
+  if (tipologia.startsWith("TAGLIOFREDDO_")) return assiSelezioneTaglioFreddo(tipologia);
   if (!tipologia.startsWith("ISOMAX_")) return null;
   const match = tipologia.match(/^ISOMAX_([A-Z0-9]+)_([A-Z0-9]+)$/);
   if (!match) return null;
@@ -2032,7 +2040,6 @@ const IN_ARRIVO: Record<string, string> = {
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fenix K non ancora caricato — in arrivo",
-  SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER: "Listino Serramenti Alluminio a taglio freddo non ancora caricato — in arrivo",
   SERRAMENTI_LEGNO_PLACEHOLDER: "Listino Serramenti Legno non ancora caricato — in arrivo",
   SERRAMENTI_ALLUMINIO_PLASMA30ALU_PLACEHOLDER: "Listino Serramenti Alluminio Plasma 30 Alu non ancora caricato — in arrivo",
   SERRAMENTI_LEGNOALLUMINIO_PLASMA30WOOD_PLACEHOLDER: "Listino Serramenti Legno-Alluminio Plasma 30 Wood non ancora caricato — in arrivo",
@@ -2067,6 +2074,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith("TAGLIOFREDDO_")) return labelTaglioFreddo(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PEDANA_")) return labelPedana(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PAVGAL_")) return labelPavgal(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LATT_")) return labelLatt(tipologia) ?? tipologia.replace(/_/g, " ");

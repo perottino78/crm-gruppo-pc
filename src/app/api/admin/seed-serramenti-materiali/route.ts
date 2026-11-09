@@ -37,6 +37,8 @@ const TIPOLOGIE_RITIRATE = [
   "SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER",
   // Fidra: listino vero caricato da seed-fidra (tipologie FIDRA_*, sottogruppo «Alluminio — Fidra»).
   "SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER",
+  // Taglio freddo: listino vero caricato da seed-taglio-freddo (tipologie TAGLIOFREDDO_*).
+  "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER",
 ];
 
 export async function POST(req: NextRequest) {

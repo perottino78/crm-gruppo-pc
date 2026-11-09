@@ -1334,7 +1334,7 @@ function SelettoreCascataIsomax({
       </div>
       {modello && (
         <div className="flex flex-col gap-1">
-          <label className="text-[11px] text-neutral-600">{tipologie.some((t) => t.value.startsWith("RASOMURO_")) ? "2. Misura" : tipologie.some((t) => t.value.startsWith("STABYLA_")) ? "2. Installazione" : "2. Tipo apertura"}</label>
+          <label className="text-[11px] text-neutral-600">{tipologie.some((t) => t.value.startsWith("RASOMURO_")) ? "2. Misura" : tipologie.some((t) => t.value.startsWith("STABYLA_")) ? "2. Installazione" : tipologie.some((t) => t.value.startsWith("TAGLIOFREDDO_")) ? "2. Vetro" : "2. Tipo apertura"}</label>
           <select
             value={apertura}
             onChange={(e) => setApertura(e.target.value)}
