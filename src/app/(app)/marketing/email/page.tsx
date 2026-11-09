@@ -82,12 +82,12 @@ export default async function EmailAutomatichePage({ searchParams }: { searchPar
                       {v && <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700">{NOMI_VARIANTI[v] ?? v}</span>}
                     </span>
                     {pers
-                      ? <span className="rounded-full bg-violet-100 px-2 py-1 text-xs font-semibold text-violet-800" title={pers.aggiornatoIl ? `modificata il ${new Date(pers.aggiornatoIl).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}` : undefined}>✏️ personalizzata{pers.aggiornatoDa ? ` da ${pers.aggiornatoDa}` : ""}</span>
+                      ? <span className="rounded-full bg-violet-100 px-2 py-1 text-xs font-semibold text-violet-800" title={pers.aggiornatoIl ? `modificata il ${new Date(pers.aggiornatoIl).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}` : undefined}>✏️ personalizzata{pers.formato === "HTML" ? " · HTML" : ""}{pers.aggiornatoDa ? ` da ${pers.aggiornatoDa}` : ""}</span>
                       : <span className="rounded-full bg-neutral-100 px-2 py-1 text-xs text-neutral-500">testo standard</span>}
                   </summary>
                   <div className="bg-neutral-50/60 px-4 pb-4 pt-2">
                     {dove.length > 0 && <p className="mb-2 text-xs text-neutral-600">Parte nel percorso: {dove.join(" · ")}</p>}
-                    <EditorEmail modello={m} variante={v} oggetto={pers?.oggetto ?? std.oggetto} testo={pers?.testo ?? std.testo} preheader={pers?.preheader ?? ""} valori={valori}
+                    <EditorEmail modello={m} variante={v} oggetto={pers?.oggetto ?? std.oggetto} testo={pers?.testo ?? std.testo} formato={pers?.formato === "HTML" ? "HTML" : "TESTO"} preheader={pers?.preheader ?? ""} valori={valori}
                       salva={salvaTestoEmail} ripristina={ripristinaTestoEmail} personalizzata={!!pers} />
                   </div>
                 </details>

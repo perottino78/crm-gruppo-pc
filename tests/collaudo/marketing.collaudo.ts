@@ -80,7 +80,7 @@ async function main() {
   await eseguiInviiScaduti({ adesso: ora });
   const e = await prisma.emailLead.findFirstOrThrow({ where: { leadId: l!.id, chiave: "request-received" } });
   verifica(e.stato === "INVIATA" && e.oggetto === "Grazie Mario, ci sentiamo presto!", "oggetto personalizzato col nome", e.oggetto);
-  verifica(e.testo.startsWith("Ciao Mario,\n\nabbiamo ricevuto la tua richiesta per Pergola.\n\nChiamaci al 011") && e.testo.includes("Non vuoi più ricevere email?"), "testo personalizzato, nota vuota tolta, disiscrizione presente", e.testo);
+  verifica(e.testo.startsWith("Ciao Mario,\n\nabbiamo ricevuto la tua richiesta per Pergola.\n\nChiamaci al 011") && e.testo.includes("Non vuoi più ricevere email promozionali?"), "testo personalizzato, nota vuota tolta, disiscrizione presente", e.testo);
   const altra = await prisma.emailLead.findFirstOrThrow({ where: { leadId: l!.id, chiave: "call-requested" } });
   verifica(altra.oggetto.includes("Contatto in target da chiamare"), "le altre email restano con il testo standard");
   verifica(posta.some((p) => p.a[0] === "mario@rossi.it" && p.dati.includes("Grazie Mario")), "partita davvero dal server di posta");

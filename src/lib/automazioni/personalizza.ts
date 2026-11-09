@@ -5,8 +5,10 @@ import {
   componiEmail, riepilogoContatto, riepilogoRichiesta, riepilogoAppuntamento, contattiConsulente, nomeProprio, famigliaLettere, CONTATTI,
   type DatiLeadEmail, type EmailPronta, type Link,
 } from "./email";
+import { testoDaHtml, testoInHtml } from "@/lib/mail/html";
 
-export type TestoPersonalizzato = { oggetto: string; testo: string; preheader?: string | null; aggiornatoDa?: string | null; aggiornatoIl?: string | null };
+// formato HTML: «testo» è un template HTML (incollato o caricato) con gli stessi segnaposto; il testo semplice si ricava da lì.
+export type TestoPersonalizzato = { oggetto: string; testo: string; formato?: "TESTO" | "HTML"; preheader?: string | null; aggiornatoDa?: string | null; aggiornatoIl?: string | null };
 
 export const PREFISSO_TESTO = "email_testo:";
 
@@ -107,7 +109,17 @@ export function riempi(modello: string, valori: Record<string, string>): string 
 /** Applica il testo personalizzato (se c'è) all'email già composta con il testo standard. */
 export function personalizza(e: EmailPronta, t: TestoPersonalizzato | null | undefined, valori: Record<string, string>): EmailPronta & { personalizzata: boolean } {
   if (!t || !t.testo.trim()) return { ...e, personalizzata: false };
-  return { ...e, oggetto: riempi(t.oggetto || e.oggetto, valori).replace(/\s+/g, " ").trim(), testo: riempi(t.testo, valori), personalizzata: true };
+  const oggetto = riempi(t.oggetto || e.oggetto, valori).replace(/\s+/g, " ").trim();
+  if (t.formato === "HTML") {
+    const html = riempiHtml(t.testo, valori);
+    return { ...e, oggetto, testo: testoDaHtml(html), html, personalizzata: true };
+  }
+  return { ...e, oggetto, testo: riempi(t.testo, valori), personalizzata: true };
+}
+
+/** Riempie i segnaposto in un template HTML: i valori sono protetti (niente tag rotti) e le righe a capo diventano <br>. */
+export function riempiHtml(template: string, valori: Record<string, string>): string {
+  return template.replace(/\{([a-z_]+)\}/g, (tutto, k) => (k in valori ? testoInHtml(valori[k]) : tutto));
 }
 
 // --- testo standard scritto con i segnaposto (punto di partenza per chi lo modifica) ---

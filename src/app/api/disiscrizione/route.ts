@@ -4,14 +4,15 @@ import { disiscriviCliente } from "@/lib/campagne/motore";
 
 export const dynamic = "force-dynamic";
 
-// Link "Non voglio più ricevere email" in fondo alle email ai clienti (firmato: non si può disiscrivere un altro).
+// Link "Non voglio più ricevere email promozionali" in fondo alle email ai clienti (firmato: non si può disiscrivere un altro).
+// Ferma solo le email commerciali (campagne, lettere di vendita, promozioni): quelle di servizio continuano.
 export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams;
   // l = lead (email automatiche), c = cliente (campagne)
   const ok = q.get("c") ? await disiscriviCliente(q.get("c") ?? "", q.get("t") ?? "") : await disiscrivi(q.get("l") ?? "", q.get("t") ?? "");
   const testo = ok
-    ? "Fatto: non riceverai più le nostre email automatiche. Se hai bisogno di noi chiamaci allo 011 19887497."
-    : "Il link non è valido o è scaduto. Per non ricevere più email rispondi a una nostra email o chiamaci allo 011 19887497.";
+    ? "Fatto: non riceverai più le nostre email promozionali. Continuerai a ricevere solo le comunicazioni legate alle tue richieste (appuntamenti, offerte, contatti con il tuo consulente). Se hai bisogno di noi chiamaci allo 011 19887497."
+    : "Il link non è valido o è scaduto. Per non ricevere più email promozionali rispondi a una nostra email o chiamaci allo 011 19887497.";
   const html = `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gruppo P&amp;C</title></head>
 <body style="font-family:Arial,sans-serif;background:#f5f5f4;margin:0"><div style="max-width:520px;margin:40px auto;background:#fff;border-radius:8px;overflow:hidden">
 <div style="background:#ea580c;color:#fff;padding:16px 20px;font-weight:bold;font-size:18px">Gruppo P&amp;C</div>

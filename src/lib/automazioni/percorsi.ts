@@ -152,7 +152,9 @@ export function esitiPossibili(fase: string): string[] {
   // la chiamata del commerciale: lui fissa l'appuntamento, la rimanda (nuova chiamata) o, se il cliente non risponde, torna al centralino
   if (fase === "APPUNTAMENTO_TELEFONICO") return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "NON_RISPONDE", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
   if (FASI_APPUNTAMENTO.includes(fase)) return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
-  if (fase === "FUORI_REGIONE" || fase === "NON_INTERESSATO") return ["IN_TARGET"]; // riapertura esplicita
+  if (fase === "FUORI_REGIONE") return ["IN_TARGET"]; // riapertura esplicita
+  // «Recupero contatti»: un non interessato si può richiamare in ogni momento ed esitare come alla prima chiamata
+  if (fase === "NON_INTERESSATO") return ["IN_TARGET", ...PREQUALIFICA.filter((e) => e !== "NON_INTERESSATO")];
   return PREQUALIFICA;
 }
 

@@ -19,7 +19,9 @@ test("prima la classificazione geografica, poi la prequalifica", () => {
   assert.ok(esitiPossibili("IN_TARGET").includes("NON_RISPONDE"));
   assert.ok(!esitiPossibili("IN_TARGET").includes("FUORI_REGIONE")); // fuori regione solo alla classificazione
   assert.ok(esitiPossibili("APPUNTAMENTO_CASA").includes("APPUNTAMENTO_ANNULLATO"));
-  assert.deepEqual(esitiPossibili("NON_INTERESSATO"), ["IN_TARGET"]);
+  assert.deepEqual(esitiPossibili("FUORI_REGIONE"), ["IN_TARGET"]);
+  // recupero contatti: il non interessato si richiama ed esita come alla prima chiamata
+  assert.ok(esitiPossibili("NON_INTERESSATO").includes("APPUNTAMENTO_CASA") && esitiPossibili("NON_INTERESSATO").includes("NON_RISPONDE") && !esitiPossibili("NON_INTERESSATO").includes("NON_INTERESSATO"));
 });
 
 test("scadenze dopo l'esito", () => {
@@ -51,8 +53,8 @@ test("testi delle email: niente segnaposto vuoti, disiscrizione solo ai clienti"
   assert.ok(cliente.testo.includes("Prodotto di interesse: Pergola"));
   assert.ok(cliente.testo.includes("011 19887497"));
   assert.ok(!/undefined|null|\{\{|~Contact/.test(cliente.testo));
-  assert.ok(testoEmail(cliente, link).includes("Non vuoi più ricevere email?"));
-  assert.ok(htmlEmail(cliente, link).includes("Non voglio più ricevere email"));
+  assert.ok(testoEmail(cliente, link).includes("Non vuoi più ricevere email promozionali?"));
+  assert.ok(htmlEmail(cliente, link).includes("Non voglio più ricevere email promozionali"));
   const interna = componiEmail("call-requested", d, link, "scheduled-first-contact");
   assert.equal(interna.oggetto, "[CRM P&C] Richiama il contatto interessato — Mario Rossi");
   assert.ok(interna.testo.includes("https://crm/lead?id=1"));

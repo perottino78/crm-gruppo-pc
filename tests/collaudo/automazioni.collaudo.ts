@@ -100,7 +100,7 @@ async function main() {
   g.__utente = alessia;
   verifica((await redirectA(esitoLead(fd({ leadId: id, esito: "DA_RICHIAMARE" }))))?.replace(/\+/g, " ").includes("Indica data e ora del ricontatto"), "il ricontatto vuole la data");
 
-  console.log("6. Il cliente si disiscrive: le email al cliente si fermano, quelle interne no");
+  console.log("6. Il cliente si disiscrive: si fermano solo le email promozionali, quelle di servizio e interne no");
   const res = await disiscrizione(new NextRequest(linkDisiscrizione(id).replace(/^https?:\/\/[^/]+/, "http://localhost")));
   verifica(res.status === 200 && (await prisma.lead.findUniqueOrThrow({ where: { id } })).disiscritto, "disiscritto dal link");
   verifica((await disiscrizione(new NextRequest(`http://localhost/api/disiscrizione?l=${id}&t=falsa`))).status === 400, "link falsificato rifiutato");
@@ -108,7 +108,7 @@ async function main() {
   await registraEsito({ leadId: id, esito: "DA_RICHIAMARE", data: R, utenteNome: "Alessia" }, ora());
   await esegui();
   const reg = await prisma.emailLead.findFirstOrThrow({ where: { leadId: id, chiave: "callback-confirmed" } });
-  verifica(reg.stato === "SOPPRESSA" && reg.motivo === "il cliente si è disiscritto", "conferma del ricontatto non inviata (disiscritto)");
+  verifica(reg.stato === "INVIATA", "la conferma del ricontatto (email di servizio) parte lo stesso", reg);
   verifica((await prossimi(id))[0] === "DA_RICHIAMARE#1@2026-11-10T15:30", "chiamata al centralino il giorno R alle 15:30", await prossimi(id));
   vai("2026-11-10T15:31"); const n6 = posta.length; await esegui();
   verifica(posta.length === n6 + 1 && oggetti().at(-1)!.includes("Richiama il contatto interessato") && (await prossimi(id))[0] === "DA_RICHIAMARE#2@2026-11-11T15:30", "R inviata, R+1 programmata", await prossimi(id));

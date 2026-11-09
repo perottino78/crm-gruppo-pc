@@ -38,8 +38,11 @@ export type DatiLeadEmail = {
 };
 
 export type Link = { lead: string; disiscrizione?: string };
-export type Modello = { chiave: string; versione: number; categoria: "CLIENTE" | "INTERNA" };
-export type EmailPronta = Modello & { oggetto: string; testo: string };
+// commerciale = promozionale (lettere di vendita, promozioni, «restiamo in contatto»): non va a chi si è disiscritto.
+// Le altre email al cliente sono di servizio (richiesta ricevuta, appuntamento, ricontatto…) e partono sempre.
+export type Modello = { chiave: string; versione: number; categoria: "CLIENTE" | "INTERNA"; commerciale?: boolean };
+// html: corpo scritto in HTML dal Marketing (al posto della grafica standard costruita dal testo)
+export type EmailPronta = Modello & { oggetto: string; testo: string; html?: string };
 
 export const nomeProprio = (nome: string) => nome.trim().split(/\s+/)[0] ?? nome;
 
@@ -99,19 +102,19 @@ export const MODELLI: Record<string, Modello> = {
   "appointment-reminder-seller": { chiave: "appointment-reminder-seller", versione: 1, categoria: "INTERNA" },
   "appointment-cancelled-seller": { chiave: "appointment-cancelled-seller", versione: 1, categoria: "INTERNA" },
   "cancellation-follow-up-requested": { chiave: "cancellation-follow-up-requested", versione: 1, categoria: "INTERNA" },
-  "lost-recovery-promotion": { chiave: "lost-recovery-promotion", versione: 1, categoria: "CLIENTE" },
+  "lost-recovery-promotion": { chiave: "lost-recovery-promotion", versione: 1, categoria: "CLIENTE", commerciale: true },
   "lost-recovery-call-requested": { chiave: "lost-recovery-call-requested", versione: 1, categoria: "INTERNA" },
-  "sales-letter-1": { chiave: "sales-letter-1", versione: 1, categoria: "CLIENTE" },
-  "sales-letter-2": { chiave: "sales-letter-2", versione: 2, categoria: "CLIENTE" },
-  "sales-letter-3": { chiave: "sales-letter-3", versione: 2, categoria: "CLIENTE" },
-  "sales-letter-4": { chiave: "sales-letter-4", versione: 2, categoria: "CLIENTE" },
+  "sales-letter-1": { chiave: "sales-letter-1", versione: 1, categoria: "CLIENTE", commerciale: true },
+  "sales-letter-2": { chiave: "sales-letter-2", versione: 2, categoria: "CLIENTE", commerciale: true },
+  "sales-letter-3": { chiave: "sales-letter-3", versione: 2, categoria: "CLIENTE", commerciale: true },
+  "sales-letter-4": { chiave: "sales-letter-4", versione: 2, categoria: "CLIENTE", commerciale: true },
   "qualification-requested": { chiave: "qualification-requested", versione: 1, categoria: "INTERNA" },
   "request-received": { chiave: "request-received", versione: 1, categoria: "CLIENTE" },
   "region-not-served": { chiave: "region-not-served", versione: 1, categoria: "CLIENTE" },
   "callback-confirmed": { chiave: "callback-confirmed", versione: 1, categoria: "CLIENTE" },
   "call-requested": { chiave: "call-requested", versione: 1, categoria: "INTERNA" },
   "call-unanswered-contact": { chiave: "call-unanswered-contact", versione: 1, categoria: "CLIENTE" },
-  "interest-closed": { chiave: "interest-closed", versione: 1, categoria: "CLIENTE" },
+  "interest-closed": { chiave: "interest-closed", versione: 1, categoria: "CLIENTE", commerciale: true },
 };
 
 /** Compone l'email del modello `chiave` per il lead. `variante` serve alle chiamate al centralino. */
@@ -235,9 +238,10 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 
 /** Versione HTML: fascia arancione P&C, testo con i link cliccabili, piè di pagina con la disiscrizione per i clienti. */
 export function htmlEmail(e: EmailPronta, link: Link): string {
+  if (e.html) return htmlConPiede(e.html, e.categoria === "CLIENTE" ? link.disiscrizione : undefined);
   const corpo = esc(e.testo).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" style="color:#c2410c">$1</a>').replace(/\n/g, "<br>");
   const piede = e.categoria === "CLIENTE" && link.disiscrizione
-    ? `<p style="font-size:11px;color:#888;margin-top:24px">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(link.disiscrizione)}" style="color:#888">Non voglio più ricevere email</a>.</p>`
+    ? `<p style="font-size:11px;color:#888;margin-top:24px">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(link.disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a>.</p>`
     : "";
   return `<!doctype html><html><body style="margin:0;background:#f5f5f4;font-family:Arial,Helvetica,sans-serif">
 <div style="max-width:600px;margin:0 auto;background:#fff">
@@ -246,9 +250,17 @@ export function htmlEmail(e: EmailPronta, link: Link): string {
 </div></body></html>`;
 }
 
+/** Template HTML del Marketing: {disiscrizione} diventa il link; per i clienti, se manca, il piede con la disiscrizione si aggiunge in fondo. */
+function htmlConPiede(html: string, disiscrizione: string | undefined): string {
+  if (!disiscrizione) return html.replace(/\{\s*disiscrizione\s*\}/gi, "");
+  if (/\{\s*disiscrizione\s*\}/i.test(html)) return html.replace(/\{\s*disiscrizione\s*\}/gi, esc(disiscrizione));
+  const piede = `<p style="font-size:11px;color:#888;text-align:center;margin:24px 0">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a>.</p>`;
+  return /<\/body>/i.test(html) ? html.replace(/<\/body>/i, `${piede}</body>`) : `${html}${piede}`;
+}
+
 /** Testo semplice con la riga di disiscrizione (per i programmi di posta che non mostrano l'HTML). */
 export function testoEmail(e: EmailPronta, link: Link): string {
-  return e.categoria === "CLIENTE" && link.disiscrizione ? `${e.testo}\n\n—\nNon vuoi più ricevere email? ${link.disiscrizione}` : e.testo;
+  return e.categoria === "CLIENTE" && link.disiscrizione ? `${e.testo}\n\n—\nNon vuoi più ricevere email promozionali? ${link.disiscrizione}` : e.testo;
 }
 
 /** Le lettere di vendita (Fase 2): presentano l'azienda mentre il cliente aspetta l'appuntamento. */
