@@ -39,10 +39,11 @@ test("lead appesi: visita dopo l'arrivo del lead; un ricontatto concordato dopo 
   const r = leadDaAvanzare(leads, a, clienti);
   assert.deepEqual(r.map((x) => [x.leadId, x.appuntamentoId, x.esito, x.utenteId]), [["l1", "b1", "APPUNTAMENTO_CASA", "venditore"], ["l3", "b3", "APPUNTAMENTO_SHOWROOM", "u1"]]);
   assert.deepEqual(leadDaAvanzare(leads, a, clienti, new Set(["b1"])).map((x) => x.leadId), ["l3"]);
-  // i ricontatti del centralino (telefonista o appuntamento telefonico) non sono visite
+  // i ricontatti del centralino (appuntamenti della telefonista) non contano
   assert.deepEqual(leadDaAvanzare(leads, a, clienti, new Set(), new Set(["venditore"])).map((x) => x.leadId), ["l3"]);
+  // la telefonata fissata per il commerciale diventa «chiamata con commerciale»
   a[1].tipo = "TELEFONICO";
-  assert.deepEqual(leadDaAvanzare(leads, a, clienti).map((x) => x.leadId), ["l1"]);
+  assert.deepEqual(leadDaAvanzare(leads, a, clienti).map((x) => [x.leadId, x.esito]), [["l1", "APPUNTAMENTO_CASA"], ["l3", "APPUNTAMENTO_TELEFONICO"]]);
 });
 
 test("lead appesi: visita precedente all'arrivo del lead non conta", () => {

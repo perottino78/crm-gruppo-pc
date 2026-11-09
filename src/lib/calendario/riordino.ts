@@ -50,18 +50,18 @@ export function doppioniImportati(appuntamenti: AppRiordino[], clienti: ClienteR
 /** Fasi del lead in cui la telefonista deve ancora fissare l'appuntamento. */
 export const FASI_DA_FISSARE = ["NUOVO", "IN_TARGET", "CONTATTATO", "NON_RISPONDE", "DA_RICHIAMARE", "APPUNTAMENTO_ANNULLATO", "RECUPERO"];
 
-export type LeadDaAvanzare = { leadId: string; appuntamentoId: string; esito: "APPUNTAMENTO_CASA" | "APPUNTAMENTO_SHOWROOM"; dataOra: Date; utenteId: string; luogo: string | null; clienteId: string };
+export type LeadDaAvanzare = { leadId: string; appuntamentoId: string; esito: "APPUNTAMENTO_CASA" | "APPUNTAMENTO_SHOWROOM" | "APPUNTAMENTO_TELEFONICO"; dataOra: Date; utenteId: string; luogo: string | null; clienteId: string };
 
 /**
  * Lead appesi la cui persona ha già un appuntamento (non annullato) dopo l'arrivo del lead (dopo l'ultimo esito se è un ricontatto o un annullamento):
- * l'appuntamento più recente diventa quello del lead. In showroom se luogo o titolo lo dicono, altrimenti a casa.
+ * l'appuntamento più recente diventa quello del lead. Telefonico = «chiamata con commerciale»; in showroom se luogo o titolo lo dicono, altrimenti a casa.
  * `esclusi` = appuntamenti che stanno per essere tolti come doppioni; `centralino` = telefoniste: i loro «appuntamenti» (e quelli telefonici)
  * sono ricontatti, non visite del venditore, e non contano.
  */
 export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[], clienti: ClienteRiordino[], esclusi = new Set<string>(), centralino = new Set<string>()): LeadDaAvanzare[] {
   const perId = new Map(clienti.map((c) => [c.id, c]));
   const perChiave = new Map<string, AppRiordino[]>();
-  for (const a of appuntamenti.filter((x) => x.stato !== "ANNULLATO" && !esclusi.has(x.id) && x.tipo !== "TELEFONICO" && !centralino.has(x.utenteId)))
+  for (const a of appuntamenti.filter((x) => x.stato !== "ANNULLATO" && !esclusi.has(x.id) && !centralino.has(x.utenteId)))
     for (const k of chiaviCliente(perId.get(a.clienteId), a.clienteId)) perChiave.set(k, [...(perChiave.get(k) ?? []), a]);
   const out: LeadDaAvanzare[] = [];
   for (const l of leads.filter((x) => FASI_DA_FISSARE.includes(x.fase))) {
@@ -75,7 +75,7 @@ export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[
       .sort((x, y) => y.dataOra.getTime() - x.dataOra.getTime())[0];
     if (!app) continue;
     const showroom = /show ?room|in sede|presso (la )?sede|negozio/i.test(`${app.luogo ?? ""} ${app.titolo ?? ""}`);
-    out.push({ leadId: l.id, appuntamentoId: app.id, esito: showroom ? "APPUNTAMENTO_SHOWROOM" : "APPUNTAMENTO_CASA", dataOra: app.dataOra, utenteId: app.utenteId, luogo: app.luogo, clienteId: app.clienteId });
+    out.push({ leadId: l.id, appuntamentoId: app.id, esito: app.tipo === "TELEFONICO" ? "APPUNTAMENTO_TELEFONICO" : showroom ? "APPUNTAMENTO_SHOWROOM" : "APPUNTAMENTO_CASA", dataOra: app.dataOra, utenteId: app.utenteId, luogo: app.luogo, clienteId: app.clienteId });
   }
   return out;
 }

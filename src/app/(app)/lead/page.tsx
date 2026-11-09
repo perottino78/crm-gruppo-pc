@@ -38,7 +38,10 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const inizioOggi = inizioGiorno(oggi);
   const fineOggi = inizioGiorno(aggiungiGiorni(oggi, 1));
   const aperti: Prisma.LeadWhereInput = { fase: { in: FASI_APERTE } };
-  const FASI_APPUNTAMENTO = ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO"];
+  // visite già passate: non sono un compito del centralino (le esita il venditore dal calendario)
+  const VISITE = ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO"];
+  // «chiamata con commerciale»: il task è del commerciale che chiama, non della telefonista
+  const soloLeChiamateMie: Prisma.LeadWhereInput = u ? { NOT: { fase: "APPUNTAMENTO_TELEFONICO", OR: [{ venditoreId: null }, { venditoreId: { not: u.id } }] } } : {};
   const elenco = !!q || !!p.fase || vista !== "dafare";
 
   const filtroElenco: Prisma.LeadWhereInput = q
@@ -48,11 +51,11 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const [daFare, inProgramma, lavoratiOggi, risultati, totali, stato, fatto] = await Promise.all([
     elenco ? Promise.resolve([] as Riga[]) : prisma.lead.findMany({
       // un appuntamento già passato non è un compito della telefonista (lo esita il venditore dal calendario)
-      where: { AND: [scope, aperti, { OR: [{ scadenzaAzione: null }, { scadenzaAzione: { lt: fineOggi } }] }, { NOT: { fase: { in: FASI_APPUNTAMENTO }, scadenzaAzione: { lt: inizioOggi } } }] },
+      where: { AND: [scope, aperti, { OR: [{ scadenzaAzione: null }, { scadenzaAzione: { lt: fineOggi } }] }, { NOT: { fase: { in: VISITE }, scadenzaAzione: { lt: inizioOggi } } }, soloLeChiamateMie] },
       orderBy: [{ scadenzaAzione: { sort: "asc", nulls: "first" } }, { createdAt: "asc" }], take: 200, select: SELEZIONE,
     }),
     elenco ? Promise.resolve([] as Riga[]) : prisma.lead.findMany({
-      where: { AND: [scope, aperti, { scadenzaAzione: { gte: fineOggi } }] },
+      where: { AND: [scope, aperti, { scadenzaAzione: { gte: fineOggi } }, soloLeChiamateMie] },
       orderBy: { scadenzaAzione: "asc" }, take: 100, select: SELEZIONE,
     }),
     elenco ? Promise.resolve([]) : prisma.lead.findMany({
