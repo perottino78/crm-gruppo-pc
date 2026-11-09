@@ -645,7 +645,8 @@ export async function aggiornaSconto(formData: FormData) {
 
   await prisma.preventivo.update({
     where: { id },
-    data: { scontoPercentuale: Number.isFinite(scontoPercentuale) ? scontoPercentuale : 0 },
+    // fino a 5 decimali, per far quadrare il totale con una cifra concordata
+    data: { scontoPercentuale: Number.isFinite(scontoPercentuale) ? Math.round(scontoPercentuale * 1e5) / 1e5 : 0 },
   });
   await ricalcolaTotali(id);
   revalidatePath(`/preventivi/${id}`);

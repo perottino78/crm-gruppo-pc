@@ -10,7 +10,7 @@ import { perInput } from "@/lib/calendario/tempo";
 import { FASI_LEAD, ESITI, PERCORSI, esitiPossibili } from "@/lib/automazioni/percorsi";
 import { CONTATTI } from "@/lib/automazioni/email";
 import { leggiNoteLead, provenienzaLead } from "@/lib/automazioni/note-lead";
-import { esitoLead, assegnaVenditoreLead, riassegnaLead, aggiungiNotaLead, spostaProssimaAttivita } from "@/app/lead-percorso-actions";
+import { esitoLead, assegnaVenditoreLead, riassegnaLead, aggiungiNotaLead, spostaProssimaAttivita, modificaDatiLead } from "@/app/lead-percorso-actions";
 import EsitoLead from "@/components/lead/EsitoLead";
 import RisposteModulo from "@/components/lead/RisposteModulo";
 
@@ -20,7 +20,7 @@ const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome",
 const STATO_EMAIL: Record<string, string> = { INVIATA: "inviata", FALLITA: "non inviata", SOPPRESSA: "non inviata (bloccata)", PREPARATA: "in preparazione", RIMBALZATA: "tornata indietro" };
 const TITOLI: Record<string, string> = {
   "lead.creato": "Lead arrivato", "lead.esito": "Esito registrato", "lead.venditore": "Venditore", "lead.assegnato": "Assegnazione",
-  "lead.nota": "Nota", "lead.spostato": "Prossima attività", "lead.non_gestito": "Non gestito", "lead.recupero": "Recupero",
+  "lead.nota": "Nota", "lead.dati": "Dati modificati", "lead.spostato": "Prossima attività", "lead.non_gestito": "Non gestito", "lead.recupero": "Recupero",
   "email.inviata": "Email inviata", "email.fallita": "Email non inviata", "email.soppressa": "Email bloccata",
 };
 
@@ -92,6 +92,22 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
           <li className="text-neutral-600">🕒 Arrivato {quando(l.createdAt)}{provenienza ? ` ${provenienza}` : ""}</li>
           {l.recuperi > 0 && <li className="text-teal-800">♻️ Recuperato {l.recuperi} {l.recuperi === 1 ? "volta" : "volte"}</li>}
         </ul>
+        <details className="mt-3 rounded border border-neutral-200 px-3 py-2">
+          <summary className="cursor-pointer select-none text-xs font-semibold text-neutral-700">✏️ Modifica i dati del lead</summary>
+          <form action={modificaDatiLead} className="mt-2 grid gap-2 sm:grid-cols-2">
+            <input type="hidden" name="leadId" value={l.id} /><input type="hidden" name="ritorno" value={ritorno} />
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">Nome e cognome<input name="nome" required defaultValue={l.nome} className={inp} /></label>
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">Telefono<input name="telefono" type="tel" defaultValue={l.telefono ?? ""} className={inp} /></label>
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">Email<input name="email" type="email" defaultValue={l.email ?? ""} className={inp} /></label>
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">Prodotto di interesse<input name="prodotto" defaultValue={l.prodotto ?? ""} className={inp} /></label>
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">Comune<input name="comune" defaultValue={l.comune ?? ""} className={inp} /></label>
+            <label className="flex flex-col gap-1 text-xs font-semibold text-neutral-700">CAP<input name="cap" inputMode="numeric" defaultValue={l.cap ?? ""} className={inp} /></label>
+            <div className="sm:col-span-2 flex items-center gap-2">
+              <button className="btn-3d btn-3d-blue px-4 py-1.5 text-sm">💾 Salva i dati</button>
+              <span className="text-[11px] text-neutral-500">Resta un lead (non diventa cliente). La modifica resta nella cronologia.</span>
+            </div>
+          </form>
+        </details>
         <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-neutral-100 pt-3 text-sm">
           <span className="text-neutral-600">Assegnato a <b className="text-neutral-900">{l.telefonista?.nome ?? "nessuno"}</b></span>
           {persone.length > 0 && (
