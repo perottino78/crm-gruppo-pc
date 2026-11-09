@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { doppioniImportati, leadDaAvanzare, FASI_DA_FISSARE } from "@/lib/calendario/riordino";
+import { doppioniImportati, leadDaAvanzare, appuntamentiDeiLead, FASI_DA_FISSARE } from "@/lib/calendario/riordino";
 import { ESITI } from "@/lib/automazioni/percorsi";
 
 export const dynamic = "force-dynamic";
@@ -91,6 +91,7 @@ async function esegui(prova: boolean) {
 
 export async function GET(req: NextRequest) {
   if (req.headers.get("x-seed-key") !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (req.nextUrl.searchParams.get("diagnosi") === "1") return NextResponse.json(await diagnosi());
   return NextResponse.json(await esegui(true));
 }
 
@@ -101,4 +102,27 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     return NextResponse.json({ error: String(e).slice(0, 300) }, { status: 500 });
   }
+}
+
+/** Sola lettura: i lead ancora da lavorare e gli appuntamenti trovati per la stessa persona (per capire perché restano appesi). */
+async function diagnosi() {
+  const [appuntamenti, clienti, leads, utenti] = await Promise.all([
+    prisma.appuntamento.findMany({ select: { id: true, chiaveImport: true, clienteId: true, utenteId: true, tipo: true, dataOra: true, stato: true, luogo: true, titolo: true, createdAt: true } }),
+    prisma.cliente.findMany({ select: { id: true, nome: true, telefono: true, cellulare: true, email: true } }),
+    prisma.lead.findMany({
+      where: { fase: { in: FASI_DA_FISSARE } },
+      select: { id: true, nome: true, telefono: true, email: true, fase: true, createdAt: true, scadenzaAzione: true, clienteGenerato: { select: { id: true } }, eventi: { where: { tipo: "lead.esito" }, orderBy: { createdAt: "desc" }, take: 1, select: { createdAt: true, testo: true, utenteNome: true } } },
+    }),
+    prisma.utente.findMany({ select: { id: true, nome: true, ruolo: true } }),
+  ]);
+  const ut = new Map(utenti.map((u) => [u.id, u]));
+  const mappa = appuntamentiDeiLead(
+    leads.map((l) => ({ id: l.id, nome: l.nome, telefono: l.telefono, email: l.email, fase: l.fase, createdAt: l.createdAt, clienteId: l.clienteGenerato?.id ?? null, ultimoEsitoIl: l.eventi[0]?.createdAt ?? null })),
+    appuntamenti, clienti,
+  );
+  const righe = leads.map((l) => ({
+    lead: l.nome, fase: l.fase, arrivato: quando(l.createdAt), ultimoEsito: l.eventi[0] ? `${quando(l.eventi[0].createdAt)} ${l.eventi[0].testo} (${l.eventi[0].utenteNome ?? "?"})` : null,
+    appuntamenti: (mappa.get(l.id) ?? []).map((a) => `${quando(a.dataOra)} · ${a.tipo} · ${a.stato} · ${ut.get(a.utenteId)?.nome ?? "?"} (${ut.get(a.utenteId)?.ruolo ?? "?"}) · ${a.chiaveImport ? "BConsole" : "ONE"} · ${a.titolo ?? ""}`),
+  }));
+  return { leadAperti: leads.length, conAppuntamenti: righe.filter((r) => r.appuntamenti.length).length, righe: righe.filter((r) => r.appuntamenti.length) };
 }
