@@ -368,19 +368,31 @@ login nel `matcher` del middleware.
   Nei «Task di oggi» i lead con appuntamento già passato non compaiono più (li esita il venditore). Collaudo `riordino-appuntamenti` (15).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
   da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
+- **Fatturazione: fatture emesse e DDT di uscita** (ufficio Giorgia; `/fatturazione`, permesso `fatturazione` = AMMINISTRATIVO, uffici FATTURAZIONE/AMMINISTRAZIONE
+  o chiunque abbia `amministrazione`; `src/app/fatturazione-actions.ts`, `src/lib/fatturazione/`: `tabelle.ts` (come BConsole, letto il 9/11/2026: cedente, sezionali
+  P&C «FE», Fotovoltaico «FO», Sconto in fattura «SCF», Plasma «PL», Pura Fonte «PF», R.A «A»; tipi FATTURA/ACCONTO TD02/SALDO/ACCOMPAGNATORIA/DIFFERITA TD24/NOTA_CREDITO TD04/
+  NOTA_DEBITO/PROFORMA; codici IVA con natura; metodi di pagamento con MP e rate F.M.; causali di trasporto, porto, aspetto beni), `calcoli.ts` puro (righe, riepilogo IVA,
+  bollo 2 € oltre 77,47 € esenti, rate, numerazione «N/EST/anno»), `xml.ts` (FatturaPA FPR12, validato con l'XSD 1.2.2 ufficiale), `pdf.ts` (copia di cortesia e DDT),
+  `server.ts` (numeri, `emetti`, righe dall'offerta)). Modelli `FatturaEmessa`/`RigaFatturaEmessa` (BOZZA → PROVA | EMESSA) e `DdtUscita`/`RigaDdtUscita`
+  (BOZZA → DA_FATTURARE → PARZ_FATTURATO/FATTURATO, o CHIUSO). Emissione vera solo con `fatturazione_reale` = "1" (Fatture e DDT › Numerazione, la accende solo
+  l'amministratore): altrimenti numeri «PROVA …», niente vendite. Vera: numero dopo il più alto fra FatturaVendita importate (`progressivoDa`), CRM e ultimo indicato
+  (`fatt_ultimo_<sez>_<anno>`, `ddt_ultimo_<anno>`), lock advisory; crea la `FatturaVendita` (origine `CRM`, chiave `CRM|<id>`, XML) e le scadenze con `creaScadenzeVendita`.
+  Acconto dalla commessa (`propostaDaCommessa`), saldo = righe dell'offerta − acconti fatturati (CRM o BConsole TD02), fattura differita da più DDT dello stesso cliente,
+  nota di credito che storna (fattura collegata). Emessa = non si modifica né elimina. PDF `GET /api/fatturazione/fattura/<id>/pdf`, XML `/xml`, DDT `/api/fatturazione/ddt/<id>/pdf`;
+  ricerca clienti senza scope `/api/fatturazione/clienti`. Fino allo SDI (2027) l'XML si carica a mano. Test `tests/fatturazione/calcoli.test.ts`, collaudo `fatturazione` (29).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 300, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 308, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
@@ -402,6 +414,7 @@ tipi ✓ · test unitari ✓ · collaudi toccati ✓ · `next build` ✓ · se c
 - Consigliato: database di sviluppo separato (ramo Neon) per non far girare le anteprime sul DB di produzione.
 - Documento "flusso pratica per ufficio": cosa fa ciascun ufficio e come usare il CRM.
 - Rilievi/assistenze inseriti prima del 30/10/2026 possono risultare spostati di un'ora (vecchio errore di fuso orario).
-- Fatturazione elettronica verso SDI: avvio previsto 1° gennaio 2027 (emissione fatture di vendita dal CRM).
+- Fatturazione elettronica verso SDI: avvio previsto 1° gennaio 2027. Le fatture si emettono già dal CRM (Fatture e DDT, oggi in modalità PROVA):
+  il giorno del passaggio da BConsole indicare gli ultimi numeri usati e accendere l'emissione vera; scegliere l'intermediario per l'invio allo SDI.
 - Collegamento automatico cassetto fiscale / SDI per le fatture dei fornitori: da scegliere l'intermediario (per ora zip caricati a mano).
 - Foto guida ferro zincato da aggiungere: `public/immagini/tapparelle/guida-ferro-zincato.jpg`.
