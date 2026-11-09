@@ -71,6 +71,8 @@ export const PERCORSI: Record<string, Passo[]> = {
   // Appuntamento fissato con il venditore già scelto
   APPUNTAMENTO_CASA: appuntamento("CASA"),
   APPUNTAMENTO_SHOWROOM: appuntamento("SHOWROOM"),
+  // Telefonata fissata con il commerciale (il cliente vuole parlare direttamente con lui): la vede nel suo calendario all'ora fissata, nessuna email
+  APPUNTAMENTO_TELEFONICO: [],
   // Appuntamento fissato senza venditore: il centralino lo assegna, poi parte il percorso dell'appuntamento
   ASSEGNA_VENDITORE_CASA: [{ tipo: "EMAIL", modello: "seller-assignment-requested", variante: "CASA", a: "CENTRALINO", quando: { subito: true }, nome: "Venditore da assegnare (centralino)" }],
   ASSEGNA_VENDITORE_SHOWROOM: [{ tipo: "EMAIL", modello: "seller-assignment-requested", variante: "SHOWROOM", a: "CENTRALINO", quando: { subito: true }, nome: "Venditore da assegnare (centralino)" }],
@@ -115,6 +117,7 @@ export const FASI_LEAD: Record<string, { nome: string; azione: string | null; ch
   DA_RICHIAMARE: { nome: "Da richiamare", azione: "Ricontatto concordato", colore: "bg-amber-100 text-amber-900" },
   APPUNTAMENTO_CASA: { nome: "Appuntamento a casa", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento in showroom", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
+  APPUNTAMENTO_TELEFONICO: { nome: "Chiamata con commerciale", azione: "Chiamata con commerciale: esita la telefonata", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato", azione: "Definisci il seguito", colore: "bg-red-100 text-red-900" },
   NON_INTERESSATO: { nome: "Non interessato", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
   RECUPERO: { nome: "Da recuperare", azione: "Richiama: gli abbiamo mandato la promozione", colore: "bg-teal-100 text-teal-900" },
@@ -132,15 +135,23 @@ export const ESITI: Record<string, { nome: string; serveData?: "richiamo" | "app
   DA_RICHIAMARE: { nome: "Appuntamento da fissare (ricontatto)", serveData: "richiamo" },
   APPUNTAMENTO_CASA: { nome: "Appuntamento fissato a CASA", serveData: "appuntamento" },
   APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento fissato in SHOWROOM", serveData: "appuntamento" },
+  APPUNTAMENTO_TELEFONICO: { nome: "Chiamata con commerciale", serveData: "appuntamento" },
   APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato" },
   NON_INTERESSATO: { nome: "Non interessato" },
 };
 
-const PREQUALIFICA = ["NON_RISPONDE", "DA_RICHIAMARE", "APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "NON_INTERESSATO"];
+/** Esiti con cui si fissa qualcosa con il commerciale (visita a casa, in showroom o sua telefonata). */
+export const ESITI_APPUNTAMENTO = ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO"];
+/** Fasi «appuntamento fissato» (anche quella dei lead registrati prima del nuovo percorso). */
+export const FASI_APPUNTAMENTO = [...ESITI_APPUNTAMENTO, "APPUNTAMENTO_FISSATO"];
+
+const PREQUALIFICA = ["NON_RISPONDE", "DA_RICHIAMARE", "APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "NON_INTERESSATO"];
 /** Esiti che si possono registrare partendo da una fase (prima la classificazione geografica, poi la prequalifica). */
 export function esitiPossibili(fase: string): string[] {
   if (fase === "NUOVO") return ["IN_TARGET", "FUORI_REGIONE"];
-  if (fase === "APPUNTAMENTO_CASA" || fase === "APPUNTAMENTO_SHOWROOM" || fase === "APPUNTAMENTO_FISSATO") return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
+  // la chiamata del commerciale: lui fissa l'appuntamento, la rimanda (nuova chiamata) o, se il cliente non risponde, torna al centralino
+  if (fase === "APPUNTAMENTO_TELEFONICO") return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "NON_RISPONDE", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
+  if (FASI_APPUNTAMENTO.includes(fase)) return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
   if (fase === "FUORI_REGIONE" || fase === "NON_INTERESSATO") return ["IN_TARGET"]; // riapertura esplicita
   return PREQUALIFICA;
 }
@@ -148,7 +159,7 @@ export function esitiPossibili(fase: string): string[] {
 /** Scadenza dell'azione da fare dopo l'esito (le fasi chiuse non hanno scadenza). */
 export function scadenzaDopoEsito(esito: string, adesso: Date, data?: Date | null): Date | null {
   // appuntamento fissato: la "scadenza" è l'appuntamento stesso
-  if (esito === "DA_RICHIAMARE" || esito === "APPUNTAMENTO_CASA" || esito === "APPUNTAMENTO_SHOWROOM") return data ?? null;
+  if (esito === "DA_RICHIAMARE" || ESITI_APPUNTAMENTO.includes(esito)) return data ?? null;
   if (esito === "NON_RISPONDE") return scadenzaNuovoTentativo(adesso);
   if (esito === "FUORI_REGIONE" || esito === "NON_INTERESSATO") return null;
   return chiusuraGiornata(adesso);

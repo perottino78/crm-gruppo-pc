@@ -20,5 +20,5 @@ test("marketing: pubblicità, listini e nuovi colleghi, ma non amministratori", 
   assert.equal(puoMarketing({ ruolo: "COMMERCIALE", ufficio: "COMMERCIALE" }), false);
   assert.ok(!RUOLI_CREABILI_MARKETING.includes("AMMINISTRATORE") && !RUOLI_CREABILI_MARKETING.includes("AMMINISTRATIVO"));
   assert.deepEqual(scopeLeadWhere({ id: "r", ruolo: "MARKETING" }), {});
-  assert.deepEqual(scopeLeadWhere({ id: "t", ruolo: "TELEFONISTA" }), { telefonistaId: "t" });
+  assert.deepEqual(scopeLeadWhere({ id: "t", ruolo: "TELEFONISTA" }), { OR: [{ telefonistaId: "t" }, { venditoreId: "t", fase: "APPUNTAMENTO_TELEFONICO" }] });
 });

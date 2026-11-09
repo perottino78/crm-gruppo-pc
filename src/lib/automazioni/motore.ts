@@ -7,7 +7,7 @@ import { after } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
-import { PERCORSI, ESITI, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare, MAX_RECUPERI, MESI_RECUPERO_DEFAULT } from "./percorsi";
+import { PERCORSI, ESITI, ESITI_APPUNTAMENTO, quandoPasso, esitiPossibili, scadenzaDopoEsito, faseDelPercorso, daSaltare, MAX_RECUPERI, MESI_RECUPERO_DEFAULT } from "./percorsi";
 import { provenienzaDaFonte } from "@/lib/clienti/provenienza";
 import { eseguiCampagne } from "@/lib/campagne/motore";
 import { chiusuraGiornata, troppoInRitardo, dopoGiorniAlle08 } from "./tempi";
@@ -109,17 +109,27 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
   if (def.serveData && !e.data) return { ok: false, errore: def.serveData === "richiamo" ? "Indica data e ora del ricontatto." : "Indica data e ora dell'appuntamento." };
   if (def.serveData && e.data && e.data.getTime() < adesso.getTime() - 60_000) return { ok: false, errore: "La data indicata è già passata." };
   const quando = e.data ? e.data.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" }) : null;
-  const appuntamento = e.esito === "APPUNTAMENTO_CASA" || e.esito === "APPUNTAMENTO_SHOWROOM";
+  const appuntamento = ESITI_APPUNTAMENTO.includes(e.esito);
+  if (e.esito === "APPUNTAMENTO_TELEFONICO" && !e.venditoreId) return { ok: false, errore: "Scegli il commerciale che farà la telefonata." };
   const indirizzo = e.indirizzo?.trim() || (e.esito === "APPUNTAMENTO_CASA" ? [lead.cap, lead.comune].filter(Boolean).join(" ") : "") || null;
   if (e.esito === "APPUNTAMENTO_CASA" && !indirizzo) return { ok: false, errore: "Indica l'indirizzo dell'appuntamento a casa." };
   const venditore = appuntamento && e.venditoreId ? await prisma.utente.findUnique({ where: { id: e.venditoreId }, select: { id: true, nome: true } }) : null;
   if (appuntamento && e.venditoreId && !venditore) return { ok: false, errore: "Venditore non trovato." };
   // appuntamento senza venditore: prima il centralino lo assegna, poi partono conferme e lettere
   const percorso = appuntamento && !venditore ? e.esito.replace("APPUNTAMENTO_", "ASSEGNA_VENDITORE_") : e.esito;
+  // esito della chiamata del commerciale: la telefonata in calendario si chiude (svolta o annullata) e un nuovo appuntamento ne crea uno a parte
+  const chiudeChiamata = lead.fase === "APPUNTAMENTO_TELEFONICO" && e.esito !== "APPUNTAMENTO_TELEFONICO" && !!lead.appuntamentoId;
   await prisma.$transaction(async (tx) => {
+    if (chiudeChiamata) {
+      await tx.appuntamento.updateMany({
+        where: { id: lead.appuntamentoId!, stato: { not: "ANNULLATO" } },
+        data: { stato: e.esito === "APPUNTAMENTO_ANNULLATO" ? "ANNULLATO" : "COMPLETATO", esito: `${def.nome}${e.note ? ` · ${e.note}` : ""}` },
+      });
+    }
     await tx.lead.update({
       where: { id: e.leadId },
       data: {
+        ...(chiudeChiamata ? { appuntamentoId: null } : {}),
         fase: e.esito,
         scadenzaAzione: scadenzaDopoEsito(e.esito, adesso, e.data),
         nonGestitoIl: null,
@@ -138,7 +148,7 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
 /** Il centralino assegna (o cambia) il venditore di un appuntamento: partono conferme, lettere e promemoria. */
 export async function assegnaVenditore(leadId: string, venditoreId: string, utenteNome?: string | null, adesso = new Date()): Promise<{ ok: true } | { ok: false; errore: string }> {
   const lead = await prisma.lead.findUnique({ where: { id: leadId } });
-  if (!lead || (lead.fase !== "APPUNTAMENTO_CASA" && lead.fase !== "APPUNTAMENTO_SHOWROOM") || !lead.appuntamentoIl) return { ok: false, errore: "Il lead non ha un appuntamento fissato." };
+  if (!lead || !ESITI_APPUNTAMENTO.includes(lead.fase) || !lead.appuntamentoIl) return { ok: false, errore: "Il lead non ha un appuntamento fissato." };
   if (lead.appuntamentoIl.getTime() < adesso.getTime()) return { ok: false, errore: "L'appuntamento è già passato." };
   const venditore = await prisma.utente.findUnique({ where: { id: venditoreId }, select: { id: true, nome: true } });
   if (!venditore) return { ok: false, errore: "Venditore non trovato." };
@@ -164,8 +174,9 @@ export async function sincronizzaCalendario(leadId: string, utenteNome?: string 
       if (esistente) await prisma.appuntamento.update({ where: { id: esistente.id }, data: { stato: "ANNULLATO" } });
       return;
     }
-    if ((lead.fase !== "APPUNTAMENTO_CASA" && lead.fase !== "APPUNTAMENTO_SHOWROOM") || !lead.venditoreId || !lead.appuntamentoIl) return;
+    if (!ESITI_APPUNTAMENTO.includes(lead.fase) || !lead.venditoreId || !lead.appuntamentoIl) return;
     const casa = lead.fase === "APPUNTAMENTO_CASA";
+    const telefonata = lead.fase === "APPUNTAMENTO_TELEFONICO";
     const clienteId = lead.clienteGenerato?.id ?? (await prisma.cliente.create({
       data: {
         nome: lead.nome, telefono: lead.telefono, email: lead.email, brandId: lead.brandId, leadOrigineId: lead.id,
@@ -174,13 +185,13 @@ export async function sincronizzaCalendario(leadId: string, utenteNome?: string 
       },
     })).id;
     const dati = {
-      dataOra: lead.appuntamentoIl, utenteId: lead.venditoreId, stato: "PROGRAMMATO", durataMin: 90,
-      titolo: `Appuntamento ${casa ? "a casa" : "in showroom"}${lead.prodotto ? ` — ${lead.prodotto}` : ""}`,
-      luogo: casa ? lead.indirizzoAppuntamento : CONTATTI.showroom, note: lead.note,
+      dataOra: lead.appuntamentoIl, utenteId: lead.venditoreId, stato: "PROGRAMMATO", durataMin: telefonata ? 15 : 90, tipo: telefonata ? "TELEFONICO" : "COMMERCIALE",
+      titolo: telefonata ? `Telefonata al cliente${lead.prodotto ? ` — ${lead.prodotto}` : ""}` : `Appuntamento ${casa ? "a casa" : "in showroom"}${lead.prodotto ? ` — ${lead.prodotto}` : ""}`,
+      luogo: telefonata ? (lead.telefono ? `📞 ${lead.telefono}` : null) : casa ? lead.indirizzoAppuntamento : CONTATTI.showroom, note: lead.note,
     };
     if (esistente) await prisma.appuntamento.update({ where: { id: esistente.id }, data: dati });
     else {
-      const a = await prisma.appuntamento.create({ data: { ...dati, clienteId, tipo: "COMMERCIALE", creatoDaNome: utenteNome ?? "Lead da lavorare" } });
+      const a = await prisma.appuntamento.create({ data: { ...dati, clienteId, creatoDaNome: utenteNome ?? "Lead da lavorare" } });
       await prisma.lead.update({ where: { id: leadId }, data: { appuntamentoId: a.id } });
     }
   } catch (err) {

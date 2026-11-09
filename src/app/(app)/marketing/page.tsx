@@ -18,7 +18,7 @@ const TAPPE: { titolo: string; colore: string; fasi: string[]; percorsi: string[
   { titolo: "1 · Arriva il lead", colore: "#2563eb", fasi: ["NUOVO"], percorsi: ["NUOVO"], spiega: "Da Facebook, sito, landing o simulatore: avviso al centralino per classificarlo." },
   { titolo: "2 · Classificazione", colore: "#0d9488", fasi: ["IN_TARGET", "FUORI_REGIONE"], percorsi: ["IN_TARGET", "FUORI_REGIONE"], spiega: "In target: grazie al cliente e chiamata. Fuori regione: email di cortesia." },
   { titolo: "3 · Telefonate", colore: "#ca8a04", fasi: ["NON_RISPONDE", "DA_RICHIAMARE"], percorsi: ["NON_RISPONDE", "DA_RICHIAMARE"], spiega: "Solleciti al centralino e email «abbiamo provato a chiamarti» / «ti richiameremo»." },
-  { titolo: "4 · Appuntamento", colore: "#ea580c", fasi: ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO"], percorsi: ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "ASSEGNA_VENDITORE_CASA", "APPUNTAMENTO_ANNULLATO"], spiega: "Conferme a cliente e venditore, 4 lettere di vendita, promemoria il giorno prima." },
+  { titolo: "4 · Appuntamento", colore: "#ea580c", fasi: ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "APPUNTAMENTO_FISSATO"], percorsi: ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "ASSEGNA_VENDITORE_CASA", "APPUNTAMENTO_ANNULLATO"], spiega: "Conferme a cliente e venditore, 4 lettere di vendita, promemoria il giorno prima." },
   { titolo: "5 · Non interessato e recupero", colore: "#7c3aed", fasi: ["NON_INTERESSATO", "RECUPERO"], percorsi: ["NON_INTERESSATO", "RECUPERO"], spiega: "Email di saluto; dopo qualche mese la promozione del momento e una nuova chiamata." },
 ];
 

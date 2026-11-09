@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { scopeLeadWhere } from "@/lib/scope";
 import { perInput } from "@/lib/calendario/tempo";
-import { FASI_LEAD, ESITI, PERCORSI, esitiPossibili } from "@/lib/automazioni/percorsi";
+import { FASI_LEAD, ESITI, PERCORSI, esitiPossibili, ESITI_APPUNTAMENTO } from "@/lib/automazioni/percorsi";
 import { CONTATTI } from "@/lib/automazioni/email";
 import { leggiNoteLead, provenienzaLead } from "@/lib/automazioni/note-lead";
 import { esitoLead, assegnaVenditoreLead, riassegnaLead, aggiungiNotaLead, spostaProssimaAttivita, modificaDatiLead } from "@/app/lead-percorso-actions";
@@ -51,7 +51,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
   const provenienza = provenienzaLead(l.fonte, note);
   const scaduto = !!l.scadenzaAzione && l.scadenzaAzione.getTime() < Date.now() && !fase.chiusa;
   const ritorno = `/lead/${l.id}`;
-  const appuntamento = (l.fase === "APPUNTAMENTO_CASA" || l.fase === "APPUNTAMENTO_SHOWROOM") && l.appuntamentoIl;
+  const appuntamento = ESITI_APPUNTAMENTO.includes(l.fase) && l.appuntamentoIl;
   const ultimoEsito = l.eventi.find((e) => e.tipo === "lead.esito");
   const nomeVenditore = venditori.find((v) => v.id === l.venditoreId)?.nome;
 
@@ -149,7 +149,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
 
         {appuntamento && (
           <div className="mb-3 space-y-2 rounded border border-purple-200 bg-purple-50 px-3 py-2 text-sm">
-            <p>📅 <b>{quando(l.appuntamentoIl!)}</b> · {l.fase === "APPUNTAMENTO_CASA" ? `a casa: ${l.indirizzoAppuntamento ?? "—"}` : `showroom: ${CONTATTI.showroom}`}</p>
+            <p>📅 <b>{quando(l.appuntamentoIl!)}</b> · {l.fase === "APPUNTAMENTO_CASA" ? `a casa: ${l.indirizzoAppuntamento ?? "—"}` : l.fase === "APPUNTAMENTO_TELEFONICO" ? "📞 la chiama il commerciale" : `showroom: ${CONTATTI.showroom}`}</p>
             <p>{l.venditoreId ? <>Venditore <b>{nomeVenditore ?? "—"}</b> · <Link href={`/calendario?giorno=${perInput(l.appuntamentoIl!).slice(0, 10)}`} className="underline">vedi in calendario</Link></> : <b className="text-red-700">⚠️ Venditore da assegnare</b>}</p>
             <form action={assegnaVenditoreLead} className="flex flex-wrap items-center gap-1">
               <input type="hidden" name="leadId" value={l.id} /><input type="hidden" name="ritorno" value={ritorno} />

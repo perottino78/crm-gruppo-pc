@@ -58,7 +58,7 @@ test("regioni e province", () => {
 test("visibilità dei dati: suoi, zona, tutto", () => {
   const prop = { id: "u1", ruolo: "COMMERCIALE" };
   assert.deepEqual(scopePreventivoWhere(prop), { commercialeId: "u1" });
-  assert.deepEqual(scopeLeadWhere(prop), { telefonistaId: "u1" });
+  assert.deepEqual(scopeLeadWhere(prop), { OR: [{ telefonistaId: "u1" }, { venditoreId: "u1", fase: "APPUNTAMENTO_TELEFONICO" }] });
   const zona = { id: "r1", ruolo: "COMMERCIALE", profiloId: "z", permessi: [], visibilita: "ZONA", visibileProvince: ["GE", "SP"], visibileUtenti: ["u1", "u2"] };
   const c = JSON.stringify(scopeClienteWhere(zona));
   assert.ok(c.includes('"responsabileId":{"in":["r1","u1","u2"]}') && c.includes('"provincia":{"in":') && c.includes("Genova"));
