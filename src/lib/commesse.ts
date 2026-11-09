@@ -17,3 +17,14 @@ export function numeroCommessa(c: { numero: number; anno: number }) {
 
 export const eur = (n: number) =>
   n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
+
+/** Consegna prevista del progetto: testo e colore (rossa se scaduta e il lavoro non è finito, arancione se entro 7 giorni). */
+export function statoConsegna(consegna: Date | null | undefined, stato: string, oggi = new Date()): { testo: string; cls: string } {
+  if (!consegna) return { testo: "—", cls: "text-neutral-400" };
+  const testo = consegna.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "2-digit" });
+  if (["LAVORI_ESEGUITI", "CHIUSA", "ANNULLATA"].includes(stato)) return { testo, cls: "text-neutral-700" };
+  const giorni = Math.floor((consegna.getTime() - oggi.getTime()) / 86400000);
+  if (giorni < 0) return { testo: `${testo} · scaduta`, cls: "text-red-700 font-bold" };
+  if (giorni <= 7) return { testo, cls: "text-amber-700 font-bold" };
+  return { testo, cls: "text-green-800" };
+}

@@ -701,6 +701,8 @@ model Commessa {
   ordiniFornitore         OrdineFornitore[]
   // Avvio commessa: quando tutto il materiale è arrivato (o prelevato dal magazzino)
   materialeCompletoIl     DateTime?
+  // Progetto (come in BConsole): consegna prevista del lavoro al cliente, la deadline che si sposta se serve
+  consegnaPrevista        DateTime?
   // Pratica presa in carico da un ordine BConsole (n. ordine): incassi dalle fatture BConsole agganciate, niente rate di acconto/saldo automatiche
   ordineBC                String?
 

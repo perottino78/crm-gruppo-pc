@@ -7,7 +7,7 @@ import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso } from "@/app/flusso-actions";
+import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale } from "@/app/flusso-actions";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
 import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
@@ -1093,6 +1093,21 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
     });
     descrizione = descrizione ?? art.descrizione;
     fornitoreId = fornitoreId ?? art.fornitoreId;
+  } else if (tipo === "PR") {
+    const p = await prisma.prodotto.findUnique({ where: { id: testo(x.articoloId) ?? "" } });
+    if (!p) return { errore: "Prodotto di listino non trovato." };
+    const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: p.brandId, tipologia: p.tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
+    fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
+    const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
+    const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
+    const prezzo = numero(x.larghezza) && testo(x.note) === "AL_METRO" ? Math.round(p.prezzoBase * (numero(x.larghezza) ?? 0) / 100 * 100) / 100 : p.prezzoBase;
+    Object.assign(dati, {
+      codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: prezzo, scontoAcquisto: f ? sconto : null,
+      costoPrevisto: f ? costoPrevisto({ prezzoUnitario: prezzo, quantita: q }, sconto) : null,
+    });
+    const L = numero(x.larghezza), H = numero(x.altezza);
+    descrizione = `${labelBreveTipologia(p.tipologia)}${p.colore && !/TARIFFA|Prezzo a/.test(p.colore) ? ` — ${p.colore}` : ""}${L ? ` (${L}${H ? `×${H}` : ""} ${unitaMisura(p.tipologia)})` : ""}`;
+    x = { ...x, note: testo(x.note) === "AL_METRO" ? null : x.note };
   } else if (tipo === "P") {
     const brandId = testo(x.brandId), tipologia = testo(x.tipologia), colore = testo(x.colore);
     if (!brandId || !tipologia || !colore) return { errore: "Scegli il prodotto e il colore." };
@@ -1151,4 +1166,122 @@ export async function eliminaComplemento(formData: FormData) {
   await prisma.rigaOrdine.delete({ where: { id } });
   await log(r.commessaId, `Tolto il complemento «${r.descrizione}».`);
   revalidatePath(`/commesse/${r.commessaId}`);
+}
+
+/** Consegna prevista del progetto (deadline): si scrive e si sposta dalla pratica; ogni cambio va nello storico. */
+export async function salvaConsegnaPrevista(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  const v = str(formData, "consegnaPrevista");
+  const nuova = v && /^\d{4}-\d{2}-\d{2}$/.test(v) ? new Date(`${v}T12:00:00Z`) : null;
+  const prima = await prisma.commessa.findUnique({ where: { id }, select: { consegnaPrevista: true } });
+  if (!prima) return;
+  await prisma.commessa.update({ where: { id }, data: { consegnaPrevista: nuova } });
+  const it = (d: Date | null) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "nessuna");
+  if ((prima.consegnaPrevista?.getTime() ?? null) !== (nuova?.getTime() ?? null))
+    await log(id, `Consegna prevista: ${it(prima.consegnaPrevista)} → ${it(nuova)}.`);
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+}
+
+// ============ MATERIALE DAL LISTINO (stesso selettore a tendine dell'offerta) ============
+// Il selettore dell'offerta manda «preventivoId»: qui è l'id della commessa. Il pezzo va nel materiale della pratica, solo acquisto.
+async function complementoDaSelettore(formData: FormData, cerca: (commessaId: string) => Promise<Complemento | string>) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "preventivoId");
+  if (!commessaId || !(await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true } }))) return;
+  const torna = (q: string) => redirect(`/commesse/${commessaId}?${q}#materiale-pratica`);
+  const x = await cerca(commessaId);
+  if (typeof x === "string") torna(`avviso=${encodeURIComponent(x)}`);
+  await assicuraRigheOfferta(commessaId);
+  const r = await creaComplemento(commessaId, x as Complemento);
+  if (r.errore) torna(`avviso=${encodeURIComponent(r.errore)}`);
+  await log(commessaId, `Materiale aggiunto dal listino (solo acquisto) — ${r.descrizione}.`);
+  revalidatePath(`/commesse/${commessaId}`);
+  torna(`fattoMateriale=${encodeURIComponent(`Aggiunto: ${r.descrizione}`)}`);
+}
+
+/** Dal selettore: prodotto a prezzo fisso o variante già scelta (anche lattoneria al metro, porte con misura di listino). */
+export async function complementoDaListino(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const prodottoId = str(formData, "prodottoId");
+    if (!prodottoId) return "Scegli il prodotto.";
+    const lattCm = flt(formData, "lattCm");
+    const L = lattCm ?? flt(formData, "rmL") ?? flt(formData, "luceNetta"), H = lattCm ? null : flt(formData, "rmH");
+    return { tipo: "PR", articoloId: prodottoId, quantita: str(formData, "quantita"), larghezza: L, altezza: H, note: lattCm ? "AL_METRO" : null };
+  });
+}
+
+/** Dal selettore: prodotto a misura (larghezza × altezza): fascia di listino uguale o subito superiore. */
+export async function complementoDaListinoPerMisura(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const brandId = str(formData, "brandId"), tipologia = str(formData, "tipologia");
+    const L = flt(formData, "larghezza"), H = flt(formData, "altezza") ?? 0;
+    if (!brandId || !tipologia || !L) return "Scrivi la misura.";
+    const p = await trovaFasciaPrezzo({ brandId, tipologia, larghezza: L, altezza: H });
+    if (!p) return `${labelBreveTipologia(tipologia)}: misura fuori listino, scrivilo come testo libero nel rilievo.`;
+    return { tipo: "PR", articoloId: p.id, quantita: str(formData, "quantita"), larghezza: L, altezza: H || null };
+  });
+}
+
+// ============ AZIONI SULLE RIGHE SPUNTATE (barra in fondo, come in BConsole) ============
+function righeSpuntate(fd: FormData) { return [...new Set(fd.getAll("riga").map(String))]; }
+
+/** Sposta le righe spuntate (non ancora ordinate) in un altro progetto dello stesso cliente. */
+export async function spostaRigheProgetto(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const da = str(formData, "commessaId"), a = str(formData, "progettoDestinazione");
+  if (!da) return;
+  const torna = (q: string) => redirect(`/commesse/${da}?${q}#materiale-pratica`);
+  const ids = righeSpuntate(formData);
+  if (!ids.length) torna(`avviso=${encodeURIComponent("Spunta le righe da spostare.")}`);
+  if (!a) torna(`avviso=${encodeURIComponent("Scegli il progetto in cui spostarle.")}`);
+  const [cDa, cA] = await Promise.all([prisma.commessa.findUnique({ where: { id: da } }), prisma.commessa.findUnique({ where: { id: a! } })]);
+  if (!cDa || !cA || cDa.clienteId !== cA.clienteId || cDa.id === cA.id) torna(`avviso=${encodeURIComponent("Si può spostare solo in un altro progetto dello stesso cliente.")}`);
+  const righe = await prisma.rigaOrdine.findMany({ where: { id: { in: ids }, commessaId: da, ordineFornitoreId: null, ordinato: false } });
+  if (!righe.length) torna(`avviso=${encodeURIComponent("Le righe spuntate sono già ordinate: si spostano solo quelle ancora da ordinare.")}`);
+  await prisma.rigaOrdine.updateMany({ where: { id: { in: righe.map((r) => r.id) } }, data: { commessaId: a!, complemento: true } });
+  const nome = (c: { anno: number; numero: number }) => `C${c.anno}-${String(c.numero).padStart(3, "0")}`;
+  await log(da, `Spostate nel progetto ${nome(cA!)}: ${righe.map((r) => r.descrizione).join("; ")}.`);
+  await log(a!, `Arrivate dal progetto ${nome(cDa!)} (solo acquisto): ${righe.map((r) => r.descrizione).join("; ")}.`);
+  revalidatePath(`/commesse/${a}`);
+  torna(`fattoMateriale=${encodeURIComponent(`${righe.length} righe spostate nel progetto ${nome(cA!)}.`)}`);
+}
+
+/** Toglie le righe spuntate aggiunte al rilievo (complementi) non ancora ordinate; quelle dell'offerta restano. */
+export async function eliminaRigheMateriale(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const ids = righeSpuntate(formData);
+  const via = await prisma.rigaOrdine.findMany({ where: { id: { in: ids }, commessaId, complemento: true, ordineFornitoreId: null, ordinato: false } });
+  if (via.length) {
+    await prisma.rigaOrdine.deleteMany({ where: { id: { in: via.map((r) => r.id) } } });
+    await log(commessaId, `Tolto il materiale aggiunto: ${via.map((r) => r.descrizione).join("; ")}.`);
+  }
+  const restano = ids.length - via.length;
+  redirect(`/commesse/${commessaId}?${via.length ? `fattoMateriale=${encodeURIComponent(`${via.length} righe tolte.`)}&` : ""}${restano ? `avviso=${encodeURIComponent(`${restano} righe non tolte: sono dell'offerta o già ordinate (le righe dell'offerta si cambiano con una variante).`)}` : ""}#materiale-pratica`);
+}
+
+/** Task a un ufficio con l'elenco delle righe spuntate (es. magazzino: preparare questi pezzi). */
+export async function taskDaRighe(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId"), ufficio = str(formData, "ufficioTask");
+  if (!commessaId) return;
+  const torna = (q: string) => redirect(`/commesse/${commessaId}?${q}#materiale-pratica`);
+  const ids = righeSpuntate(formData);
+  if (!ids.length || !ufficio) torna(`avviso=${encodeURIComponent("Spunta le righe e scegli l'ufficio del task.")}`);
+  const righe = await prisma.rigaOrdine.findMany({ where: { id: { in: ids }, commessaId }, orderBy: { createdAt: "asc" } });
+  const titolo = str(formData, "titoloTask") ?? `Materiale da gestire (${righe.length} righe)`;
+  const descrizione = righe.map((r) => `• ${r.descrizione} × ${r.quantita}${r.fornitoreNome ? ` — ${r.fornitoreNome}` : ""}`).join("\n");
+  const fd = new FormData();
+  fd.set("commessaId", commessaId); fd.set("ufficio", ufficio!); fd.set("titolo", titolo); fd.set("descrizione", descrizione);
+  await creaTaskManuale(fd);
+  torna(`fattoMateriale=${encodeURIComponent(`Task «${titolo}» creato.`)}`);
 }
