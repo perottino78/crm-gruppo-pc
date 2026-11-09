@@ -13,17 +13,19 @@ export default async function Documenti({ entita, entitaId, titolo = "Documenti"
   if (!u || !(await puoVedereEntita(u, entita, entitaId))) return null;
   const docs = await documentiDi(entita, entitaId);
   const cartelle = [...new Set([...CARTELLE[entita], ...docs.map((d) => d.cartella)])];
-  const piene = cartelle.filter((c) => docs.some((d) => d.cartella === c));
+  // nel progetto (commessa) si vedono tutte le cartelle anche vuote, come in BConsole; altrove solo quelle con file
+  const piene = entita === "COMMESSA" ? cartelle : cartelle.filter((c) => docs.some((d) => d.cartella === c));
   return (
     <section className="bg-white border border-neutral-200 rounded-lg p-4 print:hidden">
       <h2 className="font-bold text-neutral-900 mb-2">📁 {titolo} <span className="text-xs font-normal text-neutral-500">({docs.length} file)</span></h2>
-      {piene.length === 0 && <p className="text-sm text-neutral-500 mb-2">Nessun documento ancora.</p>}
+      {docs.length === 0 && <p className="text-sm text-neutral-500 mb-2">Nessun documento ancora.</p>}
       <div className="space-y-1 mb-3">
         {piene.map((c) => {
           const lista = docs.filter((d) => d.cartella === c);
           return (
-            <details key={c} open={piene.length <= 2} className="border border-neutral-200 rounded">
+            <details key={c} open={lista.length > 0 && piene.filter((x) => docs.some((d) => d.cartella === x)).length <= 2} className="border border-neutral-200 rounded">
               <summary className="cursor-pointer px-3 py-1.5 text-sm font-medium">📂 {c} <span className="text-neutral-500 font-normal">({lista.length})</span></summary>
+              {lista.length === 0 && <p className="px-3 py-1.5 text-xs text-neutral-500">Cartella vuota: carica i file qui sotto scegliendo «{c}».</p>}
               <ul className="divide-y divide-neutral-100">
                 {lista.map((d) => (
                   <li key={d.id} className="px-3 py-1.5 flex flex-wrap items-center gap-2 text-sm">

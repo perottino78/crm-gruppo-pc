@@ -4,16 +4,19 @@ import { useState, useTransition } from "react";
 import { inviaOrdineEmail, type EsitoInvio } from "@/app/ordini-actions";
 
 /** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
-export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], mittente }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fileRilievo?: { id: string; nome: string }[]; mittente: string }) {
+export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
   const [senzaPrezzi, setSenzaPrezzi] = useState(true);
   // file del rilievo da allegare: si sceglie quale (di partenza i PDF)
   const [scelti, setScelti] = useState<string[]>(fileRilievo.filter((f) => /\.pdf$/i.test(f.nome)).map((f) => f.id));
+  // file delle cartelle del progetto: di partenza quelli di «Rilievi misura»
+  const [doc, setDoc] = useState<string[]>(documenti.filter((d) => d.cartella === "Rilievi misura").map((d) => d.id));
+  const cartelle = [...new Set(documenti.map((d) => d.cartella))];
   const [esito, setEsito] = useState<EsitoInvio | null>(null);
   const [inCorso, avvia] = useTransition();
   const inp = "border border-neutral-300 rounded px-2 py-1 text-sm w-full";
   const invia = () => avvia(async () => {
-    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, fileRilievo: scelti });
+    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, fileRilievo: scelti, documenti: doc });
     setEsito(r);
     if (r.mailto) window.location.href = r.mailto;
   });
@@ -40,6 +43,23 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
             ))}
           </div>
         ) : <p className="text-xs text-neutral-500">Nessun rilievo caricato nella pratica da allegare.</p>}
+        {documenti.length > 0 && (
+          <div>
+            <p className="text-xs font-bold text-neutral-800 mt-1">File delle cartelle del progetto:</p>
+            {cartelle.map((c) => (
+              <div key={c} className="ml-2">
+                <p className="text-[11px] font-semibold text-neutral-600">📂 {c}</p>
+                {documenti.filter((d) => d.cartella === c).map((d) => (
+                  <label key={d.id} className="flex items-center gap-2 ml-2">
+                    <input type="checkbox" checked={doc.includes(d.id)} onChange={(e) => setDoc(e.target.checked ? [...doc, d.id] : doc.filter((x) => x !== d.id))} />
+                    <span>{d.nome}</span>
+                    <a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-xs text-blue-800 underline">apri</a>
+                  </label>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flex flex-wrap gap-2 items-center">
         <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green text-sm px-4 py-2 disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email con PDF" : "✉ Invia per email con PDF"}</button>

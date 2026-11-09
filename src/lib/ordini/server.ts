@@ -121,3 +121,16 @@ export async function fileRilievo(commessaId: string | null | undefined, conCont
     return { id: r.id, nome, mime, contenuto: m ? (m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]))) : Buffer.alloc(0) };
   }).filter((f) => !conContenuto || f.contenuto.length > 0);
 }
+
+/** File delle cartelle del progetto (pratica e offerta) da allegare all'ordine o alla richiesta al fornitore. */
+export async function documentiProgetto(commessaId: string | null | undefined, conContenuto = true, soloId?: string[]) {
+  if (!commessaId) return [];
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { preventivoId: true } });
+  if (!c) return [];
+  const docs = await prisma.documento.findMany({
+    where: { OR: [{ entita: "COMMESSA", entitaId: commessaId }, { entita: "PREVENTIVO", entitaId: c.preventivoId }], ...(soloId ? { id: { in: soloId } } : {}) },
+    select: { id: true, nome: true, cartella: true, mime: true, entita: true, ...(conContenuto ? { contenuto: true } : {}) },
+    orderBy: [{ cartella: "asc" }, { createdAt: "asc" }],
+  });
+  return docs.map((d) => ({ id: d.id, nome: d.nome, cartella: d.entita === "PREVENTIVO" ? `Offerta · ${d.cartella}` : d.cartella, mime: d.mime, contenuto: Buffer.from((d as { contenuto?: Uint8Array }).contenuto ?? new Uint8Array()) }));
+}
