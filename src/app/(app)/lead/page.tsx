@@ -38,6 +38,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const inizioOggi = inizioGiorno(oggi);
   const fineOggi = inizioGiorno(aggiungiGiorni(oggi, 1));
   const aperti: Prisma.LeadWhereInput = { fase: { in: FASI_APERTE } };
+  const FASI_APPUNTAMENTO = ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO"];
   const elenco = !!q || !!p.fase || vista !== "dafare";
 
   const filtroElenco: Prisma.LeadWhereInput = q
@@ -46,7 +47,8 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
 
   const [daFare, inProgramma, lavoratiOggi, risultati, totali, stato, fatto] = await Promise.all([
     elenco ? Promise.resolve([] as Riga[]) : prisma.lead.findMany({
-      where: { AND: [scope, aperti, { OR: [{ scadenzaAzione: null }, { scadenzaAzione: { lt: fineOggi } }] }] },
+      // un appuntamento già passato non è un compito della telefonista (lo esita il venditore dal calendario)
+      where: { AND: [scope, aperti, { OR: [{ scadenzaAzione: null }, { scadenzaAzione: { lt: fineOggi } }] }, { NOT: { fase: { in: FASI_APPUNTAMENTO }, scadenzaAzione: { lt: inizioOggi } } }] },
       orderBy: [{ scadenzaAzione: { sort: "asc", nulls: "first" } }, { createdAt: "asc" }], take: 200, select: SELEZIONE,
     }),
     elenco ? Promise.resolve([] as Riga[]) : prisma.lead.findMany({

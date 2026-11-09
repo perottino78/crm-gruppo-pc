@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { percentuale } from "@/lib/numeri";
 import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
 import Documenti from "@/components/documenti/Documenti";
@@ -359,7 +360,7 @@ export default async function PreventivoPage({
             {preventivo.prezzoManualeAttivo
               ? " (prezzo manuale)"
               : preventivo.scontoPercentuale > 0
-                ? ` (scontato ${preventivo.scontoPercentuale}%)`
+                ? ` (scontato ${percentuale(preventivo.scontoPercentuale)}%)`
                 : ""}
           </p>
           <p className="text-sm font-medium mb-2">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
@@ -369,11 +370,12 @@ export default async function PreventivoPage({
             <input
               name="scontoPercentuale"
               type="number"
-              step="0.1"
+              step="0.00001"
               min={0}
               max={100}
               defaultValue={preventivo.scontoPercentuale}
-              className="w-16 text-xs border border-neutral-200 rounded px-1.5 py-1"
+              title="Fino a 5 decimali (es. 12,34567)"
+              className="w-24 text-xs border border-neutral-200 rounded px-1.5 py-1"
             />
             <span className="text-[11px] text-neutral-500">%</span>
             <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>

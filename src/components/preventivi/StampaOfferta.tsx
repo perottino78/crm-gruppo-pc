@@ -1,3 +1,4 @@
+import { percentuale } from "@/lib/numeri";
 import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -364,7 +365,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
               )}
               {!prezzoManualeAttivo && sconto > 0 && (
                 <div className="flex justify-between py-1">
-                  <span className="text-neutral-700">Sconto ({sconto}%)</span>
+                  <span className="text-neutral-700">Sconto ({percentuale(sconto)}%)</span>
                   <span>-{eur(imponibileLordo - totaleNetto)}</span>
                 </div>
               )}

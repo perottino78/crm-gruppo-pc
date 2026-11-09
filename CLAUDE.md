@@ -59,6 +59,7 @@ login nel `matcher` del middleware.
   Accettazione (Commerciale) → Fattura acconto (Fatturazione) → Rilievo misure (Tecnico) → Evasione ordini (Ordini) →
   Fattura saldo (Fatturazione) → Posa (Posa). "Fatto" su un task crea il task dell'ufficio successivo. Ogni fase può
   preparare/inviare un'email (`mailAttiva`, `mailAutomatica`) e avvisare l'ufficio (`avvisaUfficio`).
+- **Sconto dell'offerta** (`aggiornaSconto`): percentuale fino a 5 decimali (per far quadrare il totale con una cifra concordata), mostrata con `percentuale()` di `src/lib/numeri.ts`.
 - **Conferma ordine dall'offerta** (`confermaOrdinePreventivo` in `commesse-actions.ts`): richiede contratto firmato in
   cartella "Contratto firmato" (offerta o commessa) o la spunta "firmato su carta"; blocca l'offerta, apre la commessa, chiude
   l'Accettazione e crea il task Fattura acconto con la nota del commerciale.
@@ -228,7 +229,7 @@ login nel `matcher` del middleware.
   Lead nuovi: telefonista del marchio da Impostazioni › Lead (anche marketing), altrimenti la prima TELEFONISTA in ordine alfabetico; `passaLeadAperti`
   sposta in blocco. Password di default: `login` segna `mustChangePassword` (lista `PASSWORD_DEBOLI`), finestra bloccante `CambioPasswordObbligatorio`;
   rotta una tantum `api/admin/segna-password-deboli`. `InvioInCorso` (layout): barra blu e pulsante spento dopo ogni invio/clic. Classe `btn-indietro`
-  per i link «← …». Calendario: annullati nascosti (`?annullati=1` per vederli). Clienti: pagine `?pc=`/`?pl=`. Collaudo `telefoniste` (20).
+  per i link «← …». Calendario: annullati nascosti (`?annullati=1` per vederli). Clienti: pagine `?pc=`/`?pl=`. Anagrafica del lead modificabile senza farlo cliente («✏️ Modifica i dati del lead», `modificaDatiLead`, evento `lead.dati` con prima → dopo). Collaudo `telefoniste` (20).
 - **Moduli istantanei di Meta** (Impostazioni › Lead, sezione `#meta`, `components/lead/ModuliMeta.tsx`, `src/app/meta-actions.ts`, permesso
   `pubblicita`): Meta → gateway (progetto Vercel `gpc-meta-gateway`, cartella `gateway/`, ha le chiavi Meta) → ONE `/api/lead/meta/internal`
   (`META_INTERNAL_MODE=live`). Moduli collegati dal CRM in `Configurazione.meta_moduli` (con marchio), uniti a `META_ALLOWED_FORM_IDS`
@@ -359,6 +360,12 @@ login nel `matcher` del middleware.
   per nome (`chiaveNome`, ordine delle parole libero), «Info P&C» = la telefonista; cliente per telefono o nome (`indiceClienti`), altrimenti creato.
   `Appuntamento.chiaveImport` = «BC|<n. attività>»: niente doppioni ai rilanci, quanto cambiato nel CRM resta. Nessun invito né email. «Info P&C» = `?centralino=<nome>`
   (es. cristina; senza, la prima telefonista attiva). Caricati in produzione il 9/11/2026 da settembre in avanti. Collaudo `appuntamenti-bconsole` (12).
+  Riordino dopo l'import (rotta `api/admin/riordina-appuntamenti`, GET prova con l'elenco, POST esegue, rilanciabile; regole pure in
+  `src/lib/calendario/riordino.ts`, test): `doppioniImportati` toglie gli appuntamenti «BC|» che doppiano uno di P&C ONE (stessa persona per cliente,
+  telefono, email o nome in qualsiasi ordine, stesso giorno di Roma; non se quello di ONE è annullato) e i clienti creati dall'import rimasti vuoti;
+  `leadDaAvanzare` porta i lead appesi (`FASI_DA_FISSARE`) ad APPUNTAMENTO_CASA/SHOWROOM quando la persona ha un appuntamento dopo l'ultimo esito
+  (storico «aggiornato in automatico», utente «Automatico», invii in coda annullati, nessuna email, cliente collegato con `leadOrigineId`).
+  Nei «Task di oggi» i lead con appuntamento già passato non compaiono più (li esita il venditore). Collaudo `riordino-appuntamenti` (15).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
   da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
@@ -367,13 +374,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 296, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 299, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

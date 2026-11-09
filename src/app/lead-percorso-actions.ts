@@ -168,3 +168,29 @@ export async function spostaProssimaAttivita(fd: FormData) {
   revalidatePath("/lead");
   redirect(torna(ritorno, { ok: `Prossima attività: ${testo}` }));
 }
+
+/** Corregge l'anagrafica del lead (nome, telefono, email, comune, CAP, prodotto) senza trasformarlo in cliente. */
+export async function modificaDatiLead(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const leadId = str(fd, "leadId");
+  const ritorno = str(fd, "ritorno");
+  const nome = str(fd, "nome");
+  if (!leadId) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  if (!nome) redirect(torna(ritorno, { errore: "Il nome non può restare vuoto." }));
+  const lead = await prisma.lead.findFirst({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] }, select: { nome: true, telefono: true, email: true, comune: true, cap: true, prodotto: true } });
+  if (!lead) redirect(torna(ritorno, { errore: "Lead non trovato." }));
+  const email = str(fd, "email")?.toLowerCase() ?? null;
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(torna(ritorno, { errore: "L'email non sembra valida." }));
+  const nuovi = { nome: nome!.slice(0, 200), telefono: str(fd, "telefono"), email, comune: str(fd, "comune"), cap: str(fd, "cap"), prodotto: str(fd, "prodotto") };
+  const ETICHETTE: Record<keyof typeof nuovi, string> = { nome: "nome", telefono: "telefono", email: "email", comune: "comune", cap: "CAP", prodotto: "prodotto" };
+  const cambi = (Object.keys(nuovi) as (keyof typeof nuovi)[]).filter((k) => (lead![k] ?? null) !== nuovi[k]);
+  if (!cambi.length) redirect(torna(ritorno, { ok: "Nessuna modifica" }));
+  await prisma.lead.update({ where: { id: leadId! }, data: nuovi });
+  await prisma.leadEvento.create({
+    data: { leadId: leadId!, tipo: "lead.dati", utenteNome: u!.nome, testo: `Dati corretti: ${cambi.map((k) => `${ETICHETTE[k]} «${lead![k] ?? "—"}» → «${nuovi[k] ?? "—"}»`).join(", ")}` },
+  });
+  revalidatePath("/lead");
+  revalidatePath(`/lead/${leadId}`);
+  redirect(torna(ritorno, { ok: "Dati del lead aggiornati" }));
+}
