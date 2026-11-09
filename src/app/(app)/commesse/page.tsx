@@ -6,7 +6,7 @@ import BrandSwitcher from "@/components/BrandSwitcher";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { creaCommessaDaPreventivo } from "@/app/commesse-actions";
-import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
+import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commesse";
 
 export default async function CommessePage({ searchParams }: { searchParams: Promise<{ brand?: string }> }) {
   const { brand } = await searchParams;
@@ -91,6 +91,7 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
                     <p className="text-[11px] text-neutral-500">{numeroCommessa(c)} · {c.brand.nome}</p>
                     <p className="text-sm font-semibold"><Link href={`/clienti/${c.clienteId}`} title="Apri la scheda del cliente" className="relative z-10 text-blue-800 underline decoration-blue-300 underline-offset-2 hover:decoration-blue-700">{c.cliente.nome}</Link></p>
                     <p className="text-xs text-neutral-700">{eur(c.totaleVendita)}</p>
+                    {c.consegnaPrevista && <p className={`text-[11px] ${statoConsegna(c.consegnaPrevista, c.stato).cls}`}>🏁 consegna {statoConsegna(c.consegnaPrevista, c.stato).testo}</p>}
                     {c.rilievi[0] && (
                       <p className="text-[11px] text-indigo-800 mt-1">📅 {c.rilievi[0].dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
                     )}

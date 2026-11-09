@@ -12,6 +12,11 @@ import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
 import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { creaOrdineDaRighe } from "@/app/ordini-actions";
+import { salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
+import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
+import SelettoreProdotto from "@/components/SelettoreProdotto";
+import { tassonomiaListino } from "@/lib/listini/tassonomia";
+import { UFFICI } from "@/lib/flusso";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
   aggiornaCondizioniAcconto,
@@ -44,18 +49,17 @@ import {
   segnaRecensioneRichiesta,
   creaAssistenza,
 } from "@/app/commesse-actions";
-import { STATI_COMMESSA, numeroCommessa, eur } from "@/lib/commesse";
+import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
 import { creaTaskManuale, avviaFlussoCommessa } from "@/app/flusso-actions";
-import { UFFICI } from "@/lib/flusso";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -96,6 +100,12 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
+  const consegna = statoConsegna(c.consegnaPrevista, c.stato);
+  const [tassonomia, progettiCliente] = await Promise.all([
+    tassonomiaListino(c.brandId),
+    prisma.commessa.findMany({ where: { clienteId: c.clienteId, id: { not: c.id }, stato: { notIn: ["CHIUSA", "ANNULLATA"] } }, include: { preventivo: { select: { oggetto: true } }, brand: { select: { nome: true } } }, orderBy: [{ anno: "desc" }, { numero: "desc" }] }),
+  ]);
+  const altriProgetti = progettiCliente.map((p) => ({ id: p.id, nome: `${numeroCommessa(p)} · ${p.brand.nome}${p.preventivo.oggetto ? ` · ${p.preventivo.oggetto}` : ""}`.slice(0, 70) }));
   // nel rilievo: il materiale già nella pratica, o (prima del rilievo) le righe dell'offerta del commerciale
   const materialeOfferta = c.righeOrdine.length
     ? c.righeOrdine.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, complemento: r.complemento, fornitore: r.fornitoreNome }))
@@ -135,6 +145,21 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </h1>
         <span className={`text-xs font-bold px-3 py-1 rounded ${stato.cls}`}>{stato.label}</span>
       </div>
+      <div className="mb-3 -mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-700">
+        <span>📁 Progetto <b>{c.brand.nome}</b>{c.preventivo.oggetto ? ` · ${c.preventivo.oggetto}` : ""} · <Link href={`/preventivi/${c.preventivoId}`} className="text-blue-800 underline">offerta {c.preventivo.numeroOfferta ?? ""}</Link></span>
+        <form action={salvaConsegnaPrevista} className="flex items-center gap-1.5">
+          <input type="hidden" name="id" value={c.id} />
+          <label className="text-xs font-bold text-neutral-800">Consegna prevista</label>
+          <input type="date" name="consegnaPrevista" defaultValue={c.consegnaPrevista ? c.consegnaPrevista.toISOString().slice(0, 10) : ""} className={`${inp} py-0.5`} />
+          <button className="btn-3d btn-3d-dark text-[11px] px-2 py-1">salva</button>
+          {c.consegnaPrevista && <span className={`text-xs ${consegna.cls}`}>{consegna.testo.includes("scaduta") ? "⚠ scaduta" : ""}</span>}
+        </form>
+      </div>
+      <nav aria-label="Vai alla sezione" className="mb-4 flex flex-wrap gap-1.5">
+        {[["#rilievo", "📏 Rilievo"], ["#evasione", "📦 Materiale e ordini"], ["#acconto", "💶 Acconto e fatture"], ["#costi", "📊 Costi"], ["#posa", "🔧 Posa"], ["#storico", "🕘 Storico"], ["#documenti", "📂 File"]].map(([h, t]) => (
+          <a key={h} href={h} className="btn-3d btn-3d-outline text-xs px-2.5 py-1">{t}</a>
+        ))}
+      </nav>
 
       {/* CONTRATTO E CONFERMA ORDINE */}
       <div className={`mb-4 rounded-xl border-2 px-4 py-3 flex flex-wrap items-center gap-3 ${c.preventivo.confermatoIl ? "border-green-300 bg-green-50" : "border-amber-400 bg-amber-50"}`}>
@@ -208,7 +233,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* ACCONTO */}
-      <section className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
+      <section id="acconto" className="card-fase scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
         <h2 className="mb-3">1 · Acconto / finanziamento</h2>
         <p className="text-sm text-neutral-800 mb-3">
           {finanz ? (
@@ -220,7 +245,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </p>
 
         {!finanz && c.accontoIncassato && (
-          <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">
+          <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">
             Incassato {eur(c.accontoImportoIncassato ?? 0)} il {c.accontoIncassatoIl?.toLocaleDateString("it-IT")}
             {c.accontoModalita ? ` · ${c.accontoModalita}` : ""}{c.accontoNote ? ` · ${c.accontoNote}` : ""}
             {admin && (
@@ -229,7 +254,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                 <button className="text-xs text-red-700 underline">annulla incasso</button>
               </form>
             )}
-          </p>
+          </div>
         )}
 
         {!finanz && !c.accontoIncassato && gestoreIncassi && (
@@ -409,7 +434,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                   </span>
                 </div>
                 {f.stato === "CHIUSA" ? (
-                  <p className="text-xs text-neutral-800 mt-1">
+                  <div className="text-xs text-neutral-800 mt-1">
                     Chiusa da <b>{f.chiusaDaNome}</b> il {f.chiusaIl?.toLocaleDateString("it-IT")} · {f.forfait !== null ? `forfait ${eur(f.forfait)}` : `${f.ore ?? 0} h × ${eur(f.costoOrario ?? 0)}/h`} = <b>{eur(f.costoTotale)}</b>
                     {f.note ? ` · ${f.note}` : ""}
                     {admin && (
@@ -418,7 +443,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                         <button className="text-red-700 underline">riapri</button>
                       </form>
                     )}
-                  </p>
+                  </div>
                 ) : (
                   <div className="mt-2 space-y-2">
                     <form action={assegnaFase} className="flex items-center gap-2">
@@ -476,7 +501,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
         <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
           <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
-          <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe dello stesso fornitore</b> e crea l&apos;ordine: nell&apos;invio scegli i PDF del rilievo da allegare. Parte da {EMAIL_ORDINI()} con la lista senza prezzi. Il materiale mancante si aggiunge nel rilievo (sezione 2).</p>
+          <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
+          {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
           {materialePratica.length === 0 ? (
             <form action={generaRigheOrdine} className="mb-3"><input type="hidden" name="id" value={c.id} />
@@ -492,7 +518,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                       const libera = !r.ordineFornitoreId && !r.ordinato && !r.daMagazzino;
                       return (
                         <tr key={r.id} className="border-b border-neutral-100 align-top">
-                          <td className="py-1.5">{libera && <input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} />}</td>
+                          <td className="py-1.5"><input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} /></td>
                           <td className="py-1.5 pr-2">{r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
                           <td className="py-1.5 text-right pr-3">{r.quantita}</td>
                           <td className="py-1.5 text-xs">{r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>}</td>
@@ -507,19 +533,16 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                   </tbody>
                 </table>
               </div>
-              {puoGestireOrdini(utente) && materialePratica.some((r) => !r.ordineFornitoreId && !r.ordinato && !r.daMagazzino) && (
-                <div className="flex flex-wrap items-end gap-2 mt-2">
-                  <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Fornitore
-                    <select name="fornitoreId" className={`${inp} max-w-60`}>
-                      <option value="">quello delle righe spuntate</option>
-                      {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
-                    </select>
-                  </label>
-                  <button className="btn-3d btn-3d-purple text-sm px-4 py-2">📨 Crea l&apos;ordine al fornitore con le righe spuntate</button>
-                </div>
-              )}
+              <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
+                azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
             </form>
           )}
+          <details className="mt-2 rounded border border-blue-200 bg-blue-50/40 p-2">
+            <summary className="cursor-pointer text-sm font-bold text-blue-900">📚 Aggiungi materiale dal listino (Indoor / Outdoor, come nell&apos;offerta) — solo acquisto</summary>
+            <div className="mt-2">
+              <SelettoreProdotto preventivoId={c.id} brandId={c.brandId} brandColor="#1d4ed8" tassonomia={tassonomia} azionePerMisura={complementoDaListinoPerMisura} azionePerProdotto={complementoDaListino} />
+            </div>
+          </details>
         </div>
         <StatoAcquisti commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
         <MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
@@ -538,11 +561,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             <button className="btn-3d btn-3d-amber text-sm px-4 py-2">Aggiungi acquisto</button>
           </form>
           {c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").map((m) => (
-            <p key={m.id} className="text-xs text-neutral-900 mt-1">• {m.descrizione}: <b>{eur(m.importo)}</b>
+            <div key={m.id} className="text-xs text-neutral-900 mt-1">• {m.descrizione}: <b>{eur(m.importo)}</b>
               {gestoreIncassi && (
                 <form action={eliminaCostoManuale} className="inline ml-2"><input type="hidden" name="id" value={m.id} /><button className="text-red-700 underline">elimina</button></form>
               )}
-            </p>
+            </div>
           ))}
         </div>
         {c.righeOrdine.length === 0 ? (
@@ -589,7 +612,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* SCHEDA COSTI A SCALARE */}
-      <section className="card-fase" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
+      <section id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
         <h2 className="mb-3">5 · Scheda costi a scalare</h2>
         <div className="grid grid-cols-4 gap-3 mb-4">
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Vendita (imponibile)</p><p className="text-sm font-bold">{eur(c.totaleImponibile)}</p></div>
@@ -650,13 +673,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         <h2 className="mb-1">6 · Saldo e conferma posa</h2>
         <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
         {c.saldoIncassato ? (
-          <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
+          <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
             ✔ Saldo incassato {eur(c.saldoImporto ?? 0)} il {c.saldoIncassatoIl?.toLocaleDateString("it-IT")}
             {c.fatturaSaldoNumero ? ` · fattura n. ${c.fatturaSaldoNumero}` : ""}{c.saldoModalita ? ` · ${c.saldoModalita}` : ""}
             {admin && (
               <form action={annullaSaldo} className="inline ml-3"><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-700 underline">annulla saldo</button></form>
             )}
-          </p>
+          </div>
         ) : gestoreIncassi ? (
           <form action={registraSaldo} className="flex flex-wrap items-end gap-2">
             <input type="hidden" name="id" value={c.id} />
@@ -672,7 +695,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* POSA E FINE LAVORI */}
-      <section className="card-fase" style={{ "--fase": "#f59e0b" } as React.CSSProperties}>
+      <section id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties}>
         <h2 className="mb-3">7 · Posa e fine lavori</h2>
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
@@ -867,7 +890,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* TIMELINE */}
-      <section className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
+      <section id="storico" className="card-fase scroll-mt-4" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
         <h2 className="mb-3">Storico</h2>
         <form action={aggiungiNotaCommessa} className="flex gap-2 mb-3">
           <input type="hidden" name="id" value={c.id} />

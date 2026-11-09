@@ -322,6 +322,17 @@ login nel `matcher` del middleware.
   si scelgono i file del rilievo da allegare (`fileRilievo: id[]`, di partenza i PDF). Offerta sbloccata con la commessa già aperta: pannello arancione
   «💾 Salva la variante» (`salvaVariante`, solo amministratore; anche `confermaOrdinePreventivo` ci passa): riblocca, aggiorna totali della commessa e
   acconto se non incassato, rigenera le righe non ordinate tenendo il fornitore, aggiunge le nuove; quelle già ordinate non si toccano (avviso nel log).
+- **Progetti come in BConsole** (richiesta di Ugo, nov 2026): ogni commessa (= offerta confermata) è un progetto con i suoi ordini; nella scheda cliente
+  la sezione «📁 Progetti» (prima scheda, `?sez=progetti`) con N. progetto, data, descrizione, tipologia (marchio), consegna, ordini fornitori, totale e stato,
+  più i progetti di BConsole (`storico.progetti`, sola lettura). `Commessa.consegnaPrevista` (deadline, `salvaConsegnaPrevista`, spostamenti nello storico;
+  `statoConsegna` in `lib/commesse.ts`: rossa se scaduta, arancione entro 7 giorni), mostrata anche nell'elenco commesse. Nella pratica: intestazione
+  «📁 Progetto», pulsanti veloci (`#rilievo #evasione #acconto #costi #posa #storico #documenti`), materiale dal listino con lo stesso `SelettoreProdotto`
+  dell'offerta (albero in `src/lib/listini/tassonomia.ts` `tassonomiaListino`, condiviso con la pagina dell'offerta; azioni `complementoDaListino` /
+  `complementoDaListinoPerMisura`, il campo «preventivoId» porta l'id della commessa; complemento tipo «PR» = prodotto già individuato) e barra delle righe
+  spuntate (`components/commesse/BarraAzioniMateriale.tsx`, sticky in fondo al riquadro): ordine al fornitore, sposta in un altro progetto dello stesso cliente
+  (`spostaRigheProgetto`, solo righe non ordinate), task a un ufficio con l'elenco (`taskDaRighe`), togli il materiale aggiunto (`eliminaRigheMateriale`).
+  Da fare (chiesto da Ugo): distinta base / prodotti correlati (kit), bolla di consegna al cliente e fattura dalle righe, «crea progetto» dalle righe.
+  Collaudo `progetti` (14).
 - **Foto vetrate panoramiche** (Brillante/Scintilla/Fisso, fornitore Vepa): `public/immagini/vetrate/` dalle schede tecniche PDF (immagini CMYK invertite: canali
   da invertire prima di convertire in RGB); messe in produzione con `api/admin/immagini-vetrate` (solo immagini mancanti, non tocca i prezzi). Fisso: foto generica.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
@@ -330,13 +341,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 287, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 288, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21), ordine-da-rilievo (29, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), rilievo-complementi (21), ordine-da-rilievo (29, SMTP finto), progetti (14)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

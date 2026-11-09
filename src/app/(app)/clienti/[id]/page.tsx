@@ -19,7 +19,7 @@ import PraticaCard from "@/components/clienti/PraticaCard";
 import TaskCard from "@/components/TaskCard";
 import { praticheCliente, diarioCliente } from "@/lib/clienti/scheda";
 import { STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
-import { eur } from "@/lib/commesse";
+import { eur, numeroCommessa, statoConsegna, STATI_COMMESSA } from "@/lib/commesse";
 import { statoOrdine } from "@/lib/ordini/calcoli";
 import { storicoBConsole } from "@/lib/clienti/storico-bconsole";
 import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
@@ -32,7 +32,7 @@ const TIPI = [
   { v: "TASK", label: "Task / scadenza", icon: "✅" },
 ];
 
-type Sezione = "pratiche" | "attivita" | "task" | "appuntamenti" | "acquisti" | "file" | "bconsole" | "anagrafica";
+type Sezione = "pratiche" | "progetti" | "attivita" | "task" | "appuntamenti" | "acquisti" | "file" | "bconsole" | "anagrafica";
 
 const iniziali = (nome: string) =>
   nome.split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]?.toUpperCase()).join("") || "?";
@@ -73,6 +73,12 @@ export default async function SchedaClientePage({
     ? await prisma.flussoFase.findMany({ orderBy: { ordine: "asc" }, select: { chiave: true, nome: true, ufficio: true } })
     : [];
   const praticheBC = new Map((await prisma.commessa.findMany({ where: { id: { in: storico.ordini.map((d) => d.commessaId).filter((x): x is string => !!x) } }, select: { id: true, numero: true, anno: true } })).map((c) => [c.id, `C${c.anno}-${String(c.numero).padStart(3, "0")}`]));
+  // progetti (come in BConsole): ogni offerta confermata è un progetto con i suoi ordini, la sua consegna e il suo stato
+  const progetti = await prisma.commessa.findMany({
+    where: { clienteId: cliente.id },
+    include: { preventivo: { select: { oggetto: true, numeroOfferta: true } }, brand: { select: { nome: true } }, responsabile: { select: { nome: true } }, _count: { select: { ordiniFornitore: true } } },
+    orderBy: [{ anno: "desc" }, { numero: "desc" }],
+  });
   const nStorico = storico.offerte.length + storico.ordini.length + storico.fatture.length + storico.progetti.length;
 
   const taskCommesse = commesse.filter((c) => !["CHIUSA", "LAVORI_ESEGUITI", "ANNULLATA"].includes(c.stato)).flatMap((c) => c.tasks.filter((t) => !STATI_CHIUSI.includes(t.stato)).map((t) => ({ t, c })));
@@ -84,6 +90,7 @@ export default async function SchedaClientePage({
   const nTask = taskCommesse.length + taskAttivita.length;
 
   const sezioniTutte: { id: Sezione; label: string; n?: number; colore: string; visibile: boolean }[] = [
+    { id: "progetti", label: "📁 Progetti", n: progetti.length + storico.progetti.length, colore: "bg-orange-500", visibile: true },
     { id: "pratiche", label: "Offerte e pratiche", n: pratiche.length, colore: "bg-blue-600", visibile: true },
     { id: "attivita", label: "Attività recenti", colore: "bg-slate-500", visibile: true },
     { id: "task", label: "Task", n: nTask, colore: "bg-amber-500", visibile: true },
@@ -292,6 +299,53 @@ export default async function SchedaClientePage({
                 </div>
               </details>
             )}
+          </div>
+        )}
+
+        {/* ── Progetti (come la prima videata di BConsole) ── */}
+        {sez === "progetti" && (
+          <div className="space-y-3">
+            <p className="text-xs text-neutral-600">Ogni offerta confermata è un progetto a sé (serramenti, clima, fotovoltaico…): dentro ci sono rilievo, materiale, ordini ai fornitori, fatture, costi e file. La consegna prevista si scrive e si sposta nel progetto.</p>
+            <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+              <table className="w-full text-sm">
+                <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200">
+                  <th className="px-3 py-2">N. progetto</th><th>Data</th><th>Descrizione</th><th>Tipologia</th><th>Consegna</th><th className="text-right pr-3">Ordini forn.</th><th className="text-right pr-3">Totale</th><th>Stato</th>
+                </tr></thead>
+                <tbody>
+                  {progetti.map((p) => {
+                    const st = STATI_COMMESSA[p.stato] ?? { label: p.stato, cls: "bg-neutral-100" };
+                    const cons = statoConsegna(p.consegnaPrevista, p.stato);
+                    return (
+                      <tr key={p.id} className="border-b border-neutral-100 hover:bg-orange-50/40">
+                        <td className="px-3 py-1.5 font-bold"><Link href={`/commesse/${p.id}`} className="text-blue-800 underline">{numeroCommessa(p)}</Link></td>
+                        <td className="py-1.5">{p.createdAt.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</td>
+                        <td className="py-1.5 pr-2">{p.preventivo.oggetto || "—"}{p.preventivo.numeroOfferta ? <span className="text-xs text-neutral-500"> · rif. offerta n. {p.preventivo.numeroOfferta}</span> : null}</td>
+                        <td className="py-1.5">{p.brand.nome}</td>
+                        <td className={`py-1.5 ${cons.cls}`}>{cons.testo}</td>
+                        <td className="py-1.5 text-right pr-3">{p._count.ordiniFornitore}</td>
+                        <td className="py-1.5 text-right pr-3">{eur(p.totaleVendita)}</td>
+                        <td className="py-1.5"><span className={`text-[11px] font-bold px-2 py-0.5 rounded ${st.cls}`}>{st.label}</span></td>
+                      </tr>
+                    );
+                  })}
+                  {storico.progetti.map((pr) => (
+                    <tr key={`bc-${pr.numero}`} className="border-b border-neutral-100 text-neutral-700">
+                      <td className="px-3 py-1.5 font-semibold">{pr.numero} <span className="text-[10px] font-bold px-1 rounded bg-stone-200 text-stone-800">BConsole</span></td>
+                      <td className="py-1.5">{pr.creatoIl ? pr.creatoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "—"}</td>
+                      <td className="py-1.5 pr-2">{pr.descrizione ?? "—"}</td>
+                      <td className="py-1.5">{pr.tipologia ?? "—"}</td>
+                      <td className="py-1.5 text-neutral-400">—</td>
+                      <td className="py-1.5 text-right pr-3 text-neutral-400">—</td>
+                      <td className="py-1.5 text-right pr-3">{pr.totaleOfferto ? eur(pr.totaleOfferto) : "—"}</td>
+                      <td className="py-1.5"><span className="text-[11px] font-bold px-2 py-0.5 rounded bg-stone-100 text-stone-800">{pr.stato ?? "—"}</span></td>
+                    </tr>
+                  ))}
+                  {progetti.length + storico.progetti.length === 0 && (
+                    <tr><td colSpan={8} className="px-3 py-6 text-center text-neutral-500">Nessun progetto: nasce quando si conferma un&apos;offerta.</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
