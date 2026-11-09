@@ -392,6 +392,8 @@ model Appuntamento {
   invitoInviatoIl DateTime?
   esito           String?
   stato           String    @default("PROGRAMMATO") // PROGRAMMATO | CONFERMATO | COMPLETATO | ANNULLATO
+  // Appuntamento portato da un altro programma (es. «BC|<n. attività>» dal calendario di BConsole): niente doppioni ai rilanci
+  chiaveImport    String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now()) @updatedAt
 }
