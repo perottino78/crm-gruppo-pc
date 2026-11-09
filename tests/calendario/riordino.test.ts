@@ -28,10 +28,10 @@ test("doppioni: si tiene quello importato se in P&C ONE è annullato", () => {
   assert.deepEqual(doppioniImportati(a, clienti), [{ id: "b1", tieni: "n1" }]);
 });
 
-test("lead appesi: avanza solo se l'appuntamento è dopo l'ultimo esito", () => {
+test("lead appesi: visita dopo l'arrivo del lead; un ricontatto concordato dopo la visita resta", () => {
   const a = [app("b1", "c1", "2026-11-20T09:00:00Z", { chiaveImport: "BC|1", utenteId: "venditore" }), app("b3", "c3", "2026-10-01T09:00:00Z", { luogo: "Showroom Rosta" })];
   const leads: LeadRiordino[] = [
-    { id: "l1", nome: "Mario Rossi", telefono: "3331234567", email: null, fase: "NON_RISPONDE", createdAt: d("2026-10-20T00:00:00Z"), clienteId: null, ultimoEsitoIl: d("2026-11-01T00:00:00Z") },
+    { id: "l1", nome: "Mario Rossi", telefono: "3331234567", email: null, fase: "NON_RISPONDE", createdAt: d("2026-10-20T00:00:00Z"), clienteId: null, ultimoEsitoIl: d("2026-11-25T00:00:00Z") }, // classificato in blocco dopo la visita: avanza lo stesso
     { id: "l2", nome: "Anna Bianchi", telefono: null, email: "ANNA@x.it", fase: "DA_RICHIAMARE", createdAt: d("2026-09-01T00:00:00Z"), clienteId: null, ultimoEsitoIl: d("2026-10-05T00:00:00Z") }, // richiamo dopo l'appuntamento: resta
     { id: "l3", nome: "Anna Bianchi", telefono: null, email: "anna@x.it", fase: "NUOVO", createdAt: d("2026-09-20T00:00:00Z"), clienteId: null, ultimoEsitoIl: null },
     { id: "l4", nome: "Mario Rossi", telefono: null, email: null, fase: "NON_INTERESSATO", createdAt: d("2026-10-20T00:00:00Z"), clienteId: null, ultimoEsitoIl: null }, // chiuso: non si tocca
@@ -43,4 +43,10 @@ test("lead appesi: avanza solo se l'appuntamento è dopo l'ultimo esito", () => 
   assert.deepEqual(leadDaAvanzare(leads, a, clienti, new Set(), new Set(["venditore"])).map((x) => x.leadId), ["l3"]);
   a[1].tipo = "TELEFONICO";
   assert.deepEqual(leadDaAvanzare(leads, a, clienti).map((x) => x.leadId), ["l1"]);
+});
+
+test("lead appesi: visita precedente all'arrivo del lead non conta", () => {
+  const a = [app("b1", "c1", "2026-09-18T09:00:00Z", { chiaveImport: "BC|1" })];
+  const l: LeadRiordino = { id: "l1", nome: "Mario Rossi", telefono: "3331234567", email: null, fase: "IN_TARGET", createdAt: d("2026-10-05T00:00:00Z"), clienteId: null, ultimoEsitoIl: null };
+  assert.deepEqual(leadDaAvanzare([l], a, clienti), []);
 });

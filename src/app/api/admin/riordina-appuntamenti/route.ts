@@ -72,7 +72,7 @@ async function esegui(prova: boolean) {
       await tx.leadEvento.create({
         data: {
           leadId: d.leadId, tipo: "lead.esito", utenteNome: "Automatico",
-          testo: `${ESITI[d.esito].nome} — ${quando(d.dataOra)}${venditore ? ` con ${venditore}` : ""} · aggiornato in automatico: l'appuntamento era già nel calendario (fissato prima del passaggio a P&C ONE)`,
+          testo: `${ESITI[d.esito].nome} — ${quando(d.dataOra)}${venditore ? ` con ${venditore}` : ""} · aggiornato in automatico: l'appuntamento era già nel calendario (fissato prima del passaggio a P&C ONE), classificazione e prequalifica superate`,
         },
       });
       if (collegaCliente) await tx.cliente.update({ where: { id: d.clienteId }, data: { leadOrigineId: d.leadId } });

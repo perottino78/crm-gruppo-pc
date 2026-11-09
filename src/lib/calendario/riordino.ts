@@ -53,7 +53,7 @@ export const FASI_DA_FISSARE = ["NUOVO", "IN_TARGET", "CONTATTATO", "NON_RISPOND
 export type LeadDaAvanzare = { leadId: string; appuntamentoId: string; esito: "APPUNTAMENTO_CASA" | "APPUNTAMENTO_SHOWROOM"; dataOra: Date; utenteId: string; luogo: string | null; clienteId: string };
 
 /**
- * Lead appesi la cui persona ha già un appuntamento (non annullato) fissato dopo l'ultimo esito del lead (o dopo il suo arrivo):
+ * Lead appesi la cui persona ha già un appuntamento (non annullato) dopo l'arrivo del lead (dopo l'ultimo esito se è un ricontatto o un annullamento):
  * l'appuntamento più recente diventa quello del lead. In showroom se luogo o titolo lo dicono, altrimenti a casa.
  * `esclusi` = appuntamenti che stanno per essere tolti come doppioni; `centralino` = telefoniste: i loro «appuntamenti» (e quelli telefonici)
  * sono ricontatti, non visite del venditore, e non contano.
@@ -65,7 +65,10 @@ export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[
     for (const k of chiaviCliente(perId.get(a.clienteId), a.clienteId)) perChiave.set(k, [...(perChiave.get(k) ?? []), a]);
   const out: LeadDaAvanzare[] = [];
   for (const l of leads.filter((x) => FASI_DA_FISSARE.includes(x.fase))) {
-    const da = l.ultimoEsitoIl && l.ultimoEsitoIl > l.createdAt ? l.ultimoEsitoIl : l.createdAt;
+    // In migrazione conta l'arrivo del lead: le classificazioni fatte in blocco su P&C ONE dopo una visita già svolta non la annullano.
+    // Fanno eccezione un ricontatto concordato o un annullamento registrati dopo: lì vale l'ultimo esito.
+    const dopoEsito = (l.fase === "DA_RICHIAMARE" || l.fase === "APPUNTAMENTO_ANNULLATO") && l.ultimoEsitoIl && l.ultimoEsitoIl > l.createdAt;
+    const da = dopoEsito ? l.ultimoEsitoIl! : new Date(l.createdAt.getTime() - 86_400_000);
     const chiavi = chiaviPersona({ clienteId: l.clienteId, nome: l.nome, telefoni: [l.telefono], email: l.email });
     const app = [...new Set(chiavi.flatMap((k) => perChiave.get(k) ?? []))]
       .filter((a) => a.dataOra.getTime() >= da.getTime())
