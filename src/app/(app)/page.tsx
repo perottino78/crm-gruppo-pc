@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { chiaveGiorno, inizioGiorno, aggiungiGiorni } from "@/lib/calendario/tempo";
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
 import { getCurrentUser } from "@/lib/auth";
@@ -22,6 +23,10 @@ export default async function DashboardPage({
     prisma.preventivo.aggregate({ _sum: { totaleNetto: true }, where: { stato: "APERTO", ...brandFiltro, ...preventivoScope } }),
     prisma.lead.count({ where: { fase: { in: FASI_APERTE }, ...brandFiltro, ...leadScope } }),
   ]);
+
+  // «chiamata con commerciale» fissate dal centralino per me, da fare entro oggi (il task del venditore)
+  const fineOggi = inizioGiorno(aggiungiGiorni(chiaveGiorno(new Date()), 1));
+  const chiamateDaFare = utente ? await prisma.lead.count({ where: { venditoreId: utente.id, fase: "APPUNTAMENTO_TELEFONICO", scadenzaAzione: { lt: fineOggi } } }) : 0;
 
   // comunicazioni del team non lette o con un task ancora da fare
   const comunicazioni = utente ? await prisma.comunicazioneDestinatario.findMany({
@@ -56,6 +61,13 @@ export default async function DashboardPage({
               {r.comunicazione.conTask ? `📌 ${r.comunicazione.titoloTask}` : `✉️ ${r.comunicazione.oggetto.replace(/\{[a-z_]+\}/g, "")}`} <span className="text-neutral-400">· {r.comunicazione.mittenteNome}</span>
             </span>
           ))}
+        </a>
+      )}
+
+      {chiamateDaFare > 0 && (
+        <a href="/lead" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-purple-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
+          <span className="text-sm font-extrabold text-neutral-900">📞 Chiamate con commerciale da fare ed esitare</span>
+          <span className="text-2xl font-extrabold text-purple-700">{chiamateDaFare}</span>
         </a>
       )}
 

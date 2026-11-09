@@ -26,15 +26,15 @@ export default function EsitoLead({ leadId, esiti, venditori, venditoreId, indir
         ))}
       </div>
       {def?.serveData && (
-        <label className="block text-xs font-semibold text-neutral-700">{appuntamento ? "Giorno e ora dell'appuntamento" : "Quando richiamare"}
+        <label className="block text-xs font-semibold text-neutral-700">{esito === "APPUNTAMENTO_TELEFONICO" ? "Giorno e ora in cui il commerciale chiama" : appuntamento ? "Giorno e ora dell'appuntamento" : "Quando richiamare"}
           <input type="datetime-local" name="data" required defaultValue={appuntamento ? dataAppuntamento : ""} className={campo} />
         </label>
       )}
       {appuntamento && (
         <div className="grid gap-3 sm:grid-cols-2">
-          <label className="block text-xs font-semibold text-neutral-700">Venditore
-            <select name="venditoreId" defaultValue={venditoreId ?? ""} className={campo}>
-              <option value="">da assegnare dopo</option>
+          <label className="block text-xs font-semibold text-neutral-700">{esito === "APPUNTAMENTO_TELEFONICO" ? "Commerciale che chiama" : "Venditore"}
+            <select key={esito} name="venditoreId" defaultValue={venditoreId ?? ""} required={esito === "APPUNTAMENTO_TELEFONICO"} className={campo}>
+              <option value="">{esito === "APPUNTAMENTO_TELEFONICO" ? "scegli il commerciale…" : "da assegnare dopo"}</option>
               {venditori.map((v) => <option key={v.id} value={v.id}>{v.nome}</option>)}
             </select>
           </label>

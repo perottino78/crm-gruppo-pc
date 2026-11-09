@@ -35,7 +35,8 @@ export function scopeLeadWhere(utente: U): Prisma.LeadWhereInput {
   const v = visibilitaDi(utente);
   if (v === "TUTTI") return {};
   if (v === "ZONA") return { OR: [{ telefonistaId: { in: team(utente) } }, { venditoreId: { in: team(utente) } }] };
-  return { telefonistaId: utente.id };
+  // chi vede solo i suoi: i lead assegnati a lui e le «chiamate con commerciale» fissate per lui
+  return { OR: [{ telefonistaId: utente.id }, { venditoreId: utente.id, fase: "APPUNTAMENTO_TELEFONICO" }] };
 }
 
 export function scopePreventivoWhere(utente: U): Prisma.PreventivoWhereInput {
