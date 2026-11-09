@@ -39,4 +39,8 @@ test("lead appesi: avanza solo se l'appuntamento è dopo l'ultimo esito", () => 
   const r = leadDaAvanzare(leads, a, clienti);
   assert.deepEqual(r.map((x) => [x.leadId, x.appuntamentoId, x.esito, x.utenteId]), [["l1", "b1", "APPUNTAMENTO_CASA", "venditore"], ["l3", "b3", "APPUNTAMENTO_SHOWROOM", "u1"]]);
   assert.deepEqual(leadDaAvanzare(leads, a, clienti, new Set(["b1"])).map((x) => x.leadId), ["l3"]);
+  // i ricontatti del centralino (telefonista o appuntamento telefonico) non sono visite
+  assert.deepEqual(leadDaAvanzare(leads, a, clienti, new Set(), new Set(["venditore"])).map((x) => x.leadId), ["l3"]);
+  a[1].tipo = "TELEFONICO";
+  assert.deepEqual(leadDaAvanzare(leads, a, clienti).map((x) => x.leadId), ["l1"]);
 });

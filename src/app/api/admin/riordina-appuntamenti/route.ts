@@ -17,13 +17,13 @@ const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome",
  */
 async function esegui(prova: boolean) {
   const [appuntamenti, clienti, leads, utenti] = await Promise.all([
-    prisma.appuntamento.findMany({ select: { id: true, chiaveImport: true, clienteId: true, utenteId: true, dataOra: true, stato: true, luogo: true, titolo: true, createdAt: true } }),
+    prisma.appuntamento.findMany({ select: { id: true, chiaveImport: true, clienteId: true, utenteId: true, tipo: true, dataOra: true, stato: true, luogo: true, titolo: true, createdAt: true } }),
     prisma.cliente.findMany({ select: { id: true, nome: true, telefono: true, cellulare: true, email: true, noteLibere: true, leadOrigineId: true } }),
     prisma.lead.findMany({
       where: { fase: { in: FASI_DA_FISSARE } },
       select: { id: true, nome: true, telefono: true, email: true, fase: true, createdAt: true, clienteGenerato: { select: { id: true } }, eventi: { where: { tipo: "lead.esito" }, orderBy: { createdAt: "desc" }, take: 1, select: { createdAt: true } } },
     }),
-    prisma.utente.findMany({ select: { id: true, nome: true } }),
+    prisma.utente.findMany({ select: { id: true, nome: true, ruolo: true } }),
   ]);
   const nomeCliente = new Map(clienti.map((c) => [c.id, c.nome]));
   const nomeUtente = new Map(utenti.map((u) => [u.id, u.nome]));
@@ -48,7 +48,7 @@ async function esegui(prova: boolean) {
   // 2) lead appesi con l'appuntamento già fissato
   const daAvanzare = leadDaAvanzare(
     leads.map((l) => ({ id: l.id, nome: l.nome, telefono: l.telefono, email: l.email, fase: l.fase, createdAt: l.createdAt, clienteId: l.clienteGenerato?.id ?? null, ultimoEsitoIl: l.eventi[0]?.createdAt ?? null })),
-    appuntamenti, clienti, via,
+    appuntamenti, clienti, via, new Set(utenti.filter((u) => u.ruolo === "TELEFONISTA").map((u) => u.id)),
   );
   const adesso = new Date();
   const perLead = new Map(leads.map((l) => [l.id, l]));

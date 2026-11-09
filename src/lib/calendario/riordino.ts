@@ -5,7 +5,7 @@
 import { chiaveGiorno } from "./tempo";
 import { normalizzaTelefono, chiaveNomeCliente } from "@/lib/clienti/bconsole";
 
-export type AppRiordino = { id: string; chiaveImport: string | null; clienteId: string; utenteId: string; dataOra: Date; stato: string; luogo: string | null; titolo: string | null; createdAt: Date };
+export type AppRiordino = { id: string; chiaveImport: string | null; clienteId: string; utenteId: string; tipo?: string; dataOra: Date; stato: string; luogo: string | null; titolo: string | null; createdAt: Date };
 export type ClienteRiordino = { id: string; nome: string; telefono: string | null; cellulare: string | null; email: string | null };
 export type LeadRiordino = { id: string; nome: string; telefono: string | null; email: string | null; fase: string; createdAt: Date; clienteId: string | null; ultimoEsitoIl: Date | null };
 
@@ -55,12 +55,13 @@ export type LeadDaAvanzare = { leadId: string; appuntamentoId: string; esito: "A
 /**
  * Lead appesi la cui persona ha già un appuntamento (non annullato) fissato dopo l'ultimo esito del lead (o dopo il suo arrivo):
  * l'appuntamento più recente diventa quello del lead. In showroom se luogo o titolo lo dicono, altrimenti a casa.
- * `esclusi` = appuntamenti che stanno per essere tolti come doppioni.
+ * `esclusi` = appuntamenti che stanno per essere tolti come doppioni; `centralino` = telefoniste: i loro «appuntamenti» (e quelli telefonici)
+ * sono ricontatti, non visite del venditore, e non contano.
  */
-export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[], clienti: ClienteRiordino[], esclusi = new Set<string>()): LeadDaAvanzare[] {
+export function leadDaAvanzare(leads: LeadRiordino[], appuntamenti: AppRiordino[], clienti: ClienteRiordino[], esclusi = new Set<string>(), centralino = new Set<string>()): LeadDaAvanzare[] {
   const perId = new Map(clienti.map((c) => [c.id, c]));
   const perChiave = new Map<string, AppRiordino[]>();
-  for (const a of appuntamenti.filter((x) => x.stato !== "ANNULLATO" && !esclusi.has(x.id)))
+  for (const a of appuntamenti.filter((x) => x.stato !== "ANNULLATO" && !esclusi.has(x.id) && x.tipo !== "TELEFONICO" && !centralino.has(x.utenteId)))
     for (const k of chiaviCliente(perId.get(a.clienteId), a.clienteId)) perChiave.set(k, [...(perChiave.get(k) ?? []), a]);
   const out: LeadDaAvanzare[] = [];
   for (const l of leads.filter((x) => FASI_DA_FISSARE.includes(x.fase))) {
