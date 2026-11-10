@@ -2,12 +2,13 @@
 import { prisma } from "@/lib/prisma";
 import { clientiPerSituazione } from "./regole";
 
-/** Clienti che hanno comprato: commessa (non annullata), offerta confermata, ordine BConsole, fattura di vendita (non nota di credito). */
+/** Clienti che hanno comprato: commessa (non annullata), offerta confermata (CRM o BConsole), ordine BConsole, fattura di vendita (non nota di credito). */
 export async function clientiCheHannoComprato(): Promise<Set<string>> {
   const [commesse, offerte, ordini, fatture] = await Promise.all([
     prisma.commessa.findMany({ where: { stato: { not: "ANNULLATA" } }, select: { clienteId: true } }),
     prisma.preventivo.findMany({ where: { OR: [{ stato: "ACCETTATO" }, { confermatoIl: { not: null } }] }, select: { clienteId: true } }),
-    prisma.documentoBC.findMany({ where: { tipo: "ORDINE", clienteId: { not: null } }, select: { clienteId: true } }),
+    // ordini BConsole e offerte BConsole confermate (stato «Confermato» / «Parz.Confermato»)
+    prisma.documentoBC.findMany({ where: { clienteId: { not: null }, OR: [{ tipo: "ORDINE" }, { tipo: "OFFERTA", stato: { contains: "onfermat", mode: "insensitive" } }] }, select: { clienteId: true } }),
     prisma.fatturaVendita.findMany({ where: { clienteId: { not: null }, tipoDocumento: { not: "TD04" } }, select: { clienteId: true } }),
   ]);
   return new Set([...commesse, ...offerte, ...ordini, ...fatture].map((x) => x.clienteId!).filter(Boolean));
