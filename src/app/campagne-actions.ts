@@ -10,7 +10,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { accodaCampagna, inviaProva, CHIAVE_PROMEMORIA_GIORNI, CHIAVE_PROMEMORIA_A } from "@/lib/campagne/motore";
 import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
-import { emailValida, leggiGiorniPromemoria, giorniAllaScadenza } from "@/lib/campagne/regole";
+import { emailValida, leggiGiorniPromemoria, giorniAllaScadenza, SITUAZIONI } from "@/lib/campagne/regole";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const lista = (fd: FormData, k: string) => fd.getAll(k).filter((x): x is string => typeof x === "string" && !!x.trim());
@@ -56,6 +56,10 @@ export async function salvaCampagna(fd: FormData) {
       preheader: (str(fd, "preheader") ?? "").slice(0, 200), formato, html: html.slice(0, 300_000), tracciamento: fd.get("tracciamento") === "on",
       marchi: lista(fd, "marchi"), stati: lista(fd, "stati"), categorie: lista(fd, "categorie"),
       provenienza: str(fd, "provenienza"), commercialeId: str(fd, "commercialeId"), provincia: str(fd, "provincia"),
+      situazione: SITUAZIONI.some((x) => x.codice === str(fd, "situazione")) ? str(fd, "situazione") : null,
+      offerteDal: str(fd, "offerteDal") ? daOraRoma(`${str(fd, "offerteDal")}T00:00`) : null,
+      offerteAl: str(fd, "offerteAl") ? daOraRoma(`${str(fd, "offerteAl")}T23:59`) : null,
+      richiama: fd.get("richiama") === "on", richiamaTelefonistaId: str(fd, "richiamaTelefonistaId"),
       validaFino: fino ? daOraRoma(`${fino}T12:00`) : null,
       // nuova scadenza: gli avvisi ripartono da capo
       promemoriaInviati: [],
@@ -105,7 +109,7 @@ export async function duplicaCampagna(fd: FormData) {
   if (!id) return;
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id } });
   const n = await prisma.campagna.create({
-    data: { nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, creataDa: u.nome },
+    data: { nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, creataDa: u.nome },
   });
   redirect(`/campagne/${n.id}?ok=${encodeURIComponent("Copia creata: aggiorna testo e scadenza, poi invia.")}`);
 }

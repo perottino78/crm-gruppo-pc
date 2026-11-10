@@ -55,6 +55,7 @@ export default async function MarketingPage() {
   const sezioni: [string, string, string, string][] = [
     ["/lead", "📞", "Lead da lavorare", "La coda delle telefoniste, esiti e storico di ogni contatto"],
     ["/clienti", "👥", "Contatti e filtri", "Tutti i clienti: provenienza, stato, commerciale; esporta per Excel o per i pubblici di Meta"],
+    ["/marketing/costi", "💶", "Costo per canale", "Quanto costa un lead, un appuntamento e un contratto di ogni canale (Facebook, Instagram, email…)"],
     ["/campagne", "📣", "Campagne email", "Invii ai clienti filtrati per marchio, stato e provenienza, con scadenza e avvisi"],
     ["/impostazioni/automazioni", "⚙️", "Email automatiche", "Accensione, promozione del recupero, avvisi di scadenza, registro degli invii"],
     ["/marketing/email", "✏️", "Testi delle email", "Modifica oggetto e testo di ogni email del percorso, con anteprima"],
