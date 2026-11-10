@@ -8,6 +8,7 @@ import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemori
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/mail/tracciamento";
 import { controllaRimbalzi } from "@/lib/mail/rimbalzi-server";
+import { filtriSituazione } from "./situazione";
 import { INTESTAZIONE } from "@/lib/mail/rimbalzi";
 
 /** L'indirizzo della scheda è quello già rimbalzato? (se qualcuno lo corregge, si torna a scrivergli) */
@@ -43,6 +44,11 @@ export async function disiscriviCliente(clienteId: string, firma: string): Promi
 export const filtriDi = (c: { marchi: string[]; stati: string[]; categorie: string[]; provenienza: string | null; commercialeId: string | null; provincia: string | null }): FiltriCampagna =>
   ({ marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia });
 
+/** Filtri della campagna compresa la situazione (offerta non chiusa, ha comprato…), che va calcolata sul database. */
+export async function filtriCampagna(c: Parameters<typeof filtriDi>[0] & { situazione: string | null; offerteDal: Date | null; offerteAl: Date | null }): Promise<FiltriCampagna> {
+  return { ...filtriDi(c), ...(await filtriSituazione(c)) };
+}
+
 /** Quanti clienti rientrano nei filtri e quanti si possono davvero raggiungere via email. */
 export async function contaDestinatari(f: FiltriCampagna) {
   const base = whereCampagna(f);
@@ -60,7 +66,7 @@ export async function contaDestinatari(f: FiltriCampagna) {
 /** Mette in coda i destinatari della campagna (chi l'ha già ricevuta non la riceve di nuovo). Ritorna quanti nuovi. */
 export async function accodaCampagna(campagnaId: string, adesso = new Date()): Promise<number> {
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id: campagnaId } });
-  const clienti = await prisma.cliente.findMany({ where: { AND: [whereCampagna(filtriDi(c)), whereRaggiungibile] }, select: { id: true, email: true, emailRimbalzata: true } });
+  const clienti = await prisma.cliente.findMany({ where: { AND: [whereCampagna(await filtriCampagna(c)), whereRaggiungibile] }, select: { id: true, email: true, emailRimbalzata: true } });
   const validi = clienti.filter((x) => emailValida(x.email) && !rimbalzato(x));
   const r = await prisma.campagnaInvio.createMany({ data: validi.map((x) => ({ campagnaId, clienteId: x.id, email: x.email!.trim().toLowerCase() })), skipDuplicates: true });
   await prisma.campagna.update({ where: { id: campagnaId }, data: { stato: "IN_INVIO", inviataIl: c.inviataIl ?? adesso } });

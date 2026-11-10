@@ -6,8 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
 import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne } from "@/app/campagne-actions";
-import { contaDestinatari, filtriDi, emailCampagna } from "@/lib/campagne/motore";
-import { CATEGORIE, SENZA_STATO, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
+import { contaDestinatari, filtriCampagna, emailCampagna } from "@/lib/campagne/motore";
+import { CATEGORIE, SENZA_STATO, SITUAZIONI, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 import CampiEmail from "@/components/campagne/CampiEmail";
 
 const perc = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : "—");
@@ -24,12 +24,14 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   const p = await searchParams;
   const c = await prisma.campagna.findUnique({ where: { id }, include: { invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
   if (!c) notFound();
-  const [brand, perStato, perProvenienza, commerciali, conti] = await Promise.all([
+  const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" }, select: { nome: true } }),
     prisma.cliente.groupBy({ by: ["statoLead"], _count: { _all: true }, orderBy: { _count: { statoLead: "desc" } } }),
     prisma.cliente.groupBy({ by: ["origine"], _count: { _all: true }, orderBy: { _count: { origine: "desc" } } }),
     prisma.utente.findMany({ where: { clientiResponsabile: { some: {} } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
-    contaDestinatari(filtriDi(c)),
+    filtriCampagna(c).then(contaDestinatari),
+    prisma.utente.findMany({ where: { stato: "ATTIVO", OR: [{ ruolo: "TELEFONISTA" }, { ruolo: "MARKETING" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
+    prisma.leadEvento.count({ where: { tipo: "campagna.clic", testo: { contains: `campagna «${c.nome}»` } } }),
   ]);
   const n = (s: string) => c.invii.filter((i) => i.stato === s).length;
   const g = c.validaFino ? giorniAllaScadenza(c.validaFino, new Date()) : null;
@@ -76,6 +78,19 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
               <input name="provincia" defaultValue={c.provincia ?? ""} placeholder="es. TO" className={`${inp} w-full`} />
             </label>
           </div>
+          <div className="rounded border border-orange-200 bg-orange-50/60 p-3 space-y-2">
+            <p className="text-xs text-neutral-700 font-semibold">Situazione del contatto (per trovare chi è già interessato)</p>
+            <div className="flex flex-wrap gap-2">
+              <label className={casella(!c.situazione)}><input type="radio" name="situazione" value="" defaultChecked={!c.situazione} />tutti</label>
+              {SITUAZIONI.map((x) => <label key={x.codice} title={x.spiega} className={casella(c.situazione === x.codice)}><input type="radio" name="situazione" value={x.codice} defaultChecked={c.situazione === x.codice} />{x.nome}</label>)}
+            </div>
+            <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-700">
+              Offerte fatte dal <input type="date" name="offerteDal" defaultValue={c.offerteDal ? chiaveGiorno(c.offerteDal) : ""} className={inp} />
+              al <input type="date" name="offerteAl" defaultValue={c.offerteAl ? chiaveGiorno(c.offerteAl) : ""} className={inp} />
+              <span className="text-neutral-500">(solo per «offerta non chiusa»; vuoto = tutte)</span>
+            </div>
+            <p className="text-[11px] text-neutral-600">«Offerta non chiusa» = ha avuto un preventivo nel CRM o in BConsole e non ha mai firmato (niente contratto, ordine o fattura). Sono i contatti più caldi: hanno già incontrato un commerciale.</p>
+          </div>
           <p className="text-sm rounded bg-teal-50 border border-teal-200 px-3 py-2">
             👥 <b>{conti.raggiungibili}</b> riceveranno l&apos;email · {conti.totale} rientrano nei filtri ({conti.senzaEmail} senza email, {conti.disiscritti} disiscritti{conti.rimbalzati ? `, ${conti.rimbalzati} con email rimbalzata` : ""}).
             <span className="text-xs text-neutral-600"> Il conteggio si aggiorna quando salvi.</span>
@@ -91,6 +106,16 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             <input type="date" name="validaFino" defaultValue={c.validaFino ? chiaveGiorno(c.validaFino) : ""} className={`${inp} ml-2`} />
             <span className="ml-2 font-normal text-neutral-500">prima della scadenza arriva l&apos;avviso di aggiornarla (giorni e destinatari in Impostazioni › Email automatiche)</span>
           </label>
+          <div className={`rounded border p-3 space-y-2 ${c.richiama ? "border-green-300 bg-green-50" : "border-neutral-200 bg-neutral-50"}`}>
+            <label className="flex items-start gap-2 text-sm">
+              <input type="checkbox" name="richiama" defaultChecked={c.richiama} className="mt-1" />
+              <span><b>📞 Chi clicca diventa una chiamata</b> per la telefonista: al primo clic sull&apos;email il contatto compare nei suoi «Task di oggi» come «Da recuperare», con la nota della campagna. Chi ha già un appuntamento non viene richiamato.</span>
+            </label>
+            <label className="text-xs text-neutral-600 flex flex-wrap items-center gap-2">Telefonista
+              <select name="richiamaTelefonistaId" defaultValue={c.richiamaTelefonistaId ?? ""} className={`${inp} max-w-full`}><option value="">quella del marchio</option>{telefoniste.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}</select>
+            </label>
+            {richiamati > 0 && <p className="text-xs text-green-800 font-semibold">Finora {richiamati} contatti sono diventati chiamate.</p>}
+          </div>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">💾 Salva</button>
         </div>
       </form>

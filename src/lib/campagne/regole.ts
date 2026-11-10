@@ -13,7 +13,30 @@ export type FiltriCampagna = {
   provenienza?: string | null;
   commercialeId?: string | null;
   provincia?: string | null;
+  /** Solo questi clienti (es. chi ha un'offerta non chiusa); null/undefined = nessun limite */
+  soloClienti?: string[] | null;
+  /** Escludi questi clienti (es. chi ha già comprato) */
+  escludiClienti?: string[] | null;
 };
+
+/** Situazioni del contatto per scegliere a chi scrivere. */
+export const SITUAZIONI: { codice: string; nome: string; spiega: string }[] = [
+  { codice: "OFFERTA_APERTA", nome: "Ha un'offerta non chiusa", spiega: "ha avuto un preventivo (CRM o BConsole) nel periodo scelto e non ha mai firmato un contratto" },
+  { codice: "HA_COMPRATO", nome: "Ha già comprato da noi", spiega: "ha un contratto, un ordine o una fattura: buono per proporre un altro marchio" },
+  { codice: "MAI_COMPRATO", nome: "Non ha mai comprato", spiega: "lead e contatti senza contratto, ordine o fattura" },
+];
+
+/**
+ * Da chi ha avuto offerte e chi ha comprato, i clienti da includere/escludere per la situazione scelta.
+ * Chi ha un'offerta non chiusa = ha un'offerta nel periodo e non compare fra chi ha comprato.
+ */
+export function clientiPerSituazione(situazione: string | null | undefined, conOfferta: Iterable<string>, comprati: Iterable<string>): { soloClienti?: string[]; escludiClienti?: string[] } {
+  const c = new Set(comprati);
+  if (situazione === "OFFERTA_APERTA") return { soloClienti: [...new Set(conOfferta)].filter((id) => !c.has(id)) };
+  if (situazione === "HA_COMPRATO") return { soloClienti: [...c] };
+  if (situazione === "MAI_COMPRATO") return { escludiClienti: [...c] };
+  return {};
+}
 
 /** Clienti che rientrano nei filtri della campagna (con email, non disiscritti: quelli si contano a parte). */
 export function whereCampagna(f: FiltriCampagna): Prisma.ClienteWhereInput {
@@ -30,6 +53,8 @@ export function whereCampagna(f: FiltriCampagna): Prisma.ClienteWhereInput {
   if (f.provenienza) w.push({ origine: f.provenienza });
   if (f.commercialeId) w.push({ responsabileId: f.commercialeId });
   if (f.provincia?.trim()) w.push({ provincia: { contains: f.provincia.trim(), mode: "insensitive" } });
+  if (f.soloClienti) w.push({ id: { in: f.soloClienti } });
+  if (f.escludiClienti?.length) w.push({ id: { notIn: f.escludiClienti } });
   return { AND: w };
 }
 

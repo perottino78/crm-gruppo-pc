@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { leggiCodice, linkSicuro } from "@/lib/mail/tracciamento";
 import { APP_URL } from "@/lib/mail/invio";
+import { richiamaDaCampagna } from "@/lib/campagne/richiamo";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ codi
       if (c.tipo === "c") {
         await prisma.campagnaInvio.updateMany({ where: { id: c.id }, data: dati });
         await prisma.campagnaInvio.updateMany({ where: { id: c.id, apertaIl: null }, data: { apertaIl: ora } });
-        if (clic) await prisma.campagnaInvio.updateMany({ where: { id: c.id, clicIl: null }, data: { clicIl: ora } });
+        if (clic) {
+          const primo = await prisma.campagnaInvio.updateMany({ where: { id: c.id, clicIl: null }, data: { clicIl: ora } });
+          // primo clic: se la campagna lo chiede, il contatto diventa una chiamata per la telefonista
+          if (primo.count) await richiamaDaCampagna(c.id, ora).catch(() => null);
+        }
       } else {
         await prisma.emailLead.updateMany({ where: { id: c.id }, data: dati });
         await prisma.emailLead.updateMany({ where: { id: c.id, apertaIl: null }, data: { apertaIl: ora } });

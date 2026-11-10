@@ -380,19 +380,30 @@ login nel `matcher` del middleware.
   Acconto dalla commessa (`propostaDaCommessa`), saldo = righe dell'offerta − acconti fatturati (CRM o BConsole TD02), fattura differita da più DDT dello stesso cliente,
   nota di credito che storna (fattura collegata). Emessa = non si modifica né elimina. PDF `GET /api/fatturazione/fattura/<id>/pdf`, XML `/xml`, DDT `/api/fatturazione/ddt/<id>/pdf`;
   ricerca clienti senza scope `/api/fatturazione/clienti`. Fino allo SDI (2027) l'XML si carica a mano. Test `tests/fatturazione/calcoli.test.ts`, collaudo `fatturazione` (29).
+- **Svolta appuntamenti senza Facebook** (richiesta di Ugo, nov 2026: nuovo commerciale da riempire di appuntamenti, Meta troppo cara):
+  nelle Campagne la «Situazione del contatto» (`Campagna.situazione` OFFERTA_APERTA | HA_COMPRATO | MAI_COMPRATO, periodo `offerteDal/offerteAl`):
+  `src/lib/campagne/situazione.ts` (chi ha comprato = commessa non annullata, offerta confermata, ordine BConsole `DocumentoBC` ORDINE, fattura di
+  vendita non TD04; chi ha un'offerta = preventivo CRM o `DocumentoBC` OFFERTA nel periodo) + `clientiPerSituazione` puro (`soloClienti`/`escludiClienti`
+  in `whereCampagna`; `filtriCampagna` asincrona in `motore.ts`). «Chi clicca diventa una chiamata» (`Campagna.richiama`, `richiamaTelefonistaId`):
+  al primo clic (rotta `api/traccia`) `richiamaDaCampagna` (`src/lib/campagne/richiamo.ts`, regola pura `azioneRichiamo`): lead del cliente
+  (`leadOrigineId`) chiuso → riaperto in RECUPERO con scadenza adesso (invii in coda annullati), aperto → scadenza anticipata a oggi, con appuntamento →
+  solo nota, nessun lead → creato (fonte `campagna`, fase RECUPERO) e agganciato al cliente; evento `campagna.clic`. Costo per canale
+  (`/marketing/costi`, permesso marketing): `SpesaMarketing` (mese+canale unico, `salvaSpeseMarketing` in `src/app/spese-marketing-actions.ts`), calcoli puri
+  `src/lib/marketing/costi.ts` (lead del mese per `provenienzaDaFonte`, appuntamenti, contratti = commessa/offerta confermata del cliente nato dal lead,
+  € per lead/appuntamento/contratto, resa). Test `tests/marketing/svolta.test.ts`, collaudo `svolta-appuntamenti` (14).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 308, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 312, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 
