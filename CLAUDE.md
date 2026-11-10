@@ -382,7 +382,7 @@ login nel `matcher` del middleware.
   ricerca clienti senza scope `/api/fatturazione/clienti`. Fino allo SDI (2027) l'XML si carica a mano. Test `tests/fatturazione/calcoli.test.ts`, collaudo `fatturazione` (29).
 - **Svolta appuntamenti senza Facebook** (richiesta di Ugo, nov 2026: nuovo commerciale da riempire di appuntamenti, Meta troppo cara):
   nelle Campagne la «Situazione del contatto» (`Campagna.situazione` OFFERTA_APERTA | HA_COMPRATO | MAI_COMPRATO, periodo `offerteDal/offerteAl`):
-  `src/lib/campagne/situazione.ts` (chi ha comprato = commessa non annullata, offerta confermata, ordine BConsole `DocumentoBC` ORDINE, fattura di
+  `src/lib/campagne/situazione.ts` (chi ha comprato = commessa non annullata, offerta confermata, ordine BConsole `DocumentoBC` ORDINE o OFFERTA «Confermato»/«Parz.Confermato», fattura di
   vendita non TD04; chi ha un'offerta = preventivo CRM o `DocumentoBC` OFFERTA nel periodo) + `clientiPerSituazione` puro (`soloClienti`/`escludiClienti`
   in `whereCampagna`; `filtriCampagna` asincrona in `motore.ts`). «Chi clicca diventa una chiamata» (`Campagna.richiama`, `richiamaTelefonistaId`):
   al primo clic (rotta `api/traccia`) `richiamaDaCampagna` (`src/lib/campagne/richiamo.ts`, regola pura `azioneRichiamo`): lead del cliente

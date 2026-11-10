@@ -35,6 +35,9 @@ async function main() {
   await prisma.documentoBC.create({ data: { id: "OFF|2", tipo: "OFFERTA", numero: "701/2026", data: new Date("2026-08-01T10:00:00Z"), clienteId: franco.id, clienteNome: franco.nome } });
   await prisma.documentoBC.create({ data: { id: "ORD|2", tipo: "ORDINE", numero: "300/2026", data: new Date("2026-08-20T10:00:00Z"), clienteId: franco.id, clienteNome: franco.nome } });
 
+  // Gino: offerta BConsole «Confermato» (comprato anche senza ordine importato)
+  const gino = await cli("GINO OFFERTA CONFERMATA");
+  await prisma.documentoBC.create({ data: { id: "OFF|3", tipo: "OFFERTA", numero: "702/2026", data: new Date("2026-07-01T10:00:00Z"), clienteId: gino.id, clienteNome: gino.nome, stato: "Parz.Confermato" } });
   // 1) campagna alle offerte non chiuse del 2026
   const camp = await prisma.campagna.create({ data: { nome: "Offerta ancora valida", oggetto: "{nome}, la tua offerta", testo: "Ciao {nome}", creataDa: "Ugo" } });
   await redirectA(salvaCampagna(fd({ id: camp.id, nome: "Offerta ancora valida", oggetto: "{nome}, la tua offerta", formato: "TESTO", testo: "Ciao {nome}", tracciamento: "on", situazione: "OFFERTA_APERTA", offerteDal: "2026-01-01", offerteAl: "2026-12-31", richiama: "on", richiamaTelefonistaId: cristina.id })));
@@ -47,8 +50,8 @@ async function main() {
   verifica(invii.map((i) => i.clienteId).sort().join() === [anna.id, bruno.id].sort().join(), "in coda solo Anna e Bruno");
   // senza periodo entra anche Elena; «ha comprato» = Carla e Franco; «mai comprato» esclude Carla e Franco
   verifica((await contaDestinatari(await filtriCampagna({ ...c, offerteDal: null, offerteAl: null }))).raggiungibili === 3, "senza periodo: anche l'offerta del 2024");
-  verifica((await contaDestinatari(await filtriCampagna({ ...c, situazione: "HA_COMPRATO" }))).raggiungibili === 2, "«ha già comprato»: commessa del CRM e ordine BConsole");
-  verifica((await contaDestinatari(await filtriCampagna({ ...c, situazione: "MAI_COMPRATO" }))).raggiungibili === 4, "«non ha mai comprato»: tutti tranne Carla e Franco");
+  verifica((await contaDestinatari(await filtriCampagna({ ...c, situazione: "HA_COMPRATO" }))).raggiungibili === 3, "«ha già comprato»: commessa del CRM, ordine BConsole e offerta BConsole confermata");
+  verifica((await contaDestinatari(await filtriCampagna({ ...c, situazione: "MAI_COMPRATO" }))).raggiungibili === 4, "«non ha mai comprato»: tutti tranne Carla, Franco e Gino");
 
   // 2) Anna clicca: nasce la chiamata per Cristina
   const invAnna = invii.find((i) => i.clienteId === anna.id)!;
