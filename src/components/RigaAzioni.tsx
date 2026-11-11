@@ -36,9 +36,9 @@ export default function RigaAzioni({
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        {children}
-        <div className="flex items-start gap-3">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0 break-words">{children}</div>
+        <div className="flex items-start gap-3 shrink-0">
           <span className="font-medium pt-1">{subtotale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
           <div className="flex flex-col gap-1 w-[84px] shrink-0">
             <button type="button" onClick={() => setAperto((v) => !v)} className="btn-flat btn-flat-neutral w-full">

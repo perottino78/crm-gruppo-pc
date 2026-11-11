@@ -27,7 +27,9 @@ async function main() {
   console.log("1. Righe nelle stanze");
   await creaSezione(fd({ preventivoId: p.id, nome: "Cucina" }));
   const cucina = (await prev(p.id)).sezioni[0];
-  await aggiungiRigaPreventivo(fd({ preventivoId: p.id, prodottoId: prodotto.id, quantita: "2", sezioneId: cucina.id }));
+  const aggiunta = await aggiungiRigaPreventivo(fd({ preventivoId: p.id, prodottoId: prodotto.id, quantita: "2", sezioneId: cucina.id }));
+  const nuova = aggiunta ? await prisma.rigaPreventivo.findUnique({ where: { id: aggiunta.rigaId } }) : null;
+  verifica(nuova?.sezioneId === cucina.id && nuova.quantita === 2, "la finestra «negozio» riceve la riga appena aggiunta (per aprirne gli optional)", aggiunta);
   await aggiungiRigaTestoLibero(fd({ preventivoId: p.id, testoLibero: "Smontaggio vecchie porte", prezzoUnitario: "150", sezioneId: cucina.id }));
   await aggiungiRigaPreventivo(fd({ preventivoId: p.id, prodottoId: prodotto.id }));
   let x = await prev(p.id);

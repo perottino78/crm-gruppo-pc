@@ -24,6 +24,7 @@ import SelectAutoInvio from "@/components/SelectAutoInvio";
 import FormAutoSalva from "@/components/FormAutoSalva";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
 import RigaTesto from "@/components/preventivi/RigaTesto";
+import FinestraOptional from "@/components/preventivi/FinestraOptional";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
 import {
   aggiungiRigaPreventivo,
@@ -324,7 +325,7 @@ export default async function PreventivoPage({
         </div>
       )}
 
-      <fieldset disabled={bloccata} className={bloccata ? "opacity-75" : ""}>
+      <fieldset disabled={bloccata} className={`min-w-0 ${bloccata ? "opacity-75" : ""}`}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <p className="text-xs text-neutral-600 mb-1">Commerciale</p>
@@ -372,7 +373,7 @@ export default async function PreventivoPage({
         </p>
       )}
 
-      <fieldset disabled={bloccata} className={bloccata ? "opacity-75" : ""}>
+      <fieldset disabled={bloccata} className={`min-w-0 ${bloccata ? "opacity-75" : ""}`}>
       <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
         <h2 className="text-base font-bold text-neutral-900">Righe ({preventivo.righe.length})</h2>
         <form action={creaSezione} className="flex items-center gap-1.5">
@@ -389,7 +390,7 @@ export default async function PreventivoPage({
             return (
               <div key={r.id} className="flex items-stretch">
                 {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
-                <div className="flex-1 px-4 py-3 text-sm">
+                <div className="flex-1 min-w-0 px-4 py-3 text-sm">
                 <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} importo={subtotaleLibero} />
                 </div>
               </div>
@@ -406,7 +407,7 @@ export default async function PreventivoPage({
           return (
             <div key={r.id} className="flex items-stretch">
               {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
-              <div className="flex-1 px-4 py-3 text-sm">
+              <div className="flex-1 min-w-0 px-4 py-3 text-sm">
               <RigaAzioni
                 rigaId={r.id}
                 preventivoId={preventivo.id}
@@ -443,7 +444,7 @@ export default async function PreventivoPage({
                     <input type="hidden" name="preventivoId" value={preventivo.id} />
                     <input type="hidden" name="mostra" value={(!r.mostraDescrizione).toString()} />
                     <button className={`text-[11px] px-2 py-0.5 rounded-full border ${r.mostraDescrizione ? "border-green-200 bg-green-50 text-green-700" : "border-neutral-200 text-neutral-600"}`}>
-                      {r.mostraDescrizione ? "✓ descrizione visibile in offerta" : "descrizione nascosta — clicca per mostrarla"}
+                      {r.mostraDescrizione ? "✓ foto (e testo personalizzato) in offerta" : "foto e testo nascosti in offerta — clicca per mostrarli"}
                     </button>
                   </form>
                   {r.descrizionePersonalizzata && (
@@ -452,7 +453,7 @@ export default async function PreventivoPage({
                     </span>
                   )}
                   <details className="text-[11px]">
-                    <summary className="cursor-pointer text-neutral-600 hover:text-neutral-700">✏️ modifica testo descrizione</summary>
+                    <summary className="cursor-pointer text-neutral-600 hover:text-neutral-700" title="In stampa c'è il riepilogo a elenco (tipo, colore, misure, optional); la scheda tecnica completa compare solo se la personalizzi qui">✏️ testo per il cliente (facoltativo)</summary>
                     <form action={aggiornaDescrizionePersonalizzata} className="mt-1.5 flex flex-col gap-1.5 max-w-lg">
                       <input type="hidden" name="id" value={r.id} />
                       <input type="hidden" name="preventivoId" value={preventivo.id} />
@@ -506,6 +507,7 @@ export default async function PreventivoPage({
                 </div>
               )}
 
+              <FinestraOptional rigaId={r.id} titolo={labelBreveTipologia(prodotto.tipologia)} scelti={r.optionali.length}>
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
                   .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
@@ -1245,6 +1247,7 @@ export default async function PreventivoPage({
                   </form>
                 );
               })()}
+              </FinestraOptional>
               </div>
             </div>
           );
@@ -1333,18 +1336,9 @@ export default async function PreventivoPage({
 
 
       <div id="aggiungi-prodotto" className="scroll-mt-4" />
-      {preventivo.sezioni.length > 0 && (
-        <form method="get" action={`/preventivi/${preventivo.id}#aggiungi-prodotto`} className="mb-2 flex flex-wrap items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm">
-          <span className="font-semibold text-blue-900">🧩 Il prodotto scelto va in:</span>
-          <SelectAutoInvio
-            name="sezione"
-            defaultValue={sezioneScelta?.id ?? "nessuna"}
-            opzioni={[{ valore: "nessuna", etichetta: "— nessuna sezione —" }, ...preventivo.sezioni.map((x) => ({ valore: x.id, etichetta: `🏠 ${x.nome}` }))]}
-            className="text-sm border border-blue-300 rounded px-2 py-1 bg-white"
-          />
-        </form>
-      )}
       <SelettoreProdotto
+        finestra
+        sezioni={preventivo.sezioni.map((x) => ({ id: x.id, nome: x.nome }))}
         sezioneId={sezioneScelta?.id ?? null}
         preventivoId={preventivo.id}
         brandId={preventivo.brandId}
@@ -1372,7 +1366,7 @@ export default async function PreventivoPage({
               {prodottiTrovati.map((p) => (
                 <form
                   key={p.id}
-                  action={aggiungiRigaPreventivo}
+                  action={async (fd: FormData) => { "use server"; await aggiungiRigaPreventivo(fd); }}
                   className="flex items-center justify-between px-4 py-2.5 text-sm gap-2"
                 >
                   <input type="hidden" name="preventivoId" value={preventivo.id} />

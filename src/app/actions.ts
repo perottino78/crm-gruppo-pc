@@ -933,7 +933,7 @@ export async function spostaSezioneGiu(formData: FormData) {
   await spostaSezione(formData, 1);
 }
 
-export async function aggiungiRigaPreventivo(formData: FormData) {
+export async function aggiungiRigaPreventivo(formData: FormData): Promise<{ rigaId: string } | void> {
   if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const prodottoId = str(formData, "prodottoId");
@@ -976,9 +976,11 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
   }
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+  // la finestra «negozio» apre subito gli optional della riga appena aggiunta
+  return { rigaId: riga.id };
 }
 
-export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
+export async function aggiungiRigaPreventivoPerMisura(formData: FormData): Promise<{ rigaId: string } | void> {
   if (await offertaBloccata(formData)) return;
   const preventivoId = str(formData, "preventivoId");
   const brandId = str(formData, "brandId");
@@ -1022,7 +1024,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
         )}`
       );
     }
-    await prisma.rigaPreventivo.create({
+    const rigaFormula = await prisma.rigaPreventivo.create({
       data: {
         ...(await posizioneNuovaRiga(formData, preventivoId)),
         preventivoId,
@@ -1035,7 +1037,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
     });
     await ricalcolaTotali(preventivoId);
     revalidatePath(`/preventivi/${preventivoId}`);
-    return;
+    return { rigaId: rigaFormula.id };
   }
 
   const prodotto = await trovaFasciaPrezzo({ brandId, tipologia, larghezza, altezza });
@@ -1109,6 +1111,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
 
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+  return { rigaId: nuovaRiga.id };
 }
 
 export async function aggiornaDescrizionePersonalizzata(formData: FormData) {

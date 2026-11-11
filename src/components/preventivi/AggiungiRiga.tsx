@@ -2,8 +2,7 @@
 
 // Riga «nuova» in fondo a ogni sezione (stanza) dell'offerta — richiesta di Rocco: due pulsanti, «Prodotto» o «Testo».
 // «Testo» apre al posto dei pulsanti il testo + l'importo + «Aggiungi»; aggiunta la riga, tornano i due pulsanti pronti
-// per la successiva. «Prodotto» porta alla scelta del prodotto, che finirà in questa sezione.
-import Link from "next/link";
+// per la successiva. «Prodotto» apre la finestra «negozio» (SelettoreProdotto) già su questa sezione.
 import { useState } from "react";
 import { aggiungiRigaTestoLibero } from "@/app/actions";
 
@@ -14,7 +13,13 @@ export default function AggiungiRiga({ preventivoId, sezioneId, nomeSezione }: {
     return (
       <div className="flex flex-wrap items-center gap-2 px-4 py-2.5 bg-neutral-50/60">
         <span className="text-xs text-neutral-500">Nuova riga{dove}:</span>
-        <Link href={`/preventivi/${preventivoId}?sezione=${sezioneId ?? "nessuna"}#aggiungi-prodotto`} scroll={false} className="btn-3d btn-3d-blue text-xs px-3 py-1.5">🧩 Prodotto</Link>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new CustomEvent("scegli-prodotto", { detail: { sezioneId } }))}
+          className="btn-3d btn-3d-blue text-xs px-3 py-1.5"
+        >
+          🧩 Prodotto
+        </button>
         <button type="button" onClick={() => setTesto(true)} className="btn-3d btn-3d-outline text-xs px-3 py-1.5">📝 Testo</button>
       </div>
     );
