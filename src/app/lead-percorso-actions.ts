@@ -178,17 +178,27 @@ export async function modificaDatiLead(fd: FormData) {
   const nome = str(fd, "nome");
   if (!leadId) redirect(torna(ritorno, { errore: "Lead non trovato." }));
   if (!nome) redirect(torna(ritorno, { errore: "Il nome non può restare vuoto." }));
-  const lead = await prisma.lead.findFirst({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] }, select: { nome: true, telefono: true, email: true, comune: true, cap: true, prodotto: true } });
+  const lead = await prisma.lead.findFirst({ where: { AND: [{ id: leadId! }, scopeLeadWhere(u!)] }, select: { nome: true, telefono: true, email: true, comune: true, cap: true, prodotto: true, fonte: true, brandId: true, brand: { select: { nome: true } } } });
   if (!lead) redirect(torna(ritorno, { errore: "Lead non trovato." }));
   const email = str(fd, "email")?.toLowerCase() ?? null;
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(torna(ritorno, { errore: "L'email non sembra valida." }));
   const nuovi = { nome: nome!.slice(0, 200), telefono: str(fd, "telefono"), email, comune: str(fd, "comune"), cap: str(fd, "cap"), prodotto: str(fd, "prodotto") };
   const ETICHETTE: Record<keyof typeof nuovi, string> = { nome: "nome", telefono: "telefono", email: "email", comune: "comune", cap: "CAP", prodotto: "prodotto" };
   const cambi = (Object.keys(nuovi) as (keyof typeof nuovi)[]).filter((k) => (lead![k] ?? null) !== nuovi[k]);
-  if (!cambi.length) redirect(torna(ritorno, { ok: "Nessuna modifica" }));
-  await prisma.lead.update({ where: { id: leadId! }, data: nuovi });
+  const testi = cambi.map((k) => `${ETICHETTE[k]} «${lead![k] ?? "—"}» → «${nuovi[k] ?? "—"}»`);
+  // marchio e provenienza (richiesta di Rocco): solo se nel modulo e cambiati
+  const extra: { brandId?: string; fonte?: string } = {};
+  const brandId = str(fd, "brandId");
+  if (brandId && brandId !== lead!.brandId) {
+    const b = await prisma.brand.findUnique({ where: { id: brandId }, select: { nome: true } });
+    if (b) { extra.brandId = brandId; testi.push(`marchio «${lead!.brand.nome}» → «${b.nome}»`); }
+  }
+  const fonte = str(fd, "fonte");
+  if (fonte && fonte !== lead!.fonte) { extra.fonte = fonte.slice(0, 60); testi.push(`provenienza «${lead!.fonte}» → «${fonte}»`); }
+  if (!testi.length) redirect(torna(ritorno, { ok: "Nessuna modifica" }));
+  await prisma.lead.update({ where: { id: leadId! }, data: { ...nuovi, ...extra } });
   await prisma.leadEvento.create({
-    data: { leadId: leadId!, tipo: "lead.dati", utenteNome: u!.nome, testo: `Dati corretti: ${cambi.map((k) => `${ETICHETTE[k]} «${lead![k] ?? "—"}» → «${nuovi[k] ?? "—"}»`).join(", ")}` },
+    data: { leadId: leadId!, tipo: "lead.dati", utenteNome: u!.nome, testo: `Dati corretti: ${testi.join(", ")}` },
   });
   revalidatePath("/lead");
   revalidatePath(`/lead/${leadId}`);

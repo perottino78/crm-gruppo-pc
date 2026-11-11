@@ -10,6 +10,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
 import { PROVENIENZE, NESSUNA, whereFiltriClienti, filtriCampagnaAttivi } from "@/lib/clienti/provenienza";
 import { daOraRoma, aggiungiGiorni } from "@/lib/calendario/tempo";
+import { puo } from "@/lib/permessi/catalogo";
+import BottoneConferma from "@/components/BottoneConferma";
+import { eliminaCliente, eliminaLead } from "@/app/elimina-contatti-actions";
 
 
 // Quante righe mostrare (lead: ?lead=, anagrafica clienti: ?clienti=): di default le 10
@@ -50,6 +53,8 @@ type ClientiSearchParams = {
   commerciale?: string;
   dal?: string;
   al?: string;
+  ok?: string;
+  errore?: string;
 };
 
 export default async function ClientiPage({
@@ -88,6 +93,7 @@ export default async function ClientiPage({
   const utente = await getCurrentUser();
   const clienteScope = utente ? scopeClienteWhere(utente) : {};
   const leadScope = utente ? scopeLeadWhere(utente) : {};
+  const puoEliminare = puo(utente, "clienti.elimina");
 
   // Filtri dell'elenco clienti (ricerca, indirizzo e campagne): stessa funzione dell'esportazione
   const dataDa = dal ? daOraRoma(`${dal}T00:00`) : null;
@@ -151,6 +157,8 @@ export default async function ClientiPage({
         <h1 className="text-2xl font-bold text-neutral-900">Clienti</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+      {filtri.ok && <p className="mb-4 rounded-lg bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-900">✓ {filtri.ok}</p>}
+      {filtri.errore && <p className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-sm text-red-900">⚠️ {filtri.errore}</p>}
 
       {/* Barra di ricerca unificata — filtra sia lead che clienti */}
       <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
@@ -316,7 +324,7 @@ export default async function ClientiPage({
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
         {lead.map((l) => (
           <div key={l.id} className="flex items-center justify-between px-4 py-3 text-sm gap-3">
-            <div>
+            <div className="min-w-0">
               <p className="text-base font-bold text-neutral-900">{l.nome}</p>
               <p className="text-xs text-neutral-800">
                 🕒 Arrivato il {arrivoLead(l.createdAt)}
@@ -330,7 +338,7 @@ export default async function ClientiPage({
                 {l.fonte} · {l.brand.nome} · assegnato a {l.telefonista?.nome ?? "—"}
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-end gap-2">
               <Link href={`/lead/${l.id}`} className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-700 whitespace-nowrap">
                 {FASI_LEAD[l.fase]?.nome ?? l.fase} · lavora →
               </Link>
@@ -338,6 +346,13 @@ export default async function ClientiPage({
                 <form action={convertiLeadInCliente}>
                   <input type="hidden" name="id" value={l.id} />
                   <button className="text-xs text-blue-600 underline whitespace-nowrap">→ crea cliente</button>
+                </form>
+              )}
+              {puoEliminare && (
+                <form action={eliminaLead}>
+                  <input type="hidden" name="id" value={l.id} />
+                  <input type="hidden" name="ritorno" value={hrefQuante({})} />
+                  <BottoneConferma messaggio={`Eliminare il lead «${l.nome}»? Spariscono anche la sua cronologia e le email in programma. Non si può annullare.`} className="text-xs px-2 py-1 rounded border border-red-200 text-red-700 hover:bg-red-50" >🗑</BottoneConferma>
                 </form>
               )}
             </div>
@@ -370,10 +385,10 @@ export default async function ClientiPage({
 
       <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
         {clienti.map((c) => (
+          <div key={c.id} className="flex items-stretch hover:bg-neutral-50">
           <Link
-            key={c.id}
             href={`/clienti/${c.id}`}
-            className="flex items-center justify-between px-4 py-3 text-sm hover:bg-neutral-50"
+            className="flex flex-1 min-w-0 items-center justify-between px-4 py-3 text-sm"
           >
             <div>
               <p className="text-base font-bold text-neutral-900">{c.nome}</p>
@@ -393,6 +408,14 @@ export default async function ClientiPage({
             </div>
             <span className="text-xs text-neutral-600 text-right">{c.brand.nome}<br />{c.paese}</span>
           </Link>
+          {puoEliminare && (
+            <form action={eliminaCliente} className="flex items-center pr-3">
+              <input type="hidden" name="id" value={c.id} />
+              <input type="hidden" name="ritorno" value={hrefQuante({})} />
+              <BottoneConferma messaggio={`Eliminare il cliente «${c.nome}»? Spariscono anche contatti, indirizzi e appuntamenti. Se ha preventivi, pratiche o fatture non verrà eliminato. Non si può annullare.`} className="text-xs px-2 py-1 rounded border border-red-200 text-red-700 hover:bg-red-50">🗑</BottoneConferma>
+            </form>
+          )}
+          </div>
         ))}
         {clienti.length === 0 && ricercaAttiva && (
           <p className="px-4 py-6 text-sm text-neutral-600">Nessun cliente trovato con questi criteri di ricerca.</p>
