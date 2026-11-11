@@ -15,7 +15,7 @@ const incCliente = { include: { cliente: true } } as const;
 export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | null; tipi?: TipoEvento[] }): Promise<EventoCal[]> {
   const vuoi = (t: TipoEvento) => !o.tipi || o.tipi.includes(t);
   const u = o.utenteId ?? undefined;
-  const [app, ril, pose, ass] = await Promise.all([
+  const [app, ril, pose, ass, riu] = await Promise.all([
     vuoi("APPUNTAMENTO")
       ? prisma.appuntamento.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { utenteId: u } : {}) }, include: { cliente: true, utente: true } })
       : [],
@@ -28,12 +28,18 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
     vuoi("ASSISTENZA")
       ? prisma.assistenza.findMany({ where: { dataIntervento: { gte: o.da, lt: o.a }, ...(u ? { assegnatoUtenteId: u } : {}) }, include: { commessa: incCliente } })
       : [],
+    vuoi("RIUNIONE")
+      ? prisma.riunione.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { partecipanti: { has: u } } : {}) } })
+      : [],
   ]);
+  const nomi = riu.length ? new Map((await prisma.utente.findMany({ where: { id: { in: [...new Set(riu.flatMap((r) => r.partecipanti))] } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome])) : new Map<string, string>();
   const out: EventoCal[] = [
     ...app.map(daAppuntamento),
     ...ril.map(daRilievo),
     ...pose.map(daPosa),
     ...ass.map(daAssistenza),
+    // una riunione compare nel calendario di ognuno dei partecipanti (con il suo colore)
+    ...riu.flatMap((r) => r.partecipanti.filter((p) => !u || p === u).map((p) => daRiunione(r, p, nomi))),
   ].filter((e) => e.fine > o.da && e.inizio < o.a);
   return out.sort((x, y) => x.inizio.getTime() - y.inizio.getTime());
 }
@@ -81,6 +87,43 @@ export function daAssistenza(a: AssConDati): EventoCal {
     luogo: indirizzoCliente(a.commessa.cliente), note: [a.prodotto, a.descrizione].filter(Boolean).join(" — "),
     utenteId: a.assegnatoUtenteId, chi: a.assegnatoNome, stato: a.stato, href: `/assistenza`,
   };
+}
+
+type Riu = Awaited<ReturnType<typeof prisma.riunione.findFirstOrThrow>>;
+export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>): EventoCal {
+  const altri = r.partecipanti.filter((p) => p !== utenteId).map((p) => nomi.get(p)).filter(Boolean);
+  return {
+    id: `RIUNIONE:${r.id}:${utenteId}`, tipo: "RIUNIONE", inizio: r.dataOra, fine: new Date(r.dataOra.getTime() + (r.durataMin || 60) * MIN), giornataIntera: false,
+    titolo: r.titolo, cliente: null, luogo: r.luogo, note: [altri.length ? `Con: ${altri.join(", ")}` : null, r.note].filter(Boolean).join(" — ") || null,
+    utenteId, chi: nomi.get(utenteId) ?? null, stato: r.stato, href: `/calendario/riunione/${r.id}`,
+  };
+}
+
+/** Invito (o annullamento) della riunione a tutti i partecipanti: ognuno lo riceve sul suo calendario. Non blocca mai. */
+export async function invitaRiunione(id: string, metodo: "REQUEST" | "CANCEL" = "REQUEST"): Promise<{ inviati: string[]; motivo?: string }> {
+  const r = await prisma.riunione.findUnique({ where: { id } });
+  if (!r) return { inviati: [], motivo: "riunione non trovata" };
+  const persone = await prisma.utente.findMany({ where: { id: { in: r.partecipanti } }, select: { id: true, nome: true, email: true } });
+  const nomi = new Map(persone.map((x) => [x.id, x.nome]));
+  const mittente = await indirizzoMittente();
+  const quando = `${giornoBreve(chiaveGiorno(r.dataOra))} ore ${oraRoma(r.dataOra)}`;
+  const inviati: string[] = [];
+  let motivo: string | undefined;
+  for (const p of persone) {
+    if (!p.email || !/.+@.+\..+/.test(p.email)) continue;
+    const e = daRiunione(r, p.id, nomi);
+    // stesso uid per tutti: è la stessa riunione
+    const v: VoceIcs = { ...voceIcs(e), uid: `riunione-${r.id}@crm-gruppo-pc`, organizzatore: mittente ? { nome: "Gruppo P&C", email: mittente } : null, partecipanti: persone.filter((x) => x.email).map((x) => ({ nome: x.nome, email: x.email })) };
+    const annulla = metodo === "CANCEL";
+    const esito = await inviaMail({
+      a: [p.email],
+      oggetto: `${annulla ? "ANNULLATA — " : ""}Riunione: ${r.titolo} — ${quando}`,
+      testo: [`${annulla ? "Riunione annullata" : "Nuova riunione in calendario"}: ${r.titolo}`, `Quando: ${quando} (${r.durataMin} min)`, r.luogo ? `Dove: ${r.luogo}` : "", `Partecipanti: ${persone.map((x) => x.nome).join(", ")}`, r.note ? `Note: ${r.note}` : "", "", `Apri nel CRM: ${APP_URL}/calendario/riunione/${r.id}`].filter(Boolean).join("\n"),
+      invito: { metodo, ics: calendarioIcs([v], { metodo }) },
+    });
+    if (esito.inviata) inviati.push(p.email); else motivo = esito.motivo;
+  }
+  return { inviati, motivo };
 }
 
 /** Converte un evento in voce .ics (usata dal link calendario e dagli inviti) */

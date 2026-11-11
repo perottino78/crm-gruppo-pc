@@ -60,7 +60,7 @@ export async function evento(db: Db, leadId: string, tipo: string, testo: string
   await db.leadEvento.create({ data: { leadId, tipo, testo, utenteNome: utenteNome ?? null } });
 }
 
-type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null; mesiRecupero?: number };
+type DateLead = { richiamoIl?: Date | null; appuntamentoIl?: Date | null; mesiRecupero?: number; senzaEmailCliente?: boolean };
 
 /**
  * Programma il prossimo passo utile del ciclo a partire da `da`. I passi da saltare (lettere troppo vicine
@@ -72,7 +72,10 @@ async function programmaDa(db: Db, leadId: string, run: string, percorso: string
   if (date.mesiRecupero === undefined && passi.slice(da).some((p) => "dopoMesi" in p.quando)) date = { ...date, mesiRecupero: await mesiRecupero(db) };
   for (let i = da; i < passi.length; i++) {
     const quando = quandoPasso(passi[i].quando, riferimento, date);
-    const salta = passi[i].tipo === "EMAIL" ? daSaltare((passi[i] as { condizione?: Parameters<typeof daSaltare>[0] }).condizione, quando, riferimento, date.appuntamentoIl) : null;
+    const passo = passi[i];
+    const salta = passo.tipo === "EMAIL"
+      ? (date.senzaEmailCliente && passo.a === "CLIENTE" ? "niente email al cliente (scelto dal centralino)" : daSaltare(passo.condizione, quando, riferimento, date.appuntamentoIl))
+      : null;
     if (!salta) {
       await db.invioProgrammato.create({ data: { leadId, run, percorso, passo: i, chiave: `${run}:${i}`, eseguiDopo: quando } });
       return;
@@ -97,7 +100,7 @@ export async function avviaNuovoLead(leadId: string, adesso = new Date()) {
   });
 }
 
-export type EsitoLead = { leadId: string; esito: string; data?: Date | null; note?: string | null; utenteNome?: string | null; venditoreId?: string | null; indirizzo?: string | null };
+export type EsitoLead = { leadId: string; esito: string; data?: Date | null; note?: string | null; utenteNome?: string | null; venditoreId?: string | null; indirizzo?: string | null; senzaEmailCliente?: boolean };
 
 /** Registra l'esito di una telefonata/classificazione e avvia il percorso corrispondente. Ritorna un errore leggibile. */
 export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<{ ok: true } | { ok: false; errore: string }> {
@@ -138,8 +141,8 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
         ...(e.note ? { note: [lead.note, `[${adesso.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}${e.utenteNome ? ` ${e.utenteNome}` : ""}] ${e.note}`].filter(Boolean).join("\n") } : {}),
       },
     });
-    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${venditore ? ` con ${venditore.nome}` : appuntamento ? " (venditore da assegnare)" : ""}${e.note ? ` · ${e.note}` : ""}`, e.utenteNome);
-    await avviaPercorso(tx, e.leadId, percorso, adesso, { richiamoIl: def.serveData === "richiamo" ? e.data : null, appuntamentoIl: def.serveData === "appuntamento" ? e.data : null });
+    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${venditore ? ` con ${venditore.nome}` : appuntamento ? " (venditore da assegnare)" : ""}${e.senzaEmailCliente ? " · nessuna email al cliente" : ""}${e.note ? ` · ${e.note}` : ""}`, e.utenteNome);
+    await avviaPercorso(tx, e.leadId, percorso, adesso, { richiamoIl: def.serveData === "richiamo" ? e.data : null, appuntamentoIl: def.serveData === "appuntamento" ? e.data : null, senzaEmailCliente: !!e.senzaEmailCliente });
   });
   if (appuntamento || e.esito === "APPUNTAMENTO_ANNULLATO") await sincronizzaCalendario(e.leadId, e.utenteNome);
   return { ok: true };

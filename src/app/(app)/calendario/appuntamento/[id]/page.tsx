@@ -140,7 +140,11 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
             </div>
             <div className="flex flex-wrap gap-2 md:col-span-3">
               {a.stato !== "CONFERMATO" && btnStato("CONFERMATO", "👍 Confermato dal cliente (prima di andare)", "btn-3d-outline")}
-              {btnStato("ANNULLATO", "❌ Annulla (non interessato)", "btn-3d-red")}
+              <form action={rifissaDalCentralino}>
+                <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+                <input type="hidden" name="annullato" value="1" />
+                <button className="btn-3d btn-3d-red px-4 py-2 text-sm" title="L'appuntamento sparisce dal calendario e il centralino trova il task «Motiva l'annullamento»">❌ Appuntamento annullato</button>
+              </form>
             </div>
           </div>
         ) : (

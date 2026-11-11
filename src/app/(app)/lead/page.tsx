@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { leadSimili, SOGLIA_FUZZY } from "@/lib/ricerca/server";
 import { puo } from "@/lib/permessi/catalogo";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -68,7 +69,9 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const meseCal = giornoScelto ? meseDi(giornoScelto) : oggi.slice(0, 7);
   const finestraDal = inizioGiorno(`${meseVicino(meseCal, -4)}-01`), finestraAl = inizioGiorno(`${meseVicino(meseCal, 5)}-01`);
   const filtriTutti: Prisma.LeadWhereInput[] = [scope];
-  if (q) filtriTutti.push({ AND: q.split(/\s+/).filter(Boolean).slice(0, 6).map((x) => ({ OR: [{ nome: { contains: x, mode: "insensitive" as const } }, { telefono: { contains: x } }, { email: { contains: x, mode: "insensitive" as const } }] })) });
+  const filtriSenzaNome = (): Prisma.LeadWhereInput[] => filtriTutti.filter((f) => f !== filtroNome);
+  const filtroNome: Prisma.LeadWhereInput | null = q ? { AND: q.split(/\s+/).filter(Boolean).slice(0, 6).map((x) => ({ OR: [{ nome: { contains: x, mode: "insensitive" as const } }, { telefono: { contains: x } }, { email: { contains: x, mode: "insensitive" as const } }] })) } : null;
+  if (filtroNome) filtriTutti.push(filtroNome);
   if (fasiScelte.length) filtriTutti.push({ fase: { in: STATI_TASK.filter((s) => fasiScelte.includes(s.etichetta) || s.fasi.some((f) => fasiScelte.includes(f))).flatMap((s) => s.fasi) } });
   if (giornoScelto) {
     const dal = inizioGiorno(giornoScelto), al = inizioGiorno(aggiungiGiorni(giornoScelto, 1));
@@ -95,6 +98,9 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
     statoAutomazioni(),
     p.fatto ? prisma.lead.findFirst({ where: { AND: [scope, { id: p.fatto }] }, select: { id: true, nome: true } }) : Promise.resolve(null),
   ]);
+  // ricerca che perdona gli errori: se il nome esatto trova poco, si aggiungono i nomi più somiglianti
+  const simili = q && vista === "tutti" && risultati.length < SOGLIA_FUZZY ? await leadSimili(q, { AND: filtriSenzaNome() }, risultati.map((r) => r.id)) : [];
+  if (simili.length) risultati.push(...await prisma.lead.findMany({ where: { id: { in: simili } }, select: SELEZIONE }));
   const adesso = Date.now();
   lavoratiOggi.sort((a, b) => b.eventi[0].createdAt.getTime() - a.eventi[0].createdAt.getTime());
   const conteggi = conteggiPerGiorno(perCalendario.map((l) => chiaveGiorno(dataTask(l))));
@@ -220,7 +226,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
             <p className="text-sm text-neutral-600">Scegli i filtri e premi «Cerca»: i task escono per giorno, dal più recente al più vecchio. Senza filtri «Cerca» mostra tutti i lead.</p>
           ) : (
             <>
-              <p className="text-sm text-neutral-600">{risultati.length}{risultati.length === 500 ? "+ (i più recenti)" : ""} task trovati</p>
+              <p className="text-sm text-neutral-600">{risultati.length}{risultati.length === 500 ? "+ (i più recenti)" : ""} task trovati{simili.length ? <span className="ml-1 text-amber-800">· 🔎 {simili.length} con un nome simile a «{q}» (forse hai sbagliato una lettera)</span> : null}</p>
               {gruppi.map((g) => (
                 <section key={g.giorno}>
                   <h3 className="sticky top-0 z-10 bg-neutral-50/95 py-1 text-xs font-bold uppercase tracking-wide text-neutral-600 capitalize">{giornoLungo(g.giorno)} · {g.righe.length}</h3>

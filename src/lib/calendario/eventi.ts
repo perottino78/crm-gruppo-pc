@@ -2,7 +2,7 @@ import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Un solo formato per tutto ciò che va in calendario: appuntamenti, rilievi, pose, interventi di assistenza.
 import { chiaveGiorno, partiRoma, aggiungiGiorni } from "./tempo";
 
-export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA";
+export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA" | "RIUNIONE";
 
 export type EventoCal = {
   id: string; // es. "APPUNTAMENTO:abc"
@@ -19,13 +19,38 @@ export type EventoCal = {
   chi?: string | null;
   stato: string;
   href: string;
+  /** colore della persona incaricata (richiesta di Rocco: nel calendario il colore dice di chi è l'impegno, l'emoji il tipo) */
+  colore?: string;
+  chiaro?: string;
 };
+
+/** Colori delle persone del team: ben distinti fra loro (la tavolozza fissa dei grafici, allungata), assegnati in ordine. */
+export const PALETTE_PERSONE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948", "#0e9f9a", "#a05a2c", "#7a8a00", "#c2389b"];
+
+/** Versione chiara di un colore (sfondo delle schede): mescolato col bianco. */
+export function schiarisci(hex: string, quanto = 0.82): string {
+  const n = parseInt(hex.slice(1), 16);
+  const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v + (255 - v) * quanto));
+  return `#${c.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
+/** Colore di ogni persona (sempre lo stesso finché l'elenco del team non cambia): in ordine di nome. */
+export function coloriPersone(ids: string[]): Map<string, { colore: string; chiaro: string }> {
+  return new Map(ids.map((id, i) => {
+    const colore = PALETTE_PERSONE[i % PALETTE_PERSONE.length];
+    return [id, { colore, chiaro: schiarisci(colore) }];
+  }));
+}
+
+/** Colori di un evento: quelli della persona se ci sono, altrimenti grigio. */
+export const stileEvento = (e: EventoCal) => ({ colore: e.colore ?? "#737373", chiaro: e.chiaro ?? "#f5f5f5", icona: STILE_TIPO[e.tipo].icona, nome: STILE_TIPO[e.tipo].nome });
 
 export const STILE_TIPO: Record<TipoEvento, { nome: string; colore: string; chiaro: string; icona: string }> = {
   APPUNTAMENTO: { nome: "Appuntamenti", colore: "#2563eb", chiaro: "#dbeafe", icona: "🤝" },
   RILIEVO: { nome: "Rilievi misure", colore: "#7c3aed", chiaro: "#ede9fe", icona: "📏" },
   POSA: { nome: "Pose", colore: "#ea580c", chiaro: "#ffedd5", icona: "🔧" },
   ASSISTENZA: { nome: "Assistenza", colore: "#0d9488", chiaro: "#ccfbf1", icona: "🛟" },
+  RIUNIONE: { nome: "Riunioni", colore: "#525252", chiaro: "#f5f5f5", icona: "👥" },
 };
 
 export const TIPI_APPUNTAMENTO = [

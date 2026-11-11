@@ -29,7 +29,7 @@ export async function esitoLead(fd: FormData) {
   // solo chi vede il lead può registrarne l'esito
   const visibile = await prisma.lead.count({ where: { AND: [{ id: leadId }, scopeLeadWhere(u)] } });
   if (!visibile) redirect(torna(ritorno, { errore: "Lead non trovato." }));
-  const r = await registraEsito({ leadId, esito, data: daOraRoma(str(fd, "data")), note: str(fd, "note"), utenteNome: u.nome, venditoreId: str(fd, "venditoreId"), indirizzo: str(fd, "indirizzo") });
+  const r = await registraEsito({ leadId, esito, data: daOraRoma(str(fd, "data")), note: str(fd, "note"), utenteNome: u.nome, venditoreId: str(fd, "venditoreId"), indirizzo: str(fd, "indirizzo"), senzaEmailCliente: fd.get("senzaEmailCliente") === "1" });
   if (!r.ok) redirect(torna(ritorno, { errore: r.errore, id: leadId }));
   eseguiDopoRisposta();
   revalidatePath("/lead");

@@ -5,17 +5,18 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { eventiPeriodo } from "@/lib/calendario/server";
-import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
+import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, coloriPersone, stileEvento, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
 import {
   chiaveGiorno, perInput, inizioGiorno, aggiungiGiorni, lunediDi, grigliaMese, nomeMese, giornoBreve, nomeGiorno, oraRoma,
 } from "@/lib/calendario/tempo";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
+import FormRiunione from "@/components/calendario/FormRiunione";
 
 type Vista = "giorno" | "settimana" | "mese" | "agenda";
 const ORA_DA = 7;
 const ORA_A = 21;
 const PX_ORA = 52;
-const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA"];
+const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA", "RIUNIONE"];
 
 export default async function CalendarioPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;
@@ -41,12 +42,15 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
   // gli annullati non occupano spazio: si vedono solo a richiesta (?annullati=1)
   const conAnnullati = sp.annullati === "1";
   const nAnnullati = tuttiEventi.filter(annullato).length;
-  const eventi = conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e));
+  // ogni persona ha il suo colore (sempre lo stesso: in ordine di nome fra chi lavora), con la legenda sopra il calendario
+  const colori = coloriPersone(utenti.filter((x) => x.stato === "ATTIVO").map((x) => x.id));
+  const eventi = (conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e))).map((e) => ({ ...e, ...(e.utenteId ? colori.get(e.utenteId) : undefined) }));
+  const legenda = utenti.filter((x) => eventi.some((e) => e.utenteId === x.id)).map((x) => ({ id: x.id, nome: x.nome, colore: colori.get(x.id)?.colore ?? "#737373" }));
   const clientePreset = sp.cliente ? await prisma.cliente.findUnique({ where: { id: sp.cliente }, select: { id: true, nome: true, email: true } }) : null;
 
   const qs = (o: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
-    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, annullati: conAnnullati ? "1" : undefined, cliente: sp.cliente, ...o };
+    const base: Record<string, string | undefined> = { vista, giorno, persona: tutti ? persona : undefined, tipi: sp.tipi, annullati: conAnnullati ? "1" : undefined, cliente: sp.cliente, ...("nuovo" in o ? {} : { nuovo: undefined }), ...o };
     for (const [k, v] of Object.entries(base)) if (v) p.set(k, v);
     return `/calendario?${p.toString()}`;
   };
@@ -59,7 +63,18 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
     : vista === "settimana" ? `${giornoBreve(daK)} – ${giornoBreve(aggiungiGiorni(daK, 6))}`
     : `Prossimi 30 giorni da ${giornoBreve(giorno)}`;
   const nuovoData = sp.nuovo && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(sp.nuovo) ? sp.nuovo : perInput(new Date(Math.ceil(Date.now() / 3600_000) * 3600_000));
-  const linkNuovo = (data: string) => `${qs({ nuovo: data })}#nuovo`;
+  const linkNuovo = (data: string) => `${qs({ nuovo: data, genere: sp.cliente ? "cliente" : undefined })}#nuovo`;
+  // nella finestra del nuovo appuntamento: con un cliente o riunione del team (con il cliente già scelto si salta la domanda)
+  const genere = sp.nuovo ? (sp.genere === "riunione" ? "riunione" : sp.genere === "cliente" || clientePreset ? "cliente" : null) : null;
+  // impegni per persona e giorno nelle prossime settimane (sotto la scelta del giorno, come un sito di prenotazioni)
+  const conteggi: Record<string, Record<string, number>> = {};
+  if (genere === "cliente") {
+    const da = lunediDi(nuovoData.slice(0, 10) < oggi ? oggi : nuovoData.slice(0, 10));
+    for (const e of await eventiPeriodo({ da: inizioGiorno(da), a: inizioGiorno(aggiungiGiorni(da, 21)), utenteId: tutti ? null : u.id })) {
+      if (annullato(e) || !e.utenteId) continue;
+      for (const g of giorniEvento(e)) ((conteggi[e.utenteId] ??= {})[g] = (conteggi[e.utenteId][g] ?? 0) + 1);
+    }
+  }
 
   return (
     <div className="max-w-[1400px]">
@@ -96,9 +111,9 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
           const on = tipi.includes(t);
           const nuovi = on ? tipi.filter((x) => x !== t) : [...tipi, t];
           return (
-            <Link key={t} href={qs({ tipi: nuovi.length === 4 ? undefined : nuovi.join(",") || "nessuno" })}
-              className="text-xs font-bold px-2.5 py-1 rounded-full border-2"
-              style={{ borderColor: STILE_TIPO[t].colore, background: on ? STILE_TIPO[t].colore : "white", color: on ? "white" : STILE_TIPO[t].colore }}>
+            <Link key={t} href={qs({ tipi: nuovi.length === TUTTI_TIPI.length ? undefined : nuovi.join(",") || "nessuno" })}
+              aria-pressed={on}
+              className={`text-xs font-bold px-2.5 py-1 rounded-full border-2 ${on ? "border-neutral-800 bg-neutral-800 text-white" : "border-neutral-300 bg-white text-neutral-500"}`}>
               {STILE_TIPO[t].icona} {STILE_TIPO[t].nome}
             </Link>
           );
@@ -124,6 +139,17 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         )}
       </div>
 
+      {legenda.length > 0 && (
+        <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-700" aria-label="Legenda dei colori">
+          <span className="font-semibold text-neutral-500">Colori:</span>
+          {legenda.map((x) => (
+            <Link key={x.id} href={tutti ? qs({ persona: x.id }) : qs({})} className="inline-flex items-center gap-1 hover:underline">
+              <span className="h-3 w-3 rounded-sm" style={{ background: x.colore }} />{x.nome}
+            </Link>
+          ))}
+        </div>
+      )}
+
       {/* sul computer: griglia con le ore; sul telefono: elenco giorno per giorno, facile da scorrere col pollice */}
       {vista === "settimana" && <>
         <div className="hidden md:block"><Griglia giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
@@ -139,25 +165,41 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
       {vista === "mese" && <Mese giorno={giorno} eventi={eventi} oggi={oggi} qs={qs} />}
       {vista === "agenda" && <Agenda eventi={eventi} />}
 
-      {/* nuovo appuntamento: si apre solo premendo su un orario dell'agenda o su «+ Nuovo appuntamento» */}
+      {/* nuovo impegno (richiesta di Rocco): finestra sopra il calendario; prima si sceglie se è con un cliente o una riunione del team */}
       {sp.nuovo && (
-      <section id="nuovo" className="card-fase mt-6 scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
-        <div className="mb-3 flex items-center justify-between gap-2">
-          <h2>+ Nuovo appuntamento{clientePreset ? ` con ${clientePreset.nome}` : ""}</h2>
-          <Link href={qs({})} scroll={false} className="text-xs font-bold text-neutral-600 underline">✕ chiudi</Link>
+      <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-black/40 p-3 sm:p-6" role="dialog" aria-modal="true" aria-label="Nuovo appuntamento">
+        <div id="nuovo" className="mt-4 w-full max-w-3xl rounded-2xl bg-white p-4 shadow-2xl sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <h2 className="text-lg font-black text-neutral-900">
+              {genere === "riunione" ? "👥 Nuova riunione interna" : genere === "cliente" ? `🤝 Nuovo appuntamento${clientePreset ? ` con ${clientePreset.nome}` : " con un cliente"}` : "+ Nuovo appuntamento"}
+            </h2>
+            <Link href={qs({ genere: undefined })} scroll={false} className="rounded-full px-2 text-xl font-bold text-neutral-500 hover:bg-neutral-100" aria-label="Chiudi">✕</Link>
+          </div>
+          {!genere && (
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href={qs({ nuovo: nuovoData, genere: "cliente" })} scroll={false} className="btn-3d tile-3d btn-3d-green py-6"><span className="text-3xl">🤝</span><span className="text-base">Con un cliente</span><span className="text-xs font-normal">visita, sopralluogo, firma, telefonata…</span></Link>
+              <Link href={qs({ nuovo: nuovoData, genere: "riunione" })} scroll={false} className="btn-3d tile-3d btn-3d-blue py-6"><span className="text-3xl">👥</span><span className="text-base">Riunione interna</span><span className="text-xs font-normal">con una o più persone del team</span></Link>
+            </div>
+          )}
+          {genere === "cliente" && (
+            <FormAppuntamento
+              utenti={utenti.filter((x) => x.stato === "ATTIVO")} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
+              cliente={clientePreset} ritorno={qs({ cliente: undefined, nuovo: undefined, genere: undefined })} mailAttiva={await mailConfigurata()}
+              conteggi={conteggi} oggi={oggi}
+            />
+          )}
+          {genere === "riunione" && (
+            <FormRiunione utenti={utenti.filter((x) => x.stato === "ATTIVO")} data={nuovoData} io={u.id} ritorno={qs({ nuovo: undefined, genere: undefined })} />
+          )}
         </div>
-        <FormAppuntamento
-          utenti={utenti.filter((x) => x.stato === "ATTIVO")} utenteId={filtroUtente ?? u.id} puoAssegnare={tutti} data={nuovoData}
-          cliente={clientePreset} ritorno={qs({ cliente: undefined })} mailAttiva={await mailConfigurata()}
-        />
-      </section>
+      </div>
       )}
     </div>
   );
 }
 
 function Scheda({ e, compatta }: { e: EventoCal; compatta?: boolean }) {
-  const s = STILE_TIPO[e.tipo];
+  const s = stileEvento(e);
   const off = annullato(e);
   return (
     <Link href={e.href} title={[e.titolo, e.chi, e.luogo].filter(Boolean).join(" · ")}
@@ -267,7 +309,7 @@ function Mese({ giorno, eventi, oggi, qs }: { giorno: string; eventi: EventoCal[
               {/* telefono: un pallino colorato per impegno, tocca il giorno per vederli */}
               {ev.length > 0 && (
                 <Link href={qs({ vista: "giorno", giorno: g })} className="md:hidden mt-1 flex flex-wrap items-center gap-0.5">
-                  {ev.slice(0, 6).map((e) => <span key={e.id} className="h-2 w-2 rounded-full" style={{ background: STILE_TIPO[e.tipo].colore, opacity: annullato(e) ? 0.35 : 1 }} />)}
+                  {ev.slice(0, 6).map((e) => <span key={e.id} className="h-2 w-2 rounded-full" style={{ background: stileEvento(e).colore, opacity: annullato(e) ? 0.35 : 1 }} />)}
                   {ev.length > 6 && <span className="text-[9px] font-bold text-neutral-600">+{ev.length - 6}</span>}
                 </Link>
               )}
@@ -296,11 +338,11 @@ function ListaGiorni({ giorni, eventi, oggi, linkNuovo }: { giorni: string[]; ev
               <a href={linkNuovo(`${g}T09:00`)} className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${g === oggi ? "bg-white/20" : "bg-green-100 text-green-800"}`}>+ fissa</a>
             </div>
             {ev.map((e) => {
-              const st = STILE_TIPO[e.tipo];
+              const st = stileEvento(e);
               return (
                 <Link key={e.id} href={e.href} className={`flex items-stretch gap-3 border-t border-neutral-100 px-3 py-2.5 active:bg-neutral-100 ${annullato(e) ? "opacity-50 line-through" : ""}`}>
                   <span className="w-1 shrink-0 rounded-full" style={{ background: st.colore }} />
-                  <span className="w-12 shrink-0 text-sm font-black tabular-nums" style={{ color: st.colore }}>{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
+                  <span className="w-12 shrink-0 text-sm font-black tabular-nums text-neutral-900">{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-bold text-neutral-900">{st.icona} {e.cliente ?? e.titolo}</span>
                     <span className="block text-xs text-neutral-600">{[e.chi, e.luogo].filter(Boolean).join(" · ") || st.nome}</span>
@@ -327,10 +369,10 @@ function Agenda({ eventi }: { eventi: EventoCal[] }) {
         <div key={g} className="rounded-xl border border-neutral-200 bg-white overflow-hidden">
           <p className="bg-neutral-50 px-4 py-1.5 text-sm font-bold capitalize">{giornoBreve(g)}</p>
           {perGiorno.get(g)!.map((e) => {
-            const s = STILE_TIPO[e.tipo];
+            const s = stileEvento(e);
             return (
               <Link key={e.id} href={e.href} className={`flex items-start gap-3 border-t border-neutral-100 px-4 py-2 hover:bg-neutral-50 ${annullato(e) ? "opacity-50 line-through" : ""}`}>
-                <span className="w-14 shrink-0 text-sm font-bold" style={{ color: s.colore }}>{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
+                <span className="w-14 shrink-0 border-l-4 pl-2 text-sm font-bold text-neutral-900" style={{ borderColor: s.colore }}>{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold text-neutral-900">{s.icona} {e.titolo}</span>
                   <span className="block text-xs text-neutral-600">{[e.chi, e.luogo].filter(Boolean).join(" · ")}</span>

@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import GiorniOccupati from "./GiorniOccupati";
 import ClientePicker from "./ClientePicker";
 import { creaAppuntamento, modificaAppuntamento } from "@/app/calendario-actions";
 import { TIPI_APPUNTAMENTO } from "@/lib/calendario/eventi";
@@ -14,6 +18,9 @@ type Props = {
   // modifica
   esistente?: { id: string; tipo: string; durataMin: number; titolo: string | null; luogo: string | null; note: string | null; invitaCliente: boolean } | null;
   mailAttiva: boolean;
+  /** impegni per persona e giorno (AAAA-MM-GG) nelle prossime settimane: mostrati sotto la scelta del giorno */
+  conteggi?: Record<string, Record<string, number>>;
+  oggi?: string;
 };
 
 const inp = "w-full border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -21,6 +28,9 @@ const lab = "text-[11px] font-bold text-neutral-700";
 
 export default function FormAppuntamento(p: Props) {
   const e = p.esistente;
+  const [dataOra, setDataOra] = useState(p.data);
+  const [utenteId, setUtenteId] = useState(p.utenteId);
+  const nomeScelto = p.utenti.find((u) => u.id === utenteId)?.nome ?? "";
   return (
     <form action={e ? modificaAppuntamento : creaAppuntamento} className="grid grid-cols-1 md:grid-cols-6 gap-3">
       {e && <input type="hidden" name="id" value={e.id} />}
@@ -48,7 +58,7 @@ export default function FormAppuntamento(p: Props) {
       </div>
       <div className="md:col-span-2">
         <label className={lab}>Giorno e ora *</label>
-        <input type="datetime-local" name="dataOra" defaultValue={p.data} step={900} required className={inp} />
+        <input type="datetime-local" name="dataOra" value={dataOra} onChange={(x) => setDataOra(x.target.value)} step={900} required className={inp} />
       </div>
       <div className="md:col-span-1">
         <label className={lab}>Durata</label>
@@ -59,7 +69,7 @@ export default function FormAppuntamento(p: Props) {
       <div className={e ? "md:col-span-1" : "md:col-span-3"}>
         <label className={lab}>Con chi</label>
         {p.puoAssegnare ? (
-          <select name="utenteId" defaultValue={p.utenteId} className={inp}>
+          <select name="utenteId" value={utenteId} onChange={(x) => setUtenteId(x.target.value)} className={inp}>
             {p.utenti.map((u) => <option key={u.id} value={u.id}>{u.nome}</option>)}
           </select>
         ) : (
@@ -69,6 +79,12 @@ export default function FormAppuntamento(p: Props) {
           </>
         )}
       </div>
+      {p.conteggi && p.oggi && /^\d{4}-\d{2}-\d{2}/.test(dataOra) && (
+        <div className="md:col-span-6">
+          <GiorniOccupati giorno={dataOra.slice(0, 10)} oggi={p.oggi} conteggi={p.conteggi[utenteId] ?? {}} nome={nomeScelto}
+            onScegli={(g) => setDataOra(`${g}T${dataOra.slice(11, 16) || "09:00"}`)} />
+        </div>
+      )}
       <div className="md:col-span-3">
         <label className={lab}>Titolo (facoltativo)</label>
         <input name="titolo" defaultValue={e?.titolo ?? ""} placeholder="es. Presentazione pergola bioclimatica" className={inp} />
