@@ -25,10 +25,10 @@ export const STATI_SCADENZA: Record<string, { label: string; cls: string }> = {
   ANNULLATA: { label: "Annullata", cls: "bg-neutral-200 text-neutral-600 border-neutral-300" },
 };
 
-export const STATI_MOVIMENTO: Record<string, { label: string; cls: string }> = {
-  DA_ABBINARE: { label: "Da abbinare", cls: "bg-amber-100 text-amber-900 border-amber-300" },
-  ABBINATO: { label: "Abbinato", cls: "bg-green-100 text-green-800 border-green-300" },
-  REGISTRATO: { label: "Registrato", cls: "bg-neutral-100 text-neutral-700 border-neutral-300" },
+export const STATI_MOVIMENTO: Record<string, { label: string; cls: string; spiega: string }> = {
+  DA_ABBINARE: { label: "Da abbinare", cls: "bg-amber-100 text-amber-900 border-amber-300", spiega: "soldi entrati o usciti di cui non sappiamo ancora a cosa si riferiscono: va collegato a una fattura/scadenza (pulsante «Abbina») o registrato come spesa senza fattura" },
+  ABBINATO: { label: "Abbinato", cls: "bg-green-100 text-green-800 border-green-300", spiega: "collegato a una o più fatture/scadenze: quelle risultano pagate o incassate per questo importo" },
+  REGISTRATO: { label: "Registrato", cls: "bg-neutral-100 text-neutral-700 border-neutral-300", spiega: "messo in una categoria senza fattura (es. commissioni, stipendi, F24): non c'è niente da saldare" },
 };
 
 // Giorni dopo la creazione della commessa entro cui è atteso l'acconto

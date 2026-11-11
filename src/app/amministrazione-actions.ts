@@ -313,20 +313,27 @@ export async function annullaRegistrazione(fd: FormData) {
 export async function nuovoMovimento(fd: FormData) {
   const u = await utenteAmministrazione();
   if (!u) return;
-  const contoId = str(fd, "contoId"), descrizione = str(fd, "descrizione");
+  const uscita = str(fd, "verso") === "uscita";
+  // «Chi» (richiesta di Rocco): cliente o fornitore dall'anagrafica; le sue fatture spuntate si saldano con questo movimento
+  const chiNome = str(fd, "chi") ? str(fd, "chiNome") : null;
+  const daSaldare = [...new Set(fd.getAll("scadenze").filter((x): x is string => typeof x === "string" && !!x))];
+  const contoId = str(fd, "contoId"), descrizione = str(fd, "descrizione") ?? (chiNome ? `${uscita ? "Pagamento" : "Incasso"} ${chiNome}` : null);
   const data = dataDa(fd, "data");
   const valore = num(fd, "importo");
   if (!contoId || !descrizione || !data || !valore) return;
   if (await eMeseChiuso(data)) return;
-  const importo = cent(Math.abs(valore) * (str(fd, "verso") === "uscita" ? -1 : 1));
-  const categoria = str(fd, "categoria");
+  const importo = cent(Math.abs(valore) * (uscita ? -1 : 1));
+  const categoria = daSaldare.length ? null : str(fd, "categoria");
   const m = await prisma.movimentoFinanziario.create({
     data: {
-      contoId, data, importo, descrizione, origine: "MANUALE", impronta: `MAN-${randomUUID()}`,
+      contoId, data, importo, descrizione, origine: "MANUALE", impronta: `MAN-${randomUUID()}`, note: chiNome ? `Chi: ${chiNome}` : null,
       stato: categoria ? "REGISTRATO" : "DA_ABBINARE", categoria, divisione: str(fd, "divisione"), creatoDaNome: u.nome,
     },
   });
-  await registra("Movimento", m.id, "Inserito a mano", `${giorno(data)} ${eur(importo)} «${descrizione}»${categoria ? " → " + categoria : ""}`, u.nome);
+  await registra("Movimento", m.id, "Inserito a mano", `${giorno(data)} ${eur(importo)} «${descrizione}»${chiNome ? ` (${chiNome})` : ""}${categoria ? " → " + categoria : ""}`, u.nome);
+  // le scadenze spuntate, dalla più vecchia: ognuna prende quanto resta del movimento (l'ultima anche solo in parte)
+  const ordinate = await prisma.scadenza.findMany({ where: { id: { in: daSaldare } }, select: { id: true }, orderBy: [{ dataScadenza: { sort: "asc", nulls: "last" } }] });
+  for (const sc of ordinate) await abbina(m.id, sc.id, null, u.nome);
   aggiorna();
 }
 

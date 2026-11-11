@@ -9,6 +9,7 @@ import { cent } from "@/lib/amministrazione/estratto";
 import { eur, dataIt, STATI_MOVIMENTO, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
 import { BRANDS } from "@/lib/brands";
 import VisteSalvate from "@/components/amministrazione/VisteSalvate";
+import MovimentoAMano from "@/components/amministrazione/MovimentoAMano";
 import {
   abbinaMovimento, abbinaSicuri, scollegaAbbinamento, registraMovimento, annullaRegistrazione, nuovoMovimento, stornaMovimento, impostaDivisione,
 } from "@/app/amministrazione-actions";
@@ -48,8 +49,8 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
   const pill = (a: boolean) => `px-3 py-1 rounded-full text-xs font-semibold border ${a ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-700 border-neutral-300 hover:bg-neutral-50"}`;
 
   return (
-    <div className="flex gap-5 items-start">
-      <aside className="w-56 shrink-0 space-y-2 sticky top-4">
+    <div className="flex flex-col md:flex-row gap-5 md:items-start">
+      <aside className="w-full md:w-56 shrink-0 space-y-2 md:sticky md:top-4 grid grid-cols-2 gap-2 md:block">
         <Link href={qs({ conto: undefined })} className={`block rounded-lg border px-3 py-2 ${!p.conto ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-200 bg-white"}`}>
           <p className="text-xs font-semibold">Tutti i conti</p>
           <p className="font-extrabold">{eur(cent(saldi.filter((s) => s.c.attivo).reduce((t, s) => t + s.saldo, 0)))}</p>
@@ -78,12 +79,22 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
             {p.stato && <input type="hidden" name="stato" value={p.stato} />}
             {p.verso && <input type="hidden" name="verso" value={p.verso} />}
             <input type="month" name="mese" defaultValue={p.mese} className={`${inp} py-1.5`} />
-            <input name="q" defaultValue={p.q} placeholder="Cerca causale o importo" className={`${inp} py-1.5 w-52`} />
+            <input name="q" defaultValue={p.q} placeholder="Cerca causale o importo" className={`${inp} py-1.5 w-40 sm:w-52`} />
             <button className="btn-3d btn-3d-dark text-xs px-3">Filtra</button>
           </form>
         </div>
 
         <VisteSalvate pagina="/amministrazione/prima-nota" query={qs({})} />
+        <details className="bg-white border border-neutral-200 rounded-lg px-3 py-2 text-xs text-neutral-700">
+          <summary className="cursor-pointer font-semibold">ℹ️ Cosa vogliono dire i bollini?</summary>
+          <ul className="mt-2 space-y-1.5">
+            {Object.entries(STATI_MOVIMENTO).map(([k, st]) => (
+              <li key={k} className="flex gap-2 items-start"><span className={`shrink-0 inline-block text-[10px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}</span><span>{st.spiega}</span></li>
+            ))}
+            <li className="flex gap-2 items-start"><span className="shrink-0 text-[10px] text-purple-700 font-semibold">a mano / storno</span><span>scritto in prima nota da una persona (non arriva dall&apos;estratto conto della banca); lo storno annulla un movimento a mano.</span></li>
+            <li className="flex gap-2 items-start"><span className="shrink-0 text-[10px] text-neutral-500">🔒 mese chiuso</span><span>il mese è chiuso: il movimento non si cambia più.</span></li>
+          </ul>
+        </details>
         <div className="flex flex-wrap gap-3 items-center bg-white border border-neutral-200 rounded-lg px-4 py-2 text-sm">
           <span>{conteggio} movimenti</span>
           <span className="text-green-700 font-semibold">Entrate {eur(totEntrate)}</span>
@@ -96,23 +107,14 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
         </div>
 
         <details className="bg-white border border-neutral-200 rounded-lg p-3">
-          <summary className="cursor-pointer font-semibold text-sm">➕ Movimento a mano (cassa contanti, rettifica)</summary>
-          <form action={nuovoMovimento} className="grid md:grid-cols-6 gap-2 mt-3">
-            <select name="contoId" required defaultValue={p.conto ?? conti.find((c) => c.tipo === "CASSA")?.id} className={`${inp} py-1.5`}>
-              {conti.filter((c) => c.attivo).map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}
-            </select>
-            <input type="date" name="data" required defaultValue={new Date().toISOString().slice(0, 10)} className={`${inp} py-1.5`} />
-            <select name="verso" className={`${inp} py-1.5`}><option value="entrata">Entrata</option><option value="uscita">Uscita</option></select>
-            <input name="importo" required inputMode="decimal" placeholder="Importo €" className={`${inp} py-1.5`} />
-            <input name="descrizione" required placeholder="Descrizione" className={`${inp} py-1.5 md:col-span-2`} />
-            <select name="categoria" className={`${inp} py-1.5 md:col-span-2`}>
-              <option value="">— da abbinare a una scadenza —</option>
-              {CATEGORIE_MOVIMENTO.map((c) => <option key={c}>{c}</option>)}
-            </select>
-            <select name="divisione" className={`${inp} py-1.5`}><option value="">Divisione…</option>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select>
-            <p className="text-[11px] text-neutral-500 md:col-span-2 self-center">I movimenti delle banche non si scrivono a mano: si importano dall&apos;estratto conto.</p>
-            <button className="btn-3d btn-3d-green text-xs">Registra</button>
-          </form>
+          <summary className="cursor-pointer font-semibold text-sm">➕ Movimento a mano (cassa contanti, pagamento a un fornitore, rettifica)</summary>
+          <MovimentoAMano
+            azione={nuovoMovimento}
+            conti={conti.filter((c) => c.attivo).map((c) => ({ id: c.id, nome: c.nome }))}
+            contoPredefinito={p.conto ?? conti.find((c) => c.tipo === "CASSA")?.id}
+            categorie={[...CATEGORIE_MOVIMENTO]}
+            divisioni={BRANDS.map((b) => b.nome)}
+          />
         </details>
 
         <div className="bg-white border border-neutral-200 rounded-lg overflow-x-auto">
@@ -143,7 +145,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
                     <td className="px-3 py-2 text-right whitespace-nowrap text-green-700 font-semibold">{m.importo > 0 ? eur(m.importo) : ""}</td>
                     <td className="px-3 py-2 text-right whitespace-nowrap text-orange-700 font-semibold">{m.importo < 0 ? eur(-m.importo) : ""}</td>
                     <td className="px-3 py-2 text-xs space-y-1.5">
-                      <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}{m.stato === "REGISTRATO" && m.categoria ? ` · ${m.categoria}` : ""}</span>
+                      <span title={st.spiega} className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}{m.stato === "REGISTRATO" && m.categoria ? ` · ${m.categoria}` : ""}</span>
                       {m.abbinamenti.map((a) => (
                         <div key={a.id} className="flex items-start justify-between gap-2 bg-green-50 border border-green-200 rounded px-2 py-1">
                           <span>✓ <b>{a.scadenza.controparte}</b> · {a.scadenza.descrizione} · {eur(a.importo)}</span>
