@@ -26,13 +26,13 @@ export async function GET(req: NextRequest) {
         })),
       ],
     },
-    select: { id: true, nome: true, comune: true, telefono: true, indirizzo: true, cap: true, provincia: true },
+    select: { id: true, nome: true, comune: true, telefono: true, indirizzo: true, cap: true, provincia: true, brandId: true },
     orderBy: { nome: "asc" },
     take: 12,
   });
   return NextResponse.json(
     clienti.map((c) => ({
-      id: c.id, nome: c.nome, sotto: [c.comune, c.telefono].filter(Boolean).join(" · "),
+      id: c.id, nome: c.nome, brandId: c.brandId, sotto: [c.comune, c.telefono].filter(Boolean).join(" · "),
       indirizzo: [c.indirizzo, [c.cap, c.comune].filter(Boolean).join(" "), c.provincia ? `(${c.provincia})` : null].filter(Boolean).join(", "),
     })),
   );

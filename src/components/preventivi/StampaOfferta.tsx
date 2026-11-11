@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura, labelBreveTipologia } from "@/lib/prodotti";
-import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
   ARTICOLI_CONTRATTO,
@@ -234,16 +234,6 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
         <div className="relative rounded-2xl border border-neutral-200 shadow-sm print:shadow-none overflow-hidden">
         <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${info.primary}, ${info.accent})` }} />
         <div className="p-6 print:p-6">
-        {preventivo.immagineCopertinaUrl && (
-          <div className="w-full mb-6 rounded-lg border border-neutral-200 bg-neutral-50 flex items-center justify-center overflow-hidden" style={{ maxHeight: 420 }}>
-            <img
-              src={preventivo.immagineCopertinaUrl}
-              alt="Copertina offerta"
-              className="max-w-full object-contain"
-              style={{ maxHeight: 420 }}
-            />
-          </div>
-        )}
         <div className="flex items-center justify-between pb-4 mb-6 border-b" style={{ borderColor: `${info.primary}33` }}>
           <div className="flex items-center gap-3">
             {info.logoUrl ? (
@@ -278,6 +268,17 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </div>
         </div>
 
+        {/* immagine o render dell'offerta: sotto l'intestazione */}
+        {preventivo.immagineCopertinaUrl && (
+          <div className="w-full mb-5 rounded-lg border border-neutral-200 bg-neutral-50 flex items-center justify-center overflow-hidden" style={{ maxHeight: 420 }}>
+            <img
+              src={preventivo.immagineCopertinaUrl}
+              alt="Copertina offerta"
+              className="max-w-full object-contain"
+              style={{ maxHeight: 420 }}
+            />
+          </div>
+        )}
         {preventivo.oggetto && (
           <div className="mb-4">
             <span
@@ -354,8 +355,13 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </tbody>
         </table>
 
-        <div className="flex justify-end mb-8">
-          <div className="w-72 rounded-xl border overflow-hidden" style={{ borderColor: `${info.primary}33` }}>
+        <div className="flex flex-col-reverse sm:flex-row sm:items-end sm:justify-between gap-4 mb-2 print:flex-row print:items-end print:justify-between">
+          {/* accanto al prezzo finale: fattibilità e validità (richiesta di Rocco) */}
+          <div className="text-sm">
+            <p className="font-semibold" style={{ color: info.primary }}>{NOTA_FATTIBILITA}</p>
+            {testoValidita(preventivo.scadenza) && <p className="text-neutral-700 mt-0.5">{testoValidita(preventivo.scadenza)}</p>}
+          </div>
+          <div className="w-72 max-w-full rounded-xl border overflow-hidden" style={{ borderColor: `${info.primary}33` }}>
             <div className="p-3 text-sm" style={{ background: info.primarySoft }}>
               {!prezzoManualeAttivo && (
                 <div className="flex justify-between py-1">
@@ -369,10 +375,12 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                   <span>-{eur(imponibileLordo - totaleNetto)}</span>
                 </div>
               )}
-              <div className="flex justify-between py-1">
-                <span className="text-neutral-700">Imponibile {!prezzoManualeAttivo && sconto > 0 ? "scontato" : ""}</span>
-                <span>{eur(totaleNetto)}</span>
-              </div>
+              {(prezzoManualeAttivo || sconto > 0) && (
+                <div className="flex justify-between py-1">
+                  <span className="text-neutral-700">Imponibile {!prezzoManualeAttivo && sconto > 0 ? "scontato" : ""}</span>
+                  <span>{eur(totaleNetto)}</span>
+                </div>
+              )}
               <div className="flex justify-between py-1">
                 <span className="text-neutral-700">IVA ({preventivo.aliquotaIva}%)</span>
                 <span>{eur(totaleIva)}</span>
@@ -384,6 +392,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
             </div>
           </div>
         </div>
+        <p className="text-[10px] text-neutral-600 text-right mb-8">{CLAUSOLA_ISTRUTTORIA}</p>
 
         <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
           <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.primary }}>
@@ -404,7 +413,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </p>
         ) : (
           <p className="text-xs text-neutral-500 border-t border-neutral-100 pt-4 mb-6">
-            Offerta valida 30 giorni dalla data di emissione salvo diversa indicazione. Prezzi espressi in Euro.
+            {testoValidita(preventivo.scadenza) ?? "Offerta valida 30 giorni dalla data di emissione salvo diversa indicazione"}. Prezzi espressi in Euro.
             {" "}{preventivo.brand.nome} — Gruppo P&amp;C — documento generato dal CRM interno.
           </p>
         )}

@@ -388,15 +388,16 @@ export async function eliminaCorrelazione(formData: FormData) {
 // Numero offerta progressivo per brand, resettato ogni anno solare (1, 2, 3... dal 1 gennaio).
 // Non e' garantito atomico sotto concorrenza estrema, accettabile per il volume di questo CRM.
 async function prossimoNumeroOfferta(brandId: string): Promise<number> {
-  const anno = new Date().getFullYear();
-  const inizioAnno = new Date(anno, 0, 1);
-  const inizioAnnoSuccessivo = new Date(anno + 1, 0, 1);
-  const ultimo = await prisma.preventivo.findFirst({
-    where: { brandId, createdAt: { gte: inizioAnno, lt: inizioAnnoSuccessivo } },
-    orderBy: { numeroOfferta: "desc" },
-    select: { numeroOfferta: true },
+  // anno di Roma; il massimo (non «l'ultimo in ordine decrescente»: in Postgres i vuoti vengono prima, e le offerte
+  // senza numero — es. quelle prese in carico da BConsole — facevano ripartire sempre da 1: segnalato da Rocco)
+  const anno = Number(new Date().toLocaleString("en-US", { timeZone: "Europe/Rome", year: "numeric" }));
+  const inizioAnno = new Date(Date.UTC(anno - 1, 11, 31, 22));
+  const inizioAnnoSuccessivo = new Date(Date.UTC(anno, 11, 31, 22));
+  const max = await prisma.preventivo.aggregate({
+    where: { brandId, createdAt: { gte: inizioAnno, lt: inizioAnnoSuccessivo }, numeroOfferta: { not: null } },
+    _max: { numeroOfferta: true },
   });
-  return (ultimo?.numeroOfferta ?? 0) + 1;
+  return (max._max.numeroOfferta ?? 0) + 1;
 }
 
 // Validità standard di un'offerta: 15 giorni dalla creazione (modificabile a mano dalla pagina preventivo).
@@ -479,14 +480,19 @@ export async function creaPreventivo(formData: FormData) {
   const clienteId = str(formData, "clienteId");
   const brandId = str(formData, "brandId");
   const commercialeId = str(formData, "commercialeId");
-  if (!clienteId || !brandId || !commercialeId) return;
+  if (!clienteId || !brandId || !commercialeId) {
+    const manca = !clienteId ? "il cliente (cercalo e sceglilo dall'elenco)" : !commercialeId ? "il commerciale" : "il marchio";
+    redirect(`/preventivi/nuovo?${new URLSearchParams({ errore: `Manca ${manca}.`, ...(clienteId ? { cliente: clienteId } : {}) })}`);
+  }
 
-  const cliente = await prisma.cliente.findUnique({ where: { id: clienteId } });
-  const { aliquota } = aliquotaIvaPerPaese(cliente?.paese ?? "IT");
-  const numeroOfferta = await prossimoNumeroOfferta(brandId);
+  const cliente = await prisma.cliente.findUnique({ where: { id: clienteId! } });
+  if (!cliente) redirect(`/preventivi/nuovo?errore=${encodeURIComponent("Cliente non trovato.")}`);
+  const { aliquota } = aliquotaIvaPerPaese(cliente!.paese ?? "IT");
+  const numeroOfferta = await prossimoNumeroOfferta(brandId!);
+  const oggetto = str(formData, "oggetto")?.slice(0, 300) ?? null;
 
   const preventivo = await prisma.preventivo.create({
-    data: { clienteId, brandId, commercialeId, aliquotaIva: aliquota, numeroOfferta, scadenza: scadenzaDefault() },
+    data: { clienteId: clienteId!, brandId: brandId!, commercialeId: commercialeId!, aliquotaIva: aliquota, numeroOfferta, scadenza: scadenzaDefault(), oggetto },
   });
   revalidatePath("/preventivi");
   revalidatePath("/");
@@ -621,12 +627,23 @@ export async function aggiornaCondizioniOfferta(formData: FormData) {
   const oggetto = str(formData, "oggetto");
   const condizioniPagamento = str(formData, "condizioniPagamento");
   const condizioniConsegna = str(formData, "condizioniConsegna");
-  const immagineCopertinaUrl = str(formData, "immagineCopertinaUrl");
+  // l'immagine ora ha il suo riquadro: si tocca solo se arriva nel modulo
+  const immagine = formData.has("immagineCopertinaUrl") ? { immagineCopertinaUrl: str(formData, "immagineCopertinaUrl") } : {};
 
   await prisma.preventivo.update({
     where: { id },
-    data: { oggetto, condizioniPagamento, condizioniConsegna, immagineCopertinaUrl },
+    data: { oggetto, condizioniPagamento, condizioniConsegna, ...immagine },
   });
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+}
+
+/** Immagine o render dell'offerta (richiesta di Rocco: subito dopo intestazione, commerciale e stato; si salva da sola). */
+export async function aggiornaImmagineOfferta(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  await prisma.preventivo.update({ where: { id }, data: { immagineCopertinaUrl: str(formData, "immagineCopertinaUrl") } });
   revalidatePath(`/preventivi/${id}`);
   revalidatePath(`/preventivi/${id}/stampa`);
 }
