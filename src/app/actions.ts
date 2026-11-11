@@ -709,28 +709,29 @@ export async function aggiornaPrezzoManuale(formData: FormData) {
   if (await offertaBloccata(formData, true)) return;
   const id = str(formData, "id");
   if (!id) return;
-  const attivo = formData.get("prezzoManualeAttivo") === "on";
   const totaleStr = str(formData, "prezzoManualeTotale");
+  const totale = totaleStr ? parseFloat(totaleStr.replace(",", ".")) : NaN;
+  // senza spunta nel modulo (pagina nuova, richiesta di Rocco): il prezzo scritto accende il prezzo manuale, vuoto lo spegne
+  const attivo = formData.has("prezzoManualeAttivo") ? formData.get("prezzoManualeAttivo") === "on" : Number.isFinite(totale) && totale > 0;
   const preset = str(formData, "aliquotaPreset");
   const customStr = str(formData, "aliquotaCustom");
 
-  let aliquotaIva: number;
+  // l'IVA si cambia qui solo se il modulo la porta (altrimenti resta quella dell'offerta)
+  let aliquotaIva: number | undefined;
   if (preset === "ALTRO") {
     const custom = customStr ? parseFloat(customStr.replace(",", ".")) : NaN;
     aliquotaIva = Number.isFinite(custom) ? Math.max(0, Math.min(100, custom)) : 22;
-  } else {
-    const val = preset ? parseFloat(preset.replace(",", ".")) : NaN;
+  } else if (preset) {
+    const val = parseFloat(preset.replace(",", "."));
     aliquotaIva = Number.isFinite(val) ? val : 22;
   }
-
-  const totale = totaleStr ? parseFloat(totaleStr.replace(",", ".")) : NaN;
 
   await prisma.preventivo.update({
     where: { id },
     data: {
       prezzoManualeAttivo: attivo,
       prezzoManualeTotale: attivo && Number.isFinite(totale) ? totale : null,
-      aliquotaIva,
+      ...(aliquotaIva !== undefined ? { aliquotaIva } : {}),
     },
   });
   await ricalcolaTotali(id);
@@ -783,6 +784,15 @@ async function prossimoOrdine(preventivoId: string, sezioneId: string | null): P
     _max: { ordine: true },
   });
   return (agg._max.ordine ?? -1) + 1;
+}
+
+/** Sezione (stanza) in cui mettere una riga nuova scelta nel modulo (`sezioneId`), in coda: solo se è di questa offerta. */
+async function posizioneNuovaRiga(formData: FormData, preventivoId: string): Promise<{ sezioneId?: string; ordine?: number }> {
+  const sezioneId = str(formData, "sezioneId");
+  if (!sezioneId) return {};
+  const sez = await prisma.sezionePreventivo.findFirst({ where: { id: sezioneId, preventivoId }, select: { id: true } });
+  if (!sez) return {};
+  return { sezioneId: sez.id, ordine: await prossimoOrdine(preventivoId, sez.id) };
 }
 
 async function resequenceRighe(preventivoId: string, sezioneId: string | null): Promise<{ id: string; ordine: number }[]> {
@@ -949,6 +959,7 @@ export async function aggiungiRigaPreventivo(formData: FormData) {
   const latt = lattAlMetro(prodotto.tipologia) && Number.isFinite(lattCm) && lattCm > 0 && lattCm <= 2000;
   const riga = await prisma.rigaPreventivo.create({
     data: {
+      ...(await posizioneNuovaRiga(formData, preventivoId)),
       preventivoId, prodottoId, quantita,
       prezzoUnitario: latt && !prezzoStr ? prezzoPerLunghezza(prodotto.prezzoBase, lattCm) : prezzoUnitario,
       ...(isomax ? { misuraLarghezza: luce, misuraAltezza: 210 } : latt ? { misuraLarghezza: lattCm } : misuraRaso),
@@ -1013,6 +1024,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
     }
     await prisma.rigaPreventivo.create({
       data: {
+        ...(await posizioneNuovaRiga(formData, preventivoId)),
         preventivoId,
         prodottoId: esito!.prodottoRiferimentoId,
         quantita,
@@ -1037,6 +1049,7 @@ export async function aggiungiRigaPreventivoPerMisura(formData: FormData) {
 
   const nuovaRiga = await prisma.rigaPreventivo.create({
     data: {
+      ...(await posizioneNuovaRiga(formData, preventivoId)),
       preventivoId,
       prodottoId: prodotto!.id,
       quantita,
@@ -1194,7 +1207,20 @@ export async function modificaRigaPreventivo(formData: FormData) {
     where: { id },
     include: { prodotto: true },
   });
-  if (!riga || !riga.prodotto) return;
+  if (!riga) return;
+  // riga di testo (richiesta di Rocco: modifica anche delle righe «testo»): testo e importo
+  if (!riga.prodotto) {
+    const testo = str(formData, "testoLibero");
+    const importoStr = str(formData, "prezzoUnitario");
+    const importo = importoStr ? parseFloat(importoStr.replace(",", ".")) : 0;
+    await prisma.rigaPreventivo.update({
+      where: { id },
+      data: { ...(testo ? { testoLibero: testo } : {}), prezzoUnitario: Number.isFinite(importo) ? Math.round(importo * 100) / 100 : riga.prezzoUnitario },
+    });
+    await ricalcolaTotali(preventivoId);
+    revalidatePath(`/preventivi/${preventivoId}`);
+    return;
+  }
 
   const quantitaStr = str(formData, "quantita");
   const quantita = quantitaStr ? Math.max(1, parseInt(quantitaStr, 10)) : riga.quantita;

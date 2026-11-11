@@ -52,7 +52,7 @@ export default function RigaAzioni({
             <form action={rimuoviRigaPreventivo}>
               <input type="hidden" name="id" value={rigaId} />
               <input type="hidden" name="preventivoId" value={preventivoId} />
-              <button className="btn-flat btn-flat-red w-full">rimuovi</button>
+              <button className="btn-flat btn-flat-red w-full">🗑 elimina</button>
             </form>
           </div>
         </div>
