@@ -132,6 +132,9 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
   // "puliti" ricavati a ritroso dal totale finale scritto a mano, indistinguibili da un
   // preventivo calcolato normalmente.
   const prezzoManualeAttivo = preventivo.prezzoManualeAttivo;
+  // prezzo manuale = offerta «a corpo» (richiesta di Rocco): spariscono prezzi unitari, totali di riga e di sezione
+  const aCorpo = prezzoManualeAttivo;
+  const colonne = aCorpo ? 2 : 4;
 
   const oggi = new Date().toLocaleDateString("it-IT");
   const anno = preventivo.createdAt.getFullYear();
@@ -147,10 +150,10 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
       const subtotaleLibero = r.quantita * r.prezzoUnitario;
       return (
         <tr key={r.id} className="border-b border-neutral-100 align-top">
-          <td className="py-2" colSpan={r.prezzoUnitario === 0 ? 4 : 1}>
+          <td className="py-2" colSpan={r.prezzoUnitario === 0 || aCorpo ? colonne : 1}>
             <p className="text-neutral-700 whitespace-pre-line italic">{r.testoLibero}</p>
           </td>
-          {r.prezzoUnitario !== 0 && (
+          {r.prezzoUnitario !== 0 && !aCorpo && (
             <>
               <td className="py-2 text-center">{r.quantita}</td>
               <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
@@ -206,8 +209,12 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </div>
         </td>
         <td className="py-2 text-center">{r.quantita}</td>
-        <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
-        <td className="py-2 text-right font-medium">{eur(subtotale)}</td>
+        {!aCorpo && (
+          <>
+            <td className="py-2 text-right">{eur(r.prezzoUnitario)}</td>
+            <td className="py-2 text-right font-medium">{eur(subtotale)}</td>
+          </>
+        )}
       </tr>
     );
   };
@@ -315,15 +322,15 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           <thead>
             <tr className="text-left text-xs" style={{ background: info.primarySoft }}>
               <th className="py-2 px-2 rounded-l-lg" style={{ color: info.primary }}>Descrizione</th>
-              <th className="py-2 px-2 text-center" style={{ color: info.primary }}>Qtà</th>
-              <th className="py-2 px-2 text-right" style={{ color: info.primary }}>Prezzo unit.</th>
-              <th className="py-2 px-2 text-right rounded-r-lg" style={{ color: info.primary }}>Totale</th>
+              <th className={`py-2 px-2 text-center ${aCorpo ? "rounded-r-lg" : ""}`} style={{ color: info.primary }}>Qtà</th>
+              {!aCorpo && <th className="py-2 px-2 text-right" style={{ color: info.primary }}>Prezzo unit.</th>}
+              {!aCorpo && <th className="py-2 px-2 text-right rounded-r-lg" style={{ color: info.primary }}>Totale</th>}
             </tr>
           </thead>
           <tbody className="[&>tr:nth-child(even)]:bg-neutral-50">
             {mostraIntestazioniSezione && righeSenzaSezione.length > 0 && (
               <tr>
-                <td colSpan={4} className="pt-3 pb-1 px-2 text-[10px] font-bold uppercase tracking-wide text-neutral-400">
+                <td colSpan={colonne} className="pt-3 pb-1 px-2 text-[10px] font-bold uppercase tracking-wide text-neutral-400">
                   Senza sezione
                 </td>
               </tr>
@@ -336,7 +343,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                 return (
                   <Fragment key={sezione.id}>
                     <tr>
-                      <td colSpan={3} className="pt-4 pb-1.5 px-2">
+                      <td colSpan={aCorpo ? colonne : 3} className="pt-4 pb-1.5 px-2">
                         <span
                           className="inline-block text-xs font-bold uppercase tracking-wide text-white px-3 py-1 rounded-full"
                           style={{ background: info.accent }}
@@ -344,9 +351,11 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                           🏠 {sezione.nome}
                         </span>
                       </td>
-                      <td className="pt-4 pb-1.5 px-2 text-right text-xs font-bold" style={{ color: info.accent }}>
-                        {eur(totaleSezione)}
-                      </td>
+                      {!aCorpo && (
+                        <td className="pt-4 pb-1.5 px-2 text-right text-xs font-bold" style={{ color: info.accent }}>
+                          {eur(totaleSezione)}
+                        </td>
+                      )}
                     </tr>
                     {righe.map((r) => renderRigaStampa(r))}
                   </Fragment>

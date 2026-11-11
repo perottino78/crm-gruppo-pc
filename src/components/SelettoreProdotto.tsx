@@ -1571,7 +1571,10 @@ export default function SelettoreProdotto({
   tassonomia,
   azionePerMisura,
   azionePerProdotto,
+  sezioneId = null,
 }: {
+  /** stanza dell'offerta in cui mettere il prodotto scelto (pulsante «🧩 Prodotto» di una sezione) */
+  sezioneId?: string | null;
   preventivoId: string;
   brandId: string;
   brandColor: string;
@@ -2035,6 +2038,7 @@ export default function SelettoreProdotto({
               )}
               <form action={azionePerMisura} onSubmit={alSubmitMisura} className="flex flex-wrap items-end gap-2">
                 <input type="hidden" name="preventivoId" value={preventivoId} />
+                {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
                 <input type="hidden" name="brandId" value={brandId} />
                 <input type="hidden" name="tipologia" value={scelto.value} />
                 <div className="flex flex-col gap-1">
@@ -2103,6 +2107,7 @@ export default function SelettoreProdotto({
               {scelto.varianti.map((v) => (
                 <form key={v.id} action={azionePerProdotto} className="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded px-2 py-1.5">
                   <input type="hidden" name="preventivoId" value={preventivoId} />
+                {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
                   <input type="hidden" name="prodottoId" value={v.id} />
                   <span className="text-xs flex-1">{v.colore} — {v.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
                   {scelto.value.startsWith("ISOMAX_") && (

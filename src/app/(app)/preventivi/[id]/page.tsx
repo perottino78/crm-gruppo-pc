@@ -21,7 +21,10 @@ import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listin
 import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDimensioni, haMisura, sottogruppoDiTipologia, labelBreveTipologia, finituraDiTipologia, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, optionalSeraFrangisoleApplicabile, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica, slugTessutoRullo, RULLO_TESSUTO_LABELS, notaInArrivo } from "@/lib/prodotti";
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import SelectAutoInvio from "@/components/SelectAutoInvio";
-import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT } from "@/lib/condizioniOfferta";
+import FormAutoSalva from "@/components/FormAutoSalva";
+import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
+import RigaTesto from "@/components/preventivi/RigaTesto";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -73,10 +76,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string }>;
+  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
 }) {
   const { id } = await params;
-  const { q, errore, confermata, inviata, variante, firma } = await searchParams;
+  const { q, errore, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -134,6 +137,7 @@ export default async function PreventivoPage({
 
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
 
   // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
   // rendering della riga — riusato per calcolare il totale di ogni sezione.
@@ -142,6 +146,9 @@ export default async function PreventivoPage({
     const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
     return r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   };
+  const imponibileLordo = preventivo.righe.reduce((t, r) => t + subtotaleRiga(r), 0);
+  // stanza in cui va il prossimo prodotto (pulsante «🧩 Prodotto» di una sezione, ?sezione=<id>)
+  const sezioneScelta = preventivo.sezioni.find((x) => x.id === sezioneParam) ?? null;
 
   // Frecce su/giu + tendina "sposta in sezione" mostrate a sinistra di ogni riga
   // (prodotto o testo libero). idx/totale sono la posizione della riga dentro il
@@ -182,8 +189,8 @@ export default async function PreventivoPage({
         ← {preventivo.cliente.nome}
       </Link>
 
-      <div className="flex items-center justify-between mt-2 mb-6">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 mt-2 mb-6">
+        <div className="flex flex-wrap items-center gap-3 min-w-0">
           <h1 className="text-2xl font-bold text-neutral-900">Preventivo — {preventivo.cliente.nome}</h1>
           <span
             className="text-xs font-medium px-3 py-1.5 rounded-full border"
@@ -196,7 +203,7 @@ export default async function PreventivoPage({
             {preventivo.duplicatoDaId ? " · copia" : ""}
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {preventivo.brand.nome === "Solaris" && (
             preventivo.solarisProgetto ? (
               <Link
@@ -383,23 +390,7 @@ export default async function PreventivoPage({
               <div key={r.id} className="flex items-stretch">
                 {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
                 <div className="flex-1 px-4 py-3 text-sm">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex-1">
-                    <p className="font-medium text-neutral-800 whitespace-pre-line">📝 {r.testoLibero}</p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    {r.prezzoUnitario !== 0 && (
-                      <span className={`font-medium ${subtotaleLibero < 0 ? "text-red-600" : ""}`}>
-                        {subtotaleLibero.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
-                      </span>
-                    )}
-                    <form action={rimuoviRigaPreventivo}>
-                      <input type="hidden" name="id" value={r.id} />
-                      <input type="hidden" name="preventivoId" value={preventivo.id} />
-                      <button className="btn-flat btn-flat-red">rimuovi</button>
-                    </form>
-                  </div>
-                </div>
+                <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} importo={subtotaleLibero} />
                 </div>
               </div>
             );
@@ -1277,6 +1268,7 @@ export default async function PreventivoPage({
                 </div>
               )}
               {righeSenzaSezione.map((r, idx, arr) => renderRiga(r, idx, arr))}
+              <AggiungiRiga preventivoId={preventivo.id} sezioneId={null} nomeSezione={sezioniConRighe.length > 0 ? "senza sezione" : undefined} />
               {sezioniConRighe.map(({ sezione, righe }, sIdx, sArr) => {
                 const totaleSezione = righe.reduce((s, r) => s + subtotaleRiga(r), 0);
                 return (
@@ -1296,7 +1288,7 @@ export default async function PreventivoPage({
                           </form>
                         </div>
                         <span className="text-xl">🏠</span>
-                        <form action={rinominaSezione} className="flex items-center gap-1.5">
+                        <FormAutoSalva key={`nome-${sezione.id}-${sezione.nome}`} action={rinominaSezione} className="flex items-center gap-1.5">
                           <input type="hidden" name="id" value={sezione.id} />
                           <input type="hidden" name="preventivoId" value={preventivo.id} />
                           <input
@@ -1304,23 +1296,12 @@ export default async function PreventivoPage({
                             defaultValue={sezione.nome}
                             className="text-base font-bold text-indigo-900 bg-white/70 border border-indigo-200 rounded px-2 py-1 focus:border-indigo-500 focus:outline-none"
                           />
-                          <button className="btn-3d btn-3d-blue text-[11px] px-2.5 py-1.5">salva nome</button>
-                        </form>
+                        </FormAutoSalva>
                       </div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="btn-3d bg-white text-indigo-900 border-indigo-300 text-sm px-3 py-1.5 cursor-default">
                           Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
                         </span>
-                        <form action={aggiungiRigaTestoLibero} className="flex items-center gap-1">
-                          <input type="hidden" name="preventivoId" value={preventivo.id} />
-                          <input type="hidden" name="sezioneId" value={sezione.id} />
-                          <input
-                            name="testoLibero"
-                            placeholder="riga di testo in questa sezione..."
-                            className="text-xs border border-amber-300 bg-amber-50 rounded px-1.5 py-1.5 w-44"
-                          />
-                          <button className="btn-3d btn-3d-orange text-[11px] px-2.5 py-1.5">📝 + riga testuale</button>
-                        </form>
                         {righe.length === 0 && (
                           <form action={eliminaSezione}>
                             <input type="hidden" name="id" value={sezione.id} />
@@ -1333,10 +1314,11 @@ export default async function PreventivoPage({
                     <div className="divide-y divide-neutral-100 bg-indigo-50/20">
                       {righe.map((r, idx, arr) => renderRiga(r, idx, arr))}
                       {righe.length === 0 && (
-                        <p className="px-4 py-4 text-xs text-neutral-500 italic">
-                          Nessun articolo qui — spostane uno con la tendina nella colonna a sinistra, oppure aggiungi una riga testuale qui sopra.
+                        <p className="px-4 py-3 text-xs text-neutral-500 italic">
+                          Stanza vuota: aggiungi qui sotto un prodotto o un testo (o spostane uno con la tendina a sinistra delle righe).
                         </p>
                       )}
+                      <AggiungiRiga preventivoId={preventivo.id} sezioneId={sezione.id} nomeSezione={sezione.nome} />
                     </div>
                   </div>
                 );
@@ -1345,37 +1327,25 @@ export default async function PreventivoPage({
           );
         })()}
         {preventivo.righe.length === 0 && (
-          <p className="px-4 py-6 text-sm text-neutral-600">Nessun prodotto ancora — aggiungilo qui sotto.</p>
+          <p className="px-4 py-4 text-sm text-neutral-600">Offerta vuota: scegli «🧩 Prodotto» o «📝 Testo» qui sopra. Per dividere per stanze usa «🏠 + crea sezione».</p>
         )}
       </div>
 
-      <details className="bg-white rounded-lg border border-neutral-200 mb-6">
-        <summary className="cursor-pointer text-sm font-semibold text-neutral-800 px-4 py-2.5">
-          + Aggiungi riga di testo libero (info o motivazione sconto)
-        </summary>
-        <form action={aggiungiRigaTestoLibero} className="px-4 pb-4 flex flex-col gap-2">
-          <input type="hidden" name="preventivoId" value={preventivo.id} />
-          <textarea
-            name="testoLibero"
-            rows={2}
-            placeholder="es. Sconto riservato concordato con il cliente per fine serie"
-            className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
-          />
-          <div className="flex items-center gap-2">
-            <label className="text-xs text-neutral-600">Importo (facoltativo, anche negativo per uno sconto)</label>
-            <input
-              name="prezzoUnitario"
-              type="number"
-              step="0.01"
-              defaultValue={0}
-              className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-28"
-            />
-            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1 ml-auto">+ aggiungi riga</button>
-          </div>
-        </form>
-      </details>
 
+      <div id="aggiungi-prodotto" className="scroll-mt-4" />
+      {preventivo.sezioni.length > 0 && (
+        <form method="get" action={`/preventivi/${preventivo.id}#aggiungi-prodotto`} className="mb-2 flex flex-wrap items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm">
+          <span className="font-semibold text-blue-900">🧩 Il prodotto scelto va in:</span>
+          <SelectAutoInvio
+            name="sezione"
+            defaultValue={sezioneScelta?.id ?? "nessuna"}
+            opzioni={[{ valore: "nessuna", etichetta: "— nessuna sezione —" }, ...preventivo.sezioni.map((x) => ({ valore: x.id, etichetta: `🏠 ${x.nome}` }))]}
+            className="text-sm border border-blue-300 rounded px-2 py-1 bg-white"
+          />
+        </form>
+      )}
       <SelettoreProdotto
+        sezioneId={sezioneScelta?.id ?? null}
         preventivoId={preventivo.id}
         brandId={preventivo.brandId}
         brandColor={info.primary}
@@ -1407,6 +1377,7 @@ export default async function PreventivoPage({
                 >
                   <input type="hidden" name="preventivoId" value={preventivo.id} />
                   <input type="hidden" name="prodottoId" value={p.id} />
+                  {sezioneScelta && <input type="hidden" name="sezioneId" value={sezioneScelta.id} />}
                   <span className="flex-1">
                     {p.tipologia} · {p.colore}
                     {haMisura(p.larghezzaMm, p.altezzaMm) && ` · ${p.larghezzaMm}×${p.altezzaMm}${unitaMisura(p.tipologia)}`}
@@ -1429,119 +1400,104 @@ export default async function PreventivoPage({
           )}
         </div>
       </details>
-      <h2 className="text-base font-bold text-neutral-900 mt-8 mb-3">💶 Prezzo, IVA e sconto</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <div className="bg-white rounded-lg border border-neutral-200 p-4">
-          <p className="text-xs text-neutral-600 mb-1">
-            Netto
-            {preventivo.prezzoManualeAttivo
-              ? " (prezzo manuale)"
-              : preventivo.scontoPercentuale > 0
-                ? ` (scontato ${percentuale(preventivo.scontoPercentuale)}%)`
-                : ""}
-          </p>
-          <p className="text-sm font-medium mb-2">{preventivo.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
-          <form action={aggiornaSconto} className="flex items-center gap-1">
+      {/* ===== Prezzo, IVA e sconto (richiesta di Rocco): a sinistra i campi, a destra il riepilogo come in stampa ===== */}
+      <h2 id="prezzo" className="text-base font-bold text-neutral-900 mt-8 mb-3">💶 Prezzo, IVA e sconto</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-white rounded-lg border border-neutral-200 p-4 space-y-4">
+          <FormAutoSalva key={`iva-${preventivo.aliquotaIva}`} action={aggiornaIva} className="space-y-1">
             <input type="hidden" name="id" value={preventivo.id} />
-            <label className="text-[11px] text-neutral-500">Sconto</label>
-            <input
-              name="scontoPercentuale"
-              type="number"
-              step="0.00001"
-              min={0}
-              max={100}
-              defaultValue={preventivo.scontoPercentuale}
-              title="Fino a 5 decimali (es. 12,34567)"
-              className="w-24 text-xs border border-neutral-200 rounded px-1.5 py-1"
-            />
-            <span className="text-[11px] text-neutral-500">%</span>
-            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
-          </form>
-        </div>
-        <div className="bg-neutral-900 rounded-lg p-4">
-          <p className="text-xs text-neutral-500 mb-1">Totale (IVA {preventivo.aliquotaIva}%)</p>
-          <p className="text-sm font-medium text-white mb-2">{totaleFinale.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
-          <form action={aggiornaIva} className="flex items-center gap-1 flex-wrap">
+            <label className="block text-xs font-semibold text-neutral-700">IVA</label>
+            <div className="flex items-center gap-2">
+              <select
+                name="aliquotaPreset"
+                defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
+                className="text-sm border border-neutral-300 rounded px-2 py-1.5"
+              >
+                <option value="22">22%</option>
+                <option value="10">10%</option>
+                <option value="14.8">14,8% (agevolata)</option>
+                <option value="ALTRO">altra…</option>
+              </select>
+              <input
+                name="aliquotaCustom"
+                type="number"
+                step="0.1"
+                min={0}
+                max={100}
+                defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
+                placeholder="% (se «altra»)"
+                className="w-32 text-sm border border-neutral-300 rounded px-2 py-1.5"
+              />
+            </div>
+          </FormAutoSalva>
+          <FormAutoSalva key={`sconto-${preventivo.scontoPercentuale}`} action={aggiornaSconto} className="space-y-1">
             <input type="hidden" name="id" value={preventivo.id} />
-            <select
-              name="aliquotaPreset"
-              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
-              className="text-xs border border-neutral-700 bg-neutral-800 text-white rounded px-1.5 py-1"
-            >
-              <option value="22">IVA 22%</option>
-              <option value="10">IVA 10%</option>
-              <option value="14.8">IVA agevolata 14,8%</option>
-              <option value="ALTRO">Altro —</option>
-            </select>
-            <input
-              name="aliquotaCustom"
-              type="number"
-              step="0.1"
-              min={0}
-              max={100}
-              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
-              placeholder="%"
-              className="w-14 text-xs border border-neutral-700 bg-neutral-800 text-white rounded px-1.5 py-1"
-            />
-            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
-          </form>
-        </div>
-      </div>
-      <details className="bg-white rounded-lg border border-neutral-200 mb-6" open={preventivo.prezzoManualeAttivo}>
-        <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
-          💰 Prezzo manuale — bypassa sconto/calcolo automatico
-        </summary>
-        <form action={aggiornaPrezzoManuale} className="px-4 pb-4 flex flex-col gap-2">
-          <input type="hidden" name="id" value={preventivo.id} />
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="prezzoManualeAttivo" defaultChecked={preventivo.prezzoManualeAttivo} />
-            Attiva prezzo manuale
-          </label>
-          <div className="flex items-center gap-2 flex-wrap">
-            <label className="text-xs text-neutral-500">Totale finale (IVA inclusa)</label>
+            <label className="block text-xs font-semibold text-neutral-700">Sconto %</label>
+            <div className="flex items-center gap-2">
+              <input
+                name="scontoPercentuale"
+                type="number"
+                step="0.00001"
+                min={0}
+                max={100}
+                defaultValue={preventivo.scontoPercentuale || ""}
+                placeholder="0"
+                title="Fino a 5 decimali (es. 12,34567)"
+                disabled={preventivo.prezzoManualeAttivo}
+                className="w-32 text-sm border border-neutral-300 rounded px-2 py-1.5 disabled:bg-neutral-100"
+              />
+              <span className="text-xs text-neutral-500">{preventivo.prezzoManualeAttivo ? "non conta: c'è il prezzo manuale" : "fino a 5 decimali per far tornare una cifra tonda"}</span>
+            </div>
+          </FormAutoSalva>
+          <FormAutoSalva key={`manuale-${preventivo.prezzoManualeAttivo}-${preventivo.prezzoManualeTotale}`} action={aggiornaPrezzoManuale} className="space-y-1 border-t border-neutral-100 pt-3">
+            <input type="hidden" name="id" value={preventivo.id} />
+            <label className="block text-xs font-semibold text-neutral-700">💰 Prezzo manuale (totale finale IVA inclusa)</label>
             <input
               name="prezzoManualeTotale"
               type="number"
               step="0.01"
               min={0}
-              defaultValue={preventivo.prezzoManualeTotale ?? ""}
-              placeholder="es. 2400,00"
-              className="w-32 text-sm border border-neutral-200 rounded px-1.5 py-1"
+              defaultValue={preventivo.prezzoManualeAttivo ? preventivo.prezzoManualeTotale ?? "" : ""}
+              placeholder="vuoto = calcolato dalle righe"
+              className="w-48 text-sm border border-neutral-300 rounded px-2 py-1.5"
             />
-            <label className="text-xs text-neutral-500">IVA</label>
-            <select
-              name="aliquotaPreset"
-              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? String(preventivo.aliquotaIva) : "ALTRO"}
-              className="text-xs border border-neutral-200 rounded px-1.5 py-1"
-            >
-              <option value="22">22%</option>
-              <option value="10">10%</option>
-              <option value="14.8">14,8%</option>
-              <option value="ALTRO">Altro —</option>
-            </select>
-            <input
-              name="aliquotaCustom"
-              type="number"
-              step="0.1"
-              min={0}
-              max={100}
-              defaultValue={[22, 10, 14.8].includes(preventivo.aliquotaIva) ? "" : preventivo.aliquotaIva}
-              placeholder="%"
-              className="w-14 text-xs border border-neutral-200 rounded px-1.5 py-1"
-            />
-            <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
+            <p className="text-[11px] text-neutral-500">
+              Se lo scrivi, l&apos;offerta diventa «a corpo»: in stampa niente sconto e niente prezzi delle singole righe, solo il prezzo finale.
+              Cancellalo per tornare al calcolo dalle righe.
+            </p>
+          </FormAutoSalva>
+          <p className="text-[11px] text-neutral-400">Si salva tutto da solo: le tendine subito, i numeri quando esci dal campo.</p>
+        </div>
+
+        <div className="rounded-xl border overflow-hidden self-start" style={{ borderColor: `${info.primary}33` }}>
+          <p className="px-4 pt-3 text-[11px] font-bold uppercase tracking-wide" style={{ color: info.primary, background: info.primarySoft }}>Come lo vede il cliente</p>
+          <div className="p-4 text-sm space-y-1" style={{ background: info.primarySoft }}>
+            {preventivo.prezzoManualeAttivo ? (
+              <p className="text-xs text-neutral-600 pb-1">Prezzo a corpo: righe senza prezzi.</p>
+            ) : (
+              <>
+                <div className="flex justify-between"><span className="text-neutral-700">Totale prodotti</span><span>{eur(imponibileLordo)}</span></div>
+                {preventivo.scontoPercentuale > 0 && (
+                  <div className="flex justify-between text-red-700"><span>− Sconto {percentuale(preventivo.scontoPercentuale)}%</span><span>−{eur(imponibileLordo - preventivo.totaleNetto)}</span></div>
+                )}
+              </>
+            )}
+            <div className="flex justify-between"><span className="text-neutral-700">Imponibile</span><span>{eur(preventivo.totaleNetto)}</span></div>
+            <div className="flex justify-between"><span className="text-neutral-700">+ IVA {preventivo.aliquotaIva}%</span><span>{eur(preventivo.totaleIva)}</span></div>
           </div>
-          <p className="text-[11px] text-neutral-500">
-            Quando attivo, il totale sopra ignora righe e sconto%: in stampa comparirà solo un
-            imponibile + IVA coerenti con questa cifra, senza alcuna riga "sconto" visibile al
-            cliente — come un preventivo calcolato normalmente.
-          </p>
-        </form>
-      </details>
+          <div className="flex justify-between px-4 py-3 font-bold text-white text-base" style={{ background: info.primary }}>
+            <span>Totale a pagare</span><span>{eur(totaleFinale)}</span>
+          </div>
+          <div className="px-4 py-2 bg-white text-xs">
+            <p className="font-semibold" style={{ color: info.primary }}>{NOTA_FATTIBILITA}</p>
+            <p className="text-[10px] text-neutral-500">{CLAUSOLA_ISTRUTTORIA}</p>
+          </div>
+        </div>
+      </div>
 
       <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
         <p className="text-base font-bold text-neutral-900 mb-2">📅 Validità dell&apos;offerta</p>
-        <form action={aggiornaScadenzaPreventivo} className="flex items-center gap-2">
+        <FormAutoSalva key={`scad-${preventivo.scadenza?.toISOString() ?? ""}`} action={aggiornaScadenzaPreventivo} className="flex flex-wrap items-center gap-2">
           <input type="hidden" name="id" value={preventivo.id} />
           <label className="text-xs font-semibold text-neutral-700">Valida fino al</label>
           <input
@@ -1550,16 +1506,15 @@ export default async function PreventivoPage({
             defaultValue={preventivo.scadenza ? preventivo.scadenza.toISOString().slice(0, 10) : ""}
             className="border border-neutral-300 rounded px-2 py-1 text-sm"
           />
-          <button type="submit" className="btn-3d text-xs px-2.5 py-1">Salva</button>
-          <span className="text-xs text-neutral-600">(di default 15 giorni dalla creazione; scaduta l'offerta aperta va in archivio)</span>
-        </form>
+          <span className="text-xs text-neutral-600">si salva da sola · di default 15 giorni dalla creazione; scaduta, l&apos;offerta aperta va in archivio</span>
+        </FormAutoSalva>
         <p className="mt-1 text-[11px] text-neutral-500">In stampa compare «Offerta valida fino al …».</p>
       </div>
-      <details className="bg-white rounded-lg border border-neutral-200 mb-6">
-        <summary className="cursor-pointer text-base font-bold text-neutral-900 px-4 py-3">
-          📝 Condizioni dell'offerta (oggetto, pagamento, consegna) — usate nella stampa
-        </summary>
-        <form action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
+      <div className="bg-white rounded-lg border border-neutral-200 mb-6">
+        <p className="text-base font-bold text-neutral-900 px-4 pt-3 pb-2">
+          📝 Condizioni dell&apos;offerta <span className="text-xs font-normal text-neutral-500">— usate nella stampa, si salvano da sole quando esci dal campo</span>
+        </p>
+        <FormAutoSalva key={`cond-${preventivo.oggetto ?? ""}|${preventivo.condizioniPagamento ?? ""}|${preventivo.condizioniConsegna ?? ""}`} action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
           <input type="hidden" name="id" value={preventivo.id} />
           <div>
             <label className="text-xs text-neutral-600 block mb-1">Oggetto offerta</label>
@@ -1588,14 +1543,13 @@ export default async function PreventivoPage({
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
-          <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 self-start">salva condizioni</button>
-        </form>
-      </details>
+        </FormAutoSalva>
+      </div>
 
       <div className="mb-8 flex flex-wrap items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4">
-        <Link href={`/preventivi/${preventivo.id}/stampa`} target="_blank" className="btn-3d btn-3d-blue px-5 py-2 text-sm">👁️ Guarda anteprima</Link>
+        <Link href={`/preventivi/${preventivo.id}/stampa?da=offerta`} className="btn-3d btn-3d-blue px-5 py-2 text-sm">👁️ Guarda anteprima</Link>
         <Link href={`/preventivi/${preventivo.id}/invia`} className="btn-3d btn-3d-green px-5 py-2 text-sm">✉️ Invia al cliente</Link>
-        <span className="text-xs text-neutral-600">L&apos;anteprima è l&apos;offerta come la vede il cliente: da lì si stampa o si salva in PDF.</span>
+        <span className="text-xs text-neutral-600">L&apos;anteprima è l&apos;offerta come la vede il cliente: da lì la stampi, la salvi in PDF o la mandi al cliente.</span>
       </div>
       </fieldset>
       <div id="documenti-offerta">
