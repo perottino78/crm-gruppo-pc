@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 import { SIGLE_COMMERCIALI, NOMI_COMMERCIALI } from "@/lib/clienti/bconsole";
 import { puo, visibilitaDi, type ConPermessi } from "@/lib/permessi/catalogo";
+import { importoFuoriProvvigione } from "./servizi";
 import { cent, contrattiDaFatture, incassatoScadenza, sigleDi, type Contratto, type Pagamento, type ProgettoC } from "./calcoli";
 
 type Persona = { id: string; nome: string; username: string | null };
@@ -47,6 +48,7 @@ export async function contrattiDi(persone: Persona[]): Promise<Contratto[]> {
     prisma.provvigione.findMany({ where: { utenteId: { in: ids } }, include: { liquidazioni: { orderBy: { data: "asc" } } } }),
   ]);
   const idCommesse = commesse.map((c) => c.id);
+  const servizi = await serviziDelleOfferte(commesse.map((c) => c.preventivoId));
   const fattureCommesse = idCommesse.length
     ? await prisma.fatturaVendita.findMany({ where: { commessaId: { in: idCommesse } }, select: { id: true, numero: true, commessaId: true } })
     : [];
@@ -105,7 +107,7 @@ export async function contrattiDi(persone: Persona[]): Promise<Contratto[]> {
     return {
       chiave, origine: "CRM", numero: numeroCommessa(c), data: c.createdAt, clienteNome: c.cliente.nome, comune: c.cliente.comune,
       marchio: c.brand.nome, descrizione: c.preventivo.oggetto, stato: c.stato, commercialeId, commercialeNome: nomeDi.get(commercialeId) ?? "",
-      imponibile: c.totaleImponibile || c.totaleVendita, dovuto: c.totaleVendita,
+      imponibile: c.totaleImponibile || c.totaleVendita, servizi: servizi.get(c.preventivoId) ?? 0, dovuto: c.totaleVendita,
       fatture: fattureCommesse.filter((f) => f.commessaId === c.id).map((f) => f.numero),
       href: `/commesse/${c.id}`, pagamenti, provvigione: conProvvigione(chiave, commercialeId),
     };
@@ -115,4 +117,29 @@ export async function contrattiDi(persone: Persona[]): Promise<Contratto[]> {
     return { ...c, commercialeId: p?.id ?? null, commercialeNome: p?.nome ?? venditore ?? "", href: null, pagamenti: pagamentiDi.get(c.chiave) ?? [], provvigione: conProvvigione(c.chiave, p?.id ?? null) };
   });
   return [...daCommesse, ...daBC].sort((a, b) => (b.data?.getTime() ?? 0) - (a.data?.getTime() ?? 0));
+}
+
+/** Per ogni offerta, l'importo dei servizi e pratiche che non vanno in provvigione (prodotti e optional senza la spunta). */
+export async function serviziDelleOfferte(preventivoIds: string[]): Promise<Map<string, number>> {
+  const out = new Map<string, number>();
+  if (!preventivoIds.length) return out;
+  const [righe, fuori] = await Promise.all([
+    prisma.rigaPreventivo.findMany({
+      where: { preventivoId: { in: preventivoIds } },
+      select: { preventivoId: true, quantita: true, prezzoUnitario: true, optionalPrezzo: true, prodotto: { select: { brandId: true, tipologia: true } },
+        optionali: { select: { quantita: true, prezzoUnitario: true, optional: { select: { inProvvigione: true } } } } },
+    }),
+    prisma.modelloProdotto.findMany({ where: { inProvvigione: false }, select: { brandId: true, tipologia: true } }),
+  ]);
+  const esclusi = new Set(fuori.map((m) => `${m.brandId}|${m.tipologia}`));
+  const perOfferta = new Map<string, typeof righe>();
+  for (const r of righe) perOfferta.set(r.preventivoId, [...(perOfferta.get(r.preventivoId) ?? []), r]);
+  for (const [id, rr] of perOfferta) {
+    out.set(id, importoFuoriProvvigione(rr.map((r) => ({
+      quantita: r.quantita, prezzoUnitario: r.prezzoUnitario, optionalPrezzo: r.optionalPrezzo,
+      inProvvigione: !r.prodotto || !esclusi.has(`${r.prodotto.brandId}|${r.prodotto.tipologia}`),
+      optionali: r.optionali.map((o) => ({ quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, inProvvigione: o.optional.inProvvigione })),
+    }))));
+  }
+  return out;
 }

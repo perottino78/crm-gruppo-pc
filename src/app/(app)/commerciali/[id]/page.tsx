@@ -18,6 +18,7 @@ function periodoCorrente(): string {
 
 function labelPeriodo(periodo: string): string {
   const [anno, mese] = periodo.split("-");
+  if (!mese) return `Anno ${anno}`;
   const nomi = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
   return `${nomi[Number(mese) - 1] ?? mese} ${anno}`;
 }

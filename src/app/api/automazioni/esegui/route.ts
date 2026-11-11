@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { eseguiInviiScaduti } from "@/lib/automazioni/motore";
 import { eseguiCampagne } from "@/lib/campagne/motore";
+import { inviaEmailObiettivi } from "@/lib/provvigioni/obiettivi-server";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -10,6 +11,8 @@ export const maxDuration = 60;
 export async function GET() {
   const lead = await eseguiInviiScaduti();
   const campagne = await eseguiCampagne();
-  return NextResponse.json({ ...lead, campagne });
+  // il punto della settimana sugli obiettivi dei commerciali (una volta a settimana, dal lunedì)
+  const obiettivi = await inviaEmailObiettivi().catch((e) => ({ errore: String(e).slice(0, 200) }));
+  return NextResponse.json({ ...lead, campagne, obiettivi });
 }
 export const POST = GET;

@@ -231,6 +231,17 @@ login nel `matcher` del middleware.
   (% sull'imponibile, `Utente.provvigionePercentuale` = abituale proposta), maturano in proporzione a quanto ha pagato il cliente, si liquidano
   anche in più volte. Chi gestisce: permesso `provvigioni` (AMMINISTRATIVO, uffici FATTURAZIONE/AMMINISTRAZIONE) o `amministrazione`; gli altri
   vedono solo i propri (il responsabile di zona anche i venditori della zona; il marketing NO, anche se vede tutti i clienti).
+- **Servizi e pratiche, obiettivi e premi** (richiesta di Ugo, nov 2026): `ModelloProdotto.inProvvigione` e `Optional.inProvvigione` (di serie sì; spunta
+  «Va in provvigione» nella scheda del modello, solo con `listini.modifica`). Famiglia del listino `SERVIZI` › «SERVIZI E PRATICHE» (pratica ENEA 350, autoscala
+  250/500/800/+300, facchinaggio 70 al piano; `src/lib/provvigioni/servizi.ts`, rotta `api/admin/seed-servizi` GET prova/POST, per ogni marchio): fuori provvigione.
+  Gli optional ENEA/autoscala/facchinaggio dei vecchi listini → `Optional.attivo=false` (non più proposti nell'offerta) e fuori provvigione; voci «Facchinaggio»
+  W&S tolte se mai usate. In Contratti la base proposta = imponibile − servizi (`serviziDelleOfferte`, `importoFuoriProvvigione`: tolti per intero, non scontati);
+  provvigione rata per rata (`provvigioneSulleRate`: acconto e saldo maturano quando il cliente paga); `/contratti/stampa` (per cliente e per contratto,
+  stessi filtri). Obiettivi: `Obiettivo` mese «AAAA-MM» o anno «AAAA» con `premio`, pagina `/contratti/obiettivi` (gestisceProvvigioni), riquadro
+  `RiquadroObiettivi` con tabella di marcia (`src/lib/provvigioni/obiettivi.ts`: atteso = obiettivo × giorni passati/giorni del periodo; in linea, quasi ≥80%,
+  indietro, raggiunto) e venduto mese per mese; venduto = imponibile dei contratti (commesse CRM + progetti BConsole) nel periodo. Email del lunedì
+  (`inviaEmailObiettivi` in `obiettivi-server.ts`, chiamata da `/api/automazioni/esegui`; una volta a settimana `obiettivi_mail_settimana`, spegnibile
+  `obiettivi_mail_attiva`, «Manda adesso»). Test `tests/provvigioni/servizi-obiettivi.test.ts`, collaudo `servizi-obiettivi` (22, SMTP finto).
 - **Comunicazioni interne** (`/comunicazioni`, `src/app/comunicazioni-actions.ts`, `src/lib/comunicazioni/testo.ts` puro e testato,
   `password.ts`, `components/comunicazioni/EditorComunicazione.tsx`): l'amministratore e il marketing (permesso `comunicazioni` o `marketing`)
   scrivono al team scegliendo le persone (gruppi: commerciali, telefoniste, uffici, tecnici, marketing), con segnaposto `{nome}` `{username}`
@@ -445,13 +456,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 318, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 328, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (22)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

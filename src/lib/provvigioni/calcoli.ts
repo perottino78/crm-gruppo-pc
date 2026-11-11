@@ -30,8 +30,10 @@ export type Contratto = {
   stato?: string | null;
   commercialeId: string | null;
   commercialeNome: string;
-  /** imponibile del contratto (base delle provvigioni) */
+  /** imponibile del contratto */
   imponibile: number;
+  /** servizi e pratiche a costo netto (ENEA, autoscala…) che non vanno in provvigione: si tolgono dall'imponibile */
+  servizi?: number;
   /** quanto deve pagare il cliente (IVA compresa): totale della commessa o fatturato BConsole */
   dovuto: number;
   fatture: string[];
@@ -176,4 +178,21 @@ export function totali(contratti: Contratto[]) {
   }
   return { contratti: contratti.length, venduto: cent(venduto), incassato: cent(incassato), daIncassare: cent(daIncassare), provvigioni: cent(provvigioni),
     maturate: cent(maturate), liquidate: cent(liquidate), daLiquidare: cent(daLiquidare), daControllare };
+}
+
+/**
+ * Provvigione rata per rata (acconto, saldo…): ogni rata del cliente porta la sua parte di provvigione, che matura quando
+ * il cliente la paga. Così acconto e saldo del commerciale maturano in tempi diversi, come i pagamenti del cliente.
+ */
+export function provvigioneSulleRate(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione">): Map<string, { quota: number; maturata: number }> {
+  const out = new Map<string, { quota: number; maturata: number }>();
+  const p = c.provvigione;
+  if (!p) return out;
+  const { dovuto } = riepilogoPagamenti(c);
+  if (dovuto <= 0) return out;
+  for (const r of c.pagamenti) {
+    if (r.stato === "ANNULLATA" || r.stato === "SOSTITUITA") continue;
+    out.set(r.id, { quota: cent(p.importo * r.importo / dovuto), maturata: cent(p.importo * r.incassato / dovuto) });
+  }
+  return out;
 }

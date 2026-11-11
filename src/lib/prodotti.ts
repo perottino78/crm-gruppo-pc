@@ -3,6 +3,7 @@ import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { SOTTOGRUPPO_TAGLIO_FREDDO, labelTaglioFreddo, assiSelezioneTaglioFreddo } from "@/lib/listini/taglio-freddo";
+import { PREFISSO_SERVIZI, labelServizio } from "@/lib/provvigioni/servizi";
 import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
 import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { sottogruppoLatt, labelLatt } from "@/lib/listini/lattoneria";
@@ -2075,6 +2076,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("TAGLIOFREDDO_")) return labelTaglioFreddo(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (tipologia.startsWith(PREFISSO_SERVIZI)) return labelServizio(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PEDANA_")) return labelPedana(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PAVGAL_")) return labelPavgal(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("LATT_")) return labelLatt(tipologia) ?? tipologia.replace(/_/g, " ");
