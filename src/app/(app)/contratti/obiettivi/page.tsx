@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
-import { contrattiDi, gestisceProvvigioni } from "@/lib/provvigioni/server";
+import { contrattiDi, gestisceProvvigioni, eVenditore } from "@/lib/provvigioni/server";
 import { avanzamento, nomePeriodo, vendutoNelPeriodo, NOMI_STATO_OBIETTIVO, periodoMese, estremi, MESI } from "@/lib/provvigioni/obiettivi";
 import { emailObiettiviAttiva } from "@/lib/provvigioni/obiettivi-server";
 import { salvaObiettiviCommerciale, impostaEmailObiettivi, mandaOraEmailObiettivi } from "@/app/provvigioni-actions";
@@ -25,11 +25,12 @@ export default async function ObiettiviPage({ searchParams }: { searchParams: Pr
   // giorno di riferimento per la tabella di marcia: oggi se il mese è quello in corso, altrimenti il mese intero (passato) o nulla (futuro)
   const rif = mese === periodoMese(oggi) ? oggi : mese < periodoMese(oggi) ? estremi(mese).a : estremi(mese).da;
 
-  const persone = await prisma.utente.findMany({
-    where: { OR: [{ stato: "ATTIVO", ruolo: "COMMERCIALE" }, { obiettivi: { some: { periodo: { in: [mese, anno] } } } }] },
-    select: { id: true, nome: true, username: true, email: true, stato: true, obiettivi: { where: { periodo: { in: [mese, anno] } } } },
+  // commerciali attivi, chi vende pur avendo un altro ruolo (Ugo) e chi ha già un obiettivo nel periodo
+  const persone = (await prisma.utente.findMany({
+    where: { OR: [{ stato: "ATTIVO", ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] } }, { obiettivi: { some: { periodo: { in: [mese, anno] } } } }] },
+    select: { id: true, nome: true, username: true, email: true, stato: true, ruolo: true, obiettivi: { where: { periodo: { in: [mese, anno] } } } },
     orderBy: { nome: "asc" },
-  });
+  })).filter((x) => eVenditore(x) || x.obiettivi.length > 0);
   const contratti = await contrattiDi(persone.map((x) => ({ id: x.id, nome: x.nome, username: x.username })));
   const attiva = await emailObiettiviAttiva();
   const [aa, mm] = mese.split("-").map(Number);

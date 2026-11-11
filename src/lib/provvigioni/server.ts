@@ -13,13 +13,19 @@ const numeroCommessa = (c: { anno: number; numero: number }) => `C${c.anno}-${St
 /** Fatturazione/amministrazione: controlla i contratti, inserisce e liquida le provvigioni. */
 export const gestisceProvvigioni = (u: ConPermessi | null | undefined) => puo(u, "provvigioni") || puo(u, "amministrazione");
 
+/** Sigle BConsole di chi vende pur non avendo il ruolo COMMERCIALE (Ugo vende anche lui: UPE). */
+export const VENDONO_ANCHE = ["UPE"];
+/** È un venditore: commerciale, oppure una delle persone di VENDONO_ANCHE (riconosciuta per username o nome). */
+export const eVenditore = (u: { ruolo?: string | null; username?: string | null; nome: string }) =>
+  u.ruolo === "COMMERCIALE" || sigleDi(u, SIGLE_COMMERCIALI, NOMI_COMMERCIALI).some((s) => VENDONO_ANCHE.includes(s));
+
 /** Di chi può vedere i contratti: i suoi; il responsabile di zona anche quelli dei venditori della zona; fatturazione e amministratore tutti. */
 export async function personeVisibili(u: ConPermessi & { id: string; visibileUtenti?: string[] | null }): Promise<Persona[]> {
   // le provvigioni sono riservate: "vede tutto" sui clienti (es. marketing) non basta, servono fatturazione o amministrazione
   const tutti = gestisceProvvigioni(u);
   const ids = tutti ? undefined : [u.id, ...(visibilitaDi(u) === "ZONA" ? u.visibileUtenti ?? [] : [])];
   return prisma.utente.findMany({
-    where: ids ? { id: { in: ids } } : { OR: [{ preventivi: { some: {} } }, { provvigioni: { some: {} } }, { ruolo: "COMMERCIALE" }, { username: { in: Object.values(SIGLE_COMMERCIALI) } }] },
+    where: ids ? { id: { in: ids } } : { OR: [{ preventivi: { some: {} } }, { provvigioni: { some: {} } }, { ruolo: "COMMERCIALE" }, { ruolo: "AMMINISTRATORE" }, { username: { in: Object.values(SIGLE_COMMERCIALI) } }] },
     select: { id: true, nome: true, username: true },
     orderBy: { nome: "asc" },
   });

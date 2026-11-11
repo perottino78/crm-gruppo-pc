@@ -34,7 +34,7 @@ import { NextRequest } from "next/server";
 import { prisma } from "../../src/lib/prisma";
 import * as seed from "../../src/app/api/admin/seed-servizi/route";
 import { tassonomiaListino } from "../../src/lib/listini/tassonomia";
-import { contrattiDi } from "../../src/lib/provvigioni/server";
+import { contrattiDi, eVenditore } from "../../src/lib/provvigioni/server";
 import { salvaObiettiviCommerciale, mandaOraEmailObiettivi, impostaEmailObiettivi } from "../../src/app/provvigioni-actions";
 import { inviaEmailObiettivi, obiettiviDi } from "../../src/lib/provvigioni/obiettivi-server";
 import { salvaModelloProdotto } from "../../src/app/actions";
@@ -123,6 +123,8 @@ async function main() {
   await redirectA(salvaObiettiviCommerciale(fd({ utenteId: luca.id, mese, anno, targetMese: "5000" })));
   await redirectA(salvaObiettiviCommerciale(fd({ utenteId: luca.id, mese, anno, targetMese: "" })));
   verifica(await prisma.obiettivo.count({ where: { utenteId: luca.id } }) === 0, "obiettivo vuoto = tolto");
+
+  verifica(eVenditore(ugo) && eVenditore(marco) && !eVenditore(giorgia), "Ugo conta come venditore (sigla UPE) anche da amministratore, Giorgia no");
 
   console.log("5. Email del lunedì");
   const sabato = new Date("2026-11-14T09:00:00Z"), lunedi = new Date("2026-11-16T08:00:00Z");
