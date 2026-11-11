@@ -118,7 +118,7 @@ export const FASI_LEAD: Record<string, { nome: string; azione: string | null; ch
   APPUNTAMENTO_CASA: { nome: "Appuntamento a casa", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento in showroom", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_TELEFONICO: { nome: "Chiamata con commerciale", azione: "Chiamata con commerciale: esita la telefonata", colore: "bg-purple-100 text-purple-900" },
-  APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato", azione: "Definisci il seguito", colore: "bg-red-100 text-red-900" },
+  APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato", azione: "Motiva l'annullamento", colore: "bg-red-100 text-red-900" },
   NON_INTERESSATO: { nome: "Non interessato", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
   RECUPERO: { nome: "Da recuperare", azione: "Richiama: gli abbiamo mandato la promozione", colore: "bg-teal-100 text-teal-900" },
   FUORI_REGIONE: { nome: "Fuori regione", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
@@ -151,7 +151,10 @@ export function esitiPossibili(fase: string): string[] {
   if (fase === "NUOVO") return ["IN_TARGET", "FUORI_REGIONE"];
   // la chiamata del commerciale: lui fissa l'appuntamento, la rimanda (nuova chiamata) o, se il cliente non risponde, torna al centralino
   if (fase === "APPUNTAMENTO_TELEFONICO") return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "NON_RISPONDE", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
-  if (FASI_APPUNTAMENTO.includes(fase)) return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "APPUNTAMENTO_ANNULLATO", "NON_INTERESSATO"];
+  // appuntamento fissato: niente «non interessato» qui, si passa da «annullato» e poi si motiva (richiamare o non interessato)
+  if (FASI_APPUNTAMENTO.includes(fase)) return ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO", "APPUNTAMENTO_ANNULLATO"];
+  // «Motiva l'annullamento» (richiesta di Rocco): da richiamare in futuro per rifissare, oppure non interessato (o si rifissa subito)
+  if (fase === "APPUNTAMENTO_ANNULLATO") return ["DA_RICHIAMARE", "NON_INTERESSATO", "APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_TELEFONICO"];
   if (fase === "FUORI_REGIONE") return ["IN_TARGET"]; // riapertura esplicita
   // «Recupero contatti»: un non interessato si può richiamare in ogni momento ed esitare come alla prima chiamata
   if (fase === "NON_INTERESSATO") return ["IN_TARGET", ...PREQUALIFICA.filter((e) => e !== "NON_INTERESSATO")];

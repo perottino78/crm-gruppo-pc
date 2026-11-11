@@ -30,6 +30,12 @@ export default function EsitoLead({ leadId, esiti, venditori, venditoreId, indir
           <input type="datetime-local" name="data" required defaultValue={appuntamento ? dataAppuntamento : ""} className={campo} />
         </label>
       )}
+      {esito === "DA_RICHIAMARE" && (
+        <label className="flex items-start gap-2 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-neutral-800">
+          <input type="checkbox" name="senzaEmailCliente" value="1" className="mt-0.5" />
+          <span><b>Non inviare il promemoria al cliente</b> (nessuna email «ti ricontatteremo»): utile quando dice che richiama lui. Il task resta a te per il giorno scelto, se non ha richiamato prima.</span>
+        </label>
+      )}
       {appuntamento && (
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block text-xs font-semibold text-neutral-700">{esito === "APPUNTAMENTO_TELEFONICO" ? "Commerciale che chiama" : "Venditore"}

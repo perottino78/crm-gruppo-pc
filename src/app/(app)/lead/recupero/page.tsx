@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { leadSimili, SOGLIA_FUZZY } from "@/lib/ricerca/server";
 import Link from "next/link";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -23,6 +24,13 @@ const GRUPPI: Record<string, { nome: string; spiega: string; where: Prisma.LeadW
  * (recupero automatico), ma qui si possono richiamare in qualsiasi momento ed esitare come alla prima chiamata: l'esito annulla il
  * recupero automatico programmato (a meno che non ci rientrino).
  */
+const SELEZIONE_RECUPERO = {
+        id: true, nome: true, telefono: true, fase: true, prodotto: true, comune: true, recuperi: true, nonGestitoIl: true, createdAt: true,
+        brand: { select: { nome: true } }, telefonista: { select: { nome: true } },
+        eventi: { where: { tipo: "lead.esito" }, orderBy: { createdAt: "desc" }, take: 1, select: { testo: true, createdAt: true, utenteNome: true } },
+        invii: { where: { stato: "IN_ATTESA" }, select: { percorso: true, passo: true, eseguiDopo: true } },
+      } satisfies Prisma.LeadSelect;
+
 export default async function RecuperoContatti({ searchParams }: { searchParams: Promise<P> }) {
   const p = await searchParams;
   const u = await getCurrentUser();
@@ -36,16 +44,17 @@ export default async function RecuperoContatti({ searchParams }: { searchParams:
   const [leads, conti] = await Promise.all([
     prisma.lead.findMany({
       where: { AND: [scope, tipo === "tutti" ? tuttiGruppi : GRUPPI[tipo].where, cerca] },
-      select: {
-        id: true, nome: true, telefono: true, fase: true, prodotto: true, comune: true, recuperi: true, nonGestitoIl: true, createdAt: true,
-        brand: { select: { nome: true } }, telefonista: { select: { nome: true } },
-        eventi: { where: { tipo: "lead.esito" }, orderBy: { createdAt: "desc" }, take: 1, select: { testo: true, createdAt: true, utenteNome: true } },
-        invii: { where: { stato: "IN_ATTESA" }, select: { percorso: true, passo: true, eseguiDopo: true } },
-      },
+      select: SELEZIONE_RECUPERO,
       orderBy: { createdAt: "desc" }, take: 300,
     }),
     Promise.all(Object.entries(GRUPPI).map(async ([k, g]) => [k, await prisma.lead.count({ where: { AND: [scope, g.where] } })] as const)),
   ]);
+  // ricerca che perdona gli errori: pochi risultati esatti → i nomi più somiglianti
+  const simili = q && leads.length < SOGLIA_FUZZY ? await leadSimili(q, { AND: [scope, tipo === "tutti" ? tuttiGruppi : GRUPPI[tipo].where] }, leads.map((l) => l.id)) : [];
+  if (simili.length) {
+    const altri = await prisma.lead.findMany({ where: { id: { in: simili } }, select: SELEZIONE_RECUPERO });
+    leads.push(...simili.map((id) => altri.find((x) => x.id === id)!).filter(Boolean));
+  }
   const quanti = Object.fromEntries(conti);
   const totale = conti.reduce((s, [, n]) => s + n, 0);
   // quando torna da solo nei task: il passo «recupero» già programmato
@@ -78,6 +87,7 @@ export default async function RecuperoContatti({ searchParams }: { searchParams:
       {tipo !== "tutti" && <p className="text-xs text-neutral-500">{GRUPPI[tipo].nome}: {GRUPPI[tipo].spiega}.</p>}
       {p.fatto && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ Esito registrato: il recupero automatico di quel contatto è stato annullato.</p>}
 
+      {simili.length > 0 && <p className="rounded border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">🔎 Aggiunti {simili.length} contatti con un nome simile a «{q}» (forse hai sbagliato una lettera).</p>}
       {leads.length === 0 ? (
         <p className="rounded-lg border border-neutral-200 bg-white p-4 text-sm text-neutral-600">Nessun contatto da recuperare{q ? ` per «${q}»` : ""}.</p>
       ) : (

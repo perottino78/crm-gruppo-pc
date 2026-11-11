@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { randomBytes } from "crypto";
 import { getCurrentUser } from "@/lib/auth";
 import { daOraRoma, perInput, giornoBreve, chiaveGiorno, oraRoma } from "@/lib/calendario/tempo";
-import { inviaInvito } from "@/lib/calendario/server";
+import { inviaInvito, invitaRiunione } from "@/lib/calendario/server";
 import { nomeTipoAppuntamento } from "@/lib/calendario/eventi";
 
 function str(fd: FormData, k: string): string | null {
@@ -210,14 +210,17 @@ export async function rifissaDalCentralino(formData: FormData) {
   if (!u) redirect("/login");
   const id = str(formData, "id");
   if (!id) return;
-  const quando = daOraRoma(str(formData, "richiamaIl")) ?? new Date();
+  // «❌ Appuntamento annullato» (richiesta di Rocco): non vuol dire «non interessato»; il centralino lo trova subito nei
+  // task di oggi come «Motiva l'annullamento» e decide se richiamare più avanti o chiuderlo come non interessato
+  const annullato = formData.get("annullato") === "1";
+  const quando = (annullato ? null : daOraRoma(str(formData, "richiamaIl"))) ?? new Date();
   const note = str(formData, "note");
   const a = await prisma.appuntamento.findUnique({ where: { id }, include: { cliente: true } });
   if (!a) return;
   const { registraEsito } = await import("@/lib/automazioni/motore");
   const { esitiPossibili } = await import("@/lib/automazioni/percorsi");
   const { telefonistaDefaultPerBrand } = await import("@/lib/leadIngest");
-  const testo = `Da rifissare (${u.nome}, dopo l'appuntamento del ${giornoBreve(chiaveGiorno(a.dataOra))} ${oraRoma(a.dataOra)})${note ? `: ${note}` : ""}`;
+  const testo = `${annullato ? "Annullato" : "Da rifissare"} (${u.nome}, appuntamento del ${giornoBreve(chiaveGiorno(a.dataOra))} ${oraRoma(a.dataOra)})${note ? `: ${note}` : ""}`;
   let lead = await prisma.lead.findFirst({ where: { appuntamentoId: a.id } })
     ?? (a.cliente.leadOrigineId ? await prisma.lead.findUnique({ where: { id: a.cliente.leadOrigineId } }) : null);
   if (lead && esitiPossibili(lead.fase).includes("APPUNTAMENTO_ANNULLATO")) {
@@ -244,5 +247,40 @@ export async function rifissaDalCentralino(formData: FormData) {
   revalidatePath("/calendario");
   revalidatePath("/lead");
   revalidatePath(`/clienti/${a.clienteId}`);
+  if (annullato) redirect(ritorno(formData, `/calendario/appuntamento/${id}`, `❌ Appuntamento annullato. ${l.telefonista?.nome ?? "La telefonista"} trova nei «Task di oggi» il task «Motiva l'annullamento»: richiamare più avanti o non interessato.`));
   redirect(ritorno(formData, `/calendario/appuntamento/${id}`, `📞 Mandato al centralino: ${l.telefonista?.nome ?? "la telefonista"} lo trova nei «Task di oggi» dal ${quando.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })} per richiamare e rifissare.`));
+}
+
+/** Riunione interna (richiesta di Rocco): una o più persone del team, nessun cliente; l'invito parte da solo a tutti. */
+export async function creaRiunione(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const dataOra = daOraRoma(str(formData, "dataOra"));
+  const titolo = str(formData, "titolo") ?? "Riunione";
+  const partecipanti = [...new Set(formData.getAll("partecipanti").map(String).filter(Boolean))];
+  if (!dataOra) redirect(ritorno(formData, "/calendario", "Scegli giorno e ora della riunione."));
+  if (!partecipanti.length) redirect(ritorno(formData, "/calendario", "Scegli almeno una persona del team per la riunione."));
+  const validi = await prisma.utente.findMany({ where: { id: { in: partecipanti }, stato: "ATTIVO" }, select: { id: true } });
+  const r = await prisma.riunione.create({
+    data: {
+      titolo, dataOra: dataOra!, partecipanti: validi.map((x) => x.id),
+      durataMin: Math.max(15, Math.min(600, Number(str(formData, "durataMin") ?? 60) || 60)),
+      luogo: str(formData, "luogo"), note: str(formData, "note"), creatoDaNome: u.nome,
+    },
+  });
+  const e = await invitaRiunione(r.id);
+  revalidatePath("/calendario");
+  redirect(ritorno(formData, `/calendario?giorno=${chiaveGiorno(dataOra!)}`, `👥 Riunione salvata. ${e.inviati.length ? `Invito mandato a ${e.inviati.length} ${e.inviati.length === 1 ? "persona" : "persone"}.` : `Invito non inviato (${e.motivo ?? "nessuna email"}).`}`));
+}
+
+/** Annulla la riunione: sparisce dal calendario e i partecipanti ricevono l'annullamento. */
+export async function annullaRiunione(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id");
+  if (!id) return;
+  const r = await prisma.riunione.update({ where: { id }, data: { stato: "ANNULLATO" } });
+  await invitaRiunione(id, "CANCEL");
+  revalidatePath("/calendario");
+  redirect(`/calendario?giorno=${chiaveGiorno(r.dataOra)}&msg=${encodeURIComponent("Riunione annullata: i partecipanti hanno ricevuto l'avviso.")}`);
 }

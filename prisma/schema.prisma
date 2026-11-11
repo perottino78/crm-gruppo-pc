@@ -2169,3 +2169,21 @@ model SpesaMarketing {
 
   @@unique([mese, canale])
 }
+
+// Riunione interna (richiesta di Rocco): impegno del team senza cliente, con una o più persone. Compare nel calendario di ognuno
+// e ognuno riceve l'invito via email. stato: PROGRAMMATO | ANNULLATO
+model Riunione {
+  id           String   @id @default(cuid())
+  titolo       String
+  dataOra      DateTime
+  durataMin    Int      @default(60)
+  luogo        String?
+  note         String?
+  partecipanti String[] @default([])
+  stato        String   @default("PROGRAMMATO")
+  creatoDaNome String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([dataOra])
+}

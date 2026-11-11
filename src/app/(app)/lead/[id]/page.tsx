@@ -16,6 +16,7 @@ import EsitoLead from "@/components/lead/EsitoLead";
 import BottoneConferma from "@/components/BottoneConferma";
 import { eliminaLead } from "@/app/elimina-contatti-actions";
 import RisposteModulo from "@/components/lead/RisposteModulo";
+import { voceEsito } from "@/lib/lead/cronologia";
 
 type P = { ok?: string; errore?: string; fatto?: string; da?: string };
 const inp = "rounded-md border border-neutral-300 px-2 py-1.5 text-sm";
@@ -61,7 +62,11 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
 
   // Cronologia unica: eventi + email (le email inviate hanno già il loro evento "email.*": si mostra solo la riga dell'email)
   const cronologia = [
-    ...l.eventi.filter((e) => !e.tipo.startsWith("email.")).map((e) => ({ id: e.id, data: e.createdAt, titolo: TITOLI[e.tipo] ?? "Attività", testo: e.testo, chi: e.utenteNome, nota: e.tipo === "lead.nota" })),
+    ...l.eventi.filter((e) => !e.tipo.startsWith("email.")).map((e) => {
+      // esito: il titolo è l'esito stesso («Non risponde»…), sotto solo i dettagli se ci sono
+      const v = e.tipo === "lead.esito" ? voceEsito(e.testo) : { titolo: TITOLI[e.tipo] ?? "Attività", corpo: e.testo };
+      return { id: e.id, data: e.createdAt, titolo: v.titolo, testo: v.corpo, chi: e.utenteNome, nota: e.tipo === "lead.nota" };
+    }),
     ...l.emailLead.map((e) => ({
       id: e.id, data: e.createdAt, titolo: e.categoria === "CLIENTE" ? "Email al cliente" : "Email interna",
       testo: `${e.oggetto} · ${STATO_EMAIL[e.stato] ?? e.stato}${e.motivo ? ` (${e.motivo})` : ""}${e.apertaIl ? " · 👁 aperta" : ""}`, chi: null, nota: false,
@@ -106,14 +111,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
             {note.altro.map((a, i) => <li key={`a${i}`}>{a}</li>)}
             {l.recuperi > 0 && <li className="text-teal-800">♻️ Recuperato {l.recuperi} {l.recuperi === 1 ? "volta" : "volte"}</li>}
           </ul>
-          {note.noteDatate.length > 0 && (
-            <div className="mt-2 border-t border-neutral-200 pt-2">
-              <p className="mb-1 text-[11px] font-bold uppercase text-neutral-500">Note del centralino</p>
-              <ul className="list-disc space-y-0.5 pl-5 text-sm text-neutral-800">
-                {note.noteDatate.map((x, i) => <li key={i}><span className="font-semibold text-neutral-900">{x.data}{x.autore ? ` · ${x.autore}` : ""}:</span> {x.testo}</li>)}
-              </ul>
-            </div>
-          )}
+          {/* le note del centralino non si ripetono qui: sono già nella cronologia in fondo */}
           <div className="mt-2 flex flex-wrap gap-2">
             <details className="rounded border border-neutral-200 bg-white px-3 py-1.5">
               <summary className="cursor-pointer select-none text-xs font-semibold text-neutral-700">✏️ Modifica i dati del lead</summary>
@@ -242,7 +240,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
               <span className={`absolute -left-[27px] top-1 h-3.5 w-3.5 rounded-full border-2 border-white ${c.nota ? "bg-teal-600" : "bg-neutral-400"}`} />
               <p className="text-xs text-neutral-500">{quando(c.data)}{c.chi ? ` · ${c.chi}` : ""}</p>
               <p className="text-sm font-bold text-neutral-900">{c.titolo}</p>
-              <p className="mt-0.5 whitespace-pre-line text-sm leading-relaxed text-neutral-700">{c.testo}</p>
+              {c.testo && <p className="mt-0.5 whitespace-pre-line text-sm leading-relaxed text-neutral-700">{c.testo}</p>}
             </li>
           ))}
           {cronologia.length === 0 && <li className="text-sm text-neutral-500">Ancora nessuna attività.</li>}

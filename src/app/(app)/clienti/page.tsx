@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { clientiSimili, leadSimili, SOGLIA_FUZZY } from "@/lib/ricerca/server";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import BrandSwitcher from "@/components/BrandSwitcher";
@@ -136,6 +137,23 @@ export default async function ClientiPage({
     isAdmin ? prisma.utente.findMany({ where: { clientiResponsabile: { some: {} } }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }) : Promise.resolve([]),
   ]);
 
+  // ricerca che perdona gli errori: se la ricerca esatta trova poco, si aggiungono i nomi più somiglianti (clienti e lead)
+  const [clientiSimiliIds, leadSimiliIds] = ricercaStd && paginaClienti <= 1 && paginaLead <= 1
+    ? await Promise.all([
+        clientiTotali < SOGLIA_FUZZY ? clientiSimili(ricercaStd, { AND: [brandFiltro, clienteScope, ...whereFiltriClienti({ ...filtri, q: undefined, brand: undefined }, dataDa, dataA)] }, clienti.map((c) => c.id)) : Promise.resolve([]),
+        leadTotali < SOGLIA_FUZZY ? leadSimili(ricercaStd, { AND: [brandFiltro, leadScope] }, lead.map((l) => l.id)) : Promise.resolve([]),
+      ])
+    : [[], []];
+  if (clientiSimiliIds.length) {
+    const altri = await prisma.cliente.findMany({ where: { id: { in: clientiSimiliIds } }, include: { brand: true, responsabile: { select: { nome: true } } } });
+    clienti.push(...clientiSimiliIds.map((id) => altri.find((x) => x.id === id)!).filter(Boolean));
+  }
+  if (leadSimiliIds.length) {
+    const altri = await prisma.lead.findMany({ where: { id: { in: leadSimiliIds } }, include: { telefonista: true, brand: true, clienteGenerato: true } });
+    lead.push(...leadSimiliIds.map((id) => altri.find((x) => x.id === id)!).filter(Boolean));
+  }
+  const simili = clientiSimiliIds.length + leadSimiliIds.length;
+
   const navigazione = (tipo: "pc" | "pl", attuale: number, perPagina: number | undefined, totale: number, mostrati: number) => {
     if (!perPagina || totale <= perPagina) return null;
     const pagine = Math.ceil(totale / perPagina);
@@ -157,6 +175,7 @@ export default async function ClientiPage({
         <h1 className="text-2xl font-bold text-neutral-900">Clienti</h1>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+      {simili > 0 && <p className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-900">🔎 Nessun risultato esatto (o quasi) per «{ricercaStd}»: aggiunti {simili} {simili === 1 ? "nome simile" : "nomi simili"}, forse hai sbagliato una lettera.</p>}
       {filtri.ok && <p className="mb-4 rounded-lg bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-900">✓ {filtri.ok}</p>}
       {filtri.errore && <p className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-sm text-red-900">⚠️ {filtri.errore}</p>}
 
