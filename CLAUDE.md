@@ -204,7 +204,17 @@ login nel `matcher` del middleware.
   `?sezione=<id>#aggiungi-prodotto`: il prodotto scelto va in quella stanza, `SelettoreProdotto sezioneId` → campo `sezioneId` → `posizioneNuovaRiga`
   in `aggiungiRigaPreventivo`/`…PerMisura`, solo stanze della stessa offerta) e «📝 Testo» (testo + importo + Aggiungi); righe di testo con
   modifica/duplica/elimina (`components/preventivi/RigaTesto.tsx`, `modificaRigaPreventivo` gestisce anche il testo). «👁️ Guarda anteprima» apre
-  `/preventivi/[id]/stampa` con in alto «← Torna all'offerta» e «✉️ Invia al cliente». Collaudo `preventivi-righe` (12).
+  `/preventivi/[id]/stampa` con in alto «← Torna all'offerta» e «✉️ Invia al cliente». Collaudo `preventivi-righe` (13).
+- **Preventivi, richieste di Rocco parte 3 (nov 2026)**: prodotti «come un negozio online»: `SelettoreProdotto finestra` (solo nell'offerta; nella pratica
+  resta il vecchio elenco) = pulsante «➕ Aggiungi prodotto» che apre una finestra: tessere Indoor/Outdoor → categorie (gruppi) → sottogruppi → modelli
+  con la foto (`NodoTipologia.immagine` da `ModelloProdotto.immagineUrl`, esclusi i data URI) → configuratore di sempre (`elencoTipologie`: tendine a
+  cascata se il listino le prevede) → «🛒 Aggiungi al preventivo»; dentro la finestra «va in» la stanza (`sezioni`), il pulsante «🧩 Prodotto» di una
+  stanza la apre con l'evento `scegli-prodotto`. `aggiungiRigaPreventivo`/`…PerMisura` restituiscono `{ rigaId }`: dopo l'aggiunta la finestra offre
+  «⚙️ Scegli gli optional» (evento `apri-optional` + `window.__apriOptional`), «Aggiungi un altro prodotto», «Chiudi». Gli optional di ogni riga prodotto
+  stanno in `components/preventivi/FinestraOptional.tsx` (pulsante «⚙️ Optional (n)», gli stessi moduli di prima dentro una finestra; nascosto se il
+  prodotto non ne ha). Stampa: ogni prodotto con nome leggibile e elenco puntato Tipo (gruppo — sottogruppo) / Colore / Misure / Optional
+  (`src/lib/preventivi/riepilogo-stampa.ts` puro, test `tests/preventivi/riepilogo-stampa.test.ts`); la scheda tecnica completa non va più in stampa,
+  solo il testo personalizzato della riga («✏️ testo per il cliente»).
 - **Invia offerta e firme email** (`src/app/offerte-email-actions.ts`, `src/lib/mail/firma.ts` puro, `src/lib/mail/link-offerta.ts`,
   pagina `/preventivi/[id]/invia` con `EditorInvioOfferta`): pulsante «✉️ Invia offerta» nella scheda dell'offerta → editor con A/Cc/oggetto/testo,
   firma di chi manda, pulsante «Vedi e scarica l'offerta» (link firmato `/offerta/<id>.<firma>`, pubblico, stessa vista della stampa
@@ -435,13 +445,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 315, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 318, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (12)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

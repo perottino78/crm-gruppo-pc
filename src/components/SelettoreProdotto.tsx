@@ -9,6 +9,8 @@ import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME
 export type NodoTipologia = {
   value: string;
   label: string;
+  /** foto del modello per le tessere della finestra «negozio» */
+  immagine?: string;
   haMisura: boolean;
   varianti?: { id: string; colore: string; prezzoBase: number }[];
   // range di misure effettivamente a listino (solo per i modelli con haMisura=true)
@@ -1572,15 +1574,21 @@ export default function SelettoreProdotto({
   azionePerMisura,
   azionePerProdotto,
   sezioneId = null,
+  finestra = false,
+  sezioni = [],
 }: {
   /** stanza dell'offerta in cui mettere il prodotto scelto (pulsante «🧩 Prodotto» di una sezione) */
   sezioneId?: string | null;
+  /** finestra «negozio» (richiesta di Rocco): Indoor/Outdoor → categorie → prodotti → configuratore → «Aggiungi al preventivo» */
+  finestra?: boolean;
+  /** stanze dell'offerta, per scegliere dove va il prodotto dentro la finestra */
+  sezioni?: { id: string; nome: string }[];
   preventivoId: string;
   brandId: string;
   brandColor: string;
   tassonomia: FamigliaNodo[];
-  azionePerMisura: (formData: FormData) => void;
-  azionePerProdotto: (formData: FormData) => void;
+  azionePerMisura: (formData: FormData) => void | Promise<unknown>;
+  azionePerProdotto: (formData: FormData) => void | Promise<unknown>;
 }) {
   const [query, setQuery] = useState("");
   const [famigliaAperta, setFamigliaAperta] = useState<string | null>(null);
@@ -1590,6 +1598,41 @@ export default function SelettoreProdotto({
   const [larghezzaVal, setLarghezzaVal] = useState("");
   const [altezzaVal, setAltezzaVal] = useState("");
   const [erroreMisura, setErroreMisura] = useState<string | null>(null);
+  const [aperto, setAperto] = useState(false);
+  const [sezioneCorrente, setSezioneCorrente] = useState<string | null>(sezioneId);
+  const [aggiunto, setAggiunto] = useState<{ label: string; rigaId?: string } | null>(null);
+  useEffect(() => setSezioneCorrente(sezioneId), [sezioneId]);
+  // il pulsante «🧩 Prodotto» di una stanza apre la finestra già sulla stanza giusta
+  useEffect(() => {
+    if (!finestra) return;
+    const apri = (e: Event) => {
+      const d = (e as CustomEvent<{ sezioneId: string | null }>).detail;
+      setSezioneCorrente(d?.sezioneId ?? null);
+      setAggiunto(null);
+      setAperto(true);
+    };
+    window.addEventListener("scegli-prodotto", apri);
+    return () => window.removeEventListener("scegli-prodotto", apri);
+  }, [finestra]);
+  useEffect(() => {
+    if (!aperto) return;
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setAperto(false); };
+    window.addEventListener("keydown", esc);
+    const prima = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", esc); document.body.style.overflow = prima; };
+  }, [aperto]);
+  // dopo «Aggiungi al preventivo» nella finestra: riepilogo con «Scegli gli optional» / «Altro prodotto»
+  const invia = (azione: (fd: FormData) => void | Promise<unknown>) =>
+    (finestra
+      ? async (fd: FormData) => {
+          const r = (await azione(fd)) as { rigaId?: string } | undefined;
+          setAggiunto({ label: scelto?.label ?? "Prodotto", rigaId: r?.rigaId });
+          setScelto(null);
+          setLarghezzaVal("");
+          setAltezzaVal("");
+        }
+      : azione) as (fd: FormData) => void;
 
   const risultatiRicerca = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -1673,6 +1716,146 @@ export default function SelettoreProdotto({
     return null;
   }
 
+  function tesseraTipologia(t: NodoTipologia) {
+    const sel = scelto?.value === t.value;
+    return (
+      <button
+        key={t.value}
+        type="button"
+        onClick={() => (t.disabilitato ? window.alert(t.disabilitato) : scegli(t))}
+        title={t.disabilitato}
+        className={`group text-left rounded-xl border overflow-hidden bg-white transition ${t.disabilitato ? "opacity-50 cursor-not-allowed" : "hover:shadow-md hover:border-neutral-400"} ${sel ? "ring-2 ring-blue-500" : "border-neutral-200"}`}
+      >
+        <div className="h-24 bg-neutral-50 flex items-center justify-center overflow-hidden">
+          {t.immagine ? <img src={t.immagine} alt="" className="h-full w-full object-cover group-hover:scale-105 transition" /> : <span className="text-3xl text-neutral-300">🧩</span>}
+        </div>
+        <p className="px-2.5 py-2 text-xs font-semibold text-neutral-800 leading-snug">{t.label}{t.disabilitato ? " · in arrivo" : ""}</p>
+      </button>
+    );
+  }
+
+  // modelli di un gruppo/sottogruppo: tendine a cascata quando il listino le prevede, altrimenti l'elenco
+  // (nella finestra «negozio» l'elenco diventa una griglia di tessere con la foto)
+  function elencoTipologie(tipologie: NodoTipologia[], griglia: boolean) {
+    return (
+      <>
+                                          {tipologie.length > 0 && tipologie.every((t) => t.assi) ? (
+                                              <SelettoreCascata
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiModelloAnte) ? (
+                                              <SelettoreCascataModelloAnte
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiPersianeBlindate) ? (
+                                              <SelettoreCascataPersianeBlindate
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiKopen) ? (
+                                              <SelettoreCascataKopen
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiPergola) ? (
+                                              <SelettoreCascataPergola
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiVetrata) ? (
+                                              <SelettoreCascataVetrata
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiBioclimatica) ? (
+                                              <SelettoreCascataBioclimatica
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiIsomax) ? (
+                                              <SelettoreCascataIsomax
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiRullo) ? (
+                                              <SelettoreCascataRullo
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiZenith) ? (
+                                              <SelettoreCascataZenith
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiBlindati) ? (
+                                              <SelettoreCascataBlindati
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiMinibox) ? (
+                                              <SelettoreCascataMinibox
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiTapparelle) ? (
+                                              <SelettoreCascataTapparelle
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+                                            ) : tipologie.length > 0 && tipologie.every((t) => t.assiAccessoriTapparelle) ? (
+                                              <SelettoreCascataAccessoriTapparelle
+                                                tipologie={tipologie}
+                                                selezionato={scelto?.value ?? null}
+                                                onScegli={scegli}
+                                                onReset={azzeraScelta}
+                                              />
+        ) : griglia ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{tipologie.map(tesseraTipologia)}</div>
+        ) : (
+          tipologie.map((t) =>
+            t.disabilitato ? (
+              <button key={t.value} type="button" onClick={() => window.alert(t.disabilitato)} className="text-left px-2 py-1.5 text-xs rounded bg-red-50 text-red-400 cursor-not-allowed" title={t.disabilitato}>
+                {t.label}
+              </button>
+            ) : (
+              <button key={t.value} type="button" onClick={() => scegli(t)} className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}>
+                {t.label}
+              </button>
+            )
+          )
+        )}
+      </>
+    );
+  }
+
   function alSubmitMisura(e: FormEvent<HTMLFormElement>) {
     if (!scelto) return;
     const errore = controllaMisure(scelto, larghezzaVal, altezzaVal);
@@ -1685,10 +1868,75 @@ export default function SelettoreProdotto({
     }
   }
 
-  return (
-    <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
-      <h2 className="text-base font-bold text-neutral-900 mb-1">Aggiungi prodotto</h2>
-      <p className="text-xs text-neutral-600 mb-3">
+  // ===== Finestra «negozio» (richiesta di Rocco) =====
+  const nomeFamiglia = (n: string) => (n === "INDOOR" ? "🏠 Indoor" : n === "OUTDOOR" ? "🌤️ Outdoor" : n);
+  const primaFoto = (g: GruppoNodo) =>
+    [...g.tipologie, ...(g.sottogruppi ?? []).flatMap((sg) => sg.tipologie)].find((t) => t.immagine)?.immagine;
+  const quanti = (g: GruppoNodo) => (g.sottogruppi ? g.sottogruppi.reduce((t, sg) => t + sg.tipologie.length, 0) : g.tipologie.length);
+  function tessera(chiave: string, titolo: string, sotto: string | null, foto: string | undefined, onClick: () => void, grande = false) {
+    return (
+      <button key={chiave} type="button" onClick={onClick} className="group text-left rounded-xl border border-neutral-200 overflow-hidden bg-white hover:shadow-md hover:border-neutral-400 transition">
+        <div className={`${grande ? "h-36" : "h-24"} bg-gradient-to-br from-neutral-50 to-neutral-100 flex items-center justify-center overflow-hidden`}>
+          {foto ? <img src={foto} alt="" className="h-full w-full object-cover group-hover:scale-105 transition" /> : <span className={`${grande ? "text-5xl" : "text-3xl"} text-neutral-300`}>{grande ? titolo.slice(0, 2) : "📦"}</span>}
+        </div>
+        <div className="px-3 py-2">
+          <p className={`${grande ? "text-lg" : "text-sm"} font-bold text-neutral-900 leading-snug`}>{titolo}</p>
+          {sotto && <p className="text-[11px] text-neutral-500">{sotto}</p>}
+        </div>
+      </button>
+    );
+  }
+  function navigazioneGriglia() {
+    const f = tassonomia.find((x) => x.nome === famigliaAperta) ?? null;
+    const g = f?.gruppi.find((x) => x.nome === gruppoAperto) ?? null;
+    const sg = g?.sottogruppi?.find((x) => `${g.nome}|${x.nome}` === sottogruppoAperto) ?? null;
+    const briciole = (
+      <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-neutral-600">
+        <button type="button" onClick={() => { setFamigliaAperta(null); setGruppoAperto(null); setSottogruppoAperto(null); }} className="underline">Tutti i prodotti</button>
+        {f && <><span>›</span><button type="button" onClick={() => { setGruppoAperto(null); setSottogruppoAperto(null); }} className="underline">{nomeFamiglia(f.nome)}</button></>}
+        {g && <><span>›</span><button type="button" onClick={() => setSottogruppoAperto(null)} className="underline">{g.nome}</button></>}
+        {sg && <><span>›</span><span className="font-semibold text-neutral-800">{sg.nome}</span></>}
+      </nav>
+    );
+    if (!f) {
+      return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+          {tassonomia.map((x) => tessera(x.nome, nomeFamiglia(x.nome), `${x.gruppi.length} categorie`, x.gruppi.map(primaFoto).find(Boolean), () => setFamigliaAperta(x.nome), true))}
+        </div>
+      );
+    }
+    if (!g) {
+      return (
+        <>
+          {briciole}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
+            {f.gruppi.map((x) => tessera(x.nome, x.nome, `${quanti(x)} prodotti`, primaFoto(x), () => { setGruppoAperto(x.nome); setSottogruppoAperto(null); }))}
+          </div>
+        </>
+      );
+    }
+    if (g.sottogruppi && !sg) {
+      return (
+        <>
+          {briciole}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
+            {g.sottogruppi.map((x) => tessera(x.nome, x.nome, `${x.tipologie.length} prodotti`, x.tipologie.find((t) => t.immagine)?.immagine, () => setSottogruppoAperto(`${g.nome}|${x.nome}`)))}
+          </div>
+        </>
+      );
+    }
+    return (
+      <>
+        {briciole}
+        <div className="mb-3 flex flex-col">{elencoTipologie(sg ? sg.tipologie : g.tipologie, true)}</div>
+      </>
+    );
+  }
+
+  const contenuto = (
+    <>
+      {!finestra && <h2 className="text-base font-bold text-neutral-900 mb-1">Aggiungi prodotto</h2>}
+      <p className={`text-xs text-neutral-600 mb-3 ${finestra ? "hidden" : ""}`}>
         Sfoglia Indoor / Outdoor per famiglia e modello, oppure cerca direttamente il nome se lo conosci già.
       </p>
 
@@ -1702,7 +1950,7 @@ export default function SelettoreProdotto({
         />
       </div>
 
-      {risultatiRicerca ? (
+      {finestra && scelto ? null : risultatiRicerca ? (
         <div className="border border-neutral-100 rounded-lg divide-y divide-neutral-50 max-h-72 overflow-y-auto mb-3">
           {risultatiRicerca.length === 0 && (
             <p className="px-3 py-3 text-sm text-neutral-600">Nessun modello corrisponde a &quot;{query}&quot;.</p>
@@ -1732,6 +1980,8 @@ export default function SelettoreProdotto({
             )
           )}
         </div>
+      ) : finestra ? (
+        navigazioneGriglia()
       ) : (
         <div className="border border-neutral-100 rounded-lg divide-y divide-neutral-50 mb-3">
           {tassonomia.map((f) => {
@@ -1788,128 +2038,7 @@ export default function SelettoreProdotto({
                                       </button>
                                       {apertoSg && (
                                         <div className="pl-3 pb-1 flex flex-col">
-                                          {sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assi) ? (
-                                            <SelettoreCascata
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiModelloAnte) ? (
-                                            <SelettoreCascataModelloAnte
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPersianeBlindate) ? (
-                                            <SelettoreCascataPersianeBlindate
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiKopen) ? (
-                                            <SelettoreCascataKopen
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiPergola) ? (
-                                            <SelettoreCascataPergola
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiVetrata) ? (
-                                            <SelettoreCascataVetrata
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiBioclimatica) ? (
-                                            <SelettoreCascataBioclimatica
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiIsomax) ? (
-                                            <SelettoreCascataIsomax
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiRullo) ? (
-                                            <SelettoreCascataRullo
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiZenith) ? (
-                                            <SelettoreCascataZenith
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiBlindati) ? (
-                                            <SelettoreCascataBlindati
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiMinibox) ? (
-                                            <SelettoreCascataMinibox
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiTapparelle) ? (
-                                            <SelettoreCascataTapparelle
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : sg.tipologie.length > 0 && sg.tipologie.every((t) => t.assiAccessoriTapparelle) ? (
-                                            <SelettoreCascataAccessoriTapparelle
-                                              tipologie={sg.tipologie}
-                                              selezionato={scelto?.value ?? null}
-                                              onScegli={scegli}
-                                              onReset={azzeraScelta}
-                                            />
-                                          ) : (
-                                            sg.tipologie.map((t) =>
-                                              t.disabilitato ? (
-                                                <button
-                                                  key={t.value}
-                                                  type="button"
-                                                  onClick={() => window.alert(t.disabilitato)}
-                                                  className="text-left px-2 py-1.5 text-xs rounded bg-red-50 text-red-400 cursor-not-allowed"
-                                                  title={t.disabilitato}
-                                                >
-                                                  {t.label}
-                                                </button>
-                                              ) : (
-                                                <button
-                                                  key={t.value}
-                                                  type="button"
-                                                  onClick={() => scegli(t)}
-                                                  className={`text-left px-2 py-1.5 text-xs rounded hover:bg-neutral-50 ${scelto?.value === t.value ? "bg-neutral-100 font-medium" : "text-neutral-700"}`}
-                                                >
-                                                  {t.label}
-                                                </button>
-                                              )
-                                            )
-                                          )}
+                                          {elencoTipologie(sg.tipologie, false)}
                                         </div>
                                       )}
                                     </div>
@@ -1954,6 +2083,9 @@ export default function SelettoreProdotto({
         </div>
       )}
 
+      {scelto && finestra && (
+        <button type="button" onClick={azzeraScelta} className="mb-2 text-xs text-blue-700 underline">← torna ai prodotti</button>
+      )}
       {scelto && (
         <div className="border border-neutral-200 rounded-lg p-3 bg-neutral-50">
           <div className="flex items-center justify-between mb-2">
@@ -2036,9 +2168,9 @@ export default function SelettoreProdotto({
                   </div>
                 </div>
               )}
-              <form action={azionePerMisura} onSubmit={alSubmitMisura} className="flex flex-wrap items-end gap-2">
+              <form action={invia(azionePerMisura)} onSubmit={alSubmitMisura} className="flex flex-wrap items-end gap-2">
                 <input type="hidden" name="preventivoId" value={preventivoId} />
-                {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
+                {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
                 <input type="hidden" name="brandId" value={brandId} />
                 <input type="hidden" name="tipologia" value={scelto.value} />
                 <div className="flex flex-col gap-1">
@@ -2088,7 +2220,7 @@ export default function SelettoreProdotto({
                   <input name="quantita" type="number" defaultValue={1} min={1} className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-20" />
                 </div>
                 <button className="btn-3d text-sm px-4 py-2" style={{ background: brandColor, color: "#fff", borderColor: brandColor }}>
-                  Calcola e aggiungi
+                  {finestra ? "🛒 Aggiungi al preventivo" : "Calcola e aggiungi"}
                 </button>
                 {erroreMisura && (
                   <div className="w-full flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-3 py-2 text-xs font-medium">
@@ -2105,9 +2237,9 @@ export default function SelettoreProdotto({
             <div className="flex flex-col gap-1.5">
               <p className="text-[11px] text-neutral-600 mb-1">{scelto.value.startsWith("LATT_") ? GUIDA_LATTONERIA : "Prodotto a prezzo fisso (senza misura) — scegli la variante:"}</p>
               {scelto.varianti.map((v) => (
-                <form key={v.id} action={azionePerProdotto} className="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded px-2 py-1.5">
+                <form key={v.id} action={invia(azionePerProdotto)} className="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded px-2 py-1.5">
                   <input type="hidden" name="preventivoId" value={preventivoId} />
-                {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
+                {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
                   <input type="hidden" name="prodottoId" value={v.id} />
                   <span className="text-xs flex-1">{v.colore} — {v.prezzoBase.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
                   {scelto.value.startsWith("ISOMAX_") && (
@@ -2136,7 +2268,7 @@ export default function SelettoreProdotto({
                     <input name="lattCm" type="number" step="0.1" min={1} max={2000} defaultValue={300} required aria-label="Lunghezza di ogni pezzo in cm" title="Lunghezza di ogni pezzo in cm (prezzo al metro × lunghezza)" placeholder="cm" className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   )}
                   <input name="quantita" type="number" defaultValue={1} min={1} title={lattAlMetro(scelto.value) ? "Numero di pezzi" : scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
-                  <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ aggiungi</button>
+                  <button className={finestra ? "btn-3d btn-3d-orange text-[11px] px-2.5 py-1" : "btn-3d btn-3d-outline text-[11px] px-2 py-1"}>{finestra ? "🛒 Aggiungi al preventivo" : "+ aggiungi"}</button>
                 </form>
               ))}
             </div>
@@ -2145,6 +2277,64 @@ export default function SelettoreProdotto({
           )}
         </div>
       )}
-    </div>
+    </>
+  );
+
+  if (!finestra) return <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">{contenuto}</div>;
+
+  const nomeSezione = sezioni.find((x) => x.id === sezioneCorrente)?.nome;
+  return (
+    <>
+      <div className="bg-white rounded-lg border border-neutral-200 p-4 mb-6 flex flex-wrap items-center gap-3">
+        <button type="button" onClick={() => { setAggiunto(null); setAperto(true); }} className="btn-3d btn-3d-blue px-5 py-2.5 text-sm">➕ Aggiungi prodotto</button>
+        <span className="text-xs text-neutral-600">Si apre il catalogo: Indoor / Outdoor → categoria → prodotto → configuri e «Aggiungi al preventivo».</span>
+      </div>
+      {aperto && (
+        <div className="fixed inset-0 z-[120] flex items-start justify-center overflow-y-auto bg-black/50 p-2 sm:p-6" onClick={() => setAperto(false)}>
+          <div role="dialog" aria-modal="true" aria-label="Aggiungi prodotto" className="w-full max-w-5xl rounded-2xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 z-10 flex flex-wrap items-center gap-3 rounded-t-2xl border-b border-neutral-200 bg-white px-4 py-3">
+              <h2 className="text-lg font-bold text-neutral-900">🛒 Aggiungi prodotto</h2>
+              {sezioni.length > 0 && (
+                <label className="flex items-center gap-1.5 text-xs text-neutral-700">
+                  va in
+                  <select value={sezioneCorrente ?? ""} onChange={(e) => setSezioneCorrente(e.target.value || null)} className="rounded border border-blue-300 bg-blue-50 px-2 py-1 text-xs">
+                    <option value="">— nessuna stanza —</option>
+                    {sezioni.map((x) => <option key={x.id} value={x.id}>🏠 {x.nome}</option>)}
+                  </select>
+                </label>
+              )}
+              <button type="button" onClick={() => setAperto(false)} className="ml-auto rounded-full px-3 py-1 text-lg text-neutral-500 hover:bg-neutral-100" aria-label="Chiudi">✕</button>
+            </div>
+            <div className="p-4">
+              {aggiunto ? (
+                <div className="py-6 text-center">
+                  <p className="text-4xl">✅</p>
+                  <p className="mt-2 text-lg font-bold text-neutral-900">{aggiunto.label} aggiunto al preventivo{nomeSezione ? ` in «${nomeSezione}»` : ""}</p>
+                  <div className="mt-5 flex flex-wrap justify-center gap-3">
+                    {aggiunto.rigaId && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          (window as unknown as { __apriOptional?: string }).__apriOptional = aggiunto.rigaId;
+                          window.dispatchEvent(new CustomEvent("apri-optional", { detail: { rigaId: aggiunto.rigaId } }));
+                          setAperto(false);
+                        }}
+                        className="btn-3d btn-3d-purple px-4 py-2 text-sm"
+                      >
+                        ⚙️ Scegli gli optional
+                      </button>
+                    )}
+                    <button type="button" onClick={() => setAggiunto(null)} className="btn-3d btn-3d-blue px-4 py-2 text-sm">➕ Aggiungi un altro prodotto</button>
+                    <button type="button" onClick={() => setAperto(false)} className="btn-3d btn-3d-outline px-4 py-2 text-sm">Chiudi</button>
+                  </div>
+                </div>
+              ) : (
+                contenuto
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

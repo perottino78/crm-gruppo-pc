@@ -4,7 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
-import { unitaMisura, haMisura, labelBreveTipologia } from "@/lib/prodotti";
+import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } from "@/lib/prodotti";
+import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
@@ -179,32 +180,38 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
               <img src={modello.immagineUrl} alt={r.prodotto.tipologia} className="w-16 h-16 object-cover rounded shrink-0" />
             )}
             <div>
-              <p className="font-medium">{r.prodotto.tipologia.startsWith("LATT_") ? labelBreveTipologia(r.prodotto.tipologia) : r.prodotto.tipologia.replace(/_/g, " ")}</p>
-              <p className="text-xs text-neutral-600">
-                colore {r.prodotto.colore}
-                {haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
-                {r.prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
-              </p>
-              {mostraScheda && descrizioneEffettiva && (
-                <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{descrizioneEffettiva}</p>
+              {/* riepilogo per il cliente a elenco puntato (richiesta di Rocco): tipo, colore, misure, optional */}
+              <p className="font-semibold">{labelBreveTipologia(r.prodotto.tipologia)}</p>
+              <ul className="mt-0.5 list-disc pl-4 text-xs text-neutral-700 space-y-0.5">
+                {vociRiepilogo({
+                  gruppo: modello?.gruppo,
+                  sottogruppo: sottogruppoDiTipologia(r.prodotto.tipologia),
+                  colore: r.prodotto.colore,
+                  misura: r.prodotto.tipologia.startsWith("LATT_")
+                    ? (r.misuraLarghezza ? `pezzi da ${r.misuraLarghezza} cm` : null)
+                    : haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) || r.misuraLarghezza
+                      ? `${larghezzaMostrata}${altezzaMostrata ? ` × ${altezzaMostrata}` : ""} ${unit}`.trim()
+                      : null,
+                  optionali: r.optionali.map((ro) => {
+                    const nomeOptional = ro.optional.categoria.startsWith("Tessuto - ")
+                      ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}`
+                      : ro.optional.categoria.startsWith("Motore - ") && ro.optional.categoria !== "Motore - Manuale"
+                      ? `${ro.optional.categoria.replace("Motore - ", "")} ${ro.optional.nome}`
+                      : ro.optional.nome.includes("scrittura libera") || ro.optional.nome.includes("da definire")
+                      ? ro.optional.categoria.replace(/^Pannello( Interno - (STD|A pagamento))?$/, (_m, _g1, tipo) =>
+                          tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
+                        )
+                      : ro.optional.nome;
+                    return `${nomeOptional}${ro.nota ? ` («${ro.nota}»)` : ""}${ro.quantita > 1 ? ` ×${ro.quantita}` : ""}`;
+                  }),
+                }).map((v) => (
+                  <li key={v.etichetta}><span className="text-neutral-500">{v.etichetta}:</span> {v.valore}</li>
+                ))}
+              </ul>
+              {/* la scheda tecnica completa resta per noi: in stampa solo il testo scritto apposta per questa riga */}
+              {r.mostraDescrizione && r.descrizionePersonalizzata && (
+                <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{r.descrizionePersonalizzata}</p>
               )}
-              {r.optionali.map((ro) => {
-                const nomeOptional = ro.optional.categoria.startsWith("Tessuto - ")
-                  ? `${ro.optional.categoria.replace("Tessuto - ", "")} ${ro.optional.nome}`
-                  : ro.optional.categoria.startsWith("Motore - ") && ro.optional.categoria !== "Motore - Manuale"
-                  ? `${ro.optional.categoria.replace("Motore - ", "")} ${ro.optional.nome}`
-                  : ro.optional.nome.includes("scrittura libera") || ro.optional.nome.includes("da definire")
-                  ? ro.optional.categoria.replace(/^Pannello( Interno - (STD|A pagamento))?$/, (_m, _g1, tipo) =>
-                      tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
-                    )
-                  : ro.optional.nome;
-                return (
-                  <p key={ro.id} className="text-xs text-neutral-600">
-                    + {nomeOptional}
-                    {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×)
-                  </p>
-                );
-              })}
             </div>
           </div>
         </td>

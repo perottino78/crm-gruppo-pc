@@ -162,6 +162,9 @@ export async function tassonomiaListino(brandId: string): Promise<FamigliaNodo[]
         // tipologia non ha una etichetta breve dedicata, quindi va bene chiamarla sempre
         // (serve anche fuori dai sottogruppi, es. le "linee" Hisense Fresh Master/IQ Plus).
         label: labelBreveTipologia(tip),
+        // foto per le tessere della finestra «negozio» (solo percorsi/indirizzi: le foto salvate come data URI
+        // peserebbero troppo nella pagina)
+        ...(m?.immagineUrl && !m.immagineUrl.startsWith("data:") ? { immagine: m.immagineUrl } : {}),
         haMisura: conMisura,
         varianti: variantiPerTipologia.get(tip),
         misure:
