@@ -137,8 +137,16 @@ export function contrattiDaFatture(fatture: FatturaC[], progetti: Map<string, Pr
 
 /** Sigle BConsole di un utente (MPI per mpiccatti…): dallo username o, se diverso, dal nome. */
 export function sigleDi(u: { username?: string | null; nome: string }, sigle: Record<string, string>, nomi: Record<string, string>): string[] {
-  const nome = u.nome.trim().toLowerCase();
-  return Object.entries(sigle).filter(([, user]) => user === u.username || (nomi[user] ?? "").toLowerCase() === nome).map(([s]) => s);
+  return Object.entries(sigle).filter(([, user]) => user === u.username || stessaPersona(u.nome, nomi[user] ?? "")).map(([s]) => s);
+}
+
+/** Stessa persona anche se un nome è più corto o in altro ordine: «Paolo Visconti» = «Gian Paolo Visconti» = «VISCONTI GIAN PAOLO». */
+export function stessaPersona(a: string, b: string): boolean {
+  const parole = (s: string) => new Set(s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z]+/).filter((x) => x.length > 1));
+  const pa = parole(a), pb = parole(b);
+  if (pa.size < 2 || pb.size < 2) return false;
+  const [corto, lungo] = pa.size <= pb.size ? [pa, pb] : [pb, pa];
+  return [...corto].every((x) => lungo.has(x));
 }
 
 // ---------- ricerca libera e filtri ----------

@@ -19,7 +19,7 @@ export async function personeVisibili(u: ConPermessi & { id: string; visibileUte
   const tutti = gestisceProvvigioni(u);
   const ids = tutti ? undefined : [u.id, ...(visibilitaDi(u) === "ZONA" ? u.visibileUtenti ?? [] : [])];
   return prisma.utente.findMany({
-    where: ids ? { id: { in: ids } } : { OR: [{ preventivi: { some: {} } }, { provvigioni: { some: {} } }, { username: { in: Object.values(SIGLE_COMMERCIALI) } }] },
+    where: ids ? { id: { in: ids } } : { OR: [{ preventivi: { some: {} } }, { provvigioni: { some: {} } }, { ruolo: "COMMERCIALE" }, { username: { in: Object.values(SIGLE_COMMERCIALI) } }] },
     select: { id: true, nome: true, username: true },
     orderBy: { nome: "asc" },
   });

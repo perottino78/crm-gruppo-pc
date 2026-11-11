@@ -75,6 +75,12 @@ test("sigle BConsole dell'utente", () => {
   assert.deepEqual(sigleDi({ username: "mpiccatti", nome: "Marco" }, sigle, nomi), ["MPI"]);
   assert.deepEqual(sigleDi({ username: "ugo", nome: "Ugo Perottino" }, sigle, nomi), ["UPE"]);
   assert.deepEqual(sigleDi({ username: "x", nome: "Nessuno" }, sigle, nomi), []);
+  // nome più corto o rovesciato (Visconti: in BConsole «Gian Paolo Visconti», nel CRM magari «Paolo Visconti»)
+  const s2 = { GVI: "vpaolo" }, n2 = { vpaolo: "Gian Paolo Visconti" };
+  assert.deepEqual(sigleDi({ username: "pvisconti", nome: "Paolo Visconti" }, s2, n2), ["GVI"]);
+  assert.deepEqual(sigleDi({ username: "gp", nome: "VISCONTI GIAN PAOLO" }, s2, n2), ["GVI"]);
+  assert.deepEqual(sigleDi({ username: "p", nome: "Paolo Rossi" }, s2, n2), []);
+  assert.deepEqual(sigleDi({ username: "v", nome: "Visconti" }, s2, n2), []);
 });
 
 test("ricerca libera: tutte le parole, senza accenti, anche numeri di fattura e anno", () => {
