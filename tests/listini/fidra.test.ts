@@ -15,6 +15,7 @@ test("griglie come nel listino (prezzi al cliente)", () => {
   assert.equal(prezzo("FIDRA_PF1A_SOGLIA", 700, 1500), 1229.8);
   assert.equal(prezzo("FIDRA_PF3A", 1200, 1500), 3011.8);
   assert.equal(prezzo("FIDRA_TRASLANTE", 1600, 1500), 3410);
+  assert.equal(prezzo("FIDRA_F2A", 900, 800), 1073.6); // refuso del file (937) corretto con la progressione
 });
 
 test("«*» = primo prezzo disponibile", () => {

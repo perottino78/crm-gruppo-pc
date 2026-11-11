@@ -35,8 +35,8 @@ test("stessa base del listino Fidra: Optima = base × 1,35 (Fidra = base × 2,2)
     if (Math.abs(p.prezzoBase / COEFFICIENTE_OPTIMA - q.prezzoBase / 2.2) >= 0.02) diverse.push(`${p.tipologia} ${p.larghezzaMm}×${p.altezzaMm}`);
   }
   assert.ok(confrontati > 2000, String(confrontati));
-  // le sole due celle diverse sono nei file così come sono arrivati (presi i valori del listino Optima)
-  assert.deepEqual(diverse.sort(), ["OPTIMA_F2A 900×800", "OPTIMA_PF3A_SOGLIA 2400×2300"]);
+  // unica cella diversa, nei file così come sono arrivati (2 € di base); il refuso Fidra 900×800 è corretto in estrai_fidra.py
+  assert.deepEqual(diverse.sort(), ["OPTIMA_PF3A_SOGLIA 2400×2300"]);
 });
 
 test("tutte le tipologie hanno griglia, etichetta e sottogruppo; il segnaposto «in arrivo» non c'è più", () => {

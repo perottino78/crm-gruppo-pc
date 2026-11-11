@@ -45,6 +45,11 @@ for foglio, tip in FOGLI.items():
             if p is None: continue
             prodotti.append({"tipologia": t, "colore": "STANDARD", "larghezzaMm": L, "altezzaMm": H, "prezzoBase": p}); n += 1
         riepilogo[t] = (n, min(Ls), max(Ls), min(Hs), max(Hs))
+# refusi del file del fornitore, corretti seguendo la progressione delle misure vicine (richiesta di Ugo, nov 2026)
+CORREZIONI = {("FIDRA_F2A", 900, 800): 1073.6}  # nel file 937 (più basso di 900×700, 900×900 e 1000×800); = 488 di base × 2,2 come Optima
+for p in prodotti:
+    k = (p["tipologia"], p["larghezzaMm"], p["altezzaMm"])
+    if k in CORREZIONI: p["prezzoBase"] = CORREZIONI[k]
 json.dump(prodotti, open(out, "w"), ensure_ascii=False)
 for k, v in riepilogo.items(): print(k, v)
 print("totale", len(prodotti))
