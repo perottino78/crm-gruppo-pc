@@ -71,6 +71,7 @@ export async function cambiaMansioneUtente(fd: FormData) {
     where: { id },
     data: {
       ruolo, ufficio: nuovoUfficio,
+      ...(fd.get("conVende") === "1" ? { vende: fd.get("vende") === "1" } : {}),
       ...(cambiaEmail ? { email } : {}),
       ...(vecchiaCasella ? { smtpPassword: null, smtpUtente: null, smtpVerificataIl: null, smtpErrore: null } : {}),
     },

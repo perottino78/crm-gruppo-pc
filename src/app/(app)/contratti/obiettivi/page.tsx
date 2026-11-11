@@ -27,8 +27,8 @@ export default async function ObiettiviPage({ searchParams }: { searchParams: Pr
 
   // commerciali attivi, chi vende pur avendo un altro ruolo (Ugo) e chi ha già un obiettivo nel periodo
   const persone = (await prisma.utente.findMany({
-    where: { OR: [{ stato: "ATTIVO", ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] } }, { obiettivi: { some: { periodo: { in: [mese, anno] } } } }] },
-    select: { id: true, nome: true, username: true, email: true, stato: true, ruolo: true, obiettivi: { where: { periodo: { in: [mese, anno] } } } },
+    where: { OR: [{ stato: "ATTIVO", ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] } }, { stato: "ATTIVO", vende: true }, { obiettivi: { some: { periodo: { in: [mese, anno] } } } }] },
+    select: { id: true, nome: true, username: true, email: true, stato: true, ruolo: true, vende: true, obiettivi: { where: { periodo: { in: [mese, anno] } } } },
     orderBy: { nome: "asc" },
   })).filter((x) => eVenditore(x) || x.obiettivi.length > 0);
   const contratti = await contrattiDi(persone.map((x) => ({ id: x.id, nome: x.nome, username: x.username })));

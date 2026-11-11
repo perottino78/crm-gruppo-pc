@@ -38,6 +38,8 @@ import { contrattiDi, eVenditore } from "../../src/lib/provvigioni/server";
 import { salvaObiettiviCommerciale, mandaOraEmailObiettivi, impostaEmailObiettivi } from "../../src/app/provvigioni-actions";
 import { inviaEmailObiettivi, obiettiviDi } from "../../src/lib/provvigioni/obiettivi-server";
 import { salvaModelloProdotto } from "../../src/app/actions";
+import { cambiaMansioneUtente } from "../../src/app/team-actions";
+import { commercialiAttivi } from "../../src/lib/utenti/stato";
 import { chiaveGiorno } from "../../src/lib/calendario/tempo";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -125,6 +127,13 @@ async function main() {
   verifica(await prisma.obiettivo.count({ where: { utenteId: luca.id } }) === 0, "obiettivo vuoto = tolto");
 
   verifica(eVenditore(ugo) && eVenditore(marco) && !eVenditore(giorgia), "Ugo conta come venditore (sigla UPE) anche da amministratore, Giorgia no");
+  const laura = await prisma.utente.create({ data: { nome: "Laura Pinto", email: "laura@x.it", username: "laurap", ruolo: "TECNICO", ufficio: "TECNICO" } });
+  verifica(!eVenditore(laura) && !(await commercialiAttivi()).some((x) => x.id === laura.id), "una tecnica di serie non è tra i venditori");
+  g.__utente = ugo;
+  await redirectA(cambiaMansioneUtente(fd({ utenteId: laura.id, ruolo: "TECNICO", ufficio: "TECNICO", email: "laura@x.it", conVende: "1", vende: "1", ritorno: "/commerciali" })));
+  const laura2 = (await prisma.utente.findUnique({ where: { id: laura.id } }))!;
+  verifica(laura2.vende && laura2.ruolo === "TECNICO" && eVenditore(laura2) && (await commercialiAttivi()).some((x) => x.id === laura.id), "con «Vende anche» resta tecnica ma diventa venditrice (commerciale delle offerte, obiettivi)");
+  g.__utente = giorgia;
 
   console.log("5. Email del lunedì");
   const sabato = new Date("2026-11-14T09:00:00Z"), lunedi = new Date("2026-11-16T08:00:00Z");
