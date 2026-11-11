@@ -18,11 +18,13 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
   const p = await searchParams;
   await sincronizzaScadenzeCommesse();
   const oggi = oggiUtc();
+  // ordine per data di scadenza (richiesta di Rocco): dalla più vicina (crescente) o dalla più lontana/recente (decrescente)
+  const verso = p.ordine === "desc" ? "desc" : "asc";
   const [scadenze, fornitori, conti] = await Promise.all([
     prisma.scadenza.findMany({
       where: whereScadenze(p),
       include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } },
-      orderBy: [{ dataScadenza: { sort: "asc", nulls: "last" } }, { createdAt: "asc" }],
+      orderBy: [{ dataScadenza: { sort: verso, nulls: "last" } }, { createdAt: verso }],
       take: 1000,
     }),
     prisma.soggetto.findMany({ where: { attivo: true }, select: { id: true, ragioneSociale: true }, orderBy: { ragioneSociale: "asc" } }),
@@ -49,7 +51,7 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
 
   const qs = (extra: Record<string, string | undefined>) => {
     const u = new URLSearchParams();
-    const tutti = { tipo: p.tipo, periodo: p.periodo, stato: p.stato, q: p.q, ...extra };
+    const tutti = { tipo: p.tipo, periodo: p.periodo, stato: p.stato, q: p.q, ordine: p.ordine, ...extra };
     Object.entries(tutti).forEach(([k, v]) => v && u.set(k, v));
     return `?${u.toString()}`;
   };
@@ -71,10 +73,15 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
       </div>
       <div className="flex flex-wrap gap-2 items-center">
         {periodi.map(([v, l]) => <Link key={v} href={qs({ periodo: v })} className={pill((p.periodo ?? "tutte") === v)}>{l}</Link>)}
+        <span className="w-px h-5 bg-neutral-300 mx-1" />
+        <span className="text-xs text-neutral-600">Ordine:</span>
+        <Link href={qs({ ordine: undefined })} className={pill(verso === "asc")} title="Dalla scadenza più vecchia alla più lontana">↑ Crescente</Link>
+        <Link href={qs({ ordine: "desc" })} className={pill(verso === "desc")} title="Dalla scadenza più lontana alla più vecchia">↓ Decrescente</Link>
         <form className="ml-auto flex gap-2">
           {p.tipo && <input type="hidden" name="tipo" value={p.tipo} />}
           {p.periodo && <input type="hidden" name="periodo" value={p.periodo} />}
           {p.stato && <input type="hidden" name="stato" value={p.stato} />}
+          {p.ordine && <input type="hidden" name="ordine" value={p.ordine} />}
           <input name="q" defaultValue={p.q} placeholder="Cerca cliente, fornitore, n° doc…" className={`${inp} w-64`} />
           <button className="btn-3d btn-3d-dark text-xs px-3">Cerca</button>
         </form>
@@ -140,7 +147,7 @@ type Riga = Awaited<ReturnType<typeof prisma.scadenza.findMany>>[number] & {
 /** Filtri attuali, per tornare alla stessa vista dopo aver registrato un pagamento. */
 function qsBase(p: ParametriScadenze) {
   const u = new URLSearchParams();
-  for (const k of ["tipo", "periodo", "stato", "q"] as const) if (p[k]) u.set(k, p[k]!);
+  for (const k of ["tipo", "periodo", "stato", "q", "ordine"] as const) if (p[k]) u.set(k, p[k]!);
   const t = u.toString();
   return t ? `?${t}` : "";
 }

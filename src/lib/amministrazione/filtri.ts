@@ -3,7 +3,7 @@ import type { Prisma } from "@prisma/client";
 
 const GIORNO = 86400000;
 
-export type ParametriScadenze = { tipo?: string; periodo?: string; stato?: string; q?: string };
+export type ParametriScadenze = { tipo?: string; periodo?: string; stato?: string; q?: string; ordine?: string };
 
 export function oggiUtc(): Date {
   const o = new Date();
