@@ -568,6 +568,10 @@ model Optional {
   // comparire quando si è scelto il modello di finitura Standard. Null = nessuna
   // restrizione di finitura (l'optional compare per qualunque finitura del gruppo).
   finituraApplicabile String?
+  // Va nella base delle provvigioni del commerciale? (no = costo netto/servizio, es. pratica ENEA, autoscala)
+  inProvvigione       Boolean        @default(true)
+  // Proposto nell'offerta? (no = spostato altrove, es. nei «Servizi e pratiche»; resta sulle offerte già fatte)
+  attivo              Boolean        @default(true)
   righe               RigaOptional[]
 }
 
@@ -625,6 +629,8 @@ model ModelloProdotto {
   fornitoreId        String?
   codiceFornitore    String?
   scontoAcquisto     Float?
+  // Va nella base delle provvigioni del commerciale? (no = servizi e pratiche a costo netto: ENEA, autoscala, facchinaggio…)
+  inProvvigione      Boolean @default(true)
 
   @@unique([brandId, tipologia])
 }
@@ -634,8 +640,10 @@ model Obiettivo {
   id            String   @id @default(cuid())
   utente        Utente   @relation(fields: [utenteId], references: [id])
   utenteId      String
-  periodo       String // formato "YYYY-MM"
+  periodo       String // formato "YYYY-MM" (mese) oppure "YYYY" (anno)
   importoTarget Float
+  // premio al commerciale se raggiunge l'obiettivo (facoltativo)
+  premio        Float?
   note          String?
   createdAt     DateTime @default(now())
 

@@ -111,7 +111,7 @@ export default async function PreventivoPage({
   ]);
 
   const [optionaliDisponibili, prodottiTrovati, tassonomia] = await Promise.all([
-    prisma.optional.findMany({ where: { brandId: preventivo.brandId }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
+    prisma.optional.findMany({ where: { brandId: preventivo.brandId, attivo: true }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
     q
       ? prisma.prodotto.findMany({
           where: {

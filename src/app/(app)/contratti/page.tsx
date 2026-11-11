@@ -7,11 +7,13 @@ import { getCurrentUser } from "@/lib/auth";
 import { perInput } from "@/lib/calendario/tempo";
 import { contrattiDi, personeVisibili, gestisceProvvigioni } from "@/lib/provvigioni/server";
 import {
-  filtra, totali, riepilogoPagamenti, riepilogoProvvigione, NOMI_STATO_PAGAMENTO, NOMI_STATO_PROVVIGIONE,
+  filtra, totali, riepilogoPagamenti, riepilogoProvvigione, provvigioneSulleRate, NOMI_STATO_PAGAMENTO, NOMI_STATO_PROVVIGIONE,
   type Contratto, type StatoPagamento, type StatoProvvigione,
 } from "@/lib/provvigioni/calcoli";
 import { salvaProvvigione, eliminaProvvigione, registraLiquidazione, annullaLiquidazione, salvaPercentualeAbituale } from "@/app/provvigioni-actions";
 import BottoneConferma from "@/components/BottoneConferma";
+import { baseProvvigione } from "@/lib/provvigioni/servizi";
+import RiquadroObiettivi from "@/components/provvigioni/RiquadroObiettivi";
 
 type P = { persona?: string; q?: string; anno?: string; pagamento?: string; provvigione?: string; origine?: string; n?: string; aperto?: string; ok?: string; errore?: string };
 
@@ -61,6 +63,7 @@ export default async function ContrattiPage({ searchParams }: { searchParams: Pr
 
   return (
     <div className="max-w-6xl space-y-4">
+      <div className="flex flex-wrap items-start justify-between gap-2">
       <div>
         <h1 className="text-2xl font-extrabold text-neutral-900">💼 Contratti e provvigioni</h1>
         <p className="text-sm text-neutral-600">
@@ -68,6 +71,12 @@ export default async function ContrattiPage({ searchParams }: { searchParams: Pr
           {gestore ? " Apri un contratto per inserire la percentuale (controllo del contratto) e registrare i pagamenti al commerciale." : " Le percentuali le inserisce l'ufficio fatturazione quando controlla il contratto."}
         </p>
       </div>
+      <div className="flex flex-wrap gap-2">
+        <Link href={qs({ n: undefined }).replace("/contratti?", "/contratti/stampa?")} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">🖨️ Stampa</Link>
+        {gestore && <Link href="/contratti/obiettivi" className="btn-3d btn-3d-amber px-3 py-1.5 text-sm">🎯 Obiettivi e premi</Link>}
+      </div>
+      </div>
+      {persona !== "tutti" && <RiquadroObiettivi utenteId={persona} contratti={tuttiContratti} />}
       {p.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {p.ok}</p>}
       {p.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{p.errore}</p>}
 
@@ -184,6 +193,7 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
 }) {
   const pg = riepilogoPagamenti(c);
   const pv = riepilogoProvvigione(c);
+  const sulleRate = provvigioneSulleRate(c);
   const campo = "rounded-md border border-neutral-300 px-2 py-1 text-sm";
   return (
     <details id={ancora(c.chiave)} open={aperto} className="group">
@@ -216,7 +226,7 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
           {c.pagamenti.length === 0 ? <p className="text-xs text-neutral-500">Nessuna rata registrata.</p> : (
             <div className="overflow-x-auto rounded-md border border-neutral-200 bg-white">
               <table className="w-full text-xs">
-                <thead className="bg-neutral-50 text-left text-neutral-600"><tr><th className="px-2 py-1">Rata</th><th className="px-2 py-1">Scadenza</th><th className="px-2 py-1 text-right">Importo</th><th className="px-2 py-1 text-right">Pagato</th><th className="px-2 py-1 text-right">Resta</th></tr></thead>
+                <thead className="bg-neutral-50 text-left text-neutral-600"><tr><th className="px-2 py-1">Rata</th><th className="px-2 py-1">Scadenza</th><th className="px-2 py-1 text-right">Importo</th><th className="px-2 py-1 text-right">Pagato</th><th className="px-2 py-1 text-right">Resta</th>{c.provvigione && <th className="px-2 py-1 text-right" title="Parte della provvigione legata a questa rata: matura quando il cliente la paga">Provv.</th>}</tr></thead>
                 <tbody className="divide-y divide-neutral-100">
                   {c.pagamenti.map((r) => (
                     <tr key={r.id} className={r.stato === "ANNULLATA" || r.stato === "SOSTITUITA" ? "text-neutral-400 line-through" : ""}>
@@ -225,6 +235,7 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
                       <td className="px-2 py-1 text-right">{eur(r.importo)}</td>
                       <td className="px-2 py-1 text-right text-green-800">{r.incassato ? eur(r.incassato) : "—"}</td>
                       <td className={`px-2 py-1 text-right ${r.residuo > 0.5 ? "font-semibold text-red-700" : ""}`}>{r.residuo > 0.5 ? eur(r.residuo) : "✓"}</td>
+                      {c.provvigione && <td className="px-2 py-1 text-right text-violet-800">{sulleRate.get(r.id) ? <>{eur(sulleRate.get(r.id)!.quota)}<span className="block text-[10px] text-neutral-500">{sulleRate.get(r.id)!.maturata >= sulleRate.get(r.id)!.quota - 0.005 ? "maturata" : sulleRate.get(r.id)!.maturata > 0 ? `maturati ${eur(sulleRate.get(r.id)!.maturata)}` : "da maturare"}</span></> : "—"}</td>}
                     </tr>
                   ))}
                 </tbody>
@@ -267,13 +278,18 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
             </p>
           )}
 
+          {(c.servizi ?? 0) > 0 && (
+            <p className="mt-1 rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900">
+              🧾 Servizi e pratiche fuori provvigione: {eur(c.servizi!)} · base proposta {eur(c.imponibile)} − {eur(c.servizi!)} = <b>{eur(baseProvvigione(c.imponibile, c.servizi!))}</b>
+            </p>
+          )}
           {gestore && c.commercialeId && (
             <div className="mt-2 grid gap-2">
               <form action={salvaProvvigione} className="flex flex-wrap items-end gap-2 rounded-md border border-violet-200 bg-violet-50 p-2 text-xs">
                 <input type="hidden" name="contratto" value={c.chiave} /><input type="hidden" name="utenteId" value={c.commercialeId} />
                 <input type="hidden" name="clienteNome" value={c.clienteNome} /><input type="hidden" name="descrizione" value={c.descrizione ?? ""} />
                 <input type="hidden" name="torna" value={torna} />
-                <label className="font-semibold">Imponibile €<input name="base" type="number" step="0.01" min="0" defaultValue={c.provvigione?.base ?? c.imponibile} className={`${campo} block w-28`} /></label>
+                <label className="font-semibold">Imponibile €<input name="base" type="number" step="0.01" min="0" defaultValue={c.provvigione?.base ?? baseProvvigione(c.imponibile, c.servizi ?? 0)} className={`${campo} block w-28`} /></label>
                 <label className="font-semibold">%<input name="percentuale" type="number" step="0.01" min="0" max="100" defaultValue={c.provvigione?.percentuale ?? percentualeAbituale ?? ""} required className={`${campo} block w-20`} /></label>
                 <label className="min-w-[120px] flex-1 font-semibold">Nota<input name="note" defaultValue={c.provvigione?.note ?? ""} placeholder="es. contratto controllato, sconto extra…" className={`${campo} block w-full`} /></label>
                 <button className="btn-3d btn-3d-purple px-3 py-1 text-xs">{c.provvigione ? "Correggi" : "✓ Contratto controllato"}</button>

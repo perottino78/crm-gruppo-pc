@@ -129,6 +129,7 @@ export default async function ModelloProdottoPage({
               <option value="">—</option>
               <option value="OUTDOOR">Outdoor</option>
               <option value="INDOOR">Indoor</option>
+              <option value="SERVIZI">Servizi e pratiche</option>
             </select>
           </div>
           <div className="flex flex-col gap-1 flex-1">
@@ -141,6 +142,11 @@ export default async function ModelloProdottoPage({
             />
           </div>
         </div>
+        <input type="hidden" name="conProvvigione" value="1" />
+        <label className="flex items-start gap-2 rounded-md border border-violet-200 bg-violet-50 px-3 py-2 text-sm">
+          <input type="checkbox" name="inProvvigione" value="1" defaultChecked={modello?.inProvvigione ?? true} className="mt-1" />
+          <span><b>Va in provvigione</b><span className="block text-[11px] text-neutral-600">Togli la spunta per i servizi e le pratiche a costo netto (es. pratica ENEA, autoscala, facchinaggio): il loro importo si toglie dall&apos;imponibile su cui il commerciale prende la percentuale.</span></span>
+        </label>
         <button className="btn-3d btn-3d-dark text-sm px-4 py-2 self-start">Salva scheda</button>
       </form>
 

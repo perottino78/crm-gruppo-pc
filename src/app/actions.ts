@@ -1562,10 +1562,13 @@ export async function salvaModelloProdotto(formData: FormData) {
   const famiglia = str(formData, "famiglia");
   const gruppo = str(formData, "gruppo");
 
+  // spunta «va in provvigione» (il campo nascosto dice che il modulo la conteneva: spunta tolta = false)
+  const chi = await getCurrentUser();
+  const provv = formData.get("conProvvigione") === "1" && puo(chi, "listini.modifica") ? { inProvvigione: formData.get("inProvvigione") === "1" } : {};
   await prisma.modelloProdotto.upsert({
     where: { brandId_tipologia: { brandId, tipologia } },
-    create: { brandId, tipologia, immagineUrl, descrizioneTecnica, famiglia, gruppo },
-    update: { immagineUrl, descrizioneTecnica, famiglia, gruppo },
+    create: { brandId, tipologia, immagineUrl, descrizioneTecnica, famiglia, gruppo, ...provv },
+    update: { immagineUrl, descrizioneTecnica, famiglia, gruppo, ...provv },
   });
   revalidatePath("/prodotti");
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);

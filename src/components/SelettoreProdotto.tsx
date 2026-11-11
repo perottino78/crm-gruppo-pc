@@ -1869,7 +1869,7 @@ export default function SelettoreProdotto({
   }
 
   // ===== Finestra «negozio» (richiesta di Rocco) =====
-  const nomeFamiglia = (n: string) => (n === "INDOOR" ? "🏠 Indoor" : n === "OUTDOOR" ? "🌤️ Outdoor" : n);
+  const nomeFamiglia = (n: string) => (n === "INDOOR" ? "🏠 Indoor" : n === "OUTDOOR" ? "🌤️ Outdoor" : n === "SERVIZI" ? "🧾 Servizi e pratiche" : n);
   const primaFoto = (g: GruppoNodo) =>
     [...g.tipologie, ...(g.sottogruppi ?? []).flatMap((sg) => sg.tipologie)].find((t) => t.immagine)?.immagine;
   const quanti = (g: GruppoNodo) => (g.sottogruppi ? g.sottogruppi.reduce((t, sg) => t + sg.tipologie.length, 0) : g.tipologie.length);
@@ -1997,7 +1997,7 @@ export default function SelettoreProdotto({
                   }}
                   className="w-full flex items-center justify-between px-3 py-2.5 text-base font-bold text-neutral-900 hover:bg-neutral-50"
                 >
-                  <span>{f.nome === "INDOOR" ? "🏠 Indoor" : f.nome === "OUTDOOR" ? "🌤️ Outdoor" : f.nome}</span>
+                  <span>{f.nome === "INDOOR" ? "🏠 Indoor" : f.nome === "OUTDOOR" ? "🌤️ Outdoor" : f.nome === "SERVIZI" ? "🧾 Servizi e pratiche" : f.nome}</span>
                   <span className="text-neutral-500 text-xs">{apertaF ? "▲" : "▼"}</span>
                 </button>
                 {apertaF && (
