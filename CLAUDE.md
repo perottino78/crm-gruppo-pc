@@ -320,6 +320,16 @@ login nel `matcher` del middleware.
   90 €/anta finestre e 150 €/anta portefinestre (su tutte le tipologie), maniglia passante 500 € su tutte, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
   di produzione, autoscala, ENEA, smaltimento. Rotta `api/admin/seed-fidra` (GET prova, POST carica). Disegni in `public/immagini/fidra/`, brochure e
   dispositivi Matter in `public/cataloghi/fidra/`. Nell'offerta stesso riquadro a tendine del raso muro. Test `tests/listini/fidra.test.ts`, collaudo `fidra` (8).
+- **Serramenti PVC Optima 70** («Optima 1.3»: 5 camere, 70 mm, Uf 1,3; gruppo SERRAMENTI, sottogruppo «PVC — Optima 70»; ha sostituito il segnaposto
+  `SERRAMENTI_PVC_OPTIMA_PLACEHOLDER`): 12 tipologie `OPTIMA_<F1A|F2A|F3A|FF|W|PF1A|PF2A|PF3A>[_SOGLIA]|OPTIMA_TRASLANTE` come Fidra, griglie L×H in mm dal file
+  «OPTIMA70_PREMIUM_FINALE.xlsx» (valori dei fogli = base × 1,35 del file, stessa base del listino Fidra che è × 2,2; due celle diverse dal Fidra lasciate come
+  nel file: F2A 900×800 e PF3A soglia 2400×2300) in `prisma/seed-data/optima_prodotti.json` (`python3 -I scripts/listini/estrai_optima.py <file.xlsx> prisma/seed-data/optima_prodotti.json`).
+  `src/lib/listini/optima.ts` (puro): bianco massa compreso, tutte le pellicole +20% (codici AP), fuori standard +30% / due lati +100%, vetro STC 150 €/vetro,
+  satinato 90 €/anta finestre e 150 €/anta portefinestre, maniglia passante 500 € su tutte, motore wasistas 350, antifurto 45, foro passagatto 150, traversi 90/120,
+  pannello fisso 100 (portefinestre), oltre misura 300 €/10 cm, minimo di produzione 450, trasporto fuori sagoma 350, autoscala 700/900 (+500 suolo pubblico), ENEA 350,
+  smaltimento cartongesso 300/m², smontaggio veranda 500 a corpo (listini `OPTIMA`, `OPTIMA_F`, `OPTIMA_PF`, `OPTIMA_WAS`; `listiniOptima`). Disegni = quelli di Fidra,
+  scheda tecnica in `public/cataloghi/optima/` (attenzione: il piè di pagina del PDF ha telefono/REA segnaposto e una P.IVA diversa da quella di P&C).
+  Rotta `api/admin/seed-optima` (GET prova, POST carica, rilanciabile). Test `tests/listini/optima.test.ts`, collaudo `optima` (9).
 - **Porte a vetro per vetrate** (OUTDOOR › VETRATE › «Porte a vetro», gruppo modello `VETRATE PORTE` in `GRUPPI_VETRATE`): `PORTAVETRO_PAL` (vetro e
   alluminio, varianti telaio 3/4 lati) e `PORTAVETRO_PTV` (tutto vetro), prezzo fisso = listino fornitore +60% (`src/lib/listini/porte-vetro.ts`, test
   `tests/listini/porte-vetro.test.ts`); optional: apertura, maniglione antipanico (solo PAL), colore RAL di serie, altezza oltre 2500 +5%. Rotta
@@ -456,13 +466,13 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 328, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 333, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (23)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (18, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (23), optima (9)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

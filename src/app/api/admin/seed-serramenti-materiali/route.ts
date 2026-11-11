@@ -37,6 +37,8 @@ const TIPOLOGIE_RITIRATE = [
   "SERRAMENTI_LEGNOALLUMINIO_PLACEHOLDER",
   // Fidra: listino vero caricato da seed-fidra (tipologie FIDRA_*, sottogruppo «Alluminio — Fidra»).
   "SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER",
+  // Optima 70 (PVC): listino vero caricato da seed-optima (tipologie OPTIMA_*, sottogruppo «PVC — Optima 70»).
+  "SERRAMENTI_PVC_OPTIMA_PLACEHOLDER",
   // Taglio freddo: listino vero caricato da seed-taglio-freddo (tipologie TAGLIOFREDDO_*).
   "SERRAMENTI_ALLUMINIOFREDDO_PLACEHOLDER",
 ];
