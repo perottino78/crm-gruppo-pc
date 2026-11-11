@@ -241,7 +241,7 @@ login nel `matcher` del middleware.
   `RiquadroObiettivi` con tabella di marcia (`src/lib/provvigioni/obiettivi.ts`: atteso = obiettivo × giorni passati/giorni del periodo; in linea, quasi ≥80%,
   indietro, raggiunto) e venduto mese per mese; venduto = imponibile dei contratti (commesse CRM + progetti BConsole) nel periodo. Email del lunedì
   (`inviaEmailObiettivi` in `obiettivi-server.ts`, chiamata da `/api/automazioni/esegui`; una volta a settimana `obiettivi_mail_settimana`, spegnibile
-  `obiettivi_mail_attiva`, «Manda adesso»). Test `tests/provvigioni/servizi-obiettivi.test.ts`, collaudo `servizi-obiettivi` (23, SMTP finto). Venditori: ruolo COMMERCIALE + `VENDONO_ANCHE` (Ugo, UPE) con `eVenditore`; sigle agganciate anche con nome più corto o rovesciato (`stessaPersona`), verifica `GET api/admin/stato-venditori`.
+  `obiettivi_mail_attiva`, «Manda adesso»). Test `tests/provvigioni/servizi-obiettivi.test.ts`, collaudo `servizi-obiettivi` (23, SMTP finto). Venditori: ruolo COMMERCIALE + `VENDONO_ANCHE` (Ugo, UPE) con `eVenditore`; sigle agganciate anche con nome più corto o rovesciato (`stessaPersona`), verifica `GET api/admin/stato-venditori`; in Team & performance colonna «Venduto <anno> CRM + BConsole» (`contrattiDi`, link ai Contratti).
 - **Comunicazioni interne** (`/comunicazioni`, `src/app/comunicazioni-actions.ts`, `src/lib/comunicazioni/testo.ts` puro e testato,
   `password.ts`, `components/comunicazioni/EditorComunicazione.tsx`): l'amministratore e il marketing (permesso `comunicazioni` o `marketing`)
   scrivono al team scegliendo le persone (gruppi: commerciali, telefoniste, uffici, tecnici, marketing), con segnaposto `{nome}` `{username}`

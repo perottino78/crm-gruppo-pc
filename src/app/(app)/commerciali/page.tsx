@@ -6,6 +6,11 @@ import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { impostaStatoUtente } from "@/app/team-actions";
 import { STATI_UTENTE, statoUtente } from "@/lib/utenti/stato";
+import { contrattiDi, eVenditore } from "@/lib/provvigioni/server";
+import { vendutoNelPeriodo } from "@/lib/provvigioni/obiettivi";
+import { sigleDi } from "@/lib/provvigioni/calcoli";
+import { SIGLE_COMMERCIALI, NOMI_COMMERCIALI } from "@/lib/clienti/bconsole";
+import { chiaveGiorno } from "@/lib/calendario/tempo";
 
 export default async function CommercialiPage({ searchParams }: { searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const msg = await searchParams;
@@ -24,6 +29,11 @@ export default async function CommercialiPage({ searchParams }: { searchParams: 
   // prima chi lavora, poi chi è in pausa, in fondo i disattivati
   const ordine = (st: string) => STATI_UTENTE.findIndex((x) => x.chiave === st);
   utenti.sort((a, b) => ordine(a.stato) - ordine(b.stato));
+  // venduto dell'anno: contratti del CRM e storico BConsole (fatture con la sua sigla), come in «Contratti e provvigioni»
+  const anno = chiaveGiorno(new Date()).slice(0, 4);
+  const venditori = utenti.filter((u) => eVenditore(u) || u.preventivi.length > 0 || sigleDi(u, SIGLE_COMMERCIALI, NOMI_COMMERCIALI).length > 0);
+  const contratti = await contrattiDi(venditori.map((u) => ({ id: u.id, nome: u.nome, username: u.username })));
+  const vendutoDi = (id: string) => vendutoNelPeriodo(contratti.filter((c) => c.commercialeId === id), anno);
 
   return (
     <div className="max-w-5xl">
@@ -43,6 +53,7 @@ export default async function CommercialiPage({ searchParams }: { searchParams: 
               <th className="px-4 py-2 font-medium">Ruolo</th>
               <th className="px-4 py-2 font-medium">Stato</th>
               <th className="px-4 py-2 font-medium">Listini abilitati</th>
+              <th className="px-4 py-2 font-medium text-right">Venduto {anno}<span className="block normal-case font-normal">CRM + BConsole</span></th>
               <th className="px-4 py-2 font-medium text-right">Preventivi accettati</th>
               <th className="px-4 py-2 font-medium text-right">Valore accettato</th>
               <th className="px-4 py-2 font-medium text-right">Appuntamenti</th>
@@ -78,6 +89,11 @@ export default async function CommercialiPage({ searchParams }: { searchParams: 
                   </td>
                   <td className="px-4 py-2 text-xs text-neutral-700">
                     {u.brandAutorizzati.length > 0 ? u.brandAutorizzati.map((b) => b.nome).join(", ") : "— tutti (nessuna restrizione impostata)"}
+                  </td>
+                  <td className="px-4 py-2 text-right">
+                    {venditori.some((v) => v.id === u.id)
+                      ? <Link href={`/contratti?persona=${u.id}&anno=${anno}`} className="font-semibold text-blue-800 hover:underline">{vendutoDi(u.id).toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 })}</Link>
+                      : "—"}
                   </td>
                   <td className="px-4 py-2 text-right">{accettati.length}</td>
                   <td className="px-4 py-2 text-right">{valoreAccettato.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</td>
