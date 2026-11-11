@@ -52,7 +52,7 @@ export const totaleCollegati = (c: Record<string, number>) => Object.values(c).r
  */
 export function commercialiAttivi() {
   return prisma.utente.findMany({
-    where: { stato: "ATTIVO", OR: [{ ruolo: "COMMERCIALE" }, { ufficio: "COMMERCIALE" }, { preventivi: { some: {} } }] },
+    where: { stato: "ATTIVO", OR: [{ ruolo: "COMMERCIALE" }, { ufficio: "COMMERCIALE" }, { vende: true }, { preventivi: { some: {} } }] },
     orderBy: { nome: "asc" },
   });
 }

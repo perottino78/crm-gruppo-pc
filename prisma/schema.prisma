@@ -35,6 +35,8 @@ model Utente {
   nome                   String
   email                  String            @unique
   ruolo                  String
+  // Vende anche se ha un altro ruolo (es. un tecnico che fa offerte Solaris): compare come commerciale, ha obiettivi e provvigioni
+  vende                  Boolean           @default(false)
   // Credenziali di accesso al CRM. Username nullable per compatibilità con gli utenti creati
   // prima dell'introduzione del login (vanno attivati impostando username+password da Impostazioni).
   // Senza passwordHash l'utente non può accedere.

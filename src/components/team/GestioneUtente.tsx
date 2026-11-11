@@ -62,6 +62,11 @@ export default function GestioneUtente({ utente: u, colleghi, collegati, lavoroA
           <label className="text-xs text-neutral-600">Email di lavoro (dell&apos;ufficio)
             <input name="email" type="email" required defaultValue={u.email} className={`${inp} block w-72 max-w-full`} />
           </label>
+          <input type="hidden" name="conVende" value="1" />
+          <label className="flex items-center gap-2 rounded-md border border-violet-200 bg-violet-50 px-2 py-1.5 text-xs text-neutral-700">
+            <input type="checkbox" name="vende" value="1" defaultChecked={u.vende || u.ruolo === "COMMERCIALE"} disabled={u.ruolo === "COMMERCIALE"} />
+            <span><b>Vende anche</b> (fa offerte ai clienti): compare come commerciale, ha obiettivi, premi e provvigioni</span>
+          </label>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva mansione ed email</button>
         </div>
       </form>

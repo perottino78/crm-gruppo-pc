@@ -43,7 +43,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
   if (!l) notFound();
   const gestisce = puo(u, "pubblicita") || puo(u, "marketing");
   const [venditori, persone, marchi] = await Promise.all([
-    prisma.utente.findMany({ where: { ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] }, OR: [{ stato: "ATTIVO" }, { id: l.venditoreId ?? "-" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { OR: [{ ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] }, stato: "ATTIVO" }, { vende: true, stato: "ATTIVO" }, { id: l.venditoreId ?? "-" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
     gestisce || l.telefonistaId === u.id
       ? prisma.utente.findMany({ where: { stato: "ATTIVO", ruolo: { not: "POSATORE" } }, select: { id: true, nome: true, ruolo: true }, orderBy: [{ ruolo: "desc" }, { nome: "asc" }] })
       : Promise.resolve([]),
