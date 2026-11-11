@@ -1,13 +1,12 @@
 export const dynamic = "force-dynamic";
 
-import { commercialiAttivi } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import BrandSwitcher from "@/components/BrandSwitcher";
-import { creaPreventivo, aggiornaStatoPreventivo, archiviaOfferteScadute } from "@/app/actions";
+import { aggiornaStatoPreventivo, archiviaOfferteScadute } from "@/app/actions";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
-import { scopePreventivoWhere, scopeClienteWhere } from "@/lib/scope";
+import { scopePreventivoWhere } from "@/lib/scope";
 
 const COLONNE = [
   { stato: "APERTO", label: "Aperti" },
@@ -28,7 +27,6 @@ export default async function PreventiviPage({
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const preventivoScope = utente ? scopePreventivoWhere(utente) : {};
-  const clienteScope = utente ? scopeClienteWhere(utente) : {};
 
   // numeroOfferta è Int, non supporta contains — lo cerchiamo per conversione numerica
   const numeroRicercato = ricerca ? parseInt(ricerca, 10) : NaN;
@@ -42,27 +40,25 @@ export default async function PreventiviPage({
       }
     : {};
 
-  const [preventivi, clienti, brands, commerciali] = await Promise.all([
-    prisma.preventivo.findMany({
-      where: { AND: [brandFiltro, preventivoScope, { archiviato: inArchivio }, ricercaWhere] },
-      include: { cliente: true, commerciale: true },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.cliente.findMany({ where: { ...brandFiltro, ...clienteScope }, orderBy: { nome: "asc" } }),
-    prisma.brand.findMany({ orderBy: { nome: "asc" } }),
-    commercialiAttivi(),
-  ]);
+  const preventivi = await prisma.preventivo.findMany({
+    where: { AND: [brandFiltro, preventivoScope, { archiviato: inArchivio }, ricercaWhere] },
+    include: { cliente: true, commerciale: true },
+    orderBy: { createdAt: "desc" },
+  });
 
   return (
     <div className="max-w-5xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-neutral-900">{inArchivio ? "Preventivi — Archivio" : "Preventivi"}</h1>
-        <Link
-          href={inArchivio ? "/preventivi" : "/preventivi?archivio=1"}
-          className="btn-3d text-sm px-3 py-1.5"
-        >
-          {inArchivio ? "← Torna ai preventivi attivi" : "🗄️ Archivio"}
-        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link href="/preventivi/nuovo" className="btn-3d btn-3d-green text-sm px-4 py-2">➕ Nuovo preventivo</Link>
+          <Link
+            href={inArchivio ? "/preventivi" : "/preventivi?archivio=1"}
+            className="btn-3d text-sm px-3 py-2"
+          >
+            {inArchivio ? "← Torna ai preventivi attivi" : "🗄️ Archivio"}
+          </Link>
+        </div>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
 
@@ -88,39 +84,8 @@ export default async function PreventiviPage({
         )}
       </form>
 
-      <form action={creaPreventivo} className="bg-white rounded-lg border border-neutral-200 p-4 mb-8 flex flex-wrap items-end gap-2">
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-700">Cliente</label>
-          <select name="clienteId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[160px]">
-            <option value="">Seleziona...</option>
-            {clienti.map((c) => (
-              <option key={c.id} value={c.id}>{c.nome}</option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-700">Commerciale</label>
-          <select name="commercialeId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[160px]">
-            <option value="">Seleziona...</option>
-            {commerciali.map((u) => (
-              <option key={u.id} value={u.id}>{u.nome}</option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-neutral-700">Brand</label>
-          <select name="brandId" required className="border border-neutral-200 rounded px-2 py-1.5 text-sm min-w-[140px]">
-            <option value="">Seleziona...</option>
-            {brands.map((b) => (
-              <option key={b.id} value={b.id}>{b.nome}</option>
-            ))}
-          </select>
-        </div>
-        <button className="btn-3d btn-3d-green text-sm px-4 py-2">Nuovo preventivo</button>
-        <p className="text-xs text-neutral-600 w-full">Le righe prodotto/prezzo si aggiungono in una fase successiva.</p>
-      </form>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {COLONNE.map((col) => {
           const items = preventivi.filter((p) => p.stato === col.stato);
           return (

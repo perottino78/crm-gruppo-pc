@@ -134,3 +134,10 @@ button.sta-inviando, input.sta-inviando { opacity: 0.6; cursor: progress; pointe
 @keyframes barra-attesa { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
 .barra-attesa { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; overflow: hidden; background: rgba(37, 99, 235, 0.15); }
 .barra-attesa::after { content: ""; position: absolute; inset: 0; width: 40%; background: #2563eb; animation: barra-attesa 1s ease-in-out infinite; }
+/* salvataggio in corso: velo su tutta la pagina con la rotella al centro (compare dopo un attimo, così i salvataggi veloci non lampeggiano) */
+@keyframes velo-attesa-entra { from { opacity: 0; } to { opacity: 1; } }
+@keyframes velo-attesa-gira { to { transform: rotate(360deg); } }
+.velo-attesa { position: fixed; inset: 0; z-index: 190; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(1.5px); cursor: progress; opacity: 0; animation: velo-attesa-entra 0.15s ease-out 0.12s forwards; }
+.velo-attesa-scheda { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 26px; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); font-size: 14px; font-weight: 600; color: #1f2937; }
+.velo-attesa-rotella { width: 34px; height: 34px; border-radius: 9999px; border: 4px solid #dbeafe; border-top-color: #2563eb; animation: velo-attesa-gira 0.8s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .velo-attesa-rotella { animation-duration: 2s; } }

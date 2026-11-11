@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Voce = { id: string; nome: string; sotto: string; indirizzo: string };
+type Voce = { id: string; nome: string; sotto: string; indirizzo: string; brandId?: string };
 
 /** Campo "Cliente" con ricerca mentre si scrive; compila anche il luogo con l'indirizzo del cliente */
 export default function ClientePicker({ iniziale, endpoint = "/api/clienti/cerca" }: { iniziale?: { id: string; nome: string } | null; endpoint?: string }) {
@@ -31,6 +31,9 @@ export default function ClientePicker({ iniziale, endpoint = "/api/clienti/cerca
     setAperto(false);
     const luogo = box.current?.closest("form")?.querySelector<HTMLInputElement>('input[name="luogo"]');
     if (luogo && !luogo.value && v.indirizzo) luogo.placeholder = v.indirizzo;
+    // nel nuovo preventivo: il marchio del cliente, se non è già stato scelto
+    const marchio = box.current?.closest("form")?.querySelector<HTMLSelectElement>('select[name="brandId"]');
+    if (marchio && !marchio.value && v.brandId) marchio.value = v.brandId;
   }
 
   return (

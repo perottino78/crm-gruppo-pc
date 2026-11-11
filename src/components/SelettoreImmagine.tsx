@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Selettore foto con il vero dialogo "Scegli file" del sistema operativo (Finder/Esplora
@@ -14,12 +14,21 @@ export default function SelettoreImmagine({
   name,
   defaultValue,
   label,
+  inviaSubito = false,
 }: {
   name: string;
   defaultValue?: string | null;
   label: string;
+  /** salva da sola appena si sceglie o si toglie la foto (invia il modulo che la contiene) */
+  inviaSubito?: boolean;
 }) {
   const [valore, setValore] = useState(defaultValue ?? "");
+  const nascosto = useRef<HTMLInputElement>(null);
+  const primo = useRef(true);
+  useEffect(() => {
+    if (primo.current) { primo.current = false; return; }
+    if (inviaSubito) nascosto.current?.form?.requestSubmit();
+  }, [valore, inviaSubito]);
   const [errore, setErrore] = useState<string | null>(null);
   const [caricamento, setCaricamento] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -87,7 +96,7 @@ export default function SelettoreImmagine({
   return (
     <div>
       <label className="text-xs text-neutral-600 block mb-1">{label}</label>
-      <input type="hidden" name={name} value={valore} />
+      <input ref={nascosto} type="hidden" name={name} value={valore} />
       <div className="flex items-center gap-3 flex-wrap">
         <button
           type="button"
