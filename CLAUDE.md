@@ -315,7 +315,7 @@ login nel `matcher` del middleware.
 - **Serramenti Fidra** (alluminio con cuore PVC, gruppo SERRAMENTI, sottogruppo «Alluminio — Fidra»; ha sostituito il segnaposto
   `SERRAMENTI_PVCALLUMINIO_FIDRA_PLACEHOLDER`): 12 tipologie `FIDRA_<F1A|F2A|F3A|FF|W|PF1A|PF2A|PF3A>[_SOGLIA]|FIDRA_TRASLANTE`, griglie L×H in mm già
   al cliente finale (×2,2 del fornitore) in `prisma/seed-data/fidra_prodotti.json` (estratte dal file Excel UKW 1.3 con `python3 -I scripts/listini/estrai_fidra.py <file.xlsx> prisma/seed-data/fidra_prodotti.json`:
-  «*» = primo prezzo disponibile, «-» = non eseguibile). Optional in `src/lib/listini/fidra.ts` (listini `FIDRA` comune, `FIDRA_F` finestre, `FIDRA_PF`
+  «*» = primo prezzo disponibile, «-» = non eseguibile; refuso F2A 900×800 «937» corretto a 1.073,60 seguendo la progressione, `CORREZIONI` nello script). Optional in `src/lib/listini/fidra.ts` (listini `FIDRA` comune, `FIDRA_F` finestre, `FIDRA_PF`
   portefinestre, `FIDRA_WAS` wasistas; `listiniFidra`): colori standard compresi, fuori standard +30%, due lati diversi +100%, vetro STC, satinato
   90 €/anta finestre e 150 €/anta portefinestre (su tutte le tipologie), maniglia passante 500 € su tutte, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
   di produzione, autoscala, ENEA, smaltimento. Rotta `api/admin/seed-fidra` (GET prova, POST carica). Disegni in `public/immagini/fidra/`, brochure e
@@ -323,7 +323,7 @@ login nel `matcher` del middleware.
 - **Serramenti PVC Optima 70** («Optima 1.3»: 5 camere, 70 mm, Uf 1,3; gruppo SERRAMENTI, sottogruppo «PVC — Optima 70»; ha sostituito il segnaposto
   `SERRAMENTI_PVC_OPTIMA_PLACEHOLDER`): 12 tipologie `OPTIMA_<F1A|F2A|F3A|FF|W|PF1A|PF2A|PF3A>[_SOGLIA]|OPTIMA_TRASLANTE` come Fidra, griglie L×H in mm dal file
   «OPTIMA70_PREMIUM_FINALE.xlsx» (valori dei fogli = base × 1,35 del file, stessa base del listino Fidra che è × 2,2; due celle diverse dal Fidra lasciate come
-  nel file: F2A 900×800 e PF3A soglia 2400×2300) in `prisma/seed-data/optima_prodotti.json` (`python3 -I scripts/listini/estrai_optima.py <file.xlsx> prisma/seed-data/optima_prodotti.json`).
+  nel file: PF3A soglia 2400×2300; F2A 900×800 è giusta, era il Fidra ad avere il refuso) in `prisma/seed-data/optima_prodotti.json` (`python3 -I scripts/listini/estrai_optima.py <file.xlsx> prisma/seed-data/optima_prodotti.json`).
   `src/lib/listini/optima.ts` (puro): bianco massa compreso, tutte le pellicole +20% (codici AP), fuori standard +30% / due lati +100%, vetro STC 150 €/vetro,
   satinato 90 €/anta finestre e 150 €/anta portefinestre, maniglia passante 500 € su tutte, motore wasistas 350, antifurto 45, foro passagatto 150, traversi 90/120,
   pannello fisso 100 (portefinestre), oltre misura 300 €/10 cm, minimo di produzione 450, trasporto fuori sagoma 350, autoscala 700/900 (+500 suolo pubblico), ENEA 350,
