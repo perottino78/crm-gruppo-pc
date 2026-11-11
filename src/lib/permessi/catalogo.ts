@@ -7,7 +7,7 @@ export type Permesso = string;
 export type Visibilita = "PROPRI" | "ZONA" | "TUTTI";
 
 export const AREE: { area: string; voci: [Permesso, string][] }[] = [
-  { area: "Contatti", voci: [["lead", "Lead da lavorare"], ["clienti", "Clienti"], ["clienti.esporta", "Esportare i clienti (Excel, pubblici Meta)"]] },
+  { area: "Contatti", voci: [["lead", "Lead da lavorare"], ["clienti", "Clienti"], ["clienti.esporta", "Esportare i clienti (Excel, pubblici Meta)"], ["clienti.elimina", "Eliminare lead e clienti"]] },
   { area: "Vendite", voci: [["preventivi", "Preventivi"], ["commesse", "Commesse e pratiche"], ["task", "Task pratiche"]] },
   { area: "Calendario", voci: [["calendario", "Calendario"], ["calendario.tutti", "Vede e organizza il calendario di tutti"]] },
   { area: "Ordini e magazzino", voci: [["ordini", "Ordini ai fornitori"], ["magazzino", "Magazzino"]] },
@@ -27,7 +27,7 @@ export const VISIBILITA: { chiave: Visibilita; nome: string; spiega: string }[] 
 ];
 
 const BASE: Permesso[] = ["lead", "clienti", "clienti.esporta", "preventivi", "commesse", "task", "calendario", "lavori", "assistenza", "prodotti", "team", "archivio"];
-const MARKETING: Permesso[] = ["marketing", "campagne", "automazioni", "pubblicita", "listini.modifica", "utenti.crea", "firme", "comunicazioni"];
+const MARKETING: Permesso[] = ["marketing", "campagne", "automazioni", "pubblicita", "listini.modifica", "utenti.crea", "firme", "comunicazioni", "clienti.elimina"];
 
 /** I permessi di ogni ruolo come erano prima dei profili (nessuno perde accessi quando arrivano i profili). */
 export function permessiPredefiniti(ruolo: string, ufficio?: string | null): Permesso[] {

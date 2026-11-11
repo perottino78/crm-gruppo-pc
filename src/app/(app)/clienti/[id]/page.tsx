@@ -24,6 +24,8 @@ import { statoOrdine } from "@/lib/ordini/calcoli";
 import { storicoBConsole } from "@/lib/clienti/storico-bconsole";
 import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
 import { puo } from "@/lib/permessi/catalogo";
+import BottoneConferma from "@/components/BottoneConferma";
+import { eliminaCliente, bloccaEliminazioneCliente } from "@/app/elimina-contatti-actions";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -42,7 +44,7 @@ export default async function SchedaClientePage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ sez?: string; chiuse?: string; fissa?: string }>;
+  searchParams: Promise<{ sez?: string; chiuse?: string; fissa?: string; errore?: string }>;
 }) {
   const { id } = await params;
   const sp = await searchParams;
@@ -639,6 +641,25 @@ export default async function SchedaClientePage({
             })}
           />
         )}
+        {sez === "anagrafica" && puo(utenteCorrente, "clienti.elimina") && (async () => {
+          const blocchi = await bloccaEliminazioneCliente(cliente.id);
+          return (
+            <div id="elimina" className="mt-6 rounded-lg border border-red-200 bg-red-50/50 p-4 text-sm">
+              <p className="font-semibold text-red-900">🗑 Elimina il cliente</p>
+              {sp.errore && <p className="mt-1 text-red-800">⚠️ {sp.errore}</p>}
+              {blocchi.length > 0 ? (
+                <p className="mt-1 text-neutral-700">Non si può eliminare: ha {blocchi.join(", ")}. Si elimina solo un cliente senza lavoro collegato.</p>
+              ) : (
+                <form action={eliminaCliente} className="mt-2 flex flex-wrap items-center gap-3">
+                  <input type="hidden" name="id" value={cliente.id} />
+                  <input type="hidden" name="ritorno" value={`/clienti/${cliente.id}?sez=anagrafica#elimina`} />
+                  <BottoneConferma messaggio={`Eliminare il cliente «${cliente.nome}»? Spariscono anche contatti, indirizzi, attività e appuntamenti. Non si può annullare.`} className="btn-3d btn-3d-red px-4 py-1.5 text-sm">Elimina definitivamente</BottoneConferma>
+                  <span className="text-xs text-neutral-600">Spariscono anche contatti, indirizzi, attività e appuntamenti. Il lead da cui è nato resta.</span>
+                </form>
+              )}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

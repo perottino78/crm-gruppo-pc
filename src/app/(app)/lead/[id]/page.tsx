@@ -10,8 +10,11 @@ import { perInput } from "@/lib/calendario/tempo";
 import { FASI_LEAD, ESITI, PERCORSI, esitiPossibili, ESITI_APPUNTAMENTO } from "@/lib/automazioni/percorsi";
 import { CONTATTI } from "@/lib/automazioni/email";
 import { leggiNoteLead, provenienzaLead } from "@/lib/automazioni/note-lead";
+import { PROVENIENZE } from "@/lib/clienti/provenienza";
 import { esitoLead, assegnaVenditoreLead, riassegnaLead, aggiungiNotaLead, spostaProssimaAttivita, modificaDatiLead } from "@/app/lead-percorso-actions";
 import EsitoLead from "@/components/lead/EsitoLead";
+import BottoneConferma from "@/components/BottoneConferma";
+import { eliminaLead } from "@/app/elimina-contatti-actions";
 import RisposteModulo from "@/components/lead/RisposteModulo";
 
 type P = { ok?: string; errore?: string; fatto?: string; da?: string };
@@ -39,11 +42,12 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
   });
   if (!l) notFound();
   const gestisce = puo(u, "pubblicita") || puo(u, "marketing");
-  const [venditori, persone] = await Promise.all([
+  const [venditori, persone, marchi] = await Promise.all([
     prisma.utente.findMany({ where: { ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] }, OR: [{ stato: "ATTIVO" }, { id: l.venditoreId ?? "-" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
     gestisce || l.telefonistaId === u.id
       ? prisma.utente.findMany({ where: { stato: "ATTIVO", ruolo: { not: "POSATORE" } }, select: { id: true, nome: true, ruolo: true }, orderBy: [{ ruolo: "desc" }, { nome: "asc" }] })
       : Promise.resolve([]),
+    prisma.brand.findMany({ select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
   ]);
 
   const fase = FASI_LEAD[l.fase] ?? { nome: l.fase, azione: null, colore: "bg-neutral-100 text-neutral-700" };
@@ -121,6 +125,8 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
                 <label className={`flex flex-col gap-1 ${piccolo}`}>Prodotto di interesse<input name="prodotto" defaultValue={l.prodotto ?? ""} className={inp} /></label>
                 <label className={`flex flex-col gap-1 ${piccolo}`}>Comune<input name="comune" defaultValue={l.comune ?? ""} className={inp} /></label>
                 <label className={`flex flex-col gap-1 ${piccolo}`}>CAP<input name="cap" inputMode="numeric" defaultValue={l.cap ?? ""} className={inp} /></label>
+                <label className={`flex flex-col gap-1 ${piccolo}`}>Marchio<select name="brandId" defaultValue={l.brandId} className={inp}>{marchi.map((b) => <option key={b.id} value={b.id}>{b.nome}</option>)}</select></label>
+                <label className={`flex flex-col gap-1 ${piccolo}`}>Provenienza<select name="fonte" defaultValue={PROVENIENZE.includes(l.fonte as (typeof PROVENIENZE)[number]) ? l.fonte : ""} className={inp}><option value="">{provenienza} (com&apos;è ora)</option>{PROVENIENZE.map((x) => <option key={x} value={x}>{x}</option>)}</select></label>
                 <div className="flex items-center gap-2 sm:col-span-2">
                   <button className="btn-3d btn-3d-blue px-4 py-1.5 text-sm">💾 Salva i dati</button>
                   <span className="text-[11px] text-neutral-500">Resta un lead (non diventa cliente). La modifica resta nella cronologia.</span>
@@ -139,6 +145,12 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
                   <button className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">Passa</button>
                 </form>
               </details>
+            )}
+            {puo(u, "clienti.elimina") && (
+              <form action={eliminaLead} className="pt-1">
+                <input type="hidden" name="id" value={l.id} /><input type="hidden" name="ritorno" value="/lead" />
+                <BottoneConferma messaggio={`Eliminare il lead «${l.nome}»? Spariscono anche la cronologia e le email in programma. Non si può annullare.`} className="text-xs text-red-700 underline">🗑 Elimina il lead</BottoneConferma>
+              </form>
             )}
           </div>
         </div>
