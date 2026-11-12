@@ -6,6 +6,7 @@ import BrandSwitcher from "@/components/BrandSwitcher";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere, scopeLeadWhere } from "@/lib/scope";
 import { FASI_APERTE } from "@/lib/automazioni/percorsi";
+import { destinatarioAssistenza, gestisceSegnalazioni } from "@/lib/segnalazioni/server";
 
 export default async function DashboardPage({
   searchParams,
@@ -34,6 +35,9 @@ export default async function DashboardPage({
     include: { comunicazione: { select: { oggetto: true, titoloTask: true, conTask: true, mittenteNome: true } } },
     orderBy: { createdAt: "desc" }, take: 5,
   }) : [];
+
+  // segnalazioni del team da guardare (per chi segue l'assistenza e gli amministratori)
+  const segnalazioni = gestisceSegnalazioni(utente, (await destinatarioAssistenza())?.id) ? await prisma.segnalazione.count({ where: { stato: "APERTA" } }) : 0;
 
   // task dati dalla scheda di un cliente a me (da fare)
   const taskClienti = utente ? await prisma.attivita.count({ where: { tipo: "TASK", completata: false, utenteId: utente.id } }) : 0;
@@ -71,6 +75,13 @@ export default async function DashboardPage({
         <a href="/lead" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-purple-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
           <span className="text-sm font-extrabold text-neutral-900">📞 Chiamate con commerciale da fare ed esitare</span>
           <span className="text-2xl font-extrabold text-purple-700">{chiamateDaFare}</span>
+        </a>
+      )}
+
+      {segnalazioni > 0 && (
+        <a href="/segnalazioni" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-red-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
+          <span className="text-sm font-extrabold text-neutral-900">🆘 Segnalazioni del team da guardare</span>
+          <span className="text-2xl font-extrabold text-red-700">{segnalazioni}</span>
         </a>
       )}
 

@@ -10,6 +10,8 @@ import { logout } from "@/app/actions";
 import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
 import CambioPasswordObbligatorio from "@/components/CambioPasswordObbligatorio";
 import InvioInCorso from "@/components/InvioInCorso";
+import { prisma } from "@/lib/prisma";
+import { destinatarioAssistenza, gestisceSegnalazioni } from "@/lib/segnalazioni/server";
 
 // Mentre qualcuno usa il CRM gli invii scaduti partono anche senza il controllo periodico (al massimo una volta al minuto).
 let ultimoControllo = 0;
@@ -27,10 +29,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const permesso = permessoPagina((await headers()).get("x-percorso") ?? "");
   const negato = permesso && !puo(utente, permesso);
 
+  // assistenza interna: «🆘 Segnala un problema» nel menu; chi le gestisce vede quante sono aperte
+  const dest = await destinatarioAssistenza();
+  const gestisce = gestisceSegnalazioni(utente, dest?.id);
+  const assistenza = { destinatario: dest && dest.id !== utente.id ? dest.nome : null, gestisce, aperte: gestisce ? await prisma.segnalazione.count({ where: { stato: "APERTA" } }) : 0 };
+
   return (
     <div className="flex min-h-screen">
       <Suspense fallback={<div className="hidden md:block w-56 shrink-0 border-r border-neutral-200 bg-white" />}>
-        <Sidebar utente={{ nome: utente.nome, ruolo: utente.ruolo, ufficio: utente.ufficio, permessi: utente.permessi, profiloId: utente.profiloId }} logoutAction={logout} />
+        <Sidebar utente={{ nome: utente.nome, ruolo: utente.ruolo, ufficio: utente.ufficio, permessi: utente.permessi, profiloId: utente.profiloId }} logoutAction={logout} assistenza={assistenza} />
       </Suspense>
       <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={<div className="h-1.5 w-full" />}>

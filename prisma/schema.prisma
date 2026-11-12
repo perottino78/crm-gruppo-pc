@@ -2198,3 +2198,31 @@ model Riunione {
 
   @@index([dataOra])
 }
+
+// Assistenza interna (richiesta di Ugo, nov 2026): «🆘 Segnala un problema» dal menu, va a chi segue l'assistenza (Rocco)
+// con l'amministratore in copia; con la pagina dov'era e le schermate. Si chiude con una risposta che arriva a chi ha scritto.
+model Segnalazione {
+  id             String                 @id @default(cuid())
+  autoreId       String
+  autoreNome     String
+  pagina         String?
+  testo          String
+  stato          String                 @default("APERTA") // APERTA | RISOLTA
+  destinatarioId String?
+  risposta       String?
+  risoltaIl      DateTime?
+  risoltaDaNome  String?
+  createdAt      DateTime               @default(now())
+  allegati       SegnalazioneAllegato[]
+}
+
+model SegnalazioneAllegato {
+  id             String       @id @default(cuid())
+  segnalazione   Segnalazione @relation(fields: [segnalazioneId], references: [id], onDelete: Cascade)
+  segnalazioneId String
+  nome           String
+  mime           String
+  dimensione     Int
+  contenuto      Bytes
+  createdAt      DateTime     @default(now())
+}

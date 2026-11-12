@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { brandInfo } from "@/lib/brands";
 import { IconaOne, LogoOne } from "@/components/LogoOne";
 import { puo, permessoPagina } from "@/lib/permessi/catalogo";
+import SegnalaProblema from "@/components/SegnalaProblema";
 
 const moduli: { href: string; label: string; icon: string; soloAmministrazione?: boolean; soloOrdini?: boolean; soloMarketing?: boolean }[] = [
   { href: "/", label: "Dashboard", icon: "🏠" },
@@ -35,9 +36,12 @@ const moduli: { href: string; label: string; icon: string; soloAmministrazione?:
 export default function Sidebar({
   utente,
   logoutAction,
+  assistenza,
 }: {
   utente?: { nome: string; ruolo: string; ufficio?: string | null; permessi?: string[]; profiloId?: string | null };
   logoutAction?: () => void;
+  /** assistenza interna: chi riceve le segnalazioni e, per chi le gestisce, quante sono aperte */
+  assistenza?: { destinatario: string | null; gestisce: boolean; aperte: number };
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -90,6 +94,13 @@ export default function Sidebar({
         <div className="px-4 pt-3 mt-3 border-t border-neutral-100">
           <p className="text-[11px] font-semibold text-neutral-900 leading-tight">{utente.nome}</p>
           <p className="text-[10px] text-neutral-500 leading-tight mb-2">{utente.ruolo}</p>
+          <SegnalaProblema destinatario={assistenza?.destinatario ?? null} />
+          {assistenza?.gestisce && (
+            <Link href="/segnalazioni" className="mb-2 flex items-center justify-between rounded-md px-2 py-1 text-[11px] font-semibold text-neutral-700 hover:bg-neutral-100">
+              <span>📥 Segnalazioni del team</span>
+              {assistenza.aperte > 0 && <span className="rounded-full bg-red-600 px-1.5 text-[10px] font-bold text-white">{assistenza.aperte}</span>}
+            </Link>
+          )}
           <div className="flex items-center gap-2">
             <Link href="/profilo" className="text-[11px] font-medium text-neutral-600 hover:underline">
               Profilo
