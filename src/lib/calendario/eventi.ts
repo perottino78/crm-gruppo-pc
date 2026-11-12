@@ -2,11 +2,7 @@ import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Un solo formato per tutto ciò che va in calendario: appuntamenti, rilievi, pose, interventi di assistenza.
 import { chiaveGiorno, partiRoma, aggiungiGiorni } from "./tempo";
 
-<<<<<<< HEAD
 export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA" | "RIUNIONE" | "ESTERNO";
-=======
-export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA" | "RIUNIONE";
->>>>>>> origin/claude/clever-feynman-b637mq
 
 export type EventoCal = {
   id: string; // es. "APPUNTAMENTO:abc"
@@ -41,7 +37,6 @@ export function schiarisci(hex: string, quanto = 0.82): string {
 }
 
 /** Colore di ogni persona (sempre lo stesso finché l'elenco del team non cambia): in ordine di nome. */
-<<<<<<< HEAD
 export function coloriPersone(persone: (string | { id: string; colore?: string | null })[]): Map<string, { colore: string; chiaro: string }> {
   // il colore scelto in Impostazioni › Utenti vince; gli altri prendono in ordine i colori della tavolozza non ancora usati
   const lista = persone.map((p) => (typeof p === "string" ? { id: p, colore: null } : p));
@@ -72,15 +67,6 @@ export function cercaEventi(eventi: EventoCal[], q: string): EventoCal[] {
   });
 }
 
-=======
-export function coloriPersone(ids: string[]): Map<string, { colore: string; chiaro: string }> {
-  return new Map(ids.map((id, i) => {
-    const colore = PALETTE_PERSONE[i % PALETTE_PERSONE.length];
-    return [id, { colore, chiaro: schiarisci(colore) }];
-  }));
-}
-
->>>>>>> origin/claude/clever-feynman-b637mq
 /** Colori di un evento: quelli della persona se ci sono, altrimenti grigio. */
 export const stileEvento = (e: EventoCal) => ({ colore: e.colore ?? "#737373", chiaro: e.chiaro ?? "#f5f5f5", icona: STILE_TIPO[e.tipo].icona, nome: STILE_TIPO[e.tipo].nome });
 
@@ -90,10 +76,7 @@ export const STILE_TIPO: Record<TipoEvento, { nome: string; colore: string; chia
   POSA: { nome: "Pose", colore: "#ea580c", chiaro: "#ffedd5", icona: "🔧" },
   ASSISTENZA: { nome: "Assistenza", colore: "#0d9488", chiaro: "#ccfbf1", icona: "🛟" },
   RIUNIONE: { nome: "Riunioni", colore: "#525252", chiaro: "#f5f5f5", icona: "👥" },
-<<<<<<< HEAD
   ESTERNO: { nome: "Da Nextcloud", colore: "#737373", chiaro: "#f5f5f5", icona: "🗓️" },
-=======
->>>>>>> origin/claude/clever-feynman-b637mq
 };
 
 export const TIPI_APPUNTAMENTO = [

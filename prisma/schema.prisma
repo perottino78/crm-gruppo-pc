@@ -2198,7 +2198,6 @@ model Riunione {
 
   @@index([dataOra])
 }
-<<<<<<< HEAD
 
 // Assistenza interna (richiesta di Ugo, nov 2026): «🆘 Segnala un problema» dal menu, va a chi segue l'assistenza (Rocco)
 // con l'amministratore in copia; con la pagina dov'era e le schermate. Si chiude con una risposta che arriva a chi ha scritto.
@@ -2251,5 +2250,3 @@ model EventoNextcloud {
   @@index([utenteId, inizio])
   @@index([chiave])
 }
-=======
->>>>>>> origin/claude/clever-feynman-b637mq

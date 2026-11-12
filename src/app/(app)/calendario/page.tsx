@@ -5,11 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { eventiPeriodo } from "@/lib/calendario/server";
-<<<<<<< HEAD
 import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, coloriPersone, stileEvento, cercaEventi, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
-=======
-import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, coloriPersone, stileEvento, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
->>>>>>> origin/claude/clever-feynman-b637mq
 import {
   chiaveGiorno, perInput, inizioGiorno, aggiungiGiorni, lunediDi, grigliaMese, nomeMese, giornoBreve, nomeGiorno, oraRoma,
 } from "@/lib/calendario/tempo";
@@ -20,11 +16,7 @@ type Vista = "giorno" | "settimana" | "mese" | "agenda";
 const ORA_DA = 7;
 const ORA_A = 21;
 const PX_ORA = 52;
-<<<<<<< HEAD
 const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA", "RIUNIONE", "ESTERNO"];
-=======
-const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA", "RIUNIONE"];
->>>>>>> origin/claude/clever-feynman-b637mq
 
 export default async function CalendarioPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;
@@ -51,7 +43,6 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
   const conAnnullati = sp.annullati === "1";
   const nAnnullati = tuttiEventi.filter(annullato).length;
   // ogni persona ha il suo colore (sempre lo stesso: in ordine di nome fra chi lavora), con la legenda sopra il calendario
-<<<<<<< HEAD
   // colore scelto in Impostazioni › Utenti (o automatico); chi ha «calendario attivo» spento non compare nel calendario del team
   const colori = coloriPersone(utenti.filter((x) => x.stato === "ATTIVO" && x.inCalendario).map((x) => ({ id: x.id, colore: x.coloreCalendario })));
   const nascosti = new Set(utenti.filter((x) => !x.inCalendario).map((x) => x.id));
@@ -66,10 +57,6 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
   const adesso = new Date();
   const trovatiFuturi = trovati.filter((e) => e.fine >= adesso);
   const trovatiPassati = trovati.filter((e) => e.fine < adesso);
-=======
-  const colori = coloriPersone(utenti.filter((x) => x.stato === "ATTIVO").map((x) => x.id));
-  const eventi = (conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e))).map((e) => ({ ...e, ...(e.utenteId ? colori.get(e.utenteId) : undefined) }));
->>>>>>> origin/claude/clever-feynman-b637mq
   const legenda = utenti.filter((x) => eventi.some((e) => e.utenteId === x.id)).map((x) => ({ id: x.id, nome: x.nome, colore: colori.get(x.id)?.colore ?? "#737373" }));
   const clientePreset = sp.cliente ? await prisma.cliente.findUnique({ where: { id: sp.cliente }, select: { id: true, nome: true, email: true } }) : null;
 
@@ -183,7 +170,6 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         </div>
       )}
 
-<<<<<<< HEAD
       {cerca && (
         <section className="mb-6 rounded-2xl border-2 border-blue-300 bg-blue-50/40 p-3 md:p-4" aria-label="Risultati della ricerca">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -196,8 +182,6 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         </section>
       )}
 
-=======
->>>>>>> origin/claude/clever-feynman-b637mq
       {/* sul computer: griglia con le ore; sul telefono: elenco giorno per giorno, facile da scorrere col pollice */}
       {!cerca && vista === "settimana" && <>
         <div className="hidden md:block"><Griglia giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
