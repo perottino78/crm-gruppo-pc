@@ -347,6 +347,17 @@ login nel `matcher` del middleware.
   «📄 Allega la scheda tecnica» (`RigaPreventivo.allegaScheda`, `aggiornaSchedaRiga`; `Preventivo.schedeAllegate` non più usato): quelle spuntate si stampano in fondo all'offerta una volta per listino
   (pagine JPG in `public/cataloghi/<listino>/pagine/`, una per foglio) e nell'«Invia offerta» sono già spuntate come allegato PDF (`pdfPubblico`: disco o sito).
   Rotta `api/admin/seed-optima` (GET prova, POST carica, rilanciabile). Test `tests/listini/optima.test.ts`, collaudo `optima` (9).
+- **Serramenti PVC Plasma 30** (telaio e anta 74 mm, Uf 1,0; gruppo SERRAMENTI, sottogruppi «PVC — Plasma 30» e «PVC — Plasma 30 triplo vetro»; ha sostituito il
+  segnaposto `SERRAMENTI_PVC_PLASMA30_PLACEHOLDER`): 24 tipologie `PLASMA30_<apertura>` (doppio vetro, file «PLASMA 30 UKW 1.3 - 2025», coeff. 2,7 = base Optima × 2,7)
+  e `PLASMA30TV_<apertura>` (triplo vetro, «UKW 1.0», coeff. 3, base propria), aperture come Optima/Fidra; griglie già al cliente in
+  `prisma/seed-data/plasma30_prodotti.json` (`python3 -I scripts/listini/estrai_plasma30.py <ukw13.xlsx> <ukw10.xlsx> prisma/seed-data/plasma30_prodotti.json`;
+  refuso F2A 900×800 «937» corretto a 1.317,60 in `CORREZIONI`). Attenzione: «PLASMA30_» non comprende «PLASMA30TV_» → usare `ePlasma30()`.
+  `src/lib/listini/plasma30.ts` (puro): optional sulla falsa riga dell'Optima (richiesta di Ugo) ma colori del listino Plasma: avorio +5%, pellicole standard
+  +15% un lato / +20% due lati uguali, fuori standard +30% un lato, diverse sui due lati +100%; STC, satinato 90/150, maniglia passante, motore wasistas, antifurto,
+  traversi, pannello fisso, passagatto, oltre misura 300 €/10 cm (triplo PF3A soglia 400: listino `PLASMA30_FUORI400`), curvi/sagomati +40%, minimo 450, trasporto,
+  servizi al contratto. Scheda tecnica `public/cataloghi/plasma30/` (16 pagine; ripulita con `pulisci_plasma.py` in scratchpad: tolti i dati nascosti del fornitore
+  Kompany/Korus, «Win Box» → «Plasma 30», pagine 3/6/11/16 rese immagine), una voce in `SCHEDE` per prefisso con la stessa chiave «PLASMA30» (allegata una volta).
+  Rotta `api/admin/seed-plasma30` (GET prova, POST carica). Test `tests/listini/plasma30.test.ts`, collaudo `plasma30` (10).
 - **Porte a vetro per vetrate** (OUTDOOR › VETRATE › «Porte a vetro», gruppo modello `VETRATE PORTE` in `GRUPPI_VETRATE`): `PORTAVETRO_PAL` (vetro e
   alluminio, varianti telaio 3/4 lati) e `PORTAVETRO_PTV` (tutto vetro), prezzo fisso = listino fornitore +60% (`src/lib/listini/porte-vetro.ts`, test
   `tests/listini/porte-vetro.test.ts`); optional: apertura, maniglione antipanico (solo PAL), colore RAL di serie, altezza oltre 2500 +5%. Rotta
@@ -496,13 +507,13 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 339, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 344, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), rocco-calendario (20)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

@@ -3,6 +3,7 @@
 // con l'email. Modulo puro (anche nel browser): per aggiungere un listino basta una voce in SCHEDE, con il PDF in public/cataloghi/<listino>/
 // e le pagine come immagini in public/cataloghi/<listino>/pagine/p-<n>.jpg (pdftoppm -jpeg -jpegopt quality=80 -r 110 <pdf> <cartella>/p).
 import { PREFISSO_OPTIMA, DESCRIZIONE_CLIENTE_OPTIMA, CATALOGHI_OPTIMA } from "../listini/optima";
+import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
 
 export type SchedaCliente = {
   /** chiave del listino (una scheda per listino) */
@@ -21,6 +22,15 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
   {
     prefisso: PREFISSO_OPTIMA,
     scheda: { chiave: "OPTIMA", nome: CATALOGHI_OPTIMA[0].nome, descrizione: DESCRIZIONE_CLIENTE_OPTIMA, pdf: CATALOGHI_OPTIMA[0].url, pagine: pagine("/cataloghi/optima", 8) },
+  },
+  // Plasma 30: stessa scheda per doppio e triplo vetro (stessa chiave: allegata una volta sola), descrizione diversa
+  {
+    prefisso: PREFISSO_PLASMA30,
+    scheda: { chiave: "PLASMA30", nome: CATALOGHI_PLASMA30[0].nome, descrizione: DESCRIZIONE_CLIENTE_PLASMA30, pdf: CATALOGHI_PLASMA30[0].url, pagine: pagine("/cataloghi/plasma30", 16) },
+  },
+  {
+    prefisso: PREFISSO_PLASMA30_TV,
+    scheda: { chiave: "PLASMA30", nome: CATALOGHI_PLASMA30[0].nome, descrizione: DESCRIZIONE_CLIENTE_PLASMA30_TV, pdf: CATALOGHI_PLASMA30[0].url, pagine: pagine("/cataloghi/plasma30", 16) },
   },
 ];
 
