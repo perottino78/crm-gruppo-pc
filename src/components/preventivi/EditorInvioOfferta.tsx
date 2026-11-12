@@ -10,6 +10,8 @@ type Doc = { id: string; nome: string; cartella: string; dove: string; kb: numbe
 export default function EditorInvioOfferta(p: {
   id: string; a: string; cc: string; oggetto: string; testo: string; firma: string; firmaSalvata: boolean;
   colore: string; logo: string | null; documenti: Doc[]; avviso?: string | null; mittente: string;
+  /** schede tecniche dei prodotti dell'offerta (spuntate se scelte nella pagina dell'offerta) */
+  schede?: { chiave: string; nome: string; spuntata: boolean }[];
 }) {
   const [a, setA] = useState(p.a);
   const [cc, setCc] = useState(p.cc);
@@ -57,6 +59,13 @@ export default function EditorInvioOfferta(p: {
         </details>
         <fieldset className="rounded-md border border-neutral-200 bg-white px-3 py-2">
           <legend className="px-1 text-sm font-semibold">📎 Allegati</legend>
+          {(p.schede ?? []).map((s) => (
+            <label key={s.chiave} className="mb-1 flex items-center gap-2 text-sm">
+              <input type="checkbox" name="scheda" value={s.chiave} defaultChecked={s.spuntata} />
+              <span className="truncate">📄 {s.nome} (PDF)</span>
+              <span className="shrink-0 text-xs text-neutral-500">Scheda tecnica</span>
+            </label>
+          ))}
           {p.documenti.length > 0 ? (
             <div className="flex flex-col gap-1">
               {p.documenti.map((d) => (

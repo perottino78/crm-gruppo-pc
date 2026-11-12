@@ -12,17 +12,33 @@ import { brandInfo } from "@/lib/brands";
 import { emailOfferta, indirizzi } from "@/lib/mail/firma";
 import { linkOfferta } from "@/lib/mail/link-offerta";
 import { MAX_DOCUMENTO } from "@/lib/ordini/calcoli";
+import { schedeDelleTipologie } from "@/lib/preventivi/scheda-cliente";
+import { readFile } from "fs/promises";
+import path from "path";
 
 const MAX_TOTALE = 5.5 * 1024 * 1024; // il modulo arriva fino a 6 MB
 
 const vai = (dove: string, p: Record<string, string>) => redirect(`${dove}${dove.includes("?") ? "&" : "?"}${new URLSearchParams(p)}`);
+
+async function pdfPubblico(url: string): Promise<Buffer | null> {
+  try {
+    return await readFile(path.join(process.cwd(), "public", url));
+  } catch {
+    try {
+      const r = await fetch(`${APP_URL}${url}`);
+      return r.ok ? Buffer.from(await r.arrayBuffer()) : null;
+    } catch {
+      return null;
+    }
+  }
+}
 
 export async function inviaOffertaEmail(fd: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
   const id = String(fd.get("id") ?? "");
   const torna = `/preventivi/${id}/invia`;
-  const p = await prisma.preventivo.findFirst({ where: { id, ...scopePreventivoWhere(u) }, include: { brand: true, cliente: true } });
+  const p = await prisma.preventivo.findFirst({ where: { id, ...scopePreventivoWhere(u) }, include: { brand: true, cliente: true, righe: { select: { prodotto: { select: { tipologia: true } } } } } });
   if (!p) vai("/preventivi", { errore: "Offerta non trovata" });
   const offerta = p!;
 
@@ -43,7 +59,16 @@ export async function inviaOffertaEmail(fd: FormData) {
   const caricati = fd.getAll("file").filter((f): f is File => typeof f === "object" && f !== null && "arrayBuffer" in f && (f as File).size > 0);
   for (const f of caricati) if (f.size > MAX_DOCUMENTO) vai(torna, { errore: `«${f.name}» è troppo grande (massimo 4 MB per file)` });
   const nuovi = await Promise.all(caricati.map(async (f) => ({ nome: f.name, mime: f.type || "application/octet-stream", contenuto: Buffer.from(await f.arrayBuffer()) })));
-  const totale = documenti.reduce((s, d) => s + d.dimensione, 0) + nuovi.reduce((s, f) => s + f.contenuto.length, 0);
+  // schede tecniche spuntate (PDF pubblici in public/cataloghi): dal disco o, se sul server non c'è, dal sito
+  const chiaviSchede = fd.getAll("scheda").map(String);
+  const schede = schedeDelleTipologie(offerta.righe.map((r) => r.prodotto?.tipologia)).filter((s) => chiaviSchede.includes(s.chiave));
+  const pdfSchede: { nome: string; mime: string; contenuto: Buffer }[] = [];
+  for (const s of schede) {
+    const contenuto = await pdfPubblico(s.pdf);
+    if (!contenuto) vai(torna, { errore: `Non riesco a leggere «${s.nome}»: togli la spunta e riprova, o allegala dal computer` });
+    pdfSchede.push({ nome: `${s.nome}.pdf`, mime: "application/pdf", contenuto: contenuto! });
+  }
+  const totale = documenti.reduce((s, d) => s + d.dimensione, 0) + nuovi.reduce((s, f) => s + f.contenuto.length, 0) + pdfSchede.reduce((s, f) => s + f.contenuto.length, 0);
   if (totale > MAX_TOTALE) vai(torna, { errore: "Allegati troppo pesanti (in tutto massimo 5 MB): togline qualcuno, il cliente ha comunque il link all'offerta" });
 
   const info = brandInfo(offerta.brand?.nome);
@@ -52,6 +77,7 @@ export async function inviaOffertaEmail(fd: FormData) {
   const allegati = [
     ...documenti.map((d) => ({ nome: d.nome, contenuto: Buffer.from(d.contenuto), mime: d.mime })),
     ...nuovi,
+    ...pdfSchede,
   ];
   const esito = await inviaMail({ a, cc, oggetto, testo: corpo.testo, html: corpo.html, daUtenteId: u!.id, allegati });
 

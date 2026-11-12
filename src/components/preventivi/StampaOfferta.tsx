@@ -6,7 +6,7 @@ import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } from "@/lib/prodotti";
 import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
-import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
+import { schedaCliente, schedeDaAllegare } from "@/lib/preventivi/scheda-cliente";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
@@ -220,11 +220,9 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                 return (
                   <p className="text-xs text-neutral-600 mt-1 max-w-md">
                     {!r.descrizionePersonalizzata && <>{scheda.descrizione} </>}
-                    {scheda.link && (
-                      <a href={scheda.link.url} target="_blank" rel="noopener" className="text-blue-700 underline whitespace-nowrap">
-                        📄 {scheda.link.nome}
-                      </a>
-                    )}
+                    <a href={scheda.pdf} target="_blank" rel="noopener" className="text-blue-700 underline whitespace-nowrap">
+                      📄 {scheda.nome}
+                    </a>
                   </p>
                 );
               })()}
@@ -667,6 +665,18 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
             </div>
           </section>
         </>
+      )}
+
+      {/* ===== SCHEDE TECNICHE ALLEGATE (spunta «allega alla stampa» nella pagina dell'offerta) ===== */}
+      {schedeDaAllegare(preventivo.schedeAllegate, preventivo.righe.map((r) => r.prodotto?.tipologia)).map((scheda) =>
+        scheda.pagine.map((src, i) => (
+          <section key={src} className="print:break-before-page print:break-inside-avoid px-10 pt-6 pb-4 print:p-0">
+            {i === 0 && (
+              <p className="text-xs font-bold text-neutral-700 mb-2 print:hidden">Allegato: {scheda.nome}</p>
+            )}
+            <img src={src} alt={`${scheda.nome} — pagina ${i + 1}`} className="w-full border border-neutral-200 print:border-0 print:w-auto print:max-w-full print:max-h-[265mm] print:mx-auto" />
+          </section>
+        ))
       )}
     </div>
   );

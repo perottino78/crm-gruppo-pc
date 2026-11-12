@@ -648,6 +648,19 @@ export async function aggiornaImmagineOfferta(formData: FormData) {
   revalidatePath(`/preventivi/${id}/stampa`);
 }
 
+// Schede tecniche da stampare in fondo all'offerta e da allegare all'email (richiesta di Ugo): valgono anche a offerta confermata,
+// non cambiano prezzi né condizioni.
+export async function aggiornaSchedeAllegate(formData: FormData) {
+  const utente = await getCurrentUser();
+  const id = str(formData, "id");
+  if (!utente || !id) return;
+  const schede = [...new Set(formData.getAll("scheda").map(String).filter((x) => /^[A-Z0-9_]{1,40}$/.test(x)))];
+  await prisma.preventivo.update({ where: { id }, data: { schedeAllegate: schede } });
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
+  revalidatePath(`/preventivi/${id}/invia`);
+}
+
 // Azione dedicata per lo sconto, separata da "Condizioni offerta": vive accanto al
 // riquadro del totale nella pagina preventivo, con salvataggio immediato e ricalcolo
 // del netto/IVA, cosi' non serve aprire la scheda condizioni per modificarlo.
