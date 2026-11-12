@@ -8,6 +8,8 @@ import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { cambiaMansioneUtente, impostaStatoUtente, salvaCalendarioUtente } from "@/app/team-actions";
 import { coloriPersone } from "@/lib/calendario/eventi";
+import { salvaDestinatarioAssistenza } from "@/app/segnalazioni-actions";
+import { destinatarioAssistenza, CHIAVE_DESTINATARIO } from "@/lib/segnalazioni/server";
 import { UFFICI, nomeUfficio } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
 import { statoUtente, RUOLI_UTENTE, STATI_UTENTE, puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
@@ -23,7 +25,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
 
   const [config, utenti, brands] = await Promise.all([
     // la posta aziendale ha il suo riquadro (Email automatiche): la password non deve comparire qui
-    prisma.configurazione.findMany({ where: { AND: [{ NOT: { chiave: { startsWith: "posta_" } } }, { NOT: { chiave: { startsWith: "email_testo:" } } }, { NOT: { chiave: { startsWith: "rimbalzi_" } } }] }, orderBy: { chiave: "asc" } }),
+    prisma.configurazione.findMany({ where: { AND: [{ NOT: { chiave: { startsWith: "posta_" } } }, { NOT: { chiave: { startsWith: "email_testo:" } } }, { NOT: { chiave: { startsWith: "rimbalzi_" } } }, { NOT: { chiave: { startsWith: "assistenza_" } } }] }, orderBy: { chiave: "asc" } }),
     admin || marketing ? prisma.utente.findMany({ orderBy: { nome: "asc" } }) : Promise.resolve([]),
     prisma.brand.findMany({ orderBy: { nome: "asc" } }),
   ]);
@@ -31,6 +33,9 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
   // il team attivo (e in pausa) in elenco; i disattivati a parte, in fondo
   const attivi = utenti.filter((u) => u.stato !== "DISATTIVATO");
   const disattivati = utenti.filter((u) => u.stato === "DISATTIVATO");
+  // assistenza interna: chi riceve le segnalazioni del team
+  const destAssistenza = admin ? await destinatarioAssistenza() : null;
+  const sceltoAssistenza = admin ? (await prisma.configurazione.findUnique({ where: { chiave: CHIAVE_DESTINATARIO } }))?.valore ?? "" : "";
   // colori del calendario come li vede il calendario (scelto o automatico)
   const coloriCal = coloriPersone(utenti.filter((u) => u.stato === "ATTIVO" && u.inCalendario).map((u) => ({ id: u.id, colore: u.coloreCalendario })));
 
@@ -59,6 +64,21 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
           </form>
         ))}
       </div>
+
+      {admin && (
+        <section id="assistenza" className="mb-8 rounded-lg border border-red-200 bg-white px-4 py-3">
+          <h2 className="text-base font-bold text-neutral-900">🆘 Assistenza del team</h2>
+          <p className="mb-2 text-xs text-neutral-600">Chi riceve le segnalazioni del pulsante «🆘 Segnala un problema» (in basso nel menu). Gli amministratori sono sempre in copia e le vedono in «📥 Segnalazioni del team».</p>
+          <form action={salvaDestinatarioAssistenza} className="flex flex-wrap items-end gap-2">
+            <select name="utenteId" defaultValue={sceltoAssistenza} className="rounded border border-neutral-300 px-2 py-1.5 text-sm">
+              <option value="">Automatico: responsabile del Marketing ({destAssistenza && !sceltoAssistenza ? destAssistenza.nome : "o un amministratore"})</option>
+              {utenti.filter((x) => x.stato === "ATTIVO").map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
+            </select>
+            <button className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">Salva</button>
+            {destAssistenza && <span className="text-xs text-neutral-600">Ora le riceve: <b>{destAssistenza.nome}</b></span>}
+          </form>
+        </section>
+      )}
 
       <Link href="/impostazioni/anagrafica" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
         <span className="text-base font-bold text-neutral-900">Anagrafica fornitori, posatori e tecnici →</span>
