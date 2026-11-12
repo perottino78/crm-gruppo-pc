@@ -341,7 +341,7 @@ login nel `matcher` del middleware.
   pannello fisso 100 (portefinestre), oltre misura 300 €/10 cm, minimo di produzione 450, trasporto fuori sagoma 350, autoscala 700/900 (+500 suolo pubblico), ENEA 350,
   smaltimento cartongesso 300/m², smontaggio veranda 500 a corpo (listini `OPTIMA`, `OPTIMA_F`, `OPTIMA_PF`, `OPTIMA_WAS`; `listiniOptima`). Disegni = quelli di Fidra,
   scheda tecnica in `public/cataloghi/optima/` (v3, piè di pagina corretto con i dati di P&C srl). Nell'offerta stampata sotto l'elenco puntato:
-  descrizione tecnica breve `DESCRIZIONE_CLIENTE_OPTIMA` (se la riga non ha un testo personalizzato) e link «📄 Scheda tecnica» (`src/lib/preventivi/scheda-cliente.ts`,
+  descrizione tecnica breve `DESCRIZIONE_CLIENTE_OPTIMA` (sempre, anche con testo personalizzato o foto/testo nascosti) e link «📄 Scheda tecnica» (`src/lib/preventivi/scheda-cliente.ts`,
   una voce per listino in `SCHEDE`); `/cataloghi` è pubblico nel middleware perché il cliente lo apre dal link dell'offerta.
   Il commerciale vede la scheda (anteprima, descrizione, link) nel configuratore della finestra «Aggiungi prodotto». Nell'offerta il riquadro «📄 Schede tecniche»
   (`#schede-tecniche`, `aggiornaSchedeAllegate`, `Preventivo.schedeAllegate` = chiavi, vale anche a offerta confermata): le spuntate si stampano in fondo all'offerta

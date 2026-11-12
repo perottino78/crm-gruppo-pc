@@ -213,13 +213,14 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
               {r.mostraDescrizione && r.descrizionePersonalizzata && (
                 <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{r.descrizionePersonalizzata}</p>
               )}
-              {/* descrizione tecnica breve del listino (es. Optima 70) e collegamento alla scheda tecnica */}
-              {r.mostraDescrizione && (() => {
+              {/* descrizione tecnica breve del listino (es. Optima 70) e collegamento alla scheda tecnica: sempre, anche con il testo
+                  personalizzato o con foto e testo nascosti (richiesta di Ugo) */}
+              {(() => {
                 const scheda = schedaCliente(r.prodotto.tipologia);
                 if (!scheda) return null;
                 return (
                   <p className="text-xs text-neutral-600 mt-1 max-w-md">
-                    {!r.descrizionePersonalizzata && <>{scheda.descrizione} </>}
+                    {scheda.descrizione}{" "}
                     <a href={scheda.pdf} target="_blank" rel="noopener" className="text-blue-700 underline whitespace-nowrap">
                       📄 {scheda.nome}
                     </a>
