@@ -32,6 +32,7 @@ const smtp = net.createServer((s) => {
 
 import { prisma } from "../../src/lib/prisma";
 import { inviaOffertaEmail, salvaFirma } from "../../src/app/offerte-email-actions";
+import { aggiornaSchedeAllegate } from "../../src/app/actions";
 import { codiceOfferta, leggiCodiceOfferta } from "../../src/lib/mail/link-offerta";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -109,6 +110,18 @@ async function main() {
 
   console.log("4. Link per il cliente");
   verifica(leggiCodiceOfferta(codiceOfferta(off.id)) === off.id && leggiCodiceOfferta(`${altro.id}.${codiceOfferta(off.id).split(".")[1]}`) === null, "il link apre solo la sua offerta");
+
+  console.log("5. Scheda tecnica Optima allegata");
+  process.env.SMTP_PORT = "2531";
+  const finestra = await prisma.prodotto.create({ data: { brandId: brand.id, tipologia: "OPTIMA_F1A", colore: "STD", larghezzaMm: 800, altezzaMm: 1200, prezzoBase: 500 } });
+  await prisma.rigaPreventivo.create({ data: { preventivoId: off.id, prodottoId: finestra.id, quantita: 1, prezzoUnitario: 500 } });
+  await aggiornaSchedeAllegate(modulo({ id: off.id, scheda: ["OPTIMA", "x'; drop"] }));
+  verifica((await prisma.preventivo.findUnique({ where: { id: off.id } }))?.schedeAllegate.join() === "OPTIMA", "la spunta si salva (solo chiavi valide)");
+  r = await redirectA(inviaOffertaEmail(modulo({ id: off.id, a: "mario@rossi.it", oggetto: "Con scheda", testo: "Ciao", firma: "", scheda: "OPTIMA" })));
+  const conScheda = posta.at(-1)!;
+  verifica(r?.includes("?inviata=") && /Scheda tecnica Optima 70\.pdf/.test(leggibile(conScheda.dati)) && conScheda.dati.length > 300_000, "il PDF della scheda parte con l'email", r);
+  await aggiornaSchedeAllegate(modulo({ id: off.id }));
+  verifica((await prisma.preventivo.findUnique({ where: { id: off.id } }))?.schedeAllegate.length === 0, "togliendo la spunta non si allega più");
 
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }

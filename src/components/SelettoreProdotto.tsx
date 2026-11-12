@@ -5,6 +5,7 @@ import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { lattAlMetro, GUIDA_LATTONERIA } from "@/lib/listini/lattoneria";
 import { unitaMisura, etichetteDimensioni, type AssiZpc, type AssiModelloAnte, type AssiPersianeBlindate, type AssiKopen, type AssiIsomax, type AssiBlindati, type AssiZenith, type AssiMinibox, type AssiTapparelle, type AssiAccessoriTapparelle, type AssiRullo, type AssiPergola, type AssiVetrata, type AssiBioclimatica } from "@/lib/prodotti";
 import { galleriaKopenPerTipologia, lineaRealeDiTipologiaKopen, KOPEN_LINEA_NOME } from "@/lib/kopenGalleria";
+import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
 
 export type NodoTipologia = {
   value: string;
@@ -2122,6 +2123,25 @@ export default function SelettoreProdotto({
               </div>
             </div>
           )}
+
+          {/* scheda tecnica del listino (es. Optima 70): il commerciale la vede mentre configura il prodotto */}
+          {(() => {
+            const scheda = schedaCliente(scelto.value);
+            if (!scheda) return null;
+            return (
+              <div className="mb-3 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-2.5">
+                <a href={scheda.pdf} target="_blank" rel="noopener noreferrer" className="shrink-0" title="Apri la scheda tecnica">
+                  <img src={scheda.pagine[0]} alt="" className="h-24 w-[68px] rounded border border-blue-200 bg-white object-cover object-top" />
+                </a>
+                <div className="min-w-0">
+                  <p className="text-xs font-bold text-blue-900">📄 {scheda.nome}</p>
+                  <p className="text-[11px] text-neutral-700 mt-0.5">{scheda.descrizione}</p>
+                  <a href={scheda.pdf} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs font-semibold text-blue-700 underline">Apri la scheda tecnica</a>
+                  <span className="text-[11px] text-neutral-500"> · si allega alla stampa dall&apos;offerta, riquadro «Schede tecniche»</span>
+                </div>
+              </div>
+            );
+          })()}
 
           {scelto.haMisura ? (
             <>

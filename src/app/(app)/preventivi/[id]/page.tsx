@@ -23,6 +23,7 @@ import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDime
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import SelectAutoInvio from "@/components/SelectAutoInvio";
 import FormAutoSalva from "@/components/FormAutoSalva";
+import { schedeDelleTipologie } from "@/lib/preventivi/scheda-cliente";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
 import RigaTesto from "@/components/preventivi/RigaTesto";
 import FinestraOptional from "@/components/preventivi/FinestraOptional";
@@ -38,6 +39,7 @@ import {
   aggiornaDescrizionePersonalizzata,
   aggiornaCondizioniOfferta,
   aggiornaImmagineOfferta,
+  aggiornaSchedeAllegate,
   aggiornaSconto,
   aggiornaIva,
   aggiornaPrezzoManuale,
@@ -1549,6 +1551,29 @@ export default async function PreventivoPage({
         <span className="text-xs text-neutral-600">L&apos;anteprima è l&apos;offerta come la vede il cliente: da lì la stampi, la salvi in PDF o la mandi al cliente.</span>
       </div>
       </fieldset>
+      {(() => {
+        // schede tecniche dei prodotti dell'offerta: spunta = stampate in fondo all'offerta e allegate all'email (anche a offerta confermata)
+        const schede = schedeDelleTipologie(preventivo.righe.map((r) => r.prodotto?.tipologia));
+        if (!schede.length) return null;
+        return (
+          <div id="schede-tecniche" className="mb-8 rounded-xl border border-neutral-200 bg-white p-4">
+            <p className="text-sm font-bold text-neutral-900 mb-1">📄 Schede tecniche</p>
+            <p className="text-xs text-neutral-600 mb-2">Spunta quelle da allegare: si stampano in fondo all&apos;offerta e partono come PDF con l&apos;email al cliente.</p>
+            <FormAutoSalva key={`schede-${preventivo.schedeAllegate.join(",")}`} action={aggiornaSchedeAllegate} className="flex flex-col gap-1.5">
+              <input type="hidden" name="id" value={preventivo.id} />
+              {schede.map((s) => (
+                <div key={s.chiave} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" name="scheda" value={s.chiave} defaultChecked={preventivo.schedeAllegate.includes(s.chiave)} className="h-4 w-4" />
+                    Allega «{s.nome}» alla stampa
+                  </label>
+                  <a href={s.pdf} target="_blank" rel="noreferrer" className="text-xs text-blue-700 underline">apri la scheda</a>
+                </div>
+              ))}
+            </FormAutoSalva>
+          </div>
+        );
+      })()}
       <div id="documenti-offerta">
         <Documenti entita="PREVENTIVO" entitaId={preventivo.id} titolo="Documenti dell’offerta (contratto firmato, foto, rilievi…)" />
       </div>
