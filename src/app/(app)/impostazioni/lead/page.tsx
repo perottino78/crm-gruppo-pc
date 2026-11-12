@@ -13,6 +13,7 @@ import { rigeneraChiaveLead, impostaTelefonistaBrand } from "@/app/lead-actions"
 import { passaLeadAperti } from "@/app/lead-percorso-actions";
 import { FASI_APERTE } from "@/lib/automazioni/percorsi";
 import ModuliMeta from "@/components/lead/ModuliMeta";
+import RegoleEsiti from "@/components/lead/RegoleEsiti";
 
 export default async function LeadSettings({ searchParams }: { searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const msg = await searchParams;
@@ -78,6 +79,8 @@ export default async function LeadSettings({ searchParams }: { searchParams: Pro
           <button className="text-xs text-red-700 underline">Rigenera chiave (la vecchia smette di funzionare)</button>
         </form>
       </section>
+
+      {puo(u, "lead.esiti") && <RegoleEsiti />}
 
       <section id="telefoniste" className="bg-white rounded-lg border border-neutral-200 p-4 scroll-mt-4">
         <h2 className="font-bold text-neutral-900 mb-1">Telefonista di default per brand</h2>

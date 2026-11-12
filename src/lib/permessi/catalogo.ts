@@ -7,7 +7,7 @@ export type Permesso = string;
 export type Visibilita = "PROPRI" | "ZONA" | "TUTTI";
 
 export const AREE: { area: string; voci: [Permesso, string][] }[] = [
-  { area: "Contatti", voci: [["lead", "Lead da lavorare"], ["clienti", "Clienti"], ["clienti.esporta", "Esportare i clienti (Excel, pubblici Meta)"], ["clienti.elimina", "Eliminare lead e clienti"]] },
+  { area: "Contatti", voci: [["lead", "Lead da lavorare"], ["clienti", "Clienti"], ["clienti.esporta", "Esportare i clienti (Excel, pubblici Meta)"], ["clienti.elimina", "Eliminare lead e clienti"], ["lead.esiti", "Regole sull'esito degli appuntamenti (promemoria, blocco, sblocco)"]] },
   { area: "Vendite", voci: [["preventivi", "Preventivi"], ["commesse", "Commesse e pratiche"], ["task", "Task pratiche"]] },
   { area: "Calendario", voci: [["calendario", "Calendario"], ["calendario.tutti", "Vede e organizza il calendario di tutti"], ["calendario.nextcloud", "Collegare i calendari Nextcloud"]] },
   { area: "Ordini e magazzino", voci: [["ordini", "Ordini ai fornitori"], ["magazzino", "Magazzino"]] },

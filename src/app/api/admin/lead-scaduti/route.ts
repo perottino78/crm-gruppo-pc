@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { FASI_APERTE } from "@/lib/automazioni/percorsi";
 import { chiaveGiorno, inizioGiorno } from "@/lib/calendario/tempo";
+import { chiudiLeadDopoVisita } from "@/lib/appuntamenti/esiti-server";
 
 export const dynamic = "force-dynamic";
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
@@ -32,4 +33,15 @@ export async function GET(req: NextRequest) {
     return { id: l.id, scadenza: l.scadenzaAzione, tipo };
   });
   return NextResponse.json({ telefonista: t?.nome, scaduti: leads.length, perTipo: conteggio, righe: righe.slice(0, 60) });
+}
+
+/** Una tantum: chiude i lead in fase di visita il cui appuntamento collegato è già stato esitato «svolto» dal commerciale. ?esegui=1 per farlo. */
+export async function POST(req: NextRequest) {
+  if (req.headers.get("x-seed-key") !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const esegui = req.nextUrl.searchParams.get("esegui") === "1";
+  const leads = await prisma.lead.findMany({ where: { fase: { in: ["APPUNTAMENTO_CASA", "APPUNTAMENTO_SHOWROOM", "APPUNTAMENTO_FISSATO", "APPUNTAMENTO_TELEFONICO"] }, appuntamentoId: { not: null } }, select: { appuntamentoId: true } });
+  const svolti = await prisma.appuntamento.findMany({ where: { id: { in: leads.map((l) => l.appuntamentoId!) }, stato: "COMPLETATO" }, select: { id: true } });
+  let chiusi = 0;
+  if (esegui) for (const a of svolti) chiusi += await chiudiLeadDopoVisita(a.id, "Automatico");
+  return NextResponse.json({ prova: !esegui, daChiudere: svolti.length, chiusi });
 }
