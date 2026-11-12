@@ -1746,7 +1746,9 @@ model Campagna {
   richiama              Boolean            @default(false)
   richiamaTelefonistaId String?
   validaFino            DateTime?
-  stato                 String             @default("BOZZA") // BOZZA | IN_INVIO | INVIATA
+  stato                 String             @default("BOZZA") // BOZZA | PROGRAMMATA | IN_INVIO | INVIATA
+  // Invio programmato: alla data e ora (di Roma) la campagna parte da sola (stato PROGRAMMATA → IN_INVIO)
+  programmataIl         DateTime?
   promemoriaInviati     String[]           @default([]) // giorni alla scadenza già avvisati, es. ["3","2"]
   creataDa              String?
   inviataIl             DateTime?

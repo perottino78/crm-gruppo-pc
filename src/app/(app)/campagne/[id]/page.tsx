@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
-import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest } from "@/app/campagne-actions";
+import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest, programmaCampagna, annullaProgrammazione } from "@/app/campagne-actions";
 import { contaDestinatari, filtriCampagna, emailCampagna, contenutoDi } from "@/lib/campagne/motore";
 import { CATEGORIE, SENZA_STATO, SITUAZIONI, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 import CampiEmail from "@/components/campagne/CampiEmail";
@@ -54,7 +54,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
           <span className="shrink-0 text-xs text-neutral-500">✏️ clicca per rinominare</span>
         </FormAutoSalva>
         <p className="text-sm text-neutral-600">
-          {c.stato === "BOZZA" ? "Bozza" : c.stato === "IN_INVIO" ? "In invio" : "Inviata"}{c.creataDa ? ` · creata da ${c.creataDa}` : ""}
+          {c.stato === "BOZZA" ? "Bozza" : c.stato === "PROGRAMMATA" ? "🕒 Programmata" : c.stato === "IN_INVIO" ? "In invio" : "Inviata"}{c.creataDa ? ` · creata da ${c.creataDa}` : ""}
           {g !== null && <span className={g <= 3 ? " text-red-700 font-semibold" : ""}> · {g < 0 ? "scaduta" : `scade ${testoGiorni(g)}`}</span>}
         </p>
       </div>
@@ -166,11 +166,25 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
           </form>
           <form action={inviaCampagna}>
             <input type="hidden" name="id" value={c.id} />
-            <button className="btn-3d btn-3d-orange text-sm px-4 py-2">{c.stato === "BOZZA" ? `📤 Invia a ${conti.raggiungibili} contatti` : "📤 Invia ai nuovi che rientrano nei filtri"}</button>
+            <button className="btn-3d btn-3d-orange text-sm px-4 py-2">{c.inviataIl ? "📤 Invia adesso ai nuovi che rientrano nei filtri" : `📤 Invia adesso a ${conti.raggiungibili} contatti`}</button>
           </form>
           <form action={duplicaCampagna}><input type="hidden" name="id" value={c.id} /><button className="btn-3d btn-3d-outline text-sm px-3 py-2">Duplica</button></form>
           <form action={eliminaCampagna}><input type="hidden" name="id" value={c.id} /><BottoneConferma messaggio={c.invii.length ? `Eliminare «${c.nome}»? Spariscono anche le statistiche e gli invii ancora in coda non partono.` : `Eliminare «${c.nome}»?`} className="text-sm text-red-700 underline px-2">🗑 Elimina</BottoneConferma></form>
         </div>
+        {c.stato === "PROGRAMMATA" && c.programmataIl ? (
+          <div className="flex flex-wrap items-center gap-2 rounded-lg border border-blue-300 bg-blue-50 px-3 py-2 text-sm">
+            <span>🕒 <b>Invio programmato</b> per {c.programmataIl.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}: parte da sola, ai contatti che rientrano nei filtri in quel momento. Fino ad allora puoi modificarla (ricordati di salvare).</span>
+            <form action={annullaProgrammazione}><input type="hidden" name="id" value={c.id} /><button className="btn-3d btn-3d-outline px-3 py-1 text-xs">Annulla la programmazione</button></form>
+          </div>
+        ) : c.stato !== "IN_INVIO" && (
+          <form action={programmaCampagna} className="flex flex-wrap items-end gap-2 rounded-lg border border-blue-200 bg-blue-50/50 px-3 py-2">
+            <input type="hidden" name="id" value={c.id} />
+            <span className="text-sm font-semibold">🕒 Oppure programma l&apos;invio:</span>
+            <label className="text-xs text-neutral-600">Giorno<input type="date" name="giorno" required min={chiaveGiorno(new Date())} className={`${inp} block`} /></label>
+            <label className="text-xs text-neutral-600">Ora<input type="time" name="ora" required defaultValue="09:00" step={300} className={`${inp} block`} /></label>
+            <button className="btn-3d btn-3d-blue text-sm px-4 py-2">🕒 Programma l&apos;invio</button>
+          </form>
+        )}
         <p className="text-xs text-neutral-600">Salva prima di inviare. Le email partono a blocchi da {"promozionale@gruppopec.com"}, ognuna con il link per disiscriversi; chi l&apos;ha già ricevuta non la riceve due volte.</p>
         {c.invii.length > 0 && (
           <p className="text-sm">✉️ <b>{n("INVIATA")}</b> inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · <span className={n("FALLITA") ? "text-red-700" : ""}>{n("FALLITA")} non inviate</span> · {n("SOPPRESSA")} disiscritti nel frattempo</p>

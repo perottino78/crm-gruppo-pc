@@ -125,7 +125,7 @@ export async function inviaProva(campagnaId: string, a: string): Promise<{ invia
   return { ...ultimo, quante: versioni.length };
 }
 
-export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; motivo?: string };
+export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; programmate?: number; motivo?: string };
 
 /** Avvisi di scadenza (campagne e promozione del recupero) e un blocco di invii in coda. Sicuro da chiamare più volte. */
 export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } = {}): Promise<ResocontoCampagne> {
@@ -138,7 +138,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
   // 1. Avvisi di scadenza: "la campagna scade fra N giorni, aggiornala"
   const imp = await impostazioniPromemoria();
   if (imp.a.length && imp.giorni.length) {
-    const attive = await prisma.campagna.findMany({ where: { stato: { not: "BOZZA" }, validaFino: { not: null } } });
+    const attive = await prisma.campagna.findMany({ where: { validaFino: { not: null }, OR: [{ stato: { notIn: ["BOZZA", "PROGRAMMATA"] } }, { inviataIl: { not: null } }] } });
     for (const c of attive) {
       const g = promemoriaDiOggi(c.validaFino, imp.giorni, c.promemoriaInviati, ora());
       if (g === null) continue;
@@ -164,7 +164,15 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
     }
   }
 
-  // 2. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata)
+  // 2. Campagne programmate arrivate all'ora: si mettono in coda adesso (i destinatari si calcolano in questo momento)
+  const pronte = await prisma.campagna.findMany({ where: { stato: "PROGRAMMATA", programmataIl: { lte: ora() } }, select: { id: true } });
+  for (const p of pronte) {
+    // si segna prima: due controlli insieme non la mettono in coda due volte
+    const presa = await prisma.campagna.updateMany({ where: { id: p.id, stato: "PROGRAMMATA" }, data: { stato: "IN_INVIO" } });
+    if (presa.count) { await accodaCampagna(p.id, ora()); r.programmate = (r.programmate ?? 0) + 1; }
+  }
+
+  // 3. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata)
   for (let i = 0; i < (opz.max ?? 40); i++) {
     const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true, variante: true } });
     if (!inv) break;
