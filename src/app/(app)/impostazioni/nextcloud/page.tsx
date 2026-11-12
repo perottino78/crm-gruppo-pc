@@ -36,7 +36,7 @@ export default async function NextcloudPage({ searchParams }: { searchParams: Pr
         <p className="mb-2 text-xs text-neutral-600">Su Nextcloud: in alto a destra il tuo profilo › Impostazioni › Sicurezza › «Crea una nuova password per app» (nome: P&amp;C ONE). Incollala qui: viene salvata cifrata.</p>
         <form action={salvaAccesso} className="grid gap-2 sm:grid-cols-3">
           <label className="text-xs font-semibold text-neutral-700">Indirizzo del server<input name="url" required defaultValue={cfg.url ?? "https://businesscloudonline.it"} className={`${inp} block w-full`} /></label>
-          <label className="text-xs font-semibold text-neutral-700">Utente Nextcloud<input name="utente" required defaultValue={cfg.utente ?? ""} className={`${inp} block w-full`} /></label>
+          <label className="text-xs font-semibold text-neutral-700">Utente Nextcloud<input name="utente" required defaultValue={cfg.utente ?? ""} className={`${inp} block w-full`} /><span className="font-normal text-neutral-500">il nome con cui entri in Nextcloud (non «P&amp;C ONE»)</span></label>
           <label className="text-xs font-semibold text-neutral-700">Password per app<input name="password" type="password" autoComplete="new-password" placeholder={cfg.haPassword ? "•••••• (salvata: lascia vuoto per tenerla)" : ""} required={!cfg.haPassword} className={`${inp} block w-full`} /></label>
           <div className="sm:col-span-3"><button className="btn-3d btn-3d-blue px-4 py-2 text-sm">🔌 Salva e prova il collegamento</button></div>
         </form>
