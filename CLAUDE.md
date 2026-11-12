@@ -311,12 +311,13 @@ login nel `matcher` del middleware.
   amministratore; sostituisce l'idea di Google OAuth): CalDAV nei due sensi. `src/lib/calendario/caldav.ts` (PROPFIND calendari, REPORT con `expand` dei
   ricorrenti, PUT/DELETE/GET, Basic con «password per app»), `ical.ts` puro (lettura VEVENT/multistatus, `abbinaCalendario` per nome «Marco Piccatti BCONSOLE»
   con `stessaPersona`, `uidOne` «one-<tipo>-<id>@crm-gruppo-pc», `esterniDaMostrare` toglie i doppioni ±30 min degli impegni di ONE, `decisione`), `nextcloud.ts`
-  (`sincronizzaNextcloud`: da −7 a +120 giorni; impegni di ONE scritti nel calendario «✍️ Scrivi qui» della persona, impronta sha1 per non riscrivere; etag cambiato
-  su Nextcloud → appuntamento/riunione spostati o annullati in ONE, rilievi/pose/assistenze comanda ONE; impegni solo-Nextcloud in `EventoNextcloud` (chiave vuota)
+  (`sincronizzaNextcloud`: da −7 a +120 giorni; impegni di ONE scritti nel calendario «✍️ Scrivi qui» della persona, impronta sha1 per non riscrivere; P&C ONE ha sempre la
+  precedenza (scelta di Ugo, 12/11/2026): un impegno di ONE spostato o cancellato su Nextcloud si riscrive com'è in ONE (prima spostava/annullava gli appuntamenti; ripristino con
+  `api/admin/nextcloud-ripristino`, GET diagnosi `?persona=`, POST `?esegui=1` rimette PROGRAMMATO gli annullati «Cancellato sul calendario Nextcloud»); impegni solo-Nextcloud in `EventoNextcloud` (chiave vuota)
   mostrati come tipo ESTERNO «Da Nextcloud» 🗓️, pagina `/calendario/esterno/[id]`, esclusi dal link .ics). Quando: dopo ogni `inviaInvito`/`invitaRiunione`
   (`sincronizzaDopoRisposta` con `after`), all'apertura del CRM (max ogni 5 min, `nextcloud_ultima`) e in `/api/automazioni/esegui`. Configurazione chiavi
   `nextcloud_*` (password cifrata con `cifra`), pagina `/impostazioni/nextcloud` (permesso `calendario.nextcloud`, `src/app/nextcloud-actions.ts`).
-  Il server Nextcloud non è raggiungibile dall'ambiente di sviluppo: collaudo `nextcloud` (15) con un Nextcloud simulato; test `tests/calendario/nextcloud.test.ts`.
+  Il server Nextcloud non è raggiungibile dall'ambiente di sviluppo: collaudo `nextcloud` (16) con un Nextcloud simulato; test `tests/calendario/nextcloud.test.ts`.
 - **Lead e clienti, richieste di Rocco (PDF «modifiche per PC ONE», nov 2026)**: `/lead` a schede «Oggi» (nuovi + da fare oggi, «Lavorati oggi»
   a scomparsa), «Scaduti», «In programma», «Chiusi», «Tutti» (come un estratto conto: nome/telefono/email, giorno da `CalendarioConteggi` con
   il numero di task per giorno indipendente dagli altri filtri, spunte degli stati raggruppate per azione, «Cerca», risultati per giorno dal più
