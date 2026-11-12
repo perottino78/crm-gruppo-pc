@@ -1,5 +1,6 @@
 "use server";
 
+import { chiudiLeadDopoVisita } from "@/lib/appuntamenti/esiti-server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -97,6 +98,8 @@ export async function esitoAppuntamento(formData: FormData) {
   const testi: Record<string, string> = { COMPLETATO: "✅ Appuntamento svolto", ANNULLATO: "❌ Appuntamento annullato", CONFERMATO: "👍 Appuntamento confermato dal cliente", PROGRAMMATO: "Appuntamento riaperto" };
   await diario(a.clienteId, a.commessaId, u.nome, `${testi[stato]}${a.esito ? `: ${a.esito}` : ""}.`);
   let msg = "Salvato.";
+  // visita svolta: il task del centralino sul lead si chiude da solo
+  if (stato === "COMPLETATO" && (await chiudiLeadDopoVisita(id, u.nome))) msg = "Salvato: il task del centralino è chiuso.";
   if (stato === "ANNULLATO") msg = esitoInvito(await inviaInvito(`APPUNTAMENTO:${id}`, "CANCEL")).replace("Invito", "Annullamento");
   revalidatePath("/calendario");
   revalidatePath(`/clienti/${a.clienteId}`);

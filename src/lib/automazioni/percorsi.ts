@@ -119,6 +119,8 @@ export const FASI_LEAD: Record<string, { nome: string; azione: string | null; ch
   APPUNTAMENTO_SHOWROOM: { nome: "Appuntamento in showroom", azione: "Appuntamento", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_TELEFONICO: { nome: "Chiamata con commerciale", azione: "Chiamata con commerciale: esita la telefonata", colore: "bg-purple-100 text-purple-900" },
   APPUNTAMENTO_ANNULLATO: { nome: "Appuntamento annullato", azione: "Motiva l'annullamento", colore: "bg-red-100 text-red-900" },
+  // il commerciale ha esitato la visita (svolta) dal calendario: il task del centralino è finito
+  APPUNTAMENTO_SVOLTO: { nome: "Appuntamento svolto", azione: null, chiusa: true, colore: "bg-green-100 text-green-900" },
   NON_INTERESSATO: { nome: "Non interessato", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },
   RECUPERO: { nome: "Da recuperare", azione: "Richiama: gli abbiamo mandato la promozione", colore: "bg-teal-100 text-teal-900" },
   FUORI_REGIONE: { nome: "Fuori regione", azione: null, chiusa: true, colore: "bg-neutral-200 text-neutral-700" },

@@ -2,6 +2,7 @@
 // Regole (dalle automazioni Keap): ogni nuovo esito annulla le azioni future del ciclo precedente; un passo non viene
 // mai eseguito due volte (chiave unica); gli invii in ritardo di oltre 24 ore non partono da soli; le email
 // non bloccano mai il lavoro. Il passo successivo si programma quando il precedente è davvero concluso.
+import { controlloBlocco } from "@/lib/appuntamenti/esiti-server";
 import { createHmac, randomUUID } from "crypto";
 import { after } from "next/server";
 import type { Prisma } from "@prisma/client";
@@ -118,6 +119,8 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
   if (e.esito === "APPUNTAMENTO_CASA" && !indirizzo) return { ok: false, errore: "Indica l'indirizzo dell'appuntamento a casa." };
   const venditore = appuntamento && e.venditoreId ? await prisma.utente.findUnique({ where: { id: e.venditoreId }, select: { id: true, nome: true } }) : null;
   if (appuntamento && e.venditoreId && !venditore) return { ok: false, errore: "Venditore non trovato." };
+  // blocco facoltativo (Impostazioni › Lead): chi ha troppi appuntamenti senza esito non ne riceve di nuovi
+  if (venditore && venditore.id !== lead.venditoreId) { const b = await controlloBlocco(venditore.id); if (b) return { ok: false, errore: b }; }
   // appuntamento senza venditore: prima il centralino lo assegna, poi partono conferme e lettere
   const percorso = appuntamento && !venditore ? e.esito.replace("APPUNTAMENTO_", "ASSEGNA_VENDITORE_") : e.esito;
   // esito della chiamata del commerciale: la telefonata in calendario si chiude (svolta o annullata) e un nuovo appuntamento ne crea uno a parte
@@ -156,6 +159,8 @@ export async function assegnaVenditore(leadId: string, venditoreId: string, uten
   const venditore = await prisma.utente.findUnique({ where: { id: venditoreId }, select: { id: true, nome: true } });
   if (!venditore) return { ok: false, errore: "Venditore non trovato." };
   if (lead.venditoreId === venditore.id) return { ok: true };
+  const blocco = await controlloBlocco(venditore.id);
+  if (blocco) return { ok: false, errore: blocco };
   await prisma.$transaction(async (tx) => {
     await tx.lead.update({ where: { id: leadId }, data: { venditoreId: venditore.id } });
     await evento(tx, leadId, "lead.venditore", `Venditore dell'appuntamento: ${venditore.nome}`, utenteNome);

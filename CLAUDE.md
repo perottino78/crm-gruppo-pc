@@ -518,6 +518,14 @@ login nel `matcher` del middleware.
   (`/marketing/costi`, permesso marketing): `SpesaMarketing` (mese+canale unico, `salvaSpeseMarketing` in `src/app/spese-marketing-actions.ts`), calcoli puri
   `src/lib/marketing/costi.ts` (lead del mese per `provenienzaDaFonte`, appuntamenti, contratti = commessa/offerta confermata del cliente nato dal lead,
   € per lead/appuntamento/contratto, resa). Test `tests/marketing/svolta.test.ts`, collaudo `svolta-appuntamenti` (14).
+- **Esito degli appuntamenti** (segnalazione di Cristina, decisione di Ugo nov 2026; `src/lib/appuntamenti/esiti.ts` puro e testato, `esiti-server.ts`,
+  `src/app/esiti-actions.ts`, `components/lead/RegoleEsiti.tsx`): «✅ Svolto» del commerciale (`esitoAppuntamento` COMPLETATO) → `chiudiLeadDopoVisita` porta il lead
+  collegato (`appuntamentoId`, o `leadOrigineId` del cliente con lo stesso venditore) nella fase chiusa `APPUNTAMENTO_SVOLTO`, annulla gli invii in coda, evento in cronologia.
+  Visite PROGRAMMATO/CONFERMATO non esitate (dal giorno `esiti_dal`, default 9/11/2026; le telefoniste escluse): dopo `esiti_giorni_promemoria` (1) riquadro rosso in Dashboard
+  e email ogni mattina feriale (`inviaPromemoriaEsiti` in `/api/automazioni/esegui`, una al giorno `esiti_mail_giorno`); dopo `esiti_giorni_lista` (2) nella pagina
+  `/lead/senza-esito` del centralino (pulsante nei task). Blocco facoltativo (`esiti_blocco_attivo`, spento di serie; `esiti_blocco_soglia` 3; `esiti_sbloccati` JSON):
+  `controlloBlocco` in `registraEsito`/`assegnaVenditore`. Regole in Impostazioni › Lead `#esiti`, permesso `lead.esiti` (solo amministratore). Una tantum
+  `POST api/admin/lead-scaduti?esegui=1` chiude i lead già svolti; `GET ?persona=` diagnosi dei lead scaduti. Collaudo `esiti-appuntamenti` (12).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
@@ -537,13 +545,13 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 354, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 358, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto), esiti-appuntamenti (12)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

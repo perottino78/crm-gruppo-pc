@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { appuntamentiSenzaEsito, regoleEsiti } from "@/lib/appuntamenti/esiti-server";
 import { leadSimili, SOGLIA_FUZZY } from "@/lib/ricerca/server";
 import { puo } from "@/lib/permessi/catalogo";
 import Link from "next/link";
@@ -78,6 +79,8 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
     filtriTutti.push({ OR: [{ scadenzaAzione: { gte: dal, lt: al } }, { scadenzaAzione: null, createdAt: { gte: dal, lt: al } }] });
   }
 
+  const regoleEs = await regoleEsiti();
+  const nSenzaEsito = (await appuntamentiSenzaEsito({ giorni: regoleEs.giorniLista, regole: regoleEs })).length;
   const [nOggi, nScaduti, nProgramma, nChiusi, righeVista, lavoratiOggi, risultati, perCalendario, stato, fatto] = await Promise.all([
     prisma.lead.count({ where: { AND: [...base, dOggi] } }),
     prisma.lead.count({ where: { AND: [...base, dScaduti] } }),
@@ -159,6 +162,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
         {tab("chiusi", `Chiusi (${nChiusi})`)}
         {tab("tutti", "Tutti")}
         <Link href="/lead/recupero" className="rounded-full border border-teal-600 bg-teal-50 px-3 py-1.5 text-sm font-semibold text-teal-900 hover:bg-teal-100">♻️ Recupero contatti</Link>
+        <Link href="/lead/senza-esito" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${nSenzaEsito ? "border-red-400 bg-red-50 text-red-800 hover:bg-red-100" : "border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50"}`}>📋 Appuntamenti senza esito ({nSenzaEsito})</Link>
       </div>
 
       {(!stato.attive || !stato.posta) && (

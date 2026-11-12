@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { appuntamentiSenzaEsito, regoleEsiti } from "@/lib/appuntamenti/esiti-server";
 import { chiaveGiorno, inizioGiorno, aggiungiGiorni } from "@/lib/calendario/tempo";
 import { prisma } from "@/lib/prisma";
 import BrandSwitcher from "@/components/BrandSwitcher";
@@ -27,6 +28,9 @@ export default async function DashboardPage({
 
   // «chiamata con commerciale» fissate dal centralino per me, da fare entro oggi (il task del venditore)
   const fineOggi = inizioGiorno(aggiungiGiorni(chiaveGiorno(new Date()), 1));
+  // appuntamenti miei passati ancora da esitare (promemoria del giorno dopo, regole in Impostazioni › Lead)
+  const regoleEs = utente ? await regoleEsiti() : null;
+  const daEsitare = utente && regoleEs ? await appuntamentiSenzaEsito({ giorni: regoleEs.giorniPromemoria, utenteId: utente.id, regole: regoleEs }) : [];
   const chiamateDaFare = utente ? await prisma.lead.count({ where: { venditoreId: utente.id, fase: "APPUNTAMENTO_TELEFONICO", scadenzaAzione: { lt: fineOggi } } }) : 0;
 
   // comunicazioni del team non lette o con un task ancora da fare
@@ -69,6 +73,21 @@ export default async function DashboardPage({
             </span>
           ))}
         </a>
+      )}
+
+      {daEsitare.length > 0 && (
+        <div className="bg-white rounded-lg border border-neutral-200 border-l-4 border-l-red-600 p-4 shadow-sm mb-4">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-extrabold text-neutral-900">📋 Appuntamenti da esitare: com&apos;è andata?</span>
+            <span className="text-2xl font-extrabold text-red-700">{daEsitare.length}</span>
+          </div>
+          <ul className="mt-2 space-y-1 text-sm">
+            {daEsitare.slice(0, 8).map((a) => (
+              <li key={a.id}><a href={`/calendario/appuntamento/${a.id}`} className="text-blue-800 underline">{a.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })} · {a.cliente}</a></li>
+            ))}
+          </ul>
+          {regoleEs && regoleEs.giorniLista > regoleEs.giorniPromemoria && <p className="mt-2 text-xs text-neutral-500">Dopo {regoleEs.giorniLista} giorni senza esito passano al centralino.</p>}
+        </div>
       )}
 
       {chiamateDaFare > 0 && (
