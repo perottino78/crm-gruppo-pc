@@ -1,6 +1,7 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
 import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
 import { SOTTOGRUPPO_OPTIMA, labelOptima } from "@/lib/listini/optima";
+import { SOTTOGRUPPO_PLASMA30, SOTTOGRUPPO_PLASMA30_TV, labelPlasma30, ePlasma30, triploVetro } from "@/lib/listini/plasma30";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { SOTTOGRUPPO_TAGLIO_FREDDO, labelTaglioFreddo, assiSelezioneTaglioFreddo } from "@/lib/listini/taglio-freddo";
@@ -73,6 +74,8 @@ export function listinoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("FIDRA_")) return "FIDRA";
   // Serramenti PVC Optima 70: optional comuni (gli altri listini OPTIMA_F/OPTIMA_PF/OPTIMA_WAS da listiniOptima).
   if (tipologia.startsWith("OPTIMA_")) return "OPTIMA";
+  // Serramenti PVC Plasma 30 (doppio e triplo vetro): optional comuni (gli altri da listiniPlasma30).
+  if (ePlasma30(tipologia)) return "PLASMA30";
   // Porte a vetro per vetrate: optional comuni (gli specifici hanno listino = tipologia).
   if (tipologia.startsWith("PORTAVETRO_")) return "PORTAVETRO";
   // Pergola Tempra (STABYLA): optional comuni a tutti i modelli.
@@ -772,6 +775,7 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("OPTIMA_")) return SOTTOGRUPPO_OPTIMA;
+  if (ePlasma30(tipologia)) return triploVetro(tipologia) ? SOTTOGRUPPO_PLASMA30_TV : SOTTOGRUPPO_PLASMA30;
   if (tipologia.startsWith("STABYLA_")) return SOTTOGRUPPO_TEMPRA;
   if (tipologia.startsWith("TAGLIOFREDDO_")) return SOTTOGRUPPO_TAGLIO_FREDDO;
   if (tipologia.startsWith("PEDANA_")) return SOTTOGRUPPO_PEDANE;
@@ -884,9 +888,8 @@ export function sottogruppoDiTipologia(tipologia: string): string | null {
 // Segnaposto "in arrivo" per i materiali Serramenti non ancora a listino (vedi
 // IN_ARRIVO piu' sotto per il messaggio mostrato al click).
 const SERRAMENTI_MATERIALE_LABELS: Record<string, string> = {
-  // PVC: Zenith e' gia' a listino reale (vedi sottogruppoDiTipologia sopra); Optima,
-  // Plasma 30 e Fenix sono le altre linee del materiale, ancora senza listino.
-  SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "PVC — Plasma 30",
+  // PVC: Zenith, Optima 70 e Plasma 30 sono già a listino reale (vedi sottogruppoDiTipologia sopra);
+  // Fenix è l'altra linea del materiale, ancora senza listino.
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "PVC — Fenix",
   // PVC-Alluminio: Fidra ora ha il listino vero (tipologie FIDRA_*, sottogruppo «Alluminio — Fidra»).
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "PVC-Alluminio — Plasma 30",
@@ -2039,7 +2042,6 @@ const IN_ARRIVO: Record<string, string> = {
   PORTEPC_PLACEHOLDER: "Listino Porte P&C non ancora caricato — in arrivo",
   PENSILINA_DRITTA_PLACEHOLDER: "Listino Pensilina Dritta non ancora caricato — in arrivo",
   PAVGRES_PLACEHOLDER: "Listino Gres porcellanato non ancora caricato — in arrivo",
-  SERRAMENTI_PVC_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVC_FENIX_PLACEHOLDER: "Listino Serramenti PVC Fenix non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_PLASMA30_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Plasma 30 non ancora caricato — in arrivo",
   SERRAMENTI_PVCALLUMINIO_FENIXK_PLACEHOLDER: "Listino Serramenti PVC-Alluminio Fenix K non ancora caricato — in arrivo",
@@ -2076,6 +2078,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("OPTIMA_")) return labelOptima(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (ePlasma30(tipologia)) return labelPlasma30(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("PORTAVETRO_")) return labelPortaVetro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("STABYLA_")) return labelTempra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("TAGLIOFREDDO_")) return labelTaglioFreddo(tipologia) ?? tipologia.replace(/_/g, " ");

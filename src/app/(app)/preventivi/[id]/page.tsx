@@ -13,6 +13,7 @@ import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { listiniOptima, GUIDA_OPTIMA, CATALOGHI_OPTIMA } from "@/lib/listini/optima";
+import { listiniPlasma30, GUIDA_PLASMA30, CATALOGHI_PLASMA30, ePlasma30 } from "@/lib/listini/plasma30";
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
 import { GUIDA_TAGLIO_FREDDO } from "@/lib/listini/taglio-freddo";
@@ -427,7 +428,7 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("OPTIMA_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? "" : ` · ${prodotto.colore}`}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? "" : ` · ${prodotto.colore}`}
                       {prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? (r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null) : haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
                       {prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
@@ -529,9 +530,9 @@ export default async function PreventivoPage({
               <FinestraOptional rigaId={r.id} titolo={labelBreveTipologia(prodotto.tipologia)} scelti={r.optionali.length}>
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniOptima(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniOptima(prodotto.tipologia).includes(o.listino ?? "") || listiniPlasma30(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
                   /* Porte raso muro, serramenti Fidra e porte a vetro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
-                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
+                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -776,12 +777,14 @@ export default async function PreventivoPage({
                 const fidra = prodotto.tipologia.startsWith("FIDRA_");
                 // Serramenti PVC Optima 70: come Fidra.
                 const optima = prodotto.tipologia.startsWith("OPTIMA_");
+                // Serramenti PVC Plasma 30 (doppio e triplo vetro): come Optima.
+                const plasma30 = ePlasma30(prodotto.tipologia);
                 const portaVetro = prodotto.tipologia.startsWith("PORTAVETRO_");
                 const tempra = prodotto.tipologia.startsWith("STABYLA_");
                 const pedana = prodotto.tipologia.startsWith("PEDANA_");
                 const pavgal = prodotto.tipologia.startsWith("PAVGAL_");
                 const tagliofreddo = prodotto.tipologia.startsWith("TAGLIOFREDDO_");
-                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || optima || portaVetro || tempra || pedana || pavgal || tagliofreddo) {
+                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || optima || plasma30 || portaVetro || tempra || pedana || pavgal || tagliofreddo) {
                   const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Supplementi", "Smontaggio", "Sconti per quantità", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
                   // le voci Work&Service (posa, rilievo, trasporto, trasferte, magazzino…) stanno tutte in un'unica tendina, divise per tipo
                   const WS = "Posa e servizi (Work&Service)";
@@ -792,8 +795,8 @@ export default async function PreventivoPage({
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
-                        {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : optima ? GUIDA_OPTIMA : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
-                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo ? [] : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
+                        {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : plasma30 ? GUIDA_PLASMA30 : optima ? GUIDA_OPTIMA : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
+                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo ? [] : plasma30 ? CATALOGHI_PLASMA30 : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>

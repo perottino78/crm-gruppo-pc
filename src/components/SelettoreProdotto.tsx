@@ -2137,7 +2137,7 @@ export default function SelettoreProdotto({
                   <p className="text-xs font-bold text-blue-900">📄 {scheda.nome}</p>
                   <p className="text-[11px] text-neutral-700 mt-0.5">{scheda.descrizione}</p>
                   <a href={scheda.pdf} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs font-semibold text-blue-700 underline">Apri la scheda tecnica</a>
-                  <span className="text-[11px] text-neutral-500"> · si allega alla stampa dall&apos;offerta, riquadro «Schede tecniche»</span>
+                  <span className="text-[11px] text-neutral-500"> · per mandarla al cliente spunta «Allega la scheda tecnica» sul prodotto nell&apos;offerta</span>
                 </div>
               </div>
             );
