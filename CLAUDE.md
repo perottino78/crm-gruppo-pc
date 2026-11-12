@@ -577,7 +577,7 @@ tipi ✓ · test unitari ✓ · collaudi toccati ✓ · `next build` ✓ · se c
 - Collegare la posta aziendale in Impostazioni › Email automatiche (o variabili SMTP su Vercel; deve poter spedire come
   promozionale@ e marketing@gruppopec.com) e far collegare a ognuno la sua casella dal Profilo, poi
   spegnere in Keap i percorsi e accendere le email automatiche in Impostazioni › Email automatiche.
-- Consigliato: un controllo esterno ogni 5-10 minuti su `GET /api/automazioni/esegui` (es. cron-job.org) per gli invii a orario.
+- Controllo esterno attivo da 12/11/2026: cron-job.org ogni 5 minuti su `GET /api/automazioni/esegui` (risponde subito e lavora dopo con `after`, `?attendi=1` per il resoconto).
 - Inserire `ANTHROPIC_API_KEY` su Vercel (lettura AI di bolle e fatture).
 - Consigliato: database di sviluppo separato (ramo Neon) per non far girare le anteprime sul DB di produzione.
 - Documento "flusso pratica per ufficio": cosa fa ciascun ufficio e come usare il CRM.
