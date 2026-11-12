@@ -33,7 +33,8 @@ const smtp = net.createServer((s) => {
 
 import { prisma } from "../../src/lib/prisma";
 import { eseguiCampagne } from "../../src/lib/campagne/motore";
-import { creaCampagna, salvaCampagna, inviaCampagna, rinominaCampagna, duplicaCampagna, eliminaCampagna, impostaAbTest, provaCampagna } from "../../src/app/campagne-actions";
+import { chiaveGiorno } from "../../src/lib/calendario/tempo";
+import { creaCampagna, salvaCampagna, inviaCampagna, rinominaCampagna, duplicaCampagna, eliminaCampagna, impostaAbTest, provaCampagna, programmaCampagna, annullaProgrammazione } from "../../src/app/campagne-actions";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
 let ok = 0, ko = 0;
@@ -112,6 +113,29 @@ async function main() {
   await dove(impostaAbTest(fd({ id: n, attivo: "1" })));
   const vs = await prisma.campagnaVariante.findMany({ where: { campagnaId: n } });
   verifica(vs.length === 2 && vs.every((v) => v.oggetto === "Ciao {nome}" && v.testo === "Testo base"), "due gruppi copiati dalla versione salvata");
+
+  console.log("7. Invio programmato");
+  const fra = (ore: number) => new Date(Date.now() + ore * 3_600_000);
+  const oraRoma = (d: Date) => d.toLocaleTimeString("it-IT", { timeZone: "Europe/Rome", hour: "2-digit", minute: "2-digit" });
+  await dove(salvaCampagna(fd({ id: n, oggetto: "Ciao {nome}", formato: "TESTO", testo: "Testo base", stati: "Non interessato" })));
+  await dove(impostaAbTest(fd({ id: n, attivo: "0" })));
+  const passato = await dove(programmaCampagna(fd({ id: n, giorno: chiaveGiorno(fra(-2)), ora: oraRoma(fra(-2)) })));
+  verifica(passato?.includes("errore="), "un'ora già passata è rifiutata", passato);
+  const t = fra(2);
+  const prog = await dove(programmaCampagna(fd({ id: n, giorno: chiaveGiorno(t), ora: oraRoma(t) })));
+  let k = await prisma.campagna.findUniqueOrThrow({ where: { id: n } });
+  verifica(prog?.includes("ok=") && k.stato === "PROGRAMMATA" && !!k.programmataIl && Math.abs(k.programmataIl.getTime() - t.getTime()) < 60_000, "programmata all'ora scelta (ora di Roma)", { prog, p: k.programmataIl });
+  posta.length = 0;
+  await eseguiCampagne({ adesso: () => fra(1), max: 50 });
+  verifica(posta.length === 0 && (await prisma.campagnaInvio.count({ where: { campagnaId: n } })) === 0, "prima dell'ora non parte niente");
+  await eseguiCampagne({ adesso: () => fra(3), max: 50 });
+  k = await prisma.campagna.findUniqueOrThrow({ where: { id: n } });
+  verifica(posta.length === 12 && k.stato === "INVIATA", "all'ora scelta parte da sola a tutti (12)", { n: posta.length, stato: k.stato });
+  const t2 = fra(5);
+  await dove(programmaCampagna(fd({ id: n, giorno: chiaveGiorno(t2), ora: oraRoma(t2) })));
+  await dove(annullaProgrammazione(fd({ id: n })));
+  k = await prisma.campagna.findUniqueOrThrow({ where: { id: n } });
+  verifica(k.stato === "INVIATA" && !k.programmataIl, "programmazione annullata: torna com'era (già inviata)", k.stato);
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   smtp.close();

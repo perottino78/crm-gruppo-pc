@@ -8,7 +8,7 @@ import { creaCampagna, puoFareCampagne, duplicaCampagna, eliminaCampagna } from 
 import BottoneConferma from "@/components/BottoneConferma";
 import { giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 
-const STATO: Record<string, string> = { BOZZA: "📝 Bozza", IN_INVIO: "📤 In invio", INVIATA: "✅ Inviata" };
+const STATO: Record<string, string> = { BOZZA: "📝 Bozza", PROGRAMMATA: "🕒 Programmata", IN_INVIO: "📤 In invio", INVIATA: "✅ Inviata" };
 
 /** Campagne email di marketing: elenco con scadenze e risultati. */
 export default async function CampagnePage({ searchParams }: { searchParams: Promise<{ errore?: string; ok?: string; tipo?: string }> }) {
@@ -54,7 +54,7 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
           return (
             <div key={c.id} className="card-fase relative bg-white rounded-lg border border-neutral-200 p-4 hover:border-neutral-400">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <Link href={`/campagne/${c.id}`} className="font-semibold text-neutral-900 after:absolute after:inset-0">{c.abTest ? "🧪 " : ""}{c.nome} <span className="text-xs font-normal text-neutral-500">{STATO[c.stato] ?? c.stato}{c.abTest ? ` · A/B test, ${c._count.varianti} gruppi` : ""}</span></Link>
+                <Link href={`/campagne/${c.id}`} className="font-semibold text-neutral-900 after:absolute after:inset-0">{c.abTest ? "🧪 " : ""}{c.nome} <span className="text-xs font-normal text-neutral-500">{STATO[c.stato] ?? c.stato}{c.stato === "PROGRAMMATA" && c.programmataIl ? ` il ${c.programmataIl.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}` : ""}{c.abTest ? ` · A/B test, ${c._count.varianti} gruppi` : ""}</span></Link>
                 {g !== null && <span className={`text-xs px-2 py-0.5 rounded-full ${g < 0 ? "bg-neutral-200 text-neutral-700" : g <= 3 ? "bg-red-100 text-red-800 font-semibold" : "bg-green-50 text-green-800"}`}>{g < 0 ? "scaduta" : `scade ${testoGiorni(g)}`} · {c.validaFino!.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</span>}
               </div>
               <p className="text-xs text-neutral-600 mt-1">

@@ -134,23 +134,59 @@ export async function provaCampagna(fd: FormData) {
   torna(id, r.inviata ? { ok: r.quante && r.quante > 1 ? `${r.quante} email di prova (una per gruppo) inviate a ${a}.` : `Email di prova inviata a ${a}.` } : { errore: `Email di prova non inviata: ${r.motivo ?? "errore"}` });
 }
 
+/** Cosa manca prima di poter spedire (null = pronta). Vale per l'invio subito e per quello programmato. */
+async function primaDiInviare(id: string): Promise<string | null> {
+  const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" } } } });
+  if (c.abTest) {
+    if (c.varianti.length < 2) return "L'A/B test ha bisogno di almeno 2 gruppi: salva i gruppi prima di inviare.";
+    const incompleto = c.varianti.find((v) => !v.oggetto.trim() || !(v.formato === "HTML" ? v.html.trim() : v.testo.trim()));
+    if (incompleto) return `${incompleto.nome}: scrivi oggetto e testo (o il template HTML) e salva prima di inviare.`;
+  }
+  const vuota = c.formato === "HTML" ? !c.html.trim() : !c.testo.trim();
+  if (!c.abTest && (!c.oggetto.trim() || vuota)) return c.formato === "HTML" ? "Scrivi l'oggetto e incolla (o carica) il template HTML, poi salva prima di inviare." : "Scrivi oggetto e testo dell'email e salva prima di inviare.";
+  if (c.validaFino && giorniAllaScadenza(c.validaFino, new Date()) < 0) return "La campagna è già scaduta: aggiorna la data \"valida fino al\".";
+  return null;
+}
+
 export async function inviaCampagna(fd: FormData) {
   await marketing();
   const id = str(fd, "id");
   if (!id) return;
-  const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" } } } });
-  if (c.abTest) {
-    if (c.varianti.length < 2) torna(id, { errore: "L'A/B test ha bisogno di almeno 2 gruppi: salva i gruppi prima di inviare." });
-    const incompleto = c.varianti.find((v) => !v.oggetto.trim() || !(v.formato === "HTML" ? v.html.trim() : v.testo.trim()));
-    if (incompleto) torna(id, { errore: `${incompleto.nome}: scrivi oggetto e testo (o il template HTML) e salva prima di inviare.` });
-  }
-  const vuota = c.formato === "HTML" ? !c.html.trim() : !c.testo.trim();
-  if (!c.abTest && (!c.oggetto.trim() || vuota)) torna(id, { errore: c.formato === "HTML" ? "Scrivi l'oggetto e incolla (o carica) il template HTML, poi salva prima di inviare." : "Scrivi oggetto e testo dell'email e salva prima di inviare." });
-  if (c.validaFino && giorniAllaScadenza(c.validaFino, new Date()) < 0) torna(id, { errore: "La campagna è già scaduta: aggiorna la data \"valida fino al\"." });
+  const errore = await primaDiInviare(id);
+  if (errore) torna(id, { errore });
+  await prisma.campagna.update({ where: { id }, data: { programmataIl: null } });
   const n = await accodaCampagna(id);
   eseguiDopoRisposta();
   revalidatePath("/campagne");
   torna(id, { ok: n ? `Invio avviato: ${n} email in coda, partono a blocchi nei prossimi minuti.` : "Nessun nuovo destinatario: chi rientra nei filtri l'ha già ricevuta." });
+}
+
+/** Invio programmato: giorno e ora (di Roma) in cui la campagna parte da sola. I destinatari si calcolano in quel momento. */
+export async function programmaCampagna(fd: FormData) {
+  await marketing();
+  const id = str(fd, "id");
+  if (!id) return;
+  const giorno = str(fd, "giorno"), ora = str(fd, "ora") ?? "09:00";
+  const quando = giorno && /^\d{2}:\d{2}$/.test(ora) ? daOraRoma(`${giorno}T${ora}`) : null;
+  if (!quando) torna(id, { errore: "Scegli il giorno e l'ora dell'invio." });
+  if (quando!.getTime() < Date.now() + 60_000) torna(id, { errore: "L'ora scelta è già passata: scegline una futura (o usa «Invia adesso»)." });
+  const errore = await primaDiInviare(id);
+  if (errore) torna(id, { errore });
+  const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, select: { stato: true } });
+  if (c.stato === "IN_INVIO") torna(id, { errore: "La campagna sta già partendo: aspetta che finisca, poi programma il prossimo invio." });
+  await prisma.campagna.update({ where: { id }, data: { programmataIl: quando, stato: "PROGRAMMATA" } });
+  revalidatePath("/campagne");
+  torna(id, { ok: `Invio programmato per ${quando!.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}. Fino ad allora puoi ancora modificarla.` });
+}
+
+export async function annullaProgrammazione(fd: FormData) {
+  await marketing();
+  const id = str(fd, "id");
+  if (!id) return;
+  const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, select: { inviataIl: true } });
+  await prisma.campagna.updateMany({ where: { id, stato: "PROGRAMMATA" }, data: { programmataIl: null, stato: c.inviataIl ? "INVIATA" : "BOZZA" } });
+  revalidatePath("/campagne");
+  torna(id, { ok: "Invio programmato annullato." });
 }
 
 /** Controlla subito la casella aziendale per le email rimbalzate (di solito lo fa da sola ogni 10 minuti). */
