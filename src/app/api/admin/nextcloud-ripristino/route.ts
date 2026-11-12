@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { CHIAVI_NC, configNextcloud } from "@/lib/calendario/nextcloud";
+import { CHIAVI_NC, configNextcloud, salvaCalendariNextcloud } from "@/lib/calendario/nextcloud";
+import { cancellaEvento } from "@/lib/calendario/caldav";
 
 export const dynamic = "force-dynamic";
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
@@ -39,6 +40,20 @@ export async function POST(req: NextRequest) {
   if (req.headers.get("x-seed-key") !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const q = req.nextUrl.searchParams;
   const prova = q.get("esegui") !== "1";
+  // «nonscrivere»: toglie la spunta «Scrivi qui» a tutti i calendari e cancella da Nextcloud gli impegni scritti da P&C ONE
+  if (q.get("azione") === "nonscrivere") {
+    const cfg = await configNextcloud();
+    const scritti = await prisma.eventoNextcloud.findMany({ where: { chiave: { not: null } }, select: { id: true, href: true } });
+    let tolti = 0; const errori: string[] = [];
+    if (!prova) {
+      await salvaCalendariNextcloud(cfg.calendari.map((c) => ({ ...c, scrivi: false })));
+      for (const s of scritti) {
+        try { if (cfg.dav) await cancellaEvento(cfg.dav, s.href); await prisma.eventoNextcloud.delete({ where: { id: s.id } }); tolti++; }
+        catch (e) { errori.push(e instanceof Error ? e.message : String(e)); }
+      }
+    }
+    return NextResponse.json({ prova, calendariConScrivi: cfg.calendari.filter((c) => c.scrivi).length, impegniScritti: scritti.length, tolti, errori: errori.slice(0, 5) });
+  }
   // finestra in cui ha girato la vecchia sincronizzazione (quella che annullava): solo gli appuntamenti toccati lì
   const dal = new Date(q.get("dal") ?? "1970-01-01"), al = new Date(q.get("al") ?? Date.now());
   const toccati = await prisma.appuntamento.findMany({ where: { stato: "ANNULLATO", updatedAt: { gte: dal, lte: al } }, select: { id: true, esito: true, dataOra: true, titolo: true } });
