@@ -29,7 +29,7 @@ export async function salvaAccesso(fd: FormData) {
   let trovati;
   try { trovati = await elencaCalendari(cfg.dav!); }
   catch (e) { vai({ errore: `Collegamento non riuscito: ${e instanceof Error ? e.message : String(e)}` }); }
-  if (trovati!.length === 0) vai({ errore: `Nextcloud ha risposto ma con l'utente «${utente}» non c'è nessun calendario. Nel campo «Utente Nextcloud» va il nome con cui entri in Nextcloud (quello che Nextcloud mostra sopra la password per app), non il nome dato alla password («P&C ONE»).` });
+  if (trovati!.length === 0) vai({ errore: `Nextcloud ha risposto ma con l'utente «${utente}» non c'è nessun calendario. Nel campo «Utente Nextcloud» va il nome utente o l'email con cui entri in Nextcloud, non il nome dato alla password («P&C ONE»).` });
   const utenti = await prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true } });
   const prima = new Map(cfg.calendari.map((c) => [c.href, c]));
   const calendari: CalendarioAbbinato[] = trovati!.map((c) => prima.get(c.href) ?? { href: c.href, nome: c.nome, utenteId: abbinaCalendario(c.nome, utenti), scrivi: false });
