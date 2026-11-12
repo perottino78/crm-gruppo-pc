@@ -288,6 +288,17 @@ login nel `matcher` del middleware.
   (`FormAppuntamento`, ora client, con `GiorniOccupati`: 3 settimane con gli impegni del giorno della persona scelta) o «Riunione interna» (`FormRiunione`,
   modello `Riunione` con `partecipanti` = id utenti, tipo evento RIUNIONE 👥 per ogni partecipante, `creaRiunione`/`annullaRiunione`, `invitaRiunione` .ics a
   tutti, pagina `/calendario/riunione/[id]`). Sincronizzazione bidirezionale con Google Calendar: non fatta (serve un progetto Google Cloud con OAuth). Collaudo `rocco-calendario` (20).
+- **Usando solo ONE, richieste di Ugo (nov 2026)**: calendario con la lente (`?cerca=`, `cercaEventi` in `src/lib/calendario/eventi.ts`: tutte le parole fra
+  cliente, titolo, luogo = paese/città/via, note, incaricato e telefono del cliente `EventoCal.telefono`; ≥5 cifre senza lettere = ricerca per telefono sulle
+  sole cifre), 2 anni indietro e 1 avanti, risultati «In programma» / «Già passati». Colore e «calendario attivo» per persona in Impostazioni › Utenti
+  (`Utente.coloreCalendario` #rrggbb o vuoto = automatico, `Utente.inCalendario`; `salvaCalendarioUtente` in `team-actions.ts`, solo amministratore;
+  `coloriPersone` accetta `{ id, colore }`: lo scelto vince, gli altri prendono i colori liberi della tavolozza); chi ha la spunta tolta non compare nel
+  calendario del team né nella tendina delle persone. Scheda cliente: «✅ Task» apre «Nuovo task» (`#nuovo-task`, `src/app/task-clienti-actions.ts`
+  `creaTaskCliente`/`completaTaskCliente`: `Attivita` TASK con incaricato attivo, `creatoDaId/creatoDaNome`, `completataIl`, scadenza `daOraRoma`,
+  email di avviso al collega) che l'incaricato trova in `/task` («📌 I miei task sui clienti», con «dati da me ai colleghi») e in Dashboard.
+  «✉️ Email» apre `/clienti/[id]/email` (`EditorEmailCliente`, `inviaEmailCliente` in `src/app/cliente-email-actions.ts`): dalla casella di chi scrive con
+  firma, Cc, allegati (documenti del cliente e delle sue offerte o dal computer → «Corrispondenza»), anteprima; resta nelle attività (`Attivita` EMAIL con il
+  testo, «mostra il testo» nel diario: `VoceDiario.dettaglio`). Collaudo `scheda-cliente` (14, SMTP finto), test `tests/calendario/ricerca-colori.test.ts`.
 - **Lead e clienti, richieste di Rocco (PDF «modifiche per PC ONE», nov 2026)**: `/lead` a schede «Oggi» (nuovi + da fare oggi, «Lavorati oggi»
   a scomparsa), «Scaduti», «In programma», «Chiusi», «Tutti» (come un estratto conto: nome/telefono/email, giorno da `CalendarioConteggi` con
   il numero di task per giorno indipendente dagli altri filtri, spunte degli stati raggruppate per azione, «Cerca», risultati per giorno dal più
@@ -507,13 +518,13 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 344, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 347, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

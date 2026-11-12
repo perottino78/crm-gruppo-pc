@@ -27,7 +27,7 @@ export type PraticaCliente = {
   conteggi: { ordini: number; bolle: number; fatture: number; file: number };
 };
 
-export type VoceDiario = { data: Date; tipo: string; colore: string; testo: string; chi: string | null; link?: string };
+export type VoceDiario = { data: Date; tipo: string; colore: string; testo: string; chi: string | null; link?: string; dettaglio?: string | null };
 
 export async function praticheCliente(u: Pick<Utente, "ruolo">, clienteId: string) {
   const [preventivi, fasiDb] = await Promise.all([
@@ -128,7 +128,7 @@ export async function praticheCliente(u: Pick<Utente, "ruolo">, clienteId: strin
 
 /** Diario unico del cliente: attività, offerte, commesse, passaggi fra uffici e note di commessa. */
 export function diarioCliente(input: {
-  attivita: { dataOra: Date; tipo: string; oggetto: string; utente: { nome: string } | null }[];
+  attivita: { dataOra: Date; tipo: string; oggetto: string; descrizione?: string | null; utente: { nome: string } | null }[];
   appuntamenti: { dataOra: Date; tipo: string; stato: string; utente: { nome: string } }[];
   pratiche: PraticaCliente[];
   commesse: { id: string; numeroTxt: string; createdAt: Date; tasks: { titolo: string; ufficio: string; stato: string; completatoIl: Date | null; completatoDaNome: string | null }[]; eventi: { testo: string; utenteNome: string | null; createdAt: Date }[] }[];
@@ -137,7 +137,7 @@ export function diarioCliente(input: {
     NOTA: ["Nota", "#8b5cf6"], CHIAMATA: ["Chiamata", "#0ea5e9"], EMAIL: ["Email", "#6366f1"], TASK: ["Task", "#f59e0b"],
   };
   const voci: VoceDiario[] = [
-    ...input.attivita.map((a) => ({ data: a.dataOra, tipo: TIPO_ATT[a.tipo]?.[0] ?? a.tipo, colore: TIPO_ATT[a.tipo]?.[1] ?? "#737373", testo: a.oggetto, chi: a.utente?.nome ?? null })),
+    ...input.attivita.map((a) => ({ data: a.dataOra, tipo: TIPO_ATT[a.tipo]?.[0] ?? a.tipo, colore: TIPO_ATT[a.tipo]?.[1] ?? "#737373", testo: a.oggetto, chi: a.utente?.nome ?? null, dettaglio: a.descrizione ?? null })),
     ...input.appuntamenti.map((a) => ({ data: a.dataOra, tipo: "Appuntamento", colore: "#db2777", testo: `${a.tipo.toLowerCase()} · ${a.stato.toLowerCase()}`, chi: a.utente.nome })),
     ...input.pratiche.map((p) => ({ data: p.data, tipo: "Offerta", colore: "#2563eb", testo: `Offerta ${p.numeroOfferta ?? ""}${p.oggetto ? ` — ${p.oggetto}` : ""}`.trim(), chi: p.commerciale, link: `/preventivi/${p.id}` })),
     ...input.commesse.flatMap((c) => [

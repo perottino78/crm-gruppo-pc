@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { eventiPeriodo } from "@/lib/calendario/server";
-import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, coloriPersone, stileEvento, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
+import { STILE_TIPO, impagina, giorniEvento, annullato, vedeTutti, coloriPersone, stileEvento, cercaEventi, type EventoCal, type TipoEvento } from "@/lib/calendario/eventi";
 import {
   chiaveGiorno, perInput, inizioGiorno, aggiungiGiorni, lunediDi, grigliaMese, nomeMese, giornoBreve, nomeGiorno, oraRoma,
 } from "@/lib/calendario/tempo";
@@ -37,14 +37,26 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
     : [giorno, aggiungiGiorni(giorno, 30)];
   const [tuttiEventi, utenti] = await Promise.all([
     eventiPeriodo({ da: inizioGiorno(daK), a: inizioGiorno(aK), utenteId: filtroUtente, tipi }),
-    prisma.utente.findMany({ where: { OR: [{ stato: "ATTIVO" }, { passwordHash: { not: null } }] }, select: { id: true, nome: true, ufficio: true, stato: true }, orderBy: { nome: "asc" } }),
+    prisma.utente.findMany({ where: { OR: [{ stato: "ATTIVO" }, { passwordHash: { not: null } }] }, select: { id: true, nome: true, ufficio: true, stato: true, coloreCalendario: true, inCalendario: true }, orderBy: { nome: "asc" } }),
   ]);
   // gli annullati non occupano spazio: si vedono solo a richiesta (?annullati=1)
   const conAnnullati = sp.annullati === "1";
   const nAnnullati = tuttiEventi.filter(annullato).length;
   // ogni persona ha il suo colore (sempre lo stesso: in ordine di nome fra chi lavora), con la legenda sopra il calendario
-  const colori = coloriPersone(utenti.filter((x) => x.stato === "ATTIVO").map((x) => x.id));
-  const eventi = (conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e))).map((e) => ({ ...e, ...(e.utenteId ? colori.get(e.utenteId) : undefined) }));
+  // colore scelto in Impostazioni › Utenti (o automatico); chi ha «calendario attivo» spento non compare nel calendario del team
+  const colori = coloriPersone(utenti.filter((x) => x.stato === "ATTIVO" && x.inCalendario).map((x) => ({ id: x.id, colore: x.coloreCalendario })));
+  const nascosti = new Set(utenti.filter((x) => !x.inCalendario).map((x) => x.id));
+  const visibile = (e: EventoCal) => persona !== "tutti" || !e.utenteId || !nascosti.has(e.utenteId);
+  const conColori = (e: EventoCal) => ({ ...e, ...(e.utenteId ? colori.get(e.utenteId) : undefined) });
+  const eventi = (conAnnullati ? tuttiEventi : tuttiEventi.filter((e) => !annullato(e))).filter(visibile).map(conColori);
+  // ricerca veloce (la lente): nome, paese/città, via, telefono — negli ultimi 2 anni e nel prossimo
+  const cerca = (sp.cerca ?? "").trim();
+  const trovati = cerca
+    ? cercaEventi((await eventiPeriodo({ da: inizioGiorno(aggiungiGiorni(oggi, -730)), a: inizioGiorno(aggiungiGiorni(oggi, 366)), utenteId: filtroUtente })).filter(visibile), cerca).map(conColori)
+    : [];
+  const adesso = new Date();
+  const trovatiFuturi = trovati.filter((e) => e.fine >= adesso);
+  const trovatiPassati = trovati.filter((e) => e.fine < adesso);
   const legenda = utenti.filter((x) => eventi.some((e) => e.utenteId === x.id)).map((x) => ({ id: x.id, nome: x.nome, colore: colori.get(x.id)?.colore ?? "#737373" }));
   const clientePreset = sp.cliente ? await prisma.cliente.findUnique({ where: { id: sp.cliente }, select: { id: true, nome: true, email: true } }) : null;
 
@@ -87,7 +99,15 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
           <Link href={qs({ giorno: dopo })} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">›</Link>
         </div>
         <p className="text-base md:text-lg font-bold text-neutral-800 capitalize">{titolo}</p>
-        <div className="w-full md:w-auto md:ml-auto flex flex-wrap gap-2">
+        <form action="/calendario" role="search" className="w-full md:w-auto md:ml-auto flex items-center gap-1">
+          <input type="hidden" name="vista" value={vista} />
+          <input type="hidden" name="giorno" value={giorno} />
+          {tutti && persona !== "tutti" && <input type="hidden" name="persona" value={persona} />}
+          <input name="cerca" type="search" defaultValue={cerca} placeholder="🔍 Cerca nome, paese, via, telefono…" aria-label="Cerca nel calendario"
+            className="flex-1 md:w-72 rounded-lg border border-neutral-300 px-3 py-2 text-sm" />
+          <button className="btn-3d btn-3d-blue px-3 py-2 text-sm" aria-label="Cerca">🔍</button>
+        </form>
+        <div className="w-full md:w-auto flex flex-wrap gap-2">
           <a href={linkNuovo(nuovoData)} className="btn-3d btn-3d-green px-4 py-2 text-sm flex-1 md:flex-none text-center">+ Nuovo appuntamento</a>
           <Link href="/calendario/sul-telefono" className="btn-3d btn-3d-dark px-4 py-2 text-sm flex-1 md:flex-none text-center">📱 Su Google / telefono</Link>
         </div>
@@ -132,7 +152,7 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
             <select name="persona" defaultValue={persona} className="flex-1 md:flex-none border border-neutral-300 rounded px-2 py-1.5 text-sm">
               <option value="tutti">👥 Tutto il team</option>
               <option value={u.id}>👤 Solo io</option>
-              {utenti.filter((x) => x.id !== u.id).map((x) => <option key={x.id} value={x.id}>{x.nome}{x.ufficio ? ` · ${x.ufficio.toLowerCase()}` : ""}</option>)}
+              {utenti.filter((x) => x.id !== u.id && x.inCalendario).map((x) => <option key={x.id} value={x.id}>{x.nome}{x.ufficio ? ` · ${x.ufficio.toLowerCase()}` : ""}</option>)}
             </select>
             <button className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">Mostra</button>
           </form>
@@ -150,20 +170,32 @@ export default async function CalendarioPage({ searchParams }: { searchParams: P
         </div>
       )}
 
+      {cerca && (
+        <section className="mb-6 rounded-2xl border-2 border-blue-300 bg-blue-50/40 p-3 md:p-4" aria-label="Risultati della ricerca">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-base font-black text-neutral-900">🔍 {trovati.length ? `${trovati.length} ${trovati.length === 1 ? "impegno trovato" : "impegni trovati"}` : "Nessun impegno trovato"} per «{cerca}»</h2>
+            <Link href={qs({ cerca: undefined })} className="text-sm font-bold text-blue-800 underline">✕ chiudi la ricerca</Link>
+          </div>
+          {trovatiFuturi.length > 0 && <><p className="mb-1 text-xs font-bold uppercase tracking-wide text-neutral-600">In programma</p><Agenda eventi={trovatiFuturi} conAnno /></>}
+          {trovatiPassati.length > 0 && <><p className="mb-1 mt-3 text-xs font-bold uppercase tracking-wide text-neutral-600">Già passati (dal più recente)</p><Agenda eventi={trovatiPassati} conAnno decrescente /></>}
+          {!trovati.length && <p className="text-sm text-neutral-600">Prova con un&apos;altra parola: il cognome, il paese, la via o il numero di telefono (bastano 5 cifre).</p>}
+        </section>
+      )}
+
       {/* sul computer: griglia con le ore; sul telefono: elenco giorno per giorno, facile da scorrere col pollice */}
-      {vista === "settimana" && <>
+      {!cerca && vista === "settimana" && <>
         <div className="hidden md:block"><Griglia giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
         <div className="md:hidden"><ListaGiorni giorni={Array.from({ length: 7 }, (_, i) => aggiungiGiorni(daK, i))} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
       </>}
-      {vista === "giorno" && <>
+      {!cerca && vista === "giorno" && <>
         <div className="hidden md:block">
           <GrigliaPersone giorno={giorno} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo}
             persone={filtroUtente ? utenti.filter((x) => x.id === filtroUtente) : utenti.filter((x) => eventi.some((e) => e.utenteId === x.id))} />
         </div>
         <div className="md:hidden"><ListaGiorni giorni={[giorno]} eventi={eventi} oggi={oggi} linkNuovo={linkNuovo} /></div>
       </>}
-      {vista === "mese" && <Mese giorno={giorno} eventi={eventi} oggi={oggi} qs={qs} />}
-      {vista === "agenda" && <Agenda eventi={eventi} />}
+      {!cerca && vista === "mese" && <Mese giorno={giorno} eventi={eventi} oggi={oggi} qs={qs} />}
+      {!cerca && vista === "agenda" && <Agenda eventi={eventi} />}
 
       {/* nuovo impegno (richiesta di Rocco): finestra sopra il calendario; prima si sceglie se è con un cliente o una riunione del team */}
       {sp.nuovo && (
@@ -358,16 +390,18 @@ function ListaGiorni({ giorni, eventi, oggi, linkNuovo }: { giorni: string[]; ev
   );
 }
 
-function Agenda({ eventi }: { eventi: EventoCal[] }) {
+function Agenda({ eventi, conAnno, decrescente }: { eventi: EventoCal[]; conAnno?: boolean; decrescente?: boolean }) {
   const perGiorno = new Map<string, EventoCal[]>();
-  for (const e of eventi) for (const g of giorniEvento(e)) perGiorno.set(g, [...(perGiorno.get(g) ?? []), e]);
+  // nei risultati della ricerca una posa di più giorni compare solo al primo giorno
+  for (const e of eventi) for (const g of conAnno ? giorniEvento(e).slice(0, 1) : giorniEvento(e)) perGiorno.set(g, [...(perGiorno.get(g) ?? []), e]);
   const giorni = [...perGiorno.keys()].sort();
+  if (decrescente) giorni.reverse();
   if (!giorni.length) return <p className="rounded-xl border border-neutral-200 bg-white px-4 py-10 text-center text-sm text-neutral-600">Nessun impegno nei prossimi 30 giorni.</p>;
   return (
     <div className="space-y-3">
       {giorni.map((g) => (
         <div key={g} className="rounded-xl border border-neutral-200 bg-white overflow-hidden">
-          <p className="bg-neutral-50 px-4 py-1.5 text-sm font-bold capitalize">{giornoBreve(g)}</p>
+          <p className="bg-neutral-50 px-4 py-1.5 text-sm font-bold capitalize">{giornoBreve(g)}{conAnno ? ` ${g.slice(0, 4)}` : ""}</p>
           {perGiorno.get(g)!.map((e) => {
             const s = stileEvento(e);
             return (
@@ -375,7 +409,7 @@ function Agenda({ eventi }: { eventi: EventoCal[] }) {
                 <span className="w-14 shrink-0 border-l-4 pl-2 text-sm font-bold text-neutral-900" style={{ borderColor: s.colore }}>{e.giornataIntera ? "giorno" : oraRoma(e.inizio)}</span>
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold text-neutral-900">{s.icona} {e.titolo}</span>
-                  <span className="block text-xs text-neutral-600">{[e.chi, e.luogo].filter(Boolean).join(" · ")}</span>
+                  <span className="block text-xs text-neutral-600">{[e.chi, e.luogo, conAnno ? e.telefono : null].filter(Boolean).join(" · ")}</span>
                 </span>
               </Link>
             );

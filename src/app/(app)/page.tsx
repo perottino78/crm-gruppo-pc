@@ -35,6 +35,9 @@ export default async function DashboardPage({
     orderBy: { createdAt: "desc" }, take: 5,
   }) : [];
 
+  // task dati dalla scheda di un cliente a me (da fare)
+  const taskClienti = utente ? await prisma.attivita.count({ where: { tipo: "TASK", completata: false, utenteId: utente.id } }) : 0;
+
   const taskAperti = await prisma.taskPratica.count({
     where: { stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] }, ...(utente?.ufficio ? { ufficio: utente.ufficio } : {}) },
   });
@@ -68,6 +71,13 @@ export default async function DashboardPage({
         <a href="/lead" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-purple-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
           <span className="text-sm font-extrabold text-neutral-900">📞 Chiamate con commerciale da fare ed esitare</span>
           <span className="text-2xl font-extrabold text-purple-700">{chiamateDaFare}</span>
+        </a>
+      )}
+
+      {taskClienti > 0 && (
+        <a href="/task#task-clienti" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-amber-500 p-4 shadow-sm mb-4 hover:border-neutral-400">
+          <span className="text-sm font-extrabold text-neutral-900">📌 Task sui clienti da fare</span>
+          <span className="text-2xl font-extrabold text-amber-600">{taskClienti}</span>
         </a>
       )}
 

@@ -10,6 +10,7 @@ const indirizzoCliente = (c: { indirizzo: string | null; cap: string | null; com
   [c.indirizzo, [c.cap, c.comune, c.provincia ? `(${c.provincia})` : null].filter(Boolean).join(" ")].filter(Boolean).join(", ") || null;
 
 const incCliente = { include: { cliente: true } } as const;
+const telCliente = (c: { cellulare?: string | null; telefono?: string | null }) => [c.cellulare, c.telefono].filter(Boolean).join(" ") || null;
 
 /** Tutti gli impegni di un periodo, per tutti o per una persona */
 export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | null; tipi?: TipoEvento[] }): Promise<EventoCal[]> {
@@ -50,7 +51,7 @@ export function daAppuntamento(a: AppConDati): EventoCal {
     id: `APPUNTAMENTO:${a.id}`, tipo: "APPUNTAMENTO", sottotipo: a.tipo,
     inizio: a.dataOra, fine: new Date(a.dataOra.getTime() + (a.durataMin || 60) * MIN), giornataIntera: false,
     titolo: a.titolo || `${nomeTipoAppuntamento(a.tipo)} · ${a.cliente.nome}`,
-    cliente: a.cliente.nome, luogo: a.luogo || (a.tipo === "TELEFONICO" ? null : indirizzoCliente(a.cliente)), note: a.note,
+    cliente: a.cliente.nome, luogo: a.luogo || (a.tipo === "TELEFONICO" ? null : indirizzoCliente(a.cliente)), note: a.note, telefono: telCliente(a.cliente),
     utenteId: a.utenteId, chi: a.utente.nome, stato: a.stato, href: `/calendario/appuntamento/${a.id}`,
   };
 }
@@ -60,7 +61,7 @@ export function daRilievo(r: RilConDati): EventoCal {
   return {
     id: `RILIEVO:${r.id}`, tipo: "RILIEVO", inizio: r.dataOra, fine: new Date(r.dataOra.getTime() + 90 * MIN), giornataIntera: false,
     titolo: `Rilievo misure · ${r.commessa.cliente.nome}`, cliente: r.commessa.cliente.nome,
-    luogo: r.indirizzo || indirizzoCliente(r.commessa.cliente), note: [numeroCommessa(r.commessa), r.note].filter(Boolean).join(" — "),
+    luogo: r.indirizzo || indirizzoCliente(r.commessa.cliente), telefono: telCliente(r.commessa.cliente), note: [numeroCommessa(r.commessa), r.note].filter(Boolean).join(" — "),
     utenteId: r.tecnicoId, chi: r.tecnico.nome, stato: r.stato, href: `/commesse/${r.commessaId}`,
   };
 }
@@ -72,7 +73,7 @@ export function daPosa(p: PosaConDati): EventoCal {
   return {
     id: `POSA:${p.id}`, tipo: "POSA", inizio: inizioGiorno(g), fine: inizioGiorno(aggiungiGiorni(g, giorni)), giornataIntera: true,
     titolo: `Posa${giorni > 1 ? ` (${giorni} gg)` : ""} · ${p.commessa.cliente.nome}`, cliente: p.commessa.cliente.nome,
-    luogo: p.indirizzo || indirizzoCliente(p.commessa.cliente),
+    luogo: p.indirizzo || indirizzoCliente(p.commessa.cliente), telefono: telCliente(p.commessa.cliente),
     note: [numeroCommessa(p.commessa), p.squadra ? `Squadra: ${p.squadra}` : null, p.confermata ? "Confermata al cliente" : "Da confermare al cliente", p.note].filter(Boolean).join(" — "),
     utenteId: p.assegnatoUtenteId, chi: p.assegnatoNome, stato: p.stato, href: `/commesse/${p.commessaId}`,
   };
@@ -84,7 +85,7 @@ export function daAssistenza(a: AssConDati): EventoCal {
   return {
     id: `ASSISTENZA:${a.id}`, tipo: "ASSISTENZA", inizio: d, fine: new Date(d.getTime() + 120 * MIN), giornataIntera: false,
     titolo: `Assistenza n.${a.numero} · ${a.commessa.cliente.nome}`, cliente: a.commessa.cliente.nome,
-    luogo: indirizzoCliente(a.commessa.cliente), note: [a.prodotto, a.descrizione].filter(Boolean).join(" — "),
+    luogo: indirizzoCliente(a.commessa.cliente), telefono: telCliente(a.commessa.cliente), note: [a.prodotto, a.descrizione].filter(Boolean).join(" — "),
     utenteId: a.assegnatoUtenteId, chi: a.assegnatoNome, stato: a.stato, href: `/assistenza`,
   };
 }

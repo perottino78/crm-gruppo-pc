@@ -26,6 +26,7 @@ import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
 import { puo } from "@/lib/permessi/catalogo";
 import BottoneConferma from "@/components/BottoneConferma";
 import { eliminaCliente, bloccaEliminazioneCliente } from "@/app/elimina-contatti-actions";
+import { creaTaskCliente, completaTaskCliente } from "@/app/task-clienti-actions";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -44,7 +45,7 @@ export default async function SchedaClientePage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ sez?: string; chiuse?: string; fissa?: string; errore?: string }>;
+  searchParams: Promise<{ sez?: string; chiuse?: string; fissa?: string; errore?: string; fatto?: string; inviata?: string }>;
 }) {
   const { id } = await params;
   const sp = await searchParams;
@@ -133,7 +134,7 @@ export default async function SchedaClientePage({
               </div>
               <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-700">
                 {telefono && <a href={`tel:${telefono}`} className="hover:underline">📞 {telefono}</a>}
-                {cliente.email && <a href={`mailto:${cliente.email}`} className="hover:underline">✉️ {cliente.email}</a>}
+                {cliente.email && <a href={`/clienti/${cliente.id}/email`} className="hover:underline" title="Scrivi l'email da P&C ONE">✉️ {cliente.email}</a>}
                 {cliente.email && cliente.emailRimbalzata && cliente.email.toLowerCase() === cliente.emailRimbalzata.toLowerCase() && (
                   <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800" title={cliente.emailRimbalzataIl ? `rimbalzata il ${cliente.emailRimbalzataIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : undefined}>📭 email non recapitata ({cliente.rimbalzoMotivo ?? "rimbalzata"}): correggila, finché resta questa non riceve email</span>
                 )}
@@ -159,10 +160,10 @@ export default async function SchedaClientePage({
             { ico: "➕", t: "Nuova offerta", h: `${href("pratiche")}#nuova-offerta`, c: "btn-3d-green" },
             { ico: "📝", t: "Nota / chiamata", h: `${href("attivita")}#nuova-attivita`, c: "btn-3d-blue" },
             { ico: "📅", t: "Appuntamento", h: `${href("appuntamenti")}#nuovo-appuntamento`, c: "btn-3d-purple" },
-            { ico: "✅", t: "Task", h: href("task"), c: "btn-3d-amber" },
+            { ico: "✅", t: "Task", h: `${href("task")}#nuovo-task`, c: "btn-3d-amber" },
             { ico: "📎", t: "Carica file", h: href("file"), c: "btn-3d-teal" },
             { ico: "📞", t: "Chiama", h: telefono ? `tel:${telefono}` : null, c: "btn-3d-dark" },
-            { ico: "✉️", t: "Email", h: cliente.email ? `mailto:${cliente.email}` : null, c: "btn-3d-pink" },
+            { ico: "✉️", t: "Email", h: `/clienti/${cliente.id}/email`, c: "btn-3d-pink" },
             { ico: "📍", t: "Naviga", h: indirizzo ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(indirizzo)}` : null, c: "btn-3d-orange" },
             { ico: "✎", t: "Anagrafica", h: href("anagrafica"), c: "btn-3d-outline" },
           ].map((b) =>
@@ -354,6 +355,7 @@ export default async function SchedaClientePage({
         {/* ── Attività recenti ── */}
         {sez === "attivita" && (
           <div className="space-y-4">
+            {sp.inviata && <p className="rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-900">✅ Email inviata a {sp.inviata}: la trovi qui sotto nelle attività.</p>}
             <form id="nuova-attivita" action={creaAttivita} className="bg-white rounded-xl border border-neutral-200 p-4 flex flex-wrap items-end gap-2">
               <input type="hidden" name="clienteId" value={cliente.id} />
               <div className="flex flex-col gap-1">
@@ -394,13 +396,19 @@ export default async function SchedaClientePage({
                       <span className="absolute -left-[7px] mt-1.5 w-3 h-3 rounded-full border-2 border-white" style={{ background: v.colore }} />
                       <div className="flex flex-wrap items-baseline gap-2 text-sm">
                         <span className="text-xs text-neutral-500 tabular-nums w-[92px] shrink-0">
-                          {v.data.toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit", year: "2-digit" })}{" "}
-                          {v.data.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}
+                          {v.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "2-digit" })}{" "}
+                          {v.data.toLocaleTimeString("it-IT", { timeZone: "Europe/Rome", hour: "2-digit", minute: "2-digit" })}
                         </span>
                         <span className="text-[10px] uppercase tracking-wide font-bold px-1.5 py-px rounded text-white" style={{ background: v.colore }}>{v.tipo}</span>
                         {v.link ? <Link href={v.link} className="text-neutral-900 hover:underline">{v.testo}</Link> : <span className="text-neutral-900">{v.testo}</span>}
                         {v.chi && <span className="text-xs text-neutral-500">· {v.chi}</span>}
                       </div>
+                      {v.dettaglio && (
+                        <details className="ml-[100px] text-xs text-neutral-700">
+                          <summary className="cursor-pointer text-neutral-500">mostra il testo</summary>
+                          <p className="mt-1 whitespace-pre-line rounded bg-neutral-50 px-2 py-1">{v.dettaglio}</p>
+                        </details>
+                      )}
                     </li>
                   ))}
               </ol>
@@ -413,21 +421,49 @@ export default async function SchedaClientePage({
 
         {/* ── Task ── */}
         {sez === "task" && (
-          <div className="space-y-3">
+          <div id="task" className="space-y-3 scroll-mt-4">
+            {sp.fatto && <p className="rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-900">✅ {sp.fatto}</p>}
+            {sp.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-4 py-2 text-sm font-semibold text-red-800">{sp.errore}</p>}
+            {/* nuovo task (richiesta di Ugo): a chiunque del team, con l'avviso via email */}
+            <section id="nuovo-task" className="card-fase scroll-mt-4" style={{ "--fase": "#d97706" } as React.CSSProperties}>
+              <h2>✅ Nuovo task su {cliente.nome}</h2>
+              <form action={creaTaskCliente} className="grid gap-3 sm:grid-cols-2">
+                <input type="hidden" name="clienteId" value={cliente.id} />
+                <label className="text-xs font-semibold text-neutral-700 sm:col-span-2">Cosa c&apos;è da fare
+                  <input name="oggetto" required placeholder="es. richiamare per la scelta dei colori" className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
+                </label>
+                <label className="text-xs font-semibold text-neutral-700">Per chi
+                  <select name="utenteId" defaultValue={utenteCorrente.id} className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm">
+                    {utentiCal.map((x) => <option key={x.id} value={x.id}>{x.id === utenteCorrente.id ? `${x.nome} (io)` : x.nome}</option>)}
+                  </select>
+                </label>
+                <label className="text-xs font-semibold text-neutral-700">Entro (facoltativo)
+                  <input name="scadenza" type="date" className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
+                </label>
+                <label className="text-xs font-semibold text-neutral-700 sm:col-span-2">Dettagli (facoltativi)
+                  <textarea name="descrizione" rows={2} className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
+                </label>
+                <div className="sm:col-span-2 flex flex-wrap items-center gap-3">
+                  <button className="btn-3d btn-3d-amber px-5 py-2 text-sm">✅ Dai il task</button>
+                  <span className="text-xs text-neutral-600">Lo trova in «Task» e sulla Dashboard; se è un collega gli arriva anche un&apos;email.</span>
+                </div>
+              </form>
+            </section>
             {taskAttivita.length > 0 && (
               <div className="bg-white rounded-xl border border-neutral-200 p-4">
-                <h2 className="text-sm font-bold text-neutral-900 mb-2">Promemoria sul cliente ({taskAttivita.length})</h2>
+                <h2 className="text-sm font-bold text-neutral-900 mb-2">Task sul cliente ({taskAttivita.length})</h2>
                 {taskAttivita.map((t) => (
                   <div key={t.id} className="flex flex-wrap items-center justify-between gap-2 text-sm py-1.5 border-b border-neutral-50 last:border-0">
-                    <span>
-                      {t.oggetto}
-                      {t.scadenza && <span className="text-xs text-amber-700"> — scadenza {t.scadenza.toLocaleDateString("it-IT")}</span>}
-                      {t.utente && <span className="text-xs text-neutral-500"> · {t.utente.nome}</span>}
+                    <span className="min-w-0">
+                      <b>{t.oggetto}</b>
+                      {t.scadenza && <span className={`text-xs ${t.scadenza < new Date() ? "text-red-700 font-semibold" : "text-amber-700"}`}> — entro {t.scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</span>}
+                      {t.utente && <span className="text-xs text-neutral-600"> · per {t.utente.nome}</span>}
+                      {t.creatoDaNome && t.creatoDaId !== t.utenteId && <span className="text-xs text-neutral-500"> · da {t.creatoDaNome}</span>}
+                      {t.descrizione && <span className="block text-xs text-neutral-600 whitespace-pre-line">{t.descrizione}</span>}
                     </span>
-                    <form action={completaAttivita}>
+                    <form action={completaTaskCliente}>
                       <input type="hidden" name="id" value={t.id} />
-                      <input type="hidden" name="clienteId" value={cliente.id} />
-                      <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">✓ fatto</button>
+                      <button className="btn-3d btn-3d-green text-[11px] px-2 py-1">✓ fatto</button>
                     </form>
                   </div>
                 ))}

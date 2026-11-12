@@ -6,7 +6,8 @@ import { aggiornaConfigurazione, creaUtente, adminResetPassword, adminAggiornaTe
 import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { cambiaMansioneUtente, impostaStatoUtente } from "@/app/team-actions";
+import { cambiaMansioneUtente, impostaStatoUtente, salvaCalendarioUtente } from "@/app/team-actions";
+import { coloriPersone } from "@/lib/calendario/eventi";
 import { UFFICI, nomeUfficio } from "@/lib/flusso";
 import { CasellaEmailAdmin } from "@/components/CasellaEmail";
 import { statoUtente, RUOLI_UTENTE, STATI_UTENTE, puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
@@ -30,6 +31,8 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
   // il team attivo (e in pausa) in elenco; i disattivati a parte, in fondo
   const attivi = utenti.filter((u) => u.stato !== "DISATTIVATO");
   const disattivati = utenti.filter((u) => u.stato === "DISATTIVATO");
+  // colori del calendario come li vede il calendario (scelto o automatico)
+  const coloriCal = coloriPersone(utenti.filter((u) => u.stato === "ATTIVO" && u.inCalendario).map((u) => ({ id: u.id, colore: u.coloreCalendario })));
 
   return (
     <div className="max-w-5xl">
@@ -158,6 +161,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                 <summary className="px-4 py-2.5 flex items-center justify-between gap-3 cursor-pointer list-none hover:bg-neutral-50">
                   <span className="flex items-center gap-2">
                     <span className="text-neutral-400 group-open:rotate-90 transition-transform">▶</span>
+                    <span className="h-3 w-3 shrink-0 rounded-full border border-neutral-300" style={{ background: u.inCalendario ? coloriCal.get(u.id)?.colore ?? "#d4d4d4" : "transparent" }} title={u.inCalendario ? "colore nel calendario" : "non compare nel calendario"} />
                     <span className="text-blue-700 font-semibold">{u.nome}</span>
                     <span className="text-xs text-neutral-500 hidden sm:inline">{u.email}</span>
                   </span>
@@ -192,6 +196,20 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                     <input name="nota" defaultValue={u.statoNota ?? ""} placeholder="es. maternità fino a marzo" className="border border-neutral-200 rounded px-2 py-1 text-xs w-64" />
                   </div>
                   <button disabled={u.id === utenteCorrente?.id} className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5 disabled:opacity-50">Salva stato</button>
+                </form>
+                <form action={salvaCalendarioUtente} className="flex flex-wrap items-end gap-3 pt-1 border-t border-neutral-50">
+                  <input type="hidden" name="utenteId" value={u.id} />
+                  <input type="hidden" name="ritorno" value={`/impostazioni?utente=${u.id}`} />
+                  <span className="text-[11px] font-semibold text-neutral-700 self-center">📅 Calendario</span>
+                  <label className="flex items-center gap-1.5 text-xs self-center cursor-pointer">
+                    <input type="checkbox" name="inCalendario" value="1" defaultChecked={u.inCalendario} className="h-4 w-4" /> calendario attivo
+                  </label>
+                  <label className="flex flex-col gap-1 text-[11px] text-neutral-600">
+                    Colore{u.coloreCalendario ? "" : " (ora automatico)"}
+                    <input type="color" name="colore" defaultValue={coloriCal.get(u.id)?.colore ?? u.coloreCalendario ?? "#2a78d6"} className="h-8 w-16 cursor-pointer rounded border border-neutral-200 bg-white" aria-label={`Colore di ${u.nome} nel calendario`} />
+                  </label>
+                  <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva calendario</button>
+                  {u.coloreCalendario && <button name="automatico" value="1" className="text-[11px] text-neutral-600 underline">torna al colore automatico</button>}
                 </form>
                 <form action={adminResetPassword} className="flex flex-wrap items-end gap-2 pt-1 border-t border-neutral-50">
                   <input type="hidden" name="utenteId" value={u.id} />
