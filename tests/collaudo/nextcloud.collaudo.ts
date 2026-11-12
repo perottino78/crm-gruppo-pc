@@ -98,16 +98,16 @@ async function main() {
   x = await dove(sincronizzaOra());
   verifica(x?.includes("Scritti 0, aggiornati 0, tolti 0"), "senza cambi non riscrive nulla", x);
 
-  console.log("3. Cambi fatti su Nextcloud tornano in P&C ONE");
+  console.log("3. Cambi fatti su Nextcloud agli impegni di P&C ONE: vince P&C ONE");
   const hApp = scritti.find((h) => h.includes("appuntamento"))!, hRiu = scritti.find((h) => h.includes("riunione"))!;
   const r0 = calendari[mc].risorse.get(hApp)!;
   calendari[mc].risorse.set(hApp, { etag: "mosso", ics: r0.ics.replace(/DTSTART:\d{8}T\d{6}Z/, `DTSTART;TZID=Europe/Rome:${domani}T120000`).replace(/DTEND:\d{8}T\d{6}Z/, `DTEND;TZID=Europe/Rome:${domani}T133000`) });
   calendari[mc].risorse.delete(hRiu);
   x = await dove(sincronizzaOra());
   const app2 = (await prisma.appuntamento.findUnique({ where: { id: app.id } }))!;
-  verifica(app2.dataOra.toLocaleTimeString("it-IT", { timeZone: "Europe/Rome", hour: "2-digit", minute: "2-digit" }) === "12:00" && app2.durataMin === 90, "appuntamento spostato su Nextcloud → spostato anche in P&C ONE (12:00, 90 min)", { x, d: app2.dataOra, m: app2.durataMin });
-  verifica((await prisma.riunione.findUnique({ where: { id: riu.id } }))?.stato === "ANNULLATO", "riunione cancellata su Nextcloud → annullata in P&C ONE");
-  verifica(x?.includes("da Nextcloud"), "nel riepilogo si vede cosa è arrivato da Nextcloud", x);
+  verifica(app2.dataOra.getTime() === app.dataOra.getTime() && app2.durataMin === app.durataMin && app2.stato === app.stato, "appuntamento spostato su Nextcloud → in P&C ONE resta com'era (P&C ONE ha la precedenza)", { x, d: app2.dataOra });
+  verifica(!/DTSTART;TZID=Europe\/Rome:\d{8}T120000/.test(calendari[mc].risorse.get(hApp)?.ics ?? "") && calendari[mc].risorse.get(hApp)?.etag !== "mosso", "…e su Nextcloud torna com'è in P&C ONE", calendari[mc].risorse.get(hApp)?.ics);
+  verifica((await prisma.riunione.findUnique({ where: { id: riu.id } }))?.stato !== "ANNULLATO" && [...calendari[mc].risorse.keys()].some((h) => h.includes("riunione")), "riunione cancellata su Nextcloud → non annullata in P&C ONE e riscritta su Nextcloud", x);
 
   console.log("4. Cambi fatti in P&C ONE vanno su Nextcloud");
   await prisma.appuntamento.update({ where: { id: app.id }, data: { titolo: "Preventivo infissi" } });

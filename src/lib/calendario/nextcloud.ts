@@ -43,38 +43,6 @@ function icsDi(e: EventoCal): { ics: string; impronta: string } {
   return { ics, impronta };
 }
 
-/** Cambio fatto su Nextcloud a un impegno di P&C ONE: si riportano giorno/ora (appuntamenti e riunioni) o l'annullamento. */
-async function prendiDaNextcloud(chiave: string, ev: { inizio: Date; fine: Date; annullato: boolean } | null): Promise<string | null> {
-  const [tipo, resto] = [chiave.split(":")[0], chiave.split(":").slice(1).join(":")];
-  const id = tipo === "RIUNIONE" ? resto.split("-")[0] : resto;
-  const durataMin = ev ? Math.max(15, Math.round((ev.fine.getTime() - ev.inizio.getTime()) / 60_000)) : 0;
-  if (tipo === "APPUNTAMENTO") {
-    const a = await prisma.appuntamento.findUnique({ where: { id } });
-    if (!a) return null;
-    if (!ev || ev.annullato) {
-      if (a.stato === "ANNULLATO") return null;
-      await prisma.appuntamento.update({ where: { id }, data: { stato: "ANNULLATO", esito: a.esito ?? "Cancellato sul calendario Nextcloud" } });
-      return `annullato l'appuntamento del ${a.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" })} (cancellato su Nextcloud)`;
-    }
-    if (a.dataOra.getTime() === ev.inizio.getTime() && a.durataMin === durataMin) return null;
-    await prisma.appuntamento.update({ where: { id }, data: { dataOra: ev.inizio, durataMin } });
-    return `spostato un appuntamento al ${ev.inizio.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" })} (da Nextcloud)`;
-  }
-  if (tipo === "RIUNIONE") {
-    const r = await prisma.riunione.findUnique({ where: { id } });
-    if (!r) return null;
-    if (!ev || ev.annullato) {
-      if (r.stato === "ANNULLATO") return null;
-      await prisma.riunione.update({ where: { id }, data: { stato: "ANNULLATO" } });
-      return `annullata la riunione «${r.titolo}» (cancellata su Nextcloud)`;
-    }
-    if (r.dataOra.getTime() === ev.inizio.getTime() && r.durataMin === durataMin) return null;
-    await prisma.riunione.update({ where: { id }, data: { dataOra: ev.inizio, durataMin } });
-    return `spostata la riunione «${r.titolo}» (da Nextcloud)`;
-  }
-  return null; // rilievi, pose, assistenze: comanda P&C ONE (si riscrivono su Nextcloud)
-}
-
 export type EsitoSync = { fatto: boolean; motivo?: string; scritti?: number; aggiornati?: number; cancellati?: number; daNextcloud?: string[]; esterni?: number; errori?: string[] };
 let inCorso: Promise<EsitoSync> | null = null;
 
@@ -129,25 +97,15 @@ export async function sincronizzaNextcloud(opz: { forza?: boolean; adesso?: Date
           }
           const { ics, impronta } = icsDi(e);
           let azione = decisione({ etagSalvato: s?.etag ?? null, etagNextcloud: rem?.x.etag ?? null, esisteSuNextcloud: !!rem, impronta, improntaSalvata: s?.impronta ?? null });
-          if (azione === "CANCELLATO_SU_NEXTCLOUD" && s && (await esisteEvento(dav, s.href))) azione = "AGGIORNA_NEXTCLOUD"; // era solo fuori dalla lettura
-          if (azione === "PRENDI_DA_NEXTCLOUD" || azione === "CANCELLATO_SU_NEXTCLOUD") {
-            const chiave = chiaveDaUid(uid) ?? e.id;
-            const cosa = await prendiDaNextcloud(chiave, azione === "PRENDI_DA_NEXTCLOUD" ? rem!.e : null);
-            if (cosa) r.daNextcloud.push(`${cal.nome}: ${cosa}`);
-            if (azione === "CANCELLATO_SU_NEXTCLOUD") {
-              // rilievi/pose/assistenze cancellati su Nextcloud: si riscrivono (comanda P&C ONE); appuntamenti e riunioni ora sono annullati
-              if (s) await prisma.eventoNextcloud.delete({ where: { id: s.id } });
-              if (!cosa && !["APPUNTAMENTO", "RIUNIONE"].includes(chiave.split(":")[0])) { const w = await scriviEvento(dav, cal.href, uid, ics); await registra(cal, uid, e, w, impronta); r.scritti++; }
-              continue;
-            }
-            // da qui in poi: salvo il nuovo etag; se P&C ONE è cambiato per davvero si riscrive al giro dopo
-            const dati = { etag: rem!.x.etag, impronta: cosa ? null : impronta, inizio: rem!.e.inizio, fine: rem!.e.fine };
-            if (s) await prisma.eventoNextcloud.update({ where: { id: s.id }, data: dati });
-            else await registra(cal, uid, e, { href: rem!.x.href, etag: rem!.x.etag }, cosa ? null : impronta);
-            continue;
+          // P&C ONE ha la precedenza (scelta di Ugo): spostato o cancellato su Nextcloud → si riscrive com'è in P&C ONE
+          if (azione === "PRENDI_DA_NEXTCLOUD") azione = "AGGIORNA_NEXTCLOUD";
+          let hrefNc = s?.href ?? rem?.x.href ?? null;
+          if (azione === "CANCELLATO_SU_NEXTCLOUD") {
+            if (s && (await esisteEvento(dav, s.href))) azione = "AGGIORNA_NEXTCLOUD"; // era solo fuori dalla lettura
+            else { azione = "CREA"; hrefNc = null; }
           }
           if (azione === "CREA" || azione === "AGGIORNA_NEXTCLOUD") {
-            const w = await scriviEvento(dav, cal.href, uid, ics, s?.href ?? rem?.x.href ?? null);
+            const w = await scriviEvento(dav, cal.href, uid, ics, hrefNc);
             await registra(cal, uid, e, w, impronta, s?.id);
             if (azione === "CREA") r.scritti++; else r.aggiornati++;
           }
