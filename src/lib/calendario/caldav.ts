@@ -12,6 +12,21 @@ export const cartellaCalendari = (c: ConfigDav) => `${base(c.url)}/remote.php/da
 export const assoluto = (c: ConfigDav, href: string) => (/^https?:\/\//.test(href) ? href : `${new URL(base(c.url)).origin}${href.startsWith("/") ? "" : "/"}${href}`);
 
 async function richiesta(c: ConfigDav, metodo: string, url: string, corpo?: string, intestazioni: Record<string, string> = {}): Promise<Response> {
+  try { return await chiama(c, metodo, url, corpo, intestazioni); }
+  catch (e) {
+    // «fetch failed» da solo non dice niente: si aggiunge il motivo vero (server non trovato, certificato, connessione rifiutata…)
+    const causa = e instanceof Error ? (e.cause as { code?: string; message?: string } | undefined) : undefined;
+    const host = (() => { try { return new URL(url).host; } catch { return url; } })();
+    const motivo = causa?.code === "ENOTFOUND" ? "il server non esiste (nome sbagliato?)"
+      : causa?.code === "ECONNREFUSED" ? "il server rifiuta la connessione"
+      : causa?.code && /CERT|SSL|TLS|SELF_SIGNED/i.test(causa.code) ? `certificato del sito non valido (${causa.code})`
+      : e instanceof Error && e.name === "TimeoutError" ? "il server non risponde (20 secondi)"
+      : [causa?.code, causa?.message].filter(Boolean).join(" ") || (e instanceof Error ? e.message : String(e));
+    throw new Error(`${host} non raggiungibile: ${motivo}`);
+  }
+}
+
+function chiama(c: ConfigDav, metodo: string, url: string, corpo?: string, intestazioni: Record<string, string> = {}): Promise<Response> {
   return fetch(url, {
     method: metodo,
     headers: {
