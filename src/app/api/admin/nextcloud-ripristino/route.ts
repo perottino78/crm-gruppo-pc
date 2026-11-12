@@ -37,10 +37,18 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   if (req.headers.get("x-seed-key") !== SECRET) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  const prova = req.nextUrl.searchParams.get("esegui") !== "1";
-  const daRipristinare = await prisma.appuntamento.findMany({ where: { esito: MOTIVO, stato: "ANNULLATO" }, select: { id: true } });
-  if (!prova) await prisma.appuntamento.updateMany({ where: { id: { in: daRipristinare.map((a) => a.id) } }, data: { stato: "PROGRAMMATO", esito: null } });
-  // gli abbinamenti salvati degli impegni di P&C ONE si azzerano: al giro dopo P&C ONE li riscrive com'è lui
-  if (!prova) await prisma.eventoNextcloud.updateMany({ where: { chiave: { not: null } }, data: { impronta: null } });
-  return NextResponse.json({ prova, ripristinati: daRipristinare.length });
+  const q = req.nextUrl.searchParams;
+  const prova = q.get("esegui") !== "1";
+  // finestra in cui ha girato la vecchia sincronizzazione (quella che annullava): solo gli appuntamenti toccati lì
+  const dal = new Date(q.get("dal") ?? "1970-01-01"), al = new Date(q.get("al") ?? Date.now());
+  const toccati = await prisma.appuntamento.findMany({ where: { stato: "ANNULLATO", updatedAt: { gte: dal, lte: al } }, select: { id: true, esito: true, dataOra: true, titolo: true } });
+  // annullati solo dalla sincronizzazione → di nuovo in programma; con un esito scritto dal venditore (era già svolto) → svolti;
+  // annullati da una persona («Annullato (…)») restano come sono
+  const daProgrammare = toccati.filter((a) => a.esito === MOTIVO);
+  const daSvolti = toccati.filter((a) => a.esito && a.esito !== MOTIVO && !/^Annullat/i.test(a.esito));
+  if (!prova) {
+    await prisma.appuntamento.updateMany({ where: { id: { in: daProgrammare.map((a) => a.id) } }, data: { stato: "PROGRAMMATO", esito: null } });
+    await prisma.appuntamento.updateMany({ where: { id: { in: daSvolti.map((a) => a.id) } }, data: { stato: "COMPLETATO" } });
+  }
+  return NextResponse.json({ prova, rimessiInProgramma: daProgrammare.length, rimessiSvolti: daSvolti.length, lasciatiAnnullati: toccati.length - daProgrammare.length - daSvolti.length });
 }
