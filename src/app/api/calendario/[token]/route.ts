@@ -26,7 +26,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
   const ora = Date.now();
   const eventi = await eventiPeriodo({ da: new Date(ora - 60 * 86400_000), a: new Date(ora + 365 * 86400_000), utenteId: team ? null : persona?.id ?? u.id });
   const ics = calendarioIcs(
-    eventi.filter((e) => !/^ANNULLAT/.test(e.stato)).map((e) => {
+    eventi.filter((e) => !/^ANNULLAT/.test(e.stato) && e.tipo !== "ESTERNO").map((e) => {
       const v = { ...voceIcs(e), sequenza: 0 };
       // nel calendario di tutto il team si vede di chi è l'impegno
       return team && e.chi ? { ...v, titolo: `${v.titolo} · ${e.chi}` } : v;

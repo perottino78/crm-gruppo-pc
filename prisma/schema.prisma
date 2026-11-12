@@ -2226,3 +2226,27 @@ model SegnalazioneAllegato {
   contenuto      Bytes
   createdAt      DateTime     @default(now())
 }
+
+// Calendari Nextcloud (CalDAV) collegati a P&C ONE: impegni scritti da P&C ONE (chiave = impegno, impronta = cosa abbiamo
+// scritto) e impegni esterni letti dai calendari dei colleghi (chiave vuota), mostrati nel calendario come «Da Nextcloud».
+model EventoNextcloud {
+  id             String   @id @default(cuid())
+  calendario     String
+  href           String   @unique
+  uid            String
+  etag           String?
+  utenteId       String
+  chiave         String?
+  impronta       String?
+  titolo         String
+  inizio         DateTime
+  fine           DateTime
+  giornataIntera Boolean  @default(false)
+  luogo          String?
+  note           String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([utenteId, inizio])
+  @@index([chiave])
+}

@@ -13,6 +13,7 @@ export async function GET() {
   const campagne = await eseguiCampagne();
   // il punto della settimana sugli obiettivi dei commerciali (una volta a settimana, dal lunedì)
   const obiettivi = await inviaEmailObiettivi().catch((e) => ({ errore: String(e).slice(0, 200) }));
-  return NextResponse.json({ ...lead, campagne, obiettivi });
+  const nextcloud = await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch((e) => ({ errore: String(e).slice(0, 200) }));
+  return NextResponse.json({ ...lead, campagne, obiettivi, nextcloud });
 }
 export const POST = GET;

@@ -287,7 +287,7 @@ login nel `matcher` del middleware.
   `eventi.ts`, `stileEvento`) con legenda; pulsanti dei tipi neutri (l'emoji dice il tipo). «+ Nuovo appuntamento» apre una finestra: «Con un cliente»
   (`FormAppuntamento`, ora client, con `GiorniOccupati`: 3 settimane con gli impegni del giorno della persona scelta) o «Riunione interna» (`FormRiunione`,
   modello `Riunione` con `partecipanti` = id utenti, tipo evento RIUNIONE 👥 per ogni partecipante, `creaRiunione`/`annullaRiunione`, `invitaRiunione` .ics a
-  tutti, pagina `/calendario/riunione/[id]`). Sincronizzazione bidirezionale con Google Calendar: non fatta (serve un progetto Google Cloud con OAuth). Collaudo `rocco-calendario` (20).
+  tutti, pagina `/calendario/riunione/[id]`). Sincronizzazione bidirezionale: con Nextcloud (vedi «Calendari Nextcloud»). Collaudo `rocco-calendario` (20).
 - **Usando solo ONE, richieste di Ugo (nov 2026)**: calendario con la lente (`?cerca=`, `cercaEventi` in `src/lib/calendario/eventi.ts`: tutte le parole fra
   cliente, titolo, luogo = paese/città/via, note, incaricato e telefono del cliente `EventoCal.telefono`; ≥5 cifre senza lettere = ricerca per telefono sulle
   sole cifre), 2 anni indietro e 1 avanti, risultati «In programma» / «Già passati». Colore e «calendario attivo» per persona in Impostazioni › Utenti
@@ -307,6 +307,16 @@ login nel `matcher` del middleware.
   scrive. `/segnalazioni`: chi gestisce (`gestisceSegnalazioni`: destinatario e amministratori) le vede tutte con le schermate (`GET /api/segnalazioni/allegato/<id>`)
   e le chiude con «✓ Risolta» + risposta (email a chi ha scritto) o le riapre; gli altri vedono le proprie. Nel menu «📥 Segnalazioni del team» con il numero di
   aperte (dal layout), in Dashboard il riquadro rosso. Collaudo `segnalazioni` (15, SMTP finto).
+- **Calendari Nextcloud** (richiesta di Ugo, nov 2026: i calendari dei commerciali sono su Nextcloud businesscloudonline.it, utente di Ugo
+  amministratore; sostituisce l'idea di Google OAuth): CalDAV nei due sensi. `src/lib/calendario/caldav.ts` (PROPFIND calendari, REPORT con `expand` dei
+  ricorrenti, PUT/DELETE/GET, Basic con «password per app»), `ical.ts` puro (lettura VEVENT/multistatus, `abbinaCalendario` per nome «Marco Piccatti BCONSOLE»
+  con `stessaPersona`, `uidOne` «one-<tipo>-<id>@crm-gruppo-pc», `esterniDaMostrare` toglie i doppioni ±30 min degli impegni di ONE, `decisione`), `nextcloud.ts`
+  (`sincronizzaNextcloud`: da −7 a +120 giorni; impegni di ONE scritti nel calendario «✍️ Scrivi qui» della persona, impronta sha1 per non riscrivere; etag cambiato
+  su Nextcloud → appuntamento/riunione spostati o annullati in ONE, rilievi/pose/assistenze comanda ONE; impegni solo-Nextcloud in `EventoNextcloud` (chiave vuota)
+  mostrati come tipo ESTERNO «Da Nextcloud» 🗓️, pagina `/calendario/esterno/[id]`, esclusi dal link .ics). Quando: dopo ogni `inviaInvito`/`invitaRiunione`
+  (`sincronizzaDopoRisposta` con `after`), all'apertura del CRM (max ogni 5 min, `nextcloud_ultima`) e in `/api/automazioni/esegui`. Configurazione chiavi
+  `nextcloud_*` (password cifrata con `cifra`), pagina `/impostazioni/nextcloud` (permesso `calendario.nextcloud`, `src/app/nextcloud-actions.ts`).
+  Il server Nextcloud non è raggiungibile dall'ambiente di sviluppo: collaudo `nextcloud` (15) con un Nextcloud simulato; test `tests/calendario/nextcloud.test.ts`.
 - **Lead e clienti, richieste di Rocco (PDF «modifiche per PC ONE», nov 2026)**: `/lead` a schede «Oggi» (nuovi + da fare oggi, «Lavorati oggi»
   a scomparsa), «Scaduti», «In programma», «Chiusi», «Tutti» (come un estratto conto: nome/telefono/email, giorno da `CalendarioConteggi` con
   il numero di task per giorno indipendente dagli altri filtri, spunte degli stati raggruppate per azione, «Cerca», risultati per giorno dal più
@@ -526,7 +536,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 347, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 354, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

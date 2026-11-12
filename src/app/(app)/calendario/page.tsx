@@ -16,7 +16,7 @@ type Vista = "giorno" | "settimana" | "mese" | "agenda";
 const ORA_DA = 7;
 const ORA_A = 21;
 const PX_ORA = 52;
-const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA", "RIUNIONE"];
+const TUTTI_TIPI: TipoEvento[] = ["APPUNTAMENTO", "RILIEVO", "POSA", "ASSISTENZA", "RIUNIONE", "ESTERNO"];
 
 export default async function CalendarioPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;
