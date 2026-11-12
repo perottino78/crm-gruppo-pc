@@ -2,7 +2,7 @@ import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Un solo formato per tutto ciò che va in calendario: appuntamenti, rilievi, pose, interventi di assistenza.
 import { chiaveGiorno, partiRoma, aggiungiGiorni } from "./tempo";
 
-export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA" | "RIUNIONE";
+export type TipoEvento = "APPUNTAMENTO" | "RILIEVO" | "POSA" | "ASSISTENZA" | "RIUNIONE" | "ESTERNO";
 
 export type EventoCal = {
   id: string; // es. "APPUNTAMENTO:abc"
@@ -76,6 +76,7 @@ export const STILE_TIPO: Record<TipoEvento, { nome: string; colore: string; chia
   POSA: { nome: "Pose", colore: "#ea580c", chiaro: "#ffedd5", icona: "🔧" },
   ASSISTENZA: { nome: "Assistenza", colore: "#0d9488", chiaro: "#ccfbf1", icona: "🛟" },
   RIUNIONE: { nome: "Riunioni", colore: "#525252", chiaro: "#f5f5f5", icona: "👥" },
+  ESTERNO: { nome: "Da Nextcloud", colore: "#737373", chiaro: "#f5f5f5", icona: "🗓️" },
 };
 
 export const TIPI_APPUNTAMENTO = [

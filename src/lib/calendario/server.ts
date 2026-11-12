@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { numeroCommessa } from "@/lib/commesse";
 import { inviaMail, APP_URL, indirizzoMittente } from "@/lib/mail/invio";
 import { calendarioIcs, type VoceIcs } from "./ics";
+import { esterniDaMostrare } from "./ical";
 import { type EventoCal, type TipoEvento, nomeTipoAppuntamento, STILE_TIPO } from "./eventi";
 import { chiaveGiorno, inizioGiorno, aggiungiGiorni, giornoBreve, oraRoma } from "./tempo";
 
@@ -16,7 +17,7 @@ const telCliente = (c: { cellulare?: string | null; telefono?: string | null }) 
 export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | null; tipi?: TipoEvento[] }): Promise<EventoCal[]> {
   const vuoi = (t: TipoEvento) => !o.tipi || o.tipi.includes(t);
   const u = o.utenteId ?? undefined;
-  const [app, ril, pose, ass, riu] = await Promise.all([
+  const [app, ril, pose, ass, riu, est] = await Promise.all([
     vuoi("APPUNTAMENTO")
       ? prisma.appuntamento.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { utenteId: u } : {}) }, include: { cliente: true, utente: true } })
       : [],
@@ -32,6 +33,10 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
     vuoi("RIUNIONE")
       ? prisma.riunione.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { partecipanti: { has: u } } : {}) } })
       : [],
+    // impegni scritti solo sui calendari Nextcloud (smart working, fiere…): sola lettura
+    vuoi("ESTERNO")
+      ? prisma.eventoNextcloud.findMany({ where: { chiave: null, inizio: { lt: o.a }, fine: { gt: o.da }, ...(u ? { utenteId: u } : {}) }, take: 2000 })
+      : [],
   ]);
   const nomi = riu.length ? new Map((await prisma.utente.findMany({ where: { id: { in: [...new Set(riu.flatMap((r) => r.partecipanti))] } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome])) : new Map<string, string>();
   const out: EventoCal[] = [
@@ -42,6 +47,11 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
     // una riunione compare nel calendario di ognuno dei partecipanti (con il suo colore)
     ...riu.flatMap((r) => r.partecipanti.filter((p) => !u || p === u).map((p) => daRiunione(r, p, nomi))),
   ].filter((e) => e.fine > o.da && e.inizio < o.a);
+  // gli esterni che doppiano un impegno di P&C ONE della stessa persona (es. appuntamenti BConsole già importati) non si mostrano
+  if (est.length) {
+    const nomiEst = new Map((await prisma.utente.findMany({ where: { id: { in: [...new Set(est.map((x) => x.utenteId))] } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome]));
+    out.push(...esterniDaMostrare(est, out).map((x) => daEsterno(x, nomiEst.get(x.utenteId) ?? null)));
+  }
   return out.sort((x, y) => x.inizio.getTime() - y.inizio.getTime());
 }
 
@@ -90,6 +100,14 @@ export function daAssistenza(a: AssConDati): EventoCal {
   };
 }
 
+type Est = Awaited<ReturnType<typeof prisma.eventoNextcloud.findFirstOrThrow>>;
+export function daEsterno(x: Est, chi: string | null): EventoCal {
+  return {
+    id: `ESTERNO:${x.id}`, tipo: "ESTERNO", inizio: x.inizio, fine: x.fine, giornataIntera: x.giornataIntera, titolo: x.titolo, cliente: null,
+    luogo: x.luogo, note: x.note, utenteId: x.utenteId, chi, stato: "PROGRAMMATO", href: `/calendario/esterno/${x.id}`,
+  };
+}
+
 type Riu = Awaited<ReturnType<typeof prisma.riunione.findFirstOrThrow>>;
 export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>): EventoCal {
   const altri = r.partecipanti.filter((p) => p !== utenteId).map((p) => nomi.get(p)).filter(Boolean);
@@ -102,6 +120,7 @@ export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>):
 
 /** Invito (o annullamento) della riunione a tutti i partecipanti: ognuno lo riceve sul suo calendario. Non blocca mai. */
 export async function invitaRiunione(id: string, metodo: "REQUEST" | "CANCEL" = "REQUEST"): Promise<{ inviati: string[]; motivo?: string }> {
+  await import("./nextcloud").then((m) => m.sincronizzaDopoRisposta()).catch(() => undefined);
   const r = await prisma.riunione.findUnique({ where: { id } });
   if (!r) return { inviati: [], motivo: "riunione non trovata" };
   const persone = await prisma.utente.findMany({ where: { id: { in: r.partecipanti } }, select: { id: true, nome: true, email: true } });
@@ -167,6 +186,8 @@ async function evento(chiave: string): Promise<{ e: EventoCal; emailUtente: stri
  * Non blocca mai: senza SMTP o senza indirizzo semplicemente non parte.
  */
 export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" = "REQUEST", opz: { soloEmail?: string } = {}): Promise<{ inviati: string[]; motivo?: string }> {
+  // ogni cambio d'impegno va anche sui calendari Nextcloud (dopo la risposta all'utente)
+  await import("./nextcloud").then((m) => m.sincronizzaDopoRisposta()).catch(() => undefined);
   const x = await evento(chiave);
   if (!x) return { inviati: [], motivo: "evento non trovato" };
   const { e } = x;

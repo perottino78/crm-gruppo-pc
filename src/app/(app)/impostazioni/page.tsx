@@ -85,6 +85,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
 
+      {puo(utenteCorrente, "calendario.nextcloud") && (
+        <Link href="/impostazioni/nextcloud" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-4 hover:border-neutral-400">
+          <span className="text-base font-bold text-neutral-900">🗓️ Calendari Nextcloud →</span>
+          <span className="block text-xs text-neutral-600">Collega i calendari dei colleghi su Nextcloud: gli impegni di P&amp;C ONE vanno lì e quelli di Nextcloud si vedono qui.</span>
+        </Link>
+      )}
+
       {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
         <Link href="/impostazioni/firme" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
           <span className="text-base font-bold text-neutral-900">✍️ Firme email del team →</span>
