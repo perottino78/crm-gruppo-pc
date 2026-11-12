@@ -10,7 +10,7 @@ import { APP_URL } from "@/lib/mail/invio";
 import { rimbalzato } from "@/lib/campagne/motore";
 import { firmaDi, testoOffertaPredefinito, oggettoOffertaPredefinito } from "@/lib/mail/firma";
 import EditorInvioOfferta from "@/components/preventivi/EditorInvioOfferta";
-import { schedeDelleTipologie } from "@/lib/preventivi/scheda-cliente";
+import { schedeDelleTipologie, schedeDaAllegare } from "@/lib/preventivi/scheda-cliente";
 
 export default async function InviaOffertaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ errore?: string }> }) {
   const { id } = await params;
@@ -19,7 +19,7 @@ export default async function InviaOffertaPage({ params, searchParams }: { param
   if (!u) redirect("/login");
   const p = await prisma.preventivo.findFirst({
     where: { id, ...scopePreventivoWhere(u) },
-    include: { cliente: true, brand: true, commerciale: { select: { email: true } }, righe: { select: { prodotto: { select: { tipologia: true } } } } },
+    include: { cliente: true, brand: true, commerciale: { select: { email: true } }, righe: { select: { allegaScheda: true, prodotto: { select: { tipologia: true } } } } },
   });
   if (!p) notFound();
   const numero = `${p.numeroOfferta ?? p.id.slice(-6).toUpperCase()}/${p.createdAt.getFullYear()}`;
@@ -56,7 +56,7 @@ export default async function InviaOffertaPage({ params, searchParams }: { param
         logo={info.logoUrl ? `${APP_URL}${info.logoUrl}` : null}
         documenti={documenti.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella, dove: d.entita === "CLIENTE" ? "Cliente" : "Offerta", kb: Math.max(1, Math.round(d.dimensione / 1024)) }))}
         avviso={avviso}
-        schede={schedeDelleTipologie(p.righe.map((r) => r.prodotto?.tipologia)).map((s) => ({ chiave: s.chiave, nome: s.nome, spuntata: p.schedeAllegate.includes(s.chiave) }))}
+        schede={schedeDelleTipologie(p.righe.map((r) => r.prodotto?.tipologia)).map((s) => ({ chiave: s.chiave, nome: s.nome, spuntata: schedeDaAllegare(p.righe.map((r) => ({ tipologia: r.prodotto?.tipologia, allegaScheda: r.allegaScheda }))).some((x) => x.chiave === s.chiave) }))}
         mittente={personale ? `la tua casella (${u.smtpUtente})` : "la casella aziendale, con le risposte a te"}
       />
     </div>

@@ -668,8 +668,8 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
         </>
       )}
 
-      {/* ===== SCHEDE TECNICHE ALLEGATE (spunta «allega alla stampa» nella pagina dell'offerta) ===== */}
-      {schedeDaAllegare(preventivo.schedeAllegate, preventivo.righe.map((r) => r.prodotto?.tipologia)).map((scheda) =>
+      {/* ===== SCHEDE TECNICHE ALLEGATE (spunta «allega la scheda» sui prodotti dell'offerta) ===== */}
+      {schedeDaAllegare(preventivo.righe.map((r) => ({ tipologia: r.prodotto?.tipologia, allegaScheda: r.allegaScheda }))).map((scheda) =>
         scheda.pagine.map((src, i) => (
           <section key={src} className="print:break-before-page print:break-inside-avoid px-10 pt-6 pb-4 print:p-0">
             {i === 0 && (

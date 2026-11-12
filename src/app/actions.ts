@@ -554,6 +554,7 @@ export async function duplicaPreventivo(formData: FormData) {
         optionalDescrizione: r.optionalDescrizione,
         optionalPrezzo: r.optionalPrezzo,
         mostraDescrizione: r.mostraDescrizione,
+        allegaScheda: r.allegaScheda,
         misuraLarghezza: r.misuraLarghezza,
         misuraAltezza: r.misuraAltezza,
         descrizionePersonalizzata: r.descrizionePersonalizzata,
@@ -648,17 +649,16 @@ export async function aggiornaImmagineOfferta(formData: FormData) {
   revalidatePath(`/preventivi/${id}/stampa`);
 }
 
-// Schede tecniche da stampare in fondo all'offerta e da allegare all'email (richiesta di Ugo): valgono anche a offerta confermata,
-// non cambiano prezzi né condizioni.
-export async function aggiornaSchedeAllegate(formData: FormData) {
+// Spunta «allega la scheda tecnica» di un prodotto dell'offerta (richiesta di Ugo): la scheda del suo listino si stampa in fondo
+// all'offerta e parte con l'email. Non cambia prezzi né condizioni.
+export async function aggiornaSchedaRiga(formData: FormData) {
   const utente = await getCurrentUser();
   const id = str(formData, "id");
   if (!utente || !id) return;
-  const schede = [...new Set(formData.getAll("scheda").map(String).filter((x) => /^[A-Z0-9_]{1,40}$/.test(x)))];
-  await prisma.preventivo.update({ where: { id }, data: { schedeAllegate: schede } });
-  revalidatePath(`/preventivi/${id}`);
-  revalidatePath(`/preventivi/${id}/stampa`);
-  revalidatePath(`/preventivi/${id}/invia`);
+  const riga = await prisma.rigaPreventivo.update({ where: { id }, data: { allegaScheda: formData.get("allega") === "1" }, select: { preventivoId: true } });
+  revalidatePath(`/preventivi/${riga.preventivoId}`);
+  revalidatePath(`/preventivi/${riga.preventivoId}/stampa`);
+  revalidatePath(`/preventivi/${riga.preventivoId}/invia`);
 }
 
 // Azione dedicata per lo sconto, separata da "Condizioni offerta": vive accanto al
@@ -1189,6 +1189,7 @@ export async function duplicaRigaPreventivo(formData: FormData) {
       optionalDescrizione: riga.optionalDescrizione,
       optionalPrezzo: riga.optionalPrezzo,
       mostraDescrizione: riga.mostraDescrizione,
+      allegaScheda: riga.allegaScheda,
       misuraLarghezza: riga.misuraLarghezza,
       misuraAltezza: riga.misuraAltezza,
       descrizionePersonalizzata: riga.descrizionePersonalizzata,

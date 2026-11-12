@@ -32,7 +32,7 @@ const smtp = net.createServer((s) => {
 
 import { prisma } from "../../src/lib/prisma";
 import { inviaOffertaEmail, salvaFirma } from "../../src/app/offerte-email-actions";
-import { aggiornaSchedeAllegate } from "../../src/app/actions";
+import { aggiornaSchedaRiga } from "../../src/app/actions";
 import { codiceOfferta, leggiCodiceOfferta } from "../../src/lib/mail/link-offerta";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -114,14 +114,14 @@ async function main() {
   console.log("5. Scheda tecnica Optima allegata");
   process.env.SMTP_PORT = "2531";
   const finestra = await prisma.prodotto.create({ data: { brandId: brand.id, tipologia: "OPTIMA_F1A", colore: "STD", larghezzaMm: 800, altezzaMm: 1200, prezzoBase: 500 } });
-  await prisma.rigaPreventivo.create({ data: { preventivoId: off.id, prodottoId: finestra.id, quantita: 1, prezzoUnitario: 500 } });
-  await aggiornaSchedeAllegate(modulo({ id: off.id, scheda: ["OPTIMA", "x'; drop"] }));
-  verifica((await prisma.preventivo.findUnique({ where: { id: off.id } }))?.schedeAllegate.join() === "OPTIMA", "la spunta si salva (solo chiavi valide)");
+  const rigaOpt = await prisma.rigaPreventivo.create({ data: { preventivoId: off.id, prodottoId: finestra.id, quantita: 1, prezzoUnitario: 500 } });
+  await aggiornaSchedaRiga(modulo({ id: rigaOpt.id, allega: "1" }));
+  verifica((await prisma.rigaPreventivo.findUnique({ where: { id: rigaOpt.id } }))?.allegaScheda === true, "la spunta sul prodotto si salva");
   r = await redirectA(inviaOffertaEmail(modulo({ id: off.id, a: "mario@rossi.it", oggetto: "Con scheda", testo: "Ciao", firma: "", scheda: "OPTIMA" })));
   const conScheda = posta.at(-1)!;
   verifica(r?.includes("?inviata=") && /Scheda tecnica Optima 70\.pdf/.test(leggibile(conScheda.dati)) && conScheda.dati.length > 300_000, "il PDF della scheda parte con l'email", r);
-  await aggiornaSchedeAllegate(modulo({ id: off.id }));
-  verifica((await prisma.preventivo.findUnique({ where: { id: off.id } }))?.schedeAllegate.length === 0, "togliendo la spunta non si allega più");
+  await aggiornaSchedaRiga(modulo({ id: rigaOpt.id }));
+  verifica((await prisma.rigaPreventivo.findUnique({ where: { id: rigaOpt.id } }))?.allegaScheda === false, "togliendo la spunta non si allega più");
 
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
