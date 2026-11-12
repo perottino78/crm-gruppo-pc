@@ -6,6 +6,7 @@ import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } from "@/lib/prodotti";
 import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
+import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
@@ -212,6 +213,21 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
               {r.mostraDescrizione && r.descrizionePersonalizzata && (
                 <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{r.descrizionePersonalizzata}</p>
               )}
+              {/* descrizione tecnica breve del listino (es. Optima 70) e collegamento alla scheda tecnica */}
+              {r.mostraDescrizione && (() => {
+                const scheda = schedaCliente(r.prodotto.tipologia);
+                if (!scheda) return null;
+                return (
+                  <p className="text-xs text-neutral-600 mt-1 max-w-md">
+                    {!r.descrizionePersonalizzata && <>{scheda.descrizione} </>}
+                    {scheda.link && (
+                      <a href={scheda.link.url} target="_blank" rel="noopener" className="text-blue-700 underline whitespace-nowrap">
+                        📄 {scheda.link.nome}
+                      </a>
+                    )}
+                  </p>
+                );
+              })()}
             </div>
           </div>
         </td>

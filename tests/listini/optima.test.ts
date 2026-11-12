@@ -65,3 +65,11 @@ test("optional: pellicole +20%, satinato 90 € finestre / 150 € portefinestre
   assert.equal(visibili("OPTIMA_F1A").find((o) => o.nome.startsWith("Autoscala dal 3°"))?.valore, 700);
   assert.equal(new Set(opt.map((o) => `${o.listino}|${o.categoria}|${o.nome}`)).size, opt.length);
 });
+
+test("descrizione breve e scheda tecnica per il cliente nell'offerta", async () => {
+  const { schedaCliente } = await import("../../src/lib/preventivi/scheda-cliente");
+  const s = schedaCliente("OPTIMA_F2A");
+  assert.ok(s && /5 camere/.test(s.descrizione) && /Uf 1,3/.test(s.descrizione));
+  assert.equal(s?.link?.url, "/cataloghi/optima/Optima70-scheda-tecnica.pdf");
+  assert.equal(schedaCliente("FIDRA_F2A"), null);
+});
