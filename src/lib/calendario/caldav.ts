@@ -31,9 +31,27 @@ function errore(r: Response, cosa: string): Error {
   return new Error(`${cosa}: Nextcloud ha risposto ${r.status} ${r.statusText}`);
 }
 
+/**
+ * La cartella dei calendari chiesta a Nextcloud (current-user-principal): così funziona anche se per entrare si usa l'email
+ * invece del nome utente. Se Nextcloud non risponde come previsto si usa <server>/remote.php/dav/calendars/<utente>/.
+ */
+export async function trovaCartellaCalendari(c: ConfigDav): Promise<string> {
+  try {
+    const r = await richiesta(c, "PROPFIND", `${base(c.url)}/remote.php/dav/`,
+      `<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:current-user-principal/></d:prop></d:propfind>`, { Depth: "0" });
+    if (r.status === 401) throw errore(r, "Accesso");
+    if (r.status === 207) {
+      const xml = await r.text();
+      const id = xml.match(/current-user-principal[^>]*>\s*<(?:[a-z0-9]+:)?href>[^<]*\/principals\/users\/([^/<]+)\/?<\//i)?.[1];
+      if (id) return `${new URL(base(c.url)).origin}${new URL(base(c.url)).pathname.replace(/\/$/, "")}/remote.php/dav/calendars/${id}/`;
+    }
+  } catch (e) { if (e instanceof Error && e.message.includes("(401)")) throw e; }
+  return cartellaCalendari(c);
+}
+
 /** I calendari dell'utente (anche quelli condivisi con lui). */
 export async function elencaCalendari(c: ConfigDav): Promise<CalendarioDav[]> {
-  const r = await richiesta(c, "PROPFIND", cartellaCalendari(c),
+  const r = await richiesta(c, "PROPFIND", await trovaCartellaCalendari(c),
     `<?xml version="1.0"?><d:propfind xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav" xmlns:a="http://apple.com/ns/ical/"><d:prop><d:displayname/><d:resourcetype/><c:supported-calendar-component-set/><a:calendar-color/></d:prop></d:propfind>`,
     { Depth: "1" });
   if (r.status !== 207) throw errore(r, "Elenco dei calendari");

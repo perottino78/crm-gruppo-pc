@@ -16,8 +16,12 @@ const server = http.createServer((req, res) => {
   req.on("data", (d) => (corpo += d));
   req.on("end", () => {
     richieste.push(`${req.method} ${req.url}`);
-    if (req.headers.authorization !== `Basic ${Buffer.from("ugo:app-pass").toString("base64")}`) { res.writeHead(401); return res.end(); }
+    if (!["ugo", "ugo@gruppopec.com"].some((l) => req.headers.authorization === `Basic ${Buffer.from(`${l}:app-pass`).toString("base64")}`)) { res.writeHead(401); return res.end(); }
     const url = decodeURIComponent(req.url!.split("?")[0]);
+    if (req.method === "PROPFIND" && url === "/remote.php/dav/") {
+      res.writeHead(207, { "Content-Type": "application/xml" });
+      return res.end(`<?xml version="1.0"?><d:multistatus xmlns:d="DAV:"><d:response><d:href>/remote.php/dav/</d:href><d:propstat><d:prop><d:current-user-principal><d:href>/remote.php/dav/principals/users/ugo/</d:href></d:current-user-principal></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response></d:multistatus>`);
+    }
     if (req.method === "PROPFIND" && url === CAL) {
       res.writeHead(207, { "Content-Type": "application/xml" });
       return res.end(`<?xml version="1.0"?><d:multistatus xmlns:d="DAV:" xmlns:cal="urn:ietf:params:xml:ns:caldav"><d:response><d:href>${CAL}</d:href><d:propstat><d:prop><d:resourcetype><d:collection/></d:resourcetype></d:prop></d:propstat></d:response>` +
@@ -73,6 +77,8 @@ async function main() {
   console.log("1. Collegamento e abbinamento dei calendari");
   let x = await dove(salvaAccesso(fd({ url: "http://127.0.0.1:2600", utente: "ugo", password: "sbagliata" })));
   verifica(x?.includes("401"), "password sbagliata: messaggio chiaro", x);
+  x = await dove(salvaAccesso(fd({ url: "http://127.0.0.1:2600", utente: "ugo@gruppopec.com", password: "app-pass" })));
+  verifica(x?.includes("2 calendari trovati"), "si entra anche con l'email: la cartella dei calendari la dice Nextcloud", x);
   x = await dove(salvaAccesso(fd({ url: "http://127.0.0.1:2600/index.php/apps/calendar", utente: "ugo", password: "app-pass" })));
   let cfg = await configNextcloud();
   verifica(x?.includes("2 calendari trovati, 1 abbinati"), "trovati i calendari, Marco abbinato dal nome (anche con l'indirizzo copiato dal browser)", x);
