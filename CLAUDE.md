@@ -479,6 +479,19 @@ login nel `matcher` del middleware.
   € per lead/appuntamento/contratto, resa). Test `tests/marketing/svolta.test.ts`, collaudo `svolta-appuntamenti` (14).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
+## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
+Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:
+1. **Dati aziendali**: nel PDF tutti i dati diversi da quelli di P&C vanno tolti o corretti con quelli veri (`CEDENTE` in
+   `src/lib/fatturazione/tabelle.ts`: P&C srl unipersonale, Corso Moncenisio 28 Rosta, P.IVA 10741080013, tel. 011 19887497,
+   info@gruppopec.com, PEC gruppopec@cert.ica-net.it). Niente telefoni/REA segnaposto. Controllare ogni pagina (anche righe «Info tecniche»).
+2. **File**: PDF in `public/cataloghi/<listino>/` e pagine in JPG `public/cataloghi/<listino>/pagine/p-<n>.jpg`
+   (`pdftoppm -jpeg -jpegopt quality=80 -r 110 <pdf> <cartella>/pagine/p`).
+3. **Descrizione tecnica breve** per il cliente (3-4 righe dai dati della scheda) nel modulo del listino (es. `DESCRIZIONE_CLIENTE_OPTIMA`).
+4. **Una voce in `SCHEDE`** (`src/lib/preventivi/scheda-cliente.ts`): prefisso delle tipologie, chiave, nome, descrizione, PDF, numero pagine.
+   Da sola dà: riquadro nel configuratore per il commerciale, descrizione + link «📄 Scheda tecnica» sempre in stampa sotto il prodotto,
+   spunta «Allega la scheda tecnica» su ogni riga (stampa in fondo all'offerta + PDF allegato all'email).
+5. Test in `tests/listini/<listino>.test.ts` (schedaCliente della tipologia), screenshot, PR.
+
 ## Comandi
 ```bash
 npm install                     # genera anche il client Prisma
