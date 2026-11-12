@@ -10,6 +10,7 @@ import { SOTTOGRUPPO_PEDANE, labelPedana } from "@/lib/listini/pedane";
 import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { sottogruppoLatt, labelLatt } from "@/lib/listini/lattoneria";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
+import { eChirenti, labelChirenti } from "@/lib/listini/chirenti";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
@@ -2076,6 +2077,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
+  if (eChirenti(tipologia)) return labelChirenti(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("OPTIMA_")) return labelOptima(tipologia) ?? tipologia.replace(/_/g, " ");
   if (ePlasma30(tipologia)) return labelPlasma30(tipologia) ?? tipologia.replace(/_/g, " ");

@@ -17,6 +17,7 @@ import { listiniPlasma30, GUIDA_PLASMA30, CATALOGHI_PLASMA30, ePlasma30 } from "
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
 import { GUIDA_TAGLIO_FREDDO } from "@/lib/listini/taglio-freddo";
+import { eChirenti } from "@/lib/listini/chirenti";
 import { GUIDA_PEDANE } from "@/lib/listini/pedane";
 import { GUIDA_PAVGAL, listiniPavgal } from "@/lib/listini/pavimenti-galleggianti";
 import { listiniRasomuro, guidaRasomuro, CATALOGHI_RASOMURO } from "@/lib/listini/rasomuro";
@@ -428,11 +429,11 @@ export default async function PreventivoPage({
                   )}
                   <div>
                     <p className="font-medium">
-                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? "" : ` · ${prodotto.colore}`}
-                      {prodotto.tipologia.startsWith("TAGLIOFREDDO_") ? (r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null) : haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
+                      {prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("LATT_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") || eChirenti(prodotto.tipologia) ? labelBreveTipologia(prodotto.tipologia) : prodotto.tipologia}{prodotto.tipologia.startsWith("FIDRA_") ? " · Fidra" : prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_") || eChirenti(prodotto.tipologia) ? "" : ` · ${prodotto.colore}`}
+                      {prodotto.tipologia.startsWith("TAGLIOFREDDO_") || eChirenti(prodotto.tipologia) ? (r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null) : haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && ` · ${larghezzaMostrata}×${altezzaMostrata}${unit}`}
                       {prodotto.tipologia.startsWith("RASOMURO_") && r.misuraLarghezza ? ` · L ${r.misuraLarghezza} × H ${r.misuraAltezza} cm` : null}
                       {prodotto.tipologia.startsWith("LATT_") && r.misuraLarghezza ? ` · pezzi da ${r.misuraLarghezza} cm` : null}
-                      {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && !prodotto.tipologia.startsWith("TAGLIOFREDDO_") && (
+                      {r.misuraLarghezza && haMisura(prodotto.larghezzaMm, prodotto.altezzaMm) && !prodotto.tipologia.startsWith("TAGLIOFREDDO_") && !eChirenti(prodotto.tipologia) && (
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>

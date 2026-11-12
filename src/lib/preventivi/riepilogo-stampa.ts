@@ -13,6 +13,8 @@ export function nomeLeggibile(testo: string): string {
 export function coloreLeggibile(colore: string | null | undefined): string | null {
   const c = (colore ?? "").trim();
   if (!c || /^(-|—|std|standard|unico|n\.?d\.?|nessuno|default)$/i.test(c)) return null;
+  // le righe «tariffa» dei listini al m² / al metro (Scintilla, Brillante, taglio freddo, Chirenti…) non sono un colore
+  if (/^(tariffa\b|placeholder$)/i.test(c)) return null;
   return c;
 }
 
