@@ -10,6 +10,7 @@ import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/
 import { controllaRimbalzi } from "@/lib/mail/rimbalzi-server";
 import { filtriSituazione } from "./situazione";
 import { INTESTAZIONE } from "@/lib/mail/rimbalzi";
+import { assegnaGruppi } from "./abtest";
 
 /** L'indirizzo della scheda è quello già rimbalzato? (se qualcuno lo corregge, si torna a scrivergli) */
 const uguali = (a?: string | null, b?: string | null) => !!a && !!b && a.trim().toLowerCase() === b.trim().toLowerCase();
@@ -68,7 +69,17 @@ export async function accodaCampagna(campagnaId: string, adesso = new Date()): P
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id: campagnaId } });
   const clienti = await prisma.cliente.findMany({ where: { AND: [whereCampagna(await filtriCampagna(c)), whereRaggiungibile] }, select: { id: true, email: true, emailRimbalzata: true } });
   const validi = clienti.filter((x) => emailValida(x.email) && !rimbalzato(x));
-  const r = await prisma.campagnaInvio.createMany({ data: validi.map((x) => ({ campagnaId, clienteId: x.id, email: x.email!.trim().toLowerCase() })), skipDuplicates: true });
+  // A/B test: i nuovi contatti si dividono in parti uguali fra i gruppi (chi l'ha già ricevuta resta nel suo)
+  const varianti = c.abTest ? await prisma.campagnaVariante.findMany({ where: { campagnaId }, orderBy: { posizione: "asc" }, select: { id: true, _count: { select: { invii: true } } } }) : [];
+  let gruppo = new Map<string, number>();
+  if (varianti.length >= 2) {
+    const gia = new Set((await prisma.campagnaInvio.findMany({ where: { campagnaId }, select: { clienteId: true } })).map((x) => x.clienteId));
+    gruppo = assegnaGruppi(campagnaId, validi.filter((x) => !gia.has(x.id)).map((x) => x.id), varianti.map((v) => v._count.invii));
+  }
+  const r = await prisma.campagnaInvio.createMany({
+    data: validi.map((x) => ({ campagnaId, clienteId: x.id, email: x.email!.trim().toLowerCase(), varianteId: gruppo.has(x.id) ? varianti[gruppo.get(x.id)!].id : null })),
+    skipDuplicates: true,
+  });
   await prisma.campagna.update({ where: { id: campagnaId }, data: { stato: "IN_INVIO", inviataIl: c.inviataIl ?? adesso } });
   return r.count;
 }
@@ -97,10 +108,21 @@ export function emailCampagna(c: ContenutoCampagna, cliente: { id: string; nome:
   return { oggetto, testo, html };
 }
 
-export async function inviaProva(campagnaId: string, a: string): Promise<{ inviata: boolean; motivo?: string }> {
-  const c = await prisma.campagna.findUniqueOrThrow({ where: { id: campagnaId } });
-  const m = emailCampagna(c, { id: "prova", nome: "Mario Rossi" });
-  return inviaMail({ a: [a], oggetto: `[PROVA] ${m.oggetto}`, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti });
+/** Il contenuto da spedire: la versione del gruppo (A/B test) o quella della campagna; il tracciamento è sempre della campagna. */
+export const contenutoDi = (c: ContenutoCampagna, v?: { oggetto: string; preheader: string; formato: string; testo: string; html: string } | null): ContenutoCampagna =>
+  v ? { oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html, tracciamento: c.tracciamento } : c;
+
+/** Prova: una email per versione (con l'A/B test una per gruppo, con il nome del gruppo nell'oggetto). */
+export async function inviaProva(campagnaId: string, a: string): Promise<{ inviata: boolean; motivo?: string; quante?: number }> {
+  const c = await prisma.campagna.findUniqueOrThrow({ where: { id: campagnaId }, include: { varianti: { orderBy: { posizione: "asc" } } } });
+  const versioni = c.abTest && c.varianti.length ? c.varianti.map((v) => ({ tag: `[PROVA · ${v.nome}]`, cont: contenutoDi(c, v) })) : [{ tag: "[PROVA]", cont: contenutoDi(c) }];
+  let ultimo: { inviata: boolean; motivo?: string } = { inviata: false };
+  for (const x of versioni) {
+    const m = emailCampagna(x.cont, { id: "prova", nome: "Mario Rossi" });
+    ultimo = await inviaMail({ a: [a], oggetto: `${x.tag} ${m.oggetto}`, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti });
+    if (!ultimo.inviata) return ultimo;
+  }
+  return { ...ultimo, quante: versioni.length };
 }
 
 export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; motivo?: string };
@@ -144,7 +166,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
 
   // 2. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata)
   for (let i = 0; i < (opz.max ?? 40); i++) {
-    const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true } });
+    const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true, variante: true } });
     if (!inv) break;
     const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", tentativi: { increment: 1 } } });
     if (!preso.count) continue;
@@ -154,7 +176,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
       r.saltate++;
       continue;
     }
-    const m = emailCampagna(inv.campagna, cliente, `c-${inv.id}`);
+    const m = emailCampagna(contenutoDi(inv.campagna, inv.variante), cliente, `c-${inv.id}`);
     const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti, intestazioni: { [INTESTAZIONE]: `c-${inv.id}` } });
     if (esito.inviata) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });

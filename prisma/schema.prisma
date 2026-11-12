@@ -1720,20 +1720,20 @@ model AumentoListino {
 // Una campagna: filtri dei destinatari (marchio, stato, tipo, provenienza…), testo e scadenza.
 // Gli invii sono in coda (CampagnaInvio) e partono a blocchi; 3-2-1 giorni prima della scadenza arriva l'avviso di aggiornarla.
 model Campagna {
-  id                    String          @id @default(cuid())
+  id                    String             @id @default(cuid())
   nome                  String
-  oggetto               String          @default("")
-  testo                 String          @default("")
+  oggetto               String             @default("")
+  testo                 String             @default("")
   // Anteprima mostrata dai programmi di posta accanto all'oggetto (preheader)
-  preheader             String          @default("")
+  preheader             String             @default("")
   // TESTO = testo semplice nella grafica P&C; HTML = template HTML incollato o caricato
-  formato               String          @default("TESTO")
-  html                  String          @default("")
+  formato               String             @default("TESTO")
+  html                  String             @default("")
   // Tracciamento di aperture (pixel invisibile) e clic sui link
-  tracciamento          Boolean         @default(true)
-  marchi                String[]        @default([])
-  stati                 String[]        @default([]) // statoLead (es. "Non interessato", "VISITATO"); "(nessuno)" = senza stato
-  categorie             String[]        @default([]) // Lead | Cliente | Account
+  tracciamento          Boolean            @default(true)
+  marchi                String[]           @default([])
+  stati                 String[]           @default([]) // statoLead (es. "Non interessato", "VISITATO"); "(nessuno)" = senza stato
+  categorie             String[]           @default([]) // Lead | Cliente | Account
   provenienza           String?
   commercialeId         String?
   provincia             String?
@@ -1743,34 +1743,58 @@ model Campagna {
   offerteDal            DateTime?
   offerteAl             DateTime?
   // Chi clicca sull'email diventa una chiamata nei «Task di oggi» della telefonista (lead «Da recuperare»)
-  richiama              Boolean         @default(false)
+  richiama              Boolean            @default(false)
   richiamaTelefonistaId String?
   validaFino            DateTime?
-  stato                 String          @default("BOZZA") // BOZZA | IN_INVIO | INVIATA
-  promemoriaInviati     String[]        @default([]) // giorni alla scadenza già avvisati, es. ["3","2"]
+  stato                 String             @default("BOZZA") // BOZZA | IN_INVIO | INVIATA
+  promemoriaInviati     String[]           @default([]) // giorni alla scadenza già avvisati, es. ["3","2"]
   creataDa              String?
   inviataIl             DateTime?
-  createdAt             DateTime        @default(now())
-  updatedAt             DateTime        @default(now()) @updatedAt
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @default(now()) @updatedAt
   invii                 CampagnaInvio[]
+  // A/B test (richiesta di Rocco): il pubblico si divide in parti uguali fra i gruppi, ognuno con la sua versione dell'email
+  abTest                Boolean            @default(false)
+  varianti              CampagnaVariante[]
+}
+
+// Un gruppo dell'A/B test: nome e versione dell'email (oggetto, preheader, corpo in testo o HTML)
+model CampagnaVariante {
+  id         String          @id @default(cuid())
+  campagna   Campagna        @relation(fields: [campagnaId], references: [id], onDelete: Cascade)
+  campagnaId String
+  posizione  Int             @default(0)
+  nome       String          @default("")
+  oggetto    String          @default("")
+  preheader  String          @default("")
+  formato    String          @default("TESTO")
+  testo      String          @default("")
+  html       String          @default("")
+  createdAt  DateTime        @default(now())
+  invii      CampagnaInvio[]
+
+  @@index([campagnaId])
 }
 
 model CampagnaInvio {
-  id         String    @id @default(cuid())
-  campagna   Campagna  @relation(fields: [campagnaId], references: [id], onDelete: Cascade)
+  id         String            @id @default(cuid())
+  campagna   Campagna          @relation(fields: [campagnaId], references: [id], onDelete: Cascade)
   campagnaId String
   clienteId  String
   email      String
-  stato      String    @default("IN_ATTESA") // IN_ATTESA | INVIATA | FALLITA | SOPPRESSA
+  stato      String            @default("IN_ATTESA") // IN_ATTESA | INVIATA | FALLITA | SOPPRESSA
   motivo     String?
-  tentativi  Int       @default(0)
+  tentativi  Int               @default(0)
   inviataIl  DateTime?
   // Tracciamento: prima apertura / primo clic e quante volte
   apertaIl   DateTime?
-  aperture   Int       @default(0)
+  aperture   Int               @default(0)
   clicIl     DateTime?
-  clic       Int       @default(0)
-  createdAt  DateTime  @default(now())
+  clic       Int               @default(0)
+  createdAt  DateTime          @default(now())
+  // A/B test: il gruppo (versione dell'email) a cui è toccato questo contatto
+  variante   CampagnaVariante? @relation(fields: [varianteId], references: [id], onDelete: SetNull)
+  varianteId String?
 
   // un cliente riceve una campagna una volta sola (tabella nuova: il vincolo non tocca dati esistenti)
   @@unique([campagnaId, clienteId])

@@ -5,10 +5,13 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
-import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne } from "@/app/campagne-actions";
-import { contaDestinatari, filtriCampagna, emailCampagna } from "@/lib/campagne/motore";
+import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest } from "@/app/campagne-actions";
+import { contaDestinatari, filtriCampagna, emailCampagna, contenutoDi } from "@/lib/campagne/motore";
 import { CATEGORIE, SENZA_STATO, SITUAZIONI, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 import CampiEmail from "@/components/campagne/CampiEmail";
+import GruppiAB from "@/components/campagne/GruppiAB";
+import FormAutoSalva from "@/components/FormAutoSalva";
+import BottoneConferma from "@/components/BottoneConferma";
 
 const perc = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : "—");
 const quando = (d: Date | null) => (d ? d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "");
@@ -22,7 +25,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   if (!(await puoFareCampagne(u))) notFound();
   const { id } = await params;
   const p = await searchParams;
-  const c = await prisma.campagna.findUnique({ where: { id }, include: { invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
+  const c = await prisma.campagna.findUnique({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" }, include: { _count: { select: { invii: true } } } }, invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true, varianteId: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
   if (!c) notFound();
   const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" }, select: { nome: true } }),
@@ -35,14 +38,21 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   ]);
   const n = (s: string) => c.invii.filter((i) => i.stato === s).length;
   const g = c.validaFino ? giorniAllaScadenza(c.validaFino, new Date()) : null;
-  const anteprima = emailCampagna(c, { id: "anteprima", nome: "Mario Rossi" });
+  const ab = c.abTest && c.varianti.length > 0;
+  const anteprime = ab ? c.varianti.map((v) => ({ nome: v.nome, preheader: v.preheader, m: emailCampagna(contenutoDi(c, v), { id: "anteprima", nome: "Mario Rossi" }) })) : [{ nome: "", preheader: c.preheader, m: emailCampagna(c, { id: "anteprima", nome: "Mario Rossi" }) }];
   const stati = [...perStato.filter((s) => s.statoLead).map((s) => ({ v: s.statoLead!, n: s._count._all })), { v: SENZA_STATO, n: perStato.filter((s) => !s.statoLead).reduce((t, s) => t + s._count._all, 0) }];
 
   return (
     <div className="max-w-5xl space-y-4">
       <div>
         <Link href="/campagne" className="btn-indietro">← Campagne</Link>
-        <h1 className="text-2xl font-bold text-neutral-900">📣 {c.nome}</h1>
+        <FormAutoSalva key={c.nome} action={rinominaCampagna} className="mt-2 flex items-center gap-2">
+          <input type="hidden" name="id" value={c.id} />
+          <span className="text-2xl">{c.abTest ? "🧪" : "📣"}</span>
+          <input name="nome" defaultValue={c.nome} required maxLength={150} aria-label="Nome della campagna" title="Clicca per cambiare il nome: si salva da solo"
+            className="w-full min-w-0 rounded border border-transparent bg-transparent px-1 text-2xl font-bold text-neutral-900 hover:border-neutral-300 focus:border-teal-500 focus:bg-white focus:outline-none" />
+          <span className="shrink-0 text-xs text-neutral-500">✏️ clicca per rinominare</span>
+        </FormAutoSalva>
         <p className="text-sm text-neutral-600">
           {c.stato === "BOZZA" ? "Bozza" : c.stato === "IN_INVIO" ? "In invio" : "Inviata"}{c.creataDa ? ` · creata da ${c.creataDa}` : ""}
           {g !== null && <span className={g <= 3 ? " text-red-700 font-semibold" : ""}> · {g < 0 ? "scaduta" : `scade ${testoGiorni(g)}`}</span>}
@@ -99,9 +109,26 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
 
         <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
           <p className="font-semibold">2. L&apos;email</p>
-          <label className="text-xs text-neutral-600 block">Nome della campagna (interno)<input name="nome" defaultValue={c.nome} className={`${inp} w-full`} /></label>
-          <label className="text-xs text-neutral-600 block">Oggetto<input name="oggetto" defaultValue={c.oggetto} placeholder="es. {nome}, la tua pergola con lo sconto in fattura" className={`${inp} w-full`} /></label>
-          <CampiEmail preheader={c.preheader} formato={c.formato} testo={c.testo} html={c.html} tracciamento={c.tracciamento} />
+          {c.abTest ? (
+            <div className="space-y-3 rounded-lg border border-purple-200 bg-purple-50/40 p-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm"><b>🧪 A/B test</b>: chi rientra nei filtri qui sopra viene diviso in parti uguali fra i gruppi; ogni gruppo riceve la sua versione dell&apos;email. Poi in «Com&apos;è andata» vedi quale funziona meglio.</p>
+                {c.invii.length === 0 && <button formAction={impostaAbTest} name="attivo" value="0" className="btn-3d btn-3d-outline px-3 py-1 text-xs">Torna a un&apos;email unica</button>}
+              </div>
+              <GruppiAB contatti={conti.raggiungibili} iniziali={c.varianti.map((v) => ({ id: v.id, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html, usato: v._count.invii > 0 }))} />
+              <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="tracciamento" defaultChecked={c.tracciamento} /> 📈 Traccia aperture e clic (serve per capire quale gruppo funziona meglio)</label>
+            </div>
+          ) : (
+            <>
+              <label className="text-xs text-neutral-600 block">Oggetto<input name="oggetto" defaultValue={c.oggetto} placeholder="es. {nome}, la tua pergola con lo sconto in fattura" className={`${inp} w-full`} /></label>
+              <CampiEmail preheader={c.preheader} formato={c.formato} testo={c.testo} html={c.html} tracciamento={c.tracciamento} />
+              <div className="flex flex-wrap items-center gap-2 rounded border border-dashed border-purple-300 bg-purple-50/40 px-3 py-2 text-sm">
+                <span>🧪 Vuoi provare versioni diverse (oggetto, preheader, testo) su gruppi di contatti?</span>
+                <button formAction={impostaAbTest} name="attivo" value="1" className="btn-3d btn-3d-purple px-3 py-1 text-xs">Fai un A/B test</button>
+                <span className="text-[11px] text-neutral-500">(salva prima le modifiche: la versione salvata diventa il punto di partenza di ogni gruppo)</span>
+              </div>
+            </>
+          )}
           <label className="text-xs text-neutral-600 block">Valida fino al
             <input type="date" name="validaFino" defaultValue={c.validaFino ? chiaveGiorno(c.validaFino) : ""} className={`${inp} ml-2`} />
             <span className="ml-2 font-normal text-neutral-500">prima della scadenza arriva l&apos;avviso di aggiornarla (giorni e destinatari in Impostazioni › Email automatiche)</span>
@@ -122,13 +149,15 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
 
       <div className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <p className="font-semibold">3. Prova e invio</p>
-        <details open>
-          <summary className="text-sm cursor-pointer">Anteprima com&apos;è salvata (con un nome di esempio)</summary>
-          <div className="mt-2 rounded-lg border border-neutral-200 bg-neutral-50 p-2">
-            <p className="text-sm"><b>{anteprima.oggetto || "— oggetto mancante —"}</b> <span className="text-neutral-500">— {c.preheader || <i>senza preheader</i>}</span></p>
-            <iframe title="Anteprima dell'email" srcDoc={anteprima.html} sandbox="" className="mt-2 h-[520px] w-full rounded border border-neutral-200 bg-white" />
-          </div>
-        </details>
+        {anteprime.map((a, i) => (
+          <details key={i} open={i === 0}>
+            <summary className="text-sm cursor-pointer">Anteprima {a.nome ? <b>{a.nome}</b> : null} com&apos;è salvata (con un nome di esempio)</summary>
+            <div className="mt-2 rounded-lg border border-neutral-200 bg-neutral-50 p-2">
+              <p className="text-sm"><b>{a.m.oggetto || "— oggetto mancante —"}</b> <span className="text-neutral-500">— {a.preheader || <i>senza preheader</i>}</span></p>
+              <iframe title={`Anteprima dell'email ${a.nome}`} srcDoc={a.m.html} sandbox="" className="mt-2 h-[520px] w-full rounded border border-neutral-200 bg-white" />
+            </div>
+          </details>
+        ))}
         <div className="flex flex-wrap items-end gap-2">
           <form action={provaCampagna} className="flex items-end gap-2">
             <input type="hidden" name="id" value={c.id} />
@@ -140,7 +169,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             <button className="btn-3d btn-3d-orange text-sm px-4 py-2">{c.stato === "BOZZA" ? `📤 Invia a ${conti.raggiungibili} contatti` : "📤 Invia ai nuovi che rientrano nei filtri"}</button>
           </form>
           <form action={duplicaCampagna}><input type="hidden" name="id" value={c.id} /><button className="btn-3d btn-3d-outline text-sm px-3 py-2">Duplica</button></form>
-          {c.stato === "BOZZA" && <form action={eliminaCampagna}><input type="hidden" name="id" value={c.id} /><button className="text-sm text-red-700 underline px-2">Elimina bozza</button></form>}
+          <form action={eliminaCampagna}><input type="hidden" name="id" value={c.id} /><BottoneConferma messaggio={c.invii.length ? `Eliminare «${c.nome}»? Spariscono anche le statistiche e gli invii ancora in coda non partono.` : `Eliminare «${c.nome}»?`} className="text-sm text-red-700 underline px-2">🗑 Elimina</BottoneConferma></form>
         </div>
         <p className="text-xs text-neutral-600">Salva prima di inviare. Le email partono a blocchi da {"promozionale@gruppopec.com"}, ognuna con il link per disiscriversi; chi l&apos;ha già ricevuta non la riceve due volte.</p>
         {c.invii.length > 0 && (
@@ -160,6 +189,33 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
                 <div key={t} className="rounded-lg border border-neutral-200 p-3"><div className="text-[11px] font-bold uppercase text-neutral-500">{t}</div><div className="text-2xl font-extrabold tabular-nums">{v}</div><div className="text-xs text-neutral-600">{d}</div></div>
               ))}
             </div>
+            {ab && (() => {
+              const righe = c.varianti.map((v) => {
+                const suoi = inviate.filter((i) => i.varianteId === v.id);
+                const ap = suoi.filter((i) => i.apertaIl).length, cl = suoi.filter((i) => i.clicIl).length;
+                return { v, n: suoi.length, ap, cl, tasso: suoi.length ? cl / suoi.length : 0 };
+              });
+              const meglio = righe.reduce((m, r) => (r.n && r.tasso > (m?.tasso ?? -1) ? r : m), null as (typeof righe)[number] | null);
+              return (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead><tr className="text-left text-xs text-neutral-500"><th className="py-1">Gruppo</th><th>Oggetto</th><th className="text-right">Inviate</th><th className="text-right">Aperte</th><th className="text-right">Clic</th></tr></thead>
+                    <tbody>
+                      {righe.map((r) => (
+                        <tr key={r.v.id} className={`border-t border-neutral-100 ${meglio?.v.id === r.v.id && r.cl > 0 ? "bg-green-50" : ""}`}>
+                          <td className="py-1 font-semibold">{r.v.nome}{meglio?.v.id === r.v.id && r.cl > 0 ? " 🏆" : ""}</td>
+                          <td className="max-w-[260px] truncate text-neutral-600">{r.v.oggetto}</td>
+                          <td className="text-right tabular-nums">{r.n}</td>
+                          <td className="text-right tabular-nums">{r.ap} · {perc(r.ap, r.n)}</td>
+                          <td className="text-right tabular-nums font-semibold">{r.cl} · {perc(r.cl, r.n)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="mt-1 text-[11px] text-neutral-500">🏆 = il gruppo con più clic in proporzione. Con pochi invii la differenza può essere solo fortuna: conta di più su qualche centinaio di contatti per gruppo.</p>
+                </div>
+              );
+            })()}
             {!c.tracciamento && <p className="text-xs text-amber-800">Il tracciamento di aperture e clic è spento per questa campagna.</p>}
             <details>
               <summary className="cursor-pointer text-sm">Destinatari ({inviate.length}): prima chi ha cliccato, poi chi ha aperto</summary>
