@@ -58,6 +58,9 @@ model Utente {
   mustChangePassword     Boolean           @default(true)
   // Link privato del calendario personale (feed .ics da aggiungere a telefono / Google / Outlook)
   calendarioToken        String?
+  // Calendario (Impostazioni › Utenti): colore scelto per la persona (#rrggbb, vuoto = automatico) e se compare nel calendario
+  coloreCalendario       String?
+  inCalendario           Boolean           @default(true)
   // ATTIVO | PAUSA (assente per un periodo) | DISATTIVATO (ha lasciato l'azienda). Chi non è attivo non entra nel CRM
   // e non compare nelle tendine per assegnare lavoro nuovo; i suoi dati (offerte, clienti, storico) restano.
   stato                  String            @default("ATTIVO")
@@ -597,18 +600,22 @@ model RigaOptional {
 
 // tipo attivita: EMAIL | CHIAMATA | NOTA | TASK | APPUNTAMENTO
 model Attivita {
-  id          String    @id @default(cuid())
-  cliente     Cliente   @relation(fields: [clienteId], references: [id])
-  clienteId   String
-  tipo        String
-  oggetto     String
-  descrizione String?
-  dataOra     DateTime  @default(now())
-  scadenza    DateTime?
-  completata  Boolean   @default(false)
-  utente      Utente?   @relation(fields: [utenteId], references: [id])
-  utenteId    String?
-  createdAt   DateTime  @default(now())
+  id           String    @id @default(cuid())
+  cliente      Cliente   @relation(fields: [clienteId], references: [id])
+  clienteId    String
+  tipo         String
+  oggetto      String
+  descrizione  String?
+  dataOra      DateTime  @default(now())
+  scadenza     DateTime?
+  completata   Boolean   @default(false)
+  utente       Utente?   @relation(fields: [utenteId], references: [id])
+  utenteId     String?
+  // task dalla scheda cliente: chi lo ha creato e quando è stato fatto
+  creatoDaId   String?
+  creatoDaNome String?
+  completataIl DateTime?
+  createdAt    DateTime  @default(now())
 }
 
 // Scheda tecnica condivisa per tutte le varianti dimensionali di una tipologia

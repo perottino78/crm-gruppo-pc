@@ -125,3 +125,16 @@ export async function eliminaUtente(fd: FormData) {
   revalidatePath("/impostazioni");
   redirect(`/commerciali?ok=${encodeURIComponent(`${u.nome} eliminato.`)}`);
 }
+
+/** Calendario della persona (Impostazioni › Utenti): se compare nel calendario del team e con quale colore (vuoto = automatico). */
+export async function salvaCalendarioUtente(fd: FormData) {
+  await amministratore();
+  const id = str(fd, "utenteId"), ritorno = str(fd, "ritorno");
+  if (!id) return;
+  const colore = fd.get("automatico") === "1" ? null : str(fd, "colore");
+  if (colore && !/^#[0-9a-f]{6}$/i.test(colore)) torna(ritorno, { errore: "Colore non valido." });
+  await prisma.utente.update({ where: { id }, data: { inCalendario: fd.get("inCalendario") === "1", coloreCalendario: colore ? colore.toLowerCase() : null } });
+  aggiorna(id);
+  revalidatePath("/calendario");
+  torna(ritorno, { ok: "Calendario salvato" });
+}

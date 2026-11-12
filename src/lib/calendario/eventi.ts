@@ -15,6 +15,8 @@ export type EventoCal = {
   cliente?: string | null;
   luogo?: string | null;
   note?: string | null;
+  /** telefono del cliente, per la ricerca veloce del calendario */
+  telefono?: string | null;
   utenteId?: string | null;
   chi?: string | null;
   stato: string;
@@ -35,11 +37,34 @@ export function schiarisci(hex: string, quanto = 0.82): string {
 }
 
 /** Colore di ogni persona (sempre lo stesso finché l'elenco del team non cambia): in ordine di nome. */
-export function coloriPersone(ids: string[]): Map<string, { colore: string; chiaro: string }> {
-  return new Map(ids.map((id, i) => {
-    const colore = PALETTE_PERSONE[i % PALETTE_PERSONE.length];
-    return [id, { colore, chiaro: schiarisci(colore) }];
+export function coloriPersone(persone: (string | { id: string; colore?: string | null })[]): Map<string, { colore: string; chiaro: string }> {
+  // il colore scelto in Impostazioni › Utenti vince; gli altri prendono in ordine i colori della tavolozza non ancora usati
+  const lista = persone.map((p) => (typeof p === "string" ? { id: p, colore: null } : p));
+  const valido = (c?: string | null) => (c && /^#[0-9a-f]{6}$/i.test(c) ? c.toLowerCase() : null);
+  const usati = new Set(lista.map((p) => valido(p.colore)).filter(Boolean));
+  const liberi = PALETTE_PERSONE.filter((c) => !usati.has(c.toLowerCase()));
+  let i = 0;
+  return new Map(lista.map((p) => {
+    const colore = valido(p.colore) ?? (liberi.length ? liberi[i++ % liberi.length] : PALETTE_PERSONE[i++ % PALETTE_PERSONE.length]);
+    return [p.id, { colore, chiaro: schiarisci(colore) }];
   }));
+}
+
+const normalizza = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/** Ricerca veloce del calendario (la lente): tutte le parole devono trovarsi fra cliente, titolo, luogo (paese, città, via),
+ *  note, incaricato e telefono; nei numeri contano solo le cifre («333 12 34» trova «3331234…»). */
+export function cercaEventi(eventi: EventoCal[], q: string): EventoCal[] {
+  const parole = normalizza(q).split(/\s+/).filter(Boolean);
+  if (!parole.length) return [];
+  return eventi.filter((e) => {
+    const testo = normalizza([e.titolo, e.cliente, e.luogo, e.note, e.chi, e.telefono].filter(Boolean).join(" "));
+    const cifre = testo.replace(/\D/g, "");
+    const cifreQ = normalizza(q).replace(/\D/g, "");
+    // ricerca di un numero di telefono (almeno 5 cifre e niente lettere): confronto sulle sole cifre
+    if (cifreQ.length >= 5 && !/[a-z]/.test(normalizza(q))) return cifre.includes(cifreQ);
+    return parole.every((w) => testo.includes(w));
+  });
 }
 
 /** Colori di un evento: quelli della persona se ci sono, altrimenti grigio. */
