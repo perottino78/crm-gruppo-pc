@@ -31,6 +31,9 @@ export const GRUPPI_VETRATE: Record<string, string> = {
   "VETRATE FISSO": "Fisso",
   // Porte a vetro (vetro e alluminio / tutto vetro): famiglia a parte dentro VETRATE.
   "VETRATE PORTE": "Porte a vetro",
+  // Vetrate con vetrocamera di Chirenti (src/lib/listini/chirenti.ts)
+  "VETRATE BOOK PRO CAM": "Book Pro Cam (a libro, vetrocamera)",
+  "VETRATE SOLCO PRO CAM": "Solco Pro Cam (scorrevole, vetrocamera)",
 };
 
 // Listino Work&Service (posa/rilievo/servizi, vedi task #280): i 24 "gruppo" con cui

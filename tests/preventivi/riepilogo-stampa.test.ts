@@ -20,3 +20,10 @@ test("elenco puntato nell'ordine tipo, colore, misure, optional", () => {
   assert.equal(v[3].valore, "Strip LED 5 m (1×)");
   assert.deepEqual(vociRiepilogo({ colore: "std" }), []);
 });
+
+test("le righe «tariffa al m²» dei listini non diventano un colore", async () => {
+  const { coloreLeggibile } = await import("../../src/lib/preventivi/riepilogo-stampa");
+  assert.equal(coloreLeggibile("TARIFFA AL M²"), null);
+  assert.equal(coloreLeggibile("TARIFFA AL METRO LINEARE"), null);
+  assert.equal(coloreLeggibile("RAL 9016"), "RAL 9016");
+});

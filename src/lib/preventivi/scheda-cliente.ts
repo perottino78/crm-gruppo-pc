@@ -3,6 +3,7 @@
 // con l'email. Modulo puro (anche nel browser): per aggiungere un listino basta una voce in SCHEDE, con il PDF in public/cataloghi/<listino>/
 // e le pagine come immagini in public/cataloghi/<listino>/pagine/p-<n>.jpg (pdftoppm -jpeg -jpegopt quality=80 -r 110 <pdf> <cartella>/p).
 import { PREFISSO_OPTIMA, DESCRIZIONE_CLIENTE_OPTIMA, CATALOGHI_OPTIMA } from "../listini/optima";
+import { SCHEDE_CHIRENTI } from "../listini/chirenti";
 import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
 
 export type SchedaCliente = {
@@ -32,6 +33,11 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
     prefisso: PREFISSO_PLASMA30_TV,
     scheda: { chiave: "PLASMA30", nome: CATALOGHI_PLASMA30[0].nome, descrizione: DESCRIZIONE_CLIENTE_PLASMA30_TV, pdf: CATALOGHI_PLASMA30[0].url, pagine: pagine("/cataloghi/plasma30", 16) },
   },
+  // Vetrate Chirenti (Book Pro Cam / Solco Pro Cam): scheda tecnica del sito chirenti.it, una per sistema (temperato e stratificato insieme)
+  ...Object.values(SCHEDE_CHIRENTI).map((c) => ({
+    prefisso: `VETRATA_${c.chiave}_`,
+    scheda: { chiave: c.chiave, nome: c.nome, descrizione: c.descrizione, pdf: c.pdf, pagine: pagine(c.cartella, c.pagine) },
+  })),
 ];
 
 /** La scheda per il cliente del modello, o null se il listino non ne ha una. */
