@@ -43,6 +43,12 @@ export const GUIDA_OPTIMA =
 
 export const CATALOGHI_OPTIMA = [{ nome: "Scheda tecnica Optima 70", url: "/cataloghi/optima/Optima70-scheda-tecnica.pdf" }];
 
+/** Descrizione tecnica breve per il cliente, stampata nell'offerta sotto l'elenco puntato (richiesta di Ugo, dalla scheda tecnica v3). */
+export const DESCRIZIONE_CLIENTE_OPTIMA =
+  "Serramento in PVC Optima 70: profilo a 5 camere isolanti (classe A, EN 12608), profondità 70 mm, rinforzi in acciaio zincato, " +
+  "doppia guarnizione EPDM. Trasmittanza telaio Uf 1,3 W/m²K (finestra Uw ≈ 1,1 con vetro basso emissivo), isolamento acustico fino a 45 dB. " +
+  "Aria classe 4, acqua 9A, vento C4. Marcatura CE EN 14351-1, colore garantito 10 anni.";
+
 /** Pellicole del listino (tutte +20% sul bianco massa). */
 export const PELLICOLE_OPTIMA = [
   "Rovere gold (AP 23)", "Noce gold (AP 27)", "Rovere grigio (AP 94)", "Bianco frassinato (AP 44)", "Oregon (AP 15)",

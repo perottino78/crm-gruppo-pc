@@ -340,7 +340,9 @@ login nel `matcher` del middleware.
   satinato 90 €/anta finestre e 150 €/anta portefinestre, maniglia passante 500 € su tutte, motore wasistas 350, antifurto 45, foro passagatto 150, traversi 90/120,
   pannello fisso 100 (portefinestre), oltre misura 300 €/10 cm, minimo di produzione 450, trasporto fuori sagoma 350, autoscala 700/900 (+500 suolo pubblico), ENEA 350,
   smaltimento cartongesso 300/m², smontaggio veranda 500 a corpo (listini `OPTIMA`, `OPTIMA_F`, `OPTIMA_PF`, `OPTIMA_WAS`; `listiniOptima`). Disegni = quelli di Fidra,
-  scheda tecnica in `public/cataloghi/optima/` (attenzione: il piè di pagina del PDF ha telefono/REA segnaposto e una P.IVA diversa da quella di P&C).
+  scheda tecnica in `public/cataloghi/optima/` (v3, piè di pagina corretto con i dati di P&C srl). Nell'offerta stampata sotto l'elenco puntato:
+  descrizione tecnica breve `DESCRIZIONE_CLIENTE_OPTIMA` (se la riga non ha un testo personalizzato) e link «📄 Scheda tecnica» (`src/lib/preventivi/scheda-cliente.ts`,
+  una voce per listino in `SCHEDE`); `/cataloghi` è pubblico nel middleware perché il cliente lo apre dal link dell'offerta.
   Rotta `api/admin/seed-optima` (GET prova, POST carica, rilanciabile). Test `tests/listini/optima.test.ts`, collaudo `optima` (9).
 - **Porte a vetro per vetrate** (OUTDOOR › VETRATE › «Porte a vetro», gruppo modello `VETRATE PORTE` in `GRUPPI_VETRATE`): `PORTAVETRO_PAL` (vetro e
   alluminio, varianti telaio 3/4 lati) e `PORTAVETRO_PTV` (tutto vetro), prezzo fisso = listino fornitore +60% (`src/lib/listini/porte-vetro.ts`, test
@@ -478,7 +480,7 @@ login nel `matcher` del middleware.
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 337, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 338, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
