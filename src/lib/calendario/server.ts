@@ -17,7 +17,11 @@ const telCliente = (c: { cellulare?: string | null; telefono?: string | null }) 
 export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | null; tipi?: TipoEvento[] }): Promise<EventoCal[]> {
   const vuoi = (t: TipoEvento) => !o.tipi || o.tipi.includes(t);
   const u = o.utenteId ?? undefined;
+<<<<<<< HEAD
   const [app, ril, pose, ass, riu, est] = await Promise.all([
+=======
+  const [app, ril, pose, ass, riu] = await Promise.all([
+>>>>>>> origin/claude/clever-feynman-b637mq
     vuoi("APPUNTAMENTO")
       ? prisma.appuntamento.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { utenteId: u } : {}) }, include: { cliente: true, utente: true } })
       : [],
@@ -33,10 +37,13 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
     vuoi("RIUNIONE")
       ? prisma.riunione.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { partecipanti: { has: u } } : {}) } })
       : [],
+<<<<<<< HEAD
     // impegni scritti solo sui calendari Nextcloud (smart working, fiere…): sola lettura
     vuoi("ESTERNO")
       ? prisma.eventoNextcloud.findMany({ where: { chiave: null, inizio: { lt: o.a }, fine: { gt: o.da }, ...(u ? { utenteId: u } : {}) }, take: 2000 })
       : [],
+=======
+>>>>>>> origin/claude/clever-feynman-b637mq
   ]);
   const nomi = riu.length ? new Map((await prisma.utente.findMany({ where: { id: { in: [...new Set(riu.flatMap((r) => r.partecipanti))] } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome])) : new Map<string, string>();
   const out: EventoCal[] = [
@@ -100,6 +107,7 @@ export function daAssistenza(a: AssConDati): EventoCal {
   };
 }
 
+<<<<<<< HEAD
 type Est = Awaited<ReturnType<typeof prisma.eventoNextcloud.findFirstOrThrow>>;
 export function daEsterno(x: Est, chi: string | null): EventoCal {
   return {
@@ -108,6 +116,8 @@ export function daEsterno(x: Est, chi: string | null): EventoCal {
   };
 }
 
+=======
+>>>>>>> origin/claude/clever-feynman-b637mq
 type Riu = Awaited<ReturnType<typeof prisma.riunione.findFirstOrThrow>>;
 export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>): EventoCal {
   const altri = r.partecipanti.filter((p) => p !== utenteId).map((p) => nomi.get(p)).filter(Boolean);
@@ -120,7 +130,10 @@ export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>):
 
 /** Invito (o annullamento) della riunione a tutti i partecipanti: ognuno lo riceve sul suo calendario. Non blocca mai. */
 export async function invitaRiunione(id: string, metodo: "REQUEST" | "CANCEL" = "REQUEST"): Promise<{ inviati: string[]; motivo?: string }> {
+<<<<<<< HEAD
   await import("./nextcloud").then((m) => m.sincronizzaDopoRisposta()).catch(() => undefined);
+=======
+>>>>>>> origin/claude/clever-feynman-b637mq
   const r = await prisma.riunione.findUnique({ where: { id } });
   if (!r) return { inviati: [], motivo: "riunione non trovata" };
   const persone = await prisma.utente.findMany({ where: { id: { in: r.partecipanti } }, select: { id: true, nome: true, email: true } });
