@@ -75,10 +75,10 @@ test("descrizione breve e scheda tecnica per il cliente nell'offerta", async () 
   assert.equal(schedaCliente("FIDRA_F2A"), null);
 });
 
-test("schede da allegare: una per listino e solo se il prodotto è ancora nell'offerta", async () => {
+test("schede da allegare: solo quelle dei prodotti spuntati, una per listino", async () => {
   const { schedeDelleTipologie, schedeDaAllegare } = await import("../../src/lib/preventivi/scheda-cliente");
   assert.deepEqual(schedeDelleTipologie(["OPTIMA_F1A", "FIDRA_F1A", "OPTIMA_PF2A", null]).map((s) => s.chiave), ["OPTIMA"]);
-  assert.equal(schedeDaAllegare(["OPTIMA"], ["OPTIMA_F1A"]).length, 1);
-  assert.equal(schedeDaAllegare(["OPTIMA"], ["FIDRA_F1A"]).length, 0);
-  assert.equal(schedeDaAllegare([], ["OPTIMA_F1A"]).length, 0);
+  assert.equal(schedeDaAllegare([{ tipologia: "OPTIMA_F1A", allegaScheda: true }, { tipologia: "OPTIMA_PF2A", allegaScheda: true }]).length, 1);
+  assert.equal(schedeDaAllegare([{ tipologia: "OPTIMA_F1A", allegaScheda: false }]).length, 0);
+  assert.equal(schedeDaAllegare([{ tipologia: "FIDRA_F1A", allegaScheda: true }]).length, 0);
 });

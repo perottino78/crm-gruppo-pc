@@ -1,11 +1,11 @@
 // Schede tecniche dei listini per il cliente (richiesta di Ugo, nov 2026): descrizione tecnica breve e link nell'offerta stampata,
-// riquadro nel configuratore per il commerciale, spunta «allega» che stampa le pagine della scheda in fondo all'offerta e manda il PDF
+// riquadro nel configuratore per il commerciale, spunta «allega» su ogni prodotto dell'offerta che stampa le pagine della scheda in fondo all'offerta e manda il PDF
 // con l'email. Modulo puro (anche nel browser): per aggiungere un listino basta una voce in SCHEDE, con il PDF in public/cataloghi/<listino>/
 // e le pagine come immagini in public/cataloghi/<listino>/pagine/p-<n>.jpg (pdftoppm -jpeg -jpegopt quality=80 -r 110 <pdf> <cartella>/p).
 import { PREFISSO_OPTIMA, DESCRIZIONE_CLIENTE_OPTIMA, CATALOGHI_OPTIMA } from "../listini/optima";
 
 export type SchedaCliente = {
-  /** chiave salvata in Preventivo.schedeAllegate */
+  /** chiave del listino (una scheda per listino) */
   chiave: string;
   nome: string;
   descrizione: string;
@@ -39,7 +39,7 @@ export function schedeDelleTipologie(tipologie: (string | null | undefined)[]): 
   return [...viste.values()];
 }
 
-/** Le schede spuntate che valgono ancora (il prodotto è ancora nell'offerta). */
-export function schedeDaAllegare(spuntate: string[], tipologie: (string | null | undefined)[]): SchedaCliente[] {
-  return schedeDelleTipologie(tipologie).filter((s) => spuntate.includes(s.chiave));
+/** Le schede da stampare e allegare: quelle dei prodotti con la spunta «allega», una volta ciascuna. */
+export function schedeDaAllegare(righe: { tipologia?: string | null; allegaScheda: boolean }[]): SchedaCliente[] {
+  return schedeDelleTipologie(righe.filter((r) => r.allegaScheda).map((r) => r.tipologia));
 }
