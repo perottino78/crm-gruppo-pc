@@ -43,27 +43,17 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
     <div className="max-w-5xl">
       <h1 className="text-2xl font-bold text-neutral-900 mb-6">Impostazioni</h1>
 
-      <h2 className="text-base font-bold text-neutral-900 mb-3">Configurazione listino e IVA</h2>
-      <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100 mb-8">
-        {config.map((c) => (
-          <form
-            key={c.id}
-            action={aggiornaConfigurazione}
-            className="flex items-center justify-between px-4 py-3 text-sm gap-3"
-          >
-            <input type="hidden" name="id" value={c.id} />
-            <span className="text-neutral-700">{c.chiave}</span>
-            <div className="flex items-center gap-2">
-              <input
-                name="valore"
-                defaultValue={c.valore}
-                className="border border-neutral-200 rounded px-2 py-1 text-sm w-28 text-right"
-              />
-              <button className="text-xs text-blue-600 underline">salva</button>
-            </div>
-          </form>
-        ))}
-      </div>
+      {/* valori di configurazione: listino e IVA a portata di mano, il resto (chiavi tecniche dei collegamenti) chiuso in fondo; i valori cifrati non si mostrano */}
+      <details className="mb-4 rounded-lg border border-neutral-200 bg-white">
+        <summary className="cursor-pointer px-4 py-3 text-base font-bold text-neutral-900">💶 Listino e IVA <span className="text-xs font-normal text-neutral-500">(aliquote IVA e ricarico) · apri per modificare</span></summary>
+        <RigheConfigurazione righe={config.filter((c) => eListinoIva(c.chiave))} />
+      </details>
+      {admin && (
+        <details className="mb-8 rounded-lg border border-neutral-200 bg-white">
+          <summary className="cursor-pointer px-4 py-3 text-sm font-bold text-neutral-700">⚙️ Valori tecnici <span className="text-xs font-normal text-neutral-500">(usati dai collegamenti e dalle automazioni: da toccare solo se te lo dico io)</span></summary>
+          <RigheConfigurazione righe={config.filter((c) => !eListinoIva(c.chiave) && !c.valore.startsWith("v1:"))} />
+        </details>
+      )}
 
       {admin && (
         <section id="assistenza" className="mb-8 rounded-lg border border-red-200 bg-white px-4 py-3">
@@ -369,6 +359,26 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
           </form>
         </>
       )}
+    </div>
+  );
+}
+
+const eListinoIva = (k: string) => k.startsWith("aliquota_") || k.startsWith("coefficiente_") || k.includes("ricarico") || k.includes("iva");
+
+function RigheConfigurazione({ righe }: { righe: { id: string; chiave: string; valore: string }[] }) {
+  if (righe.length === 0) return <p className="px-4 pb-3 text-sm text-neutral-500">Nessun valore.</p>;
+  return (
+    <div className="divide-y divide-neutral-100 border-t border-neutral-100">
+      {righe.map((c) => (
+        <form key={c.id} action={aggiornaConfigurazione} className="flex items-center justify-between gap-3 px-4 py-2 text-sm">
+          <input type="hidden" name="id" value={c.id} />
+          <span className="min-w-0 truncate text-neutral-700">{c.chiave}</span>
+          <div className="flex shrink-0 items-center gap-2">
+            <input name="valore" defaultValue={c.valore} className="w-40 rounded border border-neutral-200 px-2 py-1 text-right text-sm" />
+            <button className="text-xs text-blue-600 underline">salva</button>
+          </div>
+        </form>
+      ))}
     </div>
   );
 }
