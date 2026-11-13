@@ -47,6 +47,9 @@ END:VCALENDAR</cal:calendar-data></d:prop><d:status>HTTP/1.1 200 OK</d:status></
 test("abbinamento calendario → persona", () => {
   const utenti = [{ id: "m", nome: "Marco Piccatti" }, { id: "p", nome: "Gian Paolo Visconti" }, { id: "g", nome: "massimo giordano" }];
   assert.equal(personaDelCalendario("Massimo+Porcu+BCONSOLE"), "Massimo Porcu");
+  assert.equal(personaDelCalendario("Massimo+Porcu+BCONSOLE+%28Importazione+Google+Calendar%29"), "Massimo Porcu");
+  assert.equal(personaDelCalendario("Paolo Visconti BCONSOLE (Importazione Google Calendar)"), "Paolo Visconti");
+  assert.equal(abbinaCalendario("Paolo Visconti BCONSOLE (Importazione Google Calendar)", utenti), "p");
   assert.equal(abbinaCalendario("Marco Piccatti BCONSOLE", utenti), "m");
   assert.equal(abbinaCalendario("Paolo Visconti BCONSOLE", utenti), "p");
   assert.equal(abbinaCalendario("massimo giordano BCONSOLE", utenti), "g", "maiuscole e minuscole");

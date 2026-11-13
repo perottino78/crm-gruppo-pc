@@ -11,7 +11,7 @@ import { calendarioIcs } from "./ics";
 import { eventiPeriodo, voceIcs } from "./server";
 import type { EventoCal } from "./eventi";
 import { cancellaEvento, elencaCalendari, esisteEvento, leggiPeriodo, scriviEvento, type ConfigDav } from "./caldav";
-import { chiaveDaUid, eDiOne, uidOne, decisione } from "./ical";
+import { abbinaCalendario, chiaveDaUid, eDiOne, uidOne, decisione } from "./ical";
 
 export const CHIAVI_NC = { url: "nextcloud_url", utente: "nextcloud_utente", password: "nextcloud_password", calendari: "nextcloud_calendari", stato: "nextcloud_stato", ultima: "nextcloud_ultima" } as const;
 export type CalendarioAbbinato = { href: string; nome: string; utenteId: string | null; scrivi: boolean };
@@ -64,6 +64,18 @@ export async function sincronizzaNextcloud(opz: { forza?: boolean; adesso?: Date
     const da = new Date(ora.getTime() - 7 * 86_400_000), a = new Date(ora.getTime() + 120 * 86_400_000);
     const r = { scritti: 0, aggiornati: 0, cancellati: 0, daNextcloud: [] as string[], esterni: 0, errori: [] as string[] };
     const dav = cfg.dav;
+    // calendari ancora senza persona: si riprova l'abbinamento per nome (es. dopo che il nome «(Importazione Google Calendar)» si legge bene);
+    // quelli abbinati a mano non si toccano
+    if (cfg.calendari.some((c) => !c.utenteId)) {
+      const utenti = await prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true } });
+      let cambiati = 0;
+      for (const c of cfg.calendari) {
+        if (c.utenteId) continue;
+        const id = abbinaCalendario(c.nome, utenti);
+        if (id) { c.utenteId = id; cambiati++; }
+      }
+      if (cambiati) await salvaCalendariNextcloud(cfg.calendari);
+    }
     for (const cal of cfg.calendari.filter((c) => c.utenteId)) {
       try {
         const remoti = await leggiPeriodo(dav, cal.href, da, a);
