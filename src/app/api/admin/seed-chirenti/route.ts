@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { FORNITORE_CHIRENTI, PREFISSO_CHIRENTI, RICARICO_CHIRENTI, SISTEMI_CHIRENTI, descrizioneChirenti, eChirenti, optionalChirenti, partiChirenti, prodottiChirenti } from "@/lib/listini/chirenti";
+import { AREA_MINIMA_CHIRENTI, FORNITORE_CHIRENTI, PREFISSO_CHIRENTI, RICARICO_CHIRENTI, SISTEMI_CHIRENTI, descrizioneChirenti, eChirenti, optionalChirenti, partiChirenti, prodottiChirenti } from "@/lib/listini/chirenti";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -58,13 +58,14 @@ async function esegui(prova: boolean) {
   if (!prova) {
     for (const tipologia of [...new Set(righe.map((r) => r.tipologia))]) {
       const s = SISTEMI_CHIRENTI[partiChirenti(tipologia)!.sistema];
-      const dati = { descrizioneTecnica: descrizioneChirenti(tipologia) ?? "", famiglia: "OUTDOOR", gruppo: s.gruppo, immagineUrl: s.foto, modalitaCalcolo: "MQ_CON_MINIMI", parametriCalcolo: { arrotondamentoCm: 5 } };
-      const acquisto = { fornitoreId: fornitore!.id, codiceFornitore: `${s.nome.toUpperCase()} ${partiChirenti(tipologia)!.vetro === "TEMP" ? "CAMERA TEMP" : "CAMERA STRAT"}`, scontoAcquisto: Math.round((1 - 1 / RICARICO_CHIRENTI) * 100) };
+      const dati = { descrizioneTecnica: descrizioneChirenti(tipologia) ?? "", famiglia: "OUTDOOR", gruppo: s.gruppo, immagineUrl: s.foto, modalitaCalcolo: "MQ_CON_MINIMI", parametriCalcolo: { arrotondamentoCm: 5, areaMinimaM2: AREA_MINIMA_CHIRENTI } };
+      const acquisto = { fornitoreId: fornitore!.id, codiceFornitore: `${s.nome.toUpperCase()} ${partiChirenti(tipologia)!.vetro === "TEMP" ? "CAMERA TEMP" : "CAMERA STRAT"}`, scontoAcquisto: Math.round((1 - 1 / RICARICO_CHIRENTI) * 10000) / 100 };
       const e = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: brand.id, tipologia } } });
       if (!e) await prisma.modelloProdotto.create({ data: { brandId: brand.id, tipologia, ...dati, ...acquisto } });
       else await prisma.modelloProdotto.update({
         where: { id: e.id },
-        data: { ...dati, ...(e.fornitoreId ? {} : { fornitoreId: acquisto.fornitoreId }), ...(e.codiceFornitore ? {} : { codiceFornitore: acquisto.codiceFornitore }), ...(e.scontoAcquisto != null ? {} : { scontoAcquisto: acquisto.scontoAcquisto }) },
+        data: { ...dati, ...(e.fornitoreId ? {} : { fornitoreId: acquisto.fornitoreId }), ...(e.codiceFornitore ? {} : { codiceFornitore: acquisto.codiceFornitore }), // lo sconto d'acquisto si aggiorna anche se è quello messo da questa rotta con il vecchio ricarico ×2 (50%); uno scritto a mano resta
+          ...(e.scontoAcquisto != null && e.scontoAcquisto !== 50 ? {} : { scontoAcquisto: acquisto.scontoAcquisto }) },
       });
     }
   }

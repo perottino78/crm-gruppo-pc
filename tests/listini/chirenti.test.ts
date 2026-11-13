@@ -7,17 +7,17 @@ test("costo al m² ricostruisce gli imponibili dei preventivi Chirenti (2500 × 
   assert.equal(Math.round(costoMqChirenti("TEMP") * MQ_RIFERIMENTO_CHIRENTI), 2300); // Book temperato 26-3694
   assert.equal(Math.round(costoMqChirenti("STRAT") * MQ_RIFERIMENTO_CHIRENTI), 1985); // Book stratificato 26-3694a
   const serratura = optionalChirenti().find((o) => o.nome.startsWith("Serratura"))!;
-  assert.equal(Math.round(costoMqChirenti("STRAT") * 6 + serratura.valore / 2), 2045); // Solco stratificato + serratura 26-3694b
+  assert.equal(Math.round(costoMqChirenti("STRAT") * 6 + serratura.valore / 3.2), 2045); // Solco stratificato + serratura 26-3694b
 });
 
-test("vendita al m² e optional (ricarico 2)", () => {
-  assert.equal(venditaMqChirenti("TEMP"), 767);
-  assert.equal(venditaMqChirenti("STRAT"), 662);
+test("vendita al m² e optional (ricarico 3,2)", () => {
+  assert.equal(venditaMqChirenti("TEMP"), 1227);
+  assert.equal(venditaMqChirenti("STRAT"), 1059);
   const p = prodottiChirenti();
   assert.equal(p.length, 4);
-  assert.deepEqual(p.map((x) => `${x.tipologia}=${x.prezzoBase}`).sort(), ["VETRATA_BOOKPROCAM_STRAT=662", "VETRATA_BOOKPROCAM_TEMP=767", "VETRATA_SOLCOPROCAM_STRAT=662", "VETRATA_SOLCOPROCAM_TEMP=767"]);
+  assert.deepEqual(p.map((x) => `${x.tipologia}=${x.prezzoBase}`).sort(), ["VETRATA_BOOKPROCAM_STRAT=1059", "VETRATA_BOOKPROCAM_TEMP=1227", "VETRATA_SOLCOPROCAM_STRAT=1059", "VETRATA_SOLCOPROCAM_TEMP=1227"]);
   const o = optionalChirenti();
-  assert.equal(o.find((x) => x.nome.startsWith("Serratura"))?.valore, 120);
+  assert.equal(o.find((x) => x.nome.startsWith("Serratura"))?.valore, 192);
   assert.ok(o.filter((x) => x.gruppo === "VETRATE BOOK PRO CAM").every((x) => !x.nome.startsWith("Serratura")), "la serratura è solo del Solco");
 });
 
