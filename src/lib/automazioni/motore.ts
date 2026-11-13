@@ -358,6 +358,7 @@ export function eseguiDopoRisposta() {
       await eseguiInviiScaduti().catch(() => undefined);
       await eseguiCampagne().catch(() => undefined);
       await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch(() => undefined);
+      await import("@/lib/calendario/google").then((m) => m.sincronizzaGoogle()).catch(() => undefined);
     });
   } catch {
     // fuori dal contesto di una richiesta Next: ci penserà il controllo periodico

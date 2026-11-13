@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
   // «nonscrivere»: toglie la spunta «Scrivi qui» a tutti i calendari e cancella da Nextcloud gli impegni scritti da P&C ONE
   if (q.get("azione") === "nonscrivere") {
     const cfg = await configNextcloud();
-    const scritti = await prisma.eventoNextcloud.findMany({ where: { chiave: { not: null } }, select: { id: true, href: true } });
+    const scritti = await prisma.eventoNextcloud.findMany({ where: { chiave: { not: null }, NOT: { calendario: { startsWith: "google:" } } }, select: { id: true, href: true } });
     let tolti = 0; const errori: string[] = [];
     if (!prova) {
       await salvaCalendariNextcloud(cfg.calendari.map((c) => ({ ...c, scrivi: false })));
