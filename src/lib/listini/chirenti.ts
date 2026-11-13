@@ -9,7 +9,9 @@ export const SCONTO_CHIRENTI = 0.5; // sconto fornitore sul listino (VEPA ed alt
 export const IMBALLO_CHIRENTI = 200; // casse di legno con vetro, a spedizione
 export const TRASPORTO_CHIRENTI = 150; // trasporto standard in Piemonte (con vostro muletto), a spedizione
 export const MQ_RIFERIMENTO_CHIRENTI = 6; // 2500 × 2400 mm dei preventivi: imballo e trasporto spalmati su questi m²
-export const RICARICO_CHIRENTI = 2; // vendita = costo × 2 (come lattoneria e pedane); si cambia qui e si rilancia la rotta
+export const RICARICO_CHIRENTI = 3.2; // vendita = costo × 3,2 (scelta di Ugo, 13/11/2026: come le porte a vetro, listino +60%); si cambia qui e si rilancia la rotta
+/** Superficie minima fatturabile (m²) per tutti e due i sistemi: imballo e trasporto sono a spedizione, anche per una vetrata piccola. */
+export const AREA_MINIMA_CHIRENTI = 3;
 
 /** Listino Chirenti €/m² (prezzo pieno prima dello sconto) dai preventivi: 3.900 € e 3.270 € per 6 m². */
 export const LISTINO_MQ_CHIRENTI = { TEMP: 650, STRAT: 545 } as const;
@@ -77,7 +79,7 @@ export function descrizioneChirenti(tipologia: string): string | null {
   if (!p) return null;
   const s = SISTEMI_CHIRENTI[p.sistema];
   return `${s.testo} Vetro: ${VETRI_CHIRENTI[p.vetro].toLowerCase()} da ${s.spessore} mm. ` +
-    `PREZZO: ${venditaMqChirenti(p.vetro)} €/m² sulla superficie (larghezza e altezza arrotondate per eccesso ai 5 cm), già compresi imballo in casse di legno e trasporto. ` +
+    `PREZZO: ${venditaMqChirenti(p.vetro)} €/m² sulla superficie (larghezza e altezza arrotondate per eccesso ai 5 cm, minimo fatturabile ${AREA_MINIMA_CHIRENTI} m²), già compresi imballo in casse di legno e trasporto. ` +
     `Binari oltre 3 m: vengono tagliati, interi con supplemento di trasporto. Consegna del fornitore entro 30 giorni lavorativi dall'ordine.` +
     (s.daPreventivo.includes(p.vetro) ? "" : " Prezzo stimato (stessa differenza fra temperato e stratificato del Book Pro Cam): da confermare con Chirenti.");
 }
@@ -144,5 +146,5 @@ export const SCHEDE_CHIRENTI = {
   SOLCOPROCAM: { chiave: "SOLCOPROCAM", nome: "Scheda tecnica Solco Pro Cam", pdf: "/cataloghi/solco-pro-cam/solco-pro-cam.pdf", cartella: "/cataloghi/solco-pro-cam", pagine: 1, descrizione: DESCRIZIONE_CLIENTE_SOLCO },
 } as const;
 
-export const GUIDA_CHIRENTI = "Prezzo al m² con imballo e trasporto compresi: scrivi larghezza e altezza del vano in cm (arrotondate ai 5 cm). " +
+export const GUIDA_CHIRENTI = `Prezzo al m² con imballo e trasporto compresi: scrivi larghezza e altezza del vano in cm (arrotondate ai 5 cm, minimo fatturabile ${AREA_MINIMA_CHIRENTI} m²). ` + +
   "Colori di serie senza sovrapprezzo; la serratura con cilindro (solo Solco) si aggiunge negli optional.";

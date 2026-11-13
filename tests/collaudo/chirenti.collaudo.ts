@@ -37,8 +37,8 @@ async function main() {
   verifica((await prisma.prodotto.findFirst({ where: { tipologia: "VETRATA_SCINTILLA" } }))?.prezzoBase === 640, "Scintilla non toccata");
 
   const m = await prisma.modelloProdotto.findFirstOrThrow({ where: { tipologia: "VETRATA_BOOKPROCAM_TEMP" } });
-  verifica(m.gruppo === "VETRATE BOOK PRO CAM" && m.modalitaCalcolo === "MQ_CON_MINIMI" && m.immagineUrl === "/immagini/vetrate/book-pro-cam.jpg" && m.fornitoreId === f[0].id && m.scontoAcquisto === 50,
-    "modello con foto, al m², fornitore Chirenti e costo d'acquisto (50%)", m);
+  verifica(m.gruppo === "VETRATE BOOK PRO CAM" && m.modalitaCalcolo === "MQ_CON_MINIMI" && m.immagineUrl === "/immagini/vetrate/book-pro-cam.jpg" && m.fornitoreId === f[0].id && m.scontoAcquisto === 68.75 && (m.parametriCalcolo as { areaMinimaM2?: number })?.areaMinimaM2 === 3,
+    "modello con foto, al m² (minimo 3 m²), fornitore Chirenti e costo d'acquisto (vendita ÷ 3,2)", m);
   const albero = await tassonomiaListino(b.id);
   const vet = albero.find((x) => x.nome === "OUTDOOR")?.gruppi.find((gr) => gr.nome === "VETRATE");
   const nomi = vet?.sottogruppi?.map((s) => s.nome) ?? [];
@@ -46,18 +46,22 @@ async function main() {
 
   const c = await prisma.cliente.create({ data: { nome: "Robusti", brandId: b.id } });
   const pr = await prisma.preventivo.create({ data: { clienteId: c.id, brandId: b.id, commercialeId: u.id } });
-  // Solco stratificato 250 × 240 cm = 6 m² × 662 = 3.972 € (+ serratura 120)
+  // Solco stratificato 250 × 240 cm = 6 m² × 1.059 = 6.354 € (+ serratura 192)
   await aggiungiRigaPreventivoPerMisura(fd({ preventivoId: pr.id, brandId: b.id, tipologia: "VETRATA_SOLCOPROCAM_STRAT", larghezza: "250", altezza: "240", quantita: "1" }));
   const riga = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: pr.id } });
-  verifica(Math.abs(riga.prezzoUnitario - 3972) < 0.01, "Solco stratificato 250×240 cm → 6 m² a 3.972 €", riga.prezzoUnitario);
+  verifica(Math.abs(riga.prezzoUnitario - 6354) < 0.01, "Solco stratificato 250×240 cm → 6 m² a 6.354 €", riga.prezzoUnitario);
   const ser = await prisma.optional.findFirstOrThrow({ where: { nome: { startsWith: "Serratura" }, gruppiApplicabili: { has: "VETRATE SOLCO PRO CAM" } } });
   await aggiungiOptionalARiga(fd({ preventivoId: pr.id, rigaId: riga.id, optionalId: ser.id, quantita: "1" }));
   const p = await prisma.preventivo.findUniqueOrThrow({ where: { id: pr.id } });
-  verifica(Math.abs(p.totaleNetto - 4092) < 0.02, "con la serratura con cilindro: 4.092 €", p.totaleNetto);
-  // Book temperato 247 × 238 → 250 × 240 (arrotondato ai 5 cm) = 6 m² × 767 = 4.602 €
+  verifica(Math.abs(p.totaleNetto - 6546) < 0.02, "con la serratura con cilindro: 6.546 €", p.totaleNetto);
+  // Book temperato 247 × 238 → 250 × 240 (arrotondato ai 5 cm) = 6 m² × 1.227 = 7.362 €
   await aggiungiRigaPreventivoPerMisura(fd({ preventivoId: pr.id, brandId: b.id, tipologia: "VETRATA_BOOKPROCAM_TEMP", larghezza: "247", altezza: "238", quantita: "1" }));
   const r3 = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: pr.id, prodotto: { tipologia: "VETRATA_BOOKPROCAM_TEMP" } } });
-  verifica(Math.abs(r3.prezzoUnitario - 4602) < 0.01, "Book temperato 247×238 cm → arrotondato 250×240 → 4.602 €", r3.prezzoUnitario);
+  verifica(Math.abs(r3.prezzoUnitario - 7362) < 0.01, "Book temperato 247×238 cm → arrotondato 250×240 → 7.362 €", r3.prezzoUnitario);
+  // vetrata piccola 120 × 150 cm = 1,8 m² → fatturati i 3 m² minimi × 1.059 = 3.177 €
+  await aggiungiRigaPreventivoPerMisura(fd({ preventivoId: pr.id, brandId: b.id, tipologia: "VETRATA_BOOKPROCAM_STRAT", larghezza: "120", altezza: "150", quantita: "1" }));
+  const r4 = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: pr.id, prodotto: { tipologia: "VETRATA_BOOKPROCAM_STRAT" } } });
+  verifica(Math.abs(r4.prezzoUnitario - 3177) < 0.01, "120×150 cm (1,8 m²) → minimo fatturabile 3 m² = 3.177 €", r4.prezzoUnitario);
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
