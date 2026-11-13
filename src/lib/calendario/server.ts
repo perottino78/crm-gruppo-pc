@@ -33,7 +33,7 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
     vuoi("RIUNIONE")
       ? prisma.riunione.findMany({ where: { dataOra: { gte: new Date(o.da.getTime() - 12 * 3600_000), lt: o.a }, ...(u ? { partecipanti: { has: u } } : {}) } })
       : [],
-    // impegni scritti solo sui calendari Nextcloud (smart working, fiere…): sola lettura
+    // impegni scritti solo sui calendari esterni (Google: «occupato», ferie, fiere…; prima Nextcloud): sola lettura
     vuoi("ESTERNO")
       ? prisma.eventoNextcloud.findMany({ where: { chiave: null, inizio: { lt: o.a }, fine: { gt: o.da }, ...(u ? { utenteId: u } : {}) }, take: 2000 })
       : [],
@@ -121,6 +121,7 @@ export function daRiunione(r: Riu, utenteId: string, nomi: Map<string, string>):
 /** Invito (o annullamento) della riunione a tutti i partecipanti: ognuno lo riceve sul suo calendario. Non blocca mai. */
 export async function invitaRiunione(id: string, metodo: "REQUEST" | "CANCEL" = "REQUEST"): Promise<{ inviati: string[]; motivo?: string }> {
   await import("./nextcloud").then((m) => m.sincronizzaDopoRisposta()).catch(() => undefined);
+  await import("./google").then((m) => m.sincronizzaGoogleDopoRisposta()).catch(() => undefined);
   const r = await prisma.riunione.findUnique({ where: { id } });
   if (!r) return { inviati: [], motivo: "riunione non trovata" };
   const persone = await prisma.utente.findMany({ where: { id: { in: r.partecipanti } }, select: { id: true, nome: true, email: true } });
@@ -188,6 +189,7 @@ async function evento(chiave: string): Promise<{ e: EventoCal; emailUtente: stri
 export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" = "REQUEST", opz: { soloEmail?: string } = {}): Promise<{ inviati: string[]; motivo?: string }> {
   // ogni cambio d'impegno va anche sui calendari Nextcloud (dopo la risposta all'utente)
   await import("./nextcloud").then((m) => m.sincronizzaDopoRisposta()).catch(() => undefined);
+  await import("./google").then((m) => m.sincronizzaGoogleDopoRisposta()).catch(() => undefined);
   const x = await evento(chiave);
   if (!x) return { inviati: [], motivo: "evento non trovato" };
   const { e } = x;

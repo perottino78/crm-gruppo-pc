@@ -69,7 +69,7 @@ export async function sincronizzaOra() {
 export async function scollegaNextcloud() {
   await chi();
   await prisma.configurazione.deleteMany({ where: { chiave: { in: Object.values(CHIAVI_NC) } } });
-  await prisma.eventoNextcloud.deleteMany({});
+  await prisma.eventoNextcloud.deleteMany({ where: { NOT: { calendario: { startsWith: "google:" } } } }); // quelli di Google restano
   revalidatePath(PAGINA);
   vai({ ok: "Nextcloud scollegato. Sui calendari Nextcloud non è stato cancellato nulla." });
 }

@@ -85,6 +85,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
 
+      {puo(utenteCorrente, "calendario.google") && (
+        <Link href="/impostazioni/google" className="block bg-white rounded-lg border border-blue-300 px-4 py-3 mb-4 hover:border-blue-500">
+          <span className="text-base font-bold text-neutral-900">📅 Google Calendar →</span>
+          <span className="block text-xs text-neutral-600">I calendari «BCONSOLE» dei colleghi su Google: gli appuntamenti nuovi di P&amp;C ONE vanno lì, e chi si segna «occupato» su Google risulta occupato anche qui.</span>
+        </Link>
+      )}
+
       {puo(utenteCorrente, "calendario.nextcloud") && (
         <Link href="/impostazioni/nextcloud" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-4 hover:border-neutral-400">
           <span className="text-base font-bold text-neutral-900">🗓️ Calendari Nextcloud →</span>

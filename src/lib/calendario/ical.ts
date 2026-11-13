@@ -113,7 +113,7 @@ export function personaDelCalendario(nome: string): string {
   let n = nome.replace(/\+/g, " ");
   try { n = decodeURIComponent(n); } catch { /* nome con un «%» vero: resta com'è */ }
   // «Paolo Visconti BCONSOLE (Importazione Google Calendar)»: la parte fra parentesi non è il nome
-  return n.replace(/\([^)]*\)/g, " ").replace(/\b(bconsole|calendario|calendar|crm|p&c one)\b/gi, " ").replace(/\s+/g, " ").trim();
+  return n.replace(/\([^)]*\)/g, " ").replace(/\b(bconsole|finale|calendario|calendar|crm|p&c one)\b/gi, " ").replace(/\s+/g, " ").trim();
 }
 
 /** Proposta di abbinamento calendario → persona del team (stesso nome in qualsiasi ordine, anche più corto). */
