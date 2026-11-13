@@ -108,8 +108,13 @@ export function leggiCalendari(xml: string): CalendarioDav[] {
   return out;
 }
 
-/** Nome della persona dal nome del calendario: «Marco Piccatti BCONSOLE» → «Marco Piccatti»; «Massimo+Porcu+BCONSOLE» → «Massimo Porcu». */
-export const personaDelCalendario = (nome: string) => nome.replace(/\+/g, " ").replace(/\b(bconsole|calendario|calendar|crm|p&c one)\b/gi, " ").replace(/\s+/g, " ").trim();
+/** Nome della persona dal nome del calendario: «Marco Piccatti BCONSOLE» → «Marco Piccatti»; «Massimo+Porcu+BCONSOLE+%28Importazione+Google+Calendar%29» → «Massimo Porcu». */
+export function personaDelCalendario(nome: string): string {
+  let n = nome.replace(/\+/g, " ");
+  try { n = decodeURIComponent(n); } catch { /* nome con un «%» vero: resta com'è */ }
+  // «Paolo Visconti BCONSOLE (Importazione Google Calendar)»: la parte fra parentesi non è il nome
+  return n.replace(/\([^)]*\)/g, " ").replace(/\b(bconsole|calendario|calendar|crm|p&c one)\b/gi, " ").replace(/\s+/g, " ").trim();
+}
 
 /** Proposta di abbinamento calendario → persona del team (stesso nome in qualsiasi ordine, anche più corto). */
 export function abbinaCalendario(nome: string, utenti: { id: string; nome: string }[]): string | null {
