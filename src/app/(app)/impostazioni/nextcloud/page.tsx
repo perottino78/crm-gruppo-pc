@@ -17,6 +17,8 @@ export default async function NextcloudPage({ searchParams }: { searchParams: Pr
   if (!u) redirect("/login");
   if (!puo(u, "calendario.nextcloud")) redirect("/impostazioni");
   const p = await searchParams;
+  // Nextcloud sostituito da Google Calendar (13/11/2026): senza un collegamento attivo si va alla pagina di Google
+  if (!(await configNextcloud()).dav && !p.ok && !p.errore) redirect("/impostazioni/google");
   const [cfg, utenti] = await Promise.all([configNextcloud(), prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } })]);
   return (
     <div className="max-w-4xl space-y-4">
