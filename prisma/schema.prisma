@@ -1745,6 +1745,8 @@ model Campagna {
   // Chi clicca sull'email diventa una chiamata nei «Task di oggi» della telefonista (lead «Da recuperare»)
   richiama              Boolean            @default(false)
   richiamaTelefonistaId String?
+  /// id di altre campagne: chi le ha già ricevute non riceve questa (richiesta di Ugo, nov 2026)
+  escludiCampagne       String[]           @default([])
   validaFino            DateTime?
   stato                 String             @default("BOZZA") // BOZZA | PROGRAMMATA | IN_INVIO | INVIATA
   // Invio programmato: alla data e ora (di Roma) la campagna parte da sola (stato PROGRAMMATA → IN_INVIO)

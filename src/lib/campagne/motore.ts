@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { inviaMail, invioMassivoPossibile, APP_URL } from "@/lib/mail/invio";
 import { servizioInvio } from "@/lib/mail/servizio";
 import { CONTATTI, htmlEmail, testoEmail, type EmailPronta } from "@/lib/automazioni/email";
-import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, type FiltriCampagna } from "./regole";
+import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, conEsclusi, STATI_RICEVUTA, type FiltriCampagna } from "./regole";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/mail/tracciamento";
 import { controllaRimbalzi } from "@/lib/mail/rimbalzi-server";
@@ -47,8 +47,13 @@ export const filtriDi = (c: { marchi: string[]; stati: string[]; categorie: stri
   ({ marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia });
 
 /** Filtri della campagna compresa la situazione (offerta non chiusa, ha comprato…), che va calcolata sul database. */
-export async function filtriCampagna(c: Parameters<typeof filtriDi>[0] & { situazione: string | null; offerteDal: Date | null; offerteAl: Date | null }): Promise<FiltriCampagna> {
-  return { ...filtriDi(c), ...(await filtriSituazione(c)) };
+export async function filtriCampagna(c: Parameters<typeof filtriDi>[0] & { id?: string; situazione: string | null; offerteDal: Date | null; offerteAl: Date | null; escludiCampagne?: string[] }): Promise<FiltriCampagna> {
+  const f: FiltriCampagna = { ...filtriDi(c), ...(await filtriSituazione(c)) };
+  // «escludi chi ha già ricevuto»: clienti con un invio (fatto o in coda) nelle campagne scelte
+  const altre = (c.escludiCampagne ?? []).filter((x) => x && x !== c.id);
+  if (!altre.length) return f;
+  const ricevute = await prisma.campagnaInvio.findMany({ where: { campagnaId: { in: altre }, stato: { in: STATI_RICEVUTA } }, select: { clienteId: true }, distinct: ["clienteId"] });
+  return conEsclusi(f, ricevute.map((r) => r.clienteId));
 }
 
 /** Quanti clienti rientrano nei filtri e quanti si possono davvero raggiungere via email. */

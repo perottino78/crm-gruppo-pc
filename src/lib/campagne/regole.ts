@@ -38,6 +38,15 @@ export function clientiPerSituazione(situazione: string | null | undefined, conO
   return {};
 }
 
+/** Stati di un invio che contano come «l'ha già ricevuta (o la sta ricevendo)» per escluderlo da un'altra campagna. */
+export const STATI_RICEVUTA = ["INVIATA", "IN_ATTESA", "IN_CORSO"];
+
+/** Aggiunge agli esclusi chi ha già ricevuto le campagne scelte (senza doppioni). */
+export function conEsclusi<T extends { escludiClienti?: string[] | null }>(f: T, giaRicevuta: Iterable<string>): T {
+  const tutti = new Set([...(f.escludiClienti ?? []), ...giaRicevuta]);
+  return tutti.size ? { ...f, escludiClienti: [...tutti] } : f;
+}
+
 /** Clienti che rientrano nei filtri della campagna (con email, non disiscritti: quelli si contano a parte). */
 export function whereCampagna(f: FiltriCampagna): Prisma.ClienteWhereInput {
   const w: Prisma.ClienteWhereInput[] = [];
