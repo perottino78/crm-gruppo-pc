@@ -135,7 +135,7 @@ export function mittenteCampagna(marchi: string[]): string {
 export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; programmate?: number; ripresi?: number; motivo?: string };
 
 /** Avvisi di scadenza (campagne e promozione del recupero) e un blocco di invii in coda. Sicuro da chiamare più volte. */
-export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } = {}): Promise<ResocontoCampagne> {
+export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number; entro?: number } = {}): Promise<ResocontoCampagne> {
   const ora = opz.adesso ?? (() => new Date());
   const r: ResocontoCampagne = { inviate: 0, fallite: 0, saltate: 0, promemoria: 0 };
   if (!(await invioMassivoPossibile())) return { ...r, motivo: "posta (SMTP) non configurata" };
@@ -191,6 +191,8 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
   const inizio = Date.now();
   for (let i = 0; i < (opz.max ?? (servizio ? 3000 : 40)); i++) {
     if (servizio && Date.now() - inizio > 40_000) break;
+    // `entro` = ora (ms) in cui il controllo viene fermato da Vercel: si smette 8 secondi prima, mai a metà di un invio
+    if (opz.entro && Date.now() > opz.entro - 8_000) break;
     const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true, variante: true } });
     if (!inv) break;
     const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", presoIl: ora(), tentativi: { increment: 1 } } });
