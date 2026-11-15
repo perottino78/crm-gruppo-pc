@@ -240,7 +240,9 @@ login nel `matcher` del middleware.
   Gli optional ENEA/autoscala/facchinaggio dei vecchi listini → `Optional.attivo=false` (non più proposti nell'offerta) e fuori provvigione; voci «Facchinaggio»
   W&S tolte se mai usate. In Contratti la base proposta = imponibile − servizi (`serviziDelleOfferte`, `importoFuoriProvvigione`: tolti per intero, non scontati);
   provvigione rata per rata (`provvigioneSulleRate`: acconto e saldo maturano quando il cliente paga); `/contratti/stampa` (per cliente e per contratto,
-  stessi filtri). Obiettivi: `Obiettivo` mese «AAAA-MM» o anno «AAAA» con `premio`, pagina `/contratti/obiettivi` (gestisceProvvigioni), riquadro
+  stessi filtri). Obiettivi: `Obiettivo` mese «AAAA-MM», anno «AAAA» o su misura «AAAA-MM-GG~AAAA-MM-GG» (date scelte con il commerciale, `Obiettivo.titolo`,
+  `eSuMisura`/`suMisuraInCorso`, `creaObiettivoSuMisura`/`eliminaObiettivoSuMisura`, riquadro `#su-misura` della pagina obiettivi; nel riquadro e nell'email del lunedì
+  quelli in corso, test `tests/provvigioni/obiettivi-su-misura.test.ts`) con `premio`, pagina `/contratti/obiettivi` (gestisceProvvigioni), riquadro
   `RiquadroObiettivi` con tabella di marcia (`src/lib/provvigioni/obiettivi.ts`: atteso = obiettivo × giorni passati/giorni del periodo; in linea, quasi ≥80%,
   indietro, raggiunto) e venduto mese per mese; venduto = imponibile dei contratti (commesse CRM + progetti BConsole) nel periodo. Email del lunedì
   (`inviaEmailObiettivi` in `obiettivi-server.ts`, chiamata da `/api/automazioni/esegui`; una volta a settimana `obiettivi_mail_settimana`, spegnibile
@@ -592,6 +594,9 @@ login nel `matcher` del middleware.
   del mese/anno in Configurazione `kit_*`, modificabili in `/kit` › Regole e premi (permesso `kit.regole`, di serie solo amministratore; i punti già dati non cambiano;
   annullare una consegna solo con lo stesso permesso, nel registro). Pagina `/kit` «🎁 Raccolta punti kit» (permesso `commesse`): i tuoi punti, classifica del mese
   e dell'anno (`classifica`, pari merito), lavori finiti senza kit (`praticheSenzaKit`), ultime consegne. In «I miei progetti» il pulsante «🎁 Registra il kit».
+  Spunta veloce dell'ufficio (richiesta di Ugo): «✅ Kit consegnato» con un clic nella pratica e nella lista dei lavori finiti (`torna=kit` riporta alla lista),
+  punti sempre al commerciale dell'offerta; chi in ufficio non vende (`vedeSoloISuoiKit`: visibilità PROPRI ma non `eVenditore`) vede tutti i lavori finiti;
+  il commerciale vede «✅ 🎁» accanto al cliente in «I miei progetti».
   `src/lib/kit/punti.ts` puro (test `tests/kit/punti.test.ts`), collaudo `kit-cliente` (20).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
@@ -612,13 +617,13 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 391, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 394, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto), campagne-ripresa (7, SMTP finto), esiti-appuntamenti (12), campagne-ab (19, SMTP finto), chirenti (11), google (27, Google simulato), nextcloud (16), brevo (18, due SMTP finti e API finta), cestino (13), kit-cliente (20), campagne-escludi (5, SMTP finto), consumi-database (10, Neon simulata e SMTP finto)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (20), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto), campagne-ripresa (7, SMTP finto), esiti-appuntamenti (12), campagne-ab (19, SMTP finto), chirenti (11), google (27, Google simulato), nextcloud (16), brevo (18, due SMTP finti e API finta), cestino (13), kit-cliente (22), campagne-escludi (5, SMTP finto), consumi-database (10, Neon simulata e SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

@@ -9,6 +9,7 @@ import { gestisceProvvigioni } from "@/lib/provvigioni/server";
 import { importoProvvigione, cent } from "@/lib/provvigioni/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaEmailObiettivi, CHIAVE_MAIL_OBIETTIVI } from "@/lib/provvigioni/obiettivi-server";
+import { periodoSuMisura } from "@/lib/provvigioni/obiettivi";
 
 const numero = (v: FormDataEntryValue | null) => {
   const n = Number(String(v ?? "").replace(/\./g, "").replace(",", ".").trim());
@@ -142,6 +143,40 @@ export async function salvaObiettiviCommerciale(fd: FormData) {
   }
   revalidatePath("/contratti");
   vai(`${dove}#u-${utenteId}`, { ok: "Obiettivi salvati" });
+}
+
+/** Obiettivo su misura: periodo scelto con il commerciale (dal… al…), con nome, cifra e premio. */
+export async function creaObiettivoSuMisura(fd: FormData) {
+  const u = await gestore();
+  const dove = String(fd.get("torna") ?? "").startsWith("/contratti/obiettivi") ? String(fd.get("torna")) : "/contratti/obiettivi";
+  if (!gestisceProvvigioni(u)) vai(dove, { errore: "Gli obiettivi li dà l'amministrazione" });
+  const utenteId = String(fd.get("utenteId") ?? "");
+  const da = String(fd.get("da") ?? ""), a = String(fd.get("a") ?? "");
+  const titolo = String(fd.get("titolo") ?? "").trim().slice(0, 120) || null;
+  const note = String(fd.get("note") ?? "").trim().slice(0, 300) || null;
+  const target = numeroCampo(fd.get("target")), premioTxt = String(fd.get("premio") ?? "").trim();
+  const premio = premioTxt ? numeroCampo(fd.get("premio")) : null;
+  if (!utenteId || !(await prisma.utente.findUnique({ where: { id: utenteId }, select: { id: true } }))) vai(`${dove}#su-misura`, { errore: "Scegli il commerciale" });
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(da) || !/^\d{4}-\d{2}-\d{2}$/.test(a) || a < da) vai(`${dove}#su-misura`, { errore: "Le date non vanno bene: il «dal» deve venire prima dell'«al»" });
+  if (!(target > 0)) vai(`${dove}#su-misura`, { errore: "Scrivi la cifra dell'obiettivo" });
+  if (premio !== null && !(premio >= 0)) vai(`${dove}#su-misura`, { errore: "Premio non valido" });
+  const periodo = periodoSuMisura(da, a);
+  await prisma.obiettivo.upsert({
+    where: { utenteId_periodo: { utenteId, periodo } },
+    update: { importoTarget: cent(target), premio: premio === null ? null : cent(premio), titolo, note },
+    create: { utenteId, periodo, importoTarget: cent(target), premio: premio === null ? null : cent(premio), titolo, note },
+  });
+  revalidatePath("/contratti");
+  vai(`${dove}#su-misura`, { ok: "Obiettivo su misura salvato" });
+}
+
+export async function eliminaObiettivoSuMisura(fd: FormData) {
+  const u = await gestore();
+  if (!gestisceProvvigioni(u)) vai("/contratti/obiettivi", { errore: "Solo l'amministrazione" });
+  const id = String(fd.get("id") ?? "");
+  await prisma.obiettivo.deleteMany({ where: { id, periodo: { contains: "~" } } });
+  revalidatePath("/contratti");
+  vai("/contratti/obiettivi#su-misura", { ok: "Obiettivo su misura tolto" });
 }
 
 /** Accende/spegne l'email settimanale degli obiettivi. */

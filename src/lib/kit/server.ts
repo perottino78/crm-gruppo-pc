@@ -2,6 +2,8 @@
 import { prisma } from "@/lib/prisma";
 import type { Utente } from "@prisma/client";
 import { scopePreventivoWhere } from "@/lib/scope";
+import { visibilitaDi } from "@/lib/permessi/catalogo";
+import { eVenditore } from "@/lib/provvigioni/server";
 import { numeroCommessa } from "@/lib/commesse";
 import { CHIAVI_KIT, regoleDa, STATI_KIT, type RegoleKit } from "./punti";
 
@@ -10,10 +12,13 @@ export async function regoleKit(): Promise<RegoleKit> {
   return regoleDa(Object.fromEntries(righe.map((r) => [r.chiave, r.valore])));
 }
 
+/** Chi vende vede i suoi clienti; chi lavora in ufficio con «solo i suoi» (es. fine lavori) vede tutte le pratiche: è lui a mettere la spunta. */
+export const vedeSoloISuoiKit = (u: Utente) => visibilitaDi(u) === "PROPRI" && eVenditore(u);
+
 /** Pratiche a lavoro finito senza kit, fra quelle che l'utente vede (il commerciale: le sue). */
 export async function praticheSenzaKit(u: Utente) {
   const commesse = await prisma.commessa.findMany({
-    where: { stato: { in: STATI_KIT }, preventivo: scopePreventivoWhere(u) },
+    where: { stato: { in: STATI_KIT }, preventivo: vedeSoloISuoiKit(u) ? scopePreventivoWhere(u) : {} },
     select: {
       id: true, numero: true, anno: true, stato: true, chiusaIl: true, consegnaPrevista: true, clienteId: true,
       cliente: { select: { nome: true, comune: true } },

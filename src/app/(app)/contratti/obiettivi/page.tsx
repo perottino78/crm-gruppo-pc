@@ -9,8 +9,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
 import { contrattiDi, gestisceProvvigioni, eVenditore } from "@/lib/provvigioni/server";
 import { avanzamento, nomePeriodo, vendutoNelPeriodo, NOMI_STATO_OBIETTIVO, periodoMese, estremi, MESI } from "@/lib/provvigioni/obiettivi";
+import BottoneConferma from "@/components/BottoneConferma";
 import { emailObiettiviAttiva } from "@/lib/provvigioni/obiettivi-server";
-import { salvaObiettiviCommerciale, impostaEmailObiettivi, mandaOraEmailObiettivi } from "@/app/provvigioni-actions";
+import { salvaObiettiviCommerciale, impostaEmailObiettivi, mandaOraEmailObiettivi, creaObiettivoSuMisura, eliminaObiettivoSuMisura } from "@/app/provvigioni-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 
@@ -31,7 +32,12 @@ export default async function ObiettiviPage({ searchParams }: { searchParams: Pr
     select: { id: true, nome: true, username: true, email: true, stato: true, ruolo: true, vende: true, obiettivi: { where: { periodo: { in: [mese, anno] } } } },
     orderBy: { nome: "asc" },
   })).filter((x) => eVenditore(x) || x.obiettivi.length > 0);
-  const contratti = await contrattiDi(persone.map((x) => ({ id: x.id, nome: x.nome, username: x.username })));
+  // obiettivi su misura che toccano il mese scelto o vengono dopo (i finiti prima del mese restano nello storico ma non qui)
+  const suMisura = (await prisma.obiettivo.findMany({ where: { periodo: { contains: "~" } }, select: { id: true, utenteId: true, periodo: true, titolo: true, importoTarget: true, premio: true, note: true } }))
+    .filter((o) => o.periodo.slice(11) >= estremi(mese).da).sort((a, b) => a.periodo.localeCompare(b.periodo));
+  const conSuMisura = await prisma.utente.findMany({ where: { id: { in: suMisura.map((o) => o.utenteId).filter((id) => !persone.some((x) => x.id === id)) } }, select: { id: true, nome: true, username: true } });
+  const contratti = await contrattiDi([...persone, ...conSuMisura].map((x) => ({ id: x.id, nome: x.nome, username: x.username })));
+  const nomeDi = new Map([...persone, ...conSuMisura].map((x) => [x.id, x.nome]));
   const attiva = await emailObiettiviAttiva();
   const [aa, mm] = mese.split("-").map(Number);
   const meseVicino = (d: number) => { const t = new Date(Date.UTC(aa, mm - 1 + d, 1)); return `${t.getUTCFullYear()}-${String(t.getUTCMonth() + 1).padStart(2, "0")}`; };
@@ -104,6 +110,52 @@ export default async function ObiettiviPage({ searchParams }: { searchParams: Pr
           );
         })}
       </div>
+      <section id="su-misura" className="scroll-mt-4 space-y-3 rounded-lg border border-amber-200 bg-amber-50/60 p-3">
+        <div>
+          <h2 className="text-base font-extrabold text-neutral-900">🎯 Obiettivi su misura</h2>
+          <p className="text-xs text-neutral-600">Oltre a mese e anno: scegli tu con il commerciale le date, la cifra e il premio (es. «Pergole di primavera» dal 1° marzo al 30 aprile). Lo vede in «Contratti e provvigioni» con la sua tabella di marcia e nell&apos;email del lunedì.</p>
+        </div>
+        <form action={creaObiettivoSuMisura} className="flex flex-wrap items-end gap-2 rounded-md border border-neutral-200 bg-white p-2">
+          <input type="hidden" name="torna" value={`/contratti/obiettivi?mese=${mese}`} />
+          <label className="text-xs">Commerciale
+            <select name="utenteId" required defaultValue="" className={`${campo} block`}>
+              <option value="" disabled>— scegli —</option>
+              {persone.filter((x) => x.stato === "ATTIVO").map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
+            </select>
+          </label>
+          <label className="text-xs">Nome (facoltativo)<input name="titolo" placeholder="es. Pergole di primavera" className={`${campo} block w-48`} /></label>
+          <label className="text-xs">Dal<input type="date" name="da" required defaultValue={oggi} className={`${campo} block`} /></label>
+          <label className="text-xs">Al<input type="date" name="a" required className={`${campo} block`} /></label>
+          <label className="text-xs">Obiettivo €<input name="target" type="number" step="100" min="1" required className={`${campo} block w-28`} /></label>
+          <label className="text-xs">Premio €<input name="premio" type="number" step="10" min="0" className={`${campo} block w-24`} /></label>
+          <label className="text-xs">Nota<input name="note" placeholder="facoltativa" className={`${campo} block w-40`} /></label>
+          <button className="btn-3d btn-3d-green px-3 py-1 text-xs">➕ Crea obiettivo</button>
+        </form>
+        {suMisura.length === 0 ? <p className="text-xs text-neutral-500">Nessun obiettivo su misura in corso o in arrivo.</p> : (
+          <div className="divide-y divide-neutral-100 rounded-md border border-neutral-200 bg-white">
+            {suMisura.map((o) => {
+              const { da, a } = estremi(o.periodo);
+              const rifO = oggi < da ? da : oggi > a ? a : oggi;
+              const av = avanzamento(o.importoTarget, vendutoNelPeriodo(contratti.filter((c) => c.commercialeId === o.utenteId), o.periodo), o.periodo, rifO);
+              return (
+                <div key={o.id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 text-sm">
+                  <span>
+                    <b>{nomeDi.get(o.utenteId) ?? "—"}</b>{o.titolo ? ` · ${o.titolo}` : ""} · {nomePeriodo(o.periodo)}
+                    <span className="block text-xs text-neutral-600">
+                      Obiettivo {eur(o.importoTarget)}{o.premio ? ` · premio ${eur(o.premio)}` : ""} · venduto {eur(av.venduto)} = {Math.round(av.percentuale * 100)}% · {oggi < da ? "⏳ non ancora iniziato" : NOMI_STATO_OBIETTIVO[av.stato]}{o.note ? ` · 📝 ${o.note}` : ""}
+                    </span>
+                  </span>
+                  <form action={eliminaObiettivoSuMisura}>
+                    <input type="hidden" name="id" value={o.id} />
+                    <BottoneConferma messaggio="Togliere questo obiettivo su misura?" className="btn-3d btn-3d-outline px-2 py-1 text-xs text-red-700">Togli</BottoneConferma>
+                  </form>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
       <p className="text-xs text-neutral-500">Obiettivo vuoto o 0 = nessun obiettivo per quel periodo. Il venduto conta le commesse del CRM (data della commessa) e i progetti BConsole.</p>
     </div>
   );

@@ -6,8 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puo, visibilitaDi } from "@/lib/permessi/catalogo";
 import { classifica, periodoDi, type Posizione } from "@/lib/kit/punti";
-import { regoleKit, praticheSenzaKit } from "@/lib/kit/server";
-import { salvaRegoleKit } from "@/app/kit-cliente-actions";
+import { regoleKit, praticheSenzaKit, vedeSoloISuoiKit } from "@/lib/kit/server";
+import { salvaRegoleKit, registraKitCliente } from "@/app/kit-cliente-actions";
 
 const MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
 const nomeMese = (p: string) => `${MESI[+p.slice(5, 7) - 1]} ${p.slice(0, 4)}`;
@@ -63,7 +63,7 @@ export default async function KitPage({ searchParams }: { searchParams: Promise<
   const kMese = classifica(consegne, mese);
   const kAnno = classifica(consegne, anno);
   const gestisce = puo(u, "kit.regole");
-  const soloMiei = visibilitaDi(u) === "PROPRI";
+  const soloMiei = vedeSoloISuoiKit(u);
   const mio = kMese.find((r) => r.utenteId === u.id);
   const mesePrima = (() => { const [y, m] = mese.split("-").map(Number); return m === 1 ? `${y - 1}-12` : `${y}-${String(m - 1).padStart(2, "0")}`; })();
   const meseDopo = (() => { const [y, m] = mese.split("-").map(Number); return m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, "0")}`; })();
@@ -117,7 +117,14 @@ export default async function KitPage({ searchParams }: { searchParams: Promise<
                   {x.comune ? <span className="text-neutral-600"> · {x.comune}</span> : null}
                   <span className="text-neutral-600"> · {x.numero}{!soloMiei ? ` · ${x.commerciale}` : ""}{x.dataFine ? ` · fine lavori ${giorno(x.dataFine)}` : ""}</span>
                 </span>
-                <Link href={`/commesse/${x.id}#kit-cliente`} className="btn-3d btn-3d-pink px-3 py-1 text-xs">🎁 Registra il kit</Link>
+                <span className="flex items-center gap-2">
+                  <form action={registraKitCliente}>
+                    <input type="hidden" name="commessaId" value={x.id} />
+                    <input type="hidden" name="torna" value="kit" />
+                    <button className="btn-3d btn-3d-green px-3 py-1 text-xs">✅ Kit consegnato</button>
+                  </form>
+                  <Link href={`/commesse/${x.id}#kit-cliente`} className="text-xs text-blue-800 underline">con foto…</Link>
+                </span>
               </div>
             ))}
           </div>

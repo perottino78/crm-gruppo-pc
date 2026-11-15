@@ -108,6 +108,7 @@ export default async function ProgettiPage({ searchParams }: { searchParams: Pro
                   <div>
                     <p className="text-base font-bold text-neutral-900">
                       <Link href={`/clienti/${x.clienteId}?sez=progetti`} className="text-blue-800 underline decoration-blue-300 underline-offset-2 hover:decoration-blue-700">{x.cliente}</Link>
+                      {x.kitConsegnato && <span className="ml-1.5 rounded bg-green-100 px-1.5 py-0.5 align-middle text-xs font-semibold text-green-800" title="Kit consegnato: punti nella tua raccolta">✅ 🎁</span>}
                       {x.comune && <span className="font-normal text-neutral-500"> · {x.comune}</span>}
                     </p>
                     <p className="text-xs text-neutral-600">

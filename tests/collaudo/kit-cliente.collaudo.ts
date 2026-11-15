@@ -81,6 +81,15 @@ async function main() {
   verifica((await prisma.registroAmministrazione.count({ where: { entita: "KIT" } })) === 2, "regole e annullamento nel registro «chi ha fatto cosa»");
   verifica((await praticheSenzaKit(ugo)).some((x) => x.id === finita1.id), "la pratica torna fra quelle senza kit");
 
+  console.log("5. La spunta veloce dell'ufficio (fine lavori)");
+  const giorgia = await prisma.utente.create({ data: { nome: "Giorgia Ufficio", email: "giorgia@x.it", username: "giorgia", ruolo: "AMMINISTRATIVO", ufficio: "POSA" } });
+  const viste = await praticheSenzaKit(giorgia);
+  verifica(viste.length === 1 && viste[0].id === finita1.id && viste[0].commerciale === "Marco Piccatti", "chi lavora in ufficio vede i lavori finiti senza kit anche dei commerciali (non solo i suoi)", viste);
+  g.__utente = giorgia;
+  esito = await redirectA(registraKitCliente(modulo({ commessaId: finita1.id, torna: "kit" })));
+  const kv = await prisma.consegnaKit.findUnique({ where: { commessaId: finita1.id } });
+  verifica(esito?.includes(";/kit?ok=") && kv?.utenteId === marco.id && kv.punti === 20 && kv.registratoDaNome === "Giorgia Ufficio", "«✅ Kit consegnato» dalla lista: punti al commerciale dell'offerta, si torna alla lista", { esito, kv });
+
   console.log(`\n${ok} ok, ${ko} falliti`);
   await prisma.$disconnect();
   process.exit(ko ? 1 : 0);
