@@ -15,7 +15,7 @@ export const AREE: { area: string; voci: [Permesso, string][] }[] = [
   { area: "Prodotti", voci: [["prodotti", "Prodotti e listini (consultare)"], ["articoli", "Articoli dei fornitori"], ["listini.modifica", "Caricare listini e articoli, applicare aumenti"]] },
   { area: "Marketing", voci: [["marketing", "Pagina Marketing"], ["campagne", "Campagne email"], ["automazioni", "Email automatiche e loro testi"], ["pubblicita", "Lead da pubblicità e pagine di atterraggio"]] },
   { area: "Amministrazione", voci: [["amministrazione", "Amministrazione: banche, fatture, scadenze"], ["fatturazione", "Fatturazione: emettere fatture e DDT di uscita"], ["report", "Report: fatturato, margini, cassa"], ["provvigioni", "Provvigioni: controllare i contratti, inserire e liquidare le provvigioni"]] },
-  { area: "Team", voci: [["team", "Team e performance"], ["utenti.crea", "Aggiungere nuovi colleghi"], ["firme", "Firme email di tutti i colleghi"], ["comunicazioni", "Comunicazioni interne al team (email e task)"], ["archivio", "Archivio file"], ["registro", "Registro «chi ha fatto cosa» e cestino (ripristinare ciò che è stato eliminato)"]] },
+  { area: "Team", voci: [["team", "Team e performance"], ["utenti.crea", "Aggiungere nuovi colleghi"], ["firme", "Firme email di tutti i colleghi"], ["comunicazioni", "Comunicazioni interne al team (email e task)"], ["archivio", "Archivio file"], ["registro", "Registro «chi ha fatto cosa» e cestino (ripristinare ciò che è stato eliminato)"], ["database", "Consumo del database: costi, budget e avvisi"]] },
 ];
 export const TUTTI_PERMESSI: Permesso[] = AREE.flatMap((a) => a.voci.map((v) => v[0]));
 export const NOME_PERMESSO: Record<string, string> = Object.fromEntries(AREE.flatMap((a) => a.voci));
@@ -72,7 +72,7 @@ export function visibilitaDi(u: ConPermessi | null | undefined): Visibilita {
 
 /** Pagina → permesso che serve per aprirla (il più specifico vince). */
 const PAGINE: [string, Permesso][] = [
-  ["/impostazioni/automazioni", "automazioni"], ["/impostazioni/registro", "registro"], ["/impostazioni/lead", "pubblicita"], ["/marketing/email", "automazioni"],
+  ["/impostazioni/automazioni", "automazioni"], ["/impostazioni/registro", "registro"], ["/impostazioni/database", "database"], ["/impostazioni/lead", "pubblicita"], ["/marketing/email", "automazioni"],
   ["/prodotti/aumenti", "listini.modifica"], ["/prodotti/articoli", "articoli"], ["/prodotti", "prodotti"],
   ["/lead", "lead"], ["/clienti", "clienti"], ["/preventivi", "preventivi"], ["/contratti", "preventivi"], ["/commesse", "commesse"], ["/task", "task"],
   ["/calendario", "calendario"], ["/ordini-fornitori", "ordini"], ["/magazzino", "magazzino"], ["/lavori", "lavori"],

@@ -82,6 +82,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         </Link>
       )}
 
+      {puo(utenteCorrente, "database") && (
+        <Link href="/impostazioni/database" className="block bg-white rounded-lg border border-teal-300 px-4 py-3 mb-4 hover:border-teal-500">
+          <span className="text-base font-bold text-neutral-900">📊 Consumo del database →</span>
+          <span className="block text-xs text-neutral-600">Quanto usa e quanto costa il database questo mese, con la previsione e l&apos;avviso via email prima di arrivare al budget o a un limite.</span>
+        </Link>
+      )}
+
       {puo(utenteCorrente, "calendario.google") && (
         <Link href="/impostazioni/google" className="block bg-white rounded-lg border border-blue-300 px-4 py-3 mb-4 hover:border-blue-500">
           <span className="text-base font-bold text-neutral-900">📅 Google Calendar →</span>
