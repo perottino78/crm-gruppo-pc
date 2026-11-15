@@ -603,7 +603,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 377, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 386, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
