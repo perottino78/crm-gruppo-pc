@@ -9,14 +9,16 @@ export const maxDuration = 60;
 
 /** Tutti i controlli, uno dopo l'altro (un errore in uno non ferma gli altri). */
 async function eseguiTutto() {
+  const avvio = Date.now();
   const lead = await eseguiInviiScaduti().catch((e) => ({ errore: String(e).slice(0, 200) }));
-  const campagne = await eseguiCampagne().catch((e) => ({ errore: String(e).slice(0, 200) }));
   // il punto della settimana sugli obiettivi dei commerciali (una volta a settimana, dal lunedì)
   const obiettivi = await inviaEmailObiettivi().catch((e) => ({ errore: String(e).slice(0, 200) }));
   const esiti = await inviaPromemoriaEsiti().catch((e) => ({ errore: String(e).slice(0, 200) }));
   const nextcloud = await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const google = await import("@/lib/calendario/google").then((m) => m.sincronizzaGoogle()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const cestino = await import("@/lib/cestino").then((m) => m.svuotaScaduti()).catch((e) => ({ errore: String(e).slice(0, 200) }));
+  // le campagne per ultime, con il tempo che resta: il blocco di email si ferma prima che Vercel chiuda il controllo (60 s)
+  const campagne = await eseguiCampagne({ entro: avvio + 55_000 }).catch((e) => ({ errore: String(e).slice(0, 200) }));
   return { ...lead, campagne, obiettivi, esiti, nextcloud, google, cestinoSvuotati: cestino };
 }
 
