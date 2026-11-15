@@ -133,3 +133,38 @@ export async function scollegaServizioInvio() {
   revalidatePath("/impostazioni/automazioni");
   redirect("/impostazioni/automazioni?servizio=" + encodeURIComponent("Brevo scollegato: le email tornano a partire dalla posta aziendale.") + "#servizio");
 }
+
+/**
+ * Crea in Brevo il webhook dei rimbalzi e delle disiscrizioni (POST /v3/webhooks) con una chiave API incollata per l'occasione:
+ * la chiave NON viene salvata (serve una volta sola). Se il webhook c'è già, lo dice e non lo duplica.
+ */
+export async function creaWebhookBrevo(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u || u.ruolo !== "AMMINISTRATORE") redirect("/impostazioni/automazioni");
+  const go = (p: Record<string, string>) => redirect(`/impostazioni/automazioni?${new URLSearchParams(p)}#servizio`);
+  const chiave = str(fd, "apiKey");
+  if (!chiave || !chiave.startsWith("xkeysib-")) go({ servizioErrore: "Incolla una chiave API di Brevo (inizia con «xkeysib-»): Brevo › Impostazioni › SMTP e API › scheda «Chiavi API e MCP» › «Genera una nuova chiave API»." });
+  const { chiaveWebhook } = await import("@/lib/mail/servizio");
+  const { APP_URL } = await import("@/lib/mail/invio");
+  const url = `${APP_URL}/api/brevo/eventi?k=${await chiaveWebhook()}`;
+  const API = process.env.BREVO_API_BASE || "https://api.brevo.com";
+  const intestazioni = { "api-key": chiave!, accept: "application/json", "content-type": "application/json" };
+  let messaggio: Record<string, string>;
+  try {
+    const elenco = await fetch(`${API}/v3/webhooks?type=transactional`, { headers: intestazioni, signal: AbortSignal.timeout(20_000) });
+    if (elenco.status === 401) throw new Error("chiave API non valida");
+    const gia = ((await elenco.json().catch(() => ({}))) as { webhooks?: { url?: string }[] }).webhooks?.some((w) => w.url === url);
+    if (gia) messaggio = { servizio: "Il webhook di P&C ONE c'era già in Brevo: rimbalzi e disiscrizioni arrivano qui." };
+    else {
+      const r = await fetch(`${API}/v3/webhooks`, {
+        method: "POST", headers: intestazioni, signal: AbortSignal.timeout(20_000),
+        body: JSON.stringify({ url, type: "transactional", description: "P&C ONE: rimbalzi e disiscrizioni", events: ["hardBounce", "softBounce", "blocked", "invalid", "spam", "unsubscribed"] }),
+      });
+      if (!r.ok) throw new Error(`Brevo ha risposto ${r.status}: ${(await r.text().catch(() => "")).slice(0, 200)}`);
+      messaggio = { servizio: "Webhook creato in Brevo: da adesso rimbalzi, disiscrizioni e segnalazioni di spam arrivano in P&C ONE. La chiave API non è stata salvata: puoi cancellarla in Brevo." };
+    }
+  } catch (e) {
+    messaggio = { servizioErrore: `Webhook non creato: ${e instanceof Error ? e.message : String(e)}` };
+  }
+  go(messaggio!);
+}

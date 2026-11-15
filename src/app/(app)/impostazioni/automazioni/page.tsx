@@ -14,7 +14,7 @@ import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percors
 import { salvaPromemoriaCampagne, controllaRimbalziOra } from "@/app/campagne-actions";
 import { ultimoEsitoRimbalzi } from "@/lib/mail/rimbalzi-server";
 import { impostazioniPromemoria } from "@/lib/campagne/motore";
-import { salvaPostaAziendale, salvaServizioInvio, scollegaServizioInvio } from "@/app/posta-actions";
+import { salvaPostaAziendale, salvaServizioInvio, scollegaServizioInvio, creaWebhookBrevo } from "@/app/posta-actions";
 import { servizioInvio, chiaveWebhook } from "@/lib/mail/servizio";
 import { APP_URL } from "@/lib/mail/invio";
 import BottoneConferma from "@/components/BottoneConferma";
@@ -288,6 +288,12 @@ async function ServizioInvio({ ok, errore }: { ok?: string; errore?: string }) {
         <p><b>Rimbalzi e disiscrizioni da Brevo</b>: in Brevo › Impostazioni › <b>Webhook</b> › «Aggiungi un webhook» (transazionale) incolla questo indirizzo e spunta
           «Hard bounce», «Soft bounce», «Bloccato», «Email non valida», «Disiscritto» e «Spam»:</p>
         <p className="select-all break-all font-mono text-[11px] text-blue-900">{webhook}</p>
+        <form action={creaWebhookBrevo} className="flex flex-wrap items-end gap-2 pt-1">
+          <label className="text-xs text-neutral-700">Oppure lo crea P&amp;C ONE: incolla una <b>chiave API</b> di Brevo (Impostazioni › SMTP e API › «Chiavi API e MCP», inizia con xkeysib-; non viene salvata)
+            <input name="apiKey" type="password" autoComplete="off" placeholder="xkeysib-…" className="mt-1 block w-72 max-w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+          </label>
+          <button className="btn-3d btn-3d-blue text-xs px-3 py-1.5">🔗 Crea il webhook in Brevo</button>
+        </form>
       </div>
       {s && <form action={scollegaServizioInvio}><BottoneConferma messaggio="Scollegare Brevo? Le email torneranno a partire dalla posta aziendale." className="btn-3d btn-3d-outline text-xs px-3 py-1.5">Scollega Brevo</BottoneConferma></form>}
     </div>
