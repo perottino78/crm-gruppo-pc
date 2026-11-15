@@ -150,7 +150,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number; e
   // 1. Avvisi di scadenza: "la campagna scade fra N giorni, aggiornala"
   const imp = await impostazioniPromemoria();
   if (imp.a.length && imp.giorni.length) {
-    const attive = await prisma.campagna.findMany({ where: { validaFino: { not: null }, OR: [{ stato: { notIn: ["BOZZA", "PROGRAMMATA"] } }, { inviataIl: { not: null } }] } });
+    const attive = await prisma.campagna.findMany({ where: { validaFino: { not: null }, OR: [{ stato: { notIn: ["BOZZA", "PROGRAMMATA"] } }, { inviataIl: { not: null } }] }, select: { id: true, nome: true, validaFino: true, promemoriaInviati: true } });
     for (const c of attive) {
       const g = promemoriaDiOggi(c.validaFino, imp.giorni, c.promemoriaInviati, ora());
       if (g === null) continue;

@@ -1,4 +1,5 @@
 import { NextResponse, after, type NextRequest } from "next/server";
+import { prisma } from "@/lib/prisma";
 import { eseguiInviiScaduti } from "@/lib/automazioni/motore";
 import { eseguiCampagne } from "@/lib/campagne/motore";
 import { inviaEmailObiettivi } from "@/lib/provvigioni/obiettivi-server";
@@ -16,10 +17,12 @@ async function eseguiTutto() {
   const esiti = await inviaPromemoriaEsiti().catch((e) => ({ errore: String(e).slice(0, 200) }));
   const nextcloud = await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const google = await import("@/lib/calendario/google").then((m) => m.sincronizzaGoogle()).catch((e) => ({ errore: String(e).slice(0, 200) }));
+  // consumi del database (Neon): una lettura all'ora, email se ci si avvicina al budget o a un limite
+  const consumi = await import("@/lib/database/consumi-server").then((m) => m.controllaConsumi()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const cestino = await import("@/lib/cestino").then((m) => m.svuotaScaduti()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   // le campagne per ultime, con il tempo che resta: il blocco di email si ferma prima che Vercel chiuda il controllo (60 s)
   const campagne = await eseguiCampagne({ entro: avvio + 55_000 }).catch((e) => ({ errore: String(e).slice(0, 200) }));
-  return { ...lead, campagne, obiettivi, esiti, nextcloud, google, cestinoSvuotati: cestino };
+  return { ...lead, campagne, obiettivi, esiti, nextcloud, google, consumi, cestinoSvuotati: cestino };
 }
 
 // Controllo periodico degli invii programmati dei lead e delle campagne (coda e avvisi di scadenza) (Vercel Cron o un servizio esterno ogni 5 minuti,
@@ -27,6 +30,10 @@ async function eseguiTutto() {
 // Risponde subito e lavora dopo la risposta (`after`): i servizi esterni aspettano al massimo 30 secondi, un blocco di email può metterci di più.
 // Con `?attendi=1` aspetta la fine e mostra il resoconto (per controlli a mano).
 export async function GET(req: NextRequest) {
+  // database irraggiungibile (es. limite del piano superato): 503, così cron-job.org lo segnala come errore e manda l'email
+  try { await prisma.$queryRawUnsafe("SELECT 1"); } catch (e) {
+    return NextResponse.json({ errore: "database non raggiungibile", dettaglio: String(e).slice(0, 300) }, { status: 503 });
+  }
   if (req.nextUrl.searchParams.get("attendi") === "1") return NextResponse.json(await eseguiTutto());
   after(() => eseguiTutto().then(() => undefined));
   return NextResponse.json({ avviato: true, il: new Date().toISOString() });
