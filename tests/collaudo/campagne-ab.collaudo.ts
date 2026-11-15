@@ -105,7 +105,7 @@ async function main() {
   const copia = await prisma.campagna.findFirstOrThrow({ where: { nome: "Pergole primavera 2027 (copia)" }, include: { varianti: true, _count: { select: { invii: true } } } });
   verifica(lista?.startsWith("/campagne?ok=") && copia.abTest && copia.varianti.length === 3 && copia._count.invii === 0, "duplica: resta sull'elenco, copia con i 3 gruppi e senza invii", lista);
   const el = await dove(eliminaCampagna(fd({ id })));
-  verifica(el?.includes("eliminata") && !(await prisma.campagna.findUnique({ where: { id } })) && !(await prisma.campagnaInvio.count({ where: { campagnaId: id } })), "anche una campagna già inviata si elimina (con i suoi invii)", el);
+  verifica(el?.includes("cestino") && !(await prisma.campagna.findUnique({ where: { id } })) && !(await prisma.campagnaInvio.count({ where: { campagnaId: id } })), "anche una campagna già inviata si elimina (con i suoi invii, che restano nel cestino)", el);
 
   console.log("6. Campagna normale: A/B acceso dalla pagina parte dalla versione salvata");
   const n = idDa(await dove(creaCampagna(fd({ nome: "Normale" }))));
