@@ -9,6 +9,7 @@ import { createHash } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { casellaAziendale, casellaPersonale, indirizzoDi, spiegaErrore, type Casella } from "./caselle";
 import { capisciErrore, alternative, chiaveTentativo, consiglio, usaSsl } from "./diagnosi";
+import { servizioInvio } from "./servizio";
 
 export const APP_URL = process.env.APP_URL || "https://crm-gruppo-pc.vercel.app";
 
@@ -29,15 +30,22 @@ export async function mailConfigurata(): Promise<boolean> {
   return !!(await postaAziendale());
 }
 
+/** Si può spedire una campagna? (servizio di invio o, se manca, la posta aziendale) */
+export async function invioMassivoPossibile(): Promise<boolean> {
+  return !!(await servizioInvio()) || !!(await postaAziendale());
+}
+
 const trasporti = new Map<string, nodemailer.Transporter>();
-function trasporto(c: Casella) {
-  const k = createHash("sha256").update(`${c.host}|${c.porta}|${usaSsl(c)}|${!!c.accettaCertificato}|${c.utente}|${c.password}`).digest("hex");
+function trasporto(c: Casella & { servizio?: boolean }) {
+  const k = createHash("sha256").update(`${c.host}|${c.porta}|${usaSsl(c)}|${!!c.accettaCertificato}|${c.utente}|${c.password}|${!!c.servizio}`).digest("hex");
   let t = trasporti.get(k);
   if (!t) {
     const ssl = usaSsl(c);
     t = nodemailer.createTransport({
       host: c.host, port: c.porta, secure: ssl, auth: { user: c.utente, pass: c.password },
       connectionTimeout: 15000, greetingTimeout: 15000,
+      // servizio di invio (Brevo): connessioni riusate, così un blocco di campagna parte in fretta
+      ...(c.servizio ? { pool: true, maxConnections: 5, maxMessages: 500 } : {}),
       // il certificato non riconosciuto si accetta solo se l'amministratore l'ha scelto: la posta resta comunque cifrata
       ...(c.accettaCertificato ? { tls: { rejectUnauthorized: false } } : {}),
     });
@@ -56,21 +64,24 @@ export type MailDaInviare = {
   intestazioni?: Record<string, string>;
   /** In copia (es. il commerciale o un collega) */
   cc?: string[];
+  /** Email di massa (campagne) o automatica al cliente: parte dal servizio di invio (Brevo) se è collegato. */
+  servizio?: boolean;
   /** File allegati (es. l'offerta in PDF, foto, schede tecniche) */
   allegati?: { nome: string; contenuto: Buffer; mime?: string }[];
 };
 
-async function spedisci(c: Casella, m: MailDaInviare, a: string[], da: string, rispondiA?: string | null) {
+async function spedisci(c: Casella & { servizio?: boolean }, m: MailDaInviare, a: string[], da: string, rispondiA?: string | null) {
   const cc = (m.cc ?? []).filter((x) => /.+@.+\..+/.test(x) && !a.includes(x));
   await trasporto(c).sendMail({
     from: da,
     to: a.join(", "),
     ...(cc.length ? { cc: cc.join(", ") } : {}),
-    // i "mancato recapito" tornano alla casella che spedisce, dove il CRM li legge (vedi rimbalzi-server.ts)
-    envelope: { from: c.utente, to: [...a, ...cc] },
+    // i "mancato recapito" tornano alla casella che spedisce, dove il CRM li legge (vedi rimbalzi-server.ts);
+    // con il servizio di invio li raccoglie Brevo e li manda al webhook (busta lasciata a Brevo)
+    ...(c.servizio ? {} : { envelope: { from: c.utente, to: [...a, ...cc] } }),
     ...(m.allegati?.length ? { attachments: m.allegati.map((f) => ({ filename: f.nome, content: f.contenuto, ...(f.mime ? { contentType: f.mime } : {}) })) } : {}),
     replyTo: rispondiA || undefined,
-    ...(m.intestazioni ? { headers: m.intestazioni } : {}),
+    ...(m.intestazioni || c.servizio ? { headers: { ...(m.intestazioni ?? {}), ...(c.servizio && m.intestazioni?.["X-CRM-Invio"] ? { "X-Mailin-custom": m.intestazioni["X-CRM-Invio"] } : {}) } } : {}),
     subject: m.oggetto,
     text: m.testo,
     ...(m.html ? { html: m.html } : {}),
@@ -84,6 +95,15 @@ export async function inviaMail(m: MailDaInviare): Promise<EsitoMail> {
   const a = [...new Set(m.a.map((x) => x.trim()).filter((x) => /.+@.+\..+/.test(x)))];
   if (!a.length) return { inviata: false, motivo: "nessun indirizzo email valido" };
   try {
+    // 0. campagne ed email automatiche ai clienti: dal servizio di invio (Brevo). Se non va NON si ripiega sulla posta aziendale:
+    //    è proprio l'invio massivo dall'hosting che è stato bloccato.
+    if (m.servizio) {
+      const s = await servizioInvio();
+      if (s) {
+        await spedisci(s, m, a, m.da || s.mittente, m.rispondiA);
+        return { inviata: true, da: indirizzoDi(m.da) ?? s.utente };
+      }
+    }
     const aziendale = await postaAziendale();
     // 1. dalla casella personale di chi manda
     let rispondiA = m.rispondiA;

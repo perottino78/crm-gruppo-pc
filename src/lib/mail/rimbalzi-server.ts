@@ -51,7 +51,7 @@ async function leggiCasella(c: Casella, daUid: number | null): Promise<Messaggio
 const uguale = (a?: string | null, b?: string | null) => !!a && !!b && a.trim().toLowerCase() === b.trim().toLowerCase();
 
 /** Applica un rimbalzo: invio della campagna o email del lead "rimbalzata", e (se permanente) indirizzo da non usare più. */
-async function applica(r: Rimbalzo, quando: Date): Promise<string[]> {
+export async function applicaRimbalzo(r: Rimbalzo, quando: Date): Promise<string[]> {
   const indirizzi = new Set(r.destinatari);
   const tipo = r.codice?.slice(0, 1), id = r.codice?.slice(2);
   if (tipo === "c" && id) {
@@ -99,7 +99,7 @@ export async function controllaRimbalzi(opz: { forza?: boolean; adesso?: () => D
       const r = m.sorgente ? leggiRimbalzo(m.sorgente, { ignora: [casella.utente] }) : null;
       if (!r) continue;
       esito.rimbalzi++;
-      esito.indirizzi.push(...(await applica(r, ora())));
+      esito.indirizzi.push(...(await applicaRimbalzo(r, ora())));
     }
     if (maxUid) await salva(CHIAVE_UID, String(maxUid));
   } catch (e) {
