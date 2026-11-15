@@ -25,7 +25,9 @@ export async function progettiDi(utente: Utente): Promise<Progetto[]> {
   const [commesse, fasiDb] = await Promise.all([
     prisma.commessa.findMany({
       where: { preventivo: scope },
-      include: {
+      select: {
+        id: true, numero: true, anno: true, stato: true, clienteId: true, consegnaPrevista: true, totaleVendita: true,
+        accontoIncassato: true, accontoImporto: true, accontoImportoIncassato: true, saldoIncassato: true, createdAt: true,
         cliente: { select: { nome: true, comune: true } },
         brand: { select: { nome: true } },
         preventivo: { select: { oggetto: true, stato: true, commercialeId: true, commerciale: { select: { nome: true } } } },
