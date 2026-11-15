@@ -17,6 +17,7 @@ export type Progetto = ProgettoMin & {
   passi: Passo[];
   corrente: Passo | null;
   dataContratto: Date;
+  kitConsegnato: boolean;
 };
 
 export async function progettiDi(utente: Utente): Promise<Progetto[]> {
@@ -45,6 +46,7 @@ export async function progettiDi(utente: Utente): Promise<Progetto[]> {
         select: { id: true, commessaId: true, fatturaVenditaId: true, importo: true, pagatoManuale: true, ritenuta: true, abbinamenti: { select: { importo: true } } },
       })
     : [];
+  const conKit = new Set(ids.length ? (await prisma.consegnaKit.findMany({ where: { commessaId: { in: ids } }, select: { commessaId: true } })).map((k) => k.commessaId) : []);
   const scadenzeDi = new Map<string, typeof scadenze>();
   for (const x of scadenze) {
     const cid = x.commessaId ?? (x.fatturaVenditaId ? commessaDiFattura.get(x.fatturaVenditaId) : undefined);
@@ -76,6 +78,7 @@ export async function progettiDi(utente: Utente): Promise<Progetto[]> {
       passi,
       corrente,
       dataContratto: c.createdAt,
+      kitConsegnato: conKit.has(c.id),
     };
   });
 }

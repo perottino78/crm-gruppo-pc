@@ -9,6 +9,7 @@ import { filtraProgetti, ordinaProgetti, riepilogoProgetti, semaforoConsegna, pe
 import { Stepper } from "@/components/clienti/PraticaCard";
 import { STATI_COMMESSA, eur } from "@/lib/commesse";
 import { nomeUfficio } from "@/lib/flusso";
+import { puoConsegnareKit } from "@/lib/kit/punti";
 
 type P = { vista?: string; q?: string; persona?: string };
 
@@ -128,6 +129,9 @@ export default async function ProgettiPage({ searchParams }: { searchParams: Pro
                       ? <>👉 Adesso: <b>{x.corrente.nome}</b>{x.corrente.ufficio ? <> · {nomeUfficio(x.corrente.ufficio)}</> : null}</>
                       : x.stato === "ANNULLATA" ? "Pratica annullata" : FINITO(x.stato) ? "✅ Lavoro concluso" : "—"}
                   </p>
+                  {puoConsegnareKit(x.stato) && (x.kitConsegnato
+                    ? <span className="rounded bg-pink-50 px-2 py-0.5 text-xs font-semibold text-pink-800 ring-1 ring-pink-200">🎁 kit consegnato</span>
+                    : <Link href={`/commesse/${x.id}#kit-cliente`} className="btn-3d btn-3d-pink px-3 py-1 text-xs">🎁 Registra il kit</Link>)}
                   <div className="min-w-[260px] flex-1 md:max-w-sm">
                     <div className="flex justify-between text-xs text-neutral-700">
                       <span>Pagato <b>{eur(x.pagato)}</b> di {eur(x.totale)}</span>

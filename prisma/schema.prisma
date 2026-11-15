@@ -2300,3 +2300,23 @@ model Cestino {
   @@index([scadeIl])
   @@index([eliminatoIl])
 }
+
+// Raccolta punti «kit al cliente» (richiesta di Ugo, nov 2026): dopo la posa il commerciale consegna il kit P&C al cliente,
+// lo registra nella pratica (foto facoltativa nei Documenti, cartella «Consegna kit») e prende punti. Regole e premi in
+// Configurazione (chiavi kit_*). Una consegna per commessa.
+model ConsegnaKit {
+  id               String   @id @default(cuid())
+  commessaId       String   @unique
+  clienteId        String
+  utenteId         String
+  utenteNome       String
+  consegnatoIl     DateTime
+  conFoto          Boolean  @default(false)
+  recensione       Boolean  @default(false)
+  punti            Int
+  nota             String?
+  registratoDaNome String?
+  createdAt        DateTime @default(now())
+
+  @@index([utenteId, consegnatoIl])
+}

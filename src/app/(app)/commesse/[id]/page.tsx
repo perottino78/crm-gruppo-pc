@@ -56,12 +56,13 @@ import TaskCard from "@/components/TaskCard";
 import { creaTaskManuale, avviaFlussoCommessa } from "@/app/flusso-actions";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
+import KitCliente from "@/components/commesse/KitCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -897,6 +898,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           )}
         </section>
       )}
+
+      {/* KIT AL CLIENTE (raccolta punti) */}
+      <KitCliente commessaId={c.id} stato={c.stato} commercialeId={c.preventivo.commercialeId} utente={utente} ok={kitOk} errore={kitErrore} />
 
       {/* ASSISTENZA */}
       <section className="card-fase" style={{ "--fase": "#dc2626" } as React.CSSProperties}>
