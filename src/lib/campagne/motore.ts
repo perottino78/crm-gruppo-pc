@@ -2,7 +2,8 @@
 // Le campagne sono indipendenti dalla pausa delle email automatiche dei lead: servono solo la posta (SMTP) e il clic su Invia.
 import { createHmac } from "crypto";
 import { prisma } from "@/lib/prisma";
-import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
+import { inviaMail, invioMassivoPossibile, APP_URL } from "@/lib/mail/invio";
+import { servizioInvio } from "@/lib/mail/servizio";
 import { CONTATTI, htmlEmail, testoEmail, type EmailPronta } from "@/lib/automazioni/email";
 import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, type FiltriCampagna } from "./regole";
 import { daOraRoma } from "@/lib/calendario/tempo";
@@ -119,10 +120,16 @@ export async function inviaProva(campagnaId: string, a: string): Promise<{ invia
   let ultimo: { inviata: boolean; motivo?: string } = { inviata: false };
   for (const x of versioni) {
     const m = emailCampagna(x.cont, { id: "prova", nome: "Mario Rossi" });
-    ultimo = await inviaMail({ a: [a], oggetto: `${x.tag} ${m.oggetto}`, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti });
+    ultimo = await inviaMail({ a: [a], oggetto: `${x.tag} ${m.oggetto}`, testo: m.testo, html: m.html, da: mittenteCampagna(c.marchi), servizio: true });
     if (!ultimo.inviata) return ultimo;
   }
   return { ...ultimo, quante: versioni.length };
+}
+
+/** Mittente della campagna: le campagne solo Solaris partono da promozionale@solarisfotovoltaico.com, le altre da quello di P&C. */
+export function mittenteCampagna(marchi: string[]): string {
+  const solo = [...new Set(marchi.map((m) => m.trim().toLowerCase()))];
+  return solo.length === 1 && solo[0].startsWith("solaris") ? (process.env.MAIL_FROM_SOLARIS || "Solaris Fotovoltaico <promozionale@solarisfotovoltaico.com>") : CONTATTI.mittenteClienti;
 }
 
 export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; programmate?: number; motivo?: string };
@@ -131,7 +138,7 @@ export type ResocontoCampagne = { inviate: number; fallite: number; saltate: num
 export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } = {}): Promise<ResocontoCampagne> {
   const ora = opz.adesso ?? (() => new Date());
   const r: ResocontoCampagne = { inviate: 0, fallite: 0, saltate: 0, promemoria: 0 };
-  if (!(await mailConfigurata())) return { ...r, motivo: "posta (SMTP) non configurata" };
+  if (!(await invioMassivoPossibile())) return { ...r, motivo: "posta (SMTP) non configurata" };
   // email rimbalzate: la casella aziendale si legge al massimo ogni 10 minuti (un errore non ferma gli invii)
   await controllaRimbalzi({ adesso: ora }).catch(() => null);
 
@@ -172,8 +179,12 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
     if (presa.count) { await accodaCampagna(p.id, ora()); r.programmate = (r.programmate ?? 0) + 1; }
   }
 
-  // 3. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata)
-  for (let i = 0; i < (opz.max ?? 40); i++) {
+  // 3. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata). Con il servizio di invio
+  //    (Brevo) il blocco è grande e si ferma dopo 40 secondi (il controllo ha 60 secondi); con la posta aziendale 40 email.
+  const servizio = !!(await servizioInvio());
+  const inizio = Date.now();
+  for (let i = 0; i < (opz.max ?? (servizio ? 3000 : 40)); i++) {
+    if (servizio && Date.now() - inizio > 40_000) break;
     const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true, variante: true } });
     if (!inv) break;
     const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", tentativi: { increment: 1 } } });
@@ -185,7 +196,7 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
       continue;
     }
     const m = emailCampagna(contenutoDi(inv.campagna, inv.variante), cliente, `c-${inv.id}`);
-    const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: CONTATTI.mittenteClienti, intestazioni: { [INTESTAZIONE]: `c-${inv.id}` } });
+    const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: mittenteCampagna(inv.campagna.marchi), intestazioni: { [INTESTAZIONE]: `c-${inv.id}` }, servizio: true });
     if (esito.inviata) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
       r.inviate++;

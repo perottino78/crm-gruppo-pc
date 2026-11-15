@@ -14,11 +14,14 @@ import { impostaAutomazioni, eseguiOra, salvaRecupero } from "@/app/lead-percors
 import { salvaPromemoriaCampagne, controllaRimbalziOra } from "@/app/campagne-actions";
 import { ultimoEsitoRimbalzi } from "@/lib/mail/rimbalzi-server";
 import { impostazioniPromemoria } from "@/lib/campagne/motore";
-import { salvaPostaAziendale } from "@/app/posta-actions";
+import { salvaPostaAziendale, salvaServizioInvio, scollegaServizioInvio } from "@/app/posta-actions";
+import { servizioInvio, chiaveWebhook } from "@/lib/mail/servizio";
+import { APP_URL } from "@/lib/mail/invio";
+import BottoneConferma from "@/components/BottoneConferma";
 import { postaAziendale } from "@/lib/mail/invio";
 import { HOST_PREDEFINITO, PORTA_PREDEFINITA } from "@/lib/mail/caselle";
 
-type P = { posta?: string; postaErrore?: string; prove?: string; u?: string; h?: string; pt?: string; m?: string; ac?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string; rimbalzi?: string };
+type P = { servizio?: string; servizioErrore?: string; posta?: string; postaErrore?: string; prove?: string; u?: string; h?: string; pt?: string; m?: string; ac?: string; promemoria?: string; recupero?: string; ok?: string; eseguiti?: string; inviate?: string; motivo?: string; errore?: string; rimbalzi?: string };
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 const ESEMPIO_PROMO = { testo: "• Sconto in fattura sulle pergole bioclimatiche\n• Finanziamento su misura sugli infissi", validaFino: new Date(Date.now() + 30 * 86400000) };
 const ESEMPIO = {
@@ -86,6 +89,8 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
       {p.errore === "permesso" && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">Solo amministrazione e marketing possono cambiare queste impostazioni.</p>}
       {p.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">{p.ok === "attive" ? "▶️ Email automatiche ACCESE." : "⏸ Email automatiche in PAUSA."}</p>}
       {p.eseguiti && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">Controllo eseguito: {p.eseguiti} invii elaborati, {p.inviate} email spedite.{p.motivo ? ` (${p.motivo})` : ""}</p>}
+
+      {admin && <ServizioInvio ok={p.servizio} errore={p.servizioErrore} />}
 
       {admin && <div id="posta" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -243,6 +248,48 @@ export default async function AutomazioniPage({ searchParams }: { searchParams: 
           );
         })}
       </div>
+    </div>
+  );
+}
+
+/** Servizio di invio (Brevo): campagne ed email automatiche ai clienti; la posta aziendale resta per le email una a una. */
+async function ServizioInvio({ ok, errore }: { ok?: string; errore?: string }) {
+  const s = await servizioInvio();
+  const webhook = `${APP_URL}/api/brevo/eventi?k=${await chiaveWebhook()}`;
+  return (
+    <div id="servizio" className="card-fase bg-white rounded-lg border border-neutral-200 p-4 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="font-semibold">🚀 Servizio di invio per campagne ed email automatiche (Brevo)</p>
+        <span className={`text-sm px-3 py-1 rounded-full ${s ? "bg-green-50 text-green-800" : "bg-amber-50 text-amber-800"}`}>{s ? `✓ collegato: ${s.utente}` : "non collegato: si usa la posta aziendale"}</span>
+      </div>
+      <p className="text-sm text-neutral-600">
+        Le campagne e le email automatiche ai clienti partono da Brevo, così l&apos;hosting della posta aziendale non le blocca. Le campagne «solo Solaris»
+        partono da promozionale@solarisfotovoltaico.com, le altre da promozionale@gruppopec.com (devono essere mittenti verificati in Brevo). Offerte, risposte e avvisi
+        agli uffici restano sulle caselle aziendali. Dati da Brevo › Impostazioni › <b>SMTP e API</b> › SMTP.
+      </p>
+      {ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {ok}</p>}
+      {errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{errore}</p>}
+      <form action={salvaServizioInvio} className="grid sm:grid-cols-4 gap-2 items-end">
+        <label className="text-xs text-neutral-600 sm:col-span-2">Login SMTP
+          <input name="utente" defaultValue={s?.utente ?? ""} placeholder="es. 9a1b2c001@smtp-brevo.com" className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+        </label>
+        <label className="text-xs text-neutral-600 sm:col-span-2">Chiave SMTP
+          <input name="chiave" type="password" autoComplete="new-password" placeholder={s ? "•••••••• (lascia vuoto per non cambiarla)" : "xsmtpsib-…"} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+        </label>
+        <label className="text-xs text-neutral-600 sm:col-span-3">Server
+          <input name="host" defaultValue={s?.host ?? "smtp-relay.brevo.com"} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+        </label>
+        <label className="text-xs text-neutral-600">Porta
+          <input name="porta" inputMode="numeric" defaultValue={s?.porta ?? 587} className="w-full border border-neutral-300 rounded px-2 py-1.5 text-sm" />
+        </label>
+        <button className="btn-3d btn-3d-teal text-sm px-4 py-2 sm:col-span-4 justify-self-start">Salva e manda una prova</button>
+      </form>
+      <div className="rounded border border-neutral-200 bg-neutral-50 px-3 py-2 text-xs text-neutral-700 space-y-1">
+        <p><b>Rimbalzi e disiscrizioni da Brevo</b>: in Brevo › Impostazioni › <b>Webhook</b> › «Aggiungi un webhook» (transazionale) incolla questo indirizzo e spunta
+          «Hard bounce», «Soft bounce», «Bloccato», «Email non valida», «Disiscritto» e «Spam»:</p>
+        <p className="select-all break-all font-mono text-[11px] text-blue-900">{webhook}</p>
+      </div>
+      {s && <form action={scollegaServizioInvio}><BottoneConferma messaggio="Scollegare Brevo? Le email torneranno a partire dalla posta aziendale." className="btn-3d btn-3d-outline text-xs px-3 py-1.5">Scollega Brevo</BottoneConferma></form>}
     </div>
   );
 }

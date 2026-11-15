@@ -100,3 +100,36 @@ export async function salvaPostaAziendale(fd: FormData) {
   revalidatePath(dove);
   vai(dove, { posta: `Posta aziendale collegata: email di prova inviata a ${u.email}.${corretto ? ` Impostazioni corrette in automatico: server ${t.host}, porta ${t.porta} ${usaSsl(t) ? "SSL" : "STARTTLS"}${t.accettaCertificato ? ", certificato del server accettato" : ""}.` : ""}` });
 }
+
+/** Servizio di invio (Brevo) per campagne ed email automatiche: salva login e chiave SMTP e manda subito una prova a chi salva. */
+export async function salvaServizioInvio(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u || u.ruolo !== "AMMINISTRATORE") redirect("/impostazioni/automazioni");
+  const dove = "/impostazioni/automazioni";
+  const go = (p: Record<string, string>) => redirect(`${dove}?${new URLSearchParams(p)}#servizio`);
+  const { salvaServizio, servizioInvio, scollegaServizio } = await import("@/lib/mail/servizio");
+  const { inviaMail } = await import("@/lib/mail/invio");
+  const { CONTATTI } = await import("@/lib/automazioni/email");
+  const utente = str(fd, "utente");
+  const chiave = str(fd, "chiave");
+  if (!utente) go({ servizioErrore: "Scrivi il login SMTP di Brevo (es. 9a1b2c001@smtp-brevo.com)." });
+  const prima = await servizioInvio();
+  if (!chiave && !prima) go({ servizioErrore: "Incolla la chiave SMTP di Brevo." });
+  await salvaServizio(utente!, chiave, str(fd, "host"), portaValida(str(fd, "porta")));
+  const esito = await inviaMail({ a: [u.email], oggetto: "Prova del servizio di invio (Brevo) da P&C ONE", testo: `Ciao,\n\nquesta email è partita da Brevo: campagne ed email automatiche ai clienti useranno questo servizio.\n\nP&C ONE`, da: CONTATTI.mittenteClienti, servizio: true });
+  if (!esito.inviata) {
+    if (!prima) await scollegaServizio(); // non va: si torna come prima, le email non devono fermarsi
+    go({ servizioErrore: `Non collegato, Brevo non ha accettato la prova: ${esito.motivo ?? "errore"}. Controlla login e chiave SMTP e che il mittente (${CONTATTI.mittenteClienti}) sia verificato in Brevo.` });
+  }
+  revalidatePath(dove);
+  go({ servizio: `Brevo collegato: email di prova inviata a ${u.email}. Da adesso campagne ed email automatiche ai clienti partono da Brevo.` });
+}
+
+export async function scollegaServizioInvio() {
+  const u = await getCurrentUser();
+  if (!u || u.ruolo !== "AMMINISTRATORE") redirect("/impostazioni/automazioni");
+  const { scollegaServizio } = await import("@/lib/mail/servizio");
+  await scollegaServizio();
+  revalidatePath("/impostazioni/automazioni");
+  redirect("/impostazioni/automazioni?servizio=" + encodeURIComponent("Brevo scollegato: le email tornano a partire dalla posta aziendale.") + "#servizio");
+}

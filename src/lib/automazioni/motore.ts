@@ -286,7 +286,7 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
         return "FATTO";
       }
       // aperture e clic: solo le email al cliente (quelle interne non serve contarle)
-      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined, intestazioni: { "X-CRM-Invio": `l-${reg.id}` } });
+      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined, intestazioni: { "X-CRM-Invio": `l-${reg.id}` }, servizio: reg.categoria === "CLIENTE" });
       if (esito.inviata) {
         await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
         await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);
