@@ -132,7 +132,7 @@ export function mittenteCampagna(marchi: string[]): string {
   return solo.length === 1 && solo[0].startsWith("solaris") ? (process.env.MAIL_FROM_SOLARIS || "Solaris Fotovoltaico <promozionale@solarisfotovoltaico.com>") : CONTATTI.mittenteClienti;
 }
 
-export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; programmate?: number; motivo?: string };
+export type ResocontoCampagne = { inviate: number; fallite: number; saltate: number; promemoria: number; programmate?: number; ripresi?: number; motivo?: string };
 
 /** Avvisi di scadenza (campagne e promozione del recupero) e un blocco di invii in coda. Sicuro da chiamare più volte. */
 export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } = {}): Promise<ResocontoCampagne> {
@@ -182,12 +182,18 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number } 
   // 3. Un blocco di invii in coda (il resto al prossimo controllo: la posta non viene intasata). Con il servizio di invio
   //    (Brevo) il blocco è grande e si ferma dopo 40 secondi (il controllo ha 60 secondi); con la posta aziendale 40 email.
   const servizio = !!(await servizioInvio());
+  // invii presi da un controllo interrotto a metà (tempo scaduto, server spento): restavano «in corso» per sempre e la
+  // campagna non finiva mai. Dopo 10 minuti tornano in coda; dopo 3 tentativi interrotti restano «non inviati».
+  const scaduto = new Date(ora().getTime() - 10 * 60_000);
+  const bloccati = { stato: "IN_CORSO", OR: [{ presoIl: null }, { presoIl: { lt: scaduto } }] };
+  await prisma.campagnaInvio.updateMany({ where: { ...bloccati, tentativi: { gte: 3 } }, data: { stato: "FALLITA", motivo: "invio interrotto più volte" } });
+  r.ripresi = (await prisma.campagnaInvio.updateMany({ where: bloccati, data: { stato: "IN_ATTESA" } })).count;
   const inizio = Date.now();
   for (let i = 0; i < (opz.max ?? (servizio ? 3000 : 40)); i++) {
     if (servizio && Date.now() - inizio > 40_000) break;
     const inv = await prisma.campagnaInvio.findFirst({ where: { stato: "IN_ATTESA", campagna: { stato: "IN_INVIO" } }, orderBy: { createdAt: "asc" }, include: { campagna: true, variante: true } });
     if (!inv) break;
-    const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", tentativi: { increment: 1 } } });
+    const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", presoIl: ora(), tentativi: { increment: 1 } } });
     if (!preso.count) continue;
     const cliente = await prisma.cliente.findUnique({ where: { id: inv.clienteId }, select: { id: true, nome: true, nomePersona: true, email: true, emailRimbalzata: true, disiscritto: true, leadOrigine: { select: { disiscritto: true } } } });
     if (!cliente || cliente.disiscritto || cliente.leadOrigine?.disiscritto || (rimbalzato(cliente) && uguali(cliente.email, inv.email))) {
