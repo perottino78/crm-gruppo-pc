@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
 import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest, programmaCampagna, annullaProgrammazione } from "@/app/campagne-actions";
 import { contaDestinatari, filtriCampagna, emailCampagna, contenutoDi } from "@/lib/campagne/motore";
-import { CATEGORIE, SENZA_STATO, SITUAZIONI, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
+import { CATEGORIE, SENZA_STATO, SITUAZIONI, STATI_RICEVUTA, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 import CampiEmail from "@/components/campagne/CampiEmail";
 import GruppiAB from "@/components/campagne/GruppiAB";
 import FormAutoSalva from "@/components/FormAutoSalva";
@@ -27,7 +27,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   const p = await searchParams;
   const c = await prisma.campagna.findUnique({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" }, include: { _count: { select: { invii: true } } } }, invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true, varianteId: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
   if (!c) notFound();
-  const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati] = await Promise.all([
+  const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati, altreCampagne] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" }, select: { nome: true } }),
     prisma.cliente.groupBy({ by: ["statoLead"], _count: { _all: true }, orderBy: { _count: { statoLead: "desc" } } }),
     prisma.cliente.groupBy({ by: ["origine"], _count: { _all: true }, orderBy: { _count: { origine: "desc" } } }),
@@ -35,6 +35,8 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
     filtriCampagna(c).then(contaDestinatari),
     prisma.utente.findMany({ where: { stato: "ATTIVO", OR: [{ ruolo: "TELEFONISTA" }, { ruolo: "MARKETING" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
     prisma.leadEvento.count({ where: { tipo: "campagna.clic", testo: { contains: `campagna «${c.nome}»` } } }),
+    // campagne già partite (o in partenza) da poter escludere: chi le ha ricevute non riceve questa
+    prisma.campagna.findMany({ where: { id: { not: c.id }, OR: [{ invii: { some: {} } }, { id: { in: c.escludiCampagne } }] }, orderBy: [{ inviataIl: { sort: "desc", nulls: "last" } }, { createdAt: "desc" }], take: 30, select: { id: true, nome: true, inviataIl: true, _count: { select: { invii: { where: { stato: { in: STATI_RICEVUTA } } } } } } }),
   ]);
   const n = (s: string) => c.invii.filter((i) => i.stato === s).length;
   const g = c.validaFino ? giorniAllaScadenza(c.validaFino, new Date()) : null;
@@ -101,6 +103,20 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             </div>
             <p className="text-[11px] text-neutral-600">«Offerta non chiusa» = ha avuto un preventivo nel CRM o in BConsole e non ha mai firmato (niente contratto, ordine o fattura). Sono i contatti più caldi: hanno già incontrato un commerciale.</p>
           </div>
+          {altreCampagne.length > 0 && (
+            <details open={c.escludiCampagne.length > 0} className="rounded border border-sky-200 bg-sky-50/60 p-3">
+              <summary className="cursor-pointer text-xs font-semibold text-neutral-700">🚫 Escludi chi ha già ricevuto un&apos;altra campagna{c.escludiCampagne.length ? ` (${c.escludiCampagne.length} ${c.escludiCampagne.length === 1 ? "scelta" : "scelte"})` : ""}</summary>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {altreCampagne.map((x) => (
+                  <label key={x.id} className={casella(c.escludiCampagne.includes(x.id))}>
+                    <input type="checkbox" name="escludiCampagne" value={x.id} defaultChecked={c.escludiCampagne.includes(x.id)} />
+                    {x.nome} <span className="text-xs text-neutral-500">· {x._count.invii} contatti{x.inviataIl ? ` · ${x.inviataIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}</span>
+                  </label>
+                ))}
+              </div>
+              <p className="mt-1 text-[11px] text-neutral-600">Chi ha ricevuto (o sta ricevendo) le campagne spuntate non riceve questa: utile per scrivere solo ai contatti nuovi con lo stesso messaggio.</p>
+            </details>
+          )}
           <p className="text-sm rounded bg-teal-50 border border-teal-200 px-3 py-2">
             👥 <b>{conti.raggiungibili}</b> riceveranno l&apos;email · {conti.totale} rientrano nei filtri ({conti.senzaEmail} senza email, {conti.disiscritti} disiscritti{conti.rimbalzati ? `, ${conti.rimbalzati} con email rimbalzata` : ""}).
             <span className="text-xs text-neutral-600"> Il conteggio si aggiorna quando salvi.</span>

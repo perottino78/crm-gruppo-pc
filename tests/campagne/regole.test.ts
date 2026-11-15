@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { whereCampagna, personalizza, giorniAllaScadenza, leggiGiorniPromemoria, promemoriaDiOggi, testoGiorni, emailValida, SENZA_STATO } from "../../src/lib/campagne/regole";
+import { whereCampagna, personalizza, giorniAllaScadenza, leggiGiorniPromemoria, promemoriaDiOggi, testoGiorni, emailValida, SENZA_STATO, conEsclusi } from "../../src/lib/campagne/regole";
 import { daOraRoma } from "../../src/lib/calendario/tempo";
 
 const r = (s: string) => daOraRoma(s)!;
@@ -55,4 +55,10 @@ test("email valide", () => {
   assert.ok(!emailValida("mario@rossi"));
   assert.ok(!emailValida("senza-email@importato.invalid"));
   assert.ok(!emailValida(null));
+});
+
+test("conEsclusi: unisce chi ha già ricevuto agli esclusi, senza doppioni", () => {
+  assert.deepEqual(conEsclusi({ marchi: [], stati: [], categorie: [], escludiClienti: ["a", "b"] }, ["b", "c"]).escludiClienti, ["a", "b", "c"]);
+  const f: { marchi: string[]; stati: string[]; categorie: string[]; escludiClienti?: string[] } = { marchi: [], stati: [], categorie: [] };
+  assert.equal(conEsclusi(f, []), f);
 });

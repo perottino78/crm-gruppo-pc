@@ -90,6 +90,7 @@ export async function salvaCampagna(fd: FormData) {
       offerteDal: str(fd, "offerteDal") ? daOraRoma(`${str(fd, "offerteDal")}T00:00`) : null,
       offerteAl: str(fd, "offerteAl") ? daOraRoma(`${str(fd, "offerteAl")}T23:59`) : null,
       richiama: fd.get("richiama") === "on", richiamaTelefonistaId: str(fd, "richiamaTelefonistaId"),
+      escludiCampagne: lista(fd, "escludiCampagne").filter((x) => x !== id).slice(0, 50),
       validaFino: fino ? daOraRoma(`${fino}T12:00`) : null,
       // nuova scadenza: gli avvisi ripartono da capo
       promemoriaInviati: [],
@@ -205,7 +206,7 @@ export async function duplicaCampagna(fd: FormData) {
   if (!id) return;
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" } } } });
   const n = await prisma.campagna.create({
-    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, creataDa: u.nome },
+    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, escludiCampagne: c.escludiCampagne, creataDa: u.nome },
   });
   if (fd.get("resta") === "1") { revalidatePath("/campagne"); redirect(`/campagne?ok=${encodeURIComponent(`Creata «${c.nome} (copia)».`)}`); }
   redirect(`/campagne/${n.id}?ok=${encodeURIComponent("Copia creata: aggiorna testo e scadenza, poi invia.")}`);
