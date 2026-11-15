@@ -16,7 +16,8 @@ async function eseguiTutto() {
   const esiti = await inviaPromemoriaEsiti().catch((e) => ({ errore: String(e).slice(0, 200) }));
   const nextcloud = await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const google = await import("@/lib/calendario/google").then((m) => m.sincronizzaGoogle()).catch((e) => ({ errore: String(e).slice(0, 200) }));
-  return { ...lead, campagne, obiettivi, esiti, nextcloud, google };
+  const cestino = await import("@/lib/cestino").then((m) => m.svuotaScaduti()).catch((e) => ({ errore: String(e).slice(0, 200) }));
+  return { ...lead, campagne, obiettivi, esiti, nextcloud, google, cestinoSvuotati: cestino };
 }
 
 // Controllo periodico degli invii programmati dei lead e delle campagne (coda e avvisi di scadenza) (Vercel Cron o un servizio esterno ogni 5 minuti,

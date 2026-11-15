@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { scopeClienteWhere, scopeLeadWhere } from "@/lib/scope";
+import { mettiNelCestino } from "@/lib/cestino";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const vai = (ritorno: string | null, q: Record<string, string>): never => {
@@ -49,6 +50,7 @@ export async function eliminaCliente(fd: FormData) {
   if (!c) vai(ritorno, { errore: "Cliente non trovato." });
   const blocchi = await bloccaEliminazioneCliente(c!.id);
   if (blocchi.length) vai(ritorno, { errore: `${c!.nome} non si può eliminare: ha ${blocchi.join(", ")}.` });
+  await mettiNelCestino("CLIENTE", c!.id, u); // copia completa per 30 giorni (scrive anche nel registro)
   await prisma.$transaction(async (tx) => {
     // il resto (contatti, appuntamenti, attività, note) va via con lui; offerte BConsole e invii di campagne restano senza cliente
     await tx.appuntamento.deleteMany({ where: { clienteId: c!.id } });
@@ -61,9 +63,8 @@ export async function eliminaCliente(fd: FormData) {
     await tx.documento.deleteMany({ where: { entita: "CLIENTE", entitaId: c!.id } }).catch(() => null);
     await tx.cliente.delete({ where: { id: c!.id } });
   });
-  await prisma.registroAmministrazione.create({ data: { entita: "CLIENTE", entitaId: c!.id, azione: "ELIMINATO", dettaglio: c!.nome, utenteNome: u.nome } }).catch(() => null);
   revalidatePath("/clienti");
-  vai(ritorno?.startsWith("/clienti/") ? "/clienti" : ritorno, { ok: `${c!.nome} eliminato.` });
+  vai(ritorno?.startsWith("/clienti/") ? "/clienti" : ritorno, { ok: `${c!.nome} eliminato (nel cestino per 30 giorni).` });
 }
 
 export async function eliminaLead(fd: FormData) {
@@ -72,13 +73,13 @@ export async function eliminaLead(fd: FormData) {
   const ritorno = str(fd, "ritorno");
   const l = id ? await prisma.lead.findFirst({ where: { AND: [{ id }, scopeLeadWhere(u)] }, select: { id: true, nome: true } }) : null;
   if (!l) vai(ritorno, { errore: "Lead non trovato." });
+  await mettiNelCestino("LEAD", l!.id, u);
   await prisma.$transaction(async (tx) => {
     // il cliente nato dal lead resta (perde solo il collegamento); cronologia, email e invii in coda vanno via con il lead
     await tx.cliente.updateMany({ where: { leadOrigineId: l!.id }, data: { leadOrigineId: null } });
     await tx.lead.delete({ where: { id: l!.id } });
   });
-  await prisma.registroAmministrazione.create({ data: { entita: "LEAD", entitaId: l!.id, azione: "ELIMINATO", dettaglio: l!.nome, utenteNome: u.nome } }).catch(() => null);
   revalidatePath("/lead");
   revalidatePath("/clienti");
-  vai(ritorno?.startsWith("/lead/") ? "/lead" : ritorno, { ok: `Lead ${l!.nome} eliminato.` });
+  vai(ritorno?.startsWith("/lead/") ? "/lead" : ritorno, { ok: `Lead ${l!.nome} eliminato (nel cestino per 30 giorni).` });
 }

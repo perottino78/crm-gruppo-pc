@@ -212,14 +212,17 @@ export async function duplicaCampagna(fd: FormData) {
 }
 
 export async function eliminaCampagna(fd: FormData) {
-  await marketing();
+  const chi = await marketing();
   const id = str(fd, "id");
   if (!id) return;
   // anche quelle già inviate (richiesta di Rocco): con la campagna vanno via i gruppi, la coda ancora da spedire e le statistiche
   const c = await prisma.campagna.findUnique({ where: { id }, select: { nome: true } });
+  // prima nel cestino (30 giorni, l'amministrazione la può ripristinare), poi via
+  const { mettiNelCestino } = await import("@/lib/cestino");
+  await mettiNelCestino("CAMPAGNA", id, chi);
   await prisma.campagna.deleteMany({ where: { id } });
   revalidatePath("/campagne");
-  redirect(`/campagne?ok=${encodeURIComponent(`Campagna «${c?.nome ?? ""}» eliminata.`)}`);
+  redirect(`/campagne?ok=${encodeURIComponent(`Campagna «${c?.nome ?? ""}» spostata nel cestino: l'amministrazione la può ripristinare per 30 giorni.`)}`);
 }
 
 /** Impostazioni: giorni degli avvisi di scadenza (es. 3,2,1) e a chi mandarli. */

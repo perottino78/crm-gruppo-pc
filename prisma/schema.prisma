@@ -2276,3 +2276,23 @@ model EventoNextcloud {
   @@index([utenteId, inizio])
   @@index([chiave])
 }
+
+// Cestino (richiesta di Ugo 15/11/2026): quello che si elimina (campagne, lead, clienti) resta qui 30 giorni con tutti i dati
+// collegati e l'amministrazione lo può ripristinare da Impostazioni › Registro e cestino. Dopo `scadeIl` si cancella da solo.
+model Cestino {
+  id                 String    @id @default(cuid())
+  tipo               String // CAMPAGNA | LEAD | CLIENTE
+  rifId              String
+  nome               String
+  // { tabelle: [{ modello, righe }], collega: [{ modello, id, campo, valore }] } in ordine di ripristino
+  dati               Json
+  eliminatoDaId      String?
+  eliminatoDaNome    String?
+  eliminatoIl        DateTime  @default(now())
+  scadeIl            DateTime
+  ripristinatoIl     DateTime?
+  ripristinatoDaNome String?
+
+  @@index([scadeIl])
+  @@index([eliminatoIl])
+}

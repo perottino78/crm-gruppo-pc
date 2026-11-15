@@ -75,6 +75,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         <span className="block text-xs text-neutral-600">Dati fiscali, banca e pagamenti, mail ordini, tariffe di posa, DURC e assicurazioni.</span>
       </Link>
 
+      {puo(utenteCorrente, "registro") && (
+        <Link href="/impostazioni/registro" className="block bg-white rounded-lg border border-red-200 px-4 py-3 mb-4 hover:border-red-400">
+          <span className="text-base font-bold text-neutral-900">🗂️ Registro e cestino →</span>
+          <span className="block text-xs text-neutral-600">Chi ha fatto cosa, e il cestino: campagne, lead e clienti eliminati restano 30 giorni e si ripristinano.</span>
+        </Link>
+      )}
+
       {puo(utenteCorrente, "calendario.google") && (
         <Link href="/impostazioni/google" className="block bg-white rounded-lg border border-blue-300 px-4 py-3 mb-4 hover:border-blue-500">
           <span className="text-base font-bold text-neutral-900">📅 Google Calendar →</span>
