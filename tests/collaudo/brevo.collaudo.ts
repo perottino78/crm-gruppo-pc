@@ -35,13 +35,24 @@ const aziendale: Mail[] = [], brevo: Mail[] = [];
 let chiaveSbagliata = false;
 smtpFinto(2551, aziendale);
 smtpFinto(2552, brevo, () => chiaveSbagliata);
+// API di Brevo finta (creazione del webhook)
+import http from "node:http";
+const webhookCreati: { url: string; events: string[] }[] = [];
+http.createServer((req, res) => {
+  let b = ""; req.on("data", (d) => (b += d)); req.on("end", () => {
+    if (req.headers["api-key"] !== "xkeysib-buona") { res.writeHead(401); return res.end("{}"); }
+    if (req.method === "GET") { res.writeHead(200, { "content-type": "application/json" }); return res.end(JSON.stringify({ webhooks: webhookCreati })); }
+    webhookCreati.push(JSON.parse(b)); res.writeHead(201, { "content-type": "application/json" }); res.end('{"id":1}');
+  });
+}).listen(2553);
+process.env.BREVO_API_BASE = "http://127.0.0.1:2553";
 Object.assign(process.env, { SMTP_HOST: "127.0.0.1", SMTP_PORT: "2551", SMTP_USER: "crm@gruppopec.com", SMTP_PASS: "x", MAIL_FROM: "Gruppo P&C <crm@gruppopec.com>" });
 
 import { NextRequest } from "next/server";
 import { prisma } from "../../src/lib/prisma";
 import { eseguiCampagne } from "../../src/lib/campagne/motore";
 import { inviaMail } from "../../src/lib/mail/invio";
-import { salvaServizioInvio } from "../../src/app/posta-actions";
+import { salvaServizioInvio, creaWebhookBrevo } from "../../src/app/posta-actions";
 import { chiaveWebhook, servizioInvio } from "../../src/lib/mail/servizio";
 import { POST as webhook } from "../../src/app/api/brevo/eventi/route";
 
@@ -114,6 +125,15 @@ async function main() {
   const cl = await prisma.cliente.findUniqueOrThrow({ where: { id: inv.clienteId } });
   verifica(dopo.stato === "RIMBALZATA" && cl.emailRimbalzata === inv.email, "rimbalzo: invio RIMBALZATA e indirizzo da non usare più", { s: dopo.stato, r: cl.emailRimbalzata });
   verifica((await prisma.cliente.findFirstOrThrow({ where: { email: "c1.brevo@esempio.it" } })).disiscritto, "disiscrizione da Brevo: cliente disiscritto");
+
+  console.log("6. Webhook creato da P&C ONE");
+  x = await dove(creaWebhookBrevo(fd({ apiKey: "xkeysib-sbagliata" })));
+  verifica(x?.includes("chiave API non valida") && !webhookCreati.length, "chiave API sbagliata: niente creato", x);
+  x = await dove(creaWebhookBrevo(fd({ apiKey: "xkeysib-buona" })));
+  verifica(x?.includes("Webhook creato") && webhookCreati.length === 1 && webhookCreati[0].url.endsWith(`k=${k}`) && webhookCreati[0].events.includes("hardBounce") && webhookCreati[0].events.includes("unsubscribed"), "webhook creato con l'indirizzo e gli eventi giusti", webhookCreati);
+  x = await dove(creaWebhookBrevo(fd({ apiKey: "xkeysib-buona" })));
+  verifica(x?.includes("c'era già") && webhookCreati.length === 1, "seconda volta: niente doppione", x);
+  verifica(!(await prisma.configurazione.findFirst({ where: { valore: { contains: "xkeysib" } } })), "la chiave API non è salvata da nessuna parte");
 
   console.log(`\n${ok} ok, ${ko} falliti`);
   await prisma.$disconnect();
