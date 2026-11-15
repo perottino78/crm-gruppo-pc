@@ -598,6 +598,13 @@ login nel `matcher` del middleware.
   punti sempre al commerciale dell'offerta; chi in ufficio non vende (`vedeSoloISuoiKit`: visibilità PROPRI ma non `eVenditore`) vede tutti i lavori finiti;
   il commerciale vede «✅ 🎁» accanto al cliente in «I miei progetti».
   `src/lib/kit/punti.ts` puro (test `tests/kit/punti.test.ts`), collaudo `kit-cliente` (20).
+- **Solaris Studio** (`public/solaris-studio/studio.html` servito da `api/solaris/studio/[id]`, documentazione in `docs/solaris-studio/`):
+  «🛰️ Foto dal satellite» = indirizzo del passo 1 → `GET /api/solaris/geocodifica` (Esri, riserva OpenStreetMap) → tessere Esri World Imagery da
+  `GET /api/solaris/satellite?z&x&y` (zoom 20, se manca 19; solo sessione, niente DB), falda disegnata da sola e misure dai pixel (`P.mpp`); scatto
+  automatico aprendo «Foto del tetto» e alla riapertura (`P.sat`; l'immagine non va in `statoJson`). Conti puri in `src/lib/solaris/satellite.ts`.
+  Prodotti Stealth Energy (`src/lib/solaris/stealth.ts`, inverter ST-INV-S/T e batterie SP-HEV50…, prezzi a 0 da completare): creati da soli in
+  `SolarisComponente` alla prima apertura dello Studio (`createMany skipDuplicates`); batterie scelte nello Studio (`S.battId`, moduli con `moduliPer`)
+  e portate in offerta. Test `tests/solaris/`.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
@@ -617,7 +624,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 394, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 401, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

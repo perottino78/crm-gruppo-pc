@@ -1,6 +1,7 @@
 "use server";
 
 import { puo } from "@/lib/permessi/catalogo";
+import { moduliPer } from "@/lib/solaris/stealth";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -1755,9 +1756,24 @@ export async function importaSolarisInPreventivo(formData: FormData) {
     });
   }
 
-  // Sistema di accumulo
+  // Sistema di accumulo: modello scelto nello Studio (moduli) o batteria generica a prezzo per kWh
   const battKwh = progetto.batteria ?? 0;
-  if (battKwh > 0 && progetto.costoBatteria != null) {
+  const statoBatt = progetto.statoJson as Record<string, unknown> | null;
+  const battId = typeof statoBatt?.battId === "string" && statoBatt.battId ? statoBatt.battId : null;
+  const modelloBatt = battId && battKwh > 0
+    ? await prisma.solarisComponente.findUnique({ where: { id: battId }, select: { nome: true, potenzaW: true, prezzoVendita: true } })
+    : null;
+  if (modelloBatt && modelloBatt.potenzaW > 0) {
+    const kwhModulo = modelloBatt.potenzaW / 1000;
+    const moduli = moduliPer(battKwh, kwhModulo);
+    righe.push({
+      preventivoId,
+      testoLibero: `☀️ Batteria ${modelloBatt.nome} — ${moduli} ${moduli === 1 ? "modulo" : "moduli"} (${(moduli * kwhModulo).toFixed(2).replace(".", ",")} kWh)`,
+      quantita: moduli,
+      prezzoUnitario: modelloBatt.prezzoVendita > 0 ? modelloBatt.prezzoVendita : (kwhModulo * (progetto.costoBatteria ?? 0)),
+      ordine: ordineBase + righe.length,
+    });
+  } else if (battKwh > 0 && progetto.costoBatteria != null) {
     righe.push({
       preventivoId,
       testoLibero: `☀️ Sistema di accumulo ${battKwh} kWh`,

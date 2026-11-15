@@ -3,6 +3,7 @@ import { getCurrentUser, getSolarisLivello } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import fs from "fs";
 import path from "path";
+import { CATALOGO_STEALTH } from "@/lib/solaris/stealth";
 
 export async function GET(
   _req: NextRequest,
@@ -33,10 +34,38 @@ export async function GET(
     return new NextResponse("Non autorizzato", { status: 403 });
   }
 
-  const componenti = await prisma.solarisComponente.findMany({
-    where: { attivo: true },
-    orderBy: [{ categoria: "asc" }, { potenzaW: "asc" }],
-  });
+  const leggiCatalogo = () =>
+    prisma.solarisComponente.findMany({
+      where: { attivo: true },
+      orderBy: [{ categoria: "asc" }, { potenzaW: "asc" }],
+    });
+  let componenti = await leggiCatalogo();
+
+  // Prodotti Stealth Energy: caricati da soli la prima volta (prezzi a 0, li completa l'amministratore).
+  // Si guarda anche fra i disattivati, così un prodotto spento a mano non torna.
+  const nomiStealth = CATALOGO_STEALTH.map((c) => c.nome);
+  const giaCaricati = await prisma.solarisComponente.count({ where: { nome: { in: nomiStealth } } });
+  if (giaCaricati < nomiStealth.length) {
+    const solaris = await prisma.brand.findFirst({ where: { nome: "Solaris" }, select: { id: true } });
+    if (solaris) {
+      await prisma.solarisComponente.createMany({
+        data: CATALOGO_STEALTH.map((c) => ({
+          brandId: solaris.id,
+          categoria: c.categoria,
+          nome: c.nome,
+          potenzaW: c.potenzaW,
+          faseTipo: c.faseTipo,
+          ibrido: c.ibrido,
+          note: c.note,
+          misureJson: c.misureJson as object,
+          prezzoVendita: 0,
+          costoAcquisto: 0,
+        })),
+        skipDuplicates: true,
+      });
+      componenti = await leggiCatalogo();
+    }
+  }
 
   const mostraCosti = livello === "AMMINISTRATORE";
 
@@ -61,6 +90,20 @@ export async function GET(
       price: livello !== "TECNICO" ? c.prezzoVendita : null,
       cost: mostraCosti ? c.costoAcquisto : null,
       ibrido: c.ibrido,
+      hyb: c.ibrido,
+      ...((c.misureJson as Record<string, unknown>) ?? {}),
+    }));
+
+  const batterie = componenti
+    .filter((c) => c.categoria === "BATTERIA")
+    .map((c) => ({
+      id: c.id,
+      n: c.nome,
+      kwh: c.potenzaW / 1000,
+      price: livello !== "TECNICO" ? c.prezzoVendita : null,
+      cost: mostraCosti ? c.costoAcquisto : null,
+      note: c.note,
+      ...((c.misureJson as Record<string, unknown>) ?? {}),
     }));
 
   const solarisInit = {
@@ -71,8 +114,8 @@ export async function GET(
     isAmministratore: livello === "AMMINISTRATORE",
     stato: (progetto.statoJson as Record<string, unknown> | null) ?? null,
     categoriaImpianto: progetto.categoriaImpianto ?? null,
-    catalogo: pannelli.length > 0 || inverter.length > 0
-      ? { pannelli, inverter }
+    catalogo: pannelli.length > 0 || inverter.length > 0 || batterie.length > 0
+      ? { pannelli, inverter, batterie }
       : null,
   };
 

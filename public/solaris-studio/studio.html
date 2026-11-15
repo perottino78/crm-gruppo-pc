@@ -381,7 +381,7 @@ section[hidden]{display:none}
           <select id="invSel"></select>
           <div class="check" id="invCheck"></div>
           <div class="check warn" id="spiWarn" hidden>⚠ Impianto &gt; 11.08 kWp: SPI esterno (DDI) obbligatorio per CEI 0-21 §9.5.1 — aggiungi voce separata a preventivo</div>
-          <details class="schedaBox"><summary>📋 Schede tecniche di modulo e inverter</summary><div class="scheda" id="schedaComp"></div></details>
+          <details class="schedaBox"><summary>📋 Schede tecniche</summary><div class="scheda" id="schedaComp"></div></details>
           <button class="b3d commOnly" id="newCompBtn">+ Nuovo pannello o inverter</button>
           <div class="newcomp commOnly" id="newComp" hidden>
             <div class="two"><select id="ncType" aria-label="Tipo di componente"><option value="pan">Pannello</option><option value="inv">Inverter</option></select><input type="text" id="ncName" placeholder="Marca e modello"></div>
@@ -420,6 +420,9 @@ section[hidden]{display:none}
             <button class="b3d" data-batt="10">10 kWh</button>
             <button class="b3d" data-batt="15">15 kWh</button>
           </div>
+          <label class="hint" for="battSel" id="battSelLbl" hidden>Modello di batteria</label>
+          <select id="battSel" hidden></select>
+          <div class="check ok" id="battInfo" hidden></div>
         </div>
         <button class="b3d sun" data-goto="3">Vedi quanto risparmi</button>
       </section>
@@ -637,25 +640,18 @@ const INVERTERS=[
   {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450,
    specs:{eff:99.0,mppt:1,vdc_max:"850 V",vac:"220–240 V",comm:"WiFi · ZigBee · RS485",gar:12,cert:"CE / IEC 62109 / Grid Guard"}},
   {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620,
-   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}},
-  {id:"st3",n:"Inverter Ibrido ST-INV-S 3 kW",kw:3,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st368",n:"Inverter Ibrido ST-INV-S 3.68 kW",kw:3.68,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st4",n:"Inverter Ibrido ST-INV-S 4 kW",kw:4,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st5",n:"Inverter Ibrido ST-INV-S 5 kW",kw:5,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st10t",n:"Inverter Ibrido Trifase ST-INV-T 10 kW",kw:10,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
-   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st15t",n:"Inverter Ibrido Trifase ST-INV-T 15 kW",kw:15,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
-   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}}];
+   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}}];
+const BATTERIES=[];
 if(_INIT.catalogo){
   (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
   (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
+  (_INIT.catalogo.batterie||[]).forEach(p=>BATTERIES.push(p));
 } else {
   try{ const ex=JSON.parse(localStorage.getItem("solaris-catalogo")||"{}"); (ex.pan||[]).forEach(p=>PANELS.push(p)); (ex.inv||[]).forEach(p=>INVERTERS.push(p)); }catch(e){}
 }
+function curBatt(){ return BATTERIES.find(b=>b.id===S.battId)||null; }
+function battModuli(){ const b=curBatt(); return b&&S.batt>0?Math.max(1,Math.ceil(S.batt/b.kwh-1e-9)):0; }
+function battCosto(batt){ const b=curBatt(); if(b&&b.price>0&&batt>0) return Math.max(1,Math.ceil(batt/b.kwh-1e-9))*b.price; return batt*S.cbat; }
 function curPanel(){ return PANELS.find(p=>p.id===S.panelId)||PANELS[0]; }
 function filteredInverters(){
   const isTri = S.categoria !== "MONOFASE";
@@ -669,7 +665,7 @@ function curInv(){ const fi=filteredInverters(); return fi.find(p=>p.id===S.invI
 
 const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,tilt:28,panels:12,batt:5,
   month:5,hour:12,playing:false,step:1,ckwp:850,cbat:520,detr:0.5,commercial:false,cliente:"",
-  panelId:"jinko440",invId:"hw6",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
+  panelId:"jinko440",invId:"hw6",battId:"",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
   f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
   categoria:"MONOFASE",spiEsterno:false,checklist:{vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false},
   mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null},
@@ -735,7 +731,7 @@ function simulate(batt){
   }
   const billToday = cons*S.price+FIXED;
   const billAfter = imp*S.price+FIXED - exp*RID;
-  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + batt*S.cbat + S.sottostruttura + S.pratiche + S.piattaforma;
+  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + battCosto(batt) + S.sottostruttura + S.pratiche + S.piattaforma;
   return {kwp,prodY,cons,direct,fromBatt,imp,exp,billToday,billAfter,saving:billToday-billAfter,cost,pm,cm,
     selfShare:(direct+fromBatt)/cons};
 }
@@ -795,6 +791,7 @@ bindSeg("billmode","billMode",v=>v);
 bindSeg("presence","presence",v=>+v);
 bindSeg("ori","ori",v=>+v);
 bindSeg("batt","batt",v=>+v);
+$$("[data-batt]").forEach(b=>b.addEventListener("click",()=>setTimeout(battInfo,0)));
 bindSeg("detr","detr",v=>+v);
 bindSeg("pay","pay",v=>v);
 bindSeg("months","months",v=>+v);
@@ -911,7 +908,7 @@ function go(step){
   $("#s1").hidden = step!==1; $("#s2").hidden = step!==2;
   $("#s3").hidden = step!==3; $("#s4").hidden = step!==4;
   if(step<=2) setTimeout(resize,30);
-  if(step===4){ setTimeout(sizeSig,30); snapshotProp(); }
+  if(step===4){ if(typeof sizeSig==="function") setTimeout(sizeSig,30); snapshotProp(); }
   window.scrollTo({top:0,behavior:"smooth"});
   refresh();
 }
@@ -1154,13 +1151,13 @@ function refresh(){
   const who=S.cliente||"Cliente";
   $("#propTitle").textContent="Proposta per "+who;
   $("#propSub").textContent=`${c.n}, falda ${$("#oriOut").textContent.toLowerCase()} inclinata ${S.tilt}°. Stima preliminare, da confermare con sopralluogo.`;
-  const pan=curPanel(), inv=curInv(), pv=r.kwp*S.ckwp, bt=S.batt*S.cbat, det=r.cost*S.detr;
+  const pan=curPanel(), inv=curInv(), pv=r.kwp*S.ckwp, bt=battCosto(S.batt), det=r.cost*S.detr, cb=curBatt();
   $("#lines").innerHTML=`
     <tr><td>${S.panels} moduli ${esc(pan.n)}, totale ${fmt(r.kwp,2)} kWp</td><td>${eur(S.panels*pan.price)}</td></tr>
     <tr><td>Inverter ${esc(inv.n)}</td><td>${eur(inv.price)}</td></tr>
     <tr><td>Strutture, cavi, quadri e posa in opera</td><td>${eur(pv)}</td></tr>
     ${S.sottostruttura>0?`<tr><td>Sottostruttura e staffe</td><td>${eur(S.sottostruttura)}</td></tr>`:""}
-    ${S.batt?`<tr><td>Batteria di accumulo ${S.batt} kWh</td><td>${eur(bt)}</td></tr>`:""}
+    ${S.batt?`<tr><td>Batteria di accumulo ${cb?esc(cb.n)+" × "+battModuli()+" ("+fmt(battModuli()*cb.kwh,2)+" kWh)":S.batt+" kWh"}</td><td>${eur(bt)}</td></tr>`:""}
     <tr><td>Pratiche, allaccio e collaudo</td><td>${S.pratiche>0?eur(S.pratiche):"incluso"}</td></tr>
     ${S.piattaforma>0?`<tr><td>Piattaforma per la posa</td><td>${eur(S.piattaforma)}</td></tr>`:""}
     <tr class="tot"><td>Investimento</td><td>${eur(r.cost)}</td></tr>
@@ -1215,11 +1212,27 @@ function schedaHtml(){
     ${is.mppt?row("N° MPPT",is.mppt):""}
     ${is.vdc_max?row("Tensione CC max",is.vdc_max):""}
     ${is.vac?row("Tensione AC uscita",is.vac):""}
+    ${is.vbatt?row("Tensione batteria",is.vbatt):""}
+    ${is.dim?row("Dimensioni",is.dim):""}
     ${is.comm?row("Comunicazione",is.comm):""}
     ${is.gar?row("Garanzia",is.gar+" anni"):""}
     ${is.cert?row("Certificazioni",is.cert):""}
   </div>`;
-  return ph+ih;
+  const bat=curBatt(); let bh="";
+  if(bat){ const bs=bat.specs||{};
+    bh=`<div class="scheda-card">
+    <div class="sc-title">🔋 Batteria ${esc(bat.n)}</div>
+    ${row("Capacità del modulo",fmt(bat.kwh,2)+" kWh")}
+    ${S.batt?row("Moduli per "+S.batt+" kWh",battModuli()):""}
+    ${bs.chimica?row("Chimica",bs.chimica):""}
+    ${bs.dod?row("Profondità di scarica",bs.dod):""}
+    ${bs.cicli?row("Cicli",bs.cicli):""}
+    ${bs.ip?row("Protezione",bs.ip):""}
+    ${bs.dim?row("Dimensioni",bs.dim):""}
+    ${bs.gar?row("Garanzia",bs.gar+" anni"):""}
+    ${bs.compat?row("Compatibile con",bs.compat):""}
+  </div>`; }
+  return ph+ih+bh;
 }
 function renderScheda(){
   const h=schedaHtml();
@@ -1569,7 +1582,19 @@ function fillSelects(){
   $("#invSel").innerHTML=fi.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
   if(!fi.find(p=>p.id===S.invId)) S.invId=(fi[0]||INVERTERS[0]).id;
   $("#panSel").value=S.panelId; $("#invSel").value=S.invId; PANEL_KW=curPanel().kw;
+  const bs=$("#battSel"), has=BATTERIES.length>0; bs.hidden=!has; $("#battSelLbl").hidden=!has;
+  if(has){ bs.innerHTML=`<option value="">Batteria generica (prezzo al kWh)</option>`+BATTERIES.map(b=>`<option value="${b.id}">${esc(b.n)}</option>`).join("");
+    if(S.battId&&!curBatt()) S.battId=""; bs.value=S.battId||""; }
+  battInfo();
 }
+function battInfo(){
+  const el=$("#battInfo"), b=curBatt();
+  if(!b||!S.batt){ el.hidden=true; return; }
+  const n=battModuli(), tot=n*b.kwh;
+  el.hidden=false; el.className="check "+(tot+1e-9>=S.batt?"ok":"warn");
+  el.textContent=`${n} ${n===1?"modulo":"moduli"} × ${fmt(b.kwh,2)} kWh = ${fmt(tot,2)} kWh`+(b.specs&&b.specs.compat?` · compatibile con ${b.specs.compat}`:"");
+}
+$("#battSel").addEventListener("change",e=>{ S.battId=e.target.value; battInfo(); renderScheda(); refresh(); });
 $("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(S.mode==="photo"&&P.corners.length===4) fitGrid(); refresh(); });
 $("#invSel").addEventListener("change",e=>{ S.invId=e.target.value; refresh(); });
 
