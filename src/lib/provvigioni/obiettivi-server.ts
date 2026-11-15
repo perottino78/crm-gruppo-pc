@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { contrattiDi } from "./server";
-import { avanzamento, emailSettimanale, periodoAnno, periodoMese, settimanaIso, vendutoNelPeriodo } from "./obiettivi";
+import { avanzamento, emailSettimanale, periodoAnno, periodoMese, settimanaIso, vendutoNelPeriodo, suMisuraInCorso } from "./obiettivi";
 
 export const CHIAVE_MAIL_OBIETTIVI = "obiettivi_mail_attiva";
 export const CHIAVE_ULTIMA_MAIL_OBIETTIVI = "obiettivi_mail_settimana";
@@ -11,12 +11,15 @@ export const CHIAVE_ULTIMA_MAIL_OBIETTIVI = "obiettivi_mail_settimana";
 /** Obiettivo del mese e dell'anno in corso di un commerciale, con la tabella di marcia. */
 export async function obiettiviDi(utenteId: string, contratti: { data: Date | null; imponibile: number }[], oggi = chiaveGiorno(new Date())) {
   const mese = periodoMese(oggi), anno = periodoAnno(oggi);
-  const righe = await prisma.obiettivo.findMany({ where: { utenteId, periodo: { in: [mese, anno] } } });
+  const righe = await prisma.obiettivo.findMany({ where: { utenteId, OR: [{ periodo: { in: [mese, anno] } }, { periodo: { contains: "~" } }] } });
   const di = (periodo: string) => {
     const o = righe.find((x) => x.periodo === periodo);
     return o && o.importoTarget > 0 ? { periodo, premio: o.premio, note: o.note, av: avanzamento(o.importoTarget, vendutoNelPeriodo(contratti, periodo), periodo, oggi) } : null;
   };
-  return { oggi, mese: di(mese), anno: di(anno) };
+  // obiettivi su misura (date scelte con il commerciale) in corso oggi
+  const altri = righe.filter((o) => o.importoTarget > 0 && suMisuraInCorso(o.periodo, oggi)).sort((a, b) => a.periodo.localeCompare(b.periodo))
+    .map((o) => ({ periodo: o.periodo, titolo: o.titolo, premio: o.premio, note: o.note, av: avanzamento(o.importoTarget, vendutoNelPeriodo(contratti, o.periodo), o.periodo, oggi) }));
+  return { oggi, mese: di(mese), anno: di(anno), altri };
 }
 
 /** L'email settimanale si può spegnere in Obiettivi e premi (di serie è accesa: parte solo a chi ha un obiettivo). */
@@ -46,15 +49,15 @@ export async function inviaEmailObiettivi(opz: { adesso?: Date; forza?: boolean;
   if (!(await mailConfigurata())) return { ...r, motivo: "posta non configurata" };
   const periodi = [periodoMese(oggi), periodoAnno(oggi)];
   const conObiettivo = await prisma.obiettivo.findMany({
-    where: { periodo: { in: periodi }, importoTarget: { gt: 0 }, ...(opz.soloUtenteId ? { utenteId: opz.soloUtenteId } : {}), utente: { stato: "ATTIVO" } },
-    select: { utente: { select: { id: true, nome: true, username: true, email: true } } },
+    where: { OR: [{ periodo: { in: periodi } }, { periodo: { contains: "~" } }], importoTarget: { gt: 0 }, ...(opz.soloUtenteId ? { utenteId: opz.soloUtenteId } : {}), utente: { stato: "ATTIVO" } },
+    select: { periodo: true, utente: { select: { id: true, nome: true, username: true, email: true } } },
   });
-  const persone = [...new Map(conObiettivo.map((o) => [o.utente.id, o.utente])).values()];
+  const persone = [...new Map(conObiettivo.filter((o) => !o.periodo.includes("~") || suMisuraInCorso(o.periodo, oggi)).map((o) => [o.utente.id, o.utente])).values()];
   for (const p of persone) {
     if (!p.email) { r.saltate++; continue; }
     const contratti = await contrattiDi([p]);
     const ob = await obiettiviDi(p.id, contratti, oggi);
-    const mail = emailSettimanale({ nome: p.nome, oggi, mese: ob.mese, anno: ob.anno, link: `${APP_URL}/contratti` });
+    const mail = emailSettimanale({ nome: p.nome, oggi, mese: ob.mese, anno: ob.anno, altri: ob.altri, link: `${APP_URL}/contratti` });
     if (!mail) { r.saltate++; continue; }
     const esito = await inviaMail({ a: [p.email], oggetto: mail.oggetto, testo: mail.testo });
     if (esito.inviata) r.inviate++; else r.errori.push(`${p.nome}: ${esito.motivo ?? "non inviata"}`);

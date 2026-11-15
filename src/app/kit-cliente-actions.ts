@@ -11,8 +11,10 @@ import { puntiConsegna, puoConsegnareKit, CHIAVI_KIT } from "@/lib/kit/punti";
 import { regoleKit } from "@/lib/kit/server";
 import { registra } from "@/lib/amministrazione/server";
 
-const torna = (commessaId: string, chiave: "kitOk" | "kitErrore", testo: string): never =>
-  redirect(`/commesse/${commessaId}?${chiave}=${encodeURIComponent(testo)}#kit-cliente`);
+const torna = (commessaId: string, chiave: "kitOk" | "kitErrore", testo: string, daLista = false): never =>
+  daLista
+    ? redirect(`/kit?${chiave === "kitOk" ? "ok" : "errore"}=${encodeURIComponent(testo)}`)
+    : redirect(`/commesse/${commessaId}?${chiave}=${encodeURIComponent(testo)}#kit-cliente`);
 
 /** Foto dal selettore (array JSON di data URI) → Documenti della commessa, cartella «Consegna kit». */
 function fotoDa(campo: FormDataEntryValue | null): { nome: string; mime: string; dati: Buffer }[] {
@@ -27,16 +29,18 @@ function fotoDa(campo: FormDataEntryValue | null): { nome: string; mime: string;
 export async function registraKitCliente(formData: FormData) {
   const u = await getCurrentUser();
   const commessaId = String(formData.get("commessaId") ?? "");
-  if (!u || !puo(u, "commesse")) return torna(commessaId, "kitErrore", "Non hai il permesso di aggiornare le pratiche.");
+  // dalla lista «Lavori finiti senza kit» si torna alla lista (spunta veloce dell'ufficio)
+  const daLista = formData.get("torna") === "kit";
+  if (!u || !puo(u, "commesse")) return torna(commessaId, "kitErrore", "Non hai il permesso di aggiornare le pratiche.", daLista);
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, stato: true, clienteId: true, preventivo: { select: { commercialeId: true } } } });
-  if (!c) return torna(commessaId, "kitErrore", "Pratica non trovata.");
-  if (!puoConsegnareKit(c.stato)) return torna(commessaId, "kitErrore", "Il kit si registra a lavoro finito (posa in corso o fatta).");
-  if (await prisma.consegnaKit.findUnique({ where: { commessaId } })) return torna(commessaId, "kitErrore", "Il kit di questa pratica è già registrato.");
+  if (!c) return torna(commessaId, "kitErrore", "Pratica non trovata.", daLista);
+  if (!puoConsegnareKit(c.stato)) return torna(commessaId, "kitErrore", "Il kit si registra a lavoro finito (posa in corso o fatta).", daLista);
+  if (await prisma.consegnaKit.findUnique({ where: { commessaId } })) return torna(commessaId, "kitErrore", "Il kit di questa pratica è già registrato.", daLista);
   const chiId = String(formData.get("utenteId") || c.preventivo.commercialeId);
   const chi = await prisma.utente.findUnique({ where: { id: chiId }, select: { id: true, nome: true } });
-  if (!chi) return torna(commessaId, "kitErrore", "Scegli chi ha consegnato il kit.");
+  if (!chi) return torna(commessaId, "kitErrore", "Scegli chi ha consegnato il kit.", daLista);
   const quando = daOraRoma(String(formData.get("giorno") ?? "")) ?? new Date();
-  if (quando.getTime() > Date.now() + 86400000) return torna(commessaId, "kitErrore", "La data di consegna non può essere nel futuro.");
+  if (quando.getTime() > Date.now() + 86400000) return torna(commessaId, "kitErrore", "La data di consegna non può essere nel futuro.", daLista);
   const foto = fotoDa(formData.get("foto"));
   const recensione = formData.get("recensione") === "1";
   const regole = await regoleKit();
@@ -51,7 +55,7 @@ export async function registraKitCliente(formData: FormData) {
   });
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/kit");
-  return torna(commessaId, "kitOk", `Kit registrato: ${punti} punti a ${chi.nome}.`);
+  return torna(commessaId, "kitOk", `Kit registrato: ${punti} punti a ${chi.nome}.`, daLista);
 }
 
 /** Il cliente ha lasciato la recensione (o si toglie per errore): ricalcola i punti con le regole di adesso. */

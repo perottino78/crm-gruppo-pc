@@ -55,12 +55,21 @@ export default async function KitCliente({ commessaId, stato, commercialeId, ute
       ) : !puoConsegnareKit(stato) ? (
         <p className="text-sm text-neutral-600">A lavoro finito il commerciale consegna il kit P&amp;C al cliente e lo registra qui: vale <b>{regole.puntiConsegna} punti</b>, +{regole.puntiFoto} con la foto, +{regole.puntiRecensione} con la recensione.</p>
       ) : (
-        <form action={registraKitCliente} className="space-y-3">
-          <input type="hidden" name="commessaId" value={commessaId} />
+        <div className="space-y-3">
           <p className="text-sm text-neutral-700">
-            Il lavoro è finito: consegna il kit al cliente e registralo. Vale <b>{puntiConsegna({ conFoto: false, recensione: false }, regole)} punti</b>,
-            {" "}<b>+{regole.puntiFoto}</b> con la foto della consegna, <b>+{regole.puntiRecensione}</b> se il cliente lascia la recensione.
+            Il lavoro è finito: quando il kit è consegnato al cliente metti la spunta. I punti vanno al commerciale
+            {persone.find((p) => p.id === commercialeId) ? <> (<b>{persone.find((p) => p.id === commercialeId)!.nome}</b>)</> : null}:
+            {" "}<b>{puntiConsegna({ conFoto: false, recensione: false }, regole)} punti</b>, <b>+{regole.puntiFoto}</b> con la foto, <b>+{regole.puntiRecensione}</b> con la recensione.
           </p>
+          <form action={registraKitCliente}>
+            <input type="hidden" name="commessaId" value={commessaId} />
+            <input type="hidden" name="utenteId" value={commercialeId} />
+            <button className="btn-3d btn-3d-green px-4 py-2 text-sm">✅ Kit consegnato</button>
+          </form>
+          <details className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2">
+            <summary className="cursor-pointer text-sm font-semibold text-neutral-800">📷 Con la foto, la recensione o un altro giorno</summary>
+        <form action={registraKitCliente} className="mt-3 space-y-3">
+          <input type="hidden" name="commessaId" value={commessaId} />
           <div className="flex flex-wrap items-end gap-2">
             <label className="text-xs font-semibold text-neutral-700">Chi l&apos;ha consegnato
               <select name="utenteId" defaultValue={commercialeId} className={`${inp} block`}>
@@ -81,6 +90,8 @@ export default async function KitCliente({ commessaId, stato, commercialeId, ute
           <input name="nota" placeholder="Nota (facoltativa)" className={`${inp} w-full`} />
           <button className="btn-3d btn-3d-pink px-4 py-2 text-sm">🎁 Registra la consegna del kit</button>
         </form>
+          </details>
+        </div>
       )}
     </section>
   );

@@ -11,13 +11,22 @@ export const MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno
 export const periodoMese = (oggi: string) => oggi.slice(0, 7);
 export const periodoAnno = (oggi: string) => oggi.slice(0, 4);
 export const eAnnuale = (periodo: string) => /^\d{4}$/.test(periodo);
-export const nomePeriodo = (periodo: string) => (eAnnuale(periodo) ? `anno ${periodo}` : `${MESI[+periodo.slice(5, 7) - 1]} ${periodo.slice(0, 4)}`);
+/** Obiettivo su misura: date scelte con il commerciale, «AAAA-MM-GG~AAAA-MM-GG». */
+export const eSuMisura = (periodo: string) => /^\d{4}-\d{2}-\d{2}~\d{4}-\d{2}-\d{2}$/.test(periodo);
+export const periodoSuMisura = (da: string, a: string) => `${da}~${a}`;
+const dataIt = (g: string) => `${g.slice(8, 10)}/${g.slice(5, 7)}/${g.slice(0, 4)}`;
+export const nomePeriodo = (periodo: string) =>
+  eSuMisura(periodo) ? `dal ${dataIt(periodo.slice(0, 10))} al ${dataIt(periodo.slice(11))}`
+  : eAnnuale(periodo) ? `anno ${periodo}` : `${MESI[+periodo.slice(5, 7) - 1]} ${periodo.slice(0, 4)}`;
+/** L'obiettivo su misura è in corso in quel giorno («AAAA-MM-GG»)? */
+export const suMisuraInCorso = (periodo: string, oggi: string) => eSuMisura(periodo) && periodo.slice(0, 10) <= oggi && oggi <= periodo.slice(11);
 
 const giorno = (s: string) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
 const GIORNO = 86_400_000;
 
 /** Primo e ultimo giorno del periodo ("2026-11" o "2026"). */
 export function estremi(periodo: string): { da: string; a: string } {
+  if (eSuMisura(periodo)) return { da: periodo.slice(0, 10), a: periodo.slice(11) };
   if (eAnnuale(periodo)) return { da: `${periodo}-01-01`, a: `${periodo}-12-31` };
   const [a, m] = periodo.split("-").map(Number);
   const ultimo = new Date(Date.UTC(a, m, 0)).getUTCDate();
@@ -26,7 +35,8 @@ export function estremi(periodo: string): { da: string; a: string } {
 
 /** Venduto nel periodo: imponibile dei contratti con data (ora di Roma) dentro il periodo. */
 export function vendutoNelPeriodo(contratti: { data: Date | null; imponibile: number }[], periodo: string): number {
-  return cent(contratti.filter((c) => c.data && chiaveGiorno(c.data).startsWith(periodo)).reduce((s, c) => s + c.imponibile, 0));
+  const { da, a } = estremi(periodo);
+  return cent(contratti.filter((c) => { if (!c.data) return false; const g = chiaveGiorno(c.data); return g >= da && g <= a; }).reduce((s, c) => s + c.imponibile, 0));
 }
 
 /** Venduto mese per mese dell'anno (12 valori). */
@@ -117,10 +127,12 @@ export function emailSettimanale(o: {
   nome: string; oggi: string;
   mese?: { periodo: string; av: Avanzamento; premio: number | null } | null;
   anno?: { periodo: string; av: Avanzamento; premio: number | null } | null;
+  altri?: { periodo: string; titolo: string | null; av: Avanzamento; premio: number | null }[];
   link: string;
 }): { oggetto: string; testo: string } | null {
-  if (!o.mese && !o.anno) return null;
-  const principale = (o.mese ?? o.anno)!;
+  const altri = o.altri ?? [];
+  if (!o.mese && !o.anno && !altri.length) return null;
+  const principale = (o.mese ?? altri[0] ?? o.anno)!;
   const sett = +settimanaIso(o.oggi).slice(-2);
   const nome = o.nome.split(/\s+/)[0];
   const testo = [
@@ -128,6 +140,7 @@ export function emailSettimanale(o: {
     "ecco il punto della settimana sui tuoi obiettivi.", "",
     ...(o.mese ? [...righePeriodo(`📅 ${nomePeriodo(o.mese.periodo)}`, o.mese.av, o.mese.premio), ""] : []),
     ...(o.anno ? [...righePeriodo(`📈 ${nomePeriodo(o.anno.periodo)}`, o.anno.av, o.anno.premio), ""] : []),
+    ...altri.flatMap((x) => [...righePeriodo(`🎯 ${x.titolo ? `${x.titolo} (${nomePeriodo(x.periodo)})` : nomePeriodo(x.periodo)}`, x.av, x.premio), ""]),
     incoraggiamento(principale.av.stato, sett), "",
     `Trovi i tuoi contratti e le provvigioni qui: ${o.link}`, "",
     "Buon lavoro!", "Gruppo P&C",

@@ -34,7 +34,7 @@ function Barra({ titolo, av, premio, note }: { titolo: string; av: Avanzamento; 
 export default async function RiquadroObiettivi({ utenteId, contratti }: { utenteId: string; contratti: { data: Date | null; imponibile: number; commercialeId: string | null }[] }) {
   const suoi = contratti.filter((c) => c.commercialeId === utenteId);
   const ob = await obiettiviDi(utenteId, suoi);
-  if (!ob.mese && !ob.anno) return null;
+  if (!ob.mese && !ob.anno && !ob.altri.length) return null;
   const anno = ob.oggi.slice(0, 4);
   const mesi = vendutoPerMese(suoi, anno);
   const max = Math.max(1, ...mesi);
@@ -45,6 +45,7 @@ export default async function RiquadroObiettivi({ utenteId, contratti }: { utent
       <div className="grid gap-2 md:grid-cols-2">
         {ob.mese && <Barra titolo={`📅 ${nomePeriodo(ob.mese.periodo)}`} av={ob.mese.av} premio={ob.mese.premio} note={ob.mese.note} />}
         {ob.anno && <Barra titolo={`📈 ${nomePeriodo(ob.anno.periodo)}`} av={ob.anno.av} premio={ob.anno.premio} note={ob.anno.note} />}
+        {ob.altri.map((x) => <Barra key={x.periodo} titolo={`🎯 ${x.titolo ? `${x.titolo} · ` : ""}${nomePeriodo(x.periodo)}`} av={x.av} premio={x.premio} note={x.note} />)}
       </div>
       <div className="rounded-lg border border-neutral-200 bg-white p-3">
         <p className="mb-2 text-xs font-semibold text-neutral-700">Venduto mese per mese ({anno})</p>
