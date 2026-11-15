@@ -8,6 +8,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere, scopeLeadWhere } from "@/lib/scope";
 import { FASI_APERTE } from "@/lib/automazioni/percorsi";
 import { destinatarioAssistenza, gestisceSegnalazioni } from "@/lib/segnalazioni/server";
+import { visibilitaDi } from "@/lib/permessi/catalogo";
+import { progettiDi } from "@/lib/progetti/server";
+import { riepilogoProgetti } from "@/lib/progetti/miei";
 
 export default async function DashboardPage({
   searchParams,
@@ -45,6 +48,9 @@ export default async function DashboardPage({
 
   // task dati dalla scheda di un cliente a me (da fare)
   const taskClienti = utente ? await prisma.attivita.count({ where: { tipo: "TASK", completata: false, utenteId: utente.id } }) : 0;
+
+  // «I miei progetti» per chi vede solo i suoi clienti (il commerciale): pratiche in corso e consegne a rischio
+  const progetti = utente && visibilitaDi(utente) === "PROPRI" ? riepilogoProgetti(await progettiDi(utente), new Date()) : null;
 
   const taskAperti = await prisma.taskPratica.count({
     where: { stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] }, ...(utente?.ufficio ? { ufficio: utente.ufficio } : {}) },
@@ -108,6 +114,21 @@ export default async function DashboardPage({
         <a href="/task#task-clienti" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-amber-500 p-4 shadow-sm mb-4 hover:border-neutral-400">
           <span className="text-sm font-extrabold text-neutral-900">📌 Task sui clienti da fare</span>
           <span className="text-2xl font-extrabold text-amber-600">{taskClienti}</span>
+        </a>
+      )}
+
+      {progetti && progetti.inCorso > 0 && (
+        <a href="/progetti" className={`flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 ${progetti.scadute ? "border-l-red-600" : progetti.vicine ? "border-l-amber-500" : "border-l-blue-600"} p-4 shadow-sm mb-4 hover:border-neutral-400`}>
+          <span>
+            <span className="block text-sm font-extrabold text-neutral-900">📁 I miei progetti in corso</span>
+            <span className="block text-xs text-neutral-600">
+              {progetti.scadute ? <b className="text-red-700">{progetti.scadute} con la consegna scaduta</b> : null}
+              {progetti.scadute && progetti.vicine ? " · " : null}
+              {progetti.vicine ? <b className="text-amber-700">{progetti.vicine} da consegnare entro 7 giorni</b> : null}
+              {!progetti.scadute && !progetti.vicine ? "a che punto è ogni pratica, consegne e pagamenti" : null}
+            </span>
+          </span>
+          <span className="text-2xl font-extrabold text-blue-700">{progetti.inCorso}</span>
         </a>
       )}
 

@@ -6,7 +6,7 @@ import { STATI_COMMESSA, eur } from "@/lib/commesse";
 
 const dataBreve = (d: Date) => d.toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit", year: "2-digit" });
 
-function Stepper({ passi }: { passi: PraticaCliente["passi"] }) {
+export function Stepper({ passi }: { passi: PraticaCliente["passi"] }) {
   return (
     <ol className="flex items-start w-full overflow-x-auto pb-1">
       {passi.map((p, i) => {

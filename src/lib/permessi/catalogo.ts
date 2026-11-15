@@ -74,7 +74,7 @@ export function visibilitaDi(u: ConPermessi | null | undefined): Visibilita {
 const PAGINE: [string, Permesso][] = [
   ["/impostazioni/automazioni", "automazioni"], ["/impostazioni/registro", "registro"], ["/impostazioni/lead", "pubblicita"], ["/marketing/email", "automazioni"],
   ["/prodotti/aumenti", "listini.modifica"], ["/prodotti/articoli", "articoli"], ["/prodotti", "prodotti"],
-  ["/lead", "lead"], ["/clienti", "clienti"], ["/preventivi", "preventivi"], ["/contratti", "preventivi"], ["/commesse", "commesse"], ["/task", "task"],
+  ["/lead", "lead"], ["/clienti", "clienti"], ["/preventivi", "preventivi"], ["/contratti", "preventivi"], ["/progetti", "preventivi"], ["/commesse", "commesse"], ["/task", "task"],
   ["/calendario", "calendario"], ["/ordini-fornitori", "ordini"], ["/magazzino", "magazzino"], ["/lavori", "lavori"],
   ["/assistenza", "assistenza"], ["/marketing", "marketing"], ["/campagne", "campagne"], ["/amministrazione", "amministrazione"], ["/fatturazione", "fatturazione"],
   ["/report", "report"], ["/commerciali", "team"], ["/archivio", "archivio"],

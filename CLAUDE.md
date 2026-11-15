@@ -570,6 +570,12 @@ login nel `matcher` del middleware.
   `/lead/senza-esito` del centralino (pulsante nei task). Blocco facoltativo (`esiti_blocco_attivo`, spento di serie; `esiti_blocco_soglia` 3; `esiti_sbloccati` JSON):
   `controlloBlocco` in `registraEsito`/`assegnaVenditore`. Regole in Impostazioni › Lead `#esiti`, permesso `lead.esiti` (solo amministratore). Una tantum
   `POST api/admin/lead-scaduti?esegui=1` chiude i lead già svolti; `GET ?persona=` diagnosi dei lead scaduti. Collaudo `esiti-appuntamenti` (12).
+- **I miei progetti** (`/progetti`, richiesta di Ugo dopo la presentazione, nov 2026; `src/lib/progetti/miei.ts` puro e testato, `server.ts` `progettiDi`): il commerciale
+  (visibilità PROPRI; chi vede di più ha la tendina dei commerciali e il titolo «Progetti dei clienti») vede tutte le commesse dei suoi clienti con le tappe del flusso
+  (`Stepper` di `components/clienti/PraticaCard.tsx` + `passiPratica`), «Adesso: fase · ufficio», consegna prevista col semaforo (`semaforoConsegna`: scaduta, entro 7 giorni,
+  nei tempi) e quanto ha pagato il cliente (scadenze INCASSO della commessa o delle fatture di vendita agganciate, `residuoScadenza`; senza scadenze i flag acconto/saldo).
+  Schede In corso / Conclusi / Tutti, ricerca, ordine: scadute, vicine, poi per consegna. In Dashboard il riquadro «📁 I miei progetti in corso» (solo visibilità PROPRI).
+  Test `tests/progetti/miei.test.ts`.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
