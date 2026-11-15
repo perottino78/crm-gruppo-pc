@@ -1788,6 +1788,8 @@ model CampagnaInvio {
   motivo     String?
   tentativi  Int               @default(0)
   inviataIl  DateTime?
+  // quando un controllo l'ha preso («IN_CORSO»): se il controllo viene interrotto, dopo 10 minuti torna in coda
+  presoIl    DateTime?
   // Tracciamento: prima apertura / primo clic e quante volte
   apertaIl   DateTime?
   aperture   Int               @default(0)

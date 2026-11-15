@@ -355,6 +355,12 @@ export async function disiscrivi(leadId: string, firma: string): Promise<boolean
 export function eseguiDopoRisposta() {
   try {
     after(async () => {
+      // sul server (Vercel) il lavoro va alla rotta del controllo periodico, che ha il suo tempo (60 s): qui dentro una
+      // pagina veniva interrotto a metà blocco di email (campagne ferme con gli invii «in corso»). La rotta risponde subito.
+      if (process.env.VERCEL) {
+        const ok = await fetch(`${APP_URL}/api/automazioni/esegui`, { signal: AbortSignal.timeout(8000), cache: "no-store" }).then((r) => r.ok).catch(() => false);
+        if (ok) return;
+      }
       await eseguiInviiScaduti().catch(() => undefined);
       await eseguiCampagne().catch(() => undefined);
       await import("@/lib/calendario/nextcloud").then((m) => m.sincronizzaNextcloud()).catch(() => undefined);
