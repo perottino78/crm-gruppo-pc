@@ -29,9 +29,17 @@ export function listiniZenith(tipologia: string): string[] {
   ];
 }
 
+export const CATALOGHI_ZENITH = [{ nome: "Scheda tecnica Zenith 72", url: "/cataloghi/zenith/Zenith72-scheda-tecnica.pdf" }];
+
+/** Descrizione tecnica breve per il cliente, stampata nell'offerta sotto l'elenco puntato (dalla scheda tecnica Zenith 72). */
+export const DESCRIZIONE_CLIENTE_ZENITH =
+  "Serramento in PVC Zenith 72: PVC rigido antiurto, profilo da 70 mm a 6 camere con rinforzi in acciaio, doppia guarnizione in EPDM. " +
+  "Vetrocamera stratificato di sicurezza isolante 3+3 basso emissivo / 18 gas argon / 3+3, trasmittanza del profilo Uf 1,3 W/m²K. " +
+  "Soglia ribassata a taglio termico calpestabile, ferramenta con trattamento anticorrosivo, pellicolatura a caldo. Consegna indicativa 60 giorni lavorativi.";
+
 export const GUIDA_ZENITH =
   "Prezzo dalla griglia del listino Zenith (misura uguale o subito superiore), bianco massa compreso; colori fuori standard e pellicole +20%. " +
-  "Scegli colore esterno e interno (servono anche al rilievo), il vetro e gli accessori. Forme trapezoidali o curve: +40%. " +
+  "Vetro stratificato di sicurezza 3+3 / 18 argon / 3+3 già di serie. Scegli colore esterno e interno (servono anche al rilievo), il vetro e gli accessori. Forme trapezoidali o curve: +40%. " +
   "Vetri speciali: prezzi stimati, da confermare con il fornitore.";
 
 export function optionalZenith(): VoceOptional[] {
@@ -50,12 +58,12 @@ export function optionalZenith(): VoceOptional[] {
     ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola con esterno bianco massa`, 20, "ZENITH", "PERCENTUALE")),
     ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola diversa da quella esterna`, 80, "ZENITH", "PERCENTUALE")),
     // vetri
-    o("Vetri", "Vetrocamera doppio basso emissivo con gas argon (di serie)", 0, "ZENITH_DOPPIO"),
+    o("Vetri", "Vetrocamera stratificato di sicurezza 3+3 basso emissivo / 18 argon / 3+3 (di serie)", 0, "ZENITH_DOPPIO"),
     o("Vetri", "Vetrocamera triplo basso emissivo con gas argon (di serie)", 0, "ZENITH_TRIPLO"),
     o("Vetri", "Vetro STC a controllo solare (a vetro)", 150, "ZENITH", "FISSO", "vetro"),
     o("Vetri", "Vetro satinato (ad anta)", 90, "ZENITH_F", "FISSO", "anta"),
     o("Vetri", "Vetro satinato (ad anta)", 150, "ZENITH_PF", "FISSO", "anta"),
-    ...vetriSpeciali("ZENITH"),
+    ...vetriSpeciali("ZENITH", { stratificatoDiSerie: true }),
     // accessori, tutti nella stessa tendina
     o("Accessori", "Maniglia passante con cilindro europeo", 500),
     o("Accessori", "Motore per wasistas (bianco o nero, con pulsante; corrente a carico del cliente)", 350, "ZENITH_WAS"),

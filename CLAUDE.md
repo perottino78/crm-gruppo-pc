@@ -416,7 +416,9 @@ login nel `matcher` del middleware.
   pulsanti uscivano dal riquadro). Allineamento senza rotte seed: `assicuraOptionalSerramenti` (`allinea-optional.ts`, all'apertura di un'offerta, una volta per
   `VERSIONE_OPTIONAL_SERRAMENTI`, chiave `optional_serramenti_versione`): crea solo le voci mancanti (mai i prezzi esistenti, che possono essere aumentati) e spegne le
   vecchie voci Zenith (`ZENITH_WASISTAS`, `ZENITH_PF3A_SOGLIA`, le due pellicole PF3A); `seed-zenith` usa la stessa funzione. Al rilievo e nell'ordine: `assicuraRigheOfferta`
-  scrive nella descrizione del materiale le scelte dell'offerta (`sceltePerRilievo`: «Colore esterno: … · Vetri: … ×2»). Manca la scheda tecnica Zenith (PDF da Ugo).
+  scrive nella descrizione del materiale le scelte dell'offerta (`sceltePerRilievo`: «Colore esterno: … · Vetri: … ×2»). Scheda tecnica «Zenith 72» (1 pagina, già con i dati
+  di P&C) in `public/cataloghi/zenith/`, `DESCRIZIONE_CLIENTE_ZENITH`, voce in `SCHEDE`: vetro stratificato di sicurezza 3+3 BE / 18 argon / 3+3 DI SERIE, quindi per lo Zenith
+  niente sovrapprezzi stratificato (`vetriSpeciali(base, { stratificatoDiSerie })`; versione «2026-11-16b» spegne le voci create prima).
   Test `tests/listini/zenith.test.ts`, collaudo `zenith-optional` (6).
 - **Serramenti PVC Plasma 30** (telaio e anta 74 mm, Uf 1,0; gruppo SERRAMENTI, sottogruppi «PVC — Plasma 30» e «PVC — Plasma 30 triplo vetro»; ha sostituito il
   segnaposto `SERRAMENTI_PVC_PLASMA30_PLACEHOLDER`): 24 tipologie `PLASMA30_<apertura>` (doppio vetro, file «PLASMA 30 UKW 1.3 - 2025», coeff. 2,7 = base Optima × 2,7)
