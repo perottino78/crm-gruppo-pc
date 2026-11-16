@@ -32,11 +32,11 @@ const TITOLI: Record<string, string> = {
 export default async function LeadDettaglio({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<P> }) {
   const [{ id }, p, u] = await Promise.all([params, searchParams, getCurrentUser()]);
   if (!u) notFound();
-  // il commerciale che apre il link di un promemoria non vede i lead della telefonista (visibilità «solo i suoi»):
-  // lo portiamo al suo appuntamento con quel cliente, altrimenti, se è il venditore del lead, gli mostriamo comunque la scheda
+  // il commerciale non vede la scheda del lead (storico e note del centralino, richiesta di Rocco 16/11/2026): se apre un link
+  // vecchio lo portiamo al suo appuntamento con quel cliente, dove trova solo quello che serve (nome, luogo, telefono, nota)
   const visibile = await prisma.lead.findFirst({ where: { AND: [{ id }, scopeLeadWhere(u)] }, select: { id: true } });
   if (!visibile) {
-    const x = await prisma.lead.findUnique({ where: { id }, select: { venditoreId: true, appuntamentoId: true, clienteGenerato: { select: { id: true } } } });
+    const x = await prisma.lead.findUnique({ where: { id }, select: { appuntamentoId: true, clienteGenerato: { select: { id: true } } } });
     if (!x) {
       return (
         <div className="max-w-xl rounded-lg border border-amber-300 bg-amber-50 p-5">
@@ -51,15 +51,13 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
       orderBy: { dataOra: "desc" }, select: { id: true },
     });
     if (app) redirect(`/calendario/appuntamento/${app.id}`);
-    if (x.venditoreId !== u.id) {
-      return (
-        <div className="max-w-xl rounded-lg border border-amber-300 bg-amber-50 p-5">
-          <p className="font-bold text-amber-900">Questo contatto non è fra i tuoi</p>
-          <p className="mt-1 text-sm text-amber-900">Lo segue il centralino. Gli appuntamenti fissati per te li trovi nel calendario.</p>
-          <Link href="/calendario" className="mt-3 inline-block text-sm underline">Vai al calendario</Link>
-        </div>
-      );
-    }
+    return (
+      <div className="max-w-xl rounded-lg border border-amber-300 bg-amber-50 p-5">
+        <p className="font-bold text-amber-900">Questo contatto lo segue il centralino</p>
+        <p className="mt-1 text-sm text-amber-900">Gli appuntamenti fissati per te, con nome, luogo, telefono e nota della telefonista, li trovi nel calendario.</p>
+        <Link href="/calendario" className="mt-3 inline-block text-sm underline">Vai al calendario</Link>
+      </div>
+    );
   }
   const l = await prisma.lead.findUnique({
     where: { id },

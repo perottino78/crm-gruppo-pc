@@ -35,9 +35,10 @@ export function scopeLeadWhere(utente: U): Prisma.LeadWhereInput {
   const v = visibilitaDi(utente);
   if (v === "TUTTI") return {};
   if (v === "ZONA") return { OR: [{ telefonistaId: { in: team(utente) } }, { venditoreId: { in: team(utente) } }] };
-  // chi vede solo i suoi: i lead assegnati a lui (come telefonista) e quelli di cui è il venditore, con tutta la trafila
-  // (richiesta di Ugo 16/11/2026: il commerciale vede i lead dei suoi appuntamenti, non quelli degli altri)
-  return { OR: [{ telefonistaId: utente.id }, { venditoreId: utente.id }] };
+  // chi vede solo i suoi: i lead assegnati a lui come telefonista. Il commerciale NON vede la scheda del lead (storico, note del
+  // centralino): dei suoi appuntamenti vede solo la pagina dell'appuntamento (richiesta di Rocco 16/11/2026). Fa eccezione la
+  // «chiamata con commerciale», che è un suo compito da esitare.
+  return { OR: [{ telefonistaId: utente.id }, { venditoreId: utente.id, fase: "APPUNTAMENTO_TELEFONICO" }] };
 }
 
 /** Le persone di cui l'utente vede gli impegni: null = tutti; altrimenti sé stesso (o il team della zona). */
@@ -49,7 +50,7 @@ export function utentiVisibili(utente: U): string[] | null {
 
 /**
  * «Task di oggi» di chi vede solo i suoi: i lead della telefonista restano compiti della telefonista; al venditore arrivano solo
- * le «chiamate con commerciale» fissate per lui (gli altri suoi lead li vede in «Tutti», con la trafila).
+ * le «chiamate con commerciale» fissate per lui (degli appuntamenti vede solo la pagina dell'appuntamento).
  */
 export function taskLeadWhere(utente: U): Prisma.LeadWhereInput {
   if (visibilitaDi(utente) !== "PROPRI") return {};
