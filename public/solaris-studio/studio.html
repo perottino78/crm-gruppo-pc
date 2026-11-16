@@ -174,6 +174,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .schedaBox .scheda-card{background:var(--surface)}
 .satBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
 @media (min-width:1101px){.split > .stage{position:sticky;top:178px;height:calc(100vh - 196px);min-height:460px;align-self:start}}
+.mappaCasa{height:300px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#9aa6b2;position:relative;z-index:0}
+.mappaCasa .leaflet-control-attribution{font-size:10px}
+.pinTip{font-size:13px;font-weight:600;border-radius:10px;padding:8px 10px;background:var(--saveSoft);color:var(--save)}
+.pinTip.warn{background:var(--costSoft);color:var(--cost)}
 .linkrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .linkrow a.b3d{display:flex;align-items:center;justify-content:center;text-decoration:none}
 .viewSeg{display:flex;gap:4px;background:#fff;border-radius:14px;padding:4px;box-shadow:inset 0 0 0 1px #D5DEEA}
@@ -304,7 +308,8 @@ section[hidden]{display:none}
             <a class="b3d" id="gmaps" href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>
             <a class="b3d" id="gearth" href="https://earth.google.com/web/" target="_blank" rel="noopener">Google Earth</a>
           </div>
-          <p class="hint">Apri la vista satellitare, fai uno screenshot del tetto con il nord in alto e caricalo in “Foto del tetto”, vista dall’alto. Con “Misura distanza” di Maps prendi anche la larghezza della falda.</p>
+          <div id="mappaCasa" class="mappaCasa" aria-label="Mappa satellitare: trascina il segnaposto sul tetto"></div>
+          <div class="pinTip warn" id="pinTip">Scrivi l’indirizzo e premi Invio: la mappa va sulla casa. Poi trascina il segnaposto 📍 sul tetto giusto (o tocca il tetto).</div>
         </div>
         <div class="field">
           <div class="lbl">Zona climatica <output id="zoneOut">E</output></div>
@@ -448,12 +453,13 @@ section[hidden]{display:none}
       <div class="modeSw" role="group" aria-label="Vista"><button id="m3d" aria-pressed="true">Modello 3D</button><button id="mPhoto" aria-pressed="false">Foto del tetto</button></div>
       <div id="photoStage" hidden>
         <canvas id="photoCanvas"></canvas>
-        <div class="photoEmpty" id="photoEmpty"><div><b>Fotografa il tetto del cliente</b>Leggo posizione e orientamento dalla foto, poi tocchi i 4 angoli della falda e i pannelli compaiono sul tetto vero, con misure e produzione scritte sopra.<br><span class="satBtns"><button class="b3d sun" type="button" id="satBtn">🛰️ Foto dal satellite</button><label class="b3d" for="roofFile">📷 Scatta o scegli una foto</label></span><span style="font-size:14px;opacity:.85;display:block;margin-top:14px">Dal satellite prendo l’immagine dall’indirizzo del passo 1 (o dalla tua posizione), con nord in alto e misure già in scala: disegno io la falda e tu sposti gli angoli.</span></div></div>
+        <div class="photoEmpty" id="photoEmpty"><div><b>Fotografa il tetto del cliente</b>Leggo posizione e orientamento dalla foto, poi tocchi i 4 angoli della falda e i pannelli compaiono sul tetto vero, con misure e produzione scritte sopra.<br><span class="satBtns"><button class="b3d sun" type="button" id="satBtn">🛰️ Foto dal satellite</button><label class="b3d" for="roofFile">📷 Scatta o scegli una foto</label><button class="b3d" type="button" id="catturaBtn">🖥️ Cattura dallo schermo</button></span><span style="font-size:13px;opacity:.8;display:block;margin-top:8px">Puoi anche incollare un’immagine con Ctrl+V / Cmd+V (per esempio uno screenshot di Google Earth).</span><span style="font-size:14px;opacity:.85;display:block;margin-top:14px">Dal satellite prendo l’immagine dall’indirizzo del passo 1 (o dalla tua posizione), con nord in alto e misure già in scala: disegno io la falda e tu sposti gli angoli.</span></div></div>
         <div class="photoTip chip" id="photoTip" hidden><span id="tipLbl"></span><strong id="tipTxt" style="font-size:18px;display:block;line-height:1.25"></strong></div>
         <div class="photobar" id="photobar" hidden>
           <div class="viewSeg" role="group" aria-label="Tipo di foto"><button data-pv="ground" aria-pressed="true">Da terra</button><button data-pv="top" aria-pressed="false">Dall’alto</button></div>
           <button class="b3d" type="button" id="satBtn2">🛰️ Satellite</button><button class="b3d" type="button" id="satIn" aria-label="Avvicina" hidden>＋</button><button class="b3d" type="button" id="satOut" aria-label="Allontana" hidden>－</button>
           <label class="b3d" for="roofFile">Nuova foto</label>
+          <button class="b3d" type="button" id="catturaBtn2">🖥️ Cattura</button>
           <button class="b3d" id="compassBtn">Usa la bussola</button>
           <button class="b3d" id="resetCorners">Rifai gli angoli</button>
           <button class="b3d" id="toggleLabels">Nascondi scritte</button>
@@ -578,6 +584,8 @@ section[hidden]{display:none}
 <div class="toast" id="toast" role="status"></div>
 <div id="_saveStatus" style="position:fixed;bottom:8px;right:14px;font-size:11px;color:var(--muted);opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999"></div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* === SOLARIS INIT — iniettato dal server via window.SOLARIS_INIT === */
@@ -921,6 +929,7 @@ function go(step){
   $("#s1").hidden = step!==1; $("#s2").hidden = step!==2;
   $("#s3").hidden = step!==3; $("#s4").hidden = step!==4;
   if(step<=2) setTimeout(resize,30);
+  if(step===1) setTimeout(()=>{ if(mappaPronta()) mappa.invalidateSize(); },60);
   if(step===4){ if(typeof sizeSig==="function") setTimeout(sizeSig,30); snapshotProp(); }
   window.scrollTo({top:0,behavior:"smooth"});
   refresh();
@@ -1331,15 +1340,47 @@ function setHeading(h,src){
 }
 $("#roofFile").addEventListener("change",async e=>{
   const f=e.target.files&&e.target.files[0]; e.target.value=""; if(!f) return;
+  caricaFotoTetto(f);
+});
+async function caricaFotoTetto(f,opz={}){
   let g=null; try{ g=exifGPS(await f.arrayBuffer()); }catch(err){}
   const img=new Image();
   img.onload=()=>{ P.img=img; P.corners=[]; P.mpp=null; P.sat=null; $("#satIn").hidden=true; $("#satOut").hidden=true; P.when=new Date(); $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#photoTip").hidden=false; drawPhoto(); };
   img.src=URL.createObjectURL(f);
   if(g){ useLocation(g.lat,g.lon,"dalla foto"); if(g.dir!=null&&P.view==="ground") setHeading(g.dir,"dalla foto"); }
+  else if(S.addrPos){ P.lat=S.addrPos.lat; P.lon=S.addrPos.lon; }
   else if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(p=>useLocation(p.coords.latitude,p.coords.longitude,"dal GPS"),
       ()=>toast("La foto non contiene la posizione: scegli la località al passo 1"),{enableHighAccuracy:true,timeout:9000});
   } else toast("La foto non contiene la posizione: scegli la località al passo 1");
+}
+/* schermata presa dallo schermo (come «Segnala un problema»): una scheda di Google Earth o Maps */
+async function catturaSchermo(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getDisplayMedia){ toast("Su questo dispositivo la cattura non c’è: fai uno screenshot e incollalo con Ctrl+V"); return; }
+  let stream;
+  try{ stream=await navigator.mediaDevices.getDisplayMedia({video:{displaySurface:"browser"},audio:false}); }
+  catch(e){ return; }
+  try{
+    const v=document.createElement("video"); v.srcObject=stream; v.muted=true; await v.play();
+    await new Promise(r=>setTimeout(r,350));
+    const c=document.createElement("canvas"); c.width=v.videoWidth; c.height=v.videoHeight; c.getContext("2d").drawImage(v,0,0);
+    const blob=await new Promise(r=>c.toBlob(r,"image/jpeg",0.92));
+    if(blob) fotoDaImmagine(blob,"Schermata catturata");
+  } finally { stream.getTracks().forEach(t=>t.stop()); }
+}
+function fotoDaImmagine(blob,cosa){
+  const f=new File([blob],"tetto.jpg",{type:blob.type||"image/jpeg"});
+  P.view="top"; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.pv==="top")); $("#compassBtn").hidden=true;
+  if(S.mode!=="photo"){ if(S.step!==2) go(2); setMode("photo"); }
+  caricaFotoTetto(f);
+  toast(`${cosa}: tocca i 4 angoli della falda e scrivi la larghezza della gronda in metri`);
+}
+$("#catturaBtn").addEventListener("click",catturaSchermo);
+$("#catturaBtn2").addEventListener("click",catturaSchermo);
+document.addEventListener("paste",e=>{
+  const it=[...(e.clipboardData&&e.clipboardData.items||[])].find(i=>i.type&&i.type.startsWith("image/"));
+  if(!it||S.step>2) return;
+  const b=it.getAsFile(); if(!b) return; e.preventDefault(); fotoDaImmagine(b,"Immagine incollata");
 });
 $("#compassBtn").addEventListener("click",async()=>{
   const D=window.DeviceOrientationEvent;
@@ -1743,11 +1784,43 @@ async function cercaIndirizzo(){
     const r=await fetch(`${window.SAT_BASE||""}/api/solaris/geocodifica?q=${encodeURIComponent(S.addr)}`); const j=await r.json();
     if(!r.ok||j.lat==null){ toast("Indirizzo non trovato: controlla via e paese"); return null; }
     S.addrPos={lat:j.lat,lon:j.lon,preciso:!!j.preciso,per:S.addr};
+    if(P.sat){ P.sat=null; P.img=null; P.corners=[]; }
     useLocation(j.lat,j.lon,"dall’indirizzo",j.comune||null);
+    mostraSullaMappa(j.lat,j.lon);
     return S.addrPos;
   }catch(e){ return null; }
 }
 $("#addr").addEventListener("change",()=>{ cercaIndirizzo(); });
+$("#addr").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); e.target.blur(); } });
+
+let mappa=null, pin=null;
+function mappaPronta(){
+  if(mappa||!window.L) return mappa;
+  const centro=S.addrPos?[S.addrPos.lat,S.addrPos.lon]:(CITIES[S.city]&&CITIES[S.city].lon!=null?[CITIES[S.city].lat,CITIES[S.city].lon]:[45.0849,7.4755]);
+  mappa=L.map("mappaCasa",{zoomControl:true,attributionControl:true}).setView(centro,S.addrPos?19:13);
+  const base=window.SAT_BASE||"";
+  if(_INIT.googleMappe) L.tileLayer(base+"/api/solaris/satellite?fonte=gtile&z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:20,attribution:"Immagini © Google"}).addTo(mappa);
+  else L.tileLayer(base+"/api/solaris/satellite?z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:19,attribution:"Immagini © Esri, Maxar"}).addTo(mappa);
+  const icona=L.divIcon({className:"",html:'<div style="font-size:34px;line-height:34px;transform:translate(-4px,-30px);filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))">📍</div>',iconSize:[30,34]});
+  pin=L.marker(centro,{draggable:true,icon:icona,autoPan:true});
+  if(S.addrPos) pin.addTo(mappa);
+  pin.on("dragend",()=>{ const ll=pin.getLatLng(); puntoTetto(ll.lat,ll.lng); });
+  mappa.on("click",e=>{ pin.setLatLng(e.latlng).addTo(mappa); puntoTetto(e.latlng.lat,e.latlng.lng); });
+  if(S.addrPos&&S.addrPos.manuale) pinOk();
+  return mappa;
+}
+function pinOk(){ const t=$("#pinTip"); t.className="pinTip"; t.textContent="✓ Tetto segnato. Al passo 2 la foto dal satellite parte da questo punto."; }
+function puntoTetto(lat,lon){
+  S.addrPos={lat,lon,preciso:true,per:S.addr,manuale:true};
+  P.lat=lat; P.lon=lon;
+  if(P.sat){ P.sat=null; P.img=null; P.corners=[]; } // la foto del tetto si rifà dal nuovo punto
+  pinOk(); saveToServer();
+}
+function mostraSullaMappa(lat,lon){
+  if(!mappaPronta()) return;
+  mappa.setView([lat,lon],19); pin.setLatLng([lat,lon]).addTo(mappa);
+  const t=$("#pinTip"); t.className="pinTip warn"; t.textContent="Trascina il segnaposto 📍 sul tetto esatto della casa (o tocca il tetto).";
+}
 
 /* ======================= ABITUDINI DI CASA ======================= */
 const QUIZ=[
@@ -1886,6 +1959,7 @@ function ripristinaCampi(){
   });
 }
 ripristinaCampi();
+setTimeout(()=>{ if(S.step===1||!S.step) mappaPronta(); },80);
 fillSelects(); renderKwpTargets(); clampPanels(); updateDial(); refresh();
 if(P.sat&&P.sat.lat!=null){ const c0=P.corners.slice(); satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},fonte:P.sat.fonte||"esri",z:P.sat.z,zg:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}).then(()=>{ if(c0.length===4){ P.corners=c0; fitGrid(); if(S.mode==="photo") drawPhoto(); } }); }
 if(window.THREE){ initThree(); } else { $("#nowKw").textContent="3D non disponibile"; }

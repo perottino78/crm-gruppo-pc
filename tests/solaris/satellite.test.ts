@@ -25,7 +25,8 @@ test("riquadro: le tessere coprono tutto il lato richiesto", () => {
 
 test("tessera valida: niente zoom o coordinate fuori misura", () => {
   assert.equal(tesseraValida(19, 272000, 188000), true);
-  assert.equal(tesseraValida(10, 1, 1), false);
+  assert.equal(tesseraValida(2, 1, 1), false);
+  assert.equal(tesseraValida(23, 1, 1), false);
   assert.equal(tesseraValida(19, -1, 5), false);
   assert.equal(tesseraValida(19, 2 ** 19, 5), false);
   assert.equal(tesseraValida(19.5, 1, 1), false);

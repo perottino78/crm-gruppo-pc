@@ -606,6 +606,9 @@ login nel `matcher` del middleware.
   `src/lib/solaris/google-mappe.ts`) la foto arriva da Maps Static API (`?fonte=google`, 1280 px, zoom 17–21) e `GET /api/solaris/tetto` chiede la falda
   a Google Solar API (`faldeDaSolar`/`faldaMigliore`/`misureFalda`: angoli, inclinazione e orientamento da soli); senza chiave Esri. L'indirizzo all'uscita
   dal campo dà il comune (`S.cityGps`, salvato) e la posizione (`S.addrPos`); alla riapertura `ripristinaCampi` rimette nome, indirizzo, località e scelte.
+  Come Reonic: al passo 1 mappa Leaflet (`#mappaCasa`, tessere `?fonte=gtile` = Google Map Tiles API con sessione creata dal server in `tesseraGoogle`, o Esri senza
+  chiave; `googleMappe` in `SOLARIS_INIT`) con il segnaposto 📍 da trascinare o toccare sul tetto (`puntoTetto` → `S.addrPos.manuale`, la foto del passo 2 riparte da lì).
+  Al passo 2 anche «🖥️ Cattura dallo schermo» (`getDisplayMedia`, come «Segnala un problema») e incolla con Ctrl/Cmd+V (`fotoDaImmagine` → `caricaFotoTetto`, vista dall'alto).
   Prodotti Stealth Energy (`src/lib/solaris/stealth.ts`, inverter ST-INV-S/T e batterie SP-HEV50…, prezzi a 0 da completare): creati da soli in
   `SolarisComponente` alla prima apertura dello Studio (`createMany skipDuplicates`); batterie scelte nello Studio (`S.battId`, moduli con `moduliPer`)
   e portate in offerta. Test `tests/solaris/`.

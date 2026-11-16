@@ -34,7 +34,7 @@ export function tessereRiquadro(lat: number, lon: number, zoom: number, lato: nu
 /** Controllo dei parametri di una tessera richiesta alla rotta (niente indirizzi arbitrari verso Esri). */
 export function tesseraValida(z: number, x: number, y: number): boolean {
   if (![z, x, y].every(Number.isInteger)) return false;
-  if (z < 15 || z > 21) return false;
+  if (z < 3 || z > 22) return false; // mappa del passo 1 (da lontano) e foto del tetto (da vicino)
   const n = 2 ** z;
   return x >= 0 && x < n && y >= 0 && y < n;
 }

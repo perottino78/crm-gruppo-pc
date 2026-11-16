@@ -60,3 +60,36 @@ export async function faldeGoogle(lat: number, lon: number, chiave?: string | nu
   if (!r.ok) return { errore: `Google Solar ${r.status}: ${(j as { error?: { message?: string } })?.error?.message ?? "errore"}` };
   return { falde: faldeDaSolar(j) };
 }
+
+// ===== Mappa interattiva: tessere satellitari Google (Map Tiles API), sessione creata qui e tenuta in memoria =====
+const TILE_BASE = () => process.env.GOOGLE_TILE_BASE || "https://tile.googleapis.com";
+let sessioneTessere: { token: string; scade: number; chiave: string } | null = null;
+
+async function sessioneGoogle(k: string): Promise<string | null> {
+  if (sessioneTessere && sessioneTessere.chiave === k && Date.now() < sessioneTessere.scade - 3_600_000) return sessioneTessere.token;
+  const r = await fetch(`${TILE_BASE()}/v1/createSession?key=${encodeURIComponent(k)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mapType: "satellite", language: "it-IT", region: "IT", scale: "scaleFactor2x", highDpi: true }),
+    signal: AbortSignal.timeout(10000),
+  });
+  if (!r.ok) return null;
+  const j = (await r.json()) as { session?: string; expiry?: string };
+  if (!j.session) return null;
+  sessioneTessere = { token: j.session, scade: (Number(j.expiry) || Date.now() / 1000 + 86400) * 1000, chiave: k };
+  return j.session;
+}
+
+/** Una tessera satellitare Google per la mappa del passo 1. */
+export async function tesseraGoogle(z: number, x: number, y: number): Promise<{ img: ArrayBuffer; tipo: string } | { errore: string; stato: number }> {
+  const k = await chiaveGoogleMaps();
+  if (!k) return { errore: "nessuna_chiave", stato: 404 };
+  const s = await sessioneGoogle(k);
+  if (!s) return { errore: "sessione Google non creata (attiva «Map Tiles API»)", stato: 502 };
+  const r = await fetch(`${TILE_BASE()}/v1/2dtiles/${z}/${x}/${y}?session=${encodeURIComponent(s)}&key=${encodeURIComponent(k)}`, { signal: AbortSignal.timeout(10000) });
+  if (!r.ok) {
+    if (r.status === 401 || r.status === 403) sessioneTessere = null;
+    return { errore: `Google ${r.status}`, stato: r.status === 404 ? 404 : 502 };
+  }
+  return { img: await r.arrayBuffer(), tipo: r.headers.get("content-type") || "image/jpeg" };
+}
