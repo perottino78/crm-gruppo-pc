@@ -1,8 +1,8 @@
-// Collaudo: l'incasso registrato fa avanzare da solo la trafila dei task (acconto → ufficio successivo, saldo → posa).
+// Collaudo: l'incasso registrato (Debora) lascia la fattura d'acconto a Giorgia e il task «incasso e progetto» ad Amministrazione; il saldo pagato chiude il task di fatturazione.
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/trafila-incassi.collaudo.ts
 import { prisma } from "../../src/lib/prisma";
 import { registraPagamento } from "../../src/app/pagamenti-actions";
-import { avviaFaseFlusso, fattoTask } from "../../src/app/flusso-actions";
+import { avviaFaseFlusso } from "../../src/app/flusso-actions";
 import { sincronizzaScadenzeCommesse } from "../../src/lib/amministrazione/server";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -26,28 +26,26 @@ async function main() {
   await sincronizzaScadenzeCommesse();
   const acconto = (await prisma.scadenza.findFirst({ where: { commessaId: c.id, origine: "COMMESSA_ACCONTO" } }))!;
   const saldo = (await prisma.scadenza.findFirst({ where: { commessaId: c.id, origine: "COMMESSA_SALDO" } }))!;
-  verifica((await aperti(c.id)).map((t) => t.faseChiave).join() === "FATT_ACCONTO", "la pratica aspetta la fattura di acconto");
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "partono insieme la fattura di acconto (Giorgia) e incasso e progetto (Debora)");
 
-  console.log("1. Incasso parziale dell'acconto: la pratica va avanti");
+  console.log("1. Incasso dell'acconto: la fattura resta a Giorgia, il progetto a Debora");
   const r = await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-03", importo: "500", contoId: banca.id, metodo: "BONIFICO", ritorno: "/amministrazione/scadenzario" })));
-  verifica(r?.includes("Pratica avanzata") && r.includes("Emettere la fattura di acconto"), "il messaggio dice che la pratica è avanzata", r);
-  const dopo = await aperti(c.id);
-  verifica(dopo.length === 1 && dopo[0].faseChiave === "RILIEVO" && dopo[0].ufficio === "TECNICO", "chiusa «Fattura acconto», nuovo task all'ufficio tecnico (rilievo)", dopo.map((t) => t.faseChiave));
-  const chiuso = (await prisma.taskPratica.findFirst({ where: { commessaId: c.id, faseChiave: "FATT_ACCONTO" } }))!;
-  verifica(chiuso.completatoIl && chiuso.completatoDaNome === "Debora Girodo" && chiuso.descrizione?.includes("Acconto incassato il 03/11/2026"), "il task chiuso spiega perché, con chi e quando");
-  verifica((await prisma.commessa.findUnique({ where: { id: c.id } }))?.accontoIncassato, "la commessa risulta con l'acconto incassato");
+  verifica((await prisma.commessa.findUnique({ where: { id: c.id } }))?.accontoIncassato, "la commessa risulta con l'acconto incassato", r);
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "nessun task si chiude da solo: la fattura la chiude Giorgia, il progetto lo crea Debora");
 
   console.log("2. Un secondo incasso non crea doppioni");
   await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-04", importo: "500", contoId: banca.id, metodo: "BONIFICO" })));
-  verifica((await prisma.taskPratica.count({ where: { commessaId: c.id, faseChiave: "RILIEVO" } })) === 1, "sempre un solo task di rilievo");
+  verifica((await prisma.taskPratica.count({ where: { commessaId: c.id } })) === 2, "sempre e solo i due task iniziali");
 
-  console.log("3. Saldo incassato con la pratica alla «Fattura saldo»: parte la posa");
-  for (let i = 0; i < 2; i++) { const t = (await aperti(c.id))[0]; await dove(fattoTask(fd({ taskId: t.id }))); }
-  verifica((await aperti(c.id))[0]?.faseChiave === "FATT_SALDO", "rilievo e ordini fatti: si aspetta la fattura di saldo");
+  console.log("3. Saldo pagato: si chiude il task di fatturazione del saldo");
+  await avviaFaseFlusso(c.id, "FATT_SALDO", "MAGAZZINO", "Collaudo");
+  await prisma.taskPratica.create({ data: { commessaId: c.id, faseChiave: "MATERIALE_COMPLETO", ufficio: "FATTURAZIONE", titolo: "Materiale completo: fattura saldo e incasso", creatoDa: "Magazzino" } });
+  const saldiAperti = () => prisma.taskPratica.count({ where: { commessaId: c.id, completatoIl: null, OR: [{ faseChiave: "FATT_SALDO" }, { faseChiave: "MATERIALE_COMPLETO" }] } });
+  verifica((await saldiAperti()) === 2, "due task di saldo aperti");
   await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-20", importo: "1000", contoId: banca.id, metodo: "BONIFICO" })));
-  verifica((await aperti(c.id))[0]?.faseChiave === "FATT_SALDO", "saldo pagato solo in parte: la fase resta aperta");
+  verifica((await saldiAperti()) === 2, "saldo pagato solo in parte: i task restano aperti");
   await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-21", importo: "500", contoId: banca.id, metodo: "BONIFICO" })));
-  verifica((await aperti(c.id))[0]?.faseChiave === "POSA", "pagato tutto: chiusa «Fattura saldo», task alla posa");
+  verifica((await saldiAperti()) === 0, "pagato tutto: si chiudono tutti e due i task di fatturazione del saldo");
 
   console.log("4. Incasso su una fattura di vendita agganciata alla pratica (come Giorgini da BConsole)");
   const pr2 = await prisma.preventivo.create({ data: { clienteId: cliente.id, brandId: b.id, commercialeId: debora.id, stato: "ACCETTATO" } });
@@ -56,7 +54,7 @@ async function main() {
   const fv = await prisma.fatturaVendita.create({ data: { chiave: "BCV|9", numero: "500/FE/2026", data: new Date("2026-10-30"), clienteNome: "GIORGINI STEFANO", commessaId: c2.id, imponibile: 819.67, totale: 1000 } });
   const sf = await prisma.scadenza.create({ data: { tipo: "INCASSO", descrizione: "Fattura 500/FE/2026", controparte: "Giorgini", importo: 1000, fatturaVenditaId: fv.id, origine: "FATTURA_VENDITA", chiaveImport: "BCV:9" } });
   await dove(registraPagamento(fd({ scadenzaId: sf.id, data: "2026-11-03", importo: "1000", contoId: banca.id, metodo: "BONIFICO" })));
-  verifica((await aperti(c2.id))[0]?.faseChiave === "RILIEVO", "pagata la fattura della pratica: parte il task successivo");
+  verifica((await aperti(c2.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "pagata la fattura della pratica: i task iniziali restano ai loro uffici");
 
   console.log("5. Pagamenti ai fornitori non toccano le pratiche");
   const sp = await prisma.scadenza.create({ data: { tipo: "PAGAMENTO", descrizione: "Fattura fornitore", controparte: "DIMAR", importo: 100, commessaId: null } });

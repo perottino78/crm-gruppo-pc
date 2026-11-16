@@ -732,6 +732,8 @@ model Commessa {
   progettoCreatoDaNome    String?
   materialeConfermatoIl   DateTime?
   materialeConfermatoDaNome String?
+  // Ringraziamento al cliente per il pagamento dell'acconto (una sola mail)
+  ringraziamentoInviatoIl DateTime?
   // Progetto (come in BConsole): consegna prevista del lavoro al cliente, la deadline che si sposta se serve
   consegnaPrevista        DateTime?
   // Pratica presa in carico da un ordine BConsole (n. ordine): incassi dalle fatture BConsole agganciate, niente rate di acconto/saldo automatiche

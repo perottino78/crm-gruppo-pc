@@ -46,9 +46,11 @@ async function main() {
   const tasks = p2.commessa!.tasks;
   const acc = tasks.find((t) => t.faseChiave === "ACCETTAZIONE");
   verifica(acc?.completatoIl && acc.completatoDaNome === "Pavel", "fase Accettazione chiusa dal commerciale", acc);
-  const prossimo = tasks.find((t) => !t.completatoIl);
+  const prossimo = tasks.find((t) => t.faseChiave === "FATT_ACCONTO");
   verifica(prossimo?.faseChiave === "FATT_ACCONTO" && prossimo.ufficio === "FATTURAZIONE", "task creato per la contabilità (fattura acconto)", prossimo);
   verifica(prossimo?.descrizione?.includes("Acconto 50% bonifico"), "la nota del commerciale è nel task", prossimo?.descrizione);
+  const incasso = tasks.find((t) => t.faseChiave === "PROGETTO");
+  verifica(incasso?.ufficio === "AMMINISTRAZIONE" && !incasso.completatoIl, "in parallelo parte il task di Debora (incasso e progetto)", incasso);
   verifica(p2.commessa!.eventi.some((e) => e.testo.includes("Contratto firmato allegato (1 file)") && e.testo.includes("Foto allegate: 1")), "nel diario della commessa: contratto e foto");
 
   console.log("4. Offerta bloccata");
@@ -77,7 +79,7 @@ async function main() {
   g.__utente = comm;
   const prevB = await prisma.preventivo.create({ data: { clienteId: cli.id, brandId: brand.id, commercialeId: comm.id, numeroOfferta: 102, totaleNetto: 500 } });
   await redirectA(C.confermaOrdinePreventivo(fd({ preventivoId: prevB.id, contrattoCartaceo: "on" })));
-  const tB = await prisma.taskPratica.findFirst({ where: { commessa: { preventivoId: prevB.id }, completatoIl: null } });
+  const tB = await prisma.taskPratica.findFirst({ where: { commessa: { preventivoId: prevB.id }, completatoIl: null, faseChiave: "FATT_ACCONTO" } });
   verifica(tB?.descrizione?.includes("firmato su carta"), "la contabilità vede l'avviso del contratto cartaceo", tB?.descrizione);
 
   console.log(`\n${ok} superati, ${ko} falliti`);

@@ -1,6 +1,7 @@
 "use server";
 
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
+import { ordiniTuttiInviati } from "@/lib/pratica/avanzamenti";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -257,6 +258,8 @@ async function segnaInviato(id: string, modalita: "EMAIL" | "MANUALE", a: string
   const o = await prisma.ordineFornitore.update({ where: { id }, data: { stato: "INVIATO", inviatoIl: new Date(), inviatoA: a, inviatoDaNome: nome, modalitaInvio: modalita } });
   await prisma.rigaOrdine.updateMany({ where: { ordineFornitoreId: id, ordinato: false }, data: { ordinato: true, ordinatoIl: new Date(), ordinatoDaNome: nome } });
   await logCommessa(o.commessaId, `Ordine fornitore ${numeroOrdine(o)} inviato${a ? ` a ${a}` : ""} (${modalita === "EMAIL" ? "email dal CRM" : "inviato a mano"}).`, nome);
+  // flusso: con tutte le righe del progetto ordinate il task dell'ufficio ordini passa al magazzino
+  if (o.commessaId) await ordiniTuttiInviati(o.commessaId);
   aggiorna(id, o.commessaId);
 }
 
