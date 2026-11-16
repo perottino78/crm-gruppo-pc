@@ -13,7 +13,7 @@ import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { listiniOptima, GUIDA_OPTIMA, CATALOGHI_OPTIMA } from "@/lib/listini/optima";
-import { listiniZenith, GUIDA_ZENITH } from "@/lib/listini/zenith";
+import { listiniZenith, GUIDA_ZENITH, CATALOGHI_ZENITH } from "@/lib/listini/zenith";
 import { tendinaDi } from "@/lib/listini/serramenti-comuni";
 import { assicuraOptionalSerramenti } from "@/lib/listini/allinea-optional";
 import { listiniPlasma30, GUIDA_PLASMA30, CATALOGHI_PLASMA30, ePlasma30 } from "@/lib/listini/plasma30";
@@ -806,7 +806,7 @@ export default async function PreventivoPage({
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
                         {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : plasma30 ? GUIDA_PLASMA30 : zenith ? GUIDA_ZENITH : optima ? GUIDA_OPTIMA : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
-                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo || zenith ? [] : plasma30 ? CATALOGHI_PLASMA30 : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
+                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo ? [] : zenith ? CATALOGHI_ZENITH : plasma30 ? CATALOGHI_PLASMA30 : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>

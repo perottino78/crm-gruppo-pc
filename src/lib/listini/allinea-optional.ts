@@ -8,13 +8,19 @@ import { optionalFidra } from "./fidra";
 import { optionalPlasma30 } from "./plasma30";
 import type { VoceOptional } from "./serramenti-comuni";
 
-export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-16";
+export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-16b";
 const CHIAVE = "optional_serramenti_versione";
 const chiave = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
 /** Vecchi listini Zenith (optional del primo caricamento) sostituiti dai nuovi: non più proposti, restano sulle offerte già fatte. */
 const LISTINI_ZENITH_VECCHI = ["ZENITH_PF3A_SOGLIA", "ZENITH_WASISTAS"];
 const VECCHIE_ZENITH_PF3A = ["Pellicole fuori standard diverse, un solo lato", "Pellicole fuori standard diverse, due lati diversi"];
+/** Voci Zenith della prima versione di oggi da spegnere: lo Zenith 72 ha già il vetro stratificato 3+3 di serie (scheda tecnica). */
+const VECCHIE_ZENITH_NOMI = [
+  "Vetrocamera doppio basso emissivo con gas argon (di serie)",
+  "Vetro stratificato di sicurezza 3+3 lato interno (antinfortunio) (ad anta)",
+  "Vetro stratificato di sicurezza 3+3 sui due lati (ad anta)",
+];
 
 /** Brand che ha prodotti con questo prefisso (in Prisma «_» in startsWith vale qualsiasi carattere: si ricontrolla). */
 async function brandCon(prefisso: string): Promise<string | null> {
@@ -37,7 +43,7 @@ export async function allineaOptionalSerramenti() {
   if (zenith) {
     creati += await creaMancanti(zenith, optionalZenith(), "ZENITH");
     spenti += (await prisma.optional.updateMany({
-      where: { brandId: zenith, attivo: true, OR: [{ listino: { in: LISTINI_ZENITH_VECCHI } }, { listino: "ZENITH_PF3A", nome: { in: VECCHIE_ZENITH_PF3A } }] },
+      where: { brandId: zenith, attivo: true, OR: [{ listino: { in: LISTINI_ZENITH_VECCHI } }, { listino: "ZENITH_PF3A", nome: { in: VECCHIE_ZENITH_PF3A } }, { listino: { in: ["ZENITH_DOPPIO", "ZENITH_F", "ZENITH_PF"] }, nome: { in: VECCHIE_ZENITH_NOMI } }] },
       data: { attivo: false },
     })).count;
   }

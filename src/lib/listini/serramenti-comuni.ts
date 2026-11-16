@@ -15,8 +15,10 @@ export const VETRI_SPECIALI: [string, number, number][] = [
 ];
 
 /** Vetri speciali del listino: una voce per finestre (`<base>_F`) e una per portefinestre (`<base>_PF`). */
-export function vetriSpeciali(base: string): VoceOptional[] {
-  return VETRI_SPECIALI.flatMap(([nome, f, pf]) => [
+export function vetriSpeciali(base: string, opzioni: { stratificatoDiSerie?: boolean } = {}): VoceOptional[] {
+  // con il vetro stratificato 3+3 già di serie (Zenith 72) i sovrapprezzi dello stratificato non servono
+  const vetri = opzioni.stratificatoDiSerie ? VETRI_SPECIALI.filter(([nome]) => !nome.startsWith("Vetro stratificato")) : VETRI_SPECIALI;
+  return vetri.flatMap(([nome, f, pf]) => [
     { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: f, unita: "anta", listino: `${base}_F` },
     { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: pf, unita: "anta", listino: `${base}_PF` },
   ]);

@@ -5,6 +5,7 @@ import { optionalOptima } from "../../src/lib/listini/optima";
 import { optionalFidra } from "../../src/lib/listini/fidra";
 import { optionalPlasma30 } from "../../src/lib/listini/plasma30";
 import { tendinaDi, sceltePerRilievo, vetriSpeciali } from "../../src/lib/listini/serramenti-comuni";
+import { schedaCliente } from "../../src/lib/preventivi/scheda-cliente";
 
 const chiave = (o: { categoria: string; nome: string; listino: string }) => `${o.categoria}|${o.nome}|${o.listino}`;
 
@@ -54,4 +55,16 @@ test("tendine: accessori insieme, lavorazioni e misure; scelte per il rilievo", 
     ]),
     "Colore esterno: Rovere gold (AP 23) — pellicola · Vetri: Vetro satinato (ad anta) ×2 (bagno)",
   );
+});
+
+test("Zenith 72: scheda tecnica e vetro stratificato 3+3 già di serie (niente sovrapprezzo)", () => {
+  const s = schedaCliente("ZENITH_PF2A_SOGLIA_UKW13");
+  assert.equal(s?.chiave, "ZENITH");
+  assert.equal(s?.pdf, "/cataloghi/zenith/Zenith72-scheda-tecnica.pdf");
+  assert.deepEqual(s?.pagine, ["/cataloghi/zenith/pagine/p-1.jpg"]);
+  assert.match(s?.descrizione ?? "", /3\+3 basso emissivo \/ 18 gas argon \/ 3\+3/);
+  const o = optionalZenith();
+  assert.ok(!o.some((x) => x.nome.startsWith("Vetro stratificato")), "lo stratificato 3+3 è di serie");
+  assert.ok(o.some((x) => x.nome.startsWith("Vetrocamera stratificato di sicurezza 3+3") && x.valore === 0));
+  assert.ok(optionalOptima().some((x) => x.nome.startsWith("Vetro stratificato")), "negli altri listini resta a pagamento");
 });
