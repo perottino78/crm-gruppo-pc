@@ -1,11 +1,11 @@
-// Cestino: prima di eliminare una campagna, un lead o un cliente se ne fa una copia completa (con i dati collegati) che resta
+// Cestino: prima di eliminare una campagna, un lead, un cliente o un'offerta se ne fa una copia completa (con i dati collegati) che resta
 // 30 giorni; l'amministrazione la ripristina da Impostazioni › Registro e cestino. Ogni eliminazione e ripristino va anche nel
 // registro «chi ha fatto cosa» (RegistroAmministrazione).
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
 export const GIORNI_CESTINO = 30;
-export type TipoCestino = "CAMPAGNA" | "LEAD" | "CLIENTE";
+export type TipoCestino = "CAMPAGNA" | "LEAD" | "CLIENTE" | "PREVENTIVO";
 type Tabella = { modello: string; righe: Record<string, unknown>[] };
 type Collega = { modello: string; id: string; campo: string; valore: string };
 export type DatiCestino = { tabelle: Tabella[]; collega?: Collega[] };
@@ -28,6 +28,26 @@ export async function fotografia(tipo: TipoCestino, id: string): Promise<{ nome:
       prisma.cliente.findMany({ where: { leadOrigineId: id }, select: { id: true } }),
     ]);
     return { nome: l.nome, dati: { tabelle: [{ modello: "lead", righe: [l] }, { modello: "leadEvento", righe: eventi }, { modello: "emailLead", righe: email }], collega: clienti.map((c) => ({ modello: "cliente", id: c.id, campo: "leadOrigineId", valore: id })) } };
+  }
+  if (tipo === "PREVENTIVO") {
+    const p = await prisma.preventivo.findUnique({ where: { id }, include: { cliente: { select: { nome: true } } } });
+    if (!p) return null;
+    const { cliente, ...preventivo } = p;
+    const [sezioni, righe, optional, promemoria, email, solaris] = await Promise.all([
+      prisma.sezionePreventivo.findMany({ where: { preventivoId: id } }), prisma.rigaPreventivo.findMany({ where: { preventivoId: id } }),
+      prisma.rigaOptional.findMany({ where: { riga: { preventivoId: id } } }), prisma.promemoriaInviato.findMany({ where: { preventivoId: id } }),
+      prisma.emailOfferta.findMany({ where: { preventivoId: id } }), prisma.solarisProgetto.findMany({ where: { preventivoId: id } }),
+    ]);
+    const fotoSolaris = solaris.length ? await prisma.solarisFoto.findMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }) : [];
+    const nome = `Offerta${p.numeroOfferta ? ` n. ${p.numeroOfferta}` : ""} — ${cliente.nome}`;
+    return {
+      nome,
+      dati: {
+        tabelle: [{ modello: "preventivo", righe: [preventivo] }, { modello: "sezionePreventivo", righe: sezioni }, { modello: "rigaPreventivo", righe: righe },
+          { modello: "rigaOptional", righe: optional }, { modello: "promemoriaInviato", righe: promemoria }, { modello: "emailOfferta", righe: email },
+          { modello: "solarisProgetto", righe: solaris }, { modello: "solarisFoto", righe: fotoSolaris }],
+      },
+    };
   }
   const c = await prisma.cliente.findUnique({ where: { id } });
   if (!c) return null;
