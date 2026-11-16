@@ -29,6 +29,7 @@ import SelettoreImmagine from "@/components/SelettoreImmagine";
 import SelectAutoInvio from "@/components/SelectAutoInvio";
 import FormAutoSalva from "@/components/FormAutoSalva";
 import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
+import { rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
 import RigaTesto from "@/components/preventivi/RigaTesto";
 import FinestraOptional from "@/components/preventivi/FinestraOptional";
@@ -85,10 +86,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
+  searchParams: Promise<{ q?: string; solaris?: string; solarisFoto?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
 }) {
   const { id } = await params;
-  const { q, errore, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
+  const { q, solaris, solarisFoto, errore, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -329,6 +330,13 @@ export default async function PreventivoPage({
         </div>
       )}
 
+      {solaris != null && (
+        <div className="mb-4 text-sm text-green-800 bg-green-50 border border-green-200 rounded-lg px-4 py-2.5">
+          ☀️ Dallo Studio: {solaris === "0" ? "nessuna riga da portare" : `${solaris} righe nell'offerta (pannelli, inverter, batteria, installazione)`}
+          {solarisFoto ? ", la foto del tetto con i pannelli in copertina" : ""}. Le schede tecniche si allegano con la spunta su ogni riga. Se torni nello Studio e cambi qualcosa, al ritorno le righe si aggiornano.
+        </div>
+      )}
+
       {errore && (
         <div className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5">
           ⚠️ {errore}
@@ -402,6 +410,17 @@ export default async function PreventivoPage({
                 {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
                 <div className="flex-1 min-w-0 px-4 py-3 text-sm">
                 <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} importo={subtotaleLibero} />
+                {rigaConSchedaSolaris(r.testoLibero) && (
+                  // scheda tecnica dallo Studio (pannello, inverter, batteria): stampata in fondo all'offerta
+                  <FormAutoSalva key={`scheda-${r.id}-${r.allegaScheda}`} action={aggiornaSchedaRiga} className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px]">
+                    <input type="hidden" name="id" value={r.id} />
+                    <label className={`flex items-center gap-1.5 cursor-pointer px-2 py-0.5 rounded-full border ${r.allegaScheda ? "border-blue-300 bg-blue-50 text-blue-800" : "border-neutral-200 text-neutral-600"}`}>
+                      <input type="checkbox" name="allega" value="1" defaultChecked={r.allegaScheda} className="h-3.5 w-3.5" />
+                      📄 Allega la scheda tecnica (in fondo all'offerta)
+                    </label>
+                    <a href={`/preventivi/${preventivo.id}/schede-solaris`} target="_blank" rel="noreferrer" className="text-blue-700 underline">apri la scheda</a>
+                  </FormAutoSalva>
+                )}
                 </div>
               </div>
             );
