@@ -11,6 +11,7 @@ import { SOTTOGRUPPO_PAVGAL, labelPavgal } from "@/lib/listini/pavimenti-gallegg
 import { sottogruppoLatt, labelLatt } from "@/lib/listini/lattoneria";
 import { sottogruppoRasomuro, labelRasomuro, assiSelezioneRasomuro } from "@/lib/listini/rasomuro";
 import { eChirenti, labelChirenti } from "@/lib/listini/chirenti";
+import { posizioneSolarisBC, labelSolarisBC, PREFISSO_SOLARIS_BC } from "@/lib/listini/solaris-bconsole";
 // Le tipologie delle strutture da esterno (pergole, tende, ombreggianti) usano
 // come unità di misura il centimetro nei listini fornitore; i serramenti (Illumia)
 // usano il millimetro. altezzaMm/larghezzaMm restano i nomi dei campi a DB per
@@ -773,6 +774,7 @@ const LAMBORGHINI_SOTTOGRUPPI: Record<string, string> = {
 
 
 export function sottogruppoDiTipologia(tipologia: string): string | null {
+  if (tipologia.startsWith(PREFISSO_SOLARIS_BC)) return posizioneSolarisBC(tipologia)?.sottogruppo ?? null;
   if (tipologia.startsWith("RASOMURO_")) return sottogruppoRasomuro(tipologia);
   if (tipologia.startsWith("FIDRA_")) return SOTTOGRUPPO_FIDRA;
   if (tipologia.startsWith("OPTIMA_")) return SOTTOGRUPPO_OPTIMA;
@@ -2090,6 +2092,7 @@ export function labelBreveTipologia(tipologia: string): string {
   if (tipologia === "PAVGRES_PLACEHOLDER") return "Gres porcellanato (listino in arrivo)";
   if (WSPOSA_LABELS[tipologia]) return WSPOSA_LABELS[tipologia];
   if (tipologia === "PORTEPC_PLACEHOLDER") return "Porte P&C (listino in arrivo)";
+  if (tipologia.startsWith(PREFISSO_SOLARIS_BC)) return labelSolarisBC(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("RASOMURO_")) return labelRasomuro(tipologia) ?? tipologia.replace(/_/g, " ");
   if (eChirenti(tipologia)) return labelChirenti(tipologia) ?? tipologia.replace(/_/g, " ");
   if (tipologia.startsWith("FIDRA_")) return labelFidra(tipologia) ?? tipologia.replace(/_/g, " ");
