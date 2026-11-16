@@ -652,7 +652,7 @@ login nel `matcher` del middleware.
   di BConsole; fornitore (per nome), codice e `scontoAcquisto` = costo BConsole. `src/lib/listini/solaris-bconsole.ts` (puro: `posizioneSolarisBC`, `labelSolarisBC`,
   `nomePulito` corregge i refusi, `PREZZI_STEALTH_BC`). Rotta `api/admin/seed-solaris-bconsole` (GET prova, POST carica, rilanciabile: mai sopra prezzi esistenti, del
   modello solo i campi vuoti; in Solaris Studio prezzi Stealth solo dove sono a 0). In BConsole SP-HEHV27 è il controller BMS e il modulo da 2,76 kWh è «SP HE10227».
-  Test `tests/listini/solaris-bconsole.test.ts`, collaudo `solaris-bconsole` (10).
+  Test `tests/listini/solaris-bconsole.test.ts`, collaudo `solaris-bconsole` (11).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
