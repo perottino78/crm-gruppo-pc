@@ -66,7 +66,7 @@ import {
   aggiornaScadenzaPreventivo,
 } from "@/app/actions";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
-import { tassonomiaListino, GRUPPI_TENDE_CON_TESSUTO } from "@/lib/listini/tassonomia";
+import { tassonomiaListino, optionalAttiviDelMarchio, GRUPPI_TENDE_CON_TESSUTO } from "@/lib/listini/tassonomia";
 import RigaAzioni from "@/components/RigaAzioni";
 import AvvisoMisuraFuoriListino from "@/components/AvvisoMisuraFuoriListino";
 import { SelettorePannelliBlindati } from "@/components/SelettorePannelliBlindati";
@@ -121,7 +121,7 @@ export default async function PreventivoPage({
   // optional dei serramenti (Zenith, Optima, Fidra, Plasma 30) aggiornati alla versione del codice: lavora solo la prima volta
   await assicuraOptionalSerramenti();
   const [optionaliDisponibili, prodottiTrovati, tassonomia] = await Promise.all([
-    prisma.optional.findMany({ where: { brandId: preventivo.brandId, attivo: true }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
+    optionalAttiviDelMarchio(preventivo.brandId),
     q
       ? prisma.prodotto.findMany({
           where: {
