@@ -2,6 +2,7 @@
 // (coefficiente 2,2 già applicato nel file del fornitore). Le griglie larghezza × altezza (mm) sono in
 // prisma/seed-data/fidra_prodotti.json (estratte dal file Excel; le celle «*» = primo prezzo disponibile).
 // Modulo puro: lo usano la rotta api/admin/seed-fidra e la pagina dell'offerta.
+import { formeSpeciali, vetriSpeciali } from "./serramenti-comuni";
 
 export const PREFISSO_FIDRA = "FIDRA_";
 export const SOTTOGRUPPO_FIDRA = "Alluminio — Fidra";
@@ -62,6 +63,8 @@ export function optionalFidra(): OptionalFidra[] {
     o("Traversi e pannelli", "Pannello fisso aggiuntivo (cad.)", 100, "FIDRA_PF"),
     o("Misure e lavorazioni", "Oltre le misure di listino: ogni 10 cm in più (L o H)", 300),
     o("Misure e lavorazioni", "Serramento curvo o sagomato", 40, "FIDRA", "PERCENTUALE"),
+    ...formeSpeciali("FIDRA", false),
+    ...vetriSpeciali("FIDRA"),
     o("Misure e lavorazioni", "Minimo di produzione (ordine con meno di 3 pezzi; fissi meno di 2)", 450),
     o("Servizi al contratto", "Autoscala dal 3° piano in su", 500),
     o("Servizi al contratto", "Autoscala dal 7° piano in su", 800),

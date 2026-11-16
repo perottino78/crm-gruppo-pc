@@ -52,7 +52,7 @@ export default function FinestraOptional({ rigaId, titolo, scelti, children }: {
           <div ref={contenuto} className={aperto ? "p-4 [&_select]:max-w-full" : ""}>{children}</div>
           {aperto && (
             <div className="flex flex-wrap items-center gap-3 border-t border-neutral-200 px-4 py-3">
-              <span className="text-xs text-neutral-600">{scelti ? `Già aggiunti: ${scelti}. ` : ""}Ogni optional si aggiunge con il suo pulsante «+ optional».</span>
+              <span className="text-xs text-neutral-600">{scelti ? `Già aggiunti: ${scelti}. ` : ""}Scegli dalla tendina e premi «+ Aggiungi» (o «+ optional»).</span>
               <button type="button" onClick={() => setAperto(false)} className="ml-auto btn-3d btn-3d-green px-4 py-1.5 text-sm">✓ Fatto</button>
             </div>
           )}

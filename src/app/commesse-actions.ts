@@ -3,6 +3,7 @@
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
+import { sceltePerRilievo } from "@/lib/listini/serramenti-comuni";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -609,7 +610,7 @@ export async function generaRigheOrdine(formData: FormData) {
 async function assicuraRigheOfferta(id: string, silenzioso = false) {
   const c = await prisma.commessa.findUnique({
     where: { id },
-    include: { righeOrdine: true, preventivo: { include: { righe: { include: { prodotto: true }, orderBy: [{ ordine: "asc" }, { id: "asc" }] } } } },
+    include: { righeOrdine: true, preventivo: { include: { righe: { include: { prodotto: true, optionali: { select: { quantita: true, nota: true, optional: { select: { categoria: true, nome: true } } } } }, orderBy: [{ ordine: "asc" }, { id: "asc" }] } } } },
   });
   if (!c) return;
   const giaPresenti = new Set(c.righeOrdine.map((r) => r.rigaPreventivoId).filter(Boolean));
@@ -621,6 +622,8 @@ async function assicuraRigheOfferta(id: string, silenzioso = false) {
       if (r.prodotto && r.prodotto.colore && !/TARIFFA|Prezzo a/.test(r.prodotto.colore)) desc += ` — ${r.prodotto.colore}`;
       if (r.misuraLarghezza && r.misuraAltezza) desc += ` (${r.misuraLarghezza}×${r.misuraAltezza})`;
       if (r.optionalDescrizione) desc += ` + ${r.optionalDescrizione}`;
+      // colore esterno/interno, vetri e accessori scelti nell'offerta: servono al rilievo e nell'ordine al fornitore
+      if (r.optionali.length) desc += ` — ${sceltePerRilievo(r.optionali)}`;
       const acq = acquisto.get(r.id);
       return { commessaId: id, rigaPreventivoId: r.id, descrizione: desc, quantita: r.quantita, ...acq };
     });
