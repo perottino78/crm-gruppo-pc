@@ -1,11 +1,13 @@
 "use server";
 
 import { puo } from "@/lib/permessi/catalogo";
-import { moduliPer } from "@/lib/solaris/stealth";
+import { ricalcolaTotali } from "@/lib/preventivi/totali";
+import { portaSolarisInOfferta } from "@/lib/solaris/porta-in-offerta";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import { mettiNelCestino } from "@/lib/cestino";
 import { revalidatePath } from "next/cache";
+import { svuotaCacheListino } from "@/lib/listini/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
@@ -599,44 +601,6 @@ export async function duplicaPreventivo(formData: FormData) {
   redirect(`/preventivi/${nuovo.id}`);
 }
 
-// totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
-// l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
-// Se e' attivo il "prezzo manuale" (vedi aggiornaPrezzoManuale), il calcolo dalle righe
-// viene del tutto bypassato: totaleNetto/totaleIva si ricavano a ritroso dal totale finale
-// scritto a mano e dall'aliquota IVA corrente, ignorando righe e scontoPercentuale.
-async function ricalcolaTotali(preventivoId: string) {
-  const preventivoAttuale = await prisma.preventivo.findUnique({ where: { id: preventivoId } });
-  if (!preventivoAttuale) return;
-
-  if (preventivoAttuale.prezzoManualeAttivo && preventivoAttuale.prezzoManualeTotale != null) {
-    const totaleManuale = preventivoAttuale.prezzoManualeTotale;
-    const totaleNetto = totaleManuale / (1 + preventivoAttuale.aliquotaIva / 100);
-    await prisma.preventivo.update({
-      where: { id: preventivoId },
-      data: { totaleNetto, totaleIva: totaleManuale - totaleNetto },
-    });
-    return;
-  }
-
-  const righe = await prisma.rigaPreventivo.findMany({
-    where: { preventivoId },
-    include: { optionali: true },
-  });
-  const imponibileLordo = righe.reduce((sum, r) => {
-    const subOptionali = r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0);
-    return sum + r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
-  }, 0);
-  const sconto = preventivoAttuale.scontoPercentuale ?? 0;
-  const totaleNetto = imponibileLordo * (1 - sconto / 100);
-  const preventivo = await prisma.preventivo.update({
-    where: { id: preventivoId },
-    data: { totaleNetto },
-  });
-  await prisma.preventivo.update({
-    where: { id: preventivoId },
-    data: { totaleIva: totaleNetto * (preventivo.aliquotaIva / 100) },
-  });
-}
 
 export async function aggiornaCondizioniOfferta(formData: FormData) {
   if (await offertaBloccata(formData, true)) return;
@@ -1602,6 +1566,7 @@ export async function salvaModelloProdotto(formData: FormData) {
     update: { immagineUrl, descrizioneTecnica, famiglia, gruppo, ...provv },
   });
   revalidatePath("/prodotti");
+  svuotaCacheListino();
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
@@ -1615,6 +1580,7 @@ export async function salvaPrezzoProdotto(formData: FormData) {
 
   await prisma.prodotto.update({ where: { id: prodottoId }, data: { prezzoBase } });
   revalidatePath("/prodotti");
+  svuotaCacheListino();
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
@@ -1705,152 +1671,13 @@ export async function aggiornaSolarisRuolo(formData: FormData) {
 
 export async function importaSolarisInPreventivo(formData: FormData) {
   const progettoId = str(formData, "progettoId");
-  if (!progettoId) return;
-  const prog = await prisma.solarisProgetto.findUnique({ where: { id: progettoId }, select: { preventivo: { select: { confermatoIl: true } } } });
-  if (prog?.preventivo?.confermatoIl) return;
   const utente = await getCurrentUser();
-  if (!utente) return;
-
-  const progetto = await prisma.solarisProgetto.findUnique({
-    where: { id: progettoId },
-    select: {
-      id: true,
-      preventivoId: true,
-      commercialeId: true,
-      kwp: true,
-      numeroPannelli: true,
-      batteria: true,
-      panelId: true,
-      inverterId: true,
-      costoKwp: true,
-      costoBatteria: true,
-      statoJson: true,
-    },
-  });
-  if (!progetto || !progetto.preventivoId) return;
-  if (!isAmministratore(utente) && progetto.commercialeId !== utente.id) return;
-
-  const [pannello, inverter] = await Promise.all([
-    progetto.panelId
-      ? prisma.solarisComponente.findUnique({ where: { id: progetto.panelId }, select: { nome: true, potenzaW: true, prezzoVendita: true } })
-      : null,
-    progetto.inverterId
-      ? prisma.solarisComponente.findUnique({ where: { id: progetto.inverterId }, select: { nome: true, prezzoVendita: true } })
-      : null,
-  ]);
-
-  const preventivoId = progetto.preventivoId;
-  const righe: {
-    preventivoId: string;
-    testoLibero: string;
-    quantita: number;
-    prezzoUnitario: number;
-    ordine: number;
-  }[] = [];
-
-  const ordineBase = await prossimoOrdine(preventivoId, null);
-
-  // Pannelli fotovoltaici
-  if (pannello && progetto.numeroPannelli) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Pannello ${pannello.nome} ${pannello.potenzaW}W — ${progetto.numeroPannelli} pz (${progetto.kwp?.toFixed(2) ?? "?"} kWp totali)`,
-      quantita: progetto.numeroPannelli,
-      prezzoUnitario: pannello.prezzoVendita ?? 0,
-      ordine: ordineBase + righe.length,
-    });
+  if (!progettoId || !utente) return;
+  const esito = await portaSolarisInOfferta(progettoId, utente);
+  if (!esito.ok) {
+    if (esito.preventivoId) redirect(`/preventivi/${esito.preventivoId}?errore=${encodeURIComponent(esito.errore)}`);
+    return;
   }
-
-  // Inverter
-  if (inverter) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Inverter ${inverter.nome}`,
-      quantita: 1,
-      prezzoUnitario: inverter.prezzoVendita ?? 0,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  // Sistema di accumulo: modello scelto nello Studio (moduli) o batteria generica a prezzo per kWh
-  const battKwh = progetto.batteria ?? 0;
-  const statoBatt = progetto.statoJson as Record<string, unknown> | null;
-  const battId = typeof statoBatt?.battId === "string" && statoBatt.battId ? statoBatt.battId : null;
-  const modelloBatt = battId && battKwh > 0
-    ? await prisma.solarisComponente.findUnique({ where: { id: battId }, select: { nome: true, potenzaW: true, prezzoVendita: true } })
-    : null;
-  if (modelloBatt && modelloBatt.potenzaW > 0) {
-    const kwhModulo = modelloBatt.potenzaW / 1000;
-    const moduli = moduliPer(battKwh, kwhModulo);
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Batteria ${modelloBatt.nome} — ${moduli} ${moduli === 1 ? "modulo" : "moduli"} (${(moduli * kwhModulo).toFixed(2).replace(".", ",")} kWh)`,
-      quantita: moduli,
-      prezzoUnitario: modelloBatt.prezzoVendita > 0 ? modelloBatt.prezzoVendita : (kwhModulo * (progetto.costoBatteria ?? 0)),
-      ordine: ordineBase + righe.length,
-    });
-  } else if (battKwh > 0 && progetto.costoBatteria != null) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Sistema di accumulo ${battKwh} kWh`,
-      quantita: 1,
-      prezzoUnitario: battKwh * progetto.costoBatteria,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  // Installazione, strutture e pratiche
-  if (progetto.kwp && progetto.costoKwp != null) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Installazione, cavi e quadri — ${progetto.kwp.toFixed(2)} kWp`,
-      quantita: 1,
-      prezzoUnitario: progetto.kwp * progetto.costoKwp,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  // Kit fotovoltaici (voci opzionali salvate nel statoJson dallo Studio)
-  const stato = progetto.statoJson as Record<string, unknown> | null;
-  const n = (k: string) => { const v = stato?.[k]; return typeof v === "number" && v > 0 ? v : 0; };
-
-  const sottostruttura = n("sottostruttura");
-  if (sottostruttura > 0) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Sottostruttura e staffe`,
-      quantita: 1,
-      prezzoUnitario: sottostruttura,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  const pratiche = n("pratiche");
-  if (pratiche > 0) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Pratiche, allaccio e collaudo`,
-      quantita: 1,
-      prezzoUnitario: pratiche,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  const piattaforma = n("piattaforma");
-  if (piattaforma > 0) {
-    righe.push({
-      preventivoId,
-      testoLibero: `☀️ Piattaforma per la posa`,
-      quantita: 1,
-      prezzoUnitario: piattaforma,
-      ordine: ordineBase + righe.length,
-    });
-  }
-
-  if (righe.length > 0) {
-    await prisma.rigaPreventivo.createMany({ data: righe });
-    await ricalcolaTotali(preventivoId);
-  }
-
-  redirect(`/preventivi/${preventivoId}`);
+  revalidatePath(`/preventivi/${esito.preventivoId}`);
+  redirect(`/preventivi/${esito.preventivoId}?solaris=${esito.righe}`);
 }

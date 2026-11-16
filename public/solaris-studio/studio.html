@@ -577,7 +577,7 @@ section[hidden]{display:none}
         </div>
         <div id="tornaPrevCard" class="card" style="display:none">
           <h3>Progettazione completata</h3>
-          <p class="sub">Torna al preventivo CRM per aggiungere i componenti e stampare l'offerta.</p>
+          <p class="sub">Tornando al preventivo porto nell’offerta i pannelli, l’inverter, la batteria, l’installazione, la foto del tetto con i pannelli e le schede tecniche (in fondo all’offerta). Se lo rifai, le righe dello Studio vengono aggiornate, non raddoppiate.</p>
           <div class="row" style="margin-top:14px">
             <button class="b3d go" id="tornaPrevBtn">← Torna al preventivo</button>
           </div>
@@ -1282,6 +1282,22 @@ function schedaHtml(){
   </div>`; }
   return ph+ih+bh;
 }
+/* le stesse schede in forma di dati, per stamparle in fondo all'offerta del CRM */
+function schedePerOfferta(){
+  const pan=curPanel(), inv=curInv(), ps=pan.specs||{}, is=inv.specs||{}, out=[];
+  const v=(l,x)=>x!=null&&x!==""?[l,String(x)]:null, pulisci=a=>a.filter(Boolean);
+  out.push({titolo:"Modulo fotovoltaico "+pan.n,voci:pulisci([v("Tecnologia celle",ps.celle),v("Efficienza",ps.eff!=null?ps.eff+"%":null),v("Potenza nominale",fmt(pan.kw*1000,0)+" Wp"),
+    v("Dimensioni",ps.dim),v("Peso",ps.peso),v("Tensione a vuoto (Voc)",ps.voc),v("Corrente di corto (Isc)",ps.isc),v("Tensione MPP (Vmp)",ps.vmp),v("Corrente MPP (Imp)",ps.imp),
+    v("Garanzia",ps.gar_prod||ps.gar_rend?`${ps.gar_prod||"?"} anni prodotto · ${ps.gar_rend||"?"} anni rendimento`:null),v("Certificazioni",ps.cert)])});
+  out.push({titolo:"Inverter "+inv.n,voci:pulisci([v("Tipo",(inv.hyb?"Ibrido, ":"")+(inv.faseTipo==="TRIFASE"?"trifase":"monofase")),v("Potenza nominale AC",fmt(inv.kw,0)+" kW"),
+    v("Efficienza massima",is.eff!=null?is.eff+"%":null),v("N° MPPT",is.mppt),v("Tensione CC max",is.vdc_max),v("Tensione AC uscita",is.vac),v("Tensione batteria",is.vbatt),
+    v("Dimensioni",is.dim),v("Comunicazione",is.comm),v("Garanzia",is.gar?is.gar+" anni":null),v("Certificazioni",is.cert)])});
+  const bat=curBatt();
+  if(bat&&S.batt){ const bs=bat.specs||{};
+    out.push({titolo:"Batteria "+bat.n,voci:pulisci([v("Capacità del modulo",fmt(bat.kwh,2)+" kWh"),v("Moduli per "+S.batt+" kWh",battModuli()),v("Chimica",bs.chimica),
+      v("Profondità di scarica",bs.dod),v("Cicli",bs.cicli),v("Protezione",bs.ip),v("Dimensioni",bs.dim),v("Garanzia",bs.gar?bs.gar+" anni":null),v("Compatibile con",bs.compat)])}); }
+  return out;
+}
 function renderScheda(){
   const h=schedaHtml();
   const c=$("#schedaComp"); if(c) c.innerHTML=h;
@@ -1294,8 +1310,22 @@ const _tornaPrevCard=document.getElementById("tornaPrevCard");
 const _tornaPrevBtn=document.getElementById("tornaPrevBtn");
 if(_INIT.preventivoId && _tornaPrevCard && _tornaPrevBtn){
   _tornaPrevCard.style.display="";
-  _tornaPrevBtn.addEventListener("click",()=>{
-    window.top.location.href="/preventivi/"+_INIT.preventivoId;
+  _tornaPrevBtn.addEventListener("click",async()=>{
+    const testo=_tornaPrevBtn.textContent; _tornaPrevBtn.disabled=true; _tornaPrevBtn.textContent="Porto pannelli, materiale, foto e schede nell’offerta…";
+    let dove="/preventivi/"+_INIT.preventivoId;
+    try{
+      S.schedeOfferta=schedePerOfferta();
+      await salvaOra();
+      const foto=await fotoPerOfferta();
+      const p=curPanel(), inv=curInv();
+      const r=await fetch(`/api/solaris/progetto/${_PROGETTO_ID}/offerta`,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({foto,pannello:{nome:p.n,potenzaW:Math.round(p.kw*1000),prezzo:p.price},inverter:{nome:inv.n,prezzo:inv.price}})});
+      const j=await r.json().catch(()=>({}));
+      if(r.ok) dove+=`?solaris=${j.righe||0}${j.foto?"&solarisFoto=1":""}`;
+      else dove+=`?errore=${encodeURIComponent(j.error||"Righe dello Studio non portate nell’offerta")}`;
+    }catch(e){ dove+=`?errore=${encodeURIComponent("Righe dello Studio non portate nell’offerta (rete)")}`; }
+    _tornaPrevBtn.textContent=testo;
+    window.top.location.href=dove;
   });
 }
 function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("show"),2600); }
@@ -1757,6 +1787,14 @@ async function exportBlob(){
   g.drawImage(P.img,0,0); renderOverlay(g,(x,y)=>[x,y],1/fit.s,false,{w:c.width,h:c.height});
   return await new Promise(r=>c.toBlob(r,"image/jpeg",0.9));
 }
+/* foto del tetto con i pannelli per la copertina dell'offerta (al massimo 1600 px, JPEG) */
+async function fotoPerOfferta(){
+  if(!P.img||P.corners.length<4) return null;
+  const k=Math.min(1,1600/Math.max(P.img.width,P.img.height));
+  const c=document.createElement("canvas"); c.width=Math.round(P.img.width*k); c.height=Math.round(P.img.height*k); const g=c.getContext("2d");
+  g.drawImage(P.img,0,0,c.width,c.height); renderOverlay(g,(x,y)=>[x*k,y*k],Math.max(1,c.width/900),false,{w:c.width,h:c.height});
+  return c.toDataURL("image/jpeg",0.85);
+}
 async function snapshotProp(blob){
   if(!P.img||P.corners.length<4) return;
   blob=blob||await exportBlob(); if(!blob) return;
@@ -2013,7 +2051,13 @@ function _setSaveStatus(t){
 function saveToServer(){
   if(!_PROGETTO_ID) return;
   clearTimeout(_saveTimer);
-  _saveTimer=setTimeout(async()=>{
+  _saveTimer=setTimeout(salvaOra,800);
+}
+/* salvataggio immediato (anche prima di tornare all'offerta): true se il server ha salvato */
+async function salvaOra(){
+  if(!_PROGETTO_ID) return false;
+  clearTimeout(_saveTimer);
+  {
     _setSaveStatus("↑ salvataggio…");
     try{
       const r=simulate(S.batt), cf=cashflow(r);
@@ -2047,11 +2091,13 @@ function saveToServer(){
       });
       _setSaveStatus(resp.ok?"✓ salvato":"⚠ errore salvataggio");
       setTimeout(()=>_setSaveStatus(""),3000);
+      return resp.ok;
     }catch(e){
       _setSaveStatus("⚠ errore rete");
       setTimeout(()=>_setSaveStatus(""),3000);
+      return false;
     }
-  },800);
+  }
 }
 
 /* ======================= AVVIO ======================= */

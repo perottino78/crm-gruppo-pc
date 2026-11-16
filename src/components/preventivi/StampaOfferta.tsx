@@ -2,6 +2,8 @@ import { percentuale } from "@/lib/numeri";
 import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import { leggiSchedeSolaris, rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
+import SchedeSolaris from "@/components/preventivi/SchedeSolaris";
 import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } from "@/lib/prodotti";
@@ -58,7 +60,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
       sezioni: { orderBy: [{ ordine: "asc" }, { id: "asc" }] },
       solarisProgetto: {
         include: {
-          fotoTetto: { orderBy: { createdAt: "asc" }, take: 3 },
+          fotoTetto: { where: { tipo: { not: "OFFERTA" } }, orderBy: { createdAt: "asc" }, take: 3 },
         },
       },
     },
@@ -667,6 +669,18 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </section>
         </>
       )}
+
+      {/* ===== SCHEDE TECNICHE DEL FOTOVOLTAICO (dallo Studio, righe ☀️ con la spunta «allega la scheda») ===== */}
+      {(() => {
+        if (!preventivo.solarisProgetto || !preventivo.righe.some((r) => !r.prodotto && r.allegaScheda && rigaConSchedaSolaris(r.testoLibero))) return null;
+        const schede = leggiSchedeSolaris(preventivo.solarisProgetto.statoJson);
+        if (!schede.length) return null;
+        return (
+          <section className="print:break-before-page px-10 pt-6 pb-4 print:p-6">
+            <SchedeSolaris schede={schede} />
+          </section>
+        );
+      })()}
 
       {/* ===== SCHEDE TECNICHE ALLEGATE (spunta «allega la scheda» sui prodotti dell'offerta) ===== */}
       {schedeDaAllegare(preventivo.righe.map((r) => ({ tipologia: r.prodotto?.tipologia, allegaScheda: r.allegaScheda }))).map((scheda) =>
