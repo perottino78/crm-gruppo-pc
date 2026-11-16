@@ -666,7 +666,7 @@ login nel `matcher` del middleware.
   dai dati del catalogo (`misureJson.specs` in `src/lib/solaris/stealth.ts`: MPPT e campo di tensione, tensione batteria, EPS, IP65, dimensioni, peso, garanzia 7 anni
   estendibile; batteria SP-HEHV27 640×220×380 mm 30,5 kg per modulo, 10 anni/10.000 cicli) e le porta in offerta con la spunta «Allega la scheda tecnica»; la rotta
   `seed-solaris-bconsole` aggiorna i dati delle righe già a catalogo (`schedeStealthAggiornate`, mai i prezzi). Nessun PDF del produttore nel CRM (hanno il suo marchio).
-  Il pannello VDS 460 W resta senza scheda del produttore: misure indicative.
+  Pannello VDS 460 W Total Black: misure (2095 × 1039 × 30 mm) e peso (28,5 kg) dalla scheda VDS-S144/M6H-BG 430–450 W della stessa famiglia (non cita il 460 W: da confermare); dati elettrici non inseriti.
   Test `tests/listini/solaris-bconsole.test.ts`, collaudo `solaris-bconsole` (13).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 

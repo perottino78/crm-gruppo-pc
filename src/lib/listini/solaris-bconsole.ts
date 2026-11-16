@@ -96,6 +96,13 @@ export const PREZZI_STEALTH_BC: Record<string, { vendita: number; costo: number;
  * della stessa famiglia 144 mezze celle da 166 mm (≈ 2095 × 1039 mm, scheda VDS-S144/M6H): «da confermare» con la scheda tecnica.
  */
 export const PANNELLI_STUDIO_BC = [
-  { nome: "VDS 370 W Red (monocristallino, cornice RAL 8017)", potenzaW: 370, w: 1.0, h: 1.98, spessoreMm: 35, vendita: 480, costo: 303, daConfermare: false, codice: "VE372PVMR370W" },
-  { nome: "VDS 460 W Total Black", potenzaW: 460, w: 1.039, h: 2.095, spessoreMm: 35, vendita: 380, costo: 99.9, daConfermare: true, codice: "VDS-S144/M6H" },
+  {
+    nome: "VDS 370 W Red (monocristallino, cornice RAL 8017)", potenzaW: 370, w: 1.0, h: 1.98, spessoreMm: 35, vendita: 480, costo: 303, codice: "VE372PVMR370W", daConfermare: false,
+    specs: { celle: "monocristallino 5 busbar, vetro 4 mm, cornice RAL 8017", dim: "1980 × 1000 × 35 mm", cert: "RAEE (contributo incluso)" },
+  },
+  {
+    // misure e peso dalla scheda VDS-S144/M6H-BG 430–450 W (stessa famiglia 144 mezze celle da 166 mm); il 460 W Total Black non è citato nella scheda
+    nome: "VDS 460 W Total Black", potenzaW: 460, w: 1.039, h: 2.095, spessoreMm: 30, vendita: 380, costo: 99.9, codice: "VDS-S144/M6H", daConfermare: true,
+    specs: { celle: "monocristallino 166 mm, 144 mezze celle (6 × 24), tecnologia multi busbar", dim: "2095 × 1039 × 30 mm", peso: "28,5 kg", gar_prod: 12, gar_rend: 25, cert: "VDS Power GmbH (Germania) · fuoco classe A" },
+  },
 ];
