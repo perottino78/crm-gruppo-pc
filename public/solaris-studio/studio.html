@@ -584,8 +584,8 @@ section[hidden]{display:none}
 <div class="toast" id="toast" role="status"></div>
 <div id="_saveStatus" style="position:fixed;bottom:8px;right:14px;font-size:11px;color:var(--muted);opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999"></div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/solaris-studio/vendor/leaflet-1.9.4/leaflet.css">
+<script src="/solaris-studio/vendor/leaflet-1.9.4/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* === SOLARIS INIT — iniettato dal server via window.SOLARIS_INIT === */
@@ -1471,7 +1471,8 @@ function satGoogle(lat,lon,z){
 /* falda riconosciuta da Google Solar: angoli, orientamento e inclinazione veri */
 async function satFaldaGoogle(pos,cv){
   try{
-    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/tetto?lat=${pos.lat}&lon=${pos.lon}`); if(!r.ok) return;
+    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/tetto?lat=${pos.lat}&lon=${pos.lon}`);
+    if(!r.ok){ if(r.status!==404){ let m=""; try{ m=(await r.json()).errore||""; }catch(e){} toast("Falda automatica di Google non disponibile: "+(m||r.status)+". Sposta gli angoli a mano."); } return; }
     const j=await r.json(), f=j.migliore; if(!f) { toast("Google non conosce ancora questo tetto: sposta gli angoli sulla falda"); return; }
     const piana=f.pendenza<5;
     if(!piana){ S.tilt=Math.max(5,Math.min(45,Math.round(f.pendenza))); const t=$("#tilt"); t.value=S.tilt; setP(t); $("#tiltOut").textContent=S.tilt+"°"; }
@@ -1795,12 +1796,22 @@ $("#addr").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault
 
 let mappa=null, pin=null;
 function mappaPronta(){
-  if(mappa||!window.L) return mappa;
+  if(mappa) return mappa;
+  if(!window.L){ const m=$("#mappaCasa"); if(m&&!m.dataset.avviso){ m.dataset.avviso="1"; m.innerHTML='<div style="padding:16px;font-size:14px;color:#13233D;background:#fff;height:100%">La mappa non si è caricata. Ricarica la pagina; se resta così usa «Foto del tetto» al passo 2.</div>'; } return null; }
+  try{ return creaMappa(); }catch(e){ console.error(e); toast("Mappa non disponibile: "+(e&&e.message||e)); return null; }
+}
+function creaMappa(){
   const centro=S.addrPos?[S.addrPos.lat,S.addrPos.lon]:(CITIES[S.city]&&CITIES[S.city].lon!=null?[CITIES[S.city].lat,CITIES[S.city].lon]:[45.0849,7.4755]);
   mappa=L.map("mappaCasa",{zoomControl:true,attributionControl:true}).setView(centro,S.addrPos?19:13);
   const base=window.SAT_BASE||"";
-  if(_INIT.googleMappe) L.tileLayer(base+"/api/solaris/satellite?fonte=gtile&z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:20,attribution:"Immagini © Google"}).addTo(mappa);
-  else L.tileLayer(base+"/api/solaris/satellite?z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:19,attribution:"Immagini © Esri, Maxar"}).addTo(mappa);
+  const esri=()=>L.tileLayer(base+"/api/solaris/satellite?z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:19,attribution:"Immagini © Esri, Maxar"});
+  if(_INIT.googleMappe){
+    // Google (Map Tiles API); se le tessere non arrivano si passa da soli a Esri invece di restare grigi
+    const g=L.tileLayer(base+"/api/solaris/satellite?fonte=gtile&z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:20,attribution:"Immagini © Google"}).addTo(mappa);
+    let ok=0, ko=0;
+    g.on("tileload",()=>{ ok++; });
+    g.on("tileerror",()=>{ ko++; if(!ok&&ko>=4&&mappa.hasLayer(g)){ mappa.removeLayer(g); esri().addTo(mappa); } });
+  } else esri().addTo(mappa);
   const icona=L.divIcon({className:"",html:'<div style="font-size:34px;line-height:34px;transform:translate(-4px,-30px);filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))">📍</div>',iconSize:[30,34]});
   pin=L.marker(centro,{draggable:true,icon:icona,autoPan:true});
   if(S.addrPos) pin.addTo(mappa);
