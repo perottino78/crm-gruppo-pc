@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale } from "@/app/flusso-actions";
 import { datiAcquisto } from "@/lib/ordini/server";
+import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
 import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
 import { costoPrevisto } from "@/lib/ordini/calcoli";
@@ -321,6 +322,8 @@ export async function programmaRilievo(formData: FormData) {
   if (!c) return;
   const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
   if (!viaLibera) return; // blocco: rilievo solo dopo acconto/finanziamento
+  const percorso = await percorsoDiCommessa(commessaId);
+  if (percorso && !percorso.progettoCreatoIl && !percorso.legacy) return; // blocco: prima si crea il progetto
   const indirizzo =
     str(formData, "indirizzo") ??
     [c.cliente.indirizzo, c.cliente.cap, c.cliente.comune, c.cliente.provincia].filter(Boolean).join(", ");
@@ -1353,4 +1356,43 @@ export async function taskDaRighe(formData: FormData) {
   fd.set("commessaId", commessaId); fd.set("ufficio", ufficio!); fd.set("titolo", titolo); fd.set("descrizione", descrizione);
   await creaTaskManuale(fd);
   torna(`fattoMateriale=${encodeURIComponent(`Task «${titolo}» creato.`)}`);
+}
+
+// ── Percorso guidato del progetto (richiesta di Ugo 16/11/2026) ──────────────────────────────────────────────────────────
+/** «Crea progetto»: dopo l'incasso dell'acconto (o l'approvazione del finanziamento) parte il percorso rilievo → prodotti → ordini → magazzino. */
+export async function creaProgetto(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const p = await percorsoDiCommessa(id);
+  if (!p) return;
+  const torna = (q: string) => redirect(`/commesse/${id}?${q}#progetto`);
+  if (p.progettoCreatoIl) torna("pok=" + encodeURIComponent("Il progetto è già stato creato."));
+  if (!p.viaLibera) torna("pav=" + encodeURIComponent("Il progetto si crea dopo l'incasso dell'acconto (o il finanziamento approvato)."));
+  await prisma.commessa.update({ where: { id }, data: { progettoCreatoIl: new Date(), progettoCreatoDaNome: utente.nome } });
+  await log(id, `Progetto creato da ${utente.nome}: ora si fissa il rilievo.`);
+  revalidatePath(`/commesse/${id}`);
+  revalidatePath("/commesse");
+  torna("pok=" + encodeURIComponent("Progetto creato: fissa l'appuntamento di rilievo."));
+}
+
+/** «Conferma materiale»: rilievo caricato e righe con il fornitore → si sbloccano gli ordini; chiude il task del rilievo e avvisa l'ufficio ordini. */
+export async function confermaMaterialeProgetto(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const p = await percorsoDiCommessa(id);
+  if (!p) return;
+  const torna = (q: string) => redirect(`/commesse/${id}?${q}#progetto`);
+  if (p.materialeConfermatoIl) torna("pok=" + encodeURIComponent("Il materiale è già confermato."));
+  if (!p.puoConfermare) torna("pav=" + encodeURIComponent("Per confermare servono il rilievo caricato e tutte le righe del materiale con il fornitore."));
+  await prisma.commessa.update({ where: { id }, data: { materialeConfermatoIl: new Date(), materialeConfermatoDaNome: utente.nome } });
+  await log(id, `Materiale confermato da ${utente.nome}: si può ordinare ai fornitori.`);
+  // il task del rilievo si chiude e parte quello dell'ufficio ordini (flusso fra uffici)
+  const aperto = await prisma.taskPratica.findFirst({ where: { commessaId: id, faseChiave: "RILIEVO", completatoIl: null, stato: { notIn: ["COMPLETATO", "ANNULLATO", "ESEGUITO"] } }, select: { id: true } });
+  if (aperto) { const fd = new FormData(); fd.set("taskId", aperto.id); await fattoTask(fd); }
+  revalidatePath(`/commesse/${id}`);
+  torna("pok=" + encodeURIComponent("Materiale confermato: ora puoi creare gli ordini ai fornitori."));
 }
