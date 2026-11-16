@@ -82,3 +82,11 @@ test("listini serramenti unificati: le stesse 2 tendine (Finestre/Portefinestre 
   assert.equal(assiSelezioneZenith("ZENITH_F2A_UKW13")?.modello.valore, "F2A");
   assert.equal(assiSelezioneZenith("TAGLIOFREDDO_SCORR_33"), null);
 });
+
+test("Fidra: scheda tecnica allegabile come lo Zenith", () => {
+  const s = schedaCliente("FIDRA_PF2A_SOGLIA");
+  assert.equal(s?.chiave, "FIDRA");
+  assert.equal(s?.pdf, "/cataloghi/fidra/Fidra-scheda-tecnica.pdf");
+  assert.deepEqual(s?.pagine, ["/cataloghi/fidra/pagine/p-1.jpg", "/cataloghi/fidra/pagine/p-2.jpg"]);
+  assert.match(s?.descrizione ?? "", /PVC riciclato/);
+});
