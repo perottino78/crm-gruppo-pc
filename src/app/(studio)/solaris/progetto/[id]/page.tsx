@@ -46,7 +46,7 @@ export default async function SolarisStudioPage({
         border: "none",
       }}
       title="Solaris Studio"
-      allow="geolocation"
+      allow="geolocation; display-capture; clipboard-read; clipboard-write"
     />
   );
 }
