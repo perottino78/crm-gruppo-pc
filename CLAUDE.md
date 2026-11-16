@@ -102,7 +102,8 @@ login nel `matcher` del middleware.
   riportano telefono ed email del consulente (`contattiConsulente`) per il sabato e gli orari di ufficio chiuso.
   Le email al VENDITORE (conferma, promemoria, annullato…) portano al suo appuntamento (`linkAppuntamento`, `/calendario/appuntamento/<id>`), non al lead:
   il commerciale con visibilità «suoi» non vede i lead della telefonista e la pagina dava errore (segnalazione di Bruno, 16/11/2026); i vecchi link
-  `/lead?id=` di un lead dove è venditore lo rimandano da soli all'appuntamento (`/lead/[id]`). Collaudo `appuntamenti` (21).
+  `/lead?id=` (`/lead/[id]`): lead non visibile → appuntamento dell'utente per quel lead (`appuntamentoId` o il cliente nato dal lead), altrimenti scheda del lead
+  se è il venditore, altrimenti messaggio «Questo contatto non è fra i tuoi» (mai più pagina d'errore). Collaudo `appuntamenti` (21).
 - **Campagne email** (`/campagne`, `src/app/campagne-actions.ts`, `src/lib/campagne/`, AMMINISTRATORE o ufficio MARKETING):
   filtri marchio, stato (`Cliente.statoLead`, anche "senza stato"), tipo (`categoria` Lead/Cliente/Account), provenienza,
   commerciale, provincia; `{nome}` nel testo; prova; invio a blocchi da 40 (`CampagnaInvio`, unico per campagna+cliente: niente
