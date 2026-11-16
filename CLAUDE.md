@@ -603,6 +603,9 @@ login nel `matcher` del middleware.
   risponde 503 se il database non risponde (cron-job.org con «Notify me when the cronjob fails» avvisa). Collaudo `consumi-database` (10).
   **Da tenere a mente**: ogni nuova pagina/controllo deve leggere solo i campi che servono (`select`), mai data URI, HTML delle email, XML o file
   (`Documento.contenuto`) negli elenchi; dopo modifiche grosse guardare la pagina dei consumi.
+  Alleggerimenti fatti (16/11/2026): albero del listino e optional del marchio 5 minuti in memoria (`src/lib/listini/cache.ts` `inMemoriaListino`,
+  `tassonomiaListino`/`optionalAttiviDelMarchio`; `svuotaCacheListino()` in aumenti e scheda modello), `omit: { immagineCopertinaUrl: true }` (preview `omitApi`)
+  negli elenchi delle offerte (Preventivi, Dashboard, Commesse, scheda cliente), promemoria campagne con `select`.
 - **I miei progetti** (`/progetti`, richiesta di Ugo dopo la presentazione, nov 2026; `src/lib/progetti/miei.ts` puro e testato, `server.ts` `progettiDi`): il commerciale
   (visibilità PROPRI; chi vede di più ha la tendina dei commerciali e il titolo «Progetti dei clienti») vede tutte le commesse dei suoi clienti con le tappe del flusso
   (`Stepper` di `components/clienti/PraticaCard.tsx` + `passiPratica`), «Adesso: fase · ufficio», consegna prevista col semaforo (`semaforoConsegna`: scaduta, entro 7 giorni,

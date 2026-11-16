@@ -7,6 +7,7 @@ import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
 import { mettiNelCestino } from "@/lib/cestino";
 import { revalidatePath } from "next/cache";
+import { svuotaCacheListino } from "@/lib/listini/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
 import { trovaFasciaPrezzo, calcolaPrezzoAFormula } from "@/lib/prezzoPerMisura";
@@ -1565,6 +1566,7 @@ export async function salvaModelloProdotto(formData: FormData) {
     update: { immagineUrl, descrizioneTecnica, famiglia, gruppo, ...provv },
   });
   revalidatePath("/prodotti");
+  svuotaCacheListino();
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
@@ -1578,6 +1580,7 @@ export async function salvaPrezzoProdotto(formData: FormData) {
 
   await prisma.prodotto.update({ where: { id: prodottoId }, data: { prezzoBase } });
   revalidatePath("/prodotti");
+  svuotaCacheListino();
   revalidatePath(`/prodotti/modello/${encodeURIComponent(tipologia)}`);
 }
 
