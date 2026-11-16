@@ -627,7 +627,10 @@ login nel `matcher` del middleware.
   Al passo 2 anche «🖥️ Cattura dallo schermo» (`getDisplayMedia`, come «Segnala un problema») e incolla con Ctrl/Cmd+V (`fotoDaImmagine` → `caricaFotoTetto`, vista dall'alto).
   Prodotti Stealth Energy (`src/lib/solaris/stealth.ts`, inverter ST-INV-S/T e batterie SP-HEV50…, prezzi a 0 da completare): creati da soli in
   `SolarisComponente` alla prima apertura dello Studio (`createMany skipDuplicates`); batterie scelte nello Studio (`S.battId`, moduli con `moduliPer`)
-  e portate in offerta. Test `tests/solaris/`.
+  e portate in offerta. Pannelli sulla foto alla misura vera (`postiFalda`: falda P.w × P.l in metri, margine 30 cm, fughe 2 cm, verticali o
+  orizzontali `P.orient`): i posti liberi tratteggiati, quelli scelti in `P.celle` («fila,colonna», dalla grondaia e dal centro, `ordinePosti`); il numero
+  resta quello scelto o «Dimensiona sui consumi» (`P.voluti`, limitato ai posti della falda) e un tocco sulla foto aggiunge o toglie il singolo pannello.
+  Test `tests/solaris/`.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)

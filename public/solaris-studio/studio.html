@@ -418,15 +418,20 @@ section[hidden]{display:none}
         </div>
         <div class="field" id="photoGrid" hidden>
           <div class="lbl">Pannelli sulla foto <output id="gridOut"></output></div>
+          <p class="hint" id="gridInfo">Tocca i 4 angoli della falda: poi i pannelli si dispongono da soli, alla loro misura vera.</p>
           <div class="seg">
-            <div><div class="mini"><button class="b3d" data-grid="c-" aria-label="Una colonna in meno">−</button><span id="gCols">6</span><button class="b3d" data-grid="c+" aria-label="Una colonna in più">+</button></div><p class="hint" style="text-align:center;margin-top:6px">colonne</p></div>
-            <div><div class="mini"><button class="b3d" data-grid="r-" aria-label="Una riga in meno">−</button><span id="gRows">2</span><button class="b3d" data-grid="r+" aria-label="Una riga in più">+</button></div><p class="hint" style="text-align:center;margin-top:6px">righe</p></div>
+            <button class="b3d on" type="button" data-orient="V">In verticale</button>
+            <button class="b3d" type="button" data-orient="H">In orizzontale</button>
+          </div>
+          <div class="seg">
+            <button class="b3d" type="button" id="riempiFalda">Riempi la falda</button>
+            <button class="b3d" type="button" id="riordinaFalda">Rimetti in ordine</button>
           </div>
           <div class="seg">
             <input type="text" inputmode="decimal" id="slopeW" placeholder="Larghezza falda, m" aria-label="Larghezza falda in metri">
             <input type="text" inputmode="decimal" id="slopeL" placeholder="Lunghezza falda, m" aria-label="Lunghezza falda in metri">
           </div>
-          <p class="hint">Con le misure calcolo quanti pannelli ci stanno e le scrivo sulla foto.</p>
+          <p class="hint">Misure della falda (lungo la grondaia e lungo la pendenza): dalla foto del satellite le calcolo da solo, puoi correggerle a mano.</p>
         </div>
         <div class="field">
           <div class="lbl">Batteria di accumulo</div>
@@ -584,8 +589,8 @@ section[hidden]{display:none}
 <div class="toast" id="toast" role="status"></div>
 <div id="_saveStatus" style="position:fixed;bottom:8px;right:14px;font-size:11px;color:var(--muted);opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999"></div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/solaris-studio/vendor/leaflet-1.9.4/leaflet.css">
+<script src="/solaris-studio/vendor/leaflet-1.9.4/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* === SOLARIS INIT — iniettato dal server via window.SOLARIS_INIT === */
@@ -638,6 +643,7 @@ const CONS_W = [1.12,1.05,1.0,.92,.9,.95,1.05,1.0,.92,.95,1.04,1.1];
 const CONS_SHARE = CONS_W.map(v=>v/CONS_W.reduce((a,b)=>a+b,0));
 let PANEL_KW = 0.44; const RID = 0.09, FIXED = 120, CO2F = 0.26;
 /* catalogo di esempio: prezzi segnaposto da sostituire con il listino Solaris */
+const MARGINE_FALDA=0.3, FUGA=0.02; // posa sulla falda: margine dai bordi e fuga tra i pannelli, in metri
 const PANELS=[
   {id:"jinko440",n:"Jinko Tiger Neo 440 W",kw:.44,w:1.134,h:1.762,price:125,cost:78,
    specs:{celle:"182mm monocristallino TOPCon N-type",eff:22.8,peso:"24,9 kg",dim:"1134 × 1762 × 30 mm",voc:"37,0 V",isc:"14,51 A",vmp:"31,0 V",imp:"14,21 A",gar_prod:12,gar_rend:25,cert:"IEC 61215 / IEC 61730 / MCS"}},
@@ -687,7 +693,7 @@ const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,ti
   panelId:"jinko440",invId:"hw6",battId:"",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
   f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
   categoria:"MONOFASE",spiEsterno:false,checklist:{vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false},
-  mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null},
+  mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null,orient:"V",celle:null,celleSig:""},
   sottostruttura:0,pratiche:0,piattaforma:0};
 
 /* Ripristina stato salvato dal server */
@@ -763,7 +769,8 @@ function cashflow(r){
   }
   return {pts,pay,total:cum};
 }
-function maxPanels(){ const p=curPanel(), L=5/Math.cos(S.tilt*Math.PI/180); return Math.floor(11.8/(p.w+0.03))*Math.floor((L-0.2)/(p.h+0.04)); }
+function maxPanels(){ const lay=typeof layoutAttivo==="function"?layoutAttivo():null; if(lay) return lay.posti.length;
+  const p=curPanel(), L=5/Math.cos(S.tilt*Math.PI/180); return Math.floor(11.8/(p.w+0.03))*Math.floor((L-0.2)/(p.h+0.04)); }
 
 /* ======================= UI BINDING ======================= */
 function setP(el){ const p=(el.value-el.min)/(el.max-el.min)*100; el.style.setProperty("--p",p+"%"); }
@@ -806,6 +813,7 @@ bindRange("cprat","pratiche","#cpratOut",v=>v>0?"€ "+fmt(v):"non incluse");
 bindRange("cpiat","piattaforma","#cpiatOut",v=>v>0?"€ "+fmt(v):"non inclusa");
 bindRange("cbat","cbat","#cbatOut",v=>"€ "+fmt(v)+" al kWh");
 $("#tilt").addEventListener("input",()=>{ clampPanels(); rebuildHouse(); });
+$("#tilt").addEventListener("change",()=>{ if(P.corners.length===4){ fitGrid(); if(S.mode==="photo") drawPhoto(); } });
 function hh(v){ const h=Math.floor(v), m=Math.round((v-h)*60); return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0"); }
 
 bindSeg("billmode","billMode",v=>v);
@@ -908,12 +916,30 @@ function applyBill(d){
   refresh();
 }
 
-function clampPanels(){ const mx=maxPanels(); S.panels=Math.max(4,Math.min(mx,S.panels)); $("#pMax").textContent="massimo "+mx+" su questa falda"; }
-$("#pMinus").addEventListener("click",()=>{S.panels--; clampPanels(); rebuildHouse(); refresh();});
-$("#pPlus").addEventListener("click",()=>{S.panels++; clampPanels(); rebuildHouse(); refresh();});
+function clampPanels(){ const lay=layoutAttivo(), mx=maxPanels(), min=lay?1:4;
+  S.panels=Math.max(Math.min(min,mx),Math.min(mx,S.panels));
+  $("#pMax").textContent=lay?`posti sulla falda: ${mx}`:`massimo ${mx} su questa falda`; }
+function cambiaPannelli(delta){
+  const lay=layoutAttivo();
+  if(lay){
+    const ord=ordinePosti(lay), set=new Set(P.celle);
+    if(delta>0){ const k=ord.find(k=>!set.has(k)); if(!k){ toast(`La falda è piena: ci stanno ${lay.posti.length} pannelli`); return; } P.celle.push(k); }
+    else { if(P.celle.length<=1) return; const k=[...ord].reverse().find(k=>set.has(k)); P.celle=P.celle.filter(x=>x!==k); }
+    S.panels=P.voluti=P.celle.length; applyGrid(); drawPhoto(); return;
+  }
+  S.panels+=delta; clampPanels(); P.voluti=S.panels; rebuildHouse(); refresh();
+}
+$("#pMinus").addEventListener("click",()=>cambiaPannelli(-1));
+$("#pPlus").addEventListener("click",()=>cambiaPannelli(1));
 $("#pAuto").addEventListener("click",()=>{
-  const y=CITIES[S.city].y*orientFactor();
-  S.panels=Math.round(annualKwh()*1.05/y/PANEL_KW); clampPanels(); rebuildHouse(); refresh();
+  const y=CITIES[S.city].y*orientFactor(), serve=Math.max(1,Math.round(annualKwh()*1.05/y/PANEL_KW));
+  const lay=layoutAttivo();
+  if(lay){
+    P.voluti=serve; S.panels=Math.min(serve,lay.posti.length); sincCelle(true); applyGrid(); drawPhoto();
+    toast(serve>lay.posti.length?`Sui consumi servirebbero ${serve} pannelli, ma sulla falda ne stanno ${lay.posti.length}`:`Impianto dimensionato sui consumi: ${S.panels} pannelli`);
+    return;
+  }
+  S.panels=serve; clampPanels(); P.voluti=S.panels; rebuildHouse(); refresh();
   toast("Impianto dimensionato sui consumi: "+S.panels+" pannelli");
 });
 
@@ -1418,8 +1444,8 @@ async function satPosizione(){
 }
 function satDefaultCorners(cx,cy,mpp){
   // falda di partenza: la griglia di pannelli attuale, orientata come al passo 2 (poi si spostano gli angoli)
-  const pn=curPanel(); if(!P.cols||!P.rows){ P.rows=2; P.cols=Math.max(1,Math.ceil(S.panels/2)); }
-  const w=P.cols*(pn.w+0.03)+0.3, l=(P.rows*(pn.h+0.04)+0.3)*Math.cos(S.tilt*Math.PI/180);
+  const dp=dimPannello(), cols=Math.max(1,Math.ceil((P.voluti||S.panels)/2)), rows=2;
+  const w=cols*(dp.w+FUGA)-FUGA+2*MARGINE_FALDA+0.1, l=(rows*(dp.h+FUGA)-FUGA+2*MARGINE_FALDA+0.1)*Math.cos(S.tilt*Math.PI/180);
   const W=w/mpp, Lp=l/mpp, az=(180+S.ori)*Math.PI/180;
   const d=[Math.sin(az),-Math.cos(az)], e=[d[1],-d[0]];
   const pt=(a,b)=>[cx+d[0]*a*Lp/2+e[0]*b*W/2, cy+d[1]*a*Lp/2+e[1]*b*W/2];
@@ -1471,7 +1497,8 @@ function satGoogle(lat,lon,z){
 /* falda riconosciuta da Google Solar: angoli, orientamento e inclinazione veri */
 async function satFaldaGoogle(pos,cv){
   try{
-    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/tetto?lat=${pos.lat}&lon=${pos.lon}`); if(!r.ok) return;
+    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/tetto?lat=${pos.lat}&lon=${pos.lon}`);
+    if(!r.ok){ if(r.status!==404){ let m=""; try{ m=(await r.json()).errore||""; }catch(e){} toast("Falda automatica di Google non disponibile: "+(m||r.status)+". Sposta gli angoli a mano."); } return; }
     const j=await r.json(), f=j.migliore; if(!f) { toast("Google non conosce ancora questo tetto: sposta gli angoli sulla falda"); return; }
     const piana=f.pendenza<5;
     if(!piana){ S.tilt=Math.max(5,Math.min(45,Math.round(f.pendenza))); const t=$("#tilt"); t.value=S.tilt; setP(t); $("#tiltOut").textContent=S.tilt+"°"; }
@@ -1540,19 +1567,29 @@ function renderOverlay(ctx,T,u,live,B){
     if(live&&cs.length){ ctx.strokeStyle="#F2A71B"; ctx.lineWidth=3*u; ctx.setLineDash([8*u,6*u]); ctx.beginPath(); cs.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.stroke(); ctx.setLineDash([]); cs.forEach((p,i)=>handle(ctx,p,i+1,u)); }
     return;
   }
-  const H=homog(cs), cols=P.cols, rows=P.rows, m=.035, gu=.012, gv=.022;
-  const cw=(1-2*m-gu*(cols-1))/cols, rh=(1-2*m-gv*(rows-1))/rows;
+  const H=homog(cs), lay=layoutAttivo();
   ctx.fillStyle="rgba(242,167,27,.12)"; poly(ctx,cs); ctx.fill();
-  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
-    const u0=m+c*(cw+gu), v0=m+r*(rh+gv);
-    const q=[H(u0,v0),H(u0+cw,v0),H(u0+cw,v0+rh),H(u0,v0+rh)];
-    const gr=ctx.createLinearGradient(q[3][0],q[3][1],q[1][0],q[1][1]);
-    gr.addColorStop(0,"#33609e"); gr.addColorStop(.5,"#15294b"); gr.addColorStop(1,"#0c1a33");
-    ctx.fillStyle=gr; poly(ctx,q); ctx.fill();
-    ctx.strokeStyle="rgba(140,170,210,.45)"; ctx.lineWidth=.8*u;
-    for(let k=1;k<6;k++){ const t=k/6, a=H(u0,v0+rh*t), b=H(u0+cw,v0+rh*t); ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
-    for(let k=1;k<3;k++){ const t=k/3, a=H(u0+cw*t,v0), b=H(u0+cw*t,v0+rh); ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
-    ctx.strokeStyle="#dfe5ee"; ctx.lineWidth=1.6*u; poly(ctx,q); ctx.stroke();
+  if(lay){
+    const scelti=new Set(P.celle||[]);
+    lay.posti.forEach(pt=>{
+      const q=quadPosto(H,pt);
+      if(!scelti.has(pt.k)){
+        if(live){ ctx.strokeStyle="rgba(255,255,255,.55)"; ctx.lineWidth=1*u; ctx.setLineDash([4*u,4*u]); poly(ctx,q); ctx.stroke(); ctx.setLineDash([]); }
+        return;
+      }
+      const gr=ctx.createLinearGradient(q[3][0],q[3][1],q[1][0],q[1][1]);
+      gr.addColorStop(0,"#33609e"); gr.addColorStop(.5,"#15294b"); gr.addColorStop(1,"#0c1a33");
+      ctx.fillStyle=gr; poly(ctx,q); ctx.fill();
+      const u0=pt.x/P.w, u1=(pt.x+pt.w)/P.w, v0=pt.y/P.l, v1=(pt.y+pt.h)/P.l, lungo=pt.h>=pt.w;
+      ctx.strokeStyle="rgba(140,170,210,.45)"; ctx.lineWidth=.8*u;
+      for(let k=1;k<6;k++){ const t=k/6;
+        const a=lungo?H(u0,v0+(v1-v0)*t):H(u0+(u1-u0)*t,v0), b=lungo?H(u1,v0+(v1-v0)*t):H(u0+(u1-u0)*t,v1);
+        ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
+      for(let k=1;k<3;k++){ const t=k/3;
+        const a=lungo?H(u0+(u1-u0)*t,v0):H(u0,v0+(v1-v0)*t), b=lungo?H(u0+(u1-u0)*t,v1):H(u1,v0+(v1-v0)*t);
+        ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
+      ctx.strokeStyle="#dfe5ee"; ctx.lineWidth=1.4*u; poly(ctx,q); ctx.stroke();
+    });
   }
   ctx.strokeStyle="#F2A71B"; ctx.lineWidth=2.5*u; ctx.setLineDash([8*u,6*u]); poly(ctx,cs); ctx.stroke(); ctx.setLineDash([]);
   if(P.w){ const p=H(.5,0); pill(ctx,[p[0],p[1]+22*u],fmt(P.w,1)+" m",u); }
@@ -1562,7 +1599,7 @@ function renderOverlay(ctx,T,u,live,B){
   if(!P.hideLabels){
   const r=simulate(S.batt);
   const L=[[`Falda ${$("#oriOut").textContent.trim()}, inclinata ${S.tilt}°`,600,13,"#5B6B82"],
-           [`${cols*rows} pannelli, ${fmt(r.kwp,2)} kWp`,800,21,"#13233D"],
+           [`${S.panels} pannelli, ${fmt(r.kwp,2)} kWp`,800,21,"#13233D"],
            [`circa ${fmt(Math.round(r.prodY/100)*100)} kWh all’anno`,700,15,"#1F8A5B"]];
   let w=0; L.forEach(([t,wt,sz])=>{ ctx.font=`${wt} ${sz*u}px Figtree, sans-serif`; w=Math.max(w,ctx.measureText(t).width); });
   w+=32*u; const h=(13+21+15)*u+40*u;
@@ -1605,9 +1642,21 @@ pc.addEventListener("pointerdown",e=>{
   let best=-1,bd=34/fit.s;
   P.corners.forEach((c,i)=>{ const d=Math.hypot(c[0]-p[0],c[1]-p[1]); if(d<bd){bd=d;best=i;} });
   if(best<0 && inQuad(p,P.corners)){ best=-2; lastP=p; }
+  tocco=best===-2?{x:e.clientX,y:e.clientY,p,angoli:P.corners.map(c=>[...c])}:null;
   dragIdx=best; if(best!==-1) pc.setPointerCapture(e.pointerId);
 });
-let lastP=null;
+let lastP=null, tocco=null;
+function quadPosto(H,pt){ const u0=pt.x/P.w, u1=(pt.x+pt.w)/P.w, v0=pt.y/P.l, v1=(pt.y+pt.h)/P.l; return [H(u0,v0),H(u1,v0),H(u1,v1),H(u0,v1)]; }
+function toccaPosto(p){
+  const lay=layoutAttivo(); if(!lay) return false;
+  const H=homog(P.corners), pt=lay.posti.find(x=>inQuad(p,quadPosto(H,x)));
+  if(!pt) return false;
+  const i=P.celle.indexOf(pt.k);
+  if(i>=0){ if(P.celle.length<=1){ toast("Serve almeno un pannello"); return true; } P.celle.splice(i,1); }
+  else P.celle.push(pt.k);
+  S.panels=P.voluti=P.celle.length; applyGrid(); drawPhoto();
+  return true;
+}
 function inQuad(p,q){ let ins=false; for(let i=0,j=q.length-1;i<q.length;j=i++){ const [xi,yi]=q[i],[xj,yj]=q[j]; if(((yi>p[1])!==(yj>p[1]))&&(p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi)) ins=!ins; } return ins; }
 pc.addEventListener("pointermove",e=>{
   if(dragIdx===-1) return; const p=toImg(e);
@@ -1615,11 +1664,53 @@ pc.addEventListener("pointermove",e=>{
   else P.corners[dragIdx]=p;
   drawPhoto();
 });
-pc.addEventListener("pointerup",()=>{ const was=dragIdx!==-1; dragIdx=-1; if(was&&P.view==="top") fitGrid(); });
+pc.addEventListener("pointerup",e=>{
+  const was=dragIdx!==-1, t=tocco; dragIdx=-1; tocco=null;
+  if(t&&Math.hypot(e.clientX-t.x,e.clientY-t.y)<7){ P.corners=t.angoli; if(toccaPosto(t.p)) return; }
+  if(was&&P.view==="top") fitGrid(); else if(was) drawPhoto();
+});
 pc.addEventListener("pointercancel",()=>{ dragIdx=-1; });
 
-/* griglia pannelli */
-function applyGrid(){ $("#gCols").textContent=P.cols; $("#gRows").textContent=P.rows; S.panels=P.cols*P.rows; $("#gridOut").textContent=S.panels+" pannelli"; rebuildHouse(); refresh(); }
+/* posa dei pannelli: misure vere del pannello sulla falda, margine dal bordo e fughe tra i moduli */
+
+function dimPannello(){ const p=curPanel(); return P.orient==="H"?{w:p.h,h:p.w}:{w:p.w,h:p.h}; }
+function postiFalda(){
+  if(!(P.w>0&&P.l>0)) return null;
+  const d=dimPannello();
+  const cols=Math.max(0,Math.floor((P.w-2*MARGINE_FALDA+FUGA)/(d.w+FUGA)+1e-6));
+  const rows=Math.max(0,Math.floor((P.l-2*MARGINE_FALDA+FUGA)/(d.h+FUGA)+1e-6));
+  const x0=(P.w-(cols*d.w+(cols-1)*FUGA))/2, posti=[];
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) posti.push({k:r+","+c,r,c,x:x0+c*(d.w+FUGA),y:MARGINE_FALDA+r*(d.h+FUGA),w:d.w,h:d.h});
+  return {cols,rows,posti,d};
+}
+function layoutAttivo(){ if(P.corners.length<4) return null; const L=postiFalda(); return L&&L.posti.length?L:null; }
+/* ordine di posa: dalla grondaia verso il colmo, ogni fila dal centro verso i lati */
+function ordinePosti(L){
+  const mid=(L.cols-1)/2, colonne=[...Array(L.cols).keys()].sort((a,b)=>Math.abs(a-mid)-Math.abs(b-mid)||a-b), out=[];
+  for(let r=0;r<L.rows;r++) colonne.forEach(c=>out.push(r+","+c));
+  return out;
+}
+function sincCelle(nuovo){
+  const L=layoutAttivo(); if(!L) return;
+  const sig=`${L.cols}x${L.rows}|${P.orient||"V"}|${S.panelId}`, validi=new Set(L.posti.map(x=>x.k));
+  if(!nuovo&&P.celleSig===sig&&Array.isArray(P.celle)) P.celle=P.celle.filter(k=>validi.has(k));
+  else {
+    const voluti=P.voluti||S.panels;
+    P.celle=ordinePosti(L).slice(0,Math.min(Math.max(1,voluti),L.posti.length)); P.celleSig=sig;
+    if(!nuovo&&voluti>L.posti.length) toast(`Sulla falda ci stanno ${L.posti.length} pannelli (ne avevi scelti ${voluti})`);
+  }
+  if(!P.celle.length) P.celle=ordinePosti(L).slice(0,1);
+  S.panels=P.celle.length;
+}
+function applyGrid(){
+  const L=layoutAttivo();
+  if(L){ P.cols=L.cols; P.rows=L.rows;
+    $("#gridOut").textContent=`${S.panels} di ${L.posti.length}`;
+    $("#gridInfo").textContent=`Sulla falda ci stanno ${L.posti.length} pannelli (${L.cols} × ${L.rows}, ${fmt(L.d.w,2)} × ${fmt(L.d.h,2)} m l’uno). Ne hai messi ${S.panels}: tocca un pannello per toglierlo, tocca un posto vuoto per aggiungerlo.`;
+  } else { $("#gridOut").textContent=""; $("#gridInfo").textContent=P.corners.length<4?"Tocca i 4 angoli della falda: poi i pannelli si dispongono da soli, alla loro misura vera.":"Scrivi le misure della falda: con quelle metto i pannelli alla misura vera."; }
+  $$("[data-orient]").forEach(b=>b.classList.toggle("on",b.dataset.orient===(P.orient||"V")));
+  clampPanels(); rebuildHouse(); refresh();
+}
 const TIPS_TOP=["Tocca l’angolo sinistro sul lato della grondaia","Ora l’angolo destro sulla grondaia","Ora l’angolo destro sul colmo","Infine l’angolo sinistro sul colmo"];
 function topGeometry(){
   if(P.view!=="top"||P.corners.length<4) return;
@@ -1635,26 +1726,30 @@ function topGeometry(){
   if(P.w){ const wpx=(d(c[0],c[1])+d(c[3],c[2]))/2, lpx=(d(c[0],c[3])+d(c[1],c[2]))/2;
     P.l=Math.round(P.w*lpx/wpx/Math.cos(S.tilt*Math.PI/180)*10)/10; $("#slopeL").value=fmt(P.l,1); }
 }
+/* foto senza scala (scattata da terra, senza misure): falda stimata sui pannelli scelti, da correggere a mano */
 function gridToSlope(){
-  const p=curPanel(); if(!P.cols||!P.rows) return;
-  P.w=P.cols*(p.w+0.03)+0.3; P.l=P.rows*(p.h+0.04)+0.3;
+  const d=dimPannello(), cols=Math.max(1,Math.ceil(S.panels/2)), rows=2;
+  P.w=Math.round((cols*(d.w+FUGA)-FUGA+2*MARGINE_FALDA+0.05)*10)/10; P.l=Math.round((rows*(d.h+FUGA)-FUGA+2*MARGINE_FALDA+0.05)*10)/10;
   const sw=document.getElementById("slopeW"), sl=document.getElementById("slopeL");
-  if(sw) sw.value=fmt(P.w,2); if(sl) sl.value=fmt(P.l,2);
+  if(sw) sw.value=fmt(P.w,1); if(sl) sl.value=fmt(P.l,1);
 }
-function fitGrid(){ if(!P.w&&P.cols&&!P.mpp) gridToSlope(); topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)+0.03))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)+0.03))); } applyGrid(); }
+function fitGrid(){ if(!P.w&&!P.mpp) gridToSlope(); topGeometry(); sincCelle(); applyGrid(); }
 $$("[data-pv]").forEach(b=>b.addEventListener("click",()=>{
   P.view=b.dataset.pv; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x===b));
   $("#compassBtn").hidden=P.view==="top";
   if(P.corners.length===4) fitGrid(); drawPhoto();
 }));
-$$("[data-grid]").forEach(b=>b.addEventListener("click",()=>{
-  const k=b.dataset.grid;
-  if(k==="c+") P.cols=Math.min(20,P.cols+1); if(k==="c-") P.cols=Math.max(1,P.cols-1);
-  if(k==="r+") P.rows=Math.min(8,P.rows+1); if(k==="r-") P.rows=Math.max(1,P.rows-1);
-  applyGrid(); gridToSlope(); if(S.mode==="photo") drawPhoto();
+$$("[data-orient]").forEach(b=>b.addEventListener("click",()=>{
+  if((P.orient||"V")===b.dataset.orient) return;
+  P.orient=b.dataset.orient; sincCelle(true); applyGrid(); drawPhoto();
+  const L=layoutAttivo(); if(L) toast(`Pannelli ${P.orient==="H"?"in orizzontale":"in verticale"}: sulla falda ne stanno ${L.posti.length}`);
 }));
+$("#riempiFalda").addEventListener("click",()=>{ const L=layoutAttivo(); if(!L){ toast("Prima segna la falda sulla foto"); return; }
+  P.celle=ordinePosti(L); S.panels=P.voluti=P.celle.length; applyGrid(); drawPhoto(); toast(`Falda piena: ${S.panels} pannelli`); });
+$("#riordinaFalda").addEventListener("click",()=>{ if(!layoutAttivo()){ toast("Prima segna la falda sulla foto"); return; } sincCelle(true); applyGrid(); drawPhoto(); });
 const num=v=>{ const n=parseFloat(String(v).replace(",",".")); return isFinite(n)&&n>0?n:null; };
-["slopeW","slopeL"].forEach(id=>$("#"+id).addEventListener("input",()=>{ P.w=num($("#slopeW").value); P.l=num($("#slopeL").value); if(P.w&&(P.l||P.view==="top")) fitGrid(); else drawPhoto(); }));
+["slopeW","slopeL"].forEach(id=>$("#"+id).addEventListener("change",()=>{ P.w=num($("#slopeW").value); P.l=num($("#slopeL").value);
+  if(P.w&&P.l&&P.corners.length===4){ sincCelle(); applyGrid(); } drawPhoto(); }));
 
 /* esporta e metti in proposta */
 async function exportBlob(){
@@ -1698,7 +1793,7 @@ function battInfo(){
   el.textContent=`${n} ${n===1?"modulo":"moduli"} × ${fmt(b.kwh,2)} kWh = ${fmt(tot,2)} kWh`+(b.specs&&b.specs.compat?` · compatibile con ${b.specs.compat}`:"");
 }
 $("#battSel").addEventListener("change",e=>{ S.battId=e.target.value; battInfo(); renderScheda(); refresh(); });
-$("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(S.mode==="photo"&&P.corners.length===4) fitGrid(); refresh(); });
+$("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(P.corners.length===4){ fitGrid(); if(S.mode==="photo") drawPhoto(); } refresh(); });
 $("#invSel").addEventListener("change",e=>{ S.invId=e.target.value; refresh(); });
 
 /* ===================== TIPO IMPIANTO ===================== */
@@ -1795,12 +1890,22 @@ $("#addr").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault
 
 let mappa=null, pin=null;
 function mappaPronta(){
-  if(mappa||!window.L) return mappa;
+  if(mappa) return mappa;
+  if(!window.L){ const m=$("#mappaCasa"); if(m&&!m.dataset.avviso){ m.dataset.avviso="1"; m.innerHTML='<div style="padding:16px;font-size:14px;color:#13233D;background:#fff;height:100%">La mappa non si è caricata. Ricarica la pagina; se resta così usa «Foto del tetto» al passo 2.</div>'; } return null; }
+  try{ return creaMappa(); }catch(e){ console.error(e); toast("Mappa non disponibile: "+(e&&e.message||e)); return null; }
+}
+function creaMappa(){
   const centro=S.addrPos?[S.addrPos.lat,S.addrPos.lon]:(CITIES[S.city]&&CITIES[S.city].lon!=null?[CITIES[S.city].lat,CITIES[S.city].lon]:[45.0849,7.4755]);
   mappa=L.map("mappaCasa",{zoomControl:true,attributionControl:true}).setView(centro,S.addrPos?19:13);
   const base=window.SAT_BASE||"";
-  if(_INIT.googleMappe) L.tileLayer(base+"/api/solaris/satellite?fonte=gtile&z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:20,attribution:"Immagini © Google"}).addTo(mappa);
-  else L.tileLayer(base+"/api/solaris/satellite?z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:19,attribution:"Immagini © Esri, Maxar"}).addTo(mappa);
+  const esri=()=>L.tileLayer(base+"/api/solaris/satellite?z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:19,attribution:"Immagini © Esri, Maxar"});
+  if(_INIT.googleMappe){
+    // Google (Map Tiles API); se le tessere non arrivano si passa da soli a Esri invece di restare grigi
+    const g=L.tileLayer(base+"/api/solaris/satellite?fonte=gtile&z={z}&x={x}&y={y}",{maxZoom:21,maxNativeZoom:20,attribution:"Immagini © Google"}).addTo(mappa);
+    let ok=0, ko=0;
+    g.on("tileload",()=>{ ok++; });
+    g.on("tileerror",()=>{ ko++; if(!ok&&ko>=4&&mappa.hasLayer(g)){ mappa.removeLayer(g); esri().addTo(mappa); } });
+  } else esri().addTo(mappa);
   const icona=L.divIcon({className:"",html:'<div style="font-size:34px;line-height:34px;transform:translate(-4px,-30px);filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))">📍</div>',iconSize:[30,34]});
   pin=L.marker(centro,{draggable:true,icon:icona,autoPan:true});
   if(S.addrPos) pin.addTo(mappa);
