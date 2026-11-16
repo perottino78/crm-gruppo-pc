@@ -72,13 +72,13 @@ test("descrizione breve e scheda tecnica per il cliente nell'offerta", async () 
   assert.ok(s && /5 camere/.test(s.descrizione) && /Uf 1,3/.test(s.descrizione));
   assert.equal(s?.pdf, "/cataloghi/optima/Optima70-scheda-tecnica.pdf");
   assert.equal(s?.pagine.length, 8);
-  assert.equal(schedaCliente("FIDRA_F2A"), null);
+  assert.equal(schedaCliente("TAGLIOFREDDO_SCORR_33"), null);
 });
 
 test("schede da allegare: solo quelle dei prodotti spuntati, una per listino", async () => {
   const { schedeDelleTipologie, schedeDaAllegare } = await import("../../src/lib/preventivi/scheda-cliente");
-  assert.deepEqual(schedeDelleTipologie(["OPTIMA_F1A", "FIDRA_F1A", "OPTIMA_PF2A", null]).map((s) => s.chiave), ["OPTIMA"]);
+  assert.deepEqual(schedeDelleTipologie(["OPTIMA_F1A", "FIDRA_F1A", "OPTIMA_PF2A", null]).map((s) => s.chiave), ["OPTIMA", "FIDRA"]);
   assert.equal(schedeDaAllegare([{ tipologia: "OPTIMA_F1A", allegaScheda: true }, { tipologia: "OPTIMA_PF2A", allegaScheda: true }]).length, 1);
   assert.equal(schedeDaAllegare([{ tipologia: "OPTIMA_F1A", allegaScheda: false }]).length, 0);
-  assert.equal(schedeDaAllegare([{ tipologia: "FIDRA_F1A", allegaScheda: true }]).length, 0);
+  assert.equal(schedeDaAllegare([{ tipologia: "TAGLIOFREDDO_SCORR_33", allegaScheda: true }]).length, 0);
 });

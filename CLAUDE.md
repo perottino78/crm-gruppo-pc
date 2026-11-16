@@ -390,7 +390,10 @@ login nel `matcher` del middleware.
   portefinestre, `FIDRA_WAS` wasistas; `listiniFidra`): colori standard compresi, fuori standard +30%, due lati diversi +100%, vetro STC, satinato
   90 €/anta finestre e 150 €/anta portefinestre (su tutte le tipologie), maniglia passante 500 € su tutte, motoriduttore, traversi, pannello fisso, fuori misura, sagomati +40%, minimo
   di produzione, autoscala, ENEA, smaltimento. Rotta `api/admin/seed-fidra` (GET prova, POST carica). Disegni in `public/immagini/fidra/`, brochure e
-  dispositivi Matter in `public/cataloghi/fidra/`. Nell'offerta stesso riquadro a tendine del raso muro. Test `tests/listini/fidra.test.ts`, collaudo `fidra` (8).
+  dispositivi Matter in `public/cataloghi/fidra/`. Nell'offerta stesso riquadro a tendine del raso muro. Fidra = «Inversa» di Biemme Finestre
+  (fornitore, mai nominato al cliente): scheda tecnica `Fidra-scheda-tecnica.pdf` (2 pagine, fatta da noi il 16/11/2026 con logo e dati di P&C, valori e foto dalla
+  pagina pubblica biemmefinestre.it/inversa e dalla brochure; la scheda del fornitore è riservata ai rivenditori; HTML sorgente in scratchpad `inversa/scheda.html`),
+  `DESCRIZIONE_CLIENTE_FIDRA`, voce in `SCHEDE`. Test `tests/listini/fidra.test.ts`, collaudo `fidra` (8).
 - **Serramenti PVC Optima 70** («Optima 1.3»: 5 camere, 70 mm, Uf 1,3; gruppo SERRAMENTI, sottogruppo «PVC — Optima 70»; ha sostituito il segnaposto
   `SERRAMENTI_PVC_OPTIMA_PLACEHOLDER`): 12 tipologie `OPTIMA_<F1A|F2A|F3A|FF|W|PF1A|PF2A|PF3A>[_SOGLIA]|OPTIMA_TRASLANTE` come Fidra, griglie L×H in mm dal file
   «OPTIMA70_PREMIUM_FINALE.xlsx» (valori dei fogli = base × 1,35 del file, stessa base del listino Fidra che è × 2,2; due celle diverse dal Fidra lasciate come
@@ -650,7 +653,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 409, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 410, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
