@@ -27,6 +27,7 @@ async function main() {
   await prisma.solarisComponente.create({ data: { brandId: b.id, categoria: "INVERTER", nome: "Stealth ST-INV-T10.0 10 kW trifase (ibrido)", potenzaW: 10000, prezzoVendita: 0, costoAcquisto: 0 } });
   await prisma.solarisComponente.create({ data: { brandId: b.id, categoria: "INVERTER", nome: "Stealth ST-INV-S6.0 6 kW (ibrido)", potenzaW: 6000, prezzoVendita: 990, costoAcquisto: 0 } });
 
+  await prisma.solarisComponente.update({ where: { id: (await prisma.solarisComponente.findFirstOrThrow({ where: { nome: { contains: "T10.0" } } })).id }, data: { misureJson: { sigla: "ST-INV-T10.0", specs: { eff: 98.6, vbatt: "80–495 V" } } } });
   const prova = await (await seed.GET(req("GET"))).json();
   verifica(prova.prova && prova.prezziCreati === VOCI_SOLARIS_BC.length && (await prisma.prodotto.count()) === 0, "la prova non scrive nulla", prova);
   const r1 = await (await seed.POST(req("POST"))).json();
@@ -36,6 +37,9 @@ async function main() {
   const s6 = await prisma.solarisComponente.findFirstOrThrow({ where: { nome: { contains: "S6.0" } } });
   verifica(t10.prezzoVendita === 3920 && t10.costoAcquisto === 1225 && s6.prezzoVendita === 990, "inverter T10 a 3.920 € (costo 1.225), S6 resta 990 € scritto a mano", { t10, s6 });
 
+  const t10s = (await prisma.solarisComponente.findFirstOrThrow({ where: { nome: { contains: "T10.0" } } })).misureJson as { specs: { vbatt: string; peso: string; dim: string } };
+  verifica(r1.schedeStealthAggiornate === 2 && t10s.specs.vbatt === "180–600 V" && t10s.specs.peso === "28 kg" && t10s.specs.dim === "457 × 654 × 228 mm",
+    "scheda Stealth T10 aggiornata ai dati del produttore", t10s);
   const voceT10 = VOCI_SOLARIS_BC.find((v) => v.codice.includes("ST-INV-T10"))!;
   const m = await prisma.modelloProdotto.findFirstOrThrow({ where: { tipologia: voceT10.tipologia } });
   verifica(m.famiglia === "SOLARIS" && m.gruppo === "FOTOVOLTAICO" && m.fornitoreId === stealth.id && m.scontoAcquisto === 68.75 && !!m.immagineUrl?.startsWith("/immagini/solaris-bc/"),
@@ -43,6 +47,7 @@ async function main() {
   await prisma.modelloProdotto.update({ where: { id: m.id }, data: { descrizioneTecnica: "scritta a mano" } });
   await prisma.prodotto.updateMany({ where: { tipologia: voceT10.tipologia }, data: { prezzoBase: 4100 } });
   const r2 = await (await seed.POST(req("POST"))).json();
+  verifica(r2.schedeStealthAggiornate === 0, "rilancio: schede Stealth già aggiornate", r2);
   verifica(r2.prezziCreati === 0 && r2.modelliCreati === 0 && r2.modelliCompletati === 0 && r2.studioAggiornati === 0, "rilancio senza doppioni", r2);
   verifica((await prisma.prodotto.findFirstOrThrow({ where: { tipologia: voceT10.tipologia } })).prezzoBase === 4100
     && (await prisma.modelloProdotto.findFirstOrThrow({ where: { id: m.id } })).descrizioneTecnica === "scritta a mano", "prezzo aumentato e descrizione scritta a mano restano");

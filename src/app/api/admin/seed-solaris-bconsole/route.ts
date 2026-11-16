@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { CATALOGO_STEALTH } from "@/lib/solaris/stealth";
 import {
   VOCI_SOLARIS_BC, PREFISSO_SOLARIS_BC, FAMIGLIA_SOLARIS, posizioneSolarisBC, varianteSolarisBC, scontoAcquistoBC,
   descrizioneSolarisBC, inProvvigioneSolarisBC, nomePulito, PREZZI_STEALTH_BC, PANNELLI_STUDIO_BC,
@@ -10,6 +11,8 @@ export const maxDuration = 120;
 
 const SECRET = process.env.SEED_SECRET || "gpc-2026-seed-x7f2";
 const ok = (req: NextRequest) => req.headers.get("x-seed-key") === SECRET;
+// Postgres (jsonb) riordina le chiavi: per confrontare si ordinano ovunque
+const canonico = (v: unknown): string => JSON.stringify(v, (_, x) => (x && typeof x === "object" && !Array.isArray(x) ? Object.fromEntries(Object.entries(x).sort(([a], [b]) => a.localeCompare(b))) : x));
 const norm = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
 /**
@@ -20,7 +23,7 @@ const norm = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
 async function esegui(prova: boolean) {
   const brand = await prisma.brand.findUnique({ where: { nome: "Solaris" }, select: { id: true } });
   if (!brand) return { error: "marchio Solaris non trovato" };
-  const st = { voci: VOCI_SOLARIS_BC.length, prezziCreati: 0, prezziGiaPresenti: 0, modelliCreati: 0, modelliCompletati: 0, fornitoriAbbinati: 0, studioAggiornati: 0, studioGiaConPrezzo: 0, pannelliStudioCreati: 0 };
+  const st = { voci: VOCI_SOLARIS_BC.length, prezziCreati: 0, prezziGiaPresenti: 0, modelliCreati: 0, modelliCompletati: 0, fornitoriAbbinati: 0, studioAggiornati: 0, studioGiaConPrezzo: 0, pannelliStudioCreati: 0, schedeStealthAggiornate: 0 };
 
   const fornitori = await prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, select: { id: true, ragioneSociale: true } });
   const fornitoreDi = (nome: string) => {
@@ -68,6 +71,15 @@ async function esegui(prova: boolean) {
     st.studioAggiornati++;
     if (!prova) await prisma.solarisComponente.update({ where: { id: c.id }, data: { prezzoVendita: p.vendita, ...(c.costoAcquisto > 0 || !p.costo ? {} : { costoAcquisto: p.costo }) } });
   }
+  // schede tecniche Stealth dello Studio: dati ufficiali del produttore (misure, pesi, tensioni, garanzia); i prezzi non si toccano
+  const stealthDb = await prisma.solarisComponente.findMany({ where: { nome: { in: CATALOGO_STEALTH.map((c) => c.nome) } }, select: { id: true, nome: true, misureJson: true } });
+  for (const c of CATALOGO_STEALTH) {
+    const r = stealthDb.find((x) => x.nome === c.nome);
+    if (!r || canonico(r.misureJson) === canonico(c.misureJson)) continue;
+    st.schedeStealthAggiornate++;
+    if (!prova) await prisma.solarisComponente.update({ where: { id: r.id }, data: { misureJson: c.misureJson as object, note: c.note } });
+  }
+
   // pannelli VDS di BConsole nel catalogo di Solaris Studio (solo se mancano, per nome)
   const nomiPannelli = new Set((await prisma.solarisComponente.findMany({ where: { categoria: "PANNELLO" }, select: { nome: true } })).map((c) => c.nome));
   for (const p of PANNELLI_STUDIO_BC) {

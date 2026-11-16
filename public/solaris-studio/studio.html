@@ -1259,9 +1259,13 @@ function schedaHtml(){
     ${is.eff?row("Efficienza massima",is.eff+"%"):""}
     ${is.mppt?row("N° MPPT",is.mppt):""}
     ${is.vdc_max?row("Tensione CC max",is.vdc_max):""}
+    ${is.mppt_range?row("Campo di tensione MPPT",is.mppt_range):""}
     ${is.vac?row("Tensione AC uscita",is.vac):""}
     ${is.vbatt?row("Tensione batteria",is.vbatt):""}
+    ${is.eps?row("Commutazione backup (EPS)",is.eps):""}
+    ${is.ip?row("Protezione",is.ip):""}
     ${is.dim?row("Dimensioni",is.dim):""}
+    ${is.peso?row("Peso",is.peso):""}
     ${is.comm?row("Comunicazione",is.comm):""}
     ${is.gar?row("Garanzia",is.gar+" anni"):""}
     ${is.cert?row("Certificazioni",is.cert):""}
@@ -1275,8 +1279,10 @@ function schedaHtml(){
     ${bs.chimica?row("Chimica",bs.chimica):""}
     ${bs.dod?row("Profondità di scarica",bs.dod):""}
     ${bs.cicli?row("Cicli",bs.cicli):""}
+    ${bs.vmod?row("Tensione",bs.vmod):""}
     ${bs.ip?row("Protezione",bs.ip):""}
     ${bs.dim?row("Dimensioni",bs.dim):""}
+    ${bs.peso?row("Peso",bs.peso):""}
     ${bs.gar?row("Garanzia",bs.gar+" anni"):""}
     ${bs.compat?row("Compatibile con",bs.compat):""}
   </div>`; }
@@ -1290,12 +1296,12 @@ function schedePerOfferta(){
     v("Dimensioni",ps.dim),v("Peso",ps.peso),v("Tensione a vuoto (Voc)",ps.voc),v("Corrente di corto (Isc)",ps.isc),v("Tensione MPP (Vmp)",ps.vmp),v("Corrente MPP (Imp)",ps.imp),
     v("Garanzia",ps.gar_prod||ps.gar_rend?`${ps.gar_prod||"?"} anni prodotto · ${ps.gar_rend||"?"} anni rendimento`:null),v("Certificazioni",ps.cert)])});
   out.push({titolo:"Inverter "+inv.n,voci:pulisci([v("Tipo",(inv.hyb?"Ibrido, ":"")+(inv.faseTipo==="TRIFASE"?"trifase":"monofase")),v("Potenza nominale AC",fmt(inv.kw,0)+" kW"),
-    v("Efficienza massima",is.eff!=null?is.eff+"%":null),v("N° MPPT",is.mppt),v("Tensione CC max",is.vdc_max),v("Tensione AC uscita",is.vac),v("Tensione batteria",is.vbatt),
-    v("Dimensioni",is.dim),v("Comunicazione",is.comm),v("Garanzia",is.gar?is.gar+" anni":null),v("Certificazioni",is.cert)])});
+    v("Efficienza massima",is.eff!=null?is.eff+"%":null),v("N° MPPT",is.mppt),v("Tensione CC max",is.vdc_max),v("Campo di tensione MPPT",is.mppt_range),v("Tensione AC uscita",is.vac),v("Tensione batteria",is.vbatt),v("Commutazione backup (EPS)",is.eps),v("Protezione",is.ip),
+    v("Dimensioni",is.dim),v("Peso",is.peso),v("Comunicazione",is.comm),v("Garanzia",is.gar?is.gar+" anni":null),v("Certificazioni",is.cert)])});
   const bat=curBatt();
   if(bat&&S.batt){ const bs=bat.specs||{};
     out.push({titolo:"Batteria "+bat.n,voci:pulisci([v("Capacità del modulo",fmt(bat.kwh,2)+" kWh"),v("Moduli per "+S.batt+" kWh",battModuli()),v("Chimica",bs.chimica),
-      v("Profondità di scarica",bs.dod),v("Cicli",bs.cicli),v("Protezione",bs.ip),v("Dimensioni",bs.dim),v("Garanzia",bs.gar?bs.gar+" anni":null),v("Compatibile con",bs.compat)])}); }
+      v("Profondità di scarica",bs.dod),v("Cicli",bs.cicli),v("Tensione",bs.vmod),v("Protezione",bs.ip),v("Dimensioni",bs.dim),v("Peso",bs.peso),v("Garanzia",bs.gar?bs.gar+" anni":null),v("Compatibile con",bs.compat)])}); }
   return out;
 }
 function renderScheda(){
