@@ -12,9 +12,11 @@ import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
 import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { creaOrdineDaRighe } from "@/app/ordini-actions";
-import { aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
+import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
+import PercorsoProgetto from "@/components/commesse/PercorsoProgetto";
+import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { labelCalcolo } from "@/lib/listini/kit";
@@ -60,9 +62,9 @@ import KitCliente from "@/components/commesse/KitCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -147,6 +149,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const stato = STATI_COMMESSA[c.stato] ?? { label: c.stato, cls: "bg-neutral-200" };
   const finanz = c.accontoTipo === "FINANZIAMENTO";
   const viaLibera = finanz ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  const percorsoProg = await percorsoDiCommessa(c.id);
   const defaultData = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
 
   return (
@@ -213,6 +216,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <Link href={`/preventivi/${c.preventivoId}`} className="text-sm font-medium text-blue-800 hover:underline">apri preventivo →</Link>
         </div>
       </div>
+
+      {/* PERCORSO DEL PROGETTO */}
+      {percorsoProg && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
       {/* FLUSSO PRATICA FRA UFFICI */}
       <section className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
@@ -347,9 +353,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         <h2 className="mb-3">2 · Rilievo misure</h2>
         {fatto && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {fatto}</p>}
         {avvisoRilievo && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avvisoRilievo}</p>}
-        {!viaLibera ? (
+        {!viaLibera || (percorsoProg && !percorsoProg.progettoCreatoIl && !percorsoProg.legacy) ? (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">
-            Il rilievo si sblocca dopo l&apos;incasso dell&apos;acconto{finanz ? " (finanziamento approvato)" : ""}.
+            {!viaLibera
+              ? <>Il rilievo si sblocca dopo l&apos;incasso dell&apos;acconto{finanz ? " (finanziamento approvato)" : ""}.</>
+              : <>Il cliente ha pagato: <a href="#progetto" className="underline font-bold">crea il progetto</a> per fissare il rilievo.</>}
           </p>
         ) : (
           <form action={programmaRilievo} className="flex flex-wrap items-end gap-2 mb-4">
