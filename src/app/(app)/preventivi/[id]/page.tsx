@@ -13,6 +13,9 @@ import { scopePreventivoWhere } from "@/lib/scope";
 import { brandInfo } from "@/lib/brands";
 import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { listiniOptima, GUIDA_OPTIMA, CATALOGHI_OPTIMA } from "@/lib/listini/optima";
+import { listiniZenith, GUIDA_ZENITH } from "@/lib/listini/zenith";
+import { tendinaDi } from "@/lib/listini/serramenti-comuni";
+import { assicuraOptionalSerramenti } from "@/lib/listini/allinea-optional";
 import { listiniPlasma30, GUIDA_PLASMA30, CATALOGHI_PLASMA30, ePlasma30 } from "@/lib/listini/plasma30";
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
@@ -115,6 +118,8 @@ export default async function PreventivoPage({
     prisma.documento.count({ where: { entita: "PREVENTIVO", entitaId: preventivo.id, cartella: "Foto" } }),
   ]);
 
+  // optional dei serramenti (Zenith, Optima, Fidra, Plasma 30) aggiornati alla versione del codice: lavora solo la prima volta
+  await assicuraOptionalSerramenti();
   const [optionaliDisponibili, prodottiTrovati, tassonomia] = await Promise.all([
     prisma.optional.findMany({ where: { brandId: preventivo.brandId, attivo: true }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }),
     q
@@ -531,9 +536,9 @@ export default async function PreventivoPage({
               <FinestraOptional rigaId={r.id} titolo={labelBreveTipologia(prodotto.tipologia)} scelti={r.optionali.length}>
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
-                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniOptima(prodotto.tipologia).includes(o.listino ?? "") || listiniPlasma30(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
+                  .filter((o) => o.listino === null || optionalSeraFrangisoleApplicabile(o.listino, prodotto.tipologia) || o.listino === listinoDiTipologia(prodotto.tipologia) || o.listino === prodotto.tipologia || o.listino === famigliaColoreStruttura(prodotto.tipologia) || listiniRasomuro(prodotto.tipologia).includes(o.listino ?? "") || listiniFidra(prodotto.tipologia).includes(o.listino ?? "") || listiniOptima(prodotto.tipologia).includes(o.listino ?? "") || listiniZenith(prodotto.tipologia).includes(o.listino ?? "") || listiniPlasma30(prodotto.tipologia).includes(o.listino ?? "") || listiniPavgal(prodotto.tipologia).includes(o.listino ?? ""))
                   /* Porte raso muro, serramenti Fidra e porte a vetro: solo le voci del proprio listino (non quelle Isomax senza listino del gruppo PORTE INTERNE). */
-                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
+                  .filter((o) => !(prodotto.tipologia.startsWith("RASOMURO_") || prodotto.tipologia.startsWith("FIDRA_") || prodotto.tipologia.startsWith("OPTIMA_") || prodotto.tipologia.startsWith("ZENITH_") || ePlasma30(prodotto.tipologia) || prodotto.tipologia.startsWith("PORTAVETRO_") || prodotto.tipologia.startsWith("STABYLA_") || prodotto.tipologia.startsWith("PEDANA_") || prodotto.tipologia.startsWith("PAVGAL_") || prodotto.tipologia.startsWith("TAGLIOFREDDO_")) || o.listino !== null || o.gruppiApplicabili.length === 0 || o.categoria.endsWith("(Work&Service)"))
                   .filter((o) => o.gruppiApplicabili.length === 0 || (modello?.gruppo && o.gruppiApplicabili.includes(modello.gruppo)))
                   .filter((o) => !o.finituraApplicabile || o.finituraApplicabile === finituraDiTipologia(prodotto.tipologia))
                   /* Il colore profilo per le zanzariere plissé è già implicito nella scelta della finitura
@@ -778,6 +783,8 @@ export default async function PreventivoPage({
                 const fidra = prodotto.tipologia.startsWith("FIDRA_");
                 // Serramenti PVC Optima 70: come Fidra.
                 const optima = prodotto.tipologia.startsWith("OPTIMA_");
+                // Serramenti PVC Zenith: come Optima, con colore esterno e interno separati (richiesta di Ugo 16/11/2026).
+                const zenith = prodotto.tipologia.startsWith("ZENITH_");
                 // Serramenti PVC Plasma 30 (doppio e triplo vetro): come Optima.
                 const plasma30 = ePlasma30(prodotto.tipologia);
                 const portaVetro = prodotto.tipologia.startsWith("PORTAVETRO_");
@@ -785,19 +792,21 @@ export default async function PreventivoPage({
                 const pedana = prodotto.tipologia.startsWith("PEDANA_");
                 const pavgal = prodotto.tipologia.startsWith("PAVGAL_");
                 const tagliofreddo = prodotto.tipologia.startsWith("TAGLIOFREDDO_");
-                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || optima || plasma30 || portaVetro || tempra || pedana || pavgal || tagliofreddo) {
-                  const ordine = ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Supplementi", "Smontaggio", "Sconti per quantità", "Vetri", "Maniglie e ferramenta", "Traversi e pannelli", "Misure e lavorazioni", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
+                if (prodotto.tipologia.startsWith("RASOMURO_") || fidra || optima || zenith || plasma30 || portaVetro || tempra || pedana || pavgal || tagliofreddo) {
+                  // serramenti: colore, vetri, accessori, lavorazioni, servizi (l'ordine in cui le chiede il rilievo)
+                  const ordineSerramenti = ["Colore esterno", "Colore interno", "Colore", "Vetri", "Accessori", "Lavorazioni e misure", "Servizi al contratto"];
+                  const ordine = fidra || optima || zenith || plasma30 ? ordineSerramenti : ["Piedini regolabili", "Pezzi speciali", "Finiture", "Posa e servizi", "Copertura", "Illuminazione LED", "Apertura", "Accessori", "Colore telaio", "Misure", "Colore", "Supplementi", "Smontaggio", "Sconti per quantità", "Vetri", "Lavorazioni e misure", "Servizi al contratto", "Finitura anta", "Anta", "Su misura", "Telaio e varianti", "Chiusure e serrature", "Maniglie e maniglioni", "Fonoisolamento (battenti)", "Planarità ante", "Lavorazioni particolari", "Accessori di ricambio", "Imballo e trasporto"];
                   // le voci Work&Service (posa, rilievo, trasporto, trasferte, magazzino…) stanno tutte in un'unica tendina, divise per tipo
                   const WS = "Posa e servizi (Work&Service)";
-                  const gruppoDi = (o: { categoria: string }) => (o.categoria.endsWith("(Work&Service)") ? WS : o.categoria);
+                  const gruppoDi = (o: { categoria: string }) => (o.categoria.endsWith("(Work&Service)") ? WS : tendinaDi(o.categoria));
                   const categorie = [...new Set(optionaliRigaFiltrati.map(gruppoDi))].sort((a, b) => (ordine.indexOf(a) + 1 || (a === WS ? 98 : 99)) - (ordine.indexOf(b) + 1 || (b === WS ? 98 : 99)));
                   const testoVoce = (o: (typeof optionaliRigaFiltrati)[number]) =>
                     `${o.nome} (${o.tipoPrezzo === "PERCENTUALE" ? `${o.valore > 0 ? "+" : ""}${o.valore}%` : o.valore === 0 ? "compreso" : `${o.valore > 0 ? "+" : ""}${o.valore.toLocaleString("it-IT", { maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(o.valore) ? 0 : 2 })}€${o.unita ? `/${o.unita}` : ""}`})`;
                   return (
                     <div className="mt-2 flex flex-col gap-1">
                       <p className="text-[11px] text-neutral-500">
-                        {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : plasma30 ? GUIDA_PLASMA30 : optima ? GUIDA_OPTIMA : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
-                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo ? [] : plasma30 ? CATALOGHI_PLASMA30 : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
+                        {tagliofreddo ? GUIDA_TAGLIO_FREDDO : pavgal ? GUIDA_PAVGAL : pedana ? GUIDA_PEDANE : tempra ? GUIDA_TEMPRA : portaVetro ? GUIDA_PORTE_VETRO : plasma30 ? GUIDA_PLASMA30 : zenith ? GUIDA_ZENITH : optima ? GUIDA_OPTIMA : fidra ? GUIDA_FIDRA : guidaRasomuro(prodotto.tipologia)}{" "}
+                        {(portaVetro || tempra || pedana || pavgal || tagliofreddo || zenith ? [] : plasma30 ? CATALOGHI_PLASMA30 : optima ? CATALOGHI_OPTIMA : fidra ? CATALOGHI_FIDRA : CATALOGHI_RASOMURO).map((c) => (
                           <a key={c.url} href={c.url} target="_blank" rel="noreferrer" className="underline text-blue-700 mr-2">📘 {c.nome}</a>
                         ))}
                       </p>
@@ -805,10 +814,12 @@ export default async function PreventivoPage({
                         const voci = optionaliRigaFiltrati.filter((o) => gruppoDi(o) === cat).sort((a, b) => Number(a.valore !== 0) - Number(b.valore !== 0)); // le voci comprese (colori standard) per prime
                         const sottogruppi = cat === WS ? [...new Set(voci.map((o) => o.categoria))] : [];
                         return (
-                          <form key={cat} action={aggiungiOptionalARiga} className="flex flex-wrap items-center gap-1">
+                          <form key={cat} action={aggiungiOptionalARiga} className="flex min-w-0 flex-col gap-0.5">
                             <input type="hidden" name="rigaId" value={r.id} />
                             <input type="hidden" name="preventivoId" value={preventivo.id} />
-                            <select name="optionalId" aria-label={cat} className="text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[420px]">
+                            <span className="text-[11px] font-semibold text-neutral-700">{cat}</span>
+                            <span className="flex min-w-0 items-center gap-1">
+                            <select name="optionalId" aria-label={cat} className="min-w-0 flex-1 text-xs border border-neutral-200 rounded px-1.5 py-1 max-w-[420px]">
                               {cat === WS
                                 ? sottogruppi.map((sg) => (
                                     <optgroup key={sg} label={sg.replace(" (Work&Service)", "")}>
@@ -821,8 +832,9 @@ export default async function PreventivoPage({
                                     <option key={o.id} value={o.id}>{testoVoce(o)}</option>
                                   ))}
                             </select>
-                            <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
-                            <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ {cat.toLowerCase()}</button>
+                            <input name="quantita" type="number" defaultValue={1} min={1} aria-label="Quantità" className="shrink-0 text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
+                            <button className="btn-3d btn-3d-outline shrink-0 text-[11px] px-2 py-1">+ Aggiungi</button>
+                            </span>
                           </form>
                         );
                       })}

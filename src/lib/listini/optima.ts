@@ -3,6 +3,7 @@
 // (base × coefficiente 1,35 del file) e stanno in prisma/seed-data/optima_prodotti.json (estratte con
 // scripts/listini/estrai_optima.py; «*» = primo prezzo disponibile). Optional e accessori presi dalle note dei fogli
 // e dal foglio «ACCESSORI». Modulo puro: lo usano la rotta api/admin/seed-optima e la pagina dell'offerta.
+import { formeSpeciali, vetriSpeciali } from "./serramenti-comuni";
 
 export const PREFISSO_OPTIMA = "OPTIMA_";
 export const SOTTOGRUPPO_OPTIMA = "PVC — Optima 70";
@@ -77,6 +78,8 @@ export function optionalOptima(): OptionalOptima[] {
     o("Traversi e pannelli", "Traverso aggiuntivo verticale (cad.)", 120),
     o("Traversi e pannelli", "Pannello fisso aggiuntivo (cad.)", 100, "OPTIMA_PF"),
     o("Traversi e pannelli", "Foro per passagatto (il cliente fornisce il passagatto, o traverso + pannello fisso)", 150),
+    ...vetriSpeciali("OPTIMA"),
+    ...formeSpeciali("OPTIMA"),
     o("Misure e lavorazioni", "Oltre le misure di listino: ogni 10 cm in più (L o H)", 300),
     o("Misure e lavorazioni", "Minimo di produzione (ordine con meno di 3 pezzi; fissi meno di 2)", 450),
     o("Misure e lavorazioni", "Trasporto pezzi fuori sagoma (celle rosa del listino)", 350),
