@@ -47,6 +47,10 @@ async function main() {
   verifica((await prisma.prodotto.findFirstOrThrow({ where: { tipologia: voceT10.tipologia } })).prezzoBase === 4100
     && (await prisma.modelloProdotto.findFirstOrThrow({ where: { id: m.id } })).descrizioneTecnica === "scritta a mano", "prezzo aumentato e descrizione scritta a mano restano");
 
+  const pann = await prisma.solarisComponente.findMany({ where: { categoria: "PANNELLO" }, orderBy: { potenzaW: "asc" } });
+  verifica(r1.pannelliStudioCreati === 2 && pann.length === 2 && (pann[0].misureJson as { w: number; h: number }).h === 1.98 && pann[1].prezzoVendita === 380 && r2.pannelliStudioCreati === 0,
+    "Solaris Studio: pannelli VDS 370 W (1,98 × 1,00 m) e 460 W creati una volta sola", pann.map((x) => [x.nome, x.misureJson]));
+
   const albero = await tassonomiaListino(b.id);
   const testo = JSON.stringify(albero);
   verifica(testo.includes("FOTOVOLTAICO") && testo.includes("Impianti completi (kit)") && testo.includes("Inverter") && testo.includes("POMPE DI CALORE E CALDAIE AMG"),
