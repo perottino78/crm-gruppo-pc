@@ -32,7 +32,8 @@ async function esegui(prova: boolean) {
     cambi.push({ chiave: d.chiave, azione: "aggiorna", dettaglio: diversi.join("; ") });
     if (!prova) await prisma.flussoFase.update({ where: { chiave: d.chiave }, data: { ordine: i + 1, nome: d.nome, ufficio: d.ufficio, prossimaChiave: d.prossimaChiave, taskTitolo: d.taskTitolo, taskTesto: d.taskTesto, taskAttivo: true } });
   }
-  return { ok: true, prova, cambi };
+  const attuali = esistenti.sort((a, b) => a.ordine - b.ordine).map((f) => ({ chiave: f.chiave, ordine: f.ordine, nome: f.nome, ufficio: f.ufficio, prossima: f.prossimaChiave, task: f.taskAttivo ? f.taskTitolo : "(nessun task)", mail: f.mailAttiva ? `${f.mailQuando} → ${f.mailDestinatario}${f.mailAutomatica ? " (automatica)" : ""}` : null }));
+  return { ok: true, prova, attuali, cambi };
 }
 
 export async function GET(req: NextRequest) {
