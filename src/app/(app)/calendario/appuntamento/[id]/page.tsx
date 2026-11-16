@@ -88,7 +88,13 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           </form>
           <Link href={modifica ? ritorno : `${ritorno}?modifica=1#modifica`} scroll={!modifica} className="btn-3d tile-3d btn-3d-outline"><span className="text-xl">✎</span><span>{modifica ? "Chiudi modifica" : "Modifica"}</span></Link>
         </div>
-        {luogo && <p className="px-5 pb-4 text-sm text-neutral-700">📍 {luogo}</p>}
+        {luogo && <p className="px-5 pb-1 text-sm text-neutral-700">📍 {luogo}</p>}
+        {(tel || a.cliente.email) && (
+          <p className="flex flex-wrap gap-x-4 px-5 pb-4 text-sm text-neutral-700">
+            {tel && <a href={`tel:${tel}`} className="hover:underline">📞 {tel}</a>}
+            {a.cliente.email && <a href={`mailto:${a.cliente.email}`} className="break-all hover:underline">✉️ {a.cliente.email}</a>}
+          </p>
+        )}
       </div>
 
       {/* dopo l'appuntamento: lo compila chi ci è andato */}

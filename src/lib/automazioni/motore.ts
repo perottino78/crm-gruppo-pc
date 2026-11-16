@@ -145,7 +145,7 @@ export async function registraEsito(e: EsitoLead, adesso = new Date()): Promise<
         ...(e.note ? { note: [lead.note, `[${adesso.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}${e.utenteNome ? ` ${e.utenteNome}` : ""}] ${e.note}`].filter(Boolean).join("\n") } : {}),
       },
     });
-    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${venditore ? ` con ${venditore.nome}` : appuntamento ? " (venditore da assegnare)" : ""}${e.senzaEmailCliente ? " · nessuna email al cliente" : ""}${e.note ? ` · ${e.note}` : ""}`, e.utenteNome);
+    await evento(tx, e.leadId, "lead.esito", `${def.nome}${quando ? ` — ${quando}` : ""}${venditore ? ` con ${venditore.nome}` : appuntamento ? " (venditore da assegnare)" : ""}${e.senzaEmailCliente ? " · nessuna email al cliente" : ""}${e.note ? `\nNota: ${e.note}` : ""}`, e.utenteNome);
     await avviaPercorso(tx, e.leadId, percorso, adesso, { richiamoIl: def.serveData === "richiamo" ? e.data : null, appuntamentoIl: def.serveData === "appuntamento" ? e.data : null, senzaEmailCliente: !!e.senzaEmailCliente });
   });
   if (appuntamento || e.esito === "APPUNTAMENTO_ANNULLATO") await sincronizzaCalendario(e.leadId, e.utenteNome);

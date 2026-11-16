@@ -48,7 +48,15 @@ export async function creaAppuntamento(formData: FormData) {
     },
     include: { utente: true },
   });
-  await diario(clienteId, a.commessaId, u.nome, `📅 ${nomeTipoAppuntamento(tipo)} fissato per ${giornoBreve(chiaveGiorno(dataOra))} ore ${oraRoma(dataOra)} con ${a.utente.nome}.`);
+  await diario(clienteId, a.commessaId, u.nome, `📅 ${nomeTipoAppuntamento(tipo)} fissato per ${giornoBreve(chiaveGiorno(dataOra))} ore ${oraRoma(dataOra)} con ${a.utente.nome}.${a.note ? `\nNota: ${a.note}` : ""}`);
+  // richiesta di Rocco: se il cliente è nato da un lead, l'appuntamento fissato (con la nota scritta qui) va anche nella cronologia del contatto
+  const lead = await prisma.lead.findFirst({ where: { clienteGenerato: { id: clienteId } }, select: { id: true } });
+  if (lead) {
+    const quando = dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "short", timeStyle: "short" });
+    await prisma.leadEvento.create({
+      data: { leadId: lead.id, tipo: "lead.esito", utenteNome: u.nome, testo: `Appuntamento fissato — ${nomeTipoAppuntamento(tipo)} ${quando} con ${a.utente.nome}${a.luogo ? ` · ${a.luogo}` : ""}${a.note ? `\nNota: ${a.note}` : ""}` },
+    }).catch(() => null);
+  }
   const e = await inviaInvito(`APPUNTAMENTO:${a.id}`);
   revalidatePath("/calendario");
   revalidatePath(`/clienti/${clienteId}`);

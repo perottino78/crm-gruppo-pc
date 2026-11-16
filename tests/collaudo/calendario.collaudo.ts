@@ -51,6 +51,9 @@ async function main() {
   const comm = await prisma.utente.create({ data: { nome: "Pavel", email: "pavel@gruppopec.com", ruolo: "COMMERCIALE", passwordHash: "x" } });
   const comm2 = await prisma.utente.create({ data: { nome: "Luca", email: "luca@gruppopec.com", ruolo: "COMMERCIALE", passwordHash: "x" } });
   const cli = await prisma.cliente.create({ data: { nome: "ROSSI MARIO", email: "mario@cliente.it", brandId: brand.id, indirizzo: "Via Roma 1", cap: "10090", comune: "Rosta", provincia: "TO" } });
+  // il cliente è nato da un lead: l'appuntamento fissato dal calendario va anche nella cronologia del lead (con la nota)
+  const leadCli = await prisma.lead.create({ data: { nome: "ROSSI MARIO", brandId: brand.id, fonte: "sito", telefonistaId: tel.id } });
+  await prisma.cliente.update({ where: { id: cli.id }, data: { leadOrigineId: leadCli.id } });
 
   console.log("1. Senza invio email configurato");
   g.__utente = tel;
@@ -64,6 +67,8 @@ async function main() {
   Object.assign(process.env, { SMTP_HOST: "127.0.0.1", SMTP_PORT: "2526", SMTP_USER: "crm@gruppopec.com", SMTP_PASS: "x", MAIL_FROM: "Gruppo P&C <crm@gruppopec.com>" });
   const r2 = await redirectA(K.creaAppuntamento(fd({ clienteId: cli.id, utenteId: comm.id, dataOra: "2026-07-14T15:30", tipo: "SOPRALLUOGO", invitaCliente: "on", note: "citofono Rossi" })));
   verifica(r2?.includes("Invito inviato a pavel@gruppopec.com, mario@cliente.it"), "invito a commerciale e cliente", r2);
+  const evLead = await prisma.leadEvento.findMany({ where: { leadId: leadCli.id, tipo: "lead.esito" }, orderBy: { createdAt: "asc" } });
+  verifica(evLead.length === 2 && evLead[1].testo.startsWith("Appuntamento fissato") && evLead[1].testo.includes("\nNota: citofono Rossi"), "nella cronologia del contatto l'appuntamento fissato con la nota scritta nel calendario", evLead.map((e) => e.testo));
   const mPavel = posta.find((m) => m.a.includes("pavel@gruppopec.com"));
   verifica(mPavel && /METHOD:REQUEST/.test(mPavel.dati) && /text\/calendar/.test(mPavel.dati), "l'email del commerciale contiene l'invito di calendario");
   verifica(mPavel && /DTSTART:20260714T133000Z/.test(mPavel.dati.replace(/=\r\n/g, "")), "nell'invito le 15:30 di luglio (ora legale) = 13:30 UTC");

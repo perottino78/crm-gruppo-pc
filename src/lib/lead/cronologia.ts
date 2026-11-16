@@ -7,6 +7,7 @@ const NOMI_ESITI = Object.values(ESITI).map((e) => e.nome).sort((a, b) => b.leng
 const ALTRI: [RegExp, string][] = [
   [/^Annullato\b/i, "Appuntamento annullato"],
   [/^Da rifissare\b/i, "Appuntamento da rifissare"],
+  [/^Appuntamento fissato\b/i, "Appuntamento fissato"],
 ];
 
 const pulisci = (s: string) => s.replace(/^[\s—–\-·:,]+/, "").trim();

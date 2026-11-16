@@ -42,7 +42,7 @@ async function main() {
   verifica(l.fase === "NON_RISPONDE" && l.telefonistaId === cri.id && !!l.scadenzaAzione && !l.appuntamentoId, "lead di nuovo a Cristina («Non risponde», nuovo tentativo)", l);
   verifica(dopo.stato === "COMPLETATO" && dopo.esito?.includes("Non risponde"), "la telefonata in calendario resta svolta con l'esito", dopo);
   verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, taskLeadWhere(marco)] } }) === 0, "Marco non ce l'ha più tra i suoi task (torna a Cristina)");
-  verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, scopeLeadWhere(marco)] } }) === 1, "ma lo vede ancora, con la trafila: è il suo cliente");
+  verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, scopeLeadWhere(marco)] } }) === 0, "e non vede più la scheda del lead (solo il suo appuntamento)");
 
   console.log("4. Nuova chiamata: il commerciale fissa l'appuntamento a casa");
   g.__utente = cri;
