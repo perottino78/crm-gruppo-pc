@@ -614,6 +614,13 @@ login nel `matcher` del middleware.
   «🛰️ Foto dal satellite» = indirizzo del passo 1 → `GET /api/solaris/geocodifica` (Esri, riserva OpenStreetMap) → tessere Esri World Imagery da
   `GET /api/solaris/satellite?z&x&y` (zoom 20, se manca 19; solo sessione, niente DB), falda disegnata da sola e misure dai pixel (`P.mpp`); scatto
   automatico aprendo «Foto del tetto» e alla riapertura (`P.sat`; l'immagine non va in `statoJson`). Conti puri in `src/lib/solaris/satellite.ts`.
+  Con la chiave Google (Impostazioni › Google `#mappe`, `salvaChiaveMappe` la prova e la salva cifrata in `solaris_google_maps_key`, o env `GOOGLE_MAPS_API_KEY`;
+  `src/lib/solaris/google-mappe.ts`) la foto arriva da Maps Static API (`?fonte=google`, 1280 px, zoom 17–21) e `GET /api/solaris/tetto` chiede la falda
+  a Google Solar API (`faldeDaSolar`/`faldaMigliore`/`misureFalda`: angoli, inclinazione e orientamento da soli); senza chiave Esri. L'indirizzo all'uscita
+  dal campo dà il comune (`S.cityGps`, salvato) e la posizione (`S.addrPos`); alla riapertura `ripristinaCampi` rimette nome, indirizzo, località e scelte.
+  Come Reonic: al passo 1 mappa Leaflet (`#mappaCasa`, tessere `?fonte=gtile` = Google Map Tiles API con sessione creata dal server in `tesseraGoogle`, o Esri senza
+  chiave; `googleMappe` in `SOLARIS_INIT`) con il segnaposto 📍 da trascinare o toccare sul tetto (`puntoTetto` → `S.addrPos.manuale`, la foto del passo 2 riparte da lì).
+  Al passo 2 anche «🖥️ Cattura dallo schermo» (`getDisplayMedia`, come «Segnala un problema») e incolla con Ctrl/Cmd+V (`fotoDaImmagine` → `caricaFotoTetto`, vista dall'alto).
   Prodotti Stealth Energy (`src/lib/solaris/stealth.ts`, inverter ST-INV-S/T e batterie SP-HEV50…, prezzi a 0 da completare): creati da soli in
   `SolarisComponente` alla prima apertura dello Studio (`createMany skipDuplicates`); batterie scelte nello Studio (`S.battId`, moduli con `moduliPer`)
   e portate in offerta. Test `tests/solaris/`.
@@ -636,7 +643,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 405, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 407, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

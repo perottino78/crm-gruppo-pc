@@ -25,8 +25,34 @@ test("riquadro: le tessere coprono tutto il lato richiesto", () => {
 
 test("tessera valida: niente zoom o coordinate fuori misura", () => {
   assert.equal(tesseraValida(19, 272000, 188000), true);
-  assert.equal(tesseraValida(10, 1, 1), false);
+  assert.equal(tesseraValida(2, 1, 1), false);
+  assert.equal(tesseraValida(23, 1, 1), false);
   assert.equal(tesseraValida(19, -1, 5), false);
   assert.equal(tesseraValida(19, 2 ** 19, 5), false);
   assert.equal(tesseraValida(19.5, 1, 1), false);
+});
+
+import { faldeDaSolar, faldaMigliore, misureFalda, scartoDaSud } from "../../src/lib/solaris/satellite";
+
+const seg = (az: number, area: number, lat = 45.0849, lon = 7.4755, dLat = 0.00004, dLon = 0.00008) => ({
+  pitchDegrees: 25, azimuthDegrees: az, stats: { groundAreaMeters2: area },
+  center: { latitude: lat, longitude: lon },
+  boundingBox: { sw: { latitude: lat - dLat, longitude: lon - dLon }, ne: { latitude: lat + dLat, longitude: lon + dLon } },
+});
+
+test("Solar: falde lette e falda migliore verso sud", () => {
+  const f = faldeDaSolar({ solarPotential: { roofSegmentStats: [seg(0, 120), seg(180, 80), seg(90, 60), { stats: {} }] } });
+  assert.equal(f.length, 3);
+  assert.equal(faldaMigliore(f)!.azimut, 180); // la nord è più grande ma esclusa
+  assert.equal(faldaMigliore([])!, null);
+  assert.equal(scartoDaSud(200), 20);
+  assert.equal(scartoDaSud(10), 170);
+});
+
+test("Solar: misure di una falda rivolta a sud dal suo riquadro", () => {
+  // riquadro 2·0,00008° di longitudine ≈ 12,6 m, 2·0,00004° di latitudine ≈ 8,9 m → area 112 m²
+  const [f] = faldeDaSolar({ solarPotential: { roofSegmentStats: [seg(180, 112)] } });
+  const m = misureFalda(f);
+  assert.ok(Math.abs(m.larghezza - 12.6) < 0.3, String(m.larghezza));
+  assert.ok(Math.abs(m.profondita - 8.9) < 0.3, String(m.profondita));
 });

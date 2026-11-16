@@ -96,6 +96,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         </Link>
       )}
 
+      {puo(utenteCorrente, "calendario.google") && (
+        <Link href="/impostazioni/google#mappe" className="block bg-white rounded-lg border border-amber-300 px-4 py-3 mb-4 hover:border-amber-500">
+          <span className="text-base font-bold text-neutral-900">🛰️ Chiave Google per Solaris Studio →</span>
+          <span className="block text-xs text-neutral-600">Incolla qui la chiave API di Google: mappa e foto del tetto nitide come in Google Maps, falda riconosciuta da sola.</span>
+        </Link>
+      )}
+
 
       {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
         <Link href="/impostazioni/firme" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
