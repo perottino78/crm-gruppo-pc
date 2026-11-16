@@ -5,6 +5,7 @@
 import { PREFISSO_OPTIMA, DESCRIZIONE_CLIENTE_OPTIMA, CATALOGHI_OPTIMA } from "../listini/optima";
 import { SCHEDE_CHIRENTI } from "../listini/chirenti";
 import { PREFISSO_ZENITH, DESCRIZIONE_CLIENTE_ZENITH, CATALOGHI_ZENITH } from "../listini/zenith";
+import { PREFISSO_FIDRA, DESCRIZIONE_CLIENTE_FIDRA, CATALOGHI_FIDRA } from "../listini/fidra";
 import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
 
 export type SchedaCliente = {
@@ -28,6 +29,10 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
   {
     prefisso: PREFISSO_ZENITH,
     scheda: { chiave: "ZENITH", nome: CATALOGHI_ZENITH[0].nome, descrizione: DESCRIZIONE_CLIENTE_ZENITH, pdf: CATALOGHI_ZENITH[0].url, pagine: pagine("/cataloghi/zenith", 1) },
+  },
+  {
+    prefisso: PREFISSO_FIDRA,
+    scheda: { chiave: "FIDRA", nome: CATALOGHI_FIDRA[0].nome, descrizione: DESCRIZIONE_CLIENTE_FIDRA, pdf: CATALOGHI_FIDRA[0].url, pagine: pagine("/cataloghi/fidra", 2) },
   },
   // Plasma 30: stessa scheda per doppio e triplo vetro (stessa chiave: allegata una volta sola), descrizione diversa
   {

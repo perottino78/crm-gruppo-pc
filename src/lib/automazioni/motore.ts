@@ -56,6 +56,7 @@ const SEGRETO = process.env.SESSION_SECRET || "gpc-2026-session-secret-x7f2-camb
 export const firmaDisiscrizione = (leadId: string) => createHmac("sha256", SEGRETO).update(`disiscrivi:${leadId}`).digest("hex").slice(0, 24);
 export const linkDisiscrizione = (leadId: string) => `${APP_URL}/api/disiscrizione?l=${encodeURIComponent(leadId)}&t=${firmaDisiscrizione(leadId)}`;
 export const linkLead = (leadId: string) => `${APP_URL}/lead?id=${encodeURIComponent(leadId)}`;
+export const linkAppuntamento = (appuntamentoId: string) => `${APP_URL}/calendario/appuntamento/${encodeURIComponent(appuntamentoId)}`;
 
 export async function evento(db: Db, leadId: string, tipo: string, testo: string, utenteNome?: string | null) {
   await db.leadEvento.create({ data: { leadId, tipo, testo, utenteNome: utenteNome ?? null } });
@@ -258,7 +259,8 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
 
     /** Prepara, registra e spedisce l'email del passo. "RIPROVA" = non partita, riprogrammata o fermata. */
     const emailDelPasso = async (modello: string, destinatario: "CLIENTE" | "CENTRALINO" | "VENDITORE", variante?: string, extra: Partial<DatiLeadEmail> = {}): Promise<"FATTO" | "RIPROVA"> => {
-      const link = { lead: linkLead(lead.id), disiscrizione: linkDisiscrizione(lead.id) };
+      // al venditore il link porta al suo appuntamento (il lead della telefonista non lo vede: la pagina darebbe errore)
+      const link = { lead: destinatario === "VENDITORE" && lead.appuntamentoId ? linkAppuntamento(lead.appuntamentoId) : linkLead(lead.id), disiscrizione: linkDisiscrizione(lead.id) };
       const venditore = lead.venditoreId ? await prisma.utente.findUnique({ where: { id: lead.venditoreId }, select: { nome: true, telefono: true, email: true } }) : null;
       const promozione = extra.promozione ?? (modello === "lost-recovery-call-requested" ? await promozioneValida(ora()) : null);
       const dati = datiEmail(lead, venditore, { ...extra, promozione, adesso: ora() });

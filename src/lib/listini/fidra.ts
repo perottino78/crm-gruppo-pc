@@ -31,11 +31,18 @@ export function listiniFidra(tipologia: string): string[] {
   return ["FIDRA", t.portafinestra ? "FIDRA_PF" : "FIDRA_F", ...(tipologia === "FIDRA_W" ? ["FIDRA_WAS"] : [])];
 }
 
+/** Descrizione tecnica breve per il cliente, stampata nell'offerta sotto l'elenco puntato (dalla scheda tecnica Fidra, 16/11/2026). */
+export const DESCRIZIONE_CLIENTE_FIDRA =
+  "Serramento ibrido Fidra: struttura interna in PVC riciclato al 100% senza rinforzi in ferro e cover esterne in alluminio estruso, " +
+  "cornici in alluminio mono o bicolore con angoli saldati. Profilo minimale (nodo laterale 80 mm, centrale 85 mm) per più luce, " +
+  "vetrocamera stratificato di sicurezza 3+3 basso emissivo con gas argon, trasmittanza Uw 1,3 W/m²K. Finiture RAL ed effetti legno, anche bicolore.";
+
 export const GUIDA_FIDRA =
   "Prezzo dalla griglia del listino (misura uguale o subito superiore), già al cliente finale, colori standard compresi. " +
   "Meno di 3 pezzi nell'ordine (fissi: meno di 2): aggiungi il minimo di produzione. Misure speciali: chiedere fattibilità tecnica.";
 
 export const CATALOGHI_FIDRA = [
+  { nome: "Scheda tecnica Fidra", url: "/cataloghi/fidra/Fidra-scheda-tecnica.pdf" },
   { nome: "Brochure Fidra", url: "/cataloghi/fidra/Brochure-Fidra.pdf" },
   { nome: "Dispositivi Matter", url: "/cataloghi/fidra/Dispositivi-Matter.pdf" },
 ];
