@@ -23,7 +23,7 @@ const norm = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
 async function esegui(prova: boolean) {
   const brand = await prisma.brand.findUnique({ where: { nome: "Solaris" }, select: { id: true } });
   if (!brand) return { error: "marchio Solaris non trovato" };
-  const st = { voci: VOCI_SOLARIS_BC.length, prezziCreati: 0, prezziGiaPresenti: 0, modelliCreati: 0, modelliCompletati: 0, fornitoriAbbinati: 0, studioAggiornati: 0, studioGiaConPrezzo: 0, pannelliStudioCreati: 0, schedeStealthAggiornate: 0 };
+  const st = { voci: VOCI_SOLARIS_BC.length, prezziCreati: 0, prezziGiaPresenti: 0, modelliCreati: 0, modelliCompletati: 0, fornitoriAbbinati: 0, studioAggiornati: 0, studioGiaConPrezzo: 0, pannelliStudioCreati: 0, schedeStealthAggiornate: 0, pannelliStudioAggiornati: 0 };
 
   const fornitori = await prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, select: { id: true, ragioneSociale: true } });
   const fornitoreDi = (nome: string) => {
@@ -80,15 +80,19 @@ async function esegui(prova: boolean) {
     if (!prova) await prisma.solarisComponente.update({ where: { id: r.id }, data: { misureJson: c.misureJson as object, note: c.note } });
   }
 
-  // pannelli VDS di BConsole nel catalogo di Solaris Studio (solo se mancano, per nome)
-  const nomiPannelli = new Set((await prisma.solarisComponente.findMany({ where: { categoria: "PANNELLO" }, select: { nome: true } })).map((c) => c.nome));
+  // pannelli VDS di BConsole nel catalogo di Solaris Studio (per nome): creati se mancano, misure e scheda aggiornate (mai i prezzi)
+  const pannelliDb = await prisma.solarisComponente.findMany({ where: { categoria: "PANNELLO" }, select: { id: true, nome: true, misureJson: true } });
   for (const p of PANNELLI_STUDIO_BC) {
-    if (nomiPannelli.has(p.nome)) continue;
-    st.pannelliStudioCreati++;
-    if (!prova) await prisma.solarisComponente.create({ data: {
-      brandId: brand.id, categoria: "PANNELLO", nome: p.nome, potenzaW: p.potenzaW, prezzoVendita: p.vendita, costoAcquisto: p.costo,
-      misureJson: { w: p.w, h: p.h, spessoreMm: p.spessoreMm }, note: `Da BConsole (${p.codice}).${p.daConfermare ? " Misure indicative della famiglia VDS-S144/M6H: da confermare con la scheda tecnica." : ""}`,
-    } });
+    const misure = { w: p.w, h: p.h, spessoreMm: p.spessoreMm, specs: p.specs };
+    const note = `Da BConsole (${p.codice}).${p.daConfermare ? " Misure e peso della famiglia VDS-S144/M6H (scheda 430–450 W): il 460 W Total Black non è citato, da confermare." : ""}`;
+    const r = pannelliDb.find((x) => x.nome === p.nome);
+    if (!r) {
+      st.pannelliStudioCreati++;
+      if (!prova) await prisma.solarisComponente.create({ data: { brandId: brand.id, categoria: "PANNELLO", nome: p.nome, potenzaW: p.potenzaW, prezzoVendita: p.vendita, costoAcquisto: p.costo, misureJson: misure, note } });
+    } else if (canonico(r.misureJson) !== canonico(misure)) {
+      st.pannelliStudioAggiornati++;
+      if (!prova) await prisma.solarisComponente.update({ where: { id: r.id }, data: { misureJson: misure, note } });
+    }
   }
   return { ok: true, prova, ...st };
 }
