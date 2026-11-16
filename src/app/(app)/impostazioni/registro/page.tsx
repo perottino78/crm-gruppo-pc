@@ -10,7 +10,7 @@ import { ripristinaDalCestino } from "@/app/registro-actions";
 import BottoneConferma from "@/components/BottoneConferma";
 
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit" });
-const TIPO: Record<string, string> = { CAMPAGNA: "📣 Campagna", LEAD: "📞 Lead", CLIENTE: "👤 Cliente" };
+const TIPO: Record<string, string> = { CAMPAGNA: "📣 Campagna", LEAD: "📞 Lead", CLIENTE: "👤 Cliente", PREVENTIVO: "📄 Offerta" };
 const AZIONE: Record<string, string> = { ELIMINATO: "🗑 eliminato", RIPRISTINATO: "♻️ ripristinato" };
 
 export default async function RegistroPage({ searchParams }: { searchParams: Promise<{ ok?: string; errore?: string; q?: string }> }) {

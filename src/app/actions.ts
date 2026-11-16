@@ -4,6 +4,7 @@ import { puo } from "@/lib/permessi/catalogo";
 import { moduliPer } from "@/lib/solaris/stealth";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
+import { mettiNelCestino } from "@/lib/cestino";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { aliquotaIvaPerPaese } from "@/lib/pricing";
@@ -460,21 +461,36 @@ export async function eliminaPreventivo(formData: FormData) {
   const id = str(formData, "id");
   if (!id) return;
   const p = await prisma.preventivo.findUnique({ where: { id }, include: { progetto: true, commessa: true } });
-  if (!p) return;
+  if (!p) redirect("/preventivi");
   if (p.progetto || p.commessa) {
     redirect(`/preventivi/${id}?errore=${encodeURIComponent("Offerta con commessa/progetto collegato: non eliminabile, usa Archivia.")}`);
   }
-  await prisma.$transaction([
-    prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: id } } }),
-    prisma.rigaPreventivo.deleteMany({ where: { preventivoId: id } }),
-    prisma.sezionePreventivo.deleteMany({ where: { preventivoId: id } }),
-    prisma.promemoriaInviato.deleteMany({ where: { preventivoId: id } }),
-    prisma.preventivo.delete({ where: { id } }),
-  ]);
+  // Prima una copia nel cestino (30 giorni, si ripristina da Impostazioni › Registro e cestino), poi si elimina tutto
+  // quello che dipende dall'offerta: anche il progetto Solaris Studio, che prima bloccava l'eliminazione con un errore.
+  let errore: string | null = null;
+  try {
+    const u = await getCurrentUser();
+    await mettiNelCestino("PREVENTIVO", id, { id: u?.id, nome: u?.nome });
+    const solaris = await prisma.solarisProgetto.findMany({ where: { preventivoId: id }, select: { id: true } });
+    await prisma.$transaction([
+      prisma.solarisFoto.deleteMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }),
+      prisma.solarisProgetto.deleteMany({ where: { preventivoId: id } }),
+      prisma.emailOfferta.deleteMany({ where: { preventivoId: id } }),
+      prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: id } } }),
+      prisma.rigaPreventivo.deleteMany({ where: { preventivoId: id } }),
+      prisma.sezionePreventivo.deleteMany({ where: { preventivoId: id } }),
+      prisma.promemoriaInviato.deleteMany({ where: { preventivoId: id } }),
+      prisma.preventivo.delete({ where: { id } }),
+    ]);
+  } catch (e) {
+    console.error("eliminaPreventivo", e);
+    errore = `Eliminazione non riuscita: ${e instanceof Error ? e.message.split("\n").pop()?.slice(0, 200) : String(e)}`;
+  }
+  if (errore) redirect(`/preventivi/${id}?errore=${encodeURIComponent(errore)}`);
   revalidatePath("/preventivi");
   revalidatePath(`/clienti/${p.clienteId}`);
   revalidatePath(`/commerciali/${p.commercialeId}`);
-  redirect("/preventivi");
+  redirect(`/preventivi?ok=${encodeURIComponent("Offerta eliminata: resta nel cestino per 30 giorni (Impostazioni › Registro e cestino).")}`);
 }
 
 export async function creaPreventivo(formData: FormData) {

@@ -18,9 +18,9 @@ const COLONNE = [
 export default async function PreventiviPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string; archivio?: string; q?: string }>;
+  searchParams: Promise<{ brand?: string; archivio?: string; q?: string; ok?: string }>;
 }) {
-  const { brand, archivio, q } = await searchParams;
+  const { brand, archivio, q, ok } = await searchParams;
   const inArchivio = archivio === "1";
   const ricerca = q?.trim();
   await archiviaOfferteScadute();
@@ -61,6 +61,8 @@ export default async function PreventiviPage({
         </div>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
+
+      {ok && <p className="mb-4 rounded border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {ok}</p>}
 
       {/* Barra di ricerca preventivi */}
       <form action="" method="get" className="bg-white rounded-lg border border-neutral-200 p-3 mb-4 flex flex-col sm:flex-row gap-2">
