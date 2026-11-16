@@ -5,7 +5,6 @@ import { puoMarketing } from "@/lib/utenti/stato";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { svuotaCacheListino } from "@/lib/listini/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { listinoDiTipologia } from "@/lib/prodotti";
@@ -107,7 +106,6 @@ export async function applicaAumento(formData: FormData) {
   }, { timeout: 280000, maxWait: 20000 });
 
   revalidatePath("/prodotti");
-  svuotaCacheListino();
   redirect(`/prodotti/aumenti?fatto=${id}`);
 }
 
@@ -128,6 +126,5 @@ export async function annullaAumento(formData: FormData) {
     await tx.aumentoListino.update({ where: { id }, data: { annullatoIl: new Date(), annullatoDa: u.nome } });
   }, { timeout: 280000, maxWait: 20000 });
   revalidatePath("/prodotti");
-  svuotaCacheListino();
   redirect(`/prodotti/aumenti?annullato=${id}`);
 }

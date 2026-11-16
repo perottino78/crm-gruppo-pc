@@ -34,7 +34,6 @@ export async function praticheCliente(u: Pick<Utente, "ruolo">, clienteId: strin
     prisma.preventivo.findMany({
       where: { clienteId },
       orderBy: { createdAt: "desc" },
-      omit: { immagineCopertinaUrl: true },
       include: {
         brand: { select: { nome: true } },
         commerciale: { select: { nome: true } },

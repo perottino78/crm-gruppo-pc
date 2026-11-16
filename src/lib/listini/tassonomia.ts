@@ -1,7 +1,6 @@
 // Albero del listino per il selettore a tendine (Famiglia Indoor/Outdoor > Gruppo > [Sottogruppo] > Modello), lo stesso
 // dell'offerta: lo usano la pagina dell'offerta e la pratica (materiale da ordinare preso dal listino).
 import { prisma } from "@/lib/prisma";
-import { inMemoriaListino } from "./cache";
 import type { FamigliaNodo, NodoTipologia } from "@/components/SelettoreProdotto";
 import { haMisura, sottogruppoDiTipologia, labelBreveTipologia, notaInArrivo, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica } from "@/lib/prodotti";
 
@@ -68,7 +67,7 @@ export const GRUPPI_WSPOSA: Record<string, { gruppo: string; sottogruppo: string
   "Spese Magazzino": { gruppo: "Servizi", sottogruppo: "Spese Magazzino" },
 };
 
-async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
+export async function tassonomiaListino(brandId: string): Promise<FamigliaNodo[]> {
   const [tipologieMisure, modelliBrand, blindatiMisure] = await Promise.all([
     prisma.prodotto.groupBy({
       by: ["tipologia"],
@@ -276,10 +275,3 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
     }));
   return tassonomia;
 }
-
-/** Albero del listino di un marchio (5 minuti in memoria, vedi ./cache). */
-export const tassonomiaListino = (brandId: string) => inMemoriaListino(`tassonomia:${brandId}`, () => tassonomiaDalDatabase(brandId));
-
-/** Optional attivi del marchio, per l'offerta (5 minuti in memoria). */
-export const optionalAttiviDelMarchio = (brandId: string) =>
-  inMemoriaListino(`optional:${brandId}`, () => prisma.optional.findMany({ where: { brandId, attivo: true }, orderBy: [{ categoria: "asc" }, { nome: "asc" }] }));

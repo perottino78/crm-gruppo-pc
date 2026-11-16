@@ -2,7 +2,7 @@
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/chiamata-commerciale.collaudo.ts
 import { prisma } from "../../src/lib/prisma";
 import { esitoLead } from "../../src/app/lead-percorso-actions";
-import { scopeLeadWhere } from "../../src/lib/scope";
+import { scopeLeadWhere, taskLeadWhere } from "../../src/lib/scope";
 import { perInput } from "../../src/lib/calendario/tempo";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -41,7 +41,8 @@ async function main() {
   const dopo = await prisma.appuntamento.findUniqueOrThrow({ where: { id: chiamata!.id } });
   verifica(l.fase === "NON_RISPONDE" && l.telefonistaId === cri.id && !!l.scadenzaAzione && !l.appuntamentoId, "lead di nuovo a Cristina («Non risponde», nuovo tentativo)", l);
   verifica(dopo.stato === "COMPLETATO" && dopo.esito?.includes("Non risponde"), "la telefonata in calendario resta svolta con l'esito", dopo);
-  verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, scopeLeadWhere(marco)] } }) === 0, "Marco non ce l'ha più tra i suoi");
+  verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, taskLeadWhere(marco)] } }) === 0, "Marco non ce l'ha più tra i suoi task (torna a Cristina)");
+  verifica(await prisma.lead.count({ where: { AND: [{ id: lead.id }, scopeLeadWhere(marco)] } }) === 1, "ma lo vede ancora, con la trafila: è il suo cliente");
 
   console.log("4. Nuova chiamata: il commerciale fissa l'appuntamento a casa");
   g.__utente = cri;

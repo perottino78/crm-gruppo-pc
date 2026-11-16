@@ -60,7 +60,6 @@ export default async function DashboardPage({
     where: { ...brandFiltro, ...preventivoScope },
     take: 5,
     orderBy: { createdAt: "desc" },
-    omit: { immagineCopertinaUrl: true },
     include: { cliente: true },
   });
 

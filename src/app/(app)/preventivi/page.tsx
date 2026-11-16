@@ -42,9 +42,7 @@ export default async function PreventiviPage({
 
   const preventivi = await prisma.preventivo.findMany({
     where: { AND: [brandFiltro, preventivoScope, { archiviato: inArchivio }, ricercaWhere] },
-    // niente foto di copertina (data URI) nell'elenco: pesava sul traffico del database
-    omit: { immagineCopertinaUrl: true },
-    include: { cliente: true, commerciale: { select: { id: true, nome: true } } },
+    include: { cliente: true, commerciale: true },
     orderBy: { createdAt: "desc" },
   });
 

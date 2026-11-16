@@ -22,7 +22,6 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
     }),
     prisma.preventivo.findMany({
       where: { ...brandFiltro, ...scope, stato: "ACCETTATO", commessa: null },
-      omit: { immagineCopertinaUrl: true },
       include: { cliente: true, brand: true },
       orderBy: { createdAt: "desc" },
     }),

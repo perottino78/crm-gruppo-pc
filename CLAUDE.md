@@ -103,7 +103,10 @@ login nel `matcher` del middleware.
   Le email al VENDITORE (conferma, promemoria, annullato…) portano al suo appuntamento (`linkAppuntamento`, `/calendario/appuntamento/<id>`), non al lead:
   il commerciale con visibilità «suoi» non vede i lead della telefonista e la pagina dava errore (segnalazione di Bruno, 16/11/2026); i vecchi link
   `/lead?id=` (`/lead/[id]`): lead non visibile → appuntamento dell'utente per quel lead (`appuntamentoId` o il cliente nato dal lead), altrimenti scheda del lead
-  se è il venditore, altrimenti messaggio «Questo contatto non è fra i tuoi» (mai più pagina d'errore). Collaudo `appuntamenti` (21).
+  se è il venditore, altrimenti messaggio «Questo contatto non è fra i tuoi» (mai più pagina d'errore).
+  Visibilità dei lead per chi vede «solo i suoi» (Ugo 16/11/2026): `scopeLeadWhere` = lead di cui è telefonista O venditore (tutta la trafila);
+  nei «Task di oggi» (`taskLeadWhere`) al venditore arrivano solo le sue «chiamate con commerciale». «Appuntamenti senza esito» (`/lead/senza-esito`): chi ha
+  `calendario.tutti` (centralino, uffici) vede tutti, il commerciale solo i suoi (`utentiVisibili`); lead inesistente → «Contatto non trovato». Collaudo `appuntamenti` (21).
 - **Campagne email** (`/campagne`, `src/app/campagne-actions.ts`, `src/lib/campagne/`, AMMINISTRATORE o ufficio MARKETING):
   filtri marchio, stato (`Cliente.statoLead`, anche "senza stato"), tipo (`categoria` Lead/Cliente/Account), provenienza,
   commerciale, provincia; `{nome}` nel testo; prova; invio a blocchi da 40 (`CampagnaInvio`, unico per campagna+cliente: niente
@@ -604,9 +607,6 @@ login nel `matcher` del middleware.
   risponde 503 se il database non risponde (cron-job.org con «Notify me when the cronjob fails» avvisa). Collaudo `consumi-database` (10).
   **Da tenere a mente**: ogni nuova pagina/controllo deve leggere solo i campi che servono (`select`), mai data URI, HTML delle email, XML o file
   (`Documento.contenuto`) negli elenchi; dopo modifiche grosse guardare la pagina dei consumi.
-  Alleggerimenti fatti (16/11/2026): albero del listino e optional del marchio 5 minuti in memoria (`src/lib/listini/cache.ts` `inMemoriaListino`,
-  `tassonomiaListino`/`optionalAttiviDelMarchio`; `svuotaCacheListino()` in aumenti e scheda modello), `omit: { immagineCopertinaUrl: true }` (preview `omitApi`)
-  negli elenchi delle offerte (Preventivi, Dashboard, Commesse, scheda cliente), promemoria campagne con `select`.
 - **I miei progetti** (`/progetti`, richiesta di Ugo dopo la presentazione, nov 2026; `src/lib/progetti/miei.ts` puro e testato, `server.ts` `progettiDi`): il commerciale
   (visibilità PROPRI; chi vede di più ha la tendina dei commerciali e il titolo «Progetti dei clienti») vede tutte le commesse dei suoi clienti con le tappe del flusso
   (`Stepper` di `components/clienti/PraticaCard.tsx` + `passiPratica`), «Adesso: fase · ufficio», consegna prevista col semaforo (`semaforoConsegna`: scaduta, entro 7 giorni,
@@ -640,13 +640,6 @@ login nel `matcher` del middleware.
   e portate in offerta. Pannelli sulla foto alla misura vera (`postiFalda`: falda P.w × P.l in metri, margine 30 cm, fughe 2 cm, verticali o
   orizzontali `P.orient`): i posti liberi tratteggiati, quelli scelti in `P.celle` («fila,colonna», dalla grondaia e dal centro, `ordinePosti`); il numero
   resta quello scelto o «Dimensiona sui consumi» (`P.voluti`, limitato ai posti della falda) e un tocco sulla foto aggiunge o toglie il singolo pannello.
-  «← Torna al preventivo» (`src/lib/solaris/porta-in-offerta.ts` `portaSolarisInOfferta`, rotta `POST /api/solaris/progetto/[id]/offerta`, anche «↓ Importa nel
-  preventivo»): salva subito lo Studio (`salvaOra`), porta le righe ☀️ (pannelli anche di serie non a catalogo, nome/prezzo dallo Studio; inverter, batteria a moduli,
-  installazione, kit) sostituendo quelle portate prima (niente doppioni, spunta della scheda tenuta per tipo) e la foto del tetto con i pannelli in copertina
-  (`SolarisFoto` tipo OFFERTA servita da `GET /api/solaris/foto/<id>`, pubblica solo per quel tipo; un render messo a mano non si tocca). Schede tecniche del
-  fotovoltaico dai dati dello Studio (`statoJson.schedeOfferta`, `src/lib/solaris/schede-offerta.ts`): come gli altri listini, spunta «📄 Allega la scheda tecnica» sulle
-  righe pannello/inverter/batteria → in fondo all'offerta stampata (`components/preventivi/SchedeSolaris.tsx`), altrimenti solo dal link `/preventivi/[id]/schede-solaris`.
-  Totali dell'offerta in `src/lib/preventivi/totali.ts`. Test `tests/solaris/porta-in-offerta.test.ts`, collaudo `solaris-offerta` (14).
   Test `tests/solaris/`.
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
@@ -667,13 +660,13 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 414, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 410, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest npx prisma db push --skip-generate
 DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/<nome>.collaudo.ts
-# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (21), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto), campagne-ripresa (7, SMTP finto), esiti-appuntamenti (12), campagne-ab (19, SMTP finto), chirenti (11), google (27, Google simulato), nextcloud (16), brevo (18, due SMTP finti e API finta), cestino (13), kit-cliente (22), campagne-escludi (5, SMTP finto), elimina-offerta (6), zenith-optional (6), consumi-database (10, Neon simulata e SMTP finto), solaris-offerta (14)
+# <nome>: conferma (17), magazzino (33), ordini (43), articoli (48), calendario (16, con server SMTP finto), utenti (18), clienti (11), campagne (9), aumenti (15), fornitori-modelli (5), automazioni (23, SMTP finto e orologio simulato), appuntamenti (21), recupero (13), campagne-email (34), posta (17, tre server SMTP finti), fornitore-alternativo (15), team (26), fatture-incassi (32), posta-tls (13, server SMTP con certificati veri), contabilita-bconsole (19), marketing (20, SMTP finto), calendario-telefono (13, SMTP finto), permessi (17), tracciamento (15, SMTP finto), rimbalzi (13, SMTP finto e casella simulata), invia-offerta (21, SMTP finto), provvigioni (24), comunicazioni (16, SMTP finto), storico-bconsole (5), documenti-bconsole (6), trafila-incassi (11), presa-in-carico-bc (9), file-acquisti-bc (5), telefoniste (20), moduli-meta (28), dopo-appuntamento (13), isomax-luce (5), rasomuro (11), fidra (8), porte-vetro (6), tempra (6), pedane (5), pavimenti-galleggianti (7), lattoneria (12), taglio-freddo (11), rilievo-complementi (21), ordine-da-rilievo (30, SMTP finto), progetti (14), kit (15), appuntamenti-bconsole (12), riordino-appuntamenti (15), chiamata-commerciale (11), fatturazione (29), svolta-appuntamenti (14), switch-keap (12), lead-clienti (12), prima-nota-chi (9), preventivi-nuovo (8), preventivi-righe (13), servizi-obiettivi (25), optima (9), plasma30 (10), rocco-calendario (20), scheda-cliente (14, SMTP finto), segnalazioni (15, SMTP finto), campagne-ripresa (7, SMTP finto), esiti-appuntamenti (12), campagne-ab (19, SMTP finto), chirenti (11), google (27, Google simulato), nextcloud (16), brevo (18, due SMTP finti e API finta), cestino (13), kit-cliente (22), campagne-escludi (5, SMTP finto), elimina-offerta (6), zenith-optional (6), consumi-database (10, Neon simulata e SMTP finto)
 ```
 `tests/collaudo/registra.cjs` sostituisce sessione e cache di Next: l'utente simulato si imposta con `globalThis.__utente`.
 

@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { appuntamentiSenzaEsito, regoleEsiti } from "@/lib/appuntamenti/esiti-server";
+import { utentiVisibili } from "@/lib/scope";
 
 const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
@@ -15,7 +16,9 @@ export default async function SenzaEsitoPage() {
   if (!u) redirect("/login");
   if (!puo(u, "lead")) redirect("/");
   const r = await regoleEsiti();
-  const lista = await appuntamentiSenzaEsito({ giorni: r.giorniLista, regole: r });
+  // il commerciale vede solo i suoi appuntamenti (il responsabile di zona quelli della zona), il centralino tutti
+  const visibili = puo(u, "calendario.tutti") ? null : utentiVisibili(u);
+  const lista = (await appuntamentiSenzaEsito({ giorni: r.giorniLista, regole: r })).filter((a) => !visibili || visibili.includes(a.utenteId));
   const perUtente = new Map<string, typeof lista>();
   for (const a of lista) perUtente.set(a.utente, [...(perUtente.get(a.utente) ?? []), a]);
   return (

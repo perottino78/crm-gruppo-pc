@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { scopeLeadWhere } from "@/lib/scope";
+import { scopeLeadWhere, taskLeadWhere } from "@/lib/scope";
 import { chiaveGiorno, inizioGiorno, aggiungiGiorni } from "@/lib/calendario/tempo";
 import { FASI_LEAD, FASI_APERTE } from "@/lib/automazioni/percorsi";
 import { statoAutomazioni } from "@/lib/automazioni/motore";
@@ -60,7 +60,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const senzaVisitePassate: Prisma.LeadWhereInput = { NOT: { fase: { in: VISITE }, scadenzaAzione: { lt: inizioOggi } } };
   // «chiamata con commerciale»: il task è del commerciale che chiama, non della telefonista
   const soloLeChiamateMie: Prisma.LeadWhereInput = u ? { NOT: { fase: "APPUNTAMENTO_TELEFONICO", OR: [{ venditoreId: null }, { venditoreId: { not: u.id } }] } } : {};
-  const base = [scope, aperti, senzaVisitePassate, soloLeChiamateMie];
+  const base = [scope, aperti, senzaVisitePassate, soloLeChiamateMie, ...(u ? [taskLeadWhere(u)] : [])];
   const dOggi: Prisma.LeadWhereInput = { OR: [{ scadenzaAzione: null }, { scadenzaAzione: { gte: inizioOggi, lt: fineOggi } }] };
   const dScaduti: Prisma.LeadWhereInput = { scadenzaAzione: { lt: inizioOggi } };
   const dProgramma: Prisma.LeadWhereInput = { scadenzaAzione: { gte: fineOggi } };
