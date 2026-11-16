@@ -29,7 +29,9 @@ test("commessa con task di rilievo aperto: fasi precedenti fatte", () => {
     fasi,
   });
   assert.equal(r.esito, "IN_CORSO");
-  assert.deepEqual(r.passi.map((p) => p.stato), ["fatto", "fatto", "fatto", "corrente", "futuro", "futuro", "futuro", "futuro"]);
+  const iR = r.passi.findIndex((p) => p.chiave === "RILIEVO");
+  assert.ok(iR > 2, "il rilievo viene dopo accettazione, acconto, incasso e appuntamento");
+  assert.deepEqual(r.passi.map((p, i) => (i < iR ? "fatto" : i === iR ? "corrente" : "futuro")), r.passi.map((p) => p.stato));
   assert.equal(r.corrente?.chiave, "RILIEVO");
 });
 

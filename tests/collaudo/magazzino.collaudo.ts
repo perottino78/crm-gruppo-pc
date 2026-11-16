@@ -77,8 +77,8 @@ async function main() {
   verifica(A2.arrivato && A2.quantitaArrivata === 2 && B2.arrivato, "tutte le righe arrivate");
   verifica((await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: ord.id } })).stato === "EVASO", "ordine fornitore evaso");
   verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).materialeCompletoIl, "commessa con materiale completo");
-  const task = await prisma.taskPratica.findMany({ where: { commessaId: c.id, faseChiave: "MATERIALE_COMPLETO" } });
-  verifica(task.length === 2 && task.some((t) => t.ufficio === "FATTURAZIONE") && task.some((t) => t.ufficio === "POSA"), "attività di fatturazione saldo e posa create");
+  const task = await prisma.taskPratica.findMany({ where: { commessaId: c.id, faseChiave: { in: ["MATERIALE_COMPLETO", "POSA_APP"] } } });
+  verifica(task.length === 2 && task.some((t) => t.ufficio === "FATTURAZIONE") && task.some((t) => t.ufficio === "CENTRALINO"), "task di saldo (fatturazione) e di posa (centralino) creati");
   verifica((await prisma.bollaEntrata.findUniqueOrThrow({ where: { id: b2.id } })).stato === "DA_FATTURARE", "bolla 2 da fatturare");
 
   console.log("5. Scorte: carico, impegno e prelievo per un'altra commessa");

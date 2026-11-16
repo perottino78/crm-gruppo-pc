@@ -8,7 +8,9 @@ import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale } from "@/app/flusso-actions";
+import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale, chiudiTaskFase } from "@/app/flusso-actions";
+import { inviaMailPratica, ringraziaPagamentoAcconto } from "@/lib/pratica/mail-cliente-server";
+import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
@@ -274,6 +276,7 @@ export async function registraIncassoAcconto(formData: FormData) {
   await log(id, `Acconto incassato: ${importo.toFixed(2)} €${modalita ? " (" + modalita + ")" : ""}. Rilievo sbloccato.`);
   await ricalcolaStato(id);
   await avanzaDopoIncasso(id);
+  await ringraziaPagamentoAcconto(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
 }
@@ -334,6 +337,10 @@ export async function programmaRilievo(formData: FormData) {
   await log(commessaId, `Rilievo programmato il ${dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome" })} con ${r.tecnico.nome}.`);
   const inv = await inviaInvito(`RILIEVO:${r.id}`);
   if (inv.inviati.length) await log(commessaId, `Invito calendario inviato a ${inv.inviati.join(", ")}.`);
+  // flusso: il centralino fissa il rilievo → mail al cliente e il task passa al rilevatore scelto
+  const quando = dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+  await inviaMailPratica(commessaId, "rilievo fissato", (d) => mailRilievoFissato({ ...d, quando, tecnico: r.tecnico.nome, indirizzo: indirizzo || null }));
+  await chiudiTaskFase(commessaId, "RILIEVO_APP", { id: r.tecnico.id, nome: r.tecnico.nome });
   await ricalcolaStato(commessaId);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/commesse");
@@ -390,6 +397,8 @@ export async function caricaRilievo(formData: FormData) {
   }
   await log(r.commessaId, `Rilievo eseguito e caricato${foto.length ? ` (${foto.length} file tra foto e PDF)` : ""}${aggiunti.length ? `; materiale aggiunto (solo acquisto): ${aggiunti.join("; ")}` : ""}.`);
   await ricalcolaStato(r.commessaId);
+  // flusso: rilievo eseguito → il task passa all'ufficio ordini (Laura)
+  await chiudiTaskFase(r.commessaId, "RILIEVO");
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
   const fatto = `Rilievo salvato${foto.length ? `: ${foto.length} file` : ""}${aggiunti.length ? `, ${aggiunti.length} materiali aggiunti` : ""}.`;
@@ -744,6 +753,10 @@ export async function programmaPosa(formData: FormData) {
   await log(commessaId, `Posa programmata dal ${dataInizio.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })} (${giorni} gg) — ${ass.tipo === "ESTERNA" ? "posatore esterno" : "squadra interna"}${ass.assegnatoNome ? ": " + ass.assegnatoNome : ""}.`);
   const invP = await inviaInvito(`POSA:${nuovaPosa.id}`);
   if (invP.inviati.length) await log(commessaId, `Invito calendario della posa inviato a ${invP.inviati.join(", ")}.`);
+  // flusso: il centralino fissa la posa → mail al cliente (come far trovare l'ambiente di lavoro, conferma della data) e il task passa alla squadra
+  const quandoPosa = dataInizio.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+  await inviaMailPratica(commessaId, "posa fissata", (d) => mailPosaFissata({ ...d, quando: quandoPosa, giorni: giorni, squadra: ass.assegnatoNome, indirizzo: indirizzo || null }));
+  await chiudiTaskFase(commessaId, "POSA_APP", ass.assegnatoUtenteId && ass.assegnatoNome ? { id: ass.assegnatoUtenteId, nome: ass.assegnatoNome } : null);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/lavori");
   revalidatePath("/calendario");
@@ -843,8 +856,21 @@ export async function completaPosa(formData: FormData) {
       data: { stato: "CHIUSA", ore, costoOrario, forfait, costoTotale, chiusaIl: new Date(), chiusaDaNome: u.nome, assegnatoNome: fase.assegnatoNome ?? p.assegnatoNome, note: esterna ? `Fattura squadra esterna${fattNumero ? " n. " + fattNumero : ""}` : fase.note },
     });
   }
-  await prisma.commessa.update({ where: { id: p.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
-  await log(p.commessaId, `Posa completata da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
+  // flusso: il centralino carica i documenti di fine lavori e segna la posa. Completa → lavori eseguiti, recensione al cliente e task kit al commerciale.
+  // Parziale → la pratica resta in posa, al cliente le scuse e il centralino fissa un'altra data.
+  const parziale = str(formData, "esitoPosa") === "PARZIALE";
+  if (!parziale) await prisma.commessa.update({ where: { id: p.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
+  await log(p.commessaId, `Posa ${parziale ? "PARZIALE (da completare)" : "completata"} da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
+  await chiudiTaskFase(p.commessaId, "POSA");
+  if (parziale) {
+    await inviaMailPratica(p.commessaId, "posa parziale: scuse", (d) => mailPosaParziale({ ...d, note: str(formData, "noteFine") }));
+    await prisma.taskPratica.create({ data: { commessaId: p.commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: "Posa parziale: fissare un'altra data per finire il lavoro", descrizione: `Posa non conclusa. Note: ${str(formData, "noteFine") ?? "—"}. Fissare un nuovo giorno con la squadra (sezione Posa).`, creatoDa: u.nome } });
+  } else {
+    const inviata = await inviaMailPratica(p.commessaId, "lavoro terminato: richiesta di recensione", (d) => mailPosaCompletata({ ...d, linkRecensione: process.env.RECENSIONI_URL || undefined }));
+    if (inviata) await prisma.commessa.update({ where: { id: p.commessaId }, data: { recensioneRichiestaIl: new Date() } });
+    // il commerciale riceve il task (e la mail di avviso) per consegnare il kit di manutenzione
+    await avviaFaseFlusso(p.commessaId, "KIT", "POSA", u.nome);
+  }
   revalidatePath(`/commesse/${p.commessaId}`);
   revalidatePath("/lavori");
 }
@@ -1371,10 +1397,12 @@ export async function creaProgetto(formData: FormData) {
   if (p.progettoCreatoIl) torna("pok=" + encodeURIComponent("Il progetto è già stato creato."));
   if (!p.viaLibera) torna("pav=" + encodeURIComponent("Il progetto si crea dopo l'incasso dell'acconto (o il finanziamento approvato)."));
   await prisma.commessa.update({ where: { id }, data: { progettoCreatoIl: new Date(), progettoCreatoDaNome: utente.nome } });
-  await log(id, `Progetto creato da ${utente.nome}: ora si fissa il rilievo.`);
+  await log(id, `Progetto creato da ${utente.nome}: ora il centralino fissa il rilievo.`);
+  // flusso: l'amministrazione crea il progetto → il task passa al centralino per fissare il rilievo
+  await chiudiTaskFase(id, "PROGETTO");
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
-  torna("pok=" + encodeURIComponent("Progetto creato: fissa l'appuntamento di rilievo."));
+  torna("pok=" + encodeURIComponent("Progetto creato: il task è arrivato al centralino per fissare il rilievo."));
 }
 
 /** «Conferma materiale»: rilievo caricato e righe con il fornitore → si sbloccano gli ordini; chiude il task del rilievo e avvisa l'ufficio ordini. */
@@ -1390,9 +1418,7 @@ export async function confermaMaterialeProgetto(formData: FormData) {
   if (!p.puoConfermare) torna("pav=" + encodeURIComponent("Per confermare servono il rilievo caricato e tutte le righe del materiale con il fornitore."));
   await prisma.commessa.update({ where: { id }, data: { materialeConfermatoIl: new Date(), materialeConfermatoDaNome: utente.nome } });
   await log(id, `Materiale confermato da ${utente.nome}: si può ordinare ai fornitori.`);
-  // il task del rilievo si chiude e parte quello dell'ufficio ordini (flusso fra uffici)
-  const aperto = await prisma.taskPratica.findFirst({ where: { commessaId: id, faseChiave: "RILIEVO", completatoIl: null, stato: { notIn: ["COMPLETATO", "ANNULLATO", "ESEGUITO"] } }, select: { id: true } });
-  if (aperto) { const fd = new FormData(); fd.set("taskId", aperto.id); await fattoTask(fd); }
+  // (il task del rilievo si è già chiuso al caricamento del rilievo: l'ufficio ordini ha il suo)
   revalidatePath(`/commesse/${id}`);
   torna("pok=" + encodeURIComponent("Materiale confermato: ora puoi creare gli ordini ai fornitori."));
 }

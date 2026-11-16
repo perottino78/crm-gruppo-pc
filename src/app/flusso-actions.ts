@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
+import { ringraziaPagamentoAcconto } from "@/lib/pratica/mail-cliente-server";
 import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_CHIUSI, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 
@@ -16,10 +17,13 @@ function str(fd: FormData, key: string): string | null {
 // Garantisce che le fasi di default esistano (prima lettura)
 export async function assicuraFlusso() {
   if (!(await getCurrentUser())) return;
-  const n = await prisma.flussoFase.count();
-  if (n > 0) return;
+  const esistenti = new Set((await prisma.flussoFase.findMany({ select: { chiave: true } })).map((f) => f.chiave));
+  // di partenza tutte le fasi; poi solo quelle che mancano (le fasi già modificate dall'amministratore non si toccano)
+  const mancanti = FASI_DEFAULT.map((f, i) => ({ f, i })).filter(({ f }) => !esistenti.has(f.chiave));
+  if (!mancanti.length) return;
   await prisma.flussoFase.createMany({
-    data: FASI_DEFAULT.map((f, i) => ({
+    skipDuplicates: true,
+    data: mancanti.map(({ f, i }) => ({
       chiave: f.chiave, ordine: i + 1, nome: f.nome, ufficio: f.ufficio, prossimaChiave: f.prossimaChiave,
       taskAttivo: true, taskTitolo: f.taskTitolo, taskTesto: f.taskTesto,
       mailAttiva: f.mailAttiva ?? false, mailQuando: f.mailQuando ?? "FATTO", mailDestinatario: f.mailDestinatario ?? "CLIENTE",
@@ -46,6 +50,8 @@ async function variabili(commessaId: string, ufficioPrec?: string | null) {
 export async function avviaFaseFlusso(commessaId: string, chiave: string, daUfficio?: string | null, creatoDa?: string | null) {
   if (!(await getCurrentUser())) return;
   await assicuraFlusso();
+  // la fattura d'acconto (Giorgia) e l'incasso con la creazione del progetto (Debora) partono insieme
+  if (chiave === "FATT_ACCONTO" && !(await prisma.commessa.findUnique({ where: { id: commessaId }, select: { ordineBC: true } }))?.ordineBC) await avviaFaseFlusso(commessaId, "PROGETTO", daUfficio, creatoDa);
   const f = await prisma.flussoFase.findUnique({ where: { chiave } });
   if (!f) return;
   const ctx = await variabili(commessaId, daUfficio);
@@ -93,6 +99,7 @@ async function completa(taskId: string, stato: string) {
   });
   await prisma.commessaEvento.create({ data: { commessaId: t.commessaId, utenteNome: u.nome, testo: `Task "${t.titolo}" (${nomeUfficio(t.ufficio)}): ${STATI_TASK.find((s) => s.chiave === stato)?.nome ?? stato}.` } });
   if (avanza && t.faseChiave) {
+    await assicuraFlusso();
     const f = await prisma.flussoFase.findUnique({ where: { chiave: t.faseChiave } });
     if (f) {
       if (f.mailAttiva && f.mailQuando === "FATTO") {
@@ -136,13 +143,15 @@ export async function avanzaDopoIncasso(commessaId: string, quando: Date = new D
   const giorno = quando.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
   if (pagato > 0.5 && !c.accontoIncassato && c.accontoTipo !== "FINANZIAMENTO") {
     await prisma.commessa.update({ where: { id: commessaId }, data: { accontoIncassato: true, accontoIncassatoIl: quando, accontoImportoIncassato: Math.round(Math.min(pagato, c.accontoImporto || pagato) * 100) / 100 } });
+    await ringraziaPagamentoAcconto(commessaId);
   }
   const tutto = c.totaleVendita > 0 && pagato >= c.totaleVendita - 0.5;
   const chiuse: string[] = [];
   for (const t of c.tasks) {
-    const daChiudere = (t.faseChiave === "FATT_ACCONTO" && (pagato > 0.5 || c.accontoIncassato)) || (t.faseChiave === "FATT_SALDO" && tutto);
+    // la fattura d'acconto la chiude Giorgia (Fatturazione); l'incasso lo segna l'amministrazione e il task «incasso e progetto» si chiude con «Crea progetto»
+    const daChiudere = (t.faseChiave === "FATT_SALDO" || (t.faseChiave === "MATERIALE_COMPLETO" && t.ufficio === "FATTURAZIONE")) && tutto;
     if (!daChiudere) continue;
-    const nota = t.faseChiave === "FATT_SALDO" ? `Saldo incassato il ${giorno}: fase chiusa in automatico.` : `Acconto incassato il ${giorno}: fase chiusa in automatico.`;
+    const nota = `Saldo incassato il ${giorno}: fase chiusa in automatico.`;
     await prisma.taskPratica.update({ where: { id: t.id }, data: { descrizione: [t.descrizione, nota].filter(Boolean).join("\n\n") } });
     await completa(t.id, "COMPLETATO");
     chiuse.push(t.titolo);
@@ -326,4 +335,17 @@ async function spedisciMailTask(taskId: string, chi: string | null): Promise<str
   });
   if (esito.inviata) await prisma.taskPratica.update({ where: { id: taskId }, data: { mailInviataIl: new Date() } });
   return t.commessaId;
+}
+
+/** Chiude il task aperto di una fase della pratica (se c'è) e fa partire la fase successiva del flusso. */
+export async function chiudiTaskFase(commessaId: string, faseChiave: string, assegnaProssimoA?: { id: string; nome: string } | null): Promise<boolean> {
+  const t = await prisma.taskPratica.findFirst({ where: { commessaId, faseChiave, completatoIl: null, stato: { notIn: STATI_CHIUSI } }, orderBy: { createdAt: "asc" }, select: { id: true } });
+  if (!t) return false;
+  const prima = new Date();
+  await completa(t.id, "COMPLETATO");
+  // il task che nasce (es. rilievo) si assegna a una persona precisa (il rilevatore scelto dal centralino)
+  if (assegnaProssimoA) {
+    await prisma.taskPratica.updateMany({ where: { commessaId, createdAt: { gte: prima }, completatoIl: null, assegnatoUtenteId: null }, data: { assegnatoUtenteId: assegnaProssimoA.id, assegnatoNome: assegnaProssimoA.nome } });
+  }
+  return true;
 }

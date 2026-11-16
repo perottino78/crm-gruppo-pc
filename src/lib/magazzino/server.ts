@@ -139,13 +139,15 @@ export async function verificaMaterialeCommessa(tx: Tx, commessaId: string, nome
     if (!c.saldoIncassato) {
       await tx.taskPratica.create({ data: { commessaId, faseChiave: "MATERIALE_COMPLETO", ufficio: "FATTURAZIONE", titolo: "Materiale completo: fattura saldo e incasso", descrizione: `Commessa ${nr} di ${c.cliente.nome}: tutto il materiale è in magazzino. Emettere la fattura di saldo e registrare l'incasso prima dell'uscita del materiale.`, creatoDa: "Magazzino" } });
     }
-    await tx.taskPratica.create({ data: { commessaId, faseChiave: "MATERIALE_COMPLETO", ufficio: "POSA", titolo: "Materiale completo: programmare la posa", descrizione: `Commessa ${nr} di ${c.cliente.nome}: materiale completo${c.saldoIncassato ? " e saldo già incassato" : " (la conferma del giorno arriva con il saldo incassato)"}. Programmare la posa.`, creatoDa: "Magazzino" } });
+    // flusso: il task del magazzino si chiude e il centralino (Alessia) fissa la posa con la squadra competente
+    await tx.taskPratica.updateMany({ where: { commessaId, faseChiave: "MAGAZZINO", completatoIl: null, stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] } }, data: { stato: "COMPLETATO", completatoIl: new Date(), completatoDaNome: nome } });
+    await tx.taskPratica.create({ data: { commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: "Materiale completo: fissare la posa con la squadra", descrizione: `Pratica ${nr} di ${c.cliente.nome}: materiale completo${c.saldoIncassato ? " e saldo già incassato" : " (la conferma del giorno arriva con il saldo incassato)"}. Nella pratica, sezione Posa: scegli la squadra e il giorno; parte la mail al cliente.`, creatoDa: "Magazzino" } });
     return "COMPLETO";
   }
   if (!completo && c.materialeCompletoIl) {
     await tx.commessa.update({ where: { id: commessaId }, data: { materialeCompletoIl: null } });
     await tx.commessaEvento.create({ data: { commessaId, utenteNome: nome, testo: "Materiale non più completo (bolla stornata o riga riaperta)." } });
-    await tx.taskPratica.updateMany({ where: { commessaId, faseChiave: "MATERIALE_COMPLETO", stato: "DA_INIZIARE" }, data: { stato: "ANNULLATO" } });
+    await tx.taskPratica.updateMany({ where: { commessaId, faseChiave: { in: ["MATERIALE_COMPLETO", "POSA_APP"] }, stato: "DA_INIZIARE" }, data: { stato: "ANNULLATO" } });
     return "RIAPERTO";
   }
   return null;

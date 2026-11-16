@@ -47,7 +47,9 @@ async function main() {
   const ril = await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } });
   p = (await percorsoDiCommessa(c.id))!;
   verifica(p.etichetta === "Carica i rilievi", "rilievo fissato", p.etichetta);
+  await prisma.taskPratica.create({ data: { commessaId: c.id, faseChiave: "RILIEVO", ufficio: "TECNICO", titolo: "Eseguire il rilievo" } });
   await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));
+  verifica(!!(await prisma.taskPratica.findFirstOrThrow({ where: { faseChiave: "RILIEVO" } })).completatoIl && !!(await prisma.taskPratica.findFirst({ where: { faseChiave: "ORDINI", ufficio: "ORDINI" } })), "rilievo caricato: task del tecnico chiuso e task all'ufficio ordini");
 
   console.log("4. Prodotti e materiale; gli ordini sono bloccati");
   await dove(C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "T", descrizione: "Coprifilo 70 mm", quantita: "4" })));
@@ -62,12 +64,9 @@ async function main() {
   const rOrd0 = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: righe.map((r) => r.id) })));
   verifica(rOrd0?.includes("avviso=") && (await prisma.ordineFornitore.count()) === 0, "senza conferma non si crea nessun ordine", rOrd0);
 
-  console.log("5. Conferma materiale: si sbloccano gli ordini e il flusso passa all'ufficio ordini");
-  await prisma.taskPratica.create({ data: { commessaId: c.id, faseChiave: "RILIEVO", ufficio: "TECNICO", titolo: "Eseguire il rilievo" } });
+  console.log("5. Conferma materiale: si sbloccano gli ordini");
   const rConf = await dove(C.confermaMaterialeProgetto(fd({ commessaId: c.id })));
   verifica(rConf?.includes("pok="), "materiale confermato", rConf);
-  const tRil = await prisma.taskPratica.findFirstOrThrow({ where: { faseChiave: "RILIEVO" } });
-  verifica(!!tRil.completatoIl, "task del rilievo chiuso");
   p = (await percorsoDiCommessa(c.id))!;
   verifica(!p.ordiniBloccati && p.etichetta === "Da ordinare", "ordini sbloccati", p.etichetta);
   const rOrd = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: righe.map((r) => r.id) })));

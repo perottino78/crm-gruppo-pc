@@ -840,6 +840,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                     <summary className="text-xs font-semibold text-green-800 cursor-pointer">Fine lavori: verbale, firma e costo</summary>
                     <form action={completaPosa} className="mt-2 space-y-2">
                       <input type="hidden" name="posaId" value={p.id} />
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-900 bg-neutral-50 border border-neutral-200 rounded p-2">
+                        <span className="font-bold">Come è finita la posa?</span>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="COMPLETA" defaultChecked /> Finita: al cliente la richiesta di recensione, il commerciale porta il kit</label>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale: al cliente le scuse, si fissa un&apos;altra data</label>
+                      </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
                       <FotoRilievo name="foto" />
                       <input name="nomeFirmatario" placeholder="Nome di chi firma" className={`${inp} w-64`} />
