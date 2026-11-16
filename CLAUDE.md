@@ -103,7 +103,10 @@ login nel `matcher` del middleware.
   Le email al VENDITORE (conferma, promemoria, annullato…) portano al suo appuntamento (`linkAppuntamento`, `/calendario/appuntamento/<id>`), non al lead:
   il commerciale con visibilità «suoi» non vede i lead della telefonista e la pagina dava errore (segnalazione di Bruno, 16/11/2026); i vecchi link
   `/lead?id=` (`/lead/[id]`): lead non visibile → appuntamento dell'utente per quel lead (`appuntamentoId` o il cliente nato dal lead), altrimenti scheda del lead
-  se è il venditore, altrimenti messaggio «Questo contatto non è fra i tuoi» (mai più pagina d'errore). Collaudo `appuntamenti` (21).
+  se è il venditore, altrimenti messaggio «Questo contatto non è fra i tuoi» (mai più pagina d'errore).
+  Visibilità dei lead per chi vede «solo i suoi» (Ugo 16/11/2026): `scopeLeadWhere` = lead di cui è telefonista O venditore (tutta la trafila);
+  nei «Task di oggi» (`taskLeadWhere`) al venditore arrivano solo le sue «chiamate con commerciale». «Appuntamenti senza esito» (`/lead/senza-esito`): chi ha
+  `calendario.tutti` (centralino, uffici) vede tutti, il commerciale solo i suoi (`utentiVisibili`); lead inesistente → «Contatto non trovato». Collaudo `appuntamenti` (21).
 - **Campagne email** (`/campagne`, `src/app/campagne-actions.ts`, `src/lib/campagne/`, AMMINISTRATORE o ufficio MARKETING):
   filtri marchio, stato (`Cliente.statoLead`, anche "senza stato"), tipo (`categoria` Lead/Cliente/Account), provenienza,
   commerciale, provincia; `{nome}` nel testo; prova; invio a blocchi da 40 (`CampagnaInvio`, unico per campagna+cliente: niente

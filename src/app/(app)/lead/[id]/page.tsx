@@ -37,7 +37,15 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
   const visibile = await prisma.lead.findFirst({ where: { AND: [{ id }, scopeLeadWhere(u)] }, select: { id: true } });
   if (!visibile) {
     const x = await prisma.lead.findUnique({ where: { id }, select: { venditoreId: true, appuntamentoId: true, clienteGenerato: { select: { id: true } } } });
-    if (!x) notFound();
+    if (!x) {
+      return (
+        <div className="max-w-xl rounded-lg border border-amber-300 bg-amber-50 p-5">
+          <p className="font-bold text-amber-900">Contatto non trovato</p>
+          <p className="mt-1 text-sm text-amber-900">Il collegamento non porta a nessun contatto: forse è stato eliminato o il link è incompleto. Cerca il cliente in Clienti o nel calendario.</p>
+          <Link href="/calendario" className="mt-3 inline-block text-sm underline">Vai al calendario</Link>
+        </div>
+      );
+    }
     const app = await prisma.appuntamento.findFirst({
       where: { utenteId: u.id, OR: [...(x.appuntamentoId ? [{ id: x.appuntamentoId }] : []), ...(x.clienteGenerato ? [{ clienteId: x.clienteGenerato.id }] : [])] },
       orderBy: { dataOra: "desc" }, select: { id: true },
