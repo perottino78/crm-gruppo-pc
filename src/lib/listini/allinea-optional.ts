@@ -8,7 +8,7 @@ import { optionalFidra } from "./fidra";
 import { optionalPlasma30 } from "./plasma30";
 import type { VoceOptional } from "./serramenti-comuni";
 
-export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-16b";
+export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-16c";
 const CHIAVE = "optional_serramenti_versione";
 const chiave = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
@@ -21,6 +21,9 @@ const VECCHIE_ZENITH_NOMI = [
   "Vetro stratificato di sicurezza 3+3 lato interno (antinfortunio) (ad anta)",
   "Vetro stratificato di sicurezza 3+3 sui due lati (ad anta)",
 ];
+
+/** Sovrapprezzi dello stratificato 3+3 creati il 16/11 e poi tolti: lo stratificato è di serie su tutti i serramenti. */
+const STRATIFICATO_A_PAGAMENTO = ["Vetro stratificato di sicurezza 3+3 lato interno (antinfortunio) (ad anta)", "Vetro stratificato di sicurezza 3+3 sui due lati (ad anta)"];
 
 /** Brand che ha prodotti con questo prefisso (in Prisma «_» in startsWith vale qualsiasi carattere: si ricontrolla). */
 async function brandCon(prefisso: string): Promise<string | null> {
@@ -47,6 +50,10 @@ export async function allineaOptionalSerramenti() {
       data: { attivo: false },
     })).count;
   }
+  spenti += (await prisma.optional.updateMany({
+    where: { attivo: true, nome: { in: STRATIFICATO_A_PAGAMENTO }, OR: ["ZENITH", "OPTIMA", "FIDRA", "PLASMA30"].map((p) => ({ listino: { startsWith: p } })) },
+    data: { attivo: false },
+  })).count;
   const optima = await brandCon(PREFISSO_OPTIMA);
   if (optima) creati += await creaMancanti(optima, optionalOptima(), "OPTIMA");
   const fidra = await brandCon("FIDRA_");

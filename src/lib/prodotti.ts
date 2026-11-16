@@ -1,7 +1,7 @@
 import { WPC_TIPOLOGIE } from "@/lib/wpcCatalogo";
-import { SOTTOGRUPPO_FIDRA, labelFidra } from "@/lib/listini/fidra";
-import { SOTTOGRUPPO_OPTIMA, labelOptima } from "@/lib/listini/optima";
-import { SOTTOGRUPPO_PLASMA30, SOTTOGRUPPO_PLASMA30_TV, labelPlasma30, ePlasma30, triploVetro } from "@/lib/listini/plasma30";
+import { SOTTOGRUPPO_FIDRA, labelFidra, TIPOLOGIE_FIDRA } from "@/lib/listini/fidra";
+import { SOTTOGRUPPO_OPTIMA, labelOptima, TIPOLOGIE_OPTIMA } from "@/lib/listini/optima";
+import { SOTTOGRUPPO_PLASMA30, SOTTOGRUPPO_PLASMA30_TV, labelPlasma30, ePlasma30, triploVetro, TIPOLOGIE_PLASMA30 } from "@/lib/listini/plasma30";
 import { labelPortaVetro } from "@/lib/listini/porte-vetro";
 import { SOTTOGRUPPO_TEMPRA, labelTempra, assiSelezioneTempra } from "@/lib/listini/tempra";
 import { SOTTOGRUPPO_TAGLIO_FREDDO, labelTaglioFreddo, assiSelezioneTaglioFreddo } from "@/lib/listini/taglio-freddo";
@@ -1587,7 +1587,21 @@ const ZENITH_CATEGORIA_LABEL: Record<string, string> = {
   PORTEFINESTRE: "Portefinestre",
 };
 
+/**
+ * Serramenti Optima 70, Fidra e Plasma 30: le stesse 2 tendine dello Zenith (Finestre / Portefinestre → tipo di anta), richiesta di Ugo
+ * 16/11/2026 («unifichiamo i listini serramenti»). Il modello è la sigla dell'apertura (F1A, PF2A_SOGLIA…) con l'etichetta del listino.
+ */
+function assiSerramentoListino(tipologia: string): AssiZenith | null {
+  const t = TIPOLOGIE_OPTIMA[tipologia] ?? TIPOLOGIE_FIDRA[tipologia] ?? TIPOLOGIE_PLASMA30[tipologia];
+  if (!t) return null;
+  const sigla = tipologia.replace(/^(OPTIMA|FIDRA|PLASMA30TV|PLASMA30)_/, "");
+  const categoria = t.portafinestra ? "PORTEFINESTRE" : "FINESTRE";
+  return { categoria: { valore: categoria, label: ZENITH_CATEGORIA_LABEL[categoria] }, modello: { valore: sigla, label: t.label } };
+}
+
 export function assiSelezioneZenith(tipologia: string): AssiZenith | null {
+  const listino = assiSerramentoListino(tipologia);
+  if (listino) return listino;
   const match = tipologia.match(/^ZENITH_(.+)_UKW1[03]$/);
   if (!match) return null;
   const base = match[1];
