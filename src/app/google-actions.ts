@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
+import { fotoGoogle, faldeGoogle, salvaChiaveGoogleMaps } from "@/lib/solaris/google-mappe";
 import { aggiornaCalendariGoogle, configGoogle, salvaCalendariGoogle, salvaCredenzialiGoogle, scollegaGoogle, sincronizzaGoogle } from "@/lib/calendario/google";
 
 const PAGINA = "/impostazioni/google";
@@ -72,4 +73,25 @@ export async function scollegaGoogleOra() {
   revalidatePath(PAGINA);
   revalidatePath("/calendario");
   vai({ ok: "Google scollegato. Su Google Calendar non è stato cancellato nulla." });
+}
+
+/** Chiave Google Maps per Solaris Studio (foto satellitare nitida e falde dal Solar API): si prova subito e si salva cifrata. */
+export async function salvaChiaveMappe(fd: FormData) {
+  await chi();
+  if (fd.get("togli") === "1") {
+    await salvaChiaveGoogleMaps(null);
+    revalidatePath(PAGINA);
+    vai({ ok: "Chiave Google Maps tolta: Solaris Studio usa di nuovo le immagini Esri." });
+  }
+  const k = String(fd.get("chiave") ?? "").trim();
+  if (!/^AIza[0-9A-Za-z_-]{30,}$/.test(k)) vai({ errore: "La chiave API di Google comincia con «AIza»: copiala per intero dalla Google Cloud Console" });
+  // prova sulla sede di Rosta
+  const foto = await fotoGoogle(45.0849, 7.4755, 20, k).catch((e) => ({ errore: String(e) }));
+  if ("errore" in foto) vai({ errore: `Google non accetta la chiave per le foto (attiva «Maps Static API» nel progetto e la fatturazione): ${foto.errore}` });
+  const tetto = await faldeGoogle(45.0849, 7.4755, k).catch((e) => ({ errore: String(e) }));
+  await salvaChiaveGoogleMaps(k);
+  revalidatePath(PAGINA);
+  vai({ ok: "errore" in tetto
+    ? `Chiave salvata: le foto dal satellite arrivano da Google. Il riconoscimento automatico delle falde non è attivo (attiva «Solar API» nel progetto): ${tetto.errore}`
+    : `Chiave salvata e provata: foto da Google e riconoscimento delle falde attivi (sulla sede trovate ${tetto.falde.length} falde).` });
 }

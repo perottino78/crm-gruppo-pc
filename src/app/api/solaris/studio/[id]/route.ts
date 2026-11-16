@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import fs from "fs";
 import path from "path";
 import { CATALOGO_STEALTH } from "@/lib/solaris/stealth";
+import { haChiaveGoogleMaps } from "@/lib/solaris/google-mappe";
 
 export async function GET(
   _req: NextRequest,
@@ -114,6 +115,8 @@ export async function GET(
     isAmministratore: livello === "AMMINISTRATORE",
     stato: (progetto.statoJson as Record<string, unknown> | null) ?? null,
     categoriaImpianto: progetto.categoriaImpianto ?? null,
+    // con la chiave Google la mappa del passo 1 e le foto del tetto arrivano da Google
+    googleMappe: await haChiaveGoogleMaps().catch(() => false),
     catalogo: pannelli.length > 0 || inverter.length > 0 || batterie.length > 0
       ? { pannelli, inverter, batterie }
       : null,
