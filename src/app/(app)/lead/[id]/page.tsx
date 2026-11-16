@@ -32,8 +32,29 @@ const TITOLI: Record<string, string> = {
 export default async function LeadDettaglio({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<P> }) {
   const [{ id }, p, u] = await Promise.all([params, searchParams, getCurrentUser()]);
   if (!u) notFound();
-  const l = await prisma.lead.findFirst({
-    where: { AND: [{ id }, scopeLeadWhere(u)] },
+  // il commerciale che apre il link di un promemoria non vede i lead della telefonista (visibilità «solo i suoi»):
+  // lo portiamo al suo appuntamento con quel cliente, altrimenti, se è il venditore del lead, gli mostriamo comunque la scheda
+  const visibile = await prisma.lead.findFirst({ where: { AND: [{ id }, scopeLeadWhere(u)] }, select: { id: true } });
+  if (!visibile) {
+    const x = await prisma.lead.findUnique({ where: { id }, select: { venditoreId: true, appuntamentoId: true, clienteGenerato: { select: { id: true } } } });
+    if (!x) notFound();
+    const app = await prisma.appuntamento.findFirst({
+      where: { utenteId: u.id, OR: [...(x.appuntamentoId ? [{ id: x.appuntamentoId }] : []), ...(x.clienteGenerato ? [{ clienteId: x.clienteGenerato.id }] : [])] },
+      orderBy: { dataOra: "desc" }, select: { id: true },
+    });
+    if (app) redirect(`/calendario/appuntamento/${app.id}`);
+    if (x.venditoreId !== u.id) {
+      return (
+        <div className="max-w-xl rounded-lg border border-amber-300 bg-amber-50 p-5">
+          <p className="font-bold text-amber-900">Questo contatto non è fra i tuoi</p>
+          <p className="mt-1 text-sm text-amber-900">Lo segue il centralino. Gli appuntamenti fissati per te li trovi nel calendario.</p>
+          <Link href="/calendario" className="mt-3 inline-block text-sm underline">Vai al calendario</Link>
+        </div>
+      );
+    }
+  }
+  const l = await prisma.lead.findUnique({
+    where: { id },
     include: {
       brand: true, telefonista: { select: { id: true, nome: true } }, clienteGenerato: { select: { id: true } },
       eventi: { orderBy: { createdAt: "desc" }, take: 60 },
@@ -41,13 +62,7 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
       invii: { where: { stato: { in: ["IN_ATTESA", "DA_VERIFICARE", "FALLITO"] } }, orderBy: { eseguiDopo: "asc" } },
     },
   });
-  if (!l) {
-    // il venditore che apre il link del promemoria non vede i lead della telefonista: lo portiamo al suo appuntamento,
-    // dove trova le risposte del modulo e le note del centralino («Da sapere prima di andare»)
-    const suo = await prisma.lead.findFirst({ where: { id, venditoreId: u.id }, select: { appuntamentoId: true } });
-    if (suo?.appuntamentoId) redirect(`/calendario/appuntamento/${suo.appuntamentoId}`);
-    notFound();
-  }
+  if (!l) notFound();
   const gestisce = puo(u, "pubblicita") || puo(u, "marketing");
   const [venditori, persone, marchi] = await Promise.all([
     prisma.utente.findMany({ where: { OR: [{ ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] }, stato: "ATTIVO" }, { vende: true, stato: "ATTIVO" }, { id: l.venditoreId ?? "-" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
