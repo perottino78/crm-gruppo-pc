@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
@@ -41,7 +41,13 @@ export default async function LeadDettaglio({ params, searchParams }: { params: 
       invii: { where: { stato: { in: ["IN_ATTESA", "DA_VERIFICARE", "FALLITO"] } }, orderBy: { eseguiDopo: "asc" } },
     },
   });
-  if (!l) notFound();
+  if (!l) {
+    // il venditore che apre il link del promemoria non vede i lead della telefonista: lo portiamo al suo appuntamento,
+    // dove trova le risposte del modulo e le note del centralino («Da sapere prima di andare»)
+    const suo = await prisma.lead.findFirst({ where: { id, venditoreId: u.id }, select: { appuntamentoId: true } });
+    if (suo?.appuntamentoId) redirect(`/calendario/appuntamento/${suo.appuntamentoId}`);
+    notFound();
+  }
   const gestisce = puo(u, "pubblicita") || puo(u, "marketing");
   const [venditori, persone, marchi] = await Promise.all([
     prisma.utente.findMany({ where: { OR: [{ ruolo: { in: ["COMMERCIALE", "AMMINISTRATORE"] }, stato: "ATTIVO" }, { vende: true, stato: "ATTIVO" }, { id: l.venditoreId ?? "-" }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),

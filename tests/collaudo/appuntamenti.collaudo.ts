@@ -88,6 +88,9 @@ async function main() {
   ].join(), "conferme subito, lettere mar-mer-gio, la 4ª saltata (giorno del promemoria), promemoria venerdì", ea);
   const conferma = await prisma.emailLead.findFirstOrThrow({ where: { leadId: a, chiave: "appointment-confirmed-seller" } });
   verifica(conferma.a === "marco@gruppopec.com" && conferma.testo.includes("Vuole anche le zanzariere"), "il venditore riceve la conferma con le note");
+  const promSeller = await prisma.emailLead.findFirstOrThrow({ where: { leadId: a, chiave: "appointment-reminder-seller" } });
+  const appA = (await prisma.lead.findUniqueOrThrow({ where: { id: a } })).appuntamentoId;
+  verifica(appA && conferma.testo.includes(`/calendario/appuntamento/${appA}`) && promSeller.testo.includes(`/calendario/appuntamento/${appA}`) && !promSeller.testo.includes("/lead?id="), "al venditore il link porta al suo appuntamento, non al lead della telefonista", promSeller.testo);
   verifica((await prisma.invioProgrammato.count({ where: { leadId: a, stato: "SALTATO" } })) === 1, "lettera 4 registrata come saltata");
 
   console.log("2. Appuntamento fissato la sera prima: solo la conferma, niente lettere né promemoria");
