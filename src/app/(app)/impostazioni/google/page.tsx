@@ -7,7 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { configGoogle, REDIRECT_GOOGLE } from "@/lib/calendario/google";
-import { aggiornaCalendari, salvaAbbinamentiGoogle, salvaCredenziali, scollegaGoogleOra, sincronizzaGoogleOra } from "@/app/google-actions";
+import { aggiornaCalendari, salvaAbbinamentiGoogle, salvaChiaveMappe, salvaCredenziali, scollegaGoogleOra, sincronizzaGoogleOra } from "@/app/google-actions";
+import { haChiaveGoogleMaps } from "@/lib/solaris/google-mappe";
 import BottoneConferma from "@/components/BottoneConferma";
 
 const inp = "rounded-md border border-neutral-300 px-2 py-1.5 text-sm";
@@ -18,7 +19,7 @@ export default async function GooglePage({ searchParams }: { searchParams: Promi
   if (!u) redirect("/login");
   if (!puo(u, "calendario.google")) redirect("/impostazioni");
   const p = await searchParams;
-  const [cfg, utenti] = await Promise.all([configGoogle(), prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } })]);
+  const [cfg, utenti, mappe] = await Promise.all([configGoogle(), prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }), haChiaveGoogleMaps()]);
   const nome = new Map(utenti.map((x) => [x.id, x.nome]));
   const senzaCalendario = utenti.filter((x) => !cfg.calendari.some((c) => c.utenteId === x.id));
   return (
@@ -35,6 +36,22 @@ export default async function GooglePage({ searchParams }: { searchParams: Promi
       </div>
       {p.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {p.ok}</p>}
       {p.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{p.errore}</p>}
+
+      <section id="mappe" className="card-fase" style={{ "--fase": "#f2a71b" } as React.CSSProperties}>
+        <h2>🛰️ Solaris Studio · foto del tetto da Google</h2>
+        <p className="mb-2 text-xs text-neutral-600">
+          Con la chiave di Google, Solaris Studio prende le foto dal satellite di Google Maps (molto più nitide) e, dove Google lo conosce, riconosce da solo la falda
+          del tetto con inclinazione e orientamento. Senza chiave usa le immagini Esri. Dalla Google Cloud Console (lo stesso progetto del calendario va bene):
+          «API e servizi» › «Libreria» › attiva <b>Maps Static API</b> e <b>Solar API</b>; poi «Credenziali» › «Crea credenziali» › «Chiave API» e incollala qui.
+          Serve la fatturazione attiva sul progetto: ogni foto costa pochi decimi di centesimo e ogni mese Google regala una quota gratuita.
+        </p>
+        <p className="mb-2 text-sm">{mappe ? <span className="font-semibold text-green-800">✅ Chiave salvata: le foto arrivano da Google.</span> : <span className="text-neutral-700">Nessuna chiave: oggi le foto arrivano da Esri.</span>}</p>
+        <form action={salvaChiaveMappe} className="flex flex-wrap items-end gap-2">
+          <label className="text-xs font-semibold text-neutral-700">Chiave API di Google<input name="chiave" type="password" autoComplete="off" placeholder={mappe ? "•••••• (salvata: incollane una nuova per cambiarla)" : "AIza…"} className={`${inp} block w-80 max-w-full`} /></label>
+          <button className="btn-3d btn-3d-amber px-4 py-2 text-sm">💾 Prova e salva</button>
+        </form>
+        {mappe && <form action={salvaChiaveMappe} className="mt-2"><input type="hidden" name="togli" value="1" /><BottoneConferma messaggio="Togliere la chiave? Solaris Studio tornerà alle immagini Esri." className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">Togli la chiave</BottoneConferma></form>}
+      </section>
 
       <section className="card-fase" style={{ "--fase": "#4285f4" } as React.CSSProperties}>
         <h2>1 · App Google (una volta sola)</h2>

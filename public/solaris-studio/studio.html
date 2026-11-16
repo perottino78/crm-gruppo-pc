@@ -67,6 +67,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---------- layout ---------- */
 main{max-width:1500px;margin:0 auto;padding:18px 22px 40px}
 .split{display:grid;grid-template-columns:380px 1fr;gap:18px;min-height:calc(100vh - 200px)}
+.split > *{min-width:0}
+select{max-width:100%;width:100%;text-overflow:ellipsis}
+.panel{min-width:0}
+.seg > *{min-width:0}
+.seg input[type=text]{width:100%;min-width:0}
+.dial > *{min-width:0}
+@media (max-width:420px){.dial{grid-template-columns:118px 1fr;gap:10px}.oriBtns{gap:6px}.oriBtns .b3d{padding:0 4px;font-size:14px}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:22px}
 .panel h2{font-family:var(--display);font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0}
 .panel p.lead{margin:-12px 0 0;color:var(--muted)}
@@ -128,6 +135,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .photobar .b3d{background:#fff;color:#13233D;box-shadow:0 5px 0 #B9C6D8, inset 0 0 0 1px #D5DEEA}
 .photobar .b3d.sun,.photoEmpty .b3d.sun{background:#F2A71B;color:#3a2400;box-shadow:0 5px 0 #B0740A}
 .photobar label.b3d,.photoEmpty label.b3d{display:inline-flex;align-items:center}
+.photobar{gap:6px;padding:6px;left:10px;right:10px;bottom:10px;border-radius:14px}
+.photobar .b3d{min-height:38px;padding:0 10px;font-size:13.5px;box-shadow:0 3px 0 #B9C6D8, inset 0 0 0 1px #D5DEEA}
+.photobar .b3d.sun{box-shadow:0 3px 0 #B0740A}
+.photobar .viewSeg button{min-height:34px;padding:0 10px;font-size:13.5px}
 .stage.photo .overlay,.stage.photo .sunbar,.stage.photo .draghint{display:none}
 .mini{display:grid;grid-template-columns:48px 1fr 48px;gap:8px;align-items:center}
 .mini .b3d{padding:0;font-size:24px}
@@ -446,7 +457,7 @@ section[hidden]{display:none}
           <button class="b3d" id="compassBtn">Usa la bussola</button>
           <button class="b3d" id="resetCorners">Rifai gli angoli</button>
           <button class="b3d" id="toggleLabels">Nascondi scritte</button>
-          <button class="b3d sun" id="savePhoto">Salva l’immagine</button>
+          <button class="b3d sun" id="savePhoto">💾 Salva</button>
         </div>
         <input type="file" id="roofFile" accept="image/*" hidden>
       </div>
@@ -766,6 +777,8 @@ function onSeg(key){
   if(key==="pay"){ $("#finMonths").hidden=S.pay!=="fin"; }
 }
 
+if(S.cityGps&&S.cityGps.lat!=null&&!CITIES.some(c=>c.gps)) CITIES.push({...S.cityGps,gps:true});
+if(!CITIES[S.city]) S.city=0;
 CITIES.forEach((c,i)=>$("#city").insertAdjacentHTML("beforeend",`<option value="${i}">${c.n}</option>`));
 MONTH_FULL.forEach((m,i)=>$("#month").insertAdjacentHTML("beforeend",`<option value="${i}">${m}</option>`));
 $("#month").value=S.month;
@@ -1266,7 +1279,7 @@ function setMode(m){
 }
 $("#m3d").addEventListener("click",()=>setMode("3d"));
 $("#mPhoto").addEventListener("click",()=>{ if(S.step!==2) go(2); setMode("photo");
-  if(!P.img&&(P.sat||S.addr||P.lat!=null)) satellite(P.sat?{pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}:{}); });
+  if(!P.img&&(P.sat||S.addr||P.lat!=null)) satellite(P.sat?{pos:{lat:P.sat.lat,lon:P.sat.lon},fonte:P.sat.fonte||"esri",z:P.sat.z,zg:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}:{}); });
 
 /* posizione e direzione dai dati EXIF della foto */
 function exifGPS(buf){
@@ -1296,17 +1309,18 @@ function exifGPS(buf){
   }catch(e){}
   return null;
 }
-function useLocation(lat,lon,src){
+function useLocation(lat,lon,src,nome){
   P.lat=lat; P.lon=lon;
   let best=0,bd=1e9;
   CITIES.forEach((c,i)=>{ if(c.gps) return; const d=Math.hypot(c.lat-lat,(c.lon-lon)*Math.cos(lat*Math.PI/180)); if(d<bd){bd=d;best=i;} });
   const near=CITIES[best];
-  const entry={n:`Sopralluogo vicino a ${near.n}`,lat,lon,zone:near.zone,y:Math.round(1270+(45.07-lat)*45),gps:true};
+  const entry={n:nome||`Sopralluogo vicino a ${near.n}`,lat,lon,zone:near.zone,y:Math.round(1270+(45.07-lat)*45),gps:true};
+  S.cityGps=entry;
   let gi=CITIES.findIndex(c=>c.gps);
   if(gi<0){ CITIES.push(entry); gi=CITIES.length-1; $("#city").insertAdjacentHTML("beforeend",`<option value="${gi}"></option>`); } else CITIES[gi]=entry;
   $("#city").options[gi].textContent=entry.n;
-  $("#city").value=gi; S.city=gi; updateSunPath(); refresh();
-  toast(`Posizione ${src}: ${fmt(lat,4)}, ${fmt(lon,4)}`);
+  $("#city").value=gi; S.city=gi; updateSunPath(); refresh(); saveToServer();
+  if(src) toast(nome?`Località: ${nome} (${src})`:`Posizione ${src}: ${fmt(lat,4)}, ${fmt(lon,4)}`);
 }
 function setHeading(h,src){
   P.heading=h;
@@ -1349,6 +1363,8 @@ function satMpp(lat,z){ return 156543.03392*Math.cos(lat*Math.PI/180)/Math.pow(2
 function satPixel(lat,lon,z){ const n=256*Math.pow(2,z), sn=Math.sin(lat*Math.PI/180); return {x:(lon+180)/360*n, y:(.5-Math.log((1+sn)/(1-sn))/(4*Math.PI))*n}; }
 function satTile(z,x,y){ return new Promise(res=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>res(null); im.src=`${window.SAT_BASE||""}/api/solaris/satellite?z=${z}&x=${x}&y=${y}`; }); }
 async function satPosizione(){
+  if(S.addrPos&&S.addrPos.per===S.addr) return {lat:S.addrPos.lat,lon:S.addrPos.lon,src:"dall’indirizzo"};
+  if(S.addr&&S.addr.length>=4){ addrCercato=""; const a=await cercaIndirizzo(); if(a){ if(!a.preciso) toast("Indirizzo trovato in modo approssimativo: sposta la falda sul tetto giusto"); return {lat:a.lat,lon:a.lon,src:"dall’indirizzo"}; } }
   if(S.addr&&S.addr.length>=3){
     try{ const r=await fetch(`${window.SAT_BASE||""}/api/solaris/geocodifica?q=${encodeURIComponent(S.addr)}`); const j=await r.json();
       if(r.ok&&j.lat!=null){ if(!j.preciso) toast("Indirizzo trovato in modo approssimativo: sposta la falda sul tetto giusto"); return {lat:j.lat,lon:j.lon,src:"dall’indirizzo"}; } }catch(e){}
@@ -1374,7 +1390,20 @@ async function satellite(opz={}){
     let pos=opz.pos||null;
     if(!pos){ toast("Cerco il tetto dal satellite…"); pos=await satPosizione(); }
     if(!pos){ toast("Scrivi l’indirizzo al passo 1 o consenti la posizione per la foto dal satellite"); return; }
-    let z=opz.z||(P.sat&&P.sat.z)||20, lato=opz.lato||(P.sat&&P.sat.lato)||SAT_LATO[z]||320;
+    // 1) Google: foto nitida 1280×1280 (se in Impostazioni c'è la chiave)
+    if(opz.fonte!=="esri"){
+      const zg=opz.zg||(P.sat&&P.sat.fonte==="google"&&P.sat.z)||20;
+      const im=await satGoogle(pos.lat,pos.lon,zg);
+      if(im){
+        const cv=document.createElement("canvas"); cv.width=im.width; cv.height=im.height; const g=cv.getContext("2d"); g.drawImage(im,0,0);
+        P.img=cv; P.mpp=satMpp(pos.lat,zg)*640/im.width; P.sat={lat:pos.lat,lon:pos.lon,z:zg,fonte:"google"}; P.when=new Date();
+        satDopoFoto(pos,opz,cv);
+        if(!opz.tieniAngoli) satFaldaGoogle(pos,cv);
+        return;
+      }
+    }
+    // 2) Esri: tessere 256 px (zoom 20 dove c'è, altrimenti 19)
+    let z=(P.sat&&P.sat.fonte!=="google"&&P.sat.z)||opz.z||20, lato=opz.lato||(P.sat&&P.sat.fonte!=="google"&&P.sat.lato)||SAT_LATO[z]||320;
     // lo zoom 20 non c'è dappertutto: si prova la tessera centrale, altrimenti zoom 19
     const tc=satPixel(pos.lat,pos.lon,z);
     if(z===20 && !(await satTile(20,Math.floor(tc.x/256),Math.floor(tc.y/256)))){ z=19; if(!opz.lato) lato=SAT_LATO[19]; }
@@ -1390,23 +1419,56 @@ async function satellite(opz={}){
     g.font=`600 ${11*SAT_K}px Figtree, sans-serif`; g.textAlign="right"; g.textBaseline="bottom";
     g.fillStyle="rgba(255,255,255,.85)"; g.fillText("Immagini © Esri, Maxar, Earthstar Geographics",cv.width-8*SAT_K,cv.height-6*SAT_K);
     const mpp=satMpp(pos.lat,z)/SAT_K;
-    P.img=cv; P.mpp=mpp; P.sat={lat:pos.lat,lon:pos.lon,z,lato}; P.when=new Date();
+    P.img=cv; P.mpp=mpp; P.sat={lat:pos.lat,lon:pos.lon,z,lato,fonte:"esri"}; P.when=new Date();
+    satDopoFoto(pos,opz,cv);
+  } finally { satBusy=false; }
+}
+function satGoogle(lat,lon,z){
+  return new Promise(res=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>res(null);
+    im.src=`${window.SAT_BASE||""}/api/solaris/satellite?fonte=google&lat=${lat}&lon=${lon}&z=${z}`; });
+}
+/* falda riconosciuta da Google Solar: angoli, orientamento e inclinazione veri */
+async function satFaldaGoogle(pos,cv){
+  try{
+    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/tetto?lat=${pos.lat}&lon=${pos.lon}`); if(!r.ok) return;
+    const j=await r.json(), f=j.migliore; if(!f) { toast("Google non conosce ancora questo tetto: sposta gli angoli sulla falda"); return; }
+    const piana=f.pendenza<5;
+    if(!piana){ S.tilt=Math.max(5,Math.min(45,Math.round(f.pendenza))); const t=$("#tilt"); t.value=S.tilt; setP(t); $("#tiltOut").textContent=S.tilt+"°"; }
+    let ori=Math.round((f.azimut-180)/5)*5; if(ori<-180) ori+=360; if(ori>180) ori-=360;
+    if(!piana){ S.ori=Math.max(-90,Math.min(90,ori)); updateDial(); }
+    const z=P.sat.z, c=satPixel(pos.lat,pos.lon,z), k=cv.width/640, mppI=P.mpp;
+    const fc=satPixel(f.centro.lat,f.centro.lon,z);
+    const cx=cv.width/2+(fc.x-c.x)*k, cy=cv.height/2+(fc.y-c.y)*k;
+    const az=(piana?180:f.azimut)*Math.PI/180, d=[Math.sin(az),-Math.cos(az)], e=[d[1],-d[0]];
+    const W=f.larghezza/mppI, L=f.profondita/mppI;
+    const pt=(a,b)=>[cx+d[0]*a*L/2+e[0]*b*W/2, cy+d[1]*a*L/2+e[1]*b*W/2];
+    P.corners=[pt(1,-1),pt(1,1),pt(-1,1),pt(-1,-1)]; P.w=null; P.l=null;
+    rebuildHouse(); fitGrid(); drawPhoto(); saveToServer();
+    toast(piana?`Tetto piano riconosciuto da Google: ${fmt(f.area)} m²`:`Falda riconosciuta da Google: ${$("#oriOut").textContent.trim()}, ${S.tilt}°, ${fmt(f.area)} m²`);
+  }catch(e){}
+}
+function satDopoFoto(pos,opz,cv){
+    const mpp=P.mpp;
     P.view="top"; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.pv==="top")); $("#compassBtn").hidden=true;
     if(!opz.tieniAngoli||P.corners.length!==4){ P.corners=satDefaultCorners(cv.width/2,cv.height/2,mpp); P.w=null; P.l=null; }
     $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#satIn").hidden=false; $("#satOut").hidden=false;
-    if(!opz.silenzioso) useLocation(pos.lat,pos.lon,pos.src); else { P.lat=pos.lat; P.lon=pos.lon; }
+    if(!opz.silenzioso&&pos.src!=="dall’indirizzo") useLocation(pos.lat,pos.lon,pos.src); else { P.lat=pos.lat; P.lon=pos.lon; }
     if(S.mode!=="photo") setMode("photo");
     fitGrid(); drawPhoto(); saveToServer();
     if(!opz.silenzioso) setTimeout(()=>toast("Ecco il tetto dal satellite: trascina gli angoli arancioni sulla falda"),2700);
-  } finally { satBusy=false; }
 }
 $("#satBtn").addEventListener("click",()=>satellite({z:20}));
 $("#satBtn2").addEventListener("click",()=>{ P.sat=null; satellite({z:20}); });
-function satZoom(f){ if(!P.sat) return; const old=P.sat.lato, lato=Math.max(96,Math.min(768,Math.round(old*f/32)*32));
+function satZoom(f){ if(!P.sat) return;
+  if(P.sat.fonte==="google"){ const nz=Math.max(17,Math.min(21,P.sat.z+(f<1?1:-1))); if(nz===P.sat.z) return;
+    const k=Math.pow(2,nz-P.sat.z), cx=P.img.width/2, cy=P.img.height/2;
+    P.corners=P.corners.map(([x,y])=>[cx+(x-cx)*k, cy+(y-cy)*k]);
+    satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},zg:nz,tieniAngoli:true,silenzioso:true}); return; }
+  const old=P.sat.lato, lato=Math.max(96,Math.min(768,Math.round(old*f/32)*32));
   if(lato===old) return; const k=old/lato, cx=P.img.width/2, cy=P.img.height/2;
   // gli angoli restano sullo stesso punto del tetto
   P.corners=P.corners.map(([x,y])=>[cx+(x-cx)*k, cy+(y-cy)*k]);
-  satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato,tieniAngoli:true,silenzioso:true}); }
+  satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},fonte:"esri",z:P.sat.z,lato,tieniAngoli:true,silenzioso:true}); }
 $("#satIn").addEventListener("click",()=>satZoom(0.7));
 $("#satOut").addEventListener("click",()=>satZoom(1.4));
 
@@ -1671,7 +1733,21 @@ $("#addr").addEventListener("input",e=>{
   S.addr=e.target.value.trim(); const q=encodeURIComponent(S.addr);
   $("#gmaps").href=S.addr?`https://www.google.com/maps/search/?api=1&query=${q}`:"https://www.google.com/maps";
   $("#gearth").href=S.addr?`https://earth.google.com/web/search/${q}`:"https://earth.google.com/web/";
+  saveToServer();
 });
+let addrCercato="";
+async function cercaIndirizzo(){
+  if(!S.addr||S.addr.length<4||S.addr===addrCercato) return null;
+  addrCercato=S.addr;
+  try{
+    const r=await fetch(`${window.SAT_BASE||""}/api/solaris/geocodifica?q=${encodeURIComponent(S.addr)}`); const j=await r.json();
+    if(!r.ok||j.lat==null){ toast("Indirizzo non trovato: controlla via e paese"); return null; }
+    S.addrPos={lat:j.lat,lon:j.lon,preciso:!!j.preciso,per:S.addr};
+    useLocation(j.lat,j.lon,"dall’indirizzo",j.comune||null);
+    return S.addrPos;
+  }catch(e){ return null; }
+}
+$("#addr").addEventListener("change",()=>{ cercaIndirizzo(); });
 
 /* ======================= ABITUDINI DI CASA ======================= */
 const QUIZ=[
@@ -1801,8 +1877,17 @@ function saveToServer(){
 }
 
 /* ======================= AVVIO ======================= */
+function ripristinaCampi(){
+  $("#cliente").value=S.cliente||""; $("#addr").value=S.addr||""; addrCercato=S.addr||"";
+  if(S.addr){ const q=encodeURIComponent(S.addr); $("#gmaps").href=`https://www.google.com/maps/search/?api=1&query=${q}`; $("#gearth").href=`https://earth.google.com/web/search/${q}`; }
+  $("#city").value=S.city;
+  [["billmode","billMode"],["presence","presence"],["ori","ori"],["batt","batt"],["detr","detr"],["pay","pay"],["months","months"]].forEach(([a,k])=>{
+    $$("[data-"+a+"]").forEach(x=>x.classList.toggle("on",String(x.dataset[a])===String(S[k]))); onSeg(k==="ori"?"":k);
+  });
+}
+ripristinaCampi();
 fillSelects(); renderKwpTargets(); clampPanels(); updateDial(); refresh();
-if(P.sat&&P.sat.lat!=null){ const c0=P.corners.slice(); satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}).then(()=>{ if(c0.length===4){ P.corners=c0; fitGrid(); if(S.mode==="photo") drawPhoto(); } }); }
+if(P.sat&&P.sat.lat!=null){ const c0=P.corners.slice(); satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},fonte:P.sat.fonte||"esri",z:P.sat.z,zg:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}).then(()=>{ if(c0.length===4){ P.corners=c0; fitGrid(); if(S.mode==="photo") drawPhoto(); } }); }
 if(window.THREE){ initThree(); } else { $("#nowKw").textContent="3D non disponibile"; }
 </script>
 </body>
