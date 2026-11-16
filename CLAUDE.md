@@ -418,7 +418,9 @@ login nel `matcher` del middleware.
   vecchie voci Zenith (`ZENITH_WASISTAS`, `ZENITH_PF3A_SOGLIA`, le due pellicole PF3A); `seed-zenith` usa la stessa funzione. Al rilievo e nell'ordine: `assicuraRigheOfferta`
   scrive nella descrizione del materiale le scelte dell'offerta (`sceltePerRilievo`: «Colore esterno: … · Vetri: … ×2»). Scheda tecnica «Zenith 72» (1 pagina, già con i dati
   di P&C) in `public/cataloghi/zenith/`, `DESCRIZIONE_CLIENTE_ZENITH`, voce in `SCHEDE`: vetro stratificato di sicurezza 3+3 BE / 18 argon / 3+3 DI SERIE, quindi per lo Zenith
-  niente sovrapprezzi stratificato (`vetriSpeciali(base, { stratificatoDiSerie })`; versione «2026-11-16b» spegne le voci create prima).
+  niente sovrapprezzi stratificato. Poi (Ugo, stesso giorno) lo stratificato 3+3 è DI SERIE su TUTTI i serramenti (norma in Italia): `VETRI_SPECIALI` non ha più lo
+  stratificato, `VETRO_STRATIFICATO_DI_SERIE` a 0 € negli altri listini (versione «2026-11-16c» spegne i sovrapprezzi già creati). Listini serramenti unificati nella
+  scelta: Optima, Fidra e Plasma 30 usano le stesse 2 tendine dello Zenith (Finestre/Portefinestre → tipo di anta, `assiSerramentoListino` dentro `assiSelezioneZenith`).
   Test `tests/listini/zenith.test.ts`, collaudo `zenith-optional` (6).
 - **Serramenti PVC Plasma 30** (telaio e anta 74 mm, Uf 1,0; gruppo SERRAMENTI, sottogruppi «PVC — Plasma 30» e «PVC — Plasma 30 triplo vetro»; ha sostituito il
   segnaposto `SERRAMENTI_PVC_PLASMA30_PLACEHOLDER`): 24 tipologie `PLASMA30_<apertura>` (doppio vetro, file «PLASMA 30 UKW 1.3 - 2025», coeff. 2,7 = base Optima × 2,7)
@@ -645,7 +647,7 @@ Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa S
 ```bash
 npm install                     # genera anche il client Prisma
 npx tsc --noEmit -p .           # controllo tipi
-npx tsx --test tests/*/*.test.ts   # test unitari (oggi 407, tutti verdi)
+npx tsx --test tests/*/*.test.ts   # test unitari (oggi 409, tutti verdi)
 npx next build                  # build (in locale senza db push)
 
 # Collaudi end-to-end su Postgres LOCALE (svuotano le tabelle! mai sul DB di produzione)

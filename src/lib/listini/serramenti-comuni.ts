@@ -5,23 +5,28 @@
 
 export type VoceOptional = { categoria: string; nome: string; tipoPrezzo: "FISSO" | "PERCENTUALE"; valore: number; unita: string | null; listino: string };
 
-/** Vetri speciali per anta: [nome, prezzo finestra, prezzo portafinestra]. */
+/**
+ * Vetri speciali per anta: [nome, prezzo finestra, prezzo portafinestra]. Lo stratificato di sicurezza 3+3 è di serie su tutti i
+ * serramenti (in Italia è la norma, decisione di Ugo 16/11/2026): niente sovrapprezzo, solo una voce «di serie» per il rilievo.
+ */
 export const VETRI_SPECIALI: [string, number, number][] = [
-  ["Vetro stratificato di sicurezza 3+3 lato interno (antinfortunio)", 70, 120],
-  ["Vetro stratificato di sicurezza 3+3 sui due lati", 120, 200],
   ["Vetro antisfondamento 4+4 esterno + 3+3 interno (classe P2A)", 150, 260],
   ["Vetro insonorizzante acustico 3+3 / 5 (PVB acustico, fino a 42 dB)", 130, 220],
   ["Vetro decorativo stampato (es. Master Carré, Cincillà)", 90, 150],
 ];
 
-/** Vetri speciali del listino: una voce per finestre (`<base>_F`) e una per portefinestre (`<base>_PF`). */
+export const VETRO_STRATIFICATO_DI_SERIE = "Vetro stratificato di sicurezza 3+3 (di serie)";
+
+/** Vetri del listino: lo stratificato di serie (compreso) e i vetri speciali per finestre (`<base>_F`) e portefinestre (`<base>_PF`). */
 export function vetriSpeciali(base: string, opzioni: { stratificatoDiSerie?: boolean } = {}): VoceOptional[] {
-  // con il vetro stratificato 3+3 già di serie (Zenith 72) i sovrapprezzi dello stratificato non servono
-  const vetri = opzioni.stratificatoDiSerie ? VETRI_SPECIALI.filter(([nome]) => !nome.startsWith("Vetro stratificato")) : VETRI_SPECIALI;
-  return vetri.flatMap(([nome, f, pf]) => [
-    { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: f, unita: "anta", listino: `${base}_F` },
-    { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: pf, unita: "anta", listino: `${base}_PF` },
-  ]);
+  // per lo Zenith il vetro di serie ha già la sua voce (vetrocamera stratificato 3+3 / 18 argon / 3+3 della scheda tecnica)
+  return [
+    ...(opzioni.stratificatoDiSerie ? [] : [{ categoria: "Vetri", nome: VETRO_STRATIFICATO_DI_SERIE, tipoPrezzo: "FISSO" as const, valore: 0, unita: null, listino: base }]),
+    ...VETRI_SPECIALI.flatMap(([nome, f, pf]) => [
+      { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: f, unita: "anta", listino: `${base}_F` },
+      { categoria: "Vetri", nome: `${nome} (ad anta)`, tipoPrezzo: "FISSO" as const, valore: pf, unita: "anta", listino: `${base}_PF` },
+    ]),
+  ];
 }
 
 /** Forme speciali: trapezoidale e curva/ad arco, +40% come «curvi o sagomati» degli altri listini. */

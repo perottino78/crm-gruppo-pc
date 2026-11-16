@@ -40,7 +40,8 @@ test("Optima, Fidra e Plasma 30: vetri speciali e forma trapezoidale senza doppi
     assert.ok(voci.some((x) => x.nome === "Forma trapezoidale (fuori squadro)"), `${nome}: trapezoidale`);
     assert.ok(voci.some((x) => x.nome.startsWith("Vetro antisfondamento")), `${nome}: antisfondamento`);
   }
-  assert.equal(vetriSpeciali("X").length, 10);
+  assert.equal(vetriSpeciali("X").length, 7);
+  assert.equal(vetriSpeciali("X", { stratificatoDiSerie: true }).length, 6);
 });
 
 test("tendine: accessori insieme, lavorazioni e misure; scelte per il rilievo", () => {
@@ -66,5 +67,18 @@ test("Zenith 72: scheda tecnica e vetro stratificato 3+3 già di serie (niente s
   const o = optionalZenith();
   assert.ok(!o.some((x) => x.nome.startsWith("Vetro stratificato")), "lo stratificato 3+3 è di serie");
   assert.ok(o.some((x) => x.nome.startsWith("Vetrocamera stratificato di sicurezza 3+3") && x.valore === 0));
-  assert.ok(optionalOptima().some((x) => x.nome.startsWith("Vetro stratificato")), "negli altri listini resta a pagamento");
+  for (const voci of [optionalOptima(), optionalFidra(), optionalPlasma30()]) {
+    assert.ok(voci.some((x) => x.nome === "Vetro stratificato di sicurezza 3+3 (di serie)" && x.valore === 0), "stratificato di serie anche negli altri listini");
+    assert.ok(!voci.some((x) => x.nome.startsWith("Vetro stratificato") && x.valore > 0), "mai a pagamento");
+  }
+});
+
+test("listini serramenti unificati: le stesse 2 tendine (Finestre/Portefinestre → tipo di anta) per Zenith, Optima, Fidra e Plasma 30", async () => {
+  const { assiSelezioneZenith } = await import("../../src/lib/prodotti");
+  assert.deepEqual(assiSelezioneZenith("OPTIMA_PF2A_SOGLIA"), { categoria: { valore: "PORTEFINESTRE", label: "Portefinestre" }, modello: { valore: "PF2A_SOGLIA", label: "Portafinestra 2 ante — soglia ribassata" } });
+  assert.equal(assiSelezioneZenith("FIDRA_F1A")?.categoria.valore, "FINESTRE");
+  assert.equal(assiSelezioneZenith("PLASMA30TV_W")?.modello.valore, "W");
+  assert.equal(assiSelezioneZenith("PLASMA30_PF3A")?.categoria.valore, "PORTEFINESTRE");
+  assert.equal(assiSelezioneZenith("ZENITH_F2A_UKW13")?.modello.valore, "F2A");
+  assert.equal(assiSelezioneZenith("TAGLIOFREDDO_SCORR_33"), null);
 });
