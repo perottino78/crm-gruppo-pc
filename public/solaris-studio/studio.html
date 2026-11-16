@@ -154,6 +154,15 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .sc-row b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
 .sc-badge{display:inline-block;background:var(--panelSoft);color:var(--panel);border-radius:8px;font-size:11px;font-weight:700;padding:2px 8px;letter-spacing:.02em}
 @media(max-width:700px){.scheda{grid-template-columns:1fr}}
+.schedaBox{border:1px solid var(--line);border-radius:14px;background:var(--surface2);padding:0 14px}
+.schedaBox summary{cursor:pointer;font-weight:600;font-size:14px;min-height:46px;display:flex;align-items:center;list-style:none}
+.schedaBox summary::-webkit-details-marker{display:none}
+.schedaBox summary::after{content:"▾";margin-left:auto;color:var(--muted)}
+.schedaBox[open] summary::after{content:"▴"}
+.schedaBox .scheda{grid-template-columns:1fr;margin:0 0 14px}
+.schedaBox .scheda-card{background:var(--surface)}
+.satBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+@media (min-width:1101px){.split > .stage{position:sticky;top:178px;height:calc(100vh - 196px);min-height:460px;align-self:start}}
 .linkrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .linkrow a.b3d{display:flex;align-items:center;justify-content:center;text-decoration:none}
 .viewSeg{display:flex;gap:4px;background:#fff;border-radius:14px;padding:4px;box-shadow:inset 0 0 0 1px #D5DEEA}
@@ -372,7 +381,7 @@ section[hidden]{display:none}
           <select id="invSel"></select>
           <div class="check" id="invCheck"></div>
           <div class="check warn" id="spiWarn" hidden>⚠ Impianto &gt; 11.08 kWp: SPI esterno (DDI) obbligatorio per CEI 0-21 §9.5.1 — aggiungi voce separata a preventivo</div>
-          <div class="scheda" id="schedaComp"></div>
+          <details class="schedaBox"><summary>📋 Schede tecniche</summary><div class="scheda" id="schedaComp"></div></details>
           <button class="b3d commOnly" id="newCompBtn">+ Nuovo pannello o inverter</button>
           <div class="newcomp commOnly" id="newComp" hidden>
             <div class="two"><select id="ncType" aria-label="Tipo di componente"><option value="pan">Pannello</option><option value="inv">Inverter</option></select><input type="text" id="ncName" placeholder="Marca e modello"></div>
@@ -411,6 +420,9 @@ section[hidden]{display:none}
             <button class="b3d" data-batt="10">10 kWh</button>
             <button class="b3d" data-batt="15">15 kWh</button>
           </div>
+          <label class="hint" for="battSel" id="battSelLbl" hidden>Modello di batteria</label>
+          <select id="battSel" hidden></select>
+          <div class="check ok" id="battInfo" hidden></div>
         </div>
         <button class="b3d sun" data-goto="3">Vedi quanto risparmi</button>
       </section>
@@ -425,10 +437,11 @@ section[hidden]{display:none}
       <div class="modeSw" role="group" aria-label="Vista"><button id="m3d" aria-pressed="true">Modello 3D</button><button id="mPhoto" aria-pressed="false">Foto del tetto</button></div>
       <div id="photoStage" hidden>
         <canvas id="photoCanvas"></canvas>
-        <div class="photoEmpty" id="photoEmpty"><div><b>Fotografa il tetto del cliente</b>Leggo posizione e orientamento dalla foto, poi tocchi i 4 angoli della falda e i pannelli compaiono sul tetto vero, con misure e produzione scritte sopra.<br><label class="b3d sun" for="roofFile">Scatta o scegli una foto</label><br><span style="font-size:14px;opacity:.85;display:block;margin-top:14px">Va bene anche uno screenshot satellitare di Google Maps o Earth: dopo averlo caricato scegli “Dall’alto” e orientamento e misure si calcolano da soli.</span></div></div>
+        <div class="photoEmpty" id="photoEmpty"><div><b>Fotografa il tetto del cliente</b>Leggo posizione e orientamento dalla foto, poi tocchi i 4 angoli della falda e i pannelli compaiono sul tetto vero, con misure e produzione scritte sopra.<br><span class="satBtns"><button class="b3d sun" type="button" id="satBtn">🛰️ Foto dal satellite</button><label class="b3d" for="roofFile">📷 Scatta o scegli una foto</label></span><span style="font-size:14px;opacity:.85;display:block;margin-top:14px">Dal satellite prendo l’immagine dall’indirizzo del passo 1 (o dalla tua posizione), con nord in alto e misure già in scala: disegno io la falda e tu sposti gli angoli.</span></div></div>
         <div class="photoTip chip" id="photoTip" hidden><span id="tipLbl"></span><strong id="tipTxt" style="font-size:18px;display:block;line-height:1.25"></strong></div>
         <div class="photobar" id="photobar" hidden>
           <div class="viewSeg" role="group" aria-label="Tipo di foto"><button data-pv="ground" aria-pressed="true">Da terra</button><button data-pv="top" aria-pressed="false">Dall’alto</button></div>
+          <button class="b3d" type="button" id="satBtn2">🛰️ Satellite</button><button class="b3d" type="button" id="satIn" aria-label="Avvicina" hidden>＋</button><button class="b3d" type="button" id="satOut" aria-label="Allontana" hidden>－</button>
           <label class="b3d" for="roofFile">Nuova foto</label>
           <button class="b3d" id="compassBtn">Usa la bussola</button>
           <button class="b3d" id="resetCorners">Rifai gli angoli</button>
@@ -627,25 +640,18 @@ const INVERTERS=[
   {id:"se6",n:"SolarEdge Home Hub 6 kW (ibrido)",kw:6,hyb:true,faseTipo:"MONOFASE",price:2100,cost:1450,
    specs:{eff:99.0,mppt:1,vdc_max:"850 V",vac:"220–240 V",comm:"WiFi · ZigBee · RS485",gar:12,cert:"CE / IEC 62109 / Grid Guard"}},
   {id:"sg5",n:"Sungrow SG5.0RS (non ibrido)",kw:5,hyb:false,faseTipo:"MONOFASE",price:950,cost:620,
-   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}},
-  {id:"st3",n:"Inverter Ibrido ST-INV-S 3 kW",kw:3,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st368",n:"Inverter Ibrido ST-INV-S 3.68 kW",kw:3.68,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st4",n:"Inverter Ibrido ST-INV-S 4 kW",kw:4,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st5",n:"Inverter Ibrido ST-INV-S 5 kW",kw:5,hyb:true,faseTipo:"MONOFASE",price:0,cost:0,
-   specs:{eff:97.6,mppt:2,vbatt:"85–460 V",vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st10t",n:"Inverter Ibrido Trifase ST-INV-T 10 kW",kw:10,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
-   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}},
-  {id:"st15t",n:"Inverter Ibrido Trifase ST-INV-T 15 kW",kw:15,hyb:true,faseTipo:"TRIFASE",price:0,cost:0,
-   specs:{eff:97.5,mppt:2,vbatt:"85–460 V",vdc_max:"800 V",vac:"380–415 V",comm:"WiFi · RS485",gar:10,cert:"CE / IP65"}}];
+   specs:{eff:98.4,mppt:2,vdc_max:"600 V",vac:"220–240 V",comm:"WiFi · LAN · RS485",gar:10,cert:"CE / IEC 62109"}}];
+const BATTERIES=[];
 if(_INIT.catalogo){
   (_INIT.catalogo.pannelli||[]).forEach(p=>PANELS.push(p));
   (_INIT.catalogo.inverter||[]).forEach(p=>INVERTERS.push(p));
+  (_INIT.catalogo.batterie||[]).forEach(p=>BATTERIES.push(p));
 } else {
   try{ const ex=JSON.parse(localStorage.getItem("solaris-catalogo")||"{}"); (ex.pan||[]).forEach(p=>PANELS.push(p)); (ex.inv||[]).forEach(p=>INVERTERS.push(p)); }catch(e){}
 }
+function curBatt(){ return BATTERIES.find(b=>b.id===S.battId)||null; }
+function battModuli(){ const b=curBatt(); return b&&S.batt>0?Math.max(1,Math.ceil(S.batt/b.kwh-1e-9)):0; }
+function battCosto(batt){ const b=curBatt(); if(b&&b.price>0&&batt>0) return Math.max(1,Math.ceil(batt/b.kwh-1e-9))*b.price; return batt*S.cbat; }
 function curPanel(){ return PANELS.find(p=>p.id===S.panelId)||PANELS[0]; }
 function filteredInverters(){
   const isTri = S.categoria !== "MONOFASE";
@@ -659,7 +665,7 @@ function curInv(){ const fi=filteredInverters(); return fi.find(p=>p.id===S.invI
 
 const S = {city:0,kwh:3800,eur:110,billMode:"kwh",price:0.30,presence:1,ori:0,tilt:28,panels:12,batt:5,
   month:5,hour:12,playing:false,step:1,ckwp:850,cbat:520,detr:0.5,commercial:false,cliente:"",
-  panelId:"jinko440",invId:"hw6",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
+  panelId:"jinko440",invId:"hw6",battId:"",addr:"",qTouched:false,q:{persone:2,giorno:1,elettro:0,cucina:0,acqua:0,clima:0,auto:0},
   f1:null,infl:2,pay:"cash",months:120,addons:new Set(),
   categoria:"MONOFASE",spiEsterno:false,checklist:{vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false},
   mode:"3d",photo:{view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null},
@@ -671,6 +677,7 @@ if(_INIT.stato){
   const addonsArr=st.addons; delete st.addons;
   Object.assign(S,st);
   S.addons=new Set(Array.isArray(addonsArr)?addonsArr:[]);
+  if(S.photo&&typeof S.photo==="object") S.photo.img=null;
   if(!S.photo||typeof S.photo!=="object") S.photo={view:"ground",img:null,corners:[],cols:6,rows:2,lat:null,lon:null,heading:null,when:null,w:null,l:null};
   if(!S.checklist||typeof S.checklist!=="object") S.checklist={vvf:false,officinaEl:false,pas:false,telecontrollo:false,dnsh:false,terna:false,strutturale:false,vincoli:false};
 }
@@ -724,7 +731,7 @@ function simulate(batt){
   }
   const billToday = cons*S.price+FIXED;
   const billAfter = imp*S.price+FIXED - exp*RID;
-  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + batt*S.cbat + S.sottostruttura + S.pratiche + S.piattaforma;
+  const cost = S.panels*curPanel().price + curInv().price + kwp*S.ckwp + battCosto(batt) + S.sottostruttura + S.pratiche + S.piattaforma;
   return {kwp,prodY,cons,direct,fromBatt,imp,exp,billToday,billAfter,saving:billToday-billAfter,cost,pm,cm,
     selfShare:(direct+fromBatt)/cons};
 }
@@ -784,6 +791,7 @@ bindSeg("billmode","billMode",v=>v);
 bindSeg("presence","presence",v=>+v);
 bindSeg("ori","ori",v=>+v);
 bindSeg("batt","batt",v=>+v);
+$$("[data-batt]").forEach(b=>b.addEventListener("click",()=>setTimeout(battInfo,0)));
 bindSeg("detr","detr",v=>+v);
 bindSeg("pay","pay",v=>v);
 bindSeg("months","months",v=>+v);
@@ -900,7 +908,7 @@ function go(step){
   $("#s1").hidden = step!==1; $("#s2").hidden = step!==2;
   $("#s3").hidden = step!==3; $("#s4").hidden = step!==4;
   if(step<=2) setTimeout(resize,30);
-  if(step===4){ setTimeout(sizeSig,30); snapshotProp(); }
+  if(step===4){ if(typeof sizeSig==="function") setTimeout(sizeSig,30); snapshotProp(); }
   window.scrollTo({top:0,behavior:"smooth"});
   refresh();
 }
@@ -1143,13 +1151,13 @@ function refresh(){
   const who=S.cliente||"Cliente";
   $("#propTitle").textContent="Proposta per "+who;
   $("#propSub").textContent=`${c.n}, falda ${$("#oriOut").textContent.toLowerCase()} inclinata ${S.tilt}°. Stima preliminare, da confermare con sopralluogo.`;
-  const pan=curPanel(), inv=curInv(), pv=r.kwp*S.ckwp, bt=S.batt*S.cbat, det=r.cost*S.detr;
+  const pan=curPanel(), inv=curInv(), pv=r.kwp*S.ckwp, bt=battCosto(S.batt), det=r.cost*S.detr, cb=curBatt();
   $("#lines").innerHTML=`
     <tr><td>${S.panels} moduli ${esc(pan.n)}, totale ${fmt(r.kwp,2)} kWp</td><td>${eur(S.panels*pan.price)}</td></tr>
     <tr><td>Inverter ${esc(inv.n)}</td><td>${eur(inv.price)}</td></tr>
     <tr><td>Strutture, cavi, quadri e posa in opera</td><td>${eur(pv)}</td></tr>
     ${S.sottostruttura>0?`<tr><td>Sottostruttura e staffe</td><td>${eur(S.sottostruttura)}</td></tr>`:""}
-    ${S.batt?`<tr><td>Batteria di accumulo ${S.batt} kWh</td><td>${eur(bt)}</td></tr>`:""}
+    ${S.batt?`<tr><td>Batteria di accumulo ${cb?esc(cb.n)+" × "+battModuli()+" ("+fmt(battModuli()*cb.kwh,2)+" kWh)":S.batt+" kWh"}</td><td>${eur(bt)}</td></tr>`:""}
     <tr><td>Pratiche, allaccio e collaudo</td><td>${S.pratiche>0?eur(S.pratiche):"incluso"}</td></tr>
     ${S.piattaforma>0?`<tr><td>Piattaforma per la posa</td><td>${eur(S.piattaforma)}</td></tr>`:""}
     <tr class="tot"><td>Investimento</td><td>${eur(r.cost)}</td></tr>
@@ -1204,11 +1212,27 @@ function schedaHtml(){
     ${is.mppt?row("N° MPPT",is.mppt):""}
     ${is.vdc_max?row("Tensione CC max",is.vdc_max):""}
     ${is.vac?row("Tensione AC uscita",is.vac):""}
+    ${is.vbatt?row("Tensione batteria",is.vbatt):""}
+    ${is.dim?row("Dimensioni",is.dim):""}
     ${is.comm?row("Comunicazione",is.comm):""}
     ${is.gar?row("Garanzia",is.gar+" anni"):""}
     ${is.cert?row("Certificazioni",is.cert):""}
   </div>`;
-  return ph+ih;
+  const bat=curBatt(); let bh="";
+  if(bat){ const bs=bat.specs||{};
+    bh=`<div class="scheda-card">
+    <div class="sc-title">🔋 Batteria ${esc(bat.n)}</div>
+    ${row("Capacità del modulo",fmt(bat.kwh,2)+" kWh")}
+    ${S.batt?row("Moduli per "+S.batt+" kWh",battModuli()):""}
+    ${bs.chimica?row("Chimica",bs.chimica):""}
+    ${bs.dod?row("Profondità di scarica",bs.dod):""}
+    ${bs.cicli?row("Cicli",bs.cicli):""}
+    ${bs.ip?row("Protezione",bs.ip):""}
+    ${bs.dim?row("Dimensioni",bs.dim):""}
+    ${bs.gar?row("Garanzia",bs.gar+" anni"):""}
+    ${bs.compat?row("Compatibile con",bs.compat):""}
+  </div>`; }
+  return ph+ih+bh;
 }
 function renderScheda(){
   const h=schedaHtml();
@@ -1241,7 +1265,8 @@ function setMode(m){
   if(m==="photo") setTimeout(drawPhoto,20); else setTimeout(resize,20);
 }
 $("#m3d").addEventListener("click",()=>setMode("3d"));
-$("#mPhoto").addEventListener("click",()=>{ if(S.step!==2) go(2); setMode("photo"); });
+$("#mPhoto").addEventListener("click",()=>{ if(S.step!==2) go(2); setMode("photo");
+  if(!P.img&&(P.sat||S.addr||P.lat!=null)) satellite(P.sat?{pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}:{}); });
 
 /* posizione e direzione dai dati EXIF della foto */
 function exifGPS(buf){
@@ -1294,7 +1319,7 @@ $("#roofFile").addEventListener("change",async e=>{
   const f=e.target.files&&e.target.files[0]; e.target.value=""; if(!f) return;
   let g=null; try{ g=exifGPS(await f.arrayBuffer()); }catch(err){}
   const img=new Image();
-  img.onload=()=>{ P.img=img; P.corners=[]; P.when=new Date(); $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#photoTip").hidden=false; drawPhoto(); };
+  img.onload=()=>{ P.img=img; P.corners=[]; P.mpp=null; P.sat=null; $("#satIn").hidden=true; $("#satOut").hidden=true; P.when=new Date(); $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#photoTip").hidden=false; drawPhoto(); };
   img.src=URL.createObjectURL(f);
   if(g){ useLocation(g.lat,g.lon,"dalla foto"); if(g.dir!=null&&P.view==="ground") setHeading(g.dir,"dalla foto"); }
   else if(navigator.geolocation){
@@ -1315,6 +1340,76 @@ $("#compassBtn").addEventListener("click",async()=>{
 });
 $("#resetCorners").addEventListener("click",()=>{ P.corners=[]; drawPhoto(); });
 $("#toggleLabels").addEventListener("click",e=>{ P.hideLabels=!P.hideLabels; e.currentTarget.textContent=P.hideLabels?"Mostra scritte":"Nascondi scritte"; drawPhoto(); });
+
+/* ======================= FOTO DAL SATELLITE ======================= */
+/* Immagini Esri World Imagery passate dal nostro server (/api/solaris/satellite): nord in alto e scala nota,
+   quindi le misure della falda si calcolano dai pixel senza scriverle a mano. */
+const SAT_LATO={20:288,19:192}; let satBusy=false;
+function satMpp(lat,z){ return 156543.03392*Math.cos(lat*Math.PI/180)/Math.pow(2,z); }
+function satPixel(lat,lon,z){ const n=256*Math.pow(2,z), sn=Math.sin(lat*Math.PI/180); return {x:(lon+180)/360*n, y:(.5-Math.log((1+sn)/(1-sn))/(4*Math.PI))*n}; }
+function satTile(z,x,y){ return new Promise(res=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>res(null); im.src=`${window.SAT_BASE||""}/api/solaris/satellite?z=${z}&x=${x}&y=${y}`; }); }
+async function satPosizione(){
+  if(S.addr&&S.addr.length>=3){
+    try{ const r=await fetch(`${window.SAT_BASE||""}/api/solaris/geocodifica?q=${encodeURIComponent(S.addr)}`); const j=await r.json();
+      if(r.ok&&j.lat!=null){ if(!j.preciso) toast("Indirizzo trovato in modo approssimativo: sposta la falda sul tetto giusto"); return {lat:j.lat,lon:j.lon,src:"dall’indirizzo"}; } }catch(e){}
+  }
+  if(P.sat&&P.sat.lat!=null) return {lat:P.sat.lat,lon:P.sat.lon,src:"dal progetto"};
+  if(P.lat!=null) return {lat:P.lat,lon:P.lon,src:"dalla foto"};
+  if(navigator.geolocation) return await new Promise(res=>navigator.geolocation.getCurrentPosition(
+    p=>res({lat:p.coords.latitude,lon:p.coords.longitude,src:"dal GPS"}),()=>res(null),{enableHighAccuracy:true,timeout:9000}));
+  return null;
+}
+function satDefaultCorners(cx,cy,mpp){
+  // falda di partenza: la griglia di pannelli attuale, orientata come al passo 2 (poi si spostano gli angoli)
+  const pn=curPanel(); if(!P.cols||!P.rows){ P.rows=2; P.cols=Math.max(1,Math.ceil(S.panels/2)); }
+  const w=P.cols*(pn.w+0.03)+0.3, l=(P.rows*(pn.h+0.04)+0.3)*Math.cos(S.tilt*Math.PI/180);
+  const W=w/mpp, Lp=l/mpp, az=(180+S.ori)*Math.PI/180;
+  const d=[Math.sin(az),-Math.cos(az)], e=[d[1],-d[0]];
+  const pt=(a,b)=>[cx+d[0]*a*Lp/2+e[0]*b*W/2, cy+d[1]*a*Lp/2+e[1]*b*W/2];
+  return [pt(1,-1),pt(1,1),pt(-1,1),pt(-1,-1)];
+}
+async function satellite(opz={}){
+  if(satBusy) return; satBusy=true;
+  try{
+    let pos=opz.pos||null;
+    if(!pos){ toast("Cerco il tetto dal satellite…"); pos=await satPosizione(); }
+    if(!pos){ toast("Scrivi l’indirizzo al passo 1 o consenti la posizione per la foto dal satellite"); return; }
+    let z=opz.z||(P.sat&&P.sat.z)||20, lato=opz.lato||(P.sat&&P.sat.lato)||SAT_LATO[z]||320;
+    // lo zoom 20 non c'è dappertutto: si prova la tessera centrale, altrimenti zoom 19
+    const tc=satPixel(pos.lat,pos.lon,z);
+    if(z===20 && !(await satTile(20,Math.floor(tc.x/256),Math.floor(tc.y/256)))){ z=19; if(!opz.lato) lato=SAT_LATO[19]; }
+    const c=satPixel(pos.lat,pos.lon,z), x0=c.x-lato/2, y0=c.y-lato/2;
+    const cv=document.createElement("canvas"); const SAT_K=Math.max(2,Math.round(900/lato)); cv.width=cv.height=Math.round(lato*SAT_K);
+    const g=cv.getContext("2d"); g.imageSmoothingEnabled=true; g.imageSmoothingQuality="high"; g.fillStyle="#9aa6b2"; g.fillRect(0,0,cv.width,cv.height);
+    const jobs=[];
+    for(let ty=Math.floor(y0/256);ty<=Math.floor((y0+lato-1)/256);ty++)
+      for(let tx=Math.floor(x0/256);tx<=Math.floor((x0+lato-1)/256);tx++)
+        jobs.push(satTile(z,tx,ty).then(im=>{ if(im) g.drawImage(im,(tx*256-x0)*SAT_K,(ty*256-y0)*SAT_K,256*SAT_K,256*SAT_K); return !!im; }));
+    const ok=await Promise.all(jobs);
+    if(!ok.some(Boolean)){ toast("Immagine satellitare non disponibile adesso: riprova o carica una foto"); return; }
+    g.font=`600 ${11*SAT_K}px Figtree, sans-serif`; g.textAlign="right"; g.textBaseline="bottom";
+    g.fillStyle="rgba(255,255,255,.85)"; g.fillText("Immagini © Esri, Maxar, Earthstar Geographics",cv.width-8*SAT_K,cv.height-6*SAT_K);
+    const mpp=satMpp(pos.lat,z)/SAT_K;
+    P.img=cv; P.mpp=mpp; P.sat={lat:pos.lat,lon:pos.lon,z,lato}; P.when=new Date();
+    P.view="top"; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.pv==="top")); $("#compassBtn").hidden=true;
+    if(!opz.tieniAngoli||P.corners.length!==4){ P.corners=satDefaultCorners(cv.width/2,cv.height/2,mpp); P.w=null; P.l=null; }
+    $("#photoEmpty").hidden=true; $("#photobar").hidden=false; $("#satIn").hidden=false; $("#satOut").hidden=false;
+    if(!opz.silenzioso) useLocation(pos.lat,pos.lon,pos.src); else { P.lat=pos.lat; P.lon=pos.lon; }
+    if(S.mode!=="photo") setMode("photo");
+    fitGrid(); drawPhoto(); saveToServer();
+    if(!opz.silenzioso) setTimeout(()=>toast("Ecco il tetto dal satellite: trascina gli angoli arancioni sulla falda"),2700);
+  } finally { satBusy=false; }
+}
+$("#satBtn").addEventListener("click",()=>satellite({z:20}));
+$("#satBtn2").addEventListener("click",()=>{ P.sat=null; satellite({z:20}); });
+function satZoom(f){ if(!P.sat) return; const old=P.sat.lato, lato=Math.max(96,Math.min(768,Math.round(old*f/32)*32));
+  if(lato===old) return; const k=old/lato, cx=P.img.width/2, cy=P.img.height/2;
+  // gli angoli restano sullo stesso punto del tetto
+  P.corners=P.corners.map(([x,y])=>[cx+(x-cx)*k, cy+(y-cy)*k]);
+  satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato,tieniAngoli:true,silenzioso:true}); }
+$("#satIn").addEventListener("click",()=>satZoom(0.7));
+$("#satOut").addEventListener("click",()=>satZoom(1.4));
+
 
 /* disegno */
 function homog(q){
@@ -1431,6 +1526,9 @@ function topGeometry(){
   let ori=Math.round((az-180)/5)*5; if(ori<-180) ori+=360; if(ori>180) ori-=360;
   if(Math.abs(ori)>100) toast("Attenzione: questa falda guarda a nord, valuta l’altra");
   S.ori=Math.max(-90,Math.min(90,ori)); updateDial(); rebuildHouse();
+  if(P.mpp){ const wpx=(d(c[0],c[1])+d(c[3],c[2]))/2, lpx=(d(c[0],c[3])+d(c[1],c[2]))/2;
+    P.w=Math.round(wpx*P.mpp*10)/10; P.l=Math.round(lpx*P.mpp/Math.cos(S.tilt*Math.PI/180)*10)/10;
+    $("#slopeW").value=fmt(P.w,1); $("#slopeL").value=fmt(P.l,1); return; }
   if(P.w){ const wpx=(d(c[0],c[1])+d(c[3],c[2]))/2, lpx=(d(c[0],c[3])+d(c[1],c[2]))/2;
     P.l=Math.round(P.w*lpx/wpx/Math.cos(S.tilt*Math.PI/180)*10)/10; $("#slopeL").value=fmt(P.l,1); }
 }
@@ -1440,7 +1538,7 @@ function gridToSlope(){
   const sw=document.getElementById("slopeW"), sl=document.getElementById("slopeL");
   if(sw) sw.value=fmt(P.w,2); if(sl) sl.value=fmt(P.l,2);
 }
-function fitGrid(){ if(!P.w&&P.cols) gridToSlope(); topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)))); } applyGrid(); }
+function fitGrid(){ if(!P.w&&P.cols&&!P.mpp) gridToSlope(); topGeometry(); const p=curPanel(); if(P.w&&P.l){ P.cols=Math.max(1,Math.min(20,Math.floor((P.w-0.3)/(p.w+0.03)+0.03))); P.rows=Math.max(1,Math.min(8,Math.floor((P.l-0.3)/(p.h+0.04)+0.03))); } applyGrid(); }
 $$("[data-pv]").forEach(b=>b.addEventListener("click",()=>{
   P.view=b.dataset.pv; $$("[data-pv]").forEach(x=>x.setAttribute("aria-pressed",x===b));
   $("#compassBtn").hidden=P.view==="top";
@@ -1484,7 +1582,19 @@ function fillSelects(){
   $("#invSel").innerHTML=fi.map(p=>`<option value="${p.id}">${esc(p.n)}</option>`).join("");
   if(!fi.find(p=>p.id===S.invId)) S.invId=(fi[0]||INVERTERS[0]).id;
   $("#panSel").value=S.panelId; $("#invSel").value=S.invId; PANEL_KW=curPanel().kw;
+  const bs=$("#battSel"), has=BATTERIES.length>0; bs.hidden=!has; $("#battSelLbl").hidden=!has;
+  if(has){ bs.innerHTML=`<option value="">Batteria generica (prezzo al kWh)</option>`+BATTERIES.map(b=>`<option value="${b.id}">${esc(b.n)}</option>`).join("");
+    if(S.battId&&!curBatt()) S.battId=""; bs.value=S.battId||""; }
+  battInfo();
 }
+function battInfo(){
+  const el=$("#battInfo"), b=curBatt();
+  if(!b||!S.batt){ el.hidden=true; return; }
+  const n=battModuli(), tot=n*b.kwh;
+  el.hidden=false; el.className="check "+(tot+1e-9>=S.batt?"ok":"warn");
+  el.textContent=`${n} ${n===1?"modulo":"moduli"} × ${fmt(b.kwh,2)} kWh = ${fmt(tot,2)} kWh`+(b.specs&&b.specs.compat?` · compatibile con ${b.specs.compat}`:"");
+}
+$("#battSel").addEventListener("change",e=>{ S.battId=e.target.value; battInfo(); renderScheda(); refresh(); });
 $("#panSel").addEventListener("change",e=>{ S.panelId=e.target.value; PANEL_KW=curPanel().kw; clampPanels(); rebuildHouse(); if(S.mode==="photo"&&P.corners.length===4) fitGrid(); refresh(); });
 $("#invSel").addEventListener("change",e=>{ S.invId=e.target.value; refresh(); });
 
@@ -1654,7 +1764,7 @@ function saveToServer(){
     try{
       const r=simulate(S.batt), cf=cashflow(r);
       const body={
-        statoJson:{...S,addons:[...S.addons]},
+        statoJson:{...S,addons:[...S.addons],photo:{...S.photo,img:null}},
         kwp:+r.kwp.toFixed(3),
         produzioneStimaKwh:Math.round(r.prodY),
         risparmioAnno1:Math.round(r.saving),
@@ -1692,6 +1802,7 @@ function saveToServer(){
 
 /* ======================= AVVIO ======================= */
 fillSelects(); renderKwpTargets(); clampPanels(); updateDial(); refresh();
+if(P.sat&&P.sat.lat!=null){ const c0=P.corners.slice(); satellite({pos:{lat:P.sat.lat,lon:P.sat.lon},z:P.sat.z,lato:P.sat.lato,tieniAngoli:true,silenzioso:true}).then(()=>{ if(c0.length===4){ P.corners=c0; fitGrid(); if(S.mode==="photo") drawPhoto(); } }); }
 if(window.THREE){ initThree(); } else { $("#nowKw").textContent="3D non disponibile"; }
 </script>
 </body>
