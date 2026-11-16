@@ -4,6 +4,7 @@
 // prisma/seed-data/plasma30_prodotti.json (scripts/listini/estrai_plasma30.py; «*» = primo prezzo disponibile).
 // Optional sulla falsa riga dell'Optima 70 (richiesta di Ugo), con le regole dei colori del listino Plasma 30.
 // Modulo puro: lo usano la rotta api/admin/seed-plasma30, la pagina dell'offerta e le schede tecniche.
+import { formeSpeciali, vetriSpeciali } from "./serramenti-comuni";
 
 export const PREFISSO_PLASMA30 = "PLASMA30_";
 export const PREFISSO_PLASMA30_TV = "PLASMA30TV_";
@@ -112,6 +113,8 @@ export function optionalPlasma30(): OptionalPlasma30[] {
     o("Misure e lavorazioni", "Oltre le misure di listino: ogni 10 cm in più (L o H)", 300, "PLASMA30_FUORI300"),
     o("Misure e lavorazioni", "Oltre 2400 mm: ogni 10 cm in più", 400, "PLASMA30_FUORI400"),
     o("Misure e lavorazioni", "Serramento curvo o sagomato", 40, "PLASMA30", "PERCENTUALE"),
+    ...formeSpeciali("PLASMA30", false),
+    ...vetriSpeciali("PLASMA30"),
     o("Misure e lavorazioni", "Minimo di produzione (doppio vetro: meno di 3 pezzi, fissi meno di 2; triplo vetro: meno di 2 pezzi)", 450),
     o("Misure e lavorazioni", "Trasporto pezzi fuori sagoma", 350),
     o("Servizi al contratto", "Autoscala dal 3° piano in su", 700),

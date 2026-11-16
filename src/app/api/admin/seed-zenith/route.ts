@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import prodottiData from "../../../../../prisma/seed-data/zenith_prodotti.json";
 import modelliData from "../../../../../prisma/seed-data/zenith_modelli.json";
-import optionaliData from "../../../../../prisma/seed-data/zenith_optional.json";
+import { allineaOptionalSerramenti } from "@/lib/listini/allinea-optional";
 
 export const dynamic = "force-dynamic";
 
@@ -20,23 +20,10 @@ type ModelloRow = {
   modalitaCalcolo: string;
   parametriCalcolo: Record<string, number>;
 };
-type OptionalRow = {
-  categoria: string;
-  nome: string;
-  tipoPrezzo: string;
-  valore: number;
-  unita: string | null;
-  sporgenzaMm: number | null;
-  larghezzaMm: number | null;
-  listino: string | null;
-  note: string | null;
-  gruppiApplicabili: string[];
-};
 
 const TIPOLOGIE_PREFIXES = ["ZENITH_"];
 const keyProdotto = (p: { tipologia: string; colore: string; altezzaMm: number; larghezzaMm: number }) =>
   `${p.tipologia}|${p.colore}|${p.altezzaMm}|${p.larghezzaMm}`;
-const keyOptional = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
 export async function POST(req: NextRequest) {
   const key = req.headers.get("x-seed-key");
@@ -106,50 +93,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const optionaliNuovi = optionaliData as OptionalRow[];
-    const optionaliEsistenti = await prisma.optional.findMany({
-      where: { brandId: brand.id, gruppiApplicabili: { has: GRUPPO } },
-    });
-    const mappaOptional = new Map(optionaliEsistenti.map((o) => [keyOptional(o), o]));
-
-    let optCreati = 0;
-    let optAggiornati = 0;
-    let optInvariati = 0;
-    for (const o of optionaliNuovi) {
-      const esistente = mappaOptional.get(keyOptional(o));
-      if (!esistente) {
-        await prisma.optional.create({
-          data: {
-            brandId: brand.id,
-            categoria: o.categoria,
-            nome: o.nome,
-            tipoPrezzo: o.tipoPrezzo,
-            valore: o.valore,
-            unita: o.unita,
-            sporgenzaMm: o.sporgenzaMm,
-            larghezzaMm: o.larghezzaMm,
-            listino: o.listino,
-            note: o.note,
-            gruppiApplicabili: o.gruppiApplicabili,
-          },
-        });
-        optCreati++;
-      } else if (
-        esistente.valore !== o.valore ||
-        esistente.tipoPrezzo !== o.tipoPrezzo ||
-        esistente.note !== o.note ||
-        esistente.listino !== o.listino ||
-        JSON.stringify(esistente.gruppiApplicabili) !== JSON.stringify(o.gruppiApplicabili)
-      ) {
-        await prisma.optional.update({
-          where: { id: esistente.id },
-          data: { valore: o.valore, tipoPrezzo: o.tipoPrezzo, note: o.note, listino: o.listino, gruppiApplicabili: o.gruppiApplicabili },
-        });
-        optAggiornati++;
-      } else {
-        optInvariati++;
-      }
-    }
+    // optional: dal modulo src/lib/listini/zenith.ts (colore esterno/interno, vetri, accessori, lavorazioni), solo quelli che mancano;
+    // le vecchie voci del primo caricamento (zenith_optional.json) restano spente
+    const { creati: optCreati, spenti: optSpenti } = await allineaOptionalSerramenti();
 
     return NextResponse.json({
       ok: true,
@@ -158,8 +104,7 @@ export async function POST(req: NextRequest) {
       prodottiInvariati,
       modelliAggiornati: modelli.length,
       optCreati,
-      optAggiornati,
-      optInvariati,
+      optSpenti,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
