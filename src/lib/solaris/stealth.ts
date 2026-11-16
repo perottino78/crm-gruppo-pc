@@ -14,8 +14,8 @@ export type ComponenteStealth = {
   misureJson: Record<string, unknown>;
 };
 
-const MONO = { vac: "220–240 V", comm: "WiFi · RS485 · APP", cert: "CEI 0-21 · IP65 · funzione UPS" };
-const TRI = { vac: "380–415 V", comm: "WiFi · RS485 · APP", cert: "CEI 0-21 · IP65 · funzione UPS" };
+const MONO = { vac: "220–240 V", comm: "WiFi · RS485 · APP", ip: "IP65", cert: "CEI 0-21 · IEC 62109-1/2 · VDE-AR-N 4105" };
+const TRI = { vac: "380–415 V", comm: "WiFi · RS485 · APP", ip: "IP65", cert: "CEI 0-21 · IEC 62109-1/2 · VDE-AR-N 4105" };
 
 function invMono(kw: number, fonte: string): ComponenteStealth {
   const sigla = `ST-INV-S${kw.toFixed(1)}`;
@@ -29,7 +29,7 @@ function invMono(kw: number, fonte: string): ComponenteStealth {
     misureJson: {
       sigla,
       marca: "Stealth Energy",
-      specs: { eff: 97.6, mppt: 2, vdc_max: "550 V", vbatt: "80–495 V", ...MONO, gar: 10, dim: "411 × 505 × 192 mm" },
+      specs: { eff: 97.6, mppt: 2, mppt_range: "125–530 V", vdc_max: "550 V", vbatt: "85–460 V", ...MONO, gar: 7, dim: "411 × 505 × 192 mm", peso: "18 kg", eps: "< 200 ms" },
     },
   };
 }
@@ -43,7 +43,7 @@ function invTri(kw: number, extra: Record<string, unknown>, fonte: string): Comp
     faseTipo: "TRIFASE",
     ibrido: true,
     note: `Inverter ibrido trifase Stealth Energy ${sigla}. ${fonte}`,
-    misureJson: { sigla, marca: "Stealth Energy", specs: { mppt: 2, ...TRI, gar: 10, ...extra } },
+    misureJson: { sigla, marca: "Stealth Energy", specs: { mppt: 2, mppt_range: "200–850 V", vdc_max: "1000 V", vbatt: "180–600 V", ...TRI, gar: 7, peso: "28 kg", eps: "< 100 ms", ...extra } },
   };
 }
 
@@ -64,15 +64,16 @@ export const CATALOGO_STEALTH: ComponenteStealth[] = [
   invMono(4, "Listino Italia."),
   invMono(5, "Listino Italia."),
   invMono(6, "Listino Italia."),
-  invTri(5, { eff: 98.6, vbatt: "180–600 V", dim: "457 × 654 × 228 mm" }, "Dati del produttore, fino a 16 in parallelo."),
-  invTri(6, { eff: 98.6, vbatt: "180–600 V", dim: "457 × 654 × 228 mm" }, "Dati del produttore."),
-  invTri(8, { eff: 98.6, vbatt: "180–600 V", dim: "457 × 654 × 228 mm" }, "Dati del produttore."),
-  invTri(10, { eff: 98.6, vdc_max: "1000 V", vbatt: "80–495 V", dim: "457 × 654 × 228 mm" }, "Listino Italia."),
+  invTri(5, { eff: 98.6, dim: "457 × 654 × 228 mm" }, "Dati del produttore, fino a 16 in parallelo."),
+  invTri(6, { eff: 98.6, dim: "457 × 654 × 228 mm" }, "Dati del produttore."),
+  invTri(8, { eff: 98.6, dim: "457 × 654 × 228 mm" }, "Dati del produttore."),
+  invTri(10, { eff: 98.6, dim: "457 × 654 × 228 mm" }, "Listino Italia."),
   batteria("SP-HEV50", 5, "Modulo batteria al litio alta tensione, espandibile (controller SP-HEV27: 1 ogni 5 moduli)", {
     chimica: "LFP", cicli: "10.000", ip: "IP65", dim: "640 × 420 × 380 mm", gar: 10, compat: "ST-INV-S4.0–6.0 · ST-INV-T10.0",
   }),
   batteria("SP-HEHV27", 2.76, "Modulo batteria alta tensione 80–576 V, da 1 a 5 moduli", {
-    chimica: "LFP", dod: "95%", ip: "IP65", gar: 10, compat: "inverter ibridi Stealth HV",
+    chimica: "LFP", dod: "95%", cicli: "10.000 (garanzia 10 anni)", ip: "IP65", dim: "640 × 220 × 380 mm per modulo", peso: "30,5 kg per modulo",
+    vmod: "80–115,2 V per modulo", gar: 10, compat: "inverter ibridi Stealth HV",
   }),
   batteria("SP-HE4850", 2.4, "Modulo batteria bassa tensione 48 V, espandibile fino a 14,4 kWh", {
     chimica: "LFP", dod: "90%", ip: "IP20", gar: 10, compat: "solo inverter 48 V (non ST-INV)",
