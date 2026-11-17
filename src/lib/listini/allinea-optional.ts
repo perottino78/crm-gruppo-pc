@@ -8,7 +8,7 @@ import { optionalFidra } from "./fidra";
 import { optionalPlasma30 } from "./plasma30";
 import type { VoceOptional } from "./serramenti-comuni";
 
-export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-17a";
+export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-17b";
 const CHIAVE = "optional_serramenti_versione";
 const chiave = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
@@ -54,10 +54,14 @@ export async function allineaOptionalSerramenti() {
     where: { attivo: true, nome: { in: STRATIFICATO_A_PAGAMENTO }, OR: ["ZENITH", "OPTIMA", "FIDRA", "PLASMA30"].map((p) => ({ listino: { startsWith: p } })) },
     data: { attivo: false },
   })).count;
-  // pellicola interna diversa dall'esterna: il +20% è già nell'esterno, il +80% in più va tolto (richiesta di Ugo 17/11/2026)
+  // pellicole diverse sui due lati: +25% totale (richiesta di Ugo 17/11/2026). Zenith: +5% oltre al +20% dell'esterno; gli altri listini hanno una voce sola.
   spenti += (await prisma.optional.updateMany({
-    where: { categoria: "Colore interno", listino: "ZENITH", nome: { contains: "pellicola diversa da quella esterna" }, valore: { gt: 0 } },
-    data: { valore: 0 },
+    where: { categoria: "Colore interno", listino: "ZENITH", nome: { contains: "pellicola diversa da quella esterna" }, valore: { not: 5 } },
+    data: { valore: 5 },
+  })).count;
+  spenti += (await prisma.optional.updateMany({
+    where: { categoria: "Colore", nome: { contains: "diverse sui due lati" }, valore: 100, OR: ["OPTIMA", "FIDRA", "PLASMA30"].map((p) => ({ listino: { startsWith: p } })) },
+    data: { valore: 25 },
   })).count;
   const optima = await brandCon(PREFISSO_OPTIMA);
   if (optima) creati += await creaMancanti(optima, optionalOptima(), "OPTIMA");

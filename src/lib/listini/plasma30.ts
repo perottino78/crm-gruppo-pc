@@ -60,7 +60,7 @@ export function listiniPlasma30(tipologia: string): string[] {
 
 export const GUIDA_PLASMA30 =
   "Prezzo dalla griglia del listino Plasma 30 (misura uguale o subito superiore), bianco massa compreso; avorio +5%; pellicole standard " +
-  "+15% su un lato o +20% sui due lati uguali, fuori standard +30% su un lato, diverse sui due lati +100% (fuori standard sui due lati: chiedere). " +
+  "+15% su un lato o +20% sui due lati uguali, fuori standard +30% su un lato, diverse sui due lati +25% totale (fuori standard sui due lati: chiedere). " +
   "Minimo di produzione: doppio vetro meno di 3 pezzi (fissi meno di 2), triplo vetro meno di 2 pezzi. Misure speciali: chiedere fattibilità tecnica.";
 
 export const CATALOGHI_PLASMA30 = [{ nome: "Scheda tecnica Plasma 30", url: "/cataloghi/plasma30/Plasma30-scheda-tecnica.pdf" }];
@@ -99,7 +99,7 @@ export function optionalPlasma30(): OptionalPlasma30[] {
       o("Colore", `${c} — pellicola sui due lati uguali`, 20, "PLASMA30", "PERCENTUALE"),
     ]),
     ...PELLICOLE_FUORI_STANDARD_PLASMA30.map((c) => o("Colore", `${c} — pellicola fuori standard su un lato`, 30, "PLASMA30", "PERCENTUALE")),
-    o("Colore", "Pellicole diverse sui due lati (interno/esterno)", 100, "PLASMA30", "PERCENTUALE"),
+    o("Colore", "Pellicole diverse sui due lati (interno/esterno)", 25, "PLASMA30", "PERCENTUALE"),
     o("Vetri", "Vetro STC (a vetro)", 150, "PLASMA30", "FISSO", "vetro"),
     o("Vetri", "Vetro satinato (ad anta)", 90, "PLASMA30_F", "FISSO", "anta"),
     o("Vetri", "Vetro satinato (ad anta)", 150, "PLASMA30_PF", "FISSO", "anta"),
