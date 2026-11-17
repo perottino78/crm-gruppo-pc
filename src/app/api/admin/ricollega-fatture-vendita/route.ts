@@ -23,9 +23,21 @@ export async function POST(req: NextRequest) {
   for (const d of elenco) {
     if (d.tipo !== "VENDITA") continue;
     const fv = await prisma.fatturaVendita.findFirst({ where: { chiave: `BCV|${d.bcId}` }, select: { id: true, numero: true, clienteId: true } });
-    if (!fv?.clienteId) continue;
+    if (!fv) continue;
+    if (!fv.clienteId) {
+      // fattura rimasta senza cliente (dopo una riparazione): se il cliente giusto ora esiste, la si ricollega
+      const trovato = esegui ? await trovaCliente(d) : null;
+      if (esegui && trovato && nomiCompatibili(trovato.nome, d.controparte)) {
+        await prisma.fatturaVendita.update({ where: { id: fv.id }, data: { clienteId: trovato.id, clienteNome: trovato.nome } });
+        await prisma.scadenza.updateMany({ where: { fatturaVenditaId: fv.id }, data: { clienteId: trovato.id, controparte: trovato.nome } });
+        await registra("Ricollegata", fv.id, `Fattura ${fv.numero}`, `a «${trovato.nome}»`, "Riparazione");
+        esiti.push({ numero: fv.numero, controparte: d.controparte, collegataA: null, nuovoCliente: trovato.nome });
+      }
+      continue;
+    }
     const sbagliato = await prisma.cliente.findUnique({ where: { id: fv.clienteId }, select: { id: true, nome: true, codiceFiscale: true } });
-    if (!sbagliato || nomiCompatibili(sbagliato.nome, d.controparte)) continue;
+    // schede con l'email al posto del nome (clienti arrivati dai moduli): non si giudicano dal nome
+    if (!sbagliato || sbagliato.nome.includes("@") || nomiCompatibili(sbagliato.nome, d.controparte)) continue;
     const toglieCf = !!d.codiceFiscale && sbagliato.codiceFiscale?.toUpperCase() === d.codiceFiscale.toUpperCase();
     if (esegui && toglieCf) await prisma.cliente.update({ where: { id: sbagliato.id }, data: { codiceFiscale: null } });
     const giusto = esegui ? await trovaCliente(d) : null;
