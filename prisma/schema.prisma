@@ -1476,6 +1476,8 @@ model CategoriaArticolo {
   arrotondamento Float?
   // margine minimo sotto cui l'articolo viene segnalato (in %)
   margineMinimo  Float?
+  // Chi può vedere questo listino/categoria (ruoli e uffici, vedi lib/articoli/visibilita.ts); vuoto = tutti quelli che hanno accesso agli articoli
+  visibileA      String[]            @default([])
   ordine         Int                 @default(0)
   articoli       Articolo[]
   createdAt      DateTime            @default(now())

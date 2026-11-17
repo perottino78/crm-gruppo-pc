@@ -1,5 +1,6 @@
 // Ricerca dei complementi da aggiungere al rilievo: articoli dell'anagrafica e prodotti dei listini (con i colori).
 // Solo per chi è collegato. Risponde con al massimo 25 risultati.
+import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
@@ -13,13 +14,15 @@ export type RisultatoComplemento =
   | { tipo: "P"; brandId: string; tipologia: string; label: string; gruppo: string | null; fornitoreId: string | null; colori: string[]; griglia: boolean; unita: "cm" | "mm" };
 
 export async function GET(req: NextRequest) {
-  if (!(await getCurrentUser())) return NextResponse.json({ errore: "Non autorizzato" }, { status: 401 });
+  const utente = await getCurrentUser();
+  if (!utente) return NextResponse.json({ errore: "Non autorizzato" }, { status: 401 });
   const q = (req.nextUrl.searchParams.get("q") ?? "").trim();
   if (q.length < 2) return NextResponse.json({ risultati: [] });
   const parole = q.split(/\s+/).filter(Boolean).slice(0, 5);
+  const vis = visibilitaArticoliWhere(utente);
 
   const articoli = await prisma.articolo.findMany({
-    where: { attivo: true, AND: parole.map((p) => ({ OR: [{ descrizione: { contains: p, mode: "insensitive" as const } }, { codice: { contains: p, mode: "insensitive" as const } }, { codiceFornitore: { contains: p, mode: "insensitive" as const } }] })) },
+    where: { attivo: true, AND: [...(vis ? [vis] : []), ...parole.map((p) => ({ OR: [{ descrizione: { contains: p, mode: "insensitive" as const } }, { codice: { contains: p, mode: "insensitive" as const } }, { codiceFornitore: { contains: p, mode: "insensitive" as const } }] }))] },
     select: { id: true, codice: true, descrizione: true, um: true, costoAcquisto: true, fornitoreId: true, fornitore: { select: { ragioneSociale: true } } },
     orderBy: { codice: "asc" }, take: 12,
   });

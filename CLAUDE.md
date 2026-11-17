@@ -702,6 +702,9 @@ login nel `matcher` del middleware.
   Un passo è fatto se lo dice il suo dato o se è fatto un passo più avanti (pratiche già avviate non restano ferme). Il PROGETTO non aspetta più l'incasso: `creaProgetto` richiede `Commessa.fatturaAccontoIl`
   (`registraFatturaAcconto`, con annulla=1 si rimette da fare) e `registraBenvenuto` (`benvenutoIl/benvenutoNote`, rivedibile) chiude il task FATT_ACCONTO; il rilievo parte (`avviaRilievoSePronto`) quando ci sono
   progetto E acconto incassato (`dopoIncassoAcconto` chiude il task di Debora, fase PROGETTO ora «Incasso acconto»). Dopo il deploy: `api/admin/allinea-flusso` POST per aggiornare le fasi. Test `tests/pratica/passi.test.ts`.
+- **Articoli: categorie al volo e listino visibile a chi** (richiesta di Ugo 18/11/2026, ricambi di vetrate e pergole): nella scheda articolo «➕ Nuova categoria» (`creaCategoriaRapida`, eredita regola e visibilità
+  della madre) e link a «gestisci categorie»; `CategoriaArticolo.visibileA` (token «RUOLO:…»/«UFFICIO:…», vuoto = tutti; `src/lib/articoli/visibilita.ts` puro e testato, `ScegliVisibilita` nella pagina Categorie).
+  Chi non vede la categoria non ne vede gli articoli in elenco, esportazione, scheda e ricerca complementi (`visibilitaArticoliWhere`); chi ha `listini.modifica` vede tutto. Non filtrati (per ora): ordini fornitori e magazzino.
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:

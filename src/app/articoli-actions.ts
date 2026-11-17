@@ -1,5 +1,6 @@
 "use server";
 
+import { pulisciToken } from "@/lib/articoli/visibilita";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -131,8 +132,9 @@ export async function salvaCategoria(fd: FormData) {
   if (!nome) return;
   const metodo = str(fd, "metodoPrezzo");
   const valore = num(fd, "valore");
+  const visibileA = pulisciToken(fd.getAll("visibileA").filter((x): x is string => typeof x === "string"));
   const dati = {
-    nome, padreId: str(fd, "padreId"), divisione: str(fd, "divisione"),
+    nome, padreId: str(fd, "padreId"), divisione: str(fd, "divisione"), visibileA,
     metodoPrezzo: metodo === "RICARICO" || metodo === "MARGINE" ? metodo : null,
     valore: metodo === "RICARICO" ? (valore && valore >= 1 ? valore : null) : metodo === "MARGINE" ? (valore !== null && valore >= 0 && valore < 100 ? valore : null) : null,
     arrotondamento: num(fd, "arrotondamento"), margineMinimo: num(fd, "margineMinimo"),
@@ -356,4 +358,20 @@ export async function aggiungiArticoloAOrdine(fd: FormData) {
   });
   revalidatePath(`/ordini-fornitori/${o.id}`);
   if (o.commessaId) revalidatePath(`/commesse/${o.commessaId}`);
+}
+
+/** Dalla scheda articolo: crea al volo una categoria (o sottocategoria) e restituisce id e nome per sceglierla subito. Con padre eredita regola e visibilità. */
+export async function creaCategoriaRapida(nome: string, padreId: string | null): Promise<{ ok: true; id: string; etichetta: string } | { ok: false; errore: string }> {
+  await amministratore();
+  const n = nome.trim();
+  if (!n) return { ok: false, errore: "Scrivi il nome della categoria." };
+  const padre = padreId ? await prisma.categoriaArticolo.findUnique({ where: { id: padreId }, select: { id: true, nome: true, divisione: true, visibileA: true } }) : null;
+  try {
+    const c = await prisma.categoriaArticolo.create({ data: { nome: n, padreId: padre?.id ?? null, divisione: padre?.divisione ?? null, visibileA: padre?.visibileA ?? [] } });
+    revalidatePath("/prodotti/articoli");
+    revalidatePath("/prodotti/articoli/categorie");
+    return { ok: true, id: c.id, etichetta: padre ? `${padre.nome} › ${n}` : n };
+  } catch {
+    return { ok: false, errore: `Esiste già una categoria «${n}» in quella posizione.` };
+  }
 }

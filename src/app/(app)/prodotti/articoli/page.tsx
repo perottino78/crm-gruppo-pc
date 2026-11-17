@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { puoVedereArticoli, puoModificareArticoli, filtroArticoli, categorieRegola, nomeCategoria, type FiltriArticoli } from "@/lib/articoli/server";
+import { puoVedereArticoli, puoModificareArticoli, filtroArticoli, visibilitaArticoliWhere, categorieRegola, nomeCategoria, type FiltriArticoli } from "@/lib/articoli/server";
 import { calcolaArticolo, testoRegola, euro, perc, alberoCategorie } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
 import { aggiornamentoInBlocco } from "@/app/articoli-actions";
@@ -25,7 +25,8 @@ export default async function ArticoliPage({ searchParams }: { searchParams: Pro
     categorieRegola(),
     prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" }, select: { id: true, ragioneSociale: true } }),
   ]);
-  const where = filtroArticoli(p, cat);
+  const vis = visibilitaArticoliWhere(u);
+  const where = vis ? { AND: [filtroArticoli(p, cat), vis] } : filtroArticoli(p, cat);
   const [totale, totaleTutti, lista] = await Promise.all([
     prisma.articolo.count({ where }),
     prisma.articolo.count(),
