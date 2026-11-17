@@ -33,6 +33,7 @@ import { rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
 import RigaTesto from "@/components/preventivi/RigaTesto";
 import FinestraOptional from "@/components/preventivi/FinestraOptional";
+import ScegliOptionalConFoto from "@/components/preventivi/ScegliOptionalConFoto";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
 import {
   aggiungiRigaPreventivo,
@@ -1287,7 +1288,15 @@ export default async function PreventivoPage({
                   );
                 }
 
+                const conFoto = optionaliRigaFiltrati.filter((o) => o.immagineUrl);
                 return (
+                  <>
+                  {conFoto.length > 0 && (
+                    <ScegliOptionalConFoto
+                      voci={conFoto.map((o) => ({ id: o.id, categoria: o.categoria, nome: o.nome, valore: o.valore, tipoPrezzo: o.tipoPrezzo, immagineUrl: o.immagineUrl! }))}
+                      azione={aggiungiOptionalARiga} rigaId={r.id} preventivoId={preventivo.id}
+                    />
+                  )}
                   <form action={aggiungiOptionalARiga} className="mt-2 flex items-center gap-1">
                     <input type="hidden" name="rigaId" value={r.id} />
                     <input type="hidden" name="preventivoId" value={preventivo.id} />
@@ -1301,6 +1310,7 @@ export default async function PreventivoPage({
                     <input name="quantita" type="number" defaultValue={1} min={1} className="text-xs border border-neutral-200 rounded px-1.5 py-1 w-14" />
                     <button className="btn-3d btn-3d-outline text-[11px] px-2 py-1">+ optional</button>
                   </form>
+                  </>
                 );
               })()}
               </FinestraOptional>
