@@ -39,6 +39,24 @@ export async function togliChiaveNeon() {
   await prisma.configurazione.deleteMany({ where: { chiave: CHIAVI.apiKey } });
 }
 
+/** Per capire un «progetto non trovato»: i progetti (e le organizzazioni) che la chiave vede davvero, con nome e ID. */
+async function progettiVisti(k: string): Promise<string> {
+  const chiedi = async (percorso: string) => {
+    try {
+      const r = await fetch(`${API()}${percorso}`, { headers: { Authorization: `Bearer ${k}`, Accept: "application/json" }, cache: "no-store", signal: AbortSignal.timeout(8_000) });
+      return r.ok ? ((await r.json()) as Record<string, unknown>) : null;
+    } catch { return null; }
+  };
+  const righe: string[] = [];
+  const aggiungi = (j: Record<string, unknown> | null, dove: string) => {
+    for (const p of ((j?.projects as { id: string; name: string }[] | undefined) ?? [])) righe.push(`${p.name} (ID ${p.id})${dove}`);
+  };
+  aggiungi(await chiedi("/projects?limit=50"), "");
+  const org = await chiedi("/users/me/organizations");
+  for (const o of ((org?.organizations as { id: string; name: string }[] | undefined) ?? [])) aggiungi(await chiedi(`/projects?limit=50&org_id=${encodeURIComponent(o.id)}`), ` — organizzazione «${o.name}»`);
+  return righe.length ? `La chiave vede: ${righe.join("; ")}. Scrivi nel campo «ID del progetto» quello del database di P&C ONE.` : "La chiave non vede nessun progetto: crea la chiave dall'organizzazione che contiene il database (Neon › cambia da «Personal account» all'organizzazione › Settings › API keys).";
+}
+
 /** Legge i consumi del periodo da Neon. Errore leggibile se la chiave manca o è sbagliata. */
 export async function leggiNeon(chiave?: string, progetto?: string): Promise<{ ok: true; consumo: ConsumoNeon } | { ok: false; motivo: string }> {
   const cfg = await configConsumi();
@@ -47,7 +65,10 @@ export async function leggiNeon(chiave?: string, progetto?: string): Promise<{ o
   try {
     const r = await fetch(`${API()}/projects/${encodeURIComponent(progetto || cfg.progetto)}`, { headers: { Authorization: `Bearer ${k}`, Accept: "application/json" }, cache: "no-store", signal: AbortSignal.timeout(10_000) });
     if (r.status === 401 || r.status === 403) return { ok: false, motivo: "Neon rifiuta la chiave (sbagliata o senza accesso a questo database)" };
-    if (r.status === 404) return { ok: false, motivo: `Neon non trova il progetto «${progetto || cfg.progetto}»` };
+    if (r.status === 404) {
+      const visti = await progettiVisti(k);
+      return { ok: false, motivo: `Neon non trova il progetto «${progetto || cfg.progetto}» con questa chiave. ${visti}` };
+    }
     if (!r.ok) return { ok: false, motivo: `Neon ha risposto ${r.status}` };
     const c = consumoDaNeon(await r.json());
     return c ? { ok: true, consumo: c } : { ok: false, motivo: "risposta di Neon senza i consumi" };
