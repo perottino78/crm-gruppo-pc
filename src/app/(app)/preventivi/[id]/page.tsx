@@ -1288,7 +1288,7 @@ export default async function PreventivoPage({
                   );
                 }
 
-                const conFoto = optionaliRigaFiltrati.filter((o) => o.immagineUrl);
+                const conFoto = optionaliRigaFiltrati.filter((o) => o.immagineUrl && o.listino === "PORTONCINOPVC");
                 return (
                   <>
                   {conFoto.length > 0 && (

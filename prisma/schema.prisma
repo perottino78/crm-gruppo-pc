@@ -566,8 +566,6 @@ model Optional {
   sporgenzaMm         Int?
   larghezzaMm         Int?
   listino             String?
-  /// Foto dell'optional (es. pannello decorativo o maniglione dei portoncini): nell'offerta si sceglie guardando la foto
-  immagineUrl         String?
   note                String?
   // URL immagine rappresentativa (es. per i pannelli di rivestimento a catalogo: Blindati).
   // Facoltativo: molte righe Optional restano senza immagine (accessori, sovrapprezzi, ecc.).
