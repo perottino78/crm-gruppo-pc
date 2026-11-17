@@ -11,7 +11,7 @@ export const STATI_ORDINE: { chiave: string; nome: string; colore: string }[] = 
 export const statoOrdine = (k: string) => STATI_ORDINE.find((s) => s.chiave === k) ?? { chiave: k, nome: k, colore: "#6b7280" };
 
 export const CARTELLE: Record<string, string[]> = {
-  CLIENTE: ["Generale", "Documenti identità", "Contratti firmati", "Pratiche e detrazioni", "Foto", "Corrispondenza"],
+  CLIENTE: ["Generale", "Rilievi misura", "Documenti identità", "Contratti firmati", "Pratiche e detrazioni", "Foto", "Corrispondenza"],
   PREVENTIVO: ["Contratto firmato", "Foto", "Generale", "Rilievi e disegni", "Offerte fornitori", "Corrispondenza"],
   // cartelle del progetto come in BConsole (rilievi, foto, conferme, posa, contratto, finanziamento) più quelle del CRM
   COMMESSA: ["Rilievi misura", "Foto rilievi", "Conferme d'ordine fornitori", "Foto posa", "Documenti posa", "Consegna kit", "Contratto firmato", "Documentazione finanziamento", "Generale", "DDT e bolle", "Fatture fornitori", "Foto", "Pratiche"],

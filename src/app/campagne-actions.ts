@@ -212,6 +212,17 @@ export async function duplicaCampagna(fd: FormData) {
   redirect(`/campagne/${n.id}?ok=${encodeURIComponent("Copia creata: aggiorna testo e scadenza, poi invia.")}`);
 }
 
+/** Archivia (toglie dall'elenco, restano risultati e report) o rimette fra le attive. */
+export async function archiviaCampagna(fd: FormData) {
+  await marketing();
+  const id = str(fd, "id");
+  if (!id) return;
+  const ripristina = fd.get("ripristina") === "1";
+  const c = await prisma.campagna.update({ where: { id }, data: { archiviataIl: ripristina ? null : new Date() }, select: { nome: true } });
+  revalidatePath("/campagne");
+  redirect(`/campagne${ripristina ? "" : "?tipo=archivio"}?ok=${encodeURIComponent(ripristina ? `«${c.nome}» è di nuovo fra le campagne attive.` : `«${c.nome}» archiviata: la trovi in Archivio e nel report.`)}`.replace("?tipo=archivio?", "?tipo=archivio&"));
+}
+
 export async function eliminaCampagna(fd: FormData) {
   const chi = await marketing();
   const id = str(fd, "id");

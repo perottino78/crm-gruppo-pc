@@ -1764,6 +1764,8 @@ model Campagna {
   promemoriaInviati     String[]           @default([]) // giorni alla scadenza già avvisati, es. ["3","2"]
   creataDa              String?
   inviataIl             DateTime?
+  /// Archiviata: tolta dall'elenco (resta nell'Archivio e nei report)
+  archiviataIl          DateTime?
   createdAt             DateTime           @default(now())
   updatedAt             DateTime           @default(now()) @updatedAt
   invii                 CampagnaInvio[]

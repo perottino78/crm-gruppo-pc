@@ -64,7 +64,7 @@ async function main() {
   const prev = await prisma.preventivo.create({ data: { clienteId: cli.id, brandId: brand.id, commercialeId: pavel.id, oggetto: "Serramenti", stato: "ACCETTATO" } });
   await prisma.rigaPreventivo.create({ data: { preventivoId: prev.id, testoLibero: "Finestra 2 ante", prezzoUnitario: 900, quantita: 2, ordine: 1 } });
   const c = await prisma.commessa.create({ data: { numero: 7, anno: 2026, preventivoId: prev.id, clienteId: cli.id, brandId: brand.id, responsabileId: pavel.id, accontoImporto: 900 } });
-  const aperti = async () => (await prisma.taskPratica.findMany({ where: { commessaId: c.id, completatoIl: null }, orderBy: { createdAt: "asc" } })).map((t) => `${t.faseChiave}:${t.ufficio}`).join(" ");
+  const aperti = async () => (await prisma.taskPratica.findMany({ where: { commessaId: c.id, completatoIl: null, faseChiave: { not: null } }, orderBy: { createdAt: "asc" } })).map((t) => `${t.faseChiave}:${t.ufficio}`).join(" ");
 
   console.log("1. Conferma ordine: partono insieme la fattura (Giorgia) e l'incasso con il progetto (Debora)");
   g.__utente = pavel;
@@ -93,6 +93,8 @@ async function main() {
   verifica(tRil?.ufficio === "TECNICO" && tRil.assegnatoUtenteId === marco.id, "task di rilievo assegnato al tecnico scelto", tRil);
 
   console.log("5. Il tecnico carica il rilievo (eseguito): il task passa a Laura, ufficio ordini");
+  const avvisi = await prisma.taskPratica.findMany({ where: { commessaId: c.id, faseChiave: null, ufficio: "COMMERCIALE" } });
+  verifica(avvisi.length === 1 && /Rilievo fissato/.test(avvisi[0].titolo), "per conoscenza al commerciale: task del rilievo fissato", avvisi.map((a) => a.titolo));
   g.__utente = marco;
   const ril = await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } });
   await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));

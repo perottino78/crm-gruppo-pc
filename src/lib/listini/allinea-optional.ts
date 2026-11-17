@@ -8,7 +8,7 @@ import { optionalFidra } from "./fidra";
 import { optionalPlasma30 } from "./plasma30";
 import type { VoceOptional } from "./serramenti-comuni";
 
-export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-16c";
+export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-17a";
 const CHIAVE = "optional_serramenti_versione";
 const chiave = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
@@ -53,6 +53,11 @@ export async function allineaOptionalSerramenti() {
   spenti += (await prisma.optional.updateMany({
     where: { attivo: true, nome: { in: STRATIFICATO_A_PAGAMENTO }, OR: ["ZENITH", "OPTIMA", "FIDRA", "PLASMA30"].map((p) => ({ listino: { startsWith: p } })) },
     data: { attivo: false },
+  })).count;
+  // pellicola interna diversa dall'esterna: il +20% è già nell'esterno, il +80% in più va tolto (richiesta di Ugo 17/11/2026)
+  spenti += (await prisma.optional.updateMany({
+    where: { categoria: "Colore interno", listino: "ZENITH", nome: { contains: "pellicola diversa da quella esterna" }, valore: { gt: 0 } },
+    data: { valore: 0 },
   })).count;
   const optima = await brandCon(PREFISSO_OPTIMA);
   if (optima) creati += await creaMancanti(optima, optionalOptima(), "OPTIMA");
