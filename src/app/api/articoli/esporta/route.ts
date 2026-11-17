@@ -2,7 +2,7 @@
 // Le colonne sono quelle del modello d'importazione: il file si può modificare e ricaricare.
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { puoVedereArticoli, filtroArticoli, categorieRegola, type FiltriArticoli } from "@/lib/articoli/server";
+import { puoVedereArticoli, filtroArticoli, visibilitaArticoliWhere, categorieRegola, type FiltriArticoli } from "@/lib/articoli/server";
 import { calcolaArticolo, testoRegola } from "@/lib/articoli/prezzi";
 import { COLONNE } from "@/lib/articoli/importa";
 import { scriviXlsx, scriviCsv, type Cella } from "@/lib/articoli/foglio";
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
   const sp = new URL(req.url).searchParams;
   const p = Object.fromEntries(sp.entries()) as FiltriArticoli & { formato?: string };
   const [cat, regole] = await Promise.all([prisma.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true } }), categorieRegola()]);
-  const lista = await prisma.articolo.findMany({ where: filtroArticoli(p, cat), include: { fornitore: { select: { ragioneSociale: true } } }, orderBy: [{ codice: "asc" }] });
+  const lista = await prisma.articolo.findMany({ where: (() => { const vis = visibilitaArticoliWhere(u); return vis ? { AND: [filtroArticoli(p, cat), vis] } : filtroArticoli(p, cat); })(), include: { fornitore: { select: { ragioneSociale: true } } }, orderBy: [{ codice: "asc" }] });
   const extra = ["COSTO CALCOLATO", "MARGINE EFFETTIVO %", "RICARICO EFFETTIVO (×)", "REGOLA APPLICATA", "PREZZO IVATO", "AGGIORNATO IL"];
   const righe: Cella[][] = [[...COLONNE.map((c) => c.titolo), ...extra]];
   for (const a of lista) {

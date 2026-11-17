@@ -8,6 +8,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { puoVedereArticoli, puoModificareArticoli } from "@/lib/articoli/server";
 import { alberoCategorie, testoRegola } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
+import ScegliVisibilita from "@/components/articoli/ScegliVisibilita";
+import { testoVisibilita } from "@/lib/articoli/visibilita";
 import { salvaCategoria, eliminaCategoria, ricalcolaTutto } from "@/app/articoli-actions";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
@@ -61,10 +63,11 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
                         <button className="btn-3d btn-3d-purple text-[11px] px-2 py-1">Salva</button>
                         <button formAction={eliminaCategoria} className="text-[11px] text-red-700 underline px-1" title="Elimina (solo se vuota)">✕</button>
                       </span>
+                      <ScegliVisibilita valore={c.visibileA} />
                     </form>
                   ) : (
                     <div className="grid grid-cols-[2fr_1fr_1.3fr_0.7fr_0.8fr_0.8fr_0.5fr] gap-1.5 px-2 py-1.5">
-                      <span className={c.livello ? "ml-5" : "font-bold"}>{c.nome}</span><span>{c.divisione ?? "—"}</span>
+                      <span className={c.livello ? "ml-5" : "font-bold"}>{c.nome} <span className="text-[11px] font-normal text-neutral-500">· {testoVisibilita(c.visibileA)}</span></span><span>{c.divisione ?? "—"}</span>
                       <span>{c.metodoPrezzo ? testoRegola({ metodo: c.metodoPrezzo, valore: c.valore }) : c.livello ? "come la madre" : "nessuna"}</span><span /><span>{n(c.arrotondamento) || "—"}</span><span>{n(c.margineMinimo) || "—"}</span><span className="text-right">{quanti(c.id)}</span>
                     </div>
                   )}
@@ -87,6 +90,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
             <label>Divisione<select name="divisione" defaultValue="" className={`${inp} w-full`}><option value="">—</option>{DIVISIONI.map((d) => <option key={d}>{d}</option>)}</select></label>
             <label>Arrotonda a €<input name="arrotondamento" className={`${inp} w-full`} placeholder="es. 1 o 5" /></label>
             <label>Margine minimo %<input name="margineMinimo" className={`${inp} w-full`} placeholder="es. 25" /></label>
+            <ScegliVisibilita valore={[]} />
             <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Crea</button>
           </form>
         </section>

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { calcolaArticolo, type CategoriaRegola } from "./prezzi";
 import type { Esistente } from "./importa";
+import { tokenDi } from "./visibilita";
 
 /** Consultare il catalogo (costi compresi): tutti tranne i commerciali. */
 export const puoVedereArticoli = (u: ConPermessi | null | undefined) => puo(u, "articoli");
@@ -11,6 +12,13 @@ export const puoVedereArticoli = (u: ConPermessi | null | undefined) => puo(u, "
 export const puoModificareArticoli = (u: ConPermessi | null | undefined) => puo(u, "listini.modifica");
 
 type Db = Prisma.TransactionClient | typeof prisma;
+
+/** Condizione sugli articoli per la persona: i listini/categorie non visibili a lei restano fuori (chi modifica gli articoli vede tutto). null = nessun limite. */
+export function visibilitaArticoliWhere(u: (ConPermessi & { ruolo?: string | null; ufficio?: string | null }) | null | undefined): Prisma.ArticoloWhereInput | null {
+  if (!u || puoModificareArticoli(u)) return null;
+  const t = tokenDi(u);
+  return { OR: [{ categoriaId: null }, { categoria: { visibileA: { isEmpty: true } } }, ...(t.length ? [{ categoria: { visibileA: { hasSome: t } } }] : [])] };
+}
 
 export const categorieRegola = (db: Db = prisma): Promise<CategoriaRegola[]> =>
   db.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true, metodoPrezzo: true, valore: true, arrotondamento: true, margineMinimo: true } });

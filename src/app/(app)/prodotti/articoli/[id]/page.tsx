@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { puoVedereArticoli, puoModificareArticoli, categorieRegola } from "@/lib/articoli/server";
 import { alberoCategorie, euro } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
+import { categoriaVisibile } from "@/lib/articoli/visibilita";
 import { aiDisponibile } from "@/lib/articoli/ai";
 import { numeroOrdine, statoOrdine } from "@/lib/ordini/calcoli";
 import { caricaFotoArticolo, duplicaArticolo, eliminaArticolo } from "@/app/articoli-actions";
@@ -30,6 +31,11 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
     prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" }, select: { id: true, ragioneSociale: true, scontoFornitore: true } }),
   ]);
   if (!nuovo && !a) notFound();
+  // listino non visibile a questa persona: come se non esistesse
+  if (a && !admin) {
+    const c = a.categoriaId ? await prisma.categoriaArticolo.findUnique({ where: { id: a.categoriaId }, select: { visibileA: true } }) : null;
+    if (c && !categoriaVisibile(c.visibileA, u)) notFound();
+  }
   const albero = alberoCategorie(cat).map((c) => ({ ...regole.find((r) => r.id === c.id)!, etichetta: c.etichetta }));
   const usi = a ? await prisma.rigaOrdine.findMany({ where: { articoloId: a.id }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true, stato: true } } }, orderBy: { createdAt: "desc" }, take: 10 }) : [];
   const { storico, ...dati } = a ?? { storico: [] as never[] };
