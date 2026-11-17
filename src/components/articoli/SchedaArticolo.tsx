@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { salvaArticolo, creaCategoriaRapida, type EsitoArticolo } from "@/app/articoli-actions";
+import ScegliPosizioneListino from "@/components/articoli/ScegliPosizioneListino";
 import { calcolaArticolo, leggiNumero, euro, perc, testoRegola, UNITA, ALIQUOTE, METODI, type CategoriaRegola } from "@/lib/articoli/prezzi";
 
 type Art = {
@@ -14,26 +15,31 @@ type Art = {
 type Props = {
   articolo: Art; categorie: (CategoriaRegola & { etichetta: string })[]; fornitori: { id: string; ragioneSociale: string; scontoFornitore: number | null }[];
   divisioni: string[]; modificabile: boolean; aiAttiva: boolean;
+  /** famiglie e gruppi del listino delle offerte, e dove compare ogni categoria (testo già pronto) */
+  posizioni?: { famiglia: string; gruppi: string[] }[]; posizioneCategoria?: Record<string, string>;
 };
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm w-full disabled:bg-neutral-50";
 const n = (v: number | null | undefined) => (v === null || v === undefined ? "" : String(v).replace(".", ","));
 
-export default function SchedaArticolo({ articolo: a, categorie, fornitori, divisioni, modificabile, aiAttiva }: Props) {
+export default function SchedaArticolo({ articolo: a, categorie, fornitori, divisioni, modificabile, aiAttiva, posizioni = [], posizioneCategoria = {} }: Props) {
   const [esito, azione, inCorso] = useActionState<EsitoArticolo, FormData>(salvaArticolo, null);
   const form = useRef<HTMLFormElement>(null);
   const selCat = useRef<HTMLSelectElement>(null);
   // categorie create al volo da questa scheda (richiesta di Ugo 18/11/2026)
-  const [extraCat, setExtraCat] = useState<{ id: string; etichetta: string }[]>([]);
+  const [extraCat, setExtraCat] = useState<{ id: string; etichetta: string; pos: string }[]>([]);
+  const [catScelta, setCatScelta] = useState(a.categoriaId ?? "");
+  const [posNuova, setPosNuova] = useState<{ famiglia: string; gruppo: string }>({ famiglia: "", gruppo: "" });
   const [nuovaCat, setNuovaCat] = useState<{ aperta: boolean; nome: string; padre: string; esito: string; occupato: boolean }>({ aperta: false, nome: "", padre: "", esito: "", occupato: false });
   const [appenaCreata, setAppenaCreata] = useState<string | null>(null);
   // dopo aver aggiunto l'opzione nuova al menu la si sceglie
   useEffect(() => { if (appenaCreata && selCat.current) selCat.current.value = appenaCreata; }, [appenaCreata, extraCat]);
   async function creaCat() {
     setNuovaCat((s) => ({ ...s, occupato: true, esito: "" }));
-    const r = await creaCategoriaRapida(nuovaCat.nome, nuovaCat.padre || null);
+    const r = await creaCategoriaRapida(nuovaCat.nome, nuovaCat.padre || null, posNuova.famiglia || null, posNuova.gruppo || null);
     if (!r.ok) { setNuovaCat((s) => ({ ...s, occupato: false, esito: `⚠️ ${r.errore}` })); return; }
-    setExtraCat((l) => [...l, { id: r.id, etichetta: r.etichetta }]);
+    setExtraCat((l) => [...l, { id: r.id, etichetta: r.etichetta, pos: posNuova.famiglia ? `${posNuova.famiglia}${posNuova.gruppo ? ` › ${posNuova.gruppo}` : ""}` : "" }]);
+    setCatScelta(r.id);
     setNuovaCat({ aperta: false, nome: "", padre: "", esito: `✅ Categoria «${r.etichetta}» creata e scelta.`, occupato: false });
     setAppenaCreata(r.id);
   }
@@ -109,7 +115,7 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
           <label className="md:col-span-6">Descrizione *<input name="descrizione" required defaultValue={a.descrizione} className={inp} /></label>
           <label className="md:col-span-6">Descrizione estesa / caratteristiche<textarea name="descrizioneEstesa" defaultValue={a.descrizioneEstesa ?? ""} rows={2} className={inp} /></label>
           <label className="md:col-span-3">Categoria
-            <select ref={selCat} name="categoriaId" defaultValue={a.categoriaId ?? ""} className={inp}>
+            <select ref={selCat} name="categoriaId" defaultValue={a.categoriaId ?? ""} onChange={(e) => setCatScelta(e.target.value)} className={inp}>
               <option value="">— nessuna —</option>
               {categorie.map((x) => <option key={x.id} value={x.id}>{x.etichetta}{x.metodoPrezzo ? ` (${testoRegola({ metodo: x.metodoPrezzo, valore: x.valore })})` : ""}</option>)}
               {extraCat.map((x) => <option key={x.id} value={x.id}>{x.etichetta}</option>)}
@@ -121,6 +127,12 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
                 {nuovaCat.esito && <span className={nuovaCat.esito.startsWith("✅") ? "font-semibold text-green-800" : "font-semibold text-red-700"}>{nuovaCat.esito}</span>}
               </span>
             )}
+            {catScelta && (
+              <span className="mt-1 block text-[11px] font-normal text-neutral-700">
+                📍 Nel listino delle offerte: <b className="text-blue-800">{posizioneCategoria[catScelta] ?? extraCat.find((x) => x.id === catScelta)?.pos ?? ""}</b>
+                {!(posizioneCategoria[catScelta] ?? extraCat.find((x) => x.id === catScelta)?.pos) && <span className="text-amber-800"> solo anagrafica: scegli dove metterla da «gestisci categorie».</span>}
+              </span>
+            )}
             {modificabile && nuovaCat.aperta && (
               <span className="mt-1 flex flex-wrap items-end gap-2 rounded border border-blue-200 bg-blue-50/60 p-2 font-normal">
                 <span className="flex flex-col text-[11px] text-neutral-700">Nome<input value={nuovaCat.nome} onChange={(e) => setNuovaCat((s) => ({ ...s, nome: e.target.value }))} placeholder="es. Ricambi vetrate" className="rounded border border-neutral-300 px-2 py-1 text-sm" /></span>
@@ -130,6 +142,7 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
                     {categorie.filter((x) => !x.padreId).map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
                   </select>
                 </span>
+                <ScegliPosizioneListino compatto posizioni={posizioni} onChange={setPosNuova} />
                 <button type="button" disabled={nuovaCat.occupato || !nuovaCat.nome.trim()} onClick={creaCat} className="btn-3d btn-3d-purple px-3 py-1 text-xs disabled:opacity-40">Crea e scegli</button>
               </span>
             )}
@@ -201,6 +214,9 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
           {c.sottoMinimo && <p className="mt-2 text-xs text-red-700">Margine sotto il minimo della categoria ({n(c.regola?.margineMinimo)}%).</p>}
           {modificabile && (
             <button disabled={inCorso} className="btn-3d btn-3d-purple w-full mt-3 text-sm py-2">{inCorso ? "Salvataggio…" : a.id ? "Salva modifiche" : "Crea articolo"}</button>
+          )}
+          {modificabile && !a.id && (
+            <button disabled={inCorso} name="altro" value="1" className="btn-3d btn-3d-green w-full mt-2 text-sm py-2">{inCorso ? "Salvataggio…" : "💾 Salva e inserisci un altro"}</button>
           )}
           {esito && <p className={`mt-2 text-xs ${esito.ok ? "text-green-800" : "text-red-700"}`}>{esito.messaggio}</p>}
         </section>

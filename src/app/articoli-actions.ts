@@ -79,6 +79,11 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
     nuovoId = a.id;
   }
   aggiorna(nuovoId!);
+  if (!id && fd.get("altro") === "1") {
+    // «Salva e inserisci un altro»: modulo nuovo e vuoto, ma con fornitore, categoria, divisione, marca, IVA e UM dell'articolo appena salvato (richiesta di Ugo 18/11/2026: carica 5 articoli di fila)
+    const q = new URLSearchParams({ salvato: codice ?? "", ...(dati.fornitoreId ? { f: dati.fornitoreId } : {}), ...(dati.categoriaId ? { c: dati.categoriaId } : {}), ...(dati.divisione ? { d: dati.divisione } : {}), ...(dati.marca ? { m: dati.marca } : {}), i: String(dati.aliquotaIva), u: dati.um });
+    redirect(`/prodotti/articoli/nuovo?${q}`);
+  }
   if (!id) redirect(`/prodotti/articoli/${nuovoId}?creato=1`);
   return { ok: true, messaggio: c.sottoMinimo ? `Salvato. Attenzione: margine ${String(c.margine).replace(".", ",")}% sotto il minimo della categoria.` : "Salvato." };
 }
@@ -134,7 +139,7 @@ export async function salvaCategoria(fd: FormData) {
   const valore = num(fd, "valore");
   const visibileA = pulisciToken(fd.getAll("visibileA").filter((x): x is string => typeof x === "string"));
   const dati = {
-    nome, padreId: str(fd, "padreId"), divisione: str(fd, "divisione"), visibileA,
+    nome, padreId: str(fd, "padreId"), divisione: str(fd, "divisione"), visibileA, famiglia: str(fd, "famiglia"), gruppoListino: str(fd, "famiglia") ? str(fd, "gruppoListino") : null,
     metodoPrezzo: metodo === "RICARICO" || metodo === "MARGINE" ? metodo : null,
     valore: metodo === "RICARICO" ? (valore && valore >= 1 ? valore : null) : metodo === "MARGINE" ? (valore !== null && valore >= 0 && valore < 100 ? valore : null) : null,
     arrotondamento: num(fd, "arrotondamento"), margineMinimo: num(fd, "margineMinimo"),
@@ -361,13 +366,13 @@ export async function aggiungiArticoloAOrdine(fd: FormData) {
 }
 
 /** Dalla scheda articolo: crea al volo una categoria (o sottocategoria) e restituisce id e nome per sceglierla subito. Con padre eredita regola e visibilità. */
-export async function creaCategoriaRapida(nome: string, padreId: string | null): Promise<{ ok: true; id: string; etichetta: string } | { ok: false; errore: string }> {
+export async function creaCategoriaRapida(nome: string, padreId: string | null, famiglia: string | null = null, gruppoListino: string | null = null): Promise<{ ok: true; id: string; etichetta: string } | { ok: false; errore: string }> {
   await amministratore();
   const n = nome.trim();
   if (!n) return { ok: false, errore: "Scrivi il nome della categoria." };
   const padre = padreId ? await prisma.categoriaArticolo.findUnique({ where: { id: padreId }, select: { id: true, nome: true, divisione: true, visibileA: true } }) : null;
   try {
-    const c = await prisma.categoriaArticolo.create({ data: { nome: n, padreId: padre?.id ?? null, divisione: padre?.divisione ?? null, visibileA: padre?.visibileA ?? [] } });
+    const c = await prisma.categoriaArticolo.create({ data: { nome: n, padreId: padre?.id ?? null, divisione: padre?.divisione ?? null, visibileA: padre?.visibileA ?? [], famiglia: famiglia || null, gruppoListino: famiglia ? gruppoListino || null : null } });
     revalidatePath("/prodotti/articoli");
     revalidatePath("/prodotti/articoli/categorie");
     return { ok: true, id: c.id, etichetta: padre ? `${padre.nome} › ${n}` : n };

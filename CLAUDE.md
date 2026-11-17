@@ -705,6 +705,9 @@ login nel `matcher` del middleware.
 - **Articoli: categorie al volo e listino visibile a chi** (richiesta di Ugo 18/11/2026, ricambi di vetrate e pergole): nella scheda articolo «➕ Nuova categoria» (`creaCategoriaRapida`, eredita regola e visibilità
   della madre) e link a «gestisci categorie»; `CategoriaArticolo.visibileA` (token «RUOLO:…»/«UFFICIO:…», vuoto = tutti; `src/lib/articoli/visibilita.ts` puro e testato, `ScegliVisibilita` nella pagina Categorie).
   Chi non vede la categoria non ne vede gli articoli in elenco, esportazione, scheda e ricerca complementi (`visibilitaArticoliWhere`); chi ha `listini.modifica` vede tutto. Non filtrati (per ora): ordini fornitori e magazzino.
+- **Articoli collegati al listino delle offerte** (richiesta di Ugo 18/11/2026): `CategoriaArticolo.famiglia` + `gruppoListino` (stessi nomi dell'albero «Aggiungi prodotto», es. OUTDOOR › VETRATE; `posizioniListino()` in `src/lib/articoli/server.ts`,
+  `posizione.ts` puro: la sottocategoria usa la posizione della madre; `ScegliPosizioneListino` nella pagina Categorie, nella creazione al volo e in «📍 Nel listino» della scheda articolo). Nella finestra «Aggiungi prodotto» (`SelettoreProdotto`, livello famiglia e livello gruppo)
+  il riquadro «🔧 Ricambi e articoli» (`RicambiDelGruppo`, `GET /api/articoli/listino?famiglia=&gruppo=`, solo articoli visibili a chi chiede) aggiunge l'articolo come riga di testo con il suo prezzo (`aggiungiArticoloPreventivo` in `actions.ts`, nella stanza scelta). Collaudo `articoli` (51), test `tests/articoli/posizione.test.ts`.
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:
