@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   const utente = await getCurrentUser();
   if (!utente) return NextResponse.json({ error: "accesso richiesto" }, { status: 401 });
   const p = req.nextUrl.searchParams;
-  const f: FiltriClienti = Object.fromEntries(["brand", "q", "indirizzo", "comune", "provincia", "cap", "paese", "provenienza", "stato", "commerciale", "dal", "al"].map((k) => [k, p.get(k) ?? undefined]));
+  const f: FiltriClienti = Object.fromEntries(["brand", "q", "prodotto", "indirizzo", "comune", "provincia", "cap", "paese", "provenienza", "stato", "commerciale", "dal", "al"].map((k) => [k, p.get(k) ?? undefined]));
   // Il filtro per commerciale è solo dell'amministratore (gli altri vedono già solo i propri)
   if (utente.ruolo !== "AMMINISTRATORE" && utente.ruolo !== "MARKETING") f.commerciale = undefined;
   const dataDa = f.dal ? daOraRoma(`${f.dal}T00:00`) : null;

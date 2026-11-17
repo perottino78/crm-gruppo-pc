@@ -219,7 +219,15 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                   personalizzato o con foto e testo nascosti (richiesta di Ugo) */}
               {(() => {
                 const scheda = schedaCliente(r.prodotto.tipologia);
-                if (!scheda) return null;
+                if (!scheda) {
+                  // nessun PDF del fornitore: scheda leggera in HTML dai dati del modello (foto, caratteristiche, colori)
+                  if (!modello?.descrizioneTecnica && !modello?.immagineUrl) return null;
+                  return (
+                    <p className="text-xs mt-1 print:hidden">
+                      <a href={`/schede/${encodeURIComponent(r.prodotto.tipologia)}`} target="_blank" rel="noopener" className="text-blue-700 underline whitespace-nowrap">📄 Scheda del prodotto</a>
+                    </p>
+                  );
+                }
                 return (
                   <p className="text-xs text-neutral-600 mt-1 max-w-md">
                     {scheda.descrizione}{" "}

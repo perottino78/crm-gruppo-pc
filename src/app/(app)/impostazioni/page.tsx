@@ -16,7 +16,7 @@ import { statoUtente, RUOLI_UTENTE, STATI_UTENTE, puoMarketing, RUOLI_CREABILI_M
 
 const RUOLI = ["COMMERCIALE", "TELEFONISTA", "MARKETING", "TECNICO", "POSATORE", "AMMINISTRATIVO", "AMMINISTRATORE"];
 
-export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string; ok?: string; errore?: string }> }) {
+export default async function ImpostazioniPage({ searchParams }: { searchParams: Promise<{ utente?: string; posta?: string; postaErrore?: string; ok?: string; errore?: string; campo?: string }> }) {
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
   const admin = isAmministratore(utenteCorrente);
@@ -271,6 +271,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Reset accesso</button>
                 </form>
+                {sp.utente === u.id && sp.campo === "accesso" && sp.ok && <p className="text-xs font-semibold text-emerald-700">✅ {sp.ok}</p>}
                 <form action={cambiaMansioneUtente} id={`mansione-${u.id}`} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />
                   <input type="hidden" name="ritorno" value={`/impostazioni?utente=${u.id}`} />
@@ -293,7 +294,7 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva mansione ed email</button>
                 </form>
-                {sp.utente === u.id && sp.ok && <p className="text-xs text-emerald-700">✅ {sp.ok}</p>}
+                {sp.utente === u.id && sp.ok && !sp.campo && <p className="text-xs text-emerald-700">✅ {sp.ok}</p>}
                 {sp.utente === u.id && sp.errore && <p className="text-xs text-red-700">{sp.errore}</p>}
                 <form action={adminAggiornaTelefonoUtente} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="utenteId" value={u.id} />
@@ -307,7 +308,9 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                     />
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva telefono</button>
+                  {u.telefono && <span className="pb-1.5 text-[11px] font-semibold text-emerald-700">✓ salvato</span>}
                 </form>
+                {sp.utente === u.id && sp.campo === "telefono" && sp.ok && <p className="text-xs font-semibold text-emerald-700">✅ {sp.ok}</p>}
                 <div id={sp.utente === u.id ? "posta" : undefined}>
                   <CasellaEmailAdmin utente={u} />
                   {sp.utente === u.id && sp.posta && <p className="text-xs text-emerald-700 mt-1">✅ {sp.posta}</p>}
@@ -324,7 +327,9 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                     </select>
                   </div>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva Solaris</button>
+                  <span className={`pb-1.5 text-[11px] font-bold ${u.solarisRuolo ? "text-emerald-700" : "text-neutral-500"}`}>{u.solarisRuolo ? `✅ Attivato: ${u.solarisRuolo}` : "non attivo"}</span>
                 </form>
+                {sp.utente === u.id && sp.campo === "solaris" && sp.ok && <p className="text-xs font-semibold text-emerald-700">✅ {sp.ok}</p>}
                 </div>
               </details>
             ))}

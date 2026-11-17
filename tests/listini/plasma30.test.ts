@@ -57,7 +57,7 @@ test("optional come l'Optima, colori con le regole del listino Plasma 30", () =>
   assert.equal(f.find((o) => o.nome === "Rovere gold (AP 23) — pellicola su un lato")?.valore, 15);
   assert.equal(f.find((o) => o.nome === "Rovere gold (AP 23) — pellicola sui due lati uguali")?.valore, 20);
   assert.equal(f.find((o) => o.nome.startsWith("Rovere grigio (AP 94)"))?.valore, 30);
-  assert.equal(f.find((o) => o.nome.startsWith("Pellicole diverse"))?.valore, 100);
+  assert.equal(f.find((o) => o.nome.startsWith("Pellicole diverse"))?.valore, 25);
   assert.equal(f.find((o) => o.nome.startsWith("Vetro satinato"))?.valore, 90);
   assert.equal(visibili("PLASMA30TV_PF2A").find((o) => o.nome.startsWith("Vetro satinato"))?.valore, 150);
   assert.ok(visibili("PLASMA30_W").some((o) => o.nome.startsWith("Motore per wasistas")));

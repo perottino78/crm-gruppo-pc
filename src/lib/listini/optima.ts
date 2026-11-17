@@ -67,7 +67,7 @@ export function optionalOptima(): OptionalOptima[] {
     o("Colore", "Bianco massa", 0),
     ...PELLICOLE_OPTIMA.map((c) => o("Colore", `${c} — pellicola`, 20, "OPTIMA", "PERCENTUALE")),
     o("Colore", "Pellicola fuori standard su un lato", 30, "OPTIMA", "PERCENTUALE"),
-    o("Colore", "Pellicole fuori standard diverse sui due lati (interno/esterno)", 100, "OPTIMA", "PERCENTUALE"),
+    o("Colore", "Pellicole fuori standard diverse sui due lati (interno/esterno)", 25, "OPTIMA", "PERCENTUALE"),
     o("Vetri", "Vetro STC (a vetro)", 150, "OPTIMA", "FISSO", "vetro"),
     o("Vetri", "Vetro satinato (ad anta)", 90, "OPTIMA_F", "FISSO", "anta"),
     o("Vetri", "Vetro satinato (ad anta)", 150, "OPTIMA_PF", "FISSO", "anta"),

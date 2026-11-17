@@ -1,7 +1,7 @@
 // Serramenti in PVC ZENITH (Uw 1,3 zona E vetrocamera doppio, Uw 1,0 zona F vetrocamera triplo): le griglie restano quelle di
 // prisma/seed-data/zenith_prodotti.json; qui gli optional rifatti «come l'Optima» (richiesta di Ugo 16/11/2026): colore esterno e
 // interno separati con i costi, vetri, accessori insieme, lavorazioni trapezoidali e curve. Regole del listino Zenith: bianco massa
-// compreso, colori fuori standard e pellicole +20%; PF3A: pellicola fuori standard su un lato +30%, diverse sui due lati +100%.
+// compreso, colori fuori standard e pellicole +20%; PF3A: pellicola fuori standard su un lato +30%, diverse sui due lati +25%.
 // Modulo puro: lo usano la pagina dell'offerta, la rotta seed-zenith e l'allineamento automatico degli optional.
 import { PELLICOLE_OPTIMA } from "./optima";
 import { formeSpeciali, vetriSpeciali, type VoceOptional } from "./serramenti-comuni";
@@ -52,11 +52,11 @@ export function optionalZenith(): VoceOptional[] {
     o("Colore esterno", "Colore fuori standard (a campione)", 20, "ZENITH", "PERCENTUALE"),
     o("Colore esterno", "Pellicola fuori standard su un lato (PF3A)", 30, "ZENITH_PF3A", "PERCENTUALE"),
     // colore interno: bianco o uguale all'esterno senza costi; pellicola solo dentro (esterno bianco) +20%;
-    // pellicola diversa da quella esterna: nessun altro sovrapprezzo, il +20% è già nell'esterno (Ugo 17/11/2026: +20% totale, non 20+20 né +100%)
+    // pellicola diversa da quella esterna: +5% oltre al +20% dell'esterno = +25% totale (Ugo 17/11/2026)
     o("Colore interno", "Bianco massa", 0),
     o("Colore interno", "Uguale all'esterno", 0),
     ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola con esterno bianco massa`, 20, "ZENITH", "PERCENTUALE")),
-    ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola diversa da quella esterna`, 0, "ZENITH", "PERCENTUALE")),
+    ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola diversa da quella esterna`, 5, "ZENITH", "PERCENTUALE")),
     // vetri
     o("Vetri", "Vetrocamera stratificato di sicurezza 3+3 basso emissivo / 18 argon / 3+3 (di serie)", 0, "ZENITH_DOPPIO"),
     o("Vetri", "Vetrocamera triplo basso emissivo con gas argon (di serie)", 0, "ZENITH_TRIPLO"),

@@ -71,7 +71,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
   const finestraDal = inizioGiorno(`${meseVicino(meseCal, -4)}-01`), finestraAl = inizioGiorno(`${meseVicino(meseCal, 5)}-01`);
   const filtriTutti: Prisma.LeadWhereInput[] = [scope];
   const filtriSenzaNome = (): Prisma.LeadWhereInput[] => filtriTutti.filter((f) => f !== filtroNome);
-  const filtroNome: Prisma.LeadWhereInput | null = q ? { AND: q.split(/\s+/).filter(Boolean).slice(0, 6).map((x) => ({ OR: [{ nome: { contains: x, mode: "insensitive" as const } }, { telefono: { contains: x } }, { email: { contains: x, mode: "insensitive" as const } }] })) } : null;
+  const filtroNome: Prisma.LeadWhereInput | null = q ? { AND: q.split(/\s+/).filter(Boolean).slice(0, 6).map((x) => ({ OR: [{ nome: { contains: x, mode: "insensitive" as const } }, { telefono: { contains: x } }, { email: { contains: x, mode: "insensitive" as const } }, { prodotto: { contains: x, mode: "insensitive" as const } }, { comune: { contains: x, mode: "insensitive" as const } }, { note: { contains: x, mode: "insensitive" as const } }] })) } : null;
   if (filtroNome) filtriTutti.push(filtroNome);
   if (fasiScelte.length) filtriTutti.push({ fase: { in: STATI_TASK.filter((s) => fasiScelte.includes(s.etichetta) || s.fasi.some((f) => fasiScelte.includes(f))).flatMap((s) => s.fasi) } });
   if (giornoScelto) {
@@ -153,7 +153,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
           <h1 className="text-2xl font-bold text-neutral-900">📞 Task di oggi</h1>
           <p className="text-sm text-neutral-600">Chi chiamare adesso. Tocca una riga per aprire il lead e registrare l&apos;esito.</p>
         </div>
-        <form className="flex gap-2"><input type="hidden" name="vista" value="tutti" /><input name="q" defaultValue={q ?? ""} placeholder="Cerca nome, telefono, email" className={inp} /><button className="btn-3d btn-3d-teal px-3 py-1.5 text-sm">Cerca</button></form>
+        <form className="flex gap-2"><input type="hidden" name="vista" value="tutti" /><input name="q" defaultValue={q ?? ""} placeholder="Cerca nome, telefono, email, prodotto" className={inp} /><button className="btn-3d btn-3d-teal px-3 py-1.5 text-sm">Cerca</button></form>
       </div>
       <div className="flex flex-wrap gap-2">
         {tab("oggi", `Oggi (${nOggi})`)}
@@ -212,7 +212,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
             <input type="hidden" name="vista" value="tutti" />
             <input type="hidden" name="cerca" value="1" />
             <div className="flex flex-wrap items-center gap-2">
-              <input name="q" defaultValue={q ?? ""} placeholder="Nome, telefono o email del lead" className={`${inp} flex-1 min-w-[180px]`} />
+              <input name="q" defaultValue={q ?? ""} placeholder="Nome, telefono, email o prodotto del lead" className={`${inp} flex-1 min-w-[180px]`} />
               <CalendarioConteggi conteggi={conteggi} iniziale={giornoScelto} meseIniziale={meseCal} />
             </div>
             <div className="flex flex-wrap gap-1.5">

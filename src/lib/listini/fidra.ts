@@ -59,7 +59,7 @@ export function optionalFidra(): OptionalFidra[] {
   return [
     ...COLORI_STANDARD.map((c) => o("Colore", `${c} (colore standard)`, 0)),
     ...COLORI_FUORI_STANDARD.map((c) => o("Colore", `${c} — fuori standard, pellicola su un lato`, 30, "FIDRA", "PERCENTUALE")),
-    o("Colore", "Pellicole fuori standard diverse sui due lati (interno/esterno)", 100, "FIDRA", "PERCENTUALE"),
+    o("Colore", "Pellicole fuori standard diverse sui due lati (interno/esterno)", 25, "FIDRA", "PERCENTUALE"),
     o("Vetri", "Vetro STC (a vetro)", 150, "FIDRA", "FISSO", "vetro"),
     o("Vetri", "Vetro satinato (ad anta)", 90, "FIDRA_F", "FISSO", "anta"),
     o("Vetri", "Vetro satinato (ad anta)", 150, "FIDRA_PF", "FISSO", "anta"),

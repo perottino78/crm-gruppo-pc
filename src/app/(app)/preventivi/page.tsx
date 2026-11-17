@@ -100,11 +100,11 @@ export default async function PreventiviPage({
               <div className="flex flex-col gap-2">
                 {items.map((p) => (
                   <div key={p.id} className="bg-white rounded-lg border border-neutral-200 p-3">
-                    <Link href={`/preventivi/${p.id}`} className="text-sm font-medium hover:underline">
-                      {p.cliente.nome}
+                    <Link href={`/preventivi/${p.id}`} className="btn-3d btn-3d-blue block w-full px-3 py-1.5 text-center text-sm font-bold">
+                      {p.numeroOfferta ? `N° ${p.numeroOfferta}` : "Offerta"} · {p.cliente.nome}
                     </Link>
-                    <p className="text-xs font-semibold text-neutral-800 mt-1">
-                      {p.numeroOfferta ? `Offerta N° ${p.numeroOfferta}` : "Offerta"} · {p.createdAt.toLocaleDateString("it-IT")}
+                    <p className="text-xs font-semibold text-neutral-800 mt-1.5">
+                      {p.createdAt.toLocaleDateString("it-IT")}
                       {p.duplicatoDaId ? " · copia" : ""}
                     </p>
                     <p className="text-xs text-neutral-600">
