@@ -692,8 +692,8 @@ login nel `matcher` del middleware.
 - **Richieste di Ugo del 17/11/2026**: Campagne con «🗄 Archivia»/Archivio (`Campagna.archiviataIl`) e report `/campagne/report` per settimana o mese (`src/lib/campagne/report.ts` puro, Excel `api/campagne/report`);
   pellicola interna Zenith diversa dall'esterna a +0% (il +20% è già nell'esterno; `allineaOptionalSerramenti` riporta a 0 le voci già salvate); rilievo (appuntamento SOPRALLUOGO) con etichetta «RILIEVO · inserito da», allegati in «Rilievi misura» e senza esito né rimando al centralino;
   spunta «✉️ Invia al cliente» (`conSpuntaCliente`/`inviaCliente`) su rilievo, posa e fine posa; `avvisaCommerciale` (task `faseChiave` null + mail per conoscenza) a rilievo e posa fissati; date dei passaggi fra uffici nel riquadro del flusso; ricerca per prodotto (`FiltriClienti.prodotto`, lead);
-  scheda prodotto leggera `/schede/<tipologia>` (pubblica, `BottoneStampa`); portoncini PVC: `Optional.immagineUrl` (foto di pannelli 13-24 e 37-75, maniglioni WALA, maniglie, buca lettere, spioncino in `public/immagini/portoncini-pvc/`, `src/lib/listini/portoncini-foto.ts`,
-  rotta `api/admin/immagini-portoncini` GET prova/POST) e scelta con la foto nell'offerta (`ScegliOptionalConFoto`). Mancano le foto dei pannelli 01-12 e 25-36.
+  scheda prodotto leggera `/schede/<tipologia>` (pubblica, `BottoneStampa`); portoncini PVC: `Optional.immagineUrl` (foto dei 75 pannelli, maniglioni WALA, maniglie, buca lettere, spioncino in `public/immagini/portoncini-pvc/`, `src/lib/listini/portoncini-foto.ts`,
+  rotta `api/admin/immagini-portoncini` GET prova/POST) e scelta con la foto nell'offerta (`ScegliOptionalConFoto`).
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:
