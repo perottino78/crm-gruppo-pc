@@ -24,8 +24,9 @@ export default async function InviaOffertaPage({ params, searchParams }: { param
   if (!p) notFound();
   const numero = `${p.numeroOfferta ?? p.id.slice(-6).toUpperCase()}/${p.createdAt.getFullYear()}`;
   const info = brandInfo(p.brand?.nome);
+  const idRighe = (await prisma.rigaPreventivo.findMany({ where: { preventivoId: p.id }, select: { id: true } })).map((r) => r.id);
   const documenti = await prisma.documento.findMany({
-    where: { OR: [{ entita: "PREVENTIVO", entitaId: p.id }, { entita: "CLIENTE", entitaId: p.clienteId }] },
+    where: { OR: [{ entita: "PREVENTIVO", entitaId: p.id }, { entita: "CLIENTE", entitaId: p.clienteId }, { entita: "RIGA_PREVENTIVO", entitaId: { in: idRighe } }] },
     select: { id: true, nome: true, cartella: true, entita: true, dimensione: true },
     orderBy: { createdAt: "desc" },
     take: 60,
@@ -54,7 +55,7 @@ export default async function InviaOffertaPage({ params, searchParams }: { param
         firmaSalvata={!!u.firmaEmail?.trim()}
         colore={info.primary}
         logo={info.logoUrl ? `${APP_URL}${info.logoUrl}` : null}
-        documenti={documenti.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella, dove: d.entita === "CLIENTE" ? "Cliente" : "Offerta", kb: Math.max(1, Math.round(d.dimensione / 1024)) }))}
+        documenti={documenti.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella, dove: d.entita === "CLIENTE" ? "Cliente" : d.entita === "RIGA_PREVENTIVO" ? "Prodotto" : "Offerta", kb: Math.max(1, Math.round(d.dimensione / 1024)) }))}
         avviso={avviso}
         schede={schedeDelleTipologie(p.righe.map((r) => r.prodotto?.tipologia)).map((s) => ({ chiave: s.chiave, nome: s.nome, spuntata: schedeDaAllegare(p.righe.map((r) => ({ tipologia: r.prodotto?.tipologia, allegaScheda: r.allegaScheda }))).some((x) => x.chiave === s.chiave) }))}
         mittente={personale ? `la tua casella (${u.smtpUtente})` : "la casella aziendale, con le risposte a te"}

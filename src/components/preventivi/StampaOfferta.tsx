@@ -8,6 +8,7 @@ import type { Prisma } from "@prisma/client";
 import { brandInfo } from "@/lib/brands";
 import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } from "@/lib/prodotti";
 import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
+import { codiceFileRiga } from "@/lib/mail/link-offerta";
 import { schedaCliente, schedeDaAllegare } from "@/lib/preventivi/scheda-cliente";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
@@ -66,6 +67,12 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
     },
   });
   if (!preventivo) notFound();
+  // foto e PDF caricati sulle righe (es. portoncino): foto sotto il prodotto, PDF come «Scegli il modello»
+  const fileRighe = await prisma.documento.findMany({
+    where: { entita: "RIGA_PREVENTIVO", entitaId: { in: preventivo.righe.map((r) => r.id) } },
+    select: { id: true, entitaId: true, cartella: true, nome: true, mime: true },
+    orderBy: { createdAt: "asc" },
+  });
 
   const tipologiePresenti = [
     ...new Set(preventivo.righe.filter((r) => r.prodotto).map((r) => r.prodotto!.tipologia)),
@@ -211,6 +218,27 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                   <li key={v.etichetta}><span className="text-neutral-500">{v.etichetta}:</span> {v.valore}</li>
                 ))}
               </ul>
+              {(() => {
+                const mie = fileRighe.filter((f) => f.entitaId === r.id);
+                const foto = mie.filter((f) => f.mime.startsWith("image/"));
+                const pdf = mie.filter((f) => f.mime === "application/pdf");
+                if (!foto.length && !pdf.length) return null;
+                return (
+                  <div className="mt-1.5">
+                    {foto.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {foto.map((f) => <img key={f.id} src={`/api/offerta/file/${codiceFileRiga(f.id)}`} alt={f.nome} className="max-h-56 max-w-[14rem] rounded border border-neutral-200 object-contain" />)}
+                      </div>
+                    )}
+                    {pdf.length > 0 && (
+                      <p className="mt-1 text-xs">
+                        <span className="text-neutral-600">Scegli il modello: </span>
+                        {pdf.map((f) => <a key={f.id} href={`/api/offerta/file/${codiceFileRiga(f.id)}`} target="_blank" rel="noopener" className="text-blue-700 underline mr-2">📄 {f.nome.replace(/\.pdf$/i, "")}</a>)}
+                      </p>
+                    )}
+                  </div>
+                );
+              })()}
               {/* la scheda tecnica completa resta per noi: in stampa solo il testo scritto apposta per questa riga */}
               {r.mostraDescrizione && r.descrizionePersonalizzata && (
                 <p className="text-xs text-neutral-700 mt-1 max-w-md whitespace-pre-line">{r.descrizionePersonalizzata}</p>

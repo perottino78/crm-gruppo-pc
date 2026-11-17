@@ -10,6 +10,8 @@ export const STATI_ORDINE: { chiave: string; nome: string; colore: string }[] = 
 ];
 export const statoOrdine = (k: string) => STATI_ORDINE.find((s) => s.chiave === k) ?? { chiave: k, nome: k, colore: "#6b7280" };
 
+export const FOTO_RIGA = "Foto del prodotto scelto";
+export const PDF_RIGA = "PDF da scegliere";
 export const CARTELLE: Record<string, string[]> = {
   CLIENTE: ["Generale", "Rilievi misura", "Documenti identità", "Contratti firmati", "Pratiche e detrazioni", "Foto", "Corrispondenza"],
   PREVENTIVO: ["Contratto firmato", "Foto", "Generale", "Rilievi e disegni", "Offerte fornitori", "Corrispondenza"],
@@ -19,6 +21,8 @@ export const CARTELLE: Record<string, string[]> = {
   ARTICOLO: ["Foto", "Schede tecniche", "Certificazioni", "Istruzioni"],
   BOLLA_ENTRATA: ["Bolla", "Foto della merce", "Contestazioni"],
   FATTURA_ACQUISTO: ["Fattura", "Allegati"],
+  // foto del prodotto scelto e PDF fra cui il cliente può scegliere, su una riga dell'offerta (es. portoncino)
+  RIGA_PREVENTIVO: [FOTO_RIGA, PDF_RIGA],
   TASK: ["Allegati", "Generale"],
   TASK_PRATICA: ["Allegati", "Generale"],
 };

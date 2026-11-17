@@ -13,3 +13,11 @@ export function leggiCodiceOfferta(codice: string): string | null {
   return m && firmaCodice(m[1]) === m[2] ? m[1] : null;
 }
 
+
+// File caricati su una riga dell'offerta (foto del portoncino scelto, PDF da scegliere): il cliente li apre dal link dell'offerta, senza accesso.
+const firmaFile = (id: string) => createHmac("sha256", SEGRETO).update(`file-riga:${id}`).digest("hex").slice(0, 20);
+export const codiceFileRiga = (id: string) => `${id}.${firmaFile(id)}`;
+export function leggiCodiceFileRiga(codice: string): string | null {
+  const m = /^([A-Za-z0-9_-]+)\.([0-9a-f]{20})$/.exec(decodeURIComponent(codice || ""));
+  return m && firmaFile(m[1]) === m[2] ? m[1] : null;
+}

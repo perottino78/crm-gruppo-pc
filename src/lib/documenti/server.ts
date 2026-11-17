@@ -24,6 +24,8 @@ export async function puoVedereEntita(u: Pick<Utente, "id" | "ruolo">, entita: s
       return puoAmministrazione(u);
     case "TASK":
       return puoVedereTask(u, entitaId);
+    case "RIGA_PREVENTIVO":
+      return !!(await prisma.rigaPreventivo.findFirst({ where: { id: entitaId, preventivo: scopePreventivoWhere(u) }, select: { id: true } }));
     case "TASK_PRATICA":
       return true; // i task fra uffici li vede chi è collegato
     default:

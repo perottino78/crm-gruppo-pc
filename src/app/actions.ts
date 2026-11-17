@@ -475,7 +475,9 @@ export async function eliminaPreventivo(formData: FormData) {
     const u = await getCurrentUser();
     await mettiNelCestino("PREVENTIVO", id, { id: u?.id, nome: u?.nome });
     const solaris = await prisma.solarisProgetto.findMany({ where: { preventivoId: id }, select: { id: true } });
+    const idRighe = (await prisma.rigaPreventivo.findMany({ where: { preventivoId: id }, select: { id: true } })).map((x) => x.id);
     await prisma.$transaction([
+      prisma.documento.deleteMany({ where: { entita: "RIGA_PREVENTIVO", entitaId: { in: idRighe } } }),
       prisma.solarisFoto.deleteMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }),
       prisma.solarisProgetto.deleteMany({ where: { preventivoId: id } }),
       prisma.emailOfferta.deleteMany({ where: { preventivoId: id } }),
@@ -1150,6 +1152,7 @@ export async function rimuoviRigaPreventivo(formData: FormData) {
   const preventivoId = str(formData, "preventivoId");
   if (!id || !preventivoId) return;
   await prisma.rigaOptional.deleteMany({ where: { rigaId: id } });
+  await prisma.documento.deleteMany({ where: { entita: "RIGA_PREVENTIVO", entitaId: id } });
   await prisma.rigaPreventivo.delete({ where: { id } });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
