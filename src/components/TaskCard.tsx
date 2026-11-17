@@ -2,6 +2,8 @@ import Link from "next/link";
 import { fattoTask, cambiaStatoTask, prendiInCaricoTask, segnaMailTaskInviata, inviaMailTask } from "@/app/flusso-actions";
 import { STATI_TASK, STATI_CHIUSI, nomeUfficio, statoTask } from "@/lib/flusso";
 import { prisma } from "@/lib/prisma";
+import { commentaTaskPratica } from "@/app/task-actions";
+import ElencoCommenti from "@/components/task/ElencoCommenti";
 
 type Task = {
   id: string; commessaId: string; faseChiave: string | null; titolo: string; descrizione: string | null; ufficio: string;
@@ -14,6 +16,7 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
   const chiuso = STATI_CHIUSI.includes(task.stato);
   const fase = task.faseChiave ? await prisma.flussoFase.findUnique({ where: { chiave: task.faseChiave } }) : null;
   const prossima = fase?.prossimaChiave ? await prisma.flussoFase.findUnique({ where: { chiave: fase.prossimaChiave } }) : null;
+  const commenti = await prisma.taskCommento.findMany({ where: { taskPraticaId: task.id }, orderBy: { createdAt: "asc" }, select: { id: true, utenteNome: true, testo: true, chiusura: true, createdAt: true } });
   const dt = (d: Date) => d.toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit" }) + " " + d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
   const mailto = task.mailOggetto || task.mailTesto
     ? `mailto:${task.mailA ?? ""}?subject=${encodeURIComponent(task.mailOggetto ?? "")}&body=${encodeURIComponent(task.mailTesto ?? "")}`
@@ -85,6 +88,23 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
           </form>
         </div>
       )}
+
+      {/* scambio interno sul task: richieste, risposte e «cosa abbiamo fatto» (come i commenti dei task di BConsole) */}
+      <details className="mt-2" open={commenti.length > 0 && !chiuso}>
+        <summary className="cursor-pointer text-xs font-bold text-neutral-700">💬 Commenti ({commenti.length})</summary>
+        <div className="mt-2 space-y-2">
+          <ElencoCommenti commenti={commenti} vuoto="Nessun commento: scrivi cosa hai fatto o cosa ti serve." />
+          <form action={commentaTaskPratica} className="space-y-1.5">
+            <input type="hidden" name="taskId" value={task.id} />
+            <textarea name="testo" rows={2} required placeholder="Scrivi un commento o la risposta…" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-xs" />
+            <label className="flex items-center gap-1.5 text-[11px] text-neutral-700"><input type="checkbox" name="notifica" value="1" defaultChecked /> 📧 Avvisa per email chi ha il task</label>
+            <div className="flex flex-wrap gap-2">
+              <button className="btn-3d btn-3d-outline px-3 py-1 text-xs">Commenta</button>
+              {!chiuso && <button name="chiudi" value="1" className="btn-3d btn-3d-green px-3 py-1 text-xs">✔ Commenta e segna Fatto</button>}
+            </div>
+          </form>
+        </div>
+      </details>
     </div>
   );
 }

@@ -213,11 +213,10 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
           </dl>
           {c.sottoMinimo && <p className="mt-2 text-xs text-red-700">Margine sotto il minimo della categoria ({n(c.regola?.margineMinimo)}%).</p>}
           {modificabile && (
-            <button disabled={inCorso} className="btn-3d btn-3d-purple w-full mt-3 text-sm py-2">{inCorso ? "Salvataggio…" : a.id ? "Salva modifiche" : "Crea articolo"}</button>
+            <button disabled={inCorso} className="btn-3d btn-3d-purple w-full mt-3 text-sm py-2">{inCorso ? "Salvataggio…" : a.id ? "Salva modifiche" : "💾 Salva e passa al prossimo"}</button>
           )}
-          {modificabile && !a.id && (
-            <button disabled={inCorso} name="altro" value="1" className="btn-3d btn-3d-green w-full mt-2 text-sm py-2">{inCorso ? "Salvataggio…" : "💾 Salva e inserisci un altro"}</button>
-          )}
+          {modificabile && !a.id && <a href="/prodotti/articoli/nuovo" className="btn-3d btn-3d-outline w-full mt-2 text-sm py-2 text-center block">➕ Crea nuovo (modulo tutto vuoto)</a>}
+          {modificabile && !a.id && <p className="mt-1 text-[11px] text-neutral-600">Salva l&apos;articolo e riapre il modulo vuoto per il prossimo (fornitore e categoria restano).</p>}
           {esito && <p className={`mt-2 text-xs ${esito.ok ? "text-green-800" : "text-red-700"}`}>{esito.messaggio}</p>}
         </section>
       </aside>

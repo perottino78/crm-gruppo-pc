@@ -617,6 +617,31 @@ model Attivita {
   creatoDaNome String?
   completataIl DateTime?
   createdAt    DateTime  @default(now())
+  // Task come «corrispondenza interna» (richiesta di Ugo 18/11/2026, come in BConsole): in copia a, categoria, ore previste, avvisi, stato e commenti
+  inCopiaA     String[]  @default([])
+  categoria    String?
+  orePreviste  Float?
+  notifica     Boolean   @default(true)
+  statoTask    String    @default("DA_FARE") // DA_FARE | IN_CORSO | FATTO (FATTO = completata)
+  commenti     TaskCommento[]
+}
+
+// Commento dello scambio interno su un task: «cosa abbiamo fatto», richieste e risposte. Su un task di cliente (Attivita) o di pratica (TaskPratica).
+model TaskCommento {
+  id             String       @id @default(cuid())
+  attivita       Attivita?    @relation(fields: [attivitaId], references: [id], onDelete: Cascade)
+  attivitaId     String?
+  taskPratica    TaskPratica? @relation(fields: [taskPraticaId], references: [id], onDelete: Cascade)
+  taskPraticaId  String?
+  utenteId       String?
+  utenteNome     String
+  testo          String
+  // il commento che ha chiuso il task («risposta di chiusura»)
+  chiusura       Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([attivitaId, createdAt])
+  @@index([taskPraticaId, createdAt])
 }
 
 // Scheda tecnica condivisa per tutte le varianti dimensionali di una tipologia
@@ -1031,6 +1056,7 @@ model TaskPratica {
   mailInviataIl     DateTime?
   avvisoInviatoIl   DateTime?
   createdAt         DateTime  @default(now())
+  commenti          TaskCommento[]
 }
 
 // ===== Integrazione Meta Lead Ads (receiver webhook) =====

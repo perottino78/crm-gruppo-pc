@@ -687,6 +687,7 @@ login nel `matcher` del middleware.
   `seed-solaris-bconsole` aggiorna i dati delle righe già a catalogo (`schedeStealthAggiornate`, mai i prezzi). Nessun PDF del produttore nel CRM (hanno il suo marchio).
   Pannello VDS 460 W Total Black: misure (2095 × 1039 × 30 mm) e peso (28,5 kg) dalla scheda VDS-S144/M6H-BG 430–450 W della stessa famiglia (non cita il 460 W: da confermare); dati elettrici non inseriti.
   Test `tests/listini/solaris-bconsole.test.ts`, collaudo `solaris-bconsole` (13).
+- **Familiari con lo stesso telefono** (18/11/2026, caso Matta Roberto / Scorda Antonella): negli import da BConsole telefono ed email riconoscono lo stesso cliente solo se il nome è compatibile (`nomiCompatibili`: almeno una parola in comune), e il C.F. di una fattura aggancia la scheda solo se il nome è compatibile. Riparazione di fatture già collegate male: rotta `api/admin/ricollega-fatture-vendita` (POST con i documenti di vendita; senza `?esegui=1` è una prova; toglie il C.F. dalla scheda sbagliata e ricollega fattura e scadenze). Collaudo `ricollega-fatture` (7).
 - **Fornitori**: `Soggetto` con `ruoli: ["FORNITORE"]`; 55 importati da BConsole (rotta `api/admin/importa-fornitori-bconsole`).
 
 - **Richieste di Ugo del 17/11/2026**: Campagne con «🗄 Archivia»/Archivio (`Campagna.archiviataIl`) e report `/campagne/report` per settimana o mese (`src/lib/campagne/report.ts` puro, Excel `api/campagne/report`);
@@ -708,6 +709,11 @@ login nel `matcher` del middleware.
 - **Articoli collegati al listino delle offerte** (richiesta di Ugo 18/11/2026): `CategoriaArticolo.famiglia` + `gruppoListino` (stessi nomi dell'albero «Aggiungi prodotto», es. OUTDOOR › VETRATE; `posizioniListino()` in `src/lib/articoli/server.ts`,
   `posizione.ts` puro: la sottocategoria usa la posizione della madre; `ScegliPosizioneListino` nella pagina Categorie, nella creazione al volo e in «📍 Nel listino» della scheda articolo). Nella finestra «Aggiungi prodotto» (`SelettoreProdotto`, livello famiglia e livello gruppo)
   il riquadro «🔧 Ricambi e articoli» (`RicambiDelGruppo`, `GET /api/articoli/listino?famiglia=&gruppo=`, solo articoli visibili a chi chiede) aggiunge l'articolo come riga di testo con il suo prezzo (`aggiungiArticoloPreventivo` in `actions.ts`, nella stanza scelta). Collaudo `articoli` (51), test `tests/articoli/posizione.test.ts`.
+- **Task come corrispondenza interna** (richiesta di Ugo 18/11/2026, sul modello dei task di BConsole: «teniamo traccia dell'avanzamento, rispondiamo dicendo cosa abbiamo fatto e chiudiamo»):
+  pagina `/task/[id]` per i task di cliente (`Attivita` TASK) con schede Descrizione · Commenti · File · Info sul task (`src/app/task-actions.ts`: `commentaTask` con «Commenta e chiudi il task» = risposta di chiusura,
+  `salvaInfoTask`, `salvaDescrizioneTask`; modello `TaskCommento`; `Attivita.inCopiaA/categoria/orePreviste/notifica/statoTask`; categorie e stato mostrato «Scaduta» in `src/lib/task/categorie.ts`; chi lo vede `puoVedereTask`: autore, incaricato, in copia,
+  amministratori e chi vede il cliente; File = `Documento` entità `TASK`). Email di avviso (mai bloccanti) a incaricato, in copia e autore per task nuovo, commenti e chiusura, con link `/task/<id>`. «➕ Nuovo task» anche in `/task` (cliente cercato con `ClientePicker`,
+  assegna a, categoria, scadenza, ore, in copia) e elenco «In copia a me». I task di pratica (`TaskPratica`) hanno «💬 Commenti» e «Commenta e segna Fatto» nella `TaskCard` (`commentaTaskPratica`, chiude con `fattoTask`). Collaudo `task-corrispondenza` (13, SMTP finto), test `tests/task/stato.test.ts`.
 
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:

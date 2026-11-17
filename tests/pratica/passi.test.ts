@@ -63,3 +63,17 @@ test("passo precedente: salta i passi in parallelo", () => {
   assert.equal(passoPrecedente(passi, "POSA_APP")?.chiave, "ARRIVO");
   assert.equal(passoPrecedente(passi, "FATTURA"), null);
 });
+
+import { passiPratica as passiScheda } from "../../src/lib/clienti/pratica";
+test("scheda cliente: acconto incassato → «Incasso acconto» è fatto anche se la fattura di Giorgia è ancora da fare", () => {
+  const fasi = [
+    { chiave: "FATT_ACCONTO", nome: "Fattura acconto", ufficio: "FATTURAZIONE" },
+    { chiave: "PROGETTO", nome: "Incasso acconto", ufficio: "AMMINISTRAZIONE" },
+    { chiave: "RILIEVO", nome: "Rilievo", ufficio: "TECNICO" },
+  ];
+  const r = passiScheda({ statoOfferta: "ACCETTATO", fasi, commessa: { stato: "IN_ATTESA_ACCONTO", accontoIncassato: true, tasks: [{ faseChiave: "FATT_ACCONTO", stato: "DA_FARE", ufficio: "FATTURAZIONE" }] } });
+  const st = Object.fromEntries(r.passi.map((p) => [p.chiave, p.stato]));
+  assert.equal(st.FATT_ACCONTO, "corrente");
+  assert.equal(st.PROGETTO, "fatto");
+  assert.equal(st.RILIEVO, "futuro");
+});

@@ -56,7 +56,7 @@ export async function progettiDi(utente: Utente): Promise<Progetto[]> {
   }
   const fasi = fasiDb.length ? fasiDb : FASI_DEFAULT.map((f) => ({ chiave: f.chiave, nome: f.nome, ufficio: f.ufficio }));
   return commesse.map((c) => {
-    const { passi, corrente } = passiPratica({ statoOfferta: c.preventivo.stato, commessa: { stato: c.stato, tasks: c.tasks }, fasi });
+    const { passi, corrente } = passiPratica({ statoOfferta: c.preventivo.stato, commessa: { stato: c.stato, tasks: c.tasks, accontoIncassato: c.accontoIncassato }, fasi });
     // pagato: dalle scadenze d'incasso della commessa; senza scadenze, dai flag acconto/saldo della commessa
     const sc = scadenzeDi.get(c.id) ?? [];
     const pagato = sc.length

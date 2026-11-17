@@ -69,3 +69,12 @@ test("riconosce lo stesso cliente e completa solo i vuoti", () => {
   assert.equal(extra.origine, undefined); // già scritta a mano
   assert.equal(extra.telefono, undefined);
 });
+
+import { nomiCompatibili as _nc, indiceClienti as _ic } from "../../src/lib/clienti/bconsole";
+test("stesso cellulare ma persone diverse (marito e moglie) non si fondono", () => {
+  assert.equal(_nc("Matta Roberto", "SCORDA ANTONELLA"), false);
+  assert.equal(_nc("Matta Roberto", "Roberto Matta"), true);
+  const ind = _ic([{ id: "1", nome: "Matta Roberto", telefono: "3479627188", cellulare: null, email: null, piva: null, codiceFiscale: null, bconsoleId: "33363" }]);
+  assert.equal(ind.trova({ nome: "SCORDA ANTONELLA", telefono: "3479627188" } as never), null);
+  assert.equal(ind.trova({ nome: "Roberto Matta", telefono: "3479627188" } as never)?.id, "1");
+});

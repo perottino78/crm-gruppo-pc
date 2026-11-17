@@ -455,7 +455,7 @@ export default async function SchedaClientePage({
                 {taskAttivita.map((t) => (
                   <div key={t.id} className="flex flex-wrap items-center justify-between gap-2 text-sm py-1.5 border-b border-neutral-50 last:border-0">
                     <span className="min-w-0">
-                      <b>{t.oggetto}</b>
+                      <Link href={`/task/${t.id}`} className="font-bold text-blue-800 underline decoration-blue-300 underline-offset-2">{t.oggetto}</Link>
                       {t.scadenza && <span className={`text-xs ${t.scadenza < new Date() ? "text-red-700 font-semibold" : "text-amber-700"}`}> — entro {t.scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</span>}
                       {t.utente && <span className="text-xs text-neutral-600"> · per {t.utente.nome}</span>}
                       {t.creatoDaNome && t.creatoDaId !== t.utenteId && <span className="text-xs text-neutral-500"> · da {t.creatoDaNome}</span>}

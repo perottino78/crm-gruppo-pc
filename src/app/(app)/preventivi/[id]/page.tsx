@@ -3,7 +3,6 @@ export const dynamic = "force-dynamic";
 import { percentuale } from "@/lib/numeri";
 import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
-import Documenti from "@/components/documenti/Documenti";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
@@ -32,6 +31,7 @@ import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
 import { rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
 import RigaTesto from "@/components/preventivi/RigaTesto";
+import Documenti from "@/components/documenti/Documenti";
 import FinestraOptional from "@/components/preventivi/FinestraOptional";
 import ScegliOptionalConFoto from "@/components/preventivi/ScegliOptionalConFoto";
 import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
@@ -553,6 +553,13 @@ export default async function PreventivoPage({
                 </div>
               )}
 
+              {prodotto.tipologia.startsWith("PORTONCINO") && (
+                <details className="mt-2 print:hidden">
+                  <summary className="cursor-pointer text-xs font-semibold text-blue-800">📷 Foto del portoncino scelto e PDF da far scegliere al cliente</summary>
+                  <p className="text-[11px] text-neutral-600 my-1">La foto va in stampa sotto il prodotto; i PDF compaiono come «Scegli il modello» nel link dell&apos;offerta e si possono allegare all&apos;email.</p>
+                  <Documenti entita="RIGA_PREVENTIVO" entitaId={r.id} titolo="Foto e PDF di questo portoncino" />
+                </details>
+              )}
               <FinestraOptional rigaId={r.id} titolo={labelBreveTipologia(prodotto.tipologia)} scelti={r.optionali.length}>
               {(() => {
                 const optionaliRigaFiltrati = optionaliDisponibili
