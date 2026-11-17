@@ -42,6 +42,7 @@ type ClientiSearchParams = {
   q?: string;
   indirizzo?: string;
   comune?: string;
+  prodotto?: string;
   provincia?: string;
   cap?: string;
   paese?: string;
@@ -64,7 +65,7 @@ export default async function ClientiPage({
   searchParams: Promise<ClientiSearchParams>;
 }) {
   const filtri = await searchParams;
-  const { brand, q, indirizzo, comune, provincia, cap, paese, lead: leadParam, clienti: clientiParam, provenienza, stato, commerciale, dal, al } = filtri;
+  const { brand, q, prodotto, indirizzo, comune, provincia, cap, paese, lead: leadParam, clienti: clientiParam, provenienza, stato, commerciale, dal, al } = filtri;
   const leadMostrati = leggiQuante(leadParam);
   const leadTake = quanteTake(leadMostrati);
   const clientiMostrati = leggiQuante(clientiParam);
@@ -76,7 +77,7 @@ export default async function ClientiPage({
   // Link "Mostra: 10/20/50/100/tutti" che conserva brand, ricerca e l'altra scelta.
   const hrefQuante = (cambia: { lead?: string; clienti?: string; pc?: number; pl?: number }) => {
     const parametri = new URLSearchParams();
-    for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametri.set(k, v);
+    for (const [k, v] of Object.entries({ brand, q, prodotto, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametri.set(k, v);
     const l = cambia.lead ?? leadMostrati;
     const c = cambia.clienti ?? clientiMostrati;
     if (l !== LEAD_DEFAULT) parametri.set("lead", l);
@@ -108,7 +109,7 @@ export default async function ClientiPage({
   // amministratore e marketing vedono tutti i clienti: possono filtrare per commerciale
   const isAdmin = utente?.ruolo === "AMMINISTRATORE" || utente?.ruolo === "MARKETING";
   const parametriEsporta = new URLSearchParams();
-  for (const [k, v] of Object.entries({ brand, q, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametriEsporta.set(k, v);
+  for (const [k, v] of Object.entries({ brand, q, prodotto, indirizzo, comune, provincia, cap, paese, provenienza, stato, commerciale, dal, al })) if (v) parametriEsporta.set(k, v);
 
   // Ricerca lead: nome, telefono, email
   const leadRicercaWhere: Prisma.LeadWhereInput = ricercaStd
@@ -202,9 +203,10 @@ export default async function ClientiPage({
             </Link>
           )}
         </div>
-        <details className="mt-3" open={Boolean(indirizzo || comune || provincia || cap || (paese && paese !== "Tutti"))}>
-          <summary className="text-xs text-neutral-600 cursor-pointer select-none">🔍 Ricerca avanzata per indirizzo (solo clienti)</summary>
+        <details className="mt-3" open={Boolean(prodotto || indirizzo || comune || provincia || cap || (paese && paese !== "Tutti"))}>
+          <summary className="text-xs text-neutral-600 cursor-pointer select-none">🔍 Ricerca avanzata: per prodotto o per indirizzo</summary>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2">
+            <input type="text" name="prodotto" defaultValue={prodotto ?? ""} placeholder="Prodotto (es. pergola, Optima, fotovoltaico)" className="col-span-2 sm:col-span-5 border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input type="text" name="indirizzo" defaultValue={indirizzo ?? ""} placeholder="Via" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input type="text" name="comune" defaultValue={comune ?? ""} placeholder="Comune" className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />
             <input type="text" name="provincia" defaultValue={provincia ?? ""} placeholder="Prov." maxLength={2} className="border border-neutral-200 rounded px-2 py-1.5 text-sm" />

@@ -42,6 +42,8 @@ export function provenienzaDaFonte(fonte?: string | null): string {
 export type FiltriClienti = {
   brand?: string; q?: string; indirizzo?: string; comune?: string; provincia?: string; cap?: string; paese?: string;
   provenienza?: string; stato?: string; commerciale?: string; dal?: string; al?: string;
+  /** Prodotto cercato (richiesta di Ugo 17/11/2026): nelle righe delle offerte e nel prodotto/note del lead da cui è nato il cliente */
+  prodotto?: string;
 };
 
 export const NESSUNA = "(nessuna)";
@@ -55,6 +57,13 @@ export function whereFiltriClienti(f: FiltriClienti, dataDa?: Date | null, dataA
   if (q) {
     const parole = q.split(/\s+/).filter(Boolean).slice(0, 6);
     w.push({ AND: parole.map((p) => ({ OR: [{ nome: { contains: p, mode: "insensitive" as const } }, { telefono: { contains: p, mode: "insensitive" as const } }, { cellulare: { contains: p, mode: "insensitive" as const } }, { email: { contains: p, mode: "insensitive" as const } }] })) });
+  }
+  const prod = f.prodotto?.trim();
+  if (prod) {
+    w.push({ AND: prod.split(/\s+/).filter(Boolean).slice(0, 5).map((x) => ({ OR: [
+      { preventivi: { some: { righe: { some: { OR: [{ testoLibero: { contains: x, mode: "insensitive" as const } }, { prodotto: { OR: [{ tipologia: { contains: x, mode: "insensitive" as const } }, { descrizione: { contains: x, mode: "insensitive" as const } }] } }] } } } } },
+      { leadOrigine: { OR: [{ prodotto: { contains: x, mode: "insensitive" as const } }, { note: { contains: x, mode: "insensitive" as const } }] } },
+    ] })) });
   }
   for (const k of ["indirizzo", "comune", "provincia", "cap"] as const) {
     const v = f[k]?.trim();
