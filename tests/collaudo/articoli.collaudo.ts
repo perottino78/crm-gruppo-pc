@@ -60,7 +60,7 @@ async function main() {
   console.log("3. Scheda articolo");
   const dest = await redirectA(A.salvaArticolo(null, fd({ descrizione: "Motore Oximo 40", categoriaId: mot.id, fornitoreId: somfy.id, prezzoListino: "245,00", sconti: "50+10", attivo: "1", um: "pz", aliquotaIva: "22" })));
   const m1 = (await prisma.articolo.findFirst({ where: { descrizione: "Motore Oximo 40" }, include: { storico: true } }))!;
-  verifica(dest?.startsWith(`/prodotti/articoli/${m1.id}`), "dopo la creazione si apre la scheda", dest);
+  verifica(dest?.startsWith("/prodotti/articoli/nuovo?salvato="), "dopo il salvataggio si riapre il modulo vuoto", dest);
   verifica(m1.codice === "ART-00001", "codice automatico ART-00001", m1.codice);
   verifica(m1.costoAcquisto === 110.25 && m1.prezzoVendita === 364, "costo 245 −50−10 = 110,25; vendita ×3,3 arrotondata = 364 (regola della madre)", m1);
   verifica(m1.storico.length === 1, "prima voce nello storico prezzi");
