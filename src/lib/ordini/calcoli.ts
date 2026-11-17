@@ -19,6 +19,8 @@ export const CARTELLE: Record<string, string[]> = {
   ARTICOLO: ["Foto", "Schede tecniche", "Certificazioni", "Istruzioni"],
   BOLLA_ENTRATA: ["Bolla", "Foto della merce", "Contestazioni"],
   FATTURA_ACQUISTO: ["Fattura", "Allegati"],
+  TASK: ["Allegati", "Generale"],
+  TASK_PRATICA: ["Allegati", "Generale"],
 };
 export const ENTITA_DOCUMENTI = Object.keys(CARTELLE);
 export const MAX_DOCUMENTO = 4 * 1024 * 1024; // 4 MB per file

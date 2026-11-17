@@ -7,7 +7,9 @@ import { UFFICI, STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
 import { numeroCommessa } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
 import { assicuraFlusso } from "@/app/flusso-actions";
-import { completaTaskCliente } from "@/app/task-clienti-actions";
+import { completaTaskCliente, creaTaskCliente } from "@/app/task-clienti-actions";
+import ClientePicker from "@/components/calendario/ClientePicker";
+import { CATEGORIE_TASK } from "@/lib/task/categorie";
 
 export default async function TaskPage({ searchParams }: { searchParams: Promise<{ ufficio?: string; vista?: string }> }) {
   const sp = await searchParams;
@@ -27,8 +29,12 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
   });
   // task dati dalla scheda cliente: i miei da fare e quelli che ho dato ai colleghi (ancora aperti)
   const [mieiClienti, datiDaMe] = u ? await Promise.all([
-    prisma.attivita.findMany({ where: { tipo: "TASK", completata: false, utenteId: u.id }, include: { cliente: { select: { id: true, nome: true } } }, orderBy: [{ scadenza: { sort: "asc", nulls: "last" } }, { createdAt: "desc" }], take: 100 }),
+    prisma.attivita.findMany({ where: { tipo: "TASK", completata: false, utenteId: u.id }, include: { cliente: { select: { id: true, nome: true } }, _count: { select: { commenti: true } } }, orderBy: [{ scadenza: { sort: "asc", nulls: "last" } }, { createdAt: "desc" }], take: 100 }),
     prisma.attivita.findMany({ where: { tipo: "TASK", completata: false, creatoDaId: u.id, NOT: { utenteId: u.id } }, include: { cliente: { select: { id: true, nome: true } }, utente: { select: { nome: true } } }, orderBy: { createdAt: "desc" }, take: 50 }),
+  ]) : [[], []];
+  const [inCopia, utenti] = u ? await Promise.all([
+    prisma.attivita.findMany({ where: { tipo: "TASK", completata: false, inCopiaA: { has: u.id } }, include: { cliente: { select: { id: true, nome: true } }, utente: { select: { nome: true } }, _count: { select: { commenti: true } } }, orderBy: { createdAt: "desc" }, take: 50 }),
+    prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } }),
   ]) : [[], []];
   const adesso = new Date();
   const link = (uff: string, v: string) => `/task?ufficio=${uff}&vista=${v}`;
@@ -48,7 +54,9 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
             {mieiClienti.map((t) => (
               <div key={t.id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 text-sm">
                 <span className="min-w-0">
-                  <b>{t.oggetto}</b> · <Link href={`/clienti/${t.cliente.id}?sez=task`} className="text-blue-700 underline">{t.cliente.nome}</Link>
+                  <Link href={`/task/${t.id}`} className="font-bold text-blue-800 underline decoration-blue-300 underline-offset-2 hover:decoration-blue-700">{t.oggetto}</Link> · <Link href={`/clienti/${t.cliente.id}?sez=task`} className="text-neutral-700 underline">{t.cliente.nome}</Link>
+                  {t.categoria && <span className="ml-1 rounded bg-neutral-100 px-1.5 py-0.5 text-[10px] font-semibold text-neutral-700">{t.categoria}</span>}
+                  {t._count.commenti > 0 && <span className="ml-1 text-xs text-neutral-600">💬 {t._count.commenti}</span>}
                   {t.scadenza && <span className={`text-xs ${t.scadenza < adesso ? "font-semibold text-red-700" : "text-amber-700"}`}> — entro {t.scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}</span>}
                   {t.creatoDaNome && t.creatoDaId !== u?.id && <span className="text-xs text-neutral-500"> · da {t.creatoDaNome}</span>}
                   {t.descrizione && <span className="block text-xs text-neutral-600 whitespace-pre-line">{t.descrizione}</span>}
@@ -61,12 +69,45 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
             ))}
           </div>
         )}
+        {inCopia.length > 0 && (
+          <details className="mt-2 text-sm">
+            <summary className="cursor-pointer text-xs font-semibold text-neutral-700">In copia a me ({inCopia.length})</summary>
+            <ul className="mt-1 space-y-1 text-xs text-neutral-700">
+              {inCopia.map((t) => <li key={t.id}><Link href={`/task/${t.id}`} className="font-bold text-blue-800 underline">{t.oggetto}</Link> · {t.cliente.nome} · per {t.utente?.nome ?? "—"}{t._count.commenti > 0 ? ` · 💬 ${t._count.commenti}` : ""}</li>)}
+            </ul>
+          </details>
+        )}
+        {u && (
+          <details className="mt-3 rounded-lg border border-amber-200 bg-white p-3">
+            <summary className="cursor-pointer text-sm font-bold text-neutral-900">➕ Nuovo task</summary>
+            <form action={creaTaskCliente} className="mt-2 space-y-2 text-sm">
+              <input type="hidden" name="apri" value="1" />
+              <div className="grid gap-2 md:grid-cols-2">
+                <div className="text-xs font-bold text-neutral-700">Cliente (correlato a)<ClientePicker /></div>
+                <label className="block text-xs font-bold text-neutral-700">Cosa c&apos;è da fare<input name="oggetto" required placeholder="es. Richiesta preventivo smontaggio pergola" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
+                <label className="block text-xs font-bold text-neutral-700">Assegna a
+                  <select name="utenteId" defaultValue={u.id} className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm">{utenti.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}</select>
+                </label>
+                <label className="block text-xs font-bold text-neutral-700">Categoria
+                  <select name="categoria" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm"><option value="">—</option>{CATEGORIE_TASK.map((c) => <option key={c}>{c}</option>)}</select>
+                </label>
+                <label className="block text-xs font-bold text-neutral-700">Scadenza<input type="date" name="scadenza" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
+                <label className="block text-xs font-bold text-neutral-700">Ore previste<input name="orePreviste" placeholder="es. 1" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
+              </div>
+              <label className="block text-xs font-bold text-neutral-700">Descrizione<textarea name="descrizione" rows={3} className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
+              <fieldset className="rounded border border-neutral-200 p-2"><legend className="px-1 text-xs font-bold text-neutral-700">In copia a</legend>
+                <div className="grid gap-x-4 gap-y-1 sm:grid-cols-2 md:grid-cols-3">{utenti.filter((x) => x.id !== u.id).map((x) => <label key={x.id} className="flex items-center gap-1.5 text-xs"><input type="checkbox" name="inCopiaA" value={x.id} /> {x.nome}</label>)}</div>
+              </fieldset>
+              <button className="btn-3d btn-3d-green px-5 py-1.5 text-sm">Crea il task</button>
+            </form>
+          </details>
+        )}
         {datiDaMe.length > 0 && (
           <details className="mt-2 text-sm">
             <summary className="cursor-pointer text-xs font-semibold text-neutral-700">Dati da me ai colleghi, ancora da fare ({datiDaMe.length})</summary>
             <ul className="mt-1 space-y-1 text-xs text-neutral-700">
               {datiDaMe.map((t) => (
-                <li key={t.id}><b>{t.oggetto}</b> · <Link href={`/clienti/${t.cliente.id}?sez=task`} className="underline">{t.cliente.nome}</Link> · per {t.utente?.nome ?? "—"}{t.scadenza ? ` · entro ${t.scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}</li>
+                <li key={t.id}><Link href={`/task/${t.id}`} className="font-bold text-blue-800 underline">{t.oggetto}</Link> · <Link href={`/clienti/${t.cliente.id}?sez=task`} className="underline">{t.cliente.nome}</Link> · per {t.utente?.nome ?? "—"}{t.scadenza ? ` · entro ${t.scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}</li>
               ))}
             </ul>
           </details>

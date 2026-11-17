@@ -70,7 +70,7 @@ async function main() {
   const t = await prisma.attivita.findFirst({ where: { tipo: "TASK", clienteId: cliente.id } });
   verifica(r?.includes("Task dato a Cristina Bianchi (avvisato via email)") && t?.utenteId === cri.id && t.creatoDaNome === "Ugo Perottino" && t.scadenza?.toISOString().startsWith("2026-11-19T23:00"), "task a Cristina con scadenza (ora di Roma) e chi l'ha dato", { r, t });
   const avviso = posta.at(-1)!;
-  verifica(avviso.a.includes("cristina@gruppopec.com") && leggibile(avviso.dati).includes("Richiamare per i colori") && leggibile(avviso.dati).includes(`/clienti/${cliente.id}?sez=task`), "a Cristina arriva l'email con il link al cliente");
+  verifica(avviso.a.includes("cristina@gruppopec.com") && leggibile(avviso.dati).includes("Richiamare per i colori") && leggibile(avviso.dati).includes(`/task/${t!.id}`), "a Cristina arriva l'email con il link al cliente");
   const nPosta = posta.length;
   r = await redirectA(creaTaskCliente(modulo({ clienteId: cliente.id, oggetto: "Promemoria per me" })));
   verifica(r?.includes("Task dato a te") && posta.length === nPosta, "a sé stessi: niente email", r);

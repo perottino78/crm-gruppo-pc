@@ -27,14 +27,19 @@ export async function creaTaskCliente(fd: FormData) {
   if (!per) vai(torna, { errore: "Scegli una persona del team" });
   const scadenza = daOraRoma(str(fd, "scadenza"));
   const descrizione = str(fd, "descrizione");
-  await prisma.attivita.create({
-    data: { clienteId: cliente!.id, tipo: "TASK", oggetto: oggetto!, descrizione, scadenza, utenteId: per!.id, creatoDaId: u!.id, creatoDaNome: u!.nome },
+  const copia = (await prisma.utente.findMany({ where: { id: { in: fd.getAll("inCopiaA").filter((x): x is string => typeof x === "string") }, stato: "ATTIVO" }, select: { id: true, email: true, nome: true } }));
+  const ore = str(fd, "orePreviste") ? parseFloat(str(fd, "orePreviste")!.replace(",", ".")) : null;
+  const creato = await prisma.attivita.create({
+    data: {
+      clienteId: cliente!.id, tipo: "TASK", oggetto: oggetto!, descrizione, scadenza, utenteId: per!.id, creatoDaId: u!.id, creatoDaNome: u!.nome,
+      inCopiaA: copia.map((c) => c.id), categoria: str(fd, "categoria"), orePreviste: ore !== null && Number.isFinite(ore) && ore >= 0 ? ore : null,
+    },
   });
   // avviso via email all'incaricato (se non se lo è dato da solo)
   let avviso = "";
   if (per!.id !== u!.id && per!.email) {
     const quando = scadenza ? ` entro il ${scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long" })}` : "";
-    const link = `${APP_URL}/clienti/${cliente!.id}?sez=task`;
+    const link = `${APP_URL}/task/${creato.id}`;
     const esito = await inviaMail({
       a: [per!.email],
       oggetto: `[CRM P&C] Nuovo task da ${u!.nome}: ${oggetto}`,
@@ -43,8 +48,14 @@ export async function creaTaskCliente(fd: FormData) {
     });
     avviso = esito.inviata ? " (avvisato via email)" : "";
   }
+  // chi è in copia viene avvisato
+  for (const c of copia) {
+    if (c.id !== u!.id && c.email) await inviaMail({ a: [c.email], oggetto: `[CRM P&C] In copia su un task: ${oggetto}`, testo: `Ciao ${c.nome.split(" ")[0]},\n\n${u!.nome} ti ha messo in copia su un task per ${per!.nome} sul cliente ${cliente!.nome}:\n\n${oggetto}${descrizione ? `\n\n${descrizione}` : ""}\n\nApri il task: ${APP_URL}/task/${creato.id}`, daUtenteId: u!.id });
+  }
   revalidatePath(`/clienti/${cliente!.id}`);
   revalidatePath("/task");
+  // dalla pagina dei task si apre subito il task nuovo, dalla scheda cliente si torna alla scheda
+  if (str(fd, "apri") === "1") redirect(`/task/${creato.id}?tab=descrizione&ok=${encodeURIComponent(`Task dato a ${per!.id === u!.id ? "te" : per!.nome}${avviso}`)}`);
   vai(torna, { fatto: `Task dato a ${per!.id === u!.id ? "te" : per!.nome}${avviso}` });
 }
 
@@ -56,7 +67,7 @@ export async function completaTaskCliente(fd: FormData) {
   if (!id) return;
   const t = await prisma.attivita.findUnique({ where: { id }, select: { clienteId: true } });
   if (!t) return;
-  await prisma.attivita.update({ where: { id }, data: { completata: true, completataIl: new Date() } });
+  await prisma.attivita.update({ where: { id }, data: { completata: true, completataIl: new Date(), statoTask: "FATTO" } });
   revalidatePath(`/clienti/${t.clienteId}`);
   revalidatePath("/task");
   revalidatePath("/");

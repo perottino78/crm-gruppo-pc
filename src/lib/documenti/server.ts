@@ -1,4 +1,5 @@
 // Documenti: permessi di accesso in base all'entità a cui appartengono.
+import { puoVedereTask } from "@/lib/task/permessi";
 import { prisma } from "@/lib/prisma";
 import type { Utente } from "@prisma/client";
 import { scopeClienteWhere, scopePreventivoWhere } from "@/lib/scope";
@@ -21,6 +22,10 @@ export async function puoVedereEntita(u: Pick<Utente, "id" | "ruolo">, entita: s
       return puoGestireOrdini(u);
     case "FATTURA_ACQUISTO":
       return puoAmministrazione(u);
+    case "TASK":
+      return puoVedereTask(u, entitaId);
+    case "TASK_PRATICA":
+      return true; // i task fra uffici li vede chi è collegato
     default:
       return false;
   }
