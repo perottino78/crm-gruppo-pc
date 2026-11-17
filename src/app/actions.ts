@@ -1488,14 +1488,20 @@ export async function aggiornaContattiUtente(formData: FormData) {
 }
 
 // L'amministratore può correggere il telefono di un altro utente (es. se lo ha inserito sbagliato).
+/** Dopo un salvataggio nella scheda di un utente: torna alla stessa scheda aperta con la conferma «✅ …» sotto il modulo (campo = quale modulo). */
+function confermaUtente(utenteId: string, campo: string, messaggio: string): never {
+  redirect(`/impostazioni?${new URLSearchParams({ utente: utenteId, campo, ok: messaggio })}#utente-${utenteId}`);
+}
+
 export async function adminAggiornaTelefonoUtente(formData: FormData) {
   const admin = await getCurrentUser();
   if (!admin || !isAmministratore(admin)) redirect("/impostazioni");
   const utenteId = str(formData, "utenteId");
   if (!utenteId) return;
   const telefono = str(formData, "telefono");
-  await prisma.utente.update({ where: { id: utenteId }, data: { telefono } });
+  const u = await prisma.utente.update({ where: { id: utenteId }, data: { telefono }, select: { nome: true } });
   revalidatePath("/impostazioni");
+  confermaUtente(utenteId, "telefono", telefono ? `Telefono di ${u.nome} salvato: ${telefono}.` : `Telefono di ${u.nome} tolto.`);
 }
 
 // Reset amministrativo: l'AMMINISTRATORE imposta una nuova password per un altro utente,
@@ -1517,8 +1523,9 @@ export async function adminResetPassword(formData: FormData) {
   if (nuovoUsername) data.username = nuovoUsername;
   if (Object.keys(data).length === 0) return;
 
-  await prisma.utente.update({ where: { id: utenteId }, data });
+  const u = await prisma.utente.update({ where: { id: utenteId }, data, select: { nome: true } });
   revalidatePath("/impostazioni");
+  confermaUtente(utenteId, "accesso", `Accesso di ${u.nome} aggiornato${data.passwordHash ? ": nuova password impostata (la cambierà al primo accesso)" : ""}${data.username ? `, nuovo username ${data.username}` : ""}.`);
 }
 
 export async function creaAttivita(formData: FormData) {
@@ -1662,11 +1669,13 @@ export async function aggiornaSolarisRuolo(formData: FormData) {
   const utenteId = str(formData, "utenteId");
   const solarisRuolo = str(formData, "solarisRuolo");
   if (!utenteId) return;
-  await prisma.utente.update({
+  const u = await prisma.utente.update({
     where: { id: utenteId },
     data: { solarisRuolo: solarisRuolo || null },
+    select: { nome: true },
   });
   revalidatePath("/impostazioni");
+  confermaUtente(utenteId, "solaris", solarisRuolo ? `Solaris Studio attivato per ${u.nome} come ${solarisRuolo}.` : `Solaris Studio disattivato per ${u.nome}.`);
 }
 
 export async function importaSolarisInPreventivo(formData: FormData) {
