@@ -68,6 +68,11 @@ async function main() {
   const m1b = (await art("ART-00001"))!;
   verifica(e2?.ok && m1b.prezzoVendita === 387 && m1b.storico.length === 2, "modifica listino: vendita ricalcolata (260×0,45×3,3=386,1→387) e storico", { e2, v: m1b.prezzoVendita });
   await redirectA(A.salvaArticolo(null, fd({ codice: "FLT-10", descrizione: "Cartuccia 10 pollici", categoriaId: dep.id, fornitoreId: acqua.id, costoAcquisto: "6,80", attivo: "1" })));
+  // «Salva e inserisci un altro»: ogni salvataggio crea un articolo nuovo e il modulo successivo parte vuoto con fornitore e categoria di prima
+  const prima = await prisma.articolo.count();
+  const r1 = await redirectA(A.salvaArticolo(null, fd({ descrizione: "Tappo A", categoriaId: dep.id, fornitoreId: acqua.id, costoAcquisto: "1", attivo: "1", altro: "1" })));
+  const r2 = await redirectA(A.salvaArticolo(null, fd({ descrizione: "Tappo B", categoriaId: dep.id, fornitoreId: acqua.id, costoAcquisto: "2", attivo: "1", altro: "1" })));
+  verifica((await prisma.articolo.count()) === prima + 2 && r1?.startsWith("/prodotti/articoli/nuovo?salvato=") && r2?.includes(`c=${dep.id}`) && r2.includes(`f=${acqua.id}`), "due salvataggi di fila = due articoli, modulo nuovo con fornitore e categoria", [r1, r2]);
   const doppio = await A.salvaArticolo(null, fd({ codice: "flt-10", descrizione: "altro", attivo: "1" }));
   verifica(doppio?.ok === false && /già usato/.test(doppio.messaggio), "codice doppio rifiutato", doppio);
   const flt = (await art("FLT-10"))!;

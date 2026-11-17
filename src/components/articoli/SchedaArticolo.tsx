@@ -202,6 +202,9 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
           {modificabile && (
             <button disabled={inCorso} className="btn-3d btn-3d-purple w-full mt-3 text-sm py-2">{inCorso ? "Salvataggio…" : a.id ? "Salva modifiche" : "Crea articolo"}</button>
           )}
+          {modificabile && !a.id && (
+            <button disabled={inCorso} name="altro" value="1" className="btn-3d btn-3d-green w-full mt-2 text-sm py-2">{inCorso ? "Salvataggio…" : "💾 Salva e inserisci un altro"}</button>
+          )}
           {esito && <p className={`mt-2 text-xs ${esito.ok ? "text-green-800" : "text-red-700"}`}>{esito.messaggio}</p>}
         </section>
       </aside>

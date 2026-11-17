@@ -79,6 +79,11 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
     nuovoId = a.id;
   }
   aggiorna(nuovoId!);
+  if (!id && fd.get("altro") === "1") {
+    // «Salva e inserisci un altro»: modulo nuovo e vuoto, ma con fornitore, categoria, divisione, marca, IVA e UM dell'articolo appena salvato (richiesta di Ugo 18/11/2026: carica 5 articoli di fila)
+    const q = new URLSearchParams({ salvato: codice ?? "", ...(dati.fornitoreId ? { f: dati.fornitoreId } : {}), ...(dati.categoriaId ? { c: dati.categoriaId } : {}), ...(dati.divisione ? { d: dati.divisione } : {}), ...(dati.marca ? { m: dati.marca } : {}), i: String(dati.aliquotaIva), u: dati.um });
+    redirect(`/prodotti/articoli/nuovo?${q}`);
+  }
   if (!id) redirect(`/prodotti/articoli/${nuovoId}?creato=1`);
   return { ok: true, messaggio: c.sottoMinimo ? `Salvato. Attenzione: margine ${String(c.margine).replace(".", ",")}% sotto il minimo della categoria.` : "Salvato." };
 }

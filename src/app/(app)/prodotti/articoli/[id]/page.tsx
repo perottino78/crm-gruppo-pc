@@ -16,11 +16,11 @@ import Documenti from "@/components/documenti/Documenti";
 
 const ORIGINI: Record<string, string> = { MANUALE: "a mano", IMPORTAZIONE: "importazione", REGOLA: "ricalcolo regola", AGGIORNAMENTO: "aggiornamento in blocco" };
 
-export default async function ArticoloPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ creato?: string }> }) {
+export default async function ArticoloPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ creato?: string; salvato?: string; f?: string; c?: string; d?: string; m?: string; i?: string; u?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoVedereArticoli(u)) notFound();
   const { id } = await params;
-  const { creato } = await searchParams;
+  const { creato, salvato, f, c: cat0, d, m, i, u: um0 } = await searchParams;
   const nuovo = id === "nuovo";
   const admin = puoModificareArticoli(u);
   if (nuovo && !admin) notFound();
@@ -56,10 +56,11 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
         )}
       </div>
       {creato && <p className="text-sm bg-green-50 border border-green-200 text-green-900 rounded px-3 py-2">✅ Articolo creato.</p>}
+      {nuovo && salvato && <p className="text-sm bg-green-50 border border-green-200 text-green-900 rounded px-3 py-2">✅ Articolo <b>{salvato}</b> salvato. Ecco il modulo per il prossimo: fornitore e categoria sono già quelli di prima. <Link href="/prodotti/articoli" className="underline font-bold">Vedi l&apos;elenco</Link></p>}
 
       <SchedaArticolo
-        key={a?.updatedAt.toISOString() ?? "nuovo"}
-        articolo={nuovo ? { attivo: true, um: "pz", aliquotaIva: 22 } : dati}
+        key={a?.updatedAt.toISOString() ?? `nuovo-${salvato ?? ""}`}
+        articolo={nuovo ? { attivo: true, um: um0 ?? "pz", aliquotaIva: i ? Number(i) || 22 : 22, fornitoreId: f ?? null, categoriaId: cat0 ?? null, divisione: d ?? null, marca: m ?? null } : dati}
         categorie={albero} fornitori={fornitori} divisioni={DIVISIONI} modificabile={admin} aiAttiva={aiDisponibile()}
       />
 
