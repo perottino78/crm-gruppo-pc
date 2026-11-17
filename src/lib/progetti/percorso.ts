@@ -32,7 +32,7 @@ export type PassoPercorso = {
 };
 
 export type Percorso = {
-  fase: "NON_PAGATO" | "DA_CREARE" | "IN_CORSO" | "COMPLETO";
+  fase: "DA_CREARE" | "IN_CORSO" | "COMPLETO";
   passi: PassoPercorso[];
   /** rilievo caricato e materiale con i fornitori: si può confermare il materiale */
   puoConfermare: boolean;
@@ -80,8 +80,8 @@ export function percorsoProgetto(d: DatiPercorso): Percorso {
   ];
 
   if (!d.progettoCreatoIl && !d.legacy) {
-    const fase = d.viaLibera ? "DA_CREARE" : "NON_PAGATO";
-    return { fase, passi, puoConfermare: false, ordiniBloccati: true, etichetta: d.viaLibera ? "Da creare" : "In attesa dell'acconto" };
+    // il progetto lo crea Giorgia con la fattura di acconto (non aspetta più l'incasso: 18/11/2026); il rilievo aspetta progetto E acconto
+    return { fase: "DA_CREARE", passi, puoConfermare: false, ordiniBloccati: true, etichetta: "Da creare" };
   }
   const etichetta = arrivato ? "Materiale in magazzino"
     : ordinato ? "Ordinato: in attesa del materiale"

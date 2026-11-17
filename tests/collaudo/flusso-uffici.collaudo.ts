@@ -66,23 +66,32 @@ async function main() {
   const c = await prisma.commessa.create({ data: { numero: 7, anno: 2026, preventivoId: prev.id, clienteId: cli.id, brandId: brand.id, responsabileId: pavel.id, accontoImporto: 900 } });
   const aperti = async () => (await prisma.taskPratica.findMany({ where: { commessaId: c.id, completatoIl: null, faseChiave: { not: null } }, orderBy: { createdAt: "asc" } })).map((t) => `${t.faseChiave}:${t.ufficio}`).join(" ");
 
-  console.log("1. Conferma ordine: partono insieme la fattura (Giorgia) e l'incasso con il progetto (Debora)");
+  console.log("1. Conferma ordine: partono insieme l'apertura pratica (Giorgia) e l'incasso (Debora)");
   g.__utente = pavel;
   await avviaFaseFlusso(c.id, "FATT_ACCONTO", "COMMERCIALE", "Pavel");
   verifica((await aperti()).split(" ").sort().join(" ") === "FATT_ACCONTO:FATTURAZIONE PROGETTO:AMMINISTRAZIONE", "due task", await aperti());
 
-  console.log("2. Debora segna l'acconto pagato: mail di ringraziamento al cliente; la fattura resta a Giorgia");
+  console.log("2. Giorgia: fattura di acconto, creazione progetto e chiamata di benvenuto (un passo alla volta)");
+  g.__utente = giorgia;
+  await dove(C.creaProgetto(fd({ commessaId: c.id })));
+  verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "il progetto non si crea prima della fattura di acconto");
+  await dove(C.registraFatturaAcconto(fd({ commessaId: c.id })));
+  await dove(C.registraBenvenuto(fd({ commessaId: c.id, note: "x" })));
+  verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).benvenutoIl, "il benvenuto non si salva prima del progetto");
+  await dove(C.creaProgetto(fd({ commessaId: c.id })));
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "progetto creato da Giorgia");
+  verifica(!(await aperti()).includes("RILIEVO_APP"), "il rilievo aspetta l'incasso dell'acconto", await aperti());
+  await dove(C.registraBenvenuto(fd({ commessaId: c.id, note: "Cliente contento" })));
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).benvenutoIl && !(await aperti()).includes("FATT_ACCONTO"), "chiamata di benvenuto salvata: il task di Giorgia si chiude", await aperti());
+
+  console.log("3. Debora segna l'acconto pagato: ringraziamento al cliente e il task passa ad Alessia (centralino)");
   g.__utente = debora;
   await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900", modalita: "Bonifico" })));
   const grazie = posta.find((m) => /Grazie! Abbiamo ricevuto il suo pagamento/.test(testoMail(m)));
   verifica(grazie?.a.includes("mario@cliente.it"), "ringraziamento al cliente", posta.map((m) => m.a));
   await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900" }))).catch(() => undefined);
   verifica(posta.filter((m) => /Grazie! Abbiamo ricevuto/.test(testoMail(m))).length === 1, "una sola mail di ringraziamento");
-  verifica((await aperti()).includes("FATT_ACCONTO:FATTURAZIONE"), "il task fattura di Giorgia è ancora aperto");
-
-  console.log("3. Debora crea il progetto: il task passa ad Alessia (centralino)");
-  await dove(C.creaProgetto(fd({ commessaId: c.id })));
-  verifica((await aperti()).split(" ").sort().join(" ") === "FATT_ACCONTO:FATTURAZIONE RILIEVO_APP:CENTRALINO", "task rilievo al centralino", await aperti());
+  verifica((await aperti()).split(" ").sort().join(" ") === "RILIEVO_APP:CENTRALINO", "task rilievo al centralino (progetto e acconto fatti)", await aperti());
 
   console.log("4. Alessia fissa il rilievo e sceglie il tecnico: mail al cliente, il task va al tecnico");
   g.__utente = alessia;
@@ -98,7 +107,7 @@ async function main() {
   g.__utente = marco;
   const ril = await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } });
   await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));
-  verifica((await aperti()).split(" ").sort().join(" ") === "FATT_ACCONTO:FATTURAZIONE ORDINI:ORDINI", "task all'ufficio ordini", await aperti());
+  verifica((await aperti()).split(" ").sort().join(" ") === "ORDINI:ORDINI", "task all'ufficio ordini", await aperti());
 
   console.log("6. Laura conferma il materiale, ordina; con tutte le righe ordinate il task va al magazzino");
   g.__utente = laura;
@@ -109,7 +118,7 @@ async function main() {
   verifica((await prisma.ordineFornitore.count({ where: { commessaId: c.id } })) === 1, "ordine creato");
   await prisma.rigaOrdine.updateMany({ where: { commessaId: c.id }, data: { ordinato: true, ordinatoIl: new Date() } });
   await ordiniTuttiInviati(c.id);
-  verifica((await aperti()).split(" ").sort().join(" ") === "FATT_ACCONTO:FATTURAZIONE MAGAZZINO:MAGAZZINO", "task al magazzino", await aperti());
+  verifica((await aperti()).split(" ").sort().join(" ") === "MAGAZZINO:MAGAZZINO", "task al magazzino", await aperti());
 
   console.log("7. Il magazzino carica le bolle: pratica completa → saldo a Giorgia e posa ad Alessia");
   g.__utente = paolo;

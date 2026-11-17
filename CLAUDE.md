@@ -695,6 +695,14 @@ login nel `matcher` del middleware.
   scheda prodotto leggera `/schede/<tipologia>` (pubblica, `BottoneStampa`); portoncini PVC: `Optional.immagineUrl` (foto dei 75 pannelli, maniglioni WALA, maniglie, buca lettere, spioncino in `public/immagini/portoncini-pvc/`, `src/lib/listini/portoncini-foto.ts`,
   rotta `api/admin/immagini-portoncini` GET prova/POST) e scelta con la foto nell'offerta (`ScegliOptionalConFoto`).
 
+- **Percorso guidato della pratica a passi** (richiesta di Ugo 18/11/2026, dopo aver parlato con Debora; `src/lib/pratica/passi.ts` puro e testato, `passi-server.ts`,
+  `components/commesse/PercorsoPratica.tsx` e `PannelloApertura.tsx`): la pagina della pratica mostra SOLO il passo in corso (`?passo=<CHIAVE>` per rivedere uno già fatto o uno in parallelo);
+  i passi dopo non si aprono finché il corrente non è salvato; in ogni passo «← Torna a: <passo prima>». 12 passi: 1 fattura di acconto, 2 creazione progetto, 3 chiamata di benvenuto (tutti di Giorgia, Fatturazione),
+  4 incasso (Debora, in parallelo), 5 appuntamento di rilievo, 6 rilievo eseguito, 7 materiale e ordini, 8 arrivo in magazzino, 9 saldo (in parallelo), 10 appuntamento di posa, 11 posa, 12 kit.
+  Un passo è fatto se lo dice il suo dato o se è fatto un passo più avanti (pratiche già avviate non restano ferme). Il PROGETTO non aspetta più l'incasso: `creaProgetto` richiede `Commessa.fatturaAccontoIl`
+  (`registraFatturaAcconto`, con annulla=1 si rimette da fare) e `registraBenvenuto` (`benvenutoIl/benvenutoNote`, rivedibile) chiude il task FATT_ACCONTO; il rilievo parte (`avviaRilievoSePronto`) quando ci sono
+  progetto E acconto incassato (`dopoIncassoAcconto` chiude il task di Debora, fase PROGETTO ora «Incasso acconto»). Dopo il deploy: `api/admin/allinea-flusso` POST per aggiornare le fasi. Test `tests/pratica/passi.test.ts`.
+
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:
 1. **Dati aziendali**: nel PDF tutti i dati diversi da quelli di P&C vanno tolti o corretti con quelli veri (`CEDENTE` in

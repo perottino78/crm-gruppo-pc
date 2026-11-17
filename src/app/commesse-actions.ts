@@ -8,7 +8,7 @@ import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
-import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale, chiudiTaskFase } from "@/app/flusso-actions";
+import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale, chiudiTaskFase, avviaRilievoSePronto, dopoIncassoAcconto } from "@/app/flusso-actions";
 import { inviaMailPratica, ringraziaPagamentoAcconto, avvisaCommerciale } from "@/lib/pratica/mail-cliente-server";
 import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
 import { datiAcquisto } from "@/lib/ordini/server";
@@ -277,6 +277,7 @@ export async function registraIncassoAcconto(formData: FormData) {
   await ricalcolaStato(id);
   await avanzaDopoIncasso(id);
   await ringraziaPagamentoAcconto(id);
+  await dopoIncassoAcconto(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
 }
@@ -308,6 +309,7 @@ export async function aggiornaFinanziamento(formData: FormData) {
   });
   await log(id, `Finanziamento: ${stato.replace("_", " ").toLowerCase()}.${stato === "APPROVATO" ? " Rilievo sbloccato." : ""}`);
   await ricalcolaStato(id);
+  if (stato === "APPROVATO") await dopoIncassoAcconto(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
 }
@@ -1398,16 +1400,52 @@ export async function creaProgetto(formData: FormData) {
   if (!id) return;
   const p = await percorsoDiCommessa(id);
   if (!p) return;
-  const torna = (q: string) => redirect(`/commesse/${id}?${q}#progetto`);
+  const torna = (q: string) => redirect(`/commesse/${id}?${q}`);
   if (p.progettoCreatoIl) torna("pok=" + encodeURIComponent("Il progetto è già stato creato."));
-  if (!p.viaLibera) torna("pav=" + encodeURIComponent("Il progetto si crea dopo l'incasso dell'acconto (o il finanziamento approvato)."));
+  const c = await prisma.commessa.findUnique({ where: { id }, select: { fatturaAccontoIl: true } });
+  if (!c?.fatturaAccontoIl && !p.legacy) torna("pav=" + encodeURIComponent("Prima segna che la fattura di acconto è stata emessa."));
   await prisma.commessa.update({ where: { id }, data: { progettoCreatoIl: new Date(), progettoCreatoDaNome: utente.nome } });
-  await log(id, `Progetto creato da ${utente.nome}: ora il centralino fissa il rilievo.`);
-  // flusso: l'amministrazione crea il progetto → il task passa al centralino per fissare il rilievo
-  await chiudiTaskFase(id, "PROGETTO");
+  await log(id, `Progetto creato da ${utente.nome}.`);
+  // se l'acconto è già incassato il centralino può fissare subito il rilievo, altrimenti aspetta l'incasso di Debora
+  await avviaRilievoSePronto(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
-  torna("pok=" + encodeURIComponent("Progetto creato: il task è arrivato al centralino per fissare il rilievo."));
+  torna("pok=" + encodeURIComponent("Progetto creato. Ora la chiamata di benvenuto al cliente."));
+}
+
+/** Passo 1 dell'apertura pratica (Giorgia): la fattura di acconto è stata emessa. Con annulla=1 si rimette «da fare». */
+export async function registraFatturaAcconto(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const annulla = str(formData, "annulla") === "1";
+  await prisma.commessa.update({ where: { id }, data: annulla ? { fatturaAccontoIl: null, fatturaAccontoDaNome: null } : { fatturaAccontoIl: new Date(), fatturaAccontoDaNome: utente.nome } });
+  await log(id, annulla ? `Fattura di acconto rimessa «da fare» da ${utente.nome}.` : `Fattura di acconto emessa (segnata da ${utente.nome}).`);
+  revalidatePath(`/commesse/${id}`);
+  redirect(`/commesse/${id}?pok=${encodeURIComponent(annulla ? "Fattura di acconto rimessa da fare." : "Fattura di acconto segnata. Ora si crea il progetto.")}`);
+}
+
+/** Passo 3 dell'apertura pratica (Giorgia): chiamata di benvenuto al cliente, con la nota di com'è andata. Rivedibile: salvando di nuovo si aggiorna la nota. */
+export async function registraBenvenuto(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!utente) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const note = str(formData, "note");
+  const c = await prisma.commessa.findUnique({ where: { id }, select: { benvenutoIl: true, progettoCreatoIl: true } });
+  if (!c) return;
+  if (!c.progettoCreatoIl) redirect(`/commesse/${id}?pav=${encodeURIComponent("Prima si crea il progetto.")}`);
+  const nuova = !c.benvenutoIl;
+  await prisma.commessa.update({ where: { id }, data: { benvenutoIl: c.benvenutoIl ?? new Date(), benvenutoDaNome: utente.nome, benvenutoNote: note } });
+  await log(id, `Chiamata di benvenuto al cliente ${nuova ? "fatta" : "aggiornata"} da ${utente.nome}${note ? `: ${note}` : "."}`);
+  if (nuova) {
+    // l'apertura pratica di Giorgia è finita: chiude il suo task; il rilievo parte se l'acconto è già incassato
+    await chiudiTaskFase(id, "FATT_ACCONTO");
+    await avviaRilievoSePronto(id);
+  }
+  revalidatePath(`/commesse/${id}`);
+  redirect(`/commesse/${id}?pok=${encodeURIComponent(nuova ? "Chiamata di benvenuto salvata: apertura pratica completata." : "Chiamata di benvenuto aggiornata.")}`);
 }
 
 /** «Conferma materiale»: rilievo caricato e righe con il fornitore → si sbloccano gli ordini; chiude il task del rilievo e avvisa l'ufficio ordini. */
