@@ -26,12 +26,12 @@ async function main() {
   await sincronizzaScadenzeCommesse();
   const acconto = (await prisma.scadenza.findFirst({ where: { commessaId: c.id, origine: "COMMESSA_ACCONTO" } }))!;
   const saldo = (await prisma.scadenza.findFirst({ where: { commessaId: c.id, origine: "COMMESSA_SALDO" } }))!;
-  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "partono insieme la fattura di acconto (Giorgia) e incasso e progetto (Debora)");
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "partono insieme l'apertura pratica (Giorgia) e l'incasso (Debora)");
 
-  console.log("1. Incasso dell'acconto: la fattura resta a Giorgia, il progetto a Debora");
+  console.log("1. Incasso dell'acconto: si chiude il task di Debora, l'apertura pratica resta a Giorgia");
   const r = await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-03", importo: "500", contoId: banca.id, metodo: "BONIFICO", ritorno: "/amministrazione/scadenzario" })));
   verifica((await prisma.commessa.findUnique({ where: { id: c.id } }))?.accontoIncassato, "la commessa risulta con l'acconto incassato", r);
-  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "nessun task si chiude da solo: la fattura la chiude Giorgia, il progetto lo crea Debora");
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO", "l'incasso chiude il task di Debora; la fattura, il progetto e il benvenuto restano a Giorgia");
 
   console.log("2. Un secondo incasso non crea doppioni");
   await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-04", importo: "500", contoId: banca.id, metodo: "BONIFICO" })));

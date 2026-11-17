@@ -19,11 +19,6 @@ export default function PercorsoProgetto({ commessaId, percorso: p, creaProgetto
       {ok && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {ok}</p>}
       {avviso && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avviso}</p>}
 
-      {p.fase === "NON_PAGATO" && (
-        <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">
-          Il progetto si crea dopo l&apos;incasso dell&apos;acconto (o il finanziamento approvato). Poi partono rilievo, prodotti, ordini ai fornitori e arrivo del materiale.
-        </p>
-      )}
       {p.fase === "DA_CREARE" && (
         <form action={creaProgetto} className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-green-300 bg-green-50 px-4 py-3">
           <input type="hidden" name="commessaId" value={commessaId} />

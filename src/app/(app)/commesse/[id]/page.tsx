@@ -21,6 +21,10 @@ import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { labelCalcolo } from "@/lib/listini/kit";
 import { UFFICI, nomeUfficio } from "@/lib/flusso";
+import { passiDiCommessa } from "@/lib/pratica/passi-server";
+import { passoDaMostrare, passoPrecedente, type ChiavePasso } from "@/lib/pratica/passi";
+import { BarraPassi, TestataPasso } from "@/components/commesse/PercorsoPratica";
+import PannelloApertura from "@/components/commesse/PannelloApertura";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
   aggiornaCondizioniAcconto,
@@ -28,6 +32,8 @@ import {
   annullaIncassoAcconto,
   aggiornaFinanziamento,
   programmaRilievo,
+  registraFatturaAcconto,
+  registraBenvenuto,
   annullaRilievo,
   aggiungiNotaCommessa,
   generaFasiStandard,
@@ -62,9 +68,9 @@ import KitCliente from "@/components/commesse/KitCliente";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -150,6 +156,12 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const finanz = c.accontoTipo === "FINANZIAMENTO";
   const viaLibera = finanz ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
   const percorsoProg = await percorsoDiCommessa(c.id);
+  // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
+  const pp = await passiDiCommessa(c.id);
+  const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo) : null;
+  const mostra = (...k: ChiavePasso[]) => !pp || (sel !== null && k.includes(sel));
+  const passoSel = pp?.passi.find((x) => x.chiave === sel) ?? null;
+  const passoCorr = pp?.passi.find((x) => x.chiave === pp.corrente) ?? null;
   const defaultData = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
 
   return (
@@ -174,11 +186,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           {c.consegnaPrevista && <span className={`text-xs ${consegna.cls}`}>{consegna.testo.includes("scaduta") ? "⚠ scaduta" : ""}</span>}
         </form>
       </div>
-      <nav aria-label="Vai alla sezione" className="mb-4 flex flex-wrap gap-1.5">
-        {[["#rilievo", "📏 Rilievo"], ["#evasione", "📦 Materiale e ordini"], ["#acconto", "💶 Acconto e fatture"], ["#costi", "📊 Costi"], ["#posa", "🔧 Posa"], ["#storico", "🕘 Storico"], ["#foto", "📷 Foto"], ["#documenti", "📂 File"]].map(([h, t]) => (
-          <a key={h} href={h} className="btn-3d btn-3d-outline text-xs px-2.5 py-1">{t}</a>
-        ))}
-      </nav>
+      {pp && <BarraPassi commessaId={c.id} passi={pp.passi} mostrato={sel} corrente={pp.corrente} />}
 
       {/* CONTRATTO E CONFERMA ORDINE */}
       <div className={`mb-4 rounded-xl border-2 px-4 py-3 flex flex-wrap items-center gap-3 ${c.preventivo.confermatoIl ? "border-green-300 bg-green-50" : "border-amber-400 bg-amber-50"}`}>
@@ -217,8 +225,16 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </div>
       </div>
 
-      {/* PERCORSO DEL PROGETTO */}
-      {percorsoProg && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
+      {/* PASSO IN CORSO */}
+      {pp && passoSel && <TestataPasso commessaId={c.id} passo={passoSel} precedente={passoPrecedente(pp.passi, passoSel.chiave)} corrente={passoCorr} />}
+      {pp && (sel === "FATTURA" || sel === "PROGETTO" || sel === "BENVENUTO") && (
+        <PannelloApertura
+          passo={sel}
+          d={{ commessaId: c.id, cliente: c.cliente.nome, telefono: c.cliente.cellulare ?? c.cliente.telefono ?? null, importoAcconto: c.accontoImporto, legacy: !!percorsoProg?.legacy, fatturaAccontoIl: c.fatturaAccontoIl, fatturaAccontoDaNome: c.fatturaAccontoDaNome, progettoCreatoIl: c.progettoCreatoIl, progettoCreatoDaNome: c.progettoCreatoDaNome, benvenutoIl: c.benvenutoIl, benvenutoDaNome: c.benvenutoDaNome, benvenutoNote: c.benvenutoNote }}
+          registraFattura={registraFatturaAcconto} creaProgetto={creaProgetto} registraBenvenuto={registraBenvenuto} ok={pok} avviso={pav}
+        />
+      )}
+      {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
       {/* FLUSSO PRATICA FRA UFFICI */}
       <section className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
@@ -274,6 +290,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* ACCONTO */}
+      {mostra("INCASSO") && (
       <section id="acconto" className="card-fase scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
         <h2 className="mb-3">1 · Acconto / finanziamento</h2>
         <p className="text-sm text-neutral-800 mb-3">
@@ -366,13 +383,17 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <p className="text-[11px] text-neutral-500 border-t border-neutral-200 pt-2">Le condizioni di acconto (50% o finanziamento) possono essere modificate solo dal responsabile.</p>
         )}
       </section>
+      )}
 
       {/* RILIEVO */}
+      {mostra("RILIEVO_APP", "RILIEVO") && (
       <section id="rilievo" className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
         <h2 className="mb-3">2 · Rilievo misure</h2>
         {fatto && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {fatto}</p>}
         {avvisoRilievo && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avvisoRilievo}</p>}
-        {!viaLibera || (percorsoProg && !percorsoProg.progettoCreatoIl && !percorsoProg.legacy) ? (
+        {mostra("RILIEVO_APP") && (
+          <>
+          {!viaLibera || (percorsoProg && !percorsoProg.progettoCreatoIl && !percorsoProg.legacy) ? (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">
             {!viaLibera
               ? <>Il rilievo si sblocca dopo l&apos;incasso dell&apos;acconto{finanz ? " (finanziamento approvato)" : ""}.</>
@@ -403,6 +424,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
             <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma rilievo</button>
           </form>
+        )}
+          </>
         )}
 
         <div className="space-y-3">
@@ -457,6 +480,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </div>
 
       </section>
+      )}
 
 
       {/* FASI */}
@@ -540,6 +564,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </section>
 
       {/* EVASIONE ORDINI */}
+      {mostra("MATERIALE", "ARRIVO") && (
       <section id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties}>
         <h2 className="mb-1">4 · Evasione ordini e acquisti</h2>
         <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
@@ -668,8 +693,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           </div>
         )}
       </section>
+      )}
 
       {/* SCHEDA COSTI A SCALARE */}
+      {mostra("MATERIALE", "ARRIVO") && (
       <section id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
         <h2 className="mb-3">5 · Scheda costi a scalare</h2>
         <div className="grid grid-cols-4 gap-3 mb-4">
@@ -725,8 +752,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           </div>
         )}
       </section>
+      )}
 
       {/* SALDO */}
+      {mostra("SALDO", "POSA_APP") && (
       <section className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties}>
         <h2 className="mb-1">6 · Saldo e conferma posa</h2>
         <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
@@ -751,10 +780,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <p className="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">In attesa del saldo: lo registra l&apos;amministrazione.</p>
         )}
       </section>
+      )}
 
       {/* POSA E FINE LAVORI */}
+      {mostra("POSA_APP", "POSA") && (
       <section id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties}>
         <h2 className="mb-3">7 · Posa e fine lavori</h2>
+        {mostra("POSA_APP") && (
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
           <div className="flex flex-col gap-1">
@@ -779,6 +811,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
             <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma posa</button>
         </form>
+        )}
 
         <div className="space-y-3">
           {c.pose.map((p) => (
@@ -896,9 +929,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           {c.pose.length === 0 && <p className="text-xs text-neutral-600">Nessuna posa programmata.</p>}
         </div>
       </section>
+      )}
 
       {/* CHIUSURA */}
-      {(c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
+      {mostra("KIT") && (c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
         <section className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
           <h2 className="mb-3">8 · Chiusura commessa</h2>
           {c.stato === "CHIUSA" ? (
@@ -935,7 +969,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       )}
 
       {/* KIT AL CLIENTE (raccolta punti) */}
-      <KitCliente commessaId={c.id} stato={c.stato} commercialeId={c.preventivo.commercialeId} utente={utente} ok={kitOk} errore={kitErrore} />
+      {mostra("POSA", "KIT") && <KitCliente commessaId={c.id} stato={c.stato} commercialeId={c.preventivo.commercialeId} utente={utente} ok={kitOk} errore={kitErrore} />}
 
       {/* ASSISTENZA */}
       <section className="card-fase" style={{ "--fase": "#dc2626" } as React.CSSProperties}>

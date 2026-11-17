@@ -144,6 +144,7 @@ export async function avanzaDopoIncasso(commessaId: string, quando: Date = new D
   if (pagato > 0.5 && !c.accontoIncassato && c.accontoTipo !== "FINANZIAMENTO") {
     await prisma.commessa.update({ where: { id: commessaId }, data: { accontoIncassato: true, accontoIncassatoIl: quando, accontoImportoIncassato: Math.round(Math.min(pagato, c.accontoImporto || pagato) * 100) / 100 } });
     await ringraziaPagamentoAcconto(commessaId);
+    await dopoIncassoAcconto(commessaId);
   }
   const tutto = c.totaleVendita > 0 && pagato >= c.totaleVendita - 0.5;
   const chiuse: string[] = [];
@@ -157,6 +158,28 @@ export async function avanzaDopoIncasso(commessaId: string, quando: Date = new D
     chiuse.push(t.titolo);
   }
   return chiuse;
+}
+
+/**
+ * Il centralino fissa il rilievo quando la pratica è pronta: progetto creato (Giorgia) E acconto incassato o finanziamento approvato (Debora).
+ * Si chiama da tutti e due i lati; parte una volta sola.
+ */
+export async function avviaRilievoSePronto(commessaId: string): Promise<boolean> {
+  const c = await prisma.commessa.findUnique({
+    where: { id: commessaId },
+    select: { progettoCreatoIl: true, accontoTipo: true, accontoIncassato: true, finanziamentoStato: true, ordineBC: true, rilievi: { select: { id: true } }, tasks: { where: { faseChiave: "RILIEVO_APP" }, select: { id: true } } },
+  });
+  if (!c || !c.progettoCreatoIl || c.tasks.length > 0 || c.rilievi.length > 0) return false;
+  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  if (!viaLibera) return false;
+  await avviaFaseFlusso(commessaId, "RILIEVO_APP", "AMMINISTRAZIONE");
+  return true;
+}
+
+/** Acconto incassato (o finanziamento approvato): si chiude il task di incasso di Debora e, se il progetto c'è già, parte il rilievo. */
+export async function dopoIncassoAcconto(commessaId: string): Promise<void> {
+  await chiudiTaskFase(commessaId, "PROGETTO");
+  await avviaRilievoSePronto(commessaId);
 }
 
 export async function fattoTask(formData: FormData) {

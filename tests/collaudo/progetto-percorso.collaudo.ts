@@ -26,21 +26,23 @@ async function main() {
   g.__utente = ugo;
   const quando = new Date(Date.now() + 3 * 86400000).toISOString().slice(0, 16);
 
-  console.log("1. Prima dell'acconto: niente progetto");
+  console.log("1. Apertura pratica (Giorgia): prima la fattura di acconto, poi il progetto");
   let p = (await percorsoDiCommessa(c.id))!;
-  verifica(p.fase === "NON_PAGATO" && p.ordiniBloccati, "in attesa dell'acconto", p.etichetta);
+  verifica(p.fase === "DA_CREARE" && p.ordiniBloccati, "da creare, anche senza incasso", p.etichetta);
   const r1 = await dove(C.creaProgetto(fd({ commessaId: c.id })));
-  verifica(r1?.includes("pav=") && !(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "«Crea progetto» rifiutato", r1);
+  verifica(r1?.includes("pav=") && !(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "«Crea progetto» rifiutato senza la fattura di acconto", r1);
+  await dove(C.registraFatturaAcconto(fd({ commessaId: c.id })));
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).fatturaAccontoIl, "fattura di acconto segnata");
 
-  console.log("2. Acconto incassato: compare «Crea progetto», il rilievo resta bloccato");
-  await prisma.commessa.update({ where: { id: c.id }, data: { accontoIncassato: true, accontoIncassatoIl: new Date() } });
-  p = (await percorsoDiCommessa(c.id))!;
-  verifica(p.fase === "DA_CREARE", "da creare", p.etichetta);
-  await C.programmaRilievo(fd({ commessaId: c.id, tecnicoId: ugo.id, dataOra: quando }));
-  verifica((await prisma.rilievo.count({ where: { commessaId: c.id } })) === 0, "senza progetto il rilievo non si fissa");
+  console.log("2. Progetto creato prima dell'incasso: il rilievo aspetta l'acconto");
   const r2 = await dove(C.creaProgetto(fd({ commessaId: c.id })));
   verifica(r2?.includes("pok=") && !!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "progetto creato", r2);
   verifica(!!(await prisma.commessaEvento.findFirst({ where: { commessaId: c.id, testo: { contains: "Progetto creato" } } })), "nello storico");
+  await C.programmaRilievo(fd({ commessaId: c.id, tecnicoId: ugo.id, dataOra: quando }));
+  verifica((await prisma.rilievo.count({ where: { commessaId: c.id } })) === 0, "senza acconto incassato il rilievo non si fissa");
+  await dove(C.registraBenvenuto(fd({ commessaId: c.id, note: "Cliente contento" })));
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).benvenutoIl, "chiamata di benvenuto salvata");
+  await prisma.commessa.update({ where: { id: c.id }, data: { accontoIncassato: true, accontoIncassatoIl: new Date() } });
 
   console.log("3. Appuntamento di rilievo e caricamento rilievi");
   await C.programmaRilievo(fd({ commessaId: c.id, tecnicoId: ugo.id, dataOra: quando }));

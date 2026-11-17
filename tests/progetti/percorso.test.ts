@@ -7,8 +7,8 @@ const adesso = new Date();
 const aperto: DatiPercorso = { ...base, progettoCreatoIl: adesso };
 const pronto: DatiPercorso = { ...aperto, rilievi: [{ stato: "ESEGUITO" }], righe: 5, righeTotali: 5 };
 
-test("prima dell'acconto il progetto non si crea; dopo compare «Crea progetto»", () => {
-  assert.equal(percorsoProgetto({ ...base, viaLibera: false }).etichetta, "In attesa dell'acconto");
+test("il progetto si crea con la fattura di acconto (Giorgia), anche prima dell'incasso", () => {
+  assert.equal(percorsoProgetto({ ...base, viaLibera: false }).etichetta, "Da creare");
   const p = percorsoProgetto(base);
   assert.equal(p.fase, "DA_CREARE");
   assert.equal(p.ordiniBloccati, true, "senza progetto non si ordina");
