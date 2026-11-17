@@ -5,6 +5,7 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { chiaveFattura } from "@/lib/fatture/fatturapa";
 import { nomeNorm, sezionaleDaNumero } from "@/lib/fatture/vendite";
+import { nomiCompatibili } from "@/lib/clienti/bconsole";
 import { categoriaFattura, descrizioneBreve } from "@/lib/report/categorie";
 
 const cent = (n: number) => Math.round(n * 100) / 100;
@@ -176,12 +177,16 @@ export async function importaVenditaBC(d: DocumentoBC, e: Esito, prova = false) 
   e.nuove++;
 }
 
-async function trovaCliente(d: DocumentoBC) {
+export async function trovaCliente(d: DocumentoBC) {
   const sel = { id: true, nome: true, brand: { select: { nome: true } } } as const;
   if (d.bcAnagrafica) { const c = await prisma.cliente.findFirst({ where: { bconsoleId: d.bcAnagrafica }, select: sel }); if (c) return c; }
   const p = pivaNorm(d.partitaIva);
   if (p) { const c = await prisma.cliente.findFirst({ where: { piva: { contains: p } }, select: sel }); if (c) return c; }
-  if (d.codiceFiscale) { const c = await prisma.cliente.findFirst({ where: { codiceFiscale: { equals: d.codiceFiscale, mode: "insensitive" } }, select: sel }); if (c) return c; }
+  if (d.codiceFiscale) {
+    // il C.F. conta solo se il nome è compatibile (un C.F. finito per errore sulla scheda di un familiare non collega la fattura)
+    const c = await prisma.cliente.findFirst({ where: { codiceFiscale: { equals: d.codiceFiscale, mode: "insensitive" } }, select: sel });
+    if (c && nomiCompatibili(c.nome, d.controparte)) return c;
+  }
   const n = nomeNorm(d.controparte);
   if (!n) return null;
   const cand = await prisma.cliente.findMany({ where: { AND: n.split(" ").slice(0, 3).map((w) => ({ nome: { contains: w, mode: "insensitive" as const } })) }, select: sel, take: 20 });

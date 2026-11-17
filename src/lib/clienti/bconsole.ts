@@ -67,6 +67,14 @@ export function chiaveNomeCliente(s?: string | null): string {
   return (s ?? "").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Z0-9]+/g, " ").trim().split(" ").filter(Boolean).sort().join(" ");
 }
 
+/** Due nomi possono essere la stessa persona se hanno almeno una parola in comune (in qualsiasi ordine); se uno dei due è vuoto non si può dire. */
+export function nomiCompatibili(a?: string | null, b?: string | null): boolean {
+  const ta = chiaveNomeCliente(a).split(" ").filter((x) => x.length >= 2);
+  const tb = new Set(chiaveNomeCliente(b).split(" ").filter((x) => x.length >= 2));
+  if (!ta.length || !tb.size) return true;
+  return ta.some((x) => tb.has(x));
+}
+
 /** Provenienza uniforme per le campagne: tiene il valore di BConsole, se manca la ricava da tag e descrizione. */
 export function provenienza(a: AnagraficaBConsole): string {
   const o = pulisci(a.origine);
@@ -163,12 +171,15 @@ export function indiceClienti(esistenti: ClienteEsistente[]) {
     const k = chiaveNomeCliente(c.nome); if (k.includes(" ")) mappe.nome.set(k, c);
   };
   esistenti.forEach(aggiungi);
+  const daNomeCompatibile = (c: ClienteEsistente | undefined, nome?: string | null) => (c && nomiCompatibili(c.nome, nome) ? c : undefined);
   const trova = (d: DatiCliente) =>
     (d.bconsoleId && mappe.id.get(d.bconsoleId)) ||
     (d.piva && mappe.piva.get(d.piva)) ||
     (d.codiceFiscale && mappe.cf.get(d.codiceFiscale)) ||
-    (d.email && mappe.email.get(d.email)) ||
-    [d.telefono, d.cellulare].map(normalizzaTelefono).filter(Boolean).map((t) => mappe.tel.get(t!)).find(Boolean) ||
+    // email e telefono si condividono in famiglia (marito e moglie): contano solo se il nome è compatibile
+    // (caso Matta Roberto / Scorda Antonella: stesso cellulare, persone diverse)
+    (d.email && daNomeCompatibile(mappe.email.get(d.email), d.nome)) ||
+    [d.telefono, d.cellulare].map(normalizzaTelefono).filter(Boolean).map((t) => daNomeCompatibile(mappe.tel.get(t!), d.nome)).find(Boolean) ||
     // il nome da solo basta solo se ha almeno nome e cognome
     (chiaveNomeCliente(d.nome).includes(" ") ? mappe.nome.get(chiaveNomeCliente(d.nome)) : undefined) ||
     null;
