@@ -4,9 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { puoVedereArticoli, puoModificareArticoli, categorieRegola } from "@/lib/articoli/server";
+import { puoVedereArticoli, puoModificareArticoli, categorieRegola, posizioniListino } from "@/lib/articoli/server";
 import { alberoCategorie, euro } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
+import { posizioneEffettiva, testoPosizione } from "@/lib/articoli/posizione";
 import { categoriaVisibile } from "@/lib/articoli/visibilita";
 import { aiDisponibile } from "@/lib/articoli/ai";
 import { numeroOrdine, statoOrdine } from "@/lib/ordini/calcoli";
@@ -24,11 +25,12 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
   const nuovo = id === "nuovo";
   const admin = puoModificareArticoli(u);
   if (nuovo && !admin) notFound();
-  const [a, regole, cat, fornitori] = await Promise.all([
+  const [a, regole, cat, fornitori, posizioni] = await Promise.all([
     nuovo ? null : prisma.articolo.findUnique({ where: { id }, include: { storico: { orderBy: { createdAt: "desc" }, take: 30 } } }),
     categorieRegola(),
-    prisma.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true, ordine: true } }),
+    prisma.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true, ordine: true, famiglia: true, gruppoListino: true } }),
     prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" }, select: { id: true, ragioneSociale: true, scontoFornitore: true } }),
+    posizioniListino(),
   ]);
   if (!nuovo && !a) notFound();
   // listino non visibile a questa persona: come se non esistesse
@@ -62,6 +64,7 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
         key={a?.updatedAt.toISOString() ?? `nuovo-${salvato ?? ""}`}
         articolo={nuovo ? { attivo: true, um: um0 ?? "pz", aliquotaIva: i ? Number(i) || 22 : 22, fornitoreId: f ?? null, categoriaId: cat0 ?? null, divisione: d ?? null, marca: m ?? null } : dati}
         categorie={albero} fornitori={fornitori} divisioni={DIVISIONI} modificabile={admin} aiAttiva={aiDisponibile()}
+        posizioni={posizioni} posizioneCategoria={Object.fromEntries(cat.map((c) => { const p = posizioneEffettiva(c.id, cat); return [c.id, p ? testoPosizione(p) : ""]; }))}
       />
 
       {a && (

@@ -1,5 +1,6 @@
 "use client";
 
+import RicambiDelGruppo from "@/components/preventivi/RicambiDelGruppo";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { lattAlMetro, GUIDA_LATTONERIA } from "@/lib/listini/lattoneria";
@@ -1887,6 +1888,7 @@ export default function SelettoreProdotto({
       </button>
     );
   }
+  const ricambi = (famiglia: string, gruppo: string | null) => <RicambiDelGruppo key={`${famiglia}|${gruppo ?? ""}`} famiglia={famiglia} gruppo={gruppo} preventivoId={preventivoId} sezioneId={sezioneCorrente} />;
   function navigazioneGriglia() {
     const f = tassonomia.find((x) => x.nome === famigliaAperta) ?? null;
     const g = f?.gruppi.find((x) => x.nome === gruppoAperto) ?? null;
@@ -1913,6 +1915,7 @@ export default function SelettoreProdotto({
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
             {f.gruppi.map((x) => tessera(x.nome, x.nome, `${quanti(x)} prodotti`, primaFoto(x), () => { setGruppoAperto(x.nome); setSottogruppoAperto(null); }))}
           </div>
+          {ricambi(f.nome, null)}
         </>
       );
     }
@@ -1923,6 +1926,7 @@ export default function SelettoreProdotto({
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
             {g.sottogruppi.map((x) => tessera(x.nome, x.nome, `${x.tipologie.length} prodotti`, x.tipologie.find((t) => t.immagine)?.immagine, () => setSottogruppoAperto(`${g.nome}|${x.nome}`)))}
           </div>
+          {ricambi(f.nome, g.nome)}
         </>
       );
     }
@@ -1930,6 +1934,7 @@ export default function SelettoreProdotto({
       <>
         {briciole}
         <div className="mb-3 flex flex-col">{elencoTipologie(sg ? sg.tipologie : g.tipologie, true)}</div>
+        {ricambi(f!.nome, g.nome)}
       </>
     );
   }

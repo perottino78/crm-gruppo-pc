@@ -9,6 +9,9 @@ import { puoVedereArticoli, puoModificareArticoli } from "@/lib/articoli/server"
 import { alberoCategorie, testoRegola } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
 import ScegliVisibilita from "@/components/articoli/ScegliVisibilita";
+import ScegliPosizioneListino from "@/components/articoli/ScegliPosizioneListino";
+import { posizioniListino } from "@/lib/articoli/server";
+import { posizioneEffettiva, testoPosizione } from "@/lib/articoli/posizione";
 import { testoVisibilita } from "@/lib/articoli/visibilita";
 import { salvaCategoria, eliminaCategoria, ricalcolaTutto } from "@/app/articoli-actions";
 
@@ -20,9 +23,10 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
   if (!u || !puoVedereArticoli(u)) notFound();
   const admin = puoModificareArticoli(u);
   const p = await searchParams;
-  const [cat, conteggi] = await Promise.all([
+  const [cat, conteggi, posizioni] = await Promise.all([
     prisma.categoriaArticolo.findMany(),
     prisma.articolo.groupBy({ by: ["categoriaId"], _count: { _all: true } }),
+    posizioniListino(),
   ]);
   const quanti = (id: string) => conteggi.find((c) => c.categoriaId === id)?._count._all ?? 0;
   const albero = alberoCategorie(cat);
@@ -64,6 +68,10 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
                         <button formAction={eliminaCategoria} className="text-[11px] text-red-700 underline px-1" title="Elimina (solo se vuota)">✕</button>
                       </span>
                       <ScegliVisibilita valore={c.visibileA} />
+                      <details className="col-span-full rounded border border-neutral-200 bg-white px-2 py-1">
+                        <summary className="cursor-pointer text-xs font-semibold text-neutral-700">📍 Nel listino: <span className="text-blue-800">{testoPosizione(posizioneEffettiva(c.id, cat))}</span></summary>
+                        <div className="mt-1"><ScegliPosizioneListino posizioni={posizioni} famiglia={c.famiglia} gruppo={c.gruppoListino} /></div>
+                      </details>
                     </form>
                   ) : (
                     <div className="grid grid-cols-[2fr_1fr_1.3fr_0.7fr_0.8fr_0.8fr_0.5fr] gap-1.5 px-2 py-1.5">
@@ -91,6 +99,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
             <label>Arrotonda a €<input name="arrotondamento" className={`${inp} w-full`} placeholder="es. 1 o 5" /></label>
             <label>Margine minimo %<input name="margineMinimo" className={`${inp} w-full`} placeholder="es. 25" /></label>
             <ScegliVisibilita valore={[]} />
+            <ScegliPosizioneListino posizioni={posizioni} />
             <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Crea</button>
           </form>
         </section>

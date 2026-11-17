@@ -1478,6 +1478,9 @@ model CategoriaArticolo {
   margineMinimo  Float?
   // Chi può vedere questo listino/categoria (ruoli e uffici, vedi lib/articoli/visibilita.ts); vuoto = tutti quelli che hanno accesso agli articoli
   visibileA      String[]            @default([])
+  // Dove compare nel listino delle offerte (famiglia Indoor/Outdoor/… e gruppo, es. OUTDOOR › VETRATE): gli articoli della categoria si aggiungono dalla finestra «Aggiungi prodotto». Vuoto = solo anagrafica.
+  famiglia       String?
+  gruppoListino  String?
   ordine         Int                 @default(0)
   articoli       Articolo[]
   createdAt      DateTime            @default(now())

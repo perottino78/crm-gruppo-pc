@@ -1,5 +1,6 @@
 "use server";
 
+import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { ricalcolaTotali } from "@/lib/preventivi/totali";
 import { portaSolarisInOfferta } from "@/lib/solaris/porta-in-offerta";
@@ -753,6 +754,28 @@ export async function aggiungiRigaTestoLibero(formData: FormData) {
   await prisma.rigaPreventivo.create({
     data: { preventivoId, testoLibero, quantita: 1, prezzoUnitario, sezioneId, ordine },
   });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+/**
+ * Articolo dell'anagrafica (es. ricambio di vetrata o pergola) come riga dell'offerta: descrizione «codice — nome», quantità e prezzo di vendita dell'articolo.
+ * Richiesta di Ugo 18/11/2026: gli articoli collegati a Indoor/Outdoor e a un gruppo si aggiungono dalla finestra «Aggiungi prodotto».
+ */
+export async function aggiungiArticoloPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
+  const u = await getCurrentUser();
+  if (!u) return;
+  const preventivoId = str(formData, "preventivoId");
+  const articoloId = str(formData, "articoloId");
+  if (!preventivoId || !articoloId) return;
+  const quantita = Math.max(1, Math.round(parseFloat((str(formData, "quantita") ?? "1").replace(",", ".")) || 1));
+  const vis = visibilitaArticoliWhere(u);
+  const a = await prisma.articolo.findFirst({ where: { id: articoloId, attivo: true, ...(vis ? { AND: [vis] } : {}) }, select: { codice: true, descrizione: true, um: true, prezzoVendita: true } });
+  if (!a) return;
+  const sezioneId = str(formData, "sezioneId") || null;
+  const ordine = await prossimoOrdine(preventivoId, sezioneId);
+  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${a.codice} — ${a.descrizione}`, quantita, prezzoUnitario: a.prezzoVendita ?? 0, sezioneId, ordine } });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

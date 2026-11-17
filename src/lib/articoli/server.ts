@@ -5,6 +5,7 @@ import type { Prisma, Utente } from "@prisma/client";
 import { calcolaArticolo, type CategoriaRegola } from "./prezzi";
 import type { Esistente } from "./importa";
 import { tokenDi } from "./visibilita";
+import { tassonomiaListino } from "@/lib/listini/tassonomia";
 
 /** Consultare il catalogo (costi compresi): tutti tranne i commerciali. */
 export const puoVedereArticoli = (u: ConPermessi | null | undefined) => puo(u, "articoli");
@@ -86,4 +87,20 @@ export function filtroArticoli(p: FiltriArticoli, cat: { id: string; padreId: st
     ...(p.senzaPrezzo ? { prezzoVendita: null } : {}),
     ...(parole.length ? { AND: parole.map((w) => ({ OR: [{ codice: { contains: w, mode: "insensitive" as const } }, { codiceFornitore: { contains: w, mode: "insensitive" as const } }, { descrizione: { contains: w, mode: "insensitive" as const } }, { marca: { contains: w, mode: "insensitive" as const } }, { ean: { contains: w } }] })) } : {}),
   };
+}
+
+/** Famiglie e gruppi del listino delle offerte (gli stessi dell'albero «Aggiungi prodotto», di tutti i marchi), per collegare le categorie degli articoli. */
+export async function posizioniListino(): Promise<{ famiglia: string; gruppi: string[] }[]> {
+  const brand = await prisma.brand.findMany({ select: { id: true } });
+  const mappa = new Map<string, Set<string>>();
+  for (const b of brand) {
+    for (const f of await tassonomiaListino(b.id)) {
+      if (!mappa.has(f.nome)) mappa.set(f.nome, new Set());
+      for (const g of f.gruppi) mappa.get(f.nome)!.add(g.nome);
+    }
+  }
+  const ordine = ["INDOOR", "OUTDOOR"];
+  return [...mappa.entries()]
+    .sort(([a], [b]) => (ordine.indexOf(a) === -1 ? 9 : ordine.indexOf(a)) - (ordine.indexOf(b) === -1 ? 9 : ordine.indexOf(b)) || a.localeCompare(b))
+    .map(([famiglia, g]) => ({ famiglia, gruppi: [...g].sort((a, b) => a.localeCompare(b)) }));
 }
