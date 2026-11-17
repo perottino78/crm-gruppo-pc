@@ -84,7 +84,7 @@ export async function praticheCliente(u: Pick<Utente, "ruolo">, clienteId: strin
     const c = p.commessa;
     const { passi, esito, percentuale } = passiPratica({
       statoOfferta: p.stato,
-      commessa: c ? { stato: c.stato, tasks: c.tasks } : null,
+      commessa: c ? { stato: c.stato, tasks: c.tasks, accontoIncassato: c.accontoIncassato } : null,
       fasi,
     });
     return {

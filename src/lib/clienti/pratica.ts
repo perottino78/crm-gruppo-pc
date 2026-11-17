@@ -8,7 +8,7 @@ export type Esito = "TRATTATIVA" | "IN_CORSO" | "CONCLUSA" | "PERSA" | "ANNULLAT
 
 export type FaseFlussoMin = { chiave: string; nome: string; ufficio: string };
 export type TaskMin = { faseChiave: string | null; stato: string; ufficio?: string | null };
-export type CommessaMin = { stato: string; tasks: TaskMin[] } | null;
+export type CommessaMin = { stato: string; tasks: TaskMin[]; accontoIncassato?: boolean } | null;
 
 const COMMESSA_FINITA = ["LAVORI_ESEGUITI", "CHIUSA"];
 const OFFERTA_PERSA = ["SCADUTO", "RIFIUTATO", "PERSO"];
@@ -70,6 +70,12 @@ export function passiPratica(input: { statoOfferta: string; commessa: CommessaMi
       const i = fasi.findIndex((f) => f.chiave === chiave);
       if (i >= 0) stati[i] = "corrente";
       else if (fasi.length) stati[0] = "corrente";
+    }
+    // acconto già incassato (Debora): la fase «Incasso acconto» è fatta anche se il suo task non è ancora nato
+    // (nel flusso nuovo parte dopo la fattura di acconto di Giorgia)
+    if (commessa.accontoIncassato) {
+      const i = fasi.findIndex((f) => f.chiave === "PROGETTO");
+      if (i >= 0 && stati[i] === "futuro") stati[i] = "fatto";
     }
     // le fasi saltate prima dell'ultima raggiunta contano come fatte
     let ultima = -1;
