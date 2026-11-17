@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale, chiudiTaskFase } from "@/app/flusso-actions";
-import { inviaMailPratica, ringraziaPagamentoAcconto } from "@/lib/pratica/mail-cliente-server";
+import { inviaMailPratica, ringraziaPagamentoAcconto, avvisaCommerciale } from "@/lib/pratica/mail-cliente-server";
 import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
@@ -312,6 +312,9 @@ export async function aggiornaFinanziamento(formData: FormData) {
   revalidatePath("/commesse");
 }
 
+/** Spunta «invia al cliente» dei moduli: se il modulo non ha la spunta (vecchi moduli) si invia come sempre. */
+const inviaAlCliente = (fd: FormData) => !fd.has("conSpuntaCliente") || fd.get("inviaCliente") === "1";
+
 export async function programmaRilievo(formData: FormData) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
@@ -339,7 +342,8 @@ export async function programmaRilievo(formData: FormData) {
   if (inv.inviati.length) await log(commessaId, `Invito calendario inviato a ${inv.inviati.join(", ")}.`);
   // flusso: il centralino fissa il rilievo → mail al cliente e il task passa al rilevatore scelto
   const quando = dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
-  await inviaMailPratica(commessaId, "rilievo fissato", (d) => mailRilievoFissato({ ...d, quando, tecnico: r.tecnico.nome, indirizzo: indirizzo || null }));
+  if (inviaAlCliente(formData)) await inviaMailPratica(commessaId, "rilievo fissato", (d) => mailRilievoFissato({ ...d, quando, tecnico: r.tecnico.nome, indirizzo: indirizzo || null }));
+  await avvisaCommerciale(commessaId, "Rilievo fissato", `Il rilievo è stato fissato per ${quando} con ${r.tecnico.nome}${indirizzo ? ` (${indirizzo})` : ""}. Fissato da ${utente.nome}.`);
   await chiudiTaskFase(commessaId, "RILIEVO_APP", { id: r.tecnico.id, nome: r.tecnico.nome });
   await ricalcolaStato(commessaId);
   revalidatePath(`/commesse/${commessaId}`);
@@ -755,7 +759,8 @@ export async function programmaPosa(formData: FormData) {
   if (invP.inviati.length) await log(commessaId, `Invito calendario della posa inviato a ${invP.inviati.join(", ")}.`);
   // flusso: il centralino fissa la posa → mail al cliente (come far trovare l'ambiente di lavoro, conferma della data) e il task passa alla squadra
   const quandoPosa = dataInizio.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
-  await inviaMailPratica(commessaId, "posa fissata", (d) => mailPosaFissata({ ...d, quando: quandoPosa, giorni: giorni, squadra: ass.assegnatoNome, indirizzo: indirizzo || null }));
+  if (inviaAlCliente(formData)) await inviaMailPratica(commessaId, "posa fissata", (d) => mailPosaFissata({ ...d, quando: quandoPosa, giorni: giorni, squadra: ass.assegnatoNome, indirizzo: indirizzo || null }));
+  await avvisaCommerciale(commessaId, "Posa fissata", `La posa è stata fissata per ${quandoPosa} (${giorni} ${giorni === 1 ? "giorno" : "giorni"})${ass.assegnatoNome ? ` con ${ass.assegnatoNome}` : ""}. Fissata da ${u.nome}.`);
   await chiudiTaskFase(commessaId, "POSA_APP", ass.assegnatoUtenteId && ass.assegnatoNome ? { id: ass.assegnatoUtenteId, nome: ass.assegnatoNome } : null);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/lavori");
@@ -863,10 +868,10 @@ export async function completaPosa(formData: FormData) {
   await log(p.commessaId, `Posa ${parziale ? "PARZIALE (da completare)" : "completata"} da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
   await chiudiTaskFase(p.commessaId, "POSA");
   if (parziale) {
-    await inviaMailPratica(p.commessaId, "posa parziale: scuse", (d) => mailPosaParziale({ ...d, note: str(formData, "noteFine") }));
+    if (inviaAlCliente(formData)) await inviaMailPratica(p.commessaId, "posa parziale: scuse", (d) => mailPosaParziale({ ...d, note: str(formData, "noteFine") }));
     await prisma.taskPratica.create({ data: { commessaId: p.commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: "Posa parziale: fissare un'altra data per finire il lavoro", descrizione: `Posa non conclusa. Note: ${str(formData, "noteFine") ?? "—"}. Fissare un nuovo giorno con la squadra (sezione Posa).`, creatoDa: u.nome } });
   } else {
-    const inviata = await inviaMailPratica(p.commessaId, "lavoro terminato: richiesta di recensione", (d) => mailPosaCompletata({ ...d, linkRecensione: process.env.RECENSIONI_URL || undefined }));
+    const inviata = inviaAlCliente(formData) ? await inviaMailPratica(p.commessaId, "lavoro terminato: richiesta di recensione", (d) => mailPosaCompletata({ ...d, linkRecensione: process.env.RECENSIONI_URL || undefined })) : false;
     if (inviata) await prisma.commessa.update({ where: { id: p.commessaId }, data: { recensioneRichiestaIl: new Date() } });
     // il commerciale riceve il task (e la mail di avviso) per consegnare il kit di manutenzione
     await avviaFaseFlusso(p.commessaId, "KIT", "POSA", u.nome);

@@ -20,7 +20,7 @@ import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { labelCalcolo } from "@/lib/listini/kit";
-import { UFFICI } from "@/lib/flusso";
+import { UFFICI, nomeUfficio } from "@/lib/flusso";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import {
   aggiornaCondizioniAcconto,
@@ -224,6 +224,25 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       <section className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
         <h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2>
         <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Puoi anche inviare un task libero a un ufficio.</p>
+        {c.tasks.length > 0 && (
+          <div className="mb-3 rounded border border-sky-200 bg-sky-50/60 p-2 text-xs text-neutral-800">
+            <p className="mb-1 font-bold text-sky-900">🕒 Passaggi fra uffici (quando è arrivata e quando è stata chiusa)</p>
+            <ul className="space-y-0.5">
+              {[...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime()).filter((t) => t.faseChiave).map((t) => {
+                const fine = t.completatoIl ?? null;
+                const giorni = Math.max(0, Math.floor(((fine ?? new Date()).getTime() - t.createdAt.getTime()) / 86400000));
+                const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
+                const ritardo = !fine && t.stato !== "ANNULLATO" && giorni >= 3;
+                return (
+                  <li key={t.id} className={t.stato === "ANNULLATO" ? "text-neutral-400 line-through" : ""}>
+                    <b>{nomeUfficio(t.ufficio)}</b>: {t.titolo} — arrivata il {d(t.createdAt)}
+                    {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : t.stato !== "ANNULLATO" && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-amber-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
         <div className="flex flex-col gap-2 mb-3">
           {c.tasks.length === 0 && (
             <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
@@ -381,6 +400,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <label className="text-xs font-bold text-neutral-800">Note per il tecnico</label>
               <input name="note" className={`${inp} w-56`} />
             </div>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
             <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma rilievo</button>
           </form>
         )}
@@ -756,7 +776,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Altri nella squadra</label><input name="squadra" className={`${inp} w-44`} /></div>
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Indirizzo (se diverso)</label><input name="indirizzo" className={`${inp} w-48`} /></div>
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Note per la squadra</label><input name="note" className={`${inp} w-48`} /></div>
-          <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma posa</button>
+          <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
+            <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma posa</button>
         </form>
 
         <div className="space-y-3">
@@ -844,6 +865,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                         <span className="font-bold">Come è finita la posa?</span>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="COMPLETA" defaultChecked /> Finita: al cliente la richiesta di recensione, il commerciale porta il kit</label>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale: al cliente le scuse, si fissa un&apos;altra data</label>
+                        <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
                       </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
                       <FotoRilievo name="foto" />

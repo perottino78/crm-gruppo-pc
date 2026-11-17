@@ -51,12 +51,12 @@ export function optionalZenith(): VoceOptional[] {
     ...PELLICOLE_OPTIMA.map((c) => o("Colore esterno", `${c} — pellicola`, 20, "ZENITH", "PERCENTUALE")),
     o("Colore esterno", "Colore fuori standard (a campione)", 20, "ZENITH", "PERCENTUALE"),
     o("Colore esterno", "Pellicola fuori standard su un lato (PF3A)", 30, "ZENITH_PF3A", "PERCENTUALE"),
-    // colore interno: bianco o uguale all'esterno senza costi; pellicola solo dentro (fuori bianco) +20%;
-    // diversa da quella esterna = +100% in tutto (+80% oltre al +20% dell'esterno)
+    // colore interno: bianco o uguale all'esterno senza costi; pellicola solo dentro (esterno bianco) +20%;
+    // pellicola diversa da quella esterna: nessun altro sovrapprezzo, il +20% è già nell'esterno (Ugo 17/11/2026: +20% totale, non 20+20 né +100%)
     o("Colore interno", "Bianco massa", 0),
     o("Colore interno", "Uguale all'esterno", 0),
     ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola con esterno bianco massa`, 20, "ZENITH", "PERCENTUALE")),
-    ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola diversa da quella esterna`, 80, "ZENITH", "PERCENTUALE")),
+    ...PELLICOLE_OPTIMA.map((c) => o("Colore interno", `${c} — pellicola diversa da quella esterna`, 0, "ZENITH", "PERCENTUALE")),
     // vetri
     o("Vetri", "Vetrocamera stratificato di sicurezza 3+3 basso emissivo / 18 argon / 3+3 (di serie)", 0, "ZENITH_DOPPIO"),
     o("Vetri", "Vetrocamera triplo basso emissivo con gas argon (di serie)", 0, "ZENITH_TRIPLO"),

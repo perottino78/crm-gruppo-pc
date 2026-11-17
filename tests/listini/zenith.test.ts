@@ -25,7 +25,7 @@ test("Zenith: colore esterno e interno con i costi, vetri, accessori, forme trap
   assert.equal(est.find((x) => x.nome === "Bianco massa")?.valore, 0);
   assert.ok(est.filter((x) => x.nome.endsWith("— pellicola")).every((x) => x.tipoPrezzo === "PERCENTUALE" && x.valore === 20), "pellicole +20%");
   assert.equal(int.find((x) => x.nome === "Uguale all'esterno")?.valore, 0);
-  assert.ok(int.some((x) => x.nome.includes("diversa da quella esterna") && x.valore === 80), "diversa: +100% in tutto con il +20% esterno");
+  assert.ok(int.some((x) => x.nome.includes("diversa da quella esterna") && x.valore === 0), "diversa: nessun +80%, il +20% totale è già nell'esterno");
   assert.ok(o.some((x) => x.nome.startsWith("Vetro antisfondamento 4+4") && x.listino === "ZENITH_PF" && x.unita === "anta"));
   assert.ok(o.some((x) => x.nome.startsWith("Vetro insonorizzante") && x.listino === "ZENITH_F"));
   assert.ok(o.some((x) => x.nome === "Forma trapezoidale (fuori squadro)" && x.valore === 40 && x.tipoPrezzo === "PERCENTUALE"));

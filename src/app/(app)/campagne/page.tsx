@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { creaCampagna, puoFareCampagne, duplicaCampagna, eliminaCampagna } from "@/app/campagne-actions";
+import { creaCampagna, puoFareCampagne, duplicaCampagna, eliminaCampagna, archiviaCampagna } from "@/app/campagne-actions";
 import BottoneConferma from "@/components/BottoneConferma";
 import { giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 
@@ -16,10 +16,12 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
   if (!(await puoFareCampagne(u))) notFound();
   const p = await searchParams;
   const soloAb = p.tipo === "ab";
-  const nAb = await prisma.campagna.count({ where: { abTest: true } });
+  const archivio = p.tipo === "archivio";
+  const nAb = await prisma.campagna.count({ where: { abTest: true, archiviataIl: null } });
+  const nArch = await prisma.campagna.count({ where: { archiviataIl: { not: null } } });
   const campagne = await prisma.campagna.findMany({
-    where: soloAb ? { abTest: true } : {},
-    orderBy: { createdAt: "desc" },
+    where: archivio ? { archiviataIl: { not: null } } : soloAb ? { abTest: true, archiviataIl: null } : { archiviataIl: null },
+    orderBy: archivio ? { archiviataIl: "desc" } : { createdAt: "desc" },
     include: { invii: { select: { stato: true, apertaIl: true, clicIl: true } }, _count: { select: { varianti: true } } },
   });
   const adesso = new Date();
@@ -38,13 +40,15 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
       {p.errore === "permesso" && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">Le campagne le gestiscono l&apos;amministratore e l&apos;ufficio Marketing.</p>}
       {p.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {p.ok}</p>}
       <div className="flex flex-wrap items-center gap-2">
-        <Link href="/campagne" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${!soloAb ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-700"}`}>Tutte</Link>
+        <Link href="/campagne" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${!soloAb && !archivio ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-700"}`}>Attive</Link>
         <Link href="/campagne?tipo=ab" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${soloAb ? "border-purple-700 bg-purple-700 text-white" : "border-purple-300 bg-purple-50 text-purple-900"}`}>🧪 A/B test ({nAb})</Link>
-        <form action={creaCampagna} className="ml-auto flex gap-2">
+        <Link href="/campagne?tipo=archivio" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${archivio ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-700"}`}>🗄 Archivio ({nArch})</Link>
+        <Link href="/campagne/report" className="rounded-full border border-blue-300 bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-900">📊 Report settimanale e mensile</Link>
+        {!archivio && <form action={creaCampagna} className="ml-auto flex gap-2">
           <input type="hidden" name="ab" value="1" />
           <input name="nome" placeholder="Nome dell'A/B test" className="border border-neutral-300 rounded px-2 py-1.5 text-sm w-56" />
           <button className="btn-3d btn-3d-purple text-sm px-4 py-2">+ Nuovo A/B test</button>
-        </form>
+        </form>}
       </div>
       {soloAb && <p className="text-xs text-neutral-600">A/B test: scegli il pubblico con i filtri, poi il numero di gruppi; i contatti si dividono in parti uguali e ogni gruppo riceve la sua versione (oggetto, preheader, testo). Nei risultati vedi quale gruppo apre e clicca di più.</p>}
       <div className="space-y-2">
@@ -63,13 +67,16 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
               {c.invii.length > 0 && <p className="text-xs text-neutral-700 mt-1">✉️ {n("INVIATA")} inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · {n("FALLITA")} non inviate · {n("SOPPRESSA")} disiscritti
                 {n("RIMBALZATA") > 0 && <span className="text-red-700"> · 📭 {n("RIMBALZATA")} rimbalzate</span>}{n("INVIATA") > 0 && <> · <b>👁 {Math.round((c.invii.filter((i) => i.apertaIl).length / n("INVIATA")) * 100)}% aperte</b> · <b>👆 {Math.round((c.invii.filter((i) => i.clicIl).length / n("INVIATA")) * 100)}% clic</b></>}</p>}
               <div className="relative z-10 mt-2 flex justify-end gap-2">
+                {archivio
+                  ? <form action={archiviaCampagna}><input type="hidden" name="id" value={c.id} /><input type="hidden" name="ripristina" value="1" /><button className="btn-3d btn-3d-outline px-3 py-1 text-xs">↩ Rimetti fra le attive</button></form>
+                  : <form action={archiviaCampagna}><input type="hidden" name="id" value={c.id} /><button className="btn-3d btn-3d-outline px-3 py-1 text-xs">🗄 Archivia</button></form>}
                 <form action={duplicaCampagna}><input type="hidden" name="id" value={c.id} /><input type="hidden" name="resta" value="1" /><button className="btn-3d btn-3d-outline px-3 py-1 text-xs">⧉ Duplica</button></form>
                 <form action={eliminaCampagna}><input type="hidden" name="id" value={c.id} /><BottoneConferma messaggio={c.invii.length ? `Eliminare «${c.nome}»? Spariscono anche le statistiche e gli invii ancora in coda non partono.` : `Eliminare «${c.nome}»?`} className="btn-3d btn-3d-outline px-3 py-1 text-xs text-red-700">🗑 Elimina</BottoneConferma></form>
               </div>
             </div>
           );
         })}
-        {campagne.length === 0 && <p className="text-sm text-neutral-600">Nessuna campagna ancora: creane una qui sopra.</p>}
+        {campagne.length === 0 && <p className="text-sm text-neutral-600">{archivio ? "Nessuna campagna archiviata." : "Nessuna campagna ancora: creane una qui sopra."}</p>}
       </div>
     </div>
   );

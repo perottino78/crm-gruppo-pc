@@ -8,6 +8,7 @@ import { mailConfigurata } from "@/lib/mail/invio";
 import { nomeTipoAppuntamento, vedeTutti, STILE_TIPO } from "@/lib/calendario/eventi";
 import { perInput, chiaveGiorno, giornoBreve, oraRoma } from "@/lib/calendario/tempo";
 import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino } from "@/app/calendario-actions";
+import Documenti from "@/components/documenti/Documenti";
 import { telefonistaDefaultPerBrand } from "@/lib/leadIngest";
 import { aggiungiGiorni } from "@/lib/calendario/tempo";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
@@ -33,6 +34,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   const idTel = await telefonistaDefaultPerBrand(a.cliente.brandId);
   const telefonista = idTel ? (await prisma.utente.findUnique({ where: { id: idTel }, select: { nome: true } }))?.nome.split(" ")[0] ?? null : null;
   const richiamaDefault = `${aggiungiGiorni(chiaveGiorno(new Date()), 1)}T10:00`;
+  const rilievo = a.tipo === "SOPRALLUOGO";
   const chiuso = a.stato === "COMPLETATO" || a.stato === "ANNULLATO";
   const ritorno = `/calendario/appuntamento/${a.id}`;
   const btnStato = (stato: string, testo: string, cls: string) => (
@@ -59,6 +61,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-xl font-black text-neutral-900">{a.titolo || nomeTipoAppuntamento(a.tipo)}</h1>
+              {rilievo && <span className="text-[11px] font-black px-2 py-0.5 rounded-full bg-violet-100 text-violet-900 border border-violet-300">📏 RILIEVO · inserito da {a.creatoDaNome ?? "—"}</span>}
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${STATI[a.stato] ?? "bg-neutral-100"}`}>{a.stato.toLowerCase()}</span>
             </div>
             <p className="text-sm text-neutral-700 mt-0.5">
@@ -97,7 +100,35 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
         )}
       </div>
 
-      {/* dopo l'appuntamento: lo compila chi ci è andato */}
+      {rilievo ? (
+        <>
+          {/* rilievo: lo fissa il centralino, niente esito da scrivere né rimando al centralino; solo documenti utili e spostamento */}
+          <section className="card-fase mt-5" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
+            <h2 className="mb-1">📎 Foto e documenti utili per il rilievo</h2>
+            <p className="mb-3 text-xs text-neutral-600">Se ci sono foto, PDF o disegni che servono a chi va a fare il rilievo, caricali qui: restano {a.commessaId ? "nella pratica (cartella «Rilievi misura»)" : "nella scheda del cliente (cartella «Rilievi misura»)"}.</p>
+            <Documenti entita={a.commessaId ? "COMMESSA" : "CLIENTE"} entitaId={a.commessaId ?? a.clienteId} titolo="Documenti del rilievo" />
+          </section>
+          <section className="card-fase mt-5" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
+            <h2 className="mb-2">↪ Spostare o annullare</h2>
+            {!chiuso ? (
+              <div className="flex flex-col gap-3 md:flex-row md:items-end">
+                <form action={spostaAppuntamentoA} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+                  <label className="text-[11px] font-bold text-neutral-700">Nuovo giorno e ora
+                    <input type="datetime-local" name="dataOra" required defaultValue={perInput(a.dataOra)} className="mt-0.5 block rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+                  </label>
+                  <label className="flex items-center gap-2 text-xs text-neutral-800">
+                    <input type="checkbox" name="invitaCliente" defaultChecked={a.invitaCliente && !!a.cliente.email} disabled={!a.cliente.email} />
+                    <span>✉️ Avvisa anche il cliente</span>
+                  </label>
+                  <button className="btn-3d btn-3d-blue px-4 py-2 text-sm">↪ Sposta</button>
+                </form>
+                {btnStato("ANNULLATO", "❌ Annulla il rilievo", "btn-3d-red")}
+              </div>
+            ) : btnStato("PROGRAMMATO", "↩ Riapri", "btn-3d-outline")}
+          </section>
+        </>
+      ) : (
       <section className="card-fase mt-5" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
         <h2 className="mb-1">Dopo l&apos;appuntamento: com&apos;è andato?</h2>
         <p className="mb-3 text-xs text-neutral-600">Lo compila chi è andato dal cliente ({a.utente.nome}). Scegli una delle strade qui sotto.</p>
@@ -157,6 +188,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           btnStato("PROGRAMMATO", "↩ Riapri", "btn-3d-outline")
         )}
       </section>
+      )}
 
       {/* modifica completa (tipo, incaricato, luogo, note): solo dal pulsante «Modifica», per i casi rari */}
       {modifica && (
