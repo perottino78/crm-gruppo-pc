@@ -43,6 +43,16 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   if (!ok(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  // ?rimuovi=CHIAVE1,CHIAVE2: toglie dal flusso le fasi create a mano che doppiano quelle del flusso reale (es. «Chiusura: kit…» e un secondo «Arrivo materiale»).
+  // Solo fasi che non sono tra quelle di serie; i task già nati restano (nella barra del percorso vanno sull'ultima fase dello stesso ufficio).
+  const rimuovi = (req.nextUrl.searchParams.get("rimuovi") ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (rimuovi.length) {
+    const daTogliere = rimuovi.filter((k) => !FASI_DEFAULT.some((d) => d.chiave === k));
+    const taskCollegati = await prisma.taskPratica.count({ where: { faseChiave: { in: daTogliere } } });
+    await prisma.flussoFase.updateMany({ where: { prossimaChiave: { in: daTogliere } }, data: { prossimaChiave: null } });
+    const tolte = await prisma.flussoFase.deleteMany({ where: { chiave: { in: daTogliere } } });
+    return NextResponse.json({ ok: true, rimosse: tolte.count, taskCollegati });
+  }
   try {
     return NextResponse.json(await esegui(false));
   } catch (e) {
