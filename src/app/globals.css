@@ -141,3 +141,10 @@ button.sta-inviando, input.sta-inviando { opacity: 0.6; cursor: progress; pointe
 .velo-attesa-scheda { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 26px; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); font-size: 14px; font-weight: 600; color: #1f2937; }
 .velo-attesa-rotella { width: 34px; height: 34px; border-radius: 9999px; border: 4px solid #dbeafe; border-top-color: #2563eb; animation: velo-attesa-gira 0.8s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .velo-attesa-rotella { animation-duration: 2s; } }
+
+/* Sezioni della pratica a scomparsa: si apre solo quella in corso, le altre con un clic */
+details.card-fase > summary { cursor: pointer; list-style: none; }
+details.card-fase > summary::-webkit-details-marker { display: none; }
+details.card-fase > summary h2::before { content: "▸ "; }
+details.card-fase[open] > summary h2::before { content: "▾ "; }
+details.card-fase[open] > summary { margin-bottom: 0.75rem; }

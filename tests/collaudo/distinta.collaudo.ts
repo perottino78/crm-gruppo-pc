@@ -1,0 +1,35 @@
+// Scheda articolo come in BConsole: distinta base (kit con prezzo) e prodotti correlati.
+import { prisma } from "../../src/lib/prisma";
+import * as D from "../../src/app/distinta-actions";
+let ok = 0, ko = 0;
+const verifica = (c: unknown, m: string, x?: unknown) => { if (c) { ok++; console.log("  ✓", m); } else { ko++; console.log("  ✗", m, x ?? ""); } };
+const fd = (o: Record<string, string>) => { const f = new FormData(); for (const [k, v] of Object.entries(o)) f.set(k, v); return f; };
+const senzaRedirect = async (p: Promise<unknown>) => { try { await p; return null; } catch (e) { return String((e as { digest?: string }).digest ?? e); } };
+(async () => {
+  await prisma.$executeRawUnsafe('TRUNCATE "ComponenteArticolo","ArticoloCorrelato","StoricoPrezzoArticolo","Articolo" CASCADE');
+  const u = await prisma.utente.findFirst({ where: { ruolo: "AMMINISTRATORE" } }) ?? await prisma.utente.create({ data: { nome: "Admin", email: "a@a.it", username: "admin", passwordHash: "x", ruolo: "AMMINISTRATORE" } as never });
+  (globalThis as { __utente?: unknown }).__utente = u;
+  const mk = (codice: string, costo: number, vendita: number) => prisma.articolo.create({ data: { codice, descrizione: `Pezzo ${codice}`, costoAcquisto: costo, prezzoVendita: vendita } });
+  const kit = await prisma.articolo.create({ data: { codice: "KIT-1", descrizione: "Kit zanzariera completo" } });
+  const a = await mk("P-1", 10, 25), b = await mk("P-2", 3.5, 9.9);
+  await senzaRedirect(D.aggiungiComponente(fd({ articoloId: kit.id, componenteId: a.id, quantita: "2" })));
+  await senzaRedirect(D.aggiungiComponente(fd({ articoloId: kit.id, componenteId: b.id, quantita: "1" })));
+  await senzaRedirect(D.aggiungiComponente(fd({ articoloId: kit.id, componenteId: b.id, quantita: "2" })));
+  let comp = await prisma.componenteArticolo.findMany({ where: { articoloId: kit.id } });
+  verifica(comp.length === 2 && comp.find((c) => c.componenteId === b.id)?.quantita === 3, "pezzi nel kit; lo stesso pezzo somma la quantità", comp);
+  const r1 = await senzaRedirect(D.aggiungiComponente(fd({ articoloId: kit.id, componenteId: kit.id })));
+  verifica(await prisma.componenteArticolo.count({ where: { articoloId: kit.id, componenteId: kit.id } }) === 0 && !!r1, "un kit non può contenere se stesso", r1);
+  await senzaRedirect(D.aggiungiComponente(fd({ articoloId: a.id, componenteId: kit.id })));
+  verifica(await prisma.componenteArticolo.count({ where: { articoloId: a.id } }) === 0, "niente giri: il pezzo non può contenere il suo kit");
+  await senzaRedirect(D.ricalcolaDaDistinta(fd({ articoloId: kit.id })));
+  const k = await prisma.articolo.findUniqueOrThrow({ where: { id: kit.id } });
+  verifica(k.costoAcquisto === 30.5 && k.prezzoVendita === 79.7, "prezzi del kit dalla distinta (2×10+3×3,5 = 30,50 · 2×25+3×9,90 = 79,70)", [k.costoAcquisto, k.prezzoVendita]);
+  verifica((await prisma.storicoPrezzoArticolo.count({ where: { articoloId: kit.id, origine: "DISTINTA" } })) === 1, "variazione nello storico prezzi");
+  await senzaRedirect(D.aggiungiCorrelato(fd({ articoloId: a.id, componenteId: b.id })));
+  await senzaRedirect(D.aggiungiCorrelato(fd({ articoloId: b.id, componenteId: a.id })));
+  verifica((await prisma.articoloCorrelato.count()) === 1, "correlati: il legame è uno solo e vale nei due sensi");
+  await prisma.articolo.delete({ where: { id: kit.id } });
+  verifica((await prisma.componenteArticolo.count()) === 0, "togliendo il kit spariscono i suoi pezzi");
+  console.log(`\n${ok} controlli superati, ${ko} falliti`);
+  process.exit(ko ? 1 : 0);
+})();

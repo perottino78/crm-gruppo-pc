@@ -65,6 +65,9 @@ import { creaTaskManuale, avviaFlussoCommessa } from "@/app/flusso-actions";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
 import KitCliente from "@/components/commesse/KitCliente";
+import ApriDaAncora from "@/components/ApriDaAncora";
+import CaricaDocumenti from "@/components/documenti/CaricaDocumenti";
+import { documentiDi } from "@/lib/documenti/server";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
@@ -158,7 +161,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const percorsoProg = await percorsoDiCommessa(c.id);
   // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
   const pp = await passiDiCommessa(c.id);
+  // cartella «Rilievi misura» della pratica: si vede e si riempie anche dal riquadro del rilievo
+  const fileRilievi = (await documentiDi("COMMESSA", c.id)).filter((d) => d.cartella === "Rilievi misura");
   const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo) : null;
+  const apre = (...k: ChiavePasso[]) => sel !== null && k.includes(sel);
   const mostra = (...k: ChiavePasso[]) => !pp || (sel !== null && k.includes(sel));
   const passoSel = pp?.passi.find((x) => x.chiave === sel) ?? null;
   const passoCorr = pp?.passi.find((x) => x.chiave === pp.corrente) ?? null;
@@ -225,6 +231,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </div>
       </div>
 
+      <ApriDaAncora />
       {/* PASSO IN CORSO */}
       {pp && passoSel && <TestataPasso commessaId={c.id} passo={passoSel} precedente={passoPrecedente(pp.passi, passoSel.chiave)} corrente={passoCorr} />}
       {pp && (sel === "FATTURA" || sel === "PROGETTO" || sel === "BENVENUTO") && (
@@ -237,8 +244,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
       {/* FLUSSO PRATICA FRA UFFICI */}
-      <section className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties}>
-        <h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2>
+      <details className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={false}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2></summary>
         <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Puoi anche inviare un task libero a un ufficio.</p>
         {c.tasks.length > 0 && (
           <div className="mb-3 rounded border border-sky-200 bg-sky-50/60 p-2 text-xs text-neutral-800">
@@ -287,12 +294,12 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             <input name="descrizione" className={inp + " w-full"} /></div>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Invia task</button>
         </form>
-      </section>
+      </details>
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (
-      <section id="acconto" className="card-fase scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
-        <h2 className="mb-3">1 · Acconto / finanziamento</h2>
+      <details id="acconto" className="card-fase scroll-mt-4" style={{ "--fase": "#16a34a" } as React.CSSProperties} open={apre("FATTURA","PROGETTO","BENVENUTO","INCASSO")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">1 · Acconto / finanziamento</h2></summary>
         <p className="text-sm text-neutral-800 mb-3">
           {finanz ? (
             <>Pagamento tramite <b>finanziamento</b>{c.finanziamentoSocieta ? ` (${c.finanziamentoSocieta})` : ""} — stato: <b>{(c.finanziamentoStato ?? "IN_ISTRUTTORIA").replace("_", " ").toLowerCase()}</b></>
@@ -382,13 +389,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         ) : (
           <p className="text-[11px] text-neutral-500 border-t border-neutral-200 pt-2">Le condizioni di acconto (50% o finanziamento) possono essere modificate solo dal responsabile.</p>
         )}
-      </section>
+      </details>
       )}
 
       {/* RILIEVO */}
       {mostra("RILIEVO_APP", "RILIEVO") && (
-      <section id="rilievo" className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
-        <h2 className="mb-3">2 · Rilievo misure</h2>
+      <details id="rilievo" className="card-fase" style={{ "--fase": "#2563eb" } as React.CSSProperties} open={apre("RILIEVO_APP","RILIEVO")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">2 · Rilievo misure</h2></summary>
         {fatto && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {fatto}</p>}
         {avvisoRilievo && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avvisoRilievo}</p>}
         {mostra("RILIEVO_APP") && (
@@ -421,7 +428,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <label className="text-xs font-bold text-neutral-800">Note per il tecnico</label>
               <input name="note" className={`${inp} w-56`} />
             </div>
-            <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
             <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma rilievo</button>
           </form>
         )}
@@ -465,7 +472,22 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                   <summary className="text-sm font-bold text-blue-800 cursor-pointer">
                     {r.stato === "ESEGUITO" ? "✏️ Aggiungi misure, file o materiale" : "📋 Carica il rilievo (misure, PDF e foto, materiale)"}
                   </summary>
-                  <CaricaRilievo rilievoId={r.id} misure={r.misure ?? ""} eseguito={r.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} />
+                  <CaricaRilievo brandId={c.brandId} rilievoId={r.id} misure={r.misure ?? ""} eseguito={r.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} />
+                  <div className="mt-3 rounded border border-blue-200 bg-blue-50/40 p-2">
+                    <p className="text-xs font-bold text-neutral-800 mb-1">📂 Cartella «Rilievi misura» della pratica ({fileRilievi.length} file)</p>
+                    {fileRilievi.length ? (
+                      <ul className="mb-2 divide-y divide-neutral-100 text-sm">
+                        {fileRilievi.map((d) => (
+                          <li key={d.id} className="py-1 flex flex-wrap items-center gap-x-3">
+                            <a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline break-all">📄 {d.nome}</a>
+                            <span className="text-xs text-neutral-500">{d.createdAt.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span>
+                            <a href={`/api/documenti/${d.id}?scarica=1`} className="text-xs text-neutral-700 underline">scarica</a>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : <p className="mb-2 text-xs text-neutral-500">Nessun file ancora in questa cartella.</p>}
+                    <CaricaDocumenti entita="COMMESSA" entitaId={c.id} cartelle={["Rilievi misura"]} />
+                  </div>
                 </details>
               )}
               {r.stato === "PROGRAMMATO" && (
@@ -479,13 +501,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           {c.rilievi.length === 0 && <p className="text-xs text-neutral-600">Nessun rilievo programmato.</p>}
         </div>
 
-      </section>
+      </details>
       )}
 
 
       {/* FASI */}
-      <section className="card-fase" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
-        <h2 className="mb-3">3 · Fasi della commessa</h2>
+      <details className="card-fase" style={{ "--fase": "#7c3aed" } as React.CSSProperties} open={false}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">3 · Fasi della commessa</h2></summary>
         {c.fasi.length === 0 ? (
           <form action={generaFasiStandard}>
             <input type="hidden" name="id" value={c.id} />
@@ -561,12 +583,12 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <input name="nome" placeholder="Nuova fase (es. Sopralluogo muratore)" className={`${inp} flex-1`} />
           <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Aggiungi fase</button>
         </form>
-      </section>
+      </details>
 
       {/* EVASIONE ORDINI */}
       {mostra("MATERIALE", "ARRIVO") && (
-      <section id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties}>
-        <h2 className="mb-1">4 · Evasione ordini e acquisti</h2>
+      <details id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties} open={apre("MATERIALE","ARRIVO")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">4 · Evasione ordini e acquisti</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
         <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
           <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
@@ -692,13 +714,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </form>
           </div>
         )}
-      </section>
+      </details>
       )}
 
       {/* SCHEDA COSTI A SCALARE */}
       {mostra("MATERIALE", "ARRIVO") && (
-      <section id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
-        <h2 className="mb-3">5 · Scheda costi a scalare</h2>
+      <details id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties} open={false}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">5 · Scheda costi a scalare</h2></summary>
         <div className="grid grid-cols-4 gap-3 mb-4">
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Vendita (imponibile)</p><p className="text-sm font-bold">{eur(c.totaleImponibile)}</p></div>
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Costi registrati</p><p className="text-sm font-bold">{eur(totaleCosti)}</p></div>
@@ -751,13 +773,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             ))}
           </div>
         )}
-      </section>
+      </details>
       )}
 
       {/* SALDO */}
       {mostra("SALDO", "POSA_APP") && (
-      <section className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties}>
-        <h2 className="mb-1">6 · Saldo e conferma posa</h2>
+      <details className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties} open={apre("SALDO")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">6 · Saldo e conferma posa</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
         {c.saldoIncassato ? (
           <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
@@ -779,13 +801,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         ) : (
           <p className="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">In attesa del saldo: lo registra l&apos;amministrazione.</p>
         )}
-      </section>
+      </details>
       )}
 
       {/* POSA E FINE LAVORI */}
       {mostra("POSA_APP", "POSA") && (
-      <section id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties}>
-        <h2 className="mb-3">7 · Posa e fine lavori</h2>
+      <details id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties} open={apre("POSA_APP","POSA")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">7 · Posa e fine lavori</h2></summary>
         {mostra("POSA_APP") && (
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
@@ -808,7 +830,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Altri nella squadra</label><input name="squadra" className={`${inp} w-44`} /></div>
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Indirizzo (se diverso)</label><input name="indirizzo" className={`${inp} w-48`} /></div>
           <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Note per la squadra</label><input name="note" className={`${inp} w-48`} /></div>
-          <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
+          <label className="flex items-center gap-1.5 text-xs font-bold text-neutral-800 self-center"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
             <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Programma posa</button>
         </form>
         )}
@@ -898,7 +920,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                         <span className="font-bold">Come è finita la posa?</span>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="COMPLETA" defaultChecked /> Finita: al cliente la richiesta di recensione, il commerciale porta il kit</label>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale: al cliente le scuse, si fissa un&apos;altra data</label>
-                        <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" defaultChecked /> ✉️ Invia al cliente</label>
+                        <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
                       </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
                       <FotoRilievo name="foto" />
@@ -928,13 +950,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           ))}
           {c.pose.length === 0 && <p className="text-xs text-neutral-600">Nessuna posa programmata.</p>}
         </div>
-      </section>
+      </details>
       )}
 
       {/* CHIUSURA */}
       {mostra("KIT") && (c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
-        <section className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
-          <h2 className="mb-3">8 · Chiusura commessa</h2>
+        <details className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties} open={apre("KIT")}>
+          <summary className="cursor-pointer list-none"><h2 className="mb-3">8 · Chiusura commessa</h2></summary>
           {c.stato === "CHIUSA" ? (
             <div className="text-sm text-neutral-900 space-y-1">
               <p className="text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">✔ Commessa chiusa il {c.chiusaIl?.toLocaleDateString("it-IT")} · garanzia {c.garanziaMesi} mesi{c.fatturaFinaleNote ? ` · ${c.fatturaFinaleNote}` : ""}</p>
@@ -965,16 +987,16 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               </div>
             </div>
           )}
-        </section>
+        </details>
       )}
 
       {/* KIT AL CLIENTE (raccolta punti) */}
       {mostra("POSA", "KIT") && <KitCliente commessaId={c.id} stato={c.stato} commercialeId={c.preventivo.commercialeId} utente={utente} ok={kitOk} errore={kitErrore} />}
 
       {/* ASSISTENZA */}
-      <section className="card-fase" style={{ "--fase": "#dc2626" } as React.CSSProperties}>
+      <details className="card-fase" style={{ "--fase": "#dc2626" } as React.CSSProperties} open={false}>
         <div className="flex items-center justify-between mb-3">
-          <h2>Assistenza ({c.assistenze.length})</h2>
+          <summary className="cursor-pointer list-none"><h2>Assistenza ({c.assistenze.length})</h2></summary>
           <Link href="/assistenza" className="text-xs text-blue-800 underline">tutte le assistenze</Link>
         </div>
         {c.assistenze.map((a) => (
@@ -989,11 +1011,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <select name="priorita" className={inp}><option>NORMALE</option><option>URGENTE</option><option>BASSA</option></select>
           <button className="btn-3d btn-3d-pink text-sm px-4 py-2">Apri assistenza</button>
         </form>
-      </section>
+      </details>
 
       {/* TIMELINE */}
-      <section id="storico" className="card-fase scroll-mt-4" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
-        <h2 className="mb-3">Storico</h2>
+      <details id="storico" className="card-fase scroll-mt-4" style={{ "--fase": "#2563eb" } as React.CSSProperties} open={false}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">Storico</h2></summary>
         <form action={aggiungiNotaCommessa} className="flex gap-2 mb-3">
           <input type="hidden" name="id" value={c.id} />
           <input name="testo" placeholder="Aggiungi una nota…" className={`${inp} flex-1`} />
@@ -1007,7 +1029,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </li>
           ))}
         </ul>
-      </section>
+      </details>
       <div className="mb-4"><FotoProgetto commessaId={c.id} preventivoId={c.preventivoId} /></div>
       <div id="documenti" className="scroll-mt-4">
         <Documenti entita="COMMESSA" entitaId={c.id} titolo="Documenti della commessa" />

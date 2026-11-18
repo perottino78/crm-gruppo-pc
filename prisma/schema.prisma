@@ -1548,9 +1548,42 @@ model Articolo {
   createdAt         DateTime                @default(now())
   updatedAt         DateTime                @updatedAt
   storico           StoricoPrezzoArticolo[]
+  // Distinta base (kit) e prodotti correlati, come nella scheda prodotto di BConsole
+  componenti        ComponenteArticolo[]    @relation("DistintaKit")
+  inKit             ComponenteArticolo[]    @relation("DistintaPezzo")
+  correlati         ArticoloCorrelato[]     @relation("CorrelatiA")
+  correlatoDa       ArticoloCorrelato[]     @relation("CorrelatiDa")
 
   @@index([fornitoreId, codiceFornitore])
   @@index([categoriaId])
+}
+
+// Pezzo di un kit: l'articolo «kit» (articoloId) è fatto di più articoli (componenteId) con la loro quantità.
+model ComponenteArticolo {
+  id           String   @id @default(cuid())
+  articolo     Articolo @relation("DistintaKit", fields: [articoloId], references: [id], onDelete: Cascade)
+  articoloId   String
+  componente   Articolo @relation("DistintaPezzo", fields: [componenteId], references: [id], onDelete: Cascade)
+  componenteId String
+  quantita     Float    @default(1)
+  ordine       Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([articoloId])
+  @@index([componenteId])
+}
+
+// Articolo correlato (da proporre insieme): il legame vale nei due sensi.
+model ArticoloCorrelato {
+  id         String   @id @default(cuid())
+  articolo   Articolo @relation("CorrelatiA", fields: [articoloId], references: [id], onDelete: Cascade)
+  articoloId String
+  correlato  Articolo @relation("CorrelatiDa", fields: [correlatoId], references: [id], onDelete: Cascade)
+  correlatoId String
+  createdAt  DateTime @default(now())
+
+  @@index([articoloId])
+  @@index([correlatoId])
 }
 
 model StoricoPrezzoArticolo {

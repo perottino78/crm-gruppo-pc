@@ -11,8 +11,8 @@ const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
  * Modulo unico del rilievo, come «carica rilievo» di BConsole: misure, foto e PDF, il materiale dell'offerta
  * (quello del commerciale) e il materiale mancante da aggiungere. Un solo «Salva» registra tutto.
  */
-export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOfferta, fornitori }: {
-  rilievoId: string; misure: string; eseguito: boolean;
+export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOfferta, fornitori, brandId }: {
+  brandId?: string; rilievoId: string; misure: string; eseguito: boolean;
   materialeOfferta: { descrizione: string; quantita: number; complemento: boolean; fornitore: string | null }[];
   fornitori: { id: string; ragioneSociale: string }[];
 }) {
@@ -54,7 +54,7 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
               ))}
             </ul>
           ) : <p className="px-2 py-1 text-xs text-neutral-500">Niente da aggiungere per ora.</p>}
-          <div className="p-2"><ScegliMateriale fornitori={fornitori} onAggiungi={(m) => setLista([...lista, m])} /></div>
+          <div className="p-2"><ScegliMateriale brandId={brandId} fornitori={fornitori} onAggiungi={(m) => setLista([...lista, m])} /></div>
         </div>
       </div>
       <button className="btn-3d btn-3d-green text-sm px-5 py-2">💾 Salva il rilievo{lista.length ? ` e ${lista.length} material${lista.length === 1 ? "e" : "i"}` : ""}</button>
