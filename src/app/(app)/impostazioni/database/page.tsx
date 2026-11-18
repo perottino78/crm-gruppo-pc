@@ -59,7 +59,13 @@ export default async function ConsumoDatabasePage({ searchParams }: { searchPara
         </section>
       ) : (
         <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-          {cfg.haChiave ? "Nessuna lettura ancora: premi «Aggiorna adesso»." : "Per vedere costi e previsione serve la chiave dell'API di Neon (qui sotto). Senza chiave restano le misure interne in fondo alla pagina."}
+          {cfg.haChiave ? "Nessuna lettura ancora: premi «Aggiorna adesso»." : (
+            <>
+              Il database è gestito da Vercel: costo e traffico del mese si vedono lì, già calcolati. Qui sotto restano spazio occupato e tabelle più lette.{" "}
+              <a href="https://vercel.com/dashboard/stores" target="_blank" rel="noopener" className="font-semibold underline">📊 Vedi i consumi su Vercel (Storage › neon-bistre-pocket › Usage)</a>
+              . La chiave dell&apos;API di Neon è facoltativa: serve solo se un giorno si vuole il costo anche qui dentro, con l&apos;email di avviso.
+            </>
+          )}
           {cfg.haChiave && <form action={aggiornaConsumi} className="mt-2"><button className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">🔄 Aggiorna adesso</button></form>}
         </div>
       )}
