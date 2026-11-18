@@ -9,7 +9,7 @@ export type RigaLead = {
 
 export const CAMPI = ["nome", "telefono", "email", "marchio", "provenienza", "comune", "cap", "prodotto", "note"] as const;
 export type Campo = (typeof CAMPI)[number];
-export const MAX_RIGHE = 5000;
+export const MAX_RIGHE = 250000;
 
 const senzaAccenti = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
 const chiaveIntestazione = (s: string) => senzaAccenti(s).toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -95,15 +95,21 @@ export type Esistente = { tipo: "LEAD" | "CLIENTE"; id: string; nome: string; te
 export type Stato = "NUOVO" | "DOPPIO_FILE" | "DOPPIO_LEAD" | "DOPPIO_CLIENTE" | "ERRORE";
 export type Esito = { riga: RigaLead; stato: Stato; motivo?: string; collegatoA?: string };
 
+/** Dove vanno i contatti: TELEFONISTE = lead da chiamare (task di oggi); CAMPAGNE = solo contatti per le campagne email, le telefoniste non li vedono. */
+export type Modo = "TELEFONISTE" | "CAMPAGNE";
+
 /** Controlla ogni riga: errori, doppioni dentro il file (la prima vince) e doppioni già in ONE (lead o clienti, per telefono o email). */
-export function classifica(righe: RigaLead[], esistenti: Esistente[]): Esito[] {
+export function classifica(righe: RigaLead[], esistenti: Esistente[], modo: Modo = "TELEFONISTE"): Esito[] {
   const perTel = new Map<string, Esistente>(), perMail = new Map<string, Esistente>();
   for (const e of esistenti) { for (const t of e.telefoni) if (!perTel.has(t)) perTel.set(t, e); for (const m of e.emails) if (!perMail.has(m)) perMail.set(m, e); }
   const visti = new Map<string, number>(); // chiave → riga del file
   return righe.map((riga) => {
-    const tels = telefoniDi(riga.telefono);
+    const campagne = modo === "CAMPAGNE";
+    // per le campagne conta solo l'email: il telefono non serve e non fa da chiave
+    const tels = campagne ? [] : telefoniDi(riga.telefono);
     const mail = normalizzaEmail(riga.email);
     if (!riga.nome.trim()) return { riga, stato: "ERRORE", motivo: "Manca il nome." };
+    if (campagne && !EMAIL_OK.test(mail)) return { riga, stato: "ERRORE", motivo: mail ? "Email non valida." : "Manca l'email: le campagne mandano email." };
     if (!tels.length && !mail) return { riga, stato: "ERRORE", motivo: riga.telefono ? "Telefono non valido e nessuna email." : "Serve almeno un telefono o un'email." };
     if (mail && !EMAIL_OK.test(mail) && !tels.length) return { riga, stato: "ERRORE", motivo: "Email non valida e nessun telefono." };
     const mailBuona = mail && EMAIL_OK.test(mail) ? mail : "";

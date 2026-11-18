@@ -1,12 +1,20 @@
 // Collaudo dell'importazione dei lead da CSV: controllo senza salvare, solo i nuovi, doppioni (lead, clienti, nel file), nessuna email.
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/lead-importa.collaudo.ts
 import { prisma } from "../../src/lib/prisma";
-import { importaLead } from "../../src/lib/lead/importa-server";
-import { modelloCsv } from "../../src/lib/lead/importa";
+import { importaRighe } from "../../src/lib/lead/importa-server";
+import { modelloCsv, righeDaCsv, type Modo } from "../../src/lib/lead/importa";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
 let ok = 0, ko = 0;
 const verifica = (cond: unknown, nome: string, info?: unknown) => { if (cond) { ok++; console.log("  ✓", nome); } else { ko++; console.log("  ✗", nome, info ?? ""); } };
+
+const UT = { id: "", nome: "Ugo" };
+// stesso passaggio del browser: il file si legge e si manda a righe; qui in un colpo solo
+const importaLead = async (testo: string, nomeFile: string, esegui: boolean, nome: string, modo: Modo = "TELEFONISTE") => {
+  const l = righeDaCsv(testo);
+  if (l.errore) return { ok: false as const, errore: l.errore, riepilogo: undefined, creati: undefined, avvisi: [] as string[] };
+  return importaRighe(l.righe, modo, esegui, nomeFile, { ...UT, nome });
+};
 
 async function main() {
   await prisma.$executeRawUnsafe('TRUNCATE "InvioProgrammato","EmailLead","LeadEvento","Lead","Cliente","Utente","Brand","Configurazione" CASCADE');
@@ -42,7 +50,7 @@ async function main() {
   const anna = await prisma.lead.findFirst({ where: { nome: "Anna Bianchi" } });
   verifica(anna?.brandId === sol.id, "marchio Solaris riconosciuto");
   const strano = await prisma.lead.findFirst({ where: { nome: "Marchio Strano" } });
-  verifica(strano?.brandId === pc.id && (vera.avvisi ?? []).some((a) => a.includes("Pinco")), "marchio sconosciuto → P&C con avviso", vera.avvisi);
+  verifica(strano?.brandId === pc.id && (vera.avvisi ?? []).some((a: string) => a.includes("Pinco")), "marchio sconosciuto → P&C con avviso", vera.avvisi);
   verifica((await prisma.invioProgrammato.count()) === 0 && (await prisma.emailLead.count()) === 0, "nessuna email programmata né inviata");
 
   console.log("3. Stesso file ricaricato");
@@ -54,7 +62,42 @@ async function main() {
   const m = await importaLead(modelloCsv(["P&C", "Solaris"]), "modello.csv", false, "Ugo");
   verifica(m.ok && m.riepilogo?.totale === 2 && m.riepilogo.errori === 0, "il modello scaricato si legge (2 righe di esempio, nessun errore)", m.riepilogo);
   const sbagliato = await importaLead("Telefono;Email\n333;a@b.it", "x.csv", false, "Ugo");
-  verifica(!sbagliato.ok && !!sbagliato.errore, "file senza colonna nome: errore chiaro", sbagliato.errore);
+  verifica(!sbagliato.ok && !!(sbagliato as { errore?: string }).errore, "file senza colonna nome: errore chiaro", sbagliato.errore);
+
+  console.log("5. Solo per le campagne (le telefoniste non li vedono)");
+  const ugo = await prisma.utente.create({ data: { nome: "Ugo", email: "u@x.it", username: "ugo", ruolo: "AMMINISTRATORE" } });
+  UT.id = ugo.id;
+  const prima = await prisma.lead.count();
+  const csvC = [
+    "Nome e cognome;Email;Telefono;Marchio;Provenienza;Comune",
+    "Gianni Campagna;gianni@x.it;333 8888881;Solaris;Fiera Torino 2026;Rosta",
+    "Elena Mailing;elena@x.it;;P&C;Passaparola;",
+    "Senza Mail;;333 8888882;P&C;;",
+    "Gia Cliente;LUCA@x.it;;P&C;;",
+    "Telefono Uguale;nuova@x.it;347 0000001;P&C;;",
+    "Gianni Doppio;gianni@x.it;;P&C;;",
+  ].join("\r\n");
+  const provaC = await importaLead(csvC, "campagna.csv", false, "Ugo", "CAMPAGNE");
+  verifica(provaC.riepilogo?.nuovi === 3 && provaC.riepilogo.errori === 1 && provaC.riepilogo.doppiLead === 1 && provaC.riepilogo.doppiFile === 1, "per le campagne conta l'email: 3 nuovi (anche con lo stesso telefono di un lead), 1 senza email, 1 già lead, 1 doppio nel file", provaC.riepilogo);
+  const veraC = await importaLead(csvC, "campagna.csv", true, "Ugo", "CAMPAGNE");
+  const gianni = await prisma.cliente.findFirst({ where: { email: "gianni@x.it" } });
+  verifica(veraC.creati === 3 && gianni?.categoria === "Lead" && gianni.origine === "FIERA" && gianni.brandId === sol.id && gianni.comune === "Rosta" && gianni.tag?.startsWith("import "), "creati come anagrafica «Lead» con provenienza, marchio e comune", gianni);
+  verifica((await prisma.lead.count()) === prima, "nessun lead per le telefoniste (task di oggi invariati)");
+  const ancoraC = await importaLead(csvC, "campagna.csv", true, "Ugo", "CAMPAGNE");
+  verifica(ancoraC.creati === 0, "rilanciare lo stesso file non crea doppioni");
+
+  console.log("6. File grande a pezzi");
+  const grande = ["Nome;Email;Provenienza"];
+  for (let i = 0; i < 7000; i++) grande.push(`Contatto ${i};grande${i % 6500}@esempio.it;Fiera`); // 500 email ripetute
+  const l = righeDaCsv(grande.join("\n"));
+  let nuoviTot = 0, creatiTot = 0;
+  const t0 = Date.now();
+  for (let i = 0; i < l.righe.length; i += 3000) {
+    const r = await importaRighe(l.righe.slice(i, i + 3000), "CAMPAGNE", true, "grande.csv", { ...UT });
+    nuoviTot += r.riepilogo?.nuovi ?? 0; creatiTot += r.creati ?? 0;
+  }
+  verifica(creatiTot === 6500 && nuoviTot === 6500, "7.000 righe a pezzi da 3.000: 6.500 creati e le 500 email ripetute riconosciute", [creatiTot, nuoviTot]);
+  console.log(`   (${Math.round((Date.now() - t0) / 100) / 10} s)`);
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
