@@ -19,3 +19,7 @@ export function testoValidita(scadenza: Date | null | undefined): string | null 
   if (!scadenza) return null;
   return `Offerta valida fino al ${scadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric" })}`;
 }
+
+/** Con il pagamento a finanziamento la consegna parte dall'approvazione della finanziaria (richiesta di Ugo 18/11/2026). */
+export const CONDIZIONI_CONSEGNA_FINANZIAMENTO =
+  "Consegna 60 gg indicativi da rilievo tecnico esecutivo e da finanziamento approvato.";

@@ -6,14 +6,14 @@ export const CHIAVE_TABELLE = "finanziamento_tabelle";
 /** Tabelle in uso: quelle salvate in Impostazioni, altrimenti quelle del simulatore. */
 export async function leggiTabelleFinanziamento(): Promise<TabellaFinanziamento[]> {
   const c = await prisma.configurazione.findUnique({ where: { chiave: CHIAVE_TABELLE }, select: { valore: true } });
-  if (!c?.valore) return TABELLE_PREDEFINITE;
+  if (!c?.valore) return TABELLE_PREDEFINITE.map((t) => ({ ...t }));
   try {
     const arr = JSON.parse(c.valore);
-    if (!Array.isArray(arr)) return TABELLE_PREDEFINITE;
+    if (!Array.isArray(arr)) return TABELLE_PREDEFINITE.map((t) => ({ ...t }));
     const ok = arr.map((x) => normalizzaTabella(x)).filter((x): x is TabellaFinanziamento => typeof x !== "string");
     return ok;
   } catch {
-    return TABELLE_PREDEFINITE;
+    return TABELLE_PREDEFINITE.map((t) => ({ ...t }));
   }
 }
 
