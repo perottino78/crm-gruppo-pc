@@ -127,6 +127,8 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
   const alberoMap = new Map<string, Map<string, VoceAlbero[]>>();
   for (const t of tipologieMisure) {
     const tip = t.tipologia;
+    // Tapparelle in PVC: tolte (Debora 18/11/2026), restano solo quelle in alluminio
+    if (tip === "TAPPARELLE_PVC_PLACEHOLDER") continue;
     const m = modelloBrandMap.get(tip);
     const famiglia = m?.famiglia ?? "Altro";
     let gruppo = m?.gruppo ?? "Altro";
