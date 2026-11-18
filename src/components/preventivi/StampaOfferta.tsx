@@ -1,5 +1,6 @@
 import { percentuale } from "@/lib/numeri";
 import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -11,7 +12,7 @@ import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } fr
 import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
 import { codiceFileRiga } from "@/lib/mail/link-offerta";
 import { schedaCliente, schedeDaAllegare } from "@/lib/preventivi/scheda-cliente";
-import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, CONDIZIONI_CONSEGNA_FINANZIAMENTO, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
   ARTICOLI_CONTRATTO,
@@ -139,6 +140,8 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
   const totaleNetto = preventivo.totaleNetto;
   const totaleIva = preventivo.totaleIva;
   const totaleFinale = totaleNetto + totaleIva;
+  const tabelleFin = preventivo.finanziamento ? await leggiTabelleFinanziamento() : [];
+  const finanz = preventivo.finanziamento ? calcolaFinanziamento(preventivo.finanziamento as SceltaFinanziamento, totaleFinale, tabelleFin) : null;
   // Prezzo manuale: quando attivo, la stampa non deve rivelare al cliente ne' l'imponibile
   // lordo di calcolo ne' la percentuale di sconto applicata — mostra solo un imponibile+IVA
   // "puliti" ricavati a ritroso dal totale finale scritto a mano, indistinguibili da un
@@ -438,17 +441,6 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           <div className="text-sm">
             <p className="font-semibold" style={{ color: info.primary }}>{NOTA_FATTIBILITA}</p>
             {testoValidita(preventivo.scadenza) && <p className="text-neutral-700 mt-0.5">{testoValidita(preventivo.scadenza)}</p>}
-            {(() => {
-              const fin = preventivo.finanziamento ? calcolaFinanziamento(preventivo.finanziamento as SceltaFinanziamento, totaleFinale) : null;
-              if (!fin || !fin.ok) return null;
-              return (
-                <p className="text-neutral-700 mt-2">
-                  <span className="font-semibold">Pagamento con finanziamento:</span>{" "}
-                  {fin.anticipoDiretto > 0.005 ? <>{eur(fin.anticipoDiretto)} subito, </> : null}
-                  {eur(fin.importoFinanziato)} in {fin.rate} rate da {eur(fin.rata)} (TAN {fin.tabella.tan.toLocaleString("it-IT")}% · TAEG {fin.taeg.toLocaleString("it-IT")}%, prima rata a {fin.tabella.giorniPrimaRata} giorni). Salvo approvazione della finanziaria.
-                </p>
-              );
-            })()}
           </div>
           <div className="w-72 max-w-full rounded-xl border overflow-hidden print:overflow-visible no-spezza print:ml-auto print:mt-2" style={{ borderColor: `${info.primary}33` }}>
             <div className="p-3 text-sm" style={{ background: info.primarySoft }}>
@@ -486,11 +478,19 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
         <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
           <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.primary }}>
             <p className="mb-1 font-semibold" style={{ color: info.primary }}>Condizioni di pagamento</p>
-            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
+            {finanz && finanz.ok ? (
+              <p className="text-neutral-700">
+                <span className="font-semibold">Pagamento con finanziamento.</span>{" "}
+                {finanz.anticipoDiretto > 0.005 ? <>{eur(finanz.anticipoDiretto)} alla firma; </> : null}
+                {eur(finanz.importoFinanziato)} in {finanz.rate} rate mensili da {eur(finanz.rata)} (TAN {finanz.tabella.tan.toLocaleString("it-IT")}% · TAEG {finanz.taeg.toLocaleString("it-IT")}%), prima rata a {finanz.tabella.giorniPrimaRata} giorni. Salvo approvazione della finanziaria.
+              </p>
+            ) : (
+              <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
+            )}
           </div>
           <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.accent }}>
             <p className="mb-1 font-semibold" style={{ color: info.accent }}>Condizioni di consegna</p>
-            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}</p>
+            <p className="text-neutral-700 whitespace-pre-line">{finanz && finanz.ok ? CONDIZIONI_CONSEGNA_FINANZIAMENTO : (preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT)}</p>
           </div>
         </div>
 

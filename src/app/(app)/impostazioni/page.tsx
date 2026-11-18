@@ -104,6 +104,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
       )}
 
 
+      {(admin || puo(utenteCorrente, "amministrazione")) && (
+        <Link href="/impostazioni/finanziamenti" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-4 hover:border-neutral-400">
+          <span className="text-base font-bold text-neutral-900">🏦 Tabelle di finanziamento →</span>
+          <span className="block text-xs text-neutral-600">Le tabelle del simulatore (TAN, rate, importi) che il commerciale sceglie nell&apos;offerta.</span>
+        </Link>
+      )}
+
       {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
         <Link href="/impostazioni/firme" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
           <span className="text-base font-bold text-neutral-900">✍️ Firme email del team →</span>
