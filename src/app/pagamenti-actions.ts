@@ -48,12 +48,23 @@ export async function registraPagamento(fd: FormData) {
   const conto = importo > 0 ? await prisma.contoFinanziario.findFirst({ where: { id: str(fd, "contoId") ?? "", attivo: true } }) : null;
   if (importo > 0 && !conto) torna(ritorno, { errore: "Scegli la banca (o la cassa) su cui è passato il pagamento." });
 
+  // «non generare un movimento in prima nota» (Debora): il pagamento si segna sulla scadenza ma non entra in prima nota
+  const senzaPrimaNota = fd.get("senzaPrimaNota") === "1";
   const descr = `${incasso ? "Incasso" : "Pagamento"} ${s!.controparte} · ${s!.descrizione}${s!.numeroDocumento ? ` · doc. ${s!.numeroDocumento}` : ""}`.slice(0, 480);
   // sui conti in banca il pagamento resta "da confermare" finché l'estratto conto non lo ritrova
   const daConfermare = !!conto && conto.tipo !== "CASSA";
   await prisma.$transaction(async (tx) => {
     let movId: string | null = null;
-    if (importo > 0 && conto) {
+    if (senzaPrimaNota && importo > 0) {
+      await tx.scadenza.update({
+        where: { id: s!.id },
+        data: {
+          pagatoManuale: cent(s!.pagatoManuale + importo), pagataIl: data, metodoPagamento: metodo, bancaPagamento: conto?.nome ?? s!.bancaPagamento,
+          note: [s!.note, `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)} del ${giorno(data)} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} — senza movimento in prima nota${str(fd, "note") ? ` · ${str(fd, "note")}` : ""}`].filter(Boolean).join("\n"),
+        },
+      });
+    }
+    if (!senzaPrimaNota && importo > 0 && conto) {
       const m = await tx.movimentoFinanziario.create({
         data: {
           contoId: conto.id, data, importo: incasso ? importo : -importo, descrizione: descr, origine: "MANUALE", impronta: `PAG-${randomUUID()}`,
@@ -83,7 +94,7 @@ export async function registraPagamento(fd: FormData) {
   // incasso di una pratica: la trafila dei task va avanti da sola (acconto → ufficio successivo, saldo → posa)
   const pratica = incasso ? await praticaDiIncasso(s!.id) : null;
   const avanzate = pratica ? await avanzaDopoIncasso(pratica, data) : [];
-  const testo = `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)}${ritenuta ? ` + ritenuta ${eur(ritenuta)}` : ""} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} · ${giorno(data)}${commissione ? ` · commissione ${eur(commissione)}` : ""}`;
+  const testo = `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)}${ritenuta ? ` + ritenuta ${eur(ritenuta)}` : ""} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} · ${giorno(data)}${commissione ? ` · commissione ${eur(commissione)}` : ""}${senzaPrimaNota ? " · senza movimento in prima nota" : ""}`;
   await registra("Scadenza", s!.id, incasso ? "Incasso registrato" : "Pagamento registrato", `${s!.controparte} · ${s!.descrizione} — ${testo}`, u!.nome);
   aggiorna();
   revalidatePath("/commesse/[id]", "page");

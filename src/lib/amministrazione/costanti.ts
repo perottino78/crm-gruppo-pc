@@ -25,6 +25,28 @@ export const STATI_SCADENZA: Record<string, { label: string; cls: string }> = {
   ANNULLATA: { label: "Annullata", cls: "bg-neutral-200 text-neutral-600 border-neutral-300" },
 };
 
+/**
+ * Stati della tendina «Stato» di una scadenza in BConsole (elenco di Debora, 18/11/2026).
+ * `effetto`: cosa fa ai conti — NESSUNO = solo etichetta, CHIUDE = come saldata (si segna pagata a mano),
+ * RITENUTA = chiusa con la ritenuta fiscale, STORNA = annullata, APRE = toglie l'etichetta.
+ */
+export const STATI_BCONSOLE: { nome: string; effetto: "NESSUNO" | "CHIUDE" | "RITENUTA" | "STORNA" | "APRE" }[] = [
+  { nome: "Anticipata", effetto: "NESSUNO" },
+  { nome: "Aperta", effetto: "APRE" },
+  { nome: "Cassa Iva Estero", effetto: "NESSUNO" },
+  { nome: "Cassa QB", effetto: "NESSUNO" },
+  { nome: "Chiusa", effetto: "CHIUDE" },
+  { nome: "Compensata", effetto: "CHIUDE" },
+  { nome: "Compensata con crediti", effetto: "CHIUDE" },
+  { nome: "Fatturata", effetto: "NESSUNO" },
+  { nome: "Insoluta", effetto: "NESSUNO" },
+  { nome: "Previsionale", effetto: "NESSUNO" },
+  { nome: "Rit. Fis Compensazione", effetto: "RITENUTA" },
+  { nome: "Saldata", effetto: "CHIUDE" },
+  { nome: "Saldata parzialmente", effetto: "NESSUNO" },
+  { nome: "Stornata", effetto: "STORNA" },
+];
+
 export const STATI_MOVIMENTO: Record<string, { label: string; cls: string; spiega: string }> = {
   DA_ABBINARE: { label: "Da abbinare", cls: "bg-amber-100 text-amber-900 border-amber-300", spiega: "soldi entrati o usciti di cui non sappiamo ancora a cosa si riferiscono: va collegato a una fattura/scadenza (pulsante «Abbina») o registrato come spesa senza fattura" },
   ABBINATO: { label: "Abbinato", cls: "bg-green-100 text-green-800 border-green-300", spiega: "collegato a una o più fatture/scadenze: quelle risultano pagate o incassate per questo importo" },

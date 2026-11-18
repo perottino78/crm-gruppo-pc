@@ -3,6 +3,8 @@
 // Fatturazione (ufficio Giorgia): fatture emesse dal CRM e DDT di uscita, come in BConsole.
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Prisma } from "@prisma/client";
+import { leggiCointestatario } from "@/lib/fatturazione/cointestato";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { setConfig } from "@/lib/leadIngest";
@@ -101,6 +103,7 @@ export async function salvaTestataFattura(fd: FormData) {
   const f = await bozza(str(fd, "id"));
   const tipo = TIPI_FATTURA.some((t) => t.codice === str(fd, "tipo")) ? str(fd, "tipo")! : f.tipo;
   const data = giorno(str(fd, "data")) ?? f.data;
+  const cointest = leggiCointestatario((k) => str(fd, k), fd.get("cointestata") === "on") as Prisma.InputJsonValue | null;
   await prisma.$transaction(async (tx) => {
     await tx.fatturaEmessa.update({
       where: { id: f.id },
@@ -109,6 +112,7 @@ export async function salvaTestataFattura(fd: FormData) {
         metodoPagamento: str(fd, "metodoPagamento"), banca: str(fd, "banca"), iban: str(fd, "iban")?.replace(/\s/g, "").toUpperCase() ?? null,
         causale: str(fd, "causale"), riferimento: str(fd, "riferimento"), note: str(fd, "note"), noteInterne: str(fd, "noteInterne"),
         addebitoBollo: fd.get("addebitoBollo") === "on", detrazione: fd.get("detrazione") === "on",
+        cointestatario: cointest ?? Prisma.DbNull,
         clienteNome: str(fd, "clienteNome") ?? f.clienteNome, partitaIva: campo(fd, "partitaIva", f.partitaIva, str), codiceFiscale: campo(fd, "codiceFiscale", f.codiceFiscale, (x, k) => str(x, k)?.toUpperCase() ?? null),
         indirizzo: campo(fd, "indirizzo", f.indirizzo, str), cap: campo(fd, "cap", f.cap, str), comune: campo(fd, "comune", f.comune, str), provincia: campo(fd, "provincia", f.provincia, (x, k) => str(x, k)?.toUpperCase() ?? null),
         nazione: (campo(fd, "nazione", f.nazione, str) ?? "IT").toUpperCase().slice(0, 2), codiceDestinatario: campo(fd, "codiceDestinatario", f.codiceDestinatario, (x, k) => str(x, k)?.toUpperCase() ?? null), pec: campo(fd, "pec", f.pec, str),
@@ -197,11 +201,12 @@ export async function creaNotaCredito(fd: FormData) {
   const u = await utente();
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: { orderBy: { posizione: "asc" } } } });
   if (!f || (f.stato !== "EMESSA" && f.stato !== "PROVA")) redirect("/fatturazione/fatture");
-  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, tipo: _t, ...resto } = f;
+  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, tipo: _t, cointestatario: _ct, ...resto } = f;
   void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r; void _t;
+  const cointest = _ct === null ? undefined : (_ct as Prisma.InputJsonValue);
   const nc = await prisma.fatturaEmessa.create({
     data: {
-      ...resto, tipo: "NOTA_CREDITO", data: oggi(), anno: oggi().getUTCFullYear(), fatturaCollegataId: f.id, causale: `Storno fattura n. ${f.numero}`, creatoDaNome: u.nome,
+      ...resto, cointestatario: cointest, tipo: "NOTA_CREDITO", data: oggi(), anno: oggi().getUTCFullYear(), fatturaCollegataId: f.id, causale: `Storno fattura n. ${f.numero}`, creatoDaNome: u.nome,
       righe: { create: righe.map((r) => ({ posizione: r.posizione, codice: r.codice, descrizione: r.descrizione, quantita: r.quantita, um: r.um, prezzo: r.prezzo, sconto: r.sconto, aliquota: r.aliquota, natura: r.natura })) },
     },
   });
@@ -214,10 +219,11 @@ export async function duplicaFattura(fd: FormData) {
   const u = await utente();
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: { orderBy: { posizione: "asc" } } } });
   if (!f) redirect("/fatturazione/fatture");
-  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, ...resto } = f;
+  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, cointestatario: _ct2, ...resto } = f;
   void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r;
+  const cointest2 = _ct2 === null ? undefined : (_ct2 as Prisma.InputJsonValue);
   const nuova = await prisma.fatturaEmessa.create({
-    data: { ...resto, data: oggi(), anno: oggi().getUTCFullYear(), creatoDaNome: u.nome, righe: { create: righe.map((r) => ({ posizione: r.posizione, codice: r.codice, descrizione: r.descrizione, quantita: r.quantita, um: r.um, prezzo: r.prezzo, sconto: r.sconto, aliquota: r.aliquota, natura: r.natura })) } },
+    data: { ...resto, cointestatario: cointest2, data: oggi(), anno: oggi().getUTCFullYear(), creatoDaNome: u.nome, righe: { create: righe.map((r) => ({ posizione: r.posizione, codice: r.codice, descrizione: r.descrizione, quantita: r.quantita, um: r.um, prezzo: r.prezzo, sconto: r.sconto, aliquota: r.aliquota, natura: r.natura })) } },
   });
   aggiorna();
   redirect(`/fatturazione/fatture/${nuova.id}`);

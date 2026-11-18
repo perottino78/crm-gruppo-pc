@@ -5,10 +5,10 @@ import { prisma } from "@/lib/prisma";
 import { sincronizzaScadenzeCommesse, residuoScadenza } from "@/lib/amministrazione/server";
 import { whereScadenze, oggiUtc, type ParametriScadenze } from "@/lib/amministrazione/filtri";
 import { cent } from "@/lib/amministrazione/estratto";
-import { eur, dataIt, STATI_SCADENZA, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
+import { eur, dataIt, STATI_SCADENZA, STATI_BCONSOLE, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
 import { BRANDS } from "@/lib/brands";
 import VisteSalvate from "@/components/amministrazione/VisteSalvate";
-import { nuovaScadenza, modificaScadenza, saldaManualmente, annullaScadenza } from "@/app/amministrazione-actions";
+import { nuovaScadenza, modificaScadenza, saldaManualmente, annullaScadenza, impostaStatoScadenza, azzeraPagatoManuale } from "@/app/amministrazione-actions";
 import RegistraPagamento, { type ContoPerPagamento } from "@/components/amministrazione/RegistraPagamento";
 import { ritenutaPrevista } from "@/lib/amministrazione/pagamenti";
 
@@ -35,7 +35,7 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
   const fvDi = new Map(fv.map((f) => [f.id, f]));
   const righe = scadenze.map((s) => ({
     ...s, residuo: residuoScadenza(s), scaduta: !!s.dataScadenza && s.dataScadenza < oggi && ["APERTA", "PARZIALE"].includes(s.stato),
-    ritenutaSuggerita: s.fatturaVenditaId && fvDi.has(s.fatturaVenditaId) && s.ritenuta === 0 ? ritenutaPrevista(fvDi.get(s.fatturaVenditaId)!, s.importo) : 0,
+    ritenutaSuggerita: s.fatturaVenditaId && fvDi.has(s.fatturaVenditaId) && s.ritenuta === 0 ? ritenutaPrevista(residuoScadenza(s)) : 0,
   }));
   const ritorno = `/amministrazione/scadenzario${qsBase(p)}`;
   const tot = (tipo: string) => cent(righe.filter((r) => r.tipo === tipo && r.stato !== "ANNULLATA").reduce((t, r) => t + r.residuo, 0));
@@ -70,6 +70,17 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
         {[["aperte", "Da saldare"], ["pagate", "Saldate"], ["annullate", "Annullate"], ["tutte", "Tutti gli stati"]].map(([v, l]) => (
           <Link key={v} href={qs({ stato: v })} className={pill((p.stato ?? "aperte") === v)}>{l}</Link>
         ))}
+        <form className="inline-flex items-center gap-1" title="Gli stati della tendina di BConsole">
+          {p.tipo && <input type="hidden" name="tipo" value={p.tipo} />}
+          {p.periodo && <input type="hidden" name="periodo" value={p.periodo} />}
+          {p.ordine && <input type="hidden" name="ordine" value={p.ordine} />}
+          {p.q && <input type="hidden" name="q" value={p.q} />}
+          <select name="stato" defaultValue={p.stato?.startsWith("bc:") ? p.stato : ""} className={`${inp} !py-1 text-xs`}>
+            <option value="">Stato come in BConsole…</option>
+            {STATI_BCONSOLE.filter((x) => x.effetto !== "APRE").map((x) => <option key={x.nome} value={`bc:${x.nome}`}>{x.nome}</option>)}
+          </select>
+          <button className="btn-3d btn-3d-dark text-xs px-2 py-1">Mostra</button>
+        </form>
       </div>
       <div className="flex flex-wrap gap-2 items-center">
         {periodi.map(([v, l]) => <Link key={v} href={qs({ periodo: v })} className={pill((p.periodo ?? "tutte") === v)}>{l}</Link>)}
@@ -181,7 +192,7 @@ function Gruppo({ titolo, righe, conti, ritorno }: { titolo: string; righe: Riga
             </td>
             <td className="px-3 py-2 text-right whitespace-nowrap">{eur(s.importo)}</td>
             <td className="px-3 py-2 text-right whitespace-nowrap font-bold">{s.stato === "ANNULLATA" ? "—" : eur(s.residuo)}</td>
-            <td className="px-3 py-2"><span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}</span></td>
+            <td className="px-3 py-2"><span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}</span>{s.statoEtichetta && <span className="block mt-0.5 text-[11px] font-bold text-purple-800">{s.statoEtichetta}</span>}</td>
             <td className="px-3 py-2 text-right">
               {s.stato !== "ANNULLATA" && (
                 <details className="relative inline-block text-left">
@@ -189,6 +200,15 @@ function Gruppo({ titolo, righe, conti, ritorno }: { titolo: string; righe: Riga
                   <div className="absolute right-0 z-20 mt-1 w-[26rem] max-w-[90vw] bg-white border border-neutral-300 rounded-lg shadow-lg p-3 space-y-3">
                     <RegistraPagamento compatto conti={conti} ritorno={ritorno} ritenutaSuggerita={s.ritenutaSuggerita}
                       scadenza={{ id: s.id, tipo: s.tipo, residuo: s.residuo, ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />
+                    <form action={impostaStatoScadenza} className="space-y-1.5 border-t pt-2">
+                      <input type="hidden" name="id" value={s.id} />
+                      <label className="block text-[11px] font-semibold">Stato (come in BConsole)
+                        <select name="stato" defaultValue={s.statoEtichetta ?? (s.stato === "PAGATA" ? "Saldata" : s.stato === "PARZIALE" ? "Saldata parzialmente" : s.stato === "ANNULLATA" ? "Stornata" : "Aperta")} className={`${inp} w-full`}>
+                          {STATI_BCONSOLE.map((x) => <option key={x.nome}>{x.nome}</option>)}
+                        </select></label>
+                      <button className="btn-3d btn-3d-purple text-xs w-full">Cambia stato</button>
+                      <p className="text-[10px] text-neutral-500">Saldata, Chiusa, Compensata chiudono la scadenza; Stornata la annulla (solo senza pagamenti). Insoluta, Previsionale… sono solo etichette.</p>
+                    </form>
                     <form action={modificaScadenza} className="space-y-1.5 border-t pt-2">
                       <input type="hidden" name="id" value={s.id} />
                       <label className="block text-[11px] font-semibold">Data scadenza
@@ -207,6 +227,14 @@ function Gruppo({ titolo, righe, conti, ritorno }: { titolo: string; righe: Riga
                         <input name="motivo" required placeholder="Come? (contanti, assegno, compensazione…) *" className={`${inp} w-full`} />
                         <button className="btn-3d btn-3d-green text-xs w-full">Segna saldata</button>
                         <p className="text-[10px] text-neutral-500">Se il pagamento è passato in banca, abbinalo invece dalla Prima nota.</p>
+                      </form>
+                    )}
+                    {s.pagatoManuale > 0 && (
+                      <form action={azzeraPagatoManuale} className="space-y-1.5 border-t pt-2">
+                        <input type="hidden" name="id" value={s.id} />
+                        <p className="text-[11px] font-semibold">Pagato a mano: {eur(s.pagatoManuale)}</p>
+                        <input name="motivo" required placeholder="Perché lo tolgo? (errore di registrazione…) *" className={`${inp} w-full`} />
+                        <button className="btn-3d btn-3d-red text-xs w-full">Togli i pagamenti segnati a mano</button>
                       </form>
                     )}
                     {!daCommessa && s.abbinamenti.length === 0 && s.pagatoManuale === 0 && (

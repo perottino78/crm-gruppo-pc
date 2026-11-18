@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { puoAmministrazione, registra as registraLog } from "@/lib/amministrazione/server";
+import { mettiNelCestino } from "@/lib/cestino";
+import { puoAmministrazione, eMeseChiuso, registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiFileFatture } from "@/lib/fatture/fatturapa";
 import { importaFatturaVendita, creaScadenzeVendita, type EsitoVendita } from "@/lib/fatture/vendite";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
@@ -128,16 +129,37 @@ export async function salvaFatturaVendita(fd: FormData) {
   redirect(`/amministrazione/fatture-vendita/${f.id}?ok=${encodeURIComponent("Salvato.")}`);
 }
 
-/** Elimina una fattura caricata per errore (solo senza incassi). */
+/**
+ * Elimina una fattura registrata per errore (richiesta di Debora 18/11/2026). Finisce nel cestino per 30 giorni
+ * (Impostazioni › Registro e cestino › «Ripristina»). Con gli incassi si annullano prima quelli registrati a mano e non
+ * ancora confermati dall'estratto conto (come «annulla» nella fattura); gli incassi già confermati dalla banca
+ * si scollegano prima dalla Prima nota. Le fatture emesse dal CRM non si eliminano: si fa una nota di credito.
+ */
 export async function eliminaFatturaVendita(fd: FormData) {
   const u = await utente();
   const id = str(fd, "id");
   const f = id ? await prisma.fatturaVendita.findUnique({ where: { id } }) : null;
   if (!f) return;
-  const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: f.id }, include: { abbinamenti: { select: { id: true } } } });
+  const torna = (errore: string) => redirect(`/amministrazione/fatture-vendita/${f.id}?errore=${encodeURIComponent(errore)}`);
+  if (f.origine === "CRM") torna("Questa fattura è stata emessa dal CRM: non si elimina. Per correggerla fai una nota di credito (Fatturazione).");
+  const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: f.id }, include: { abbinamenti: { include: { movimento: true } } } });
   const proprie = scad.filter((s) => s.chiaveImport?.startsWith(`FV:${f.id}:`));
-  if (proprie.some((s) => s.abbinamenti.length || s.pagatoManuale > 0 || s.ritenuta > 0))
-    redirect(`/amministrazione/fatture-vendita/${f.id}?errore=${encodeURIComponent("Ha già incassi registrati: annullali prima di eliminarla.")}`);
+  const movimenti = new Map<string, (typeof scad)[number]["abbinamenti"][number]["movimento"]>();
+  for (const s of proprie) for (const a of s.abbinamenti) movimenti.set(a.movimento.id, a.movimento);
+  const bloccati = [...movimenti.values()].filter((m) => m.confermatoIl || m.origine !== "MANUALE" || !m.metodo);
+  if (bloccati.length) torna(`Ha incassi già confermati dall'estratto conto (${bloccati.map((m) => `${m.data.toLocaleDateString("it-IT")} ${m.importo.toFixed(2).replace(".", ",")} €`).join(", ")}): scollegali prima dalla Prima nota, poi elimina la fattura.`);
+  for (const m of movimenti.values()) if (await eMeseChiuso(m.data)) torna(`Il mese del ${m.data.toLocaleDateString("it-IT")} è chiuso: riaprilo dalla Prima nota per annullare l'incasso.`);
+  // 1) si tolgono gli incassi registrati a mano (movimenti, commissioni, importi segnati a mano, ritenute)
+  await prisma.$transaction(async (tx) => {
+    for (const m of movimenti.values()) {
+      await tx.abbinamentoScadenza.deleteMany({ where: { movimentoId: m.id } });
+      await tx.movimentoFinanziario.deleteMany({ where: { commissioneDiId: m.id } });
+      await tx.movimentoFinanziario.delete({ where: { id: m.id } });
+    }
+    await tx.scadenza.updateMany({ where: { id: { in: proprie.map((s) => s.id) } }, data: { pagatoManuale: 0, ritenuta: 0, stato: "APERTA", pagataIl: null } });
+  });
+  // 2) copia nel cestino (con le scadenze pulite) e poi eliminazione
+  await mettiNelCestino("FATTURA_VENDITA", f.id, { id: u.id, nome: u.nome });
   await prisma.$transaction([
     prisma.scadenza.deleteMany({ where: { id: { in: proprie.map((s) => s.id) } } }),
     prisma.scadenza.updateMany({ where: { fatturaVenditaId: f.id }, data: { fatturaVenditaId: null } }),
@@ -145,5 +167,5 @@ export async function eliminaFatturaVendita(fd: FormData) {
   ]);
   await registraLog("FATTURA_VENDITA", f.id, "ELIMINATA", `Fattura ${f.numero} — ${f.clienteNome}`, u.nome);
   aggiorna();
-  redirect(`/amministrazione/fatture-vendita?ok=${encodeURIComponent(`Fattura ${f.numero} eliminata.`)}`);
+  redirect(`/amministrazione/fatture-vendita?ok=${encodeURIComponent(`Fattura ${f.numero} eliminata (la trovi nel cestino per 30 giorni: Impostazioni › Registro e cestino › Ripristina).`)}`);
 }

@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import CointestatoFattura from "@/components/fatturazione/CointestatoFattura";
+import { cointestatarioDa } from "@/lib/fatturazione/cointestato";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -100,6 +102,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
           <label className="block text-xs text-neutral-700">Causale (va nella fattura elettronica)<input name="causale" defaultValue={f.causale ?? ""} className={inp} /></label>
           <div className="flex flex-wrap gap-4 text-sm">
             <label className="flex items-center gap-2"><input type="checkbox" name="detrazione" defaultChecked={f.detrazione} /> Lavori con detrazione fiscale (bonifico parlante)</label>
+            <CointestatoFattura iniziale={cointestatarioDa(f.cointestatario)} disabilitato={!bozza} />
             <label className="flex items-center gap-2"><input type="checkbox" name="addebitoBollo" defaultChecked={f.addebitoBollo} /> Addebita il bollo da 2 € al cliente (se dovuto)</label>
           </div>
           {tf.trasporto && (
