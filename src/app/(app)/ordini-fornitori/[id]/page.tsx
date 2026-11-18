@@ -15,7 +15,7 @@ import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
-import { campiDaCompilare, nomeCampo } from "@/lib/ordini/scheda-produzione";
+import { campiDaCompilare, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
@@ -174,11 +174,34 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                 <form action={creaSchedaProduzione} className="space-y-2">
                   <input type="hidden" name="ordineId" value={o.id} />
                   <input type="hidden" name="modelloId" value={modelloScelto.id} />
-                  {campiDaCompilare(modelloScelto.html).map((c) => (
-                    <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
-                      <textarea name={`campo_${c}`} rows={c.includes("misure") ? 6 : 3} className={`${inp} w-full`} placeholder={c.includes("misure") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
-                    </label>
-                  ))}
+                  {(() => {
+                    const { singoli, tabelle } = raggruppaCampi(campiDaCompilare(modelloScelto.html));
+                    return (
+                      <>
+                        {tabelle.map((t) => (
+                          <div key={t.gruppo} className="overflow-x-auto">
+                            <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
+                            <table className="text-xs border-collapse">
+                              <thead><tr><th className="p-1" />{t.colonne.map((c) => <th key={c} className="border border-neutral-300 bg-neutral-50 px-1.5 py-0.5 font-semibold">{nomeCampo(c)}</th>)}</tr></thead>
+                              <tbody>
+                                {t.righe.map((r) => (
+                                  <tr key={r}>
+                                    <td className="px-1.5 font-semibold text-neutral-500">{r}</td>
+                                    {t.colonne.map((c) => <td key={c} className="border border-neutral-300 p-0"><input name={`campo_tab_${t.gruppo}_${r}_${c}`} className="w-20 px-1 py-1 text-xs" aria-label={`${nomeCampo(t.gruppo)} ${r} ${c}`} /></td>)}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        ))}
+                        {singoli.map((c) => (
+                          <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
+                            <textarea name={`campo_${c}`} rows={c.includes("misure") ? 6 : 3} className={`${inp} w-full`} placeholder={c.includes("misure") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
+                          </label>
+                        ))}
+                      </>
+                    );
+                  })()}
                   <button className="btn-3d btn-3d-blue text-sm px-4 py-2">📄 Crea la scheda</button>
                   <p className="text-[11px] text-neutral-500">Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all&apos;invio dell&apos;ordine.</p>
                 </form>
