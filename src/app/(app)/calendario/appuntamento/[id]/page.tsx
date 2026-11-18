@@ -142,7 +142,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           <section className="card-fase mt-5" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
             <h2 className="mb-1">📎 Foto e documenti utili per il rilievo</h2>
             <p className="mb-3 text-xs text-neutral-600">Se ci sono foto, PDF o disegni che servono a chi va a fare il rilievo, caricali qui: restano {a.commessaId ? "nella pratica (cartella «Rilievi misura»)" : "nella scheda del cliente (cartella «Rilievi misura»)"}.</p>
-            <Documenti entita={a.commessaId ? "COMMESSA" : "CLIENTE"} entitaId={a.commessaId ?? a.clienteId} titolo="Documenti del rilievo" />
+            <Documenti entita={a.commessaId ? "COMMESSA" : "CLIENTE"} entitaId={a.commessaId ?? a.clienteId} titolo="Documenti del rilievo" soloCartelle={["Rilievi misura"]} />
           </section>
           <section className="card-fase mt-5" style={{ "--fase": "#2563eb" } as React.CSSProperties}>
             <h2 className="mb-2">↪ Spostare o annullare</h2>
