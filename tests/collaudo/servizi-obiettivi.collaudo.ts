@@ -72,12 +72,12 @@ async function main() {
 
   console.log("1. Caricamento dei Servizi e pratiche");
   const prova = await (await seed.GET(req("GET"))).json();
-  verifica(prova.prova && prova.prodottiCreati === 12 && prova.optionalSpostati.length === 2 && prova.facchinaggioWsTolti === 1, "la prova conta 6 voci × 2 marchi, 2 optional da spostare, 1 facchinaggio W&S", prova);
+  verifica(prova.prova && prova.prodottiCreati === 26 && prova.optionalSpostati.length === 2 && prova.facchinaggioWsTolti === 1, "la prova conta 13 voci × 2 marchi, 2 optional da spostare, 1 facchinaggio W&S", prova);
   verifica(await prisma.prodotto.count({ where: { tipologia: { startsWith: "SERVIZI_" } } }) === 0, "la prova non scrive nulla");
   const fatto = await (await seed.POST(req("POST"))).json();
-  verifica(fatto.ok && fatto.prodottiCreati === 12, "caricati i servizi per ogni marchio", fatto);
+  verifica(fatto.ok && fatto.prodottiCreati === 26, "caricati i servizi per ogni marchio", fatto);
   const modelli = await prisma.modelloProdotto.findMany({ where: { brandId: brand.id, tipologia: { startsWith: "SERVIZI_" } } });
-  verifica(modelli.length === 3 && modelli.every((m) => !m.inProvvigione && m.famiglia === "SERVIZI" && m.gruppo === "SERVIZI E PRATICHE"), "modelli ENEA/autoscala/facchinaggio senza spunta provvigione, famiglia Servizi");
+  verifica(modelli.length === 6 && modelli.every((m) => !m.inProvvigione && m.famiglia === "SERVIZI" && m.gruppo === "SERVIZI E PRATICHE"), "modelli dei servizi (ENEA, autoscala, facchinaggio, posa, trasporto, assistenza) senza spunta provvigione, famiglia Servizi");
   const opt = await prisma.optional.findMany({ where: { brandId: brand.id } });
   verifica(opt.filter((o) => !o.attivo && !o.inProvvigione).length === 2 && opt.find((o) => o.id === ral.id)!.attivo, "ENEA e autoscala escono dagli optional, il RAL resta");
   verifica(await prisma.prodotto.count({ where: { colore: "Facchinaggio al piano", tipologia: { startsWith: "WSPOSA_" } } }) === 0 && await prisma.prodotto.count({ where: { tipologia: "WSPOSA_NOTE_POSA_SERRAMENTI" } }) === 1, "via il facchinaggio W&S mai usato, resta lo smontaggio");

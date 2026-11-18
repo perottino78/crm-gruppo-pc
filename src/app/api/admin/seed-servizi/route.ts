@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { FAMIGLIA_SERVIZI, GRUPPO_SERVIZI, PREFISSO_SERVIZI, SERVIZI_LISTINO, descrizioneServizio, eServizioDaSpostare, prodottiServizi } from "@/lib/provvigioni/servizi";
+import { FAMIGLIA_SERVIZI, GRUPPO_SERVIZI, PREFISSO_SERVIZI, SERVIZI_LISTINO, descrizioneServizio, eServizioDaSpostare, immagineServizio, prodottiServizi } from "@/lib/provvigioni/servizi";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -24,27 +24,21 @@ async function esegui(prova: boolean) {
   for (const brand of brands) {
     // startsWith diventa LIKE e «_» vale qualsiasi carattere: ricontrollo il prefisso in JS
     const esistenti = (await prisma.prodotto.findMany({ where: { brandId: brand.id, tipologia: { startsWith: PREFISSO_SERVIZI } } })).filter((p) => p.tipologia.startsWith(PREFISSO_SERVIZI));
-    const mappa = new Map(esistenti.map((p) => [kP(p), p]));
-    for (const p of righe) {
-      const e = mappa.get(kP(p));
-      if (!e) {
-        st.prodottiCreati++;
-        if (!prova) await prisma.prodotto.create({ data: { brandId: brand.id, ...p, coefficienteRicarico: 1 } });
-      } else if (e.prezzoBase !== p.prezzoBase || e.coefficienteRicarico !== 1) {
-        st.prodottiAggiornati++;
-        if (!prova) await prisma.prodotto.update({ where: { id: e.id }, data: { prezzoBase: p.prezzoBase, coefficienteRicarico: 1 } });
-      }
-    }
-    const chiavi = new Set(righe.map(kP));
-    for (const v of esistenti.filter((p) => !chiavi.has(kP(p)))) {
-      if (prova) { st.prodottiRimossi++; continue; }
-      try { await prisma.prodotto.delete({ where: { id: v.id } }); st.prodottiRimossi++; } catch { /* usato in un'offerta: resta */ }
+    // Rilanciabile senza toccare quanto è stato scritto a mano: le voci di un servizio si creano SOLO se il servizio non ha ancora nessuna voce
+    // (prezzi, nomi e voci aggiunte o tolte dal listino restano come sono).
+    const conVoci = new Set(esistenti.map((p) => p.tipologia));
+    const daCreare = SERVIZI_LISTINO.filter((s) => !conVoci.has(s.tipologia)).map((s) => s.tipologia);
+    for (const p of righe.filter((r) => daCreare.includes(r.tipologia))) {
+      st.prodottiCreati++;
+      if (!prova) await prisma.prodotto.create({ data: { brandId: brand.id, ...p, coefficienteRicarico: 1 } });
     }
     for (const s of SERVIZI_LISTINO) {
       st.modelli++;
       if (prova) continue;
-      const dati = { descrizioneTecnica: descrizioneServizio(s.tipologia) ?? "", famiglia: FAMIGLIA_SERVIZI, gruppo: GRUPPO_SERVIZI, inProvvigione: false };
-      await prisma.modelloProdotto.upsert({ where: { brandId_tipologia: { brandId: brand.id, tipologia: s.tipologia } }, create: { brandId: brand.id, tipologia: s.tipologia, ...dati }, update: dati });
+      const mod = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId: brand.id, tipologia: s.tipologia } }, select: { descrizioneTecnica: true, immagineUrl: true } });
+      const dati = { famiglia: FAMIGLIA_SERVIZI, gruppo: GRUPPO_SERVIZI, inProvvigione: false };
+      if (!mod) await prisma.modelloProdotto.create({ data: { brandId: brand.id, tipologia: s.tipologia, descrizioneTecnica: descrizioneServizio(s.tipologia) ?? "", immagineUrl: immagineServizio(s.tipologia), ...dati } });
+      else await prisma.modelloProdotto.update({ where: { brandId_tipologia: { brandId: brand.id, tipologia: s.tipologia } }, data: { ...dati, ...(mod.descrizioneTecnica ? {} : { descrizioneTecnica: descrizioneServizio(s.tipologia) ?? "" }), ...(mod.immagineUrl ? {} : { immagineUrl: immagineServizio(s.tipologia) }) } });
     }
   }
 

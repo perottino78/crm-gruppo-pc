@@ -9,6 +9,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
 import { aggiungiComponenteKit, eliminaComponenteKit } from "@/app/kit-actions";
 import { CALCOLI_KIT, labelCalcolo } from "@/lib/listini/kit";
+import { PREFISSO_SERVIZI } from "@/lib/provvigioni/servizi";
+import { aggiungiVoceServizio, eliminaVoceServizio, salvaVoceServizio } from "@/app/servizi-actions";
 
 export default async function ModelloProdottoPage({
   params,
@@ -52,6 +54,9 @@ export default async function ModelloProdottoPage({
       })
     : [];
 
+  const vociServizio = tipologia.startsWith(PREFISSO_SERVIZI)
+    ? [...new Map(variantiPrezzo.map((v) => [v.colore, v])).values()]
+    : [];
   // Pannelli/optional con immagine applicabili a questa scheda (stesso filtro usato in
   // preventivi per popolare il menu a tendina): listino a livello di famiglia/tipologia,
   // gruppo merceologico corrispondente. Raggruppati per categoria, una miniatura ciascuna
@@ -150,7 +155,39 @@ export default async function ModelloProdottoPage({
         <button className="btn-3d btn-3d-dark text-sm px-4 py-2 self-start">Salva scheda</button>
       </form>
 
-      {senzaMisura && variantiPrezzo.length > 0 && (
+      {tipologia.startsWith(PREFISSO_SERVIZI) && (
+        <div id="voci" className="mt-6 bg-white rounded-lg border border-neutral-200 p-4 scroll-mt-4">
+          <h2 className="text-base font-bold text-neutral-900 mb-1">🧾 Voci di questo servizio ({vociServizio.length})</h2>
+          <p className="text-xs text-neutral-600 mb-3">Scrivi il nome e il prezzo (IVA esclusa) di ogni voce: valgono per tutti i marchi. Una voce a 0 € significa «da definire». Puoi rinominare, aggiungere o togliere le voci.</p>
+          {kitOk && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {kitOk}</p>}
+          {kitErrore && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{kitErrore}</p>}
+          <div className="flex flex-col gap-2">
+            {vociServizio.map((v) => (
+              <div key={v.colore} className="flex flex-wrap items-center gap-2 border border-neutral-100 rounded px-2 py-1.5">
+                <form action={salvaVoceServizio} className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
+                  <input type="hidden" name="tipologia" value={tipologia} />
+                  <input type="hidden" name="nomeOriginale" value={v.colore} />
+                  <input name="nome" defaultValue={v.colore} aria-label="Nome della voce" className="border border-neutral-200 rounded px-2 py-1 text-sm flex-1 min-w-[12rem]" />
+                  <span className="text-xs text-neutral-500">€</span>
+                  <input name="prezzo" type="number" step="0.01" min="0" defaultValue={v.prezzoBase} aria-label="Prezzo" className="border border-neutral-200 rounded px-2 py-1 text-sm w-28 text-right" />
+                  {puoKit && <button className="btn-3d btn-3d-dark text-xs px-3 py-1.5">Salva</button>}
+                </form>
+                {puoKit && <form action={eliminaVoceServizio}><input type="hidden" name="tipologia" value={tipologia} /><input type="hidden" name="nomeOriginale" value={v.colore} /><button className="text-xs text-red-700 underline">togli</button></form>}
+              </div>
+            ))}
+          </div>
+          {puoKit && (
+            <form action={aggiungiVoceServizio} className="mt-3 flex flex-wrap items-end gap-2 border-t border-neutral-200 pt-3">
+              <input type="hidden" name="tipologia" value={tipologia} />
+              <label className="text-xs font-semibold flex-1 min-w-[12rem]">Nuova voce<input name="nome" required placeholder="es. Posa a ore con 2 operai" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-full" /></label>
+              <label className="text-xs font-semibold">Prezzo €<input name="prezzo" type="number" step="0.01" min="0" defaultValue="0" className="border border-neutral-200 rounded px-2 py-1.5 text-sm w-28 text-right block" /></label>
+              <button className="btn-3d btn-3d-green text-sm px-3 py-1.5">➕ Aggiungi voce</button>
+            </form>
+          )}
+        </div>
+      )}
+
+      {!tipologia.startsWith(PREFISSO_SERVIZI) && senzaMisura && variantiPrezzo.length > 0 && (
         <div className="mt-6 bg-white rounded-lg border border-neutral-200 p-4">
           <h2 className="text-base font-bold text-neutral-900 mb-1">
             Prezzi ({variantiPrezzo.length} varianti)
