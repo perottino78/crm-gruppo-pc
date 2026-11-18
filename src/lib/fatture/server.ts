@@ -13,11 +13,11 @@ const data12 = (s: string) => new Date(`${s.slice(0, 10)}T12:00:00Z`);
 export async function trovaFornitore(partitaIva: string | null, nome: string) {
   const p = pivaNorm(partitaIva);
   if (p) {
-    const tutti = await prisma.soggetto.findMany({ where: { partitaIva: { contains: p } }, select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true } });
+    const tutti = await prisma.soggetto.findMany({ where: { partitaIva: { contains: p } }, select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true, centroCosto: true } });
     const esatto = tutti.find((s) => pivaNorm(s.partitaIva) === p);
     if (esatto) return esatto;
   }
-  return prisma.soggetto.findFirst({ where: { ragioneSociale: { equals: nome.trim(), mode: "insensitive" } }, select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true } });
+  return prisma.soggetto.findFirst({ where: { ragioneSociale: { equals: nome.trim(), mode: "insensitive" } }, select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true, centroCosto: true } });
 }
 
 /** Ordini fornitori citati nella fattura ("12/2026", "ord. 12", ecc.). */
@@ -52,7 +52,7 @@ export async function importaFattura(f: FatturaLetta, opz: { xml: string | null;
   if (!forn && opz.creaFornitore !== false && f.fornitore.partitaIva) {
     forn = await prisma.soggetto.create({
       data: { ragioneSociale: f.fornitore.denominazione, ruoli: ["FORNITORE"], partitaIva: pivaNorm(f.fornitore.partitaIva), codiceFiscale: f.fornitore.codiceFiscale, indirizzo: f.fornitore.indirizzo, cap: f.fornitore.cap, comune: f.fornitore.comune, provincia: f.fornitore.provincia, email: f.fornitore.email, note: `Creato dalla fattura ${f.numero} del ${f.data}` },
-      select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true },
+      select: { id: true, ragioneSociale: true, giorniPagamento: true, partitaIva: true, centroCosto: true },
     });
   }
   const segno = f.notaCredito ? -1 : 1;
@@ -67,7 +67,7 @@ export async function importaFattura(f: FatturaLetta, opz: { xml: string | null;
     data: {
       chiave, fornitoreId: forn?.id ?? null, fornitoreNome: forn?.ragioneSociale ?? f.fornitore.denominazione, partitaIva: pivaNorm(f.fornitore.partitaIva) || null,
       tipoDocumento: f.tipoDocumento, numero: f.numero, data: data12(f.data), imponibile: cent(segno * Math.abs(f.imponibile)), iva: cent(segno * Math.abs(f.iva)), totale: cent(segno * Math.abs(f.totale)),
-      divisione: divisioneDaCliente(f.cliente.partitaIva), origine: opz.origine, xml: opz.xml,
+      divisione: divisioneDaCliente(f.cliente.partitaIva), centroCosto: forn?.centroCosto ?? null, origine: opz.origine, xml: opz.xml,
       riferimentiOrdine: f.ordini.map((o) => o.numero).join(", ") || null, riferimentiDdt: f.ddt.map((d) => `${d.numero}${d.data ? ` del ${d.data.split("-").reverse().join("/")}` : ""}`).join(", ") || null,
       scadenzePreviste: f.scadenze.length ? f.scadenze : undefined, note: f.causale || null, creatoDaNome: opz.creatoDaNome,
       righe: {

@@ -74,8 +74,13 @@ async function main() {
   await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: null } });
   const errCf = await redirectA(A.emettiFattura(fd({ id: saldoId })));
   verifica(errCf.includes("codice fiscale"), "senza codice fiscale/partita IVA non si emette", errCf);
-  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: "RSSMRA80A01L219X" } });
+  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: "RSSMRA80A01L219X", cointestatario: { nome: "Anna", cognome: "", codiceFiscale: "" } } });
+  const errCo = await redirectA(A.emettiFattura(fd({ id: saldoId })));
+  verifica(errCo.includes("cointestatario"), "cointestata: senza cognome e codice fiscale del secondo intestatario non si emette", errCo);
+  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { cointestatario: { nome: "Anna", cognome: "Verdi", codiceFiscale: "VRDNNA80A41L219X", quota: "50%" } } });
   await redirectA(A.emettiFattura(fd({ id: saldoId })));
+  const xmlCo = (await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } })).xml ?? "";
+  verifica(/Fattura cointestata a: Anna Verdi, C\.F\. VRDNNA80A41L219X/.test(xmlCo) && xmlCo.includes("quota 50%"), "cointestata: il secondo intestatario è nella causale della fattura elettronica");
   verifica((await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } })).numero === "520/FE/2026", "il saldo prende 520/FE/2026");
 
   // 4) DDT di uscita dalla commessa, conferma (continua da 551) e fattura differita

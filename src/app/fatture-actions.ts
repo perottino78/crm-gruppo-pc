@@ -74,7 +74,7 @@ async function commessaDaTesto(t: string | null): Promise<string | null> {
 export async function creaFatturaManuale(fd: FormData) {
   const u = await utente();
   const fornitoreId = str(fd, "fornitoreId");
-  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true, partitaIva: true } }) : null;
+  const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true, partitaIva: true, centroCosto: true } }) : null;
   const fornitoreNome = forn?.ragioneSociale ?? str(fd, "fornitoreNome");
   const numero = str(fd, "numero"), d = data(fd, "data");
   if (!fornitoreNome || !numero || !d) throw new Error("Servono fornitore, numero e data della fattura.");
@@ -91,7 +91,7 @@ export async function creaFatturaManuale(fd: FormData) {
     data: {
       chiave, fornitoreId: forn?.id ?? null, fornitoreNome, partitaIva: forn?.partitaIva ?? null, tipoDocumento: tipo, numero, data: d,
       imponibile: cent(segno * Math.abs(imponibile)), iva: cent(segno * Math.abs(iva)), totale: cent(segno * Math.abs(totale)), divisione: str(fd, "divisione"), origine: "PDF", creatoDaNome: u.nome,
-      modoPagamento: str(fd, "modoPagamento"), bancaPrevista: str(fd, "bancaPrevista"), note: str(fd, "note"),
+      modoPagamento: str(fd, "modoPagamento"), bancaPrevista: str(fd, "bancaPrevista"), centroCosto: forn?.centroCosto ?? null, note: str(fd, "note"),
       scadenzePreviste: scad ? [{ data: scad.toISOString().slice(0, 10), importo: Math.abs(totale), modalita: null }] : undefined,
       righe: { create: [{ posizione: 1, descrizione: str(fd, "descrizione") ?? (tipo === "PROFORMA" ? "Totale proforma" : "Totale fattura"), importo: cent(segno * Math.abs(imponibile)), commessaId }] },
     },
@@ -273,4 +273,19 @@ export async function assegnaCommessaATutte(fd: FormData) {
   if (!commessaId && str(fd, "commessa")) redirect(`/amministrazione/fatture-acquisto/${f.id}?errore=${encodeURIComponent("Commessa non trovata: sceglila dall'elenco che compare mentre scrivi.")}`);
   await prisma.rigaFatturaAcquisto.updateMany({ where: { fatturaId: f.id, rigaOrdineId: null }, data: { commessaId } });
   aggiorna(f.id);
+}
+
+/** Centro di costo della fattura (si propone quello del fornitore); con la spunta diventa anche quello abituale del fornitore. */
+export async function salvaCentroCostoFattura(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  if (!id) return;
+  const f = await prisma.fatturaAcquisto.findUnique({ where: { id }, select: { id: true, fornitoreId: true, fornitoreNome: true, numero: true } });
+  if (!f) return;
+  const centro = str(fd, "centroCosto");
+  await prisma.fatturaAcquisto.update({ where: { id }, data: { centroCosto: centro } });
+  if (fd.get("alFornitore") === "on" && f.fornitoreId) await prisma.soggetto.update({ where: { id: f.fornitoreId }, data: { centroCosto: centro } });
+  await registraLog("FATTURA_ACQUISTO", id, "CENTRO DI COSTO", `${f.fornitoreNome} n. ${f.numero}: ${centro ?? "—"}${fd.get("alFornitore") === "on" ? " (anche sul fornitore)" : ""}`, u.nome);
+  revalidatePath(`/amministrazione/fatture-acquisto/${id}`);
+  revalidatePath("/amministrazione/fatture-acquisto");
 }

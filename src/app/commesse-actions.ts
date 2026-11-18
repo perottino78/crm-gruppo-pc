@@ -454,6 +454,7 @@ function datiSoggetto(fd: FormData) {
     intestatario: str(fd, "intestatario"),
     metodoPagamento: str(fd, "metodoPagamento"),
     condizioniPagamento: str(fd, "condizioniPagamento"),
+    centroCosto: str(fd, "centroCosto"),
     giorniPagamento: giorni === null ? null : Math.round(giorni),
     scontoFornitore: flt(fd, "scontoFornitore"),
     listiniForniti: str(fd, "listiniForniti"),

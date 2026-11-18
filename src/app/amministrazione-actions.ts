@@ -11,7 +11,7 @@ import {
   utenteAmministrazione, registra, eMeseChiuso, mesiChiusi, meseDi, saldoConto,
   ricalcolaScadenza, ricalcolaMovimento, residuoScadenza, residuoMovimento,
 } from "@/lib/amministrazione/server";
-import { eur } from "@/lib/amministrazione/costanti";
+import { eur, STATI_BCONSOLE } from "@/lib/amministrazione/costanti";
 import { confermePagamentiManuali } from "@/lib/amministrazione/pagamenti";
 import { praticaDiIncasso, avanzaDopoIncasso } from "@/app/flusso-actions";
 
@@ -431,6 +431,59 @@ export async function saldaManualmente(fd: FormData) {
   await prisma.scadenza.update({ where: { id }, data: { pagatoManuale: cent(s.pagatoManuale + importo), note: [s.note, `Saldata a mano ${eur(importo)}: ${motivo}`].filter(Boolean).join("\n") } });
   await ricalcolaScadenza(id);
   await registra("Scadenza", id, "Saldata a mano", `${s.controparte} · ${s.descrizione} · ${eur(importo)} — ${motivo}`, u.nome);
+  aggiorna();
+}
+
+/**
+ * Stato della scadenza come nella tendina di BConsole (Insoluta, Previsionale, Saldata, Stornata…).
+ * Gli stati che chiudono la scadenza la segnano pagata a mano con la nota; Stornata la annulla (solo se non ha pagamenti).
+ */
+export async function impostaStatoScadenza(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id"), nome = str(fd, "stato");
+  const voce = STATI_BCONSOLE.find((x) => x.nome === nome);
+  if (!id || !voce) return;
+  const s = await prisma.scadenza.findUnique({ where: { id }, include: { abbinamenti: true } });
+  if (!s) return;
+  const residuo = Math.max(0, residuoScadenza(s));
+  const nota = (t: string) => [s.note, t].filter(Boolean).join("\n");
+  const dati: Record<string, unknown> = {};
+  if (voce.effetto === "APRE") {
+    dati.statoEtichetta = null;
+    if (s.stato === "ANNULLATA") dati.stato = "APERTA";
+  } else if (voce.effetto === "NESSUNO") {
+    if (s.stato === "ANNULLATA") return;
+    dati.statoEtichetta = voce.nome;
+  } else if (voce.effetto === "STORNA") {
+    if (s.abbinamenti.length || s.pagatoManuale > 0 || s.ritenuta > 0) return;
+    dati.stato = "ANNULLATA"; dati.statoEtichetta = voce.nome; dati.note = nota(`Stornata il ${giorno(new Date())}`);
+  } else {
+    if (s.stato === "ANNULLATA") return;
+    if (residuo > 0.004) {
+      if (voce.effetto === "RITENUTA") dati.ritenuta = cent(s.ritenuta + residuo);
+      else dati.pagatoManuale = cent(s.pagatoManuale + residuo);
+      dati.note = nota(`Segnata «${voce.nome}» il ${giorno(new Date())} (${eur(residuo)})`);
+    }
+    dati.statoEtichetta = voce.nome === "Saldata" ? null : voce.nome;
+  }
+  await prisma.scadenza.update({ where: { id }, data: dati });
+  await ricalcolaScadenza(id);
+  await registra("Scadenza", id, "Stato cambiato", `${s.controparte} · ${s.descrizione}: ${voce.nome}`, u.nome);
+  aggiorna();
+}
+
+/** Toglie i pagamenti segnati a mano (senza prima nota o «saldata a mano») per correggere un errore. */
+export async function azzeraPagatoManuale(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id"), motivo = str(fd, "motivo");
+  if (!id || !motivo) return;
+  const s = await prisma.scadenza.findUnique({ where: { id }, include: { abbinamenti: true } });
+  if (!s || s.pagatoManuale <= 0) return;
+  await prisma.scadenza.update({ where: { id }, data: { pagatoManuale: 0, statoEtichetta: null, pagataIl: null, note: [s.note, `Pagamenti segnati a mano (${eur(s.pagatoManuale)}) annullati il ${giorno(new Date())}: ${motivo}`].filter(Boolean).join("\n") } });
+  await ricalcolaScadenza(id);
+  await registra("Scadenza", id, "Pagato a mano annullato", `${s.controparte} · ${s.descrizione} · ${eur(s.pagatoManuale)} — ${motivo}`, u.nome);
   aggiorna();
 }
 

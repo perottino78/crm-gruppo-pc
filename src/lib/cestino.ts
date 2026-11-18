@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
 export const GIORNI_CESTINO = 30;
-export type TipoCestino = "CAMPAGNA" | "LEAD" | "CLIENTE" | "PREVENTIVO";
+export type TipoCestino = "CAMPAGNA" | "LEAD" | "CLIENTE" | "PREVENTIVO" | "FATTURA_VENDITA";
 type Tabella = { modello: string; righe: Record<string, unknown>[] };
 type Collega = { modello: string; id: string; campo: string; valore: string };
 export type DatiCestino = { tabelle: Tabella[]; collega?: Collega[] };
@@ -28,6 +28,15 @@ export async function fotografia(tipo: TipoCestino, id: string): Promise<{ nome:
       prisma.cliente.findMany({ where: { leadOrigineId: id }, select: { id: true } }),
     ]);
     return { nome: l.nome, dati: { tabelle: [{ modello: "lead", righe: [l] }, { modello: "leadEvento", righe: eventi }, { modello: "emailLead", righe: email }], collega: clienti.map((c) => ({ modello: "cliente", id: c.id, campo: "leadOrigineId", valore: id })) } };
+  }
+  if (tipo === "FATTURA_VENDITA") {
+    const f = await prisma.fatturaVendita.findUnique({ where: { id } });
+    if (!f) return null;
+    const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: id } });
+    const proprie = scad.filter((x) => x.chiaveImport?.startsWith(`FV:${id}:`));
+    // le scadenze di acconto/saldo della commessa non si eliminano: si ricollegano alla fattura al ripristino
+    const agganciate = scad.filter((x) => !x.chiaveImport?.startsWith(`FV:${id}:`));
+    return { nome: `Fattura ${f.numero} — ${f.clienteNome}`, dati: { tabelle: [{ modello: "fatturaVendita", righe: [f] }, { modello: "scadenza", righe: proprie }], collega: agganciate.map((x) => ({ modello: "scadenza", id: x.id, campo: "fatturaVenditaId", valore: id })) } };
   }
   if (tipo === "PREVENTIVO") {
     const p = await prisma.preventivo.findUnique({ where: { id }, include: { cliente: { select: { nome: true } } } });

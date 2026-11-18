@@ -11,8 +11,11 @@ import CaricaFattureXml from "@/components/fatture/CaricaFattureXml";
 import LeggiFatturaAI from "@/components/fatture/LeggiFatturaAI";
 import { numeroCommessa } from "@/lib/commesse";
 import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
+import { statoVendita as statoPagamentoFattura, STATI_ACQUISTO } from "@/lib/fatture/vendite";
+import { residuoScadenza } from "@/lib/amministrazione/server";
+import { oggiUtc } from "@/lib/amministrazione/filtri";
 
-type P = { stato?: string; fornitore?: string; q?: string; anno?: string; tipo?: string };
+type P = { stato?: string; fornitore?: string; q?: string; anno?: string; tipo?: string; pag?: string };
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -38,6 +41,18 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
     prisma.fatturaAcquisto.count({ where: { tipoDocumento: "PROFORMA", stato: "REGISTRATA" } }),
     prisma.contoFinanziario.findMany({ where: { attivo: true }, select: { nome: true }, orderBy: [{ ordine: "asc" }, { nome: "asc" }] }),
   ]);
+  // pagamento delle fatture (come per le vendite): insolute = scadute e non pagate
+  const scadAcq = fatture.length ? await prisma.scadenza.findMany({ where: { OR: fatture.map((f) => ({ chiaveImport: { startsWith: `FA:${f.id}:` } })) }, include: { abbinamenti: { select: { importo: true } } } }) : [];
+  const oggi = oggiUtc();
+  const conPag = fatture.map((f) => {
+    const sc = scadAcq.filter((x) => x.chiaveImport?.startsWith(`FA:${f.id}:`)).map((x) => ({ ...x, residuo: x.stato === "ANNULLATA" ? 0 : residuoScadenza(x) }));
+    const residuo = Math.round(sc.reduce((t, x) => t + x.residuo, 0) * 100) / 100;
+    return { ...f, pag: f.stato === "SOSTITUITA" ? "SALDATA" : statoPagamentoFattura(f, sc, oggi), residuo };
+  });
+  const visibili = p.pag === "da-pagare" ? conPag.filter((f) => ["APERTA", "PARZIALE", "SCADUTA"].includes(f.pag)) : p.pag ? conPag.filter((f) => f.pag === p.pag) : conPag;
+  const nPag = (k: string) => conPag.filter((f) => f.pag === k).length;
+  const daPagare = Math.round(conPag.filter((f) => ["APERTA", "PARZIALE", "SCADUTA"].includes(f.pag)).reduce((t, f) => t + f.residuo, 0) * 100) / 100;
+  const insoluto = Math.round(conPag.filter((f) => f.pag === "SCADUTA").reduce((t, f) => t + f.residuo, 0) * 100) / 100;
   const c = (s: string) => conteggi.find((x) => x.stato === s);
   const qs = (x: Partial<P>) => `?${new URLSearchParams(Object.entries({ ...p, ...x }).filter(([, v]) => v) as [string, string][])}`;
   const pill = (a: boolean) => `px-2.5 py-1 rounded-full text-xs border ${a ? "bg-neutral-900 text-white border-neutral-900" : "bg-white border-neutral-300 text-neutral-700"}`;
@@ -83,6 +98,14 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
         <Link href={qs({ tipo: "proforma", stato: undefined })} className={pill(p.tipo === "proforma")}>Proforma in attesa di fattura ({proformeAperte})</Link>
         {Object.entries(STATI).map(([k, s]) => <Link key={k} href={qs({ stato: k })} className={pill(p.stato === k)}>{s.nome} ({c(k)?._count ?? 0}{c(k)?._sum.totale ? ` · ${eur(c(k)!._sum.totale!)}` : ""})</Link>)}
       </div>
+      <div className="flex flex-wrap gap-1.5 items-center">
+        <span className="text-xs text-neutral-600">Pagamento:</span>
+        <Link href={qs({ pag: undefined })} className={pill(!p.pag)}>Tutte ({conPag.length})</Link>
+        <Link href={qs({ pag: "da-pagare" })} className={pill(p.pag === "da-pagare")}>Da pagare ({nPag("APERTA") + nPag("PARZIALE") + nPag("SCADUTA")} · {eur(daPagare)})</Link>
+        <Link href={qs({ pag: "SCADUTA" })} className={pill(p.pag === "SCADUTA")}>Insolute ({nPag("SCADUTA")} · {eur(insoluto)})</Link>
+        <Link href={qs({ pag: "PARZIALE" })} className={pill(p.pag === "PARZIALE")}>Pagate in parte ({nPag("PARZIALE")})</Link>
+        <Link href={qs({ pag: "SALDATA" })} className={pill(p.pag === "SALDATA")}>Saldate ({nPag("SALDATA")})</Link>
+      </div>
       <form className="flex flex-wrap gap-2 items-end">
         {p.stato && <input type="hidden" name="stato" value={p.stato} />}
         <select name="fornitore" defaultValue={p.fornitore ?? ""} className={inp}><option value="">Tutti i fornitori</option>{fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}</select>
@@ -93,9 +116,9 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
 
       <div className="bg-white border border-neutral-200 rounded-lg overflow-x-auto">
         <table className="w-full text-sm">
-          <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200 bg-neutral-50"><th className="p-2">Data</th><th>Numero</th><th>Fornitore</th><th>Società</th><th className="text-right">Imponibile</th><th className="text-right">Totale</th><th>Collegamenti</th><th>Stato</th></tr></thead>
+          <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200 bg-neutral-50"><th className="p-2">Data</th><th>Numero</th><th>Fornitore</th><th>Società</th><th className="text-right">Imponibile</th><th className="text-right">Totale</th><th>Centro di costo</th><th>Collegamenti</th><th>Stato</th><th>Pagamento</th></tr></thead>
           <tbody>
-            {fatture.map((f) => {
+            {visibili.map((f) => {
               const s = STATI[f.stato] ?? { nome: f.stato, cls: "bg-neutral-100" };
               const comm = new Set(f.righe.map((r) => r.commessaId).filter(Boolean)).size;
               const senza = f.righe.filter((r) => !r.commessaId).length;
@@ -107,12 +130,14 @@ export default async function FattureAcquistoPage({ searchParams }: { searchPara
                   <td className="text-xs">{f.divisione ?? "—"}</td>
                   <td className="text-right">{eur(f.imponibile)}</td>
                   <td className="text-right font-semibold">{eur(f.totale)}</td>
+                  <td className="text-xs">{f.centroCosto ?? "—"}</td>
                   <td className="text-xs">{comm ? `${comm} commess${comm === 1 ? "a" : "e"}` : ""}{senza && comm ? ` · ${senza} righe libere` : ""}{f.bolle.length ? ` · ${f.bolle.length} bolle` : ""}{f.origine === "XML" ? " · XML" : ""}</td>
                   <td><span className={`text-xs px-2 py-0.5 rounded-full ${s.cls}`}>{s.nome}</span></td>
+                  <td className="whitespace-nowrap">{f.stato === "REGISTRATA" || f.stato === "DA_VERIFICARE" || f.stato === "SOSTITUITA" ? <span className={`text-xs px-2 py-0.5 rounded-full ${STATI_ACQUISTO[f.pag]?.cls ?? ""}`}>{STATI_ACQUISTO[f.pag]?.nome ?? f.pag}</span> : null}{["APERTA", "PARZIALE", "SCADUTA"].includes(f.pag) && f.residuo > 0 ? <span className="block text-[11px] text-neutral-600">da pagare {eur(f.residuo)}</span> : null}</td>
                 </tr>
               );
             })}
-            {fatture.length === 0 && <tr><td colSpan={8} className="p-4 text-center text-neutral-500">Nessuna fattura d&apos;acquisto.</td></tr>}
+            {visibili.length === 0 && <tr><td colSpan={10} className="p-4 text-center text-neutral-500">Nessuna fattura d&apos;acquisto.</td></tr>}
           </tbody>
         </table>
       </div>
