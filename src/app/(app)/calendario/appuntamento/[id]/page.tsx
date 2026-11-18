@@ -7,7 +7,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { nomeTipoAppuntamento, vedeTutti, STILE_TIPO } from "@/lib/calendario/eventi";
 import { perInput, chiaveGiorno, giornoBreve, oraRoma } from "@/lib/calendario/tempo";
-import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino } from "@/app/calendario-actions";
+import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino, collegaAppuntamentoProgetto } from "@/app/calendario-actions";
+import { numeroCommessa, STATI_COMMESSA } from "@/lib/commesse";
+import { STATI_PROGETTO_CHIUSO, linkProgetto } from "@/lib/calendario/rilievo-progetto";
 import Documenti from "@/components/documenti/Documenti";
 import { telefonistaDefaultPerBrand } from "@/lib/leadIngest";
 import { aggiungiGiorni } from "@/lib/calendario/tempo";
@@ -35,6 +37,14 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   const telefonista = idTel ? (await prisma.utente.findUnique({ where: { id: idTel }, select: { nome: true } }))?.nome.split(" ")[0] ?? null : null;
   const richiamaDefault = `${aggiungiGiorni(chiaveGiorno(new Date()), 1)}T10:00`;
   const rilievo = a.tipo === "SOPRALLUOGO";
+  // progetti (pratiche) del cliente: quello collegato e quelli aperti a cui collegare l'appuntamento
+  const progetti = await prisma.commessa.findMany({
+    where: { clienteId: a.clienteId, OR: [{ stato: { notIn: STATI_PROGETTO_CHIUSO } }, ...(a.commessaId ? [{ id: a.commessaId }] : [])] },
+    select: { id: true, numero: true, anno: true, stato: true, preventivo: { select: { oggetto: true } } },
+    orderBy: [{ anno: "desc" }, { numero: "desc" }],
+  });
+  const collegato = progetti.find((p) => p.id === a.commessaId) ?? null;
+  const nomeProgetto = (p: (typeof progetti)[number]) => `${numeroCommessa(p)}${p.preventivo?.oggetto ? ` — ${p.preventivo.oggetto}` : ""} (${STATI_COMMESSA[p.stato]?.label ?? p.stato.toLowerCase()})`;
   const chiuso = a.stato === "COMPLETATO" || a.stato === "ANNULLATO";
   const ritorno = `/calendario/appuntamento/${a.id}`;
   const btnStato = (stato: string, testo: string, cls: string) => (
@@ -99,6 +109,32 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           </p>
         )}
       </div>
+
+      <section className="card-fase mt-5" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
+        <h2 className="mb-1">📁 Progetto</h2>
+        {collegato ? (
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-sm">Collegato al progetto <b>{nomeProgetto(collegato)}</b>.{rilievo ? " Il rilievo (misure, foto, PDF e materiale) si carica dal progetto." : ""}</p>
+            <Link href={linkProgetto(collegato.id, a.tipo)} className="btn-3d btn-3d-green px-4 py-2 text-sm">➡️ Portami al progetto</Link>
+          </div>
+        ) : progetti.length ? (
+          <p className="mb-2 text-xs text-neutral-600">Questo appuntamento è libero. {rilievo ? "Collegalo al progetto del cliente: nasce il rilievo della pratica e lo carichi da lì con i suoi moduli (misure, foto, PDF, materiale)." : "Collegalo al progetto del cliente per ritrovarlo nella pratica."}</p>
+        ) : (
+          <p className="text-sm text-neutral-600">Il cliente non ha progetti aperti: l&apos;appuntamento resta libero. Il progetto nasce quando un&apos;offerta viene confermata.</p>
+        )}
+        {progetti.filter((p) => p.id !== a.commessaId).length > 0 && (
+          <form action={collegaAppuntamentoProgetto} className="mt-2 flex flex-wrap items-end gap-2">
+            <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+            <label className="text-[11px] font-bold text-neutral-700">{collegato ? "Collega a un altro progetto" : "Progetto del cliente"}
+              <select name="commessaId" required defaultValue="" className="mt-0.5 block rounded border border-neutral-300 px-2 py-1.5 text-sm">
+                <option value="" disabled>— scegli —</option>
+                {progetti.filter((p) => p.id !== a.commessaId).map((p) => <option key={p.id} value={p.id}>{nomeProgetto(p)}</option>)}
+              </select>
+            </label>
+            <button className="btn-3d btn-3d-blue px-4 py-2 text-sm">🔗 Collega al progetto</button>
+          </form>
+        )}
+      </section>
 
       {rilievo ? (
         <>

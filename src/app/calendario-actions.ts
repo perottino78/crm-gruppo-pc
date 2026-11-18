@@ -70,6 +70,7 @@ export async function modificaAppuntamento(formData: FormData) {
   if (!id) return;
   const prima = await prisma.appuntamento.findUnique({ where: { id } });
   if (!prima) return;
+  const rilievo = await rilievoCollegato(prima);
   const dataOra = daOraRoma(str(formData, "dataOra")) ?? prima.dataOra;
   const utenteId = str(formData, "utenteId") ?? prima.utenteId;
   const a = await prisma.appuntamento.update({
@@ -83,6 +84,8 @@ export async function modificaAppuntamento(formData: FormData) {
     },
     include: { utente: true },
   });
+  // il rilievo della pratica collegato segue l'appuntamento
+  if (rilievo) await prisma.rilievo.update({ where: { id: rilievo.id }, data: { dataOra, tecnicoId: utenteId } });
   // se cambia l'incaricato, il vecchio riceve l'annullamento
   if (prima.utenteId !== utenteId) {
     const vecchio = await prisma.utente.findUnique({ where: { id: prima.utenteId } });
@@ -102,7 +105,10 @@ export async function esitoAppuntamento(formData: FormData) {
   const id = str(formData, "id");
   const stato = str(formData, "stato");
   if (!id || !stato || !["COMPLETATO", "ANNULLATO", "CONFERMATO", "PROGRAMMATO"].includes(stato)) return;
+  const rilievo = stato === "ANNULLATO" ? await prisma.appuntamento.findUnique({ where: { id } }).then((x) => (x ? rilievoCollegato(x) : null)) : null;
   const a = await prisma.appuntamento.update({ where: { id }, data: { stato, esito: str(formData, "esito") } });
+  // rilievo annullato dal calendario: si annulla anche quello della pratica collegata
+  if (rilievo) await prisma.rilievo.update({ where: { id: rilievo.id }, data: { stato: "ANNULLATO" } });
   const testi: Record<string, string> = { COMPLETATO: "✅ Appuntamento svolto", ANNULLATO: "❌ Appuntamento annullato", CONFERMATO: "👍 Appuntamento confermato dal cliente", PROGRAMMATO: "Appuntamento riaperto" };
   await diario(a.clienteId, a.commessaId, u.nome, `${testi[stato]}${a.esito ? `: ${a.esito}` : ""}.`);
   let msg = "Salvato.";
@@ -294,4 +300,50 @@ export async function annullaRiunione(formData: FormData) {
   await invitaRiunione(id, "CANCEL");
   revalidatePath("/calendario");
   redirect(`/calendario?giorno=${chiaveGiorno(r.dataOra)}&msg=${encodeURIComponent("Riunione annullata: i partecipanti hanno ricevuto l'avviso.")}`);
+}
+
+/** Il rilievo della pratica che corrisponde a un appuntamento di rilievo collegato (stesso tecnico e stesso momento, ancora da fare). */
+async function rilievoCollegato(a: { tipo: string; commessaId: string | null; utenteId: string; dataOra: Date }) {
+  if (a.tipo !== "SOPRALLUOGO" || !a.commessaId) return null;
+  return prisma.rilievo.findFirst({ where: { commessaId: a.commessaId, tecnicoId: a.utenteId, dataOra: a.dataOra, stato: "PROGRAMMATO" }, select: { id: true } });
+}
+
+/**
+ * «📁 Collega al progetto» (richiesta di Ugo 18/11/2026): l'appuntamento si aggancia a una pratica aperta dello stesso cliente.
+ * Se è un rilievo nasce il rilievo della pratica (stesso tecnico, giorno e ora; nel calendario si vede una volta sola), il task
+ * «Appuntamento di rilievo» passa al tecnico e i documenti caricati per il rilievo passano nella cartella «Rilievi misura» della pratica.
+ */
+export async function collegaAppuntamentoProgetto(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "id"), commessaId = str(formData, "commessaId");
+  const torna = `/calendario/appuntamento/${id}`;
+  if (!id) return;
+  if (!commessaId) redirect(ritorno(formData, torna, "Scegli il progetto da collegare."));
+  const a = await prisma.appuntamento.findUnique({ where: { id }, include: { utente: { select: { id: true, nome: true } }, cliente: true } });
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId! }, select: { id: true, clienteId: true, numero: true, anno: true } });
+  if (!a || !c || c.clienteId !== a.clienteId) redirect(ritorno(formData, torna, "Il progetto non è di questo cliente."));
+  if (a!.commessaId === c!.id) redirect(ritorno(formData, torna, "Già collegato a questo progetto."));
+  const nome = `C${c!.anno}-${String(c!.numero).padStart(3, "0")}`;
+  await prisma.appuntamento.update({ where: { id: a!.id }, data: { commessaId: c!.id } });
+  let creato = false;
+  if (a!.tipo === "SOPRALLUOGO") {
+    const esiste = await prisma.rilievo.findFirst({ where: { commessaId: c!.id, tecnicoId: a!.utenteId, dataOra: a!.dataOra } });
+    if (!esiste && a!.stato !== "ANNULLATO") {
+      const indirizzo = a!.luogo || [a!.cliente.indirizzo, a!.cliente.cap, a!.cliente.comune, a!.cliente.provincia].filter(Boolean).join(", ");
+      await prisma.rilievo.create({ data: { commessaId: c!.id, tecnicoId: a!.utenteId, dataOra: a!.dataOra, indirizzo: indirizzo || null, note: a!.note, stato: "PROGRAMMATO" } });
+      creato = true;
+      const { chiudiTaskFase } = await import("@/app/flusso-actions");
+      await chiudiTaskFase(c!.id, "RILIEVO_APP", a!.utente).catch(() => false);
+    }
+    // documenti caricati per questo rilievo nella scheda del cliente → cartella «Rilievi misura» della pratica
+    await prisma.documento.updateMany({
+      where: { entita: "CLIENTE", entitaId: a!.clienteId, cartella: "Rilievi misura", createdAt: { gte: a!.createdAt } },
+      data: { entita: "COMMESSA", entitaId: c!.id },
+    });
+  }
+  await diario(a!.clienteId, c!.id, u.nome, `🔗 ${nomeTipoAppuntamento(a!.tipo)} del ${giornoBreve(chiaveGiorno(a!.dataOra))} ore ${oraRoma(a!.dataOra)} con ${a!.utente.nome} collegato al progetto${creato ? ": rilievo programmato nella pratica" : ""}.`);
+  revalidatePath("/calendario");
+  revalidatePath(`/commesse/${c!.id}`);
+  redirect(ritorno(formData, torna, `Collegato al progetto ${nome}.${creato ? " Il rilievo ora si carica dal progetto." : ""}`));
 }
