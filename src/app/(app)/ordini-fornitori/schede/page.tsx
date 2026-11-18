@@ -6,11 +6,11 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puoGestireOrdini } from "@/lib/ordini/server";
 import { salvaModelloScheda, eliminaModelloScheda } from "@/app/schede-produzione-actions";
-import { MODELLO_PREDEFINITO, SEGNAPOSTO_FISSI, campiDaCompilare, compilaScheda, nomeCampo } from "@/lib/ordini/scheda-produzione";
+import { MODELLI_PRONTI, MODELLO_PREDEFINITO, SEGNAPOSTO_FISSI, campiDaCompilare, compilaScheda, nomeCampo } from "@/lib/ordini/scheda-produzione";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function SchedeProduzionePage({ searchParams }: { searchParams: Promise<{ modifica?: string; nuovo?: string; salvato?: string; eliminato?: string; errore?: string }> }) {
+export default async function SchedeProduzionePage({ searchParams }: { searchParams: Promise<{ base?: string; modifica?: string; nuovo?: string; salvato?: string; eliminato?: string; errore?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
   const q = await searchParams;
@@ -19,7 +19,8 @@ export default async function SchedeProduzionePage({ searchParams }: { searchPar
     prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" }, attivo: true }, select: { id: true, ragioneSociale: true }, orderBy: { ragioneSociale: "asc" } }),
   ]);
   const inModifica = q.modifica ? modelli.find((m) => m.id === q.modifica) ?? null : null;
-  const form = inModifica ?? (q.nuovo ? { id: "", nome: "", fornitoreId: null as string | null, html: MODELLO_PREDEFINITO, attivo: true } : null);
+  const base = MODELLI_PRONTI.find((b) => b.chiave === q.base);
+  const form = inModifica ?? (q.nuovo ? { id: "", nome: base && base.chiave !== "standard" ? base.nome : "", fornitoreId: null as string | null, html: base?.html ?? MODELLO_PREDEFINITO, attivo: true } : null);
   const esempio = form ? compilaScheda(form.html, { ordine: "123/2026", data: "18/11/2026", fornitore: "Fornitore Esempio srl", cliente: "Mario Rossi", commessa: "C2026-001", indirizzo: "Via Roma 1, Torino", consegna: "30/11/2026", misure_rilievo: "Soggiorno – finestra 2 ante: L 1200 × H 1400" }, '<table class="righe"><tr><th>#</th><th>Descrizione</th><th>Q.tà</th></tr><tr><td>1</td><td>Finestra 2 ante bianca</td><td>2 pz</td></tr></table>') : "";
 
   return (
@@ -38,6 +39,7 @@ export default async function SchedeProduzionePage({ searchParams }: { searchPar
           <h2 className="font-bold">I modelli ({modelli.length})</h2>
           <Link href="/ordini-fornitori/schede?nuovo=1" className="btn-3d btn-3d-green text-sm px-3 py-1.5">➕ Nuovo modello</Link>
         </div>
+        <p className="text-xs text-neutral-700 mb-2">Parti da un modello già pronto: {MODELLI_PRONTI.map((b, i) => <span key={b.chiave}>{i > 0 && " · "}<Link href={`/ordini-fornitori/schede?nuovo=1&base=${b.chiave}`} className="underline text-blue-800" title={b.descrizione}>{b.nome}</Link></span>)}</p>
         {modelli.length === 0 ? <p className="text-sm text-neutral-600">Nessun modello ancora. Premi «Nuovo modello»: parte da una scheda già pronta (dati dell&apos;ordine, tabella del materiale, misure definitive, note di produzione).</p> : (
           <ul className="divide-y divide-neutral-100 text-sm">
             {modelli.map((m) => (
@@ -69,7 +71,7 @@ export default async function SchedeProduzionePage({ searchParams }: { searchPar
             <div className="text-xs text-neutral-700 rounded bg-neutral-50 border border-neutral-200 p-2">
               <p className="font-bold mb-1">Segnaposto riempiti dal CRM:</p>
               <p>{Object.entries(SEGNAPOSTO_FISSI).map(([k, v]) => <span key={k} className="inline-block mr-3"><code className="bg-white border px-1 rounded">{`{{${k}}}`}</code> {v}</span>)}</p>
-              <p className="mt-1">Qualsiasi altro <code className="bg-white border px-1 rounded">{"{{nome_campo}}"}</code> diventa una casella da compilare quando prepari la scheda dall&apos;ordine (es. <code>{"{{misure_definitive}}"}</code>).</p>
+              <p className="mt-1">Qualsiasi altro <code className="bg-white border px-1 rounded">{"{{nome_campo}}"}</code> diventa una casella da compilare quando prepari la scheda dall&apos;ordine (es. <code>{"{{misure_definitive}}"}</code>). Per le tabelle riga per riga usa <code>{"{{tab_gruppo_1_colonna}}"}</code>, <code>{"{{tab_gruppo_2_colonna}}"}</code>… (es. <code>{"{{tab_dimensioni_1_L}}"}</code>): ogni gruppo diventa una piccola tabella da compilare.</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button className="btn-3d btn-3d-green text-sm px-4 py-2">💾 Salva il modello</button>
