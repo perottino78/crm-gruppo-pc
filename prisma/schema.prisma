@@ -428,6 +428,8 @@ model Configurazione {
 
 model Preventivo {
   id                   String              @id @default(cuid())
+  // Pagamento splittato con finanziamento: { tabellaId, rate, importoFinanziato } (vedi src/lib/finanziamenti). Null = nessuno.
+  finanziamento        Json?
   cliente              Cliente             @relation(fields: [clienteId], references: [id])
   clienteId            String
   brand                Brand               @relation(fields: [brandId], references: [id])
