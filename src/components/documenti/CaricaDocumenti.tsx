@@ -3,7 +3,7 @@
 import { useActionState, useRef, useEffect } from "react";
 import { caricaDocumenti, type EsitoDocumenti } from "@/app/documenti-actions";
 
-export default function CaricaDocumenti({ entita, entitaId, cartelle }: { entita: string; entitaId: string; cartelle: string[] }) {
+export default function CaricaDocumenti({ entita, entitaId, cartelle, nuovaCartella = true }: { entita: string; entitaId: string; cartelle: string[]; nuovaCartella?: boolean }) {
   const [esito, invia, inCorso] = useActionState<EsitoDocumenti | null, FormData>(caricaDocumenti, null);
   const form = useRef<HTMLFormElement>(null);
   useEffect(() => { if (esito?.ok) form.current?.reset(); }, [esito]);
@@ -15,9 +15,11 @@ export default function CaricaDocumenti({ entita, entitaId, cartelle }: { entita
       <label className="text-xs font-semibold">Cartella
         <select name="cartella" className={`${inp} block`} defaultValue={cartelle[0]}>{cartelle.map((c) => <option key={c}>{c}</option>)}</select>
       </label>
-      <label className="text-xs font-semibold">…oppure nuova cartella
-        <input name="nuovaCartella" placeholder="es. Varianti" maxLength={60} className={`${inp} block w-40`} />
-      </label>
+      {nuovaCartella && (
+        <label className="text-xs font-semibold">…oppure nuova cartella
+          <input name="nuovaCartella" placeholder="es. Varianti" maxLength={60} className={`${inp} block w-40`} />
+        </label>
+      )}
       <label className="text-xs font-semibold">File (PDF, foto, Word, Excel… max 4 MB l&apos;uno)
         <input type="file" name="file" multiple required className="block text-sm" />
       </label>

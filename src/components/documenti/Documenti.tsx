@@ -8,13 +8,14 @@ const dim = (b: number) => (b < 1024 * 1024 ? `${Math.max(1, Math.round(b / 1024
 const icona = (m: string) => (m === "application/pdf" ? "📕" : m.startsWith("image/") ? "🖼️" : /sheet|excel|csv/.test(m) ? "📊" : /word/.test(m) ? "📝" : "📄");
 
 /** Cartelle documenti di un cliente, preventivo, commessa o ordine fornitore. */
-export default async function Documenti({ entita, entitaId, titolo = "Documenti" }: { entita: keyof typeof CARTELLE; entitaId: string; titolo?: string }) {
+/** `soloCartelle`: mostra e fa caricare solo queste cartelle (es. «Rilievi misura» nell'appuntamento di rilievo; le altre restano nel progetto). */
+export default async function Documenti({ entita, entitaId, titolo = "Documenti", soloCartelle }: { entita: keyof typeof CARTELLE; entitaId: string; titolo?: string; soloCartelle?: string[] }) {
   const u = await getCurrentUser();
   if (!u || !(await puoVedereEntita(u, entita, entitaId))) return null;
-  const docs = await documentiDi(entita, entitaId);
-  const cartelle = [...new Set([...CARTELLE[entita], ...docs.map((d) => d.cartella)])];
+  const docs = (await documentiDi(entita, entitaId)).filter((d) => !soloCartelle || soloCartelle.includes(d.cartella));
+  const cartelle = soloCartelle ?? [...new Set([...CARTELLE[entita], ...docs.map((d) => d.cartella)])];
   // nel progetto (commessa) si vedono tutte le cartelle anche vuote, come in BConsole; altrove solo quelle con file
-  const piene = entita === "COMMESSA" ? cartelle : cartelle.filter((c) => docs.some((d) => d.cartella === c));
+  const piene = entita === "COMMESSA" || soloCartelle ? cartelle : cartelle.filter((c) => docs.some((d) => d.cartella === c));
   return (
     <section className="bg-white border border-neutral-200 rounded-lg p-4 print:hidden">
       <h2 className="font-bold text-neutral-900 mb-2">📁 {titolo} <span className="text-xs font-normal text-neutral-500">({docs.length} file)</span></h2>
@@ -47,7 +48,7 @@ export default async function Documenti({ entita, entitaId, titolo = "Documenti"
           );
         })}
       </div>
-      <CaricaDocumenti entita={entita} entitaId={entitaId} cartelle={cartelle} />
+      <CaricaDocumenti entita={entita} entitaId={entitaId} cartelle={cartelle} nuovaCartella={!soloCartelle} />
     </section>
   );
 }
