@@ -212,12 +212,19 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                           tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
                         )
                       : ro.optional.nome;
-                    return `${nomeOptional}${ro.nota ? ` («${ro.nota}»)` : ""}${ro.quantita > 1 ? ` ×${ro.quantita}` : ""}`;
+                    // il prezzo di ogni optional accanto al suo nome (richiesta di Debora 18/11/2026); con l'offerta «a corpo» niente prezzi
+                    const prezzoOpt = ro.quantita * ro.prezzoUnitario;
+                    return `${nomeOptional}${ro.nota ? ` («${ro.nota}»)` : ""}${ro.quantita > 1 ? ` ×${ro.quantita}` : ""}${!aCorpo && prezzoOpt !== 0 ? ` + ${eur(prezzoOpt)}` : ""}`;
                   }),
                 }).map((v) => (
                   <li key={v.etichetta}><span className="text-neutral-500">{v.etichetta}:</span> {v.valore}</li>
                 ))}
               </ul>
+              {!aCorpo && subOptionali + r.optionalPrezzo !== 0 && (
+                <p className="mt-1 text-xs text-neutral-700">
+                  Prodotto {eur(r.quantita * r.prezzoUnitario)} + optional {eur(subOptionali + r.optionalPrezzo)} = <b>{eur(subtotale)}</b>
+                </p>
+              )}
               {(() => {
                 const mie = fileRighe.filter((f) => f.entitaId === r.id);
                 const foto = mie.filter((f) => f.mime.startsWith("image/"));
@@ -289,7 +296,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
     ? `${preventivo.numeroOfferta}/${anno}`
     : `${preventivo.id.slice(-6).toUpperCase()}/${anno}`; // fallback per preventivi creati prima della numerazione progressiva
 
-  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   return (
     <div className="max-w-3xl mx-auto bg-white text-neutral-900 print:max-w-none">

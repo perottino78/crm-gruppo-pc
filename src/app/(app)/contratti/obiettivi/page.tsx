@@ -13,7 +13,7 @@ import BottoneConferma from "@/components/BottoneConferma";
 import { emailObiettiviAttiva } from "@/lib/provvigioni/obiettivi-server";
 import { salvaObiettiviCommerciale, impostaEmailObiettivi, mandaOraEmailObiettivi, creaObiettivoSuMisura, eliminaObiettivoSuMisura } from "@/app/provvigioni-actions";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" as unknown as boolean });
 
 export default async function ObiettiviPage({ searchParams }: { searchParams: Promise<{ mese?: string; ok?: string; errore?: string }> }) {
   const u = await getCurrentUser();

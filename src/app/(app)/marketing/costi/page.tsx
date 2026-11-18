@@ -9,7 +9,7 @@ import { provenienzaDaFonte, PROVENIENZE } from "@/lib/clienti/provenienza";
 import { costiPerCanale, limitiMese, meseValido } from "@/lib/marketing/costi";
 import { salvaSpeseMarketing } from "@/app/spese-marketing-actions";
 
-const eur = (n: number | null) => (n === null ? "—" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: n >= 100 ? 0 : 2 }));
+const eur = (n: number | null) => (n === null ? "—" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean, maximumFractionDigits: n >= 100 ? 0 : 2 }));
 const meseNome = (m: string) => new Date(`${m}-15T12:00:00Z`).toLocaleDateString("it-IT", { month: "long", year: "numeric", timeZone: "Europe/Rome" });
 const meseAttuale = () => new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" }).slice(0, 7);
 

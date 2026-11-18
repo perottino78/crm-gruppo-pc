@@ -150,7 +150,7 @@ export default async function PreventivoPage({
 
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
-  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
   // rendering della riga — riusato per calcolare il totale di ogni sezione.
@@ -462,7 +462,7 @@ export default async function PreventivoPage({
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
-                    <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+                    <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</p>
                   </div>
                 </div>
               </RigaAzioni>
@@ -541,7 +541,7 @@ export default async function PreventivoPage({
                               tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
                             )
                           : ro.optional.nome}
-                        {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                        {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })})
                       </span>
                       <form action={rimuoviOptionalDaRiga}>
                         <input type="hidden" name="id" value={ro.id} />
@@ -1339,7 +1339,7 @@ export default async function PreventivoPage({
                 <div className="px-4 pt-3 pb-1.5 flex items-center justify-between">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Senza sezione</p>
                   <span className="text-xs font-bold text-neutral-600">
-                    {totaleSenzaSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                    {totaleSenzaSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
                   </span>
                 </div>
               )}
@@ -1376,7 +1376,7 @@ export default async function PreventivoPage({
                       </div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="btn-3d bg-white text-indigo-900 border-indigo-300 text-sm px-3 py-1.5 cursor-default">
-                          Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                          Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
                         </span>
                         {righe.length === 0 && (
                           <form action={eliminaSezione}>

@@ -11,7 +11,8 @@ export const CONDIZIONI_CONSEGNA_DEFAULT =
 // Testi fissi accanto e sotto il prezzo finale dell'offerta stampata (richiesta di Rocco, nov 2026).
 export const NOTA_FATTIBILITA = "Previa fattibilità tecnica";
 export const SPESE_ISTRUTTORIA = 400;
-export const CLAUSOLA_ISTRUTTORIA = `Spese di istruttoria ai sensi dell'articolo n. 1 delle condizioni generali del contratto: € ${SPESE_ISTRUTTORIA}`;
+// Testo richiesto da Debora (18/11/2026): «spese di istruttoria ai sensi dell'articolo n. 1 delle condizioni generali del contratto (nel caso di recesso) di € 400,00 + iva»
+export const CLAUSOLA_ISTRUTTORIA = `Spese di istruttoria ai sensi dell'articolo n. 1 delle condizioni generali del contratto (nel caso di recesso) di € ${SPESE_ISTRUTTORIA.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} + IVA`;
 
 /** «Offerta valida fino al 26/11/2026» (data di Roma), o null se l'offerta non ha scadenza. */
 export function testoValidita(scadenza: Date | null | undefined): string | null {

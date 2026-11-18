@@ -39,7 +39,7 @@ async function variabili(commessaId: string, ufficioPrec?: string | null) {
     cliente: c.cliente.nome,
     commessa: `${c.numero}/${c.anno}`,
     offerta: c.preventivo.numeroOfferta ? String(c.preventivo.numeroOfferta) : "",
-    importo: c.totaleVendita.toLocaleString("it-IT", { style: "currency", currency: "EUR" }),
+    importo: c.totaleVendita.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean }),
     commerciale: c.responsabile?.nome ?? "",
     ufficioPrecedente: nomeUfficio(ufficioPrec),
   };

@@ -108,7 +108,7 @@ export default async function PreventiviPage({
                       {p.duplicatoDaId ? " · copia" : ""}
                     </p>
                     <p className="text-xs text-neutral-600">
-                      {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                      {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
                     </p>
                     <p className="text-xs text-neutral-600">{p.commerciale.nome}</p>
                     <div className="flex flex-wrap gap-1 mt-2">

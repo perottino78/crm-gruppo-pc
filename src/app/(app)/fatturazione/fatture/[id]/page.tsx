@@ -12,7 +12,7 @@ import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazion
 import { controlliEmissione, emissioneReale } from "@/lib/fatturazione/server";
 import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura } from "@/app/fatturazione-actions";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-full disabled:bg-neutral-50 disabled:text-neutral-700";
 const giornoInput = (d: Date) => d.toISOString().slice(0, 10);

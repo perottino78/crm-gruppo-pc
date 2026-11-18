@@ -6,7 +6,7 @@ import { STATI_DDT } from "@/lib/fatturazione/tabelle";
 import { numeroDdt } from "@/lib/fatturazione/calcoli";
 import { fatturaDaDdt } from "@/app/fatturazione-actions";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 type P = { stato?: string; anno?: string; q?: string; errore?: string };
 

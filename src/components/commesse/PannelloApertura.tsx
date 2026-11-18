@@ -11,7 +11,7 @@ export type DatiApertura = {
 };
 
 const giorno = (d: Date | null) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "");
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
 export default function PannelloApertura({ passo, d, registraFattura, creaProgetto, registraBenvenuto, ok, avviso }: {
   passo: Extract<ChiavePasso, "FATTURA" | "PROGETTO" | "BENVENUTO">; d: DatiApertura;
