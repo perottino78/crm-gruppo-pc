@@ -11,6 +11,7 @@ import { leggiNumero, leggiSconti, scriviSconti, calcolaArticolo, scontoEquivale
 import { leggiFile, type Tabella } from "@/lib/articoli/foglio";
 import { analizzaListino, mappaColonne, contaAnteprima, DIVISIONI, type Opzioni, type DatiArticolo } from "@/lib/articoli/importa";
 import { puoModificareArticoli, categorieRegola, ricalcolaArticoli, conFiglie, prossimiCodici, articoliPerConfronto, CAMPI_ESISTENTE } from "@/lib/articoli/server";
+import { convertiInWebp } from "@/lib/immagini/webp";
 import { MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/calcoli";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
@@ -46,6 +47,8 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
   if (metodo === "RICARICO" && (valore === null || valore < 1)) return { ok: false, messaggio: "Il ricarico è un coefficiente sul costo, almeno 1 (es. 3,3)." };
   if (metodo === "MARGINE" && (valore === null || valore < 0 || valore >= 100)) return { ok: false, messaggio: "Il margine va tra 0 e 99%." };
   const listino = num(fd, "prezzoListino");
+  // Foto scelta dal computer (già ridotta dal browser): non resta nella riga dell'articolo, va nei documenti
+  const fotoNuova = str(fd, "immagineUrl")?.startsWith("data:image/") ? str(fd, "immagineUrl") : null;
   const dati = {
     codiceFornitore: str(fd, "codiceFornitore"), ean: str(fd, "ean"), descrizione, descrizioneEstesa: str(fd, "descrizioneEstesa"),
     divisione: DIVISIONI.includes(str(fd, "divisione") ?? "") ? str(fd, "divisione") : null,
@@ -53,7 +56,7 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
     aliquotaIva: num(fd, "aliquotaIva") ?? 22, prezzoListino: listino, sconti: sconti.length ? scriviSconti(sconti) : null,
     costoAcquisto: listino === null ? num(fd, "costoAcquisto") : null,
     metodoPrezzo: metodo, valorePrezzo: metodo === "RICARICO" || metodo === "MARGINE" ? valore : null,
-    prezzoVendita: num(fd, "prezzoVendita"), immagineUrl: str(fd, "immagineUrl"), note: str(fd, "note"), attivo: fd.get("attivo") === "1",
+    prezzoVendita: num(fd, "prezzoVendita"), immagineUrl: fotoNuova ? null : str(fd, "immagineUrl"), note: str(fd, "note"), attivo: fd.get("attivo") === "1",
   };
   const cat = await categorieRegola();
   const c = calcolaArticolo(dati, cat);
@@ -77,6 +80,14 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
       return a;
     });
     nuovoId = a.id;
+  }
+  if (fotoNuova && nuovoId) {
+    const m = /^data:(image\/[a-z+]+);base64,(.+)$/.exec(fotoNuova);
+    if (m) {
+      const buf = Buffer.from(m[2], "base64");
+      const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: nuovoId, cartella: "Foto", nome: m[1].includes("webp") ? "foto-articolo.webp" : "foto-articolo.jpg", mime: m[1], dimensione: buf.length, contenuto: buf, caricatoDaNome: u.nome } });
+      await prisma.articolo.update({ where: { id: nuovoId }, data: { immagineUrl: `/api/documenti/${d.id}` } });
+    }
   }
   aggiorna(nuovoId!);
   if (!id) {
@@ -121,7 +132,8 @@ export async function caricaFotoArticolo(fd: FormData) {
   const f = fd.get("foto");
   if (!id || !(f instanceof File) || !f.size) return;
   if (f.size > MAX_DOCUMENTO || !/^image\/(jpeg|png|webp|gif)$/.test(f.type)) return;
-  const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: id, cartella: "Foto", nome: nomeFileSicuro(f.name), mime: f.type, dimensione: f.size, contenuto: Buffer.from(await f.arrayBuffer()), caricatoDaNome: u.nome } });
+  const w = await convertiInWebp({ contenuto: Buffer.from(await f.arrayBuffer()), mime: f.type, nome: f.name }, 1200, 78);
+  const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: id, cartella: "Foto", nome: nomeFileSicuro(w.nome), mime: w.mime, dimensione: w.contenuto.length, contenuto: w.contenuto, caricatoDaNome: u.nome } });
   await prisma.articolo.update({ where: { id }, data: { immagineUrl: `/api/documenti/${d.id}` } });
   aggiorna(id);
 }

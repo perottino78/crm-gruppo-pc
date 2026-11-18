@@ -1,5 +1,6 @@
 "use server";
 
+import { convertiInWebp } from "@/lib/immagini/webp";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth";
@@ -28,7 +29,9 @@ export async function caricaDocumenti(_: EsitoDocumenti | null, fd: FormData): P
     const mime = f.type || "application/octet-stream";
     if (f.size > MAX_DOCUMENTO) { scartati.push(`${f.name} (oltre 4 MB)`); continue; }
     if (!TIPI_AMMESSI.test(mime)) { scartati.push(`${f.name} (tipo non ammesso)`); continue; }
-    await prisma.documento.create({ data: { entita, entitaId, cartella, nome: nomeFileSicuro(f.name), mime, dimensione: f.size, contenuto: Buffer.from(await f.arrayBuffer()), caricatoDaNome: u.nome } });
+    // le foto diventano WebP leggero (le altre cose, PDF compresi, restano come sono)
+    const w = await convertiInWebp({ contenuto: Buffer.from(await f.arrayBuffer()), mime, nome: f.name });
+    await prisma.documento.create({ data: { entita, entitaId, cartella, nome: nomeFileSicuro(w.nome), mime: w.mime, dimensione: w.contenuto.length, contenuto: w.contenuto, caricatoDaNome: u.nome } });
     caricati++;
   }
   const p = percorso(entita, entitaId);

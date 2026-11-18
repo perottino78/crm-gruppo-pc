@@ -3,6 +3,7 @@
 // «🆘 Segnala un problema» (richiesta di Ugo, nov 2026): in basso nel menu, vicino al proprio nome.
 // Prende da solo il link della pagina; la schermata si fa con il pulsante, si incolla (Ctrl/Cmd+V) o si sceglie da file.
 import { useEffect, useRef, useState } from "react";
+import { canvasInWebpBlob } from "@/lib/immagini/webp-client";
 import { createPortal } from "react-dom";
 import { inviaSegnalazione, type EsitoSegnalazione } from "@/app/segnalazioni-actions";
 
@@ -17,10 +18,10 @@ async function riduci(blob: Blob, nome: string): Promise<Img> {
     const c = document.createElement("canvas");
     c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
     c.getContext("2d")!.drawImage(bmp, 0, 0, c.width, c.height);
-    const jpg = await new Promise<Blob | null>((r) => c.toBlob(r, "image/jpeg", 0.8));
-    if (!jpg) throw new Error();
-    const n = nome.replace(/\.[a-z0-9]+$/i, "") + ".jpg";
-    return { nome: n, blob: jpg, url: URL.createObjectURL(jpg) };
+    const r = await canvasInWebpBlob(c, 0.8);
+    if (!r) throw new Error();
+    const n = nome.replace(/\.[a-z0-9]+$/i, "") + "." + r.est;
+    return { nome: n, blob: r.blob, url: URL.createObjectURL(r.blob) };
   } catch {
     return { nome, blob, url: URL.createObjectURL(blob) };
   }

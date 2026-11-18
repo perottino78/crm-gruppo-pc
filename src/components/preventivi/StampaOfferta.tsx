@@ -293,12 +293,12 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
 
   return (
     <div className="max-w-3xl mx-auto bg-white text-neutral-900 print:max-w-none">
-      <style>{`@media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }`}</style>
+      <style>{`@page { size: A4; margin: 10mm; } @media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } tr, .no-spezza { break-inside: avoid; page-break-inside: avoid; } }`}</style>
       <PrintButton />
 
       {/* ===== PAGINA 1 — COPERTINA / OFFERTA ===== */}
       <section className="p-6 print:p-4 print:break-after-page">
-        <div className="relative rounded-2xl border border-neutral-200 shadow-sm print:shadow-none overflow-hidden">
+        <div className="relative rounded-2xl border border-neutral-200 shadow-sm print:shadow-none overflow-hidden print:overflow-visible print:border-0 print:rounded-none">
         <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${info.primary}, ${info.accent})` }} />
         <div className="p-6 print:p-6">
         <div className="flex items-center justify-between pb-4 mb-6 border-b" style={{ borderColor: `${info.primary}33` }}>
@@ -424,13 +424,14 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           </tbody>
         </table>
 
-        <div className="flex flex-col-reverse sm:flex-row sm:items-end sm:justify-between gap-4 mb-2 print:flex-row print:items-end print:justify-between">
+        <div className="no-spezza">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-end sm:justify-between gap-4 mb-2 print:block print:overflow-visible no-spezza">
           {/* accanto al prezzo finale: fattibilità e validità (richiesta di Rocco) */}
           <div className="text-sm">
             <p className="font-semibold" style={{ color: info.primary }}>{NOTA_FATTIBILITA}</p>
             {testoValidita(preventivo.scadenza) && <p className="text-neutral-700 mt-0.5">{testoValidita(preventivo.scadenza)}</p>}
           </div>
-          <div className="w-72 max-w-full rounded-xl border overflow-hidden" style={{ borderColor: `${info.primary}33` }}>
+          <div className="w-72 max-w-full rounded-xl border overflow-hidden print:overflow-visible no-spezza print:ml-auto print:mt-2" style={{ borderColor: `${info.primary}33` }}>
             <div className="p-3 text-sm" style={{ background: info.primarySoft }}>
               {!prezzoManualeAttivo && (
                 <div className="flex justify-between py-1">
@@ -491,6 +492,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           <RigaFirma label="Luogo e data" />
           <RigaFirma label="Il Cliente (per accettazione)" sub={preventivo.cliente.nome} />
           <RigaFirma label="Il Fornitore" sub={isPC ? "P&C S.r.l. Unipersonale" : isSolaris ? "P&C S.r.l. Unipersonale — Solaris" : preventivo.brand.nome} />
+        </div>
         </div>
         </div>
         </div>

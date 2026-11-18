@@ -1,5 +1,6 @@
 "use client";
 
+import { canvasInWebp } from "@/lib/immagini/webp-client";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -15,12 +16,18 @@ export default function SelettoreImmagine({
   defaultValue,
   label,
   inviaSubito = false,
+  maxLato = 1600,
+  qualita = 0.82,
 }: {
   name: string;
   defaultValue?: string | null;
   label: string;
   /** salva da sola appena si sceglie o si toglie la foto (invia il modulo che la contiene) */
   inviaSubito?: boolean;
+  /** lato massimo in pixel dopo la riduzione (più basso = file più leggero) */
+  maxLato?: number;
+  /** qualità JPEG da 0 a 1 */
+  qualita?: number;
 }) {
   const [valore, setValore] = useState(defaultValue ?? "");
   const nascosto = useRef<HTMLInputElement>(null);
@@ -34,7 +41,7 @@ export default function SelettoreImmagine({
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const MAX_MB_ORIGINALE = 12;
-  const MAX_LATO_PX = 1600;
+  const MAX_LATO_PX = maxLato;
 
   function ridimensionaEComprimi(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -59,7 +66,7 @@ export default function SelettoreImmagine({
             return;
           }
           ctx.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL("image/jpeg", 0.82));
+          resolve(canvasInWebp(canvas, qualita));
         };
         img.src = reader.result as string;
       };

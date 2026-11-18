@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { salvaArticolo, creaCategoriaRapida, type EsitoArticolo } from "@/app/articoli-actions";
+import SelettoreImmagine from "@/components/SelettoreImmagine";
 import ScegliPosizioneListino from "@/components/articoli/ScegliPosizioneListino";
 import { calcolaArticolo, leggiNumero, euro, perc, testoRegola, UNITA, ALIQUOTE, METODI, type CategoriaRegola } from "@/lib/articoli/prezzi";
 
@@ -191,7 +192,7 @@ export default function SchedaArticolo({ articolo: a, categorie, fornitori, divi
         </section>
 
         <section className="bg-white border border-neutral-200 rounded-lg p-4 grid md:grid-cols-6 gap-3 text-sm">
-          <label className="md:col-span-4">Immagine (indirizzo web)<input name="immagineUrl" defaultValue={a.immagineUrl ?? ""} placeholder="https://… oppure carica la foto qui sotto" className={inp} /></label>
+          <div className="md:col-span-4"><SelettoreImmagine name="immagineUrl" defaultValue={a.immagineUrl ?? ""} label="Immagine dell'articolo (si riduce da sola, resta leggera)" maxLato={900} qualita={0.78} /></div>
           <label className="md:col-span-2 flex items-center gap-2 mt-5"><input type="checkbox" name="attivo" value="1" defaultChecked={a.attivo ?? true} /> Articolo attivo</label>
           <label className="md:col-span-6">Note<textarea name="note" defaultValue={a.note ?? ""} rows={2} className={inp} /></label>
         </section>

@@ -212,6 +212,14 @@ async function main() {
   verifica(res.status === 401, "l'AI del catalogo è riservata agli amministratori");
   globalThis.fetch = vero;
 
+  g.__utente = capo;
+  // Foto scelta dal computer: va nei documenti, nell'articolo resta solo il link
+  const pix = "data:image/jpeg;base64," + Buffer.from("fotoleggera").toString("base64");
+  await redirectA(A.salvaArticolo(null, fd({ codice: "FOTO-1", descrizione: "Articolo con foto", categoriaId: dep.id, fornitoreId: acqua.id, costoAcquisto: "2", attivo: "1", immagineUrl: pix })));
+  const conFoto = await prisma.articolo.findFirst({ where: { codice: "FOTO-1" } });
+  const docFoto = conFoto ? await prisma.documento.findFirst({ where: { entita: "ARTICOLO", entitaId: conFoto.id } }) : null;
+  verifica(!!docFoto && conFoto?.immagineUrl === `/api/documenti/${docFoto.id}` && docFoto.mime === "image/jpeg", "foto dal computer: salvata nei documenti, nell'articolo solo il link", conFoto?.immagineUrl);
+
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   await prisma.$disconnect();
   process.exit(ko ? 1 : 0);
