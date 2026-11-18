@@ -9,17 +9,17 @@ export const FAMIGLIA_SERVIZI = "SERVIZI";
 export const GRUPPO_SERVIZI = "SERVIZI E PRATICHE";
 export const PREFISSO_SERVIZI = "SERVIZI_";
 
-export type ServizioListino = { tipologia: string; nome: string; descrizione: string; varianti: { nome: string; prezzo: number }[] };
+export type ServizioListino = { tipologia: string; nome: string; descrizione: string; immagine: string; varianti: { nome: string; prezzo: number }[] };
 
 /** I servizi di partenza (prezzi netti, IVA a parte), presi dagli optional che c'erano nei listini. */
 export const SERVIZI_LISTINO: ServizioListino[] = [
   {
-    tipologia: "SERVIZI_ENEA", nome: "Pratica ENEA",
+    tipologia: "SERVIZI_ENEA", immagine: "/immagini/servizi/enea.svg", nome: "Pratica ENEA",
     descrizione: "Gestione e presentazione della pratica ENEA per le detrazioni fiscali: la seguiamo noi dall'inizio alla fine.",
     varianti: [{ nome: "Pratica ENEA (gestione e presentazione)", prezzo: 350 }],
   },
   {
-    tipologia: "SERVIZI_AUTOSCALA", nome: "Autoscala",
+    tipologia: "SERVIZI_AUTOSCALA", immagine: "/immagini/servizi/autoscala.svg", nome: "Autoscala",
     descrizione: "Noleggio dell'autoscala per portare il materiale ai piani alti quando non passa dalle scale.",
     varianti: [
       { nome: "Autoscala per la portata al piano", prezzo: 250 },
@@ -29,18 +29,36 @@ export const SERVIZI_LISTINO: ServizioListino[] = [
     ],
   },
   {
-    tipologia: "SERVIZI_FACCHINAGGIO", nome: "Facchinaggio",
+    tipologia: "SERVIZI_FACCHINAGGIO", immagine: "/immagini/servizi/facchinaggio.svg", nome: "Facchinaggio",
     descrizione: "Movimentazione e trasporto a mano del materiale fino al piano (quantità = numero di piani).",
     varianti: [{ nome: "Facchinaggio al piano (per piano)", prezzo: 70 }],
+  },
+  // Voci aggiunte il 18/11/2026 (richiesta di Ugo, come su BConsole): i prezzi a 0 sono «da definire» e si scrivono dalla scheda del servizio
+  // (Prodotti › listino › servizio): chi compila il listino può anche rinominare, aggiungere o togliere le voci.
+  {
+    tipologia: "SERVIZI_POSA", immagine: "/immagini/servizi/posa.svg", nome: "Posa in opera",
+    descrizione: "Posa a regola d'arte con la nostra squadra: a corpo, a ore o a giornata.",
+    varianti: [{ nome: "Posa a corpo", prezzo: 0 }, { nome: "Posa a ore (per ora)", prezzo: 0 }, { nome: "Posa a giornata (per giorno di squadra)", prezzo: 0 }],
+  },
+  {
+    tipologia: "SERVIZI_TRASPORTO", immagine: "/immagini/servizi/trasporto.svg", nome: "Trasporto",
+    descrizione: "Trasporto e consegna del materiale presso il cantiere.",
+    varianti: [{ nome: "Trasporto e consegna (a corpo)", prezzo: 0 }, { nome: "Trasporto fuori zona (per km)", prezzo: 0 }],
+  },
+  {
+    tipologia: "SERVIZI_ASSISTENZA", immagine: "/immagini/servizi/assistenza.svg", nome: "Assistenza tecnica",
+    descrizione: "Intervento del nostro tecnico: costo di chiamata a uscita oppure a ore.",
+    varianti: [{ nome: "Costo chiamata (a chiamata)", prezzo: 80 }, { nome: "Assistenza a orario (per ora)", prezzo: 80 }],
   },
 ];
 
 /** Prodotti (righe del listino «a nome», senza misura) dei servizi. */
-export function prodottiServizi() {
-  return SERVIZI_LISTINO.flatMap((s) => s.varianti.map((v) => ({ tipologia: s.tipologia, colore: v.nome, larghezzaMm: 0, altezzaMm: 0, prezzoBase: v.prezzo })));
+export function prodottiServizi(soloTipologie?: string[]) {
+  return SERVIZI_LISTINO.filter((s) => !soloTipologie || soloTipologie.includes(s.tipologia)).flatMap((s) => s.varianti.map((v) => ({ tipologia: s.tipologia, colore: v.nome, larghezzaMm: 0, altezzaMm: 0, prezzoBase: v.prezzo })));
 }
 
 export const labelServizio = (tipologia: string) => SERVIZI_LISTINO.find((s) => s.tipologia === tipologia)?.nome ?? null;
+export const immagineServizio = (tipologia: string) => SERVIZI_LISTINO.find((s) => s.tipologia === tipologia)?.immagine ?? null;
 export const descrizioneServizio = (tipologia: string) => SERVIZI_LISTINO.find((s) => s.tipologia === tipologia)?.descrizione ?? null;
 
 /** Optional dei vecchi listini che diventano servizi: escono dagli optional e dalla base delle provvigioni. */

@@ -35,7 +35,9 @@ test("servizi: optional da spostare e listino di partenza", () => {
   assert.ok(!eServizioDaSpostare("Tenda Serenea"));
   const p = prodottiServizi();
   assert.equal(p.length, SERVIZI_LISTINO.reduce((s, x) => s + x.varianti.length, 0));
-  assert.ok(p.every((x) => x.tipologia.startsWith("SERVIZI_") && x.larghezzaMm === 0 && x.prezzoBase > 0));
+  assert.ok(p.every((x) => x.tipologia.startsWith("SERVIZI_") && x.larghezzaMm === 0 && x.prezzoBase >= 0));
+  assert.equal(p.filter((x) => x.prezzoBase === 0).length, 5, "voci «da definire»: posa e trasporto");
+  assert.deepEqual(p.filter((x) => x.tipologia === "SERVIZI_ASSISTENZA").map((x) => x.prezzoBase), [80, 80]);
   assert.equal(p.find((x) => x.tipologia === "SERVIZI_ENEA")!.prezzoBase, 350);
   assert.equal(labelServizio("SERVIZI_AUTOSCALA"), "Autoscala");
 });
