@@ -15,7 +15,7 @@ import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
-import { campiDaCompilare, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
+import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
@@ -175,7 +175,9 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                   <input type="hidden" name="ordineId" value={o.id} />
                   <input type="hidden" name="modelloId" value={modelloScelto.id} />
                   {(() => {
-                    const { singoli, tabelle } = raggruppaCampi(campiDaCompilare(modelloScelto.html));
+                    const descritti = descriviCampi(modelloScelto.html);
+                    const { singoli, tabelle } = raggruppaCampi(descritti.map((d) => d.nome));
+                    const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
                     return (
                       <>
                         {tabelle.map((t) => (
@@ -194,11 +196,28 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                             </table>
                           </div>
                         ))}
-                        {singoli.map((c) => (
-                          <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
-                            <textarea name={`campo_${c}`} rows={c.includes("misure") ? 6 : 3} className={`${inp} w-full`} placeholder={c.includes("misure") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
-                          </label>
-                        ))}
+                        {singoli.map((c) => {
+                          const d = tipoDi.get(c);
+                          if (d && d.tipo !== "testo") {
+                            return (
+                              <fieldset key={c} className="rounded border border-neutral-200 px-2 py-1">
+                                <legend className="text-xs font-semibold px-1">{nomeCampo(c)}</legend>
+                                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                                  {d.opzioni.map((o) => (
+                                    <label key={o} className="text-xs flex items-center gap-1 font-normal">
+                                      <input type={d.tipo === "scelta" ? "radio" : "checkbox"} name={`campo_${c}`} value={o} /> {o}
+                                    </label>
+                                  ))}
+                                </div>
+                              </fieldset>
+                            );
+                          }
+                          return (
+                            <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
+                              <textarea name={`campo_${c}`} rows={c.includes("misure") || c.includes("note") ? 4 : 1} className={`${inp} w-full`} placeholder={c.includes("misure_definitive") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
+                            </label>
+                          );
+                        })}
                       </>
                     );
                   })()}

@@ -71,7 +71,7 @@ export default async function SchedeProduzionePage({ searchParams }: { searchPar
             <div className="text-xs text-neutral-700 rounded bg-neutral-50 border border-neutral-200 p-2">
               <p className="font-bold mb-1">Segnaposto riempiti dal CRM:</p>
               <p>{Object.entries(SEGNAPOSTO_FISSI).map(([k, v]) => <span key={k} className="inline-block mr-3"><code className="bg-white border px-1 rounded">{`{{${k}}}`}</code> {v}</span>)}</p>
-              <p className="mt-1">Qualsiasi altro <code className="bg-white border px-1 rounded">{"{{nome_campo}}"}</code> diventa una casella da compilare quando prepari la scheda dall&apos;ordine (es. <code>{"{{misure_definitive}}"}</code>). Per le tabelle riga per riga usa <code>{"{{tab_gruppo_1_colonna}}"}</code>, <code>{"{{tab_gruppo_2_colonna}}"}</code>… (es. <code>{"{{tab_dimensioni_1_L}}"}</code>): ogni gruppo diventa una piccola tabella da compilare.</p>
+              <p className="mt-1">Qualsiasi altro <code className="bg-white border px-1 rounded">{"{{nome_campo}}"}</code> diventa una casella da compilare quando prepari la scheda dall&apos;ordine (es. <code>{"{{misure_definitive}}"}</code>). Per le caselle da spuntare usa <code>{"{{sc:nome|Sì|No}}"}</code> (una sola scelta) o <code>{"{{multi:nome|A|B|C}}"}</code> (più scelte): nella scheda compaiono ☒ ☐. Per le tabelle riga per riga usa <code>{"{{tab_gruppo_1_colonna}}"}</code>, <code>{"{{tab_gruppo_2_colonna}}"}</code>… (es. <code>{"{{tab_dimensioni_1_L}}"}</code>): ogni gruppo diventa una piccola tabella da compilare.</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button className="btn-3d btn-3d-green text-sm px-4 py-2">💾 Salva il modello</button>

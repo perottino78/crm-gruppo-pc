@@ -1,7 +1,7 @@
 // Schede di produzione HTML per il fornitore: modello → compilazione con le misure definitive → documento della pratica da allegare all'ordine.
 import { prisma } from "../../src/lib/prisma";
 import * as A from "../../src/app/schede-produzione-actions";
-import { MODELLO_PREDEFINITO } from "../../src/lib/ordini/scheda-produzione";
+import { MODELLO_PREDEFINITO, MODELLO_SEEGLASS } from "../../src/lib/ordini/scheda-produzione";
 let ok = 0, ko = 0;
 const verifica = (c: unknown, m: string, x?: unknown) => { if (c) { ok++; console.log("  ✓", m); } else { ko++; console.log("  ✗", m, x ?? ""); } };
 const fd = (o: Record<string, string>) => { const f = new FormData(); for (const [k, v] of Object.entries(o)) f.set(k, v); return f; };
@@ -30,8 +30,18 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   verifica(html.includes("L 1198 × H 1395 &lt;speciale&gt;") && html.includes("Bianco RAL 9010"), "misure definitive e note, protette dall'HTML");
   verifica(html.includes("Soggiorno L 1200 × H 1400"), "misure del rilievo come riferimento");
   verifica(!/\{\{/.test(html), "nessun segnaposto rimasto");
+  // modulo con scelte a spunta (SEEGLASS RUN): una scelta singola e una multipla (più valori con lo stesso nome)
+  await redir(A.salvaModelloScheda(fd({ nome: "Seeglass", html: MODELLO_SEEGLASS })));
+  const ms = await prisma.schedaProduzioneModello.findFirstOrThrow({ where: { nome: "Seeglass" } });
+  const f2 = fd({ ordineId: ord.id, modelloId: ms.id, campo_n_vie: "4 vie", campo_larghezza_mm: "4200" });
+  f2.append("campo_chiusura", "Serratura CD-4"); f2.append("campo_chiusura", "Maniglia e azionamento");
+  await redir(A.creaSchedaProduzione(f2));
+  const d2 = (await prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: com.id, nome: { contains: "Scheda produzione" } }, orderBy: { createdAt: "desc" } }))[0];
+  const h2 = d2.contenuto.toString("utf-8");
+  verifica(h2.includes("&#9746; 4 vie") && h2.includes("&#9744; 3 vie"), "scelta singola con le caselle ☒ ☐");
+  verifica(h2.includes("&#9746; Serratura CD-4") && h2.includes("&#9746; Maniglia e azionamento") && h2.includes("&#9744; Auto-blocco"), "scelta multipla: più voci spuntate");
   await redir(A.eliminaModelloScheda(fd({ id: m.id })));
-  verifica((await prisma.schedaProduzioneModello.count()) === 0 && (await prisma.documento.count()) === 1, "eliminando il modello restano le schede già create");
+  verifica((await prisma.schedaProduzioneModello.count()) === 1 && (await prisma.documento.count()) === 2, "eliminando il modello restano le schede già create");
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();
