@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { canvasInWebp } from "@/lib/immagini/webp-client";
 
 /**
  * Selettore multiplo di foto: ridimensiona/comprime lato client e mette un array JSON di data URI nel campo nascosto `name`.
@@ -44,7 +45,7 @@ export default function FotoRilievo({ name, pdf = false }: { name: string; pdf?:
           canvas.width = width;
           canvas.height = height;
           canvas.getContext("2d")!.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL("image/jpeg", 0.7));
+          resolve(canvasInWebp(canvas, 0.7));
         };
         img.src = reader.result as string;
       };

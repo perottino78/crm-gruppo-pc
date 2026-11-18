@@ -1,5 +1,6 @@
 "use client";
 
+import { canvasInWebp } from "@/lib/immagini/webp-client";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -65,7 +66,7 @@ export default function SelettoreImmagine({
             return;
           }
           ctx.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL("image/jpeg", qualita));
+          resolve(canvasInWebp(canvas, qualita));
         };
         img.src = reader.result as string;
       };

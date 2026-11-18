@@ -11,6 +11,7 @@ import { leggiNumero, leggiSconti, scriviSconti, calcolaArticolo, scontoEquivale
 import { leggiFile, type Tabella } from "@/lib/articoli/foglio";
 import { analizzaListino, mappaColonne, contaAnteprima, DIVISIONI, type Opzioni, type DatiArticolo } from "@/lib/articoli/importa";
 import { puoModificareArticoli, categorieRegola, ricalcolaArticoli, conFiglie, prossimiCodici, articoliPerConfronto, CAMPI_ESISTENTE } from "@/lib/articoli/server";
+import { convertiInWebp } from "@/lib/immagini/webp";
 import { MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/calcoli";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
@@ -84,7 +85,7 @@ export async function salvaArticolo(_: EsitoArticolo, fd: FormData): Promise<Esi
     const m = /^data:(image\/[a-z+]+);base64,(.+)$/.exec(fotoNuova);
     if (m) {
       const buf = Buffer.from(m[2], "base64");
-      const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: nuovoId, cartella: "Foto", nome: "foto-articolo.jpg", mime: m[1], dimensione: buf.length, contenuto: buf, caricatoDaNome: u.nome } });
+      const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: nuovoId, cartella: "Foto", nome: m[1].includes("webp") ? "foto-articolo.webp" : "foto-articolo.jpg", mime: m[1], dimensione: buf.length, contenuto: buf, caricatoDaNome: u.nome } });
       await prisma.articolo.update({ where: { id: nuovoId }, data: { immagineUrl: `/api/documenti/${d.id}` } });
     }
   }
@@ -131,7 +132,8 @@ export async function caricaFotoArticolo(fd: FormData) {
   const f = fd.get("foto");
   if (!id || !(f instanceof File) || !f.size) return;
   if (f.size > MAX_DOCUMENTO || !/^image\/(jpeg|png|webp|gif)$/.test(f.type)) return;
-  const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: id, cartella: "Foto", nome: nomeFileSicuro(f.name), mime: f.type, dimensione: f.size, contenuto: Buffer.from(await f.arrayBuffer()), caricatoDaNome: u.nome } });
+  const w = await convertiInWebp({ contenuto: Buffer.from(await f.arrayBuffer()), mime: f.type, nome: f.name }, 1200, 78);
+  const d = await prisma.documento.create({ data: { entita: "ARTICOLO", entitaId: id, cartella: "Foto", nome: nomeFileSicuro(w.nome), mime: w.mime, dimensione: w.contenuto.length, contenuto: w.contenuto, caricatoDaNome: u.nome } });
   await prisma.articolo.update({ where: { id }, data: { immagineUrl: `/api/documenti/${d.id}` } });
   aggiorna(id);
 }
