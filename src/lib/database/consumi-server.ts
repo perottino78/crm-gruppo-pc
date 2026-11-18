@@ -41,11 +41,13 @@ export async function togliChiaveNeon() {
 
 /** Per capire un «progetto non trovato»: i progetti (e le organizzazioni) che la chiave vede davvero, con nome e ID. */
 async function progettiVisti(k: string): Promise<string> {
+  const esiti: string[] = [];
   const chiedi = async (percorso: string) => {
     try {
       const r = await fetch(`${API()}${percorso}`, { headers: { Authorization: `Bearer ${k}`, Accept: "application/json" }, cache: "no-store", signal: AbortSignal.timeout(8_000) });
+      esiti.push(`${percorso.split("?")[0]} → ${r.status}`);
       return r.ok ? ((await r.json()) as Record<string, unknown>) : null;
-    } catch { return null; }
+    } catch { esiti.push(`${percorso.split("?")[0]} → nessuna risposta`); return null; }
   };
   const righe: string[] = [];
   const aggiungi = (j: Record<string, unknown> | null, dove: string) => {
@@ -54,7 +56,8 @@ async function progettiVisti(k: string): Promise<string> {
   aggiungi(await chiedi("/projects?limit=50"), "");
   const org = await chiedi("/users/me/organizations");
   for (const o of ((org?.organizations as { id: string; name: string }[] | undefined) ?? [])) aggiungi(await chiedi(`/projects?limit=50&org_id=${encodeURIComponent(o.id)}`), ` — organizzazione «${o.name}»`);
-  return righe.length ? `La chiave vede: ${righe.join("; ")}. Scrivi nel campo «ID del progetto» quello del database di P&C ONE.` : "La chiave non vede nessun progetto: crea la chiave dall'organizzazione che contiene il database (Neon › cambia da «Personal account» all'organizzazione › Settings › API keys).";
+  const dettaglio = ` [risposte di Neon: ${esiti.join(", ")}]`;
+  return (righe.length ? `La chiave vede: ${righe.join("; ")}. Scrivi nel campo «ID del progetto» quello del database di P&C ONE.` : "La chiave non vede nessun progetto: controlla in quale organizzazione è il database e crea la chiave da lì.") + dettaglio;
 }
 
 /** Legge i consumi del periodo da Neon. Errore leggibile se la chiave manca o è sbagliata. */
