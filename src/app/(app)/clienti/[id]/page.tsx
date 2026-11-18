@@ -26,6 +26,7 @@ import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
 import { puo } from "@/lib/permessi/catalogo";
 import BottoneConferma from "@/components/BottoneConferma";
 import { eliminaCliente, bloccaEliminazioneCliente } from "@/app/elimina-contatti-actions";
+import AllegatiTask from "@/components/task/AllegatiTask";
 import { creaTaskCliente, completaTaskCliente } from "@/app/task-clienti-actions";
 
 const TIPI = [
@@ -443,6 +444,7 @@ export default async function SchedaClientePage({
                 <label className="text-xs font-semibold text-neutral-700 sm:col-span-2">Dettagli (facoltativi)
                   <textarea name="descrizione" rows={2} className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
                 </label>
+                <AllegatiTask />
                 <div className="sm:col-span-2 flex flex-wrap items-center gap-3">
                   <button className="btn-3d btn-3d-amber px-5 py-2 text-sm">✅ Dai il task</button>
                   <span className="text-xs text-neutral-600">Lo trova in «Task» e sulla Dashboard; se è un collega gli arriva anche un&apos;email.</span>
