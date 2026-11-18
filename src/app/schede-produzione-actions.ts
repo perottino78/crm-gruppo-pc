@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { puoGestireOrdini } from "@/lib/ordini/server";
 import { numeroOrdine } from "@/lib/ordini/calcoli";
-import { campiDaCompilare, compilaScheda, tabellaRighe } from "@/lib/ordini/scheda-produzione";
+import { descriviCampi, compilaScheda, tabellaRighe } from "@/lib/ordini/scheda-produzione";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 
@@ -53,7 +53,10 @@ export async function creaSchedaProduzione(fd: FormData) {
     indirizzo: o.indirizzoSpedizione ?? "", consegna: o.consegnaRichiesta ? o.consegnaRichiesta.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "",
     misure_rilievo: rilievi.map((r) => r.misure).join("\n\n"),
   };
-  for (const c of campiDaCompilare(m.html)) valori[c] = typeof fd.get(`campo_${c}`) === "string" ? (fd.get(`campo_${c}`) as string) : "";
+  for (const c of descriviCampi(m.html)) {
+    // scelte multiple: più valori con lo stesso nome, uniti da «|»
+    valori[c.nome] = c.tipo === "multi" ? fd.getAll(`campo_${c.nome}`).filter((x): x is string => typeof x === "string").join("|") : typeof fd.get(`campo_${c.nome}`) === "string" ? (fd.get(`campo_${c.nome}`) as string) : "";
+  }
   const html = compilaScheda(m.html, valori, tabellaRighe(o.righe.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, um: r.um, codice: r.codiceFornitore ?? r.codice, note: r.note }))));
   const contenuto = Buffer.from(html, "utf-8");
   const nome = `Scheda produzione ${numeroOrdine(o).replace("/", "-")} ${o.fornitore.ragioneSociale}.html`.replace(/[^\w.\- ]+/g, "_");

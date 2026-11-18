@@ -9,18 +9,33 @@ export const SEGNAPOSTO_FISSI: Record<string, string> = {
 
 export const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-/** I {{campo}} del modello che il CRM non riempie da solo: diventano caselle da compilare (in ordine, senza doppioni). */
-export function campiDaCompilare(html: string): string[] {
+const RE_SCELTA = /\{\{\s*(sc|multi):([a-zA-Z0-9_àèéìòù]+)\|([^}]+?)\s*\}\}/g;
+const RE_CAMPO = /\{\{\s*([a-zA-Z0-9_àèéìòù]+)\s*\}\}/g;
+
+export type DescrizioneCampo = { nome: string; tipo: "testo" | "scelta" | "multi"; opzioni: string[] };
+
+/** Tutti i campi del modello nell'ordine in cui compaiono: testo libero `{{nome}}`, scelta singola `{{sc:nome|A|B|C}}` (☒ ☐ nella scheda) e scelta multipla `{{multi:nome|A|B|C}}`. */
+export function descriviCampi(html: string): DescrizioneCampo[] {
+  const trovati: { pos: number; d: DescrizioneCampo }[] = [];
+  for (const m of html.matchAll(RE_SCELTA)) trovati.push({ pos: m.index ?? 0, d: { nome: m[2], tipo: m[1] === "sc" ? "scelta" : "multi", opzioni: m[3].split("|").map((x) => x.trim()).filter(Boolean) } });
+  for (const m of html.matchAll(RE_CAMPO)) if (!(m[1] in SEGNAPOSTO_FISSI)) trovati.push({ pos: m.index ?? 0, d: { nome: m[1], tipo: "testo", opzioni: [] } });
   const visti = new Set<string>();
-  for (const m of html.matchAll(/\{\{\s*([a-zA-Z0-9_àèéìòù]+)\s*\}\}/g)) if (!(m[1] in SEGNAPOSTO_FISSI)) visti.add(m[1]);
-  return [...visti];
+  return trovati.sort((a, b) => a.pos - b.pos).map((t) => t.d).filter((d) => (visti.has(d.nome) ? false : (visti.add(d.nome), true)));
 }
+
+/** I campi del modello che il CRM non riempie da solo (solo i nomi, in ordine, senza doppioni). */
+export const campiDaCompilare = (html: string): string[] => descriviCampi(html).map((d) => d.nome);
 
 export const nomeCampo = (c: string) => c.replace(/_/g, " ").replace(/^./, (x) => x.toUpperCase());
 
-/** Sostituisce i segnaposto. I valori testuali sono protetti (HTML escape, a capo conservati); `righe` è già HTML. */
+/** Sostituisce i segnaposto. I valori testuali sono protetti (HTML escape, a capo conservati); `righe` è già HTML.
+ *  Le scelte diventano caselle: la voce scelta ☒, le altre ☐ (per le multiple i valori scelti sono separati da «|»). */
 export function compilaScheda(html: string, valori: Record<string, string>, righeHtml: string): string {
-  return html.replace(/\{\{\s*([a-zA-Z0-9_àèéìòù]+)\s*\}\}/g, (_m, k: string) => {
+  const conScelte = html.replace(RE_SCELTA, (_m, tipo: string, nome: string, opz: string) => {
+    const scelti = tipo === "multi" ? (valori[nome] ?? "").split("|").map((x) => x.trim()).filter(Boolean) : [(valori[nome] ?? "").trim()];
+    return opz.split("|").map((o) => o.trim()).filter(Boolean).map((o) => `<span class="opz">${scelti.includes(o) ? "&#9746;" : "&#9744;"} ${esc(o)}</span>`).join(" ");
+  });
+  return conScelte.replace(RE_CAMPO, (_m, k: string) => {
     if (k === "righe") return righeHtml;
     const v = valori[k] ?? "";
     return esc(v).replace(/\n/g, "<br>");
@@ -99,8 +114,31 @@ export const MODELLO_LIPARI = `<!doctype html>
 </body></html>
 `;
 
+export const MODELLO_SEEGLASS = `<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>Modulo d'ordine SEEGLASS RUN {{ordine}}</title>
+<style>
+ @page{size:A4;margin:10mm}
+ body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#111;margin:16px}
+ h1{font-size:20px;margin:0}.sotto{color:#555;margin:0 0 8px}
+ h2{font-size:12px;margin:12px 0 3px;background:#e5e5e5;padding:3px 6px;text-transform:uppercase}
+ table.f{border-collapse:collapse;width:100%}table.f th{width:30%;text-align:left;background:#f6f6f6;font-weight:600}
+ table.f th,table.f td{border:1px solid #999;padding:4px 6px;vertical-align:top}
+ .opz{display:inline-block;margin-right:12px;white-space:nowrap;font-size:11px}
+ .testa{display:flex;justify-content:space-between;align-items:flex-start}.dati td{border:none;padding:1px 8px 1px 0}
+ .box{border:1px solid #999;padding:8px;min-height:60px}.firma{margin-top:18px;display:flex;justify-content:space-between}.firma div{border-top:1px solid #444;width:45%;padding-top:3px;font-size:10px}
+</style></head><body>
+<div class="testa"><div><h1>MODULO D'ORDINE · SEEGLASS RUN</h1><p class="sotto">Vetrata scorrevole Scintilla — fornitore C3 Systems</p>{{sc:tipo_documento|Ordine|Preventivo}}</div>
+<table class="dati"><tr><td><b>Data</b></td><td>{{data}}</td></tr><tr><td><b>Nome</b></td><td>{{cliente}}</td></tr><tr><td><b>Città / Paese</b></td><td>{{citta}}</td></tr><tr><td><b>Riferimento</b></td><td>{{ordine}} — pratica {{commessa}}</td></tr><tr><td><b>Indirizzo di consegna</b></td><td>{{indirizzo}}</td></tr></table></div>
+<h2>Misure della vetrata</h2><table class="f"><tr><th>Larghezza (L) mm</th><td>{{larghezza_mm}}</td></tr><tr><th>Altezza (H) mm</th><td>{{altezza_mm}}</td></tr><tr><th>Le misure sono</th><td>{{sc:misure_riferite|Interne|Esterne|Totali}}<br><small>Misure totali o pubblicate, inclusi i profili superiori e inferiori (eccetto il profilo incassato).</small></td></tr></table><h2>Tipo di vetro e finiture</h2><table class="f"><tr><th>Vetro</th><td>{{sc:tipo_vetro|Completo (con vetro)|Semi-lavorato (senza vetro)}}</td></tr><tr><th>Spessore</th><td>{{sc:spessore|8 mm|10 mm}}</td></tr><tr><th>Finitura</th><td>{{sc:finitura_vetro|Trasparente|Altri}} {{vetro_altri}}</td></tr></table><h2>Ante, vie e profilo</h2><table class="f"><tr><th>N° ante</th><td>{{sc:n_ante|Lo decide il produttore|Desidero specificare}} {{n_ante_num}}</td></tr><tr><th>Numero di vie</th><td>{{sc:n_vie|3 vie|4 vie|5 vie|6 vie}}</td></tr><tr><th>Profilo inferiore</th><td>{{sc:profilo_inferiore|In superficie|Incassato}} &nbsp; misura luce: {{luce_incassato}}</td></tr><tr><th>Posizionamento delle ante sul profilo</th><td>{{sc:posizione_ante|Sinistra|Centrale|Destra}}<br><small>Vista interna della vetrata.</small></td></tr></table><h2>Colori e guarnizioni</h2><table class="f"><tr><th>Colore profili alluminio</th><td>{{sc:colore_profili|Bianco|RAL / Altri}}</td></tr><tr><th>RAL / Altri: profilo superiore · inferiore · anta · laterale</th><td>{{ral_superiore}} · {{ral_inferiore}} · {{ral_anta}} · {{ral_laterale}}</td></tr><tr><th>Tipi di guarnizioni</th><td>{{sc:guarnizioni|Trasparente PLUS|Alluminio decorativo nero|Alluminio decorativo colore della vetrata}}</td></tr><tr><th>Colore tappi</th><td>{{sc:colore_tappi|Bianco|Nero|Grigio|Cromo opaco}}</td></tr><tr><th>Decorazione stile industriale</th><td>{{sc:stile_industriale|No|Sì}} &nbsp; {{sc:spazzolino|Con spazzolino|Senza spazzolino}} &nbsp; {{sc:colore_decor|Nero}}</td></tr></table><h2>Maniglia e azionamento · sistemi di chiusura / apertura</h2><table class="f"><tr><th>Sistemi scelti</th><td>{{multi:chiusura|Auto-blocco|Serratura CD-6|Serratura CD-4|Maniglia e azionamento|Pomo fisso Seeglass|Tirante anello|Chiusura inferiore}}</td></tr><tr><th>Finitura maniglie e serrature</th><td>{{sc:finitura_chiusura|Cromo opaco|Nero opaco|Cromo lucido}}</td></tr><tr><th>Chiusura inferiore</th><td>{{sc:chiusura_inferiore|Semplice (interno)|Doppia (interno ed esterno)}}</td></tr><tr><th>Altezza degli azionamenti</th><td>{{sc:altezza_azionamenti|Lo decide il fabbricante|Altezza indicata}} {{altezza_azionamenti_mm}} mm<br><small>Non inferiore a 265 mm. Se gli azionamenti di sezioni diverse devono essere allineati alla stessa altezza va indicato espressamente.</small></td></tr></table><h2>Produzione e trasporto</h2><table class="f"><tr><th>Profili</th><td>{{multi:non_tagliare|Non tagliare i profili}}<br><small>Il trasporto di sistemi oltre 1.850 mm comporta un supplemento nel costo totale.</small></td></tr><tr><th>Trasporto</th><td>{{sc:trasporto|Trasporto C3 Systems|Trasporto cliente|Con nostri mezzi (senza agenzia)}}</td></tr></table><h2>Materiale ordinato</h2>
+{{righe}}
+<h2>Note per la produzione</h2><div class="box">{{note_produzione}}</div>
+<div class="firma"><div>Firma e timbro</div><div>P&amp;C S.r.l. — Corso Moncenisio 28, Rosta (TO) — info@gruppopec.com — 011 19887497</div></div>
+</body></html>
+`;
+
 /** Modelli già pronti, da cui partire dall'editor. */
 export const MODELLI_PRONTI: { chiave: string; nome: string; descrizione: string; html: string }[] = [
   { chiave: "standard", nome: "Scheda di produzione standard", descrizione: "Dati dell'ordine, materiale, misure definitive e note.", html: MODELLO_PREDEFINITO },
   { chiave: "lipari", nome: "Modulo d'ordine NEW LIPARI (pergola Lucilla)", descrizione: "Come il modulo del fornitore: installazione, dimensioni, piantoni, colore, motore, optional, traversi e illuminazione, una riga per pergola.", html: MODELLO_LIPARI },
+  { chiave: "seeglass", nome: "Modulo d'ordine SEEGLASS RUN (vetrata scorrevole Scintilla)", descrizione: "Come il modulo di C3 Systems: misure, vetro, ante e vie, profilo, colori, guarnizioni, chiusure, altezza azionamenti e trasporto, con le caselle ☒ ☐.", html: MODELLO_SEEGLASS },
 ];

@@ -27,5 +27,24 @@ test("modello NEW LIPARI: gruppi da 3 righe (una per pergola) e note", () => {
   assert.ok(g.tabelle.every((t) => t.righe.length === 3));
   assert.deepEqual(g.tabelle.find((t) => t.gruppo === "piantoni")?.colonne, ["A", "B", "C", "D", "A1", "B1", "C1", "D1"]);
   assert.ok(g.singoli.includes("note_produzione"));
-  assert.equal(MODELLI_PRONTI.length, 2);
+  assert.ok(MODELLI_PRONTI.length >= 2);
+});
+
+import { descriviCampi, MODELLO_SEEGLASS } from "../../src/lib/ordini/scheda-produzione";
+test("scelte a spunta: singola e multipla, con caselle ☒ ☐ nella scheda", () => {
+  const h = "{{sc:vie|3 vie|4 vie|5 vie}} {{multi:chiusura|Auto-blocco|Serratura CD-6|Pomo}} {{nota}}";
+  const d = descriviCampi(h);
+  assert.deepEqual(d.map((x) => [x.nome, x.tipo]), [["vie", "scelta"], ["chiusura", "multi"], ["nota", "testo"]]);
+  assert.deepEqual(d[1].opzioni, ["Auto-blocco", "Serratura CD-6", "Pomo"]);
+  const out = compilaScheda(h, { vie: "4 vie", chiusura: "Auto-blocco|Pomo", nota: "ok" }, "");
+  assert.ok(out.includes("&#9746; 4 vie") && out.includes("&#9744; 3 vie") && out.includes("&#9746; Auto-blocco") && out.includes("&#9744; Serratura CD-6") && out.includes("&#9746; Pomo"));
+});
+test("modulo SEEGLASS RUN: scelte per vie, vetro, colori, chiusure e trasporto", () => {
+  const d = descriviCampi(MODELLO_SEEGLASS);
+  const per = new Map(d.map((x) => [x.nome, x]));
+  assert.deepEqual(per.get("n_vie")?.opzioni, ["3 vie", "4 vie", "5 vie", "6 vie"]);
+  assert.equal(per.get("chiusura")?.tipo, "multi");
+  assert.ok(per.get("trasporto")?.opzioni.includes("Trasporto C3 Systems"));
+  assert.equal(per.get("larghezza_mm")?.tipo, "testo");
+  assert.equal(MODELLI_PRONTI.length, 3);
 });
