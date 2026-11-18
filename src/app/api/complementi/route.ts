@@ -17,6 +17,15 @@ export async function GET(req: NextRequest) {
   const utente = await getCurrentUser();
   if (!utente) return NextResponse.json({ errore: "Non autorizzato" }, { status: 401 });
   const q = (req.nextUrl.searchParams.get("q") ?? "").trim();
+  const tip = req.nextUrl.searchParams.get("tipologia"), brand = req.nextUrl.searchParams.get("brandId");
+  if (tip && brand) {
+    // un prodotto scelto dall'albero del listino: colori e se è a misura
+    const m = await prisma.modelloProdotto.findFirst({ where: { brandId: brand, tipologia: tip }, select: { brandId: true, tipologia: true, gruppo: true, fornitoreId: true } });
+    if (!m) return NextResponse.json({ risultati: [] });
+    const righe = await prisma.prodotto.findMany({ where: { brandId: m.brandId, tipologia: m.tipologia }, distinct: ["colore"], select: { colore: true }, take: 80 });
+    const griglia = (await prisma.prodotto.count({ where: { brandId: m.brandId, tipologia: m.tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
+    return NextResponse.json({ risultati: [{ tipo: "P", brandId: m.brandId, tipologia: m.tipologia, label: labelBreveTipologia(m.tipologia) || m.tipologia, gruppo: m.gruppo, fornitoreId: m.fornitoreId, colori: righe.map((r) => r.colore), griglia, unita: unitaMisura(m.tipologia) }] });
+  }
   if (q.length < 2) return NextResponse.json({ risultati: [] });
   const parole = q.split(/\s+/).filter(Boolean).slice(0, 5);
   const vis = visibilitaArticoliWhere(utente);

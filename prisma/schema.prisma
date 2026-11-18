@@ -815,6 +815,7 @@ model RilievoAllegato {
 // ruoli: FORNITORE | POSATORE_ESTERNO | TECNICO_INTERNO | ALTRO
 model Soggetto {
   id                    String            @id @default(cuid())
+  schedeProduzione      SchedaProduzioneModello[]
   ragioneSociale        String
   tipo                  String            @default("AZIENDA") // AZIENDA | PERSONA
   ruoli                 String[]
@@ -1548,9 +1549,42 @@ model Articolo {
   createdAt         DateTime                @default(now())
   updatedAt         DateTime                @updatedAt
   storico           StoricoPrezzoArticolo[]
+  // Distinta base (kit) e prodotti correlati, come nella scheda prodotto di BConsole
+  componenti        ComponenteArticolo[]    @relation("DistintaKit")
+  inKit             ComponenteArticolo[]    @relation("DistintaPezzo")
+  correlati         ArticoloCorrelato[]     @relation("CorrelatiA")
+  correlatoDa       ArticoloCorrelato[]     @relation("CorrelatiDa")
 
   @@index([fornitoreId, codiceFornitore])
   @@index([categoriaId])
+}
+
+// Pezzo di un kit: l'articolo «kit» (articoloId) è fatto di più articoli (componenteId) con la loro quantità.
+model ComponenteArticolo {
+  id           String   @id @default(cuid())
+  articolo     Articolo @relation("DistintaKit", fields: [articoloId], references: [id], onDelete: Cascade)
+  articoloId   String
+  componente   Articolo @relation("DistintaPezzo", fields: [componenteId], references: [id], onDelete: Cascade)
+  componenteId String
+  quantita     Float    @default(1)
+  ordine       Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([articoloId])
+  @@index([componenteId])
+}
+
+// Articolo correlato (da proporre insieme): il legame vale nei due sensi.
+model ArticoloCorrelato {
+  id         String   @id @default(cuid())
+  articolo   Articolo @relation("CorrelatiA", fields: [articoloId], references: [id], onDelete: Cascade)
+  articoloId String
+  correlato  Articolo @relation("CorrelatiDa", fields: [correlatoId], references: [id], onDelete: Cascade)
+  correlatoId String
+  createdAt  DateTime @default(now())
+
+  @@index([articoloId])
+  @@index([correlatoId])
 }
 
 model StoricoPrezzoArticolo {
@@ -2368,4 +2402,20 @@ model ConsegnaKit {
   createdAt        DateTime @default(now())
 
   @@index([utenteId, consegnatoIl])
+}
+
+// Modello di scheda HTML da compilare e mandare al fornitore con l'ordine (misure definitive per la produzione).
+// Nel testo i segnaposto {{ordine}}, {{cliente}}, {{righe}}, {{misure_rilievo}}… li riempie il CRM; ogni altro {{campo}} diventa una casella da compilare.
+model SchedaProduzioneModello {
+  id          String   @id @default(cuid())
+  nome        String
+  fornitore   Soggetto? @relation(fields: [fornitoreId], references: [id], onDelete: SetNull)
+  fornitoreId String?
+  html        String
+  attivo      Boolean  @default(true)
+  creatoDaNome String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([fornitoreId])
 }

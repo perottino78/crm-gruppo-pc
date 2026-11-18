@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   if (!d || !(await puoVedereEntita(u, d.entita, d.entitaId))) return new Response("Documento non trovato", { status: 404 });
   const scarica = new URL(req.url).searchParams.has("scarica");
   // in linea solo PDF e immagini; tutto il resto si scarica
-  const inLinea = !scarica && /^(application\/pdf|image\/(jpeg|png|webp|gif))$/.test(d.mime);
+  const inLinea = !scarica && /^(application\/pdf|text\/html|image\/(jpeg|png|webp|gif))$/.test(d.mime);
   return new Response(new Uint8Array(d.contenuto), {
     headers: {
       "Content-Type": d.mime,

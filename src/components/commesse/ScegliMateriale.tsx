@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { RisultatoComplemento } from "@/app/api/complementi/route";
 import type { Complemento } from "@/app/commesse-actions";
+import type { AlberoLeggero } from "@/app/api/listino/albero/route";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 export type MaterialeInLista = Complemento & { etichetta: string };
@@ -11,7 +12,20 @@ export type MaterialeInLista = Complemento & { etichetta: string };
  * Cerca il materiale nel listino o negli articoli (o scrivilo a mano) e mettilo nella lista del rilievo.
  * Non salva niente da solo: i campi non hanno «name», la lista si salva con il rilievo.
  */
-export default function ScegliMateriale({ fornitori, onAggiungi }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void }) {
+export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void; brandId?: string }) {
+  const [albero, setAlbero] = useState<AlberoLeggero | null>(null);
+  const [apriAlbero, setApriAlbero] = useState(false);
+  async function caricaAlbero() {
+    setApriAlbero((v) => !v);
+    if (albero || !brandId) return;
+    try { const r = await fetch(`/api/listino/albero?brandId=${encodeURIComponent(brandId)}`); setAlbero(r.ok ? (await r.json()).albero : []); } catch { setAlbero([]); }
+  }
+  async function dalListino(tipologia: string) {
+    if (!brandId) return;
+    const r = await fetch(`/api/complementi?tipologia=${encodeURIComponent(tipologia)}&brandId=${encodeURIComponent(brandId)}`);
+    const j = r.ok ? await r.json() : { risultati: [] };
+    if (j.risultati?.[0]) { scegli(j.risultati[0]); setApriAlbero(false); } else setErrore("Prodotto non trovato nel listino.");
+  }
   const [q, setQ] = useState("");
   const [risultati, setRisultati] = useState<RisultatoComplemento[]>([]);
   const [cerca, setCerca] = useState(false);
@@ -58,6 +72,38 @@ export default function ScegliMateriale({ fornitori, onAggiungi }: { fornitori: 
 
   return (
     <div className="space-y-2 rounded border border-teal-200 bg-teal-50/40 p-2">
+      {!scelto && brandId && (
+        <div>
+          <button type="button" onClick={caricaAlbero} className="btn-3d btn-3d-outline text-xs px-3 py-1.5">📂 Sfoglia il listino (Indoor / Outdoor → categoria → prodotto) {apriAlbero ? "▴" : "▾"}</button>
+          {apriAlbero && (
+            <div className="mt-1 max-h-80 overflow-auto rounded border border-neutral-300 bg-white p-2 text-sm">
+              {albero === null && <p className="text-xs text-neutral-500">Carico il listino…</p>}
+              {albero?.length === 0 && <p className="text-xs text-neutral-500">Listino non disponibile.</p>}
+              {albero?.map((f) => (
+                <details key={f.nome} className="mb-1">
+                  <summary className="cursor-pointer font-bold">{f.nome}</summary>
+                  <div className="ml-3">
+                    {f.gruppi.map((g) => (
+                      <details key={g.nome} className="mb-0.5">
+                        <summary className="cursor-pointer font-semibold text-neutral-800">{g.nome}</summary>
+                        <div className="ml-3">
+                          {g.voci.map((v) => <button key={v.value} type="button" onClick={() => dalListino(v.value)} className="block w-full text-left px-1.5 py-0.5 hover:bg-blue-50 rounded">{v.label}</button>)}
+                          {g.sottogruppi.map((sg) => (
+                            <details key={sg.nome}>
+                              <summary className="cursor-pointer text-neutral-700">{sg.nome}</summary>
+                              <div className="ml-3">{sg.voci.map((v) => <button key={v.value} type="button" onClick={() => dalListino(v.value)} className="block w-full text-left px-1.5 py-0.5 hover:bg-blue-50 rounded">{v.label}</button>)}</div>
+                            </details>
+                          ))}
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       {!scelto ? (
         <div className="relative">
           <label className="text-xs font-bold text-neutral-800 block">Cerca nel listino o negli articoli, oppure scrivi la descrizione</label>
