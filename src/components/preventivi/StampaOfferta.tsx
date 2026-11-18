@@ -197,7 +197,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                   gruppo: modello?.gruppo,
                   sottogruppo: sottogruppoDiTipologia(r.prodotto.tipologia),
                   colore: r.prodotto.colore,
-                  misura: r.prodotto.tipologia.startsWith("LATT_")
+                  misura: r.prodotto.tipologia.startsWith("LATT_") || r.prodotto.tipologia.startsWith("COPRIF_")
                     ? (r.misuraLarghezza ? `pezzi da ${r.misuraLarghezza} cm` : null)
                     : haMisura(r.prodotto.larghezzaMm, r.prodotto.altezzaMm) || r.misuraLarghezza
                       ? `${larghezzaMostrata}${altezzaMostrata ? ` × ${altezzaMostrata}` : ""} ${unit}`.trim()

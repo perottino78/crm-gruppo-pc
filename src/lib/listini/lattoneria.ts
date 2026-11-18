@@ -200,7 +200,8 @@ export function catalogoLattoneria() {
 export const sottogruppoLatt = (tipologia: string) => articoloLatt(tipologia)?.sottogruppo ?? null;
 export const labelLatt = (tipologia: string) => articoloLatt(tipologia)?.nome ?? null;
 /** true per gli articoli venduti al metro lineare (nell'offerta si scrive la lunghezza). */
-export const lattAlMetro = (tipologia: string) => articoloLatt(tipologia)?.um === "ML";
+// anche i coprifili e gli angolari in PVC (COPRIF_, src/lib/listini/coprifili.ts) si vendono al metro con la lunghezza del pezzo
+export const lattAlMetro = (tipologia: string) => tipologia.startsWith("COPRIF_") || articoloLatt(tipologia)?.um === "ML";
 
 /** Prezzo di un pezzo lungo `cm` centimetri a partire dal prezzo al metro (arrotondato al centesimo). */
 export const prezzoPerLunghezza = (prezzoMl: number, cm: number) => Math.round(prezzoMl * (cm / 100) * 100) / 100;
