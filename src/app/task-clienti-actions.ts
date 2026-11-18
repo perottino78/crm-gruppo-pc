@@ -10,6 +10,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { scopeClienteWhere } from "@/lib/scope";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaMail, APP_URL } from "@/lib/mail/invio";
+import { convertiInWebp } from "@/lib/immagini/webp";
+import { MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/calcoli";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const vai = (dove: string, p: Record<string, string>) => redirect(`${dove}${dove.includes("?") ? "&" : "?"}${new URLSearchParams(p)}#task`);
@@ -35,6 +37,12 @@ export async function creaTaskCliente(fd: FormData) {
       inCopiaA: copia.map((c) => c.id), categoria: str(fd, "categoria"), orePreviste: ore !== null && Number.isFinite(ore) && ore >= 0 ? ore : null,
     },
   });
+  // allegati (file e foto): finiscono nella scheda «File» del task, le foto in WebP leggero
+  const allegati = fd.getAll("file").filter((f): f is File => f instanceof File && f.size > 0 && f.size <= MAX_DOCUMENTO);
+  for (const f of allegati) {
+    const w = await convertiInWebp({ contenuto: Buffer.from(await f.arrayBuffer()), mime: f.type || "application/octet-stream", nome: f.name });
+    await prisma.documento.create({ data: { entita: "TASK", entitaId: creato.id, cartella: "Generale", nome: nomeFileSicuro(w.nome), mime: w.mime, dimensione: w.contenuto.length, contenuto: w.contenuto, caricatoDaNome: u!.nome } });
+  }
   // avviso via email all'incaricato (se non se lo è dato da solo)
   let avviso = "";
   if (per!.id !== u!.id && per!.email) {
@@ -43,7 +51,7 @@ export async function creaTaskCliente(fd: FormData) {
     const esito = await inviaMail({
       a: [per!.email],
       oggetto: `[CRM P&C] Nuovo task da ${u!.nome}: ${oggetto}`,
-      testo: `Ciao ${per!.nome.split(" ")[0]},\n\n${u!.nome} ti ha dato un task sul cliente ${cliente!.nome}${quando}:\n\n${oggetto}${descrizione ? `\n\n${descrizione}` : ""}\n\nApri il cliente: ${link}\n`,
+      testo: `Ciao ${per!.nome.split(" ")[0]},\n\n${u!.nome} ti ha dato un task sul cliente ${cliente!.nome}${quando}:\n\n${oggetto}${descrizione ? `\n\n${descrizione}` : ""}${allegati.length ? `\n\n📎 Allegati: ${allegati.length}` : ""}\n\nApri il cliente: ${link}\n`,
       daUtenteId: u!.id,
     });
     avviso = esito.inviata ? " (avvisato via email)" : "";

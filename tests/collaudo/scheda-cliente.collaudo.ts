@@ -100,6 +100,12 @@ async function main() {
   r = await redirectA(salvaCalendarioUtente(modulo({ utenteId: cri.id, ritorno: "/impostazioni", inCalendario: "1" })));
   verifica(r?.includes("Solo l'amministratore") && (await prisma.utente.findUnique({ where: { id: cri.id } }))?.inCalendario === false, "solo l'amministratore lo cambia", r);
 
+  console.log("Task con allegati");
+  await redirectA(creaTaskCliente(modulo({ clienteId: cliente.id, oggetto: "Pergola che perde", utenteId: cri.id }, [new File([Buffer.from("%PDF-1.4 prova")], "foto-perdita.pdf", { type: "application/pdf" })])));
+  const tA = await prisma.attivita.findFirst({ where: { tipo: "TASK", oggetto: "Pergola che perde" } });
+  const dA = tA ? await prisma.documento.findMany({ where: { entita: "TASK", entitaId: tA.id } }) : [];
+  verifica(dA.length === 1 && dA[0].nome === "foto-perdita.pdf", "task con allegato: il file è nella scheda «File» del task", dA.map((d) => d.nome));
+
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { smtp.close(); await prisma.$disconnect(); process.exit(ko ? 1 : 0); });

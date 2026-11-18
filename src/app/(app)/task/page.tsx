@@ -7,6 +7,7 @@ import { UFFICI, STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
 import { numeroCommessa } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
 import { assicuraFlusso } from "@/app/flusso-actions";
+import AllegatiTask from "@/components/task/AllegatiTask";
 import { completaTaskCliente, creaTaskCliente } from "@/app/task-clienti-actions";
 import ClientePicker from "@/components/calendario/ClientePicker";
 import { CATEGORIE_TASK } from "@/lib/task/categorie";
@@ -95,6 +96,7 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
                 <label className="block text-xs font-bold text-neutral-700">Ore previste<input name="orePreviste" placeholder="es. 1" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
               </div>
               <label className="block text-xs font-bold text-neutral-700">Descrizione<textarea name="descrizione" rows={3} className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
+              <AllegatiTask />
               <fieldset className="rounded border border-neutral-200 p-2"><legend className="px-1 text-xs font-bold text-neutral-700">In copia a</legend>
                 <div className="grid gap-x-4 gap-y-1 sm:grid-cols-2 md:grid-cols-3">{utenti.filter((x) => x.id !== u.id).map((x) => <label key={x.id} className="flex items-center gap-1.5 text-xs"><input type="checkbox" name="inCopiaA" value={x.id} /> {x.nome}</label>)}</div>
               </fieldset>
