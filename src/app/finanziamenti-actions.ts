@@ -18,7 +18,7 @@ async function autorizzato() {
   if (!(u.ruolo === "AMMINISTRATORE" || puo(u, "amministrazione"))) esito("errore", "Non hai il permesso di modificare i finanziamenti.");
 }
 
-const campi = (fd: FormData) => Object.fromEntries(["id", "nome", "importoMin", "importoMax", "rateDa", "rateA", "giorniPrimaRata", "tan", "tassoRendimento"].map((k) => [k, fd.get(k)]));
+const campi = (fd: FormData) => Object.fromEntries(["id", "nome", "importoMin", "importoMax", "rateDa", "rateA", "giorniPrimaRata", "tan", "tassoRendimento", "speseIncassoRata"].map((k) => [k, fd.get(k)]));
 
 /** Salva una tabella esistente (con id) oppure ne aggiunge una nuova (senza id). */
 export async function salvaTabellaFinanziamento(fd: FormData) {
