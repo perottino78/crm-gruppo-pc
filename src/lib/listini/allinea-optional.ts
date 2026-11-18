@@ -8,7 +8,7 @@ import { optionalFidra } from "./fidra";
 import { optionalPlasma30 } from "./plasma30";
 import type { VoceOptional } from "./serramenti-comuni";
 
-export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-17b";
+export const VERSIONE_OPTIONAL_SERRAMENTI = "2026-11-18";
 const CHIAVE = "optional_serramenti_versione";
 const chiave = (o: { categoria: string; nome: string; listino: string | null }) => `${o.categoria}|${o.nome}|${o.listino ?? ""}`;
 
@@ -31,11 +31,11 @@ async function brandCon(prefisso: string): Promise<string | null> {
   return p.find((x) => x.tipologia.startsWith(prefisso))?.brandId ?? null;
 }
 
-async function creaMancanti(brandId: string, voci: VoceOptional[], prefissoListino: string) {
+async function creaMancanti(brandId: string, voci: VoceOptional[], prefissoListino: string, gruppi: string[] = ["SERRAMENTI"]) {
   const esistenti = await prisma.optional.findMany({ where: { brandId, listino: { startsWith: prefissoListino } }, select: { categoria: true, nome: true, listino: true } });
   const ci = new Set(esistenti.map(chiave));
   const nuove = voci.filter((v) => !ci.has(chiave(v)));
-  if (nuove.length) await prisma.optional.createMany({ data: nuove.map((v) => ({ brandId, ...v, gruppiApplicabili: ["SERRAMENTI"] })) });
+  if (nuove.length) await prisma.optional.createMany({ data: nuove.map((v) => ({ brandId, ...v, gruppiApplicabili: gruppi })) });
   return nuove.length;
 }
 
@@ -69,7 +69,20 @@ export async function allineaOptionalSerramenti() {
   if (fidra) creati += await creaMancanti(fidra, optionalFidra(), "FIDRA");
   const plasma = await brandCon("PLASMA30");
   if (plasma) creati += await creaMancanti(plasma, optionalPlasma30(), "PLASMA30");
+  // Persiane: forma centinata +60% e trapezio +50% (richiesta di Ugo 18/11/2026)
+  for (const [prefisso, listino] of [["PERSIANEBLINDATE_", "PERSIANE_BLINDATE"], ["PERSIANEGOCCIA_", "PERSIANE_GOCCIA"]] as const) {
+    const b = await brandCon(prefisso);
+    if (b) creati += await creaMancanti(b, optionalFormePersiane(listino), listino, ["PERSIANE"]);
+  }
   return { creati, spenti };
+}
+
+/** Maggiorazioni di forma per le persiane: percentuale sul prezzo della persiana. */
+export function optionalFormePersiane(listino: string): VoceOptional[] {
+  return [
+    { categoria: "Lavorazione", nome: "Persiana centinata (ad arco) +60%", tipoPrezzo: "PERCENTUALE", valore: 60, unita: null, listino },
+    { categoria: "Lavorazione", nome: "Persiana a trapezio +50%", tipoPrezzo: "PERCENTUALE", valore: 50, unita: null, listino },
+  ];
 }
 
 /** Da chiamare all'apertura dell'offerta: lavora solo la prima volta dopo una nuova versione (una lettura sola le altre volte). */
