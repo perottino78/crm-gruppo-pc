@@ -14,13 +14,15 @@ import {
 import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
+import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
+import { campiDaCompilare, nomeCampo } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const iso = (d?: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string }> }) {
+export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string; scheda?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
   const { id } = await params;
@@ -35,6 +37,13 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   ]) : [[], []];
   const conBozza = new Map(altreBozze.map((b) => [b.fornitoreId, numeroOrdine(b)]));
   const catalogo = await prisma.articolo.findMany({ where: { fornitoreId: o.fornitoreId, attivo: true }, select: { codice: true, descrizione: true, codiceFornitore: true }, orderBy: { codice: "asc" }, take: 3000 });
+  const [modelliScheda, schedeCreate] = await Promise.all([
+    prisma.schedaProduzioneModello.findMany({ where: { attivo: true, OR: [{ fornitoreId: null }, { fornitoreId: o.fornitoreId }] }, orderBy: { nome: "asc" } }),
+    o.commessaId
+      ? prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: o.commessaId, cartella: "Schede produzione" }, select: { id: true, nome: true, createdAt: true, caricatoDaNome: true }, orderBy: { createdAt: "desc" }, take: 10 })
+      : prisma.documento.findMany({ where: { entita: "ORDINE_FORNITORE", entitaId: o.id, mime: "text/html" }, select: { id: true, nome: true, createdAt: true, caricatoDaNome: true }, orderBy: { createdAt: "desc" }, take: 10 }),
+  ]);
+  const modelloScelto = msg.scheda ? modelliScheda.find((m) => m.id === msg.scheda) ?? null : null;
   const s = statoOrdine(o.stato);
   const bozza = o.stato === "BOZZA", annullato = o.stato === "ANNULLATO";
   const t = totaleOrdine(o.righe);
@@ -143,6 +152,48 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
           </form>
         )}
       </section>
+
+      {!annullato && (
+        <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
+          <h2 className="font-bold mb-1">📄 Scheda di produzione per il fornitore (misure definitive)</h2>
+          {modelliScheda.length === 0 ? (
+            <p className="text-sm text-neutral-600">Nessun modello di scheda per questo fornitore. <Link href="/ordini-fornitori/schede?nuovo=1" className="underline text-blue-800">Crea il primo modello</Link>.</p>
+          ) : (
+            <>
+              <form method="get" className="flex flex-wrap items-end gap-2 mb-2">
+                <label className="text-xs font-semibold">Modello
+                  <select name="scheda" defaultValue={modelloScelto?.id ?? ""} className={`${inp} block`}>
+                    <option value="">Scegli…</option>
+                    {modelliScheda.map((m) => <option key={m.id} value={m.id}>{m.nome}</option>)}
+                  </select>
+                </label>
+                <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
+                <Link href="/ordini-fornitori/schede" className="text-xs underline text-blue-800">gestisci i modelli</Link>
+              </form>
+              {modelloScelto && (
+                <form action={creaSchedaProduzione} className="space-y-2">
+                  <input type="hidden" name="ordineId" value={o.id} />
+                  <input type="hidden" name="modelloId" value={modelloScelto.id} />
+                  {campiDaCompilare(modelloScelto.html).map((c) => (
+                    <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
+                      <textarea name={`campo_${c}`} rows={c.includes("misure") ? 6 : 3} className={`${inp} w-full`} placeholder={c.includes("misure") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
+                    </label>
+                  ))}
+                  <button className="btn-3d btn-3d-blue text-sm px-4 py-2">📄 Crea la scheda</button>
+                  <p className="text-[11px] text-neutral-500">Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all&apos;invio dell&apos;ordine.</p>
+                </form>
+              )}
+            </>
+          )}
+          {schedeCreate.length > 0 && (
+            <ul className="mt-3 text-sm divide-y divide-neutral-100">
+              {schedeCreate.map((d) => (
+                <li key={d.id} className="py-1 flex flex-wrap items-center gap-3"><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline">📄 {d.nome}</a><span className="text-xs text-neutral-500">{d.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span></li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
 
       {!annullato && o.righe.length > 0 && (
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">

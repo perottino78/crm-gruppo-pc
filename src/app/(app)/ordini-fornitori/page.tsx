@@ -59,6 +59,7 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
         <div>
           <h1 className="text-2xl font-bold text-neutral-900">🚚 Ordini fornitori</h1>
           <p className="text-sm text-neutral-600">Anno {anno}: {aperti} aperti · {n("EVASO")} arrivati · {n("ANNULLATO")} annullati</p>
+          <Link href="/ordini-fornitori/schede" className="text-xs underline text-blue-800">📄 Schede di produzione per i fornitori (modelli HTML)</Link>
         </div>
         <form action={creaOrdineLibero} className="flex flex-wrap items-end gap-2">
           <label className="text-xs font-semibold">Nuovo ordine senza commessa (scorta, consumabili)
