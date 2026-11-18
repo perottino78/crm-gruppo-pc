@@ -28,7 +28,8 @@ import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDime
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import SelectAutoInvio from "@/components/SelectAutoInvio";
 import FormAutoSalva from "@/components/FormAutoSalva";
-import { TABELLE_PREDEFINITE, calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
 import { rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
@@ -153,6 +154,7 @@ export default async function PreventivoPage({
 
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
+  const tabelleFin = await leggiTabelleFinanziamento();
   const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
@@ -1582,32 +1584,32 @@ export default async function PreventivoPage({
       </div>
       {(() => {
         const sc = preventivo.finanziamento as SceltaFinanziamento | null;
-        const fin = sc ? calcolaFinanziamento(sc, totaleFinale) : null;
+        const fin = sc ? calcolaFinanziamento(sc, totaleFinale, tabelleFin) : null;
         const vedeCosto = isAmministratore(utenteCorrente) || puo(utenteCorrente, "amministrazione");
-        const t = sc ? TABELLE_PREDEFINITE.find((x) => x.id === sc.tabellaId) : null;
+        const t = sc ? tabelleFin.find((x) => x.id === sc.tabellaId) : null;
         return (
           <div id="finanziamento" className="bg-white rounded-lg border border-neutral-200 p-4 mb-6">
             <p className="text-base font-bold text-neutral-900 mb-1">🏦 Pagamento con finanziamento</p>
             <p className="text-[11px] text-neutral-500 mb-2">Una parte la paga subito il cliente, il resto lo finanzia in rate (tabelle del simulatore). Si salva da solo.</p>
-            <FormAutoSalva key={`fin-${sc?.tabellaId ?? ""}|${sc?.rate ?? ""}|${sc?.importoFinanziato ?? ""}|${totaleFinale}`} action={salvaFinanziamento} className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <FormAutoSalva key={`fin-${sc?.tabellaId ?? ""}|${sc?.rate ?? ""}|${sc?.pagaSubito ?? sc?.importoFinanziato ?? ""}|${totaleFinale}`} action={salvaFinanziamento} className="grid grid-cols-1 md:grid-cols-3 gap-2">
               <input type="hidden" name="id" value={preventivo.id} />
               <label className="text-xs font-semibold text-neutral-700">Tabella
                 <select name="tabellaId" defaultValue={sc?.tabellaId ?? ""} className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal">
                   <option value="">Nessun finanziamento</option>
-                  {TABELLE_PREDEFINITE.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
+                  {tabelleFin.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
                 </select>
               </label>
               <label className="text-xs font-semibold text-neutral-700">Numero rate{t && t.rateDa !== t.rateA ? ` (${t.rateDa}–${t.rateA})` : ""}
                 <input name="rate" type="number" min={t?.rateDa ?? 10} max={t?.rateA ?? 120} defaultValue={sc?.rate ?? ""} className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
               </label>
-              <label className="text-xs font-semibold text-neutral-700">Importo finanziato (€)
-                <input name="importoFinanziato" inputMode="decimal" defaultValue={sc?.importoFinanziato ?? ""} placeholder={String(Math.round(totaleFinale))} className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
+              <label className="text-xs font-semibold text-neutral-700">Il cliente paga subito (€)
+                <input name="pagaSubito" inputMode="decimal" defaultValue={fin && fin.ok ? fin.anticipoDiretto : ""} placeholder="0" className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
               </label>
             </FormAutoSalva>
             {fin && !fin.ok && <p className="mt-2 text-sm text-red-700">{fin.errore}</p>}
             {fin && fin.ok && (
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                <div className="bg-neutral-50 rounded p-2"><p className="text-[11px] text-neutral-500">Il cliente paga subito</p><p className="font-bold">{eur(fin.anticipoDiretto)}</p></div>
+                <div className="bg-neutral-50 rounded p-2"><p className="text-[11px] text-neutral-500">Importo finanziato</p><p className="font-bold">{eur(fin.importoFinanziato)}</p></div>
                 <div className="bg-neutral-50 rounded p-2"><p className="text-[11px] text-neutral-500">Rata mensile × {fin.rate}</p><p className="font-bold">{eur(fin.rata)}</p></div>
                 <div className="bg-neutral-50 rounded p-2"><p className="text-[11px] text-neutral-500">TAN / TAEG</p><p className="font-bold">{fin.tabella.tan.toLocaleString("it-IT")}% / {fin.taeg.toLocaleString("it-IT")}%</p></div>
                 <div className="bg-neutral-50 rounded p-2"><p className="text-[11px] text-neutral-500">Totale rate (con spese)</p><p className="font-bold">{eur(fin.totaleDovuto)}</p></div>

@@ -3,7 +3,8 @@
 import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { ricalcolaTotali } from "@/lib/preventivi/totali";
-import { calcolaFinanziamento, TABELLE_PREDEFINITE } from "@/lib/finanziamenti/tabelle";
+import { calcolaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { portaSolarisInOfferta } from "@/lib/solaris/porta-in-offerta";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
@@ -473,15 +474,19 @@ export async function salvaFinanziamento(formData: FormData) {
     if (!p) return;
     const totale = p.totaleNetto + p.totaleIva;
     // dati mancanti o fuori dalla tabella scelta: si parte da valori sensati (60 rate o il massimo/minimo consentito)
-    const tab = TABELLE_PREDEFINITE.find((x) => x.id === tabellaId);
+    const tabelle = await leggiTabelleFinanziamento();
+    const tab = tabelle.find((x) => x.id === tabellaId);
     const rateIn = parseInt(str(formData, "rate") || "0", 10);
     const rate = tab ? Math.min(tab.rateA, Math.max(tab.rateDa, rateIn > 0 ? rateIn : 60)) : rateIn;
-    const finGrezzo = str(formData, "importoFinanziato") ?? "";
-    const finStr = finGrezzo.includes(",") ? finGrezzo.replace(/\./g, "").replace(",", ".") : finGrezzo;
-    const importoFinanziato = finStr ? parseFloat(finStr) : Math.min(totale, tab?.importoMax ?? totale);
-    const e = calcolaFinanziamento({ tabellaId, rate, importoFinanziato }, totale);
+    // «Il cliente paga subito» è la cifra che decide il commerciale; il resto si finanzia (vuoto = tutto finanziato, fino al massimo della tabella)
+    const subGrezzo = str(formData, "pagaSubito") ?? "";
+    const subStr = subGrezzo.includes(",") ? subGrezzo.replace(/\./g, "").replace(",", ".") : subGrezzo;
+    const minimoSubito = Math.max(0, totale - (tab?.importoMax ?? totale));
+    const pagaSubito = subStr ? parseFloat(subStr) : minimoSubito;
+    if (!Number.isFinite(pagaSubito)) return redirect(`/preventivi/${id}?errore=${encodeURIComponent("Cifra «paga subito» non valida.")}#finanziamento`);
+    const e = calcolaFinanziamento({ tabellaId, rate, pagaSubito }, totale, tabelle);
     if (!e.ok) return redirect(`/preventivi/${id}?errore=${encodeURIComponent(e.errore)}#finanziamento`);
-    await prisma.preventivo.update({ where: { id }, data: { finanziamento: { tabellaId, rate, importoFinanziato } } });
+    await prisma.preventivo.update({ where: { id }, data: { finanziamento: { tabellaId, rate, pagaSubito } } });
   }
   revalidatePath(`/preventivi/${id}`);
   revalidatePath(`/preventivi/${id}/stampa`);
