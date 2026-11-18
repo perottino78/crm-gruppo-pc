@@ -10,7 +10,7 @@ import { importoRiga, numeroDdt } from "@/lib/fatturazione/calcoli";
 import { emissioneReale } from "@/lib/fatturazione/server";
 import { salvaTestataDdt, salvaRigheDdt, confermaDdt, cambiaStatoDdt, eliminaDdt, fatturaDaDdt } from "@/app/fatturazione-actions";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-full disabled:bg-neutral-50 disabled:text-neutral-700";
 

@@ -84,7 +84,7 @@ export function SelettoreMotori({
             <option value="">2. Modello —</option>
             {variantiDellaMarca.map((o) => (
               <option key={o.id} value={o.id}>
-                {o.nome} ({o.valore.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                {o.nome} ({o.valore.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })})
               </option>
             ))}
           </select>

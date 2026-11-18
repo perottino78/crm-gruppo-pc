@@ -82,7 +82,7 @@ export function SelettoreAccessoriMotore({
             <option value="">Telecomando, centralina, sensore...</option>
             {accessoriDellaMarca.map((o) => (
               <option key={o.id} value={o.id}>
-                {o.nome} ({o.valore.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                {o.nome} ({o.valore.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })})
               </option>
             ))}
           </select>

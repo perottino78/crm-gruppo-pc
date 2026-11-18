@@ -92,11 +92,11 @@ export default async function CommercialiPage({ searchParams }: { searchParams: 
                   </td>
                   <td className="px-4 py-2 text-right">
                     {venditori.some((v) => v.id === u.id)
-                      ? <Link href={`/contratti?persona=${u.id}&anno=${anno}`} className="font-semibold text-blue-800 hover:underline">{vendutoDi(u.id).toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 })}</Link>
+                      ? <Link href={`/contratti?persona=${u.id}&anno=${anno}`} className="font-semibold text-blue-800 hover:underline">{vendutoDi(u.id).toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" as unknown as boolean })}</Link>
                       : "—"}
                   </td>
                   <td className="px-4 py-2 text-right">{accettati.length}</td>
-                  <td className="px-4 py-2 text-right">{valoreAccettato.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</td>
+                  <td className="px-4 py-2 text-right">{valoreAccettato.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</td>
                   <td className="px-4 py-2 text-right">{u.appuntamenti.length}</td>
                 </tr>
               );

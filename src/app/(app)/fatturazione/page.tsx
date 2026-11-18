@@ -8,7 +8,7 @@ import { numeroDdt } from "@/lib/fatturazione/calcoli";
 import { creaFattura, creaDdt, fatturaDaDdt } from "@/app/fatturazione-actions";
 import ClientePicker from "@/components/calendario/ClientePicker";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const oggi = () => new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";

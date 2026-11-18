@@ -215,7 +215,7 @@ export async function salvaVariante(formData: FormData) {
   }
   const idRighe = new Set(p.righe.map((r) => r.id));
   const tolteGiaOrdinate = await prisma.rigaOrdine.count({ where: { commessaId: c.id, complemento: false, rigaPreventivoId: { not: null }, NOT: { rigaPreventivoId: { in: [...idRighe] } } } });
-  const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
   await log(c.id, `Variante dell'offerta ${p.numeroOfferta ?? ""} salvata da ${utente!.nome}: totale ${eur(c.totaleVendita)} → ${eur(totale)} IVA incl.; materiale aggiornato.${tolteGiaOrdinate ? ` ⚠ ${tolteGiaOrdinate} righe tolte dall'offerta erano già ordinate al fornitore: verificare.` : ""}`);
   await ricalcolaStato(c.id);
   revalidatePath(`/preventivi/${id}`);

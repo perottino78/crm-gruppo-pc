@@ -17,7 +17,7 @@ import RiquadroObiettivi from "@/components/provvigioni/RiquadroObiettivi";
 
 type P = { persona?: string; q?: string; anno?: string; pagamento?: string; provvigione?: string; origine?: string; n?: string; aperto?: string; ok?: string; errore?: string };
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const giorno = (d: Date | null | undefined) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric" }) : "—");
 const ancora = (chiave: string) => `c-${chiave.replace(/[^A-Za-z0-9_-]/g, "_")}`;
 

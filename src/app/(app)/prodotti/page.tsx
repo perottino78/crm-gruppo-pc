@@ -171,7 +171,7 @@ export default async function ProdottiPage({
         </form>
         {calcRisultato && (
           <div className="mt-3 text-sm bg-green-50 border border-green-200 rounded-lg px-4 py-2.5 text-green-800">
-            Prezzo: <span className="font-semibold">{calcRisultato.prezzo.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>{" "}
+            Prezzo: <span className="font-semibold">{calcRisultato.prezzo.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</span>{" "}
             <span className="text-green-600 text-xs">(fascia listino {calcRisultato.larghezzaFascia}×{calcRisultato.altezzaFascia}{calcRisultato.unit})</span>
           </div>
         )}
@@ -314,8 +314,8 @@ export default async function ProdottiPage({
                     )}
                   </td>
                   <td className="px-4 py-2 text-right">
-                    {r.prezzoMin.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
-                    {r.prezzoMax !== r.prezzoMin && <> – {r.prezzoMax.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</>}
+                    {r.prezzoMin.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
+                    {r.prezzoMax !== r.prezzoMin && <> – {r.prezzoMax.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</>}
                   </td>
                   <td className="px-4 py-2 text-right">
                     <Link href={`/prodotti/modello/${encodeURIComponent(r.tipologia)}`} className="text-xs text-blue-600 underline whitespace-nowrap">

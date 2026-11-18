@@ -110,7 +110,7 @@ export function settimanaIso(oggi: string): string {
   return `${d.getUTCFullYear()}-W${String(n).padStart(2, "0")}`;
 }
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
 function righePeriodo(titolo: string, av: Avanzamento, premio: number | null): string[] {
   const out = [`${titolo}: obiettivo ${eur(av.target)}${premio ? ` (premio ${eur(premio)})` : ""}`,

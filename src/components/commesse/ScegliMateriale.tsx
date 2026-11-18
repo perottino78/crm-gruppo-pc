@@ -117,7 +117,7 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
                   <button type="button" onClick={() => scegli(r)} className="w-full text-left px-2 py-1.5 hover:bg-blue-50">
                     <span className={`text-[10px] font-bold mr-1.5 px-1 rounded ${r.tipo === "A" ? "bg-amber-100 text-amber-900" : "bg-blue-100 text-blue-900"}`}>{r.tipo === "A" ? "ARTICOLO" : "LISTINO"}</span>
                     {r.label}
-                    <span className="text-xs text-neutral-500">{r.tipo === "A" ? `${r.fornitore ? ` · ${r.fornitore}` : ""}${r.costo !== null ? ` · costo ${r.costo.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}/${r.um}` : ""}` : `${r.gruppo ? ` · ${r.gruppo}` : ""} · ${r.colori.length} colori${r.griglia ? " · a misura" : ""}`}</span>
+                    <span className="text-xs text-neutral-500">{r.tipo === "A" ? `${r.fornitore ? ` · ${r.fornitore}` : ""}${r.costo !== null ? ` · costo ${r.costo.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}/${r.um}` : ""}` : `${r.gruppo ? ` · ${r.gruppo}` : ""} · ${r.colori.length} colori${r.griglia ? " · a misura" : ""}`}</span>
                   </button>
                 </li>
               ))}
