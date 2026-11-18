@@ -5,6 +5,7 @@ import { calendarioIcs, type VoceIcs } from "./ics";
 import { esterniDaMostrare } from "./ical";
 import { type EventoCal, type TipoEvento, nomeTipoAppuntamento, STILE_TIPO } from "./eventi";
 import { chiaveGiorno, inizioGiorno, aggiungiGiorni, giornoBreve, oraRoma } from "./tempo";
+import { rilieviDoppioni } from "./rilievo-progetto";
 
 const MIN = 60_000;
 const indirizzoCliente = (c: { indirizzo: string | null; cap: string | null; comune: string | null; provincia: string | null }) =>
@@ -41,7 +42,8 @@ export async function eventiPeriodo(o: { da: Date; a: Date; utenteId?: string | 
   const nomi = riu.length ? new Map((await prisma.utente.findMany({ where: { id: { in: [...new Set(riu.flatMap((r) => r.partecipanti))] } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome])) : new Map<string, string>();
   const out: EventoCal[] = [
     ...app.map(daAppuntamento),
-    ...ril.map(daRilievo),
+    // il rilievo nato da un appuntamento di rilievo collegato al progetto si vede una volta sola (come appuntamento)
+    ...((d) => ril.filter((r) => !d.has(r.id)))(rilieviDoppioni(app, ril)).map(daRilievo),
     ...pose.map(daPosa),
     ...ass.map(daAssistenza),
     // una riunione compare nel calendario di ognuno dei partecipanti (con il suo colore)
