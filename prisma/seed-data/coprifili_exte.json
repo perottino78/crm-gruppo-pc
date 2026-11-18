@@ -1,0 +1,812 @@
+[
+ {
+  "sezione": "PIATTI",
+  "codice": "65025020",
+  "descrizione": "Listello piatto 20 x 2,5",
+  "per100m": {
+   "bianco": 51.12,
+   "protettiva": 51.86,
+   "rivestito": 225.95
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025025",
+  "descrizione": "Listello piatto 25 x 2,5",
+  "per100m": {
+   "bianco": 54.0,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025030",
+  "descrizione": "Listello piatto 30 x 2,5",
+  "per100m": {
+   "bianco": 59.74,
+   "protettiva": 60.48,
+   "rivestito": 271.14
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025035",
+  "descrizione": "Listello piatto 35 x 2,5",
+  "per100m": {
+   "bianco": 66.63,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025040",
+  "descrizione": "Listello piatto 40 x 2,5",
+  "per100m": {
+   "bianco": 73.53,
+   "protettiva": 74.98,
+   "rivestito": 303.31
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025050",
+  "descrizione": "Listello piatto 50 x 2,5",
+  "per100m": {
+   "bianco": 87.31,
+   "protettiva": 88.75,
+   "rivestito": 335.47
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025060",
+  "descrizione": "Listello piatto 60 x 2,5",
+  "per100m": {
+   "bianco": 125.81,
+   "protettiva": 127.26,
+   "rivestito": 385.46
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025070",
+  "descrizione": "Listello piatto 70 x 2,5",
+  "per100m": {
+   "bianco": 150.51,
+   "protettiva": 153.0,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025080",
+  "descrizione": "Listello piatto 80 x 2,5",
+  "per100m": {
+   "bianco": 174.65,
+   "protettiva": 177.13,
+   "rivestito": 515.0
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025100",
+  "descrizione": "Listello piatto 100 x 2,5",
+  "per100m": {
+   "bianco": 223.47,
+   "protettiva": null,
+   "rivestito": 567.0
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025120",
+  "descrizione": "Listello piatto 120 x 2,5",
+  "per100m": {
+   "bianco": 264.83,
+   "protettiva": 268.97,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIATTI",
+  "codice": "65025150",
+  "descrizione": "Listello piatto 150 x 2,5",
+  "per100m": {
+   "bianco": 465.22,
+   "protettiva": 468.95,
+   "rivestito": 1200.0
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030020",
+  "descrizione": "Listello piatto 20 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 81.58,
+   "protettiva": 82.32,
+   "rivestito": 262.87
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030030",
+  "descrizione": "Listello piatto 30 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 101.1,
+   "protettiva": 102.06,
+   "rivestito": 308.06
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030040",
+  "descrizione": "Listello piatto 40 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 118.91,
+   "protettiva": 120.35,
+   "rivestito": 340.23
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030050",
+  "descrizione": "Listello piatto 50 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 129.36,
+   "protettiva": 131.02,
+   "rivestito": 372.39
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030060",
+  "descrizione": "Listello piatto 60 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 147.64,
+   "protettiva": 149.57,
+   "rivestito": 422.38
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030080",
+  "descrizione": "Listello piatto 80 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 193.6,
+   "protettiva": 197.29,
+   "rivestito": 522.36
+  }
+ },
+ {
+  "sezione": "PIATTI_ADESIVI",
+  "codice": "64030100",
+  "descrizione": "Listello piatto 100 x 2,5, autoadesivo espanso",
+  "per100m": {
+   "bianco": 228.6,
+   "protettiva": null,
+   "rivestito": 603.92
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6462020",
+  "descrizione": "Listello piegabile 40, 20 x 20 x 2,5 mm",
+  "per100m": {
+   "bianco": 124.0,
+   "protettiva": null,
+   "rivestito": 358.16
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6462525",
+  "descrizione": "Listello piegabile 50, 25 x 25 x 2,5 mm",
+  "per100m": {
+   "bianco": 125.0,
+   "protettiva": null,
+   "rivestito": 392.86
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6463535",
+  "descrizione": "Listello piegabile 70, 35 x 35 x 2,5 mm",
+  "per100m": {
+   "bianco": 175.0,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6465020",
+  "descrizione": "Listello piegabile 70, 50 x 20 x 2,5 mm",
+  "per100m": {
+   "bianco": 175.0,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6464040",
+  "descrizione": "Listello piegabile 80, 40 x 40 x 2,5 mm",
+  "per100m": {
+   "bianco": 225.2,
+   "protettiva": null,
+   "rivestito": 545.65
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6465050",
+  "descrizione": "Listello piegabile 100, 50 x 50 x 2,5 mm",
+  "per100m": {
+   "bianco": 265.0,
+   "protettiva": null,
+   "rivestito": 597.74
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "6466060",
+  "descrizione": "Listello piegabile 120, 60 x 60 x 2,5 mm",
+  "per100m": {
+   "bianco": 357.9,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "PIEGABILI",
+  "codice": "64241",
+  "descrizione": "Listello flessibile 80 x 2",
+  "per100m": {
+   "bianco": 152.81,
+   "protettiva": 156.5,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_SEPARABILI",
+  "codice": "6405080R",
+  "descrizione": "Listello scatolato 80 x 5 con prerottura di separazione ed autoadesivo espanso",
+  "per100m": {
+   "bianco": 214.29,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_SEPARABILI",
+  "codice": "6405100R",
+  "descrizione": "Listello scatolato 100 x 5 con prerottura di separazione ed autoadesivo espanso",
+  "per100m": {
+   "bianco": 235.89,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_SEPARABILI",
+  "codice": "6405001",
+  "descrizione": "Profilo di giunzione",
+  "per100m": {
+   "bianco": 150.0,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507153",
+  "descrizione": "Listello scatolato 15/7",
+  "per100m": {
+   "bianco": 71.8,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507253",
+  "descrizione": "Listello scatolato 25/7",
+  "per100m": {
+   "bianco": 86.17,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507353",
+  "descrizione": "Listello scatolato 35/7",
+  "per100m": {
+   "bianco": 97.65,
+   "protettiva": 98.69,
+   "rivestito": 358.56
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507453",
+  "descrizione": "Listello scatolato 45/7",
+  "per100m": {
+   "bianco": 109.15,
+   "protettiva": 110.6,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507553",
+  "descrizione": "Listello scatolato 55/7",
+  "per100m": {
+   "bianco": 117.77,
+   "protettiva": 119.84,
+   "rivestito": 484.68
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507753",
+  "descrizione": "Listello scatolato 75/7",
+  "per100m": {
+   "bianco": 146.48,
+   "protettiva": null,
+   "rivestito": 584.43
+  }
+ },
+ {
+  "sezione": "SCATOLATI",
+  "codice": "6507953",
+  "descrizione": "Listello scatolato 95/7",
+  "per100m": {
+   "bianco": 206.81,
+   "protettiva": null,
+   "rivestito": 862.1
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407153",
+  "descrizione": "Listello scatolato 15/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 100.53,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407253",
+  "descrizione": "Listello scatolato 25/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 118.34,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407353",
+  "descrizione": "Listello scatolato 35/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 136.15,
+   "protettiva": 138.0,
+   "rivestito": 378.58
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407453",
+  "descrizione": "Listello scatolato 45/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 155.1,
+   "protettiva": 157.21,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407553",
+  "descrizione": "Listello scatolato 55/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 175.22,
+   "protettiva": 177.86,
+   "rivestito": 523.89
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407753",
+  "descrizione": "Listello scatolato 75/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 203.93,
+   "protettiva": null,
+   "rivestito": 698.4
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6407953",
+  "descrizione": "Listello scatolato 95/7, autoadesivo espanso",
+  "per100m": {
+   "bianco": 229.79,
+   "protettiva": null,
+   "rivestito": 873.0
+  }
+ },
+ {
+  "sezione": "SCATOLATI_ADESIVI",
+  "codice": "6477953",
+  "descrizione": "Listello scatolato 95/7 2 x autoadesivo espanso",
+  "per100m": {
+   "bianco": 260.35,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650720",
+  "descrizione": "Listello scatolato 20/7 con baffo",
+  "per100m": {
+   "bianco": 71.8,
+   "protettiva": null,
+   "rivestito": 270.95
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650730",
+  "descrizione": "Listello scatolato 30/7 con baffo",
+  "per100m": {
+   "bianco": 86.17,
+   "protettiva": 86.91,
+   "rivestito": 295.0
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650740",
+  "descrizione": "Listello scatolato 40/7 con baffo",
+  "per100m": {
+   "bianco": 97.65,
+   "protettiva": 99.11,
+   "rivestito": 352.91
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650750",
+  "descrizione": "Listello scatolato 50/7 con baffo",
+  "per100m": {
+   "bianco": 109.15,
+   "protettiva": 110.61,
+   "rivestito": 421.26
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650760",
+  "descrizione": "Listello scatolato 60/7 con baffo",
+  "per100m": {
+   "bianco": 117.77,
+   "protettiva": 119.21,
+   "rivestito": 485.59
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650780",
+  "descrizione": "Listello scatolato 80/7 con baffo",
+  "per100m": {
+   "bianco": 146.48,
+   "protettiva": null,
+   "rivestito": 660.1
+  }
+ },
+ {
+  "sezione": "BAFFO",
+  "codice": "650700",
+  "descrizione": "Listello scatolato 100/7 con baffo",
+  "per100m": {
+   "bianco": 206.81,
+   "protettiva": null,
+   "rivestito": 857.68
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640720",
+  "descrizione": "Listello scatolato 20/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 100.53,
+   "protettiva": null,
+   "rivestito": 290.1
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "6407251",
+  "descrizione": "Listello scatolato 25/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 109.44,
+   "protettiva": null,
+   "rivestito": 308.77
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640730",
+  "descrizione": "Listello scatolato 30/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 118.34,
+   "protettiva": 119.3,
+   "rivestito": 327.44
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640740",
+  "descrizione": "Listello scatolato 40/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 136.15,
+   "protettiva": 138.0,
+   "rivestito": 378.58
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640750",
+  "descrizione": "Listello scatolato 50/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 155.1,
+   "protettiva": 157.21,
+   "rivestito": 436.58
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640760",
+  "descrizione": "Listello scatolato 60/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 175.22,
+   "protettiva": 177.86,
+   "rivestito": 523.89
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640780",
+  "descrizione": "Listello scatolato 80/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 203.93,
+   "protettiva": null,
+   "rivestito": 698.4
+  }
+ },
+ {
+  "sezione": "BAFFO_ADESIVI",
+  "codice": "640700",
+  "descrizione": "Listello scatolato 100/7 con baffo, autoadesivo espanso",
+  "per100m": {
+   "bianco": 229.79,
+   "protettiva": null,
+   "rivestito": 873.0
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71020020",
+  "descrizione": "Angolare 20 x 20 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 111.45,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71025025",
+  "descrizione": "Angolare 25 x 25 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 118.34,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71030030",
+  "descrizione": "Angolare 30 x 30 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 128.67,
+   "protettiva": null,
+   "rivestito": 620.0
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71035035",
+  "descrizione": "Angolare 35 x 35 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 146.07,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71040040",
+  "descrizione": "Angolare 40 x 40 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 156.83,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71050050",
+  "descrizione": "Angolare 50 x 50 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 210.26,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "71060060",
+  "descrizione": "Angolare 60 x 60 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 241.57,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_UGUALI",
+  "codice": "61100100",
+  "descrizione": "Angolare 100 x 100 x 2,5 arrotondato",
+  "per100m": {
+   "bianco": 394.96,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71020012",
+  "descrizione": "Angolare 20 x 12 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 109.1,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71030020",
+  "descrizione": "Angolare 30 x 20 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 118.34,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71040020",
+  "descrizione": "Angolare 40 x 20 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 128.67,
+   "protettiva": null,
+   "rivestito": 620.0
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71045025",
+  "descrizione": "Angolare 45 x 25 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 172.33,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71050010",
+  "descrizione": "Angolare 50 x 10 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 128.67,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71050030",
+  "descrizione": "Angolare 50 x 30 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 156.83,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71060020",
+  "descrizione": "Angolare 60 x 20 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 182.59,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71060030",
+  "descrizione": "Angolare 60 x 30 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 184.41,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71060040",
+  "descrizione": "Angolare 60 x 40 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 210.26,
+   "protettiva": null,
+   "rivestito": 750.0
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71080040",
+  "descrizione": "Angolare 80 x 40 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 241.57,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71080050",
+  "descrizione": "Angolare 80 x 50 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 261.7,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "71100060",
+  "descrizione": "Angolare 100 x 60 x 2,5 squadrato",
+  "per100m": {
+   "bianco": 315.96,
+   "protettiva": null,
+   "rivestito": null
+  }
+ },
+ {
+  "sezione": "ANGOLARI_DIVERSI",
+  "codice": "61150100",
+  "descrizione": "Angolare 150 x 100 x 2,5 arrotondato",
+  "per100m": {
+   "bianco": 493.7,
+   "protettiva": null,
+   "rivestito": null
+  }
+ }
+]
