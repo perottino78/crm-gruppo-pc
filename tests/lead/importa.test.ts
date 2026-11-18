@@ -52,3 +52,10 @@ test("controlli: errori, doppioni nel file, lead e clienti già in ONE", () => {
   assert.deepEqual(riepilogo(e), { totale: 7, nuovi: 2, doppiFile: 1, doppiLead: 1, doppiClienti: 1, errori: 2 });
   assert.ok(e[4].motivo?.includes("Verdi Luca"));
 });
+
+test("per le campagne conta solo l'email: telefono ignorato, email obbligatoria", () => {
+  const esistenti: Esistente[] = [{ tipo: "CLIENTE", id: "C1", nome: "Neri Paola", telefoni: [], emails: ["paola@x.it"] }];
+  const l = righeDaCsv("Nome;Email;Telefono\nA Uno;uno@x.it;333 1111111\nB Due;;333 2222222\nC Tre;PAOLA@x.it;\nD Quattro;non-una-mail;\nE Cinque;uno@x.it;333 9999999");
+  const e = classifica(l.righe, esistenti, "CAMPAGNE");
+  assert.deepEqual(e.map((x) => x.stato), ["NUOVO", "ERRORE", "DOPPIO_CLIENTE", "ERRORE", "DOPPIO_FILE"]);
+});
