@@ -477,15 +477,20 @@ export async function salvaFinanziamento(formData: FormData) {
     const tabelle = await leggiTabelleFinanziamento();
     const tab = tabelle.find((x) => x.id === tabellaId);
     const rateIn = parseInt(str(formData, "rate") || "0", 10);
+    // stessa tabella e numero di rate fuori dai limiti: bloccato con avviso; se cambia la tabella, le rate si portano da sole dentro i suoi limiti
+    const precedente = (await prisma.preventivo.findUnique({ where: { id }, select: { finanziamento: true } }))?.finanziamento as { tabellaId?: string } | null;
+    if (tab && precedente?.tabellaId === tabellaId && rateIn > 0 && (rateIn < tab.rateDa || rateIn > tab.rateA))
+      return redirect(`/preventivi/${id}?finerr=${encodeURIComponent(`Numero rate da ${tab.rateDa} a ${tab.rateA}.`)}#finanziamento`);
     const rate = tab ? Math.min(tab.rateA, Math.max(tab.rateDa, rateIn > 0 ? rateIn : 60)) : rateIn;
     // «Il cliente paga subito» è la cifra che decide il commerciale; il resto si finanzia (vuoto = tutto finanziato, fino al massimo della tabella)
     const subGrezzo = str(formData, "pagaSubito") ?? "";
-    const subStr = subGrezzo.includes(",") ? subGrezzo.replace(/\./g, "").replace(",", ".") : subGrezzo;
+    // «18.200» = diciottomiladuecento (punto delle migliaia), «18.2» = 18,2
+    const subStr = subGrezzo.includes(",") || /^\d{1,3}(\.\d{3})+$/.test(subGrezzo) ? subGrezzo.replace(/\./g, "").replace(",", ".") : subGrezzo;
     const minimoSubito = Math.max(0, totale - (tab?.importoMax ?? totale));
     const pagaSubito = subStr ? parseFloat(subStr) : minimoSubito;
-    if (!Number.isFinite(pagaSubito)) return redirect(`/preventivi/${id}?errore=${encodeURIComponent("Cifra «paga subito» non valida.")}#finanziamento`);
+    if (!Number.isFinite(pagaSubito)) return redirect(`/preventivi/${id}?finerr=${encodeURIComponent("Cifra «paga subito» non valida.")}#finanziamento`);
     const e = calcolaFinanziamento({ tabellaId, rate, pagaSubito }, totale, tabelle);
-    if (!e.ok) return redirect(`/preventivi/${id}?errore=${encodeURIComponent(e.errore)}#finanziamento`);
+    if (!e.ok) return redirect(`/preventivi/${id}?finerr=${encodeURIComponent(e.errore)}#finanziamento`);
     await prisma.preventivo.update({ where: { id }, data: { finanziamento: { tabellaId, rate, pagaSubito } } });
   }
   revalidatePath(`/preventivi/${id}`);

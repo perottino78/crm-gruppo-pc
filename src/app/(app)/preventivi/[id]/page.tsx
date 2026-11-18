@@ -91,10 +91,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; solaris?: string; solarisFoto?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
+  searchParams: Promise<{ q?: string; solaris?: string; solarisFoto?: string; errore?: string; finerr?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
 }) {
   const { id } = await params;
-  const { q, solaris, solarisFoto, errore, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
+  const { q, solaris, solarisFoto, errore, finerr, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -155,7 +155,10 @@ export default async function PreventivoPage({
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
   const tabelleFin = await leggiTabelleFinanziamento();
-  const finAttivo = !!preventivo.finanziamento && !!tabelleFin.find((x) => x.id === (preventivo.finanziamento as SceltaFinanziamento).tabellaId);
+  const finScelta = preventivo.finanziamento as SceltaFinanziamento | null;
+  const finCalcolo = finScelta ? calcolaFinanziamento(finScelta, totaleFinale, tabelleFin) : null;
+  // se il totale cambia e il finanziamento esce dai limiti della tabella, in stampa tornano le condizioni standard
+  const finAttivo = !!finCalcolo?.ok;
   const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
@@ -1588,8 +1591,8 @@ export default async function PreventivoPage({
           📝 Condizioni dell&apos;offerta <span className="text-xs font-normal text-neutral-500">— usate nella stampa, si salvano da sole quando esci dal campo</span>
         </p>
       {(() => {
-        const sc = preventivo.finanziamento as SceltaFinanziamento | null;
-        const fin = sc ? calcolaFinanziamento(sc, totaleFinale, tabelleFin) : null;
+        const sc = finScelta;
+        const fin = finCalcolo;
         const vedeCosto = isAmministratore(utenteCorrente) || puo(utenteCorrente, "amministrazione");
         const t = sc ? tabelleFin.find((x) => x.id === sc.tabellaId) : null;
         return (
@@ -1611,7 +1614,15 @@ export default async function PreventivoPage({
                 <input name="pagaSubito" inputMode="decimal" defaultValue={fin && fin.ok ? fin.anticipoDiretto : ""} placeholder="0" className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
               </label>
             </FormAutoSalva>
-            {fin && !fin.ok && <p className="mt-2 text-sm text-red-700">{fin.errore}</p>}
+            {t && (
+              <p className="mt-2 text-[11px] text-neutral-600">
+                Limiti di questa tabella: da {t.rateDa} a {t.rateA} rate · importo finanziato da {eur(t.importoMin)} a {eur(t.importoMax)}
+                {totaleFinale > t.importoMax ? <> · con questo totale il cliente paga subito almeno {eur(totaleFinale - t.importoMax)}</> : null}
+                {totaleFinale < t.importoMin ? <> · <b className="text-red-700">il totale dell&apos;offerta è sotto il minimo finanziabile</b></> : null}.
+              </p>
+            )}
+            {finerr && <p className="mt-2 rounded border border-red-300 bg-red-50 px-2 py-1.5 text-sm font-semibold text-red-800">⛔ Non salvato: {finerr}</p>}
+            {fin && !fin.ok && <p className="mt-2 rounded border border-amber-300 bg-amber-50 px-2 py-1.5 text-sm text-amber-900">⚠️ {fin.errore} In stampa restano le condizioni di pagamento standard finché non lo correggi.</p>}
             {fin && fin.ok && (
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                 <div className="bg-white rounded p-2"><p className="text-[11px] text-neutral-500">Importo finanziato</p><p className="font-bold">{eur(fin.importoFinanziato)}</p></div>

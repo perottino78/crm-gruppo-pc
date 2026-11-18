@@ -23,6 +23,8 @@ export const TABELLE_PREDEFINITE: TabellaFinanziamento[] = [
 ];
 
 // Se c'è `pagaSubito` (cifra mista) il finanziato è sempre il totale meno quella cifra, anche se il totale cambia.
+const eurInt = (n: number) => `${n.toLocaleString("it-IT", { minimumFractionDigits: 0, maximumFractionDigits: 2, useGrouping: "always" as unknown as boolean })} €`;
+
 export type SceltaFinanziamento = { tabellaId: string; rate: number; importoFinanziato?: number; pagaSubito?: number };
 
 export type EsitoFinanziamento =
@@ -47,7 +49,7 @@ export function calcolaFinanziamento(scelta: SceltaFinanziamento, totaleOfferta:
   const importoFinanziato = scelta.pagaSubito != null ? arrotondaCent(totaleOfferta - scelta.pagaSubito) : (scelta.importoFinanziato ?? totaleOfferta);
   if (scelta.pagaSubito != null && (scelta.pagaSubito < 0 || scelta.pagaSubito > totaleOfferta)) return { ok: false, errore: "La cifra pagata subito non può superare il totale dell'offerta." };
   if (!Number.isFinite(importoFinanziato) || importoFinanziato < t.importoMin || importoFinanziato > t.importoMax)
-    return { ok: false, errore: `Importo finanziato da ${t.importoMin} a ${t.importoMax} €.` };
+    return { ok: false, errore: `Importo finanziato da ${eurInt(t.importoMin)} a ${eurInt(t.importoMax)} (adesso ${eurInt(importoFinanziato)}).` };
   if (importoFinanziato > totaleOfferta + 0.005) return { ok: false, errore: "L'importo finanziato supera il totale dell'offerta." };
   if (!Number.isInteger(rate) || rate < t.rateDa || rate > t.rateA) return { ok: false, errore: `Numero rate da ${t.rateDa} a ${t.rateA}.` };
   const d: DatiFinanziamento = { importo: importoFinanziato, tanPercentuale: t.tan, rate, mesiPrimaRata: t.giorniPrimaRata / 30, speseIncassoRata: t.speseIncassoRata };
