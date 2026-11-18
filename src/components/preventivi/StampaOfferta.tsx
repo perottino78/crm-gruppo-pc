@@ -1,4 +1,5 @@
 import { percentuale } from "@/lib/numeri";
+import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
 import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -437,6 +438,17 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
           <div className="text-sm">
             <p className="font-semibold" style={{ color: info.primary }}>{NOTA_FATTIBILITA}</p>
             {testoValidita(preventivo.scadenza) && <p className="text-neutral-700 mt-0.5">{testoValidita(preventivo.scadenza)}</p>}
+            {(() => {
+              const fin = preventivo.finanziamento ? calcolaFinanziamento(preventivo.finanziamento as SceltaFinanziamento, totaleFinale) : null;
+              if (!fin || !fin.ok) return null;
+              return (
+                <p className="text-neutral-700 mt-2">
+                  <span className="font-semibold">Pagamento con finanziamento:</span>{" "}
+                  {fin.anticipoDiretto > 0.005 ? <>{eur(fin.anticipoDiretto)} subito, </> : null}
+                  {eur(fin.importoFinanziato)} in {fin.rate} rate da {eur(fin.rata)} (TAN {fin.tabella.tan.toLocaleString("it-IT")}% · TAEG {fin.taeg.toLocaleString("it-IT")}%, prima rata a {fin.tabella.giorniPrimaRata} giorni). Salvo approvazione della finanziaria.
+                </p>
+              );
+            })()}
           </div>
           <div className="w-72 max-w-full rounded-xl border overflow-hidden print:overflow-visible no-spezza print:ml-auto print:mt-2" style={{ borderColor: `${info.primary}33` }}>
             <div className="p-3 text-sm" style={{ background: info.primarySoft }}>
