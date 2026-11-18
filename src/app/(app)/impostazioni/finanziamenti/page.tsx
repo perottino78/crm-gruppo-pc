@@ -25,6 +25,7 @@ function Campi({ t }: { t?: TabellaFinanziamento }) {
         <select name="giorniPrimaRata" defaultValue={t?.giorniPrimaRata ?? 90} className={input}>{[30, 60, 90, 120].map((g) => <option key={g} value={g}>{g}</option>)}</select>
       </label>
       <label className="text-xs font-semibold text-neutral-700">TAN al cliente %<input name="tan" defaultValue={t?.tan ?? 0} className={input} /></label>
+      <label className="text-xs font-semibold text-neutral-700">Spese incasso a rata €<input name="speseIncassoRata" defaultValue={t?.speseIncassoRata ?? 1.5} className={input} /></label>
       <label className="text-xs font-semibold text-neutral-700 col-span-2">Tasso di rendimento % (per il costo a noi)<input name="tassoRendimento" defaultValue={t?.tassoRendimento ?? 6.5} className={input} /></label>
     </div>
   );
