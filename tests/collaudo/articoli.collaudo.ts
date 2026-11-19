@@ -1,6 +1,10 @@
 // Collaudo anagrafica articoli, importazione Excel/CSV, AI (simulata) e collegamento agli ordini, su database di PROVA.
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/articoli.collaudo.ts
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { prisma } from "../../src/lib/prisma";
+import { NextRequest } from "next/server";
+import { GET as complementi } from "../../src/app/api/complementi/route";
 import * as A from "../../src/app/articoli-actions";
 import { GET as esporta } from "../../src/app/api/articoli/esporta/route";
 import { GET as modello } from "../../src/app/api/articoli/modello/route";
@@ -147,6 +151,21 @@ async function main() {
   verifica((await prisma.importazioneArticoli.findUnique({ where: { id: imp2 } }))!.stato === "ANNULLATA", "anteprima annullata");
   const bad = await redirectA(A.caricaListino(fd({ file: new File([Buffer.from("D0CF11E0A1B11AE1", "hex")], "vecchio.xls") })));
   verifica(/xlsx/.test(decodeURIComponent(bad ?? "")), "file .xls vecchio: messaggio chiaro", bad);
+
+  // esportazione «Prodotti» di BConsole (.xls): categorie su 3 livelli e fornitore creato se manca
+  const xlsBC = readFileSync(join(__dirname, "..", "articoli", "bconsole-prodotti.xls"));
+  const impBC = (await redirectA(A.caricaListino(fd({ file: new File([new Uint8Array(xlsBC)], "export_pro_1.xls") }))))!.split("/").pop()!;
+  await redirectA(A.confermaImportazione(fd({ id: impBC })));
+  const angBC = await prisma.articolo.findUnique({ where: { codice: "ANG/PROVA" }, include: { categoria: { include: { padre: { include: { padre: true } } } }, fornitore: true } });
+  verifica(angBC?.categoria?.nome === "ANGOLARI" && angBC.categoria.padre?.nome === "ACCESSORI" && angBC.categoria.padre.padre?.nome === "VETRATE" && angBC.prezzoVendita === 15, "BConsole .xls: articolo in VETRATE › ACCESSORI › ANGOLARI a 15 €", angBC?.categoria?.nome);
+  const profBC = await prisma.articolo.findUnique({ where: { codice: "PROF/PROVA" }, include: { fornitore: true, categoria: true } });
+  verifica(profBC?.fornitore?.ragioneSociale === "Fornitore Nuovo Srl" && profBC.fornitore.ruoli.includes("FORNITORE") && profBC.codiceFornitore === "PF-9" && profBC.um === "m" && profBC.costoAcquisto === 12.5 && !profBC.attivo, "BConsole .xls: fornitore mancante creato, codice fornitore, metri, costo, non attivo", profBC?.fornitore?.ragioneSociale);
+  const vetrate = await prisma.categoriaArticolo.findMany({ where: { nome: "VETRATE", padreId: null } });
+  const acc = await prisma.categoriaArticolo.findMany({ where: { nome: "ACCESSORI", padreId: vetrate[0]?.id } });
+  verifica(vetrate.length === 1 && acc.length === 1 && (await prisma.categoriaArticolo.count({ where: { padreId: acc[0].id } })) === 2, "BConsole .xls: una sola VETRATE › ACCESSORI con ANGOLARI e PROFILI IN FERRO sotto");
+  const cerca = await complementi(new NextRequest("http://x/api/complementi?q=vetrate%20angolari"));
+  const trovati = ((await cerca.json()) as { risultati: { codice?: string }[] }).risultati;
+  verifica(trovati.some((r) => JSON.stringify(r).includes("ANG/PROVA")), "materiale per la pratica/ordine: «vetrate angolari» trova l'articolo dalla categoria", trovati.length);
 
   console.log("6. Regole e aggiornamenti in blocco");
   await redirectA(A.salvaCategoria(fd({ id: perg.id, nome: "Pergole", metodoPrezzo: "RICARICO", valore: "3", arrotondamento: "1", margineMinimo: "30", ricalcola: "1" })));

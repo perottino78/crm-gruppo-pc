@@ -4,6 +4,7 @@
 // ma completo (intestazione in grassetto, riga bloccata, larghezze colonne) che Excel, LibreOffice e
 // Google Fogli aprono senza avvisi. Testato in tests/articoli/articoli.test.ts.
 import { inflateRawSync, deflateRawSync } from "node:zlib";
+import { leggiXls } from "./xls";
 
 export type Tabella = string[][];
 export type Cella = string | number | null | undefined;
@@ -177,7 +178,13 @@ export function leggiCsvTesto(testo: string): Tabella {
 export function leggiFile(nome: string, buf: Buffer): FoglioLetto[] {
   const n = nome.toLowerCase();
   const zip = buf.length > 4 && buf.readUInt32LE(0) === 0x04034b50;
-  if (n.endsWith(".xls") && !zip) throw new Error("I file .xls del vecchio Excel non si leggono: apri il file e salvalo come «Cartella di lavoro Excel (.xlsx)» oppure come CSV.");
+  // .xls del vecchio Excel (es. l'esportazione prodotti di BConsole): letti con il lettore BIFF
+  if (buf.length >= 4 && buf.readUInt32LE(0) === 0xe011cfd0) return leggiXls(buf);
+  if (n.endsWith(".xls") && !zip) {
+    // alcuni programmi salvano come .xls una pagina HTML o un testo a colonne: si prova come testo
+    const t = buf.toString("utf8");
+    if (/<table/i.test(t)) throw new Error("Questo .xls è una pagina web: aprilo e salvalo come «Cartella di lavoro Excel (.xlsx)» oppure come CSV.");
+  }
   if (n.endsWith(".ods")) throw new Error("I file .ods non si leggono: salvali come .xlsx o CSV.");
   if (zip) return leggiXlsx(buf);
   let testo = buf.toString("utf8");

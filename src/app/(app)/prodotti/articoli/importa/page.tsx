@@ -46,9 +46,9 @@ export default async function ImportaPage({ searchParams }: { searchParams: Prom
           <h2 className="font-bold">1. Da file Excel o CSV</h2>
           <span className="text-sm flex gap-3"><a href="/api/articoli/modello" className="text-blue-800 underline">📄 Modello Excel</a><a href="/api/articoli/modello?formato=csv" className="text-blue-800 underline">Modello CSV</a><a href="/api/articoli/esporta" className="text-blue-800 underline">⬇ Esporta il catalogo attuale</a></span>
         </div>
-        <p className="text-xs text-neutral-600">Va bene il modello compilato, l&apos;esportazione del catalogo modificata (per aggiornare i prezzi) o il listino del fornitore così com&apos;è: le colonne si riconoscono dal titolo (Codice, Descrizione, Prezzo listino, Sconti, Categoria…). File .xlsx o .csv fino a 5 MB.</p>
+        <p className="text-xs text-neutral-600">Va bene il modello compilato, l&apos;esportazione del catalogo modificata (per aggiornare i prezzi) o il listino del fornitore così com&apos;è: le colonne si riconoscono dal titolo (Codice, Descrizione, Prezzo listino, Sconti, Categoria…). Va bene anche l&apos;esportazione «Prodotti» di BConsole (.xls) così com&apos;è: categoria, sottocategoria e terzo livello vengono creati da soli. File .xlsx, .xls o .csv fino a 5 MB.</p>
         <form action={caricaListino} className="grid md:grid-cols-6 gap-2 items-end text-sm">
-          <label className="md:col-span-6">File<input type="file" name="file" required accept=".xlsx,.csv,.txt,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" className="block mt-1" /></label>
+          <label className="md:col-span-6">File<input type="file" name="file" required accept=".xlsx,.xls,.csv,.txt,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv" className="block mt-1" /></label>
           {opzioni}
           <label className="md:col-span-4 flex items-center gap-1"><input type="checkbox" name="soloAggiornamento" value="1" /> Solo aggiornamento prezzi: non creare articoli nuovi</label>
           <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5 md:col-span-2">Carica e mostra anteprima</button>

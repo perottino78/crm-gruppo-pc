@@ -31,7 +31,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
   ]);
   const quanti = (id: string) => conteggi.find((c) => c.categoriaId === id)?._count._all ?? 0;
   const albero = alberoCategorie(cat);
-  const madri = albero.filter((c) => c.livello === 0);
+  const madri = albero.filter((c) => c.livello <= 1); // categorie e sottocategorie: sotto una sottocategoria si crea il terzo livello
 
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
@@ -56,7 +56,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
                     <form action={salvaCategoria} className="grid grid-cols-[minmax(160px,2fr)_1fr_1.3fr_0.7fr_0.8fr_0.8fr_0.5fr_auto] gap-1.5 items-center px-2 py-1.5">
                       <input type="hidden" name="id" value={c.id} />
                       <input type="hidden" name="padreId" value={c.padreId ?? ""} />
-                      <input name="nome" defaultValue={c.nome} className={`${inp} ${c.livello ? "ml-5" : "font-bold"}`} />
+                      <input name="nome" defaultValue={c.nome} className={`${inp} ${c.livello === 2 ? "ml-10" : c.livello ? "ml-5" : "font-bold"}`} />
                       <select name="divisione" defaultValue={c.divisione ?? ""} className={inp}><option value="">—</option>{DIVISIONI.map((d) => <option key={d}>{d}</option>)}</select>
                       <select name="metodoPrezzo" defaultValue={c.metodoPrezzo ?? ""} className={inp}><option value="">{c.livello ? "come la madre" : "nessuna"}</option><option value="RICARICO">Ricarico ×</option><option value="MARGINE">Margine %</option></select>
                       <input name="valore" defaultValue={n(c.valore)} placeholder={c.metodoPrezzo === "MARGINE" ? "40" : "3,3"} className={inp} />
@@ -76,7 +76,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
                     </form>
                   ) : (
                     <div className="grid grid-cols-[2fr_1fr_1.3fr_0.7fr_0.8fr_0.8fr_0.5fr] gap-1.5 px-2 py-1.5">
-                      <span className={c.livello ? "ml-5" : "font-bold"}>{c.nome} <span className="text-[11px] font-normal text-neutral-500">· {testoVisibilita(c.visibileA)}</span></span><span>{c.divisione ?? "—"}</span>
+                      <span className={c.livello === 2 ? "ml-10" : c.livello ? "ml-5" : "font-bold"}>{c.livello === 2 ? "› " : ""}{c.nome} <span className="text-[11px] font-normal text-neutral-500">· {testoVisibilita(c.visibileA)}</span></span><span>{c.divisione ?? "—"}</span>
                       <span>{c.metodoPrezzo ? testoRegola({ metodo: c.metodoPrezzo, valore: c.valore }) : c.livello ? "come la madre" : "nessuna"}</span><span /><span>{n(c.arrotondamento) || "—"}</span><span>{n(c.margineMinimo) || "—"}</span><span className="text-right">{quanti(c.id)}</span>
                     </div>
                   )}
@@ -93,7 +93,7 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
           <h2 className="font-bold mb-2">+ Nuova categoria o sottocategoria</h2>
           <form action={salvaCategoria} className="grid md:grid-cols-7 gap-2 items-end text-sm">
             <label className="md:col-span-2">Nome<input name="nome" required className={`${inp} w-full`} placeholder="es. Pergole, Motori, Filtri" /></label>
-            <label className="md:col-span-2">Dentro la categoria<select name="padreId" defaultValue="" className={`${inp} w-full`}><option value="">— nessuna (categoria principale) —</option>{madri.map((m) => <option key={m.id} value={m.id}>{m.nome}</option>)}</select></label>
+            <label className="md:col-span-2">Dentro la categoria<select name="padreId" defaultValue="" className={`${inp} w-full`}><option value="">— nessuna (categoria principale) —</option>{madri.map((m) => <option key={m.id} value={m.id}>{m.etichetta}</option>)}</select></label>
             <label>Regola<select name="metodoPrezzo" defaultValue="" className={`${inp} w-full`}><option value="">nessuna / come la madre</option><option value="RICARICO">Ricarico ×</option><option value="MARGINE">Margine %</option></select></label>
             <label>Valore<input name="valore" className={`${inp} w-full`} placeholder="3,3 o 40" /></label>
             <label>Divisione<select name="divisione" defaultValue="" className={`${inp} w-full`}><option value="">—</option>{DIVISIONI.map((d) => <option key={d}>{d}</option>)}</select></label>

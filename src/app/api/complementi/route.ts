@@ -31,7 +31,11 @@ export async function GET(req: NextRequest) {
   const vis = visibilitaArticoliWhere(utente);
 
   const articoli = await prisma.articolo.findMany({
-    where: { attivo: true, AND: [...(vis ? [vis] : []), ...parole.map((p) => ({ OR: [{ descrizione: { contains: p, mode: "insensitive" as const } }, { codice: { contains: p, mode: "insensitive" as const } }, { codiceFornitore: { contains: p, mode: "insensitive" as const } }] }))] },
+    where: { attivo: true, AND: [...(vis ? [vis] : []), ...parole.map((p) => ({ OR: [{ descrizione: { contains: p, mode: "insensitive" as const } }, { codice: { contains: p, mode: "insensitive" as const } }, { codiceFornitore: { contains: p, mode: "insensitive" as const } },
+      // anche per categoria (es. «vetrate profili»: VETRATE › ACCESSORI › PROFILI IN FERRO), su tre livelli
+      { categoria: { nome: { contains: p, mode: "insensitive" as const } } },
+      { categoria: { padre: { nome: { contains: p, mode: "insensitive" as const } } } },
+      { categoria: { padre: { padre: { nome: { contains: p, mode: "insensitive" as const } } } } }] }))] },
     select: { id: true, codice: true, descrizione: true, um: true, costoAcquisto: true, fornitoreId: true, fornitore: { select: { ragioneSociale: true } } },
     orderBy: { codice: "asc" }, take: 12,
   });

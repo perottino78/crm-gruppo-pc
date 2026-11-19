@@ -75,7 +75,7 @@ export default async function ArticoliPage({ searchParams }: { searchParams: Pro
         <select name="categoria" defaultValue={p.categoria ?? ""} className={inp}>
           <option value="">Tutte le categorie</option>
           <option value="nessuna">— senza categoria —</option>
-          {albero.map((c) => <option key={c.id} value={c.id}>{c.livello ? `   › ${c.nome}` : c.nome}</option>)}
+          {albero.map((c) => <option key={c.id} value={c.id}>{c.livello ? `${"\u00a0\u00a0\u00a0".repeat(c.livello)}› ${c.nome}` : c.nome}</option>)}
         </select>
         <select name="fornitore" defaultValue={p.fornitore ?? ""} className={inp}>
           <option value="">Tutti i fornitori</option>
