@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { puoVedereArticoli, puoModificareArticoli, categorieRegola, posizioniListino } from "@/lib/articoli/server";
+import { puoVedereArticoli, puoModificareArticoli, categorieRegola, posizioniListino, assicuraCategorieListino } from "@/lib/articoli/server";
 import { alberoCategorie, euro } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
 import { posizioneEffettiva, testoPosizione } from "@/lib/articoli/posizione";
@@ -28,12 +28,13 @@ export default async function ArticoloPage({ params, searchParams }: { params: P
   const nuovo = id === "nuovo";
   const admin = puoModificareArticoli(u);
   if (nuovo && !admin) notFound();
-  const [a, regole, cat, fornitori, posizioni] = await Promise.all([
+  const posizioni = await posizioniListino();
+  if (admin) await assicuraCategorieListino(posizioni);
+  const [a, regole, cat, fornitori] = await Promise.all([
     nuovo ? null : prisma.articolo.findUnique({ where: { id }, include: { storico: { orderBy: { createdAt: "desc" }, take: 30 } } }),
     categorieRegola(),
     prisma.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true, ordine: true, famiglia: true, gruppoListino: true } }),
     prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" } }, orderBy: { ragioneSociale: "asc" }, select: { id: true, ragioneSociale: true, scontoFornitore: true } }),
-    posizioniListino(),
   ]);
   if (!nuovo && !a) notFound();
   // listino non visibile a questa persona: come se non esistesse

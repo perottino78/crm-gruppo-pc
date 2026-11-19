@@ -104,3 +104,37 @@ export async function posizioniListino(): Promise<{ famiglia: string; gruppi: st
     .sort(([a], [b]) => (ordine.indexOf(a) === -1 ? 9 : ordine.indexOf(a)) - (ordine.indexOf(b) === -1 ? 9 : ordine.indexOf(b)) || a.localeCompare(b))
     .map(([famiglia, g]) => ({ famiglia, gruppi: [...g].sort((a, b) => a.localeCompare(b)) }));
 }
+
+/**
+ * Le categorie degli articoli seguono il listino delle offerte (richiesta di Ugo 19/11/2026: «mi serve la lista completa, non ricrearle tutte»):
+ * per ogni famiglia (INDOOR, OUTDOOR…) una categoria madre e, dentro, una sottocategoria per ogni gruppo (VETRATE, PERGOLE…), già collegate al listino.
+ * Crea solo quelle che mancano (mai toccare né rinominare le tue) e si riallinea solo quando il listino cambia, così una categoria tolta a mano non ricompare di continuo.
+ */
+export async function assicuraCategorieListino(posizioni: { famiglia: string; gruppi: string[] }[]): Promise<void> {
+  try {
+    const firma = posizioni.map((p) => `${p.famiglia}:${p.gruppi.join(",")}`).join("|");
+    const chiave = "categorie_listino_firma";
+    const gia = await prisma.configurazione.findUnique({ where: { chiave } });
+    if (gia?.valore === firma) return;
+    const tutte = await prisma.categoriaArticolo.findMany({ select: { id: true, nome: true, padreId: true } });
+    const uguali = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
+    let ordine = 0;
+    for (const p of posizioni) {
+      ordine += 10;
+      let madre = tutte.find((c) => !c.padreId && uguali(c.nome, p.famiglia));
+      if (!madre) {
+        madre = await prisma.categoriaArticolo.create({ data: { nome: p.famiglia, famiglia: p.famiglia, ordine }, select: { id: true, nome: true, padreId: true } });
+        tutte.push(madre);
+      }
+      for (const g of p.gruppi) {
+        const esiste = tutte.find((c) => c.padreId === madre!.id && uguali(c.nome, g));
+        if (esiste) continue;
+        const nuova = await prisma.categoriaArticolo.create({ data: { nome: g, padreId: madre.id, famiglia: p.famiglia, gruppoListino: g }, select: { id: true, nome: true, padreId: true } });
+        tutte.push(nuova);
+      }
+    }
+    await prisma.configurazione.upsert({ where: { chiave }, update: { valore: firma }, create: { chiave, valore: firma } });
+  } catch (e) {
+    console.error("assicuraCategorieListino", e); // mai bloccare la pagina
+  }
+}
