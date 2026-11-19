@@ -5,7 +5,7 @@ import { leggiNumero, leggiSconti, scriviSconti, calcolaArticolo, type Categoria
 import type { Tabella } from "./foglio";
 
 export type Campo =
-  | "codice" | "codiceFornitore" | "descrizione" | "descrizioneEstesa" | "categoria" | "sottocategoria" | "fornitore" | "marca"
+  | "codice" | "codiceFornitore" | "descrizione" | "descrizioneEstesa" | "categoria" | "sottocategoria" | "categoria3" | "fornitore" | "marca"
   | "divisione" | "um" | "aliquotaIva" | "prezzoListino" | "sconti" | "costoAcquisto" | "metodoPrezzo" | "ricarico" | "margine"
   | "prezzoVendita" | "ean" | "immagineUrl" | "note" | "attivo";
 
@@ -17,6 +17,7 @@ export const COLONNE: { campo: Campo; titolo: string; sinonimi: string[]; larghe
   { campo: "descrizioneEstesa", titolo: "DESCRIZIONE ESTESA", sinonimi: ["DESCRIZIONE ESTESA", "DESCRIZIONE LUNGA", "DETTAGLI", "CARATTERISTICHE"], larghezza: 30, spiegazione: "Testo lungo facoltativo (caratteristiche tecniche)." },
   { campo: "categoria", titolo: "CATEGORIA", sinonimi: ["CATEGORIA", "FAMIGLIA", "GRUPPO MERCEOLOGICO"], larghezza: 18, spiegazione: "Se non esiste viene creata. Dalla categoria dipende la regola di prezzo." },
   { campo: "sottocategoria", titolo: "SOTTOCATEGORIA", sinonimi: ["SOTTOCATEGORIA", "SOTTO CATEGORIA", "SOTTOFAMIGLIA", "SOTTOGRUPPO"], larghezza: 18, spiegazione: "Facoltativa; se non esiste viene creata sotto la categoria." },
+  { campo: "categoria3", titolo: "TERZO LIVELLO", sinonimi: ["TERZO LIVELLO", "CAT 3 LIV", "CATEGORIA 3 LIVELLO", "CATEGORIA 3", "CAT 3 LIVELLO", "SOTTOSOTTOCATEGORIA"], larghezza: 18, spiegazione: "Facoltativo: terzo livello sotto la sottocategoria (es. VETRATE › ACCESSORI › ANGOLARI). Se non esiste viene creato." },
   { campo: "fornitore", titolo: "FORNITORE", sinonimi: ["FORNITORE", "RAGIONE SOCIALE FORNITORE"], larghezza: 24, spiegazione: "Nome come in anagrafica. Se manca vale il fornitore scelto al caricamento." },
   { campo: "marca", titolo: "MARCA", sinonimi: ["MARCA", "BRAND", "PRODUTTORE"], larghezza: 14, spiegazione: "Facoltativa." },
   { campo: "divisione", titolo: "DIVISIONE", sinonimi: ["DIVISIONE", "SOCIETA"], larghezza: 14, spiegazione: "P&C, Solaris, PTC, Purafonte, Work & Services." },
@@ -40,8 +41,35 @@ export const DIVISIONI = ["P&C", "Solaris", "PTC", "Purafonte", "Work & Services
 export const norm = (s: unknown) =>
   String(s ?? "").toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[()×%.,/\\:_#°\-'"]/g, " ").replace(/\s+/g, " ").trim();
 
+// Esportazione «Prodotti» di BConsole (.xls): ha sia «Nome» (la descrizione breve) sia «Descrizione» (il testo lungo), una colonna
+// «Listino» col nome del listino (es. «LISTINO 2024», non un prezzo) e l'immagine come percorso interno di BConsole; i prezzi
+// mai compilati valgono 0. Qui si rinominano le colonne come nel modello del CRM e gli zeri dei prezzi diventano celle vuote.
+const TITOLI_BCONSOLE: Record<string, string> = {
+  NOME: "DESCRIZIONE",
+  DESCRIZIONE: "DESCRIZIONE ESTESA",
+  LISTINO: "NOME LISTINO BCONSOLE",
+  IMMAGINE: "IMMAGINE BCONSOLE",
+};
+const PREZZI_BCONSOLE = ["PREZZO ACQUISTO", "PREZZO DI VENDITA", "COSTO DIRETTO", "PREZZO IVATO"];
+
+/** Riconosce l'esportazione prodotti di BConsole e la porta nel formato del modello (stesse colonne, stesse righe). */
+export function adattaBConsole(tab: Tabella): Tabella {
+  for (let i = 0; i < Math.min(tab.length, 10); i++) {
+    const h = (tab[i] ?? []).map(norm);
+    if (!(h.includes("NOME") && h.includes("PREZZO IVATO") && h.includes("CAT 3 LIV"))) continue;
+    const prezzi = h.map((x, j) => (PREZZI_BCONSOLE.includes(x) ? j : -1)).filter((j) => j >= 0);
+    return tab.map((r, k) => {
+      if (k < i) return r;
+      if (k === i) return r.map((x) => TITOLI_BCONSOLE[norm(x)] ?? x);
+      return r.map((x, j) => (prezzi.includes(j) && leggiNumero(x) === 0 ? "" : x));
+    });
+  }
+  return tab;
+}
+
 /** Trova la riga di intestazione e a quale colonna corrisponde ogni campo. */
 export function mappaColonne(tab: Tabella): { riga: number; mappa: Partial<Record<Campo, number>>; ignorate: string[] } | null {
+  tab = adattaBConsole(tab);
   for (let i = 0; i < Math.min(tab.length, 25); i++) {
     const h = (tab[i] ?? []).map(norm);
     const mappa: Partial<Record<Campo, number>> = {};
@@ -79,7 +107,14 @@ export type CategoriaRif = CategoriaRegola;
 export type Opzioni = { fornitoreId?: string | null; divisione?: string | null; categoriaId?: string | null; soloAggiornamento?: boolean };
 
 /** Dati da scrivere sull'articolo (categoria indicata per nome finché non viene creata). */
-export type DatiArticolo = Partial<Omit<Esistente, "id">> & { categoriaNome?: string | null; sottocategoriaNome?: string | null };
+export type DatiArticolo = Partial<Omit<Esistente, "id">> & {
+  categoriaPercorso?: string[] | null;
+  /** fornitore del file che non c'è in anagrafica: alla conferma si crea (serve per gli ordini) */
+  fornitoreNuovo?: string | null;
+};
+
+/** Categoria nuova da creare: «VETRATE › ACCESSORI › ANGOLARI». */
+export const testoPercorso = (p: string[] | null | undefined) => (p ?? []).join(" › ");
 export type Modifica = { campo: string; prima: string; dopo: string };
 export type RigaAnteprima = {
   riga: number; azione: "NUOVO" | "MODIFICA" | "INVARIATO" | "ERRORE" | "SALTATA";
@@ -95,16 +130,22 @@ const ETICHETTE: Record<string, string> = {
 };
 const testoVal = (v: unknown) => (v === null || v === undefined || v === "" ? "—" : typeof v === "number" ? String(Math.round(v * 100) / 100).replace(".", ",") : typeof v === "boolean" ? (v ? "sì" : "no") : String(v));
 
-function trovaFornitore(nome: string, fornitori: FornitoreRif[]): FornitoreRif | undefined {
+const senzaForma = (s: string) => s.replace(/\b(S R L S|SRLS|S R L|SRL|S P A|SPA|S A S|SAS|S N C|SNC)\b/g, "").replace(/\s+/g, " ").trim();
+/** Stesse parole in qualsiasi ordine («SIMONE CORBELLI» = «CORBELLI SIMONE»). */
+const parole = (s: string) => senzaForma(s).split(" ").filter(Boolean).sort().join(" ");
+
+export function trovaFornitore(nome: string, fornitori: FornitoreRif[]): FornitoreRif | undefined {
   const n = norm(nome);
   if (!n) return undefined;
   return fornitori.find((f) => norm(f.ragioneSociale) === n)
-    ?? fornitori.find((f) => norm(f.ragioneSociale).replace(/\b(S R L|SRL|S P A|SPA|S A S|SAS|S N C|SNC)\b/g, "").trim() === n.replace(/\b(S R L|SRL|S P A|SPA|S A S|SAS|S N C|SNC)\b/g, "").trim())
+    ?? fornitori.find((f) => senzaForma(norm(f.ragioneSociale)) === senzaForma(n))
+    ?? fornitori.find((f) => parole(norm(f.ragioneSociale)) === parole(n))
     ?? (n.length >= 4 ? fornitori.find((f) => norm(f.ragioneSociale).startsWith(n) || n.startsWith(norm(f.ragioneSociale))) : undefined);
 }
 
 /** Analizza le righe del foglio e prepara l'anteprima. */
 export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente[], fornitori: FornitoreRif[], categorie: CategoriaRif[]): Anteprima {
+  tab = adattaBConsole(tab);
   const m = mappaColonne(tab);
   if (!m) return { righe: [], colonne: [], ignorate: [], categorieNuove: [], errore: "Non trovo la riga dei titoli: servono almeno DESCRIZIONE (o CODICE / CODICE FORNITORE) e un'altra colonna riconosciuta, come PREZZO LISTINO. Scarica il modello per vedere i nomi delle colonne." };
   const { mappa } = m;
@@ -139,8 +180,10 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
     if (nomeForn) {
       const f = trovaFornitore(nomeForn, fornitori);
       if (f) fornitore = f;
-      else avvisi.push(`fornitore «${nomeForn}» non trovato in anagrafica${fornDefault ? `: uso ${fornDefault.ragioneSociale}` : ""}`);
+      else if (fornDefault) avvisi.push(`fornitore «${nomeForn}» non trovato in anagrafica: uso ${fornDefault.ragioneSociale}`);
+      else avvisi.push(`fornitore «${nomeForn}» non è in anagrafica: alla conferma viene creato come fornitore`);
     }
+    const fornitoreNuovo = nomeForn && !trovaFornitore(nomeForn, fornitori) && !fornDefault ? nomeForn : null;
 
     // articolo esistente
     const chiaveCod = codice.toUpperCase();
@@ -159,13 +202,14 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
     if (descr) dati.descrizione = descr;
     if (v("descrizioneEstesa")) dati.descrizioneEstesa = v("descrizioneEstesa");
     if (fornitore && (nomeForn || !es || !es.fornitoreId)) dati.fornitoreId = fornitore.id;
+    if (fornitoreNuovo && (!es || !es.fornitoreId)) dati.fornitoreNuovo = fornitoreNuovo;
     if (v("marca")) dati.marca = v("marca");
     const div = v("divisione") || (!es ? opz.divisione ?? "" : "");
     if (div) {
       const d = DIVISIONI.find((x) => norm(x) === norm(div) || norm(x).replace(/ /g, "") === norm(div).replace(/ /g, ""));
       if (d) dati.divisione = d; else avvisi.push(`divisione «${div}» non riconosciuta`);
     }
-    if (v("um")) dati.um = v("um").toLowerCase().replace("mq", "m²").replace("m2", "m²").replace("mc", "m³").replace(/^nr?$|^pezzi$|^pz\.$/, "pz");
+    if (v("um")) dati.um = v("um").toLowerCase().replace("mq", "m²").replace("m2", "m²").replace("mc", "m³").replace(/^nr?$|^pezzi$|^pz\.$/, "pz").replace(/^(mt|mtl|metri|metro|ml lineari)$/, "m");
     const iva = num("aliquotaIva", "IVA");
     if (iva !== undefined) { if (iva > 30) errori.push("IVA oltre il 30%"); else dati.aliquotaIva = iva; }
     const listino = num("prezzoListino", "Prezzo listino");
@@ -213,23 +257,20 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
     if (metodo === "MARGINE" && dati.valorePrezzo === undefined && !(es?.metodoPrezzo === "MARGINE")) errori.push("metodo MARGINE senza percentuale");
     if (metodo !== undefined) { dati.metodoPrezzo = metodo; if (metodo === null || metodo === "MANUALE") dati.valorePrezzo = null; }
 
-    // categoria
-    const catNome = v("categoria"), sotNome = v("sottocategoria");
-    let categoriaId: string | null | undefined = es?.categoriaId ?? (opz.categoriaId || null);
-    let catCalcolo: string | null = null; // per una sottocategoria nuova il prezzo si calcola con la regola della madre
+    // categoria: fino a 3 livelli (categoria › sottocategoria › terzo livello), creati se mancano
+    const catNome = v("categoria");
+    let catCalcolo: string | null = null; // per una categoria nuova il prezzo si calcola con la regola dell'ultima già esistente sopra di lei
     if (catNome) {
-      const c = catPerNome(catNome, null);
-      if (c) {
-        categoriaId = c.id;
-        if (sotNome) {
-          const s = catPerNome(sotNome, c.id);
-          if (s) categoriaId = s.id; else { categoriaId = undefined; catCalcolo = c.id; dati.categoriaNome = c.nome; dati.sottocategoriaNome = sotNome; categorieNuove.add(`${c.nome} › ${sotNome}`); }
-        }
-      } else {
-        categoriaId = undefined; dati.categoriaNome = catNome; dati.sottocategoriaNome = sotNome || null;
-        categorieNuove.add(sotNome ? `${catNome} › ${sotNome}` : catNome);
+      const nomi = [catNome, v("sottocategoria"), v("categoria3")].filter(Boolean);
+      let padre: string | null = null;
+      const percorso: string[] = [];
+      let nuova = false;
+      for (const nome of nomi) {
+        const c: CategoriaRif | undefined = nuova ? undefined : catPerNome(nome, padre);
+        if (c) { padre = c.id; percorso.push(c.nome); } else { nuova = true; percorso.push(nome); }
       }
-      if (categoriaId) dati.categoriaId = categoriaId;
+      if (nuova) { catCalcolo = padre; dati.categoriaPercorso = percorso; categorieNuove.add(testoPercorso(percorso)); }
+      else if (padre) dati.categoriaId = padre;
     } else if (!es && opz.categoriaId) dati.categoriaId = opz.categoriaId;
 
     const attivoTesto = norm(v("attivo"));
@@ -240,13 +281,13 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
 
     // prezzo di vendita: dal file solo se a mano o se non esiste una regola
     const unito = { ...(es ?? {}), ...dati } as Esistente & DatiArticolo;
-    const catRegola = dati.categoriaNome ? catCalcolo : unito.categoriaId;
+    const catRegola = dati.categoriaPercorso ? catCalcolo : unito.categoriaId;
     const venditaFile = num("prezzoVendita", "Prezzo vendita");
     const provvisorio = calcolaArticolo({ ...unito, categoriaId: catRegola, prezzoVendita: null }, categorie);
     if (venditaFile !== undefined) {
       if (unito.metodoPrezzo === "MANUALE" || !provvisorio.regola) {
         dati.prezzoVendita = venditaFile;
-        if (!unito.metodoPrezzo && !provvisorio.regola && !dati.categoriaNome) { dati.metodoPrezzo = "MANUALE"; }
+        if (!unito.metodoPrezzo && !provvisorio.regola && !dati.categoriaPercorso) { dati.metodoPrezzo = "MANUALE"; }
       } else if (provvisorio.vendita !== null && Math.abs(provvisorio.vendita - venditaFile) > 0.011) {
         avvisi.push(`prezzo vendita nel file ${testoVal(venditaFile)} € ma la regola (${provvisorio.regola.da}) dà ${testoVal(provvisorio.vendita)} €: tengo il calcolato (per forzarlo scrivi MANUALE in METODO PREZZO)`);
       }
@@ -262,7 +303,7 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
     }
     if (fin.costo !== null && fin.vendita !== null && fin.vendita < fin.costo) avvisi.push("vendita sotto il costo");
     else if (fin.sottoMinimo) avvisi.push(`margine ${testoVal(fin.margine)}% sotto il minimo della categoria`);
-    if (!es && fin.vendita === null) avvisi.push(dati.categoriaNome && !catCalcolo ? "prezzo di vendita da calcolare dopo aver dato la regola alla nuova categoria" : "senza prezzo di vendita: manca il costo o la regola");
+    if (!es && fin.vendita === null) avvisi.push(dati.categoriaPercorso && !catCalcolo ? "prezzo di vendita da calcolare dopo aver dato la regola alla nuova categoria" : "senza prezzo di vendita: manca il costo o la regola");
     if (es) {
       const cPrima = calcolaArticolo(es, categorie);
       const varia = (a: number | null, b: number | null) => (a && b ? Math.abs(b - a) / a : 0);
@@ -274,7 +315,7 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
     const modifiche: Modifica[] = [];
     if (es) {
       for (const [k, val] of Object.entries(dati)) {
-        if (k === "categoriaNome" || k === "sottocategoriaNome") continue;
+        if (k === "categoriaPercorso" || k === "fornitoreNuovo") continue;
         const prima = (es as Record<string, unknown>)[k];
         const uguale = typeof val === "number" && typeof prima === "number" ? Math.abs(val - prima) < 0.005 : (prima ?? null) === (val ?? null);
         if (uguale) { delete (dati as Record<string, unknown>)[k]; continue; }
@@ -282,7 +323,7 @@ export function analizzaListino(tab: Tabella, opz: Opzioni, esistenti: Esistente
         const nomeC = (id: unknown) => categorie.find((c) => c.id === id)?.nome ?? "—";
         modifiche.push({ campo: ETICHETTE[k] ?? k, prima: k === "fornitoreId" ? nomeF(prima) : k === "categoriaId" ? nomeC(prima) : testoVal(prima), dopo: k === "fornitoreId" ? nomeF(val) : k === "categoriaId" ? nomeC(val) : testoVal(val) });
       }
-      if (dati.categoriaNome) modifiche.push({ campo: "Categoria", prima: categorie.find((c) => c.id === es!.categoriaId)?.nome ?? "—", dopo: `${dati.categoriaNome}${dati.sottocategoriaNome ? ` › ${dati.sottocategoriaNome}` : ""} (nuova)` });
+      if (dati.categoriaPercorso) modifiche.push({ campo: "Categoria", prima: categorie.find((c) => c.id === es!.categoriaId)?.nome ?? "—", dopo: `${testoPercorso(dati.categoriaPercorso)} (nuova)` });
     }
     const azione = errori.length ? "ERRORE" : !es ? "NUOVO" : modifiche.length ? "MODIFICA" : "INVARIATO";
     righe.push({ riga: i + 1, azione, articoloId: es?.id, codice: codice || es?.codice || null, descrizione: descr || es?.descrizione || codForn, dati, modifiche, avvisi, errori, costo: fin.costo, vendita: fin.vendita, margine: fin.margine });

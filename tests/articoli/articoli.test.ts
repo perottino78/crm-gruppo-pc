@@ -145,7 +145,7 @@ test("Anteprima: nuovo, modificato, invariato, errori, doppioni, categorie nuove
   assert.equal(nuovo.azione, "NUOVO");
   assert.equal(nuovo.dati.fornitoreId, "f1");
   assert.equal(nuovo.dati.sconti, "40");
-  assert.equal(nuovo.dati.sottocategoriaNome, "Staffe");
+  assert.deepEqual(nuovo.dati.categoriaPercorso, ["Pergole", "Staffe"]);
   assert.deepEqual(a.categorieNuove, ["Pergole › Staffe"]);
   assert.equal(senzaDescr.azione, "ERRORE");
   assert.equal(telo.azione, "NUOVO");

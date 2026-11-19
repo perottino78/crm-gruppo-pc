@@ -26,10 +26,10 @@ export const categorieRegola = (db: Db = prisma): Promise<CategoriaRegola[]> =>
 
 /** Nome completo "Categoria › Sottocategoria". */
 export function nomeCategoria(id: string | null | undefined, cat: { id: string; nome: string; padreId: string | null }[]): string {
-  const c = cat.find((x) => x.id === id);
-  if (!c) return "";
-  const p = c.padreId ? cat.find((x) => x.id === c.padreId) : undefined;
-  return p ? `${p.nome} › ${c.nome}` : c.nome;
+  const nomi: string[] = [];
+  let c = cat.find((x) => x.id === id);
+  for (let i = 0; c && i < 6; i++) { nomi.unshift(c.nome); c = c.padreId ? cat.find((x) => x.id === c!.padreId) : undefined; }
+  return nomi.join(" › ");
 }
 
 /** Id della categoria e di tutte le sue sottocategorie. */
