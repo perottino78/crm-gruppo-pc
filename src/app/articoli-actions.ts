@@ -250,7 +250,7 @@ function scegliFoglio(fogli: { nome: string; righe: Tabella }[], scelto: string 
 export async function caricaListino(fd: FormData) {
   const u = await amministratore();
   const f = fd.get("file");
-  if (!(f instanceof File) || !f.size) redirect(`/prodotti/articoli/importa?errore=${encodeURIComponent("Scegli un file Excel (.xlsx) o CSV.")}`);
+  if (!(f instanceof File) || !f.size) redirect(`/prodotti/articoli/importa?errore=${encodeURIComponent("Scegli un file Excel (.xlsx o .xls) o CSV.")}`);
   if (f.size > 5 * 1024 * 1024) redirect(`/prodotti/articoli/importa?errore=${encodeURIComponent("File oltre 5 MB: dividilo in più parti.")}`);
   let fogli;
   try { fogli = leggiFile(f.name, Buffer.from(await f.arrayBuffer())); }
@@ -289,18 +289,36 @@ export async function confermaImportazione(fd: FormData) {
   const conta = contaAnteprima(an.righe);
   await prisma.$transaction(async (tx) => {
     // categorie nuove
-    const cache = new Map<string, string>();
+    const cache = new Map<string, string | null>();
     const idCategoria = async (dati: DatiArticolo): Promise<string | null | undefined> => {
-      if (!dati.categoriaNome) return dati.categoriaId;
-      const chiave = `${dati.categoriaNome.toUpperCase()}|${(dati.sottocategoriaNome ?? "").toUpperCase()}`;
+      const percorso = dati.categoriaPercorso;
+      if (!percorso?.length) return dati.categoriaId;
+      const chiave = percorso.map((x) => x.toUpperCase()).join("|");
       if (cache.has(chiave)) return cache.get(chiave);
       const trova = (nome: string, padreId: string | null) => tx.categoriaArticolo.findFirst({ where: { nome: { equals: nome, mode: "insensitive" }, padreId } });
-      const madre = (await trova(dati.categoriaNome, null)) ?? (await tx.categoriaArticolo.create({ data: { nome: dati.categoriaNome, divisione: (imp!.opzioni as Opzioni).divisione ?? null } }));
-      let fin = madre.id;
-      if (dati.sottocategoriaNome) fin = ((await trova(dati.sottocategoriaNome, madre.id)) ?? (await tx.categoriaArticolo.create({ data: { nome: dati.sottocategoriaNome, padreId: madre.id } }))).id;
-      cache.set(chiave, fin);
-      return fin;
+      // ogni livello (categoria › sottocategoria › terzo livello) si cerca sotto il precedente e si crea se manca
+      let padre: string | null = null;
+      for (const nome of percorso) {
+        const c: { id: string } = (await trova(nome, padre)) ?? (await tx.categoriaArticolo.create({ data: { nome, padreId: padre, divisione: padre ? null : (imp!.opzioni as Opzioni).divisione ?? null } }));
+        padre = c.id;
+      }
+      cache.set(chiave, padre);
+      return padre;
     };
+    // fornitori del file che non c'erano in anagrafica: creati una volta sola (servono per gli ordini ai fornitori)
+    const fornitoriCreati = new Map<string, string>();
+    for (const r of da) {
+      const nome = r.dati.fornitoreNuovo?.trim();
+      if (!nome || r.dati.fornitoreId) continue;
+      const chiave = nome.toUpperCase();
+      if (!fornitoriCreati.has(chiave)) {
+        const c = (await tx.soggetto.findFirst({ where: { ragioneSociale: { equals: nome, mode: "insensitive" } }, select: { id: true, ruoli: true } }))
+          ?? (await tx.soggetto.create({ data: { ragioneSociale: nome, ruoli: ["FORNITORE"], note: `Creato dall'importazione articoli «${imp!.nomeFile}».`.slice(0, 300) }, select: { id: true, ruoli: true } }));
+        if (!c.ruoli.includes("FORNITORE")) await tx.soggetto.update({ where: { id: c.id }, data: { ruoli: { push: "FORNITORE" } } });
+        fornitoriCreati.set(chiave, c.id);
+      }
+      r.dati.fornitoreId = fornitoriCreati.get(chiave);
+    }
     const nuovi = da.filter((r) => r.azione === "NUOVO");
     const usati = new Set((await tx.articolo.findMany({ select: { codice: true } })).map((a) => a.codice.toUpperCase()));
     const generati = nuovi.length ? await prossimiCodici(tx, nuovi.length) : [];
@@ -309,8 +327,8 @@ export async function confermaImportazione(fd: FormData) {
     for (const r of da) categoriaDi.set(r.riga, await idCategoria(r.dati));
     const regole = await categorieRegola(tx);
     for (const r of da) {
-      const { categoriaNome: _cn, sottocategoriaNome: _sn, ...dati } = r.dati;
-      void _cn; void _sn;
+      const { categoriaPercorso: _cp, fornitoreNuovo: _fn, ...dati } = r.dati;
+      void _cp; void _fn;
       const categoriaId = categoriaDi.get(r.riga);
       if (r.azione === "MODIFICA" && r.articoloId) {
         let a = await tx.articolo.update({ where: { id: r.articoloId }, data: { ...dati, ...(categoriaId !== undefined ? { categoriaId } : {}), aggiornatoDaNome: u.nome } });

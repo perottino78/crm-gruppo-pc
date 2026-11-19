@@ -150,9 +150,12 @@ export const perc = (n: number | null | undefined) => (n === null || n === undef
 export function alberoCategorie<T extends { id: string; nome: string; padreId: string | null; ordine?: number }>(cat: T[]): (T & { livello: number; etichetta: string })[] {
   const ord = (a: T, b: T) => (a.ordine ?? 0) - (b.ordine ?? 0) || a.nome.localeCompare(b.nome, "it");
   const out: (T & { livello: number; etichetta: string })[] = [];
-  for (const m of cat.filter((c) => !c.padreId || !cat.some((x) => x.id === c.padreId)).sort(ord)) {
-    out.push({ ...m, livello: 0, etichetta: m.nome });
-    for (const f of cat.filter((c) => c.padreId === m.id).sort(ord)) out.push({ ...f, livello: 1, etichetta: `${m.nome} › ${f.nome}` });
-  }
+  // categoria › sottocategoria › terzo livello (e oltre), ognuna sotto la sua madre
+  const visita = (c: T, livello: number, sopra: string) => {
+    const etichetta = sopra ? `${sopra} › ${c.nome}` : c.nome;
+    out.push({ ...c, livello, etichetta });
+    if (livello < 5) for (const f of cat.filter((x) => x.padreId === c.id).sort(ord)) visita(f, livello + 1, etichetta);
+  };
+  for (const m of cat.filter((c) => !c.padreId || !cat.some((x) => x.id === c.padreId)).sort(ord)) visita(m, 0, "");
   return out;
 }
