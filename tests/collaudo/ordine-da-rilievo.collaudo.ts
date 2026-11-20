@@ -135,6 +135,11 @@ async function main() {
   const m4 = posta[n2]?.dati ?? "";
   verifica(e4.ok && m4.includes("misure C3.pdf") && !m4.includes("contratto.pdf") && e4.messaggio.includes("1 file del progetto"), "allegato solo il file scelto della cartella", e4);
 
+  const e5 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Ordine cartaceo", "Testo", { senzaPrezzi: true, extra: [{ nome: "ordine firmato.pdf", dataUri: "data:application/pdf;base64," + Buffer.from("%PDF-1.4 prova").toString("base64") }, { nome: "virus.exe", dataUri: "data:application/octet-stream;base64,AAAA" }] });
+  const m5 = posta[n2 + 1]?.dati ?? "";
+  verifica(e5.ok && m5.includes("ordine firmato.pdf") && !m5.includes("virus.exe") && e5.messaggio.includes("1 file caricati"), "file dal computer allegato (solo PDF/foto)", e5);
+  verifica((await prisma.documento.count({ where: { entita: "ORDINE_FORNITORE", entitaId: o3.id, cartella: "Ordine cartaceo e disegni" } })) === 1, "e tenuto nei documenti dell'ordine");
+
   console.log("8. Variante dell'offerta: si salva e aggiorna la commessa");
   await C.sbloccaPreventivo(fd({ preventivoId: prev.id }));
   verifica(!(await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).confermatoIl, "offerta sbloccata");

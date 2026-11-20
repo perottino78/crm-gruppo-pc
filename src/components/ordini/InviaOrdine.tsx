@@ -12,11 +12,27 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
   // file delle cartelle del progetto: di partenza quelli di «Rilievi misura»
   const [doc, setDoc] = useState<string[]>(documenti.filter((d) => d.cartella === "Rilievi misura").map((d) => d.id));
   const cartelle = [...new Set(documenti.map((d) => d.cartella))];
+  // file dal computer (ordine cartaceo firmato, disegni): max ~3,4 MB in tutto per il limite delle richieste
+  const [extra, setExtra] = useState<{ nome: string; dataUri: string; kb: number }[]>([]);
+  const [avvisoFile, setAvvisoFile] = useState("");
+  async function aggiungiFile(files: FileList | null) {
+    if (!files) return;
+    let tot = extra.reduce((t, f) => t + f.kb, 0);
+    const nuovi = [...extra];
+    setAvvisoFile("");
+    for (const f of Array.from(files)) {
+      if (!/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(f.type)) { setAvvisoFile(`«${f.name}»: solo PDF o foto (JPG, PNG, WebP).`); continue; }
+      if (tot + f.size / 1024 > 3400) { setAvvisoFile(`«${f.name}» non c'è più posto: in tutto al massimo 3,4 MB per invio (puoi mandare il resto con un secondo invio).`); continue; }
+      const dataUri = await new Promise<string>((ok) => { const r = new FileReader(); r.onload = () => ok(String(r.result)); r.readAsDataURL(f); });
+      tot += f.size / 1024; nuovi.push({ nome: f.name, dataUri, kb: Math.round(f.size / 1024) });
+    }
+    setExtra(nuovi);
+  }
   const [esito, setEsito] = useState<EsitoInvio | null>(null);
   const [inCorso, avvia] = useTransition();
   const inp = "border border-neutral-300 rounded px-2 py-1 text-sm w-full";
   const invia = () => avvia(async () => {
-    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, fileRilievo: scelti, documenti: doc });
+    const r = await inviaOrdineEmail(ordineId, dest, copia, ogg, corpo, { senzaPrezzi, fileRilievo: scelti, documenti: doc, extra: extra.map(({ nome, dataUri }) => ({ nome, dataUri })) });
     setEsito(r);
     if (r.mailto) window.location.href = r.mailto;
   });
@@ -60,6 +76,14 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
             ))}
           </div>
         )}
+        <div className="mt-1">
+          <p className="text-xs font-bold text-neutral-800">📎 Allega file dal computer (ordine cartaceo, disegno, foto):</p>
+          <input type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(e) => { void aggiungiFile(e.target.files); e.target.value = ""; }} className="ml-2 text-xs" />
+          {extra.map((f, i) => (
+            <p key={i} className="ml-2 text-xs">{/\.pdf$/i.test(f.nome) ? "📄" : "🖼️"} {f.nome} <span className="text-neutral-500">({f.kb} KB)</span> <button type="button" onClick={() => setExtra(extra.filter((_, j) => j !== i))} className="text-red-700 underline">togli</button></p>
+          ))}
+          {avvisoFile && <p className="ml-2 text-xs text-red-700">{avvisoFile}</p>}
+        </div>
       </div>
       <div className="flex flex-wrap gap-2 items-center">
         <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green text-sm px-4 py-2 disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email con PDF" : "✉ Invia per email con PDF"}</button>

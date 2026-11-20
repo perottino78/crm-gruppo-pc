@@ -1463,6 +1463,9 @@ model OrdineFornitore {
   inviatoA                String?
   inviatoDaNome           String?
   modalitaInvio           String? // EMAIL | MANUALE
+  // Spunta «il fornitore ha ricevuto l'ordine» (richiesta di Ugo 20/11/2026)
+  ricevutoIl              DateTime?
+  ricevutoDaNome          String?
   creatoDaNome            String?
   righe                   RigaOrdine[]
   createdAt               DateTime     @default(now())

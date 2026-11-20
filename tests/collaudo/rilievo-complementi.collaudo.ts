@@ -101,6 +101,14 @@ async function main() {
   verifica(ev, "scritto nella storia della commessa");
   verifica((await costiCommesse([c.id])).get(c.id)?.materiale === 1274.4, "anche i report usano lo stesso costo");
 
+  console.log("5b. Spunta «ricevuto dal fornitore» e file dal computer nell'invio");
+  await O.segnaOrdineRicevuto(fd({ id: ord.id, ricevuto: "1" }));
+  const rc = await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: ord.id } });
+  verifica(rc.ricevutoIl !== null && rc.ricevutoDaNome === "Ugo Perottino", "spunta ricevuto: data e chi", rc);
+  await O.segnaOrdineRicevuto(fd({ id: ord.id, ricevuto: "0" }));
+  verifica((await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: ord.id } })).ricevutoIl === null, "spunta tolta");
+  verifica(!!(await prisma.commessaEvento.findFirst({ where: { commessaId: c.id, testo: { contains: "ha ricevuto l'ordine" } } })), "scritto nella storia della pratica");
+
   console.log("6. Arriva la fattura: conta la fattura");
   const f = await prisma.fatturaAcquisto.create({ data: { chiave: "F1", fornitoreId: mastro.id, fornitoreNome: "IL MASTRO SRLS", numero: "88", data: new Date("2026-11-20"), imponibile: 1300, totale: 1586, stato: "DA_VERIFICARE",
     righe: { create: [{ descrizione: "Scossaline", importo: 1300, commessaId: c.id }] } } });

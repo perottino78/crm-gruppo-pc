@@ -10,7 +10,7 @@ import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordi
 import { BRANDS } from "@/lib/brands";
 import {
   salvaTestataOrdine, salvaRigaOrdineFornitore, aggiungiRigaAOrdine, togliRigaDaOrdine, segnaOrdineInviatoAMano,
-  registraConfermaFornitore, registraArrivi, annullaOrdine, spostaRigaAFornitore,
+  registraConfermaFornitore, segnaOrdineRicevuto, registraArrivi, annullaOrdine, spostaRigaAFornitore,
 } from "@/app/ordini-actions";
 import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
@@ -276,6 +276,15 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
             </form>
           )}
         </section>
+      )}
+
+      {!bozza && !annullato && (
+        <form action={segnaOrdineRicevuto} className={`rounded-lg border p-3 flex flex-wrap items-center gap-3 ${o.ricevutoIl ? "border-green-300 bg-green-50" : "border-amber-300 bg-amber-50"}`}>
+          <input type="hidden" name="id" value={o.id} />
+          <input type="hidden" name="ricevuto" value={o.ricevutoIl ? "0" : "1"} />
+          <span className="text-sm font-bold">{o.ricevutoIl ? `✅ Il fornitore ha ricevuto l'ordine (${o.ricevutoIl.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}${o.ricevutoDaNome ? `, spunta di ${o.ricevutoDaNome}` : ""})` : "📬 Il fornitore ha confermato di aver ricevuto l'ordine?"}</span>
+          <button className={`btn-3d ${o.ricevutoIl ? "btn-3d-outline" : "btn-3d-green"} text-sm px-3 py-1.5`}>{o.ricevutoIl ? "Togli la spunta" : "✓ Sì, l'hanno ricevuto"}</button>
+        </form>
       )}
 
       {!bozza && !annullato && (
