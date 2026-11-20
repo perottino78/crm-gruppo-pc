@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { mailConfigurata } from "@/lib/mail/invio";
 import { nomeTipoAppuntamento, vedeTutti, STILE_TIPO } from "@/lib/calendario/eventi";
 import { perInput, chiaveGiorno, giornoBreve, oraRoma } from "@/lib/calendario/tempo";
-import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino, collegaAppuntamentoProgetto } from "@/app/calendario-actions";
+import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppuntamentoA, rifissaDalCentralino, collegaAppuntamentoProgetto, aggiornaIndirizzoAppuntamento, rilievoEseguito } from "@/app/calendario-actions";
 import { numeroCommessa, STATI_COMMESSA } from "@/lib/commesse";
 import { STATI_PROGETTO_CHIUSO, linkProgetto } from "@/lib/calendario/rilievo-progetto";
 import Documenti from "@/components/documenti/Documenti";
@@ -31,6 +31,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   const utenti = await prisma.utente.findMany({ where: { OR: [{ stato: "ATTIVO" }, { id: a.utenteId }] }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   const luogo = a.luogo || [a.cliente.indirizzo, [a.cliente.cap, a.cliente.comune].filter(Boolean).join(" "), a.cliente.provincia].filter(Boolean).join(", ");
   const tel = a.cliente.telefono;
+  const mappa = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(luogo)}`;
   const fine = new Date(a.dataOra.getTime() + a.durataMin * 60_000);
   const noteLette = leggiNoteLead(a.note);
   const idTel = await telefonistaDefaultPerBrand(a.cliente.brandId);
@@ -91,7 +92,7 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
         </div>
         <div className="px-5 pb-4 grid grid-cols-3 sm:grid-cols-6 gap-2">
           {tel ? <a href={`tel:${tel}`} className="btn-3d tile-3d btn-3d-dark"><span className="text-xl">📞</span><span>Chiama</span></a> : <span className="btn-3d tile-3d btn-3d-outline opacity-40"><span className="text-xl">📞</span><span>Chiama</span></span>}
-          {luogo ? <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(luogo)}`} target="_blank" className="btn-3d tile-3d btn-3d-orange"><span className="text-xl">📍</span><span>Naviga</span></a> : <span className="btn-3d tile-3d btn-3d-outline opacity-40"><span className="text-xl">📍</span><span>Naviga</span></span>}
+          {luogo ? <a href={mappa} target="_blank" rel="noopener" className="btn-3d tile-3d btn-3d-orange"><span className="text-xl">📍</span><span>Naviga</span></a> : <span className="btn-3d tile-3d btn-3d-outline opacity-40"><span className="text-xl">📍</span><span>Naviga</span></span>}
           <Link href={`/clienti/${a.clienteId}`} className="btn-3d tile-3d btn-3d-blue"><span className="text-xl">👤</span><span>Scheda cliente</span></Link>
           <Link href={`/clienti/${a.clienteId}#nuova-offerta`} className="btn-3d tile-3d btn-3d-green"><span className="text-xl">➕</span><span>Nuova offerta</span></Link>
           <form action={reinviaInvito} className="contents">
@@ -101,7 +102,23 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           </form>
           <Link href={modifica ? ritorno : `${ritorno}?modifica=1#modifica`} scroll={!modifica} className="btn-3d tile-3d btn-3d-outline"><span className="text-xl">✎</span><span>{modifica ? "Chiudi modifica" : "Modifica"}</span></Link>
         </div>
-        {luogo && <p className="px-5 pb-1 text-sm text-neutral-700">📍 {luogo}</p>}
+        {/* dove andare: indirizzo ben visibile, «Portami» apre Google Maps, correggibile da chi va (richiesta di Ugo 20/11/2026) */}
+        <div className="mx-5 mb-3 rounded-xl border-2 border-orange-300 bg-orange-50 p-3">
+          <p className="text-[11px] font-bold uppercase text-orange-900">📍 Dove andare</p>
+          <div className="mt-1 flex flex-wrap items-center gap-3">
+            <p className="min-w-0 flex-1 text-base font-bold text-neutral-900">{luogo || <span className="font-normal text-red-700">Indirizzo mancante: scrivilo qui sotto</span>}</p>
+            {luogo && <a href={mappa} target="_blank" rel="noopener" className="btn-3d btn-3d-orange px-4 py-2 text-sm">🧭 Portami</a>}
+          </div>
+          <details className="mt-2" open={!luogo}>
+            <summary className="cursor-pointer text-xs font-bold text-orange-900">✏️ Correggi l&apos;indirizzo</summary>
+            <form action={aggiornaIndirizzoAppuntamento} className="mt-2 flex flex-wrap items-end gap-2">
+              <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+              <input name="luogo" defaultValue={luogo} placeholder="Via, numero civico, comune" className="min-w-0 flex-1 rounded border border-neutral-300 px-2 py-1.5 text-sm" />
+              <button className="btn-3d btn-3d-blue px-4 py-2 text-sm">💾 Salva</button>
+            </form>
+            <p className="mt-1 text-[11px] text-neutral-600">Vale solo per questo appuntamento{a.commessaId && rilievo ? " e per il rilievo della pratica" : ""}; lascia vuoto per tornare all&apos;indirizzo della scheda cliente.</p>
+          </details>
+        </div>
         {(tel || a.cliente.email) && (
           <p className="flex flex-wrap gap-x-4 px-5 pb-4 text-sm text-neutral-700">
             {tel && <a href={`tel:${tel}`} className="hover:underline">📞 {tel}</a>}
@@ -109,6 +126,36 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           </p>
         )}
       </div>
+
+      {rilievo && a.stato !== "ANNULLATO" && (
+        <section className="card-fase mt-5" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
+          <h2 className="mb-1">📏 Il rilievo</h2>
+          {a.stato === "COMPLETATO" ? (
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="text-sm">✅ Rilievo eseguito.{collegato ? " Misure, foto, PDF e materiale si caricano nel progetto." : ""}</p>
+              {collegato && <Link href={linkProgetto(collegato.id, a.tipo)} className="btn-3d btn-3d-green px-4 py-2 text-sm">📏 Carica il rilievo</Link>}
+            </div>
+          ) : (
+            <form action={rilievoEseguito} className="flex flex-wrap items-end gap-3">
+              <input type="hidden" name="id" value={a.id} /><input type="hidden" name="ritorno" value={ritorno} />
+              {!collegato && progetti.length > 0 && (
+                <label className="text-[11px] font-bold text-neutral-700">Progetto del cliente
+                  <select name="commessaId" required defaultValue={progetti.length === 1 ? progetti[0].id : ""} className="mt-0.5 block rounded border border-neutral-300 px-2 py-1.5 text-sm">
+                    <option value="" disabled>— scegli —</option>
+                    {progetti.map((p) => <option key={p.id} value={p.id}>{nomeProgetto(p)}</option>)}
+                  </select>
+                </label>
+              )}
+              <button className="btn-3d btn-3d-green px-5 py-3 text-base">{collegato || progetti.length ? "✅ Eseguito: carica il rilievo" : "✅ Rilievo eseguito"}</button>
+              <p className="w-full text-[11px] text-neutral-600">
+                {collegato || progetti.length
+                  ? "Segna il rilievo come eseguito e apre il progetto dove carichi misure, foto, PDF e il materiale da aggiungere."
+                  : "Il cliente non ha progetti aperti: il rilievo si segna eseguito e i file si caricano qui sotto in «Rilievi misura»."}
+              </p>
+            </form>
+          )}
+        </section>
+      )}
 
       <section className="card-fase mt-5" style={{ "--fase": "#0d9488" } as React.CSSProperties}>
         <h2 className="mb-1">📁 Progetto</h2>

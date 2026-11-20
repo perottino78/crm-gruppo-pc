@@ -56,6 +56,24 @@ async function main() {
   await dove(K.esitoAppuntamento(fd({ id: a.id, stato: "ANNULLATO" })));
   verifica((await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } })).stato === "ANNULLATO", "annullato: anche il rilievo della pratica");
 
+  console.log("4. Indirizzo e «Eseguito: carica il rilievo» (richiesta di Ugo 20/11/2026)");
+  const b = await prisma.appuntamento.create({ data: { clienteId: cli.id, utenteId: tec.id, tipo: "SOPRALLUOGO", dataOra: new Date("2026-11-27T09:00:00Z"), creatoDaNome: "Ugo Perottino" } });
+  g.__utente = await prisma.utente.create({ data: { nome: "Marco Venditore", email: "ven@x.it", ruolo: "COMMERCIALE" } });
+  const vietato = await dove(K.aggiornaIndirizzoAppuntamento(fd({ id: b.id, luogo: "Via Falsa 1" })));
+  verifica(vietato?.includes("Non puoi") && !(await prisma.appuntamento.findUniqueOrThrow({ where: { id: b.id } })).luogo, "un commerciale che non è l'incaricato non può cambiare l'indirizzo", vietato);
+  g.__utente = tec;
+  const esegui = await dove(K.rilievoEseguito(fd({ id: b.id, commessaId: c.id })));
+  const b2 = await prisma.appuntamento.findUniqueOrThrow({ where: { id: b.id } });
+  const rilB = await prisma.rilievo.findFirst({ where: { commessaId: c.id, dataOra: b.dataOra } });
+  verifica(b2.stato === "COMPLETATO" && b2.commessaId === c.id && !!rilB, "eseguito: appuntamento svolto, collegato al progetto, rilievo nella pratica", b2);
+  verifica(esegui?.startsWith(`/commesse/${c.id}?passo=RILIEVO`) && esegui.endsWith("#rilievo"), "apre il progetto al caricamento del rilievo", esegui);
+  await dove(K.aggiornaIndirizzoAppuntamento(fd({ id: b.id, luogo: "Via Garibaldi 5, Rivoli" })));
+  verifica((await prisma.appuntamento.findUniqueOrThrow({ where: { id: b.id } })).luogo === "Via Garibaldi 5, Rivoli", "il tecnico corregge l'indirizzo dell'appuntamento");
+  const c2 = await prisma.appuntamento.create({ data: { clienteId: altro.id, utenteId: tec.id, tipo: "SOPRALLUOGO", dataOra: new Date("2026-11-28T09:00:00Z") } });
+  await prisma.commessa.update({ where: { id: cB.id }, data: { stato: "CHIUSA" } });
+  const senza = await dove(K.rilievoEseguito(fd({ id: c2.id })));
+  verifica(senza?.includes("non ha un progetto aperto") && (await prisma.appuntamento.findUniqueOrThrow({ where: { id: c2.id } })).stato === "COMPLETATO", "senza progetto: eseguito e resta sull'appuntamento", senza);
+
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
   if (ko) process.exit(1);
