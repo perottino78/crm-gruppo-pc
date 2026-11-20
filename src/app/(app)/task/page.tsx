@@ -7,6 +7,7 @@ import { UFFICI, STATI_CHIUSI, nomeUfficio } from "@/lib/flusso";
 import { numeroCommessa } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
 import { assicuraFlusso } from "@/app/flusso-actions";
+import ScegliPersone from "@/components/task/ScegliPersone";
 import AllegatiTask from "@/components/task/AllegatiTask";
 import { completaTaskCliente, creaTaskCliente } from "@/app/task-clienti-actions";
 import ClientePicker from "@/components/calendario/ClientePicker";
@@ -72,7 +73,7 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
         )}
         {inCopia.length > 0 && (
           <details className="mt-2 text-sm">
-            <summary className="cursor-pointer text-xs font-semibold text-neutral-700">In copia a me ({inCopia.length})</summary>
+            <summary className="cursor-pointer text-xs font-semibold text-neutral-700">Dove sono coinvolto ({inCopia.length})</summary>
             <ul className="mt-1 space-y-1 text-xs text-neutral-700">
               {inCopia.map((t) => <li key={t.id}><Link href={`/task/${t.id}`} className="font-bold text-blue-800 underline">{t.oggetto}</Link> · {t.cliente.nome} · per {t.utente?.nome ?? "—"}{t._count.commenti > 0 ? ` · 💬 ${t._count.commenti}` : ""}</li>)}
             </ul>
@@ -86,9 +87,7 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
               <div className="grid gap-2 md:grid-cols-2">
                 <div className="text-xs font-bold text-neutral-700">Cliente (correlato a)<ClientePicker /></div>
                 <label className="block text-xs font-bold text-neutral-700">Cosa c&apos;è da fare<input name="oggetto" required placeholder="es. Richiesta preventivo smontaggio pergola" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
-                <label className="block text-xs font-bold text-neutral-700">Assegna a
-                  <select name="utenteId" defaultValue={u.id} className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm">{utenti.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}</select>
-                </label>
+                <ScegliPersone utenti={utenti.map((x) => ({ id: x.id, nome: x.nome }))} ioId={u.id} etichetta="Assegna a (anche più persone)" />
                 <label className="block text-xs font-bold text-neutral-700">Categoria
                   <select name="categoria" className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm"><option value="">—</option>{CATEGORIE_TASK.map((c) => <option key={c}>{c}</option>)}</select>
                 </label>
@@ -97,9 +96,6 @@ export default async function TaskPage({ searchParams }: { searchParams: Promise
               </div>
               <label className="block text-xs font-bold text-neutral-700">Descrizione<textarea name="descrizione" rows={3} className="w-full rounded border border-neutral-300 px-2 py-1.5 text-sm" /></label>
               <AllegatiTask />
-              <fieldset className="rounded border border-neutral-200 p-2"><legend className="px-1 text-xs font-bold text-neutral-700">In copia a</legend>
-                <div className="grid gap-x-4 gap-y-1 sm:grid-cols-2 md:grid-cols-3">{utenti.filter((x) => x.id !== u.id).map((x) => <label key={x.id} className="flex items-center gap-1.5 text-xs"><input type="checkbox" name="inCopiaA" value={x.id} /> {x.nome}</label>)}</div>
-              </fieldset>
               <button className="btn-3d btn-3d-green px-5 py-1.5 text-sm">Crea il task</button>
             </form>
           </details>

@@ -29,7 +29,9 @@ export async function creaTaskCliente(fd: FormData) {
   if (!per) vai(torna, { errore: "Scegli una persona del team" });
   const scadenza = daOraRoma(str(fd, "scadenza"));
   const descrizione = str(fd, "descrizione");
-  const copia = (await prisma.utente.findMany({ where: { id: { in: fd.getAll("inCopiaA").filter((x): x is string => typeof x === "string") }, stato: "ATTIVO" }, select: { id: true, email: true, nome: true } }));
+  // coinvolti (anche più persone, ScegliPersone): tutti tranne l'incaricato, senza doppioni
+  const idCopia = [...new Set(fd.getAll("inCopiaA").filter((x): x is string => typeof x === "string" && x !== per!.id))];
+  const copia = (await prisma.utente.findMany({ where: { id: { in: idCopia }, stato: "ATTIVO" }, select: { id: true, email: true, nome: true } }));
   const ore = str(fd, "orePreviste") ? parseFloat(str(fd, "orePreviste")!.replace(",", ".")) : null;
   const creato = await prisma.attivita.create({
     data: {
@@ -58,13 +60,14 @@ export async function creaTaskCliente(fd: FormData) {
   }
   // chi è in copia viene avvisato
   for (const c of copia) {
-    if (c.id !== u!.id && c.email) await inviaMail({ a: [c.email], oggetto: `[CRM P&C] In copia su un task: ${oggetto}`, testo: `Ciao ${c.nome.split(" ")[0]},\n\n${u!.nome} ti ha messo in copia su un task per ${per!.nome} sul cliente ${cliente!.nome}:\n\n${oggetto}${descrizione ? `\n\n${descrizione}` : ""}\n\nApri il task: ${APP_URL}/task/${creato.id}`, daUtenteId: u!.id });
+    if (c.id !== u!.id && c.email) await inviaMail({ a: [c.email], oggetto: `[CRM P&C] Sei coinvolto in un task: ${oggetto}`, testo: `Ciao ${c.nome.split(" ")[0]},\n\n${u!.nome} ti ha coinvolto in un task per ${per!.nome} sul cliente ${cliente!.nome}:\n\n${oggetto}${descrizione ? `\n\n${descrizione}` : ""}\n\nApri il task: ${APP_URL}/task/${creato.id}`, daUtenteId: u!.id });
   }
   revalidatePath(`/clienti/${cliente!.id}`);
   revalidatePath("/task");
   // dalla pagina dei task si apre subito il task nuovo, dalla scheda cliente si torna alla scheda
   if (str(fd, "apri") === "1") redirect(`/task/${creato.id}?tab=descrizione&ok=${encodeURIComponent(`Task dato a ${per!.id === u!.id ? "te" : per!.nome}${avviso}`)}`);
-  vai(torna, { fatto: `Task dato a ${per!.id === u!.id ? "te" : per!.nome}${avviso}` });
+  const anche = copia.length ? ` (coinvolti anche: ${copia.map((c) => c.nome).join(", ")})` : "";
+  vai(torna, { fatto: `Task dato a ${per!.id === u!.id ? "te" : per!.nome}${avviso}${anche}` });
 }
 
 /** «✓ Fatto» su un task del cliente: dalla scheda cliente o da «Task». */

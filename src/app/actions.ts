@@ -822,6 +822,44 @@ export async function aggiungiArticoloPreventivo(formData: FormData) {
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
+/**
+ * Angolare in alluminio su misura (Il Mastro) come riga dell'offerta (richiesta di Ugo 20/11/2026): il commerciale sceglie forma, lati, spessore,
+ * bello, colore e lunghezza; prezzo di vendita = costo a peso × 2, ricalcolato qui dal codice (non si fida del prezzo arrivato dal browser).
+ */
+export async function aggiungiAngolarePreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
+  const u = await getCurrentUser();
+  if (!u) return;
+  const preventivoId = str(formData, "preventivoId");
+  const { leggiCodiceAngolare, descrizioneAngolare, venditaBarra } = await import("@/lib/ordini/angolari");
+  const x = leggiCodiceAngolare(str(formData, "codiceAngolare"), Math.max(1, Math.round(Number(str(formData, "quantita") ?? "1") || 1)));
+  if (!preventivoId || !x) return;
+  const sezioneId = str(formData, "sezioneId") || null;
+  const ordine = await prossimoOrdine(preventivoId, sezioneId);
+  const nota = str(formData, "notaAngolare");
+  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${descrizioneAngolare(x)}${nota ? ` — ${nota}` : ""}`, quantita: x.pezzi, prezzoUnitario: venditaBarra(x), sezioneId, ordine } });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+/** Legno piallato su misura come riga dell'offerta (Ugo 20/11/2026): spessore × larghezza × lunghezza libere, vendita = sviluppo × 900 €/m³ × 2, ricalcolata dal codice. */
+export async function aggiungiLegnoPreventivo(formData: FormData) {
+  if (await offertaBloccata(formData)) return;
+  const u = await getCurrentUser();
+  if (!u) return;
+  const preventivoId = str(formData, "preventivoId");
+  const { leggiLegnoLibero, descrizioneLegno, venditaLegno } = await import("@/lib/ordini/legno");
+  const l = leggiLegnoLibero(str(formData, "codiceLegno"));
+  const quantita = Math.max(1, Math.round(Number(str(formData, "quantita") ?? "1") || 1));
+  if (!preventivoId || !l || l.sezione.spessore > 1000 || l.sezione.larghezza > 1000 || l.lunghezza > 20000) return;
+  const sezioneId = str(formData, "sezioneId") || null;
+  const ordine = await prossimoOrdine(preventivoId, sezioneId);
+  const nota = str(formData, "notaLegno");
+  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${descrizioneLegno(l.sezione, l.lunghezza)}${nota ? ` — ${nota}` : ""}`, quantita, prezzoUnitario: venditaLegno(l.sezione, l.lunghezza), sezioneId, ordine } });
+  await ricalcolaTotali(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
 // ===== Sezioni preventivo (raggruppamento righe per stanza/gruppo) =====
 //
 // Le righe di un preventivo con molti articoli misti (finestre, tapparelle,

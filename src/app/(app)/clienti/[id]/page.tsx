@@ -26,6 +26,7 @@ import { prendiInCaricoOrdineBC } from "@/app/commesse-actions";
 import { puo } from "@/lib/permessi/catalogo";
 import BottoneConferma from "@/components/BottoneConferma";
 import { eliminaCliente, bloccaEliminazioneCliente } from "@/app/elimina-contatti-actions";
+import ScegliPersone from "@/components/task/ScegliPersone";
 import AllegatiTask from "@/components/task/AllegatiTask";
 import { creaTaskCliente, completaTaskCliente } from "@/app/task-clienti-actions";
 
@@ -433,11 +434,7 @@ export default async function SchedaClientePage({
                 <label className="text-xs font-semibold text-neutral-700 sm:col-span-2">Cosa c&apos;è da fare
                   <input name="oggetto" required placeholder="es. richiamare per la scelta dei colori" className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
                 </label>
-                <label className="text-xs font-semibold text-neutral-700">Per chi
-                  <select name="utenteId" defaultValue={utenteCorrente.id} className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm">
-                    {utentiCal.map((x) => <option key={x.id} value={x.id}>{x.id === utenteCorrente.id ? `${x.nome} (io)` : x.nome}</option>)}
-                  </select>
-                </label>
+                <ScegliPersone utenti={utentiCal.map((x) => ({ id: x.id, nome: x.nome }))} ioId={utenteCorrente.id} />
                 <label className="text-xs font-semibold text-neutral-700">Entro (facoltativo)
                   <input name="scadenza" type="date" className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm" />
                 </label>
@@ -447,7 +444,7 @@ export default async function SchedaClientePage({
                 <AllegatiTask />
                 <div className="sm:col-span-2 flex flex-wrap items-center gap-3">
                   <button className="btn-3d btn-3d-amber px-5 py-2 text-sm">✅ Dai il task</button>
-                  <span className="text-xs text-neutral-600">Lo trova in «Task» e sulla Dashboard; se è un collega gli arriva anche un&apos;email.</span>
+                  <span className="text-xs text-neutral-600">Lo trovano in «Task» e sulla Dashboard; ai colleghi arriva anche un&apos;email.</span>
                 </div>
               </form>
             </section>

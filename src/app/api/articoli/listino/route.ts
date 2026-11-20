@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { categorieDelListino } from "@/lib/articoli/posizione";
+import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,7 @@ export async function GET(req: NextRequest) {
   const famiglia = req.nextUrl.searchParams.get("famiglia") ?? "";
   const gruppo = req.nextUrl.searchParams.get("gruppo") || null;
   if (!famiglia) return NextResponse.json({ articoli: [] });
+  await assicuraArticoliLegno(); // i legni piallati delle vetrate (una volta sola)
   const cat = await prisma.categoriaArticolo.findMany({ select: { id: true, padreId: true, famiglia: true, gruppoListino: true } });
   const ids = categorieDelListino(famiglia, gruppo, cat);
   if (!ids.length) return NextResponse.json({ articoli: [] });

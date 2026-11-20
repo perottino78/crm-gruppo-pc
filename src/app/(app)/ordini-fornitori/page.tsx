@@ -59,7 +59,8 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
         <div>
           <h1 className="text-2xl font-bold text-neutral-900">🚚 Ordini fornitori</h1>
           <p className="text-sm text-neutral-600">Anno {anno}: {aperti} aperti · {n("EVASO")} arrivati · {n("ANNULLATO")} annullati</p>
-          <Link href="/ordini-fornitori/schede" className="text-xs underline text-blue-800">📄 Schede di produzione per i fornitori (modelli HTML)</Link>
+          <Link href="/ordini-fornitori/schede" className="btn-3d btn-3d-purple mt-2 inline-block px-4 py-2 text-sm">📐 Moduli di rilievo per i fornitori (schede di produzione)</Link>
+          <p className="mt-1 text-[11px] text-neutral-600">Qui si preparano i modelli; si compilano dentro ogni ordine con «📐 Modulo» nell&apos;elenco qui sotto.</p>
         </div>
         <form action={creaOrdineLibero} className="flex flex-wrap items-end gap-2">
           <label className="text-xs font-semibold">Nuovo ordine senza commessa (scorta, consumabili)
@@ -75,7 +76,7 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
           <summary className="cursor-pointer text-sm font-semibold text-amber-900">Da ordinare: {perCommessa.size} commesse con righe non ancora in un ordine</summary>
           <ul className="mt-2 grid md:grid-cols-2 gap-1 text-sm">
             {[...perCommessa.entries()].slice(0, 40).map(([id, x]) => (
-              <li key={id}><Link href={`/commesse/${id}#acquisti`} className="text-blue-800 underline">{x.titolo}</Link>
+              <li key={id}><Link href={`/commesse/${id}?passo=MATERIALE#evasione`} className="text-blue-800 underline">{x.titolo}</Link> <Link href={`/commesse/${id}?passo=RILIEVO#rilievo`} className="text-xs text-blue-800 underline">📏 rilievo</Link>
                 <span className="text-xs text-neutral-700"> — {[...x.fornitori].join(", ")}{x.senzaFornitore ? `${x.fornitori.size ? " · " : ""}${x.senzaFornitore} righe senza fornitore` : ""}</span></li>
             ))}
           </ul>
@@ -98,7 +99,7 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
       <div className="bg-white border border-neutral-200 rounded-lg overflow-x-auto">
         <table className="w-full text-sm">
           <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200 bg-neutral-50">
-            <th className="p-2">N.</th><th>Data</th><th>Fornitore</th><th>Commessa / cliente</th><th>Consegna</th><th>Arrivi</th><th className="text-right">Totale</th><th className="p-2">Stato</th>
+            <th className="p-2">N.</th><th>Data</th><th>Fornitore</th><th>Commessa / cliente</th><th>Consegna</th><th>Arrivi</th><th className="text-right">Totale</th><th className="p-2">Stato</th><th className="p-2">Modulo</th>
           </tr></thead>
           <tbody>
             {ordini.map((o) => {
@@ -116,10 +117,11 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
                   <td className="text-xs">{o.righe.length ? `${arr}/${o.righe.length}` : "—"}</td>
                   <td className="text-right text-xs">{t.totale ? eur(t.totale) : "—"}</td>
                   <td className="p-2"><span className="text-xs px-2 py-0.5 rounded-full text-white" style={{ background: s.colore }}>{s.nome}</span></td>
+                  <td className="p-2">{o.stato !== "ANNULLATO" && <Link href={`/ordini-fornitori/${o.id}#scheda-produzione`} className="btn-3d btn-3d-outline whitespace-nowrap px-2 py-1 text-[11px]">📐 Modulo</Link>}</td>
                 </tr>
               );
             })}
-            {ordini.length === 0 && <tr><td colSpan={8} className="p-4 text-neutral-500">Nessun ordine con questi filtri.</td></tr>}
+            {ordini.length === 0 && <tr><td colSpan={9} className="p-4 text-neutral-500">Nessun ordine con questi filtri.</td></tr>}
           </tbody>
         </table>
       </div>

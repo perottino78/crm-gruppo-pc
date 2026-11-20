@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
+import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
 import { puoGestireOrdini } from "@/lib/ordini/server";
 import { salvaModelloScheda, eliminaModelloScheda } from "@/app/schede-produzione-actions";
 import { MODELLI_PRONTI, MODELLO_PREDEFINITO, SEGNAPOSTO_FISSI, campiDaCompilare, compilaScheda, nomeCampo } from "@/lib/ordini/scheda-produzione";
@@ -13,6 +14,7 @@ const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 export default async function SchedeProduzionePage({ searchParams }: { searchParams: Promise<{ base?: string; modifica?: string; nuovo?: string; salvato?: string; eliminato?: string; errore?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
+  await assicuraModelliPronti();
   const q = await searchParams;
   const [modelli, fornitori] = await Promise.all([
     prisma.schedaProduzioneModello.findMany({ include: { fornitore: { select: { ragioneSociale: true } } }, orderBy: [{ attivo: "desc" }, { nome: "asc" }] }),
@@ -27,7 +29,7 @@ export default async function SchedeProduzionePage({ searchParams }: { searchPar
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
       <div>
         <Link href="/ordini-fornitori" className="btn-indietro">← Ordini fornitori</Link>
-        <h1 className="text-2xl font-bold text-neutral-900">📄 Schede di produzione per i fornitori</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">📐 Moduli di rilievo per i fornitori (schede di produzione)</h1>
         <p className="text-sm text-neutral-700">Modelli HTML da compilare con le misure definitive e mandare al fornitore insieme all&apos;ordine. Il CRM riempie da solo i dati dell&apos;ordine; tu scrivi solo le misure e le note di produzione.</p>
       </div>
       {q.salvato && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ Modello salvato.</p>}

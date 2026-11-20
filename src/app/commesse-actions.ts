@@ -1167,6 +1167,10 @@ export async function aggiungiCorrelato(formData: FormData) {
 export type Complemento = {
   tipo?: string; articoloId?: string; brandId?: string; tipologia?: string; colore?: string; larghezza?: number | string | null; altezza?: number | string | null;
   quantita?: number | string | null; fornitoreId?: string | null; descrizione?: string | null; note?: string | null;
+  /** tipo «ANG»: angolare in alluminio su misura, codice ANGALL-… (forma, lati, spessore, bello, colore, lunghezza) */
+  codice?: string | null;
+  /** file allegato al complemento (foto o PDF del disegno, data URI): va nei documenti della pratica, cartella «Rilievi misura» */
+  allegato?: { nome?: string; dataUri?: string } | null;
 };
 const numero = (v: unknown) => { if (v === null || v === undefined || v === "") return null; const n = Number(String(v).replace(",", ".")); return Number.isFinite(n) ? n : null; };
 const testo = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
@@ -1231,6 +1235,36 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
       costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p.prezzoBase, quantita: q }, sconto) : null,
     });
     descrizione = `${nome} — ${colore}${misura}`;
+  } else if (tipo === "ANG") {
+    // angolare in alluminio su misura (Il Mastro, richiesta di Ugo 20/11/2026): costo a peso a barra dal codice; fornitore Il Mastro se non scelto
+    const { leggiCodiceAngolare, descrizioneAngolare, costoBarra, misureLabel } = await import("@/lib/ordini/angolari");
+    const a = leggiCodiceAngolare(testo(x.codice), q);
+    if (!a) return { errore: "Angolare: misure non valide." };
+    const costo = costoBarra(a);
+    descrizione = descrizioneAngolare(a);
+    fornitoreId = fornitoreId ?? (await prisma.soggetto.findFirst({ where: { ragioneSociale: { contains: "mastro", mode: "insensitive" }, ruoli: { has: "FORNITORE" } }, select: { id: true } }))?.id ?? null;
+    Object.assign(dati, { codice: testo(x.codice), um: "pz", prezzoAcquisto: costo, scontoAcquisto: 0, costoPrevisto: Math.round(costo * q * 100) / 100 });
+    // file del disegno o foto (facoltativo): nei documenti della pratica, così si allega all'ordine per Il Mastro
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(x.allegato?.dataUri ?? "");
+    if (m && /^(image\/(jpeg|png|webp)|application\/pdf)$/.test(m[1])) {
+      const contenuto = Buffer.from(m[2], "base64");
+      if (contenuto.length <= 2_000_000) {
+        const nome = `Angolare ${a.forma} ${misureLabel(a)} - ${(x.allegato?.nome ?? "disegno").replace(/[^\w.\- ]+/g, "_")}`.slice(0, 120);
+        await prisma.documento.create({ data: { entita: "COMMESSA", entitaId: commessaId, cartella: "Rilievi misura", nome, mime: m[1], dimensione: contenuto.length, contenuto } });
+        x = { ...x, note: [testo(x.note), `📎 ${nome}`].filter(Boolean).join(" · ") };
+      }
+    }
+  }
+  if (tipo === "LEG") {
+    // legno piallato su misura (Ugo 20/11/2026): costo sullo sviluppo; se la misura è uno dei 26 articoli si collega all'articolo
+    const { leggiLegnoLibero, descrizioneLegno, costoLegno } = await import("@/lib/ordini/legno");
+    const l = leggiLegnoLibero(testo(x.codice));
+    if (!l) return { errore: "Legno: misure non valide." };
+    const art = await prisma.articolo.findUnique({ where: { codice: testo(x.codice)! }, select: { id: true, costoAcquisto: true, fornitoreId: true } });
+    const costo = art?.costoAcquisto ?? costoLegno(l.sezione, l.lunghezza);
+    descrizione = descrizioneLegno(l.sezione, l.lunghezza);
+    fornitoreId = fornitoreId ?? art?.fornitoreId ?? null;
+    Object.assign(dati, { codice: testo(x.codice), um: "pz", articoloId: art?.id, prezzoAcquisto: costo, scontoAcquisto: 0, costoPrevisto: Math.round(costo * q * 100) / 100 });
   }
   if (!descrizione) return { errore: "Scrivi la descrizione del complemento." };
   const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;

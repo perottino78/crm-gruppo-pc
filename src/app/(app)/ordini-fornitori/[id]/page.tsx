@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
+import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
 import { puoGestireOrdini, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordini/calcoli";
 import { BRANDS } from "@/lib/brands";
@@ -15,6 +16,12 @@ import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
+import TabellaLegno from "@/components/ordini/TabellaLegno";
+import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { valoriDaRighe } from "@/lib/ordini/legno";
+import { salvaLegnoInOrdine, salvaAngolariInOrdine } from "@/app/schede-produzione-actions";
+import TabellaAngolari from "@/components/ordini/TabellaAngolari";
+import { valoriAngolari } from "@/lib/ordini/angolari";
 import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
@@ -28,6 +35,14 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const { id } = await params;
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, commessa: { include: { cliente: true } }, righe: { orderBy: { createdAt: "asc" } } } });
   if (!o) notFound();
+  await assicuraModelliPronti();
+  await assicuraArticoliLegno();
+  // angolari: righe già salvate o proposta dai legni dell'ordine e del materiale della pratica (anche quelli aggiunti dal rilevatore)
+  const legniPratica = o.commessaId ? await prisma.rigaOrdine.findMany({ where: { commessaId: o.commessaId, OR: [{ codice: { startsWith: "LEGNO-" } }, { codice: { startsWith: "ANGALL-" } }] }, select: { codice: true, quantita: true, ordineFornitoreId: true } }) : [];
+  // legno: le righe LEGNO-… dell'ordine; se non ce ne sono, quello messo nel materiale della pratica (anche dal rilevatore) e non ancora in un ordine
+  const righeLegno = o.righe.some((r) => r.codice?.startsWith("LEGNO-")) ? o.righe : legniPratica.filter((r) => !r.ordineFornitoreId);
+  const ap = valoriAngolari(o.righe, legniPratica.filter((r) => !r.ordineFornitoreId || r.ordineFornitoreId === o.id));
+  const angolariIniziali = { iniziali: ap.valori, proposta: ap.proposta };
   const msg = await searchParams;
   const bozzaAperta = o.stato === "BOZZA";
   // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
@@ -65,6 +80,13 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </div>
         <span className="text-sm px-3 py-1 rounded-full text-white" style={{ background: s.colore }}>{s.nome}</span>
       </div>
+      {/* scorciatoie per l'ufficio ordini (richiesta di Ugo 20/11/2026): i moduli di rilievo interattivi e il rilievo della pratica */}
+      {!annullato && (
+        <div className="flex flex-wrap gap-2">
+          <a href="#scheda-produzione" className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</a>
+          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-blue px-4 py-2 text-sm">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
+        </div>
+      )}
       {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       {o.inviatoIl && <p className="text-xs text-neutral-600">Inviato il {o.inviatoIl.toLocaleString("it-IT")} {o.inviatoA ? `a ${o.inviatoA}` : ""} ({o.modalitaInvio === "EMAIL" ? "email dal CRM" : "a mano"}) da {o.inviatoDaNome}</p>}
@@ -155,7 +177,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
 
       {!annullato && (
         <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
-          <h2 className="font-bold mb-1">📄 Scheda di produzione per il fornitore (misure definitive)</h2>
+          <h2 className="font-bold mb-1">📐 Modulo di rilievo / scheda di produzione per il fornitore (misure definitive)</h2>
+          {msg.scheda && msg.ok && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
+          {msg.scheda && msg.errore && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
+          <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS), compila le misure e salva: la scheda va nella cartella «Schede produzione» della pratica e la alleghi con «Invia ordine».</p>
           {modelliScheda.length === 0 ? (
             <p className="text-sm text-neutral-600">Nessun modello di scheda per questo fornitore. <Link href="/ordini-fornitori/schede?nuovo=1" className="underline text-blue-800">Crea il primo modello</Link>.</p>
           ) : (
@@ -180,7 +205,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                     const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
                     return (
                       <>
-                        {tabelle.map((t) => (
+                        {tabelle.map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
                           <div key={t.gruppo} className="overflow-x-auto">
                             <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
                             <table className="text-xs border-collapse">
@@ -196,7 +221,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                             </table>
                           </div>
                         ))}
-                        {singoli.map((c) => {
+                        {singoli.filter((c) => !(c === "prezzo_m3" && tabelle.some((t) => t.gruppo === "legno"))).map((c) => {
                           const d = tipoDi.get(c);
                           if (d && d.tipo !== "testo") {
                             return (
