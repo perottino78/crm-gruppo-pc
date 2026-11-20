@@ -11,6 +11,8 @@ import { esitoAppuntamento, reinviaInvito, spostaAppuntamentoRapido, spostaAppun
 import { numeroCommessa, STATI_COMMESSA } from "@/lib/commesse";
 import { STATI_PROGETTO_CHIUSO, linkProgetto } from "@/lib/calendario/rilievo-progetto";
 import Documenti from "@/components/documenti/Documenti";
+import { puoVedereEntita } from "@/lib/documenti/server";
+import { linkOfferta } from "@/lib/mail/link-offerta";
 import { telefonistaDefaultPerBrand } from "@/lib/leadIngest";
 import { aggiungiGiorni } from "@/lib/calendario/tempo";
 import FormAppuntamento from "@/components/calendario/FormAppuntamento";
@@ -41,11 +43,20 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
   // progetti (pratiche) del cliente: quello collegato e quelli aperti a cui collegare l'appuntamento
   const progetti = await prisma.commessa.findMany({
     where: { clienteId: a.clienteId, OR: [{ stato: { notIn: STATI_PROGETTO_CHIUSO } }, ...(a.commessaId ? [{ id: a.commessaId }] : [])] },
-    select: { id: true, numero: true, anno: true, stato: true, preventivo: { select: { oggetto: true } } },
+    select: { id: true, numero: true, anno: true, stato: true, preventivoId: true, preventivo: { select: { oggetto: true } } },
     orderBy: [{ anno: "desc" }, { numero: "desc" }],
   });
   const collegato = progetti.find((p) => p.id === a.commessaId) ?? null;
   const nomeProgetto = (p: (typeof progetti)[number]) => `${numeroCommessa(p)}${p.preventivo?.oggetto ? ` — ${p.preventivo.oggetto}` : ""} (${STATI_COMMESSA[p.stato]?.label ?? p.stato.toLowerCase()})`;
+  // contratto da vedere prima del rilievo (richiesta di Ugo 20/11/2026): l'offerta firmata del progetto collegato (o dei progetti aperti)
+  // e i file della cartella «Contratto firmato»; tutto si apre a parte, in un'altra scheda
+  const daRilevare = rilievo ? (collegato ? [collegato] : progetti) : [];
+  const fileContratto = daRilevare.length ? await prisma.documento.findMany({
+    where: { cartella: "Contratto firmato", OR: [{ entita: "COMMESSA", entitaId: { in: daRilevare.map((p) => p.id) } }, { entita: "PREVENTIVO", entitaId: { in: daRilevare.map((p) => p.preventivoId) } }] },
+    select: { id: true, nome: true, entita: true, entitaId: true }, orderBy: { createdAt: "asc" },
+  }) : [];
+  const fileVisibili = [];
+  for (const d of fileContratto) if (await puoVedereEntita(u, d.entita, d.entitaId)) fileVisibili.push(d);
   const chiuso = a.stato === "COMPLETATO" || a.stato === "ANNULLATO";
   const ritorno = `/calendario/appuntamento/${a.id}`;
   const btnStato = (stato: string, testo: string, cls: string) => (
@@ -126,6 +137,28 @@ export default async function AppuntamentoPage({ params, searchParams }: { param
           </p>
         )}
       </div>
+
+      {rilievo && daRilevare.length > 0 && (
+        <section className="card-fase mt-5" style={{ "--fase": "#b45309" } as React.CSSProperties}>
+          <h2 className="mb-1">📄 Contratto: cosa rilevare</h2>
+          <p className="mb-2 text-xs text-neutral-600">Si apre a parte, in un&apos;altra scheda: guardi cosa ha comprato il cliente e torni qui.</p>
+          <div className="flex flex-col gap-2">
+            {daRilevare.map((p) => (
+              <a key={p.id} href={linkOfferta("", p.preventivoId)} target="_blank" rel="noopener" className="btn-3d btn-3d-amber px-4 py-2 text-sm">
+                📄 Apri il contratto{daRilevare.length > 1 ? ` ${nomeProgetto(p)}` : p.preventivo?.oggetto ? ` — ${p.preventivo.oggetto}` : ""}
+              </a>
+            ))}
+            {fileVisibili.length > 0 && (
+              <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-2">
+                <p className="mb-1 text-[11px] font-bold uppercase text-amber-900">📁 Cartella «Contratto firmato»</p>
+                <ul className="space-y-1">
+                  {fileVisibili.map((d) => <li key={d.id}><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="break-all text-sm font-semibold text-blue-800 underline">📎 {d.nome}</a></li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {rilievo && a.stato !== "ANNULLATO" && (
         <section className="card-fase mt-5" style={{ "--fase": "#16a34a" } as React.CSSProperties}>
