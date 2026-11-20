@@ -1,3 +1,4 @@
+import { provinciaDelContatto } from "@/lib/geo/localita";
 import { randomUUID } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { brandIdDaNome, telefonistaDefaultPerBrand } from "@/lib/leadIngest";
@@ -62,6 +63,8 @@ export async function importaRighe(righe: RigaLead[], modo: Modo, esegui: boolea
           nome: r.nome.slice(0, 200), email: normalizzaEmail(r.email).slice(0, 200), telefono: r.telefono.slice(0, 40) || null,
           brandId, responsabileId: utente.id, categoria: "Lead", origine: provenienzaDaFonte(r.provenienza || "importazione"),
           comune: r.comune.slice(0, 120) || null, cap: r.cap.slice(0, 20) || null,
+          // la provincia scritta nel file, altrimenti ricavata dal CAP o dal comune (serve a scegliere le province nelle campagne)
+          provincia: provinciaDelContatto({ provincia: r.provincia, comune: r.comune, cap: r.cap }),
           descrizione: [r.prodotto && `Interesse: ${r.prodotto}`, r.note].filter(Boolean).join("\n").slice(0, 2000) || null,
           tag: `import ${quando}`,
         });

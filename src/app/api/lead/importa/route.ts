@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   if (corpo.righe.length > MAX_PER_RICHIESTA) return NextResponse.json({ ok: false, errore: `Troppe righe in una volta (massimo ${MAX_PER_RICHIESTA}).` }, { status: 400 });
   const righe: RigaLead[] = corpo.righe.map((r) => ({
     riga: Number(r.riga) || 0, nome: testo(r.nome, 200), telefono: testo(r.telefono, 80), email: testo(r.email, 200), marchio: testo(r.marchio, 60),
-    provenienza: testo(r.provenienza, 120), comune: testo(r.comune, 120), cap: testo(r.cap, 20), prodotto: testo(r.prodotto, 120), note: testo(r.note, 2000),
+    provenienza: testo(r.provenienza, 120), comune: testo(r.comune, 120), provincia: testo(r.provincia, 60), cap: testo(r.cap, 20), prodotto: testo(r.prodotto, 120), note: testo(r.note, 2000),
   }));
   return NextResponse.json(await importaRighe(righe, modo, corpo.esegui === true, testo(corpo.nomeFile, 120) || "file", { id: u.id, nome: u.nome }));
 }
