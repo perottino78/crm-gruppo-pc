@@ -1365,6 +1365,24 @@ export async function complementoDaListinoPerMisura(formData: FormData) {
   });
 }
 
+/** Dal selettore (tessera «Angolari in alluminio»): angolare su misura al costo di Il Mastro, solo acquisto. */
+export async function complementoAngolareDaListino(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const codice = str(formData, "codiceAngolare");
+    if (!codice) return "Scegli le misure dell'angolare.";
+    return { tipo: "ANG", codice, quantita: str(formData, "quantita"), note: str(formData, "notaAngolare") };
+  });
+}
+
+/** Dal selettore (tessera «Legni piallati»): legno su misura al costo sullo sviluppo, solo acquisto. */
+export async function complementoLegnoDaListino(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const codice = str(formData, "codiceLegno");
+    if (!codice) return "Scegli le misure del legno.";
+    return { tipo: "LEG", codice, quantita: str(formData, "quantita"), note: str(formData, "notaLegno") };
+  });
+}
+
 // ============ AZIONI SULLE RIGHE SPUNTATE (barra in fondo, come in BConsole) ============
 function righeSpuntate(fd: FormData) { return [...new Set(fd.getAll("riga").map(String))]; }
 
