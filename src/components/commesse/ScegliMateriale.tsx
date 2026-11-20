@@ -8,7 +8,14 @@ import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
-export type MaterialeInLista = Complemento & { etichetta: string };
+/** Una riga della lista: `base` = nome con colore e misura, `fornDefault` = fornitore del listino/articolo, `fuori` = altro da mostrare in coda (es. foto allegata). */
+export type MaterialeInLista = Complemento & { etichetta: string; base: string; fornDefault?: string | null; fuori?: string | null };
+
+/** L'etichetta della riga come si legge in lista: «nome × quantità · fornitore · altro». Si rifà ogni volta che la riga si modifica. */
+export function etichettaMateriale(m: Pick<MaterialeInLista, "base" | "quantita" | "fornitoreId" | "fornDefault" | "fuori">, fornitori: { id: string; ragioneSociale: string }[]): string {
+  const forn = fornitori.find((f) => f.id === m.fornitoreId)?.ragioneSociale ?? m.fornDefault;
+  return `${m.base} × ${m.quantita ?? 1}${forn ? ` · ${forn}` : ""}${m.fuori ? ` · ${m.fuori}` : ""}`;
+}
 
 /**
  * Cerca il materiale nel listino o negli articoli (o scrivilo a mano) e mettilo nella lista del rilievo.
@@ -59,15 +66,15 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
     const qta = quantita.trim() || "1";
     if (!scelto) {
       if (!q.trim()) { setErrore("Cerca un prodotto o scrivi la descrizione."); return; }
-      onAggiungi({ tipo: "T", descrizione: q.trim(), quantita: qta, fornitoreId: fornitoreId || null, note: note || null, etichetta: `${q.trim()} × ${qta}${forn ? ` · ${forn}` : ""}` });
+      onAggiungi({ tipo: "T", descrizione: q.trim(), quantita: qta, fornitoreId: fornitoreId || null, note: note || null, base: q.trim(), etichetta: `${q.trim()} × ${qta}${forn ? ` · ${forn}` : ""}` });
     } else if (scelto.tipo === "A") {
       const nome = scelto.label.split(" — ").slice(1).join(" — ") || scelto.label;
-      onAggiungi({ tipo: "A", articoloId: scelto.id, descrizione: nome, quantita: qta, fornitoreId: fornitoreId || null, note: note || null, etichetta: `${scelto.label} × ${qta}${forn ? ` · ${forn}` : scelto.fornitore ? ` · ${scelto.fornitore}` : ""}` });
+      onAggiungi({ tipo: "A", articoloId: scelto.id, descrizione: nome, quantita: qta, fornitoreId: fornitoreId || null, note: note || null, base: scelto.label, fornDefault: scelto.fornitore ?? null, etichetta: `${scelto.label} × ${qta}${forn ? ` · ${forn}` : scelto.fornitore ? ` · ${scelto.fornitore}` : ""}` });
     } else {
       if (scelto.griglia && !L.trim()) { setErrore(`Scrivi la misura (${scelto.unita}).`); return; }
       const misura = scelto.griglia ? ` ${L}${H ? `×${H}` : ""} ${scelto.unita}` : "";
       onAggiungi({ tipo: "P", brandId: scelto.brandId, tipologia: scelto.tipologia, colore, larghezza: L || null, altezza: H || null, descrizione: scelto.label, quantita: qta, fornitoreId: fornitoreId || null, note: note || null,
-        etichetta: `${scelto.label} — ${colore}${misura} × ${qta}${forn ? ` · ${forn}` : ""}` });
+        base: `${scelto.label} — ${colore}${misura}`, etichetta: `${scelto.label} — ${colore}${misura} × ${qta}${forn ? ` · ${forn}` : ""}` });
     }
     azzera();
   }
@@ -113,7 +120,8 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
               const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
               onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
-                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.nota ? ` · nota: ${extra.nota}` : ""}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
+                base: descrizione, fornDefault: "Il Mastro", fuori: extra.allegato ? `📎 ${extra.allegato.nome}` : null,
+                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
             }} />
           </div>
         </details>
@@ -124,7 +132,7 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
           <div className="mt-2">
             <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
               const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}${nota ? ` · nota: ${nota}` : ""}` });
+              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, base: descrizione, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}` });
             }} />
           </div>
         </details>
