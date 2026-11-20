@@ -106,6 +106,13 @@ async function main() {
   const dA = tA ? await prisma.documento.findMany({ where: { entita: "TASK", entitaId: tA.id } }) : [];
   verifica(dA.length === 1 && dA[0].nome === "foto-perdita.pdf", "task con allegato: il file è nella scheda «File» del task", dA.map((d) => d.nome));
 
+  console.log("Task con più persone (richiesta di Ugo 20/11/2026)");
+  const rob = await prisma.utente.create({ data: { nome: "Roberto Marongiu", email: "roberto@gruppopec.com", username: "rob", ruolo: "COMMERCIALE" } });
+  const rP = await redirectA(creaTaskCliente(modulo({ clienteId: cliente.id, oggetto: "Info su maniglia passante", utenteId: rob.id, inCopiaA: [cri.id, rob.id, cri.id, ex.id] })));
+  const tP = await prisma.attivita.findFirst({ where: { tipo: "TASK", oggetto: "Info su maniglia passante" } });
+  verifica(tP?.utenteId === rob.id && tP.inCopiaA.length === 1 && tP.inCopiaA[0] === cri.id, "il primo è l'incaricato, gli altri coinvolti (senza doppioni né disattivati)", tP);
+  verifica(rP?.includes("coinvolti anche: Cristina Bianchi"), "il messaggio dice chi è coinvolto", rP);
+
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { smtp.close(); await prisma.$disconnect(); process.exit(ko ? 1 : 0); });
