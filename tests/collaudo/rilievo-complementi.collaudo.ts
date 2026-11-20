@@ -74,6 +74,16 @@ async function main() {
   await C.eliminaComplemento(fd({ rigaId: cf.id }));
   verifica(!(await prisma.rigaOrdine.findUnique({ where: { id: cf.id } })), "complemento tolto");
 
+  console.log("4b. Angolari e legni dal listino della pratica (solo acquisto)");
+  const ang = await dove(C.complementoAngolareDaListino(fd({ preventivoId: c.id, codiceAngolare: "ANGALL-L-30X50X0-15-EST-C0-3000-ME", quantita: "2", notaAngolare: "gronda nord" })));
+  const ra = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, codice: { startsWith: "ANGALL-" } } });
+  verifica(ra.complemento && ra.quantita === 2 && (ra.costoPrevisto ?? 0) > 0 && ra.note === "gronda nord" && ra.fornitoreId === mastro.id, "angolare dal listino: complemento al costo, fornitore Il Mastro", { ra, ang });
+  await dove(C.complementoLegnoDaListino(fd({ preventivoId: c.id, codiceLegno: "LEGNO-30X70-2500", quantita: "3", notaLegno: "pilastri" })));
+  const rl = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, codice: "LEGNO-30X70-2500" } });
+  verifica(rl.complemento && rl.quantita === 3 && (rl.costoPrevisto ?? 0) > 0 && rl.note === "pilastri", "legno su misura dal listino: complemento con costo", rl);
+  await prisma.rigaOrdine.deleteMany({ where: { id: { in: [ra.id, rl.id] } } });
+  verifica((await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).totaleNetto === totPrima, "la vendita al cliente non cambia");
+
   console.log("5. Ordine al fornitore e totale confermato");
   await dove(O.creaOrdineDaCommessa(fd({ commessaId: c.id, fornitoreId: mastro.id })));
   const ord = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: mastro.id }, include: { righe: true } });
