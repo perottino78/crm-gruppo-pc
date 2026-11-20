@@ -60,13 +60,13 @@ def pagina_testo(page, marca, clip=None, tutto=False):
             page.insert_text(pymupdf.Point(x, s["origin"][1]), t, fontname=nome, fontfile=percorso, fontsize=s["size"], color=rgb(s["color"]))
             x += font.text_length(t, fontsize=s["size"])
 
-def cancella(page, rects):
-    for r in rects: page.add_redact_annot(pymupdf.Rect(*r), fill=BIANCO)
+def cancella(page, rects, colore=BIANCO):
+    for r in rects: page.add_redact_annot(pymupdf.Rect(*r), fill=colore)
     page.apply_redactions(images=pymupdf.PDF_REDACT_IMAGE_PIXELS)
 
 def scintilla(d):
     for i in (4, 5, 6): pagina_testo(d[i], "scintilla")
-    cancella(d[6], [(50, 440, 440, 842)])                              # certificati col nome e l'indirizzo del fornitore
+    cancella(d[6], [(50, 440, 440, 842), (445, 528, 585, 656)])   # certificati con la ragione sociale del fornitore e foto dei campioni colore (porta il suo logo)
     cancella(d[7], [(285, 668, 540, 748), (70, 805, 215, 862)])        # loghi, QR, social, edizione
 
 def brillante(d):
