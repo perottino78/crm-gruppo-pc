@@ -3,7 +3,7 @@
 // Modulo «Legno piallato per vetrate» nell'ordine (richiesta di Ugo 20/11/2026): per ogni sezione pezzi e lunghezza, con il conto
 // della cubatura mentre si scrive (metri, m³ e prezzo). Il prezzo concordato al m³ va nella scheda; senza, la stima usa il prezzo indicativo e resta solo qui.
 import { useState } from "react";
-import { LUNGHEZZA_STANDARD, PREZZO_M3_INDICATIVO, riepilogoLegno, sezioneDellaRiga } from "@/lib/ordini/legno";
+import { LUNGHEZZA_STANDARD, PREZZO_M3_INDICATIVO, RIGHE_LIBERE, riepilogoLegno, sezioneDellaRiga } from "@/lib/ordini/legno";
 
 const n2 = (n: number, dec = 2) => n.toLocaleString("it-IT", { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: "always" as unknown as boolean });
 
@@ -33,6 +33,33 @@ export default function TabellaLegno({ righe, iniziali = {}, salva, modificabile
                   <td className="border border-neutral-300 px-1.5 font-semibold whitespace-nowrap">{s ? `${s.spessore} × ${s.larghezza}` : "?"}</td>
                   <td className="border border-neutral-300 p-0"><input name={`campo_tab_legno_${n}_pezzi`} inputMode="numeric" className={inp} value={valori[`tab_legno_${n}_pezzi`] ?? ""} onChange={(e) => set(`tab_legno_${n}_pezzi`, e.target.value)} aria-label={`Pezzi ${s?.spessore}×${s?.larghezza}`} /></td>
                   <td className="border border-neutral-300 p-0"><input name={(valori[`tab_legno_${n}_pezzi`] ?? "").trim() ? `campo_tab_legno_${n}_lunghezza` : undefined} inputMode="numeric" className={inp} value={valori[`tab_legno_${n}_lunghezza`] ?? String(LUNGHEZZA_STANDARD)} onChange={(e) => set(`tab_legno_${n}_lunghezza`, e.target.value)} aria-label={`Lunghezza ${s?.spessore}×${s?.larghezza}`} /></td>
+                  <td className="border border-neutral-300 px-1.5 text-right">{x ? n2(x.m3, 4) : ""}</td>
+                  <td className="border border-neutral-300 px-1.5 text-right">{x?.prezzoBarra != null ? n2(x.prezzoBarra) : ""}</td>
+                  <td className="border border-neutral-300 px-1.5 text-right font-semibold">{x?.totale != null ? n2(x.totale) : ""}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-xs font-bold text-neutral-800">✏️ Misure libere (spessore e larghezza a piacere)</p>
+      <div className="overflow-x-auto">
+        <table className="text-xs border-collapse">
+          <thead><tr className="bg-neutral-50">
+            {["#", "Spessore mm", "Larghezza mm", "Pezzi", "Lunghezza mm", "m³", "€ a barra", "Totale €"].map((h) => <th key={h} className="border border-neutral-300 px-1.5 py-0.5 font-semibold">{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {Array.from({ length: RIGHE_LIBERE }, (_, i) => i + 1).map((n) => {
+              const x = perRiga.get(100 + n);
+              const k = (c: string) => `tab_legnol_${n}_${c}`;
+              const campo = (c: string) => <input name={`campo_${k(c)}`} inputMode="numeric" className={inp} value={valori[k(c)] ?? (c === "lunghezza" ? String(LUNGHEZZA_STANDARD) : "")} onChange={(e) => set(k(c), e.target.value)} aria-label={`${c} misura libera ${n}`} />;
+              return (
+                <tr key={n} className={x ? "bg-amber-50" : ""}>
+                  <td className="px-1.5 text-neutral-500">L{n}</td>
+                  <td className="border border-neutral-300 p-0">{campo("spessore")}</td>
+                  <td className="border border-neutral-300 p-0">{campo("larghezza")}</td>
+                  <td className="border border-neutral-300 p-0">{campo("pezzi")}</td>
+                  <td className="border border-neutral-300 p-0">{campo("lunghezza")}</td>
                   <td className="border border-neutral-300 px-1.5 text-right">{x ? n2(x.m3, 4) : ""}</td>
                   <td className="border border-neutral-300 px-1.5 text-right">{x?.prezzoBarra != null ? n2(x.prezzoBarra) : ""}</td>
                   <td className="border border-neutral-300 px-1.5 text-right font-semibold">{x?.totale != null ? n2(x.totale) : ""}</td>
