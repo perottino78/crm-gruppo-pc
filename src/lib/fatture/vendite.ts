@@ -55,6 +55,16 @@ export const STATI_VENDITA: Record<string, { nome: string; cls: string }> = {
   SENZA_SCADENZE: { nome: "Senza scadenze", cls: "bg-neutral-100 text-neutral-600" },
 };
 
+/** Stesse etichette per le fatture d'acquisto (come in BConsole): insolute = scadute e non pagate, saldate = pagate. */
+export const STATI_ACQUISTO: Record<string, { nome: string; cls: string }> = {
+  APERTA: { nome: "Da pagare", cls: "bg-sky-100 text-sky-800" },
+  PARZIALE: { nome: "Pagata in parte", cls: "bg-amber-100 text-amber-900" },
+  SCADUTA: { nome: "Insoluta (scaduta)", cls: "bg-red-600 text-white" },
+  SALDATA: { nome: "Saldata", cls: "bg-green-600 text-white" },
+  NOTA_CREDITO: { nome: "Nota di credito", cls: "bg-neutral-200 text-neutral-700" },
+  SENZA_SCADENZE: { nome: "Senza scadenze", cls: "bg-neutral-100 text-neutral-600" },
+};
+
 /** Cliente del CRM: per P.IVA, codice fiscale o nome (anche scritto "Cognome Nome"). */
 export async function trovaCliente(f: { partitaIva: string | null; codiceFiscale: string | null; denominazione: string }) {
   const sel = { id: true, nome: true, brand: { select: { nome: true } } } as const;

@@ -9,7 +9,7 @@ import { contrattiDi, personeVisibili, gestisceProvvigioni } from "@/lib/provvig
 import { filtra, totali, riepilogoProvvigione, riepilogoPagamenti, NOMI_STATO_PROVVIGIONE, NOMI_STATO_PAGAMENTO, cent } from "@/lib/provvigioni/calcoli";
 
 type P = { persona?: string; q?: string; anno?: string; pagamento?: string; provvigione?: string; origine?: string };
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const giorno = (d: Date | null | undefined) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric" }) : "—");
 
 export default async function StampaProvvigioni({ searchParams }: { searchParams: Promise<P> }) {

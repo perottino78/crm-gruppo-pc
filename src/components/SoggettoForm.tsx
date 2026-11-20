@@ -80,6 +80,7 @@ export default function SoggettoForm({
             <option value="">—</option><option>Bonifico</option><option>Riba</option><option>Contanti</option><option>Carta</option><option>Assegno</option>
           </select>
         </Campo>
+        <Campo label="Centro di costo abituale"><input name="centroCosto" defaultValue={s?.centroCosto ?? ""} className={inp} placeholder="es. Serramenti, Fotovoltaico" title="Le fatture di questo fornitore arrivano già con questo centro di costo" /></Campo>
         <Campo label="Giorni di pagamento"><input name="giorniPagamento" defaultValue={s?.giorniPagamento ?? ""} className={inp} placeholder="es. 30" /></Campo>
         <div className="col-span-3">
           <Campo label="Condizioni di pagamento"><input name="condizioniPagamento" defaultValue={s?.condizioniPagamento ?? ""} className={inp} placeholder="es. 30% all'ordine, saldo alla consegna" /></Campo>

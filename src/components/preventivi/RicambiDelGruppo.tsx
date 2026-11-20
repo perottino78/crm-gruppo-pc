@@ -19,7 +19,7 @@ export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezio
   if (!lista || lista.length === 0) return null;
   const parole = cerca.toLowerCase().split(/\s+/).filter(Boolean);
   const viste = lista.filter((a) => parole.every((p) => `${a.codice} ${a.descrizione} ${a.categoria?.nome ?? ""}`.toLowerCase().includes(p)));
-  const euro = (n: number | null) => (n === null ? "prezzo da definire" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR" }));
+  const euro = (n: number | null) => (n === null ? "prezzo da definire" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean }));
   return (
     <section className="mt-4 rounded-xl border-2 border-amber-300 bg-amber-50/50 p-3">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">

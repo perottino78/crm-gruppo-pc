@@ -1,4 +1,6 @@
 import { percentuale } from "@/lib/numeri";
+import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { Fragment } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -10,7 +12,7 @@ import { unitaMisura, haMisura, labelBreveTipologia, sottogruppoDiTipologia } fr
 import { vociRiepilogo } from "@/lib/preventivi/riepilogo-stampa";
 import { codiceFileRiga } from "@/lib/mail/link-offerta";
 import { schedaCliente, schedeDaAllegare } from "@/lib/preventivi/scheda-cliente";
-import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, CONDIZIONI_CONSEGNA_FINANZIAMENTO, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA, testoValidita } from "@/lib/condizioniOfferta";
 import PrintButton from "@/components/PrintButton";
 import {
   ARTICOLI_CONTRATTO,
@@ -138,6 +140,8 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
   const totaleNetto = preventivo.totaleNetto;
   const totaleIva = preventivo.totaleIva;
   const totaleFinale = totaleNetto + totaleIva;
+  const tabelleFin = preventivo.finanziamento ? await leggiTabelleFinanziamento() : [];
+  const finanz = preventivo.finanziamento ? calcolaFinanziamento(preventivo.finanziamento as SceltaFinanziamento, totaleFinale, tabelleFin) : null;
   // Prezzo manuale: quando attivo, la stampa non deve rivelare al cliente ne' l'imponibile
   // lordo di calcolo ne' la percentuale di sconto applicata — mostra solo un imponibile+IVA
   // "puliti" ricavati a ritroso dal totale finale scritto a mano, indistinguibili da un
@@ -212,12 +216,19 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                           tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
                         )
                       : ro.optional.nome;
-                    return `${nomeOptional}${ro.nota ? ` («${ro.nota}»)` : ""}${ro.quantita > 1 ? ` ×${ro.quantita}` : ""}`;
+                    // il prezzo di ogni optional accanto al suo nome (richiesta di Debora 18/11/2026); con l'offerta «a corpo» niente prezzi
+                    const prezzoOpt = ro.quantita * ro.prezzoUnitario;
+                    return `${nomeOptional}${ro.nota ? ` («${ro.nota}»)` : ""}${ro.quantita > 1 ? ` ×${ro.quantita}` : ""}${!aCorpo && prezzoOpt !== 0 ? ` + ${eur(prezzoOpt)}` : ""}`;
                   }),
                 }).map((v) => (
                   <li key={v.etichetta}><span className="text-neutral-500">{v.etichetta}:</span> {v.valore}</li>
                 ))}
               </ul>
+              {!aCorpo && subOptionali + r.optionalPrezzo !== 0 && (
+                <p className="mt-1 text-xs text-neutral-700">
+                  Prodotto {eur(r.quantita * r.prezzoUnitario)} + optional {eur(subOptionali + r.optionalPrezzo)} = <b>{eur(subtotale)}</b>
+                </p>
+              )}
               {(() => {
                 const mie = fileRighe.filter((f) => f.entitaId === r.id);
                 const foto = mie.filter((f) => f.mime.startsWith("image/"));
@@ -289,7 +300,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
     ? `${preventivo.numeroOfferta}/${anno}`
     : `${preventivo.id.slice(-6).toUpperCase()}/${anno}`; // fallback per preventivi creati prima della numerazione progressiva
 
-  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   return (
     <div className="max-w-3xl mx-auto bg-white text-neutral-900 print:max-w-none">
@@ -467,11 +478,19 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
         <div className="grid grid-cols-2 gap-6 mb-8 text-xs">
           <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.primary }}>
             <p className="mb-1 font-semibold" style={{ color: info.primary }}>Condizioni di pagamento</p>
-            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
+            {finanz && finanz.ok ? (
+              <p className="text-neutral-700">
+                <span className="font-semibold">Pagamento con finanziamento.</span>{" "}
+                {finanz.anticipoDiretto > 0.005 ? <>{eur(finanz.anticipoDiretto)} alla firma; </> : null}
+                {eur(finanz.importoFinanziato)} in {finanz.rate} rate mensili da {eur(finanz.rata)} (TAN {finanz.tabella.tan.toLocaleString("it-IT")}% · TAEG {finanz.taeg.toLocaleString("it-IT")}%), prima rata a {finanz.tabella.giorniPrimaRata} giorni. Salvo approvazione della finanziaria.
+              </p>
+            ) : (
+              <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}</p>
+            )}
           </div>
           <div className="rounded-lg p-3 bg-neutral-50 border-l-4" style={{ borderColor: info.accent }}>
             <p className="mb-1 font-semibold" style={{ color: info.accent }}>Condizioni di consegna</p>
-            <p className="text-neutral-700 whitespace-pre-line">{preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}</p>
+            <p className="text-neutral-700 whitespace-pre-line">{finanz && finanz.ok ? CONDIZIONI_CONSEGNA_FINANZIAMENTO : (preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT)}</p>
           </div>
         </div>
 

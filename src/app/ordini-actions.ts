@@ -334,7 +334,7 @@ export async function registraConfermaFornitore(fd: FormData) {
       ...(totaleCambiato ? { totaleConfermato: totale !== null && totale >= 0 ? Math.round(totale * 100) / 100 : null, totaleConfermatoIl: totale !== null ? new Date() : null, totaleConfermatoDaNome: totale !== null ? u.nome : null } : {}),
     },
   });
-  await logCommessa(o.commessaId, `Ordine ${numeroOrdine(o)} confermato dal fornitore${o.numeroConfermaFornitore ? ` (conferma n. ${o.numeroConfermaFornitore})` : ""}${consegna ? `, consegna prevista ${consegna.toLocaleDateString("it-IT")}` : ""}${totaleCambiato && o.totaleConfermato !== null ? `: totale confermato ${o.totaleConfermato.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} caricato nei costi della commessa` : ""}.`, u.nome);
+  await logCommessa(o.commessaId, `Ordine ${numeroOrdine(o)} confermato dal fornitore${o.numeroConfermaFornitore ? ` (conferma n. ${o.numeroConfermaFornitore})` : ""}${consegna ? `, consegna prevista ${consegna.toLocaleDateString("it-IT")}` : ""}${totaleCambiato && o.totaleConfermato !== null ? `: totale confermato ${o.totaleConfermato.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })} caricato nei costi della commessa` : ""}.`, u.nome);
   aggiorna(id, o.commessaId);
 }
 

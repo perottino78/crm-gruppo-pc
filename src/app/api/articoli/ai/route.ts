@@ -8,7 +8,7 @@ import type { Prisma } from "@prisma/client";
 import { puoModificareArticoli, articoliPerConfronto, categorieRegola, nomeCategoria } from "@/lib/articoli/server";
 import { chiediClaude, bloccoFile, promptListino, PROMPT_CONTROLLO, promptFoto, estraiCsv, estraiJson, ErroreAi, INTESTAZIONE_AI } from "@/lib/articoli/ai";
 import { leggiCsvTesto, type Tabella } from "@/lib/articoli/foglio";
-import { analizzaListino, mappaColonne, type Opzioni } from "@/lib/articoli/importa";
+import { analizzaListino, mappaColonne, testoPercorso, type Opzioni } from "@/lib/articoli/importa";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
       const righe = an.righe.filter((r) => r.azione !== "ERRORE").slice(0, 600);
       const n = (x: number | null) => (x === null ? "" : String(x).replace(".", ","));
       const tabella = ["RIGA;AZIONE;CODICE;DESCRIZIONE;CATEGORIA;UM;COSTO;VENDITA;MARGINE%;AVVISI", ...righe.map((r) => {
-        const cat = r.dati.categoriaNome ? `${r.dati.categoriaNome}${r.dati.sottocategoriaNome ? ` › ${r.dati.sottocategoriaNome}` : ""}` : nomeCategoria(r.dati.categoriaId ?? esistenti.find((e) => e.id === r.articoloId)?.categoriaId, catNomi);
+        const cat = r.dati.categoriaPercorso ? `${testoPercorso(r.dati.categoriaPercorso)}` : nomeCategoria(r.dati.categoriaId ?? esistenti.find((e) => e.id === r.articoloId)?.categoriaId, catNomi);
         return [r.riga, r.azione, r.codice ?? r.dati.codiceFornitore ?? "", r.descrizione.replace(/;/g, ","), cat, r.dati.um ?? "", n(r.costo), n(r.vendita), n(r.margine), r.avvisi.join(" / ").replace(/;/g, ",")].join(";");
       })].join("\n");
       const testo = await chiediClaude({ sistema: PROMPT_CONTROLLO, contenuto: [{ type: "text", text: `Importazione «${imp.nomeFile}» (${righe.length} righe${an.righe.length > righe.length ? `, mostrate le prime ${righe.length}` : ""}):\n\n${tabella}` }], maxTokens: 3000 });

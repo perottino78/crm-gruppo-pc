@@ -152,6 +152,7 @@ export default async function LeadPage({ searchParams }: { searchParams: Promise
         <div>
           <h1 className="text-2xl font-bold text-neutral-900">📞 Task di oggi</h1>
           <p className="text-sm text-neutral-600">Chi chiamare adesso. Tocca una riga per aprire il lead e registrare l&apos;esito.</p>
+          {u && (u.ruolo === "AMMINISTRATORE" || puo(u, "lead.importa")) && <Link href="/lead/importa" className="mt-1 inline-block text-xs font-semibold text-blue-700 underline">📥 Importa contatti da un file</Link>}
         </div>
         <form className="flex gap-2"><input type="hidden" name="vista" value="tutti" /><input name="q" defaultValue={q ?? ""} placeholder="Cerca nome, telefono, email, prodotto" className={inp} /><button className="btn-3d btn-3d-teal px-3 py-1.5 text-sm">Cerca</button></form>
       </div>

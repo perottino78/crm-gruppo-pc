@@ -2,7 +2,7 @@
 import { obiettiviDi } from "@/lib/provvigioni/obiettivi-server";
 import { NOMI_STATO_OBIETTIVO, nomePeriodo, vendutoPerMese, MESI, type Avanzamento } from "@/lib/provvigioni/obiettivi";
 
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" as unknown as boolean });
 const COLORE: Record<string, string> = { RAGGIUNTO: "#16A34A", IN_LINEA: "#2563EB", VICINO: "#D97706", INDIETRO: "#DC2626", NON_INIZIATO: "#737373" };
 
 function Barra({ titolo, av, premio, note }: { titolo: string; av: Avanzamento; premio: number | null; note: string | null }) {

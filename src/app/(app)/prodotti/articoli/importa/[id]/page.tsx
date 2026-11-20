@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { puoModificareArticoli, articoliPerConfronto, categorieRegola, nomeCategoria } from "@/lib/articoli/server";
 import { alberoCategorie, euro, perc } from "@/lib/articoli/prezzi";
-import { analizzaListino, contaAnteprima, DIVISIONI, type Opzioni, type RigaAnteprima } from "@/lib/articoli/importa";
+import { analizzaListino, contaAnteprima, DIVISIONI, testoPercorso, type Opzioni, type RigaAnteprima } from "@/lib/articoli/importa";
 import type { Tabella } from "@/lib/articoli/foglio";
 import { aiDisponibile } from "@/lib/articoli/ai";
 import { confermaImportazione, annullaImportazione, aggiornaOpzioniImportazione } from "@/app/articoli-actions";
@@ -53,8 +53,8 @@ export default async function AnteprimaPage({ params }: { params: Promise<{ id: 
   const gruppo = (a: RigaAnteprima["azione"]) => an.righe.filter((r) => r.azione === a);
   const conAvvisi = an.righe.filter((r) => (r.azione === "NUOVO" || r.azione === "MODIFICA") && r.avvisi.length);
   const albero = alberoCategorie(cat);
-  const catDi = (r: RigaAnteprima) => r.dati.categoriaNome ? `${r.dati.categoriaNome}${r.dati.sottocategoriaNome ? ` › ${r.dati.sottocategoriaNome}` : ""} (nuova)` : nomeCategoria(r.dati.categoriaId ?? esistenti.find((e) => e.id === r.articoloId)?.categoriaId, cat);
-  const fornDi = (r: RigaAnteprima) => fornitori.find((f) => f.id === (r.dati.fornitoreId ?? esistenti.find((e) => e.id === r.articoloId)?.fornitoreId))?.ragioneSociale ?? "—";
+  const catDi = (r: RigaAnteprima) => r.dati.categoriaPercorso ? `${testoPercorso(r.dati.categoriaPercorso)} (nuova)` : nomeCategoria(r.dati.categoriaId ?? esistenti.find((e) => e.id === r.articoloId)?.categoriaId, cat);
+  const fornDi = (r: RigaAnteprima) => fornitori.find((f) => f.id === (r.dati.fornitoreId ?? esistenti.find((e) => e.id === r.articoloId)?.fornitoreId))?.ragioneSociale ?? (r.dati.fornitoreNuovo ? `${r.dati.fornitoreNuovo} (nuovo)` : "—");
 
   const elenco = (righe: RigaAnteprima[], modifiche?: boolean) => (
     <div className="overflow-x-auto">

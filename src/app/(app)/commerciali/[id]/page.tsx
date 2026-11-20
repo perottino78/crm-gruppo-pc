@@ -114,12 +114,12 @@ export default async function SchedaCommercialePage({
         <div className="bg-white rounded-lg border border-neutral-200 border-l-4 border-l-blue-500 p-4 shadow-sm">
           <p className="text-xs font-semibold text-neutral-600 mb-1">Preventivi aperti</p>
           <p className="text-lg font-bold text-neutral-900">{preventiviAperti.length}</p>
-          <p className="text-xs text-neutral-600">{valoreAperti.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <p className="text-xs text-neutral-600">{valoreAperti.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</p>
         </div>
         <div className="bg-green-50 border border-green-200 border-l-4 border-l-green-600 rounded-lg p-4 shadow-sm">
           <p className="text-xs font-semibold text-green-700 mb-1">Contratti chiusi (accettati)</p>
           <p className="text-lg font-bold text-green-800">{preventiviAccettati.length}</p>
-          <p className="text-xs text-green-700">{valoreAccettati.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+          <p className="text-xs text-green-700">{valoreAccettati.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</p>
         </div>
         <div className="bg-white rounded-lg border border-neutral-200 border-l-4 border-l-purple-500 p-4 shadow-sm">
           <p className="text-xs font-semibold text-neutral-600 mb-1">Tasso di chiusura</p>
@@ -138,8 +138,8 @@ export default async function SchedaCommercialePage({
         {obiettivoCorrente ? (
           <div className="mb-3">
             <div className="flex items-center justify-between text-sm mb-1">
-              <span>{realizzatoMese.toLocaleString("it-IT", { style: "currency", currency: "EUR" })} realizzato</span>
-              <span className="text-neutral-600">obiettivo {obiettivoCorrente.importoTarget.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
+              <span>{realizzatoMese.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })} realizzato</span>
+              <span className="text-neutral-600">obiettivo {obiettivoCorrente.importoTarget.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</span>
             </div>
             <div className="h-2.5 bg-neutral-100 rounded-full overflow-hidden">
               <div
@@ -180,7 +180,7 @@ export default async function SchedaCommercialePage({
         {utente.obiettivi.length > 1 && (
           <div className="mt-3 pt-3 border-t border-neutral-100 flex flex-wrap gap-3 text-xs text-neutral-600">
             {utente.obiettivi.filter((o) => o.periodo !== periodo).slice(0, 6).map((o) => (
-              <span key={o.id}>{labelPeriodo(o.periodo)}: {o.importoTarget.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
+              <span key={o.id}>{labelPeriodo(o.periodo)}: {o.importoTarget.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</span>
             ))}
           </div>
         )}
@@ -218,7 +218,7 @@ export default async function SchedaCommercialePage({
                   {p.cliente.nome} <span className="text-xs text-neutral-600">· {p.brand.nome} · {p.createdAt.toLocaleDateString("it-IT")}{p.duplicatoDaId ? " · duplicata" : ""}{p.archiviato ? " · archiviata" : ""}</span>
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="text-xs text-neutral-700">{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>
+                  <span className="text-xs text-neutral-700">{p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</span>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">{p.stato}</span>
                 </span>
               </Link>

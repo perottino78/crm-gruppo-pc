@@ -113,7 +113,7 @@ async function calcolaMetroLineare(
   return {
     prezzoUnitario,
     prodottoRiferimentoId: fascia.id,
-    dettaglio: `tariffa ${tariffaAlMetro.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}/ml (fascia altezza ${fascia.altezzaMm}cm) × ${larghezzaM}ml (larghezza arrotondata per eccesso da ${larghezzaCm}cm)`,
+    dettaglio: `tariffa ${tariffaAlMetro.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}/ml (fascia altezza ${fascia.altezzaMm}cm) × ${larghezzaM}ml (larghezza arrotondata per eccesso da ${larghezzaCm}cm)`,
   };
 }
 
@@ -151,7 +151,7 @@ async function calcolaMqConMinimi(
   return {
     prezzoUnitario,
     prodottoRiferimentoId: tariffaRiga.id,
-    dettaglio: `tariffa ${tariffaAlMq.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}/m² × ${areaFatturabileM2.toFixed(2)}m² fatturabili (larghezza ${larghezzaArrCm / 100}ml × altezza ${altezzaArrCm / 100}ml${altezzaArrCm > arrotondaSuPerEccesso(altezzaCm, passo) ? ", altezza minima applicata" : ""}${areaFatturabileM2 > areaRealeM2 ? ", area minima applicata" : ""})`,
+    dettaglio: `tariffa ${tariffaAlMq.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}/m² × ${areaFatturabileM2.toFixed(2)}m² fatturabili (larghezza ${larghezzaArrCm / 100}ml × altezza ${altezzaArrCm / 100}ml${altezzaArrCm > arrotondaSuPerEccesso(altezzaCm, passo) ? ", altezza minima applicata" : ""}${areaFatturabileM2 > areaRealeM2 ? ", area minima applicata" : ""})`,
   };
 }
 
@@ -183,7 +183,7 @@ async function calcolaMetroLineareFisso(
   return {
     prezzoUnitario,
     prodottoRiferimentoId: tariffaRiga.id,
-    dettaglio: `tariffa ${tariffaAlMl.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}/ml × ${lunghezzaM}ml (lunghezza arrotondata per eccesso da ${larghezzaCm}cm)`,
+    dettaglio: `tariffa ${tariffaAlMl.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}/ml × ${lunghezzaM}ml (lunghezza arrotondata per eccesso da ${larghezzaCm}cm)`,
   };
 }
 

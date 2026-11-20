@@ -16,7 +16,7 @@ export function numeroCommessa(c: { numero: number; anno: number }) {
 }
 
 export const eur = (n: number) =>
-  n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
+  n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 2, useGrouping: "always" as unknown as boolean });
 
 /** Consegna prevista del progetto: testo e colore (rossa se scaduta e il lavoro non è finito, arancione se entro 7 giorni). */
 export function statoConsegna(consegna: Date | null | undefined, stato: string, oggi = new Date()): { testo: string; cls: string } {

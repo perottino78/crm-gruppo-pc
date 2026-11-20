@@ -240,7 +240,7 @@ export default async function ModelloProdottoPage({
                   <td className="py-1.5 text-right pr-3">{String(c.quantita).replace(".", ",")}</td>
                   <td className="py-1.5 text-xs">{labelCalcolo(c.calcolo)}</td>
                   <td className="py-1.5 text-xs">{c.fornitoreId ? nomeFornitore.get(c.fornitoreId) ?? "—" : "quello del modello"}</td>
-                  <td className="py-1.5 text-right pr-3 text-xs">{c.costoUnitario !== null ? c.costoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" }) : "—"}</td>
+                  <td className="py-1.5 text-right pr-3 text-xs">{c.costoUnitario !== null ? c.costoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean }) : "—"}</td>
                   <td className="py-1.5 text-xs">{c.facoltativo ? <span className="px-1.5 rounded bg-amber-100 text-amber-900 font-bold">facoltativo</span> : <span className="px-1.5 rounded bg-teal-100 text-teal-900 font-bold">sempre</span>}</td>
                   <td className="py-1.5 text-right">{puoKit && <form action={eliminaComponenteKit}><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-700 underline">togli</button></form>}</td>
                 </tr>

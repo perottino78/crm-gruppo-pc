@@ -68,7 +68,7 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
             <p className="text-sm">{dataIt(s.dataScadenza)} · {eur(s.importo)} · {s.descrizione} <span className="text-xs text-neutral-600">({s.stato === "PAGATA" ? "incassata" : s.stato === "PARZIALE" ? "incassata in parte" : s.stato === "ANNULLATA" ? "annullata" : "da incassare"})</span>
               {s.origine !== "FATTURA_VENDITA" && <span className="text-xs text-neutral-500"> · incasso della commessa</span>}</p>
             {s.stato !== "ANNULLATA" && <RegistraPagamento conti={conti} ritorno={`/amministrazione/fatture-vendita/${f.id}`}
-              ritenutaSuggerita={f.detrazione && s.ritenuta === 0 ? ritenutaPrevista(f, s.importo) : 0}
+              ritenutaSuggerita={f.detrazione && s.ritenuta === 0 ? ritenutaPrevista(s.residuo) : 0}
               scadenza={{ id: s.id, tipo: s.tipo, residuo: s.residuo, ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />}
           </div>
         ))}
@@ -93,8 +93,15 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
         <p className="text-[11px] text-neutral-500 md:col-span-4">Collegando la commessa, se la fattura non ha ancora incassi, le scadenze si agganciano all&apos;acconto o al saldo della commessa con lo stesso importo.</p>
       </form>
 
-      {!pagamenti && (
-        <form action={eliminaFatturaVendita} className="text-right"><input type="hidden" name="id" value={f.id} /><button className="text-xs text-red-700 underline">elimina (caricata per errore)</button></form>
+      {f.origine !== "CRM" && (
+        <section className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm space-y-1">
+          <p className="font-semibold text-red-900">Registrata per errore?</p>
+          <p className="text-xs text-neutral-700">Elimina la fattura{pagamenti ? " (gli incassi registrati a mano vengono annullati)" : ""}. Non si perde nulla: resta 30 giorni nel cestino e la ripristini da Impostazioni › Registro e cestino › «Ripristina».</p>
+          <form action={eliminaFatturaVendita} className="flex flex-wrap items-center gap-2">
+            <input type="hidden" name="id" value={f.id} />
+            <button className="btn-3d btn-3d-red text-xs px-3 py-1.5">🗑 Elimina la fattura (cestino)</button>
+          </form>
+        </section>
       )}
     </div>
   );

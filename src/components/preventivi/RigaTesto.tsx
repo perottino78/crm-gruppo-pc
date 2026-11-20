@@ -6,7 +6,7 @@ import { duplicaRigaPreventivo, modificaRigaPreventivo, rimuoviRigaPreventivo } 
 
 export default function RigaTesto({ rigaId, preventivoId, testo, importo }: { rigaId: string; preventivoId: string; testo: string; importo: number }) {
   const [modifica, setModifica] = useState(false);
-  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
   return (
     <div>
       <div className="flex items-start justify-between gap-3">

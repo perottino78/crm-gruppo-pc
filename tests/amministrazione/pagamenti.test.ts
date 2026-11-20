@@ -6,12 +6,20 @@ import { nomeNorm, conDetrazione, sezionaleDaNumero, statoVendita, rateIncasso, 
 
 const d = (s: string) => new Date(`${s}T12:00:00Z`);
 
-test("ritenuta 11% sull'imponibile, in proporzione alla scadenza", () => {
-  assert.equal(ritenutaPrevista({ imponibile: 10000, totale: 11000 }, 11000), 1100);
-  assert.equal(ritenutaPrevista({ imponibile: 10000, totale: 11000 }, 5500), 550); // metà fattura
-  assert.equal(ritenutaPrevista({ imponibile: 10000, totale: 11000 }, 20000), 1100); // mai oltre la fattura
-  assert.equal(ritenutaPrevista(null, 1000), 0);
-  assert.equal(ritenutaPrevista({ imponibile: -100, totale: -122 }, 122), 0); // nota di credito
+test("ritenuta 11% del bonifico parlante: lordo : 1,22 × 11 / 100 (formula di Debora)", () => {
+  assert.equal(ritenutaPrevista(492.06), 44.37); // 492,06 : 1,22 = 403,33 → 44,37
+  assert.equal(ritenutaPrevista(1220), 110); // 1220 : 1,22 = 1000 → 110
+  assert.equal(ritenutaPrevista(0), 0);
+  assert.equal(ritenutaPrevista(-122), 0); // nota di credito
+});
+
+test("tendina dei metodi di pagamento: tutte le voci di BConsole, chiavi vecchie ancora valide", () => {
+  const nomi = METODI_PAGAMENTO.map((m) => m.nome.toLowerCase());
+  for (const v of ["assegno", "bollettino bancario", "bollettino di c/c postale", "bonifico", "compensazione", "contanti", "contanti presso tesoreria", "domiciliazione bancaria", "domiciliazione postale", "f24", "mav", "pagopa", "quietanza erario", "riba", "rid", "rid utenza", "rid veloce", "sepa direct debit", "sepa direct debit b2b", "sepa direct debit core", "trattenuta su somme già riscosse", "vaglia cambiario", "versamento contanti su c/c"])
+    assert.ok(nomi.includes(v), v);
+  for (const k of ["BONIFICO", "CARTA_CREDITO", "BANCOMAT", "ASSEGNO", "CONTANTI", "RIBA", "RID", "F24", "PAGOPA", "FINANZIAMENTO", "COMPENSAZIONE", "BONIFICO_DETRAZIONE"])
+    assert.ok(METODI_PAGAMENTO.some((m) => m.chiave === k), k);
+  assert.equal(new Set(METODI_PAGAMENTO.map((m) => m.chiave)).size, METODI_PAGAMENTO.length);
 });
 
 test("controlli sul pagamento", () => {

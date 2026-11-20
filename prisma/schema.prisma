@@ -428,6 +428,8 @@ model Configurazione {
 
 model Preventivo {
   id                   String              @id @default(cuid())
+  // Pagamento splittato con finanziamento: { tabellaId, rate, importoFinanziato } (vedi src/lib/finanziamenti). Null = nessuno.
+  finanziamento        Json?
   cliente              Cliente             @relation(fields: [clienteId], references: [id])
   clienteId            String
   brand                Brand               @relation(fields: [brandId], references: [id])
@@ -841,6 +843,8 @@ model Soggetto {
   metodoPagamento       String?
   condizioniPagamento   String?
   giorniPagamento       Int?
+  // Centro di costo abituale: le fatture di questo fornitore arrivano già con questo centro
+  centroCosto           String?
   // Fornitore
   scontoFornitore       Float?
   listiniForniti        String?
@@ -1345,6 +1349,8 @@ model Scadenza {
   pagataIl         DateTime?
   metodoPagamento  String?
   bancaPagamento   String?
+  // Stato come nella tendina di BConsole (Insoluta, Previsionale, Anticipata…): solo etichetta, i conti restano quelli dei pagamenti
+  statoEtichetta   String?
   numeroDocumento  String?
   categoria        String?
   brand            String?
@@ -1744,6 +1750,8 @@ model FatturaAcquisto {
   modoPagamento     String?
   // Progetto/commessa BConsole a cui è imputata ("623/26"), per i margini nei report
   progetto          String?
+  // Centro di costo (dal fornitore, modificabile sulla fattura)
+  centroCosto       String?
   righe             RigaFatturaAcquisto[]
   bolle             BollaEntrata[]
   createdAt         DateTime              @default(now())
@@ -2163,6 +2171,8 @@ model FatturaEmessa {
   bollo              Boolean             @default(false)
   addebitoBollo      Boolean             @default(false)
   detrazione         Boolean             @default(false)
+  // Fattura cointestata: secondo intestatario {nome, cognome, codiceFiscale, partitaIva, indirizzo, cap, comune, provincia, quota}
+  cointestatario     Json?
   // Trasporto (fattura accompagnatoria)
   causaleTrasporto   String?
   trasportoACura     String?

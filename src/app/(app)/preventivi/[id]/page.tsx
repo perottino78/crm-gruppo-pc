@@ -9,6 +9,7 @@ import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import PannelloConferma from "@/components/preventivi/PannelloConferma";
 import { numeroCommessa } from "@/lib/commesse";
 import { scopePreventivoWhere } from "@/lib/scope";
+import { puo } from "@/lib/permessi/catalogo";
 import { brandInfo } from "@/lib/brands";
 import { listiniFidra, GUIDA_FIDRA, CATALOGHI_FIDRA } from "@/lib/listini/fidra";
 import { listiniOptima, GUIDA_OPTIMA, CATALOGHI_OPTIMA } from "@/lib/listini/optima";
@@ -27,6 +28,8 @@ import { unitaMisura, listinoDiTipologia, famigliaColoreStruttura, etichetteDime
 import SelettoreImmagine from "@/components/SelettoreImmagine";
 import SelectAutoInvio from "@/components/SelectAutoInvio";
 import FormAutoSalva from "@/components/FormAutoSalva";
+import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { schedaCliente } from "@/lib/preventivi/scheda-cliente";
 import { rigaConSchedaSolaris } from "@/lib/solaris/schede-offerta";
 import AggiungiRiga from "@/components/preventivi/AggiungiRiga";
@@ -34,7 +37,7 @@ import RigaTesto from "@/components/preventivi/RigaTesto";
 import Documenti from "@/components/documenti/Documenti";
 import FinestraOptional from "@/components/preventivi/FinestraOptional";
 import ScegliOptionalConFoto from "@/components/preventivi/ScegliOptionalConFoto";
-import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
+import { CONDIZIONI_PAGAMENTO_DEFAULT, CONDIZIONI_CONSEGNA_DEFAULT, CONDIZIONI_CONSEGNA_FINANZIAMENTO, NOTA_FATTIBILITA, CLAUSOLA_ISTRUTTORIA } from "@/lib/condizioniOfferta";
 import {
   aggiungiRigaPreventivo,
   aggiungiRigaPreventivoPerMisura,
@@ -66,6 +69,7 @@ import {
   ripristinaPreventivo,
   eliminaPreventivo,
   aggiornaScadenzaPreventivo,
+  salvaFinanziamento,
 } from "@/app/actions";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino, optionalAttiviDelMarchio, GRUPPI_TENDE_CON_TESSUTO } from "@/lib/listini/tassonomia";
@@ -87,10 +91,10 @@ export default async function PreventivoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ q?: string; solaris?: string; solarisFoto?: string; errore?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
+  searchParams: Promise<{ q?: string; solaris?: string; solarisFoto?: string; errore?: string; finerr?: string; confermata?: string; inviata?: string; variante?: string; firma?: string; sezione?: string }>;
 }) {
   const { id } = await params;
-  const { q, solaris, solarisFoto, errore, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
+  const { q, solaris, solarisFoto, errore, finerr, confermata, inviata, variante, firma, sezione: sezioneParam } = await searchParams;
   const utenteCorrente = await getCurrentUser();
   if (!utenteCorrente) notFound();
 
@@ -150,7 +154,12 @@ export default async function PreventivoPage({
 
   const info = brandInfo(preventivo.brand.nome);
   const totaleFinale = preventivo.totaleNetto + preventivo.totaleIva;
-  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+  const tabelleFin = await leggiTabelleFinanziamento();
+  const finScelta = preventivo.finanziamento as SceltaFinanziamento | null;
+  const finCalcolo = finScelta ? calcolaFinanziamento(finScelta, totaleFinale, tabelleFin) : null;
+  // se il totale cambia e il finanziamento esce dai limiti della tabella, in stampa tornano le condizioni standard
+  const finAttivo = !!finCalcolo?.ok;
+  const eur = (v: number) => v.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
   // Subtotale di una riga (prodotto o testo libero), stessa formula usata nel
   // rendering della riga — riusato per calcolare il totale di ogni sezione.
@@ -462,7 +471,7 @@ export default async function PreventivoPage({
                         <span className="text-neutral-600 font-normal"> (fascia listino {prodotto.larghezzaMm}×{prodotto.altezzaMm}{unit})</span>
                       )}
                     </p>
-                    <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</p>
+                    <p className="text-xs text-neutral-600">{r.quantita} × {r.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}</p>
                   </div>
                 </div>
               </RigaAzioni>
@@ -541,7 +550,7 @@ export default async function PreventivoPage({
                               tipo === "STD" ? "Pannello interno STD" : tipo === "A pagamento" ? "Pannello interno a pagamento" : "Pannello esterno"
                             )
                           : ro.optional.nome}
-                        {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR" })})
+                        {ro.nota ? ` — "${ro.nota}"` : ""} ({ro.quantita}×{ro.prezzoUnitario.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })})
                       </span>
                       <form action={rimuoviOptionalDaRiga}>
                         <input type="hidden" name="id" value={ro.id} />
@@ -1339,7 +1348,7 @@ export default async function PreventivoPage({
                 <div className="px-4 pt-3 pb-1.5 flex items-center justify-between">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Senza sezione</p>
                   <span className="text-xs font-bold text-neutral-600">
-                    {totaleSenzaSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                    {totaleSenzaSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
                   </span>
                 </div>
               )}
@@ -1376,7 +1385,7 @@ export default async function PreventivoPage({
                       </div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="btn-3d bg-white text-indigo-900 border-indigo-300 text-sm px-3 py-1.5 cursor-default">
-                          Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+                          Totale: {totaleSezione.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
                         </span>
                         {righe.length === 0 && (
                           <form action={eliminaSezione}>
@@ -1581,6 +1590,52 @@ export default async function PreventivoPage({
         <p className="text-base font-bold text-neutral-900 px-4 pt-3 pb-2">
           📝 Condizioni dell&apos;offerta <span className="text-xs font-normal text-neutral-500">— usate nella stampa, si salvano da sole quando esci dal campo</span>
         </p>
+      {(() => {
+        const sc = finScelta;
+        const fin = finCalcolo;
+        const vedeCosto = isAmministratore(utenteCorrente) || puo(utenteCorrente, "amministrazione");
+        const t = sc ? tabelleFin.find((x) => x.id === sc.tabellaId) : null;
+        return (
+          <div id="finanziamento" className="mx-4 mb-3 rounded-lg border border-neutral-200 bg-neutral-50/60 p-3">
+            <p className="text-base font-bold text-neutral-900 mb-1">💳 Modalità di pagamento — con finanziamento</p>
+            <p className="text-[11px] text-neutral-500 mb-2">Scegli una tabella: al posto delle condizioni di pagamento standard, in stampa compare il piano di finanziamento. Una parte la paga subito il cliente, il resto in rate. Si salva da solo.</p>
+            <FormAutoSalva key={`fin-${sc?.tabellaId ?? ""}|${sc?.rate ?? ""}|${sc?.pagaSubito ?? sc?.importoFinanziato ?? ""}|${totaleFinale}`} action={salvaFinanziamento} className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <input type="hidden" name="id" value={preventivo.id} />
+              <label className="text-xs font-semibold text-neutral-700">Tabella
+                <select name="tabellaId" defaultValue={sc?.tabellaId ?? ""} className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal">
+                  <option value="">Nessun finanziamento</option>
+                  {tabelleFin.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}
+                </select>
+              </label>
+              <label className="text-xs font-semibold text-neutral-700">Numero rate{t && t.rateDa !== t.rateA ? ` (${t.rateDa}–${t.rateA})` : ""}
+                <input name="rate" type="number" min={t?.rateDa ?? 10} max={t?.rateA ?? 120} defaultValue={sc?.rate ?? ""} className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
+              </label>
+              <label className="text-xs font-semibold text-neutral-700">Il cliente paga subito (€)
+                <input name="pagaSubito" inputMode="decimal" defaultValue={fin && fin.ok ? fin.anticipoDiretto : ""} placeholder="0" className="mt-1 w-full border border-neutral-300 rounded px-2 py-1 text-sm font-normal" />
+              </label>
+            </FormAutoSalva>
+            {t && (
+              <p className="mt-2 text-[11px] text-neutral-600">
+                Limiti di questa tabella: da {t.rateDa} a {t.rateA} rate · importo finanziato da {eur(t.importoMin)} a {eur(t.importoMax)}
+                {totaleFinale > t.importoMax ? <> · con questo totale il cliente paga subito almeno {eur(totaleFinale - t.importoMax)}</> : null}
+                {totaleFinale < t.importoMin ? <> · <b className="text-red-700">il totale dell&apos;offerta è sotto il minimo finanziabile</b></> : null}.
+              </p>
+            )}
+            {finerr && <p className="mt-2 rounded border border-red-300 bg-red-50 px-2 py-1.5 text-sm font-semibold text-red-800">⛔ Non salvato: {finerr}</p>}
+            {fin && !fin.ok && <p className="mt-2 rounded border border-amber-300 bg-amber-50 px-2 py-1.5 text-sm text-amber-900">⚠️ {fin.errore} In stampa restano le condizioni di pagamento standard finché non lo correggi.</p>}
+            {fin && fin.ok && (
+              <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                <div className="bg-white rounded p-2"><p className="text-[11px] text-neutral-500">Importo finanziato</p><p className="font-bold">{eur(fin.importoFinanziato)}</p></div>
+                <div className="bg-white rounded p-2"><p className="text-[11px] text-neutral-500">Rata mensile × {fin.rate}</p><p className="font-bold">{eur(fin.rata)}</p></div>
+                <div className="bg-white rounded p-2"><p className="text-[11px] text-neutral-500">TAN / TAEG</p><p className="font-bold">{fin.tabella.tan.toLocaleString("it-IT")}% / {fin.taeg.toLocaleString("it-IT")}%</p></div>
+                <div className="bg-white rounded p-2"><p className="text-[11px] text-neutral-500">Totale rate (con spese)</p><p className="font-bold">{eur(fin.totaleDovuto)}</p></div>
+                {vedeCosto && <div className="bg-amber-50 rounded p-2 col-span-2"><p className="text-[11px] text-neutral-500">Costo per noi (contributo alla finanziaria)</p><p className="font-bold">{eur(fin.costoPerNoi)}</p></div>}
+                {vedeCosto && <div className="bg-amber-50 rounded p-2 col-span-2"><p className="text-[11px] text-neutral-500">Netto che ci arriva dalla finanziaria</p><p className="font-bold">{eur(fin.nettoErogato)}</p></div>}
+              </div>
+            )}
+          </div>
+        );
+      })()}
         <FormAutoSalva key={`cond-${preventivo.oggetto ?? ""}|${preventivo.condizioniPagamento ?? ""}|${preventivo.condizioniConsegna ?? ""}`} action={aggiornaCondizioniOfferta} className="px-4 pb-4 flex flex-col gap-3">
           <input type="hidden" name="id" value={preventivo.id} />
           <div>
@@ -1592,24 +1647,38 @@ export default async function PreventivoPage({
               className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
             />
           </div>
+          {finAttivo ? (
+            <>
+              <input type="hidden" name="condizioniPagamento" value={preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT} />
+              <p className="rounded border border-violet-200 bg-violet-50 px-2 py-1.5 text-xs text-violet-900">💳 Con il finanziamento scelto, in stampa il piano di rate prende il posto delle condizioni di pagamento standard. Per tornare alle condizioni standard scegli «Nessun finanziamento».</p>
+            </>
+          ) : (
+            <div>
+              <label className="text-xs text-neutral-600 block mb-1">Condizioni di pagamento</label>
+              <textarea
+                name="condizioniPagamento"
+                rows={2}
+                defaultValue={preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}
+                className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+              />
+            </div>
+          )}
+          {finAttivo ? (
+            <>
+              <input type="hidden" name="condizioniConsegna" value={preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT} />
+              <p className="rounded border border-violet-200 bg-violet-50 px-2 py-1.5 text-xs text-violet-900">🚚 Con il finanziamento la consegna in stampa diventa: «{CONDIZIONI_CONSEGNA_FINANZIAMENTO}»</p>
+            </>
+          ) : (
           <div>
-            <label className="text-xs text-neutral-600 block mb-1">Condizioni di pagamento</label>
-            <textarea
-              name="condizioniPagamento"
-              rows={2}
-              defaultValue={preventivo.condizioniPagamento ?? CONDIZIONI_PAGAMENTO_DEFAULT}
-              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
-            />
-          </div>
-          <div>
-            <label className="text-xs text-neutral-600 block mb-1">Condizioni di consegna</label>
-            <textarea
-              name="condizioniConsegna"
-              rows={2}
-              defaultValue={preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}
-              className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
-            />
-          </div>
+              <label className="text-xs text-neutral-600 block mb-1">Condizioni di consegna</label>
+              <textarea
+                name="condizioniConsegna"
+                rows={2}
+                defaultValue={preventivo.condizioniConsegna ?? CONDIZIONI_CONSEGNA_DEFAULT}
+                className="w-full text-sm border border-neutral-200 rounded px-2 py-1.5"
+              />
+            </div>
+          )}
         </FormAutoSalva>
       </div>
 

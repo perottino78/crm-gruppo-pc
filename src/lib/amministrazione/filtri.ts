@@ -18,6 +18,7 @@ export function whereScadenze(p: ParametriScadenze): Prisma.ScadenzaWhereInput {
   if (stato === "aperte") w.stato = { in: ["APERTA", "PARZIALE"] };
   else if (stato === "pagate") w.stato = "PAGATA";
   else if (stato === "annullate") w.stato = "ANNULLATA";
+  else if (stato.startsWith("bc:")) w.statoEtichetta = stato.slice(3);
   const periodo = p.periodo ?? "tutte";
   const tra = (da: Date, a: Date) => ({ gte: da, lt: a });
   if (periodo === "scadute") w.dataScadenza = { lt: oggi };

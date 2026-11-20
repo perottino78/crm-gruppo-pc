@@ -148,7 +148,7 @@ export default async function DashboardPage({
           <p className="text-2xl font-bold text-neutral-900">
             {(valorePipeline._sum.totaleNetto ?? 0).toLocaleString("it-IT", {
               style: "currency",
-              currency: "EUR",
+              currency: "EUR", useGrouping: "always" as unknown as boolean,
             })}
           </p>
         </div>
@@ -164,7 +164,7 @@ export default async function DashboardPage({
           <div key={p.id} className="flex items-center justify-between px-4 py-3 text-sm">
             <span className="font-medium">{p.cliente.nome}</span>
             <span className="text-neutral-600">
-              {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
+              {p.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean })}
             </span>
             <span
               className={`text-xs px-2 py-1 rounded-full ${

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 type Trovato = { id: string; codice: string; descrizione: string; um: string; costoAcquisto: number | null; prezzoVendita: number | null };
-const eur = (n: number | null) => (n === null ? "—" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR" }));
+const eur = (n: number | null) => (n === null ? "—" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean }));
 
 /** Cerca un articolo e lo aggiunge (al kit con la quantità, oppure come correlato) con l'azione ricevuta. */
 export default function AggiungiArticolo({ azione, articoloId, conQuantita, bottone }: { azione: (fd: FormData) => Promise<void>; articoloId: string; conQuantita?: boolean; bottone: string }) {

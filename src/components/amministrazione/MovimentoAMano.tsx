@@ -10,7 +10,7 @@ type Risultato = { chiave: string; nome: string; info: string };
 type Scad = { id: string; descrizione: string; numero: string | null; data: string | null; residuo: number; importo: number };
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-xs bg-white";
-const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: string | null) => (d ? new Date(d).toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "senza data");
 
 export default function MovimentoAMano({ azione, conti, contoPredefinito, categorie, divisioni }: {

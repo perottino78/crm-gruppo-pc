@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { salvaCentroCostoFattura } from "@/app/fatture-actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -34,8 +35,9 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
     f.fornitoreId ? prisma.bollaEntrata.findMany({ where: { fornitoreId: f.fornitoreId, OR: [{ stato: "DA_FATTURARE" }, { fatturaAcquistoId: f.id }] }, orderBy: [{ anno: "desc" }, { numero: "desc" }], take: 60 }) : Promise.resolve([]),
     f.fornitoreId ? prisma.rigaOrdine.findMany({ where: { OR: [{ ordineFornitore: { fornitoreId: f.fornitoreId, dataOrdine: { gte: unAnnoFa } } }, { id: { in: f.righe.map((r) => r.rigaOrdineId).filter(Boolean) as string[] } }] }, include: { ordineFornitore: { select: { numero: true, anno: true } } }, orderBy: { createdAt: "desc" }, take: 500 }) : Promise.resolve([]),
     prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, orderBy: { dataScadenza: "asc" }, include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } } }),
-    f.fornitoreId ? prisma.soggetto.findUnique({ where: { id: f.fornitoreId }, select: { giorniPagamento: true } }) : Promise.resolve(null),
+    f.fornitoreId ? prisma.soggetto.findUnique({ where: { id: f.fornitoreId }, select: { giorniPagamento: true, centroCosto: true } }) : Promise.resolve(null),
   ]);
+  const centriNoti = [...new Set([...(await prisma.soggetto.findMany({ where: { centroCosto: { not: null } }, select: { centroCosto: true }, distinct: ["centroCosto"] })).map((x) => x.centroCosto!), ...(await prisma.fatturaAcquisto.findMany({ where: { centroCosto: { not: null } }, select: { centroCosto: true }, distinct: ["centroCosto"] })).map((x) => x.centroCosto!)])].sort();
   const fileFattura = await prisma.documento.findMany({ where: { entita: "FATTURA_ACQUISTO", entitaId: f.id }, select: { id: true, nome: true, mime: true }, orderBy: [{ cartella: "asc" }, { createdAt: "asc" }] });
   const proforma = f.tipoDocumento === "PROFORMA";
   const [conti, proformaCollegata, candidateProforma, sostituitaDa] = await Promise.all([
@@ -81,6 +83,17 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
         </div>
       </div>
 
+      <section className="bg-white border border-neutral-200 rounded-lg p-3">
+        <form action={salvaCentroCostoFattura} className="flex flex-wrap items-end gap-2">
+          <input type="hidden" name="id" value={f.id} />
+          <label className="text-xs font-semibold">Centro di costo
+            <input name="centroCosto" list="centri-costo" defaultValue={f.centroCosto ?? ""} placeholder="es. Serramenti, Fotovoltaico, Generale" className={`${inp} block w-64`} />
+          </label>
+          <datalist id="centri-costo">{centriNoti.map((c) => <option key={c} value={c} />)}</datalist>
+          {f.fornitoreId && <label className="flex items-center gap-1.5 text-xs text-neutral-700"><input type="checkbox" name="alFornitore" defaultChecked={!forn?.centroCosto} /> usalo sempre per questo fornitore{forn?.centroCosto ? ` (ora: ${forn.centroCosto})` : ""}</label>}
+          <button className="btn-3d btn-3d-blue text-xs px-3 py-1.5">Salva</button>
+        </form>
+      </section>
       {proforma && (
         <section className="bg-sky-50 border border-sky-200 rounded-lg p-3 text-sm">
           {sostituitaDa ? <>📄 Sostituita dalla <Link href={`/amministrazione/fatture-acquisto/${sostituitaDa.id}`} className="underline font-semibold">fattura {sostituitaDa.numero} del {dataIt(sostituitaDa.data)}</Link>: i pagamenti sono passati lì.</>

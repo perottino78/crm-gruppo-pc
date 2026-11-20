@@ -1,4 +1,5 @@
 // Fatturazione (ufficio Giorgia): funzioni lato server condivise da azioni e pagine.
+import { cointestatarioDa, mancaCointestato, causaleConCointestato } from "./cointestato";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
@@ -101,7 +102,8 @@ async function ibanDi(tx: Tx, banca: string | null): Promise<string | null> {
 export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   const f = await tx.fatturaEmessa.findUniqueOrThrow({ where: { id }, include: { righe: { orderBy: [{ posizione: "asc" }, { id: "asc" }] }, ddt: true } });
   if (f.stato === "EMESSA" || f.stato === "ANNULLATA") throw new Error("La fattura è già emessa.");
-  const mancano = controlliEmissione(f, f.righe);
+  const cointest = cointestatarioDa(f.cointestatario);
+  const mancano = [...controlliEmissione(f, f.righe), ...mancaCointestato(cointest).map((m) => `Manca: ${m}.`)];
   if (mancano.length) throw new Error(mancano.join(" "));
   const tf = tipoFattura(f.tipo);
   const anno = f.data.getUTCFullYear();
@@ -118,7 +120,7 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   const xml = tf.fiscale ? xmlFatturaPA({
     progressivoInvio: `${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
     cliente: { denominazione: f.clienteNome, persona: f.persona, nome: f.nomePersona, cognome: f.cognome, partitaIva: f.partitaIva, codiceFiscale: f.codiceFiscale, nazione: f.nazione, indirizzo: f.indirizzo, cap: f.cap, comune: f.comune, provincia: f.provincia, codiceDestinatario: f.codiceDestinatario, pec: f.pec },
-    righe: f.righe, causale: f.causale, bollo, addebitoBollo: bollo && f.addebitoBollo,
+    righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo,
     pagamento: rate.length ? { metodo: f.metodoPagamento, iban, istituto: f.banca, rate } : null,
     ddt: f.ddt.filter((d) => d.numero).map((d) => ({ numero: `${d.numero}/${d.anno}`, data: d.data })),
     fatturaCollegata: collegata?.numero ? { numero: collegata.numero, data: collegata.data } : null,
@@ -133,7 +135,7 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
         chiave: `CRM|${f.id}`, sezionale: sezionale(f.sezionale).estensione, tipoDocumento: tf.td!, numero, data: f.data,
         clienteId: f.clienteId, clienteNome: f.clienteNome, partitaIva: f.partitaIva?.replace(/^IT/i, "") ?? null, codiceFiscale: f.codiceFiscale,
         commessaId: f.commessaId, divisione: "P&C", brand: f.brand ?? sezionale(f.sezionale).brand, imponibile: cent(segno * t.imponibile), iva: cent(segno * t.iva),
-        totale: cent(segno * t.totale), detrazione: f.detrazione, causale: f.causale, origine: "CRM", xml, creatoDaNome: nome, venditore: f.venditore,
+        totale: cent(segno * t.totale), detrazione: f.detrazione, causale: causaleConCointestato(f.causale, cointest), origine: "CRM", xml, creatoDaNome: nome, venditore: f.venditore,
         descrizione: f.righe.map((r) => r.descrizione).join(" · ").slice(0, 300),
       },
     });
@@ -193,7 +195,7 @@ export async function datiPdfFattura(id: string) {
     fattura: f,
     dati: {
       tipo: f.tipo, numero: f.numero ?? "BOZZA", data: f.data, stato: f.stato, cliente: { nome: f.clienteNome, righe: righeCliente(f) }, righe: f.righe,
-      causale: f.causale, riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban, rate,
+      causale: causaleConCointestato(f.causale, cointestatarioDa(f.cointestatario)), riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban, rate,
       bollo, addebitoBollo: f.addebitoBollo, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
       fatturaCollegata: collegata?.numero ? `${collegata.numero} del ${collegata.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : null, destinazione: f.destinazione,
       trasporto: { causale: f.causaleTrasporto, aCura: ({ MITTENTE: "Mittente", DESTINATARIO: "Destinatario", VETTORE: "Vettore" } as Record<string, string>)[f.trasportoACura ?? ""] ?? f.trasportoACura, vettore: f.vettore, aspetto: f.aspettoBeni, colli: f.colli, peso: f.pesoLordo, porto: f.porto, inizio: f.inizioTrasporto },

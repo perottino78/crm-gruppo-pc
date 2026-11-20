@@ -3,9 +3,12 @@
 import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { ricalcolaTotali } from "@/lib/preventivi/totali";
+import { calcolaFinanziamento } from "@/lib/finanziamenti/tabelle";
+import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
 import { portaSolarisInOfferta } from "@/lib/solaris/porta-in-offerta";
 import { puoMarketing, RUOLI_CREABILI_MARKETING } from "@/lib/utenti/stato";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { mettiNelCestino } from "@/lib/cestino";
 import { revalidatePath } from "next/cache";
 import { svuotaCacheListino } from "@/lib/listini/cache";
@@ -455,6 +458,43 @@ export async function aggiornaScadenzaPreventivo(formData: FormData) {
   await prisma.preventivo.update({ where: { id }, data: { scadenza: s ? new Date(s) : null } });
   revalidatePath(`/preventivi/${id}`);
   revalidatePath("/preventivi");
+}
+
+// Pagamento splittato con finanziamento (tabelle del simulatore): una parte la paga subito il cliente, il resto in rate.
+// Tabella vuota = nessun finanziamento. Se il totale dell'offerta cambia dopo, il calcolo si rifà da solo alla stampa.
+export async function salvaFinanziamento(formData: FormData) {
+  if (await offertaBloccata(formData, true)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  const tabellaId = str(formData, "tabellaId");
+  if (!tabellaId) {
+    await prisma.preventivo.update({ where: { id }, data: { finanziamento: Prisma.DbNull } });
+  } else {
+    const p = await prisma.preventivo.findUnique({ where: { id }, select: { totaleNetto: true, totaleIva: true } });
+    if (!p) return;
+    const totale = p.totaleNetto + p.totaleIva;
+    // dati mancanti o fuori dalla tabella scelta: si parte da valori sensati (60 rate o il massimo/minimo consentito)
+    const tabelle = await leggiTabelleFinanziamento();
+    const tab = tabelle.find((x) => x.id === tabellaId);
+    const rateIn = parseInt(str(formData, "rate") || "0", 10);
+    // stessa tabella e numero di rate fuori dai limiti: bloccato con avviso; se cambia la tabella, le rate si portano da sole dentro i suoi limiti
+    const precedente = (await prisma.preventivo.findUnique({ where: { id }, select: { finanziamento: true } }))?.finanziamento as { tabellaId?: string } | null;
+    if (tab && precedente?.tabellaId === tabellaId && rateIn > 0 && (rateIn < tab.rateDa || rateIn > tab.rateA))
+      return redirect(`/preventivi/${id}?finerr=${encodeURIComponent(`Numero rate da ${tab.rateDa} a ${tab.rateA}.`)}#finanziamento`);
+    const rate = tab ? Math.min(tab.rateA, Math.max(tab.rateDa, rateIn > 0 ? rateIn : 60)) : rateIn;
+    // «Il cliente paga subito» è la cifra che decide il commerciale; il resto si finanzia (vuoto = tutto finanziato, fino al massimo della tabella)
+    const subGrezzo = str(formData, "pagaSubito") ?? "";
+    // «18.200» = diciottomiladuecento (punto delle migliaia), «18.2» = 18,2
+    const subStr = subGrezzo.includes(",") || /^\d{1,3}(\.\d{3})+$/.test(subGrezzo) ? subGrezzo.replace(/\./g, "").replace(",", ".") : subGrezzo;
+    const minimoSubito = Math.max(0, totale - (tab?.importoMax ?? totale));
+    const pagaSubito = subStr ? parseFloat(subStr) : minimoSubito;
+    if (!Number.isFinite(pagaSubito)) return redirect(`/preventivi/${id}?finerr=${encodeURIComponent("Cifra «paga subito» non valida.")}#finanziamento`);
+    const e = calcolaFinanziamento({ tabellaId, rate, pagaSubito }, totale, tabelle);
+    if (!e.ok) return redirect(`/preventivi/${id}?finerr=${encodeURIComponent(e.errore)}#finanziamento`);
+    await prisma.preventivo.update({ where: { id }, data: { finanziamento: { tabellaId, rate, pagaSubito } } });
+  }
+  revalidatePath(`/preventivi/${id}`);
+  revalidatePath(`/preventivi/${id}/stampa`);
 }
 
 // Eliminazione definitiva: righe, optional, sezioni e promemoria vanno via con l'offerta.
