@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { aggiungiArticoloPreventivo } from "@/app/actions";
+import { aggiungiArticoloPreventivo, aggiungiAngolarePreventivo } from "@/app/actions";
+import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 
 type Art = { id: string; codice: string; descrizione: string; um: string; prezzoVendita: number | null; aliquotaIva: number; categoria: { nome: string } | null };
 
@@ -16,11 +17,23 @@ export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezio
       .then((r) => (r.ok ? r.json() : { articoli: [] })).then((j) => { if (vivo) setLista(j.articoli ?? []); }).catch(() => { if (vivo) setLista([]); });
     return () => { vivo = false; };
   }, [famiglia, gruppo]);
-  if (!lista || lista.length === 0) return null;
+  // vetrate: angolari in alluminio su misura per i legni (Il Mastro), anche senza articoli
+  const angolari = famiglia === "OUTDOOR" && gruppo === "VETRATE" ? (
+    <details className="mt-3 rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
+      <summary className="cursor-pointer text-sm font-bold text-slate-900">🔩 Angolare in alluminio su misura (copertura dei legni)</summary>
+      <form action={aggiungiAngolarePreventivo} className="mt-2">
+        <input type="hidden" name="preventivoId" value={preventivoId} />
+        {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
+        <ConfiguraAngolare prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
+      </form>
+    </details>
+  ) : null;
+  if (!lista || lista.length === 0) return angolari;
   const parole = cerca.toLowerCase().split(/\s+/).filter(Boolean);
   const viste = lista.filter((a) => parole.every((p) => `${a.codice} ${a.descrizione} ${a.categoria?.nome ?? ""}`.toLowerCase().includes(p)));
   const euro = (n: number | null) => (n === null ? "prezzo da definire" : n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean }));
   return (
+    <>
     <section className="mt-4 rounded-xl border-2 border-amber-300 bg-amber-50/50 p-3">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-sm font-bold text-amber-950">🔧 Ricambi e articoli {gruppo ? `di ${gruppo}` : `di ${famiglia.toLowerCase()}`} ({lista.length})</h3>
@@ -43,5 +56,7 @@ export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezio
         {viste.length === 0 && <li className="text-xs text-neutral-600">Nessun articolo trovato.</li>}
       </ul>
     </section>
+    {angolari}
+    </>
   );
 }

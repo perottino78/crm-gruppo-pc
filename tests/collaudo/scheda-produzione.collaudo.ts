@@ -84,6 +84,20 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   verifica(righeA.length === 1 && righeA[0].codice === "ANGALL-L-30X50X0-15-EST-C0-3000" && righeA[0].quantita === 4 && righeA[0].prezzoAcquisto === 13.6, "salva gli angolari: riga con codice e costo di Il Mastro a barra (la U senza lati è scartata)", righeA);
   verifica(decodeURIComponent(rA.replace(/\+/g, " ")).includes("costo 54,40"), "messaggio con il costo degli angolari", rA);
   verifica((await prisma.rigaOrdine.count({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } } })) === 1, "le righe del legno restano");
+  // vendita e rilievo (richiesta di Ugo 20/11/2026): angolare nell'offerta al prezzo di vendita, al rilievo come materiale aggiuntivo al costo
+  const { aggiungiAngolarePreventivo } = await import("../../src/app/actions");
+  const { aggiungiComplemento } = await import("../../src/app/commesse-actions");
+  const comm = (await prisma.commessa.findFirst({ include: { preventivo: true } }))!;
+  if (comm.preventivo.confermatoIl) await prisma.preventivo.update({ where: { id: comm.preventivoId }, data: { confermatoIl: null } });
+  await redir(aggiungiAngolarePreventivo(fd({ preventivoId: comm.preventivoId, codiceAngolare: "ANGALL-L-30X50X0-15-EST-C0-3000", quantita: "3" })));
+  const rp = await prisma.rigaPreventivo.findFirst({ where: { preventivoId: comm.preventivoId, testoLibero: { contains: "Angolare a L" } } });
+  verifica(rp?.quantita === 3 && rp.prezzoUnitario === 27.2, "offerta: angolare su misura al prezzo di vendita (costo × 2)", rp);
+  await redir(aggiungiAngolarePreventivo(fd({ preventivoId: comm.preventivoId, codiceAngolare: "ANGALL-FALSO" })));
+  verifica((await prisma.rigaPreventivo.count({ where: { preventivoId: comm.preventivoId, testoLibero: { contains: "Angolare" } } })) === 1, "offerta: codice non valido rifiutato");
+  const mastro = await prisma.soggetto.create({ data: { ragioneSociale: "IL MASTRO srls", ruoli: ["FORNITORE"] } });
+  await redir(aggiungiComplemento(fd({ commessaId: comm.id, tipo: "ANG", codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000", quantita: "2" })));
+  const rc = await prisma.rigaOrdine.findFirst({ where: { commessaId: comm.id, codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000" } });
+  verifica(rc?.complemento === true && rc.fornitoreId === mastro.id && rc.quantita === 2 && rc.prezzoAcquisto === 7.8 && rc.descrizione.includes("Profilo a U"), "rilievo: angolare aggiunto al materiale con costo di Il Mastro e fornitore Il Mastro", rc);
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();

@@ -1167,6 +1167,8 @@ export async function aggiungiCorrelato(formData: FormData) {
 export type Complemento = {
   tipo?: string; articoloId?: string; brandId?: string; tipologia?: string; colore?: string; larghezza?: number | string | null; altezza?: number | string | null;
   quantita?: number | string | null; fornitoreId?: string | null; descrizione?: string | null; note?: string | null;
+  /** tipo «ANG»: angolare in alluminio su misura, codice ANGALL-… (forma, lati, spessore, bello, colore, lunghezza) */
+  codice?: string | null;
 };
 const numero = (v: unknown) => { if (v === null || v === undefined || v === "") return null; const n = Number(String(v).replace(",", ".")); return Number.isFinite(n) ? n : null; };
 const testo = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
@@ -1231,6 +1233,15 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
       costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p.prezzoBase, quantita: q }, sconto) : null,
     });
     descrizione = `${nome} — ${colore}${misura}`;
+  } else if (tipo === "ANG") {
+    // angolare in alluminio su misura (Il Mastro, richiesta di Ugo 20/11/2026): costo a peso a barra dal codice; fornitore Il Mastro se non scelto
+    const { leggiCodiceAngolare, descrizioneAngolare, costoBarra } = await import("@/lib/ordini/angolari");
+    const a = leggiCodiceAngolare(testo(x.codice), q);
+    if (!a) return { errore: "Angolare: misure non valide." };
+    const costo = costoBarra(a);
+    descrizione = descrizioneAngolare(a);
+    fornitoreId = fornitoreId ?? (await prisma.soggetto.findFirst({ where: { ragioneSociale: { contains: "mastro", mode: "insensitive" }, ruoli: { has: "FORNITORE" } }, select: { id: true } }))?.id ?? null;
+    Object.assign(dati, { codice: testo(x.codice), um: "pz", prezzoAcquisto: costo, scontoAcquisto: 0, costoPrevisto: Math.round(costo * q * 100) / 100 });
   }
   if (!descrizione) return { errore: "Scrivi la descrizione del complemento." };
   const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;

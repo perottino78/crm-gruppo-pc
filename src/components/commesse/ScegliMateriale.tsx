@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { RisultatoComplemento } from "@/app/api/complementi/route";
 import type { Complemento } from "@/app/commesse-actions";
 import type { AlberoLeggero } from "@/app/api/listino/albero/route";
+import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 export type MaterialeInLista = Complemento & { etichetta: string };
@@ -103,6 +104,17 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             </div>
           )}
         </div>
+      )}
+      {!scelto && (
+        <details className="rounded border border-slate-300 bg-white p-2">
+          <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro) · per i legni piallati cerca «legno piallato»</summary>
+          <div className="mt-2">
+            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione) => {
+              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
+              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: note || null, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}` });
+            }} />
+          </div>
+        </details>
       )}
       {!scelto ? (
         <div className="relative">
