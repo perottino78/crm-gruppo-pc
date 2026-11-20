@@ -4,6 +4,9 @@ import { prisma } from "@/lib/prisma";
 import { SEZIONI_LEGNO, PREZZO_M3_INDICATIVO, codiceLegno, descrizioneLegno, volumeBarra } from "./legno";
 
 const CHIAVE = "legno_articoli_versione";
+/** 2 = i legni si spostano nel listino OUTDOOR › «LEGNI PIALLATI» (Ugo 20/11/2026), prima erano tra i ricambi delle vetrate. */
+const VERSIONE = "2";
+export const GRUPPO_LEGNI = "LEGNI PIALLATI";
 
 async function categoria(nome: string, padreId: string | null, dati: Record<string, unknown>) {
   const c = await prisma.categoriaArticolo.findFirst({ where: { nome, padreId } });
@@ -12,9 +15,11 @@ async function categoria(nome: string, padreId: string | null, dati: Record<stri
 
 export async function assicuraArticoliLegno(): Promise<number> {
   const fatto = await prisma.configurazione.findUnique({ where: { chiave: CHIAVE }, select: { valore: true } });
-  if (fatto?.valore === "1") return 0;
+  if (fatto?.valore === VERSIONE) return 0;
   const madre = await categoria("Complementi vetrate", null, { famiglia: "OUTDOOR", gruppoListino: "VETRATE" });
   const figlia = await categoria("Legni piallati", madre.id, { metodoPrezzo: "RICARICO", valore: 2 });
+  // posizione propria nel listino delle offerte: OUTDOOR › LEGNI PIALLATI
+  if (figlia.famiglia !== "OUTDOOR" || figlia.gruppoListino !== GRUPPO_LEGNI) await prisma.categoriaArticolo.update({ where: { id: figlia.id }, data: { famiglia: "OUTDOOR", gruppoListino: GRUPPO_LEGNI } });
   const codici = SEZIONI_LEGNO.map((s) => codiceLegno(s));
   const esistenti = new Set((await prisma.articolo.findMany({ where: { codice: { in: codici } }, select: { codice: true } })).map((a) => a.codice));
   const nuovi = SEZIONI_LEGNO.filter((s) => !esistenti.has(codiceLegno(s))).map((s) => {
@@ -27,6 +32,6 @@ export async function assicuraArticoliLegno(): Promise<number> {
     };
   });
   if (nuovi.length) await prisma.articolo.createMany({ data: nuovi, skipDuplicates: true });
-  await prisma.configurazione.upsert({ where: { chiave: CHIAVE }, update: { valore: "1" }, create: { chiave: CHIAVE, valore: "1" } });
+  await prisma.configurazione.upsert({ where: { chiave: CHIAVE }, update: { valore: VERSIONE }, create: { chiave: CHIAVE, valore: VERSIONE } });
   return nuovi.length;
 }

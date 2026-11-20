@@ -836,7 +836,8 @@ export async function aggiungiAngolarePreventivo(formData: FormData) {
   if (!preventivoId || !x) return;
   const sezioneId = str(formData, "sezioneId") || null;
   const ordine = await prossimoOrdine(preventivoId, sezioneId);
-  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: descrizioneAngolare(x), quantita: x.pezzi, prezzoUnitario: venditaBarra(x), sezioneId, ordine } });
+  const nota = str(formData, "notaAngolare");
+  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${descrizioneAngolare(x)}${nota ? ` — ${nota}` : ""}`, quantita: x.pezzi, prezzoUnitario: venditaBarra(x), sezioneId, ordine } });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

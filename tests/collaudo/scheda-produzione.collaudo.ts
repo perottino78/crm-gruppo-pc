@@ -64,7 +64,7 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   await prisma.configurazione.deleteMany({ where: { chiave: "legno_articoli_versione" } });
   verifica((await assicuraArticoliLegno()) === 26 && (await assicuraArticoliLegno()) === 0, "26 articoli «Legni piallati» creati una volta sola");
   const art = await prisma.articolo.findUnique({ where: { codice: "LEGNO-30X50-3000" }, include: { categoria: { include: { padre: true } } } });
-  verifica(art?.categoria?.nome === "Legni piallati" && art.categoria.padre?.nome === "Complementi vetrate" && art.categoria.padre.gruppoListino === "VETRATE" && art.costoAcquisto === 4.05 && art.prezzoVendita === 8.1, "articolo in Complementi vetrate › Legni piallati con costo sullo sviluppo", art);
+  verifica(art?.categoria?.nome === "Legni piallati" && art.categoria.famiglia === "OUTDOOR" && art.categoria.gruppoListino === "LEGNI PIALLATI" && art.categoria.padre?.nome === "Complementi vetrate" && art.categoria.padre.gruppoListino === "VETRATE" && art.costoAcquisto === 4.05 && art.prezzoVendita === 8.1, "articolo in Complementi vetrate › Legni piallati con costo sullo sviluppo", art);
   const ml = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: { contains: "legno piallato" } } }))!;
   const ordL = await prisma.ordineFornitore.create({ data: { numero: 77, anno: 2026, fornitoreId: (await prisma.soggetto.findFirstOrThrow()).id, commessaId: (await prisma.commessa.findFirst())?.id } });
   await prisma.rigaOrdine.create({ data: { ordineFornitoreId: ordL.id, descrizione: "Altro materiale", quantita: 1, codice: "X1" } });
@@ -81,23 +81,31 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const ma = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: { contains: "angolari in alluminio" } } }))!;
   const rA = await redir(A.salvaAngolariInOrdine(fd({ ordineId: ordL.id, modelloId: ma.id, campo_tab_ang_1_forma: "L", campo_tab_ang_1_a: "30", campo_tab_ang_1_b: "50", campo_tab_ang_1_spessore: "1.5", campo_tab_ang_1_bello: "EST", campo_tab_ang_1_colore: "0", campo_tab_ang_1_lunghezza: "3000", campo_tab_ang_1_pezzi: "4", campo_tab_ang_2_pezzi: "2", campo_tab_ang_2_forma: "U", campo_tab_ang_2_a: "20" })));
   const righeA = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "ANGALL-" } } });
-  verifica(righeA.length === 1 && righeA[0].codice === "ANGALL-L-30X50X0-15-EST-C0-3000" && righeA[0].quantita === 4 && righeA[0].prezzoAcquisto === 13.6, "salva gli angolari: riga con codice e costo di Il Mastro a barra (la U senza lati è scartata)", righeA);
-  verifica(decodeURIComponent(rA.replace(/\+/g, " ")).includes("costo 54,40"), "messaggio con il costo degli angolari", rA);
+  verifica(righeA.length === 1 && righeA[0].codice === "ANGALL-L-30X50X0-15-EST-C0-3000-ME" && righeA[0].quantita === 4 && righeA[0].prezzoAcquisto === 13.35, "salva gli angolari: riga con codice e costo di Il Mastro a barra (la U senza lati è scartata)", righeA);
+  verifica(decodeURIComponent(rA.replace(/\+/g, " ")).includes("costo 53,40"), "messaggio con il costo degli angolari", rA);
   verifica((await prisma.rigaOrdine.count({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } } })) === 1, "le righe del legno restano");
   // vendita e rilievo (richiesta di Ugo 20/11/2026): angolare nell'offerta al prezzo di vendita, al rilievo come materiale aggiuntivo al costo
   const { aggiungiAngolarePreventivo } = await import("../../src/app/actions");
   const { aggiungiComplemento } = await import("../../src/app/commesse-actions");
   const comm = (await prisma.commessa.findFirst({ include: { preventivo: true } }))!;
   if (comm.preventivo.confermatoIl) await prisma.preventivo.update({ where: { id: comm.preventivoId }, data: { confermatoIl: null } });
-  await redir(aggiungiAngolarePreventivo(fd({ preventivoId: comm.preventivoId, codiceAngolare: "ANGALL-L-30X50X0-15-EST-C0-3000", quantita: "3" })));
+  await redir(aggiungiAngolarePreventivo(fd({ preventivoId: comm.preventivoId, codiceAngolare: "ANGALL-L-30X50X0-15-EST-C0-3000-ME", quantita: "3", notaAngolare: "tagli a 45°" })));
   const rp = await prisma.rigaPreventivo.findFirst({ where: { preventivoId: comm.preventivoId, testoLibero: { contains: "Angolare a L" } } });
-  verifica(rp?.quantita === 3 && rp.prezzoUnitario === 27.2, "offerta: angolare su misura al prezzo di vendita (costo × 2)", rp);
+  verifica(rp?.quantita === 3 && rp.prezzoUnitario === 26.7 && !!rp.testoLibero?.includes("tagli a 45°"), "offerta: angolare su misura al prezzo di vendita (costo × 2)", rp);
   await redir(aggiungiAngolarePreventivo(fd({ preventivoId: comm.preventivoId, codiceAngolare: "ANGALL-FALSO" })));
   verifica((await prisma.rigaPreventivo.count({ where: { preventivoId: comm.preventivoId, testoLibero: { contains: "Angolare" } } })) === 1, "offerta: codice non valido rifiutato");
   const mastro = await prisma.soggetto.create({ data: { ragioneSociale: "IL MASTRO srls", ruoli: ["FORNITORE"] } });
-  await redir(aggiungiComplemento(fd({ commessaId: comm.id, tipo: "ANG", codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000", quantita: "2" })));
-  const rc = await prisma.rigaOrdine.findFirst({ where: { commessaId: comm.id, codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000" } });
-  verifica(rc?.complemento === true && rc.fornitoreId === mastro.id && rc.quantita === 2 && rc.prezzoAcquisto === 7.8 && rc.descrizione.includes("Profilo a U"), "rilievo: angolare aggiunto al materiale con costo di Il Mastro e fornitore Il Mastro", rc);
+  await redir(aggiungiComplemento(fd({ commessaId: comm.id, tipo: "ANG", codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000-ME", quantita: "2" })));
+  const rc = await prisma.rigaOrdine.findFirst({ where: { commessaId: comm.id, codice: "ANGALL-U-20X50X20-10-ENTRAMBI-C6-2000-ME" } });
+  verifica(rc?.complemento === true && rc.fornitoreId === mastro.id && rc.quantita === 2 && rc.prezzoAcquisto === 7.6 && rc.descrizione.includes("Profilo a U"), "rilievo: angolare aggiunto al materiale con costo di Il Mastro e fornitore Il Mastro", rc);
+  // nota e file del disegno (dal modulo del rilievo il complemento arriva come JSON con l'allegato)
+  const { caricaRilievo } = await import("../../src/app/commesse-actions");
+  const ril = await prisma.rilievo.create({ data: { commessaId: comm.id, tecnicoId: u.id, dataOra: new Date(), stato: "PROGRAMMATO" } });
+  const pdf = "data:application/pdf;base64," + Buffer.from("%PDF-1.4 disegno").toString("base64");
+  await redir(caricaRilievo(fd({ rilievoId: ril.id, misure: "ok", complementi: JSON.stringify([{ tipo: "ANG", codice: "ANGALL-PUNTA-40X40X15-10-EST-C0-3000-MI-G120", quantita: "3", note: "sopra il traverso", allegato: { nome: "disegno.pdf", dataUri: pdf } }]) })));
+  const rcp = await prisma.rigaOrdine.findFirst({ where: { commessaId: comm.id, codice: { contains: "PUNTA" } } });
+  const docP = await prisma.documento.findFirst({ where: { entitaId: comm.id, cartella: "Rilievi misura", nome: { contains: "disegno.pdf" } } });
+  verifica(!!rcp && rcp.descrizione.includes("Copertina a punta") && !!rcp.note?.includes("sopra il traverso") && !!rcp.note?.includes("📎") && docP?.mime === "application/pdf", "rilievo: copertina a punta con nota e file del disegno nella cartella «Rilievi misura»", { rcp, docP: docP?.nome });
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();

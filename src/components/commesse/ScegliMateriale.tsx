@@ -109,9 +109,10 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
         <details className="rounded border border-slate-300 bg-white p-2">
           <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro) · per i legni piallati cerca «legno piallato»</summary>
           <div className="mt-2">
-            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione) => {
+            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
               const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: note || null, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}` });
+              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
+                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.nota ? ` · nota: ${extra.nota}` : ""}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
             }} />
           </div>
         </details>

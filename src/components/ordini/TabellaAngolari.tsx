@@ -4,7 +4,7 @@
 // colore, lunghezza e pezzi, con costo di Il Mastro a peso e vendita × 2 mentre si scrive. Parte già compilato (righe salvate o proposta dai legni).
 import { useState } from "react";
 import { COLORI_LATTONERIA } from "@/lib/listini/lattoneria";
-import { BELLO, FORME, LEGENDA_SVG, RIGHE_ANGOLARI, SPESSORI, angolareDellaRiga, costoBarra, kgBarra, riepilogoAngolari, spessoreLabel, venditaBarra, type Forma } from "@/lib/ordini/angolari";
+import { BELLO, FORME, MISURA, LEGENDA_SVG, RIGHE_ANGOLARI, SPESSORI, angolareDellaRiga, costoBarra, kgBarra, riepilogoAngolari, spessoreLabel, venditaBarra, type Forma } from "@/lib/ordini/angolari";
 
 const n2 = (n: number, d = 2) => n.toLocaleString("it-IT", { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: "always" as unknown as boolean });
 
@@ -23,7 +23,7 @@ export default function TabellaAngolari({ iniziali, proposta, salva, modificabil
       <div className="overflow-x-auto">
         <table className="text-xs border-collapse">
           <thead><tr className="bg-neutral-50">
-            {["#", "Forma", "A", "B", "C", "Spessore", "Bello", "Colore", "Lungh. mm", "Pezzi", "kg", "Costo Il Mastro €", "Vendita €"].map((h) => <th key={h} className="border border-neutral-300 px-1.5 py-0.5 font-semibold whitespace-nowrap">{h}</th>)}
+            {["#", "Forma", "A", "B", "C", "Angolo °", "Misure", "Spessore", "Bello", "Colore", "Lungh. mm", "Pezzi", "kg", "Costo Il Mastro €", "Vendita €"].map((h) => <th key={h} className="border border-neutral-300 px-1.5 py-0.5 font-semibold whitespace-nowrap">{h}</th>)}
           </tr></thead>
           <tbody>
             {Array.from({ length: RIGHE_ANGOLARI }, (_, i) => i + 1).map((n) => {
@@ -37,9 +37,13 @@ export default function TabellaAngolari({ iniziali, proposta, salva, modificabil
                   <td className="border border-neutral-300 p-0"><select name={campo("forma")} value={forma} onChange={(e) => set(`tab_ang_${n}_forma`, e.target.value)} className={sel}>{Object.entries(FORME).map(([k, f]) => <option key={k} value={k}>{f.nome}</option>)}</select></td>
                   {(["a", "b", "c"] as const).map((l) => (
                     <td key={l} className="border border-neutral-300 p-0">{FORME[forma].lati.includes(l)
-                      ? <input name={campo(l)} inputMode="numeric" value={g(n, l)} onChange={(e) => set(`tab_ang_${n}_${l}`, e.target.value)} className={inp} placeholder="mm" aria-label={`Lato ${l.toUpperCase()} riga ${n}`} />
+                      ? <input name={campo(l)} inputMode="numeric" value={g(n, l)} onChange={(e) => set(`tab_ang_${n}_${l}`, e.target.value)} className={inp} placeholder={FORME[forma].facoltativi?.includes(l) ? "facolt." : "mm"} aria-label={`Lato ${l.toUpperCase()} riga ${n}`} />
                       : <span className="block px-1 text-neutral-300">—</span>}</td>
                   ))}
+                  <td className="border border-neutral-300 p-0">{forma === "PUNTA"
+                    ? <input name={campo("angolo")} inputMode="numeric" value={g(n, "angolo", "90")} onChange={(e) => set(`tab_ang_${n}_angolo`, e.target.value)} className={inp} aria-label={`Angolo riga ${n}`} />
+                    : <span className="block px-1 text-neutral-300">—</span>}</td>
+                  <td className="border border-neutral-300 p-0"><select name={campo("misura")} value={g(n, "misura", "EST")} onChange={(e) => set(`tab_ang_${n}_misura`, e.target.value)} className={sel}>{Object.entries(MISURA).map(([k, m]) => <option key={k} value={k}>{k === "EST" ? "esterne" : "interne"}</option>)}</select></td>
                   <td className="border border-neutral-300 p-0"><select name={campo("spessore")} value={g(n, "spessore", "1.5")} onChange={(e) => set(`tab_ang_${n}_spessore`, e.target.value)} className={sel}>{SPESSORI.map((s) => <option key={s} value={String(s)}>{spessoreLabel(s)}</option>)}</select></td>
                   <td className="border border-neutral-300 p-0"><select name={campo("bello")} value={g(n, "bello", "EST")} onChange={(e) => set(`tab_ang_${n}_bello`, e.target.value)} className={sel}>{Object.entries(BELLO).map(([k, b]) => <option key={k} value={k}>{b}</option>)}</select></td>
                   <td className="border border-neutral-300 p-0"><select name={campo("colore")} value={g(n, "colore", "0")} onChange={(e) => set(`tab_ang_${n}_colore`, e.target.value)} className={sel}>{COLORI_LATTONERIA.map((c, i) => <option key={c.nome} value={String(i)}>{c.nome}</option>)}</select></td>
