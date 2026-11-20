@@ -28,6 +28,7 @@ test("nomi, descrizioni e scheda tecnica", () => {
   assert.match(descrizioneChirenti("VETRATA_SOLCOPROCAM_TEMP")!, /da confermare/);
   assert.doesNotMatch(descrizioneChirenti("VETRATA_SOLCOPROCAM_STRAT")!, /da confermare/);
   assert.equal(schedaCliente("VETRATA_BOOKPROCAM_STRAT")?.pdf, "/cataloghi/book-pro-cam/book-pro-cam.pdf");
-  assert.equal(schedaCliente("VETRATA_SCINTILLA"), null);
+  assert.equal(schedaCliente("VETRATA_FISSO"), null);
+  assert.equal(schedaCliente("VETRATA_SCINTILLA")?.chiave, "SCINTILLA", "Scintilla ha la sua scheda (non quella Chirenti)");
   assert.equal(schedeDelleTipologie(["VETRATA_SOLCOPROCAM_TEMP", "VETRATA_SOLCOPROCAM_STRAT", "VETRATA_BOOKPROCAM_TEMP"]).length, 2, "una scheda per sistema");
 });

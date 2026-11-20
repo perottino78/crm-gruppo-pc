@@ -4,6 +4,7 @@
 // e le pagine come immagini in public/cataloghi/<listino>/pagine/p-<n>.jpg (pdftoppm -jpeg -jpegopt quality=80 -r 110 <pdf> <cartella>/p).
 import { PREFISSO_OPTIMA, DESCRIZIONE_CLIENTE_OPTIMA, CATALOGHI_OPTIMA } from "../listini/optima";
 import { SCHEDE_CHIRENTI } from "../listini/chirenti";
+import { SCHEDE_VETRATE } from "../listini/schede-vetrate";
 import { PREFISSO_ZENITH, DESCRIZIONE_CLIENTE_ZENITH, CATALOGHI_ZENITH } from "../listini/zenith";
 import { PREFISSO_FIDRA, DESCRIZIONE_CLIENTE_FIDRA, CATALOGHI_FIDRA } from "../listini/fidra";
 import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
@@ -46,6 +47,11 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
   // Vetrate Chirenti (Book Pro Cam / Solco Pro Cam): scheda tecnica del sito chirenti.it, una per sistema (temperato e stratificato insieme)
   ...Object.values(SCHEDE_CHIRENTI).map((c) => ({
     prefisso: `VETRATA_${c.chiave}_`,
+    scheda: { chiave: c.chiave, nome: c.nome, descrizione: c.descrizione, pdf: c.pdf, pagine: pagine(c.cartella, c.pagine) },
+  })),
+  // Vetrate panoramiche Scintilla e Brillante: una scheda ciascuna
+  ...Object.values(SCHEDE_VETRATE).map((c) => ({
+    prefisso: c.prefisso,
     scheda: { chiave: c.chiave, nome: c.nome, descrizione: c.descrizione, pdf: c.pdf, pagine: pagine(c.cartella, c.pagine) },
   })),
 ];

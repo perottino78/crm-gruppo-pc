@@ -10,7 +10,7 @@ import { alberoCategorie, testoRegola } from "@/lib/articoli/prezzi";
 import { DIVISIONI } from "@/lib/articoli/importa";
 import ScegliVisibilita from "@/components/articoli/ScegliVisibilita";
 import ScegliPosizioneListino from "@/components/articoli/ScegliPosizioneListino";
-import { posizioniListino } from "@/lib/articoli/server";
+import { posizioniListino, assicuraCategorieListino } from "@/lib/articoli/server";
 import { posizioneEffettiva, testoPosizione } from "@/lib/articoli/posizione";
 import { testoVisibilita } from "@/lib/articoli/visibilita";
 import { salvaCategoria, eliminaCategoria, ricalcolaTutto } from "@/app/articoli-actions";
@@ -23,10 +23,11 @@ export default async function CategoriePage({ searchParams }: { searchParams: Pr
   if (!u || !puoVedereArticoli(u)) notFound();
   const admin = puoModificareArticoli(u);
   const p = await searchParams;
-  const [cat, conteggi, posizioni] = await Promise.all([
+  const posizioni = await posizioniListino();
+  if (admin) await assicuraCategorieListino(posizioni);
+  const [cat, conteggi] = await Promise.all([
     prisma.categoriaArticolo.findMany(),
     prisma.articolo.groupBy({ by: ["categoriaId"], _count: { _all: true } }),
-    posizioniListino(),
   ]);
   const quanti = (id: string) => conteggi.find((c) => c.categoriaId === id)?._count._all ?? 0;
   const albero = alberoCategorie(cat);
