@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
+import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
 import { puoGestireOrdini, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordini/calcoli";
 import { BRANDS } from "@/lib/brands";
@@ -28,6 +29,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const { id } = await params;
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, commessa: { include: { cliente: true } }, righe: { orderBy: { createdAt: "asc" } } } });
   if (!o) notFound();
+  await assicuraModelliPronti();
   const msg = await searchParams;
   const bozzaAperta = o.stato === "BOZZA";
   // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
@@ -65,6 +67,13 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </div>
         <span className="text-sm px-3 py-1 rounded-full text-white" style={{ background: s.colore }}>{s.nome}</span>
       </div>
+      {/* scorciatoie per l'ufficio ordini (richiesta di Ugo 20/11/2026): i moduli di rilievo interattivi e il rilievo della pratica */}
+      {!annullato && (
+        <div className="flex flex-wrap gap-2">
+          <a href="#scheda-produzione" className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</a>
+          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-blue px-4 py-2 text-sm">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
+        </div>
+      )}
       {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       {o.inviatoIl && <p className="text-xs text-neutral-600">Inviato il {o.inviatoIl.toLocaleString("it-IT")} {o.inviatoA ? `a ${o.inviatoA}` : ""} ({o.modalitaInvio === "EMAIL" ? "email dal CRM" : "a mano"}) da {o.inviatoDaNome}</p>}
@@ -155,7 +164,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
 
       {!annullato && (
         <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
-          <h2 className="font-bold mb-1">📄 Scheda di produzione per il fornitore (misure definitive)</h2>
+          <h2 className="font-bold mb-1">📐 Modulo di rilievo / scheda di produzione per il fornitore (misure definitive)</h2>
+          <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS), compila le misure e salva: la scheda va nella cartella «Schede produzione» della pratica e la alleghi con «Invia ordine».</p>
           {modelliScheda.length === 0 ? (
             <p className="text-sm text-neutral-600">Nessun modello di scheda per questo fornitore. <Link href="/ordini-fornitori/schede?nuovo=1" className="underline text-blue-800">Crea il primo modello</Link>.</p>
           ) : (

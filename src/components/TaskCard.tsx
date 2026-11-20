@@ -4,6 +4,7 @@ import { STATI_TASK, STATI_CHIUSI, nomeUfficio, statoTask } from "@/lib/flusso";
 import { prisma } from "@/lib/prisma";
 import { commentaTaskPratica } from "@/app/task-actions";
 import ElencoCommenti from "@/components/task/ElencoCommenti";
+import { linkTask, azioneTask } from "@/lib/pratica/link-task";
 
 type Task = {
   id: string; commessaId: string; faseChiave: string | null; titolo: string; descrizione: string | null; ufficio: string;
@@ -27,7 +28,7 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
         <div className="min-w-0">
           <p className="text-sm font-extrabold text-neutral-900">{task.titolo}</p>
           {pratica && (
-            <Link href={`/commesse/${task.commessaId}${task.faseChiave === "RILIEVO" ? "#rilievo" : task.faseChiave === "ORDINI" ? "#evasione" : ""}`} className="text-xs font-bold text-blue-700 underline">
+            <Link href={linkTask(task.commessaId, task.faseChiave)} className="text-xs font-bold text-blue-700 underline">
               Commessa {pratica.numero} · {pratica.cliente}
             </Link>
           )}
@@ -67,6 +68,9 @@ export default async function TaskCard({ task, pratica }: { task: Task; pratica?
 
       {!chiuso && (
         <div className="mt-2 flex flex-wrap items-center gap-2">
+          {azioneTask(task.faseChiave) && (
+            <Link href={linkTask(task.commessaId, task.faseChiave)} className="btn-3d btn-3d-blue text-xs px-4 py-1.5">{azioneTask(task.faseChiave)}</Link>
+          )}
           {!task.assegnatoNome && (
             <form action={prendiInCaricoTask}>
               <input type="hidden" name="taskId" value={task.id} />
