@@ -46,5 +46,5 @@ test("modulo SEEGLASS RUN: scelte per vie, vetro, colori, chiusure e trasporto",
   assert.equal(per.get("chiusura")?.tipo, "multi");
   assert.ok(per.get("trasporto")?.opzioni.includes("Trasporto C3 Systems"));
   assert.equal(per.get("larghezza_mm")?.tipo, "testo");
-  assert.equal(MODELLI_PRONTI.length, 4); // standard, NEW LIPARI, legno piallato, SEEGLASS
+  assert.equal(MODELLI_PRONTI.length, 5); // standard, NEW LIPARI, legno piallato, angolari, SEEGLASS
 });

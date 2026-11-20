@@ -19,7 +19,9 @@ import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
 import TabellaLegno from "@/components/ordini/TabellaLegno";
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 import { valoriDaRighe } from "@/lib/ordini/legno";
-import { salvaLegnoInOrdine } from "@/app/schede-produzione-actions";
+import { salvaLegnoInOrdine, salvaAngolariInOrdine } from "@/app/schede-produzione-actions";
+import TabellaAngolari from "@/components/ordini/TabellaAngolari";
+import { valoriAngolari } from "@/lib/ordini/angolari";
 import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
@@ -35,6 +37,12 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   if (!o) notFound();
   await assicuraModelliPronti();
   await assicuraArticoliLegno();
+  // angolari: righe già salvate o proposta dai legni dell'ordine e del materiale della pratica (anche quelli aggiunti dal rilevatore)
+  const legniPratica = o.commessaId ? await prisma.rigaOrdine.findMany({ where: { commessaId: o.commessaId, codice: { startsWith: "LEGNO-" } }, select: { codice: true, quantita: true, ordineFornitoreId: true } }) : [];
+  // legno: le righe LEGNO-… dell'ordine; se non ce ne sono, quello messo nel materiale della pratica (anche dal rilevatore) e non ancora in un ordine
+  const righeLegno = o.righe.some((r) => r.codice?.startsWith("LEGNO-")) ? o.righe : legniPratica.filter((r) => !r.ordineFornitoreId);
+  const ap = valoriAngolari(o.righe, legniPratica);
+  const angolariIniziali = { iniziali: ap.valori, proposta: ap.proposta };
   const msg = await searchParams;
   const bozzaAperta = o.stato === "BOZZA";
   // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
@@ -197,7 +205,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                     const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
                     return (
                       <>
-                        {tabelle.map((t) => t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(o.righe)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
+                        {tabelle.map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
                           <div key={t.gruppo} className="overflow-x-auto">
                             <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
                             <table className="text-xs border-collapse">
