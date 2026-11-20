@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { numeroOrdine, statoOrdine } from "@/lib/ordini/calcoli";
-import { creaOrdineDaCommessa, applicaFornitoriPredefiniti } from "@/app/ordini-actions";
+import { creaOrdineDaCommessa, applicaFornitoriPredefiniti, segnaOrdineRicevuto } from "@/app/ordini-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 
@@ -9,7 +9,7 @@ const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", curren
 export default async function StatoAcquisti({ commessaId, puoGestire }: { commessaId: string; puoGestire: boolean }) {
   const [righe, ordini] = await Promise.all([
     prisma.rigaOrdine.findMany({ where: { commessaId }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true, stato: true } } }, orderBy: { createdAt: "asc" } }),
-    prisma.ordineFornitore.findMany({ where: { commessaId }, include: { fornitore: { select: { ragioneSociale: true } }, righe: { select: { arrivato: true } } }, orderBy: [{ anno: "asc" }, { numero: "asc" }] }),
+    prisma.ordineFornitore.findMany({ where: { commessaId }, include: { fornitore: { select: { ragioneSociale: true, emailOrdini: true, email: true } }, righe: { select: { arrivato: true } } }, orderBy: [{ anno: "asc" }, { numero: "asc" }] }),
   ]);
   if (!righe.length && !ordini.length) return null;
   const prev = await prisma.rigaPreventivo.findMany({ where: { id: { in: righe.map((r) => r.rigaPreventivoId).filter(Boolean) as string[] } }, select: { id: true, prezzoUnitario: true, optionalPrezzo: true, quantita: true } });
@@ -67,6 +67,35 @@ export default async function StatoAcquisti({ commessaId, puoGestire }: { commes
           })}
         </tbody>
       </table>
+      {ordini.some((o) => o.stato !== "ANNULLATO") && (
+        <div className="mt-3 rounded-lg border border-purple-200 bg-purple-50/40 p-2">
+          <p className="text-xs font-bold text-purple-900 mb-1">📨 Ordini ai fornitori di questa pratica</p>
+          <div className="space-y-1.5">
+            {ordini.filter((o) => o.stato !== "ANNULLATO").map((o) => {
+              const bozza = o.stato === "BOZZA", email = o.fornitore.emailOrdini ?? o.fornitore.email;
+              return (
+                <div key={o.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded border border-neutral-200 bg-white px-2 py-1.5 text-xs">
+                  <b>Ordine {numeroOrdine(o)}</b>
+                  <span>{o.fornitore.ragioneSociale}</span>
+                  <span style={{ color: statoOrdine(o.stato).colore }}>{statoOrdine(o.stato).nome}</span>
+                  <span className="text-neutral-600">{email ? `✉ ${email}` : "⚠ manca l'email ordini del fornitore"}</span>
+                  {puoGestire && <Link href={`/ordini-fornitori/${o.id}#invia`} className="btn-3d btn-3d-blue text-[11px] px-2 py-1">{bozza ? "✉ Invia per email (con file e disegni)" : "✉ Reinvia / apri l'ordine"}</Link>}
+                  {!bozza && (
+                    <form action={segnaOrdineRicevuto} className="flex items-center gap-1.5">
+                      <input type="hidden" name="id" value={o.id} />
+                      <input type="hidden" name="ricevuto" value={o.ricevutoIl ? "0" : "1"} />
+                      <button className="flex items-center gap-1" title={o.ricevutoIl ? "Clicca per togliere la spunta" : "Spunta quando il fornitore conferma di averlo ricevuto"}>
+                        <span className={`inline-block h-4 w-4 rounded border text-center leading-[14px] ${o.ricevutoIl ? "border-green-700 bg-green-600 text-white" : "border-neutral-400 bg-white"}`}>{o.ricevutoIl ? "✓" : ""}</span>
+                        <span className={o.ricevutoIl ? "font-semibold text-green-800" : "text-neutral-700"}>{o.ricevutoIl ? `Ricevuto dal fornitore (${o.ricevutoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })})` : "Ricevuto dal fornitore?"}</span>
+                      </button>
+                    </form>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
       {ordini.some((o) => o.stato === "ANNULLATO") && <p className="text-[11px] text-neutral-500 mt-1">Ordini annullati: {ordini.filter((o) => o.stato === "ANNULLATO").map((o) => numeroOrdine(o)).join(", ")}</p>}
     </div>
   );
