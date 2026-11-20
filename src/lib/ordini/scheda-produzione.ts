@@ -1,10 +1,12 @@
 // Schede di produzione in HTML per il fornitore (misure definitive): segnaposto, campi da compilare e compilazione. Logica pura, testata.
+import { htmlRiepilogoLegno, MODELLO_LEGNO } from "./legno";
 
 /** Segnaposto che riempie il CRM da solo. */
 export const SEGNAPOSTO_FISSI: Record<string, string> = {
   ordine: "numero dell'ordine", data: "data dell'ordine", fornitore: "ragione sociale del fornitore", cliente: "cliente finale",
   commessa: "numero della pratica", indirizzo: "indirizzo di consegna", consegna: "consegna richiesta",
   righe: "tabella delle righe d'ordine (senza prezzi)", misure_rilievo: "misure e note del rilievo",
+  riepilogo_legno: "riepilogo del modulo legno (pezzi, metri, m³ e, se scritto, prezzo al m³)",
 };
 
 export const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -37,6 +39,7 @@ export function compilaScheda(html: string, valori: Record<string, string>, righ
   });
   return conScelte.replace(RE_CAMPO, (_m, k: string) => {
     if (k === "righe") return righeHtml;
+    if (k === "riepilogo_legno") return htmlRiepilogoLegno(valori);
     const v = valori[k] ?? "";
     return esc(v).replace(/\n/g, "<br>");
   });
@@ -140,5 +143,6 @@ export const MODELLO_SEEGLASS = `<!doctype html>
 export const MODELLI_PRONTI: { chiave: string; nome: string; descrizione: string; html: string }[] = [
   { chiave: "standard", nome: "Scheda di produzione standard", descrizione: "Dati dell'ordine, materiale, misure definitive e note.", html: MODELLO_PREDEFINITO },
   { chiave: "lipari", nome: "Modulo d'ordine NEW LIPARI (pergola Lucilla)", descrizione: "Come il modulo del fornitore: installazione, dimensioni, piantoni, colore, motore, optional, traversi e illuminazione, una riga per pergola.", html: MODELLO_LIPARI },
+  { chiave: "legno", nome: "Ordine legno piallato per vetrate (30×50…50×170 × 3000)", descrizione: "Tutte le sezioni da 30×50 a 30×170 e da 50×50 a 50×170 mm: pezzi e lunghezza per misura, essenza e lavorazione; nella scheda il riepilogo con metri, m³ e, se scritto, il prezzo concordato al m³.", html: MODELLO_LEGNO },
   { chiave: "seeglass", nome: "Modulo d'ordine SEEGLASS RUN (vetrata scorrevole Scintilla)", descrizione: "Come il modulo di C3 Systems: misure, vetro, ante e vie, profilo, colori, guarnizioni, chiusure, altezza azionamenti e trasporto, con le caselle ☒ ☐.", html: MODELLO_SEEGLASS },
 ];

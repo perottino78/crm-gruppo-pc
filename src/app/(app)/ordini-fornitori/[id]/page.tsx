@@ -16,6 +16,7 @@ import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
+import TabellaLegno from "@/components/ordini/TabellaLegno";
 import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
@@ -190,7 +191,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                     const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
                     return (
                       <>
-                        {tabelle.map((t) => (
+                        {tabelle.map((t) => t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} /> : (
                           <div key={t.gruppo} className="overflow-x-auto">
                             <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
                             <table className="text-xs border-collapse">
@@ -206,7 +207,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                             </table>
                           </div>
                         ))}
-                        {singoli.map((c) => {
+                        {singoli.filter((c) => !(c === "prezzo_m3" && tabelle.some((t) => t.gruppo === "legno"))).map((c) => {
                           const d = tipoDi.get(c);
                           if (d && d.tipo !== "testo") {
                             return (
