@@ -17,6 +17,9 @@ import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
 import TabellaLegno from "@/components/ordini/TabellaLegno";
+import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { valoriDaRighe } from "@/lib/ordini/legno";
+import { salvaLegnoInOrdine } from "@/app/schede-produzione-actions";
 import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
@@ -31,6 +34,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, commessa: { include: { cliente: true } }, righe: { orderBy: { createdAt: "asc" } } } });
   if (!o) notFound();
   await assicuraModelliPronti();
+  await assicuraArticoliLegno();
   const msg = await searchParams;
   const bozzaAperta = o.stato === "BOZZA";
   // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
@@ -166,6 +170,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       {!annullato && (
         <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
           <h2 className="font-bold mb-1">📐 Modulo di rilievo / scheda di produzione per il fornitore (misure definitive)</h2>
+          {msg.scheda && msg.ok && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
+          {msg.scheda && msg.errore && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
           <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS), compila le misure e salva: la scheda va nella cartella «Schede produzione» della pratica e la alleghi con «Invia ordine».</p>
           {modelliScheda.length === 0 ? (
             <p className="text-sm text-neutral-600">Nessun modello di scheda per questo fornitore. <Link href="/ordini-fornitori/schede?nuovo=1" className="underline text-blue-800">Crea il primo modello</Link>.</p>
@@ -191,7 +197,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                     const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
                     return (
                       <>
-                        {tabelle.map((t) => t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} /> : (
+                        {tabelle.map((t) => t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(o.righe)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
                           <div key={t.gruppo} className="overflow-x-auto">
                             <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
                             <table className="text-xs border-collapse">

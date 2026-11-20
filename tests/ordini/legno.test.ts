@@ -31,3 +31,18 @@ test("la scheda: riepilogo senza prezzi se non è scritto il prezzo concordato",
   const html = compilaScheda(m.html, { tab_legno_14_pezzi: "6", essenza: "Abete" }, "");
   assert.ok(html.includes("50 × 50 × 3000") && html.includes("&#9746; Abete"));
 });
+
+import { codiceLegno, leggiCodiceLegno, valoriDaRighe, righeDaValori } from "../../src/lib/ordini/legno";
+
+test("codici degli articoli e andata/ritorno con le righe dell'ordine", () => {
+  assert.equal(codiceLegno({ spessore: 30, larghezza: 50 }), "LEGNO-30X50-3000");
+  assert.deepEqual(leggiCodiceLegno("LEGNO-50X170-2500"), { riga: 26, lunghezza: 2500 });
+  assert.equal(leggiCodiceLegno("LEGNO-40X50-3000"), null);
+  assert.equal(leggiCodiceLegno("ALTRO"), null);
+  const righe = righeDaValori({ tab_legno_1_pezzi: "10", tab_legno_26_pezzi: "4", tab_legno_26_lunghezza: "2500" }, 900);
+  assert.deepEqual(righe.map((r) => [r.codice, r.quantita, r.prezzo]), [["LEGNO-30X50-3000", 10, 4.05], ["LEGNO-50X170-2500", 4, 19.13]]);
+  const v = valoriDaRighe(righe.map((r) => ({ codice: r.codice, quantita: r.quantita, prezzoAcquisto: r.prezzo })).concat([{ codice: "XYZ", quantita: 3, prezzoAcquisto: 1 }]));
+  assert.equal(v.tab_legno_1_pezzi, "10");
+  assert.equal(v.tab_legno_26_lunghezza, "2500");
+  assert.equal(v.prezzo_m3, "900");
+});

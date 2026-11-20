@@ -2,6 +2,7 @@
 import { prisma } from "../../src/lib/prisma";
 import * as A from "../../src/app/schede-produzione-actions";
 import { assicuraModelliPronti } from "../../src/lib/ordini/schede-server";
+import { assicuraArticoliLegno } from "../../src/lib/ordini/legno-server";
 import { MODELLO_PREDEFINITO, MODELLO_SEEGLASS } from "../../src/lib/ordini/scheda-produzione";
 let ok = 0, ko = 0;
 const verifica = (c: unknown, m: string, x?: unknown) => { if (c) { ok++; console.log("  ✓", m); } else { ko++; console.log("  ✗", m, x ?? ""); } };
@@ -57,6 +58,24 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const agg = await assicuraModelliPronti();
   const dopo = (await prisma.schedaProduzioneModello.findMany({ select: { nome: true } })).map((x) => x.nome);
   verifica(agg === 1 && dopo.some((n) => n.includes("legno piallato")) && !dopo.some((n) => n.includes("SEEGLASS")), "aggiornamento: arriva solo il modulo del legno", dopo);
+  // legno piallato collegato agli articoli e alle righe dell'ordine (richiesta di Ugo 20/11/2026)
+  await prisma.articolo.deleteMany({ where: { codice: { startsWith: "LEGNO-" } } });
+  await prisma.configurazione.deleteMany({ where: { chiave: "legno_articoli_versione" } });
+  verifica((await assicuraArticoliLegno()) === 26 && (await assicuraArticoliLegno()) === 0, "26 articoli «Legni piallati» creati una volta sola");
+  const art = await prisma.articolo.findUnique({ where: { codice: "LEGNO-30X50-3000" }, include: { categoria: { include: { padre: true } } } });
+  verifica(art?.categoria?.nome === "Legni piallati" && art.categoria.padre?.nome === "Complementi vetrate" && art.categoria.padre.gruppoListino === "VETRATE" && art.costoAcquisto === 4.05 && art.prezzoVendita === 8.1, "articolo in Complementi vetrate › Legni piallati con costo sullo sviluppo", art);
+  const ml = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: { contains: "legno piallato" } } }))!;
+  const ordL = await prisma.ordineFornitore.create({ data: { numero: 77, anno: 2026, fornitoreId: (await prisma.soggetto.findFirstOrThrow()).id, commessaId: (await prisma.commessa.findFirst())?.id } });
+  await prisma.rigaOrdine.create({ data: { ordineFornitoreId: ordL.id, descrizione: "Altro materiale", quantita: 1, codice: "X1" } });
+  const rL = await redir(A.salvaLegnoInOrdine(fd({ ordineId: ordL.id, modelloId: ml.id, campo_tab_legno_1_pezzi: "10", campo_tab_legno_26_pezzi: "4", campo_tab_legno_26_lunghezza: "2500", campo_prezzo_m3: "850" })));
+  const righeL = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } }, orderBy: { codice: "asc" } });
+  verifica(righeL.length === 2 && righeL[0].quantita === 10 && righeL[0].prezzoAcquisto === 3.83 && !!righeL[0].articoloId && righeL[1].codice === "LEGNO-50X170-2500", "salva il legno: una riga per misura con prezzo a barra e articolo", righeL);
+  verifica(decodeURIComponent(rL.replace(/\+/g, " ")).includes("totale 110,54"), "messaggio con il totale dei legni", rL);
+  await redir(A.salvaLegnoInOrdine(fd({ ordineId: ordL.id, modelloId: ml.id, campo_tab_legno_14_pezzi: "6" })));
+  const dopoL = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id } });
+  verifica(dopoL.length === 2 && dopoL.some((r) => r.codice === "X1") && dopoL.some((r) => r.codice === "LEGNO-50X50-3000" && r.quantita === 6 && r.prezzoAcquisto === 6.75), "risalvando le righe del legno si sostituiscono, le altre restano (prezzo indicativo senza concordato)", dopoL);
+  const schedeL = await prisma.documento.findMany({ where: { cartella: "Schede produzione", nome: { contains: "77-2026" } } });
+  verifica(schedeL.length === 1 && schedeL[0].contenuto.toString("utf-8").includes("50 × 50 × 3000"), "la scheda per il fornitore si aggiorna (una sola, niente doppioni)", schedeL.map((d) => d.nome));
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();
