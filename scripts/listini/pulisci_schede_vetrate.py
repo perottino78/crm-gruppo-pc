@@ -19,16 +19,49 @@ def rgb(c):
     if c == 0x00b3da: return ARANCIO     # azzurro del fornitore
     return (((c >> 16) & 255) / 255, ((c >> 8) & 255) / 255, (c & 255) / 255)
 
+# refusi e parti in spagnolo/inglese delle schede originali (clienti attenti: si correggono tutti)
+CORREZIONI = [
+    ("Certifi cazioni", "Certificazioni"),
+    ("(?:^ )(?=cazioni)", ""),
+    ("rompe la stetica", "rompe l’estetica"), (" and Tests", " e prove"),
+    ("adizionale basato nella stetica e la confortabilità", "aggiuntivo basato sull’estetica e sul comfort"),
+    ("´", "’"), ("ﬁ ", "fi"), ("ﬂ ", "fl"), ("ﬁ", "fi"), ("ﬂ", "fl"),
+    ("profi li", "profili"), ("profi lo", "profilo"), ("superfi cie", "superficie"),
+    (r"(?<![e])stetica", "estetica"), ("metereologiche", "meteorologiche"), ("Protezione contra", "Protezione contro"),
+    ("sottoutilizzate", "sottoutilizzati"), ("protegendo le loro strutture ed elementi", "proteggendone le strutture e gli elementi"),
+    ("per se stesso", "di per sé"), ("sigilare", "sigillare"), ("mal tempo", "maltempo"), ("vetrata..", "vetrata."),
+    ("AZZIONAMENTO", "AZIONAMENTO"), ("Azzionamenti", "Azionamenti"), ("Posibilità", "Possibilità"), ("interiore/ esteriore", "interiore/esteriore"),
+    ("con il autoblocco", "con l’autoblocco"), ("Cromo mate", "Cromo opaco"), ("- Negro", "- Nero"), ("incassto", "incassato"),
+    ("Detagli", "Dettagli"), ("degli cuscineti", "dei cuscinetti"), ("UP TO 5 mm", "FINO A 5 mm"), ("REGULATION", "REGOLAZIONE"),
+    ("Opzione de chiave", "Opzione di chiave"), ("Finitura::", "Finitura:"), ("Round opening", "Dispositivo di apertura"), ("device.", "rotondo."),
+    ("i remati", "le rifiniture"), ("laterali possiamo", "laterali non sono"), ("non metterli.", "necessarie."),
+    ("Número de vie", "Numero di vie"), ("Tipo de profolio", "Tipo di profilo"), ("INCASSATTO", "INCASSATO"), ("Sostengo di vetro", "Sostegno del vetro"),
+    ("Finiture disponibile", "Finiture disponibili"), ("puó", "può"), ("SPECIFICAZIONE TECNICHE", "SPECIFICHE TECNICHE"),
+    ("Certificazioni and Tests", "Certificazioni e prove"), ("ha le prove che regolano le regole sulla resistenza e tenuta del vento", "ha superato le prove di resistenza e tenuta al vento"),
+    ("ha il marcato CE", "ha la marcatura CE"), ("high quality", "di alta qualità"), ("tenere fino a", "reggere fino a"), ("fronte ad", "contro"),
+    ("Scintilla serramento adatto", "Scintilla, serramento adatto"), ("ILIMITATO", "ILLIMITATO"), ("Ilimitato", "Illimitato"),
+    ("panelli", "pannelli"), ("caratteristrica", "caratteristica"), ("Ad Esempio", "Ad esempio"),
+    ("spazii", "spazi"), ("trattii", "tratti"), ("articulato", "articolato"), ("Fisaggio", "Fissaggio"), ("polímero", "polimero"),
+    ("TABOLA", "TABELLA"), ("finta legno", "finto legno"), ("Finta Legno", "Finto Legno"), ("Cota Z", "Quota Z"),
+    ("El Kit di Blocco", "Il kit di blocco"), ("entrare all’interno. Vedere", "entrare all’interno. Può essere"),
+    ("ecc. del cantiere, mattoni a vista, ecc. Facile", "ecc. Facile"), (" y Qualicoat", " e Qualicoat"), ("CLASE", "CLASSE"),
+    ("Sigillato dell’acqua", "Sigillatura all’acqua"),
+]
+
+def corregge(t):
+    for a, b in CORREZIONI:
+        t = re.sub(a, b, t) if a.startswith("(?") else t.replace(a, b)
+    return t
+
 def sistema(testo, marca):
     t = re.sub(r"Seeglass convenzionale", "convenzionale", testo)
     t = re.sub(r"pomo seeglass", "pomo", t)
     t = re.sub(r"SG RUN", marca.title(), t)
-    t = re.sub(r"(?i)seeglass[- ]?(sub|run)?", lambda m: marca.upper() if m.group(0).isupper() else marca.title(), t)
+    t = re.sub(r"(?i)seeglass(?:[- ](?:sub|run))?", lambda m: marca.upper() if m.group(0).isupper() else marca.title(), t)
     t = re.sub(r"^SUB ", "", t)
-    return t
+    return corregge(t)
 
 DA_TOGLIERE = re.compile(r"Spagna|C3 |SystemS|Systems\.|Apaprtiene|Seeglass SUB è la nuova|Seeglass SUB nasce|famiglia Seeglass\.|ED\. \d")
-DA_RISCRIVERE = re.compile(r"(?i)seeglass|SG RUN|^SUB ")
 
 def righe(page):
     for b in page.get_text("dict")["blocks"]:
@@ -47,7 +80,7 @@ def pagina_testo(page, marca, clip=None, tutto=False):
         if clip is not None and not pymupdf.Rect(l["bbox"]).intersects(clip): continue
         if tutto or DA_TOGLIERE.search(testo):
             page.add_redact_annot(riquadro(l), fill=False)
-        elif DA_RISCRIVERE.search(testo):
+        elif sistema(testo, marca) != testo:
             page.add_redact_annot(riquadro(l), fill=False)
             lavori.append(l)
     page.apply_redactions(images=pymupdf.PDF_REDACT_IMAGE_NONE)
@@ -57,15 +90,42 @@ def pagina_testo(page, marca, clip=None, tutto=False):
             t = sistema(s["text"], marca)
             if not t: continue
             nome, font, percorso = FONT[famiglia(s["font"])]
+            dx, dy = l["dir"]
+            if abs(dy) > .05:      # testo inclinato (es. il bollino «fino a 5 mm»)
+                o = pymupdf.Point(s["origin"])
+                lung = pymupdf.Rect(l["bbox"]).width * abs(dx) + pymupdf.Rect(l["bbox"]).height * abs(dy)
+                fs = min(s["size"], s["size"] * lung / max(font.text_length(t, fontsize=s["size"]), 1))
+                page.insert_text(o, t, fontname=nome, fontfile=percorso, fontsize=fs, color=rgb(s["color"]), morph=(o, pymupdf.Matrix(dx, -dy, dy, dx, 0, 0)))
+                break
             page.insert_text(pymupdf.Point(x, s["origin"][1]), t, fontname=nome, fontfile=percorso, fontsize=s["size"], color=rgb(s["color"]))
             x += font.text_length(t, fontsize=s["size"])
+
+def paragrafo_ce(page):
+    """«Scintilla ha la marcatura CE…»: tolta la parte in inglese e rifatto il capoverso"""
+    clip = pymupdf.Rect(326, 262, 582, 340)
+    prima = None
+    for l, testo in righe(page):
+        if pymupdf.Rect(l["bbox"]).intersects(clip):
+            page.add_redact_annot(riquadro(l), fill=False)
+            if prima is None: prima = l
+    page.apply_redactions(images=pymupdf.PDF_REDACT_IMAGE_NONE)
+    parole = [("Scintilla", "bold", 11, 0x00b3da)] + [(w, "reg", 10, 0x231f20) for w in "ha la marcatura CE. Garantiamo il processo di certificazione tramite dichiarazione di conformità debitamente sigillata e firmata.".split()]
+    x0, x1, y = prima["bbox"][0], 574, prima["spans"][0]["origin"][1]
+    x = x0
+    for w, fam, size, col in parole:
+        nome, font, percorso = FONT[fam]
+        larg = font.text_length(w, fontsize=size); spazio = font.text_length(" ", fontsize=size)
+        if x + larg > x1: x, y = x0, y + 13.5
+        page.insert_text(pymupdf.Point(x, y), w, fontname=nome, fontfile=percorso, fontsize=size, color=rgb(col))
+        x += larg + spazio
 
 def cancella(page, rects, colore=BIANCO):
     for r in rects: page.add_redact_annot(pymupdf.Rect(*r), fill=colore)
     page.apply_redactions(images=pymupdf.PDF_REDACT_IMAGE_PIXELS)
 
 def scintilla(d):
-    for i in (4, 5, 6): pagina_testo(d[i], "scintilla")
+    paragrafo_ce(d[6])
+    for p in d: pagina_testo(p, "scintilla")
     cancella(d[6], [(50, 440, 440, 842), (445, 528, 585, 656)])   # certificati con la ragione sociale del fornitore e foto dei campioni colore (porta il suo logo)
     cancella(d[7], [(285, 668, 540, 748), (70, 805, 215, 862)])        # loghi, QR, social, edizione
 
@@ -74,8 +134,7 @@ def brillante(d):
     pagina_testo(p, "brillante", clip=pymupdf.Rect(560, 150, 830, 245), tutto=True)
     nome, font, percorso = FONT["reg"]
     p.insert_textbox(pymupdf.Rect(566, 160, 822, 215), "Brillante è la nuova vetrata panoramica scorrevole e a pacchetto.", fontname=nome, fontfile=percorso, fontsize=10, color=rgb(0x231f20))
-    pagina_testo(p, "brillante", clip=pymupdf.Rect(0, 400, 884, 637))
-    for i in (2, 3, 4, 5, 7, 8, 10): pagina_testo(d[i], "brillante")
+    for p in d: pagina_testo(p, "brillante")
     cancella(d[11], [(550, 452, 785, 532), (135, 536, 275, 592)])
 
 # azzurro del fornitore -> arancio P&C (a tinte: il chiaro resta chiaro)
