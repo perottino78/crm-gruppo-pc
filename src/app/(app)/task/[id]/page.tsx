@@ -112,7 +112,7 @@ export default async function TaskDettaglio({ params, searchParams }: { params: 
             <p className="text-xs font-bold text-neutral-700">Correlato a<span className="mt-1 block"><Link href={`/clienti/${t.cliente.id}`} className="text-blue-800 underline">{t.cliente.nome}</Link></span></p>
           </div>
           <fieldset className="rounded border border-neutral-200 p-2">
-            <legend className="px-1 text-xs font-bold text-neutral-700">In copia a</legend>
+            <legend className="px-1 text-xs font-bold text-neutral-700">Coinvolti (in copia)</legend>
             <div className="grid gap-x-4 gap-y-1 sm:grid-cols-2 md:grid-cols-3">
               {utenti.map((x) => <label key={x.id} className="flex items-center gap-1.5 text-xs"><input type="checkbox" name="inCopiaA" value={x.id} defaultChecked={t.inCopiaA.includes(x.id)} /> {x.nome}</label>)}
             </div>
