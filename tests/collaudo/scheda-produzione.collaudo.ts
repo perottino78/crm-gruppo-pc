@@ -118,6 +118,26 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const rLib = await redir(A.salvaLegnoInOrdine(fd({ ordineId: ordL.id, modelloId: ml.id, campo_tab_legno_1_pezzi: "2", campo_tab_legnol_1_spessore: "35", campo_tab_legnol_1_larghezza: "75", campo_tab_legnol_1_lunghezza: "2400", campo_tab_legnol_1_pezzi: "4", campo_prezzo_m3: "900" })));
   const libere = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } } });
   verifica(libere.length === 2 && libere.some((r) => r.codice === "LEGNO-35X75-2400" && r.quantita === 4 && r.prezzoAcquisto === 5.67), "ordine: misure libere salvate nelle righe del legno", { libere, rLib });
+  console.log("Modulo del fornitore al «Carica rilievo» (senza ordine)");
+  await prisma.rigaOrdine.deleteMany({ where: { commessaId: com.id, ordineFornitoreId: null } });
+  const mr = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: "Scheda serramenti" } })) ?? (await prisma.schedaProduzioneModello.create({ data: { nome: "Scheda serramenti", html: MODELLO_PREDEFINITO, fornitoreId: forn.id } }));
+  const rpr = await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "Cucina L 900 × H 1200", campo_note_produzione: "Antracite" })));
+  console.log("   redirect:", rpr, (await prisma.documento.findMany({ where: { entitaId: com.id }, select: { nome: true } })).map((x) => x.nome));
+  const dp = await prisma.documento.findFirstOrThrow({ where: { entita: "COMMESSA", entitaId: com.id, cartella: "Schede produzione", nome: { contains: "Serramenti Srl - 1-2026" } } });
+  const hp = dp.contenuto.toString("utf-8");
+  verifica(rpr.includes("modulo-fornitore") && hp.includes("Cucina L 900 × H 1200") && hp.includes("Mario Rossi") && hp.includes("Serramenti Srl") && !/\{\{/.test(hp), "scheda compilata al rilievo, senza ordine");
+  await A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "Cucina L 910 × H 1200" })).catch(() => undefined);
+  verifica((await prisma.documento.count({ where: { entita: "COMMESSA", entitaId: com.id, nome: { contains: "Serramenti Srl - 1-2026" } } })) === 1, "risalvando si sostituisce, niente doppioni");
+  const rlp = await redir(A.salvaLegnoInPratica(fd({ commessaId: com.id, modelloId: ml.id, campo_tab_legno_1_pezzi: "10", campo_tab_legno_26_pezzi: "4", campo_tab_legno_26_lunghezza: "2500", campo_prezzo_m3: "850" })));
+  const lp = await prisma.rigaOrdine.findMany({ where: { commessaId: com.id, ordineFornitoreId: null, codice: { startsWith: "LEGNO-" } } });
+  verifica(lp.length === 2 && lp.every((r) => r.complemento && (r.costoPrevisto ?? 0) > 0), "legno nel materiale della pratica (non ancora in un ordine) con costo previsto", { lp, rlp });
+  await A.salvaLegnoInPratica(fd({ commessaId: com.id, modelloId: ml.id, campo_tab_legno_14_pezzi: "6" })).catch(() => undefined);
+  verifica((await prisma.rigaOrdine.count({ where: { commessaId: com.id, ordineFornitoreId: null, codice: { startsWith: "LEGNO-" } } })) === 1, "risalvando il legno si riscrive, niente doppioni");
+  const mastroP = (await prisma.soggetto.findFirst({ where: { ragioneSociale: { contains: "mastro", mode: "insensitive" } } })) ?? (await prisma.soggetto.create({ data: { ragioneSociale: "IL MASTRO SRLS", ruoli: ["FORNITORE"] } }));
+  await A.salvaAngolariInPratica(fd({ commessaId: com.id, modelloId: ml.id, campo_tab_ang_1_forma: "L", campo_tab_ang_1_a: "30", campo_tab_ang_1_b: "50", campo_tab_ang_1_spessore: "15", campo_tab_ang_1_bello: "EST", campo_tab_ang_1_colore: "0", campo_tab_ang_1_lunghezza: "3000", campo_tab_ang_1_pezzi: "2" })).catch(() => undefined);
+  const ap = await prisma.rigaOrdine.findMany({ where: { commessaId: com.id, ordineFornitoreId: null, codice: { startsWith: "ANGALL-" } } });
+  verifica(ap.length === 1 && ap[0].quantita === 2 && ap[0].fornitoreId === mastroP.id && (ap[0].costoPrevisto ?? 0) > 0, "angolari nel materiale della pratica, fornitore Il Mastro", ap);
+
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();

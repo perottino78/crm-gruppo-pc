@@ -4,6 +4,11 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { costiMaterialeCommesse } from "@/lib/ordini/server";
 import CaricaRilievo from "@/components/commesse/CaricaRilievo";
+import ModuloScheda from "@/components/ordini/ModuloScheda";
+import { creaSchedaDaRilievo, salvaLegnoInPratica, salvaAngolariInPratica } from "@/app/schede-produzione-actions";
+import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
+import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { valoriAngolari } from "@/lib/ordini/angolari";
 import { labelBreveTipologia } from "@/lib/prodotti";
 import { notFound } from "next/navigation";
 import StatoAcquisti from "@/components/ordini/StatoAcquisti";
@@ -71,9 +76,9 @@ import { documentiDi } from "@/lib/documenti/server";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string; scheda?: string; okScheda?: string; erroreScheda?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo, scheda, okScheda, erroreScheda } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -114,6 +119,19 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
+  // modulo del fornitore al «Carica rilievo» (Ugo 20/11/2026): modelli, legno e angolari già nel materiale, schede già salvate
+  const mostraModulo = puoGestireOrdini(utente) && c.rilievi.some((x) => x.stato !== "ANNULLATO");
+  let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
+  if (mostraModulo) {
+    await assicuraModelliPronti();
+    await assicuraArticoliLegno();
+    const [modelli, legniPratica, salvate] = await Promise.all([
+      prisma.schedaProduzioneModello.findMany({ where: { attivo: true }, include: { fornitore: { select: { ragioneSociale: true } } }, orderBy: { nome: "asc" } }),
+      prisma.rigaOrdine.findMany({ where: { commessaId: c.id, ordineFornitoreId: null, OR: [{ codice: { startsWith: "LEGNO-" } }, { codice: { startsWith: "ANGALL-" } }] }, select: { codice: true, quantita: true } }),
+      prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: c.id, cartella: "Schede produzione" }, select: { id: true, nome: true, createdAt: true, caricatoDaNome: true }, orderBy: { createdAt: "desc" }, take: 10 }),
+    ]);
+    moduloDati = { modelli: modelli.map((m) => ({ id: m.id, nome: m.nome, html: m.html, fornitore: m.fornitore?.ragioneSociale ?? null })), legniPratica, salvate };
+  }
   const consegna = statoConsegna(c.consegnaPrevista, c.stato);
   const [tassonomia, progettiCliente] = await Promise.all([
     tassonomiaListino(c.brandId),
@@ -499,6 +517,40 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </div>
           ))}
           {c.rilievi.length === 0 && <p className="text-xs text-neutral-600">Nessun rilievo programmato.</p>}
+          {moduloDati && (() => {
+            const modello = moduloDati.modelli.find((m) => m.id === scheda) ?? null;
+            const ap = valoriAngolari([], moduloDati.legniPratica);
+            return (
+              <section id="modulo-fornitore" className="mt-3 rounded-lg border border-purple-200 bg-purple-50/30 p-3 scroll-mt-4">
+                <h3 className="font-bold text-sm mb-1">📐 Modulo del fornitore (misure per la produzione) — si compila qui, al rilievo</h3>
+                <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS, legno, angolari), scrivi le misure e aggiungi i prodotti: il modulo resta nei documenti della pratica e, quando fai l&apos;ordine a quel fornitore, è già pronto da allegare.</p>
+                {okScheda && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {okScheda}</p>}
+                {erroreScheda && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{erroreScheda}</p>}
+                <form method="get" className="mb-2 flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="passo" value="RILIEVO" />
+                  <label className="text-xs font-semibold">Modulo
+                    <select name="scheda" defaultValue={modello?.id ?? ""} className="block rounded border border-neutral-300 px-2 py-1 text-sm">
+                      <option value="">Scegli…</option>
+                      {moduloDati.modelli.map((m) => <option key={m.id} value={m.id}>{m.nome}{m.fornitore ? ` — ${m.fornitore}` : ""}</option>)}
+                    </select>
+                  </label>
+                  <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
+                </form>
+                {modello && (
+                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} righeLegno={moduloDati.legniPratica}
+                    angolariIniziali={{ iniziali: ap.valori, proposta: ap.proposta }} salvaLegno={salvaLegnoInPratica} salvaAngolari={salvaAngolariInPratica} modificabile dove="nella pratica"
+                    testoPulsante="📄 Salva il modulo" nota="Il CRM aggiunge da solo cliente, pratica, materiale e le misure del rilievo. Legno e angolari con «Salva» entrano anche nel materiale da ordinare." />
+                )}
+                {moduloDati.salvate.length > 0 && (
+                  <ul className="mt-3 divide-y divide-neutral-100 text-sm">
+                    {moduloDati.salvate.map((d) => (
+                      <li key={d.id} className="flex flex-wrap items-center gap-3 py-1"><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline">📄 {d.nome}</a><span className="text-xs text-neutral-500">{d.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span></li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            );
+          })()}
         </div>
 
       </details>
