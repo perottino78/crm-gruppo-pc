@@ -1,6 +1,7 @@
 // Schede di produzione HTML per il fornitore: modello → compilazione con le misure definitive → documento della pratica da allegare all'ordine.
 import { prisma } from "../../src/lib/prisma";
 import * as A from "../../src/app/schede-produzione-actions";
+import { assicuraModelliPronti } from "../../src/lib/ordini/schede-server";
 import { MODELLO_PREDEFINITO, MODELLO_SEEGLASS } from "../../src/lib/ordini/scheda-produzione";
 let ok = 0, ko = 0;
 const verifica = (c: unknown, m: string, x?: unknown) => { if (c) { ok++; console.log("  ✓", m); } else { ko++; console.log("  ✗", m, x ?? ""); } };
@@ -42,6 +43,14 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   verifica(h2.includes("&#9746; Serratura CD-4") && h2.includes("&#9746; Maniglia e azionamento") && h2.includes("&#9744; Auto-blocco"), "scelta multipla: più voci spuntate");
   await redir(A.eliminaModelloScheda(fd({ id: m.id })));
   verifica((await prisma.schedaProduzioneModello.count()) === 1 && (await prisma.documento.count()) === 2, "eliminando il modello restano le schede già create");
+  // moduli pronti creati da soli una volta (richiesta di Ugo 20/11/2026)
+  await prisma.$executeRawUnsafe('TRUNCATE "SchedaProduzioneModello" CASCADE');
+  await prisma.configurazione.deleteMany({ where: { chiave: "schede_pronte_versione" } });
+  const creati = await assicuraModelliPronti();
+  const nomi = (await prisma.schedaProduzioneModello.findMany({ select: { nome: true } })).map((x) => x.nome);
+  verifica(creati === 3 && nomi.some((n) => n.includes("NEW LIPARI")) && nomi.some((n) => n.includes("SEEGLASS")), "i moduli pronti (standard, NEW LIPARI, SEEGLASS) compaiono da soli", nomi);
+  await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "SEEGLASS" } } });
+  verifica((await assicuraModelliPronti()) === 0 && (await prisma.schedaProduzioneModello.count()) === 2, "una volta sola: un modello tolto a mano non torna");
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();
