@@ -5,9 +5,9 @@ import { prisma } from "@/lib/prisma";
 import { MODELLI_PRONTI } from "./scheda-produzione";
 
 const CHIAVE = "schede_pronte_versione";
-const VERSIONE = "2";
+const VERSIONE = "3";
 /** Da quale versione esiste ogni modello pronto: si crea solo se è più nuovo di quanto già fatto (un modello tolto a mano non torna). */
-const DA_VERSIONE: Record<string, number> = { standard: 1, lipari: 1, seeglass: 1, legno: 2 };
+const DA_VERSIONE: Record<string, number> = { standard: 1, lipari: 1, seeglass: 1, legno: 2, angolari: 3 };
 
 export async function assicuraModelliPronti(): Promise<number> {
   const fatto = await prisma.configurazione.findUnique({ where: { chiave: CHIAVE }, select: { valore: true } });

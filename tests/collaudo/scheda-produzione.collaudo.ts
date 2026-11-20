@@ -49,15 +49,16 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   await prisma.configurazione.deleteMany({ where: { chiave: "schede_pronte_versione" } });
   const creati = await assicuraModelliPronti();
   const nomi = (await prisma.schedaProduzioneModello.findMany({ select: { nome: true } })).map((x) => x.nome);
-  verifica(creati === 4 && nomi.some((n) => n.includes("legno piallato")) && nomi.some((n) => n.includes("NEW LIPARI")) && nomi.some((n) => n.includes("SEEGLASS")), "i moduli pronti (standard, NEW LIPARI, SEEGLASS, legno piallato) compaiono da soli", nomi);
+  verifica(creati === 5 && nomi.some((n) => n.includes("angolari in alluminio")) && nomi.some((n) => n.includes("legno piallato")) && nomi.some((n) => n.includes("NEW LIPARI")) && nomi.some((n) => n.includes("SEEGLASS")), "i moduli pronti (standard, NEW LIPARI, SEEGLASS, legno piallato) compaiono da soli", nomi);
   await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "SEEGLASS" } } });
-  verifica((await assicuraModelliPronti()) === 0 && (await prisma.schedaProduzioneModello.count()) === 3, "una volta sola: un modello tolto a mano non torna");
+  verifica((await assicuraModelliPronti()) === 0 && (await prisma.schedaProduzioneModello.count()) === 4, "una volta sola: un modello tolto a mano non torna");
   // produzione già alla versione 1 (senza legno): al rilascio arriva solo il modulo nuovo, il SEEGLASS tolto non torna
   await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "legno piallato" } } });
   await prisma.configurazione.update({ where: { chiave: "schede_pronte_versione" }, data: { valore: "1" } });
+  await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "angolari in alluminio" } } });
   const agg = await assicuraModelliPronti();
   const dopo = (await prisma.schedaProduzioneModello.findMany({ select: { nome: true } })).map((x) => x.nome);
-  verifica(agg === 1 && dopo.some((n) => n.includes("legno piallato")) && !dopo.some((n) => n.includes("SEEGLASS")), "aggiornamento: arriva solo il modulo del legno", dopo);
+  verifica(agg === 2 && dopo.some((n) => n.includes("legno piallato")) && dopo.some((n) => n.includes("angolari in alluminio")) && !dopo.some((n) => n.includes("SEEGLASS")), "aggiornamento dalla versione 1: arrivano solo legno e angolari", dopo);
   // legno piallato collegato agli articoli e alle righe dell'ordine (richiesta di Ugo 20/11/2026)
   await prisma.articolo.deleteMany({ where: { codice: { startsWith: "LEGNO-" } } });
   await prisma.configurazione.deleteMany({ where: { chiave: "legno_articoli_versione" } });
@@ -76,6 +77,13 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   verifica(dopoL.length === 2 && dopoL.some((r) => r.codice === "X1") && dopoL.some((r) => r.codice === "LEGNO-50X50-3000" && r.quantita === 6 && r.prezzoAcquisto === 6.75), "risalvando le righe del legno si sostituiscono, le altre restano (prezzo indicativo senza concordato)", dopoL);
   const schedeL = await prisma.documento.findMany({ where: { cartella: "Schede produzione", nome: { contains: "77-2026" } } });
   verifica(schedeL.length === 1 && schedeL[0].contenuto.toString("utf-8").includes("50 × 50 × 3000"), "la scheda per il fornitore si aggiorna (una sola, niente doppioni)", schedeL.map((d) => d.nome));
+  // angolari in alluminio per i legni (richiesta di Ugo 20/11/2026)
+  const ma = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: { contains: "angolari in alluminio" } } }))!;
+  const rA = await redir(A.salvaAngolariInOrdine(fd({ ordineId: ordL.id, modelloId: ma.id, campo_tab_ang_1_forma: "L", campo_tab_ang_1_a: "30", campo_tab_ang_1_b: "50", campo_tab_ang_1_spessore: "1.5", campo_tab_ang_1_bello: "EST", campo_tab_ang_1_colore: "0", campo_tab_ang_1_lunghezza: "3000", campo_tab_ang_1_pezzi: "4", campo_tab_ang_2_pezzi: "2", campo_tab_ang_2_forma: "U", campo_tab_ang_2_a: "20" })));
+  const righeA = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "ANGALL-" } } });
+  verifica(righeA.length === 1 && righeA[0].codice === "ANGALL-L-30X50X0-15-EST-C0-3000" && righeA[0].quantita === 4 && righeA[0].prezzoAcquisto === 13.6, "salva gli angolari: riga con codice e costo di Il Mastro a barra (la U senza lati è scartata)", righeA);
+  verifica(decodeURIComponent(rA.replace(/\+/g, " ")).includes("costo 54,40"), "messaggio con il costo degli angolari", rA);
+  verifica((await prisma.rigaOrdine.count({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } } })) === 1, "le righe del legno restano");
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();

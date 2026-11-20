@@ -9,6 +9,7 @@ import { puoGestireOrdini } from "@/lib/ordini/server";
 import { numeroOrdine } from "@/lib/ordini/calcoli";
 import { descriviCampi, compilaScheda, tabellaRighe } from "@/lib/ordini/scheda-produzione";
 import { PREFISSO_LEGNO, PREZZO_M3_INDICATIVO, righeDaValori } from "@/lib/ordini/legno";
+import { PREFISSO_ANGOLARI, righeDaAngolari } from "@/lib/ordini/angolari";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 
@@ -111,4 +112,38 @@ export async function salvaLegnoInOrdine(fd: FormData) {
   redirect(torna({ ok: nuove.length
     ? `Legno salvato nell'ordine: ${nuove.length} righe, ${nuove.reduce((t, r) => t + r.quantita, 0)} pezzi, totale ${totale.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €${modelloId ? "; scheda per il fornitore aggiornata" : ""}.`
     : "Nessun pezzo nel modulo: le righe del legno sono state tolte dall'ordine." }));
+}
+
+/**
+ * «💾 Salva gli angolari nell'ordine» (richiesta di Ugo 20/11/2026): come il legno, le righe ANGALL-… dell'ordine si riscrivono dal modulo
+ * (una per riga, prezzo d'acquisto = costo di Il Mastro a barra) e la scheda per il fornitore si aggiorna. Le righe già arrivate non si toccano.
+ */
+export async function salvaAngolariInOrdine(fd: FormData) {
+  const u = await addetto();
+  const ordineId = str(fd, "ordineId"), modelloId = str(fd, "modelloId");
+  if (!ordineId) return;
+  const torna = (p: Record<string, string>) => `/ordini-fornitori/${ordineId}?${new URLSearchParams({ ...(modelloId ? { scheda: modelloId } : {}), ...p })}#scheda-produzione`;
+  const o = await prisma.ordineFornitore.findUnique({ where: { id: ordineId }, include: { fornitore: true } });
+  if (!o) return;
+  if (!["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)) redirect(torna({ errore: "L'ordine è già arrivato o annullato: gli angolari non si possono più cambiare." }));
+  const valori: Record<string, string> = {};
+  for (const [k, v] of fd.entries()) if (typeof v === "string" && k.startsWith("campo_")) valori[k.slice(6)] = v;
+  const nuove = righeDaAngolari(valori);
+  await prisma.$transaction([
+    prisma.rigaOrdine.deleteMany({ where: { ordineFornitoreId: o.id, codice: { startsWith: PREFISSO_ANGOLARI }, arrivato: false, quantitaArrivata: 0 } }),
+    prisma.rigaOrdine.createMany({
+      data: nuove.map((r) => ({
+        ordineFornitoreId: o.id, commessaId: o.commessaId, descrizione: r.descrizione, quantita: r.quantita, um: "pz", codice: r.codice,
+        prezzoAcquisto: r.prezzo, scontoAcquisto: 0, complemento: !!o.commessaId,
+        fornitoreId: o.fornitoreId, fornitoreNome: o.fornitore.ragioneSociale, ordinato: o.stato !== "BOZZA", ordinatoIl: o.stato !== "BOZZA" ? new Date() : null,
+      })),
+    }),
+  ]);
+  if (modelloId) await compilaESalva(o.id, modelloId, fd, u.nome, true);
+  const totale = Math.round(nuove.reduce((t, r) => t + r.prezzo * r.quantita, 0) * 100) / 100;
+  revalidatePath(`/ordini-fornitori/${o.id}`);
+  if (o.commessaId) revalidatePath(`/commesse/${o.commessaId}`);
+  redirect(torna({ ok: nuove.length
+    ? `Angolari salvati nell'ordine: ${nuove.length} righe, ${nuove.reduce((t, r) => t + r.quantita, 0)} pezzi, costo ${totale.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €${modelloId ? "; scheda per il fornitore aggiornata" : ""}.`
+    : "Nessun angolare nel modulo: le righe degli angolari sono state tolte dall'ordine." }));
 }
