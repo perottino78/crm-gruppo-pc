@@ -64,13 +64,15 @@ const inValori = (v: Record<string, string>, n: number, x: Angolare) => {
 };
 
 /**
- * Modulo già compilato nell'ordine: gli angolari già salvati nelle righe dell'ordine; se non ce ne sono, una proposta per ogni legno
+ * Modulo già compilato nell'ordine: gli angolari già salvati nelle righe dell'ordine, altrimenti quelli del materiale della pratica (anche dal rilevatore); se non ce ne sono, una proposta per ogni legno
  * (righe LEGNO-… dell'ordine e materiale della pratica aggiunto dal rilevatore): angolare a L spessore × larghezza del legno, stessa lunghezza
  * e stessi pezzi, 15/10, bello esterno, bianco. È solo una proposta: si corregge prima di salvare.
  */
 export function valoriAngolari(righeOrdine: { codice: string | null; quantita: number }[], altriLegni: { codice: string | null; quantita: number }[] = []) {
   const v: Record<string, string> = {};
-  const salvati = righeOrdine.map((r) => leggiCodiceAngolare(r.codice, r.quantita)).filter((x): x is Angolare => !!x);
+  const daCodici = (rr: { codice: string | null; quantita: number }[]) => rr.map((r) => leggiCodiceAngolare(r.codice, r.quantita)).filter((x): x is Angolare => !!x);
+  // prima quelli salvati nell'ordine, poi quelli messi nel materiale della pratica (anche dal rilevatore)
+  const salvati = daCodici(righeOrdine).length ? daCodici(righeOrdine) : daCodici(altriLegni);
   if (salvati.length) { salvati.slice(0, RIGHE_ANGOLARI).forEach((x, i) => inValori(v, i + 1, x)); return { valori: v, proposta: false }; }
   const perCodice = new Map<string, number>();
   for (const r of [...righeOrdine, ...altriLegni]) if (leggiCodiceLegno(r.codice)) perCodice.set(r.codice!, Math.max(perCodice.get(r.codice!) ?? 0, r.quantita));

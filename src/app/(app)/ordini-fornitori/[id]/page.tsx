@@ -38,10 +38,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   await assicuraModelliPronti();
   await assicuraArticoliLegno();
   // angolari: righe già salvate o proposta dai legni dell'ordine e del materiale della pratica (anche quelli aggiunti dal rilevatore)
-  const legniPratica = o.commessaId ? await prisma.rigaOrdine.findMany({ where: { commessaId: o.commessaId, codice: { startsWith: "LEGNO-" } }, select: { codice: true, quantita: true, ordineFornitoreId: true } }) : [];
+  const legniPratica = o.commessaId ? await prisma.rigaOrdine.findMany({ where: { commessaId: o.commessaId, OR: [{ codice: { startsWith: "LEGNO-" } }, { codice: { startsWith: "ANGALL-" } }] }, select: { codice: true, quantita: true, ordineFornitoreId: true } }) : [];
   // legno: le righe LEGNO-… dell'ordine; se non ce ne sono, quello messo nel materiale della pratica (anche dal rilevatore) e non ancora in un ordine
   const righeLegno = o.righe.some((r) => r.codice?.startsWith("LEGNO-")) ? o.righe : legniPratica.filter((r) => !r.ordineFornitoreId);
-  const ap = valoriAngolari(o.righe, legniPratica);
+  const ap = valoriAngolari(o.righe, legniPratica.filter((r) => !r.ordineFornitoreId || r.ordineFornitoreId === o.id));
   const angolariIniziali = { iniziali: ap.valori, proposta: ap.proposta };
   const msg = await searchParams;
   const bozzaAperta = o.stato === "BOZZA";
