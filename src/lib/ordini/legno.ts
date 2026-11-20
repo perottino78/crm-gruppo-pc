@@ -7,6 +7,8 @@ export type SezioneLegno = { spessore: number; larghezza: number };
 export const SEZIONI_LEGNO: SezioneLegno[] = [30, 50].flatMap((spessore) => Array.from({ length: 13 }, (_, i) => ({ spessore, larghezza: 50 + i * 10 })));
 
 export const LUNGHEZZA_STANDARD = 3000; // mm
+/** Righe del modulo con le misure libere (oltre alle 26 sezioni fisse). */
+export const RIGHE_LIBERE = 6;
 /** Prezzo indicativo dell'abete piallato 4 lati (nov 2026: rivenditori ~800–900 €/m³ per listelli piallati; da confermare col fornitore). Solo per la stima in ONE, non va nella scheda. */
 export const PREZZO_M3_INDICATIVO = 900;
 
@@ -35,6 +37,16 @@ export function riepilogoLegno(valori: Record<string, string>, prezzoM3?: number
     const prezzoBarra = p ? Math.round(volumeBarra(sezione, lunghezza) * p * 100) / 100 : null;
     righe.push({ riga, sezione, lunghezza, pezzi, metri: (lunghezza / 1000) * pezzi, m3, prezzoBarra, totale: prezzoBarra !== null ? Math.round(prezzoBarra * pezzi * 100) / 100 : null });
   });
+  // misure libere (Ugo 20/11/2026): spessore, larghezza e lunghezza a piacere, stesso calcolo sullo sviluppo
+  for (let n = 1; n <= RIGHE_LIBERE; n++) {
+    const sezione = { spessore: Math.round(num(valori[`tab_legnol_${n}_spessore`])), larghezza: Math.round(num(valori[`tab_legnol_${n}_larghezza`])) };
+    const pezzi = Math.round(num(valori[`tab_legnol_${n}_pezzi`]));
+    if (!pezzi || !sezione.spessore || !sezione.larghezza) continue;
+    const lunghezza = num(valori[`tab_legnol_${n}_lunghezza`]) || LUNGHEZZA_STANDARD;
+    const m3 = volumeBarra(sezione, lunghezza) * pezzi;
+    const prezzoBarra = p ? Math.round(volumeBarra(sezione, lunghezza) * p * 100) / 100 : null;
+    righe.push({ riga: 100 + n, sezione, lunghezza, pezzi, metri: (lunghezza / 1000) * pezzi, m3, prezzoBarra, totale: prezzoBarra !== null ? Math.round(prezzoBarra * pezzi * 100) / 100 : null });
+  }
   const pezzi = righe.reduce((t, r) => t + r.pezzi, 0);
   const metri = righe.reduce((t, r) => t + r.metri, 0);
   const m3 = righe.reduce((t, r) => t + r.m3, 0);
@@ -102,11 +114,30 @@ export function leggiCodiceLegno(codice: string | null | undefined): { riga: num
   return i < 0 ? null : { riga: i + 1, lunghezza: Number(m[3]) };
 }
 
-/** Valori del modulo dalle righe dell'ordine: pezzi sommati per sezione, lunghezza dalla prima riga, prezzo al m³ ricavato dal prezzo a barra. */
+/** Qualsiasi legno «LEGNO-<spessore>X<larghezza>-<lunghezza>», anche su misura (null se il codice non è un legno). */
+export function leggiLegnoLibero(codice: string | null | undefined): { sezione: SezioneLegno; lunghezza: number } | null {
+  const m = /^LEGNO-(\d+)X(\d+)-(\d+)$/i.exec((codice ?? "").trim());
+  if (!m || !+m[1] || !+m[2] || !+m[3]) return null;
+  return { sezione: { spessore: +m[1], larghezza: +m[2] }, lunghezza: +m[3] };
+}
+
+/** Costo indicativo di una barra (sviluppo × €/m³) e vendita × 2, come gli articoli dei legni piallati. */
+export const costoLegno = (s: SezioneLegno, lunghezza: number, prezzoM3 = PREZZO_M3_INDICATIVO) => Math.round(volumeBarra(s, lunghezza) * prezzoM3 * 100) / 100;
+export const venditaLegno = (s: SezioneLegno, lunghezza: number) => Math.round(costoLegno(s, lunghezza) * 2 * 100) / 100;
+
+/** Valori del modulo dalle righe dell'ordine: pezzi sommati per sezione, lunghezza dalla prima riga, prezzo al m³ ricavato dal prezzo a barra; le misure fuori dalle 26 sezioni vanno nelle righe libere. */
 export function valoriDaRighe(righe: { codice: string | null; quantita: number; prezzoAcquisto?: number | null }[]): Record<string, string> {
   const v: Record<string, string> = {};
+  let libere = 0;
   for (const r of righe) {
     const c = leggiCodiceLegno(r.codice);
+    const lib = c ? null : leggiLegnoLibero(r.codice);
+    if (lib && libere < RIGHE_LIBERE) {
+      libere++;
+      Object.assign(v, { [`tab_legnol_${libere}_spessore`]: String(lib.sezione.spessore), [`tab_legnol_${libere}_larghezza`]: String(lib.sezione.larghezza), [`tab_legnol_${libere}_lunghezza`]: String(lib.lunghezza), [`tab_legnol_${libere}_pezzi`]: String(r.quantita) });
+      if (!v.prezzo_m3 && r.prezzoAcquisto) v.prezzo_m3 = String(Math.round(r.prezzoAcquisto / volumeBarra(lib.sezione, lib.lunghezza)));
+      continue;
+    }
     if (!c) continue;
     const k = `tab_legno_${c.riga}_pezzi`;
     v[k] = String((Number(v[k]) || 0) + r.quantita);

@@ -2,7 +2,8 @@
 
 import RicambiDelGruppo from "@/components/preventivi/RicambiDelGruppo";
 import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
-import { aggiungiAngolarePreventivo } from "@/app/actions";
+import { aggiungiAngolarePreventivo, aggiungiLegnoPreventivo } from "@/app/actions";
+import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { lattAlMetro, GUIDA_LATTONERIA } from "@/lib/listini/lattoneria";
@@ -1928,7 +1929,17 @@ export default function SelettoreProdotto({
               {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
               <ConfiguraAngolare prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
             </form>
-          ) : ricambi(f.nome, "LEGNI PIALLATI")}
+          ) : (
+            <>
+              <form action={aggiungiLegnoPreventivo} className="rounded-xl border-2 border-amber-300 bg-amber-50 p-3">
+                <p className="mb-2 text-sm font-bold text-amber-950">🪵 Legno piallato su misura: prezzo di vendita sullo sviluppo (m³)</p>
+                <input type="hidden" name="preventivoId" value={preventivoId} />
+                {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
+                <ConfiguraLegno prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
+              </form>
+              {ricambi(f.nome, "LEGNI PIALLATI")}
+            </>
+          )}
         </>
       );
     }
@@ -1939,7 +1950,7 @@ export default function SelettoreProdotto({
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
             {f.gruppi.map((x) => tessera(x.nome, x.nome, `${quanti(x)} prodotti`, primaFoto(x), () => { setGruppoAperto(x.nome); setSottogruppoAperto(null); }))}
             {extraOutdoor && tessera("ANGOLARI IN ALLUMINIO", "ANGOLARI IN ALLUMINIO", "su misura: forma, lati, bello", undefined, () => setGruppoAperto("ANGOLARI IN ALLUMINIO"))}
-            {extraOutdoor && tessera("LEGNI PIALLATI", "LEGNI PIALLATI", "30×50 … 50×170 × 3000", undefined, () => setGruppoAperto("LEGNI PIALLATI"))}
+            {extraOutdoor && tessera("LEGNI PIALLATI", "LEGNI PIALLATI", "su misura o 30×50 … 50×170", undefined, () => setGruppoAperto("LEGNI PIALLATI"))}
           </div>
           {ricambi(f.nome, null)}
         </>

@@ -1255,6 +1255,17 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
       }
     }
   }
+  if (tipo === "LEG") {
+    // legno piallato su misura (Ugo 20/11/2026): costo sullo sviluppo; se la misura è uno dei 26 articoli si collega all'articolo
+    const { leggiLegnoLibero, descrizioneLegno, costoLegno } = await import("@/lib/ordini/legno");
+    const l = leggiLegnoLibero(testo(x.codice));
+    if (!l) return { errore: "Legno: misure non valide." };
+    const art = await prisma.articolo.findUnique({ where: { codice: testo(x.codice)! }, select: { id: true, costoAcquisto: true, fornitoreId: true } });
+    const costo = art?.costoAcquisto ?? costoLegno(l.sezione, l.lunghezza);
+    descrizione = descrizioneLegno(l.sezione, l.lunghezza);
+    fornitoreId = fornitoreId ?? art?.fornitoreId ?? null;
+    Object.assign(dati, { codice: testo(x.codice), um: "pz", articoloId: art?.id, prezzoAcquisto: costo, scontoAcquisto: 0, costoPrevisto: Math.round(costo * q * 100) / 100 });
+  }
   if (!descrizione) return { errore: "Scrivi la descrizione del complemento." };
   const forn = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } }) : null;
   const creata = await prisma.rigaOrdine.create({

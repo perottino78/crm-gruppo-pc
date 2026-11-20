@@ -5,6 +5,7 @@ import type { RisultatoComplemento } from "@/app/api/complementi/route";
 import type { Complemento } from "@/app/commesse-actions";
 import type { AlberoLeggero } from "@/app/api/listino/albero/route";
 import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
+import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 export type MaterialeInLista = Complemento & { etichetta: string };
@@ -107,12 +108,23 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
       )}
       {!scelto && (
         <details className="rounded border border-slate-300 bg-white p-2">
-          <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro) · per i legni piallati cerca «legno piallato»</summary>
+          <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro)</summary>
           <div className="mt-2">
             <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
               const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
               onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
                 etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.nota ? ` · nota: ${extra.nota}` : ""}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
+            }} />
+          </div>
+        </details>
+      )}
+      {!scelto && (
+        <details className="rounded border border-amber-300 bg-white p-2">
+          <summary className="cursor-pointer text-xs font-bold text-amber-950">🪵 Legno piallato su misura (spessore, larghezza, lunghezza libere)</summary>
+          <div className="mt-2">
+            <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
+              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
+              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}${nota ? ` · nota: ${nota}` : ""}` });
             }} />
           </div>
         </details>

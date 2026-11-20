@@ -46,3 +46,20 @@ test("codici degli articoli e andata/ritorno con le righe dell'ordine", () => {
   assert.equal(v.tab_legno_26_lunghezza, "2500");
   assert.equal(v.prezzo_m3, "900");
 });
+
+import { leggiLegnoLibero, costoLegno, venditaLegno } from "../../src/lib/ordini/legno";
+
+test("legno su misura: misure libere nel modulo, codice, prezzi", () => {
+  const l = leggiLegnoLibero("LEGNO-35X75-2400")!;
+  assert.deepEqual(l, { sezione: { spessore: 35, larghezza: 75 }, lunghezza: 2400 });
+  assert.equal(costoLegno(l.sezione, l.lunghezza), 5.67); // 0,0063 m³ × 900
+  assert.equal(venditaLegno(l.sezione, l.lunghezza), 11.34);
+  const v = { tab_legno_1_pezzi: "2", tab_legnol_1_spessore: "35", tab_legnol_1_larghezza: "75", tab_legnol_1_lunghezza: "2400", tab_legnol_1_pezzi: "4" };
+  const righe = righeDaValori(v, 900);
+  assert.deepEqual(righe.map((r) => [r.codice, r.quantita, r.prezzo]), [["LEGNO-30X50-3000", 2, 4.05], ["LEGNO-35X75-2400", 4, 5.67]]);
+  const back = valoriDaRighe(righe.map((r) => ({ codice: r.codice, quantita: r.quantita, prezzoAcquisto: r.prezzo })));
+  assert.equal(back.tab_legnol_1_larghezza, "75");
+  assert.equal(back.tab_legnol_1_pezzi, "4");
+  assert.equal(back.tab_legno_1_pezzi, "2");
+  assert.ok(htmlRiepilogoLegno(v).includes("35 × 75 × 2400"));
+});

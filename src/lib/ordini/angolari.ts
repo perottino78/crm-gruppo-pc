@@ -3,7 +3,7 @@
 // lunghezza e pezzi. Costo a peso come il listino della lattoneria (sviluppo × spessore × 2,7 kg/dm³ × €/kg del colore), vendita × 2.
 // Modulo puro (test in tests/ordini/angolari.test.ts).
 import { COLORI_LATTONERIA, DENSITA_ALLUMINIO, FASCE, RICARICO_LATTONERIA } from "@/lib/listini/lattoneria";
-import { leggiCodiceLegno, sezioneDellaRiga, LUNGHEZZA_STANDARD } from "./legno";
+import { leggiLegnoLibero, LUNGHEZZA_STANDARD } from "./legno";
 
 export type Forma = "L" | "U" | "Z" | "PIATTO" | "PUNTA";
 export const FORME: Record<Forma, { nome: string; lati: ("a" | "b" | "c")[]; facoltativi?: ("a" | "b" | "c")[]; spiega: string }> = {
@@ -93,13 +93,12 @@ export function valoriAngolari(righeOrdine: { codice: string | null; quantita: n
   const salvati = daCodici(righeOrdine).length ? daCodici(righeOrdine) : daCodici(altriLegni);
   if (salvati.length) { salvati.slice(0, RIGHE_ANGOLARI).forEach((x, i) => inValori(v, i + 1, x)); return { valori: v, proposta: false }; }
   const perCodice = new Map<string, number>();
-  for (const r of [...righeOrdine, ...altriLegni]) if (leggiCodiceLegno(r.codice)) perCodice.set(r.codice!, Math.max(perCodice.get(r.codice!) ?? 0, r.quantita));
+  for (const r of [...righeOrdine, ...altriLegni]) if (leggiLegnoLibero(r.codice)) perCodice.set(r.codice!, Math.max(perCodice.get(r.codice!) ?? 0, r.quantita));
   let n = 0;
   for (const [codice, pezzi] of perCodice) {
-    const c = leggiCodiceLegno(codice)!;
-    const s = sezioneDellaRiga(c.riga)!;
+    const c = leggiLegnoLibero(codice)!;
     if (++n > RIGHE_ANGOLARI) break;
-    inValori(v, n, { forma: "L", a: s.spessore, b: s.larghezza, c: 0, spessore: 1.5, bello: "EST", colore: 0, lunghezza: c.lunghezza, pezzi });
+    inValori(v, n, { forma: "L", a: c.sezione.spessore, b: c.sezione.larghezza, c: 0, spessore: 1.5, bello: "EST", colore: 0, lunghezza: c.lunghezza, pezzi, misura: "EST" });
   }
   return { valori: v, proposta: n > 0 };
 }

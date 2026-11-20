@@ -106,6 +106,18 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const rcp = await prisma.rigaOrdine.findFirst({ where: { commessaId: comm.id, codice: { contains: "PUNTA" } } });
   const docP = await prisma.documento.findFirst({ where: { entitaId: comm.id, cartella: "Rilievi misura", nome: { contains: "disegno.pdf" } } });
   verifica(!!rcp && rcp.descrizione.includes("Copertina a punta") && !!rcp.note?.includes("sopra il traverso") && !!rcp.note?.includes("📎") && docP?.mime === "application/pdf", "rilievo: copertina a punta con nota e file del disegno nella cartella «Rilievi misura»", { rcp, docP: docP?.nome });
+  // legno su misura (Ugo 20/11/2026): offerta, rilievo e modulo dell'ordine con misure libere
+  const { aggiungiLegnoPreventivo } = await import("../../src/app/actions");
+  await redir(aggiungiLegnoPreventivo(fd({ preventivoId: comm.preventivoId, codiceLegno: "LEGNO-35X75-2400", quantita: "4", notaLegno: "larice" })));
+  const rl = await prisma.rigaPreventivo.findFirst({ where: { preventivoId: comm.preventivoId, testoLibero: { contains: "35 × 75 × 2400" } } });
+  verifica(rl?.quantita === 4 && rl.prezzoUnitario === 11.34 && !!rl.testoLibero?.includes("larice"), "offerta: legno su misura al prezzo di vendita sullo sviluppo", rl);
+  await redir(aggiungiComplemento(fd({ commessaId: comm.id, tipo: "LEG", codice: "LEGNO-35X75-2400", quantita: "4" })));
+  await redir(aggiungiComplemento(fd({ commessaId: comm.id, tipo: "LEG", codice: "LEGNO-30X50-3000", quantita: "2" })));
+  const rlg = await prisma.rigaOrdine.findMany({ where: { commessaId: comm.id, codice: { in: ["LEGNO-35X75-2400", "LEGNO-30X50-3000"] }, ordineFornitoreId: null } });
+  verifica(rlg.length === 2 && rlg.some((r) => r.codice === "LEGNO-35X75-2400" && r.prezzoAcquisto === 5.67 && !r.articoloId) && rlg.some((r) => r.codice === "LEGNO-30X50-3000" && !!r.articoloId), "rilievo: legno su misura al costo (e collegato all'articolo se è una misura standard)", rlg);
+  const rLib = await redir(A.salvaLegnoInOrdine(fd({ ordineId: ordL.id, modelloId: ml.id, campo_tab_legno_1_pezzi: "2", campo_tab_legnol_1_spessore: "35", campo_tab_legnol_1_larghezza: "75", campo_tab_legnol_1_lunghezza: "2400", campo_tab_legnol_1_pezzi: "4", campo_prezzo_m3: "900" })));
+  const libere = await prisma.rigaOrdine.findMany({ where: { ordineFornitoreId: ordL.id, codice: { startsWith: "LEGNO-" } } });
+  verifica(libere.length === 2 && libere.some((r) => r.codice === "LEGNO-35X75-2400" && r.quantita === 4 && r.prezzoAcquisto === 5.67), "ordine: misure libere salvate nelle righe del legno", { libere, rLib });
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();
