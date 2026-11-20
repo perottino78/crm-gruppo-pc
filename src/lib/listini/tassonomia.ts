@@ -2,6 +2,7 @@
 // dell'offerta: lo usano la pagina dell'offerta e la pratica (materiale da ordinare preso dal listino).
 import { prisma } from "@/lib/prisma";
 import { inMemoriaListino } from "./cache";
+import { articoloLatt } from "./lattoneria";
 import type { FamigliaNodo, NodoTipologia } from "@/components/SelettoreProdotto";
 import { haMisura, sottogruppoDiTipologia, labelBreveTipologia, notaInArrivo, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica } from "@/lib/prodotti";
 
@@ -129,6 +130,8 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
     const tip = t.tipologia;
     // Tapparelle in PVC: tolte (Debora 18/11/2026), restano solo quelle in alluminio
     if (tip === "TAPPARELLE_PVC_PLACEHOLDER") continue;
+    // Angolari della lattoneria: tolti (Ugo 20/11/2026), ora c'è OUTDOOR › «Angolari in alluminio» su misura (forma, lati, bello, misure)
+    if (articoloLatt(tip)?.sottogruppo === "Angolari") continue;
     const m = modelloBrandMap.get(tip);
     const famiglia = m?.famiglia ?? "Altro";
     let gruppo = m?.gruppo ?? "Altro";

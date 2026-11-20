@@ -66,6 +66,8 @@ async function compilaESalva(ordineId: string, modelloId: string, fd: FormData, 
     // scelte multiple: più valori con lo stesso nome, uniti da «|»
     valori[c.nome] = c.tipo === "multi" ? fd.getAll(`campo_${c.nome}`).filter((x): x is string => typeof x === "string").join("|") : typeof fd.get(`campo_${c.nome}`) === "string" ? (fd.get(`campo_${c.nome}`) as string) : "";
   }
+  // colonne nuove dei moduli (es. misure e angolo degli angolari) anche se il modello salvato è di prima
+  for (const [k, x] of fd.entries()) if (typeof x === "string" && k.startsWith("campo_tab_") && !(k.slice(6) in valori)) valori[k.slice(6)] = x;
   const html = compilaScheda(m.html, valori, tabellaRighe(o.righe.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, um: r.um, codice: r.codiceFornitore ?? r.codice, note: r.note }))));
   const contenuto = Buffer.from(html, "utf-8");
   const nome = `Scheda produzione ${numeroOrdine(o).replace("/", "-")} ${o.fornitore.ragioneSociale}.html`.replace(/[^\w.\- ]+/g, "_");

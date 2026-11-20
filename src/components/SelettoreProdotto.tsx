@@ -1,6 +1,8 @@
 "use client";
 
 import RicambiDelGruppo from "@/components/preventivi/RicambiDelGruppo";
+import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
+import { aggiungiAngolarePreventivo } from "@/app/actions";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
 import { lattAlMetro, GUIDA_LATTONERIA } from "@/lib/listini/lattoneria";
@@ -1909,12 +1911,35 @@ export default function SelettoreProdotto({
         </div>
       );
     }
+    // OUTDOOR: «Angolari in alluminio» su misura e «Legni piallati» (Ugo 20/11/2026), fuori dall'albero dei modelli
+    const extraOutdoor = f.nome === "OUTDOOR" && finestra; // solo nell'offerta (nella pratica preventivoId è la commessa)
+    if (extraOutdoor && (gruppoAperto === "ANGOLARI IN ALLUMINIO" || gruppoAperto === "LEGNI PIALLATI")) {
+      return (
+        <>
+          <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-neutral-600">
+            <button type="button" onClick={() => { setFamigliaAperta(null); setGruppoAperto(null); }} className="underline">Tutti i prodotti</button><span>›</span>
+            <button type="button" onClick={() => setGruppoAperto(null)} className="underline">{nomeFamiglia(f.nome)}</button><span>›</span>
+            <span className="font-semibold text-neutral-800">{gruppoAperto}</span>
+          </nav>
+          {gruppoAperto === "ANGOLARI IN ALLUMINIO" ? (
+            <form action={aggiungiAngolarePreventivo} className="rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
+              <p className="mb-2 text-sm font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro): prezzo di vendita a peso</p>
+              <input type="hidden" name="preventivoId" value={preventivoId} />
+              {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
+              <ConfiguraAngolare prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
+            </form>
+          ) : ricambi(f.nome, "LEGNI PIALLATI")}
+        </>
+      );
+    }
     if (!g) {
       return (
         <>
           {briciole}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
             {f.gruppi.map((x) => tessera(x.nome, x.nome, `${quanti(x)} prodotti`, primaFoto(x), () => { setGruppoAperto(x.nome); setSottogruppoAperto(null); }))}
+            {extraOutdoor && tessera("ANGOLARI IN ALLUMINIO", "ANGOLARI IN ALLUMINIO", "su misura: forma, lati, bello", undefined, () => setGruppoAperto("ANGOLARI IN ALLUMINIO"))}
+            {extraOutdoor && tessera("LEGNI PIALLATI", "LEGNI PIALLATI", "30×50 … 50×170 × 3000", undefined, () => setGruppoAperto("LEGNI PIALLATI"))}
           </div>
           {ricambi(f.nome, null)}
         </>
