@@ -768,6 +768,8 @@ login nel `matcher` del middleware.
 
 - **Categorie articoli = listino delle offerte** (richiesta di Ugo 19/11/2026): `assicuraCategorieListino` (`src/lib/articoli/server.ts`, chiamata aprendo Categorie e la scheda articolo) crea una categoria madre per ogni famiglia (INDOOR, OUTDOOR…) e una sottocategoria per ogni gruppo (PERGOLE, VETRATE…) già collegate al listino; solo quelle mancanti, mai rinomina le tue, si riallinea solo se il listino cambia (`categorie_listino_firma`).
 
+- **Schede tecniche Scintilla e Brillante** (richiesta di Ugo 20/11/2026, vetrate panoramiche): PDF e pagine JPG in `public/cataloghi/scintilla/` (8 pagine) e `public/cataloghi/brillante/` (12), voci in `SCHEDE` da `src/lib/listini/schede-vetrate.ts` (prefissi `VETRATA_SCINTILLA` e `VETRATA_BRILLANTE`, descrizione breve per il cliente). Dai PDF del fornitore sono stati tolti nome del sistema e dell'azienda produttrice, Spagna, QR, social, loghi e certificati con la sua ragione sociale; il sistema si chiama col nome P&C (carattere Montserrat) e l'azzurro è diventato l'arancio del logo P&C (233,123,54). Ripetibile con `python3 -I scripts/listini/pulisci_schede_vetrate.py <scintilla.pdf> <brillante.pdf> <uscita> <cartella-font reg/semi/bold.ttf>` (serve `pip install pymupdf`; font Montserrat da Google Fonts). Test `tests/listini/schede-vetrate.test.ts`.
+
 ## Procedura fissa: scheda tecnica di un prodotto (decisa da Ugo, nov 2026)
 Ogni volta che Ugo carica la scheda tecnica (PDF) di un prodotto/listino si fa SEMPRE tutto questo, come per l'Optima 70:
 1. **Dati aziendali**: nel PDF tutti i dati diversi da quelli di P&C vanno tolti o corretti con quelli veri (`CEDENTE` in
