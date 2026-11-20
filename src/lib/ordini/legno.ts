@@ -85,3 +85,40 @@ export const MODELLO_LEGNO = `<!doctype html>
 <p style="margin-top:20px">P&amp;C S.r.l. — Corso Moncenisio 28, Rosta (TO) — info@gruppopec.com — 011 19887497</p>
 </body></html>
 `;
+
+// ── Collegamento con gli articoli e le righe dell'ordine (richiesta di Ugo 20/11/2026) ──
+// Ogni sezione è un articolo «LEGNO-30X50-3000» (Articoli › Complementi vetrate › Legni piallati); nell'ordine le righe con questi codici
+// riempiono il modulo, e «Salva il legno nell'ordine» le riscrive dal modulo con il prezzo a barra.
+
+export const PREFISSO_LEGNO = "LEGNO-";
+export const codiceLegno = (s: SezioneLegno, lunghezza = LUNGHEZZA_STANDARD) => `${PREFISSO_LEGNO}${s.spessore}X${s.larghezza}-${lunghezza}`;
+export const descrizioneLegno = (s: SezioneLegno, lunghezza = LUNGHEZZA_STANDARD) => `Legno piallato ${s.spessore} × ${s.larghezza} × ${lunghezza} mm`;
+
+/** Riga del modulo e lunghezza da un codice «LEGNO-30X50-3000» (null se non è un legno del modulo). */
+export function leggiCodiceLegno(codice: string | null | undefined): { riga: number; lunghezza: number } | null {
+  const m = /^LEGNO-(\d+)X(\d+)-(\d+)$/i.exec((codice ?? "").trim());
+  if (!m) return null;
+  const i = SEZIONI_LEGNO.findIndex((s) => s.spessore === Number(m[1]) && s.larghezza === Number(m[2]));
+  return i < 0 ? null : { riga: i + 1, lunghezza: Number(m[3]) };
+}
+
+/** Valori del modulo dalle righe dell'ordine: pezzi sommati per sezione, lunghezza dalla prima riga, prezzo al m³ ricavato dal prezzo a barra. */
+export function valoriDaRighe(righe: { codice: string | null; quantita: number; prezzoAcquisto?: number | null }[]): Record<string, string> {
+  const v: Record<string, string> = {};
+  for (const r of righe) {
+    const c = leggiCodiceLegno(r.codice);
+    if (!c) continue;
+    const k = `tab_legno_${c.riga}_pezzi`;
+    v[k] = String((Number(v[k]) || 0) + r.quantita);
+    v[`tab_legno_${c.riga}_lunghezza`] ??= String(c.lunghezza);
+    if (!v.prezzo_m3 && r.prezzoAcquisto) v.prezzo_m3 = String(Math.round(r.prezzoAcquisto / volumeBarra(SEZIONI_LEGNO[c.riga - 1], c.lunghezza)));
+  }
+  return v;
+}
+
+/** Righe d'ordine da scrivere dal modulo: una per sezione con pezzi, prezzo a barra sullo sviluppo. */
+export function righeDaValori(valori: Record<string, string>, prezzoM3: number) {
+  return riepilogoLegno(valori, prezzoM3).righe.map((x) => ({
+    codice: codiceLegno(x.sezione, x.lunghezza), descrizione: descrizioneLegno(x.sezione, x.lunghezza), quantita: x.pezzi, prezzo: x.prezzoBarra ?? 0,
+  }));
+}
