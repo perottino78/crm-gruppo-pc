@@ -116,7 +116,7 @@ async function main() {
   const d6 = await dove(C.caricaRilievo(fd({ rilievoId: ril2.id, misure: "Bagno L 600 × H 800", foto: JSON.stringify([{ nome: "bagno.jpg", dataUri: foto }, { nome: "rilievo bagno.pdf", dataUri: pdf }]),
     complementi: JSON.stringify([{ tipo: "T", descrizione: "Guarnizione", quantita: "3", fornitoreId: fidra.id }, { tipo: "P", brandId: brand.id, tipologia: "NON_ESISTE", colore: "X", descrizione: "Prodotto sbagliato" }]) })));
   verifica(await prisma.rigaOrdine.count({ where: { commessaId: c.id, descrizione: "Guarnizione", complemento: true, fornitoreId: fidra.id, quantita: 3 } }) === 1, "il materiale della lista è salvato con il rilievo");
-  verifica(d6?.includes("fatto=") && d6.includes("1 materiali aggiunti") && d6.includes("avvisoRilievo=") && d6.includes("Prodotto sbagliato") && d6.endsWith("#rilievo"), "messaggio di conferma e avviso per quello non aggiunto", d6);
+  verifica(d6?.includes("fatto=") && d6.includes("1 materiali aggiunti") && d6.includes("avvisoRilievo=") && d6.includes("Prodotto sbagliato") && d6.includes("salvato=1"), "messaggio di conferma e avviso per quello non aggiunto", d6);
 
   console.log("7. Nell'invio si sceglie quale file del rilievo allegare");
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [(await prisma.rigaOrdine.findFirstOrThrow({ where: { descrizione: "Guarnizione" } })).id] })));

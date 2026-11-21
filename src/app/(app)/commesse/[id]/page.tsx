@@ -251,7 +251,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </div>
           </div>
         )}
-        <CaricaRilievo brandId={c.brandId} rilievoId={rilievoAperto.id} misure={rilievoAperto.misure ?? ""} eseguito={rilievoAperto.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} verbale={verbaleIniziale} />
+        <CaricaRilievo brandId={c.brandId} rilievoId={rilievoAperto.id} misure={rilievoAperto.misure ?? ""} eseguito={rilievoAperto.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} verbale={verbaleIniziale} salvato={salvato === "1"} />
         {moduloFornitoreJsx && (
           <details open={!!(scheda || okScheda || erroreScheda || salvato === "1")} className="rounded-lg border border-neutral-200 bg-white p-2">
             <summary className="cursor-pointer text-sm font-bold text-purple-900">📐 Modulo del fornitore (facoltativo: legno, angolari, pergole, vetrate…)</summary>

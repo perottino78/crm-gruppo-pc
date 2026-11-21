@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { caricaRilievo } from "@/app/commesse-actions";
 import FotoRilievo from "@/components/FotoRilievo";
 import ScegliMateriale, { etichettaMateriale, type MaterialeInLista } from "./ScegliMateriale";
@@ -13,12 +13,37 @@ const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
  * Modulo unico del rilievo, come «carica rilievo» di BConsole: misure, foto e PDF, il materiale dell'offerta
  * (quello del commerciale) e il materiale mancante da aggiungere. Un solo «Salva» registra tutto.
  */
-export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOfferta, fornitori, brandId, verbale }: {
-  verbale: Verbale; brandId?: string; rilievoId: string; misure: string; eseguito: boolean;
+export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOfferta, fornitori, brandId, verbale, salvato = false }: {
+  salvato?: boolean; verbale: Verbale; brandId?: string; rilievoId: string; misure: string; eseguito: boolean;
   materialeOfferta: { descrizione: string; quantita: number; complemento: boolean; fornitore: string | null }[];
   fornitori: { id: string; ragioneSociale: string }[];
 }) {
   const [lista, setLista] = useState<MaterialeInLista[]>([]);
+  // bozza nel browser (Ugo 21/11/2026: «caricati due pezzi e non me li tiene in memoria»): quello che si scrive resta anche se la pagina
+  // si ricarica (modulo del fornitore, torna indietro, scheda chiusa) finché il rilievo non è salvato
+  const chiaveBozza = `rilievo-bozza-${rilievoId}`;
+  const [misureTesto, setMisureTesto] = useState(misure);
+  const [bozzaPronta, setBozzaPronta] = useState(false);
+  const [bozzaRipristinata, setBozzaRipristinata] = useState(false);
+  useEffect(() => {
+    try {
+      if (salvato) { localStorage.removeItem(chiaveBozza); localStorage.removeItem(`${chiaveBozza}-verbale`); }
+      else {
+        const raw = localStorage.getItem(chiaveBozza);
+        if (raw) {
+          const b = JSON.parse(raw) as { lista?: MaterialeInLista[]; misure?: string };
+          if (Array.isArray(b.lista) && b.lista.length) { setLista(b.lista); setBozzaRipristinata(true); }
+          if (typeof b.misure === "string" && b.misure.trim() && b.misure !== misure) { setMisureTesto(b.misure); setBozzaRipristinata(true); }
+        }
+      }
+    } catch { /* senza memoria del browser si lavora come prima */ }
+    setBozzaPronta(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (!bozzaPronta) return;
+    try { localStorage.setItem(chiaveBozza, JSON.stringify({ lista: lista.map(({ allegato: _a, ...x }) => x), misure: misureTesto })); } catch { /* pieno o bloccato */ }
+  }, [lista, misureTesto, bozzaPronta, chiaveBozza]);
   // riga in modifica (indice) e valori che si stanno scrivendo
   const [inModifica, setInModifica] = useState<number | null>(null);
   const [bozza, setBozza] = useState<{ quantita: string; fornitoreId: string; note: string; descrizione: string }>({ quantita: "1", fornitoreId: "", note: "", descrizione: "" });
@@ -57,6 +82,8 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
     <form action={caricaRilievo} className="mt-2 space-y-3">
       <input type="hidden" name="rilievoId" value={rilievoId} />
       <input type="hidden" name="complementi" value={JSON.stringify(lista.map(({ etichetta: _e, base: _b, fornDefault: _f, fuori: _u, ...x }) => x))} />
+
+      {bozzaRipristinata && <p className="rounded border border-sky-300 bg-sky-50 px-3 py-1.5 text-xs text-sky-900">💾 Ho ripristinato quello che avevi già scritto (materiale, verbale, misure): non è ancora salvato, si salva con «Salva il rilievo».</p>}
 
       {/* passi: si vede solo quello che serve in quel momento */}
       <ol className="flex flex-wrap gap-1.5" aria-label="Passi del rilievo">
@@ -121,15 +148,16 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
       <section className={pannello(2)}>
         <h3 className="mb-1 text-base font-bold text-neutral-900">📋 Verbale di sopralluogo</h3>
         <p className="mb-2 text-xs text-neutral-600">Apri una sezione, spunta quello che vedi e chiudila. È il verbale che serve per il piano di lavorazione e la posa; si stampa insieme al rilievo.</p>
-        <VerbaleCompilazione iniziale={verbale} />
+        <VerbaleCompilazione iniziale={verbale} chiaveBozza={`${chiaveBozza}-verbale`} salvato={salvato} />
       </section>
 
       <section className={pannello(3)}>
         <h3 className="mb-1 text-base font-bold text-neutral-900">📏 Misure, rilievo cartaceo e foto</h3>
         <label className="block text-xs font-bold text-neutral-800 mb-1">Misure e note di cantiere</label>
-        <textarea name="misure" rows={7} defaultValue={misure} placeholder={"Misure per ogni apertura/elemento, es.\nSoggiorno – finestra 2 ante: L 1200 × H 1400 …"} className={`${inp} w-full`} />
+        <textarea name="misure" rows={7} value={misureTesto} onChange={(e) => setMisureTesto(e.target.value)} placeholder={"Misure per ogni apertura/elemento, es.\nSoggiorno – finestra 2 ante: L 1200 × H 1400 …"} className={`${inp} w-full`} />
         <p className="text-xs font-bold text-neutral-800 mt-3 mb-1">Rilievo cartaceo (PDF) e foto</p>
         <FotoRilievo name="foto" pdf />
+        <p className="mt-1 text-[11px] text-neutral-600">I file caricati qui vanno anche nelle cartelle della pratica: i PDF in «Rilievi misura», le foto in «Foto rilievi».</p>
       </section>
 
       <section className={pannello(4)}>
