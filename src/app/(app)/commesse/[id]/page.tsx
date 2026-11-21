@@ -71,6 +71,7 @@ import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commes
 import TaskCard from "@/components/TaskCard";
 import { creaTaskManuale, avviaFlussoCommessa, salvaCostoTask } from "@/app/flusso-actions";
 import CostoLavoroTask from "@/components/commesse/CostoLavoroTask";
+import { puoVedereReportEconomico } from "@/lib/commesse/report-economico";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
 import KitCliente from "@/components/commesse/KitCliente";
@@ -280,7 +281,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             {c.cliente.nome}
           </Link>
         </h1>
-        <span className={`text-xs font-bold px-3 py-1 rounded ${stato.cls}`}>{stato.label}</span>
+        <span className="flex flex-wrap items-center gap-2">
+          {puoVedereReportEconomico(utente) && <Link href={`/commesse/${c.id}/report`} className="btn-3d btn-3d-teal px-4 py-2 text-sm" title="Venduto, costi e margine di questo progetto">📊 Report economico</Link>}
+          <span className={`text-xs font-bold px-3 py-1 rounded ${stato.cls}`}>{stato.label}</span>
+        </span>
       </div>
       <div className="mb-3 -mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-700">
         <span>📁 Progetto <b>{c.brand.nome}</b>{c.preventivo.oggetto ? ` · ${c.preventivo.oggetto}` : ""} · <Link href={`/preventivi/${c.preventivoId}`} className="text-blue-800 underline">offerta {c.preventivo.numeroOfferta ?? ""}</Link></span>
@@ -348,7 +352,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           registraFattura={registraFatturaAcconto} creaProgetto={creaProgetto} registraBenvenuto={registraBenvenuto} ok={pok} avviso={pav}
         />
       )}
-      {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
+      {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} reportHref={puoVedereReportEconomico(utente) ? `/commesse/${c.id}/report` : null} />}
 
       {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
       {(() => {

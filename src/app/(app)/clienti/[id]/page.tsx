@@ -13,6 +13,7 @@ import { creaAttivita, completaAttivita, creaPreventivo } from "@/app/actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
+import { puoVedereReportEconomico } from "@/lib/commesse/report-economico";
 import { scopeClienteWhere } from "@/lib/scope";
 import SchedaClienteTabs from "@/components/SchedaClienteTabs";
 import PraticaCard from "@/components/clienti/PraticaCard";
@@ -52,6 +53,7 @@ export default async function SchedaClientePage({
   const { id } = await params;
   const sp = await searchParams;
   const utenteCorrente = await getCurrentUser();
+  const vedeReport = puoVedereReportEconomico(utenteCorrente);
   const utentiCal = await prisma.utente.findMany({ where: { stato: "ATTIVO" }, select: { id: true, nome: true }, orderBy: { nome: "asc" } });
   if (!utenteCorrente) notFound();
 
@@ -314,7 +316,7 @@ export default async function SchedaClientePage({
             <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
               <table className="w-full text-sm">
                 <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200">
-                  <th className="px-3 py-2">N. progetto</th><th>Data</th><th>Descrizione</th><th>Tipologia</th><th>Consegna</th><th className="text-right pr-3">Ordini forn.</th><th className="text-right pr-3">Totale</th><th>Stato</th>
+                  <th className="px-3 py-2">N. progetto</th><th>Data</th><th>Descrizione</th><th>Tipologia</th><th>Consegna</th><th className="text-right pr-3">Ordini forn.</th><th className="text-right pr-3">Totale</th><th>Stato</th>{vedeReport && <th className="pr-3 text-right">Costi</th>}
                 </tr></thead>
                 <tbody>
                   {progetti.map((p) => {
@@ -330,6 +332,7 @@ export default async function SchedaClientePage({
                         <td className="py-1.5 text-right pr-3">{p._count.ordiniFornitore}</td>
                         <td className="py-1.5 text-right pr-3">{eur(p.totaleVendita)}</td>
                         <td className="py-1.5"><span className={`text-[11px] font-bold px-2 py-0.5 rounded ${st.cls}`}>{st.label}</span></td>
+                        {vedeReport && <td className="py-1.5 pr-3 text-right"><Link href={`/commesse/${p.id}/report`} className="btn-3d btn-3d-teal px-2.5 py-1 text-[11px]" title="Venduto, costi e margine">📊 Report economico</Link></td>}
                       </tr>
                     );
                   })}
@@ -343,10 +346,11 @@ export default async function SchedaClientePage({
                       <td className="py-1.5 text-right pr-3 text-neutral-400">—</td>
                       <td className="py-1.5 text-right pr-3">{pr.totaleOfferto ? eur(pr.totaleOfferto) : "—"}</td>
                       <td className="py-1.5"><span className="text-[11px] font-bold px-2 py-0.5 rounded bg-stone-100 text-stone-800">{pr.stato ?? "—"}</span></td>
+                      {vedeReport && <td />}
                     </tr>
                   ))}
                   {progetti.length + storico.progetti.length === 0 && (
-                    <tr><td colSpan={8} className="px-3 py-6 text-center text-neutral-500">Nessun progetto: nasce quando si conferma un&apos;offerta.</td></tr>
+                    <tr><td colSpan={vedeReport ? 9 : 8} className="px-3 py-6 text-center text-neutral-500">Nessun progetto: nasce quando si conferma un&apos;offerta.</td></tr>
                   )}
                 </tbody>
               </table>
