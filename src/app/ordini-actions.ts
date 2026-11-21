@@ -128,7 +128,7 @@ export async function creaOrdineDaRighe(fd: FormData) {
   }
   const ordine = await nuovoOrdineConRighe(u.nome, commessaId, fornitoreId, righe.map((r) => r.id));
   if (!ordine) torna("Ordine non creato.");
-  redirect(`/ordini-fornitori/${ordine!.id}#invia`);
+  redirect(`/ordini-fornitori/${ordine!.id}?passo=righe`);
 }
 
 /** Ordine senza commessa (materiale a scorta, consumabili). */

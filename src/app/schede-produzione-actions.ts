@@ -55,7 +55,7 @@ export async function creaSchedaProduzione(fd: FormData) {
   const ok = await compilaESalva(ordineId, modelloId, fd, u.nome, false);
   if (!ok) return;
   revalidatePath(`/ordini-fornitori/${ordineId}`);
-  redirect(`/ordini-fornitori/${ordineId}?ok=${encodeURIComponent("Scheda di produzione creata: la trovi tra i documenti da allegare all'invio dell'ordine (cartella «Schede produzione»).")}#scheda-produzione`);
+  redirect(`/ordini-fornitori/${ordineId}?passo=modulo&ok=${encodeURIComponent("Scheda di produzione creata: la trovi tra i documenti da allegare all'invio dell'ordine (cartella «Schede produzione»).")}#scheda-produzione`);
 }
 
 async function compilaESalva(ordineId: string, modelloId: string, fd: FormData, chi: string, sostituisci: boolean) {
