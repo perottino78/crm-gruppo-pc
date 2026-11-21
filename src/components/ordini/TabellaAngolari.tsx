@@ -8,7 +8,7 @@ import { BELLO, FORME, MISURA, LEGENDA_SVG, RIGHE_ANGOLARI, SPESSORI, angolareDe
 
 const n2 = (n: number, d = 2) => n.toLocaleString("it-IT", { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: "always" as unknown as boolean });
 
-export default function TabellaAngolari({ iniziali, proposta, salva, modificabile = true }: { iniziali: Record<string, string>; proposta: boolean; salva?: (fd: FormData) => Promise<void>; modificabile?: boolean }) {
+export default function TabellaAngolari({ iniziali, proposta, salva, modificabile = true, dove = "nell'ordine" }: { iniziali: Record<string, string>; proposta: boolean; salva?: (fd: FormData) => Promise<void>; modificabile?: boolean; dove?: string }) {
   const [v, setV] = useState<Record<string, string>>(iniziali);
   const set = (k: string, x: string) => setV((o) => ({ ...o, [k]: x }));
   const g = (n: number, c: string, d = "") => v[`tab_ang_${n}_${c}`] ?? d;
@@ -61,7 +61,7 @@ export default function TabellaAngolari({ iniziali, proposta, salva, modificabil
       <p className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-xs"><b>{r.pezzi}</b> pezzi · <b>{n2(r.kg)}</b> kg · costo Il Mastro <b>{n2(r.costo)} €</b> · vendita <b>{n2(r.vendita)} €</b> <span className="text-neutral-600">(a peso: standard 14 €/kg, RAL 16, bronzo e fuori standard 18; vendita ×2. Nella scheda per il fornitore vanno forme, lati e kg, senza prezzi.)</span></p>
       {salva && modificabile && (
         <div className="flex flex-wrap items-center gap-3">
-          <button formAction={salva} className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva gli angolari nell&apos;ordine</button>
+          <button formAction={salva} className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva gli angolari {dove}</button>
           <span className="text-[11px] text-neutral-600">Una riga per angolare con il costo di Il Mastro a barra; la scheda da allegare si aggiorna.</span>
         </div>
       )}

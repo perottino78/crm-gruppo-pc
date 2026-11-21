@@ -149,3 +149,106 @@ export async function salvaAngolariInOrdine(fd: FormData) {
     ? `Angolari salvati nell'ordine: ${nuove.length} righe, ${nuove.reduce((t, r) => t + r.quantita, 0)} pezzi, costo ${totale.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €${modelloId ? "; scheda per il fornitore aggiornata" : ""}.`
     : "Nessun angolare nel modulo: le righe degli angolari sono state tolte dall'ordine." }));
 }
+
+// ============ DAL «CARICA RILIEVO» DELLA PRATICA (Ugo 20/11/2026) ============
+// Il modulo del fornitore si compila al rilievo, senza aspettare l'ordine: la scheda va nei documenti della pratica («Schede produzione»)
+// e all'invio dell'ordine a quel fornitore è già lì, spuntata. Legno e angolari diventano materiale della pratica (complementi con costo).
+
+async function compilaPerPratica(commessaId: string, modelloId: string, fd: FormData, chi: string) {
+  const [c, m] = await Promise.all([
+    prisma.commessa.findUnique({ where: { id: commessaId }, include: { cliente: true } }),
+    prisma.schedaProduzioneModello.findUnique({ where: { id: modelloId }, include: { fornitore: { select: { id: true, ragioneSociale: true } } } }),
+  ]);
+  if (!c || !m) return null;
+  const [rilievi, righe] = await Promise.all([
+    prisma.rilievo.findMany({ where: { commessaId, misure: { not: null } }, orderBy: { dataOra: "asc" }, select: { misure: true } }),
+    prisma.rigaOrdine.findMany({ where: { commessaId, ordineFornitoreId: null, ...(m.fornitoreId ? { OR: [{ fornitoreId: m.fornitoreId }, { fornitoreId: null }] } : {}) }, orderBy: { createdAt: "asc" } }),
+  ]);
+  const it = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
+  const valori: Record<string, string> = {
+    ordine: "da emettere", data: it(new Date()), fornitore: m.fornitore?.ragioneSociale ?? "", cliente: c.cliente.nome, commessa: `${c.numero}/${c.anno}`,
+    indirizzo: "", consegna: c.consegnaPrevista ? it(c.consegnaPrevista) : "", misure_rilievo: rilievi.map((r) => r.misure).join("\n\n"),
+  };
+  for (const x of descriviCampi(m.html)) {
+    valori[x.nome] = x.tipo === "multi" ? fd.getAll(`campo_${x.nome}`).filter((v): v is string => typeof v === "string").join("|") : typeof fd.get(`campo_${x.nome}`) === "string" ? (fd.get(`campo_${x.nome}`) as string) : "";
+  }
+  for (const [k, x] of fd.entries()) if (typeof x === "string" && k.startsWith("campo_tab_") && !(k.slice(6) in valori)) valori[k.slice(6)] = x;
+  const html = compilaScheda(m.html, valori, tabellaRighe(righe.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, um: r.um, codice: r.codiceFornitore ?? r.codice, note: r.note }))));
+  const contenuto = Buffer.from(html, "utf-8");
+  const nome = `Scheda produzione ${m.nome}${m.fornitore ? ` - ${m.fornitore.ragioneSociale}` : ""} - ${c.numero}-${c.anno}.html`.replace(/[^\w.\- ]+/g, "_");
+  const dove = { entita: "COMMESSA", entitaId: commessaId, cartella: "Schede produzione" };
+  await prisma.documento.deleteMany({ where: { ...dove, nome } });
+  await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi } });
+  return { nome, fornitoreId: m.fornitoreId, fornitoreNome: m.fornitore?.ragioneSociale ?? null };
+}
+
+const tornaRilievo = (commessaId: string, modelloId: string | null, p: Record<string, string>) =>
+  `/commesse/${commessaId}?${new URLSearchParams({ passo: "RILIEVO", ...(modelloId ? { scheda: modelloId } : {}), ...p })}#modulo-fornitore`;
+
+async function logPratica(commessaId: string, testo: string, chi: string) {
+  await prisma.commessaEvento.create({ data: { commessaId, testo, utenteNome: chi } }).catch(() => undefined);
+}
+
+/** «📄 Salva il modulo» dal rilievo: compila la scheda con le misure scritte e la tiene nei documenti della pratica. */
+export async function creaSchedaDaRilievo(fd: FormData) {
+  const u = await addetto();
+  const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  if (!commessaId || !modelloId) return;
+  const r = await compilaPerPratica(commessaId, modelloId, fd, u.nome);
+  if (!r) redirect(tornaRilievo(commessaId, modelloId, { erroreScheda: "Modulo non trovato." }));
+  await logPratica(commessaId, `Modulo del fornitore compilato al rilievo («${r.nome}»): sarà allegato all'ordine.`, u.nome);
+  revalidatePath(`/commesse/${commessaId}`);
+  redirect(tornaRilievo(commessaId, modelloId, { okScheda: "Modulo salvato: resta tra i documenti della pratica («Schede produzione») e all'invio dell'ordine è già pronto da allegare." }));
+}
+
+/** «💾 Salva il legno nella pratica»: le righe LEGNO-… del materiale non ancora ordinato si riscrivono dal modulo (costo a barra) e la scheda si aggiorna. */
+export async function salvaLegnoInPratica(fd: FormData) {
+  const u = await addetto();
+  const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  if (!commessaId) return;
+  const valori: Record<string, string> = {};
+  for (const [k, v] of fd.entries()) if (typeof v === "string" && k.startsWith("campo_")) valori[k.slice(6)] = v;
+  const prezzoM3 = Number((valori.prezzo_m3 ?? "").replace(",", ".")) || PREZZO_M3_INDICATIVO;
+  const nuove = righeDaValori(valori, prezzoM3);
+  const m = modelloId ? await prisma.schedaProduzioneModello.findUnique({ where: { id: modelloId }, select: { fornitoreId: true, fornitore: { select: { ragioneSociale: true } } } }) : null;
+  const articoli = await prisma.articolo.findMany({ where: { codice: { in: nuove.map((r) => r.codice) } }, select: { id: true, codice: true, fornitoreId: true } });
+  const art = new Map(articoli.map((a) => [a.codice, a]));
+  const fornitori = await prisma.soggetto.findMany({ where: { id: { in: [...new Set([m?.fornitoreId, ...articoli.map((a) => a.fornitoreId)].filter(Boolean) as string[])] } }, select: { id: true, ragioneSociale: true } });
+  const nomeForn = new Map(fornitori.map((f) => [f.id, f.ragioneSociale]));
+  await prisma.$transaction([
+    prisma.rigaOrdine.deleteMany({ where: { commessaId, ordineFornitoreId: null, complemento: true, codice: { startsWith: PREFISSO_LEGNO }, arrivato: false, quantitaArrivata: 0 } }),
+    prisma.rigaOrdine.createMany({
+      data: nuove.map((r) => {
+        const a = art.get(r.codice), fid = m?.fornitoreId ?? a?.fornitoreId ?? null;
+        return { commessaId, descrizione: r.descrizione, quantita: r.quantita, um: "pz", codice: r.codice, prezzoAcquisto: r.prezzo, scontoAcquisto: 0, costoPrevisto: Math.round(r.prezzo * r.quantita * 100) / 100, articoloId: a?.id ?? null, complemento: true, fornitoreId: fid, fornitoreNome: fid ? nomeForn.get(fid) ?? null : null };
+      }),
+    }),
+  ]);
+  if (modelloId) await compilaPerPratica(commessaId, modelloId, fd, u.nome);
+  const pezzi = nuove.reduce((t, r) => t + r.quantita, 0);
+  await logPratica(commessaId, nuove.length ? `Legno aggiunto al materiale dal modulo del rilievo: ${nuove.length} righe, ${pezzi} pezzi.` : "Legno tolto dal materiale (modulo del rilievo vuoto).", u.nome);
+  revalidatePath(`/commesse/${commessaId}`);
+  redirect(tornaRilievo(commessaId, modelloId, { okScheda: nuove.length ? `Legno nel materiale della pratica: ${nuove.length} righe, ${pezzi} pezzi (costo previsto calcolato). Lo trovi in «Materiale e ordini».` : "Nessun pezzo nel modulo: legno tolto dal materiale." }));
+}
+
+/** «💾 Salva gli angolari nella pratica»: come il legno, con il costo a peso di Il Mastro. */
+export async function salvaAngolariInPratica(fd: FormData) {
+  const u = await addetto();
+  const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  if (!commessaId) return;
+  const valori: Record<string, string> = {};
+  for (const [k, v] of fd.entries()) if (typeof v === "string" && k.startsWith("campo_")) valori[k.slice(6)] = v;
+  const nuove = righeDaAngolari(valori);
+  const mastro = await prisma.soggetto.findFirst({ where: { ragioneSociale: { contains: "mastro", mode: "insensitive" }, ruoli: { has: "FORNITORE" } }, select: { id: true, ragioneSociale: true } });
+  await prisma.$transaction([
+    prisma.rigaOrdine.deleteMany({ where: { commessaId, ordineFornitoreId: null, complemento: true, codice: { startsWith: PREFISSO_ANGOLARI }, arrivato: false, quantitaArrivata: 0 } }),
+    prisma.rigaOrdine.createMany({
+      data: nuove.map((r) => ({ commessaId, descrizione: r.descrizione, quantita: r.quantita, um: "pz", codice: r.codice, prezzoAcquisto: r.prezzo, scontoAcquisto: 0, costoPrevisto: Math.round(r.prezzo * r.quantita * 100) / 100, complemento: true, fornitoreId: mastro?.id ?? null, fornitoreNome: mastro?.ragioneSociale ?? null })),
+    }),
+  ]);
+  if (modelloId) await compilaPerPratica(commessaId, modelloId, fd, u.nome);
+  const pezzi = nuove.reduce((t, r) => t + r.quantita, 0);
+  await logPratica(commessaId, nuove.length ? `Angolari aggiunti al materiale dal modulo del rilievo: ${nuove.length} righe, ${pezzi} pezzi.` : "Angolari tolti dal materiale (modulo del rilievo vuoto).", u.nome);
+  revalidatePath(`/commesse/${commessaId}`);
+  redirect(tornaRilievo(commessaId, modelloId, { okScheda: nuove.length ? `Angolari nel materiale della pratica: ${nuove.length} righe, ${pezzi} pezzi (fornitore Il Mastro). Lo trovi in «Materiale e ordini».` : "Nessun angolare nel modulo: tolti dal materiale." }));
+}

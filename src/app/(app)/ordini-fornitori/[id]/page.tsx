@@ -16,13 +16,10 @@ import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
-import TabellaLegno from "@/components/ordini/TabellaLegno";
+import ModuloScheda from "@/components/ordini/ModuloScheda";
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
-import { valoriDaRighe } from "@/lib/ordini/legno";
 import { salvaLegnoInOrdine, salvaAngolariInOrdine } from "@/app/schede-produzione-actions";
-import TabellaAngolari from "@/components/ordini/TabellaAngolari";
 import { valoriAngolari } from "@/lib/ordini/angolari";
-import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
@@ -196,59 +193,9 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                 <Link href="/ordini-fornitori/schede" className="text-xs underline text-blue-800">gestisci i modelli</Link>
               </form>
               {modelloScelto && (
-                <form action={creaSchedaProduzione} className="space-y-2">
-                  <input type="hidden" name="ordineId" value={o.id} />
-                  <input type="hidden" name="modelloId" value={modelloScelto.id} />
-                  {(() => {
-                    const descritti = descriviCampi(modelloScelto.html);
-                    const { singoli, tabelle } = raggruppaCampi(descritti.map((d) => d.nome));
-                    const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
-                    return (
-                      <>
-                        {tabelle.map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
-                          <div key={t.gruppo} className="overflow-x-auto">
-                            <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
-                            <table className="text-xs border-collapse">
-                              <thead><tr><th className="p-1" />{t.colonne.map((c) => <th key={c} className="border border-neutral-300 bg-neutral-50 px-1.5 py-0.5 font-semibold">{nomeCampo(c)}</th>)}</tr></thead>
-                              <tbody>
-                                {t.righe.map((r) => (
-                                  <tr key={r}>
-                                    <td className="px-1.5 font-semibold text-neutral-500">{r}</td>
-                                    {t.colonne.map((c) => <td key={c} className="border border-neutral-300 p-0"><input name={`campo_tab_${t.gruppo}_${r}_${c}`} className="w-20 px-1 py-1 text-xs" aria-label={`${nomeCampo(t.gruppo)} ${r} ${c}`} /></td>)}
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        ))}
-                        {singoli.filter((c) => !(c === "prezzo_m3" && tabelle.some((t) => t.gruppo === "legno"))).map((c) => {
-                          const d = tipoDi.get(c);
-                          if (d && d.tipo !== "testo") {
-                            return (
-                              <fieldset key={c} className="rounded border border-neutral-200 px-2 py-1">
-                                <legend className="text-xs font-semibold px-1">{nomeCampo(c)}</legend>
-                                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                                  {d.opzioni.map((o) => (
-                                    <label key={o} className="text-xs flex items-center gap-1 font-normal">
-                                      <input type={d.tipo === "scelta" ? "radio" : "checkbox"} name={`campo_${c}`} value={o} /> {o}
-                                    </label>
-                                  ))}
-                                </div>
-                              </fieldset>
-                            );
-                          }
-                          return (
-                            <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
-                              <textarea name={`campo_${c}`} rows={c.includes("misure") || c.includes("note") ? 4 : 1} className={`${inp} w-full`} placeholder={c.includes("misure_definitive") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
-                            </label>
-                          );
-                        })}
-                      </>
-                    );
-                  })()}
-                  <button className="btn-3d btn-3d-blue text-sm px-4 py-2">📄 Crea la scheda</button>
-                  <p className="text-[11px] text-neutral-500">Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all&apos;invio dell&apos;ordine.</p>
-                </form>
+                <ModuloScheda azione={creaSchedaProduzione} nascosti={[{ name: "ordineId", value: o.id }]} modello={modelloScelto} righeLegno={righeLegno} angolariIniziali={angolariIniziali}
+                  salvaLegno={salvaLegnoInOrdine} salvaAngolari={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)}
+                  nota="Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all'invio dell'ordine." />
               )}
             </>
           )}
@@ -266,7 +213,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
-          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} />
+          <InviaOrdine fornitore={o.fornitore.ragioneSociale} ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} />
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />
