@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { praticheDaRingraziare } from "@/lib/pratica/ringraziamento";
+import { causaliIncassi } from "@/lib/amministrazione/causale-server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -30,6 +32,7 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
     f.clienteId ? prisma.cliente.findUnique({ where: { id: f.clienteId }, select: { id: true, nome: true } }) : Promise.resolve(null),
   ]);
   const righe = scadenze.map((s) => ({ ...s, residuo: s.stato === "ANNULLATA" ? 0 : residuoScadenza(s) }));
+  const [ringraziare, causali] = await Promise.all([praticheDaRingraziare(scadenze.filter((s) => s.tipo === "INCASSO")), causaliIncassi(scadenze)]);
   const stato = STATI_VENDITA[statoVendita(f, righe, oggiUtc())];
   const incassato = righe.reduce((t, s) => t + s.importo - s.residuo, 0);
   const pagamenti = righe.some((s) => s.abbinamenti.length || s.pagatoManuale > 0 || s.ritenuta > 0);
@@ -67,7 +70,7 @@ export default async function FatturaVenditaPage({ params, searchParams }: { par
           <div key={s.id} className="border-t border-neutral-100 pt-2 first:border-0 first:pt-0">
             <p className="text-sm">{dataIt(s.dataScadenza)} · {eur(s.importo)} · {s.descrizione} <span className="text-xs text-neutral-600">({s.stato === "PAGATA" ? "incassata" : s.stato === "PARZIALE" ? "incassata in parte" : s.stato === "ANNULLATA" ? "annullata" : "da incassare"})</span>
               {s.origine !== "FATTURA_VENDITA" && <span className="text-xs text-neutral-500"> · incasso della commessa</span>}</p>
-            {s.stato !== "ANNULLATA" && <RegistraPagamento conti={conti} ritorno={`/amministrazione/fatture-vendita/${f.id}`}
+            {s.stato !== "ANNULLATA" && <RegistraPagamento conti={conti} ritorno={`/amministrazione/fatture-vendita/${f.id}`} ringraziamento={ringraziare.has(s.id)} causale={causali.get(s.id)}
               ritenutaSuggerita={f.detrazione && s.ritenuta === 0 ? ritenutaPrevista(s.residuo) : 0}
               scadenza={{ id: s.id, tipo: s.tipo, residuo: s.residuo, ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />}
           </div>

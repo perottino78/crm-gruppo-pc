@@ -1,4 +1,4 @@
-// Apertura pratica di Giorgia (Fatturazione), come in BConsole: 1 fattura di acconto → 2 creazione progetto → 3 chiamata di benvenuto.
+// Apertura pratica di Giorgia (Fatturazione): 1 creazione del progetto → 2 fattura di acconto → 3 chiamata di benvenuto (Ugo, 21/11/2026: fattura e chiamata dentro il progetto).
 // Si vede un solo passo alla volta; ogni passo salvato si può rivedere e modificare dalla barra dei passi.
 import Link from "next/link";
 import type { ChiavePasso } from "@/lib/pratica/passi";
@@ -24,7 +24,7 @@ export default function PannelloApertura({ passo, d, registraFattura, creaProget
 
       {passo === "FATTURA" && (
         <>
-          <h2 className="mb-2">1 · Fattura di acconto</h2>
+          <h2 className="mb-2">2 · Fattura di acconto</h2>
           <p className="mb-3 text-sm text-neutral-800">Emetti la fattura di acconto di <b>{d.cliente}</b>{d.importoAcconto > 0 ? <> (acconto della pratica {eur(d.importoAcconto)})</> : null}. Poi torna qui e segna che è fatta.</p>
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/fatturazione" className="btn-3d btn-3d-outline px-4 py-2 text-sm">🧾 Apri Fatture e DDT</Link>
@@ -42,13 +42,13 @@ export default function PannelloApertura({ passo, d, registraFattura, creaProget
 
       {passo === "PROGETTO" && (
         <>
-          <h2 className="mb-2">2 · Creazione del progetto</h2>
+          <h2 className="mb-2">1 · Creazione del progetto</h2>
           {d.progettoCreatoIl ? (
             <p className="rounded bg-green-100 px-3 py-2 text-sm font-bold text-green-900">✅ Progetto creato il {giorno(d.progettoCreatoIl)}{d.progettoCreatoDaNome ? ` da ${d.progettoCreatoDaNome}` : ""}.</p>
           ) : (
             <form action={creaProgetto} className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-green-300 bg-green-50 px-4 py-3">
               <input type="hidden" name="commessaId" value={d.commessaId} />
-              <p className="min-w-[16rem] flex-1 text-sm text-green-900">Crea il progetto della pratica: dentro si fissano il rilievo, si caricano le misure, si inseriscono i prodotti e si ordina ai fornitori.</p>
+              <p className="min-w-[16rem] flex-1 text-sm text-green-900">Crea il progetto della pratica: dentro si fanno la fattura di acconto e la chiamata di benvenuto, poi si fissa il rilievo, si caricano le misure, si inseriscono i prodotti e si ordina ai fornitori.</p>
               <button className="btn-3d btn-3d-green">➕ Crea progetto</button>
             </form>
           )}

@@ -760,6 +760,9 @@ model Commessa {
   // Apertura pratica (Giorgia, Fatturazione): fattura di acconto emessa, progetto creato, chiamata di benvenuto al cliente (richiesta di Ugo 18/11/2026, come in BConsole)
   fatturaAccontoIl        DateTime?
   fatturaAccontoDaNome    String?
+  // Posa parziale per materiale mancante, rotto o in garanzia: da quando si riordina (si azzera a materiale di nuovo completo) e cosa serve
+  riordinoIl              DateTime?
+  riordinoNote            String?
   benvenutoIl             DateTime?
   benvenutoDaNome         String?
   benvenutoNote           String?

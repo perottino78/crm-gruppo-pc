@@ -93,7 +93,7 @@ export async function registraPagamento(fd: FormData) {
   await ricalcolaScadenza(s!.id);
   // incasso di una pratica: la trafila dei task va avanti da sola (acconto → ufficio successivo, saldo → posa)
   const pratica = incasso ? await praticaDiIncasso(s!.id) : null;
-  const avanzate = pratica ? await avanzaDopoIncasso(pratica, data) : [];
+  const avanzate = pratica ? await avanzaDopoIncasso(pratica, data, { ringrazia: fd.get("ringrazia") === "1" }) : [];
   const testo = `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)}${ritenuta ? ` + ritenuta ${eur(ritenuta)}` : ""} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} · ${giorno(data)}${commissione ? ` · commissione ${eur(commissione)}` : ""}${senzaPrimaNota ? " · senza movimento in prima nota" : ""}`;
   await registra("Scadenza", s!.id, incasso ? "Incasso registrato" : "Pagamento registrato", `${s!.controparte} · ${s!.descrizione} — ${testo}`, u!.nome);
   aggiorna();
