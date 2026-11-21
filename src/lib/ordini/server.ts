@@ -52,6 +52,11 @@ export function aziendaPerDivisione(divisione?: string | null) {
 }
 
 /** Dati per il PDF dell'ordine (usati anche dalla rotta di download). */
+/** Solo il nominativo del cliente («Nome Cognome - indirizzo…» → «Nome Cognome»): l'indirizzo e gli altri dati non vanno al fornitore. */
+export function nominativoCliente(clienteFinale: string | null | undefined): string {
+  return (clienteFinale ?? "").split(" - ")[0].trim();
+}
+
 /** Riferimento da mostrare al fornitore: «Commessa N/anno» (senza oggetto dell'offerta né dati del cliente). */
 export function riferimentoPerFornitore(riferimento: string | null | undefined, commessa?: { numero: number | string; anno: number } | null): string {
   if (commessa) return `Commessa ${commessa.numero}/${commessa.anno}`;
@@ -70,8 +75,8 @@ export async function datiPdfOrdine(id: string) {
       fornitore: { ragioneSociale: f.ragioneSociale, righe: [[f.indirizzo, [f.cap, f.comune, f.provincia ? `(${f.provincia})` : null].filter(Boolean).join(" ")].filter(Boolean).join(", "), f.partitaIva ? `P.IVA ${f.partitaIva}` : "", f.emailOrdini ?? f.email ?? ""].filter(Boolean) },
       testata: [
         ["Consegna richiesta", dataIt(o.consegnaRichiesta)], ["Commessa", o.commessa ? `${o.commessa.numero}/${o.commessa.anno}` : ""],
-        // al fornitore va solo il riferimento (pratica), mai nome o indirizzo del cliente
-        ["Riferimento", riferimentoPerFornitore(o.riferimento, o.commessa)],
+        // al fornitore vanno il nominativo e il riferimento della pratica, mai l'indirizzo né altri dati del cliente
+        ["Cliente", nominativoCliente(o.clienteFinale)], ["Riferimento", riferimentoPerFornitore(o.riferimento, o.commessa)],
         ["Indirizzo di consegna", o.indirizzoSpedizione ?? ""], ["Trasporto", o.trasporto ?? ""],
       ] as [string, string][],
       righe: o.righe.map((r) => ({ codice: r.codice, codiceFornitore: r.codiceFornitore, descrizione: r.descrizione + (r.note ? ` (${r.note})` : ""), quantita: r.quantita, um: r.um, prezzoAcquisto: r.prezzoAcquisto, scontoAcquisto: r.scontoAcquisto })),

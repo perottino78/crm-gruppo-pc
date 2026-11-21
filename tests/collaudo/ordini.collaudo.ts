@@ -71,7 +71,7 @@ async function main() {
   const res = await pdfOrdine(new Request("http://x/?scarica=1"), { params: Promise.resolve({ id: o1.id }) });
   const pdf = Buffer.from(await res.arrayBuffer()).toString("latin1");
   verifica(res.status === 200 && pdf.startsWith("%PDF") && /attachment/.test(res.headers.get("content-disposition") ?? ""), "PDF scaricabile");
-  verifica(pdf.includes("Maniglia extra \\(prova\\)") && !pdf.includes("ROSSI MARIO") && pdf.includes("Commessa 7/2026"), "il PDF contiene le righe e solo il riferimento (niente cliente)");
+  verifica(pdf.includes("Maniglia extra \\(prova\\)") && pdf.includes("ROSSI MARIO") && !pdf.includes("Via Roma") && pdf.includes("Commessa 7/2026"), "il PDF contiene righe, nominativo e riferimento (niente indirizzo del cliente)");
 
   console.log("5. Invio: senza servizio configurato, poi con servizio simulato");
   delete process.env.EMAIL_PROVIDER;

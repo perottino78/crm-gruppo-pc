@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { puoGestireOrdini, puoModuloRilievo } from "@/lib/ordini/server";
+import { puoGestireOrdini, puoModuloRilievo, nominativoCliente } from "@/lib/ordini/server";
 import { numeroOrdine } from "@/lib/ordini/calcoli";
 import { descriviCampi, compilaScheda, tabellaRighe } from "@/lib/ordini/scheda-produzione";
 import { PREFISSO_LEGNO, PREZZO_M3_INDICATIVO, righeDaValori } from "@/lib/ordini/legno";
@@ -67,7 +67,7 @@ async function compilaESalva(ordineId: string, modelloId: string, fd: FormData, 
   const rilievi = o.commessaId ? await prisma.rilievo.findMany({ where: { commessaId: o.commessaId, misure: { not: null } }, orderBy: { dataOra: "asc" }, select: { misure: true } }) : [];
   const valori: Record<string, string> = {
     ordine: numeroOrdine(o), data: o.dataOrdine.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }), fornitore: o.fornitore.ragioneSociale,
-    cliente: o.commessa ? `Pratica ${o.commessa.numero}/${o.commessa.anno}` : "", commessa: o.commessa ? `${o.commessa.numero}/${o.commessa.anno}` : "",
+    cliente: nominativoCliente(o.clienteFinale) || (o.commessa?.cliente.nome ?? ""), commessa: o.commessa ? `${o.commessa.numero}/${o.commessa.anno}` : "",
     indirizzo: o.indirizzoSpedizione ?? "", consegna: o.consegnaRichiesta ? o.consegnaRichiesta.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "",
     misure_rilievo: rilievi.map((r) => r.misure).join("\n\n"),
   };
@@ -180,7 +180,7 @@ async function compilaPerPratica(commessaId: string, modelloId: string, fd: Form
   const righe = tutte.filter((r) => !r.codice?.startsWith(PREFISSO_LEGNO) && !r.codice?.startsWith(PREFISSO_ANGOLARI));
   const it = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
   const valori: Record<string, string> = {
-    ordine: "da emettere", data: it(new Date()), fornitore: forn?.ragioneSociale ?? "", cliente: `Pratica ${c.numero}/${c.anno}`, commessa: `${c.numero}/${c.anno}`,
+    ordine: "da emettere", data: it(new Date()), fornitore: forn?.ragioneSociale ?? "", cliente: c.cliente.nome, commessa: `${c.numero}/${c.anno}`,
     indirizzo: "", consegna: c.consegnaPrevista ? it(c.consegnaPrevista) : "", misure_rilievo: rilievi.map((r) => r.misure).join("\n\n"),
   };
   for (const x of descriviCampi(m.html)) {

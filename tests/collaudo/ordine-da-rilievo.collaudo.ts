@@ -93,12 +93,29 @@ async function main() {
   verifica(o1.stato === "BOZZA" && o1.righe.length === 2 && o1.commessaId === c.id && o1.clienteFinale?.startsWith("GERBAUDO"), "ordine in bozza a FIDRA con le 2 righe spuntate", o1);
   const pdfDati = await (await import("../../src/lib/ordini/server")).datiPdfOrdine(o1.id);
   const testata = JSON.stringify(pdfDati?.dati.testata ?? []);
-  verifica(!testata.includes("GERBAUDO") && !testata.includes("Cliente finale") && testata.includes("Commessa "), "al fornitore va solo il riferimento (niente nome o indirizzo del cliente)", testata);
+  verifica(testata.includes("GERBAUDO") && !/Via|Torino|Rosta \(/.test(testata.replace(/Rosta, Corso Moncenisio 28/g, "")) && testata.includes("Commessa "), "al fornitore vanno nominativo e riferimento, non l'indirizzo del cliente", testata);
   verifica(d1 === `/ordini-fornitori/${o1.id}?passo=invio`, "si apre subito l'invio dell'email", d1);
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id], fornitoreId: mastro.id })));
   const t2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id }, include: { ordineFornitore: true } });
   verifica(t2.fornitoreId === mastro.id && t2.fornitoreNome === "IL MASTRO SRLS" && t2.ordineFornitore?.fornitoreId === mastro.id, "fornitore scelto nella tendina: la riga va a Il Mastro", t2);
   verifica((await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [finestra.id] }))))?.includes("già in un ordine"), "riga già ordinata: avviso");
+
+  console.log("3b. Scarico un solo PDF con l'ordine e gli allegati");
+  {
+    const { PDFDocument } = await import("pdf-lib");
+    const sharp = (await import("sharp")).default;
+    const d = await PDFDocument.create(); d.addPage([300, 300]); d.addPage([300, 300]);
+    const rilTutti = await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } });
+    const a1 = await prisma.rilievoAllegato.create({ data: { rilievoId: rilTutti.id, nome: "vero.pdf", dataUri: `data:application/pdf;base64,${Buffer.from(await d.save()).toString("base64")}` } });
+    const png = await sharp({ create: { width: 40, height: 30, channels: 3, background: "#cc3300" } }).png().toBuffer();
+    const a2 = await prisma.rilievoAllegato.create({ data: { rilievoId: rilTutti.id, nome: "foto.png", dataUri: `data:image/png;base64,${png.toString("base64")}` } });
+    const solo = await O.scaricaOrdineCompleto(o1.id, { senzaPrezzi: true });
+    const tutto = await O.scaricaOrdineCompleto(o1.id, { senzaPrezzi: true, fileRilievo: [a1.id, a2.id] });
+    const pagine = async (b64?: string) => (await PDFDocument.load(Buffer.from(b64 ?? "", "base64"))).getPageCount();
+    const n0 = await pagine(solo.base64), n1 = await pagine(tutto.base64);
+    verifica(solo.ok && tutto.ok && n1 === n0 + 3 && (tutto.saltati?.length ?? 0) === 0 && /con allegati/.test(tutto.nome ?? ""), "PDF unico: ordine + 2 pagine del PDF + 1 pagina della foto", { n0, n1, saltati: tutto.saltati });
+    await prisma.rilievoAllegato.deleteMany({ where: { id: { in: [a1.id, a2.id] } } });
+  }
 
   console.log("4. Invio da ordini@ con lista senza prezzi e rilievo allegato");
   const e = await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine 1/2026 - P&C S.r.l.", "Buongiorno, in allegato il nostro ordine con il rilievo misure.", { senzaPrezzi: true, conRilievo: true });
