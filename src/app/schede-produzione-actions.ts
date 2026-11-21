@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { puoGestireOrdini } from "@/lib/ordini/server";
+import { puoGestireOrdini, puoModuloRilievo } from "@/lib/ordini/server";
 import { numeroOrdine } from "@/lib/ordini/calcoli";
 import { descriviCampi, compilaScheda, tabellaRighe } from "@/lib/ordini/scheda-produzione";
 import { PREFISSO_LEGNO, PREZZO_M3_INDICATIVO, righeDaValori } from "@/lib/ordini/legno";
@@ -20,10 +20,12 @@ async function addetto() {
   return u;
 }
 
-/** Chi carica il rilievo (anche il tecnico) compila il modulo del fornitore: basta essere collegati. */
-async function rilevatore() {
+/** Modulo al «Carica rilievo»: ufficio ordini, amministratori e il tecnico che fa il rilievo di quella pratica (`puoModuloRilievo`). */
+async function rilevatore(commessaId: string | null) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
+  const tecnici = commessaId ? (await prisma.rilievo.findMany({ where: { commessaId }, select: { tecnicoId: true } })).map((r) => r.tecnicoId) : [];
+  if (!puoModuloRilievo(u, tecnici)) throw new Error("Non autorizzato.");
   return u;
 }
 
@@ -198,8 +200,8 @@ async function logPratica(commessaId: string, testo: string, chi: string) {
 
 /** «📄 Salva il modulo» dal rilievo: compila la scheda con le misure scritte e la tiene nei documenti della pratica. */
 export async function creaSchedaDaRilievo(fd: FormData) {
-  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  const u = await rilevatore(commessaId);
   if (!commessaId || !modelloId) return;
   const r = await compilaPerPratica(commessaId, modelloId, fd, u.nome);
   if (!r) redirect(tornaRilievo(commessaId, modelloId, { erroreScheda: "Modulo non trovato." }));
@@ -210,8 +212,8 @@ export async function creaSchedaDaRilievo(fd: FormData) {
 
 /** «💾 Salva il legno nella pratica»: le righe LEGNO-… del materiale non ancora ordinato si riscrivono dal modulo (costo a barra) e la scheda si aggiorna. */
 export async function salvaLegnoInPratica(fd: FormData) {
-  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  const u = await rilevatore(commessaId);
   if (!commessaId) return;
   const valori: Record<string, string> = {};
   for (const [k, v] of fd.entries()) if (typeof v === "string" && k.startsWith("campo_")) valori[k.slice(6)] = v;
@@ -240,8 +242,8 @@ export async function salvaLegnoInPratica(fd: FormData) {
 
 /** «💾 Salva gli angolari nella pratica»: come il legno, con il costo a peso di Il Mastro. */
 export async function salvaAngolariInPratica(fd: FormData) {
-  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
+  const u = await rilevatore(commessaId);
   if (!commessaId) return;
   const valori: Record<string, string> = {};
   for (const [k, v] of fd.entries()) if (typeof v === "string" && k.startsWith("campo_")) valori[k.slice(6)] = v;

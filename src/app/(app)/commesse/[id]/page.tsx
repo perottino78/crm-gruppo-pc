@@ -16,7 +16,7 @@ import StatoAcquisti from "@/components/ordini/StatoAcquisti";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
-import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { puoGestireOrdini, puoModuloRilievo, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { creaOrdineDaRighe } from "@/app/ordini-actions";
 import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
@@ -121,7 +121,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
   // modulo del fornitore al «Carica rilievo» (Ugo 20/11/2026): modelli, legno e angolari già nel materiale, schede già salvate
-  const mostraModulo = !!utente && c.rilievi.some((x) => x.stato !== "ANNULLATO");
+  const mostraModulo = puoModuloRilievo(utente, c.rilievi.map((x) => x.tecnicoId)) && c.rilievi.some((x) => x.stato !== "ANNULLATO");
   let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
   if (mostraModulo) {
     await assicuraModelliPronti();
