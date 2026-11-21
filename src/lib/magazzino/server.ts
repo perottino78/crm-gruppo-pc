@@ -1,4 +1,5 @@
 // Magazzino: funzioni lato server (numerazione bolle, righe da ricevere, giacenze, avvio commessa).
+import { nomeIntervento } from "@/lib/pratica/interventi";
 import { prisma } from "@/lib/prisma";
 import type { Prisma, Utente } from "@prisma/client";
 import { puoGestireOrdini } from "@/lib/ordini/server";
@@ -129,19 +130,26 @@ export async function applicaBolla(tx: Tx, bollaId: string, segno: 1 | -1, nome:
  * qualcosa (storno di una bolla) la marcatura si toglie.
  */
 export async function verificaMaterialeCommessa(tx: Tx, commessaId: string, nome: string): Promise<"COMPLETO" | "RIAPERTO" | null> {
-  const c = await tx.commessa.findUnique({ where: { id: commessaId }, include: { righeOrdine: { select: { arrivato: true } }, cliente: { select: { nome: true } } } });
+  const c = await tx.commessa.findUnique({ where: { id: commessaId }, include: { righeOrdine: { select: { arrivato: true, createdAt: true } }, cliente: { select: { nome: true } } } });
   if (!c || ["ANNULLATA", "CHIUSA"].includes(c.stato)) return null;
-  const completo = materialeCompleto(c.righeOrdine);
+  // dopo una posa parziale per materiale (riordino) serve almeno una riga nuova, arrivata anche lei
+  const completo = materialeCompleto(c.righeOrdine) && (!c.riordinoIl || c.righeOrdine.some((r) => r.createdAt >= c.riordinoIl!));
   const nr = numeroCommessa(c);
   if (completo && !c.materialeCompletoIl) {
-    await tx.commessa.update({ where: { id: commessaId }, data: { materialeCompletoIl: new Date() } });
-    await tx.commessaEvento.create({ data: { commessaId, utenteNome: nome, testo: `Materiale completo: tutte le ${c.righeOrdine.length} righe sono arrivate o prelevate. Commessa pronta per saldo e posa.` } });
-    if (!c.saldoIncassato) {
+    await tx.commessa.update({ where: { id: commessaId }, data: { materialeCompletoIl: new Date(), riordinoIl: null } });
+    await tx.commessaEvento.create({ data: { commessaId, utenteNome: nome, testo: c.riordinoIl ? "Materiale riordinato dopo la posa parziale: tutto arrivato. Si fissa la data per finire il lavoro." : `Materiale completo: tutte le ${c.righeOrdine.length} righe sono arrivate o prelevate. Commessa pronta per saldo e posa.` } });
+    const aperti = await tx.taskPratica.findMany({ where: { commessaId, faseChiave: { in: ["MATERIALE_COMPLETO", "POSA_APP"] }, completatoIl: null, stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] } }, select: { faseChiave: true } });
+    if (!c.saldoIncassato && !aperti.some((t) => t.faseChiave === "MATERIALE_COMPLETO")) {
       await tx.taskPratica.create({ data: { commessaId, faseChiave: "MATERIALE_COMPLETO", ufficio: "FATTURAZIONE", titolo: "Materiale completo: fattura saldo e incasso", descrizione: `Commessa ${nr} di ${c.cliente.nome}: tutto il materiale è in magazzino. Emettere la fattura di saldo e registrare l'incasso prima dell'uscita del materiale.`, creatoDa: "Magazzino" } });
     }
     // flusso: il task del magazzino si chiude e il centralino (Alessia) fissa la posa con la squadra competente
     await tx.taskPratica.updateMany({ where: { commessaId, faseChiave: "MAGAZZINO", completatoIl: null, stato: { notIn: ["COMPLETATO", "ESEGUITO", "ANNULLATO"] } }, data: { stato: "COMPLETATO", completatoIl: new Date(), completatoDaNome: nome } });
-    await tx.taskPratica.create({ data: { commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: "Materiale completo: fissare la posa con la squadra", descrizione: `Pratica ${nr} di ${c.cliente.nome}: materiale completo${c.saldoIncassato ? " e saldo già incassato" : " (la conferma del giorno arriva con il saldo incassato)"}. Nella pratica, sezione Posa: scegli la squadra e il giorno; parte la mail al cliente.`, creatoDa: "Magazzino" } });
+    // interventi in attesa del materiale (es. fine posa dopo una posa parziale): tornano da fissare e il centralino li fissa
+    const inAttesa = await tx.assistenza.findMany({ where: { commessaId, stato: "IN_ATTESA_RICAMBIO" }, select: { id: true, numero: true, tipo: true, descrizione: true } });
+    if (inAttesa.length) {
+      await tx.assistenza.updateMany({ where: { id: { in: inAttesa.map((x) => x.id) } }, data: { stato: "APERTA" } });
+      for (const iv of inAttesa) await tx.taskPratica.create({ data: { commessaId, ufficio: "CENTRALINO", titolo: `Fissare l'intervento n.${iv.numero} (${nomeIntervento(iv.tipo).replace(/^\S+ /, "")})`, descrizione: `Pratica ${nr} di ${c.cliente.nome}: il materiale riordinato è arrivato. ${iv.descrizione}. Nella pratica, sezione Interventi: scegli chi va e il giorno (va nel suo calendario).`, creatoDa: "Magazzino" } });
+    } else if (!aperti.some((t) => t.faseChiave === "POSA_APP")) await tx.taskPratica.create({ data: { commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: c.riordinoIl ? "Materiale riordinato arrivato: fissare la data per finire la posa" : "Materiale completo: fissare la posa con la squadra", descrizione: `Pratica ${nr} di ${c.cliente.nome}: materiale completo${c.saldoIncassato ? " e saldo già incassato" : " (la conferma del giorno arriva con il saldo incassato)"}. Nella pratica, sezione Posa: scegli la squadra e il giorno; parte la mail al cliente.`, creatoDa: "Magazzino" } });
     return "COMPLETO";
   }
   if (!completo && c.materialeCompletoIl) {

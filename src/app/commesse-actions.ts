@@ -1,5 +1,7 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
@@ -13,6 +15,7 @@ import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { avviaFaseFlusso, fattoTask, avanzaDopoIncasso, assicuraFlusso, creaTaskManuale, chiudiTaskFase, avviaRilievoSePronto, dopoIncassoAcconto } from "@/app/flusso-actions";
 import { inviaMailPratica, ringraziaPagamentoAcconto, avvisaCommerciale } from "@/lib/pratica/mail-cliente-server";
 import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
+import { tipoValido, nomeIntervento, chiusuraIntervento } from "@/lib/pratica/interventi";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import { trovaFasciaPrezzo, trovaBarraPiuVicina } from "@/lib/prezzoPerMisura";
@@ -46,8 +49,7 @@ function puoGestireIncassi(ruolo?: string | null) {
 async function ricalcolaStato(commessaId: string) {
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { rilievi: true } });
   if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA", "SALDO_INCASSATO", "LAVORI_ESEGUITI"].includes(c.stato)) return;
-  const viaLibera =
-    c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  const viaLibera = !!(await statoSogliaRilievo(c.id))?.viaLibera;
   let stato = "IN_ATTESA_ACCONTO";
   if (viaLibera) {
     const attivi = c.rilievi.filter((r) => r.stato !== "ANNULLATO");
@@ -278,19 +280,96 @@ export async function registraIncassoAcconto(formData: FormData) {
   await log(id, `Acconto incassato: ${importo.toFixed(2)} €${modalita ? " (" + modalita + ")" : ""}. Rilievo sbloccato.`);
   await ricalcolaStato(id);
   await avanzaDopoIncasso(id);
-  await ringraziaPagamentoAcconto(id);
+  if (formData.get("ringrazia") === "1") await ringraziaPagamentoAcconto(id);
   await dopoIncassoAcconto(id);
   revalidatePath(`/commesse/${id}`);
   revalidatePath("/commesse");
 }
 
-/** «✉️ Manda il ringraziamento al cliente» dalla pratica, se all'incasso non è partito (es. email del cliente mancante, poi aggiunta). Una volta sola. */
+/** «✉️ Manda il ringraziamento al cliente» dalla pratica, se all'incasso non è stato spuntato o non è partito (es. email del cliente mancante). Una volta sola. */
 export async function inviaRingraziamentoAcconto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!puoGestireIncassi(utente?.ruolo)) return;
   const id = str(formData, "id");
   if (!id) return;
   await ringraziaPagamentoAcconto(id);
+  revalidatePath(`/commesse/${id}`);
+}
+
+// ── Rate intermedie e sblocco del rilievo sotto il 50% (Debora, 21/11/2026) ─────────────────────────────────────
+const puoIncassiOFatturazione = (u: Awaited<ReturnType<typeof getCurrentUser>>) => !!u && (puoGestireIncassi(u.ruolo) || puo(u, "fatturazione"));
+
+/** Rata intermedia fra acconto e saldo: una scadenza d'incasso della pratica (si registra come le altre); il saldo cala di tanto. */
+export async function aggiungiRataIntermedia(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoIncassiOFatturazione(u)) return;
+  const id = str(formData, "commessaId");
+  const importo = Math.round((flt(formData, "importo") ?? 0) * 100) / 100;
+  if (!id || importo <= 0) return;
+  const c = await prisma.commessa.findUnique({ where: { id }, include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } });
+  if (!c) return;
+  const esistenti = await prisma.scadenza.findMany({ where: { commessaId: id, origine: { startsWith: "COMMESSA_RATA_" } }, select: { origine: true } });
+  const n = esistenti.reduce((m, s) => Math.max(m, Number(s.origine.replace("COMMESSA_RATA_", "")) || 0), 0) + 1;
+  const data = str(formData, "data");
+  await prisma.scadenza.create({
+    data: {
+      tipo: "INCASSO", origine: `COMMESSA_RATA_${n}`, commessaId: id, clienteId: c.clienteId, controparte: c.cliente.nome, brand: c.brand.nome,
+      descrizione: str(formData, "descrizione") ?? `Rata ${n} commessa C${c.anno}-${String(c.numero).padStart(3, "0")}`, importo, dataScadenza: data ? new Date(`${data}T12:00:00Z`) : null, dataModificata: !!data,
+    },
+  });
+  const { sincronizzaScadenzeCommesse } = await import("@/lib/amministrazione/server");
+  await sincronizzaScadenzeCommesse(id);
+  await log(id, `Rata intermedia ${n} di ${importo.toFixed(2)} € aggiunta da ${u!.nome}: il saldo cala di tanto.`);
+  revalidatePath(`/commesse/${id}`);
+}
+
+/** Toglie una rata intermedia ancora da pagare (il saldo torna come prima). */
+export async function togliRataIntermedia(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoIncassiOFatturazione(u)) return;
+  const s = await prisma.scadenza.findUnique({ where: { id: str(formData, "id") ?? "" }, include: { abbinamenti: true } });
+  if (!s?.commessaId || !s.origine.startsWith("COMMESSA_RATA_") || s.abbinamenti.length || s.pagatoManuale > 0 || s.ritenuta > 0) return;
+  await prisma.scadenza.delete({ where: { id: s.id } });
+  const { sincronizzaScadenzeCommesse } = await import("@/lib/amministrazione/server");
+  await sincronizzaScadenzeCommesse(s.commessaId);
+  await log(s.commessaId, `Rata intermedia «${s.descrizione}» tolta da ${u!.nome}.`);
+  revalidatePath(`/commesse/${s.commessaId}`);
+}
+
+const TITOLO_SBLOCCO = "Sbloccare il rilievo senza il 50% incassato";
+
+/** Sotto il 50% il rilievo non parte: si chiede all'amministratore (email e task) di farlo partire lo stesso. */
+export async function chiediSbloccoRilievo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const motivo = str(formData, "motivo");
+  const c = await prisma.commessa.findUnique({ where: { id }, include: { cliente: { select: { nome: true } } } });
+  if (!c || c.rilievoSbloccatoIl) return;
+  const st = await statoSogliaRilievo(id);
+  await prisma.commessa.update({ where: { id }, data: { rilievoSbloccoRichiestoIl: new Date(), rilievoSbloccoMotivo: motivo } });
+  const admin = await prisma.utente.findMany({ where: { ruolo: "AMMINISTRATORE", stato: "ATTIVO" }, select: { id: true, nome: true, email: true }, orderBy: { nome: "asc" } });
+  const nr = `C${c.anno}-${String(c.numero).padStart(3, "0")}`;
+  const testo = `Pratica ${nr} di ${c.cliente.nome}: incassati ${(st?.incassato ?? 0).toFixed(2)} € su ${c.totaleVendita.toFixed(2)} € (serve il 50% = ${(st?.soglia ?? 0).toFixed(2)} €). ${u.nome} chiede di far partire lo stesso il rilievo${motivo ? `: ${motivo}` : "."} Nella pratica, riquadro Acconto: «🔓 Sblocca il rilievo».`;
+  await prisma.taskPratica.create({ data: { commessaId: id, ufficio: "AMMINISTRAZIONE", titolo: TITOLO_SBLOCCO, descrizione: testo, creatoDa: u.nome, assegnatoUtenteId: admin[0]?.id ?? null, assegnatoNome: admin[0]?.nome ?? null } });
+  const { inviaMail, APP_URL } = await import("@/lib/mail/invio");
+  await inviaMail({ a: admin.map((a) => a.email).filter(Boolean) as string[], oggetto: `[CRM P&C] Richiesta: rilievo senza il 50% — ${c.cliente.nome}`, testo: `${testo}\n\n${APP_URL}/commesse/${id}#acconto`, rispondiA: u.email, daUtenteId: u.id });
+  await log(id, `Chiesto all'amministratore di far partire il rilievo senza il 50% incassato (${u.nome})${motivo ? `: ${motivo}` : ""}.`);
+  revalidatePath(`/commesse/${id}`);
+}
+
+/** L'amministratore fa partire il rilievo anche sotto il 50%. */
+export async function sbloccaRilievo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  await prisma.commessa.update({ where: { id }, data: { rilievoSbloccatoIl: new Date(), rilievoSbloccatoDaNome: u!.nome } });
+  await prisma.taskPratica.updateMany({ where: { commessaId: id, titolo: TITOLO_SBLOCCO, completatoIl: null }, data: { stato: "COMPLETATO", completatoIl: new Date(), completatoDaNome: u!.nome } });
+  await log(id, `Rilievo sbloccato dall'amministratore (${u!.nome}) anche senza il 50% incassato.`);
+  await ricalcolaStato(id);
+  await avviaRilievoSePronto(id);
   revalidatePath(`/commesse/${id}`);
 }
 
@@ -311,7 +390,8 @@ export async function annullaIncassoAcconto(formData: FormData) {
 
 export async function aggiornaFinanziamento(formData: FormData) {
   const utente = await getCurrentUser();
-  if (!puoGestireIncassi(utente?.ruolo)) return;
+  // l'approvazione del finanziamento la segna la fatturazione (Giorgia, decisione di Debora 21/11/2026) o l'amministrazione
+  if (!utente || (!puoGestireIncassi(utente.ruolo) && !puo(utente, "fatturazione"))) return;
   const id = str(formData, "id");
   const stato = str(formData, "finanziamentoStato");
   if (!id || !stato || !["IN_ISTRUTTORIA", "APPROVATO", "RIFIUTATO"].includes(stato)) return;
@@ -340,8 +420,7 @@ export async function programmaRilievo(formData: FormData) {
   if (!dataOra) return;
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { cliente: true } });
   if (!c) return;
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
-  if (!viaLibera) return; // blocco: rilievo solo dopo acconto/finanziamento
+  if (!(await statoSogliaRilievo(c.id))?.viaLibera) return; // blocco: rilievo solo con il 50% incassato, finanziamento approvato o sblocco
   const percorso = await percorsoDiCommessa(commessaId);
   if (percorso && !percorso.progettoCreatoIl && !percorso.legacy) return; // blocco: prima si crea il progetto
   const indirizzo =
@@ -893,13 +972,22 @@ export async function completaPosa(formData: FormData) {
   }
   // flusso: il centralino carica i documenti di fine lavori e segna la posa. Completa → lavori eseguiti, recensione al cliente e task kit al commerciale.
   // Parziale → la pratica resta in posa, al cliente le scuse e il centralino fissa un'altra data.
-  const parziale = str(formData, "esitoPosa") === "PARZIALE";
+  // Parziale (Ugo, 21/11/2026) in due modi: si torna solo per finire (→ appuntamento di posa) oppure serve materiale mancante, rotto o in garanzia (→ ufficio ordini)
+  const esito = str(formData, "esitoPosa") ?? "COMPLETA";
+  const parziale = esito === "PARZIALE" || esito === "PARZIALE_MATERIALE";
+  const conMateriale = esito === "PARZIALE_MATERIALE";
+  const cosaServe = str(formData, "materialeServe");
   if (!parziale) await prisma.commessa.update({ where: { id: p.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
-  await log(p.commessaId, `Posa ${parziale ? "PARZIALE (da completare)" : "completata"} da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
+  await log(p.commessaId, `Posa ${parziale ? (conMateriale ? "PARZIALE: serve materiale" + (cosaServe ? ` (${cosaServe})` : "") + ", passa all'ufficio ordini" : "PARZIALE (si torna per finire)") : "completata"} da ${u.nome}${costoTotale ? ` — costo posa ${costoTotale.toFixed(2)} €` : ""}${firma ? ", verbale firmato dal cliente" : ""}.`);
   await chiudiTaskFase(p.commessaId, "POSA");
   if (parziale) {
     if (inviaAlCliente(formData)) await inviaMailPratica(p.commessaId, "posa parziale: scuse", (d) => mailPosaParziale({ ...d, note: str(formData, "noteFine") }));
-    await prisma.taskPratica.create({ data: { commessaId: p.commessaId, faseChiave: "POSA_APP", ufficio: "CENTRALINO", titolo: "Posa parziale: fissare un'altra data per finire il lavoro", descrizione: `Posa non conclusa. Note: ${str(formData, "noteFine") ?? "—"}. Fissare un nuovo giorno con la squadra (sezione Posa).`, creatoDa: u.nome } });
+    // si apre l'intervento di fine posa dentro il progetto: con materiale si passa prima dall'ufficio ordini, altrimenti il centralino lo fissa subito
+    const note = str(formData, "noteFine");
+    const iv = await prisma.assistenza.create({ data: { commessaId: p.commessaId, tipo: "FINE_POSA", descrizione: `Finire la posa${note ? `: ${note}` : ""}`, serveMateriale: conMateriale, ricambioNote: conMateriale ? cosaServe : null, stato: conMateriale ? "IN_ATTESA_RICAMBIO" : "APERTA", assegnatoUtenteId: p.assegnatoUtenteId, assegnatoNome: p.assegnatoNome, aperturaDa: u.nome } });
+    await log(p.commessaId, `Aperto l'intervento n.${iv.numero} di fine posa${conMateriale ? " (serve materiale)" : ""}.`);
+    if (conMateriale) await apriRiordino(p.commessaId, cosaServe, "Posa parziale", u.nome);
+    else await taskFissareIntervento(p.commessaId, iv.numero, "FINE_POSA", `Posa parziale, intervento n.${iv.numero} per finire il lavoro. Note: ${note ?? "—"}`, u.nome);
   } else {
     const inviata = inviaAlCliente(formData) ? await inviaMailPratica(p.commessaId, "lavoro terminato: richiesta di recensione", (d) => mailPosaCompletata({ ...d, linkRecensione: process.env.RECENSIONI_URL || undefined })) : false;
     if (inviata) await prisma.commessa.update({ where: { id: p.commessaId }, data: { recensioneRichiestaIl: new Date() } });
@@ -1000,7 +1088,25 @@ export async function segnaRecensioneRichiesta(formData: FormData) {
   revalidatePath(`/commesse/${id}`);
 }
 
-// ============ ASSISTENZA ============
+// ============ INTERVENTI DEL PROGETTO (ex assistenza) ============
+// Ugo, 21/11/2026: dentro il progetto si apre un intervento per finire la posa, una manutenzione, un sopralluogo o un secondo rilievo.
+// Può chiedere materiale (riordino all'ufficio ordini), si fissa con incaricato e giorno (va in calendario) e si chiude con il report.
+
+/** Riordino del materiale: la pratica torna all'ufficio ordini; all'arrivo in magazzino si torna a fissare l'intervento o la posa. */
+async function apriRiordino(commessaId: string, cosaServe: string | null, perche: string, chi: string) {
+  await prisma.commessa.update({ where: { id: commessaId }, data: { riordinoIl: new Date(), riordinoNote: cosaServe, materialeCompletoIl: null } });
+  await prisma.taskPratica.create({ data: { commessaId, faseChiave: "ORDINI", ufficio: "ORDINI", titolo: `${perche}: ordinare il materiale mancante, rotto o in garanzia`, descrizione: `${perche}: serve materiale.${cosaServe ? ` Cosa serve: ${cosaServe}.` : ""} Nella pratica, Materiale e ordini: aggiungi il materiale, crea e invia gli ordini (email o portale del fornitore). All'arrivo in magazzino il centralino fissa l'intervento.`, creatoDa: chi } });
+}
+
+/** Task al centralino per fissare l'intervento (si chiude da solo quando l'intervento ha giorno e incaricato). */
+const titoloFissare = (numero: number, tipo: string) => `Fissare l'intervento n.${numero} (${nomeIntervento(tipo).replace(/^\S+ /, "")})`;
+async function taskFissareIntervento(commessaId: string, numero: number, tipo: string, descrizione: string, chi: string) {
+  await prisma.taskPratica.create({ data: { commessaId, ufficio: "CENTRALINO", titolo: titoloFissare(numero, tipo), descrizione: `${descrizione}. Nella pratica, sezione Interventi: scegli chi va e il giorno (va nel suo calendario).`, creatoDa: chi } });
+}
+async function chiudiTaskFissare(commessaId: string, numero: number, tipo: string, chi: string) {
+  await prisma.taskPratica.updateMany({ where: { commessaId, faseChiave: null, titolo: titoloFissare(numero, tipo), completatoIl: null }, data: { stato: "COMPLETATO", completatoIl: new Date(), completatoDaNome: chi } });
+}
+
 export async function creaAssistenza(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
@@ -1016,6 +1122,8 @@ export async function creaAssistenza(formData: FormData) {
     scad.setMonth(scad.getMonth() + c.garanziaMesi);
     inGaranzia = scad.getTime() >= Date.now();
   }
+  const tipo = tipoValido(str(formData, "tipo"));
+  const serveMateriale = formData.get("serveMateriale") === "1";
   const ass = str(formData, "assegnatoUtenteId");
   const ut = ass ? await prisma.utente.findUnique({ where: { id: ass } }) : null;
   const dt = str(formData, "dataIntervento");
@@ -1023,19 +1131,26 @@ export async function creaAssistenza(formData: FormData) {
     data: {
       commessaId,
       descrizione,
+      tipo,
+      serveMateriale,
       prodotto: str(formData, "prodotto"),
       priorita: str(formData, "priorita") ?? "NORMALE",
       inGaranzia,
       assegnatoUtenteId: ut?.id ?? null,
       assegnatoNome: ut?.nome ?? null,
       dataIntervento: dt ? daOraRoma(dt) : null,
-      stato: dt ? "PROGRAMMATA" : "APERTA",
+      stato: serveMateriale ? "IN_ATTESA_RICAMBIO" : dt ? "PROGRAMMATA" : "APERTA",
+      ricambioNote: serveMateriale ? str(formData, "materialeServe") : null,
       aperturaDa: u.nome,
     },
   });
-  await log(commessaId, `Assistenza #${a.numero} aperta da ${u.nome}: ${descrizione}${inGaranzia ? "" : " (fuori garanzia)"}`);
+  await log(commessaId, `Intervento n.${a.numero} (${nomeIntervento(tipo)}) aperto da ${u.nome}: ${descrizione}${serveMateriale ? " — serve materiale, passa all'ufficio ordini" : ""}${inGaranzia ? "" : " (fuori garanzia)"}`);
+  if (serveMateriale) await apriRiordino(commessaId, str(formData, "materialeServe"), `Intervento n.${a.numero}`, u.nome);
+  else if (!dt) await taskFissareIntervento(commessaId, a.numero, tipo, `Intervento n.${a.numero}: ${descrizione}`, u.nome);
+  if (dt && ut) await inviaInvito(`ASSISTENZA:${a.id}`);
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/assistenza");
+  revalidatePath("/calendario");
 }
 
 export async function aggiornaAssistenza(formData: FormData) {
@@ -1045,27 +1160,49 @@ export async function aggiornaAssistenza(formData: FormData) {
   if (!id) return;
   const prima = await prisma.assistenza.findUnique({ where: { id } });
   if (!prima) return;
-  const ass = str(formData, "assegnatoUtenteId");
+  const ass = formData.has("assegnatoUtenteId") ? str(formData, "assegnatoUtenteId") : prima.assegnatoUtenteId;
   const ut = ass ? await prisma.utente.findUnique({ where: { id: ass } }) : null;
-  const dt = str(formData, "dataIntervento");
+  const dt = formData.has("dataIntervento") ? str(formData, "dataIntervento") : null;
+  const data = formData.has("dataIntervento") ? (dt ? daOraRoma(dt) : null) : prima.dataIntervento;
   let stato = str(formData, "stato") ?? prima.stato;
-  if (stato === "APERTA" && dt) stato = "PROGRAMMATA";
+  if ((stato === "APERTA" || stato === "IN_ATTESA_RICAMBIO") && data && !str(formData, "stato")) stato = "PROGRAMMATA";
+  const lavoroFinito = stato === "RISOLTA" && formData.get("lavoroFinito") === "1";
   await prisma.assistenza.update({
     where: { id },
     data: {
       stato,
       assegnatoUtenteId: ut?.id ?? null,
       assegnatoNome: ut?.nome ?? null,
-      dataIntervento: dt ? daOraRoma(dt) : null,
-      ricambioNote: str(formData, "ricambioNote"),
-      esito: str(formData, "esito"),
-      costo: flt(formData, "costo"),
+      dataIntervento: data,
+      ricambioNote: formData.has("ricambioNote") ? str(formData, "ricambioNote") : prima.ricambioNote,
+      esito: formData.has("esito") ? str(formData, "esito") : prima.esito,
+      costo: formData.has("costo") ? flt(formData, "costo") : prima.costo,
+      lavoroFinito,
       risoltaIl: stato === "RISOLTA" ? prima.risoltaIl ?? new Date() : null,
     },
   });
-  if (stato !== prima.stato) await log(prima.commessaId, `Assistenza #${prima.numero}: ${prima.stato} → ${stato} (${u.nome}).`);
+  const nome = `Intervento n.${prima.numero} (${nomeIntervento(prima.tipo)})`;
+  if (stato !== prima.stato) await log(prima.commessaId, `${nome}: ${prima.stato} → ${stato} (${u.nome})${stato === "RISOLTA" && str(formData, "esito") ? `. Report: ${str(formData, "esito")}` : ""}.`);
+  if (data && ut && (data.getTime() !== prima.dataIntervento?.getTime() || ut.id !== prima.assegnatoUtenteId)) {
+    await chiudiTaskFissare(prima.commessaId, prima.numero, prima.tipo, u.nome);
+    await inviaInvito(`ASSISTENZA:${id}`);
+  }
+  if (stato === "RISOLTA" && prima.stato !== "RISOLTA") {
+    await chiudiTaskFissare(prima.commessaId, prima.numero, prima.tipo, u.nome);
+    const altri = await prisma.assistenza.findMany({ where: { commessaId: prima.commessaId, id: { not: id } }, select: { tipo: true, stato: true } });
+    const c = await prisma.commessa.findUnique({ where: { id: prima.commessaId }, select: { stato: true } });
+    if (chiusuraIntervento({ tipo: prima.tipo, lavoroFinito }, altri).lavoriEseguiti && c && !["LAVORI_ESEGUITI", "CHIUSA"].includes(c.stato)) {
+      // come una posa finita: lavori eseguiti, recensione al cliente (con la spunta) e kit al commerciale
+      await prisma.commessa.update({ where: { id: prima.commessaId }, data: { stato: "LAVORI_ESEGUITI" } });
+      await log(prima.commessaId, `${nome} chiuso con lavoro finito: lavori eseguiti.`);
+      const inviata = inviaAlCliente(formData) ? await inviaMailPratica(prima.commessaId, "lavoro terminato: richiesta di recensione", (d) => mailPosaCompletata({ ...d, linkRecensione: process.env.RECENSIONI_URL || undefined })) : false;
+      if (inviata) await prisma.commessa.update({ where: { id: prima.commessaId }, data: { recensioneRichiestaIl: new Date() } });
+      await avviaFaseFlusso(prima.commessaId, "KIT", "POSA", u.nome);
+    }
+  }
   revalidatePath(`/commesse/${prima.commessaId}`);
   revalidatePath("/assistenza");
+  revalidatePath("/calendario");
 }
 
 // ── Presa in carico di un lavoro iniziato in BConsole ─────────────────────────
@@ -1477,7 +1614,7 @@ export async function taskDaRighe(formData: FormData) {
 }
 
 // ── Percorso guidato del progetto (richiesta di Ugo 16/11/2026) ──────────────────────────────────────────────────────────
-/** «Crea progetto»: dopo l'incasso dell'acconto (o l'approvazione del finanziamento) parte il percorso rilievo → prodotti → ordini → magazzino. */
+/** «Crea progetto»: il primo passo di Giorgia (Ugo, 21/11/2026): dentro il progetto si fanno fattura di acconto e chiamata di benvenuto; con l'acconto incassato parte il rilievo. */
 export async function creaProgetto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
@@ -1487,8 +1624,6 @@ export async function creaProgetto(formData: FormData) {
   if (!p) return;
   const torna = (q: string) => redirect(`/commesse/${id}?${q}`);
   if (p.progettoCreatoIl) torna("pok=" + encodeURIComponent("Il progetto è già stato creato."));
-  const c = await prisma.commessa.findUnique({ where: { id }, select: { fatturaAccontoIl: true } });
-  if (!c?.fatturaAccontoIl && !p.legacy) torna("pav=" + encodeURIComponent("Prima segna che la fattura di acconto è stata emessa."));
   await prisma.commessa.update({ where: { id }, data: { progettoCreatoIl: new Date(), progettoCreatoDaNome: utente.nome } });
   await log(id, `Progetto creato da ${utente.nome}.`);
   // se l'acconto è già incassato il centralino può fissare subito il rilievo, altrimenti aspetta l'incasso di Debora
@@ -1498,39 +1633,47 @@ export async function creaProgetto(formData: FormData) {
   torna("pok=" + encodeURIComponent("Progetto creato. Ora la chiamata di benvenuto al cliente."));
 }
 
-/** Passo 1 dell'apertura pratica (Giorgia): la fattura di acconto è stata emessa. Con annulla=1 si rimette «da fare». */
+/** Passo 3 dell'apertura pratica (Giorgia): la fattura di acconto è stata emessa, dentro il progetto già creato. Con annulla=1 si rimette «da fare». */
 export async function registraFatturaAcconto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
   const id = str(formData, "commessaId");
   if (!id) return;
   const annulla = str(formData, "annulla") === "1";
+  if (!annulla) {
+    const c = await prisma.commessa.findUnique({ where: { id }, select: { progettoCreatoIl: true } });
+    if (!c?.progettoCreatoIl) redirect(`/commesse/${id}?pav=${encodeURIComponent("Prima si crea il progetto: la fattura di acconto si fa dentro il progetto.")}`);
+  }
   await prisma.commessa.update({ where: { id }, data: annulla ? { fatturaAccontoIl: null, fatturaAccontoDaNome: null } : { fatturaAccontoIl: new Date(), fatturaAccontoDaNome: utente.nome } });
   await log(id, annulla ? `Fattura di acconto rimessa «da fare» da ${utente.nome}.` : `Fattura di acconto emessa (segnata da ${utente.nome}).`);
+  // con progetto, chiamata di benvenuto e fattura fatti l'apertura pratica di Giorgia è finita: si chiude il suo task
+  const fatta = !annulla && (await prisma.commessa.findUnique({ where: { id }, select: { benvenutoIl: true } }))?.benvenutoIl;
+  if (fatta) { await chiudiTaskFase(id, "FATT_ACCONTO"); await avviaRilievoSePronto(id); }
   revalidatePath(`/commesse/${id}`);
-  redirect(`/commesse/${id}?pok=${encodeURIComponent(annulla ? "Fattura di acconto rimessa da fare." : "Fattura di acconto segnata. Ora si crea il progetto.")}`);
+  redirect(`/commesse/${id}?pok=${encodeURIComponent(annulla ? "Fattura di acconto rimessa da fare." : fatta ? "Fattura di acconto segnata: apertura pratica completata." : "Fattura di acconto segnata.")}`);
 }
 
-/** Passo 3 dell'apertura pratica (Giorgia): chiamata di benvenuto al cliente, con la nota di com'è andata. Rivedibile: salvando di nuovo si aggiorna la nota. */
+/** Passo 2 dell'apertura pratica (Giorgia): chiamata di benvenuto al cliente, con la nota di com'è andata. Rivedibile: salvando di nuovo si aggiorna la nota. */
 export async function registraBenvenuto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!utente) redirect("/login");
   const id = str(formData, "commessaId");
   if (!id) return;
   const note = str(formData, "note");
-  const c = await prisma.commessa.findUnique({ where: { id }, select: { benvenutoIl: true, progettoCreatoIl: true } });
+  const c = await prisma.commessa.findUnique({ where: { id }, select: { benvenutoIl: true, progettoCreatoIl: true, fatturaAccontoIl: true } });
   if (!c) return;
   if (!c.progettoCreatoIl) redirect(`/commesse/${id}?pav=${encodeURIComponent("Prima si crea il progetto.")}`);
   const nuova = !c.benvenutoIl;
   await prisma.commessa.update({ where: { id }, data: { benvenutoIl: c.benvenutoIl ?? new Date(), benvenutoDaNome: utente.nome, benvenutoNote: note } });
   await log(id, `Chiamata di benvenuto al cliente ${nuova ? "fatta" : "aggiornata"} da ${utente.nome}${note ? `: ${note}` : "."}`);
-  if (nuova) {
-    // l'apertura pratica di Giorgia è finita: chiude il suo task; il rilievo parte se l'acconto è già incassato
+  const completa = nuova && !!c.fatturaAccontoIl;
+  if (completa) {
+    // fattura già segnata (pratiche aperte con l'ordine di prima): l'apertura di Giorgia è finita, si chiude il suo task
     await chiudiTaskFase(id, "FATT_ACCONTO");
     await avviaRilievoSePronto(id);
   }
   revalidatePath(`/commesse/${id}`);
-  redirect(`/commesse/${id}?pok=${encodeURIComponent(nuova ? "Chiamata di benvenuto salvata: apertura pratica completata." : "Chiamata di benvenuto aggiornata.")}`);
+  redirect(`/commesse/${id}?pok=${encodeURIComponent(!nuova ? "Chiamata di benvenuto aggiornata." : completa ? "Chiamata di benvenuto salvata: apertura pratica completata." : "Chiamata di benvenuto salvata. Ora la fattura di acconto.")}`);
 }
 
 /** «Conferma materiale»: rilievo caricato e righe con il fornitore → si sbloccano gli ordini; chiude il task del rilievo e avvisa l'ufficio ordini. */

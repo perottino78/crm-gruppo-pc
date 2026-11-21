@@ -11,13 +11,17 @@ const virgola = (n: number) => n.toFixed(2).replace(".", ",");
 export type ContoPerPagamento = { id: string; nome: string; tipo: string };
 export type PagamentoFatto = { abbinamentoId: string; importo: number; movimento: { id: string; data: Date; metodo: string | null; origine: string; confermatoIl: Date | null; daConfermare: boolean; conto: { nome: string } } };
 
-export default function RegistraPagamento({ scadenza, conti, ritorno, ritenutaSuggerita = 0, metodoSuggerito, compatto }: {
+export default function RegistraPagamento({ scadenza, conti, ritorno, ritenutaSuggerita = 0, metodoSuggerito, compatto, ringraziamento, causale }: {
   scadenza: { id: string; tipo: string; residuo: number; ritenuta?: number; pagamenti?: PagamentoFatto[] };
   conti: ContoPerPagamento[];
   ritorno: string;
   ritenutaSuggerita?: number;
   metodoSuggerito?: string | null;
   compatto?: boolean;
+  /** primo incasso dell'acconto di una pratica: spunta (non preselezionata) per mandare il ringraziamento al cliente */
+  ringraziamento?: boolean;
+  /** causale proposta, es. «SALDO FT n. 40/FE» */
+  causale?: string;
 }) {
   const incasso = scadenza.tipo === "INCASSO";
   const rit = Math.min(ritenutaSuggerita, scadenza.residuo);
@@ -59,10 +63,15 @@ export default function RegistraPagamento({ scadenza, conti, ritorno, ritenutaSu
           </label>
           <label className="text-[11px] text-neutral-600">Commissione €<input name="commissione" inputMode="decimal" placeholder="0,00" className={inp} /></label>
           {incasso && <label className="text-[11px] text-neutral-600">Ritenuta 11% €<input name="ritenuta" inputMode="decimal" defaultValue={rit ? virgola(rit) : ""} placeholder="solo bonifici per detrazione" className={inp} /></label>}
-          <label className={`text-[11px] text-neutral-600 ${compatto ? "col-span-2" : ""}`}>Causale / note<input name="note" placeholder="es. SALDO FT n. 2703/00, n. assegno" className={inp} /></label>
+          <label className={`text-[11px] text-neutral-600 ${compatto ? "col-span-2" : ""}`}>Causale / note<input name="note" defaultValue={causale ?? ""} placeholder="es. SALDO FT n. 2703/00, n. assegno" className={inp} /></label>
           <label className={`flex items-center gap-2 text-[11px] text-neutral-700 ${compatto ? "col-span-2" : "sm:col-span-2"}`} title="Per i casi in cui il movimento in prima nota c'è già o non va inserito">
             <input type="checkbox" name="senzaPrimaNota" value="1" /> non generare un movimento in prima nota
           </label>
+          {incasso && ringraziamento && (
+            <label className={`flex items-center gap-2 text-[11px] font-semibold text-green-900 ${compatto ? "col-span-2" : "sm:col-span-2"}`} title="Email di ringraziamento per il pagamento dell'acconto, dalla casella della fatturazione; parte una volta sola per pratica">
+              <input type="checkbox" name="ringrazia" value="1" /> ✉️ Manda il ringraziamento al cliente
+            </label>
+          )}
           <button className={`btn-3d ${incasso ? "btn-3d-green" : "btn-3d-orange"} text-xs py-2 ${compatto ? "col-span-2" : ""}`}>{incasso ? "Registra incasso" : "Registra pagamento"}</button>
           {incasso && rit > 0 && <p className={`${compatto ? "col-span-2" : "sm:col-span-4"} text-[10px] text-neutral-500`}>Bonifico parlante: ritenuta = importo lordo ÷ 1,22 × 11% = {eur(rit)}; la banca accredita il totale meno questa cifra. Puoi correggerla a mano.</p>}
           {!conti.length && <p className="text-[11px] text-red-700 col-span-2">Nessuna banca: aggiungila in Amministrazione › Banche.</p>}

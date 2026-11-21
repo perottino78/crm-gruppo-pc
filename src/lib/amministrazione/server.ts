@@ -81,12 +81,15 @@ export function residuoMovimento(m: { importo: number; abbinamenti: { importo: n
  * - Se l'incasso è già segnato nella commessa (prima della prima nota), la scadenza risulta saldata
  *   "a mano" con l'importo registrato in commessa.
  */
-export async function sincronizzaScadenzeCommesse(): Promise<number> {
+export async function sincronizzaScadenzeCommesse(soloCommessa?: string): Promise<number> {
   const [commesse, esistenti] = await Promise.all([
     // le pratiche prese da BConsole incassano dalle fatture BConsole agganciate: niente rate automatiche
-    prisma.commessa.findMany({ where: { ordineBC: null }, include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } }),
-    prisma.scadenza.findMany({ where: { commessaId: { not: null } }, include: { abbinamenti: true } }),
+    prisma.commessa.findMany({ where: { ordineBC: null, ...(soloCommessa ? { id: soloCommessa } : {}) }, include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } }),
+    prisma.scadenza.findMany({ where: soloCommessa ? { commessaId: soloCommessa } : { commessaId: { not: null } }, include: { abbinamenti: true } }),
   ]);
+  // rate intermedie fra acconto e saldo (Debora 21/11/2026): scadenze «COMMESSA_RATA_<n>», tolte dal saldo
+  const rate = new Map<string, number>();
+  for (const s of esistenti) if (s.commessaId && s.origine.startsWith("COMMESSA_RATA_") && s.stato !== "ANNULLATA") rate.set(s.commessaId, cent((rate.get(s.commessaId) ?? 0) + s.importo));
   const mappa = new Map(esistenti.map((s) => [`${s.commessaId}|${s.origine}`, s]));
   let modifiche = 0;
   for (const c of commesse) {
@@ -94,7 +97,7 @@ export async function sincronizzaScadenzeCommesse(): Promise<number> {
     const annullata = c.stato === "ANNULLATA";
     const conAcconto = c.accontoTipo !== "FINANZIAMENTO" && c.accontoImporto > 0;
     const acconto = conAcconto ? cent(c.accontoImportoIncassato ?? c.accontoImporto) : 0;
-    const saldo = cent(Math.max(0, c.totaleVendita - acconto));
+    const saldo = cent(Math.max(0, c.totaleVendita - acconto - (rate.get(c.id) ?? 0)));
     const voci = [
       conAcconto && {
         origine: "COMMESSA_ACCONTO",

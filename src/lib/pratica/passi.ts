@@ -1,4 +1,4 @@
-// Percorso guidato della pratica (richiesta di Ugo, 18/11/2026): le operazioni dalla conferma d'ordine al kit sono in sequenza; la pagina
+// Percorso guidato della pratica (richiesta di Ugo, 18/11/2026; 21/11/2026: prima si crea il progetto, poi fattura e chiamata ci stanno dentro): le operazioni dalla conferma d'ordine al kit sono in sequenza; la pagina
 // della pratica mostra SOLO il passo in corso (o uno già fatto che si vuole rivedere o modificare) e non le schermate dei passi dopo finché
 // quello attuale non è salvato. Modulo puro: decide stato e passo corrente dai dati della pratica.
 
@@ -20,6 +20,13 @@ export type DatiPassi = {
   posaFissata: boolean;
   posaFinita: boolean;
   kitConsegnato: boolean;
+  /**
+   * Posa parziale per materiale mancante, rotto o in garanzia (Ugo, 21/11/2026): si torna all'ufficio ordini.
+   * `ordinato` = il materiale nuovo è stato aggiunto e ordinato tutto. Finché il riordino è aperto, materiale e arrivo tornano da fare.
+   */
+  riordino?: { ordinato: boolean } | null;
+  /** C'è un intervento di fine posa ancora da fare (dopo una posa parziale): la pratica resta al passo «Posa e fine lavori». */
+  interventoFinePosa?: boolean;
 };
 
 export type StatoPasso = "FATTO" | "ORA" | "IN_ATTESA";
@@ -38,13 +45,13 @@ export type PassoPratica = {
 
 type Def = { chiave: ChiavePasso; titolo: string; chi: string; parallelo: boolean };
 const DEF: Def[] = [
-  { chiave: "FATTURA", titolo: "Fattura di acconto", chi: "Fatturazione (Giorgia)", parallelo: false },
   { chiave: "PROGETTO", titolo: "Creazione del progetto", chi: "Fatturazione (Giorgia)", parallelo: false },
   { chiave: "BENVENUTO", titolo: "Chiamata di benvenuto", chi: "Fatturazione (Giorgia)", parallelo: false },
+  { chiave: "FATTURA", titolo: "Fattura di acconto", chi: "Fatturazione (Giorgia)", parallelo: false },
   { chiave: "INCASSO", titolo: "Incasso dell'acconto", chi: "Amministrazione (Debora)", parallelo: true },
   { chiave: "RILIEVO_APP", titolo: "Appuntamento di rilievo", chi: "Centralino (Alessia)", parallelo: false },
   { chiave: "RILIEVO", titolo: "Rilievo eseguito", chi: "Tecnico", parallelo: false },
-  { chiave: "MATERIALE", titolo: "Materiale e ordini", chi: "Ufficio ordini (Laura)", parallelo: false },
+  { chiave: "MATERIALE", titolo: "Materiale e invio ordini", chi: "Ufficio ordini (Laura)", parallelo: false },
   { chiave: "ARRIVO", titolo: "Arrivo in magazzino", chi: "Magazzino", parallelo: false },
   { chiave: "SALDO", titolo: "Fattura e incasso del saldo", chi: "Fatturazione (Giorgia)", parallelo: true },
   { chiave: "POSA_APP", titolo: "Appuntamento di posa", chi: "Centralino (Alessia)", parallelo: false },
@@ -64,6 +71,8 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
     RILIEVO_APP: d.rilievoFissato, RILIEVO: d.rilievoCaricato, MATERIALE: d.ordinato, ARRIVO: d.materialeCompleto, SALDO: d.saldoIncassato,
     POSA_APP: d.posaFissata, POSA: d.posaFinita, KIT: d.kitConsegnato,
   };
+  if (d.interventoFinePosa && !d.posaFinita) raw.POSA_APP = true;
+  if (d.riordino) { raw.MATERIALE = d.riordino.ordinato; raw.ARRIVO = false; raw.POSA_APP = false; }
   const sequenza = DEF.filter((x) => !x.parallelo);
   // fatto = dato proprio oppure un passo della sequenza più avanti è fatto
   const fatto = (c: ChiavePasso): boolean => {
@@ -76,7 +85,8 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
   const corrente = sequenza.find((x) => !fatto(x.chiave))?.chiave ?? null;
   const passi = DEF.map((x): PassoPratica => {
     const f = fatto(x.chiave);
-    const stato: StatoPasso = f ? "FATTO" : x.chiave === corrente ? "ORA" : x.parallelo ? (x.chiave === "INCASSO" ? "ORA" : d.ordinato ? "ORA" : "IN_ATTESA") : "IN_ATTESA";
+    // incasso e saldo si possono fare in ogni momento (il saldo anche prima che arrivi il materiale, per portarsi avanti con i pagamenti)
+    const stato: StatoPasso = f ? "FATTO" : x.chiave === corrente || x.parallelo ? "ORA" : "IN_ATTESA";
     return { chiave: x.chiave, titolo: x.titolo, chi: x.chi, parallelo: x.parallelo, stato, nota: notaPasso(x.chiave, f, d) };
   });
   return { passi, corrente };
@@ -85,17 +95,17 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
 function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
   if (fatto) return "Fatto.";
   switch (c) {
-    case "FATTURA": return "Emetti la fattura di acconto, poi segnala che è fatta.";
-    case "PROGETTO": return "Crea il progetto della pratica.";
-    case "BENVENUTO": return "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
-    case "INCASSO": return "Registra il pagamento dell'acconto (o il finanziamento approvato): parte da solo il ringraziamento al cliente e il task si chiude da solo.";
-    case "RILIEVO_APP": return !d.viaLibera ? "Serve l'acconto incassato: poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
+    case "PROGETTO": return "Crea il progetto della pratica: chiamata di benvenuto e fattura di acconto si fanno dentro il progetto.";
+    case "BENVENUTO": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
+    case "FATTURA": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Emetti la fattura di acconto, poi segnala che è fatta: l'apertura della pratica è completa.";
+    case "INCASSO": return "Registra i pagamenti (acconto ed eventuali rate intermedie) e spunta «Manda il ringraziamento al cliente»: parte dalla casella della fatturazione. Con il 50% incassato (o il finanziamento approvato da Giorgia) il task si chiude da solo e parte il rilievo.";
+    case "RILIEVO_APP": return !d.viaLibera ? "Serve il 50% incassato (o il finanziamento approvato, o lo sblocco dell'amministratore): poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
     case "RILIEVO": return "Il tecnico carica misure, PDF e foto del rilievo.";
-    case "MATERIALE": return "Controlla i prodotti, conferma il materiale e ordina ai fornitori.";
+    case "MATERIALE": return d.riordino ? "Posa parziale: aggiungi e ordina il materiale mancante, rotto o in garanzia." : "Controlla i prodotti, conferma il materiale e invia gli ordini ai fornitori (email dal CRM o caricati sul portale del fornitore).";
     case "ARRIVO": return "Il magazzino carica bolle e fatture del materiale in arrivo.";
-    case "SALDO": return "Emetti la fattura di saldo e registra l'incasso: con il saldo si conferma il giorno di posa.";
+    case "SALDO": return "Fattura di saldo e incasso: si possono fare quando vuoi, anche prima che arrivi il materiale. Con il saldo incassato si conferma il giorno di posa.";
     case "POSA_APP": return "Scegli squadra, giorno e giorni previsti.";
-    case "POSA": return "La squadra posa; il centralino carica i documenti e segna Finita o Parziale.";
+    case "POSA": return d.interventoFinePosa ? "Posa parziale: c'è un intervento di fine posa da fissare e chiudere con il report (sezione Interventi)." : "La squadra posa; il centralino carica i documenti e segna Finita o Parziale (si apre un intervento: solo per finire, o con materiale da riordinare).";
     case "KIT": return "Il commerciale consegna il kit di manutenzione e lo registra.";
   }
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { numeroCommessa } from "@/lib/commesse";
+import { nomeIntervento } from "@/lib/pratica/interventi";
 import { aggiornaAssistenza } from "@/app/commesse-actions";
 import { soloAttivi } from "@/lib/utenti/stato";
 
@@ -25,7 +26,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
   ]);
   return (
     <div className="max-w-5xl">
-      <h1 className="text-2xl font-bold text-neutral-900 mb-1">Assistenza</h1>
+      <h1 className="text-2xl font-bold text-neutral-900 mb-1">Interventi e assistenza</h1>
       <p className="text-xs text-neutral-600 mb-3">Le richieste si aprono dalla scheda della commessa.</p>
       <div className="flex gap-2 mb-4 text-xs">
         <Link href="/assistenza" className="underline text-blue-800">aperte</Link>
@@ -36,7 +37,7 @@ export default async function AssistenzaPage({ searchParams }: { searchParams: P
         {lista.map((a) => (
           <div key={a.id} className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties}>
             <p className="text-sm text-neutral-900">
-              <b>#{a.numero}</b> · <Link href={`/commesse/${a.commessaId}`} className="underline text-blue-800">{numeroCommessa(a.commessa)} {a.commessa.cliente.nome}</Link>
+              <b>{nomeIntervento(a.tipo)} n.{a.numero}</b> · <Link href={`/commesse/${a.commessaId}#interventi`} className="underline text-blue-800">{numeroCommessa(a.commessa)} {a.commessa.cliente.nome}</Link>
               {" · "}{a.prodotto ? a.prodotto + " · " : ""}{a.descrizione}
               <span className={`ml-2 text-xs font-bold px-2 py-0.5 rounded ${a.priorita === "URGENTE" ? "bg-red-200" : "bg-neutral-200"}`}>{a.priorita}</span>
               <span className={`ml-1 text-xs px-2 py-0.5 rounded ${a.inGaranzia ? "bg-green-100" : "bg-amber-200"}`}>{a.inGaranzia ? "in garanzia" : "fuori garanzia"}</span>

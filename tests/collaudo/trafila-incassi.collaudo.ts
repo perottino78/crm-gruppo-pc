@@ -31,10 +31,12 @@ async function main() {
   console.log("1. Incasso dell'acconto: si chiude il task di Debora, l'apertura pratica resta a Giorgia");
   const r = await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-03", importo: "500", contoId: banca.id, metodo: "BONIFICO", ritorno: "/amministrazione/scadenzario" })));
   verifica((await prisma.commessa.findUnique({ where: { id: c.id } }))?.accontoIncassato, "la commessa risulta con l'acconto incassato", r);
-  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO", "l'incasso chiude il task di Debora; la fattura, il progetto e il benvenuto restano a Giorgia");
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO,PROGETTO", "500 su 2.500 (sotto il 50%): il task di Debora resta aperto");
 
-  console.log("2. Un secondo incasso non crea doppioni");
+  console.log("2. Con il 50% incassato si chiude il task di Debora, senza doppioni");
   await dove(registraPagamento(fd({ scadenzaId: acconto.id, data: "2026-11-04", importo: "500", contoId: banca.id, metodo: "BONIFICO" })));
+  await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-05", importo: "250", contoId: banca.id, metodo: "BONIFICO" })));
+  verifica((await aperti(c.id)).map((t) => t.faseChiave).sort().join() === "FATT_ACCONTO", "1.250 su 2.500: si chiude il task di Debora; l'apertura pratica resta a Giorgia");
   verifica((await prisma.taskPratica.count({ where: { commessaId: c.id } })) === 2, "sempre e solo i due task iniziali");
 
   console.log("3. Saldo pagato: si chiude il task di fatturazione del saldo");
@@ -44,7 +46,7 @@ async function main() {
   verifica((await saldiAperti()) === 2, "due task di saldo aperti");
   await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-20", importo: "1000", contoId: banca.id, metodo: "BONIFICO" })));
   verifica((await saldiAperti()) === 2, "saldo pagato solo in parte: i task restano aperti");
-  await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-21", importo: "500", contoId: banca.id, metodo: "BONIFICO" })));
+  await dove(registraPagamento(fd({ scadenzaId: saldo.id, data: "2026-11-21", importo: "250", contoId: banca.id, metodo: "BONIFICO" })));
   verifica((await saldiAperti()) === 0, "pagato tutto: si chiudono tutti e due i task di fatturazione del saldo");
 
   console.log("4. Incasso su una fattura di vendita agganciata alla pratica (come Giorgini da BConsole)");

@@ -1,12 +1,13 @@
 "use server";
 
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { ringraziaPagamentoAcconto } from "@/lib/pratica/mail-cliente-server";
-import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_CHIUSI, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
+import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_CHIUSI, STATI_TASK, compila, nomeUfficio, VERSIONE_TESTI_FLUSSO, FASI_TESTI_AGGIORNATI } from "@/lib/flusso";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 import { costoLavoro, durataLeggibile, numeroIt } from "@/lib/pratica/costo-lavoro";
 
@@ -21,6 +22,7 @@ export async function assicuraFlusso() {
   const esistenti = new Set((await prisma.flussoFase.findMany({ select: { chiave: true } })).map((f) => f.chiave));
   // di partenza tutte le fasi; poi solo quelle che mancano (le fasi già modificate dall'amministratore non si toccano)
   const mancanti = FASI_DEFAULT.map((f, i) => ({ f, i })).filter(({ f }) => !esistenti.has(f.chiave));
+  await allineaTestiFlusso();
   if (!mancanti.length) return;
   await prisma.flussoFase.createMany({
     skipDuplicates: true,
@@ -31,6 +33,17 @@ export async function assicuraFlusso() {
       mailOggetto: f.mailOggetto ?? null, mailTesto: f.mailTesto ?? null,
     })),
   });
+}
+
+/** Una volta per versione: nome e testi del task delle fasi cambiate (es. Giorgia: prima il progetto, poi fattura e chiamata). Uffici, catena e mail non si toccano. */
+async function allineaTestiFlusso() {
+  const chiave = "flusso_testi_versione";
+  const c = await prisma.configurazione.findUnique({ where: { chiave }, select: { valore: true } });
+  if (c?.valore === VERSIONE_TESTI_FLUSSO) return;
+  for (const f of FASI_DEFAULT.filter((x) => FASI_TESTI_AGGIORNATI.includes(x.chiave))) {
+    await prisma.flussoFase.updateMany({ where: { chiave: f.chiave }, data: { nome: f.nome, taskTitolo: f.taskTitolo, taskTesto: f.taskTesto } });
+  }
+  await prisma.configurazione.upsert({ where: { chiave }, create: { chiave, valore: VERSIONE_TESTI_FLUSSO }, update: { valore: VERSIONE_TESTI_FLUSSO } });
 }
 
 async function variabili(commessaId: string, ufficioPrec?: string | null) {
@@ -129,7 +142,7 @@ export async function praticaDiIncasso(scadenzaId: string): Promise<string | nul
  * se la pratica è ferma alla «Fattura acconto» la fase si chiude da sola e parte il task dell'ufficio successivo;
  * se la pratica è pagata tutta e aspetta la «Fattura saldo», si chiude anche quella (parte la posa).
  */
-export async function avanzaDopoIncasso(commessaId: string, quando: Date = new Date()): Promise<string[]> {
+export async function avanzaDopoIncasso(commessaId: string, quando: Date = new Date(), opz: { ringrazia?: boolean } = {}): Promise<string[]> {
   const u = await getCurrentUser();
   if (!u) return [];
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { tasks: { where: { completatoIl: null, stato: { notIn: STATI_CHIUSI } }, orderBy: { createdAt: "asc" } } } });
@@ -144,9 +157,11 @@ export async function avanzaDopoIncasso(commessaId: string, quando: Date = new D
   const giorno = quando.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
   if (pagato > 0.5 && !c.accontoIncassato && c.accontoTipo !== "FINANZIAMENTO") {
     await prisma.commessa.update({ where: { id: commessaId }, data: { accontoIncassato: true, accontoIncassatoIl: quando, accontoImportoIncassato: Math.round(Math.min(pagato, c.accontoImporto || pagato) * 100) / 100 } });
-    await ringraziaPagamentoAcconto(commessaId);
-    await dopoIncassoAcconto(commessaId);
+    // il ringraziamento al cliente parte solo con la spunta di chi registra l'incasso (Ugo, 21/11/2026)
+    if (opz.ringrazia) await ringraziaPagamentoAcconto(commessaId);
   }
+  // ogni incasso (anche una rata intermedia) può portare la pratica al 50%: allora si chiude il task di Debora e parte il rilievo
+  if (pagato > 0.5 && c.accontoTipo !== "FINANZIAMENTO") await dopoIncassoAcconto(commessaId);
   const tutto = c.totaleVendita > 0 && pagato >= c.totaleVendita - 0.5;
   const chiuse: string[] = [];
   for (const t of c.tasks) {
@@ -171,14 +186,17 @@ export async function avviaRilievoSePronto(commessaId: string): Promise<boolean>
     select: { progettoCreatoIl: true, accontoTipo: true, accontoIncassato: true, finanziamentoStato: true, ordineBC: true, rilievi: { select: { id: true } }, tasks: { where: { faseChiave: "RILIEVO_APP" }, select: { id: true } } },
   });
   if (!c || !c.progettoCreatoIl || c.tasks.length > 0 || c.rilievi.length > 0) return false;
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
-  if (!viaLibera) return false;
+  if (!(await statoSogliaRilievo(commessaId))?.viaLibera) return false;
   await avviaFaseFlusso(commessaId, "RILIEVO_APP", "AMMINISTRAZIONE");
   return true;
 }
 
-/** Acconto incassato (o finanziamento approvato): si chiude il task di incasso di Debora e, se il progetto c'è già, parte il rilievo. */
+/**
+ * Dopo ogni incasso (o finanziamento approvato): quando la pratica ha il 50% incassato (o il finanziamento approvato, o lo sblocco
+ * dell'amministratore) si chiude il task di incasso di Debora e, se il progetto c'è già, parte il rilievo. Sotto il 50% resta tutto aperto.
+ */
 export async function dopoIncassoAcconto(commessaId: string): Promise<void> {
+  if (!(await statoSogliaRilievo(commessaId))?.viaLibera) return;
   await chiudiTaskFase(commessaId, "PROGETTO");
   await avviaRilievoSePronto(commessaId);
 }

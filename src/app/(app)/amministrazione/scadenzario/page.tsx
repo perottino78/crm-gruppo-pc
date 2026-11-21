@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { praticheDaRingraziare } from "@/lib/pratica/ringraziamento";
+import { causaliIncassi } from "@/lib/amministrazione/causale-server";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { sincronizzaScadenzeCommesse, residuoScadenza } from "@/lib/amministrazione/server";
@@ -33,9 +35,12 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
   // incassi di fatture con detrazione: si propone la ritenuta dell'11%
   const fv = await prisma.fatturaVendita.findMany({ where: { id: { in: scadenze.map((x) => x.fatturaVenditaId).filter(Boolean) as string[] }, detrazione: true }, select: { id: true, imponibile: true, totale: true } });
   const fvDi = new Map(fv.map((f) => [f.id, f]));
+  // incassi: spunta del ringraziamento al primo incasso di una pratica e causale «ACCONTO/SALDO FT n. …» già scritta (Ugo, 21/11/2026)
+  const [ringraziare, causali] = await Promise.all([praticheDaRingraziare(scadenze.filter((x) => x.tipo === "INCASSO")), causaliIncassi(scadenze)]);
   const righe = scadenze.map((s) => ({
     ...s, residuo: residuoScadenza(s), scaduta: !!s.dataScadenza && s.dataScadenza < oggi && ["APERTA", "PARZIALE"].includes(s.stato),
     ritenutaSuggerita: s.fatturaVenditaId && fvDi.has(s.fatturaVenditaId) && s.ritenuta === 0 ? ritenutaPrevista(residuoScadenza(s)) : 0,
+    ringrazia: ringraziare.has(s.id), causale: causali.get(s.id),
   }));
   const ritorno = `/amministrazione/scadenzario${qsBase(p)}`;
   const tot = (tipo: string) => cent(righe.filter((r) => r.tipo === tipo && r.stato !== "ANNULLATA").reduce((t, r) => t + r.residuo, 0));
@@ -151,7 +156,7 @@ export default async function ScadenzarioPage({ searchParams }: { searchParams: 
 }
 
 type Riga = Awaited<ReturnType<typeof prisma.scadenza.findMany>>[number] & {
-  residuo: number; scaduta: boolean; ritenutaSuggerita: number;
+  residuo: number; scaduta: boolean; ritenutaSuggerita: number; ringrazia: boolean; causale?: string;
   abbinamenti: { id: string; importo: number; movimento: { id: string; data: Date; metodo: string | null; origine: string; confermatoIl: Date | null; daConfermare: boolean; conto: { nome: string } } }[];
 };
 
@@ -198,7 +203,7 @@ function Gruppo({ titolo, righe, conti, ritorno }: { titolo: string; righe: Riga
                 <details className="relative inline-block text-left">
                   <summary className="cursor-pointer text-xs underline text-neutral-700 list-none">Gestisci</summary>
                   <div className="absolute right-0 z-20 mt-1 w-[26rem] max-w-[90vw] bg-white border border-neutral-300 rounded-lg shadow-lg p-3 space-y-3">
-                    <RegistraPagamento compatto conti={conti} ritorno={ritorno} ritenutaSuggerita={s.ritenutaSuggerita}
+                    <RegistraPagamento compatto conti={conti} ritorno={ritorno} ritenutaSuggerita={s.ritenutaSuggerita} ringraziamento={s.ringrazia} causale={s.causale}
                       scadenza={{ id: s.id, tipo: s.tipo, residuo: s.residuo, ritenuta: s.ritenuta, pagamenti: s.abbinamenti.map((a) => ({ abbinamentoId: a.id, importo: a.importo, movimento: a.movimento })) }} />
                     <form action={impostaStatoScadenza} className="space-y-1.5 border-t pt-2">
                       <input type="hidden" name="id" value={s.id} />

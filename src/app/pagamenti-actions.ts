@@ -60,6 +60,7 @@ export async function registraPagamento(fd: FormData) {
         where: { id: s!.id },
         data: {
           pagatoManuale: cent(s!.pagatoManuale + importo), pagataIl: data, metodoPagamento: metodo, bancaPagamento: conto?.nome ?? s!.bancaPagamento,
+          manualeDaControllare: true, controllatoEstrattoIl: null, controllatoDaNome: null,
           note: [s!.note, `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)} del ${giorno(data)} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} — senza movimento in prima nota${str(fd, "note") ? ` · ${str(fd, "note")}` : ""}`].filter(Boolean).join("\n"),
         },
       });
@@ -93,12 +94,24 @@ export async function registraPagamento(fd: FormData) {
   await ricalcolaScadenza(s!.id);
   // incasso di una pratica: la trafila dei task va avanti da sola (acconto → ufficio successivo, saldo → posa)
   const pratica = incasso ? await praticaDiIncasso(s!.id) : null;
-  const avanzate = pratica ? await avanzaDopoIncasso(pratica, data) : [];
+  const avanzate = pratica ? await avanzaDopoIncasso(pratica, data, { ringrazia: fd.get("ringrazia") === "1" }) : [];
   const testo = `${incasso ? "Incasso" : "Pagamento"} ${eur(importo)}${ritenuta ? ` + ritenuta ${eur(ritenuta)}` : ""} · ${nomeMetodo(metodo)}${conto ? ` · ${conto.nome}` : ""} · ${giorno(data)}${commissione ? ` · commissione ${eur(commissione)}` : ""}${senzaPrimaNota ? " · senza movimento in prima nota" : ""}`;
   await registra("Scadenza", s!.id, incasso ? "Incasso registrato" : "Pagamento registrato", `${s!.controparte} · ${s!.descrizione} — ${testo}`, u!.nome);
   aggiorna();
   revalidatePath("/commesse/[id]", "page");
   torna(ritorno, { ok: `${testo}. ${residuo - importo - ritenuta > 0.004 ? `Resta da saldare ${eur(cent(residuo - importo - ritenuta))}.` : "Scadenza saldata."}${avanzate.length ? ` Pratica avanzata: chiusa la fase «${avanzate.join("», «")}», task all'ufficio successivo.` : ""}` });
+}
+
+/** Pagamento segnato a mano senza prima nota: controllato con l'estratto conto (o rimesso da controllare con annulla=1). */
+export async function segnaControllatoEstratto(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id");
+  if (!id) return;
+  const annulla = str(fd, "annulla") === "1";
+  const s = await prisma.scadenza.update({ where: { id }, data: annulla ? { controllatoEstrattoIl: null, controllatoDaNome: null } : { controllatoEstrattoIl: new Date(), controllatoDaNome: u.nome } });
+  await registra("Scadenza", s.id, annulla ? "Rimesso da controllare" : "Controllato con l'estratto conto", `${s.controparte} · ${s.descrizione}`, u.nome);
+  aggiorna();
 }
 
 /** Annulla un pagamento registrato a mano (sbagliato): solo se l'estratto conto non l'ha ancora confermato e il mese è aperto. */
