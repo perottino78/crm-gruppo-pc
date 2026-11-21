@@ -117,7 +117,7 @@ export default async function OrdiniFornitoriPage({ searchParams }: { searchPara
                   <td className="text-xs">{o.righe.length ? `${arr}/${o.righe.length}` : "—"}</td>
                   <td className="text-right text-xs">{t.totale ? eur(t.totale) : "—"}</td>
                   <td className="p-2"><span className="text-xs px-2 py-0.5 rounded-full text-white" style={{ background: s.colore }}>{s.nome}</span></td>
-                  <td className="p-2">{o.stato !== "ANNULLATO" && <Link href={`/ordini-fornitori/${o.id}#scheda-produzione`} className="btn-3d btn-3d-outline whitespace-nowrap px-2 py-1 text-[11px]">📐 Modulo</Link>}</td>
+                  <td className="p-2">{o.stato !== "ANNULLATO" && <Link href={`/ordini-fornitori/${o.id}?passo=modulo`} className="btn-3d btn-3d-outline whitespace-nowrap px-2 py-1 text-[11px]">📐 Modulo</Link>}</td>
                 </tr>
               );
             })}

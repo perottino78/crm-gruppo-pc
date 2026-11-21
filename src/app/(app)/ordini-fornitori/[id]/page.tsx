@@ -26,7 +26,7 @@ const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const iso = (d?: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string; scheda?: string }> }) {
+export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string; scheda?: string; passo?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
   const { id } = await params;
@@ -58,6 +58,19 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const modelloScelto = msg.scheda ? modelliScheda.find((m) => m.id === msg.scheda) ?? null : null;
   const s = statoOrdine(o.stato);
   const bozza = o.stato === "BOZZA", annullato = o.stato === "ANNULLATO";
+  // pagina a passi (Ugo 21/11/2026): si vede un passo alla volta; ?passo=righe|modulo|invio|conferma|arrivo|documenti
+  const PASSI = [
+    { k: "righe", n: "Righe e dati", i: "📋", fatto: o.righe.length > 0, attivo: true },
+    { k: "modulo", n: "Modulo del fornitore", i: "📐", fatto: schedeCreate.length > 0, attivo: true },
+    { k: "invio", n: "Invio", i: "✉️", fatto: !bozza, attivo: o.righe.length > 0 },
+    { k: "conferma", n: "Conferma del fornitore", i: "🧾", fatto: o.totaleConfermato !== null || !!o.numeroConfermaFornitore, attivo: !bozza },
+    { k: "arrivo", n: "Arrivo merce", i: "🚚", fatto: o.righe.length > 0 && o.righe.every((r) => r.arrivato), attivo: !bozza },
+    { k: "documenti", n: "Documenti", i: "📎", fatto: false, attivo: true },
+  ];
+  const passo = PASSI.find((x) => x.k === msg.passo)?.k ?? (msg.scheda ? "modulo" : bozza ? "righe" : "conferma");
+  const viPasso = (k: string) => `/ordini-fornitori/${o.id}?passo=${k}`;
+  const attivi = PASSI.filter((x) => x.attivo);
+  const posizione = attivi.findIndex((x) => x.k === passo);
   const t = totaleOrdine(o.righe);
   const nr = numeroOrdine(o);
   const emailForn = o.fornitore.emailOrdini ?? o.fornitore.email ?? "";
@@ -82,7 +95,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       {/* scorciatoie per l'ufficio ordini (richiesta di Ugo 20/11/2026): i moduli di rilievo interattivi e il rilievo della pratica */}
       {!annullato && (
         <div className="flex flex-wrap gap-2">
-          <a href="#scheda-produzione" className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</a>
+          <Link href={viPasso("modulo")} className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</Link>
           {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-blue px-4 py-2 text-sm">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
         </div>
       )}
@@ -90,6 +103,22 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       {o.inviatoIl && <p className="text-xs text-neutral-600">Inviato il {o.inviatoIl.toLocaleString("it-IT")} {o.inviatoA ? `a ${o.inviatoA}` : ""} ({o.modalitaInvio === "EMAIL" ? "email dal CRM" : "a mano"}) da {o.inviatoDaNome}</p>}
 
+      {/* passi dell'ordine: si vede solo quello che serve in quel momento */}
+      {!annullato && (
+        <nav aria-label="Passi dell'ordine" className="flex flex-wrap gap-1.5">
+          {PASSI.map((x) => x.attivo ? (
+            <Link key={x.k} href={viPasso(x.k)} aria-current={x.k === passo ? "step" : undefined}
+              className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${x.k === passo ? "border-blue-600 bg-blue-600 text-white" : x.fatto ? "border-green-400 bg-green-50 text-green-900" : "border-neutral-300 bg-white text-neutral-700"}`}>
+              {x.fatto && x.k !== passo ? "✓" : x.i} {x.n}
+            </Link>
+          ) : (
+            <span key={x.k} className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-semibold text-neutral-400" title="Disponibile dopo l'invio dell'ordine">{x.i} {x.n}</span>
+          ))}
+        </nav>
+      )}
+
+      {passo === "righe" && (
+        <>
       <section className="bg-white border border-neutral-200 rounded-lg p-4">
         <h2 className="font-bold mb-2">Dati dell&apos;ordine</h2>
         <form action={salvaTestataOrdine} className="grid md:grid-cols-3 gap-2">
@@ -174,7 +203,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         )}
       </section>
 
-      {!annullato && (
+        </>
+      )}
+
+      {passo === "modulo" && !annullato && (
         <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
           <h2 className="font-bold mb-1">📐 Modulo di rilievo / scheda di produzione per il fornitore (misure definitive)</h2>
           {msg.scheda && msg.ok && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
@@ -211,7 +243,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </section>
       )}
 
-      {!annullato && o.righe.length > 0 && (
+      {passo === "invio" && !annullato && o.righe.length > 0 && (
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
@@ -227,7 +259,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </section>
       )}
 
-      {!bozza && !annullato && (
+      {passo === "invio" && !bozza && !annullato && (
         <form action={segnaOrdineRicevuto} className={`rounded-lg border p-3 flex flex-wrap items-center gap-3 ${o.ricevutoIl ? "border-green-300 bg-green-50" : "border-amber-300 bg-amber-50"}`}>
           <input type="hidden" name="id" value={o.id} />
           <input type="hidden" name="ricevuto" value={o.ricevutoIl ? "0" : "1"} />
@@ -237,8 +269,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       )}
 
       {!bozza && !annullato && (
-        <div className="grid md:grid-cols-2 gap-4">
-          <section className="bg-white border border-neutral-200 rounded-lg p-4">
+        <div className="grid gap-4">
+          {passo === "conferma" && <section className="bg-white border border-neutral-200 rounded-lg p-4">
             <h2 className="font-bold mb-2">Conferma del fornitore</h2>
             <form action={registraConfermaFornitore} className="space-y-2">
               <input type="hidden" name="id" value={o.id} />
@@ -251,8 +283,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Salva conferma</button>
               <p className="text-xs text-neutral-500">La conferma d&apos;ordine del fornitore (PDF) caricala nei documenti qui sotto, cartella «Conferma del fornitore».</p>
             </form>
-          </section>
-          <section className="bg-white border border-neutral-200 rounded-lg p-4">
+          </section>}
+          {passo === "arrivo" && <section className="bg-white border border-neutral-200 rounded-lg p-4">
             <h2 className="font-bold mb-2">Arrivo merce</h2>
             <form action={registraArrivi} className="space-y-1">
               <input type="hidden" name="id" value={o.id} />
@@ -262,13 +294,13 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               ))}
               <button className="btn-3d btn-3d-green text-sm px-3 py-1.5 mt-2">Registra arrivi</button>
             </form>
-          </section>
+          </section>}
         </div>
       )}
 
-      <Documenti entita="ORDINE_FORNITORE" entitaId={o.id} titolo="Documenti dell'ordine (conferma, DDT, fattura)" />
+      {passo === "documenti" && <Documenti entita="ORDINE_FORNITORE" entitaId={o.id} titolo="Documenti dell'ordine (conferma, DDT, fattura)" />}
 
-      {!annullato && (
+      {passo === "documenti" && !annullato && (
         <details className="bg-white border border-red-200 rounded-lg p-3">
           <summary className="cursor-pointer text-sm text-red-800">Annulla ordine</summary>
           <form action={annullaOrdine} className="flex flex-wrap gap-2 items-center mt-2">
@@ -278,6 +310,14 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
             <span className="text-xs text-neutral-600">Le righe della commessa tornano «da ordinare».</span>
           </form>
         </details>
+      )}
+
+      {!annullato && attivi.length > 1 && (
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-3">
+          {posizione > 0 ? <Link href={viPasso(attivi[posizione - 1].k)} className="btn-3d btn-3d-outline text-sm px-4 py-2">← {attivi[posizione - 1].n}</Link> : <span />}
+          <span className="text-xs text-neutral-500">Passo {posizione + 1} di {attivi.length}</span>
+          {posizione >= 0 && posizione < attivi.length - 1 ? <Link href={viPasso(attivi[posizione + 1].k)} className="btn-3d btn-3d-blue text-sm px-4 py-2">{attivi[posizione + 1].n} →</Link> : <span />}
+        </div>
       )}
     </div>
   );

@@ -79,7 +79,7 @@ export default async function StatoAcquisti({ commessaId, puoGestire }: { commes
                   <span>{o.fornitore.ragioneSociale}</span>
                   <span style={{ color: statoOrdine(o.stato).colore }}>{statoOrdine(o.stato).nome}</span>
                   <span className="text-neutral-600">{email ? `✉ ${email}` : "⚠ manca l'email ordini del fornitore"}</span>
-                  {puoGestire && <Link href={`/ordini-fornitori/${o.id}#invia`} className="btn-3d btn-3d-blue text-[11px] px-2 py-1">{bozza ? "✉ Invia per email (con file e disegni)" : "✉ Reinvia / apri l'ordine"}</Link>}
+                  {puoGestire && <Link href={`/ordini-fornitori/${o.id}?passo=${bozza ? "righe" : "invio"}`} className="btn-3d btn-3d-blue text-[11px] px-2 py-1">{bozza ? "✉ Invia per email (con file e disegni)" : "✉ Reinvia / apri l'ordine"}</Link>}
                   {!bozza && (
                     <form action={segnaOrdineRicevuto} className="flex items-center gap-1.5">
                       <input type="hidden" name="id" value={o.id} />
