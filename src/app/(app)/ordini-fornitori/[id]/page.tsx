@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
-import { puoGestireOrdini, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { puoGestireOrdini, fileRilievo, documentiProgetto, cartellaConsentita, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordini/calcoli";
 import { BRANDS } from "@/lib/brands";
 import {
@@ -77,8 +77,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const rilievo = await fileRilievo(o.commessaId, false);
   // i file del rilievo salvati anche in cartella («Rilievi misura», «Foto rilievi») compaiono già tra i «file del rilievo»: niente doppioni
   const nomiRilievo = new Set(rilievo.map((f) => f.nome));
-  const docProgetto = (await documentiProgetto(o.commessaId, false)).filter((d) => !(["Rilievi misura", "Foto rilievi"].includes(d.cartella) && nomiRilievo.has(d.nome.replace(/[^\w.\- ]+/g, "_"))));
-  const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.clienteFinale ? ` - rif. ${o.clienteFinale.split(" - ")[0]}` : ""}`;
+  const docProgetto = (await documentiProgetto(o.commessaId, false)).filter((d) => cartellaConsentita(u, d.cartella)).filter((d) => !(["Rilievi misura", "Foto rilievi"].includes(d.cartella) && nomiRilievo.has(d.nome.replace(/[^\w.\- ]+/g, "_"))));
+  const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.commessa ? ` - rif. Commessa ${o.commessa.numero}/${o.commessa.anno}` : ""}`;
   const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${rilievo.length ? " con il rilievo misure" : ""}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con prezzi e data di consegna, citando il nostro numero d'ordine, rispondendo a ${EMAIL_ORDINI()}.\n\nGrazie, cordiali saluti\n${u.nome}\nUfficio ordini ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}\nTel. 011 1988 7497`;
 
   return (
@@ -125,7 +125,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
           <label className="text-xs font-semibold">Consegna richiesta<input type="date" name="consegnaRichiesta" defaultValue={iso(o.consegnaRichiesta)} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold">Società / divisione<select name="divisione" defaultValue={o.divisione ?? "P&C"} className={`${inp} w-full`}>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select></label>
           <label className="text-xs font-semibold">Trasporto<input name="trasporto" defaultValue={o.trasporto ?? ""} placeholder="es. a cura del fornitore / vettore" className={`${inp} w-full`} /></label>
-          <label className="text-xs font-semibold md:col-span-2">Cliente finale<input name="clienteFinale" defaultValue={o.clienteFinale ?? ""} className={`${inp} w-full`} /></label>
+          <label className="text-xs font-semibold md:col-span-2">Cliente finale <span className="font-normal text-neutral-500">(solo per noi: non va al fornitore)</span><input name="clienteFinale" defaultValue={o.clienteFinale ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold">Indirizzo di consegna<input name="indirizzoSpedizione" defaultValue={o.indirizzoSpedizione ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold md:col-span-3">Riferimento<input name="riferimento" defaultValue={o.riferimento ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold md:col-span-3">Note per il fornitore (stampate sull&apos;ordine)<textarea name="note" defaultValue={o.note ?? ""} rows={2} className={`${inp} w-full`} /></label>
@@ -246,7 +246,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
-          <InviaOrdine fornitore={o.fornitore.ragioneSociale} ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} />
+          <InviaOrdine fornitore={o.fornitore.ragioneSociale} ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} tornaA={o.commessaId ? `/commesse/${o.commessaId}?passo=MATERIALE&fattoMateriale=${encodeURIComponent(`Ordine ${nr} inviato a ${o.fornitore.ragioneSociale}. Puoi inviare gli altri ordini o chiudere la pratica.`)}#materiale-pratica` : "/ordini-fornitori"} tornaTesto={o.commessaId ? "← Torna alla pratica" : "← Torna agli ordini"} />
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />

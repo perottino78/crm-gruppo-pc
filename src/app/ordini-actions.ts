@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, cartellaConsentita, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { inviaMail } from "@/lib/mail/invio";
 import { numeroOrdine, statoDaArrivi } from "@/lib/ordini/calcoli";
 import { pdfOrdineFornitore, senzaPrezzi } from "@/lib/ordini/pdfOrdine";
@@ -87,7 +87,7 @@ async function nuovoOrdineConRighe(nome: string, commessaId: string, fornitoreId
       data: {
         numero, anno, fornitoreId, commessaId, divisione: c.brand.nome, creatoDaNome: nome,
         clienteFinale: cl.nome + (indirizzoCliente ? ` - ${indirizzoCliente}` : ""),
-        riferimento: `Commessa ${c.numero}/${c.anno}${c.preventivo?.oggetto ? ` - ${c.preventivo.oggetto}` : ""}`.slice(0, 200),
+        riferimento: `Commessa ${c.numero}/${c.anno}`,
         indirizzoSpedizione: "Sede di Rosta, Corso Moncenisio 28",
       },
     });
@@ -329,7 +329,7 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   // file del rilievo scelti da chi invia (o tutti con «conRilievo»)
   const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : opz.conRilievo ? await fileRilievo(p.ordine.commessaId) : [];
   // file scelti dalle cartelle del progetto (es. «Rilievi misura»)
-  const documenti = opz.documenti?.length ? await documentiProgetto(p.ordine.commessaId, true, opz.documenti) : [];
+  const documenti = opz.documenti?.length ? (await documentiProgetto(p.ordine.commessaId, true, opz.documenti)).filter((d) => cartellaConsentita(u, d.cartella)) : [];
   // file caricati dal computer (ordine cartaceo, disegno): si allegano e si tengono nei documenti dell'ordine
   const extra: { nome: string; contenuto: Buffer; mime: string }[] = [];
   for (const f of (opz.extra ?? []).slice(0, 8)) {

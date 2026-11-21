@@ -1,17 +1,18 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { inviaOrdineEmail, type EsitoInvio } from "@/app/ordini-actions";
 
 /** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
-export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente, fornitore = "" }: { ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fornitore?: string; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
+export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente, fornitore = "", tornaA = "/ordini-fornitori", tornaTesto = "← Torna alla pratica" }: { tornaA?: string; tornaTesto?: string; ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fornitore?: string; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
   const [senzaPrezzi, setSenzaPrezzi] = useState(true);
   // file del rilievo da allegare: si sceglie quale (di partenza i PDF)
-  const [scelti, setScelti] = useState<string[]>(fileRilievo.filter((f) => /\.pdf$/i.test(f.nome)).map((f) => f.id));
+  const [scelti, setScelti] = useState<string[]>([]);
   // file delle cartelle del progetto: di partenza quelli di «Rilievi misura»
   // e la scheda di produzione già compilata al rilievo per questo fornitore (nel nome c'è il fornitore): è già spuntata, pronta da inviare
-  const [doc, setDoc] = useState<string[]>(documenti.filter((d) => d.cartella === "Rilievi misura" || (d.cartella === "Schede produzione" && fornitore.length > 2 && d.nome.toLowerCase().includes(fornitore.toLowerCase()))).map((d) => d.id));
+  const [doc, setDoc] = useState<string[]>(documenti.filter((d) => (d.cartella === "Schede produzione" && fornitore.length > 2 && d.nome.toLowerCase().includes(fornitore.toLowerCase()))).map((d) => d.id));
   const cartelle = [...new Set(documenti.map((d) => d.cartella))];
   // file dal computer (ordine cartaceo firmato, disegni): max ~3,4 MB in tutto per il limite delle richieste
   const [extra, setExtra] = useState<{ nome: string; dataUri: string; kb: number }[]>([]);
@@ -37,6 +38,23 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
     setEsito(r);
     if (r.mailto) window.location.href = r.mailto;
   });
+  const router = useRouter();
+  // inviata davvero: si torna da soli alla pratica (per inviare gli altri ordini o chiudere)
+  useEffect(() => {
+    if (!esito?.ok) return;
+    const t = setTimeout(() => router.push(tornaA), 2500);
+    return () => clearTimeout(t);
+  }, [esito, router, tornaA]);
+  if (esito?.ok) {
+    return (
+      <div className="rounded-lg border-2 border-green-300 bg-green-50 p-4 space-y-3" role="status">
+        <p className="text-lg font-bold text-green-900">✅ Ordine inviato al fornitore</p>
+        <p className="text-sm text-green-900">{esito.messaggio}</p>
+        <p className="text-xs text-neutral-600">Torno da solo alla pratica tra un attimo, per inviare gli altri ordini o chiudere.</p>
+        <button onClick={() => router.push(tornaA)} className="btn-3d btn-3d-blue text-sm px-4 py-2">{tornaTesto} subito</button>
+      </div>
+    );
+  }
   return (
     <div className="space-y-2">
       <div className="grid md:grid-cols-2 gap-2">

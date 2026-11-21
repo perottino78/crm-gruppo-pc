@@ -27,7 +27,7 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   await redir(A.creaSchedaProduzione(fd({ ordineId: ord.id, modelloId: m.id, campo_misure_definitive: "Soggiorno L 1198 × H 1395 <speciale>", campo_note_produzione: "Bianco RAL 9010" })));
   const d = await prisma.documento.findFirstOrThrow({ where: { entita: "COMMESSA", entitaId: com.id, cartella: "Schede produzione" } });
   const html = d.contenuto.toString("utf-8");
-  verifica(d.mime === "text/html" && /7\/2026/.test(html) && html.includes("Serramenti Srl") && html.includes("Mario Rossi"), "scheda salvata tra i documenti della pratica con i dati dell'ordine", html.slice(0, 200));
+  verifica(d.mime === "text/html" && /7\/2026/.test(html) && html.includes("Serramenti Srl") && !html.includes("Mario Rossi") && /Pratica \d+\/2026/.test(html), "scheda salvata tra i documenti della pratica con il solo riferimento (niente cliente)", html.slice(0, 200));
   verifica(html.includes("Finestra 2 ante") && !html.includes("€"), "tabella del materiale senza prezzi");
   verifica(html.includes("L 1198 × H 1395 &lt;speciale&gt;") && html.includes("Bianco RAL 9010"), "misure definitive e note, protette dall'HTML");
   verifica(html.includes("Soggiorno L 1200 × H 1400"), "misure del rilievo come riferimento");
@@ -125,7 +125,7 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   console.log("   redirect:", rpr, (await prisma.documento.findMany({ where: { entitaId: com.id }, select: { nome: true } })).map((x) => x.nome));
   const dp = await prisma.documento.findFirstOrThrow({ where: { entita: "COMMESSA", entitaId: com.id, cartella: "Schede produzione", nome: { contains: "Serramenti Srl - 1-2026" } } });
   const hp = dp.contenuto.toString("utf-8");
-  verifica(rpr.includes("modulo-fornitore") && hp.includes("Cucina L 900 × H 1200") && hp.includes("Mario Rossi") && hp.includes("Serramenti Srl") && !/\{\{/.test(hp), "scheda compilata al rilievo, senza ordine");
+  verifica(rpr.includes("modulo-fornitore") && hp.includes("Cucina L 900 × H 1200") && !hp.includes("Mario Rossi") && hp.includes("Pratica ") && hp.includes("Serramenti Srl") && !/\{\{/.test(hp), "scheda compilata al rilievo, senza ordine");
   await A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "Cucina L 910 × H 1200" })).catch(() => undefined);
   verifica((await prisma.documento.count({ where: { entita: "COMMESSA", entitaId: com.id, nome: { contains: "Serramenti Srl - 1-2026" } } })) === 1, "risalvando si sostituisce, niente doppioni");
   const rlp = await redir(A.salvaLegnoInPratica(fd({ commessaId: com.id, modelloId: ml.id, campo_tab_legno_1_pezzi: "10", campo_tab_legno_26_pezzi: "4", campo_tab_legno_26_lunghezza: "2500", campo_prezzo_m3: "850" })));

@@ -13,6 +13,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const scarica = new URL(req.url).searchParams.has("scarica");
   // in linea solo PDF e immagini; tutto il resto si scarica
   const inLinea = !scarica && /^(application\/pdf|text\/html|image\/(jpeg|png|webp|gif))$/.test(d.mime);
+  // il visualizzatore PDF e le immagini del browser non funzionano con «sandbox» (Chrome mostrava un errore al posto del PDF):
+  // la protezione resta per HTML e tutto il resto
+  const sicuroInLinea = inLinea && /^(application\/pdf|image\/(jpeg|png|webp|gif))$/.test(d.mime);
   return new Response(new Uint8Array(d.contenuto), {
     headers: {
       "Content-Type": d.mime,
@@ -20,7 +23,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
       "Content-Length": String(d.dimensione),
       "X-Content-Type-Options": "nosniff",
       "Cache-Control": "private, no-store",
-      "Content-Security-Policy": "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox",
+      ...(sicuroInLinea ? {} : { "Content-Security-Policy": "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox" }),
     },
   });
 }
