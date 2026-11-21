@@ -284,6 +284,16 @@ export async function registraIncassoAcconto(formData: FormData) {
   revalidatePath("/commesse");
 }
 
+/** «✉️ Manda il ringraziamento al cliente» dalla pratica, se all'incasso non è partito (es. email del cliente mancante, poi aggiunta). Una volta sola. */
+export async function inviaRingraziamentoAcconto(formData: FormData) {
+  const utente = await getCurrentUser();
+  if (!puoGestireIncassi(utente?.ruolo)) return;
+  const id = str(formData, "id");
+  if (!id) return;
+  await ringraziaPagamentoAcconto(id);
+  revalidatePath(`/commesse/${id}`);
+}
+
 export async function annullaIncassoAcconto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!isAmministratore(utente)) return;

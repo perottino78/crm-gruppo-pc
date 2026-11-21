@@ -88,7 +88,7 @@ function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
     case "FATTURA": return "Emetti la fattura di acconto, poi segnala che è fatta.";
     case "PROGETTO": return "Crea il progetto della pratica.";
     case "BENVENUTO": return "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
-    case "INCASSO": return "Registra il pagamento dell'acconto (o il finanziamento approvato). Parte il ringraziamento al cliente.";
+    case "INCASSO": return "Registra il pagamento dell'acconto (o il finanziamento approvato): parte da solo il ringraziamento al cliente e il task si chiude da solo.";
     case "RILIEVO_APP": return !d.viaLibera ? "Serve l'acconto incassato: poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
     case "RILIEVO": return "Il tecnico carica misure, PDF e foto del rilievo.";
     case "MATERIALE": return "Controlla i prodotti, conferma il materiale e ordina ai fornitori.";
