@@ -366,6 +366,30 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   return { ok: true, messaggio: `Ordine inviato a ${a.join(", ")}${copia.length ? ` (copia a ${copia.join(", ")})` : ""} da ${da}: ${cosa}. Le conferme del fornitore arriveranno a ${ordini}.` };
 }
 
+/**
+ * «Scarica tutto in un PDF»: l'ordine più i file scelti (rilievi, cartelle, file dal computer) in un solo PDF,
+ * da mandare per esempio in chat. Non invia nulla e non cambia lo stato dell'ordine.
+ */
+export async function scaricaOrdineCompleto(id: string, opz: { senzaPrezzi?: boolean; fileRilievo?: string[]; documenti?: string[]; extra?: { nome: string; dataUri: string }[] } = {}): Promise<{ ok: boolean; nome?: string; base64?: string; saltati?: string[]; messaggio?: string }> {
+  const u = await getCurrentUser();
+  if (!u || !puoGestireOrdini(u)) return { ok: false, messaggio: "Non autorizzato." };
+  const p = await datiPdfOrdine(id);
+  if (!p) return { ok: false, messaggio: "Ordine non trovato." };
+  const pdf = pdfOrdineFornitore(opz.senzaPrezzi ? senzaPrezzi(p.dati) : p.dati);
+  const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : [];
+  const documenti = opz.documenti?.length ? (await documentiProgetto(p.ordine.commessaId, true, opz.documenti)).filter((d) => cartellaConsentita(u, d.cartella)) : [];
+  const extra: { nome: string; mime: string; contenuto: Buffer }[] = [];
+  for (const f of (opz.extra ?? []).slice(0, 8)) {
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(f.dataUri ?? "");
+    if (!m || !/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(m[1])) continue;
+    extra.push({ nome: (f.nome || "allegato").replace(/[^\w.\- ]+/g, "_"), mime: m[1], contenuto: Buffer.from(m[2], "base64") });
+  }
+  const { unisciInUnPdf } = await import("@/lib/ordini/unisci-pdf");
+  const { pdf: unito, saltati } = await unisciInUnPdf(Buffer.from(pdf), [...rilievo, ...documenti.map((d) => ({ nome: d.nome, mime: d.mime, contenuto: d.contenuto })), ...extra]);
+  const nome = `Ordine ${p.dati.numero.replace("/", "-")} ${p.ordine.fornitore.ragioneSociale}${rilievo.length + documenti.length + extra.length ? " con allegati" : ""}.pdf`.replace(/[^\w.\- ]+/g, "_");
+  return { ok: true, nome, base64: unito.toString("base64"), saltati };
+}
+
 export async function registraConfermaFornitore(fd: FormData) {
   const u = await utente();
   const id = str(fd, "id");

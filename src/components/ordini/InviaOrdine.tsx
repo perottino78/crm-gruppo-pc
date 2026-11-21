@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { inviaOrdineEmail, type EsitoInvio } from "@/app/ordini-actions";
+import { inviaOrdineEmail, scaricaOrdineCompleto, type EsitoInvio } from "@/app/ordini-actions";
 
 /** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
 export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente, fornitore = "", tornaA = "/ordini-fornitori", tornaTesto = "← Torna alla pratica" }: { tornaA?: string; tornaTesto?: string; ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fornitore?: string; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
@@ -39,6 +39,20 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
     if (r.mailto) window.location.href = r.mailto;
   });
   const router = useRouter();
+  const [scaricando, avviaScarico] = useTransition();
+  const [msgScarico, setMsgScarico] = useState("");
+  // un solo PDF con l'ordine e tutti i file scelti (rilievi, cartelle, file dal computer), pronto da mandare in chat
+  const scaricaTutto = () => avviaScarico(async () => {
+    setMsgScarico("");
+    const r = await scaricaOrdineCompleto(ordineId, { senzaPrezzi, fileRilievo: scelti, documenti: doc, extra: extra.map(({ nome, dataUri }) => ({ nome, dataUri })) });
+    if (!r.ok || !r.base64) { setMsgScarico(r.messaggio ?? "Non sono riuscito a preparare il PDF."); return; }
+    const bytes = Uint8Array.from(atob(r.base64), (c) => c.charCodeAt(0));
+    const url = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
+    const link = document.createElement("a");
+    link.href = url; link.download = r.nome ?? "ordine.pdf"; document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    setMsgScarico(r.saltati?.length ? `PDF scaricato. Non si possono mettere nel PDF (solo nell'email): ${r.saltati.join(", ")}.` : "PDF scaricato con l'ordine e tutti i file scelti.");
+  });
   // inviata davvero: si torna da soli alla pratica (per inviare gli altri ordini o chiudere)
   useEffect(() => {
     if (!esito?.ok) return;
@@ -106,9 +120,10 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
       </div>
       <div className="flex flex-wrap gap-2 items-center">
         <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green text-sm px-4 py-2 disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email con PDF" : "✉ Invia per email con PDF"}</button>
-        <a href={`${pdfUrl}?scarica=1${senzaPrezzi ? "&prezzi=0" : ""}`} className="btn-3d btn-3d-dark text-sm px-4 py-2">⬇ Scarica PDF</a>
+        <button type="button" onClick={scaricaTutto} disabled={scaricando} className="btn-3d btn-3d-dark text-sm px-4 py-2 disabled:opacity-50" title="Un solo PDF con l'ordine e tutti i file che hai scelto">{scaricando ? "Preparo il PDF…" : "⬇ Scarica PDF con gli allegati"}</button>
         <a href={`${pdfUrl}${senzaPrezzi ? "?prezzi=0" : ""}`} target="_blank" rel="noopener" className="text-sm text-blue-800 underline">anteprima</a>
       </div>
+      {msgScarico && <p className="text-xs text-neutral-700 bg-neutral-50 border border-neutral-200 rounded p-2">{msgScarico}</p>}
       {esito && <p className={`text-sm rounded p-2 ${esito.ok ? "bg-green-50 text-green-900" : esito.mailto ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-800"}`}>{esito.messaggio}</p>}
     </div>
   );
