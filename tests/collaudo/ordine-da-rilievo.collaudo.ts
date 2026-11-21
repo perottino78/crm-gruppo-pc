@@ -117,6 +117,22 @@ async function main() {
     await prisma.rilievoAllegato.deleteMany({ where: { id: { in: [a1.id, a2.id] } } });
   }
 
+  console.log("3c. Costo dell'operatore su un passaggio fra uffici (minuti × costo orario / 60)");
+  {
+    const F = await import("../../src/app/flusso-actions");
+    const { costiCommesse } = await import("../../src/lib/amministrazione/analisi");
+    const prima = (await costiCommesse([c.id])).get(c.id)!.manodopera;
+    const tk = await prisma.taskPratica.create({ data: { commessaId: c.id, ufficio: "TECNICO", titolo: "Rilievo prova costo", stato: "COMPLETATO", completatoIl: new Date() } });
+    await F.salvaCostoTask(fd({ taskId: tk.id, minuti: "45", costoOrario: "40" }));
+    const t1 = await prisma.taskPratica.findUniqueOrThrow({ where: { id: tk.id } });
+    const dopo = (await costiCommesse([c.id])).get(c.id)!.manodopera;
+    verifica(t1.minuti === 45 && t1.costoOrario === 40 && t1.costoLavoro === 30 && Math.round((dopo - prima) * 100) === 3000, "45 min × 40 €/h = 30 €, e va nella manodopera dei costi della commessa", { t1, prima, dopo });
+    await F.salvaCostoTask(fd({ taskId: tk.id, minuti: "", costoOrario: "40" }));
+    const t2 = await prisma.taskPratica.findUniqueOrThrow({ where: { id: tk.id } });
+    verifica(t2.minuti === null && t2.costoLavoro === 0, "minuti vuoti: il costo si toglie", t2);
+    await prisma.taskPratica.delete({ where: { id: tk.id } });
+  }
+
   console.log("4. Invio da ordini@ con lista senza prezzi e rilievo allegato");
   const e = await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine 1/2026 - P&C S.r.l.", "Buongiorno, in allegato il nostro ordine con il rilievo misure.", { senzaPrezzi: true, conRilievo: true });
   verifica(e.ok && e.messaggio.includes("ordini@gruppopec.com") && e.messaggio.includes("rilievo allegato (1 file)"), "invio riuscito, conferme a ordini@", e);

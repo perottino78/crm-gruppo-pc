@@ -68,9 +68,9 @@ export default async function StatoAcquisti({ commessaId, puoGestire }: { commes
         </tbody>
       </table>
       {ordini.some((o) => o.stato !== "ANNULLATO") && (
-        <div className="mt-3 rounded-lg border border-purple-200 bg-purple-50/40 p-2">
-          <p className="text-xs font-bold text-purple-900 mb-1">📨 Ordini ai fornitori di questa pratica</p>
-          <div className="space-y-1.5">
+        <details className="mt-3 rounded-lg border border-purple-200 bg-purple-50/40 p-2">
+          <summary className="cursor-pointer text-xs font-bold text-purple-900">📨 Ordini ai fornitori di questa pratica ({ordini.filter((o) => o.stato !== "ANNULLATO").length}) <span className="font-normal text-neutral-600">— clicca per aprire</span></summary>
+          <div className="mt-1.5 space-y-1.5">
             {ordini.filter((o) => o.stato !== "ANNULLATO").map((o) => {
               const bozza = o.stato === "BOZZA", email = o.fornitore.emailOrdini ?? o.fornitore.email;
               return (
@@ -94,7 +94,7 @@ export default async function StatoAcquisti({ commessaId, puoGestire }: { commes
               );
             })}
           </div>
-        </div>
+        </details>
       )}
       {ordini.some((o) => o.stato === "ANNULLATO") && <p className="text-[11px] text-neutral-500 mt-1">Ordini annullati: {ordini.filter((o) => o.stato === "ANNULLATO").map((o) => numeroOrdine(o)).join(", ")}</p>}
     </div>

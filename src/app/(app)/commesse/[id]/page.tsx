@@ -69,7 +69,8 @@ import {
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
-import { creaTaskManuale, avviaFlussoCommessa } from "@/app/flusso-actions";
+import { creaTaskManuale, avviaFlussoCommessa, salvaCostoTask } from "@/app/flusso-actions";
+import CostoLavoroTask from "@/components/commesse/CostoLavoroTask";
 import FotoRilievo from "@/components/FotoRilievo";
 import FirmaCliente from "@/components/FirmaCliente";
 import KitCliente from "@/components/commesse/KitCliente";
@@ -172,6 +173,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
   const movimenti: Mov[] = [
     ...c.fasi.filter((f) => f.stato === "CHIUSA" && f.costoTotale > 0).map((f) => ({ data: f.chiusaIl ?? f.createdAt, voce: `Fase: ${f.nome}${f.assegnatoNome ? " (" + f.assegnatoNome + ")" : ""}`, tipo: "Manodopera", importo: f.costoTotale })),
+    ...c.tasks.filter((t) => t.costoLavoro > 0).map((t) => ({ data: t.completatoIl ?? t.createdAt, voce: `Fase: ${t.titolo}${t.lavoroDaNome ? " (" + t.lavoroDaNome + ")" : ""} · ${t.minuti} min`, tipo: "Manodopera", importo: t.costoLavoro })),
     ...materiale.voci,
     ...c.costiManuali.map((m) => ({ data: m.data, voce: m.descrizione, tipo: m.categoria === "ALTRO" ? "Altro" : m.categoria === "ACQUISTO_MATERIALE" ? "Materiale (totale)" : m.categoria === "FATTURA_FORNITORE" ? "Fattura fornitore" : m.categoria, importo: m.importo })),
   ].sort((a, b) => a.data.getTime() - b.data.getTime());
@@ -355,6 +357,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
         const attivi = passaggi.filter((t) => !chiuso(t));
         const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
+        const costoTask = (t: (typeof passaggi)[number]) => (
+          <CostoLavoroTask taskId={t.id} minuti={t.minuti} costoOrario={t.costoOrario} costoLavoroSalvato={t.costoLavoro} lavoroDaNome={t.lavoroDaNome}
+            proposta={(() => { const v = costoOrarioUtente(t.assegnatoUtenteId ?? utente?.id); return typeof v === "number" ? v : null; })()} azione={salvaCostoTask} />
+        );
         return (
       <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0}>
         <summary className="cursor-pointer list-none">
@@ -393,16 +399,16 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <li key={t.id} className="relative pl-6">
                 <span className={`absolute -left-[11px] top-1 flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-white ring-4 ring-white ${colore}`}>{annullato ? "×" : finito ? "✓" : "●"}</span>
                 <p className={`text-xs ${annullato ? "text-neutral-400 line-through" : "text-neutral-700"}`}>
-                  <b className="text-neutral-900">{nomeUfficio(t.ufficio)}</b> · arrivata il {d(t.createdAt)}
+                  <b className="text-neutral-900">{nomeUfficio(t.ufficio)}</b> · arrivata il {d(t.createdAt)}{t.costoLavoro > 0 && <span className="ml-1 rounded bg-teal-100 px-1.5 py-0.5 font-bold text-teal-900">⏱ {t.minuti} min · {t.costoLavoro.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}</span>}
                   {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : !annullato && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-sky-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
                 </p>
                 {finito ? (
                   <details className="mt-1">
                     <summary className="cursor-pointer text-sm font-semibold text-neutral-800">{t.titolo} <span className="text-xs font-normal text-neutral-500">(dettagli)</span></summary>
-                    <div className="mt-1"><TaskCard task={t} /></div>
+                    <div className="mt-1"><TaskCard task={t} />{costoTask(t)}</div>
                   </details>
                 ) : (
-                  <div className="mt-1"><TaskCard task={t} /></div>
+                  <div className="mt-1"><TaskCard task={t} />{costoTask(t)}</div>
                 )}
               </li>
             );
