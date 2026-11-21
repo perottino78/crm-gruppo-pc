@@ -169,13 +169,18 @@ async function compilaPerPratica(commessaId: string, modelloId: string, fd: Form
     prisma.schedaProduzioneModello.findUnique({ where: { id: modelloId }, include: { fornitore: { select: { id: true, ragioneSociale: true } } } }),
   ]);
   if (!c || !m) return null;
-  const [rilievi, righe] = await Promise.all([
+  // fornitore di questo modulo: quello scelto nel modulo, altrimenti quello del modello. La tabella del materiale ha SOLO le sue righe
+  // (legno e angolari hanno il loro modulo e un altro fornitore: non vanno nella scheda degli altri)
+  const fornitoreId = str(fd, "fornitoreId") ?? m.fornitoreId;
+  const forn = fornitoreId ? (fornitoreId === m.fornitoreId ? m.fornitore : await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true } })) : null;
+  const [rilievi, tutte] = await Promise.all([
     prisma.rilievo.findMany({ where: { commessaId, misure: { not: null } }, orderBy: { dataOra: "asc" }, select: { misure: true } }),
-    prisma.rigaOrdine.findMany({ where: { commessaId, ordineFornitoreId: null, ...(m.fornitoreId ? { OR: [{ fornitoreId: m.fornitoreId }, { fornitoreId: null }] } : {}) }, orderBy: { createdAt: "asc" } }),
+    fornitoreId ? prisma.rigaOrdine.findMany({ where: { commessaId, ordineFornitoreId: null, fornitoreId }, orderBy: { createdAt: "asc" } }) : Promise.resolve([]),
   ]);
+  const righe = tutte.filter((r) => !r.codice?.startsWith(PREFISSO_LEGNO) && !r.codice?.startsWith(PREFISSO_ANGOLARI));
   const it = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
   const valori: Record<string, string> = {
-    ordine: "da emettere", data: it(new Date()), fornitore: m.fornitore?.ragioneSociale ?? "", cliente: c.cliente.nome, commessa: `${c.numero}/${c.anno}`,
+    ordine: "da emettere", data: it(new Date()), fornitore: forn?.ragioneSociale ?? "", cliente: c.cliente.nome, commessa: `${c.numero}/${c.anno}`,
     indirizzo: "", consegna: c.consegnaPrevista ? it(c.consegnaPrevista) : "", misure_rilievo: rilievi.map((r) => r.misure).join("\n\n"),
   };
   for (const x of descriviCampi(m.html)) {
@@ -184,11 +189,11 @@ async function compilaPerPratica(commessaId: string, modelloId: string, fd: Form
   for (const [k, x] of fd.entries()) if (typeof x === "string" && k.startsWith("campo_tab_") && !(k.slice(6) in valori)) valori[k.slice(6)] = x;
   const html = compilaScheda(m.html, valori, tabellaRighe(righe.map((r) => ({ descrizione: r.descrizione, quantita: r.quantita, um: r.um, codice: r.codiceFornitore ?? r.codice, note: r.note }))));
   const contenuto = Buffer.from(html, "utf-8");
-  const nome = `Scheda produzione ${m.nome}${m.fornitore ? ` - ${m.fornitore.ragioneSociale}` : ""} - ${c.numero}-${c.anno}.html`.replace(/[^\w.\- ]+/g, "_");
+  const nome = `Scheda produzione ${m.nome}${forn ? ` - ${forn.ragioneSociale}` : ""} - ${c.numero}-${c.anno}.html`.replace(/[^\w.\- ]+/g, "_");
   const dove = { entita: "COMMESSA", entitaId: commessaId, cartella: "Schede produzione" };
   await prisma.documento.deleteMany({ where: { ...dove, nome } });
   await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi } });
-  return { nome, fornitoreId: m.fornitoreId, fornitoreNome: m.fornitore?.ragioneSociale ?? null };
+  return { nome, fornitoreId, fornitoreNome: forn?.ragioneSociale ?? null };
 }
 
 const tornaRilievo = (commessaId: string, modelloId: string | null, p: Record<string, string>) =>
