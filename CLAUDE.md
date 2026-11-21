@@ -57,7 +57,7 @@ login nel `matcher` del middleware.
 ## Funzioni principali (stato attuale)
 - **Flusso pratica fra uffici** (`src/lib/flusso.ts`, `FlussoFase` configurabile in Impostazioni › Flusso; flusso reale descritto da Ugo il 16/11/2026):
   Accettazione (Commerciale) → in parallelo **Fattura acconto** (Fatturazione, Giorgia: la chiude lei, non si chiude da sola) e **Incasso acconto e creazione progetto**
-  (`PROGETTO`, Amministrazione, Debora: registra il pagamento — parte da solo il ringraziamento al cliente — e preme «Crea progetto») → **Appuntamento di rilievo**
+  (`PROGETTO`, Amministrazione, Debora: registra il pagamento — parte da solo il ringraziamento al cliente, l'unica email automatica senza spunta (Ugo 21/11/2026); nella pratica «✉️ Ringraziamento inviato il …» o, se non è partito, `inviaRingraziamentoAcconto`; il task si chiude da solo, niente «Fatto») → **Appuntamento di rilievo**
   (`RILIEVO_APP`, Centralino, Alessia: sceglie il rilevatore; mail al cliente; il task di rilievo va a quel tecnico) → **Rilievo** (Tecnico: «carica rilievo» = eseguito) →
   **Conferma materiale e ordini** (`ORDINI`, Ufficio ordini, Laura: conferma il materiale, ordina, carica i costi; chiuso quando tutte le righe sono inviate) →
   **Arrivo materiale** (`MAGAZZINO`: bolle e fatture; chiuso da `verificaMaterialeCommessa` a materiale completo, che crea il task di saldo per la Fatturazione e `POSA_APP`

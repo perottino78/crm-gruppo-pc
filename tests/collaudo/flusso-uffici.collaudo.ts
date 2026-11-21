@@ -91,6 +91,8 @@ async function main() {
   verifica(grazie?.a.includes("mario@cliente.it"), "ringraziamento al cliente", posta.map((m) => m.a));
   await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900" }))).catch(() => undefined);
   verifica(posta.filter((m) => /Grazie! Abbiamo ricevuto/.test(testoMail(m))).length === 1, "una sola mail di ringraziamento");
+  await dove(C.inviaRingraziamentoAcconto(fd({ id: c.id }))).catch(() => undefined);
+  verifica(posta.filter((m) => /Grazie! Abbiamo ricevuto/.test(testoMail(m))).length === 1, "il pulsante «Manda il ringraziamento» non lo rimanda");
   verifica((await aperti()).split(" ").sort().join(" ") === "RILIEVO_APP:CENTRALINO", "task rilievo al centralino (progetto e acconto fatti)", await aperti());
 
   console.log("4. Alessia fissa il rilievo e sceglie il tecnico: mail al cliente, il task va al tecnico");

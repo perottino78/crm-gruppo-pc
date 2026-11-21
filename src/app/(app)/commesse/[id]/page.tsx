@@ -30,6 +30,7 @@ import {
   aggiornaCondizioniAcconto,
   registraIncassoAcconto,
   annullaIncassoAcconto,
+  inviaRingraziamentoAcconto,
   aggiornaFinanziamento,
   programmaRilievo,
   registraFatturaAcconto,
@@ -321,6 +322,15 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             )}
           </div>
         )}
+        {!finanz && c.accontoIncassato && (c.ringraziamentoInviatoIl ? (
+          <p className="text-xs text-neutral-700 mb-3">✉️ Ringraziamento al cliente inviato il {c.ringraziamentoInviatoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}.</p>
+        ) : gestoreIncassi ? (
+          <form action={inviaRingraziamentoAcconto} className="flex flex-wrap items-center gap-2 mb-3">
+            <input type="hidden" name="id" value={c.id} />
+            <span className="text-xs text-amber-800">Il ringraziamento al cliente non è partito (controlla l&apos;email nella scheda del cliente).</span>
+            <button className="btn-3d btn-3d-outline text-xs px-3 py-1.5">✉️ Manda il ringraziamento al cliente</button>
+          </form>
+        ) : null)}
 
         {!finanz && !c.accontoIncassato && gestoreIncassi && (
           <form action={registraIncassoAcconto} className="flex flex-wrap items-end gap-2 mb-3">
@@ -340,6 +350,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <input name="note" className={`${inp} w-56`} />
             </div>
             <button className="btn-3d btn-3d-green text-sm px-4 py-2">Registra incasso acconto</button>
+            <p className="w-full text-[11px] text-neutral-600">Registrando l&apos;incasso parte da solo il ringraziamento al cliente e il task si chiude: non serve premere Fatto.</p>
           </form>
         )}
         {!finanz && !c.accontoIncassato && !gestoreIncassi && (
