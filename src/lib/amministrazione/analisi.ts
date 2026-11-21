@@ -69,8 +69,9 @@ export type CostiCommessa = { manodopera: number; materiale: number; altro: numb
 export async function costiCommesse(ids: string[]): Promise<Map<string, CostiCommessa>> {
   const out = new Map<string, CostiCommessa>();
   if (!ids.length) return out;
-  const [fasi, materialePerCommessa, manuali] = await Promise.all([
+  const [fasi, lavoriTask, materialePerCommessa, manuali] = await Promise.all([
     prisma.faseCommessa.findMany({ where: { commessaId: { in: ids }, stato: "CHIUSA", costoTotale: { gt: 0 } }, select: { commessaId: true, costoTotale: true } }),
+    prisma.taskPratica.findMany({ where: { commessaId: { in: ids }, costoLavoro: { gt: 0 } }, select: { commessaId: true, costoLavoro: true } }),
     costiMaterialeCommesse(ids),
     prisma.costoManuale.findMany({ where: { commessaId: { in: ids } }, select: { commessaId: true, categoria: true, importo: true } }),
   ]);
@@ -78,7 +79,7 @@ export async function costiCommesse(ids: string[]): Promise<Map<string, CostiCom
     const man = manuali.filter((m) => m.commessaId === id);
     // stessa regola della scheda commessa: righe con costo, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
     const mat = materialePerCommessa.get(id) ?? { voci: [], righeSenzaCosto: 0 };
-    const manodopera = cent(fasi.filter((f) => f.commessaId === id).reduce((t, f) => t + f.costoTotale, 0));
+    const manodopera = cent(fasi.filter((f) => f.commessaId === id).reduce((t, f) => t + f.costoTotale, 0) + lavoriTask.filter((t) => t.commessaId === id).reduce((t, x) => t + x.costoLavoro, 0));
     const materiale = cent(mat.voci.reduce((t, v) => t + v.importo, 0) + man.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0));
     const altro = cent(man.filter((m) => m.categoria !== "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0));
     out.set(id, { manodopera, materiale, altro, totale: cent(manodopera + materiale + altro), righeSenzaCosto: mat.righeSenzaCosto });

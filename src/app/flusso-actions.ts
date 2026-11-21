@@ -8,6 +8,7 @@ import { inviaMail, mailConfigurata, APP_URL } from "@/lib/mail/invio";
 import { ringraziaPagamentoAcconto } from "@/lib/pratica/mail-cliente-server";
 import { FASI_DEFAULT, STATI_CHE_AVANZANO, STATI_CHIUSI, STATI_TASK, compila, nomeUfficio } from "@/lib/flusso";
 import { residuoScadenza } from "@/lib/amministrazione/server";
+import { costoLavoro, durataLeggibile, numeroIt } from "@/lib/pratica/costo-lavoro";
 
 function str(fd: FormData, key: string): string | null {
   const v = fd.get(key);
@@ -371,4 +372,24 @@ export async function chiudiTaskFase(commessaId: string, faseChiave: string, ass
     await prisma.taskPratica.updateMany({ where: { commessaId, createdAt: { gte: prima }, completatoIl: null, assegnatoUtenteId: null }, data: { assegnatoUtenteId: assegnaProssimoA.id, assegnatoNome: assegnaProssimoA.nome } });
   }
   return true;
+}
+
+/**
+ * Costo dell'operatore per la fase di un task della pratica: minuti × costo orario / 60.
+ * Va nei costi della commessa (voce Manodopera). Minuti vuoti = si toglie il costo.
+ */
+export async function salvaCostoTask(fd: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(fd, "taskId");
+  if (!id) return;
+  const t = await prisma.taskPratica.findUnique({ where: { id }, select: { id: true, commessaId: true, titolo: true } });
+  if (!t) return;
+  const minuti = (() => { const n = numeroIt(fd.get("minuti")); return n !== null && n > 0 ? Math.min(Math.round(n), 60 * 24 * 30) : null; })();
+  const orario = (() => { const n = numeroIt(fd.get("costoOrario")); return n !== null && n > 0 ? Math.min(n, 10000) : null; })();
+  if (minuti !== null && orario === null) return; // serve anche il costo orario
+  const costo = costoLavoro(minuti, orario);
+  await prisma.taskPratica.update({ where: { id }, data: { minuti, costoOrario: minuti === null ? null : orario, costoLavoro: minuti === null ? 0 : costo, lavoroDaNome: minuti === null ? null : u.nome } });
+  await prisma.commessaEvento.create({ data: { commessaId: t.commessaId, utenteNome: u.nome, testo: minuti === null ? `Costo dell'operatore tolto dal passaggio «${t.titolo}».` : `Costo dell'operatore per «${t.titolo}»: ${durataLeggibile(minuti)} × ${orario} €/h = ${costo.toFixed(2)} € (nei costi della commessa, manodopera).` } });
+  revalidatePath(`/commesse/${t.commessaId}`);
 }
