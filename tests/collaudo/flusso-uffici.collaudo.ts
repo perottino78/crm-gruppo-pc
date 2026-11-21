@@ -71,24 +71,26 @@ async function main() {
   await avviaFaseFlusso(c.id, "FATT_ACCONTO", "COMMERCIALE", "Pavel");
   verifica((await aperti()).split(" ").sort().join(" ") === "FATT_ACCONTO:FATTURAZIONE PROGETTO:AMMINISTRAZIONE", "due task", await aperti());
 
-  console.log("2. Giorgia: fattura di acconto, creazione progetto e chiamata di benvenuto (un passo alla volta)");
+  console.log("2. Giorgia: creazione progetto, poi dentro il progetto fattura di acconto e chiamata di benvenuto (un passo alla volta)");
   g.__utente = giorgia;
-  await dove(C.creaProgetto(fd({ commessaId: c.id })));
-  verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "il progetto non si crea prima della fattura di acconto");
   await dove(C.registraFatturaAcconto(fd({ commessaId: c.id })));
+  verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).fatturaAccontoIl, "la fattura di acconto non si segna prima del progetto");
   await dove(C.registraBenvenuto(fd({ commessaId: c.id, note: "x" })));
   verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).benvenutoIl, "il benvenuto non si salva prima del progetto");
   await dove(C.creaProgetto(fd({ commessaId: c.id })));
-  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "progetto creato da Giorgia");
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).progettoCreatoIl, "progetto creato da Giorgia come primo passo");
+  await dove(C.registraFatturaAcconto(fd({ commessaId: c.id })));
+  verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).fatturaAccontoIl, "fattura di acconto segnata dentro il progetto");
   verifica(!(await aperti()).includes("RILIEVO_APP"), "il rilievo aspetta l'incasso dell'acconto", await aperti());
   await dove(C.registraBenvenuto(fd({ commessaId: c.id, note: "Cliente contento" })));
   verifica(!!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).benvenutoIl && !(await aperti()).includes("FATT_ACCONTO"), "chiamata di benvenuto salvata: il task di Giorgia si chiude", await aperti());
 
-  console.log("3. Debora segna l'acconto pagato: ringraziamento al cliente e il task passa ad Alessia (centralino)");
+  console.log("3. Debora segna l'acconto pagato con la spunta: ringraziamento al cliente da fatturazione@ e il task passa ad Alessia (centralino)");
   g.__utente = debora;
-  await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900", modalita: "Bonifico" })));
+  await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900", modalita: "Bonifico", ringrazia: "1" })));
   const grazie = posta.find((m) => /Grazie! Abbiamo ricevuto il suo pagamento/.test(testoMail(m)));
   verifica(grazie?.a.includes("mario@cliente.it"), "ringraziamento al cliente", posta.map((m) => m.a));
+  verifica(/fatturazione@gruppopec\.com/i.test(grazie?.dati.split("\r\n\r\n")[0] ?? "") && /Ufficio fatturazione/.test(testoMail(grazie!)), "parte da fatturazione@, firmato «Ufficio fatturazione»", grazie?.dati.slice(0, 400));
   await dove(C.registraIncassoAcconto(fd({ id: c.id, importo: "900" }))).catch(() => undefined);
   verifica(posta.filter((m) => /Grazie! Abbiamo ricevuto/.test(testoMail(m))).length === 1, "una sola mail di ringraziamento");
   await dove(C.inviaRingraziamentoAcconto(fd({ id: c.id }))).catch(() => undefined);
@@ -143,6 +145,29 @@ async function main() {
   verifica(posta.slice(mailPrima).some((m) => /non è ancora conclusa/.test(testoMail(m))), "scuse al cliente");
   verifica((await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).stato !== "LAVORI_ESEGUITI" && (await aperti()).includes("POSA_APP:CENTRALINO"), "la pratica resta in posa, task per un'altra data", await aperti());
   verifica(!(await aperti()).includes("KIT:"), "nessun task kit");
+
+  console.log("9b. Posa PARZIALE per materiale rotto: task all'ufficio ordini, all'arrivo di nuovo la posa al centralino");
+  await prisma.taskPratica.updateMany({ where: { commessaId: c.id, faseChiave: "POSA_APP", completatoIl: null }, data: { stato: "ANNULLATO", completatoIl: new Date() } });
+  await prisma.posa.update({ where: { id: posa.id }, data: { stato: "PROGRAMMATA", completataIl: null } });
+  await C.completaPosa(fd({ posaId: posa.id, esitoPosa: "PARZIALE_MATERIALE", materialeServe: "vetro rotto, in garanzia", noteFine: "vetro rotto", tipoCosto: "INTERNA" }));
+  const cr = await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } });
+  verifica(!!cr.riordinoIl && !cr.materialeCompletoIl && cr.riordinoNote === "vetro rotto, in garanzia", "riordino aperto, materiale non più completo", cr.riordinoNote);
+  verifica((await aperti()).includes("ORDINI:ORDINI") && !(await aperti()).includes("POSA_APP:"), "task all'ufficio ordini, non al centralino", await aperti());
+  const { passiDiCommessa } = await import("../../src/lib/pratica/passi-server");
+  verifica((await passiDiCommessa(c.id))?.corrente === "MATERIALE", "nel percorso la pratica torna a «Materiale e invio ordini»", (await passiDiCommessa(c.id))?.corrente);
+  await prisma.$transaction((tx) => verificaMaterialeCommessa(tx, c.id, "Paolo Salvato"));
+  verifica(!(await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } })).materialeCompletoIl, "senza materiale nuovo non risulta completo");
+  g.__utente = laura;
+  await prisma.rigaOrdine.create({ data: { commessaId: c.id, descrizione: "Vetro 3+3 sostituzione", quantita: 1, complemento: true, fornitoreId: fidra.id, fornitoreNome: "FIDRA SRL", ordinato: true, ordinatoIl: new Date() } });
+  await ordiniTuttiInviati(c.id);
+  verifica((await aperti()).includes("MAGAZZINO:MAGAZZINO"), "ordine inviato: il task va al magazzino", await aperti());
+  verifica((await passiDiCommessa(c.id))?.corrente === "ARRIVO", "nel percorso: arrivo in magazzino", (await passiDiCommessa(c.id))?.corrente);
+  await prisma.rigaOrdine.updateMany({ where: { commessaId: c.id }, data: { arrivato: true, arrivatoIl: new Date() } });
+  await prisma.$transaction((tx) => verificaMaterialeCommessa(tx, c.id, "Paolo Salvato"));
+  const cr2 = await prisma.commessa.findUniqueOrThrow({ where: { id: c.id } });
+  verifica(!!cr2.materialeCompletoIl && !cr2.riordinoIl && (await aperti()).includes("POSA_APP:CENTRALINO"), "materiale arrivato: riordino chiuso, il centralino fissa la data per finire", await aperti());
+  verifica((await passiDiCommessa(c.id))?.corrente === "POSA_APP", "nel percorso: appuntamento di posa", (await passiDiCommessa(c.id))?.corrente);
+  g.__utente = alessia;
 
   console.log("10. Seconda posa FINITA: recensione al cliente e task kit al commerciale (con mail)");
   await prisma.posa.update({ where: { id: posa.id }, data: { stato: "PROGRAMMATA", completataIl: null } });

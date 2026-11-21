@@ -251,8 +251,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />
-              <span className="text-sm">Hai inviato il PDF in altro modo (posta, portale del fornitore, WhatsApp)?</span>
-              <input name="a" placeholder="a chi / come" className={inp} />
+              <span className="text-sm"><b>🌐 Caricato sul portale del fornitore</b> o inviato in altro modo (posta, WhatsApp)?</span>
+              <input name="a" defaultValue="portale del fornitore" placeholder="dove / a chi" className={inp} />
               <button className="btn-3d btn-3d-dark text-sm px-3 py-1.5">Segna come inviato</button>
             </form>
           )}

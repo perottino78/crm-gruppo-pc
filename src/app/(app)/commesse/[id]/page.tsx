@@ -77,6 +77,8 @@ import KitCliente from "@/components/commesse/KitCliente";
 import ApriDaAncora from "@/components/ApriDaAncora";
 import CaricaDocumenti from "@/components/documenti/CaricaDocumenti";
 import { documentiDi } from "@/lib/documenti/server";
+import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
+import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
@@ -191,6 +193,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const percorsoProg = await percorsoDiCommessa(c.id);
   // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
   const pp = await passiDiCommessa(c.id);
+  // fatture di vendita della pratica: la causale dell'incasso («ACCONTO/SALDO FT n. …») e il numero della fattura di saldo si scrivono da soli
+  const fattureVendita = await prisma.fatturaVendita.findMany({ where: { commessaId: c.id }, select: { numero: true, tipoDocumento: true, data: true } });
+  const fattAcconto = fatturaPer("ACCONTO", fattureVendita);
+  const fattSaldo = fatturaPer("SALDO", fattureVendita);
   // cartella «Rilievi misura» della pratica: si vede e si riempie anche dal riquadro del rilievo
   const fileRilievi = (await documentiDi("COMMESSA", c.id)).filter((d) => d.cartella === "Rilievi misura");
   const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo ?? (avviso || fattoMateriale ? "MATERIALE" : undefined)) : null; // con un avviso sul materiale si resta nel riquadro del materiale (prima spariva e non diceva nulla)
@@ -543,7 +549,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         ) : gestoreIncassi ? (
           <form action={inviaRingraziamentoAcconto} className="flex flex-wrap items-center gap-2 mb-3">
             <input type="hidden" name="id" value={c.id} />
-            <span className="text-xs text-amber-800">Il ringraziamento al cliente non è partito (controlla l&apos;email nella scheda del cliente).</span>
+            <span className="text-xs text-amber-800">Ringraziamento al cliente non ancora mandato (non spuntato all&apos;incasso, o manca l&apos;email nella scheda del cliente).</span>
             <button className="btn-3d btn-3d-outline text-xs px-3 py-1.5">✉️ Manda il ringraziamento al cliente</button>
           </form>
         ) : null)}
@@ -557,16 +563,19 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-xs font-bold text-neutral-800">Modalità</label>
-              <select name="modalita" className={inp}>
-                <option>Bonifico</option><option>Contanti</option><option>Assegno</option><option>Carta/POS</option>
+              <select name="modalita" defaultValue="Bonifico" className={inp}>
+                {METODI_PAGAMENTO.map((m) => <option key={m.chiave} value={m.nome}>{m.nome}</option>)}
               </select>
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold text-neutral-800">Note / riferimento</label>
-              <input name="note" className={`${inp} w-56`} />
+              <label className="text-xs font-bold text-neutral-800">Causale / riferimento</label>
+              <input name="note" defaultValue={causaleIncasso("ACCONTO", fattAcconto?.numero)} className={`${inp} w-56`} />
             </div>
+            <label className="flex items-center gap-2 text-xs font-semibold text-green-900 py-2" title="Parte dalla casella della fatturazione, una volta sola">
+              <input type="checkbox" name="ringrazia" value="1" /> ✉️ Manda il ringraziamento al cliente
+            </label>
             <button className="btn-3d btn-3d-green text-sm px-4 py-2">Registra incasso acconto</button>
-            <p className="w-full text-[11px] text-neutral-600">Registrando l&apos;incasso parte da solo il ringraziamento al cliente e il task si chiude: non serve premere Fatto.</p>
+            <p className="w-full text-[11px] text-neutral-600">Il task si chiude da solo con l&apos;incasso: non serve premere Fatto. Il ringraziamento parte dalla casella della fatturazione solo se metti la spunta.</p>
           </form>
         )}
         {!finanz && !c.accontoIncassato && !gestoreIncassi && (
@@ -741,7 +750,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties} open={apre("MATERIALE","ARRIVO")}>
         <summary className="cursor-pointer list-none"><h2 className="mb-1">3 · Evasione ordini e acquisti</h2></summary>
-        <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
+        <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori e si inviano (email dal CRM o caricati sul portale del fornitore: «Segna come inviato»). Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
+        {c.riordinoIl && (
+          <p className="mb-3 rounded border-2 border-red-300 bg-red-50 px-3 py-2 text-sm text-red-900">🔁 <b>Posa parziale: serve materiale</b> (dal {c.riordinoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}){c.riordinoNote ? <> — {c.riordinoNote}</> : null}. Aggiungi qui sotto il materiale mancante, rotto o in garanzia e invia gli ordini: quando arriva in magazzino il centralino fissa la data per finire la posa.</p>
+        )}
         <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
           <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
@@ -958,7 +970,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {mostra("SALDO", "POSA_APP") && (
       <details className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties} open={apre("SALDO")}>
         <summary className="cursor-pointer list-none"><h2 className="mb-1">5 · Saldo e conferma posa</h2></summary>
-        <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
+        <p className="text-xs text-neutral-600 mb-3">Fattura di saldo e incasso si possono fare quando vuoi, anche prima che arrivi il materiale, per portarsi avanti con i pagamenti. Con il saldo incassato si conferma il giorno di posa al cliente.</p>
         {c.saldoIncassato ? (
           <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
             ✔ Saldo incassato {eur(c.saldoImporto ?? 0)} il {c.saldoIncassatoIl?.toLocaleDateString("it-IT")}
@@ -971,9 +983,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <form action={registraSaldo} className="flex flex-wrap items-end gap-2">
             <input type="hidden" name="id" value={c.id} />
             <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Importo saldo €</label><input name="importo" defaultValue={Math.max(0, Math.round((c.totaleVendita - (c.accontoIncassato ? (c.accontoImportoIncassato ?? c.accontoImporto) : 0)) * 100) / 100)} className={`${inp} w-32`} /></div>
-            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">N° fattura saldo</label><input name="fatturaNumero" className={`${inp} w-32`} /></div>
-            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Data fattura</label><input type="date" name="fatturaData" className={inp} /></div>
-            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Modalità</label><select name="modalita" className={inp}><option>Bonifico</option><option>Contanti</option><option>Assegno</option><option>Carta/POS</option><option>Finanziamento</option></select></div>
+            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">N° fattura saldo</label><input name="fatturaNumero" defaultValue={c.fatturaSaldoNumero ?? fattSaldo?.numero ?? ""} className={`${inp} w-32`} /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Data fattura</label><input type="date" name="fatturaData" defaultValue={fattSaldo ? fattSaldo.data.toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" }) : ""} className={inp} /></div>
+            <div className="flex flex-col gap-1"><label className="text-xs font-bold text-neutral-800">Modalità</label><select name="modalita" defaultValue="Bonifico" className={inp}>{METODI_PAGAMENTO.map((m) => <option key={m.chiave} value={m.nome}>{m.nome}</option>)}</select></div>
             <button className="btn-3d btn-3d-green text-sm px-4 py-2">Registra saldo incassato</button>
           </form>
         ) : (
@@ -1097,7 +1109,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                       <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-900 bg-neutral-50 border border-neutral-200 rounded p-2">
                         <span className="font-bold">Come è finita la posa?</span>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="COMPLETA" defaultChecked /> Finita: al cliente la richiesta di recensione, il commerciale porta il kit</label>
-                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale: al cliente le scuse, si fissa un&apos;altra data</label>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale, si torna solo per finire: al cliente le scuse, il centralino fissa un&apos;altra data</label>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE_MATERIALE" /> Parziale, serve materiale (mancante, rotto o in garanzia): passa all&apos;ufficio ordini, all&apos;arrivo si fissa la data per finire</label>
+                        <input name="materialeServe" placeholder="Se serve materiale: cosa manca o cosa è rotto / in garanzia" className={`${inp} w-full`} />
                         <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
                       </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
