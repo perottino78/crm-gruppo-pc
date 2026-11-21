@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { caricaRilievo } from "@/app/commesse-actions";
 import FotoRilievo from "@/components/FotoRilievo";
 import ScegliMateriale, { etichettaMateriale, type MaterialeInLista } from "./ScegliMateriale";
@@ -77,15 +77,40 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
     { n: 3, nome: "Misure e file", icona: "📏" },
     { n: 4, nome: "Salva", icona: "✅" },
   ];
-  const vai = (n: number) => { if (sospeso && n !== passo && !window.confirm(`«${sospeso}» è scelto ma NON ancora aggiunto alla lista (serve «➕ Aggiungi alla lista»). Vuoi andare avanti lo stesso?`)) return; setPasso(Math.min(4, Math.max(1, n))); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); };
+  // avviso se un prodotto è scelto ma non ancora in lista: finestra nella pagina (non il confirm del browser, che si può bloccare)
+  const formRef = useRef<HTMLFormElement>(null);
+  const salvaComunque = useRef(false);
+  const [avviso, setAvviso] = useState<{ testo: string; voce: string; vai: () => void } | null>(null);
+  const cambia = (n: number) => { setPasso(Math.min(4, Math.max(1, n))); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const vai = (n: number) => {
+    if (sospeso && n !== passo) { setAvviso({ testo: `«${sospeso}» è scelto ma NON ancora aggiunto alla lista. Se vai avanti adesso non viene tenuto.`, voce: "Vai avanti lo stesso", vai: () => cambia(n) }); return; }
+    cambia(n);
+  };
   const pannello = (n: number) => (passo === n ? "" : "hidden");
   return (
-    <form action={caricaRilievo} className="mt-2 space-y-3"
+    <form ref={formRef} action={caricaRilievo} className="mt-2 space-y-3"
       onKeyDown={(e) => { if (e.key === "Enter" && (e.target as HTMLElement).tagName === "INPUT") e.preventDefault(); }}
-      onSubmit={(e) => { if (sospeso && !window.confirm(`«${sospeso}» è scelto ma NON ancora aggiunto alla lista, quindi non verrebbe salvato. Salvare comunque il rilievo?`)) e.preventDefault(); }}>
+      onSubmit={(e) => {
+        if (sospeso && !salvaComunque.current) {
+          e.preventDefault();
+          setAvviso({ testo: `«${sospeso}» è scelto ma NON ancora aggiunto alla lista, quindi non verrebbe salvato con il rilievo.`, voce: "Salva comunque il rilievo", vai: () => { salvaComunque.current = true; formRef.current?.requestSubmit(); } });
+        }
+      }}>
       <input type="hidden" name="rilievoId" value={rilievoId} />
       <input type="hidden" name="complementi" value={JSON.stringify(lista.map(({ etichetta: _e, base: _b, fornDefault: _f, fuori: _u, ...x }) => x))} />
 
+      {avviso && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4" role="alertdialog" aria-modal="true">
+          <div className="w-full max-w-md rounded-xl bg-white p-5 shadow-2xl">
+            <p className="text-base font-bold text-amber-900">⚠️ Prodotto non ancora aggiunto</p>
+            <p className="mt-2 text-sm text-neutral-800">{avviso.testo}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button type="button" onClick={() => { setAvviso(null); setPasso(1); }} className="btn-3d btn-3d-green text-sm px-4 py-2">↩ Torna e aggiungilo</button>
+              <button type="button" onClick={() => { const f = avviso.vai; setAvviso(null); f(); }} className="btn-3d btn-3d-outline text-sm px-4 py-2">{avviso.voce}</button>
+            </div>
+          </div>
+        </div>
+      )}
       {bozzaRipristinata && <p className="rounded border border-sky-300 bg-sky-50 px-3 py-1.5 text-xs text-sky-900">💾 Ho ripristinato quello che avevi già scritto (materiale, verbale, misure): non è ancora salvato, si salva con «Salva il rilievo».</p>}
 
       {/* passi: si vede solo quello che serve in quel momento */}
