@@ -3,9 +3,10 @@
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { inviaOrdineEmail, scaricaOrdineCompleto, type EsitoInvio } from "@/app/ordini-actions";
+import { emailOfferta } from "@/lib/mail/firma";
 
 /** Invio dell'ordine: dalla casella ordini, con la lista senza prezzi e il rilievo della pratica allegato (come in BConsole). */
-export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente, fornitore = "", tornaA = "/ordini-fornitori", tornaTesto = "← Torna alla pratica" }: { tornaA?: string; tornaTesto?: string; ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fornitore?: string; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
+export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, giaInviato, fileRilievo = [], documenti = [], mittente, fornitore = "", tornaA = "/ordini-fornitori", tornaTesto = "← Torna alla pratica", firma = "", colore = "#EA580C", logo = null }: { firma?: string; colore?: string; logo?: string | null; tornaA?: string; tornaTesto?: string; ordineId: string; a: string; cc: string; oggetto: string; testo: string; pdfUrl: string; giaInviato: boolean; fornitore?: string; fileRilievo?: { id: string; nome: string }[]; documenti?: { id: string; nome: string; cartella: string }[]; mittente: string }) {
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
   const [senzaPrezzi, setSenzaPrezzi] = useState(true);
   // file del rilievo da allegare: si sceglie quale (di partenza i PDF)
@@ -69,62 +70,83 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
       </div>
     );
   }
+  const nAllegati = scelti.length + doc.length + extra.length;
+  const anteprima = emailOfferta({ testo: corpo, firma, colore, logo }).html;
+  const sez = "rounded-xl border border-neutral-200 bg-white p-4 shadow-sm";
+  const titolo = (n: number, t: string, sotto?: string) => (
+    <div className="mb-3 flex items-start gap-3">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-extrabold text-white" style={{ background: colore }}>{n}</span>
+      <div><h3 className="text-base font-extrabold text-neutral-900 leading-7">{t}</h3>{sotto && <p className="text-xs text-neutral-600 -mt-0.5">{sotto}</p>}</div>
+    </div>
+  );
+  const riga = (id: string, nome: string, on: boolean, cambia: (v: boolean) => void, apri: string, icona: string) => (
+    <label key={id} className={`flex items-center gap-3 rounded-lg border px-3 py-2 text-sm cursor-pointer transition ${on ? "border-green-400 bg-green-50" : "border-neutral-200 bg-white hover:bg-neutral-50"}`}>
+      <input type="checkbox" checked={on} onChange={(e) => cambia(e.target.checked)} className="h-4 w-4" />
+      <span className="min-w-0 flex-1 truncate">{icona} {nome}</span>
+      <a href={apri} target="_blank" rel="noopener" onClick={(e) => e.stopPropagation()} className="shrink-0 text-xs font-semibold text-blue-800 underline">apri</a>
+    </label>
+  );
   return (
-    <div className="space-y-2">
-      <div className="grid md:grid-cols-2 gap-2">
-        <label className="text-xs font-semibold">A (email ordini del fornitore)<input value={dest} onChange={(e) => setDest(e.target.value)} className={inp} placeholder="ordini@fornitore.it" /></label>
-        <label className="text-xs font-semibold">Copia a<input value={copia} onChange={(e) => setCopia(e.target.value)} className={inp} /></label>
-      </div>
-      <label className="text-xs font-semibold block">Oggetto<input value={ogg} onChange={(e) => setOgg(e.target.value)} className={inp} /></label>
-      <label className="text-xs font-semibold block">Messaggio<textarea value={corpo} onChange={(e) => setCorpo(e.target.value)} rows={6} className={inp} /></label>
-      <div className="rounded border border-neutral-200 bg-neutral-50 p-2 space-y-1 text-sm">
-        <p className="text-xs text-neutral-700">Parte da <b>{mittente}</b>: le conferme del fornitore arrivano lì.</p>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={senzaPrezzi} onChange={(e) => setSenzaPrezzi(e.target.checked)} /> PDF senza prezzi (lista prodotti: il prezzo lo dà il fornitore con la conferma)</label>
-        {fileRilievo.length > 0 ? (
-          <div>
-            <p className="text-xs font-bold text-neutral-800 mt-1">File del rilievo da allegare (scegli quelli di questo fornitore):</p>
-            {fileRilievo.map((f) => (
-              <label key={f.id} className="flex items-center gap-2 ml-2">
-                <input type="checkbox" checked={scelti.includes(f.id)} onChange={(e) => setScelti(e.target.checked ? [...scelti, f.id] : scelti.filter((x) => x !== f.id))} />
-                <span>{/\.pdf$/i.test(f.nome) ? "📄" : "🖼️"} {f.nome}</span>
-                <a href={`/api/foto/rilievo/${f.id}`} target="_blank" rel="noopener" className="text-xs text-blue-800 underline">apri</a>
-              </label>
-            ))}
-          </div>
-        ) : <p className="text-xs text-neutral-500">Nessun rilievo caricato nella pratica da allegare.</p>}
-        {documenti.length > 0 && (
-          <div>
-            <p className="text-xs font-bold text-neutral-800 mt-1">File delle cartelle del progetto:</p>
-            {cartelle.map((c) => (
-              <div key={c} className="ml-2">
-                <p className="text-[11px] font-semibold text-neutral-600">📂 {c}</p>
-                {documenti.filter((d) => d.cartella === c).map((d) => (
-                  <label key={d.id} className="flex items-center gap-2 ml-2">
-                    <input type="checkbox" checked={doc.includes(d.id)} onChange={(e) => setDoc(e.target.checked ? [...doc, d.id] : doc.filter((x) => x !== d.id))} />
-                    <span>{d.nome}</span>
-                    <a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-xs text-blue-800 underline">apri</a>
-                  </label>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
-        <div className="mt-1">
-          <p className="text-xs font-bold text-neutral-800">📎 Allega file dal computer (ordine cartaceo, disegno, foto):</p>
-          <input type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(e) => { void aggiungiFile(e.target.files); e.target.value = ""; }} className="ml-2 text-xs" />
-          {extra.map((f, i) => (
-            <p key={i} className="ml-2 text-xs">{/\.pdf$/i.test(f.nome) ? "📄" : "🖼️"} {f.nome} <span className="text-neutral-500">({f.kb} KB)</span> <button type="button" onClick={() => setExtra(extra.filter((_, j) => j !== i))} className="text-red-700 underline">togli</button></p>
-          ))}
-          {avvisoFile && <p className="ml-2 text-xs text-red-700">{avvisoFile}</p>}
+    <div className="space-y-4">
+      <section className={sez}>
+        {titolo(1, "A chi", `Parte da ${mittente}: le conferme del fornitore arrivano lì.`)}
+        <div className="grid gap-3 md:grid-cols-2">
+          <label className="text-xs font-bold text-neutral-700">A (email ordini del fornitore)<input value={dest} onChange={(e) => setDest(e.target.value)} className={inp} placeholder="ordini@fornitore.it" /></label>
+          <label className="text-xs font-bold text-neutral-700">Copia a (facoltativo)<input value={copia} onChange={(e) => setCopia(e.target.value)} className={inp} /></label>
         </div>
+        <label className="mt-3 block text-xs font-bold text-neutral-700">Oggetto<input value={ogg} onChange={(e) => setOgg(e.target.value)} className={inp} /></label>
+      </section>
+
+      <section className={sez}>
+        {titolo(2, "Messaggio", "La firma con il logo si aggiunge da sola in fondo.")}
+        <textarea value={corpo} onChange={(e) => setCorpo(e.target.value)} rows={7} className={inp} aria-label="Messaggio" />
+        <details className="mt-3 rounded-lg border border-neutral-200 bg-neutral-50" open>
+          <summary className="cursor-pointer px-3 py-2 text-sm font-bold text-neutral-800">👁️ Come lo vede il fornitore</summary>
+          <iframe title="Anteprima email" sandbox="" srcDoc={anteprima} className="h-96 w-full rounded-b-lg border-t border-neutral-200 bg-white" />
+        </details>
+      </section>
+
+      <section className={sez}>
+        {titolo(3, "Allegati", nAllegati ? `${nAllegati} ${nAllegati === 1 ? "file scelto" : "file scelti"}: spunta quelli da mandare.` : "Spunta i file da mandare: niente è scelto di partenza.")}
+        <label className="mb-3 flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm">
+          <input type="checkbox" checked={senzaPrezzi} onChange={(e) => setSenzaPrezzi(e.target.checked)} className="h-4 w-4" />
+          <span><b>📄 PDF dell&apos;ordine senza prezzi</b> <span className="text-xs text-neutral-600">— il prezzo lo dà il fornitore con la conferma</span></span>
+        </label>
+        {fileRilievo.length > 0 ? (
+          <div className="mb-3">
+            <p className="mb-1 text-xs font-extrabold uppercase tracking-wide text-neutral-600">📏 File del rilievo</p>
+            <div className="grid gap-2 md:grid-cols-2">
+              {fileRilievo.map((f) => riga(f.id, f.nome, scelti.includes(f.id), (v) => setScelti(v ? [...scelti, f.id] : scelti.filter((x) => x !== f.id)), `/api/foto/rilievo/${f.id}`, /\.pdf$/i.test(f.nome) ? "📄" : "🖼️"))}
+            </div>
+          </div>
+        ) : <p className="mb-3 text-xs text-neutral-500">Nessun rilievo caricato nella pratica da allegare.</p>}
+        {cartelle.map((c) => (
+          <div key={c} className="mb-3">
+            <p className="mb-1 text-xs font-extrabold uppercase tracking-wide text-neutral-600">📂 {c}</p>
+            <div className="grid gap-2 md:grid-cols-2">
+              {documenti.filter((d) => d.cartella === c).map((d) => riga(d.id, d.nome, doc.includes(d.id), (v) => setDoc(v ? [...doc, d.id] : doc.filter((x) => x !== d.id)), `/api/documenti/${d.id}`, "📄"))}
+            </div>
+          </div>
+        ))}
+        <div className="rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50 p-3">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-neutral-600">📎 Dal computer</p>
+          <p className="mb-2 text-xs text-neutral-600">Ordine cartaceo, disegno, foto (PDF o immagini, in tutto fino a 3,4 MB).</p>
+          <input type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(e) => { void aggiungiFile(e.target.files); e.target.value = ""; }} className="text-xs" />
+          {extra.map((f, i) => (
+            <p key={i} className="mt-1 text-xs">{/\.pdf$/i.test(f.nome) ? "📄" : "🖼️"} <b>{f.nome}</b> <span className="text-neutral-500">({f.kb} KB)</span> <button type="button" onClick={() => setExtra(extra.filter((_, j) => j !== i))} className="text-red-700 underline">togli</button></p>
+          ))}
+          {avvisoFile && <p className="mt-1 text-xs text-red-700">{avvisoFile}</p>}
+        </div>
+      </section>
+
+      <div className="sticky bottom-0 z-30 -mx-1 flex flex-wrap items-center gap-3 rounded-xl border border-neutral-200 bg-white/95 p-3 shadow-lg backdrop-blur">
+        <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green px-6 py-2.5 text-base disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email" : "✉ Invia per email"}</button>
+        <button type="button" onClick={scaricaTutto} disabled={scaricando} className="btn-3d btn-3d-dark px-4 py-2.5 text-sm disabled:opacity-50" title="Un solo PDF con l'ordine e tutti i file che hai scelto">{scaricando ? "Preparo il PDF…" : "⬇ Scarica PDF con gli allegati"}</button>
+        <a href={`${pdfUrl}${senzaPrezzi ? "?prezzi=0" : ""}`} target="_blank" rel="noopener" className="text-sm font-semibold text-blue-800 underline">anteprima del PDF</a>
+        <span className="ml-auto text-xs text-neutral-600">{nAllegati ? `${nAllegati} allegati + ordine` : "solo l'ordine in PDF"}</span>
       </div>
-      <div className="flex flex-wrap gap-2 items-center">
-        <button onClick={invia} disabled={inCorso || !dest} className="btn-3d btn-3d-green text-sm px-4 py-2 disabled:opacity-50">{inCorso ? "Invio…" : giaInviato ? "✉ Reinvia per email con PDF" : "✉ Invia per email con PDF"}</button>
-        <button type="button" onClick={scaricaTutto} disabled={scaricando} className="btn-3d btn-3d-dark text-sm px-4 py-2 disabled:opacity-50" title="Un solo PDF con l'ordine e tutti i file che hai scelto">{scaricando ? "Preparo il PDF…" : "⬇ Scarica PDF con gli allegati"}</button>
-        <a href={`${pdfUrl}${senzaPrezzi ? "?prezzi=0" : ""}`} target="_blank" rel="noopener" className="text-sm text-blue-800 underline">anteprima</a>
-      </div>
-      {msgScarico && <p className="text-xs text-neutral-700 bg-neutral-50 border border-neutral-200 rounded p-2">{msgScarico}</p>}
-      {esito && <p className={`text-sm rounded p-2 ${esito.ok ? "bg-green-50 text-green-900" : esito.mailto ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-800"}`}>{esito.messaggio}</p>}
+      {msgScarico && <p className="rounded border border-neutral-200 bg-neutral-50 p-2 text-xs text-neutral-700">{msgScarico}</p>}
+      {esito && <p className={`rounded p-2 text-sm ${esito.ok ? "bg-green-50 text-green-900" : esito.mailto ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-800"}`}>{esito.messaggio}</p>}
     </div>
   );
 }

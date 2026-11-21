@@ -27,7 +27,7 @@ import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { labelCalcolo } from "@/lib/listini/kit";
-import { UFFICI, nomeUfficio } from "@/lib/flusso";
+import { UFFICI, nomeUfficio, STATI_CHIUSI } from "@/lib/flusso";
 import { passiDiCommessa } from "@/lib/pratica/passi-server";
 import { passoDaMostrare, passoPrecedente, type ChiavePasso } from "@/lib/pratica/passi";
 import { BarraPassi, TestataPasso } from "@/components/commesse/PercorsoPratica";
@@ -347,31 +347,24 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       )}
       {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
-      {/* FLUSSO PRATICA FRA UFFICI */}
-      <details className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2></summary>
-        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Puoi anche inviare un task libero a un ufficio.</p>
-        {c.tasks.length > 0 && (
-          <div className="mb-3 rounded border border-sky-200 bg-sky-50/60 p-2 text-xs text-neutral-800">
-            <p className="mb-1 font-bold text-sky-900">🕒 Passaggi fra uffici (quando è arrivata e quando è stata chiusa)</p>
-            <ul className="space-y-0.5">
-              {[...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime()).filter((t) => t.faseChiave).map((t) => {
-                const fine = t.completatoIl ?? null;
-                const giorni = Math.max(0, Math.floor(((fine ?? new Date()).getTime() - t.createdAt.getTime()) / 86400000));
-                const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
-                const ritardo = !fine && t.stato !== "ANNULLATO" && giorni >= 3;
-                return (
-                  <li key={t.id} className={t.stato === "ANNULLATO" ? "text-neutral-400 line-through" : ""}>
-                    <b>{nomeUfficio(t.ufficio)}</b>: {t.titolo} — arrivata il {d(t.createdAt)}
-                    {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : t.stato !== "ANNULLATO" && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-amber-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-        <div className="flex flex-col gap-2 mb-3">
-          {c.tasks.length === 0 && (
+      {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
+      {(() => {
+        const passaggi = [...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
+        const chiuso = (t: (typeof passaggi)[number]) => !!t.completatoIl || STATI_CHIUSI.includes(t.stato);
+        const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
+        const attivi = passaggi.filter((t) => !chiuso(t));
+        const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
+        return (
+      <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0}>
+        <summary className="cursor-pointer list-none">
+          <h2 className="mb-1">✅ Avanzamento della pratica</h2>
+          <p className="text-xs text-neutral-600 mb-2">
+            {passaggi.length === 0 ? "Nessun passaggio fra uffici ancora." : <>{fatti} passaggi chiusi{attivi.length > 0 ? <> · <b className="text-sky-800">adesso: {attivi.map((t) => nomeUfficio(t.ufficio)).join(", ")}</b></> : " · tutto chiuso"}</>}
+          </p>
+        </summary>
+        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Qui sotto trovi il percorso fra gli uffici, con le date, e in fondo i costi di manodopera.</p>
+        {passaggi.length === 0 && (
+          <div className="mb-3">
             <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
               <input type="hidden" name="commessaId" value={c.id} />
               <p className="text-sm text-neutral-600">Nessun task ancora.</p>
@@ -385,10 +378,39 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               </select>
               <button className="btn-3d btn-3d-green text-sm px-4 py-2">Avvia flusso</button>
             </form>
-          )}
-          {c.tasks.map((t) => <TaskCard key={t.id} task={t} />)}
-        </div>
-        <form action={creaTaskManuale} className="flex flex-wrap items-end gap-2">
+          </div>
+        )}
+        <ol className="relative ml-3 border-l-2 border-sky-200 space-y-3 pb-1">
+          {passaggi.map((t) => {
+            const fine = t.completatoIl ?? null;
+            const annullato = t.stato === "ANNULLATO";
+            const finito = chiuso(t);
+            const giorni = Math.max(0, Math.floor(((fine ?? new Date()).getTime() - t.createdAt.getTime()) / 86400000));
+            const ritardo = !finito && giorni >= 3;
+            const colore = annullato ? "bg-neutral-300" : finito ? "bg-green-600" : ritardo ? "bg-red-600" : "bg-sky-600";
+            return (
+              <li key={t.id} className="relative pl-6">
+                <span className={`absolute -left-[11px] top-1 flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-white ring-4 ring-white ${colore}`}>{annullato ? "×" : finito ? "✓" : "●"}</span>
+                <p className={`text-xs ${annullato ? "text-neutral-400 line-through" : "text-neutral-700"}`}>
+                  <b className="text-neutral-900">{nomeUfficio(t.ufficio)}</b> · arrivata il {d(t.createdAt)}
+                  {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : !annullato && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-sky-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
+                </p>
+                {finito ? (
+                  <details className="mt-1">
+                    <summary className="cursor-pointer text-sm font-semibold text-neutral-800">{t.titolo} <span className="text-xs font-normal text-neutral-500">(dettagli)</span></summary>
+                    <div className="mt-1"><TaskCard task={t} /></div>
+                  </details>
+                ) : (
+                  <div className="mt-1"><TaskCard task={t} /></div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        <details className="mt-3 rounded border border-neutral-200 bg-neutral-50 p-2">
+          <summary className="cursor-pointer text-sm font-bold text-neutral-800">➕ Invia un task libero a un ufficio</summary>
+          <div className="mt-2">
+            <form action={creaTaskManuale} className="flex flex-wrap items-end gap-2">
           <input type="hidden" name="commessaId" value={c.id} />
           <div><label className="text-[11px] font-bold text-neutral-700 block">Invia task a</label>
             <select name="ufficio" className={inp}>{UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}</select></div>
@@ -398,7 +420,91 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             <input name="descrizione" className={inp + " w-full"} /></div>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Invia task</button>
         </form>
+          </div>
+        </details>
+        <details className="mt-3 rounded border border-violet-200 bg-violet-50/40 p-2">
+          <summary className="cursor-pointer text-sm font-bold text-violet-900">⏱ Costi di manodopera per fase (ore o forfait)</summary>
+          <div className="mt-2">
+        {c.fasi.length === 0 ? (
+          <form action={generaFasiStandard}>
+            <input type="hidden" name="id" value={c.id} />
+            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Genera fasi standard</button>
+          </form>
+        ) : (
+          <div className="space-y-2">
+            {c.fasi.map((f) => (
+              <div key={f.id} className="border border-neutral-200 rounded p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-semibold text-neutral-900">{f.ordine}. {f.nome}</p>
+                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${f.stato === "CHIUSA" ? "bg-green-100 text-green-900" : f.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : "bg-neutral-200 text-neutral-800"}`}>
+                    {f.stato === "CHIUSA" ? "CHIUSA" : f.stato === "IN_CORSO" ? "IN CORSO" : "DA FARE"}
+                  </span>
+                </div>
+                {f.stato === "CHIUSA" ? (
+                  <div className="text-xs text-neutral-800 mt-1">
+                    Chiusa da <b>{f.chiusaDaNome}</b> il {f.chiusaIl?.toLocaleDateString("it-IT")} · {f.forfait !== null ? `forfait ${eur(f.forfait)}` : `${f.ore ?? 0} h × ${eur(f.costoOrario ?? 0)}/h`} = <b>{eur(f.costoTotale)}</b>
+                    {f.note ? ` · ${f.note}` : ""}
+                    {admin && (
+                      <form action={riapriFase} className="inline ml-3">
+                        <input type="hidden" name="faseId" value={f.id} />
+                        <button className="text-red-700 underline">riapri</button>
+                      </form>
+                    )}
+                  </div>
+                ) : (
+                  <div className="mt-2 space-y-2">
+                    <form action={assegnaFase} className="flex items-center gap-2">
+                      <input type="hidden" name="faseId" value={f.id} />
+                      <select name="assegnatario" defaultValue={f.assegnatoUtenteId ? `U:${f.assegnatoUtenteId}` : f.assegnatoSoggettoId ? `S:${f.assegnatoSoggettoId}` : ""} className={inp}>
+                        <option value="">Assegna a…</option>
+                        <optgroup label="Utenti CRM">
+                          {soloAttivi(tecnici, f.assegnatoUtenteId).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
+                        </optgroup>
+                        {soggettiOperativi.length > 0 && (
+                          <optgroup label="Posatori / tecnici in anagrafica">
+                            {soggettiOperativi.map((t) => <option key={t.id} value={`S:${t.id}`}>{t.ragioneSociale}</option>)}
+                          </optgroup>
+                        )}
+                      </select>
+                      <button className="btn-3d btn-3d-dark text-[11px] px-2 py-1">assegna</button>
+                      {f.assegnatoNome && <span className="text-xs font-bold text-neutral-800">Assegnata a <b>{f.assegnatoNome}</b></span>}
+                    </form>
+                    <form action={chiudiFase} className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
+                      <input type="hidden" name="faseId" value={f.id} />
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Ore lavorate</label>
+                        <input name="ore" className={`${inp} w-20`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Costo orario €</label>
+                        <input name="costoOrario" defaultValue={costoOrarioUtente(utente?.id) as string | number} className={`${inp} w-24`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">oppure forfait €</label>
+                        <input name="forfait" className={`${inp} w-24`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Note</label>
+                        <input name="note" className={`${inp} w-48`} />
+                      </div>
+                      <button className="btn-3d btn-3d-green text-sm px-4 py-2">Chiudi fase</button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+        <form action={aggiungiFase} className="flex gap-2 mt-3">
+          <input type="hidden" name="commessaId" value={c.id} />
+          <input name="nome" placeholder="Nuova fase (es. Sopralluogo muratore)" className={`${inp} flex-1`} />
+          <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Aggiungi fase</button>
+        </form>
+          </div>
+        </details>
       </details>
+        );
+      })()}
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (
@@ -614,90 +720,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       )}
 
 
-      {/* FASI */}
-      <details className="card-fase" style={{ "--fase": "#7c3aed" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">3 · Fasi della commessa</h2></summary>
-        {c.fasi.length === 0 ? (
-          <form action={generaFasiStandard}>
-            <input type="hidden" name="id" value={c.id} />
-            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Genera fasi standard</button>
-          </form>
-        ) : (
-          <div className="space-y-2">
-            {c.fasi.map((f) => (
-              <div key={f.id} className="border border-neutral-200 rounded p-3">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-sm font-semibold text-neutral-900">{f.ordine}. {f.nome}</p>
-                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${f.stato === "CHIUSA" ? "bg-green-100 text-green-900" : f.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : "bg-neutral-200 text-neutral-800"}`}>
-                    {f.stato === "CHIUSA" ? "CHIUSA" : f.stato === "IN_CORSO" ? "IN CORSO" : "DA FARE"}
-                  </span>
-                </div>
-                {f.stato === "CHIUSA" ? (
-                  <div className="text-xs text-neutral-800 mt-1">
-                    Chiusa da <b>{f.chiusaDaNome}</b> il {f.chiusaIl?.toLocaleDateString("it-IT")} · {f.forfait !== null ? `forfait ${eur(f.forfait)}` : `${f.ore ?? 0} h × ${eur(f.costoOrario ?? 0)}/h`} = <b>{eur(f.costoTotale)}</b>
-                    {f.note ? ` · ${f.note}` : ""}
-                    {admin && (
-                      <form action={riapriFase} className="inline ml-3">
-                        <input type="hidden" name="faseId" value={f.id} />
-                        <button className="text-red-700 underline">riapri</button>
-                      </form>
-                    )}
-                  </div>
-                ) : (
-                  <div className="mt-2 space-y-2">
-                    <form action={assegnaFase} className="flex items-center gap-2">
-                      <input type="hidden" name="faseId" value={f.id} />
-                      <select name="assegnatario" defaultValue={f.assegnatoUtenteId ? `U:${f.assegnatoUtenteId}` : f.assegnatoSoggettoId ? `S:${f.assegnatoSoggettoId}` : ""} className={inp}>
-                        <option value="">Assegna a…</option>
-                        <optgroup label="Utenti CRM">
-                          {soloAttivi(tecnici, f.assegnatoUtenteId).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
-                        </optgroup>
-                        {soggettiOperativi.length > 0 && (
-                          <optgroup label="Posatori / tecnici in anagrafica">
-                            {soggettiOperativi.map((t) => <option key={t.id} value={`S:${t.id}`}>{t.ragioneSociale}</option>)}
-                          </optgroup>
-                        )}
-                      </select>
-                      <button className="btn-3d btn-3d-dark text-[11px] px-2 py-1">assegna</button>
-                      {f.assegnatoNome && <span className="text-xs font-bold text-neutral-800">Assegnata a <b>{f.assegnatoNome}</b></span>}
-                    </form>
-                    <form action={chiudiFase} className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
-                      <input type="hidden" name="faseId" value={f.id} />
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Ore lavorate</label>
-                        <input name="ore" className={`${inp} w-20`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Costo orario €</label>
-                        <input name="costoOrario" defaultValue={costoOrarioUtente(utente?.id) as string | number} className={`${inp} w-24`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">oppure forfait €</label>
-                        <input name="forfait" className={`${inp} w-24`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Note</label>
-                        <input name="note" className={`${inp} w-48`} />
-                      </div>
-                      <button className="btn-3d btn-3d-green text-sm px-4 py-2">Chiudi fase</button>
-                    </form>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-        <form action={aggiungiFase} className="flex gap-2 mt-3">
-          <input type="hidden" name="commessaId" value={c.id} />
-          <input name="nome" placeholder="Nuova fase (es. Sopralluogo muratore)" className={`${inp} flex-1`} />
-          <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Aggiungi fase</button>
-        </form>
-      </details>
-
       {/* EVASIONE ORDINI */}
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties} open={apre("MATERIALE","ARRIVO")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">4 · Evasione ordini e acquisti</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">3 · Evasione ordini e acquisti</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
         <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
           <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
@@ -855,7 +881,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* SCHEDA COSTI A SCALARE */}
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">5 · Scheda costi a scalare</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">4 · Scheda costi a scalare</h2></summary>
         <div className="grid grid-cols-4 gap-3 mb-4">
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Vendita (imponibile)</p><p className="text-sm font-bold">{eur(c.totaleImponibile)}</p></div>
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Costi registrati</p><p className="text-sm font-bold">{eur(totaleCosti)}</p></div>
@@ -914,7 +940,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* SALDO */}
       {mostra("SALDO", "POSA_APP") && (
       <details className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties} open={apre("SALDO")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">6 · Saldo e conferma posa</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">5 · Saldo e conferma posa</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
         {c.saldoIncassato ? (
           <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
@@ -942,7 +968,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* POSA E FINE LAVORI */}
       {mostra("POSA_APP", "POSA") && (
       <details id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties} open={apre("POSA_APP","POSA")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">7 · Posa e fine lavori</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">6 · Posa e fine lavori</h2></summary>
         {mostra("POSA_APP") && (
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
@@ -1091,7 +1117,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* CHIUSURA */}
       {mostra("KIT") && (c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
         <details className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties} open={apre("KIT")}>
-          <summary className="cursor-pointer list-none"><h2 className="mb-3">8 · Chiusura commessa</h2></summary>
+          <summary className="cursor-pointer list-none"><h2 className="mb-3">7 · Chiusura commessa</h2></summary>
           {c.stato === "CHIUSA" ? (
             <div className="text-sm text-neutral-900 space-y-1">
               <p className="text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">✔ Commessa chiusa il {c.chiusaIl?.toLocaleDateString("it-IT")} · garanzia {c.garanziaMesi} mesi{c.fatturaFinaleNote ? ` · ${c.fatturaFinaleNote}` : ""}</p>
