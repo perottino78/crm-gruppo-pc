@@ -8,10 +8,10 @@ export default function InviaOrdine({ ordineId, a, cc, oggetto, testo, pdfUrl, g
   const [dest, setDest] = useState(a), [copia, setCopia] = useState(cc), [ogg, setOgg] = useState(oggetto), [corpo, setCorpo] = useState(testo);
   const [senzaPrezzi, setSenzaPrezzi] = useState(true);
   // file del rilievo da allegare: si sceglie quale (di partenza i PDF)
-  const [scelti, setScelti] = useState<string[]>(fileRilievo.filter((f) => /\.pdf$/i.test(f.nome)).map((f) => f.id));
+  const [scelti, setScelti] = useState<string[]>([]);
   // file delle cartelle del progetto: di partenza quelli di «Rilievi misura»
   // e la scheda di produzione già compilata al rilievo per questo fornitore (nel nome c'è il fornitore): è già spuntata, pronta da inviare
-  const [doc, setDoc] = useState<string[]>(documenti.filter((d) => d.cartella === "Rilievi misura" || (d.cartella === "Schede produzione" && fornitore.length > 2 && d.nome.toLowerCase().includes(fornitore.toLowerCase()))).map((d) => d.id));
+  const [doc, setDoc] = useState<string[]>(documenti.filter((d) => (d.cartella === "Schede produzione" && fornitore.length > 2 && d.nome.toLowerCase().includes(fornitore.toLowerCase()))).map((d) => d.id));
   const cartelle = [...new Set(documenti.map((d) => d.cartella))];
   // file dal computer (ordine cartaceo firmato, disegni): max ~3,4 MB in tutto per il limite delle richieste
   const [extra, setExtra] = useState<{ nome: string; dataUri: string; kb: number }[]>([]);

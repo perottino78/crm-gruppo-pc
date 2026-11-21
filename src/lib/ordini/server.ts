@@ -130,6 +130,15 @@ export async function fileRilievo(commessaId: string | null | undefined, conCont
 }
 
 /** File delle cartelle del progetto (pratica e offerta) da allegare all'ordine o alla richiesta al fornitore. */
+/**
+ * Cartelle del progetto che si possono allegare all'ordine al fornitore: l'amministratore le vede tutte,
+ * l'ufficio ordini solo i rilievi, le foto dei rilievi e le schede di produzione (modulo del fornitore).
+ */
+export const CARTELLE_ORDINI = ["Rilievi misura", "Foto rilievi", "Schede produzione"];
+export function cartellaConsentita(u: { ruolo: string } | null | undefined, cartella: string): boolean {
+  return u?.ruolo === "AMMINISTRATORE" || CARTELLE_ORDINI.includes(cartella);
+}
+
 export async function documentiProgetto(commessaId: string | null | undefined, conContenuto = true, soloId?: string[]) {
   if (!commessaId) return [];
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { preventivoId: true } });
