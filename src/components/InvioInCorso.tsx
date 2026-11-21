@@ -15,6 +15,13 @@ export default function InvioInCorso() {
   const parametri = useSearchParams();
   const [attivo, setAttivo] = useState(false);
   const [salvataggio, setSalvataggio] = useState(false);
+  // se l'attesa dura più di mezzo secondo compare anche l'etichetta con la rotella (richiesta di Ugo 21/11/2026: i commerciali non capivano se la pagina stava lavorando)
+  const [lenta, setLenta] = useState(false);
+  useEffect(() => {
+    if (!attivo) { setLenta(false); return; }
+    const t = setTimeout(() => setLenta(true), 500);
+    return () => clearTimeout(t);
+  }, [attivo]);
 
   // pagina cambiata (anche dopo il redirect di un salvataggio): via la barra e riaccendi i pulsanti
   useEffect(() => {
@@ -75,6 +82,12 @@ export default function InvioInCorso() {
   return (
     <>
       <div className="barra-attesa" role="status" aria-label="Sto elaborando…" />
+      {lenta && !salvataggio && (
+        <div className="pill-attesa" role="status" aria-live="polite">
+          <span className="velo-attesa-rotella piccola" />
+          <span>Sto caricando… un attimo</span>
+        </div>
+      )}
       {salvataggio && (
         <div className="velo-attesa" role="alertdialog" aria-busy="true" aria-label="Salvataggio in corso">
           <div className="velo-attesa-scheda">

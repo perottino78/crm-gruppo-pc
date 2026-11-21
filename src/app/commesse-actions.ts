@@ -15,7 +15,7 @@ import { inviaMailPratica, ringraziaPagamentoAcconto, avvisaCommerciale } from "
 import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
-import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
+import { trovaFasciaPrezzo, trovaBarraPiuVicina } from "@/lib/prezzoPerMisura";
 import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
 import { costoPrevisto } from "@/lib/ordini/calcoli";
 import { scontoEquivalente } from "@/lib/articoli/prezzi";
@@ -1237,16 +1237,20 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
     const griglia = (await prisma.prodotto.count({ where: { brandId, tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
     const nome = descrizione ?? labelBreveTipologia(tipologia);
     if (griglia && L <= 0) return { errore: `${nome}: scrivi la misura.` };
-    const p = griglia
-      ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
-      : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
+    // profili e pezzi a barre: la barra più vicina alla misura scritta (anche se scritta in mm)
+    const barra = griglia && H <= 0 ? await trovaBarraPiuVicina({ brandId, tipologia, colore, larghezza: L }) : null;
+    const p = barra
+      ? barra.prodotto
+      : griglia
+        ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
+        : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
     if (!p) return { errore: `${nome}: misura fuori listino, scrivilo come testo libero.` };
     prodottoKit = p.id;
     const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId, tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
     fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
     const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
     const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
-    const misura = griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unitaMisura(tipologia)})` : "";
+    const misura = barra ? ` (barra ${p.larghezzaMm} ${unitaMisura(tipologia)}${barra.richiesta !== p.larghezzaMm ? `, richiesto ${L}${barra.inMm ? " mm" : ""}` : ""})` : griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unitaMisura(tipologia)})` : "";
     Object.assign(dati, {
       codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: p.prezzoBase, scontoAcquisto: f ? sconto : null,
       costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p.prezzoBase, quantita: q }, sconto) : null,
@@ -1376,9 +1380,10 @@ export async function complementoDaListinoPerMisura(formData: FormData) {
     const brandId = str(formData, "brandId"), tipologia = str(formData, "tipologia");
     const L = flt(formData, "larghezza"), H = flt(formData, "altezza") ?? 0;
     if (!brandId || !tipologia || !L) return "Scrivi la misura.";
-    const p = await trovaFasciaPrezzo({ brandId, tipologia, larghezza: L, altezza: H });
+    const barra = H <= 0 ? await trovaBarraPiuVicina({ brandId, tipologia, larghezza: L }) : null;
+    const p = barra ? barra.prodotto : await trovaFasciaPrezzo({ brandId, tipologia, larghezza: L, altezza: H });
     if (!p) return `${labelBreveTipologia(tipologia)}: misura fuori listino, scrivilo come testo libero nel rilievo.`;
-    return { tipo: "PR", articoloId: p.id, quantita: str(formData, "quantita"), larghezza: L, altezza: H || null };
+    return { tipo: "PR", articoloId: p.id, quantita: str(formData, "quantita"), larghezza: barra ? p.larghezzaMm : L, altezza: H || null, note: barra && barra.richiesta !== p.larghezzaMm ? `misura richiesta ${barra.richiesta}${barra.inMm ? " mm" : ""} → barra ${p.larghezzaMm}` : null };
   });
 }
 

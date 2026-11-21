@@ -74,6 +74,18 @@ async function main() {
   await cerca(new NextRequest(`http://x/api/complementi?tipologia=COMPSFUSI_PROFILO_M&brandId=${brand.id}`));
   verifica((await prisma.prodotto.count({ where: { tipologia: "COMPSFUSI_PROFILO_M" } })) === 16, "richiamato più volte non duplica");
   await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+  // profilo a barre: misura scritta in mm (4000) o non di listino (430) → barra più vicina, mai «fuori listino»
+  await prisma.prodotto.createMany({ data: [400, 500, 600, 700].map((l, i) => ({ brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", altezzaMm: 0, larghezzaMm: l, prezzoBase: 347 + i * 86, coefficienteRicarico: 1 })) });
+  const dBarra = await dove(C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "4000", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })));
+  const rBarra = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, descrizione: { contains: "COMPSFUSI PROFILO M" } } });
+  {
+    verifica(!dBarra?.includes("avviso=") && rBarra.descrizione.includes("barra 400") && rBarra.descrizione.includes("richiesto 4000 mm") && rBarra.prezzoAcquisto === 347, "4000 scritto in mm → barra da 400 cm al suo prezzo", { dBarra, d: rBarra.descrizione, p: rBarra.prezzoAcquisto });
+  }
+  await C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "570", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })).catch(() => undefined);
+  const r570 = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, descrizione: { contains: "barra 600" } } });
+  verifica(r570.length === 1, "570 cm → barra da 600 cm (la più vicina)", r570.map((x) => x.descrizione));
+  await prisma.rigaOrdine.deleteMany({ where: { commessaId: c.id, descrizione: { contains: "COMPSFUSI PROFILO M" } } });
+  await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
   await prisma.modelloProdotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
 
   console.log("2. Ricerca nel listino e negli articoli");
