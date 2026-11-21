@@ -3,6 +3,8 @@
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+import { verbaleDaForm, verbaleCompilato } from "@/lib/rilievo/verbale";
 import { sceltePerRilievo } from "@/lib/listini/serramenti-comuni";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
@@ -380,9 +382,11 @@ export async function caricaRilievo(formData: FormData) {
   } catch {
     foto = [];
   }
+  // verbale di sopralluogo (spunte, stato dell'immobile, posa, prodotti da installare) compilato al passo 2
+  const verbale = verbaleDaForm((k) => { const v = formData.get(k); return typeof v === "string" ? v : null; }, (k) => formData.getAll(k).filter((x): x is string => typeof x === "string"));
   const r = await prisma.rilievo.update({
     where: { id },
-    data: { misure, note: note ?? undefined, stato: "ESEGUITO", eseguitoIl: new Date() },
+    data: { misure, note: note ?? undefined, stato: "ESEGUITO", eseguitoIl: new Date(), verbale: verbaleCompilato(verbale) ? (verbale as unknown as Prisma.InputJsonValue) : Prisma.JsonNull },
   });
   if (foto.length) {
     await prisma.rilievoAllegato.createMany({
@@ -408,7 +412,7 @@ export async function caricaRilievo(formData: FormData) {
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
   const fatto = `Rilievo salvato${foto.length ? `: ${foto.length} file` : ""}${aggiunti.length ? `, ${aggiunti.length} materiali aggiunti` : ""}.`;
-  redirect(`/commesse/${r.commessaId}?fatto=${encodeURIComponent(fatto)}${errori.length ? `&avvisoRilievo=${encodeURIComponent(`Non aggiunti: ${errori.join(" · ")}`)}` : ""}#rilievo`);
+  redirect(`/commesse/${r.commessaId}?carica=${id}&salvato=1&fatto=${encodeURIComponent(fatto)}${errori.length ? `&avvisoRilievo=${encodeURIComponent(`Non aggiunti: ${errori.join(" · ")}`)}` : ""}`);
 }
 
 export async function aggiungiNotaCommessa(formData: FormData) {

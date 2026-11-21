@@ -8,6 +8,13 @@ import { vociMateriale } from "./costi-materiale";
 
 export const puoGestireOrdini = (u: ConPermessi | null | undefined) => puo(u, "ordini");
 
+/**
+ * Modulo del fornitore al «Carica rilievo» (Ugo 21/11/2026): lo vedono l'ufficio ordini, gli amministratori (che hanno tutti i permessi)
+ * e il tecnico che fa il rilievo di quella pratica; commerciali, telefoniste e gli altri no.
+ */
+export const puoModuloRilievo = (u: (ConPermessi & { id: string }) | null | undefined, tecniciRilievi: string[]) =>
+  !!u && (puoGestireOrdini(u) || tecniciRilievi.includes(u.id));
+
 type RigaPrev = { id: string; prezzoUnitario: number; optionalPrezzo: number; quantita: number; prodotto: { brandId: string; tipologia: string } | null };
 
 /** Per ogni riga venduta: fornitore predefinito del modello, codice fornitore, sconto e costo previsto. */

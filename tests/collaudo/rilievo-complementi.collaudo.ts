@@ -45,6 +45,19 @@ async function main() {
   verifica(all.length === 2 && all.some((a) => a.nome === "rilievo.pdf" && a.dataUri.startsWith("data:application/pdf")), "PDF e foto salvati nel rilievo", all.map((a) => a.nome));
   verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).stato === "ESEGUITO", "rilievo eseguito");
 
+  // verbale di sopralluogo compilato al passo 2 del «Carica rilievo»
+  const fv = fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400", v_piano: "2", v_note_stato: "Crepa in cucina", vr_1_tipo: "Finestra cucina", vr_1_larg: "1200", vr_1_alt: "1400", vr_1_q: "2", v_rif_interno: "Mario" });
+  fv.append("v_intervento", "Serramenti PVC"); fv.append("v_intervento", "Tapparelle"); fv.append("v_intervento", "Inventata");
+  const dvv = await dove(C.caricaRilievo(fv));
+  const rv = (await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).verbale as { campi: Record<string, unknown>; righe: { tipo: string }[]; rif_interno?: string } | null;
+  {
+    verifica(!!rv && JSON.stringify(rv.campi.intervento) === JSON.stringify(["Serramenti PVC", "Tapparelle"]) && rv.campi.piano === "2" && rv.righe[0]?.tipo === "Finestra cucina" && rv.rif_interno === "Mario", "verbale salvato nel rilievo (spunte, testi, prodotti)", rv);
+    verifica(!!dvv && dvv.includes(`carica=${ril.id}`) && dvv.includes("salvato=1"), "dopo il salvataggio si torna alla schermata del rilievo", dvv);
+  }
+  // senza verbale compilato il campo si svuota
+  await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));
+  verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).verbale === null, "verbale vuoto = nessun dato salvato");
+
   console.log("2. Ricerca nel listino e negli articoli");
   const r1 = await (await cerca(new NextRequest("http://x/api/complementi?q=scossalina"))).json();
   const p = r1.risultati.find((x: { tipo: string }) => x.tipo === "P");

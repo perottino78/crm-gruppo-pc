@@ -138,6 +138,19 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const ap = await prisma.rigaOrdine.findMany({ where: { commessaId: com.id, ordineFornitoreId: null, codice: { startsWith: "ANGALL-" } } });
   verifica(ap.length === 1 && ap[0].quantita === 2 && ap[0].fornitoreId === mastroP.id && (ap[0].costoPrevisto ?? 0) > 0, "angolari nel materiale della pratica, fornitore Il Mastro", ap);
 
+  console.log("Chi può compilare il modulo al rilievo");
+  const adminU = (globalThis as { __utente?: unknown }).__utente;
+  const commU = await prisma.utente.create({ data: { nome: "Commerciale", email: "c9@c.it", username: "comm9", passwordHash: "x", ruolo: "COMMERCIALE" } as never });
+  (globalThis as { __utente?: unknown }).__utente = commU;
+  const rifiuto = await A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id })).then(() => "", (e) => String(e));
+  verifica(rifiuto.includes("Non autorizzato"), "un commerciale non compila il modulo del fornitore", rifiuto);
+  const tecU = await prisma.utente.create({ data: { nome: "Tecnico", email: "t9@t.it", username: "tec9", passwordHash: "x", ruolo: "TECNICO" } as never });
+  await prisma.rilievo.create({ data: { commessaId: com.id, tecnicoId: tecU.id, dataOra: new Date() } });
+  (globalThis as { __utente?: unknown }).__utente = tecU;
+  const okTec = await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "x" })));
+  verifica(okTec.includes("okScheda"), "il tecnico del rilievo sì", okTec);
+  (globalThis as { __utente?: unknown }).__utente = adminU;
+
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);
 })();
