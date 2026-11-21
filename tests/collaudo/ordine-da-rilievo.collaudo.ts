@@ -127,6 +127,9 @@ async function main() {
     const t1 = await prisma.taskPratica.findUniqueOrThrow({ where: { id: tk.id } });
     const dopo = (await costiCommesse([c.id])).get(c.id)!.manodopera;
     verifica(t1.minuti === 45 && t1.costoOrario === 40 && t1.costoLavoro === 30 && Math.round((dopo - prima) * 100) === 3000, "45 min × 40 €/h = 30 €, e va nella manodopera dei costi della commessa", { t1, prima, dopo });
+    const { reportEconomico } = await import("../../src/lib/commesse/report-economico");
+    const rep = await reportEconomico(c.id);
+    verifica(!!rep && rep.perTipo.Manodopera >= 30 && rep.voci.some((v) => v.voce.includes("Rilievo prova costo") && v.importo === 30) && Math.round((rep.vendutoImponibile - rep.costiTotali - rep.margine) * 100) === 0, "report economico: la manodopera del passaggio compare e il margine torna", rep && { man: rep.perTipo, margine: rep.margine });
     await F.salvaCostoTask(fd({ taskId: tk.id, minuti: "", costoOrario: "40" }));
     const t2 = await prisma.taskPratica.findUniqueOrThrow({ where: { id: tk.id } });
     verifica(t2.minuti === null && t2.costoLavoro === 0, "minuti vuoti: il costo si toglie", t2);

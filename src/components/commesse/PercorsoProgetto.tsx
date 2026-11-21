@@ -1,21 +1,30 @@
 // Percorso guidato del progetto (richiesta di Ugo 16/11/2026): dopo l'acconto «Crea progetto», poi i 5 passi in ordine
 // (appuntamento di rilievo, rilievi, prodotti e materiale, ordini ai fornitori, arrivo in magazzino). Server component.
+import Link from "next/link";
 import type { PercorsoCommessa } from "@/lib/progetti/percorso-server";
 
 const colori = { FATTO: { bordo: "#16a34a", sfondo: "#f0fdf4", icona: "✅" }, ORA: { bordo: "#2563eb", sfondo: "#eff6ff", icona: "👉" }, IN_ATTESA: { bordo: "#d4d4d4", sfondo: "#fafafa", icona: "⏳" } } as const;
 
-export default function PercorsoProgetto({ commessaId, percorso: p, creaProgetto, confermaMateriale, ok, avviso }: {
-  commessaId: string; percorso: PercorsoCommessa;
+export default function PercorsoProgetto({ commessaId, percorso: p, creaProgetto, confermaMateriale, ok, avviso, reportHref }: {
+  commessaId: string; percorso: PercorsoCommessa; reportHref?: string | null;
   creaProgetto: (fd: FormData) => Promise<void>; confermaMateriale: (fd: FormData) => Promise<void>;
   ok?: string; avviso?: string;
 }) {
   const giorno = (d: Date | null) => (d ? d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "");
+  // il riquadro resta aperto solo quando c'è qualcosa da fare (creare il progetto, confermare il materiale) o un messaggio: il resto è già nel percorso in alto
+  const daFare = p.fase === "DA_CREARE" || p.puoConfermare || !!ok || !!avviso;
+  const fatti = p.passi.filter((x) => x.stato === "FATTO").length;
   return (
-    <section id="progetto" className="card-fase scroll-mt-4 mb-4" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-        <h2>📁 Progetto</h2>
-        <span className="text-xs font-bold px-3 py-1 rounded bg-violet-100 text-violet-900">{p.etichetta}</span>
-      </div>
+    <details id="progetto" open={daFare} className="card-fase scroll-mt-4 mb-4" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
+      <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2">
+        <span className="flex flex-wrap items-center gap-3">
+          <h2 className="mb-0">📁 Progetto</h2>
+          <span className="text-xs font-bold px-3 py-1 rounded bg-violet-100 text-violet-900">{p.etichetta}</span>
+          {p.fase !== "DA_CREARE" && <span className="text-xs text-neutral-500">{fatti} di {p.passi.length} passi fatti · clicca per i dettagli</span>}
+        </span>
+        {reportHref && <Link href={reportHref} className="btn-3d btn-3d-teal px-4 py-2 text-sm" title="Venduto, costi e margine di questo progetto">📊 Report economico</Link>}
+      </summary>
+      <div className="mt-3">
       {ok && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {ok}</p>}
       {avviso && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avviso}</p>}
 
@@ -53,6 +62,7 @@ export default function PercorsoProgetto({ commessaId, percorso: p, creaProgetto
           </p>
         </>
       )}
-    </section>
+      </div>
+    </details>
   );
 }
