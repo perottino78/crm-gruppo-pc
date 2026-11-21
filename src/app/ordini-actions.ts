@@ -87,7 +87,7 @@ async function nuovoOrdineConRighe(nome: string, commessaId: string, fornitoreId
       data: {
         numero, anno, fornitoreId, commessaId, divisione: c.brand.nome, creatoDaNome: nome,
         clienteFinale: cl.nome + (indirizzoCliente ? ` - ${indirizzoCliente}` : ""),
-        riferimento: `Commessa ${c.numero}/${c.anno}${c.preventivo?.oggetto ? ` - ${c.preventivo.oggetto}` : ""}`.slice(0, 200),
+        riferimento: `Commessa ${c.numero}/${c.anno}`,
         indirizzoSpedizione: "Sede di Rosta, Corso Moncenisio 28",
       },
     });

@@ -91,6 +91,9 @@ async function main() {
   const d1 = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [finestra.id, coprifilo.id] })));
   const o1 = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: fidra.id }, include: { righe: true } });
   verifica(o1.stato === "BOZZA" && o1.righe.length === 2 && o1.commessaId === c.id && o1.clienteFinale?.startsWith("GERBAUDO"), "ordine in bozza a FIDRA con le 2 righe spuntate", o1);
+  const pdfDati = await (await import("../../src/lib/ordini/server")).datiPdfOrdine(o1.id);
+  const testata = JSON.stringify(pdfDati?.dati.testata ?? []);
+  verifica(!testata.includes("GERBAUDO") && !testata.includes("Cliente finale") && testata.includes("Commessa "), "al fornitore va solo il riferimento (niente nome o indirizzo del cliente)", testata);
   verifica(d1 === `/ordini-fornitori/${o1.id}?passo=invio`, "si apre subito l'invio dell'email", d1);
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id], fornitoreId: mastro.id })));
   const t2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id }, include: { ordineFornitore: true } });

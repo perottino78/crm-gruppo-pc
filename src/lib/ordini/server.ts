@@ -52,6 +52,12 @@ export function aziendaPerDivisione(divisione?: string | null) {
 }
 
 /** Dati per il PDF dell'ordine (usati anche dalla rotta di download). */
+/** Riferimento da mostrare al fornitore: «Commessa N/anno» (senza oggetto dell'offerta né dati del cliente). */
+export function riferimentoPerFornitore(riferimento: string | null | undefined, commessa?: { numero: number | string; anno: number } | null): string {
+  if (commessa) return `Commessa ${commessa.numero}/${commessa.anno}`;
+  return (riferimento ?? "").split(" - ")[0];
+}
+
 export async function datiPdfOrdine(id: string) {
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, righe: { orderBy: { createdAt: "asc" } }, commessa: true } });
   if (!o) return null;
@@ -64,7 +70,8 @@ export async function datiPdfOrdine(id: string) {
       fornitore: { ragioneSociale: f.ragioneSociale, righe: [[f.indirizzo, [f.cap, f.comune, f.provincia ? `(${f.provincia})` : null].filter(Boolean).join(" ")].filter(Boolean).join(", "), f.partitaIva ? `P.IVA ${f.partitaIva}` : "", f.emailOrdini ?? f.email ?? ""].filter(Boolean) },
       testata: [
         ["Consegna richiesta", dataIt(o.consegnaRichiesta)], ["Commessa", o.commessa ? `${o.commessa.numero}/${o.commessa.anno}` : ""],
-        ["Cliente finale", o.clienteFinale ?? ""], ["Riferimento", o.riferimento ?? ""],
+        // al fornitore va solo il riferimento (pratica), mai nome o indirizzo del cliente
+        ["Riferimento", riferimentoPerFornitore(o.riferimento, o.commessa)],
         ["Indirizzo di consegna", o.indirizzoSpedizione ?? ""], ["Trasporto", o.trasporto ?? ""],
       ] as [string, string][],
       righe: o.righe.map((r) => ({ codice: r.codice, codiceFornitore: r.codiceFornitore, descrizione: r.descrizione + (r.note ? ` (${r.note})` : ""), quantita: r.quantita, um: r.um, prezzoAcquisto: r.prezzoAcquisto, scontoAcquisto: r.scontoAcquisto })),
