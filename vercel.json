@@ -1,3 +1,4 @@
 {
+  "regions": ["fra1"],
   "crons": [{ "path": "/api/automazioni/esegui", "schedule": "5 7 * * *" }]
 }
