@@ -62,7 +62,9 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const nr = numeroOrdine(o);
   const emailForn = o.fornitore.emailOrdini ?? o.fornitore.email ?? "";
   const rilievo = await fileRilievo(o.commessaId, false);
-  const docProgetto = await documentiProgetto(o.commessaId, false);
+  // i file del rilievo salvati anche in cartella («Rilievi misura», «Foto rilievi») compaiono già tra i «file del rilievo»: niente doppioni
+  const nomiRilievo = new Set(rilievo.map((f) => f.nome));
+  const docProgetto = (await documentiProgetto(o.commessaId, false)).filter((d) => !(["Rilievi misura", "Foto rilievi"].includes(d.cartella) && nomiRilievo.has(d.nome.replace(/[^\w.\- ]+/g, "_"))));
   const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.clienteFinale ? ` - rif. ${o.clienteFinale.split(" - ")[0]}` : ""}`;
   const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${rilievo.length ? " con il rilievo misure" : ""}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con prezzi e data di consegna, citando il nostro numero d'ordine, rispondendo a ${EMAIL_ORDINI()}.\n\nGrazie, cordiali saluti\n${u.nome}\nUfficio ordini ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}\nTel. 011 1988 7497`;
 

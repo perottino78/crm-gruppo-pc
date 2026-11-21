@@ -396,6 +396,19 @@ export async function caricaRilievo(formData: FormData) {
         .map((f) => ({ rilievoId: id, nome: f.nome ?? null, dataUri: f.dataUri })),
     });
   }
+  // i file del rilievo stanno anche nelle cartelle della pratica (Ugo 21/11/2026): i PDF in «Rilievi misura», le foto in «Foto rilievi»,
+  // così si trovano tra i documenti e si allegano agli ordini (senza doppioni: `fileRilievo` salta quelli già in cartella)
+  for (const f of foto.filter((x) => typeof x.dataUri === "string" && x.dataUri.startsWith("data:")).slice(0, 12)) {
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(f.dataUri);
+    if (!m) continue;
+    const contenuto = Buffer.from(m[2], "base64");
+    if (!contenuto.length) continue;
+    const nome = (f.nome ?? "").trim() || `rilievo-${Date.now()}.${m[1] === "application/pdf" ? "pdf" : (m[1].split("/")[1] ?? "jpg")}`;
+    const cartella = m[1] === "application/pdf" ? "Rilievi misura" : "Foto rilievi";
+    const dove = { entita: "COMMESSA", entitaId: r.commessaId, cartella, nome };
+    if (await prisma.documento.findFirst({ where: dove, select: { id: true } })) continue;
+    await prisma.documento.create({ data: { ...dove, mime: m[1], dimensione: contenuto.length, contenuto, caricatoDaNome: utente.nome } });
+  }
   await assicuraRigheOfferta(r.commessaId);
   // materiale aggiunto nel modulo del rilievo (solo acquisto): si salva tutto insieme al rilievo
   let complementi: Complemento[] = [];

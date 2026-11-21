@@ -45,6 +45,10 @@ async function main() {
   verifica(all.length === 2 && all.some((a) => a.nome === "rilievo.pdf" && a.dataUri.startsWith("data:application/pdf")), "PDF e foto salvati nel rilievo", all.map((a) => a.nome));
   verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).stato === "ESEGUITO", "rilievo eseguito");
 
+  const cartellaPdf = await prisma.documento.findFirst({ where: { entita: "COMMESSA", entitaId: ril.commessaId, cartella: "Rilievi misura", nome: "rilievo.pdf" } });
+  const cartellaFoto = await prisma.documento.findFirst({ where: { entita: "COMMESSA", entitaId: ril.commessaId, cartella: "Foto rilievi", nome: "foto.jpg" } });
+  verifica(!!cartellaPdf && cartellaPdf.mime === "application/pdf", "il PDF del rilievo è anche nella cartella «Rilievi misura» della pratica", cartellaPdf?.nome);
+  verifica(!!cartellaFoto, "la foto è nella cartella «Foto rilievi»");
   // verbale di sopralluogo compilato al passo 2 del «Carica rilievo»
   const fv = fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400", v_piano: "2", v_note_stato: "Crepa in cucina", vr_1_tipo: "Finestra cucina", vr_1_larg: "1200", vr_1_alt: "1400", vr_1_q: "2", v_rif_interno: "Mario" });
   fv.append("v_intervento", "Serramenti PVC"); fv.append("v_intervento", "Tapparelle"); fv.append("v_intervento", "Inventata");
