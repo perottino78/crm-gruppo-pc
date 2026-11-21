@@ -45,7 +45,7 @@ export const FASI_DEFAULT: FaseDefault[] = [
   },
   // Flusso reale di P&C (Ugo, 16-18/11/2026): Giorgia fattura, crea il progetto e fa la chiamata di benvenuto, Debora segna il pagamento, Alessia (centralino) fissa rilievo e posa,
   // il tecnico carica il rilievo, Laura (ufficio ordini) conferma il materiale e ordina, il magazzino carica bolle e fatture, il commerciale consegna il kit.
-  { chiave: "FATT_ACCONTO", nome: "Progetto, fattura acconto e chiamata di benvenuto", ufficio: "FATTURAZIONE", prossimaChiave: null, taskTitolo: "Creazione progetto, fattura di acconto e chiamata di benvenuto", taskTesto: "Pratica {commessa} di {cliente}: nella pratica, passo per passo: 1) creare il progetto, 2) dentro il progetto emettere la fattura di acconto (importo pratica {importo}), 3) fare la chiamata di benvenuto al cliente e annotarla. L'incasso lo registra l'amministrazione." },
+  { chiave: "FATT_ACCONTO", nome: "Progetto, chiamata di benvenuto e fattura acconto", ufficio: "FATTURAZIONE", prossimaChiave: null, taskTitolo: "Creazione progetto, chiamata di benvenuto e fattura di acconto", taskTesto: "Pratica {commessa} di {cliente}: nella pratica, passo per passo: 1) creare il progetto, 2) fare la chiamata di benvenuto al cliente e annotarla, 3) emettere la fattura di acconto (importo pratica {importo}) e segnarla. L'incasso lo registra l'amministrazione." },
   { chiave: "PROGETTO", nome: "Incasso acconto", ufficio: "AMMINISTRAZIONE", prossimaChiave: null, taskTitolo: "Registrare l'incasso dell'acconto", taskTesto: "Pratica {commessa} di {cliente}: quando arriva il pagamento dell'acconto registrarlo (nello scadenzario, nella fattura o nella pratica): spuntare «✉️ Manda il ringraziamento al cliente» (parte dalla casella della fatturazione); il task si chiude da solo, non serve premere Fatto. Con l'acconto incassato e il progetto creato da Giorgia, il centralino fissa il rilievo." },
   { chiave: "RILIEVO_APP", nome: "Appuntamento di rilievo", ufficio: "CENTRALINO", prossimaChiave: "RILIEVO", taskTitolo: "Fissare l'appuntamento di rilievo", taskTesto: "Pratica {commessa} di {cliente}: nella pratica, sezione Rilievo, scegliere il rilevatore, il giorno e l'ora. Va nel calendario del tecnico e parte la mail al cliente." },
   { chiave: "RILIEVO", nome: "Rilievo misure", ufficio: "TECNICO", prossimaChiave: "ORDINI", taskTitolo: "Eseguire il rilievo e caricare le misure", taskTesto: "Pratica {commessa} di {cliente}: eseguire il rilievo, poi in «Carica il rilievo» inserire misure, PDF e foto e il materiale mancante e salvare (il rilievo risulta eseguito: il task passa all'ufficio tecnico)." },
@@ -58,7 +58,7 @@ export const FASI_DEFAULT: FaseDefault[] = [
 ];
 
 /** Fasi di serie con testi cambiati nel tempo: si riallineano da sole una volta per versione (solo nome e testi del task). */
-export const VERSIONE_TESTI_FLUSSO = "2026-11-21";
+export const VERSIONE_TESTI_FLUSSO = "2026-11-21b";
 export const FASI_TESTI_AGGIORNATI = ["FATT_ACCONTO", "PROGETTO", "ORDINI"];
 
 export function compila(testo: string | null | undefined, v: Record<string, string>): string {

@@ -66,6 +66,7 @@ import {
   riapriCommessa,
   segnaRecensioneRichiesta,
   creaAssistenza,
+  aggiornaAssistenza,
 } from "@/app/commesse-actions";
 import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commesse";
 import TaskCard from "@/components/TaskCard";
@@ -79,6 +80,8 @@ import ApriDaAncora from "@/components/ApriDaAncora";
 import CaricaDocumenti from "@/components/documenti/CaricaDocumenti";
 import { documentiDi } from "@/lib/documenti/server";
 import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
+import { TIPI_INTERVENTO, nomeIntervento, eAperto } from "@/lib/pratica/interventi";
+import { perInput } from "@/lib/calendario/tempo";
 import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -1113,8 +1116,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                       <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-900 bg-neutral-50 border border-neutral-200 rounded p-2">
                         <span className="font-bold">Come è finita la posa?</span>
                         <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="COMPLETA" defaultChecked /> Finita: al cliente la richiesta di recensione, il commerciale porta il kit</label>
-                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale, si torna solo per finire: al cliente le scuse, il centralino fissa un&apos;altra data</label>
-                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE_MATERIALE" /> Parziale, serve materiale (mancante, rotto o in garanzia): passa all&apos;ufficio ordini, all&apos;arrivo si fissa la data per finire</label>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE" /> Parziale, si torna solo per finire: al cliente le scuse, si apre un intervento di fine posa che il centralino fissa</label>
+                        <label className="flex items-center gap-1"><input type="radio" name="esitoPosa" value="PARZIALE_MATERIALE" /> Parziale, serve materiale (mancante, rotto o in garanzia): intervento di fine posa, prima passa all&apos;ufficio ordini, all&apos;arrivo il centralino lo fissa</label>
                         <input name="materialeServe" placeholder="Se serve materiale: cosa manca o cosa è rotto / in garanzia" className={`${inp} w-full`} />
                         <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
                       </div>
@@ -1189,23 +1192,68 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* KIT AL CLIENTE (raccolta punti) */}
       {mostra("POSA", "KIT") && <KitCliente commessaId={c.id} stato={c.stato} commercialeId={c.preventivo.commercialeId} utente={utente} ok={kitOk} errore={kitErrore} />}
 
-      {/* ASSISTENZA */}
-      <details className="card-fase" style={{ "--fase": "#dc2626" } as React.CSSProperties} open={false}>
-        <div className="flex items-center justify-between mb-3">
-          <summary className="cursor-pointer list-none"><h2>Assistenza ({c.assistenze.length})</h2></summary>
-          <Link href="/assistenza" className="text-xs text-blue-800 underline">tutte le assistenze</Link>
+      {/* INTERVENTI DEL PROGETTO (Ugo 21/11/2026): fine posa, manutenzione, sopralluogo, secondo rilievo… con riordino del materiale e report */}
+      <details id="interventi" className="card-fase scroll-mt-4" style={{ "--fase": "#dc2626" } as React.CSSProperties} open={c.assistenze.some((a) => eAperto(a.stato)) && apre("POSA", "POSA_APP")}>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">🛠️ Interventi del progetto ({c.assistenze.filter((a) => eAperto(a.stato)).length} da fare · {c.assistenze.length} in tutto)</h2></summary>
+        <p className="text-xs text-neutral-600 mb-3">Per finire una posa parziale, una manutenzione, un sopralluogo o un secondo rilievo. Se serve materiale l&apos;intervento passa prima dall&apos;ufficio ordini; poi si fissa chi va e il giorno (va nel suo calendario) e si chiude con il report.</p>
+        <div className="space-y-3">
+          {c.assistenze.map((a) => (
+            <div key={a.id} className={`rounded border px-3 py-2 ${eAperto(a.stato) ? "border-red-200 bg-red-50/40" : "border-neutral-200 bg-white"}`}>
+              <p className="text-sm text-neutral-900">
+                <b>{nomeIntervento(a.tipo)} n.{a.numero}</b> · <span className="font-semibold">{a.stato === "IN_ATTESA_RICAMBIO" ? "in attesa del materiale" : a.stato === "APERTA" ? "da fissare" : a.stato === "PROGRAMMATA" ? "fissato" : a.stato === "RISOLTA" ? "chiuso" : a.stato.toLowerCase()}</span>
+                {a.dataIntervento ? ` · ${a.dataIntervento.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}` : ""}{a.assegnatoNome ? ` · ${a.assegnatoNome}` : ""}{a.inGaranzia ? "" : " · fuori garanzia"}
+              </p>
+              <p className="text-sm text-neutral-800">{a.descrizione}{a.ricambioNote ? <> · <span className="text-red-800">materiale: {a.ricambioNote}</span></> : null}</p>
+              {a.esito && <p className="text-sm text-green-900 mt-1">📝 Report: {a.esito}{a.lavoroFinito ? " · lavoro finito" : ""}</p>}
+              {eAperto(a.stato) && (
+                <div className="mt-2 flex flex-col gap-2">
+                  <form action={aggiornaAssistenza} className="flex flex-wrap items-end gap-2">
+                    <input type="hidden" name="id" value={a.id} />
+                    <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Chi va</label>
+                      <select name="assegnatoUtenteId" defaultValue={a.assegnatoUtenteId ?? ""} className={inp}><option value="">—</option>{soloAttivi(tecnici, a.assegnatoUtenteId).map((t) => <option key={t.id} value={t.id}>{t.nome}</option>)}</select></div>
+                    <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Giorno e ora</label>
+                      <input type="datetime-local" name="dataIntervento" defaultValue={a.dataIntervento ? perInput(a.dataIntervento) : ""} className={inp} /></div>
+                    <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5">📅 Fissa l&apos;intervento</button>
+                    {a.stato === "IN_ATTESA_RICAMBIO" && <span className="text-xs text-amber-800">Il materiale non è ancora arrivato: puoi già fissare il giorno.</span>}
+                  </form>
+                  <details>
+                    <summary className="text-xs font-semibold text-green-800 cursor-pointer">✅ Chiudi con il report</summary>
+                    <form action={aggiornaAssistenza} className="mt-2 space-y-2">
+                      <input type="hidden" name="id" value={a.id} />
+                      <input type="hidden" name="stato" value="RISOLTA" />
+                      <textarea name="esito" required rows={3} placeholder="Report: cosa è stato fatto, cosa resta, note per l'ufficio" className={`${inp} w-full`} />
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-900">
+                        {a.tipo === "FINE_POSA" && <label className="flex items-center gap-1 font-semibold"><input type="checkbox" name="lavoroFinito" value="1" defaultChecked /> Lavoro finito: lavori eseguiti, al commerciale il kit</label>}
+                        {a.tipo === "FINE_POSA" && <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente la richiesta di recensione</label>}
+                        <input name="costo" inputMode="decimal" placeholder="Costo €" className={`${inp} w-28`} />
+                      </div>
+                      <button className="btn-3d btn-3d-green text-sm px-4 py-2">Chiudi l&apos;intervento</button>
+                    </form>
+                  </details>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-        {c.assistenze.map((a) => (
-          <p key={a.id} className="text-sm text-neutral-900 border-b border-neutral-100 py-1">
-            #{a.numero} · <b>{a.stato}</b> · {a.descrizione}{a.inGaranzia ? "" : " (fuori garanzia)"}{a.dataIntervento ? ` · intervento ${a.dataIntervento.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""}
-          </p>
-        ))}
-        <form action={creaAssistenza} className="flex flex-wrap items-end gap-2 mt-3">
+        <form action={creaAssistenza} className="mt-3 rounded border border-neutral-200 bg-neutral-50 p-3 space-y-2">
           <input type="hidden" name="commessaId" value={c.id} />
-          <input name="prodotto" placeholder="Prodotto" className={`${inp} w-40`} />
-          <input name="descrizione" required placeholder="Problema segnalato" className={`${inp} flex-1 min-w-48`} />
-          <select name="priorita" className={inp}><option>NORMALE</option><option>URGENTE</option><option>BASSA</option></select>
-          <button className="btn-3d btn-3d-pink text-sm px-4 py-2">Apri assistenza</button>
+          <p className="text-sm font-bold text-neutral-900">➕ Nuovo intervento</p>
+          <div className="flex flex-wrap items-end gap-2">
+            <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Motivo</label>
+              <select name="tipo" defaultValue="FINE_POSA" className={inp}>{TIPI_INTERVENTO.map((t) => <option key={t.chiave} value={t.chiave}>{t.emoji} {t.nome}</option>)}</select></div>
+            <div className="flex flex-col gap-1 flex-1 min-w-48"><label className="text-[11px] font-bold text-neutral-800">Cosa c&apos;è da fare</label>
+              <input name="descrizione" required placeholder="es. montare la zanzariera della cucina, verificare l'infiltrazione" className={`${inp} w-full`} /></div>
+            <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Chi va (facoltativo)</label>
+              <select name="assegnatoUtenteId" className={inp}><option value="">—</option>{soloAttivi(tecnici).map((t) => <option key={t.id} value={t.id}>{t.nome}</option>)}</select></div>
+            <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Giorno (facoltativo)</label>
+              <input type="datetime-local" name="dataIntervento" className={inp} /></div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <label className="flex items-center gap-1 text-xs font-semibold text-red-900"><input type="checkbox" name="serveMateriale" value="1" /> Serve materiale (mancante, rotto o in garanzia): passa prima all&apos;ufficio ordini</label>
+            <input name="materialeServe" placeholder="cosa serve" className={`${inp} flex-1 min-w-48`} />
+            <button className="btn-3d btn-3d-pink text-sm px-4 py-2">Apri l&apos;intervento</button>
+          </div>
+          <p className="text-[11px] text-neutral-600">Senza giorno, il centralino riceve il task per fissarlo. <Link href="/assistenza" className="underline">Tutti gli interventi</Link></p>
         </form>
       </details>
 

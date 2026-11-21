@@ -1020,6 +1020,11 @@ model Assistenza {
   costo             Float?
   aperturaDa        String?
   risoltaIl         DateTime?
+  // Interventi del progetto (Ugo 21/11/2026): FINE_POSA | MANUTENZIONE | SOPRALLUOGO | SECONDO_RILIEVO | ASSISTENZA | ALTRO
+  tipo              String    @default("ASSISTENZA")
+  serveMateriale    Boolean   @default(false)
+  // chiuso con «lavoro finito» (fine posa → lavori eseguiti)
+  lavoroFinito      Boolean   @default(false)
   createdAt         DateTime  @default(now())
 }
 

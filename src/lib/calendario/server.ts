@@ -1,3 +1,4 @@
+import { nomeIntervento } from "@/lib/pratica/interventi";
 import { prisma } from "@/lib/prisma";
 import { numeroCommessa } from "@/lib/commesse";
 import { inviaMail, APP_URL, indirizzoMittente } from "@/lib/mail/invio";
@@ -96,9 +97,9 @@ export function daAssistenza(a: AssConDati): EventoCal {
   const d = a.dataIntervento ?? a.createdAt;
   return {
     id: `ASSISTENZA:${a.id}`, tipo: "ASSISTENZA", inizio: d, fine: new Date(d.getTime() + 120 * MIN), giornataIntera: false,
-    titolo: `Assistenza n.${a.numero} · ${a.commessa.cliente.nome}`, cliente: a.commessa.cliente.nome,
+    titolo: `${nomeIntervento(a.tipo).replace(/^\S+ /, "")} n.${a.numero} · ${a.commessa.cliente.nome}`, cliente: a.commessa.cliente.nome,
     luogo: indirizzoCliente(a.commessa.cliente), telefono: telCliente(a.commessa.cliente), note: [a.prodotto, a.descrizione].filter(Boolean).join(" — "),
-    utenteId: a.assegnatoUtenteId, chi: a.assegnatoNome, stato: a.stato, href: `/assistenza`,
+    utenteId: a.assegnatoUtenteId, chi: a.assegnatoNome, stato: a.stato, href: `/commesse/${a.commessaId}#interventi`,
   };
 }
 
@@ -180,6 +181,12 @@ async function evento(chiave: string): Promise<{ e: EventoCal; emailUtente: stri
     let email = u?.email ?? null;
     if (!email && p.assegnatoSoggettoId) email = (await prisma.soggetto.findUnique({ where: { id: p.assegnatoSoggettoId } }))?.email ?? null;
     return { e: daPosa(p), emailUtente: email, emailCliente: null, invitaCliente: false };
+  }
+  if (tipo === "ASSISTENZA") {
+    const a = await prisma.assistenza.findUnique({ where: { id }, include: { commessa: incCliente } });
+    if (!a?.dataIntervento) return null;
+    const u = a.assegnatoUtenteId ? await prisma.utente.findUnique({ where: { id: a.assegnatoUtenteId }, select: { email: true } }) : null;
+    return { e: daAssistenza(a), emailUtente: u?.email ?? null, emailCliente: null, invitaCliente: false, utenteId: a.assegnatoUtenteId ?? undefined };
   }
   return null;
 }

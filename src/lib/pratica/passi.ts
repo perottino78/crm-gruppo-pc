@@ -25,6 +25,8 @@ export type DatiPassi = {
    * `ordinato` = il materiale nuovo è stato aggiunto e ordinato tutto. Finché il riordino è aperto, materiale e arrivo tornano da fare.
    */
   riordino?: { ordinato: boolean } | null;
+  /** C'è un intervento di fine posa ancora da fare (dopo una posa parziale): la pratica resta al passo «Posa e fine lavori». */
+  interventoFinePosa?: boolean;
 };
 
 export type StatoPasso = "FATTO" | "ORA" | "IN_ATTESA";
@@ -44,8 +46,8 @@ export type PassoPratica = {
 type Def = { chiave: ChiavePasso; titolo: string; chi: string; parallelo: boolean };
 const DEF: Def[] = [
   { chiave: "PROGETTO", titolo: "Creazione del progetto", chi: "Fatturazione (Giorgia)", parallelo: false },
-  { chiave: "FATTURA", titolo: "Fattura di acconto", chi: "Fatturazione (Giorgia)", parallelo: false },
   { chiave: "BENVENUTO", titolo: "Chiamata di benvenuto", chi: "Fatturazione (Giorgia)", parallelo: false },
+  { chiave: "FATTURA", titolo: "Fattura di acconto", chi: "Fatturazione (Giorgia)", parallelo: false },
   { chiave: "INCASSO", titolo: "Incasso dell'acconto", chi: "Amministrazione (Debora)", parallelo: true },
   { chiave: "RILIEVO_APP", titolo: "Appuntamento di rilievo", chi: "Centralino (Alessia)", parallelo: false },
   { chiave: "RILIEVO", titolo: "Rilievo eseguito", chi: "Tecnico", parallelo: false },
@@ -69,7 +71,8 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
     RILIEVO_APP: d.rilievoFissato, RILIEVO: d.rilievoCaricato, MATERIALE: d.ordinato, ARRIVO: d.materialeCompleto, SALDO: d.saldoIncassato,
     POSA_APP: d.posaFissata, POSA: d.posaFinita, KIT: d.kitConsegnato,
   };
-  if (d.riordino) { raw.MATERIALE = d.riordino.ordinato; raw.ARRIVO = false; }
+  if (d.interventoFinePosa && !d.posaFinita) raw.POSA_APP = true;
+  if (d.riordino) { raw.MATERIALE = d.riordino.ordinato; raw.ARRIVO = false; raw.POSA_APP = false; }
   const sequenza = DEF.filter((x) => !x.parallelo);
   // fatto = dato proprio oppure un passo della sequenza più avanti è fatto
   const fatto = (c: ChiavePasso): boolean => {
@@ -92,9 +95,9 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
 function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
   if (fatto) return "Fatto.";
   switch (c) {
-    case "PROGETTO": return "Crea il progetto della pratica: fattura di acconto e chiamata di benvenuto si fanno dentro il progetto.";
-    case "FATTURA": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Emetti la fattura di acconto, poi segnala che è fatta.";
-    case "BENVENUTO": return "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
+    case "PROGETTO": return "Crea il progetto della pratica: chiamata di benvenuto e fattura di acconto si fanno dentro il progetto.";
+    case "BENVENUTO": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
+    case "FATTURA": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Emetti la fattura di acconto, poi segnala che è fatta: l'apertura della pratica è completa.";
     case "INCASSO": return "Registra il pagamento dell'acconto (o il finanziamento approvato) e spunta «Manda il ringraziamento al cliente»: parte dalla casella della fatturazione. Il task si chiude da solo.";
     case "RILIEVO_APP": return !d.viaLibera ? "Serve l'acconto incassato: poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
     case "RILIEVO": return "Il tecnico carica misure, PDF e foto del rilievo.";
@@ -102,7 +105,7 @@ function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
     case "ARRIVO": return "Il magazzino carica bolle e fatture del materiale in arrivo.";
     case "SALDO": return "Fattura di saldo e incasso: si possono fare quando vuoi, anche prima che arrivi il materiale. Con il saldo incassato si conferma il giorno di posa.";
     case "POSA_APP": return "Scegli squadra, giorno e giorni previsti.";
-    case "POSA": return "La squadra posa; il centralino carica i documenti e segna Finita o Parziale (si torna solo per finire, o serve materiale e si passa all'ufficio ordini).";
+    case "POSA": return d.interventoFinePosa ? "Posa parziale: c'è un intervento di fine posa da fissare e chiudere con il report (sezione Interventi)." : "La squadra posa; il centralino carica i documenti e segna Finita o Parziale (si apre un intervento: solo per finire, o con materiale da riordinare).";
     case "KIT": return "Il commerciale consegna il kit di manutenzione e lo registra.";
   }
 }

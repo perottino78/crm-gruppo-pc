@@ -1,6 +1,7 @@
 // Dati del percorso guidato della pratica: legge il database e li passa alla logica pura di passi.ts.
 import { prisma } from "@/lib/prisma";
 import { passiPratica, type DatiPassi } from "./passi";
+import { finePosaAperta } from "./interventi";
 
 export async function datiPassiDiCommessa(commessaId: string): Promise<(DatiPassi & { stato: string }) | null> {
   const c = await prisma.commessa.findUnique({
@@ -11,6 +12,7 @@ export async function datiPassiDiCommessa(commessaId: string): Promise<(DatiPass
       rilievi: { select: { stato: true } },
       righeOrdine: { select: { daMagazzino: true, ordinato: true, createdAt: true } },
       pose: { select: { stato: true } },
+      assistenze: { select: { tipo: true, stato: true } },
     },
   });
   if (!c) return null;
@@ -29,7 +31,7 @@ export async function datiPassiDiCommessa(commessaId: string): Promise<(DatiPass
     fatturaAccontoIl: c.fatturaAccontoIl, progettoCreatoIl: c.progettoCreatoIl, benvenutoIl: c.benvenutoIl, viaLibera,
     rilievoFissato: rilieviAttivi.length > 0, rilievoCaricato: rilieviAttivi.some((r) => r.stato === "ESEGUITO"),
     ordinato: daOrdinare.length > 0 && daOrdinare.every((r) => r.ordinato), materialeCompleto: !!c.materialeCompletoIl, saldoIncassato: c.saldoIncassato,
-    posaFissata, posaFinita, kitConsegnato: kit > 0 || c.stato === "CHIUSA", riordino,
+    posaFissata, posaFinita, kitConsegnato: kit > 0 || c.stato === "CHIUSA", riordino, interventoFinePosa: finePosaAperta(c.assistenze),
   };
 }
 
