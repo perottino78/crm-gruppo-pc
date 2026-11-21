@@ -82,14 +82,40 @@ async function main() {
   const senza = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id, coprifilo.id] })));
   verifica(senza?.includes("non hanno il fornitore"), "riga senza fornitore: chiede di sceglierlo", senza);
   verifica(await prisma.ordineFornitore.count() === 0, "nessun ordine creato per sbaglio");
+  await O.impostaFornitoreRiga(tappi.id, mastro.id);
+  const tf = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id } });
+  verifica(tf.fornitoreId === mastro.id && tf.fornitoreNome === "IL MASTRO SRLS", "tendina del fornitore sulla riga: scelto Il Mastro", tf);
+  await O.impostaFornitoreRiga(tappi.id, "");
+  const tf2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id } });
+  verifica(tf2.fornitoreId === null && tf2.fornitoreNome === null, "tendina su «da scegliere»: fornitore tolto", tf2);
   const d1 = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [finestra.id, coprifilo.id] })));
   const o1 = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: fidra.id }, include: { righe: true } });
   verifica(o1.stato === "BOZZA" && o1.righe.length === 2 && o1.commessaId === c.id && o1.clienteFinale?.startsWith("GERBAUDO"), "ordine in bozza a FIDRA con le 2 righe spuntate", o1);
-  verifica(d1 === `/ordini-fornitori/${o1.id}#invia`, "si apre l'ordine sull'invio", d1);
+  const pdfDati = await (await import("../../src/lib/ordini/server")).datiPdfOrdine(o1.id);
+  const testata = JSON.stringify(pdfDati?.dati.testata ?? []);
+  verifica(testata.includes("GERBAUDO") && !/Via|Torino|Rosta \(/.test(testata.replace(/Rosta, Corso Moncenisio 28/g, "")) && testata.includes("Commessa "), "al fornitore vanno nominativo e riferimento, non l'indirizzo del cliente", testata);
+  verifica(d1 === `/ordini-fornitori/${o1.id}?passo=invio`, "si apre subito l'invio dell'email", d1);
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id], fornitoreId: mastro.id })));
   const t2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id }, include: { ordineFornitore: true } });
   verifica(t2.fornitoreId === mastro.id && t2.fornitoreNome === "IL MASTRO SRLS" && t2.ordineFornitore?.fornitoreId === mastro.id, "fornitore scelto nella tendina: la riga va a Il Mastro", t2);
   verifica((await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [finestra.id] }))))?.includes("già in un ordine"), "riga già ordinata: avviso");
+
+  console.log("3b. Scarico un solo PDF con l'ordine e gli allegati");
+  {
+    const { PDFDocument } = await import("pdf-lib");
+    const sharp = (await import("sharp")).default;
+    const d = await PDFDocument.create(); d.addPage([300, 300]); d.addPage([300, 300]);
+    const rilTutti = await prisma.rilievo.findFirstOrThrow({ where: { commessaId: c.id } });
+    const a1 = await prisma.rilievoAllegato.create({ data: { rilievoId: rilTutti.id, nome: "vero.pdf", dataUri: `data:application/pdf;base64,${Buffer.from(await d.save()).toString("base64")}` } });
+    const png = await sharp({ create: { width: 40, height: 30, channels: 3, background: "#cc3300" } }).png().toBuffer();
+    const a2 = await prisma.rilievoAllegato.create({ data: { rilievoId: rilTutti.id, nome: "foto.png", dataUri: `data:image/png;base64,${png.toString("base64")}` } });
+    const solo = await O.scaricaOrdineCompleto(o1.id, { senzaPrezzi: true });
+    const tutto = await O.scaricaOrdineCompleto(o1.id, { senzaPrezzi: true, fileRilievo: [a1.id, a2.id] });
+    const pagine = async (b64?: string) => (await PDFDocument.load(Buffer.from(b64 ?? "", "base64"))).getPageCount();
+    const n0 = await pagine(solo.base64), n1 = await pagine(tutto.base64);
+    verifica(solo.ok && tutto.ok && n1 === n0 + 3 && (tutto.saltati?.length ?? 0) === 0 && /con allegati/.test(tutto.nome ?? ""), "PDF unico: ordine + 2 pagine del PDF + 1 pagina della foto", { n0, n1, saltati: tutto.saltati });
+    await prisma.rilievoAllegato.deleteMany({ where: { id: { in: [a1.id, a2.id] } } });
+  }
 
   console.log("4. Invio da ordini@ con lista senza prezzi e rilievo allegato");
   const e = await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine 1/2026 - P&C S.r.l.", "Buongiorno, in allegato il nostro ordine con il rilievo misure.", { senzaPrezzi: true, conRilievo: true });
@@ -97,6 +123,7 @@ async function main() {
   const m = posta[0]?.dati ?? "";
   verifica(posta.length === 1 && posta[0].a.includes("ordini@fidra.it"), "email al fornitore", posta.map((p) => p.a));
   verifica(/^From: .*Ufficio ordini.*ordini@gruppopec\.com/m.test(m) && /^Reply-To: .*ordini@gruppopec\.com/m.test(m), "parte da ordini@gruppopec.com e le risposte tornano lì", m.slice(0, 600));
+  verifica(/text\/html/.test(m) && m.includes("pc_logo.png") && m.includes("Ufficio ordini"), "email in HTML con firma dell'ufficio ordini e logo", m.slice(0, 300));
   verifica(m.includes('filename="rilievo cartaceo.pdf"') || m.includes("rilievo cartaceo.pdf"), "allegato il rilievo cartaceo");
   const allegatoPdf = m.split(/\r\n--/).find((p) => /Ordine 1-2026/.test(p) && /application\/pdf/.test(p));
   const testoPdf = allegatoPdf ? Buffer.from(allegatoPdf.split(/\r\n\r\n/).slice(1).join("").replace(/\s+/g, ""), "base64").toString("latin1") : "";
@@ -116,7 +143,7 @@ async function main() {
   const d6 = await dove(C.caricaRilievo(fd({ rilievoId: ril2.id, misure: "Bagno L 600 × H 800", foto: JSON.stringify([{ nome: "bagno.jpg", dataUri: foto }, { nome: "rilievo bagno.pdf", dataUri: pdf }]),
     complementi: JSON.stringify([{ tipo: "T", descrizione: "Guarnizione", quantita: "3", fornitoreId: fidra.id }, { tipo: "P", brandId: brand.id, tipologia: "NON_ESISTE", colore: "X", descrizione: "Prodotto sbagliato" }]) })));
   verifica(await prisma.rigaOrdine.count({ where: { commessaId: c.id, descrizione: "Guarnizione", complemento: true, fornitoreId: fidra.id, quantita: 3 } }) === 1, "il materiale della lista è salvato con il rilievo");
-  verifica(d6?.includes("fatto=") && d6.includes("1 materiali aggiunti") && d6.includes("avvisoRilievo=") && d6.includes("Prodotto sbagliato") && d6.endsWith("#rilievo"), "messaggio di conferma e avviso per quello non aggiunto", d6);
+  verifica(d6?.includes("fatto=") && d6.includes("1 materiali aggiunti") && d6.includes("avvisoRilievo=") && d6.includes("Prodotto sbagliato") && d6.includes("salvato=1"), "messaggio di conferma e avviso per quello non aggiunto", d6);
 
   console.log("7. Nell'invio si sceglie quale file del rilievo allegare");
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [(await prisma.rigaOrdine.findFirstOrThrow({ where: { descrizione: "Guarnizione" } })).id] })));
@@ -134,6 +161,11 @@ async function main() {
   const e4 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Richiesta", "Testo", { senzaPrezzi: true, documenti: [docRil.id] });
   const m4 = posta[n2]?.dati ?? "";
   verifica(e4.ok && m4.includes("misure C3.pdf") && !m4.includes("contratto.pdf") && e4.messaggio.includes("1 file del progetto"), "allegato solo il file scelto della cartella", e4);
+
+  const e5 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Ordine cartaceo", "Testo", { senzaPrezzi: true, extra: [{ nome: "ordine firmato.pdf", dataUri: "data:application/pdf;base64," + Buffer.from("%PDF-1.4 prova").toString("base64") }, { nome: "virus.exe", dataUri: "data:application/octet-stream;base64,AAAA" }] });
+  const m5 = posta[n2 + 1]?.dati ?? "";
+  verifica(e5.ok && m5.includes("ordine firmato.pdf") && !m5.includes("virus.exe") && e5.messaggio.includes("1 file caricati"), "file dal computer allegato (solo PDF/foto)", e5);
+  verifica((await prisma.documento.count({ where: { entita: "ORDINE_FORNITORE", entitaId: o3.id, cartella: "Ordine cartaceo e disegni" } })) === 1, "e tenuto nei documenti dell'ordine");
 
   console.log("8. Variante dell'offerta: si salva e aggiorna la commessa");
   await C.sbloccaPreventivo(fd({ preventivoId: prev.id }));

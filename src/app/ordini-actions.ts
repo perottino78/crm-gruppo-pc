@@ -6,8 +6,9 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, cartellaConsentita, firmaOrdine, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { inviaMail } from "@/lib/mail/invio";
+import { emailOfferta } from "@/lib/mail/firma";
 import { numeroOrdine, statoDaArrivi } from "@/lib/ordini/calcoli";
 import { pdfOrdineFornitore, senzaPrezzi } from "@/lib/ordini/pdfOrdine";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
@@ -87,7 +88,7 @@ async function nuovoOrdineConRighe(nome: string, commessaId: string, fornitoreId
       data: {
         numero, anno, fornitoreId, commessaId, divisione: c.brand.nome, creatoDaNome: nome,
         clienteFinale: cl.nome + (indirizzoCliente ? ` - ${indirizzoCliente}` : ""),
-        riferimento: `Commessa ${c.numero}/${c.anno}${c.preventivo?.oggetto ? ` - ${c.preventivo.oggetto}` : ""}`.slice(0, 200),
+        riferimento: `Commessa ${c.numero}/${c.anno}`,
         indirizzoSpedizione: "Sede di Rosta, Corso Moncenisio 28",
       },
     });
@@ -97,6 +98,29 @@ async function nuovoOrdineConRighe(nome: string, commessaId: string, fornitoreId
   await logCommessa(commessaId, `Creato ordine fornitore ${numeroOrdine(ordine)} (${idRighe.length} righe).`, nome);
   aggiorna(ordine.id, commessaId);
   return ordine;
+}
+
+/**
+ * Cambia il fornitore di una riga del materiale ancora da ordinare (tendina nella tabella della pratica).
+ * Passando a un altro fornitore si azzerano prezzo, codice e costo del vecchio; «da scegliere» (vuoto) toglie il fornitore.
+ */
+export async function impostaFornitoreRiga(rigaId: string, fornitoreId: string) {
+  const u = await utente();
+  const r = await prisma.rigaOrdine.findUnique({ where: { id: rigaId } });
+  if (!r || r.ordineFornitoreId || r.ordinato || r.daMagazzino) return;
+  if (!fornitoreId) {
+    await prisma.rigaOrdine.update({ where: { id: rigaId }, data: { fornitoreId: null, fornitoreNome: null, prezzoAcquisto: null, codiceFornitore: null, costoPrevisto: null, scontoAcquisto: null } });
+  } else {
+    if (r.fornitoreId === fornitoreId) return;
+    const f = await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true, scontoFornitore: true } });
+    if (!f) return;
+    await prisma.rigaOrdine.update({
+      where: { id: rigaId },
+      data: { fornitoreId: f.id, fornitoreNome: f.ragioneSociale, ...(r.fornitoreId ? { prezzoAcquisto: null, codiceFornitore: null, costoPrevisto: null } : {}), scontoAcquisto: f.scontoFornitore ?? null },
+    });
+    await logCommessa(r.commessaId, `Fornitore della riga «${r.descrizione}» cambiato in ${f.ragioneSociale}.`, u.nome);
+  }
+  aggiorna(undefined, r.commessaId);
 }
 
 /**
@@ -128,7 +152,8 @@ export async function creaOrdineDaRighe(fd: FormData) {
   }
   const ordine = await nuovoOrdineConRighe(u.nome, commessaId, fornitoreId, righe.map((r) => r.id));
   if (!ordine) torna("Ordine non creato.");
-  redirect(`/ordini-fornitori/${ordine!.id}#invia`);
+  // si apre subito l'invio dell'email (allegati, rilievi, ordine cartaceo); le righe restano un clic indietro
+  redirect(`/ordini-fornitori/${ordine!.id}?passo=invio`);
 }
 
 /** Ordine senza commessa (materiale a scorta, consumabili). */
@@ -272,6 +297,19 @@ export async function segnaOrdineInviatoAMano(fd: FormData) {
   await segnaInviato(id, "MANUALE", str(fd, "a"), u.nome);
 }
 
+/** Spunta «il fornitore ha ricevuto l'ordine» (ricevuto = "1") o toglie la spunta. */
+export async function segnaOrdineRicevuto(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  if (!id) return;
+  const o = await prisma.ordineFornitore.findUnique({ where: { id }, select: { id: true, numero: true, anno: true, commessaId: true, stato: true } });
+  if (!o || o.stato === "BOZZA" || o.stato === "ANNULLATO") return;
+  const ricevuto = str(fd, "ricevuto") === "1";
+  await prisma.ordineFornitore.update({ where: { id }, data: { ricevutoIl: ricevuto ? new Date() : null, ricevutoDaNome: ricevuto ? u.nome : null } });
+  await logCommessa(o.commessaId, ricevuto ? `Ordine ${numeroOrdine(o)}: il fornitore ha ricevuto l'ordine (spunta di ${u.nome}).` : `Ordine ${numeroOrdine(o)}: tolta la spunta «ricevuto dal fornitore».`, u.nome);
+  aggiorna(id, o.commessaId);
+}
+
 export type EsitoInvio = { ok: boolean; messaggio: string; mailto?: string };
 
 /**
@@ -279,7 +317,7 @@ export type EsitoInvio = { ok: boolean; messaggio: string; mailto?: string };
  * fornitore tornano lì). Come in BConsole: lista prodotti senza prezzi e rilievo della pratica allegato, se scelti.
  * Se la posta non è configurata restituisce il link mailto di riserva.
  */
-export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean; fileRilievo?: string[]; documenti?: string[] } = {}): Promise<EsitoInvio> {
+export async function inviaOrdineEmail(id: string, destinatari: string, cc: string, oggetto: string, testo: string, opz: { senzaPrezzi?: boolean; conRilievo?: boolean; fileRilievo?: string[]; documenti?: string[]; extra?: { nome: string; dataUri: string }[] } = {}): Promise<EsitoInvio> {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) return { ok: false, messaggio: "Non autorizzato." };
   const a = destinatari.split(/[,;\s]+/).filter(Boolean), copia = cc.split(/[,;\s]+/).filter(Boolean);
@@ -292,16 +330,31 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   // file del rilievo scelti da chi invia (o tutti con «conRilievo»)
   const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : opz.conRilievo ? await fileRilievo(p.ordine.commessaId) : [];
   // file scelti dalle cartelle del progetto (es. «Rilievi misura»)
-  const documenti = opz.documenti?.length ? await documentiProgetto(p.ordine.commessaId, true, opz.documenti) : [];
+  const documenti = opz.documenti?.length ? (await documentiProgetto(p.ordine.commessaId, true, opz.documenti)).filter((d) => cartellaConsentita(u, d.cartella)) : [];
+  // file caricati dal computer (ordine cartaceo, disegno): si allegano e si tengono nei documenti dell'ordine
+  const extra: { nome: string; contenuto: Buffer; mime: string }[] = [];
+  for (const f of (opz.extra ?? []).slice(0, 8)) {
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(f.dataUri ?? "");
+    if (!m || !/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(m[1])) continue;
+    const contenuto = Buffer.from(m[2], "base64");
+    if (contenuto.length > 3_500_000) continue;
+    const nome = (f.nome || "allegato").replace(/[^\w.\- ]+/g, "_").slice(0, 120);
+    extra.push({ nome, contenuto, mime: m[1] });
+    await prisma.documento.create({ data: { entita: "ORDINE_FORNITORE", entitaId: id, cartella: "Ordine cartaceo e disegni", nome, mime: m[1], dimensione: contenuto.length, contenuto, caricatoDaNome: u.nome } });
+  }
   const allegati = [
     { nome: `Ordine ${p.dati.numero.replace("/", "-")} ${p.ordine.fornitore.ragioneSociale}.pdf`.replace(/[^\w.\- ]+/g, "_"), contenuto: Buffer.from(pdf), mime: "application/pdf" },
     ...rilievo.map((f) => ({ nome: f.nome, contenuto: f.contenuto, mime: f.mime })),
     ...documenti.map((d) => ({ nome: d.nome.replace(/[^\w.\- ]+/g, "_"), contenuto: d.contenuto, mime: d.mime })),
+    ...extra,
   ];
-  const nAllegati = rilievo.length + documenti.length;
+  const nAllegati = rilievo.length + documenti.length + extra.length;
   const ordini = EMAIL_ORDINI();
   const casellaOrdini = await prisma.utente.findFirst({ where: { email: { equals: ordini, mode: "insensitive" } }, select: { id: true } });
-  const esito = await inviaMail({ a, cc: copia, oggetto, testo, da: `Ufficio ordini ${p.dati.azienda.ragioneSociale} <${ordini}>`, rispondiA: ordini, daUtenteId: casellaOrdini?.id, allegati });
+  // email in HTML con firma e logo del marchio (il testo semplice resta per chi non vede l'HTML)
+  const fo = firmaOrdine(u, p.ordine.divisione);
+  const corpoMail = emailOfferta({ testo, firma: fo.firma, colore: fo.colore, logo: fo.logo });
+  const esito = await inviaMail({ a, cc: copia, oggetto, testo: corpoMail.testo, html: corpoMail.html, da: `Ufficio ordini ${p.dati.azienda.ragioneSociale} <${ordini}>`, rispondiA: ordini, daUtenteId: casellaOrdini?.id, allegati });
   let da = esito.da ?? ordini;
   if (!esito.inviata) {
     // riserva: servizio di invio via API, se configurato su Vercel
@@ -311,10 +364,34 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
     if (!e2.ok) return { ok: false, messaggio: e2.errore ?? "Invio non riuscito." };
     da = cfg.mittente;
   }
-  const cosa = `${opz.senzaPrezzi ? "lista senza prezzi" : "con i prezzi"}${rilievo.length ? `, rilievo allegato (${rilievo.length} file)` : ""}${documenti.length ? `, ${documenti.length} file del progetto` : ""}`;
+  const cosa = `${opz.senzaPrezzi ? "lista senza prezzi" : "con i prezzi"}${rilievo.length ? `, rilievo allegato (${rilievo.length} file)` : ""}${documenti.length ? `, ${documenti.length} file del progetto` : ""}${extra.length ? `, ${extra.length} file caricati` : ""}`;
   if (p.ordine.stato === "BOZZA") { await segnaInviato(id, "EMAIL", a.join(", "), u.nome); await logCommessa(p.ordine.commessaId, `Ordine ${p.dati.numero} inviato da ${da} (${cosa}).`, u.nome); }
   else { await logCommessa(p.ordine.commessaId, `Ordine ${p.dati.numero} reinviato a ${a.join(", ")} da ${da} (${cosa}).`, u.nome); aggiorna(id, p.ordine.commessaId); }
   return { ok: true, messaggio: `Ordine inviato a ${a.join(", ")}${copia.length ? ` (copia a ${copia.join(", ")})` : ""} da ${da}: ${cosa}. Le conferme del fornitore arriveranno a ${ordini}.` };
+}
+
+/**
+ * «Scarica tutto in un PDF»: l'ordine più i file scelti (rilievi, cartelle, file dal computer) in un solo PDF,
+ * da mandare per esempio in chat. Non invia nulla e non cambia lo stato dell'ordine.
+ */
+export async function scaricaOrdineCompleto(id: string, opz: { senzaPrezzi?: boolean; fileRilievo?: string[]; documenti?: string[]; extra?: { nome: string; dataUri: string }[] } = {}): Promise<{ ok: boolean; nome?: string; base64?: string; saltati?: string[]; messaggio?: string }> {
+  const u = await getCurrentUser();
+  if (!u || !puoGestireOrdini(u)) return { ok: false, messaggio: "Non autorizzato." };
+  const p = await datiPdfOrdine(id);
+  if (!p) return { ok: false, messaggio: "Ordine non trovato." };
+  const pdf = pdfOrdineFornitore(opz.senzaPrezzi ? senzaPrezzi(p.dati) : p.dati);
+  const rilievo = opz.fileRilievo?.length ? await fileRilievo(p.ordine.commessaId, true, opz.fileRilievo) : [];
+  const documenti = opz.documenti?.length ? (await documentiProgetto(p.ordine.commessaId, true, opz.documenti)).filter((d) => cartellaConsentita(u, d.cartella)) : [];
+  const extra: { nome: string; mime: string; contenuto: Buffer }[] = [];
+  for (const f of (opz.extra ?? []).slice(0, 8)) {
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(f.dataUri ?? "");
+    if (!m || !/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(m[1])) continue;
+    extra.push({ nome: (f.nome || "allegato").replace(/[^\w.\- ]+/g, "_"), mime: m[1], contenuto: Buffer.from(m[2], "base64") });
+  }
+  const { unisciInUnPdf } = await import("@/lib/ordini/unisci-pdf");
+  const { pdf: unito, saltati } = await unisciInUnPdf(Buffer.from(pdf), [...rilievo, ...documenti.map((d) => ({ nome: d.nome, mime: d.mime, contenuto: d.contenuto })), ...extra]);
+  const nome = `Ordine ${p.dati.numero.replace("/", "-")} ${p.ordine.fornitore.ragioneSociale}${rilievo.length + documenti.length + extra.length ? " con allegati" : ""}.pdf`.replace(/[^\w.\- ]+/g, "_");
+  return { ok: true, nome, base64: unito.toString("base64"), saltati };
 }
 
 export async function registraConfermaFornitore(fd: FormData) {

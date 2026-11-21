@@ -45,6 +45,49 @@ async function main() {
   verifica(all.length === 2 && all.some((a) => a.nome === "rilievo.pdf" && a.dataUri.startsWith("data:application/pdf")), "PDF e foto salvati nel rilievo", all.map((a) => a.nome));
   verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).stato === "ESEGUITO", "rilievo eseguito");
 
+  const cartellaPdf = await prisma.documento.findFirst({ where: { entita: "COMMESSA", entitaId: ril.commessaId, cartella: "Rilievi misura", nome: "rilievo.pdf" } });
+  const cartellaFoto = await prisma.documento.findFirst({ where: { entita: "COMMESSA", entitaId: ril.commessaId, cartella: "Foto rilievi", nome: "foto.jpg" } });
+  verifica(!!cartellaPdf && cartellaPdf.mime === "application/pdf", "il PDF del rilievo è anche nella cartella «Rilievi misura» della pratica", cartellaPdf?.nome);
+  verifica(!!cartellaFoto, "la foto è nella cartella «Foto rilievi»");
+  // verbale di sopralluogo compilato al passo 2 del «Carica rilievo»
+  const fv = fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400", v_piano: "2", v_note_stato: "Crepa in cucina", vr_1_tipo: "Finestra cucina", vr_1_larg: "1200", vr_1_alt: "1400", vr_1_q: "2", v_rif_interno: "Mario" });
+  fv.append("v_intervento", "Serramenti PVC"); fv.append("v_intervento", "Tapparelle"); fv.append("v_intervento", "Inventata");
+  const dvv = await dove(C.caricaRilievo(fv));
+  const rv = (await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).verbale as { campi: Record<string, unknown>; righe: { tipo: string }[]; rif_interno?: string } | null;
+  {
+    verifica(!!rv && JSON.stringify(rv.campi.intervento) === JSON.stringify(["Serramenti PVC", "Tapparelle"]) && rv.campi.piano === "2" && rv.righe[0]?.tipo === "Finestra cucina" && rv.rif_interno === "Mario", "verbale salvato nel rilievo (spunte, testi, prodotti)", rv);
+    verifica(!!dvv && dvv.includes(`carica=${ril.id}`) && dvv.includes("salvato=1"), "dopo il salvataggio si torna alla schermata del rilievo", dvv);
+  }
+  // senza verbale compilato il campo si svuota
+  await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));
+  verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).verbale === null, "verbale vuoto = nessun dato salvato");
+
+  console.log("1b. Colori MV Living sui componenti struttura (COMPSFUSI)");
+  await prisma.prodotto.createMany({ data: [{ brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "STANDARD", altezzaMm: 0, larghezzaMm: 4000, prezzoBase: 100, coefficienteRicarico: 1 }, { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "STANDARD", altezzaMm: 0, larghezzaMm: 5000, prezzoBase: 125, coefficienteRicarico: 1 }] });
+  await prisma.modelloProdotto.upsert({ where: { brandId_tipologia: { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M" } }, create: { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", famiglia: "OUTDOOR", gruppo: "COMPONENTI STRUTTURA" }, update: {} });
+  await prisma.configurazione.deleteMany({ where: { chiave: "compsfusi_colori_versione" } });
+  const rcMv = await (await cerca(new NextRequest(`http://x/api/complementi?tipologia=COMPSFUSI_PROFILO_M&brandId=${brand.id}`))).json();
+  const colori: string[] = rcMv.risultati?.[0]?.colori ?? [];
+  verifica(colori.length >= 8 && colori.some((c) => c.includes("7016")) && colori.includes("Corten") && colori.includes("STANDARD"), "il profilo ha i colori MV Living nella tendina (e lo STANDARD di prima)", colori);
+  const prezzi = await prisma.prodotto.findMany({ where: { tipologia: "COMPSFUSI_PROFILO_M", larghezzaMm: 5000 }, select: { prezzoBase: true } });
+  verifica(prezzi.length === 8 && prezzi.every((x) => x.prezzoBase === 125), "stesso prezzo a misura per ogni colore", prezzi);
+  await cerca(new NextRequest(`http://x/api/complementi?tipologia=COMPSFUSI_PROFILO_M&brandId=${brand.id}`));
+  verifica((await prisma.prodotto.count({ where: { tipologia: "COMPSFUSI_PROFILO_M" } })) === 16, "richiamato più volte non duplica");
+  await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+  // profilo a barre: misura scritta in mm (4000) o non di listino (430) → barra più vicina, mai «fuori listino»
+  await prisma.prodotto.createMany({ data: [400, 500, 600, 700].map((l, i) => ({ brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", altezzaMm: 0, larghezzaMm: l, prezzoBase: 347 + i * 86, coefficienteRicarico: 1 })) });
+  const dBarra = await dove(C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "4000", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })));
+  const rBarra = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, descrizione: { contains: "COMPSFUSI PROFILO M" } } });
+  {
+    verifica(!dBarra?.includes("avviso=") && rBarra.descrizione.includes("barra 400") && rBarra.descrizione.includes("richiesto 4000 mm") && rBarra.prezzoAcquisto === 347, "4000 scritto in mm → barra da 400 cm al suo prezzo", { dBarra, d: rBarra.descrizione, p: rBarra.prezzoAcquisto });
+  }
+  await C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "430", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })).catch(() => undefined);
+  const r570 = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, descrizione: { contains: "barra 500" } } });
+  verifica(r570.length === 1, "430 cm → barra da 500 cm (mai una più corta)", r570.map((x) => x.descrizione));
+  await prisma.rigaOrdine.deleteMany({ where: { commessaId: c.id, descrizione: { contains: "COMPSFUSI PROFILO M" } } });
+  await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+  await prisma.modelloProdotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+
   console.log("2. Ricerca nel listino e negli articoli");
   const r1 = await (await cerca(new NextRequest("http://x/api/complementi?q=scossalina"))).json();
   const p = r1.risultati.find((x: { tipo: string }) => x.tipo === "P");
@@ -74,6 +117,16 @@ async function main() {
   await C.eliminaComplemento(fd({ rigaId: cf.id }));
   verifica(!(await prisma.rigaOrdine.findUnique({ where: { id: cf.id } })), "complemento tolto");
 
+  console.log("4b. Angolari e legni dal listino della pratica (solo acquisto)");
+  const ang = await dove(C.complementoAngolareDaListino(fd({ preventivoId: c.id, codiceAngolare: "ANGALL-L-30X50X0-15-EST-C0-3000-ME", quantita: "2", notaAngolare: "gronda nord" })));
+  const ra = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, codice: { startsWith: "ANGALL-" } } });
+  verifica(ra.complemento && ra.quantita === 2 && (ra.costoPrevisto ?? 0) > 0 && ra.note === "gronda nord" && ra.fornitoreId === mastro.id, "angolare dal listino: complemento al costo, fornitore Il Mastro", { ra, ang });
+  await dove(C.complementoLegnoDaListino(fd({ preventivoId: c.id, codiceLegno: "LEGNO-30X70-2500", quantita: "3", notaLegno: "pilastri" })));
+  const rl = await prisma.rigaOrdine.findFirstOrThrow({ where: { commessaId: c.id, codice: "LEGNO-30X70-2500" } });
+  verifica(rl.complemento && rl.quantita === 3 && (rl.costoPrevisto ?? 0) > 0 && rl.note === "pilastri", "legno su misura dal listino: complemento con costo", rl);
+  await prisma.rigaOrdine.deleteMany({ where: { id: { in: [ra.id, rl.id] } } });
+  verifica((await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).totaleNetto === totPrima, "la vendita al cliente non cambia");
+
   console.log("5. Ordine al fornitore e totale confermato");
   await dove(O.creaOrdineDaCommessa(fd({ commessaId: c.id, fornitoreId: mastro.id })));
   const ord = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: mastro.id }, include: { righe: true } });
@@ -90,6 +143,14 @@ async function main() {
   const ev = await prisma.commessaEvento.findFirst({ where: { commessaId: c.id, testo: { contains: "totale confermato" } } });
   verifica(ev, "scritto nella storia della commessa");
   verifica((await costiCommesse([c.id])).get(c.id)?.materiale === 1274.4, "anche i report usano lo stesso costo");
+
+  console.log("5b. Spunta «ricevuto dal fornitore» e file dal computer nell'invio");
+  await O.segnaOrdineRicevuto(fd({ id: ord.id, ricevuto: "1" }));
+  const rc = await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: ord.id } });
+  verifica(rc.ricevutoIl !== null && rc.ricevutoDaNome === "Ugo Perottino", "spunta ricevuto: data e chi", rc);
+  await O.segnaOrdineRicevuto(fd({ id: ord.id, ricevuto: "0" }));
+  verifica((await prisma.ordineFornitore.findUniqueOrThrow({ where: { id: ord.id } })).ricevutoIl === null, "spunta tolta");
+  verifica(!!(await prisma.commessaEvento.findFirst({ where: { commessaId: c.id, testo: { contains: "ha ricevuto l'ordine" } } })), "scritto nella storia della pratica");
 
   console.log("6. Arriva la fattura: conta la fattura");
   const f = await prisma.fatturaAcquisto.create({ data: { chiave: "F1", fornitoreId: mastro.id, fornitoreNome: "IL MASTRO SRLS", numero: "88", data: new Date("2026-11-20"), imponibile: 1300, totale: 1586, stato: "DA_VERIFICARE",

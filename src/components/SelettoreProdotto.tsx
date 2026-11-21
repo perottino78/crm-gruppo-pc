@@ -3,6 +3,7 @@
 import RicambiDelGruppo from "@/components/preventivi/RicambiDelGruppo";
 import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 import { aggiungiAngolarePreventivo, aggiungiLegnoPreventivo } from "@/app/actions";
+import { complementoAngolareDaListino, complementoLegnoDaListino } from "@/app/commesse-actions";
 import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { misureRasomuro } from "@/lib/listini/rasomuro";
@@ -1913,7 +1914,9 @@ export default function SelettoreProdotto({
       );
     }
     // OUTDOOR: «Angolari in alluminio» su misura e «Legni piallati» (Ugo 20/11/2026), fuori dall'albero dei modelli
-    const extraOutdoor = f.nome === "OUTDOOR" && finestra; // solo nell'offerta (nella pratica preventivoId è la commessa)
+    // nell'offerta (finestra) vanno in vendita; nella pratica (preventivoId = commessa) vanno al costo, solo acquisto
+    const extraOutdoor = f.nome === "OUTDOOR";
+    const inPratica = !finestra;
     if (extraOutdoor && (gruppoAperto === "ANGOLARI IN ALLUMINIO" || gruppoAperto === "LEGNI PIALLATI")) {
       return (
         <>
@@ -1923,21 +1926,21 @@ export default function SelettoreProdotto({
             <span className="font-semibold text-neutral-800">{gruppoAperto}</span>
           </nav>
           {gruppoAperto === "ANGOLARI IN ALLUMINIO" ? (
-            <form action={aggiungiAngolarePreventivo} className="rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
-              <p className="mb-2 text-sm font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro): prezzo di vendita a peso</p>
+            <form action={inPratica ? complementoAngolareDaListino : aggiungiAngolarePreventivo} className="rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
+              <p className="mb-2 text-sm font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro): {inPratica ? "costo a peso, solo acquisto" : "prezzo di vendita a peso"}</p>
               <input type="hidden" name="preventivoId" value={preventivoId} />
               {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
-              <ConfiguraAngolare prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
+              <ConfiguraAngolare prezzo={inPratica ? "costo" : "vendita"} nomi testoPulsante={inPratica ? "➕ Aggiungi al materiale" : "🛒 Aggiungi al preventivo"} />
             </form>
           ) : (
             <>
-              <form action={aggiungiLegnoPreventivo} className="rounded-xl border-2 border-amber-300 bg-amber-50 p-3">
-                <p className="mb-2 text-sm font-bold text-amber-950">🪵 Legno piallato su misura: prezzo di vendita sullo sviluppo (m³)</p>
+              <form action={inPratica ? complementoLegnoDaListino : aggiungiLegnoPreventivo} className="rounded-xl border-2 border-amber-300 bg-amber-50 p-3">
+                <p className="mb-2 text-sm font-bold text-amber-950">🪵 Legno piallato su misura: {inPratica ? "costo sullo sviluppo (m³), solo acquisto" : "prezzo di vendita sullo sviluppo (m³)"}</p>
                 <input type="hidden" name="preventivoId" value={preventivoId} />
                 {sezioneCorrente && <input type="hidden" name="sezioneId" value={sezioneCorrente} />}
-                <ConfiguraLegno prezzo="vendita" nomi testoPulsante="🛒 Aggiungi al preventivo" />
+                <ConfiguraLegno prezzo={inPratica ? "costo" : "vendita"} nomi testoPulsante={inPratica ? "➕ Aggiungi al materiale" : "🛒 Aggiungi al preventivo"} />
               </form>
-              {ricambi(f.nome, "LEGNI PIALLATI")}
+              {!inPratica && ricambi(f.nome, "LEGNI PIALLATI")}
             </>
           )}
         </>
@@ -2118,6 +2121,26 @@ export default function SelettoreProdotto({
                         </div>
                       );
                     })}
+                    {f.nome === "OUTDOOR" && !finestra && (
+                      <>
+              <details className="border-t border-neutral-50">
+                <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-neutral-900 hover:bg-neutral-50">🔩 ANGOLARI IN ALLUMINIO <span className="text-xs font-normal text-neutral-500">su misura: forma, lati, bello</span></summary>
+                <form action={complementoAngolareDaListino} className="m-2 rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
+                  <p className="mb-2 text-sm font-bold text-slate-900">Angolare in alluminio su misura (Il Mastro): costo a peso, solo acquisto</p>
+                  <input type="hidden" name="preventivoId" value={preventivoId} />
+                  <ConfiguraAngolare prezzo="costo" nomi testoPulsante="➕ Aggiungi al materiale" />
+                </form>
+              </details>
+              <details className="border-t border-neutral-50">
+                <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-neutral-900 hover:bg-neutral-50">🪵 LEGNI PIALLATI <span className="text-xs font-normal text-neutral-500">su misura, spessore × larghezza × lunghezza</span></summary>
+                <form action={complementoLegnoDaListino} className="m-2 rounded-xl border-2 border-amber-300 bg-amber-50 p-3">
+                  <p className="mb-2 text-sm font-bold text-amber-950">Legno piallato su misura: costo sullo sviluppo (m³), solo acquisto</p>
+                  <input type="hidden" name="preventivoId" value={preventivoId} />
+                  <ConfiguraLegno prezzo="costo" nomi testoPulsante="➕ Aggiungi al materiale" />
+                </form>
+              </details>
+                                  </>
+                    )}
                   </div>
                 )}
               </div>

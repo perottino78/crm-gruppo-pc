@@ -7,7 +7,7 @@ import { LUNGHEZZA_STANDARD, PREZZO_M3_INDICATIVO, RIGHE_LIBERE, riepilogoLegno,
 
 const n2 = (n: number, dec = 2) => n.toLocaleString("it-IT", { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: "always" as unknown as boolean });
 
-export default function TabellaLegno({ righe, iniziali = {}, salva, modificabile = true }: { righe: number[]; iniziali?: Record<string, string>; salva?: (fd: FormData) => Promise<void>; modificabile?: boolean }) {
+export default function TabellaLegno({ righe, iniziali = {}, salva, modificabile = true, dove = "nell'ordine" }: { righe: number[]; iniziali?: Record<string, string>; salva?: (fd: FormData) => Promise<void>; modificabile?: boolean; dove?: string }) {
   // si parte dalle righe LEGNO-… già nell'ordine (articoli Complementi vetrate › Legni piallati)
   const [valori, setValori] = useState<Record<string, string>>(iniziali);
   const set = (k: string, v: string) => setValori((x) => ({ ...x, [k]: v }));
@@ -78,11 +78,11 @@ export default function TabellaLegno({ righe, iniziali = {}, salva, modificabile
       </div>
       {salva && modificabile && (
         <div className="flex flex-wrap items-center gap-3">
-          <button formAction={salva} className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva il legno nell&apos;ordine</button>
+          <button formAction={salva} className="btn-3d btn-3d-green px-4 py-2 text-sm">💾 Salva il legno {dove}</button>
           <span className="text-[11px] text-neutral-600">Mette nell&apos;ordine una riga per misura (articoli «Legni piallati», prezzo a barra sullo sviluppo) e aggiorna la scheda da allegare: all&apos;invio il totale dei legni c&apos;è già.</span>
         </div>
       )}
-      {Object.keys(iniziali).length > 0 && <p className="text-[11px] text-green-800">✓ Precompilato con il legno già nelle righe dell&apos;ordine.</p>}
+      {Object.keys(iniziali).length > 0 && <p className="text-[11px] text-green-800">✓ Precompilato con il legno già salvato.</p>}
     </div>
   );
 }

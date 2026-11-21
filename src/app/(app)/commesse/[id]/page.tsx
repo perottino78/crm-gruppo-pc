@@ -4,14 +4,21 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { costiMaterialeCommesse } from "@/lib/ordini/server";
 import CaricaRilievo from "@/components/commesse/CaricaRilievo";
+import { verbaleDiPartenza } from "@/lib/rilievo/verbale";
+import ModuloScheda from "@/components/ordini/ModuloScheda";
+import { creaSchedaDaRilievo, salvaLegnoInPratica, salvaAngolariInPratica } from "@/app/schede-produzione-actions";
+import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
+import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { valoriAngolari } from "@/lib/ordini/angolari";
 import { labelBreveTipologia } from "@/lib/prodotti";
 import { notFound } from "next/navigation";
 import StatoAcquisti from "@/components/ordini/StatoAcquisti";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
-import { puoGestireOrdini, EMAIL_ORDINI } from "@/lib/ordini/server";
-import { creaOrdineDaRighe } from "@/app/ordini-actions";
+import { puoGestireOrdini, puoModuloRilievo, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { creaOrdineDaRighe, impostaFornitoreRiga } from "@/app/ordini-actions";
+import FornitoreRiga from "@/components/commesse/FornitoreRiga";
 import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
@@ -20,7 +27,7 @@ import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
 import { tassonomiaListino } from "@/lib/listini/tassonomia";
 import { labelCalcolo } from "@/lib/listini/kit";
-import { UFFICI, nomeUfficio } from "@/lib/flusso";
+import { UFFICI, nomeUfficio, STATI_CHIUSI } from "@/lib/flusso";
 import { passiDiCommessa } from "@/lib/pratica/passi-server";
 import { passoDaMostrare, passoPrecedente, type ChiavePasso } from "@/lib/pratica/passi";
 import { BarraPassi, TestataPasso } from "@/components/commesse/PercorsoPratica";
@@ -72,9 +79,9 @@ import { documentiDi } from "@/lib/documenti/server";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string; scheda?: string; okScheda?: string; erroreScheda?: string; carica?: string; salvato?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo, scheda, okScheda, erroreScheda, carica, salvato } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -87,7 +94,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       eventi: { orderBy: { createdAt: "desc" } },
       fasi: { orderBy: { ordine: "asc" } },
       tasks: { orderBy: { createdAt: "desc" } },
-      righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true } } } },
+      righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true, stato: true } } } },
       costiManuali: { orderBy: { data: "asc" } },
       assistenze: { orderBy: { createdAt: "desc" } },
       pose: { include: { foto: { select: { id: true, nome: true, categoria: true }, orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
@@ -115,6 +122,22 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const haAcquistiTotali = c.costiManuali.some((m) => m.categoria === "ACQUISTO_MATERIALE");
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
+  // modulo del fornitore al «Carica rilievo» (Ugo 20/11/2026): modelli, legno e angolari già nel materiale, schede già salvate
+  const mostraModulo = puoModuloRilievo(utente, c.rilievi.map((x) => x.tecnicoId)) && c.rilievi.some((x) => x.stato !== "ANNULLATO");
+  const fornitoriModulo = [...new Map([
+    ...c.righeOrdine.filter((r) => r.fornitoreId && !r.ordineFornitoreId && !r.codice?.startsWith("LEGNO-") && !r.codice?.startsWith("ANGALL-")).map((r) => [r.fornitoreId!, r.fornitoreNome ?? "Fornitore"] as const),
+  ]).entries()].map(([id, nome]) => ({ id, nome })).sort((a, b) => a.nome.localeCompare(b.nome));
+  let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null; fornitoreId: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
+  if (mostraModulo) {
+    await assicuraModelliPronti();
+    await assicuraArticoliLegno();
+    const [modelli, legniPratica, salvate] = await Promise.all([
+      prisma.schedaProduzioneModello.findMany({ where: { attivo: true }, include: { fornitore: { select: { ragioneSociale: true } } }, orderBy: { nome: "asc" } }),
+      prisma.rigaOrdine.findMany({ where: { commessaId: c.id, ordineFornitoreId: null, OR: [{ codice: { startsWith: "LEGNO-" } }, { codice: { startsWith: "ANGALL-" } }] }, select: { codice: true, quantita: true } }),
+      prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: c.id, cartella: "Schede produzione" }, select: { id: true, nome: true, createdAt: true, caricatoDaNome: true }, orderBy: { createdAt: "desc" }, take: 10 }),
+    ]);
+    moduloDati = { modelli: modelli.map((m) => ({ id: m.id, nome: m.nome, html: m.html, fornitore: m.fornitore?.ragioneSociale ?? null, fornitoreId: m.fornitoreId })), legniPratica, salvate };
+  }
   const consegna = statoConsegna(c.consegnaPrevista, c.stato);
   const [tassonomia, progettiCliente] = await Promise.all([
     tassonomiaListino(c.brandId),
@@ -139,7 +162,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   // materiale della pratica, raggruppato per fornitore (così si spuntano insieme le righe dello stesso fornitore)
   // (i pezzi del kit stanno subito sotto il loro prodotto)
   const radici = c.righeOrdine.filter((r) => !r.kitDiId || !nomeRiga.has(r.kitDiId)).sort((a, b) => (a.fornitoreNome ?? "~").localeCompare(b.fornitoreNome ?? "~"));
-  const materialePratica = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
+  const materialeTutto = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
+  // ordine già inviato (o riga segnata ordinata / dal magazzino): esce da «da ordinare» e non si modifica più
+  const giaOrdinata = (r: (typeof materialeTutto)[number]) => r.daMagazzino || r.ordinato || (!!r.ordineFornitore && r.ordineFornitore.stato !== "BOZZA" && r.ordineFornitore.stato !== "ANNULLATO");
+  const materialePratica = materialeTutto.filter((r) => !giaOrdinata(r));
+  const materialeOrdinato = materialeTutto.filter(giaOrdinata);
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
@@ -164,12 +191,82 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const pp = await passiDiCommessa(c.id);
   // cartella «Rilievi misura» della pratica: si vede e si riempie anche dal riquadro del rilievo
   const fileRilievi = (await documentiDi("COMMESSA", c.id)).filter((d) => d.cartella === "Rilievi misura");
-  const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo) : null;
+  const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo ?? (avviso || fattoMateriale ? "MATERIALE" : undefined)) : null; // con un avviso sul materiale si resta nel riquadro del materiale (prima spariva e non diceva nulla)
   const apre = (...k: ChiavePasso[]) => sel !== null && k.includes(sel);
   const mostra = (...k: ChiavePasso[]) => !pp || (sel !== null && k.includes(sel));
   const passoSel = pp?.passi.find((x) => x.chiave === sel) ?? null;
   const passoCorr = pp?.passi.find((x) => x.chiave === pp.corrente) ?? null;
   const defaultData = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
+
+  const moduloFornitoreJsx = moduloDati ? (() => {
+            const modello = moduloDati.modelli.find((m) => m.id === scheda) ?? null;
+            const ap = valoriAngolari([], moduloDati.legniPratica);
+            return (
+              <section id="modulo-fornitore" className="mt-3 rounded-lg border border-purple-200 bg-purple-50/30 p-3 scroll-mt-4">
+                <h3 className="font-bold text-sm mb-1">📐 Modulo del fornitore (misure per la produzione) — si compila qui, al rilievo</h3>
+                <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS, legno, angolari), scrivi le misure e aggiungi i prodotti: il modulo resta nei documenti della pratica e, quando fai l&apos;ordine a quel fornitore, è già pronto da allegare.</p>
+                {okScheda && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {okScheda}</p>}
+                {erroreScheda && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{erroreScheda}</p>}
+                <form method="get" className="mb-2 flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="passo" value="RILIEVO" />
+                  <label className="text-xs font-semibold">Modulo
+                    <select name="scheda" defaultValue={modello?.id ?? ""} className="block rounded border border-neutral-300 px-2 py-1 text-sm">
+                      <option value="">Scegli…</option>
+                      {moduloDati.modelli.map((m) => <option key={m.id} value={m.id}>{m.nome}{m.fornitore ? ` — ${m.fornitore}` : ""}</option>)}
+                    </select>
+                  </label>
+                  <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
+                </form>
+                {modello && (
+                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} fornitori={modello.fornitoreId && !fornitoriModulo.some((f) => f.id === modello.fornitoreId) ? [...fornitoriModulo, { id: modello.fornitoreId, nome: modello.fornitore ?? "Fornitore" }] : fornitoriModulo} fornitoreIniziale={modello.fornitoreId ?? (fornitoriModulo.length === 1 ? fornitoriModulo[0].id : undefined)} righeLegno={moduloDati.legniPratica}
+                    angolariIniziali={{ iniziali: ap.valori, proposta: ap.proposta }} salvaLegno={salvaLegnoInPratica} salvaAngolari={salvaAngolariInPratica} modificabile dove="nella pratica"
+                    testoPulsante="📄 Salva il modulo" nota="Il CRM aggiunge da solo cliente, pratica, materiale e le misure del rilievo. Legno e angolari con «Salva» entrano anche nel materiale da ordinare." />
+                )}
+                {moduloDati.salvate.length > 0 && (
+                  <ul className="mt-3 divide-y divide-neutral-100 text-sm">
+                    {moduloDati.salvate.map((d) => (
+                      <li key={d.id} className="flex flex-wrap items-center gap-3 py-1"><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline">📄 {d.nome}</a><span className="text-xs text-neutral-500">{d.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span></li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            );
+          })() : null;
+  // «Carica rilievo»: una schermata sola, a passi (prodotti → verbale → misure e file → salva), senza il resto della pratica
+  const caricaId = carica ?? ((scheda || okScheda || erroreScheda) ? [...c.rilievi].filter((x) => x.stato !== "ANNULLATO").sort((x, y) => y.dataOra.getTime() - x.dataOra.getTime())[0]?.id : undefined);
+  const rilievoAperto = caricaId ? c.rilievi.find((x) => x.id === caricaId && x.stato !== "ANNULLATO") : undefined;
+  if (rilievoAperto) {
+    const verbaleIniziale = verbaleDiPartenza(rilievoAperto.verbale, materialeOfferta);
+    return (
+      <div className="mx-auto max-w-4xl space-y-4 p-3 md:p-6">
+        <Link href={`/commesse/${c.id}?passo=RILIEVO#rilievo`} className="btn-indietro">← Torna alla pratica</Link>
+        <div>
+          <h1 className="text-xl font-bold text-neutral-900">📋 Carica il rilievo</h1>
+          <p className="text-sm text-neutral-700"><b>{c.cliente.nome}</b> · pratica {numeroCommessa(c)} · {rilievoAperto.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit" })} · {rilievoAperto.tecnico.nome}</p>
+          {rilievoAperto.indirizzo && <p className="text-xs text-neutral-600">📍 {rilievoAperto.indirizzo}</p>}
+        </div>
+        {fatto && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {fatto}</p>}
+        {avvisoRilievo && <p className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">{avvisoRilievo}</p>}
+        {salvato === "1" && (
+          <div className="rounded-lg border-2 border-green-400 bg-green-50 p-3">
+            <p className="mb-2 text-sm font-bold text-green-900">Rilievo salvato. E adesso?</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href={`/commesse/${c.id}/rilievo/${rilievoAperto.id}/stampa`} className="btn-3d btn-3d-blue text-sm px-4 py-2.5">🖨️ Stampa verbale e rilievo</Link>
+              <a href="#modulo-fornitore" className="btn-3d btn-3d-purple text-sm px-4 py-2.5">📐 Modulo del fornitore (se serve)</a>
+              <Link href={`/commesse/${c.id}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-outline text-sm px-4 py-2.5">Torna alla pratica</Link>
+            </div>
+          </div>
+        )}
+        <CaricaRilievo brandId={c.brandId} rilievoId={rilievoAperto.id} misure={rilievoAperto.misure ?? ""} eseguito={rilievoAperto.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} verbale={verbaleIniziale} salvato={salvato === "1"} />
+        {moduloFornitoreJsx && (
+          <details open={!!(scheda || okScheda || erroreScheda || salvato === "1")} className="rounded-lg border border-neutral-200 bg-white p-2">
+            <summary className="cursor-pointer text-sm font-bold text-purple-900">📐 Modulo del fornitore (facoltativo: legno, angolari, pergole, vetrate…)</summary>
+            {moduloFornitoreJsx}
+          </details>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl">
@@ -234,6 +331,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
 
       <ApriDaAncora />
       {/* PASSO IN CORSO */}
+      {avviso && !mostra("MATERIALE", "ARRIVO") && (
+        <div role="alert" className="mb-3 rounded-lg border-2 border-red-300 bg-red-50 px-4 py-3 text-sm text-red-900">
+          <p className="font-bold">⚠️ L&apos;ordine non è partito</p>
+          <p>{avviso}</p>
+          {percorsoProg && percorsoProg.ordiniBloccati && <p className="mt-1 text-xs">Vai al riquadro <a href="#progetto" className="underline font-semibold">📁 Progetto</a> qui sotto e premi «✅ Conferma materiale»: poi «Ordine al fornitore» funziona.</p>}
+        </div>
+      )}
       {pp && passoSel && <TestataPasso commessaId={c.id} passo={passoSel} precedente={passoPrecedente(pp.passi, passoSel.chiave)} corrente={passoCorr} />}
       {pp && (sel === "FATTURA" || sel === "PROGETTO" || sel === "BENVENUTO") && (
         <PannelloApertura
@@ -244,31 +348,24 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       )}
       {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
-      {/* FLUSSO PRATICA FRA UFFICI */}
-      <details className="card-fase" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">✅ Flusso pratica · task fra uffici</h2></summary>
-        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Puoi anche inviare un task libero a un ufficio.</p>
-        {c.tasks.length > 0 && (
-          <div className="mb-3 rounded border border-sky-200 bg-sky-50/60 p-2 text-xs text-neutral-800">
-            <p className="mb-1 font-bold text-sky-900">🕒 Passaggi fra uffici (quando è arrivata e quando è stata chiusa)</p>
-            <ul className="space-y-0.5">
-              {[...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime()).filter((t) => t.faseChiave).map((t) => {
-                const fine = t.completatoIl ?? null;
-                const giorni = Math.max(0, Math.floor(((fine ?? new Date()).getTime() - t.createdAt.getTime()) / 86400000));
-                const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
-                const ritardo = !fine && t.stato !== "ANNULLATO" && giorni >= 3;
-                return (
-                  <li key={t.id} className={t.stato === "ANNULLATO" ? "text-neutral-400 line-through" : ""}>
-                    <b>{nomeUfficio(t.ufficio)}</b>: {t.titolo} — arrivata il {d(t.createdAt)}
-                    {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : t.stato !== "ANNULLATO" && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-amber-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-        <div className="flex flex-col gap-2 mb-3">
-          {c.tasks.length === 0 && (
+      {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
+      {(() => {
+        const passaggi = [...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
+        const chiuso = (t: (typeof passaggi)[number]) => !!t.completatoIl || STATI_CHIUSI.includes(t.stato);
+        const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
+        const attivi = passaggi.filter((t) => !chiuso(t));
+        const d = (x: Date) => x.toLocaleDateString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit" });
+        return (
+      <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0}>
+        <summary className="cursor-pointer list-none">
+          <h2 className="mb-1">✅ Avanzamento della pratica</h2>
+          <p className="text-xs text-neutral-600 mb-2">
+            {passaggi.length === 0 ? "Nessun passaggio fra uffici ancora." : <>{fatti} passaggi chiusi{attivi.length > 0 ? <> · <b className="text-sky-800">adesso: {attivi.map((t) => nomeUfficio(t.ufficio)).join(", ")}</b></> : " · tutto chiuso"}</>}
+          </p>
+        </summary>
+        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Qui sotto trovi il percorso fra gli uffici, con le date, e in fondo i costi di manodopera.</p>
+        {passaggi.length === 0 && (
+          <div className="mb-3">
             <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
               <input type="hidden" name="commessaId" value={c.id} />
               <p className="text-sm text-neutral-600">Nessun task ancora.</p>
@@ -282,10 +379,39 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               </select>
               <button className="btn-3d btn-3d-green text-sm px-4 py-2">Avvia flusso</button>
             </form>
-          )}
-          {c.tasks.map((t) => <TaskCard key={t.id} task={t} />)}
-        </div>
-        <form action={creaTaskManuale} className="flex flex-wrap items-end gap-2">
+          </div>
+        )}
+        <ol className="relative ml-3 border-l-2 border-sky-200 space-y-3 pb-1">
+          {passaggi.map((t) => {
+            const fine = t.completatoIl ?? null;
+            const annullato = t.stato === "ANNULLATO";
+            const finito = chiuso(t);
+            const giorni = Math.max(0, Math.floor(((fine ?? new Date()).getTime() - t.createdAt.getTime()) / 86400000));
+            const ritardo = !finito && giorni >= 3;
+            const colore = annullato ? "bg-neutral-300" : finito ? "bg-green-600" : ritardo ? "bg-red-600" : "bg-sky-600";
+            return (
+              <li key={t.id} className="relative pl-6">
+                <span className={`absolute -left-[11px] top-1 flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-white ring-4 ring-white ${colore}`}>{annullato ? "×" : finito ? "✓" : "●"}</span>
+                <p className={`text-xs ${annullato ? "text-neutral-400 line-through" : "text-neutral-700"}`}>
+                  <b className="text-neutral-900">{nomeUfficio(t.ufficio)}</b> · arrivata il {d(t.createdAt)}
+                  {fine ? <> · chiusa il {d(fine)} ({giorni === 0 ? "in giornata" : `${giorni} gg`})</> : !annullato && <span className={ritardo ? "font-bold text-red-700" : "font-semibold text-sky-800"}> · ferma da {giorni} gg{ritardo ? " ⚠️ in ritardo" : ""}</span>}
+                </p>
+                {finito ? (
+                  <details className="mt-1">
+                    <summary className="cursor-pointer text-sm font-semibold text-neutral-800">{t.titolo} <span className="text-xs font-normal text-neutral-500">(dettagli)</span></summary>
+                    <div className="mt-1"><TaskCard task={t} /></div>
+                  </details>
+                ) : (
+                  <div className="mt-1"><TaskCard task={t} /></div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        <details className="mt-3 rounded border border-neutral-200 bg-neutral-50 p-2">
+          <summary className="cursor-pointer text-sm font-bold text-neutral-800">➕ Invia un task libero a un ufficio</summary>
+          <div className="mt-2">
+            <form action={creaTaskManuale} className="flex flex-wrap items-end gap-2">
           <input type="hidden" name="commessaId" value={c.id} />
           <div><label className="text-[11px] font-bold text-neutral-700 block">Invia task a</label>
             <select name="ufficio" className={inp}>{UFFICI.map((x) => <option key={x.chiave} value={x.chiave}>{x.nome}</option>)}</select></div>
@@ -295,7 +421,91 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             <input name="descrizione" className={inp + " w-full"} /></div>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Invia task</button>
         </form>
+          </div>
+        </details>
+        <details className="mt-3 rounded border border-violet-200 bg-violet-50/40 p-2">
+          <summary className="cursor-pointer text-sm font-bold text-violet-900">⏱ Costi di manodopera per fase (ore o forfait)</summary>
+          <div className="mt-2">
+        {c.fasi.length === 0 ? (
+          <form action={generaFasiStandard}>
+            <input type="hidden" name="id" value={c.id} />
+            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Genera fasi standard</button>
+          </form>
+        ) : (
+          <div className="space-y-2">
+            {c.fasi.map((f) => (
+              <div key={f.id} className="border border-neutral-200 rounded p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-semibold text-neutral-900">{f.ordine}. {f.nome}</p>
+                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${f.stato === "CHIUSA" ? "bg-green-100 text-green-900" : f.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : "bg-neutral-200 text-neutral-800"}`}>
+                    {f.stato === "CHIUSA" ? "CHIUSA" : f.stato === "IN_CORSO" ? "IN CORSO" : "DA FARE"}
+                  </span>
+                </div>
+                {f.stato === "CHIUSA" ? (
+                  <div className="text-xs text-neutral-800 mt-1">
+                    Chiusa da <b>{f.chiusaDaNome}</b> il {f.chiusaIl?.toLocaleDateString("it-IT")} · {f.forfait !== null ? `forfait ${eur(f.forfait)}` : `${f.ore ?? 0} h × ${eur(f.costoOrario ?? 0)}/h`} = <b>{eur(f.costoTotale)}</b>
+                    {f.note ? ` · ${f.note}` : ""}
+                    {admin && (
+                      <form action={riapriFase} className="inline ml-3">
+                        <input type="hidden" name="faseId" value={f.id} />
+                        <button className="text-red-700 underline">riapri</button>
+                      </form>
+                    )}
+                  </div>
+                ) : (
+                  <div className="mt-2 space-y-2">
+                    <form action={assegnaFase} className="flex items-center gap-2">
+                      <input type="hidden" name="faseId" value={f.id} />
+                      <select name="assegnatario" defaultValue={f.assegnatoUtenteId ? `U:${f.assegnatoUtenteId}` : f.assegnatoSoggettoId ? `S:${f.assegnatoSoggettoId}` : ""} className={inp}>
+                        <option value="">Assegna a…</option>
+                        <optgroup label="Utenti CRM">
+                          {soloAttivi(tecnici, f.assegnatoUtenteId).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
+                        </optgroup>
+                        {soggettiOperativi.length > 0 && (
+                          <optgroup label="Posatori / tecnici in anagrafica">
+                            {soggettiOperativi.map((t) => <option key={t.id} value={`S:${t.id}`}>{t.ragioneSociale}</option>)}
+                          </optgroup>
+                        )}
+                      </select>
+                      <button className="btn-3d btn-3d-dark text-[11px] px-2 py-1">assegna</button>
+                      {f.assegnatoNome && <span className="text-xs font-bold text-neutral-800">Assegnata a <b>{f.assegnatoNome}</b></span>}
+                    </form>
+                    <form action={chiudiFase} className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
+                      <input type="hidden" name="faseId" value={f.id} />
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Ore lavorate</label>
+                        <input name="ore" className={`${inp} w-20`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Costo orario €</label>
+                        <input name="costoOrario" defaultValue={costoOrarioUtente(utente?.id) as string | number} className={`${inp} w-24`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">oppure forfait €</label>
+                        <input name="forfait" className={`${inp} w-24`} />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[11px] font-bold text-neutral-800">Note</label>
+                        <input name="note" className={`${inp} w-48`} />
+                      </div>
+                      <button className="btn-3d btn-3d-green text-sm px-4 py-2">Chiudi fase</button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+        <form action={aggiungiFase} className="flex gap-2 mt-3">
+          <input type="hidden" name="commessaId" value={c.id} />
+          <input name="nome" placeholder="Nuova fase (es. Sopralluogo muratore)" className={`${inp} flex-1`} />
+          <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Aggiungi fase</button>
+        </form>
+          </div>
+        </details>
       </details>
+        );
+      })()}
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (
@@ -479,11 +689,15 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               )}
 
               {r.stato !== "ANNULLATO" && (
-                <details className="mt-2" open={r.stato === "PROGRAMMATO" && c.rilievi.filter((x) => x.stato === "PROGRAMMATO").length === 1}>
-                  <summary className="text-sm font-bold text-blue-800 cursor-pointer">
-                    {r.stato === "ESEGUITO" ? "✏️ Aggiungi misure, file o materiale" : "📋 Carica il rilievo (misure, PDF e foto, materiale)"}
-                  </summary>
-                  <CaricaRilievo brandId={c.brandId} rilievoId={r.id} misure={r.misure ?? ""} eseguito={r.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} />
+              <>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <Link href={`/commesse/${c.id}?passo=RILIEVO&carica=${r.id}`} className="btn-3d btn-3d-blue text-sm px-5 py-2.5">
+                    {r.stato === "ESEGUITO" ? "✏️ Rivedi il rilievo e il verbale" : "📋 Carica il rilievo"}
+                  </Link>
+                  {r.stato === "ESEGUITO" && <Link href={`/commesse/${c.id}/rilievo/${r.id}/stampa`} className="btn-3d btn-3d-outline text-sm px-4 py-2.5">🖨️ Stampa verbale e rilievo</Link>}
+                </div>
+                <details className="mt-2">
+                  <summary className="text-xs font-bold text-neutral-700 cursor-pointer">📂 Altri file della pratica</summary>
                   <div className="mt-3 rounded border border-blue-200 bg-blue-50/40 p-2">
                     <p className="text-xs font-bold text-neutral-800 mb-1">📂 Cartella «Rilievi misura» della pratica ({fileRilievi.length} file)</p>
                     {fileRilievi.length ? (
@@ -500,6 +714,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                     <CaricaDocumenti entita="COMMESSA" entitaId={c.id} cartelle={["Rilievi misura"]} />
                   </div>
                 </details>
+              </>
               )}
               {r.stato === "PROGRAMMATO" && (
                 <form action={annullaRilievo} className="mt-1">
@@ -516,102 +731,23 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       )}
 
 
-      {/* FASI */}
-      <details className="card-fase" style={{ "--fase": "#7c3aed" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">3 · Fasi della commessa</h2></summary>
-        {c.fasi.length === 0 ? (
-          <form action={generaFasiStandard}>
-            <input type="hidden" name="id" value={c.id} />
-            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Genera fasi standard</button>
-          </form>
-        ) : (
-          <div className="space-y-2">
-            {c.fasi.map((f) => (
-              <div key={f.id} className="border border-neutral-200 rounded p-3">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-sm font-semibold text-neutral-900">{f.ordine}. {f.nome}</p>
-                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${f.stato === "CHIUSA" ? "bg-green-100 text-green-900" : f.stato === "IN_CORSO" ? "bg-indigo-100 text-indigo-900" : "bg-neutral-200 text-neutral-800"}`}>
-                    {f.stato === "CHIUSA" ? "CHIUSA" : f.stato === "IN_CORSO" ? "IN CORSO" : "DA FARE"}
-                  </span>
-                </div>
-                {f.stato === "CHIUSA" ? (
-                  <div className="text-xs text-neutral-800 mt-1">
-                    Chiusa da <b>{f.chiusaDaNome}</b> il {f.chiusaIl?.toLocaleDateString("it-IT")} · {f.forfait !== null ? `forfait ${eur(f.forfait)}` : `${f.ore ?? 0} h × ${eur(f.costoOrario ?? 0)}/h`} = <b>{eur(f.costoTotale)}</b>
-                    {f.note ? ` · ${f.note}` : ""}
-                    {admin && (
-                      <form action={riapriFase} className="inline ml-3">
-                        <input type="hidden" name="faseId" value={f.id} />
-                        <button className="text-red-700 underline">riapri</button>
-                      </form>
-                    )}
-                  </div>
-                ) : (
-                  <div className="mt-2 space-y-2">
-                    <form action={assegnaFase} className="flex items-center gap-2">
-                      <input type="hidden" name="faseId" value={f.id} />
-                      <select name="assegnatario" defaultValue={f.assegnatoUtenteId ? `U:${f.assegnatoUtenteId}` : f.assegnatoSoggettoId ? `S:${f.assegnatoSoggettoId}` : ""} className={inp}>
-                        <option value="">Assegna a…</option>
-                        <optgroup label="Utenti CRM">
-                          {soloAttivi(tecnici, f.assegnatoUtenteId).map((t) => <option key={t.id} value={`U:${t.id}`}>{t.nome}</option>)}
-                        </optgroup>
-                        {soggettiOperativi.length > 0 && (
-                          <optgroup label="Posatori / tecnici in anagrafica">
-                            {soggettiOperativi.map((t) => <option key={t.id} value={`S:${t.id}`}>{t.ragioneSociale}</option>)}
-                          </optgroup>
-                        )}
-                      </select>
-                      <button className="btn-3d btn-3d-dark text-[11px] px-2 py-1">assegna</button>
-                      {f.assegnatoNome && <span className="text-xs font-bold text-neutral-800">Assegnata a <b>{f.assegnatoNome}</b></span>}
-                    </form>
-                    <form action={chiudiFase} className="flex flex-wrap items-end gap-2 bg-neutral-50 border border-neutral-200 rounded p-2">
-                      <input type="hidden" name="faseId" value={f.id} />
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Ore lavorate</label>
-                        <input name="ore" className={`${inp} w-20`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Costo orario €</label>
-                        <input name="costoOrario" defaultValue={costoOrarioUtente(utente?.id) as string | number} className={`${inp} w-24`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">oppure forfait €</label>
-                        <input name="forfait" className={`${inp} w-24`} />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-bold text-neutral-800">Note</label>
-                        <input name="note" className={`${inp} w-48`} />
-                      </div>
-                      <button className="btn-3d btn-3d-green text-sm px-4 py-2">Chiudi fase</button>
-                    </form>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-        <form action={aggiungiFase} className="flex gap-2 mt-3">
-          <input type="hidden" name="commessaId" value={c.id} />
-          <input name="nome" placeholder="Nuova fase (es. Sopralluogo muratore)" className={`${inp} flex-1`} />
-          <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Aggiungi fase</button>
-        </form>
-      </details>
-
       {/* EVASIONE ORDINI */}
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties} open={apre("MATERIALE","ARRIVO")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">4 · Evasione ordini e acquisti</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">3 · Evasione ordini e acquisti</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori. Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
         <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
           <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
           {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
-          {materialePratica.length === 0 ? (
+          {materialeTutto.length === 0 ? (
             <form action={generaRigheOrdine} className="mb-3"><input type="hidden" name="id" value={c.id} />
               <button className="text-xs text-blue-800 underline">Carica il materiale dell&apos;offerta</button></form>
           ) : (
             <form action={creaOrdineDaRighe} className="mb-3">
               <input type="hidden" name="commessaId" value={c.id} />
+              {materialePratica.length === 0 && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">Niente da ordinare: tutto il materiale è già stato ordinato (vedi sotto).</p>}
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200"><th className="py-1 w-6"></th><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th><th></th></tr></thead>
@@ -623,9 +759,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                           <td className="py-1.5"><input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} /></td>
                           <td className="py-1.5 pr-2">{r.kitDiId ? <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-indigo-100 text-indigo-900" title="Pezzo della distinta base: solo acquisto">🔗 KIT di {nomeRiga.get(r.kitDiId) ?? "—"}</span> : r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
                           <td className="py-1.5 text-right pr-3">{r.quantita}</td>
-                          <td className="py-1.5 text-xs">{r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>}</td>
+                          <td className="py-1.5 text-xs">{libera && puoGestireOrdini(utente)
+                            ? <FornitoreRiga rigaId={r.id} fornitoreId={r.fornitoreId} fornitori={fornitoriLista} azione={impostaFornitoreRiga} />
+                            : (r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>)}</td>
                           <td className="py-1.5 text-xs">{r.ordineFornitore
-                            ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
+                            ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}?passo=invio`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno} · ✉ invia</Link>
                             : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>
                           <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
                           <td className="py-1.5 text-right">{r.complemento && libera && <button formAction={eliminaComplemento} name="rigaId" value={r.id} className="text-xs text-red-700 underline">togli</button>}</td>
@@ -638,6 +776,29 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
                 azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
             </form>
+          )}
+          {materialeOrdinato.length > 0 && (
+            <div className="mt-3 rounded border border-green-200 bg-green-50/40 p-3">
+              <p className="text-sm font-bold text-green-900">✅ Ordinato — in attesa della conferma e dell&apos;arrivo <span className="font-normal text-neutral-600">({materialeOrdinato.length})</span></p>
+              <p className="text-xs text-neutral-600 mb-2">Queste righe non si modificano più. Quando la merce arriva si controllano costi e magazzino dall&apos;ordine.</p>
+              <table className="w-full text-sm">
+                <thead><tr className="text-left text-xs text-neutral-600 border-b border-green-200"><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th></tr></thead>
+                <tbody>
+                  {materialeOrdinato.map((r) => {
+                    const st = r.arrivato ? "📦 Arrivato" : r.daMagazzino ? "dal magazzino" : r.ordineFornitore?.stato === "CONFERMATO" ? "Confermato — attendo la merce" : r.ordineFornitore?.stato === "EVASO" || r.ordineFornitore?.stato === "EVASO_PARZIALE" ? "Merce in arrivo" : "In attesa di conferma";
+                    return (
+                      <tr key={r.id} className="border-b border-green-100 align-top text-neutral-700">
+                        <td className="py-1.5 pr-2">{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
+                        <td className="py-1.5 text-right pr-3">{r.quantita}</td>
+                        <td className="py-1.5 text-xs">{r.fornitoreNome ?? "—"}</td>
+                        <td className="py-1.5 text-xs">{r.ordineFornitore ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link> : "ordinato"} · <b>{st}</b></td>
+                        <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           )}
           {correlatiSuggeriti.length > 0 && (
             <div className="mt-2 rounded border border-indigo-200 bg-indigo-50/50 p-2">
@@ -731,7 +892,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* SCHEDA COSTI A SCALARE */}
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="costi" className="card-fase scroll-mt-4" style={{ "--fase": "#0d9488" } as React.CSSProperties} open={false}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">5 · Scheda costi a scalare</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">4 · Scheda costi a scalare</h2></summary>
         <div className="grid grid-cols-4 gap-3 mb-4">
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Vendita (imponibile)</p><p className="text-sm font-bold">{eur(c.totaleImponibile)}</p></div>
           <div className="rounded border border-neutral-200 p-3"><p className="text-xs text-neutral-600">Costi registrati</p><p className="text-sm font-bold">{eur(totaleCosti)}</p></div>
@@ -790,7 +951,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* SALDO */}
       {mostra("SALDO", "POSA_APP") && (
       <details className="card-fase" style={{ "--fase": "#db2777" } as React.CSSProperties} open={apre("SALDO")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-1">6 · Saldo e conferma posa</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-1">5 · Saldo e conferma posa</h2></summary>
         <p className="text-xs text-neutral-600 mb-3">Il saldo (fattura) si incassa prima dell&apos;uscita del materiale; dopo il saldo parte la conferma del giorno di posa al cliente.</p>
         {c.saldoIncassato ? (
           <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">
@@ -818,7 +979,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* POSA E FINE LAVORI */}
       {mostra("POSA_APP", "POSA") && (
       <details id="posa" className="card-fase scroll-mt-4" style={{ "--fase": "#f59e0b" } as React.CSSProperties} open={apre("POSA_APP","POSA")}>
-        <summary className="cursor-pointer list-none"><h2 className="mb-3">7 · Posa e fine lavori</h2></summary>
+        <summary className="cursor-pointer list-none"><h2 className="mb-3">6 · Posa e fine lavori</h2></summary>
         {mostra("POSA_APP") && (
         <form action={programmaPosa} className="flex flex-wrap items-end gap-2 mb-4">
           <input type="hidden" name="commessaId" value={c.id} />
@@ -967,7 +1128,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {/* CHIUSURA */}
       {mostra("KIT") && (c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA") && (
         <details className="card-fase" style={{ "--fase": "#16a34a" } as React.CSSProperties} open={apre("KIT")}>
-          <summary className="cursor-pointer list-none"><h2 className="mb-3">8 · Chiusura commessa</h2></summary>
+          <summary className="cursor-pointer list-none"><h2 className="mb-3">7 · Chiusura commessa</h2></summary>
           {c.stato === "CHIUSA" ? (
             <div className="text-sm text-neutral-900 space-y-1">
               <p className="text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2">✔ Commessa chiusa il {c.chiusaIl?.toLocaleDateString("it-IT")} · garanzia {c.garanziaMesi} mesi{c.fatturaFinaleNote ? ` · ${c.fatturaFinaleNote}` : ""}</p>

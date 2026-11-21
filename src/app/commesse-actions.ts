@@ -3,6 +3,8 @@
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+import { verbaleDaForm, verbaleCompilato } from "@/lib/rilievo/verbale";
 import { sceltePerRilievo } from "@/lib/listini/serramenti-comuni";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
 import { revalidatePath } from "next/cache";
@@ -13,7 +15,7 @@ import { inviaMailPratica, ringraziaPagamentoAcconto, avvisaCommerciale } from "
 import { mailRilievoFissato, mailPosaFissata, mailPosaCompletata, mailPosaParziale } from "@/lib/pratica/mail-cliente";
 import { datiAcquisto } from "@/lib/ordini/server";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
-import { trovaFasciaPrezzo } from "@/lib/prezzoPerMisura";
+import { trovaFasciaPrezzo, trovaBarraPiuVicina } from "@/lib/prezzoPerMisura";
 import { labelBreveTipologia, unitaMisura } from "@/lib/prodotti";
 import { costoPrevisto } from "@/lib/ordini/calcoli";
 import { scontoEquivalente } from "@/lib/articoli/prezzi";
@@ -390,9 +392,11 @@ export async function caricaRilievo(formData: FormData) {
   } catch {
     foto = [];
   }
+  // verbale di sopralluogo (spunte, stato dell'immobile, posa, prodotti da installare) compilato al passo 2
+  const verbale = verbaleDaForm((k) => { const v = formData.get(k); return typeof v === "string" ? v : null; }, (k) => formData.getAll(k).filter((x): x is string => typeof x === "string"));
   const r = await prisma.rilievo.update({
     where: { id },
-    data: { misure, note: note ?? undefined, stato: "ESEGUITO", eseguitoIl: new Date() },
+    data: { misure, note: note ?? undefined, stato: "ESEGUITO", eseguitoIl: new Date(), verbale: verbaleCompilato(verbale) ? (verbale as unknown as Prisma.InputJsonValue) : Prisma.JsonNull },
   });
   if (foto.length) {
     await prisma.rilievoAllegato.createMany({
@@ -401,6 +405,19 @@ export async function caricaRilievo(formData: FormData) {
         .slice(0, 12)
         .map((f) => ({ rilievoId: id, nome: f.nome ?? null, dataUri: f.dataUri })),
     });
+  }
+  // i file del rilievo stanno anche nelle cartelle della pratica (Ugo 21/11/2026): i PDF in «Rilievi misura», le foto in «Foto rilievi»,
+  // così si trovano tra i documenti e si allegano agli ordini (senza doppioni: `fileRilievo` salta quelli già in cartella)
+  for (const f of foto.filter((x) => typeof x.dataUri === "string" && x.dataUri.startsWith("data:")).slice(0, 12)) {
+    const m = /^data:([\w/+.-]+);base64,(.+)$/.exec(f.dataUri);
+    if (!m) continue;
+    const contenuto = Buffer.from(m[2], "base64");
+    if (!contenuto.length) continue;
+    const nome = (f.nome ?? "").trim() || `rilievo-${Date.now()}.${m[1] === "application/pdf" ? "pdf" : (m[1].split("/")[1] ?? "jpg")}`;
+    const cartella = m[1] === "application/pdf" ? "Rilievi misura" : "Foto rilievi";
+    const dove = { entita: "COMMESSA", entitaId: r.commessaId, cartella, nome };
+    if (await prisma.documento.findFirst({ where: dove, select: { id: true } })) continue;
+    await prisma.documento.create({ data: { ...dove, mime: m[1], dimensione: contenuto.length, contenuto, caricatoDaNome: utente.nome } });
   }
   await assicuraRigheOfferta(r.commessaId);
   // materiale aggiunto nel modulo del rilievo (solo acquisto): si salva tutto insieme al rilievo
@@ -418,7 +435,7 @@ export async function caricaRilievo(formData: FormData) {
   revalidatePath(`/commesse/${r.commessaId}`);
   revalidatePath("/commesse");
   const fatto = `Rilievo salvato${foto.length ? `: ${foto.length} file` : ""}${aggiunti.length ? `, ${aggiunti.length} materiali aggiunti` : ""}.`;
-  redirect(`/commesse/${r.commessaId}?fatto=${encodeURIComponent(fatto)}${errori.length ? `&avvisoRilievo=${encodeURIComponent(`Non aggiunti: ${errori.join(" · ")}`)}` : ""}#rilievo`);
+  redirect(`/commesse/${r.commessaId}?carica=${id}&salvato=1&fatto=${encodeURIComponent(fatto)}${errori.length ? `&avvisoRilievo=${encodeURIComponent(`Non aggiunti: ${errori.join(" · ")}`)}` : ""}`);
 }
 
 export async function aggiungiNotaCommessa(formData: FormData) {
@@ -1230,16 +1247,20 @@ async function creaComplemento(commessaId: string, x: Complemento): Promise<{ er
     const griglia = (await prisma.prodotto.count({ where: { brandId, tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
     const nome = descrizione ?? labelBreveTipologia(tipologia);
     if (griglia && L <= 0) return { errore: `${nome}: scrivi la misura.` };
-    const p = griglia
-      ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
-      : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
+    // profili e pezzi a barre: la barra più vicina alla misura scritta (anche se scritta in mm)
+    const barra = griglia && H <= 0 ? await trovaBarraPiuVicina({ brandId, tipologia, colore, larghezza: L }) : null;
+    const p = barra
+      ? barra.prodotto
+      : griglia
+        ? await trovaFasciaPrezzo({ brandId, tipologia, colore, larghezza: L, altezza: H })
+        : await prisma.prodotto.findFirst({ where: { brandId, tipologia, colore } });
     if (!p) return { errore: `${nome}: misura fuori listino, scrivilo come testo libero.` };
     prodottoKit = p.id;
     const m = await prisma.modelloProdotto.findUnique({ where: { brandId_tipologia: { brandId, tipologia } }, select: { fornitoreId: true, codiceFornitore: true, scontoAcquisto: true } });
     fornitoreId = fornitoreId ?? m?.fornitoreId ?? null;
     const f = fornitoreId ? await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { scontoFornitore: true } }) : null;
     const sconto = m?.scontoAcquisto ?? f?.scontoFornitore ?? null;
-    const misura = griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unitaMisura(tipologia)})` : "";
+    const misura = barra ? ` (barra ${p.larghezzaMm} ${unitaMisura(tipologia)}${barra.richiesta !== p.larghezzaMm ? `, richiesto ${L}${barra.inMm ? " mm" : ""}` : ""})` : griglia ? ` (${L}${H > 0 ? `×${H}` : ""} ${unitaMisura(tipologia)})` : "";
     Object.assign(dati, {
       codiceFornitore: m?.codiceFornitore ?? null, prezzoAcquisto: p.prezzoBase, scontoAcquisto: f ? sconto : null,
       costoPrevisto: f ? costoPrevisto({ prezzoUnitario: p.prezzoBase, quantita: q }, sconto) : null,
@@ -1369,9 +1390,28 @@ export async function complementoDaListinoPerMisura(formData: FormData) {
     const brandId = str(formData, "brandId"), tipologia = str(formData, "tipologia");
     const L = flt(formData, "larghezza"), H = flt(formData, "altezza") ?? 0;
     if (!brandId || !tipologia || !L) return "Scrivi la misura.";
-    const p = await trovaFasciaPrezzo({ brandId, tipologia, larghezza: L, altezza: H });
+    const barra = H <= 0 ? await trovaBarraPiuVicina({ brandId, tipologia, larghezza: L }) : null;
+    const p = barra ? barra.prodotto : await trovaFasciaPrezzo({ brandId, tipologia, larghezza: L, altezza: H });
     if (!p) return `${labelBreveTipologia(tipologia)}: misura fuori listino, scrivilo come testo libero nel rilievo.`;
-    return { tipo: "PR", articoloId: p.id, quantita: str(formData, "quantita"), larghezza: L, altezza: H || null };
+    return { tipo: "PR", articoloId: p.id, quantita: str(formData, "quantita"), larghezza: barra ? p.larghezzaMm : L, altezza: H || null, note: barra && barra.richiesta !== p.larghezzaMm ? `misura richiesta ${barra.richiesta}${barra.inMm ? " mm" : ""} → barra ${p.larghezzaMm}` : null };
+  });
+}
+
+/** Dal selettore (tessera «Angolari in alluminio»): angolare su misura al costo di Il Mastro, solo acquisto. */
+export async function complementoAngolareDaListino(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const codice = str(formData, "codiceAngolare");
+    if (!codice) return "Scegli le misure dell'angolare.";
+    return { tipo: "ANG", codice, quantita: str(formData, "quantita"), note: str(formData, "notaAngolare") };
+  });
+}
+
+/** Dal selettore (tessera «Legni piallati»): legno su misura al costo sullo sviluppo, solo acquisto. */
+export async function complementoLegnoDaListino(formData: FormData) {
+  await complementoDaSelettore(formData, async () => {
+    const codice = str(formData, "codiceLegno");
+    if (!codice) return "Scegli le misure del legno.";
+    return { tipo: "LEG", codice, quantita: str(formData, "quantita"), note: str(formData, "notaLegno") };
   });
 }
 

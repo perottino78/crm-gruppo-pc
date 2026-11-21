@@ -8,13 +8,20 @@ import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
-export type MaterialeInLista = Complemento & { etichetta: string };
+/** Una riga della lista: `base` = nome con colore e misura, `fornDefault` = fornitore del listino/articolo, `fuori` = altro da mostrare in coda (es. foto allegata). */
+export type MaterialeInLista = Complemento & { etichetta: string; base: string; fornDefault?: string | null; fuori?: string | null };
+
+/** L'etichetta della riga come si legge in lista: «nome × quantità · fornitore · altro». Si rifà ogni volta che la riga si modifica. */
+export function etichettaMateriale(m: Pick<MaterialeInLista, "base" | "quantita" | "fornitoreId" | "fornDefault" | "fuori">, fornitori: { id: string; ragioneSociale: string }[]): string {
+  const forn = fornitori.find((f) => f.id === m.fornitoreId)?.ragioneSociale ?? m.fornDefault;
+  return `${m.base} × ${m.quantita ?? 1}${forn ? ` · ${forn}` : ""}${m.fuori ? ` · ${m.fuori}` : ""}`;
+}
 
 /**
  * Cerca il materiale nel listino o negli articoli (o scrivilo a mano) e mettilo nella lista del rilievo.
  * Non salva niente da solo: i campi non hanno «name», la lista si salva con il rilievo.
  */
-export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void; brandId?: string }) {
+export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSospeso }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void; brandId?: string; onSospeso?: (testo: string | null) => void }) {
   const [albero, setAlbero] = useState<AlberoLeggero | null>(null);
   const [apriAlbero, setApriAlbero] = useState(false);
   async function caricaAlbero() {
@@ -35,6 +42,9 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
   const [colore, setColore] = useState(""), [L, setL] = useState(""), [H, setH] = useState(""), [quantita, setQuantita] = useState("1");
   const [fornitoreId, setFornitoreId] = useState(""), [note, setNote] = useState("");
   const [errore, setErrore] = useState<string | null>(null);
+
+  // prodotto scelto o descrizione scritta ma NON ancora messo in lista: lo si dice a chi sta per cambiare passo o salvare
+  useEffect(() => { onSospeso?.(scelto ? scelto.label : q.trim() ? q.trim() : null); }, [scelto, q, onSospeso]);
 
   useEffect(() => {
     if (scelto || q.trim().length < 2) { setRisultati([]); return; }
@@ -59,15 +69,15 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
     const qta = quantita.trim() || "1";
     if (!scelto) {
       if (!q.trim()) { setErrore("Cerca un prodotto o scrivi la descrizione."); return; }
-      onAggiungi({ tipo: "T", descrizione: q.trim(), quantita: qta, fornitoreId: fornitoreId || null, note: note || null, etichetta: `${q.trim()} × ${qta}${forn ? ` · ${forn}` : ""}` });
+      onAggiungi({ tipo: "T", descrizione: q.trim(), quantita: qta, fornitoreId: fornitoreId || null, note: note || null, base: q.trim(), etichetta: `${q.trim()} × ${qta}${forn ? ` · ${forn}` : ""}` });
     } else if (scelto.tipo === "A") {
       const nome = scelto.label.split(" — ").slice(1).join(" — ") || scelto.label;
-      onAggiungi({ tipo: "A", articoloId: scelto.id, descrizione: nome, quantita: qta, fornitoreId: fornitoreId || null, note: note || null, etichetta: `${scelto.label} × ${qta}${forn ? ` · ${forn}` : scelto.fornitore ? ` · ${scelto.fornitore}` : ""}` });
+      onAggiungi({ tipo: "A", articoloId: scelto.id, descrizione: nome, quantita: qta, fornitoreId: fornitoreId || null, note: note || null, base: scelto.label, fornDefault: scelto.fornitore ?? null, etichetta: `${scelto.label} × ${qta}${forn ? ` · ${forn}` : scelto.fornitore ? ` · ${scelto.fornitore}` : ""}` });
     } else {
       if (scelto.griglia && !L.trim()) { setErrore(`Scrivi la misura (${scelto.unita}).`); return; }
       const misura = scelto.griglia ? ` ${L}${H ? `×${H}` : ""} ${scelto.unita}` : "";
       onAggiungi({ tipo: "P", brandId: scelto.brandId, tipologia: scelto.tipologia, colore, larghezza: L || null, altezza: H || null, descrizione: scelto.label, quantita: qta, fornitoreId: fornitoreId || null, note: note || null,
-        etichetta: `${scelto.label} — ${colore}${misura} × ${qta}${forn ? ` · ${forn}` : ""}` });
+        base: `${scelto.label} — ${colore}${misura}`, etichetta: `${scelto.label} — ${colore}${misura} × ${qta}${forn ? ` · ${forn}` : ""}` });
     }
     azzera();
   }
@@ -81,7 +91,7 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             <div className="mt-1 max-h-80 overflow-auto rounded border border-neutral-300 bg-white p-2 text-sm">
               {albero === null && <p className="text-xs text-neutral-500">Carico il listino…</p>}
               {albero?.length === 0 && <p className="text-xs text-neutral-500">Listino non disponibile.</p>}
-              {albero?.map((f) => (
+              {(albero && !albero.some((x) => x.nome === "OUTDOOR") ? [...albero, { nome: "OUTDOOR", gruppi: [] } as AlberoLeggero[number]] : albero)?.map((f) => (
                 <details key={f.nome} className="mb-1">
                   <summary className="cursor-pointer font-bold">{f.nome}</summary>
                   <div className="ml-3">
@@ -99,35 +109,38 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
                         </div>
                       </details>
                     ))}
+                    {f.nome === "OUTDOOR" && (
+                      <>
+                        <details className="mb-0.5">
+                          <summary className="cursor-pointer font-semibold text-slate-900">🔩 ANGOLARI IN ALLUMINIO <span className="text-xs font-normal text-neutral-500">su misura (Il Mastro)</span></summary>
+                          <div className="ml-3 mt-1 rounded border border-slate-300 bg-slate-50 p-2">
+                            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
+                              const forn = fornitori.find((f2) => f2.id === fornitoreId)?.ragioneSociale;
+                              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
+                                base: descrizione, fornDefault: "Il Mastro", fuori: extra.allegato ? `📎 ${extra.allegato.nome}` : null,
+                                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
+                              setApriAlbero(false);
+                            }} />
+                          </div>
+                        </details>
+                        <details className="mb-0.5">
+                          <summary className="cursor-pointer font-semibold text-amber-950">🪵 LEGNI PIALLATI <span className="text-xs font-normal text-neutral-500">su misura: spessore, larghezza, lunghezza libere</span></summary>
+                          <div className="ml-3 mt-1 rounded border border-amber-300 bg-amber-50 p-2">
+                            <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
+                              const forn = fornitori.find((f2) => f2.id === fornitoreId)?.ragioneSociale;
+                              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, base: descrizione, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}` });
+                              setApriAlbero(false);
+                            }} />
+                          </div>
+                        </details>
+                      </>
+                    )}
                   </div>
                 </details>
               ))}
             </div>
           )}
         </div>
-      )}
-      {!scelto && (
-        <details className="rounded border border-slate-300 bg-white p-2">
-          <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro)</summary>
-          <div className="mt-2">
-            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
-              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
-                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.nota ? ` · nota: ${extra.nota}` : ""}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
-            }} />
-          </div>
-        </details>
-      )}
-      {!scelto && (
-        <details className="rounded border border-amber-300 bg-white p-2">
-          <summary className="cursor-pointer text-xs font-bold text-amber-950">🪵 Legno piallato su misura (spessore, larghezza, lunghezza libere)</summary>
-          <div className="mt-2">
-            <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
-              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}${nota ? ` · nota: ${nota}` : ""}` });
-            }} />
-          </div>
-        </details>
       )}
       {!scelto ? (
         <div className="relative">
@@ -164,20 +177,20 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             </label>
             {scelto.griglia && (
               <>
-                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">L ({scelto.unita})<input value={L} onChange={(e) => setL(e.target.value)} inputMode="decimal" className={`${inp} w-24`} /></label>
-                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">H ({scelto.unita})<input value={H} onChange={(e) => setH(e.target.value)} inputMode="decimal" className={`${inp} w-24`} /></label>
+                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">L ({scelto.unita})<input value={L} onChange={(e) => setL(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="decimal" className={`${inp} w-24`} /></label>
+                {scelto.conAltezza !== false && (<label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">H ({scelto.unita})<input value={H} onChange={(e) => setH(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="decimal" className={`${inp} w-24`} /></label>)}
               </>
             )}
           </>
         )}
-        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Quantità<input value={quantita} onChange={(e) => setQuantita(e.target.value)} inputMode="numeric" className={`${inp} w-20`} /></label>
+        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Quantità<input value={quantita} onChange={(e) => setQuantita(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="numeric" className={`${inp} w-20`} /></label>
         <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Fornitore
           <select value={fornitoreId} onChange={(e) => setFornitoreId(e.target.value)} className={`${inp} max-w-60`}>
             <option value="">{scelto ? "quello del listino" : "da scegliere…"}</option>
             {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
           </select>
         </label>
-        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Note<input value={note} onChange={(e) => setNote(e.target.value)} className={`${inp} w-48`} /></label>
+        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Note<input value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} className={`${inp} w-48`} /></label>
         <button type="button" onClick={aggiungi} className="btn-3d btn-3d-teal text-sm px-3 py-1.5">➕ Aggiungi alla lista</button>
       </div>
       {errore && <p className="text-xs text-red-800">{errore}</p>}

@@ -5,9 +5,12 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
-import { salvaCampagna, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest, programmaCampagna, annullaProgrammazione } from "@/app/campagne-actions";
+import { salvaCampagna, completaProvince, provaCampagna, inviaCampagna, duplicaCampagna, eliminaCampagna, puoFareCampagne, rinominaCampagna, impostaAbTest, programmaCampagna, annullaProgrammazione } from "@/app/campagne-actions";
 import { contaDestinatari, filtriCampagna, emailCampagna, contenutoDi } from "@/lib/campagne/motore";
-import { CATEGORIE, SENZA_STATO, SITUAZIONI, STATI_RICEVUTA, giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
+import { CATEGORIE, SENZA_STATO, SITUAZIONI, STATI_RICEVUTA, giorniAllaScadenza, testoGiorni, whereRaggiungibile } from "@/lib/campagne/regole";
+import { PROVINCE } from "@/lib/geo/province";
+import { siglaDaTesto, provinciaDaComune, normalizza } from "@/lib/geo/localita";
+import ScegliLuoghi from "@/components/campagne/ScegliLuoghi";
 import CampiEmail from "@/components/campagne/CampiEmail";
 import GruppiAB from "@/components/campagne/GruppiAB";
 import FormAutoSalva from "@/components/FormAutoSalva";
@@ -27,7 +30,7 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
   const p = await searchParams;
   const c = await prisma.campagna.findUnique({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" }, include: { _count: { select: { invii: true } } } }, invii: { select: { id: true, clienteId: true, email: true, stato: true, motivo: true, inviataIl: true, apertaIl: true, aperture: true, clicIl: true, clic: true, varianteId: true }, orderBy: [{ clicIl: { sort: "desc", nulls: "last" } }, { apertaIl: { sort: "desc", nulls: "last" } }, { inviataIl: "desc" }] } } });
   if (!c) notFound();
-  const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati, altreCampagne] = await Promise.all([
+  const [brand, perStato, perProvenienza, commerciali, conti, telefoniste, richiamati, altreCampagne, perProvincia, perComune] = await Promise.all([
     prisma.brand.findMany({ orderBy: { nome: "asc" }, select: { nome: true } }),
     prisma.cliente.groupBy({ by: ["statoLead"], _count: { _all: true }, orderBy: { _count: { statoLead: "desc" } } }),
     prisma.cliente.groupBy({ by: ["origine"], _count: { _all: true }, orderBy: { _count: { origine: "desc" } } }),
@@ -37,11 +40,27 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
     prisma.leadEvento.count({ where: { tipo: "campagna.clic", testo: { contains: `campagna «${c.nome}»` } } }),
     // campagne già partite (o in partenza) da poter escludere: chi le ha ricevute non riceve questa
     prisma.campagna.findMany({ where: { id: { not: c.id }, OR: [{ invii: { some: {} } }, { id: { in: c.escludiCampagne } }] }, orderBy: [{ inviataIl: { sort: "desc", nulls: "last" } }, { createdAt: "desc" }], take: 30, select: { id: true, nome: true, inviataIl: true, _count: { select: { invii: { where: { stato: { in: STATI_RICEVUTA } } } } } } }),
+    // dove abitano i contatti raggiungibili (per scegliere province e comuni)
+    prisma.cliente.groupBy({ by: ["provincia"], where: whereRaggiungibile, _count: { _all: true } }),
+    prisma.cliente.groupBy({ by: ["comune"], where: { AND: [whereRaggiungibile, { comune: { not: null } }] }, _count: { _all: true }, orderBy: { _count: { comune: "desc" } }, take: 2500 }),
   ]);
   const n = (s: string) => c.invii.filter((i) => i.stato === s).length;
   const g = c.validaFino ? giorniAllaScadenza(c.validaFino, new Date()) : null;
   const ab = c.abTest && c.varianti.length > 0;
   const anteprime = ab ? c.varianti.map((v) => ({ nome: v.nome, preheader: v.preheader, m: emailCampagna(contenutoDi(c, v), { id: "anteprima", nome: "Mario Rossi" }) })) : [{ nome: "", preheader: c.preheader, m: emailCampagna(c, { id: "anteprima", nome: "Mario Rossi" }) }];
+  const contaProv = new Map<string, number>();
+  let senzaProvincia = 0;
+  for (const r of perProvincia) { const sg = siglaDaTesto(r.provincia); if (sg) contaProv.set(sg, (contaProv.get(sg) ?? 0) + r._count._all); else senzaProvincia += r._count._all; }
+  const opzioniProvince = PROVINCE.map((pr) => ({ ...pr, n: contaProv.get(pr.sigla) ?? 0 }));
+  const perNomeComune = new Map<string, { nome: string; n: number; max: number }>();
+  for (const r of perComune) {
+    if (!r.comune?.trim()) continue;
+    const k = normalizza(r.comune);
+    const e = perNomeComune.get(k);
+    if (!e) perNomeComune.set(k, { nome: r.comune.trim(), n: r._count._all, max: r._count._all });
+    else { e.n += r._count._all; if (r._count._all > e.max) { e.max = r._count._all; e.nome = r.comune.trim(); } }
+  }
+  const opzioniComuni = [...perNomeComune.values()].sort((a, b) => b.n - a.n).map((e) => ({ nome: e.nome, n: e.n, sigla: provinciaDaComune(e.nome) }));
   const stati = [...perStato.filter((s) => s.statoLead).map((s) => ({ v: s.statoLead!, n: s._count._all })), { v: SENZA_STATO, n: perStato.filter((s) => !s.statoLead).reduce((t, s) => t + s._count._all, 0) }];
 
   return (
@@ -79,17 +98,20 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             <p className="text-xs text-neutral-600 mb-1">Tipo (Cliente = ha già comprato da noi)</p>
             <div className="flex flex-wrap gap-2">{CATEGORIE.map((k) => <label key={k} className={casella(c.categorie.includes(k))}><input type="checkbox" name="categorie" value={k} defaultChecked={c.categorie.includes(k)} />{k}</label>)}</div>
           </div>
-          <div className="grid sm:grid-cols-3 gap-2">
+          <div className="grid sm:grid-cols-2 gap-2">
             <label className="text-xs text-neutral-600">Provenienza
               <select name="provenienza" defaultValue={c.provenienza ?? ""} className={`${inp} w-full`}><option value="">tutte</option>{perProvenienza.filter((x) => x.origine).map((x) => <option key={x.origine} value={x.origine!}>{x.origine} ({x._count._all})</option>)}</select>
             </label>
             <label className="text-xs text-neutral-600">Commerciale
               <select name="commercialeId" defaultValue={c.commercialeId ?? ""} className={`${inp} w-full`}><option value="">tutti</option>{commerciali.map((x) => <option key={x.id} value={x.id}>{x.nome}</option>)}</select>
             </label>
-            <label className="text-xs text-neutral-600">Provincia
-              <input name="provincia" defaultValue={c.provincia ?? ""} placeholder="es. TO" className={`${inp} w-full`} />
-            </label>
           </div>
+          {c.provincia && (
+            <label className="block text-xs text-neutral-600">Provincia (filtro scritto a mano nella versione di prima: puoi svuotarlo e usare la scelta qui sotto)
+              <input name="provincia" defaultValue={c.provincia} className={`${inp} w-full sm:w-48`} />
+            </label>
+          )}
+          <ScegliLuoghi province={opzioniProvince} comuni={opzioniComuni} scelteProvince={c.province} scelteComuni={c.comuni} senzaProvincia={senzaProvincia} azioneCompleta={completaProvince} />
           <div className="rounded border border-orange-200 bg-orange-50/60 p-3 space-y-2">
             <p className="text-xs text-neutral-700 font-semibold">Situazione del contatto (per trovare chi è già interessato)</p>
             <div className="flex flex-wrap gap-2">

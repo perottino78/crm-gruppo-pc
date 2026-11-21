@@ -2,6 +2,7 @@
 // Funzioni pure: testabili senza database.
 import type { Prisma } from "@prisma/client";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
+import { scritturePerRicerca } from "@/lib/geo/scritture";
 
 export const SENZA_STATO = "(nessuno)";
 export const CATEGORIE = ["Lead", "Cliente", "Account"] as const;
@@ -12,7 +13,12 @@ export type FiltriCampagna = {
   categorie: string[];
   provenienza?: string | null;
   commercialeId?: string | null;
+  /** vecchio campo di testo libero (campagne di prima) */
   provincia?: string | null;
+  /** sigle delle province scelte (più di una) */
+  province?: string[];
+  /** comuni scelti (più di uno) */
+  comuni?: string[];
   /** Solo questi clienti (es. chi ha un'offerta non chiusa); null/undefined = nessun limite */
   soloClienti?: string[] | null;
   /** Escludi questi clienti (es. chi ha già comprato) */
@@ -62,6 +68,11 @@ export function whereCampagna(f: FiltriCampagna): Prisma.ClienteWhereInput {
   if (f.provenienza) w.push({ origine: f.provenienza });
   if (f.commercialeId) w.push({ responsabileId: f.commercialeId });
   if (f.provincia?.trim()) w.push({ provincia: { contains: f.provincia.trim(), mode: "insensitive" } });
+  // più province e/o più comuni: basta stare in uno qualsiasi (sigla o nome della provincia, maiuscole indifferenti)
+  const luoghi: Prisma.ClienteWhereInput[] = [];
+  for (const v of scritturePerRicerca(f.province ?? [])) luoghi.push({ provincia: { equals: v, mode: "insensitive" } });
+  for (const c of (f.comuni ?? []).filter((x) => x.trim())) luoghi.push({ comune: { equals: c.trim(), mode: "insensitive" } });
+  if (luoghi.length) w.push({ OR: luoghi });
   if (f.soloClienti) w.push({ id: { in: f.soloClienti } });
   if (f.escludiClienti?.length) w.push({ id: { notIn: f.escludiClienti } });
   return { AND: w };

@@ -4,10 +4,10 @@
 export type RigaLead = {
   riga: number; // numero di riga nel file (la prima dati = 2)
   nome: string; telefono: string; email: string;
-  marchio: string; provenienza: string; comune: string; cap: string; prodotto: string; note: string;
+  marchio: string; provenienza: string; comune: string; provincia: string; cap: string; prodotto: string; note: string;
 };
 
-export const CAMPI = ["nome", "telefono", "email", "marchio", "provenienza", "comune", "cap", "prodotto", "note"] as const;
+export const CAMPI = ["nome", "telefono", "email", "marchio", "provenienza", "comune", "provincia", "cap", "prodotto", "note"] as const;
 export type Campo = (typeof CAMPI)[number];
 export const MAX_RIGHE = 250000;
 
@@ -22,6 +22,7 @@ const SINONIMI: Record<Campo, string[]> = {
   marchio: ["marchio", "brand", "divisione", "azienda"],
   provenienza: ["provenienza", "fonte", "origine", "source", "canale", "campagna"],
   comune: ["comune", "citta", "city", "localita", "paese"],
+  provincia: ["provincia", "prov", "sigla", "siglaprovincia", "provinciadiresidenza"],
   cap: ["cap", "codicepostale", "zip"],
   prodotto: ["prodotto", "interesse", "richiesta", "servizio", "interessato", "prodottointeresse"],
   note: ["note", "nota", "messaggio", "commento", "commenti", "annotazioni", "notes"],
@@ -72,7 +73,7 @@ export function righeDaCsv(testo: string): LetturaFile {
     const v = (c: Campo) => (indice[c] === undefined ? "" : (r[indice[c]!] ?? "").trim());
     const cognome = iCognome >= 0 ? (r[iCognome] ?? "").trim() : "";
     const nome = [v("nome"), cognome && !v("nome").toLowerCase().includes(cognome.toLowerCase()) ? cognome : ""].filter(Boolean).join(" ");
-    return { riga: n + 2, nome, telefono: v("telefono"), email: v("email"), marchio: v("marchio"), provenienza: v("provenienza"), comune: v("comune"), cap: v("cap"), prodotto: v("prodotto"), note: v("note") };
+    return { riga: n + 2, nome, telefono: v("telefono"), email: v("email"), marchio: v("marchio"), provenienza: v("provenienza"), comune: v("comune"), provincia: v("provincia"), cap: v("cap"), prodotto: v("prodotto"), note: v("note") };
   });
   return { righe, colonneTrovate: trovate, colonneNonCapite: nonCapite.filter((h) => chiaveIntestazione(h) !== "cognome") };
 }
@@ -134,9 +135,9 @@ const cella = (s: string) => (/[;"\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : 
 export function modelloCsv(marchi: string[]): string {
   const m = marchi[0] ?? "P&C", m2 = marchi.find((x) => /solaris/i.test(x)) ?? m;
   const righe = [
-    ["Nome e cognome", "Telefono", "Email", "Marchio", "Provenienza", "Comune", "CAP", "Prodotto", "Note"],
-    ["Mario Rossi", "333 1234567", "mario.rossi@esempio.it", m, "Fiera Torino 2026", "Rosta", "10090", "Serramenti", "Vuole il preventivo entro dicembre"],
-    ["Anna Bianchi", "011 9876543", "", m2, "Passaparola", "Torino", "10100", "Fotovoltaico", ""],
+    ["Nome e cognome", "Telefono", "Email", "Marchio", "Provenienza", "Comune", "Provincia", "CAP", "Prodotto", "Note"],
+    ["Mario Rossi", "333 1234567", "mario.rossi@esempio.it", m, "Fiera Torino 2026", "Rosta", "TO", "10090", "Serramenti", "Vuole il preventivo entro dicembre"],
+    ["Anna Bianchi", "011 9876543", "", m2, "Passaparola", "Torino", "TO", "10100", "Fotovoltaico", ""],
   ];
   return "﻿" + righe.map((r) => r.map(cella).join(";")).join("\r\n") + "\r\n";
 }

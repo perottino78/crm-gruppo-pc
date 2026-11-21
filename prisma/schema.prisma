@@ -798,6 +798,8 @@ model Rilievo {
   // Misure rilevate (testo libero strutturato dal tecnico) e osservazioni di cantiere
   misure     String?
   eseguitoIl DateTime?
+  // Verbale di sopralluogo (spunte, stato dell'immobile, pianificazione posa, prodotti da installare), compilato al «Carica rilievo»
+  verbale    Json?
   allegati   RilievoAllegato[]
   createdAt  DateTime          @default(now())
 }
@@ -1463,6 +1465,9 @@ model OrdineFornitore {
   inviatoA                String?
   inviatoDaNome           String?
   modalitaInvio           String? // EMAIL | MANUALE
+  // Spunta «il fornitore ha ricevuto l'ordine» (richiesta di Ugo 20/11/2026)
+  ricevutoIl              DateTime?
+  ricevutoDaNome          String?
   creatoDaNome            String?
   righe                   RigaOrdine[]
   createdAt               DateTime     @default(now())
@@ -1826,6 +1831,9 @@ model Campagna {
   provenienza           String?
   commercialeId         String?
   provincia             String?
+  // Dove abitano i destinatari: più province (sigle, es. TO, CN) e/o più comuni (richiesta di Ugo 20/11/2026); vuoto = ovunque. «provincia» sopra resta per le campagne vecchie.
+  province              String[]          @default([])
+  comuni                String[]          @default([])
   // Situazione del contatto: null (tutti) | OFFERTA_APERTA (ha avuto un'offerta mai confermata) | HA_COMPRATO | MAI_COMPRATO
   situazione            String?
   // Periodo delle offerte per OFFERTA_APERTA (data dell'offerta)

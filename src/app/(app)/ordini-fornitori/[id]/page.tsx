@@ -5,31 +5,28 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
-import { puoGestireOrdini, fileRilievo, documentiProgetto, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { puoGestireOrdini, fileRilievo, documentiProgetto, cartellaConsentita, nominativoCliente, firmaOrdine, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { statoOrdine, numeroOrdine, totaleOrdine, importoRiga } from "@/lib/ordini/calcoli";
 import { BRANDS } from "@/lib/brands";
 import {
   salvaTestataOrdine, salvaRigaOrdineFornitore, aggiungiRigaAOrdine, togliRigaDaOrdine, segnaOrdineInviatoAMano,
-  registraConfermaFornitore, registraArrivi, annullaOrdine, spostaRigaAFornitore,
+  registraConfermaFornitore, segnaOrdineRicevuto, registraArrivi, annullaOrdine, spostaRigaAFornitore,
 } from "@/app/ordini-actions";
 import InviaOrdine from "@/components/ordini/InviaOrdine";
 import Documenti from "@/components/documenti/Documenti";
 import { aggiungiArticoloAOrdine } from "@/app/articoli-actions";
 import { creaSchedaProduzione } from "@/app/schede-produzione-actions";
-import TabellaLegno from "@/components/ordini/TabellaLegno";
+import ModuloScheda from "@/components/ordini/ModuloScheda";
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
-import { valoriDaRighe } from "@/lib/ordini/legno";
 import { salvaLegnoInOrdine, salvaAngolariInOrdine } from "@/app/schede-produzione-actions";
-import TabellaAngolari from "@/components/ordini/TabellaAngolari";
 import { valoriAngolari } from "@/lib/ordini/angolari";
-import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
 const iso = (d?: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string; scheda?: string }> }) {
+export default async function OrdineFornitorePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string; scheda?: string; passo?: string }> }) {
   const u = await getCurrentUser();
   if (!u || !puoGestireOrdini(u)) notFound();
   const { id } = await params;
@@ -61,13 +58,29 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const modelloScelto = msg.scheda ? modelliScheda.find((m) => m.id === msg.scheda) ?? null : null;
   const s = statoOrdine(o.stato);
   const bozza = o.stato === "BOZZA", annullato = o.stato === "ANNULLATO";
+  // pagina a passi (Ugo 21/11/2026): si vede un passo alla volta; ?passo=righe|modulo|invio|conferma|arrivo|documenti
+  const PASSI = [
+    { k: "righe", n: "Righe e dati", i: "📋", fatto: o.righe.length > 0, attivo: true },
+    { k: "modulo", n: "Modulo del fornitore", i: "📐", fatto: schedeCreate.length > 0, attivo: true },
+    { k: "invio", n: "Invio", i: "✉️", fatto: !bozza, attivo: o.righe.length > 0 },
+    { k: "conferma", n: "Conferma del fornitore", i: "🧾", fatto: o.totaleConfermato !== null || !!o.numeroConfermaFornitore, attivo: !bozza },
+    { k: "arrivo", n: "Arrivo merce", i: "🚚", fatto: o.righe.length > 0 && o.righe.every((r) => r.arrivato), attivo: !bozza },
+    { k: "documenti", n: "Documenti", i: "📎", fatto: false, attivo: true },
+  ];
+  const passo = PASSI.find((x) => x.k === msg.passo)?.k ?? (msg.scheda ? "modulo" : bozza ? "righe" : "conferma");
+  const viPasso = (k: string) => `/ordini-fornitori/${o.id}?passo=${k}`;
+  const attivi = PASSI.filter((x) => x.attivo);
+  const posizione = attivi.findIndex((x) => x.k === passo);
   const t = totaleOrdine(o.righe);
   const nr = numeroOrdine(o);
   const emailForn = o.fornitore.emailOrdini ?? o.fornitore.email ?? "";
   const rilievo = await fileRilievo(o.commessaId, false);
-  const docProgetto = await documentiProgetto(o.commessaId, false);
-  const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.clienteFinale ? ` - rif. ${o.clienteFinale.split(" - ")[0]}` : ""}`;
-  const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${rilievo.length ? " con il rilievo misure" : ""}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con prezzi e data di consegna, citando il nostro numero d'ordine, rispondendo a ${EMAIL_ORDINI()}.\n\nGrazie, cordiali saluti\n${u.nome}\nUfficio ordini ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}\nTel. 011 1988 7497`;
+  // i file del rilievo salvati anche in cartella («Rilievi misura», «Foto rilievi») compaiono già tra i «file del rilievo»: niente doppioni
+  const nomiRilievo = new Set(rilievo.map((f) => f.nome));
+  const docProgetto = (await documentiProgetto(o.commessaId, false)).filter((d) => cartellaConsentita(u, d.cartella)).filter((d) => !(["Rilievi misura", "Foto rilievi"].includes(d.cartella) && nomiRilievo.has(d.nome.replace(/[^\w.\- ]+/g, "_"))));
+  const oggetto = `Ordine ${nr} - ${o.divisione === "Work & Services" ? "Work & Services S.r.l." : "P&C S.r.l."}${o.clienteFinale ? ` - rif. ${nominativoCliente(o.clienteFinale)}` : o.commessa ? ` - rif. Commessa ${o.commessa.numero}/${o.commessa.anno}` : ""}`;
+  const testo = `Buongiorno,\n\nin allegato il nostro ordine n. ${nr}${rilievo.length ? " con il rilievo misure" : ""}${o.consegnaRichiesta ? ` con consegna richiesta entro il ${dataIt(o.consegnaRichiesta)}` : ""}.\nVi chiediamo cortesemente di inviarci conferma d'ordine con prezzi e data di consegna, citando il nostro numero d'ordine, rispondendo a ${EMAIL_ORDINI()}.\n\nGrazie, cordiali saluti`;
+  const fo = firmaOrdine(u, o.divisione);
 
   return (
     <div className="p-4 md:p-6 space-y-4 max-w-6xl">
@@ -83,14 +96,29 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       {/* scorciatoie per l'ufficio ordini (richiesta di Ugo 20/11/2026): i moduli di rilievo interattivi e il rilievo della pratica */}
       {!annullato && (
         <div className="flex flex-wrap gap-2">
-          <a href="#scheda-produzione" className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</a>
-          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-blue px-4 py-2 text-sm">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
+          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
         </div>
       )}
       {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{msg.errore}</p>}
       {o.inviatoIl && <p className="text-xs text-neutral-600">Inviato il {o.inviatoIl.toLocaleString("it-IT")} {o.inviatoA ? `a ${o.inviatoA}` : ""} ({o.modalitaInvio === "EMAIL" ? "email dal CRM" : "a mano"}) da {o.inviatoDaNome}</p>}
 
+      {/* passi dell'ordine: si vede solo quello che serve in quel momento */}
+      {!annullato && (
+        <nav aria-label="Passi dell'ordine" className="flex flex-wrap gap-1.5">
+          {PASSI.map((x) => x.attivo ? (
+            <Link key={x.k} href={viPasso(x.k)} aria-current={x.k === passo ? "step" : undefined}
+              className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${x.k === passo ? "border-blue-600 bg-blue-600 text-white" : x.fatto ? "border-green-400 bg-green-50 text-green-900" : "border-neutral-300 bg-white text-neutral-700"}`}>
+              {x.fatto && x.k !== passo ? "✓" : x.i} {x.n}
+            </Link>
+          ) : (
+            <span key={x.k} className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-semibold text-neutral-400" title="Disponibile dopo l'invio dell'ordine">{x.i} {x.n}</span>
+          ))}
+        </nav>
+      )}
+
+      {passo === "righe" && (
+        <>
       <section className="bg-white border border-neutral-200 rounded-lg p-4">
         <h2 className="font-bold mb-2">Dati dell&apos;ordine</h2>
         <form action={salvaTestataOrdine} className="grid md:grid-cols-3 gap-2">
@@ -98,7 +126,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
           <label className="text-xs font-semibold">Consegna richiesta<input type="date" name="consegnaRichiesta" defaultValue={iso(o.consegnaRichiesta)} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold">Società / divisione<select name="divisione" defaultValue={o.divisione ?? "P&C"} className={`${inp} w-full`}>{BRANDS.map((b) => <option key={b.nome}>{b.nome}</option>)}</select></label>
           <label className="text-xs font-semibold">Trasporto<input name="trasporto" defaultValue={o.trasporto ?? ""} placeholder="es. a cura del fornitore / vettore" className={`${inp} w-full`} /></label>
-          <label className="text-xs font-semibold md:col-span-2">Cliente finale<input name="clienteFinale" defaultValue={o.clienteFinale ?? ""} className={`${inp} w-full`} /></label>
+          <label className="text-xs font-semibold md:col-span-2">Cliente finale <span className="font-normal text-neutral-500">(al fornitore va solo il nominativo, non l'indirizzo)</span><input name="clienteFinale" defaultValue={o.clienteFinale ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold">Indirizzo di consegna<input name="indirizzoSpedizione" defaultValue={o.indirizzoSpedizione ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold md:col-span-3">Riferimento<input name="riferimento" defaultValue={o.riferimento ?? ""} className={`${inp} w-full`} /></label>
           <label className="text-xs font-semibold md:col-span-3">Note per il fornitore (stampate sull&apos;ordine)<textarea name="note" defaultValue={o.note ?? ""} rows={2} className={`${inp} w-full`} /></label>
@@ -175,7 +203,10 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         )}
       </section>
 
-      {!annullato && (
+        </>
+      )}
+
+      {passo === "modulo" && !annullato && (
         <section id="scheda-produzione" className="bg-white border border-neutral-200 rounded-lg p-4 scroll-mt-4">
           <h2 className="font-bold mb-1">📐 Modulo di rilievo / scheda di produzione per il fornitore (misure definitive)</h2>
           {msg.scheda && msg.ok && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
@@ -196,59 +227,9 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
                 <Link href="/ordini-fornitori/schede" className="text-xs underline text-blue-800">gestisci i modelli</Link>
               </form>
               {modelloScelto && (
-                <form action={creaSchedaProduzione} className="space-y-2">
-                  <input type="hidden" name="ordineId" value={o.id} />
-                  <input type="hidden" name="modelloId" value={modelloScelto.id} />
-                  {(() => {
-                    const descritti = descriviCampi(modelloScelto.html);
-                    const { singoli, tabelle } = raggruppaCampi(descritti.map((d) => d.nome));
-                    const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
-                    return (
-                      <>
-                        {tabelle.map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegnoInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)} /> : (
-                          <div key={t.gruppo} className="overflow-x-auto">
-                            <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
-                            <table className="text-xs border-collapse">
-                              <thead><tr><th className="p-1" />{t.colonne.map((c) => <th key={c} className="border border-neutral-300 bg-neutral-50 px-1.5 py-0.5 font-semibold">{nomeCampo(c)}</th>)}</tr></thead>
-                              <tbody>
-                                {t.righe.map((r) => (
-                                  <tr key={r}>
-                                    <td className="px-1.5 font-semibold text-neutral-500">{r}</td>
-                                    {t.colonne.map((c) => <td key={c} className="border border-neutral-300 p-0"><input name={`campo_tab_${t.gruppo}_${r}_${c}`} className="w-20 px-1 py-1 text-xs" aria-label={`${nomeCampo(t.gruppo)} ${r} ${c}`} /></td>)}
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        ))}
-                        {singoli.filter((c) => !(c === "prezzo_m3" && tabelle.some((t) => t.gruppo === "legno"))).map((c) => {
-                          const d = tipoDi.get(c);
-                          if (d && d.tipo !== "testo") {
-                            return (
-                              <fieldset key={c} className="rounded border border-neutral-200 px-2 py-1">
-                                <legend className="text-xs font-semibold px-1">{nomeCampo(c)}</legend>
-                                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                                  {d.opzioni.map((o) => (
-                                    <label key={o} className="text-xs flex items-center gap-1 font-normal">
-                                      <input type={d.tipo === "scelta" ? "radio" : "checkbox"} name={`campo_${c}`} value={o} /> {o}
-                                    </label>
-                                  ))}
-                                </div>
-                              </fieldset>
-                            );
-                          }
-                          return (
-                            <label key={c} className="text-xs font-semibold block">{nomeCampo(c)}
-                              <textarea name={`campo_${c}`} rows={c.includes("misure") || c.includes("note") ? 4 : 1} className={`${inp} w-full`} placeholder={c.includes("misure_definitive") ? "Misure definitive per ogni elemento, es. Soggiorno – finestra 2 ante: L 1198 × H 1395 …" : ""} />
-                            </label>
-                          );
-                        })}
-                      </>
-                    );
-                  })()}
-                  <button className="btn-3d btn-3d-blue text-sm px-4 py-2">📄 Crea la scheda</button>
-                  <p className="text-[11px] text-neutral-500">Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all&apos;invio dell&apos;ordine.</p>
-                </form>
+                <ModuloScheda azione={creaSchedaProduzione} nascosti={[{ name: "ordineId", value: o.id }]} modello={modelloScelto} righeLegno={righeLegno} angolariIniziali={angolariIniziali}
+                  salvaLegno={salvaLegnoInOrdine} salvaAngolari={salvaAngolariInOrdine} modificabile={["BOZZA", "INVIATO", "CONFERMATO"].includes(o.stato)}
+                  nota="Il CRM aggiunge da solo ordine, cliente, pratica, consegna, tabella del materiale (senza prezzi) e le misure del rilievo. La scheda finisce tra i documenti da allegare all'invio dell'ordine." />
               )}
             </>
           )}
@@ -262,11 +243,11 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </section>
       )}
 
-      {!annullato && o.righe.length > 0 && (
+      {passo === "invio" && !annullato && o.righe.length > 0 && (
         <section id="invia" className="bg-white border border-neutral-200 rounded-lg p-4">
           <h2 className="font-bold mb-2">{bozza ? "Invia l'ordine al fornitore" : "Reinvia o scarica l'ordine"}</h2>
           {!emailForn && <p className="text-xs text-amber-800 mb-2">Il fornitore non ha l&apos;email ordini in anagrafica: inseriscila qui sotto (e poi in Impostazioni → Anagrafica per le prossime volte).</p>}
-          <InviaOrdine ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} />
+          <InviaOrdine fornitore={o.fornitore.ragioneSociale} ordineId={o.id} a={emailForn} cc="" oggetto={oggetto} testo={testo} pdfUrl={`/api/ordini-fornitori/${o.id}/pdf`} giaInviato={!bozza} fileRilievo={rilievo.map((f) => ({ id: f.id, nome: f.nome }))} documenti={docProgetto.map((d) => ({ id: d.id, nome: d.nome, cartella: d.cartella }))} mittente={EMAIL_ORDINI()} firma={fo.firma} colore={fo.colore} logo={fo.logo} tornaA={o.commessaId ? `/commesse/${o.commessaId}?passo=MATERIALE&fattoMateriale=${encodeURIComponent(`Ordine ${nr} inviato a ${o.fornitore.ragioneSociale}. Puoi inviare gli altri ordini o chiudere la pratica.`)}#materiale-pratica` : "/ordini-fornitori"} tornaTesto={o.commessaId ? "← Torna alla pratica" : "← Torna agli ordini"} />
           {bozza && (
             <form action={segnaOrdineInviatoAMano} className="mt-3 flex flex-wrap gap-2 items-center border-t border-neutral-200 pt-3">
               <input type="hidden" name="id" value={o.id} />
@@ -278,9 +259,18 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
         </section>
       )}
 
+      {passo === "invio" && !bozza && !annullato && (
+        <form action={segnaOrdineRicevuto} className={`rounded-lg border p-3 flex flex-wrap items-center gap-3 ${o.ricevutoIl ? "border-green-300 bg-green-50" : "border-amber-300 bg-amber-50"}`}>
+          <input type="hidden" name="id" value={o.id} />
+          <input type="hidden" name="ricevuto" value={o.ricevutoIl ? "0" : "1"} />
+          <span className="text-sm font-bold">{o.ricevutoIl ? `✅ Il fornitore ha ricevuto l'ordine (${o.ricevutoIl.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}${o.ricevutoDaNome ? `, spunta di ${o.ricevutoDaNome}` : ""})` : "📬 Il fornitore ha confermato di aver ricevuto l'ordine?"}</span>
+          <button className={`btn-3d ${o.ricevutoIl ? "btn-3d-outline" : "btn-3d-green"} text-sm px-3 py-1.5`}>{o.ricevutoIl ? "Togli la spunta" : "✓ Sì, l'hanno ricevuto"}</button>
+        </form>
+      )}
+
       {!bozza && !annullato && (
-        <div className="grid md:grid-cols-2 gap-4">
-          <section className="bg-white border border-neutral-200 rounded-lg p-4">
+        <div className="grid gap-4">
+          {passo === "conferma" && <section className="bg-white border border-neutral-200 rounded-lg p-4">
             <h2 className="font-bold mb-2">Conferma del fornitore</h2>
             <form action={registraConfermaFornitore} className="space-y-2">
               <input type="hidden" name="id" value={o.id} />
@@ -293,8 +283,8 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               <button className="btn-3d btn-3d-purple text-sm px-3 py-1.5">Salva conferma</button>
               <p className="text-xs text-neutral-500">La conferma d&apos;ordine del fornitore (PDF) caricala nei documenti qui sotto, cartella «Conferma del fornitore».</p>
             </form>
-          </section>
-          <section className="bg-white border border-neutral-200 rounded-lg p-4">
+          </section>}
+          {passo === "arrivo" && <section className="bg-white border border-neutral-200 rounded-lg p-4">
             <h2 className="font-bold mb-2">Arrivo merce</h2>
             <form action={registraArrivi} className="space-y-1">
               <input type="hidden" name="id" value={o.id} />
@@ -304,13 +294,13 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               ))}
               <button className="btn-3d btn-3d-green text-sm px-3 py-1.5 mt-2">Registra arrivi</button>
             </form>
-          </section>
+          </section>}
         </div>
       )}
 
-      <Documenti entita="ORDINE_FORNITORE" entitaId={o.id} titolo="Documenti dell'ordine (conferma, DDT, fattura)" />
+      {passo === "documenti" && <Documenti entita="ORDINE_FORNITORE" entitaId={o.id} titolo="Documenti dell'ordine (conferma, DDT, fattura)" />}
 
-      {!annullato && (
+      {passo === "documenti" && !annullato && (
         <details className="bg-white border border-red-200 rounded-lg p-3">
           <summary className="cursor-pointer text-sm text-red-800">Annulla ordine</summary>
           <form action={annullaOrdine} className="flex flex-wrap gap-2 items-center mt-2">
@@ -320,6 +310,14 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
             <span className="text-xs text-neutral-600">Le righe della commessa tornano «da ordinare».</span>
           </form>
         </details>
+      )}
+
+      {!annullato && attivi.length > 1 && (
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-3">
+          {posizione > 0 ? <Link href={viPasso(attivi[posizione - 1].k)} className="btn-3d btn-3d-outline text-sm px-4 py-2">← {attivi[posizione - 1].n}</Link> : <span />}
+          <span className="text-xs text-neutral-500">Passo {posizione + 1} di {attivi.length}</span>
+          {posizione >= 0 && posizione < attivi.length - 1 ? <Link href={viPasso(attivi[posizione + 1].k)} className="btn-3d btn-3d-blue text-sm px-4 py-2">{attivi[posizione + 1].n} →</Link> : <span />}
+        </div>
       )}
     </div>
   );

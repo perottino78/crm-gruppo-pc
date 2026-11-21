@@ -5,8 +5,18 @@ import type { Prisma, Utente } from "@prisma/client";
 import { costoPrevisto, numeroOrdine } from "./calcoli";
 import type { DatiPdfOrdine } from "./pdfOrdine";
 import { vociMateriale } from "./costi-materiale";
+import { firmaDi } from "@/lib/mail/firma";
+import { brandInfo } from "@/lib/brands";
+import { APP_URL } from "@/lib/mail/invio";
 
 export const puoGestireOrdini = (u: ConPermessi | null | undefined) => puo(u, "ordini");
+
+/**
+ * Modulo del fornitore al «Carica rilievo» (Ugo 21/11/2026): lo vedono l'ufficio ordini, gli amministratori (che hanno tutti i permessi)
+ * e il tecnico che fa il rilievo di quella pratica; commerciali, telefoniste e gli altri no.
+ */
+export const puoModuloRilievo = (u: (ConPermessi & { id: string }) | null | undefined, tecniciRilievi: string[]) =>
+  !!u && (puoGestireOrdini(u) || tecniciRilievi.includes(u.id));
 
 type RigaPrev = { id: string; prezzoUnitario: number; optionalPrezzo: number; quantita: number; prodotto: { brandId: string; tipologia: string } | null };
 
@@ -45,6 +55,17 @@ export function aziendaPerDivisione(divisione?: string | null) {
 }
 
 /** Dati per il PDF dell'ordine (usati anche dalla rotta di download). */
+/** Solo il nominativo del cliente («Nome Cognome - indirizzo…» → «Nome Cognome»): l'indirizzo e gli altri dati non vanno al fornitore. */
+export function nominativoCliente(clienteFinale: string | null | undefined): string {
+  return (clienteFinale ?? "").split(" - ")[0].trim();
+}
+
+/** Riferimento da mostrare al fornitore: «Commessa N/anno» (senza oggetto dell'offerta né dati del cliente). */
+export function riferimentoPerFornitore(riferimento: string | null | undefined, commessa?: { numero: number | string; anno: number } | null): string {
+  if (commessa) return `Commessa ${commessa.numero}/${commessa.anno}`;
+  return (riferimento ?? "").split(" - ")[0];
+}
+
 export async function datiPdfOrdine(id: string) {
   const o = await prisma.ordineFornitore.findUnique({ where: { id }, include: { fornitore: true, righe: { orderBy: { createdAt: "asc" } }, commessa: true } });
   if (!o) return null;
@@ -57,7 +78,8 @@ export async function datiPdfOrdine(id: string) {
       fornitore: { ragioneSociale: f.ragioneSociale, righe: [[f.indirizzo, [f.cap, f.comune, f.provincia ? `(${f.provincia})` : null].filter(Boolean).join(" ")].filter(Boolean).join(", "), f.partitaIva ? `P.IVA ${f.partitaIva}` : "", f.emailOrdini ?? f.email ?? ""].filter(Boolean) },
       testata: [
         ["Consegna richiesta", dataIt(o.consegnaRichiesta)], ["Commessa", o.commessa ? `${o.commessa.numero}/${o.commessa.anno}` : ""],
-        ["Cliente finale", o.clienteFinale ?? ""], ["Riferimento", o.riferimento ?? ""],
+        // al fornitore vanno il nominativo e il riferimento della pratica, mai l'indirizzo né altri dati del cliente
+        ["Cliente", nominativoCliente(o.clienteFinale)], ["Riferimento", riferimentoPerFornitore(o.riferimento, o.commessa)],
         ["Indirizzo di consegna", o.indirizzoSpedizione ?? ""], ["Trasporto", o.trasporto ?? ""],
       ] as [string, string][],
       righe: o.righe.map((r) => ({ codice: r.codice, codiceFornitore: r.codiceFornitore, descrizione: r.descrizione + (r.note ? ` (${r.note})` : ""), quantita: r.quantita, um: r.um, prezzoAcquisto: r.prezzoAcquisto, scontoAcquisto: r.scontoAcquisto })),
@@ -123,6 +145,25 @@ export async function fileRilievo(commessaId: string | null | undefined, conCont
 }
 
 /** File delle cartelle del progetto (pratica e offerta) da allegare all'ordine o alla richiesta al fornitore. */
+/**
+ * Cartelle del progetto che si possono allegare all'ordine al fornitore: l'amministratore le vede tutte,
+ * l'ufficio ordini solo i rilievi, le foto dei rilievi e le schede di produzione (modulo del fornitore).
+ */
+/**
+ * Firma dell'email dell'ordine: quella scritta da chi invia nel Profilo o, se manca, quella pronta con i dati dell'ufficio ordini;
+ * colore e logo del marchio dell'ordine (logo di P&C per i marchi senza logo).
+ */
+export function firmaOrdine(u: { nome: string; ruolo?: string | null; telefono?: string | null; firmaEmail?: string | null }, divisione: string | null | undefined): { firma: string; colore: string; logo: string } {
+  const info = brandInfo(divisione === "Work & Services" ? "Work & Services" : divisione);
+  const firma = firmaDi({ nome: u.nome, ruolo: u.ruolo, ufficio: "ORDINI", telefono: u.telefono, email: EMAIL_ORDINI(), firmaEmail: u.firmaEmail }, divisione);
+  return { firma, colore: info.primary === "#525252" ? "#EA580C" : info.primary, logo: `${APP_URL}${info.logoUrl ?? "/immagini/brand/pc_logo.png"}` };
+}
+
+export const CARTELLE_ORDINI = ["Rilievi misura", "Foto rilievi", "Schede produzione"];
+export function cartellaConsentita(u: { ruolo: string } | null | undefined, cartella: string): boolean {
+  return u?.ruolo === "AMMINISTRATORE" || CARTELLE_ORDINI.includes(cartella);
+}
+
 export async function documentiProgetto(commessaId: string | null | undefined, conContenuto = true, soloId?: string[]) {
   if (!commessaId) return [];
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { preventivoId: true } });

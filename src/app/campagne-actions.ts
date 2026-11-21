@@ -12,6 +12,8 @@ import { accodaCampagna, inviaProva, CHIAVE_PROMEMORIA_GIORNI, CHIAVE_PROMEMORIA
 import { eseguiDopoRisposta } from "@/lib/automazioni/motore";
 import { emailValida, leggiGiorniPromemoria, giorniAllaScadenza, SITUAZIONI } from "@/lib/campagne/regole";
 import { nomeGruppo, numeroGruppi } from "@/lib/campagne/abtest";
+import { PROVINCE } from "@/lib/geo/province";
+import { provinciaDelContatto } from "@/lib/geo/localita";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const lista = (fd: FormData, k: string) => fd.getAll(k).filter((x): x is string => typeof x === "string" && !!x.trim());
@@ -62,6 +64,41 @@ export async function impostaAbTest(fd: FormData) {
   torna(id, { ok: attivo ? "A/B test acceso: scegli quanti gruppi e scrivi una versione dell'email per ognuno." : "A/B test spento: si manda un'email unica." });
 }
 
+/**
+ * Completa le province dei contatti che non ce l'hanno, ricavandole dal CAP e dal comune (i lead importati da un file spesso hanno solo quelli),
+ * e salva le scelte di luogo fatte sulla pagina. Riempie solo i campi vuoti: non cambia mai una provincia già scritta.
+ */
+export async function completaProvince(fd: FormData) {
+  await marketing();
+  const id = str(fd, "id");
+  if (!id) return;
+  await prisma.campagna.update({
+    where: { id },
+    data: {
+      province: [...new Set(lista(fd, "province").map((x) => x.trim().toUpperCase()).filter((x) => PROVINCE.some((p) => p.sigla === x)))],
+      comuni: [...new Set(lista(fd, "comuni").map((x) => x.trim()).filter(Boolean))].slice(0, 500),
+    },
+  });
+  let ultimo = "", provati = 0, fatti = 0;
+  while (provati < 60_000) {
+    const righe = await prisma.cliente.findMany({
+      where: { id: { gt: ultimo }, OR: [{ provincia: null }, { provincia: "" }], AND: [{ OR: [{ comune: { not: null } }, { cap: { not: null } }] }] },
+      orderBy: { id: "asc" }, take: 2000, select: { id: true, comune: true, cap: true },
+    });
+    if (!righe.length) break;
+    ultimo = righe[righe.length - 1].id;
+    provati += righe.length;
+    const perSigla = new Map<string, string[]>();
+    for (const r of righe) {
+      const sigla = provinciaDelContatto({ comune: r.comune, cap: r.cap });
+      if (sigla) perSigla.set(sigla, [...(perSigla.get(sigla) ?? []), r.id]);
+    }
+    for (const [sigla, ids] of perSigla) fatti += (await prisma.cliente.updateMany({ where: { id: { in: ids }, OR: [{ provincia: null }, { provincia: "" }] }, data: { provincia: sigla } })).count;
+  }
+  revalidatePath(`/campagne/${id}`);
+  torna(id, { ok: `Province completate: ${fatti.toLocaleString("it-IT")} contatti su ${provati.toLocaleString("it-IT")} che non l'avevano${fatti < provati ? " (agli altri mancano CAP e comune, o il comune ha lo stesso nome in due province)" : ""}.` });
+}
+
 export async function salvaCampagna(fd: FormData) {
   await marketing();
   const id = str(fd, "id");
@@ -86,6 +123,8 @@ export async function salvaCampagna(fd: FormData) {
       preheader: (str(fd, "preheader") ?? "").slice(0, 200), formato, html: html.slice(0, 300_000), tracciamento: fd.get("tracciamento") === "on",
       marchi: lista(fd, "marchi"), stati: lista(fd, "stati"), categorie: lista(fd, "categorie"),
       provenienza: str(fd, "provenienza"), commercialeId: str(fd, "commercialeId"), provincia: str(fd, "provincia"),
+      province: [...new Set(lista(fd, "province").map((x) => x.trim().toUpperCase()).filter((x) => PROVINCE.some((p) => p.sigla === x)))],
+      comuni: [...new Set(lista(fd, "comuni").map((x) => x.trim()).filter(Boolean))].slice(0, 500),
       situazione: SITUAZIONI.some((x) => x.codice === str(fd, "situazione")) ? str(fd, "situazione") : null,
       offerteDal: str(fd, "offerteDal") ? daOraRoma(`${str(fd, "offerteDal")}T00:00`) : null,
       offerteAl: str(fd, "offerteAl") ? daOraRoma(`${str(fd, "offerteAl")}T23:59`) : null,
@@ -206,7 +245,7 @@ export async function duplicaCampagna(fd: FormData) {
   if (!id) return;
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" } } } });
   const n = await prisma.campagna.create({
-    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, escludiCampagne: c.escludiCampagne, creataDa: u.nome },
+    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, province: c.province, comuni: c.comuni, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, escludiCampagne: c.escludiCampagne, creataDa: u.nome },
   });
   if (fd.get("resta") === "1") { revalidatePath("/campagne"); redirect(`/campagne?ok=${encodeURIComponent(`Creata «${c.nome} (copia)».`)}`); }
   redirect(`/campagne/${n.id}?ok=${encodeURIComponent("Copia creata: aggiorna testo e scadenza, poi invia.")}`);

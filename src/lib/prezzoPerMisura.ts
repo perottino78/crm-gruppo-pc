@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { Prodotto } from "@prisma/client";
+import { unitaMisura } from "@/lib/prodotti";
 
 /**
  * I listini fornitore sono matrici dense larghezza×altezza (o larghezza×sporgenza)
@@ -206,4 +207,34 @@ export async function calcolaPrezzoAFormula(opts: {
     return calcolaMetroLineareFisso(opts.brandId, opts.tipologia, opts.larghezzaCm, parametri);
   }
   return null;
+}
+
+
+/**
+ * Sceglie la barra di listino che COPRE la misura scritta: la più corta tra quelle uguali o più lunghe (430 → 500), mai una più corta
+ * (Ugo 21/11/2026: «non fare metà strada, altrimenti è corto quello che mi serve»). Pura e testabile.
+ */
+export function barraPiuVicina(lunghezze: number[], scritta: number, unita: "cm" | "mm"): { lunghezza: number; letta: number; inMm: boolean } | null {
+  const l = [...new Set(lunghezze.filter((x) => x > 0))].sort((a, b) => a - b);
+  if (!l.length || !(scritta > 0)) return null;
+  const max = l[l.length - 1];
+  // il listino dei profili è in cm (400…700): chi scrive 4000 intende millimetri
+  let letta = scritta, inMm = false;
+  if (unita === "cm" && scritta > max * 3 && scritta / 10 <= max * 1.5) { letta = scritta / 10; inMm = true; }
+  // oltre la barra più lunga non si inventa un prezzo: resta «fuori listino» (si scrive come testo libero)
+  const barra = l.find((x) => x >= letta);
+  return barra === undefined ? null : { lunghezza: barra, letta, inMm };
+}
+
+/**
+ * Prodotti venduti a barre (solo lunghezza: profili, piantoni…): invece di rifiutare una misura che non è di listino
+ * («misura fuori listino») si prende la barra che copre la misura (Ugo 21/11/2026). Ritorna null se il prodotto non è a barre.
+ */
+export async function trovaBarraPiuVicina(opts: { brandId: string; tipologia: string; larghezza: number; colore?: string }): Promise<{ prodotto: Prodotto; richiesta: number; inMm: boolean } | null> {
+  const righe = await prisma.prodotto.findMany({ where: { brandId: opts.brandId, tipologia: opts.tipologia, ...(opts.colore ? { colore: opts.colore } : {}) } });
+  if (!righe.length || righe.some((r) => r.altezzaMm > 0) || !righe.some((r) => r.larghezzaMm > 0)) return null;
+  const sc = barraPiuVicina(righe.map((r) => r.larghezzaMm), opts.larghezza, unitaMisura(opts.tipologia));
+  if (!sc) return null;
+  const prodotto = righe.find((r) => r.larghezzaMm === sc.lunghezza);
+  return prodotto ? { prodotto, richiesta: opts.larghezza, inMm: sc.inMm } : null;
 }

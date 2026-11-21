@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import prodottiData from "../../../../../prisma/seed-data/compsfusi_prodotti.json";
+import { assicuraColoriCompsfusi } from "@/lib/listini/compsfusi-server";
 import modelliData from "../../../../../prisma/seed-data/compsfusi_modelli.json";
 
 export const dynamic = "force-dynamic";
@@ -55,7 +56,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json({ ok: true, prodottiCreati, prodottiAggiornati, prodottiInvariati, modelliAggiornati: modelli.length });
+    const coloriCreati = await assicuraColoriCompsfusi();
+    return NextResponse.json({ ok: true, coloriCreati, prodottiCreati, prodottiAggiornati, prodottiInvariati, modelliAggiornati: modelli.length });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }

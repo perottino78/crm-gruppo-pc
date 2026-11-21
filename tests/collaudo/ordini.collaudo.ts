@@ -58,7 +58,7 @@ async function main() {
   await senzaRedirect(A.creaOrdineDaCommessa(fd({ commessaId: c.id, fornitoreId: fint.id })));
   const o1 = await prisma.ordineFornitore.findFirstOrThrow({ include: { righe: true } });
   verifica(o1.numero === 1 && o1.anno === new Date().getFullYear() && o1.righe.length === 1 && o1.righe[0].id === rf.id, "ordine 1 con la riga della finestra");
-  verifica(o1.clienteFinale === "ROSSI MARIO - Via Roma 1 10100 Torino (TO)" && o1.riferimento === "Commessa 7/2026 - Serramenti casa" && o1.divisione === "P&C" && o1.stato === "BOZZA", "testata compilata", o1);
+  verifica(o1.clienteFinale === "ROSSI MARIO - Via Roma 1 10100 Torino (TO)" && o1.riferimento === "Commessa 7/2026" && o1.divisione === "P&C" && o1.stato === "BOZZA", "testata compilata", o1);
   await senzaRedirect(A.creaOrdineDaCommessa(fd({ commessaId: c.id, fornitoreId: fint.id })));
   verifica(await prisma.ordineFornitore.count() === 1, "nessun secondo ordine se non ci sono righe libere");
   await Promise.all([1, 2, 3].map(() => senzaRedirect(A.creaOrdineLibero(fd({ fornitoreId: spi.id, divisione: "Work & Services" })))));
@@ -71,7 +71,7 @@ async function main() {
   const res = await pdfOrdine(new Request("http://x/?scarica=1"), { params: Promise.resolve({ id: o1.id }) });
   const pdf = Buffer.from(await res.arrayBuffer()).toString("latin1");
   verifica(res.status === 200 && pdf.startsWith("%PDF") && /attachment/.test(res.headers.get("content-disposition") ?? ""), "PDF scaricabile");
-  verifica(pdf.includes("Maniglia extra \\(prova\\)") && pdf.includes("ROSSI MARIO"), "il PDF contiene righe e cliente");
+  verifica(pdf.includes("Maniglia extra \\(prova\\)") && pdf.includes("ROSSI MARIO") && !pdf.includes("Via Roma") && pdf.includes("Commessa 7/2026"), "il PDF contiene righe, nominativo e riferimento (niente indirizzo del cliente)");
 
   console.log("5. Invio: senza servizio configurato, poi con servizio simulato");
   delete process.env.EMAIL_PROVIDER;
