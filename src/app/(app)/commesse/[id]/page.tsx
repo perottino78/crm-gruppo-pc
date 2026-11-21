@@ -122,7 +122,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
   // modulo del fornitore al «Carica rilievo» (Ugo 20/11/2026): modelli, legno e angolari già nel materiale, schede già salvate
   const mostraModulo = puoModuloRilievo(utente, c.rilievi.map((x) => x.tecnicoId)) && c.rilievi.some((x) => x.stato !== "ANNULLATO");
-  let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
+  const fornitoriModulo = [...new Map([
+    ...c.righeOrdine.filter((r) => r.fornitoreId && !r.ordineFornitoreId && !r.codice?.startsWith("LEGNO-") && !r.codice?.startsWith("ANGALL-")).map((r) => [r.fornitoreId!, r.fornitoreNome ?? "Fornitore"] as const),
+  ]).entries()].map(([id, nome]) => ({ id, nome })).sort((a, b) => a.nome.localeCompare(b.nome));
+  let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null; fornitoreId: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
   if (mostraModulo) {
     await assicuraModelliPronti();
     await assicuraArticoliLegno();
@@ -131,7 +134,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       prisma.rigaOrdine.findMany({ where: { commessaId: c.id, ordineFornitoreId: null, OR: [{ codice: { startsWith: "LEGNO-" } }, { codice: { startsWith: "ANGALL-" } }] }, select: { codice: true, quantita: true } }),
       prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: c.id, cartella: "Schede produzione" }, select: { id: true, nome: true, createdAt: true, caricatoDaNome: true }, orderBy: { createdAt: "desc" }, take: 10 }),
     ]);
-    moduloDati = { modelli: modelli.map((m) => ({ id: m.id, nome: m.nome, html: m.html, fornitore: m.fornitore?.ragioneSociale ?? null })), legniPratica, salvate };
+    moduloDati = { modelli: modelli.map((m) => ({ id: m.id, nome: m.nome, html: m.html, fornitore: m.fornitore?.ragioneSociale ?? null, fornitoreId: m.fornitoreId })), legniPratica, salvate };
   }
   const consegna = statoConsegna(c.consegnaPrevista, c.stato);
   const [tassonomia, progettiCliente] = await Promise.all([
@@ -209,7 +212,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                   <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
                 </form>
                 {modello && (
-                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} righeLegno={moduloDati.legniPratica}
+                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} fornitori={modello.fornitoreId && !fornitoriModulo.some((f) => f.id === modello.fornitoreId) ? [...fornitoriModulo, { id: modello.fornitoreId, nome: modello.fornitore ?? "Fornitore" }] : fornitoriModulo} fornitoreIniziale={modello.fornitoreId ?? (fornitoriModulo.length === 1 ? fornitoriModulo[0].id : undefined)} righeLegno={moduloDati.legniPratica}
                     angolariIniziali={{ iniziali: ap.valori, proposta: ap.proposta }} salvaLegno={salvaLegnoInPratica} salvaAngolari={salvaAngolariInPratica} modificabile dove="nella pratica"
                     testoPulsante="📄 Salva il modulo" nota="Il CRM aggiunge da solo cliente, pratica, materiale e le misure del rilievo. Legno e angolari con «Salva» entrano anche nel materiale da ordinare." />
                 )}

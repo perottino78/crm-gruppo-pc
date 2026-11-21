@@ -6,7 +6,7 @@ import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-pr
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 
-export default function ModuloScheda({ azione, nascosti, modello, righeLegno, angolariIniziali, salvaLegno, salvaAngolari, modificabile, testoPulsante = "📄 Crea la scheda", nota, dove }: {
+export default function ModuloScheda({ azione, nascosti, modello, righeLegno, angolariIniziali, salvaLegno, salvaAngolari, modificabile, testoPulsante = "📄 Crea la scheda", nota, dove, fornitori, fornitoreIniziale }: {
   azione: (fd: FormData) => Promise<void>;
   nascosti: { name: string; value: string }[];
   modello: { id: string; html: string };
@@ -18,12 +18,23 @@ export default function ModuloScheda({ azione, nascosti, modello, righeLegno, an
   testoPulsante?: string;
   nota?: string;
   dove?: string;
+  /** al rilievo: per quale fornitore è il modulo (la tabella del materiale ha solo le sue righe) */
+  fornitori?: { id: string; nome: string }[];
+  fornitoreIniziale?: string;
 }) {
   const modelloScelto = modello;
   return (
     <form action={azione} className="space-y-2">
       {nascosti.map((h) => <input key={h.name} type="hidden" name={h.name} value={h.value} />)}
       <input type="hidden" name="modelloId" value={modelloScelto.id} />
+      {fornitori && (
+        <label className="block text-xs font-bold text-neutral-800">Fornitore di questo modulo (nella tabella del materiale vanno solo i suoi prodotti)
+          <select name="fornitoreId" defaultValue={fornitoreIniziale ?? ""} className={`${inp} block w-full max-w-md`}>
+            <option value="">— scegli il fornitore —</option>
+            {fornitori.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
+          </select>
+        </label>
+      )}
       {(() => {
         const descritti = descriviCampi(modelloScelto.html);
         const { singoli, tabelle } = raggruppaCampi(descritti.map((d) => d.nome));

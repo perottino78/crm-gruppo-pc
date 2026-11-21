@@ -88,7 +88,7 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             <div className="mt-1 max-h-80 overflow-auto rounded border border-neutral-300 bg-white p-2 text-sm">
               {albero === null && <p className="text-xs text-neutral-500">Carico il listino…</p>}
               {albero?.length === 0 && <p className="text-xs text-neutral-500">Listino non disponibile.</p>}
-              {albero?.map((f) => (
+              {(albero && !albero.some((x) => x.nome === "OUTDOOR") ? [...albero, { nome: "OUTDOOR", gruppi: [] } as AlberoLeggero[number]] : albero)?.map((f) => (
                 <details key={f.nome} className="mb-1">
                   <summary className="cursor-pointer font-bold">{f.nome}</summary>
                   <div className="ml-3">
@@ -106,36 +106,38 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
                         </div>
                       </details>
                     ))}
+                    {f.nome === "OUTDOOR" && (
+                      <>
+                        <details className="mb-0.5">
+                          <summary className="cursor-pointer font-semibold text-slate-900">🔩 ANGOLARI IN ALLUMINIO <span className="text-xs font-normal text-neutral-500">su misura (Il Mastro)</span></summary>
+                          <div className="ml-3 mt-1 rounded border border-slate-300 bg-slate-50 p-2">
+                            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
+                              const forn = fornitori.find((f2) => f2.id === fornitoreId)?.ragioneSociale;
+                              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
+                                base: descrizione, fornDefault: "Il Mastro", fuori: extra.allegato ? `📎 ${extra.allegato.nome}` : null,
+                                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
+                              setApriAlbero(false);
+                            }} />
+                          </div>
+                        </details>
+                        <details className="mb-0.5">
+                          <summary className="cursor-pointer font-semibold text-amber-950">🪵 LEGNI PIALLATI <span className="text-xs font-normal text-neutral-500">su misura: spessore, larghezza, lunghezza libere</span></summary>
+                          <div className="ml-3 mt-1 rounded border border-amber-300 bg-amber-50 p-2">
+                            <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
+                              const forn = fornitori.find((f2) => f2.id === fornitoreId)?.ragioneSociale;
+                              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, base: descrizione, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}` });
+                              setApriAlbero(false);
+                            }} />
+                          </div>
+                        </details>
+                      </>
+                    )}
                   </div>
                 </details>
               ))}
             </div>
           )}
         </div>
-      )}
-      {!scelto && (
-        <details className="rounded border border-slate-300 bg-white p-2">
-          <summary className="cursor-pointer text-xs font-bold text-slate-900">🔩 Angolare in alluminio su misura (Il Mastro)</summary>
-          <div className="mt-2">
-            <ConfiguraAngolare prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, extra) => {
-              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "ANG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: extra.nota || null, allegato: extra.allegato,
-                base: descrizione, fornDefault: "Il Mastro", fuori: extra.allegato ? `📎 ${extra.allegato.nome}` : null,
-                etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : " · Il Mastro"}${extra.allegato ? ` · 📎 ${extra.allegato.nome}` : ""}` });
-            }} />
-          </div>
-        </details>
-      )}
-      {!scelto && (
-        <details className="rounded border border-amber-300 bg-white p-2">
-          <summary className="cursor-pointer text-xs font-bold text-amber-950">🪵 Legno piallato su misura (spessore, larghezza, lunghezza libere)</summary>
-          <div className="mt-2">
-            <ConfiguraLegno prezzo="costo" testoPulsante="➕ Aggiungi alla lista" onScegli={(x, codice, descrizione, nota) => {
-              const forn = fornitori.find((f) => f.id === fornitoreId)?.ragioneSociale;
-              onAggiungi({ tipo: "LEG", codice, descrizione, quantita: String(x.pezzi), fornitoreId: fornitoreId || null, note: nota || null, base: descrizione, etichetta: `${descrizione} × ${x.pezzi}${forn ? ` · ${forn}` : ""}` });
-            }} />
-          </div>
-        </details>
       )}
       {!scelto ? (
         <div className="relative">

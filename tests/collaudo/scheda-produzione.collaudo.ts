@@ -138,13 +138,32 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const ap = await prisma.rigaOrdine.findMany({ where: { commessaId: com.id, ordineFornitoreId: null, codice: { startsWith: "ANGALL-" } } });
   verifica(ap.length === 1 && ap[0].quantita === 2 && ap[0].fornitoreId === mastroP.id && (ap[0].costoPrevisto ?? 0) > 0, "angolari nel materiale della pratica, fornitore Il Mastro", ap);
 
+  console.log("La tabella del materiale ha solo i prodotti del fornitore del modulo");
+  const c3 = await prisma.soggetto.create({ data: { ragioneSociale: "C3 SYSTEMS", ruoli: ["FORNITORE"] } });
+  await prisma.rigaOrdine.deleteMany({ where: { commessaId: com.id, ordineFornitoreId: null } });
+  await prisma.rigaOrdine.createMany({ data: [
+    { commessaId: com.id, descrizione: "VETRATA SCINTILLA 390x300", quantita: 1, fornitoreId: c3.id, fornitoreNome: "C3 SYSTEMS" },
+    { commessaId: com.id, descrizione: "Angolare L in alluminio", quantita: 1, codice: "ANGALL-L-32X102X0-15-EST-C6-3500-MI", complemento: true, fornitoreId: null },
+    { commessaId: com.id, descrizione: "Legno piallato 50×100", quantita: 1, codice: "LEGNO-50X100-3500", complemento: true, fornitoreId: null },
+    { commessaId: com.id, descrizione: "Altro prodotto di un altro fornitore", quantita: 1, fornitoreId: forn.id, fornitoreNome: "Serramenti Srl" },
+  ] as never });
+  const msg2 = (await prisma.schedaProduzioneModello.findFirst({ where: { nome: "Seeglass" } })) ?? (await prisma.schedaProduzioneModello.create({ data: { nome: "Seeglass", html: MODELLO_SEEGLASS } }));
+  console.log("   ", await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: msg2.id, fornitoreId: c3.id }))));
+  const dSg = await prisma.documento.findFirstOrThrow({ where: { entita: "COMMESSA", entitaId: com.id, nome: { contains: "C3 SYSTEMS" } } });
+  const hSg = dSg.contenuto.toString("utf-8");
+  verifica(hSg.includes("VETRATA SCINTILLA") && !hSg.includes("Angolare") && !hSg.includes("Legno piallato") && !hSg.includes("Altro prodotto"), "solo la vetrata del fornitore: niente angolari, legni o prodotti di altri fornitori");
+  await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: msg2.id })));
+  const dVuoto = await prisma.documento.findMany({ where: { entita: "COMMESSA", entitaId: com.id, nome: { contains: "Seeglass" } } });
+  verifica(dVuoto.every((d) => !d.contenuto.toString("utf-8").includes("Angolare")), "senza fornitore scelto la tabella non pesca prodotti a caso");
+
   console.log("Chi può compilare il modulo al rilievo");
   const adminU = (globalThis as { __utente?: unknown }).__utente;
-  const commU = await prisma.utente.create({ data: { nome: "Commerciale", email: "c9@c.it", username: "comm9", passwordHash: "x", ruolo: "COMMERCIALE" } as never });
+  const sfx = String(Date.now());
+  const commU = await prisma.utente.create({ data: { nome: "Commerciale", email: `c${sfx}@c.it`, username: `comm${sfx}`, passwordHash: "x", ruolo: "COMMERCIALE" } as never });
   (globalThis as { __utente?: unknown }).__utente = commU;
   const rifiuto = await A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id })).then(() => "", (e) => String(e));
   verifica(rifiuto.includes("Non autorizzato"), "un commerciale non compila il modulo del fornitore", rifiuto);
-  const tecU = await prisma.utente.create({ data: { nome: "Tecnico", email: "t9@t.it", username: "tec9", passwordHash: "x", ruolo: "TECNICO" } as never });
+  const tecU = await prisma.utente.create({ data: { nome: "Tecnico", email: `t${sfx}@t.it`, username: `tec${sfx}`, passwordHash: "x", ruolo: "TECNICO" } as never });
   await prisma.rilievo.create({ data: { commessaId: com.id, tecnicoId: tecU.id, dataOra: new Date() } });
   (globalThis as { __utente?: unknown }).__utente = tecU;
   const okTec = await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "x" })));
