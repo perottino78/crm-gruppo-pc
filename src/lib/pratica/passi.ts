@@ -98,8 +98,8 @@ function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
     case "PROGETTO": return "Crea il progetto della pratica: chiamata di benvenuto e fattura di acconto si fanno dentro il progetto.";
     case "BENVENUTO": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Chiama il cliente per dargli il benvenuto e annota com'è andata.";
     case "FATTURA": return !d.progettoCreatoIl ? "Prima si crea il progetto." : "Emetti la fattura di acconto, poi segnala che è fatta: l'apertura della pratica è completa.";
-    case "INCASSO": return "Registra il pagamento dell'acconto (o il finanziamento approvato) e spunta «Manda il ringraziamento al cliente»: parte dalla casella della fatturazione. Il task si chiude da solo.";
-    case "RILIEVO_APP": return !d.viaLibera ? "Serve l'acconto incassato: poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
+    case "INCASSO": return "Registra i pagamenti (acconto ed eventuali rate intermedie) e spunta «Manda il ringraziamento al cliente»: parte dalla casella della fatturazione. Con il 50% incassato (o il finanziamento approvato da Giorgia) il task si chiude da solo e parte il rilievo.";
+    case "RILIEVO_APP": return !d.viaLibera ? "Serve il 50% incassato (o il finanziamento approvato, o lo sblocco dell'amministratore): poi si fissa il rilievo." : !d.progettoCreatoIl ? "Serve il progetto creato." : "Scegli rilevatore, giorno e ora.";
     case "RILIEVO": return "Il tecnico carica misure, PDF e foto del rilievo.";
     case "MATERIALE": return d.riordino ? "Posa parziale: aggiungi e ordina il materiale mancante, rotto o in garanzia." : "Controlla i prodotti, conferma il materiale e invia gli ordini ai fornitori (email dal CRM o caricati sul portale del fornitore).";
     case "ARRIVO": return "Il magazzino carica bolle e fatture del materiale in arrivo.";

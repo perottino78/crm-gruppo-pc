@@ -37,6 +37,10 @@ import {
   aggiornaCondizioniAcconto,
   registraIncassoAcconto,
   annullaIncassoAcconto,
+  aggiungiRataIntermedia,
+  togliRataIntermedia,
+  chiediSbloccoRilievo,
+  sbloccaRilievo,
   inviaRingraziamentoAcconto,
   aggiornaFinanziamento,
   programmaRilievo,
@@ -82,6 +86,10 @@ import { documentiDi } from "@/lib/documenti/server";
 import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
 import { TIPI_INTERVENTO, nomeIntervento, eAperto } from "@/lib/pratica/interventi";
 import { perInput } from "@/lib/calendario/tempo";
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
+import { mancaAllaSoglia } from "@/lib/pratica/soglia";
+import { residuoScadenza } from "@/lib/amministrazione/server";
+import { puo } from "@/lib/permessi/catalogo";
 import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
@@ -193,7 +201,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const gestoreIncassi = admin || utente?.ruolo === "AMMINISTRATIVO";
   const stato = STATI_COMMESSA[c.stato] ?? { label: c.stato, cls: "bg-neutral-200" };
   const finanz = c.accontoTipo === "FINANZIAMENTO";
-  const viaLibera = finanz ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  // il rilievo parte con il 50% incassato, il finanziamento approvato o lo sblocco dell'amministratore (Debora 21/11/2026)
+  const soglia = await statoSogliaRilievo(c.id);
+  const viaLibera = !!soglia?.viaLibera;
+  const puoFinanziamento = gestoreIncassi || (!!utente && puo(utente, "fatturazione"));
+  const rateIntermedie = await prisma.scadenza.findMany({ where: { commessaId: c.id, origine: { startsWith: "COMMESSA_RATA_" } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { origine: "asc" } });
   const percorsoProg = await percorsoDiCommessa(c.id);
   // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
   const pp = await passiDiCommessa(c.id);
@@ -538,6 +550,51 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           )}
           {viaLibera && <span className="ml-2 text-green-800 font-semibold">✔ via libera al rilievo</span>}
         </p>
+        {!finanz && soglia && (
+          <div className={`mb-3 rounded border px-3 py-2 text-sm ${viaLibera ? "border-green-200 bg-green-50 text-green-900" : "border-amber-300 bg-amber-50 text-amber-950"}`}>
+            <p><b>Incassato finora {eur(soglia.incassato)}</b> su {eur(soglia.totale)} ({soglia.totale > 0 ? Math.round((soglia.incassato / soglia.totale) * 100) : 0}%). Il rilievo parte con il 50% incassato = <b>{eur(soglia.soglia)}</b>{soglia.sbloccato ? <> · <b>sbloccato dall&apos;amministratore</b>{c.rilievoSbloccatoDaNome ? ` (${c.rilievoSbloccatoDaNome})` : ""}</> : !viaLibera ? <> · mancano <b>{eur(mancaAllaSoglia(soglia.totale, soglia.incassato))}</b></> : null}.</p>
+            {!viaLibera && (
+              c.rilievoSbloccoRichiestoIl ? (
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <span>🔓 Sblocco chiesto all&apos;amministratore il {c.rilievoSbloccoRichiestoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}{c.rilievoSbloccoMotivo ? `: ${c.rilievoSbloccoMotivo}` : ""}.</span>
+                  {admin && <form action={sbloccaRilievo}><input type="hidden" name="commessaId" value={c.id} /><button className="btn-3d btn-3d-orange text-xs px-3 py-1.5">🔓 Sblocca il rilievo</button></form>}
+                </div>
+              ) : (
+                <form action={chiediSbloccoRilievo} className="mt-2 flex flex-wrap items-center gap-2">
+                  <input type="hidden" name="commessaId" value={c.id} />
+                  <input name="motivo" placeholder="Perché partire lo stesso? es. cliente storico, paga il resto alla consegna" className={`${inp} flex-1 min-w-56`} />
+                  <button className="btn-3d btn-3d-outline text-xs px-3 py-1.5">🔓 Chiedi all&apos;amministratore di partire col rilievo</button>
+                  {admin && <span className="text-xs">oppure</span>}
+                </form>
+              )
+            )}
+            {!viaLibera && admin && !c.rilievoSbloccoRichiestoIl && <form action={sbloccaRilievo} className="mt-1"><input type="hidden" name="commessaId" value={c.id} /><button className="btn-3d btn-3d-orange text-xs px-3 py-1.5">🔓 Sblocca subito il rilievo (amministratore)</button></form>}
+          </div>
+        )}
+        {!finanz && (rateIntermedie.length > 0 || puoFinanziamento) && (
+          <div className="mb-3 rounded border border-neutral-200 bg-white px-3 py-2">
+            <p className="text-sm font-bold text-neutral-900">📆 Rate intermedie <span className="font-normal text-neutral-600">— fra acconto e saldo; si registrano nello scadenzario come le altre e il saldo cala di tanto</span></p>
+            {rateIntermedie.map((r) => {
+              const pagato = Math.max(0, r.importo - residuoScadenza(r));
+              return (
+                <p key={r.id} className="text-sm text-neutral-900 flex flex-wrap items-center gap-2 border-b border-neutral-100 py-1">
+                  <span>{r.descrizione} · <b>{eur(r.importo)}</b>{r.dataScadenza ? ` · entro il ${r.dataScadenza.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : ""} · {r.stato === "PAGATA" ? "✅ pagata" : pagato > 0 ? `pagata in parte (${eur(pagato)})` : "da pagare"}</span>
+                  {puoFinanziamento && pagato === 0 && r.stato !== "PAGATA" && <form action={togliRataIntermedia}><input type="hidden" name="id" value={r.id} /><button className="text-xs text-red-700 underline">togli</button></form>}
+                </p>
+              );
+            })}
+            {puoFinanziamento && (
+              <form action={aggiungiRataIntermedia} className="mt-2 flex flex-wrap items-end gap-2">
+                <input type="hidden" name="commessaId" value={c.id} />
+                <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Importo €</label><input name="importo" inputMode="decimal" required className={`${inp} w-28`} /></div>
+                <div className="flex flex-col gap-1"><label className="text-[11px] font-bold text-neutral-800">Entro il</label><input type="date" name="data" className={inp} /></div>
+                <div className="flex flex-col gap-1 flex-1 min-w-40"><label className="text-[11px] font-bold text-neutral-800">Descrizione (facoltativa)</label><input name="descrizione" placeholder="es. Seconda rata alla firma del rilievo" className={`${inp} w-full`} /></div>
+                <button className="btn-3d btn-3d-blue text-sm px-3 py-1.5">➕ Aggiungi rata</button>
+                <Link href="/amministrazione/scadenzario" className="text-xs text-blue-800 underline">registra i pagamenti nello scadenzario</Link>
+              </form>
+            )}
+          </div>
+        )}
 
         {!finanz && c.accontoIncassato && (
           <div className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">
@@ -589,7 +646,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <p className="text-xs text-neutral-600 mb-3">L&apos;incasso dell&apos;acconto viene registrato dall&apos;amministrazione.</p>
         )}
 
-        {finanz && gestoreIncassi && (
+        {finanz && <p className="text-xs text-neutral-600 mb-1">Quando la finanziaria approva, la fatturazione (Giorgia) segna «Approvato»: da lì parte il rilievo.</p>}
+        {finanz && puoFinanziamento && (
           <form action={aggiornaFinanziamento} className="flex flex-wrap items-end gap-2 mb-3">
             <input type="hidden" name="id" value={c.id} />
             <select name="finanziamentoStato" defaultValue={c.finanziamentoStato ?? "IN_ISTRUTTORIA"} className={inp}>

@@ -762,6 +762,11 @@ model Commessa {
   fatturaAccontoDaNome    String?
   // Posa parziale per materiale mancante, rotto o in garanzia: da quando si riordina (si azzera a materiale di nuovo completo) e cosa serve
   riordinoIl              DateTime?
+  // Rilievo senza il 50% incassato (Debora 21/11/2026): si chiede all'amministratore, che lo sblocca
+  rilievoSbloccoRichiestoIl DateTime?
+  rilievoSbloccoMotivo    String?
+  rilievoSbloccatoIl      DateTime?
+  rilievoSbloccatoDaNome  String?
   riordinoNote            String?
   benvenutoIl             DateTime?
   benvenutoDaNome         String?
@@ -1370,6 +1375,10 @@ model Scadenza {
   categoria        String?
   brand            String?
   note             String?
+  // Pagamento segnato a mano senza movimento in prima nota: da controllare con l'estratto conto (lista e promemoria, Debora 21/11/2026)
+  manualeDaControllare Boolean            @default(false)
+  controllatoEstrattoIl DateTime?
+  controllatoDaNome String?
   abbinamenti      AbbinamentoScadenza[]
   createdAt        DateTime              @default(now())
   updatedAt        DateTime              @updatedAt

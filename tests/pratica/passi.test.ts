@@ -25,7 +25,7 @@ test("progetto → benvenuto → fattura, in ordine", () => {
 
 test("l'incasso è in parallelo: non cambia il passo corrente ma sblocca il rilievo", () => {
   const d = { ...base, fatturaAccontoIl: adesso, progettoCreatoIl: adesso, benvenutoIl: adesso };
-  assert.match(passiPratica(d).passi.find((p) => p.chiave === "RILIEVO_APP")!.nota, /acconto incassato/);
+  assert.match(passiPratica(d).passi.find((p) => p.chiave === "RILIEVO_APP")!.nota, /50% incassato/);
   const e = { ...d, viaLibera: true };
   assert.equal(passiPratica(e).corrente, "RILIEVO_APP");
   assert.equal(stato(e).INCASSO, "F");

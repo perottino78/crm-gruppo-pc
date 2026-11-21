@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { whereDaControllare } from "@/lib/amministrazione/da-controllare";
+import { puoAmministrazione } from "@/lib/amministrazione/server";
 import { appuntamentiSenzaEsito, regoleEsiti } from "@/lib/appuntamenti/esiti-server";
 import { chiaveGiorno, inizioGiorno, aggiungiGiorni } from "@/lib/calendario/tempo";
 import { prisma } from "@/lib/prisma";
@@ -45,6 +47,9 @@ export default async function DashboardPage({
 
   // segnalazioni del team da guardare (per chi segue l'assistenza e gli amministratori)
   const segnalazioni = gestisceSegnalazioni(utente, (await destinatarioAssistenza())?.id) ? await prisma.segnalazione.count({ where: { stato: "APERTA" } }) : 0;
+
+  // promemoria dell'amministrazione: pagamenti segnati a mano senza prima nota, da controllare con l'estratto conto
+  const daControllare = puoAmministrazione(utente) ? await prisma.scadenza.count({ where: whereDaControllare() }) : 0;
 
   // task dati dalla scheda di un cliente a me (da fare)
   const taskClienti = utente ? await prisma.attivita.count({ where: { tipo: "TASK", completata: false, utenteId: utente.id } }) : 0;
@@ -108,6 +113,13 @@ export default async function DashboardPage({
         <a href="/segnalazioni" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-red-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
           <span className="text-sm font-extrabold text-neutral-900">🆘 Segnalazioni del team da guardare</span>
           <span className="text-2xl font-extrabold text-red-700">{segnalazioni}</span>
+        </a>
+      )}
+
+      {daControllare > 0 && (
+        <a href="/amministrazione/da-controllare" className="flex items-center justify-between bg-white rounded-lg border border-neutral-200 border-l-4 border-l-teal-600 p-4 shadow-sm mb-4 hover:border-neutral-400">
+          <span className="text-sm font-extrabold text-neutral-900">🧾 Pagamenti a mano da controllare con l&apos;estratto conto</span>
+          <span className="text-2xl font-extrabold text-teal-700">{daControllare}</span>
         </a>
       )}
 

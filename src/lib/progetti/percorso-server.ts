@@ -1,4 +1,5 @@
 // Dati del percorso guidato di una commessa (progetto): legge il database e li passa alla logica pura di percorso.ts.
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { prisma } from "@/lib/prisma";
 import { percorsoProgetto, praticaLegacy, type Percorso } from "./percorso";
 
@@ -15,7 +16,7 @@ export async function percorsoDiCommessa(commessaId: string): Promise<PercorsoCo
     },
   });
   if (!c) return null;
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  const viaLibera = !!(await statoSogliaRilievo(commessaId))?.viaLibera;
   const daOrdinare = c.righeOrdine.filter((r) => !r.daMagazzino);
   const legacy = praticaLegacy({ progettoCreatoIl: c.progettoCreatoIl, rilievi: c.rilievi.length, righe: c.righeOrdine.length, ordini: c.ordiniFornitore.length, ordineBC: !!c.ordineBC });
   const p = percorsoProgetto({
