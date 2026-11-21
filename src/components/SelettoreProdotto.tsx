@@ -2121,15 +2121,9 @@ export default function SelettoreProdotto({
                         </div>
                       );
                     })}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-          {/* Nella pratica: angolari e legni su misura al costo (Ugo 20/11/2026), solo acquisto */}
-          {(
-            <>
-              <details className="border-t border-neutral-100">
+                    {f.nome === "OUTDOOR" && !finestra && (
+                      <>
+              <details className="border-t border-neutral-50">
                 <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-neutral-900 hover:bg-neutral-50">🔩 ANGOLARI IN ALLUMINIO <span className="text-xs font-normal text-neutral-500">su misura: forma, lati, bello</span></summary>
                 <form action={complementoAngolareDaListino} className="m-2 rounded-xl border-2 border-slate-300 bg-slate-50 p-3">
                   <p className="mb-2 text-sm font-bold text-slate-900">Angolare in alluminio su misura (Il Mastro): costo a peso, solo acquisto</p>
@@ -2137,7 +2131,7 @@ export default function SelettoreProdotto({
                   <ConfiguraAngolare prezzo="costo" nomi testoPulsante="➕ Aggiungi al materiale" />
                 </form>
               </details>
-              <details className="border-t border-neutral-100">
+              <details className="border-t border-neutral-50">
                 <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-neutral-900 hover:bg-neutral-50">🪵 LEGNI PIALLATI <span className="text-xs font-normal text-neutral-500">su misura, spessore × larghezza × lunghezza</span></summary>
                 <form action={complementoLegnoDaListino} className="m-2 rounded-xl border-2 border-amber-300 bg-amber-50 p-3">
                   <p className="mb-2 text-sm font-bold text-amber-950">Legno piallato su misura: costo sullo sviluppo (m³), solo acquisto</p>
@@ -2145,8 +2139,13 @@ export default function SelettoreProdotto({
                   <ConfiguraLegno prezzo="costo" nomi testoPulsante="➕ Aggiungi al materiale" />
                 </form>
               </details>
-            </>
-          )}
+                                  </>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
