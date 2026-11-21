@@ -1,6 +1,7 @@
 // Modulo di rilievo / scheda di produzione del fornitore: stessi campi nell'ordine e nel «Carica rilievo» della pratica (Ugo 20/11/2026).
 import TabellaLegno from "@/components/ordini/TabellaLegno";
 import TabellaAngolari from "@/components/ordini/TabellaAngolari";
+import TabellaSerramenti from "@/components/ordini/TabellaSerramenti";
 import { valoriDaRighe } from "@/lib/ordini/legno";
 import { descriviCampi, nomeCampo, raggruppaCampi } from "@/lib/ordini/scheda-produzione";
 
@@ -39,9 +40,9 @@ export default function ModuloScheda({ azione, nascosti, modello, righeLegno, an
         const descritti = descriviCampi(modelloScelto.html);
         const { singoli, tabelle } = raggruppaCampi(descritti.map((d) => d.nome));
         const tipoDi = new Map(descritti.map((d) => [d.nome, d]));
-        return (
-          <>
-            {tabelle.map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolari} modificabile={modificabile} dove={dove} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegno} modificabile={modificabile} dove={dove} /> : (
+        const bloccoTabelle = (<>
+            {tabelle.some((t) => t.gruppo === "fin") && <TabellaSerramenti righe={tabelle.find((t) => t.gruppo === "fin")!.righe} coprifili={tabelle.find((t) => t.gruppo === "cop")?.righe ?? []} />}
+            {tabelle.filter((t) => !(t.gruppo === "fin" || (t.gruppo === "cop" && tabelle.some((x) => x.gruppo === "fin")))).map((t) => t.gruppo === "ang" ? <TabellaAngolari key={t.gruppo} {...angolariIniziali} salva={salvaAngolari} modificabile={modificabile} dove={dove} /> : t.gruppo === "legno" ? <TabellaLegno key={t.gruppo} righe={t.righe} iniziali={valoriDaRighe(righeLegno)} salva={salvaLegno} modificabile={modificabile} dove={dove} /> : (
               <div key={t.gruppo} className="overflow-x-auto">
                 <p className="text-xs font-bold text-neutral-800 mb-0.5">{nomeCampo(t.gruppo)}</p>
                 <table className="text-xs border-collapse">
@@ -57,6 +58,8 @@ export default function ModuloScheda({ azione, nascosti, modello, righeLegno, an
                 </table>
               </div>
             ))}
+</>);
+        const bloccoSingoli = (<>
             {singoli.filter((c) => !(c === "prezzo_m3" && tabelle.some((t) => t.gruppo === "legno"))).map((c) => {
               const d = tipoDi.get(c);
               if (d && d.tipo !== "testo") {
@@ -79,8 +82,11 @@ export default function ModuloScheda({ azione, nascosti, modello, righeLegno, an
                 </label>
               );
             })}
-          </>
-        );
+</>);
+        // nel modulo serramenti prima i dati generali (vetro, maniglie, fori), poi le finestre
+        const serramenti = tabelle.some((t) => t.gruppo === "fin");
+        return serramenti ? <>{bloccoSingoli}{bloccoTabelle}</> : <>{bloccoTabelle}{bloccoSingoli}</>;
+        
       })()}
       <button className="btn-3d btn-3d-blue text-sm px-4 py-2">{testoPulsante}</button>
       {nota && <p className="text-[11px] text-neutral-500">{nota}</p>}
