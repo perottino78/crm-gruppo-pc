@@ -1,5 +1,6 @@
 "use server";
 
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -158,8 +159,9 @@ export async function avanzaDopoIncasso(commessaId: string, quando: Date = new D
     await prisma.commessa.update({ where: { id: commessaId }, data: { accontoIncassato: true, accontoIncassatoIl: quando, accontoImportoIncassato: Math.round(Math.min(pagato, c.accontoImporto || pagato) * 100) / 100 } });
     // il ringraziamento al cliente parte solo con la spunta di chi registra l'incasso (Ugo, 21/11/2026)
     if (opz.ringrazia) await ringraziaPagamentoAcconto(commessaId);
-    await dopoIncassoAcconto(commessaId);
   }
+  // ogni incasso (anche una rata intermedia) può portare la pratica al 50%: allora si chiude il task di Debora e parte il rilievo
+  if (pagato > 0.5 && c.accontoTipo !== "FINANZIAMENTO") await dopoIncassoAcconto(commessaId);
   const tutto = c.totaleVendita > 0 && pagato >= c.totaleVendita - 0.5;
   const chiuse: string[] = [];
   for (const t of c.tasks) {
@@ -184,14 +186,17 @@ export async function avviaRilievoSePronto(commessaId: string): Promise<boolean>
     select: { progettoCreatoIl: true, accontoTipo: true, accontoIncassato: true, finanziamentoStato: true, ordineBC: true, rilievi: { select: { id: true } }, tasks: { where: { faseChiave: "RILIEVO_APP" }, select: { id: true } } },
   });
   if (!c || !c.progettoCreatoIl || c.tasks.length > 0 || c.rilievi.length > 0) return false;
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
-  if (!viaLibera) return false;
+  if (!(await statoSogliaRilievo(commessaId))?.viaLibera) return false;
   await avviaFaseFlusso(commessaId, "RILIEVO_APP", "AMMINISTRAZIONE");
   return true;
 }
 
-/** Acconto incassato (o finanziamento approvato): si chiude il task di incasso di Debora e, se il progetto c'è già, parte il rilievo. */
+/**
+ * Dopo ogni incasso (o finanziamento approvato): quando la pratica ha il 50% incassato (o il finanziamento approvato, o lo sblocco
+ * dell'amministratore) si chiude il task di incasso di Debora e, se il progetto c'è già, parte il rilievo. Sotto il 50% resta tutto aperto.
+ */
 export async function dopoIncassoAcconto(commessaId: string): Promise<void> {
+  if (!(await statoSogliaRilievo(commessaId))?.viaLibera) return;
   await chiudiTaskFase(commessaId, "PROGETTO");
   await avviaRilievoSePronto(commessaId);
 }

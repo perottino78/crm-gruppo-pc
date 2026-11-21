@@ -8,6 +8,8 @@ const tab = [
   { href: "/amministrazione/fatture-vendita", label: "Fatture di vendita" },
   { href: "/amministrazione/fatture-acquisto", label: "Fatture d'acquisto" },
   { href: "/amministrazione/prima-nota", label: "Prima nota" },
+  { href: "/amministrazione/ritenute", label: "Ritenute 11%" },
+  { href: "/amministrazione/da-controllare", label: "Da controllare" },
   { href: "/amministrazione/costi-ricavi", label: "Costi e ricavi" },
   { href: "/amministrazione/banche", label: "Banche e importazioni" },
 ];

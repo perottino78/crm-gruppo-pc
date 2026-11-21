@@ -1,4 +1,5 @@
 // Dati del percorso guidato della pratica: legge il database e li passa alla logica pura di passi.ts.
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { prisma } from "@/lib/prisma";
 import { passiPratica, type DatiPassi } from "./passi";
 import { finePosaAperta } from "./interventi";
@@ -19,7 +20,7 @@ export async function datiPassiDiCommessa(commessaId: string): Promise<(DatiPass
   const kit = await prisma.consegnaKit.count({ where: { commessaId } });
   const rilieviAttivi = c.rilievi.filter((r) => r.stato !== "ANNULLATO");
   const daOrdinare = c.righeOrdine.filter((r) => !r.daMagazzino);
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  const viaLibera = !!(await statoSogliaRilievo(commessaId))?.viaLibera;
   // posa finita = lavori eseguiti (una posa «parziale» resta COMPLETATA ma la pratica resta in POSA); fissata = c'è una posa aperta
   const posaFinita = c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA" || (c.stato !== "POSA" && c.pose.some((p) => p.stato === "COMPLETATA"));
   const posaFissata = posaFinita || c.pose.some((p) => p.stato !== "ANNULLATA" && p.stato !== "COMPLETATA");

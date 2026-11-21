@@ -1,5 +1,7 @@
 "use server";
 
+import { puo } from "@/lib/permessi/catalogo";
+import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaInvito } from "@/lib/calendario/server";
 import { prisma } from "@/lib/prisma";
@@ -47,8 +49,7 @@ function puoGestireIncassi(ruolo?: string | null) {
 async function ricalcolaStato(commessaId: string) {
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { rilievi: true } });
   if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA", "SALDO_INCASSATO", "LAVORI_ESEGUITI"].includes(c.stato)) return;
-  const viaLibera =
-    c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
+  const viaLibera = !!(await statoSogliaRilievo(c.id))?.viaLibera;
   let stato = "IN_ATTESA_ACCONTO";
   if (viaLibera) {
     const attivi = c.rilievi.filter((r) => r.stato !== "ANNULLATO");
@@ -295,6 +296,83 @@ export async function inviaRingraziamentoAcconto(formData: FormData) {
   revalidatePath(`/commesse/${id}`);
 }
 
+// ── Rate intermedie e sblocco del rilievo sotto il 50% (Debora, 21/11/2026) ─────────────────────────────────────
+const puoIncassiOFatturazione = (u: Awaited<ReturnType<typeof getCurrentUser>>) => !!u && (puoGestireIncassi(u.ruolo) || puo(u, "fatturazione"));
+
+/** Rata intermedia fra acconto e saldo: una scadenza d'incasso della pratica (si registra come le altre); il saldo cala di tanto. */
+export async function aggiungiRataIntermedia(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoIncassiOFatturazione(u)) return;
+  const id = str(formData, "commessaId");
+  const importo = Math.round((flt(formData, "importo") ?? 0) * 100) / 100;
+  if (!id || importo <= 0) return;
+  const c = await prisma.commessa.findUnique({ where: { id }, include: { cliente: { select: { nome: true } }, brand: { select: { nome: true } } } });
+  if (!c) return;
+  const esistenti = await prisma.scadenza.findMany({ where: { commessaId: id, origine: { startsWith: "COMMESSA_RATA_" } }, select: { origine: true } });
+  const n = esistenti.reduce((m, s) => Math.max(m, Number(s.origine.replace("COMMESSA_RATA_", "")) || 0), 0) + 1;
+  const data = str(formData, "data");
+  await prisma.scadenza.create({
+    data: {
+      tipo: "INCASSO", origine: `COMMESSA_RATA_${n}`, commessaId: id, clienteId: c.clienteId, controparte: c.cliente.nome, brand: c.brand.nome,
+      descrizione: str(formData, "descrizione") ?? `Rata ${n} commessa C${c.anno}-${String(c.numero).padStart(3, "0")}`, importo, dataScadenza: data ? new Date(`${data}T12:00:00Z`) : null, dataModificata: !!data,
+    },
+  });
+  const { sincronizzaScadenzeCommesse } = await import("@/lib/amministrazione/server");
+  await sincronizzaScadenzeCommesse(id);
+  await log(id, `Rata intermedia ${n} di ${importo.toFixed(2)} € aggiunta da ${u!.nome}: il saldo cala di tanto.`);
+  revalidatePath(`/commesse/${id}`);
+}
+
+/** Toglie una rata intermedia ancora da pagare (il saldo torna come prima). */
+export async function togliRataIntermedia(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoIncassiOFatturazione(u)) return;
+  const s = await prisma.scadenza.findUnique({ where: { id: str(formData, "id") ?? "" }, include: { abbinamenti: true } });
+  if (!s?.commessaId || !s.origine.startsWith("COMMESSA_RATA_") || s.abbinamenti.length || s.pagatoManuale > 0 || s.ritenuta > 0) return;
+  await prisma.scadenza.delete({ where: { id: s.id } });
+  const { sincronizzaScadenzeCommesse } = await import("@/lib/amministrazione/server");
+  await sincronizzaScadenzeCommesse(s.commessaId);
+  await log(s.commessaId, `Rata intermedia «${s.descrizione}» tolta da ${u!.nome}.`);
+  revalidatePath(`/commesse/${s.commessaId}`);
+}
+
+const TITOLO_SBLOCCO = "Sbloccare il rilievo senza il 50% incassato";
+
+/** Sotto il 50% il rilievo non parte: si chiede all'amministratore (email e task) di farlo partire lo stesso. */
+export async function chiediSbloccoRilievo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const motivo = str(formData, "motivo");
+  const c = await prisma.commessa.findUnique({ where: { id }, include: { cliente: { select: { nome: true } } } });
+  if (!c || c.rilievoSbloccatoIl) return;
+  const st = await statoSogliaRilievo(id);
+  await prisma.commessa.update({ where: { id }, data: { rilievoSbloccoRichiestoIl: new Date(), rilievoSbloccoMotivo: motivo } });
+  const admin = await prisma.utente.findMany({ where: { ruolo: "AMMINISTRATORE", stato: "ATTIVO" }, select: { id: true, nome: true, email: true }, orderBy: { nome: "asc" } });
+  const nr = `C${c.anno}-${String(c.numero).padStart(3, "0")}`;
+  const testo = `Pratica ${nr} di ${c.cliente.nome}: incassati ${(st?.incassato ?? 0).toFixed(2)} € su ${c.totaleVendita.toFixed(2)} € (serve il 50% = ${(st?.soglia ?? 0).toFixed(2)} €). ${u.nome} chiede di far partire lo stesso il rilievo${motivo ? `: ${motivo}` : "."} Nella pratica, riquadro Acconto: «🔓 Sblocca il rilievo».`;
+  await prisma.taskPratica.create({ data: { commessaId: id, ufficio: "AMMINISTRAZIONE", titolo: TITOLO_SBLOCCO, descrizione: testo, creatoDa: u.nome, assegnatoUtenteId: admin[0]?.id ?? null, assegnatoNome: admin[0]?.nome ?? null } });
+  const { inviaMail, APP_URL } = await import("@/lib/mail/invio");
+  await inviaMail({ a: admin.map((a) => a.email).filter(Boolean) as string[], oggetto: `[CRM P&C] Richiesta: rilievo senza il 50% — ${c.cliente.nome}`, testo: `${testo}\n\n${APP_URL}/commesse/${id}#acconto`, rispondiA: u.email, daUtenteId: u.id });
+  await log(id, `Chiesto all'amministratore di far partire il rilievo senza il 50% incassato (${u.nome})${motivo ? `: ${motivo}` : ""}.`);
+  revalidatePath(`/commesse/${id}`);
+}
+
+/** L'amministratore fa partire il rilievo anche sotto il 50%. */
+export async function sbloccaRilievo(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!isAmministratore(u)) return;
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  await prisma.commessa.update({ where: { id }, data: { rilievoSbloccatoIl: new Date(), rilievoSbloccatoDaNome: u!.nome } });
+  await prisma.taskPratica.updateMany({ where: { commessaId: id, titolo: TITOLO_SBLOCCO, completatoIl: null }, data: { stato: "COMPLETATO", completatoIl: new Date(), completatoDaNome: u!.nome } });
+  await log(id, `Rilievo sbloccato dall'amministratore (${u!.nome}) anche senza il 50% incassato.`);
+  await ricalcolaStato(id);
+  await avviaRilievoSePronto(id);
+  revalidatePath(`/commesse/${id}`);
+}
+
 export async function annullaIncassoAcconto(formData: FormData) {
   const utente = await getCurrentUser();
   if (!isAmministratore(utente)) return;
@@ -312,7 +390,8 @@ export async function annullaIncassoAcconto(formData: FormData) {
 
 export async function aggiornaFinanziamento(formData: FormData) {
   const utente = await getCurrentUser();
-  if (!puoGestireIncassi(utente?.ruolo)) return;
+  // l'approvazione del finanziamento la segna la fatturazione (Giorgia, decisione di Debora 21/11/2026) o l'amministrazione
+  if (!utente || (!puoGestireIncassi(utente.ruolo) && !puo(utente, "fatturazione"))) return;
   const id = str(formData, "id");
   const stato = str(formData, "finanziamentoStato");
   if (!id || !stato || !["IN_ISTRUTTORIA", "APPROVATO", "RIFIUTATO"].includes(stato)) return;
@@ -341,8 +420,7 @@ export async function programmaRilievo(formData: FormData) {
   if (!dataOra) return;
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { cliente: true } });
   if (!c) return;
-  const viaLibera = c.accontoTipo === "FINANZIAMENTO" ? c.finanziamentoStato === "APPROVATO" : c.accontoIncassato;
-  if (!viaLibera) return; // blocco: rilievo solo dopo acconto/finanziamento
+  if (!(await statoSogliaRilievo(c.id))?.viaLibera) return; // blocco: rilievo solo con il 50% incassato, finanziamento approvato o sblocco
   const percorso = await percorsoDiCommessa(commessaId);
   if (percorso && !percorso.progettoCreatoIl && !percorso.legacy) return; // blocco: prima si crea il progetto
   const indirizzo =
