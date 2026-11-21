@@ -93,7 +93,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       eventi: { orderBy: { createdAt: "desc" } },
       fasi: { orderBy: { ordine: "asc" } },
       tasks: { orderBy: { createdAt: "desc" } },
-      righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true } } } },
+      righeOrdine: { orderBy: { createdAt: "asc" }, include: { ordineFornitore: { select: { id: true, numero: true, anno: true, stato: true } } } },
       costiManuali: { orderBy: { data: "asc" } },
       assistenze: { orderBy: { createdAt: "desc" } },
       pose: { include: { foto: { select: { id: true, nome: true, categoria: true }, orderBy: { createdAt: "asc" } } }, orderBy: { dataInizio: "desc" } },
@@ -161,7 +161,11 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   // materiale della pratica, raggruppato per fornitore (così si spuntano insieme le righe dello stesso fornitore)
   // (i pezzi del kit stanno subito sotto il loro prodotto)
   const radici = c.righeOrdine.filter((r) => !r.kitDiId || !nomeRiga.has(r.kitDiId)).sort((a, b) => (a.fornitoreNome ?? "~").localeCompare(b.fornitoreNome ?? "~"));
-  const materialePratica = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
+  const materialeTutto = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
+  // ordine già inviato (o riga segnata ordinata / dal magazzino): esce da «da ordinare» e non si modifica più
+  const giaOrdinata = (r: (typeof materialeTutto)[number]) => r.daMagazzino || r.ordinato || (!!r.ordineFornitore && r.ordineFornitore.stato !== "BOZZA" && r.ordineFornitore.stato !== "ANNULLATO");
+  const materialePratica = materialeTutto.filter((r) => !giaOrdinata(r));
+  const materialeOrdinato = materialeTutto.filter(giaOrdinata);
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
   type Mov = { data: Date; voce: string; tipo: string; importo: number };
@@ -693,12 +697,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
           {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
-          {materialePratica.length === 0 ? (
+          {materialeTutto.length === 0 ? (
             <form action={generaRigheOrdine} className="mb-3"><input type="hidden" name="id" value={c.id} />
               <button className="text-xs text-blue-800 underline">Carica il materiale dell&apos;offerta</button></form>
           ) : (
             <form action={creaOrdineDaRighe} className="mb-3">
               <input type="hidden" name="commessaId" value={c.id} />
+              {materialePratica.length === 0 && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">Niente da ordinare: tutto il materiale è già stato ordinato (vedi sotto).</p>}
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200"><th className="py-1 w-6"></th><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th><th></th></tr></thead>
@@ -727,6 +732,29 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
                 azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
             </form>
+          )}
+          {materialeOrdinato.length > 0 && (
+            <div className="mt-3 rounded border border-green-200 bg-green-50/40 p-3">
+              <p className="text-sm font-bold text-green-900">✅ Ordinato — in attesa della conferma e dell&apos;arrivo <span className="font-normal text-neutral-600">({materialeOrdinato.length})</span></p>
+              <p className="text-xs text-neutral-600 mb-2">Queste righe non si modificano più. Quando la merce arriva si controllano costi e magazzino dall&apos;ordine.</p>
+              <table className="w-full text-sm">
+                <thead><tr className="text-left text-xs text-neutral-600 border-b border-green-200"><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th></tr></thead>
+                <tbody>
+                  {materialeOrdinato.map((r) => {
+                    const st = r.arrivato ? "📦 Arrivato" : r.daMagazzino ? "dal magazzino" : r.ordineFornitore?.stato === "CONFERMATO" ? "Confermato — attendo la merce" : r.ordineFornitore?.stato === "EVASO" || r.ordineFornitore?.stato === "EVASO_PARZIALE" ? "Merce in arrivo" : "In attesa di conferma";
+                    return (
+                      <tr key={r.id} className="border-b border-green-100 align-top text-neutral-700">
+                        <td className="py-1.5 pr-2">{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
+                        <td className="py-1.5 text-right pr-3">{r.quantita}</td>
+                        <td className="py-1.5 text-xs">{r.fornitoreNome ?? "—"}</td>
+                        <td className="py-1.5 text-xs">{r.ordineFornitore ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link> : "ordinato"} · <b>{st}</b></td>
+                        <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           )}
           {correlatiSuggeriti.length > 0 && (
             <div className="mt-2 rounded border border-indigo-200 bg-indigo-50/50 p-2">
