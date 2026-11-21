@@ -6,8 +6,9 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, cartellaConsentita, EMAIL_ORDINI } from "@/lib/ordini/server";
+import { datiAcquisto, prossimoNumeroOrdine, puoGestireOrdini, datiPdfOrdine, fileRilievo, documentiProgetto, cartellaConsentita, firmaOrdine, EMAIL_ORDINI } from "@/lib/ordini/server";
 import { inviaMail } from "@/lib/mail/invio";
+import { emailOfferta } from "@/lib/mail/firma";
 import { numeroOrdine, statoDaArrivi } from "@/lib/ordini/calcoli";
 import { pdfOrdineFornitore, senzaPrezzi } from "@/lib/ordini/pdfOrdine";
 import { verificaMaterialeCommessa } from "@/lib/magazzino/server";
@@ -350,7 +351,10 @@ export async function inviaOrdineEmail(id: string, destinatari: string, cc: stri
   const nAllegati = rilievo.length + documenti.length + extra.length;
   const ordini = EMAIL_ORDINI();
   const casellaOrdini = await prisma.utente.findFirst({ where: { email: { equals: ordini, mode: "insensitive" } }, select: { id: true } });
-  const esito = await inviaMail({ a, cc: copia, oggetto, testo, da: `Ufficio ordini ${p.dati.azienda.ragioneSociale} <${ordini}>`, rispondiA: ordini, daUtenteId: casellaOrdini?.id, allegati });
+  // email in HTML con firma e logo del marchio (il testo semplice resta per chi non vede l'HTML)
+  const fo = firmaOrdine(u, p.ordine.divisione);
+  const corpoMail = emailOfferta({ testo, firma: fo.firma, colore: fo.colore, logo: fo.logo });
+  const esito = await inviaMail({ a, cc: copia, oggetto, testo: corpoMail.testo, html: corpoMail.html, da: `Ufficio ordini ${p.dati.azienda.ragioneSociale} <${ordini}>`, rispondiA: ordini, daUtenteId: casellaOrdini?.id, allegati });
   let da = esito.da ?? ordini;
   if (!esito.inviata) {
     // riserva: servizio di invio via API, se configurato su Vercel

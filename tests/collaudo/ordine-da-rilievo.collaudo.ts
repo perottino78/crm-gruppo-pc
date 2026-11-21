@@ -123,6 +123,7 @@ async function main() {
   const m = posta[0]?.dati ?? "";
   verifica(posta.length === 1 && posta[0].a.includes("ordini@fidra.it"), "email al fornitore", posta.map((p) => p.a));
   verifica(/^From: .*Ufficio ordini.*ordini@gruppopec\.com/m.test(m) && /^Reply-To: .*ordini@gruppopec\.com/m.test(m), "parte da ordini@gruppopec.com e le risposte tornano lì", m.slice(0, 600));
+  verifica(/text\/html/.test(m) && m.includes("pc_logo.png") && m.includes("Ufficio ordini"), "email in HTML con firma dell'ufficio ordini e logo", m.slice(0, 300));
   verifica(m.includes('filename="rilievo cartaceo.pdf"') || m.includes("rilievo cartaceo.pdf"), "allegato il rilievo cartaceo");
   const allegatoPdf = m.split(/\r\n--/).find((p) => /Ordine 1-2026/.test(p) && /application\/pdf/.test(p));
   const testoPdf = allegatoPdf ? Buffer.from(allegatoPdf.split(/\r\n\r\n/).slice(1).join("").replace(/\s+/g, ""), "base64").toString("latin1") : "";

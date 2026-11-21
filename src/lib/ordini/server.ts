@@ -5,6 +5,9 @@ import type { Prisma, Utente } from "@prisma/client";
 import { costoPrevisto, numeroOrdine } from "./calcoli";
 import type { DatiPdfOrdine } from "./pdfOrdine";
 import { vociMateriale } from "./costi-materiale";
+import { firmaDi } from "@/lib/mail/firma";
+import { brandInfo } from "@/lib/brands";
+import { APP_URL } from "@/lib/mail/invio";
 
 export const puoGestireOrdini = (u: ConPermessi | null | undefined) => puo(u, "ordini");
 
@@ -146,6 +149,16 @@ export async function fileRilievo(commessaId: string | null | undefined, conCont
  * Cartelle del progetto che si possono allegare all'ordine al fornitore: l'amministratore le vede tutte,
  * l'ufficio ordini solo i rilievi, le foto dei rilievi e le schede di produzione (modulo del fornitore).
  */
+/**
+ * Firma dell'email dell'ordine: quella scritta da chi invia nel Profilo o, se manca, quella pronta con i dati dell'ufficio ordini;
+ * colore e logo del marchio dell'ordine (logo di P&C per i marchi senza logo).
+ */
+export function firmaOrdine(u: { nome: string; ruolo?: string | null; telefono?: string | null; firmaEmail?: string | null }, divisione: string | null | undefined): { firma: string; colore: string; logo: string } {
+  const info = brandInfo(divisione === "Work & Services" ? "Work & Services" : divisione);
+  const firma = firmaDi({ nome: u.nome, ruolo: u.ruolo, ufficio: "ORDINI", telefono: u.telefono, email: EMAIL_ORDINI(), firmaEmail: u.firmaEmail }, divisione);
+  return { firma, colore: info.primary === "#525252" ? "#EA580C" : info.primary, logo: `${APP_URL}${info.logoUrl ?? "/immagini/brand/pc_logo.png"}` };
+}
+
 export const CARTELLE_ORDINI = ["Rilievi misura", "Foto rilievi", "Schede produzione"];
 export function cartellaConsentita(u: { ruolo: string } | null | undefined, cartella: string): boolean {
   return u?.ruolo === "AMMINISTRATORE" || CARTELLE_ORDINI.includes(cartella);
