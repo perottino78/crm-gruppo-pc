@@ -330,6 +330,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
 
       <ApriDaAncora />
       {/* PASSO IN CORSO */}
+      {avviso && !mostra("MATERIALE", "ARRIVO") && (
+        <div role="alert" className="mb-3 rounded-lg border-2 border-red-300 bg-red-50 px-4 py-3 text-sm text-red-900">
+          <p className="font-bold">⚠️ L&apos;ordine non è partito</p>
+          <p>{avviso}</p>
+          {percorsoProg && percorsoProg.ordiniBloccati && <p className="mt-1 text-xs">Vai al riquadro <a href="#progetto" className="underline font-semibold">📁 Progetto</a> qui sotto e premi «✅ Conferma materiale»: poi «Ordine al fornitore» funziona.</p>}
+        </div>
+      )}
       {pp && passoSel && <TestataPasso commessaId={c.id} passo={passoSel} precedente={passoPrecedente(pp.passi, passoSel.chiave)} corrente={passoCorr} />}
       {pp && (sel === "FATTURA" || sel === "PROGETTO" || sel === "BENVENUTO") && (
         <PannelloApertura
