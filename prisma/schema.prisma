@@ -798,6 +798,8 @@ model Rilievo {
   // Misure rilevate (testo libero strutturato dal tecnico) e osservazioni di cantiere
   misure     String?
   eseguitoIl DateTime?
+  // Verbale di sopralluogo (spunte, stato dell'immobile, pianificazione posa, prodotti da installare), compilato al «Carica rilievo»
+  verbale    Json?
   allegati   RilievoAllegato[]
   createdAt  DateTime          @default(now())
 }

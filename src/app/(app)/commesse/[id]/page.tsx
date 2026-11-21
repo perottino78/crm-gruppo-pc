@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { costiMaterialeCommesse } from "@/lib/ordini/server";
 import CaricaRilievo from "@/components/commesse/CaricaRilievo";
+import { verbaleDiPartenza } from "@/lib/rilievo/verbale";
 import ModuloScheda from "@/components/ordini/ModuloScheda";
 import { creaSchedaDaRilievo, salvaLegnoInPratica, salvaAngolariInPratica } from "@/app/schede-produzione-actions";
 import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
@@ -76,9 +77,9 @@ import { documentiDi } from "@/lib/documenti/server";
 
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 
-export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string; scheda?: string; okScheda?: string; erroreScheda?: string }> }) {
+export default async function CommessaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ avviso?: string; fatto?: string; avvisoRilievo?: string; fattoMateriale?: string; kitOk?: string; kitErrore?: string; pok?: string; pav?: string; passo?: string; scheda?: string; okScheda?: string; erroreScheda?: string; carica?: string; salvato?: string }> }) {
   const { id } = await params;
-  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo, scheda, okScheda, erroreScheda } = await searchParams;
+  const { avviso, fatto, avvisoRilievo, fattoMateriale, kitOk, kitErrore, pok, pav, passo, scheda, okScheda, erroreScheda, carica, salvato } = await searchParams;
   const utente = await getCurrentUser();
   const c = await prisma.commessa.findUnique({
     where: { id },
@@ -120,7 +121,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const totaleAcquisti = c.costiManuali.filter((m) => m.categoria === "ACQUISTO_MATERIALE").reduce((t, m) => t + m.importo, 0);
   const fornitoriLista = fornitori.map((f) => ({ id: f.id, ragioneSociale: f.ragioneSociale }));
   // modulo del fornitore al «Carica rilievo» (Ugo 20/11/2026): modelli, legno e angolari già nel materiale, schede già salvate
-  const mostraModulo = puoGestireOrdini(utente) && c.rilievi.some((x) => x.stato !== "ANNULLATO");
+  const mostraModulo = !!utente && c.rilievi.some((x) => x.stato !== "ANNULLATO");
   let moduloDati: { modelli: { id: string; nome: string; html: string; fornitore: string | null }[]; legniPratica: { codice: string | null; quantita: number }[]; salvate: { id: string; nome: string; createdAt: Date; caricatoDaNome: string | null }[] } | null = null;
   if (mostraModulo) {
     await assicuraModelliPronti();
@@ -187,6 +188,76 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const passoSel = pp?.passi.find((x) => x.chiave === sel) ?? null;
   const passoCorr = pp?.passi.find((x) => x.chiave === pp.corrente) ?? null;
   const defaultData = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
+
+  const moduloFornitoreJsx = moduloDati ? (() => {
+            const modello = moduloDati.modelli.find((m) => m.id === scheda) ?? null;
+            const ap = valoriAngolari([], moduloDati.legniPratica);
+            return (
+              <section id="modulo-fornitore" className="mt-3 rounded-lg border border-purple-200 bg-purple-50/30 p-3 scroll-mt-4">
+                <h3 className="font-bold text-sm mb-1">📐 Modulo del fornitore (misure per la produzione) — si compila qui, al rilievo</h3>
+                <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS, legno, angolari), scrivi le misure e aggiungi i prodotti: il modulo resta nei documenti della pratica e, quando fai l&apos;ordine a quel fornitore, è già pronto da allegare.</p>
+                {okScheda && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {okScheda}</p>}
+                {erroreScheda && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{erroreScheda}</p>}
+                <form method="get" className="mb-2 flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="passo" value="RILIEVO" />
+                  <label className="text-xs font-semibold">Modulo
+                    <select name="scheda" defaultValue={modello?.id ?? ""} className="block rounded border border-neutral-300 px-2 py-1 text-sm">
+                      <option value="">Scegli…</option>
+                      {moduloDati.modelli.map((m) => <option key={m.id} value={m.id}>{m.nome}{m.fornitore ? ` — ${m.fornitore}` : ""}</option>)}
+                    </select>
+                  </label>
+                  <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
+                </form>
+                {modello && (
+                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} righeLegno={moduloDati.legniPratica}
+                    angolariIniziali={{ iniziali: ap.valori, proposta: ap.proposta }} salvaLegno={salvaLegnoInPratica} salvaAngolari={salvaAngolariInPratica} modificabile dove="nella pratica"
+                    testoPulsante="📄 Salva il modulo" nota="Il CRM aggiunge da solo cliente, pratica, materiale e le misure del rilievo. Legno e angolari con «Salva» entrano anche nel materiale da ordinare." />
+                )}
+                {moduloDati.salvate.length > 0 && (
+                  <ul className="mt-3 divide-y divide-neutral-100 text-sm">
+                    {moduloDati.salvate.map((d) => (
+                      <li key={d.id} className="flex flex-wrap items-center gap-3 py-1"><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline">📄 {d.nome}</a><span className="text-xs text-neutral-500">{d.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span></li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            );
+          })() : null;
+  // «Carica rilievo»: una schermata sola, a passi (prodotti → verbale → misure e file → salva), senza il resto della pratica
+  const caricaId = carica ?? ((scheda || okScheda || erroreScheda) ? [...c.rilievi].filter((x) => x.stato !== "ANNULLATO").sort((x, y) => y.dataOra.getTime() - x.dataOra.getTime())[0]?.id : undefined);
+  const rilievoAperto = caricaId ? c.rilievi.find((x) => x.id === caricaId && x.stato !== "ANNULLATO") : undefined;
+  if (rilievoAperto) {
+    const verbaleIniziale = verbaleDiPartenza(rilievoAperto.verbale, materialeOfferta);
+    return (
+      <div className="mx-auto max-w-4xl space-y-4 p-3 md:p-6">
+        <Link href={`/commesse/${c.id}?passo=RILIEVO#rilievo`} className="btn-indietro">← Torna alla pratica</Link>
+        <div>
+          <h1 className="text-xl font-bold text-neutral-900">📋 Carica il rilievo</h1>
+          <p className="text-sm text-neutral-700"><b>{c.cliente.nome}</b> · pratica {numeroCommessa(c)} · {rilievoAperto.dataOra.toLocaleString("it-IT", { timeZone: "Europe/Rome", weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit" })} · {rilievoAperto.tecnico.nome}</p>
+          {rilievoAperto.indirizzo && <p className="text-xs text-neutral-600">📍 {rilievoAperto.indirizzo}</p>}
+        </div>
+        {fatto && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {fatto}</p>}
+        {avvisoRilievo && <p className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">{avvisoRilievo}</p>}
+        {salvato === "1" && (
+          <div className="rounded-lg border-2 border-green-400 bg-green-50 p-3">
+            <p className="mb-2 text-sm font-bold text-green-900">Rilievo salvato. E adesso?</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href={`/commesse/${c.id}/rilievo/${rilievoAperto.id}/stampa`} className="btn-3d btn-3d-blue text-sm px-4 py-2.5">🖨️ Stampa verbale e rilievo</Link>
+              <a href="#modulo-fornitore" className="btn-3d btn-3d-purple text-sm px-4 py-2.5">📐 Modulo del fornitore (se serve)</a>
+              <Link href={`/commesse/${c.id}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-outline text-sm px-4 py-2.5">Torna alla pratica</Link>
+            </div>
+          </div>
+        )}
+        <CaricaRilievo brandId={c.brandId} rilievoId={rilievoAperto.id} misure={rilievoAperto.misure ?? ""} eseguito={rilievoAperto.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} verbale={verbaleIniziale} />
+        {moduloFornitoreJsx && (
+          <details open={!!(scheda || okScheda || erroreScheda || salvato === "1")} className="rounded-lg border border-neutral-200 bg-white p-2">
+            <summary className="cursor-pointer text-sm font-bold text-purple-900">📐 Modulo del fornitore (facoltativo: legno, angolari, pergole, vetrate…)</summary>
+            {moduloFornitoreJsx}
+          </details>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl">
@@ -486,11 +557,15 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               )}
 
               {r.stato !== "ANNULLATO" && (
-                <details className="mt-2" open={r.stato === "PROGRAMMATO" && c.rilievi.filter((x) => x.stato === "PROGRAMMATO").length === 1}>
-                  <summary className="text-sm font-bold text-blue-800 cursor-pointer">
-                    {r.stato === "ESEGUITO" ? "✏️ Aggiungi misure, file o materiale" : "📋 Carica il rilievo (misure, PDF e foto, materiale)"}
-                  </summary>
-                  <CaricaRilievo brandId={c.brandId} rilievoId={r.id} misure={r.misure ?? ""} eseguito={r.stato === "ESEGUITO"} materialeOfferta={materialeOfferta} fornitori={fornitoriLista} />
+              <>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <Link href={`/commesse/${c.id}?passo=RILIEVO&carica=${r.id}`} className="btn-3d btn-3d-blue text-sm px-5 py-2.5">
+                    {r.stato === "ESEGUITO" ? "✏️ Rivedi il rilievo e il verbale" : "📋 Carica il rilievo"}
+                  </Link>
+                  {r.stato === "ESEGUITO" && <Link href={`/commesse/${c.id}/rilievo/${r.id}/stampa`} className="btn-3d btn-3d-outline text-sm px-4 py-2.5">🖨️ Stampa verbale e rilievo</Link>}
+                </div>
+                <details className="mt-2">
+                  <summary className="text-xs font-bold text-neutral-700 cursor-pointer">📂 Altri file della pratica</summary>
                   <div className="mt-3 rounded border border-blue-200 bg-blue-50/40 p-2">
                     <p className="text-xs font-bold text-neutral-800 mb-1">📂 Cartella «Rilievi misura» della pratica ({fileRilievi.length} file)</p>
                     {fileRilievi.length ? (
@@ -507,6 +582,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                     <CaricaDocumenti entita="COMMESSA" entitaId={c.id} cartelle={["Rilievi misura"]} />
                   </div>
                 </details>
+              </>
               )}
               {r.stato === "PROGRAMMATO" && (
                 <form action={annullaRilievo} className="mt-1">
@@ -517,40 +593,6 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </div>
           ))}
           {c.rilievi.length === 0 && <p className="text-xs text-neutral-600">Nessun rilievo programmato.</p>}
-          {moduloDati && (() => {
-            const modello = moduloDati.modelli.find((m) => m.id === scheda) ?? null;
-            const ap = valoriAngolari([], moduloDati.legniPratica);
-            return (
-              <section id="modulo-fornitore" className="mt-3 rounded-lg border border-purple-200 bg-purple-50/30 p-3 scroll-mt-4">
-                <h3 className="font-bold text-sm mb-1">📐 Modulo del fornitore (misure per la produzione) — si compila qui, al rilievo</h3>
-                <p className="mb-2 text-xs text-neutral-600">Scegli il modulo del fornitore (es. NEW LIPARI, SEEGLASS, legno, angolari), scrivi le misure e aggiungi i prodotti: il modulo resta nei documenti della pratica e, quando fai l&apos;ordine a quel fornitore, è già pronto da allegare.</p>
-                {okScheda && <p className="mb-2 rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {okScheda}</p>}
-                {erroreScheda && <p className="mb-2 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{erroreScheda}</p>}
-                <form method="get" className="mb-2 flex flex-wrap items-end gap-2">
-                  <input type="hidden" name="passo" value="RILIEVO" />
-                  <label className="text-xs font-semibold">Modulo
-                    <select name="scheda" defaultValue={modello?.id ?? ""} className="block rounded border border-neutral-300 px-2 py-1 text-sm">
-                      <option value="">Scegli…</option>
-                      {moduloDati.modelli.map((m) => <option key={m.id} value={m.id}>{m.nome}{m.fornitore ? ` — ${m.fornitore}` : ""}</option>)}
-                    </select>
-                  </label>
-                  <button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">Apri</button>
-                </form>
-                {modello && (
-                  <ModuloScheda azione={creaSchedaDaRilievo} nascosti={[{ name: "commessaId", value: c.id }]} modello={modello} righeLegno={moduloDati.legniPratica}
-                    angolariIniziali={{ iniziali: ap.valori, proposta: ap.proposta }} salvaLegno={salvaLegnoInPratica} salvaAngolari={salvaAngolariInPratica} modificabile dove="nella pratica"
-                    testoPulsante="📄 Salva il modulo" nota="Il CRM aggiunge da solo cliente, pratica, materiale e le misure del rilievo. Legno e angolari con «Salva» entrano anche nel materiale da ordinare." />
-                )}
-                {moduloDati.salvate.length > 0 && (
-                  <ul className="mt-3 divide-y divide-neutral-100 text-sm">
-                    {moduloDati.salvate.map((d) => (
-                      <li key={d.id} className="flex flex-wrap items-center gap-3 py-1"><a href={`/api/documenti/${d.id}`} target="_blank" rel="noopener" className="text-blue-800 underline">📄 {d.nome}</a><span className="text-xs text-neutral-500">{d.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}{d.caricatoDaNome ? ` · ${d.caricatoDaNome}` : ""}</span></li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            );
-          })()}
         </div>
 
       </details>

@@ -20,6 +20,13 @@ async function addetto() {
   return u;
 }
 
+/** Chi carica il rilievo (anche il tecnico) compila il modulo del fornitore: basta essere collegati. */
+async function rilevatore() {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  return u;
+}
+
 export async function salvaModelloScheda(fd: FormData) {
   const u = await addetto();
   const id = str(fd, "id"), nome = str(fd, "nome"), html = typeof fd.get("html") === "string" ? (fd.get("html") as string) : "";
@@ -191,7 +198,7 @@ async function logPratica(commessaId: string, testo: string, chi: string) {
 
 /** «📄 Salva il modulo» dal rilievo: compila la scheda con le misure scritte e la tiene nei documenti della pratica. */
 export async function creaSchedaDaRilievo(fd: FormData) {
-  const u = await addetto();
+  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
   if (!commessaId || !modelloId) return;
   const r = await compilaPerPratica(commessaId, modelloId, fd, u.nome);
@@ -203,7 +210,7 @@ export async function creaSchedaDaRilievo(fd: FormData) {
 
 /** «💾 Salva il legno nella pratica»: le righe LEGNO-… del materiale non ancora ordinato si riscrivono dal modulo (costo a barra) e la scheda si aggiorna. */
 export async function salvaLegnoInPratica(fd: FormData) {
-  const u = await addetto();
+  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
   if (!commessaId) return;
   const valori: Record<string, string> = {};
@@ -233,7 +240,7 @@ export async function salvaLegnoInPratica(fd: FormData) {
 
 /** «💾 Salva gli angolari nella pratica»: come il legno, con il costo a peso di Il Mastro. */
 export async function salvaAngolariInPratica(fd: FormData) {
-  const u = await addetto();
+  const u = await rilevatore();
   const commessaId = str(fd, "commessaId"), modelloId = str(fd, "modelloId");
   if (!commessaId) return;
   const valori: Record<string, string> = {};
