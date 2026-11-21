@@ -16,6 +16,7 @@ import { listiniOptima, GUIDA_OPTIMA, CATALOGHI_OPTIMA } from "@/lib/listini/opt
 import { listiniZenith, GUIDA_ZENITH, CATALOGHI_ZENITH } from "@/lib/listini/zenith";
 import { tendinaDi } from "@/lib/listini/serramenti-comuni";
 import { assicuraOptionalSerramenti } from "@/lib/listini/allinea-optional";
+import { assicuraColoriCompsfusi } from "@/lib/listini/compsfusi-server";
 import { listiniPlasma30, GUIDA_PLASMA30, CATALOGHI_PLASMA30, ePlasma30 } from "@/lib/listini/plasma30";
 import { GUIDA_PORTE_VETRO } from "@/lib/listini/porte-vetro";
 import { GUIDA_TEMPRA } from "@/lib/listini/tempra";
@@ -126,6 +127,7 @@ export default async function PreventivoPage({
 
   // optional dei serramenti (Zenith, Optima, Fidra, Plasma 30) aggiornati alla versione del codice: lavora solo la prima volta
   await assicuraOptionalSerramenti();
+  await assicuraColoriCompsfusi();
   const [optionaliDisponibili, prodottiTrovati, tassonomia] = await Promise.all([
     optionalAttiviDelMarchio(preventivo.brandId),
     q

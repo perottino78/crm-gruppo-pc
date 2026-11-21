@@ -62,6 +62,20 @@ async function main() {
   await dove(C.caricaRilievo(fd({ rilievoId: ril.id, misure: "Soggiorno L 1200 × H 1400" })));
   verifica((await prisma.rilievo.findUniqueOrThrow({ where: { id: ril.id } })).verbale === null, "verbale vuoto = nessun dato salvato");
 
+  console.log("1b. Colori MV Living sui componenti struttura (COMPSFUSI)");
+  await prisma.prodotto.createMany({ data: [{ brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "STANDARD", altezzaMm: 0, larghezzaMm: 4000, prezzoBase: 100, coefficienteRicarico: 1 }, { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "STANDARD", altezzaMm: 0, larghezzaMm: 5000, prezzoBase: 125, coefficienteRicarico: 1 }] });
+  await prisma.modelloProdotto.upsert({ where: { brandId_tipologia: { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M" } }, create: { brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", famiglia: "OUTDOOR", gruppo: "COMPONENTI STRUTTURA" }, update: {} });
+  await prisma.configurazione.deleteMany({ where: { chiave: "compsfusi_colori_versione" } });
+  const rcMv = await (await cerca(new NextRequest(`http://x/api/complementi?tipologia=COMPSFUSI_PROFILO_M&brandId=${brand.id}`))).json();
+  const colori: string[] = rcMv.risultati?.[0]?.colori ?? [];
+  verifica(colori.length >= 8 && colori.some((c) => c.includes("7016")) && colori.includes("Corten") && colori.includes("STANDARD"), "il profilo ha i colori MV Living nella tendina (e lo STANDARD di prima)", colori);
+  const prezzi = await prisma.prodotto.findMany({ where: { tipologia: "COMPSFUSI_PROFILO_M", larghezzaMm: 5000 }, select: { prezzoBase: true } });
+  verifica(prezzi.length === 8 && prezzi.every((x) => x.prezzoBase === 125), "stesso prezzo a misura per ogni colore", prezzi);
+  await cerca(new NextRequest(`http://x/api/complementi?tipologia=COMPSFUSI_PROFILO_M&brandId=${brand.id}`));
+  verifica((await prisma.prodotto.count({ where: { tipologia: "COMPSFUSI_PROFILO_M" } })) === 16, "richiamato più volte non duplica");
+  await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+  await prisma.modelloProdotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
+
   console.log("2. Ricerca nel listino e negli articoli");
   const r1 = await (await cerca(new NextRequest("http://x/api/complementi?q=scossalina"))).json();
   const p = r1.risultati.find((x: { tipo: string }) => x.tipo === "P");
