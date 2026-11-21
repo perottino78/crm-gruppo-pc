@@ -190,7 +190,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const pp = await passiDiCommessa(c.id);
   // cartella «Rilievi misura» della pratica: si vede e si riempie anche dal riquadro del rilievo
   const fileRilievi = (await documentiDi("COMMESSA", c.id)).filter((d) => d.cartella === "Rilievi misura");
-  const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo) : null;
+  const sel: ChiavePasso | null = pp ? passoDaMostrare(pp.passi, pp.corrente, passo ?? (avviso || fattoMateriale ? "MATERIALE" : undefined)) : null; // con un avviso sul materiale si resta nel riquadro del materiale (prima spariva e non diceva nulla)
   const apre = (...k: ChiavePasso[]) => sel !== null && k.includes(sel);
   const mostra = (...k: ChiavePasso[]) => !pp || (sel !== null && k.includes(sel));
   const passoSel = pp?.passi.find((x) => x.chiave === sel) ?? null;
@@ -719,7 +719,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                             ? <FornitoreRiga rigaId={r.id} fornitoreId={r.fornitoreId} fornitori={fornitoriLista} azione={impostaFornitoreRiga} />
                             : (r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>)}</td>
                           <td className="py-1.5 text-xs">{r.ordineFornitore
-                            ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
+                            ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}?passo=invio`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno} · ✉ invia</Link>
                             : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>
                           <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
                           <td className="py-1.5 text-right">{r.complemento && libera && <button formAction={eliminaComplemento} name="rigaId" value={r.id} className="text-xs text-red-700 underline">togli</button>}</td>
