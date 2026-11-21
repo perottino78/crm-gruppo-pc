@@ -210,7 +210,10 @@ export async function calcolaPrezzoAFormula(opts: {
 }
 
 
-/** Sceglie la lunghezza di listino più vicina a quella scritta (a parità, la maggiore). Pura e testabile. */
+/**
+ * Sceglie la barra di listino che COPRE la misura scritta: la più corta tra quelle uguali o più lunghe (430 → 500), mai una più corta
+ * (Ugo 21/11/2026: «non fare metà strada, altrimenti è corto quello che mi serve»). Pura e testabile.
+ */
 export function barraPiuVicina(lunghezze: number[], scritta: number, unita: "cm" | "mm"): { lunghezza: number; letta: number; inMm: boolean } | null {
   const l = [...new Set(lunghezze.filter((x) => x > 0))].sort((a, b) => a - b);
   if (!l.length || !(scritta > 0)) return null;
@@ -219,15 +222,13 @@ export function barraPiuVicina(lunghezze: number[], scritta: number, unita: "cm"
   let letta = scritta, inMm = false;
   if (unita === "cm" && scritta > max * 3 && scritta / 10 <= max * 1.5) { letta = scritta / 10; inMm = true; }
   // oltre la barra più lunga non si inventa un prezzo: resta «fuori listino» (si scrive come testo libero)
-  if (letta > max) return null;
-  let migliore = l[0];
-  for (const x of l) if (Math.abs(x - letta) < Math.abs(migliore - letta) || (Math.abs(x - letta) === Math.abs(migliore - letta) && x > migliore)) migliore = x;
-  return { lunghezza: migliore, letta, inMm };
+  const barra = l.find((x) => x >= letta);
+  return barra === undefined ? null : { lunghezza: barra, letta, inMm };
 }
 
 /**
  * Prodotti venduti a barre (solo lunghezza: profili, piantoni…): invece di rifiutare una misura che non è di listino
- * («misura fuori listino») si prende la barra più vicina (Ugo 21/11/2026). Ritorna null se il prodotto non è a barre.
+ * («misura fuori listino») si prende la barra che copre la misura (Ugo 21/11/2026). Ritorna null se il prodotto non è a barre.
  */
 export async function trovaBarraPiuVicina(opts: { brandId: string; tipologia: string; larghezza: number; colore?: string }): Promise<{ prodotto: Prodotto; richiesta: number; inMm: boolean } | null> {
   const righe = await prisma.prodotto.findMany({ where: { brandId: opts.brandId, tipologia: opts.tipologia, ...(opts.colore ? { colore: opts.colore } : {}) } });

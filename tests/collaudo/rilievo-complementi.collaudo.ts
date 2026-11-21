@@ -81,9 +81,9 @@ async function main() {
   {
     verifica(!dBarra?.includes("avviso=") && rBarra.descrizione.includes("barra 400") && rBarra.descrizione.includes("richiesto 4000 mm") && rBarra.prezzoAcquisto === 347, "4000 scritto in mm → barra da 400 cm al suo prezzo", { dBarra, d: rBarra.descrizione, p: rBarra.prezzoAcquisto });
   }
-  await C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "570", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })).catch(() => undefined);
-  const r570 = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, descrizione: { contains: "barra 600" } } });
-  verifica(r570.length === 1, "570 cm → barra da 600 cm (la più vicina)", r570.map((x) => x.descrizione));
+  await C.aggiungiComplemento(fd({ commessaId: c.id, tipo: "P", brandId: brand.id, tipologia: "COMPSFUSI_PROFILO_M", colore: "Corten", larghezza: "430", quantita: "1", descrizione: "COMPSFUSI PROFILO M" })).catch(() => undefined);
+  const r570 = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id, descrizione: { contains: "barra 500" } } });
+  verifica(r570.length === 1, "430 cm → barra da 500 cm (mai una più corta)", r570.map((x) => x.descrizione));
   await prisma.rigaOrdine.deleteMany({ where: { commessaId: c.id, descrizione: { contains: "COMPSFUSI PROFILO M" } } });
   await prisma.prodotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
   await prisma.modelloProdotto.deleteMany({ where: { tipologia: "COMPSFUSI_PROFILO_M" } });
