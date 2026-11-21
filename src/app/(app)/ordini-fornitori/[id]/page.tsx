@@ -95,8 +95,7 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
       {/* scorciatoie per l'ufficio ordini (richiesta di Ugo 20/11/2026): i moduli di rilievo interattivi e il rilievo della pratica */}
       {!annullato && (
         <div className="flex flex-wrap gap-2">
-          <Link href={viPasso("modulo")} className="btn-3d btn-3d-purple px-4 py-2 text-sm">📐 Compila il modulo di rilievo per il fornitore</Link>
-          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-blue px-4 py-2 text-sm">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
+          {o.commessaId && <Link href={`/commesse/${o.commessaId}?passo=RILIEVO#rilievo`} className="btn-3d btn-3d-outline px-3 py-1.5 text-xs">📏 Rilievo della pratica (misure, PDF, foto)</Link>}
         </div>
       )}
       {msg.ok && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✅ {msg.ok}</p>}
