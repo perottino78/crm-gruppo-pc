@@ -1,6 +1,7 @@
 // Schede di produzione in HTML per il fornitore (misure definitive): segnaposto, campi da compilare e compilazione. Logica pura, testata.
 import { htmlRiepilogoLegno, MODELLO_LEGNO } from "./legno";
 import { htmlRiepilogoAngolari, MODELLO_ANGOLARI } from "./angolari";
+import { MODELLO_SERRAMENTI } from "./serramenti";
 
 /** Segnaposto che riempie il CRM da solo. */
 export const SEGNAPOSTO_FISSI: Record<string, string> = {
@@ -34,8 +35,22 @@ export const nomeCampo = (c: string) => c.replace(/_/g, " ").replace(/^./, (x) =
 
 /** Sostituisce i segnaposto. I valori testuali sono protetti (HTML escape, a capo conservati); `righe` è già HTML.
  *  Le scelte diventano caselle: la voce scelta ☒, le altre ☐ (per le multiple i valori scelti sono separati da «|»). */
+/**
+ * I blocchi `<tbody data-vuoto="auto">…</tbody>` (una riga di tabella per ogni finestra del modulo serramenti) spariscono dalla scheda
+ * se nessuno dei loro campi è compilato; il primo resta sempre, così la tabella non rimane vuota.
+ */
+export function togliBlocchiVuoti(html: string, valori: Record<string, string>): string {
+  let indice = 0;
+  return html.replace(/<tbody data-vuoto="auto">([\s\S]*?)<\/tbody>/g, (blocco: string, dentro: string) => {
+    const primo = indice++ === 0;
+    const nomi = [...dentro.matchAll(/\{\{\s*(?:sc:|multi:)?([a-zA-Z0-9_àèéìòù]+)[|\s}]/g)].map((m) => m[1]).filter((n) => !(n in SEGNAPOSTO_FISSI));
+    const pieno = nomi.some((n) => (valori[n] ?? "").trim() !== "");
+    return pieno || primo ? blocco.replace(' data-vuoto="auto"', "") : "";
+  });
+}
+
 export function compilaScheda(html: string, valori: Record<string, string>, righeHtml: string): string {
-  const conScelte = html.replace(RE_SCELTA, (_m, tipo: string, nome: string, opz: string) => {
+  const conScelte = togliBlocchiVuoti(html, valori).replace(RE_SCELTA, (_m, tipo: string, nome: string, opz: string) => {
     const scelti = tipo === "multi" ? (valori[nome] ?? "").split("|").map((x) => x.trim()).filter(Boolean) : [(valori[nome] ?? "").trim()];
     return opz.split("|").map((o) => o.trim()).filter(Boolean).map((o) => `<span class="opz">${scelti.includes(o) ? "&#9746;" : "&#9744;"} ${esc(o)}</span>`).join(" ");
   });
@@ -148,5 +163,6 @@ export const MODELLI_PRONTI: { chiave: string; nome: string; descrizione: string
   { chiave: "lipari", nome: "Modulo d'ordine NEW LIPARI (pergola Lucilla)", descrizione: "Come il modulo del fornitore: installazione, dimensioni, piantoni, colore, motore, optional, traversi e illuminazione, una riga per pergola.", html: MODELLO_LIPARI },
   { chiave: "legno", nome: "Ordine legno piallato per vetrate (30×50…50×170 × 3000)", descrizione: "Tutte le sezioni da 30×50 a 30×170 e da 50×50 a 50×170 mm: pezzi e lunghezza per misura, essenza e lavorazione; nella scheda il riepilogo con metri, m³ e, se scritto, il prezzo concordato al m³.", html: MODELLO_LEGNO },
   { chiave: "angolari", nome: "Ordine angolari in alluminio per i legni (Il Mastro)", descrizione: "Forma (L, U, Z, piatto) con i lati come nella legenda, spessore, lato del bello (interno, esterno o entrambi), colore, lunghezza e pezzi; costo a peso di Il Mastro e vendita ×2. Nell'ordine parte già compilato dai legni dell'ordine e della pratica.", html: MODELLO_ANGOLARI },
+  { chiave: "serramenti", nome: "Modulo d'ordine serramenti PVC", descrizione: "Come il modulo cartaceo P&C: vetro, maniglie, fori, una riga per finestra (misure, codice apertura, rifilo alletta, celino, cassonetto, colori, vetro STC), coprifili e note; con i disegni dei codici apertura.", html: MODELLO_SERRAMENTI },
   { chiave: "seeglass", nome: "Modulo d'ordine SEEGLASS RUN (vetrata scorrevole Scintilla)", descrizione: "Come il modulo di C3 Systems: misure, vetro, ante e vie, profilo, colori, guarnizioni, chiusure, altezza azionamenti e trasporto, con le caselle ☒ ☐.", html: MODELLO_SEEGLASS },
 ];
