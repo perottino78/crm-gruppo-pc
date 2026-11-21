@@ -1065,6 +1065,11 @@ model TaskPratica {
   mailTesto         String?
   mailInviataIl     DateTime?
   avvisoInviatoIl   DateTime?
+  // Costo dell'operatore per questa fase: minuti impiegati × costo orario / 60 (finisce nei costi della commessa, voce Manodopera)
+  minuti            Int?
+  costoOrario       Float?
+  costoLavoro       Float     @default(0)
+  lavoroDaNome      String?
   createdAt         DateTime  @default(now())
   commenti          TaskCommento[]
 }
