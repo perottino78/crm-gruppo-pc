@@ -17,7 +17,8 @@ import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
 import { puoGestireOrdini, puoModuloRilievo, EMAIL_ORDINI } from "@/lib/ordini/server";
-import { creaOrdineDaRighe } from "@/app/ordini-actions";
+import { creaOrdineDaRighe, impostaFornitoreRiga } from "@/app/ordini-actions";
+import FornitoreRiga from "@/components/commesse/FornitoreRiga";
 import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
@@ -709,7 +710,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                           <td className="py-1.5"><input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} /></td>
                           <td className="py-1.5 pr-2">{r.kitDiId ? <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-indigo-100 text-indigo-900" title="Pezzo della distinta base: solo acquisto">🔗 KIT di {nomeRiga.get(r.kitDiId) ?? "—"}</span> : r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
                           <td className="py-1.5 text-right pr-3">{r.quantita}</td>
-                          <td className="py-1.5 text-xs">{r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>}</td>
+                          <td className="py-1.5 text-xs">{libera && puoGestireOrdini(utente)
+                            ? <FornitoreRiga rigaId={r.id} fornitoreId={r.fornitoreId} fornitori={fornitoriLista} azione={impostaFornitoreRiga} />
+                            : (r.fornitoreNome ?? <span className="text-amber-800">da scegliere</span>)}</td>
                           <td className="py-1.5 text-xs">{r.ordineFornitore
                             ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>
                             : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>

@@ -46,7 +46,7 @@ export default function BarraAzioniMateriale({ fornitori, progetti, uffici, puoO
             {puoOrdinare && (
               <div className="flex items-end gap-1">
                 <select name="fornitoreId" aria-label="Fornitore dell'ordine" className={`${inp} max-w-48`}>
-                  <option value="">fornitore delle righe</option>
+                  <option value="">usa il fornitore di ogni riga</option>
                   {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
                 </select>
                 <button formAction={azioni.ordine} className="btn-3d btn-3d-purple text-xs px-3 py-1.5">📨 Ordine al fornitore</button>

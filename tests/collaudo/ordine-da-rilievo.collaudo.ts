@@ -82,10 +82,16 @@ async function main() {
   const senza = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id, coprifilo.id] })));
   verifica(senza?.includes("non hanno il fornitore"), "riga senza fornitore: chiede di sceglierlo", senza);
   verifica(await prisma.ordineFornitore.count() === 0, "nessun ordine creato per sbaglio");
+  await O.impostaFornitoreRiga(tappi.id, mastro.id);
+  const tf = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id } });
+  verifica(tf.fornitoreId === mastro.id && tf.fornitoreNome === "IL MASTRO SRLS", "tendina del fornitore sulla riga: scelto Il Mastro", tf);
+  await O.impostaFornitoreRiga(tappi.id, "");
+  const tf2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id } });
+  verifica(tf2.fornitoreId === null && tf2.fornitoreNome === null, "tendina su «da scegliere»: fornitore tolto", tf2);
   const d1 = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [finestra.id, coprifilo.id] })));
   const o1 = await prisma.ordineFornitore.findFirstOrThrow({ where: { fornitoreId: fidra.id }, include: { righe: true } });
   verifica(o1.stato === "BOZZA" && o1.righe.length === 2 && o1.commessaId === c.id && o1.clienteFinale?.startsWith("GERBAUDO"), "ordine in bozza a FIDRA con le 2 righe spuntate", o1);
-  verifica(d1 === `/ordini-fornitori/${o1.id}?passo=righe`, "si apre l'ordine sui passi, dalle righe", d1);
+  verifica(d1 === `/ordini-fornitori/${o1.id}?passo=invio`, "si apre subito l'invio dell'email", d1);
   await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: [tappi.id], fornitoreId: mastro.id })));
   const t2 = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: tappi.id }, include: { ordineFornitore: true } });
   verifica(t2.fornitoreId === mastro.id && t2.fornitoreNome === "IL MASTRO SRLS" && t2.ordineFornitore?.fornitoreId === mastro.id, "fornitore scelto nella tendina: la riga va a Il Mastro", t2);

@@ -100,6 +100,29 @@ async function nuovoOrdineConRighe(nome: string, commessaId: string, fornitoreId
 }
 
 /**
+ * Cambia il fornitore di una riga del materiale ancora da ordinare (tendina nella tabella della pratica).
+ * Passando a un altro fornitore si azzerano prezzo, codice e costo del vecchio; «da scegliere» (vuoto) toglie il fornitore.
+ */
+export async function impostaFornitoreRiga(rigaId: string, fornitoreId: string) {
+  const u = await utente();
+  const r = await prisma.rigaOrdine.findUnique({ where: { id: rigaId } });
+  if (!r || r.ordineFornitoreId || r.ordinato || r.daMagazzino) return;
+  if (!fornitoreId) {
+    await prisma.rigaOrdine.update({ where: { id: rigaId }, data: { fornitoreId: null, fornitoreNome: null, prezzoAcquisto: null, codiceFornitore: null, costoPrevisto: null, scontoAcquisto: null } });
+  } else {
+    if (r.fornitoreId === fornitoreId) return;
+    const f = await prisma.soggetto.findUnique({ where: { id: fornitoreId }, select: { id: true, ragioneSociale: true, scontoFornitore: true } });
+    if (!f) return;
+    await prisma.rigaOrdine.update({
+      where: { id: rigaId },
+      data: { fornitoreId: f.id, fornitoreNome: f.ragioneSociale, ...(r.fornitoreId ? { prezzoAcquisto: null, codiceFornitore: null, costoPrevisto: null } : {}), scontoAcquisto: f.scontoFornitore ?? null },
+    });
+    await logCommessa(r.commessaId, `Fornitore della riga «${r.descrizione}» cambiato in ${f.ragioneSociale}.`, u.nome);
+  }
+  aggiorna(undefined, r.commessaId);
+}
+
+/**
  * Dal rilievo (come «Crea → Ordine fornitore» dell'ordine cliente in BConsole): le righe spuntate dello stesso fornitore
  * diventano un ordine in bozza, pronto da inviare con la lista senza prezzi e il rilievo allegato.
  */
@@ -128,7 +151,8 @@ export async function creaOrdineDaRighe(fd: FormData) {
   }
   const ordine = await nuovoOrdineConRighe(u.nome, commessaId, fornitoreId, righe.map((r) => r.id));
   if (!ordine) torna("Ordine non creato.");
-  redirect(`/ordini-fornitori/${ordine!.id}?passo=righe`);
+  // si apre subito l'invio dell'email (allegati, rilievi, ordine cartaceo); le righe restano un clic indietro
+  redirect(`/ordini-fornitori/${ordine!.id}?passo=invio`);
 }
 
 /** Ordine senza commessa (materiale a scorta, consumabili). */
