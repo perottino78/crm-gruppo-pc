@@ -14,12 +14,12 @@ test("pratica nuova: il primo passo è la creazione del progetto, gli altri aspe
   assert.equal(stato(base).RILIEVO_APP, "I");
 });
 
-test("progetto → fattura → benvenuto, in ordine", () => {
+test("progetto → benvenuto → fattura, in ordine", () => {
   const a = { ...base, progettoCreatoIl: adesso };
-  assert.equal(passiPratica(a).corrente, "FATTURA");
-  const b = { ...a, fatturaAccontoIl: adesso };
-  assert.equal(passiPratica(b).corrente, "BENVENUTO");
-  const c = { ...b, benvenutoIl: adesso };
+  assert.equal(passiPratica(a).corrente, "BENVENUTO");
+  const b = { ...a, benvenutoIl: adesso };
+  assert.equal(passiPratica(b).corrente, "FATTURA");
+  const c = { ...b, fatturaAccontoIl: adesso };
   assert.equal(passiPratica(c).corrente, "RILIEVO_APP");
 });
 
@@ -51,19 +51,20 @@ test("materiale, arrivo, posa e kit in sequenza fino alla fine", () => {
 
 test("passo da mostrare: solo il corrente, un passo fatto per rivederlo, mai uno futuro", () => {
   const { passi, corrente } = passiPratica({ ...base, progettoCreatoIl: adesso });
-  assert.equal(passoDaMostrare(passi, corrente, null), "FATTURA");
+  assert.equal(passoDaMostrare(passi, corrente, null), "BENVENUTO");
   assert.equal(passoDaMostrare(passi, corrente, "PROGETTO"), "PROGETTO");
-  assert.equal(passoDaMostrare(passi, corrente, "RILIEVO"), "FATTURA", "un passo futuro non si apre");
+  assert.equal(passoDaMostrare(passi, corrente, "RILIEVO"), "BENVENUTO", "un passo futuro non si apre");
   assert.equal(passoDaMostrare(passi, corrente, "SALDO"), "SALDO", "anche il saldo è sempre apribile");
   assert.equal(passoDaMostrare(passi, corrente, "INCASSO"), "INCASSO", "l'incasso è sempre apribile");
 });
 
 test("passo precedente: salta i passi in parallelo", () => {
   const { passi } = passiPratica(base);
-  assert.equal(passoPrecedente(passi, "RILIEVO_APP")?.chiave, "BENVENUTO");
+  assert.equal(passoPrecedente(passi, "RILIEVO_APP")?.chiave, "FATTURA");
   assert.equal(passoPrecedente(passi, "POSA_APP")?.chiave, "ARRIVO");
   assert.equal(passoPrecedente(passi, "PROGETTO"), null);
-  assert.equal(passoPrecedente(passi, "FATTURA")?.chiave, "PROGETTO");
+  assert.equal(passoPrecedente(passi, "BENVENUTO")?.chiave, "PROGETTO");
+  assert.equal(passoPrecedente(passi, "FATTURA")?.chiave, "BENVENUTO");
 });
 
 test("il saldo si può fare quando vuoi, anche prima degli ordini", () => {
@@ -80,6 +81,15 @@ test("posa parziale per materiale: si torna a materiale e ordini, poi arrivo, po
   assert.equal(passiPratica({ ...r1, riordino: { ordinato: true } }).corrente, "ARRIVO");
   // materiale arrivato: il riordino si chiude e si torna a fissare la posa
   assert.equal(passiPratica({ ...fino, materialeCompleto: true, posaFissata: false, riordino: null }).corrente, "POSA_APP");
+});
+
+test("intervento di fine posa aperto: la pratica resta a «Posa e fine lavori»; con riordino prima materiale e arrivo", () => {
+  const fino = { ...base, fatturaAccontoIl: adesso, progettoCreatoIl: adesso, benvenutoIl: adesso, viaLibera: true, rilievoFissato: true, rilievoCaricato: true, ordinato: true, materialeCompleto: true, saldoIncassato: true };
+  const r = passiPratica({ ...fino, interventoFinePosa: true });
+  assert.equal(r.corrente, "POSA");
+  assert.match(r.passi.find((p) => p.chiave === "POSA")!.nota, /intervento di fine posa/);
+  assert.equal(passiPratica({ ...fino, materialeCompleto: false, interventoFinePosa: true, riordino: { ordinato: false } }).corrente, "MATERIALE");
+  assert.equal(passiPratica({ ...fino, interventoFinePosa: true, posaFinita: true }).corrente, "KIT");
 });
 
 import { passiPratica as passiScheda } from "../../src/lib/clienti/pratica";
