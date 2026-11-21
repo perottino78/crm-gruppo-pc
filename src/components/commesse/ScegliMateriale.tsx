@@ -21,7 +21,7 @@ export function etichettaMateriale(m: Pick<MaterialeInLista, "base" | "quantita"
  * Cerca il materiale nel listino o negli articoli (o scrivilo a mano) e mettilo nella lista del rilievo.
  * Non salva niente da solo: i campi non hanno «name», la lista si salva con il rilievo.
  */
-export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void; brandId?: string }) {
+export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSospeso }: { fornitori: { id: string; ragioneSociale: string }[]; onAggiungi: (m: MaterialeInLista) => void; brandId?: string; onSospeso?: (testo: string | null) => void }) {
   const [albero, setAlbero] = useState<AlberoLeggero | null>(null);
   const [apriAlbero, setApriAlbero] = useState(false);
   async function caricaAlbero() {
@@ -42,6 +42,9 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
   const [colore, setColore] = useState(""), [L, setL] = useState(""), [H, setH] = useState(""), [quantita, setQuantita] = useState("1");
   const [fornitoreId, setFornitoreId] = useState(""), [note, setNote] = useState("");
   const [errore, setErrore] = useState<string | null>(null);
+
+  // prodotto scelto o descrizione scritta ma NON ancora messo in lista: lo si dice a chi sta per cambiare passo o salvare
+  useEffect(() => { onSospeso?.(scelto ? scelto.label : q.trim() ? q.trim() : null); }, [scelto, q, onSospeso]);
 
   useEffect(() => {
     if (scelto || q.trim().length < 2) { setRisultati([]); return; }
@@ -174,20 +177,20 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId }: { fo
             </label>
             {scelto.griglia && (
               <>
-                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">L ({scelto.unita})<input value={L} onChange={(e) => setL(e.target.value)} inputMode="decimal" className={`${inp} w-24`} /></label>
-                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">H ({scelto.unita})<input value={H} onChange={(e) => setH(e.target.value)} inputMode="decimal" className={`${inp} w-24`} /></label>
+                <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">L ({scelto.unita})<input value={L} onChange={(e) => setL(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="decimal" className={`${inp} w-24`} /></label>
+                {scelto.conAltezza !== false && (<label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">H ({scelto.unita})<input value={H} onChange={(e) => setH(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="decimal" className={`${inp} w-24`} /></label>)}
               </>
             )}
           </>
         )}
-        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Quantità<input value={quantita} onChange={(e) => setQuantita(e.target.value)} inputMode="numeric" className={`${inp} w-20`} /></label>
+        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Quantità<input value={quantita} onChange={(e) => setQuantita(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} inputMode="numeric" className={`${inp} w-20`} /></label>
         <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Fornitore
           <select value={fornitoreId} onChange={(e) => setFornitoreId(e.target.value)} className={`${inp} max-w-60`}>
             <option value="">{scelto ? "quello del listino" : "da scegliere…"}</option>
             {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
           </select>
         </label>
-        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Note<input value={note} onChange={(e) => setNote(e.target.value)} className={`${inp} w-48`} /></label>
+        <label className="text-xs font-bold text-neutral-800 flex flex-col gap-1">Note<input value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aggiungi(); } }} className={`${inp} w-48`} /></label>
         <button type="button" onClick={aggiungi} className="btn-3d btn-3d-teal text-sm px-3 py-1.5">➕ Aggiungi alla lista</button>
       </div>
       {errore && <p className="text-xs text-red-800">{errore}</p>}

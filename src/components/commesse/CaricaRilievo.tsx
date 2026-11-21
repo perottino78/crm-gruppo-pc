@@ -70,16 +70,19 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
     setInModifica(null);
   }
   const [passo, setPasso] = useState(1);
+  const [sospeso, setSospeso] = useState<string | null>(null);
   const PASSI = [
     { n: 1, nome: "Prodotti", icona: "📦" },
     { n: 2, nome: "Verbale", icona: "📋" },
     { n: 3, nome: "Misure e file", icona: "📏" },
     { n: 4, nome: "Salva", icona: "✅" },
   ];
-  const vai = (n: number) => { setPasso(Math.min(4, Math.max(1, n))); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const vai = (n: number) => { if (sospeso && n !== passo && !window.confirm(`«${sospeso}» è scelto ma NON ancora aggiunto alla lista (serve «➕ Aggiungi alla lista»). Vuoi andare avanti lo stesso?`)) return; setPasso(Math.min(4, Math.max(1, n))); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); };
   const pannello = (n: number) => (passo === n ? "" : "hidden");
   return (
-    <form action={caricaRilievo} className="mt-2 space-y-3">
+    <form action={caricaRilievo} className="mt-2 space-y-3"
+      onKeyDown={(e) => { if (e.key === "Enter" && (e.target as HTMLElement).tagName === "INPUT") e.preventDefault(); }}
+      onSubmit={(e) => { if (sospeso && !window.confirm(`«${sospeso}» è scelto ma NON ancora aggiunto alla lista, quindi non verrebbe salvato. Salvare comunque il rilievo?`)) e.preventDefault(); }}>
       <input type="hidden" name="rilievoId" value={rilievoId} />
       <input type="hidden" name="complementi" value={JSON.stringify(lista.map(({ etichetta: _e, base: _b, fornDefault: _f, fuori: _u, ...x }) => x))} />
 
@@ -100,6 +103,7 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
       <section className={pannello(1)}>
         <h3 className="mb-1 text-base font-bold text-neutral-900">📦 Prodotti venduti e da aggiungere</h3>
         <p className="mb-2 text-xs text-neutral-600">A sinistra quello che ha venduto il commerciale; sotto aggiungi quello che serve per finire il lavoro (solo acquisto: la vendita al cliente non cambia).</p>
+        {sospeso && <p className="mb-2 rounded border border-amber-400 bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-950">⚠️ «{sospeso}» non è ancora nella lista: premi «➕ Aggiungi alla lista» (oppure Invio) per tenerlo.</p>}
         <div className="rounded border border-neutral-200 bg-white">
           <p className="text-[11px] font-bold text-neutral-600 px-2 pt-1.5">VENDUTO (offerta del commerciale{materialeOfferta.some((m) => m.complemento) ? " e materiale già aggiunto" : ""})</p>
           {materialeOfferta.length ? (
@@ -141,7 +145,7 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
               ))}
             </ul>
           ) : <p className="px-2 py-1 text-xs text-neutral-500">Niente da aggiungere per ora.</p>}
-          <div className="p-2"><ScegliMateriale brandId={brandId} fornitori={fornitori} onAggiungi={(m) => setLista([...lista, m])} /></div>
+          <div className="p-2"><ScegliMateriale brandId={brandId} fornitori={fornitori} onAggiungi={(m) => setLista([...lista, m])} onSospeso={setSospeso} /></div>
         </div>
       </section>
 

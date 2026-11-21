@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 export type RisultatoComplemento =
   | { tipo: "A"; id: string; label: string; fornitoreId: string | null; fornitore: string | null; um: string; costo: number | null }
-  | { tipo: "P"; brandId: string; tipologia: string; label: string; gruppo: string | null; fornitoreId: string | null; colori: string[]; griglia: boolean; unita: "cm" | "mm" };
+  | { tipo: "P"; brandId: string; tipologia: string; label: string; gruppo: string | null; fornitoreId: string | null; colori: string[]; griglia: boolean; /** il listino ha anche l'altezza (profili e pezzi al metro hanno solo la lunghezza) */ conAltezza: boolean; unita: "cm" | "mm" };
 
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 
@@ -27,7 +27,8 @@ export async function GET(req: NextRequest) {
     if (!m) return NextResponse.json({ risultati: [] });
     const righe = await prisma.prodotto.findMany({ where: { brandId: m.brandId, tipologia: m.tipologia }, distinct: ["colore"], select: { colore: true }, take: 80 });
     const griglia = (await prisma.prodotto.count({ where: { brandId: m.brandId, tipologia: m.tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
-    return NextResponse.json({ risultati: [{ tipo: "P", brandId: m.brandId, tipologia: m.tipologia, label: labelBreveTipologia(m.tipologia) || m.tipologia, gruppo: m.gruppo, fornitoreId: m.fornitoreId, colori: righe.map((r) => r.colore), griglia, unita: unitaMisura(m.tipologia) }] });
+    const conAltezza = (await prisma.prodotto.count({ where: { brandId: m.brandId, tipologia: m.tipologia, altezzaMm: { gt: 0 } } })) > 0;
+    return NextResponse.json({ risultati: [{ tipo: "P", brandId: m.brandId, tipologia: m.tipologia, label: labelBreveTipologia(m.tipologia) || m.tipologia, gruppo: m.gruppo, fornitoreId: m.fornitoreId, colori: righe.map((r) => r.colore), griglia, conAltezza, unita: unitaMisura(m.tipologia) }] });
   }
   if (q.length < 2) return NextResponse.json({ risultati: [] });
   const parole = q.split(/\s+/).filter(Boolean).slice(0, 5);
@@ -52,7 +53,8 @@ export async function GET(req: NextRequest) {
   const prodotti = await Promise.all(trovati.map(async (m) => {
     const righe = await prisma.prodotto.findMany({ where: { brandId: m.brandId, tipologia: m.tipologia }, distinct: ["colore"], select: { colore: true, larghezzaMm: true, altezzaMm: true }, take: 60 });
     const griglia = righe.length > 0 && (await prisma.prodotto.count({ where: { brandId: m.brandId, tipologia: m.tipologia, OR: [{ larghezzaMm: { gt: 0 } }, { altezzaMm: { gt: 0 } }] } })) > 0;
-    return { tipo: "P" as const, brandId: m.brandId, tipologia: m.tipologia, label: m.label, gruppo: m.gruppo, fornitoreId: m.fornitoreId, colori: righe.map((r) => r.colore), griglia, unita: unitaMisura(m.tipologia) };
+    const conAltezza = righe.length > 0 && (await prisma.prodotto.count({ where: { brandId: m.brandId, tipologia: m.tipologia, altezzaMm: { gt: 0 } } })) > 0;
+    return { tipo: "P" as const, brandId: m.brandId, tipologia: m.tipologia, label: m.label, gruppo: m.gruppo, fornitoreId: m.fornitoreId, colori: righe.map((r) => r.colore), griglia, conAltezza, unita: unitaMisura(m.tipologia) };
   }));
 
   const risultati: RisultatoComplemento[] = [
