@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { RisultatoComplemento } from "@/app/api/complementi/route";
 import type { Complemento } from "@/app/commesse-actions";
-import type { AlberoLeggero } from "@/app/api/listino/albero/route";
+import type { AlberoLeggero, VoceLeggera } from "@/app/api/listino/albero/route";
 import ConfiguraAngolare from "@/components/ordini/ConfiguraAngolare";
 import ConfiguraLegno from "@/components/ordini/ConfiguraLegno";
 
@@ -99,11 +99,11 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSosp
                       <details key={g.nome} className="mb-0.5">
                         <summary className="cursor-pointer font-semibold text-neutral-800">{g.nome}</summary>
                         <div className="ml-3">
-                          {g.voci.map((v) => <button key={v.value} type="button" onClick={() => dalListino(v.value)} className="block w-full text-left px-1.5 py-0.5 hover:bg-blue-50 rounded">{v.label}</button>)}
+                          <VociATendine voci={g.voci} scegli={dalListino} />
                           {g.sottogruppi.map((sg) => (
                             <details key={sg.nome}>
                               <summary className="cursor-pointer text-neutral-700">{sg.nome}</summary>
-                              <div className="ml-3">{sg.voci.map((v) => <button key={v.value} type="button" onClick={() => dalListino(v.value)} className="block w-full text-left px-1.5 py-0.5 hover:bg-blue-50 rounded">{v.label}</button>)}</div>
+                              <div className="ml-3"><VociATendine voci={sg.voci} scegli={dalListino} /></div>
                             </details>
                           ))}
                         </div>
@@ -194,6 +194,30 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSosp
         <button type="button" onClick={aggiungi} className="btn-3d btn-3d-teal text-sm px-3 py-1.5">➕ Aggiungi alla lista</button>
       </div>
       {errore && <p className="text-xs text-red-800">{errore}</p>}
+    </div>
+  );
+}
+
+/** Voci del listino: se hanno le due tendine (serramenti, porte, coprifili…) si sceglie con due menu a cascata, altrimenti elenco semplice. */
+function VociATendine({ voci, scegli }: { voci: VoceLeggera[]; scegli: (value: string) => void }) {
+  const [primo, setPrimo] = useState("");
+  const conAssi = voci.length > 0 && voci.every((v) => v.assi);
+  if (!conAssi) return <>{voci.map((v) => <button key={v.value} type="button" onClick={() => scegli(v.value)} className="block w-full text-left px-1.5 py-0.5 hover:bg-blue-50 rounded">{v.label}</button>)}</>;
+  const primi = [...new Map(voci.map((v) => [v.assi![0].valore, v.assi![0].label])).entries()];
+  const secondi = voci.filter((v) => v.assi![0].valore === primo);
+  const sel = "border border-neutral-300 rounded px-2 py-1 text-xs bg-white max-w-full";
+  return (
+    <div className="flex flex-wrap items-center gap-2 py-1">
+      <select value={primo} onChange={(e) => setPrimo(e.target.value)} className={sel} aria-label="Prima scelta">
+        <option value="">Scegli…</option>
+        {primi.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+      </select>
+      {primo && (
+        <select value="" onChange={(e) => e.target.value && scegli(e.target.value)} className={sel} aria-label="Seconda scelta">
+          <option value="">Poi scegli…</option>
+          {secondi.map((v) => <option key={v.value} value={v.value}>{v.assi![1].label}</option>)}
+        </select>
+      )}
     </div>
   );
 }
