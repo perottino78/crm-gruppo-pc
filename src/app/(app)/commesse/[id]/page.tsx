@@ -23,6 +23,7 @@ import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConseg
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
 import { agganciaOffertaONE } from "@/app/commesse-actions";
+import AzioniRigaMateriale from "@/components/commesse/AzioniRigaMateriale";
 import PercorsoProgetto from "@/components/commesse/PercorsoProgetto";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
@@ -58,6 +59,8 @@ import {
   aggiornaRigaOrdine,
   aggiungiCostoManuale,
   eliminaComplemento,
+  duplicaComplemento,
+  modificaComplemento,
   eliminaCostoManuale,
   programmaPosa,
   annullaPosa,
@@ -871,7 +874,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                             ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}?passo=invio`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno} · ✉ invia</Link>
                             : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>
                           <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
-                          <td className="py-1.5 text-right">{r.complemento && libera && <button formAction={eliminaComplemento} name="rigaId" value={r.id} className="text-xs text-red-700 underline">togli</button>}</td>
+                          <td className="py-1.5 text-right">{r.complemento && libera && <AzioniRigaMateriale rigaId={r.id} descrizione={r.descrizione} quantita={r.quantita} note={r.note} azioni={{ modifica: modificaComplemento, duplica: duplicaComplemento, elimina: eliminaComplemento }} />}</td>
                         </tr>
                       );
                     })}
