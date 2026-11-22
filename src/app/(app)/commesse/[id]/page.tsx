@@ -386,7 +386,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <option value="">Scegli l&apos;offerta…</option>
               {offerteAgganciabili.map((o) => <option key={o.id} value={o.id}>{`${o.numeroOfferta ?? "senza numero"} · ${o.oggetto ?? "offerta"} · ${o.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}`}</option>)}
             </select>
-            <label className="flex items-center gap-1.5 text-xs font-bold text-amber-900"><input type="checkbox" name="eliminaAltra" value="1" defaultChecked /> 🗑 Cancella l&apos;altra pratica di ONE (se è ancora vuota)</label>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-amber-900"><input type="checkbox" name="eliminaAltra" value="1" defaultChecked /> 🗑 Cancella l&apos;offerta e la pratica di ONE (se la pratica è ancora vuota)</label>
             <button className="btn-3d btn-3d-amber text-sm px-4 py-2">🔗 Inserisci l&apos;offerta di ONE</button>
           </form>
         ) : (

@@ -60,6 +60,7 @@ async function main() {
   const altra = await prisma.commessa.create({ data: { numero: 77, anno: 2026, preventivoId: prod2.id, clienteId: cliente.id, brandId: pura.id, responsabileId: ugo.id, totaleVendita: 122, totaleImponibile: 100, accontoTipo: "ACCONTO", stato: "IN_ATTESA_ACCONTO" } });
   r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod2.id, eliminaAltra: "1" })));
   verifica((await prisma.commessa.findUnique({ where: { id: altra.id } })) === null && (await prisma.commessa.findUnique({ where: { id: c!.id } })) !== null, "l'altra pratica di ONE, ancora vuota, viene cancellata e resta quella di BConsole", r);
+  verifica((await prisma.preventivo.findUnique({ where: { id: prod2.id } })) === null && (await prisma.cestino.count({ where: { rifId: prod2.id } })) === 1, "anche l'offerta di ONE è cancellata e finisce nel cestino");
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { await prisma.$disconnect(); process.exit(ko ? 1 : 0); });

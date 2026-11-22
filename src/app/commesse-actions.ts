@@ -1362,8 +1362,33 @@ export async function agganciaOffertaONE(formData: FormData) {
           await tx.documento.deleteMany({ where: { entita: "COMMESSA", entitaId: altra.id } });
           await tx.commessa.delete({ where: { id: altra.id } });
         });
-        nota = " L'altra pratica di ONE è stata cancellata: resta solo questa.";
+        nota = " L'altra pratica di ONE è stata cancellata.";
       } catch { nota = " L'altra pratica di ONE non si è potuta cancellare (ha dati collegati): chiedimelo e la tolgo a mano."; }
+    }
+  }
+  // e anche l'offerta di ONE (nel cestino 30 giorni) se non ha più una pratica
+  if (formData.get("eliminaAltra") === "1") {
+    const ancora = await prisma.commessa.count({ where: { preventivoId: orig!.id } });
+    if (ancora) nota += " L'offerta di ONE resta perché la sua pratica è ancora lì.";
+    else {
+      try {
+        const { mettiNelCestino } = await import("@/lib/cestino");
+        await mettiNelCestino("PREVENTIVO", orig!.id, { id: u.id, nome: u.nome });
+        const solaris = await prisma.solarisProgetto.findMany({ where: { preventivoId: orig!.id }, select: { id: true } });
+        const idRighe = (await prisma.rigaPreventivo.findMany({ where: { preventivoId: orig!.id }, select: { id: true } })).map((x) => x.id);
+        await prisma.$transaction([
+          prisma.documento.deleteMany({ where: { entita: "RIGA_PREVENTIVO", entitaId: { in: idRighe } } }),
+          prisma.solarisFoto.deleteMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }),
+          prisma.solarisProgetto.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.emailOfferta.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: orig!.id } } }),
+          prisma.rigaPreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.sezionePreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.promemoriaInviato.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.preventivo.delete({ where: { id: orig!.id } }),
+        ]);
+        nota += " L'offerta di ONE è stata cancellata (resta 30 giorni nel cestino).";
+      } catch (e) { console.error("agganciaOffertaONE elimina offerta", e); nota += " L'offerta di ONE non si è potuta cancellare."; }
     }
   }
   await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
