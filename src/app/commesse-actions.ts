@@ -1282,6 +1282,40 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
   redirect(`/commesse/${c.id}?ok=${encodeURIComponent(`Pratica presa in carico da BConsole: il task è passato a ${f!.nome}`)}`);
 }
 
+
+/**
+ * Aggancia a una pratica presa in carico da BConsole l'offerta già fatta in ONE (Ugo 22/11/2026: «sarebbe solo da accoppiare insieme»).
+ * L'offerta di ONE prende il posto di quella provvisoria a righe di testo creata dall'import; si portano nel materiale le sue righe vere.
+ */
+export async function agganciaOffertaONE(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const { puo } = await import("@/lib/permessi/catalogo");
+  const commessaId = str(formData, "commessaId") ?? "";
+  const preventivoId = str(formData, "preventivoId") ?? "";
+  const torna = (m: Record<string, string>) => redirect(`/commesse/${commessaId}?${new URLSearchParams(m)}#progetto`);
+  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di agganciare l'offerta" });
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } } } });
+  if (!c || !c.ordineBC) torna({ avviso: "Si può agganciare l'offerta solo a una pratica presa da BConsole" });
+  const nuova = await prisma.preventivo.findUnique({ where: { id: preventivoId }, select: { id: true, clienteId: true, commessa: { select: { id: true } }, totaleNetto: true, totaleIva: true, stato: true, confermatoIl: true } });
+  if (!nuova || nuova.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
+  if (nuova!.commessa && nuova!.commessa.id !== c!.id) torna({ avviso: "Questa offerta è già collegata a un'altra pratica" });
+  if (nuova!.commessa?.id === c!.id) torna({ avviso: "Questa offerta è già agganciata alla pratica" });
+  if (c!.ordiniFornitore.length) torna({ avviso: "Ci sono già ordini ai fornitori: l'offerta non si cambia più" });
+  const vecchiaId = c!.preventivoId;
+  await prisma.$transaction(async (tx) => {
+    await tx.commessa.update({ where: { id: c!.id }, data: { preventivoId: nuova!.id } });
+    await tx.preventivo.update({ where: { id: nuova!.id }, data: { stato: "ACCETTATO", confermatoIl: nuova!.confermatoIl ?? new Date(), confermatoDaNome: u.nome } });
+    // l'offerta provvisoria nata dall'import (solo righe di testo) non serve più
+    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: vecchiaId } });
+    await tx.preventivo.delete({ where: { id: vecchiaId } }).catch(() => {});
+  });
+  await assicuraRigheOfferta(c!.id);
+  await log(c!.id, `Offerta di ONE agganciata alla pratica di BConsole da ${u.nome}: le sue righe sono nel materiale.`);
+  revalidatePath(`/commesse/${c!.id}`);
+  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE agganciata: il materiale è quello dell'offerta")}#progetto`);
+}
+
 // ============ DISTINTA BASE (KIT) ============
 /**
  * Aggiunge al materiale della pratica i pezzi della distinta base del modello di una riga (solo acquisto).

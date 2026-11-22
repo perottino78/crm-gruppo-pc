@@ -27,6 +27,8 @@ export type DatiPassi = {
   riordino?: { ordinato: boolean } | null;
   /** C'è un intervento di fine posa ancora da fare (dopo una posa parziale): la pratica resta al passo «Posa e fine lavori». */
   interventoFinePosa?: boolean;
+  /** Pratica presa in carico da BConsole a lavoro già avviato (Ugo 22/11/2026): progetto, fattura di acconto e benvenuto non si rifanno. */
+  daBConsole?: boolean;
 };
 
 export type StatoPasso = "FATTO" | "ORA" | "IN_ATTESA";
@@ -71,6 +73,7 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
     RILIEVO_APP: d.rilievoFissato, RILIEVO: d.rilievoCaricato, MATERIALE: d.ordinato, ARRIVO: d.materialeCompleto, SALDO: d.saldoIncassato,
     POSA_APP: d.posaFissata, POSA: d.posaFinita, KIT: d.kitConsegnato,
   };
+  if (d.daBConsole) { raw.PROGETTO = true; raw.BENVENUTO = true; raw.FATTURA = true; }
   if (d.interventoFinePosa && !d.posaFinita) raw.POSA_APP = true;
   if (d.riordino) { raw.MATERIALE = d.riordino.ordinato; raw.ARRIVO = false; raw.POSA_APP = false; }
   const sequenza = DEF.filter((x) => !x.parallelo);
@@ -114,6 +117,8 @@ function notaPasso(c: ChiavePasso, fatto: boolean, d: DatiPassi): string {
 export function passoDaMostrare(passi: PassoPratica[], corrente: ChiavePasso | null, richiesto?: string | null): ChiavePasso | null {
   const r = passi.find((p) => p.chiave === richiesto);
   if (r && (r.stato === "FATTO" || r.parallelo || r.chiave === corrente)) return r.chiave;
+  // appuntamento e caricamento del rilievo stanno nella stessa sezione: «Carica il rilievo» dal task si apre anche se l'appuntamento non è ancora in ONE
+  if (r && r.chiave === "RILIEVO" && corrente === "RILIEVO_APP") return r.chiave;
   return corrente ?? passi[passi.length - 1]?.chiave ?? null;
 }
 
