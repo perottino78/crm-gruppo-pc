@@ -1304,30 +1304,40 @@ export async function agganciaOffertaONE(formData: FormData) {
   if (orig!.id === c!.preventivoId) torna({ avviso: "È già l'offerta di questa pratica" });
   if (!orig!.righe.length) torna({ avviso: "L'offerta scelta non ha prodotti" });
   const dest = c!.preventivoId;
-  await prisma.$transaction(async (tx) => {
-    // via le righe di testo dell'import (e il materiale non ancora ordinato che ne derivava)
-    await tx.rigaOrdine.deleteMany({ where: { commessaId: c!.id, ordinato: false, complemento: false } });
-    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: dest } });
-    await tx.sezionePreventivo.deleteMany({ where: { preventivoId: dest } });
-    await tx.preventivo.update({ where: { id: dest }, data: {
-      aliquotaIva: orig!.aliquotaIva, scontoPercentuale: orig!.scontoPercentuale, prezzoManualeAttivo: orig!.prezzoManualeAttivo, prezzoManualeTotale: orig!.prezzoManualeTotale,
-      immagineCopertinaUrl: orig!.immagineCopertinaUrl, condizioniPagamento: orig!.condizioniPagamento ?? undefined, condizioniConsegna: orig!.condizioniConsegna ?? undefined,
-    } });
-    const mappa = new Map<string, string>();
-    for (const sez of orig!.sezioni) mappa.set(sez.id, (await tx.sezionePreventivo.create({ data: { preventivoId: dest, nome: sez.nome, ordine: sez.ordine } })).id);
-    for (const r of orig!.righe) {
-      const nr = await tx.rigaPreventivo.create({ data: {
-        preventivoId: dest, prodottoId: r.prodottoId, testoLibero: r.testoLibero, quantita: r.quantita, prezzoUnitario: r.prezzoUnitario,
-        optionalDescrizione: r.optionalDescrizione, optionalPrezzo: r.optionalPrezzo, mostraDescrizione: r.mostraDescrizione, allegaScheda: r.allegaScheda,
-        misuraLarghezza: r.misuraLarghezza, misuraAltezza: r.misuraAltezza, descrizionePersonalizzata: r.descrizionePersonalizzata, ordine: r.ordine,
-        sezioneId: r.sezioneId ? mappa.get(r.sezioneId) ?? null : null,
+  try {
+    await prisma.$transaction(async (tx) => {
+      // via le righe di testo dell'import (e il materiale non ancora ordinato che ne derivava)
+      await tx.rigaOrdine.deleteMany({ where: { commessaId: c!.id, ordinato: false, complemento: false } });
+      await tx.rigaPreventivo.deleteMany({ where: { preventivoId: dest } });
+      await tx.sezionePreventivo.deleteMany({ where: { preventivoId: dest } });
+      await tx.preventivo.update({ where: { id: dest }, data: {
+        aliquotaIva: orig!.aliquotaIva, scontoPercentuale: orig!.scontoPercentuale, prezzoManualeAttivo: orig!.prezzoManualeAttivo, prezzoManualeTotale: orig!.prezzoManualeTotale,
+        immagineCopertinaUrl: orig!.immagineCopertinaUrl, condizioniPagamento: orig!.condizioniPagamento ?? undefined, condizioniConsegna: orig!.condizioniConsegna ?? undefined,
       } });
-      if (r.optionali.length) await tx.rigaOptional.createMany({ data: r.optionali.map((o) => ({ rigaId: nr.id, optionalId: o.optionalId, quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, nota: o.nota })) });
-    }
-  }, { timeout: 30000 });
-  const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
-  await ricalcolaTotali(dest);
-  await assicuraRigheOfferta(c!.id);
+      const mappa = new Map<string, string>();
+      for (const sez of orig!.sezioni) mappa.set(sez.id, (await tx.sezionePreventivo.create({ data: { preventivoId: dest, nome: sez.nome, ordine: sez.ordine } })).id);
+      for (const r of orig!.righe) {
+        const nr = await tx.rigaPreventivo.create({ data: {
+          preventivoId: dest, prodottoId: r.prodottoId, testoLibero: r.testoLibero, quantita: r.quantita, prezzoUnitario: r.prezzoUnitario,
+          optionalDescrizione: r.optionalDescrizione, optionalPrezzo: r.optionalPrezzo, mostraDescrizione: r.mostraDescrizione, allegaScheda: r.allegaScheda,
+          misuraLarghezza: r.misuraLarghezza, misuraAltezza: r.misuraAltezza, descrizionePersonalizzata: r.descrizionePersonalizzata, ordine: r.ordine,
+          sezioneId: r.sezioneId ? mappa.get(r.sezioneId) ?? null : null,
+        } });
+        if (r.optionali.length) await tx.rigaOptional.createMany({ data: r.optionali.map((o) => ({ rigaId: nr.id, optionalId: o.optionalId, quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, nota: o.nota })) });
+      }
+    }, { timeout: 30000 });
+  } catch (e) {
+    console.error("agganciaOffertaONE", e);
+    torna({ avviso: `Non sono riuscito a inserire l'offerta (${(e instanceof Error ? e.message : String(e)).split("\n").filter(Boolean).slice(-2).join(" ").slice(0, 300)}). Non è stato cambiato nulla.` });
+  }
+  try {
+    const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
+    await ricalcolaTotali(dest);
+    await assicuraRigheOfferta(c!.id);
+  } catch (e) {
+    console.error("agganciaOffertaONE dopo la copia", e);
+    torna({ avviso: `Le righe sono state copiate ma il materiale non si è aggiornato (${(e instanceof Error ? e.message : String(e)).split("\n").filter(Boolean).slice(-2).join(" ").slice(0, 300)}).` });
+  }
   // «teniamo solo quella di BConsole e l'altra la cancelliamo» (Ugo 22/11/2026): la pratica di ONE nata dalla stessa offerta si toglie, ma solo se è ancora vuota
   let nota = "";
   const altra = orig!.commessa;
@@ -1352,8 +1362,33 @@ export async function agganciaOffertaONE(formData: FormData) {
           await tx.documento.deleteMany({ where: { entita: "COMMESSA", entitaId: altra.id } });
           await tx.commessa.delete({ where: { id: altra.id } });
         });
-        nota = " L'altra pratica di ONE è stata cancellata: resta solo questa.";
+        nota = " L'altra pratica di ONE è stata cancellata.";
       } catch { nota = " L'altra pratica di ONE non si è potuta cancellare (ha dati collegati): chiedimelo e la tolgo a mano."; }
+    }
+  }
+  // e anche l'offerta di ONE (nel cestino 30 giorni) se non ha più una pratica
+  if (formData.get("eliminaAltra") === "1") {
+    const ancora = await prisma.commessa.count({ where: { preventivoId: orig!.id } });
+    if (ancora) nota += " L'offerta di ONE resta perché la sua pratica è ancora lì.";
+    else {
+      try {
+        const { mettiNelCestino } = await import("@/lib/cestino");
+        await mettiNelCestino("PREVENTIVO", orig!.id, { id: u.id, nome: u.nome });
+        const solaris = await prisma.solarisProgetto.findMany({ where: { preventivoId: orig!.id }, select: { id: true } });
+        const idRighe = (await prisma.rigaPreventivo.findMany({ where: { preventivoId: orig!.id }, select: { id: true } })).map((x) => x.id);
+        await prisma.$transaction([
+          prisma.documento.deleteMany({ where: { entita: "RIGA_PREVENTIVO", entitaId: { in: idRighe } } }),
+          prisma.solarisFoto.deleteMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }),
+          prisma.solarisProgetto.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.emailOfferta.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: orig!.id } } }),
+          prisma.rigaPreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.sezionePreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.promemoriaInviato.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.preventivo.delete({ where: { id: orig!.id } }),
+        ]);
+        nota += " L'offerta di ONE è stata cancellata (resta 30 giorni nel cestino).";
+      } catch (e) { console.error("agganciaOffertaONE elimina offerta", e); nota += " L'offerta di ONE non si è potuta cancellare."; }
     }
   }
   await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
