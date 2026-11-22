@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { inMemoriaListino } from "./cache";
 import { articoloLatt } from "./lattoneria";
 import type { FamigliaNodo, NodoTipologia } from "@/components/SelettoreProdotto";
+import { assiSelezioneCoprifili } from "@/lib/listini/coprifili";
 import { haMisura, sottogruppoDiTipologia, labelBreveTipologia, notaInArrivo, assiSelezioneZpc, assiSelezioneUragano, assiSelezioneVerticale, assiSelezioneModelloAnte, assiSelezionePersianeBlindate, assiSelezioneKopen, assiSelezioneIsomax, assiSelezioneMinibox, assiSelezioneTapparelle, assiSelezioneWpc, assiSelezioneSeraFrangisole, assiSelezioneAccessoriTapparelle, assiSelezioneBlindati, assiSelezioneZenith, assiSelezioneRullo, assiSelezionePergola, assiSelezioneVetrata, assiSelezioneBioclimatica } from "@/lib/prodotti";
 
 // Gruppi di tende da sole che usano un tessuto Tempotest (vedi task #210): qui la
@@ -205,7 +206,7 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
         assiKopen: assiSelezioneKopen(tip) ?? undefined,
         // Isomax (Porte interne): assi modello -> tipo apertura, per la selezione
         // a 2 tendine a cascata invece della lista piatta (fino a 20 voci per modello).
-        assiIsomax: assiSelezioneIsomax(tip) ?? undefined,
+        assiIsomax: assiSelezioneIsomax(tip) ?? assiSelezioneCoprifili(tip) ?? undefined,
         // Tende a rullo da interno: assi tessuto -> variante (meccanismo/cassonetto),
         // per la selezione a 2 tendine a cascata (1 sola per Tagli Tessuto, che non ha
         // varianti di meccanismo) invece della lista piatta (fino a 34 voci per linea).

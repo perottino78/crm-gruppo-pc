@@ -24,8 +24,8 @@ test("costo al metro per colore (sovrapprezzi della pellicola sul rivestito, Sal
 
 test("nomi, sottogruppi e vendita al metro", () => {
   assert.equal(labelCoprifilo("COPRIF_65025030"), "Coprifilo piatto 30 x 2,5 (EXTE 65025030)");
-  assert.equal(sottogruppoCoprifilo("COPRIF_71030030"), "Angolari a lati uguali");
-  assert.equal(sottogruppoDiTipologia("COPRIF_640730"), "Scatolati 7 mm con baffo adesivi");
+  assert.equal(sottogruppoCoprifilo("COPRIF_71030030"), "PVC — Coprifili e angolari");
+  assert.equal(sottogruppoDiTipologia("COPRIF_640730"), "PVC — Coprifili e angolari");
   assert.equal(lattAlMetro("COPRIF_65025030"), true);
   const { prodotti } = catalogoCoprifili();
   assert.ok(prodotti.every((p) => p.colore.endsWith("— al metro") && p.prezzoBase > 0));

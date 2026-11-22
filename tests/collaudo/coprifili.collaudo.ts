@@ -28,7 +28,7 @@ async function main() {
   const r2 = await (await seed.POST(req("POST"))).json();
   verifica(r2.prodottiCreati === 0 && r2.prodottiAggiornati === 0 && (await prisma.soggetto.count({ where: { ragioneSociale: "EXTE" } })) === 1, "rilancio senza doppioni, un solo fornitore EXTE", r2);
   const m = await prisma.modelloProdotto.findFirstOrThrow({ where: { tipologia: "COPRIF_65025030" } });
-  verifica(m.famiglia === "INDOOR" && m.gruppo === "COPRIFILI E ANGOLARI" && m.codiceFornitore === "65025030" && m.scontoAcquisto === 50 && !m.descrizioneTecnica?.includes("€"), "Indoor › Coprifili e angolari, codice EXTE e sconto d'acquisto sul modello, nessun prezzo nella descrizione", m);
+  verifica(m.famiglia === "INDOOR" && m.gruppo === "SERRAMENTI" && m.codiceFornitore === "65025030" && m.scontoAcquisto === 50 && !m.descrizioneTecnica?.includes("€"), "Indoor › Coprifili e angolari, codice EXTE e sconto d'acquisto sul modello, nessun prezzo nella descrizione", m);
 
   // Coprifilo piatto 30: bianco 59,74 €/100 m → 0,60 €/m costo, 1,20 €/m vendita; antracite (rivestito 271,14) → 2,71 → 5,42; Salamander +15%
   const piatto = await prisma.prodotto.findMany({ where: { tipologia: "COPRIF_65025030" } });
@@ -39,8 +39,15 @@ async function main() {
   verifica(p25.length === 2 && p25.every((p) => p.colore.startsWith("Bianco")), "piatto 25: solo bianco e bianco Salamander (niente pellicolati a catalogo)", p25.map((p) => p.colore));
 
   const albero = await tassonomiaListino(b.id);
-  const gruppo = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((x) => x.nome === "COPRIFILI E ANGOLARI");
+  const gruppo = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((x) => x.nome === "SERRAMENTI");
   verifica(!!gruppo, "nell'albero del listino (Indoor › Coprifili e angolari)", albero.map((f) => [f.nome, f.gruppi.map((x) => x.nome)]));
+
+  const sg = gruppo?.sottogruppi?.find((x) => x.nome === "PVC — Coprifili e angolari");
+  verifica(!!sg && sg.tipologie.length === 81 && sg.tipologie.every((t) => t.assiIsomax), "in Serramenti › PVC — Coprifili e angolari, tutti con le due tendine (tipo di profilo → misura)", sg?.tipologie.length);
+  const t30 = sg?.tipologie.find((t) => t.value === "COPRIF_65025030");
+  verifica(t30?.assiIsomax?.modello.label === "Coprifili piatti" && /30/.test(t30.assiIsomax.apertura.label), "coprifilo piatto 30: tendina tipo «Coprifili piatti», misura con 30", t30?.assiIsomax);
+  const { assicuraCoprifili } = await import("../../src/lib/listini/coprifili-server");
+  verifica((await assicuraCoprifili()) !== undefined && (await assicuraCoprifili()) === null, "si carica da solo all'apertura dell'offerta (una volta sola)");
 
   const c = await prisma.cliente.create({ data: { nome: "Rossi Mario", brandId: b.id } });
   const prev = await prisma.preventivo.create({ data: { clienteId: c.id, brandId: b.id, commercialeId: u.id } });
