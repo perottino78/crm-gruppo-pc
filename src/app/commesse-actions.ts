@@ -1284,8 +1284,9 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
 
 
 /**
- * Aggancia a una pratica presa in carico da BConsole l'offerta già fatta in ONE (Ugo 22/11/2026: «sarebbe solo da accoppiare insieme»).
- * L'offerta di ONE prende il posto di quella provvisoria a righe di testo creata dall'import; si portano nel materiale le sue righe vere.
+ * Mette i prodotti e i prezzi di un'offerta già fatta in ONE dentro la pratica presa da BConsole (Ugo 22/11/2026: «inserire l'offerta direttamente
+ * in quella di BConsole, quella di ONE è già a livello di prodotti e prezzi»). L'offerta di ONE (anche se ha una sua pratica) resta com'è e viene COPIATA
+ * nell'offerta della pratica al posto delle righe di testo dell'import; i totali della pratica (quelli di BConsole) non cambiano.
  */
 export async function agganciaOffertaONE(formData: FormData) {
   const u = await getCurrentUser();
@@ -1294,26 +1295,42 @@ export async function agganciaOffertaONE(formData: FormData) {
   const commessaId = str(formData, "commessaId") ?? "";
   const preventivoId = str(formData, "preventivoId") ?? "";
   const torna = (m: Record<string, string>) => redirect(`/commesse/${commessaId}?${new URLSearchParams(m)}#progetto`);
-  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di agganciare l'offerta" });
-  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } } } });
-  if (!c || !c.ordineBC) torna({ avviso: "Si può agganciare l'offerta solo a una pratica presa da BConsole" });
-  const nuova = await prisma.preventivo.findUnique({ where: { id: preventivoId }, select: { id: true, clienteId: true, commessa: { select: { id: true } }, totaleNetto: true, totaleIva: true, stato: true, confermatoIl: true } });
-  if (!nuova || nuova.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
-  if (nuova!.commessa && nuova!.commessa.id !== c!.id) torna({ avviso: "Questa offerta è già collegata a un'altra pratica" });
-  if (nuova!.commessa?.id === c!.id) torna({ avviso: "Questa offerta è già agganciata alla pratica" });
-  if (c!.ordiniFornitore.length) torna({ avviso: "Ci sono già ordini ai fornitori: l'offerta non si cambia più" });
-  const vecchiaId = c!.preventivoId;
+  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di inserire l'offerta" });
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } }, righeOrdine: { select: { id: true, ordinato: true } } } });
+  if (!c || !c.ordineBC) torna({ avviso: "Si può usare solo su una pratica presa da BConsole" });
+  if (c!.ordiniFornitore.length || c!.righeOrdine.some((r) => r.ordinato)) torna({ avviso: "Ci sono già ordini ai fornitori: il materiale non si cambia più da qui" });
+  const orig = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { sezioni: true, righe: { include: { optionali: true } } } });
+  if (!orig || orig.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
+  if (orig!.id === c!.preventivoId) torna({ avviso: "È già l'offerta di questa pratica" });
+  if (!orig!.righe.length) torna({ avviso: "L'offerta scelta non ha prodotti" });
+  const dest = c!.preventivoId;
   await prisma.$transaction(async (tx) => {
-    await tx.commessa.update({ where: { id: c!.id }, data: { preventivoId: nuova!.id } });
-    await tx.preventivo.update({ where: { id: nuova!.id }, data: { stato: "ACCETTATO", confermatoIl: nuova!.confermatoIl ?? new Date(), confermatoDaNome: u.nome } });
-    // l'offerta provvisoria nata dall'import (solo righe di testo) non serve più
-    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: vecchiaId } });
-    await tx.preventivo.delete({ where: { id: vecchiaId } }).catch(() => {});
-  });
+    // via le righe di testo dell'import (e il materiale non ancora ordinato che ne derivava)
+    await tx.rigaOrdine.deleteMany({ where: { commessaId: c!.id, ordinato: false, complemento: false } });
+    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: dest } });
+    await tx.sezionePreventivo.deleteMany({ where: { preventivoId: dest } });
+    await tx.preventivo.update({ where: { id: dest }, data: {
+      aliquotaIva: orig!.aliquotaIva, scontoPercentuale: orig!.scontoPercentuale, prezzoManualeAttivo: orig!.prezzoManualeAttivo, prezzoManualeTotale: orig!.prezzoManualeTotale,
+      immagineCopertinaUrl: orig!.immagineCopertinaUrl, condizioniPagamento: orig!.condizioniPagamento ?? undefined, condizioniConsegna: orig!.condizioniConsegna ?? undefined,
+    } });
+    const mappa = new Map<string, string>();
+    for (const sez of orig!.sezioni) mappa.set(sez.id, (await tx.sezionePreventivo.create({ data: { preventivoId: dest, nome: sez.nome, ordine: sez.ordine } })).id);
+    for (const r of orig!.righe) {
+      const nr = await tx.rigaPreventivo.create({ data: {
+        preventivoId: dest, prodottoId: r.prodottoId, testoLibero: r.testoLibero, quantita: r.quantita, prezzoUnitario: r.prezzoUnitario,
+        optionalDescrizione: r.optionalDescrizione, optionalPrezzo: r.optionalPrezzo, mostraDescrizione: r.mostraDescrizione, allegaScheda: r.allegaScheda,
+        misuraLarghezza: r.misuraLarghezza, misuraAltezza: r.misuraAltezza, descrizionePersonalizzata: r.descrizionePersonalizzata, ordine: r.ordine,
+        sezioneId: r.sezioneId ? mappa.get(r.sezioneId) ?? null : null,
+      } });
+      if (r.optionali.length) await tx.rigaOptional.createMany({ data: r.optionali.map((o) => ({ rigaId: nr.id, optionalId: o.optionalId, quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, nota: o.nota })) });
+    }
+  }, { timeout: 30000 });
+  const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
+  await ricalcolaTotali(dest);
   await assicuraRigheOfferta(c!.id);
-  await log(c!.id, `Offerta di ONE agganciata alla pratica di BConsole da ${u.nome}: le sue righe sono nel materiale.`);
+  await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
   revalidatePath(`/commesse/${c!.id}`);
-  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE agganciata: il materiale è quello dell'offerta")}#progetto`);
+  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE inserita: prodotti e prezzi sono nella pratica")}#progetto`);
 }
 
 // ============ DISTINTA BASE (KIT) ============

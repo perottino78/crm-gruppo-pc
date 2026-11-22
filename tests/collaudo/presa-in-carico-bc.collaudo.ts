@@ -44,16 +44,17 @@ async function main() {
   const c2 = await prisma.commessa.findFirst({ where: { ordineBC: "9/2026" }, include: { tasks: true } });
   verifica(c2?.tasks.length === 1 && c2.tasks[0].faseChiave === "FATT_ACCONTO" && !c2.accontoIncassato, "ordine senza fatture: la pratica parte dalla fattura di acconto");
 
-  // aggancio dell'offerta già fatta in ONE alla pratica di BConsole (Ugo 22/11/2026)
+  // l'offerta già fatta in ONE si copia dentro quella della pratica di BConsole (Ugo 22/11/2026)
   const prod = await prisma.preventivo.create({ data: { clienteId: cliente.id, brandId: pura.id, commercialeId: ugo.id, stato: "INVIATO", oggetto: "Osmosi vera", totaleNetto: 2049.18, totaleIva: 450.82, righe: { create: [{ testoLibero: "Depuratore osmosi inversa", quantita: 1, prezzoUnitario: 2049.18, ordine: 0 }] } } });
-  const vecchiaId = c!.preventivoId;
+  const destId = c!.preventivoId;
   r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod.id })));
-  const dopo = await prisma.commessa.findUnique({ where: { id: c!.id }, include: { preventivo: true } });
-  verifica(dopo?.preventivoId === prod.id && dopo.preventivo.confermatoIl, "l'offerta di ONE prende il posto di quella provvisoria e risulta confermata", r);
-  verifica((await prisma.preventivo.findUnique({ where: { id: vecchiaId } })) === null, "l'offerta provvisoria dell'import viene tolta");
-  verifica((await prisma.rigaOrdine.count({ where: { commessaId: c!.id } })) >= 1, "le righe dell'offerta entrano nel materiale della pratica");
-  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod.id })));
-  verifica(r?.includes("avviso="), "la stessa offerta non si aggancia due volte", r);
+  const dopo = await prisma.commessa.findUnique({ where: { id: c!.id }, include: { preventivo: { include: { righe: true } } } });
+  verifica(dopo?.preventivoId === destId && dopo.preventivo.righe.length === 1 && dopo.preventivo.righe[0].testoLibero === "Depuratore osmosi inversa", "prodotti e prezzi dell'offerta di ONE sono nell'offerta della pratica", r);
+  verifica(dopo?.totaleVendita === 2500, "i totali della pratica (BConsole) non cambiano");
+  verifica((await prisma.preventivo.findUnique({ where: { id: prod.id } }))?.stato === "INVIATO" && (await prisma.rigaPreventivo.count({ where: { preventivoId: prod.id } })) === 1, "l'offerta di ONE resta com'è");
+  verifica((await prisma.rigaOrdine.count({ where: { commessaId: c!.id } })) >= 1, "le righe entrano nel materiale della pratica");
+  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: destId })));
+  verifica(r?.includes("avviso="), "non si copia l'offerta della pratica su se stessa", r);
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { await prisma.$disconnect(); process.exit(ko ? 1 : 0); });
