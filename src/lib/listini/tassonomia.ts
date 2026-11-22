@@ -280,7 +280,35 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
           };
         }),
     }));
-  return tassonomia;
+  return tassonomia.map((f) => (f.nome === "INDOOR" ? { ...f, gruppi: dividiSerramentiPerMateriale(f.gruppi) } : f));
+}
+
+
+/** Materiali dei serramenti, nell'ordine in cui si mostrano (Ugo 22/11/2026: «dividi i serramenti per materiale, poi la famiglia, poi le tendine»). */
+const MATERIALI_SERRAMENTI = ["PVC", "PVC Alluminio", "PVC-Alluminio", "Alluminio", "Legno", "Legno-Alluminio", "Legno Alluminio"];
+
+/**
+ * Nel solo albero mostrato (il database non cambia) il gruppo SERRAMENTI si divide per materiale: «SERRAMENTI · PVC» con dentro le famiglie
+ * (Optima 70, Zenith…), «SERRAMENTI · Alluminio»… I sottogruppi «Materiale — Famiglia» perdono il materiale nel nome; gli altri (Legno, Acciaio, Cassonetti)
+ * diventano un materiale a sé.
+ */
+export function dividiSerramentiPerMateriale<G extends { nome: string; tipologie: NodoTipologia[]; sottogruppi?: { nome: string; tipologie: NodoTipologia[] }[] }>(gruppi: G[]): G[] {
+  const i = gruppi.findIndex((g) => g.nome === "SERRAMENTI");
+  if (i < 0 || !gruppi[i].sottogruppi?.length) return gruppi;
+  const per = new Map<string, { nome: string; tipologie: NodoTipologia[] }[]>();
+  const dirette = new Map<string, NodoTipologia[]>();
+  for (const sg of gruppi[i].sottogruppi!) {
+    const k = sg.nome.indexOf(" — ");
+    if (k < 0) { dirette.set(sg.nome, [...(dirette.get(sg.nome) ?? []), ...sg.tipologie]); continue; }
+    const mat = sg.nome.slice(0, k).trim();
+    per.set(mat, [...(per.get(mat) ?? []), { nome: sg.nome.slice(k + 3).trim(), tipologie: sg.tipologie }]);
+  }
+  const pos = (m: string) => { const x = MATERIALI_SERRAMENTI.indexOf(m); return x < 0 ? 99 : x; };
+  const nuovi: G[] = [
+    ...[...per.entries()].sort(([a], [b]) => pos(a) - pos(b) || a.localeCompare(b)).map(([m, sottogruppi]) => ({ nome: `SERRAMENTI · ${m}`, tipologie: [], sottogruppi: sottogruppi.sort((a, b) => a.nome.localeCompare(b.nome)) }) as unknown as G),
+    ...[...dirette.entries()].sort(([a], [b]) => pos(a) - pos(b) || a.localeCompare(b)).map(([m, tipologie]) => ({ nome: `SERRAMENTI · ${m}`, tipologie, sottogruppi: undefined }) as unknown as G),
+  ];
+  return [...gruppi.slice(0, i), ...nuovi, ...gruppi.slice(i + 1)];
 }
 
 /** Albero del listino di un marchio (5 minuti in memoria, vedi ./cache). */
