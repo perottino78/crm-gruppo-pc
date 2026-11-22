@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { catalogoCoprifili, GRUPPO_COPRIFILI, PREFISSO_COPRIFILI, FORNITORE_COPRIFILI, SCONTO_ACQUISTO_COPRIFILI } from "@/lib/listini/coprifili";
 
-export const VERSIONE_COPRIFILI = "2026-11-22b";
+export const VERSIONE_COPRIFILI = "2026-11-22c";
 type Riga = { tipologia: string; colore: string; larghezzaMm: number; altezzaMm: number; prezzoBase: number };
 const norm = (t: string) => t.toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/(SRLS|SRL)$/, "");
 const kP = (p: Riga) => `${p.tipologia}|${p.colore}|${p.larghezzaMm}|${p.altezzaMm}`;
