@@ -103,13 +103,15 @@ export function costoCoprifiloAlMetro(a: ArticoloCoprifilo, c: (typeof COLORI_CO
 }
 
 /** Nome della variante (lo vede anche il cliente: niente prezzi del fornitore). */
-export const coloreCoprifilo = (nome: string) => `${nome} — al metro`;
+// Ugo 22/11/2026: sono barre da 6000 mm e si compra la barra intera (il listino EXTE è al metro): il prezzo della variante è PER BARRA = prezzo al metro × 6.
+export const LUNGHEZZA_BARRA_M = 6;
+export const coloreCoprifilo = (nome: string) => `${nome} — barra da 6 m`;
 
 export function catalogoCoprifili(ricarico = RICARICO_COPRIFILI) {
   const prodotti = ARTICOLI_COPRIFILI.flatMap((a) =>
     COLORI_COPRIFILI.flatMap((c) => {
       const costo = costoCoprifiloAlMetro(a, c);
-      return costo == null ? [] : [{ tipologia: tipologiaCoprifilo(a.codice), colore: coloreCoprifilo(c.nome), larghezzaMm: 0, altezzaMm: 0, prezzoBase: r2(costo * ricarico) }];
+      return costo == null ? [] : [{ tipologia: tipologiaCoprifilo(a.codice), colore: coloreCoprifilo(c.nome), larghezzaMm: 0, altezzaMm: 0, prezzoBase: r2(costo * LUNGHEZZA_BARRA_M * ricarico) }];
     }));
   const modelli = ARTICOLI_COPRIFILI.map((a) => ({
     tipologia: tipologiaCoprifilo(a.codice),
@@ -117,7 +119,7 @@ export function catalogoCoprifili(ricarico = RICARICO_COPRIFILI) {
     sottogruppo: SOTTOGRUPPO_COPRIFILI,
     descrizioneTecnica:
       `${nomeCoprifilo(a)}: profilo in PVC per la posa dei serramenti (per esterni ed interni), barre da 6 m, confezioni da 60 m. ` +
-      `Prezzo al metro lineare. Colori: bianco${a.per100m.protettiva != null ? ", bianco con pellicola protettiva" : ""}, bianco Salamander` +
+      `Si vende a barra intera da 6 m (6000 mm): il prezzo è per barra (prezzo al metro × 6). Colori: bianco${a.per100m.protettiva != null ? ", bianco con pellicola protettiva" : ""}, bianco Salamander` +
       (a.per100m.rivestito != null ? ", pellicolato in tinta unita o effetto legno (pellicolati da 60 m in su)." : "; pellicolato non disponibile a catalogo."),
   }));
   return { prodotti, modelli };
@@ -141,5 +143,5 @@ export const labelCoprifilo = (tipologia: string) => {
 };
 
 export const GUIDA_COPRIFILI =
-  "Coprifili e angolari EXTE al metro (barre da 6 m): scrivi la lunghezza di ogni pezzo in cm e quanti pezzi. Nell'ordine al fornitore il costo previsto è il " +
+  "Coprifili e angolari EXTE in barre da 6 m (6000 mm): si compra la barra intera, il prezzo mostrato è per barra (listino al metro × 6). Scrivi quante barre. Nell'ordine al fornitore il costo previsto è il " +
   "listino EXTE; per un pellicolato non in elenco scegli «Altro colore pellicolato» e scrivi il colore.";

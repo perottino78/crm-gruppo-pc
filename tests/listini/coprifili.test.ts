@@ -22,11 +22,11 @@ test("costo al metro per colore (sovrapprezzi della pellicola sul rivestito, Sal
   assert.equal(costoCoprifiloAlMetro(art("65025025"), col("Antracite")), null); // pellicolato non a catalogo
 });
 
-test("nomi, sottogruppi e vendita al metro", () => {
+test("nomi, sottogruppi e vendita a barra da 6 m", () => {
   assert.equal(labelCoprifilo("COPRIF_65025030"), "Coprifilo piatto 30 x 2,5 (EXTE 65025030)");
   assert.equal(sottogruppoCoprifilo("COPRIF_71030030"), "Coprifili PVC — Listino completo");
   assert.equal(sottogruppoDiTipologia("COPRIF_640730"), "Coprifili PVC — Listino completo");
-  assert.equal(lattAlMetro("COPRIF_65025030"), true);
+  assert.equal(lattAlMetro("COPRIF_65025030"), false); // barre intere, niente lunghezza in cm
   const { prodotti } = catalogoCoprifili();
-  assert.ok(prodotti.every((p) => p.colore.endsWith("— al metro") && p.prezzoBase > 0));
+  assert.ok(prodotti.every((p) => p.colore.endsWith("— barra da 6 m") && p.prezzoBase > 0));
 });
