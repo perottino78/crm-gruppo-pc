@@ -33,7 +33,7 @@ async function main() {
   // Coprifilo piatto 30: bianco 59,74 €/100 m → 0,60 €/m costo, 1,20 €/m vendita; antracite (rivestito 271,14) → 2,71 → 5,42; Salamander +15%
   const piatto = await prisma.prodotto.findMany({ where: { tipologia: "COPRIF_65025030" } });
   const pr = (inizio: string) => piatto.find((p) => p.colore.startsWith(inizio))?.prezzoBase;
-  verifica(pr("Bianco —") === 1.2 && pr("Antracite") === 5.42 && pr("Bianco Salamander") === 1.38 && pr("Rovere chiaro") === 5.7, "coprifilo piatto 30: bianco 1,20 €/m, antracite 5,42, Salamander +15%, rovere chiaro +5%", piatto.map((p) => [p.colore, p.prezzoBase]));
+  verifica(pr("Bianco —") === 7.2 && pr("Antracite") === 32.52 && pr("Bianco Salamander") === 8.28 && pr("Rovere chiaro") === 34.2, "coprifilo piatto 30, barra da 6 m: bianco 7,20 (1,20 €/m × 6), antracite 32,52, Salamander +15%, rovere chiaro +5%", piatto.map((p) => [p.colore, p.prezzoBase]));
   // un articolo senza pellicolato a catalogo ha solo i bianchi
   const p25 = await prisma.prodotto.findMany({ where: { tipologia: "COPRIF_65025025" } });
   verifica(p25.length === 2 && p25.every((p) => p.colore.startsWith("Bianco")), "piatto 25: solo bianco e bianco Salamander (niente pellicolati a catalogo)", p25.map((p) => p.colore));
@@ -52,12 +52,12 @@ async function main() {
   const c = await prisma.cliente.create({ data: { nome: "Rossi Mario", brandId: b.id } });
   const prev = await prisma.preventivo.create({ data: { clienteId: c.id, brandId: b.id, commercialeId: u.id } });
   const ant = piatto.find((p) => p.colore.startsWith("Antracite"))!;
-  await aggiungiRigaPreventivo(fd({ preventivoId: prev.id, prodottoId: ant.id, lattCm: "250", quantita: "4" }));
+  await aggiungiRigaPreventivo(fd({ preventivoId: prev.id, prodottoId: ant.id, quantita: "4" }));
   const r = await prisma.rigaPreventivo.findFirstOrThrow({ where: { preventivoId: prev.id, prodottoId: ant.id } });
-  verifica(r.prezzoUnitario === 13.55 && r.quantita === 4 && r.misuraLarghezza === 250, "4 pezzi da 250 cm di coprifilo 30 antracite a 13,55 € l'uno", r);
+  verifica(r.prezzoUnitario === 32.52 && r.quantita === 4 && !r.misuraLarghezza, "4 barre intere da 6 m di coprifilo 30 antracite a 32,52 € la barra", r);
   const { datiAcquisto } = await import("../../src/lib/ordini/server");
   const acq = await datiAcquisto([{ ...r, prodotto: { brandId: b.id, tipologia: "COPRIF_65025030" } }]);
-  verifica(Math.abs((acq.get(r.id)?.costoPrevisto ?? 0) - 27.1) < 0.01 && acq.get(r.id)?.fornitoreNome === "EXTE", "nell'ordine: fornitore EXTE, costo previsto = listino EXTE (27,10 €)", acq.get(r.id));
+  verifica(Math.abs((acq.get(r.id)?.costoPrevisto ?? 0) - 65.04) < 0.01 && acq.get(r.id)?.fornitoreNome === "EXTE", "nell'ordine: fornitore EXTE, costo previsto = listino EXTE (4 barre × 16,26 = 65,04 €)", acq.get(r.id));
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
