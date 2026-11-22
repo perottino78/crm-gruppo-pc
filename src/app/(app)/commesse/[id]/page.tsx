@@ -210,7 +210,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const percorsoProg = await percorsoDiCommessa(c.id);
   // pratica presa da BConsole: le offerte di ONE dello stesso cliente non ancora collegate a una pratica si possono agganciare (Ugo 22/11/2026)
   const offerteAgganciabili = c.ordineBC
-    ? await prisma.preventivo.findMany({ where: { clienteId: c.clienteId, commessa: { is: null }, stato: { notIn: ["RIFIUTATO", "SCADUTO"] } }, select: { id: true, numeroOfferta: true, oggetto: true, totaleNetto: true }, orderBy: { createdAt: "desc" }, take: 30 })
+    ? await prisma.preventivo.findMany({ where: { clienteId: c.clienteId, id: { not: c.preventivoId }, righe: { some: {} } }, select: { id: true, numeroOfferta: true, oggetto: true, totaleNetto: true }, orderBy: { createdAt: "desc" }, take: 30 })
     : [];
   // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
   const pp = await passiDiCommessa(c.id);
@@ -378,6 +378,20 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           registraFattura={registraFatturaAcconto} creaProgetto={creaProgetto} registraBenvenuto={registraBenvenuto} ok={pok} avviso={pav}
         />
       )}
+      {c.ordineBC && (offerteAgganciabili.length > 0 ? (
+          <form id="offerta-one" action={agganciaOffertaONE} className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border-2 border-amber-400 bg-amber-50 px-4 py-3">
+            <input type="hidden" name="commessaId" value={c.id} />
+            <p className="text-sm text-amber-900 flex-1 min-w-[16rem]">🔗 <b>Pratica da BConsole (ordine n. {c.ordineBC}).</b> Scegli l&apos;offerta che hai già fatto in ONE: prodotti e prezzi vengono copiati qui e diventano il materiale della pratica (l&apos;offerta di ONE resta com&apos;è).</p>
+            <select name="preventivoId" required className={inp}>
+              <option value="">Scegli l&apos;offerta…</option>
+              {offerteAgganciabili.map((o) => <option key={o.id} value={o.id}>{`${o.numeroOfferta ?? "senza numero"} · ${o.oggetto ?? "offerta"} · ${o.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}`}</option>)}
+            </select>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-amber-900"><input type="checkbox" name="eliminaAltra" value="1" defaultChecked /> 🗑 Cancella l&apos;altra pratica di ONE (se è ancora vuota)</label>
+            <button className="btn-3d btn-3d-amber text-sm px-4 py-2">🔗 Inserisci l&apos;offerta di ONE</button>
+          </form>
+        ) : (
+          <p className="mb-4 text-sm text-amber-900 bg-amber-50 border border-amber-300 rounded-lg px-4 py-2">🔗 Pratica da BConsole: per questo cliente non ci sono offerte di ONE con prodotti da inserire.</p>
+        ))}
       {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
       {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
@@ -392,7 +406,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             proposta={(() => { const v = costoOrarioUtente(t.assegnatoUtenteId ?? utente?.id); return typeof v === "number" ? v : null; })()} azione={salvaCostoTask} />
         );
         return (
-      <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0 || (!!c.ordineBC && offerteAgganciabili.length > 0)}>
+      <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0}>
         <summary className="cursor-pointer list-none">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="mb-1 flex flex-wrap items-center gap-3">✅ Avanzamento e progetto{percorsoProg && percorsoProg.fase !== "DA_CREARE" && <span className="text-xs font-bold px-3 py-1 rounded bg-violet-100 text-violet-900">{percorsoProg.etichetta}</span>}</h2>
@@ -402,17 +416,6 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             {passaggi.length === 0 ? "Nessun passaggio fra uffici ancora." : <>{fatti} passaggi chiusi{attivi.length > 0 ? <> · <b className="text-sky-800">adesso: {attivi.map((t) => nomeUfficio(t.ufficio)).join(", ")}</b></> : " · tutto chiuso"}</>}
           </p>
         </summary>
-        {c.ordineBC && offerteAgganciabili.length > 0 && (
-          <form action={agganciaOffertaONE} className="mb-3 flex flex-wrap items-end gap-3 rounded-lg border-2 border-amber-300 bg-amber-50 px-4 py-3">
-            <input type="hidden" name="commessaId" value={c.id} />
-            <p className="text-sm text-amber-900 flex-1 min-w-[16rem]">🔗 Questa pratica viene da BConsole (ordine n. {c.ordineBC}) e ha solo righe di testo. <b>Aggancia l&apos;offerta che hai già fatto in ONE</b>: il materiale sarà quello vero dell&apos;offerta.</p>
-            <select name="preventivoId" required className={inp}>
-              <option value="">Scegli l&apos;offerta…</option>
-              {offerteAgganciabili.map((o) => <option key={o.id} value={o.id}>{`${o.numeroOfferta ?? "senza numero"} · ${o.oggetto ?? "offerta"} · ${o.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}`}</option>)}
-            </select>
-            <button className="btn-3d btn-3d-amber text-sm px-4 py-2">🔗 Aggancia l&apos;offerta</button>
-          </form>
-        )}
         <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Qui sotto trovi il percorso fra gli uffici, con le date, e in fondo i costi di manodopera.</p>
         {passaggi.length === 0 && (
           <div className="mb-3">

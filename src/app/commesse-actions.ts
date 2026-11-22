@@ -1284,8 +1284,9 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
 
 
 /**
- * Aggancia a una pratica presa in carico da BConsole l'offerta già fatta in ONE (Ugo 22/11/2026: «sarebbe solo da accoppiare insieme»).
- * L'offerta di ONE prende il posto di quella provvisoria a righe di testo creata dall'import; si portano nel materiale le sue righe vere.
+ * Mette i prodotti e i prezzi di un'offerta già fatta in ONE dentro la pratica presa da BConsole (Ugo 22/11/2026: «inserire l'offerta direttamente
+ * in quella di BConsole, quella di ONE è già a livello di prodotti e prezzi»). L'offerta di ONE (anche se ha una sua pratica) resta com'è e viene COPIATA
+ * nell'offerta della pratica al posto delle righe di testo dell'import; i totali della pratica (quelli di BConsole) non cambiano.
  */
 export async function agganciaOffertaONE(formData: FormData) {
   const u = await getCurrentUser();
@@ -1294,26 +1295,70 @@ export async function agganciaOffertaONE(formData: FormData) {
   const commessaId = str(formData, "commessaId") ?? "";
   const preventivoId = str(formData, "preventivoId") ?? "";
   const torna = (m: Record<string, string>) => redirect(`/commesse/${commessaId}?${new URLSearchParams(m)}#progetto`);
-  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di agganciare l'offerta" });
-  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } } } });
-  if (!c || !c.ordineBC) torna({ avviso: "Si può agganciare l'offerta solo a una pratica presa da BConsole" });
-  const nuova = await prisma.preventivo.findUnique({ where: { id: preventivoId }, select: { id: true, clienteId: true, commessa: { select: { id: true } }, totaleNetto: true, totaleIva: true, stato: true, confermatoIl: true } });
-  if (!nuova || nuova.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
-  if (nuova!.commessa && nuova!.commessa.id !== c!.id) torna({ avviso: "Questa offerta è già collegata a un'altra pratica" });
-  if (nuova!.commessa?.id === c!.id) torna({ avviso: "Questa offerta è già agganciata alla pratica" });
-  if (c!.ordiniFornitore.length) torna({ avviso: "Ci sono già ordini ai fornitori: l'offerta non si cambia più" });
-  const vecchiaId = c!.preventivoId;
+  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di inserire l'offerta" });
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } }, righeOrdine: { select: { id: true, ordinato: true } } } });
+  if (!c || !c.ordineBC) torna({ avviso: "Si può usare solo su una pratica presa da BConsole" });
+  if (c!.ordiniFornitore.length || c!.righeOrdine.some((r) => r.ordinato)) torna({ avviso: "Ci sono già ordini ai fornitori: il materiale non si cambia più da qui" });
+  const orig = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { sezioni: true, righe: { include: { optionali: true } }, commessa: { select: { id: true, ordineBC: true } } } });
+  if (!orig || orig.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
+  if (orig!.id === c!.preventivoId) torna({ avviso: "È già l'offerta di questa pratica" });
+  if (!orig!.righe.length) torna({ avviso: "L'offerta scelta non ha prodotti" });
+  const dest = c!.preventivoId;
   await prisma.$transaction(async (tx) => {
-    await tx.commessa.update({ where: { id: c!.id }, data: { preventivoId: nuova!.id } });
-    await tx.preventivo.update({ where: { id: nuova!.id }, data: { stato: "ACCETTATO", confermatoIl: nuova!.confermatoIl ?? new Date(), confermatoDaNome: u.nome } });
-    // l'offerta provvisoria nata dall'import (solo righe di testo) non serve più
-    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: vecchiaId } });
-    await tx.preventivo.delete({ where: { id: vecchiaId } }).catch(() => {});
-  });
+    // via le righe di testo dell'import (e il materiale non ancora ordinato che ne derivava)
+    await tx.rigaOrdine.deleteMany({ where: { commessaId: c!.id, ordinato: false, complemento: false } });
+    await tx.rigaPreventivo.deleteMany({ where: { preventivoId: dest } });
+    await tx.sezionePreventivo.deleteMany({ where: { preventivoId: dest } });
+    await tx.preventivo.update({ where: { id: dest }, data: {
+      aliquotaIva: orig!.aliquotaIva, scontoPercentuale: orig!.scontoPercentuale, prezzoManualeAttivo: orig!.prezzoManualeAttivo, prezzoManualeTotale: orig!.prezzoManualeTotale,
+      immagineCopertinaUrl: orig!.immagineCopertinaUrl, condizioniPagamento: orig!.condizioniPagamento ?? undefined, condizioniConsegna: orig!.condizioniConsegna ?? undefined,
+    } });
+    const mappa = new Map<string, string>();
+    for (const sez of orig!.sezioni) mappa.set(sez.id, (await tx.sezionePreventivo.create({ data: { preventivoId: dest, nome: sez.nome, ordine: sez.ordine } })).id);
+    for (const r of orig!.righe) {
+      const nr = await tx.rigaPreventivo.create({ data: {
+        preventivoId: dest, prodottoId: r.prodottoId, testoLibero: r.testoLibero, quantita: r.quantita, prezzoUnitario: r.prezzoUnitario,
+        optionalDescrizione: r.optionalDescrizione, optionalPrezzo: r.optionalPrezzo, mostraDescrizione: r.mostraDescrizione, allegaScheda: r.allegaScheda,
+        misuraLarghezza: r.misuraLarghezza, misuraAltezza: r.misuraAltezza, descrizionePersonalizzata: r.descrizionePersonalizzata, ordine: r.ordine,
+        sezioneId: r.sezioneId ? mappa.get(r.sezioneId) ?? null : null,
+      } });
+      if (r.optionali.length) await tx.rigaOptional.createMany({ data: r.optionali.map((o) => ({ rigaId: nr.id, optionalId: o.optionalId, quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, nota: o.nota })) });
+    }
+  }, { timeout: 30000 });
+  const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
+  await ricalcolaTotali(dest);
   await assicuraRigheOfferta(c!.id);
-  await log(c!.id, `Offerta di ONE agganciata alla pratica di BConsole da ${u.nome}: le sue righe sono nel materiale.`);
+  // «teniamo solo quella di BConsole e l'altra la cancelliamo» (Ugo 22/11/2026): la pratica di ONE nata dalla stessa offerta si toglie, ma solo se è ancora vuota
+  let nota = "";
+  const altra = orig!.commessa;
+  if (formData.get("eliminaAltra") === "1" && altra && altra.id !== c!.id && !altra.ordineBC) {
+    const a = await prisma.commessa.findUnique({ where: { id: altra.id }, select: { ordiniFornitore: { select: { id: true } }, pose: { select: { id: true } }, assistenze: { select: { id: true } }, rilievi: { select: { stato: true } }, righeOrdine: { select: { ordinato: true } } } });
+    const nFatture = await prisma.fatturaVendita.count({ where: { commessaId: altra.id } });
+    const nScad = await prisma.scadenza.count({ where: { commessaId: altra.id, OR: [{ pagatoManuale: { gt: 0 } }, { stato: "PAGATA" }] } });
+    const vuota = a && !a.ordiniFornitore.length && !a.pose.length && !a.assistenze.length && !nFatture && !nScad && !a.rilievi.some((r) => r.stato === "ESEGUITO") && !a.righeOrdine.some((r) => r.ordinato);
+    if (!vuota) nota = " L'altra pratica di ONE non è stata cancellata perché ha già ordini, rilievi eseguiti, pose o incassi.";
+    else {
+      try {
+        await prisma.$transaction(async (tx) => {
+          const rilievi = await tx.rilievo.findMany({ where: { commessaId: altra.id }, select: { id: true } });
+          await tx.rilievoAllegato.deleteMany({ where: { rilievoId: { in: rilievi.map((r) => r.id) } } });
+          await tx.rilievo.deleteMany({ where: { commessaId: altra.id } });
+          await tx.commessaEvento.deleteMany({ where: { commessaId: altra.id } });
+          await tx.faseCommessa.deleteMany({ where: { commessaId: altra.id } });
+          await tx.taskPratica.deleteMany({ where: { commessaId: altra.id } });
+          await tx.rigaOrdine.deleteMany({ where: { commessaId: altra.id } });
+          await tx.costoManuale.deleteMany({ where: { commessaId: altra.id } });
+          await tx.scadenza.deleteMany({ where: { commessaId: altra.id } });
+          await tx.documento.deleteMany({ where: { entita: "COMMESSA", entitaId: altra.id } });
+          await tx.commessa.delete({ where: { id: altra.id } });
+        });
+        nota = " L'altra pratica di ONE è stata cancellata: resta solo questa.";
+      } catch { nota = " L'altra pratica di ONE non si è potuta cancellare (ha dati collegati): chiedimelo e la tolgo a mano."; }
+    }
+  }
+  await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
   revalidatePath(`/commesse/${c!.id}`);
-  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE agganciata: il materiale è quello dell'offerta")}#progetto`);
+  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE inserita: prodotti e prezzi sono nella pratica." + nota)}#progetto`);
 }
 
 // ============ DISTINTA BASE (KIT) ============
