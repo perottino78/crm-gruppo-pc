@@ -114,7 +114,17 @@ async function main() {
   verifica((await prisma.preventivo.findUniqueOrThrow({ where: { id: prev.id } })).totaleNetto === totPrima, "la vendita al cliente non cambia");
 
   console.log("4. Togli un complemento");
-  await C.eliminaComplemento(fd({ rigaId: cf.id }));
+  // modifica e duplica (Ugo 22/11/2026)
+  const rid = (p: Promise<unknown>) => p.catch((e: unknown) => { if (!String((e as { digest?: string }).digest ?? e).includes("NEXT_REDIRECT")) throw e; });
+  const base = await prisma.rigaOrdine.create({ data: { commessaId: cf.commessaId, descrizione: "Prova modifica", quantita: 1, complemento: true, costoPrevisto: 10 } });
+  await rid(C.modificaComplemento(fd({ rigaId: base.id, [`desc_${base.id}`]: "Descrizione cambiata", [`qta_${base.id}`]: "3", [`note_${base.id}`]: "nota prova" })));
+  const dopoM = await prisma.rigaOrdine.findUniqueOrThrow({ where: { id: base.id } });
+  verifica(dopoM.descrizione === "Descrizione cambiata" && dopoM.quantita === 3 && dopoM.note === "nota prova", "modifica del materiale aggiunto: descrizione, quantità e nota");
+  const prima = await prisma.rigaOrdine.count({ where: { commessaId: cf.commessaId } });
+  await rid(C.duplicaComplemento(fd({ rigaId: base.id })));
+  verifica((await prisma.rigaOrdine.count({ where: { commessaId: cf.commessaId } })) === prima + 1, "duplica del materiale aggiunto");
+  await prisma.rigaOrdine.deleteMany({ where: { commessaId: cf.commessaId, descrizione: { in: ["Descrizione cambiata", "Prova modifica"] } } });
+  await C.eliminaComplemento(fd({ rigaId: cf.id })).catch((e: unknown) => { if (!String((e as { digest?: string }).digest ?? e).includes("NEXT_REDIRECT")) throw e; });
   verifica(!(await prisma.rigaOrdine.findUnique({ where: { id: cf.id } })), "complemento tolto");
 
   console.log("4b. Angolari e legni dal listino della pratica (solo acquisto)");

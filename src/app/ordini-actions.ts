@@ -134,7 +134,9 @@ export async function creaOrdineDaRighe(fd: FormData) {
   const torna = (avviso: string) => redirect(`/commesse/${commessaId}?avviso=${encodeURIComponent(avviso)}#materiale-pratica`);
   // percorso del progetto: si ordina dopo aver confermato il materiale (le pratiche già avviate non hanno il blocco)
   const percorso = await percorsoDiCommessa(commessaId);
-  if (percorso?.ordiniBloccati) torna(percorso.progettoCreatoIl ? "Prima conferma il materiale del progetto (rilievo caricato e righe con il fornitore): poi si ordina." : "Prima crea il progetto: si fa dopo l'incasso dell'acconto.");
+  if (percorso?.ordiniBloccati && !percorso.progettoCreatoIl) torna("Prima crea il progetto: si fa dopo l'incasso dell'acconto.");
+  // progetto creato ma materiale non «confermato»: chi sceglie le righe e le ordina lo sta già confermando (Ugo 22/11/2026), niente blocco
+  if (percorso?.ordiniBloccati) await prisma.commessa.update({ where: { id: commessaId }, data: { materialeConfermatoIl: new Date() } });
   const ids = [...new Set(fd.getAll("riga").map(String))];
   if (!ids.length) torna("Spunta le righe da ordinare.");
   const righe = await prisma.rigaOrdine.findMany({ where: { id: { in: ids }, commessaId, ordineFornitoreId: null, ordinato: false, daMagazzino: false } });

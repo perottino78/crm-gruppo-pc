@@ -1576,16 +1576,50 @@ export async function aggiungiComplemento(formData: FormData) {
 }
 
 /** Toglie un complemento non ancora messo in un ordine al fornitore. */
-export async function eliminaComplemento(formData: FormData) {
+// Righe di materiale aggiunte a mano («complementi») nella pratica: togli, modifica e duplica, finché non sono ordinate (Ugo 22/11/2026).
+async function complementoLibero(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
   const id = str(formData, "rigaId");
-  if (!id) return;
-  const r = await prisma.rigaOrdine.findUnique({ where: { id } });
-  if (!r || !r.complemento || r.ordineFornitoreId || !r.commessaId) return;
-  await prisma.rigaOrdine.delete({ where: { id } });
-  await log(r.commessaId, `Tolto il complemento «${r.descrizione}».`);
+  const r = id ? await prisma.rigaOrdine.findUnique({ where: { id } }) : null;
+  const dove = (m: string, ok = false) => redirect(`/commesse/${r?.commessaId ?? str(formData, "commessaId") ?? ""}?${ok ? "fattoMateriale" : "avviso"}=${encodeURIComponent(m)}&passo=MATERIALE#evasione`);
+  if (!r || !r.commessaId) redirect("/commesse");
+  if (!r.complemento) dove("Si possono cambiare solo le righe aggiunte a mano; quelle dell'offerta si cambiano nell'offerta.");
+  if (r.ordineFornitoreId || r.ordinato || r.daMagazzino) dove("Questa riga è già stata ordinata: non si cambia più.");
+  return { r: r!, u, dove };
+}
+
+export async function eliminaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  await prisma.rigaOrdine.deleteMany({ where: { OR: [{ id: r.id }, { kitDiId: r.id, ordinato: false }] } });
+  await log(r.commessaId!, `Tolto il materiale «${r.descrizione}».`);
   revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Tolto: ${r.descrizione}`, true);
+}
+
+export async function duplicaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  const { id: _i, createdAt: _c, ...dati } = r;
+  void _i; void _c;
+  await prisma.rigaOrdine.create({ data: { ...dati, kitDiId: null, createdAt: new Date() } });
+  await log(r.commessaId!, `Duplicato il materiale «${r.descrizione}».`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Duplicato: ${r.descrizione}`, true);
+}
+
+export async function modificaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  const desc = (str(formData, `desc_${r.id}`) ?? "").trim();
+  const q = Math.round(Number((str(formData, `qta_${r.id}`) ?? "").replace(",", ".")));
+  const note = (str(formData, `note_${r.id}`) ?? "").trim();
+  if (!desc) dove("Scrivi la descrizione.");
+  if (!Number.isFinite(q) || q < 1) dove("La quantità deve essere almeno 1.");
+  // il costo previsto è sul totale della riga: segue la quantità
+  const costo = r.costoPrevisto != null && r.quantita > 0 ? Math.round((r.costoPrevisto / r.quantita) * q * 100) / 100 : r.costoPrevisto;
+  await prisma.rigaOrdine.update({ where: { id: r.id }, data: { descrizione: desc.slice(0, 500), quantita: q, note: note || null, costoPrevisto: costo } });
+  await log(r.commessaId!, `Modificato il materiale «${desc}» (${q} pz).`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Salvato: ${desc}`, true);
 }
 
 /** Consegna prevista del progetto (deadline): si scrive e si sposta dalla pratica; ogni cambio va nello storico. */

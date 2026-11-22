@@ -71,7 +71,9 @@ export async function avviaFaseFlusso(commessaId: string, chiave: string, daUffi
   const ctx = await variabili(commessaId, daUfficio);
   if (!ctx) return;
   const { c, v } = ctx;
-  if (f.taskAttivo) {
+  // niente doppioni: se il task di questa fase è già aperto non se ne crea un secondo (Ugo 22/11/2026: «Confermare il materiale» compariva due volte)
+  const giaAperto = f.taskAttivo ? await prisma.taskPratica.findFirst({ where: { commessaId, faseChiave: f.chiave, completatoIl: null, stato: { notIn: STATI_CHIUSI } }, select: { id: true } }) : null;
+  if (f.taskAttivo && !giaAperto) {
     const mail = f.mailAttiva && f.mailQuando === "INIZIO";
     const nuovo = await prisma.taskPratica.create({
       data: {
