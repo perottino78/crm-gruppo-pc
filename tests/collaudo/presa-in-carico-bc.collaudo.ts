@@ -55,6 +55,11 @@ async function main() {
   verifica((await prisma.rigaOrdine.count({ where: { commessaId: c!.id } })) >= 1, "le righe entrano nel materiale della pratica");
   r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: destId })));
   verifica(r?.includes("avviso="), "non si copia l'offerta della pratica su se stessa", r);
+  // «teniamo solo quella di BConsole e l'altra la cancelliamo»
+  const prod2 = await prisma.preventivo.create({ data: { clienteId: cliente.id, brandId: pura.id, commercialeId: ugo.id, stato: "ACCETTATO", confermatoIl: new Date(), totaleNetto: 100, totaleIva: 22, righe: { create: [{ testoLibero: "Altro", quantita: 1, prezzoUnitario: 100, ordine: 0 }] } } });
+  const altra = await prisma.commessa.create({ data: { numero: 77, anno: 2026, preventivoId: prod2.id, clienteId: cliente.id, brandId: pura.id, responsabileId: ugo.id, totaleVendita: 122, totaleImponibile: 100, accontoTipo: "ACCONTO", stato: "IN_ATTESA_ACCONTO" } });
+  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod2.id, eliminaAltra: "1" })));
+  verifica((await prisma.commessa.findUnique({ where: { id: altra.id } })) === null && (await prisma.commessa.findUnique({ where: { id: c!.id } })) !== null, "l'altra pratica di ONE, ancora vuota, viene cancellata e resta quella di BConsole", r);
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { await prisma.$disconnect(); process.exit(ko ? 1 : 0); });

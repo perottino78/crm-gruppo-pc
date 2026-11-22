@@ -1299,7 +1299,7 @@ export async function agganciaOffertaONE(formData: FormData) {
   const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } }, righeOrdine: { select: { id: true, ordinato: true } } } });
   if (!c || !c.ordineBC) torna({ avviso: "Si può usare solo su una pratica presa da BConsole" });
   if (c!.ordiniFornitore.length || c!.righeOrdine.some((r) => r.ordinato)) torna({ avviso: "Ci sono già ordini ai fornitori: il materiale non si cambia più da qui" });
-  const orig = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { sezioni: true, righe: { include: { optionali: true } } } });
+  const orig = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { sezioni: true, righe: { include: { optionali: true } }, commessa: { select: { id: true, ordineBC: true } } } });
   if (!orig || orig.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
   if (orig!.id === c!.preventivoId) torna({ avviso: "È già l'offerta di questa pratica" });
   if (!orig!.righe.length) torna({ avviso: "L'offerta scelta non ha prodotti" });
@@ -1328,9 +1328,37 @@ export async function agganciaOffertaONE(formData: FormData) {
   const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
   await ricalcolaTotali(dest);
   await assicuraRigheOfferta(c!.id);
+  // «teniamo solo quella di BConsole e l'altra la cancelliamo» (Ugo 22/11/2026): la pratica di ONE nata dalla stessa offerta si toglie, ma solo se è ancora vuota
+  let nota = "";
+  const altra = orig!.commessa;
+  if (formData.get("eliminaAltra") === "1" && altra && altra.id !== c!.id && !altra.ordineBC) {
+    const a = await prisma.commessa.findUnique({ where: { id: altra.id }, select: { ordiniFornitore: { select: { id: true } }, pose: { select: { id: true } }, assistenze: { select: { id: true } }, rilievi: { select: { stato: true } }, righeOrdine: { select: { ordinato: true } } } });
+    const nFatture = await prisma.fatturaVendita.count({ where: { commessaId: altra.id } });
+    const nScad = await prisma.scadenza.count({ where: { commessaId: altra.id, OR: [{ pagatoManuale: { gt: 0 } }, { stato: "PAGATA" }] } });
+    const vuota = a && !a.ordiniFornitore.length && !a.pose.length && !a.assistenze.length && !nFatture && !nScad && !a.rilievi.some((r) => r.stato === "ESEGUITO") && !a.righeOrdine.some((r) => r.ordinato);
+    if (!vuota) nota = " L'altra pratica di ONE non è stata cancellata perché ha già ordini, rilievi eseguiti, pose o incassi.";
+    else {
+      try {
+        await prisma.$transaction(async (tx) => {
+          const rilievi = await tx.rilievo.findMany({ where: { commessaId: altra.id }, select: { id: true } });
+          await tx.rilievoAllegato.deleteMany({ where: { rilievoId: { in: rilievi.map((r) => r.id) } } });
+          await tx.rilievo.deleteMany({ where: { commessaId: altra.id } });
+          await tx.commessaEvento.deleteMany({ where: { commessaId: altra.id } });
+          await tx.faseCommessa.deleteMany({ where: { commessaId: altra.id } });
+          await tx.taskPratica.deleteMany({ where: { commessaId: altra.id } });
+          await tx.rigaOrdine.deleteMany({ where: { commessaId: altra.id } });
+          await tx.costoManuale.deleteMany({ where: { commessaId: altra.id } });
+          await tx.scadenza.deleteMany({ where: { commessaId: altra.id } });
+          await tx.documento.deleteMany({ where: { entita: "COMMESSA", entitaId: altra.id } });
+          await tx.commessa.delete({ where: { id: altra.id } });
+        });
+        nota = " L'altra pratica di ONE è stata cancellata: resta solo questa.";
+      } catch { nota = " L'altra pratica di ONE non si è potuta cancellare (ha dati collegati): chiedimelo e la tolgo a mano."; }
+    }
+  }
   await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
   revalidatePath(`/commesse/${c!.id}`);
-  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE inserita: prodotti e prezzi sono nella pratica")}#progetto`);
+  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE inserita: prodotti e prezzi sono nella pratica." + nota)}#progetto`);
 }
 
 // ============ DISTINTA BASE (KIT) ============
