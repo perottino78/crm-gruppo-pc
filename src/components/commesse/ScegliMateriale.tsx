@@ -95,7 +95,13 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSosp
                 <details key={f.nome} className="mb-1">
                   <summary className="cursor-pointer font-bold">{f.nome}</summary>
                   <div className="ml-3">
-                    {f.gruppi.map((g) => (
+                    {raggruppaSerramenti(f.gruppi).map((g) => (
+                      "materiali" in g ? (
+                        <details key="SERRAMENTI" className="mb-0.5">
+                          <summary className="cursor-pointer font-semibold text-neutral-800">SERRAMENTI</summary>
+                          <div className="ml-3"><SerramentiATendina materiali={g.materiali} scegli={dalListino} /></div>
+                        </details>
+                      ) : (
                       <details key={g.nome} className="mb-0.5">
                         <summary className="cursor-pointer font-semibold text-neutral-800">{g.nome}</summary>
                         <div className="ml-3">
@@ -108,6 +114,7 @@ export default function ScegliMateriale({ fornitori, onAggiungi, brandId, onSosp
                           ))}
                         </div>
                       </details>
+                      )
                     ))}
                     {f.nome === "OUTDOOR" && (
                       <>
@@ -217,6 +224,41 @@ function VociATendine({ voci, scegli }: { voci: VoceLeggera[]; scegli: (value: s
           <option value="">Poi scegli…</option>
           {secondi.map((v) => <option key={v.value} value={v.value}>{v.assi![1].label}</option>)}
         </select>
+      )}
+    </div>
+  );
+}
+
+type GruppoAlbero = AlberoLeggero[number]["gruppi"][number];
+/** Nel listino i gruppi «SERRAMENTI · PVC», «SERRAMENTI · Alluminio»… diventano una voce sola «SERRAMENTI» con la tendina del materiale (Ugo 22/11/2026). */
+function raggruppaSerramenti(gruppi: GruppoAlbero[]): (GruppoAlbero | { materiali: { nome: string; gruppo: GruppoAlbero }[] })[] {
+  const m = gruppi.filter((g) => g.nome.startsWith("SERRAMENTI · "));
+  if (!m.length) return gruppi;
+  const primo = gruppi.findIndex((g) => g.nome.startsWith("SERRAMENTI · "));
+  const resto = gruppi.filter((g) => !g.nome.startsWith("SERRAMENTI · "));
+  const nodo = { materiali: m.map((g) => ({ nome: g.nome.replace("SERRAMENTI · ", ""), gruppo: g })) };
+  return [...resto.slice(0, primo), nodo, ...resto.slice(primo)];
+}
+
+function SerramentiATendina({ materiali, scegli }: { materiali: { nome: string; gruppo: GruppoAlbero }[]; scegli: (value: string) => void }) {
+  const [mat, setMat] = useState("");
+  const g = materiali.find((x) => x.nome === mat)?.gruppo;
+  return (
+    <div className="py-1">
+      <select value={mat} onChange={(e) => setMat(e.target.value)} className="border border-neutral-300 rounded px-2 py-1 text-xs bg-white" aria-label="Materiale del serramento">
+        <option value="">Materiale… (PVC, Alluminio, Legno…)</option>
+        {materiali.map((x) => <option key={x.nome} value={x.nome}>{x.nome}</option>)}
+      </select>
+      {g && (
+        <div className="mt-1">
+          <VociATendine voci={g.voci} scegli={scegli} />
+          {g.sottogruppi.map((sg) => (
+            <details key={sg.nome}>
+              <summary className="cursor-pointer text-neutral-700">{sg.nome}</summary>
+              <div className="ml-3"><VociATendine voci={sg.voci} scegli={scegli} /></div>
+            </details>
+          ))}
+        </div>
       )}
     </div>
   );
