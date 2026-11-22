@@ -9,7 +9,9 @@
 import dati from "../../../prisma/seed-data/coprifili_exte.json";
 
 export const PREFISSO_COPRIFILI = "COPRIF_";
-export const GRUPPO_COPRIFILI = "COPRIFILI E ANGOLARI";
+// Ugo 22/11/2026: stanno in INDOOR › SERRAMENTI (sottogruppo PVC), scelti con due tendine: tipo di profilo → misura, poi colore e lunghezza.
+export const GRUPPO_COPRIFILI = "SERRAMENTI";
+export const SOTTOGRUPPO_COPRIFILI = "PVC — Coprifili e angolari";
 export const FORNITORE_COPRIFILI = "EXTE";
 /** Vendita = costo EXTE × 2, come la lattoneria (da cambiare con gli Aumenti listini se serve). */
 export const RICARICO_COPRIFILI = 2;
@@ -112,7 +114,7 @@ export function catalogoCoprifili(ricarico = RICARICO_COPRIFILI) {
   const modelli = ARTICOLI_COPRIFILI.map((a) => ({
     tipologia: tipologiaCoprifilo(a.codice),
     codiceFornitore: a.codice,
-    sottogruppo: SOTTOGRUPPI_COPRIFILI[a.sezione],
+    sottogruppo: SOTTOGRUPPO_COPRIFILI,
     descrizioneTecnica:
       `${nomeCoprifilo(a)}: profilo in PVC per la posa dei serramenti (per esterni ed interni), barre da 6 m, confezioni da 60 m. ` +
       `Prezzo al metro lineare. Colori: bianco${a.per100m.protettiva != null ? ", bianco con pellicola protettiva" : ""}, bianco Salamander` +
@@ -121,10 +123,15 @@ export function catalogoCoprifili(ricarico = RICARICO_COPRIFILI) {
   return { prodotti, modelli };
 }
 
-export const sottogruppoCoprifilo = (tipologia: string) => {
+export const sottogruppoCoprifilo = (tipologia: string) => (articoloCoprifilo(tipologia) ? SOTTOGRUPPO_COPRIFILI : null);
+
+/** Le due tendine: «Tipo di profilo» (coprifilo piatto, angolare…) e «Misura». */
+export function assiSelezioneCoprifili(tipologia: string): { modello: { valore: string; label: string }; apertura: { valore: string; label: string } } | null {
   const a = articoloCoprifilo(tipologia);
-  return a ? SOTTOGRUPPI_COPRIFILI[a.sezione] : null;
-};
+  if (!a) return null;
+  const misura = nomeCoprifilo(a).replace(/^(Coprifilo|Listello|Angolare|Scatolato)[^0-9]*?(?=\d)/i, "").trim() || nomeCoprifilo(a);
+  return { modello: { valore: a.sezione, label: SOTTOGRUPPI_COPRIFILI[a.sezione] }, apertura: { valore: a.codice, label: misura } };
+}
 /** Nome leggibile (offerta, ricerca dei complementi): «Coprifilo piatto 30 x 2,5» al posto di «Listello piatto…», con il codice EXTE. */
 export const nomeCoprifilo = (a: ArticoloCoprifilo) =>
   `${a.descrizione.replace(/^Listello (piatto|scatolato)/, "Coprifilo $1").replace(/^Listello (piegabile|flessibile)/, "Coprifilo $1")} (EXTE ${a.codice})`;
