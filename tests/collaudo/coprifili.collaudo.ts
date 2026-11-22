@@ -39,10 +39,10 @@ async function main() {
   verifica(p25.length === 2 && p25.every((p) => p.colore.startsWith("Bianco")), "piatto 25: solo bianco e bianco Salamander (niente pellicolati a catalogo)", p25.map((p) => p.colore));
 
   const albero = await tassonomiaListino(b.id);
-  const gruppo = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((x) => x.nome === "SERRAMENTI");
+  const gruppo = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((x) => x.nome === "SERRAMENTI · PVC");
   verifica(!!gruppo, "nell'albero del listino (Indoor › Coprifili e angolari)", albero.map((f) => [f.nome, f.gruppi.map((x) => x.nome)]));
 
-  const sg = gruppo?.sottogruppi?.find((x) => x.nome === "PVC — Coprifili e angolari");
+  const sg = gruppo?.sottogruppi?.find((x) => x.nome === "Coprifili e angolari");
   verifica(!!sg && sg.tipologie.length === 81 && sg.tipologie.every((t) => t.assiIsomax), "in Serramenti › PVC — Coprifili e angolari, tutti con le due tendine (tipo di profilo → misura)", sg?.tipologie.length);
   const t30 = sg?.tipologie.find((t) => t.value === "COPRIF_65025030");
   verifica(t30?.assiIsomax?.modello.label === "Coprifili piatti" && /30/.test(t30.assiIsomax.apertura.label), "coprifilo piatto 30: tendina tipo «Coprifili piatti», misura con 30", t30?.assiIsomax);
