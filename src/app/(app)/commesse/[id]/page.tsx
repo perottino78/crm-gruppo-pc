@@ -23,6 +23,7 @@ import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConseg
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
 import { agganciaOffertaONE } from "@/app/commesse-actions";
+import { scegliTaskDoppi } from "@/lib/pratica/task-doppi";
 import AzioniRigaMateriale from "@/components/commesse/AzioniRigaMateriale";
 import PercorsoProgetto from "@/components/commesse/PercorsoProgetto";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
@@ -211,6 +212,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const puoFinanziamento = gestoreIncassi || (!!utente && puo(utente, "fatturazione"));
   const rateIntermedie = await prisma.scadenza.findMany({ where: { commessaId: c.id, origine: { startsWith: "COMMESSA_RATA_" } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { origine: "asc" } });
   const percorsoProg = await percorsoDiCommessa(c.id);
+  // un solo passaggio per fase: i doppioni ancora aperti si annullano, il resto non si mostra due volte (Ugo 22/11/2026)
+  const { tieni: tieniTask, doppi: doppiTask } = scegliTaskDoppi(c.tasks, STATI_CHIUSI);
+  const daAnnullare = doppiTask.filter((t) => !t.completatoIl && !STATI_CHIUSI.includes(t.stato)).map((t) => t.id);
+  if (daAnnullare.length) await prisma.taskPratica.updateMany({ where: { id: { in: daAnnullare } }, data: { stato: "ANNULLATO", completatoIl: new Date() } }).catch(() => null);
   // pratica presa da BConsole: le offerte di ONE dello stesso cliente non ancora collegate a una pratica si possono agganciare (Ugo 22/11/2026)
   const offerteAgganciabili = c.ordineBC
     ? await prisma.preventivo.findMany({ where: { clienteId: c.clienteId, id: { not: c.preventivoId }, righe: { some: {} } }, select: { id: true, numeroOfferta: true, oggetto: true, totaleNetto: true }, orderBy: { createdAt: "desc" }, take: 30 })
@@ -399,7 +404,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
 
       {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
       {(() => {
-        const passaggi = [...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
+        const passaggi = [...tieniTask].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
         const chiuso = (t: (typeof passaggi)[number]) => !!t.completatoIl || STATI_CHIUSI.includes(t.stato);
         const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
         const attivi = passaggi.filter((t) => !chiuso(t));
@@ -419,7 +424,6 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             {passaggi.length === 0 ? "Nessun passaggio fra uffici ancora." : <>{fatti} passaggi chiusi{attivi.length > 0 ? <> · <b className="text-sky-800">adesso: {attivi.map((t) => nomeUfficio(t.ufficio)).join(", ")}</b></> : " · tutto chiuso"}</>}
           </p>
         </summary>
-        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Qui sotto trovi il percorso fra gli uffici, con le date, e in fondo i costi di manodopera.</p>
         {passaggi.length === 0 && (
           <div className="mb-3">
             <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
