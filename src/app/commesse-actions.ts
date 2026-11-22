@@ -1622,6 +1622,11 @@ export async function modificaComplemento(formData: FormData) {
   dove(`Salvato: ${desc}`, true);
 }
 
+// Versioni «legate» alla riga (si usano con .bind(null, rigaId) dalla tabella del materiale: il nome/valore del pulsante non arrivava all'azione)
+export async function eliminaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return eliminaComplemento(fd); }
+export async function duplicaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return duplicaComplemento(fd); }
+export async function modificaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return modificaComplemento(fd); }
+
 /** Consegna prevista del progetto (deadline): si scrive e si sposta dalla pratica; ogni cambio va nello storico. */
 export async function salvaConsegnaPrevista(formData: FormData) {
   const u = await getCurrentUser();

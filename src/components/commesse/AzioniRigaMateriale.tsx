@@ -20,8 +20,8 @@ export default function AzioniRigaMateriale({ rigaId, descrizione, quantita, not
     <div className="flex flex-col items-end gap-1">
       <div className="flex gap-2 text-xs">
         <button type="button" onClick={() => setAperto(!aperto)} className="text-blue-800 underline">✏️ modifica</button>
-        <button formAction={azioni.duplica} name="rigaId" value={rigaId} className="text-neutral-800 underline">⧉ duplica</button>
-        <button formAction={azioni.elimina} name="rigaId" value={rigaId} className="text-red-700 underline" onClick={(e) => { if (!confirm("Togliere questa riga dal materiale?")) e.preventDefault(); }}>🗑 elimina</button>
+        <button formAction={azioni.duplica} className="text-neutral-800 underline">⧉ duplica</button>
+        <button formAction={azioni.elimina} className="text-red-700 underline" onClick={(e) => { if (!confirm("Togliere questa riga dal materiale?")) e.preventDefault(); }}>🗑 elimina</button>
       </div>
       {aperto && (
         <div className="w-72 rounded border border-blue-200 bg-blue-50 p-2 space-y-1 text-left">
@@ -30,7 +30,7 @@ export default function AzioniRigaMateriale({ rigaId, descrizione, quantita, not
             <input name={`qta_${rigaId}`} type="number" min={1} defaultValue={quantita} onKeyDown={invio} className={`${campo} w-16`} aria-label="Quantità" title="Quantità" />
             <input name={`note_${rigaId}`} defaultValue={note ?? ""} onKeyDown={invio} placeholder="nota" className={`${campo} flex-1`} aria-label="Nota" />
           </div>
-          <button ref={salva} formAction={azioni.modifica} name="rigaId" value={rigaId} className="btn-3d btn-3d-blue text-xs px-3 py-1">💾 Salva</button>
+          <button ref={salva} formAction={azioni.modifica} className="btn-3d btn-3d-blue text-xs px-3 py-1">💾 Salva</button>
         </div>
       )}
     </div>
