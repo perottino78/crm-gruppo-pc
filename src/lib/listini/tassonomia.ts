@@ -285,7 +285,7 @@ async function tassonomiaDalDatabase(brandId: string): Promise<FamigliaNodo[]> {
 
 
 /** Materiali dei serramenti, nell'ordine in cui si mostrano (Ugo 22/11/2026: «dividi i serramenti per materiale, poi la famiglia, poi le tendine»). */
-const MATERIALI_SERRAMENTI = ["PVC", "PVC Alluminio", "PVC-Alluminio", "Alluminio", "Legno", "Legno-Alluminio", "Legno Alluminio"];
+const MATERIALI_SERRAMENTI = ["PVC", "Coprifili PVC", "PVC Alluminio", "PVC-Alluminio", "Alluminio", "Legno", "Legno-Alluminio", "Legno Alluminio"];
 
 /**
  * Nel solo albero mostrato (il database non cambia) il gruppo SERRAMENTI si divide per materiale: «SERRAMENTI · PVC» con dentro le famiglie

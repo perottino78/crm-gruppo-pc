@@ -11,7 +11,7 @@ import dati from "../../../prisma/seed-data/coprifili_exte.json";
 export const PREFISSO_COPRIFILI = "COPRIF_";
 // Ugo 22/11/2026: stanno in INDOOR › SERRAMENTI (sottogruppo PVC), scelti con due tendine: tipo di profilo → misura, poi colore e lunghezza.
 export const GRUPPO_COPRIFILI = "SERRAMENTI";
-export const SOTTOGRUPPO_COPRIFILI = "PVC — Coprifili e angolari";
+export const SOTTOGRUPPO_COPRIFILI = "Coprifili PVC — Listino completo";
 export const FORNITORE_COPRIFILI = "EXTE";
 /** Vendita = costo EXTE × 2, come la lattoneria (da cambiare con gli Aumenti listini se serve). */
 export const RICARICO_COPRIFILI = 2;
