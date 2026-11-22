@@ -7,7 +7,9 @@ import { tassonomiaListino } from "@/lib/listini/tassonomia";
 
 export const dynamic = "force-dynamic";
 
-export type AlberoLeggero = { nome: string; gruppi: { nome: string; voci: { value: string; label: string }[]; sottogruppi: { nome: string; voci: { value: string; label: string }[] }[] }[] }[];
+type Asse = { valore: string; label: string };
+export type VoceLeggera = { value: string; label: string; /** le due tendine (Ugo 22/11/2026: «anche i serramenti stessa cosa») */ assi?: [Asse, Asse] };
+export type AlberoLeggero = { nome: string; gruppi: { nome: string; voci: VoceLeggera[]; sottogruppi: { nome: string; voci: VoceLeggera[] }[] }[] }[];
 
 export async function GET(req: NextRequest) {
   if (!(await getCurrentUser())) return NextResponse.json({ errore: "Non autorizzato" }, { status: 401 });
@@ -15,7 +17,11 @@ export async function GET(req: NextRequest) {
   if (!brandId) return NextResponse.json({ albero: [] });
   await assicuraCoprifili();
   const t = await tassonomiaListino(brandId);
-  const voci = (l: { value: string; label: string; disabilitato?: string }[]) => l.filter((x) => !x.disabilitato && !/PLACEHOLDER/.test(x.value)).map((x) => ({ value: x.value, label: x.label }));
+  const voci = (l: { value: string; label: string; disabilitato?: string; assiZenith?: { categoria: Asse; modello: Asse }; assiIsomax?: { modello: Asse; apertura: Asse } }[]): VoceLeggera[] =>
+    l.filter((x) => !x.disabilitato && !/PLACEHOLDER/.test(x.value)).map((x) => ({
+      value: x.value, label: x.label,
+      ...(x.assiZenith ? { assi: [x.assiZenith.categoria, x.assiZenith.modello] as [Asse, Asse] } : x.assiIsomax ? { assi: [x.assiIsomax.modello, x.assiIsomax.apertura] as [Asse, Asse] } : {}),
+    }));
   const albero: AlberoLeggero = t.map((f) => ({
     nome: f.nome,
     gruppi: f.gruppi.map((g) => ({ nome: g.nome, voci: voci(g.tipologie), sottogruppi: (g.sottogruppi ?? []).map((s) => ({ nome: s.nome, voci: voci(s.tipologie) })) })),
