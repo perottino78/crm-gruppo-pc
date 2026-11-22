@@ -64,7 +64,12 @@ async function main() {
   verifica(p.puoConfermare && p.etichetta === "Pronto da confermare", "pronto da confermare", p.etichetta);
   const righe = await prisma.rigaOrdine.findMany({ where: { commessaId: c.id } });
   const rOrd0 = await dove(O.creaOrdineDaRighe(fd({ commessaId: c.id, riga: righe.map((r) => r.id) })));
-  verifica(rOrd0?.includes("avviso=") && (await prisma.ordineFornitore.count()) === 0, "senza conferma non si crea nessun ordine", rOrd0);
+  // dal 22/11/2026 ordinare le righe scelte vale come conferma del materiale (niente più blocco «prima conferma»)
+  verifica(rOrd0?.includes("/ordini-fornitori/") && !!(await prisma.commessa.findUnique({ where: { id: c.id } }))?.materialeConfermatoIl, "ordinando le righe il materiale si conferma da solo", rOrd0);
+  // si riparte dallo stato di prima per provare anche la conferma esplicita
+  await prisma.rigaOrdine.updateMany({ where: { commessaId: c.id }, data: { ordineFornitoreId: null, ordinato: false } });
+  await prisma.ordineFornitore.deleteMany({ where: { commessaId: c.id } });
+  await prisma.commessa.update({ where: { id: c.id }, data: { materialeConfermatoIl: null } });
 
   console.log("5. Conferma materiale: si sbloccano gli ordini");
   const rConf = await dove(C.confermaMaterialeProgetto(fd({ commessaId: c.id })));

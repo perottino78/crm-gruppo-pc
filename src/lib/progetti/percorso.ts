@@ -43,7 +43,9 @@ export type Percorso = {
 
 /** Le pratiche già avviate (rilievo, materiale o ordini presenti) non hanno il blocco del percorso nuovo. */
 export function praticaLegacy(d: { progettoCreatoIl: Date | null; rilievi: number; righe: number; ordini: number; ordineBC?: boolean }): boolean {
-  return !d.progettoCreatoIl && (d.rilievi > 0 || d.righe > 0 || d.ordini > 0 || !!d.ordineBC);
+  // una pratica presa da BConsole è sempre «già avviata»: niente blocchi, anche se poi si è premuto «Crea progetto»
+  if (d.ordineBC) return true;
+  return !d.progettoCreatoIl && (d.rilievi > 0 || d.righe > 0 || d.ordini > 0);
 }
 
 export function percorsoProgetto(d: DatiPercorso): Percorso {
