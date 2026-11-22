@@ -6,7 +6,7 @@ import { viaLiberaRilievo, sogliaRilievo } from "./soglia";
 export async function statoSogliaRilievo(commessaId: string) {
   const c = await prisma.commessa.findUnique({
     where: { id: commessaId },
-    select: { accontoTipo: true, finanziamentoStato: true, totaleVendita: true, accontoIncassato: true, accontoImportoIncassato: true, accontoImporto: true, saldoIncassato: true, saldoImporto: true, rilievoSbloccatoIl: true },
+    select: { accontoTipo: true, finanziamentoStato: true, totaleVendita: true, accontoIncassato: true, accontoImportoIncassato: true, accontoImporto: true, saldoIncassato: true, saldoImporto: true, rilievoSbloccatoIl: true, ordineBC: true },
   });
   if (!c) return null;
   const fatture = await prisma.fatturaVendita.findMany({ where: { commessaId }, select: { id: true } });
@@ -19,5 +19,7 @@ export async function statoSogliaRilievo(commessaId: string) {
   const daPratica = (c.accontoIncassato ? c.accontoImportoIncassato ?? c.accontoImporto : 0) + (c.saldoIncassato ? c.saldoImporto ?? 0 : 0);
   const incassato = Math.round(Math.max(daScadenze, daPratica) * 100) / 100;
   const viaLibera = viaLiberaRilievo({ accontoTipo: c.accontoTipo, finanziamentoStato: c.finanziamentoStato, totale: c.totaleVendita, incassato, sbloccato: !!c.rilievoSbloccatoIl });
-  return { incassato, totale: c.totaleVendita, soglia: sogliaRilievo(c.totaleVendita), viaLibera, sbloccato: !!c.rilievoSbloccatoIl };
+  // lavoro preso da BConsole: gli incassi sono già nelle fatture di BConsole, il rilievo non aspetta il 50% in ONE
+  const libera = viaLibera || !!c.ordineBC;
+  return { incassato, totale: c.totaleVendita, soglia: sogliaRilievo(c.totaleVendita), viaLibera: libera, sbloccato: !!c.rilievoSbloccatoIl };
 }

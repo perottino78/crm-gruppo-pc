@@ -105,3 +105,13 @@ test("scheda cliente: acconto incassato → «Incasso acconto» è fatto anche s
   assert.equal(st.PROGETTO, "fatto");
   assert.equal(st.RILIEVO, "futuro");
 });
+
+test("pratica presa da BConsole: progetto, fattura e benvenuto sono già fatti e «Carica il rilievo» si apre", () => {
+  const r = passiPratica({ ...base, daBConsole: true });
+  assert.equal(r.corrente, "RILIEVO_APP");
+  const st = Object.fromEntries(r.passi.map((p) => [p.chiave, p.stato]));
+  assert.equal(st.PROGETTO, "FATTO");
+  assert.equal(st.FATTURA, "FATTO");
+  // dal task del rilievo si arriva al caricamento anche se l'appuntamento non è in ONE (rifissato su BConsole)
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "RILIEVO"), "RILIEVO");
+});
