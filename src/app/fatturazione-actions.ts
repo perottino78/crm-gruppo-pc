@@ -188,6 +188,18 @@ export async function emettiFattura(fd: FormData) {
   redirect(`/fatturazione/fatture/${f.id}?emessa=1`);
 }
 
+/** Segna la fattura come inviata allo SDI (o toglie il segno). Entro 12 giorni dall'emissione. */
+export async function segnaInviataSdi(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f || f.stato !== "EMESSA") redirect("/fatturazione/fatture");
+  const annulla = fd.get("annulla") === "1";
+  await prisma.fatturaEmessa.update({ where: { id: f.id }, data: { inviataSdiIl: annulla ? null : giorno(str(fd, "data")) ?? new Date() } });
+  await registraLog("FATTURA_SDI", f.id, annulla ? "ANNULLATA" : "INVIATA", `${f.numero} ${annulla ? "tolto il segno «inviata allo SDI»" : "segnata inviata allo SDI"}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
 /** Invia la fattura (PDF di cortesia) al cliente per email, dalla casella di chi la manda (Debora 23/11/2026). */
 export async function inviaFatturaEmail(fd: FormData) {
   const u = await utente();
@@ -265,6 +277,24 @@ export async function duplicaFattura(fd: FormData) {
 }
 
 // ======================= DDT DI USCITA =======================
+
+/** Nuovo DDT (bozza) a un fornitore: reso o merce data in lavorazione. I dati del fornitore vanno nel riquadro del destinatario. */
+export async function creaDdtFornitore(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.soggetto.findUnique({ where: { id: str(fd, "fornitoreId") ?? "" } });
+  if (!f) errore("/fatturazione", "Scegli il fornitore.");
+  const causale = CAUSALI_TRASPORTO.includes(str(fd, "causale") ?? "") ? str(fd, "causale")! : "Reso al fornitore";
+  const data = giorno(str(fd, "data")) ?? oggi();
+  const d = await prisma.ddtUscita.create({
+    data: {
+      anno: data.getUTCFullYear(), data, fornitoreId: f!.id, clienteNome: f!.ragioneSociale, indirizzo: f!.indirizzo, cap: f!.cap, comune: f!.comune, provincia: f!.provincia,
+      partitaIva: f!.partitaIva, codiceFiscale: f!.codiceFiscale, causale, trasportoACura: "MITTENTE", aspettoBeni: "A vista", porto: "Porto franco",
+      riferimento: `Fornitore ${f!.ragioneSociale}`, creatoDaNome: u.nome,
+    },
+  });
+  aggiorna();
+  redirect(`/fatturazione/ddt/${d.id}`);
+}
 
 /** Nuovo DDT (bozza) per un cliente o da una commessa; con la spunta copia le voci dell'offerta. */
 export async function creaDdt(fd: FormData) {

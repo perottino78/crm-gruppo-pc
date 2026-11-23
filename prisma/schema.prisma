@@ -2190,6 +2190,8 @@ model FatturaEmessa {
   codiceDestinatario String?
   pec                String?
   telefono            String?
+  // Giorno in cui l'XML è stato inviato allo SDI (a mano, finché non c'è l'invio automatico): entro 12 giorni dall'emissione
+  inviataSdiIl        DateTime?
   email              String?
   commessaId         String?
   brand              String?
@@ -2268,6 +2270,8 @@ model DdtUscita {
   anno            Int
   data            DateTime
   clienteId       String?
+  // DDT a un fornitore (reso, conto lavorazione): i dati del fornitore sono copiati nei campi del destinatario
+  fornitoreId     String?
   clienteNome     String
   indirizzo       String?
   cap             String?

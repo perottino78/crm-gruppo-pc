@@ -94,7 +94,7 @@ export const BANCHE_AZIENDA = ["Banca Crédit Agricole Cariparma", "Banca Intesa
 
 /** Causali di trasporto verso il cliente (BConsole › Caus. Trasporto, tipo CLIENTE). */
 export const CAUSALI_TRASPORTO = [
-  "Vendita merce", "Reso al fornitore", "Conto visione", "Conto sostituzione", "Conto lavorazione da cliente", "Conto riparazione da cliente",
+  "Vendita merce", "Reso al fornitore", "Conto lavorazione a fornitore", "Conto visione", "Conto sostituzione", "Conto lavorazione da cliente", "Conto riparazione da cliente",
   "Comodato d'uso gratuito", "Prestito d'uso cliente", "Omaggio a cliente", "Reso da cliente", "Sposta giacenza",
 ];
 export const TRASPORTO_A_CURA = [{ codice: "MITTENTE", nome: "Mittente" }, { codice: "DESTINATARIO", nome: "Destinatario" }, { codice: "VETTORE", nome: "Vettore" }];
