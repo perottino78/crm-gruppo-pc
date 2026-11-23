@@ -936,6 +936,10 @@ model RigaOrdine {
   quantitaArrivata  Float            @default(0)
   // Materiale preso dalle scorte di magazzino invece che ordinato al fornitore
   daMagazzino       Boolean          @default(false)
+  // Riga messa da parte «da ordinare più avanti» (es. aspetto le misure definitive di produzione): non conta nel «da ordinare ora»
+  rimandataIl       DateTime?
+  rimandataMotivo   String?
+  rimandataDaNome   String?
   prelevatoIl       DateTime?
   // Complemento aggiunto al rilievo: solo acquisto, non cambia la vendita al cliente
   complemento       Boolean          @default(false)

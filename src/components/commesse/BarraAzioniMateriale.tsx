@@ -15,7 +15,7 @@ export default function BarraAzioniMateriale({ fornitori, progetti, uffici, puoO
   progetti: { id: string; nome: string }[];
   uffici: { chiave: string; nome: string }[];
   puoOrdinare: boolean;
-  azioni: { ordine: Azione; sposta: Azione; task: Azione; elimina: Azione };
+  azioni: { ordine: Azione; sposta: Azione; task: Azione; elimina: Azione; rimanda?: Azione };
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [n, setN] = useState(0);
@@ -69,6 +69,12 @@ export default function BarraAzioniMateriale({ fornitori, progetti, uffici, puoO
               <input name="titoloTask" placeholder="titolo (facoltativo)" className={`${inp} w-40`} />
               <button formAction={azioni.task} className="btn-3d btn-3d-teal text-xs px-3 py-1.5">✅ Crea task</button>
             </div>
+            {azioni.rimanda && (
+              <div className="flex items-end gap-1">
+                <input name="motivoRimando" placeholder="perché? (es. misure definitive)" className={`${inp} w-52`} />
+                <button formAction={azioni.rimanda} className="btn-3d btn-3d-orange text-xs px-3 py-1.5">⏳ Rimanda</button>
+              </div>
+            )}
             <button formAction={azioni.elimina} className="btn-3d btn-3d-red text-xs px-3 py-1.5">🗑 Togli</button>
             <button type="button" onClick={() => tutte(false)} className="ml-auto text-xs underline self-center">chiudi</button>
           </div>

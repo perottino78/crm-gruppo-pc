@@ -1748,6 +1748,34 @@ export async function eliminaRigheMateriale(formData: FormData) {
   redirect(`/commesse/${commessaId}?${via.length ? `fattoMateriale=${encodeURIComponent(`${via.length} righe tolte.`)}&` : ""}${restano ? `avviso=${encodeURIComponent(`${restano} righe non tolte: sono dell'offerta o già ordinate (le righe dell'offerta si cambiano con una variante).`)}` : ""}#materiale-pratica`);
 }
 
+/**
+ * «⏳ Rimanda»: le righe spuntate si mettono da parte con il motivo (es. «aspetto le misure definitive di produzione») e escono da «Da ordinare ora»;
+ * il task dell'ufficio ordini resta uno solo e si chiude quando anche queste sono ordinate (Ugo 23/11/2026).
+ */
+export async function rimandaRighe(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const ids = righeSpuntate(formData);
+  const motivo = (str(formData, "motivoRimando") ?? "").trim().slice(0, 200) || "da ordinare più avanti";
+  const r = await prisma.rigaOrdine.updateMany({ where: { id: { in: ids }, commessaId, ordineFornitoreId: null, ordinato: false, daMagazzino: false }, data: { rimandataIl: new Date(), rimandataMotivo: motivo, rimandataDaNome: u.nome } });
+  if (r.count) await log(commessaId, `${r.count} righe messe da parte («${motivo}») da ${u.nome}: da ordinare più avanti.`);
+  redirect(`/commesse/${commessaId}?${r.count ? `fattoMateriale=${encodeURIComponent(`${r.count} righe messe in «Da ordinare più avanti».`)}` : `avviso=${encodeURIComponent("Spunta le righe da rimandare: quelle già ordinate non si possono rimandare.")}`}&passo=MATERIALE#materiale-pratica`);
+}
+
+/** Rimette fra le righe da ordinare ora quelle rimandate (le spuntate, o tutte con `tutte=1`: «misure definitive arrivate»). */
+export async function riprendiRighe(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const ids = str(formData, "tutte") === "1" ? null : [...new Set(formData.getAll("riga").map(String))];
+  const r = await prisma.rigaOrdine.updateMany({ where: { commessaId, rimandataIl: { not: null }, ordineFornitoreId: null, ordinato: false, ...(ids ? { id: { in: ids } } : {}) }, data: { rimandataIl: null, rimandataMotivo: null, rimandataDaNome: null } });
+  if (r.count) await log(commessaId, `${r.count} righe rimesse in «Da ordinare ora» da ${u.nome}${str(formData, "tutte") === "1" ? " (misure definitive arrivate)" : ""}.`);
+  redirect(`/commesse/${commessaId}?${r.count ? `fattoMateriale=${encodeURIComponent(`${r.count} righe pronte da ordinare.`)}` : `avviso=${encodeURIComponent("Nessuna riga da riprendere.")}`}&passo=MATERIALE#materiale-pratica`);
+}
+
 /** Task a un ufficio con l'elenco delle righe spuntate (es. magazzino: preparare questi pezzi). */
 export async function taskDaRighe(formData: FormData) {
   const u = await getCurrentUser();
