@@ -11,7 +11,7 @@ const giorno = (d: Date | null) => (d ? d.toLocaleDateString("it-IT", { timeZone
 const isoGiorno = (d: Date | null) => (d ? d.toISOString().slice(0, 10) : "");
 const inp = "border border-neutral-300 rounded px-2 py-1 text-sm bg-white";
 
-export default async function OrdiniPerFornitore({ commessaId, puoGestire }: { commessaId: string; puoGestire: boolean }) {
+export default async function OrdiniPerFornitore({ commessaId, puoGestire, conArrivi = false }: { commessaId: string; puoGestire: boolean; /** le spunte «arrivato» servono nel passo «Arrivo in magazzino», non mentre si ordina e si conferma */ conArrivi?: boolean }) {
   const ordini = await prisma.ordineFornitore.findMany({
     where: { commessaId, stato: { in: ["INVIATO", "CONFERMATO", "EVASO_PARZIALE", "EVASO"] } },
     include: { fornitore: { select: { ragioneSociale: true } }, righe: { select: { id: true, descrizione: true, quantita: true, arrivato: true, complemento: true }, orderBy: { createdAt: "asc" } } },
@@ -69,7 +69,7 @@ export default async function OrdiniPerFornitore({ commessaId, puoGestire }: { c
       {confermati.length > 0 && (
         <section className="rounded-xl border-2 border-green-300 bg-green-50/40 p-3">
           <h3 className="text-base font-bold text-green-950">③ Confermati dal fornitore <span className="font-normal text-neutral-600">({confermati.length} {confermati.length === 1 ? "ordine" : "ordini"})</span></h3>
-          <p className="text-xs text-neutral-700 mb-2">Un riquadro per fornitore, con il <b>costo totale</b>. Quando arriva la merce spunta le righe e premi «Segna arrivato».</p>
+          <p className="text-xs text-neutral-700 mb-2">Un riquadro per fornitore, con il <b>costo totale</b>. {conArrivi ? "Quando arriva la merce spunta le righe e premi «Segna arrivato»." : <>Quando la merce arriva la controlli in <Link href={`/commesse/${commessaId}?passo=ARRIVO#evasione`} className="underline font-semibold text-blue-800">Arrivo in magazzino →</Link></>}</p>
           <div className="space-y-3">
             {confermati.map((o) => {
               const arrivate = o.righe.filter((r) => r.arrivato).length;
@@ -82,7 +82,7 @@ export default async function OrdiniPerFornitore({ commessaId, puoGestire }: { c
                     <span className={`rounded px-2 py-0.5 text-xs font-bold ${tutto ? "bg-green-600 text-white" : arrivate ? "bg-amber-200 text-amber-900" : "bg-neutral-100 text-neutral-800"}`}>{tutto ? "📦 Tutto arrivato" : arrivate ? `Arrivate ${arrivate} su ${o.righe.length}` : "Merce da ricevere"}</span>
                     <b className="ml-auto text-base text-green-900">{o.totaleConfermato !== null ? eur(o.totaleConfermato) : <span className="text-sm font-normal text-amber-800">totale da scrivere</span>}</b>
                   </div>
-                  {puoGestire ? (
+                  {puoGestire && conArrivi ? (
                     <form action={registraArrivi}>
                       <input type="hidden" name="id" value={o.id} />
                       <ul className="text-sm text-neutral-800 divide-y divide-neutral-100">
