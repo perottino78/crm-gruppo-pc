@@ -11,7 +11,7 @@ import { perInput } from "@/lib/calendario/tempo";
 import { ASPETTO_BENI, BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
 import { controlliEmissione, emissioneReale } from "@/lib/fatturazione/server";
-import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail } from "@/app/fatturazione-actions";
+import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
@@ -64,6 +64,13 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
         <div className="flex flex-wrap gap-2 items-start">
           <a href={`/api/fatturazione/fattura/${f.id}/pdf`} target="_blank" rel="noreferrer" className="btn-3d btn-3d-outline text-sm px-3 py-1.5">📄 {bozza ? "Anteprima PDF" : "PDF di cortesia"}</a>
           {f.stato !== "BOZZA" && <form action={inviaFatturaEmail} className="flex gap-1"><input type="hidden" name="id" value={f.id} /><input name="a" defaultValue={f.email ?? ""} placeholder="email del cliente" className="border border-neutral-300 rounded px-2 py-1 text-xs w-44" /><button className="btn-3d btn-3d-green text-sm px-3 py-1.5">✉️ Invia al cliente</button></form>}
+          {f.stato === "EMESSA" && (() => {
+            const limite = new Date(f.data.getTime() + 12 * 86400000);
+            const giorni = Math.ceil((limite.getTime() - Date.now()) / 86400000);
+            return f.inviataSdiIl
+              ? <form action={segnaInviataSdi} className="flex items-center gap-1 text-xs text-green-800"><input type="hidden" name="id" value={f.id} /><input type="hidden" name="annulla" value="1" />✅ Inviata allo SDI il {dataIt(f.inviataSdiIl)} <button className="underline text-neutral-600">annulla</button></form>
+              : <form action={segnaInviataSdi} className="flex items-center gap-1"><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-amber text-sm px-3 py-1.5">📤 Segna inviata allo SDI</button><span className={`text-xs ${giorni < 0 ? "text-red-700 font-semibold" : giorni <= 3 ? "text-amber-700 font-semibold" : "text-neutral-600"}`}>{giorni < 0 ? `scaduti ${-giorni} gg` : `entro ${dataIt(limite)} (${giorni} gg)`}</span></form>;
+          })()}
           {f.xml && <a href={`/api/fatturazione/fattura/${f.id}/xml`} className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⬇️ XML fattura elettronica</a>}
           {!bozza && <form action={duplicaFattura}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⧉ Duplica</button></form>}
           {(f.stato === "EMESSA" || f.stato === "PROVA") && tf.fiscale && !tf.notaCredito && <form action={creaNotaCredito}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-amber text-sm px-3 py-1.5">↩︎ Nota di credito</button></form>}
