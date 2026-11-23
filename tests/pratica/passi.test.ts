@@ -67,8 +67,10 @@ test("passo precedente: salta i passi in parallelo", () => {
   assert.equal(passoPrecedente(passi, "FATTURA")?.chiave, "BENVENUTO");
 });
 
-test("il saldo si può fare quando vuoi, anche prima degli ordini", () => {
-  assert.equal(stato(base).SALDO, "O");
+test("il saldo si può aprire quando vuoi ma si evidenzia solo a materiale arrivato", () => {
+  assert.equal(stato(base).SALDO, "I");
+  assert.equal(passiPratica(base).passi.find((p) => p.chiave === "SALDO")!.parallelo, true);
+  assert.equal(stato({ ...base, fatturaAccontoIl: adesso, progettoCreatoIl: adesso, benvenutoIl: adesso, viaLibera: true, rilievoFissato: true, rilievoCaricato: true, ordinato: true, materialeCompleto: true }).SALDO, "O");
   assert.equal(stato({ ...base, saldoIncassato: true }).SALDO, "F");
 });
 

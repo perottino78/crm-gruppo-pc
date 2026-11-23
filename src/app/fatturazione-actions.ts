@@ -11,7 +11,7 @@ import { setConfig } from "@/lib/leadIngest";
 import { registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { CHIAVE_REALE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, emetti, emissioneReale, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta } from "@/lib/fatturazione/server";
+import { CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta } from "@/lib/fatturazione/server";
 import { CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
 import { propostaDaCommessa, statoDdtDaRighe } from "@/lib/fatturazione/calcoli";
 import { numeroCommessa } from "@/lib/commesse";
@@ -115,7 +115,7 @@ export async function salvaTestataFattura(fd: FormData) {
         cointestatario: cointest ?? Prisma.DbNull,
         clienteNome: str(fd, "clienteNome") ?? f.clienteNome, partitaIva: campo(fd, "partitaIva", f.partitaIva, str), codiceFiscale: campo(fd, "codiceFiscale", f.codiceFiscale, (x, k) => str(x, k)?.toUpperCase() ?? null),
         indirizzo: campo(fd, "indirizzo", f.indirizzo, str), cap: campo(fd, "cap", f.cap, str), comune: campo(fd, "comune", f.comune, str), provincia: campo(fd, "provincia", f.provincia, (x, k) => str(x, k)?.toUpperCase() ?? null),
-        nazione: (campo(fd, "nazione", f.nazione, str) ?? "IT").toUpperCase().slice(0, 2), codiceDestinatario: campo(fd, "codiceDestinatario", f.codiceDestinatario, (x, k) => str(x, k)?.toUpperCase() ?? null), pec: campo(fd, "pec", f.pec, str),
+        nazione: (campo(fd, "nazione", f.nazione, str) ?? "IT").toUpperCase().slice(0, 2), codiceDestinatario: campo(fd, "codiceDestinatario", f.codiceDestinatario, (x, k) => str(x, k)?.toUpperCase() ?? null), pec: campo(fd, "pec", f.pec, str), email: campo(fd, "email", f.email, str), telefono: campo(fd, "telefono", f.telefono, str),
         persona: fd.has("clienteNome") ? fd.get("persona") === "on" : f.persona, nomePersona: campo(fd, "nomePersona", f.nomePersona, str), cognome: campo(fd, "cognome", f.cognome, str),
         causaleTrasporto: str(fd, "causaleTrasporto"), trasportoACura: str(fd, "trasportoACura"), vettore: str(fd, "vettore"), aspettoBeni: str(fd, "aspettoBeni"),
         colli: intero(fd, "colli"), pesoLordo: num(fd, "pesoLordo"), pesoNetto: num(fd, "pesoNetto"), porto: str(fd, "porto"),
@@ -171,10 +171,45 @@ export async function emettiFattura(fd: FormData) {
   try {
     const e = await prisma.$transaction((tx) => emetti(tx, f.id, u.nome, reale), { timeout: 30000 });
     await registraLog("FATTURA_EMESSA", e.id, e.stato, `${e.numero} — ${e.clienteNome} — ${e.totale.toFixed(2)} €`, u.nome);
+    // copia in pdf nella cartella «Fatture a cliente» della pratica (mai bloccante)
+    try {
+      if (e.commessaId && e.tipo !== "PROFORMA") {
+        const d = await datiPdfFattura(e.id);
+        if (d) {
+          const { pdfFattura } = await import("@/lib/fatturazione/pdf");
+          const bytes = Buffer.from(await pdfFattura(d.dati));
+          await prisma.documento.create({ data: { entita: "COMMESSA", entitaId: e.commessaId, cartella: "Fatture a cliente", nome: `Fattura ${(e.numero ?? "").replace(/\//g, "-")}.pdf`, mime: "application/pdf", dimensione: bytes.length, contenuto: bytes, caricatoDaNome: u.nome } });
+        }
+      }
+    } catch { /* il PDF resta scaricabile dalla fattura */ }
   } catch (err) { msg = (err as Error).message; }
   if (msg) errore(`/fatturazione/fatture/${f.id}`, msg);
   aggiorna(`/fatturazione/fatture/${f.id}`, "/amministrazione/fatture-vendita", "/amministrazione/scadenzario");
   redirect(`/fatturazione/fatture/${f.id}?emessa=1`);
+}
+
+/** Invia la fattura (PDF di cortesia) al cliente per email, dalla casella di chi la manda (Debora 23/11/2026). */
+export async function inviaFatturaEmail(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  const d = id ? await datiPdfFattura(id) : null;
+  if (!d) redirect("/fatturazione/fatture");
+  const f = d.fattura;
+  const a = (str(fd, "a") ?? "").split(/[;,\s]+/).filter((x) => x.includes("@"));
+  if (a.length === 0) errore(`/fatturazione/fatture/${f.id}`, "Scrivi l'email del cliente.");
+  const { pdfFattura } = await import("@/lib/fatturazione/pdf");
+  const { inviaMail } = await import("@/lib/mail/invio");
+  const pdf = Buffer.from(await pdfFattura(d.dati));
+  const numero = f.numero ?? "bozza";
+  const esito = await inviaMail({
+    a, daUtenteId: u.id, oggetto: `Fattura n. ${numero} - ${CEDENTE.denominazione}`,
+    testo: `Buongiorno,\n\nin allegato la fattura n. ${numero} del ${f.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}.\n\nCordiali saluti\nUfficio fatturazione\n${CEDENTE.denominazione}`,
+    allegati: [{ nome: `Fattura ${numero.replace(/\//g, "-")}.pdf`, contenuto: pdf, mime: "application/pdf" }],
+  });
+  if (!esito.inviata) errore(`/fatturazione/fatture/${f.id}`, `Email non inviata: ${esito.motivo ?? "errore"}`);
+  await registraLog("FATTURA_INVIATA_EMAIL", f.id, "INVIATA", `${numero} → ${a.join(", ")}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?inviata=1`);
 }
 
 /** Elimina una bozza, o una fattura di prova (non è mai stata valida). Libera i DDT collegati. */
@@ -322,7 +357,7 @@ export async function confermaDdt(fd: FormData) {
   const reale = await emissioneReale();
   const e = await prisma.$transaction(async (tx) => {
     const numero = await prossimoNumeroDdt(tx, d.anno, !reale);
-    return tx.ddtUscita.update({ where: { id: d.id }, data: { numero, prova: !reale, stato: "DA_FATTURARE", emessoDaNome: u.nome, inizioTrasporto: d.inizioTrasporto ?? new Date() } });
+    return tx.ddtUscita.update({ where: { id: d.id }, data: { numero, prova: !reale, stato: "DA_FATTURARE", emessoDaNome: u.nome, inizioTrasporto: d.inizioTrasporto } });
   });
   await registraLog("DDT_USCITA", e.id, "CONFERMATO", `${e.prova ? "PROVA " : ""}${e.numero}/${e.anno} — ${e.clienteNome}`, u.nome);
   aggiorna(`/fatturazione/ddt/${d.id}`);

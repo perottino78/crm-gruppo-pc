@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import BancaIban from "@/components/fatturazione/BancaIban";
 import CointestatoFattura from "@/components/fatturazione/CointestatoFattura";
 import { cointestatarioDa } from "@/lib/fatturazione/cointestato";
 import Link from "next/link";
@@ -10,18 +11,21 @@ import { perInput } from "@/lib/calendario/tempo";
 import { ASPETTO_BENI, BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
 import { controlliEmissione, emissioneReale } from "@/lib/fatturazione/server";
-import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura } from "@/app/fatturazione-actions";
+import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-full disabled:bg-neutral-50 disabled:text-neutral-700";
 const giornoInput = (d: Date) => d.toISOString().slice(0, 10);
 
-export default async function FatturaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ errore?: string; salvato?: string; emessa?: string }> }) {
+export default async function FatturaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ errore?: string; salvato?: string; emessa?: string; inviata?: string }> }) {
   const { id } = await params;
   const msg = await searchParams;
   const f = await prisma.fatturaEmessa.findUnique({ where: { id }, include: { righe: { orderBy: [{ posizione: "asc" }, { id: "asc" }] }, ddt: { orderBy: { numero: "asc" } } } });
   if (!f) notFound();
+  const conti = await prisma.contoFinanziario.findMany({ where: { tipo: "BANCA", attivo: true, iban: { not: null } }, select: { nome: true, banca: true, iban: true } });
+  const ibanPerBanca: Record<string, string> = {};
+  for (const b of BANCHE_AZIENDA) { const parola = b.replace(/^Banca\s+/i, "").split(/\s+/)[0].toLowerCase(); const c = conti.find((x) => `${x.nome} ${x.banca ?? ""}`.toLowerCase().includes(parola)); if (c?.iban) ibanPerBanca[b] = c.iban; }
   const [commessa, collegata, note, reale] = await Promise.all([
     f.commessaId ? prisma.commessa.findUnique({ where: { id: f.commessaId }, select: { id: true, numero: true, anno: true } }) : null,
     f.fatturaCollegataId ? prisma.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { id: true, numero: true, data: true } }) : null,
@@ -40,6 +44,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
     <div className="space-y-4">
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">⚠️ {msg.errore}</p>}
       {msg.salvato && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ Salvato</p>}
+      {msg.inviata && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ Fattura inviata per email</p>}
       {msg.emessa && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ {f.stato === "PROVA" ? "Fattura di prova emessa (numero «PROVA», non valida)" : "Fattura emessa"}: n. {f.numero}. Scarica il PDF per il cliente{f.xml ? " e l'XML da caricare" : ""}.</p>}
 
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -58,6 +63,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
         </div>
         <div className="flex flex-wrap gap-2 items-start">
           <a href={`/api/fatturazione/fattura/${f.id}/pdf`} target="_blank" rel="noreferrer" className="btn-3d btn-3d-outline text-sm px-3 py-1.5">📄 {bozza ? "Anteprima PDF" : "PDF di cortesia"}</a>
+          {f.stato !== "BOZZA" && <form action={inviaFatturaEmail} className="flex gap-1"><input type="hidden" name="id" value={f.id} /><input name="a" defaultValue={f.email ?? ""} placeholder="email del cliente" className="border border-neutral-300 rounded px-2 py-1 text-xs w-44" /><button className="btn-3d btn-3d-green text-sm px-3 py-1.5">✉️ Invia al cliente</button></form>}
           {f.xml && <a href={`/api/fatturazione/fattura/${f.id}/xml`} className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⬇️ XML fattura elettronica</a>}
           {!bozza && <form action={duplicaFattura}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⧉ Duplica</button></form>}
           {(f.stato === "EMESSA" || f.stato === "PROVA") && tf.fiscale && !tf.notaCredito && <form action={creaNotaCredito}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-amber text-sm px-3 py-1.5">↩︎ Nota di credito</button></form>}
@@ -91,13 +97,14 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
               <label className="text-xs text-neutral-700">Provincia (sigla)<input name="provincia" defaultValue={f.provincia ?? ""} maxLength={2} className={inp} /></label>
               <label className="text-xs text-neutral-700">Nazione<input name="nazione" defaultValue={f.nazione} maxLength={2} className={inp} /></label>
               <label className="text-xs text-neutral-700">Codice destinatario SDI<input name="codiceDestinatario" defaultValue={f.codiceDestinatario ?? ""} maxLength={7} placeholder="0000000 per i privati" className={inp} /></label>
+              <label className="text-xs text-neutral-700">Email<input name="email" defaultValue={f.email ?? ""} className={inp} /></label>
+              <label className="text-xs text-neutral-700">Telefono<input name="telefono" defaultValue={f.telefono ?? ""} className={inp} /></label>
               <label className="text-xs text-neutral-700">PEC<input name="pec" defaultValue={f.pec ?? ""} className={inp} /></label>
             </div>
           </details>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <label className="text-xs text-neutral-700">Pagamento<select name="metodoPagamento" defaultValue={f.metodoPagamento ?? "BONIFICO_VISTA"} className={inp}>{METODI_PAGAMENTO_FATTURA.map((m) => <option key={m.codice} value={m.codice}>{m.nome}</option>)}</select></label>
-            <label className="text-xs text-neutral-700">Banca per l&apos;incasso<select name="banca" defaultValue={f.banca ?? ""} className={inp}><option value="">—</option>{BANCHE_AZIENDA.map((b) => <option key={b} value={b}>{b}</option>)}</select></label>
-            <label className="text-xs text-neutral-700 sm:col-span-2">IBAN (vuoto = quello del conto in Amministrazione › Banche)<input name="iban" defaultValue={f.iban ?? ""} className={inp} /></label>
+            <BancaIban banche={BANCHE_AZIENDA} ibanPerBanca={ibanPerBanca} banca={f.banca ?? ""} iban={f.iban ?? ""} inp={inp} />
           </div>
           <label className="block text-xs text-neutral-700">Causale (va nella fattura elettronica)<input name="causale" defaultValue={f.causale ?? ""} className={inp} /></label>
           <div className="flex flex-wrap gap-4 text-sm">

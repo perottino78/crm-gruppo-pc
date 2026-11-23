@@ -59,10 +59,10 @@ export async function datiCliente(clienteId: string) {
   if (!c) return null;
   const persona = c.tipoAnagrafica === "PERSONA_FISICA" || (!c.piva && !!c.codiceFiscale && c.codiceFiscale.length === 16);
   return {
-    clienteId: c.id, clienteNome: c.nome, persona, nomePersona: c.nomePersona, cognome: c.cognome,
+    clienteId: c.id, clienteNome: persona && c.cognome && c.nomePersona ? `${c.cognome} ${c.nomePersona}` : c.nome, persona, nomePersona: c.nomePersona, cognome: c.cognome,
     partitaIva: c.piva, codiceFiscale: c.codiceFiscale, indirizzo: c.indirizzo, cap: c.cap, comune: c.comune, provincia: c.provincia,
     nazione: (c.isoNazione || c.paese || "IT").slice(0, 2).toUpperCase(), codiceDestinatario: c.codiceDestinatario, pec: c.pec,
-    email: c.emailInvioFatture || c.email, brand: c.brand.nome, metodoPagamento: null as string | null,
+    email: c.emailInvioFatture || c.email, telefono: c.telefono ?? c.cellulare ?? null, brand: c.brand.nome, metodoPagamento: null as string | null,
   };
 }
 
