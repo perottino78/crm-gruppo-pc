@@ -97,6 +97,7 @@ import { TIPI_INTERVENTO, nomeIntervento, eAperto } from "@/lib/pratica/interven
 import { perInput } from "@/lib/calendario/tempo";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { mancaAllaSoglia } from "@/lib/pratica/soglia";
+import ScadenzarioPratica from "@/components/commesse/ScadenzarioPratica";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
@@ -576,6 +577,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </details>
         );
       })()}
+
+      {(mostra("INCASSO") || mostra("SALDO")) && <ScadenzarioPratica commessaId={c.id} ritorno={`/commesse/${c.id}#scadenzario`} puoRegistrare={puoFinanziamento} puoAggiungere={puoFinanziamento} />}
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (
