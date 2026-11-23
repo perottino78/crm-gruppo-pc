@@ -54,6 +54,9 @@ export async function contrattiDi(persone: Persona[]): Promise<Contratto[]> {
     prisma.provvigione.findMany({ where: { utenteId: { in: ids } }, include: { liquidazioni: { orderBy: { data: "asc" } } } }),
   ]);
   const idCommesse = commesse.map((c) => c.id);
+  const pose = idCommesse.length ? await prisma.posa.findMany({ where: { commessaId: { in: idCommesse }, stato: "COMPLETATA", completataIl: { not: null } }, select: { commessaId: true, completataIl: true } }) : [];
+  const posatoDi = new Map<string, Date>();
+  for (const x of pose) { const d = x.completataIl!; const v = posatoDi.get(x.commessaId); if (!v || d > v) posatoDi.set(x.commessaId, d); }
   const servizi = await serviziDelleOfferte(commesse.map((c) => c.preventivoId));
   const fattureCommesse = idCommesse.length
     ? await prisma.fatturaVendita.findMany({ where: { commessaId: { in: idCommesse } }, select: { id: true, numero: true, commessaId: true } })
@@ -116,6 +119,7 @@ export async function contrattiDi(persone: Persona[]): Promise<Contratto[]> {
       imponibile: c.totaleImponibile || c.totaleVendita, servizi: servizi.get(c.preventivoId) ?? 0, dovuto: c.totaleVendita,
       fatture: fattureCommesse.filter((f) => f.commessaId === c.id).map((f) => f.numero),
       href: `/commesse/${c.id}`, pagamenti, provvigione: conProvvigione(chiave, commercialeId),
+      posatoIl: c.stato === "LAVORI_ESEGUITI" || c.stato === "CHIUSA" ? posatoDi.get(c.id) ?? null : null,
     };
   });
   const daBC: Contratto[] = bc.map(({ idFatture: _f, venditore, ...c }) => {

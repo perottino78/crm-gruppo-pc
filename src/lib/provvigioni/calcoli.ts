@@ -40,6 +40,8 @@ export type Contratto = {
   href?: string | null;
   pagamenti: Pagamento[];
   provvigione: ProvvigioneR | null;
+  /** giorno in cui la posa è stata finita (solo contratti del CRM con lavori eseguiti) */
+  posatoIl?: Date | null;
 };
 
 // ---------- pagamenti ----------
@@ -203,4 +205,39 @@ export function provvigioneSulleRate(c: Pick<Contratto, "dovuto" | "pagamenti" |
     out.set(r.id, { quota: cent(p.importo * r.importo / dovuto), maturata: cent(p.importo * r.incassato / dovuto) });
   }
   return out;
+}
+
+
+// ---------- provvigioni da pagare ogni mese (Debora 23/11/2026) ----------
+// 80% a titolo di acconto: il cliente deve aver pagato almeno il 50% della commessa entro il mese precedente.
+// 20% a saldo: pratica posata e tutto pagato dal cliente (anche il saldo del materiale) entro il mese precedente.
+
+export const QUOTA_ACCONTO_PROVV = 0.8;
+export const SOGLIA_INCASSO_ACCONTO = 0.5;
+
+/** Ultimo istante del mese precedente a quello del report (mese 1-12). */
+export function fineMesePrecedente(anno: number, mese: number): Date {
+  return new Date(Date.UTC(anno, mese - 1, 1) - 1);
+}
+
+export type ProvvigioneDaPagare = { accontoMaturato: number; saldoMaturato: number; maturato: number; giaPagato: number; daPagare: number; incassatoEntro: number; note: string[] };
+
+export function provvigioneDaPagare(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione" | "posatoIl" | "origine">, fine: Date): ProvvigioneDaPagare | null {
+  const p = c.provvigione;
+  if (!p || p.importo <= 0 || c.dovuto <= 0) return null;
+  const note: string[] = [];
+  const incassatoEntro = cent(c.pagamenti
+    .filter((x) => x.stato !== "ANNULLATA" && x.stato !== "SOSTITUITA" && x.ultimoIncasso && x.ultimoIncasso.getTime() <= fine.getTime())
+    .reduce((t, x) => t + x.incassato, 0));
+  const accontoOk = incassatoEntro >= c.dovuto * SOGLIA_INCASSO_ACCONTO - 0.005;
+  const tuttoPagato = incassatoEntro >= c.dovuto - 0.5;
+  const posato = !!c.posatoIl && c.posatoIl.getTime() <= fine.getTime();
+  const accontoMaturato = accontoOk ? cent(p.importo * QUOTA_ACCONTO_PROVV) : 0;
+  const saldoMaturato = tuttoPagato && posato ? cent(p.importo - cent(p.importo * QUOTA_ACCONTO_PROVV)) : 0;
+  if (!accontoOk) note.push("il cliente non ha ancora pagato il 50%");
+  if (accontoOk && !posato) note.push(c.origine === "BCONSOLE" ? "posa non registrata in ONE: da verificare" : "saldo: pratica non ancora posata");
+  if (accontoOk && posato && !tuttoPagato) note.push("saldo: il cliente non ha ancora pagato tutto");
+  const giaPagato = cent(p.liquidazioni.reduce((t, l) => t + l.importo, 0));
+  const maturato = cent(accontoMaturato + saldoMaturato);
+  return { accontoMaturato, saldoMaturato, maturato, giaPagato, daPagare: cent(Math.max(0, maturato - giaPagato)), incassatoEntro, note };
 }
