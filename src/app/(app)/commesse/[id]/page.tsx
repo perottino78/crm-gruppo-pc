@@ -917,11 +917,14 @@ export default async function CommessaPage({ params, searchParams }: { params: P
             </div>
           </details>
         </details>
-        <OrdiniPerFornitore commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
-        <details className="mt-3 rounded border border-neutral-200 bg-neutral-50 p-2">
-          <summary className="cursor-pointer text-sm font-semibold text-neutral-800">📦 Magazzino, arrivi e avvio commessa <span className="text-xs font-normal text-neutral-500">(avanzato)</span></summary>
-          <div className="mt-2"><MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} /></div>
-        </details>
+        <OrdiniPerFornitore commessaId={c.id} puoGestire={puoGestireOrdini(utente)} conArrivi={!pp || apre("ARRIVO")} />
+        {/* controllo merce, prelievi dal magazzino e avvio commessa: servono quando la merce arriva, non mentre si ordina (Ugo 23/11/2026) */}
+        {(!pp || apre("ARRIVO")) && (
+          <div className="mt-3 rounded-xl border-2 border-blue-300 bg-blue-50/40 p-3">
+            <h3 className="text-base font-bold text-blue-950">📦 Arrivo materiale in magazzino e controllo merce</h3>
+            <MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
+          </div>
+        )}
         <details className="mt-3 rounded border border-amber-200 bg-amber-50 p-2">
           <summary className="cursor-pointer text-sm font-semibold text-amber-950">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""} <span className="text-xs font-normal text-neutral-500">(solo se non usi i totali per fornitore)</span></summary>
           <div className="mt-2">

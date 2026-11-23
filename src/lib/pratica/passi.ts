@@ -119,6 +119,8 @@ export function passoDaMostrare(passi: PassoPratica[], corrente: ChiavePasso | n
   if (r && (r.stato === "FATTO" || r.parallelo || r.chiave === corrente)) return r.chiave;
   // appuntamento e caricamento del rilievo stanno nella stessa sezione: «Carica il rilievo» dal task si apre anche se l'appuntamento non è ancora in ONE
   if (r && r.chiave === "RILIEVO" && corrente === "RILIEVO_APP") return r.chiave;
+  // la merce può arrivare mentre si sta ancora ordinando: «Arrivo in magazzino» si apre dal passo materiale
+  if (r && r.chiave === "ARRIVO" && corrente === "MATERIALE") return r.chiave;
   return corrente ?? passi[passi.length - 1]?.chiave ?? null;
 }
 

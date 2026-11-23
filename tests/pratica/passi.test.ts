@@ -115,3 +115,10 @@ test("pratica presa da BConsole: progetto, fattura e benvenuto sono già fatti e
   // dal task del rilievo si arriva al caricamento anche se l'appuntamento non è in ONE (rifissato su BConsole)
   assert.equal(passoDaMostrare(r.passi, r.corrente, "RILIEVO"), "RILIEVO");
 });
+
+test("«Arrivo in magazzino» si può aprire anche mentre il passo corrente è ancora materiale e ordini", () => {
+  const r = passiPratica({ ...base, fatturaAccontoIl: new Date(), progettoCreatoIl: new Date(), benvenutoIl: new Date(), viaLibera: true, rilievoFissato: true, rilievoCaricato: true });
+  assert.equal(r.corrente, "MATERIALE");
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "ARRIVO"), "ARRIVO");
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "POSA"), "MATERIALE");
+});
