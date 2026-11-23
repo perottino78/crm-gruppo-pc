@@ -13,6 +13,7 @@ import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 import { valoriAngolari } from "@/lib/ordini/angolari";
 import { labelBreveTipologia } from "@/lib/prodotti";
 import { notFound } from "next/navigation";
+import AvvisoMaterialeDaOrdinare from "@/components/commesse/AvvisoMaterialeDaOrdinare";
 import OrdiniPerFornitore from "@/components/commesse/OrdiniPerFornitore";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
@@ -63,6 +64,8 @@ import {
   duplicaComplementoRiga,
   modificaComplementoRiga,
   eliminaComplementoRiga,
+  rimandaRighe,
+  riprendiRighe,
   eliminaCostoManuale,
   programmaPosa,
   annullaPosa,
@@ -186,7 +189,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const materialeTutto = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
   // ordine già inviato (o riga segnata ordinata / dal magazzino): esce da «da ordinare» e non si modifica più
   const giaOrdinata = (r: (typeof materialeTutto)[number]) => r.daMagazzino || r.ordinato || (!!r.ordineFornitore && r.ordineFornitore.stato !== "BOZZA" && r.ordineFornitore.stato !== "ANNULLATO");
-  const materialePratica = materialeTutto.filter((r) => !giaOrdinata(r));
+  const nonOrdinate = materialeTutto.filter((r) => !giaOrdinata(r));
+  // «da ordinare più avanti»: righe messe da parte (es. aspetto le misure definitive di produzione)
+  const materialeRimandato = nonOrdinate.filter((r) => !!r.rimandataIl);
+  const materialePratica = nonOrdinate.filter((r) => !r.rimandataIl);
   const materialeOrdinato = materialeTutto.filter(giaOrdinata);
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
@@ -386,6 +392,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           d={{ commessaId: c.id, cliente: c.cliente.nome, telefono: c.cliente.cellulare ?? c.cliente.telefono ?? null, importoAcconto: c.accontoImporto, legacy: !!percorsoProg?.legacy, fatturaAccontoIl: c.fatturaAccontoIl, fatturaAccontoDaNome: c.fatturaAccontoDaNome, progettoCreatoIl: c.progettoCreatoIl, progettoCreatoDaNome: c.progettoCreatoDaNome, benvenutoIl: c.benvenutoIl, benvenutoDaNome: c.benvenutoDaNome, benvenutoNote: c.benvenutoNote }}
           registraFattura={registraFatturaAcconto} creaProgetto={creaProgetto} registraBenvenuto={registraBenvenuto} ok={pok} avviso={pav}
         />
+      )}
+      {puoGestireOrdini(utente) && !["CHIUSA", "ANNULLATA"].includes(c.stato) && (materialePratica.length + materialeRimandato.length > 0) && (materialeTutto.length - materialePratica.length - materialeRimandato.length > 0 || materialeRimandato.length > 0) && (
+        <AvvisoMaterialeDaOrdinare commessaId={c.id} ordinate={materialeTutto.length - materialePratica.length - materialeRimandato.length} adesso={materialePratica.length} rimandate={materialeRimandato.length} motivi={[...new Set(materialeRimandato.map((r) => r.rimandataMotivo).filter(Boolean) as string[])].slice(0, 3)} />
       )}
       {c.ordineBC && (offerteAgganciabili.length > 0 ? (
           <form id="offerta-one" action={agganciaOffertaONE} className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border-2 border-amber-400 bg-amber-50 px-4 py-3">
@@ -851,7 +860,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         )}
         {/* chiuso di partenza (Ugo 23/11/2026: «chiudila e la apro se mi serve»); si apre da solo dopo un messaggio o dal link #materiale-pratica */}
         <details id="materiale-pratica" open={!!(fattoMateriale || avviso)} className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
-          <summary className="cursor-pointer list-none text-base font-bold text-neutral-900">① Da ordinare <span className="text-sm font-normal text-neutral-600">— {materialePratica.length} {materialePratica.length === 1 ? "riga" : "righe"} (offerta + aggiunte al rilievo) · clicca per aprire</span></summary>
+          <summary className="cursor-pointer list-none text-base font-bold text-neutral-900">① Da ordinare <span className="text-sm font-normal text-neutral-600">— {materialePratica.length} {materialePratica.length === 1 ? "riga" : "righe"} da ordinare ora{materialeRimandato.length > 0 ? ` · ${materialeRimandato.length} più avanti` : ""} · clicca per aprire</span></summary>
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
           {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
@@ -893,8 +902,24 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                 </table>
               </div>
               <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
-                azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
+                azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale, rimanda: rimandaRighe }} />
             </form>
+          )}
+          {materialeRimandato.length > 0 && (
+            <div className="mt-3 rounded-lg border-2 border-orange-300 bg-orange-50 p-3">
+              <p className="text-sm font-bold text-orange-950">⏳ Da ordinare più avanti ({materialeRimandato.length})</p>
+              <p className="text-xs text-neutral-700 mb-2">Messe da parte: non ti bloccano e il task dell&apos;ufficio ordini resta aperto finché non le ordini.</p>
+              <ul className="text-sm divide-y divide-orange-100">
+                {materialeRimandato.map((r) => (
+                  <li key={r.id} className="py-1.5 flex flex-wrap items-center gap-2">
+                    <span className="flex-1 min-w-[14rem]">{r.descrizione}{r.quantita > 1 ? ` × ${r.quantita}` : ""}<span className="block text-xs text-orange-900">⏳ {r.rimandataMotivo ?? "più avanti"}{r.rimandataDaNome ? ` · ${r.rimandataDaNome}` : ""}</span></span>
+                    <form action={riprendiRighe}><input type="hidden" name="commessaId" value={c.id} /><input type="hidden" name="riga" value={r.id} /><button className="text-xs text-blue-800 underline">▶ ordina ora</button></form>
+                  </li>
+                ))}
+              </ul>
+              <form action={riprendiRighe} className="mt-2"><input type="hidden" name="commessaId" value={c.id} /><input type="hidden" name="tutte" value="1" />
+                <button className="btn-3d btn-3d-orange text-sm px-4 py-2">✅ Misure definitive arrivate: ordina tutto ora</button></form>
+            </div>
           )}
           {correlatiSuggeriti.length > 0 && (
             <div className="mt-2 rounded border border-indigo-200 bg-indigo-50/50 p-2">
