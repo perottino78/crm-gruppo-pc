@@ -89,7 +89,9 @@ export function passiPratica(d: DatiPassi): { passi: PassoPratica[]; corrente: C
   const passi = DEF.map((x): PassoPratica => {
     const f = fatto(x.chiave);
     // incasso e saldo si possono fare in ogni momento (il saldo anche prima che arrivi il materiale, per portarsi avanti con i pagamenti)
-    const stato: StatoPasso = f ? "FATTO" : x.chiave === corrente || x.parallelo ? "ORA" : "IN_ATTESA";
+    // 4 e 9 si evidenziano solo quando è il loro turno (Debora 23/11/2026): l'incasso dopo la fattura di acconto, il saldo con il materiale arrivato
+    const suoTurno = x.chiave === "INCASSO" ? fatto("FATTURA") : x.chiave === "SALDO" ? fatto("ARRIVO") : x.parallelo;
+    const stato: StatoPasso = f ? "FATTO" : x.chiave === corrente || (x.parallelo && suoTurno) ? "ORA" : "IN_ATTESA";
     return { chiave: x.chiave, titolo: x.titolo, chi: x.chi, parallelo: x.parallelo, stato, nota: notaPasso(x.chiave, f, d) };
   });
   return { passi, corrente };

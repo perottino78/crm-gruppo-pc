@@ -2189,6 +2189,7 @@ model FatturaEmessa {
   nazione            String              @default("IT")
   codiceDestinatario String?
   pec                String?
+  telefono            String?
   email              String?
   commessaId         String?
   brand              String?

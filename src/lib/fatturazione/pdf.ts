@@ -172,5 +172,5 @@ export function pdfDdt(d: DatiPdfDdt): Uint8Array {
 }
 
 /** Righe dell'indirizzo del cliente per il riquadro. */
-export const righeCliente = (c: { indirizzo?: string | null; cap?: string | null; comune?: string | null; provincia?: string | null; partitaIva?: string | null; codiceFiscale?: string | null }) =>
-  [c.indirizzo, [c.cap, c.comune, c.provincia ? `(${c.provincia})` : null].filter(Boolean).join(" "), c.partitaIva ? `P.IVA ${c.partitaIva}` : null, c.codiceFiscale ? `C.F. ${c.codiceFiscale}` : null].filter(Boolean) as string[];
+export const righeCliente = (c: { indirizzo?: string | null; cap?: string | null; comune?: string | null; provincia?: string | null; partitaIva?: string | null; codiceFiscale?: string | null; telefono?: string | null; email?: string | null }) =>
+  [c.indirizzo, [c.cap, c.comune, c.provincia ? `(${c.provincia})` : null].filter(Boolean).join(" "), c.partitaIva ? `P.IVA ${c.partitaIva}` : null, c.codiceFiscale ? `C.F. ${c.codiceFiscale}` : null, [c.telefono ? `Tel. ${c.telefono}` : null, c.email ? `Email ${c.email}` : null].filter(Boolean).join(" · ") || null].filter(Boolean) as string[];
