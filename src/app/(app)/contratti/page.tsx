@@ -73,6 +73,7 @@ export default async function ContrattiPage({ searchParams }: { searchParams: Pr
       </div>
       <div className="flex flex-wrap gap-2">
         <Link href={qs({ n: undefined }).replace("/contratti?", "/contratti/stampa?")} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">🖨️ Stampa</Link>
+        {gestore && <Link href="/contratti/da-pagare" className="btn-3d btn-3d-green px-3 py-1.5 text-sm">💶 Provvigioni da pagare</Link>}
         {gestore && <Link href="/contratti/obiettivi" className="btn-3d btn-3d-amber px-3 py-1.5 text-sm">🎯 Obiettivi e premi</Link>}
       </div>
       </div>

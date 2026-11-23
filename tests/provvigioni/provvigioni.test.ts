@@ -104,3 +104,16 @@ test("filtri e totali", () => {
   const t = totali(lista);
   assert.deepEqual([t.contratti, t.venduto, t.incassato, t.daIncassare, t.provvigioni, t.daLiquidare, t.daControllare], [2, 12000, 12200, 2440, 500, 500, 1]);
 });
+
+import { provvigioneDaPagare, fineMesePrecedente } from "../../src/lib/provvigioni/calcoli";
+test("provvigione da pagare: 80% con il 50% pagato entro il mese prima, 20% a posa e saldo", () => {
+  const prov = { id: "p", base: 10000, percentuale: 10, importo: 1000, controllataIl: new Date(), liquidazioni: [] };
+  const pag = (importo: number, data: string) => ({ id: data, descrizione: "x", importo, incassato: importo, residuo: 0, scadenza: null, ultimoIncasso: new Date(data), stato: "PAGATA" });
+  const c = { origine: "CRM" as const, dovuto: 12200, provvigione: prov, pagamenti: [pag(6100, "2026-10-20")], posatoIl: null };
+  const fine = fineMesePrecedente(2026, 11);
+  assert.equal(provvigioneDaPagare(c, fine)!.daPagare, 800);
+  assert.equal(provvigioneDaPagare({ ...c, pagamenti: [pag(6100, "2026-11-03")] }, fine)!.daPagare, 0);
+  const chiuso = { ...c, pagamenti: [pag(6100, "2026-10-20"), pag(6100, "2026-10-28")], posatoIl: new Date("2026-10-30") };
+  assert.equal(provvigioneDaPagare(chiuso, fine)!.daPagare, 1000);
+  assert.equal(provvigioneDaPagare({ ...chiuso, provvigione: { ...prov, liquidazioni: [{ id: "l", importo: 800, data: new Date() }] } }, fine)!.daPagare, 200);
+});

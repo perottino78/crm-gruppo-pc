@@ -130,6 +130,7 @@ export default async function ProdottiPage({
           <a href="/prodotti/articoli" className="text-blue-800 underline font-medium">📦 Anagrafica articoli (catalogo, costi, ricarichi, import Excel)</a>
           <a href="/prodotti/fornitori" className="text-blue-800 underline">🚚 Fornitori dei prodotti (a chi si ordina ogni modello)</a>
           <a href="/prodotti/aumenti" className="text-blue-800 underline font-medium">📈 Aumenti listini (applica la percentuale del fornitore)</a>
+          <a href="/prodotti/correzioni" className="text-blue-800 underline font-medium">✏️ Correggi un refuso nei listini</a>
         </div>
         <BrandSwitcher active={brand ?? "Tutti"} />
       </div>
