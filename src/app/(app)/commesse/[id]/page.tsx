@@ -849,8 +849,9 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         {c.riordinoIl && (
           <p className="mb-3 rounded border-2 border-red-300 bg-red-50 px-3 py-2 text-sm text-red-900">🔁 <b>Posa parziale: serve materiale</b> (dal {c.riordinoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}){c.riordinoNote ? <> — {c.riordinoNote}</> : null}. Aggiungi qui sotto il materiale mancante, rotto o in garanzia e invia gli ordini: quando arriva in magazzino il centralino fissa la data per finire la posa.</p>
         )}
-        <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
-          <p className="text-base font-bold text-neutral-900">① Da ordinare <span className="text-sm font-normal text-neutral-600">— {materialePratica.length} {materialePratica.length === 1 ? "riga" : "righe"} (offerta + aggiunte al rilievo)</span></p>
+        {/* chiuso di partenza (Ugo 23/11/2026: «chiudila e la apro se mi serve»); si apre da solo dopo un messaggio o dal link #materiale-pratica */}
+        <details id="materiale-pratica" open={!!(fattoMateriale || avviso)} className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
+          <summary className="cursor-pointer list-none text-base font-bold text-neutral-900">① Da ordinare <span className="text-sm font-normal text-neutral-600">— {materialePratica.length} {materialePratica.length === 1 ? "riga" : "righe"} (offerta + aggiunte al rilievo) · clicca per aprire</span></summary>
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
           {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
@@ -915,7 +916,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <SelettoreProdotto preventivoId={c.id} brandId={c.brandId} brandColor="#1d4ed8" tassonomia={tassonomia} azionePerMisura={complementoDaListinoPerMisura} azionePerProdotto={complementoDaListino} />
             </div>
           </details>
-        </div>
+        </details>
         <OrdiniPerFornitore commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
         <details className="mt-3 rounded border border-neutral-200 bg-neutral-50 p-2">
           <summary className="cursor-pointer text-sm font-semibold text-neutral-800">📦 Magazzino, arrivi e avvio commessa <span className="text-xs font-normal text-neutral-500">(avanzato)</span></summary>
