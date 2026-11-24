@@ -2,6 +2,7 @@
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/rilievo-foto.collaudo.ts
 import { prisma } from "../../src/lib/prisma";
 import { POST } from "../../src/app/api/rilievo/[id]/foto/route";
+import { POST as POST_DOC } from "../../src/app/api/documenti/carica/route";
 import { NextRequest } from "next/server";
 import sharp from "sharp";
 
@@ -41,6 +42,20 @@ async function main() {
   verifica(exe.status === 415 && /non ammesso/.test(exe.j.errore ?? ""), "tipo non ammesso: messaggio chiaro", exe);
   const enorme = await invia(ril.id, "enorme.pdf", "application/pdf", Buffer.concat([Buffer.from("%PDF"), Buffer.alloc(4_100_000)]));
   verifica(enorme.status === 413, "oltre 4 MB: messaggio chiaro", enorme.status);
+  console.log("Documenti di una scheda, un file alla volta");
+  const invDoc = async (nome: string, tipo: string, dati: Buffer, cartella = "Rilievi misura") => {
+    const fd = new FormData(); fd.append("entita", "COMMESSA"); fd.append("entitaId", c.id); fd.append("cartella", cartella); fd.append("file", new File([new Uint8Array(dati)], nome, { type: tipo }));
+    const res = await POST_DOC(new NextRequest("http://localhost/api/documenti/carica", { method: "POST", body: fd }));
+    return { status: res.status, j: await res.json() as { ok: boolean; errore?: string } };
+  };
+  const d1 = await invDoc("telefono.jpg", "image/jpeg", grande);
+  const doc = await prisma.documento.findFirst({ where: { entita: "COMMESSA", entitaId: c.id, cartella: "Rilievi misura", nome: { startsWith: "telefono" } } });
+  verifica(d1.j.ok && doc?.mime === "image/webp" && doc.dimensione < 400_000, "foto grande nei Documenti: ridotta a WebP leggero", d1);
+  verifica((await invDoc("x.exe", "application/x-msdownload", Buffer.from("MZ"))).status === 415, "Documenti: tipo non ammesso rifiutato");
+  verifica((await invDoc("enorme.pdf", "application/pdf", Buffer.concat([Buffer.from("%PDF"), Buffer.alloc(4_300_000)]))).status === 413, "Documenti: oltre 4 MB rifiutato con messaggio");
+  g.__utente = null;
+  verifica((await invDoc("a.jpg", "image/jpeg", grande)).status === 401, "Documenti senza sessione: rifiutato");
+  g.__utente = ugo;
   g.__utente = null;
   verifica((await invia(ril.id, "x.jpg", "image/jpeg", grande)).status === 401, "senza sessione: rifiutato");
 
