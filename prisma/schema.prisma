@@ -949,6 +949,10 @@ model RigaOrdine {
   kitDiId           String?
   // Prodotto di listino della riga (offerta o materiale aggiunto dal listino): serve per la distinta base
   prodottoId        String?
+  // Misure definitive di produzione (dal modulo del fornitore o scritte a mano): vanno nell'ordine, nella conferma e in fattura al posto di quelle di preventivo
+  misureDefinitive  String?
+  misureDefinitiveDa String?
+  misureDefinitiveIl DateTime?
   righeBolla        RigaBolla[]
 
   @@index([ordineFornitoreId])
@@ -1498,6 +1502,7 @@ model OrdineFornitore {
   ricevutoDaNome          String?
   creatoDaNome            String?
   righe                   RigaOrdine[]
+  emailInviate            EmailOrdine[]
   createdAt               DateTime     @default(now())
   updatedAt               DateTime     @updatedAt
 
@@ -1519,6 +1524,8 @@ model Documento {
   dimensione     Int
   contenuto      Bytes
   caricatoDaNome String?
+  // Valori scritti nel modulo (solo per le schede di produzione compilate): servono a riprendere le misure definitive
+  dati           Json?
   createdAt      DateTime @default(now())
 
   @@index([entita, entitaId])
@@ -1796,6 +1803,27 @@ model FatturaAcquisto {
   @@index([fornitoreId])
   @@index([stato])
   @@index([data])
+}
+
+// Storico delle email mandate al fornitore con l'ordine: a chi, cosa e quali file (copie nei Documenti dell'ordine)
+model EmailOrdine {
+  id                String          @id @default(cuid())
+  ordine            OrdineFornitore @relation(fields: [ordineFornitoreId], references: [id], onDelete: Cascade)
+  ordineFornitoreId String
+  a                 String
+  cc                String?
+  oggetto           String
+  testo             String
+  allegati          String[]        @default([])
+  allegatiDocIds    String[]        @default([])
+  // INVIATA | NON_INVIATA
+  stato             String
+  motivo            String?
+  da                String?
+  inviataDa         String?
+  createdAt         DateTime        @default(now())
+
+  @@index([ordineFornitoreId])
 }
 
 // «Correla documento» come in BConsole: la fattura d'acquisto collegata a un ordine fornitore o a un progetto (pratica) del cliente

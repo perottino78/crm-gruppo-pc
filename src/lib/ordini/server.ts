@@ -1,3 +1,4 @@
+import { conMisureDefinitive } from "./misure";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 // Acquisti: funzioni lato server condivise (fornitore predefinito, costo previsto, permessi, numerazione).
 import { prisma } from "@/lib/prisma";
@@ -82,7 +83,7 @@ export async function datiPdfOrdine(id: string) {
         ["Cliente", nominativoCliente(o.clienteFinale)], ["Riferimento", riferimentoPerFornitore(o.riferimento, o.commessa)],
         ["Indirizzo di consegna", o.indirizzoSpedizione ?? ""], ["Trasporto", o.trasporto ?? ""],
       ] as [string, string][],
-      righe: o.righe.map((r) => ({ codice: r.codice, codiceFornitore: r.codiceFornitore, descrizione: r.descrizione + (r.note ? ` (${r.note})` : ""), quantita: r.quantita, um: r.um, prezzoAcquisto: r.prezzoAcquisto, scontoAcquisto: r.scontoAcquisto })),
+      righe: o.righe.map((r) => ({ codice: r.codice, codiceFornitore: r.codiceFornitore, descrizione: conMisureDefinitive(r.descrizione, r.misureDefinitive) + (r.note ? ` (${r.note})` : ""), quantita: r.quantita, um: r.um, prezzoAcquisto: r.prezzoAcquisto, scontoAcquisto: r.scontoAcquisto })),
       note: o.note, firma: o.creatoDaNome ? `${o.creatoDaNome} - Ufficio ordini` : "Ufficio ordini",
     },
   };

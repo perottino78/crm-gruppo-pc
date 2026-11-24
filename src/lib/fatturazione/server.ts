@@ -172,10 +172,12 @@ export async function righeDaOfferta(preventivoId: string) {
   // sconto dell'offerta spalmato sulle righe (totaleNetto = imponibile già scontato)
   const lordo = p.righe.reduce((t, r) => t + r.quantita * r.prezzoUnitario + r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0), 0);
   const fattore = lordo > 0 && p.totaleNetto > 0 ? p.totaleNetto / lordo : 1;
+  // misure definitive di produzione (ordine al fornitore): in fattura devono coincidere con quelle delle certificazioni del fornitore
+  const definitive = new Map((await prisma.rigaOrdine.findMany({ where: { rigaPreventivoId: { in: p.righe.map((r) => r.id) }, misureDefinitive: { not: null } }, select: { rigaPreventivoId: true, misureDefinitive: true } })).map((x) => [x.rigaPreventivoId!, x.misureDefinitive!]));
   return p.righe.map((r) => {
     const opt = r.optionali.map((o) => o.optional.nome).join(", ");
     const nomeProd = r.testoLibero ?? (r.prodotto ? `${r.prodotto.tipologia.replace(/_/g, " ")} ${r.prodotto.colore}`.trim() : "Voce");
-    const misura = r.misuraLarghezza ? ` ${r.misuraLarghezza}${r.misuraAltezza ? `×${r.misuraAltezza}` : ""}` : "";
+    const misura = definitive.has(r.id) ? ` ${definitive.get(r.id)}` : r.misuraLarghezza ? ` ${r.misuraLarghezza}${r.misuraAltezza ? `×${r.misuraAltezza}` : ""}` : "";
     const unit = r.quantita ? (r.prezzoUnitario + (r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0)) / r.quantita) * fattore : 0;
     return {
       descrizione: `${r.descrizionePersonalizzata && !r.testoLibero ? r.descrizionePersonalizzata.split("\n")[0].slice(0, 200) : nomeProd}${misura}${opt ? ` — con ${opt}` : ""}`.slice(0, 900),
