@@ -82,6 +82,12 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
         </Link>
       )}
 
+      {puo(utenteCorrente, "backup") && (
+        <Link href="/impostazioni/backup" className="block bg-white rounded-lg border border-teal-300 px-4 py-3 mb-4 hover:border-teal-500">
+          <span className="text-base font-bold text-neutral-900">💾 Backup sul NAS dell&apos;ufficio →</span>
+          <span className="block text-xs text-neutral-600">Ogni notte il NAS scarica una copia di tutti i dati di P&amp;C ONE. Qui la chiave, le istruzioni e l&apos;esito degli ultimi backup.</span>
+        </Link>
+      )}
       {puo(utenteCorrente, "database") && (
         <Link href="/impostazioni/database" className="block bg-white rounded-lg border border-teal-300 px-4 py-3 mb-4 hover:border-teal-500">
           <span className="text-base font-bold text-neutral-900">📊 Consumo del database →</span>
