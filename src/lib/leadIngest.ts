@@ -57,6 +57,8 @@ export type DatiLead = {
   externalId?: string | null;
   metaFormId?: string | null;
   metaAdId?: string | null;
+  // Consenso alle comunicazioni commerciali dato nel modulo (casella separata e facoltativa): se c'è, ne resta la prova
+  consensoMarketing?: { fonte: string; testo?: string; ip?: string | null } | null;
 };
 
 // Trova la telefonista di default per un brand (configurabile via DB, fallback alla prima TELEFONISTA).
@@ -129,6 +131,11 @@ export async function registraLead(d: DatiLead): Promise<{ id: string; duplicato
       if (gia) return { id: gia.id, duplicato: true };
     }
     throw e;
+  }
+  if (d.consensoMarketing) {
+    const { registraConsenso } = await import("@/lib/privacy/consensi");
+    const { leggiInformativa } = await import("@/lib/privacy/informativa");
+    await registraConsenso({ leadId: l.id, email, stato: "CONCESSO", fonte: d.consensoMarketing.fonte, testo: d.consensoMarketing.testo, ip: d.consensoMarketing.ip, versioneInformativa: (await leggiInformativa()).versione });
   }
   // percorso automatico: da classificare entro le 18:30 + avviso al centralino (Keap → CRM)
   await avviaNuovoLead(l.id);

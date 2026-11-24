@@ -191,6 +191,7 @@ export async function sincronizzaCalendario(leadId: string, utenteNome?: string 
         nome: lead.nome, telefono: lead.telefono, email: lead.email, brandId: lead.brandId, leadOrigineId: lead.id,
         origine: provenienzaDaFonte(lead.fonte), categoria: "Lead", responsabileId: lead.venditoreId,
         comune: lead.comune, cap: lead.cap, indirizzo: casa ? lead.indirizzoAppuntamento : null,
+        consensoMarketingIl: lead.consensoMarketingIl, disiscritto: lead.disiscritto,
       },
     })).id;
     const dati = {
@@ -287,8 +288,8 @@ export async function eseguiInviiScaduti(opz: { adesso?: () => Date; max?: numbe
         r.soppresse++;
         return "FATTO";
       }
-      // aperture e clic: solo le email al cliente (quelle interne non serve contarle)
-      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined, intestazioni: { "X-CRM-Invio": `l-${reg.id}` }, servizio: reg.categoria === "CLIENTE" });
+      // aperture e clic: solo le email al cliente che ha dato il consenso al marketing
+      const esito = await inviaMail({ a: [a!], oggetto: reg.oggetto, testo: reg.testo, html: reg.categoria === "CLIENTE" && lead.consensoMarketingIl ? conTracciamento(reg.html, APP_URL, `l-${reg.id}`) : reg.html, da: reg.da ?? undefined, intestazioni: { "X-CRM-Invio": `l-${reg.id}` }, servizio: reg.categoria === "CLIENTE" });
       if (esito.inviata) {
         await prisma.emailLead.update({ where: { id: reg.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });
         await evento(prisma, lead.id, "email.inviata", `${e.oggetto} → ${a}`);

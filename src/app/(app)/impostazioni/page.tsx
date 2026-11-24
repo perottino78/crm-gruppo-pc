@@ -112,6 +112,13 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
       )}
 
       {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
+        <Link href="/impostazioni/privacy" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-3 hover:border-neutral-400">
+          <span className="text-base font-bold text-neutral-900">🔒 Informativa privacy →</span>
+          <span className="block text-xs text-neutral-600">Il testo che i clienti leggono nel link «informativa privacy» di moduli, offerte ed email (da far rivedere al consulente).</span>
+        </Link>
+      )}
+
+      {(admin || puo(utenteCorrente, "firme") || puo(utenteCorrente, "marketing")) && (
         <Link href="/impostazioni/firme" className="block bg-white rounded-lg border border-neutral-200 px-4 py-3 mb-8 hover:border-neutral-400">
           <span className="text-base font-bold text-neutral-900">✍️ Firme email del team →</span>
           <span className="block text-xs text-neutral-600">La firma di ognuno (nome, ruolo, telefono, sito) in fondo alle email del CRM, come «Invia offerta».</span>

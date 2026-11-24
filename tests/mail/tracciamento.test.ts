@@ -34,7 +34,7 @@ test("template HTML: disiscrizione sempre presente e versione di solo testo", ()
   const conSegnaposto = htmlCampagna('<body><a href="{disiscrizione}">via</a></body>', "https://crm/api/disiscrizione?c=1");
   assert.ok(conSegnaposto.includes('href="https://crm/api/disiscrizione?c=1"') && !conSegnaposto.includes("Disiscriviti"));
   const senza = htmlCampagna("<html><body><h1>Promo</h1></body></html>", "https://crm/esci");
-  assert.match(senza, /Disiscriviti<\/a>\.<\/p><\/body>/);
+  assert.match(senza, /Disiscriviti<\/a> · .*Informativa privacy<\/a>\.<\/p><\/body>/);
   const t = testoDaHtml('<html><head><style>p{}</style></head><body><h1>Ciao Mario</h1><p>Prezzi &amp; sconti</p><ul><li>uno</li></ul><a href="https://x.it/p">Scopri</a></body></html>');
   assert.equal(t, "Ciao Mario\nPrezzi & sconti\n• uno\nScopri (https://x.it/p)");
 });

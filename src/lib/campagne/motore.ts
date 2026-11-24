@@ -7,6 +7,7 @@ import { servizioInvio } from "@/lib/mail/servizio";
 import { CONTATTI, htmlEmail, testoEmail, type EmailPronta } from "@/lib/automazioni/email";
 import { whereCampagna, whereRaggiungibile, emailValida, personalizza, promemoriaDiOggi, leggiGiorniPromemoria, testoGiorni, conEsclusi, STATI_RICEVUTA, type FiltriCampagna } from "./regole";
 import { daOraRoma } from "@/lib/calendario/tempo";
+import { linkConsensoCliente, linkInformativa } from "@/lib/privacy/consensi";
 import { conPreheader, conTracciamento, htmlCampagna, testoDaHtml } from "@/lib/mail/tracciamento";
 import { controllaRimbalzi } from "@/lib/mail/rimbalzi-server";
 import { filtriSituazione } from "./situazione";
@@ -96,8 +97,11 @@ type ContenutoCampagna = { oggetto: string; testo: string; preheader?: string | 
  * L'email della campagna per un cliente: oggetto e testo con {nome}, preheader, grafica P&C (o il template HTML
  * del marketing) e link per disiscriversi. Con `codiceTraccia` conta aperture e clic.
  */
-export function emailCampagna(c: ContenutoCampagna, cliente: { id: string; nome: string; nomePersona?: string | null }, codiceTraccia?: string) {
-  const pers = (t: string) => personalizza(t, cliente.nome, cliente.nomePersona);
+export function emailCampagna(c: ContenutoCampagna, cliente: { id: string; nome: string; nomePersona?: string | null }, codiceTraccia?: string, campagnaId?: string) {
+  // {informativa} = pagina pubblica dell'informativa privacy; {consenso} = link personale per dare il consenso al marketing
+  const pers = (t: string) => personalizza(t, cliente.nome, cliente.nomePersona)
+    .replace(/\{\s*informativa\s*\}/gi, linkInformativa())
+    .replace(/\{\s*consenso\s*\}/gi, linkConsensoCliente(cliente.id, campagnaId));
   const link = { lead: "", disiscrizione: linkDisiscrizioneCliente(cliente.id) };
   const oggetto = pers(c.oggetto);
   let html: string, testo: string;
@@ -202,13 +206,14 @@ export async function eseguiCampagne(opz: { adesso?: () => Date; max?: number; e
     if (!inv) break;
     const preso = await prisma.campagnaInvio.updateMany({ where: { id: inv.id, stato: "IN_ATTESA" }, data: { stato: "IN_CORSO", presoIl: ora(), tentativi: { increment: 1 } } });
     if (!preso.count) continue;
-    const cliente = await prisma.cliente.findUnique({ where: { id: inv.clienteId }, select: { id: true, nome: true, nomePersona: true, email: true, emailRimbalzata: true, disiscritto: true, leadOrigine: { select: { disiscritto: true } } } });
+    const cliente = await prisma.cliente.findUnique({ where: { id: inv.clienteId }, select: { id: true, nome: true, nomePersona: true, email: true, emailRimbalzata: true, disiscritto: true, consensoMarketingIl: true, leadOrigine: { select: { disiscritto: true } } } });
     if (!cliente || cliente.disiscritto || cliente.leadOrigine?.disiscritto || (rimbalzato(cliente) && uguali(cliente.email, inv.email))) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "SOPPRESSA", motivo: !cliente ? "cliente non più presente" : cliente.disiscritto || cliente.leadOrigine?.disiscritto ? "si è disiscritto" : "email rimbalzata in precedenza" } });
       r.saltate++;
       continue;
     }
-    const m = emailCampagna(contenutoDi(inv.campagna, inv.variante), cliente, `c-${inv.id}`);
+    // aperture e clic si contano solo per chi ha dato il consenso al marketing (Garante privacy)
+    const m = emailCampagna(contenutoDi(inv.campagna, inv.variante), cliente, cliente.consensoMarketingIl ? `c-${inv.id}` : undefined, inv.campagnaId);
     const esito = await inviaMail({ a: [inv.email], oggetto: m.oggetto, testo: m.testo, html: m.html, da: mittenteCampagna(inv.campagna.marchi), intestazioni: { [INTESTAZIONE]: `c-${inv.id}` }, servizio: true });
     if (esito.inviata) {
       await prisma.campagnaInvio.update({ where: { id: inv.id }, data: { stato: "INVIATA", inviataIl: ora(), motivo: null } });

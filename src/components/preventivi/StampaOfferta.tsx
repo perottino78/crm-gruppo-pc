@@ -711,7 +711,8 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
             <h2 className="text-sm font-bold mb-2 pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>
               Informativa privacy (art. 13 e ss. Regolamento UE 2016/679 — GDPR)
             </h2>
-            <p className="text-neutral-700 whitespace-pre-line mb-4">{condizioniBrand.gdprInformativa}</p>
+            <p className="text-neutral-700 whitespace-pre-line mb-2">{condizioniBrand.gdprInformativa}</p>
+            <p className="text-neutral-600 mb-4 text-xs">L'informativa completa e aggiornata è sempre consultabile su {(process.env.APP_URL || "https://crm-gruppo-pc.vercel.app")}/privacy</p>
 
             <p className="font-medium mb-1">Dichiarazione di consenso</p>
             <p className="text-neutral-700 mb-4">{condizioniBrand.gdprConsenso}</p>

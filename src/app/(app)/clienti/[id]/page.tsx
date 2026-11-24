@@ -30,6 +30,8 @@ import { eliminaCliente, bloccaEliminazioneCliente } from "@/app/elimina-contatt
 import ScegliPersone from "@/components/task/ScegliPersone";
 import AllegatiTask from "@/components/task/AllegatiTask";
 import { creaTaskCliente, completaTaskCliente } from "@/app/task-clienti-actions";
+import { registraConsensoCliente } from "@/app/privacy-actions";
+import { FONTI_CONSENSO } from "@/lib/privacy/consensi";
 
 const TIPI = [
   { v: "NOTA", label: "Nota", icon: "📝" },
@@ -680,6 +682,41 @@ export default async function SchedaClientePage({
             })}
           />
         )}
+        {sez === "anagrafica" && puo(utenteCorrente, "clienti") && (async () => {
+          const consensi = await prisma.consensoMarketing.findMany({ where: { clienteId: cliente.id }, orderBy: { createdAt: "desc" }, take: 20 });
+          const attivo = !!cliente.consensoMarketingIl && !cliente.disiscritto;
+          const quando = (d: Date) => d.toLocaleString("it-IT", { timeZone: "Europe/Rome", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+          return (
+            <div id="consenso" className="card-fase p-4 mt-4 space-y-3">
+              <h2 className="text-lg font-black">🔒 Consenso al marketing</h2>
+              <p className="text-sm">
+                {attivo ? <span className="font-bold text-emerald-700">✓ Consenso dato il {quando(cliente.consensoMarketingIl!)}</span>
+                  : cliente.disiscritto ? <span className="font-bold text-red-700">✕ Si è disiscritto: niente email promozionali</span>
+                  : <span className="font-bold text-amber-700">Nessun consenso registrato: niente aperture/clic tracciati</span>}
+              </p>
+              {consensi.length > 0 && (
+                <ul className="text-xs text-neutral-600 space-y-1">
+                  {consensi.map((c) => (
+                    <li key={c.id}>{quando(c.createdAt)} — <b>{c.stato === "CONCESSO" ? "Consenso" : "Revoca"}</b> ({FONTI_CONSENSO[c.fonte] ?? c.fonte}){c.utenteNome ? ` · ${c.utenteNome}` : ""}{c.versioneInformativa ? ` · informativa ${c.versioneInformativa}` : ""}</li>
+                  ))}
+                </ul>
+              )}
+              <form action={registraConsensoCliente} className="flex flex-wrap items-end gap-2 text-sm">
+                <input type="hidden" name="clienteId" value={cliente.id} />
+                <label className="flex flex-col text-xs font-bold">Cosa registro
+                  <select name="stato" className="border rounded px-2 py-1 font-normal"><option value="CONCESSO">Ha dato il consenso</option><option value="REVOCATO">Ha revocato il consenso</option></select>
+                </label>
+                <label className="flex flex-col text-xs font-bold">Come
+                  <select name="fonte" className="border rounded px-2 py-1 font-normal">
+                    <option value="CONTRATTO">Firmato nel contratto</option><option value="MODULO_CARTACEO">Modulo cartaceo</option><option value="A_VOCE">A voce (annotato)</option><option value="MANUALE">Altro</option>
+                  </select>
+                </label>
+                <button className="btn-3d btn-3d-green px-4 py-2">Registra</button>
+              </form>
+              <p className="text-xs text-neutral-500">Informativa pubblica: <Link href="/privacy" className="underline" target="_blank">/privacy</Link></p>
+            </div>
+          );
+        })()}
         {sez === "anagrafica" && puo(utenteCorrente, "clienti.elimina") && (async () => {
           const blocchi = await bloccaEliminazioneCliente(cliente.id);
           return (

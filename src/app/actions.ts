@@ -102,6 +102,8 @@ export async function convertiLeadInCliente(formData: FormData) {
       origine: provenienzaDaFonte(lead.fonte),
       categoria: "Lead",
       responsabileId: utente?.id ?? lead.telefonistaId,
+      consensoMarketingIl: lead.consensoMarketingIl,
+      disiscritto: lead.disiscritto,
     },
   });
   await prisma.lead.update({ where: { id }, data: { fase: "APPUNTAMENTO_FISSATO" } });
