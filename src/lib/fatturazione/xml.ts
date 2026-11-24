@@ -1,6 +1,6 @@
 // File XML FatturaPA (formato FPR12, privati) della fattura emessa dal CRM, da caricare a mano sul portale/intermediario
 // finché lo SDI non è collegato. Modulo puro, testato rileggendo l'XML con leggiFatturaPA.
-import { CEDENTE, metodoPagamento, tipoFattura } from "./tabelle";
+import { CEDENTE, SEZIONALI, metodoPagamento, tipoFattura } from "./tabelle";
 import { cent, importoRiga, totali, type RigaCalcolo } from "./calcoli";
 
 export type DatiXml = {
@@ -130,5 +130,13 @@ function datiTrasporto(tr: NonNullable<DatiXml["trasporto"]>): string {
     `</DatiTrasporto>`;
 }
 
-/** Nome del file come vuole lo SDI: IT + partita IVA + _ + progressivo (5 caratteri). */
-export const nomeFileXml = (progressivo: string) => `IT${CEDENTE.partitaIva}_${progressivo.replace(/[^A-Za-z0-9]/g, "").slice(-5).padStart(5, "0")}.xml`;
+/**
+ * Nome del file come vuole lo SDI: IT + partita IVA + _ + progressivo di 5 caratteri, che non si deve mai ripetere
+ * (lo SDI scarta i nomi doppi). Qui il progressivo è fatto di anno (1 carattere), sezionale (1) e numero (3), in base 36:
+ * la numerazione ricomincia ogni anno ma il nome del file no.
+ */
+export function nomeFileXml(sezionaleCodice: string, anno: number, progressivo: number): string {
+  const b36 = (n: number, l: number) => (Math.max(0, Math.floor(n)) % 36 ** l).toString(36).toUpperCase().padStart(l, "0");
+  const i = SEZIONALI.findIndex((x) => x.codice === sezionaleCodice);
+  return `IT${CEDENTE.partitaIva}_${b36(anno - 2026, 1)}${b36(i < 0 ? 0 : i, 1)}${b36(progressivo, 3)}.xml`;
+}

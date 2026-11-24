@@ -11,8 +11,8 @@ import { salvaImpostazioniFatturazione } from "@/app/fatturazione-actions";
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-28";
 
 /** Numerazione (si riparte dall'ultimo numero di BConsole) e accensione dell'emissione vera. */
-export default async function ImpostazioniFatturazionePage({ searchParams }: { searchParams: Promise<{ salvato?: string }> }) {
-  const { salvato } = await searchParams;
+export default async function ImpostazioniFatturazionePage({ searchParams }: { searchParams: Promise<{ salvato?: string; errore?: string }> }) {
+  const { salvato, errore } = await searchParams;
   const u = await getCurrentUser();
   const anno = new Date().getFullYear();
   const [reale, importate] = await Promise.all([
@@ -27,6 +27,7 @@ export default async function ImpostazioniFatturazionePage({ searchParams }: { s
   return (
     <div className="space-y-4 max-w-3xl">
       {salvato && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ Salvato</p>}
+      {errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-900">⚠️ {errore}</p>}
       <form action={salvaImpostazioniFatturazione} className="card-fase space-y-4">
         <input type="hidden" name="anno" value={anno} />
         <div>
