@@ -85,7 +85,7 @@ export default async function KitCliente({ commessaId, stato, commercialeId, ute
           </div>
           <div>
             <p className="mb-1 text-xs font-semibold text-neutral-700">📷 Foto della consegna con il cliente (facoltativa, +{regole.puntiFoto} punti)</p>
-            <FotoRilievo name="foto" />
+            <FotoRilievo name="foto" invio={{ url: "/api/documenti/carica", campi: { entita: "COMMESSA", entitaId: commessaId, cartella: "Consegna kit" } }} />
           </div>
           <input name="nota" placeholder="Nota (facoltativa)" className={`${inp} w-full`} />
           <button className="btn-3d btn-3d-pink px-4 py-2 text-sm">🎁 Registra la consegna del kit</button>
