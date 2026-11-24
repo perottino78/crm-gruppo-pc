@@ -11,7 +11,7 @@ import { setConfig } from "@/lib/leadIngest";
 import { registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta } from "@/lib/fatturazione/server";
+import { CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta } from "@/lib/fatturazione/server";
 import { CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
 import { propostaDaCommessa, statoDdtDaRighe } from "@/lib/fatturazione/calcoli";
 import { numeroCommessa } from "@/lib/commesse";
@@ -188,6 +188,26 @@ export async function emettiFattura(fd: FormData) {
   redirect(`/fatturazione/fatture/${f.id}?emessa=1`);
 }
 
+/** Riapre una fattura emessa per correggerla (non inviata allo SDI, senza incassi): torna bozza CON il suo numero; rimessa «Emetti» riprende lo stesso numero. */
+export async function riapriFattura(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f) redirect("/fatturazione/fatture");
+  const no = await motivoNoRiapertura(f);
+  if (no) errore(`/fatturazione/fatture/${f.id}`, no);
+  await prisma.$transaction(async (tx) => {
+    if (f.fatturaVenditaId) {
+      await tx.scadenza.deleteMany({ where: { fatturaVenditaId: f.fatturaVenditaId } });
+      await tx.fatturaEmessa.update({ where: { id: f.id }, data: { fatturaVenditaId: null } });
+      await tx.fatturaVendita.delete({ where: { id: f.fatturaVenditaId } });
+    }
+    await tx.fatturaEmessa.update({ where: { id: f.id }, data: { stato: "BOZZA", xml: null, rate: Prisma.DbNull } });
+  });
+  await registraLog("FATTURA_EMESSA", f.id, "RIAPERTA", `${f.numero} riaperta per correggerla`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`, "/amministrazione/fatture-vendita", "/amministrazione/scadenzario");
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
 /** Segna la fattura come inviata allo SDI (o toglie il segno). Entro 12 giorni dall'emissione. */
 export async function segnaInviataSdi(fd: FormData) {
   const u = await utente();
@@ -230,6 +250,7 @@ export async function eliminaFattura(fd: FormData) {
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: true } });
   if (!f) redirect("/fatturazione/fatture");
   if (f.stato === "EMESSA") errore(`/fatturazione/fatture/${f.id}`, "Una fattura emessa non si elimina: fai una nota di credito.");
+  if (f.stato === "BOZZA" && f.numero) errore(`/fatturazione/fatture/${f.id}`, "Questa fattura ha già un numero (è stata riaperta per correggerla): riemettila oppure fai una nota di credito.");
   await prisma.$transaction(async (tx) => {
     const righeDdt = f.righe.map((r) => r.rigaDdtId).filter(Boolean) as string[];
     if (righeDdt.length) await tx.rigaDdtUscita.updateMany({ where: { id: { in: righeDdt } }, data: { fatturata: false } });

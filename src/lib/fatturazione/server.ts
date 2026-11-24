@@ -30,7 +30,7 @@ async function ultimoIndicato(chiave: string): Promise<number | null> {
 /** Prossimo numero della fattura nel sezionale e anno: segue BConsole (fatture importate) e l'ultimo numero indicato in Impostazioni. */
 export async function prossimoProgressivoFattura(tx: Tx, sez: string, anno: number, prova: boolean): Promise<number> {
   await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`fatture-${prova ? "prova" : "vere"}-${sez}-${anno}`}))`;
-  const nostre = await tx.fatturaEmessa.findMany({ where: { sezionale: sez, anno, tipo: { not: "PROFORMA" }, stato: prova ? "PROVA" : { in: ["EMESSA", "ANNULLATA"] }, progressivo: { not: null } }, select: { progressivo: true } });
+  const nostre = await tx.fatturaEmessa.findMany({ where: { sezionale: sez, anno, tipo: { not: "PROFORMA" }, stato: prova ? "PROVA" : { in: ["EMESSA", "ANNULLATA", "BOZZA"] }, progressivo: { not: null } }, select: { progressivo: true } });
   const usati = nostre.map((f) => f.progressivo!);
   if (!prova) {
     const est = sezionale(sez).estensione;
@@ -110,8 +110,10 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   // la proforma non è un documento fiscale: numerazione a parte, mai nelle vendite
   const proforma = !tf.fiscale;
   const prova = !reale && !proforma;
-  const progressivo = proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
-  const numero = proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
+  // fattura riaperta per una correzione: mantiene il suo numero (la numerazione fiscale non si tocca)
+  const riaperta = !proforma && !prova && f.numero !== null && f.progressivo !== null;
+  const progressivo = riaperta ? f.progressivo! : proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
+  const numero = riaperta ? f.numero! : proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
   const bollo = serveBollo(f.righe);
   const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
   const iban = f.iban ?? (metodoPagamento(f.metodoPagamento).banca ? await ibanDi(tx, f.banca) : null);
@@ -217,4 +219,16 @@ export async function datiPdfDdt(id: string) {
       colli: d.colli, pesoLordo: d.pesoLordo, pesoNetto: d.pesoNetto, volume: d.volume, porto: d.porto, inizio: d.inizioTrasporto,
     },
   };
+}
+
+
+/** Una fattura emessa si può riaprire per correggerla se non è stata inviata allo SDI e il cliente non ha pagato nulla. Ritorna il motivo del no, o null. */
+export async function motivoNoRiapertura(f: { id: string; stato: string; tipo: string; inviataSdiIl: Date | null; fatturaVenditaId: string | null }): Promise<string | null> {
+  if (f.stato !== "EMESSA") return "Solo le fatture emesse si riaprono.";
+  if (!tipoFattura(f.tipo).fiscale) return "Documento non fiscale.";
+  if (f.inviataSdiIl) return "È già stata inviata allo SDI: si corregge con una nota di credito.";
+  if (!f.fatturaVenditaId) return null;
+  const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: f.fatturaVenditaId }, include: { abbinamenti: { select: { id: true } } } });
+  if (scad.some((s) => s.abbinamenti.length > 0 || s.pagatoManuale > 0 || s.ritenuta > 0 || s.pagataIl)) return "Ci sono già incassi registrati su questa fattura: si corregge con una nota di credito.";
+  return null;
 }

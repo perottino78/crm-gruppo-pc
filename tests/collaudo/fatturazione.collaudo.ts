@@ -66,6 +66,20 @@ async function main() {
   const sc = await prisma.scadenza.findMany({ where: { fatturaVenditaId: fv.id } });
   verifica(sc.length === 1 && sc[0].importo === 5500 && sc[0].tipo === "INCASSO", "scadenza di incasso creata", sc);
 
+  // 2b) riapertura per correggere: stesso numero, niente doppioni; con l'invio allo SDI non si riapre più
+  await redirectA(A.riapriFattura(fd({ id: accV })));
+  let ria = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(ria.stato === "BOZZA" && ria.numero === "519/FE/2026" && !ria.fatturaVenditaId && (await prisma.scadenza.count({ where: { fatturaVenditaId: fv.id } })) === 0 && (await prisma.fatturaVendita.count({ where: { id: fv.id } })) === 0, "riaperta: torna bozza con il suo numero, vendita e scadenze tolte", ria.stato);
+  verifica((await redirectA(A.eliminaFattura(fd({ id: accV })))).includes("errore="), "una fattura riaperta con numero non si elimina");
+  await redirectA(A.salvaTestataFattura(fd({ id: accV, tipo: "ACCONTO", sezionale: "PC", data: "2026-11-09", metodoPagamento: "BONIFICO_VISTA", causale: "Corretta" })));
+  await redirectA(A.emettiFattura(fd({ id: accV })));
+  ria = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(ria.stato === "EMESSA" && ria.numero === "519/FE/2026" && ria.causale === "Corretta" && !!ria.fatturaVenditaId, "riemessa con lo STESSO numero 519/FE/2026 e la correzione", ria.numero);
+  verifica((await prisma.scadenza.count({ where: { fatturaVenditaId: ria.fatturaVenditaId! } })) === 1, "scadenza di incasso ricreata (una sola)");
+  await redirectA(A.segnaInviataSdi(fd({ id: accV })));
+  verifica((await redirectA(A.riapriFattura(fd({ id: accV })))).includes("errore="), "inviata allo SDI: non si riapre più");
+  await redirectA(A.segnaInviataSdi(fd({ id: accV, annulla: "1" })));
+
   // 3) saldo: righe dell'offerta meno l'acconto
   const saldoId = idDa(await redirectA(A.creaFattura(fd({ commessaId: c.id, tipo: "SALDO", data: "2026-11-20" }))));
   const saldo = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId }, include: { righe: { orderBy: { posizione: "asc" } } } });
