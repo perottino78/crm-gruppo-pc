@@ -1,7 +1,10 @@
 // Generatore PDF minimale (nessuna libreria esterna): testo Helvetica, linee, più pagine.
 // Usato per l'ordine fornitore da scaricare o allegare all'email.
 
-type Op = { t: "testo"; x: number; y: number; s: string; size: number; bold?: boolean } | { t: "linea"; x1: number; y1: number; x2: number; y2: number; w?: number } | { t: "rett"; x: number; y: number; w: number; h: number; grigio: number };
+type Op = { t: "testo"; x: number; y: number; s: string; size: number; bold?: boolean } | { t: "linea"; x1: number; y1: number; x2: number; y2: number; w?: number } | { t: "rett"; x: number; y: number; w: number; h: number; grigio: number } | { t: "img"; x: number; y: number; w: number; h: number };
+
+/** Immagine JPEG incorporabile nel PDF (una sola per documento, es. il logo). */
+export type ImmagineJpeg = { larghezza: number; altezza: number; base64: string };
 
 const W = 595.28, H = 841.89; // A4 in punti
 
@@ -42,6 +45,7 @@ function codifica(s: string): number[] {
 
 export class DocumentoPdf {
   pagine: Op[][] = [[]];
+  private jpeg: ImmagineJpeg | null = null;
   y = H - 40;
   readonly margine = 40;
   readonly larghezza = W - 80;
@@ -53,6 +57,13 @@ export class DocumentoPdf {
   testoDx(xDestro: number, y: number, s: string, size = 9, bold = false) { this.testo(xDestro - larghezzaTesto(s, size, bold), y, s, size, bold); }
   linea(x1: number, y1: number, x2: number, y2: number, w = 0.5) { this.pagina.push({ t: "linea", x1, y1, x2, y2, w }); }
   rett(x: number, y: number, w: number, h: number, grigio = 0.92) { this.pagina.push({ t: "rett", x, y, w, h, grigio }); }
+  /** Disegna il JPEG (x,y = angolo in basso a sinistra) alla larghezza w; l'altezza segue le proporzioni. Ritorna l'altezza. */
+  immagine(jpeg: ImmagineJpeg, x: number, y: number, w: number): number {
+    this.jpeg = jpeg;
+    const h = (w * jpeg.altezza) / jpeg.larghezza;
+    this.pagina.push({ t: "img", x, y, w, h });
+    return h;
+  }
   /** Paragrafo a capo automatico dalla posizione corrente. */
   paragrafo(s: string, size = 9, bold = false, x = this.margine, larghezza = this.larghezza) {
     for (const r of aCapo(s, larghezza, size, bold)) { this.spazio(size + 3); this.testo(x, this.y, r, size, bold); this.y -= size + 3; }
@@ -81,16 +92,24 @@ export class DocumentoPdf {
       const f = (n: number) => (Math.round(n * 100) / 100).toString();
       for (const op of ops) {
         if (op.t === "rett") add(`${f(op.grigio)} g ${f(op.x)} ${f(op.y)} ${f(op.w)} ${f(op.h)} re f 0 g\n`);
+        else if (op.t === "img") add(`q ${f(op.w)} 0 0 ${f(op.h)} ${f(op.x)} ${f(op.y)} cm /Im1 Do Q\n`);
         else if (op.t === "linea") add(`${f(op.w ?? 0.5)} w ${f(op.x1)} ${f(op.y1)} m ${f(op.x2)} ${f(op.y2)} l S\n`);
         else { add(`BT /${op.bold ? "F2" : "F1"} ${f(op.size)} Tf ${f(op.x)} ${f(op.y)} Td (`); contenuto.push(...codifica(op.s)); add(") Tj ET\n"); }
       }
       if (piePagina) { add(`BT /F1 7 Tf 40 25 Td (`); contenuto.push(...codifica(piePagina(i + 1, tot))); add(") Tj ET\n"); }
       const flusso = new Uint8Array(contenuto);
-      obj(5 + i * 2, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${6 + i * 2} 0 R >>`);
+      obj(5 + i * 2, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>${this.jpeg ? ` /XObject << /Im1 ${5 + nPag * 2} 0 R >>` : ""} >> /Contents ${6 + i * 2} 0 R >>`);
       offsets[6 + i * 2] = pos;
       pushStr(`${6 + i * 2} 0 obj\n<< /Length ${flusso.length} >>\nstream\n`); push(flusso); pushStr("\nendstream\nendobj\n");
     });
-    const nObj = 5 + nPag * 2;
+    let nObj = 5 + nPag * 2;
+    if (this.jpeg) {
+      const dati = Uint8Array.from(Buffer.from(this.jpeg.base64, "base64"));
+      offsets[nObj] = pos;
+      pushStr(`${nObj} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${this.jpeg.larghezza} /Height ${this.jpeg.altezza} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${dati.length} >>\nstream\n`);
+      push(dati); pushStr("\nendstream\nendobj\n");
+      nObj++;
+    }
     const xref = pos;
     let x = `xref\n0 ${nObj}\n0000000000 65535 f \n`;
     for (let n = 1; n < nObj; n++) x += `${String(offsets[n]).padStart(10, "0")} 00000 n \n`;
