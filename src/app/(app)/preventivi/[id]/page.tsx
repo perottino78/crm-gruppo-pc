@@ -4,6 +4,7 @@ import { percentuale } from "@/lib/numeri";
 import BottoneConferma from "@/components/BottoneConferma";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { ALIQUOTE_RIGA, riepilogoIvaRighe } from "@/lib/preventivi/iva";
 import { notFound } from "next/navigation";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import PannelloConferma from "@/components/preventivi/PannelloConferma";
@@ -52,6 +53,7 @@ import {
   aggiornaCondizioniOfferta,
   aggiornaImmagineOfferta,
   aggiornaSchedaRiga,
+  aggiornaIvaRiga,
   aggiornaSconto,
   aggiornaIva,
   aggiornaPrezzoManuale,
@@ -173,6 +175,7 @@ export default async function PreventivoPage({
     return r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   };
   const imponibileLordo = preventivo.righe.reduce((t, r) => t + subtotaleRiga(r), 0);
+  const ivaPerAliquota = riepilogoIvaRighe(preventivo.righe.map((r) => ({ importo: subtotaleRiga(r), aliquota: r.aliquotaIva })), preventivo.scontoPercentuale ?? 0, preventivo.aliquotaIva);
   // stanza in cui va il prossimo prodotto (pulsante «🧩 Prodotto» di una sezione, ?sezione=<id>)
   const sezioneScelta = preventivo.sezioni.find((x) => x.id === sezioneParam) ?? null;
 
@@ -424,6 +427,15 @@ export default async function PreventivoPage({
                 {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
                 <div className="flex-1 min-w-0 px-4 py-3 text-sm">
                 <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} importo={subtotaleLibero} />
+                {subtotaleLibero !== 0 && (<FormAutoSalva key={`ivariga-${r.id}-${r.aliquotaIva ?? ""}`} action={aggiornaIvaRiga} className="mt-1 flex items-center gap-1.5 text-[11px] text-neutral-700">
+                    <input type="hidden" name="id" value={r.id} />
+                    <label className="flex items-center gap-1">IVA di questa voce
+                      <select name="aliquota" defaultValue={r.aliquotaIva === null ? "" : String(r.aliquotaIva)} className="border border-neutral-300 rounded px-1 py-0.5 text-[11px] bg-white">
+                        <option value="">come l&apos;offerta ({preventivo.aliquotaIva}%)</option>
+                        {ALIQUOTE_RIGA.map((a) => <option key={a} value={a}>{a}%</option>)}
+                      </select>
+                    </label>
+                  </FormAutoSalva>)}
                 {rigaConSchedaSolaris(r.testoLibero) && (
                   // scheda tecnica dallo Studio (pannello, inverter, batteria): stampata in fondo all'offerta
                   <FormAutoSalva key={`scheda-${r.id}-${r.allegaScheda}`} action={aggiornaSchedaRiga} className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px]">
@@ -479,6 +491,15 @@ export default async function PreventivoPage({
                   </div>
                 </div>
               </RigaAzioni>
+              <div className="px-4 pb-1"><FormAutoSalva key={`ivariga-${r.id}-${r.aliquotaIva ?? ""}`} action={aggiornaIvaRiga} className="mt-1 flex items-center gap-1.5 text-[11px] text-neutral-700">
+                    <input type="hidden" name="id" value={r.id} />
+                    <label className="flex items-center gap-1">IVA di questa voce
+                      <select name="aliquota" defaultValue={r.aliquotaIva === null ? "" : String(r.aliquotaIva)} className="border border-neutral-300 rounded px-1 py-0.5 text-[11px] bg-white">
+                        <option value="">come l&apos;offerta ({preventivo.aliquotaIva}%)</option>
+                        {ALIQUOTE_RIGA.map((a) => <option key={a} value={a}>{a}%</option>)}
+                      </select>
+                    </label>
+                  </FormAutoSalva></div>
 
               {(() => {
                 // scheda tecnica del listino (es. Optima 70): spunta per stamparla in fondo all'offerta e mandarla con l'email
@@ -1563,7 +1584,9 @@ export default async function PreventivoPage({
               </>
             )}
             <div className="flex justify-between"><span className="text-neutral-700">Imponibile</span><span>{eur(preventivo.totaleNetto)}</span></div>
-            <div className="flex justify-between"><span className="text-neutral-700">+ IVA {preventivo.aliquotaIva}%</span><span>{eur(preventivo.totaleIva)}</span></div>
+            {(preventivo.prezzoManualeAttivo || ivaPerAliquota.length <= 1)
+              ? <div className="flex justify-between"><span className="text-neutral-700">+ IVA {ivaPerAliquota.length === 1 && !preventivo.prezzoManualeAttivo ? ivaPerAliquota[0].aliquota : preventivo.aliquotaIva}%</span><span>{eur(preventivo.totaleIva)}</span></div>
+              : ivaPerAliquota.map((x) => <div key={x.aliquota} className="flex justify-between"><span className="text-neutral-700">+ IVA {x.aliquota}% su {eur(x.imponibile)}</span><span>{eur(x.iva)}</span></div>)}
           </div>
           <div className="flex justify-between px-4 py-3 font-bold text-white text-base" style={{ background: info.primary }}>
             <span>Totale a pagare</span><span>{eur(totaleFinale)}</span>

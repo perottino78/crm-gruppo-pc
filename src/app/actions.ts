@@ -617,6 +617,7 @@ export async function duplicaPreventivo(formData: FormData) {
         optionalPrezzo: r.optionalPrezzo,
         mostraDescrizione: r.mostraDescrizione,
         allegaScheda: r.allegaScheda,
+        aliquotaIva: r.aliquotaIva,
         misuraLarghezza: r.misuraLarghezza,
         misuraAltezza: r.misuraAltezza,
         descrizionePersonalizzata: r.descrizionePersonalizzata,
@@ -680,6 +681,23 @@ export async function aggiornaSchedaRiga(formData: FormData) {
   const id = str(formData, "id");
   if (!utente || !id) return;
   const riga = await prisma.rigaPreventivo.update({ where: { id }, data: { allegaScheda: formData.get("allega") === "1" }, select: { preventivoId: true } });
+  revalidatePath(`/preventivi/${riga.preventivoId}`);
+  revalidatePath(`/preventivi/${riga.preventivoId}/stampa`);
+  revalidatePath(`/preventivi/${riga.preventivoId}/invia`);
+}
+
+// IVA di un singolo prodotto dell'offerta (Debora/Ugo 24/11/2026): vuota = quella dell'offerta. Ricalcola i totali; con l'offerta
+// confermata non si cambia (come righe e prezzi). Arriva in fattura con l'aliquota scelta qui.
+export async function aggiornaIvaRiga(formData: FormData) {
+  const utente = await getCurrentUser();
+  const id = str(formData, "id");
+  if (!utente || !id) return;
+  const riga = await prisma.rigaPreventivo.findUnique({ where: { id }, select: { preventivoId: true, preventivo: { select: { confermatoIl: true } } } });
+  if (!riga || riga.preventivo.confermatoIl) return;
+  const v = str(formData, "aliquota");
+  const n = v === null || v === "" ? null : parseFloat(v.replace(",", "."));
+  await prisma.rigaPreventivo.update({ where: { id }, data: { aliquotaIva: n !== null && Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : null } });
+  await ricalcolaTotali(riga.preventivoId);
   revalidatePath(`/preventivi/${riga.preventivoId}`);
   revalidatePath(`/preventivi/${riga.preventivoId}/stampa`);
   revalidatePath(`/preventivi/${riga.preventivoId}/invia`);

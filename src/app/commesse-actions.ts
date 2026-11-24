@@ -1,5 +1,6 @@
 "use server";
 
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 import { puo } from "@/lib/permessi/catalogo";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { daOraRoma } from "@/lib/calendario/tempo";
@@ -45,20 +46,8 @@ function puoGestireIncassi(ruolo?: string | null) {
   return ruolo === "AMMINISTRATORE" || ruolo === "AMMINISTRATIVO";
 }
 
-// Ricalcola lo stato della commessa nella fase acconto + rilievo
-async function ricalcolaStato(commessaId: string) {
-  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { rilievi: true } });
-  if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA", "SALDO_INCASSATO", "LAVORI_ESEGUITI"].includes(c.stato)) return;
-  const viaLibera = !!(await statoSogliaRilievo(c.id))?.viaLibera;
-  let stato = "IN_ATTESA_ACCONTO";
-  if (viaLibera) {
-    const attivi = c.rilievi.filter((r) => r.stato !== "ANNULLATO");
-    if (attivi.some((r) => r.stato === "ESEGUITO")) stato = "RILIEVO_ESEGUITO";
-    else if (attivi.some((r) => r.stato === "PROGRAMMATO")) stato = "RILIEVO_PROGRAMMATO";
-    else stato = "RILIEVO_DA_PROGRAMMARE";
-  }
-  if (stato !== c.stato) await prisma.commessa.update({ where: { id: c.id }, data: { stato } });
-}
+// Ricalcola lo stato della commessa nella fase acconto + rilievo (logica condivisa in src/lib/pratica/stato-server.ts)
+const ricalcolaStato = ricalcolaStatoCommessa;
 
 async function apriCommessa(preventivoId: string, utenteNome: string): Promise<string | null> {
   const p = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { commessa: true } });
