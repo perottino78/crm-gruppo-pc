@@ -43,3 +43,30 @@ test("colori: quello scelto vince, gli altri prendono i colori liberi della tavo
   // come prima, con i soli id
   assert.equal(coloriPersone(["x", "y"]).get("y")?.colore, PALETTE_PERSONE[1]);
 });
+
+test("cambiare il colore di una persona non sposta quelli automatici degli altri (Debora 24/11/2026)", async () => {
+  const { coloriPersone, coloriDaFissare } = await import("../../src/lib/calendario/eventi");
+  const prima = [{ id: "a", colore: null }, { id: "b", colore: null }, { id: "debora", colore: null }, { id: "c", colore: null }];
+  const visti = coloriPersone(prima);
+  const fissati = coloriDaFissare(prima, "debora");
+  assert.deepEqual(fissati.map((f) => f.id), ["a", "b", "c"]);
+  // dopo il salvataggio: gli altri col colore fissato, Debora con quello che sceglie (anche uno già usato da un collega)
+  const dopo = prima.map((p) => p.id === "debora" ? { ...p, colore: visti.get("a")!.colore } : { ...p, colore: fissati.find((f) => f.id === p.id)!.colore });
+  const nuovi = coloriPersone(dopo);
+  for (const id of ["a", "b", "c"]) assert.equal(nuovi.get(id)!.colore.toLowerCase(), visti.get(id)!.colore.toLowerCase());
+  assert.equal(nuovi.get("debora")!.colore.toLowerCase(), visti.get("a")!.colore.toLowerCase());
+  // chi ha già un colore salvato non si riscrive
+  assert.deepEqual(coloriDaFissare([{ id: "x", colore: "#123456" }, { id: "y", colore: null }], "y"), []);
+});
+
+test("tavolozza: i colori dei colleghi non si scelgono, il proprio sì anche se fuori tavolozza", async () => {
+  const { coloriSceglibili, COLORI_CALENDARIO } = await import("../../src/lib/calendario/eventi");
+  assert.equal(new Set(COLORI_CALENDARIO.map((c) => c.toLowerCase())).size, 30);
+  const t = coloriSceglibili([{ nome: "Rocco", colore: "#2A78D6" }, { nome: "Cristina", colore: null }], "#123abc");
+  assert.equal(t[0].colore, "#123abc");
+  assert.ok(t[0].mio && !t[0].occupatoDa);
+  assert.equal(t.find((c) => c.colore === "#2a78d6")?.occupatoDa, "Rocco");
+  assert.equal(t.filter((c) => c.occupatoDa).length, 1);
+  const mio = coloriSceglibili([{ nome: "Rocco", colore: "#eb6834" }], "#eb6834").find((c) => c.colore === "#eb6834");
+  assert.ok(mio?.mio && !mio.occupatoDa);
+});

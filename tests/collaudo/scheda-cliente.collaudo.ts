@@ -93,6 +93,10 @@ async function main() {
   console.log("3. Calendario di ogni persona");
   r = await redirectA(salvaCalendarioUtente(modulo({ utenteId: cri.id, ritorno: "/impostazioni", inCalendario: "1", colore: "#E34948" })));
   verifica((await prisma.utente.findUnique({ where: { id: cri.id } }))?.coloreCalendario === "#e34948", "colore scelto salvato", r);
+  const ugoDopo = await prisma.utente.findUnique({ where: { id: ugo.id } });
+  verifica(!!ugoDopo?.coloreCalendario, "il colore automatico degli altri viene fissato: non cambia più quando uno sceglie il suo", ugoDopo?.coloreCalendario);
+  r = await redirectA(salvaCalendarioUtente(modulo({ utenteId: ugo.id, ritorno: "/impostazioni", inCalendario: "1", colore: "#e34948" })));
+  verifica(r?.includes("già di Cristina") && (await prisma.utente.findUnique({ where: { id: ugo.id } }))?.coloreCalendario === ugoDopo?.coloreCalendario, "un colore già di un collega non si può prendere", r);
   r = await redirectA(salvaCalendarioUtente(modulo({ utenteId: cri.id, ritorno: "/impostazioni", colore: "#E34948", automatico: "1" })));
   const c2 = await prisma.utente.findUnique({ where: { id: cri.id } });
   verifica(c2?.coloreCalendario === null && c2.inCalendario === false, "torna automatico e senza spunta non compare nel calendario");

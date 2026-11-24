@@ -29,6 +29,26 @@ export type EventoCal = {
 /** Colori delle persone del team: ben distinti fra loro (la tavolozza fissa dei grafici, allungata), assegnati in ordine. */
 export const PALETTE_PERSONE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948", "#0e9f9a", "#a05a2c", "#7a8a00", "#c2389b"];
 
+/** Colori tra cui si sceglie in Impostazioni › Utenti: ben distinti fra loro, uno per persona (richiesta di Ugo 24/11/2026). */
+export const COLORI_CALENDARIO = [
+  ...PALETTE_PERSONE,
+  "#1e40af", "#9333ea", "#0f766e", "#b45309", "#be123c", "#4d7c0f", "#0369a1", "#a21caf", "#475569",
+  "#ca8a04", "#15803d", "#c2410c", "#7c3aed", "#db2777", "#0891b2", "#65a30d", "#92400e", "#334155",
+];
+
+export type ColoreScelta = { colore: string; occupatoDa?: string; mio: boolean };
+/** La tavolozza per una persona: i colori già usati da un collega (attivo e nel calendario) non si possono scegliere.
+ *  Il colore attuale della persona c'è sempre, anche se fuori tavolozza (scelto prima con il selettore libero). */
+export function coloriSceglibili(altri: { nome: string; colore: string | null | undefined }[], mio: string | null | undefined): ColoreScelta[] {
+  const n = (c?: string | null) => (c && /^#[0-9a-f]{6}$/i.test(c) ? c.toLowerCase() : null);
+  const presi = new Map<string, string>();
+  for (const a of altri) { const c = n(a.colore); if (c && !presi.has(c)) presi.set(c, a.nome); }
+  const m = n(mio);
+  const lista = COLORI_CALENDARIO.map((c) => c.toLowerCase());
+  if (m && !lista.includes(m)) lista.unshift(m);
+  return lista.map((c) => ({ colore: c, mio: c === m, occupatoDa: c === m ? undefined : presi.get(c) }));
+}
+
 /** Versione chiara di un colore (sfondo delle schede): mescolato col bianco. */
 export function schiarisci(hex: string, quanto = 0.82): string {
   const n = parseInt(hex.slice(1), 16);
@@ -48,6 +68,18 @@ export function coloriPersone(persone: (string | { id: string; colore?: string |
     const colore = valido(p.colore) ?? (liberi.length ? liberi[i++ % liberi.length] : PALETTE_PERSONE[i++ % PALETTE_PERSONE.length]);
     return [p.id, { colore, chiaro: schiarisci(colore) }];
   }));
+}
+
+/**
+ * Colori da fissare prima di cambiare quello di una persona: chi oggi ha un colore automatico lo tiene così com'è,
+ * altrimenti scegliendo un colore per uno gli automatici degli altri scivolano (segnalazione di Debora, 24/11/2026).
+ * Restituisce solo chi non ha ancora un colore salvato, esclusa la persona che si sta cambiando.
+ */
+export function coloriDaFissare(persone: { id: string; colore?: string | null }[], tranne: string): { id: string; colore: string }[] {
+  const attuali = coloriPersone(persone);
+  return persone
+    .filter((p) => p.id !== tranne && !(p.colore && /^#[0-9a-f]{6}$/i.test(p.colore)))
+    .map((p) => ({ id: p.id, colore: attuali.get(p.id)!.colore.toLowerCase() }));
 }
 
 const normalizza = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
