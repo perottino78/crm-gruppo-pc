@@ -2,6 +2,9 @@ export const dynamic = "force-dynamic";
 
 // Backup sul NAS dell'ufficio (richiesta di Ugo, nov 2026): il NAS (QNAP, rete privata) ogni notte scarica da P&C ONE una copia di tutti i dati.
 import Link from "next/link";
+import { FREQUENZE, type Frequenza } from "@/lib/backup/regole";
+import { salvaFrequenza } from "@/app/backup-actions";
+import SelectAutoInvio from "@/components/SelectAutoInvio";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { puo } from "@/lib/permessi/catalogo";
@@ -17,7 +20,7 @@ const STATO = {
   ok: ["border-green-300 bg-green-50 text-green-900", "✅ Il backup funziona."],
   mai: ["border-neutral-300 bg-neutral-50 text-neutral-800", "Nessun backup ancora arrivato."],
   errori: ["border-amber-300 bg-amber-50 text-amber-900", "⚠️ L'ultimo backup ha avuto errori: guarda «ultimo.log» sul NAS."],
-  fermo: ["border-red-300 bg-red-50 text-red-900", "🚨 Da più di 36 ore non arriva un backup: il NAS è acceso? L'ufficio ha internet?"],
+  fermo: ["border-red-300 bg-red-50 text-red-900", "🚨 Il backup non arriva da troppo tempo: il NAS è acceso? L'ufficio ha internet?"],
 } as const;
 
 export default async function BackupPage() {
@@ -26,7 +29,7 @@ export default async function BackupPage() {
   if (!puo(u, "backup")) redirect("/impostazioni");
   const s = await situazioneBackup();
   const [colore, testo] = STATO[s.stato.livello];
-  const cmdProva = `sh "/share/${CARTELLA}/.one/backup-one.sh" --dati; cat "/share/${CARTELLA}/.one/ultimo.log"`;
+  const cmdProva = `sh "/share/${CARTELLA}/.one/backup-one.sh" --completo; cat "/share/${CARTELLA}/.one/ultimo.log"`;
 
   return (
     <div className="max-w-4xl space-y-4">
@@ -34,11 +37,23 @@ export default async function BackupPage() {
       <div>
         <h1 className="text-2xl font-extrabold text-neutral-900">💾 Backup sul NAS dell&apos;ufficio</h1>
         <p className="text-sm text-neutral-600">
-          Ogni notte alle 2 il NAS QNAP dell&apos;ufficio scarica da P&amp;C ONE una copia dei dati e la mette nella cartella «{CARTELLA}».
-          Tutti i giorni i dati (clienti, lead, offerte, pratiche, ordini, contabilità…), la domenica anche foto e documenti.
-          Tiene gli ultimi 30 backup dei dati e gli ultimi 5 completi. Il NAS resta chiuso verso internet: è lui a chiamare P&amp;C ONE con una chiave segreta.
+          Il NAS QNAP dell&apos;ufficio scarica da P&amp;C ONE una copia di tutti i dati (clienti, lead, offerte, pratiche, ordini, contabilità, foto e documenti)
+          e la mette nella cartella «{CARTELLA}». Tiene gli ultimi 5 backup completi (e, se ogni notte, gli ultimi 30 dei soli dati).
+          Il NAS resta chiuso verso internet: è lui a chiamare P&amp;C ONE con una chiave segreta.
         </p>
       </div>
+
+      <section className="card-fase space-y-2" style={{ "--fase": "#7c3aed" } as React.CSSProperties}>
+        <h2>Quando</h2>
+        <form action={salvaFrequenza}>
+          <SelectAutoInvio name="frequenza" defaultValue={s.frequenza} className="w-full rounded-md border border-neutral-300 px-2 py-1.5 text-sm"
+            opzioni={(Object.keys(FREQUENZE) as Frequenza[]).map((f) => ({ valore: f, etichetta: FREQUENZE[f] }))} />
+        </form>
+        <p className="text-xs text-neutral-600">
+          Si cambia da qui, senza toccare il NAS: il NAS chiama ogni notte alle 2 e P&amp;C ONE gli dice se tocca.
+          Se il backup non arriva da {s.frequenza === "OGNI_NOTTE" ? "36 ore" : "più di una settimana"}, arriva un&apos;email agli amministratori.
+        </p>
+      </section>
 
       {s.attivo && <p className={`rounded-lg border px-3 py-2 text-sm font-semibold ${colore}`}>{testo}{s.ultimoRiuscito && <> Ultimo riuscito: {quando(s.ultimoRiuscito)}.</>}</p>}
 
@@ -95,7 +110,7 @@ export default async function BackupPage() {
           </li>
         </ol>
         <p className="text-xs text-neutral-600">
-          Se un aggiornamento del NAS cancella le attività pianificate, il backup si ferma: dopo 36 ore senza backup arriva un&apos;email agli amministratori.
+          Se un aggiornamento del NAS cancella le attività pianificate, il backup si ferma e arriva l&apos;email agli amministratori.
           Basta riaccendere SSH e rifare il passo 3 con la stessa chiave: <span className="font-mono">sh &quot;/share/{CARTELLA}/.one/backup-one.sh&quot; --installa</span>.
         </p>
       </section>
@@ -103,7 +118,7 @@ export default async function BackupPage() {
       <section className="card-fase space-y-2" style={{ "--fase": "#64748b" } as React.CSSProperties}>
         <h2>Da sapere</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-neutral-700">
-          <li>Ogni backup è una cartella con la data (es. «2026-11-25», «2026-11-29-completo»): dentro un file per tabella (<span className="font-mono">.ndjson.gz</span>) e il «registro.txt» di quella notte.</li>
+          <li>Ogni backup è una cartella con la data (es. «2026-11-29-completo»): dentro un file per tabella (<span className="font-mono">.ndjson.gz</span>) e il «registro.txt» di quella notte.</li>
           <li>La chiave è salvata sul NAS nella cartella «{CARTELLA}/.one», che vede solo chi vede già i backup. In P&amp;C ONE resta solo un&apos;impronta: chi la legge non può scaricare niente.</li>
           <li>Per rimettere i dati in un database (in caso di disastro) c&apos;è il programma <span className="font-mono">scripts/backup/ripristina.ts</span>: lo usa il tecnico, su un database nuovo.</li>
           <li>Ogni backup legge tutti i dati dal database: il traffico in più di Neon si vede in <Link href="/impostazioni/database" className="underline">Consumo del database</Link>.</li>

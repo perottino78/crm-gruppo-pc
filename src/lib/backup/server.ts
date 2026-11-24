@@ -4,13 +4,13 @@ import { prisma } from "@/lib/prisma";
 import { inviaMail, APP_URL } from "@/lib/mail/invio";
 import { chiaveGiorno } from "@/lib/calendario/tempo";
 import {
-  chiaveGiusta, impronta, nomeValido, nuovaChiave, partiBackup, righePerVolta, statoBackup,
+  chiaveGiusta, frequenza as leggiFrequenza, impronta, oreMassime, tipoDiStanotte, type Frequenza, nomeValido, nuovaChiave, partiBackup, righePerVolta, statoBackup,
   type EsitoBackup, type TabellaDb, type TipoBackup,
 } from "./regole";
 
 export const CHIAVI = {
   impronta: "backup_chiave_impronta", chiaveDal: "backup_chiave_dal", ultimo: "backup_ultimo",
-  riuscito: "backup_ultimo_riuscito", storico: "backup_storico", avviso: "backup_avviso_giorno",
+  riuscito: "backup_ultimo_riuscito", frequenza: "backup_frequenza", storico: "backup_storico", avviso: "backup_avviso_giorno",
 };
 const leggi = async (chiave: string) => (await prisma.configurazione.findUnique({ where: { chiave }, select: { valore: true } }))?.valore ?? null;
 const scrivi = (chiave: string, valore: string) => prisma.configurazione.upsert({ where: { chiave }, update: { valore }, create: { chiave, valore } });
@@ -83,15 +83,30 @@ export async function registraEsito(e: EsitoBackup) {
   await scrivi(CHIAVI.storico, JSON.stringify([e, ...storico].slice(0, 20)));
 }
 
+/** Ogni notte o una volta a settimana (di serie: una volta a settimana, scelta di Ugo del 24/11/2026). */
+export async function frequenzaBackup(): Promise<Frequenza> {
+  return leggiFrequenza(await leggi(CHIAVI.frequenza));
+}
+export async function salvaFrequenzaBackup(f: Frequenza) {
+  await scrivi(CHIAVI.frequenza, f);
+}
+
+/** Il NAS chiama ogni notte senza dire il tipo: decide P&C ONE (null = stanotte niente). Con un tipo esplicito (a mano) si fa quello. */
+export async function tipoRichiesto(richiesto: string | null, adesso = new Date()): Promise<TipoBackup | null> {
+  if (richiesto === "dati" || richiesto === "completo") return richiesto;
+  return tipoDiStanotte(await frequenzaBackup(), adesso);
+}
+
 export async function situazioneBackup(adesso = new Date()) {
-  const [imp, dal, ultimo, riuscito, storico] = await Promise.all(
-    [CHIAVI.impronta, CHIAVI.chiaveDal, CHIAVI.ultimo, CHIAVI.riuscito, CHIAVI.storico].map(leggi),
+  const [imp, dal, ultimo, riuscito, storico, freq] = await Promise.all(
+    [CHIAVI.impronta, CHIAVI.chiaveDal, CHIAVI.ultimo, CHIAVI.riuscito, CHIAVI.storico, CHIAVI.frequenza].map(leggi),
   );
   const u = json<EsitoBackup | null>(ultimo, null);
+  const f = leggiFrequenza(freq);
   return {
-    attivo: !!imp, chiaveDal: dal, ultimo: u, ultimoRiuscito: riuscito,
+    attivo: !!imp, chiaveDal: dal, ultimo: u, ultimoRiuscito: riuscito, frequenza: f, oreMassime: oreMassime(f),
     storico: json<EsitoBackup[]>(storico, []),
-    stato: statoBackup(riuscito, u, dal, adesso),
+    stato: statoBackup(riuscito, u, dal, adesso, oreMassime(f)),
   };
 }
 
@@ -101,7 +116,7 @@ async function amministratori(): Promise<string[]> {
 }
 
 /**
- * Controllo periodico (in /api/automazioni/esegui): se il backup è stato impostato ma da 36 ore non ne arriva uno
+ * Controllo periodico (in /api/automazioni/esegui): se il backup è stato impostato ma da troppo tempo (36 ore, o 8 giorni e mezzo se settimanale) non ne arriva uno
  * riuscito (NAS spento, internet giù, chiave cambiata…) o l'ultimo ha avuto errori, email agli amministratori una volta al giorno.
  */
 export async function controllaBackup(adesso = new Date()) {
@@ -114,11 +129,11 @@ export async function controllaBackup(adesso = new Date()) {
   if (!a.length) return { livello: s.stato.livello, motivo: "nessun amministratore con email" };
   const quando = s.ultimoRiuscito ? new Date(s.ultimoRiuscito).toLocaleString("it-IT", { timeZone: "Europe/Rome", dateStyle: "full", timeStyle: "short" }) : "mai";
   const perche = s.stato.livello === "fermo"
-    ? `da più di ${36} ore non arriva un backup dal NAS dell'ufficio (ultimo riuscito: ${quando}).`
+    ? `${s.frequenza === "OGNI_NOTTE" ? "da più di 36 ore" : "da più di una settimana"} non arriva un backup dal NAS dell'ufficio (ultimo riuscito: ${quando}).`
     : `l'ultimo backup sul NAS ha avuto ${s.ultimo?.errori ?? "alcuni"} errori (cartella ${s.ultimo?.cartella ?? "?"}).`;
   const esito = await inviaMail({
     a, oggetto: "[CRM P&C] ⚠️ Backup sul NAS da controllare",
-    testo: `Ciao,\n\n${perche}\n\nCose da guardare: il NAS è acceso? L'ufficio ha internet? Sul NAS, nella cartella «Backup P&C ONE/.one», il file «ultimo.log» dice cosa è successo l'ultima notte.\n\n` +
+    testo: `Ciao,\n\n${perche}\n\nCose da guardare: il NAS è acceso? L'ufficio ha internet? Sul NAS, nella cartella «Backup P&C ONE/.one», il file «ultimo.log» dice cosa è successo l'ultima volta.\n\n` +
       `Situazione e istruzioni: ${APP_URL}/impostazioni/backup\n\nIl tuo assistente virtuale`,
   });
   if (esito.inviata) await scrivi(CHIAVI.avviso, oggi);

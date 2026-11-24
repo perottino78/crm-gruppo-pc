@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  BYTE_PER_PARTE, chiaveGiusta, elencoTesto, esitoDaModulo, impronta, nomeValido, nuovaChiave, partiBackup, partiDi, statoBackup, tipoBackup,
+  BYTE_PER_PARTE, chiaveGiusta, frequenza, oreMassime, tipoDiStanotte, elencoTesto, esitoDaModulo, impronta, nomeValido, nuovaChiave, partiBackup, partiDi, statoBackup, tipoBackup,
 } from "../../src/lib/backup/regole";
 import { SCRIPT_NAS, scriptPer } from "../../src/lib/backup/script";
 
@@ -59,4 +59,22 @@ test("lo script servito è quello di scripts/backup/backup-one.sh, con l'indiriz
   const s = scriptPer("https://crm-gruppo-pc.vercel.app/");
   assert.ok(s.includes('URL="https://crm-gruppo-pc.vercel.app"'));
   assert.ok(!s.includes("__URL__"));
+});
+
+test("frequenza: di serie una volta a settimana, la notte fra sabato e domenica (ora di Roma), completo", () => {
+  assert.equal(frequenza(null), "SETTIMANALE");
+  assert.equal(frequenza("OGNI_NOTTE"), "OGNI_NOTTE");
+  const domenica2 = new Date("2026-11-29T01:00:00Z"); // domenica 29/11 alle 2 a Roma
+  const sabato2 = new Date("2026-11-28T01:00:00Z");
+  const sabatoSeraUtcMaDomenicaRoma = new Date("2026-11-28T23:30:00Z"); // 00:30 di domenica a Roma
+  assert.equal(tipoDiStanotte("SETTIMANALE", domenica2), "completo");
+  assert.equal(tipoDiStanotte("SETTIMANALE", sabato2), null);
+  assert.equal(tipoDiStanotte("SETTIMANALE", sabatoSeraUtcMaDomenicaRoma), "completo");
+  assert.equal(tipoDiStanotte("OGNI_NOTTE", sabato2), "dati");
+  assert.equal(tipoDiStanotte("OGNI_NOTTE", domenica2), "completo");
+  assert.equal(oreMassime("OGNI_NOTTE"), 36);
+  assert.equal(oreMassime("SETTIMANALE"), 204);
+  const e = { il: "2026-11-22T01:30:00Z", tipo: "completo" as const, cartella: "x", file: 1, byte: 1, errori: 0, durata: 1 };
+  assert.equal(statoBackup(e.il, e, null, new Date("2026-11-28T12:00:00Z"), oreMassime("SETTIMANALE")).livello, "ok");
+  assert.equal(statoBackup(e.il, e, null, new Date("2026-12-01T12:00:00Z"), oreMassime("SETTIMANALE")).livello, "fermo");
 });

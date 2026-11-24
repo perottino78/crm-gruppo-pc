@@ -9,6 +9,27 @@ export const TABELLE_FILE = ["Documento", "SegnalazioneAllegato", "RilievoAllega
 export const BYTE_PER_PARTE = 40 * 1024 ** 2;
 export const ORE_SENZA_BACKUP = 36;
 
+/** Quando fare il backup: la scelta è in P&C ONE (Impostazioni › Backup), il NAS chiama ogni notte e chiede se tocca. */
+export type Frequenza = "OGNI_NOTTE" | "SETTIMANALE";
+export const frequenza = (s: string | null | undefined): Frequenza => (s === "OGNI_NOTTE" ? "OGNI_NOTTE" : "SETTIMANALE");
+export const FREQUENZE: Record<Frequenza, string> = {
+  SETTIMANALE: "Una volta a settimana: la notte fra sabato e domenica, completo (dati, foto e documenti)",
+  OGNI_NOTTE: "Ogni notte: i dati tutti i giorni, la domenica anche foto e documenti",
+};
+/** Ore senza backup riuscito prima dell'avviso: 36 se ogni notte, 8 giorni e mezzo se una volta a settimana. */
+export const oreMassime = (f: Frequenza) => (f === "OGNI_NOTTE" ? ORE_SENZA_BACKUP : 8 * 24 + 12);
+
+/** Giorno della settimana a Roma (0 = domenica). */
+const giornoRoma = (d: Date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(
+  d.toLocaleDateString("en-US", { timeZone: "Europe/Rome", weekday: "short" }));
+
+/** Cosa fare quando chiama il NAS (alle 2 di notte): null = stanotte niente. La notte fra sabato e domenica = domenica alle 2. */
+export function tipoDiStanotte(f: Frequenza, adesso: Date): TipoBackup | null {
+  const domenica = giornoRoma(adesso) === 0;
+  if (f === "SETTIMANALE") return domenica ? "completo" : null;
+  return domenica ? "completo" : "dati";
+}
+
 export type TipoBackup = "dati" | "completo";
 export const tipoBackup = (s: string | null | undefined): TipoBackup => (s === "completo" ? "completo" : "dati");
 
@@ -63,15 +84,15 @@ export function esitoDaModulo(d: Record<string, string | undefined>, adesso: Dat
 }
 
 export type StatoBackup = { livello: "mai" | "ok" | "errori" | "fermo"; ore: number | null };
-/** Stato per la pagina e per l'avviso: «fermo» se da più di 36 ore non arriva un backup riuscito. */
-export function statoBackup(ultimoRiuscito: string | null, ultimo: EsitoBackup | null, chiaveDal: string | null, adesso: Date): StatoBackup {
+/** Stato per la pagina e per l'avviso: «fermo» se da troppe ore (36, o 8 giorni e mezzo col backup settimanale) non arriva un backup riuscito. */
+export function statoBackup(ultimoRiuscito: string | null, ultimo: EsitoBackup | null, chiaveDal: string | null, adesso: Date, oreMax = ORE_SENZA_BACKUP): StatoBackup {
   const ore = (s: string) => (adesso.getTime() - new Date(s).getTime()) / 3_600_000;
   if (!ultimoRiuscito) {
-    if (chiaveDal && ore(chiaveDal) > ORE_SENZA_BACKUP) return { livello: "fermo", ore: null };
+    if (chiaveDal && ore(chiaveDal) > oreMax) return { livello: "fermo", ore: null };
     return { livello: ultimo && ultimo.errori > 0 ? "errori" : "mai", ore: null };
   }
   const h = ore(ultimoRiuscito);
-  if (h > ORE_SENZA_BACKUP) return { livello: "fermo", ore: h };
+  if (h > oreMax) return { livello: "fermo", ore: h };
   if (ultimo && ultimo.errori > 0 && ultimo.il > ultimoRiuscito) return { livello: "errori", ore: h };
   return { livello: "ok", ore: h };
 }
