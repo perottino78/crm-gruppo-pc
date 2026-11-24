@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BRANDS } from "@/lib/brands";
 import { getCurrentUser, isAmministratore } from "@/lib/auth";
 import { cambiaMansioneUtente, impostaStatoUtente, salvaCalendarioUtente } from "@/app/team-actions";
-import { coloriPersone } from "@/lib/calendario/eventi";
+import { coloriSceglibili, coloriPersone } from "@/lib/calendario/eventi";
 import { salvaDestinatarioAssistenza } from "@/app/segnalazioni-actions";
 import { destinatarioAssistenza, CHIAVE_DESTINATARIO } from "@/lib/segnalazioni/server";
 import { UFFICI, nomeUfficio } from "@/lib/flusso";
@@ -263,10 +263,22 @@ export default async function ImpostazioniPage({ searchParams }: { searchParams:
                   <label className="flex items-center gap-1.5 text-xs self-center cursor-pointer">
                     <input type="checkbox" name="inCalendario" value="1" defaultChecked={u.inCalendario} className="h-4 w-4" /> calendario attivo
                   </label>
-                  <label className="flex flex-col gap-1 text-[11px] text-neutral-600">
-                    Colore{u.coloreCalendario ? "" : " (ora automatico)"}
-                    <input type="color" name="colore" defaultValue={coloriCal.get(u.id)?.colore ?? u.coloreCalendario ?? "#2a78d6"} className="h-8 w-16 cursor-pointer rounded border border-neutral-200 bg-white" aria-label={`Colore di ${u.nome} nel calendario`} />
-                  </label>
+                  <fieldset className="flex flex-col gap-1 text-[11px] text-neutral-600 w-full">
+                    <legend className="mb-1">Colore{u.coloreCalendario ? "" : " (ora automatico)"} — quelli sbarrati sono già di un collega</legend>
+                    <div className="flex flex-wrap gap-1.5">
+                      {coloriSceglibili(
+                        utenti.filter((x) => x.id !== u.id && x.stato === "ATTIVO" && x.inCalendario).map((x) => ({ nome: x.nome, colore: coloriCal.get(x.id)?.colore ?? x.coloreCalendario })),
+                        coloriCal.get(u.id)?.colore ?? u.coloreCalendario,
+                      ).map((c) => (
+                        <label key={c.colore} title={c.occupatoDa ? `Già di ${c.occupatoDa}` : c.mio ? "Colore attuale" : "Libero"}
+                          className={`relative h-7 w-7 rounded-full border-2 ${c.occupatoDa ? "cursor-not-allowed opacity-40" : "cursor-pointer"} has-[:checked]:ring-2 has-[:checked]:ring-offset-1 has-[:checked]:ring-neutral-900 border-white shadow`}
+                          style={{ background: c.colore }}>
+                          <input type="radio" name="colore" value={c.colore} defaultChecked={c.mio} disabled={!!c.occupatoDa} className="sr-only" aria-label={`${c.colore}${c.occupatoDa ? `, già di ${c.occupatoDa}` : ""}`} />
+                          {c.occupatoDa && <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm font-bold text-white">✕</span>}
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
                   <button className="btn-3d btn-3d-outline text-[11px] px-3 py-1.5">Salva calendario</button>
                   {u.coloreCalendario && <button name="automatico" value="1" className="text-[11px] text-neutral-600 underline">torna al colore automatico</button>}
                 </form>
