@@ -1,10 +1,11 @@
 // Fatturazione (ufficio Giorgia): funzioni lato server condivise da azioni e pagine.
+import { codiceFiscaleValido, pivaValida, erroreCodiceDestinatario, pecValida } from "./controlli";
 import { cointestatarioDa, mancaCointestato, causaleConCointestato } from "./cointestato";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 import { getConfig } from "@/lib/leadIngest";
-import { CEDENTE, codiceIvaDa, metodoPagamento, sezionale, tipoFattura } from "./tabelle";
+import { CEDENTE, codiceIvaDa, metodoPagamento, SEZIONALI, sezionale, tipoFattura } from "./tabelle";
 import { cent, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
 import { xmlFatturaPA } from "./xml";
 import { creaScadenzeVendita } from "@/lib/fatture/vendite";
@@ -25,6 +26,21 @@ export async function emissioneReale(): Promise<boolean> {
 async function ultimoIndicato(chiave: string): Promise<number | null> {
   const v = Number(await getConfig(chiave));
   return Number.isFinite(v) && v > 0 ? v : null;
+}
+
+/**
+ * Sezionali per cui NON è stato indicato l'ultimo numero di BConsole (né sono state importate fatture dell'anno): accendere l'emissione
+ * vera così darebbe numeri già usati. Indicare «0» vale come «ancora nessuna fattura in quest'anno».
+ */
+export async function sezionaliSenzaUltimoNumero(anno: number): Promise<string[]> {
+  const mancano: string[] = [];
+  for (const s of SEZIONALI) {
+    const v = await getConfig(chiaveUltimaFattura(s.codice, anno));
+    if (v !== null && v !== undefined && String(v).trim() !== "") continue;
+    const importate = await prisma.fatturaVendita.count({ where: { numero: { contains: `/${s.estensione}/${anno}` } } });
+    if (importate === 0) mancano.push(`${s.nome} (${s.estensione})`);
+  }
+  return mancano;
 }
 
 /** Prossimo numero della fattura nel sezionale e anno: segue BConsole (fatture importate) e l'ultimo numero indicato in Impostazioni. */
@@ -67,14 +83,16 @@ export async function datiCliente(clienteId: string) {
 }
 
 /** Cosa manca per emettere (fiscale: dati del cliente; sempre: righe e importi). */
-export function controlliEmissione(f: { tipo: string; clienteNome: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; cap: string | null; comune: string | null; nazione: string; persona: boolean; nomePersona: string | null; cognome: string | null }, righe: { descrizione: string; quantita: number; prezzo: number }[]): string[] {
+export function controlliEmissione(f: { tipo: string; clienteNome: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; cap: string | null; comune: string | null; nazione: string; persona: boolean; nomePersona: string | null; cognome: string | null; codiceDestinatario?: string | null; pec?: string | null }, righe: { descrizione: string; quantita: number; prezzo: number }[]): string[] {
   const out: string[] = [];
   if (!righe.length) out.push("La fattura non ha righe.");
   if (righe.some((r) => !r.descrizione.trim())) out.push("C'è una riga senza descrizione.");
   if (!tipoFattura(f.tipo).fiscale) return out;
   if (!f.partitaIva && !f.codiceFiscale) out.push("Manca il codice fiscale o la partita IVA del cliente (scheda cliente › Amministrazione).");
-  if (f.codiceFiscale && !/^([A-Z0-9]{16}|\d{11})$/i.test(f.codiceFiscale.trim())) out.push("Il codice fiscale del cliente non sembra valido.");
-  if (f.partitaIva && f.nazione === "IT" && !/^(IT)?\d{11}$/i.test(f.partitaIva.replace(/\s/g, ""))) out.push("La partita IVA del cliente non sembra valida (11 cifre).");
+  if (f.nazione === "IT" && f.codiceFiscale && !codiceFiscaleValido(f.codiceFiscale)) out.push("Il codice fiscale del cliente non è valido (lo SDI scarterebbe la fattura): controllalo nella scheda cliente.");
+  if (f.partitaIva && f.nazione === "IT" && !pivaValida(f.partitaIva)) out.push("La partita IVA del cliente non è valida (11 cifre con cifra di controllo: lo SDI scarterebbe la fattura): controllala nella scheda cliente.");
+  const eCd = erroreCodiceDestinatario(f.codiceDestinatario); if (eCd) out.push(eCd);
+  if (!pecValida(f.pec)) out.push("La PEC del cliente non sembra un indirizzo valido.");
   if (!f.indirizzo || !f.comune || (f.nazione === "IT" && !/^\d{5}$/.test(f.cap ?? ""))) out.push("Manca l'indirizzo completo del cliente (via, CAP, comune).");
   return out;
 }
@@ -120,7 +138,7 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   const rate = tf.notaCredito || t.totale <= 0 ? [] : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const collegata = f.fatturaCollegataId ? await tx.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { numero: true, data: true } }) : null;
   const xml = tf.fiscale ? xmlFatturaPA({
-    progressivoInvio: `${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
+    progressivoInvio: `${anno}${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
     cliente: { denominazione: f.clienteNome, persona: f.persona, nome: f.nomePersona, cognome: f.cognome, partitaIva: f.partitaIva, codiceFiscale: f.codiceFiscale, nazione: f.nazione, indirizzo: f.indirizzo, cap: f.cap, comune: f.comune, provincia: f.provincia, codiceDestinatario: f.codiceDestinatario, pec: f.pec },
     righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase,
     pagamento: rate.length ? { metodo: f.metodoPagamento, iban, istituto: f.banca, rate } : null,

@@ -86,7 +86,9 @@ test("XML FatturaPA: si rilegge con il lettore delle fatture", () => {
   assert.equal(f.totale, 3963.8);
   assert.equal(f.righe.length, 2);
   assert.equal(f.scadenze[0].importo, 3963.8);
-  assert.equal(nomeFileXml("FE519"), "IT10741080013_FE519.xml");
+  assert.equal(nomeFileXml("FE", 2026, 519), "IT10741080013_000EF.xml");
+  assert.notEqual(nomeFileXml("FE", 2026, 1), nomeFileXml("FE", 2027, 1), "stesso numero in un altro anno = nome file diverso");
+  assert.notEqual(nomeFileXml("FE", 2026, 46), nomeFileXml("FO", 2026, 46), "stesso numero in un altro sezionale = nome file diverso");
 });
 
 test("XML: differita con DDT, nota di credito collegata, bollo e azienda", () => {
