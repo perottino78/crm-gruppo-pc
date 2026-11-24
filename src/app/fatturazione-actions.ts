@@ -112,6 +112,7 @@ export async function salvaTestataFattura(fd: FormData) {
         metodoPagamento: str(fd, "metodoPagamento"), banca: str(fd, "banca"), iban: str(fd, "iban")?.replace(/\s/g, "").toUpperCase() ?? null,
         causale: str(fd, "causale"), riferimento: str(fd, "riferimento"), note: str(fd, "note"), noteInterne: str(fd, "noteInterne"),
         addebitoBollo: fd.get("addebitoBollo") === "on", detrazione: fd.get("detrazione") === "on",
+        ritenutaAliquota: fd.get("conRitenuta") === "on" ? (num(fd, "ritenutaAliquota") ?? 23) : null, ritenutaBase: fd.get("conRitenuta") === "on" ? (num(fd, "ritenutaBase") ?? 100) : null,
         cointestatario: cointest ?? Prisma.DbNull,
         clienteNome: str(fd, "clienteNome") ?? f.clienteNome, partitaIva: campo(fd, "partitaIva", f.partitaIva, str), codiceFiscale: campo(fd, "codiceFiscale", f.codiceFiscale, (x, k) => str(x, k)?.toUpperCase() ?? null),
         indirizzo: campo(fd, "indirizzo", f.indirizzo, str), cap: campo(fd, "cap", f.cap, str), comune: campo(fd, "comune", f.comune, str), provincia: campo(fd, "provincia", f.provincia, (x, k) => str(x, k)?.toUpperCase() ?? null),
