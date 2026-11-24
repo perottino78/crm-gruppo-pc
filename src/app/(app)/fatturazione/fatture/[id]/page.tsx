@@ -10,8 +10,8 @@ import { numeroCommessa } from "@/lib/commesse";
 import { perInput } from "@/lib/calendario/tempo";
 import { ASPETTO_BENI, BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
-import { controlliEmissione, emissioneReale } from "@/lib/fatturazione/server";
-import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi } from "@/app/fatturazione-actions";
+import { controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
+import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi, riapriFattura } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
@@ -33,6 +33,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
     emissioneReale(),
   ]);
   const tf = tipoFattura(f.tipo);
+  const noRiapertura = f.stato === "EMESSA" ? await motivoNoRiapertura(f) : "x";
   const bozza = f.stato === "BOZZA";
   const bollo = serveBollo(f.righe);
   const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
@@ -50,7 +51,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link href="/fatturazione/fatture" className="btn-indietro">← Fatture</Link>
-          <h2 className="text-xl font-bold text-neutral-900">{tf.nome} {f.numero ? `n. ${f.numero}` : "(bozza)"} del {dataIt(f.data)}</h2>
+          <h2 className="text-xl font-bold text-neutral-900">{tf.nome} {f.numero ? `n. ${f.numero}` : "(bozza)"}{f.stato === "BOZZA" && f.numero ? " — riaperta per correggerla" : ""} del {dataIt(f.data)}</h2>
           <p className="text-sm text-neutral-700">
             <b>{f.clienteNome}</b> · <span className="font-semibold" style={{ color: stato?.colore }}>{stato?.nome}</span>
             {commessa && <> · <Link href={`/commesse/${commessa.id}`} className="underline">commessa {numeroCommessa(commessa)}</Link></>}
@@ -64,6 +65,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
         <div className="flex flex-wrap gap-2 items-start">
           <a href={`/api/fatturazione/fattura/${f.id}/pdf`} target="_blank" rel="noreferrer" className="btn-3d btn-3d-outline text-sm px-3 py-1.5">📄 {bozza ? "Anteprima PDF" : "PDF di cortesia"}</a>
           {f.stato !== "BOZZA" && <form action={inviaFatturaEmail} className="flex gap-1"><input type="hidden" name="id" value={f.id} /><input name="a" defaultValue={f.email ?? ""} placeholder="email del cliente" className="border border-neutral-300 rounded px-2 py-1 text-xs w-44" /><button className="btn-3d btn-3d-green text-sm px-3 py-1.5">✉️ Invia al cliente</button></form>}
+          {f.stato === "EMESSA" && noRiapertura === null && <form action={riapriFattura}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-orange text-sm px-3 py-1.5" title="Torna bozza con lo stesso numero, finché non è inviata allo SDI">✏️ Riapri per correggere</button></form>}
           {f.stato === "EMESSA" && (() => {
             const limite = new Date(f.data.getTime() + 12 * 86400000);
             const giorni = Math.ceil((limite.getTime() - Date.now()) / 86400000);
