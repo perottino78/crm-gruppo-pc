@@ -1,7 +1,8 @@
 // PDF della fattura (copia di cortesia) e del DDT di uscita, con il generatore minimale di src/lib/ordini/pdf.ts.
 import { DocumentoPdf, aCapo } from "@/lib/ordini/pdf";
-import { CEDENTE, codiceIvaDa, metodoPagamento, tipoFattura } from "./tabelle";
+import { CEDENTE, DICHIARAZIONE_CCNL, codiceIvaDa, metodoPagamento, tipoFattura } from "./tabelle";
 import { importoRiga, totali } from "./calcoli";
+import { LOGO_PC } from "@/lib/ordini/logo-pc";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" as unknown as boolean }) + " €";
 const q = (n: number) => n.toLocaleString("it-IT", { maximumFractionDigits: 3 });
@@ -13,12 +14,16 @@ type Cliente = { nome: string; righe: string[] };
 
 function intestazione(pdf: DocumentoPdf, titolo: string, numero: string, data: Date, cliente: Cliente, destinazione?: string | null) {
   const M = pdf.margine, L = pdf.larghezza;
-  pdf.testo(M, pdf.y, CEDENTE.denominazione, 13, true);
-  pdf.testo(M + 300, pdf.y, titolo, 13, true);
-  pdf.y -= 13;
+  // come il modello di Giorgia: logo a sinistra, dati della società a destra
+  const hLogo = pdf.immagine(LOGO_PC, M, pdf.y - 62, 85);
+  const xD = M + 300;
+  pdf.testo(xD, pdf.y, CEDENTE.denominazione, 11, true);
+  let yD = pdf.y - 12;
+  for (const r of [`${CEDENTE.indirizzo} ${CEDENTE.numeroCivico}`, `${CEDENTE.cap} ${CEDENTE.comune} (${CEDENTE.provincia})`, `Tel. ${CEDENTE.telefono}`, `P.IVA ${CEDENTE.partitaIva} - C.F. ${CEDENTE.partitaIva}`, `${CEDENTE.email} - ${CEDENTE.sito}`, `PEC ${CEDENTE.pec}`]) { pdf.testo(xD, yD, r, 8); yD -= 10; }
+  pdf.y = Math.min(pdf.y - hLogo + 20, yD) - 8;
   const yT = pdf.y;
-  for (const r of [`${CEDENTE.indirizzo} ${CEDENTE.numeroCivico} - ${CEDENTE.cap} ${CEDENTE.comune} (${CEDENTE.provincia})`, `P.IVA e C.F. ${CEDENTE.partitaIva}`, `Tel. ${CEDENTE.telefono} - ${CEDENTE.email}`, `PEC ${CEDENTE.pec} - ${CEDENTE.sito}`]) { pdf.testo(M, pdf.y, r, 8); pdf.y -= 10; }
-  pdf.testo(M + 300, yT, `N. ${numero} del ${dataIt(data)}`, 11, true);
+  pdf.testo(M, pdf.y, titolo, 13, true);
+  pdf.testo(M, yT - 14, `N° ${numero} del ${dataIt(data)}`, 10, true);
   pdf.y -= 8;
   const hCli = 16 + cliente.righe.length * 10;
   pdf.rett(M + 280, pdf.y - hCli + 10, L - 280, hCli + 2, 0.95);
@@ -125,9 +130,18 @@ export function pdfFattura(d: DatiPdfFattura): Uint8Array {
     pdf.testo(M + 85, pdf.y, d.rate.map((r) => `${dataIt(r.data)} ${eur(r.importo)}`).join("  ·  "), 8);
     pdf.y -= 12;
   }
-  if (d.bollo) { pdf.paragrafo("Imposta di bollo assolta in modo virtuale ai sensi del DM 17/06/2014.", 7); }
   if (tf.trasporto && d.trasporto) trasporto(pdf, d.trasporto);
-  if (d.note) { pdf.y -= 4; pdf.paragrafo(d.note, 8); }
+  // ANNOTAZIONI in fondo (modello di Giorgia): bollo, note scritte a mano e la dichiarazione sul contratto collettivo
+  const annot = [d.bollo ? "Imposta di bollo assolta in modo virtuale ai sensi del DM 17/06/2014." : null, d.note || null, tf.fiscale && !tf.notaCredito ? DICHIARAZIONE_CCNL : null].filter(Boolean) as string[];
+  if (annot.length) {
+    const linee = annot.flatMap((a) => aCapo(a, L - 16, 8));
+    pdf.spazio(linee.length * 10 + 30);
+    pdf.y -= 10;
+    pdf.rett(M, pdf.y - linee.length * 10 - 8, L, linee.length * 10 + 24, 0.96);
+    pdf.testo(M + 8, pdf.y, "ANNOTAZIONI", 8, true);
+    pdf.y -= 12;
+    for (const l of linee) { pdf.testo(M + 8, pdf.y, l, 8); pdf.y -= 10; }
+  }
   return pdf.toBytes((n, tot) => `${CEDENTE.denominazione} - ${d.numero} - pagina ${n} di ${tot}`);
 }
 
