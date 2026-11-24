@@ -139,6 +139,20 @@ async function main() {
   const fvNc = await prisma.fatturaVendita.findUniqueOrThrow({ where: { id: nc.fatturaVenditaId! } });
   verifica(nc.numero === "522/FE/2026" && fvNc.tipoDocumento === "TD04" && fvNc.totale === -5500 && (await prisma.scadenza.count({ where: { fatturaVenditaId: fvNc.id } })) === 0, "nota di credito 522/FE/2026: in negativo nelle vendite, senza scadenze", fvNc);
   verifica(leggiFatturaPA(nc.xml!)[0].notaCredito && nc.xml!.includes("<IdDocumento>520/FE/2026</IdDocumento>"), "XML della nota di credito con la fattura stornata");
+  const saldoDopo = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } });
+  const scOrig = await prisma.scadenza.findMany({ where: { fatturaVenditaId: saldoDopo.fatturaVenditaId! } });
+  verifica(scOrig.length > 0 && scOrig.every((x) => x.stato === "ANNULLATA" && (x.note ?? "").includes("nota di credito 522/FE/2026")), "la nota di credito azzera ciò che il cliente doveva ancora pagare sul saldo", scOrig.map((x) => [x.stato, x.importo]));
+  const ncDup = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: ncId } });
+  verifica(ncDup.inviataSdiIl === null, "la nota di credito non risulta già inviata allo SDI");
+  const futId = idDa(await redirectA(A.creaFattura(fd({ clienteId: cli.id, tipo: "FATTURA", data: "2027-12-01" }))));
+  await redirectA(A.salvaRigheFattura(fd({ id: futId, nuova_descrizione: "Prova", nuova_quantita: "1", nuova_prezzo: "100", nuova_iva: "22" })));
+  const errFut = await redirectA(A.emettiFattura(fd({ id: futId })));
+  verifica(decodeURIComponent(errFut).includes("nel futuro"), "una data nel futuro non si emette", errFut);
+  await redirectA(A.segnaInviataSdi(fd({ id: accV })));
+  verifica((await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } })).inviataSdiIl !== null, "segnata inviata allo SDI");
+  await redirectA(A.segnaScartataSdi(fd({ id: accV, motivo: "00305 partita IVA non valida" })));
+  const scart = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(scart.inviataSdiIl === null && (scart.noteInterne ?? "").includes("Scartata dallo SDI") && (scart.noteInterne ?? "").includes("00305") && scart.numero === "519/FE/2026", "scartata dallo SDI: tiene il numero, motivo annotato, di nuovo correggibile", scart.noteInterne);
   const errDel = await redirectA(A.eliminaFattura(fd({ id: saldoId })));
   verifica(errDel.includes("nota di credito"), "una fattura vera non si elimina");
 
