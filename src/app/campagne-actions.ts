@@ -52,18 +52,40 @@ Se invece non vuoi ricevere nostre comunicazioni promozionali, puoi disiscrivert
 Grazie,
 Gruppo P&C`;
 
+const TESTO_RICHIESTE = `Gentile {nome},
+
+ci hai lasciato i tuoi dati chiedendo informazioni a Gruppo P&C (tramite Facebook o il nostro sito). Ti scriviamo solo per dirti come li trattiamo: l'informativa sulla privacy spiega quali dati abbiamo, perché, per quanto tempo e come puoi esercitare i tuoi diritti (accesso, rettifica, cancellazione, opposizione).
+
+Puoi leggerla qui: {informativa}
+
+Se vuoi ricevere anche le nostre novità, promozioni e offerte, basta un clic su questo link personale (è facoltativo; se non lo fai, non ti manderemo comunicazioni promozionali):
+{consenso}
+
+Se non vuoi più essere contattato, puoi disiscriverti in qualsiasi momento dal link in fondo a questa email.
+
+Grazie,
+Gruppo P&C`;
+
 /**
- * Prepara (senza inviare) la campagna «Aggiornamento privacy»: informativa + link per dare il consenso + disiscrizione.
- * Di partenza va solo a chi ha già un rapporto con noi (ha comprato); sta in BOZZA, parte solo quando la lancia il marketing.
- * Niente aperture/clic: si tracciano solo per chi darà il consenso.
+ * Prepara (senza inviare) una campagna «Aggiornamento privacy»: informativa + link per dare il consenso + disiscrizione.
+ * - `CLIENTI` (di partenza): solo chi ha già comprato da noi.
+ * - `RICHIESTE`: lead e contatti arrivati da Facebook, sito o simulatore che non hanno mai comprato e non hanno ancora dato il consenso;
+ *   il testo è solo informativo (nessuna promozione). Chi clicca il link entra nelle campagne promozionali, gli altri no.
+ * Sta in BOZZA, parte solo quando la lancia il marketing. Niente aperture/clic: si tracciano solo per chi darà il consenso.
  */
-export async function creaCampagnaPrivacy() {
+export async function creaCampagnaPrivacy(fd?: FormData) {
   const u = await marketing();
+  const richieste = fd?.get("destinatari") === "RICHIESTE";
   const c = await prisma.campagna.create({
-    data: {
-      nome: "Aggiornamento privacy e consenso", creataDa: u.nome, oggetto: "Gruppo P&C: la tua privacy e le tue preferenze", preheader: "Abbiamo aggiornato l'informativa. Scegli se vuoi ricevere le nostre novità.",
-      testo: TESTO_PRIVACY, formato: "TESTO", situazione: "HA_COMPRATO", tracciamento: false,
-    },
+    data: richieste
+      ? {
+          nome: "Informativa privacy — contatti da Facebook e sito", creataDa: u.nome, oggetto: "Gruppo P&C: come trattiamo i tuoi dati", preheader: "Informativa sulla privacy e tua scelta sulle comunicazioni.",
+          testo: TESTO_RICHIESTE, formato: "TESTO", categorie: ["Lead"], situazione: "MAI_COMPRATO", consenso: "SENZA", tracciamento: false,
+        }
+      : {
+          nome: "Aggiornamento privacy e consenso", creataDa: u.nome, oggetto: "Gruppo P&C: la tua privacy e le tue preferenze", preheader: "Abbiamo aggiornato l'informativa. Scegli se vuoi ricevere le nostre novità.",
+          testo: TESTO_PRIVACY, formato: "TESTO", situazione: "HA_COMPRATO", tracciamento: false,
+        },
   });
   redirect(`/campagne/${c.id}?ok=${encodeURIComponent("Campagna pronta in BOZZA: controlla il testo, scegli a chi mandarla e fai una prova. Non è ancora partita.")}`);
 }
@@ -156,6 +178,7 @@ export async function salvaCampagna(fd: FormData) {
       province: [...new Set(lista(fd, "province").map((x) => x.trim().toUpperCase()).filter((x) => PROVINCE.some((p) => p.sigla === x)))],
       comuni: [...new Set(lista(fd, "comuni").map((x) => x.trim()).filter(Boolean))].slice(0, 500),
       situazione: SITUAZIONI.some((x) => x.codice === str(fd, "situazione")) ? str(fd, "situazione") : null,
+      consenso: ["CON", "SENZA"].includes(str(fd, "consenso") ?? "") ? str(fd, "consenso") : null,
       offerteDal: str(fd, "offerteDal") ? daOraRoma(`${str(fd, "offerteDal")}T00:00`) : null,
       offerteAl: str(fd, "offerteAl") ? daOraRoma(`${str(fd, "offerteAl")}T23:59`) : null,
       richiama: fd.get("richiama") === "on", richiamaTelefonistaId: str(fd, "richiamaTelefonistaId"),
@@ -275,7 +298,7 @@ export async function duplicaCampagna(fd: FormData) {
   if (!id) return;
   const c = await prisma.campagna.findUniqueOrThrow({ where: { id }, include: { varianti: { orderBy: { posizione: "asc" } } } });
   const n = await prisma.campagna.create({
-    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, province: c.province, comuni: c.comuni, situazione: c.situazione, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, escludiCampagne: c.escludiCampagne, creataDa: u.nome },
+    data: { abTest: c.abTest, varianti: { create: c.varianti.map((v) => ({ posizione: v.posizione, nome: v.nome, oggetto: v.oggetto, preheader: v.preheader, formato: v.formato, testo: v.testo, html: v.html })) }, nome: `${c.nome} (copia)`, oggetto: c.oggetto, testo: c.testo, preheader: c.preheader, formato: c.formato, html: c.html, tracciamento: c.tracciamento, marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, province: c.province, comuni: c.comuni, situazione: c.situazione, consenso: c.consenso, offerteDal: c.offerteDal, offerteAl: c.offerteAl, richiama: c.richiama, richiamaTelefonistaId: c.richiamaTelefonistaId, escludiCampagne: c.escludiCampagne, creataDa: u.nome },
   });
   if (fd.get("resta") === "1") { revalidatePath("/campagne"); redirect(`/campagne?ok=${encodeURIComponent(`Creata «${c.nome} (copia)».`)}`); }
   redirect(`/campagne/${n.id}?ok=${encodeURIComponent("Copia creata: aggiorna testo e scadenza, poi invia.")}`);

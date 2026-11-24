@@ -44,8 +44,8 @@ export async function disiscriviCliente(clienteId: string, firma: string): Promi
   return true;
 }
 
-export const filtriDi = (c: { marchi: string[]; stati: string[]; categorie: string[]; provenienza: string | null; commercialeId: string | null; provincia: string | null; province?: string[]; comuni?: string[] }): FiltriCampagna =>
-  ({ marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, province: c.province ?? [], comuni: c.comuni ?? [] });
+export const filtriDi = (c: { marchi: string[]; stati: string[]; categorie: string[]; provenienza: string | null; commercialeId: string | null; provincia: string | null; province?: string[]; comuni?: string[]; consenso?: string | null }): FiltriCampagna =>
+  ({ marchi: c.marchi, stati: c.stati, categorie: c.categorie, provenienza: c.provenienza, commercialeId: c.commercialeId, provincia: c.provincia, province: c.province ?? [], comuni: c.comuni ?? [], consenso: c.consenso ?? null });
 
 /** Filtri della campagna compresa la situazione (offerta non chiusa, ha comprato…), che va calcolata sul database. */
 export async function filtriCampagna(c: Parameters<typeof filtriDi>[0] & { id?: string; situazione: string | null; offerteDal: Date | null; offerteAl: Date | null; escludiCampagne?: string[] }): Promise<FiltriCampagna> {

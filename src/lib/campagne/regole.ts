@@ -23,6 +23,8 @@ export type FiltriCampagna = {
   soloClienti?: string[] | null;
   /** Escludi questi clienti (es. chi ha già comprato) */
   escludiClienti?: string[] | null;
+  /** CON = solo chi ha dato il consenso al marketing, SENZA = solo chi non l'ha dato, vuoto = tutti */
+  consenso?: string | null;
 };
 
 /** Situazioni del contatto per scegliere a chi scrivere. */
@@ -73,6 +75,8 @@ export function whereCampagna(f: FiltriCampagna): Prisma.ClienteWhereInput {
   for (const v of scritturePerRicerca(f.province ?? [])) luoghi.push({ provincia: { equals: v, mode: "insensitive" } });
   for (const c of (f.comuni ?? []).filter((x) => x.trim())) luoghi.push({ comune: { equals: c.trim(), mode: "insensitive" } });
   if (luoghi.length) w.push({ OR: luoghi });
+  if (f.consenso === "CON") w.push({ consensoMarketingIl: { not: null } });
+  if (f.consenso === "SENZA") w.push({ consensoMarketingIl: null });
   if (f.soloClienti) w.push({ id: { in: f.soloClienti } });
   if (f.escludiClienti?.length) w.push({ id: { notIn: f.escludiClienti } });
   return { AND: w };
