@@ -25,8 +25,8 @@ async function main() {
   const r = await (await listino(new NextRequest("http://x/api/articoli/listino?famiglia=OUTDOOR&gruppo=VETRATE"))).json();
   const gu = r.articoli.find((a: { codice: string }) => a.codice === "2360");
   verifica(gu && gu.prezzoVendita === 24 && gu.um === "m" && gu.immagineUrl?.endsWith("2360.webp") && gu.descrizioneEstesa?.includes("maltempo"), "guarnizione 2360 nel listino delle vetrate con prezzo, foto e descrizione", gu);
-  const art = await prisma.articolo.findUnique({ where: { codice: "2360" }, include: { categoria: { include: { padre: { include: { padre: true } } } } } });
-  verifica(art?.costoAcquisto === 8.7 && art.categoria?.nome === "Scorrevole parallelo" && art.categoria.padre?.nome === "Accessori e ricambi" && art.categoria.padre.padre?.nome === "Complementi vetrate", "in Articoli › Complementi vetrate › Accessori e ricambi › Scorrevole parallelo, costo 8,70", art?.categoria);
+  const art = await prisma.articolo.findUnique({ where: { codice: "2360" }, include: { categoria: { include: { padre: { include: { padre: { include: { padre: true } } } } } } } });
+  verifica(art?.costoAcquisto === 8.7 && art.categoria?.nome === "Vetrata scorrevole" && art.categoria.padre?.nome === "Accessori e ricambi" && art.categoria.padre.padre?.nome === "VETRATE" && art.categoria.padre.padre.padre?.nome === "OUTDOOR", "in Articoli › OUTDOOR › VETRATE › Accessori e ricambi › Vetrata scorrevole, costo 8,70", art?.categoria);
 
   console.log("2. Nell'offerta, al metro");
   await aggiungiArticoloPreventivo(fd({ preventivoId: p.id, articoloId: art!.id, quantita: "4,5" }));
@@ -44,6 +44,29 @@ async function main() {
   const dopo = await prisma.articolo.findUnique({ where: { codice: "2360" } });
   verifica(e.creati === 0 && e.completati === 1 && dopo?.prezzoVendita === 30 && dopo.descrizione === "GUARNIZIONE A MANO" && dopo.costoAcquisto === 8.7 && !!dopo.categoriaId, "nessun doppione: completa solo i campi vuoti (costo, categoria, foto)", dopo);
   verifica((await assicuraRicambiVetrate()).creati === 0 && (await prisma.articolo.count()) === 1, "rilanciato non rifà nulla");
+
+  console.log("4. Dalla prima versione: «Scorrevole parallelo» diventa «Vetrata scorrevole», i ricambi di Ugo vanno nella «Vetrata a pacchetto»");
+  await prisma.articolo.deleteMany({});
+  await prisma.configurazione.update({ where: { chiave: "ricambi_vetrate_versione" }, data: { valore: "2026-11-24" } });
+  // com'era dopo la prima versione: Complementi vetrate › Accessori e ricambi › Scorrevole parallelo
+  await prisma.categoriaArticolo.deleteMany({ where: { nome: { in: ["Accessori e ricambi"] } } });
+  const cv = await prisma.categoriaArticolo.create({ data: { nome: "Complementi vetrate", famiglia: "OUTDOOR", gruppoListino: "VETRATE" } });
+  await prisma.categoriaArticolo.create({ data: { nome: "Legni piallati", padreId: cv.id } });
+  const ric = await prisma.categoriaArticolo.create({ data: { nome: "Accessori e ricambi", padreId: cv.id, famiglia: "OUTDOOR", gruppoListino: "VETRATE" } });
+  const vecchia = await prisma.categoriaArticolo.create({ data: { nome: "Scorrevole parallelo", padreId: ric.id, famiglia: "OUTDOOR", gruppoListino: "VETRATE" } });
+  const complementi = await prisma.categoriaArticolo.create({ data: { nome: "complementi", famiglia: "OUTDOOR", gruppoListino: "VETRATE" } });
+  await prisma.articolo.create({ data: { codice: "2360", descrizione: "Guarnizione", categoriaId: vecchia.id, prezzoVendita: 24, um: "m" } });
+  for (const [c, d, pz] of [["ART-00002", "CF TAPPO FOND C/GANCIO IX NERO VRT", 70], ["ART-00003", "CF GANCIO GRIGIO #PO# VTR", 20], ["ART-00004", "CF SUPP GANCIO ------ #PO# VTR", 25], ["ART-00005", "CF TAPPO FOND CENTR IX NERO VRT", 95]] as const)
+    await prisma.articolo.create({ data: { codice: c, descrizione: d, categoriaId: complementi.id, prezzoVendita: pz } });
+  await prisma.articolo.create({ data: { codice: "ALTRO-1", descrizione: "Non toccare", categoriaId: complementi.id } });
+  const sp = await assicuraRicambiVetrate();
+  const cat = async (codice: string) => (await prisma.articolo.findUnique({ where: { codice }, include: { categoria: true } }))?.categoria?.nome;
+  verifica(sp.spostati === 5 && (await cat("2360")) === "Vetrata scorrevole" && (await cat("ART-00002")) === "Vetrata a pacchetto" && (await cat("ART-00005")) === "Vetrata a pacchetto", "guarnizione nella scorrevole, i 4 ricambi CF nella pacchetto", sp);
+  verifica((await cat("ALTRO-1")) === "complementi" && !(await prisma.categoriaArticolo.findUnique({ where: { id: vecchia.id } })) && !(await prisma.categoriaArticolo.findUnique({ where: { id: ric.id } })), "gli altri articoli non si toccano, le vecchie cartelle vuote spariscono");
+  const nuovaPos = await prisma.articolo.findUnique({ where: { codice: "ART-00003" }, include: { categoria: { include: { padre: { include: { padre: true } } } } } });
+  verifica(nuovaPos?.categoria?.padre?.padre?.nome === "VETRATE" && !!(await prisma.categoriaArticolo.findUnique({ where: { id: cv.id } })), "le cartelle nuove stanno in VETRATE; «Complementi vetrate» resta per i legni");
+  const r2 = await (await listino(new NextRequest("http://x/api/articoli/listino?famiglia=OUTDOOR&gruppo=VETRATE"))).json();
+  verifica(r2.articoli.filter((a: { categoria: { nome: string } }) => a.categoria.nome === "Vetrata a pacchetto").length === 4, "nell'offerta i 4 ricambi stanno sotto «Vetrata a pacchetto»");
 
   console.log(`\n${ok} ok, ${ko} falliti`);
   await prisma.$disconnect();

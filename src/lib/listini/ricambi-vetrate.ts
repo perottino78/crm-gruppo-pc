@@ -2,18 +2,31 @@
 // stesso codice di BConsole (così un import successivo li riconosce e non fa doppioni). Dati puri, senza database.
 // Per aggiungerne altri: una voce in RICAMBI_VETRATE e alza VERSIONE_RICAMBI_VETRATE.
 
-export const VERSIONE_RICAMBI_VETRATE = "2026-11-24";
-/** Albero delle categorie in Articoli (sotto «Complementi vetrate», nel listino OUTDOOR › VETRATE). */
+export const VERSIONE_RICAMBI_VETRATE = "2026-11-24b";
+/** Albero in Articoli: OUTDOOR › VETRATE › «Accessori e ricambi» › tipo di vetrata. «Complementi vetrate» è la cartella della prima versione (resta per i legni). */
 export const CATEGORIA_MADRE = "Complementi vetrate";
 export const CATEGORIA_RICAMBI = "Accessori e ricambi";
+/** Una cartella per tipo di vetrata dentro «Accessori e ricambi» (Ugo 24/11/2026). */
+export const SISTEMI_VETRATA = ["Vetrata scorrevole", "Vetrata a pacchetto"] as const;
+export type SistemaVetrata = (typeof SISTEMI_VETRATA)[number];
+/** Cartella della prima versione, sostituita da «Vetrata scorrevole» (vuota, si toglie). */
+export const CATEGORIA_VECCHIA = "Scorrevole parallelo";
+
+/** Articoli caricati a mano da Ugo in «complementi» da spostare una volta nella cartella giusta (24/11/2026). */
+export const DA_SPOSTARE: { codice: string; sistema: SistemaVetrata }[] = [
+  { codice: "ART-00002", sistema: "Vetrata a pacchetto" }, // CF tappo di fondo con gancio inox nero
+  { codice: "ART-00003", sistema: "Vetrata a pacchetto" }, // CF gancio grigio
+  { codice: "ART-00004", sistema: "Vetrata a pacchetto" }, // CF supporto gancio
+  { codice: "ART-00005", sistema: "Vetrata a pacchetto" }, // CF tappo di fondo centrale inox nero
+];
 
 export type RicambioVetrata = {
   codice: string;
   descrizione: string;
   /** testo per il cliente (va nell'offerta sotto il nome) */
   descrizioneEstesa: string;
-  /** sistema di vetrata (terzo livello: es. «Scorrevole parallelo») */
-  sistema: string;
+  /** tipo di vetrata (cartella dentro «Accessori e ricambi») */
+  sistema: SistemaVetrata;
   um: "m" | "pz";
   costo: number;
   vendita: number;
@@ -25,7 +38,7 @@ export const RICAMBI_VETRATE: RicambioVetrata[] = [
     codice: "2360",
     descrizione: "Guarnizione vetrata tra anta e anta 10 mm",
     descrizioneEstesa: "Guarnizione tra i vetri, standard: le guarnizioni in PVC aiutano a sigillare il sistema dal maltempo senza influenzare l'estetica della vetrata.",
-    sistema: "Scorrevole parallelo",
+    sistema: "Vetrata scorrevole",
     um: "m",
     costo: 8.7,
     vendita: 24,
