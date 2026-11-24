@@ -199,6 +199,6 @@ export const MODALITA_PAGAMENTO: Record<string, string> = {
   MP01: "Contanti", MP02: "Assegno", MP05: "Bonifico", MP08: "Carta di pagamento", MP12: "RIBA", MP19: "SEPA Direct Debit", MP21: "SEPA Direct Debit B2B", MP23: "PagoPA",
 };
 export const TIPI_DOCUMENTO: Record<string, string> = {
-  PROFORMA: "Proforma", TD01: "Fattura", TD02: "Acconto su fattura", TD04: "Nota di credito", TD05: "Nota di debito", TD06: "Parcella", TD08: "Nota di credito semplificata",
+  PROFORMA: "Proforma", SPESE: "Fattura spese", ENTRATA_MERCE: "Entrata merce", AVVISO_PARCELLA: "Avviso di parcella", TD01: "Fattura", TD02: "Acconto su fattura", TD04: "Nota di credito", TD05: "Nota di debito", TD06: "Parcella", TD08: "Nota di credito semplificata",
   TD24: "Fattura differita", TD25: "Fattura differita (triangolare)", TD16: "Integrazione reverse charge", TD17: "Autofattura servizi estero",
 };

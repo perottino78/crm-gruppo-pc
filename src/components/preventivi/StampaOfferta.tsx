@@ -1,3 +1,4 @@
+import { riepilogoIvaRighe } from "@/lib/preventivi/iva";
 import { percentuale } from "@/lib/numeri";
 import { calcolaFinanziamento, type SceltaFinanziamento } from "@/lib/finanziamenti/tabelle";
 import { leggiTabelleFinanziamento } from "@/lib/finanziamenti/server";
@@ -160,6 +161,7 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
     return r.quantita * r.prezzoUnitario + r.optionalPrezzo + subOptionali;
   };
 
+  const ivaPerAliquota = riepilogoIvaRighe(preventivo.righe.map((r) => ({ importo: subtotaleRiga(r), aliquota: r.aliquotaIva })), sconto, preventivo.aliquotaIva);
   const renderRigaStampa = (r: (typeof preventivo.righe)[number]) => {
     if (!r.prodotto) {
       const subtotaleLibero = r.quantita * r.prezzoUnitario;
@@ -462,10 +464,17 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
                   <span>{eur(totaleNetto)}</span>
                 </div>
               )}
+              {!prezzoManualeAttivo && ivaPerAliquota.length > 1 ? ivaPerAliquota.map((x) => (
+                <div key={x.aliquota} className="flex justify-between py-1">
+                  <span className="text-neutral-700">IVA {x.aliquota}% su {eur(x.imponibile)}</span>
+                  <span>{eur(x.iva)}</span>
+                </div>
+              )) : (
               <div className="flex justify-between py-1">
-                <span className="text-neutral-700">IVA ({preventivo.aliquotaIva}%)</span>
+                <span className="text-neutral-700">IVA ({!prezzoManualeAttivo && ivaPerAliquota.length === 1 ? ivaPerAliquota[0].aliquota : preventivo.aliquotaIva}%)</span>
                 <span>{eur(totaleIva)}</span>
               </div>
+              )}
             </div>
             <div className="flex justify-between py-2.5 px-3 font-semibold text-white" style={{ background: info.primary }}>
               <span>Totale a pagare</span>
@@ -702,7 +711,8 @@ export default async function StampaOfferta({ id, scope }: { id: string; scope: 
             <h2 className="text-sm font-bold mb-2 pb-1 border-b-2" style={{ color: info.primary, borderColor: `${info.primary}55` }}>
               Informativa privacy (art. 13 e ss. Regolamento UE 2016/679 — GDPR)
             </h2>
-            <p className="text-neutral-700 whitespace-pre-line mb-4">{condizioniBrand.gdprInformativa}</p>
+            <p className="text-neutral-700 whitespace-pre-line mb-2">{condizioniBrand.gdprInformativa}</p>
+            <p className="text-neutral-600 mb-4 text-xs">L'informativa completa e aggiornata è sempre consultabile su {(process.env.APP_URL || "https://crm-gruppo-pc.vercel.app")}/privacy</p>
 
             <p className="font-medium mb-1">Dichiarazione di consenso</p>
             <p className="text-neutral-700 mb-4">{condizioniBrand.gdprConsenso}</p>

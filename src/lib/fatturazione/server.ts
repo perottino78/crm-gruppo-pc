@@ -1,13 +1,15 @@
 // Fatturazione (ufficio Giorgia): funzioni lato server condivise da azioni e pagine.
+import { codiceFiscaleValido, pivaValida, erroreCodiceDestinatario, pecValida } from "./controlli";
 import { cointestatarioDa, mancaCointestato, causaleConCointestato } from "./cointestato";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 import { getConfig } from "@/lib/leadIngest";
-import { CEDENTE, codiceIvaDa, metodoPagamento, sezionale, tipoFattura } from "./tabelle";
+import { CEDENTE, codiceIvaDa, metodoPagamento, SEZIONALI, sezionale, tipoFattura } from "./tabelle";
 import { cent, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
 import { xmlFatturaPA } from "./xml";
 import { creaScadenzeVendita } from "@/lib/fatture/vendite";
+import { residuoScadenza } from "@/lib/amministrazione/server";
 
 type Tx = Prisma.TransactionClient;
 
@@ -27,10 +29,25 @@ async function ultimoIndicato(chiave: string): Promise<number | null> {
   return Number.isFinite(v) && v > 0 ? v : null;
 }
 
+/**
+ * Sezionali per cui NON è stato indicato l'ultimo numero di BConsole (né sono state importate fatture dell'anno): accendere l'emissione
+ * vera così darebbe numeri già usati. Indicare «0» vale come «ancora nessuna fattura in quest'anno».
+ */
+export async function sezionaliSenzaUltimoNumero(anno: number): Promise<string[]> {
+  const mancano: string[] = [];
+  for (const s of SEZIONALI) {
+    const v = await getConfig(chiaveUltimaFattura(s.codice, anno));
+    if (v !== null && v !== undefined && String(v).trim() !== "") continue;
+    const importate = await prisma.fatturaVendita.count({ where: { numero: { contains: `/${s.estensione}/${anno}` } } });
+    if (importate === 0) mancano.push(`${s.nome} (${s.estensione})`);
+  }
+  return mancano;
+}
+
 /** Prossimo numero della fattura nel sezionale e anno: segue BConsole (fatture importate) e l'ultimo numero indicato in Impostazioni. */
 export async function prossimoProgressivoFattura(tx: Tx, sez: string, anno: number, prova: boolean): Promise<number> {
   await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`fatture-${prova ? "prova" : "vere"}-${sez}-${anno}`}))`;
-  const nostre = await tx.fatturaEmessa.findMany({ where: { sezionale: sez, anno, tipo: { not: "PROFORMA" }, stato: prova ? "PROVA" : { in: ["EMESSA", "ANNULLATA"] }, progressivo: { not: null } }, select: { progressivo: true } });
+  const nostre = await tx.fatturaEmessa.findMany({ where: { sezionale: sez, anno, tipo: { not: "PROFORMA" }, stato: prova ? "PROVA" : { in: ["EMESSA", "ANNULLATA", "BOZZA"] }, progressivo: { not: null } }, select: { progressivo: true } });
   const usati = nostre.map((f) => f.progressivo!);
   if (!prova) {
     const est = sezionale(sez).estensione;
@@ -59,22 +76,24 @@ export async function datiCliente(clienteId: string) {
   if (!c) return null;
   const persona = c.tipoAnagrafica === "PERSONA_FISICA" || (!c.piva && !!c.codiceFiscale && c.codiceFiscale.length === 16);
   return {
-    clienteId: c.id, clienteNome: c.nome, persona, nomePersona: c.nomePersona, cognome: c.cognome,
+    clienteId: c.id, clienteNome: persona && c.cognome && c.nomePersona ? `${c.cognome} ${c.nomePersona}` : c.nome, persona, nomePersona: c.nomePersona, cognome: c.cognome,
     partitaIva: c.piva, codiceFiscale: c.codiceFiscale, indirizzo: c.indirizzo, cap: c.cap, comune: c.comune, provincia: c.provincia,
     nazione: (c.isoNazione || c.paese || "IT").slice(0, 2).toUpperCase(), codiceDestinatario: c.codiceDestinatario, pec: c.pec,
-    email: c.emailInvioFatture || c.email, brand: c.brand.nome, metodoPagamento: null as string | null,
+    email: c.emailInvioFatture || c.email, telefono: c.telefono ?? c.cellulare ?? null, brand: c.brand.nome, metodoPagamento: null as string | null,
   };
 }
 
 /** Cosa manca per emettere (fiscale: dati del cliente; sempre: righe e importi). */
-export function controlliEmissione(f: { tipo: string; clienteNome: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; cap: string | null; comune: string | null; nazione: string; persona: boolean; nomePersona: string | null; cognome: string | null }, righe: { descrizione: string; quantita: number; prezzo: number }[]): string[] {
+export function controlliEmissione(f: { tipo: string; clienteNome: string; partitaIva: string | null; codiceFiscale: string | null; indirizzo: string | null; cap: string | null; comune: string | null; nazione: string; persona: boolean; nomePersona: string | null; cognome: string | null; codiceDestinatario?: string | null; pec?: string | null }, righe: { descrizione: string; quantita: number; prezzo: number }[]): string[] {
   const out: string[] = [];
   if (!righe.length) out.push("La fattura non ha righe.");
   if (righe.some((r) => !r.descrizione.trim())) out.push("C'è una riga senza descrizione.");
   if (!tipoFattura(f.tipo).fiscale) return out;
   if (!f.partitaIva && !f.codiceFiscale) out.push("Manca il codice fiscale o la partita IVA del cliente (scheda cliente › Amministrazione).");
-  if (f.codiceFiscale && !/^([A-Z0-9]{16}|\d{11})$/i.test(f.codiceFiscale.trim())) out.push("Il codice fiscale del cliente non sembra valido.");
-  if (f.partitaIva && f.nazione === "IT" && !/^(IT)?\d{11}$/i.test(f.partitaIva.replace(/\s/g, ""))) out.push("La partita IVA del cliente non sembra valida (11 cifre).");
+  if (f.nazione === "IT" && f.codiceFiscale && !codiceFiscaleValido(f.codiceFiscale)) out.push("Il codice fiscale del cliente non è valido (lo SDI scarterebbe la fattura): controllalo nella scheda cliente.");
+  if (f.partitaIva && f.nazione === "IT" && !pivaValida(f.partitaIva)) out.push("La partita IVA del cliente non è valida (11 cifre con cifra di controllo: lo SDI scarterebbe la fattura): controllala nella scheda cliente.");
+  const eCd = erroreCodiceDestinatario(f.codiceDestinatario); if (eCd) out.push(eCd);
+  if (!pecValida(f.pec)) out.push("La PEC del cliente non sembra un indirizzo valido.");
   if (!f.indirizzo || !f.comune || (f.nazione === "IT" && !/^\d{5}$/.test(f.cap ?? ""))) out.push("Manca l'indirizzo completo del cliente (via, CAP, comune).");
   return out;
 }
@@ -83,8 +102,8 @@ export function controlliEmissione(f: { tipo: string; clienteNome: string; parti
 export async function ricalcolaFattura(tx: Tx, id: string) {
   const f = await tx.fatturaEmessa.findUniqueOrThrow({ where: { id }, include: { righe: true } });
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
-  return tx.fatturaEmessa.update({ where: { id }, data: { imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo } });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
+  return tx.fatturaEmessa.update({ where: { id }, data: { imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, ritenutaImporto: t.ritenuta } });
 }
 
 /** IBAN del conto in Amministrazione › Banche con quel nome di banca (se c'è). */
@@ -110,17 +129,21 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   // la proforma non è un documento fiscale: numerazione a parte, mai nelle vendite
   const proforma = !tf.fiscale;
   const prova = !reale && !proforma;
-  const progressivo = proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
-  const numero = proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
+  if (prova && f.numero !== null && f.progressivo !== null && !f.numero.startsWith("PROVA")) throw new Error(`La fattura ${f.numero} ha già un numero vero: si riemette solo con l'emissione vera accesa (altrimenti perderebbe il suo numero).`);
+  // fattura riaperta per una correzione: mantiene il suo numero (la numerazione fiscale non si tocca)
+  const riaperta = !proforma && !prova && f.numero !== null && f.progressivo !== null;
+  const progressivo = riaperta ? f.progressivo! : proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
+  const numero = riaperta ? f.numero! : proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
+  if (!prova && !proforma && !riaperta) await controllaDataFattura(tx, f.sezionale, anno, f.data, progressivo);
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
   const iban = f.iban ?? (metodoPagamento(f.metodoPagamento).banca ? await ibanDi(tx, f.banca) : null);
-  const rate = tf.notaCredito || t.totale <= 0 ? [] : rateDaMetodo(f.metodoPagamento, f.data, t.totale);
+  const rate = tf.notaCredito || t.totale <= 0 ? [] : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const collegata = f.fatturaCollegataId ? await tx.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { numero: true, data: true } }) : null;
   const xml = tf.fiscale ? xmlFatturaPA({
-    progressivoInvio: `${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
+    progressivoInvio: `${anno}${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
     cliente: { denominazione: f.clienteNome, persona: f.persona, nome: f.nomePersona, cognome: f.cognome, partitaIva: f.partitaIva, codiceFiscale: f.codiceFiscale, nazione: f.nazione, indirizzo: f.indirizzo, cap: f.cap, comune: f.comune, provincia: f.provincia, codiceDestinatario: f.codiceDestinatario, pec: f.pec },
-    righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo,
+    righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase,
     pagamento: rate.length ? { metodo: f.metodoPagamento, iban, istituto: f.banca, rate } : null,
     ddt: f.ddt.filter((d) => d.numero).map((d) => ({ numero: `${d.numero}/${d.anno}`, data: d.data })),
     fatturaCollegata: collegata?.numero ? { numero: collegata.numero, data: collegata.data } : null,
@@ -140,6 +163,11 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
       },
     });
     if (!tf.notaCredito && t.totale > 0) await creaScadenzeVendita(tx, fv.id);
+    if (tf.notaCredito && f.fatturaCollegataId) {
+      const orig = await tx.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { fatturaVenditaId: true } });
+      if (orig?.fatturaVenditaId) await riduciIncassiConNota(tx, orig.fatturaVenditaId, t.totale, numero);
+    }
+    if (t.ritenuta > 0) await tx.scadenza.updateMany({ where: { fatturaVenditaId: fv.id, origine: "FATTURA_VENDITA" }, data: { note: `Ritenuta d'acconto ${f.ritenutaAliquota}% su ${f.ritenutaBase ?? 100}%: ${t.ritenuta.toFixed(2).replace(".", ",")} € trattenuti dal cliente. Da incassare ${t.daPagare.toFixed(2).replace(".", ",")} €.` } });
     fatturaVenditaId = fv.id;
   }
   // DDT: righe fatturate e stato
@@ -153,9 +181,45 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
     where: { id },
     data: {
       stato: prova ? "PROVA" : "EMESSA", progressivo, anno, numero, xml, iban, rate: rate.map((r) => ({ data: r.data.toISOString(), importo: r.importo })),
-      imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, fatturaVenditaId, emessaDaNome: nome, emessaIl: new Date(),
+      imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, ritenutaImporto: t.ritenuta, fatturaVenditaId, emessaDaNome: nome, emessaIl: new Date(),
     },
   });
+}
+
+/**
+ * La data deve seguire la numerazione: non nel futuro e non prima della fattura precedente dello stesso sezionale e anno
+ * (la numerazione è progressiva e le date non possono tornare indietro).
+ */
+async function controllaDataFattura(tx: Tx, sez: string, anno: number, data: Date, progressivo: number) {
+  const giornoRoma = (d: Date) => d.toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" });
+  if (giornoRoma(data) > giornoRoma(new Date())) throw new Error("La data della fattura è nel futuro: usa la data di oggi.");
+  const prima = await tx.fatturaEmessa.findFirst({ where: { sezionale: sez, anno, stato: "EMESSA", tipo: { not: "PROFORMA" }, progressivo: { lt: progressivo } }, orderBy: { progressivo: "desc" }, select: { numero: true, data: true } });
+  if (prima && giornoRoma(data) < giornoRoma(prima.data)) throw new Error(`La data è precedente a quella della fattura n. ${prima.numero} (${prima.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}): i numeri devono seguire le date. Metti una data uguale o successiva.`);
+}
+
+/**
+ * Una nota di credito abbassa ciò che il cliente deve ancora pagare sulla fattura stornata: toglie dalle ultime rate ancora da incassare
+ * (mai sotto quanto già pagato). Se il cliente ha già pagato più del dovuto resta un credito da restituire (lo dice la nota della rata).
+ */
+export async function riduciIncassiConNota(tx: Tx, fatturaVenditaId: string, importoNota: number, numeroNota: string) {
+  let resto = cent(Math.abs(importoNota));
+  const scad = await tx.scadenza.findMany({ where: { fatturaVenditaId, tipo: "INCASSO", stato: { in: ["APERTA", "PARZIALE"] } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { dataScadenza: "desc" } });
+  for (const s of scad) {
+    if (resto <= 0) break;
+    const residuo = residuoScadenza(s);
+    if (residuo <= 0) continue;
+    const togli = Math.min(residuo, resto);
+    const nuovoImporto = cent(s.importo - togli);
+    const nota = `${s.note ? s.note + "\n" : ""}Ridotta di ${togli.toFixed(2).replace(".", ",")} € dalla nota di credito ${numeroNota}.`;
+    const pagato = cent(s.importo - residuo);
+    if (pagato <= 0 && nuovoImporto <= 0) await tx.scadenza.update({ where: { id: s.id }, data: { stato: "ANNULLATA", note: nota } });
+    else await tx.scadenza.update({ where: { id: s.id }, data: { importo: nuovoImporto, stato: cent(nuovoImporto - pagato) <= 0 ? "PAGATA" : s.stato, note: nota } });
+    resto = cent(resto - togli);
+  }
+  if (resto > 0) {
+    const ultima = await tx.scadenza.findFirst({ where: { fatturaVenditaId, tipo: "INCASSO" }, orderBy: { dataScadenza: "desc" } });
+    if (ultima) await tx.scadenza.update({ where: { id: ultima.id }, data: { note: `${ultima.note ? ultima.note + "\n" : ""}La nota di credito ${numeroNota} supera quanto ancora da incassare: ${resto.toFixed(2).replace(".", ",")} € sono un credito del cliente (da restituire o compensare).` } });
+  }
 }
 
 /** Righe proposte dall'offerta della commessa (descrizione dei prodotti con il loro importo IVA esclusa). */
@@ -169,14 +233,16 @@ export async function righeDaOfferta(preventivoId: string) {
   // sconto dell'offerta spalmato sulle righe (totaleNetto = imponibile già scontato)
   const lordo = p.righe.reduce((t, r) => t + r.quantita * r.prezzoUnitario + r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0), 0);
   const fattore = lordo > 0 && p.totaleNetto > 0 ? p.totaleNetto / lordo : 1;
+  // misure definitive di produzione (ordine al fornitore): in fattura devono coincidere con quelle delle certificazioni del fornitore
+  const definitive = new Map((await prisma.rigaOrdine.findMany({ where: { rigaPreventivoId: { in: p.righe.map((r) => r.id) }, misureDefinitive: { not: null } }, select: { rigaPreventivoId: true, misureDefinitive: true } })).map((x) => [x.rigaPreventivoId!, x.misureDefinitive!]));
   return p.righe.map((r) => {
     const opt = r.optionali.map((o) => o.optional.nome).join(", ");
     const nomeProd = r.testoLibero ?? (r.prodotto ? `${r.prodotto.tipologia.replace(/_/g, " ")} ${r.prodotto.colore}`.trim() : "Voce");
-    const misura = r.misuraLarghezza ? ` ${r.misuraLarghezza}${r.misuraAltezza ? `×${r.misuraAltezza}` : ""}` : "";
+    const misura = definitive.has(r.id) ? ` ${definitive.get(r.id)}` : r.misuraLarghezza ? ` ${r.misuraLarghezza}${r.misuraAltezza ? `×${r.misuraAltezza}` : ""}` : "";
     const unit = r.quantita ? (r.prezzoUnitario + (r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0)) / r.quantita) * fattore : 0;
     return {
       descrizione: `${r.descrizionePersonalizzata && !r.testoLibero ? r.descrizionePersonalizzata.split("\n")[0].slice(0, 200) : nomeProd}${misura}${opt ? ` — con ${opt}` : ""}`.slice(0, 900),
-      quantita: r.quantita, um: "pz", prezzo: cent(unit), aliquota, natura: null as string | null,
+      quantita: r.quantita, um: "pz", prezzo: r.quantita > 0 ? Math.round((cent(unit * r.quantita) / r.quantita) * 1e8) / 1e8 : cent(unit), aliquota: r.aliquotaIva ?? aliquota, natura: null as string | null,
     };
   }).filter((r) => r.prezzo !== 0 || r.descrizione);
 }
@@ -196,7 +262,7 @@ export async function datiPdfFattura(id: string) {
     dati: {
       tipo: f.tipo, numero: f.numero ?? "BOZZA", data: f.data, stato: f.stato, cliente: { nome: f.clienteNome, righe: righeCliente(f) }, righe: f.righe,
       causale: causaleConCointestato(f.causale, cointestatarioDa(f.cointestatario)), riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban, rate,
-      bollo, addebitoBollo: f.addebitoBollo, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
+      bollo, addebitoBollo: f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
       fatturaCollegata: collegata?.numero ? `${collegata.numero} del ${collegata.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : null, destinazione: f.destinazione,
       trasporto: { causale: f.causaleTrasporto, aCura: ({ MITTENTE: "Mittente", DESTINATARIO: "Destinatario", VETTORE: "Vettore" } as Record<string, string>)[f.trasportoACura ?? ""] ?? f.trasportoACura, vettore: f.vettore, aspetto: f.aspettoBeni, colli: f.colli, peso: f.pesoLordo, porto: f.porto, inizio: f.inizioTrasporto },
     },
@@ -217,4 +283,16 @@ export async function datiPdfDdt(id: string) {
       colli: d.colli, pesoLordo: d.pesoLordo, pesoNetto: d.pesoNetto, volume: d.volume, porto: d.porto, inizio: d.inizioTrasporto,
     },
   };
+}
+
+
+/** Una fattura emessa si può riaprire per correggerla se non è stata inviata allo SDI e il cliente non ha pagato nulla. Ritorna il motivo del no, o null. */
+export async function motivoNoRiapertura(f: { id: string; stato: string; tipo: string; inviataSdiIl: Date | null; fatturaVenditaId: string | null }): Promise<string | null> {
+  if (f.stato !== "EMESSA") return "Solo le fatture emesse si riaprono.";
+  if (!tipoFattura(f.tipo).fiscale) return "Documento non fiscale.";
+  if (f.inviataSdiIl) return "È già stata inviata allo SDI: si corregge con una nota di credito.";
+  if (!f.fatturaVenditaId) return null;
+  const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: f.fatturaVenditaId }, include: { abbinamenti: { select: { id: true } } } });
+  if (scad.some((s) => s.abbinamenti.length > 0 || s.pagatoManuale > 0 || s.ritenuta > 0 || s.pagataIl)) return "Ci sono già incassi registrati su questa fattura: si corregge con una nota di credito.";
+  return null;
 }

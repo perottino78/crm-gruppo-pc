@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { headers } from "next/headers";
+import { TESTO_CONSENSO_MARKETING } from "@/lib/privacy/informativa";
 import { notFound, redirect } from "next/navigation";
 import { BRANDS } from "@/lib/brands";
 import { registraLead, slugBrand } from "@/lib/leadIngest";
@@ -32,6 +34,9 @@ export default async function Pagina({
     // honeypot anti-spam
     if (String(fd.get("sito") ?? "")) redirect(`/richiedi/${slug}?grazie=1`);
     if (fd.get("privacy") !== "on") redirect(`/richiedi/${slug}?errore=privacy`);
+    const h = await headers();
+    const ip = h.get("x-forwarded-for")?.split(",")[0].trim() || h.get("x-real-ip") || null;
+    const consensoMarketing = fd.get("marketing") === "on" ? { fonte: "MODULO_RICHIEDI", testo: TESTO_CONSENSO_MARKETING, ip } : null;
     const nome = String(fd.get("nome") ?? "");
     const tel = String(fd.get("telefono") ?? "");
     const email = String(fd.get("email") ?? "");
@@ -42,6 +47,7 @@ export default async function Pagina({
       brand: b!.nome,
       fonte: String(fd.get("fonte") ?? "facebook"),
       prodotto: String(fd.get("interesse") ?? "") || null,
+      consensoMarketing,
       note: [String(fd.get("interesse") ?? ""), String(fd.get("campagna") ?? "") && `Campagna: ${fd.get("campagna")}`, String(fd.get("messaggio") ?? "")]
         .filter(Boolean)
         .join(" · "),
@@ -85,7 +91,11 @@ export default async function Pagina({
             <input type="hidden" name="campagna" value={campagna} />
             <label className="flex gap-2 text-xs text-neutral-600 items-start">
               <input type="checkbox" name="privacy" className="mt-0.5" />
-              <span>Acconsento al trattamento dei miei dati per essere ricontattato, ai sensi del Reg. UE 2016/679 (GDPR).</span>
+              <span>Ho letto l&apos;<a href="/privacy" target="_blank" className="underline">informativa privacy</a> e accetto che i miei dati siano trattati per rispondere alla mia richiesta e per essere ricontattato. *</span>
+            </label>
+            <label className="flex gap-2 text-xs text-neutral-600 items-start">
+              <input type="checkbox" name="marketing" className="mt-0.5" />
+              <span>{TESTO_CONSENSO_MARKETING} (facoltativo)</span>
             </label>
             <button
               className="w-full text-white font-extrabold text-lg rounded-xl py-3.5"

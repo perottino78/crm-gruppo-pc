@@ -55,7 +55,7 @@ async function main() {
   const brand = await prisma.brand.create({ data: { nome: "P&C" } });
   const ugo = await prisma.utente.create({ data: { nome: "Ugo", email: "ugo@x.it", username: "ugo", ruolo: "AMMINISTRATORE" } });
   const rocco = await prisma.utente.create({ data: { nome: "Rocco", email: "marketing@x.it", username: "mpec", ruolo: "MARKETING" } });
-  await prisma.cliente.create({ data: { nome: "ROSSI MARIO", nomePersona: "Mario", email: "mario@rossi.it", brandId: brand.id } });
+  await prisma.cliente.create({ data: { nome: "ROSSI MARIO", nomePersona: "Mario", email: "mario@rossi.it", brandId: brand.id, consensoMarketingIl: new Date() } });
   await prisma.cliente.create({ data: { nome: "Bianchi Anna", nomePersona: "Anna", email: "anna@bianchi.it", brandId: brand.id } });
 
   console.log("1. Campagna con preheader e template HTML caricato da file");

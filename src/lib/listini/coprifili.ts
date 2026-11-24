@@ -9,7 +9,9 @@
 import dati from "../../../prisma/seed-data/coprifili_exte.json";
 
 export const PREFISSO_COPRIFILI = "COPRIF_";
-export const GRUPPO_COPRIFILI = "COPRIFILI E ANGOLARI";
+// Ugo 22/11/2026: stanno in INDOOR › SERRAMENTI (sottogruppo PVC), scelti con due tendine: tipo di profilo → misura, poi colore e lunghezza.
+export const GRUPPO_COPRIFILI = "SERRAMENTI";
+export const SOTTOGRUPPO_COPRIFILI = "Coprifili PVC — Listino completo";
 export const FORNITORE_COPRIFILI = "EXTE";
 /** Vendita = costo EXTE × 2, come la lattoneria (da cambiare con gli Aumenti listini se serve). */
 export const RICARICO_COPRIFILI = 2;
@@ -80,6 +82,22 @@ export const COLORI_COPRIFILI: { nome: string; fascia: FasciaColoreCoprifili; so
   { nome: "Rosso vino RAL 3005 (WR)", fascia: "PELLICOLATO", sovrapprezzo: 15 },
   { nome: "Winchester (WIN-C)", fascia: "PELLICOLATO", sovrapprezzo: 15 },
   { nome: "Crema RAL 9001 (CWP)", fascia: "PELLICOLATO", sovrapprezzo: 15 },
+  // Ugo 22/11/2026: pellicole super opache (gamma a stock, goffratura 102201), fascia «pellicolato +20%».
+  { nome: "Amaranth Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Cayenne Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Chia Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Cinnamon Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Coriander Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Crystal White 9294 super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Ginger Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Grey Amanita Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Honey Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Loire Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Nutmeg Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Pepper Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Sesame Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Truffle Oak super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
+  { nome: "Weissbach Eiche super opaco", fascia: "PELLICOLATO", sovrapprezzo: 20 },
   { nome: "Altro colore pellicolato +15% (scrivi il colore)", fascia: "PELLICOLATO", sovrapprezzo: 15 },
   { nome: "Altro colore pellicolato +20% (scrivi il colore)", fascia: "PELLICOLATO", sovrapprezzo: 20 },
   { nome: "Altro colore pellicolato +50% (scrivi il colore)", fascia: "PELLICOLATO", sovrapprezzo: 50 },
@@ -101,30 +119,37 @@ export function costoCoprifiloAlMetro(a: ArticoloCoprifilo, c: (typeof COLORI_CO
 }
 
 /** Nome della variante (lo vede anche il cliente: niente prezzi del fornitore). */
-export const coloreCoprifilo = (nome: string) => `${nome} — al metro`;
+// Ugo 22/11/2026: sono barre da 6000 mm e si compra la barra intera (il listino EXTE è al metro): il prezzo della variante è PER BARRA = prezzo al metro × 6.
+export const LUNGHEZZA_BARRA_M = 6;
+export const coloreCoprifilo = (nome: string) => `${nome} — barra da 6 m`;
 
 export function catalogoCoprifili(ricarico = RICARICO_COPRIFILI) {
   const prodotti = ARTICOLI_COPRIFILI.flatMap((a) =>
     COLORI_COPRIFILI.flatMap((c) => {
       const costo = costoCoprifiloAlMetro(a, c);
-      return costo == null ? [] : [{ tipologia: tipologiaCoprifilo(a.codice), colore: coloreCoprifilo(c.nome), larghezzaMm: 0, altezzaMm: 0, prezzoBase: r2(costo * ricarico) }];
+      return costo == null ? [] : [{ tipologia: tipologiaCoprifilo(a.codice), colore: coloreCoprifilo(c.nome), larghezzaMm: 0, altezzaMm: 0, prezzoBase: r2(costo * LUNGHEZZA_BARRA_M * ricarico) }];
     }));
   const modelli = ARTICOLI_COPRIFILI.map((a) => ({
     tipologia: tipologiaCoprifilo(a.codice),
     codiceFornitore: a.codice,
-    sottogruppo: SOTTOGRUPPI_COPRIFILI[a.sezione],
+    sottogruppo: SOTTOGRUPPO_COPRIFILI,
     descrizioneTecnica:
       `${nomeCoprifilo(a)}: profilo in PVC per la posa dei serramenti (per esterni ed interni), barre da 6 m, confezioni da 60 m. ` +
-      `Prezzo al metro lineare. Colori: bianco${a.per100m.protettiva != null ? ", bianco con pellicola protettiva" : ""}, bianco Salamander` +
+      `Si vende a barra intera da 6 m (6000 mm): il prezzo è per barra (prezzo al metro × 6). Colori: bianco${a.per100m.protettiva != null ? ", bianco con pellicola protettiva" : ""}, bianco Salamander` +
       (a.per100m.rivestito != null ? ", pellicolato in tinta unita o effetto legno (pellicolati da 60 m in su)." : "; pellicolato non disponibile a catalogo."),
   }));
   return { prodotti, modelli };
 }
 
-export const sottogruppoCoprifilo = (tipologia: string) => {
+export const sottogruppoCoprifilo = (tipologia: string) => (articoloCoprifilo(tipologia) ? SOTTOGRUPPO_COPRIFILI : null);
+
+/** Le due tendine: «Tipo di profilo» (coprifilo piatto, angolare…) e «Misura». */
+export function assiSelezioneCoprifili(tipologia: string): { modello: { valore: string; label: string }; apertura: { valore: string; label: string } } | null {
   const a = articoloCoprifilo(tipologia);
-  return a ? SOTTOGRUPPI_COPRIFILI[a.sezione] : null;
-};
+  if (!a) return null;
+  const misura = nomeCoprifilo(a).replace(/^(Coprifilo|Listello|Angolare|Scatolato)[^0-9]*?(?=\d)/i, "").trim() || nomeCoprifilo(a);
+  return { modello: { valore: a.sezione, label: SOTTOGRUPPI_COPRIFILI[a.sezione] }, apertura: { valore: a.codice, label: misura } };
+}
 /** Nome leggibile (offerta, ricerca dei complementi): «Coprifilo piatto 30 x 2,5» al posto di «Listello piatto…», con il codice EXTE. */
 export const nomeCoprifilo = (a: ArticoloCoprifilo) =>
   `${a.descrizione.replace(/^Listello (piatto|scatolato)/, "Coprifilo $1").replace(/^Listello (piegabile|flessibile)/, "Coprifilo $1")} (EXTE ${a.codice})`;
@@ -134,5 +159,5 @@ export const labelCoprifilo = (tipologia: string) => {
 };
 
 export const GUIDA_COPRIFILI =
-  "Coprifili e angolari EXTE al metro (barre da 6 m): scrivi la lunghezza di ogni pezzo in cm e quanti pezzi. Nell'ordine al fornitore il costo previsto è il " +
+  "Coprifili e angolari EXTE in barre da 6 m (6000 mm): si compra la barra intera, il prezzo mostrato è per barra (listino al metro × 6). Scrivi quante barre. Nell'ordine al fornitore il costo previsto è il " +
   "listino EXTE; per un pellicolato non in elenco scegli «Altro colore pellicolato» e scrivi il colore.";

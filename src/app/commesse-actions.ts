@@ -1,5 +1,6 @@
 "use server";
 
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 import { puo } from "@/lib/permessi/catalogo";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { daOraRoma } from "@/lib/calendario/tempo";
@@ -45,20 +46,8 @@ function puoGestireIncassi(ruolo?: string | null) {
   return ruolo === "AMMINISTRATORE" || ruolo === "AMMINISTRATIVO";
 }
 
-// Ricalcola lo stato della commessa nella fase acconto + rilievo
-async function ricalcolaStato(commessaId: string) {
-  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, include: { rilievi: true } });
-  if (!c || ["ANNULLATA", "CHIUSA", "ORDINI", "POSA", "SALDO_INCASSATO", "LAVORI_ESEGUITI"].includes(c.stato)) return;
-  const viaLibera = !!(await statoSogliaRilievo(c.id))?.viaLibera;
-  let stato = "IN_ATTESA_ACCONTO";
-  if (viaLibera) {
-    const attivi = c.rilievi.filter((r) => r.stato !== "ANNULLATO");
-    if (attivi.some((r) => r.stato === "ESEGUITO")) stato = "RILIEVO_ESEGUITO";
-    else if (attivi.some((r) => r.stato === "PROGRAMMATO")) stato = "RILIEVO_PROGRAMMATO";
-    else stato = "RILIEVO_DA_PROGRAMMARE";
-  }
-  if (stato !== c.stato) await prisma.commessa.update({ where: { id: c.id }, data: { stato } });
-}
+// Ricalcola lo stato della commessa nella fase acconto + rilievo (logica condivisa in src/lib/pratica/stato-server.ts)
+const ricalcolaStato = ricalcolaStatoCommessa;
 
 async function apriCommessa(preventivoId: string, utenteNome: string): Promise<string | null> {
   const p = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { commessa: true } });
@@ -1282,6 +1271,120 @@ export async function prendiInCaricoOrdineBC(formData: FormData) {
   redirect(`/commesse/${c.id}?ok=${encodeURIComponent(`Pratica presa in carico da BConsole: il task è passato a ${f!.nome}`)}`);
 }
 
+
+/**
+ * Mette i prodotti e i prezzi di un'offerta già fatta in ONE dentro la pratica presa da BConsole (Ugo 22/11/2026: «inserire l'offerta direttamente
+ * in quella di BConsole, quella di ONE è già a livello di prodotti e prezzi»). L'offerta di ONE (anche se ha una sua pratica) resta com'è e viene COPIATA
+ * nell'offerta della pratica al posto delle righe di testo dell'import; i totali della pratica (quelli di BConsole) non cambiano.
+ */
+export async function agganciaOffertaONE(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const { puo } = await import("@/lib/permessi/catalogo");
+  const commessaId = str(formData, "commessaId") ?? "";
+  const preventivoId = str(formData, "preventivoId") ?? "";
+  const torna = (m: Record<string, string>) => redirect(`/commesse/${commessaId}?${new URLSearchParams(m)}#progetto`);
+  if (!puo(u, "amministrazione") && !puo(u, "provvigioni") && !puo(u, "ordini")) torna({ avviso: "Non hai il permesso di inserire l'offerta" });
+  const c = await prisma.commessa.findUnique({ where: { id: commessaId }, select: { id: true, clienteId: true, ordineBC: true, preventivoId: true, ordiniFornitore: { select: { id: true } }, righeOrdine: { select: { id: true, ordinato: true } } } });
+  if (!c || !c.ordineBC) torna({ avviso: "Si può usare solo su una pratica presa da BConsole" });
+  if (c!.ordiniFornitore.length || c!.righeOrdine.some((r) => r.ordinato)) torna({ avviso: "Ci sono già ordini ai fornitori: il materiale non si cambia più da qui" });
+  const orig = await prisma.preventivo.findUnique({ where: { id: preventivoId }, include: { sezioni: true, righe: { include: { optionali: true } }, commessa: { select: { id: true, ordineBC: true } } } });
+  if (!orig || orig.clienteId !== c!.clienteId) torna({ avviso: "Questa offerta non è di questo cliente" });
+  if (orig!.id === c!.preventivoId) torna({ avviso: "È già l'offerta di questa pratica" });
+  if (!orig!.righe.length) torna({ avviso: "L'offerta scelta non ha prodotti" });
+  const dest = c!.preventivoId;
+  try {
+    await prisma.$transaction(async (tx) => {
+      // via le righe di testo dell'import (e il materiale non ancora ordinato che ne derivava)
+      await tx.rigaOrdine.deleteMany({ where: { commessaId: c!.id, ordinato: false, complemento: false } });
+      await tx.rigaPreventivo.deleteMany({ where: { preventivoId: dest } });
+      await tx.sezionePreventivo.deleteMany({ where: { preventivoId: dest } });
+      await tx.preventivo.update({ where: { id: dest }, data: {
+        aliquotaIva: orig!.aliquotaIva, scontoPercentuale: orig!.scontoPercentuale, prezzoManualeAttivo: orig!.prezzoManualeAttivo, prezzoManualeTotale: orig!.prezzoManualeTotale,
+        immagineCopertinaUrl: orig!.immagineCopertinaUrl, condizioniPagamento: orig!.condizioniPagamento ?? undefined, condizioniConsegna: orig!.condizioniConsegna ?? undefined,
+      } });
+      const mappa = new Map<string, string>();
+      for (const sez of orig!.sezioni) mappa.set(sez.id, (await tx.sezionePreventivo.create({ data: { preventivoId: dest, nome: sez.nome, ordine: sez.ordine } })).id);
+      for (const r of orig!.righe) {
+        const nr = await tx.rigaPreventivo.create({ data: {
+          preventivoId: dest, prodottoId: r.prodottoId, testoLibero: r.testoLibero, quantita: r.quantita, prezzoUnitario: r.prezzoUnitario,
+          optionalDescrizione: r.optionalDescrizione, optionalPrezzo: r.optionalPrezzo, mostraDescrizione: r.mostraDescrizione, allegaScheda: r.allegaScheda,
+          misuraLarghezza: r.misuraLarghezza, misuraAltezza: r.misuraAltezza, descrizionePersonalizzata: r.descrizionePersonalizzata, ordine: r.ordine,
+          sezioneId: r.sezioneId ? mappa.get(r.sezioneId) ?? null : null,
+        } });
+        if (r.optionali.length) await tx.rigaOptional.createMany({ data: r.optionali.map((o) => ({ rigaId: nr.id, optionalId: o.optionalId, quantita: o.quantita, prezzoUnitario: o.prezzoUnitario, nota: o.nota })) });
+      }
+    }, { timeout: 30000 });
+  } catch (e) {
+    console.error("agganciaOffertaONE", e);
+    torna({ avviso: `Non sono riuscito a inserire l'offerta (${(e instanceof Error ? e.message : String(e)).split("\n").filter(Boolean).slice(-2).join(" ").slice(0, 300)}). Non è stato cambiato nulla.` });
+  }
+  try {
+    const { ricalcolaTotali } = await import("@/lib/preventivi/totali");
+    await ricalcolaTotali(dest);
+    await assicuraRigheOfferta(c!.id);
+  } catch (e) {
+    console.error("agganciaOffertaONE dopo la copia", e);
+    torna({ avviso: `Le righe sono state copiate ma il materiale non si è aggiornato (${(e instanceof Error ? e.message : String(e)).split("\n").filter(Boolean).slice(-2).join(" ").slice(0, 300)}).` });
+  }
+  // «teniamo solo quella di BConsole e l'altra la cancelliamo» (Ugo 22/11/2026): la pratica di ONE nata dalla stessa offerta si toglie, ma solo se è ancora vuota
+  let nota = "";
+  const altra = orig!.commessa;
+  if (formData.get("eliminaAltra") === "1" && altra && altra.id !== c!.id && !altra.ordineBC) {
+    const a = await prisma.commessa.findUnique({ where: { id: altra.id }, select: { ordiniFornitore: { select: { id: true } }, pose: { select: { id: true } }, assistenze: { select: { id: true } }, rilievi: { select: { stato: true } }, righeOrdine: { select: { ordinato: true } } } });
+    const nFatture = await prisma.fatturaVendita.count({ where: { commessaId: altra.id } });
+    const nScad = await prisma.scadenza.count({ where: { commessaId: altra.id, OR: [{ pagatoManuale: { gt: 0 } }, { stato: "PAGATA" }] } });
+    const vuota = a && !a.ordiniFornitore.length && !a.pose.length && !a.assistenze.length && !nFatture && !nScad && !a.rilievi.some((r) => r.stato === "ESEGUITO") && !a.righeOrdine.some((r) => r.ordinato);
+    if (!vuota) nota = " L'altra pratica di ONE non è stata cancellata perché ha già ordini, rilievi eseguiti, pose o incassi.";
+    else {
+      try {
+        await prisma.$transaction(async (tx) => {
+          const rilievi = await tx.rilievo.findMany({ where: { commessaId: altra.id }, select: { id: true } });
+          await tx.rilievoAllegato.deleteMany({ where: { rilievoId: { in: rilievi.map((r) => r.id) } } });
+          await tx.rilievo.deleteMany({ where: { commessaId: altra.id } });
+          await tx.commessaEvento.deleteMany({ where: { commessaId: altra.id } });
+          await tx.faseCommessa.deleteMany({ where: { commessaId: altra.id } });
+          await tx.taskPratica.deleteMany({ where: { commessaId: altra.id } });
+          await tx.rigaOrdine.deleteMany({ where: { commessaId: altra.id } });
+          await tx.costoManuale.deleteMany({ where: { commessaId: altra.id } });
+          await tx.scadenza.deleteMany({ where: { commessaId: altra.id } });
+          await tx.documento.deleteMany({ where: { entita: "COMMESSA", entitaId: altra.id } });
+          await tx.commessa.delete({ where: { id: altra.id } });
+        });
+        nota = " L'altra pratica di ONE è stata cancellata.";
+      } catch { nota = " L'altra pratica di ONE non si è potuta cancellare (ha dati collegati): chiedimelo e la tolgo a mano."; }
+    }
+  }
+  // e anche l'offerta di ONE (nel cestino 30 giorni) se non ha più una pratica
+  if (formData.get("eliminaAltra") === "1") {
+    const ancora = await prisma.commessa.count({ where: { preventivoId: orig!.id } });
+    if (ancora) nota += " L'offerta di ONE resta perché la sua pratica è ancora lì.";
+    else {
+      try {
+        const { mettiNelCestino } = await import("@/lib/cestino");
+        await mettiNelCestino("PREVENTIVO", orig!.id, { id: u.id, nome: u.nome });
+        const solaris = await prisma.solarisProgetto.findMany({ where: { preventivoId: orig!.id }, select: { id: true } });
+        const idRighe = (await prisma.rigaPreventivo.findMany({ where: { preventivoId: orig!.id }, select: { id: true } })).map((x) => x.id);
+        await prisma.$transaction([
+          prisma.documento.deleteMany({ where: { entita: "RIGA_PREVENTIVO", entitaId: { in: idRighe } } }),
+          prisma.solarisFoto.deleteMany({ where: { progettoId: { in: solaris.map((x) => x.id) } } }),
+          prisma.solarisProgetto.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.emailOfferta.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.rigaOptional.deleteMany({ where: { riga: { preventivoId: orig!.id } } }),
+          prisma.rigaPreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.sezionePreventivo.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.promemoriaInviato.deleteMany({ where: { preventivoId: orig!.id } }),
+          prisma.preventivo.delete({ where: { id: orig!.id } }),
+        ]);
+        nota += " L'offerta di ONE è stata cancellata (resta 30 giorni nel cestino).";
+      } catch (e) { console.error("agganciaOffertaONE elimina offerta", e); nota += " L'offerta di ONE non si è potuta cancellare."; }
+    }
+  }
+  await log(c!.id, `Prodotti e prezzi dell'offerta di ONE ${orig!.numeroOfferta ?? ""} inseriti nella pratica di BConsole da ${u.nome} (${orig!.righe.length} righe): il materiale è quello dell'offerta.`);
+  revalidatePath(`/commesse/${c!.id}`);
+  redirect(`/commesse/${c!.id}?fatto=${encodeURIComponent("Offerta di ONE inserita: prodotti e prezzi sono nella pratica." + nota)}#progetto`);
+}
+
 // ============ DISTINTA BASE (KIT) ============
 /**
  * Aggiunge al materiale della pratica i pezzi della distinta base del modello di una riga (solo acquisto).
@@ -1462,17 +1565,56 @@ export async function aggiungiComplemento(formData: FormData) {
 }
 
 /** Toglie un complemento non ancora messo in un ordine al fornitore. */
-export async function eliminaComplemento(formData: FormData) {
+// Righe di materiale aggiunte a mano («complementi») nella pratica: togli, modifica e duplica, finché non sono ordinate (Ugo 22/11/2026).
+async function complementoLibero(formData: FormData) {
   const u = await getCurrentUser();
   if (!u) redirect("/login");
   const id = str(formData, "rigaId");
-  if (!id) return;
-  const r = await prisma.rigaOrdine.findUnique({ where: { id } });
-  if (!r || !r.complemento || r.ordineFornitoreId || !r.commessaId) return;
-  await prisma.rigaOrdine.delete({ where: { id } });
-  await log(r.commessaId, `Tolto il complemento «${r.descrizione}».`);
-  revalidatePath(`/commesse/${r.commessaId}`);
+  const r = id ? await prisma.rigaOrdine.findUnique({ where: { id } }) : null;
+  const dove = (m: string, ok = false) => redirect(`/commesse/${r?.commessaId ?? str(formData, "commessaId") ?? ""}?${ok ? "fattoMateriale" : "avviso"}=${encodeURIComponent(m)}&passo=MATERIALE#evasione`);
+  if (!r || !r.commessaId) redirect("/commesse");
+  if (!r.complemento) dove("Si possono cambiare solo le righe aggiunte a mano; quelle dell'offerta si cambiano nell'offerta.");
+  if (r.ordineFornitoreId || r.ordinato || r.daMagazzino) dove("Questa riga è già stata ordinata: non si cambia più.");
+  return { r: r!, u, dove };
 }
+
+export async function eliminaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  await prisma.rigaOrdine.deleteMany({ where: { OR: [{ id: r.id }, { kitDiId: r.id, ordinato: false }] } });
+  await log(r.commessaId!, `Tolto il materiale «${r.descrizione}».`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Tolto: ${r.descrizione}`, true);
+}
+
+export async function duplicaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  const { id: _i, createdAt: _c, ...dati } = r;
+  void _i; void _c;
+  await prisma.rigaOrdine.create({ data: { ...dati, kitDiId: null, createdAt: new Date() } });
+  await log(r.commessaId!, `Duplicato il materiale «${r.descrizione}».`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Duplicato: ${r.descrizione}`, true);
+}
+
+export async function modificaComplemento(formData: FormData) {
+  const { r, dove } = await complementoLibero(formData);
+  const desc = (str(formData, `desc_${r.id}`) ?? "").trim();
+  const q = Math.round(Number((str(formData, `qta_${r.id}`) ?? "").replace(",", ".")));
+  const note = (str(formData, `note_${r.id}`) ?? "").trim();
+  if (!desc) dove("Scrivi la descrizione.");
+  if (!Number.isFinite(q) || q < 1) dove("La quantità deve essere almeno 1.");
+  // il costo previsto è sul totale della riga: segue la quantità
+  const costo = r.costoPrevisto != null && r.quantita > 0 ? Math.round((r.costoPrevisto / r.quantita) * q * 100) / 100 : r.costoPrevisto;
+  await prisma.rigaOrdine.update({ where: { id: r.id }, data: { descrizione: desc.slice(0, 500), quantita: q, note: note || null, costoPrevisto: costo } });
+  await log(r.commessaId!, `Modificato il materiale «${desc}» (${q} pz).`);
+  revalidatePath(`/commesse/${r.commessaId}`);
+  dove(`Salvato: ${desc}`, true);
+}
+
+// Versioni «legate» alla riga (si usano con .bind(null, rigaId) dalla tabella del materiale: il nome/valore del pulsante non arrivava all'azione)
+export async function eliminaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return eliminaComplemento(fd); }
+export async function duplicaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return duplicaComplemento(fd); }
+export async function modificaComplementoRiga(rigaId: string, fd: FormData) { fd.set("rigaId", rigaId); return modificaComplemento(fd); }
 
 /** Consegna prevista del progetto (deadline): si scrive e si sposta dalla pratica; ogni cambio va nello storico. */
 export async function salvaConsegnaPrevista(formData: FormData) {
@@ -1593,6 +1735,34 @@ export async function eliminaRigheMateriale(formData: FormData) {
   }
   const restano = ids.length - via.length;
   redirect(`/commesse/${commessaId}?${via.length ? `fattoMateriale=${encodeURIComponent(`${via.length} righe tolte.`)}&` : ""}${restano ? `avviso=${encodeURIComponent(`${restano} righe non tolte: sono dell'offerta o già ordinate (le righe dell'offerta si cambiano con una variante).`)}` : ""}#materiale-pratica`);
+}
+
+/**
+ * «⏳ Rimanda»: le righe spuntate si mettono da parte con il motivo (es. «aspetto le misure definitive di produzione») e escono da «Da ordinare ora»;
+ * il task dell'ufficio ordini resta uno solo e si chiude quando anche queste sono ordinate (Ugo 23/11/2026).
+ */
+export async function rimandaRighe(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const ids = righeSpuntate(formData);
+  const motivo = (str(formData, "motivoRimando") ?? "").trim().slice(0, 200) || "da ordinare più avanti";
+  const r = await prisma.rigaOrdine.updateMany({ where: { id: { in: ids }, commessaId, ordineFornitoreId: null, ordinato: false, daMagazzino: false }, data: { rimandataIl: new Date(), rimandataMotivo: motivo, rimandataDaNome: u.nome } });
+  if (r.count) await log(commessaId, `${r.count} righe messe da parte («${motivo}») da ${u.nome}: da ordinare più avanti.`);
+  redirect(`/commesse/${commessaId}?${r.count ? `fattoMateriale=${encodeURIComponent(`${r.count} righe messe in «Da ordinare più avanti».`)}` : `avviso=${encodeURIComponent("Spunta le righe da rimandare: quelle già ordinate non si possono rimandare.")}`}&passo=MATERIALE#materiale-pratica`);
+}
+
+/** Rimette fra le righe da ordinare ora quelle rimandate (le spuntate, o tutte con `tutte=1`: «misure definitive arrivate»). */
+export async function riprendiRighe(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!u) redirect("/login");
+  const commessaId = str(formData, "commessaId");
+  if (!commessaId) return;
+  const ids = str(formData, "tutte") === "1" ? null : [...new Set(formData.getAll("riga").map(String))];
+  const r = await prisma.rigaOrdine.updateMany({ where: { commessaId, rimandataIl: { not: null }, ordineFornitoreId: null, ordinato: false, ...(ids ? { id: { in: ids } } : {}) }, data: { rimandataIl: null, rimandataMotivo: null, rimandataDaNome: null } });
+  if (r.count) await log(commessaId, `${r.count} righe rimesse in «Da ordinare ora» da ${u.nome}${str(formData, "tutte") === "1" ? " (misure definitive arrivate)" : ""}.`);
+  redirect(`/commesse/${commessaId}?${r.count ? `fattoMateriale=${encodeURIComponent(`${r.count} righe pronte da ordinare.`)}` : `avviso=${encodeURIComponent("Nessuna riga da riprendere.")}`}&passo=MATERIALE#materiale-pratica`);
 }
 
 /** Task a un ufficio con l'elenco delle righe spuntate (es. magazzino: preparare questi pezzi). */

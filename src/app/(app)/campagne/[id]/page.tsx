@@ -44,6 +44,9 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
     prisma.cliente.groupBy({ by: ["provincia"], where: whereRaggiungibile, _count: { _all: true } }),
     prisma.cliente.groupBy({ by: ["comune"], where: { AND: [whereRaggiungibile, { comune: { not: null } }] }, _count: { _all: true }, orderBy: { _count: { comune: "desc" } }, take: 2500 }),
   ]);
+  // consensi dati e revoche arrivati da questa campagna (link nell'email o «disiscriviti»), per contatto
+  const consensiCampagna = await prisma.consensoMarketing.findMany({ where: { campagnaId: c.id }, orderBy: { createdAt: "desc" }, take: 500, select: { id: true, clienteId: true, email: true, stato: true, createdAt: true } });
+  const nomiConsensi = new Map((await prisma.cliente.findMany({ where: { id: { in: consensiCampagna.map((x) => x.clienteId).filter((x): x is string => !!x) } }, select: { id: true, nome: true } })).map((x) => [x.id, x.nome]));
   const n = (s: string) => c.invii.filter((i) => i.stato === s).length;
   const g = c.validaFino ? giorniAllaScadenza(c.validaFino, new Date()) : null;
   const ab = c.abTest && c.varianti.length > 0;
@@ -228,6 +231,21 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
           <p className="text-sm">✉️ <b>{n("INVIATA")}</b> inviate · {n("IN_ATTESA") + n("IN_CORSO")} in coda · <span className={n("FALLITA") ? "text-red-700" : ""}>{n("FALLITA")} non inviate</span> · {n("SOPPRESSA")} disiscritti nel frattempo</p>
         )}
       </div>
+
+      {consensiCampagna.length > 0 && (
+        <div className="card-fase p-4">
+          <h2 className="font-black mb-2">🔒 Consensi e revoche da questa campagna ({consensiCampagna.filter((x) => x.stato === "CONCESSO").length} consensi · {consensiCampagna.filter((x) => x.stato === "REVOCATO").length} revoche)</h2>
+          <ul className="text-sm divide-y divide-neutral-100">
+            {consensiCampagna.map((x) => (
+              <li key={x.id} className="py-1 flex gap-3">
+                <span className={x.stato === "CONCESSO" ? "text-emerald-700 font-bold" : "text-red-700 font-bold"}>{x.stato === "CONCESSO" ? "✓ Consenso" : "✕ Revoca"}</span>
+                <span>{x.clienteId ? <Link href={`/clienti/${x.clienteId}?sez=anagrafica#consenso`} className="underline">{nomiConsensi.get(x.clienteId) ?? x.email}</Link> : x.email}</span>
+                <span className="text-neutral-500 ml-auto">{x.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {c.invii.some((i) => i.stato === "INVIATA" || i.stato === "RIMBALZATA") && (() => {
         const inviate = c.invii.filter((i) => i.stato === "INVIATA" || i.stato === "RIMBALZATA");

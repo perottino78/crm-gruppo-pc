@@ -26,7 +26,7 @@ async function main() {
   verifica(puoFatturazione(giorgia) && !puoFatturazione(comm), "Giorgia fattura, il commerciale no");
   g.__utente = giorgia;
 
-  const cli = await prisma.cliente.create({ data: { nome: "ROSSI MARIO", brandId: b.id, tipoAnagrafica: "PERSONA_FISICA", nomePersona: "Mario", cognome: "Rossi", codiceFiscale: "RSSMRA80A01L219X", indirizzo: "Via Roma 1", cap: "10100", comune: "Torino", provincia: "TO", email: "mario@x.it" } });
+  const cli = await prisma.cliente.create({ data: { nome: "ROSSI MARIO", brandId: b.id, tipoAnagrafica: "PERSONA_FISICA", nomePersona: "Mario", cognome: "Rossi", codiceFiscale: "RSSMRA80A01L219M", indirizzo: "Via Roma 1", cap: "10100", comune: "Torino", provincia: "TO", email: "mario@x.it" } });
   const prev = await prisma.preventivo.create({ data: { clienteId: cli.id, brandId: b.id, commercialeId: comm.id, oggetto: "Serramenti", numeroOfferta: 1, totaleNetto: 10000, totaleIva: 1000, aliquotaIva: 10 } });
   await prisma.rigaPreventivo.create({ data: { preventivoId: prev.id, testoLibero: "Finestre in PVC bianco", quantita: 4, prezzoUnitario: 2000 } });
   await prisma.rigaPreventivo.create({ data: { preventivoId: prev.id, testoLibero: "Posa in opera", quantita: 1, prezzoUnitario: 2000 } });
@@ -39,7 +39,7 @@ async function main() {
   const accId = idDa(u1);
   let acc = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accId }, include: { righe: true } });
   verifica(acc.stato === "BOZZA" && acc.righe.length === 1 && acc.righe[0].prezzo === 5000 && acc.righe[0].aliquota === 10 && acc.totale === 5500, "acconto dalla commessa: 5.000 + IVA 10% = 5.500", acc);
-  verifica(acc.persona && acc.cognome === "Rossi" && acc.codiceFiscale === "RSSMRA80A01L219X" && acc.sezionale === "PC", "dati del cliente copiati, sezionale P&C");
+  verifica(acc.persona && acc.cognome === "Rossi" && acc.codiceFiscale === "RSSMRA80A01L219M" && acc.sezionale === "PC", "dati del cliente copiati, sezionale P&C");
   await redirectA(A.emettiFattura(fd({ id: accId })));
   acc = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accId }, include: { righe: true } });
   verifica(acc.stato === "PROVA" && acc.numero === "PROVA 1/FE/2026" && !acc.fatturaVenditaId, "in prova: numero «PROVA 1/FE/2026», niente fattura di vendita", acc.numero);
@@ -55,7 +55,10 @@ async function main() {
 
   // 2) l'amministratore accende l'emissione vera e indica l'ultimo numero di BConsole del DDT
   g.__utente = ugo;
-  await redirectA(A.salvaImpostazioniFatturazione(fd({ anno: "2026", reale: "on", ultimo_ddt: "551" })));
+  const senza = await redirectA(A.salvaImpostazioniFatturazione(fd({ anno: "2026", reale: "on", ultimo_ddt: "551" })));
+  verifica(senza.includes("errore=") && decodeURIComponent(senza).includes("ultimo numero") && !(await prisma.configurazione.findUnique({ where: { chiave: "fatturazione_reale" } }))?.valore?.includes("1"), "emissione vera RIFIUTATA se manca l'ultimo numero di BConsole dei sezionali", senza);
+  await redirectA(A.salvaImpostazioniFatturazione(fd({ anno: "2026", reale: "on", ultimo_ddt: "551", ultimo_PC: "0", ultimo_FO: "0", ultimo_SCF: "0", ultimo_PL: "0", ultimo_PF: "0", ultimo_RA: "0" })));
+  verifica((await prisma.registroAmministrazione.count({ where: { azione: "NUMERAZIONE" } })) >= 1, "le modifiche all'ultimo numero restano nel registro");
   g.__utente = giorgia;
   const accV = idDa(await redirectA(A.creaFattura(fd({ commessaId: c.id, tipo: "ACCONTO", data: "2026-11-09" }))));
   await redirectA(A.emettiFattura(fd({ id: accV })));
@@ -66,6 +69,20 @@ async function main() {
   const sc = await prisma.scadenza.findMany({ where: { fatturaVenditaId: fv.id } });
   verifica(sc.length === 1 && sc[0].importo === 5500 && sc[0].tipo === "INCASSO", "scadenza di incasso creata", sc);
 
+  // 2b) riapertura per correggere: stesso numero, niente doppioni; con l'invio allo SDI non si riapre più
+  await redirectA(A.riapriFattura(fd({ id: accV })));
+  let ria = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(ria.stato === "BOZZA" && ria.numero === "519/FE/2026" && !ria.fatturaVenditaId && (await prisma.scadenza.count({ where: { fatturaVenditaId: fv.id } })) === 0 && (await prisma.fatturaVendita.count({ where: { id: fv.id } })) === 0, "riaperta: torna bozza con il suo numero, vendita e scadenze tolte", ria.stato);
+  verifica((await redirectA(A.eliminaFattura(fd({ id: accV })))).includes("errore="), "una fattura riaperta con numero non si elimina");
+  await redirectA(A.salvaTestataFattura(fd({ id: accV, tipo: "ACCONTO", sezionale: "PC", data: "2026-11-09", metodoPagamento: "BONIFICO_VISTA", causale: "Corretta" })));
+  await redirectA(A.emettiFattura(fd({ id: accV })));
+  ria = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(ria.stato === "EMESSA" && ria.numero === "519/FE/2026" && ria.causale === "Corretta" && !!ria.fatturaVenditaId, "riemessa con lo STESSO numero 519/FE/2026 e la correzione", ria.numero);
+  verifica((await prisma.scadenza.count({ where: { fatturaVenditaId: ria.fatturaVenditaId! } })) === 1, "scadenza di incasso ricreata (una sola)");
+  await redirectA(A.segnaInviataSdi(fd({ id: accV })));
+  verifica((await redirectA(A.riapriFattura(fd({ id: accV })))).includes("errore="), "inviata allo SDI: non si riapre più");
+  await redirectA(A.segnaInviataSdi(fd({ id: accV, annulla: "1" })));
+
   // 3) saldo: righe dell'offerta meno l'acconto
   const saldoId = idDa(await redirectA(A.creaFattura(fd({ commessaId: c.id, tipo: "SALDO", data: "2026-11-20" }))));
   const saldo = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId }, include: { righe: { orderBy: { posizione: "asc" } } } });
@@ -74,13 +91,13 @@ async function main() {
   await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: null } });
   const errCf = await redirectA(A.emettiFattura(fd({ id: saldoId })));
   verifica(errCf.includes("codice fiscale"), "senza codice fiscale/partita IVA non si emette", errCf);
-  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: "RSSMRA80A01L219X", cointestatario: { nome: "Anna", cognome: "", codiceFiscale: "" } } });
+  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { codiceFiscale: "RSSMRA80A01L219M", cointestatario: { nome: "Anna", cognome: "", codiceFiscale: "" } } });
   const errCo = await redirectA(A.emettiFattura(fd({ id: saldoId })));
   verifica(errCo.includes("cointestatario"), "cointestata: senza cognome e codice fiscale del secondo intestatario non si emette", errCo);
-  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { cointestatario: { nome: "Anna", cognome: "Verdi", codiceFiscale: "VRDNNA80A41L219X", quota: "50%" } } });
+  await prisma.fatturaEmessa.update({ where: { id: saldoId }, data: { cointestatario: { nome: "Anna", cognome: "Verdi", codiceFiscale: "VRDNNA80A41L219Z", quota: "50%" } } });
   await redirectA(A.emettiFattura(fd({ id: saldoId })));
   const xmlCo = (await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } })).xml ?? "";
-  verifica(/Fattura cointestata a: Anna Verdi, C\.F\. VRDNNA80A41L219X/.test(xmlCo) && xmlCo.includes("quota 50%"), "cointestata: il secondo intestatario è nella causale della fattura elettronica");
+  verifica(/Fattura cointestata a: Anna Verdi, C\.F\. VRDNNA80A41L219Z/.test(xmlCo) && xmlCo.includes("quota 50%"), "cointestata: il secondo intestatario è nella causale della fattura elettronica");
   verifica((await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } })).numero === "520/FE/2026", "il saldo prende 520/FE/2026");
 
   // 4) DDT di uscita dalla commessa, conferma (continua da 551) e fattura differita
@@ -97,7 +114,7 @@ async function main() {
   const ddt2Id = idDa(await redirectA(A.creaDdt(fd({ clienteId: cli.id, data: "2026-11-11" }))));
   await redirectA(A.salvaRigheDdt(fd({ id: ddt2Id, nuova_descrizione: "Zanzariera", nuova_quantita: "2", nuova_prezzo: "150", nuova_iva: "22" })));
   await redirectA(A.confermaDdt(fd({ id: ddt2Id })));
-  const altro = await prisma.cliente.create({ data: { nome: "BIANCHI SRL", brandId: b.id, piva: "01234567890", indirizzo: "Via Po 2", cap: "10121", comune: "Torino", provincia: "TO" } });
+  const altro = await prisma.cliente.create({ data: { nome: "BIANCHI SRL", brandId: b.id, piva: "01234567897", indirizzo: "Via Po 2", cap: "10121", comune: "Torino", provincia: "TO" } });
   const ddt3Id = idDa(await redirectA(A.creaDdt(fd({ clienteId: altro.id }))));
   await redirectA(A.salvaRigheDdt(fd({ id: ddt3Id, nuova_descrizione: "Tenda", nuova_prezzo: "100" })));
   await redirectA(A.confermaDdt(fd({ id: ddt3Id })));
@@ -122,6 +139,20 @@ async function main() {
   const fvNc = await prisma.fatturaVendita.findUniqueOrThrow({ where: { id: nc.fatturaVenditaId! } });
   verifica(nc.numero === "522/FE/2026" && fvNc.tipoDocumento === "TD04" && fvNc.totale === -5500 && (await prisma.scadenza.count({ where: { fatturaVenditaId: fvNc.id } })) === 0, "nota di credito 522/FE/2026: in negativo nelle vendite, senza scadenze", fvNc);
   verifica(leggiFatturaPA(nc.xml!)[0].notaCredito && nc.xml!.includes("<IdDocumento>520/FE/2026</IdDocumento>"), "XML della nota di credito con la fattura stornata");
+  const saldoDopo = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldoId } });
+  const scOrig = await prisma.scadenza.findMany({ where: { fatturaVenditaId: saldoDopo.fatturaVenditaId! } });
+  verifica(scOrig.length > 0 && scOrig.every((x) => x.stato === "ANNULLATA" && (x.note ?? "").includes("nota di credito 522/FE/2026")), "la nota di credito azzera ciò che il cliente doveva ancora pagare sul saldo", scOrig.map((x) => [x.stato, x.importo]));
+  const ncDup = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: ncId } });
+  verifica(ncDup.inviataSdiIl === null, "la nota di credito non risulta già inviata allo SDI");
+  const futId = idDa(await redirectA(A.creaFattura(fd({ clienteId: cli.id, tipo: "FATTURA", data: "2027-12-01" }))));
+  await redirectA(A.salvaRigheFattura(fd({ id: futId, nuova_descrizione: "Prova", nuova_quantita: "1", nuova_prezzo: "100", nuova_iva: "22" })));
+  const errFut = await redirectA(A.emettiFattura(fd({ id: futId })));
+  verifica(decodeURIComponent(errFut).includes("nel futuro"), "una data nel futuro non si emette", errFut);
+  await redirectA(A.segnaInviataSdi(fd({ id: accV })));
+  verifica((await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } })).inviataSdiIl !== null, "segnata inviata allo SDI");
+  await redirectA(A.segnaScartataSdi(fd({ id: accV, motivo: "00305 partita IVA non valida" })));
+  const scart = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: accV } });
+  verifica(scart.inviataSdiIl === null && (scart.noteInterne ?? "").includes("Scartata dallo SDI") && (scart.noteInterne ?? "").includes("00305") && scart.numero === "519/FE/2026", "scartata dallo SDI: tiene il numero, motivo annotato, di nuovo correggibile", scart.noteInterne);
   const errDel = await redirectA(A.eliminaFattura(fd({ id: saldoId })));
   verifica(errDel.includes("nota di credito"), "una fattura vera non si elimina");
 
@@ -135,6 +166,20 @@ async function main() {
   await redirectA(A.emettiFattura(fd({ id: pfId })));
   const pf = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: pfId } });
   verifica(pf.numero === `PROFORMA 1/${new Date().getFullYear()}` && !pf.xml && !pf.fatturaVenditaId, "proforma: numero suo, niente XML né vendite", pf.numero);
+
+  // 7) ritenuta d'acconto 23% su 20% (provvigioni a una finanziaria, fattura 313/FE/2026)
+  const riId = idDa(await redirectA(A.creaFattura(fd({ clienteId: altro.id, tipo: "FATTURA", sezionale: "PC" }))));
+  await redirectA(A.salvaRigheFattura(fd({ id: riId, nuova_descrizione: "Intermediazione - Compensi di intermediazione mese di: Giugno 2026", nuova_prezzo: "67,50", nuova_iva: "N4" })));
+  await redirectA(A.salvaTestataFattura(fd({ id: riId, tipo: "FATTURA", data: "2026-11-24", metodoPagamento: "BONIFICO", conRitenuta: "on", ritenutaAliquota: "23", ritenutaBase: "20" })));
+  let ri = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: riId } });
+  verifica(ri.ritenutaImporto === 3.11 && ri.totale === 67.5, "ritenuta 3,11 € su 67,50 €, totale fattura invariato", ri);
+  await redirectA(A.emettiFattura(fd({ id: riId })));
+  ri = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: riId } });
+  const rr = ri.rate as { importo: number }[];
+  verifica(rr.length === 1 && rr[0].importo === 64.39, "scadenza = totale da pagare 64,39 €", rr);
+  verifica(!!ri.xml && ri.xml.includes("<DatiRitenuta><TipoRitenuta>RT02</TipoRitenuta><ImportoRitenuta>3.11</ImportoRitenuta><AliquotaRitenuta>4.60</AliquotaRitenuta><CausalePagamento>R</CausalePagamento></DatiRitenuta>") && ri.xml.includes("<Ritenuta>SI</Ritenuta>") && ri.xml.includes("<ImportoPagamento>64.39</ImportoPagamento>") && ri.xml.includes("<ImportoTotaleDocumento>67.50</ImportoTotaleDocumento>"), "XML con DatiRitenuta, righe soggette e importo di pagamento netto");
+  const scRi = await prisma.scadenza.findMany({ where: { fatturaVenditaId: ri.fatturaVenditaId ?? "x" } });
+  verifica(scRi.length === 1 && scRi[0].importo === 64.39 && (scRi[0].note ?? "").includes("Ritenuta"), "scadenza di incasso 64,39 € con nota sulla ritenuta", scRi);
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();

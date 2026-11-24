@@ -34,8 +34,8 @@ async function main() {
   verifica(m?.gruppo === "SERRAMENTI" && m.famiglia === "INDOOR" && m.modalitaCalcolo === "MQ_CON_MINIMI" && m.immagineUrl === "/immagini/taglio-freddo/pieghevole.jpg", "nei Serramenti, al m², con la foto", m);
 
   const albero = await tassonomiaListino(b.id);
-  const serr = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((gr) => gr.nome === "SERRAMENTI");
-  const sg = serr?.sottogruppi?.find((s) => s.nome === "Alluminio — Taglio freddo e verande");
+  const serr = albero.find((f) => f.nome === "INDOOR")?.gruppi.find((gr) => gr.nome === "SERRAMENTI · Alluminio");
+  const sg = serr?.sottogruppi?.find((s) => s.nome === "Taglio freddo e verande");
   verifica(sg?.tipologie.length === 10 && sg.tipologie.every((t) => t.assiIsomax && t.haMisura), "nell'albero dell'offerta: 10 voci con le 2 tendine (sistema → vetro) e la misura", sg);
 
   const c = await prisma.cliente.create({ data: { nome: "Rossi", brandId: b.id } });

@@ -1,13 +1,20 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { canvasInWebp } from "@/lib/immagini/webp-client";
 
 /**
  * Selettore multiplo di foto: ridimensiona/comprime lato client e mette un array JSON di data URI nel campo nascosto `name`.
  * Con `pdf` accetta anche file PDF (rilievi, disegni), mandati così come sono.
  */
-export default function FotoRilievo({ name, pdf = false }: { name: string; pdf?: boolean }) {
+export type InvioFoto = { url: string; campi?: Record<string, string>; leggi?: string[]; aggiorna?: boolean };
+export default function FotoRilievo({ name, pdf = false, rilievoId, invio }: { name: string; pdf?: boolean; rilievoId?: string; invio?: InvioFoto }) {
+  // `invio` = ogni foto parte subito, da sola, verso un'altra rotta (posa, kit…): `campi` fissi, `leggi` = campi letti dal modulo al momento dell'invio
+  const router = useRouter();
+  const destinazione = invio?.url ?? (rilievoId ? `/api/rilievo/${rilievoId}/foto` : null);
+  // Con `rilievoId` ogni file parte da solo, uno alla volta, subito dopo la scelta (nessun limite al numero di foto, errori per file con «Riprova»)
+  const [coda, setCoda] = useState<{ nome: string; stato: "su" | "ok" | "err"; msg?: string; file?: File; blob?: Blob }[]>([]);
   const [foto, setFoto] = useState<{ nome: string; dataUri: string }[]>([]);
   const [errore, setErrore] = useState<string | null>(null);
   const [caricamento, setCaricamento] = useState(false);
@@ -53,9 +60,44 @@ export default function FotoRilievo({ name, pdf = false }: { name: string; pdf?:
     });
   }
 
+  // foto dal blob WebP/JPEG (o PDF così com'è) al server, un file per volta
+  async function suBlob(file: File): Promise<Blob> {
+    if (pdf && (file.type === "application/pdf" || /\.pdf$/i.test(file.name))) return file;
+    try { const du = await comprimi(file); return await (await fetch(du)).blob(); } catch { return file; } // se il browser non la legge, parte l'originale: la riduce il server
+  }
+  async function manda(indice: number, nome: string, blob: Blob) {
+    const aggiorna = (x: Partial<(typeof coda)[number]>) => setCoda((c) => c.map((r, i) => (i === indice ? { ...r, ...x } : r)));
+    aggiorna({ stato: "su", msg: undefined });
+    try {
+      const fd = new FormData();
+      fd.append("file", new File([blob], nome.replace(/\.[^.]+$/, "") + (blob.type === "image/webp" ? ".webp" : blob.type === "application/pdf" ? ".pdf" : /\.[a-z0-9]+$/i.test(nome) ? nome.slice(nome.lastIndexOf(".")) : ".jpg"), { type: blob.type || "image/jpeg" }));
+      for (const [k, v] of Object.entries(invio?.campi ?? {})) fd.append(k, v);
+      const modulo = ref.current?.form;
+      for (const k of invio?.leggi ?? []) { const el = modulo?.elements.namedItem(k) as HTMLInputElement | null; if (el) fd.append(k, el.value); }
+      const res = await fetch(destinazione!, { method: "POST", body: fd });
+      const j = await res.json().catch(() => null) as { ok?: boolean; errore?: string } | null;
+      if (res.ok && j?.ok) aggiorna({ stato: "ok", blob: undefined });
+      else aggiorna({ stato: "err", msg: j?.errore ?? (res.status === 413 ? "File troppo pesante" : `Errore ${res.status}`), blob });
+    } catch {
+      aggiorna({ stato: "err", msg: "Connessione interrotta", blob });
+    }
+  }
+  async function scegliEManda(files: File[]) {
+    setErrore(null);
+    const inizio = coda.length;
+    setCoda((c) => [...c, ...files.map((f) => ({ nome: f.name, stato: "su" as const }))]);
+    for (let i = 0; i < files.length; i++) {
+      const b = await suBlob(files[i]);
+      await manda(inizio + i, files[i].name, b);
+    }
+    if (ref.current) ref.current.value = "";
+    if (invio?.aggiorna) router.refresh();
+  }
+
   async function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
     if (!files.length) return;
+    if (destinazione) { void scegliEManda(files.slice(0, 60)); return; }
     setErrore(null);
     setCaricamento(true);
     try {
@@ -83,6 +125,20 @@ export default function FotoRilievo({ name, pdf = false }: { name: string; pdf?:
       <input type="hidden" name={name} value={JSON.stringify(foto)} />
       <input ref={ref} type="file" accept={pdf ? "image/*,application/pdf,.pdf" : "image/*"} multiple onChange={onChange} className="text-xs" />
       {caricamento && <p className="text-xs text-neutral-600 mt-1">Elaborazione file…</p>}
+      {destinazione && coda.length > 0 && (
+        <div className="mt-2 space-y-1">
+          <p className="text-xs font-semibold text-neutral-700">
+            {coda.filter((x) => x.stato === "ok").length} di {coda.length} file caricati
+            {coda.some((x) => x.stato === "su") ? " — aspetta che finiscano prima di salvare" : coda.some((x) => x.stato === "err") ? " — alcuni non sono partiti" : " ✓"}
+          </p>
+          {coda.map((x, i) => (
+            <p key={i} className={`text-xs ${x.stato === "ok" ? "text-green-800" : x.stato === "err" ? "text-red-700" : "text-neutral-600"}`}>
+              {x.stato === "ok" ? "✓" : x.stato === "err" ? "✗" : "⏳"} {x.nome}{x.msg ? ` — ${x.msg}` : ""}
+              {x.stato === "err" && x.blob && <button type="button" onClick={() => manda(i, x.nome, x.blob!)} className="ml-2 underline">Riprova</button>}
+            </p>
+          ))}
+        </div>
+      )}
       {errore && <p className="text-xs text-red-700 mt-1">{errore}</p>}
       {foto.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-2">

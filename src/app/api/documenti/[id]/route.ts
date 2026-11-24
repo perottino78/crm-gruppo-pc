@@ -23,7 +23,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
       "Content-Length": String(d.dimensione),
       "X-Content-Type-Options": "nosniff",
       "Cache-Control": "private, no-store",
-      ...(sicuroInLinea ? {} : { "Content-Security-Policy": "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox" }),
+      ...(sicuroInLinea ? {} : { "Content-Security-Policy": "default-src 'none'; img-src 'self' https: data:; style-src 'unsafe-inline'; sandbox" }),
     },
   });
 }

@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
+import { Fragment } from "react";
 import Link from "next/link";
 import { costiMaterialeCommesse } from "@/lib/ordini/server";
 import CaricaRilievo from "@/components/commesse/CaricaRilievo";
@@ -12,7 +13,8 @@ import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 import { valoriAngolari } from "@/lib/ordini/angolari";
 import { labelBreveTipologia } from "@/lib/prodotti";
 import { notFound } from "next/navigation";
-import StatoAcquisti from "@/components/ordini/StatoAcquisti";
+import AvvisoMaterialeDaOrdinare from "@/components/commesse/AvvisoMaterialeDaOrdinare";
+import OrdiniPerFornitore from "@/components/commesse/OrdiniPerFornitore";
 import MaterialeCommessa from "@/components/magazzino/MaterialeCommessa";
 import Documenti from "@/components/documenti/Documenti";
 import { soloAttivi } from "@/lib/utenti/stato";
@@ -22,6 +24,9 @@ import FornitoreRiga from "@/components/commesse/FornitoreRiga";
 import { creaProgetto, confermaMaterialeProgetto, aggiungiCorrelato, salvaConsegnaPrevista, complementoDaListino, complementoDaListinoPerMisura, spostaRigheProgetto, taskDaRighe, eliminaRigheMateriale } from "@/app/commesse-actions";
 import BarraAzioniMateriale from "@/components/commesse/BarraAzioniMateriale";
 import FotoProgetto from "@/components/commesse/FotoProgetto";
+import { agganciaOffertaONE } from "@/app/commesse-actions";
+import { scegliTaskDoppi } from "@/lib/pratica/task-doppi";
+import AzioniRigaMateriale from "@/components/commesse/AzioniRigaMateriale";
 import PercorsoProgetto from "@/components/commesse/PercorsoProgetto";
 import { percorsoDiCommessa } from "@/lib/progetti/percorso-server";
 import SelettoreProdotto from "@/components/SelettoreProdotto";
@@ -56,7 +61,11 @@ import {
   generaRigheOrdine,
   aggiornaRigaOrdine,
   aggiungiCostoManuale,
-  eliminaComplemento,
+  duplicaComplementoRiga,
+  modificaComplementoRiga,
+  eliminaComplementoRiga,
+  rimandaRighe,
+  riprendiRighe,
   eliminaCostoManuale,
   programmaPosa,
   annullaPosa,
@@ -88,6 +97,7 @@ import { TIPI_INTERVENTO, nomeIntervento, eAperto } from "@/lib/pratica/interven
 import { perInput } from "@/lib/calendario/tempo";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { mancaAllaSoglia } from "@/lib/pratica/soglia";
+import ScadenzarioPratica from "@/components/commesse/ScadenzarioPratica";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
@@ -180,7 +190,10 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const materialeTutto = radici.flatMap((r) => [r, ...c.righeOrdine.filter((k) => k.kitDiId === r.id)]);
   // ordine già inviato (o riga segnata ordinata / dal magazzino): esce da «da ordinare» e non si modifica più
   const giaOrdinata = (r: (typeof materialeTutto)[number]) => r.daMagazzino || r.ordinato || (!!r.ordineFornitore && r.ordineFornitore.stato !== "BOZZA" && r.ordineFornitore.stato !== "ANNULLATO");
-  const materialePratica = materialeTutto.filter((r) => !giaOrdinata(r));
+  const nonOrdinate = materialeTutto.filter((r) => !giaOrdinata(r));
+  // «da ordinare più avanti»: righe messe da parte (es. aspetto le misure definitive di produzione)
+  const materialeRimandato = nonOrdinate.filter((r) => !!r.rimandataIl);
+  const materialePratica = nonOrdinate.filter((r) => !r.rimandataIl);
   const materialeOrdinato = materialeTutto.filter(giaOrdinata);
   // materiale: righe con costo reale, totali confermati dal fornitore (finché non arriva la fattura), modo rapido
   const materiale = (await costiMaterialeCommesse([c.id])).get(c.id) ?? { voci: [], righeSenzaCosto: 0 };
@@ -207,6 +220,14 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   const puoFinanziamento = gestoreIncassi || (!!utente && puo(utente, "fatturazione"));
   const rateIntermedie = await prisma.scadenza.findMany({ where: { commessaId: c.id, origine: { startsWith: "COMMESSA_RATA_" } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { origine: "asc" } });
   const percorsoProg = await percorsoDiCommessa(c.id);
+  // un solo passaggio per fase: i doppioni ancora aperti si annullano, il resto non si mostra due volte (Ugo 22/11/2026)
+  const { tieni: tieniTask, doppi: doppiTask } = scegliTaskDoppi(c.tasks, STATI_CHIUSI);
+  const daAnnullare = doppiTask.filter((t) => !t.completatoIl && !STATI_CHIUSI.includes(t.stato)).map((t) => t.id);
+  if (daAnnullare.length) await prisma.taskPratica.updateMany({ where: { id: { in: daAnnullare } }, data: { stato: "ANNULLATO", completatoIl: new Date() } }).catch(() => null);
+  // pratica presa da BConsole: le offerte di ONE dello stesso cliente non ancora collegate a una pratica si possono agganciare (Ugo 22/11/2026)
+  const offerteAgganciabili = c.ordineBC
+    ? await prisma.preventivo.findMany({ where: { clienteId: c.clienteId, id: { not: c.preventivoId }, righe: { some: {} } }, select: { id: true, numeroOfferta: true, oggetto: true, totaleNetto: true }, orderBy: { createdAt: "desc" }, take: 30 })
+    : [];
   // percorso a passi: si vede solo il passo in corso (o uno già fatto che si rivede); i passi dopo non si aprono finché il corrente non è salvato
   const pp = await passiDiCommessa(c.id);
   // fatture di vendita della pratica: la causale dell'incasso («ACCONTO/SALDO FT n. …») e il numero della fattura di saldo si scrivono da soli
@@ -373,11 +394,28 @@ export default async function CommessaPage({ params, searchParams }: { params: P
           registraFattura={registraFatturaAcconto} creaProgetto={creaProgetto} registraBenvenuto={registraBenvenuto} ok={pok} avviso={pav}
         />
       )}
-      {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} reportHref={puoVedereReportEconomico(utente) ? `/commesse/${c.id}/report` : null} />}
+      {puoGestireOrdini(utente) && !["CHIUSA", "ANNULLATA"].includes(c.stato) && (materialePratica.length + materialeRimandato.length > 0) && (materialeTutto.length - materialePratica.length - materialeRimandato.length > 0 || materialeRimandato.length > 0) && (
+        <AvvisoMaterialeDaOrdinare commessaId={c.id} ordinate={materialeTutto.length - materialePratica.length - materialeRimandato.length} adesso={materialePratica.length} rimandate={materialeRimandato.length} motivi={[...new Set(materialeRimandato.map((r) => r.rimandataMotivo).filter(Boolean) as string[])].slice(0, 3)} />
+      )}
+      {c.ordineBC && (offerteAgganciabili.length > 0 ? (
+          <form id="offerta-one" action={agganciaOffertaONE} className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border-2 border-amber-400 bg-amber-50 px-4 py-3">
+            <input type="hidden" name="commessaId" value={c.id} />
+            <p className="text-sm text-amber-900 flex-1 min-w-[16rem]">🔗 <b>Pratica da BConsole (ordine n. {c.ordineBC}).</b> Scegli l&apos;offerta che hai già fatto in ONE: prodotti e prezzi vengono copiati qui e diventano il materiale della pratica (l&apos;offerta di ONE resta com&apos;è).</p>
+            <select name="preventivoId" required className={inp}>
+              <option value="">Scegli l&apos;offerta…</option>
+              {offerteAgganciabili.map((o) => <option key={o.id} value={o.id}>{`${o.numeroOfferta ?? "senza numero"} · ${o.oggetto ?? "offerta"} · ${o.totaleNetto.toLocaleString("it-IT", { style: "currency", currency: "EUR" })}`}</option>)}
+            </select>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-amber-900"><input type="checkbox" name="eliminaAltra" value="1" defaultChecked /> 🗑 Cancella l&apos;offerta e la pratica di ONE (se la pratica è ancora vuota)</label>
+            <button className="btn-3d btn-3d-amber text-sm px-4 py-2">🔗 Inserisci l&apos;offerta di ONE</button>
+          </form>
+        ) : (
+          <p className="mb-4 text-sm text-amber-900 bg-amber-50 border border-amber-300 rounded-lg px-4 py-2">🔗 Pratica da BConsole: per questo cliente non ci sono offerte di ONE con prodotti da inserire.</p>
+        ))}
+      {percorsoProg && percorsoProg.fase !== "DA_CREARE" && mostra("RILIEVO_APP", "RILIEVO", "MATERIALE", "ARRIVO") && <PercorsoProgetto commessaId={c.id} percorso={percorsoProg} creaProgetto={creaProgetto} confermaMateriale={confermaMaterialeProgetto} ok={pok} avviso={pav} />}
 
       {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
       {(() => {
-        const passaggi = [...c.tasks].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
+        const passaggi = [...tieniTask].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
         const chiuso = (t: (typeof passaggi)[number]) => !!t.completatoIl || STATI_CHIUSI.includes(t.stato);
         const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
         const attivi = passaggi.filter((t) => !chiuso(t));
@@ -389,12 +427,14 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         return (
       <details id="avanzamento" className="card-fase scroll-mt-4" style={{ "--fase": "#0ea5e9" } as React.CSSProperties} open={attivi.length > 0}>
         <summary className="cursor-pointer list-none">
-          <h2 className="mb-1">✅ Avanzamento della pratica</h2>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className="mb-1 flex flex-wrap items-center gap-3">✅ Avanzamento e progetto{percorsoProg && percorsoProg.fase !== "DA_CREARE" && <span className="text-xs font-bold px-3 py-1 rounded bg-violet-100 text-violet-900">{percorsoProg.etichetta}</span>}</h2>
+            {puoVedereReportEconomico(utente) && <Link href={`/commesse/${c.id}/report`} className="btn-3d btn-3d-teal px-4 py-2 text-sm" title="Venduto, costi e margine di questo progetto">📊 Report economico</Link>}
+          </div>
           <p className="text-xs text-neutral-600 mb-2">
             {passaggi.length === 0 ? "Nessun passaggio fra uffici ancora." : <>{fatti} passaggi chiusi{attivi.length > 0 ? <> · <b className="text-sky-800">adesso: {attivi.map((t) => nomeUfficio(t.ufficio)).join(", ")}</b></> : " · tutto chiuso"}</>}
           </p>
         </summary>
-        <p className="text-xs text-neutral-700 mb-3">Premendo <b>Fatto</b> la pratica passa all&apos;ufficio successivo con il task già pronto. Qui sotto trovi il percorso fra gli uffici, con le date, e in fondo i costi di manodopera.</p>
         {passaggi.length === 0 && (
           <div className="mb-3">
             <form action={avviaFlussoCommessa} className="flex flex-wrap items-center gap-2">
@@ -537,6 +577,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </details>
         );
       })()}
+
+      {(mostra("INCASSO") || mostra("SALDO")) && <ScadenzarioPratica commessaId={c.id} ritorno={`/commesse/${c.id}#scadenzario`} puoRegistrare={puoFinanziamento} puoAggiungere={puoFinanziamento} />}
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (
@@ -699,7 +741,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         <summary className="cursor-pointer list-none"><h2 className="mb-3">2 · Rilievo misure</h2></summary>
         {fatto && <p className="text-sm text-green-900 bg-green-50 border border-green-200 rounded px-3 py-2 mb-3">✅ {fatto}</p>}
         {avvisoRilievo && <p className="text-sm text-red-800 bg-red-50 border border-red-200 rounded px-3 py-2 mb-3">{avvisoRilievo}</p>}
-        {mostra("RILIEVO_APP") && (
+        {(mostra("RILIEVO_APP") || (apre("RILIEVO") && !c.rilievi.some((r) => r.stato !== "ANNULLATO"))) && (
           <>
           {!viaLibera || (percorsoProg && !percorsoProg.progettoCreatoIl && !percorsoProg.legacy) ? (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded px-3 py-2">
@@ -815,12 +857,13 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       {mostra("MATERIALE", "ARRIVO") && (
       <details id="evasione" className="card-fase scroll-mt-4" style={{ "--fase": "#ea580c" } as React.CSSProperties} open={apre("MATERIALE","ARRIVO")}>
         <summary className="cursor-pointer list-none"><h2 className="mb-1">3 · Evasione ordini e acquisti</h2></summary>
-        <p className="text-xs text-neutral-600 mb-3">Dal materiale qui sotto si creano gli ordini ai fornitori e si inviano (email dal CRM o caricati sul portale del fornitore: «Segna come inviato»). Quando la merce arriva spunta &quot;arrivato&quot; e inserisci il costo reale.</p>
+        <p className="text-xs text-neutral-600 mb-3">Tre passi: <b>① da ordinare</b> (spunta le righe e premi «Ordine al fornitore») → <b>② ordinati, aspetto la conferma</b> → <b>③ confermati</b>, un riquadro per fornitore con il costo totale e la merce da segnare come arrivata.</p>
         {c.riordinoIl && (
           <p className="mb-3 rounded border-2 border-red-300 bg-red-50 px-3 py-2 text-sm text-red-900">🔁 <b>Posa parziale: serve materiale</b> (dal {c.riordinoIl.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}){c.riordinoNote ? <> — {c.riordinoNote}</> : null}. Aggiungi qui sotto il materiale mancante, rotto o in garanzia e invia gli ordini: quando arriva in magazzino il centralino fissa la data per finire la posa.</p>
         )}
-        <div id="materiale-pratica" className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
-          <p className="text-sm font-bold text-neutral-900">📦 Materiale della pratica <span className="font-normal text-neutral-600">— quello dell&apos;offerta più quello aggiunto al rilievo</span></p>
+        {/* chiuso di partenza (Ugo 23/11/2026: «chiudila e la apro se mi serve»); si apre da solo dopo un messaggio o dal link #materiale-pratica */}
+        <details id="materiale-pratica" open={!!(fattoMateriale || avviso)} className="mb-4 rounded border border-orange-200 bg-white p-3 scroll-mt-4">
+          <summary className="cursor-pointer list-none text-base font-bold text-neutral-900">① Da ordinare <span className="text-sm font-normal text-neutral-600">— {materialePratica.length} {materialePratica.length === 1 ? "riga" : "righe"} da ordinare ora{materialeRimandato.length > 0 ? ` · ${materialeRimandato.length} più avanti` : ""} · clicca per aprire</span></summary>
           <p className="text-xs text-neutral-600 mb-2"><b>Spunta le righe</b>: in fondo allo schermo compaiono le azioni (ordine al fornitore, sposta in un altro progetto, task, togli). L&apos;ordine parte da {EMAIL_ORDINI()} con la lista senza prezzi e i PDF del rilievo che scegli.</p>
           {fattoMateriale && <p className="text-xs text-green-900 bg-green-50 border border-green-200 rounded px-2 py-1 mb-2">✅ {fattoMateriale}</p>}
           {avviso && <p className="text-xs text-red-800 bg-red-50 border border-red-200 rounded px-2 py-1 mb-2">{avviso}</p>}
@@ -835,10 +878,14 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                 <table className="w-full text-sm">
                   <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200"><th className="py-1 w-6"></th><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th><th></th></tr></thead>
                   <tbody>
-                    {materialePratica.map((r) => {
+                    {materialePratica.map((r, i) => {
                       const libera = !r.ordineFornitoreId && !r.ordinato && !r.daMagazzino;
+                      // un'intestazione per ogni fornitore: le righe dello stesso fornitore stanno insieme
+                      const nuovoGruppo = !r.kitDiId && (i === 0 || (materialePratica[i - 1].fornitoreNome ?? "") !== (r.fornitoreNome ?? ""));
                       return (
-                        <tr key={r.id} className="border-b border-neutral-100 align-top">
+                        <Fragment key={r.id}>
+                        {nuovoGruppo && <tr className="bg-neutral-100"><td colSpan={7} className="py-1 px-2 text-xs font-bold uppercase tracking-wide text-neutral-700">{r.fornitoreNome ?? "Fornitore da scegliere"}</td></tr>}
+                        <tr className="border-b border-neutral-100 align-top">
                           <td className="py-1.5"><input type="checkbox" name="riga" value={r.id} aria-label={`Spunta ${r.descrizione}`} /></td>
                           <td className="py-1.5 pr-2">{r.kitDiId ? <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-indigo-100 text-indigo-900" title="Pezzo della distinta base: solo acquisto">🔗 KIT di {nomeRiga.get(r.kitDiId) ?? "—"}</span> : r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto">🧩 COMPLEMENTO</span>}{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
                           <td className="py-1.5 text-right pr-3">{r.quantita}</td>
@@ -849,38 +896,32 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                             ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}?passo=invio`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno} · ✉ invia</Link>
                             : r.daMagazzino ? "dal magazzino" : r.ordinato ? "ordinato" : <span className="text-amber-800">da ordinare</span>}</td>
                           <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
-                          <td className="py-1.5 text-right">{r.complemento && libera && <button formAction={eliminaComplemento} name="rigaId" value={r.id} className="text-xs text-red-700 underline">togli</button>}</td>
+                          <td className="py-1.5 text-right">{r.complemento && libera && <AzioniRigaMateriale rigaId={r.id} descrizione={r.descrizione} quantita={r.quantita} note={r.note} azioni={{ modifica: modificaComplementoRiga.bind(null, r.id), duplica: duplicaComplementoRiga.bind(null, r.id), elimina: eliminaComplementoRiga.bind(null, r.id) }} />}</td>
                         </tr>
+                        </Fragment>
                       );
                     })}
                   </tbody>
                 </table>
               </div>
               <BarraAzioniMateriale fornitori={fornitoriLista} progetti={altriProgetti} uffici={UFFICI} puoOrdinare={puoGestireOrdini(utente)}
-                azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale }} />
+                azioni={{ ordine: creaOrdineDaRighe, sposta: spostaRigheProgetto, task: taskDaRighe, elimina: eliminaRigheMateriale, rimanda: rimandaRighe }} />
             </form>
           )}
-          {materialeOrdinato.length > 0 && (
-            <div className="mt-3 rounded border border-green-200 bg-green-50/40 p-3">
-              <p className="text-sm font-bold text-green-900">✅ Ordinato — in attesa della conferma e dell&apos;arrivo <span className="font-normal text-neutral-600">({materialeOrdinato.length})</span></p>
-              <p className="text-xs text-neutral-600 mb-2">Queste righe non si modificano più. Quando la merce arriva si controllano costi e magazzino dall&apos;ordine.</p>
-              <table className="w-full text-sm">
-                <thead><tr className="text-left text-xs text-neutral-600 border-b border-green-200"><th>Descrizione</th><th className="text-right pr-3">Q.tà</th><th>Fornitore</th><th>Stato</th><th className="text-right">Costo previsto</th></tr></thead>
-                <tbody>
-                  {materialeOrdinato.map((r) => {
-                    const st = r.arrivato ? "📦 Arrivato" : r.daMagazzino ? "dal magazzino" : r.ordineFornitore?.stato === "CONFERMATO" ? "Confermato — attendo la merce" : r.ordineFornitore?.stato === "EVASO" || r.ordineFornitore?.stato === "EVASO_PARZIALE" ? "Merce in arrivo" : "In attesa di conferma";
-                    return (
-                      <tr key={r.id} className="border-b border-green-100 align-top text-neutral-700">
-                        <td className="py-1.5 pr-2">{r.descrizione}{r.note ? <span className="text-xs text-neutral-600"> ({r.note})</span> : null}</td>
-                        <td className="py-1.5 text-right pr-3">{r.quantita}</td>
-                        <td className="py-1.5 text-xs">{r.fornitoreNome ?? "—"}</td>
-                        <td className="py-1.5 text-xs">{r.ordineFornitore ? <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link> : "ordinato"} · <b>{st}</b></td>
-                        <td className="py-1.5 text-right text-xs">{r.costoPrevisto !== null ? eur(r.costoPrevisto) : ""}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+          {materialeRimandato.length > 0 && (
+            <div className="mt-3 rounded-lg border-2 border-orange-300 bg-orange-50 p-3">
+              <p className="text-sm font-bold text-orange-950">⏳ Da ordinare più avanti ({materialeRimandato.length})</p>
+              <p className="text-xs text-neutral-700 mb-2">Messe da parte: non ti bloccano e il task dell&apos;ufficio ordini resta aperto finché non le ordini.</p>
+              <ul className="text-sm divide-y divide-orange-100">
+                {materialeRimandato.map((r) => (
+                  <li key={r.id} className="py-1.5 flex flex-wrap items-center gap-2">
+                    <span className="flex-1 min-w-[14rem]">{r.descrizione}{r.quantita > 1 ? ` × ${r.quantita}` : ""}<span className="block text-xs text-orange-900">⏳ {r.rimandataMotivo ?? "più avanti"}{r.rimandataDaNome ? ` · ${r.rimandataDaNome}` : ""}</span></span>
+                    <form action={riprendiRighe}><input type="hidden" name="commessaId" value={c.id} /><input type="hidden" name="riga" value={r.id} /><button className="text-xs text-blue-800 underline">▶ ordina ora</button></form>
+                  </li>
+                ))}
+              </ul>
+              <form action={riprendiRighe} className="mt-2"><input type="hidden" name="commessaId" value={c.id} /><input type="hidden" name="tutte" value="1" />
+                <button className="btn-3d btn-3d-orange text-sm px-4 py-2">✅ Misure definitive arrivate: ordina tutto ora</button></form>
             </div>
           )}
           {correlatiSuggeriti.length > 0 && (
@@ -903,12 +944,19 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               <SelettoreProdotto preventivoId={c.id} brandId={c.brandId} brandColor="#1d4ed8" tassonomia={tassonomia} azionePerMisura={complementoDaListinoPerMisura} azionePerProdotto={complementoDaListino} />
             </div>
           </details>
-        </div>
-        <StatoAcquisti commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
-        <MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
-        <div className="bg-amber-50 border border-amber-300 rounded p-3 mb-4">
-          <p className="text-sm font-bold text-neutral-900 mb-1">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""}</p>
-          <p className="text-xs text-neutral-700 mb-2">Inserisci un solo importo per fornitore/fattura invece del costo di ogni riga. Se presente, sostituisce i costi per riga nella scheda costi.</p>
+        </details>
+        <OrdiniPerFornitore commessaId={c.id} puoGestire={puoGestireOrdini(utente)} conArrivi={!pp || apre("ARRIVO")} />
+        {/* controllo merce, prelievi dal magazzino e avvio commessa: servono quando la merce arriva, non mentre si ordina (Ugo 23/11/2026) */}
+        {(!pp || apre("ARRIVO")) && (
+          <div className="mt-3 rounded-xl border-2 border-blue-300 bg-blue-50/40 p-3">
+            <h3 className="text-base font-bold text-blue-950">📦 Arrivo materiale in magazzino e controllo merce</h3>
+            <MaterialeCommessa commessaId={c.id} puoGestire={puoGestireOrdini(utente)} />
+          </div>
+        )}
+        <details className="mt-3 rounded border border-amber-200 bg-amber-50 p-2">
+          <summary className="cursor-pointer text-sm font-semibold text-amber-950">Modo rapido: totale acquisto materiali{haAcquistiTotali ? ` — registrato ${eur(totaleAcquisti)}` : ""} <span className="text-xs font-normal text-neutral-500">(solo se non usi i totali per fornitore)</span></summary>
+          <div className="mt-2">
+          <p className="text-xs text-neutral-700 mb-2">Inserisci un solo importo per fornitore/fattura. Se presente, sostituisce i costi per riga nella scheda costi.</p>
           <form action={aggiungiCostoManuale} className="flex flex-wrap items-end gap-2">
             <input type="hidden" name="commessaId" value={c.id} />
             <input type="hidden" name="categoria" value="ACQUISTO_MATERIALE" />
@@ -927,48 +975,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
               )}
             </div>
           ))}
-        </div>
-        {c.righeOrdine.length === 0 ? (
-          <form action={generaRigheOrdine}>
-            <input type="hidden" name="id" value={c.id} />
-            <button className="btn-3d btn-3d-purple text-sm px-4 py-2">Genera elenco dalle righe del preventivo</button>
-          </form>
-        ) : (
-          <div className="space-y-2">
-            {c.righeOrdine.map((r) => (
-              <form key={r.id} action={aggiornaRigaOrdine} className={`border rounded p-2 ${r.arrivato ? "border-green-300 bg-green-50" : r.ordinato ? "border-indigo-200 bg-indigo-50" : "border-neutral-200"}`}>
-                <input type="hidden" name="rigaId" value={r.id} />
-                <p className="text-sm font-medium text-neutral-900">{r.complemento && <span className="text-[10px] font-bold mr-1.5 px-1 rounded bg-teal-100 text-teal-900" title="Aggiunto al rilievo: solo acquisto, la vendita non cambia">🧩 COMPLEMENTO</span>}{r.descrizione} <span className="text-xs text-neutral-600">× {r.quantita}</span>
-                  {r.ordineFornitore && <Link href={`/ordini-fornitori/${r.ordineFornitore.id}`} className="ml-2 text-xs text-purple-800 underline">ordine {r.ordineFornitore.numero}/{r.ordineFornitore.anno}</Link>}
-                  {r.costoPrevisto !== null && <span className="ml-2 text-xs text-neutral-600">costo previsto {eur(r.costoPrevisto)}</span>}</p>
-                <div className="flex flex-wrap items-center gap-3 mt-1.5">
-                  <select name="fornitoreId" defaultValue={r.fornitoreId ?? ""} disabled={!!r.ordineFornitoreId} title={r.ordineFornitoreId ? "La riga è già in un ordine: se non è ancora inviato, cambi il fornitore dall'ordine (↪ Ordina da un altro fornitore)" : undefined} className={inp}>
-                    <option value="">Fornitore…</option>
-                    {fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}
-                  </select>
-                  <label className="flex items-center gap-1 text-xs text-neutral-900"><input type="checkbox" name="ordinato" defaultChecked={r.ordinato} /> Ordinato{r.ordinatoIl ? ` (${r.ordinatoIl.toLocaleDateString("it-IT")})` : ""}</label>
-                  <label className="flex items-center gap-1 text-xs text-neutral-900"><input type="checkbox" name="arrivato" defaultChecked={r.arrivato} /> Arrivato{r.arrivatoIl ? ` (${r.arrivatoIl.toLocaleDateString("it-IT")})` : ""}</label>
-                  {venditaRiga(r.rigaPreventivoId) !== null && (
-                    <span className="text-xs font-bold text-neutral-800">Vendita <b>{eur(venditaRiga(r.rigaPreventivoId) ?? 0)}</b></span>
-                  )}
-                  <div className="flex flex-col">
-                    <label className="text-[10px] text-neutral-600">Costo d&apos;acquisto €</label>
-                    <input name="costoEffettivo" defaultValue={r.costoEffettivo ?? ""} placeholder="inserisci quando noto" className={`${inp} w-36 border-amber-400`} />
-                  </div>
-                  {r.costoEffettivo !== null && venditaRiga(r.rigaPreventivoId) !== null && (
-                    <span className="text-xs text-green-900">margine riga <b>{eur((venditaRiga(r.rigaPreventivoId) ?? 0) - (r.costoEffettivo ?? 0))}</b></span>
-                  )}
-                  <input name="note" defaultValue={r.note ?? ""} placeholder="Note" className={`${inp} w-40`} />
-                  <button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
-                </div>
-              </form>
-            ))}
-            <form action={generaRigheOrdine}>
-              <input type="hidden" name="id" value={c.id} />
-              <button className="text-xs text-blue-800 underline">Aggiorna elenco con eventuali righe nuove del preventivo</button>
-            </form>
           </div>
-        )}
+        </details>
       </details>
       )}
 
@@ -1163,8 +1171,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                     <form action={caricaFotoPosa} className="mt-2 space-y-2">
                       <input type="hidden" name="posaId" value={p.id} />
                       <select name="categoria" className={inp}><option value="PRIMA">Prima</option><option value="DURANTE">Durante</option><option value="PROBLEMA">Problema</option></select>
-                      <FotoRilievo name="foto" />
-                      <button className="btn-3d btn-3d-pink text-sm px-4 py-2">Salva foto</button>
+                      <p className="text-xs text-neutral-600">Scegli la categoria, poi le foto: partono da sole, una alla volta.</p>
+                      <FotoRilievo name="foto" invio={{ url: `/api/posa/${p.id}/foto`, leggi: ["categoria"], aggiorna: true }} />
                     </form>
                   </details>
                   <details>
@@ -1180,7 +1188,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                         <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
                       </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
-                      <FotoRilievo name="foto" />
+                      <FotoRilievo name="foto" invio={{ url: `/api/posa/${p.id}/foto`, campi: { categoria: "DOPO" } }} />
                       <input name="nomeFirmatario" placeholder="Nome di chi firma" className={`${inp} w-64`} />
                       <FirmaCliente name="firmaCliente" />
                       <div className="bg-neutral-50 border border-neutral-200 rounded p-2 space-y-2">

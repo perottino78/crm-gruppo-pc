@@ -6,6 +6,7 @@ import BrandSwitcher from "@/components/BrandSwitcher";
 import { getCurrentUser } from "@/lib/auth";
 import { scopePreventivoWhere } from "@/lib/scope";
 import { creaCommessaDaPreventivo } from "@/app/commesse-actions";
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 import { STATI_COMMESSA, numeroCommessa, eur, statoConsegna } from "@/lib/commesse";
 
 export default async function CommessePage({ searchParams }: { searchParams: Promise<{ brand?: string }> }) {
@@ -13,6 +14,10 @@ export default async function CommessePage({ searchParams }: { searchParams: Pro
   const brandFiltro = brand && brand !== "Tutti" ? { brand: { nome: brand } } : {};
   const utente = await getCurrentUser();
   const scope = utente ? scopePreventivoWhere(utente) : {};
+
+  // le pratiche ferme su «In attesa acconto» ma già con la via libera (50% incassato…) passano a «Rilievo da programmare»
+  const ferme = await prisma.commessa.findMany({ where: { ...brandFiltro, preventivo: scope, stato: "IN_ATTESA_ACCONTO" }, select: { id: true }, take: 60 });
+  for (const f of ferme) await ricalcolaStatoCommessa(f.id).catch(() => undefined);
 
   const [commesse, daAvviare, rilievi] = await Promise.all([
     prisma.commessa.findMany({

@@ -67,8 +67,10 @@ test("passo precedente: salta i passi in parallelo", () => {
   assert.equal(passoPrecedente(passi, "FATTURA")?.chiave, "BENVENUTO");
 });
 
-test("il saldo si può fare quando vuoi, anche prima degli ordini", () => {
-  assert.equal(stato(base).SALDO, "O");
+test("il saldo si può aprire quando vuoi ma si evidenzia solo a materiale arrivato", () => {
+  assert.equal(stato(base).SALDO, "I");
+  assert.equal(passiPratica(base).passi.find((p) => p.chiave === "SALDO")!.parallelo, true);
+  assert.equal(stato({ ...base, fatturaAccontoIl: adesso, progettoCreatoIl: adesso, benvenutoIl: adesso, viaLibera: true, rilievoFissato: true, rilievoCaricato: true, ordinato: true, materialeCompleto: true }).SALDO, "O");
   assert.equal(stato({ ...base, saldoIncassato: true }).SALDO, "F");
 });
 
@@ -104,4 +106,21 @@ test("scheda cliente: acconto incassato → «Incasso acconto» è fatto anche s
   assert.equal(st.FATT_ACCONTO, "corrente");
   assert.equal(st.PROGETTO, "fatto");
   assert.equal(st.RILIEVO, "futuro");
+});
+
+test("pratica presa da BConsole: progetto, fattura e benvenuto sono già fatti e «Carica il rilievo» si apre", () => {
+  const r = passiPratica({ ...base, daBConsole: true });
+  assert.equal(r.corrente, "RILIEVO_APP");
+  const st = Object.fromEntries(r.passi.map((p) => [p.chiave, p.stato]));
+  assert.equal(st.PROGETTO, "FATTO");
+  assert.equal(st.FATTURA, "FATTO");
+  // dal task del rilievo si arriva al caricamento anche se l'appuntamento non è in ONE (rifissato su BConsole)
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "RILIEVO"), "RILIEVO");
+});
+
+test("«Arrivo in magazzino» si può aprire anche mentre il passo corrente è ancora materiale e ordini", () => {
+  const r = passiPratica({ ...base, fatturaAccontoIl: new Date(), progettoCreatoIl: new Date(), benvenutoIl: new Date(), viaLibera: true, rilievoFissato: true, rilievoCaricato: true });
+  assert.equal(r.corrente, "MATERIALE");
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "ARRIVO"), "ARRIVO");
+  assert.equal(passoDaMostrare(r.passi, r.corrente, "POSA"), "MATERIALE");
 });

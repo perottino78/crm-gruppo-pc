@@ -1,7 +1,7 @@
 // Collaudo: «Prendi in carico nel CRM» di un ordine BConsole (pratica, fatture agganciate, task dalla fase scelta).
 // DATABASE_URL=postgresql://t:t@localhost:5432/crmtest node --require ./tests/collaudo/registra.cjs --import tsx tests/collaudo/presa-in-carico-bc.collaudo.ts
 import { prisma } from "../../src/lib/prisma";
-import { prendiInCaricoOrdineBC } from "../../src/app/commesse-actions";
+import { prendiInCaricoOrdineBC, agganciaOffertaONE } from "../../src/app/commesse-actions";
 import { sincronizzaScadenzeCommesse } from "../../src/lib/amministrazione/server";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -43,6 +43,24 @@ async function main() {
   r = await dove(prendiInCaricoOrdineBC(fd({ docId: "ORD|9", fase: "FATT_ACCONTO" })));
   const c2 = await prisma.commessa.findFirst({ where: { ordineBC: "9/2026" }, include: { tasks: true } });
   verifica(c2?.tasks.length === 1 && c2.tasks[0].faseChiave === "FATT_ACCONTO" && !c2.accontoIncassato, "ordine senza fatture: la pratica parte dalla fattura di acconto");
+
+  // l'offerta già fatta in ONE si copia dentro quella della pratica di BConsole (Ugo 22/11/2026)
+  const prod = await prisma.preventivo.create({ data: { clienteId: cliente.id, brandId: pura.id, commercialeId: ugo.id, stato: "INVIATO", oggetto: "Osmosi vera", totaleNetto: 2049.18, totaleIva: 450.82, righe: { create: [{ testoLibero: "Depuratore osmosi inversa", quantita: 1, prezzoUnitario: 2049.18, ordine: 0 }] } } });
+  const destId = c!.preventivoId;
+  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod.id })));
+  const dopo = await prisma.commessa.findUnique({ where: { id: c!.id }, include: { preventivo: { include: { righe: true } } } });
+  verifica(dopo?.preventivoId === destId && dopo.preventivo.righe.length === 1 && dopo.preventivo.righe[0].testoLibero === "Depuratore osmosi inversa", "prodotti e prezzi dell'offerta di ONE sono nell'offerta della pratica", r);
+  verifica(dopo?.totaleVendita === 2500, "i totali della pratica (BConsole) non cambiano");
+  verifica((await prisma.preventivo.findUnique({ where: { id: prod.id } }))?.stato === "INVIATO" && (await prisma.rigaPreventivo.count({ where: { preventivoId: prod.id } })) === 1, "l'offerta di ONE resta com'è");
+  verifica((await prisma.rigaOrdine.count({ where: { commessaId: c!.id } })) >= 1, "le righe entrano nel materiale della pratica");
+  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: destId })));
+  verifica(r?.includes("avviso="), "non si copia l'offerta della pratica su se stessa", r);
+  // «teniamo solo quella di BConsole e l'altra la cancelliamo»
+  const prod2 = await prisma.preventivo.create({ data: { clienteId: cliente.id, brandId: pura.id, commercialeId: ugo.id, stato: "ACCETTATO", confermatoIl: new Date(), totaleNetto: 100, totaleIva: 22, righe: { create: [{ testoLibero: "Altro", quantita: 1, prezzoUnitario: 100, ordine: 0 }] } } });
+  const altra = await prisma.commessa.create({ data: { numero: 77, anno: 2026, preventivoId: prod2.id, clienteId: cliente.id, brandId: pura.id, responsabileId: ugo.id, totaleVendita: 122, totaleImponibile: 100, accontoTipo: "ACCONTO", stato: "IN_ATTESA_ACCONTO" } });
+  r = await dove(agganciaOffertaONE(fd({ commessaId: c!.id, preventivoId: prod2.id, eliminaAltra: "1" })));
+  verifica((await prisma.commessa.findUnique({ where: { id: altra.id } })) === null && (await prisma.commessa.findUnique({ where: { id: c!.id } })) !== null, "l'altra pratica di ONE, ancora vuota, viene cancellata e resta quella di BConsole", r);
+  verifica((await prisma.preventivo.findUnique({ where: { id: prod2.id } })) === null && (await prisma.cestino.count({ where: { rifId: prod2.id } })) === 1, "anche l'offerta di ONE è cancellata e finisce nel cestino");
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }
 main().catch((e) => { console.error(e); ko++; }).finally(async () => { await prisma.$disconnect(); process.exit(ko ? 1 : 0); });

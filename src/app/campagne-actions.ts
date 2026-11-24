@@ -38,6 +38,36 @@ export async function creaCampagna(fd: FormData) {
   redirect(`/campagne/${c.id}`);
 }
 
+const TESTO_PRIVACY = `Gentile {nome},
+
+in Gruppo P&C teniamo alla riservatezza dei tuoi dati. Abbiamo aggiornato la nostra informativa sulla privacy, che spiega quali dati trattiamo, perché, per quanto tempo e come puoi esercitare i tuoi diritti (accesso, rettifica, cancellazione, opposizione).
+
+Puoi leggerla qui: {informativa}
+
+Se vuoi, puoi anche scegliere di ricevere le nostre novità, promozioni e iniziative: basta un clic su questo link personale (non è obbligatorio e non cambia nulla per i lavori in corso con noi):
+{consenso}
+
+Se invece non vuoi ricevere nostre comunicazioni promozionali, puoi disiscriverti in qualsiasi momento dal link in fondo a questa email.
+
+Grazie,
+Gruppo P&C`;
+
+/**
+ * Prepara (senza inviare) la campagna «Aggiornamento privacy»: informativa + link per dare il consenso + disiscrizione.
+ * Di partenza va solo a chi ha già un rapporto con noi (ha comprato); sta in BOZZA, parte solo quando la lancia il marketing.
+ * Niente aperture/clic: si tracciano solo per chi darà il consenso.
+ */
+export async function creaCampagnaPrivacy() {
+  const u = await marketing();
+  const c = await prisma.campagna.create({
+    data: {
+      nome: "Aggiornamento privacy e consenso", creataDa: u.nome, oggetto: "Gruppo P&C: la tua privacy e le tue preferenze", preheader: "Abbiamo aggiornato l'informativa. Scegli se vuoi ricevere le nostre novità.",
+      testo: TESTO_PRIVACY, formato: "TESTO", situazione: "HA_COMPRATO", tracciamento: false,
+    },
+  });
+  redirect(`/campagne/${c.id}?ok=${encodeURIComponent("Campagna pronta in BOZZA: controlla il testo, scegli a chi mandarla e fai una prova. Non è ancora partita.")}`);
+}
+
 /** Cambia il nome della campagna (dal titolo, in qualsiasi momento). */
 export async function rinominaCampagna(fd: FormData) {
   await marketing();

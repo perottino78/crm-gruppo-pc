@@ -82,6 +82,8 @@ async function main() {
   verifica((await praticheSenzaKit(ugo)).some((x) => x.id === finita1.id), "la pratica torna fra quelle senza kit");
 
   console.log("5. La spunta veloce dell'ufficio (fine lavori)");
+  // la foto della consegna annullata è «vecchia»: non deve far contare la foto alla nuova registrazione (contano solo quelle caricate nelle ultime ore)
+  await prisma.documento.updateMany({ where: { entitaId: finita1.id, cartella: "Consegna kit" }, data: { createdAt: new Date(Date.now() - 48 * 3600_000) } });
   const giorgia = await prisma.utente.create({ data: { nome: "Giorgia Ufficio", email: "giorgia@x.it", username: "giorgia", ruolo: "AMMINISTRATIVO", ufficio: "POSA" } });
   const viste = await praticheSenzaKit(giorgia);
   verifica(viste.length === 1 && viste[0].id === finita1.id && viste[0].commerciale === "Marco Piccatti", "chi lavora in ufficio vede i lavori finiti senza kit anche dei commerciali (non solo i suoi)", viste);

@@ -51,6 +51,6 @@ export { testoDaHtml } from "./html";
 /** Il template HTML incollato: se manca il link per disiscriversi ({disiscrizione}), lo aggiunge in fondo (obbligatorio). */
 export function htmlCampagna(template: string, linkDisiscrizione: string): string {
   if (/\{\s*disiscrizione\s*\}/i.test(template)) return template.replace(/\{\s*disiscrizione\s*\}/gi, linkDisiscrizione);
-  const piede = `<p style="font-size:11px;color:#888;text-align:center;margin:24px 0">Non vuoi più ricevere le nostre email? <a href="${linkDisiscrizione}" style="color:#888">Disiscriviti</a>.</p>`;
+  const piede = `<p style="font-size:11px;color:#888;text-align:center;margin:24px 0">Non vuoi più ricevere le nostre email? <a href="${linkDisiscrizione}" style="color:#888">Disiscriviti</a> · <a href="${(process.env.APP_URL || "https://crm-gruppo-pc.vercel.app")}/privacy" style="color:#888">Informativa privacy</a>.</p>`;
   return /<\/body>/i.test(template) ? template.replace(/<\/body>/i, `${piede}</body>`) : `${template}${piede}`;
 }

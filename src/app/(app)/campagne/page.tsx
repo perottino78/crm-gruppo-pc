@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { creaCampagna, puoFareCampagne, duplicaCampagna, eliminaCampagna, archiviaCampagna } from "@/app/campagne-actions";
+import { creaCampagnaPrivacy, creaCampagna, puoFareCampagne, duplicaCampagna, eliminaCampagna, archiviaCampagna } from "@/app/campagne-actions";
 import BottoneConferma from "@/components/BottoneConferma";
 import { giorniAllaScadenza, testoGiorni } from "@/lib/campagne/regole";
 
@@ -43,6 +43,7 @@ export default async function CampagnePage({ searchParams }: { searchParams: Pro
         <Link href="/campagne" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${!soloAb && !archivio ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-700"}`}>Attive</Link>
         <Link href="/campagne?tipo=ab" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${soloAb ? "border-purple-700 bg-purple-700 text-white" : "border-purple-300 bg-purple-50 text-purple-900"}`}>🧪 A/B test ({nAb})</Link>
         <Link href="/campagne?tipo=archivio" className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${archivio ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-700"}`}>🗄 Archivio ({nArch})</Link>
+        <form action={creaCampagnaPrivacy}><button className="rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1.5 text-sm font-semibold text-emerald-900">🔒 Prepara «Aggiornamento privacy»</button></form>
         <Link href="/campagne/report" className="rounded-full border border-blue-300 bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-900">📊 Report settimanale e mensile</Link>
         {!archivio && <form action={creaCampagna} className="ml-auto flex gap-2">
           <input type="hidden" name="ab" value="1" />

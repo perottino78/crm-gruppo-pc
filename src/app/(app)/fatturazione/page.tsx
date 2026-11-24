@@ -3,9 +3,9 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { numeroCommessa } from "@/lib/commesse";
-import { SEZIONALI, STATI_DDT, TIPI_FATTURA } from "@/lib/fatturazione/tabelle";
+import { CAUSALI_TRASPORTO, SEZIONALI, STATI_DDT, TIPI_FATTURA } from "@/lib/fatturazione/tabelle";
 import { numeroDdt } from "@/lib/fatturazione/calcoli";
-import { creaFattura, creaDdt, fatturaDaDdt } from "@/app/fatturazione-actions";
+import { creaFattura, creaDdt, creaDdtFornitore, fatturaDaDdt } from "@/app/fatturazione-actions";
 import ClientePicker from "@/components/calendario/ClientePicker";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
@@ -16,6 +16,7 @@ const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm";
 /** «Da fatturare»: commesse senza fattura di acconto o di saldo, DDT da fatturare, bozze in corso e scorciatoie. */
 export default async function DaFatturarePage({ searchParams }: { searchParams: Promise<{ errore?: string }> }) {
   const { errore } = await searchParams;
+  const fornitori = await prisma.soggetto.findMany({ where: { ruoli: { has: "FORNITORE" }, attivo: true }, select: { id: true, ragioneSociale: true }, orderBy: { ragioneSociale: "asc" } });
   const [commesse, ddt, bozze, ddtBozze] = await Promise.all([
     prisma.commessa.findMany({
       where: { stato: { notIn: ["ANNULLATA", "CHIUSA"] }, chiusaIl: null, ordineBC: null },
@@ -63,6 +64,13 @@ export default async function DaFatturarePage({ searchParams }: { searchParams: 
           <label className="block text-xs text-neutral-700">Data <input type="date" name="data" defaultValue={oggi()} className={inp} /></label>
           <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Crea la bozza del DDT</button>
           <p className="text-[11px] text-neutral-600">Dalla commessa (qui sotto) il DDT parte già con le voci dell&apos;offerta.</p>
+        </form>
+        <form action={creaDdtFornitore} className="card-fase space-y-2">
+          <h2 className="font-bold text-neutral-900">↩️ DDT a un fornitore <span className="text-xs font-normal text-neutral-600">(reso, conto lavorazione)</span></h2>
+          <label className="block text-xs text-neutral-700">Fornitore <select name="fornitoreId" required className={`${inp} w-full`}><option value="">— scegli —</option>{fornitori.map((f) => <option key={f.id} value={f.id}>{f.ragioneSociale}</option>)}</select></label>
+          <label className="block text-xs text-neutral-700">Causale <select name="causale" className={`${inp} w-full`}>{["Reso al fornitore", "Conto lavorazione a fornitore"].filter((c) => CAUSALI_TRASPORTO.includes(c)).map((c) => <option key={c} value={c}>{c}</option>)}</select></label>
+          <label className="block text-xs text-neutral-700">Data <input type="date" name="data" defaultValue={oggi()} className={inp} /></label>
+          <button className="btn-3d btn-3d-amber text-sm px-4 py-2">Crea la bozza del DDT</button>
         </form>
       </div>
 

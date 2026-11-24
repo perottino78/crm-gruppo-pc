@@ -13,8 +13,8 @@ const inp = "border border-neutral-300 rounded px-2 py-1.5 text-xs bg-white";
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: string | null) => (d ? new Date(d).toLocaleDateString("it-IT", { timeZone: "Europe/Rome" }) : "senza data");
 
-export default function MovimentoAMano({ azione, conti, contoPredefinito, categorie, divisioni }: {
-  azione: (fd: FormData) => void | Promise<void>; conti: Conto[]; contoPredefinito?: string; categorie: string[]; divisioni: string[];
+export default function MovimentoAMano({ azione, conti, contoPredefinito, categorie, divisioni, metodi }: {
+  azione: (fd: FormData) => void | Promise<void>; conti: Conto[]; contoPredefinito?: string; categorie: string[]; divisioni: string[]; metodi: { chiave: string; nome: string }[];
 }) {
   const [verso, setVerso] = useState("uscita");
   const [cerca, setCerca] = useState("");
@@ -116,8 +116,10 @@ export default function MovimentoAMano({ azione, conti, contoPredefinito, catego
         {categorie.map((c) => <option key={c}>{c}</option>)}
       </select>
       <select name="divisione" className={inp}><option value="">Divisione…</option>{divisioni.map((b) => <option key={b}>{b}</option>)}</select>
+      <select name="metodo" className={inp} defaultValue="" title="Come è stato pagato"><option value="">Come… (facoltativo)</option>{metodi.map((m) => <option key={m.chiave} value={m.chiave}>{m.nome}</option>)}</select>
+      <input name="commissione" inputMode="decimal" placeholder="Commissioni € (facoltativo)" className={inp} title="Commissione della banca: si scrive come movimento a parte" />
       <button className="btn-3d btn-3d-green text-xs">Registra</button>
-      <p className="text-[11px] text-neutral-500 md:col-span-6">I movimenti delle banche non si scrivono a mano: si importano dall&apos;estratto conto.</p>
+      <p className="text-[11px] text-neutral-500 md:col-span-6">Un pagamento scritto a mano su una banca resta «da confermare» finché non importi l&apos;estratto conto, che lo riconosce (stesso importo, pochi giorni). Quando arriva la fattura, apri il movimento qui sotto e collegala: risulta pagata.</p>
     </form>
   );
 }

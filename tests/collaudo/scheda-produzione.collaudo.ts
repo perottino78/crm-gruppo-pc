@@ -49,9 +49,9 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   await prisma.configurazione.deleteMany({ where: { chiave: "schede_pronte_versione" } });
   const creati = await assicuraModelliPronti();
   const nomi = (await prisma.schedaProduzioneModello.findMany({ select: { nome: true } })).map((x) => x.nome);
-  verifica(creati === 5 && nomi.some((n) => n.includes("angolari in alluminio")) && nomi.some((n) => n.includes("legno piallato")) && nomi.some((n) => n.includes("NEW LIPARI")) && nomi.some((n) => n.includes("SEEGLASS")), "i moduli pronti (standard, NEW LIPARI, SEEGLASS, legno piallato) compaiono da soli", nomi);
+  verifica(creati === 6 && nomi.some((n) => n.includes("serramenti PVC")) && nomi.some((n) => n.includes("angolari in alluminio")) && nomi.some((n) => n.includes("legno piallato")) && nomi.some((n) => n.includes("NEW LIPARI")) && nomi.some((n) => n.includes("SEEGLASS")), "i moduli pronti (standard, NEW LIPARI, SEEGLASS, legno piallato) compaiono da soli", nomi);
   await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "SEEGLASS" } } });
-  verifica((await assicuraModelliPronti()) === 0 && (await prisma.schedaProduzioneModello.count()) === 4, "una volta sola: un modello tolto a mano non torna");
+  verifica((await assicuraModelliPronti()) === 0 && (await prisma.schedaProduzioneModello.count()) === 5, "una volta sola: un modello tolto a mano non torna");
   // produzione già alla versione 1 (senza legno): al rilascio arriva solo il modulo nuovo, il SEEGLASS tolto non torna
   await prisma.schedaProduzioneModello.deleteMany({ where: { nome: { contains: "legno piallato" } } });
   await prisma.configurazione.update({ where: { chiave: "schede_pronte_versione" }, data: { valore: "1" } });
@@ -169,6 +169,20 @@ const redir = async (p: Promise<unknown>) => { try { await p; return ""; } catch
   const okTec = await redir(A.creaSchedaDaRilievo(fd({ commessaId: com.id, modelloId: mr.id, campo_misure_definitive: "x" })));
   verifica(okTec.includes("okScheda"), "il tecnico del rilievo sì", okTec);
   (globalThis as { __utente?: unknown }).__utente = adminU;
+
+  // modulo serramenti PVC: una riga per finestra, scelte con ☒ ☐, righe vuote tolte
+  {
+    const { MODELLO_SERRAMENTI } = await import("../../src/lib/ordini/serramenti");
+    const ms = await prisma.schedaProduzioneModello.create({ data: { nome: "Modulo d'ordine serramenti PVC", html: MODELLO_SERRAMENTI, creatoDaNome: "test" } });
+    const f = new FormData();
+    for (const [k, v] of Object.entries({ ordineId: ord.id, modelloId: ms.id, campo_tipologia_vetro: "44.2/16/4BE 39db", campo_colore_maniglie: "BRONZO", campo_tab_fin_1_stanza: "Soggiorno", campo_tab_fin_1_L: "1200", campo_tab_fin_1_H: "1400", campo_tab_fin_1_apertura: "2S", campo_tab_fin_1_stc: "STC", campo_tab_fin_2_stanza: "Cucina", campo_tab_cop_1_qta: "6" })) f.set(k, v);
+    f.append("campo_foro", "AEREAZIONE 160,5"); f.append("campo_foro", "PASSACANE");
+    await redir(A.creaSchedaProduzione(f));
+    const dd = await prisma.documento.findFirstOrThrow({ where: { entita: "COMMESSA", entitaId: com.id, cartella: "Schede produzione" }, orderBy: { createdAt: "desc" } });
+    const hs = dd.contenuto.toString("utf-8");
+    verifica(hs.includes("Soggiorno") && hs.includes("Cucina") && hs.includes("1200") && hs.includes("2S") && (hs.match(/class="r1"/g) ?? []).length === 2 && !/\{\{/.test(hs), "modulo serramenti: solo le finestre compilate, nessun segnaposto", hs.slice(0, 200));
+    verifica(/&#9746; 44\.2\/16\/4BE 39db/.test(hs) && /&#9746; AEREAZIONE 160,5/.test(hs) && /&#9746; PASSACANE/.test(hs) && /&#9746; STC/.test(hs), "modulo serramenti: scelte e vetro STC con le caselle ☒");
+  }
 
   console.log(`\n${ok} controlli superati, ${ko} falliti`);
   process.exit(ko ? 1 : 0);

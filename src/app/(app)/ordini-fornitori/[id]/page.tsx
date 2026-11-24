@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { assicuraModelliPronti } from "@/lib/ordini/schede-server";
@@ -20,6 +21,7 @@ import ModuloScheda from "@/components/ordini/ModuloScheda";
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
 import { salvaLegnoInOrdine, salvaAngolariInOrdine } from "@/app/schede-produzione-actions";
 import { valoriAngolari } from "@/lib/ordini/angolari";
+import { misureDaModulo, conMisureDefinitive } from "@/lib/ordini/misure";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d?: Date | null) => (d ? d.toLocaleDateString("it-IT") : "—");
@@ -41,6 +43,11 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
   const ap = valoriAngolari(o.righe, legniPratica.filter((r) => !r.ordineFornitoreId || r.ordineFornitoreId === o.id));
   const angolariIniziali = { iniziali: ap.valori, proposta: ap.proposta };
   const msg = await searchParams;
+  // misure scritte nei moduli compilati della pratica (e di questo ordine): si propongono come misure definitive di ogni riga
+  const moduliCompilati = await prisma.documento.findMany({ where: { OR: [...(o.commessaId ? [{ entita: "COMMESSA", entitaId: o.commessaId }] : []), { entita: "ORDINE_FORNITORE", entitaId: o.id }], cartella: { in: ["Schede produzione", "Generale"] }, mime: "text/html", NOT: { dati: { equals: Prisma.DbNull } } }, select: { nome: true, dati: true }, orderBy: { createdAt: "desc" }, take: 5 });
+  const misureModulo = moduliCompilati.flatMap((d) => misureDaModulo(d.dati as Record<string, string>).map((m) => ({ ...m, modulo: d.nome })));
+  const emailInviate = await prisma.emailOrdine.findMany({ where: { ordineFornitoreId: o.id }, orderBy: { createdAt: "desc" }, take: 20 });
+  const docEmail = await prisma.documento.findMany({ where: { id: { in: emailInviate.flatMap((e) => e.allegatiDocIds) } }, select: { id: true, nome: true } });
   const bozzaAperta = o.stato === "BOZZA";
   // per spostare una riga: prima i fornitori che hanno già una bozza per questa commessa, poi tutti gli altri
   const [fornitori, altreBozze] = bozzaAperta ? await Promise.all([
@@ -150,6 +157,11 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               <label className="text-[11px] md:col-span-2">Prezzo unit. €<input name="prezzoAcquisto" defaultValue={r.prezzoAcquisto ?? ""} placeholder="facoltativo" className={`${inp} w-full`} /></label>
               <label className="text-[11px] md:col-span-1">Sconto %<input name="scontoAcquisto" defaultValue={r.scontoAcquisto ?? ""} className={`${inp} w-full`} /></label>
               <label className="text-[11px] md:col-span-4">Note riga<input name="note" defaultValue={r.note ?? ""} className={`${inp} w-full`} /></label>
+              <label className="text-[11px] md:col-span-12">📐 Misure definitive di produzione <span className="text-neutral-500">(vanno nell&apos;ordine, nella conferma e in fattura al posto di quelle di preventivo{misureModulo.length ? "; scegli dal modulo o scrivile" : ""})</span>
+                <input name="misureDefinitive" list={`misure-${r.id}`} defaultValue={r.misureDefinitive ?? ""} placeholder="es. 1200×1400 mm" className={`${inp} w-full border-sky-300`} />
+                <datalist id={`misure-${r.id}`}>{misureModulo.map((m, k) => <option key={k} value={m.misure}>{m.etichetta}{m.quantita ? ` (q.tà ${m.quantita})` : ""}</option>)}</datalist>
+                {r.misureDefinitive && <span className="block text-[10px] text-sky-800">✔ {r.misureDefinitiveDa}{r.misureDefinitiveIl ? ` · ${dataIt(r.misureDefinitiveIl)}` : ""}</span>}
+              </label>
               <span className="text-xs md:col-span-1">{importoRiga(r) !== null ? eur(importoRiga(r)!) : ""}</span>
               {!annullato && <div className="flex gap-2 md:col-span-2"><button className="btn-3d btn-3d-blue text-[11px] px-2 py-1">salva</button>
                 {bozza && <button formAction={togliRigaDaOrdine} className="text-[11px] text-red-700 underline">togli</button>}</div>}
@@ -240,6 +252,35 @@ export default async function OrdineFornitorePage({ params, searchParams }: { pa
               ))}
             </ul>
           )}
+        </section>
+      )}
+
+      {passo === "invio" && o.righe.length > 0 && (
+        <section className="bg-white border border-neutral-200 rounded-lg p-4">
+          <h2 className="font-bold mb-1">📐 Riepilogo materiali e misure (come va al fornitore)</h2>
+          <ul className="text-sm space-y-0.5">
+            {o.righe.map((r) => (
+              <li key={r.id}>{r.quantita} × {conMisureDefinitive(r.descrizione, r.misureDefinitive)}{r.misureDefinitive ? <span className="text-xs text-sky-800"> ✔ definitive</span> : misureModulo.length ? <span className="text-xs text-amber-800"> · misure di preventivo (nessuna misura definitiva scelta)</span> : null}</li>
+            ))}
+          </ul>
+          {misureModulo.length > 0 && o.righe.some((r) => !r.misureDefinitive) && <p className="text-xs text-amber-900 mt-1">C&apos;è un modulo compilato con le misure di produzione: nel passo «Righe e dati» scegli per ogni riga le misure definitive, così coincidono con il modulo.</p>}
+        </section>
+      )}
+
+      {passo === "invio" && emailInviate.length > 0 && (
+        <section className="bg-white border border-neutral-200 rounded-lg p-4">
+          <h2 className="font-bold mb-2">📨 Email inviate al fornitore</h2>
+          <div className="space-y-2">
+            {emailInviate.map((e) => (
+              <div key={e.id} className={`rounded border p-2 text-sm ${e.stato === "INVIATA" ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50"}`}>
+                <p><b>{e.stato === "INVIATA" ? "✓ Inviata" : "✗ Non partita"}</b> il {e.createdAt.toLocaleString("it-IT", { timeZone: "Europe/Rome" })} da {e.inviataDa ?? "—"} a <b>{e.a}</b>{e.cc ? ` (cc ${e.cc})` : ""}</p>
+                <p className="text-xs text-neutral-700">Oggetto: {e.oggetto}</p>
+                <p className="text-xs">Allegati ({e.allegati.length}): {e.allegati.map((n, i) => { const d = docEmail.find((x) => x.id === e.allegatiDocIds[i]); return d ? <a key={i} href={`/api/documenti/${d.id}`} target="_blank" className="underline text-blue-800 mr-2">{n}</a> : <span key={i} className="mr-2">{n}</span>; })}</p>
+                {e.motivo && <p className="text-xs text-red-800">{e.motivo}</p>}
+                <details><summary className="text-xs underline cursor-pointer">testo</summary><pre className="whitespace-pre-wrap text-xs mt-1">{e.testo}</pre></details>
+              </div>
+            ))}
+          </div>
         </section>
       )}
 

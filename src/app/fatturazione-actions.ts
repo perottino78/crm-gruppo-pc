@@ -7,11 +7,11 @@ import { Prisma } from "@prisma/client";
 import { leggiCointestatario } from "@/lib/fatturazione/cointestato";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { setConfig } from "@/lib/leadIngest";
+import { getConfig, setConfig } from "@/lib/leadIngest";
 import { registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { CHIAVE_REALE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, emetti, emissioneReale, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta } from "@/lib/fatturazione/server";
+import { CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta, sezionaliSenzaUltimoNumero } from "@/lib/fatturazione/server";
 import { CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
 import { propostaDaCommessa, statoDdtDaRighe } from "@/lib/fatturazione/calcoli";
 import { numeroCommessa } from "@/lib/commesse";
@@ -64,11 +64,17 @@ export async function creaFattura(fd: FormData) {
   } else if (comm && tipo === "SALDO") {
     for (const r of await righeDaOfferta(comm.preventivo.id)) righe.push({ ...r, um: r.um });
     // acconti già fatturati (dal CRM o importati da BConsole) da dedurre
-    const acconti = await prisma.fatturaEmessa.findMany({ where: { commessaId: comm.id, tipo: "ACCONTO", stato: { in: ["EMESSA", "PROVA"] } }, select: { numero: true, data: true, imponibile: true, stato: true } });
+    const acconti = await prisma.fatturaEmessa.findMany({ where: { commessaId: comm.id, tipo: "ACCONTO", stato: { in: ["EMESSA", "PROVA"] } }, select: { numero: true, data: true, imponibile: true, stato: true, righe: { select: { aliquota: true }, take: 1 } } });
     const giaCrm = new Set(acconti.map((a) => a.numero));
-    const daBc = await prisma.fatturaVendita.findMany({ where: { commessaId: comm.id, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true } });
-    for (const a of [...acconti.filter((x) => x.stato === "EMESSA"), ...daBc.filter((x) => !giaCrm.has(x.numero))]) {
-      righe.push({ descrizione: `A dedurre acconto fattura n. ${a.numero} del ${a.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`, quantita: 1, um: null, prezzo: -Math.abs(a.imponibile), aliquota, natura: null });
+    const daBc = await prisma.fatturaVendita.findMany({ where: { commessaId: comm.id, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
+    // l'acconto si deduce con la stessa aliquota con cui è stato fatturato (con righe a IVA diverse nel saldo non esiste un'aliquota sola)
+    const aliquotaBc = (x: { imponibile: number; iva: number }) => { const a = x.imponibile ? Math.round((Math.abs(x.iva) / Math.abs(x.imponibile)) * 100) : aliquota; return [0, 4, 5, 10, 22].includes(a) ? a : aliquota; };
+    const dedotti = [
+      ...acconti.filter((x) => x.stato === "EMESSA").map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: x.righe[0]?.aliquota ?? aliquota })),
+      ...daBc.filter((x) => !giaCrm.has(x.numero)).map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: aliquotaBc(x) })),
+    ];
+    for (const a of dedotti) {
+      righe.push({ descrizione: `A dedurre acconto fattura n. ${a.numero} del ${a.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`, quantita: 1, um: null, prezzo: -Math.abs(a.imponibile), aliquota: a.aliquota, natura: null });
     }
     causale = "FATTURA SALDO";
   } else if (comm && tipo !== "NOTA_CREDITO") {
@@ -101,21 +107,23 @@ async function bozza(id: string | null) {
 export async function salvaTestataFattura(fd: FormData) {
   await utente();
   const f = await bozza(str(fd, "id"));
-  const tipo = TIPI_FATTURA.some((t) => t.codice === str(fd, "tipo")) ? str(fd, "tipo")! : f.tipo;
-  const data = giorno(str(fd, "data")) ?? f.data;
+  const bloccata = !!f.numero; // riaperta per correggerla: il numero è già suo, tipo, sezionale e data non cambiano
+  const tipo = bloccata ? f.tipo : TIPI_FATTURA.some((t) => t.codice === str(fd, "tipo")) ? str(fd, "tipo")! : f.tipo;
+  const data = bloccata ? f.data : giorno(str(fd, "data")) ?? f.data;
   const cointest = leggiCointestatario((k) => str(fd, k), fd.get("cointestata") === "on") as Prisma.InputJsonValue | null;
   await prisma.$transaction(async (tx) => {
     await tx.fatturaEmessa.update({
       where: { id: f.id },
       data: {
-        tipo, sezionale: sezionale(str(fd, "sezionale") ?? f.sezionale).codice, data, anno: data.getUTCFullYear(),
+        tipo, sezionale: bloccata ? f.sezionale : sezionale(str(fd, "sezionale") ?? f.sezionale).codice, data, anno: data.getUTCFullYear(),
         metodoPagamento: str(fd, "metodoPagamento"), banca: str(fd, "banca"), iban: str(fd, "iban")?.replace(/\s/g, "").toUpperCase() ?? null,
         causale: str(fd, "causale"), riferimento: str(fd, "riferimento"), note: str(fd, "note"), noteInterne: str(fd, "noteInterne"),
         addebitoBollo: fd.get("addebitoBollo") === "on", detrazione: fd.get("detrazione") === "on",
+        ritenutaAliquota: fd.get("conRitenuta") === "on" ? (num(fd, "ritenutaAliquota") ?? 23) : null, ritenutaBase: fd.get("conRitenuta") === "on" ? (num(fd, "ritenutaBase") ?? 100) : null,
         cointestatario: cointest ?? Prisma.DbNull,
         clienteNome: str(fd, "clienteNome") ?? f.clienteNome, partitaIva: campo(fd, "partitaIva", f.partitaIva, str), codiceFiscale: campo(fd, "codiceFiscale", f.codiceFiscale, (x, k) => str(x, k)?.toUpperCase() ?? null),
         indirizzo: campo(fd, "indirizzo", f.indirizzo, str), cap: campo(fd, "cap", f.cap, str), comune: campo(fd, "comune", f.comune, str), provincia: campo(fd, "provincia", f.provincia, (x, k) => str(x, k)?.toUpperCase() ?? null),
-        nazione: (campo(fd, "nazione", f.nazione, str) ?? "IT").toUpperCase().slice(0, 2), codiceDestinatario: campo(fd, "codiceDestinatario", f.codiceDestinatario, (x, k) => str(x, k)?.toUpperCase() ?? null), pec: campo(fd, "pec", f.pec, str),
+        nazione: (campo(fd, "nazione", f.nazione, str) ?? "IT").toUpperCase().slice(0, 2), codiceDestinatario: campo(fd, "codiceDestinatario", f.codiceDestinatario, (x, k) => str(x, k)?.toUpperCase() ?? null), pec: campo(fd, "pec", f.pec, str), email: campo(fd, "email", f.email, str), telefono: campo(fd, "telefono", f.telefono, str),
         persona: fd.has("clienteNome") ? fd.get("persona") === "on" : f.persona, nomePersona: campo(fd, "nomePersona", f.nomePersona, str), cognome: campo(fd, "cognome", f.cognome, str),
         causaleTrasporto: str(fd, "causaleTrasporto"), trasportoACura: str(fd, "trasportoACura"), vettore: str(fd, "vettore"), aspettoBeni: str(fd, "aspettoBeni"),
         colli: intero(fd, "colli"), pesoLordo: num(fd, "pesoLordo"), pesoNetto: num(fd, "pesoNetto"), porto: str(fd, "porto"),
@@ -171,10 +179,93 @@ export async function emettiFattura(fd: FormData) {
   try {
     const e = await prisma.$transaction((tx) => emetti(tx, f.id, u.nome, reale), { timeout: 30000 });
     await registraLog("FATTURA_EMESSA", e.id, e.stato, `${e.numero} — ${e.clienteNome} — ${e.totale.toFixed(2)} €`, u.nome);
+    // copia in pdf nella cartella «Fatture a cliente» della pratica (mai bloccante)
+    try {
+      if (e.commessaId && e.tipo !== "PROFORMA") {
+        const d = await datiPdfFattura(e.id);
+        if (d) {
+          const { pdfFattura } = await import("@/lib/fatturazione/pdf");
+          const bytes = Buffer.from(await pdfFattura(d.dati));
+          await prisma.documento.create({ data: { entita: "COMMESSA", entitaId: e.commessaId, cartella: "Fatture a cliente", nome: `Fattura ${(e.numero ?? "").replace(/\//g, "-")}.pdf`, mime: "application/pdf", dimensione: bytes.length, contenuto: bytes, caricatoDaNome: u.nome } });
+        }
+      }
+    } catch { /* il PDF resta scaricabile dalla fattura */ }
   } catch (err) { msg = (err as Error).message; }
   if (msg) errore(`/fatturazione/fatture/${f.id}`, msg);
   aggiorna(`/fatturazione/fatture/${f.id}`, "/amministrazione/fatture-vendita", "/amministrazione/scadenzario");
   redirect(`/fatturazione/fatture/${f.id}?emessa=1`);
+}
+
+/** Riapre una fattura emessa per correggerla (non inviata allo SDI, senza incassi): torna bozza CON il suo numero; rimessa «Emetti» riprende lo stesso numero. */
+export async function riapriFattura(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f) redirect("/fatturazione/fatture");
+  const no = await motivoNoRiapertura(f);
+  if (no) errore(`/fatturazione/fatture/${f.id}`, no);
+  await prisma.$transaction(async (tx) => {
+    if (f.fatturaVenditaId) {
+      await tx.scadenza.deleteMany({ where: { fatturaVenditaId: f.fatturaVenditaId } });
+      await tx.fatturaEmessa.update({ where: { id: f.id }, data: { fatturaVenditaId: null } });
+      await tx.fatturaVendita.delete({ where: { id: f.fatturaVenditaId } });
+    }
+    await tx.fatturaEmessa.update({ where: { id: f.id }, data: { stato: "BOZZA", xml: null, rate: Prisma.DbNull } });
+  });
+  await registraLog("FATTURA_EMESSA", f.id, "RIAPERTA", `${f.numero} riaperta per correggerla`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`, "/amministrazione/fatture-vendita", "/amministrazione/scadenzario");
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
+/** Segna la fattura come inviata allo SDI (o toglie il segno). Entro 12 giorni dall'emissione. */
+export async function segnaInviataSdi(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f || f.stato !== "EMESSA") redirect("/fatturazione/fatture");
+  const annulla = fd.get("annulla") === "1";
+  await prisma.fatturaEmessa.update({ where: { id: f.id }, data: { inviataSdiIl: annulla ? null : giorno(str(fd, "data")) ?? new Date() } });
+  await registraLog("FATTURA_SDI", f.id, annulla ? "ANNULLATA" : "INVIATA", `${f.numero} ${annulla ? "tolto il segno «inviata allo SDI»" : "segnata inviata allo SDI"}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
+/**
+ * Lo SDI ha scartato il file (errore da correggere, es. partita IVA o codice destinatario sbagliati): la fattura non è mai stata consegnata,
+ * quindi tiene il suo numero. Toglie il segno «inviata», annota il motivo e la rende riapribile: si corregge e si rimanda con lo stesso numero.
+ */
+export async function segnaScartataSdi(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f || f.stato !== "EMESSA") redirect("/fatturazione/fatture");
+  const motivo = (str(fd, "motivo") ?? "motivo non indicato").slice(0, 300);
+  const quando = new Date().toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
+  await prisma.fatturaEmessa.update({ where: { id: f.id }, data: { inviataSdiIl: null, noteInterne: [f.noteInterne, `⚠️ Scartata dallo SDI il ${quando}: ${motivo}`].filter(Boolean).join("\n") } });
+  await registraLog("FATTURA_SDI", f.id, "SCARTATA", `${f.numero} scartata dallo SDI: ${motivo}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
+/** Invia la fattura (PDF di cortesia) al cliente per email, dalla casella di chi la manda (Debora 23/11/2026). */
+export async function inviaFatturaEmail(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  const d = id ? await datiPdfFattura(id) : null;
+  if (!d) redirect("/fatturazione/fatture");
+  const f = d.fattura;
+  const a = (str(fd, "a") ?? "").split(/[;,\s]+/).filter((x) => x.includes("@"));
+  if (a.length === 0) errore(`/fatturazione/fatture/${f.id}`, "Scrivi l'email del cliente.");
+  const { pdfFattura } = await import("@/lib/fatturazione/pdf");
+  const { inviaMail } = await import("@/lib/mail/invio");
+  const pdf = Buffer.from(await pdfFattura(d.dati));
+  const numero = f.numero ?? "bozza";
+  const esito = await inviaMail({
+    a, daUtenteId: u.id, oggetto: `Fattura n. ${numero} - ${CEDENTE.denominazione}`,
+    testo: `Buongiorno,\n\nin allegato la fattura n. ${numero} del ${f.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}.\n\nCordiali saluti\nUfficio fatturazione\n${CEDENTE.denominazione}`,
+    allegati: [{ nome: `Fattura ${numero.replace(/\//g, "-")}.pdf`, contenuto: pdf, mime: "application/pdf" }],
+  });
+  if (!esito.inviata) errore(`/fatturazione/fatture/${f.id}`, `Email non inviata: ${esito.motivo ?? "errore"}`);
+  await registraLog("FATTURA_INVIATA_EMAIL", f.id, "INVIATA", `${numero} → ${a.join(", ")}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?inviata=1`);
 }
 
 /** Elimina una bozza, o una fattura di prova (non è mai stata valida). Libera i DDT collegati. */
@@ -183,6 +274,7 @@ export async function eliminaFattura(fd: FormData) {
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: true } });
   if (!f) redirect("/fatturazione/fatture");
   if (f.stato === "EMESSA") errore(`/fatturazione/fatture/${f.id}`, "Una fattura emessa non si elimina: fai una nota di credito.");
+  if (f.stato === "BOZZA" && f.numero) errore(`/fatturazione/fatture/${f.id}`, "Questa fattura ha già un numero (è stata riaperta per correggerla): riemettila oppure fai una nota di credito.");
   await prisma.$transaction(async (tx) => {
     const righeDdt = f.righe.map((r) => r.rigaDdtId).filter(Boolean) as string[];
     if (righeDdt.length) await tx.rigaDdtUscita.updateMany({ where: { id: { in: righeDdt } }, data: { fatturata: false } });
@@ -201,8 +293,8 @@ export async function creaNotaCredito(fd: FormData) {
   const u = await utente();
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: { orderBy: { posizione: "asc" } } } });
   if (!f || (f.stato !== "EMESSA" && f.stato !== "PROVA")) redirect("/fatturazione/fatture");
-  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, tipo: _t, cointestatario: _ct, ...resto } = f;
-  void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r; void _t;
+  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, tipo: _t, cointestatario: _ct, inviataSdiIl: _sdi1, ...resto } = f;
+  void _sdi1; void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r; void _t;
   const cointest = _ct === null ? undefined : (_ct as Prisma.InputJsonValue);
   const nc = await prisma.fatturaEmessa.create({
     data: {
@@ -219,8 +311,8 @@ export async function duplicaFattura(fd: FormData) {
   const u = await utente();
   const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" }, include: { righe: { orderBy: { posizione: "asc" } } } });
   if (!f) redirect("/fatturazione/fatture");
-  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, cointestatario: _ct2, ...resto } = f;
-  void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r;
+  const { id: _id, righe, stato: _s, progressivo: _p, numero: _n, xml: _x, fatturaVenditaId: _fv, emessaDaNome: _e, emessaIl: _ei, createdAt: _c, updatedAt: _u, rate: _r, cointestatario: _ct2, inviataSdiIl: _sdi2, ...resto } = f;
+  void _sdi2; void _id; void _s; void _p; void _n; void _x; void _fv; void _e; void _ei; void _c; void _u; void _r;
   const cointest2 = _ct2 === null ? undefined : (_ct2 as Prisma.InputJsonValue);
   const nuova = await prisma.fatturaEmessa.create({
     data: { ...resto, cointestatario: cointest2, data: oggi(), anno: oggi().getUTCFullYear(), creatoDaNome: u.nome, righe: { create: righe.map((r) => ({ posizione: r.posizione, codice: r.codice, descrizione: r.descrizione, quantita: r.quantita, um: r.um, prezzo: r.prezzo, sconto: r.sconto, aliquota: r.aliquota, natura: r.natura })) } },
@@ -230,6 +322,24 @@ export async function duplicaFattura(fd: FormData) {
 }
 
 // ======================= DDT DI USCITA =======================
+
+/** Nuovo DDT (bozza) a un fornitore: reso o merce data in lavorazione. I dati del fornitore vanno nel riquadro del destinatario. */
+export async function creaDdtFornitore(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.soggetto.findUnique({ where: { id: str(fd, "fornitoreId") ?? "" } });
+  if (!f) errore("/fatturazione", "Scegli il fornitore.");
+  const causale = CAUSALI_TRASPORTO.includes(str(fd, "causale") ?? "") ? str(fd, "causale")! : "Reso al fornitore";
+  const data = giorno(str(fd, "data")) ?? oggi();
+  const d = await prisma.ddtUscita.create({
+    data: {
+      anno: data.getUTCFullYear(), data, fornitoreId: f!.id, clienteNome: f!.ragioneSociale, indirizzo: f!.indirizzo, cap: f!.cap, comune: f!.comune, provincia: f!.provincia,
+      partitaIva: f!.partitaIva, codiceFiscale: f!.codiceFiscale, causale, trasportoACura: "MITTENTE", aspettoBeni: "A vista", porto: "Porto franco",
+      riferimento: `Fornitore ${f!.ragioneSociale}`, creatoDaNome: u.nome,
+    },
+  });
+  aggiorna();
+  redirect(`/fatturazione/ddt/${d.id}`);
+}
 
 /** Nuovo DDT (bozza) per un cliente o da una commessa; con la spunta copia le voci dell'offerta. */
 export async function creaDdt(fd: FormData) {
@@ -322,7 +432,7 @@ export async function confermaDdt(fd: FormData) {
   const reale = await emissioneReale();
   const e = await prisma.$transaction(async (tx) => {
     const numero = await prossimoNumeroDdt(tx, d.anno, !reale);
-    return tx.ddtUscita.update({ where: { id: d.id }, data: { numero, prova: !reale, stato: "DA_FATTURARE", emessoDaNome: u.nome, inizioTrasporto: d.inizioTrasporto ?? new Date() } });
+    return tx.ddtUscita.update({ where: { id: d.id }, data: { numero, prova: !reale, stato: "DA_FATTURARE", emessoDaNome: u.nome, inizioTrasporto: d.inizioTrasporto } });
   });
   await registraLog("DDT_USCITA", e.id, "CONFERMATO", `${e.prova ? "PROVA " : ""}${e.numero}/${e.anno} — ${e.clienteNome}`, u.nome);
   aggiorna(`/fatturazione/ddt/${d.id}`);
@@ -397,15 +507,30 @@ export async function fatturaDaDdt(fd: FormData) {
 export async function salvaImpostazioniFatturazione(fd: FormData) {
   const u = await utente();
   const anno = intero(fd, "anno") ?? new Date().getFullYear();
+  const cambi: string[] = [];
   for (const s of SEZIONALI) {
     const v = intero(fd, `ultimo_${s.codice}`);
-    if (v !== null) await setConfig(chiaveUltimaFattura(s.codice, anno), String(Math.max(0, v)));
+    if (v !== null) {
+      const nuovo = String(Math.max(0, v));
+      const prima = await getConfig(chiaveUltimaFattura(s.codice, anno));
+      if (prima !== nuovo) cambi.push(`${s.estensione}/${anno}: ${prima ?? "—"} → ${nuovo}`);
+      await setConfig(chiaveUltimaFattura(s.codice, anno), nuovo);
+    }
   }
   const ddt = intero(fd, "ultimo_ddt");
-  if (ddt !== null) await setConfig(chiaveUltimoDdt(anno), String(Math.max(0, ddt)));
+  if (ddt !== null) {
+    const prima = await getConfig(chiaveUltimoDdt(anno));
+    if (prima !== String(Math.max(0, ddt))) cambi.push(`DDT/${anno}: ${prima ?? "—"} → ${Math.max(0, ddt)}`);
+    await setConfig(chiaveUltimoDdt(anno), String(Math.max(0, ddt)));
+  }
+  if (cambi.length) await registraLog("FATTURAZIONE", null, "NUMERAZIONE", `Ultimo numero usato in BConsole: ${cambi.join("; ")}`, u.nome);
   if (u.ruolo === "AMMINISTRATORE") {
     const reale = fd.get("reale") === "on";
     if (reale !== (await emissioneReale())) {
+      if (reale) {
+        const mancano = await sezionaliSenzaUltimoNumero(anno);
+        if (mancano.length) errore("/fatturazione/impostazioni", `Prima di accendere l'emissione vera scrivi l'ultimo numero usato in BConsole per: ${mancano.join(", ")} (scrivi 0 se in questo anno non c'è ancora nessuna fattura). Senza, i numeri potrebbero ripetersi.`);
+      }
       await setConfig(CHIAVE_REALE, reale ? "1" : "0");
       await registraLog("FATTURAZIONE", null, reale ? "EMISSIONE_VERA" : "EMISSIONE_PROVA", reale ? "Accesa l'emissione vera di fatture e DDT" : "Tornati alle fatture di prova", u.nome);
     }

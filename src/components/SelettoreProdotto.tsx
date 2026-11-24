@@ -2352,7 +2352,7 @@ export default function SelettoreProdotto({
                   {lattAlMetro(scelto.value) && (
                     <input name="lattCm" type="number" step="0.1" min={1} max={2000} defaultValue={300} required aria-label="Lunghezza di ogni pezzo in cm" title="Lunghezza di ogni pezzo in cm (prezzo al metro × lunghezza)" placeholder="cm" className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   )}
-                  <input name="quantita" type="number" defaultValue={1} min={1} title={lattAlMetro(scelto.value) ? "Numero di pezzi" : scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
+                  <input name="quantita" type="number" defaultValue={1} min={1} title={lattAlMetro(scelto.value) ? "Numero di pezzi" : scelto.value.startsWith("COPRIF_") ? "Numero di barre da 6 m" : scelto.value === "RASOMURO_STRIP" ? "Metri, pezzi o coppie" : scelto.value.startsWith("PAVGAL_") ? "Metri quadri" : "Quantità"} placeholder={scelto.value.startsWith("PAVGAL_") ? "m²" : undefined} className="border border-neutral-200 rounded px-1.5 py-1 text-xs w-16" />
                   <button className={finestra ? "btn-3d btn-3d-orange text-[11px] px-2.5 py-1" : "btn-3d btn-3d-outline text-[11px] px-2 py-1"}>{finestra ? "🛒 Aggiungi al preventivo" : "+ aggiungi"}</button>
                 </form>
               ))}

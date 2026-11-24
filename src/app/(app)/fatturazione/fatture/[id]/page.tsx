@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import BancaIban from "@/components/fatturazione/BancaIban";
 import CointestatoFattura from "@/components/fatturazione/CointestatoFattura";
 import { cointestatarioDa } from "@/lib/fatturazione/cointestato";
 import Link from "next/link";
@@ -9,19 +10,22 @@ import { numeroCommessa } from "@/lib/commesse";
 import { perInput } from "@/lib/calendario/tempo";
 import { ASPETTO_BENI, BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
-import { controlliEmissione, emissioneReale } from "@/lib/fatturazione/server";
-import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura } from "@/app/fatturazione-actions";
+import { controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
+import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi, segnaScartataSdi, riapriFattura } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-full disabled:bg-neutral-50 disabled:text-neutral-700";
 const giornoInput = (d: Date) => d.toISOString().slice(0, 10);
 
-export default async function FatturaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ errore?: string; salvato?: string; emessa?: string }> }) {
+export default async function FatturaPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ errore?: string; salvato?: string; emessa?: string; inviata?: string }> }) {
   const { id } = await params;
   const msg = await searchParams;
   const f = await prisma.fatturaEmessa.findUnique({ where: { id }, include: { righe: { orderBy: [{ posizione: "asc" }, { id: "asc" }] }, ddt: { orderBy: { numero: "asc" } } } });
   if (!f) notFound();
+  const conti = await prisma.contoFinanziario.findMany({ where: { tipo: "BANCA", attivo: true, iban: { not: null } }, select: { nome: true, banca: true, iban: true } });
+  const ibanPerBanca: Record<string, string> = {};
+  for (const b of BANCHE_AZIENDA) { const parola = b.replace(/^Banca\s+/i, "").split(/\s+/)[0].toLowerCase(); const c = conti.find((x) => `${x.nome} ${x.banca ?? ""}`.toLowerCase().includes(parola)); if (c?.iban) ibanPerBanca[b] = c.iban; }
   const [commessa, collegata, note, reale] = await Promise.all([
     f.commessaId ? prisma.commessa.findUnique({ where: { id: f.commessaId }, select: { id: true, numero: true, anno: true } }) : null,
     f.fatturaCollegataId ? prisma.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { id: true, numero: true, data: true } }) : null,
@@ -29,23 +33,25 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
     emissioneReale(),
   ]);
   const tf = tipoFattura(f.tipo);
+  const noRiapertura = f.stato === "EMESSA" ? await motivoNoRiapertura(f) : "x";
   const bozza = f.stato === "BOZZA";
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
   const mancano = controlliEmissione(f, f.righe);
-  const rate = Array.isArray(f.rate) && f.rate.length ? (f.rate as { data: string; importo: number }[]).map((r) => ({ data: new Date(r.data), importo: r.importo })) : rateDaMetodo(f.metodoPagamento, f.data, t.totale);
+  const rate = Array.isArray(f.rate) && f.rate.length ? (f.rate as { data: string; importo: number }[]).map((r) => ({ data: new Date(r.data), importo: r.importo })) : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const stato = STATI_FATTURA[f.stato];
 
   return (
     <div className="space-y-4">
       {msg.errore && <p className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">⚠️ {msg.errore}</p>}
       {msg.salvato && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ Salvato</p>}
+      {msg.inviata && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ Fattura inviata per email</p>}
       {msg.emessa && <p className="rounded border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-900">✓ {f.stato === "PROVA" ? "Fattura di prova emessa (numero «PROVA», non valida)" : "Fattura emessa"}: n. {f.numero}. Scarica il PDF per il cliente{f.xml ? " e l'XML da caricare" : ""}.</p>}
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link href="/fatturazione/fatture" className="btn-indietro">← Fatture</Link>
-          <h2 className="text-xl font-bold text-neutral-900">{tf.nome} {f.numero ? `n. ${f.numero}` : "(bozza)"} del {dataIt(f.data)}</h2>
+          <h2 className="text-xl font-bold text-neutral-900">{tf.nome} {f.numero ? `n. ${f.numero}` : "(bozza)"}{f.stato === "BOZZA" && f.numero ? " — riaperta per correggerla" : ""} del {dataIt(f.data)}</h2>
           <p className="text-sm text-neutral-700">
             <b>{f.clienteNome}</b> · <span className="font-semibold" style={{ color: stato?.colore }}>{stato?.nome}</span>
             {commessa && <> · <Link href={`/commesse/${commessa.id}`} className="underline">commessa {numeroCommessa(commessa)}</Link></>}
@@ -58,6 +64,16 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
         </div>
         <div className="flex flex-wrap gap-2 items-start">
           <a href={`/api/fatturazione/fattura/${f.id}/pdf`} target="_blank" rel="noreferrer" className="btn-3d btn-3d-outline text-sm px-3 py-1.5">📄 {bozza ? "Anteprima PDF" : "PDF di cortesia"}</a>
+          {f.stato !== "BOZZA" && <form action={inviaFatturaEmail} className="flex gap-1"><input type="hidden" name="id" value={f.id} /><input name="a" defaultValue={f.email ?? ""} placeholder="email del cliente" className="border border-neutral-300 rounded px-2 py-1 text-xs w-44" /><button className="btn-3d btn-3d-green text-sm px-3 py-1.5">✉️ Invia al cliente</button></form>}
+          {f.stato === "EMESSA" && noRiapertura === null && <form action={riapriFattura}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-orange text-sm px-3 py-1.5" title="Torna bozza con lo stesso numero, finché non è inviata allo SDI">✏️ Riapri per correggere</button></form>}
+          {f.stato === "EMESSA" && (() => {
+            const limite = new Date(f.data.getTime() + 12 * 86400000);
+            const giorni = Math.ceil((limite.getTime() - Date.now()) / 86400000);
+            return f.inviataSdiIl
+              ? <form action={segnaInviataSdi} className="flex items-center gap-1 text-xs text-green-800"><input type="hidden" name="id" value={f.id} /><input type="hidden" name="annulla" value="1" />✅ Inviata allo SDI il {dataIt(f.inviataSdiIl)} <button className="underline text-neutral-600">annulla</button></form>
+              : <form action={segnaInviataSdi} className="flex items-center gap-1"><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-amber text-sm px-3 py-1.5">📤 Segna inviata allo SDI</button><span className={`text-xs ${giorni < 0 ? "text-red-700 font-semibold" : giorni <= 3 ? "text-amber-700 font-semibold" : "text-neutral-600"}`}>{giorni < 0 ? `scaduti ${-giorni} gg` : `entro ${dataIt(limite)} (${giorni} gg)`}</span></form>;
+          })()}
+          {f.stato === "EMESSA" && f.inviataSdiIl && <form action={segnaScartataSdi} className="flex items-center gap-1"><input type="hidden" name="id" value={f.id} /><input name="motivo" placeholder="errore dello SDI (es. 00305)" className="border border-neutral-300 rounded px-2 py-1 text-xs w-44" /><button className="btn-3d btn-3d-red text-sm px-3 py-1.5" title="Lo SDI non l'ha accettata: si può riaprire, correggere e rimandare con lo stesso numero">❌ Scartata dallo SDI</button></form>}
           {f.xml && <a href={`/api/fatturazione/fattura/${f.id}/xml`} className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⬇️ XML fattura elettronica</a>}
           {!bozza && <form action={duplicaFattura}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-outline text-sm px-3 py-1.5">⧉ Duplica</button></form>}
           {(f.stato === "EMESSA" || f.stato === "PROVA") && tf.fiscale && !tf.notaCredito && <form action={creaNotaCredito}><input type="hidden" name="id" value={f.id} /><button className="btn-3d btn-3d-amber text-sm px-3 py-1.5">↩︎ Nota di credito</button></form>}
@@ -91,19 +107,28 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
               <label className="text-xs text-neutral-700">Provincia (sigla)<input name="provincia" defaultValue={f.provincia ?? ""} maxLength={2} className={inp} /></label>
               <label className="text-xs text-neutral-700">Nazione<input name="nazione" defaultValue={f.nazione} maxLength={2} className={inp} /></label>
               <label className="text-xs text-neutral-700">Codice destinatario SDI<input name="codiceDestinatario" defaultValue={f.codiceDestinatario ?? ""} maxLength={7} placeholder="0000000 per i privati" className={inp} /></label>
+              <label className="text-xs text-neutral-700">Email<input name="email" defaultValue={f.email ?? ""} className={inp} /></label>
+              <label className="text-xs text-neutral-700">Telefono<input name="telefono" defaultValue={f.telefono ?? ""} className={inp} /></label>
               <label className="text-xs text-neutral-700">PEC<input name="pec" defaultValue={f.pec ?? ""} className={inp} /></label>
             </div>
           </details>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <label className="text-xs text-neutral-700">Pagamento<select name="metodoPagamento" defaultValue={f.metodoPagamento ?? "BONIFICO_VISTA"} className={inp}>{METODI_PAGAMENTO_FATTURA.map((m) => <option key={m.codice} value={m.codice}>{m.nome}</option>)}</select></label>
-            <label className="text-xs text-neutral-700">Banca per l&apos;incasso<select name="banca" defaultValue={f.banca ?? ""} className={inp}><option value="">—</option>{BANCHE_AZIENDA.map((b) => <option key={b} value={b}>{b}</option>)}</select></label>
-            <label className="text-xs text-neutral-700 sm:col-span-2">IBAN (vuoto = quello del conto in Amministrazione › Banche)<input name="iban" defaultValue={f.iban ?? ""} className={inp} /></label>
+            <BancaIban banche={BANCHE_AZIENDA} ibanPerBanca={ibanPerBanca} banca={f.banca ?? ""} iban={f.iban ?? ""} inp={inp} />
           </div>
           <label className="block text-xs text-neutral-700">Causale (va nella fattura elettronica)<input name="causale" defaultValue={f.causale ?? ""} className={inp} /></label>
           <div className="flex flex-wrap gap-4 text-sm">
             <label className="flex items-center gap-2"><input type="checkbox" name="detrazione" defaultChecked={f.detrazione} /> Lavori con detrazione fiscale (bonifico parlante)</label>
             <CointestatoFattura iniziale={cointestatarioDa(f.cointestatario)} disabilitato={!bozza} />
             <label className="flex items-center gap-2"><input type="checkbox" name="addebitoBollo" defaultChecked={f.addebitoBollo} /> Addebita il bollo da 2 € al cliente (se dovuto)</label>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 text-sm rounded border border-neutral-200 p-2">
+            <label className="flex items-center gap-2 font-semibold"><input type="checkbox" name="conRitenuta" defaultChecked={f.ritenutaAliquota != null} /> Ritenuta d&apos;acconto</label>
+            <span className="text-xs text-neutral-600">del</span>
+            <input name="ritenutaAliquota" defaultValue={String(f.ritenutaAliquota ?? 23).replace(".", ",")} className={`${inp} w-16 text-right`} /> <span>%</span>
+            <span className="text-xs text-neutral-600">su</span>
+            <input name="ritenutaBase" defaultValue={String(f.ritenutaBase ?? 20).replace(".", ",")} className={`${inp} w-16 text-right`} /> <span>% dell&apos;imponibile</span>
+            <span className="text-[11px] text-neutral-500 w-full">Per esempio provvigioni a una finanziaria: 23% su 20%. Il cliente trattiene la ritenuta e paga il netto; la fattura mostra «Totale da pagare».</span>
           </div>
           {tf.trasporto && (
             <div className="rounded border border-neutral-200 p-3 space-y-2">
@@ -181,6 +206,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
             <p>IVA <b>{eur(t.iva)}</b></p>
             {bollo && <p>Bollo {f.addebitoBollo ? "addebitato" : "virtuale (a carico nostro)"} <b>{eur(t.bollo)}</b></p>}
             <p className="text-lg">Totale <b>{eur(t.totale)}</b></p>
+            {t.ritenuta > 0 && <p>Ritenuta del {f.ritenutaAliquota}%{f.ritenutaBase && f.ritenutaBase !== 100 ? ` su ${f.ritenutaBase}%` : ""}: <b>- {eur(t.ritenuta)}</b> → da pagare <b>{eur(t.daPagare)}</b></p>}
             {rate.length > 0 && !tf.notaCredito && <p className="text-xs text-neutral-600">Scadenze: {rate.map((r) => `${dataIt(r.data)} ${eur(r.importo)}`).join(" · ")}</p>}
           </div>
         </div>

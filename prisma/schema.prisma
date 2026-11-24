@@ -145,6 +145,8 @@ model Lead {
   emailRimbalzataIl     DateTime?
   rimbalzoMotivo        String?
   disiscrittoIl         DateTime?
+  // Consenso alle comunicazioni commerciali (data dell'ultimo consenso valido; la storia e la prova stanno in ConsensoMarketing)
+  consensoMarketingIl   DateTime?
   emailLead             EmailLead[]
   invii                 InvioProgrammato[]
   eventi                LeadEvento[]
@@ -333,6 +335,7 @@ model Cliente {
   emailRimbalzataIl DateTime?
   rimbalzoMotivo    String?
   disiscrittoIl     DateTime?
+  consensoMarketingIl DateTime?
 
   @@index([bconsoleId])
 }
@@ -506,6 +509,8 @@ model RigaPreventivo {
   mostraDescrizione         Boolean            @default(true)
   // Scheda tecnica del listino di questo prodotto (es. Optima 70) stampata in fondo all'offerta e allegata all'email (richiesta di Ugo)
   allegaScheda              Boolean            @default(false)
+  // IVA di questa riga (22, 10, 4, 0): vuoto = quella dell'offerta. Segue la riga fino alla fattura di saldo.
+  aliquotaIva               Float?
   // Misura reale inserita a mano dal commerciale (può differire dalla fascia di prezzo
   // agganciata in prodottoId, che è la fascia più vicina per eccesso nel listino nascosto)
   misuraLarghezza           Float?
@@ -936,6 +941,10 @@ model RigaOrdine {
   quantitaArrivata  Float            @default(0)
   // Materiale preso dalle scorte di magazzino invece che ordinato al fornitore
   daMagazzino       Boolean          @default(false)
+  // Riga messa da parte «da ordinare più avanti» (es. aspetto le misure definitive di produzione): non conta nel «da ordinare ora»
+  rimandataIl       DateTime?
+  rimandataMotivo   String?
+  rimandataDaNome   String?
   prelevatoIl       DateTime?
   // Complemento aggiunto al rilievo: solo acquisto, non cambia la vendita al cliente
   complemento       Boolean          @default(false)
@@ -943,6 +952,10 @@ model RigaOrdine {
   kitDiId           String?
   // Prodotto di listino della riga (offerta o materiale aggiunto dal listino): serve per la distinta base
   prodottoId        String?
+  // Misure definitive di produzione (dal modulo del fornitore o scritte a mano): vanno nell'ordine, nella conferma e in fattura al posto di quelle di preventivo
+  misureDefinitive  String?
+  misureDefinitiveDa String?
+  misureDefinitiveIl DateTime?
   righeBolla        RigaBolla[]
 
   @@index([ordineFornitoreId])
@@ -1251,6 +1264,10 @@ model LeadSimulazione {
   telefono        String?
   email           String?
   consensoPrivacy Boolean @default(false)
+  // Consenso facoltativo alle comunicazioni commerciali (casella separata): data e IP restano come prova
+  consensoMarketing Boolean @default(false)
+  consensoMarketingIl DateTime?
+  consensoMarketingIp String?
 
   // Dati della simulazione (acquisiti dal form)
   localita         String?
@@ -1492,6 +1509,7 @@ model OrdineFornitore {
   ricevutoDaNome          String?
   creatoDaNome            String?
   righe                   RigaOrdine[]
+  emailInviate            EmailOrdine[]
   createdAt               DateTime     @default(now())
   updatedAt               DateTime     @updatedAt
 
@@ -1513,6 +1531,8 @@ model Documento {
   dimensione     Int
   contenuto      Bytes
   caricatoDaNome String?
+  // Valori scritti nel modulo (solo per le schede di produzione compilate): servono a riprendere le misure definitive
+  dati           Json?
   createdAt      DateTime @default(now())
 
   @@index([entita, entitaId])
@@ -1779,7 +1799,10 @@ model FatturaAcquisto {
   progetto          String?
   // Centro di costo (dal fornitore, modificabile sulla fattura)
   centroCosto       String?
+  // Numero della fattura scritto dal fornitore (quando «numero» è il progressivo nostro, es. Fattura Spese 1739/2026)
+  numeroFornitore   String?
   righe             RigaFatturaAcquisto[]
+  correlazioni      CorrelazioneFatturaAcquisto[]
   bolle             BollaEntrata[]
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
@@ -1787,6 +1810,41 @@ model FatturaAcquisto {
   @@index([fornitoreId])
   @@index([stato])
   @@index([data])
+}
+
+// Storico delle email mandate al fornitore con l'ordine: a chi, cosa e quali file (copie nei Documenti dell'ordine)
+model EmailOrdine {
+  id                String          @id @default(cuid())
+  ordine            OrdineFornitore @relation(fields: [ordineFornitoreId], references: [id], onDelete: Cascade)
+  ordineFornitoreId String
+  a                 String
+  cc                String?
+  oggetto           String
+  testo             String
+  allegati          String[]        @default([])
+  allegatiDocIds    String[]        @default([])
+  // INVIATA | NON_INVIATA
+  stato             String
+  motivo            String?
+  da                String?
+  inviataDa         String?
+  createdAt         DateTime        @default(now())
+
+  @@index([ordineFornitoreId])
+}
+
+// «Correla documento» come in BConsole: la fattura d'acquisto collegata a un ordine fornitore o a un progetto (pratica) del cliente
+model CorrelazioneFatturaAcquisto {
+  id            String          @id @default(cuid())
+  fattura       FatturaAcquisto @relation(fields: [fatturaId], references: [id], onDelete: Cascade)
+  fatturaId     String
+  tipo          String // ORDINE_FORNITORE | PROGETTO
+  riferimentoId String
+  descrizione   String
+  creatoDaNome  String?
+  createdAt     DateTime        @default(now())
+
+  @@index([fatturaId])
 }
 
 model RigaFatturaAcquisto {
@@ -1846,7 +1904,7 @@ model Campagna {
   formato               String             @default("TESTO")
   html                  String             @default("")
   // Tracciamento di aperture (pixel invisibile) e clic sui link
-  tracciamento          Boolean            @default(true)
+  tracciamento          Boolean            @default(false)
   marchi                String[]           @default([])
   stati                 String[]           @default([]) // statoLead (es. "Non interessato", "VISITATO"); "(nessuno)" = senza stato
   categorie             String[]           @default([]) // Lead | Cliente | Account
@@ -2185,6 +2243,9 @@ model FatturaEmessa {
   nazione            String              @default("IT")
   codiceDestinatario String?
   pec                String?
+  telefono            String?
+  // Giorno in cui l'XML è stato inviato allo SDI (a mano, finché non c'è l'invio automatico): entro 12 giorni dall'emissione
+  inviataSdiIl        DateTime?
   email              String?
   commessaId         String?
   brand              String?
@@ -2201,6 +2262,10 @@ model FatturaEmessa {
   bollo              Boolean             @default(false)
   addebitoBollo      Boolean             @default(false)
   detrazione         Boolean             @default(false)
+  // Ritenuta d'acconto (es. 23% su 20% per le provvigioni): aliquota, parte dell'imponibile su cui si applica e importo trattenuto dal cliente
+  ritenutaAliquota   Float?
+  ritenutaBase       Float?
+  ritenutaImporto    Float               @default(0)
   // Fattura cointestata: secondo intestatario {nome, cognome, codiceFiscale, partitaIva, indirizzo, cap, comune, provincia, quota}
   cointestatario     Json?
   // Trasporto (fattura accompagnatoria)
@@ -2263,6 +2328,8 @@ model DdtUscita {
   anno            Int
   data            DateTime
   clienteId       String?
+  // DDT a un fornitore (reso, conto lavorazione): i dati del fornitore sono copiati nei campi del destinatario
+  fornitoreId     String?
   clienteNome     String
   indirizzo       String?
   cap             String?
@@ -2458,4 +2525,25 @@ model SchedaProduzioneModello {
   updatedAt   DateTime @updatedAt
 
   @@index([fornitoreId])
+}
+
+// Prova del consenso alle comunicazioni commerciali (richiesta dal Garante: il titolare deve poterlo dimostrare):
+// ogni consenso o revoca è una riga con data, fonte, testo mostrato e, se disponibile, indirizzo IP.
+model ConsensoMarketing {
+  id         String   @id @default(cuid())
+  clienteId  String?
+  leadId     String?
+  email      String?
+  stato      String // CONCESSO | REVOCATO
+  fonte      String // MODULO_RICHIEDI | SIMULATORE | LINK_EMAIL | DISISCRIZIONE | CONTRATTO | A_VOCE | MODULO_CARTACEO | MANUALE
+  testo      String?
+  versioneInformativa String?
+  ip         String?
+  campagnaId String?
+  utenteNome String?
+  createdAt  DateTime @default(now())
+
+  @@index([clienteId, createdAt])
+  @@index([leadId, createdAt])
+  @@index([campagnaId])
 }
