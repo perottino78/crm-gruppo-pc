@@ -185,8 +185,8 @@ export default function CaricaRilievo({ rilievoId, misure, eseguito, materialeOf
         <label className="block text-xs font-bold text-neutral-800 mb-1">Misure e note di cantiere</label>
         <textarea name="misure" rows={7} value={misureTesto} onChange={(e) => setMisureTesto(e.target.value)} placeholder={"Misure per ogni apertura/elemento, es.\nSoggiorno – finestra 2 ante: L 1200 × H 1400 …"} className={`${inp} w-full`} />
         <p className="text-xs font-bold text-neutral-800 mt-3 mb-1">Rilievo cartaceo (PDF) e foto</p>
-        <FotoRilievo name="foto" pdf />
-        <p className="mt-1 text-[11px] text-neutral-600">I file caricati qui vanno anche nelle cartelle della pratica: i PDF in «Rilievi misura», le foto in «Foto rilievi».</p>
+        <FotoRilievo name="foto" pdf rilievoId={rilievoId} />
+        <p className="mt-1 text-[11px] text-neutral-600">Ogni foto parte subito, una alla volta (anche tante): aspetta il ✓ su tutte, poi salva. I file vanno anche nelle cartelle della pratica: i PDF in «Rilievi misura», le foto in «Foto rilievi».</p>
       </section>
 
       <section className={pannello(4)}>
