@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { visibilitaArticoliWhere } from "@/lib/articoli/server";
 import { categorieDelListino } from "@/lib/articoli/posizione";
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { assicuraRicambiVetrate } from "@/lib/listini/ricambi-vetrate-server";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export async function GET(req: NextRequest) {
   const famiglia = req.nextUrl.searchParams.get("famiglia") ?? "";
   const gruppo = req.nextUrl.searchParams.get("gruppo") || null;
   if (!famiglia) return NextResponse.json({ articoli: [] });
+  await assicuraRicambiVetrate(); // accessori e ricambi delle vetrate (una volta per versione)
   await assicuraArticoliLegno(); // i legni piallati delle vetrate (una volta sola)
   const cat = await prisma.categoriaArticolo.findMany({ select: { id: true, padreId: true, famiglia: true, gruppoListino: true } });
   const ids = categorieDelListino(famiglia, gruppo, cat);
@@ -24,7 +26,7 @@ export async function GET(req: NextRequest) {
   const vis = visibilitaArticoliWhere(u);
   const articoli = await prisma.articolo.findMany({
     where: { attivo: true, categoriaId: { in: ids }, ...(vis ? { AND: [vis] } : {}) },
-    select: { id: true, codice: true, descrizione: true, um: true, prezzoVendita: true, aliquotaIva: true, categoria: { select: { nome: true } } },
+    select: { id: true, codice: true, descrizione: true, descrizioneEstesa: true, immagineUrl: true, um: true, prezzoVendita: true, aliquotaIva: true, categoria: { select: { nome: true } } },
     orderBy: [{ descrizione: "asc" }], take: 150,
   });
   return NextResponse.json({ articoli });

@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { aggiungiArticoloPreventivo } from "@/app/actions";
+import { alMetro } from "@/lib/listini/ricambi-vetrate";
 
-type Art = { id: string; codice: string; descrizione: string; um: string; prezzoVendita: number | null; aliquotaIva: number; categoria: { nome: string } | null };
+type Art = { id: string; codice: string; descrizione: string; descrizioneEstesa: string | null; immagineUrl: string | null; um: string; prezzoVendita: number | null; aliquotaIva: number; categoria: { nome: string } | null };
 
 /** Articoli dell'anagrafica (ricambi…) collegati a questa famiglia/gruppo del listino: si aggiungono all'offerta come righe con il loro prezzo (richiesta di Ugo, 18/11/2026). */
 export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezioneId }: { famiglia: string; gruppo: string | null; preventivoId: string; sezioneId: string | null }) {
@@ -34,9 +35,18 @@ export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezio
               <input type="hidden" name="preventivoId" value={preventivoId} />
               <input type="hidden" name="articoloId" value={a.id} />
               {sezioneId && <input type="hidden" name="sezioneId" value={sezioneId} />}
-              <span className="min-w-[14rem] flex-1 text-xs"><b className="font-mono">{a.codice}</b> {a.descrizione}{a.categoria && <span className="text-neutral-500"> · {a.categoria.nome}</span>}</span>
-              <span className="text-xs font-semibold text-neutral-800">{euro(a.prezzoVendita)}</span>
-              <input name="quantita" type="number" min={1} defaultValue={1} className="w-14 rounded border border-neutral-300 px-1.5 py-1 text-xs" />
+              {a.immagineUrl && !a.immagineUrl.startsWith("data:") && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={a.immagineUrl} alt="" className="h-12 w-12 shrink-0 rounded border border-neutral-200 object-cover" />
+              )}
+              <span className="min-w-[14rem] flex-1 text-xs">
+                <b className="font-mono">{a.codice}</b> {a.descrizione}{a.categoria && <span className="text-neutral-500"> · {a.categoria.nome}</span>}
+                {a.descrizioneEstesa && <span className="mt-0.5 block text-[11px] text-neutral-600">{a.descrizioneEstesa}</span>}
+              </span>
+              <span className="text-xs font-semibold text-neutral-800">{euro(a.prezzoVendita)}{alMetro(a.um) ? " /mt" : ""}</span>
+              {alMetro(a.um)
+                ? <label className="flex items-center gap-1 text-[11px] text-neutral-600"><input name="quantita" type="number" min={0.01} step={0.01} defaultValue={1} className="w-16 rounded border border-neutral-300 px-1.5 py-1 text-xs" aria-label="Metri" />mt</label>
+                : <input name="quantita" type="number" min={1} defaultValue={1} className="w-14 rounded border border-neutral-300 px-1.5 py-1 text-xs" aria-label="Quantità" />}
               <button className="btn-3d btn-3d-orange px-2.5 py-1 text-[11px]">🛒 Aggiungi</button>
             </form>
           </li>
