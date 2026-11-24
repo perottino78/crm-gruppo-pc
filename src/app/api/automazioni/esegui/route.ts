@@ -19,10 +19,12 @@ async function eseguiTutto() {
   const google = await import("@/lib/calendario/google").then((m) => m.sincronizzaGoogle()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   // consumi del database (Neon): una lettura all'ora, email se ci si avvicina al budget o a un limite
   const consumi = await import("@/lib/database/consumi-server").then((m) => m.controllaConsumi()).catch((e) => ({ errore: String(e).slice(0, 200) }));
+  // backup sul NAS: email agli amministratori se da 36 ore non ne arriva uno riuscito (una volta al giorno)
+  const backup = await import("@/lib/backup/server").then((m) => m.controllaBackup()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   const cestino = await import("@/lib/cestino").then((m) => m.svuotaScaduti()).catch((e) => ({ errore: String(e).slice(0, 200) }));
   // le campagne per ultime, con il tempo che resta: il blocco di email si ferma prima che Vercel chiuda il controllo (60 s)
   const campagne = await eseguiCampagne({ entro: avvio + 55_000 }).catch((e) => ({ errore: String(e).slice(0, 200) }));
-  return { ...lead, campagne, obiettivi, esiti, nextcloud, google, consumi, cestinoSvuotati: cestino };
+  return { ...lead, campagne, obiettivi, esiti, nextcloud, google, consumi, backup, cestinoSvuotati: cestino };
 }
 
 // Controllo periodico degli invii programmati dei lead e delle campagne (coda e avvisi di scadenza) (Vercel Cron o un servizio esterno ogni 5 minuti,
