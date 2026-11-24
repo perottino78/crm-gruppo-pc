@@ -1171,8 +1171,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                     <form action={caricaFotoPosa} className="mt-2 space-y-2">
                       <input type="hidden" name="posaId" value={p.id} />
                       <select name="categoria" className={inp}><option value="PRIMA">Prima</option><option value="DURANTE">Durante</option><option value="PROBLEMA">Problema</option></select>
-                      <FotoRilievo name="foto" />
-                      <button className="btn-3d btn-3d-pink text-sm px-4 py-2">Salva foto</button>
+                      <p className="text-xs text-neutral-600">Scegli la categoria, poi le foto: partono da sole, una alla volta.</p>
+                      <FotoRilievo name="foto" invio={{ url: `/api/posa/${p.id}/foto`, leggi: ["categoria"], aggiorna: true }} />
                     </form>
                   </details>
                   <details>
@@ -1188,7 +1188,7 @@ export default async function CommessaPage({ params, searchParams }: { params: P
                         <label className="flex items-center gap-1 font-bold"><input type="hidden" name="conSpuntaCliente" value="1" /><input type="checkbox" name="inviaCliente" value="1" /> ✉️ Invia al cliente</label>
                       </div>
                       <textarea name="noteFine" rows={3} placeholder="Note di fine lavori, eventuali riserve…" className={`${inp} w-full`} />
-                      <FotoRilievo name="foto" />
+                      <FotoRilievo name="foto" invio={{ url: `/api/posa/${p.id}/foto`, campi: { categoria: "DOPO" } }} />
                       <input name="nomeFirmatario" placeholder="Nome di chi firma" className={`${inp} w-64`} />
                       <FirmaCliente name="firmaCliente" />
                       <div className="bg-neutral-50 border border-neutral-200 rounded p-2 space-y-2">

@@ -3,6 +3,7 @@
 import { prisma } from "../../src/lib/prisma";
 import { POST } from "../../src/app/api/rilievo/[id]/foto/route";
 import { POST as POST_DOC } from "../../src/app/api/documenti/carica/route";
+import { POST as POST_POSA } from "../../src/app/api/posa/[id]/foto/route";
 import { NextRequest } from "next/server";
 import sharp from "sharp";
 
@@ -53,6 +54,17 @@ async function main() {
   verifica(d1.j.ok && doc?.mime === "image/webp" && doc.dimensione < 400_000, "foto grande nei Documenti: ridotta a WebP leggero", d1);
   verifica((await invDoc("x.exe", "application/x-msdownload", Buffer.from("MZ"))).status === 415, "Documenti: tipo non ammesso rifiutato");
   verifica((await invDoc("enorme.pdf", "application/pdf", Buffer.concat([Buffer.from("%PDF"), Buffer.alloc(4_300_000)]))).status === 413, "Documenti: oltre 4 MB rifiutato con messaggio");
+  console.log("Foto della posa, una alla volta");
+  const posa = await prisma.posa.create({ data: { commessaId: c.id, dataInizio: new Date() } });
+  const invPosa = async (cat: string, nome: string, tipo: string) => {
+    const fd = new FormData(); fd.append("categoria", cat); fd.append("file", new File([new Uint8Array(grande)], nome, { type: tipo }));
+    const res = await POST_POSA(new NextRequest(`http://localhost/api/posa/${posa.id}/foto`, { method: "POST", body: fd }), { params: Promise.resolve({ id: posa.id }) });
+    return { status: res.status, j: await res.json() as { ok: boolean } };
+  };
+  verifica((await invPosa("PRIMA", "p1.jpg", "image/jpeg")).j.ok && (await invPosa("DOPO", "p2.jpg", "image/jpeg")).j.ok, "foto posa caricate");
+  const pf = await prisma.posaFoto.findMany({ where: { posaId: posa.id }, orderBy: { createdAt: "asc" } });
+  verifica(pf.length === 2 && pf[0].categoria === "PRIMA" && pf[1].categoria === "DOPO" && pf[0].dataUri.startsWith("data:image/webp") && pf[0].dataUri.length < 400_000, "categorie rispettate e foto leggere");
+  verifica((await invPosa("DOPO", "x.pdf", "application/pdf")).status === 415, "posa: solo foto");
   g.__utente = null;
   verifica((await invDoc("a.jpg", "image/jpeg", grande)).status === 401, "Documenti senza sessione: rifiutato");
   g.__utente = ugo;

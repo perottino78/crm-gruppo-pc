@@ -42,16 +42,19 @@ export async function registraKitCliente(formData: FormData) {
   const quando = daOraRoma(String(formData.get("giorno") ?? "")) ?? new Date();
   if (quando.getTime() > Date.now() + 86400000) return torna(commessaId, "kitErrore", "La data di consegna non può essere nel futuro.", daLista);
   const foto = fotoDa(formData.get("foto"));
+  // le foto del kit ora partono da sole, una alla volta, nei Documenti «Consegna kit»: contano se ce n'è almeno una
+  const giaCaricate = await prisma.documento.count({ where: { entita: "COMMESSA", entitaId: commessaId, cartella: "Consegna kit", mime: { startsWith: "image/" }, createdAt: { gte: new Date(Date.now() - 6 * 3600_000) } } }); // solo quelle di adesso (non foto vecchie di una consegna annullata)
+  const conFoto = foto.length > 0 || giaCaricate > 0;
   const recensione = formData.get("recensione") === "1";
   const regole = await regoleKit();
-  const punti = puntiConsegna({ conFoto: foto.length > 0, recensione }, regole);
+  const punti = puntiConsegna({ conFoto, recensione }, regole);
   const nota = String(formData.get("nota") ?? "").trim().slice(0, 500) || null;
   await prisma.$transaction(async (tx) => {
     for (const f of foto) {
       await tx.documento.create({ data: { entita: "COMMESSA", entitaId: commessaId, cartella: "Consegna kit", nome: f.nome, mime: f.mime, dimensione: f.dati.length, contenuto: f.dati, caricatoDaNome: u.nome } });
     }
-    await tx.consegnaKit.create({ data: { commessaId, clienteId: c.clienteId, utenteId: chi.id, utenteNome: chi.nome, consegnatoIl: quando, conFoto: foto.length > 0, recensione, punti, nota, registratoDaNome: u.nome } });
-    await tx.commessaEvento.create({ data: { commessaId, utenteNome: u.nome, testo: `🎁 Kit consegnato al cliente da ${chi.nome}${foto.length ? " (con foto)" : ""}${recensione ? ", con recensione" : ""}: ${punti} punti` } });
+    await tx.consegnaKit.create({ data: { commessaId, clienteId: c.clienteId, utenteId: chi.id, utenteNome: chi.nome, consegnatoIl: quando, conFoto, recensione, punti, nota, registratoDaNome: u.nome } });
+    await tx.commessaEvento.create({ data: { commessaId, utenteNome: u.nome, testo: `🎁 Kit consegnato al cliente da ${chi.nome}${conFoto ? " (con foto)" : ""}${recensione ? ", con recensione" : ""}: ${punti} punti` } });
   });
   revalidatePath(`/commesse/${commessaId}`);
   revalidatePath("/kit");
