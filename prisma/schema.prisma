@@ -2227,6 +2227,10 @@ model FatturaEmessa {
   bollo              Boolean             @default(false)
   addebitoBollo      Boolean             @default(false)
   detrazione         Boolean             @default(false)
+  // Ritenuta d'acconto (es. 23% su 20% per le provvigioni): aliquota, parte dell'imponibile su cui si applica e importo trattenuto dal cliente
+  ritenutaAliquota   Float?
+  ritenutaBase       Float?
+  ritenutaImporto    Float               @default(0)
   // Fattura cointestata: secondo intestatario {nome, cognome, codiceFiscale, partitaIva, indirizzo, cap, comune, provincia, quota}
   cointestatario     Json?
   // Trasporto (fattura accompagnatoria)

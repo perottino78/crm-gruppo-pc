@@ -33,9 +33,10 @@ function intestazione(pdf: DocumentoPdf, titolo: string, numero: string, data: D
   pdf.testo(M + 288, pdf.y, cliente.nome.slice(0, 48), 10, true);
   for (const r of cliente.righe) { pdf.y -= 10; pdf.testo(M + 288, pdf.y, r.slice(0, 60), 8); }
   if (destinazione) {
-    let y = yCli;
+    let y = yT - 44;
     pdf.testo(M, y + 11, "Luogo di destinazione", 8, true);
     for (const r of aCapo(destinazione, 250, 8).slice(0, 4)) { pdf.testo(M, y, r, 8); y -= 10; }
+    pdf.y = Math.min(pdf.y, y + 10);
   }
   pdf.y -= 22;
 }
@@ -83,7 +84,7 @@ function tabellaRighe(pdf: DocumentoPdf, righe: Riga[], conPrezzi: boolean) {
 export type DatiPdfFattura = {
   tipo: string; numero: string; data: Date; stato: string; cliente: Cliente; righe: Riga[]; causale?: string | null; riferimento?: string | null; note?: string | null;
   metodoPagamento?: string | null; banca?: string | null; iban?: string | null; rate?: { data: Date; importo: number }[]; bollo: boolean; addebitoBollo: boolean;
-  ddt?: string[]; fatturaCollegata?: string | null; destinazione?: string | null;
+  ddt?: string[]; fatturaCollegata?: string | null; destinazione?: string | null; ritenutaAliquota?: number | null; ritenutaBase?: number | null;
   trasporto?: { causale?: string | null; aCura?: string | null; vettore?: string | null; aspetto?: string | null; colli?: number | null; peso?: number | null; porto?: string | null; inizio?: Date | null } | null;
 };
 
@@ -105,7 +106,7 @@ export function pdfFattura(d: DatiPdfFattura): Uint8Array {
   pdf.y -= 6;
   tabellaRighe(pdf, d.righe, true);
   // Riepilogo IVA e totali
-  const t = totali(d.righe, { bollo: d.bollo, addebitoBollo: d.bollo && d.addebitoBollo });
+  const t = totali(d.righe, { bollo: d.bollo, addebitoBollo: d.bollo && d.addebitoBollo, ritenutaAliquota: d.ritenutaAliquota, ritenutaBase: d.ritenutaBase });
   pdf.spazio(40 + t.riepilogo.length * 11 + 70);
   pdf.y -= 8;
   const yInizio = pdf.y;
@@ -122,8 +123,13 @@ export function pdfFattura(d: DatiPdfFattura): Uint8Array {
   riga("Totale IVA", eur(t.iva));
   if (d.bollo) riga(d.addebitoBollo ? "Bollo (addebitato)" : "Bollo virtuale assolto", eur(t.bollo));
   y -= 2;
+  if (t.ritenuta > 0) {
+    riga("TOTALE FATTURA", eur(t.totale));
+    riga(`Ritenuta del ${q(d.ritenutaAliquota ?? 0)}%${d.ritenutaBase && d.ritenutaBase !== 100 ? ` su ${q(d.ritenutaBase)}%` : ""}`, `- ${eur(t.ritenuta)}`);
+    y -= 2;
+  }
   pdf.rett(M + L - 205, y - 4, 205, 16, 0.9);
-  riga(tf.notaCredito ? "TOTALE NOTA DI CREDITO" : "TOTALE DA PAGARE", eur(t.totale), true);
+  riga(tf.notaCredito ? "TOTALE NOTA DI CREDITO" : "TOTALE DA PAGARE", eur(t.daPagare), true);
   pdf.y = Math.min(pdf.y, y) - 8;
   if (d.rate?.length) {
     pdf.testo(M, pdf.y, "Scadenze:", 8, true);
@@ -145,9 +151,10 @@ export function pdfFattura(d: DatiPdfFattura): Uint8Array {
   return pdf.toBytes((n, tot) => `${CEDENTE.denominazione} - ${d.numero} - pagina ${n} di ${tot}`);
 }
 
-function trasporto(pdf: DocumentoPdf, t: NonNullable<DatiPdfFattura["trasporto"]>) {
+function trasporto(pdf: DocumentoPdf, t: NonNullable<DatiPdfFattura["trasporto"]>, inFondo = false) {
   const M = pdf.margine, L = pdf.larghezza;
-  pdf.spazio(80);
+  // nel DDT il blocco (causale, vettore, firme…) sta in fondo alla pagina, come un piè di pagina
+  if (inFondo) { if (pdf.y < 175) pdf.nuovaPagina(); pdf.y = 175; } else pdf.spazio(80);
   pdf.y -= 6;
   pdf.rett(M, pdf.y - 50, L, 62, 0.96);
   const celle: [string, string][] = [
@@ -178,10 +185,10 @@ export function pdfDdt(d: DatiPdfDdt): Uint8Array {
   if (d.prova) { pdf.rett(M, pdf.y - 4, L, 16, 0.85); pdf.testo(M + 6, pdf.y, "DDT DI PROVA — NON VALIDO", 10, true); pdf.y -= 20; }
   if (d.riferimento) { pdf.paragrafo(`Riferimento: ${d.riferimento}`, 8); pdf.y -= 2; }
   tabellaRighe(pdf, d.righe, false);
-  trasporto(pdf, { causale: d.causale, aCura: d.aCura, vettore: d.vettore, aspetto: d.aspetto, colli: d.colli, peso: d.pesoLordo, porto: d.porto, inizio: d.inizio });
   if (d.pesoNetto || d.volume) { pdf.paragrafo([d.pesoNetto ? `Peso netto ${q(d.pesoNetto)} kg` : null, d.volume ? `Volume ${q(d.volume)} m³` : null].filter(Boolean).join(" · "), 8); }
   if (d.noteConsegna) pdf.paragrafo(`Note sulla consegna: ${d.noteConsegna}`, 8);
   if (d.note) pdf.paragrafo(d.note, 8);
+  trasporto(pdf, { causale: d.causale, aCura: d.aCura, vettore: d.vettore, aspetto: d.aspetto, colli: d.colli, peso: d.pesoLordo, porto: d.porto, inizio: d.inizio }, true);
   return pdf.toBytes((n, tot) => `${CEDENTE.denominazione} - DDT ${d.numero} - pagina ${n} di ${tot}`);
 }
 

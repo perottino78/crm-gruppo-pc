@@ -150,6 +150,20 @@ async function main() {
   const pf = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: pfId } });
   verifica(pf.numero === `PROFORMA 1/${new Date().getFullYear()}` && !pf.xml && !pf.fatturaVenditaId, "proforma: numero suo, niente XML né vendite", pf.numero);
 
+  // 7) ritenuta d'acconto 23% su 20% (provvigioni a una finanziaria, fattura 313/FE/2026)
+  const riId = idDa(await redirectA(A.creaFattura(fd({ clienteId: altro.id, tipo: "FATTURA", sezionale: "PC" }))));
+  await redirectA(A.salvaRigheFattura(fd({ id: riId, nuova_descrizione: "Intermediazione - Compensi di intermediazione mese di: Giugno 2026", nuova_prezzo: "67,50", nuova_iva: "N4" })));
+  await redirectA(A.salvaTestataFattura(fd({ id: riId, tipo: "FATTURA", data: "2026-11-24", metodoPagamento: "BONIFICO", conRitenuta: "on", ritenutaAliquota: "23", ritenutaBase: "20" })));
+  let ri = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: riId } });
+  verifica(ri.ritenutaImporto === 3.11 && ri.totale === 67.5, "ritenuta 3,11 € su 67,50 €, totale fattura invariato", ri);
+  await redirectA(A.emettiFattura(fd({ id: riId })));
+  ri = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: riId } });
+  const rr = ri.rate as { importo: number }[];
+  verifica(rr.length === 1 && rr[0].importo === 64.39, "scadenza = totale da pagare 64,39 €", rr);
+  verifica(!!ri.xml && ri.xml.includes("<DatiRitenuta><TipoRitenuta>RT02</TipoRitenuta><ImportoRitenuta>3.11</ImportoRitenuta><AliquotaRitenuta>4.60</AliquotaRitenuta><CausalePagamento>R</CausalePagamento></DatiRitenuta>") && ri.xml.includes("<Ritenuta>SI</Ritenuta>") && ri.xml.includes("<ImportoPagamento>64.39</ImportoPagamento>") && ri.xml.includes("<ImportoTotaleDocumento>67.50</ImportoTotaleDocumento>"), "XML con DatiRitenuta, righe soggette e importo di pagamento netto");
+  const scRi = await prisma.scadenza.findMany({ where: { fatturaVenditaId: ri.fatturaVenditaId ?? "x" } });
+  verifica(scRi.length === 1 && scRi[0].importo === 64.39 && (scRi[0].note ?? "").includes("Ritenuta"), "scadenza di incasso 64,39 € con nota sulla ritenuta", scRi);
+
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
   if (ko) process.exit(1);

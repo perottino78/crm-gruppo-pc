@@ -83,8 +83,8 @@ export function controlliEmissione(f: { tipo: string; clienteNome: string; parti
 export async function ricalcolaFattura(tx: Tx, id: string) {
   const f = await tx.fatturaEmessa.findUniqueOrThrow({ where: { id }, include: { righe: true } });
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
-  return tx.fatturaEmessa.update({ where: { id }, data: { imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo } });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
+  return tx.fatturaEmessa.update({ where: { id }, data: { imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, ritenutaImporto: t.ritenuta } });
 }
 
 /** IBAN del conto in Amministrazione › Banche con quel nome di banca (se c'è). */
@@ -115,14 +115,14 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   const progressivo = riaperta ? f.progressivo! : proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
   const numero = riaperta ? f.numero! : proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
   const iban = f.iban ?? (metodoPagamento(f.metodoPagamento).banca ? await ibanDi(tx, f.banca) : null);
-  const rate = tf.notaCredito || t.totale <= 0 ? [] : rateDaMetodo(f.metodoPagamento, f.data, t.totale);
+  const rate = tf.notaCredito || t.totale <= 0 ? [] : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const collegata = f.fatturaCollegataId ? await tx.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { numero: true, data: true } }) : null;
   const xml = tf.fiscale ? xmlFatturaPA({
     progressivoInvio: `${sezionale(f.sezionale).estensione}${progressivo}`.slice(-10), tipo: f.tipo, numero, data: f.data,
     cliente: { denominazione: f.clienteNome, persona: f.persona, nome: f.nomePersona, cognome: f.cognome, partitaIva: f.partitaIva, codiceFiscale: f.codiceFiscale, nazione: f.nazione, indirizzo: f.indirizzo, cap: f.cap, comune: f.comune, provincia: f.provincia, codiceDestinatario: f.codiceDestinatario, pec: f.pec },
-    righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo,
+    righe: f.righe, causale: causaleConCointestato(f.causale, cointest), bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase,
     pagamento: rate.length ? { metodo: f.metodoPagamento, iban, istituto: f.banca, rate } : null,
     ddt: f.ddt.filter((d) => d.numero).map((d) => ({ numero: `${d.numero}/${d.anno}`, data: d.data })),
     fatturaCollegata: collegata?.numero ? { numero: collegata.numero, data: collegata.data } : null,
@@ -142,6 +142,7 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
       },
     });
     if (!tf.notaCredito && t.totale > 0) await creaScadenzeVendita(tx, fv.id);
+    if (t.ritenuta > 0) await tx.scadenza.updateMany({ where: { fatturaVenditaId: fv.id, origine: "FATTURA_VENDITA" }, data: { note: `Ritenuta d'acconto ${f.ritenutaAliquota}% su ${f.ritenutaBase ?? 100}%: ${t.ritenuta.toFixed(2).replace(".", ",")} € trattenuti dal cliente. Da incassare ${t.daPagare.toFixed(2).replace(".", ",")} €.` } });
     fatturaVenditaId = fv.id;
   }
   // DDT: righe fatturate e stato
@@ -155,7 +156,7 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
     where: { id },
     data: {
       stato: prova ? "PROVA" : "EMESSA", progressivo, anno, numero, xml, iban, rate: rate.map((r) => ({ data: r.data.toISOString(), importo: r.importo })),
-      imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, fatturaVenditaId, emessaDaNome: nome, emessaIl: new Date(),
+      imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, ritenutaImporto: t.ritenuta, fatturaVenditaId, emessaDaNome: nome, emessaIl: new Date(),
     },
   });
 }
@@ -198,7 +199,7 @@ export async function datiPdfFattura(id: string) {
     dati: {
       tipo: f.tipo, numero: f.numero ?? "BOZZA", data: f.data, stato: f.stato, cliente: { nome: f.clienteNome, righe: righeCliente(f) }, righe: f.righe,
       causale: causaleConCointestato(f.causale, cointestatarioDa(f.cointestatario)), riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban, rate,
-      bollo, addebitoBollo: f.addebitoBollo, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
+      bollo, addebitoBollo: f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
       fatturaCollegata: collegata?.numero ? `${collegata.numero} del ${collegata.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : null, destinazione: f.destinazione,
       trasporto: { causale: f.causaleTrasporto, aCura: ({ MITTENTE: "Mittente", DESTINATARIO: "Destinatario", VETTORE: "Vettore" } as Record<string, string>)[f.trasportoACura ?? ""] ?? f.trasportoACura, vettore: f.vettore, aspetto: f.aspettoBeni, colli: f.colli, peso: f.pesoLordo, porto: f.porto, inizio: f.inizioTrasporto },
     },

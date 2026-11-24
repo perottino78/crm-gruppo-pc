@@ -28,15 +28,21 @@ export function serveBollo(righe: RigaCalcolo[]): boolean {
   return senzaIva > SOGLIA_BOLLO;
 }
 
-export type Totali = { imponibile: number; iva: number; bollo: number; totale: number; riepilogo: VoceRiepilogo[] };
+/** Ritenuta d'acconto: aliquota % applicata a una parte (base %) dell'imponibile, es. 23% su 20% di 67,50 = 3,11. */
+export const ritenutaDa = (imponibile: number, aliquota?: number | null, base?: number | null) =>
+  aliquota && aliquota > 0 ? cent(((imponibile * (base && base > 0 ? base : 100)) / 100 * aliquota) / 100) : 0;
+
+export type Totali = { imponibile: number; iva: number; bollo: number; totale: number; riepilogo: VoceRiepilogo[]; ritenuta: number; daPagare: number };
 
 /** Totali del documento. Il bollo si somma al totale solo se addebitato al cliente. */
-export function totali(righe: RigaCalcolo[], opz: { bollo?: boolean; addebitoBollo?: boolean } = {}): Totali {
+export function totali(righe: RigaCalcolo[], opz: { bollo?: boolean; addebitoBollo?: boolean; ritenutaAliquota?: number | null; ritenutaBase?: number | null } = {}): Totali {
   const riepilogo = riepilogoIva(righe);
   const imponibile = cent(riepilogo.reduce((t, v) => t + v.imponibile, 0));
   const iva = cent(riepilogo.reduce((t, v) => t + v.imposta, 0));
   const bollo = opz.bollo ? IMPORTO_BOLLO : 0;
-  return { imponibile, iva, bollo, totale: cent(imponibile + iva + (opz.addebitoBollo ? bollo : 0)), riepilogo };
+  const totale = cent(imponibile + iva + (opz.addebitoBollo ? bollo : 0));
+  const ritenuta = ritenutaDa(imponibile, opz.ritenutaAliquota, opz.ritenutaBase);
+  return { imponibile, iva, bollo, totale, riepilogo, ritenuta, daPagare: cent(totale - ritenuta) };
 }
 
 /** Ultimo giorno del mese di una data (UTC, mezzogiorno). */

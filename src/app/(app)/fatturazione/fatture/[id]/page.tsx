@@ -36,9 +36,9 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
   const noRiapertura = f.stato === "EMESSA" ? await motivoNoRiapertura(f) : "x";
   const bozza = f.stato === "BOZZA";
   const bollo = serveBollo(f.righe);
-  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo });
+  const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
   const mancano = controlliEmissione(f, f.righe);
-  const rate = Array.isArray(f.rate) && f.rate.length ? (f.rate as { data: string; importo: number }[]).map((r) => ({ data: new Date(r.data), importo: r.importo })) : rateDaMetodo(f.metodoPagamento, f.data, t.totale);
+  const rate = Array.isArray(f.rate) && f.rate.length ? (f.rate as { data: string; importo: number }[]).map((r) => ({ data: new Date(r.data), importo: r.importo })) : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const stato = STATI_FATTURA[f.stato];
 
   return (
@@ -121,6 +121,14 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
             <CointestatoFattura iniziale={cointestatarioDa(f.cointestatario)} disabilitato={!bozza} />
             <label className="flex items-center gap-2"><input type="checkbox" name="addebitoBollo" defaultChecked={f.addebitoBollo} /> Addebita il bollo da 2 € al cliente (se dovuto)</label>
           </div>
+          <div className="flex flex-wrap items-center gap-2 text-sm rounded border border-neutral-200 p-2">
+            <label className="flex items-center gap-2 font-semibold"><input type="checkbox" name="conRitenuta" defaultChecked={f.ritenutaAliquota != null} /> Ritenuta d&apos;acconto</label>
+            <span className="text-xs text-neutral-600">del</span>
+            <input name="ritenutaAliquota" defaultValue={String(f.ritenutaAliquota ?? 23).replace(".", ",")} className={`${inp} w-16 text-right`} /> <span>%</span>
+            <span className="text-xs text-neutral-600">su</span>
+            <input name="ritenutaBase" defaultValue={String(f.ritenutaBase ?? 20).replace(".", ",")} className={`${inp} w-16 text-right`} /> <span>% dell&apos;imponibile</span>
+            <span className="text-[11px] text-neutral-500 w-full">Per esempio provvigioni a una finanziaria: 23% su 20%. Il cliente trattiene la ritenuta e paga il netto; la fattura mostra «Totale da pagare».</span>
+          </div>
           {tf.trasporto && (
             <div className="rounded border border-neutral-200 p-3 space-y-2">
               <p className="text-sm font-semibold">Dati di trasporto (fattura accompagnatoria)</p>
@@ -197,6 +205,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
             <p>IVA <b>{eur(t.iva)}</b></p>
             {bollo && <p>Bollo {f.addebitoBollo ? "addebitato" : "virtuale (a carico nostro)"} <b>{eur(t.bollo)}</b></p>}
             <p className="text-lg">Totale <b>{eur(t.totale)}</b></p>
+            {t.ritenuta > 0 && <p>Ritenuta del {f.ritenutaAliquota}%{f.ritenutaBase && f.ritenutaBase !== 100 ? ` su ${f.ritenutaBase}%` : ""}: <b>- {eur(t.ritenuta)}</b> → da pagare <b>{eur(t.daPagare)}</b></p>}
             {rate.length > 0 && !tf.notaCredito && <p className="text-xs text-neutral-600">Scadenze: {rate.map((r) => `${dataIt(r.data)} ${eur(r.importo)}`).join(" · ")}</p>}
           </div>
         </div>

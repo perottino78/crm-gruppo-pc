@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { importoRiga, riepilogoIva, totali, serveBollo, rateDaMetodo, numeroFattura, numeroProva, progressivoDa, prossimoNumero, numeroDdt, statoDdtDaRighe, propostaDaCommessa } from "../../src/lib/fatturazione/calcoli";
+import { ritenutaDa, importoRiga, riepilogoIva, totali, serveBollo, rateDaMetodo, numeroFattura, numeroProva, progressivoDa, prossimoNumero, numeroDdt, statoDdtDaRighe, propostaDaCommessa } from "../../src/lib/fatturazione/calcoli";
 import { xmlFatturaPA, nomeFileXml } from "../../src/lib/fatturazione/xml";
 import { leggiFatturaPA } from "../../src/lib/fatture/fatturapa";
 
@@ -17,7 +17,7 @@ test("righe, sconto e riepilogo IVA per aliquota", () => {
 
 test("totali e bollo", () => {
   const righe = [{ quantita: 1, prezzo: 3503.64, aliquota: 10 }];
-  assert.deepEqual({ ...totali(righe), riepilogo: undefined }, { imponibile: 3503.64, iva: 350.36, bollo: 0, totale: 3854, riepilogo: undefined });
+  assert.deepEqual({ ...totali(righe), riepilogo: undefined }, { imponibile: 3503.64, iva: 350.36, bollo: 0, totale: 3854, riepilogo: undefined, ritenuta: 0, daPagare: 3854 });
   const esenti = [{ quantita: 1, prezzo: 100, aliquota: 0, natura: "N4" }];
   assert.equal(serveBollo(esenti), true);
   assert.equal(serveBollo([{ quantita: 1, prezzo: 77, aliquota: 0, natura: "N4" }]), false);
@@ -111,4 +111,14 @@ test("XML: differita con DDT, nota di credito collegata, bollo e azienda", () =>
   assert.match(nc, /<DatiFattureCollegate><IdDocumento>1\/FE\/2026<\/IdDocumento>/);
   assert.equal(leggiFatturaPA(nc)[0].notaCredito, true);
   assert.throws(() => xmlFatturaPA({ progressivoInvio: "4", tipo: "PROFORMA", numero: "x", data: new Date(), cliente: { denominazione: "x", persona: false }, righe: [] }));
+});
+
+test("ritenuta d'acconto: 23% su 20% (fattura Fiditalia 313/FE/2026)", () => {
+  assert.equal(ritenutaDa(67.5, 23, 20), 3.11);
+  const t = totali([{ quantita: 1, prezzo: 67.5, aliquota: 0, natura: "N4" }], { ritenutaAliquota: 23, ritenutaBase: 20 });
+  assert.equal(t.totale, 67.5);
+  assert.equal(t.ritenuta, 3.11);
+  assert.equal(t.daPagare, 64.39);
+  assert.equal(totali([{ quantita: 1, prezzo: 100, aliquota: 22 }]).daPagare, 122);
+  assert.equal(ritenutaDa(1000, 20, null), 200);
 });

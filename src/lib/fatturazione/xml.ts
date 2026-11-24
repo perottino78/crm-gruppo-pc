@@ -16,6 +16,7 @@ export type DatiXml = {
   };
   righe: (RigaCalcolo & { descrizione: string; codice?: string | null; um?: string | null })[];
   causale?: string | null;
+  ritenutaAliquota?: number | null; ritenutaBase?: number | null; // ritenuta d'acconto (es. 23% su 20%)
   bollo?: boolean; addebitoBollo?: boolean;
   pagamento?: { metodo: string | null; iban?: string | null; istituto?: string | null; rate: { data: Date; importo: number }[] } | null;
   ddt?: { numero: string; data: Date }[];
@@ -44,7 +45,7 @@ const causali = (s: string | null | undefined) => {
 export function xmlFatturaPA(d: DatiXml): string {
   const tf = tipoFattura(d.tipo);
   if (!tf.td) throw new Error("La fattura proforma non è un documento fiscale: niente XML.");
-  const tot = totali(d.righe, { bollo: d.bollo, addebitoBollo: d.addebitoBollo });
+  const tot = totali(d.righe, { bollo: d.bollo, addebitoBollo: d.addebitoBollo, ritenutaAliquota: d.ritenutaAliquota, ritenutaBase: d.ritenutaBase });
   const c = d.cliente;
   const naz = (c.nazione || "IT").toUpperCase().slice(0, 2);
   const codDest = naz !== "IT" ? "XXXXXXX" : (c.codiceDestinatario || "0000000").toUpperCase().slice(0, 7).padEnd(7, "0");
@@ -77,6 +78,7 @@ export function xmlFatturaPA(d: DatiXml): string {
   const generali =
     `<DatiGenerali><DatiGeneraliDocumento><TipoDocumento>${tf.td}</TipoDocumento><Divisa>EUR</Divisa><Data>${d10(d.data)}</Data>` +
     `<Numero>${t(d.numero, 20)}</Numero>` +
+    (tot.ritenuta > 0 ? `<DatiRitenuta><TipoRitenuta>RT02</TipoRitenuta><ImportoRitenuta>${n2(tot.ritenuta)}</ImportoRitenuta><AliquotaRitenuta>${n2(((d.ritenutaBase ?? 100) * (d.ritenutaAliquota ?? 0)) / 100)}</AliquotaRitenuta><CausalePagamento>${(d.ritenutaBase ?? 100) === 20 ? "R" : (d.ritenutaBase ?? 100) === 50 ? "Q" : "A"}</CausalePagamento></DatiRitenuta>` : "") +
     (d.bollo ? `<DatiBollo><BolloVirtuale>SI</BolloVirtuale><ImportoBollo>${n2(tot.bollo)}</ImportoBollo></DatiBollo>` : "") +
     `<ImportoTotaleDocumento>${n2(tot.totale)}</ImportoTotaleDocumento>` + causali(d.causale) + `</DatiGeneraliDocumento>` +
     (d.fatturaCollegata ? `<DatiFattureCollegate><IdDocumento>${t(d.fatturaCollegata.numero, 20)}</IdDocumento><Data>${d10(d.fatturaCollegata.data)}</Data></DatiFattureCollegate>` : "") +
@@ -92,7 +94,7 @@ export function xmlFatturaPA(d: DatiXml): string {
     `<PrezzoUnitario>${nPrezzo(r.prezzo)}</PrezzoUnitario>` +
     (r.sconto ? `<ScontoMaggiorazione><Tipo>SC</Tipo><Percentuale>${n2(r.sconto)}</Percentuale></ScontoMaggiorazione>` : "") +
     `<PrezzoTotale>${n2(importoRiga(r))}</PrezzoTotale><AliquotaIVA>${n2(r.natura ? 0 : r.aliquota)}</AliquotaIVA>` +
-    (r.natura ? `<Natura>${r.natura}</Natura>` : "") + `</DettaglioLinee>`).join("");
+    (tot.ritenuta > 0 ? `<Ritenuta>SI</Ritenuta>` : "") + (r.natura ? `<Natura>${r.natura}</Natura>` : "") + `</DettaglioLinee>`).join("");
   const riepilogo = tot.riepilogo.map((v) =>
     `<DatiRiepilogo><AliquotaIVA>${n2(v.natura ? 0 : v.aliquota)}</AliquotaIVA>` + (v.natura ? `<Natura>${v.natura}</Natura>` : "") +
     `<ImponibileImporto>${n2(v.imponibile)}</ImponibileImporto><Imposta>${n2(v.imposta)}</Imposta>` +
