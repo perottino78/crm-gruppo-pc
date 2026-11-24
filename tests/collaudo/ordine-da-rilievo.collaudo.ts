@@ -138,7 +138,7 @@ async function main() {
 
   console.log("4. Invio da ordini@ con lista senza prezzi e rilievo allegato");
   const e = await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine 1/2026 - P&C S.r.l.", "Buongiorno, in allegato il nostro ordine con il rilievo misure.", { senzaPrezzi: true, conRilievo: true });
-  verifica(e.ok && e.messaggio.includes("ordini@gruppopec.com") && e.messaggio.includes("rilievo allegato (1 file)"), "invio riuscito, conferme a ordini@", e);
+  verifica(e.ok && e.messaggio.includes("ordini@gruppopec.com") && e.messaggio.includes("Allegati (2)") && e.messaggio.includes("rilievo cartaceo.pdf"), "invio riuscito, conferme a ordini@", e);
   const m = posta[0]?.dati ?? "";
   verifica(posta.length === 1 && posta[0].a.includes("ordini@fidra.it"), "email al fornitore", posta.map((p) => p.a));
   verifica(/^From: .*Ufficio ordini.*ordini@gruppopec\.com/m.test(m) && /^Reply-To: .*ordini@gruppopec\.com/m.test(m), "parte da ordini@gruppopec.com e le risposte tornano lì", m.slice(0, 600));
@@ -155,6 +155,19 @@ async function main() {
   await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine", "Testo", { senzaPrezzi: false, conRilievo: false });
   const m2 = posta[1]?.dati ?? "";
   verifica(!m2.includes("rilievo cartaceo.pdf"), "senza la spunta il rilievo non parte");
+
+  console.log("5b. Storico delle email, copia a ordini@ e misure definitive");
+  {
+    const storico = await prisma.emailOrdine.findMany({ where: { ordineFornitoreId: o1.id }, orderBy: { createdAt: "asc" } });
+    verifica(storico.length === 2 && storico[0].stato === "INVIATA" && storico[0].a === "ordini@fidra.it" && storico[0].allegati.length === 2 && storico[0].allegatiDocIds.length === 2, "ogni invio resta nello storico, con i file allegati", storico.map((x) => x.allegati));
+    verifica(storico[1].allegati.length === 1, "il secondo invio (senza rilievo) ha il solo PDF");
+    const copie = await prisma.documento.findMany({ where: { id: { in: storico[0].allegatiDocIds } } });
+    verifica(copie.length === 2 && copie.every((d) => d.cartella === "Inviati al fornitore" && d.dimensione > 10), "le copie dei file inviati si possono riaprire", copie.map((d) => d.nome));
+    verifica(posta[0].a.includes("ordini@gruppopec.com"), "copia nascosta anche a ordini@", posta[0].a);
+    await prisma.rigaOrdine.update({ where: { id: finestra.id }, data: { misureDefinitive: "1195×1405 mm" } });
+    const mis = await (await import("../../src/lib/ordini/server")).datiPdfOrdine(o1.id);
+    verifica(mis?.dati.righe.some((r) => r.descrizione.includes("misure definitive: 1195×1405 mm")), "l'ordine al fornitore riporta le misure definitive", mis?.dati.righe.map((r) => r.descrizione));
+  }
 
   console.log("6. Rilievo salvato insieme al materiale (un solo «Salva»)");
   const ril2 = await prisma.rilievo.create({ data: { commessaId: c.id, tecnicoId: ugo.id, dataOra: new Date() } });
@@ -179,11 +192,11 @@ async function main() {
   const n2 = posta.length;
   const e4 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Richiesta", "Testo", { senzaPrezzi: true, documenti: [docRil.id] });
   const m4 = posta[n2]?.dati ?? "";
-  verifica(e4.ok && m4.includes("misure C3.pdf") && !m4.includes("contratto.pdf") && e4.messaggio.includes("1 file del progetto"), "allegato solo il file scelto della cartella", e4);
+  verifica(e4.ok && m4.includes("misure C3.pdf") && !m4.includes("contratto.pdf") && e4.messaggio.includes("misure C3.pdf"), "allegato solo il file scelto della cartella", e4);
 
   const e5 = await O.inviaOrdineEmail(o3.id, "ordini@fidra.it", "", "Ordine cartaceo", "Testo", { senzaPrezzi: true, extra: [{ nome: "ordine firmato.pdf", dataUri: "data:application/pdf;base64," + Buffer.from("%PDF-1.4 prova").toString("base64") }, { nome: "virus.exe", dataUri: "data:application/octet-stream;base64,AAAA" }] });
   const m5 = posta[n2 + 1]?.dati ?? "";
-  verifica(e5.ok && m5.includes("ordine firmato.pdf") && !m5.includes("virus.exe") && e5.messaggio.includes("1 file caricati"), "file dal computer allegato (solo PDF/foto)", e5);
+  verifica(e5.ok && m5.includes("ordine firmato.pdf") && !m5.includes("filename=\"virus.exe\"") && e5.messaggio.includes("NON allegati") && e5.messaggio.includes("virus.exe"), "file dal computer allegato (solo PDF/foto)", e5);
   verifica((await prisma.documento.count({ where: { entita: "ORDINE_FORNITORE", entitaId: o3.id, cartella: "Ordine cartaceo e disegni" } })) === 1, "e tenuto nei documenti dell'ordine");
 
   console.log("8. Variante dell'offerta: si salva e aggiorna la commessa");
@@ -205,6 +218,12 @@ async function main() {
   await prisma.preventivo.update({ where: { id: prev.id }, data: { confermatoIl: null } });
   const dc = await dove(C.confermaOrdinePreventivo(fd({ preventivoId: prev.id })));
   verifica(dc?.includes("variante=1") && await prisma.commessa.count() === 1, "anche «Conferma ordine» su un'offerta con commessa salva la variante (niente seconda commessa)", dc);
+
+  console.log("9. File scartato: lo si dice chiaro");
+  {
+    const dopo = await O.inviaOrdineEmail(o1.id, "ordini@fidra.it", "", "Ordine", "Testo", { extra: [{ nome: "sbagliato.exe", dataUri: "data:application/x-msdownload;base64,AAAA" }] });
+    verifica(dopo.ok && dopo.messaggio.includes("NON allegati") && dopo.messaggio.includes("sbagliato.exe"), "un file scartato si dice chiaro nel messaggio", dopo.messaggio);
+  }
 
   console.log(`\n${ok} ok, ${ko} falliti`);
 }

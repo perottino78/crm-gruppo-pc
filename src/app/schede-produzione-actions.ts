@@ -83,7 +83,7 @@ async function compilaESalva(ordineId: string, modelloId: string, fd: FormData, 
   const dove = o.commessaId ? { entita: "COMMESSA", entitaId: o.commessaId, cartella: "Schede produzione" } : { entita: "ORDINE_FORNITORE", entitaId: o.id, cartella: "Generale" };
   // dal pulsante del legno la scheda si aggiorna: quella vecchia con lo stesso nome va via (niente doppioni da allegare)
   if (sostituisci) await prisma.documento.deleteMany({ where: { ...dove, nome } });
-  await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi } });
+  await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi, dati: valori } });
   return true;
 }
 
@@ -192,7 +192,7 @@ async function compilaPerPratica(commessaId: string, modelloId: string, fd: Form
   const nome = `Scheda produzione ${m.nome}${forn ? ` - ${forn.ragioneSociale}` : ""} - ${c.numero}-${c.anno}.html`.replace(/[^\w.\- ]+/g, "_");
   const dove = { entita: "COMMESSA", entitaId: commessaId, cartella: "Schede produzione" };
   await prisma.documento.deleteMany({ where: { ...dove, nome } });
-  await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi } });
+  await prisma.documento.create({ data: { ...dove, nome, mime: "text/html", dimensione: contenuto.length, contenuto, caricatoDaNome: chi, dati: valori } });
   return { nome, fornitoreId, fornitoreNome: forn?.ragioneSociale ?? null };
 }
 

@@ -64,6 +64,8 @@ export type MailDaInviare = {
   intestazioni?: Record<string, string>;
   /** In copia (es. il commerciale o un collega) */
   cc?: string[];
+  /** Copia nascosta (es. all'ufficio ordini, per ritrovare nella casella ciò che è stato inviato) */
+  ccn?: string[];
   /** Email di massa (campagne) o automatica al cliente: parte dal servizio di invio (Brevo) se è collegato. */
   servizio?: boolean;
   /** File allegati (es. l'offerta in PDF, foto, schede tecniche) */
@@ -72,13 +74,15 @@ export type MailDaInviare = {
 
 async function spedisci(c: Casella & { servizio?: boolean }, m: MailDaInviare, a: string[], da: string, rispondiA?: string | null) {
   const cc = (m.cc ?? []).filter((x) => /.+@.+\..+/.test(x) && !a.includes(x));
+  const ccn = (m.ccn ?? []).filter((x) => /.+@.+\..+/.test(x) && !a.includes(x) && !cc.includes(x));
   await trasporto(c).sendMail({
     from: da,
     to: a.join(", "),
     ...(cc.length ? { cc: cc.join(", ") } : {}),
+    ...(ccn.length ? { bcc: ccn.join(", ") } : {}),
     // i "mancato recapito" tornano alla casella che spedisce, dove il CRM li legge (vedi rimbalzi-server.ts);
     // con il servizio di invio li raccoglie Brevo e li manda al webhook (busta lasciata a Brevo)
-    ...(c.servizio ? {} : { envelope: { from: c.utente, to: [...a, ...cc] } }),
+    ...(c.servizio ? {} : { envelope: { from: c.utente, to: [...a, ...cc, ...ccn] } }),
     ...(m.allegati?.length ? { attachments: m.allegati.map((f) => ({ filename: f.nome, content: f.contenuto, ...(f.mime ? { contentType: f.mime } : {}) })) } : {}),
     replyTo: rispondiA || undefined,
     ...(m.intestazioni || c.servizio ? { headers: { ...(m.intestazioni ?? {}), ...(c.servizio && m.intestazioni?.["X-CRM-Invio"] ? { "X-Mailin-custom": m.intestazioni["X-CRM-Invio"] } : {}) } } : {}),
