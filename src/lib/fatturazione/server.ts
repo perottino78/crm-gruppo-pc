@@ -9,6 +9,7 @@ import { CEDENTE, codiceIvaDa, metodoPagamento, SEZIONALI, sezionale, tipoFattur
 import { cent, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
 import { xmlFatturaPA } from "./xml";
 import { creaScadenzeVendita } from "@/lib/fatture/vendite";
+import { residuoScadenza } from "@/lib/amministrazione/server";
 
 type Tx = Prisma.TransactionClient;
 
@@ -128,10 +129,12 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
   // la proforma non è un documento fiscale: numerazione a parte, mai nelle vendite
   const proforma = !tf.fiscale;
   const prova = !reale && !proforma;
+  if (prova && f.numero !== null && f.progressivo !== null && !f.numero.startsWith("PROVA")) throw new Error(`La fattura ${f.numero} ha già un numero vero: si riemette solo con l'emissione vera accesa (altrimenti perderebbe il suo numero).`);
   // fattura riaperta per una correzione: mantiene il suo numero (la numerazione fiscale non si tocca)
   const riaperta = !proforma && !prova && f.numero !== null && f.progressivo !== null;
   const progressivo = riaperta ? f.progressivo! : proforma ? await prossimaProforma(tx, anno) : await prossimoProgressivoFattura(tx, f.sezionale, anno, prova);
   const numero = riaperta ? f.numero! : proforma ? `PROFORMA ${progressivo}/${anno}` : prova ? numeroProva(progressivo, f.sezionale, anno) : numeroFattura(progressivo, f.sezionale, anno);
+  if (!prova && !proforma && !riaperta) await controllaDataFattura(tx, f.sezionale, anno, f.data, progressivo);
   const bollo = serveBollo(f.righe);
   const t = totali(f.righe, { bollo, addebitoBollo: bollo && f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase });
   const iban = f.iban ?? (metodoPagamento(f.metodoPagamento).banca ? await ibanDi(tx, f.banca) : null);
@@ -160,6 +163,10 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
       },
     });
     if (!tf.notaCredito && t.totale > 0) await creaScadenzeVendita(tx, fv.id);
+    if (tf.notaCredito && f.fatturaCollegataId) {
+      const orig = await tx.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { fatturaVenditaId: true } });
+      if (orig?.fatturaVenditaId) await riduciIncassiConNota(tx, orig.fatturaVenditaId, t.totale, numero);
+    }
     if (t.ritenuta > 0) await tx.scadenza.updateMany({ where: { fatturaVenditaId: fv.id, origine: "FATTURA_VENDITA" }, data: { note: `Ritenuta d'acconto ${f.ritenutaAliquota}% su ${f.ritenutaBase ?? 100}%: ${t.ritenuta.toFixed(2).replace(".", ",")} € trattenuti dal cliente. Da incassare ${t.daPagare.toFixed(2).replace(".", ",")} €.` } });
     fatturaVenditaId = fv.id;
   }
@@ -177,6 +184,42 @@ export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
       imponibile: t.imponibile, iva: t.iva, totale: t.totale, bollo, ritenutaImporto: t.ritenuta, fatturaVenditaId, emessaDaNome: nome, emessaIl: new Date(),
     },
   });
+}
+
+/**
+ * La data deve seguire la numerazione: non nel futuro e non prima della fattura precedente dello stesso sezionale e anno
+ * (la numerazione è progressiva e le date non possono tornare indietro).
+ */
+async function controllaDataFattura(tx: Tx, sez: string, anno: number, data: Date, progressivo: number) {
+  const giornoRoma = (d: Date) => d.toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" });
+  if (giornoRoma(data) > giornoRoma(new Date())) throw new Error("La data della fattura è nel futuro: usa la data di oggi.");
+  const prima = await tx.fatturaEmessa.findFirst({ where: { sezionale: sez, anno, stato: "EMESSA", tipo: { not: "PROFORMA" }, progressivo: { lt: progressivo } }, orderBy: { progressivo: "desc" }, select: { numero: true, data: true } });
+  if (prima && giornoRoma(data) < giornoRoma(prima.data)) throw new Error(`La data è precedente a quella della fattura n. ${prima.numero} (${prima.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}): i numeri devono seguire le date. Metti una data uguale o successiva.`);
+}
+
+/**
+ * Una nota di credito abbassa ciò che il cliente deve ancora pagare sulla fattura stornata: toglie dalle ultime rate ancora da incassare
+ * (mai sotto quanto già pagato). Se il cliente ha già pagato più del dovuto resta un credito da restituire (lo dice la nota della rata).
+ */
+export async function riduciIncassiConNota(tx: Tx, fatturaVenditaId: string, importoNota: number, numeroNota: string) {
+  let resto = cent(Math.abs(importoNota));
+  const scad = await tx.scadenza.findMany({ where: { fatturaVenditaId, tipo: "INCASSO", stato: { in: ["APERTA", "PARZIALE"] } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { dataScadenza: "desc" } });
+  for (const s of scad) {
+    if (resto <= 0) break;
+    const residuo = residuoScadenza(s);
+    if (residuo <= 0) continue;
+    const togli = Math.min(residuo, resto);
+    const nuovoImporto = cent(s.importo - togli);
+    const nota = `${s.note ? s.note + "\n" : ""}Ridotta di ${togli.toFixed(2).replace(".", ",")} € dalla nota di credito ${numeroNota}.`;
+    const pagato = cent(s.importo - residuo);
+    if (pagato <= 0 && nuovoImporto <= 0) await tx.scadenza.update({ where: { id: s.id }, data: { stato: "ANNULLATA", note: nota } });
+    else await tx.scadenza.update({ where: { id: s.id }, data: { importo: nuovoImporto, stato: cent(nuovoImporto - pagato) <= 0 ? "PAGATA" : s.stato, note: nota } });
+    resto = cent(resto - togli);
+  }
+  if (resto > 0) {
+    const ultima = await tx.scadenza.findFirst({ where: { fatturaVenditaId, tipo: "INCASSO" }, orderBy: { dataScadenza: "desc" } });
+    if (ultima) await tx.scadenza.update({ where: { id: ultima.id }, data: { note: `${ultima.note ? ultima.note + "\n" : ""}La nota di credito ${numeroNota} supera quanto ancora da incassare: ${resto.toFixed(2).replace(".", ",")} € sono un credito del cliente (da restituire o compensare).` } });
+  }
 }
 
 /** Righe proposte dall'offerta della commessa (descrizione dei prodotti con il loro importo IVA esclusa). */
@@ -199,7 +242,7 @@ export async function righeDaOfferta(preventivoId: string) {
     const unit = r.quantita ? (r.prezzoUnitario + (r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0)) / r.quantita) * fattore : 0;
     return {
       descrizione: `${r.descrizionePersonalizzata && !r.testoLibero ? r.descrizionePersonalizzata.split("\n")[0].slice(0, 200) : nomeProd}${misura}${opt ? ` — con ${opt}` : ""}`.slice(0, 900),
-      quantita: r.quantita, um: "pz", prezzo: cent(unit), aliquota: r.aliquotaIva ?? aliquota, natura: null as string | null,
+      quantita: r.quantita, um: "pz", prezzo: r.quantita > 0 ? Math.round((cent(unit * r.quantita) / r.quantita) * 1e8) / 1e8 : cent(unit), aliquota: r.aliquotaIva ?? aliquota, natura: null as string | null,
     };
   }).filter((r) => r.prezzo !== 0 || r.descrizione);
 }

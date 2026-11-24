@@ -64,11 +64,17 @@ export async function creaFattura(fd: FormData) {
   } else if (comm && tipo === "SALDO") {
     for (const r of await righeDaOfferta(comm.preventivo.id)) righe.push({ ...r, um: r.um });
     // acconti già fatturati (dal CRM o importati da BConsole) da dedurre
-    const acconti = await prisma.fatturaEmessa.findMany({ where: { commessaId: comm.id, tipo: "ACCONTO", stato: { in: ["EMESSA", "PROVA"] } }, select: { numero: true, data: true, imponibile: true, stato: true } });
+    const acconti = await prisma.fatturaEmessa.findMany({ where: { commessaId: comm.id, tipo: "ACCONTO", stato: { in: ["EMESSA", "PROVA"] } }, select: { numero: true, data: true, imponibile: true, stato: true, righe: { select: { aliquota: true }, take: 1 } } });
     const giaCrm = new Set(acconti.map((a) => a.numero));
-    const daBc = await prisma.fatturaVendita.findMany({ where: { commessaId: comm.id, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true } });
-    for (const a of [...acconti.filter((x) => x.stato === "EMESSA"), ...daBc.filter((x) => !giaCrm.has(x.numero))]) {
-      righe.push({ descrizione: `A dedurre acconto fattura n. ${a.numero} del ${a.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`, quantita: 1, um: null, prezzo: -Math.abs(a.imponibile), aliquota, natura: null });
+    const daBc = await prisma.fatturaVendita.findMany({ where: { commessaId: comm.id, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
+    // l'acconto si deduce con la stessa aliquota con cui è stato fatturato (con righe a IVA diverse nel saldo non esiste un'aliquota sola)
+    const aliquotaBc = (x: { imponibile: number; iva: number }) => { const a = x.imponibile ? Math.round((Math.abs(x.iva) / Math.abs(x.imponibile)) * 100) : aliquota; return [0, 4, 5, 10, 22].includes(a) ? a : aliquota; };
+    const dedotti = [
+      ...acconti.filter((x) => x.stato === "EMESSA").map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: x.righe[0]?.aliquota ?? aliquota })),
+      ...daBc.filter((x) => !giaCrm.has(x.numero)).map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: aliquotaBc(x) })),
+    ];
+    for (const a of dedotti) {
+      righe.push({ descrizione: `A dedurre acconto fattura n. ${a.numero} del ${a.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`, quantita: 1, um: null, prezzo: -Math.abs(a.imponibile), aliquota: a.aliquota, natura: null });
     }
     causale = "FATTURA SALDO";
   } else if (comm && tipo !== "NOTA_CREDITO") {
@@ -101,14 +107,15 @@ async function bozza(id: string | null) {
 export async function salvaTestataFattura(fd: FormData) {
   await utente();
   const f = await bozza(str(fd, "id"));
-  const tipo = TIPI_FATTURA.some((t) => t.codice === str(fd, "tipo")) ? str(fd, "tipo")! : f.tipo;
-  const data = giorno(str(fd, "data")) ?? f.data;
+  const bloccata = !!f.numero; // riaperta per correggerla: il numero è già suo, tipo, sezionale e data non cambiano
+  const tipo = bloccata ? f.tipo : TIPI_FATTURA.some((t) => t.codice === str(fd, "tipo")) ? str(fd, "tipo")! : f.tipo;
+  const data = bloccata ? f.data : giorno(str(fd, "data")) ?? f.data;
   const cointest = leggiCointestatario((k) => str(fd, k), fd.get("cointestata") === "on") as Prisma.InputJsonValue | null;
   await prisma.$transaction(async (tx) => {
     await tx.fatturaEmessa.update({
       where: { id: f.id },
       data: {
-        tipo, sezionale: sezionale(str(fd, "sezionale") ?? f.sezionale).codice, data, anno: data.getUTCFullYear(),
+        tipo, sezionale: bloccata ? f.sezionale : sezionale(str(fd, "sezionale") ?? f.sezionale).codice, data, anno: data.getUTCFullYear(),
         metodoPagamento: str(fd, "metodoPagamento"), banca: str(fd, "banca"), iban: str(fd, "iban")?.replace(/\s/g, "").toUpperCase() ?? null,
         causale: str(fd, "causale"), riferimento: str(fd, "riferimento"), note: str(fd, "note"), noteInterne: str(fd, "noteInterne"),
         addebitoBollo: fd.get("addebitoBollo") === "on", detrazione: fd.get("detrazione") === "on",
@@ -217,6 +224,22 @@ export async function segnaInviataSdi(fd: FormData) {
   const annulla = fd.get("annulla") === "1";
   await prisma.fatturaEmessa.update({ where: { id: f.id }, data: { inviataSdiIl: annulla ? null : giorno(str(fd, "data")) ?? new Date() } });
   await registraLog("FATTURA_SDI", f.id, annulla ? "ANNULLATA" : "INVIATA", `${f.numero} ${annulla ? "tolto il segno «inviata allo SDI»" : "segnata inviata allo SDI"}`, u.nome);
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
+/**
+ * Lo SDI ha scartato il file (errore da correggere, es. partita IVA o codice destinatario sbagliati): la fattura non è mai stata consegnata,
+ * quindi tiene il suo numero. Toglie il segno «inviata», annota il motivo e la rende riapribile: si corregge e si rimanda con lo stesso numero.
+ */
+export async function segnaScartataSdi(fd: FormData) {
+  const u = await utente();
+  const f = await prisma.fatturaEmessa.findUnique({ where: { id: str(fd, "id") ?? "" } });
+  if (!f || f.stato !== "EMESSA") redirect("/fatturazione/fatture");
+  const motivo = (str(fd, "motivo") ?? "motivo non indicato").slice(0, 300);
+  const quando = new Date().toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
+  await prisma.fatturaEmessa.update({ where: { id: f.id }, data: { inviataSdiIl: null, noteInterne: [f.noteInterne, `⚠️ Scartata dallo SDI il ${quando}: ${motivo}`].filter(Boolean).join("\n") } });
+  await registraLog("FATTURA_SDI", f.id, "SCARTATA", `${f.numero} scartata dallo SDI: ${motivo}`, u.nome);
   aggiorna(`/fatturazione/fatture/${f.id}`);
   redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
 }
