@@ -3,6 +3,7 @@
 import { prisma } from "../../src/lib/prisma";
 import { registraConsenso, haConsenso, linkConsensoCliente, linkInformativa, firmaConsenso } from "../../src/lib/privacy/consensi";
 import { emailCampagna } from "../../src/lib/campagne/motore";
+import { whereCampagna } from "../../src/lib/campagne/regole";
 import { bloccoDaTesto, INFORMATIVA_PREDEFINITA } from "../../src/lib/privacy/testi";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -44,6 +45,12 @@ async function main() {
   verifica(/api\/traccia/.test(con.html), "con consenso il tracciamento resta");
   verifica(/[?&]t=/.test(linkConsensoCliente(cl.id)) && firmaConsenso(cl.id).length > 8, "link di consenso firmato");
 
+  // filtro «consenso» delle campagne
+  const base = { marchi: [], stati: [], categorie: [] };
+  const nCon = await prisma.cliente.count({ where: whereCampagna({ ...base, consenso: "CON" }) });
+  const nSenza = await prisma.cliente.count({ where: whereCampagna({ ...base, consenso: "SENZA" }) });
+  const tutti = await prisma.cliente.count({ where: whereCampagna(base) });
+  verifica(nCon >= 1 && nCon + nSenza === tutti, "filtro consenso: con + senza = tutti", { nCon, nSenza, tutti });
   verifica(bloccoDaTesto(INFORMATIVA_PREDEFINITA).length > 3, "informativa di partenza leggibile a blocchi");
   await prisma.consensoMarketing.deleteMany({}); await prisma.lead.delete({ where: { id: lead.id } }); await prisma.cliente.delete({ where: { id: cl.id } });
   console.log(`\n${ok} ok, ${ko} falliti`);

@@ -115,6 +115,15 @@ export default async function CampagnaPage({ params, searchParams }: { params: P
             </label>
           )}
           <ScegliLuoghi province={opzioniProvince} comuni={opzioniComuni} scelteProvince={c.province} scelteComuni={c.comuni} senzaProvincia={senzaProvincia} azioneCompleta={completaProvince} />
+          <div className="rounded border border-emerald-200 bg-emerald-50/60 p-3 space-y-2">
+            <p className="text-xs text-neutral-700 font-semibold">🔒 Consenso al marketing</p>
+            <div className="flex flex-wrap gap-2">
+              <label className={casella(!c.consenso)}><input type="radio" name="consenso" value="" defaultChecked={!c.consenso} />tutti</label>
+              <label className={casella(c.consenso === "CON")}><input type="radio" name="consenso" value="CON" defaultChecked={c.consenso === "CON"} />solo chi ha dato il consenso</label>
+              <label className={casella(c.consenso === "SENZA")}><input type="radio" name="consenso" value="SENZA" defaultChecked={c.consenso === "SENZA"} />solo chi non l&apos;ha dato</label>
+            </div>
+            <p className="text-[11px] text-neutral-600">Per le promozioni a chi non ha mai comprato scegli «solo chi ha dato il consenso». «Solo chi non l&apos;ha dato» serve per la campagna informativa sulla privacy.</p>
+          </div>
           <div className="rounded border border-orange-200 bg-orange-50/60 p-3 space-y-2">
             <p className="text-xs text-neutral-700 font-semibold">Situazione del contatto (per trovare chi è già interessato)</p>
             <div className="flex flex-wrap gap-2">
