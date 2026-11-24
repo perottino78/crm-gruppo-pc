@@ -8,6 +8,7 @@ import { puoAmministrazione, registra as registraLog } from "@/lib/amministrazio
 import { leggiFileFatture, chiaveFattura } from "@/lib/fatture/fatturapa";
 import { importaFattura, registraFattura, riapriFattura, ordiniCitati, trasferisciProforma, type EsitoImport } from "@/lib/fatture/server";
 import { abbinaRighe, leggiQuantita } from "@/lib/magazzino/calcoli";
+import { numeroCommessa } from "@/lib/commesse";
 import { MAX_DOCUMENTO, nomeFileSicuro } from "@/lib/ordini/calcoli";
 
 function str(fd: FormData, k: string): string | null {
@@ -288,4 +289,106 @@ export async function salvaCentroCostoFattura(fd: FormData) {
   await registraLog("FATTURA_ACQUISTO", id, "CENTRO DI COSTO", `${f.fornitoreNome} n. ${f.numero}: ${centro ?? "—"}${fd.get("alFornitore") === "on" ? " (anche sul fornitore)" : ""}`, u.nome);
   revalidatePath(`/amministrazione/fatture-acquisto/${id}`);
   revalidatePath("/amministrazione/fatture-acquisto");
+}
+
+// ======================= TIPO, NUMERO E CORRELAZIONI (richieste di Ugo 24/11/2026) =======================
+
+const TIPI_SCELTA = ["PROFORMA", "TD01", "TD04", "SPESE", "ENTRATA_MERCE", "TD06", "AVVISO_PARCELLA"];
+
+function conMessaggio(id: string, p: { ok?: string; errore?: string }): never {
+  redirect(`/amministrazione/fatture-acquisto/${id}?${p.errore ? "errore" : "ok"}=${encodeURIComponent((p.errore ?? p.ok) as string)}`);
+}
+
+/** Prossimo numero «Fattura spese» dell'anno (1, 2, 3…): si parte dal più alto già usato. */
+export async function prossimoNumeroSpese(anno: number): Promise<number> {
+  const dal = new Date(Date.UTC(anno, 0, 1)), al = new Date(Date.UTC(anno + 1, 0, 1));
+  const gia = await prisma.fatturaAcquisto.findMany({ where: { tipoDocumento: "SPESE", data: { gte: dal, lt: al } }, select: { numero: true } });
+  return gia.reduce((m, x) => { const n = parseInt(x.numero, 10); return Number.isFinite(n) && n > m ? n : m; }, 0) + 1;
+}
+
+/**
+ * «Modifica» della fattura d'acquisto: tipo (proforma, nota di credito, fattura spese, entrata merce, parcella, avviso di parcella),
+ * numero e numero del fornitore. Scegliendo «Fattura spese» il numero diventa il progressivo dell'anno (il numero scritto dal
+ * fornitore passa in «N. fattura del fornitore»). La nota di credito ha gli importi in negativo.
+ */
+export async function modificaTipoFattura(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  const f = id ? await prisma.fatturaAcquisto.findUnique({ where: { id }, include: { righe: true } }) : null;
+  if (!f) return;
+  if (f.stato !== "DA_VERIFICARE") conMessaggio(f.id, { errore: "La fattura è già registrata: premi «Riapri per correggere», poi modificala." });
+  const tipo = str(fd, "tipoDocumento") ?? f.tipoDocumento;
+  if (!TIPI_SCELTA.includes(tipo) && tipo !== f.tipoDocumento) conMessaggio(f.id, { errore: "Tipo di documento non valido." });
+  if (tipo === "PROFORMA" && f.proformaId) conMessaggio(f.id, { errore: "Questa fattura sostituisce una proforma: scollegala prima di farla tornare proforma." });
+  const numeroScritto = str(fd, "numero"), numeroForn = str(fd, "numeroFornitore");
+  let numero = numeroScritto ?? f.numero;
+  let numeroFornitore = numeroForn ?? f.numeroFornitore;
+  let messaggio = `Tipo: ${TIPI_DOCUMENTO_NOMI[tipo] ?? tipo}.`;
+  if (tipo === "SPESE" && f.tipoDocumento !== "SPESE" && (numeroScritto === null || numeroScritto === f.numero)) {
+    // il numero del fornitore (es. 5890/26) non si perde: va nel suo campo
+    if (!numeroFornitore && f.numero && f.numero !== "0") numeroFornitore = f.numero;
+    const anno = f.data.getUTCFullYear();
+    numero = String(await prossimoNumeroSpese(anno));
+    messaggio = `Fattura spese n. ${numero}/${anno}: il numero è il progressivo dell'anno.`;
+  }
+  // proforma = numero 0 se non indicato; ritorno da «spese» a un altro tipo: si rimette il numero del fornitore
+  if (f.tipoDocumento === "SPESE" && tipo !== "SPESE" && numeroScritto === null && f.numeroFornitore) { numero = f.numeroFornitore; numeroFornitore = null; }
+  const segno = tipo === "TD04" ? -1 : 1;
+  const cambiaSegno = (tipo === "TD04") !== (f.tipoDocumento === "TD04");
+  await prisma.$transaction(async (tx) => {
+    await tx.fatturaAcquisto.update({
+      where: { id: f.id },
+      data: {
+        tipoDocumento: tipo, numero, numeroFornitore,
+        ...(cambiaSegno ? { imponibile: cent(segno * Math.abs(f.imponibile)), iva: cent(segno * Math.abs(f.iva)), totale: cent(segno * Math.abs(f.totale)) } : {}),
+      },
+    });
+    if (cambiaSegno) for (const r of f.righe) await tx.rigaFatturaAcquisto.update({ where: { id: r.id }, data: { importo: cent(segno * Math.abs(r.importo)) } });
+  });
+  await registraLog("FATTURA_ACQUISTO", f.id, "TIPO MODIFICATO", `${f.fornitoreNome}: ${f.tipoDocumento} ${f.numero} → ${tipo} ${numero}`, u.nome);
+  aggiorna(f.id);
+  conMessaggio(f.id, { ok: `${messaggio} Ora puoi registrare la fattura.` });
+}
+
+const TIPI_DOCUMENTO_NOMI: Record<string, string> = {
+  PROFORMA: "Fattura proforma", TD01: "Fattura", TD04: "Nota di credito (TD04)", SPESE: "Fattura spese", ENTRATA_MERCE: "Entrata merce", TD06: "Parcella (TD06)", AVVISO_PARCELLA: "Avviso di parcella",
+};
+
+/** «Nuova correlazione»: collega la fattura a un ordine del fornitore o al progetto (pratica) del cliente. */
+export async function aggiungiCorrelazioneFattura(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id"), tipo = str(fd, "tipo"), rif = str(fd, "riferimentoId");
+  const f = id ? await prisma.fatturaAcquisto.findUnique({ where: { id }, select: { id: true, stato: true, fornitoreNome: true, numero: true } }) : null;
+  if (!f) return;
+  if (!tipo || !rif || !["ORDINE_FORNITORE", "PROGETTO"].includes(tipo)) conMessaggio(f.id, { errore: "Scegli che cosa collegare." });
+  if (await prisma.correlazioneFatturaAcquisto.findFirst({ where: { fatturaId: f.id, tipo: tipo!, riferimentoId: rif! } })) conMessaggio(f.id, { errore: "È già collegato." });
+  let descrizione = "", avviso = "";
+  if (tipo === "ORDINE_FORNITORE") {
+    const o = await prisma.ordineFornitore.findUnique({ where: { id: rif! }, include: { fornitore: { select: { ragioneSociale: true } }, commessa: { select: { numero: true, anno: true, cliente: { select: { nome: true } } } } } });
+    if (!o) conMessaggio(f.id, { errore: "Ordine non trovato." });
+    descrizione = `Ordine fornitore ${o!.numero}/${o!.anno} · ${o!.fornitore.ragioneSociale}${o!.commessa ? ` · ${o!.commessa.cliente.nome}` : ""}`;
+  } else {
+    const c = await prisma.commessa.findUnique({ where: { id: rif! }, select: { id: true, numero: true, anno: true, cliente: { select: { nome: true } } } });
+    if (!c) conMessaggio(f.id, { errore: "Progetto non trovato." });
+    descrizione = `Progetto ${numeroCommessa(c!)} · ${c!.cliente.nome}`;
+    // fattura ancora da registrare: le righe senza progetto vanno su questo, così i costi arrivano alla commessa
+    if (f.stato === "DA_VERIFICARE") {
+      const n = await prisma.rigaFatturaAcquisto.updateMany({ where: { fatturaId: f.id, commessaId: null }, data: { commessaId: c!.id } });
+      if (n.count) avviso = ` Le ${n.count} righe senza progetto sono state messe su questo progetto (costi reali alla registrazione).`;
+    }
+  }
+  await prisma.correlazioneFatturaAcquisto.create({ data: { fatturaId: f.id, tipo: tipo!, riferimentoId: rif!, descrizione, creatoDaNome: u.nome } });
+  await registraLog("FATTURA_ACQUISTO", f.id, "CORRELATA", `${f.fornitoreNome} n. ${f.numero} ↔ ${descrizione}`, u.nome);
+  aggiorna(f.id);
+  conMessaggio(f.id, { ok: `Correlata: ${descrizione}.${avviso}` });
+}
+
+export async function togliCorrelazioneFattura(fd: FormData) {
+  const u = await utente();
+  const id = str(fd, "id");
+  const c = id ? await prisma.correlazioneFatturaAcquisto.findUnique({ where: { id } }) : null;
+  if (!c) return;
+  await prisma.correlazioneFatturaAcquisto.delete({ where: { id: c.id } });
+  await registraLog("FATTURA_ACQUISTO", c.fatturaId, "CORRELAZIONE TOLTA", c.descrizione, u.nome);
+  aggiorna(c.fatturaId);
 }

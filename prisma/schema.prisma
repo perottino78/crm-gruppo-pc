@@ -1785,7 +1785,10 @@ model FatturaAcquisto {
   progetto          String?
   // Centro di costo (dal fornitore, modificabile sulla fattura)
   centroCosto       String?
+  // Numero della fattura scritto dal fornitore (quando «numero» è il progressivo nostro, es. Fattura Spese 1739/2026)
+  numeroFornitore   String?
   righe             RigaFatturaAcquisto[]
+  correlazioni      CorrelazioneFatturaAcquisto[]
   bolle             BollaEntrata[]
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
@@ -1793,6 +1796,20 @@ model FatturaAcquisto {
   @@index([fornitoreId])
   @@index([stato])
   @@index([data])
+}
+
+// «Correla documento» come in BConsole: la fattura d'acquisto collegata a un ordine fornitore o a un progetto (pratica) del cliente
+model CorrelazioneFatturaAcquisto {
+  id            String          @id @default(cuid())
+  fattura       FatturaAcquisto @relation(fields: [fatturaId], references: [id], onDelete: Cascade)
+  fatturaId     String
+  tipo          String // ORDINE_FORNITORE | PROGETTO
+  riferimentoId String
+  descrizione   String
+  creatoDaNome  String?
+  createdAt     DateTime        @default(now())
+
+  @@index([fatturaId])
 }
 
 model RigaFatturaAcquisto {

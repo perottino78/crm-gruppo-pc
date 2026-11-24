@@ -12,7 +12,8 @@ import {
   ricalcolaScadenza, ricalcolaMovimento, residuoScadenza, residuoMovimento,
 } from "@/lib/amministrazione/server";
 import { eur, STATI_BCONSOLE } from "@/lib/amministrazione/costanti";
-import { confermePagamentiManuali } from "@/lib/amministrazione/pagamenti";
+import { confermePagamentiManuali, METODI_PAGAMENTO, nomeMetodo } from "@/lib/amministrazione/pagamenti";
+import { registraFattura } from "@/lib/fatture/server";
 import { praticaDiIncasso, avanzaDopoIncasso } from "@/app/flusso-actions";
 
 function str(fd: FormData, k: string): string | null {
@@ -309,7 +310,18 @@ export async function annullaRegistrazione(fd: FormData) {
   aggiorna();
 }
 
-/** Movimento manuale (cassa contanti, rettifiche). */
+/** Commissione bancaria di un movimento a mano: movimento a parte (categoria commissioni), si toglie insieme al movimento. */
+async function creaCommissione(m: { id: string; contoId: string; data: Date; divisione: string | null; metodo: string | null; daConfermare: boolean }, commissione: number, chi: string, utenteNome: string) {
+  await prisma.movimentoFinanziario.create({
+    data: {
+      contoId: m.contoId, data: m.data, importo: -cent(commissione), descrizione: `Commissione${m.metodo ? " " + nomeMetodo(m.metodo).toLowerCase() : ""} — ${chi}`.slice(0, 480),
+      origine: "MANUALE", impronta: `COM-${randomUUID()}`, stato: "REGISTRATO", categoria: "Commissioni e spese bancarie", metodo: m.metodo, daConfermare: m.daConfermare,
+      divisione: m.divisione, commissioneDiId: m.id, creatoDaNome: utenteNome,
+    },
+  });
+}
+
+/** Movimento manuale (cassa contanti, rettifiche, pagamento a un fornitore con la sua commissione). */
 export async function nuovoMovimento(fd: FormData) {
   const u = await utenteAmministrazione();
   if (!u) return;
@@ -324,16 +336,115 @@ export async function nuovoMovimento(fd: FormData) {
   if (await eMeseChiuso(data)) return;
   const importo = cent(Math.abs(valore) * (uscita ? -1 : 1));
   const categoria = daSaldare.length ? null : str(fd, "categoria");
+  const commissione = Math.abs(num(fd, "commissione") ?? 0);
+  const metodoScelto = str(fd, "metodo");
+  const metodo = metodoScelto && METODI_PAGAMENTO.some((x) => x.chiave === metodoScelto) ? metodoScelto : null;
+  // su un conto in banca il movimento scritto a mano resta «da confermare» finché l'estratto conto lo ritrova (niente doppioni)
+  const conto = await prisma.contoFinanziario.findUnique({ where: { id: contoId }, select: { tipo: true } });
+  const daConfermare = !!conto && conto.tipo !== "CASSA";
   const m = await prisma.movimentoFinanziario.create({
     data: {
-      contoId, data, importo, descrizione, origine: "MANUALE", impronta: `MAN-${randomUUID()}`, note: chiNome ? `Chi: ${chiNome}` : null,
-      stato: categoria ? "REGISTRATO" : "DA_ABBINARE", categoria, divisione: str(fd, "divisione"), creatoDaNome: u.nome,
+      contoId, data, importo, descrizione, origine: "MANUALE", impronta: `MAN-${randomUUID()}`, note: [chiNome ? `Chi: ${chiNome}` : null, str(fd, "note")].filter(Boolean).join(" · ") || null,
+      stato: categoria ? "REGISTRATO" : "DA_ABBINARE", categoria, divisione: str(fd, "divisione"), creatoDaNome: u.nome, metodo, daConfermare,
     },
   });
-  await registra("Movimento", m.id, "Inserito a mano", `${giorno(data)} ${eur(importo)} «${descrizione}»${chiNome ? ` (${chiNome})` : ""}${categoria ? " → " + categoria : ""}`, u.nome);
+  if (commissione > 0.004) await creaCommissione(m, commissione, chiNome ?? descrizione, u.nome);
+  await registra("Movimento", m.id, "Inserito a mano", `${giorno(data)} ${eur(importo)} «${descrizione}»${chiNome ? ` (${chiNome})` : ""}${categoria ? " → " + categoria : ""}${commissione > 0.004 ? ` · commissione ${eur(commissione)}` : ""}`, u.nome);
   // le scadenze spuntate, dalla più vecchia: ognuna prende quanto resta del movimento (l'ultima anche solo in parte)
   const ordinate = await prisma.scadenza.findMany({ where: { id: { in: daSaldare } }, select: { id: true }, orderBy: [{ dataScadenza: { sort: "asc", nulls: "last" } }] });
   for (const sc of ordinate) await abbina(m.id, sc.id, null, u.nome);
+  aggiorna();
+}
+
+/**
+ * Pagamento scritto a mano in prima nota, poi arriva la fattura (anche una settimana dopo): si apre il movimento e si collega la
+ * fattura ricevuta. Se la fattura è ancora «da verificare» si registra da sola; poi le sue rate si abbinano al movimento (dalla più
+ * vecchia) e risultano pagate.
+ */
+export async function collegaFatturaAMovimento(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const movimentoId = str(fd, "movimentoId"), fatturaId = str(fd, "fatturaId");
+  if (!movimentoId || !fatturaId) return;
+  const m = await prisma.movimentoFinanziario.findUnique({ where: { id: movimentoId }, include: { abbinamenti: true } });
+  if (!m || m.importo >= 0 || m.stato === "REGISTRATO" || residuoMovimento(m) <= 0.004 || (await eMeseChiuso(m.data))) return;
+  const f = await prisma.fatturaAcquisto.findUnique({ where: { id: fatturaId } });
+  if (!f || f.stato === "SOSTITUITA") return;
+  if (f.stato === "DA_VERIFICARE") {
+    await prisma.$transaction((tx) => registraFattura(tx, f.id, u.nome));
+    await registra("FATTURA_ACQUISTO", f.id, "REGISTRATA", `${f.fornitoreNome} n. ${f.numero} (dal pagamento in prima nota)`, u.nome);
+  }
+  const rate = await prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` }, stato: { in: ["APERTA", "PARZIALE"] } }, orderBy: [{ dataScadenza: { sort: "asc", nulls: "last" } }] });
+  for (const r of rate) await abbina(m.id, r.id, null, u.nome);
+  await prisma.movimentoFinanziario.update({ where: { id: m.id }, data: { note: [m.note, `Fattura ${f.numero} di ${f.fornitoreNome}`].filter(Boolean).join(" · ") } });
+  revalidatePath("/amministrazione/fatture-acquisto");
+  revalidatePath(`/amministrazione/fatture-acquisto/${f.id}`);
+  aggiorna();
+}
+
+/**
+ * Elimina un movimento scritto a mano (o un pagamento registrato a mano): le fatture a cui era abbinato tornano «da pagare»
+ * (si riaprono), la commissione sparisce insieme, la ritenuta si toglie. Non si tocca ciò che l'estratto conto ha già confermato.
+ */
+export async function eliminaMovimentoManuale(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id");
+  if (!id) return;
+  const m = await prisma.movimentoFinanziario.findUnique({ where: { id }, include: { abbinamenti: { include: { scadenza: true } } } });
+  if (!m || m.origine !== "MANUALE" || m.confermatoIl || m.stornatoDaId || m.commissioneDiId || (await eMeseChiuso(m.data))) return;
+  const scadenze = m.abbinamenti.map((a) => a.scadenzaId);
+  await prisma.$transaction(async (tx) => {
+    await tx.abbinamentoScadenza.deleteMany({ where: { movimentoId: m.id } });
+    if (m.ritenuta > 0 && scadenze[0]) {
+      const sc = await tx.scadenza.findUniqueOrThrow({ where: { id: scadenze[0] } });
+      await tx.scadenza.update({ where: { id: sc.id }, data: { ritenuta: Math.max(0, cent(sc.ritenuta - m.ritenuta)), note: [sc.note, `Ritenuta ${eur(m.ritenuta)} annullata con il movimento`].filter(Boolean).join("\n") } });
+    }
+    await tx.movimentoFinanziario.deleteMany({ where: { commissioneDiId: m.id } });
+    await tx.movimentoFinanziario.delete({ where: { id: m.id } });
+  });
+  for (const sid of scadenze) await ricalcolaScadenza(sid);
+  const riaperte = [...new Set(m.abbinamenti.map((a) => `${a.scadenza.controparte} · ${a.scadenza.descrizione}`))];
+  await registra("Movimento", m.id, "Eliminato", `${giorno(m.data)} ${eur(m.importo)} «${m.descrizione.slice(0, 80)}»${riaperte.length ? ` — tornate da pagare: ${riaperte.join("; ")}` : ""}`, u.nome);
+  aggiorna();
+  revalidatePath("/amministrazione/fatture-acquisto");
+}
+
+/**
+ * Modifica un movimento scritto a mano: data, banca, importo, descrizione e commissione. Se è abbinato a fatture l'importo non può
+ * scendere sotto quanto già abbinato (per cambiarlo di più si scollega prima la fattura, che torna da pagare).
+ */
+export async function modificaMovimentoManuale(fd: FormData) {
+  const u = await utenteAmministrazione();
+  if (!u) return;
+  const id = str(fd, "id");
+  if (!id) return;
+  const m = await prisma.movimentoFinanziario.findUnique({ where: { id }, include: { abbinamenti: true } });
+  if (!m || m.origine !== "MANUALE" || m.confermatoIl || m.stornatoDaId || m.commissioneDiId || (await eMeseChiuso(m.data))) return;
+  const data = dataDa(fd, "data") ?? m.data;
+  if (await eMeseChiuso(data)) return;
+  const contoId = str(fd, "contoId") ?? m.contoId;
+  const valore = num(fd, "importo");
+  const nuovoAbs = valore ? cent(Math.abs(valore)) : Math.abs(m.importo);
+  const coperto = cent(m.abbinamenti.reduce((t, a) => t + a.importo, 0));
+  if (nuovoAbs < coperto - 0.004) return;
+  const importo = cent((m.importo < 0 ? -1 : 1) * nuovoAbs);
+  const descrizione = str(fd, "descrizione") ?? m.descrizione;
+  const conto = await prisma.contoFinanziario.findUnique({ where: { id: contoId }, select: { tipo: true } });
+  const commissione = fd.has("commissione") ? Math.abs(num(fd, "commissione") ?? 0) : null;
+  await prisma.$transaction(async (tx) => {
+    await tx.movimentoFinanziario.update({ where: { id: m.id }, data: { data, contoId, importo, descrizione, note: str(fd, "note"), daConfermare: m.metodo ? !!conto && conto.tipo !== "CASSA" : m.daConfermare } });
+    if (commissione !== null) {
+      const esistente = await tx.movimentoFinanziario.findFirst({ where: { commissioneDiId: m.id } });
+      if (commissione > 0.004) {
+        if (esistente) await tx.movimentoFinanziario.update({ where: { id: esistente.id }, data: { importo: -cent(commissione), data, contoId } });
+        else await tx.movimentoFinanziario.create({ data: { contoId, data, importo: -cent(commissione), descrizione: `Commissione — ${descrizione}`.slice(0, 480), origine: "MANUALE", impronta: `COM-${randomUUID()}`, stato: "REGISTRATO", categoria: "Commissioni e spese bancarie", metodo: m.metodo, daConfermare: m.daConfermare, divisione: m.divisione, commissioneDiId: m.id, creatoDaNome: u.nome } });
+      } else if (esistente) await tx.movimentoFinanziario.delete({ where: { id: esistente.id } });
+    }
+  });
+  await ricalcolaMovimento(m.id);
+  for (const a of m.abbinamenti) await ricalcolaScadenza(a.scadenzaId);
+  await registra("Movimento", m.id, "Modificato", `${giorno(m.data)} ${eur(m.importo)} «${m.descrizione.slice(0, 60)}» → ${giorno(data)} ${eur(importo)} «${descrizione.slice(0, 60)}»`, u.nome);
   aggiorna();
 }
 
