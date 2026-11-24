@@ -16,6 +16,16 @@ export function misureDaModulo(dati: Record<string, string> | null | undefined):
     const q = Number(num(dati[`tab_fin_${n}_qta`]));
     out.push({ etichetta: [pos || `Finestra ${n}`, stanza].filter(Boolean).join(" · "), misure: `${L}×${H} mm`, quantita: Number.isFinite(q) && q > 0 ? q : null });
   }
+  // vetrata scorrevole SEEGLASS RUN: una sola misura, larghezza e altezza in mm
+  const vL = num(dati.larghezza_mm), vH = num(dati.altezza_mm);
+  if (vL && vH) out.push({ etichetta: `Vetrata${dati.misure_riferite ? ` (misure ${dati.misure_riferite.toLowerCase()})` : ""}`, misure: `${vL}×${vH} mm`, quantita: null });
+  // pergola NEW LIPARI: una riga per pergola, L × S (sporgenza) × H
+  for (let n = 1; n <= 3; n++) {
+    const L = num(dati[`tab_dimensioni_${n}_L`]), S = num(dati[`tab_dimensioni_${n}_S`]), H = num(dati[`tab_dimensioni_${n}_H`]);
+    if (!L || !S) continue;
+    const q = Number(num(dati[`tab_qta_${n}_qta`]));
+    out.push({ etichetta: `Pergola ${n}`, misure: `L ${L} × S ${S}${H ? ` × H ${H}` : ""} mm`, quantita: Number.isFinite(q) && q > 0 ? q : null });
+  }
   return out;
 }
 

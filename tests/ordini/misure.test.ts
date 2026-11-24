@@ -14,3 +14,9 @@ test("le misure definitive si aggiungono alla descrizione", () => {
   assert.equal(conMisureDefinitive("Finestra 2 ante", "1200×1400 mm"), "Finestra 2 ante — misure definitive: 1200×1400 mm");
   assert.equal(conMisureDefinitive("Finestra", "  "), "Finestra");
 });
+
+test("misure dalle vetrate e dalle pergole", () => {
+  assert.equal(misureDaModulo({ larghezza_mm: "3200", altezza_mm: "2400", misure_riferite: "Interne" })[0].misure, "3200×2400 mm");
+  const p = misureDaModulo({ tab_dimensioni_1_L: "4000", tab_dimensioni_1_S: "3500", tab_dimensioni_1_H: "2600", tab_qta_1_qta: "1" });
+  assert.equal(p[0].misure, "L 4000 × S 3500 × H 2600 mm");
+});
