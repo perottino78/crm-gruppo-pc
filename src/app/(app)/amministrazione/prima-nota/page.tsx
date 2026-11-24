@@ -8,10 +8,12 @@ import { suggerisci } from "@/lib/amministrazione/abbinamento";
 import { cent } from "@/lib/amministrazione/estratto";
 import { eur, dataIt, STATI_MOVIMENTO, CATEGORIE_MOVIMENTO } from "@/lib/amministrazione/costanti";
 import { BRANDS } from "@/lib/brands";
+import { METODI_PAGAMENTO } from "@/lib/amministrazione/pagamenti";
 import VisteSalvate from "@/components/amministrazione/VisteSalvate";
 import MovimentoAMano from "@/components/amministrazione/MovimentoAMano";
 import {
   abbinaMovimento, abbinaSicuri, scollegaAbbinamento, registraMovimento, annullaRegistrazione, nuovoMovimento, stornaMovimento, impostaDivisione,
+  collegaFatturaAMovimento, eliminaMovimentoManuale, modificaMovimentoManuale,
 } from "@/app/amministrazione-actions";
 
 const inp = "border border-neutral-300 rounded px-2 py-1 text-xs bg-white";
@@ -21,7 +23,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
   await sincronizzaScadenzeCommesse();
   const limite = Math.min(2000, Math.max(100, Number(p.limite) || 200));
   const where = whereMovimenti(p);
-  const [conti, movimenti, totali, scadenzeAperte, chiusi] = await Promise.all([
+  const [conti, movimenti, totali, scadenzeAperte, chiusi, fattureDaCollegare] = await Promise.all([
     prisma.contoFinanziario.findMany({ orderBy: [{ attivo: "desc" }, { ordine: "asc" }, { nome: "asc" }] }),
     prisma.movimentoFinanziario.findMany({
       where, orderBy: [{ data: "desc" }, { createdAt: "desc" }], take: limite,
@@ -30,9 +32,12 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
     prisma.movimentoFinanziario.groupBy({ by: ["stato"], where, _sum: { importo: true }, _count: true }),
     prisma.scadenza.findMany({ where: { stato: { in: ["APERTA", "PARZIALE"] } }, include: { abbinamenti: true } }),
     mesiChiusi(),
+    // fatture d'acquisto arrivate ma non ancora registrate: si possono collegare a un pagamento già scritto a mano
+    prisma.fatturaAcquisto.findMany({ where: { stato: "DA_VERIFICARE" }, select: { id: true, fornitoreNome: true, numero: true, numeroFornitore: true, tipoDocumento: true, data: true, totale: true }, orderBy: { data: "desc" }, take: 300 }),
   ]);
   const totEntrate = cent((await prisma.movimentoFinanziario.aggregate({ where: { AND: [where, { importo: { gt: 0 } }] }, _sum: { importo: true } }))._sum.importo ?? 0);
   const totUscite = cent((await prisma.movimentoFinanziario.aggregate({ where: { AND: [where, { importo: { lt: 0 } }] }, _sum: { importo: true } }))._sum.importo ?? 0);
+  const commissioniDi = new Map((await prisma.movimentoFinanziario.findMany({ where: { commissioneDiId: { in: movimenti.map((x) => x.id) } }, select: { commissioneDiId: true, importo: true } })).map((c) => [c.commissioneDiId!, c.importo]));
   const conteggio = totali.reduce((t, g) => t + g._count, 0);
   const daAbbinare = totali.find((g) => g.stato === "DA_ABBINARE")?._count ?? 0;
 
@@ -114,6 +119,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
             contoPredefinito={p.conto ?? conti.find((c) => c.tipo === "CASSA")?.id}
             categorie={[...CATEGORIE_MOVIMENTO]}
             divisioni={BRANDS.map((b) => b.nome)}
+            metodi={METODI_PAGAMENTO.filter((x) => !("soloIncassi" in x && x.soloIncassi)).map((x) => ({ chiave: x.chiave, nome: x.nome }))}
           />
         </details>
 
@@ -148,7 +154,7 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
                       <span title={st.spiega} className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded border ${st.cls}`}>{st.label}{m.stato === "REGISTRATO" && m.categoria ? ` · ${m.categoria}` : ""}</span>
                       {m.abbinamenti.map((a) => (
                         <div key={a.id} className="flex items-start justify-between gap-2 bg-green-50 border border-green-200 rounded px-2 py-1">
-                          <span>✓ <b>{a.scadenza.controparte}</b> · {a.scadenza.descrizione} · {eur(a.importo)}</span>
+                          <span>✓ <b>{a.scadenza.controparte}</b> · {a.scadenza.descrizione} · {eur(a.importo)}{a.scadenza.chiaveImport?.startsWith("FA:") && <> · <Link href={`/amministrazione/fatture-acquisto/${a.scadenza.chiaveImport.split(":")[1]}`} className="underline text-blue-800">apri la fattura</Link></>}</span>
                           {!chiuso && <form action={scollegaAbbinamento}><input type="hidden" name="id" value={a.id} /><button className="text-red-600 hover:underline" title="Scollega">✕</button></form>}
                         </div>
                       ))}
@@ -203,6 +209,46 @@ export default async function PrimaNotaPage({ searchParams }: { searchParams: Pr
                           <input name="motivo" placeholder="Motivo storno" className={`${inp} flex-1`} />
                           <button className="btn-3d btn-3d-red text-[11px] px-2">Storna</button>
                         </form>
+                      )}
+                      {m.origine === "MANUALE" && !m.stornatoDaId && !m.commissioneDiId && !m.confermatoIl && !chiuso && (
+                        <>
+                          {m.importo < 0 && m.stato === "DA_ABBINARE" && fattureDaCollegare.length > 0 && (() => {
+                            const chi = (m.note ?? "").match(/Chi: ([^·]+)/)?.[1]?.trim().toLowerCase() ?? "";
+                            const ord = [...fattureDaCollegare].sort((x, y) => Number(chi && y.fornitoreNome.toLowerCase().includes(chi)) - Number(chi && x.fornitoreNome.toLowerCase().includes(chi)) || Math.abs(Math.abs(x.totale) - residuo) - Math.abs(Math.abs(y.totale) - residuo)).slice(0, 80);
+                            return (
+                              <form action={collegaFatturaAMovimento} className="space-y-1 border border-sky-200 bg-sky-50 rounded p-1.5">
+                                <input type="hidden" name="movimentoId" value={m.id} />
+                                <p className="font-semibold text-sky-900">🧾 È arrivata la fattura? Collegala: si registra e risulta pagata</p>
+                                <select name="fatturaId" required defaultValue="" className={`${inp} w-full`}>
+                                  <option value="" disabled>Scegli la fattura ricevuta…</option>
+                                  {ord.map((x) => <option key={x.id} value={x.id}>{x.fornitoreNome} · {x.tipoDocumento === "SPESE" ? "spese " : ""}n. {x.numeroFornitore ?? x.numero} del {dataIt(x.data)} · {eur(x.totale)}</option>)}
+                                </select>
+                                <button className="btn-3d btn-3d-blue text-[11px] px-2 py-0.5">Collega e segna pagata</button>
+                              </form>
+                            );
+                          })()}
+                          <details>
+                            <summary className="cursor-pointer text-neutral-600 underline">✏️ Modifica o 🗑 elimina</summary>
+                            <div className="space-y-2 mt-1.5">
+                              <form action={modificaMovimentoManuale} className="grid grid-cols-2 gap-1">
+                                <input type="hidden" name="id" value={m.id} />
+                                <input type="date" name="data" defaultValue={m.data.toISOString().slice(0, 10)} className={inp} />
+                                <select name="contoId" defaultValue={m.contoId} className={inp}>{conti.filter((c) => c.attivo || c.id === m.contoId).map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}</select>
+                                <input name="importo" defaultValue={Math.abs(m.importo).toFixed(2).replace(".", ",")} className={inp} title="Importo" />
+                                <input name="commissione" defaultValue={commissioniDi.has(m.id) ? Math.abs(commissioniDi.get(m.id)!).toFixed(2).replace(".", ",") : ""} placeholder="Commissioni €" className={inp} />
+                                <input name="descrizione" defaultValue={m.descrizione} className={`${inp} col-span-2`} />
+                                <input name="note" defaultValue={m.note ?? ""} placeholder="Note" className={`${inp} col-span-2`} />
+                                <button className="btn-3d btn-3d-blue text-[11px] px-2 py-0.5 col-span-2">Salva le modifiche</button>
+                                {m.abbinamenti.length > 0 && <p className="col-span-2 text-[10px] text-neutral-500">L&apos;importo non può scendere sotto quanto già abbinato alle fatture ({eur(cent(Math.abs(m.importo) - residuo))}): per cambiarlo di più scollega prima la fattura (✕).</p>}
+                              </form>
+                              <form action={eliminaMovimentoManuale}>
+                                <input type="hidden" name="id" value={m.id} />
+                                <button className="btn-3d btn-3d-red text-[11px] px-2 py-0.5">🗑 Elimina il movimento</button>
+                                <span className="text-[10px] text-neutral-500 ml-1">{m.abbinamenti.length > 0 ? "Le fatture collegate tornano da pagare (si riaprono)." : "Sparisce anche la commissione."}</span>
+                              </form>
+                            </div>
+                          </details>
+                        </>
                       )}
                       {m.stornatoDaId && <p className="text-[11px] text-purple-700">Stornato</p>}
                       {m.stato !== "DA_ABBINARE" && !chiuso && !m.stornatoDaId && m.origine !== "STORNO" && (

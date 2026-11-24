@@ -14,6 +14,7 @@ import { BRANDS } from "@/lib/brands";
 import {
   salvaTestataFattura, salvaRigheFattura, aggiungiRigaFattura, togliRigaFattura, collegaBolle, abbinaFattura,
   registraFatturaAcquisto, riapriFatturaAcquisto, eliminaFatturaAcquisto, collegaProforma, scollegaProforma, assegnaCommessaATutte,
+  modificaTipoFattura, aggiungiCorrelazioneFattura, togliCorrelazioneFattura,
 } from "@/app/fatture-actions";
 import Documenti from "@/components/documenti/Documenti";
 
@@ -25,7 +26,7 @@ const inp = "border border-neutral-300 rounded px-2 py-1 text-sm";
 export default async function FatturaAcquistoPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; errore?: string }> }) {
   const { id } = await params;
   const msg = await searchParams;
-  const f = await prisma.fatturaAcquisto.findUnique({ where: { id }, include: { righe: { orderBy: { posizione: "asc" } }, bolle: { include: { righe: { select: { rigaOrdineId: true } } } } } });
+  const f = await prisma.fatturaAcquisto.findUnique({ where: { id }, include: { correlazioni: { orderBy: { createdAt: "asc" } }, righe: { orderBy: { posizione: "asc" } }, bolle: { include: { righe: { select: { rigaOrdineId: true } } } } } });
   if (!f) notFound();
   const modificabile = f.stato === "DA_VERIFICARE";
   const unAnnoFa = new Date(f.data); unAnnoFa.setUTCFullYear(unAnnoFa.getUTCFullYear() - 1);
@@ -37,6 +38,7 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
     prisma.scadenza.findMany({ where: { chiaveImport: { startsWith: `FA:${f.id}:` } }, orderBy: { dataScadenza: "asc" }, include: { abbinamenti: { include: { movimento: { select: { id: true, data: true, metodo: true, origine: true, confermatoIl: true, daConfermare: true, conto: { select: { nome: true } } } } } } } }),
     f.fornitoreId ? prisma.soggetto.findUnique({ where: { id: f.fornitoreId }, select: { giorniPagamento: true, centroCosto: true } }) : Promise.resolve(null),
   ]);
+  const ordiniForn = f.fornitoreId ? await prisma.ordineFornitore.findMany({ where: { fornitoreId: f.fornitoreId, stato: { not: "ANNULLATO" } }, select: { id: true, numero: true, anno: true, dataOrdine: true, commessa: { select: { cliente: { select: { nome: true } } } } }, orderBy: { dataOrdine: "desc" }, take: 80 }) : [];
   const centriNoti = [...new Set([...(await prisma.soggetto.findMany({ where: { centroCosto: { not: null } }, select: { centroCosto: true }, distinct: ["centroCosto"] })).map((x) => x.centroCosto!), ...(await prisma.fatturaAcquisto.findMany({ where: { centroCosto: { not: null } }, select: { centroCosto: true }, distinct: ["centroCosto"] })).map((x) => x.centroCosto!)])].sort();
   const fileFattura = await prisma.documento.findMany({ where: { entita: "FATTURA_ACQUISTO", entitaId: f.id }, select: { id: true, nome: true, mime: true }, orderBy: [{ cartella: "asc" }, { createdAt: "asc" }] });
   const proforma = f.tipoDocumento === "PROFORMA";
@@ -63,7 +65,8 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link href="/amministrazione/fatture-acquisto" className="btn-indietro">← Fatture d&apos;acquisto</Link>
-          <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.numero} del {dataIt(f.data)}</h2>
+          <h2 className="text-xl font-bold text-neutral-900">{TIPI_DOCUMENTO[f.tipoDocumento] ?? "Fattura"} {f.tipoDocumento === "SPESE" ? `${f.numero}/${f.data.getUTCFullYear()}` : `n. ${f.numero}`} del {dataIt(f.data)}</h2>
+          {f.numeroFornitore && <p className="text-xs text-neutral-600">N. fattura del fornitore: <b>{f.numeroFornitore}</b></p>}
           <p className="text-sm text-neutral-700"><b>{f.fornitoreNome}</b>{f.partitaIva ? ` · P.IVA ${f.partitaIva}` : ""} · {f.divisione ?? "società non indicata"} · {f.origine === "XML" ? "fattura elettronica" : f.origine === "PDF" ? "da PDF" : f.origine === "BCONSOLE" ? "importata da BConsole" : "inserita a mano"}</p>
           {(f.riferimentiOrdine || f.riferimentiDdt) && <p className="text-xs text-neutral-600">{f.riferimentiOrdine ? `Ordini citati: ${f.riferimentiOrdine}` : ""}{f.riferimentiOrdine && f.riferimentiDdt ? " · " : ""}{f.riferimentiDdt ? `DDT citati: ${f.riferimentiDdt}` : ""}</p>}
           {!f.fornitoreId && <p className="text-xs text-amber-800">Fornitore non trovato in anagrafica: sceglilo qui sotto per collegare bolle e ordini.</p>}
@@ -82,6 +85,73 @@ export default async function FatturaAcquistoPage({ params, searchParams }: { pa
           <span className={`text-xs px-2 py-0.5 rounded-full ${modificabile ? "bg-amber-100 text-amber-900" : f.stato === "SOSTITUITA" ? "bg-neutral-200 text-neutral-700" : "bg-green-100 text-green-900"}`}>{modificabile ? "Da verificare" : f.stato === "SOSTITUITA" ? "Proforma sostituita dalla fattura" : `Registrata il ${dataIt(f.registrataIl)} da ${f.registrataDaNome ?? ""}`}</span>
         </div>
       </div>
+
+      <details className="bg-white border border-neutral-200 rounded-lg p-3" open={!!msg.errore || undefined}>
+        <summary className="cursor-pointer font-semibold text-sm">✏️ Modifica (tipo di documento e numero)</summary>
+        {modificabile ? (
+          <form action={modificaTipoFattura} className="mt-2 flex flex-wrap items-end gap-2">
+            <input type="hidden" name="id" value={f.id} />
+            <label className="text-xs font-semibold">Tipo
+              <select name="tipoDocumento" defaultValue={f.tipoDocumento} className={`${inp} block w-56`}>
+                <option value="PROFORMA">Fattura proforma</option>
+                <option value="TD01">Fattura</option>
+                <option value="TD04">TD04 — Nota di accredito</option>
+                <option value="SPESE">Fattura spese</option>
+                <option value="ENTRATA_MERCE">Entrata merce</option>
+                <option value="TD06">TD06 — Parcella</option>
+                <option value="AVVISO_PARCELLA">Avviso di parcella</option>
+              </select>
+            </label>
+            <label className="text-xs font-semibold">Numero
+              <input name="numero" defaultValue={f.numero} className={`${inp} block w-28`} />
+            </label>
+            <label className="text-xs font-semibold">N. fattura del fornitore
+              <input name="numeroFornitore" defaultValue={f.numeroFornitore ?? ""} className={`${inp} block w-44`} />
+            </label>
+            <button className="btn-3d btn-3d-blue text-xs px-3 py-1.5">Salva</button>
+            <p className="w-full text-[11px] text-neutral-500">Scegliendo «Fattura spese» il numero viene dato da solo, in progressivo dell&apos;anno (es. 1739/{f.data.getUTCFullYear()}); il numero scritto dal fornitore resta nel suo campo. Dopo il salvataggio puoi registrare la fattura.</p>
+          </form>
+        ) : <p className="mt-2 text-xs text-neutral-600">La fattura è registrata: per cambiare tipo o numero premi prima «Riapri per correggere» in fondo alla pagina (se ci sono pagamenti, toglili dalla Prima nota).</p>}
+      </details>
+
+      <section className="bg-white border border-neutral-200 rounded-lg p-3">
+        <h3 className="font-bold text-sm mb-1">🔗 Correlazioni</h3>
+        {f.correlazioni.length === 0 && <p className="text-xs text-neutral-500">Nessun documento collegato. Collega la fattura all&apos;ordine del fornitore e al progetto del cliente.</p>}
+        <ul className="space-y-1 mb-2">
+          {f.correlazioni.map((c) => (
+            <li key={c.id} className="flex items-center gap-2 text-sm">
+              <Link href={c.tipo === "PROGETTO" ? `/commesse/${c.riferimentoId}` : `/ordini-fornitori/${c.riferimentoId}`} className="underline text-blue-800">{c.descrizione}</Link>
+              <form action={togliCorrelazioneFattura}><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-700 underline">togli</button></form>
+            </li>
+          ))}
+        </ul>
+        <details>
+          <summary className="cursor-pointer text-xs font-semibold text-blue-800">➕ Nuova correlazione</summary>
+          <div className="grid md:grid-cols-2 gap-3 mt-2">
+            <form action={aggiungiCorrelazioneFattura} className="flex flex-wrap items-end gap-2 border border-neutral-200 rounded p-2">
+              <input type="hidden" name="id" value={f.id} /><input type="hidden" name="tipo" value="ORDINE_FORNITORE" />
+              <label className="text-xs font-semibold flex-1 min-w-48">Ordine fornitore
+                <select name="riferimentoId" required defaultValue="" className={`${inp} block w-full`}>
+                  <option value="" disabled>{f.fornitoreId ? "Scegli l'ordine…" : "Collega prima il fornitore"}</option>
+                  {ordiniForn.map((o) => <option key={o.id} value={o.id}>{o.numero}/{o.anno} · {dataIt(o.dataOrdine)}{o.commessa ? ` · ${o.commessa.cliente.nome}` : ""}</option>)}
+                </select>
+              </label>
+              <button className="btn-3d btn-3d-purple text-xs px-3 py-1.5" disabled={!f.fornitoreId}>Collega</button>
+            </form>
+            <form action={aggiungiCorrelazioneFattura} className="flex flex-wrap items-end gap-2 border border-neutral-200 rounded p-2">
+              <input type="hidden" name="id" value={f.id} /><input type="hidden" name="tipo" value="PROGETTO" />
+              <label className="text-xs font-semibold flex-1 min-w-48">Progetto del cliente
+                <select name="riferimentoId" required defaultValue="" className={`${inp} block w-full`}>
+                  <option value="" disabled>Scegli il progetto…</option>
+                  {commesse.map((c) => <option key={c.id} value={c.id}>{numeroCommessa(c)} · {c.cliente.nome}</option>)}
+                </select>
+              </label>
+              <button className="btn-3d btn-3d-purple text-xs px-3 py-1.5">Collega</button>
+            </form>
+          </div>
+          <p className="text-[11px] text-neutral-500 mt-1">Collegando un progetto a una fattura ancora da registrare, le righe senza progetto vanno su quel progetto e alla registrazione i costi arrivano alla commessa.</p>
+        </details>
+      </section>
 
       <section className="bg-white border border-neutral-200 rounded-lg p-3">
         <form action={salvaCentroCostoFattura} className="flex flex-wrap items-end gap-2">
