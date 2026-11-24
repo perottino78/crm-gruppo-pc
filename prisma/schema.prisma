@@ -506,6 +506,8 @@ model RigaPreventivo {
   mostraDescrizione         Boolean            @default(true)
   // Scheda tecnica del listino di questo prodotto (es. Optima 70) stampata in fondo all'offerta e allegata all'email (richiesta di Ugo)
   allegaScheda              Boolean            @default(false)
+  // IVA di questa riga (22, 10, 4, 0): vuoto = quella dell'offerta. Segue la riga fino alla fattura di saldo.
+  aliquotaIva               Float?
   // Misura reale inserita a mano dal commerciale (può differire dalla fascia di prezzo
   // agganciata in prodottoId, che è la fascia più vicina per eccesso nel listino nascosto)
   misuraLarghezza           Float?

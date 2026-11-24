@@ -1,5 +1,6 @@
 // Totali dell'offerta (imponibile scontato e IVA), condivisi da azioni dei preventivi e Solaris Studio.
 import { prisma } from "@/lib/prisma";
+import { importoRigaOfferta, riepilogoIvaRighe } from "@/lib/preventivi/iva";
 
 // totaleNetto memorizzato è l'imponibile SCONTATO (imponibile lordo * (1 - sconto/100));
 // l'IVA viene calcolata su tale importo scontato, coerentemente con le offerte cartacee P&C.
@@ -34,8 +35,10 @@ export async function ricalcolaTotali(preventivoId: string) {
     where: { id: preventivoId },
     data: { totaleNetto },
   });
+  // IVA per riga (ognuna con la sua aliquota, o quella dell'offerta)
+  const iva = riepilogoIvaRighe(righe.map((r) => ({ importo: importoRigaOfferta(r), aliquota: r.aliquotaIva })), sconto, preventivo.aliquotaIva).reduce((t, x) => t + x.iva, 0);
   await prisma.preventivo.update({
     where: { id: preventivoId },
-    data: { totaleIva: totaleNetto * (preventivo.aliquotaIva / 100) },
+    data: { totaleIva: Math.round(iva * 100) / 100 },
   });
 }

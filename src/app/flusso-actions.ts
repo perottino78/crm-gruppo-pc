@@ -1,5 +1,6 @@
 "use server";
 
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -199,6 +200,7 @@ export async function avviaRilievoSePronto(commessaId: string): Promise<boolean>
  */
 export async function dopoIncassoAcconto(commessaId: string): Promise<void> {
   if (!(await statoSogliaRilievo(commessaId))?.viaLibera) return;
+  await ricalcolaStatoCommessa(commessaId);
   await chiudiTaskFase(commessaId, "PROGETTO");
   await avviaRilievoSePronto(commessaId);
 }

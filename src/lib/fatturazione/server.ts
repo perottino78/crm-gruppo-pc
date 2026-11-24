@@ -176,7 +176,7 @@ export async function righeDaOfferta(preventivoId: string) {
     const unit = r.quantita ? (r.prezzoUnitario + (r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0)) / r.quantita) * fattore : 0;
     return {
       descrizione: `${r.descrizionePersonalizzata && !r.testoLibero ? r.descrizionePersonalizzata.split("\n")[0].slice(0, 200) : nomeProd}${misura}${opt ? ` — con ${opt}` : ""}`.slice(0, 900),
-      quantita: r.quantita, um: "pz", prezzo: cent(unit), aliquota, natura: null as string | null,
+      quantita: r.quantita, um: "pz", prezzo: cent(unit), aliquota: r.aliquotaIva ?? aliquota, natura: null as string | null,
     };
   }).filter((r) => r.prezzo !== 0 || r.descrizione);
 }
