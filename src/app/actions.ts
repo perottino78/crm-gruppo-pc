@@ -831,13 +831,14 @@ export async function aggiungiArticoloPreventivo(formData: FormData) {
   const preventivoId = str(formData, "preventivoId");
   const articoloId = str(formData, "articoloId");
   if (!preventivoId || !articoloId) return;
-  const quantita = Math.max(1, Math.round(parseFloat((str(formData, "quantita") ?? "1").replace(",", ".")) || 1));
   const vis = visibilitaArticoliWhere(u);
-  const a = await prisma.articolo.findFirst({ where: { id: articoloId, attivo: true, ...(vis ? { AND: [vis] } : {}) }, select: { codice: true, descrizione: true, um: true, prezzoVendita: true } });
+  const a = await prisma.articolo.findFirst({ where: { id: articoloId, attivo: true, ...(vis ? { AND: [vis] } : {}) }, select: { codice: true, descrizione: true, descrizioneEstesa: true, um: true, prezzoVendita: true } });
   if (!a) return;
+  const { rigaArticolo } = await import("@/lib/listini/ricambi-vetrate");
+  const riga = rigaArticolo(a, str(formData, "quantita")); // al metro: metri × €/mt nel prezzo, i metri nel testo
   const sezioneId = str(formData, "sezioneId") || null;
   const ordine = await prossimoOrdine(preventivoId, sezioneId);
-  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${a.codice} — ${a.descrizione}`, quantita, prezzoUnitario: a.prezzoVendita ?? 0, sezioneId, ordine } });
+  await prisma.rigaPreventivo.create({ data: { preventivoId, ...riga, sezioneId, ordine } });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
