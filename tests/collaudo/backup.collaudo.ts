@@ -79,6 +79,12 @@ async function main() {
   const dati = await (await elenco(req("/api/backup/elenco?tipo=dati", chiave))).text();
   const completo = await (await elenco(req("/api/backup/elenco?tipo=completo", chiave))).text();
   verifica(dati.includes("\nCliente 0 1") && !dati.includes("\nDocumento "), "backup dei dati senza Documento", dati.slice(0, 200));
+  const auto = await (await elenco(req("/api/backup/elenco", chiave))).text();
+  const oggiDomenica = new Date().toLocaleDateString("en-US", { timeZone: "Europe/Rome", weekday: "short" }) === "Sun";
+  verifica(oggiDomenica ? auto.includes("# tipo completo") : auto.startsWith("# salta"), "di serie una volta a settimana: oggi il NAS chiama e ONE risponde «salta» (o completo se domenica)", auto.slice(0, 40));
+  await prisma.configurazione.create({ data: { chiave: "backup_frequenza", valore: "OGNI_NOTTE" } });
+  const ogni = await (await elenco(req("/api/backup/elenco", chiave))).text();
+  verifica(ogni.includes(oggiDomenica ? "# tipo completo" : "# tipo dati"), "con «ogni notte» risponde con l'elenco");
   verifica(completo.includes("Documento 0 1") && completo.includes("_PermessoListino 0 1"), "completo con Documento e le tabelle di collegamento");
 
   console.log("3. Scarico come lo script del NAS (Documento e Cliente divisi in 3 parti per prova) e ripristino");
