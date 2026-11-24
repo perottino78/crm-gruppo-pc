@@ -1,5 +1,6 @@
 "use client";
 
+import { TESTO_CONSENSO_MARKETING } from "@/lib/privacy/testi";
 import { useState, useMemo } from "react";
 
 // --- Costanti di calcolo ---
@@ -61,6 +62,7 @@ interface LeadData {
   telefono: string;
   email: string;
   consenso: boolean;
+  consensoMarketing: boolean;
   localita: string;
 }
 
@@ -91,6 +93,7 @@ export default function SimulaPage() {
     telefono: "",
     email: "",
     consenso: false,
+    consensoMarketing: false,
     localita: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -120,6 +123,7 @@ export default function SimulaPage() {
           telefono: lead.telefono,
           email: lead.email,
           consensoPrivacy: lead.consenso,
+          consensoMarketing: lead.consensoMarketing,
           localita: lead.localita,
           ...form,
           kwp: risultati.kwp,
@@ -374,7 +378,18 @@ function Step3({
               style={{ marginTop: 2, accentColor: "#003F87", width: 16, height: 16, flexShrink: 0 }}
             />
             <label htmlFor="consenso" style={{ fontSize: 12, color: "#64748b", lineHeight: 1.5, cursor: "pointer" }}>
-              Acconsento al trattamento dei miei dati personali da parte di Solaris – Gruppo P&amp;C S.r.l. (Corso Moncenisio 28, Rosta TO) per ricevere informazioni commerciali e il progetto fotovoltaico richiesto. Potrai revocare il consenso in qualsiasi momento scrivendo a info@gruppopec.com. <strong>Privacy policy</strong> disponibile su richiesta. *
+              Ho letto l&apos;<a href="/privacy" target="_blank" rel="noreferrer" style={{ color: "#003F87", textDecoration: "underline" }}>informativa privacy</a> e accetto che Solaris – Gruppo P&amp;C S.r.l. (Corso Moncenisio 28, Rosta TO) tratti i miei dati per inviarmi il progetto fotovoltaico richiesto e ricontattarmi. *
+            </label>
+          </div>
+          <div style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 8 }}>
+            <input
+              type="checkbox" id="consensoMarketing"
+              checked={lead.consensoMarketing}
+              onChange={e => setLead(l => ({ ...l, consensoMarketing: e.target.checked }))}
+              style={{ marginTop: 2, accentColor: "#003F87", width: 16, height: 16, flexShrink: 0 }}
+            />
+            <label htmlFor="consensoMarketing" style={{ fontSize: 12, color: "#64748b", lineHeight: 1.5, cursor: "pointer" }}>
+              {TESTO_CONSENSO_MARKETING} (facoltativo)
             </label>
           </div>
 

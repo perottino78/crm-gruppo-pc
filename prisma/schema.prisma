@@ -145,6 +145,8 @@ model Lead {
   emailRimbalzataIl     DateTime?
   rimbalzoMotivo        String?
   disiscrittoIl         DateTime?
+  // Consenso alle comunicazioni commerciali (data dell'ultimo consenso valido; la storia e la prova stanno in ConsensoMarketing)
+  consensoMarketingIl   DateTime?
   emailLead             EmailLead[]
   invii                 InvioProgrammato[]
   eventi                LeadEvento[]
@@ -333,6 +335,7 @@ model Cliente {
   emailRimbalzataIl DateTime?
   rimbalzoMotivo    String?
   disiscrittoIl     DateTime?
+  consensoMarketingIl DateTime?
 
   @@index([bconsoleId])
 }
@@ -1261,6 +1264,10 @@ model LeadSimulazione {
   telefono        String?
   email           String?
   consensoPrivacy Boolean @default(false)
+  // Consenso facoltativo alle comunicazioni commerciali (casella separata): data e IP restano come prova
+  consensoMarketing Boolean @default(false)
+  consensoMarketingIl DateTime?
+  consensoMarketingIp String?
 
   // Dati della simulazione (acquisiti dal form)
   localita         String?
@@ -1897,7 +1904,7 @@ model Campagna {
   formato               String             @default("TESTO")
   html                  String             @default("")
   // Tracciamento di aperture (pixel invisibile) e clic sui link
-  tracciamento          Boolean            @default(true)
+  tracciamento          Boolean            @default(false)
   marchi                String[]           @default([])
   stati                 String[]           @default([]) // statoLead (es. "Non interessato", "VISITATO"); "(nessuno)" = senza stato
   categorie             String[]           @default([]) // Lead | Cliente | Account
@@ -2518,4 +2525,25 @@ model SchedaProduzioneModello {
   updatedAt   DateTime @updatedAt
 
   @@index([fornitoreId])
+}
+
+// Prova del consenso alle comunicazioni commerciali (richiesta dal Garante: il titolare deve poterlo dimostrare):
+// ogni consenso o revoca è una riga con data, fonte, testo mostrato e, se disponibile, indirizzo IP.
+model ConsensoMarketing {
+  id         String   @id @default(cuid())
+  clienteId  String?
+  leadId     String?
+  email      String?
+  stato      String // CONCESSO | REVOCATO
+  fonte      String // MODULO_RICHIEDI | SIMULATORE | LINK_EMAIL | DISISCRIZIONE | CONTRATTO | A_VOCE | MODULO_CARTACEO | MANUALE
+  testo      String?
+  versioneInformativa String?
+  ip         String?
+  campagnaId String?
+  utenteNome String?
+  createdAt  DateTime @default(now())
+
+  @@index([clienteId, createdAt])
+  @@index([leadId, createdAt])
+  @@index([campagnaId])
 }

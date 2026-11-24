@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { disiscrivi } from "@/lib/automazioni/motore";
 import { disiscriviCliente } from "@/lib/campagne/motore";
+import { prisma } from "@/lib/prisma";
+import { registraConsenso } from "@/lib/privacy/consensi";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +11,11 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams;
   // l = lead (email automatiche), c = cliente (campagne)
-  const ok = q.get("c") ? await disiscriviCliente(q.get("c") ?? "", q.get("t") ?? "") : await disiscrivi(q.get("l") ?? "", q.get("t") ?? "");
+  const cId = q.get("c"), lId = q.get("l");
+  const prima = cId ? await prisma.cliente.findUnique({ where: { id: cId }, select: { disiscritto: true, email: true } }) : lId ? await prisma.lead.findUnique({ where: { id: lId }, select: { disiscritto: true, email: true } }) : null;
+  const ok = cId ? await disiscriviCliente(cId, q.get("t") ?? "") : await disiscrivi(lId ?? "", q.get("t") ?? "");
+  // resta la prova della revoca (una riga sola, anche se il link viene aperto più volte)
+  if (ok && prima && !prima.disiscritto) await registraConsenso({ clienteId: cId, leadId: cId ? null : lId, email: prima.email, stato: "REVOCATO", fonte: "DISISCRIZIONE", ip: req.headers.get("x-forwarded-for")?.split(",")[0].trim() || null });
   const testo = ok
     ? "Fatto: non riceverai più le nostre email promozionali. Continuerai a ricevere solo le comunicazioni legate alle tue richieste (appuntamenti, offerte, contatti con il tuo consulente). Se hai bisogno di noi chiamaci allo 011 19887497."
     : "Il link non è valido o è scaduto. Per non ricevere più email promozionali rispondi a una nostra email o chiamaci allo 011 19887497.";

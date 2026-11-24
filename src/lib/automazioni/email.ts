@@ -234,6 +234,7 @@ export function componiEmail(chiave: string, d: DatiLeadEmail, link: Link, varia
   throw new Error(`Modello email senza testo: ${chiave}`);
 }
 
+const INFORMATIVA = `${process.env.APP_URL || "https://crm-gruppo-pc.vercel.app"}/privacy`;
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /** Versione HTML: fascia arancione P&C, testo con i link cliccabili, piè di pagina con la disiscrizione per i clienti. */
@@ -241,7 +242,7 @@ export function htmlEmail(e: EmailPronta, link: Link): string {
   if (e.html) return htmlConPiede(e.html, e.categoria === "CLIENTE" ? link.disiscrizione : undefined);
   const corpo = esc(e.testo).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" style="color:#c2410c">$1</a>').replace(/\n/g, "<br>");
   const piede = e.categoria === "CLIENTE" && link.disiscrizione
-    ? `<p style="font-size:11px;color:#888;margin-top:24px">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(link.disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a>.</p>`
+    ? `<p style="font-size:11px;color:#888;margin-top:24px">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(link.disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a> · <a href="${INFORMATIVA}" style="color:#888">Informativa privacy</a>.</p>`
     : "";
   return `<!doctype html><html><body style="margin:0;background:#f5f5f4;font-family:Arial,Helvetica,sans-serif">
 <div style="max-width:600px;margin:0 auto;background:#fff">
@@ -254,13 +255,13 @@ export function htmlEmail(e: EmailPronta, link: Link): string {
 function htmlConPiede(html: string, disiscrizione: string | undefined): string {
   if (!disiscrizione) return html.replace(/\{\s*disiscrizione\s*\}/gi, "");
   if (/\{\s*disiscrizione\s*\}/i.test(html)) return html.replace(/\{\s*disiscrizione\s*\}/gi, esc(disiscrizione));
-  const piede = `<p style="font-size:11px;color:#888;text-align:center;margin:24px 0">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a>.</p>`;
+  const piede = `<p style="font-size:11px;color:#888;text-align:center;margin:24px 0">Hai ricevuto questa email perché hai chiesto informazioni a Gruppo P&amp;C. <a href="${esc(disiscrizione)}" style="color:#888">Non voglio più ricevere email promozionali</a> · <a href="${INFORMATIVA}" style="color:#888">Informativa privacy</a>.</p>`;
   return /<\/body>/i.test(html) ? html.replace(/<\/body>/i, `${piede}</body>`) : `${html}${piede}`;
 }
 
 /** Testo semplice con la riga di disiscrizione (per i programmi di posta che non mostrano l'HTML). */
 export function testoEmail(e: EmailPronta, link: Link): string {
-  return e.categoria === "CLIENTE" && link.disiscrizione ? `${e.testo}\n\n—\nNon vuoi più ricevere email promozionali? ${link.disiscrizione}` : e.testo;
+  return e.categoria === "CLIENTE" && link.disiscrizione ? `${e.testo}\n\n—\nNon vuoi più ricevere email promozionali? ${link.disiscrizione}\nInformativa privacy: ${INFORMATIVA}` : e.testo;
 }
 
 /** Le lettere di vendita (Fase 2): presentano l'azienda mentre il cliente aspetta l'appuntamento. */

@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
-      nome, telefono, email, consensoPrivacy, localita,
+      nome, telefono, email, consensoPrivacy, consensoMarketing, localita,
       consumoKwh, prezzoEnergia, orientamento, inclinazione, batteria,
       kwp, risparmioStimato, rientroAnni,
       simulazioneJson,
@@ -30,6 +30,9 @@ export async function POST(req: NextRequest) {
         telefono: telefono?.trim() || null,
         email: email?.trim() || null,
         consensoPrivacy: !!consensoPrivacy,
+        consensoMarketing: !!consensoMarketing,
+        consensoMarketingIl: consensoMarketing ? new Date() : null,
+        consensoMarketingIp: consensoMarketing ? (req.headers.get("x-forwarded-for")?.split(",")[0].trim() || null) : null,
         localita: localita?.trim() || null,
         consumoKwh: consumoKwh ? +consumoKwh : null,
         prezzoEnergia: prezzoEnergia ? +prezzoEnergia : null,
