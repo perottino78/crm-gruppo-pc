@@ -61,8 +61,12 @@ export async function assicuraRicambiVetrate(): Promise<{ creati: number; comple
     await togliSeVuota(vecchie.id);
   }
   // gli articoli caricati a mano da Ugo nella cartella «complementi»
+  // solo se stanno ancora in «complementi» (o senza cartella): se Ugo li ha spostati a mano, restano dove sono
   for (const d of DA_SPOSTARE) {
-    spostati += (await prisma.articolo.updateMany({ where: { codice: d.codice }, data: { categoriaId: cartelle.get(d.sistema)! } })).count;
+    const a = await prisma.articolo.findUnique({ where: { codice: d.codice }, select: { id: true, categoria: { select: { nome: true } } } });
+    if (!a || (a.categoria && !uguali(a.categoria.nome, "complementi"))) continue;
+    await prisma.articolo.update({ where: { id: a.id }, data: { categoriaId: cartelle.get(d.sistema)! } });
+    spostati++;
   }
 
   for (const r of RICAMBI_VETRATE) {

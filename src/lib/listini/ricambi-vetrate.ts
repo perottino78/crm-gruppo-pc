@@ -2,7 +2,7 @@
 // stesso codice di BConsole (così un import successivo li riconosce e non fa doppioni). Dati puri, senza database.
 // Per aggiungerne altri: una voce in RICAMBI_VETRATE e alza VERSIONE_RICAMBI_VETRATE.
 
-export const VERSIONE_RICAMBI_VETRATE = "2026-11-25c";
+export const VERSIONE_RICAMBI_VETRATE = "2026-11-25d";
 /** Albero in Articoli: OUTDOOR › VETRATE › «Accessori e ricambi» › tipo di vetrata. «Complementi vetrate» è la cartella della prima versione (resta per i legni). */
 export const CATEGORIA_MADRE = "Complementi vetrate";
 export const CATEGORIA_RICAMBI = "Accessori e ricambi";
@@ -47,6 +47,27 @@ export const RICAMBI_VETRATE: RicambioVetrata[] = [
     costo: 8.7,
     vendita: 24,
     immagine: "/immagini/ricambi-vetrate/2360.webp",
+  },
+  // Brillante (apertura a libro), schede BConsole del 25/11/2026; nomi corretti dai refusi della scheda («GUARNIIZIONE», «CXALAMITA NTEGRATA»)
+  {
+    codice: "23112",
+    descrizione: "Guarnizione ad H per angolo con calamita integrata 10 mm, 2950 mm",
+    descrizioneEstesa: "Guarnizione ad H per la chiusura d'angolo fra due ante: la calamita integrata tiene unite le ante chiuse e migliora la tenuta all'aria e all'acqua.",
+    sistema: "Brillante",
+    um: "pz",
+    costo: 16.31,
+    vendita: 32.54,
+    immagine: "/immagini/ricambi-vetrate/23112.webp",
+  },
+  {
+    codice: "BRI1409",
+    descrizione: "Guarnizione H semisferica Brillante",
+    descrizioneEstesa: "Guarnizione trasparente ad H semisferica fra le ante: sigilla la vetrata senza vedersi.",
+    sistema: "Brillante",
+    um: "pz",
+    costo: 11.9,
+    vendita: 44.34,
+    immagine: "/immagini/ricambi-vetrate/BRI1409.webp",
   },
 ];
 
