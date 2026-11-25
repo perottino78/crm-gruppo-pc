@@ -42,8 +42,8 @@ async function main() {
   await prisma.articolo.create({ data: { codice: "2360", descrizione: "GUARNIZIONE A MANO", prezzoVendita: 30, metodoPrezzo: "MANUALE" } });
   const e = await assicuraRicambiVetrate();
   const dopo = await prisma.articolo.findUnique({ where: { codice: "2360" } });
-  verifica(e.creati === 0 && e.completati === 1 && dopo?.prezzoVendita === 30 && dopo.descrizione === "GUARNIZIONE A MANO" && dopo.costoAcquisto === 8.7 && !!dopo.categoriaId, "nessun doppione: completa solo i campi vuoti (costo, categoria, foto)", dopo);
-  verifica((await assicuraRicambiVetrate()).creati === 0 && (await prisma.articolo.count()) === 1, "rilanciato non rifà nulla");
+  verifica(e.creati === 2 && e.completati === 1 && dopo?.prezzoVendita === 30 && dopo.descrizione === "GUARNIZIONE A MANO" && dopo.costoAcquisto === 8.7 && !!dopo.categoriaId, "nessun doppione: 2360 solo completato nei campi vuoti, creati gli altri due", dopo);
+  verifica((await assicuraRicambiVetrate()).creati === 0 && (await prisma.articolo.count()) === 3, "rilanciato non rifà nulla");
 
   console.log("4. Dalla prima versione: «Scorrevole parallelo» diventa «Scintilla», i ricambi di Ugo vanno nella «Brillante»");
   await prisma.articolo.deleteMany({});
@@ -66,7 +66,7 @@ async function main() {
   const nuovaPos = await prisma.articolo.findUnique({ where: { codice: "ART-00003" }, include: { categoria: { include: { padre: { include: { padre: true } } } } } });
   verifica(nuovaPos?.categoria?.padre?.padre?.nome === "VETRATE" && !!(await prisma.categoriaArticolo.findUnique({ where: { id: cv.id } })), "le cartelle nuove stanno in VETRATE; «Complementi vetrate» resta per i legni");
   const r2 = await (await listino(new NextRequest("http://x/api/articoli/listino?famiglia=OUTDOOR&gruppo=RICAMBI%20VETRATE"))).json();
-  verifica(r2.articoli.filter((a: { categoria: { nome: string } }) => a.categoria.nome === "Brillante").length === 4, "nell'offerta i 4 ricambi stanno sotto «Brillante»");
+  verifica(r2.articoli.filter((a: { categoria: { nome: string } }) => a.categoria.nome === "Brillante").length === 6, "nell'offerta i 6 ricambi della Brillante (4 CF + 2 guarnizioni) stanno sotto «Brillante»");
   const r3 = await (await listino(new NextRequest("http://x/api/articoli/listino?famiglia=OUTDOOR&gruppo=VETRATE"))).json();
   verifica(!r3.articoli.some((a: { codice: string }) => ["2360", "ART-00002"].includes(a.codice)), "sotto i modelli di VETRATE non compaiono più (stanno nel pulsante a parte)");
 
@@ -79,6 +79,13 @@ async function main() {
   await assicuraRicambiVetrate();
   const nomi = (await prisma.categoriaArticolo.findMany({ where: { padreId: sc.padreId }, select: { nome: true, gruppoListino: true } }));
   verifica(nomi.length === 2 && nomi.every((n) => ["Scintilla", "Brillante"].includes(n.nome) && n.gruppoListino === "RICAMBI VETRATE") && (await cat("ART-00003")) === "Brillante" && (await cat("2360")) === "Scintilla", "cartelle rinominate, articoli al loro posto, nel pulsante «RICAMBI VETRATE»", nomi);
+
+  verifica((await cat("23112")) === "Brillante" && (await cat("BRI1409")) === "Brillante", "i due ricambi nuovi della Brillante (23112, BRI1409) nella cartella Brillante");
+  const fuori = (await prisma.categoriaArticolo.create({ data: { nome: "Spostato a mano" } })).id;
+  await prisma.articolo.update({ where: { codice: "ART-00003" }, data: { categoriaId: fuori } });
+  await prisma.configurazione.update({ where: { chiave: "ricambi_vetrate_versione" }, data: { valore: "vecchia" } });
+  await assicuraRicambiVetrate();
+  verifica((await cat("ART-00003")) === "Spostato a mano", "un ricambio spostato a mano da Ugo resta dove l'ha messo");
 
   console.log(`\n${ok} ok, ${ko} falliti`);
   await prisma.$disconnect();

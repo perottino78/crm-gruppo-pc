@@ -22,3 +22,11 @@ test("riga d'offerta: al metro i metri vanno nel prezzo e nel testo, a pezzo la 
   const p = rigaArticolo({ codice: "X1", descrizione: "Rotella", um: "pz", prezzoVendita: 3.5 }, "2,6");
   assert.deepEqual(p, { testoLibero: "X1 — Rotella", quantita: 3, prezzoUnitario: 3.5 });
 });
+
+test("ricambi della Brillante dalle schede BConsole (23112 e BRI1409)", () => {
+  const a = RICAMBI_VETRATE.find((r) => r.codice === "23112")!;
+  const b = RICAMBI_VETRATE.find((r) => r.codice === "BRI1409")!;
+  assert.deepEqual([a.sistema, a.um, a.costo, a.vendita], ["Brillante", "pz", 16.31, 32.54]);
+  assert.deepEqual([b.sistema, b.um, b.costo, b.vendita], ["Brillante", "pz", 11.9, 44.34]);
+  assert.ok(!/guarniiz|cxalam|\bntegrata/i.test(a.descrizione), "refusi corretti");
+});
