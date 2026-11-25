@@ -25,7 +25,7 @@ export default function RicambiDelGruppo({ famiglia, gruppo, preventivoId, sezio
     <>
     <section className="mt-4 rounded-xl border-2 border-amber-300 bg-amber-50/50 p-3">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-sm font-bold text-amber-950">🔧 Ricambi e articoli {gruppo ? `di ${gruppo}` : `di ${famiglia.toLowerCase()}`} ({lista.length})</h3>
+        <h3 className="text-sm font-bold text-amber-950">🔧 {gruppo === "RICAMBI VETRATE" ? "Ricambi vetrate" : `Ricambi e articoli ${gruppo ? `di ${gruppo}` : `di ${famiglia.toLowerCase()}`}`} ({lista.length})</h3>
         {lista.length > 6 && <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca codice o descrizione" className="rounded border border-neutral-300 px-2 py-1 text-xs" />}
       </div>
       <ul className="max-h-72 space-y-1 overflow-y-auto">

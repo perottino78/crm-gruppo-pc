@@ -1,11 +1,13 @@
-// Carica una volta (per versione) gli accessori e ricambi delle vetrate in Articoli › OUTDOOR › VETRATE › Accessori e ricambi ›
-// Vetrata scorrevole | Vetrata a pacchetto (le cartelle OUTDOOR › VETRATE sono quelle del listino, `assicuraCategorieListino`).
+// Carica una volta (per versione) gli accessori e ricambi delle vetrate in Articoli › OUTDOOR › VETRATE › Accessori e ricambi › Scintilla | Brillante
+// (le cartelle OUTDOOR › VETRATE sono quelle del listino, `assicuraCategorieListino`). Nell'offerta stanno nel pulsante a parte OUTDOOR › RICAMBI VETRATE.
 // Se l'articolo c'è già (stesso codice, es. importato da BConsole) completa solo i campi vuoti: mai sopra prezzi o testi cambiati a mano.
 import { prisma } from "@/lib/prisma";
-import { CATEGORIA_MADRE, CATEGORIA_RICAMBI, CATEGORIA_VECCHIA, DA_SPOSTARE, RICAMBI_VETRATE, SISTEMI_VETRATA, VERSIONE_RICAMBI_VETRATE } from "./ricambi-vetrate";
+import { CATEGORIA_MADRE, CATEGORIA_RICAMBI, CATEGORIA_VECCHIA, DA_SPOSTARE, GRUPPO_RICAMBI_VETRATE, NOMI_VECCHI, RICAMBI_VETRATE, SISTEMI_VETRATA, VERSIONE_RICAMBI_VETRATE } from "./ricambi-vetrate";
 
 const CHIAVE = "ricambi_vetrate_versione";
 const POSIZIONE = { famiglia: "OUTDOOR", gruppoListino: "VETRATE" };
+/** Posizione nel listino dei ricambi: pulsante a parte «RICAMBI VETRATE» (Ugo 25/11/2026), non più in mezzo ai modelli di VETRATE. */
+const POSIZIONE_RICAMBI = { famiglia: "OUTDOOR", gruppoListino: GRUPPO_RICAMBI_VETRATE };
 const uguali = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 
 /** Cartella per nome (maiuscole indifferenti) sotto `padreId`; se manca la crea nella posizione del listino. */
@@ -28,9 +30,21 @@ export async function assicuraRicambiVetrate(): Promise<{ creati: number; comple
   // OUTDOOR › VETRATE come le crea il listino, poi «Accessori e ricambi» e una cartella per tipo di vetrata
   const outdoor = await cartella("OUTDOOR", null, { famiglia: "OUTDOOR" });
   const vetrate = await cartella("VETRATE", outdoor.id);
-  const ricambi = await cartella(CATEGORIA_RICAMBI, vetrate.id);
+  const ricambi = await cartella(CATEGORIA_RICAMBI, vetrate.id, POSIZIONE_RICAMBI);
+  // versione «b»: «Vetrata scorrevole» → «Scintilla», «Vetrata a pacchetto» → «Brillante» (rinominate; se c'è già la nuova, gli articoli passano lì)
+  const figlie = await prisma.categoriaArticolo.findMany({ where: { padreId: ricambi.id }, select: { id: true, nome: true } });
+  for (const [vecchio, nuovo] of Object.entries(NOMI_VECCHI)) {
+    const v = figlie.find((c) => uguali(c.nome, vecchio));
+    if (!v) continue;
+    const n = figlie.find((c) => uguali(c.nome, nuovo));
+    if (!n) { await prisma.categoriaArticolo.update({ where: { id: v.id }, data: { nome: nuovo } }); continue; }
+    await prisma.articolo.updateMany({ where: { categoriaId: v.id }, data: { categoriaId: n.id } });
+    await togliSeVuota(v.id);
+  }
   const cartelle = new Map<string, string>();
-  for (const s of SISTEMI_VETRATA) cartelle.set(s, (await cartella(s, ricambi.id)).id);
+  for (const s of SISTEMI_VETRATA) cartelle.set(s, (await cartella(s, ricambi.id, POSIZIONE_RICAMBI)).id);
+  // tutte con la posizione del pulsante «RICAMBI VETRATE» (anche quelle create prima con OUTDOOR › VETRATE)
+  await prisma.categoriaArticolo.updateMany({ where: { id: { in: [ricambi.id, ...cartelle.values()] } }, data: POSIZIONE_RICAMBI });
   let creati = 0, completati = 0, spostati = 0;
 
   // prima versione: «Complementi vetrate › Accessori e ricambi › Scorrevole parallelo | <tipo>» → nelle cartelle nuove, poi via le vuote
@@ -39,7 +53,8 @@ export async function assicuraRicambiVetrate(): Promise<{ creati: number; comple
     const vecchie = (await prisma.categoriaArticolo.findMany({ where: { padreId: m.id }, select: { id: true, nome: true } })).find((c) => uguali(c.nome, CATEGORIA_RICAMBI));
     if (!vecchie) continue;
     for (const f of await prisma.categoriaArticolo.findMany({ where: { padreId: vecchie.id }, select: { id: true, nome: true } })) {
-      const dest = uguali(f.nome, CATEGORIA_VECCHIA) ? cartelle.get("Vetrata scorrevole")! : cartelle.get(SISTEMI_VETRATA.find((x) => uguali(x, f.nome)) ?? "") ?? ricambi.id;
+      const nome = NOMI_VECCHI[f.nome] ?? f.nome;
+      const dest = uguali(f.nome, CATEGORIA_VECCHIA) ? cartelle.get("Scintilla")! : cartelle.get(SISTEMI_VETRATA.find((x) => uguali(x, nome)) ?? "") ?? ricambi.id;
       spostati += (await prisma.articolo.updateMany({ where: { categoriaId: f.id }, data: { categoriaId: dest } })).count;
     }
     spostati += (await prisma.articolo.updateMany({ where: { categoriaId: vecchie.id }, data: { categoriaId: ricambi.id } })).count;

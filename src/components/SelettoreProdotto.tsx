@@ -1917,6 +1917,19 @@ export default function SelettoreProdotto({
     // nell'offerta (finestra) vanno in vendita; nella pratica (preventivoId = commessa) vanno al costo, solo acquisto
     const extraOutdoor = f.nome === "OUTDOOR";
     const inPratica = !finestra;
+    // «RICAMBI VETRATE» (Ugo 25/11/2026): pulsante a parte con i ricambi divisi per Scintilla e Brillante; solo nell'offerta (in pratica si cercano nel materiale)
+    if (extraOutdoor && finestra && gruppoAperto === "RICAMBI VETRATE") {
+      return (
+        <>
+          <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-neutral-600">
+            <button type="button" onClick={() => { setFamigliaAperta(null); setGruppoAperto(null); }} className="underline">Tutti i prodotti</button><span>›</span>
+            <button type="button" onClick={() => setGruppoAperto(null)} className="underline">{nomeFamiglia(f.nome)}</button><span>›</span>
+            <span className="font-semibold text-neutral-800">RICAMBI VETRATE</span>
+          </nav>
+          {ricambi(f.nome, "RICAMBI VETRATE")}
+        </>
+      );
+    }
     if (extraOutdoor && (gruppoAperto === "ANGOLARI IN ALLUMINIO" || gruppoAperto === "LEGNI PIALLATI")) {
       return (
         <>
@@ -1954,6 +1967,7 @@ export default function SelettoreProdotto({
             {f.gruppi.map((x) => tessera(x.nome, x.nome, `${quanti(x)} prodotti`, primaFoto(x), () => { setGruppoAperto(x.nome); setSottogruppoAperto(null); }))}
             {extraOutdoor && tessera("ANGOLARI IN ALLUMINIO", "ANGOLARI IN ALLUMINIO", "su misura: forma, lati, bello", undefined, () => setGruppoAperto("ANGOLARI IN ALLUMINIO"))}
             {extraOutdoor && tessera("LEGNI PIALLATI", "LEGNI PIALLATI", "su misura o 30×50 … 50×170", undefined, () => setGruppoAperto("LEGNI PIALLATI"))}
+            {extraOutdoor && finestra && tessera("RICAMBI VETRATE", "RICAMBI VETRATE", "Scintilla e Brillante", "/immagini/vetrate/scintilla.jpg", () => setGruppoAperto("RICAMBI VETRATE"))}
           </div>
           {ricambi(f.nome, null)}
         </>
