@@ -7,7 +7,7 @@ test("guarnizione 2360 come nella scheda di BConsole", () => {
   assert.equal(g.costo, 8.7);
   assert.equal(g.vendita, 24);
   assert.equal(g.um, "m");
-  assert.equal(g.sistema, "Vetrata scorrevole");
+  assert.equal(g.sistema, "Scintilla");
   assert.ok(new Set(RICAMBI_VETRATE.map((r) => r.codice)).size === RICAMBI_VETRATE.length, "codici unici");
 });
 

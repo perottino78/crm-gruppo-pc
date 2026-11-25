@@ -2,22 +2,26 @@
 // stesso codice di BConsole (così un import successivo li riconosce e non fa doppioni). Dati puri, senza database.
 // Per aggiungerne altri: una voce in RICAMBI_VETRATE e alza VERSIONE_RICAMBI_VETRATE.
 
-export const VERSIONE_RICAMBI_VETRATE = "2026-11-24b";
+export const VERSIONE_RICAMBI_VETRATE = "2026-11-25c";
 /** Albero in Articoli: OUTDOOR › VETRATE › «Accessori e ricambi» › tipo di vetrata. «Complementi vetrate» è la cartella della prima versione (resta per i legni). */
 export const CATEGORIA_MADRE = "Complementi vetrate";
 export const CATEGORIA_RICAMBI = "Accessori e ricambi";
-/** Una cartella per tipo di vetrata dentro «Accessori e ricambi» (Ugo 24/11/2026). */
-export const SISTEMI_VETRATA = ["Vetrata scorrevole", "Vetrata a pacchetto"] as const;
+/** Una cartella per vetrata dentro «Accessori e ricambi» (Ugo 25/11/2026: «dividerle per Scintilla e Brillante»). */
+export const SISTEMI_VETRATA = ["Scintilla", "Brillante"] as const;
+/** Nomi delle cartelle della versione «b» (24/11/2026), rinominate: lo scorrevole è la Scintilla, il pacchetto la Brillante. */
+export const NOMI_VECCHI: Record<string, (typeof SISTEMI_VETRATA)[number]> = { "Vetrata scorrevole": "Scintilla", "Vetrata a pacchetto": "Brillante" };
+/** Il pulsante a parte nella finestra «Aggiungi prodotto» dell'offerta (OUTDOOR › RICAMBI VETRATE). */
+export const GRUPPO_RICAMBI_VETRATE = "RICAMBI VETRATE";
 export type SistemaVetrata = (typeof SISTEMI_VETRATA)[number];
-/** Cartella della prima versione, sostituita da «Vetrata scorrevole» (vuota, si toglie). */
+/** Cartella della prima versione, sostituita da «Scintilla» (vuota, si toglie). */
 export const CATEGORIA_VECCHIA = "Scorrevole parallelo";
 
 /** Articoli caricati a mano da Ugo in «complementi» da spostare una volta nella cartella giusta (24/11/2026). */
 export const DA_SPOSTARE: { codice: string; sistema: SistemaVetrata }[] = [
-  { codice: "ART-00002", sistema: "Vetrata a pacchetto" }, // CF tappo di fondo con gancio inox nero
-  { codice: "ART-00003", sistema: "Vetrata a pacchetto" }, // CF gancio grigio
-  { codice: "ART-00004", sistema: "Vetrata a pacchetto" }, // CF supporto gancio
-  { codice: "ART-00005", sistema: "Vetrata a pacchetto" }, // CF tappo di fondo centrale inox nero
+  { codice: "ART-00002", sistema: "Brillante" }, // CF tappo di fondo con gancio inox nero
+  { codice: "ART-00003", sistema: "Brillante" }, // CF gancio grigio
+  { codice: "ART-00004", sistema: "Brillante" }, // CF supporto gancio
+  { codice: "ART-00005", sistema: "Brillante" }, // CF tappo di fondo centrale inox nero
 ];
 
 export type RicambioVetrata = {
@@ -25,7 +29,7 @@ export type RicambioVetrata = {
   descrizione: string;
   /** testo per il cliente (va nell'offerta sotto il nome) */
   descrizioneEstesa: string;
-  /** tipo di vetrata (cartella dentro «Accessori e ricambi») */
+  /** vetrata (cartella dentro «Accessori e ricambi»: Scintilla o Brillante) */
   sistema: SistemaVetrata;
   um: "m" | "pz";
   costo: number;
@@ -38,7 +42,7 @@ export const RICAMBI_VETRATE: RicambioVetrata[] = [
     codice: "2360",
     descrizione: "Guarnizione vetrata tra anta e anta 10 mm",
     descrizioneEstesa: "Guarnizione tra i vetri, standard: le guarnizioni in PVC aiutano a sigillare il sistema dal maltempo senza influenzare l'estetica della vetrata.",
-    sistema: "Vetrata scorrevole",
+    sistema: "Scintilla",
     um: "m",
     costo: 8.7,
     vendita: 24,
