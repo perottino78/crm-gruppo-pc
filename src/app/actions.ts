@@ -1331,14 +1331,22 @@ export async function modificaRigaPreventivo(formData: FormData) {
     include: { prodotto: true },
   });
   if (!riga) return;
-  // riga di testo (richiesta di Rocco: modifica anche delle righe «testo»): testo e importo
+  // riga di testo (richiesta di Rocco: modifica anche delle righe «testo»): testo, quantità e prezzo unitario
+  // (Ugo 25/11/2026: anche la quantità, come le righe prodotto, per articoli e accessori)
   if (!riga.prodotto) {
     const testo = str(formData, "testoLibero");
     const importoStr = str(formData, "prezzoUnitario");
-    const importo = importoStr ? parseFloat(importoStr.replace(",", ".")) : 0;
+    // «1.108,50» o «44,34» (virgola = decimali) oppure «44.34»
+    const importo = importoStr ? parseFloat(importoStr.includes(",") ? importoStr.replace(/\./g, "").replace(",", ".") : importoStr) : 0;
+    const qStr = str(formData, "quantita");
+    const q = qStr ? parseInt(qStr, 10) : riga.quantita;
     await prisma.rigaPreventivo.update({
       where: { id },
-      data: { ...(testo ? { testoLibero: testo } : {}), prezzoUnitario: Number.isFinite(importo) ? Math.round(importo * 100) / 100 : riga.prezzoUnitario },
+      data: {
+        ...(testo ? { testoLibero: testo } : {}),
+        quantita: Number.isFinite(q) && q >= 1 ? q : riga.quantita,
+        prezzoUnitario: Number.isFinite(importo) ? Math.round(importo * 100) / 100 : riga.prezzoUnitario,
+      },
     });
     await ricalcolaTotali(preventivoId);
     revalidatePath(`/preventivi/${preventivoId}`);
