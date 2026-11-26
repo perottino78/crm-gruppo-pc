@@ -2,6 +2,7 @@ import { nomeIntervento } from "@/lib/pratica/interventi";
 import { prisma } from "@/lib/prisma";
 import { numeroCommessa } from "@/lib/commesse";
 import { inviaMail, APP_URL, indirizzoMittente } from "@/lib/mail/invio";
+import { getCurrentUser } from "@/lib/auth";
 import { calendarioIcs, type VoceIcs } from "./ics";
 import { esterniDaMostrare } from "./ical";
 import { type EventoCal, type TipoEvento, nomeTipoAppuntamento, STILE_TIPO } from "./eventi";
@@ -204,6 +205,11 @@ export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" =
   const { e } = x;
   const v = voceIcs(e);
   const mittente = await indirizzoMittente();
+  // Chi ha inserito/spostato l'impegno (es. Cristina): l'invito interno parte con il suo nome, dalla sua casella se l'ha collegata
+  // nel Profilo, altrimenti dalla casella aziendale con il suo nome ben visibile e «rispondi a» lei (prima nei programmi di posta
+  // compariva «Nessun mittente» e non si capiva da chi arrivasse).
+  const chi = await getCurrentUser().catch(() => null);
+  const nomeMittente = chi?.nome ? `${chi.nome.replace(/[<>"]/g, "")} (P&C ONE)` : "Calendario P&C ONE";
   const quando = e.giornataIntera ? giornoBreve(chiaveGiorno(e.inizio)) : `${giornoBreve(chiaveGiorno(e.inizio))} ore ${oraRoma(e.inizio)}`;
   const inviati: string[] = [];
   let motivo: string | undefined;
@@ -226,7 +232,10 @@ export async function inviaInvito(chiave: string, metodo: "REQUEST" | "CANCEL" =
         : [`Gentile cliente,`, annulla ? `l'appuntamento del ${quando} è stato annullato. La ricontatteremo per fissare una nuova data.` : `le confermiamo l'appuntamento del ${quando}${e.luogo ? ` presso ${e.luogo}` : ""}${e.chi ? ` con ${e.chi}` : ""}.`, "", "Per qualsiasi necessità può rispondere a questa email.", "", "Gruppo P&C"].join("\n"),
       invito: { metodo, ics: calendarioIcs([vv], { metodo }) },
       // al cliente l'invito parte dalla casella del venditore, se l'ha collegata nel Profilo
-      daUtenteId: d.interno ? null : x.utenteId,
+      // l'invito interno: dalla casella di chi lo inserisce (se collegata) o dall'aziendale con il suo nome; il cliente dal venditore
+      daUtenteId: d.interno ? chi?.id ?? null : x.utenteId,
+      da: mittente ? `"${d.interno ? nomeMittente : "Gruppo P&C"}" <${mittente}>` : undefined,
+      rispondiA: d.interno ? chi?.email ?? undefined : undefined,
     });
     if (esito.inviata) inviati.push(d.email);
     else motivo = esito.motivo;

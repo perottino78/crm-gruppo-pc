@@ -336,6 +336,7 @@ login nel `matcher` del middleware.
   scrive. `/segnalazioni`: chi gestisce (`gestisceSegnalazioni`: destinatario e amministratori) le vede tutte con le schermate (`GET /api/segnalazioni/allegato/<id>`)
   e le chiude con «✓ Risolta» + risposta (email a chi ha scritto) o le riapre; gli altri vedono le proprie. Nel menu «📥 Segnalazioni del team» con il numero di
   aperte (dal layout), in Dashboard il riquadro rosso. Collaudo `segnalazioni` (15, SMTP finto).
+- **Mittente degli inviti di calendario** (Ugo 26/11/2026: nell'email arrivava «Nessun mittente»): `inviaInvito` (`src/lib/calendario/server.ts`) manda l'invito interno con il nome di chi lo inserisce (`getCurrentUser`, es. «Cristina (P&C ONE)»): dalla sua casella se l'ha collegata nel Profilo, altrimenti dalla casella aziendale con quel nome nel «Da» e «rispondi a» lei; senza utente (controlli automatici) «Calendario P&C ONE». Al cliente il «Da» è «Gruppo P&C» (o la casella del venditore). Collaudo `calendario` (18).
 - **Calendari Nextcloud** (richiesta di Ugo, nov 2026: i calendari dei commerciali sono su Nextcloud businesscloudonline.it, utente di Ugo
   amministratore; sostituisce l'idea di Google OAuth): CalDAV nei due sensi. `src/lib/calendario/caldav.ts` (PROPFIND calendari, REPORT con `expand` dei
   ricorrenti, PUT/DELETE/GET, Basic con «password per app»), `ical.ts` puro (lettura VEVENT/multistatus, `abbinaCalendario` per nome «Marco Piccatti BCONSOLE»
