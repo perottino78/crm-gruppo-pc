@@ -426,7 +426,7 @@ export default async function PreventivoPage({
               <div key={r.id} className="flex items-stretch">
                 {controlliSpostamento(r.id, r.sezioneId, idx, arr.length)}
                 <div className="flex-1 min-w-0 px-4 py-3 text-sm">
-                <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} importo={subtotaleLibero} />
+                <RigaTesto rigaId={r.id} preventivoId={preventivo.id} testo={r.testoLibero ?? ""} quantita={r.quantita} prezzoUnitario={r.prezzoUnitario} />
                 {subtotaleLibero !== 0 && (<FormAutoSalva key={`ivariga-${r.id}-${r.aliquotaIva ?? ""}`} action={aggiornaIvaRiga} className="mt-1 flex items-center gap-1.5 text-[11px] text-neutral-700">
                     <input type="hidden" name="id" value={r.id} />
                     <label className="flex items-center gap-1">IVA di questa voce

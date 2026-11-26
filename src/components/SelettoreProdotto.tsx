@@ -1959,12 +1959,29 @@ export default function SelettoreProdotto({
         </>
       );
     }
+    // «RICAMBI VETRATE» dentro VETRATE (Ugo 25/11/2026): ricambi divisi per Scintilla e Brillante; solo nell'offerta (in pratica si cercano nel materiale)
+    const ricambiVetrate = extraOutdoor && finestra && g?.nome === "VETRATE";
+    const tesseraRicambi = ricambiVetrate ? tessera("RICAMBI VETRATE", "RICAMBI VETRATE", "Scintilla e Brillante", "/immagini/ricambi-vetrate/ricambi.svg", () => setSottogruppoAperto("VETRATE|RICAMBI VETRATE")) : null;
+    if (ricambiVetrate && sottogruppoAperto === "VETRATE|RICAMBI VETRATE") {
+      return (
+        <>
+          <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-neutral-600">
+            <button type="button" onClick={() => { setFamigliaAperta(null); setGruppoAperto(null); setSottogruppoAperto(null); }} className="underline">Tutti i prodotti</button><span>›</span>
+            <button type="button" onClick={() => { setGruppoAperto(null); setSottogruppoAperto(null); }} className="underline">{nomeFamiglia(f.nome)}</button><span>›</span>
+            <button type="button" onClick={() => setSottogruppoAperto(null)} className="underline">VETRATE</button><span>›</span>
+            <span className="font-semibold text-neutral-800">RICAMBI VETRATE</span>
+          </nav>
+          {ricambi(f.nome, "RICAMBI VETRATE")}
+        </>
+      );
+    }
     if (g.sottogruppi && !sg) {
       return (
         <>
           {briciole}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-3">
             {g.sottogruppi.map((x) => tessera(x.nome, x.nome, `${x.tipologie.length} prodotti`, x.tipologie.find((t) => t.immagine)?.immagine, () => setSottogruppoAperto(`${g.nome}|${x.nome}`)))}
+            {tesseraRicambi}
           </div>
           {ricambi(f.nome, g.nome)}
         </>
@@ -1973,6 +1990,7 @@ export default function SelettoreProdotto({
     return (
       <>
         {briciole}
+        {!sg && tesseraRicambi && <div className="mb-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{tesseraRicambi}</div>}
         <div className="mb-3 flex flex-col">{elencoTipologie(sg ? sg.tipologie : g.tipologie, true)}</div>
         {ricambi(f!.nome, g.nome)}
       </>

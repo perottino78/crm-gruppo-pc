@@ -14,12 +14,14 @@ export type RisultatoComplemento =
   | { tipo: "P"; brandId: string; tipologia: string; label: string; gruppo: string | null; fornitoreId: string | null; colori: string[]; griglia: boolean; /** il listino ha anche l'altezza (profili e pezzi al metro hanno solo la lunghezza) */ conAltezza: boolean; unita: "cm" | "mm" };
 
 import { assicuraArticoliLegno } from "@/lib/ordini/legno-server";
+import { assicuraRicambiVetrate } from "@/lib/listini/ricambi-vetrate-server";
 import { assicuraCoprifili } from "@/lib/listini/coprifili-server";
 import { assicuraColoriCompsfusi } from "@/lib/listini/compsfusi-server";
 
 export async function GET(req: NextRequest) {
   const utente = await getCurrentUser();
   if (!utente) return NextResponse.json({ errore: "Non autorizzato" }, { status: 401 });
+  await assicuraRicambiVetrate(); // accessori e ricambi delle vetrate (una volta per versione)
   await assicuraArticoliLegno(); // i legni piallati delle vetrate si trovano anche al rilievo (una volta sola)
   await assicuraCoprifili();
   await assicuraColoriCompsfusi(); // colori MV Living sui profili, piantoni, agganci e piastre (una volta sola)

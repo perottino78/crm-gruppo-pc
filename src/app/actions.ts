@@ -831,13 +831,14 @@ export async function aggiungiArticoloPreventivo(formData: FormData) {
   const preventivoId = str(formData, "preventivoId");
   const articoloId = str(formData, "articoloId");
   if (!preventivoId || !articoloId) return;
-  const quantita = Math.max(1, Math.round(parseFloat((str(formData, "quantita") ?? "1").replace(",", ".")) || 1));
   const vis = visibilitaArticoliWhere(u);
-  const a = await prisma.articolo.findFirst({ where: { id: articoloId, attivo: true, ...(vis ? { AND: [vis] } : {}) }, select: { codice: true, descrizione: true, um: true, prezzoVendita: true } });
+  const a = await prisma.articolo.findFirst({ where: { id: articoloId, attivo: true, ...(vis ? { AND: [vis] } : {}) }, select: { codice: true, descrizione: true, descrizioneEstesa: true, um: true, prezzoVendita: true } });
   if (!a) return;
+  const { rigaArticolo } = await import("@/lib/listini/ricambi-vetrate");
+  const riga = rigaArticolo(a, str(formData, "quantita")); // al metro: metri × €/mt nel prezzo, i metri nel testo
   const sezioneId = str(formData, "sezioneId") || null;
   const ordine = await prossimoOrdine(preventivoId, sezioneId);
-  await prisma.rigaPreventivo.create({ data: { preventivoId, testoLibero: `${a.codice} — ${a.descrizione}`, quantita, prezzoUnitario: a.prezzoVendita ?? 0, sezioneId, ordine } });
+  await prisma.rigaPreventivo.create({ data: { preventivoId, ...riga, sezioneId, ordine } });
   await ricalcolaTotali(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
@@ -1330,14 +1331,22 @@ export async function modificaRigaPreventivo(formData: FormData) {
     include: { prodotto: true },
   });
   if (!riga) return;
-  // riga di testo (richiesta di Rocco: modifica anche delle righe «testo»): testo e importo
+  // riga di testo (richiesta di Rocco: modifica anche delle righe «testo»): testo, quantità e prezzo unitario
+  // (Ugo 25/11/2026: anche la quantità, come le righe prodotto, per articoli e accessori)
   if (!riga.prodotto) {
     const testo = str(formData, "testoLibero");
     const importoStr = str(formData, "prezzoUnitario");
-    const importo = importoStr ? parseFloat(importoStr.replace(",", ".")) : 0;
+    // «1.108,50» o «44,34» (virgola = decimali) oppure «44.34»
+    const importo = importoStr ? parseFloat(importoStr.includes(",") ? importoStr.replace(/\./g, "").replace(",", ".") : importoStr) : 0;
+    const qStr = str(formData, "quantita");
+    const q = qStr ? parseInt(qStr, 10) : riga.quantita;
     await prisma.rigaPreventivo.update({
       where: { id },
-      data: { ...(testo ? { testoLibero: testo } : {}), prezzoUnitario: Number.isFinite(importo) ? Math.round(importo * 100) / 100 : riga.prezzoUnitario },
+      data: {
+        ...(testo ? { testoLibero: testo } : {}),
+        quantita: Number.isFinite(q) && q >= 1 ? q : riga.quantita,
+        prezzoUnitario: Number.isFinite(importo) ? Math.round(importo * 100) / 100 : riga.prezzoUnitario,
+      },
     });
     await ricalcolaTotali(preventivoId);
     revalidatePath(`/preventivi/${preventivoId}`);

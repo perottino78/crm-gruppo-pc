@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { nomeUfficio } from "@/lib/flusso";
+import { coloriDaFissare } from "@/lib/calendario/eventi";
 import { getCurrentUser } from "@/lib/auth";
 import { STATI_UTENTE, RUOLI_UTENTE, LEAD_CHIUSI, datiCollegati, totaleCollegati } from "@/lib/utenti/stato";
 
@@ -133,7 +134,18 @@ export async function salvaCalendarioUtente(fd: FormData) {
   if (!id) return;
   const colore = fd.get("automatico") === "1" ? null : str(fd, "colore");
   if (colore && !/^#[0-9a-f]{6}$/i.test(colore)) torna(ritorno, { errore: "Colore non valido." });
-  await prisma.utente.update({ where: { id }, data: { inCalendario: fd.get("inCalendario") === "1", coloreCalendario: colore ? colore.toLowerCase() : null } });
+  // prima si fissano i colori che gli altri vedono adesso (stesso elenco e stesso ordine del calendario): così cambia solo questa persona
+  const tutti = await prisma.utente.findMany({ where: { stato: "ATTIVO", inCalendario: true }, select: { id: true, coloreCalendario: true }, orderBy: { nome: "asc" } });
+  // un colore per persona: se un collega attivo nel calendario ce l'ha già, non si salva (in transazione, niente doppioni)
+  if (colore) {
+    const gia = await prisma.utente.findFirst({ where: { id: { not: id }, stato: "ATTIVO", inCalendario: true, coloreCalendario: { equals: colore, mode: "insensitive" } }, select: { nome: true } });
+    if (gia) torna(ritorno, { errore: `Questo colore è già di ${gia.nome}: scegline uno libero.` });
+  }
+  const daFissare = coloriDaFissare(tutti.map((u) => ({ id: u.id, colore: u.coloreCalendario })), id);
+  await prisma.$transaction([
+    ...daFissare.map((f) => prisma.utente.update({ where: { id: f.id }, data: { coloreCalendario: f.colore } })),
+    prisma.utente.update({ where: { id }, data: { inCalendario: fd.get("inCalendario") === "1", coloreCalendario: colore ? colore.toLowerCase() : null } }),
+  ]);
   aggiorna(id);
   revalidatePath("/calendario");
   torna(ritorno, { ok: "Calendario salvato" });

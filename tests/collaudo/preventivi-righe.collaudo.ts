@@ -51,6 +51,12 @@ async function main() {
   await modificaRigaPreventivo(fd({ id: testo.id, preventivoId: p.id, testoLibero: "Smontaggio e smaltimento vecchie porte", prezzoUnitario: "180,50" }));
   const t2 = await prisma.rigaPreventivo.findUniqueOrThrow({ where: { id: testo.id } });
   verifica(t2.testoLibero === "Smontaggio e smaltimento vecchie porte" && t2.prezzoUnitario === 180.5, "testo e importo modificati", t2);
+  await modificaRigaPreventivo(fd({ id: testo.id, preventivoId: p.id, testoLibero: "Smontaggio e smaltimento vecchie porte", quantita: "25", prezzoUnitario: "1.044,34" }));
+  const t3 = await prisma.rigaPreventivo.findUniqueOrThrow({ where: { id: testo.id } });
+  verifica(t3.quantita === 25 && t3.prezzoUnitario === 1044.34, "quantità e prezzo unitario modificati (1.044,34)", t3);
+  await modificaRigaPreventivo(fd({ id: testo.id, preventivoId: p.id, testoLibero: "Smontaggio e smaltimento vecchie porte", quantita: "1", prezzoUnitario: "180.50" }));
+  const t4 = await prisma.rigaPreventivo.findUniqueOrThrow({ where: { id: testo.id } });
+  verifica(t4.quantita === 1 && t4.prezzoUnitario === 180.5, "quantità riportata a 1, prezzo scritto col punto", t4);
   await duplicaRigaPreventivo(fd({ id: testo.id, preventivoId: p.id }));
   verifica((await prisma.rigaPreventivo.count({ where: { preventivoId: p.id, testoLibero: "Smontaggio e smaltimento vecchie porte", sezioneId: cucina.id } })) === 2, "la copia resta nella stessa stanza");
 
