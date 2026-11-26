@@ -74,17 +74,78 @@ export const importoProvvigione = (base: number, percentuale: number) => cent((b
 
 export type StatoProvvigione = "DA_CONTROLLARE" | "IN_MATURAZIONE" | "DA_LIQUIDARE" | "LIQUIDATA";
 
-/** Provvigione del contratto: maturata in proporzione a quanto ha pagato il cliente, liquidata, da liquidare. */
-export function riepilogoProvvigione(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione">) {
+// Regola di Debora (23/11/2026): la provvigione si paga 80% a titolo di acconto e 20% a saldo.
+//  - 80% matura quando il cliente ha pagato almeno il 50% della commessa;
+//  - 20% matura quando la pratica è posata E il cliente ha pagato tutto (saldo del materiale compreso).
+// Una sola fonte di verità: `maturazioneProvvigione`. La usano la pagina Contratti, la stampa, i totali e il report mensile
+// (`provvigioneDaPagare`, che la guarda "a fine mese" invece che "adesso").
+
+export const QUOTA_ACCONTO_PROVV = 0.8;
+export const SOGLIA_INCASSO_ACCONTO = 0.5;
+
+export type StatoSaldoProvv = "MATURATO" | "NO" | "DA_VERIFICARE";
+
+export type MaturazioneProvvigione = {
+  /** 80% a titolo di acconto */
+  quotaAcconto: number;
+  /** 20% a saldo */
+  quotaSaldo: number;
+  accontoOk: boolean;
+  saldoStato: StatoSaldoProvv;
+  accontoMaturato: number;
+  saldoMaturato: number;
+  maturato: number;
+  /** quanto aveva pagato il cliente alla data guardata */
+  incassatoEntro: number;
+  /** cosa manca, in parole semplici */
+  note: string[];
+};
+
+/**
+ * Cosa è maturato della provvigione di un contratto. Senza `fine` si guarda la situazione di adesso (pagina Contratti);
+ * con `fine` si guarda com'era a quella data (report di inizio mese: solo pagamenti e posa fino a `fine`).
+ * Per i contratti BConsole la posa non è nota: il saldo resta «da verificare» (non maturato).
+ */
+export function maturazioneProvvigione(
+  c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione" | "posatoIl" | "origine">,
+  fine?: Date | null,
+): MaturazioneProvvigione {
   const p = c.provvigione;
-  if (!p) return { stato: "DA_CONTROLLARE" as StatoProvvigione, importo: 0, maturata: 0, liquidata: 0, daLiquidare: 0, futura: 0 };
-  const { quota } = riepilogoPagamenti(c);
-  const maturata = cent(p.importo * quota);
+  const importo = p?.importo ?? 0;
+  const quotaAcconto = cent(importo * QUOTA_ACCONTO_PROVV);
+  const quotaSaldo = cent(importo - quotaAcconto);
+  const vuoto = { quotaAcconto, quotaSaldo, accontoOk: false, saldoStato: "NO" as StatoSaldoProvv, accontoMaturato: 0, saldoMaturato: 0, maturato: 0, incassatoEntro: 0, note: [] as string[] };
+  if (!p || importo <= 0) return vuoto;
+  const { dovuto } = riepilogoPagamenti(c);
+  if (dovuto <= 0) return { ...vuoto, note: ["contratto senza importi"] };
+  const incassatoEntro = cent(c.pagamenti
+    .filter((x) => x.stato !== "ANNULLATA" && x.stato !== "SOSTITUITA" && (!fine || (x.ultimoIncasso && x.ultimoIncasso.getTime() <= fine.getTime())))
+    .reduce((t, x) => t + x.incassato, 0));
+  const accontoOk = incassatoEntro >= dovuto * SOGLIA_INCASSO_ACCONTO - 0.005;
+  const tuttoPagato = incassatoEntro >= dovuto - 0.5;
+  const posato = !!c.posatoIl && (!fine || c.posatoIl.getTime() <= fine.getTime());
+  const saldoMaturo = tuttoPagato && posato;
+  const note: string[] = [];
+  if (!accontoOk) note.push("il cliente non ha pagato il 50%");
+  if (!posato) note.push(c.origine === "BCONSOLE" ? "posa non registrata in ONE: saldo da verificare" : "pratica non posata");
+  if (posato && !tuttoPagato) note.push("il cliente non ha pagato tutto");
+  const saldoStato: StatoSaldoProvv = saldoMaturo ? "MATURATO" : !posato && c.origine === "BCONSOLE" ? "DA_VERIFICARE" : "NO";
+  const accontoMaturato = accontoOk ? quotaAcconto : 0;
+  const saldoMaturato = saldoMaturo ? quotaSaldo : 0;
+  return { quotaAcconto, quotaSaldo, accontoOk, saldoStato, accontoMaturato, saldoMaturato, maturato: cent(accontoMaturato + saldoMaturato), incassatoEntro, note };
+}
+
+/** Provvigione del contratto: maturata (80/20), già liquidata, da liquidare (= maturata − già liquidata). */
+export function riepilogoProvvigione(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione" | "posatoIl" | "origine">, fine?: Date | null) {
+  const p = c.provvigione;
+  if (!p) return { stato: "DA_CONTROLLARE" as StatoProvvigione, importo: 0, maturata: 0, liquidata: 0, daLiquidare: 0, futura: 0, accontoOk: false, saldoStato: "NO" as StatoSaldoProvv, quotaAcconto: 0, quotaSaldo: 0, note: [] as string[] };
+  const m = maturazioneProvvigione(c, fine);
+  const maturata = m.maturato;
   const liquidata = cent(p.liquidazioni.reduce((s, l) => s + l.importo, 0));
   const daLiquidare = cent(Math.max(0, maturata - liquidata));
   const futura = cent(Math.max(0, p.importo - Math.max(maturata, liquidata)));
   const stato: StatoProvvigione = liquidata >= p.importo - 0.005 ? "LIQUIDATA" : daLiquidare > 0.005 ? "DA_LIQUIDARE" : "IN_MATURAZIONE";
-  return { stato, importo: p.importo, maturata, liquidata, daLiquidare, futura };
+  return { stato, importo: p.importo, maturata, liquidata, daLiquidare, futura, accontoOk: m.accontoOk, saldoStato: m.saldoStato, quotaAcconto: m.quotaAcconto, quotaSaldo: m.quotaSaldo, note: m.note };
 }
 
 export const NOMI_STATO_PROVVIGIONE: Record<StatoProvvigione, string> = {
@@ -190,54 +251,20 @@ export function totali(contratti: Contratto[]) {
     maturate: cent(maturate), liquidate: cent(liquidate), daLiquidare: cent(daLiquidare), daControllare };
 }
 
-/**
- * Provvigione rata per rata (acconto, saldo…): ogni rata del cliente porta la sua parte di provvigione, che matura quando
- * il cliente la paga. Così acconto e saldo del commerciale maturano in tempi diversi, come i pagamenti del cliente.
- */
-export function provvigioneSulleRate(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione">): Map<string, { quota: number; maturata: number }> {
-  const out = new Map<string, { quota: number; maturata: number }>();
-  const p = c.provvigione;
-  if (!p) return out;
-  const { dovuto } = riepilogoPagamenti(c);
-  if (dovuto <= 0) return out;
-  for (const r of c.pagamenti) {
-    if (r.stato === "ANNULLATA" || r.stato === "SOSTITUITA") continue;
-    out.set(r.id, { quota: cent(p.importo * r.importo / dovuto), maturata: cent(p.importo * r.incassato / dovuto) });
-  }
-  return out;
-}
-
-
 // ---------- provvigioni da pagare ogni mese (Debora 23/11/2026) ----------
-// 80% a titolo di acconto: il cliente deve aver pagato almeno il 50% della commessa entro il mese precedente.
-// 20% a saldo: pratica posata e tutto pagato dal cliente (anche il saldo del materiale) entro il mese precedente.
-
-export const QUOTA_ACCONTO_PROVV = 0.8;
-export const SOGLIA_INCASSO_ACCONTO = 0.5;
+// Stessa regola 80/20 di `maturazioneProvvigione`, guardata alla fine del mese precedente a quello del report.
 
 /** Ultimo istante del mese precedente a quello del report (mese 1-12). */
 export function fineMesePrecedente(anno: number, mese: number): Date {
   return new Date(Date.UTC(anno, mese - 1, 1) - 1);
 }
 
-export type ProvvigioneDaPagare = { accontoMaturato: number; saldoMaturato: number; maturato: number; giaPagato: number; daPagare: number; incassatoEntro: number; note: string[] };
+export type ProvvigioneDaPagare = MaturazioneProvvigione & { giaPagato: number; daPagare: number };
 
 export function provvigioneDaPagare(c: Pick<Contratto, "dovuto" | "pagamenti" | "provvigione" | "posatoIl" | "origine">, fine: Date): ProvvigioneDaPagare | null {
   const p = c.provvigione;
   if (!p || p.importo <= 0 || c.dovuto <= 0) return null;
-  const note: string[] = [];
-  const incassatoEntro = cent(c.pagamenti
-    .filter((x) => x.stato !== "ANNULLATA" && x.stato !== "SOSTITUITA" && x.ultimoIncasso && x.ultimoIncasso.getTime() <= fine.getTime())
-    .reduce((t, x) => t + x.incassato, 0));
-  const accontoOk = incassatoEntro >= c.dovuto * SOGLIA_INCASSO_ACCONTO - 0.005;
-  const tuttoPagato = incassatoEntro >= c.dovuto - 0.5;
-  const posato = !!c.posatoIl && c.posatoIl.getTime() <= fine.getTime();
-  const accontoMaturato = accontoOk ? cent(p.importo * QUOTA_ACCONTO_PROVV) : 0;
-  const saldoMaturato = tuttoPagato && posato ? cent(p.importo - cent(p.importo * QUOTA_ACCONTO_PROVV)) : 0;
-  if (!accontoOk) note.push("il cliente non ha ancora pagato il 50%");
-  if (accontoOk && !posato) note.push(c.origine === "BCONSOLE" ? "posa non registrata in ONE: da verificare" : "saldo: pratica non ancora posata");
-  if (accontoOk && posato && !tuttoPagato) note.push("saldo: il cliente non ha ancora pagato tutto");
+  const m = maturazioneProvvigione(c, fine);
   const giaPagato = cent(p.liquidazioni.reduce((t, l) => t + l.importo, 0));
-  const maturato = cent(accontoMaturato + saldoMaturato);
-  return { accontoMaturato, saldoMaturato, maturato, giaPagato, daPagare: cent(Math.max(0, maturato - giaPagato)), incassatoEntro, note };
+  return { ...m, giaPagato, daPagare: cent(Math.max(0, m.maturato - giaPagato)) };
 }

@@ -11,8 +11,9 @@ import { getConfig, setConfig } from "@/lib/leadIngest";
 import { registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta, sezionaliSenzaUltimoNumero } from "@/lib/fatturazione/server";
-import { CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
+import { accontiEmessiDellaCommessa, ibanDellaBanca, CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta, sezionaliSenzaUltimoNumero } from "@/lib/fatturazione/server";
+import { accontiDaDedurre, chiaveNumero, rigaDeduzione } from "@/lib/fatturazione/acconti";
+import { BANCA_PREDEFINITA, CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
 import { propostaDaCommessa, statoDdtDaRighe } from "@/lib/fatturazione/calcoli";
 import { numeroCommessa } from "@/lib/commesse";
 
@@ -63,19 +64,8 @@ export async function creaFattura(fd: FormData) {
     causale = "FATTURA ACCONTO";
   } else if (comm && tipo === "SALDO") {
     for (const r of await righeDaOfferta(comm.preventivo.id)) righe.push({ ...r, um: r.um });
-    // acconti già fatturati (dal CRM o importati da BConsole) da dedurre
-    const acconti = await prisma.fatturaEmessa.findMany({ where: { commessaId: comm.id, tipo: "ACCONTO", stato: { in: ["EMESSA", "PROVA"] } }, select: { numero: true, data: true, imponibile: true, stato: true, righe: { select: { aliquota: true }, take: 1 } } });
-    const giaCrm = new Set(acconti.map((a) => a.numero));
-    const daBc = await prisma.fatturaVendita.findMany({ where: { commessaId: comm.id, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
-    // l'acconto si deduce con la stessa aliquota con cui è stato fatturato (con righe a IVA diverse nel saldo non esiste un'aliquota sola)
-    const aliquotaBc = (x: { imponibile: number; iva: number }) => { const a = x.imponibile ? Math.round((Math.abs(x.iva) / Math.abs(x.imponibile)) * 100) : aliquota; return [0, 4, 5, 10, 22].includes(a) ? a : aliquota; };
-    const dedotti = [
-      ...acconti.filter((x) => x.stato === "EMESSA").map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: x.righe[0]?.aliquota ?? aliquota })),
-      ...daBc.filter((x) => !giaCrm.has(x.numero)).map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: aliquotaBc(x) })),
-    ];
-    for (const a of dedotti) {
-      righe.push({ descrizione: `A dedurre acconto fattura n. ${a.numero} del ${a.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`, quantita: 1, um: null, prezzo: -Math.abs(a.imponibile), aliquota: a.aliquota, natura: null });
-    }
+    // acconti già fatturati (dal CRM o da BConsole, anche non agganciati alla commessa) da dedurre con il segno meno
+    for (const a of accontiDaDedurre(await accontiEmessiDellaCommessa(comm.id, comm.clienteId, aliquota))) righe.push(rigaDeduzione(a));
     causale = "FATTURA SALDO";
   } else if (comm && tipo !== "NOTA_CREDITO") {
     for (const r of await righeDaOfferta(comm.preventivo.id)) righe.push(r);
@@ -85,7 +75,7 @@ export async function creaFattura(fd: FormData) {
       data: {
         tipo, sezionale: sezionale(sez).codice, anno: data.getUTCFullYear(), data, ...anagrafica, commessaId: comm?.id ?? null, brand,
         venditore: comm?.preventivo.commerciale?.nome ?? null, riferimento: comm ? `Commessa ${numeroCommessa(comm)}` : null, causale,
-        metodoPagamento: "BONIFICO_VISTA", banca: "Banca Crédit Agricole Cariparma", creatoDaNome: u.nome,
+        metodoPagamento: "BONIFICO_VISTA", banca: BANCA_PREDEFINITA, iban: await ibanDellaBanca(BANCA_PREDEFINITA), creatoDaNome: u.nome,
         righe: { create: righe.map((r, i) => ({ ...r, posizione: i + 1 })) },
       },
     });
@@ -134,6 +124,26 @@ export async function salvaTestataFattura(fd: FormData) {
   });
   aggiorna(`/fatturazione/fatture/${f.id}`);
   redirect(`/fatturazione/fatture/${f.id}?salvato=1`);
+}
+
+/** Aggiunge alla bozza di un saldo le righe «A dedurre acconto fattura n. …» (prezzo negativo) degli acconti emessi non ancora presenti. */
+export async function aggiungiAccontiDaDedurre(fd: FormData) {
+  await utente();
+  const f = await bozza(str(fd, "id"));
+  if (f.tipo !== "SALDO" || !f.commessaId) errore(`/fatturazione/fatture/${f.id}`, "Gli acconti si deducono solo nella fattura di saldo di una commessa.");
+  const comm = await prisma.commessa.findUnique({ where: { id: f.commessaId! }, select: { clienteId: true, preventivo: { select: { aliquotaIva: true } } } });
+  const righe = await prisma.rigaFatturaEmessa.findMany({ where: { fatturaId: f.id }, select: { descrizione: true } });
+  const scelti = fd.getAll("acconto").map(String);
+  const daAggiungere = accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId!, comm?.clienteId ?? f.clienteId, comm?.preventivo.aliquotaIva ?? 10), righe.map((r) => r.descrizione)).filter((a) => scelti.includes(chiaveNumero(a.numero)));
+  if (!daAggiungere.length) errore(`/fatturazione/fatture/${f.id}#righe`, "Nessun acconto da aggiungere: spunta quelli da dedurre (o sono già tutti nelle righe).");
+  await prisma.$transaction(async (tx) => {
+    const ultima = await tx.rigaFatturaEmessa.aggregate({ where: { fatturaId: f.id }, _max: { posizione: true } });
+    let pos = ultima._max.posizione ?? 0;
+    for (const a of daAggiungere) await tx.rigaFatturaEmessa.create({ data: { fatturaId: f.id, ...rigaDeduzione(a), posizione: ++pos } });
+    await ricalcolaFattura(tx, f.id);
+  });
+  aggiorna(`/fatturazione/fatture/${f.id}`);
+  redirect(`/fatturazione/fatture/${f.id}?salvato=1#righe`);
 }
 
 /** Salva tutte le righe (modifiche) e, se compilata, aggiunge la riga nuova. */
@@ -490,7 +500,7 @@ export async function fatturaDaDdt(fd: FormData) {
         tipo: "DIFFERITA", sezionale: sez, anno: data.getUTCFullYear(), data,
         ...(cli ? (({ brand: _b, metodoPagamento: _m, ...a }) => { void _b; void _m; return a; })(cli) : { clienteNome: ddt[0].clienteNome, indirizzo: ddt[0].indirizzo, cap: ddt[0].cap, comune: ddt[0].comune, provincia: ddt[0].provincia, partitaIva: ddt[0].partitaIva, codiceFiscale: ddt[0].codiceFiscale }),
         commessaId: ddt.find((d) => d.commessaId)?.commessaId ?? null, brand, riferimento: ddt.map((d) => d.riferimento).filter(Boolean).join("; ").slice(0, 300) || null,
-        metodoPagamento: "BONIFICO_VISTA", banca: "Banca Crédit Agricole Cariparma", creatoDaNome: u.nome, righe: { create: righe },
+        metodoPagamento: "BONIFICO_VISTA", banca: BANCA_PREDEFINITA, iban: await ibanDellaBanca(BANCA_PREDEFINITA), creatoDaNome: u.nome, righe: { create: righe },
       },
     });
     await tx.ddtUscita.updateMany({ where: { id: { in: ddt.map((d) => d.id) } }, data: { fatturaId: f.id } });

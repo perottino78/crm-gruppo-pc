@@ -92,6 +92,17 @@ export const metodoPagamento = (codice: string | null | undefined) => METODI_PAG
 /** Banche dell'azienda per l'incasso (BConsole › Banca azienda). L'IBAN si prende dal conto in Amministrazione › Banche se c'è. */
 export const BANCHE_AZIENDA = ["Banca Crédit Agricole Cariparma", "Banca Intesa Sanpaolo", "Banca BPER", "Banca Nazionale del Lavoro S.p.A."];
 
+/** IBAN ufficiali dell'azienda per banca: riserva quando il conto in Amministrazione › Banche non ha l'IBAN (quello del conto, se c'è, vince). */
+export const IBAN_BANCHE_AZIENDA: Record<string, string> = {
+  "Banca BPER": "IT06P0538730871000047385777",
+  "Banca Crédit Agricole Cariparma": "IT84H0623030870000040608082",
+  "Banca Intesa Sanpaolo": "IT71N0306930870100000116319",
+};
+/** Banca di partenza di una fattura nuova. */
+export const BANCA_PREDEFINITA = "Banca Crédit Agricole Cariparma";
+/** IBAN ufficiale di una banca dell'azienda (nome esatto di `BANCHE_AZIENDA`), vuoto se non noto (es. BNL). */
+export const ibanUfficiale = (banca: string | null | undefined): string | null => (banca ? IBAN_BANCHE_AZIENDA[banca] ?? null : null);
+
 /** Causali di trasporto verso il cliente (BConsole › Caus. Trasporto, tipo CLIENTE). */
 export const CAUSALI_TRASPORTO = [
   "Vendita merce", "Reso al fornitore", "Conto lavorazione a fornitore", "Conto visione", "Conto sostituzione", "Conto lavorazione da cliente", "Conto riparazione da cliente",
@@ -129,3 +140,6 @@ export const NATURE_CON_BOLLO = ["N1", "N2.1", "N2.2", "N3.5", "N3.6", "N4"];
 /** Testo fisso a piè di fattura (BConsole › riga fattura predefinita). */
 export const DICHIARAZIONE_CCNL =
   "Si dichiara che i lavori non edili indicati sono eseguiti con applicazione quale datore di lavoro del contratto collettivo del settore di appartenenza terziario confcommercio.";
+/** Diciture in fondo alla fattura (annotazioni): CONAI solo sulle fatture fiscali che non sono note di credito, la copia dell'Agenzia su tutte. */
+export const DICITURA_CONAI = "Contributo CONAI assolto ove dovuto.";
+export const DICITURA_COPIA_AGENZIA = "Copia della fattura il cui originale è depositato nell'area web «Fatture e corrispettivi» dell'Agenzia delle Entrate.";

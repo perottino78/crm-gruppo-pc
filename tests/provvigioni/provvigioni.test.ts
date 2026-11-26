@@ -38,20 +38,43 @@ test("provvigione: da controllare finché la fatturazione non la inserisce", () 
   assert.equal(r.importo, 0);
 });
 
-test("provvigione matura con i pagamenti e si liquida anche in più volte", () => {
+test("provvigione 80/20: l'80% matura al 50% pagato, il 20% a posa e saldo; si liquida anche in più volte", () => {
   assert.equal(importoProvvigione(10000, 8), 800);
   const prov = { id: "p", base: 10000, percentuale: 8, importo: 800, controllataIl: new Date(), liquidazioni: [] as { id: string; importo: number; data: Date }[] };
   const c = contratto({ provvigione: prov, pagamenti: [pag(6100, 0, "PAGATA"), pag(6100, 6100)] });
+  // il cliente ha pagato esattamente il 50%: matura l'80% = 640
   let r = riepilogoProvvigione(c);
-  assert.deepEqual([r.stato, r.maturata, r.daLiquidare, r.futura], ["DA_LIQUIDARE", 400, 400, 400]);
-  prov.liquidazioni.push({ id: "l1", importo: 400, data: new Date() });
+  assert.deepEqual([r.stato, r.maturata, r.daLiquidare, r.futura, r.accontoOk, r.saldoStato], ["DA_LIQUIDARE", 640, 640, 160, true, "NO"]);
+  prov.liquidazioni.push({ id: "l1", importo: 640, data: new Date() });
   r = riepilogoProvvigione(c);
-  assert.deepEqual([r.stato, r.liquidata, r.daLiquidare], ["IN_MATURAZIONE", 400, 0]);
+  assert.deepEqual([r.stato, r.liquidata, r.daLiquidare], ["IN_MATURAZIONE", 640, 0]);
+  // il cliente salda tutto ma la pratica non è posata: il 20% non matura
   c.pagamenti = [pag(6100, 0, "PAGATA"), pag(6100, 0, "PAGATA")];
   r = riepilogoProvvigione(c);
-  assert.deepEqual([r.stato, r.daLiquidare], ["DA_LIQUIDARE", 400]);
-  prov.liquidazioni.push({ id: "l2", importo: 400, data: new Date() });
+  assert.deepEqual([r.stato, r.daLiquidare, r.saldoStato, r.note], ["IN_MATURAZIONE", 0, "NO", ["pratica non posata"]]);
+  // posata: matura anche il 20%
+  c.posatoIl = new Date("2026-10-30");
+  r = riepilogoProvvigione(c);
+  assert.deepEqual([r.stato, r.maturata, r.daLiquidare, r.saldoStato], ["DA_LIQUIDARE", 800, 160, "MATURATO"]);
+  // pagamento parziale del 20%
+  prov.liquidazioni.push({ id: "l2", importo: 100, data: new Date() });
+  r = riepilogoProvvigione(c);
+  assert.deepEqual([r.liquidata, r.daLiquidare, r.stato], [740, 60, "DA_LIQUIDARE"]);
+  prov.liquidazioni.push({ id: "l3", importo: 60, data: new Date() });
   assert.equal(riepilogoProvvigione(c).stato, "LIQUIDATA");
+});
+
+test("provvigione 80/20: sotto il 50% non matura nulla", () => {
+  const prov = { id: "p", base: 10000, percentuale: 8, importo: 800, controllataIl: new Date(), liquidazioni: [] };
+  const r = riepilogoProvvigione(contratto({ provvigione: prov, pagamenti: [pag(6100, 3200, "PARZIALE"), pag(6100, 6100)] }));
+  assert.deepEqual([r.maturata, r.accontoOk, r.note], [0, false, ["il cliente non ha pagato il 50%", "pratica non posata"]]);
+});
+
+test("provvigione 80/20: contratto BConsole senza posa nota, saldo «da verificare»", () => {
+  const prov = { id: "p", base: 10000, percentuale: 6, importo: 600, controllataIl: new Date(), liquidazioni: [] };
+  const r = riepilogoProvvigione(contratto({ origine: "BCONSOLE", provvigione: prov, pagamenti: [pag(12200, 0, "PAGATA")] }));
+  assert.deepEqual([r.maturata, r.saldoStato], [480, "DA_VERIFICARE"]);
+  assert.match(r.note[0], /da verificare/);
 });
 
 test("contratti BConsole: fatture raggruppate per progetto, note di credito tolgono", () => {
@@ -102,18 +125,6 @@ test("filtri e totali", () => {
   assert.equal(filtra(lista, { pagamento: "PAGATO" })[0].chiave, "a");
   assert.equal(filtra(lista, { provvigione: "DA_CONTROLLARE" })[0].chiave, "b");
   const t = totali(lista);
-  assert.deepEqual([t.contratti, t.venduto, t.incassato, t.daIncassare, t.provvigioni, t.daLiquidare, t.daControllare], [2, 12000, 12200, 2440, 500, 500, 1]);
+  assert.deepEqual([t.contratti, t.venduto, t.incassato, t.daIncassare, t.provvigioni, t.daLiquidare, t.daControllare], [2, 12000, 12200, 2440, 500, 400, 1]);
 });
 
-import { provvigioneDaPagare, fineMesePrecedente } from "../../src/lib/provvigioni/calcoli";
-test("provvigione da pagare: 80% con il 50% pagato entro il mese prima, 20% a posa e saldo", () => {
-  const prov = { id: "p", base: 10000, percentuale: 10, importo: 1000, controllataIl: new Date(), liquidazioni: [] };
-  const pag = (importo: number, data: string) => ({ id: data, descrizione: "x", importo, incassato: importo, residuo: 0, scadenza: null, ultimoIncasso: new Date(data), stato: "PAGATA" });
-  const c = { origine: "CRM" as const, dovuto: 12200, provvigione: prov, pagamenti: [pag(6100, "2026-10-20")], posatoIl: null };
-  const fine = fineMesePrecedente(2026, 11);
-  assert.equal(provvigioneDaPagare(c, fine)!.daPagare, 800);
-  assert.equal(provvigioneDaPagare({ ...c, pagamenti: [pag(6100, "2026-11-03")] }, fine)!.daPagare, 0);
-  const chiuso = { ...c, pagamenti: [pag(6100, "2026-10-20"), pag(6100, "2026-10-28")], posatoIl: new Date("2026-10-30") };
-  assert.equal(provvigioneDaPagare(chiuso, fine)!.daPagare, 1000);
-  assert.equal(provvigioneDaPagare({ ...chiuso, provvigione: { ...prov, liquidazioni: [{ id: "l", importo: 800, data: new Date() }] } }, fine)!.daPagare, 200);
-});

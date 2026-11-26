@@ -5,7 +5,8 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { gestisceProvvigioni } from "@/lib/provvigioni/server";
+import { gestisceProvvigioni, contrattiDi, personeVisibili } from "@/lib/provvigioni/server";
+import { reportMensile, MESI } from "@/lib/provvigioni/report";
 import { importoProvvigione, cent } from "@/lib/provvigioni/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
 import { inviaEmailObiettivi, CHIAVE_MAIL_OBIETTIVI } from "@/lib/provvigioni/obiettivi-server";
@@ -23,7 +24,7 @@ const numeroCampo = (v: FormDataEntryValue | null) => {
 
 function torna(fd: FormData): string {
   const t = String(fd.get("torna") ?? "");
-  return /^\/contratti(\?|$)/.test(t) ? t : "/contratti";
+  return /^\/contratti(\/[a-z-]+)*(\?|#|$)/.test(t) ? t : "/contratti";
 }
 const vai = (dove: string, p: Record<string, string>) => {
   const [base, hash] = dove.split("#");
@@ -93,6 +94,29 @@ export async function registraLiquidazione(fd: FormData) {
   await prisma.liquidazioneProvvigione.create({ data: { provvigioneId: p!.id, importo, data, note: String(fd.get("note") ?? "").trim() || null, registrataDa: u.nome } });
   revalidatePath("/contratti");
   vai(dove, { ok: `Pagamento al commerciale registrato: ${importo.toFixed(2)} €` });
+}
+
+/** Dal report di inizio mese: segna pagato in un colpo tutto ciò che è da pagare a un commerciale (ricalcolato qui, non si fida della pagina). */
+export async function registraLiquidazioniMese(fd: FormData) {
+  const u = await gestore();
+  const dove = torna(fd);
+  if (!gestisceProvvigioni(u)) vai(dove, { errore: "Le provvigioni le liquida l'ufficio fatturazione" });
+  const mese = String(fd.get("mese") ?? "");
+  const utenteId = String(fd.get("utenteId") ?? "");
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(mese) || !utenteId) vai(dove, { errore: "Mese o commerciale mancante" });
+  const persona = (await personeVisibili(u)).find((x) => x.id === utenteId);
+  if (!persona) vai(dove, { errore: "Commerciale non trovato" });
+  const { gruppi } = reportMensile(await contrattiDi([persona!]), mese);
+  const righe = (gruppi.find((g) => g.commercialeId === utenteId)?.righe ?? []).filter((x) => x.r.daPagare > 0.005);
+  if (!righe.length) vai(dove, { errore: "Non c'è niente da pagare a questo commerciale per il mese scelto" });
+  const note = `Report di ${MESI[Number(mese.slice(5, 7)) - 1]} ${mese.slice(0, 4)}`;
+  let totale = 0;
+  for (const { c, r } of righe) {
+    await prisma.liquidazioneProvvigione.create({ data: { provvigioneId: c.provvigione!.id, importo: r.daPagare, data: new Date(), note, registrataDa: u.nome } });
+    totale = cent(totale + r.daPagare);
+  }
+  revalidatePath("/contratti");
+  vai(dove, { ok: `Pagamento a ${persona!.nome} registrato: ${totale.toFixed(2)} € su ${righe.length} contratti` });
 }
 
 export async function annullaLiquidazione(fd: FormData) {

@@ -98,6 +98,8 @@ import { perInput } from "@/lib/calendario/tempo";
 import { statoSogliaRilievo } from "@/lib/pratica/soglia-server";
 import { mancaAllaSoglia } from "@/lib/pratica/soglia";
 import ScadenzarioPratica from "@/components/commesse/ScadenzarioPratica";
+import { ordinaPassaggi } from "@/lib/pratica/ordina-passaggi";
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 import { puo } from "@/lib/permessi/catalogo";
 import { causaleIncasso, fatturaPer } from "@/lib/amministrazione/causale";
@@ -212,11 +214,17 @@ export default async function CommessaPage({ params, searchParams }: { params: P
   let residuo = c.totaleImponibile;
   const admin = isAmministratore(utente);
   const gestoreIncassi = admin || utente?.ruolo === "AMMINISTRATIVO";
-  const stato = STATI_COMMESSA[c.stato] ?? { label: c.stato, cls: "bg-neutral-200" };
   const finanz = c.accontoTipo === "FINANZIAMENTO";
   // il rilievo parte con il 50% incassato, il finanziamento approvato o lo sblocco dell'amministratore (Debora 21/11/2026)
   const soglia = await statoSogliaRilievo(c.id);
   const viaLibera = !!soglia?.viaLibera;
+  // incasso arrivato da una strada che non ha riallineato lo stato (scadenzario, fattura agganciata…): «In attesa acconto» → «Rilievo da programmare»
+  let statoCommessa = c.stato;
+  if (c.stato === "IN_ATTESA_ACCONTO" && viaLibera) {
+    await ricalcolaStatoCommessa(c.id).catch(() => undefined);
+    statoCommessa = (await prisma.commessa.findUnique({ where: { id: c.id }, select: { stato: true } }))?.stato ?? c.stato;
+  }
+  const stato = STATI_COMMESSA[statoCommessa] ?? { label: statoCommessa, cls: "bg-neutral-200" };
   const puoFinanziamento = gestoreIncassi || (!!utente && puo(utente, "fatturazione"));
   const rateIntermedie = await prisma.scadenza.findMany({ where: { commessaId: c.id, origine: { startsWith: "COMMESSA_RATA_" } }, include: { abbinamenti: { select: { importo: true } } }, orderBy: { origine: "asc" } });
   const percorsoProg = await percorsoDiCommessa(c.id);
@@ -339,6 +347,14 @@ export default async function CommessaPage({ params, searchParams }: { params: P
         </form>
       </div>
       {pp && <BarraPassi commessaId={c.id} passi={pp.passi} mostrato={sel} corrente={pp.corrente} />}
+      {/* scorciatoie: lo scadenzario si trova subito, in ogni passo della pratica */}
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <a href="#scadenzario" className="btn-3d btn-3d-purple text-sm px-4 py-2">📅 Scadenzario</a>
+        <a href="#avanzamento" className="btn-3d btn-3d-blue text-sm px-4 py-2">✅ Avanzamento</a>
+        <a href="#documenti" className="btn-3d btn-3d-outline text-sm px-4 py-2">📎 Documenti</a>
+      </div>
+      {/* SCADENZARIO DEL CLIENTE: sempre visibile (Debora 26/11/2026), aperto se c'è da incassare */}
+      <ScadenzarioPratica commessaId={c.id} ritorno={`/commesse/${c.id}#scadenzario`} puoRegistrare={puoFinanziamento} puoAggiungere={puoFinanziamento && !finanz} />
 
       {/* CONTRATTO E CONFERMA ORDINE */}
       <div className={`mb-4 rounded-xl border-2 px-4 py-3 flex flex-wrap items-center gap-3 ${c.preventivo.confermatoIl ? "border-green-300 bg-green-50" : "border-amber-400 bg-amber-50"}`}>
@@ -415,7 +431,8 @@ export default async function CommessaPage({ params, searchParams }: { params: P
 
       {/* AVANZAMENTO DELLA PRATICA: flusso fra uffici + costi di manodopera per fase, in un solo riquadro */}
       {(() => {
-        const passaggi = [...tieniTask].sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime());
+        // Fatturazione prima di Amministrazione: i passaggi seguono la catena del flusso, non la data di arrivo (Debora 26/11/2026)
+        const passaggi = ordinaPassaggi(tieniTask);
         const chiuso = (t: (typeof passaggi)[number]) => !!t.completatoIl || STATI_CHIUSI.includes(t.stato);
         const fatti = passaggi.filter((t) => chiuso(t) && t.stato !== "ANNULLATO").length;
         const attivi = passaggi.filter((t) => !chiuso(t));
@@ -577,8 +594,6 @@ export default async function CommessaPage({ params, searchParams }: { params: P
       </details>
         );
       })()}
-
-      {(mostra("INCASSO") || mostra("SALDO")) && <ScadenzarioPratica commessaId={c.id} ritorno={`/commesse/${c.id}#scadenzario`} puoRegistrare={puoFinanziamento} puoAggiungere={puoFinanziamento} />}
 
       {/* ACCONTO */}
       {mostra("INCASSO") && (

@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { perInput } from "@/lib/calendario/tempo";
 import { contrattiDi, personeVisibili, gestisceProvvigioni } from "@/lib/provvigioni/server";
 import {
-  filtra, totali, riepilogoPagamenti, riepilogoProvvigione, provvigioneSulleRate, NOMI_STATO_PAGAMENTO, NOMI_STATO_PROVVIGIONE,
+  filtra, totali, riepilogoPagamenti, riepilogoProvvigione, QUOTA_ACCONTO_PROVV, SOGLIA_INCASSO_ACCONTO, NOMI_STATO_PAGAMENTO, NOMI_STATO_PROVVIGIONE,
   type Contratto, type StatoPagamento, type StatoProvvigione,
 } from "@/lib/provvigioni/calcoli";
 import { salvaProvvigione, eliminaProvvigione, registraLiquidazione, annullaLiquidazione, salvaPercentualeAbituale } from "@/app/provvigioni-actions";
@@ -73,10 +73,18 @@ export default async function ContrattiPage({ searchParams }: { searchParams: Pr
       </div>
       <div className="flex flex-wrap gap-2">
         <Link href={qs({ n: undefined }).replace("/contratti?", "/contratti/stampa?")} className="btn-3d btn-3d-outline px-3 py-1.5 text-sm">🖨️ Stampa</Link>
-        {gestore && <Link href="/contratti/da-pagare" className="btn-3d btn-3d-green px-3 py-1.5 text-sm">💶 Provvigioni da pagare</Link>}
         {gestore && <Link href="/contratti/obiettivi" className="btn-3d btn-3d-amber px-3 py-1.5 text-sm">🎯 Obiettivi e premi</Link>}
       </div>
       </div>
+      {gestore && (
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-green-300 bg-green-50 px-4 py-3">
+          <Link href="/contratti/da-pagare" className="btn-3d btn-3d-green px-4 py-2 text-sm font-bold">💶 Provvigioni da pagare (report di inizio mese)</Link>
+          <p className="min-w-[240px] flex-1 text-sm text-neutral-800">
+            Il report dice per ogni commerciale quanto pagare: <b>{Math.round(QUOTA_ACCONTO_PROVV * 100)}%</b> se il cliente ha pagato il <b>{Math.round(SOGLIA_INCASSO_ACCONTO * 100)}%</b> entro il mese scorso,
+            <b> {Math.round((1 - QUOTA_ACCONTO_PROVV) * 100)}%</b> se la pratica è stata posata e saldata entro il mese scorso.
+          </p>
+        </div>
+      )}
       {persona !== "tutti" && <RiquadroObiettivi utenteId={persona} contratti={tuttiContratti} />}
       {p.ok && <p className="rounded-lg border border-green-300 bg-green-50 px-3 py-2 text-sm font-semibold text-green-900">✅ {p.ok}</p>}
       {p.errore && <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">{p.errore}</p>}
@@ -129,7 +137,7 @@ export default async function ContrattiPage({ searchParams }: { searchParams: Pr
           ["Pagato dai clienti", eur(t.incassato), "incassato finora"],
           ["Da incassare", eur(t.daIncassare), "ancora da pagare dai clienti"],
           ["Provvigioni", eur(t.provvigioni), t.daControllare ? `${t.daControllare} contratti da controllare` : "tutti controllati"],
-          ["Maturate", eur(t.maturate), "sulla parte già pagata dal cliente"],
+          ["Maturate", eur(t.maturate), "80% a 50% pagato + 20% a posa e saldo"],
           ["Liquidate", eur(t.liquidate), "già pagate al commerciale"],
           ["Da liquidare", eur(t.daLiquidare), "maturate e non ancora pagate"],
         ].map(([titolo, valore, nota]) => (
@@ -194,7 +202,6 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
 }) {
   const pg = riepilogoPagamenti(c);
   const pv = riepilogoProvvigione(c);
-  const sulleRate = provvigioneSulleRate(c);
   const campo = "rounded-md border border-neutral-300 px-2 py-1 text-sm";
   return (
     <details id={ancora(c.chiave)} open={aperto} className="group">
@@ -227,7 +234,7 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
           {c.pagamenti.length === 0 ? <p className="text-xs text-neutral-500">Nessuna rata registrata.</p> : (
             <div className="overflow-x-auto rounded-md border border-neutral-200 bg-white">
               <table className="w-full text-xs">
-                <thead className="bg-neutral-50 text-left text-neutral-600"><tr><th className="px-2 py-1">Rata</th><th className="px-2 py-1">Scadenza</th><th className="px-2 py-1 text-right">Importo</th><th className="px-2 py-1 text-right">Pagato</th><th className="px-2 py-1 text-right">Resta</th>{c.provvigione && <th className="px-2 py-1 text-right" title="Parte della provvigione legata a questa rata: matura quando il cliente la paga">Provv.</th>}</tr></thead>
+                <thead className="bg-neutral-50 text-left text-neutral-600"><tr><th className="px-2 py-1">Rata</th><th className="px-2 py-1">Scadenza</th><th className="px-2 py-1 text-right">Importo</th><th className="px-2 py-1 text-right">Pagato</th><th className="px-2 py-1 text-right">Resta</th></tr></thead>
                 <tbody className="divide-y divide-neutral-100">
                   {c.pagamenti.map((r) => (
                     <tr key={r.id} className={r.stato === "ANNULLATA" || r.stato === "SOSTITUITA" ? "text-neutral-400 line-through" : ""}>
@@ -236,7 +243,6 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
                       <td className="px-2 py-1 text-right">{eur(r.importo)}</td>
                       <td className="px-2 py-1 text-right text-green-800">{r.incassato ? eur(r.incassato) : "—"}</td>
                       <td className={`px-2 py-1 text-right ${r.residuo > 0.5 ? "font-semibold text-red-700" : ""}`}>{r.residuo > 0.5 ? eur(r.residuo) : "✓"}</td>
-                      {c.provvigione && <td className="px-2 py-1 text-right text-violet-800">{sulleRate.get(r.id) ? <>{eur(sulleRate.get(r.id)!.quota)}<span className="block text-[10px] text-neutral-500">{sulleRate.get(r.id)!.maturata >= sulleRate.get(r.id)!.quota - 0.005 ? "maturata" : sulleRate.get(r.id)!.maturata > 0 ? `maturati ${eur(sulleRate.get(r.id)!.maturata)}` : "da maturare"}</span></> : "—"}</td>}
                     </tr>
                   ))}
                 </tbody>
@@ -255,7 +261,16 @@ function RigaContratto({ c, gestore, conCommerciale, aperto, torna, percentualeA
           {c.provvigione ? (
             <div className="rounded-md border border-neutral-200 bg-white p-2 text-xs">
               <p>{c.provvigione.percentuale}% di {eur(c.provvigione.base)} = <b className="text-sm">{eur(pv.importo)}</b></p>
-              <p className="text-neutral-600">Maturata {eur(pv.maturata)} · liquidata {eur(pv.liquidata)} · <b className="text-violet-800">da liquidare {eur(pv.daLiquidare)}</b>{pv.futura > 0 ? ` · matura ancora ${eur(pv.futura)} quando il cliente paga il resto` : ""}</p>
+              <div className="my-1 grid gap-1 sm:grid-cols-2">
+                <p className={`rounded px-2 py-1 ${pv.accontoOk ? "bg-green-50 text-green-900" : "bg-neutral-100 text-neutral-600"}`}>
+                  <b>{Math.round(QUOTA_ACCONTO_PROVV * 100)}% acconto</b> · {eur(pv.quotaAcconto)}: {pv.accontoOk ? "✓ maturato" : "non ancora maturato"}
+                </p>
+                <p className={`rounded px-2 py-1 ${pv.saldoStato === "MATURATO" ? "bg-green-50 text-green-900" : pv.saldoStato === "DA_VERIFICARE" ? "bg-amber-50 text-amber-900" : "bg-neutral-100 text-neutral-600"}`}>
+                  <b>{Math.round((1 - QUOTA_ACCONTO_PROVV) * 100)}% saldo</b> · {eur(pv.quotaSaldo)}: {pv.saldoStato === "MATURATO" ? "✓ maturato" : pv.saldoStato === "DA_VERIFICARE" ? "da verificare (posa non nota)" : "non ancora maturato"}
+                </p>
+              </div>
+              {pv.note.length > 0 && <p className="text-amber-800">⏳ Cosa manca: {pv.note.join(" · ")}</p>}
+              <p className="text-neutral-600">Maturata {eur(pv.maturata)} · liquidata {eur(pv.liquidata)} · <b className="text-violet-800">da liquidare {eur(pv.daLiquidare)}</b>{pv.futura > 0 ? ` · maturano ancora ${eur(pv.futura)} (vedi sopra cosa manca)` : ""}</p>
               <p className="text-neutral-500">Controllata da {c.provvigione.controllataDa ?? "—"} il {giorno(c.provvigione.controllataIl)}{c.provvigione.note ? ` · ${c.provvigione.note}` : ""}</p>
               {c.provvigione.liquidazioni.length > 0 && (
                 <ul className="mt-1 divide-y divide-neutral-100 border-t border-neutral-100">

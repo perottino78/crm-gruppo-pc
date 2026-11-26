@@ -3,7 +3,7 @@
 import { prisma } from "../../src/lib/prisma";
 import { contrattiDi, personeVisibili, gestisceProvvigioni } from "../../src/lib/provvigioni/server";
 import { riepilogoPagamenti, riepilogoProvvigione, filtra, totali } from "../../src/lib/provvigioni/calcoli";
-import { salvaProvvigione, registraLiquidazione, annullaLiquidazione, eliminaProvvigione, salvaPercentualeAbituale } from "../../src/app/provvigioni-actions";
+import { registraLiquidazioniMese, salvaProvvigione, registraLiquidazione, annullaLiquidazione, eliminaProvvigione, salvaPercentualeAbituale } from "../../src/app/provvigioni-actions";
 import { sincronizzaScadenzeCommesse } from "../../src/lib/amministrazione/server";
 
 if (!process.env.DATABASE_URL?.includes("localhost")) throw new Error("Solo su database locale di prova!");
@@ -68,9 +68,9 @@ async function main() {
   await redirectA(salvaProvvigione(fd({ contratto: "BC:758/26", utenteId: marco.id, base: "10000", percentuale: "6", torna: "/contratti" })));
   lista = await contrattiDi(vMarco);
   const pvCrm = riepilogoProvvigione(lista.find((c) => c.origine === "CRM")!);
-  verifica(pvCrm.importo === 800 && pvCrm.maturata === 400 && pvCrm.daLiquidare === 400 && pvCrm.stato === "DA_LIQUIDARE", "8% di 10.000 = 800 €, maturati 400 (il cliente ha pagato metà)", pvCrm);
+  verifica(pvCrm.importo === 800 && pvCrm.maturata === 640 && pvCrm.daLiquidare === 640 && pvCrm.stato === "DA_LIQUIDARE" && pvCrm.accontoOk && pvCrm.saldoStato === "NO", "8% di 10.000 = 800 €, maturato l'80% = 640 (il cliente ha pagato il 50%), il 20% non è maturato (pratica non posata)", pvCrm);
   const pvBc = riepilogoProvvigione(lista.find((c) => c.origine === "BCONSOLE")!);
-  verifica(pvBc.importo === 600 && pvBc.maturata === 450, "BConsole: 6% di 10.000 = 600 €, maturati 450 (pagato il 75%)", pvBc);
+  verifica(pvBc.importo === 600 && pvBc.maturata === 480 && pvBc.saldoStato === "DA_VERIFICARE", "BConsole: 6% di 10.000 = 600 €, maturato l'80% = 480 (pagato il 75%), saldo da verificare (posa non nota)", pvBc);
 
   console.log("4. Pagamenti al commerciale");
   const prov = (await prisma.provvigione.findFirst({ where: { contratto: crm.chiave } }))!;
@@ -80,9 +80,9 @@ async function main() {
   verifica(r?.includes("registrato"), "pagamento di 400 € registrato");
   lista = await contrattiDi(vMarco);
   const dopo = riepilogoProvvigione(lista.find((c) => c.origine === "CRM")!);
-  verifica(dopo.liquidata === 400 && dopo.daLiquidare === 0 && dopo.stato === "IN_MATURAZIONE" && dopo.futura === 400, "liquidati 400, gli altri 400 maturano col saldo", dopo);
+  verifica(dopo.liquidata === 400 && dopo.daLiquidare === 240 && dopo.stato === "DA_LIQUIDARE" && dopo.futura === 160, "liquidati 400 (parziale), restano 240 da liquidare e 160 (il 20%) maturano a posa e saldo", dopo);
   const t = totali(lista);
-  verifica(t.provvigioni === 1400 && t.liquidate === 400 && t.daLiquidare === 450, "totali dell'area: provvigioni, liquidate, da liquidare", t);
+  verifica(t.provvigioni === 1400 && t.liquidate === 400 && t.daLiquidare === 720, "totali dell'area: provvigioni, liquidate, da liquidare", t);
   r = await redirectA(salvaProvvigione(fd({ contratto: crm.chiave, utenteId: marco.id, base: "1000", percentuale: "8", torna: "/contratti" })));
   verifica(r?.includes("già stati liquidati"), "non si può abbassare la provvigione sotto quanto già pagato", r);
   r = await redirectA(eliminaProvvigione(fd({ id: prov.id, torna: "/contratti" })));
@@ -97,6 +97,26 @@ async function main() {
   await redirectA(annullaLiquidazione(fd({ id: liq.id, torna: "/contratti" })));
   r = await redirectA(eliminaProvvigione(fd({ id: prov.id, torna: "/contratti" })));
   verifica(r?.includes("da controllare") && (await prisma.provvigione.count()) === 1, "annullato il pagamento, la provvigione si può togliere");
+
+  console.log("5. Report di inizio mese (80/20) e «Segna pagato tutto»");
+  const oggi = new Date();
+  const prossimo = new Date(Date.UTC(oggi.getUTCFullYear(), oggi.getUTCMonth() + 1, 1));
+  const mese = `${prossimo.getUTCFullYear()}-${String(prossimo.getUTCMonth() + 1).padStart(2, "0")}`;
+  const { reportMensile } = await import("../../src/lib/provvigioni/report");
+  const rep = reportMensile(await contrattiDi(await personeVisibili(giorgia)), mese);
+  const gMarco = rep.gruppi.find((x) => x.commercialeId === marco.id);
+  verifica(!!gMarco && gMarco.righe.length === 1 && gMarco.daPagare === 480, "report: a Marco si paga l'80% del progetto BConsole (480), la commessa del CRM non ha più provvigione", gMarco?.daPagare);
+  g.__utente = marco;
+  r = await redirectA(registraLiquidazioniMese(fd({ utenteId: marco.id, mese, torna: "/contratti/da-pagare?mese=" + mese })));
+  verifica((await prisma.liquidazioneProvvigione.count()) === 0, "il commerciale non segna pagato dal report", r);
+  g.__utente = giorgia;
+  r = await redirectA(registraLiquidazioniMese(fd({ utenteId: marco.id, mese, torna: "/contratti/da-pagare?mese=" + mese })));
+  verifica(r?.includes(";/contratti/da-pagare?mese=" + mese) && r.includes("480.00") && (await prisma.liquidazioneProvvigione.count()) === 1, "«Segna pagato tutto»: liquidazione di 480 € e si torna al report", r);
+  r = await redirectA(registraLiquidazioniMese(fd({ utenteId: marco.id, mese, torna: "/contratti/da-pagare?mese=" + mese })));
+  verifica(r?.includes("niente da pagare") && (await prisma.liquidazioneProvvigione.count()) === 1, "secondo clic: niente doppio pagamento", r);
+  const bcProv = (await prisma.provvigione.findFirst({ where: { contratto: "BC:758/26" } }))!;
+  r = await redirectA(registraLiquidazione(fd({ provvigioneId: bcProv.id, importo: "120", data: "2026-12-01", torna: "/contratti/da-pagare?mese=" + mese })));
+  verifica(r?.includes(";/contratti/da-pagare?mese=") && r.includes("registrato"), "«Segna pagata» dal report torna al report", r);
 
   console.log(`\n${ok} verifiche riuscite, ${ko} fallite`);
 }

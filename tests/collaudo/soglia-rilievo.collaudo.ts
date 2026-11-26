@@ -41,6 +41,8 @@ const fd = (o: Record<string, string | string[]>) => { const f = new FormData();
 const dove = async (p: Promise<unknown>) => { try { await p; return null; } catch (e) { const d = (e as { digest?: string }).digest ?? ""; if (!d.startsWith("NEXT_REDIRECT")) throw e; return decodeURIComponent(d.split(";")[2] ?? ""); } };
 
 import { registraPagamento, segnaControllatoEstratto } from "../../src/app/pagamenti-actions";
+import { salvaFatturaVendita } from "../../src/app/vendite-actions";
+import { impostaStatoScadenza } from "../../src/app/amministrazione-actions";
 import { sincronizzaScadenzeCommesse } from "../../src/lib/amministrazione/server";
 import { whereDaControllare } from "../../src/lib/amministrazione/da-controllare";
 
@@ -117,6 +119,25 @@ async function main() {
   await dove(segnaControllatoEstratto(fd({ id: m.id })));
   const mm = await prisma.scadenza.findUniqueOrThrow({ where: { id: m.id } });
   verifica(!!mm.controllatoEstrattoIl && mm.controllatoDaNome === "Debora Girodo" && (await prisma.scadenza.count({ where: { ...whereDaControllare(), id: m.id } })) === 0, "controllato: esce dalla lista");
+
+  console.log("7. Caso Rita Esposito: fattura saldata da 4.500 € collegata alla pratica da 9.000 € → «Rilievo da programmare»");
+  g.__utente = debora;
+  const rita = await nuova(7, { totaleVendita: 9000, accontoImporto: 4500, accontoPercentuale: 50, stato: "IN_ATTESA_ACCONTO" });
+  const fv = await prisma.fatturaVendita.create({ data: { chiave: "BCV|535", sezionale: "FE", numero: "535/FE/2026", data: new Date("2026-11-10T12:00:00Z"), clienteNome: "ROSSI MARIO", clienteId: cli.id, imponibile: 4500, iva: 0, totale: 4500, detrazione: true } });
+  await prisma.scadenza.create({ data: { tipo: "INCASSO", descrizione: "Fattura 535/FE/2026", controparte: "ROSSI MARIO", importo: 4500, stato: "PAGATA", pagatoManuale: 4500, origine: "FATTURA_VENDITA", chiaveImport: `FV:${fv.id}:0`, fatturaVenditaId: fv.id, numeroDocumento: "535/FE/2026" } });
+  verifica((await prisma.commessa.findUniqueOrThrow({ where: { id: rita.id } })).stato === "IN_ATTESA_ACCONTO", "prima del collegamento la pratica è «In attesa acconto»");
+  await dove(salvaFatturaVendita(fd({ id: fv.id, commessa: "C2026-007", cliente: "ROSSI MARIO" })));
+  const dopoRita = await prisma.commessa.findUniqueOrThrow({ where: { id: rita.id } });
+  verifica(dopoRita.stato === "RILIEVO_DA_PROGRAMMARE" && dopoRita.accontoIncassato, "collegata la fattura saldata: «Rilievo da programmare» e acconto incassato", { stato: dopoRita.stato });
+  verifica(await rilievoApp(rita.id), "parte il task di fissare il rilievo");
+
+  console.log("8. «Saldata» dallo scadenzario completo avanza la pratica come un pagamento");
+  const sald = await nuova(8, { stato: "IN_ATTESA_ACCONTO" });
+  await sincronizzaScadenzeCommesse(sald.id);
+  const accSc = await prisma.scadenza.findFirstOrThrow({ where: { commessaId: sald.id, origine: "COMMESSA_ACCONTO" } });
+  await prisma.scadenza.update({ where: { id: accSc.id }, data: { importo: 5000 } });
+  await dove(impostaStatoScadenza(fd({ id: accSc.id, stato: "Saldata" })));
+  verifica((await prisma.commessa.findUniqueOrThrow({ where: { id: sald.id } })).stato === "RILIEVO_DA_PROGRAMMARE", "con 5.000 su 10.000 segnati «Saldata» la pratica passa a «Rilievo da programmare»");
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   smtp.close();

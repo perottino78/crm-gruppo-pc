@@ -124,3 +124,13 @@ test("«Arrivo in magazzino» si può aprire anche mentre il passo corrente è a
   assert.equal(passoDaMostrare(r.passi, r.corrente, "ARRIVO"), "ARRIVO");
   assert.equal(passoDaMostrare(r.passi, r.corrente, "POSA"), "MATERIALE");
 });
+
+test("l'incasso si evidenzia solo dopo la fattura di acconto ma resta sempre apribile (Debora 26/11/2026)", () => {
+  const { passi, corrente } = passiPratica(base);
+  assert.equal(stato(base).INCASSO, "I", "pratica appena nata: l'incasso non è evidenziato");
+  assert.equal(stato({ ...base, progettoCreatoIl: adesso, benvenutoIl: adesso }).INCASSO, "I", "senza fattura di acconto ancora no");
+  assert.equal(stato({ ...base, progettoCreatoIl: adesso, benvenutoIl: adesso, fatturaAccontoIl: adesso }).INCASSO, "O", "con la fattura è il suo turno");
+  assert.equal(stato({ ...base, progettoCreatoIl: adesso, benvenutoIl: adesso, fatturaAccontoIl: adesso, viaLibera: true }).INCASSO, "F");
+  assert.equal(passoDaMostrare(passi, corrente, "INCASSO"), "INCASSO", "apribile anche quando non è il suo turno");
+  assert.equal(passoDaMostrare(passi, corrente, "SALDO"), "SALDO");
+});

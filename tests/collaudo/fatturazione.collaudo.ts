@@ -15,6 +15,8 @@ const fd = (o: Record<string, string | string[]>) => { const f = new FormData();
 const redirectA = async (p: Promise<unknown>): Promise<string> => {
   try { await p; return ""; } catch (e) { const d = (e as { digest?: string }).digest ?? ""; if (d.startsWith("NEXT_REDIRECT")) return decodeURIComponent(d.split(";")[2] ?? ""); throw e; }
 };
+// le fatture create senza data prendono «oggi»: le successive non possono avere una data precedente
+const oggiRoma = new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Rome" });
 const idDa = (url: string) => url.split("/").pop()!.split("?")[0];
 
 async function main() {
@@ -170,7 +172,7 @@ async function main() {
   // 7) ritenuta d'acconto 23% su 20% (provvigioni a una finanziaria, fattura 313/FE/2026)
   const riId = idDa(await redirectA(A.creaFattura(fd({ clienteId: altro.id, tipo: "FATTURA", sezionale: "PC" }))));
   await redirectA(A.salvaRigheFattura(fd({ id: riId, nuova_descrizione: "Intermediazione - Compensi di intermediazione mese di: Giugno 2026", nuova_prezzo: "67,50", nuova_iva: "N4" })));
-  await redirectA(A.salvaTestataFattura(fd({ id: riId, tipo: "FATTURA", data: "2026-11-24", metodoPagamento: "BONIFICO", conRitenuta: "on", ritenutaAliquota: "23", ritenutaBase: "20" })));
+  await redirectA(A.salvaTestataFattura(fd({ id: riId, tipo: "FATTURA", data: oggiRoma, metodoPagamento: "BONIFICO", conRitenuta: "on", ritenutaAliquota: "23", ritenutaBase: "20" })));
   let ri = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: riId } });
   verifica(ri.ritenutaImporto === 3.11 && ri.totale === 67.5, "ritenuta 3,11 € su 67,50 €, totale fattura invariato", ri);
   await redirectA(A.emettiFattura(fd({ id: riId })));
@@ -180,6 +182,31 @@ async function main() {
   verifica(!!ri.xml && ri.xml.includes("<DatiRitenuta><TipoRitenuta>RT02</TipoRitenuta><ImportoRitenuta>3.11</ImportoRitenuta><AliquotaRitenuta>4.60</AliquotaRitenuta><CausalePagamento>R</CausalePagamento></DatiRitenuta>") && ri.xml.includes("<Ritenuta>SI</Ritenuta>") && ri.xml.includes("<ImportoPagamento>64.39</ImportoPagamento>") && ri.xml.includes("<ImportoTotaleDocumento>67.50</ImportoTotaleDocumento>"), "XML con DatiRitenuta, righe soggette e importo di pagamento netto");
   const scRi = await prisma.scadenza.findMany({ where: { fatturaVenditaId: ri.fatturaVenditaId ?? "x" } });
   verifica(scRi.length === 1 && scRi[0].importo === 64.39 && (scRi[0].note ?? "").includes("Ritenuta"), "scadenza di incasso 64,39 € con nota sulla ritenuta", scRi);
+
+  // 8) IBAN della banca di partenza e acconti di BConsole non agganciati alla commessa (richieste di Debora 26/11/2026)
+  const cli2 = await prisma.cliente.create({ data: { nome: "SERENO SILVIA", brandId: b.id, tipoAnagrafica: "PERSONA_FISICA", nomePersona: "Silvia", cognome: "Sereno", codiceFiscale: "SRNSLV80A41L219K", indirizzo: "Via Po 3", cap: "10100", comune: "Torino", provincia: "TO" } });
+  const prev2 = await prisma.preventivo.create({ data: { clienteId: cli2.id, brandId: b.id, commercialeId: comm.id, oggetto: "Porta", numeroOfferta: 2, totaleNetto: 4000, totaleIva: 400, aliquotaIva: 10 } });
+  await prisma.rigaPreventivo.create({ data: { preventivoId: prev2.id, testoLibero: "Porta blindata", quantita: 1, prezzoUnitario: 4000 } });
+  const c2 = await prisma.commessa.create({ data: { numero: 13, anno: 2026, preventivoId: prev2.id, clienteId: cli2.id, brandId: b.id, totaleVendita: 4400, totaleImponibile: 4000, accontoImporto: 2200 } });
+  // saldo creato PRIMA che l'acconto di BConsole sia stato caricato: nessuna deduzione, ma il riquadro lo propone
+  const saldo2Id = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "SALDO", data: "2026-11-21" }))));
+  verifica((await prisma.rigaFatturaEmessa.count({ where: { fatturaId: saldo2Id } })) === 1, "saldo senza acconti: solo la riga dell'offerta");
+  const nuova = await prisma.fatturaEmessa.findUniqueOrThrow({ where: { id: saldo2Id } });
+  verifica(nuova.banca === "Banca Crédit Agricole Cariparma" && nuova.iban === "IT84H0623030870000040608082", "fattura nuova: banca di partenza con il suo IBAN già riempito", { b: nuova.banca, i: nuova.iban });
+  await prisma.fatturaVendita.create({ data: { chiave: "bc-acc-sereno", tipoDocumento: "TD02", numero: "300/FE/2026", data: new Date("2026-10-01T12:00:00Z"), clienteId: cli2.id, commessaId: null, clienteNome: "SERENO SILVIA", imponibile: 1000, iva: 100, totale: 1100, origine: "XML" } });
+  const saldo3Id = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "SALDO", data: "2026-11-21" }))));
+  const r3 = await prisma.rigaFatturaEmessa.findMany({ where: { fatturaId: saldo3Id }, orderBy: { posizione: "asc" } });
+  verifica(r3.length === 2 && r3[1].prezzo === -1000 && r3[1].aliquota === 10 && r3[1].descrizione.includes("300/FE/2026"), "acconto BConsole non agganciato (una sola commessa aperta): riga con il segno meno e IVA dell'acconto", r3.map((r) => [r.descrizione, r.prezzo, r.aliquota]));
+  await redirectA(A.aggiungiAccontiDaDedurre(fd({ id: saldo2Id, acconto: "300/FE/2026" })));
+  const r2 = await prisma.rigaFatturaEmessa.findMany({ where: { fatturaId: saldo2Id }, orderBy: { posizione: "asc" } });
+  verifica(r2.length === 2 && r2[1].prezzo === -1000, "«Aggiungi acconti da dedurre» aggiunge la riga con il segno meno", r2.map((r) => [r.descrizione, r.prezzo]));
+  const errDoppio = await redirectA(A.aggiungiAccontiDaDedurre(fd({ id: saldo2Id, acconto: "300/FE/2026" })));
+  verifica(errDoppio.includes("Nessun acconto") && (await prisma.rigaFatturaEmessa.count({ where: { fatturaId: saldo2Id } })) === 2, "lo stesso acconto non si aggiunge due volte", errDoppio);
+  // con due commesse aperte l'acconto non agganciato non si attribuisce a caso
+  const prev3 = await prisma.preventivo.create({ data: { clienteId: cli2.id, brandId: b.id, commercialeId: comm.id, oggetto: "Zanzariera", numeroOfferta: 3, totaleNetto: 100, totaleIva: 10, aliquotaIva: 10 } });
+  await prisma.commessa.create({ data: { numero: 14, anno: 2026, preventivoId: prev3.id, clienteId: cli2.id, brandId: b.id, totaleVendita: 110, totaleImponibile: 100 } });
+  const saldo4Id = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "SALDO", data: "2026-11-21" }))));
+  verifica((await prisma.rigaFatturaEmessa.count({ where: { fatturaId: saldo4Id } })) === 1, "due commesse aperte: l'acconto non agganciato non si deduce da solo");
 
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();

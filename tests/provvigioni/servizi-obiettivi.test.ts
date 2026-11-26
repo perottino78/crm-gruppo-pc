@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { importoFuoriProvvigione, baseProvvigione, eServizioDaSpostare, prodottiServizi, SERVIZI_LISTINO, labelServizio } from "../../src/lib/provvigioni/servizi";
-import { provvigioneSulleRate, type Contratto } from "../../src/lib/provvigioni/calcoli";
+import { maturazioneProvvigione, type Contratto } from "../../src/lib/provvigioni/calcoli";
 import { avanzamento, estremi, vendutoNelPeriodo, vendutoPerMese, emailSettimanale, settimanaIso, incoraggiamento, nomePeriodo } from "../../src/lib/provvigioni/obiettivi";
 
 const riga = (o: Partial<Parameters<typeof importoFuoriProvvigione>[0][number]> = {}) =>
@@ -42,17 +42,16 @@ test("servizi: optional da spostare e listino di partenza", () => {
   assert.equal(labelServizio("SERVIZI_AUTOSCALA"), "Autoscala");
 });
 
-test("provvigione rata per rata: acconto e saldo maturano quando il cliente paga", () => {
+test("provvigione 80/20: acconto al 50% pagato, saldo a posa e tutto pagato", () => {
   const c = {
-    dovuto: 10000, provvigione: { id: "p", base: 8000, percentuale: 10, importo: 800, controllataIl: new Date(), liquidazioni: [] },
+    origine: "CRM", dovuto: 10000, provvigione: { id: "p", base: 8000, percentuale: 10, importo: 800, controllataIl: new Date(), liquidazioni: [] }, posatoIl: null,
     pagamenti: [
-      { id: "a", descrizione: "Acconto", importo: 3000, incassato: 3000, residuo: 0, scadenza: null, ultimoIncasso: null, stato: "PAGATA" },
-      { id: "s", descrizione: "Saldo", importo: 7000, incassato: 0, residuo: 7000, scadenza: null, ultimoIncasso: null, stato: "APERTA" },
+      { id: "a", descrizione: "Acconto", importo: 5000, incassato: 5000, residuo: 0, scadenza: null, ultimoIncasso: null, stato: "PAGATA" },
+      { id: "s", descrizione: "Saldo", importo: 5000, incassato: 0, residuo: 5000, scadenza: null, ultimoIncasso: null, stato: "APERTA" },
     ],
   } as unknown as Contratto;
-  const r = provvigioneSulleRate(c);
-  assert.deepEqual(r.get("a"), { quota: 240, maturata: 240 });
-  assert.deepEqual(r.get("s"), { quota: 560, maturata: 0 });
+  const m = maturazioneProvvigione(c);
+  assert.deepEqual([m.quotaAcconto, m.quotaSaldo, m.accontoMaturato, m.saldoMaturato], [640, 160, 640, 0]);
 });
 
 test("obiettivi: estremi del mese e dell'anno", () => {
