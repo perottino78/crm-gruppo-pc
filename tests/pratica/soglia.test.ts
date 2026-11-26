@@ -21,3 +21,10 @@ test("finanziamento: conta l'approvazione; sblocco dell'amministratore vale semp
   assert.equal(viaLiberaRilievo({ ...base, accontoTipo: "FINANZIAMENTO", finanziamentoStato: "APPROVATO" }), true);
   assert.equal(viaLiberaRilievo({ ...base, incassato: 1000, sbloccato: true }), true);
 });
+
+test("caso Rita Esposito: fattura da 4.500 € saldata su una commessa da 9.000 € = 50%, il rilievo parte", () => {
+  assert.equal(viaLiberaRilievo({ ...base, totale: 9000, incassato: 4500 }), true);
+  assert.equal(viaLiberaRilievo({ ...base, totale: 9000, incassato: 4499.99 }), true, "un centesimo di arrotondamento non blocca");
+  assert.equal(viaLiberaRilievo({ ...base, totale: 9000, incassato: 4499.3 }), false, "sotto la tolleranza resta bloccato");
+  assert.equal(viaLiberaRilievo({ ...base, totale: 9001, incassato: 4500.5 }), true, "totale dispari: 50% = 4.500,50");
+});

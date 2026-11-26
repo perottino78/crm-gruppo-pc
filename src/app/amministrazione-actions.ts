@@ -541,6 +541,9 @@ export async function saldaManualmente(fd: FormData) {
   if (importo <= 0) return;
   await prisma.scadenza.update({ where: { id }, data: { pagatoManuale: cent(s.pagatoManuale + importo), note: [s.note, `Saldata a mano ${eur(importo)}: ${motivo}`].filter(Boolean).join("\n") } });
   await ricalcolaScadenza(id);
+  // un incasso di una pratica deve far avanzare la pratica (stato, task, rilievo) come gli altri incassi
+  const praticaSalda = s.tipo === "INCASSO" ? await praticaDiIncasso(id) : null;
+  if (praticaSalda) await avanzaDopoIncasso(praticaSalda);
   await registra("Scadenza", id, "Saldata a mano", `${s.controparte} · ${s.descrizione} · ${eur(importo)} — ${motivo}`, u.nome);
   aggiorna();
 }
@@ -580,6 +583,9 @@ export async function impostaStatoScadenza(fd: FormData) {
   }
   await prisma.scadenza.update({ where: { id }, data: dati });
   await ricalcolaScadenza(id);
+  // «Saldata», «Chiusa», «Rit. Fis Compensazione»… su un incasso di pratica: la pratica avanza come con un pagamento registrato
+  const praticaStato = s.tipo === "INCASSO" && voce.effetto !== "NESSUNO" && voce.effetto !== "APRE" ? await praticaDiIncasso(id) : null;
+  if (praticaStato) await avanzaDopoIncasso(praticaStato);
   await registra("Scadenza", id, "Stato cambiato", `${s.controparte} · ${s.descrizione}: ${voce.nome}`, u.nome);
   aggiorna();
 }
