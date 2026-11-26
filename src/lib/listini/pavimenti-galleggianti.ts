@@ -115,3 +115,12 @@ export function labelPavgal(tipologia: string): string | null {
 export const GUIDA_PAVGAL =
   "Quantità = m² (arrotonda per eccesso e aggiungi lo sfrido per gli angoli). Aggiungi i piedini al m² del formato, la posa (50 €/m², non scontabile), " +
   "la trasferta e, se serve, autoscala/facchinaggio e angolari. Attenzione al peso sui piani superiori (60 kg/m²). Si vende a scatole intere.";
+
+// Scheda tecnica per il cliente (nov 2026): 2 pagine con dati di prova del gres da 20 mm antiscivolo, collezioni e sistema di posa,
+// fatta da noi con logo e dati di P&C (il fornitore non è nominato). PDF in public/cataloghi/pavimenti-galleggianti/, pagine JPG in pagine/.
+export const DESCRIZIONE_CLIENTE_PAVGAL =
+  "Pavimento galleggiante per esterni: piastrelle in gres porcellanato colorato in massa da 20 mm, rettificate, antiscivolo R11 (DIN 51130, classe B+C), " +
+  "posate a secco su piedini regolabili, senza colla né massetto. Assorbimento d'acqua inferiore a 0,1%, resistenti al gelo e agli sbalzi termici, " +
+  "flessione superiore a 45 N/mm². Piano sottostante ispezionabile; peso circa 44-46 kg/m².";
+
+export const CATALOGHI_PAVGAL = [{ nome: "Scheda tecnica Pavimento galleggiante", url: "/cataloghi/pavimenti-galleggianti/Pavimenti-galleggianti-scheda-tecnica.pdf" }];

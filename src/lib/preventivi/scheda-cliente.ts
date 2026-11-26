@@ -7,6 +7,8 @@ import { SCHEDE_CHIRENTI } from "../listini/chirenti";
 import { SCHEDE_VETRATE } from "../listini/schede-vetrate";
 import { PREFISSO_ZENITH, DESCRIZIONE_CLIENTE_ZENITH, CATALOGHI_ZENITH } from "../listini/zenith";
 import { PREFISSO_FIDRA, DESCRIZIONE_CLIENTE_FIDRA, CATALOGHI_FIDRA } from "../listini/fidra";
+import { PREFISSO_LUCILLA, DESCRIZIONE_CLIENTE_LUCILLA, CATALOGHI_LUCILLA } from "../listini/lucilla";
+import { PREFISSO_PAVGAL, DESCRIZIONE_CLIENTE_PAVGAL, CATALOGHI_PAVGAL } from "../listini/pavimenti-galleggianti";
 import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
 
 export type SchedaCliente = {
@@ -43,6 +45,16 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
   {
     prefisso: PREFISSO_PLASMA30_TV,
     scheda: { chiave: "PLASMA30", nome: CATALOGHI_PLASMA30[0].nome, descrizione: DESCRIZIONE_CLIENTE_PLASMA30_TV, pdf: CATALOGHI_PLASMA30[0].url, pagine: pagine("/cataloghi/plasma30", 16) },
+  },
+  // Pergola Lucilla: una scheda per tutte le configurazioni (parete, isola, patio, tiranti, trapezoidale)
+  {
+    prefisso: PREFISSO_LUCILLA,
+    scheda: { chiave: "LUCILLA", nome: CATALOGHI_LUCILLA[0].nome, descrizione: DESCRIZIONE_CLIENTE_LUCILLA, pdf: CATALOGHI_LUCILLA[0].url, pagine: pagine("/cataloghi/lucilla", 2) },
+  },
+  // Pavimenti galleggianti in gres da 20 mm (tutte le collezioni: una sola scheda)
+  {
+    prefisso: PREFISSO_PAVGAL,
+    scheda: { chiave: "PAVGAL", nome: CATALOGHI_PAVGAL[0].nome, descrizione: DESCRIZIONE_CLIENTE_PAVGAL, pdf: CATALOGHI_PAVGAL[0].url, pagine: pagine("/cataloghi/pavimenti-galleggianti", 2) },
   },
   // Vetrate Chirenti (Book Pro Cam / Solco Pro Cam): scheda tecnica del sito chirenti.it, una per sistema (temperato e stratificato insieme)
   ...Object.values(SCHEDE_CHIRENTI).map((c) => ({
