@@ -10,6 +10,8 @@ import { puoAmministrazione, eMeseChiuso, registra as registraLog } from "@/lib/
 import { leggiFileFatture } from "@/lib/fatture/fatturapa";
 import { importaFatturaVendita, creaScadenzeVendita, type EsitoVendita } from "@/lib/fatture/vendite";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
+import { avanzaDopoIncasso } from "@/app/flusso-actions";
+import { ricalcolaStatoCommessa } from "@/lib/pratica/stato-server";
 
 const str = (fd: FormData, k: string) => { const v = fd.get(k); return typeof v === "string" && v.trim() ? v.trim() : null; };
 const num = (fd: FormData, k: string) => leggiQuantita(str(fd, k));
@@ -124,6 +126,9 @@ export async function salvaFatturaVendita(fd: FormData) {
       await prisma.$transaction(async (tx) => { await tx.scadenza.deleteMany({ where: { id: { in: scad.map((s) => s.id) } } }); await creaScadenzeVendita(tx, f.id); });
     }
   }
+  // fattura già saldata (es. detrazione) collegata a una pratica: la pratica avanza (50% raggiunto → rilievo da programmare); la vecchia si riallinea
+  if (comm) await avanzaDopoIncasso(comm.id).catch(() => undefined);
+  if (commessaPrima && commessaPrima !== comm?.id) await ricalcolaStatoCommessa(commessaPrima).catch(() => undefined);
   await registraLog("FATTURA_VENDITA", f.id, "MODIFICATA", `Fattura ${f.numero} — ${cli?.nome ?? f.clienteNome}`, u.nome);
   aggiorna(f.id);
   redirect(`/amministrazione/fatture-vendita/${f.id}?ok=${encodeURIComponent("Salvato.")}`);

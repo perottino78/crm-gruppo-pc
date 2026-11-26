@@ -325,6 +325,20 @@ export async function togliRataIntermedia(formData: FormData) {
   revalidatePath(`/commesse/${s.commessaId}`);
 }
 
+/** «Ricalcola» dello scadenzario della pratica (Debora 26/11/2026): rifà acconto, rate e saldo dai dati della commessa e riallinea lo stato. */
+export async function ricalcolaScadenzarioPratica(formData: FormData) {
+  const u = await getCurrentUser();
+  if (!puoIncassiOFatturazione(u)) return;
+  const id = str(formData, "commessaId");
+  if (!id) return;
+  const { sincronizzaScadenzeCommesse } = await import("@/lib/amministrazione/server");
+  await sincronizzaScadenzeCommesse(id);
+  await avanzaDopoIncasso(id);
+  await ricalcolaStato(id);
+  await log(id, `Scadenzario ricalcolato da ${u!.nome}.`);
+  revalidatePath(`/commesse/${id}`);
+}
+
 const TITOLO_SBLOCCO = "Sbloccare il rilievo senza il 50% incassato";
 
 /** Sotto il 50% il rilievo non parte: si chiede all'amministratore (email e task) di farlo partire lo stesso. */
