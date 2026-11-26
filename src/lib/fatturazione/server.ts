@@ -5,9 +5,10 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 import { getConfig } from "@/lib/leadIngest";
-import { CEDENTE, codiceIvaDa, metodoPagamento, SEZIONALI, sezionale, tipoFattura } from "./tabelle";
+import { CEDENTE, codiceIvaDa, ibanUfficiale, metodoPagamento, SEZIONALI, sezionale, tipoFattura } from "./tabelle";
 import { cent, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
 import { xmlFatturaPA } from "./xml";
+import { aliquotaDa, nonAgganciatiAttribuibili, type AccontoEmesso } from "./acconti";
 import { creaScadenzeVendita } from "@/lib/fatture/vendite";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 
@@ -111,8 +112,12 @@ async function ibanDi(tx: Tx, banca: string | null): Promise<string | null> {
   if (!banca) return null;
   const parola = banca.replace(/^Banca\s+/i, "").split(/\s+/)[0];
   const conti = await tx.contoFinanziario.findMany({ where: { tipo: "BANCA", attivo: true, iban: { not: null } }, select: { nome: true, banca: true, iban: true } });
-  return conti.find((c) => `${c.nome} ${c.banca ?? ""}`.toLowerCase().includes(parola.toLowerCase()))?.iban ?? null;
+  // l'IBAN del conto in Amministrazione vince; se manca vale quello ufficiale dell'azienda (tabelle.ts)
+  return conti.find((c) => `${c.nome} ${c.banca ?? ""}`.toLowerCase().includes(parola.toLowerCase()))?.iban ?? ibanUfficiale(banca);
 }
+
+/** IBAN di una banca dell'azienda (conto in Amministrazione, altrimenti quello ufficiale); serve anche alla creazione della fattura. */
+export const ibanDellaBanca = (banca: string | null) => ibanDi(prisma as unknown as Tx, banca);
 
 /**
  * Emissione: assegna il numero (vero o di prova), prepara l'XML e, se vera e fiscale, crea la fattura di vendita con le
@@ -261,7 +266,7 @@ export async function datiPdfFattura(id: string) {
     fattura: f,
     dati: {
       tipo: f.tipo, numero: f.numero ?? "BOZZA", data: f.data, stato: f.stato, cliente: { nome: f.clienteNome, righe: righeCliente(f) }, righe: f.righe,
-      causale: causaleConCointestato(f.causale, cointestatarioDa(f.cointestatario)), riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban, rate,
+      causale: causaleConCointestato(f.causale, cointestatarioDa(f.cointestatario)), riferimento: f.riferimento, note: f.note, metodoPagamento: f.metodoPagamento, banca: f.banca, iban: f.iban ?? (f.banca && metodoPagamento(f.metodoPagamento).banca ? await ibanDellaBanca(f.banca) : null), rate,
       bollo, addebitoBollo: f.addebitoBollo, ritenutaAliquota: f.ritenutaAliquota, ritenutaBase: f.ritenutaBase, ddt: f.ddt.filter((d) => d.numero).map((d) => `${d.prova ? "PROVA " : ""}${d.numero}/${d.anno} del ${d.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}`),
       fatturaCollegata: collegata?.numero ? `${collegata.numero} del ${collegata.data.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" })}` : null, destinazione: f.destinazione,
       trasporto: { causale: f.causaleTrasporto, aCura: ({ MITTENTE: "Mittente", DESTINATARIO: "Destinatario", VETTORE: "Vettore" } as Record<string, string>)[f.trasportoACura ?? ""] ?? f.trasportoACura, vettore: f.vettore, aspetto: f.aspettoBeni, colli: f.colli, peso: f.pesoLordo, porto: f.porto, inizio: f.inizioTrasporto },
@@ -295,4 +300,25 @@ export async function motivoNoRiapertura(f: { id: string; stato: string; tipo: s
   const scad = await prisma.scadenza.findMany({ where: { fatturaVenditaId: f.fatturaVenditaId }, include: { abbinamenti: { select: { id: true } } } });
   if (scad.some((s) => s.abbinamenti.length > 0 || s.pagatoManuale > 0 || s.ritenuta > 0 || s.pagataIl)) return "Ci sono già incassi registrati su questa fattura: si corregge con una nota di credito.";
   return null;
+}
+
+
+/**
+ * Acconti già fatturati per una commessa, da dedurre nel saldo: quelli emessi dal CRM (EMESSA, non di prova) e le fatture di acconto
+ * importate da BConsole (TD02) agganciate alla commessa o, se il cliente ha UNA sola commessa aperta, non agganciate a nessuna.
+ * Lo stesso numero non compare due volte (si confronta il numero: le fatture del CRM sono anche in FatturaVendita).
+ */
+export async function accontiEmessiDellaCommessa(commessaId: string, clienteId: string | null, aliquotaDefault: number): Promise<AccontoEmesso[]> {
+  const crm = await prisma.fatturaEmessa.findMany({ where: { commessaId, tipo: "ACCONTO", stato: "EMESSA", numero: { not: null } }, select: { numero: true, data: true, imponibile: true, righe: { select: { aliquota: true }, take: 1 } } });
+  const bc = await prisma.fatturaVendita.findMany({ where: { commessaId, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
+  if (clienteId) {
+    const aperte = await prisma.commessa.findMany({ where: { clienteId, stato: { notIn: ["ANNULLATA", "CHIUSA"] } }, select: { id: true } });
+    if (nonAgganciatiAttribuibili(aperte.map((c) => c.id), commessaId)) {
+      bc.push(...(await prisma.fatturaVendita.findMany({ where: { clienteId, commessaId: null, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } })));
+    }
+  }
+  return [
+    ...crm.map((x) => ({ numero: x.numero!, data: x.data, imponibile: x.imponibile, aliquota: x.righe[0]?.aliquota ?? aliquotaDefault, fonte: "CRM" as const })),
+    ...bc.map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: aliquotaDa(x.imponibile, x.iva, aliquotaDefault), fonte: "BCONSOLE" as const })),
+  ];
 }

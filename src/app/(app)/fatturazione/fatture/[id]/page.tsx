@@ -8,10 +8,11 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { numeroCommessa } from "@/lib/commesse";
 import { perInput } from "@/lib/calendario/tempo";
-import { ASPETTO_BENI, BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
+import { ASPETTO_BENI, BANCHE_AZIENDA, IBAN_BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
-import { controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
-import { salvaTestataFattura, salvaRigheFattura, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi, segnaScartataSdi, riapriFattura } from "@/app/fatturazione-actions";
+import { accontiDaDedurre, descrizioneDeduzione } from "@/lib/fatturazione/acconti";
+import { accontiEmessiDellaCommessa, controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
+import { salvaTestataFattura, salvaRigheFattura, aggiungiAccontiDaDedurre, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi, segnaScartataSdi, riapriFattura } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
@@ -25,7 +26,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
   if (!f) notFound();
   const conti = await prisma.contoFinanziario.findMany({ where: { tipo: "BANCA", attivo: true, iban: { not: null } }, select: { nome: true, banca: true, iban: true } });
   const ibanPerBanca: Record<string, string> = {};
-  for (const b of BANCHE_AZIENDA) { const parola = b.replace(/^Banca\s+/i, "").split(/\s+/)[0].toLowerCase(); const c = conti.find((x) => `${x.nome} ${x.banca ?? ""}`.toLowerCase().includes(parola)); if (c?.iban) ibanPerBanca[b] = c.iban; }
+  for (const b of BANCHE_AZIENDA) { const parola = b.replace(/^Banca\s+/i, "").split(/\s+/)[0].toLowerCase(); const c = conti.find((x) => `${x.nome} ${x.banca ?? ""}`.toLowerCase().includes(parola)); const iban = c?.iban ?? IBAN_BANCHE_AZIENDA[b]; if (iban) ibanPerBanca[b] = iban; }
   const [commessa, collegata, note, reale] = await Promise.all([
     f.commessaId ? prisma.commessa.findUnique({ where: { id: f.commessaId }, select: { id: true, numero: true, anno: true } }) : null,
     f.fatturaCollegataId ? prisma.fatturaEmessa.findUnique({ where: { id: f.fatturaCollegataId }, select: { id: true, numero: true, data: true } }) : null,
@@ -40,6 +41,10 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
   const mancano = controlliEmissione(f, f.righe);
   const rate = Array.isArray(f.rate) && f.rate.length ? (f.rate as { data: string; importo: number }[]).map((r) => ({ data: new Date(r.data), importo: r.importo })) : rateDaMetodo(f.metodoPagamento, f.data, t.daPagare);
   const stato = STATI_FATTURA[f.stato];
+  // saldo in bozza: acconti emessi (CRM e BConsole, anche non agganciati) non ancora presenti come riga «A dedurre acconto…»
+  const accontiMancanti = bozza && f.tipo === "SALDO" && f.commessaId
+    ? accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId, f.clienteId, f.righe[0]?.aliquota ?? 10), f.righe.map((r) => r.descrizione))
+    : [];
 
   return (
     <div className="space-y-4">
@@ -153,6 +158,20 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
           {bozza && <button className="btn-3d btn-3d-blue text-sm px-4 py-2">Salva i dati</button>}
         </fieldset>
       </form>
+
+      {accontiMancanti.length > 0 && (
+        <form action={aggiungiAccontiDaDedurre} className="card-fase border-amber-300 bg-amber-50">
+          <input type="hidden" name="id" value={f.id} />
+          <h3 className="font-bold text-neutral-900 mb-1">➕ Acconti da dedurre</h3>
+          <p className="text-xs text-neutral-700 mb-2">Questi acconti del cliente risultano già fatturati ma non sono nelle righe. Aggiungendoli entra una riga con il segno meno e l&apos;IVA dell&apos;acconto.</p>
+          <ul className="text-sm mb-2 space-y-1">
+            {accontiMancanti.map((a) => (
+              <li key={a.numero}><label className="flex items-center gap-2"><input type="checkbox" name="acconto" value={a.numero.replace(/\s+/g, "").toUpperCase()} defaultChecked /> {descrizioneDeduzione(a)} — <b>{eur(-Math.abs(a.imponibile))}</b> (IVA {a.aliquota}%){a.fonte === "BCONSOLE" ? " · da BConsole" : ""}</label></li>
+            ))}
+          </ul>
+          <button className="btn-3d btn-3d-amber text-sm px-4 py-2">➕ Aggiungi alle righe</button>
+        </form>
+      )}
 
       {/* Righe */}
       <form action={salvaRigheFattura} id="righe" className="card-fase">

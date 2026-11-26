@@ -1,6 +1,6 @@
 // PDF della fattura (copia di cortesia) e del DDT di uscita, con il generatore minimale di src/lib/ordini/pdf.ts.
 import { DocumentoPdf, aCapo } from "@/lib/ordini/pdf";
-import { CEDENTE, DICHIARAZIONE_CCNL, codiceIvaDa, metodoPagamento, tipoFattura } from "./tabelle";
+import { CEDENTE, DICHIARAZIONE_CCNL, DICITURA_CONAI, DICITURA_COPIA_AGENZIA, codiceIvaDa, metodoPagamento, tipoFattura } from "./tabelle";
 import { importoRiga, totali } from "./calcoli";
 import { LOGO_PC } from "@/lib/ordini/logo-pc";
 
@@ -137,17 +137,20 @@ export function pdfFattura(d: DatiPdfFattura): Uint8Array {
     pdf.y -= 12;
   }
   if (tf.trasporto && d.trasporto) trasporto(pdf, d.trasporto);
-  // ANNOTAZIONI in fondo (modello di Giorgia): bollo, note scritte a mano e la dichiarazione sul contratto collettivo
-  const annot = [d.bollo ? "Imposta di bollo assolta in modo virtuale ai sensi del DM 17/06/2014." : null, d.note || null, tf.fiscale && !tf.notaCredito ? DICHIARAZIONE_CCNL : null].filter(Boolean) as string[];
-  if (annot.length) {
-    const linee = annot.flatMap((a) => aCapo(a, L - 16, 8));
-    pdf.spazio(linee.length * 10 + 30);
-    pdf.y -= 10;
-    pdf.rett(M, pdf.y - linee.length * 10 - 8, L, linee.length * 10 + 24, 0.96);
-    pdf.testo(M + 8, pdf.y, "ANNOTAZIONI", 8, true);
-    pdf.y -= 12;
-    for (const l of linee) { pdf.testo(M + 8, pdf.y, l, 8); pdf.y -= 10; }
-  }
+  // ANNOTAZIONI in fondo alla pagina (ultima pagina della fattura, come il blocco trasporto dei DDT): bollo, note scritte a mano,
+  // dichiarazione sul contratto collettivo, contributo CONAI (fatture fiscali non note di credito) e copia dell'Agenzia (tutti i documenti fiscali, note di credito comprese).
+  const fiscaleNoNota = tf.fiscale && !tf.notaCredito;
+  const annot = [d.bollo ? "Imposta di bollo assolta in modo virtuale ai sensi del DM 17/06/2014." : null, d.note || null, fiscaleNoNota ? DICHIARAZIONE_CCNL : null, fiscaleNoNota ? DICITURA_CONAI : null, tf.fiscale ? DICITURA_COPIA_AGENZIA : null].filter(Boolean) as string[];
+  const linee = annot.flatMap((a) => aCapo(a, L - 16, 8));
+  const altezza = linee.length * 10 + 24;
+  const fondo = 48; // sopra il piè di pagina «pagina n di tot»
+  const cima = fondo + altezza;
+  if (pdf.y - 6 < cima) pdf.nuovaPagina(); // il contenuto arriva fin lì: il riquadro va da solo nella pagina dopo
+  pdf.rett(M, fondo, L, altezza, 0.96);
+  pdf.y = cima - 16;
+  pdf.testo(M + 8, pdf.y, "ANNOTAZIONI", 8, true);
+  pdf.y -= 12;
+  for (const l of linee) { pdf.testo(M + 8, pdf.y, l, 8); pdf.y -= 10; }
   return pdf.toBytes((n, tot) => `${CEDENTE.denominazione} - ${d.numero} - pagina ${n} di ${tot}`);
 }
 
