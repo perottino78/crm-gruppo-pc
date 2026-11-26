@@ -72,6 +72,7 @@ async function main() {
   const mPavel = posta.find((m) => m.a.includes("pavel@gruppopec.com"));
   verifica(mPavel && /METHOD:REQUEST/.test(mPavel.dati) && /text\/calendar/.test(mPavel.dati), "l'email del commerciale contiene l'invito di calendario");
   verifica(mPavel && /DTSTART:20260714T133000Z/.test(mPavel.dati.replace(/=\r\n/g, "")), "nell'invito le 15:30 di luglio (ora legale) = 13:30 UTC");
+  verifica(mPavel && /^From: .*\(P&C ONE\)/mi.test(mPavel.dati) && /^Reply-To: .*@/mi.test(mPavel.dati), "l'invito interno ha un mittente con il nome di chi lo inserisce e «rispondi a» lui", mPavel?.dati.split("\r\n").filter((r) => /^(From|Reply-To):/i.test(r)));
   const mCli = posta.find((m) => m.a.includes("mario@cliente.it"));
   verifica(mCli && !/crm-gruppo-pc\.vercel\.app/.test(mCli.dati), "al cliente non arriva il link interno del CRM");
 
