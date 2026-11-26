@@ -54,3 +54,16 @@ test("nomi dei colori dal sito La Faenza", () => {
   assert.ok(cat.prodotti.some((p) => p.colore.startsWith("Middle grey — VIS 90MG")));
   assert.ok(cat.modelli.every((m) => m.immagineUrl.startsWith("/immagini/pavimenti-galleggianti/") && !m.immagineUrl.endsWith("terrazza.jpg")));
 });
+
+test("scheda tecnica per il cliente: una sola per tutte le collezioni, con PDF e pagine", async () => {
+  const { schedaCliente, schedeDelleTipologie } = await import("../../src/lib/preventivi/scheda-cliente");
+  const a = schedaCliente("PAVGAL_GEA_60X60");
+  const b = schedaCliente("PAVGAL_YKSG_30X120");
+  assert.ok(a && b && a.chiave === "PAVGAL" && b.chiave === "PAVGAL");
+  assert.equal(a.pagine.length, 2);
+  assert.ok(a.descrizione.includes("R11") && !/faenza|imola/i.test(a.descrizione));
+  assert.equal(schedeDelleTipologie(["PAVGAL_GEA_60X60", "PAVGAL_VIS_90X90"]).length, 1);
+  const root = new URL("../../public", import.meta.url).pathname;
+  const fs = await import("node:fs");
+  for (const f of [a.pdf, ...a.pagine]) assert.ok(fs.existsSync(root + f), f);
+});
