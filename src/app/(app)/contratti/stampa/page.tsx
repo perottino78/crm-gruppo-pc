@@ -79,7 +79,7 @@ export default async function StampaProvvigioni({ searchParams }: { searchParams
       <h2 className="mt-4 text-sm font-bold">Dettaglio dei contratti</h2>
       <table className="mt-1 w-full border-collapse">
         <thead><tr className="bg-neutral-100 text-left [&>th]:border [&>th]:border-neutral-300 [&>th]:px-2 [&>th]:py-1">
-          <th>Data</th><th>Contratto</th><th>Cliente</th>{persona === "tutti" && <th>Commerciale</th>}<th className="text-right">Base</th><th className="text-right">%</th><th className="text-right">Provvigione</th><th>Cliente ha pagato</th><th className="text-right">Maturata</th><th className="text-right">Pagata</th><th className="text-right">Da pagare</th>
+          <th>Data</th><th>Contratto</th><th>Cliente</th>{persona === "tutti" && <th>Commerciale</th>}<th className="text-right">Base</th><th className="text-right">%</th><th className="text-right">Provvigione</th><th>Cliente ha pagato</th><th>80% acconto</th><th>20% saldo</th><th>Cosa manca</th><th className="text-right">Maturata</th><th className="text-right">Pagata</th><th className="text-right">Da pagare</th>
         </tr></thead>
         <tbody>
           {contratti.map((c) => {
@@ -91,13 +91,16 @@ export default async function StampaProvvigioni({ searchParams }: { searchParams
                 <td className="text-right">{c.provvigione ? `${c.provvigione.percentuale}%` : "—"}</td>
                 <td className="text-right">{c.provvigione ? eur(pv.importo) : NOMI_STATO_PROVVIGIONE.DA_CONTROLLARE}</td>
                 <td>{Math.round(pg.quota * 100)}% ({eur(pg.incassato)})</td>
+                <td>{c.provvigione ? (pv.accontoOk ? `✓ ${eur(pv.quotaAcconto)}` : "no") : "—"}</td>
+                <td>{c.provvigione ? (pv.saldoStato === "MATURATO" ? `✓ ${eur(pv.quotaSaldo)}` : pv.saldoStato === "DA_VERIFICARE" ? "da verificare" : "no") : "—"}</td>
+                <td className="text-[11px]">{pv.note.join(" · ") || "—"}</td>
                 <td className="text-right">{eur(pv.maturata)}</td><td className="text-right">{eur(pv.liquidata)}</td><td className="text-right font-bold">{eur(pv.daLiquidare)}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <p className="mt-2 text-neutral-500">La provvigione matura in proporzione a quanto ha pagato il cliente (acconto, saldo…); i servizi e le pratiche a costo netto (ENEA, autoscala, facchinaggio) non entrano nella base.</p>
+      <p className="mt-2 text-neutral-500">La provvigione si paga 80% a titolo di acconto (quando il cliente ha pagato il 50% della commessa) e 20% a saldo (a pratica posata e tutto pagato); per lo storico BConsole la posa non è nota e il saldo resta «da verificare»; i servizi e le pratiche a costo netto (ENEA, autoscala, facchinaggio) non entrano nella base.</p>
     </div>
   );
 }
