@@ -202,6 +202,14 @@ async function main() {
   verifica(r2.length === 2 && r2[1].prezzo === -1000, "«Aggiungi acconti da dedurre» aggiunge la riga con il segno meno", r2.map((r) => [r.descrizione, r.prezzo]));
   const errDoppio = await redirectA(A.aggiungiAccontiDaDedurre(fd({ id: saldo2Id, acconto: "300/FE/2026" })));
   verifica(errDoppio.includes("Nessun acconto") && (await prisma.rigaFatturaEmessa.count({ where: { fatturaId: saldo2Id } })) === 2, "lo stesso acconto non si aggiunge due volte", errDoppio);
+  // emissione del saldo senza dedurre l'acconto già fatturato: rifiutata
+  await prisma.rigaFatturaEmessa.deleteMany({ where: { fatturaId: saldo3Id, prezzo: { lt: 0 } } });
+  await prisma.fatturaEmessa.update({ where: { id: saldo3Id }, data: { codiceFiscale: "RSSMRA80A01L219M", partitaIva: null, indirizzo: "Via Roma 1", cap: "10090", comune: "Rosta", nazione: "IT", codiceDestinatario: "0000000" } });
+  const errSenza = await redirectA(A.emettiFattura(fd({ id: saldo3Id })));
+  verifica(decodeURIComponent(errSenza).includes("non sono dedotti"), "saldo emesso senza dedurre l'acconto: rifiutato", errSenza);
+  // con la spunta «Non dedurre gli acconti» il controllo non blocca (può fermarsi per altri motivi, non per questo)
+  const errSpunta = await redirectA(A.emettiFattura(fd({ id: saldo3Id, senzaDeduzione: "on" })));
+  verifica(!decodeURIComponent(errSpunta).includes("non sono dedotti"), "con «Non dedurre gli acconti» il saldo non è più bloccato per questo", errSpunta);
   // con due commesse aperte l'acconto non agganciato non si attribuisce a caso
   const prev3 = await prisma.preventivo.create({ data: { clienteId: cli2.id, brandId: b.id, commercialeId: comm.id, oggetto: "Zanzariera", numeroOfferta: 3, totaleNetto: 100, totaleIva: 10, aliquotaIva: 10 } });
   await prisma.commessa.create({ data: { numero: 14, anno: 2026, preventivoId: prev3.id, clienteId: cli2.id, brandId: b.id, totaleVendita: 110, totaleImponibile: 100 } });

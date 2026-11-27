@@ -6,9 +6,9 @@ import { prisma } from "@/lib/prisma";
 import { puo, type ConPermessi } from "@/lib/permessi/catalogo";
 import { getConfig } from "@/lib/leadIngest";
 import { CEDENTE, codiceIvaDa, ibanUfficiale, metodoPagamento, SEZIONALI, sezionale, tipoFattura } from "./tabelle";
-import { cent, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
+import { cent, importoRiga, numeroFattura, numeroProva, progressivoDa, prossimoNumero, rateDaMetodo, serveBollo, statoDdtDaRighe, totali } from "./calcoli";
 import { xmlFatturaPA } from "./xml";
-import { aliquotaDa, nonAgganciatiAttribuibili, type AccontoEmesso } from "./acconti";
+import { accontiDaDedurre, aliquotaDa, nonAgganciatiAttribuibili, partiAcconto, type AccontoEmesso } from "./acconti";
 import { creaScadenzeVendita } from "@/lib/fatture/vendite";
 import { residuoScadenza } from "@/lib/amministrazione/server";
 
@@ -123,13 +123,22 @@ export const ibanDellaBanca = (banca: string | null) => ibanDi(prisma as unknown
  * Emissione: assegna il numero (vero o di prova), prepara l'XML e, se vera e fiscale, crea la fattura di vendita con le
  * scadenze di incasso (come le fatture importate da BConsole). Le righe dei DDT collegati diventano fatturate.
  */
-export async function emetti(tx: Tx, id: string, nome: string, reale: boolean) {
+export async function emetti(tx: Tx, id: string, nome: string, reale: boolean, opz: { senzaDeduzione?: boolean } = {}) {
   const f = await tx.fatturaEmessa.findUniqueOrThrow({ where: { id }, include: { righe: { orderBy: [{ posizione: "asc" }, { id: "asc" }] }, ddt: true } });
   if (f.stato === "EMESSA" || f.stato === "ANNULLATA") throw new Error("La fattura è già emessa.");
   const cointest = cointestatarioDa(f.cointestatario);
   const mancano = [...controlliEmissione(f, f.righe), ...mancaCointestato(cointest).map((m) => `Manca: ${m}.`)];
   if (mancano.length) throw new Error(mancano.join(" "));
   const tf = tipoFattura(f.tipo);
+  // un documento fiscale (non nota di credito) col totale negativo sarebbe un rimborso: serve la nota di credito
+  if (tf.fiscale && f.tipo !== "NOTA_CREDITO" && totali(f.righe, { bollo: false }).totale < -0.005) throw new Error("Il totale è negativo: gli acconti dedotti superano l'importo. Per restituire una somma al cliente serve una nota di credito; altrimenti rivedi gli importi.");
+  if (f.tipo === "SALDO" && f.commessaId && !opz.senzaDeduzione) {
+    const c = await tx.commessa.findUnique({ where: { id: f.commessaId }, select: { clienteId: true, accontoIncassato: true, preventivo: { select: { aliquotaIva: true } } } });
+    const emessi = await accontiEmessiDellaCommessa(f.commessaId, c?.clienteId ?? f.clienteId, c?.preventivo.aliquotaIva ?? ALIQUOTA_PREDEFINITA);
+    const mancanti = accontiDaDedurre(emessi, f.righe.map((r) => r.descrizione));
+    if (mancanti.length) throw new Error(`Gli acconti già fatturati non sono dedotti dal saldo (${[...new Set(mancanti.map((a) => a.numero))].join(", ")}): aggiungili alle righe, oppure spunta «Non dedurre gli acconti» se non vanno dedotti.`);
+    if (c?.accontoIncassato && !emessi.length && !f.righe.some((r) => /acconto\s+fattura/i.test(r.descrizione))) throw new Error("L'acconto della commessa risulta incassato ma non c'è nessuna fattura di acconto da dedurre: emetti prima la fattura di acconto, oppure spunta «Non dedurre gli acconti» se non serve.");
+  }
   const anno = f.data.getUTCFullYear();
   // la proforma non è un documento fiscale: numerazione a parte, mai nelle vendite
   const proforma = !tf.fiscale;
@@ -234,13 +243,13 @@ export async function righeDaOfferta(preventivoId: string) {
     include: { righe: { orderBy: [{ ordine: "asc" }, { id: "asc" }], include: { prodotto: true, optionali: { include: { optional: true } } } } },
   });
   if (!p) return [];
-  const aliquota = p.aliquotaIva ?? 22;
+  const aliquota = p.aliquotaIva ?? ALIQUOTA_PREDEFINITA;
   // sconto dell'offerta spalmato sulle righe (totaleNetto = imponibile già scontato)
   const lordo = p.righe.reduce((t, r) => t + r.quantita * r.prezzoUnitario + r.optionalPrezzo + r.optionali.reduce((s, o) => s + o.quantita * o.prezzoUnitario, 0), 0);
   const fattore = lordo > 0 && p.totaleNetto > 0 ? p.totaleNetto / lordo : 1;
   // misure definitive di produzione (ordine al fornitore): in fattura devono coincidere con quelle delle certificazioni del fornitore
   const definitive = new Map((await prisma.rigaOrdine.findMany({ where: { rigaPreventivoId: { in: p.righe.map((r) => r.id) }, misureDefinitive: { not: null } }, select: { rigaPreventivoId: true, misureDefinitive: true } })).map((x) => [x.rigaPreventivoId!, x.misureDefinitive!]));
-  return p.righe.map((r) => {
+  const righeOfferta = p.righe.map((r) => {
     const opt = r.optionali.map((o) => o.optional.nome).join(", ");
     const nomeProd = r.testoLibero ?? (r.prodotto ? `${r.prodotto.tipologia.replace(/_/g, " ")} ${r.prodotto.colore}`.trim() : "Voce");
     const misura = definitive.has(r.id) ? ` ${definitive.get(r.id)}` : r.misuraLarghezza ? ` ${r.misuraLarghezza}${r.misuraAltezza ? `×${r.misuraAltezza}` : ""}` : "";
@@ -250,7 +259,15 @@ export async function righeDaOfferta(preventivoId: string) {
       quantita: r.quantita, um: "pz", prezzo: r.quantita > 0 ? Math.round((cent(unit * r.quantita) / r.quantita) * 1e8) / 1e8 : cent(unit), aliquota: r.aliquotaIva ?? aliquota, natura: null as string | null,
     };
   }).filter((r) => r.prezzo !== 0 || r.descrizione);
+  // lo sconto spalmato riga per riga può lasciare scarti di centesimi: il totale deve coincidere con quello dell'offerta
+  const somma = righeOfferta.reduce((t, r) => t + cent(r.prezzo * r.quantita), 0);
+  const scarto = cent(p.totaleNetto - somma);
+  if (p.totaleNetto > 0 && scarto !== 0 && Math.abs(scarto) <= 0.1 && righeOfferta.length) righeOfferta.push({ descrizione: "Arrotondamento", quantita: 1, um: null as unknown as string, prezzo: scarto, aliquota: righeOfferta[righeOfferta.length - 1].aliquota, natura: null });
+  return righeOfferta;
 }
+
+/** Aliquota di ripiego quando l'offerta non ne ha una (una sola per tutta la fatturazione). */
+export const ALIQUOTA_PREDEFINITA = 22;
 
 export { codiceIvaDa, CEDENTE };
 
@@ -309,7 +326,9 @@ export async function motivoNoRiapertura(f: { id: string; stato: string; tipo: s
  * Lo stesso numero non compare due volte (si confronta il numero: le fatture del CRM sono anche in FatturaVendita).
  */
 export async function accontiEmessiDellaCommessa(commessaId: string, clienteId: string | null, aliquotaDefault: number): Promise<AccontoEmesso[]> {
-  const crm = await prisma.fatturaEmessa.findMany({ where: { commessaId, tipo: "ACCONTO", stato: "EMESSA", numero: { not: null } }, select: { numero: true, data: true, imponibile: true, righe: { select: { aliquota: true }, take: 1 } } });
+  const crm = await prisma.fatturaEmessa.findMany({ where: { commessaId, tipo: "ACCONTO", stato: "EMESSA", numero: { not: null } }, select: { id: true, numero: true, data: true, imponibile: true, righe: { select: { quantita: true, prezzo: true, sconto: true, aliquota: true, natura: true } } } });
+  // note di credito emesse su quegli acconti: la parte stornata non si deduce
+  const note = crm.length ? await prisma.fatturaEmessa.findMany({ where: { tipo: "NOTA_CREDITO", stato: "EMESSA", fatturaCollegataId: { in: crm.map((x) => x.id) } }, select: { fatturaCollegataId: true, imponibile: true } }) : [];
   const bc = await prisma.fatturaVendita.findMany({ where: { commessaId, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
   if (clienteId) {
     const aperte = await prisma.commessa.findMany({ where: { clienteId, stato: { notIn: ["ANNULLATA", "CHIUSA"] } }, select: { id: true } });
@@ -318,7 +337,12 @@ export async function accontiEmessiDellaCommessa(commessaId: string, clienteId: 
     }
   }
   return [
-    ...crm.map((x) => ({ numero: x.numero!, data: x.data, imponibile: x.imponibile, aliquota: x.righe[0]?.aliquota ?? aliquotaDefault, fonte: "CRM" as const })),
+    ...crm.flatMap((x) => {
+      const stornato = note.filter((n) => n.fatturaCollegataId === x.id).reduce((t, n) => t + Math.abs(n.imponibile), 0);
+      const righe = x.righe.map((r) => ({ imponibile: importoRiga(r), aliquota: r.aliquota, natura: r.natura ?? null }));
+      const parti = righe.length ? partiAcconto(righe, stornato) : partiAcconto([{ imponibile: x.imponibile, aliquota: aliquotaDefault, natura: null }], stornato);
+      return parti.map((p) => ({ numero: x.numero!, data: x.data, imponibile: p.imponibile, aliquota: p.aliquota, natura: p.natura, fonte: "CRM" as const }));
+    }),
     ...bc.map((x) => ({ numero: x.numero, data: x.data, imponibile: x.imponibile, aliquota: aliquotaDa(x.imponibile, x.iva, aliquotaDefault), fonte: "BCONSOLE" as const })),
   ];
 }

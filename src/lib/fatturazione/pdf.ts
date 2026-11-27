@@ -41,9 +41,14 @@ function intestazione(pdf: DocumentoPdf, titolo: string, numero: string, data: D
   pdf.y -= 22;
 }
 
+const eurSegno = (n: number) => (n < 0 ? `- ${eur(Math.abs(n))}` : eur(n));
+/** Riga di deduzione di un acconto già fatturato («A dedurre acconto fattura n. …», importo negativo). */
+const eDeduzione = (r: Riga) => /^\s*a dedurre acconto/i.test(r.descrizione) && importoRiga(r) < 0;
+const pulisci = (t: string) => t.replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+
 function tabellaRighe(pdf: DocumentoPdf, righe: Riga[], conPrezzi: boolean) {
   const M = pdf.margine, L = pdf.larghezza;
-  const col = conPrezzi ? { cod: M, descr: M + 55, q: M + 285, um: M + 292, prezzo: M + 375, sc: M + 405, iva: M + 440, tot: M + L } : { cod: M, descr: M + 60, q: M + L - 50, um: M + L, prezzo: 0, sc: 0, iva: 0, tot: 0 };
+  const col = conPrezzi ? { cod: M, descr: M + 58, q: M + 290, um: M + 298, prezzo: M + 378, sc: M + 408, iva: M + 443, tot: M + L } : { cod: M, descr: M + 60, q: M + L - 50, um: M + L, prezzo: 0, sc: 0, iva: 0, tot: 0 };
   const testa = () => {
     pdf.rett(M, pdf.y - 4, L, 14, 0.88);
     pdf.testo(col.cod + 2, pdf.y, "Codice", 8, true);
@@ -59,25 +64,45 @@ function tabellaRighe(pdf: DocumentoPdf, righe: Riga[], conPrezzi: boolean) {
     pdf.y -= 16;
   };
   testa();
-  const largDescr = (conPrezzi ? col.q - 35 : col.q - 40) - col.descr;
-  for (const r of righe) {
-    const linee = aCapo(r.descrizione, largDescr, 8);
-    if (pdf.spazio(linee.length * 10 + 4)) testa();
-    pdf.testo(col.cod + 2, pdf.y, (r.codice ?? "").slice(0, 12), 7);
-    linee.forEach((l, i) => pdf.testo(col.descr, pdf.y - i * 10, l, 8));
+  const largDescr = (conPrezzi ? col.q - 38 : col.q - 40) - col.descr;
+  const riga = (r: Riga, corsivo = false) => {
+    const linee = aCapo(pulisci(r.descrizione), largDescr, 8);
+    if (pdf.spazio(linee.length * 10 + 8)) testa(); // la riga non si spezza fra due pagine
+    pdf.testo(col.cod + 2, pdf.y, (r.codice ?? "").slice(0, 13), 7, false, corsivo);
+    linee.forEach((l, i) => pdf.testo(col.descr, pdf.y - i * 10, l, 8, false, corsivo));
     const solaDescrizione = conPrezzi && r.prezzo === 0;
-    if (!solaDescrizione) pdf.testoDx(col.q, pdf.y, q(r.quantita), 8);
+    if (!solaDescrizione) pdf.testoDx(col.q, pdf.y, q(r.quantita), 8, false, corsivo);
     if (conPrezzi) {
       if (!solaDescrizione) {
-        pdf.testo(col.um, pdf.y, (r.um ?? "").slice(0, 8), 8);
-        pdf.testoDx(col.prezzo, pdf.y, eur(r.prezzo), 8);
-        if (r.sconto) pdf.testoDx(col.sc, pdf.y, q(r.sconto), 8);
-        pdf.testoDx(col.iva, pdf.y, r.natura ?? `${q(r.aliquota)}%`, 8);
-        pdf.testoDx(col.tot, pdf.y, eur(importoRiga(r)), 8);
+        pdf.testo(col.um, pdf.y, (r.um ?? "").slice(0, 8), 8, false, corsivo);
+        pdf.testoDx(col.prezzo, pdf.y, eurSegno(r.prezzo), 8, false, corsivo);
+        if (r.sconto) pdf.testoDx(col.sc, pdf.y, q(r.sconto), 8, false, corsivo);
+        pdf.testoDx(col.iva, pdf.y, r.natura ?? `${q(r.aliquota)}%`, 8, false, corsivo);
+        pdf.testoDx(col.tot, pdf.y, eurSegno(importoRiga(r)), 8, false, corsivo);
       }
     } else pdf.testoDx(col.um, pdf.y, r.um ?? "", 8);
     pdf.y -= linee.length * 10 + 6;
     pdf.linea(M, pdf.y + 10, M + L, pdf.y + 10, 0.2);
+  };
+  const dedotte = conPrezzi ? righe.filter(eDeduzione) : [];
+  const normali = conPrezzi ? righe.filter((r) => !eDeduzione(r)) : righe;
+  for (const r of normali) riga(r);
+  if (dedotte.length) {
+    // totale delle forniture prima delle deduzioni, poi gli acconti già fatturati in una sezione a sé
+    const tot = normali.reduce((s, r) => s + importoRiga(r), 0);
+    const totAcconti = dedotte.reduce((s, r) => s + importoRiga(r), 0);
+    if (pdf.spazio(14 + 16 + dedotte.length * 16 + 16)) testa();
+    pdf.testoDx(col.tot - 80, pdf.y - 2, "Totale lavori/forniture", 8.5, true);
+    pdf.testoDx(col.tot, pdf.y - 2, eur(tot), 8.5, true);
+    pdf.y -= 20;
+    pdf.rett(M, pdf.y - 4, L, 13, 0.94);
+    pdf.testo(col.descr, pdf.y, "Acconti già fatturati, da dedurre", 8, true);
+    pdf.y -= 17;
+    for (const r of dedotte) riga(r, true);
+    pdf.testoDx(col.tot - 80, pdf.y - 2, "Totale acconti già fatturati", 8.5, true);
+    pdf.testoDx(col.tot, pdf.y - 2, eurSegno(totAcconti), 8.5, true);
+    pdf.linea(col.tot - 230, pdf.y - 8, M + L, pdf.y - 8, 0.8);
+    pdf.y -= 22;
   }
 }
 

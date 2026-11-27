@@ -1,7 +1,7 @@
 // Generatore PDF minimale (nessuna libreria esterna): testo Helvetica, linee, più pagine.
 // Usato per l'ordine fornitore da scaricare o allegare all'email.
 
-type Op = { t: "testo"; x: number; y: number; s: string; size: number; bold?: boolean } | { t: "linea"; x1: number; y1: number; x2: number; y2: number; w?: number } | { t: "rett"; x: number; y: number; w: number; h: number; grigio: number } | { t: "img"; x: number; y: number; w: number; h: number };
+type Op = { t: "testo"; x: number; y: number; s: string; size: number; bold?: boolean; italic?: boolean } | { t: "linea"; x1: number; y1: number; x2: number; y2: number; w?: number } | { t: "rett"; x: number; y: number; w: number; h: number; grigio: number } | { t: "img"; x: number; y: number; w: number; h: number };
 
 /** Immagine JPEG incorporabile nel PDF (una sola per documento, es. il logo). */
 export type ImmagineJpeg = { larghezza: number; altezza: number; base64: string };
@@ -52,9 +52,9 @@ export class DocumentoPdf {
   get pagina() { return this.pagine[this.pagine.length - 1]; }
   nuovaPagina() { this.pagine.push([]); this.y = H - 40; }
   spazio(h: number) { if (this.y - h < 50) { this.nuovaPagina(); return true; } return false; }
-  testo(x: number, y: number, s: string, size = 9, bold = false) { this.pagina.push({ t: "testo", x, y, s, size, bold }); }
+  testo(x: number, y: number, s: string, size = 9, bold = false, italic = false) { this.pagina.push({ t: "testo", x, y, s, size, bold, italic }); }
   /** Testo allineato a destra sul bordo xDestro. */
-  testoDx(xDestro: number, y: number, s: string, size = 9, bold = false) { this.testo(xDestro - larghezzaTesto(s, size, bold), y, s, size, bold); }
+  testoDx(xDestro: number, y: number, s: string, size = 9, bold = false, italic = false) { this.testo(xDestro - larghezzaTesto(s, size, bold), y, s, size, bold, italic); }
   linea(x1: number, y1: number, x2: number, y2: number, w = 0.5) { this.pagina.push({ t: "linea", x1, y1, x2, y2, w }); }
   rett(x: number, y: number, w: number, h: number, grigio = 0.92) { this.pagina.push({ t: "rett", x, y, w, h, grigio }); }
   /** Disegna il JPEG (x,y = angolo in basso a sinistra) alla larghezza w; l'altezza segue le proporzioni. Ritorna l'altezza. */
@@ -81,11 +81,12 @@ export class DocumentoPdf {
     const nPag = tot;
     // oggetti: 1 catalogo, 2 pagine, 3 font, 4 font bold, poi per pagina: pagina + contenuto
     const obj = (n: number, corpo: Uint8Array | string) => { offsets[n] = pos; pushStr(`${n} 0 obj\n`); typeof corpo === "string" ? pushStr(corpo) : push(corpo); pushStr("\nendobj\n"); };
-    const kids = Array.from({ length: nPag }, (_, i) => `${5 + i * 2} 0 R`).join(" ");
+    const kids = Array.from({ length: nPag }, (_, i) => `${6 + i * 2} 0 R`).join(" ");
     obj(1, "<< /Type /Catalog /Pages 2 0 R >>");
     obj(2, `<< /Type /Pages /Kids [${kids}] /Count ${nPag} >>`);
     obj(3, "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
     obj(4, "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+    obj(5, "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>");
     this.pagine.forEach((ops, i) => {
       const contenuto: number[] = [];
       const add = (s: string) => contenuto.push(...enc.encode(s));
@@ -94,15 +95,15 @@ export class DocumentoPdf {
         if (op.t === "rett") add(`${f(op.grigio)} g ${f(op.x)} ${f(op.y)} ${f(op.w)} ${f(op.h)} re f 0 g\n`);
         else if (op.t === "img") add(`q ${f(op.w)} 0 0 ${f(op.h)} ${f(op.x)} ${f(op.y)} cm /Im1 Do Q\n`);
         else if (op.t === "linea") add(`${f(op.w ?? 0.5)} w ${f(op.x1)} ${f(op.y1)} m ${f(op.x2)} ${f(op.y2)} l S\n`);
-        else { add(`BT /${op.bold ? "F2" : "F1"} ${f(op.size)} Tf ${f(op.x)} ${f(op.y)} Td (`); contenuto.push(...codifica(op.s)); add(") Tj ET\n"); }
+        else { add(`BT /${op.bold ? "F2" : op.italic ? "F3" : "F1"} ${f(op.size)} Tf ${f(op.x)} ${f(op.y)} Td (`); contenuto.push(...codifica(op.s)); add(") Tj ET\n"); }
       }
       if (piePagina) { add(`BT /F1 7 Tf 40 25 Td (`); contenuto.push(...codifica(piePagina(i + 1, tot))); add(") Tj ET\n"); }
       const flusso = new Uint8Array(contenuto);
-      obj(5 + i * 2, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>${this.jpeg ? ` /XObject << /Im1 ${5 + nPag * 2} 0 R >>` : ""} >> /Contents ${6 + i * 2} 0 R >>`);
-      offsets[6 + i * 2] = pos;
-      pushStr(`${6 + i * 2} 0 obj\n<< /Length ${flusso.length} >>\nstream\n`); push(flusso); pushStr("\nendstream\nendobj\n");
+      obj(6 + i * 2, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >>${this.jpeg ? ` /XObject << /Im1 ${6 + nPag * 2} 0 R >>` : ""} >> /Contents ${7 + i * 2} 0 R >>`);
+      offsets[7 + i * 2] = pos;
+      pushStr(`${7 + i * 2} 0 obj\n<< /Length ${flusso.length} >>\nstream\n`); push(flusso); pushStr("\nendstream\nendobj\n");
     });
-    let nObj = 5 + nPag * 2;
+    let nObj = 6 + nPag * 2;
     if (this.jpeg) {
       const dati = Uint8Array.from(Buffer.from(this.jpeg.base64, "base64"));
       offsets[nObj] = pos;

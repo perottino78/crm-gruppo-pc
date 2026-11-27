@@ -39,3 +39,32 @@ test("acconti non agganciati: solo con una sola commessa aperta e proprio quella
   assert.equal(nonAgganciatiAttribuibili([], "c1"), false);
   assert.equal(nonAgganciatiAttribuibili(["c2"], "c1"), false);
 });
+
+import { partiAcconto } from "../../src/lib/fatturazione/acconti";
+
+test("acconto a IVA mista: una riga di deduzione per aliquota", () => {
+  const parti = partiAcconto([{ imponibile: 1000, aliquota: 10, natura: null }, { imponibile: 2000, aliquota: 22, natura: null }, { imponibile: 500, aliquota: 22, natura: null }]);
+  assert.deepEqual(parti.map((p) => [p.aliquota, p.imponibile]), [[22, 2500], [10, 1000]]);
+});
+
+test("la parte stornata con nota di credito non si deduce", () => {
+  assert.deepEqual(partiAcconto([{ imponibile: 1000, aliquota: 10, natura: null }], 1000), []);
+  assert.equal(partiAcconto([{ imponibile: 1000, aliquota: 10, natura: null }], 400)[0].imponibile, 600);
+});
+
+test("acconto esente: la riga di deduzione porta la natura", () => {
+  const a: AccontoEmesso = { numero: "10/FE/2026", data: new Date("2026-10-01T12:00:00Z"), imponibile: 500, aliquota: 0, natura: "N4", fonte: "CRM" };
+  assert.equal(rigaDeduzione(a).natura, "N4");
+  assert.equal(rigaDeduzione({ ...a, aliquota: 10, natura: "N4" }).natura, null);
+});
+
+test("lo stesso acconto con due aliquote dà due deduzioni, e la copia BConsole dello stesso numero si scarta", () => {
+  const d = new Date("2026-10-01T12:00:00Z");
+  const r = accontiDaDedurre([
+    { numero: "7/FE/2026", data: d, imponibile: 1000, aliquota: 10, fonte: "CRM" },
+    { numero: "7/FE/2026", data: d, imponibile: 2000, aliquota: 22, fonte: "CRM" },
+    { numero: "7/FE/2026", data: d, imponibile: 3000, aliquota: 22, fonte: "BCONSOLE" },
+  ]);
+  assert.equal(r.length, 2);
+  assert.ok(r.every((x) => x.fonte === "CRM"));
+});

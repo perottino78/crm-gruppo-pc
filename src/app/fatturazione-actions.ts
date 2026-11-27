@@ -11,7 +11,7 @@ import { getConfig, setConfig } from "@/lib/leadIngest";
 import { registra as registraLog } from "@/lib/amministrazione/server";
 import { leggiQuantita } from "@/lib/magazzino/calcoli";
 import { daOraRoma } from "@/lib/calendario/tempo";
-import { accontiEmessiDellaCommessa, ibanDellaBanca, CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta, sezionaliSenzaUltimoNumero } from "@/lib/fatturazione/server";
+import { accontiEmessiDellaCommessa, ibanDellaBanca, CHIAVE_REALE, CEDENTE, chiaveUltimaFattura, chiaveUltimoDdt, datiCliente, datiPdfFattura, emetti, emissioneReale, motivoNoRiapertura, prossimoNumeroDdt, puoFatturazione, ricalcolaFattura, righeDaOfferta, sezionaliSenzaUltimoNumero, ALIQUOTA_PREDEFINITA } from "@/lib/fatturazione/server";
 import { accontiDaDedurre, chiaveNumero, rigaDeduzione } from "@/lib/fatturazione/acconti";
 import { BANCA_PREDEFINITA, CAUSALI_TRASPORTO, SEZIONALI, TIPI_FATTURA, codiceIva, sezionale } from "@/lib/fatturazione/tabelle";
 import { propostaDaCommessa, statoDdtDaRighe } from "@/lib/fatturazione/calcoli";
@@ -55,7 +55,7 @@ export async function creaFattura(fd: FormData) {
   const data = giorno(str(fd, "data")) ?? oggi();
   const { brand: _b, metodoPagamento: _m, ...anagrafica } = cli!;
   void _b; void _m;
-  const aliquota = comm?.preventivo.aliquotaIva ?? 10;
+  const aliquota = comm?.preventivo.aliquotaIva ?? ALIQUOTA_PREDEFINITA;
   const righe: { descrizione: string; quantita: number; um: string | null; prezzo: number; aliquota: number; natura: string | null }[] = [];
   let causale: string | null = null;
   if (comm && tipo === "ACCONTO") {
@@ -134,7 +134,7 @@ export async function aggiungiAccontiDaDedurre(fd: FormData) {
   const comm = await prisma.commessa.findUnique({ where: { id: f.commessaId! }, select: { clienteId: true, preventivo: { select: { aliquotaIva: true } } } });
   const righe = await prisma.rigaFatturaEmessa.findMany({ where: { fatturaId: f.id }, select: { descrizione: true } });
   const scelti = fd.getAll("acconto").map(String);
-  const daAggiungere = accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId!, comm?.clienteId ?? f.clienteId, comm?.preventivo.aliquotaIva ?? 10), righe.map((r) => r.descrizione)).filter((a) => scelti.includes(chiaveNumero(a.numero)));
+  const daAggiungere = accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId!, comm?.clienteId ?? f.clienteId, comm?.preventivo.aliquotaIva ?? ALIQUOTA_PREDEFINITA), righe.map((r) => r.descrizione)).filter((a) => scelti.includes(chiaveNumero(a.numero)));
   if (!daAggiungere.length) errore(`/fatturazione/fatture/${f.id}#righe`, "Nessun acconto da aggiungere: spunta quelli da dedurre (o sono già tutti nelle righe).");
   await prisma.$transaction(async (tx) => {
     const ultima = await tx.rigaFatturaEmessa.aggregate({ where: { fatturaId: f.id }, _max: { posizione: true } });
@@ -187,7 +187,7 @@ export async function emettiFattura(fd: FormData) {
   const reale = await emissioneReale();
   let msg: string | null = null;
   try {
-    const e = await prisma.$transaction((tx) => emetti(tx, f.id, u.nome, reale), { timeout: 30000 });
+    const e = await prisma.$transaction((tx) => emetti(tx, f.id, u.nome, reale, { senzaDeduzione: fd.get("senzaDeduzione") === "on" }), { timeout: 30000 });
     await registraLog("FATTURA_EMESSA", e.id, e.stato, `${e.numero} — ${e.clienteNome} — ${e.totale.toFixed(2)} €`, u.nome);
     // copia in pdf nella cartella «Fatture a cliente» della pratica (mai bloccante)
     try {
