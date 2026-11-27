@@ -321,15 +321,15 @@ export async function motivoNoRiapertura(f: { id: string; stato: string; tipo: s
 
 
 /**
- * Acconti già fatturati per una commessa, da dedurre nel saldo: quelli emessi dal CRM (EMESSA, non di prova) e le fatture di acconto
+ * Acconti e rate già fatturati per una commessa (fatture di acconto o normali emesse dal CRM, TD02/TD01 di BConsole agganciate), da dedurre nel saldo: quelli emessi dal CRM (EMESSA, non di prova) e le fatture di acconto
  * importate da BConsole (TD02) agganciate alla commessa o, se il cliente ha UNA sola commessa aperta, non agganciate a nessuna.
  * Lo stesso numero non compare due volte (si confronta il numero: le fatture del CRM sono anche in FatturaVendita).
  */
 export async function accontiEmessiDellaCommessa(commessaId: string, clienteId: string | null, aliquotaDefault: number): Promise<AccontoEmesso[]> {
-  const crm = await prisma.fatturaEmessa.findMany({ where: { commessaId, tipo: "ACCONTO", stato: "EMESSA", numero: { not: null } }, select: { id: true, numero: true, data: true, imponibile: true, righe: { select: { quantita: true, prezzo: true, sconto: true, aliquota: true, natura: true } } } });
+  const crm = await prisma.fatturaEmessa.findMany({ where: { commessaId, tipo: { in: ["ACCONTO", "FATTURA"] }, stato: "EMESSA", numero: { not: null } }, select: { id: true, numero: true, data: true, imponibile: true, righe: { select: { quantita: true, prezzo: true, sconto: true, aliquota: true, natura: true } } } });
   // note di credito emesse su quegli acconti: la parte stornata non si deduce
   const note = crm.length ? await prisma.fatturaEmessa.findMany({ where: { tipo: "NOTA_CREDITO", stato: "EMESSA", fatturaCollegataId: { in: crm.map((x) => x.id) } }, select: { fatturaCollegataId: true, imponibile: true } }) : [];
-  const bc = await prisma.fatturaVendita.findMany({ where: { commessaId, tipoDocumento: "TD02" }, select: { numero: true, data: true, imponibile: true, iva: true } });
+  const bc = await prisma.fatturaVendita.findMany({ where: { commessaId, tipoDocumento: { in: ["TD02", "TD01"] } }, select: { numero: true, data: true, imponibile: true, iva: true } });
   if (clienteId) {
     const aperte = await prisma.commessa.findMany({ where: { clienteId, stato: { notIn: ["ANNULLATA", "CHIUSA"] } }, select: { id: true } });
     if (nonAgganciatiAttribuibili(aperte.map((c) => c.id), commessaId)) {

@@ -216,6 +216,14 @@ async function main() {
   const saldo4Id = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "SALDO", data: "2026-11-21" }))));
   verifica((await prisma.rigaFatturaEmessa.count({ where: { fatturaId: saldo4Id } })) === 1, "due commesse aperte: l'acconto non agganciato non si deduce da solo");
 
+  // una rata fatturata come fattura normale (IVA 22) si deduce dal saldo; una fattura normale a sé non ha deduzioni
+  await prisma.fatturaEmessa.create({ data: { tipo: "FATTURA", sezionale: "PC", anno: 2026, data: new Date("2026-11-10T12:00:00Z"), stato: "EMESSA", numero: "99/FE/2026", clienteId: cli2.id, clienteNome: "SERENO SILVIA", commessaId: c2.id, imponibile: 500, iva: 110, totale: 610, righe: { create: [{ posizione: 1, descrizione: "Rata intermedia", quantita: 1, prezzo: 500, aliquota: 22 }] } } });
+  const saldo5Id = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "SALDO", data: "2026-11-21" }))));
+  const r5 = await prisma.rigaFatturaEmessa.findMany({ where: { fatturaId: saldo5Id }, orderBy: { posizione: "asc" } });
+  verifica(r5.some((r) => r.prezzo === -500 && r.aliquota === 22 && r.descrizione.includes("99/FE/2026")), "la rata fatturata come fattura normale si deduce dal saldo con la sua IVA", r5.map((r) => [r.descrizione, r.prezzo, r.aliquota]));
+  const normId = idDa(await redirectA(A.creaFattura(fd({ commessaId: c2.id, tipo: "FATTURA", data: "2026-11-21" }))));
+  verifica((await prisma.rigaFatturaEmessa.count({ where: { fatturaId: normId, prezzo: { lt: 0 } } })) === 0, "fattura normale: nessuna deduzione");
+
   console.log(`\n${ok} verifiche superate, ${ko} fallite`);
   await prisma.$disconnect();
   if (ko) process.exit(1);
