@@ -11,10 +11,12 @@ import { perInput } from "@/lib/calendario/tempo";
 import { ASPETTO_BENI, BANCHE_AZIENDA, IBAN_BANCHE_AZIENDA, CAUSALI_TRASPORTO, CODICI_IVA, METODI_PAGAMENTO_FATTURA, PORTO, SEZIONALI, STATI_FATTURA, TIPI_FATTURA, TRASPORTO_A_CURA, UNITA_MISURA, codiceIvaDa, tipoFattura } from "@/lib/fatturazione/tabelle";
 import { importoRiga, rateDaMetodo, serveBollo, totali } from "@/lib/fatturazione/calcoli";
 import { accontiDaDedurre, descrizioneDeduzione } from "@/lib/fatturazione/acconti";
-import { accontiEmessiDellaCommessa, controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
+import { ALIQUOTA_PREDEFINITA, accontiEmessiDellaCommessa, controlliEmissione, emissioneReale, motivoNoRiapertura } from "@/lib/fatturazione/server";
 import { salvaTestataFattura, salvaRigheFattura, aggiungiAccontiDaDedurre, emettiFattura, eliminaFattura, creaNotaCredito, duplicaFattura, inviaFatturaEmail, segnaInviataSdi, segnaScartataSdi, riapriFattura } from "@/app/fatturazione-actions";
 
 const eur = (n: number) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", useGrouping: "always" as unknown as boolean });
+const eurSegno = (n: number) => (n < 0 ? `- ${eur(Math.abs(n))}` : eur(n));
+const eDeduzione = (r: { descrizione: string; quantita: number; prezzo: number; sconto?: number | null; aliquota: number }) => /^\s*a dedurre acconto/i.test(r.descrizione) && importoRiga(r) < 0;
 const dataIt = (d: Date) => d.toLocaleDateString("it-IT", { timeZone: "Europe/Rome" });
 const inp = "border border-neutral-300 rounded px-2 py-1.5 text-sm w-full disabled:bg-neutral-50 disabled:text-neutral-700";
 const giornoInput = (d: Date) => d.toISOString().slice(0, 10);
@@ -43,7 +45,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
   const stato = STATI_FATTURA[f.stato];
   // saldo in bozza: acconti emessi (CRM e BConsole, anche non agganciati) non ancora presenti come riga «A dedurre acconto…»
   const accontiMancanti = bozza && f.tipo === "SALDO" && f.commessaId
-    ? accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId, f.clienteId, f.righe[0]?.aliquota ?? 10), f.righe.map((r) => r.descrizione))
+    ? accontiDaDedurre(await accontiEmessiDellaCommessa(f.commessaId, f.clienteId, f.righe[0]?.aliquota ?? ALIQUOTA_PREDEFINITA), f.righe.map((r) => r.descrizione))
     : [];
 
   return (
@@ -183,7 +185,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
               <thead><tr className="text-left text-xs text-neutral-600 border-b border-neutral-200"><th className="w-10">Pos.</th><th className="w-24">Codice</th><th>Descrizione</th><th className="w-20">Q.tà</th><th className="w-20">U.M.</th><th className="w-28">Prezzo €</th><th className="w-16">Sc.%</th><th className="w-36">IVA</th><th className="text-right w-28 pr-2">Importo</th>{bozza && <th className="w-12 pl-2">Togli</th>}</tr></thead>
               <tbody>
                 {f.righe.map((r) => (
-                  <tr key={r.id} className="border-b border-neutral-100 align-top">
+                  <tr key={r.id} className={`border-b align-top ${eDeduzione(r) ? "border-neutral-200 bg-neutral-50 italic" : "border-neutral-100"}`}>
                     <td className="py-1"><input name={`pos_${r.id}`} defaultValue={r.posizione} className={`${inp} px-1`} /></td>
                     <td className="py-1"><input name={`codice_${r.id}`} defaultValue={r.codice ?? ""} className={inp} /></td>
                     <td className="py-1"><textarea name={`descrizione_${r.id}`} defaultValue={r.descrizione} rows={Math.max(2, Math.min(5, Math.ceil(r.descrizione.length / 38)))} className={inp} /></td>
@@ -192,7 +194,7 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
                     <td className="py-1"><input name={`prezzo_${r.id}`} defaultValue={String(r.prezzo).replace(".", ",")} className={inp} /></td>
                     <td className="py-1"><input name={`sconto_${r.id}`} defaultValue={r.sconto ? String(r.sconto).replace(".", ",") : ""} className={inp} /></td>
                     <td className="py-1"><select name={`iva_${r.id}`} defaultValue={codiceIvaDa(r.aliquota, r.natura).codice} className={inp}>{CODICI_IVA.map((c) => <option key={c.codice} value={c.codice}>{c.nome}</option>)}</select></td>
-                    <td className="py-1 text-right whitespace-nowrap">{eur(importoRiga(r))}</td>
+                    <td className={`py-1 pr-2 text-right whitespace-nowrap tabular-nums ${eDeduzione(r) ? "text-neutral-700" : ""}`}>{eurSegno(importoRiga(r))}</td>
                     {bozza && <td className="py-1 text-center"><input type="checkbox" name={`del_${r.id}`} aria-label="Togli la riga" /></td>}
                   </tr>
                 ))}
@@ -220,7 +222,13 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
           <table className="text-xs">
             <tbody>{t.riepilogo.map((v) => <tr key={`${v.aliquota}${v.natura}`}><td className="pr-3">{v.natura ? `${v.natura} — ${codiceIvaDa(0, v.natura).nome}` : `IVA ${v.aliquota}%`}</td><td className="pr-3 text-right">{eur(v.imponibile)}</td><td className="text-right">{eur(v.imposta)}</td></tr>)}</tbody>
           </table>
-          <div className="text-right space-y-0.5">
+          <div className="text-right space-y-0.5 tabular-nums">
+            {f.righe.some(eDeduzione) && (
+              <div className="mb-2 pb-2 border-b border-neutral-200 space-y-0.5">
+                <p>Totale lavori/forniture <b>{eur(f.righe.filter((r) => !eDeduzione(r)).reduce((a, r) => a + importoRiga(r), 0))}</b></p>
+                <p className="italic text-neutral-700">Totale acconti già fatturati <b>{eurSegno(f.righe.filter(eDeduzione).reduce((a, r) => a + importoRiga(r), 0))}</b></p>
+              </div>
+            )}
             <p>Imponibile <b>{eur(t.imponibile)}</b></p>
             <p>IVA <b>{eur(t.iva)}</b></p>
             {bollo && <p>Bollo {f.addebitoBollo ? "addebitato" : "virtuale (a carico nostro)"} <b>{eur(t.bollo)}</b></p>}
@@ -248,6 +256,9 @@ export default async function FatturaPage({ params, searchParams }: { params: Pr
                   ? "Prende il prossimo numero del sezionale, va nelle fatture di vendita e nello scadenzario. Dopo non si modifica più (si corregge con una nota di credito)."
                   : "Siamo in modalità PROVA: prende un numero «PROVA …», non va nelle vendite né nello scadenzario. Serve per collaudare PDF e XML."}
               </p>}
+          {f.tipo === "SALDO" && f.commessaId && (
+            <label className="flex items-center gap-2 text-xs text-neutral-700 mb-2"><input type="checkbox" name="senzaDeduzione" /> Non dedurre gli acconti (solo se quelli segnalati non vanno dedotti da questo saldo)</label>
+          )}
           <button disabled={mancano.length > 0} className="btn-3d btn-3d-green text-sm px-5 py-2 disabled:opacity-50">✓ Emetti {reale || !tf.fiscale ? "" : "(prova)"}</button>
         </form>
       )}

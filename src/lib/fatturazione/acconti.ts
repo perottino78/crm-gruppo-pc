@@ -7,6 +7,8 @@ export type AccontoEmesso = {
   imponibile: number;
   /** Aliquota IVA con cui l'acconto è stato fatturato. */
   aliquota: number;
+  /** Natura IVA dell'acconto (solo con aliquota 0): la riga di deduzione deve portarla, altrimenti lo SDI scarta il file. */
+  natura?: string | null;
   fonte: "CRM" | "BCONSOLE";
 };
 
@@ -43,18 +45,23 @@ export function numeriGiaDedotti(descrizioni: string[]): Set<string> {
  */
 export function accontiDaDedurre(candidati: AccontoEmesso[], descrizioniRighe: string[] = []): AccontoEmesso[] {
   const visti = numeriGiaDedotti(descrizioniRighe);
+  // un acconto del CRM può avere più aliquote (una voce per aliquota); se c'è il CRM, la copia di BConsole con lo stesso numero si scarta
+  const numeriCrm = new Set(candidati.filter((a) => a.fonte === "CRM").map((a) => chiaveNumero(a.numero)));
   const unici = new Map<string, AccontoEmesso>();
-  for (const a of [...candidati].sort((x, y) => (x.fonte === y.fonte ? 0 : x.fonte === "CRM" ? -1 : 1))) {
+  for (const a of candidati) {
     const k = chiaveNumero(a.numero);
-    if (!k || visti.has(k) || unici.has(k)) continue;
-    unici.set(k, a);
+    if (!k || visti.has(k)) continue;
+    if (a.fonte === "BCONSOLE" && numeriCrm.has(k)) continue;
+    const chiave = `${k}|${a.aliquota}|${a.natura ?? ""}`;
+    if (unici.has(chiave)) continue;
+    unici.set(chiave, a);
   }
-  return [...unici.values()].sort((x, y) => x.data.getTime() - y.data.getTime());
+  return [...unici.values()].sort((x, y) => x.data.getTime() - y.data.getTime() || chiaveNumero(x.numero).localeCompare(chiaveNumero(y.numero)) || y.aliquota - x.aliquota);
 }
 
 /** Riga di fattura (prezzo negativo) per un acconto. */
 export function rigaDeduzione(a: AccontoEmesso) {
-  return { descrizione: descrizioneDeduzione(a), quantita: 1, um: null as string | null, prezzo: -Math.abs(a.imponibile), aliquota: a.aliquota, natura: null as string | null };
+  return { descrizione: descrizioneDeduzione(a), quantita: 1, um: null as string | null, prezzo: -Math.abs(a.imponibile), aliquota: a.aliquota, natura: (a.aliquota === 0 ? a.natura ?? null : null) as string | null };
 }
 
 /**
@@ -63,4 +70,19 @@ export function rigaDeduzione(a: AccontoEmesso) {
  */
 export function nonAgganciatiAttribuibili(commesseAperteDelCliente: string[], commessaId: string): boolean {
   return commesseAperteDelCliente.length === 1 && commesseAperteDelCliente[0] === commessaId;
+}
+
+/** Una riga per aliquota/natura: raggruppa le righe di un acconto (anche a IVA mista) e toglie lo stornato con nota di credito. */
+export function partiAcconto(righe: { imponibile: number; aliquota: number; natura: string | null }[], stornato = 0): { imponibile: number; aliquota: number; natura: string | null }[] {
+  const g = new Map<string, { imponibile: number; aliquota: number; natura: string | null }>();
+  for (const r of righe) {
+    const k = `${r.aliquota}|${r.natura ?? ""}`;
+    const x = g.get(k) ?? { imponibile: 0, aliquota: r.aliquota, natura: r.natura };
+    x.imponibile += r.imponibile;
+    g.set(k, x);
+  }
+  const parti = [...g.values()].sort((a, b) => b.imponibile - a.imponibile);
+  let resto = Math.abs(stornato);
+  for (const p of parti) { const t = Math.min(resto, p.imponibile); p.imponibile -= t; resto -= t; }
+  return parti.filter((p) => Math.round(p.imponibile * 100) > 0).map((p) => ({ ...p, imponibile: Math.round(p.imponibile * 100) / 100 }));
 }
