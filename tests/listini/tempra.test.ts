@@ -37,3 +37,19 @@ test("etichette, tendine e optional", () => {
   assert.equal(opt.find((o) => o.nome.startsWith("Centralina"))?.valore, 563.2);
   assert.equal(opt.find((o) => o.nome.startsWith("Pannello termico sp. 55"))?.tipoPrezzo, "PERCENTUALE");
 });
+
+test("la pergola Tempra ha la sua scheda tecnica, una sola per tutti i modelli", async () => {
+  const fs = await import("node:fs");
+  const { schedaCliente, schedeDelleTipologie } = await import("../../src/lib/preventivi/scheda-cliente");
+  for (const t of new Set(righe.map((p) => p.tipologia))) {
+    const s = schedaCliente(t);
+    assert.ok(s && s.chiave === "TEMPRA", t);
+  }
+  const s = schedaCliente("STABYLA_A703_AU")!;
+  assert.equal(s.pagine.length, 2);
+  assert.ok(s.descrizione.includes("R 1,85") && !/stabyla/i.test(s.descrizione + s.nome));
+  assert.equal(schedeDelleTipologie(["STABYLA_A701_AD", "STABYLA_A707_AU"]).length, 1);
+  const root = new URL("../../public", import.meta.url).pathname;
+  for (const f of [s.pdf, ...s.pagine]) assert.ok(fs.existsSync(root + f), f);
+  assert.equal(schedaCliente("LUCILLA_ISOLA_DOPPIA")?.chiave, "LUCILLA");
+});
