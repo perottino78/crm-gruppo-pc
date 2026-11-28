@@ -18,6 +18,6 @@ test("la pergola Lucilla ha la sua scheda tecnica, una sola per tutte le configu
 });
 
 test("non si confonde con le altre pergole", () => {
-  assert.equal(schedaCliente("NUVOLA_PARETE_SINGOLA"), null);
-  assert.equal(schedaCliente("PANAREA_ISOLA"), null);
+  assert.notEqual(schedaCliente("NUVOLA_PARETE")?.chiave, "LUCILLA");
+  assert.notEqual(schedaCliente("PANAREA_STANDARD_ISOLA")?.chiave, "LUCILLA");
 });

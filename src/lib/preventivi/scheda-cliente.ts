@@ -8,6 +8,9 @@ import { SCHEDE_VETRATE } from "../listini/schede-vetrate";
 import { PREFISSO_ZENITH, DESCRIZIONE_CLIENTE_ZENITH, CATALOGHI_ZENITH } from "../listini/zenith";
 import { PREFISSO_FIDRA, DESCRIZIONE_CLIENTE_FIDRA, CATALOGHI_FIDRA } from "../listini/fidra";
 import { PREFISSO_LUCILLA, DESCRIZIONE_CLIENTE_LUCILLA, CATALOGHI_LUCILLA } from "../listini/lucilla";
+import { PREFISSO_NUVOLA, DESCRIZIONE_CLIENTE_NUVOLA, CATALOGHI_NUVOLA } from "../listini/nuvola";
+import { PREFISSO_PANAREA, DESCRIZIONE_CLIENTE_PANAREA, CATALOGHI_PANAREA } from "../listini/panarea";
+import { PREFISSO_TEMPRA, DESCRIZIONE_CLIENTE_TEMPRA, CATALOGHI_TEMPRA } from "../listini/tempra";
 import { PREFISSO_PAVGAL, DESCRIZIONE_CLIENTE_PAVGAL, CATALOGHI_PAVGAL } from "../listini/pavimenti-galleggianti";
 import { PREFISSO_PLASMA30, PREFISSO_PLASMA30_TV, DESCRIZIONE_CLIENTE_PLASMA30, DESCRIZIONE_CLIENTE_PLASMA30_TV, CATALOGHI_PLASMA30 } from "../listini/plasma30";
 
@@ -50,6 +53,19 @@ const SCHEDE: { prefisso: string; scheda: SchedaCliente }[] = [
   {
     prefisso: PREFISSO_LUCILLA,
     scheda: { chiave: "LUCILLA", nome: CATALOGHI_LUCILLA[0].nome, descrizione: DESCRIZIONE_CLIENTE_LUCILLA, pdf: CATALOGHI_LUCILLA[0].url, pagine: pagine("/cataloghi/lucilla", 2) },
+  },
+  // Pergole Nuvola, Panarea e Tempra: una scheda per tutte le versioni di ognuna
+  {
+    prefisso: PREFISSO_NUVOLA,
+    scheda: { chiave: "NUVOLA", nome: CATALOGHI_NUVOLA[0].nome, descrizione: DESCRIZIONE_CLIENTE_NUVOLA, pdf: CATALOGHI_NUVOLA[0].url, pagine: pagine("/cataloghi/nuvola", 2) },
+  },
+  {
+    prefisso: PREFISSO_PANAREA,
+    scheda: { chiave: "PANAREA", nome: CATALOGHI_PANAREA[0].nome, descrizione: DESCRIZIONE_CLIENTE_PANAREA, pdf: CATALOGHI_PANAREA[0].url, pagine: pagine("/cataloghi/panarea", 2) },
+  },
+  {
+    prefisso: PREFISSO_TEMPRA,
+    scheda: { chiave: "TEMPRA", nome: CATALOGHI_TEMPRA[0].nome, descrizione: DESCRIZIONE_CLIENTE_TEMPRA, pdf: CATALOGHI_TEMPRA[0].url, pagine: pagine("/cataloghi/tempra", 2) },
   },
   // Pavimenti galleggianti in gres da 20 mm (tutte le collezioni: una sola scheda)
   {

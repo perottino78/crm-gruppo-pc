@@ -61,3 +61,15 @@ export function optionalTempra(): OptionalTempra[] {
 export const GUIDA_TEMPRA =
   "Scrivi larghezza e sporgenza in mm: il prezzo è quello della misura di listino uguale o subito superiore. Altezza di serie 2500 mm sottotrave. " +
   "Per le strip/spot conta i metri dei lati (es. 8680×4000: 4 strip da 5 m sui lati lunghi + 2 da 4 m sui corti).";
+
+// Scheda tecnica per il cliente (28/11/2026): 2 pagine fatte da noi con logo e dati di P&C (il fornitore e i suoi marchi non sono
+// nominati, il prodotto si chiama «Pergola Tempra»). Una sola scheda per tutti i modelli e le installazioni.
+// PDF in public/cataloghi/tempra/, pagine JPG in pagine/. Il prefisso tecnico delle tipologie resta solo nel codice.
+export const PREFISSO_TEMPRA = "STABYLA_";
+
+export const DESCRIZIONE_CLIENTE_TEMPRA =
+  "Pergola in alluminio con copertura a pannelli termici coibentati autoportanti (sp. 52 mm, alluminio 0,7 mm e anima in polistirene estruso da 50 mm, " +
+  "R 1,85 m²K/W, portata 150 kg/m²): isola più di una veranda tradizionale. Montanti 155×155 mm, altezza sottotrave 2.500 mm, " +
+  "larghezza fino a 10.265 mm e sporgenza fino a 6.000 mm; modelli base, 245, Maxy e Maxy 260, addossata o autoportante, con luci LED integrabili.";
+
+export const CATALOGHI_TEMPRA = [{ nome: "Scheda tecnica Pergola Tempra", url: "/cataloghi/tempra/Tempra-scheda-tecnica.pdf" }];
